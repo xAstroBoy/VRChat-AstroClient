@@ -1,0 +1,5 @@
+C:\Users\xAstroBoy\Documents\GitHub\AstroClient\AstroClient\bin\Debug\AstroClient.dll
+C:\Users\xAstroBoy\Documents\GitHub\AstroClient\AstroClient\bin\Debug\AstroClient.pdb
+C:\Users\xAstroBoy\Documents\GitHub\AstroClient\AstroClient\obj\Debug\AstroClient.csproj.CoreCompileInputs.cache
+C:\Users\xAstroBoy\Documents\GitHub\AstroClient\AstroClient\obj\Debug\AstroClient.dll
+C:\Users\xAstroBoy\Documents\GitHub\AstroClient\AstroClient\obj\Debug\AstroClient.pdb

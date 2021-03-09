@@ -1,0 +1,180 @@
+﻿using AstroClient.components;
+using AstroClient.ConsoleUtils;
+using RubyButtonAPI;
+using System.Collections.Generic;
+using UnityEngine;
+using Exception = System.Exception;
+
+namespace AstroClient
+{
+    public class GameObjectESP
+    {
+        public static void AddESPToTriggers()
+        {
+            var items = WorldUtils.GetAllWorldTriggers();
+            try
+            {
+                foreach (var item in items)
+                {
+                    if (item != null)
+                    {
+                        if (WorldUtils.GetWorldID() == "wrld_953eff93-20c9-457b-8ef0-1ac2130d5b8a")
+                        {
+                            if (item.name == "The Doctor Watcher Activate")
+                            {
+                                ModConsole.Log("Skipped ESP Trigger : " + item.name);
+                                continue;
+                            }
+                            if (item.name == "Teddy Watcher Activate")
+                            {
+                                ModConsole.Log("Skipped ESP Trigger : " + item.name);
+                                continue;
+                            }
+                            if(item.name =="Kill Trigger For Maze Part 2")
+                            {
+                                ModConsole.Log("Skipped ESP Trigger : " + item.name);
+                                continue;
+                            }
+                            if (item.name == "Kill Trigger For Maze")
+                            {
+                                ModConsole.Log("Skipped ESP Trigger : " + item.name);
+                                continue;
+                            }
+                            if (item.transform.parent != null && item.transform.parent.gameObject != null)
+                            {
+                                if (item.transform.parent.gameObject.name == "Do Something Easter Egg")
+                                {
+                                    if (item.name == "Area Trigger")
+                                    {
+                                        ModConsole.Log("Skipped ESP Trigger : " + item.name + " With parent : " + item.transform.parent.gameObject.name);
+                                        continue;
+                                    }
+                                }
+                            }
+
+                            item.AddComponent<VRChatESP>();
+
+                        }
+                        else
+                        {
+                            item.AddComponent<VRChatESP>();
+                        }
+                    }
+                }
+            }
+            catch (Exception) { }
+        }
+        public static void RemoveESPToTriggers()
+        {
+            var items = WorldUtils.GetAllWorldTriggers();
+            try
+            {
+                foreach (var item in items)
+                {
+                    if (item != null)
+                    {
+                        var ESP = item.GetComponent<VRChatESP>();
+                        if(ESP != null)
+                        {
+                            UnityEngine.Object.Destroy(ESP);
+                        }
+                    }
+                }
+            }
+            catch (Exception) { }
+        }
+
+
+        public static void AddESPToMurderProps()
+        {
+            isMurderItemsESPActivated = true;
+            try
+            {
+                foreach (var item in MurderESPItems)
+                {
+                    if (item != null)
+                    {
+                        item.AddComponent<VRChatESP>();
+                    }
+                }
+            }
+            catch (Exception) { }
+        }
+        public static void RemoveESPToMurderProps()
+        {
+            isMurderItemsESPActivated = false;
+            try
+            {
+                foreach (var item in MurderESPItems)
+                {
+                    if (item != null)
+                    {
+                        var ESP = item.GetComponent<VRChatESP>();
+                        if (ESP != null)
+                        {
+                            UnityEngine.Object.Destroy(ESP);
+                        }
+                    }
+                }
+            }
+            catch (Exception) { }
+        }
+
+        public static void RemoveESPToPickups()
+        {
+            var items = WorldUtils.GetAllWorldPickups();
+            try
+            {
+                foreach (var item in items)
+                {
+                    var ESP = item.GetComponent<VRChatESP>();
+                    if (ESP != null)
+                    {
+                        UnityEngine.Object.Destroy(ESP);
+                    }
+                }
+            }
+            catch (Exception) { }
+        }
+
+        public static void AddESPToPickups()
+        {
+            var items = WorldUtils.GetAllWorldPickups();
+            try
+            {
+                foreach (var item in items)
+                {
+                    if(item != null)
+                    {
+                        item.AddComponent<VRChatESP>();
+                    }
+                }
+            }
+            catch (Exception) { }
+        }
+
+        public static void OnLevelLoad()
+        {
+            if (TriggerESPToggler != null)
+            {
+                TriggerESPToggler.setToggleState(false);
+            }
+            if (MurderESPtoggler != null)
+            {
+                MurderESPtoggler.setToggleState(false);
+            }
+            TriggerESPItems.Clear();
+            MurderESPItems.Clear();
+        }
+
+
+        public static bool isMurderItemsESPActivated = false;
+        public static List<GameObject> TriggerESPItems = new List<GameObject>();
+        public static List<GameObject> MurderESPItems = new List<GameObject>();
+
+        public static QMToggleButton TriggerESPToggler;
+        public static QMToggleButton MurderESPtoggler;
+
+
+    }
+}

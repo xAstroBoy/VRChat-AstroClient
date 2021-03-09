@@ -1,0 +1,8 @@
+C:\Users\xAstroBoy\Documents\GitHub\AstroClient\AstroClient\bin\Release\AstroClient.dll
+C:\Users\xAstroBoy\Documents\GitHub\AstroClient\AstroClient\bin\Release\AstroClient.pdb
+C:\Users\xAstroBoy\Documents\GitHub\AstroClient\AstroClient\bin\Release\MelonLoader.dll
+C:\Users\xAstroBoy\Documents\GitHub\AstroClient\AstroClient\obj\Release\AstroClient.csproj.CoreCompileInputs.cache
+C:\Users\xAstroBoy\Documents\GitHub\AstroClient\AstroClient\obj\Release\AstroClient.csproj.CopyComplete
+C:\Users\xAstroBoy\Documents\GitHub\AstroClient\AstroClient\obj\Release\AstroClient.dll
+C:\Users\xAstroBoy\Documents\GitHub\AstroClient\AstroClient\obj\Release\AstroClient.pdb
+C:\Users\xAstroBoy\Documents\GitHub\AstroClient\AstroClient\obj\Release\AstroClient.csprojAssemblyReference.cache
