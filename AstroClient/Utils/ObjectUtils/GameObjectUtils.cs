@@ -177,7 +177,7 @@ namespace AstroClient.GameObjectDebug
                 if (objsync2 != null)
                 {
                     OnlineEditor.TakeObjectOwnership(obj);
-                    objsync2.Method_Public_Void_PDM_4(); // FIX IT IF SOMETHING WEIRD HAPPENS
+                    objsync2.Method_Public_Void_PDM_2(); // FIX IT IF SOMETHING WEIRD HAPPENS
                     return;
                 }
             }
