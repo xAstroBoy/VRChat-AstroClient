@@ -78,6 +78,7 @@
     <Compile Include="Startup\Buttons\ItemTweakerMain.cs" />
     <Compile Include="GameObjMenu.cs" />
     <Compile Include="UdonExploitsMenu.cs" />
+    <Compile Include="Utils\ExtensionUtils\SyncPhysicsExt.cs" />
     <Compile Include="Utils\Headlight\ColorConverter.cs" />
     <Compile Include="Utils\Headlight\Headlight.cs" />
     <Compile Include="Utils\PlayerMovement\Movement.cs" />

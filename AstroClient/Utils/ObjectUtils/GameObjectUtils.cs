@@ -13,7 +13,6 @@ using VRCSDK2;
 using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 using Photon.Pun;
 using VRC;
-using AstroClient.extensions;
 
 #region AstroClient Imports
 
@@ -21,7 +20,8 @@ using AstroClient.components;
 using static AstroClient.HandsUtils;
 using AstroClient.ConsoleUtils;
 using DayClientML2.Utility.Extensions;
-
+using AstroClient.extensions;
+using AstroClient.SyncPhysicExt;
 #endregion AstroClient Imports
 
 namespace AstroClient.GameObjectDebug
@@ -157,8 +157,7 @@ namespace AstroClient.GameObjectDebug
         {
             if (obj != null)
             {
-                var Objsync1 = obj.GetComponentInChildren<VRCSDK2.VRC_ObjectSync>();
-                var objsync2 = obj.GetComponentInChildren<SyncPhysics>();
+                var PhysicSync = obj.GetComponentInChildren<SyncPhysics>();
                 var control = obj.GetComponent<RigidBodyController>();
                 if (RestoreBodySettings)
                 {
@@ -167,17 +166,11 @@ namespace AstroClient.GameObjectDebug
                         control.RestoreOriginalBody();
                     }
                 }
-                if (Objsync1 != null)
-                {
-                    OnlineEditor.TakeObjectOwnership(obj);
-                    Objsync1.Respawn();
-                    return;
-                }
 
-                if (objsync2 != null)
+                if (PhysicSync != null)
                 {
                     OnlineEditor.TakeObjectOwnership(obj);
-                    objsync2.Method_Public_Void_PDM_2(); // FIX IT IF SOMETHING WEIRD HAPPENS
+                    PhysicSync.RespawnItem();
                     return;
                 }
             }

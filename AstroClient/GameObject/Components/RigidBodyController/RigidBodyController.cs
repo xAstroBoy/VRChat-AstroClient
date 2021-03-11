@@ -8,7 +8,7 @@ using UnityEngine;
 using VRC.SDKBase;
 using VRCSDK2;
 using static AstroClient.AstroUtils.ItemTweaker.ItemTweakerMain;
-
+using AstroClient.SyncPhysicExt;
 
 namespace AstroClient.components
 {
@@ -40,63 +40,63 @@ namespace AstroClient.components
         {
             if (Sync != null)
             {
-                if (Sync.field_Private_Rigidbody_0 != null)
+                if (Sync.GetRigidBody() != null)
                 {
-                    ModConsole.DebugLog($"Backupping from Sync.field_Private_Rigidbody_0 properties for object  {obj.name}");
+                    ModConsole.DebugLog($"Backupping from Sync.GetRigidBody() properties for object  {obj.name}");
                     
-                    if (Sync.field_Private_Rigidbody_0.useGravity != OrigUseGravity)
+                    if (Sync.GetRigidBody().useGravity != OrigUseGravity)
                     {
-                        OrigUseGravity = Sync.field_Private_Rigidbody_0.useGravity;
+                        OrigUseGravity = Sync.GetRigidBody().useGravity;
                     }
-                    if (Sync.field_Private_Rigidbody_0.useGravity != useGravity)
+                    if (Sync.GetRigidBody().useGravity != useGravity)
                     {
-                        useGravity = Sync.field_Private_Rigidbody_0.useGravity;
-                    }
-
-                    if (Sync.field_Private_Rigidbody_0.isKinematic != OrigKinematic)
-                    {
-                        OrigKinematic = Sync.field_Private_Rigidbody_0.isKinematic;
-                    }
-                    if (Sync.field_Private_Rigidbody_0.isKinematic != isKinematic)
-                    {
-                        isKinematic = Sync.field_Private_Rigidbody_0.isKinematic;
+                        useGravity = Sync.GetRigidBody().useGravity;
                     }
 
-
-                    if (Sync.field_Private_Rigidbody_0.constraints != OrigConstraints)
+                    if (Sync.GetRigidBody().isKinematic != OrigKinematic)
                     {
-                        OrigConstraints = Sync.field_Private_Rigidbody_0.constraints;
+                        OrigKinematic = Sync.GetRigidBody().isKinematic;
                     }
-                    if (Sync.field_Private_Rigidbody_0.constraints != Constraints)
+                    if (Sync.GetRigidBody().isKinematic != isKinematic)
                     {
-                        Constraints = Sync.field_Private_Rigidbody_0.constraints;
-                    }
-
-                    if (Sync.field_Private_Rigidbody_0.detectCollisions != OrigDetectCollisions)
-                    {
-                        OrigDetectCollisions = Sync.field_Private_Rigidbody_0.detectCollisions;
-                    }
-                    if (Sync.field_Private_Rigidbody_0.detectCollisions != DetectCollisions)
-                    {
-                        DetectCollisions = Sync.field_Private_Rigidbody_0.detectCollisions;
+                        isKinematic = Sync.GetRigidBody().isKinematic;
                     }
 
-                    if (Sync.field_Private_Rigidbody_0.drag != OrigDrag)
+
+                    if (Sync.GetRigidBody().constraints != OrigConstraints)
                     {
-                        OrigDrag = Sync.field_Private_Rigidbody_0.drag;
+                        OrigConstraints = Sync.GetRigidBody().constraints;
                     }
-                    if (Sync.field_Private_Rigidbody_0.drag != Drag)
+                    if (Sync.GetRigidBody().constraints != Constraints)
                     {
-                        Drag = Sync.field_Private_Rigidbody_0.drag;
+                        Constraints = Sync.GetRigidBody().constraints;
                     }
 
-                    if (Sync.field_Private_Rigidbody_0.angularDrag != OrigAngularDrag)
+                    if (Sync.GetRigidBody().detectCollisions != OrigDetectCollisions)
                     {
-                        OrigAngularDrag = Sync.field_Private_Rigidbody_0.angularDrag;
+                        OrigDetectCollisions = Sync.GetRigidBody().detectCollisions;
                     }
-                    if (Sync.field_Private_Rigidbody_0.angularDrag != AngularDrag)
+                    if (Sync.GetRigidBody().detectCollisions != DetectCollisions)
                     {
-                        AngularDrag = Sync.field_Private_Rigidbody_0.angularDrag;
+                        DetectCollisions = Sync.GetRigidBody().detectCollisions;
+                    }
+
+                    if (Sync.GetRigidBody().drag != OrigDrag)
+                    {
+                        OrigDrag = Sync.GetRigidBody().drag;
+                    }
+                    if (Sync.GetRigidBody().drag != Drag)
+                    {
+                        Drag = Sync.GetRigidBody().drag;
+                    }
+
+                    if (Sync.GetRigidBody().angularDrag != OrigAngularDrag)
+                    {
+                        OrigAngularDrag = Sync.GetRigidBody().angularDrag;
+                    }
+                    if (Sync.GetRigidBody().angularDrag != AngularDrag)
+                    {
+                        AngularDrag = Sync.GetRigidBody().angularDrag;
                     }
                 }
             }
@@ -130,12 +130,12 @@ namespace AstroClient.components
             Constraints = OrigConstraints;
             if (Sync != null)
             {
-                Sync.field_Private_Rigidbody_0.useGravity = OrigUseGravity;
-                Sync.field_Private_Rigidbody_0.isKinematic = OrigKinematic;
-                Sync.field_Private_Rigidbody_0.constraints = OrigConstraints;
-                Sync.field_Private_Rigidbody_0.detectCollisions = OrigDetectCollisions;
-                Sync.field_Private_Rigidbody_0.drag = OrigDrag;
-                Sync.field_Private_Rigidbody_0.angularDrag = OrigAngularDrag;
+                Sync.GetRigidBody().useGravity = OrigUseGravity;
+                Sync.GetRigidBody().isKinematic = OrigKinematic;
+                Sync.GetRigidBody().constraints = OrigConstraints;
+                Sync.GetRigidBody().detectCollisions = OrigDetectCollisions;
+                Sync.GetRigidBody().drag = OrigDrag;
+                Sync.GetRigidBody().angularDrag = OrigAngularDrag;
             }
             RefreshEdits();
             EditMode = false;
@@ -147,15 +147,6 @@ namespace AstroClient.components
             try
             {
 
-                //if (RigidBody == null)
-                //{
-                //    RigidBody = obj.AddComponent<Rigidbody>();
-                //    BackupBasicBody();
-                //}
-                //if (objsync == null)
-                //{
-                //    objsync = obj.AddComponent<VRC_ObjectSync>();
-                //}
                 if (ForcedMode)
                 {
                     if (Sync == null)
@@ -189,77 +180,36 @@ namespace AstroClient.components
 
                 if (EditMode)
                 {
-
-                    // TEST WITHOUT THIS, IF IT WORKS AND IS LIVE, THEN THE REST IS USELESS.
-                    //if (RigidBody != null)
-                    //{
-                    //    if (RigidBody.useGravity != useGravity)
-                    //    {
-                    //        RigidBody.useGravity = useGravity;
-                    //    }
-                    //    if (RigidBody.isKinematic != isKinematic)
-                    //    {
-                    //        RigidBody.isKinematic = isKinematic;
-                    //    }
-                    //    if (RigidBody.constraints != Constraints)
-                    //    {
-                    //        RigidBody.constraints = Constraints;
-                    //    }
-
-                    //    if (RigidBody.detectCollisions != DetectCollisions)
-                    //    {
-                    //        RigidBody.detectCollisions = DetectCollisions;
-                    //    }
-                    //    if (RigidBody.drag != Drag)
-                    //    {
-                    //        RigidBody.drag = Drag;
-                    //    }
-                    //    if (RigidBody.angularDrag != AngularDrag)
-                    //    {
-                    //        RigidBody.angularDrag = AngularDrag;
-                    //    }
-                    //}
-                    //if (objsync != null)
-                    //{
-                    //    if (objsync.useGravity != useGravity)
-                    //    {
-                    //        objsync.useGravity = useGravity;
-                    //    }
-                    //    if (objsync.isKinematic != isKinematic)
-                    //    {
-                    //        objsync.isKinematic = isKinematic;
-                    //    }
-                    //}
                     if (Sync != null)
                     {
-                        if (Sync.field_Private_Rigidbody_0.useGravity != useGravity)
+                        if (Sync.GetRigidBody().useGravity != useGravity)
                         {
-                            Sync.field_Private_Rigidbody_0.useGravity = useGravity;
+                            Sync.GetRigidBody().useGravity = useGravity;
                             RefreshEdits();
                         }
-                        if (Sync.field_Private_Rigidbody_0.isKinematic != isKinematic)
+                        if (Sync.GetRigidBody().isKinematic != isKinematic)
                         {
-                            Sync.field_Private_Rigidbody_0.isKinematic = isKinematic;
+                            Sync.GetRigidBody().isKinematic = isKinematic;
                             RefreshEdits();
                         }
-                        if (Sync.field_Private_Rigidbody_0.constraints != Constraints)
+                        if (Sync.GetRigidBody().constraints != Constraints)
                         {
-                            Sync.field_Private_Rigidbody_0.constraints = Constraints;
+                            Sync.GetRigidBody().constraints = Constraints;
                             RefreshEdits();
                         }
-                        if (Sync.field_Private_Rigidbody_0.detectCollisions != DetectCollisions)
+                        if (Sync.GetRigidBody().detectCollisions != DetectCollisions)
                         {
-                            Sync.field_Private_Rigidbody_0.detectCollisions = DetectCollisions;
+                            Sync.GetRigidBody().detectCollisions = DetectCollisions;
                              RefreshEdits();
                         }
-                        if (Sync.field_Private_Rigidbody_0.drag != Drag)
+                        if (Sync.GetRigidBody().drag != Drag)
                         {
-                            Sync.field_Private_Rigidbody_0.drag = Drag;
+                            Sync.GetRigidBody().drag = Drag;
                              RefreshEdits();
                         }
-                        if (Sync.field_Private_Rigidbody_0.angularDrag != AngularDrag)
+                        if (Sync.GetRigidBody().angularDrag != AngularDrag)
                         {
-                            Sync.field_Private_Rigidbody_0.angularDrag = AngularDrag;
+                            Sync.GetRigidBody().angularDrag = AngularDrag;
                              RefreshEdits();
                         }
                     }
@@ -268,59 +218,59 @@ namespace AstroClient.components
                 {
                     if (Sync != null)
                     {
-                        if (Sync.field_Private_Rigidbody_0.useGravity != OrigUseGravity)
+                        if (Sync.GetRigidBody().useGravity != OrigUseGravity)
                         {
-                            OrigUseGravity = Sync.field_Private_Rigidbody_0.useGravity;
+                            OrigUseGravity = Sync.GetRigidBody().useGravity;
                         }
-                        if (Sync.field_Private_Rigidbody_0.useGravity != useGravity)
+                        if (Sync.GetRigidBody().useGravity != useGravity)
                         {
-                            useGravity = Sync.field_Private_Rigidbody_0.useGravity;
-                        }
-
-                        if (Sync.field_Private_Rigidbody_0.isKinematic != OrigKinematic)
-                        {
-                            OrigKinematic = Sync.field_Private_Rigidbody_0.isKinematic;
-                        }
-                        if (Sync.field_Private_Rigidbody_0.isKinematic != isKinematic)
-                        {
-                            isKinematic = Sync.field_Private_Rigidbody_0.isKinematic;
+                            useGravity = Sync.GetRigidBody().useGravity;
                         }
 
-
-                        if (Sync.field_Private_Rigidbody_0.constraints != OrigConstraints)
+                        if (Sync.GetRigidBody().isKinematic != OrigKinematic)
                         {
-                            OrigConstraints = Sync.field_Private_Rigidbody_0.constraints;
+                            OrigKinematic = Sync.GetRigidBody().isKinematic;
                         }
-                        if (Sync.field_Private_Rigidbody_0.constraints != Constraints)
+                        if (Sync.GetRigidBody().isKinematic != isKinematic)
                         {
-                            Constraints = Sync.field_Private_Rigidbody_0.constraints;
-                        }
-
-                        if (Sync.field_Private_Rigidbody_0.detectCollisions != OrigDetectCollisions)
-                        {
-                            OrigDetectCollisions = Sync.field_Private_Rigidbody_0.detectCollisions;
-                        }
-                        if (Sync.field_Private_Rigidbody_0.detectCollisions != DetectCollisions)
-                        {
-                            DetectCollisions = Sync.field_Private_Rigidbody_0.detectCollisions;
+                            isKinematic = Sync.GetRigidBody().isKinematic;
                         }
 
-                        if (Sync.field_Private_Rigidbody_0.drag != OrigDrag)
+
+                        if (Sync.GetRigidBody().constraints != OrigConstraints)
                         {
-                            OrigDrag = Sync.field_Private_Rigidbody_0.drag;
+                            OrigConstraints = Sync.GetRigidBody().constraints;
                         }
-                        if (Sync.field_Private_Rigidbody_0.drag != Drag)
+                        if (Sync.GetRigidBody().constraints != Constraints)
                         {
-                            Drag = Sync.field_Private_Rigidbody_0.drag;
+                            Constraints = Sync.GetRigidBody().constraints;
                         }
 
-                        if (Sync.field_Private_Rigidbody_0.angularDrag != OrigAngularDrag)
+                        if (Sync.GetRigidBody().detectCollisions != OrigDetectCollisions)
                         {
-                            OrigAngularDrag = Sync.field_Private_Rigidbody_0.angularDrag;
+                            OrigDetectCollisions = Sync.GetRigidBody().detectCollisions;
                         }
-                        if (Sync.field_Private_Rigidbody_0.angularDrag != AngularDrag)
+                        if (Sync.GetRigidBody().detectCollisions != DetectCollisions)
                         {
-                            AngularDrag = Sync.field_Private_Rigidbody_0.angularDrag;
+                            DetectCollisions = Sync.GetRigidBody().detectCollisions;
+                        }
+
+                        if (Sync.GetRigidBody().drag != OrigDrag)
+                        {
+                            OrigDrag = Sync.GetRigidBody().drag;
+                        }
+                        if (Sync.GetRigidBody().drag != Drag)
+                        {
+                            Drag = Sync.GetRigidBody().drag;
+                        }
+
+                        if (Sync.GetRigidBody().angularDrag != OrigAngularDrag)
+                        {
+                            OrigAngularDrag = Sync.GetRigidBody().angularDrag;
+                        }
+                        if (Sync.GetRigidBody().angularDrag != AngularDrag)
+                        {
+                            AngularDrag = Sync.GetRigidBody().angularDrag;
                         }
                     }
                 }
@@ -337,7 +287,7 @@ namespace AstroClient.components
         {
             if (Sync != null)
             {
-                Sync.Method_Public_Void_PDM_3();
+                Sync.RefreshProperties();
             }
             else
             {
