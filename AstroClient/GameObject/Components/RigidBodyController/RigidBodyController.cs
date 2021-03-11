@@ -185,32 +185,32 @@ namespace AstroClient.components
                         if (Sync.GetRigidBody().useGravity != useGravity)
                         {
                             Sync.GetRigidBody().useGravity = useGravity;
-                            RefreshEdits();
+                            Sync.RefreshProperties();
                         }
                         if (Sync.GetRigidBody().isKinematic != isKinematic)
                         {
                             Sync.GetRigidBody().isKinematic = isKinematic;
-                            RefreshEdits();
+                            Sync.RefreshProperties();
                         }
                         if (Sync.GetRigidBody().constraints != Constraints)
                         {
                             Sync.GetRigidBody().constraints = Constraints;
-                            RefreshEdits();
+                            Sync.RefreshProperties();
                         }
                         if (Sync.GetRigidBody().detectCollisions != DetectCollisions)
                         {
                             Sync.GetRigidBody().detectCollisions = DetectCollisions;
-                             RefreshEdits();
+                            Sync.RefreshProperties();
                         }
                         if (Sync.GetRigidBody().drag != Drag)
                         {
                             Sync.GetRigidBody().drag = Drag;
-                             RefreshEdits();
+                            Sync.RefreshProperties();
                         }
                         if (Sync.GetRigidBody().angularDrag != AngularDrag)
                         {
                             Sync.GetRigidBody().angularDrag = AngularDrag;
-                             RefreshEdits();
+                             Sync.RefreshProperties();
                         }
                     }
                 }
@@ -281,19 +281,7 @@ namespace AstroClient.components
             }
         }
 
-        [HideFromIl2Cpp]
 
-        internal void RefreshEdits()
-        {
-            if (Sync != null)
-            {
-                Sync.RefreshProperties();
-            }
-            else
-            {
-                ModConsole.DebugError($"Failed to refresh {obj.name} SyncPhysic properties!");
-            }
-        }
         [HideFromIl2Cpp]
         internal bool UpdateAngularDrag(float newdrag)
         {
