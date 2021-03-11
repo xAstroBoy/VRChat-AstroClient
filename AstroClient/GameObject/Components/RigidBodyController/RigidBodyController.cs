@@ -137,7 +137,7 @@ namespace AstroClient.components
                 Sync.GetRigidBody().drag = OrigDrag;
                 Sync.GetRigidBody().angularDrag = OrigAngularDrag;
             }
-            RefreshEdits();
+            Sync.RefreshProperties();
             EditMode = false;
         }
 
