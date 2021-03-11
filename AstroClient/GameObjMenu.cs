@@ -377,7 +377,7 @@ namespace AstroClient
                            }
                            if (isDestroyMode)
                            {
-                               item.DestroyMeLocal();
+                               item.gameObject.DestroyMeLocal();
                                if (CurrentSelection.Contains(item))
                                {
                                    CurrentSelection.Remove(item);
