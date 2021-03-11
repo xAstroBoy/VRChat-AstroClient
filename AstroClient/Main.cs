@@ -224,7 +224,7 @@ namespace AstroClient
         }
 
 
-        private static bool DoOnce = false;
+        //private static bool DoOnce = false;
         public static void Test()
         {
             //if (!DoOnce)

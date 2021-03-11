@@ -13,3 +13,4 @@ C:\Users\xAstroBoy\Documents\GitHub\VRChat-AstroClient\AstroClient\obj\Release\A
 C:\Users\xAstroBoy\Documents\GitHub\VRChat-AstroClient\AstroClient\obj\Release\AstroClient.csproj.CopyComplete
 C:\Users\xAstroBoy\Documents\GitHub\VRChat-AstroClient\AstroClient\obj\Release\AstroClient.dll
 C:\Users\xAstroBoy\Documents\GitHub\VRChat-AstroClient\AstroClient\obj\Release\AstroClient.pdb
+C:\Users\xAstroBoy\Documents\GitHub\VRChat-AstroClient\AstroClient\obj\Release\AstroClient.csprojAssemblyReference.cache

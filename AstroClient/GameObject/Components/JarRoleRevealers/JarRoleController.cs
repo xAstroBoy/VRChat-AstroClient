@@ -110,18 +110,24 @@ namespace AstroClient
 
         public static List<LinkedNodes> JarRoleLinks = new List<LinkedNodes>();
 
-        public static List<JarRoleESP> RoleRevealers = new List<JarRoleESP>();
+        public static List<JarRoleESP> RoleESPComponent = new List<JarRoleESP>();
 
 
-        public static LinkedNodes GetLinkedNode(int value)
+        //public static LinkedNodes GetLinkedNode(int value)
+        //{
+        //    return JarRoleLinks.Where(x => x.nodevalue == value).DefaultIfEmpty(null).First();
+        //}
+
+
+        public static JarRoleESP GetLinkedComponent(int value)
         {
-            return JarRoleLinks.Where(x => x.link == value).DefaultIfEmpty(null).First();
+            return RoleESPComponent.Where(x => x.LinkedEntry.nodevalue == value).DefaultIfEmpty(null).First();
         }
 
         public static void OnLevelLoad()
         {
             JarRoleLinks.Clear();
-            RoleRevealers.Clear();
+            RoleESPComponent.Clear();
             isAmongUsWorld = false;
             IsMurder4World = false;
             Murder4RolesRevealerToggle.setToggleState(false);
@@ -143,9 +149,9 @@ namespace AstroClient
                             var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
                             if (RoleRevealer != null)
                             {
-                                if (!RoleRevealers.Contains(RoleRevealer))
+                                if (!RoleESPComponent.Contains(RoleRevealer))
                                 {
-                                    RoleRevealers.Add(RoleRevealer);
+                                    RoleESPComponent.Add(RoleRevealer);
                                 }
                             }
                         }
@@ -160,12 +166,12 @@ namespace AstroClient
         {
             public Transform Entry{ get; set; }
             public Transform Node { get; set; }
-            public int link { get; set; }
+            public int nodevalue { get; set; }
             public LinkedNodes(Transform EntryObj, Transform Nodeobj, int linknumber)
             {
                 Entry = EntryObj;
                 Node = Nodeobj;
-                link = linknumber;
+                nodevalue = linknumber;
             }
         }
     
@@ -284,7 +290,7 @@ namespace AstroClient
                                                     if(!JarRoleLinks.Contains(addme))
                                                     {
                                                         JarRoleLinks.Add(addme);
-                                                        Debug($"Registered Player Entry : {addme.Entry.name}, With node : {addme.Node.name} with Link nr. {addme.link}");
+                                                        Debug($"Registered Player Entry : {addme.Entry.name}, With node : {addme.Node.name} with Link nr. {addme.nodevalue}");
                                                         break;
                                                     }
                                                 }

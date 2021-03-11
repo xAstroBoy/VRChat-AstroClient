@@ -38,22 +38,22 @@ namespace AstroClient.components
                 var p = this.GetComponent<Player>();
                 if (p != null)
                 {
-                    player = p;
+                    Internal_player = p;
                 }
                 else
                 {
                     UnityEngine.Object.Destroy(this);
                 }
 
-                if (player != null)
+                if (Internal_player != null)
                 {
 
-                    if (player.prop_APIUser_0 != null)
+                    if (Internal_player.prop_APIUser_0 != null)
                     {
-                        user = player.prop_APIUser_0;
+                        Internal_user = Internal_player.prop_APIUser_0;
                     }
                 }
-                GameRoleTag = SingleTagsUtils.AddSingleTag(player);
+                GameRoleTag = SingleTagsUtils.AddSingleTag(Internal_player);
                 if (JarRoleController.ViewRoles)
                 {
                     SetTag(NoRoles, DefaultTextColor, NoRolesColor);
@@ -76,13 +76,13 @@ namespace AstroClient.components
                 if (JarRoleController.IsMurder4World)
                 {
                     Murder4CurrentRole = Murder4Roles.Unassigned;
-                    ModConsole.Log("Registered " + user.displayName + " On Murder 4 Role ESP.");
+                    ModConsole.Log("Registered " + Internal_user.displayName + " On Murder 4 Role ESP.");
 
                 }
                 if (JarRoleController.isAmongUsWorld)
                 {
                     AmongUsCurrentRole = AmongUsRoles.Unassigned;
-                    ModConsole.Log("Registered " + user.displayName + " On Among US Role ESP.");
+                    ModConsole.Log("Registered " + Internal_user.displayName + " On Among US Role ESP.");
 
                 }
                 
@@ -132,7 +132,7 @@ namespace AstroClient.components
                     else
                     {
                         ModConsole.Log("Unknown Color Detected!");
-                        ModConsole.Log(user.displayName + " Current Color : new Color(" + Color.r + "f, " + Color.g + "f, " + Color.b + "f, " + Color.a + "f)");
+                        ModConsole.Log(Internal_user.displayName + " Current Color : new Color(" + Color.r + "f, " + Color.g + "f, " + Color.b + "f, " + Color.a + "f)");
                         return AmongUsRoles.None;
                     }
                 }
@@ -147,44 +147,44 @@ namespace AstroClient.components
         [HideFromIl2Cpp]
         public AmongUsRoles GetPlayerRoleAmongUS()
         {
-            if (AssignedPlayerEntry != null)
+            if (Internal_AssignedPlayerEntry != null)
             {
-                if (VerifyEntry(AssignedPlayerEntry))
+                if (VerifyEntry(Internal_AssignedPlayerEntry))
                 {
-                    return CheckEntryAmongUS(AssignedPlayerEntry);
+                    return CheckEntryAmongUS(Internal_AssignedPlayerEntry);
                 }
                 else
                 {
                     FindEntryWithUser();
-                    return CheckEntryAmongUS(AssignedPlayerEntry);
+                    return CheckEntryAmongUS(Internal_AssignedPlayerEntry);
                 }
             }
             else
             {
                 FindEntryWithUser();
-                return CheckEntryAmongUS(AssignedPlayerEntry);
+                return CheckEntryAmongUS(Internal_AssignedPlayerEntry);
             }
         }
 
         [HideFromIl2Cpp]
         public Murder4Roles GetPlayerRoleMurder4()
         {
-            if (AssignedPlayerEntry != null)
+            if (Internal_AssignedPlayerEntry != null)
             {
-                if (VerifyEntry(AssignedPlayerEntry))
+                if (VerifyEntry(Internal_AssignedPlayerEntry))
                 {
-                    return CheckEntryMurder4(AssignedPlayerEntry);
+                    return CheckEntryMurder4(Internal_AssignedPlayerEntry);
                 }
                 else
                 {
                     FindEntryWithUser();
-                    return CheckEntryMurder4(AssignedPlayerEntry);
+                    return CheckEntryMurder4(Internal_AssignedPlayerEntry);
                 }
             }
             else
             {
                 FindEntryWithUser();
-                return CheckEntryMurder4(AssignedPlayerEntry);
+                return CheckEntryMurder4(Internal_AssignedPlayerEntry);
             }
         }
 
@@ -199,7 +199,7 @@ namespace AstroClient.components
                 {
                     if (!string.IsNullOrEmpty(EntryText.text) && !string.IsNullOrWhiteSpace(EntryText.text))
                     {
-                        if (EntryText.text == user.displayName)
+                        if (EntryText.text == Internal_user.displayName)
                         {
                             return true;
                         }
@@ -224,9 +224,9 @@ namespace AstroClient.components
                         {
                             if (!string.IsNullOrEmpty(EntryText.text) && !string.IsNullOrWhiteSpace(EntryText.text))
                             {
-                                if (EntryText.text == user.displayName)
+                                if (EntryText.text == Internal_user.displayName)
                                 {
-                                    SavedEntry = item;
+                                    Internal_SavedEntry = item;
                                     break;
                                 }
                             }
@@ -318,7 +318,7 @@ namespace AstroClient.components
                     else
                     {
                         ModConsole.Log("Unknown Color Detected!");
-                        ModConsole.Log(user.displayName + " Current Color : new Color(" + Color.r + "f, " + Color.g + "f, " + Color.b + "f, " + Color.a + "f)");
+                        ModConsole.Log(Internal_user.displayName + " Current Color : new Color(" + Color.r + "f, " + Color.g + "f, " + Color.b + "f, " + Color.a + "f)");
                         return Murder4Roles.None;
                     }
                 }
@@ -347,24 +347,24 @@ namespace AstroClient.components
         [HideFromIl2Cpp]
         internal void SetTag(string text, Color TextColor, Color TagColor)
         {
-            if (player != null)
+            if (Internal_player != null)
             {
                 if (GameRoleTag != null)
                 {
                     if (GameRoleTag.Label_Text != text)
                     {
                         GameRoleTag.Label_Text = text;
-                        Debug($"Updating SingleTag Label_Text for {player.DisplayName()}, with text : {text} ");
+                        Debug($"Updating SingleTag Label_Text for {Internal_player.DisplayName()}, with text : {text} ");
                     }
                     if (GameRoleTag.Label_TextColor != TextColor)
                     {
                         GameRoleTag.Label_TextColor = TextColor;
-                        Debug($"Updating SingleTag Label_TextColor for {player.DisplayName()}, with TextColor : {TextColor.ToString()}");
+                        Debug($"Updating SingleTag Label_TextColor for {Internal_player.DisplayName()}, with TextColor : {TextColor.ToString()}");
                     }
                     if (GameRoleTag.Tag_Color != TagColor)
                     {
                         GameRoleTag.Tag_Color = TagColor;
-                        Debug($"Updating SingleTag Tag_Color for {player.DisplayName()}, with TagColor : {TagColor.ToString()}");
+                        Debug($"Updating SingleTag Tag_Color for {Internal_player.DisplayName()}, with TagColor : {TagColor.ToString()}");
                     }
                 }
             }
@@ -387,7 +387,7 @@ namespace AstroClient.components
                 _AssignedPlayerNode.RenameObject("Unassigned Node");
             }
             
-            JarRoleController.RoleRevealers.Remove(this);
+            JarRoleController.RoleESPComponent.Remove(this);
         }
 
 
@@ -403,7 +403,7 @@ namespace AstroClient.components
         {
             try
             {
-                if(SavedEntry == null)
+                if(Internal_SavedEntry == null)
                 {
                     FindEntryWithUser();
                 }
@@ -508,23 +508,37 @@ namespace AstroClient.components
 
 
         private LinkedNodes _SavedEntry;
-        private LinkedNodes SavedEntry
+        private LinkedNodes Internal_SavedEntry
         {
+            [HideFromIl2Cpp]
+
             get
             {
                 return _SavedEntry;
             }
+            [HideFromIl2Cpp]
+
             set
             {
                 _SavedEntry = value;
-                AssignedPlayerEntry = value.Entry.gameObject;
-                AssignedPlayerNode = value.Node.gameObject;
+                Internal_AssignedPlayerEntry = value.Entry.gameObject;
+                Internal_AssignedPlayerNode = value.Node.gameObject;
+            }
+        }
+
+
+        internal LinkedNodes LinkedEntry
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return Internal_SavedEntry;
             }
         }
 
 
 
-        private Player player;
+        private Player Internal_player;
         private Murder4Roles Murder4CurrentRole;
 
         private AmongUsRoles AmongUsCurrentRole;
@@ -532,40 +546,65 @@ namespace AstroClient.components
 
 
 
-        private APIUser user;
+        private APIUser Internal_user;
 
         private GameObject _AssignedPlayerEntry;
 
-        private GameObject AssignedPlayerEntry
+
+
+        
+        private GameObject Internal_AssignedPlayerEntry
         {
+            [HideFromIl2Cpp]
+
             get
             {
                 return _AssignedPlayerEntry;
             }
+            [HideFromIl2Cpp]
+
             set
             {
-
-                //if (_AssignedPlayerEntry != null)
-                //{
-                //    if (value != _AssignedPlayerEntry)
-                //    {
-                //        _AssignedPlayerEntry.RenameObject("Unassigned Entry");
-                //    }
-                //}
-                //value.RenameObject(user.displayName + "\n Assigned Entry");
                 _AssignedPlayerEntry = value;
                 
             }
         }
 
+        internal GameObject Entry
+        {
+            [HideFromIl2Cpp]
+
+            get
+            {
+                return Internal_AssignedPlayerEntry;
+            }
+        }
+
+
+        internal APIUser apiuser
+        {
+            [HideFromIl2Cpp]
+
+            get
+            {
+                return Internal_user;
+            }
+        }
+
+
+
         private GameObject _AssignedPlayerNode;
 
-        private GameObject AssignedPlayerNode
+        private GameObject Internal_AssignedPlayerNode
         {
+            [HideFromIl2Cpp]
+
             get
             {
                 return _AssignedPlayerNode;
             }
+            [HideFromIl2Cpp]
+
             set
             {
 
@@ -577,8 +616,19 @@ namespace AstroClient.components
 
                     }
                 }
-                value.RenameObject(user.displayName);
+                value.RenameObject(Internal_user.displayName);
                 _AssignedPlayerNode = value;
+            }
+        }
+
+
+
+        internal GameObject Node
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return Internal_AssignedPlayerNode;
             }
         }
 
