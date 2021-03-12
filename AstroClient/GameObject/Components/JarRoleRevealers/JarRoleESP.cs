@@ -420,11 +420,17 @@ namespace AstroClient.components
                         var color = Murder4GetNamePlateColor();
                         if (color != null)
                         {
-                            SetTag(ReturnedRole.ToString(), DefaultTextColor, color.Value);
+                            if (GetCurrentSingleTagText() != ReturnedRole.ToString())
+                            {
+                                SetTag(ReturnedRole.ToString(), DefaultTextColor, color.Value);
+                            }
                         }
                         else
                         {
-                            SetTag(NoRoles, DefaultTextColor, NoRolesColor);
+                            if (GetCurrentSingleTagText() != NoRoles)
+                            {
+                                SetTag(NoRoles, DefaultTextColor, NoRolesColor);
+                            }
                         }
                     }
                     else
@@ -448,11 +454,17 @@ namespace AstroClient.components
                         var color = AmongUsGetNamePlateColor();
                         if (color != null)
                         {
-                            SetTag(ReturnedRole.ToString(), DefaultTextColor, color.Value);
+                            if (GetCurrentSingleTagText() != ReturnedRole.ToString())
+                            {
+                                SetTag(ReturnedRole.ToString(), DefaultTextColor, color.Value);
+                            }
                         }
                         else
                         {
-                            SetTag(NoRoles, DefaultTextColor, NoRolesColor);
+                            if (GetCurrentSingleTagText() != NoRoles)
+                            {
+                                SetTag(NoRoles, DefaultTextColor, NoRolesColor);
+                            }
                         }
                     }
                     else
