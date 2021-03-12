@@ -407,7 +407,6 @@ namespace AstroClient.components
                         GameRoleTag.gameObject.SetActive(true); // KEEP IT ENABLED!
                     }
                 }
-
                 if (JarRoleController.IsMurder4World)
                 {
                     var ReturnedRole = GetPlayerRoleMurder4();
@@ -444,7 +443,7 @@ namespace AstroClient.components
                         }
                         else
                         {
-                            if (GetCurrentSingleTagText() == HiddenRole)
+                            if (GetCurrentSingleTagText() != HiddenRole)
                             {
                                 SetTag(HiddenRole, DefaultTextColor, HiddenRolesColor);
                             }
