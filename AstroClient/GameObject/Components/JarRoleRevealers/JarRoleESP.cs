@@ -430,7 +430,7 @@ namespace AstroClient.components
                         {
                             if (GetCurrentSingleTagText() == HiddenRole)
                             {
-                                SetTag(NoRoles, DefaultTextColor, NoRolesColor);
+                                SetTag(HiddenRole, HiddenRolesColor, HiddenRolesColor);
                             }
                         }
                     }
@@ -457,7 +457,7 @@ namespace AstroClient.components
                         {
                             if (GetCurrentSingleTagText() == HiddenRole)
                             {
-                                SetTag(NoRoles, DefaultTextColor, NoRolesColor);
+                                SetTag(HiddenRole, HiddenRolesColor, HiddenRolesColor);
                             }
                         }
                     }
