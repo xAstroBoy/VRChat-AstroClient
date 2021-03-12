@@ -408,63 +408,61 @@ namespace AstroClient.components
                     }
                 }
 
-                if (!JarRoleController.ViewRoles)
-                {
-                    if (GetCurrentSingleTagText() != HiddenRole)
-                    {
-                        SetTag(HiddenRole, DefaultTextColor, HiddenRolesColor);
-                    }
-                }
-
-
-
                 if (JarRoleController.IsMurder4World)
                 {
                     var ReturnedRole = GetPlayerRoleMurder4();
-                    if (!JarRoleController.ViewRoles)
-                    {
-                        if (ReturnedRole != Murder4CurrentRole)
-                        {
-                            Murder4CurrentRole = ReturnedRole;
-                        }
-                    }
-                    else if (ReturnedRole != Murder4CurrentRole)
+                    if (ReturnedRole != Murder4CurrentRole)
                     {
                         Murder4CurrentRole = ReturnedRole;
+                    }
+                    if (JarRoleController.ViewRoles)
+                    {
                         var color = Murder4GetNamePlateColor();
                         if (color != null)
                         {
-                            SetTag(ReturnedRole.ToString(), Color.white, color.Value);
+                            SetTag(ReturnedRole.ToString(), DefaultTextColor, color.Value);
                         }
                         else
                         {
                             SetTag(NoRoles, DefaultTextColor, NoRolesColor);
                         }
                     }
+                    else
+                    {
+                        if (GetCurrentSingleTagText() != HiddenRole)
+                        {
+                            SetTag(HiddenRole, DefaultTextColor, HiddenRolesColor);
+                        }
+                    }
+                    return;
                 }
                 if (JarRoleController.isAmongUsWorld)
                 {
                     var ReturnedRole = GetPlayerRoleAmongUS();
-                    if (!JarRoleController.ViewRoles)
-                    {
-                        if (ReturnedRole != AmongUsCurrentRole)
-                        {
-                            AmongUsCurrentRole = ReturnedRole;
-                        }
-                    }
-                    else if (ReturnedRole != AmongUsCurrentRole)
+                    if (ReturnedRole != AmongUsCurrentRole)
                     {
                         AmongUsCurrentRole = ReturnedRole;
-                        var color = AmongUsGetNamePlateColor();
+                    }
+                    if (JarRoleController.ViewRoles)
+                    {
+                        var color = Murder4GetNamePlateColor();
                         if (color != null)
                         {
-                            SetTag(ReturnedRole.ToString(), Color.white, color.Value);
+                            SetTag(ReturnedRole.ToString(), DefaultTextColor, color.Value);
                         }
                         else
                         {
                             SetTag(NoRoles, DefaultTextColor, NoRolesColor);
                         }
                     }
+                    else
+                    {
+                        if (GetCurrentSingleTagText() != HiddenRole)
+                        {
+                            SetTag(HiddenRole, DefaultTextColor, HiddenRolesColor);
+                        }
+                    }
+                    return;
                 }
             }
             catch (Exception e) { ModConsole.DebugError("JarRoleRevealer OnUpdate Exception : " + e); }
