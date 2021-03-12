@@ -407,62 +407,31 @@ namespace AstroClient.components
                         GameRoleTag.gameObject.SetActive(true); // KEEP IT ENABLED!
                     }
                 }
+
+                if (!JarRoleController.ViewRoles)
+                {
+                    if (GetCurrentSingleTagText() != HiddenRole)
+                    {
+                        SetTag(HiddenRole, DefaultTextColor, HiddenRolesColor);
+                    }
+                }
+
+
+
                 if (JarRoleController.IsMurder4World)
                 {
                     var ReturnedRole = GetPlayerRoleMurder4();
-                    if (GetCurrentSingleTagText() == HiddenRole && JarRoleController.ViewRoles)
+                    if (!JarRoleController.ViewRoles)
                     {
                         if (ReturnedRole != Murder4CurrentRole)
                         {
                             Murder4CurrentRole = ReturnedRole;
-                        }
-                        var color = Murder4GetNamePlateColor();
-                        if (color != null)
-                        {
-                            SetTag(ReturnedRole.ToString(), Color.white, color.Value);
-                        }
-                        else
-                        {
-                            SetTag(NoRoles, DefaultTextColor, NoRolesColor);
                         }
                     }
                     else if (ReturnedRole != Murder4CurrentRole)
                     {
                         Murder4CurrentRole = ReturnedRole;
                         var color = Murder4GetNamePlateColor();
-                        if (JarRoleController.ViewRoles)
-                        {
-                            if (color != null)
-                            {
-                                SetTag(ReturnedRole.ToString(), Color.white, color.Value);
-                            }
-                            else
-                            {
-                                SetTag(NoRoles, DefaultTextColor, NoRolesColor);
-                            }
-                        }
-                        else
-                        {
-                            if (GetCurrentSingleTagText() != HiddenRole)
-                            {
-                                SetTag(HiddenRole, DefaultTextColor, HiddenRolesColor);
-                            }
-                        }
-                    }
-
-
-
-                }
-                if (JarRoleController.isAmongUsWorld)
-                {
-                    var ReturnedRole = GetPlayerRoleAmongUS();
-                    if (GetCurrentSingleTagText() == HiddenRole && JarRoleController.ViewRoles)
-                    {
-                        if (ReturnedRole != AmongUsCurrentRole)
-                        {
-                            AmongUsCurrentRole = ReturnedRole;
-                        }
-                        var color = AmongUsGetNamePlateColor();
                         if (color != null)
                         {
                             SetTag(ReturnedRole.ToString(), Color.white, color.Value);
@@ -472,27 +441,28 @@ namespace AstroClient.components
                             SetTag(NoRoles, DefaultTextColor, NoRolesColor);
                         }
                     }
+                }
+                if (JarRoleController.isAmongUsWorld)
+                {
+                    var ReturnedRole = GetPlayerRoleAmongUS();
+                    if (!JarRoleController.ViewRoles)
+                    {
+                        if (ReturnedRole != AmongUsCurrentRole)
+                        {
+                            AmongUsCurrentRole = ReturnedRole;
+                        }
+                    }
                     else if (ReturnedRole != AmongUsCurrentRole)
                     {
                         AmongUsCurrentRole = ReturnedRole;
                         var color = AmongUsGetNamePlateColor();
-                        if (JarRoleController.ViewRoles)
+                        if (color != null)
                         {
-                            if (color != null)
-                            {
-                                SetTag(ReturnedRole.ToString(), Color.white, color.Value);
-                            }
-                            else
-                            {
-                                SetTag(NoRoles, DefaultTextColor, NoRolesColor);
-                            }
+                            SetTag(ReturnedRole.ToString(), Color.white, color.Value);
                         }
                         else
                         {
-                            if (GetCurrentSingleTagText() == HiddenRole)
-                            {
-                                SetTag(HiddenRole, DefaultTextColor, HiddenRolesColor);
-                            }
+                            SetTag(NoRoles, DefaultTextColor, NoRolesColor);
                         }
                     }
                 }
