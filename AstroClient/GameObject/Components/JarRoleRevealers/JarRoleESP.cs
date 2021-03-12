@@ -616,7 +616,6 @@ namespace AstroClient.components
                     if (value != _AssignedPlayerNode)
                     {
                         _AssignedPlayerNode.RenameObject("Unassigned Node");
-
                     }
                 }
                 value.RenameObject(Internal_user.displayName);

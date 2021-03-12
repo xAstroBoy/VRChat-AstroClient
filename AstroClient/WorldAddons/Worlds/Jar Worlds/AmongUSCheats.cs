@@ -77,9 +77,8 @@ namespace AstroClient
             AmongUsCheatsPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Among US Cheats", "Manage Among US Cheats", null, null, null, null, btnHalf);
             JarRoleController.AmongUSRolesRevealerToggle = new QMToggleButton(AmongUsCheatsPage, 1, 0, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", null, null, null, false);
             UdonExploitsMenu.InitAmongUsGameControllerExploits(AmongUsCheatsPage, 2, 0, true);
-            UdonExploitsMenu.InitAmongUSNodeExploitBtn(AmongUsCheatsPage, 2f, 0.5f, true);
-            JarRoleController.AmongUSShowHiddenNodesToggle = new QMToggleButton(AmongUsCheatsPage, 3, 0, "Reveal Hidden Nodes On", new Action(() => { JarRoleController.ShowHiddenNodes = true; }), "Reveal Hidden Nodes Off", new Action(() => { JarRoleController.ShowHiddenNodes = false; }), "Reveals Current Players Roles In nameplates.", null, null, null, false);
-
+            UdonExploitsMenu.InitAmongUSFilteredNodeExploitBtn(AmongUsCheatsPage, 2f, 0.5f, true);
+            UdonExploitsMenu.InitAmongUSUnFilteredNodeExploitBtn(AmongUsCheatsPage, 2f, 1f, true);
         }
 
 

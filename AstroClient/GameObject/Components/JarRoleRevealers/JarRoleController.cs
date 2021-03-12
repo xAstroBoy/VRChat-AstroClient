@@ -79,34 +79,9 @@ namespace AstroClient
             }
         }
 
-        public static bool ShowHiddenNodes
-        {
-            get
-            {
-                ModConsole.DebugWarning($"ShowHiddenRoles Returned {_ShowHiddenNodes}");
-                return _ShowHiddenNodes;
-            }
-            set
-            {
-                _ShowHiddenNodes = value;
-                if (AmongUSShowHiddenNodesToggle != null)
-                {
-                    AmongUSShowHiddenNodesToggle.setToggleState(value);
-                }
-                if (Murder4ShowHiddenNodesToggle != null)
-                {
-                    Murder4ShowHiddenNodesToggle.setToggleState(value);
-                }
-                ModConsole.DebugWarning($"ShowHiddenRoles Returned {_ShowHiddenNodes}");
-
-            }
-        }
 
         public static QMToggleButton Murder4RolesRevealerToggle;
         public static QMToggleButton AmongUSRolesRevealerToggle;
-
-        public static QMToggleButton AmongUSShowHiddenNodesToggle;
-        public static QMToggleButton Murder4ShowHiddenNodesToggle;
 
         public static List<LinkedNodes> JarRoleLinks = new List<LinkedNodes>();
 
