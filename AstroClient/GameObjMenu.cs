@@ -318,6 +318,7 @@ namespace AstroClient
             gameobjtogglermenu = new QMNestedButton(menu, -100, -100, "Advanced GameObject Toggler (HIDDEN BUTTON)", "Advanced GameObject Toggler (HIDDEN BUTTON)", null, null, null, null, btnHalf);
             gameobjtogglermenu.getMainButton().setActive(false);
             var registersub = new QMNestedButton(gameobjtogglermenu, -5f, -5f, "", "");
+            registersub.getMainButton().setActive(false);
             MainScroll = new QMHalfScroll(registersub);
             subscroll = new QMHalfScroll(gameobjtogglermenu);
 
