@@ -474,7 +474,8 @@ namespace AstroClient
             GameObjectESP.MurderESPtoggler = new QMToggleButton(MurderCheatsPage, 3, 0, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", null, null, null, false);
             JarRoleController.Murder4RolesRevealerToggle = new QMToggleButton(MurderCheatsPage, 4, 0, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", null, null, null, false);
             JarRoleController.Murder4ShowHiddenNodesToggle = new QMToggleButton(MurderCheatsPage, 3, 1, "Reveal Hidden Nodes On", new Action(() => { JarRoleController.ShowHiddenNodes = true; }), "Reveal Hidden Nodes Off", new Action(() => { JarRoleController.ShowHiddenNodes = false; }), "Reveals Current Players Roles In nameplates.", null, null, null, false);
-            UdonExploitsMenu.InitMurder4ExploitBtn(MurderCheatsPage, 4, 1, false);
+            UdonExploitsMenu.InitMurderGameControllerExploits(MurderCheatsPage, 4, 1, true);
+            UdonExploitsMenu.InitMurder4NodeExploitBtn(MurderCheatsPage, 4, 1.5f, true);
 
 
 

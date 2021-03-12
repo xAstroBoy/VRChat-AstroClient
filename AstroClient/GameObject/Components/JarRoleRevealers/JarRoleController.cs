@@ -110,24 +110,24 @@ namespace AstroClient
 
         public static List<LinkedNodes> JarRoleLinks = new List<LinkedNodes>();
 
-        public static List<JarRoleESP> RoleESPComponent = new List<JarRoleESP>();
+        public static List<JarRoleESP> RoleEspComponents = new List<JarRoleESP>();
 
 
-        //public static LinkedNodes GetLinkedNode(int value)
-        //{
-        //    return JarRoleLinks.Where(x => x.nodevalue == value).DefaultIfEmpty(null).First();
-        //}
+        public static LinkedNodes GetLinkedNode(int value)
+        {
+            return JarRoleLinks.Where(x => x.nodevalue == value).DefaultIfEmpty(null).First();
+        }
 
 
         public static JarRoleESP GetLinkedComponent(int value)
         {
-            return RoleESPComponent.Where(x => x.LinkedEntry.nodevalue == value).DefaultIfEmpty(null).First();
+            return RoleEspComponents.Where(x => x.LinkedEntry.nodevalue == value).DefaultIfEmpty(null).First();
         }
 
         public static void OnLevelLoad()
         {
             JarRoleLinks.Clear();
-            RoleESPComponent.Clear();
+            RoleEspComponents.Clear();
             isAmongUsWorld = false;
             IsMurder4World = false;
             Murder4RolesRevealerToggle.setToggleState(false);
@@ -149,9 +149,9 @@ namespace AstroClient
                             var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
                             if (RoleRevealer != null)
                             {
-                                if (!RoleESPComponent.Contains(RoleRevealer))
+                                if (!RoleEspComponents.Contains(RoleRevealer))
                                 {
-                                    RoleESPComponent.Add(RoleRevealer);
+                                    RoleEspComponents.Add(RoleRevealer);
                                 }
                             }
                         }
@@ -287,11 +287,18 @@ namespace AstroClient
                                                 {
                                                     Debug($"Linked Player Entry : {Entry.name}, With node : {node.name}, with link : {NodeNumber}");
                                                     var addme = new LinkedNodes(Entry, node, NodeNumber.Value);
-                                                    if(!JarRoleLinks.Contains(addme))
+                                                    if (GetLinkedNode(addme.nodevalue) != null)
                                                     {
-                                                        JarRoleLinks.Add(addme);
-                                                        Debug($"Registered Player Entry : {addme.Entry.name}, With node : {addme.Node.name} with Link nr. {addme.nodevalue}");
-                                                        break;
+                                                        continue;
+                                                    }
+                                                    else
+                                                    {
+                                                        if (!JarRoleLinks.Contains(addme))
+                                                        {
+                                                            JarRoleLinks.Add(addme);
+                                                            Debug($"Registered Player Entry : {addme.Entry.name}, With node : {addme.Node.name} with Link nr. {addme.nodevalue}");
+                                                            break;
+                                                        }
                                                     }
                                                 }
                                             }

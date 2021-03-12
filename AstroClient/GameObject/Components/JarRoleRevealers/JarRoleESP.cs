@@ -379,7 +379,7 @@ namespace AstroClient.components
                 _AssignedPlayerNode.RenameObject("Unassigned Node");
             }
             
-            JarRoleController.RoleESPComponent.Remove(this);
+            JarRoleController.RoleEspComponents.Remove(this);
         }
 
 
@@ -426,12 +426,12 @@ namespace AstroClient.components
                                 SetTag(NoRoles, DefaultTextColor, NoRolesColor);
                             }
                         }
-                    }
-                    else
-                    {
-                        if (GetCurrentSingleTagText() == HiddenRole)
+                        else
                         {
-                            SetTag(NoRoles, DefaultTextColor, NoRolesColor);
+                            if (GetCurrentSingleTagText() == HiddenRole)
+                            {
+                                SetTag(NoRoles, DefaultTextColor, NoRolesColor);
+                            }
                         }
                     }
                 }
@@ -453,12 +453,12 @@ namespace AstroClient.components
                                 SetTag(NoRoles, DefaultTextColor, NoRolesColor);
                             }
                         }
-                    }
-                    else
-                    {
-                        if (GetCurrentSingleTagText() == HiddenRole)
+                        else
                         {
-                            SetTag(NoRoles, DefaultTextColor, NoRolesColor);
+                            if (GetCurrentSingleTagText() == HiddenRole)
+                            {
+                                SetTag(NoRoles, DefaultTextColor, NoRolesColor);
+                            }
                         }
                     }
                 }
