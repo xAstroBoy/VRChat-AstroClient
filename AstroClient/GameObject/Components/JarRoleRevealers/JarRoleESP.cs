@@ -445,7 +445,7 @@ namespace AstroClient.components
                     }
                     if (JarRoleController.ViewRoles)
                     {
-                        var color = Murder4GetNamePlateColor();
+                        var color = AmongUsGetNamePlateColor();
                         if (color != null)
                         {
                             SetTag(ReturnedRole.ToString(), DefaultTextColor, color.Value);
