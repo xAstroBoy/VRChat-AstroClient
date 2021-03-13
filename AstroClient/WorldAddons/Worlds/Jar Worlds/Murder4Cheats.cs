@@ -23,7 +23,7 @@ using AstroClient.ButtonShortcut;
 
 namespace AstroClient
 {
-    public class Murder4Cheats
+    public static class Murder4Cheats
     {
         // TODO: FIGURE HOW TO FIX PARTICLES (ONLY GOLD CAMO WORKS)
         public static void UnlockPatreonTiers()
@@ -263,29 +263,22 @@ namespace AstroClient
             if (WorldUtils.GetWorldID() == "wrld_858dfdfc-1b48-4e1e-8a43-f0edc611e5fe")
             {
                 HasMurder4WorldLoaded = true;
-                if (MurderCheatsPage != null)
+                if (Murder4CheatPage != null)
                 {
                     ModConsole.Log("Recognized Murder 4's world, Unlocking Murder 4 cheats menu!", ConsoleColor.Green);
-                    MurderCheatsPage.getMainButton().setIntractable(true);
-                    MurderCheatsPage.getMainButton().setTextColor(Color.green);
-                    CheatsShortcutButton.SetActive(true);
-                    CheatsShortcutButton.SetButtonColor(Color.green);
-                    CheatsShortcutButton.ClearButtonAction();
-                    CheatsShortcutButton.SetButtonText("Murder 4 Cheats");
+                    Murder4CheatPage.getMainButton().setIntractable(true);
+                    Murder4CheatPage.getMainButton().setTextColor(Color.green);
                 }
                 FindGameMurderObjects();
             }
             else
             {
                 HasMurder4WorldLoaded = false;
-                if (MurderCheatsPage != null)
+                if (Murder4CheatPage != null)
                 {
-                    MurderCheatsPage.getMainButton().setIntractable(false);
-                    MurderCheatsPage.getMainButton().setTextColor(Color.red);
-                    CheatsShortcutButton.SetActive(false);
-                    CheatsShortcutButton.SetButtonColor(Color.red);
-                    CheatsShortcutButton.ClearButtonAction();
-                    CheatsShortcutButton.SetButtonText("Empty", "Empty");
+                    Murder4CheatPage.getMainButton().setIntractable(false);
+                    Murder4CheatPage.getMainButton().setTextColor(Color.red);
+
                 }
             }
         }
@@ -332,10 +325,10 @@ namespace AstroClient
 
         public static void Murder4CheatsButtons(QMNestedButton submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
         {
-            MurderCheatsPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Murder 4 Cheats", "Manage Murder 4 Cheats", null, null, null, null, btnHalf);
-            MurderCheatsPage.getMainButton().SetResizeTextForBestFit(true);
+            Murder4CheatPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Murder 4 Cheats", "Manage Murder 4 Cheats", null, null, null, null, btnHalf);
+            Murder4CheatPage.getMainButton().SetResizeTextForBestFit(true);
 
-            QMNestedButton MurderItemTeleporter = new QMNestedButton(MurderCheatsPage, 1, 0, "Item Teleporter", "Size Items Editor", null, null, null, null, true);
+            QMNestedButton MurderItemTeleporter = new QMNestedButton(Murder4CheatPage, 1, 0, "Item Teleporter", "Size Items Editor", null, null, null, null, true);
             #region Item Teleporter
             new QMSingleButton(MurderItemTeleporter, 1, 0, "Teleport The Clues to Your Pos!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!", null, null);
             new QMSingleButton(MurderItemTeleporter, 2, 0, "Teleport photograph!", new Action(() => { Clue_photograph.TeleportToMe(); }), "Clue Teleporter!", null, null);
@@ -352,7 +345,7 @@ namespace AstroClient
             new QMSingleButton(MurderItemTeleporter, 3, 1, "Teleport Grenade!", new Action(() => { item_Grenade.TeleportToMe(); }), "Grenade Teleporter!", null, null);
             new QMSingleButton(MurderItemTeleporter, 4, 1, "Teleport Traps!", new Action(() => { BearTraps.TeleportToMe(); }), "Silenced Gun Teleporter!", null, null);
             #endregion
-            QMNestedButton MurderItemTweaker = new QMNestedButton(MurderCheatsPage, 1, 0.5f, "Item Tweaker", "Item Tweaks!", null, null, null, null, true);
+            QMNestedButton MurderItemTweaker = new QMNestedButton(Murder4CheatPage, 1, 0.5f, "Item Tweaker", "Item Tweaks!", null, null, null, null, true);
             #region Item Tweaker
             new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!", null, null);
             new QMToggleButton(MurderItemTweaker, 2, 0, "Float (Space Mode)", new Action(() => { SetMurderItemsGravity(true); }), "Fall (World Gravity)", new Action(() => { SetMurderItemsGravity(false); }), "Tweaks all Murder! items gravity!", null, null, null, false);
@@ -374,7 +367,7 @@ namespace AstroClient
             two.SetResizeTextForBestFit(true);
             #endregion
 
-            QMNestedButton MurderItemSpawner = new QMNestedButton(MurderCheatsPage, 1, 1f, "Item Spawner", "Item Spawner!", null, null, null, null, true);
+            QMNestedButton MurderItemSpawner = new QMNestedButton(Murder4CheatPage, 1, 1f, "Item Spawner", "Item Spawner!", null, null, null, null, true);
             #region Item Spawner
 
             new QMSingleButton(MurderItemSpawner, 1, 0, "Spawn Detective Gun", new Action(() => { item_DetectiveRevolver.CloneObject(); }), "Detective Gun Cloner!", null, null);
@@ -396,7 +389,7 @@ namespace AstroClient
 
             if (Bools.AllowAttackerComponent)
             {
-                QMNestedButton MurderItemAttackerMenu = new QMNestedButton(MurderCheatsPage, 1, 1.5f, "Followers", "Murder item Followers!", null, null, null, null, true);
+                QMNestedButton MurderItemAttackerMenu = new QMNestedButton(Murder4CheatPage, 1, 1.5f, "Followers", "Murder item Followers!", null, null, null, null, true);
                 #region Followers
                 QMNestedButton Follow_target_section = new QMNestedButton(MurderItemAttackerMenu, 1, 0, "Follow Target ", "Murder item Followers!", null, null, null, null);
                 new QMSingleButton(Follow_target_section, 1, 0, "Detective Gun follows target!", new Action(() => { DetectiveGuns.AttackTarget(); }), "Make Detective Gun follow Target", null, null);
@@ -419,7 +412,7 @@ namespace AstroClient
             }
             if (Bools.AllowOrbitComponent)
             {
-                QMNestedButton MurderItemOrbiterMenu = new QMNestedButton(MurderCheatsPage, 1, 2, "orbiters", "Murder item Orbits!", null, null, null, null, true);
+                QMNestedButton MurderItemOrbiterMenu = new QMNestedButton(Murder4CheatPage, 1, 2, "orbiters", "Murder item Orbits!", null, null, null, null, true);
                 #region orbiters
 
                 QMNestedButton Orbit_target_section = new QMNestedButton(MurderItemOrbiterMenu, 0, 2, "Orbit Around Target", "Murder item Followers!", null, null, null, null);
@@ -442,7 +435,7 @@ namespace AstroClient
             }
 
 
-            QMNestedButton MurderItemClicker = new QMNestedButton(MurderCheatsPage, 1, 2.5f, "Items Clicker", "Interact with Items!", null, null, null, null, true);
+            QMNestedButton MurderItemClicker = new QMNestedButton(Murder4CheatPage, 1, 2.5f, "Items Clicker", "Interact with Items!", null, null, null, null, true);
             #region Items Clicker
 
             new QMSingleButton(MurderItemClicker, 1, 0, "Click photograph!", new Action(() => { Clue_photograph.VRC_Interactable_Click(); }), "Click!", null, null, true);
@@ -457,7 +450,7 @@ namespace AstroClient
             new QMSingleButton(MurderItemClicker, 2, 0.5f, "Unlock Random Weapon!", new Action(() => { Clues.VRC_Interactable_Click(); }), "Unlock Random Weapon!", null, null, true);
             #endregion
 
-            QMNestedButton MurderItemWatchMenu = new QMNestedButton(MurderCheatsPage, 2, 0f, "Watchers", "Murder item Watchers!", null, null, null, null, true);
+            QMNestedButton MurderItemWatchMenu = new QMNestedButton(Murder4CheatPage, 2, 0f, "Watchers", "Murder item Watchers!", null, null, null, null, true);
             #region Watchers
 
             QMNestedButton Watch_target_section = new QMNestedButton(MurderItemWatchMenu, 1, 0, "Watch Target ", "Murder item Watchers!", null, null, null, null);
@@ -481,11 +474,11 @@ namespace AstroClient
 
 
 
-            GameObjectESP.MurderESPtoggler = new QMToggleButton(MurderCheatsPage, 3, 0, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", null, null, null, false);
-            JarRoleController.Murder4RolesRevealerToggle = new QMToggleButton(MurderCheatsPage, 4, 0, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", null, null, null, false);
-            Murder4UdonExploits.InitMurderGameControllerExploits(MurderCheatsPage, 4, 1, true);
-            Murder4UdonExploits.InitMurder4FilteredNodeExploitBtn(MurderCheatsPage, 4, 1.5f, true);
-            Murder4UdonExploits.InitMurder4UnfilteredNodeExploitBtn(MurderCheatsPage, 4, 2f, true);
+            GameObjectESP.MurderESPtoggler = new QMToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", null, null, null, false);
+            JarRoleController.Murder4RolesRevealerToggle = new QMToggleButton(Murder4CheatPage, 4, 0, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", null, null, null, false);
+            Murder4UdonExploits.InitMurderGameControllerExploits(Murder4CheatPage, 4, 1, true);
+            Murder4UdonExploits.InitMurder4FilteredNodeExploitBtn(Murder4CheatPage, 4, 1.5f, true);
+            Murder4UdonExploits.InitMurder4UnfilteredNodeExploitBtn(Murder4CheatPage, 4, 2f, true);
 
 
 
@@ -586,7 +579,7 @@ namespace AstroClient
         public static List<GameObject> BearTraps = new List<GameObject>();
         public static List<GameObject> Grenades = new List<GameObject>();
 
-        public static QMNestedButton MurderCheatsPage;
+        public static QMNestedButton Murder4CheatPage;
 
         public static bool HasMurder4WorldLoaded = false;
 

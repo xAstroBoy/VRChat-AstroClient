@@ -263,7 +263,7 @@ namespace AstroClient
             HubButtonsControl.OnWorldReveal();
             WorldUnlocker.OnWorldReveal();
             WorldAddons.OnWorldReveal();
-
+            CheatsShortcutButton.OnWorldReveal();
             yield break;
         }
 

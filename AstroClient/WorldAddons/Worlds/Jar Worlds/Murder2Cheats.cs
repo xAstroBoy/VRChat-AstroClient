@@ -16,7 +16,7 @@ using AstroClient.ButtonShortcut;
 
 namespace AstroClient
 {
-    public class Murder2Cheats
+    public static class Murder2Cheats
     {
         public static void FindGameMurderObjects()
         {
@@ -148,28 +148,20 @@ namespace AstroClient
         {
             if (WorldUtils.GetWorldID() == "wrld_858dfdfc-1b28-2e1e-8a23-f0edc611e5fe")
             {
-                if (MurderCheatsPage != null)
+                if (Murder2CheatPage != null)
                 {
                     ModConsole.Log("Recognized Murder 2's world, Unlocking Murder 2 cheats menu!", ConsoleColor.Green);
-                    MurderCheatsPage.getMainButton().setIntractable(true);
-                    MurderCheatsPage.getMainButton().setTextColor(Color.green);
-                    CheatsShortcutButton.SetActive(true);
-                    CheatsShortcutButton.SetButtonColor(Color.green);
-                    CheatsShortcutButton.SetButtonShortcut(MurderCheatsPage);
-                    CheatsShortcutButton.SetButtonText("Murder 2 Cheats", "Murder 2 Cheats");
+                    Murder2CheatPage.getMainButton().setIntractable(true);
+                    Murder2CheatPage.getMainButton().setTextColor(Color.green);
                 }
                 FindGameMurderObjects();
             }
             else
             {
-                if (MurderCheatsPage != null)
+                if (Murder2CheatPage != null)
                 {
-                    MurderCheatsPage.getMainButton().setIntractable(false);
-                    MurderCheatsPage.getMainButton().setTextColor(Color.red);
-                    CheatsShortcutButton.SetActive(false);
-                    CheatsShortcutButton.SetButtonColor(Color.red);
-                    CheatsShortcutButton.ClearButtonAction();
-                    CheatsShortcutButton.SetButtonText("Empty", "Empty");
+                    Murder2CheatPage.getMainButton().setIntractable(false);
+                    Murder2CheatPage.getMainButton().setTextColor(Color.red);
                 }
             }
         }
@@ -200,14 +192,14 @@ namespace AstroClient
 
         public static void Murder2CheatsButtons(QMNestedButton submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
         {
-            MurderCheatsPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Murder 2 Cheats", "Manage Murder 2 Cheats", null, null, null, null, btnHalf);
-            MurderCheatsPage.getMainButton().SetResizeTextForBestFit(true);
-            QMNestedButton MurderItemTeleporter = new QMNestedButton(MurderCheatsPage, 1, 0, "Item Teleporter", "Size Items Editor", null, null, null, null);
+            Murder2CheatPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Murder 2 Cheats", "Manage Murder 2 Cheats", null, null, null, null, btnHalf);
+            Murder2CheatPage.getMainButton().SetResizeTextForBestFit(true);
+            QMNestedButton MurderItemTeleporter = new QMNestedButton(Murder2CheatPage, 1, 0, "Item Teleporter", "Size Items Editor", null, null, null, null);
             new QMSingleButton(MurderItemTeleporter, 1, 0, "Teleport The Clues to Your Pos!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!", null, null);
             new QMSingleButton(MurderItemTeleporter, 2, 0, "Teleport the Detective Gun!", new Action(() => { item_detectiveGun.TeleportToMe(); }), "Detective Gun Teleporter!", null, null);
             new QMSingleButton(MurderItemTeleporter, 3, 0, "Teleport the Silenced Gun!", new Action(() => { item_SilencedGun.TeleportToMe(); }), "Silenced gun Teleporter!", null, null);
 
-            QMNestedButton MurderItemTweaker = new QMNestedButton(MurderCheatsPage, 2, 0, "Item Tweaker", "Item Tweaks!", null, null, null, null);
+            QMNestedButton MurderItemTweaker = new QMNestedButton(Murder2CheatPage, 2, 0, "Item Tweaker", "Item Tweaks!", null, null, null, null);
             new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!", null, null);
             new QMToggleButton(MurderItemTweaker, 2, 0, "Float (Space Mode)", new Action(() => { SetMurderItemsGravity(true); }), "Fall (World Gravity)", new Action(() => { SetMurderItemsGravity(false); }), "Tweaks all Murder! items gravity!", null, null, null, false);
             new QMSingleButton(MurderItemTweaker, 3, 0, "Turn Knifes into rockets!", new Action(() => { Knifes.AddRocketComponent(false); }), "Make Knifes in Instance go nuts!", null, null);
@@ -217,14 +209,14 @@ namespace AstroClient
             new QMSingleButton(MurderItemTweaker, 3, 1, "Turn Guns into Crazy!", new Action(MurderGunsCrazy), "Make Guns in Instance go nuts!", null, null);
             new QMSingleButton(MurderItemTweaker, 4, 1, "Turn Clues into Crazy!", new Action(() => { Clues.AddCrazyComponent(false); }), "Make Clues in Instance go nuts!", null, null);
 
-            QMNestedButton MurderItemSpawner = new QMNestedButton(MurderCheatsPage, 3, 0, "Item Spawner", "Item Spawner!", null, null, null, null);
+            QMNestedButton MurderItemSpawner = new QMNestedButton(Murder2CheatPage, 3, 0, "Item Spawner", "Item Spawner!", null, null, null, null);
             new QMSingleButton(MurderItemSpawner, 1, 0, "Spawn Detective Gun", new Action(() => { item_detectiveGun.CloneObject(); }), "Detective Gun Cloner!", null, null);
             new QMSingleButton(MurderItemSpawner, 2, 0, "Spawn Silenced Gun", new Action(() => { item_SilencedGun.CloneObject(); }), "Silenced Gun Cloner!", null, null);
             new QMSingleButton(MurderItemSpawner, 3, 0, "Spawn Knife", new Action(() => { item_knife_0.CloneObject(); }), "Knife Cloner!", null, null);
 
             if (Bools.AllowAttackerComponent)
             {
-                QMNestedButton MurderItemAttackerMenu = new QMNestedButton(MurderCheatsPage, 2, 0, "Followers", "Murder item Followers!", null, null, null, null);
+                QMNestedButton MurderItemAttackerMenu = new QMNestedButton(Murder2CheatPage, 2, 0, "Followers", "Murder item Followers!", null, null, null, null);
                 QMNestedButton Follow_target_section = new QMNestedButton(MurderItemAttackerMenu, 1, 0, "Follows Target", "Murder item Followers!", null, null, null, null);
                 new QMSingleButton(Follow_target_section, 1, 0, "Detective Gun follows target!", new Action(() => { DetectiveGuns.AttackTarget(); }), "Make Detective Gun follow Target", null, null);
                 new QMSingleButton(Follow_target_section, 2, 0, "Silenced Gun follows target!", new Action(() => { SilencedGuns.AttackTarget(); }), "Make Silenced Gun follow Target", null, null);
@@ -238,7 +230,7 @@ namespace AstroClient
             }
             if (Bools.AllowOrbitComponent)
             {
-                QMNestedButton MurderItemOrbiterMenu = new QMNestedButton(MurderCheatsPage, 1, 1, "orbiters", "Murder item Orbits!", null, null, null, null);
+                QMNestedButton MurderItemOrbiterMenu = new QMNestedButton(Murder2CheatPage, 1, 1, "orbiters", "Murder item Orbits!", null, null, null, null);
                 QMNestedButton Orbit_target_section = new QMNestedButton(MurderItemOrbiterMenu, 1, 0, "Orbit Around Target", "Murder item Orbits!", null, null, null, null);
                 new QMSingleButton(Orbit_target_section, 1, 0, "Detective Gun orbits around target!", new Action(() => { DetectiveGuns.OrbitTarget(); }), "Make Detective Gun orbit around Target", null, null);
                 new QMSingleButton(Orbit_target_section, 2, 0, "Silenced Guns orbits around target!", new Action(() => { SilencedGuns.OrbitTarget(); }), "Make Silenced Gun around orbit Target", null, null);
@@ -250,7 +242,7 @@ namespace AstroClient
                 new QMSingleButton(Orbit_self_section, 3, 0, "Knifes orbits around you!", new Action(() => { Knifes.OrbitSelf(); }), "Make Knifes orbit around you", null, null);
                 new QMSingleButton(Orbit_self_section, 4, 0, "Clues orbits around you!", new Action(() => { Clues.OrbitSelf(); }), "Make Clues orbit around you", null, null);
             }
-            QMNestedButton MurderItemWatcherMenu = new QMNestedButton(MurderCheatsPage, 3, 0, "Watchers", "Murder item Watchers!", null, null, null, null);
+            QMNestedButton MurderItemWatcherMenu = new QMNestedButton(Murder2CheatPage, 3, 0, "Watchers", "Murder item Watchers!", null, null, null, null);
             QMNestedButton Watch_target_section = new QMNestedButton(MurderItemWatcherMenu, 1, 0, "Watchs Target", "Murder item Watchers!", null, null, null, null);
             new QMSingleButton(Watch_target_section, 1, 0, "Detective Gun Watchs target!", new Action(() => { DetectiveGuns.WatchTarget(); }), "Make Detective Gun Watch Target", null, null);
             new QMSingleButton(Watch_target_section, 2, 0, "Silenced Gun Watchs target!", new Action(() => { SilencedGuns.WatchTarget(); }), "Make Silenced Gun Watch Target", null, null);
@@ -264,8 +256,8 @@ namespace AstroClient
 
 
 
-            GodModeMurder2 = new QMToggleButton(MurderCheatsPage, 1, 2, "Normal Mode", new Action(ToggleDeathComponent), "God Mode", new Action(ToggleDeathComponent), "Tweaks all Murder! items gravity!", null, null, null, false);
-            GameObjectESP.MurderESPtoggler = new QMToggleButton(MurderCheatsPage, 2, 2, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", null, null, null, false);
+            GodModeMurder2 = new QMToggleButton(Murder2CheatPage, 1, 2, "Normal Mode", new Action(ToggleDeathComponent), "God Mode", new Action(ToggleDeathComponent), "Tweaks all Murder! items gravity!", null, null, null, false);
+            GameObjectESP.MurderESPtoggler = new QMToggleButton(Murder2CheatPage, 2, 2, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", null, null, null, false);
         }
 
         // MAP GameObjects Required for control.
@@ -293,7 +285,7 @@ namespace AstroClient
         public static GameObject item_knife_6 = null;
         public static GameObject item_knife_7 = null;
         public static GameObject item_knife_8 = null;
-        public static QMNestedButton MurderCheatsPage;
+        public static QMNestedButton Murder2CheatPage;
         public static QMToggleButton GodModeMurder2;
     }
 }

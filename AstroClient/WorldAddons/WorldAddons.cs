@@ -43,10 +43,6 @@ namespace AstroClient.Worlds
                     ModConsole.Log("Recognized Smash Contest's world, revealing SandBag Selector Button!", ConsoleColor.Green);
                     SandBagCheat.setIntractable(true);
                     SandBagCheat.setTextColor(Color.green);
-                    CheatsShortcutButton.SetActive(true);
-                    CheatsShortcutButton.SetButtonShortcut(SandBagCheat);
-                    CheatsShortcutButton.SetButtonText("Select Sandbag", "Select SandBag in Item Tweaker");
-                    CheatsShortcutButton.SetButtonColor(Color.green);
                     FindSandBag();
                 }
             }
@@ -56,10 +52,7 @@ namespace AstroClient.Worlds
                 {
                     SandBagCheat.setIntractable(false);
                     SandBagCheat.setTextColor(Color.red);
-                    CheatsShortcutButton.SetActive(false);
-                    CheatsShortcutButton.SetButtonColor(Color.red);
-                    CheatsShortcutButton.ClearButtonAction();
-                    CheatsShortcutButton.SetButtonText("Empty", "Empty");
+   
                 }
             }
 
@@ -70,10 +63,6 @@ namespace AstroClient.Worlds
                 {
                     MovieRoomPatreonRoomUnlock.setIntractable(true);
                     MovieRoomPatreonRoomUnlock.setTextColor(Color.green);
-                    CheatsShortcutButton.SetActive(true);
-                    CheatsShortcutButton.SetButtonShortcut(MovieRoomPatreonRoomUnlock);
-                    CheatsShortcutButton.SetButtonText("Unlock Patreon Room", "Enables Patreon Room Door Without the password in the Room.");
-                    CheatsShortcutButton.SetButtonColor(Color.green);
 
                 }
             }
@@ -83,10 +72,6 @@ namespace AstroClient.Worlds
                 {
                     MovieRoomPatreonRoomUnlock.setIntractable(false);
                     MovieRoomPatreonRoomUnlock.setTextColor(Color.red);
-                    CheatsShortcutButton.SetActive(false);
-                    CheatsShortcutButton.SetButtonColor(Color.red);
-                    CheatsShortcutButton.ClearButtonAction();
-                    CheatsShortcutButton.SetButtonText("Empty", "Empty");
                 }
             }
             if (WorldUtils.GetWorldID() == "wrld_ba913a96-fac4-4048-a062-9aa5db092812")
@@ -96,10 +81,6 @@ namespace AstroClient.Worlds
                     ModConsole.Log("Recognized VRCHat Hub's world, revealing Hub Addons Submenu Button!", ConsoleColor.Green);
                     HubButtonsControl.VRChat_Hub_Addons.getMainButton().setIntractable(true);
                     HubButtonsControl.VRChat_Hub_Addons.getMainButton().setTextColor(Color.green);
-                    CheatsShortcutButton.SetActive(true);
-                    CheatsShortcutButton.SetButtonShortcut(HubButtonsControl.VRChat_Hub_Addons);
-                    CheatsShortcutButton.SetButtonText("Hub Mods", "Control HUB World.");
-                    CheatsShortcutButton.SetButtonColor(Color.green);
                 }
             }
             else
@@ -108,10 +89,6 @@ namespace AstroClient.Worlds
                 {
                     HubButtonsControl.VRChat_Hub_Addons.getMainButton().setIntractable(false);
                     HubButtonsControl.VRChat_Hub_Addons.getMainButton().setTextColor(Color.red);
-                    CheatsShortcutButton.SetActive(false);
-                    CheatsShortcutButton.SetButtonColor(Color.red);
-                    CheatsShortcutButton.ClearButtonAction();
-                    CheatsShortcutButton.SetButtonText("Empty", "Empty");
 
                 }
             }
@@ -209,10 +186,10 @@ namespace AstroClient.Worlds
             }
         }
 
-        private static VRCSDK2.VRC_Trigger PatreonDoorTrigger = null;
-        private static bool HasDeletedBlockingPortal = false;
-        private static QMSingleButton MovieRoomPatreonRoomUnlock;
-        private static QMSingleButton SandBagCheat;
+        public static VRCSDK2.VRC_Trigger PatreonDoorTrigger = null;
+        public static bool HasDeletedBlockingPortal = false;
+        public static QMSingleButton MovieRoomPatreonRoomUnlock;
+        public static QMSingleButton SandBagCheat;
         public static GameObject SandBag = null;
     }
 }

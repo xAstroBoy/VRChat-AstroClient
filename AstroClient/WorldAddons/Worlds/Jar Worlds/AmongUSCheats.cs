@@ -23,7 +23,7 @@ using AstroClient.ButtonShortcut;
 
 namespace AstroClient
 {
-    public class AmongUSCheats
+    public static class AmongUSCheats
     {
   
 
@@ -59,10 +59,6 @@ namespace AstroClient
                     ModConsole.Log("Recognized Among US world, Unlocking Among US cheats menu!", ConsoleColor.Green);
                     AmongUsCheatsPage.getMainButton().setIntractable(true);
                     AmongUsCheatsPage.getMainButton().setTextColor(Color.green);
-                    CheatsShortcutButton.SetActive(true);
-                    CheatsShortcutButton.SetButtonColor(Color.green);
-                    CheatsShortcutButton.SetButtonShortcut(AmongUsCheatsPage);
-                    CheatsShortcutButton.SetButtonText("Among US Cheats", "Manage Among Us Cheats");
                 }
                 FindAmongUsObjects();
             }
@@ -73,10 +69,6 @@ namespace AstroClient
                 {
                     AmongUsCheatsPage.getMainButton().setIntractable(false);
                     AmongUsCheatsPage.getMainButton().setTextColor(Color.red);
-                    CheatsShortcutButton.SetActive(false);
-                    CheatsShortcutButton.SetButtonColor(Color.red);
-                    CheatsShortcutButton.ClearButtonAction();
-                    CheatsShortcutButton.SetButtonText("Empty", "Empty");
                 }
             }
         }
