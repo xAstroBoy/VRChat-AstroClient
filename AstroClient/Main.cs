@@ -40,6 +40,7 @@ using System.Net.Http;
 using Microsoft.Win32;
 using System.Linq;
 using AstroClient.UdonExploits;
+using AstroClient.ButtonShortcut;
 #endregion AstroClient Imports
 
 namespace AstroClient
@@ -322,6 +323,8 @@ namespace AstroClient
             new QMSingleButton("ShortcutMenu", 5, 1f, "GameObject Toggler", new Action(() => 
             { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.getMainButton().getGameObject().GetComponent<Button>().onClick.Invoke(); }
             ), "Advanced GameObject Toggler", null, null, true);
+            CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 1.5f, true);
+
 
         }
 

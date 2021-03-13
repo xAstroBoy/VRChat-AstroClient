@@ -18,6 +18,7 @@ using AstroClient.components;
 using System.Threading.Tasks;
 using System.Threading;
 using AstroClient.UdonExploits;
+using AstroClient.ButtonShortcut;
 #endregion AstroClient Imports
 
 namespace AstroClient
@@ -267,6 +268,10 @@ namespace AstroClient
                     ModConsole.Log("Recognized Murder 4's world, Unlocking Murder 4 cheats menu!", ConsoleColor.Green);
                     MurderCheatsPage.getMainButton().setIntractable(true);
                     MurderCheatsPage.getMainButton().setTextColor(Color.green);
+                    CheatsShortcutButton.SetActive(true);
+                    CheatsShortcutButton.SetButtonColor(Color.green);
+                    CheatsShortcutButton.ClearButtonAction();
+                    CheatsShortcutButton.SetButtonText("Murder 4 Cheats");
                 }
                 FindGameMurderObjects();
             }
@@ -277,6 +282,10 @@ namespace AstroClient
                 {
                     MurderCheatsPage.getMainButton().setIntractable(false);
                     MurderCheatsPage.getMainButton().setTextColor(Color.red);
+                    CheatsShortcutButton.SetActive(false);
+                    CheatsShortcutButton.SetButtonColor(Color.red);
+                    CheatsShortcutButton.ClearButtonAction();
+                    CheatsShortcutButton.SetButtonText("Empty", "Empty");
                 }
             }
         }

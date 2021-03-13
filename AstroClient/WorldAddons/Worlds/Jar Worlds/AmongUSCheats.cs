@@ -18,6 +18,7 @@ using AstroClient.components;
 using System.Threading.Tasks;
 using System.Threading;
 using AstroClient.UdonExploits;
+using AstroClient.ButtonShortcut;
 #endregion AstroClient Imports
 
 namespace AstroClient
@@ -58,6 +59,10 @@ namespace AstroClient
                     ModConsole.Log("Recognized Among US world, Unlocking Among US cheats menu!", ConsoleColor.Green);
                     AmongUsCheatsPage.getMainButton().setIntractable(true);
                     AmongUsCheatsPage.getMainButton().setTextColor(Color.green);
+                    CheatsShortcutButton.SetActive(true);
+                    CheatsShortcutButton.SetButtonColor(Color.green);
+                    CheatsShortcutButton.SetButtonShortcut(AmongUsCheatsPage);
+                    CheatsShortcutButton.SetButtonText("Among US Cheats", "Manage Among Us Cheats");
                 }
                 FindAmongUsObjects();
             }
@@ -68,6 +73,10 @@ namespace AstroClient
                 {
                     AmongUsCheatsPage.getMainButton().setIntractable(false);
                     AmongUsCheatsPage.getMainButton().setTextColor(Color.red);
+                    CheatsShortcutButton.SetActive(false);
+                    CheatsShortcutButton.SetButtonColor(Color.red);
+                    CheatsShortcutButton.ClearButtonAction();
+                    CheatsShortcutButton.SetButtonText("Empty", "Empty");
                 }
             }
         }
@@ -77,11 +86,16 @@ namespace AstroClient
         {
             AmongUsCheatsPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Among US Cheats", "Manage Among US Cheats", null, null, null, null, btnHalf);
             JarRoleController.AmongUSRolesRevealerToggle = new QMToggleButton(AmongUsCheatsPage, 1, 0, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", null, null, null, false);
-            AmongUSUdonExploits.InitAmongUsGameControllerExploits(AmongUsCheatsPage, 2, 0, true);
-            AmongUSUdonExploits.InitAmongUSFilteredNodeExploitBtn(AmongUsCheatsPage, 2f, 0.5f, true);
-            AmongUSUdonExploits.InitAmongUSUnFilteredNodeExploitBtn(AmongUsCheatsPage, 2f, 1f, true);
-            AmongUSUdonExploits.InitAmongUSKillPlayersExploitBtn(AmongUsCheatsPage, 3f, 0.5f, true);
-            AmongUSUdonExploits.InitAmongUsSabotageControllerExploits(AmongUsCheatsPage, 3f, 0f, true);
+            AmongUSUdonExploits.Init_GameController_Menu(AmongUsCheatsPage, 2, 0, true);
+
+            AmongUSUdonExploits.Init_FilteredNodes_Menu(AmongUsCheatsPage, 2f, 0.5f, true);
+            AmongUSUdonExploits.InitUnfilteredNodesMenu(AmongUsCheatsPage, 2f, 1f, true);
+
+            AmongUSUdonExploits.Init_SabotageAndRepair_Menu(AmongUsCheatsPage, 3f, 0f, true);
+            AmongUSUdonExploits.Init_KillPlayers_Menu(AmongUsCheatsPage, 3f, 0.5f, true);
+
+            AmongUSUdonExploits.Init_ForceVotePlayer_menu(AmongUsCheatsPage, 4f, 0f, true);
+            AmongUSUdonExploits.Init_ForcePlayerEject_Menu(AmongUsCheatsPage, 4f, 0.5f, true);
 
         }
 

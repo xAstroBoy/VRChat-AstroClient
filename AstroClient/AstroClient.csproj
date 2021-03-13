@@ -25,6 +25,7 @@
     <NoWarn>CS0169;CS0472</NoWarn>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
     <Compile Include="DayOfThePlay\Extensions\CameraExtension.cs" />
     <Compile Include="DayOfThePlay\Extensions\MiskExtension.cs" />
     <Compile Include="DayOfThePlay\Extensions\ModerationManagerExtension.cs" />

@@ -10,6 +10,7 @@ using AstroClient.ConsoleUtils;
 using AstroClient.variables;
 using AstroClient.Finder;
 using AstroClient.extensions;
+using AstroClient.ButtonShortcut;
 
 #endregion AstroClient Imports
 
@@ -152,6 +153,10 @@ namespace AstroClient
                     ModConsole.Log("Recognized Murder 2's world, Unlocking Murder 2 cheats menu!", ConsoleColor.Green);
                     MurderCheatsPage.getMainButton().setIntractable(true);
                     MurderCheatsPage.getMainButton().setTextColor(Color.green);
+                    CheatsShortcutButton.SetActive(true);
+                    CheatsShortcutButton.SetButtonColor(Color.green);
+                    CheatsShortcutButton.SetButtonShortcut(MurderCheatsPage);
+                    CheatsShortcutButton.SetButtonText("Murder 2 Cheats", "Murder 2 Cheats");
                 }
                 FindGameMurderObjects();
             }
@@ -161,6 +166,10 @@ namespace AstroClient
                 {
                     MurderCheatsPage.getMainButton().setIntractable(false);
                     MurderCheatsPage.getMainButton().setTextColor(Color.red);
+                    CheatsShortcutButton.SetActive(false);
+                    CheatsShortcutButton.SetButtonColor(Color.red);
+                    CheatsShortcutButton.ClearButtonAction();
+                    CheatsShortcutButton.SetButtonText("Empty", "Empty");
                 }
             }
         }
