@@ -2,6 +2,7 @@
 using System.Linq;
 using UnityEngine;
 using VRC;
+using VRC.Udon;
 
 namespace AstroClient.variables
 {
@@ -13,6 +14,18 @@ namespace AstroClient.variables
             ColliderCheck.Clear();
             RigidBodyCheck.Clear();
             ScaleCheck.Clear();
+        }
+
+        public class CachedUdonEvents
+        {
+            public UdonBehaviour Action { get; set; }
+            public string Key { get; set; }
+
+            public CachedUdonEvents(UdonBehaviour Action, string Key)
+            {
+                this.Action = Action;
+                this.Key = Key;
+            }
         }
 
         public class ColliderChecker
