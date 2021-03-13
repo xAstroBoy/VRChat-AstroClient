@@ -39,6 +39,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using Microsoft.Win32;
 using System.Linq;
+using AstroClient.UdonExploits;
 #endregion AstroClient Imports
 
 namespace AstroClient
@@ -276,6 +277,7 @@ namespace AstroClient
             CrazyObjectManager.OnLevelLoad();
             ItemInflaterManager.OnLevelLoad();
             ObjectSpinnerManager.OnLevelLoad();
+            AmongUSUdonExploits.OnLevelLoad();
             OrbitManager.OnLevelLoad();
             PlayerWatcherManager.OnLevelLoad();
             PlayerAttackerManager.OnLevelLoad();
@@ -340,7 +342,7 @@ namespace AstroClient
             WorldPickupsBtn.InitButtons(AstroClient, 2, 0, true);
             ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
             TriggerSubMenu(AstroClient, 2, 1, true);
-            UdonExploitsMenu.InitButtons(AstroClient, 2, 1.5f, true);
+            GlobalUdonExploits.InitButtons(AstroClient, 2, 1.5f, true);
             VRC_InteractableSubMenu(AstroClient, 2, 2, true);
             Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
         }

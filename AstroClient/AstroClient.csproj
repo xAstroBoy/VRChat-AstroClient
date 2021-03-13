@@ -77,7 +77,9 @@
     <Compile Include="Startup\Hooks\NetworkManagerHooks.cs" />
     <Compile Include="Startup\Buttons\ItemTweakerMain.cs" />
     <Compile Include="GameObjMenu.cs" />
-    <Compile Include="UdonExploitsMenu.cs" />
+    <Compile Include="Udon\Exploits\Global\GlobalUdonExploits.cs" />
+    <Compile Include="Udon\Exploits\Murder4\Murder4UdonExploits.cs" />
+    <Compile Include="Udon\Exploits\AmongUS\AmongUSUdonExploits.cs" />
     <Compile Include="Utils\ExtensionUtils\SyncPhysicsExt.cs" />
     <Compile Include="Utils\Headlight\ColorConverter.cs" />
     <Compile Include="Utils\Headlight\Headlight.cs" />

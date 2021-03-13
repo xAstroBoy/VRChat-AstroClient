@@ -17,6 +17,7 @@ using MelonLoader;
 using AstroClient.components;
 using System.Threading.Tasks;
 using System.Threading;
+using AstroClient.UdonExploits;
 #endregion AstroClient Imports
 
 namespace AstroClient
@@ -76,9 +77,12 @@ namespace AstroClient
         {
             AmongUsCheatsPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Among US Cheats", "Manage Among US Cheats", null, null, null, null, btnHalf);
             JarRoleController.AmongUSRolesRevealerToggle = new QMToggleButton(AmongUsCheatsPage, 1, 0, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", null, null, null, false);
-            UdonExploitsMenu.InitAmongUsGameControllerExploits(AmongUsCheatsPage, 2, 0, true);
-            UdonExploitsMenu.InitAmongUSFilteredNodeExploitBtn(AmongUsCheatsPage, 2f, 0.5f, true);
-            UdonExploitsMenu.InitAmongUSUnFilteredNodeExploitBtn(AmongUsCheatsPage, 2f, 1f, true);
+            AmongUSUdonExploits.InitAmongUsGameControllerExploits(AmongUsCheatsPage, 2, 0, true);
+            AmongUSUdonExploits.InitAmongUSFilteredNodeExploitBtn(AmongUsCheatsPage, 2f, 0.5f, true);
+            AmongUSUdonExploits.InitAmongUSUnFilteredNodeExploitBtn(AmongUsCheatsPage, 2f, 1f, true);
+            AmongUSUdonExploits.InitAmongUSKillPlayersExploitBtn(AmongUsCheatsPage, 3f, 0.5f, true);
+            AmongUSUdonExploits.InitAmongUsSabotageControllerExploits(AmongUsCheatsPage, 3f, 0f, true);
+
         }
 
 
