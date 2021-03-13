@@ -99,7 +99,7 @@ namespace AstroClient.ButtonShortcut
         {
             if (WorldCheatsShortcut != null)
             {
-                WorldCheatsShortcut.setButtonText(ButtonText);
+                WorldCheatsShortcut.setButtonText(ButtonText + " Shortcut.");
                 WorldCheatsShortcut.setToolTip(ButtonText + " Shortcut.");
             }
         }
@@ -107,7 +107,7 @@ namespace AstroClient.ButtonShortcut
         {
             if (WorldCheatsShortcut != null)
             {
-                WorldCheatsShortcut.setButtonText(ButtonText);
+                WorldCheatsShortcut.setButtonText(ButtonText + " Shortcut.");
                 WorldCheatsShortcut.setToolTip(ButtonToolTip + " Shortcut.");
             }
         }
