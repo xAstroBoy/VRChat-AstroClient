@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using AstroClient.
 using AstroClient.Worlds;
 
 namespace AstroClient.ButtonShortcut
