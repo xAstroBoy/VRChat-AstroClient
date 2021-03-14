@@ -412,7 +412,7 @@ namespace AstroClient
             }
             if (Bools.AllowOrbitComponent)
             {
-                QMNestedButton MurderItemOrbiterMenu = new QMNestedButton(Murder4CheatPage, 1, 2, "orbiters", "Murder item Orbits!", null, null, null, null, true);
+                QMNestedButton MurderItemOrbiterMenu = new QMNestedButton(Murder4CheatPage, 1, 2, "Orbiters", "Murder item Orbits!", null, null, null, null, true);
                 #region orbiters
 
                 QMNestedButton Orbit_target_section = new QMNestedButton(MurderItemOrbiterMenu, 0, 2, "Orbit Around Target", "Murder item Followers!", null, null, null, null);
@@ -476,9 +476,9 @@ namespace AstroClient
 
             GameObjectESP.MurderESPtoggler = new QMToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", null, null, null, false);
             JarRoleController.Murder4RolesRevealerToggle = new QMToggleButton(Murder4CheatPage, 4, 0, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", null, null, null, false);
-            Murder4UdonExploits.InitMurderGameControllerExploits(Murder4CheatPage, 4, 1, true);
-            Murder4UdonExploits.InitMurder4FilteredNodeExploitBtn(Murder4CheatPage, 4, 1.5f, true);
-            Murder4UdonExploits.InitMurder4UnfilteredNodeExploitBtn(Murder4CheatPage, 4, 2f, true);
+            Murder4UdonExploits.Init_GameController_Btn(Murder4CheatPage, 4, 1, true);
+            Murder4UdonExploits.Init_Filtered_Nodes_Btn(Murder4CheatPage, 4, 1.5f, true);
+            Murder4UdonExploits.Init_Unfiltered_Nodes_btn(Murder4CheatPage, 4, 2f, true);
 
 
 
