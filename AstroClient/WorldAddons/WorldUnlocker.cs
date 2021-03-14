@@ -219,11 +219,13 @@ namespace AstroClient.Worlds
                     hammer.SetPickupTheft(false);
                     foreach (var item in hammer.GetComponentsInChildren<VRC_Trigger>(true))
                     {
-                        item.DestroyMeLocal();
+                        ModConsole.DebugLog("Disabling SDK 1 Internal Trigger on Hammer..");
+                        item.enabled = false;
                     }
                     foreach (var item in hammer.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true))
                     {
-                        item.DestroyMeLocal();
+                        ModConsole.DebugLog("Disabling SDK 2 Internal Trigger on Hammer..");
+                        item.enabled = false;
                     }
                     ItemTweakerMain.WorldObjects.AddGameObject(hammer);
                 }
