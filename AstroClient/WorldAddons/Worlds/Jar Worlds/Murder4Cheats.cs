@@ -475,8 +475,8 @@ namespace AstroClient
 
 
 
-            GameObjectESP.MurderESPtoggler = new QMToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", null, null, null, false);
-            JarRoleController.Murder4RolesRevealerToggle = new QMToggleButton(Murder4CheatPage, 4, 0, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", null, null, null, false);
+            GameObjectESP.Murder4ESPtoggler = new QMSingleToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
+            JarRoleController.Murder4RolesRevealerToggle = new QMSingleToggleButton(Murder4CheatPage, 3, 0.5f, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", null, Color.green, Color.red, false, true);
             Murder4UdonExploits.Init_GameController_Btn(Murder4CheatPage, 4, 1, true);
             Murder4UdonExploits.Init_Filtered_Nodes_Btn(Murder4CheatPage, 4, 1.5f, true);
             Murder4UdonExploits.Init_Unfiltered_Nodes_btn(Murder4CheatPage, 4, 2f, true);

@@ -160,9 +160,13 @@ namespace AstroClient
             {
                 TriggerESPToggler.setToggleState(false);
             }
-            if (MurderESPtoggler != null)
+            if (Murder4ESPtoggler != null)
             {
-                MurderESPtoggler.setToggleState(false);
+                Murder4ESPtoggler.setToggleState(false);
+            }
+            if (Murder2ESPtoggler != null)
+            {
+                Murder2ESPtoggler.setToggleState(false);
             }
             TriggerESPItems.Clear();
             MurderESPItems.Clear();
@@ -174,7 +178,8 @@ namespace AstroClient
         public static List<GameObject> MurderESPItems = new List<GameObject>();
 
         public static QMToggleButton TriggerESPToggler;
-        public static QMToggleButton MurderESPtoggler;
+        public static QMSingleToggleButton Murder2ESPtoggler;
+        public static QMSingleToggleButton Murder4ESPtoggler;
 
 
     }

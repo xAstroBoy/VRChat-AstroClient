@@ -81,8 +81,8 @@ namespace AstroClient
         }
 
 
-        public static QMToggleButton Murder4RolesRevealerToggle;
-        public static QMToggleButton AmongUSRolesRevealerToggle;
+        public static QMSingleToggleButton Murder4RolesRevealerToggle;
+        public static QMSingleToggleButton AmongUSRolesRevealerToggle;
 
         public static List<LinkedNodes> JarRoleLinks = new List<LinkedNodes>();
 
