@@ -37,14 +37,15 @@ namespace AstroClient
         public static void OnLevelLoad()
         {
             CurrentTarget = null;
-            if (InflaterModeButton != null)
-            {
-                InflaterModeButton.setToggleState(InflaterScaleMode);
-            }
             if (CurrentScaleButton != null)
             {
                 CurrentScaleButton.setButtonText(string.Empty);
             }
+            EditVectorX = true;
+            EditVectorY = true;
+            EditVectorZ = true;
+            InflaterScaleMode = false;
+
         }
 
         public static void OnWorldReveal()
