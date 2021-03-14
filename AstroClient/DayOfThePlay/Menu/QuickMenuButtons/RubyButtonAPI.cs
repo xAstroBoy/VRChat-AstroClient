@@ -72,16 +72,16 @@ namespace RubyButtonAPI
 
         public void setIntractable(bool isIntractable)
         {
-            if (isIntractable)
-            {
-                setBackgroundColor(OrigBackground, false);
-                setTextColor(OrigText, false);
-            }
-            else
-            {
-                setBackgroundColor(new Color(0.5f, 0.5f, 0.5f, 1), false);
-                setTextColor(new Color(0.7f, 0.7f, 0.7f, 1), false); ;
-            }
+            //if (isIntractable)
+            //{
+            //    setBackgroundColor(OrigBackground, false);
+            //    setTextColor(OrigText, false);
+            //}
+            //else
+            //{
+            //    setBackgroundColor(new Color(0.5f, 0.5f, 0.5f, 1), false);
+            //    setTextColor(new Color(0.7f, 0.7f, 0.7f, 1), false); ;
+            //}
             button.gameObject.GetComponent<Button>().interactable = isIntractable;
         }
 
