@@ -17,8 +17,6 @@ namespace AstroClient.Worlds
     {
         public static void OnLevelLoad()
         {
-            PatreonDoorTrigger = null;
-            HasDeletedBlockingPortal = false;
             SandBag = null;
         }
 
@@ -29,8 +27,6 @@ namespace AstroClient.Worlds
             Murder4Cheats.Murder4CheatsButtons(WorldCheats, 1, 0.5f, true);
             AmongUSCheats.AmongUSCheatsButtons(WorldCheats, 1, 1f, true);
             HubButtonsControl.InitButtons(WorldCheats, 1, 1.5f, true);
-            MovieRoomPatreonRoomUnlock = new QMSingleButton(WorldCheats, 1, 2f, "Unlock Patreon Room", new Action(ForcePatreonRoomUnlock), "Enables Patreon Room Door Without the password in the Room.", null, null, true);
-            MovieRoomPatreonRoomUnlock.SetResizeTextForBestFit(true);
             SandBagCheat = new QMSingleButton(WorldCheats, 1, 2.5f, "Select SandBag", new Action(SelectSandBag), "Select SandBag in Item Tweaker", null, null, true);
             SandBagCheat.SetResizeTextForBestFit(true);
         }
@@ -54,25 +50,6 @@ namespace AstroClient.Worlds
                     SandBagCheat.setIntractable(false);
                     SandBagCheat.setTextColor(Color.red);
    
-                }
-            }
-
-            if (WorldUtils.GetWorldID() == WorldIds.RootMovieRoom)
-            {
-                ModConsole.Log("Recognized Root Movies & Anime room World, Enabled Unlock Patreon Room!");
-                if (MovieRoomPatreonRoomUnlock != null)
-                {
-                    MovieRoomPatreonRoomUnlock.setIntractable(true);
-                    MovieRoomPatreonRoomUnlock.setTextColor(Color.green);
-
-                }
-            }
-            else
-            {
-                if (MovieRoomPatreonRoomUnlock != null)
-                {
-                    MovieRoomPatreonRoomUnlock.setIntractable(false);
-                    MovieRoomPatreonRoomUnlock.setTextColor(Color.red);
                 }
             }
             if (WorldUtils.GetWorldID() == WorldIds.VRChatDefaultHub)
@@ -108,39 +85,6 @@ namespace AstroClient.Worlds
             {
                 ModConsole.Log("Recognized Dont Trip World, Finding Entity Gameobjects!...");
                 GameObjectFinder.Find("GameObject/Level/cube (5)/what the fuck").AddToWorldUtilsMenu();
-            }
-        }
-
-        private static void ForcePatreonRoomUnlock()
-        {
-            if (WorldUtils.GetWorldID() == WorldIds.RootMovieRoom)
-            {
-                if (!HasDeletedBlockingPortal)
-                {
-                    var portal = GameObjectFinder.Find("ROOT'sHomev2/VRCPortalMarker-00");
-
-                    if (portal != null)
-                    {
-                        portal.DestroyMeOnline();
-                    }
-                    if (portal != null)
-                    {
-                        portal.DestroyMeLocal();
-                    }
-                    if (portal == null)
-                    {
-                        HasDeletedBlockingPortal = true;
-                    }
-                }
-                if (PatreonDoorTrigger == null)
-                {
-                    PatreonDoorTrigger = GameObjectFinder.Find("ROOT'sHomev2/Main Room Walls/DoorFrame.001/Door.001").GetComponent<VRCSDK2.VRC_Trigger>();
-                }
-
-                if (!PatreonDoorTrigger.enabled)
-                {
-                    PatreonDoorTrigger.enabled = true;
-                }
             }
         }
 
@@ -186,10 +130,7 @@ namespace AstroClient.Worlds
                 }
             }
         }
-
-        public static VRCSDK2.VRC_Trigger PatreonDoorTrigger = null;
-        public static bool HasDeletedBlockingPortal = false;
-        public static QMSingleButton MovieRoomPatreonRoomUnlock;
+        
         public static QMSingleButton SandBagCheat;
         public static GameObject SandBag = null;
     }

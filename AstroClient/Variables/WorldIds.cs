@@ -21,8 +21,6 @@ namespace AstroClient.Variables
 
         public static readonly string VRChatDefaultHub = "wrld_ba913a96-fac4-4048-a062-9aa5db092812";
 
-        public static readonly string RootMovieRoom = "wrld_4f826865-8501-4de2-b83a-f7eeb86b26a1";
-
         public static readonly string SnoozeScaryMaze5 = "wrld_953eff93-20c9-457b-8ef0-1ac2130d5b8a";
 
         public static readonly string Meroom = "wrld_9c72e56b-d2b0-4c9b-b816-07a857f6ae4e";

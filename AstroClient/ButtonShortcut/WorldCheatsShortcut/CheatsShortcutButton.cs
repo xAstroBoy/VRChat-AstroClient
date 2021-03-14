@@ -75,16 +75,6 @@ namespace AstroClient.ButtonShortcut
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-            else if (WorldUtils.GetWorldID() == WorldIds.RootMovieRoom)
-            {
-                if (WorldAddons.MovieRoomPatreonRoomUnlock != null)
-                {
-                    SetButtonText("Unlock Patreon Room", "Enables Patreon Room Door Without the password in the Room.");
-                    SetButtonShortcut(WorldAddons.MovieRoomPatreonRoomUnlock);
-                    SetButtonColor(Color.green);
-                    ToggleButtonVisibilityAndInteractivity(true);
-                }
-            }
             else
             {
                 SetButtonColor(Color.red);
