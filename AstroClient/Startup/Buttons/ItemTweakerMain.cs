@@ -567,7 +567,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             new QMSingleButton(ScaleEditor, 1, 1, "+ Scale", new Action(() => { HandsUtils.GetGameObjectToEdit().IncreaseHoldItemScale(); }), "Increase item scale!", null, null, true);
             new QMSingleButton(ScaleEditor, 1, 1.5f, "- Scale", new Action(() => { HandsUtils.GetGameObjectToEdit().DecreaseHoldItemScale(); }), "Decrease item scale!", null, null, true);
 
-            ObjectMiscOptions.InflaterModeButton = new QMSingleToggleButton(ScaleEditor, 1, 2, "Scale Inflater ON", new Action(ObjectMiscOptions.ToggleInflaterEditor), "Scale Inflater OFF", new Action(ObjectMiscOptions.ToggleInflaterEditor), "Tweak Spawning object Scale", null, null, null, false, true);
+            ObjectMiscOptions.InflaterModeButton = new QMSingleToggleButton(ScaleEditor, 1, 2, "SCale Inflater ON", new Action(() => { ObjectMiscOptions.InflaterScaleMode = true; }), "Scale Inflater OFF", new Action(() => { ObjectMiscOptions.InflaterScaleMode = false; }), "Change between instant or inflater", Color.green, Color.red, null, false, true);
             new QMSingleButton(ScaleEditor, 1, 2.5f, "Restore Original", new Action(() => { HandsUtils.GetGameObjectToEdit().RestoreOriginalScaleItem(); }), "Restores Original Item Scale!", null, null, true);
 
             ObjectMiscOptions.ScaleEditX = new QMSingleToggleButton(ScaleEditor, 2, 1, "Edit X", new Action(() => { ObjectMiscOptions.EditVectorX = true; }), "Ignore X", new Action(() => { ObjectMiscOptions.EditVectorX = false; }), "Make Inflater Edit X", Color.green, Color.red, null, false, true);

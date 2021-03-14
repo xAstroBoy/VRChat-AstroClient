@@ -489,11 +489,28 @@ namespace AstroClient
 
         public static float ScaleValueToUse = 0.1f;
 
-        public static bool InflaterScaleMode = false;
 
-        private static bool _EditVectorX;
-        private static bool _EditVectorY;
-        private static bool _EditVectorZ;
+        private static bool _InflaterScaleMode = false;
+
+        public static bool InflaterScaleMode
+        {
+            get
+            {
+                return _InflaterScaleMode;
+            }
+            set
+            {
+                if (InflaterModeButton != null)
+                {
+                    InflaterModeButton.setToggleState(value);
+                }
+                _InflaterScaleMode = value;
+            }
+        }
+
+        private static bool _EditVectorX = true;
+        private static bool _EditVectorY = true;
+        private static bool _EditVectorZ = true;
 
 
         public static bool EditVectorX
