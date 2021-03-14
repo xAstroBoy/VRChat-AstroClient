@@ -15,6 +15,43 @@ namespace AstroClient
 {
     internal class ScaleEditor
     {
+
+        private static float ModifiedVectorX(GameObject obj)
+        {
+            if(ObjectMiscOptions.EditVectorX)
+            {
+                return ScaleValueToUse;
+            }
+            else
+            {
+                return obj.transform.localScale.x;
+            }
+        }
+
+        private static float ModifiedVectorY(GameObject obj)
+        {
+            if (ObjectMiscOptions.EditVectorY)
+            {
+                return ScaleValueToUse;
+            }
+            else
+            {
+                return obj.transform.localScale.y;
+            }
+        }
+
+        private static float ModifiedVectorZ(GameObject obj)
+        {
+            if (ObjectMiscOptions.EditVectorZ)
+            {
+                return ScaleValueToUse;
+            }
+            else
+            {
+                return obj.transform.localScale.z;
+            }
+        }
+
         internal static void EditScaleSize(GameObject obj, bool increase)
         {
             if (obj != null)
@@ -27,7 +64,7 @@ namespace AstroClient
                 {
                     if (increase)
                     {
-                        obj.transform.localScale = obj.transform.localScale + new Vector3(ScaleValueToUse, ScaleValueToUse, ScaleValueToUse);
+                        obj.transform.localScale = obj.transform.localScale + new Vector3(ModifiedVectorX(obj), ModifiedVectorY(obj), ModifiedVectorZ(obj));
                         if (obj.GetComponent<ItemInflater>() != null)
                         {
                             if (obj.GetComponent<ItemInflater>().enabled)
@@ -40,7 +77,7 @@ namespace AstroClient
                     }
                     else
                     {
-                        obj.transform.localScale = obj.transform.localScale - new Vector3(ScaleValueToUse, ScaleValueToUse, ScaleValueToUse);
+                        obj.transform.localScale = obj.transform.localScale - new Vector3(ModifiedVectorX(obj), ModifiedVectorY(obj), ModifiedVectorZ(obj));
                         if (obj.GetComponent<ItemInflater>() != null)
                         {
                             if (obj.GetComponent<ItemInflater>().enabled)
@@ -62,12 +99,12 @@ namespace AstroClient
                         }
                         if (increase)
                         {
-                            obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize + new Vector3(ScaleValueToUse, ScaleValueToUse, ScaleValueToUse);
+                            obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize + new Vector3(ModifiedVectorX(obj), ModifiedVectorY(obj), ModifiedVectorZ(obj));
                             EditUdon(obj, obj.transform.localScale);
                         }
                         else
                         {
-                            obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize - new Vector3(ScaleValueToUse, ScaleValueToUse, ScaleValueToUse);
+                            obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize - new Vector3(ModifiedVectorX(obj), ModifiedVectorY(obj), ModifiedVectorZ(obj));
                             EditUdon(obj, obj.transform.localScale);
                         }
                     }
@@ -82,12 +119,12 @@ namespace AstroClient
                             }
                             if (increase)
                             {
-                                obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize + new Vector3(ScaleValueToUse, ScaleValueToUse, ScaleValueToUse);
+                                obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize + new Vector3(ModifiedVectorX(obj), ModifiedVectorY(obj), ModifiedVectorZ(obj));
                                 EditUdon(obj, obj.transform.localScale);
                             }
                             else
                             {
-                                obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize - new Vector3(ScaleValueToUse, ScaleValueToUse, ScaleValueToUse);
+                                obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize - new Vector3(ModifiedVectorX(obj), ModifiedVectorY(obj), ModifiedVectorZ(obj));
                                 EditUdon(obj, obj.transform.localScale);
                             }
                         }
@@ -153,7 +190,7 @@ namespace AstroClient
             }
             else
             {
-                ModConsole.Log("I Dont have the original Scale stored!");
+                ModConsole.Log($"I Dont have the original Scale stored for Object {obj.gameObject.name}");
             }
         }
     }

@@ -546,24 +546,34 @@ namespace AstroClient.AstroUtils.ItemTweaker
             }
         }
 
+
+
         public static void ScaleSubMenuButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var ScaleEditor = new QMNestedButton(menu, x, y, "Scale", "Scale Editor Menu!", null, null, null, null, btnHalf);
 
             ScaleSlider = new QMSlider(Utils.QuickMenu.transform.Find(ScaleEditor.getMenuName()), "Scale:", 250, -720, delegate (float value)
             {
-                ObjectMiscOptions.SetScaleValueToUse((int)value);
-            }, 5, 100, 0, true);
+                ObjectMiscOptions.SetScaleValueToUse(value);
+            }, 0.1f, 10, 0, true);
             ScaleSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
             ScaleSlider.SetTextLabel("");
 
-            ObjectMiscOptions.CurrentAddValue = new QMSingleButton(ScaleEditor, 6, 0, ObjectMiscOptions.ScaleValueToUse.ToString(), null, string.Empty, null, null);
-            ObjectMiscOptions.GameObjectActualScale = new QMSingleButton(ScaleEditor, 6, 1, string.Empty, null, "Current Inflater Object Scale", null, null);
-            new QMSingleButton(ScaleEditor, 1, 1, "+ Scale", new Action(() => { HandsUtils.GetGameObjectToEdit().IncreaseHoldItemScale(); }), "Increase item scale!", null, null);
-            new QMSingleButton(ScaleEditor, 2, 1, "- Scale", new Action(() => { HandsUtils.GetGameObjectToEdit().DecreaseHoldItemScale(); }), "Decrease item scale!", null, null);
+            ObjectMiscOptions.CurrentAddValue = new QMSingleButton(ScaleEditor, 5, -1, ObjectMiscOptions.ScaleValueToUse.ToString(), null, string.Empty, null, null, true);
+            ObjectMiscOptions.GameObjectActualScale = new QMSingleButton(ScaleEditor, 5, 0, string.Empty, null, "Current Inflater Object Scale", null, null);
             ObjectMiscOptions.CurrentScaleButton = new QMSingleButton(ScaleEditor, 5, 1, string.Empty, null, "Current Item Scale", null, null);
-            ObjectMiscOptions.InflaterModeButton = new QMToggleButton(ScaleEditor, 1, 2, "Scale Inflater ON", new Action(ObjectMiscOptions.ToggleInflaterEditor), "Scale Inflater OFF", new Action(ObjectMiscOptions.ToggleInflaterEditor), "Tweak Spawning object Scale", null, null, null, false);
-            new QMSingleButton(ScaleEditor, 2, 2, "Restore Original Item Scale", new Action(() => { HandsUtils.GetGameObjectToEdit().RestoreOriginalScaleItem(); }), "Restores Original Item Scale!", null, null);
+
+
+            new QMSingleButton(ScaleEditor, 1, 1, "+ Scale", new Action(() => { HandsUtils.GetGameObjectToEdit().IncreaseHoldItemScale(); }), "Increase item scale!", null, null, true);
+            new QMSingleButton(ScaleEditor, 1, 1.5f, "- Scale", new Action(() => { HandsUtils.GetGameObjectToEdit().DecreaseHoldItemScale(); }), "Decrease item scale!", null, null, true);
+
+            ObjectMiscOptions.InflaterModeButton = new QMSingleToggleButton(ScaleEditor, 1, 2, "Scale Inflater ON", new Action(ObjectMiscOptions.ToggleInflaterEditor), "Scale Inflater OFF", new Action(ObjectMiscOptions.ToggleInflaterEditor), "Tweak Spawning object Scale", null, null, null, false, true);
+            new QMSingleButton(ScaleEditor, 1, 2.5f, "Restore Original", new Action(() => { HandsUtils.GetGameObjectToEdit().RestoreOriginalScaleItem(); }), "Restores Original Item Scale!", null, null, true);
+
+            ObjectMiscOptions.ScaleEditX = new QMSingleToggleButton(ScaleEditor, 2, 1, "Edit X", new Action(() => { ObjectMiscOptions.EditVectorX = true; }), "Ignore X", new Action(() => { ObjectMiscOptions.EditVectorX = false; }), "Make Inflater Edit X", Color.green, Color.red, null, false, true);
+            ObjectMiscOptions.ScaleEditY = new QMSingleToggleButton(ScaleEditor, 2, 1.5f, "Edit Y", new Action(() => { ObjectMiscOptions.EditVectorY = true; }), "Ignore Y", new Action(() => { ObjectMiscOptions.EditVectorY = false; }), "Make Inflater Edit Y", Color.green, Color.red, null, false, true);
+            ObjectMiscOptions.ScaleEditZ = new QMSingleToggleButton(ScaleEditor, 2, 2, "Edit Z", new Action(() => { ObjectMiscOptions.EditVectorZ = true; }), "Ignore Z", new Action(() => { ObjectMiscOptions.EditVectorZ = false; }), "Make Inflater Edit Z", Color.green, Color.red, null, false, true);
+
         }
 
         public static void PhysicSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)

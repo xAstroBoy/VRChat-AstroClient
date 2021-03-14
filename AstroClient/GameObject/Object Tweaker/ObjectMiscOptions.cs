@@ -443,7 +443,7 @@ namespace AstroClient
             }
         }
 
-        public static void SetScaleValueToUse(int newval)
+        public static void SetScaleValueToUse(float newval)
         {
             ScaleValueToUse = newval;
             UpdateCurrentAddValue();
@@ -480,11 +480,68 @@ namespace AstroClient
         public static QMSingleButton CurrentAddValue;
         public static QMSingleButton GameObjectActualScale;
         public static QMSingleButton CurrentScaleButton;
-        public static QMToggleButton InflaterModeButton;
+        public static QMSingleToggleButton InflaterModeButton;
+
+
+        public static QMSingleToggleButton ScaleEditX;
+        public static QMSingleToggleButton ScaleEditY;
+        public static QMSingleToggleButton ScaleEditZ;
 
         public static float ScaleValueToUse = 0.1f;
 
         public static bool InflaterScaleMode = false;
+
+        private static bool _EditVectorX;
+        private static bool _EditVectorY;
+        private static bool _EditVectorZ;
+
+
+        public static bool EditVectorX
+        {
+            get
+            {
+                return _EditVectorX;
+            }
+            set
+            {
+                if(ScaleEditX != null)
+                {
+                    ScaleEditX.setToggleState(value);
+                }
+                _EditVectorX = value;
+            }
+        }
+        public static bool EditVectorY
+        {
+            get
+            {
+                return _EditVectorY;
+            }
+            set
+            {
+                if (ScaleEditY != null)
+                {
+                    ScaleEditY.setToggleState(value);
+                }
+                _EditVectorY = value;
+            }
+        }
+        public static bool EditVectorZ
+        {
+            get
+            {
+                return _EditVectorZ;
+            }
+            set
+            {
+                if (ScaleEditZ != null)
+                {
+                    ScaleEditZ.setToggleState(value);
+                }
+                _EditVectorZ = value;
+            }
+        }
+
 
         private static Player _CurrentTarget;
 

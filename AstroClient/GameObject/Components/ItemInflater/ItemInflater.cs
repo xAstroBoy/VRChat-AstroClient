@@ -77,6 +77,7 @@ namespace AstroClient.components
                     {
                         if (obj.transform.localScale != NewSize)
                         {
+
                             // X
                             FixX();
                             // Y
