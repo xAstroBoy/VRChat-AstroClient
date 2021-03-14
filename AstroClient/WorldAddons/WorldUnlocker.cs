@@ -217,7 +217,14 @@ namespace AstroClient.Worlds
                     hammer.SetPickupable(true);
                     hammer.SetPickupOrientation(VRC.SDKBase.VRC_Pickup.PickupOrientation.Gun);
                     hammer.SetPickupTheft(false);
-                    hammer.PreventOthersFromPicking(true);
+                    foreach (var item in hammer.GetComponentsInChildren<VRC_Trigger>(true))
+                    {
+                        item.DestroyMeLocal();
+                    }
+                    foreach (var item in hammer.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true))
+                    {
+                        item.DestroyMeLocal();
+                    }
                     ItemTweakerMain.WorldObjects.AddGameObject(hammer);
                 }
             }
