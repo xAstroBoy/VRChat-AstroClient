@@ -4,7 +4,7 @@
     {
         internal static bool DisableNSFWMenu = true;
 
-        internal static bool isDebugMode = true;
+        internal static bool isDebugMode = false;
 
         internal static bool SkipMenuChecks = true;
 

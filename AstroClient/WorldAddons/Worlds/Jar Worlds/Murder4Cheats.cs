@@ -145,9 +145,17 @@ namespace AstroClient
             Clue_Locket = GameObjectFinder.Find("Game Logic/Clues/Clue (locket)");
             Clue_PocketWatch = GameObjectFinder.Find("Game Logic/Clues/Clue (pocketwatch)");
             Clue_Postcard = GameObjectFinder.Find("Game Logic/Clues/Clue (postcard)");
-            if (isChristmasMode)
+            if (!isChristmasMode)
             {
                 Clue_Present = GameObjectFinder.Find("Game Logic/Clues (xmas)/Clue (present) (5)");
+                if(Clue_Present != null)
+                {
+                    isChristmasMode = true;
+                }
+                else
+                {
+                    ModConsole.Log("Could Not Find The Present Clue!");
+                }
             }
             item_DetectiveRevolver = GameObjectFinder.Find("Game Logic/Weapons/Revolver");
             item_Knife_0 = GameObjectFinder.Find("Game Logic/Weapons/Knife (0)");
@@ -173,7 +181,7 @@ namespace AstroClient
             Clues.AddGameObject(Clue_Locket);
             Clues.AddGameObject(Clue_PocketWatch);
             Clues.AddGameObject(Clue_Postcard);
-            if (isChristmasMode)
+            if (Clue_Present != null)
             {
                 Clues.AddGameObject(Clue_Present);
                 Clues.RegisterChildsInPath("Game Logic/Clues (xmas)");
@@ -309,10 +317,7 @@ namespace AstroClient
             Clue_PocketWatch = null;
             Clue_Postcard = null;
             item_DetectiveRevolver = null;
-            if (isChristmasMode)
-            {
-                Clue_Present = null;
-            }
+            Clue_Present = null;
             Clues.Clear();
             DetectiveGuns.Clear();
             SilencedGuns.Clear();
@@ -322,6 +327,7 @@ namespace AstroClient
             BearTraps.Clear();
             Grenades.Clear();
             PatreonFlairtoggle = null;
+            isChristmasMode = false;
         }
 
         public static void Murder4CheatsButtons(QMNestedButton submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
@@ -331,39 +337,45 @@ namespace AstroClient
 
             QMNestedButton MurderItemTeleporter = new QMNestedButton(Murder4CheatPage, 1, 0, "Item Teleporter", "Size Items Editor", null, null, null, null, true);
             #region Item Teleporter
-            new QMSingleButton(MurderItemTeleporter, 1, 0, "Teleport The Clues to Your Pos!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!", null, null);
-            new QMSingleButton(MurderItemTeleporter, 2, 0, "Teleport photograph!", new Action(() => { Clue_photograph.TeleportToMe(); }), "Clue Teleporter!", null, null);
-            new QMSingleButton(MurderItemTeleporter, 3, 0, "Teleport notebook!", new Action(() => { Clue_notebook.TeleportToMe(); }), "Clue Teleporter!", null, null);
-            new QMSingleButton(MurderItemTeleporter, 4, 0, "Teleport Locket!", new Action(() => { Clue_Locket.TeleportToMe(); }), "Clue Teleporter!", null, null);
-            new QMSingleButton(MurderItemTeleporter, 5, 0, "Teleport PocketWatch!", new Action(() => { Clue_PocketWatch.TeleportToMe(); }), "Clue Teleporter!", null, null);
-            new QMSingleButton(MurderItemTeleporter, 6, 0, "Teleport Postcard!", new Action(() => { Clue_Postcard.TeleportToMe(); }), "Clue Teleporter!", null, null);
+            new QMSingleButton(MurderItemTeleporter, 1, 0, "Clues!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 1, 0.5f, "Photograph!", new Action(() => { Clue_photograph.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 1, 1, "Notebook!", new Action(() => { Clue_notebook.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 1, 1.5f, "Locket!", new Action(() => { Clue_Locket.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 1, 2, "PocketWatch!", new Action(() => { Clue_PocketWatch.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 1, 2.5f, "Postcard!", new Action(() => { Clue_Postcard.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
             if (isChristmasMode)
             {
-                new QMSingleButton(MurderItemTeleporter, 7, 0, "Teleport Present!", new Action(() => { Clue_Present.TeleportToMe(); }), "Clue Teleporter!", null, null);
+                PresentTeleporter = new QMSingleButton(MurderItemTeleporter, 1, 3, "Present!", new Action(() => { Clue_Present.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
             }
-            new QMSingleButton(MurderItemTeleporter, 1, 1, "Teleport Shotgun!", new Action(() => { item_Shotgun.TeleportToMe(); }), "Shotgun Gun Teleporter!", null, null);
-            new QMSingleButton(MurderItemTeleporter, 2, 1, "Teleport Detective Gun!", new Action(() => { item_DetectiveRevolver.TeleportToMe(); }), "Detective Gun Teleporter!", null, null);
-            new QMSingleButton(MurderItemTeleporter, 3, 1, "Teleport Grenade!", new Action(() => { item_Grenade.TeleportToMe(); }), "Grenade Teleporter!", null, null);
-            new QMSingleButton(MurderItemTeleporter, 4, 1, "Teleport Traps!", new Action(() => { BearTraps.TeleportToMe(); }), "Silenced Gun Teleporter!", null, null);
+            new QMSingleButton(MurderItemTeleporter, 2, 0, "Shotgun!", new Action(() => { item_Shotgun.TeleportToMe(); }), "Shotgun Gun Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 2, 0.5f, "Detective Gun!", new Action(() => { item_DetectiveRevolver.TeleportToMe(); }), "Detective Gun Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 2, 1, "Grenade!", new Action(() => { item_Grenade.TeleportToMe(); }), "Grenade Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 2, 1.5f, "Traps!", new Action(() => { BearTraps.TeleportToMe(); }), "Silenced Gun Teleporter!", null, null, true);
             #endregion
+
+
             QMNestedButton MurderItemTweaker = new QMNestedButton(Murder4CheatPage, 1, 0.5f, "Item Tweaker", "Item Tweaks!", null, null, null, null, true);
             #region Item Tweaker
-            new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!", null, null);
-            new QMToggleButton(MurderItemTweaker, 2, 0, "Float (Space Mode)", new Action(() => { SetMurderItemsGravity(true); }), "Fall (World Gravity)", new Action(() => { SetMurderItemsGravity(false); }), "Tweaks all Murder! items gravity!", null, null, null, false);
-            new QMSingleButton(MurderItemTweaker, 3, 0, "Turn Knifes into rockets!", new Action(() => { Knifes.AddRocketComponent(false); }), "Make Knifes in Instance go nuts!", null, null);
-            new QMSingleButton(MurderItemTweaker, 4, 0, "Turn Guns into rockets!", new Action(() => { MurderGunsRockets(); }), "Make Guns in Instance go nuts!", null, null);
-            new QMSingleButton(MurderItemTweaker, 5, 0, "Turn Grenades into rockets!", new Action(() => { Grenades.AddRocketComponent(false); }), "Make Grenade in Instance go nuts!", null, null);
-            new QMSingleButton(MurderItemTweaker, 6, 0, "Turn Bear Trap into rockets!", new Action(() => { BearTraps.AddRocketComponent(false); }), "Make Grenade in Instance go nuts!", null, null);
+            new QMSingleButton(MurderItemTweaker, 3, 0, "Knifes (Rockets)!", new Action(() => { Knifes.AddRocketComponent(false); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemTweaker, 3, 0.5f, "Guns (Rockets)!", new Action(() => { MurderGunsRockets(); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemTweaker, 3, 1, "Grenades (Rockets)!", new Action(() => { Grenades.AddRocketComponent(false); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemTweaker, 3, 1.5f, "Bear Trap (Rockets)!", new Action(() => { BearTraps.AddRocketComponent(false); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemTweaker, 3, 2, "Clues (Rockets)!", new Action(() => { Clues.AddRocketComponent(false); }), "Rockets", null, null, true).SetResizeTextForBestFit(true);
 
-            new QMSingleButton(MurderItemTweaker, 1, 1, "Turn Clues into rockets!", new Action(() => { Clues.AddRocketComponent(false); }), "Make Clues in Instance go nuts!", null, null);
-            new QMSingleButton(MurderItemTweaker, 2, 1, "Turn Knifes into Crazy!", new Action(() => { Knifes.AddCrazyComponent(false); }), "Make Knifes in Instance go nuts!", null, null);
-            new QMSingleButton(MurderItemTweaker, 3, 1, "Turn Guns into Crazy!", new Action(MurderGunsCrazy), "Make Guns in Instance go nuts!", null, null);
-            new QMSingleButton(MurderItemTweaker, 4, 1, "Turn Clues into Crazy!", new Action(() => { Clues.AddCrazyComponent(false); }), "Make Clues in Instance go nuts!", null, null);
-            new QMSingleButton(MurderItemTweaker, 5, 1, "Turn Grenade into Crazy!", new Action(() => { Grenades.AddCrazyComponent(false); }), "Make Grenade in Instance go nuts!", null, null);
-            new QMSingleButton(MurderItemTweaker, 6, 1, "Turn Bear Trap into Crazy!", new Action(() => { BearTraps.AddCrazyComponent(false); }), "Make Grenade in Instance go nuts!", null, null);
-            KnifesGrabbableToggle = new QMToggleButton(MurderItemTweaker, 1, 2, "Can Grab Knifes", new Action(() => { ToggleKnifesGrab(true); }), "Cannot Grab Knifes", new Action(() => { ToggleKnifesGrab(false); }), "Tweaks all Murder! items gravity!", null, null, null, false);
-            var one = new QMSingleButton(MurderItemTweaker, 2, 2, "Knifes Grabbable from far!", new Action(() => { MakeKnifeGrabbableFromFar(); }), "Make Knifes Grabbable from far!", null, null, true);
-            var two = new QMSingleButton(MurderItemTweaker, 2, 2.5f, "Restore Knifes Properties to world!", new Action(() => { RestoreKnifeToWorldControl(); }), "Restore Control to world!", null, null, true);
+            new QMSingleButton(MurderItemTweaker, 4, 0, "Knifes (Crazy)!", new Action(() => { Knifes.AddCrazyComponent(false); }), "Make Knifes in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemTweaker, 4, 0.5f, "Guns (Crazy)!", new Action(MurderGunsCrazy), "Make Guns in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemTweaker, 4, 1, "Clues (Crazy)!", new Action(() => { Clues.AddCrazyComponent(false); }), "Make Clues in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemTweaker, 4, 1.5f, "Grenade (Crazy)!", new Action(() => { Grenades.AddCrazyComponent(false); }), "Make Grenade in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemTweaker, 4, 2, "Bear Trap (Crazy)!", new Action(() => { BearTraps.AddCrazyComponent(false); }), "Make Grenade in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
+
+
+            new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!", null, null, true);
+            new QMSingleToggleButton(MurderItemTweaker, 1, 0.5f, "Float (Space Mode)", new Action(() => { SetMurderItemsGravity(true); }), "Fall (World Gravity)", new Action(() => { SetMurderItemsGravity(false); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
+            KnifesGrabbableToggle = new QMSingleToggleButton(MurderItemTweaker, 1, 1, "Can Grab Knifes", new Action(() => { ToggleKnifesGrab(true); }), "Cannot Grab Knifes", new Action(() => { ToggleKnifesGrab(false); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
+            var one = new QMSingleButton(MurderItemTweaker, 1, 1.5f, "Knifes Grabbable from far!", new Action(() => { MakeKnifeGrabbableFromFar(); }), "Make Knifes Grabbable from far!", null, null, true);
+            var two = new QMSingleButton(MurderItemTweaker, 1, 2, "Restore Knifes Properties to world!", new Action(() => { RestoreKnifeToWorldControl(); }), "Restore Control to world!", null, null, true);
+           
+            
             one.SetResizeTextForBestFit(true);
             two.SetResizeTextForBestFit(true);
             #endregion
@@ -371,20 +383,20 @@ namespace AstroClient
             QMNestedButton MurderItemSpawner = new QMNestedButton(Murder4CheatPage, 1, 1f, "Item Spawner", "Item Spawner!", null, null, null, null, true);
             #region Item Spawner
 
-            new QMSingleButton(MurderItemSpawner, 1, 0, "Spawn Detective Gun", new Action(() => { item_DetectiveRevolver.CloneObject(); }), "Detective Gun Cloner!", null, null);
-            new QMSingleButton(MurderItemSpawner, 2, 0, "Spawn Silenced Gun", new Action(() => { item_Silenced_Revolver_0.CloneObject(); }), "Silenced Gun Cloner!", null, null);
-            new QMSingleButton(MurderItemSpawner, 3, 0, "Spawn Shotgun", new Action(() => { item_Shotgun.CloneObject(); }), "Shotgun Cloner!", null, null);
-            new QMSingleButton(MurderItemSpawner, 4, 0, "Spawn Knife", new Action(() => { item_Knife_0.CloneObject(); }), "Knife Cloner!", null, null);
-            new QMSingleButton(MurderItemSpawner, 5, 0, "Spawn Grenade", new Action(() => { item_Grenade.CloneObject(); }), "Grenade Cloner!", null, null);
-            new QMSingleButton(MurderItemSpawner, 6, 0, "Spawn Bear Trap", new Action(() => { item_Bear_trap_1.CloneObject(); }), "Bear Trap Cloner!", null, null);
-            new QMSingleButton(MurderItemSpawner, 1, 1, "Spawn photograph!", new Action(() => { Clue_photograph.CloneObject(); }), "Clue Teleporter!", null, null);
-            new QMSingleButton(MurderItemSpawner, 2, 1, "Spawn notebook!", new Action(() => { Clue_notebook.CloneObject(); }), "Clue Teleporter!", null, null);
-            new QMSingleButton(MurderItemSpawner, 3, 1, "Spawn Locket!", new Action(() => { Clue_Locket.CloneObject(); }), "Clue Teleporter!", null, null);
-            new QMSingleButton(MurderItemSpawner, 4, 1, "Spawn PocketWatch!", new Action(() => { Clue_PocketWatch.CloneObject(); }), "Clue Teleporter!", null, null);
-            new QMSingleButton(MurderItemSpawner, 5, 1, "Spawn Postcard!", new Action(() => { Clue_Postcard.CloneObject(); }), "Clue Teleporter!", null, null);
+            new QMSingleButton(MurderItemSpawner, 1, 0, "Spawn Detective Gun", new Action(() => { item_DetectiveRevolver.CloneObject(); }), "Detective Gun Cloner!", null, null, true);
+            new QMSingleButton(MurderItemSpawner, 1, 0.5f, "Spawn Silenced Gun", new Action(() => { item_Silenced_Revolver_0.CloneObject(); }), "Silenced Gun Cloner!", null, null, true);
+            new QMSingleButton(MurderItemSpawner, 1, 1, "Spawn Shotgun", new Action(() => { item_Shotgun.CloneObject(); }), "Shotgun Cloner!", null, null, true);
+            new QMSingleButton(MurderItemSpawner, 1, 1.5f, "Spawn Knife", new Action(() => { item_Knife_0.CloneObject(); }), "Knife Cloner!", null, null, true);
+            new QMSingleButton(MurderItemSpawner, 1, 2, "Spawn Grenade", new Action(() => { item_Grenade.CloneObject(); }), "Grenade Cloner!", null, null, true);
+            new QMSingleButton(MurderItemSpawner, 1, 2.5f, "Spawn Bear Trap", new Action(() => { item_Bear_trap_1.CloneObject(); }), "Bear Trap Cloner!", null, null, true);
+            new QMSingleButton(MurderItemSpawner, 2, 0, "Spawn photograph!", new Action(() => { Clue_photograph.CloneObject(); }), "Clue Cloner!", null, null, true);
+            new QMSingleButton(MurderItemSpawner, 2, 0.5f, "Spawn notebook!", new Action(() => { Clue_notebook.CloneObject(); }), "Clue Cloner!", null, null, true);
+            new QMSingleButton(MurderItemSpawner, 2, 1, "Spawn Locket!", new Action(() => { Clue_Locket.CloneObject(); }), "Clue Cloner!", null, null, true);
+            new QMSingleButton(MurderItemSpawner, 2, 1.5f, "Spawn PocketWatch!", new Action(() => { Clue_PocketWatch.CloneObject(); }), "Clue Cloner!", null, null, true);
+            new QMSingleButton(MurderItemSpawner, 2, 2, "Spawn Postcard!", new Action(() => { Clue_Postcard.CloneObject(); }), "Clue Cloner!", null, null, true);
             if (isChristmasMode)
             {
-                new QMSingleButton(MurderItemSpawner, 6, 1, "Spawn Present!", new Action(() => { Clue_Present.CloneObject(); }), "Clue Teleporter!", null, null);
+               PresentSpawner = new QMSingleButton(MurderItemSpawner, 2, 2.5f, "Spawn Present!", new Action(() => { Clue_Present.CloneObject(); }), "Clue Teleporter!", null, null, true);
             }
             #endregion
 
@@ -392,22 +404,22 @@ namespace AstroClient
             {
                 QMNestedButton MurderItemAttackerMenu = new QMNestedButton(Murder4CheatPage, 1, 1.5f, "Followers", "Murder item Followers!", null, null, null, null, true);
                 #region Followers
-                QMNestedButton Follow_target_section = new QMNestedButton(MurderItemAttackerMenu, 1, 0, "Follow Target ", "Murder item Followers!", null, null, null, null);
-                new QMSingleButton(Follow_target_section, 1, 0, "Detective Gun follows target!", new Action(() => { DetectiveGuns.AttackTarget(); }), "Make Detective Gun follow Target", null, null);
-                new QMSingleButton(Follow_target_section, 2, 0, "Silenced Guns follows target!", new Action(() => { SilencedGuns.AttackTarget(); }), "Make Silenced Gun follow Target", null, null);
-                new QMSingleButton(Follow_target_section, 3, 0, "Knifes follows target!", new Action(() => { Knifes.AttackTarget(); }), "Make Knifes follow Target", null, null);
-                new QMSingleButton(Follow_target_section, 4, 0, "Clues follows target!", new Action(() => { Clues.AttackTarget(); }), "Make Clues follow Target", null, null);
-                new QMSingleButton(Follow_target_section, 1, 1, "Grenade follows target!", new Action(() => { Grenades.AttackTarget(); }), "Make Grenade follow Target", null, null);
-                new QMSingleButton(Follow_target_section, 2, 1, "Shotgun follows target!", new Action(() => { ShotGuns.AttackTarget(); }), "Make Bear Traps follow Target", null, null);
-                new QMSingleButton(Follow_target_section, 3, 1, "Bear traps follows target!", new Action(() => { BearTraps.AttackTarget(); }), "Make Bear Traps follow Target", null, null);
-                QMNestedButton Follow_self_section = new QMNestedButton(MurderItemAttackerMenu, 2, 0, "Follow You", "Murder item Followers!", null, null, null, null);
-                new QMSingleButton(Follow_self_section, 1, 0, "Detective Gun follows you!", new Action(() => { DetectiveGuns.AttackSelf(); }), "Make Detective Gun follow you", null, null);
-                new QMSingleButton(Follow_self_section, 2, 0, "Silenced Guns follows you!", new Action(() => { SilencedGuns.AttackSelf(); }), "Make Silenced Gun follow you", null, null);
-                new QMSingleButton(Follow_self_section, 3, 0, "Knifes follows you!", new Action(() => { Knifes.AttackSelf(); }), "Make Knifes follow you", null, null);
-                new QMSingleButton(Follow_self_section, 4, 0, "Clues follows you!", new Action(() => { Clues.AttackSelf(); }), "Make Clues follow you", null, null);
-                new QMSingleButton(Follow_self_section, 1, 1, "Grenade follows you!", new Action(() => { Grenades.AttackSelf(); }), "Make Grenade follow you", null, null);
-                new QMSingleButton(Follow_self_section, 2, 1, "Shotgun follows you!", new Action(() => { ShotGuns.AttackSelf(); }), "Make Bear Traps follow you", null, null);
-                new QMSingleButton(Follow_self_section, 3, 1, "Bear traps follows you!", new Action(() => { BearTraps.AttackSelf(); }), "Make Bear Traps follow you", null, null);
+                new QMSingleButton(MurderItemAttackerMenu, 1, 0, "Detective Gun (target)!", new Action(() => { DetectiveGuns.AttackTarget(); }), "Make Detective Gun follow Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 1, 0.5f, "Silenced Guns (target)!", new Action(() => { SilencedGuns.AttackTarget(); }), "Make Silenced Gun follow Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 1, 1, "Knifes (target)!", new Action(() => { Knifes.AttackTarget(); }), "Make Knifes follow Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 1, 1.5f, "Clues (target)!", new Action(() => { Clues.AttackTarget(); }), "Make Clues follow Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 1, 2, "Grenade (target)!", new Action(() => { Grenades.AttackTarget(); }), "Make Grenade follow Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 1, 2.5f, "Shotgun (target)!", new Action(() => { ShotGuns.AttackTarget(); }), "Make Bear Traps follow Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 2, 0, "Bear traps (target)!", new Action(() => { BearTraps.AttackTarget(); }), "Make Bear Traps follow Target", null, null, true).SetResizeTextForBestFit(true);
+
+
+                new QMSingleButton(MurderItemAttackerMenu, 3, 0, "Detective Gun (you)!", new Action(() => { DetectiveGuns.AttackSelf(); }), "Make Detective Gun follow you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 3, 0.5f, "Silenced Guns (you)!", new Action(() => { SilencedGuns.AttackSelf(); }), "Make Silenced Gun follow you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 3, 1, "Knifes (you)!", new Action(() => { Knifes.AttackSelf(); }), "Make Knifes follow you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 3, 1.5f, "Clues (you)!", new Action(() => { Clues.AttackSelf(); }), "Make Clues follow you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 3, 2, "Grenade (you)!", new Action(() => { Grenades.AttackSelf(); }), "Make Grenade follow you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 3, 2.5f, "Shotgun (you)!", new Action(() => { ShotGuns.AttackSelf(); }), "Make Shotgun follow you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 4, 0, "Bear traps (you)!", new Action(() => { BearTraps.AttackSelf(); }), "Make Bear Traps follow you", null, null, true).SetResizeTextForBestFit(true);
                 #endregion
 
             }
@@ -416,22 +428,20 @@ namespace AstroClient
                 QMNestedButton MurderItemOrbiterMenu = new QMNestedButton(Murder4CheatPage, 1, 2, "Orbiters", "Murder item Orbits!", null, null, null, null, true);
                 #region orbiters
 
-                QMNestedButton Orbit_target_section = new QMNestedButton(MurderItemOrbiterMenu, 0, 2, "Orbit Around Target", "Murder item Followers!", null, null, null, null);
-                new QMSingleButton(Orbit_target_section, 1, 0, "Detective Gun orbits around target!", new Action(() => { DetectiveGuns.OrbitTarget(); }), "Make Detective Gun orbit around Target", null, null);
-                new QMSingleButton(Orbit_target_section, 2, 0, "Silenced Guns orbits around target!", new Action(() => { SilencedGuns.OrbitTarget(); }), "Make Silenced Gun around orbit Target", null, null);
-                new QMSingleButton(Orbit_target_section, 3, 0, "Shotgun orbits around target!", new Action(() => { ShotGuns.OrbitTarget(); }), "Make ShotGun orbit around Target", null, null);
-                new QMSingleButton(Orbit_target_section, 4, 0, "Knifes orbits around target!", new Action(() => { Knifes.OrbitTarget(); }), "Make Knifes orbit around Target", null, null);
-                new QMSingleButton(Orbit_target_section, 1, 1, "Clues orbits around target!", new Action(() => { Clues.OrbitTarget(); }), "Make Clues orbit around Target", null, null);
-                new QMSingleButton(Orbit_target_section, 2, 1, "Grenade orbits around target!", new Action(() => { Grenades.OrbitTarget(); }), "Make Grenade orbit around Target", null, null);
-                new QMSingleButton(Orbit_target_section, 3, 1, "Bear Trap orbits around target!", new Action(() => { BearTraps.OrbitTarget(); }), "Make Bear Traps orbit around Target", null, null);
-                QMNestedButton Orbit_self_section = new QMNestedButton(MurderItemOrbiterMenu, 2, 0, "Orbit Around You", "Murder item Orbiters!", null, null, null, null);
-                new QMSingleButton(Orbit_self_section, 1, 0, "Detective Gun orbits around you!", new Action(() => { DetectiveGuns.OrbitSelf(); }), "Make Detective Gun orbit around you", null, null);
-                new QMSingleButton(Orbit_self_section, 2, 0, "Silenced Guns orbits around you!", new Action(() => { SilencedGuns.OrbitSelf(); }), "Make Silenced Gun around orbit you", null, null);
-                new QMSingleButton(Orbit_self_section, 3, 0, "Shotgun orbits around you!", new Action(() => { ShotGuns.OrbitSelf(); }), "Make ShotGun orbit around you", null, null);
-                new QMSingleButton(Orbit_self_section, 4, 0, "Knifes orbits around you!", new Action(() => { Knifes.OrbitSelf(); }), "Make Knifes orbit around you", null, null);
-                new QMSingleButton(Orbit_self_section, 1, 1, "Clues orbits around you!", new Action(() => { Clues.OrbitSelf(); }), "Make Clues orbit around you", null, null);
-                new QMSingleButton(Orbit_self_section, 2, 1, "Grenade orbits around you!", new Action(() => { Grenades.OrbitSelf(); }), "Make Grenade orbit around you", null, null);
-                new QMSingleButton(Orbit_self_section, 3, 1, "Bear Trap orbits around you!", new Action(() => { BearTraps.OrbitSelf(); }), "Make Bear Traps orbit around you", null, null);
+                new QMSingleButton(MurderItemOrbiterMenu, 1, 0, "Detective Gun (target)!", new Action(() => { DetectiveGuns.OrbitTarget(); }), "Make Detective Gun orbit around Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 1, 0.5f, "Silenced Guns (target)!", new Action(() => { SilencedGuns.OrbitTarget(); }), "Make Silenced Gun around orbit Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 1, 1, "Shotgun (target)!", new Action(() => { ShotGuns.OrbitTarget(); }), "Make ShotGun orbit around Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 1, 1.5f, "Knifes (target)!", new Action(() => { Knifes.OrbitTarget(); }), "Make Knifes orbit around Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 1, 2, "Clues (target)!", new Action(() => { Clues.OrbitTarget(); }), "Make Clues orbit around Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 1, 2.5f, "Grenade (target)!", new Action(() => { Grenades.OrbitTarget(); }), "Make Grenade orbit around Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 2, 0, "Bear Trap (target)!", new Action(() => { BearTraps.OrbitTarget(); }), "Make Bear Traps orbit around Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 3, 0, "Detective Gun (you)!", new Action(() => { DetectiveGuns.OrbitSelf(); }), "Make Detective Gun orbit around you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 3, 0.5f, "Silenced Guns (you)!", new Action(() => { SilencedGuns.OrbitSelf(); }), "Make Silenced Gun around orbit you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 3, 1, "Shotgun (you)!", new Action(() => { ShotGuns.OrbitSelf(); }), "Make ShotGun orbit around you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 3, 1.5f, "Knifes (you)!", new Action(() => { Knifes.OrbitSelf(); }), "Make Knifes orbit around you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 3, 2, "Clues (you)!", new Action(() => { Clues.OrbitSelf(); }), "Make Clues orbit around you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 3, 2.5f, "Grenade (you)!", new Action(() => { Grenades.OrbitSelf(); }), "Make Grenade orbit around you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 4, 0, "Bear Trap (you)!", new Action(() => { BearTraps.OrbitSelf(); }), "Make Bear Traps orbit around you", null, null, true).SetResizeTextForBestFit(true);
                 #endregion
             }
 
@@ -446,7 +456,7 @@ namespace AstroClient
             new QMSingleButton(MurderItemClicker, 1, 2, "Click Postcard!", new Action(() => { Clue_Postcard.VRC_Interactable_Click(); }), "Click!", null, null, true);
             if (isChristmasMode)
             {
-                new QMSingleButton(MurderItemSpawner, 2, 0, "Click Present!", new Action(() => { Clue_Present.CloneObject(); }), "Click!", null, null, true);
+                PresentClicker = new QMSingleButton(MurderItemSpawner, 2, 0, "Click Present!", new Action(() => { Clue_Present.CloneObject(); }), "Click!", null, null, true);
             }
             new QMSingleButton(MurderItemClicker, 2, 0.5f, "Unlock Random Weapon!", new Action(() => { Clues.VRC_Interactable_Click(); }), "Unlock Random Weapon!", null, null, true);
             #endregion
@@ -454,22 +464,21 @@ namespace AstroClient
             QMNestedButton MurderItemWatchMenu = new QMNestedButton(Murder4CheatPage, 2, 0f, "Watchers", "Murder item Watchers!", null, null, null, null, true);
             #region Watchers
 
-            QMNestedButton Watch_target_section = new QMNestedButton(MurderItemWatchMenu, 1, 0, "Watch Target ", "Murder item Watchers!", null, null, null, null);
-            new QMSingleButton(Watch_target_section, 1, 0, "Detective Gun Watchs target!", new Action(() => { DetectiveGuns.WatchTarget(); }), "Make Detective Gun Watch Target", null, null);
-            new QMSingleButton(Watch_target_section, 2, 0, "Silenced Guns Watchs target!", new Action(() => { SilencedGuns.WatchTarget(); }), "Make Silenced Gun Watch Target", null, null);
-            new QMSingleButton(Watch_target_section, 3, 0, "Knifes Watchs target!", new Action(() => { Knifes.WatchTarget(); }), "Make Knifes Watch Target", null, null);
-            new QMSingleButton(Watch_target_section, 4, 0, "Clues Watchs target!", new Action(() => { Clues.WatchTarget(); }), "Make Clues Watch Target", null, null);
-            new QMSingleButton(Watch_target_section, 1, 1, "Grenade Watchs target!", new Action(() => { Grenades.WatchTarget(); }), "Make Grenade Watch Target", null, null);
-            new QMSingleButton(Watch_target_section, 2, 1, "Shotgun Watchs target!", new Action(() => { ShotGuns.WatchTarget(); }), "Make Bear Traps Watch Target", null, null);
-            new QMSingleButton(Watch_target_section, 3, 1, "Bear traps Watchs target!", new Action(() => { BearTraps.WatchTarget(); }), "Make Bear Traps Watch Target", null, null);
-            QMNestedButton Watch_self_section = new QMNestedButton(MurderItemWatchMenu, 2, 0, "Watch You", "Murder item Watchers!", null, null, null, null);
-            new QMSingleButton(Watch_self_section, 1, 0, "Detective Gun Watchs you!", new Action(() => { DetectiveGuns.WatchSelf(); }), "Make Detective Gun Watch you", null, null);
-            new QMSingleButton(Watch_self_section, 2, 0, "Silenced Guns Watchs you!", new Action(() => { SilencedGuns.WatchSelf(); }), "Make Silenced Gun Watch you", null, null);
-            new QMSingleButton(Watch_self_section, 3, 0, "Knifes Watchs you!", new Action(() => { Knifes.WatchSelf(); }), "Make Knifes Watch you", null, null);
-            new QMSingleButton(Watch_self_section, 4, 0, "Clues Watchs you!", new Action(() => { Clues.WatchSelf(); }), "Make Clues Watch you", null, null);
-            new QMSingleButton(Watch_self_section, 1, 1, "Grenade Watchs you!", new Action(() => { Grenades.WatchSelf(); }), "Make Grenade Watch you", null, null);
-            new QMSingleButton(Watch_self_section, 2, 1, "Shotgun Watchs you!", new Action(() => { ShotGuns.WatchSelf(); }), "Make Bear Traps Watch you", null, null);
-            new QMSingleButton(Watch_self_section, 3, 1, "Bear traps Watchs you!", new Action(() => { BearTraps.WatchSelf(); }), "Make Bear Traps Watch you", null, null);
+            new QMSingleButton(MurderItemWatchMenu, 1, 0, "Detective Gun (target)!", new Action(() => { DetectiveGuns.WatchTarget(); }), "Make Detective Gun Watch Target", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 1, 0.5f, "Silenced Guns (target)!", new Action(() => { SilencedGuns.WatchTarget(); }), "Make Silenced Gun Watch Target", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 1, 1, "Knifes (target)!", new Action(() => { Knifes.WatchTarget(); }), "Make Knifes Watch Target", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 1, 1.5f, "Clues (target)!", new Action(() => { Clues.WatchTarget(); }), "Make Clues Watch Target", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 1, 2, "Grenade (target)!", new Action(() => { Grenades.WatchTarget(); }), "Make Grenade Watch Target", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 1, 2.5f, "Shotgun (target)!", new Action(() => { ShotGuns.WatchTarget(); }), "Make Bear Traps Watch Target", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 2, 0, "Bear traps (target)!", new Action(() => { BearTraps.WatchTarget(); }), "Make Bear Traps Watch Target", null, null, true).SetResizeTextForBestFit(true);
+
+            new QMSingleButton(MurderItemWatchMenu, 3, 0, "Detective Gun (you)!", new Action(() => { DetectiveGuns.WatchSelf(); }), "Make Detective Gun Watch you", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 3, 0.5f, "Silenced Guns (you)!", new Action(() => { SilencedGuns.WatchSelf(); }), "Make Silenced Gun Watch you", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 3, 1, "Knifes (you)!", new Action(() => { Knifes.WatchSelf(); }), "Make Knifes Watch you", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 3, 1.5f, "Clues (you)!", new Action(() => { Clues.WatchSelf(); }), "Make Clues Watch you", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 3, 2, "Grenade (you)!", new Action(() => { Grenades.WatchSelf(); }), "Make Grenade Watch you", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 3, 2.5f, "Shotgun (you)!", new Action(() => { ShotGuns.WatchSelf(); }), "Make Bear Traps Watch you", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 4, 0, "Bear traps (you)!", new Action(() => { BearTraps.WatchSelf(); }), "Make Bear Traps Watch you", null, null, true).SetResizeTextForBestFit(true);
             #endregion
 
 
@@ -477,9 +486,9 @@ namespace AstroClient
 
             GameObjectESP.Murder4ESPtoggler = new QMSingleToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
             JarRoleController.Murder4RolesRevealerToggle = new QMSingleToggleButton(Murder4CheatPage, 3, 0.5f, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", null, Color.green, Color.red, false, true);
-            Murder4UdonExploits.Init_GameController_Btn(Murder4CheatPage, 4, 1, true);
-            Murder4UdonExploits.Init_Filtered_Nodes_Btn(Murder4CheatPage, 4, 1.5f, true);
-            Murder4UdonExploits.Init_Unfiltered_Nodes_btn(Murder4CheatPage, 4, 2f, true);
+            Murder4UdonExploits.Init_GameController_Btn(Murder4CheatPage, 4, 0, true);
+            Murder4UdonExploits.Init_Filtered_Nodes_Btn(Murder4CheatPage, 4, 0.5f, true);
+            Murder4UdonExploits.Init_Unfiltered_Nodes_btn(Murder4CheatPage, 4, 1f, true);
 
 
 
@@ -509,7 +518,7 @@ namespace AstroClient
                 }
 
                 Pickup.SetPickupOrientation(knife, VRC.SDKBase.VRC_Pickup.PickupOrientation.Grip);
-                Pickup.SetProximity(knife, 450f);
+                Pickup.SetProximity(knife, 500f);
             }
         }
 
@@ -532,13 +541,38 @@ namespace AstroClient
         // MAP GameObjects Required for control.
 
 
+        private static QMSingleButton PresentTeleporter;
+        private static QMSingleButton PresentSpawner;
+        private static QMSingleButton PresentClicker;
 
 
-        public static QMToggleButton KnifesGrabbableToggle;
+        public static QMSingleToggleButton KnifesGrabbableToggle;
 
         public static QMSingleButton KnifesGrabFromFar;
-
-        public static readonly bool isChristmasMode = false;
+        private static bool _isChristmasMode;
+        public static bool isChristmasMode
+        {
+            get
+            {
+                return _isChristmasMode;
+            }
+            set
+            {
+                _isChristmasMode = value;
+                if(PresentClicker != null)
+                {
+                    PresentClicker.setActive(value);
+                }
+                if (PresentSpawner != null)
+                {
+                    PresentSpawner.setActive(value);
+                }
+                if(PresentTeleporter != null)
+                {
+                    PresentTeleporter.setActive(value);
+                }
+            }
+        }
 
         public static GameObject Clue_photograph = null;
 
