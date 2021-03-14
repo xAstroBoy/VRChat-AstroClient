@@ -13,7 +13,6 @@ namespace AstroClient.Startup.Buttons
             new QMSingleButton(sub, 1, 0, "Reveal all world pickups", new Action(GameObjectUtils.EnableAllWorldPickups), "Enables all world pickups!", null, null);
             new QMSingleButton(sub, 2, 0, "Hide all world pickups", new Action(GameObjectUtils.DisableAllWorldPickups), "Disables all world pickups!", null, null);
             new QMSingleButton(sub, 3, 0, "Restore Original pickups pos", new Action(GameObjectUtils.TeleportPickupsToTheirDefaultPosition), "Restores all Pickups Original Position!", null, null);
-            new QMSingleButton(sub, 4, 0, "Clean World Music", new Action(WorldSoundCleaner.CleanWorldBGMusic), "Remove World Music", null, null);
             new QMSingleButton(sub, 1, 1, "Clear QPens Drawing Globally", new Action(QVPensUtils.ResetQPensGlobal), "Clears QPens Globally", null, null);
             new QMSingleButton(sub, 2, 1, "Allow Theft Globally", new Action(ObjectMiscOptions.AllowTheftGlobal), "Allows Theft", null, null, true);
             new QMSingleButton(sub, 2, 1.5f, "Disallow Theft Globally", new Action(ObjectMiscOptions.DisallowTheftGlobal), "Blocks Theft", null, null, true);

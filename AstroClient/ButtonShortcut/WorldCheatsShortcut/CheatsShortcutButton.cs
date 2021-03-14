@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using AstroClient.Worlds;
+using AstroClient.Variables;
 
 namespace AstroClient.ButtonShortcut
 {
@@ -27,14 +28,14 @@ namespace AstroClient.ButtonShortcut
 
         public static void OnWorldReveal()
         {
-            if (WorldUtils.GetWorldID() == "wrld_ba913a96-fac4-4048-a062-9aa5db092812")
+            if (WorldUtils.GetWorldID() == WorldIds.VRChatDefaultHub)
             {
                 SetButtonText("Hub Mods", "Control HUB World.");
                 SetButtonShortcut(HubButtonsControl.VRChat_Hub_Addons);
                 SetButtonColor(Color.green);
                 ToggleButtonVisibilityAndInteractivity(true);
             }
-            else if (WorldUtils.GetWorldID() == "wrld_dd036610-a246-4f52-bf01-9d7cea3405d7")
+            else if (WorldUtils.GetWorldID() == WorldIds.AmongUS)
             {
                 if (AmongUSCheats.AmongUsCheatsPage != null)
                 {
@@ -44,7 +45,7 @@ namespace AstroClient.ButtonShortcut
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-            else if (WorldUtils.GetWorldID() == "wrld_858dfdfc-1b28-2e1e-8a23-f0edc611e5fe")
+            else if (WorldUtils.GetWorldID() == WorldIds.Murder2)
             {
                 if (Murder2Cheats.Murder2CheatPage != null)
                 {
@@ -54,7 +55,7 @@ namespace AstroClient.ButtonShortcut
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-            else if (WorldUtils.GetWorldID() == "wrld_858dfdfc-1b48-4e1e-8a43-f0edc611e5fe")
+            else if (WorldUtils.GetWorldID() == WorldIds.Murder4)
             {
                 if (Murder4Cheats.Murder4CheatPage != null)
                 {
@@ -64,7 +65,7 @@ namespace AstroClient.ButtonShortcut
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-            else if (WorldUtils.GetWorldID() == "wrld_c87d9e7a-d46a-4ca4-9077-a6322ac0f7e7")
+            else if (WorldUtils.GetWorldID() == WorldIds.SmashContest)
             {
                 if (WorldAddons.SandBagCheat != null)
                 {
@@ -74,7 +75,7 @@ namespace AstroClient.ButtonShortcut
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-            else if (WorldUtils.GetWorldID() == "wrld_4f826865-8501-4de2-b83a-f7eeb86b26a1")
+            else if (WorldUtils.GetWorldID() == WorldIds.RootMovieRoom)
             {
                 if (WorldAddons.MovieRoomPatreonRoomUnlock != null)
                 {

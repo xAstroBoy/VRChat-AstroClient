@@ -9,6 +9,7 @@ using static AstroClient.WorldUtils;
 using static AstroClient.LocalPlayerUtils;
 using System;
 using AstroClient.ConsoleUtils;
+using AstroClient.Variables;
 
 #endregion AstroClient Imports
 
@@ -98,7 +99,7 @@ namespace AstroClient.World.Hub
 
         public static void OnWorldReveal()
         {
-            if (GetWorldID() == "wrld_ba913a96-fac4-4048-a062-9aa5db092812")
+            if (GetWorldID() == WorldIds.VRChatDefaultHub)
             {
                 isHubWorldLoaded = true;
             }
@@ -110,7 +111,7 @@ namespace AstroClient.World.Hub
 
         public static void AnalyzeHubForGameObjects()
         {
-            if (GetWorldID() == "wrld_ba913a96-fac4-4048-a062-9aa5db092812")
+            if (GetWorldID() == WorldIds.VRChatDefaultHub)
             {
                 if (Button_toggle_Table_Props == null && Button_toggle_MirrorProps == null && Button_toggle_BeachBall == null && Button_toggle_CrystalBlocks == null && Button_toggle_Boats == null)
                 {

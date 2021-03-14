@@ -8,8 +8,6 @@
 
         internal static bool SkipMenuChecks = true;
 
-        internal static bool KillKnownWorldSounds = true;
-
         // TOGGLE "Malicious" COMPONENTS
         internal static bool AllowOrbitComponent = true;
 

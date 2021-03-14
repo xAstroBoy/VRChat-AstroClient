@@ -2,6 +2,7 @@
 using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
 using AstroClient.Finder;
+using AstroClient.Variables;
 using AstroClient.World.Hub;
 using RubyButtonAPI;
 using System;
@@ -36,7 +37,7 @@ namespace AstroClient.Worlds
 
         public static void OnWorldReveal()
         {
-            if (WorldUtils.GetWorldID() == "wrld_c87d9e7a-d46a-4ca4-9077-a6322ac0f7e7")
+            if (WorldUtils.GetWorldID() == WorldIds.SmashContest)
             {
                 if (SandBagCheat != null)
                 {
@@ -56,7 +57,7 @@ namespace AstroClient.Worlds
                 }
             }
 
-            if (WorldUtils.GetWorldID() == "wrld_4f826865-8501-4de2-b83a-f7eeb86b26a1")
+            if (WorldUtils.GetWorldID() == WorldIds.RootMovieRoom)
             {
                 ModConsole.Log("Recognized Root Movies & Anime room World, Enabled Unlock Patreon Room!");
                 if (MovieRoomPatreonRoomUnlock != null)
@@ -74,7 +75,7 @@ namespace AstroClient.Worlds
                     MovieRoomPatreonRoomUnlock.setTextColor(Color.red);
                 }
             }
-            if (WorldUtils.GetWorldID() == "wrld_ba913a96-fac4-4048-a062-9aa5db092812")
+            if (WorldUtils.GetWorldID() == WorldIds.VRChatDefaultHub)
             {
                 if (HubButtonsControl.VRChat_Hub_Addons != null)
                 {
@@ -93,7 +94,7 @@ namespace AstroClient.Worlds
                 }
             }
 
-            if (WorldUtils.GetWorldID() == "wrld_d010695a-3e7c-43a1-ac38-d80f3ffeab17")
+            if (WorldUtils.GetWorldID() == WorldIds.TermalTreatment)
             {
                 ModConsole.Log("Recognized Thermal Treatment World, Finding Platforms Gameobjects!...");
                 var list = new List<GameObject>();
@@ -103,7 +104,7 @@ namespace AstroClient.Worlds
                     list.AddToWorldUtilsMenu();
                 }
             }
-            if (WorldUtils.GetWorldID() == "wrld_a1b9fcc4-1ed1-4e67-8b16-f1edc5a5d6e9")
+            if (WorldUtils.GetWorldID() == WorldIds.DontTripWorld)
             {
                 ModConsole.Log("Recognized Dont Trip World, Finding Entity Gameobjects!...");
                 GameObjectFinder.Find("GameObject/Level/cube (5)/what the fuck").AddToWorldUtilsMenu();
@@ -112,7 +113,7 @@ namespace AstroClient.Worlds
 
         private static void ForcePatreonRoomUnlock()
         {
-            if (WorldUtils.GetWorldID() == "wrld_4f826865-8501-4de2-b83a-f7eeb86b26a1")
+            if (WorldUtils.GetWorldID() == WorldIds.RootMovieRoom)
             {
                 if (!HasDeletedBlockingPortal)
                 {

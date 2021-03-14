@@ -1,5 +1,6 @@
 ﻿using AstroClient.components;
 using AstroClient.ConsoleUtils;
+using AstroClient.Variables;
 using RubyButtonAPI;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace AstroClient
                 {
                     if (item != null)
                     {
-                        if (WorldUtils.GetWorldID() == "wrld_953eff93-20c9-457b-8ef0-1ac2130d5b8a")
+                        if (WorldUtils.GetWorldID() == WorldIds.SnoozeScaryMaze5)
                         {
                             if (item.name == "The Doctor Watcher Activate")
                             {

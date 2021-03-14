@@ -2,6 +2,7 @@
 using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
 using AstroClient.Finder;
+using AstroClient.Variables;
 using RubyButtonAPI;
 using System;
 using System.Collections.Generic;
@@ -206,8 +207,8 @@ namespace AstroClient
 
         public static void OnWorldReveal()
         {
-            isAmongUsWorld = (WorldUtils.GetWorldID() == "wrld_dd036610-a246-4f52-bf01-9d7cea3405d7");
-            IsMurder4World = (WorldUtils.GetWorldID() == "wrld_858dfdfc-1b48-4e1e-8a43-f0edc611e5fe");
+            isAmongUsWorld = (WorldUtils.GetWorldID() == WorldIds.AmongUS);
+            IsMurder4World = (WorldUtils.GetWorldID() == WorldIds.Murder4);
 
             if (isAmongUsWorld || IsMurder4World)
             {

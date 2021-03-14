@@ -2,6 +2,7 @@
 using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
 using AstroClient.Finder;
+using AstroClient.Variables;
 using System;
 using VRC.SDKBase;
 
@@ -11,7 +12,7 @@ namespace AstroClient.Worlds
     {
         public static void OnWorldReveal()
         {
-            if (WorldUtils.GetWorldID() == "wrld_9c72e56b-d2b0-4c9b-b816-07a857f6ae4e")
+            if (WorldUtils.GetWorldID() == WorldIds.Meroom)
             {
                 ModConsole.Log("Recognized Meroom, Spawning Lockpick Trigger.");
 
@@ -66,7 +67,7 @@ namespace AstroClient.Worlds
                 }
             }
 
-            else if (WorldUtils.GetWorldID() == "wrld_d319c58a-dcec-47de-b5fc-21200116462c")
+            else if (WorldUtils.GetWorldID() == WorldIds.FBTHeaven)
             {
                 ModConsole.Log("Recognized FBT Heaven! Removing Blinders and Dividers...");
                 var blinders = GameObjectFinder.Find("[AREA_DEVIDERS]");
@@ -195,7 +196,7 @@ namespace AstroClient.Worlds
                 }
             }
 
-            else if (WorldUtils.GetWorldID() == "wrld_953eff93-20c9-457b-8ef0-1ac2130d5b8a")
+            else if (WorldUtils.GetWorldID() == WorldIds.SnoozeScaryMaze5)
             {
                 ModConsole.Log("Recognized The Snooze's Scary Maze 5, Removing Anti-cheat protections..");
                 var roofanticheat = GameObjectFinder.Find("World/Roof & Preventions");
@@ -221,7 +222,7 @@ namespace AstroClient.Worlds
                 }
             }
 
-            else if (WorldUtils.GetWorldID() == "wrld_6caf5200-70e1-46c2-b043-e3c4abe69e0f")
+            else if (WorldUtils.GetWorldID() == WorldIds.TheGreatPug)
             {
                 ModConsole.Log("Recognized The Great Pug World, Removing Basement Door & Kitchen Door.");
                 var BasementDoor = GameObjectFinder.Find(" - Props/Props (Static) - Hallways - First Floor/door-private");

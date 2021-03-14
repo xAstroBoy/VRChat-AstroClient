@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using AstroClient.UdonExploits;
 using AstroClient.ButtonShortcut;
+using AstroClient.Variables;
 #endregion AstroClient Imports
 
 namespace AstroClient
@@ -51,7 +52,7 @@ namespace AstroClient
 
         public static void OnWorldReveal()
         {
-            if (WorldUtils.GetWorldID() == "wrld_dd036610-a246-4f52-bf01-9d7cea3405d7")
+            if (WorldUtils.GetWorldID() == WorldIds.AmongUS)
             {
                 HasAmongUsWorldLoaded = true;
                 if (AmongUsCheatsPage != null)

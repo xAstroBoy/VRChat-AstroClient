@@ -11,6 +11,7 @@ using AstroClient.variables;
 using AstroClient.Finder;
 using AstroClient.extensions;
 using AstroClient.ButtonShortcut;
+using AstroClient.Variables;
 
 #endregion AstroClient Imports
 
@@ -146,7 +147,7 @@ namespace AstroClient
 
         public static void OnWorldReveal()
         {
-            if (WorldUtils.GetWorldID() == "wrld_858dfdfc-1b28-2e1e-8a23-f0edc611e5fe")
+            if (WorldUtils.GetWorldID() == WorldIds.Murder2)
             {
                 if (Murder2CheatPage != null)
                 {
