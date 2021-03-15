@@ -37,7 +37,7 @@ namespace AstroClient.Worlds
             {
                 if (SandBagCheat != null)
                 {
-                    ModConsole.Log("Recognized Smash Contest's world, revealing SandBag Selector Button!", ConsoleColor.Green);
+                    ModConsole.Log("Recognized Smash Contest's world, revealing SandBag Selector Button!", System.Drawing.Color.Green);
                     SandBagCheat.setIntractable(true);
                     SandBagCheat.setTextColor(Color.green);
                     FindSandBag();
@@ -56,7 +56,7 @@ namespace AstroClient.Worlds
             {
                 if (HubButtonsControl.VRChat_Hub_Addons != null)
                 {
-                    ModConsole.Log("Recognized VRCHat Hub's world, revealing Hub Addons Submenu Button!", ConsoleColor.Green);
+                    ModConsole.Log("Recognized VRCHat Hub's world, revealing Hub Addons Submenu Button!", System.Drawing.Color.Green);
                     HubButtonsControl.VRChat_Hub_Addons.getMainButton().setIntractable(true);
                     HubButtonsControl.VRChat_Hub_Addons.getMainButton().setTextColor(Color.green);
                 }

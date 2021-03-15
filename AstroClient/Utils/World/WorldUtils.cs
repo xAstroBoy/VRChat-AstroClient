@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using VRC;
 using VRC.SDK3.Components;
+using Color = System.Drawing.Color;
 
 #region AstroClient Imports
 
@@ -117,7 +118,7 @@ namespace AstroClient
 
         public static void OnWorldReveal()
         {
-            ModConsole.Log("This instance has " + GetAllPlayers0().Count() + " Players.", ConsoleColor.Green);
+            ModConsole.Log("This instance has " + GetAllPlayers0().Count() + " Players.", Color.Gold);
         }
 
         public static List<GameObject> GetAllWorldPickups()

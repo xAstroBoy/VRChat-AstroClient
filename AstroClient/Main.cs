@@ -10,6 +10,7 @@ using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using VRC;
 using UnityEngine.UI;
+using Color = System.Drawing.Color;
 
 using AstroClient.components;
 
@@ -29,7 +30,6 @@ using AstroClient.Components;
 using AstroClient.Startup;
 using AstroClient.Cloner;
 using AstroClient.extensions;
-using Color = UnityEngine.Color;
 using AstroClient.Finder;
 using AstroClient.Variables;
 using AstroClient.BetterPatch;
@@ -58,10 +58,8 @@ namespace AstroClient
     public class Main : MelonMod
     {
 
+
         // Thanks Kirai <3
-        static Main()
-        {
-        }
 
 
 
@@ -70,10 +68,8 @@ namespace AstroClient
 
         public override void OnApplicationStart()
         {
+
             ComponentHelper.RegisterComponents();
-
-
-
             HookFadeTo();
             HookSpawnEmojiRPC();
             MelonCoroutines.Start(HookNetworkManager());
@@ -165,6 +161,7 @@ namespace AstroClient
 
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
+            Console.ResetColor();
             switch (buildIndex)
             {
                 case 0: // app
@@ -214,6 +211,7 @@ namespace AstroClient
 
             // RANDOM SHIT
             VRChatObjects.OnUpdate();
+
         }
 
         public override void OnLateUpdate()
@@ -395,9 +393,9 @@ namespace AstroClient
 
         private static void OnFadeToEvent()
         {
-            ModConsole.Log("You entered this world : " + WorldUtils.GetWorldName(), ConsoleColor.Cyan);
-            ModConsole.Log("World ID : " + WorldUtils.GetWorldID(), ConsoleColor.Cyan);
-            ModConsole.Log("World Asset URL : " + WorldUtils.GetWorldAssetURL(), ConsoleColor.Cyan);
+            ModConsole.Log("You entered this world : " + WorldUtils.GetWorldName(), System.Drawing.Color.CadetBlue);
+            ModConsole.Log("World ID : " + WorldUtils.GetWorldID(), System.Drawing.Color.CadetBlue);
+            ModConsole.Log("World Asset URL : " + WorldUtils.GetWorldAssetURL(), System.Drawing.Color.CadetBlue);
             MelonCoroutines.Start(OnWorldReveal());
         }
 

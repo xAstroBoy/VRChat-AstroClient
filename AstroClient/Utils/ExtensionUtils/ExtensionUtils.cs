@@ -6,6 +6,7 @@ using VRC;
 using VRC.Core;
 using VRC.SDKBase;
 using AstroClient.components;
+using Color = System.Drawing.Color;
 
 #region AstroClient Imports
 
@@ -1576,12 +1577,12 @@ namespace AstroClient.extensions
             }
             if (obj != null)
             {
-                ModConsole.Log("Failed To Destroy Server-side  Object :  " + obj.name, ConsoleColor.Red);
+                ModConsole.Log("Failed To Destroy Server-side  Object :  " + obj.name, Color.Red);
                 return false;
             }
             else
             {
-                ModConsole.Log("Destroyed Server-side Object : " + name, ConsoleColor.Green);
+                ModConsole.Log("Destroyed Server-side Object : " + name, Color.Green);
                 if(refreshhandutils)
                 {
                     HandsUtils.GameObjectToEdit = null;
@@ -1664,12 +1665,12 @@ namespace AstroClient.extensions
                 }
                 if (obj != null)
                 {
-                    ModConsole.Log("Failed To Destroy Object : " + obj.name, ConsoleColor.Red);
-                    ModConsole.Log("Try To Destroy His GameObject in case you are trying to destroy the transform.", ConsoleColor.Yellow);
+                    ModConsole.Log("Failed To Destroy Object : " + obj.name, Color.Red);
+                    ModConsole.Log("Try To Destroy His GameObject in case you are trying to destroy the transform.", Color.Yellow);
                 }
                 else
                 {
-                    ModConsole.Log("Destroyed Client-side Object : " + name, ConsoleColor.Green);
+                    ModConsole.Log("Destroyed Client-side Object : " + name, Color.Green);
                 }
             }
         }

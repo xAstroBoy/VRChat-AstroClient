@@ -7,6 +7,8 @@ using UnityEngine;
 using VRC;
 using VRC.Core;
 using AstroClient.extensions;
+using Color = System.Drawing.Color;
+
 #region AstroClient Imports
 
 using static AstroClient.variables.InstanceBuilder;
@@ -70,11 +72,11 @@ namespace AstroClient.components
                 UnityEngine.Object.DontDestroyOnLoad(gameobj);
                 if (Instance != null)
                 {
-                    ModConsole.Log("[ " + name.ToUpper() + " STATUS ] : READY", ConsoleColor.Green);
+                    ModConsole.Log("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
                 }
                 else
                 {
-                    ModConsole.Log("[ " + name.ToUpper() + " STATUS ] : ERROR", ConsoleColor.Red);
+                    ModConsole.Log("[ " + name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
                 }
             }
         }

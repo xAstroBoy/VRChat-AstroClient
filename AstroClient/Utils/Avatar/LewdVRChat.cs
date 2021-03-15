@@ -10,7 +10,7 @@ using VRC.Core;
 using UnityEngine.UI;
 using System.IO;
 using Newtonsoft.Json;
-using Color = UnityEngine.Color;
+using Color = System.Drawing.Color;
 
 #region AstroClient Imports
 
@@ -184,14 +184,14 @@ namespace AstroClient
         {
             if (Body == null)
             {
-                ModConsole.Log("Couldn't find avatar body , is the player using a invisible avatar?", ConsoleColor.Red);
+                ModConsole.Log("Couldn't find avatar body , is the player using a invisible avatar?", Color.Red);
                 return;
             }
 
-            ModConsole.Log("[AVATAR Pickup] : Finding All Render Components of " + player.GetAPIUser().displayName + " Avatar...", ConsoleColor.Green);
+            ModConsole.Log("[AVATAR Pickup] : Finding All Render Components of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
             if (player.prop_ApiAvatar_0 != null)
             {
-                ModConsole.Log("[AVATAR ANALYZER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, ConsoleColor.Green);
+                ModConsole.Log("[AVATAR ANALYZER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
             }
             AvatarHelper.CheckTransform(Body.transform);
             var username = GetDisplayName(player);
@@ -202,7 +202,7 @@ namespace AstroClient
                 return;
             }
             _DumpedNames = new List<string>();
-            ModConsole.Log("Adding Pickup To Avatar Internals ...", ConsoleColor.Green);
+            ModConsole.Log("Adding Pickup To Avatar Internals ...", Color.Green);
 
             foreach (var obj in AvatarHelper._GameObjects)
             {
@@ -234,7 +234,7 @@ namespace AstroClient
                             control.ForceComponent = true;
                                 Pickup.SetPickupable(item, true);
                                 Pickup.SetDisallowTheft(item);
-                            ModConsole.Log("Added Pickup in Object [ " + item.name + " ] in " + username + "'s avatar", ConsoleColor.Yellow);
+                            ModConsole.Log("Added Pickup in Object [ " + item.name + " ] in " + username + "'s avatar", Color.Yellow);
 
                         }
 
@@ -249,14 +249,14 @@ namespace AstroClient
         {
             if (Body == null)
             {
-                ModConsole.Log("Couldn't find avatar body , is the player using a invisible avatar?", ConsoleColor.Red);
+                ModConsole.Log("Couldn't find avatar body , is the player using a invisible avatar?", Color.Red);
                 return;
             }
 
-            ModConsole.Log("[AVATAR ANALYZER] : Dumping All Render Components of " + player.GetAPIUser().displayName + " Avatar...", ConsoleColor.Green);
+            ModConsole.Log("[AVATAR ANALYZER] : Dumping All Render Components of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
             if (player.prop_ApiAvatar_0 != null)
             {
-                ModConsole.Log("[AVATAR ANALYZER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, ConsoleColor.Green);
+                ModConsole.Log("[AVATAR ANALYZER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
             }
             AvatarHelper.CheckTransform(Body.transform);
             var username = GetDisplayName(player);
@@ -267,7 +267,7 @@ namespace AstroClient
                 return;
             }
             _DumpedNames = new List<string>();
-            ModConsole.Log("Dumping Objects ...", ConsoleColor.Green);
+            ModConsole.Log("Dumping Objects ...", Color.Green);
 
             foreach (var obj in AvatarHelper._GameObjects)
             {
@@ -284,7 +284,7 @@ namespace AstroClient
 
                     if (!_DumpedNames.Contains(item.name))
                     {
-                        ModConsole.Log("Found Object [ " + item.name + " ] in " + username + "'s avatar", ConsoleColor.Yellow);
+                        ModConsole.Log("Found Object [ " + item.name + " ] in " + username + "'s avatar", Color.Yellow);
                         _DumpedNames.Add(item.name);
                     }
                 }
@@ -303,7 +303,7 @@ namespace AstroClient
             }
             _DumpedNames = new List<string>();
 
-            ModConsole.Log("Dumping Materials ...", ConsoleColor.Green);
+            ModConsole.Log("Dumping Materials ...", Color.Green);
 
             foreach (var obj in AvatarHelper._GameObjects)
             {
@@ -320,7 +320,7 @@ namespace AstroClient
 
                     if (!_DumpedNames.Contains(TransformRenderer.material.name))
                     {
-                        ModConsole.Log("Found Material [ " + TransformRenderer.material.name + " ] in " + username + "'s avatar", ConsoleColor.Yellow);
+                        ModConsole.Log("Found Material [ " + TransformRenderer.material.name + " ] in " + username + "'s avatar", Color.Yellow);
                         _DumpedNames.Add(TransformRenderer.name);
                     }
                 }

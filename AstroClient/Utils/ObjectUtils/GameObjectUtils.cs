@@ -13,6 +13,7 @@ using VRCSDK2;
 using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 using Photon.Pun;
 using VRC;
+using Color = System.Drawing.Color;
 
 #region AstroClient Imports
 
@@ -326,7 +327,7 @@ namespace AstroClient.GameObjectDebug
                         var player = PlayerManager.Method_Public_Static_Player_Int32_0(ownerid);
                         if (player != null)
                         {
-                            ModConsole.Log("Player : " + player.prop_APIUser_0.displayName + " is controlling object : " + item.name, ConsoleColor.Cyan);
+                            ModConsole.Log("Player : " + player.prop_APIUser_0.displayName + " is controlling object : " + item.name, Color.GreenYellow);
                         }
                     }
                 }

@@ -7,6 +7,7 @@ using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;
 using static AstroClient.ConsoleUtils.ModConsole;
+using Color = System.Drawing.Color;
 
 #region AstroClient Imports
 
@@ -69,11 +70,11 @@ namespace AstroClient.components
                 UnityEngine.Object.DontDestroyOnLoad(gameobj);
                 if (Instance != null)
                 {
-                    ModConsole.Log("[ " + name.ToUpper() + " STATUS ] : READY", ConsoleColor.Green);
+                    ModConsole.Log("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
                 }
                 else
                 {
-                    ModConsole.Error("[ " + name + " Status ] : Error");
+                    ModConsole.Log("[ " + name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
                 }
             }
         }

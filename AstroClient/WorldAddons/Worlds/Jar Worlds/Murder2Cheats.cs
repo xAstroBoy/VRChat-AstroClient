@@ -92,12 +92,12 @@ namespace AstroClient
 
             if (Death != null)
             {
-                ModConsole.Log("Found Death Gameobject, God Mode is available!", ConsoleColor.Green);
+                ModConsole.Log("Found Death Gameobject, God Mode is available!", System.Drawing.Color.Green);
                 GodModeMurder2.setActive(true);
             }
             else
             {
-                ModConsole.Log("Death Gameobject is Unknown, God Mode is unavailable!", ConsoleColor.Red);
+                ModConsole.Log("Death Gameobject is Unknown, God Mode is unavailable!", System.Drawing.Color.Red);
                 if (GodModeMurder2 != null)
                 {
                     GodModeMurder2.setActive(false);
@@ -151,7 +151,7 @@ namespace AstroClient
             {
                 if (Murder2CheatPage != null)
                 {
-                    ModConsole.Log("Recognized Murder 2's world, Unlocking Murder 2 cheats menu!", ConsoleColor.Green);
+                    ModConsole.Log("Recognized Murder 2's world, Unlocking Murder 2 cheats menu!", System.Drawing.Color.Green);
                     Murder2CheatPage.getMainButton().setIntractable(true);
                     Murder2CheatPage.getMainButton().setTextColor(Color.green);
                 }

@@ -5,6 +5,7 @@ using AstroClient.Finder;
 using AstroClient.Variables;
 using System;
 using VRC.SDKBase;
+using Color = System.Drawing.Color;
 
 namespace AstroClient.Worlds
 {
@@ -20,23 +21,23 @@ namespace AstroClient.Worlds
                 var DisplaySwitchTrigger = GameObjectFinder.Find("Living room/Button/switch (1)");
                 if (PrivateRoomSwitchTrigger == null)
                 {
-                    ModConsole.Log("Failed to Find Private Room Switch, Has MeRoom World updated?", ConsoleColor.Red);
+                    ModConsole.Log("Failed to Find Private Room Switch, Has MeRoom World updated?", Color.Red);
                 }
                 else
                 {
-                    ModConsole.Log("Found Private room Switch!", ConsoleColor.Green);
+                    ModConsole.Log("Found Private room Switch!", Color.Green);
                 }
                 if (DisplaySwitchTrigger == null)
                 {
-                    ModConsole.Log("Failed to Find Living Room Display Switch, Has MeRoom World updated?", ConsoleColor.Red);
+                    ModConsole.Log("Failed to Find Living Room Display Switch, Has MeRoom World updated?", Color.Red);
                 }
                 else
                 {
-                    ModConsole.Log("Found Living Room Display Switch!", ConsoleColor.Green);
+                    ModConsole.Log("Found Living Room Display Switch!", Color.Green);
                 }
                 if (PrivateRoomSwitchTrigger == null || DisplaySwitchTrigger == null)
                 {
-                    ModConsole.Log("Aborted LockPick Button Generation.", ConsoleColor.Yellow);
+                    ModConsole.Log("Aborted LockPick Button Generation.", Color.Yellow);
                     return;
                 }
 

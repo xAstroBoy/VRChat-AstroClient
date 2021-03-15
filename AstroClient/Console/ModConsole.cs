@@ -2,180 +2,250 @@
 using Il2CppSystem.Text.RegularExpressions;
 using MelonLoader;
 using RubyButtonAPI;
+using Colorful;
 using System;
-using System.Text;
+using Console = Colorful.Console;
+using System.Drawing;
 
 namespace AstroClient.ConsoleUtils
 {
     public class ModConsole
     {
-
-        public static void LogExc(Il2CppSystem.Exception e)
+        public enum LogTypes
         {
-            MelonLogger.Msg($"Exception Message : {e.Message}");
-            MelonLogger.Msg($"Exception StackTrace : {e.StackTrace}");
-            MelonLogger.Msg($"Exception TargetSite : {e.TargetSite}");
-            MelonLogger.Msg($"Exception Source : {e.Source}");
-
-        }
-
-        public static void WarningExc(Il2CppSystem.Exception e)
-        {
-            MelonLogger.Warning($"Exception Message : {e.Message}");
-            MelonLogger.Warning($"Exception StackTrace : {e.StackTrace}");
-            MelonLogger.Warning($"Exception TargetSite : {e.TargetSite}");
-            MelonLogger.Warning($"Exception Source : {e.Source}");
-        }
-
-        public static void ErrorExc(Il2CppSystem.Exception e)
-        {
-            MelonLogger.Error($"Exception Message : {e.Message}");
-            MelonLogger.Error($"Exception StackTrace : {e.StackTrace}");
-            MelonLogger.Error($"Exception TargetSite : {e.TargetSite}");
-            MelonLogger.Error($"Exception Source : {e.Source}");
+            LOG,
+            WARNING,
+            ERROR,
+            DEBUG_LOG, 
+            DEBUG_WARNING,
+            DEBUG_ERROR
         }
 
 
-        public static void DebugLogExc(Il2CppSystem.Exception e)
+
+        public static void LogExc<T>(T e)
         {
-            if (Bools.isDebugMode)
+            Exception((e as System.Exception), LogTypes.LOG);
+        }
+
+        public static void WarningExc<T>(T e)
+        {
+            Exception((e as System.Exception), LogTypes.WARNING);
+
+        }
+
+        public static void ErrorExc<T>(T e)
+        {
+            Exception((e as System.Exception), LogTypes.ERROR);
+        }
+
+        public static void DebugLogExc<T>(T e)
+        {
+            Exception((e as System.Exception), LogTypes.DEBUG_LOG);
+        }
+        public static void DebugWarningExc<T>(T e)
+        {
+            Exception((e as System.Exception), LogTypes.DEBUG_WARNING);
+
+        }
+
+        public static void DebugErrorExc<T>(T e)
+        {
+            Exception((e as System.Exception), LogTypes.DEBUG_ERROR);
+        }
+
+
+
+        public static void Log(string msg, Color? textcolor = null)
+        {
+            if (textcolor == null)
             {
-                MelonLogger.Msg($"[ASTRODEBUG] Exception Message : {e.Message}");
-                MelonLogger.Msg($"[ASTRODEBUG] Exception StackTrace : {e.StackTrace}");
-                MelonLogger.Msg($"[ASTRODEBUG] Exception TargetSite : {e.TargetSite}");
-                MelonLogger.Msg($"[ASTRODEBUG] Exception Source : {e.Source}");
+                textcolor = Color.White;
+            }
+            PrintTags(LogTypes.LOG);
+            PrintLine(msg, textcolor.Value);
+        }
+        public static void Warning(string msg, Color? textcolor = null)
+        {
+            if (textcolor == null)
+            {
+                textcolor = Color.White;
+            }
+            PrintTags(LogTypes.WARNING);
+            PrintLine(msg, textcolor.Value);
+        }
+
+        public static void Error(string msg, Color? textcolor = null)
+        {
+            if (textcolor == null)
+            {
+                textcolor = Color.White;
+            }
+            PrintTags(LogTypes.ERROR);
+            PrintLine(msg, textcolor.Value);
+        }
+
+        public static void DebugLog(string msg, Color? textcolor = null)
+        {
+            if (!Bools.isDebugMode)
+            {
+                return;
+            }
+            if (textcolor == null)
+            {
+                textcolor = Color.White;
+            }
+            PrintTags(LogTypes.DEBUG_LOG);
+            PrintLine(msg, textcolor.Value);
+        }
+
+        public static void DebugWarning(string msg, Color? textcolor = null)
+        {
+            if (!Bools.isDebugMode)
+            {
+                return;
+            }
+            if (textcolor == null)
+            {
+                textcolor = Color.White;
+            }
+            PrintTags(LogTypes.DEBUG_LOG);
+            PrintLine(msg, textcolor.Value);
+        }
+
+
+        public static void DebugError(string msg, Color? textcolor = null)
+        {
+            if (!Bools.isDebugMode)
+            {
+                return;
+            }
+            if (textcolor == null)
+            {
+                textcolor = Color.White;
+            }
+            PrintTags(LogTypes.DEBUG_LOG);
+            PrintLine(msg, textcolor.Value);
+        }
+
+        public static void Exception<T>(T e, LogTypes logType = LogTypes.LOG, Color? color = null)
+        {
+            if (logType == LogTypes.DEBUG_LOG  || logType == LogTypes.DEBUG_WARNING || logType == LogTypes.DEBUG_ERROR && !Bools.isDebugMode)
+            {
+                return;
+            }
+            if (color == null)
+            {
+                color = Color.White;
+            }
+
+
+            PrintTags(logType);
+
+            PrintLine(); // Basically an easy way to newline
+            PrintLine($"Exception Message: {(e as System.Exception).Message}", color.Value);
+            PrintLine($"Exception StackTrace: {(e as System.Exception).StackTrace}", color.Value);
+            PrintLine($"Exception TargetSite: {(e as System.Exception).TargetSite}");
+            PrintLine($"Exception Source: {(e as System.Exception).Source}");
+        }
+
+        public static void PrintLine(string msg = "", Color? color = null)
+        {
+            Console.Write(msg + Environment.NewLine, color.Value);
+        }
+
+        private static void PrintTags(LogTypes logType = LogTypes.LOG)
+        {
+            PrintTimestamp();
+            PrintModStamp();
+
+            switch (logType)
+            {
+                case LogTypes.LOG:
+                    PrintLogTag();
+                    break;
+                case LogTypes.WARNING:
+                    PrintWarningTag();
+                    break;
+                case LogTypes.ERROR:
+                    PrintErrorTag();
+                    break;
+                case LogTypes.DEBUG_LOG:
+                    PrintDebugLogTag();
+                    break;
+                case LogTypes.DEBUG_WARNING:
+                    PrintDebugWarningTag();
+                    break;
+                case LogTypes.DEBUG_ERROR:
+                    PrintDebugErrorTag();
+                    break;
+
             }
         }
-        public static void DebugWarningExc(Il2CppSystem.Exception e)
+        private static void PrintLogTag()
         {
-            if (Bools.isDebugMode)
-            {
-                MelonLogger.Warning($"[ASTRODEBUG] Exception Message : {e.Message}");
-                MelonLogger.Warning($"[ASTRODEBUG] Exception StackTrace : {e.StackTrace}");
-                MelonLogger.Warning($"[ASTRODEBUG] Exception TargetSite : {e.TargetSite}");
-                MelonLogger.Warning($"[ASTRODEBUG] Exception Source : {e.Source}");
-            }
-        }
-
-        public static void DebugErrorExc(Il2CppSystem.Exception e)
-        {
-            if (Bools.isDebugMode)
-            {
-                MelonLogger.Error($"[ASTRODEBUG] Exception Message : {e.Message}");
-                MelonLogger.Error($"[ASTRODEBUG] Exception StackTrace : {e.StackTrace}");
-                MelonLogger.Error($"[ASTRODEBUG] Exception TargetSite : {e.TargetSite}");
-                MelonLogger.Error($"[ASTRODEBUG] Exception Source : {e.Source}");
-            }
-        }
-
-        public static void LogExc(System.Exception e)
-        {
-            MelonLogger.Msg($"Exception Message : {e.Message}");
-            MelonLogger.Msg($"Exception StackTrace : {e.StackTrace}");
-            MelonLogger.Msg($"Exception TargetSite : {e.TargetSite}");
-            MelonLogger.Msg($"Exception Source : {e.Source}");
-
-        }
-
-        public static void WarningExc(System.Exception e)
-        {
-            MelonLogger.Warning($"Exception Message : {e.Message}");
-            MelonLogger.Warning($"Exception StackTrace : {e.StackTrace}");
-            MelonLogger.Warning($"Exception TargetSite : {e.TargetSite}");
-            MelonLogger.Warning($"Exception Source : {e.Source}");
-        }
-
-        public static void ErrorExc(System.Exception e)
-        {
-            MelonLogger.Error($"Exception Message : {e.Message}");
-            MelonLogger.Error($"Exception StackTrace : {e.StackTrace}");
-            MelonLogger.Error($"Exception TargetSite : {e.TargetSite}");
-            MelonLogger.Error($"Exception Source : {e.Source}");
+            Console.Write("[", Color.White);
+            Console.Write("LOG", Color.Aqua);
+            Console.Write("] ", Color.White);
         }
 
 
-        public static void DebugLogExc(System.Exception e)
+        private static void PrintWarningTag()
         {
-            if (Bools.isDebugMode)
-            {
-                MelonLogger.Msg($"[ASTRODEBUG] Exception Message : {e.Message}");
-                MelonLogger.Msg($"[ASTRODEBUG] Exception StackTrace : {e.StackTrace}");
-                MelonLogger.Msg($"[ASTRODEBUG] Exception TargetSite : {e.TargetSite}");
-                MelonLogger.Msg($"[ASTRODEBUG] Exception Source : {e.Source}");
-            }
-        }
-        public static void DebugWarningExc(System.Exception e)
-        {
-            if (Bools.isDebugMode)
-            {
-                MelonLogger.Warning($"[ASTRODEBUG] Exception Message : {e.Message}");
-                MelonLogger.Warning($"[ASTRODEBUG] Exception StackTrace : {e.StackTrace}");
-                MelonLogger.Warning($"[ASTRODEBUG] Exception TargetSite : {e.TargetSite}");
-                MelonLogger.Warning($"[ASTRODEBUG] Exception Source : {e.Source}");
-            }
+            Console.Write("[", Color.White);
+            Console.Write("WARNING", Color.Orange);
+            Console.Write("] ", Color.White);
         }
 
-        public static void DebugErrorExc(System.Exception e)
+        private static void PrintErrorTag()
         {
-            if (Bools.isDebugMode)
-            {
-                MelonLogger.Error($"[ASTRODEBUG] Exception Message : {e.Message}");
-                MelonLogger.Error($"[ASTRODEBUG] Exception StackTrace : {e.StackTrace}");
-                MelonLogger.Error($"[ASTRODEBUG] Exception TargetSite : {e.TargetSite}");
-                MelonLogger.Error($"[ASTRODEBUG] Exception Source : {e.Source}");
-            }
+            Console.Write("[", Color.White);
+            Console.Write("ERROR", Color.Red);
+            Console.Write("] ", Color.White);
         }
 
 
 
 
-        public static void Log(string text, ConsoleColor color)
+        private static void PrintDebugLogTag()
         {
-            MelonLogger.Msg(color, $"{text}");
+            Console.Write("[", Color.White);
+            Console.Write("DEBUG LOG", Color.Aquamarine);
+            Console.Write("] ", Color.White);
         }
 
-        
-        public static void Log(string text)
+        private static void PrintDebugWarningTag()
         {
-            MelonLogger.Msg($"{text}");
-        }
-
-
-        public static void Warning(string text)
-        {
-            MelonLogger.Warning($"{text}");
-        }
-
-        public static void Error(string text)
-        {
-            MelonLogger.Error($"{text}");
+            Console.Write("[", Color.White);
+            Console.Write("DEBUG WARNING", Color.Orange);
+            Console.Write("] ", Color.White);
         }
 
 
-        public static void DebugLog(string text)
+        private static void PrintDebugErrorTag()
         {
-            if (Bools.isDebugMode)
-            {
-                MelonLogger.Msg($"[ASTRODEBUG] {text}");
-            }
-        }
-        public static void DebugWarning(string text)
-        {
-            if (Bools.isDebugMode)
-            {
-                MelonLogger.Warning($"[ASTRODEBUG] {text}");
-            }
+            Console.Write("[", Color.White);
+            Console.Write("DEBUG ERROR", Color.Red);
+            Console.Write("] ", Color.White);
         }
 
-        public static void DebugError(string text)
+        private static void PrintModStamp()
         {
-            if (Bools.isDebugMode)
-            {
-                MelonLogger.Error($"[ASTRODEBUG] {text}");
-            }
+            Console.Write("[", Color.White);
+            Console.Write(BuildInfo.Name, Color.Gold);
+            Console.Write("] ", Color.White);
         }
 
-        public static void ToggleConsole()
+        private static void PrintTimestamp()
+        {
+            string time = DateTime.Now.ToString("HH:mm:ss.fff");
+            Console.Write("[", Color.White);
+            Console.Write(time, Color.Green);
+            Console.Write("] ", Color.White);
+        }
+    
+
+    public static void ToggleConsole()
         {
             Bools.isDebugMode = !Bools.isDebugMode;
             if (ToggleDebugInfo != null)
@@ -184,11 +254,11 @@ namespace AstroClient.ConsoleUtils
             }
             if (Bools.isDebugMode)
             {
-                MelonLogger.Msg(": Debug Info enabled");
+                Log("Debug Info enabled", Color.Violet);
             }
             else
             {
-                MelonLogger.Msg(": Debug Info disabled");
+                Log("Debug Info disabled", Color.Violet);
             }
         }
 

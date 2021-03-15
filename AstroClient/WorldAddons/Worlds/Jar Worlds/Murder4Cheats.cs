@@ -294,7 +294,7 @@ namespace AstroClient
                 HasMurder4WorldLoaded = true;
                 if (Murder4CheatPage != null)
                 {
-                    ModConsole.Log("Recognized Murder 4's world, Unlocking Murder 4 cheats menu!", ConsoleColor.Green);
+                    ModConsole.Log("Recognized Murder 4's world, Unlocking Murder 4 cheats menu!", System.Drawing.Color.Green);
                     Murder4CheatPage.getMainButton().setIntractable(true);
                     Murder4CheatPage.getMainButton().setTextColor(Color.green);
                 }

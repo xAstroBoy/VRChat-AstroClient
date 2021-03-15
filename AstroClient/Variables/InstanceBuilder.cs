@@ -1,6 +1,7 @@
 ﻿using AstroClient.ConsoleUtils;
 using System;
 using UnityEngine;
+using Color = System.Drawing.Color;
 
 namespace AstroClient.variables
 {
@@ -10,7 +11,7 @@ namespace AstroClient.variables
 
         public static void BuildInstanceContainer()
         {
-            ModConsole.Log("Generating Instance Holder", ConsoleColor.Green);
+            ModConsole.Log("Generating Instance Holder", Color.LimeGreen);
             InstanceHolder = new GameObject();
             InstanceHolder.name = "Instance Holder " + BuildInfo.Name;
             UnityEngine.Object.DontDestroyOnLoad(InstanceHolder);
@@ -22,7 +23,7 @@ namespace AstroClient.variables
             {
                 if (instancename != "INSTANCE_OBJECT_ADDED")
                 {
-                    ModConsole.Log(instancename + " is now Added!", ConsoleColor.Yellow);
+                    ModConsole.Log(instancename + " is now Added!", Color.Orange);
                 }
                 UnityEngine.Object.DontDestroyOnLoad(InstanceHolder);
                 return InstanceHolder;

@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using VRC;
+using Color = System.Drawing.Color;
 
 #region AstroClient Imports
 
@@ -163,7 +164,7 @@ namespace AstroClient
                 }
                 else
                 {
-                    ModConsole.Log("Error : ApiUser is null", ConsoleColor.Red);
+                    ModConsole.Log("Error : ApiUser is null", Color.Red);
                 }
             }
             catch (Exception) { }
@@ -196,7 +197,7 @@ namespace AstroClient
                 }
                 else
                 {
-                    ModConsole.Log("Error : ApiUser is null", ConsoleColor.Red);
+                    ModConsole.Log("Error : ApiUser is null", Color.Red);
                 }
             }
             catch (Exception) { }

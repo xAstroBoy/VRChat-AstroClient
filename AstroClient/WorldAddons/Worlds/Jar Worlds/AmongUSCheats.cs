@@ -57,7 +57,7 @@ namespace AstroClient
                 HasAmongUsWorldLoaded = true;
                 if (AmongUsCheatsPage != null)
                 {
-                    ModConsole.Log("Recognized Among US world, Unlocking Among US cheats menu!", ConsoleColor.Green);
+                    ModConsole.Log("Recognized Among US world, Unlocking Among US cheats menu!", System.Drawing.Color.Green);
                     AmongUsCheatsPage.getMainButton().setIntractable(true);
                     AmongUsCheatsPage.getMainButton().setTextColor(Color.green);
                 }
