@@ -16,7 +16,7 @@ namespace AstroClient
     internal class ScaleEditor
     {
 
-        private static float ModifiedVectorX(GameObject obj)
+        private static float ModifiedVectorX()
         {
             if(ObjectMiscOptions.EditVectorX)
             {
@@ -28,7 +28,7 @@ namespace AstroClient
             }
         }
 
-        private static float ModifiedVectorY(GameObject obj)
+        private static float ModifiedVectorY()
         {
             if (ObjectMiscOptions.EditVectorY)
             {
@@ -40,7 +40,7 @@ namespace AstroClient
             }
         }
 
-        private static float ModifiedVectorZ(GameObject obj)
+        private static float ModifiedVectorZ()
         {
             if (ObjectMiscOptions.EditVectorZ)
             {
@@ -64,7 +64,7 @@ namespace AstroClient
                 {
                     if (increase)
                     {
-                        obj.transform.localScale = obj.transform.localScale + new Vector3(ModifiedVectorX(obj), ModifiedVectorY(obj), ModifiedVectorZ(obj));
+                        obj.transform.localScale = obj.transform.localScale + new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
                         if (obj.GetComponent<ItemInflater>() != null)
                         {
                             if (obj.GetComponent<ItemInflater>().enabled)
@@ -77,7 +77,7 @@ namespace AstroClient
                     }
                     else
                     {
-                        obj.transform.localScale = obj.transform.localScale - new Vector3(ModifiedVectorX(obj), ModifiedVectorY(obj), ModifiedVectorZ(obj));
+                        obj.transform.localScale = obj.transform.localScale - new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
                         if (obj.GetComponent<ItemInflater>() != null)
                         {
                             if (obj.GetComponent<ItemInflater>().enabled)
@@ -99,12 +99,12 @@ namespace AstroClient
                         }
                         if (increase)
                         {
-                            obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize + new Vector3(ModifiedVectorX(obj), ModifiedVectorY(obj), ModifiedVectorZ(obj));
+                            obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize + new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
                             EditUdon(obj, obj.transform.localScale);
                         }
                         else
                         {
-                            obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize - new Vector3(ModifiedVectorX(obj), ModifiedVectorY(obj), ModifiedVectorZ(obj));
+                            obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize - new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
                             EditUdon(obj, obj.transform.localScale);
                         }
                     }
@@ -119,12 +119,12 @@ namespace AstroClient
                             }
                             if (increase)
                             {
-                                obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize + new Vector3(ModifiedVectorX(obj), ModifiedVectorY(obj), ModifiedVectorZ(obj));
+                                obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize + new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
                                 EditUdon(obj, obj.transform.localScale);
                             }
                             else
                             {
-                                obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize - new Vector3(ModifiedVectorX(obj), ModifiedVectorY(obj), ModifiedVectorZ(obj));
+                                obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize - new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
                                 EditUdon(obj, obj.transform.localScale);
                             }
                         }

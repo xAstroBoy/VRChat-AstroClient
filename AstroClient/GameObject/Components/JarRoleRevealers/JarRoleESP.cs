@@ -57,11 +57,13 @@ namespace AstroClient.components
                 if (JarRoleController.ViewRoles)
                 {
                     SetTag(NoRoles, DefaultTextColor, NoRolesColor);
+                    GameRoleTag.ShowTag = false;
 
                 }
                 else
                 {
                     SetTag(HiddenRole, DefaultTextColor, HiddenRolesColor);
+                    GameRoleTag.ShowTag = false;
                 }
                 if (JarRoleController.IsMurder4World)
                 {
@@ -396,9 +398,9 @@ namespace AstroClient.components
 
                 if (GameRoleTag != null)
                 {
-                    if (!GameRoleTag.gameObject.active)
+                    if(GameRoleTag.ShowTag != JarRoleController.ViewRoles)
                     {
-                        GameRoleTag.gameObject.SetActive(true); // KEEP IT ENABLED!
+                        GameRoleTag.ShowTag = JarRoleController.ViewRoles;
                     }
                 }
 

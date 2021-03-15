@@ -186,9 +186,9 @@ namespace AstroClient.components
                 }
                 if (SpawnedTag != null)
                 {
-                    if (!SpawnedTag.gameObject.active)
+                    if (SpawnedTag.gameObject.active != ShowTag)
                     {
-                        SpawnedTag.gameObject.SetActive(true);
+                        SpawnedTag.gameObject.SetActive(ShowTag);
                     }
 
 
@@ -284,5 +284,7 @@ namespace AstroClient.components
         private ImageThreeSlice SpawnedStatsImage;
 
         internal Color Tag_Color = Color.grey;
+
+        internal bool ShowTag = true;
     }
 }
