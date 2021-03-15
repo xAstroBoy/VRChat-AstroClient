@@ -60,7 +60,7 @@ namespace AstroClient.ConsoleUtils
         {
             if (textcolor == null)
             {
-                textcolor = Color.White;
+                textcolor = Color.PapayaWhip;
             }
             PrintTags(LogTypes.LOG);
             PrintLine(msg, textcolor.Value);
@@ -69,7 +69,7 @@ namespace AstroClient.ConsoleUtils
         {
             if (textcolor == null)
             {
-                textcolor = Color.White;
+                textcolor = Color.Yellow;
             }
             PrintTags(LogTypes.WARNING);
             PrintLine(msg, textcolor.Value);
@@ -79,7 +79,7 @@ namespace AstroClient.ConsoleUtils
         {
             if (textcolor == null)
             {
-                textcolor = Color.White;
+                textcolor = Color.Red;
             }
             PrintTags(LogTypes.ERROR);
             PrintLine(msg, textcolor.Value);
@@ -93,7 +93,7 @@ namespace AstroClient.ConsoleUtils
             }
             if (textcolor == null)
             {
-                textcolor = Color.White;
+                textcolor = Color.PapayaWhip;
             }
             PrintTags(LogTypes.DEBUG_LOG);
             PrintLine(msg, textcolor.Value);
@@ -107,7 +107,7 @@ namespace AstroClient.ConsoleUtils
             }
             if (textcolor == null)
             {
-                textcolor = Color.White;
+                textcolor = Color.Yellow;
             }
             PrintTags(LogTypes.DEBUG_LOG);
             PrintLine(msg, textcolor.Value);
@@ -122,7 +122,7 @@ namespace AstroClient.ConsoleUtils
             }
             if (textcolor == null)
             {
-                textcolor = Color.White;
+                textcolor = Color.Red;
             }
             PrintTags(LogTypes.DEBUG_LOG);
             PrintLine(msg, textcolor.Value);
@@ -136,7 +136,7 @@ namespace AstroClient.ConsoleUtils
             }
             if (color == null)
             {
-                color = Color.White;
+                color = Color.Red;
             }
 
 
@@ -186,7 +186,7 @@ namespace AstroClient.ConsoleUtils
         {
             Console.Write("[", Color.White);
             Console.Write("LOG", Color.Aqua);
-            Console.Write("] ", Color.White);
+            Console.Write("]: ", Color.White);
         }
 
 
@@ -194,14 +194,14 @@ namespace AstroClient.ConsoleUtils
         {
             Console.Write("[", Color.White);
             Console.Write("WARNING", Color.Orange);
-            Console.Write("] ", Color.White);
+            Console.Write("]: ", Color.White);
         }
 
         private static void PrintErrorTag()
         {
             Console.Write("[", Color.White);
             Console.Write("ERROR", Color.Red);
-            Console.Write("] ", Color.White);
+            Console.Write("]: ", Color.White);
         }
 
 
@@ -211,14 +211,14 @@ namespace AstroClient.ConsoleUtils
         {
             Console.Write("[", Color.White);
             Console.Write("DEBUG LOG", Color.Aquamarine);
-            Console.Write("] ", Color.White);
+            Console.Write("]: ", Color.White);
         }
 
         private static void PrintDebugWarningTag()
         {
             Console.Write("[", Color.White);
             Console.Write("DEBUG WARNING", Color.Orange);
-            Console.Write("] ", Color.White);
+            Console.Write("]: ", Color.White);
         }
 
 
@@ -226,7 +226,7 @@ namespace AstroClient.ConsoleUtils
         {
             Console.Write("[", Color.White);
             Console.Write("DEBUG ERROR", Color.Red);
-            Console.Write("] ", Color.White);
+            Console.Write("]: ", Color.White);
         }
 
         private static void PrintModStamp()
@@ -240,7 +240,7 @@ namespace AstroClient.ConsoleUtils
         {
             string time = DateTime.Now.ToString("HH:mm:ss.fff");
             Console.Write("[", Color.White);
-            Console.Write(time, Color.Green);
+            Console.Write(time, Color.LightGreen);
             Console.Write("] ", Color.White);
         }
     

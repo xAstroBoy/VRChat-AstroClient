@@ -47,6 +47,8 @@
     <Compile Include="Console\ColorfulConsole\GradientGenerator.cs" />
     <Compile Include="Console\ColorfulConsole\IPrototypable.cs" />
     <Compile Include="Console\ColorfulConsole\MatchLocation.cs" />
+    <Compile Include="Console\ColorfulConsole\NativeMethods.cs" />
+    <Compile Include="Console\ColorfulConsole\OperationSystemDetector.cs" />
     <Compile Include="Console\ColorfulConsole\Pattern.cs" />
     <Compile Include="Console\ColorfulConsole\PatternBasedColorAlternator.cs" />
     <Compile Include="Console\ColorfulConsole\PatternCollection.cs" />
@@ -59,6 +61,8 @@
     <Compile Include="Console\ColorfulConsole\TextFormatter.cs" />
     <Compile Include="Console\ColorfulConsole\TextPattern.cs" />
     <Compile Include="Console\ColorfulConsole\TextPatternCollection.cs" />
+    <Compile Include="Console\ColorfulConsole\VirtualTerminalConsole.cs" />
+    <Compile Include="Console\ColorfulConsole\VirtualTerminalSequences.cs" />
     <Compile Include="DayOfThePlay\Extensions\CameraExtension.cs" />
     <Compile Include="DayOfThePlay\Extensions\MiskExtension.cs" />
     <Compile Include="DayOfThePlay\Extensions\ModerationManagerExtension.cs" />

@@ -10,8 +10,7 @@ using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using VRC;
 using UnityEngine.UI;
-using Color = System.Drawing.Color;
-
+using Console = Colorful.Console;
 using AstroClient.components;
 
 #region AstroClient Imports
@@ -159,9 +158,12 @@ namespace AstroClient
         }
 
 
+
+
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
-            Console.ResetColor();
+            Console.ReplaceAllColorsWithDefaults();
+
             switch (buildIndex)
             {
                 case 0: // app
@@ -393,9 +395,9 @@ namespace AstroClient
 
         private static void OnFadeToEvent()
         {
-            ModConsole.Log("You entered this world : " + WorldUtils.GetWorldName(), System.Drawing.Color.CadetBlue);
-            ModConsole.Log("World ID : " + WorldUtils.GetWorldID(), System.Drawing.Color.CadetBlue);
-            ModConsole.Log("World Asset URL : " + WorldUtils.GetWorldAssetURL(), System.Drawing.Color.CadetBlue);
+            ModConsole.Log("You entered this world : " + WorldUtils.GetWorldName(), System.Drawing.Color.Goldenrod);
+            ModConsole.Log("World ID : " + WorldUtils.GetWorldID(), System.Drawing.Color.Goldenrod);
+            ModConsole.Log("World Asset URL : " + WorldUtils.GetWorldAssetURL(), System.Drawing.Color.Goldenrod);
             MelonCoroutines.Start(OnWorldReveal());
         }
 
