@@ -16,15 +16,15 @@ namespace AstroClient.variables
             ScaleCheck.Clear();
         }
 
-        public class CachedUdonEvents
+        public class CachedUdonEvent
         {
             public UdonBehaviour Action { get; set; }
-            public string Key { get; set; }
+            public string EventKey { get; set; }
 
-            public CachedUdonEvents(UdonBehaviour Action, string Key)
+            public CachedUdonEvent(UdonBehaviour Action, string Key)
             {
                 this.Action = Action;
-                this.Key = Key;
+                this.EventKey = Key;
             }
         }
 

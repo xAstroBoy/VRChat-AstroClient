@@ -24,7 +24,7 @@ namespace AstroClient
             }
             else
             {
-                return obj.transform.localScale.x;
+                return 0;
             }
         }
 
@@ -36,7 +36,7 @@ namespace AstroClient
             }
             else
             {
-                return obj.transform.localScale.y;
+                return 0;
             }
         }
 
@@ -48,7 +48,7 @@ namespace AstroClient
             }
             else
             {
-                return obj.transform.localScale.z;
+                return 0;
             }
         }
 

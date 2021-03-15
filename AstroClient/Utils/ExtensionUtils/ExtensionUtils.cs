@@ -19,6 +19,7 @@ using DayClientML2.Utility.Extensions;
 using AstroClient.AstroUtils.ItemTweaker;
 using static AstroClient.Forces;
 using VRC.SDK3.Components;
+using static AstroClient.variables.CustomLists;
 
 #endregion AstroClient Imports
 
@@ -1090,6 +1091,30 @@ namespace AstroClient.extensions
                 ItemPosition.TeleportObject(obj);
             }
         }
+
+
+        public static void ExecuteUdonEvent(this CachedUdonEvent cachedudon)
+        {
+            if(cachedudon.Action != null)
+            {
+                cachedudon.Action.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, cachedudon.EventKey);
+            }
+
+        }
+
+
+        public static void ExecuteUdonEvent(this List<CachedUdonEvent> cachedudons)
+        {
+            foreach (var cachedudon in cachedudons)
+            {
+                if (cachedudon.Action != null)
+                {
+                    cachedudon.Action.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, cachedudon.EventKey);
+                }
+            }
+
+        }
+
 
         public static void AddString(this List<string> list, string text)
         {

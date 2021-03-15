@@ -20,6 +20,8 @@ using System.Threading;
 using AstroClient.UdonExploits;
 using AstroClient.ButtonShortcut;
 using AstroClient.Variables;
+using static AstroClient.variables.CustomLists;
+using VRC.Udon;
 #endregion AstroClient Imports
 
 namespace AstroClient
@@ -171,6 +173,24 @@ namespace AstroClient
             item_Silenced_Revolver_0 = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Luger (0)");
             item_Silenced_Revolver_1 = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Luger (1)");
             item_Grenade = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Frag (0)");
+
+
+            foreach (var action in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+            {
+                if (action.gameObject.name == "Game Logic")
+                {
+                    foreach (var subaction in action._eventTable)
+                    {
+                        if(subaction.key == "OnPlayerUnlockedClues")
+                        {
+                            OnPlayerUnlockedClues = new CachedUdonEvent(action, subaction.key);
+                            ModConsole.Log("Found Unlocked Clues Sound.");
+                            break;
+                        }
+                    }
+                }
+            }
+
 
             item_Grenade.RenameObject("Grenade");
             item_Silenced_Revolver_0.RenameObject("Silenced Revolver");
@@ -328,6 +348,8 @@ namespace AstroClient
             Grenades.Clear();
             PatreonFlairtoggle = null;
             isChristmasMode = false;
+            DoUnlockedSound = false;
+            OnPlayerUnlockedClues = null;
         }
 
         public static void Murder4CheatsButtons(QMNestedButton submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
@@ -347,10 +369,12 @@ namespace AstroClient
             {
                 PresentTeleporter = new QMSingleButton(MurderItemTeleporter, 1, 3, "Present!", new Action(() => { Clue_Present.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
             }
-            new QMSingleButton(MurderItemTeleporter, 2, 0, "Shotgun!", new Action(() => { item_Shotgun.TeleportToMe(); }), "Shotgun Gun Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 2, 0.5f, "Detective Gun!", new Action(() => { item_DetectiveRevolver.TeleportToMe(); }), "Detective Gun Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 2, 1, "Grenade!", new Action(() => { item_Grenade.TeleportToMe(); }), "Grenade Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 2, 1.5f, "Traps!", new Action(() => { BearTraps.TeleportToMe(); }), "Silenced Gun Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 2, 0, "Shotgun!", new Action(() => { item_Shotgun.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Shotgun Gun Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 2, 0.5f, "Detective Gun!", new Action(() => { item_DetectiveRevolver.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Detective Gun Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 2, 1, "Grenade!", new Action(() => { item_Grenade.TeleportToMe();  if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Grenade Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 2, 1.5f, "Traps!", new Action(() => { BearTraps.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Silenced Gun Teleporter!", null, null, true);
+
+            DoUnlockedSoundbtn = new QMSingleToggleButton(MurderItemTeleporter, 4, 0, "Do Sound", new Action(() => { DoUnlockedSound = true; }), "Quiet Mode", new Action(() => { DoUnlockedSound = false; }), "Should i run the Sound action on pickups teleport.", Color.green, Color.red, null, false, true);
             #endregion
 
 
@@ -545,6 +569,26 @@ namespace AstroClient
         private static QMSingleButton PresentSpawner;
         private static QMSingleButton PresentClicker;
 
+        private static QMSingleToggleButton DoUnlockedSoundbtn;
+
+        private static bool _DoUnlockedSound;
+
+        public static bool DoUnlockedSound
+        {
+            get
+            {
+                return _DoUnlockedSound;
+            }
+            set
+            {
+                _DoUnlockedSound = value;
+                if(DoUnlockedSoundbtn != null)
+                {
+                    DoUnlockedSoundbtn.setToggleState(value);
+                }
+            }
+        }
+
 
         public static QMSingleToggleButton KnifesGrabbableToggle;
 
@@ -615,6 +659,8 @@ namespace AstroClient
         public static List<GameObject> Grenades = new List<GameObject>();
 
         public static QMNestedButton Murder4CheatPage;
+
+        public static CachedUdonEvent OnPlayerUnlockedClues; 
 
         public static bool HasMurder4WorldLoaded = false;
 
