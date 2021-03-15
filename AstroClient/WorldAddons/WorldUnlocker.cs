@@ -16,8 +16,8 @@ namespace AstroClient.Worlds
             {
                 ModConsole.Log("Recognized Meroom, Spawning Lockpick Trigger.");
 
-                var PrivateRoomSwitchTrigger = GameObjectFinder.Find("Private room/Switch /switch (1)/trigger");
-                var DisplaySwitchTrigger = GameObjectFinder.Find("Living room/Switch/switch/trigger");
+                var PrivateRoomSwitchTrigger = GameObjectFinder.Find("Private room/Button/switch");
+                var DisplaySwitchTrigger = GameObjectFinder.Find("Living room/Button/switch (1)");
                 if (PrivateRoomSwitchTrigger == null)
                 {
                     ModConsole.Log("Failed to Find Private Room Switch, Has MeRoom World updated?", ConsoleColor.Red);
