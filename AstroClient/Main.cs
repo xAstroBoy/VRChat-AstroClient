@@ -67,7 +67,7 @@ namespace AstroClient
         {
             FigletFont font = FigletFont.LoadFromAssembly("Larry3D.flf");
             Figlet Logo = new Figlet(font);
-            Console.WriteWithGradient(Logo.ToAscii(BuildInfo.Name).ToString(), System.Drawing.Color.Cyan, System.Drawing.Color.DeepSkyBlue, 16);
+            Console.WriteWithGradient(Logo.ToAscii(BuildInfo.Name).ToString(), System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue, 16);
         }
 
 
