@@ -324,6 +324,8 @@ namespace Colorful
 
         private static void DoWithGradient<T>(Action<object, Color> writeAction, IEnumerable<T> input, Color startColor, Color endColor, int maxColorsInGradient)
         {
+            var oldSystemColor = ForegroundColor;
+
             GradientGenerator generator = new GradientGenerator();
             List<StyleClass<T>> gradient = generator.GenerateGradient(input, startColor, endColor, maxColorsInGradient);
 
@@ -331,6 +333,8 @@ namespace Colorful
             {
                 writeAction(item.Target, item.Color);
             }
+
+            ForegroundColor = oldSystemColor;
         }
 
         private static Figlet GetFiglet(FigletFont font = null)

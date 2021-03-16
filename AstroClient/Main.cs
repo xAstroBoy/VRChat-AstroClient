@@ -11,6 +11,7 @@ using UnityEngine;
 using VRC;
 using UnityEngine.UI;
 using Console = Colorful.Console;
+using Color = System.Drawing.Color;
 using AstroClient.components;
 
 #region AstroClient Imports
@@ -40,6 +41,7 @@ using Microsoft.Win32;
 using System.Linq;
 using AstroClient.UdonExploits;
 using AstroClient.ButtonShortcut;
+using Colorful;
 #endregion AstroClient Imports
 
 namespace AstroClient
@@ -59,7 +61,14 @@ namespace AstroClient
 
 
         // Thanks Kirai <3
+        // LETS TEST
 
+        public static void GradientThing()
+        {
+            FigletFont font = FigletFont.LoadFromAssembly("Larry3D.flf");
+            Figlet Logo = new Figlet(font);
+            Console.WriteWithGradient(Logo.ToAscii(BuildInfo.Name).ToString(), System.Drawing.Color.Cyan, System.Drawing.Color.DeepSkyBlue, 16);
+        }
 
 
 
@@ -67,7 +76,15 @@ namespace AstroClient
 
         public override void OnApplicationStart()
         {
-
+            try
+            {
+                GradientThing();
+                Console.ReplaceAllColorsWithDefaults();
+            }
+            catch(Exception e)
+            {
+                ModConsole.Error("Failed To generate Gradient, the Embeded file doesn't exist!");
+            }
             ComponentHelper.RegisterComponents();
             HookFadeTo();
             HookSpawnEmojiRPC();

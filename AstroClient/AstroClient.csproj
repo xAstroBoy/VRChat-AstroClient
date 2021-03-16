@@ -804,6 +804,8 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <EmbeddedResource Include="Figlet\Larry3D.flf" />
+    <EmbeddedResource Include="Figlet\Bloody.flf" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

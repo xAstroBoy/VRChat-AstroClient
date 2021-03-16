@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
 
     public class FigletFont
     {
@@ -63,6 +64,20 @@
 
             return Parse(File.ReadLines(filePath));
         }
+
+
+        public static FigletFont LoadFromAssembly(string filename)
+        {
+           string resourceName = Assembly.GetExecutingAssembly().GetManifestResourceNames().Single(str => str.EndsWith(filename));
+            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
+            if (stream == null) { throw new ArgumentNullException(nameof(stream)); }
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                return Parse(reader.ReadToEnd());
+            }
+            return null;
+        }
+
 
         public static FigletFont Parse(string fontContent)
         {
