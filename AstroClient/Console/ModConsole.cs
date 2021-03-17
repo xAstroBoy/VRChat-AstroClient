@@ -7,13 +7,14 @@ using System;
 using Console = Colorful.Console;
 using System.Drawing;
 using System.IO;
+using System.Collections;
 
 namespace AstroClient.ConsoleUtils
 {
     public class ModConsole
     {
 
-
+        private static StreamWriter LogWrite;
         private static bool HasRenamedOldLogFile = false;
 
 
@@ -64,7 +65,7 @@ namespace AstroClient.ConsoleUtils
         }
 
 
-        public static void Write(string text)
+        public static void OnApplicationStart()
         {
             if (!Directory.Exists(LogsPath))
             {
@@ -75,10 +76,19 @@ namespace AstroClient.ConsoleUtils
                 ReplaceOldLatestFile();
                 HasRenamedOldLogFile = true;
             }
-            File.AppendAllText(LatestLogFile, text);
-
         }
 
+        public static void Write(string msg)
+        {
+            MelonCoroutines.Start(InternalWrite(msg));
+        }
+
+
+        private static IEnumerator InternalWrite(string msg)
+        {
+            File.AppendAllText(LatestLogFile, msg);
+            yield return null;
+        }
 
 
 
@@ -224,6 +234,7 @@ namespace AstroClient.ConsoleUtils
         {
             Console.Write(msg + Environment.NewLine, color.Value);
             Write(msg + Environment.NewLine);
+            
         }
 
         private static void PrintTags(LogTypes logType = LogTypes.LOG)

@@ -76,8 +76,10 @@ namespace AstroClient
 
         public override void OnApplicationStart()
         {
+            ModConsole.OnApplicationStart();
             try
             {
+                Console.ReplaceAllColorsWithDefaults();
                 GradientThing();
                 Console.ReplaceAllColorsWithDefaults();
             }
