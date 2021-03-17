@@ -6,11 +6,82 @@ using Colorful;
 using System;
 using Console = Colorful.Console;
 using System.Drawing;
+using System.IO;
 
 namespace AstroClient.ConsoleUtils
 {
     public class ModConsole
     {
+
+
+        private static bool HasRenamedOldLogFile = false;
+
+
+        private static string LogsPath
+        {
+            get
+            {
+                return Path.Combine(Environment.CurrentDirectory, $"External Logs\\{BuildInfo.Name}");
+            }
+        }
+
+        private static string LatestLogFile
+        {
+            get
+            {
+                return Path.Combine(LogsPath, BuildInfo.Name + "_Latest.log");
+            }
+        }
+
+        private static int LogInt = 0;
+
+        private static int GetCurrentInt()
+        {
+            return LogInt++;
+        }
+
+        public static string GetNewFileName()
+        {
+            var result = GetCurrentInt();
+            var newfilename = BuildInfo.Name + "_Log_" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year + "_" + result + ".log";
+            if (!File.Exists(Path.Combine(LogsPath, newfilename)))
+            {
+                return Path.Combine(LogsPath, newfilename);
+            }
+            else
+            {
+                return GetNewFileName();
+            }
+        }
+
+        public static void ReplaceOldLatestFile()
+        {
+            var tmp = GetNewFileName();
+            if (File.Exists(LatestLogFile))
+            {
+                File.Move(LatestLogFile, tmp);
+            }
+        }
+
+
+        public static void Write(string text)
+        {
+            if (!Directory.Exists(LogsPath))
+            {
+                Directory.CreateDirectory(LogsPath);
+            }
+            if (!HasRenamedOldLogFile)
+            {
+                ReplaceOldLatestFile();
+                HasRenamedOldLogFile = true;
+            }
+            File.AppendAllText(LatestLogFile, text);
+
+        }
+
+
+
+
         public enum LogTypes
         {
             LOG,
@@ -152,6 +223,7 @@ namespace AstroClient.ConsoleUtils
         public static void PrintLine(string msg = "", Color? color = null)
         {
             Console.Write(msg + Environment.NewLine, color.Value);
+            Write(msg + Environment.NewLine);
         }
 
         private static void PrintTags(LogTypes logType = LogTypes.LOG)
@@ -187,6 +259,7 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write("LOG", Color.Aqua);
             Console.Write("]: ", Color.White);
+            Write("[LOG]: ");
         }
 
 
@@ -195,6 +268,8 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write("WARNING", Color.Orange);
             Console.Write("]: ", Color.White);
+            Write("[WARNING]: ");
+
         }
 
         private static void PrintErrorTag()
@@ -202,6 +277,8 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write("ERROR", Color.Red);
             Console.Write("]: ", Color.White);
+            Write("[ERROR]: ");
+
         }
 
 
@@ -212,6 +289,8 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write("DEBUG LOG", Color.Aquamarine);
             Console.Write("]: ", Color.White);
+            Write("[DEBUG LOG]: ");
+
         }
 
         private static void PrintDebugWarningTag()
@@ -219,6 +298,8 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write("DEBUG WARNING", Color.Orange);
             Console.Write("]: ", Color.White);
+            Write("[DEBUG WARNING]: ");
+
         }
 
 
@@ -227,6 +308,8 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write("DEBUG ERROR", Color.Red);
             Console.Write("]: ", Color.White);
+            Write("[DEBUG ERROR]: ");
+
         }
 
         private static void PrintModStamp()
@@ -234,6 +317,8 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write(BuildInfo.Name, Color.Gold);
             Console.Write("] ", Color.White);
+            Write($"[{BuildInfo.Name}] ");
+
         }
 
         private static void PrintTimestamp()
@@ -242,10 +327,12 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write(time, Color.LightGreen);
             Console.Write("] ", Color.White);
-        }
-    
+            Write($"[{time}] ");
 
-    public static void ToggleConsole()
+        }
+
+
+        public static void ToggleConsole()
         {
             Bools.isDebugMode = !Bools.isDebugMode;
             if (ToggleDebugInfo != null)
@@ -269,6 +356,8 @@ namespace AstroClient.ConsoleUtils
                 ToggleDebugInfo.setToggleState(Bools.isDebugMode);
             }
         }
+        
+
 
         public static QMToggleButton ToggleDebugInfo;
     }
