@@ -83,13 +83,14 @@ namespace AstroClient.ConsoleUtils
 
         public static void Write(string msg)
         {
+            Task.Run(() => File.AppendAllText(LatestLogFile, msg));
             MelonCoroutines.Start(InternalWrite(msg));
         }
 
 
         private static IEnumerator InternalWrite(string msg)
         {
-            File.AppendAllText(LatestLogFile, msg);
+            
             yield return null;
         }
 
