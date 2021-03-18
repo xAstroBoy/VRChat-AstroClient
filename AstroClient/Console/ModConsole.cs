@@ -5,6 +5,7 @@ using Console = CheetosConsole.Console;
 using System.Drawing;
 using System.IO;
 using System.Collections;
+using System.Threading.Tasks;
 
 namespace AstroClient.ConsoleUtils
 {
@@ -84,7 +85,6 @@ namespace AstroClient.ConsoleUtils
         public static void Write(string msg)
         {
             Task.Run(() => File.AppendAllText(LatestLogFile, msg));
-            MelonCoroutines.Start(InternalWrite(msg));
         }
 
 
@@ -236,6 +236,7 @@ namespace AstroClient.ConsoleUtils
 
         public static void PrintLine(string msg = "", Color? color = null)
         {
+
             Console.Write(msg + Environment.NewLine, color.Value);
             Write(msg + Environment.NewLine);
             
