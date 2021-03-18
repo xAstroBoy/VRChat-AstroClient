@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-
-namespace Colorful
+﻿namespace CheetosConsole
 {
+    using System;
+    using System.Runtime.InteropServices;
+
     internal static class NativeMethods
     {
         private const string Kernel32 = "kernel32.dll";

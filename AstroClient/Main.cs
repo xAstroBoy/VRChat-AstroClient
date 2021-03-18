@@ -10,7 +10,7 @@ using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
 using VRC;
 using UnityEngine.UI;
-using Console = Colorful.Console;
+using Console = CheetosConsole.Console;
 using Color = System.Drawing.Color;
 using AstroClient.components;
 
@@ -41,7 +41,7 @@ using Microsoft.Win32;
 using System.Linq;
 using AstroClient.UdonExploits;
 using AstroClient.ButtonShortcut;
-using Colorful;
+using CheetosConsole;
 #endregion AstroClient Imports
 
 namespace AstroClient
@@ -63,12 +63,6 @@ namespace AstroClient
         // Thanks Kirai <3
         // LETS TEST
 
-        public static void GradientThing()
-        {
-            FigletFont font = FigletFont.LoadFromAssembly("Larry3D.flf");
-            Figlet Logo = new Figlet(font);
-            Console.WriteWithGradient(Logo.ToAscii(BuildInfo.Name).ToString(), System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue, 16);
-        }
 
 
 
@@ -79,13 +73,12 @@ namespace AstroClient
             ModConsole.OnApplicationStart();
             try
             {
-                Console.ReplaceAllColorsWithDefaults();
-                GradientThing();
-                Console.ReplaceAllColorsWithDefaults();
+                Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ModConsole.Error("Failed To generate Gradient, the Embeded file doesn't exist!");
+                ModConsole.ErrorExc(e);
             }
             ComponentHelper.RegisterComponents();
             HookFadeTo();
@@ -181,8 +174,6 @@ namespace AstroClient
 
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
-            Console.ReplaceAllColorsWithDefaults();
-
             switch (buildIndex)
             {
                 case 0: // app

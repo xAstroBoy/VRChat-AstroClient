@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Colorful
+namespace CheetosConsole
 {
     // NOTE: The StyledString class is meant to replace a number of instances of System.String in this project.  
     //       However, it's currently only used in the WriteLineStyled method, becuase I'd like to have better
@@ -68,7 +68,7 @@ namespace Colorful
         }
 
         public override bool Equals(object obj) => Equals(obj as StyledString);
-       
+
         // Does not take styling information into account...and it needs to be taken into account.
         public override int GetHashCode()
         {

@@ -1,4 +1,4 @@
-﻿namespace Colorful
+﻿namespace CheetosConsole
 {
     public sealed class DefaultFonts
     {

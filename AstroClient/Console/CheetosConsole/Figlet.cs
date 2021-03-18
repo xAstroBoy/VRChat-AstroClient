@@ -1,4 +1,4 @@
-﻿namespace Colorful
+﻿namespace CheetosConsole
 {
     using System;
     using System.Text;
@@ -38,7 +38,7 @@
             {
                 int runningWidthTotal = 0;
 
-                for (int c = 0; c < value.Length; c++) 
+                for (int c = 0; c < value.Length; c++)
                 {
                     char character = value[c];
                     string fragment = GetCharacter(font, character, line);

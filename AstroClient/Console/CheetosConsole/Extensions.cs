@@ -1,9 +1,23 @@
-﻿using System.Collections.Generic;
-
-namespace Colorful
+﻿namespace CheetosConsole
 {
-    internal static class ExtensionMethods
+    using System;
+    using System.Collections.Generic;
+
+    public static class Extensions
     {
+        public static System.Drawing.Color ToDrawingColor(this ConsoleColor c)
+        {
+            int cInt = (int)c;
+
+            int brightnessCoefficient = ((cInt & 8) > 0) ? 2 : 1;
+            int r = ((cInt & 4) > 0) ? 64 * brightnessCoefficient : 0;
+            int g = ((cInt & 2) > 0) ? 64 * brightnessCoefficient : 0;
+            int b = ((cInt & 1) > 0) ? 64 * brightnessCoefficient : 0;
+
+            return System.Drawing.Color.FromArgb(r, g, b);
+        }
+
+        /**
         internal static IEnumerable<T> Prototype<T>(this IEnumerable<T> input) where T : IPrototypable<T>
         {
             foreach (T item in input)
@@ -11,6 +25,7 @@ namespace Colorful
                 yield return item.Prototype();
             }
         }
+        **/
 
         internal static IEnumerable<T> DeepCopy<T>(this IEnumerable<T> input) where T : struct
         {

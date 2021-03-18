@@ -1,7 +1,7 @@
 ﻿using AstroClient.variables;
 using MelonLoader;
 using System;
-using Console = Colorful.Console;
+using Console = CheetosConsole.Console;
 using System.Drawing;
 using System.IO;
 using System.Collections;

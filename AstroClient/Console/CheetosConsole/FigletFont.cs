@@ -1,4 +1,4 @@
-﻿namespace Colorful
+﻿namespace CheetosConsole
 {
     using System;
     using System.Collections.Generic;
@@ -60,30 +60,14 @@
 
         public static FigletFont Load(string filePath)
         {
-            if (filePath == null) { throw new ArgumentNullException(nameof(filePath)); }
-
-            return Parse(File.ReadLines(filePath));
+            return filePath == null ? throw new ArgumentNullException(nameof(filePath)) : Parse(File.ReadLines(filePath));
         }
-
-
-        public static FigletFont LoadFromAssembly(string filename)
-        {
-           string resourceName = Assembly.GetExecutingAssembly().GetManifestResourceNames().Single(str => str.EndsWith(filename));
-            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
-            if (stream == null) { throw new ArgumentNullException(nameof(stream)); }
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                return Parse(reader.ReadToEnd());
-            }
-            return null;
-        }
-
 
         public static FigletFont Parse(string fontContent)
         {
-            if (fontContent == null) { throw new ArgumentNullException(nameof(fontContent)); }
-
-            return Parse(fontContent.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None));
+            return fontContent == null
+                ? throw new ArgumentNullException(nameof(fontContent))
+                : Parse(fontContent.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None));
         }
 
         public static FigletFont Parse(IEnumerable<string> fontLines)
@@ -111,6 +95,18 @@
             }
 
             return font;
+        }
+
+        public static FigletFont LoadFromAssembly(string filename)
+        {
+            string resourceName = Assembly.GetExecutingAssembly().GetManifestResourceNames().Single(str => str.EndsWith(filename));
+            Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName);
+            if (stream == null) { throw new ArgumentNullException(nameof(stream)); }
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                return Parse(reader.ReadToEnd());
+            }
+            return null;
         }
 
         private static int ParseIntValue(string[] values, int index)
