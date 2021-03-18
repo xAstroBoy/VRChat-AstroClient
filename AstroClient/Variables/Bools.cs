@@ -1,10 +1,36 @@
-﻿namespace AstroClient.variables
+﻿using AstroClient.ConsoleUtils;
+
+namespace AstroClient.variables
 {
     public class Bools
     {
         internal static bool DisableNSFWMenu = true;
 
-        internal static bool isDebugMode = false;
+        private static bool _isDebugMode = false;
+
+        internal static bool isDebugMode
+        {
+            get
+            {
+                return _isDebugMode;
+            }
+            set
+            {
+                _isDebugMode = value;
+                if (Main.ToggleDebugInfo != null)
+                {
+                    Main.ToggleDebugInfo.setToggleState(value);
+                }
+                if (value)
+                {
+                    ModConsole.Log("Debug Info Enabled", System.Drawing.Color.Green);
+                }
+                else
+                {
+                    ModConsole.Log("Debug Info disabled", System.Drawing.Color.Red);
+                }
+            }
+        }
 
         internal static bool SkipMenuChecks = true;
 

@@ -244,30 +244,6 @@ namespace AstroClient
 
         }
 
-
-        //private static bool DoOnce = false;
-        public static void Test()
-        {
-            //if (!DoOnce)
-            //{
-            //    ModConsole.Log("Checking if you are protected...");
-            //    try
-            //    {
-            //        HarmonyInstance.UnpatchAllInstances();
-            //    }
-            //    catch(Exception e)
-            //    {
-            //        if(e.Message == "You tried fam, but this is protected")
-            //        {
-            //            ModConsole.Log("Protected, Failed to unpatch Harmony Patches.");
-                        
-            //        }
-            //        ModConsole.LogExc(e);
-            //        return;
-            //    }
-            //    ModConsole.Log("You aren't protected...");
-            //}
-        }
         private static IEnumerator OnWorldReveal()
         {
             ObjectMiscOptions.OnWorldReveal();
@@ -288,12 +264,10 @@ namespace AstroClient
 
         private static IEnumerator OnLevelLoadEvents()
         {
-            Test();
             SingleTagsUtils.OnLevelLoad();
             ItemTweakerMain.OnLevelLoad();
             ObjectCloner.OnLevelLoad();
             HandsUtils.OnLevelLoad();
-            ModConsole.OnLevelLoad();
             CrazyObjectManager.OnLevelLoad();
             ItemInflaterManager.OnLevelLoad();
             ObjectSpinnerManager.OnLevelLoad();
@@ -322,6 +296,10 @@ namespace AstroClient
             JarRoleController.OnLevelLoad();
             GameObjMenu.OnLevelLoad();
             Headlight.Headlight.OnLevelLoad();
+            if (ToggleDebugInfo != null)
+            {
+                ToggleDebugInfo.setToggleState(Bools.isDebugMode);
+            }
             yield break;
         }
 
@@ -354,7 +332,7 @@ namespace AstroClient
         public static void InitMainsButtons(float x, float y, bool btnHalf)
         {
             QMNestedButton AstroClient = new QMNestedButton("ShortcutMenu", x, y, "AstroClient Menu", "AstroClient Menu", null, null, null, null, btnHalf);  // Menu Main Button
-            ConsoleUtils.ModConsole.ToggleDebugInfo = new QMToggleButton(AstroClient, 4, 2, "Debug Console ON", new Action(ConsoleUtils.ModConsole.ToggleConsole), "Debug Console OFF", new Action(ConsoleUtils.ModConsole.ToggleConsole), "Shows Client Details in Melonloader's console", null, null, null, false);
+            ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", new Action(() => { Bools.isDebugMode = true;}), "Debug Console OFF", new Action(() => { Bools.isDebugMode = false; }), "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
             WorldAddons.InitButtons(AstroClient, 1, 0, true);
             LightControl.InitButtons(AstroClient, 1, 0.5f, true);
             Movement.InitButtons(AstroClient, 1, 1, true);
@@ -368,6 +346,10 @@ namespace AstroClient
             VRC_InteractableSubMenu(AstroClient, 2, 2, true);
             Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
         }
+
+        public static QMSingleToggleButton ToggleDebugInfo;
+
+
 
         public static void TriggerSubMenu(QMNestedButton main, float x, float y, bool btnHalf)
         {

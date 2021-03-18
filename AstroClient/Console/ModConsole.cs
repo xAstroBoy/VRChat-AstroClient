@@ -1,8 +1,5 @@
 ﻿using AstroClient.variables;
-using Il2CppSystem.Text.RegularExpressions;
 using MelonLoader;
-using RubyButtonAPI;
-using Colorful;
 using System;
 using Console = Colorful.Console;
 using System.Drawing;
@@ -13,9 +10,15 @@ namespace AstroClient.ConsoleUtils
 {
     public class ModConsole
     {
-
-        private static StreamWriter LogWrite;
         private static bool HasRenamedOldLogFile = false;
+
+        private static bool DebugMode
+        {
+            get
+            {
+                return Bools.isDebugMode;
+            }
+        }
 
 
         private static string LogsPath
@@ -44,7 +47,7 @@ namespace AstroClient.ConsoleUtils
         public static string GetNewFileName()
         {
             var result = GetCurrentInt();
-            var newfilename = BuildInfo.Name + "_Log_" + DateTime.Now.Day + "_" + DateTime.Now.Month + "_" + DateTime.Now.Year + "_" + result + ".log";
+            var newfilename = BuildInfo.Name + "-Log-" + DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + " (" + result + ").log";
             if (!File.Exists(Path.Combine(LogsPath, newfilename)))
             {
                 return Path.Combine(LogsPath, newfilename);
@@ -168,7 +171,7 @@ namespace AstroClient.ConsoleUtils
 
         public static void DebugLog(string msg, Color? textcolor = null)
         {
-            if (!Bools.isDebugMode)
+            if (!DebugMode)
             {
                 return;
             }
@@ -182,7 +185,7 @@ namespace AstroClient.ConsoleUtils
 
         public static void DebugWarning(string msg, Color? textcolor = null)
         {
-            if (!Bools.isDebugMode)
+            if (!DebugMode)
             {
                 return;
             }
@@ -197,7 +200,7 @@ namespace AstroClient.ConsoleUtils
 
         public static void DebugError(string msg, Color? textcolor = null)
         {
-            if (!Bools.isDebugMode)
+            if (!DebugMode)
             {
                 return;
             }
@@ -211,7 +214,7 @@ namespace AstroClient.ConsoleUtils
 
         public static void Exception<T>(T e, LogTypes logType = LogTypes.LOG, Color? color = null)
         {
-            if (logType == LogTypes.DEBUG_LOG  || logType == LogTypes.DEBUG_WARNING || logType == LogTypes.DEBUG_ERROR && !Bools.isDebugMode)
+            if (logType == LogTypes.DEBUG_LOG  || logType == LogTypes.DEBUG_WARNING || logType == LogTypes.DEBUG_ERROR && !DebugMode)
             {
                 return;
             }
@@ -341,35 +344,6 @@ namespace AstroClient.ConsoleUtils
             Write($"[{time}] ");
 
         }
-
-
-        public static void ToggleConsole()
-        {
-            Bools.isDebugMode = !Bools.isDebugMode;
-            if (ToggleDebugInfo != null)
-            {
-                ToggleDebugInfo.setToggleState(Bools.isDebugMode);
-            }
-            if (Bools.isDebugMode)
-            {
-                Log("Debug Info enabled", Color.Violet);
-            }
-            else
-            {
-                Log("Debug Info disabled", Color.Violet);
-            }
-        }
-
-        public static void OnLevelLoad()
-        {
-            if (ToggleDebugInfo != null)
-            {
-                ToggleDebugInfo.setToggleState(Bools.isDebugMode);
-            }
-        }
         
-
-
-        public static QMToggleButton ToggleDebugInfo;
     }
 }
