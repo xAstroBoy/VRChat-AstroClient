@@ -1,7 +1,12 @@
 ﻿using AstroClient.ConsoleUtils;
 using MelonLoader;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
@@ -40,7 +45,7 @@ namespace DayClientML2.Utility.Extensions
         {
             try
             {
-                Instance.Method_Public_Void_Boolean_2(withFade);
+                Instance.Method_Public_Void_Boolean_0(withFade);
             }
             catch { }
         }
@@ -69,12 +74,12 @@ namespace DayClientML2.Utility.Extensions
                 vrcuiPage = gameObject.GetComponent<VRCUiPage>();
                 if (vrcuiPage == null)
                 {
-                    ModConsole.Error("Screen Not Found - " + screenPath);
+                    MelonLogger.Error("Screen Not Found - " + screenPath);
                 }
             }
             else
             {
-                ModConsole.Warning("Screen Not Found - " + screenPath);
+                MelonLogger.Warning("Screen Not Found - " + screenPath);
             }
             return vrcuiPage;
         }
@@ -141,7 +146,7 @@ namespace DayClientML2.Utility.Extensions
                     PageUserInfo pageUserInfo = Utils.VRCUiManager.GetMenuContent().GetComponentInChildren<PageUserInfo>();
                     if (pageUserInfo != null)
                     {
-                        pageUserInfo.Method_Public_Void_APIUser_0(userapi);
+                        pageUserInfo.Method_Private_Boolean_APIUser_0(userapi);
                         pageUserInfo.Method_Private_Boolean_APIUser_PDM_0(userapi);
                         pageUserInfo.Method_Private_Boolean_APIUser_PDM_1(userapi);
 
@@ -153,7 +158,39 @@ namespace DayClientML2.Utility.Extensions
                     ModConsole.Log("Error Couldnt Fetch User\n" + Error);
                 }));
         }
+        internal static void GetAvatarAuthorFromSocial(this APIUser Instance)
+        {
+            var avatarLink = new Uri(Instance.currentAvatarImageUrl);
 
+            string adjustedLink = string.Format("https://{0}", avatarLink.Authority);
+
+            for (int i = 0; i < avatarLink.Segments.Length - 2; i++)
+            {
+                adjustedLink += avatarLink.Segments[i];
+            }
+
+            avatarLink = new Uri(adjustedLink.Trim("/".ToCharArray()));
+            void OnSuccess(APIUser user)
+            {
+                ModConsole.Log($"Found Author: {user.id}");
+                Utils.VRCUiManager.SelectAPIUser(user);
+            }
+            if (avatarLink == null) return;
+            WebRequest request = WebRequest.Create(avatarLink);
+            WebResponse response = request.GetResponse();
+            if (((HttpWebResponse)response).StatusCode != HttpStatusCode.OK) return;
+            using (StreamReader streamReader = new StreamReader(response.GetResponseStream()))
+            {
+                JObject jsonData = (JObject)JsonSerializer.CreateDefault().Deserialize(streamReader, typeof(JObject));
+
+                var requestedData = jsonData.ToObject<Api.Object.ImageFile>();
+                //ModConsole.Log(JsonConvert.SerializeObject(jsonData, Formatting.Indented));
+                APIUser.FetchUser(requestedData.ownerId, new Action<APIUser>(OnSuccess), new Action<string>((thing) => { }));
+            }
+
+            response.Close();
+        }
+       
         internal static void RefreshMenu()
         {
             UiUserList[] userLists = Utils.VRCUiManager.GetComponentsInChildren<UiUserList>(true);

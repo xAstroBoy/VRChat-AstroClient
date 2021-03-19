@@ -1,4 +1,5 @@
-﻿using MelonLoader;
+﻿using AstroClient.ConsoleUtils;
+using MelonLoader;
 using System;
 using System.Collections;
 using System.IO;
@@ -34,7 +35,7 @@ namespace DayClientML2.Utility.Extensions
                 string displayText = (!componentInChildren.field_Public_Boolean_0) ? tooltip.GetAlternateText() : tooltip.GetText();
                 if (TooltipManager.field_Private_Static_Text_0 != null) //Only return type field of text
                     TooltipManager.Method_Public_Static_Void_String_0(displayText); //Last function to take string parameter
-                else if (tooltip.GetToolTip() != null)
+                if (tooltip.GetToolTip() != null)
                     tooltip.GetToolTip().text = displayText;
             }
         }
@@ -89,8 +90,7 @@ namespace DayClientML2.Utility.Extensions
         {
             while (VRCPlayer.field_Internal_Static_VRCPlayer_0 != true) yield return null;
             var Sprite = new Sprite();
-            IntPtr UrlPtr = new IntPtr(Convert.ToInt32(url, 16));
-            WWW www = new WWW(UrlPtr);
+            WWW www = new WWW(url, null, new Il2CppSystem.Collections.Generic.Dictionary<string, string>());
             yield return www;
             {
                 Sprite = Sprite.CreateSprite(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
@@ -99,51 +99,104 @@ namespace DayClientML2.Utility.Extensions
             Instance.color = Color.white;
             yield break;
         }
-
-        internal static bool XRefScanForMethod(this MethodBase methodBase, string methodName = null, string reflectedType = null)
+        public static bool XRefScanForGlobal(this MethodBase methodBase, string searchTerm, bool ignoreCase = true)
         {
-            bool flag = false;
-            foreach (XrefInstance xrefInstance in XrefScanner.XrefScan(methodBase))
-            {
-                if (xrefInstance.Type == XrefType.Method)
-                {
-                    MethodBase methodBase2 = xrefInstance.TryResolve();
-                    if (!(methodBase2 == null))
-                    {
-                        if (!string.IsNullOrEmpty(methodName))
-                        {
-                            flag = (!string.IsNullOrEmpty(methodBase2.Name) && methodBase2.Name.IndexOf(methodName, StringComparison.OrdinalIgnoreCase) >= 0);
-                        }
-                        if (!string.IsNullOrEmpty(reflectedType))
-                        {
-                            Type reflectedType2 = methodBase2.ReflectedType;
-                            flag = (!string.IsNullOrEmpty((reflectedType2 != null) ? reflectedType2.Name : null) && methodBase2.ReflectedType.Name.IndexOf(reflectedType, StringComparison.OrdinalIgnoreCase) >= 0);
-                        }
-                        if (flag)
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
+            if (!string.IsNullOrEmpty(searchTerm))
+                return XrefScanner.XrefScan(methodBase).Any(
+                    xref => xref.Type == XrefType.Global && xref.ReadAsObject()?.ToString().IndexOf(
+                                searchTerm,
+                                ignoreCase
+                                    ? StringComparison.OrdinalIgnoreCase
+                                    : StringComparison.Ordinal) >= 0);
+            ModConsole.Error($"XRefScanForGlobal \"{methodBase}\" has an empty searchTerm. Returning false");
             return false;
         }
 
+        public static bool XRefScanForMethod(this MethodBase methodBase, string methodName = null, string parentType = null, bool ignoreCase = true)
+        {
+            if (!string.IsNullOrEmpty(methodName)
+                || !string.IsNullOrEmpty(parentType))
+                return XrefScanner.XrefScan(methodBase).Any(
+                    xref =>
+                    {
+                        if (xref.Type != XrefType.Method) return false;
+
+                        var found = false;
+                        MethodBase resolved = xref.TryResolve();
+                        if (resolved == null) return false;
+
+                        if (!string.IsNullOrEmpty(methodName))
+                            found = !string.IsNullOrEmpty(resolved.Name) && resolved.Name.IndexOf(
+                                    methodName,
+                                    ignoreCase
+                                        ? StringComparison.OrdinalIgnoreCase
+                                        : StringComparison.Ordinal) >= 0;
+
+                        if (!string.IsNullOrEmpty(parentType))
+                            found = !string.IsNullOrEmpty(resolved.ReflectedType?.Name) && resolved.ReflectedType.Name.IndexOf(
+                                    parentType,
+                                    ignoreCase
+                                        ? StringComparison
+                                            .OrdinalIgnoreCase
+                                        : StringComparison.Ordinal)
+                                >= 0;
+
+                        return found;
+                    });
+            ModConsole.Error($"XRefScanForMethod \"{methodBase}\" has all null/empty parameters. Returning false");
+            return false;
+        }
+
+        public static int XRefScanMethodCount(this MethodBase methodBase, string methodName = null, string parentType = null, bool ignoreCase = true)
+        {
+            if (!string.IsNullOrEmpty(methodName)
+                || !string.IsNullOrEmpty(parentType))
+                return XrefScanner.XrefScan(methodBase).Count(
+                    xref =>
+                    {
+                        if (xref.Type != XrefType.Method) return false;
+
+                        var found = false;
+                        MethodBase resolved = xref.TryResolve();
+                        if (resolved == null) return false;
+
+                        if (!string.IsNullOrEmpty(methodName))
+                            found = !string.IsNullOrEmpty(resolved.Name) && resolved.Name.IndexOf(
+                                    methodName,
+                                    ignoreCase
+                                        ? StringComparison.OrdinalIgnoreCase
+                                        : StringComparison.Ordinal) >= 0;
+
+                        if (!string.IsNullOrEmpty(parentType))
+                            found = !string.IsNullOrEmpty(resolved.ReflectedType?.Name) && resolved.ReflectedType.Name.IndexOf(
+                                    parentType,
+                                    ignoreCase
+                                        ? StringComparison
+                                            .OrdinalIgnoreCase
+                                        : StringComparison.Ordinal)
+                                >= 0;
+
+                        return found;
+                    });
+            ModConsole.Error($"XRefScanMethodCount \"{methodBase}\" has all null/empty parameters. Returning -1");
+            return -1;
+        }
         public static bool checkXref(this MethodBase m, string match)
         {
             try
             {
-                return XrefScanner.XrefScan(m).Any((XrefInstance instance) => instance.Type == null && instance.ReadAsObject() != null && instance.ReadAsObject().ToString().Equals(match, StringComparison.OrdinalIgnoreCase));
+                return XrefScanner.XrefScan(m).Any(
+                    instance => instance.Type == XrefType.Global && instance.ReadAsObject() != null && instance.ReadAsObject().ToString()
+                                   .Equals(match, StringComparison.OrdinalIgnoreCase));
             }
-            catch
-            {
-            }
+            catch { }
+
             return false;
         }
 
         public static T Cast<T>(this object o)
         {
-            return (T)((object)o);
+            return (T)o;
         }
 
         internal static bool IsRunningNotorious()

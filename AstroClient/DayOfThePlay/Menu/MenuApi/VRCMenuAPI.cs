@@ -1,4 +1,5 @@
-﻿using AstroClient.ConsoleUtils;
+﻿using AstroClient;
+using AstroClient.ConsoleUtils;
 using DayClientML2.Utility.Extensions;
 using System;
 using UnityEngine;
@@ -15,7 +16,7 @@ namespace DayClientML2.Utility.ButtonApi
                 Instance = this;
                 GameObject SettingsPage = GameObject.Find("UserInterface/MenuContent/Screens/Settings");
                 Page = GameObject.Instantiate(SettingsPage, SettingsPage.transform.parent);
-                Page.name = "Menu_"+ "AstroClient_" + name;
+                Page.name = "Menu_" + name + BuildInfo.Name;
                 //UnityEngine.Object.Destroy(Page.GetComponent<PageAvatar>());
                 //VRCUiPage = Page.AddComponent<VRCUiPage>();
                 VRCUiPage = Page.GetComponent<VRCUiPageSettings>();
@@ -45,7 +46,7 @@ namespace DayClientML2.Utility.ButtonApi
                         UnityEngine.Object.Destroy(btnEnum.gameObject);
                 }
             }
-            catch (Exception e) { ModConsole.Log($"VRCMenu Error: {e}"); }
+            catch (Exception e) { ModConsole.Error($"VRCMenu Error: {e}"); }
             try
             {
                 //ScreenPath = MiscUtility.GetPath(Page);
@@ -61,7 +62,7 @@ namespace DayClientML2.Utility.ButtonApi
                     }
                 }));
             }
-            catch (Exception e) { ModConsole.Log($"VRCMenu 2 Error: {e}"); }
+            catch (Exception e) { ModConsole.Error($"VRCMenu 2 Error: {e}"); }
         }
 
         public VRCMenu(string name, Action OnPageShown = null, Action OnPageClose = null)
@@ -71,7 +72,7 @@ namespace DayClientML2.Utility.ButtonApi
                 Instance = this;
                 GameObject SettingsPage = GameObject.Find("UserInterface/MenuContent/Screens/Settings");
                 Page = GameObject.Instantiate(SettingsPage, SettingsPage.transform.parent);
-                Page.name = "Menu_"+ "AstroClient_" + name;
+                Page.name = "Menu_" + name + BuildInfo.Name;
                 //UnityEngine.Object.Destroy(Page.GetComponent<PageAvatar>());
                 //VRCUiPage = Page.AddComponent<VRCUiPage>();
                 VRCUiPage = Page.GetComponent<VRCUiPageSettings>();
@@ -101,7 +102,7 @@ namespace DayClientML2.Utility.ButtonApi
                         UnityEngine.Object.Destroy(btnEnum.gameObject);
                 }
             }
-            catch (Exception e) { ModConsole.Log($"VRCMenu Error: {e}"); }
+            catch (Exception e) { ModConsole.Error($"VRCMenu Error: {e}"); }
         }
 
         public string ScreenPath { get; set; }
@@ -118,7 +119,7 @@ namespace DayClientML2.Utility.ButtonApi
             try
             {
                 Panel = GameObject.Instantiate(GameObject.Find("UserInterface/MenuContent/Screens/Settings/AudioDevicePanel"), transform);
-                Panel.name = "Panel_" + "AstroClient_" + text;
+                Panel.name = "Panel_" + text + BuildInfo.Name;
                 Panel.GetComponent<RectTransform>().anchoredPosition = new Vector2(PosX, PosY);
                 Panel.GetComponent<RectTransform>().sizeDelta = new Vector2(SizeX, SizeY);
                 TitleText = Panel.transform.Find("TitleText").gameObject;
@@ -136,7 +137,7 @@ namespace DayClientML2.Utility.ButtonApi
                 }
                 //  UnityEngine.Object.Destroy(Panel.GetComponent<UIDeviceSelector>());
             }
-            catch (Exception e) { ModConsole.Log($"VRCPanel Error: {e}"); }
+            catch (Exception e) { ModConsole.Error($"VRCPanel Error: {e}"); }
         }
 
         //unused -- Might be used in the future for closing content of a panel
@@ -145,7 +146,7 @@ namespace DayClientML2.Utility.ButtonApi
             try
             {
                 Panel = GameObject.Instantiate(GameObject.Find("UserInterface/MenuContent/Screens/Settings/AudioDevicePanel"), transform);
-                Panel.name = "VRCMenuPanel_" + "AstroClient_" + text;
+                Panel.name = "VRCMenuPanel_" + text + BuildInfo.Name;
                 Panel.GetComponent<RectTransform>().anchoredPosition = new Vector2(PosX, PosY);
                 Panel.GetComponent<RectTransform>().sizeDelta = new Vector2(SizeX, SizeY);
                 TitleText = Panel.transform.Find("TitleText").gameObject;
@@ -174,7 +175,7 @@ namespace DayClientML2.Utility.ButtonApi
                 }
                 //UnityEngine.Object.Destroy(Panel.GetComponent<UIDeviceSelector>());
             }
-            catch (Exception e) { ModConsole.Log($"VRCPanel Error: {e}"); }
+            catch (Exception e) { ModConsole.Error($"VRCPanel Error: {e}"); }
         }
 
         public static MenuCheckbox DefaultActiveToggle;

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DayClientML2.Managers;
+using UnityEngine;
 using VRC;
 using VRC.Core;
 using VRC.SDKBase;
@@ -262,21 +263,21 @@ namespace DayClientML2.Utility.Extensions
                 return "Moderation User";
             if (Instance.hasSuperPowers || Instance.tags.Contains("admin_"))
                 return "Admin User";
-            else if (Instance.tags.Contains("system_legend") && Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
+            if (Instance.tags.Contains("system_legend") && Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
                 return "Legend";
-            else if (Instance.hasLegendTrustLevel || Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
+            if (Instance.hasLegendTrustLevel || Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
                 return "Veteran";
-            else if (Instance.hasVeteranTrustLevel)
+            if (Instance.hasVeteranTrustLevel)
                 return "Trusted";
-            else if (Instance.hasTrustedTrustLevel)
+            if (Instance.hasTrustedTrustLevel)
                 return "Known";
-            else if (Instance.hasKnownTrustLevel)
+            if (Instance.hasKnownTrustLevel)
                 return "User";
-            else if (Instance.hasBasicTrustLevel || Instance.isNewUser)
+            if (Instance.hasBasicTrustLevel || Instance.isNewUser)
                 return "New User";
-            else if (Instance.hasNegativeTrustLevel)
+            if (Instance.hasNegativeTrustLevel)
                 return "NegativeTrust";
-            else if (Instance.hasVeryNegativeTrustLevel)
+            if (Instance.hasVeryNegativeTrustLevel)
                 return "VeryNegativeTrust";
             return "Visitor";
         }
@@ -287,21 +288,21 @@ namespace DayClientML2.Utility.Extensions
                 return RankType.Moderator;
             if (Instance.hasSuperPowers || Instance.tags.Contains("admin_"))
                 return RankType.Admin;
-            else if (Instance.tags.Contains("system_legend") && Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
+            if (Instance.tags.Contains("system_legend") && Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
                 return RankType.Legend;
-            else if (Instance.hasLegendTrustLevel || Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
+            if (Instance.hasLegendTrustLevel || Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
                 return RankType.Veteran;
-            else if (Instance.hasVeteranTrustLevel)
+            if (Instance.hasVeteranTrustLevel)
                 return RankType.Trusted;
-            else if (Instance.hasTrustedTrustLevel)
+            if (Instance.hasTrustedTrustLevel)
                 return RankType.Known;
-            else if (Instance.hasKnownTrustLevel)
+            if (Instance.hasKnownTrustLevel)
                 return RankType.User;
-            else if (Instance.hasBasicTrustLevel || Instance.isNewUser)
+            if (Instance.hasBasicTrustLevel || Instance.isNewUser)
                 return RankType.newUser;
-            else if (Instance.hasNegativeTrustLevel)
+            if (Instance.hasNegativeTrustLevel)
                 return RankType.NegativeTrust;
-            else if (Instance.hasVeryNegativeTrustLevel)
+            if (Instance.hasVeryNegativeTrustLevel)
                 return RankType.VeryNegativeTrust;
             return RankType.visitor;
         }
@@ -321,6 +322,82 @@ namespace DayClientML2.Utility.Extensions
             VeryNegativeTrust,
         }
 
+        public static string GetThings(this VRCPlayer Instance)
+        {
+            // Small confusion between [BOT] and [B] when first connecting to the client, just a FYI.    - Love
+            string returnstring = string.Empty;
+            // arion remember when we where trying to find out why it wasnt showing me in the playerlist in the quickemnu... well i just found it -HI/Nekro
+            if (GetIsBot(Instance))
+                returnstring += "<color=red>[BOT]</color> ";
+            if (Instance.GetAPIUser().statusValue == APIUser.UserStatus.Offline)
+                returnstring += "<color=gray>[Offline]</color> ";
+
+            if (Instance.UserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlocked(Instance.UserID()) && Utils.ModerationManager.GetIsBlockedByUser(Instance.UserID()))
+                returnstring += "<color=magenta>[B]</color> ";
+
+            if (Instance.UserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlocked(Instance.UserID()))
+                returnstring += "<color=cyan>[B]</color> ";
+
+            if (Instance.UserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlockedByUser(Instance.UserID()))
+                returnstring += "<color=red>[B]</color> ";
+            if (Instance.GetAPIUser().isFriend)
+                returnstring += "<color=yellow>[F]</color> ";
+            if (Instance.GetVRCPlayerApi().isMaster)
+                returnstring += "<color=#12F1FF>[O]</color> ";
+            if (Instance.GetIsDANGER())
+            {
+                returnstring += "<color=#FFC4FF>[MODERATOR]</color> ";
+                Instance.GetVRCPlayerApi().ClearPlayerTags();
+            }
+            if (Instance.GetAPIUser().isSupporter)
+                returnstring += "<color=yellow>[V+]</color> ";
+            if (Instance.GetAPIUser().IsOnMobile)
+                returnstring += "<color=#59D365>[Q]</color> ";
+            //if (Instance.GetAPIUser().id == Config.Instance.Target)
+            //    returnstring += "<color=red>[T]</color>";
+            //if (Config.Instance.SeeMore)
+            //    returnstring += $"[{Instance.GetVRCPlayerApi().playerId}]";
+            //var groups = Modules.Misc.KosHelper.GetGroups(Instance.GetAPIUser().id);
+            //foreach (var group in groups)
+            //{
+            //    if (group != null)
+            //    {
+            //        returnstring += $"<color=red>[{group.GroupName}]</color>";
+            //    }
+            //}
+            returnstring += Instance.GetVRCPlayerApi().IsUserInVR() ? "<color=#A6CACD><VR></color> " : "<color=#A6CACD><D></color> ";
+            return returnstring;
+        }
+
+        public static string GetSmallThings(this VRCPlayer Instance)
+        {
+            string returnstring = string.Empty;
+            if (Instance.UserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlocked(Instance.UserID()) && Utils.ModerationManager.GetIsBlockedByUser(Instance.UserID()))
+                returnstring += "<color=magenta>[B]</color> ";
+
+            if (Instance.UserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlocked(Instance.UserID()))
+                returnstring += "<color=cyan>[B]</color> ";
+
+            if (Instance.UserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlockedByUser(Instance.UserID()))
+                returnstring += "<color=red>[B]</color> ";
+            if (Instance.GetAPIUser().isFriend)
+                returnstring += "<color=yellow>[F]</color> ";
+            if (Instance.GetVRCPlayerApi().isMaster)
+                returnstring += "<color=#12F1FF>[O]</color> ";
+            if (Instance.GetIsDANGER())
+            {
+                returnstring += "<color=#FFC4FF>[MODERATOR]</color> ";
+                Instance.GetVRCPlayerApi().ClearPlayerTags();
+            }
+            if (Instance.GetAPIUser().IsOnMobile)
+                returnstring += "<color=#59D365>[Q]</color> ";
+            //if (Instance.GetAPIUser().id == Config.Instance.Target)
+            //    returnstring += "<color=red>[T]</color>";
+            //if(Config.Instance.SeeMore)
+            //    returnstring += $"[{Instance.GetVRCPlayerApi().playerId}]";
+            return returnstring;
+        }
+
         public static bool GetIsFriend(this APIUser Instance)
         {
             return Instance.isFriend || APIUser.IsFriendsWith(Instance.id);
@@ -336,6 +413,41 @@ namespace DayClientML2.Utility.Extensions
             return Instance.GetPing() == 0 && Instance.GetFrames() == 0 && Instance.UserID() != APIUser.CurrentUser.id;
         }
 
+        public static Color GetRankColor(this APIUser Instance)
+        {
+            string playerRank = Instance.GetRank();
+            switch (playerRank.ToLower())
+            {
+                case "legend":
+                    return ConversionManager.LegendColor;
+                    break;
+
+                case "veteran":
+                    return ConversionManager.VeteranColor;
+                    break;
+
+                case "trusted":
+                    return ConversionManager.TrustedColor;
+                    break;
+
+                case "known":
+                    return ConversionManager.KnownColor;
+                    break;
+
+                case "user":
+                    return ConversionManager.UserColor;
+                    break;
+
+                case "new user":
+                    return ConversionManager.NewUserColor;
+                    break;
+
+                case "visitor":
+                    return ConversionManager.VisitorsColor;
+                    break;
+            }
+            return Color.red;
+        }
 
         #endregion Ranks
 

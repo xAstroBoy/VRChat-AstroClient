@@ -1,4 +1,5 @@
-﻿using AstroClient.ConsoleUtils;
+﻿using AstroClient;
+using AstroClient.ConsoleUtils;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,7 +27,7 @@ namespace DayClientML2.Utility
                 //GameObject.Find("UserInterface/MenuContent/Screens/Settings/OtherOptionsPanel/DesktopReticle/Label").GetComponent<RectTransform>().offsetMax = new Vector2(25, 21.5f);
                 Checkbox = Object.Instantiate(Object.Find("UserInterface/MenuContent/Screens/Settings/OtherOptionsPanel/DesktopReticle"), parent, false);
                 Object.DestroyImmediate(Checkbox.GetComponent<UiSettingConfig>());
-                Checkbox.name = "Check_" + "AstroClient_" + text;
+                Checkbox.name = "Check_" + text + BuildInfo.Name;
                 Checkbox.GetComponent<RectTransform>().anchoredPosition = new Vector2(XPos, YPos);
                 Text = Checkbox.GetComponentInChildren<Text>();
                 //Text.horizontalOverflow = (HorizontalWrapMode)2; //
@@ -41,7 +42,7 @@ namespace DayClientML2.Utility
             }
             catch (Exception)
             {
-                ModConsole.Log("[<color=#FF0000>Error</color>] <color=#59D365>Error Occurred in Checkbox API</color>");
+                ModConsole.DebugLog("[<color=#FF0000>Error</color>] <color=#59D365>Error Occurred in Checkbox API</color>");
             }
         }
 

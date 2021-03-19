@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using UnhollowerRuntimeLib;
+using UnityEngine;
+using UnityEngine.XR;
 using VRC;
 using VRC.SDKBase;
 using VRC.UserCamera;
@@ -155,77 +157,78 @@ namespace DayClientML2.Utility.Extensions
             }
         }
 
-        //public static Vector3 GetWorldCameraPosition()
-        //{
-        //    VRCVrCamera camera = VRCVrCamera;
-        //    var type = camera.GetIl2CppType();
-        //    if (type == Il2CppType.Of<VRCVrCameraSteam>())
-        //    {
-        //        VRCVrCameraSteam steam = camera.Cast<VRCVrCameraSteam>();
-        //        Transform transform1 = steam.field_Private_Transform_0;
-        //        Transform transform2 = steam.field_Private_Transform_1;
-        //        if (transform1.name == "Camera (eye)")
-        //        {
-        //            return transform1.position;
-        //        }
-        //        else if (transform2.name == "Camera (eye)")
-        //        {
-        //            return transform2.position;
-        //        }
-        //    }
-        //    else if (type == Il2CppType.Of<VRCVrCameraUnity>())
-        //    {
-        //        VRCVrCameraUnity unity = camera.Cast<VRCVrCameraUnity>();
-        //        return unity.field_Public_Camera_0.transform.position;
-        //    }
-        //    else if (type == Il2CppType.Of<VRCVrCameraWave>())
-        //    {
-        //        VRCVrCameraWave wave = camera.Cast<VRCVrCameraWave>();
-        //        return wave.transform.position;
-        //    }
-        //    return camera.transform.parent.TransformPoint(GetLocalCameraPosition());
-        //}
-        //public static Vector3 GetLocalCameraPosition()
-        //{
-        //    VRCVrCamera camera = VRCVrCamera;
-        //    var type = camera.GetIl2CppType();
-        //    if (type == Il2CppType.Of<VRCVrCameraGoogle>())
-        //    {
-        //        return camera.transform.localPosition;
-        //    }
-        //    else if (type == Il2CppType.Of<VRCVrCameraSteam>())
-        //    {
-        //        VRCVrCameraSteam steam = camera.Cast<VRCVrCameraSteam>();
-        //        Transform transform1 = steam.field_Private_Transform_0;
-        //        Transform transform2 = steam.field_Private_Transform_1;
-        //        if (transform1.name == "Camera (eye)")
-        //        {
-        //            return camera.transform.parent.InverseTransformPoint(transform1.position);
-        //        }
-        //        else if (transform2.name == "Camera (eye)")
-        //        {
-        //            return camera.transform.parent.InverseTransformPoint(transform2.position);
-        //        }
-        //        else
-        //        {
-        //            return Vector3.zero;
-        //        }
-        //    }
-        //    else if (type == Il2CppType.Of<VRCVrCameraUnity>())
-        //    {
-        //        if (Utils.CurrentUser.GetIsInVR())
-        //        {
-        //            return camera.transform.localPosition + InputTracking.GetLocalPosition(XRNode.CenterEye);
-        //        }
-        //        VRCVrCameraUnity unity = camera.Cast<VRCVrCameraUnity>();
-        //        return camera.transform.parent.InverseTransformPoint(unity.CameraStereo.transform.position);
-        //    }
-        //    else if (type == Il2CppType.Of<VRCVrCameraWave>())
-        //    {
-        //        VRCVrCameraWave wave = camera.Cast<VRCVrCameraWave>();
-        //        return wave.trackingRoot.InverseTransformPoint(camera.transform.position);
-        //    }
-        //    return Vector3.zero;
-        //}
+        public static Vector3 GetWorldCameraPosition()
+        {
+            VRCVrCamera camera = Utils.VRCVrCamera;
+            var type = camera.GetIl2CppType();
+            if (type == Il2CppType.Of<VRCVrCameraSteam>())
+            {
+                VRCVrCameraSteam steam = camera.Cast<VRCVrCameraSteam>();
+                Transform transform1 = steam.field_Private_Transform_0;
+                Transform transform2 = steam.field_Private_Transform_1;
+                if (transform1.name == "Camera (eye)")
+                {
+                    return transform1.position;
+                }
+                if (transform2.name == "Camera (eye)")
+                {
+                    return transform2.position;
+                }
+            }
+            if (type == Il2CppType.Of<VRCVrCameraUnity>())
+            {
+                VRCVrCameraUnity unity = camera.Cast<VRCVrCameraUnity>();
+                return unity.field_Public_Camera_0.transform.position;
+            }
+            if (type == Il2CppType.Of<VRCVrCameraWave>())
+            {
+                VRCVrCameraWave wave = camera.Cast<VRCVrCameraWave>();
+                return wave.transform.position;
+            }
+            return camera.transform.parent.TransformPoint(GetLocalCameraPosition());
+        }
+
+        public static Vector3 GetLocalCameraPosition()
+        {
+            VRCVrCamera camera = Utils.VRCVrCamera;
+            var type = camera.GetIl2CppType();
+            if (type == Il2CppType.Of<VRCVrCamera>())
+            {
+                return camera.transform.localPosition;
+            }
+            if (type == Il2CppType.Of<VRCVrCameraSteam>())
+            {
+                VRCVrCameraSteam steam = camera.Cast<VRCVrCameraSteam>();
+                Transform transform1 = steam.field_Private_Transform_0;
+                Transform transform2 = steam.field_Private_Transform_1;
+                if (transform1.name == "Camera (eye)")
+                {
+                    return camera.transform.parent.InverseTransformPoint(transform1.position);
+                }
+                if (transform2.name == "Camera (eye)")
+                {
+                    return camera.transform.parent.InverseTransformPoint(transform2.position);
+                }
+                else
+                {
+                    return Vector3.zero;
+                }
+            }
+            if (type == Il2CppType.Of<VRCVrCameraUnity>())
+            {
+                if (MiskExtension.IsInVR())
+                {
+                    return camera.transform.localPosition + InputTracking.GetLocalPosition(XRNode.CenterEye);
+                }
+                VRCVrCameraUnity unity = camera.Cast<VRCVrCameraUnity>();
+                return camera.transform.parent.InverseTransformPoint(unity.field_Public_Camera_0.transform.position);
+            }
+            if (type == Il2CppType.Of<VRCVrCameraWave>())
+            {
+                VRCVrCameraWave wave = camera.Cast<VRCVrCameraWave>();
+                return wave.field_Public_Transform_0.InverseTransformPoint(camera.transform.position);
+            }
+            return Vector3.zero;
+        }
     }
 }

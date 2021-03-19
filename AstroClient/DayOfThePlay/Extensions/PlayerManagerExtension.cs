@@ -12,6 +12,13 @@ namespace DayClientML2.Utility.Extensions
         {
             return Instance.field_Private_List_1_Player_0.ToArray().ToList();
         }
+        public static List<int> AllPlayersIDs(this PlayerManager Instance)
+        {
+            List<int> PhotonIDs = new List<int>();
+            foreach (var p in Instance.AllPlayers())
+                PhotonIDs.Add(p.GetVRCPlayerApi().playerId);
+            return PhotonIDs;
+        }
 
         public static Player GetPlayer(this PlayerManager Instance, int Index)
         {

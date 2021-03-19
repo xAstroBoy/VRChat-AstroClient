@@ -11,10 +11,19 @@ namespace DayClientML2.Utility.Extensions
             //return WorldStuff2.GetWorld() != null || WorldStuff2.GetWorldInstance() != null;
             return GetWorld() != null || GetWorldInstance() != null;
         }
+        //public static bool IsMaster()
+        //{
+        //    RoomManager.
+        //}
 
         public static ApiWorld GetWorld()
         {
             return RoomManager.field_Internal_Static_ApiWorld_0;
+        }
+
+        public static string GetWorldName()
+        {
+            return GetWorld().name;
         }
 
         public static ApiWorldInstance GetWorldInstance()
@@ -25,6 +34,16 @@ namespace DayClientML2.Utility.Extensions
         public static string GetInstanceID()
         {
             return RoomManagerExtension.GetWorld().id + ":" + RoomManagerExtension.GetWorldInstance().idWithTags;
+        }
+
+        public static int GetWorldOccupants()
+        {
+            return GetWorld().occupants;
+        }
+
+        public static int GetWorldCapacity()
+        {
+            return GetWorld().capacity;
         }
 
         private static class WorldStuff2 // The class is for if you want to switch back to non-future proof stuff then just use the above shit and remove the class reference in IsInWorld

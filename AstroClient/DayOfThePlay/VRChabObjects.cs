@@ -127,6 +127,8 @@ namespace DayClientML2.Utility
         #region UserInfo
 
         public static GameObject UserInfoPlaylistButton { get { return GameObject.Find("MenuContent/Screens/UserInfo/User Panel/Playlists/PlaylistsButton"); } }
+        public static GameObject USINFOVRCSupportButton { get { return GameObject.Find("UserInterface/MenuContent/Screens/UserInfo/User Panel/Supporter"); } }
+        public static GameObject USINFOStupidCat { get { return GameObject.Find("UserInterface/MenuContent/Screens/UserInfo/User Panel/VRCPlusEarlyAdopter"); } }
 
         #endregion UserInfo
 

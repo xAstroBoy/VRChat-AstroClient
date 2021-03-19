@@ -22,7 +22,7 @@ namespace DayClientML2.Utility.MenuApi
             }
             try
             {
-                GameObject original = GameObject.Find("/UserInterface/MenuContent/Screens/Avatar/TitlePanel (1)/TitleText");
+                GameObject original = GameObject.Find("UserInterface/MenuContent/Screens/Avatar/TitlePanel (1)/TitleText");
                 Button = UnityEngine.Object.Instantiate(original, original.transform);
             }
             catch (Exception)
@@ -68,7 +68,7 @@ namespace DayClientML2.Utility.MenuApi
         {
             try
             {
-                GameObject original = GameObject.Find("/UserInterface/MenuContent/Screens/Avatar/TitlePanel (1)/TitleText");
+                GameObject original = GameObject.Find("UserInterface/MenuContent/Screens/Avatar/TitlePanel (1)/TitleText");
                 Button = UnityEngine.Object.Instantiate(original, original.transform);
             }
             catch (Exception)

@@ -64,24 +64,18 @@ namespace RubyButtonAPI
             button.gameObject.SetActive(isActive);
         }
 
-
-        public void SetResizeTextForBestFit(bool resizeTextForBestFit)
-        {
-            button.gameObject.GetComponentInChildren<Text>().resizeTextForBestFit = resizeTextForBestFit;
-        }
-
         public void setIntractable(bool isIntractable)
         {
-            //if (isIntractable)
-            //{
-            //    setBackgroundColor(OrigBackground, false);
-            //    setTextColor(OrigText, false);
-            //}
-            //else
-            //{
-            //    setBackgroundColor(new Color(0.5f, 0.5f, 0.5f, 1), false);
-            //    setTextColor(new Color(0.7f, 0.7f, 0.7f, 1), false); ;
-            //}
+            if (isIntractable)
+            {
+                setBackgroundColor(OrigBackground, false);
+                setTextColor(OrigText, false);
+            }
+            else
+            {
+                setBackgroundColor(new Color(0.5f, 0.5f, 0.5f, 1), false);
+                setTextColor(new Color(0.7f, 0.7f, 0.7f, 1), false); ;
+            }
             button.gameObject.GetComponent<Button>().interactable = isIntractable;
         }
 
@@ -111,7 +105,6 @@ namespace RubyButtonAPI
             button.GetComponent<UiTooltip>().field_Public_String_1 = buttonToolTip;
         }
 
-
         public void DestroyMe()
         {
             try
@@ -124,6 +117,124 @@ namespace RubyButtonAPI
         public void LoadSprite(string url)
         {
             MelonLoader.MelonCoroutines.Start(LoadSprite(button.GetComponent<Image>(), url));
+        }
+
+        private static IEnumerator LoadSprite(Image Instance, string url)
+        {
+            while (VRCPlayer.field_Internal_Static_VRCPlayer_0 != true) yield return null;
+            var Sprite = new Sprite();
+            WWW www = new WWW(url, null, new Il2CppSystem.Collections.Generic.Dictionary<string, string>());
+            yield return www;
+            {
+                Sprite = Sprite.CreateSprite(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+            }
+            Instance.sprite = Sprite;
+            Instance.color = Color.white;
+            yield break;
+        }
+
+        public void SetParent(QMNestedButton Parent)
+        {
+            button.transform.SetParent(QuickMenuStuff.GetQuickMenuInstance().transform.Find(Parent.getMenuName()));
+        }
+
+        public void SetParent(Transform Parent)
+        {
+            button.transform.SetParent(Parent);
+        }
+
+
+        public void SetResizeTextForBestFit(bool resizeTextForBestFit)
+        {
+            button.gameObject.GetComponentInChildren<Text>().resizeTextForBestFit = resizeTextForBestFit;
+        }
+
+
+        public virtual void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
+        {
+        }
+
+        public virtual void setTextColor(Color buttonTextColor, bool save = true)
+        {
+        }
+
+        public virtual void setTextColorOn(Color buttonTextColorOn, bool save = true)
+        {
+        }
+
+        public virtual void setTextColorOff(Color buttonTextColorOff, bool save = true)
+        {
+        }
+    }
+
+    public class QMTabBase
+    {
+        protected GameObject button;
+        protected GameObject Icon;
+        protected string btnQMLoc;
+        protected string btnType;
+        protected string btnTag;
+        protected int[] initShift = { 0, 0 };
+        protected Color OrigBackground;
+
+        public GameObject getGameObject()
+        {
+            return button;
+        }
+        public GameObject getIcon()
+        {
+            if (Icon == null)
+                Icon = button.transform.Find("Icon").gameObject;
+            return Icon;
+        }
+
+        public void setActive(bool isActive)
+        {
+            button.gameObject.SetActive(isActive);
+        }
+
+        public void setIntractable(bool isIntractable)
+        {
+            if (isIntractable)
+            {
+                setBackgroundColor(OrigBackground, false);
+            }
+            else
+            {
+                setBackgroundColor(new Color(0.5f, 0.5f, 0.5f, 1), false);
+            }
+            button.gameObject.GetComponent<Button>().interactable = isIntractable;
+        }
+
+        public void setLocation(float buttonXLoc)
+        {
+            //button.GetComponent<RectTransform>().anchoredPosition += Vector2.right * (210 * (buttonXLoc + initShift[0]));
+            //button.GetComponent<RectTransform>().anchoredPosition += Vector2.down * (420 * (buttonYLoc + initShift[1]));
+            button.transform.SetSiblingIndex((int)buttonXLoc);
+            btnTag = "(" + buttonXLoc + ")";
+            button.name = btnQMLoc + "/" + btnType + btnTag;
+            button.GetComponent<Button>().name = btnType + btnTag;
+        }
+
+        public void setToolTip(string buttonToolTip)
+        {
+            button.GetComponent<UiTooltip>().field_Public_String_0 = buttonToolTip;
+            button.GetComponent<UiTooltip>().field_Public_String_1 = buttonToolTip;
+        }
+
+        public void DestroyMe()
+        {
+            try
+            {
+                UnityEngine.Object.Destroy(button);
+            }
+            catch { }
+        }
+
+        public void LoadSprite(string url)
+        {
+            var image = getIcon().GetComponent<Image>();
+            MelonLoader.MelonCoroutines.Start(LoadSprite(image, url));
         }
 
         private static IEnumerator LoadSprite(Image Instance, string url)
@@ -154,23 +265,144 @@ namespace RubyButtonAPI
         public virtual void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
         {
         }
+    }
 
-        public virtual void setTextColor(Color buttonTextColor, bool save = true)
+    public class QMTabButton : QMTabBase
+    {
+        public QMTabButton(float btnXLocation, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null,String ImageURL = null)
         {
+            initButton(btnXLocation, btnAction, btnToolTip, btnBackgroundColor, ImageURL);
         }
 
-        public virtual void setTextColorOn(Color buttonTextColorOn, bool save = true)
+        private void initButton(float btnXLocation, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null,String ImageURL = null)
         {
+            btnType = "QMTabButton";
+            button = UnityEngine.Object.Instantiate(QuickMenuStuff.TabButtonTemplate(), QuickMenuStuff.TabButtonTemplate().transform.parent, true);
+
+            initShift[0] = 0;
+            initShift[1] = 0;
+            setLocation(btnXLocation);
+            setToolTip(btnToolTip);
+            setAction(btnAction);
+
+            if (btnBackgroundColor != null)
+                setBackgroundColor((Color)btnBackgroundColor);
+            else
+                OrigBackground = button.GetComponent<Image>().color;
+
+            if(ImageURL != null)
+                LoadSprite(ImageURL);
+
+            setActive(true);
         }
 
-        public virtual void setTextColorOff(Color buttonTextColorOff, bool save = true)
+        public void setAction(System.Action buttonAction)
         {
+            button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
+            if (buttonAction != null)
+                button.GetComponent<Button>().onClick.AddListener(UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
+        }
+
+        public override void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
+        {
+            //button.GetComponentInChildren<UnityEngine.UI.Image>().color = buttonBackgroundColor;
+            if (save)
+                OrigBackground = (Color)buttonBackgroundColor;
+            button.GetComponentInChildren<UnityEngine.UI.Button>().colors = new ColorBlock()
+            {
+                colorMultiplier = 1f,
+                disabledColor = Color.grey,
+                highlightedColor = buttonBackgroundColor * 1.5f,
+                normalColor = buttonBackgroundColor / 1.5f,
+                pressedColor = Color.grey * 1.5f
+            };
+        }
+    }
+
+    public class QMTabMenu
+    {
+        protected QMTabButton mainButton;
+        protected QMSingleButton backButton;
+        protected string menuName;
+        protected string btnQMLoc;
+        protected string btnType;
+
+
+        public QMTabMenu(float btnXLocation, String btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, String ImageURL = null)
+        {
+            initButton(btnXLocation, btnToolTip,btnBackgroundColor, backbtnBackgroundColor, backbtnTextColor, ImageURL);
+        }
+
+        public void initButton(float btnXLocation, String btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, String ImageURL = null)
+        {
+            btnType = "QMTabMenu";
+
+            Transform menu = UnityEngine.Object.Instantiate<Transform>(QuickMenuStuff.NestedMenuTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform);
+            menuName = QMButtonAPI.identifier + btnQMLoc + "_" + btnXLocation + "_" + btnToolTip;
+            menu.name = menuName;
+
+            mainButton = new QMTabButton(btnXLocation, () => { QuickMenuStuff.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, ImageURL);
+
+            Il2CppSystem.Collections.IEnumerator enumerator = menu.transform.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                Il2CppSystem.Object obj = enumerator.Current;
+                Transform btnEnum = obj.Cast<Transform>();
+                if (btnEnum != null)
+                {
+                    UnityEngine.Object.Destroy(btnEnum.gameObject);
+                }
+            }
+            if (backbtnTextColor == null)
+            {
+                backbtnTextColor = Color.yellow;
+            }
+           // backButton = new QMSingleButton(menuName, 5, 2, "Back", () => { QuickMenuStuff.ShowQuickmenuPage("ShortcutMenu"); }, "Go Back", backbtnBackgroundColor, backbtnTextColor);
+        }
+
+        public string getMenuName()
+        {
+            return menuName;
+        }
+
+        public QMTabButton getMainButton()
+        {
+            return mainButton;
+        }
+
+        public QMSingleButton getBackButton()
+        {
+            return backButton;
+        }
+
+        public void DestroyMe()
+        {
+            mainButton.DestroyMe();
+            backButton.DestroyMe();
+        }
+
+        public void OpenMe()
+        {
+            QuickMenuStuff.ShowQuickmenuPage(menuName);
         }
     }
 
     public class QMSingleButton : QMButtonBase
     {
         public QMSingleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool btnHalf = false)
+        {
+            btnQMLoc = btnMenu.getMenuName();
+            if (btnHalf)
+            {
+                btnYLocation -= 0.25f;
+            }
+            initButton(btnXLocation, btnYLocation, btnText, btnAction, btnToolTip, btnBackgroundColor, btnTextColor);
+            if (btnHalf)
+            {
+                button.GetComponentInChildren<RectTransform>().sizeDelta /= new Vector2(1f, 2.0175f);
+            }
+        }
+        public QMSingleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.getMenuName();
             if (btnHalf)
@@ -229,7 +461,6 @@ namespace RubyButtonAPI
             button.GetComponentInChildren<Text>().text = buttonText;
         }
 
-
         public void setAction(System.Action buttonAction)
         {
             button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
@@ -262,7 +493,6 @@ namespace RubyButtonAPI
         }
 
 
-
     }
 
     public class QMToggleButton : QMButtonBase
@@ -277,6 +507,11 @@ namespace RubyButtonAPI
         private System.Action btnOffAction = null;
 
         public QMToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnTextOn, System.Action btnActionOn, String btnTextOff, System.Action btnActionOff, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConfig = true, bool defaultPosition = false)
+        {
+            btnQMLoc = btnMenu.getMenuName();
+            initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, shouldSaveInConfig, defaultPosition);
+        }
+        public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, String btnTextOn, System.Action btnActionOn, String btnTextOff, System.Action btnActionOff, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConfig = true, bool defaultPosition = false)
         {
             btnQMLoc = btnMenu.getMenuName();
             initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, shouldSaveInConfig, defaultPosition);
@@ -405,7 +640,7 @@ namespace RubyButtonAPI
                     showWhenOn.ForEach(x => x.setActive(true));
                     hideWhenOn.ForEach(x => x.setActive(false));
                 }
-                else if (!toggleOn && shouldInvoke)
+                if (!toggleOn && shouldInvoke)
                 {
                     btnOffAction.Invoke();
                     showWhenOn.ForEach(x => x.setActive(false));
@@ -415,7 +650,6 @@ namespace RubyButtonAPI
             catch { }
             if (shouldSaveInConfig)
             {
-                //DayClientML2.Modules.Settings.Config.Instance.SaveConfig();
             }
         }
 
@@ -460,6 +694,15 @@ namespace RubyButtonAPI
             }
             initButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
         }
+        public QMSingleToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, String btnONText, System.Action btnONAction, String btnOffText, System.Action btnOFFction, String btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
+        {
+            btnQMLoc = btnMenu.getMenuName();
+            if (btnHalf)
+            {
+                btnYLocation -= 0.25f;
+            }
+            initButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
+        }
 
         public QMSingleToggleButton(string btnMenu, float btnXLocation, float btnYLocation, String btnONText, System.Action btnONAction, String btnOffText, System.Action btnOFFction, String btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
         {
@@ -478,7 +721,6 @@ namespace RubyButtonAPI
 
             initShift[0] = -1;
             initShift[1] = 0;
-            state = position;
             setLocation(btnXLocation, btnYLocation);
             setButtonText(position ? btnONText : btnOffText);
             OnText = btnONText;
@@ -487,6 +729,7 @@ namespace RubyButtonAPI
             setAction(btnONAction, btnOFFAction);
             OnAction = btnONAction;
             OffAction = btnOFFAction;
+            state = position;
 
             if (btnBackgroundColor != null)
                 setBackgroundColor((Color)btnBackgroundColor);
@@ -575,7 +818,7 @@ namespace RubyButtonAPI
                 {
                     OnAction.Invoke();
                 }
-                else if (!toggleOn && shouldInvoke)
+                if (!toggleOn && shouldInvoke)
                 {
                     OffAction.Invoke();
                 }
@@ -597,6 +840,8 @@ namespace RubyButtonAPI
                 button.GetComponent<RectTransform>().sizeDelta = Size;
             }
         }
+
+
     }
 
     public class QMNestedButton
@@ -612,53 +857,16 @@ namespace RubyButtonAPI
             btnQMLoc = btnMenu.getMenuName();
             initButton(btnXLocation, btnYLocation, btnText, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
-
-        public QMNestedButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action OpenEvent, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
+        public QMNestedButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, String btnText, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.getMenuName();
-            initButton(btnXLocation, btnYLocation, btnText, OpenEvent, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
+            initButton(btnXLocation, btnYLocation, btnText, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
 
         public QMNestedButton(string btnMenu, float btnXLocation, float btnYLocation, String btnText, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu;
             initButton(btnXLocation, btnYLocation, btnText, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
-        }
-
-
-        public QMNestedButton(string btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action OpenEvent, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
-        {
-            btnQMLoc = btnMenu;
-            initButton(btnXLocation, btnYLocation, btnText, OpenEvent, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
-        }
-
-        public void initButton(float btnXLocation, float btnYLocation, String btnText, System.Action OpenEvent,  String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
-        {
-            btnType = "NestedButton";
-
-            Transform menu = UnityEngine.Object.Instantiate<Transform>(QuickMenuStuff.NestedMenuTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform);
-            menuName = QMButtonAPI.identifier + btnQMLoc + "_" + btnXLocation + "_" + btnYLocation;
-            menu.name = menuName;
-
-            mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { OpenEvent.Invoke(); QuickMenuStuff.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, btnTextColor, btnHalf);
-
-            Il2CppSystem.Collections.IEnumerator enumerator = menu.transform.GetEnumerator();
-            while (enumerator.MoveNext())
-            {
-                Il2CppSystem.Object obj = enumerator.Current;
-                Transform btnEnum = obj.Cast<Transform>();
-                if (btnEnum != null)
-                {
-                    UnityEngine.Object.Destroy(btnEnum.gameObject);
-                }
-            }
-
-            if (backbtnTextColor == null)
-            {
-                backbtnTextColor = Color.yellow;
-            }
-            QMButtonAPI.allNestedButtons.Add(this);
-            backButton = new QMSingleButton(this, 5, 2, "Back", () => { QuickMenuStuff.ShowQuickmenuPage(btnQMLoc); }, "Go Back", backbtnBackgroundColor, backbtnTextColor);
         }
 
         public void initButton(float btnXLocation, float btnYLocation, String btnText, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
@@ -716,8 +924,11 @@ namespace RubyButtonAPI
             QuickMenuStuff.ShowQuickmenuPage(menuName);
         }
     }
-        public class QMHalfScroll
+
+    // TODO : ADD TWO ACTIONS THAT CAN RUN WHEN THE SCROLL IS OPEN OR CLOSED.
+    public class QMHalfScroll
     { 
+
         public class ScrollObject
         {
             public QMButtonBase ButtonBase;
@@ -937,7 +1148,7 @@ namespace RubyButtonAPI
         }
     }
 
-    public class QMScroll
+    public class QMScrollMenu
     {
         public class ScrollObject
         {
@@ -954,14 +1165,14 @@ namespace RubyButtonAPI
         private int Posy = 0;
         private int Pos = 0;
         private int Index = 0;
-        private Action<QMScroll> OpenAction;
+        private Action<QMScrollMenu> OpenAction;
         public int currentMenuIndex = 0;
 
         public bool ShouldChangePos = true;
         public bool AllowOverStepping = false;
         public bool IgnoreEverything = false;
 
-        public QMScroll(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action<QMScroll> MenuOpenAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
+        public QMScrollMenu(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action<QMScrollMenu> MenuOpenAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             BaseMenu = new QMNestedButton(btnMenu, btnXLocation, btnYLocation, btnText, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
             SetAction(MenuOpenAction);
@@ -978,7 +1189,7 @@ namespace RubyButtonAPI
             }, "Go Next", null, null, true);
         }
 
-        public QMScroll(QMNestedButton basemenu)
+        public QMScrollMenu(QMNestedButton basemenu)
         {
             BaseMenu = basemenu;
             IndexButton = new QMSingleButton(BaseMenu, 5, 0.5f, "Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString(), delegate { }, "");
@@ -1010,7 +1221,7 @@ namespace RubyButtonAPI
             IndexButton.setButtonText("Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString());
         }
 
-        public void SetAction(Action<QMScroll> Open, bool shouldClear = true)
+        public void SetAction(Action<QMScrollMenu> Open, bool shouldClear = true)
         {
             try
             {
@@ -1106,29 +1317,6 @@ namespace RubyButtonAPI
             });
         }
 
-
-        public void Add(QMButtonBase Button, int Page, bool ShouldChangePos, float POSX = 0f, float POSY = 0f)
-        {
-            if (ShouldChangePos)
-            {
-                Button.setLocation(POSX, POSY);
-            }
-            Button.setActive(false);
-            QMButtons.Add(new ScrollObject()
-            {
-                ButtonBase = Button,
-                Index = Page
-            });
-            if (!IgnoreEverything)
-            {
-                if (Page > Index)
-                {
-                    Index = Page;
-                }
-            }
-        }
-
-
         public void Add(QMButtonBase Button, int Page, float POSX = 0, float POSY = 0)
         {
             if (ShouldChangePos)
@@ -1211,7 +1399,7 @@ namespace RubyButtonAPI
 
         public void SetInfoIcon(bool state)
         {
-            InfoIconObject.SetActive(!state);
+            InfoIconObject.SetActive(state);
         }
     }
 
@@ -1331,6 +1519,8 @@ namespace RubyButtonAPI
         // Internal cache of the BoxCollider Background for the Quick Menu
         private static BoxCollider QuickMenuBackgroundReference;
 
+        private static GameObject TabButtonReference;
+
         // Internal cache of the Single Button Template for the Quick Menu
         private static GameObject SingleButtonReference;
 
@@ -1360,6 +1550,14 @@ namespace RubyButtonAPI
             if (SingleButtonReference == null)
                 SingleButtonReference = GetQuickMenuInstance().transform.Find("ShortcutMenu/WorldsButton").gameObject;
             return SingleButtonReference;
+        }
+        public static GameObject TabButtonTemplate()
+        {
+           // var Tab1 = GameObject.Find("/UserInterface/QuickMenu/QuickModeTabs/HomeTab");
+           // var Tab2 = GameObject.Find("/UserInterface/QuickMenu/QuickModeTabs/NotificationsTab");
+            if (TabButtonReference == null)
+                TabButtonReference = GameObject.Find("/UserInterface/QuickMenu/QuickModeTabs/HomeTab");
+            return TabButtonReference;
         }
 
         // Fetch the Toggle Button Template from the Quick Menu
@@ -1402,9 +1600,10 @@ namespace RubyButtonAPI
             return vrcuimInstance;
         }
 
-        // Cache the FieldInfo for getting the current page. Hope to god this works!
+               // Cache the FieldInfo for getting the current page. Hope to god this works!
         private static FieldInfo currentPageGetter;
-
+        private static GameObject shortcutMenu;
+        private static GameObject userInteractMenu;
 
         // Show a Quick Menu page via the Page Name. Hope to god this works!
         public static void ShowQuickmenuPage(string pagename)
@@ -1478,9 +1677,7 @@ namespace RubyButtonAPI
             }
         }
 
-        private static GameObject shortcutMenu;
-        private static GameObject userInteractMenu;
-
+        // Set the current Quick Menu index
         public static void SetIndex(int index)
         {
             GetQuickMenuInstance().field_Private_Int32_0 = index;

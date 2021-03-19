@@ -29,7 +29,7 @@ namespace DayClientML2.Utility.MenuApi
         public UiVRCList UiVRCList;
         public Text Text;
 
-        //public static void RenderElement(Il2CppSystem.Collections.Generic.List<ApiModel> ModelList)
+        //public void RenderElement(Il2CppSystem.Collections.Generic.List<ApiModel> ModelList)
         //{
         //    UiVRCList.Method_Protected_Void_List_1_T_Int32_Boolean_VRCUiContentButton_0<ApiModel>(ModelList, 0, true);
         //}
@@ -38,7 +38,7 @@ namespace DayClientML2.Utility.MenuApi
             UiVRCList.Method_Protected_Void_List_1_T_Int32_Boolean_VRCUiContentButton_0<ApiAvatar>(AvatarList, 0, true);
         }
 
-        //public static void RenderElement(Il2CppSystem.Collections.Generic.List<APIUser> UserList)
+        //public void RenderElement(Il2CppSystem.Collections.Generic.List<APIUser> UserList)
         //{
         //    UiVRCList.Method_Protected_Void_List_1_T_Int32_Boolean_VRCUiContentButton_0<APIUser>(UserList, 0, true);
         //}

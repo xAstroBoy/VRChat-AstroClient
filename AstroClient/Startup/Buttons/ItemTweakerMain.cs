@@ -143,7 +143,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
         public static void WorldObjectSeletionQMScroll(QMNestedButton main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Select W.Objects", "Select World Objects to edit", null, null, null, null, btnHalf);
-            var scroll = new QMScroll(menu);
+            var scroll = new QMScrollMenu(menu);
             new QMSingleButton(menu, 0, -1, "Refresh", delegate
             {
                 scroll.Refresh();
@@ -183,7 +183,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
         public static void PickupSelectionQMScroll(QMNestedButton main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Select Pickup", "Select World Pickup to edit", null, null, null, null, btnHalf);
-            var PickupQMScroll = new QMScroll(menu);
+            var PickupQMScroll = new QMScrollMenu(menu);
             new QMSingleButton(menu, 0, -1, "Refresh", delegate
             {
                 PickupQMScroll.Refresh();
@@ -318,7 +318,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
         public static void InternalTriggerQMScroll(QMNestedButton main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Interact Triggers", "Interact with Selected Pickup Triggers", null, null, null, null, btnHalf);
-            var scroll = new QMScroll(menu);
+            var scroll = new QMScrollMenu(menu);
             scroll.SetAction(delegate
             {
                 foreach (var trigger in GetObjectTriggers(HandsUtils.GetGameObjectToEdit()))
@@ -429,7 +429,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
         {
             var menu = new QMNestedButton(main, x, y, "Internal VRC_Interactable ", "Interact with Internal VRC_Interactable Triggers", null, null, null, null, btnHalf);
             menu.getMainButton().SetResizeTextForBestFit(true);
-            var scroll = new QMScroll(menu);
+            var scroll = new QMScrollMenu(menu);
             new QMSingleButton(menu, 0, -1, "Refresh", delegate
             {
                 scroll.Refresh();
@@ -467,7 +467,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
         public static void PrefabSpawnerQMScroll(QMNestedButton main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Spawn Prefabs", "Spawn World Prefabs", null, null, null, null, btnHalf);
-            var prefabQMScroll = new QMScroll(menu);
+            var prefabQMScroll = new QMScrollMenu(menu);
             prefabQMScroll.SetAction(delegate
             {
                 foreach (var prefab in WorldUtils.GetAllWorldPrefabs())

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AstroClient;
+using System;
 using UnhollowerBaseLib;
 using UnhollowerRuntimeLib;
 using UnityEngine;
@@ -92,19 +93,11 @@ namespace DayClientML2.Utility
                 text2.text = "";
             }
             Button.GetComponentInChildren<Text>().text = text;
-            Button.name = "AstroClient_" + text;
+            Button.name = text + BuildInfo.Name;
             Button.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             Button.GetComponentInChildren<Button>().onClick.AddListener(listener);
             Button.GetComponentInChildren<Button>().m_Interactable = true;
             Button.GetComponent<RectTransform>().anchoredPosition = new Vector2(x_pos, y_pos);
-            Il2CppReferenceArray<Component> componentsInChildren = Button.GetComponentsInChildren(Il2CppType.Of<Image>());
-            foreach (Component component in componentsInChildren)
-            {
-                bool flag2 = component.name == "Icon_New";
-
-                if (flag2)
-                    UnityEngine.Object.DestroyImmediate(component);
-            }
             Button.name = $"MenuButton_{text}_{x_pos}_{y_pos}";
             Button.SetActive(true);
         }
@@ -192,20 +185,11 @@ namespace DayClientML2.Utility
                 text2.text = "";
             }
             Button.GetComponentInChildren<Text>().text = text;
-            Button.name = "AstroClient_" + text;
+            Button.name = text + BuildInfo.Name;
             Button.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             Button.GetComponentInChildren<Button>().onClick.AddListener(listener);
             Button.GetComponentInChildren<Button>().m_Interactable = true;
             Button.GetComponent<RectTransform>().anchoredPosition = new Vector2(x_pos, y_pos);
-            Button.GetComponent<RectTransform>().anchoredPosition = new Vector2(x_pos, y_pos);
-            Il2CppReferenceArray<Component> componentsInChildren = Button.GetComponentsInChildren(Il2CppType.Of<Image>());
-            foreach (Component component in componentsInChildren)
-            {
-                bool flag2 = component.name == "Icon_New";
-
-                if (flag2)
-                    UnityEngine.Object.DestroyImmediate(component);
-            }
             Button.GetComponent<RectTransform>().sizeDelta /= new Vector2(xSize, ySize);
             Button.name = $"MenuButton_{text}_{x_pos}_{y_pos}";
             Button.SetActive(true);
@@ -238,7 +222,7 @@ namespace DayClientML2.Utility
                         break;
                 }
                 Button.transform.SetParent(Parent);
-                Button.name = "AstroClient_" + text;; //Better than Favorite Button(Clone) all the time but no one sees this.
+                Button.name =  text + BuildInfo.Name; //Better than Favorite Button(Clone) all the time but no one sees this.
                 foreach (Text text2 in Button.GetComponentsInChildren<Text>(true))
                 {
                     text2.text = "";
@@ -248,14 +232,6 @@ namespace DayClientML2.Utility
                 Button.GetComponentInChildren<Button>().onClick.AddListener(listener);
                 Button.GetComponentInChildren<Button>().m_Interactable = true;
                 Button.GetComponent<RectTransform>().anchoredPosition = new Vector2(x_pos, y_pos);
-                Il2CppReferenceArray<Component> componentsInChildren = Button.GetComponentsInChildren(Il2CppType.Of<Image>());
-                foreach (Component component in componentsInChildren)
-                {
-                    bool flag2 = component.name == "Icon_New";
-
-                    if (flag2)
-                        UnityEngine.Object.DestroyImmediate(component);
-                }
                 Button.name = $"MenuButton_{text}_{x_pos}_{y_pos}";
             }
             catch (Exception)
@@ -302,15 +278,8 @@ namespace DayClientML2.Utility
                 Button.GetComponentInChildren<Button>().m_Interactable = true;
                 Button.GetComponent<RectTransform>().anchoredPosition = new Vector2(x_pos, y_pos);
                 Il2CppReferenceArray<Component> componentsInChildren = Button.GetComponentsInChildren(Il2CppType.Of<Image>());
-                foreach (Component component in componentsInChildren)
-                {
-                    bool flag2 = component.name == "Icon_New";
-
-                    if (flag2)
-                        UnityEngine.Object.DestroyImmediate(component);
-                }
                 Button.GetComponent<RectTransform>().sizeDelta /= new Vector2(xSize, ySize);
-                Button.name = "AstroClient_" + text;; //Better than Favorite Button(Clone) all the time but no one sees this.
+                Button.name = text + BuildInfo.Name; //Better than Favorite Button(Clone) all the time but no one sees this.
             }
             catch (Exception)
             {
@@ -346,7 +315,7 @@ namespace DayClientML2.Utility
                         break;
                 }
                 Button.transform.SetParent(Parent);
-                Button.name = "AstroClient_" + text;; //Better than Favorite Button(Clone) all the time but no one sees this.
+                Button.name =  text + BuildInfo.Name; //Better than Favorite Button(Clone) all the time but no one sees this.
                 foreach (Text text2 in Button.GetComponentsInChildren<Text>(true))
                 {
                     text2.text = "";
@@ -356,14 +325,6 @@ namespace DayClientML2.Utility
                 Button.GetComponentInChildren<Button>().onClick.AddListener(listener);
                 Button.GetComponentInChildren<Button>().m_Interactable = true;
                 Button.GetComponent<RectTransform>().anchoredPosition = new Vector2(x_pos, y_pos);
-                Il2CppReferenceArray<Component> componentsInChildren = Button.GetComponentsInChildren(Il2CppType.Of<Image>());
-                foreach (Component component in componentsInChildren)
-                {
-                    bool flag2 = component.name == "Icon_New";
-
-                    if (flag2)
-                        UnityEngine.Object.DestroyImmediate(component);
-                }
                 Button.name = $"MenuButton_{text}_{x_pos}_{y_pos}";
             }
             catch (Exception)
@@ -378,10 +339,10 @@ namespace DayClientML2.Utility
             Button.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
         }
 
-        public void SetSize(float size)
-        {
-            Button.GetComponent<RectTransform>().sizeDelta = Button.GetComponent<RectTransform>().sizeDelta * size;
-        }
+        //public void SetSize(float size)
+        //{
+        //    Button.GetComponent<RectTransform>().sizeDelta = Button.GetComponent<RectTransform>().sizeDelta * size;
+        //}
 
         public void SetText(string Text)
         {
@@ -416,9 +377,20 @@ namespace DayClientML2.Utility
 
         public void SetInteractable(bool result)
         {
+            //if (Button.GetComponentInChildren<Image>().color != Color.gray)
+            //     SavedColor = Button.GetComponentInChildren<Image>().color;
+            //if (result)
+            //{
+            //    SetBackgroundColor(Color.gray);
+            //}
+            //else
+            //{
+            //    if(SavedColor != null)
+            //        SetBackgroundColor(SavedColor);
+            //}
             Button.GetComponentInChildren<Button>().interactable = result;
         }
-
+        private Color SavedColor;
         public GameObject Button;
         public GameObject UserInfoPage;
         public GameObject AvatarPage;

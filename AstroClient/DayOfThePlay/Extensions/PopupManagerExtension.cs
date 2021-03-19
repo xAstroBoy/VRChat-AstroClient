@@ -47,7 +47,7 @@ namespace DayClientML2.Utility.Extensions
             }
             else
             {
-                //instance.field_Private_List_1_String_0.Add(Message);
+                instance.field_Private_List_1_String_0.Add(Message);
             }
         }
 
@@ -63,7 +63,7 @@ namespace DayClientML2.Utility.Extensions
         internal static void AskInGameInput(this VRCUiPopupManager instance, string title, string okButtonName, Action<string> onSuccess, string def = null)
         {
             IsTyping = true;
-            //MiscUtility.DelayFunction(15, delegate { IsTyping = false; });
+            MiscUtility.DelayFunction(15, delegate { IsTyping = false; });
             instance.InputPopUp(title, okButtonName, new Action<string>((g) =>
             {
                 onSuccess(g);
