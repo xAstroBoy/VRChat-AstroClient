@@ -9,9 +9,14 @@ using System.Threading.Tasks;
 
 namespace AstroClient.ConsoleUtils
 {
-    public class ModConsole
+
+    
+        public class ModConsole
     {
         private static bool HasRenamedOldLogFile = false;
+
+        private static bool HasInitiated = false;
+
 
         private static bool DebugMode
         {
@@ -20,6 +25,7 @@ namespace AstroClient.ConsoleUtils
                 return Bools.isDebugMode;
             }
         }
+
 
 
         private static string LogsPath
@@ -69,30 +75,37 @@ namespace AstroClient.ConsoleUtils
         }
 
 
-        public static void OnApplicationStart()
+        public static void InitLogsSetup()
         {
-            if (!Directory.Exists(LogsPath))
+            if (!HasInitiated)
             {
-                Directory.CreateDirectory(LogsPath);
-            }
-            if (!HasRenamedOldLogFile)
-            {
-                ReplaceOldLatestFile();
-                HasRenamedOldLogFile = true;
+                if (!Directory.Exists(LogsPath))
+                {
+                    Directory.CreateDirectory(LogsPath);
+                }
+                if (!HasRenamedOldLogFile)
+                {
+                    ReplaceOldLatestFile();
+                    HasRenamedOldLogFile = true;
+                }
+                HasInitiated = true;
             }
         }
 
         public static void Write(string msg)
         {
-            Task.Run(() => File.AppendAllText(LatestLogFile, msg));
+            if (!HasInitiated)
+            {
+                InitLogsSetup();
+            }
+
+
+            ConsoleMutex.WaitOne();
+            File.AppendAllText(LatestLogFile, msg);
+            ConsoleMutex.ReleaseMutex();
         }
 
 
-        private static IEnumerator InternalWrite(string msg)
-        {
-            
-            yield return null;
-        }
 
 
 
@@ -238,7 +251,7 @@ namespace AstroClient.ConsoleUtils
         {
 
             Console.Write(msg + Environment.NewLine, color.Value);
-            Write(msg + Environment.NewLine);
+            Task.Run(() => { Write(msg + Environment.NewLine); });
             
         }
 
@@ -275,7 +288,7 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write("LOG", Color.Aqua);
             Console.Write("]: ", Color.White);
-            Write("[LOG]: ");
+           Task.Run(() => { Write("[LOG]: "); });
         }
 
 
@@ -284,7 +297,7 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write("WARNING", Color.Orange);
             Console.Write("]: ", Color.White);
-            Write("[WARNING]: ");
+            Task.Run(() => { Write("[WARNING]: "); });
 
         }
 
@@ -293,7 +306,7 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write("ERROR", Color.Red);
             Console.Write("]: ", Color.White);
-            Write("[ERROR]: ");
+            Task.Run(() => { Write("[ERROR]: "); });
 
         }
 
@@ -305,7 +318,7 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write("DEBUG LOG", Color.Aquamarine);
             Console.Write("]: ", Color.White);
-            Write("[DEBUG LOG]: ");
+          Task.Run(() => { Write("[DEBUG LOG]: "); });
 
         }
 
@@ -314,7 +327,7 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write("DEBUG WARNING", Color.Orange);
             Console.Write("]: ", Color.White);
-            Write("[DEBUG WARNING]: ");
+           Task.Run(() => { Write("[DEBUG WARNING]: "); });
 
         }
 
@@ -324,7 +337,7 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write("DEBUG ERROR", Color.Red);
             Console.Write("]: ", Color.White);
-            Write("[DEBUG ERROR]: ");
+           Task.Run(() => {  Write("[DEBUG ERROR]: "); });
 
         }
 
@@ -333,7 +346,7 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write(BuildInfo.Name, Color.Gold);
             Console.Write("] ", Color.White);
-            Write($"[{BuildInfo.Name}] ");
+            Task.Run(() => {  Write($"[{BuildInfo.Name}] "); });
 
         }
 
@@ -343,9 +356,12 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write(time, Color.LightGreen);
             Console.Write("] ", Color.White);
-            Write($"[{time}] ");
+            Task.Run(() => {  Write($"[{time}] "); });
 
         }
-        
+
+        private static System.Threading.Mutex ConsoleMutex = new System.Threading.Mutex();
     }
+
+
 }

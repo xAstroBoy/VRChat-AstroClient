@@ -70,7 +70,6 @@ namespace AstroClient
 
         public override void OnApplicationStart()
         {
-            ModConsole.OnApplicationStart();
             try
             {
                 Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);
