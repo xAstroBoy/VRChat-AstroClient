@@ -555,7 +555,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             ScaleSlider = new QMSlider(Utils.QuickMenu.transform.Find(ScaleEditor.getMenuName()), "Scale:", 250, -720, delegate (float value)
             {
                 ObjectMiscOptions.SetScaleValueToUse(value);
-            }, 0.1f, 10, 0, true);
+            }, 0.1f, 20, 0, true);
             ScaleSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
             ScaleSlider.SetTextLabel("");
 

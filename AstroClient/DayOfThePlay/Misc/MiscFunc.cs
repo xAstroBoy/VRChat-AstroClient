@@ -542,6 +542,7 @@ namespace DayClientML2.Utility
             catch (Exception e)
             {
                 ModConsole.Error("[VRCA]Download Error");
+                ModConsole.ErrorExc(e);
             }
         }
 

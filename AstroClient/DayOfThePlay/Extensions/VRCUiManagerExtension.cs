@@ -148,7 +148,6 @@ namespace DayClientML2.Utility.Extensions
                     {
                         pageUserInfo.Method_Private_Boolean_APIUser_0(userapi);
                         pageUserInfo.Method_Private_Boolean_APIUser_PDM_0(userapi);
-                        pageUserInfo.Method_Private_Boolean_APIUser_PDM_1(userapi);
 
                         ModConsole.Log("Refreshed user: " + userapi.id);
                     }
