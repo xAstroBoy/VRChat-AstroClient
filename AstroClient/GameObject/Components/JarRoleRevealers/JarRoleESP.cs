@@ -485,10 +485,26 @@ namespace AstroClient.components
 
 
         private readonly Color DefaultTextColor = Color.white;
+        internal Murder4Roles AssignedMurder4Role
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return Murder4CurrentRole;
+            }
+        }
+
+        internal AmongUsRoles AssignedAmongUS4Role
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return AmongUsCurrentRole;
+            }
+        }
 
 
-
-        private enum Murder4Roles
+        internal enum Murder4Roles
         {
             None = 0,
             Detective = 1,
@@ -497,7 +513,7 @@ namespace AstroClient.components
             Unassigned = 4,
         }
 
-        private enum AmongUsRoles
+        internal enum AmongUsRoles
         {
             None = 0,
             Crewmate = 1,
@@ -522,6 +538,8 @@ namespace AstroClient.components
                 Internal_AssignedPlayerNode = value.Node.gameObject;
             }
         }
+
+
 
 
         internal LinkedNodes LinkedEntry
@@ -611,9 +629,9 @@ namespace AstroClient.components
         }
 
 
-        private Player Internal_player;
         private Murder4Roles Murder4CurrentRole;
         private AmongUsRoles AmongUsCurrentRole;
+        private Player Internal_player;
         private APIUser Internal_user;
         private GameObject _AssignedPlayerEntry;
         private SingleTag GameRoleTag;
