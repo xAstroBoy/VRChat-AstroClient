@@ -164,7 +164,7 @@ namespace AstroClient
                 }
                 else
                 {
-                    ModConsole.Log("Error : ApiUser is null", Color.Red);
+                    ModConsole.Error("Error : ApiUser is null");
                 }
             }
             catch (Exception) { }
@@ -197,7 +197,7 @@ namespace AstroClient
                 }
                 else
                 {
-                    ModConsole.Log("Error : ApiUser is null", Color.Red);
+                    ModConsole.Error("Error : ApiUser is null");
                 }
             }
             catch (Exception) { }
@@ -323,7 +323,7 @@ namespace AstroClient
                 }
                 else
                 {
-                    ModConsole.Log("[ORBIT] Cant find Target ");
+                    ModConsole.Error("[ORBIT] Cant find Target ");
                 }
             }
             catch (Exception) { }

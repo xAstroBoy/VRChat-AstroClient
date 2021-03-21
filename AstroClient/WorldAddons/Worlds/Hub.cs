@@ -210,7 +210,7 @@ namespace AstroClient.World.Hub
                     }
                     else
                     {
-                        ModConsole.Log(item.name + " event handler is missing!");
+                        ModConsole.Warning(item.name + " event handler is missing!");
                     }
                     Fighting_Toy_BeachBall = false;
                 }
@@ -236,7 +236,7 @@ namespace AstroClient.World.Hub
                     }
                     else
                     {
-                        ModConsole.Log(item.name + " event handler is missing!");
+                        ModConsole.Warning(item.name + " event handler is missing!");
                     }
                     Fighting_MirrorProps = false;
                 }
@@ -262,7 +262,7 @@ namespace AstroClient.World.Hub
                     }
                     else
                     {
-                        ModConsole.Log(item.name + " event handler is missing!");
+                        ModConsole.Warning(item.name + " event handler is missing!");
                     }
                     Fighting_RolePlayFighting_Props = false;
                 }
@@ -288,7 +288,7 @@ namespace AstroClient.World.Hub
                     }
                     else
                     {
-                        ModConsole.Log(item.name + " event handler is missing!");
+                        ModConsole.Warning(item.name + " event handler is missing!");
                     }
                     Fighting_Build_Crystals_blocks = false;
                 }
@@ -314,7 +314,7 @@ namespace AstroClient.World.Hub
                     }
                     else
                     {
-                        ModConsole.Log(item.name + " event handler is missing!");
+                        ModConsole.Warning(item.name + " event handler is missing!");
                     }
                     Fighting_Boats_Props = false;
                 }
@@ -352,7 +352,7 @@ namespace AstroClient.World.Hub
                         {
                             if (VrcEvent.ParameterBoolOp != Table_Props)
                             {
-                                ModConsole.Log(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the roleplay props!");
+                                ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the roleplay props!");
                                 // BlinkColorObject(Button_toggle_Table_Props, Color.red, //OriginalColor_Buttontoggle_Table_Props);
                                 Status_Table_Props = VrcEvent.ParameterBoolOp;
                                 Fighting_RolePlayFighting_Props = true;
@@ -362,7 +362,7 @@ namespace AstroClient.World.Hub
                         {
                             if (VrcEvent.ParameterBoolOp != Mirror_Props)
                             {
-                                ModConsole.Log(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the mirror props!");
+                                ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the mirror props!");
                                 // BlinkColorObject(Button_toggle_MirrorProps, Color.red, //OriginalColor_Buttontoggle_MirrorProps);
                                 Status_Mirror_Props = VrcEvent.ParameterBoolOp;
                                 Fighting_MirrorProps = true;
@@ -372,7 +372,7 @@ namespace AstroClient.World.Hub
                         {
                             if (VrcEvent.ParameterBoolOp != BeachBalls_Props)
                             {
-                                ModConsole.Log(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the beachballs props!");
+                                ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the beachballs props!");
                                 // BlinkColorObject(Button_toggle_BeachBall, Color.red, //OriginalColor_Buttontoggle_BeachBall);
                                 Status_BeachBalls_Props = VrcEvent.ParameterBoolOp;
                                 Fighting_Toy_BeachBall = true;
@@ -382,7 +382,7 @@ namespace AstroClient.World.Hub
                         {
                             if (VrcEvent.ParameterBoolOp != CrystalBlock_Props)
                             {
-                                ModConsole.Log(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the Crystals Block props!");
+                                ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the Crystals Block props!");
                                 // BlinkColorObject(Button_toggle_CrystalBlocks, Color.red, //OriginalColor_Buttontoggle_CrystalBlocks);
                                 Status_CrystalBlock_Props = VrcEvent.ParameterBoolOp;
                                 Fighting_Build_Crystals_blocks = true;
@@ -393,7 +393,7 @@ namespace AstroClient.World.Hub
                         {
                             if (VrcEvent.ParameterBoolOp != Boats_Props)
                             {
-                                ModConsole.Log(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the boats props!");
+                                ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the boats props!");
                                 // BlinkColorObject(Button_toggle_Boats, Color.red, //OriginalColor_Buttontoggle_BeachBall);
                                 Status_Boats_Props = VrcEvent.ParameterBoolOp;
                                 Fighting_Boats_Props = true;

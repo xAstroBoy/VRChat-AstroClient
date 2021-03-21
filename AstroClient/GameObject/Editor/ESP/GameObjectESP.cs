@@ -23,22 +23,22 @@ namespace AstroClient
                         {
                             if (item.name == "The Doctor Watcher Activate")
                             {
-                                ModConsole.Log("Skipped ESP Trigger : " + item.name);
+                                ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
                                 continue;
                             }
                             if (item.name == "Teddy Watcher Activate")
                             {
-                                ModConsole.Log("Skipped ESP Trigger : " + item.name);
+                                ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
                                 continue;
                             }
                             if(item.name =="Kill Trigger For Maze Part 2")
                             {
-                                ModConsole.Log("Skipped ESP Trigger : " + item.name);
+                                ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
                                 continue;
                             }
                             if (item.name == "Kill Trigger For Maze")
                             {
-                                ModConsole.Log("Skipped ESP Trigger : " + item.name);
+                                ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
                                 continue;
                             }
                             if (item.transform.parent != null && item.transform.parent.gameObject != null)
@@ -47,7 +47,7 @@ namespace AstroClient
                                 {
                                     if (item.name == "Area Trigger")
                                     {
-                                        ModConsole.Log("Skipped ESP Trigger : " + item.name + " With parent : " + item.transform.parent.gameObject.name);
+                                        ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name + " With parent : " + item.transform.parent.gameObject.name);
                                         continue;
                                     }
                                 }

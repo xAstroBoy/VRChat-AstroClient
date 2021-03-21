@@ -73,22 +73,22 @@ namespace AstroClient.components
 
             if (GetComponent<RigidBodyController>() == null)
                 {
-                    ModConsole.Log("PlayerAttacker : Object Still Has No RigidBodyController (Probably Udon World) , Attacker Will be broken!");
+                    ModConsole.Warning("PlayerAttacker : Object Still Has No RigidBodyController (Probably Udon World) , Attacker Will be broken!");
                 }
 
                 if (GetComponent<PickupController>() == null)
                 {
-                    ModConsole.Log("PlayerAttacker : Object Still Has No PickupController (Probably Udon World) , Attacker Will be broken!");
+                    ModConsole.Warning("PlayerAttacker : Object Still Has No PickupController (Probably Udon World) , Attacker Will be broken!");
                 }
 
                 if (player == null)
                 {
-                    ModConsole.Log("PlayerAttacker : ERROR , Player Is not registered!");
+                    ModConsole.Error("PlayerAttacker : ERROR , Player Is not registered!");
                 }
 
                 if (this == null)
                 {
-                    ModConsole.Log("Is This actually supposed to be null?");
+                    ModConsole.Error("PlayerAttacker : Is This actually supposed to be null?");
                 }
             }
             catch

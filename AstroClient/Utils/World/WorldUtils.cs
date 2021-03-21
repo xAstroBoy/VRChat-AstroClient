@@ -138,7 +138,7 @@ namespace AstroClient
                             Pickups.Add(item.gameObject);
                         }
                     }
-                    ModConsole.Log("Returned only SDKBase Pickups");
+                    ModConsole.DebugLog("Returned only SDKBase Pickups");
                     return Pickups;
                 }
                 if (list2.Count() != 0 && list1.Count() == 0)
@@ -150,7 +150,7 @@ namespace AstroClient
                             Pickups.Add(item.gameObject);
                         }
                     }
-                    ModConsole.Log("Returned only VRCSDK2 Pickups");
+                    ModConsole.DebugLog("Returned only VRCSDK2 Pickups");
 
                     return Pickups;
                 }
@@ -163,7 +163,7 @@ namespace AstroClient
                             Pickups.Add(item.gameObject);
                         }
                     }
-                    ModConsole.Log("Returned only VRCSDK3 Pickups");
+                    ModConsole.DebugLog("Returned only VRCSDK3 Pickups");
 
                     return Pickups;
                 }
@@ -192,7 +192,7 @@ namespace AstroClient
                             VRC_Interactables.Add(item.gameObject);
                         }
                     }
-                    ModConsole.Log("Returned only SDKBase VRC_Interactable");
+                    ModConsole.DebugLog("Returned only SDKBase VRC_Interactable");
                     return VRC_Interactables;
                 }
                 if (list2.Count() != 0 && list1.Count() == 0)
@@ -204,7 +204,7 @@ namespace AstroClient
                             VRC_Interactables.Add(item.gameObject);
                         }
                     }
-                    ModConsole.Log("Returned only VRCSDK2 VRC_Interactable");
+                    ModConsole.DebugLog("Returned only VRCSDK2 VRC_Interactable");
 
                     return VRC_Interactables;
                 }
@@ -217,7 +217,7 @@ namespace AstroClient
                             VRC_Interactables.Add(item.gameObject);
                         }
                     }
-                    ModConsole.Log("Returned only VRCSDK3 VRC_Interactable");
+                    ModConsole.DebugLog("Returned only VRCSDK3 VRC_Interactable");
 
                     return VRC_Interactables;
                 }
@@ -243,7 +243,7 @@ namespace AstroClient
                         Triggers.Add(item.gameObject);
                     }
                 }
-                ModConsole.Log("Returned only SDKBase VRC_Trigger");
+                ModConsole.DebugLog("Returned only SDKBase VRC_Trigger");
                 return Triggers;
             }
             if (list2.Count() != 0 && list.Count() == 0)
@@ -255,7 +255,7 @@ namespace AstroClient
                         Triggers.Add(item.gameObject);
                     }
                 }
-                ModConsole.Log("Returned only VRCSDK2 VRC_Trigger");
+                ModConsole.DebugLog("Returned only VRCSDK2 VRC_Trigger");
                 return Triggers;
             }
             return Triggers;

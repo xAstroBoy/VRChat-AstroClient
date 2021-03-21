@@ -23,7 +23,7 @@ namespace AstroClient
                 }
                 else
                 {
-                    ModConsole.Log("Unable to get " + obj.name + " Renderer component.");
+                    ModConsole.Warning("Unable to get " + obj.name + " Renderer component.");
                 }
             }
         }

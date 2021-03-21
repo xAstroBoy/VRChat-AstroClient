@@ -68,13 +68,13 @@ namespace AstroClient.components
                 if (JarRoleController.IsMurder4World)
                 {
                     Murder4CurrentRole = Murder4Roles.Unassigned;
-                    ModConsole.Log("Registered " + Internal_user.displayName + " On Murder 4 Role ESP.");
+                    ModConsole.DebugLog("Registered " + Internal_user.displayName + " On Murder 4 Role ESP.");
 
                 }
                 if (JarRoleController.isAmongUsWorld)
                 {
                     AmongUsCurrentRole = AmongUsRoles.Unassigned;
-                    ModConsole.Log("Registered " + Internal_user.displayName + " On Among US Role ESP.");
+                    ModConsole.DebugLog("Registered " + Internal_user.displayName + " On Among US Role ESP.");
 
                 }
                 
@@ -123,8 +123,8 @@ namespace AstroClient.components
                     }
                     else
                     {
-                        ModConsole.Log("Unknown Color Detected!");
-                        ModConsole.Log(Internal_user.displayName + " Current Color : new Color(" + Color.r + "f, " + Color.g + "f, " + Color.b + "f, " + Color.a + "f)");
+                        ModConsole.Warning("Unknown Color Detected!");
+                        ModConsole.Warning(Internal_user.displayName + " Current Color : new Color(" + Color.r + "f, " + Color.g + "f, " + Color.b + "f, " + Color.a + "f)");
                         return AmongUsRoles.None;
                     }
                 }
@@ -307,8 +307,8 @@ namespace AstroClient.components
                     }
                     else
                     {
-                        ModConsole.Log("Unknown Color Detected!");
-                        ModConsole.Log(Internal_user.displayName + " Current Color : new Color(" + Color.r + "f, " + Color.g + "f, " + Color.b + "f, " + Color.a + "f)");
+                        ModConsole.Warning("Unknown Color Detected!");
+                        ModConsole.Warning(Internal_user.displayName + " Current Color : new Color(" + Color.r + "f, " + Color.g + "f, " + Color.b + "f, " + Color.a + "f)");
                         return Murder4Roles.None;
                     }
                 }

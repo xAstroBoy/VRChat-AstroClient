@@ -121,7 +121,7 @@ namespace AstroClient.components
             }
             else
             {
-                ModConsole.Log("PlayerWatcherManager Instance is Null!");
+                ModConsole.Error("PlayerWatcherManager Instance is Null!");
             }
         }
 

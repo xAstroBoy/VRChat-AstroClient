@@ -567,8 +567,8 @@ namespace AstroClient
             GameStartbtn = new QMSingleButton(Murder4CheatPage, 3, 2, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
             GameAbortbtn = new QMSingleButton(Murder4CheatPage, 3, 2.5f, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
 
-            GameVictoryBystanderBtn = new QMSingleButton(Murder4CheatPage, 4, 2, "Victory Crewmate", new Action(() => { VictoryBystanderEvent.ExecuteUdonEvent(); }), "Force Victory Bystander Event", null, Color.green, true);
-            GameVictoryMurdererBtn = new QMSingleButton(Murder4CheatPage, 4, 2.5f, "Victory Impostor", new Action(() => { VictoryMurdererEvent.ExecuteUdonEvent(); }), "Force Victory Murderer Event", null, Color.red, true);
+            GameVictoryBystanderBtn = new QMSingleButton(Murder4CheatPage, 4, 2, "Victory Bystander", new Action(() => { VictoryBystanderEvent.ExecuteUdonEvent(); }), "Force Victory Bystander Event", null, Color.green, true);
+            GameVictoryMurdererBtn = new QMSingleButton(Murder4CheatPage, 4, 2.5f, "Victory Murderer", new Action(() => { VictoryMurdererEvent.ExecuteUdonEvent(); }), "Force Victory Murderer Event", null, Color.red, true);
 
 
         }

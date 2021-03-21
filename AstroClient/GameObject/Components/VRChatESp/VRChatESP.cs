@@ -54,7 +54,7 @@ namespace AstroClient.components
             }
             else
             {
-                ModConsole.Log("Unable to Keep ESP to : " + this.gameObject.name + " As MeshRenderer is Missing");
+                ModConsole.Error("Unable to Keep ESP to : " + this.gameObject.name + " As MeshRenderer is Missing");
                 UnityEngine.Object.Destroy(this);
             }
         }

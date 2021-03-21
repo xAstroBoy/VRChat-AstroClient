@@ -103,7 +103,7 @@ namespace AstroClient.components
                 }
                 else
                 {
-                    ModConsole.Log("CrazyObjectManager Instance is Null!");
+                    ModConsole.Error("CrazyObjectManager Instance is Null!");
                 }
             }
         }

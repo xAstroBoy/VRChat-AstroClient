@@ -102,7 +102,7 @@ namespace AstroClient.components
                 }
                 else
                 {
-                    ModConsole.Log("RocketManager Instance is Null!");
+                    ModConsole.Error("RocketManager Instance is Null!");
                 }
             }
         }

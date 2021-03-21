@@ -53,7 +53,7 @@ namespace AstroClient.Cloner
 
         public static void CloneGameObject(GameObject GameObject)
         {
-            ModConsole.Log("Found A Target GameObject  :" + GameObject.name);
+            ModConsole.DebugLog("Found A Target GameObject  :" + GameObject.name);
             var obj = NetworkManager.Instantiate(GameObject);
             if (obj != null)
             {

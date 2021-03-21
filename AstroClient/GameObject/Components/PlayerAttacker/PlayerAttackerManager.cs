@@ -88,18 +88,18 @@ namespace AstroClient.components
         {
             if (obj == null)
             {
-                ModConsole.Log("Object is null");
+                ModConsole.DebugWarning("Object is null");
                 return;
             }
             if (player == null)
             {
-                ModConsole.Log("player is null");
+                ModConsole.DebugWarning("player is null");
                 return;
             }
 
             if (Instance == null)
             {
-                ModConsole.Log("Instance is null");
+                ModConsole.Error("Player Attacker Instance is null");
             }
             if (Instance != null)
             {
@@ -120,7 +120,7 @@ namespace AstroClient.components
             }
             else
             {
-                ModConsole.Log("PlayerAttackerManager Instance is Null!");
+                ModConsole.Warning("PlayerAttackerManager Instance is Null!");
             }
         }
 
