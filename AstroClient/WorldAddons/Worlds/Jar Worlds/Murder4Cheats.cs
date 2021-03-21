@@ -181,14 +181,59 @@ namespace AstroClient
                 {
                     foreach (var subaction in action._eventTable)
                     {
-                        if(subaction.key == "OnPlayerUnlockedClues")
+                        if (subaction.key == "SyncStart")
+                        {
+                            StartGameEvent = new CachedUdonEvent(action, subaction.key);
+                            ModConsole.Log("Found Start Game Event.");
+                        }
+                        if (subaction.key == "SyncAbort")
+                        {
+                            AbortGameEvent = new CachedUdonEvent(action, subaction.key);
+                            ModConsole.Log("Found Abort Game Event.");
+                        }
+                        if (subaction.key == "SyncVictoryB")
+                        {
+                            VictoryBystanderEvent = new CachedUdonEvent(action, subaction.key);
+                            ModConsole.Log("Found Victory Bystander Event.");
+                        }
+                        if (subaction.key == "SyncVictoryM")
+                        {
+                            VictoryMurdererEvent = new CachedUdonEvent(action, subaction.key);
+                            ModConsole.Log("Found Victory Murderer Event.");
+                        }
+                        if (subaction.key == "OnPlayerUnlockedClues")
                         {
                             OnPlayerUnlockedClues = new CachedUdonEvent(action, subaction.key);
                             ModConsole.Log("Found Unlocked Clues Sound.");
+                        }
+                        if (StartGameEvent != null && AbortGameEvent != null && VictoryBystanderEvent != null && VictoryMurdererEvent != null && OnPlayerUnlockedClues != null)
+                        {
+                            ModConsole.DebugLog("Finished Finding all Udon Events!");
                             break;
                         }
                     }
                 }
+            }
+
+            if (GameStartbtn != null)
+            {
+                GameStartbtn.setActive(StartGameEvent.isNotNull());
+                GameStartbtn.setIntractable(StartGameEvent.isNotNull());
+            }
+            if (GameAbortbtn != null)
+            {
+                GameAbortbtn.setActive(AbortGameEvent.isNotNull());
+                GameAbortbtn.setIntractable(AbortGameEvent.isNotNull());
+            }
+            if (GameVictoryBystanderBtn != null)
+            {
+                GameVictoryBystanderBtn.setActive(VictoryBystanderEvent.isNotNull());
+                GameVictoryBystanderBtn.setIntractable(VictoryBystanderEvent.isNotNull());
+            }
+            if (GameVictoryMurdererBtn != null)
+            {
+                GameVictoryMurdererBtn.setActive(VictoryMurdererEvent.isNotNull());
+                GameVictoryMurdererBtn.setIntractable(VictoryMurdererEvent.isNotNull());
             }
 
 
@@ -338,6 +383,10 @@ namespace AstroClient
             Clue_Postcard = null;
             item_DetectiveRevolver = null;
             Clue_Present = null;
+            StartGameEvent = null;
+            AbortGameEvent = null;
+            VictoryBystanderEvent = null;
+            VictoryMurdererEvent = null;
             Clues.Clear();
             DetectiveGuns.Clear();
             SilencedGuns.Clear();
@@ -515,6 +564,12 @@ namespace AstroClient
             Murder4UdonExploits.Init_Unfiltered_Nodes_btn(Murder4CheatPage, 4, 1f, true);
 
 
+            GameStartbtn = new QMSingleButton(Murder4CheatPage, 3, 2, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
+            GameAbortbtn = new QMSingleButton(Murder4CheatPage, 3, 2.5f, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
+
+            GameVictoryBystanderBtn = new QMSingleButton(Murder4CheatPage, 4, 2, "Victory Crewmate", new Action(() => { VictoryBystanderEvent.ExecuteUdonEvent(); }), "Force Victory Bystander Event", null, Color.green, true);
+            GameVictoryMurdererBtn = new QMSingleButton(Murder4CheatPage, 4, 2.5f, "Victory Impostor", new Action(() => { VictoryMurdererEvent.ExecuteUdonEvent(); }), "Force Victory Murderer Event", null, Color.red, true);
+
 
         }
 
@@ -564,6 +619,13 @@ namespace AstroClient
 
         // MAP GameObjects Required for control.
 
+
+
+
+        public static QMSingleButton GameStartbtn;
+        public static QMSingleButton GameAbortbtn;
+        public static QMSingleButton GameVictoryBystanderBtn;
+        public static QMSingleButton GameVictoryMurdererBtn;
 
         private static QMSingleButton PresentTeleporter;
         private static QMSingleButton PresentSpawner;
@@ -660,7 +722,13 @@ namespace AstroClient
 
         public static QMNestedButton Murder4CheatPage;
 
-        public static CachedUdonEvent OnPlayerUnlockedClues; 
+        public static CachedUdonEvent OnPlayerUnlockedClues;
+
+        public static CachedUdonEvent StartGameEvent;
+        public static CachedUdonEvent AbortGameEvent;
+
+        public static CachedUdonEvent VictoryBystanderEvent;
+        public static CachedUdonEvent VictoryMurdererEvent;
 
         public static bool HasMurder4WorldLoaded = false;
 

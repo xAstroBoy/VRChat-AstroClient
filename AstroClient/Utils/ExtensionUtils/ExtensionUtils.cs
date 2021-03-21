@@ -1094,19 +1094,19 @@ namespace AstroClient.extensions
         }
 
 
-        public static void ExecuteUdonEvent(this CachedUdonEvent cachedudon)
+        public static void ExecuteUdonEvent(this CachedUdonEvent udonvar)
         {
-            if(cachedudon.Action != null)
+            if(udonvar.Action != null)
             {
-                cachedudon.Action.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, cachedudon.EventKey);
+                udonvar.Action.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, udonvar.EventKey);
             }
 
         }
 
 
-        public static void ExecuteUdonEvent(this List<CachedUdonEvent> cachedudons)
+        public static void ExecuteUdonEvent(this List<CachedUdonEvent> udonlist)
         {
-            foreach (var cachedudon in cachedudons)
+            foreach (var cachedudon in udonlist)
             {
                 if (cachedudon.Action != null)
                 {
@@ -1116,6 +1116,36 @@ namespace AstroClient.extensions
 
         }
 
+
+        public static bool IsEmpty<T>(this List<T> list)
+        {
+            return list == null || list.Count == 0;
+        }
+        public static bool isNotEmpty<T>(this List<T> list)
+        {
+            return list.Count != 0;
+        }
+
+
+        public static bool IsNull<T>(this T obj) where T : class
+        {
+            return obj == null;
+        }
+
+        public static bool IsNull<T>(this T? obj) where T : struct
+        {
+            return !obj.HasValue;
+        }
+
+        public static bool isNotNull<T>(this T obj) where T : class
+        {
+            return obj != null;
+        }
+
+        public static bool isNotNull<T>(this T? obj) where T : struct
+        {
+            return obj.HasValue;
+        }
 
         public static void AddString(this List<string> list, string text)
         {

@@ -20,6 +20,8 @@ using System.Threading;
 using AstroClient.UdonExploits;
 using AstroClient.ButtonShortcut;
 using AstroClient.Variables;
+using VRC.Udon;
+using static AstroClient.variables.CustomLists;
 #endregion AstroClient Imports
 
 namespace AstroClient
@@ -27,6 +29,15 @@ namespace AstroClient
     public static class AmongUSCheats
     {
   
+        public static void OnLevelLoad()
+        {
+            StartGameEvent = null;
+            AbortGameEvent = null;
+            VictoryCrewmateEvent = null;
+            VictoryImpostorEvent = null;
+
+
+        }
 
         public static void FindAmongUsObjects()
         {
@@ -46,6 +57,62 @@ namespace AstroClient
             if (invisiblewall_1 != null)
             {
                 invisiblewall_1.DestroyMeLocal();
+            }
+
+            foreach (var action in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+            {
+                if (action.gameObject.name == "Game Logic")
+                {
+                    foreach (var subaction in action._eventTable)
+                    {
+                        if (subaction.key == "SyncStart")
+                        {
+                            StartGameEvent = new CachedUdonEvent(action, subaction.key);
+                            ModConsole.Log("Found Start Game Event.");
+                        }
+                        if (subaction.key == "SyncAbort")
+                        {
+                            AbortGameEvent = new CachedUdonEvent(action, subaction.key);
+                            ModConsole.Log("Found Abort Game Event.");
+                        }
+                        if (subaction.key == "SyncVictoryB")
+                        {
+                            VictoryCrewmateEvent = new CachedUdonEvent(action, subaction.key);
+                            ModConsole.Log("Found Victory Crewmate Event.");
+                        }
+                        if (subaction.key == "SyncVictoryM")
+                        {
+                            VictoryImpostorEvent = new CachedUdonEvent(action, subaction.key);
+                            ModConsole.Log("Found Victory Impostor Event.");
+                        }
+                        if (StartGameEvent != null && AbortGameEvent != null && VictoryCrewmateEvent != null && VictoryImpostorEvent != null)
+                        {
+                            ModConsole.DebugLog("Finished Finding all Udon Events!");
+                            break;
+                        }
+                    }
+
+                }
+            }
+            if(GameStartbtn != null)
+            {
+                GameStartbtn.setActive(StartGameEvent.isNotNull());
+                GameStartbtn.setIntractable(StartGameEvent.isNotNull());
+            }
+            if (GameAbortbtn != null)
+            {
+                GameAbortbtn.setActive(AbortGameEvent.isNotNull());
+                GameAbortbtn.setIntractable(AbortGameEvent.isNotNull());
+            }
+            if (GameVictoryCrewmateBtn != null)
+            {
+                GameVictoryCrewmateBtn.setActive(VictoryCrewmateEvent.isNotNull());
+                GameVictoryCrewmateBtn.setIntractable(VictoryCrewmateEvent.isNotNull());
+            }
+            if (GameVictoryImpostorBtn != null)
+            {
+                GameVictoryImpostorBtn.setActive(VictoryImpostorEvent.isNotNull());
+                GameVictoryImpostorBtn.setIntractable(VictoryImpostorEvent.isNotNull());
             }
         }
 
@@ -90,6 +157,18 @@ namespace AstroClient
             AmongUSUdonExploits.Init_ForceVotePlayer_menu(AmongUsCheatsPage, 4f, 0f, true);
             AmongUSUdonExploits.Init_ForcePlayerEject_Menu(AmongUsCheatsPage, 4f, 0.5f, true);
 
+            GameStartbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
+            GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1.5f, "Abort Game", new Action(() => {AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
+
+            GameVictoryCrewmateBtn = new QMSingleButton(AmongUsCheatsPage, 1, 2, "Victory Bystander", new Action(() => { VictoryCrewmateEvent.ExecuteUdonEvent(); }), "Force Victory Bystander Event", null, Color.green, true);
+            GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, 1, 2.5f, "Victory Murderer", new Action(() => { VictoryImpostorEvent.ExecuteUdonEvent();}), "Force Victory Murderer Event", null, Color.red, true);
+
+
+
+
+
+
+
         }
 
 
@@ -99,10 +178,22 @@ namespace AstroClient
 
 
 
+        public static QMSingleButton GameStartbtn;
+        public static QMSingleButton GameAbortbtn;
+        public static QMSingleButton GameVictoryCrewmateBtn;
+        public static QMSingleButton GameVictoryImpostorBtn;
+
 
         public static QMNestedButton AmongUsCheatsPage;
 
         public static bool HasAmongUsWorldLoaded = false;
+
+        public static CachedUdonEvent StartGameEvent;
+        public static CachedUdonEvent AbortGameEvent;
+
+        public static CachedUdonEvent VictoryCrewmateEvent;
+        public static CachedUdonEvent VictoryImpostorEvent;
+
 
 
     }

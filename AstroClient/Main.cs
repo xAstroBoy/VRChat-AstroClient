@@ -281,6 +281,7 @@ namespace AstroClient
             GlobalLists.OnLevelLoad();
             Murder2Cheats.OnLevelLoad();
             Murder4Cheats.OnLevelLoad();
+            AmongUSCheats.OnLevelLoad();
             HubButtonsControl.OnLevelLoad();
             WorldAddons.OnLevelLoad();
             JarRoleController.OnLevelLoad();
