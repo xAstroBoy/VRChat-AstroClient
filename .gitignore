@@ -1,4 +1,4 @@
-AstroClient/obj/*
-AstroClient/bin/*
-.vs/*
+/AstroClient/obj/
+/AstroClient/obj/Debug
+/.vs/
 *.cache
