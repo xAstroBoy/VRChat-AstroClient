@@ -473,21 +473,21 @@ namespace AstroClient
                 QMNestedButton MurderItemAttackerMenu = new QMNestedButton(Murder4CheatPage, 1, 1.5f, "Followers", "Murder item Followers!", null, null, null, null, true);
                 #region Followers
                 new QMSingleButton(MurderItemAttackerMenu, 1, 0, "Detective Gun (target)!", new Action(() => { DetectiveGuns.AttackTarget(); }), "Make Detective Gun follow Target", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemAttackerMenu, 1, 0.5f, "Silenced Guns (target)!", new Action(() => { SilencedGuns.AttackTarget(); }), "Make Silenced Gun follow Target", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemAttackerMenu, 1, 1, "Knifes (target)!", new Action(() => { Knifes.AttackTarget(); }), "Make Knifes follow Target", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemAttackerMenu, 1, 1.5f, "Clues (target)!", new Action(() => { Clues.AttackTarget(); }), "Make Clues follow Target", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemAttackerMenu, 1, 2, "Grenade (target)!", new Action(() => { Grenades.AttackTarget(); }), "Make Grenade follow Target", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemAttackerMenu, 1, 2.5f, "Shotgun (target)!", new Action(() => { ShotGuns.AttackTarget(); }), "Make Bear Traps follow Target", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemAttackerMenu, 2, 0, "Bear traps (target)!", new Action(() => { BearTraps.AttackTarget(); }), "Make Bear Traps follow Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 2, 0, "Silenced Guns (target)!", new Action(() => { SilencedGuns.AttackTarget(); }), "Make Silenced Gun follow Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 3, 0, "Knifes (target)!", new Action(() => { Knifes.AttackTarget(); }), "Make Knifes follow Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 4, 0, "Clues (target)!", new Action(() => { Clues.AttackTarget(); }), "Make Clues follow Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 1, 0.5f, "Grenade (target)!", new Action(() => { Grenades.AttackTarget(); }), "Make Grenade follow Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 2, 0.5f, "Shotgun (target)!", new Action(() => { ShotGuns.AttackTarget(); }), "Make Bear Traps follow Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 3, 0.5f, "Bear traps (target)!", new Action(() => { BearTraps.AttackTarget(); }), "Make Bear Traps follow Target", null, null, true).SetResizeTextForBestFit(true);
 
 
-                new QMSingleButton(MurderItemAttackerMenu, 3, 0, "Detective Gun (you)!", new Action(() => { DetectiveGuns.AttackSelf(); }), "Make Detective Gun follow you", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemAttackerMenu, 3, 0.5f, "Silenced Guns (you)!", new Action(() => { SilencedGuns.AttackSelf(); }), "Make Silenced Gun follow you", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemAttackerMenu, 3, 1, "Knifes (you)!", new Action(() => { Knifes.AttackSelf(); }), "Make Knifes follow you", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemAttackerMenu, 3, 1.5f, "Clues (you)!", new Action(() => { Clues.AttackSelf(); }), "Make Clues follow you", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemAttackerMenu, 3, 2, "Grenade (you)!", new Action(() => { Grenades.AttackSelf(); }), "Make Grenade follow you", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemAttackerMenu, 3, 2.5f, "Shotgun (you)!", new Action(() => { ShotGuns.AttackSelf(); }), "Make Shotgun follow you", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemAttackerMenu, 4, 0, "Bear traps (you)!", new Action(() => { BearTraps.AttackSelf(); }), "Make Bear Traps follow you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 1, 1.5f, "Detective Gun (you)!", new Action(() => { DetectiveGuns.AttackSelf(); }), "Make Detective Gun follow you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 2, 1.5f, "Silenced Guns (you)!", new Action(() => { SilencedGuns.AttackSelf(); }), "Make Silenced Gun follow you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 3, 1.5f, "Knifes (you)!", new Action(() => { Knifes.AttackSelf(); }), "Make Knifes follow you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 4, 1.5f, "Clues (you)!", new Action(() => { Clues.AttackSelf(); }), "Make Clues follow you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 1, 2, "Grenade (you)!", new Action(() => { Grenades.AttackSelf(); }), "Make Grenade follow you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 2, 2, "Shotgun (you)!", new Action(() => { ShotGuns.AttackSelf(); }), "Make Shotgun follow you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemAttackerMenu, 3, 2, "Bear traps (you)!", new Action(() => { BearTraps.AttackSelf(); }), "Make Bear Traps follow you", null, null, true).SetResizeTextForBestFit(true);
                 #endregion
 
             }
@@ -497,19 +497,20 @@ namespace AstroClient
                 #region orbiters
 
                 new QMSingleButton(MurderItemOrbiterMenu, 1, 0, "Detective Gun (target)!", new Action(() => { DetectiveGuns.OrbitTarget(); }), "Make Detective Gun orbit around Target", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemOrbiterMenu, 1, 0.5f, "Silenced Guns (target)!", new Action(() => { SilencedGuns.OrbitTarget(); }), "Make Silenced Gun around orbit Target", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemOrbiterMenu, 1, 1, "Shotgun (target)!", new Action(() => { ShotGuns.OrbitTarget(); }), "Make ShotGun orbit around Target", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemOrbiterMenu, 1, 1.5f, "Knifes (target)!", new Action(() => { Knifes.OrbitTarget(); }), "Make Knifes orbit around Target", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemOrbiterMenu, 1, 2, "Clues (target)!", new Action(() => { Clues.OrbitTarget(); }), "Make Clues orbit around Target", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemOrbiterMenu, 1, 2.5f, "Grenade (target)!", new Action(() => { Grenades.OrbitTarget(); }), "Make Grenade orbit around Target", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemOrbiterMenu, 2, 0, "Bear Trap (target)!", new Action(() => { BearTraps.OrbitTarget(); }), "Make Bear Traps orbit around Target", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemOrbiterMenu, 3, 0, "Detective Gun (you)!", new Action(() => { DetectiveGuns.OrbitSelf(); }), "Make Detective Gun orbit around you", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemOrbiterMenu, 3, 0.5f, "Silenced Guns (you)!", new Action(() => { SilencedGuns.OrbitSelf(); }), "Make Silenced Gun around orbit you", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemOrbiterMenu, 3, 1, "Shotgun (you)!", new Action(() => { ShotGuns.OrbitSelf(); }), "Make ShotGun orbit around you", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemOrbiterMenu, 3, 1.5f, "Knifes (you)!", new Action(() => { Knifes.OrbitSelf(); }), "Make Knifes orbit around you", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemOrbiterMenu, 3, 2, "Clues (you)!", new Action(() => { Clues.OrbitSelf(); }), "Make Clues orbit around you", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemOrbiterMenu, 3, 2.5f, "Grenade (you)!", new Action(() => { Grenades.OrbitSelf(); }), "Make Grenade orbit around you", null, null, true).SetResizeTextForBestFit(true);
-                new QMSingleButton(MurderItemOrbiterMenu, 4, 0, "Bear Trap (you)!", new Action(() => { BearTraps.OrbitSelf(); }), "Make Bear Traps orbit around you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 2, 0, "Silenced Guns (target)!", new Action(() => { SilencedGuns.OrbitTarget(); }), "Make Silenced Gun around orbit Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 3, 0, "Shotgun (target)!", new Action(() => { ShotGuns.OrbitTarget(); }), "Make ShotGun orbit around Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 4, 0, "Knifes (target)!", new Action(() => { Knifes.OrbitTarget(); }), "Make Knifes orbit around Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 1, 0.5f, "Clues (target)!", new Action(() => { Clues.OrbitTarget(); }), "Make Clues orbit around Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 2, 0.5f, "Grenade (target)!", new Action(() => { Grenades.OrbitTarget(); }), "Make Grenade orbit around Target", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 3, 0.5f, "Bear Trap (target)!", new Action(() => { BearTraps.OrbitTarget(); }), "Make Bear Traps orbit around Target", null, null, true).SetResizeTextForBestFit(true);
+                
+                new QMSingleButton(MurderItemOrbiterMenu, 1, 1.5f, "Detective Gun (you)!", new Action(() => { DetectiveGuns.OrbitSelf(); }), "Make Detective Gun orbit around you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 2, 1.5f, "Silenced Guns (you)!", new Action(() => { SilencedGuns.OrbitSelf(); }), "Make Silenced Gun around orbit you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 3, 1.5f, "Shotgun (you)!", new Action(() => { ShotGuns.OrbitSelf(); }), "Make ShotGun orbit around you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 4, 1.5f, "Knifes (you)!", new Action(() => { Knifes.OrbitSelf(); }), "Make Knifes orbit around you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 1, 2, "Clues (you)!", new Action(() => { Clues.OrbitSelf(); }), "Make Clues orbit around you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 2, 2, "Grenade (you)!", new Action(() => { Grenades.OrbitSelf(); }), "Make Grenade orbit around you", null, null, true).SetResizeTextForBestFit(true);
+                new QMSingleButton(MurderItemOrbiterMenu, 3, 2, "Bear Trap (you)!", new Action(() => { BearTraps.OrbitSelf(); }), "Make Bear Traps orbit around you", null, null, true).SetResizeTextForBestFit(true);
                 #endregion
             }
 
@@ -522,7 +523,7 @@ namespace AstroClient
             new QMSingleButton(MurderItemClicker, 1, 1, "Click Locket!", new Action(() => { Clue_Locket.VRC_Interactable_Click(); }), "Click!", null, null, true);
             new QMSingleButton(MurderItemClicker, 1, 1.5f, "Click PocketWatch!", new Action(() => { Clue_PocketWatch.VRC_Interactable_Click(); }), "Click!", null, null, true);
             new QMSingleButton(MurderItemClicker, 1, 2, "Click Postcard!", new Action(() => { Clue_Postcard.VRC_Interactable_Click(); }), "Click!", null, null, true);
-            PresentClicker = new QMSingleButton(MurderItemSpawner, 2, 0, "Click Present!", new Action(() => { Clue_Present.CloneObject(); }), "Click!", null, null, true);
+            PresentClicker = new QMSingleButton(MurderItemSpawner, 2, 0, "Click Present!", new Action(() => { Clue_Present.VRC_Interactable_Click(); }), "Click!", null, null, true);
             
             new QMSingleButton(MurderItemClicker, 2, 0.5f, "Unlock Random Weapon!", new Action(() => { Clues.VRC_Interactable_Click(); }), "Unlock Random Weapon!", null, null, true);
             #endregion
@@ -531,20 +532,20 @@ namespace AstroClient
             #region Watchers
 
             new QMSingleButton(MurderItemWatchMenu, 1, 0, "Detective Gun (target)!", new Action(() => { DetectiveGuns.WatchTarget(); }), "Make Detective Gun Watch Target", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemWatchMenu, 1, 0.5f, "Silenced Guns (target)!", new Action(() => { SilencedGuns.WatchTarget(); }), "Make Silenced Gun Watch Target", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemWatchMenu, 1, 1, "Knifes (target)!", new Action(() => { Knifes.WatchTarget(); }), "Make Knifes Watch Target", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemWatchMenu, 1, 1.5f, "Clues (target)!", new Action(() => { Clues.WatchTarget(); }), "Make Clues Watch Target", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemWatchMenu, 1, 2, "Grenade (target)!", new Action(() => { Grenades.WatchTarget(); }), "Make Grenade Watch Target", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemWatchMenu, 1, 2.5f, "Shotgun (target)!", new Action(() => { ShotGuns.WatchTarget(); }), "Make Bear Traps Watch Target", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemWatchMenu, 2, 0, "Bear traps (target)!", new Action(() => { BearTraps.WatchTarget(); }), "Make Bear Traps Watch Target", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 2, 0, "Silenced Guns (target)!", new Action(() => { SilencedGuns.WatchTarget(); }), "Make Silenced Gun Watch Target", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 3, 0, "Knifes (target)!", new Action(() => { Knifes.WatchTarget(); }), "Make Knifes Watch Target", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 4, 0, "Clues (target)!", new Action(() => { Clues.WatchTarget(); }), "Make Clues Watch Target", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 1, 0.5f, "Grenade (target)!", new Action(() => { Grenades.WatchTarget(); }), "Make Grenade Watch Target", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 2, 0.5f, "Shotgun (target)!", new Action(() => { ShotGuns.WatchTarget(); }), "Make Bear Traps Watch Target", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 3, 0.5f, "Bear traps (target)!", new Action(() => { BearTraps.WatchTarget(); }), "Make Bear Traps Watch Target", null, null, true).SetResizeTextForBestFit(true);
 
-            new QMSingleButton(MurderItemWatchMenu, 3, 0, "Detective Gun (you)!", new Action(() => { DetectiveGuns.WatchSelf(); }), "Make Detective Gun Watch you", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemWatchMenu, 3, 0.5f, "Silenced Guns (you)!", new Action(() => { SilencedGuns.WatchSelf(); }), "Make Silenced Gun Watch you", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemWatchMenu, 3, 1, "Knifes (you)!", new Action(() => { Knifes.WatchSelf(); }), "Make Knifes Watch you", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemWatchMenu, 3, 1.5f, "Clues (you)!", new Action(() => { Clues.WatchSelf(); }), "Make Clues Watch you", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemWatchMenu, 3, 2, "Grenade (you)!", new Action(() => { Grenades.WatchSelf(); }), "Make Grenade Watch you", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemWatchMenu, 3, 2.5f, "Shotgun (you)!", new Action(() => { ShotGuns.WatchSelf(); }), "Make Bear Traps Watch you", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemWatchMenu, 4, 0, "Bear traps (you)!", new Action(() => { BearTraps.WatchSelf(); }), "Make Bear Traps Watch you", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 1, 1.5f, "Detective Gun (you)!", new Action(() => { DetectiveGuns.WatchSelf(); }), "Make Detective Gun Watch you", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 2, 1.5f, "Silenced Guns (you)!", new Action(() => { SilencedGuns.WatchSelf(); }), "Make Silenced Gun Watch you", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 3, 1.5f, "Knifes (you)!", new Action(() => { Knifes.WatchSelf(); }), "Make Knifes Watch you", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 4, 1.5f, "Clues (you)!", new Action(() => { Clues.WatchSelf(); }), "Make Clues Watch you", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 1, 2, "Grenade (you)!", new Action(() => { Grenades.WatchSelf(); }), "Make Grenade Watch you", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 2, 2, "Shotgun (you)!", new Action(() => { ShotGuns.WatchSelf(); }), "Make Bear Traps Watch you", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemWatchMenu, 3, 2, "Bear traps (you)!", new Action(() => { BearTraps.WatchSelf(); }), "Make Bear Traps Watch you", null, null, true).SetResizeTextForBestFit(true);
             #endregion
 
 
