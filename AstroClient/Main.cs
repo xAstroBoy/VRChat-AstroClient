@@ -49,7 +49,7 @@ using Mono.CSharp;
 namespace AstroClient
 {
     [Serializable]
-    public class Main : MelonMod
+    public class Main : MelonMod 
     {
 
         //public static event EventHandler Event_OnApplicationStart;
@@ -139,6 +139,8 @@ namespace AstroClient
         }
 
 
+
+        
 
         public override void VRChat_OnUiManagerInit()
         {
