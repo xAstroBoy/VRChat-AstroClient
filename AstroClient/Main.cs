@@ -43,6 +43,7 @@ using AstroClient.UdonExploits;
 using AstroClient.ButtonShortcut;
 using CheetosConsole;
 using Transmtn;
+using Mono.CSharp;
 #endregion AstroClient Imports
 
 namespace AstroClient
@@ -57,9 +58,13 @@ namespace AstroClient
 
         public static event EventHandler Update;
 
-        //public EventHandler<EventArgs> PlayerJoin;
+        public static event EventHandler LateUpdate;
 
-        //public EventHandler<EventArgs> PlayerLeave;
+        public static EventHandler<EventArgs> PlayerJoin;
+
+        public static EventHandler<EventArgs> PlayerLeft;
+
+        public static EventHandler<EventArgs> LevelLoaded;
 
         public override void OnApplicationStart()
         {
@@ -199,7 +204,7 @@ namespace AstroClient
             JarRoleController.OnPlayerJoined(player);
             // DEMO
 
-
+            PlayerJoin?.Invoke(this, new PlayerEventArgs(player));
         }
 
         public void OnPlayerLeft(Player player)
@@ -207,6 +212,8 @@ namespace AstroClient
             ObjectMiscOptions.OnPlayerLeft(player);
             LewdVRChat.OnPlayerLeft(player);
             SingleTagsUtils.onPlayerLeft(player);
+
+            PlayerLeft?.Invoke(this, new PlayerEventArgs(player));
         }
 
         public override void OnUpdate()
@@ -214,7 +221,8 @@ namespace AstroClient
             Update?.Invoke(this, new EventArgs());
 
             // Move these to new CheetoComponents
-            LocalPlayerUtils.OnUpdate();
+
+            //LocalPlayerUtils.OnUpdate();
             EmojiUtils.OnUpdate();
             LewdVRChat.OnUpdate();
             QuickMenuUtils.OnUpdate();
@@ -235,6 +243,7 @@ namespace AstroClient
                 LewdVRChat.OnLateUpdate();
             }
 
+            LateUpdate?.Invoke(this, new EventArgs());
         }
 
         private static IEnumerator OnWorldReveal()
@@ -257,6 +266,9 @@ namespace AstroClient
 
         private static IEnumerator OnLevelLoadEvents()
         {
+            LevelLoaded?.Invoke(null, new EventArgs());
+
+            // Change these later
             SingleTagsUtils.OnLevelLoad();
             ItemTweakerMain.OnLevelLoad();
             ObjectCloner.OnLevelLoad();

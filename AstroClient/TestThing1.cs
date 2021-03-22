@@ -7,7 +7,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class TestThing1 : CheetoComponent
+    public class TestBase : CheetoComponent
     {
         public override void Start()
         {
@@ -15,7 +15,7 @@
         }
     }
 
-    public class TestThing2 : CheetoComponent
+    public class TestEvents: CheetoEvents
     {
         public override void Start()
         {
@@ -23,35 +23,11 @@
         }
     }
 
-    public class TestThing3 : CheetoComponent
+    public class TestHooks : CheetoHooks
     {
         public override void Start()
         {
             ModConsole.DebugLog("TestThing3 Start()");
-        }
-    }
-
-    public class TestThing4 : CheetoComponent
-    {
-        public override void Start()
-        {
-            ModConsole.DebugLog("TestThing4 Start()");
-        }
-    }
-
-    public class TestThing5 : CheetoComponent
-    {
-        public override void Start()
-        {
-            ModConsole.DebugLog("TestThing5 Start()");
-        }
-    }
-
-    public class TestThing6 : CheetoComponent
-    {
-        public override void Start()
-        {
-            ModConsole.DebugLog("TestThing6 Start()");
         }
     }
 }

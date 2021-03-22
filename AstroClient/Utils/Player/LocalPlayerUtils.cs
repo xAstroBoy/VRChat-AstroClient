@@ -14,7 +14,6 @@ namespace AstroClient
         {
         }
 
-        /**
         public override void Update()
         {
             if (!FreezePlayerOnQMOpen)
@@ -36,28 +35,10 @@ namespace AstroClient
             {
             }
         }
-        **/
 
-        public static void OnUpdate()
+        public static void OnLevelLoad()
         {
-            if (!FreezePlayerOnQMOpen)
-            {
-                if (GetPlayerCharControl() != null)
-                {
-                    GetPlayerCharControl().enabled = true;
-                }
-                return;
-            }
-            try
-            {
-                if (GetPlayerCharControl() != null)
-                {
-                    GetPlayerCharControl().enabled = !IsQuickMenuOpen;
-                }
-            }
-            catch
-            {
-            }
+            LocalMotionState = null;
         }
 
         public static Vector3 PlayerPositionBones(Player player, HumanBodyBones bone)
@@ -201,11 +182,6 @@ namespace AstroClient
                 LocalMotionState = GetPlayerGameObject().GetComponent<VRC.Animation.VRCMotionState>();
                 return LocalMotionState;
             }
-        }
-
-        public static void OnLevelLoad()
-        {
-            LocalMotionState = null;
         }
 
         public static void ToggleFreezePlayerOnQMOpen()
