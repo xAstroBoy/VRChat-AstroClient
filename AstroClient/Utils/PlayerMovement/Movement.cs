@@ -36,7 +36,7 @@ namespace AstroClient.AstroUtils.PlayerMovement
             FixJumpMissing();
         }
 
-        public static void OnWorldReveal()
+        public override void OnWorldReveal()
         {
             HasCheckedJump = false;
         }

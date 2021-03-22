@@ -26,10 +26,10 @@ using static AstroClient.variables.CustomLists;
 
 namespace AstroClient
 {
-    public static class AmongUSCheats
+    public  class AmongUSCheats : Overridables
     {
-  
-        public static void OnLevelLoad()
+
+        public override void OnLevelLoaded()
         {
             StartGameEvent = null;
             AbortGameEvent = null;
@@ -117,7 +117,7 @@ namespace AstroClient
         }
 
 
-        public static void OnWorldReveal()
+        public override void OnWorldReveal()
         {
             if (WorldUtils.GetWorldID() == WorldIds.AmongUS)
             {

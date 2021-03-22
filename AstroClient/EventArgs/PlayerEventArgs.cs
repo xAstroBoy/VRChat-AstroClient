@@ -5,7 +5,7 @@ namespace AstroClient
 {
     public class PlayerEventArgs : EventArgs
     {
-        private Player player;
+        public Player player;
 
         public PlayerEventArgs(Player player)
         {

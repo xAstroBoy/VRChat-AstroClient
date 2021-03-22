@@ -13,9 +13,9 @@ using static AstroClient.HandsUtils;
 
 namespace AstroClient.Worlds
 {
-    public static class WorldAddons
+    public class WorldAddons : Overridables
     {
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             SandBag = null;
         }
@@ -31,7 +31,7 @@ namespace AstroClient.Worlds
             SandBagCheat.SetResizeTextForBestFit(true);
         }
 
-        public static void OnWorldReveal()
+        public override void OnWorldReveal()
         {
             if (WorldUtils.GetWorldID() == WorldIds.SmashContest)
             {

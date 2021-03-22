@@ -12,7 +12,7 @@ using AstroClient.Variables;
 
 namespace AstroClient.ButtonShortcut
 {
-    public static class CheatsShortcutButton
+    public class CheatsShortcutButton : Overridables
     {
 
         private static QMSingleButton WorldCheatsShortcut;
@@ -26,7 +26,7 @@ namespace AstroClient.ButtonShortcut
 
 
 
-        public static void OnWorldReveal()
+        public override void OnWorldReveal()
         {
             if (WorldUtils.GetWorldID() == WorldIds.VRChatDefaultHub)
             {

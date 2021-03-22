@@ -19,11 +19,11 @@ using AstroClient.extensions;
 
 namespace AstroClient
 {
-    public class ObjectMiscOptions
+    public class ObjectMiscOptions : Overridables
     {
 
 
-        public static void OnPlayerLeft(Player player)
+        public override void OnPlayerLeft(Player player)
         {
             if (player != null)
             {
@@ -35,7 +35,7 @@ namespace AstroClient
         }
 
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             CurrentTarget = null;
             if (CurrentScaleButton != null)
@@ -49,7 +49,7 @@ namespace AstroClient
 
         }
 
-        public static void OnWorldReveal()
+        public override void OnWorldReveal()
         {
             if (CurrentTarget == null)
             {

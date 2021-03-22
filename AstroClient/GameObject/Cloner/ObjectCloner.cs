@@ -6,14 +6,15 @@ using static AstroClient.variables.GlobalLists;
 using AstroClient.variables;
 using AstroClient.ConsoleUtils;
 using AstroClient.AstroUtils.ItemTweaker;
+using AstroClient.extensions;
 
 #endregion AstroClient Imports
 
 namespace AstroClient.Cloner
 {
-    public class ObjectCloner
+    public class ObjectCloner : Overridables
     {
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             _Holder = null;
             ClonedObjects.Clear();
@@ -24,13 +25,15 @@ namespace AstroClient.Cloner
         {
             foreach (var obj in ClonedObjects)
             {
-                CustomLists.RemoveObjFromLists(obj);
+                obj.RemoveObjFromCustomLists();
                 UnityEngine.Object.DestroyImmediate(obj);
             }
             ClonedObjects.Clear();
 
             ItemTweakerMain.UpdateSpawnedPickupsBtn();
         }
+
+
 
         private static GameObject _Holder;
 

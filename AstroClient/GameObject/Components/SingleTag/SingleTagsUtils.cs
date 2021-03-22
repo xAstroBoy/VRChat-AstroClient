@@ -11,16 +11,16 @@ using VRC.Core;
 
 namespace AstroClient.Components
 {
-    class SingleTagsUtils : GameEvents
+    class SingleTagsUtils : Overridables 
     {
 
-        public override void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             Counter.Clear();
         }
 
 
-        public static void onPlayerLeft(Player player)
+        public override void OnPlayerLeft(Player player)
         {
             if (player != null)
             {

@@ -16,7 +16,7 @@ using VRC.SDKBase;
 
 namespace AstroClient.AstroUtils.ItemTweaker
 {
-    public static class ItemTweakerMain
+    public class ItemTweakerMain : Overridables
     {
         public static void InitButtons(float x, float y, bool btnHalf)
         {
@@ -716,7 +716,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             UpdateSpawnedPrefabsBtn();
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             SpawnedPrefabs.Clear();
             WorldObjects.Clear();
@@ -792,8 +792,9 @@ namespace AstroClient.AstroUtils.ItemTweaker
                 Pickup_DisallowTheft.setToggleState(false);
             }
 
-            #endregion DisallowTheft
+            #endregion DisallowTheft       
         }
+
 
         public static void KillCustomComponents()
         {

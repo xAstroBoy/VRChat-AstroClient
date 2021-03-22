@@ -53,7 +53,7 @@ namespace AstroClient.World.Hub
             Emulate_table_roleplay_props_click();
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             Status_Mirror_Props = VrcBooleanOp.Unused;
             Status_BeachBalls_Props = VrcBooleanOp.Unused;
@@ -97,7 +97,7 @@ namespace AstroClient.World.Hub
             }
         }
 
-        public static void OnWorldReveal()
+        public override void OnWorldReveal()
         {
             if (GetWorldID() == WorldIds.VRChatDefaultHub)
             {
@@ -334,7 +334,7 @@ namespace AstroClient.World.Hub
             return false;
         }
 
-        public static void TriggerEventHook(VRC_EventHandler EventHandler, VRC_EventHandler.VrcEvent VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int value, float floatvalue)
+        public override void VRC_EventDispatcherRFC_triggerEvent(VRC_EventHandler EventHandler, VRC_EventHandler.VrcEvent VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int value, float floatvalue)
         {
             HubObjectPatcher(EventHandler, VrcEvent);
             UpdateVariablesHub(EventHandler, VrcEvent);

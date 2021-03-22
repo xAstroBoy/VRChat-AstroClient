@@ -13,7 +13,7 @@ using static AstroClient.variables.CustomLists;
 
 namespace AstroClient
 {
-    internal class ScaleEditor
+    internal class ScaleEditor : Overridables
     {
 
         private static float ModifiedVectorX()
@@ -155,7 +155,7 @@ namespace AstroClient
             }
         }
 
-        internal static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             ScaleCheck.Clear();
         }

@@ -15,7 +15,7 @@ using VRC;
 
 namespace AstroClient
 {
-    public static class JarRoleController
+    public  class JarRoleController : Overridables
     {
         
         private static bool _IsMurder4World;
@@ -100,7 +100,7 @@ namespace AstroClient
             return RoleEspComponents.Where(x => x.LinkedEntry.nodevalue == value).DefaultIfEmpty(null).First();
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             JarRoleLinks.Clear();
             RoleEspComponents.Clear();
@@ -112,7 +112,7 @@ namespace AstroClient
         }
 
 
-        public static void OnPlayerJoined(Player player)
+        public override void OnPlayerJoined(Player player)
         {
             if (JarRoleLinks.Count() != 0)
             {
@@ -205,7 +205,7 @@ namespace AstroClient
         }
 
 
-        public static void OnWorldReveal()
+        public override void OnWorldReveal()
         {
             isAmongUsWorld = (WorldUtils.GetWorldID() == WorldIds.AmongUS);
             IsMurder4World = (WorldUtils.GetWorldID() == WorldIds.Murder4);

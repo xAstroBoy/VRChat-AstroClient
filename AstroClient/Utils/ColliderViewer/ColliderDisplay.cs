@@ -61,7 +61,7 @@ namespace AstroClient
             }
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             ToggleDisplays(false);
             if (ToggleColliderDisplayBtn != null)

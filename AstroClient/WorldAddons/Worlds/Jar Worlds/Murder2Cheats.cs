@@ -17,7 +17,7 @@ using AstroClient.Variables;
 
 namespace AstroClient
 {
-    public static class Murder2Cheats
+    public class Murder2Cheats : Overridables
     {
         public static void FindGameMurderObjects()
         {
@@ -145,7 +145,7 @@ namespace AstroClient
             }
         }
 
-        public static void OnWorldReveal()
+        public override void OnWorldReveal()
         {
             if (WorldUtils.GetWorldID() == WorldIds.Murder2)
             {
@@ -167,7 +167,7 @@ namespace AstroClient
             }
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             Death = null;
             item_detectiveGun = null;

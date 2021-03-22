@@ -11,14 +11,14 @@ using AstroClient.extensions;
 
 namespace AstroClient
 {
-    public class QVPensUtils
+    public class QVPensUtils : Overridables
     {
-        public static void OnWorldReveal()
+        public override void OnWorldReveal()
         {
             FindQVPenSet();
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             if (PenManagers != null)
             {

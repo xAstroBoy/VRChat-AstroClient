@@ -17,7 +17,7 @@ using static AstroClient.variables.InstanceBuilder;
 
 namespace AstroClient.components
 {
-    public class CrazyObjectManager : MonoBehaviour
+    public class CrazyObjectManager : MonoBehaviour 
     {
         #region Internal
 

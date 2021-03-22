@@ -20,7 +20,7 @@ using System.Linq;
 
 namespace AstroClient
 {
-    public static class HandsUtils
+    public  class HandsUtils : Overridables
     {
         public static string GetObjectToEditName
         {
@@ -70,7 +70,7 @@ namespace AstroClient
             }
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             SetEditLock(false);
             if (GameObjToEdit != null)

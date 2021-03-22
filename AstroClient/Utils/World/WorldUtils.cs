@@ -14,11 +14,8 @@ using AstroClient.ConsoleUtils;
 
 namespace AstroClient
 {
-    public class WorldUtils
+    public class WorldUtils : Overridables
     {
-        public static void OnLevelLoad()
-        {
-        }
 
         public static List<GameObject> GetAllWorldPrefabs()
         {
@@ -37,7 +34,7 @@ namespace AstroClient
                             }
                         }
                     }
-                    ModConsole.Log("Returned SDKBase Dynamic Prefabs");
+                    ModConsole.DebugLog("Returned SDKBase Dynamic Prefabs");
                     return PrefabList;
                 }
             }
@@ -55,7 +52,7 @@ namespace AstroClient
                             }
                         }
                     }
-                    ModConsole.Log("Returned VRCSDK2 Dynamic Prefabs");
+                    ModConsole.DebugLog("Returned VRCSDK2 Dynamic Prefabs");
                     return PrefabList;
                 }
             }
@@ -69,7 +66,6 @@ namespace AstroClient
 
         public static Player GetPlayerByID(string id)
         {
-            ModConsole.Log("GetPlayerID Called with params :" + id);
 
             var zero = PlayerManager.Method_Public_Static_Player_String_0(id);
             //var one = PlayerManager.Method_Public_Static_Player_String_PDM_0(id);
@@ -80,11 +76,11 @@ namespace AstroClient
             //}
             if (zero != null)
             {
-                ModConsole.Log("returned Method_Public_Static_Player_String_PDM_0");
+                ModConsole.DebugLog("returned Method_Public_Static_Player_String_PDM_0");
                 return zero;
             }
 
-            ModConsole.Log("GetPlayerById Failed to find A Player from ID.");
+            ModConsole.Warning("GetPlayerById Failed to find A Player from ID.");
             return null;
         }
 
@@ -116,7 +112,7 @@ namespace AstroClient
             return target.field_Private_Player_0;
         }
 
-        public static void OnWorldReveal()
+        public override void OnWorldReveal()
         {
             ModConsole.Log("This instance has " + GetAllPlayers0().Count() + " Players.", Color.Gold);
         }
@@ -270,15 +266,8 @@ namespace AstroClient
                 {
                     return instance.name;
                 }
-                else
-                {
-                    return "ASTROBOY_CLIENT_ERROR_WORLD_IS_NULL";
-                }
             }
-            else
-            {
-                return "ASTROBOY_CLIENT_ERROR_WORLD_IS_NULL";
-            }
+            return null;
         }
 
         public static string GetWorldID()
@@ -290,15 +279,8 @@ namespace AstroClient
                 {
                     return instance.id;
                 }
-                else
-                {
-                    return "ASTROBOY_CLIENT_ERROR_WORLD_ID_IS_NULL";
-                }
             }
-            else
-            {
-                return "ASTROBOY_CLIENT_ERROR_WORLD_ID_IS_NULL";
-            }
+            return null;
         }
 
         public static string GetWorldAssetURL()
@@ -310,15 +292,8 @@ namespace AstroClient
                 {
                     return instance.assetUrl;
                 }
-                else
-                {
-                    return "ASTROBOY_CLIENT_ERROR_WORLD_ID_IS_NULL";
-                }
             }
-            else
-            {
-                return "ASTROBOY_CLIENT_ERROR_WORLD_ID_IS_NULL";
-            }
+            return null;
         }
     }
 }

@@ -3,12 +3,12 @@ using UnityEngine;
 
 namespace AstroClient.variables
 {
-    public class GlobalLists
+    public class GlobalLists : Overridables
     {
         public static List<GameObject> ClonedObjects = new List<GameObject>();
         public static List<Renderer> RenderObjects = new List<Renderer>();
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             ClonedObjects.Clear();
             RenderObjects.Clear();

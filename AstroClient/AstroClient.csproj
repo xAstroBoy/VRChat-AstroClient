@@ -27,6 +27,9 @@
   <ItemGroup>
     <Compile Include="BuildInfo.cs" />
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
+    <Compile Include="EventArgs\OnAvatarSpawnArgs.cs" />
+    <Compile Include="EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
+    <Compile Include="EventArgs\SpawnEmojiArgs.cs" />
     <Compile Include="Overridables.cs" />
     <Compile Include="Console\CheetosConsole\Console.cs" />
     <Compile Include="Console\CheetosConsole\DefaultFonts.cs" />
@@ -105,16 +108,22 @@
     <Compile Include="GameObject\Editor\ESP\GameObjectESP.cs" />
     <Compile Include="Patches\Patching.cs" />
     <Compile Include="EventArgs\PlayerEventArgs.cs" />
+    <Compile Include="Startup\Buttons\RandomSubmenus.cs" />
     <Compile Include="Startup\Buttons\WorldPickupsBtn.cs" />
     <Compile Include="Startup\Buttons\QuickMenuBtns.cs" />
     <Compile Include="Startup\Buttons\UserInteractMenuBtns.cs" />
     <Compile Include="Startup\ComponentHelper.cs" />
+    <Compile Include="Startup\Hooks\AvatarManagerHook.cs" />
     <Compile Include="Startup\Hooks\NetworkManagerHooks.cs" />
     <Compile Include="Startup\Buttons\ItemTweakerMain.cs" />
     <Compile Include="GameObjMenu.cs" />
+    <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
+    <Compile Include="Startup\Hooks\SpawnEmojiRPCHook.cs" />
+    <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
     <Compile Include="Udon\Exploits\Global\GlobalUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Murder4\Murder4UdonExploits.cs" />
     <Compile Include="Udon\Exploits\AmongUS\AmongUSUdonExploits.cs" />
+    <Compile Include="Utils\ExtensionUtils\CustomListExtensions.cs" />
     <Compile Include="Utils\ExtensionUtils\SyncPhysicsExt.cs" />
     <Compile Include="Utils\Headlight\ColorConverter.cs" />
     <Compile Include="Utils\Headlight\Headlight.cs" />

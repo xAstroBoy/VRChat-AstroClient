@@ -1,9 +1,11 @@
-﻿using System;
+﻿using MelonLoader;
+using System;
+using System.Collections;
 using VRC;
 
 namespace AstroClient
 {
-    public static class NetworkManagerHooks
+    public class NetworkManagerHooks : Overridables
     {
         private static bool IsInitialized;
         private static bool SeenFire;
@@ -12,6 +14,43 @@ namespace AstroClient
         public static event Action<Player> OnJoin;
 
         public static event Action<Player> OnLeave;
+
+
+        public static EventHandler<PlayerEventArgs> Event_OnPlayerJoin;
+
+        public static EventHandler<PlayerEventArgs> Event_OnPlayerLeft;
+
+        public override void OnApplicationStart()
+        {
+            MelonCoroutines.Start(HookNetworkManager());
+        }
+
+
+        public static IEnumerator HookNetworkManager()
+        {
+            while (ReferenceEquals(NetworkManager.field_Internal_Static_NetworkManager_0, null)) yield return null;
+            while (ReferenceEquals(VRCAudioManager.field_Private_Static_VRCAudioManager_0, null)) yield return null;
+            while (ReferenceEquals(VRCUiManager.prop_VRCUiManager_0, null)) yield return null;
+
+            NetworkManagerHooks.Initialize();
+            NetworkManagerHooks.OnJoin += OnPlayerJoinedEvent;
+            NetworkManagerHooks.OnLeave += OnPlayerLeftEvent;
+        }
+
+
+
+        public static void OnPlayerJoinedEvent(Player player)
+        {
+            Event_OnPlayerJoin?.Invoke(null, new PlayerEventArgs(player));
+        }
+
+        public static void OnPlayerLeftEvent(Player player)
+        {
+            Event_OnPlayerLeft?.Invoke(null, new PlayerEventArgs(player));
+        }
+
+
+
 
         public static void EventHandlerA(Player player)
         {

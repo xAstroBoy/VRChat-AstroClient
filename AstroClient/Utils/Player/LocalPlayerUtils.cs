@@ -10,9 +10,6 @@ namespace AstroClient
 {
     public class LocalPlayerUtils : Overridables
     {
-        public LocalPlayerUtils() : base()
-        {
-        }
 
         public override void OnUpdate()
         {
@@ -36,7 +33,7 @@ namespace AstroClient
             }
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             LocalMotionState = null;
         }

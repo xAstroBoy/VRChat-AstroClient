@@ -26,11 +26,36 @@ using DayClientML2.Utility.Extensions;
 
 namespace AstroClient
 {
-    public class LewdVRChat
+    public class LewdVRChat : Overridables
     {
 
         // TODO :  REMAKE THIS TRASH
 
+
+        public override void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
+        {
+            if (avatar != null && DescriptorObj != null)
+            {
+                Event_OnAvatarSpawn?.Invoke(null, new OnAvatarSpawnArgs(avatar, DescriptorObj, state));
+
+                GameObjHelper.CheckTransform(avatar.transform);
+
+                if (GameObjHelper._GameObjects == null)
+                {
+                    return;
+                }
+
+                if (GameObjHelper._GameObjects.Count < 2)
+                {
+                    return;
+                }
+
+                if (!Bools.DisableNSFWMenu)
+                {
+                    LewdVRChat.AvatarLoaded(avatar.transform, avatar.transform.root.GetComponentInChildren<Player>());
+                }
+            }
+        }
 
         public static void AvatarLoaded(Transform avatar, Player player)
         {
@@ -81,7 +106,7 @@ namespace AstroClient
             }
         }
 
-        public static void OnPlayerJoined(Player player)
+        public override void OnPlayerJoined(Player e)
         {
             if (Bools.DisableNSFWMenu)
             {
@@ -89,7 +114,7 @@ namespace AstroClient
             }
         }
 
-        public static void OnPlayerLeft(Player player)
+        public override void OnPlayerLeft(Player player)
         {
             if (Bools.DisableNSFWMenu)
             {
@@ -106,7 +131,7 @@ namespace AstroClient
         }
 
 
-        public static void OnWorldReveal()
+        public override void OnWorldReveal()
         {
             if (Bools.DisableNSFWMenu)
             {
@@ -114,7 +139,7 @@ namespace AstroClient
             }
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             if (Bools.DisableNSFWMenu)
             {

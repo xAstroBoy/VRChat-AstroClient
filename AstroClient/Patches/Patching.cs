@@ -4,10 +4,10 @@ using DayClientML2.Utility;
 using DayClientML2.Utility.Extensions;
 using ExitGames.Client.Photon;
 using Harmony;
-using Il2CppSystem.Collections;
 using MelonLoader;
 using RootMotion.FinalIK;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -35,8 +35,6 @@ namespace AstroClient.BetterPatch
 {
     internal class Patching : Overridables
     {
-        public static HarmonyInstance Instance = HarmonyInstance.Create("AstroClientPatches");
-
         private static HarmonyMethod GetPatch(string name)
         {
             return new HarmonyMethod(typeof(Patching).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
@@ -139,36 +137,5 @@ namespace AstroClient.BetterPatch
             catch { }
             return true;
         }
-
-        private static readonly float PermanentNearClip = 0.1f;
-        private static void nearClipPlane(ref float __result, ref Camera __instance)
-        {
-            if (__instance == null) return;
-            try
-            {
-                if (__instance != null)
-                {
-                    if (__instance.nearClipPlane != PermanentNearClip)
-                    {
-                        __instance.nearClipPlane = PermanentNearClip;
-                    }
-                }
-                if (__result != null)
-                {
-                    if (__result != PermanentNearClip)
-                    {
-                        __result = PermanentNearClip;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                ModConsole.Error("Error in nearClipPlane");
-                ModConsole.ErrorExc(e);
-            }
-        }
-
-
-
     }
 }

@@ -1,0 +1,90 @@
+﻿using AstroClient.ConsoleUtils;
+using MelonLoader;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using UnhollowerBaseLib;
+
+namespace AstroClient.Startup.Hooks
+{
+    public class OnWorldRevealHook : Overridables
+    {
+        public static event EventHandler Event_OnWorldReveal;
+
+
+
+        public override void OnApplicationStart()
+        {
+            HookFadeTo();
+        }
+
+
+        private static void HookFadeTo()
+        {
+            unsafe
+            {
+                ModConsole.Log("Hooking FadeTo");
+                var originalMethod = *(IntPtr*)(IntPtr)UnhollowerUtils
+                    .GetIl2CppMethodInfoPointerFieldForGeneratedMethod(
+                        typeof(VRCUiManager).GetMethod(
+                            nameof(VRCUiManager
+                                .Method_Public_Void_String_Single_Action_0))).GetValue(null);
+                MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), typeof(Main).GetMethod(nameof(FadeToPatch), BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer());
+                _fadeToDelegate = Marshal.GetDelegateForFunctionPointer<FadeToDelegate>(originalMethod);
+                if (_fadeToDelegate != null)
+                {
+                    ModConsole.Log("Hooked OnFadeTo");
+                }
+                else
+                {
+                    ModConsole.Error("Failed to hook OnFadeTo!");
+                }
+            }
+        }
+
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate void FadeToDelegate(IntPtr thisPtr, IntPtr fadeTypePtr, float duration, IntPtr action);
+
+        private static FadeToDelegate _fadeToDelegate;
+
+        private static void FadeToPatch(IntPtr thisPtr, IntPtr fadeTypePtr, float duration, IntPtr action)
+        {
+            try
+            {
+                if (thisPtr != IntPtr.Zero && fadeTypePtr != IntPtr.Zero)
+                {
+                    string fadeType = IL2CPP.Il2CppStringToManaged(fadeTypePtr);
+                    ModConsole.DebugLog("FadeType Called : " + fadeType + " With duration : " + duration);
+                    if (fadeType.Equals("BlackFade") && duration.Equals(0f) &&
+                        RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
+                    {
+                        MelonCoroutines.Start(StartOnWorldRevealEvent());
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ModConsole.Error(e.Message);
+            }
+            finally
+            {
+                _fadeToDelegate(thisPtr, fadeTypePtr, duration, action);
+            }
+        }
+
+
+        private static IEnumerator StartOnWorldRevealEvent()
+        {
+            Event_OnWorldReveal?.Invoke(null, new EventArgs());
+            yield break;
+        }
+
+
+
+    }
+}

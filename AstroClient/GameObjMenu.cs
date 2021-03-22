@@ -13,10 +13,10 @@ using UnityEngine.UI;
 
 namespace AstroClient
 {
-    public static class GameObjMenu
+    public  class GameObjMenu : Overridables
     {
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             CurrentSelection.Clear();
             Current = null;

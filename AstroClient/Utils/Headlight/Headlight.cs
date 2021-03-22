@@ -10,7 +10,7 @@ using VRC;
 
 namespace AstroClient.Headlight
 {
-    public class Headlight
+    public class Headlight : Overridables
     {
         public static float LightRange = 10f;
         public static Color LightColor = Color.white;
@@ -57,12 +57,12 @@ namespace AstroClient.Headlight
         public static QMSingleToggleButton DesktopHeadlightBtn;
         public static QMSingleToggleButton VRHeadlightBtn;
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             DesktopHeadlightBool = false;
             VRHeadLightBool = false;
-            Object.Destroy(VRLight);
-            Object.Destroy(DesktopLight);
+            VRLight.DestroyMeLocal();
+            DesktopLight.DestroyMeLocal();
             DesktopLight = null;
             VRLight = null;
         }

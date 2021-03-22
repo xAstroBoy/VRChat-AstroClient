@@ -1,0 +1,60 @@
+﻿using AstroClient.AstroUtils.ItemTweaker;
+using AstroClient.extensions;
+using RubyButtonAPI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AstroClient
+{
+    class RandomSubmenus
+    {
+
+        public static void VRC_InteractableSubMenu(QMNestedButton main, float x, float y, bool btnHalf)
+        {
+            var menu = new QMNestedButton(main, x, y, "Interact VRC_Interactable", "Interact with VRC_Interactable Triggers", null, null, null, null, btnHalf);
+            var scroll = new QMScrollMenu(menu);
+            new QMSingleButton(menu, 0, -1, "Refresh", delegate
+            {
+                scroll.Refresh();
+            }, "", null, null, true);
+            scroll.SetAction(delegate
+            {
+                foreach (var obj in WorldUtils.GetAllVRCInteractables())
+                {
+                    scroll.Add(
+                    new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {obj.name}", delegate
+                    {
+                        obj.VRC_Interactable_Click();
+                    }, $"Click {obj.name}", null, ItemTweakerMain.GetObjectStatus(obj)));
+                }
+            });
+        }
+
+
+        public static void TriggerSubMenu(QMNestedButton main, float x, float y, bool btnHalf)
+        {
+            var menu = new QMNestedButton(main, x, y, "Interact Triggers", "Interact with Level Triggers", null, null, null, null, btnHalf);
+            var scroll = new QMScrollMenu(menu);
+            new QMSingleButton(menu, 0, -1, "Refresh", delegate
+            {
+                scroll.Refresh();
+            }, "", null, null, true);
+            scroll.SetAction(delegate
+            {
+                foreach (var trigger in WorldUtils.GetAllWorldTriggers())
+                {
+                    scroll.Add(
+                    new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {trigger.name}", delegate
+                    {
+                        trigger.TriggerClick();
+                    }, $"Click {trigger.name}", null, ItemTweakerMain.GetObjectStatus(trigger)));
+                }
+            });
+        }
+
+
+    }
+}

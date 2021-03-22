@@ -9,9 +9,9 @@ using Color = System.Drawing.Color;
 
 namespace AstroClient.Worlds
 {
-    internal class WorldUnlocker
+    internal class WorldUnlocker : Overridables
     {
-        public static void OnWorldReveal()
+        public override void OnWorldReveal()
         {
             if (WorldUtils.GetWorldID() == WorldIds.Meroom)
             {

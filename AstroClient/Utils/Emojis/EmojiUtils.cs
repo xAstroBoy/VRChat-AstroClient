@@ -45,7 +45,7 @@ namespace AstroClient
             UpdateEmojiButton();
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             Cooldown = 0f;
             IsVRChatCooldownActive = false;
@@ -55,19 +55,20 @@ namespace AstroClient
             UpdateEmojiSpawning(true);
         }
 
-        public static void SpawnEmojiRPCHook(VRCPlayer player, int emoji)
+
+        public override void SpawnEmojiRPC(VRCPlayer player, int Emoji)
         {
             if (player == VRCPlayer.field_Internal_Static_VRCPlayer_0)
             {
-                SetEmoji(emoji);
-                UpdateLastSpawnedEmoji(emoji);
+                SetEmoji(Emoji);
+                UpdateLastSpawnedEmoji(Emoji);
                 if (IsVRChatCooldownActive)
                 {
                     if (!IsBeingSpawnedFromMenu)
                     {
                         if (SkipVRChatOnlineCooldown)
                         {
-                            SpawnOfflineEmoji(emoji, false);
+                            SpawnOfflineEmoji(Emoji, false);
                         }
                     }
                 }
@@ -77,8 +78,9 @@ namespace AstroClient
                 }
                 return;
             }
-            SpawnLocalEmoji(player, emoji);
+            SpawnLocalEmoji(player, Emoji);
         }
+
 
         public override void OnUpdate()
         {

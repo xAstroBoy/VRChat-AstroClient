@@ -10,12 +10,13 @@ using AstroClient.ConsoleUtils;
 using static AstroClient.ConsoleUtils.ModConsole;
 using static AstroClient.variables.CustomLists;
 using static AstroClient.variables.GlobalLists;
+using AstroClient.extensions;
 
 #endregion AstroClient Imports
 
 namespace AstroClient.WorldLights
 {
-    public class LightControl
+    public class LightControl : Overridables
     {
         public static QMToggleButton FogSwitch;
 
@@ -29,7 +30,7 @@ namespace AstroClient.WorldLights
             }
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             FogEnabled = RenderSettings.fog;
             UpdateFogSwitch();

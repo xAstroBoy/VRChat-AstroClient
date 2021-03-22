@@ -27,7 +27,7 @@ using AstroClient.SyncPhysicExt;
 
 namespace AstroClient.GameObjectDebug
 {
-    public class GameObjectUtils
+    public class GameObjectUtils : Overridables
     {
         public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
@@ -443,7 +443,7 @@ namespace AstroClient.GameObjectDebug
             }
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             Mirrors.Clear();
             if (GameObjDumper != null)

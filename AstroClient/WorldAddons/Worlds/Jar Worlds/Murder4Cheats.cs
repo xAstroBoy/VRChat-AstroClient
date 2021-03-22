@@ -26,7 +26,7 @@ using VRC.Udon;
 
 namespace AstroClient
 {
-    public static class Murder4Cheats
+    public  class Murder4Cheats : Overridables
     {
         // TODO: FIGURE HOW TO FIX PARTICLES (ONLY GOLD CAMO WORKS)
         public static void UnlockPatreonTiers()
@@ -331,7 +331,7 @@ namespace AstroClient
 
 
 
-        public static void OnWorldReveal()
+        public override void OnWorldReveal()
         {
             if (WorldUtils.GetWorldID() == WorldIds.Murder4)
             {
@@ -356,7 +356,7 @@ namespace AstroClient
             }
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             if (KnifesGrabbableToggle != null)
             {
