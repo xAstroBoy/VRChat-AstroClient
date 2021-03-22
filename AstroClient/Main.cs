@@ -100,7 +100,7 @@ namespace AstroClient
                 if (btype != null && btype.Equals(typeof(CheetoComponent)))
                 {
                     CheetoComponent component = assembly.CreateInstance(type.ToString(), true) as CheetoComponent;
-                    //component.Start(); Add this later
+                    component.Start();
                 }
             }
         }
