@@ -1,11 +1,6 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.ConsoleUtils;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using UnityEngine;
 
     public class RayCastHook : Overridables
@@ -20,9 +15,7 @@
                 RaycastHit hit;
                 if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hit, float.MaxValue))
                 {
-                    Debug.DrawRay(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
                     Event_RayCastHit?.Invoke(this, new RayCastEventArgs(hit));
-                    //ModConsole.DebugLog($"Did Hit: {hit.transform.gameObject.name}");
                 }
             }
         }
