@@ -27,6 +27,7 @@
   <ItemGroup>
     <Compile Include="BuildInfo.cs" />
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
+    <Compile Include="Cheetos\AssemblySpy.cs" />
     <Compile Include="EventArgs\OnAvatarSpawnArgs.cs" />
     <Compile Include="EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
     <Compile Include="EventArgs\SpawnEmojiArgs.cs" />
