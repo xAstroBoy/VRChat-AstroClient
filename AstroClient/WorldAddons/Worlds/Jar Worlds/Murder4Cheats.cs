@@ -236,7 +236,6 @@ namespace AstroClient
                 GameVictoryMurdererBtn.setIntractable(VictoryMurdererEvent.isNotNull());
             }
 
-
             item_Grenade.RenameObject("Grenade");
             item_Silenced_Revolver_0.RenameObject("Silenced Revolver");
             item_Silenced_Revolver_1.RenameObject("Silenced Revolver 1");
@@ -408,22 +407,20 @@ namespace AstroClient
 
             QMNestedButton MurderItemTeleporter = new QMNestedButton(Murder4CheatPage, 1, 0, "Item Teleporter", "Size Items Editor", null, null, null, null, true);
             #region Item Teleporter
+            DoUnlockedSoundbtn = new QMSingleToggleButton(MurderItemTeleporter, 0, 0, "Do Sound", new Action(() => { DoUnlockedSound = true; }), "Quiet Mode", new Action(() => { DoUnlockedSound = false; }), "Should i run the Sound action on pickups teleport.", Color.green, Color.red, null, false, true);
             new QMSingleButton(MurderItemTeleporter, 1, 0, "Clues!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 1, 0.5f, "Photograph!", new Action(() => { Clue_photograph.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 1, 1, "Notebook!", new Action(() => { Clue_notebook.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 1, 1.5f, "Locket!", new Action(() => { Clue_Locket.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 1, 2, "PocketWatch!", new Action(() => { Clue_PocketWatch.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 1, 2.5f, "Postcard!", new Action(() => { Clue_Postcard.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
-            if (isChristmasMode)
-            {
-                PresentTeleporter = new QMSingleButton(MurderItemTeleporter, 1, 3, "Present!", new Action(() => { Clue_Present.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
-            }
-            new QMSingleButton(MurderItemTeleporter, 2, 0, "Shotgun!", new Action(() => { item_Shotgun.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Shotgun Gun Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 2, 0.5f, "Detective Gun!", new Action(() => { item_DetectiveRevolver.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Detective Gun Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 2, 1, "Grenade!", new Action(() => { item_Grenade.TeleportToMe();  if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Grenade Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 2, 1.5f, "Traps!", new Action(() => { BearTraps.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Silenced Gun Teleporter!", null, null, true);
-
-            DoUnlockedSoundbtn = new QMSingleToggleButton(MurderItemTeleporter, 4, 0, "Do Sound", new Action(() => { DoUnlockedSound = true; }), "Quiet Mode", new Action(() => { DoUnlockedSound = false; }), "Should i run the Sound action on pickups teleport.", Color.green, Color.red, null, false, true);
+            new QMSingleButton(MurderItemTeleporter, 2, 0, "Photograph!", new Action(() => { Clue_photograph.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 3, 0, "Notebook!", new Action(() => { Clue_notebook.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 4, 0, "Locket!", new Action(() => { Clue_Locket.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 1, 0.5f, "PocketWatch!", new Action(() => { Clue_PocketWatch.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 2, 0.5f, "Postcard!", new Action(() => { Clue_Postcard.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 3, 0.5f, "Shotgun!", new Action(() => { item_Shotgun.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Shotgun Gun Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 4, 0.5f, "Detective Gun!", new Action(() => { item_DetectiveRevolver.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Detective Gun Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 1, 1f, "Silenced Gun 1!", new Action(() => { item_Silenced_Revolver_0.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Silenced Gun Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 2, 1f, "Silenced Gun 2!", new Action(() => { item_Silenced_Revolver_1.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Silenced Gun Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 3, 1, "Grenade!", new Action(() => { item_Grenade.TeleportToMe();  if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Grenade Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 4, 1f, "Traps!", new Action(() => { BearTraps.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Silenced Gun Teleporter!", null, null, true);
+            PresentTeleporter = new QMSingleButton(MurderItemTeleporter, 1, 2, "Present!", new Action(() => { Clue_Present.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
             #endregion
 
 
@@ -467,10 +464,8 @@ namespace AstroClient
             new QMSingleButton(MurderItemSpawner, 2, 1, "Spawn Locket!", new Action(() => { Clue_Locket.CloneObject(); }), "Clue Cloner!", null, null, true);
             new QMSingleButton(MurderItemSpawner, 2, 1.5f, "Spawn PocketWatch!", new Action(() => { Clue_PocketWatch.CloneObject(); }), "Clue Cloner!", null, null, true);
             new QMSingleButton(MurderItemSpawner, 2, 2, "Spawn Postcard!", new Action(() => { Clue_Postcard.CloneObject(); }), "Clue Cloner!", null, null, true);
-            if (isChristmasMode)
-            {
-               PresentSpawner = new QMSingleButton(MurderItemSpawner, 2, 2.5f, "Spawn Present!", new Action(() => { Clue_Present.CloneObject(); }), "Clue Teleporter!", null, null, true);
-            }
+            PresentSpawner = new QMSingleButton(MurderItemSpawner, 2, 2.5f, "Spawn Present!", new Action(() => { Clue_Present.CloneObject(); }), "Clue Teleporter!", null, null, true);
+            
             #endregion
 
             if (Bools.AllowAttackerComponent)
@@ -527,10 +522,8 @@ namespace AstroClient
             new QMSingleButton(MurderItemClicker, 1, 1, "Click Locket!", new Action(() => { Clue_Locket.VRC_Interactable_Click(); }), "Click!", null, null, true);
             new QMSingleButton(MurderItemClicker, 1, 1.5f, "Click PocketWatch!", new Action(() => { Clue_PocketWatch.VRC_Interactable_Click(); }), "Click!", null, null, true);
             new QMSingleButton(MurderItemClicker, 1, 2, "Click Postcard!", new Action(() => { Clue_Postcard.VRC_Interactable_Click(); }), "Click!", null, null, true);
-            if (isChristmasMode)
-            {
-                PresentClicker = new QMSingleButton(MurderItemSpawner, 2, 0, "Click Present!", new Action(() => { Clue_Present.CloneObject(); }), "Click!", null, null, true);
-            }
+            PresentClicker = new QMSingleButton(MurderItemSpawner, 2, 0, "Click Present!", new Action(() => { Clue_Present.CloneObject(); }), "Click!", null, null, true);
+            
             new QMSingleButton(MurderItemClicker, 2, 0.5f, "Unlock Random Weapon!", new Action(() => { Clues.VRC_Interactable_Click(); }), "Unlock Random Weapon!", null, null, true);
             #endregion
 
