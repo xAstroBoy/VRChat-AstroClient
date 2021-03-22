@@ -18,11 +18,11 @@ using Color = System.Drawing.Color;
 #region AstroClient Imports
 
 using AstroClient.components;
-using static AstroClient.HandsUtils;
 using AstroClient.ConsoleUtils;
 using DayClientML2.Utility.Extensions;
 using AstroClient.extensions;
 using AstroClient.SyncPhysicExt;
+
 #endregion AstroClient Imports
 
 namespace AstroClient.GameObjectDebug
@@ -146,14 +146,14 @@ namespace AstroClient.GameObjectDebug
             }
         }
 
-
         public static void TeleportPlayerToPickup(GameObject obj)
         {
-            if(obj != null && Utils.CurrentUser != null)
+            if (obj != null && Utils.CurrentUser != null)
             {
                 Utils.CurrentUser.transform.position = obj.transform.position;
             }
         }
+
         public static void RestoreOriginalLocation(GameObject obj, bool RestoreBodySettings)
         {
             if (obj != null)
@@ -312,7 +312,6 @@ namespace AstroClient.GameObjectDebug
                 ModConsole.Log("Done Dumping GameObjects, Check The Path");
             }).Start();
         }
-
 
         public static void GetAllPickupsOwners()
         {

@@ -1,18 +1,12 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DayBots.VRCAPI
 {
-    class Utils
+    internal class Utils
     {
         internal static string GetRespondsStream(WebResponse webResponse_0)
         {
@@ -27,7 +21,8 @@ namespace DayBots.VRCAPI
             webResponse_0.Dispose();
             return result;
         }
-        internal static string WebGet(string url, Dictionary<string,string> Parameter)
+
+        internal static string WebGet(string url, Dictionary<string, string> Parameter)
         {
             WebRequest requestclient = WebRequest.Create(url);
             requestclient.ContentType = "application/json";
@@ -37,6 +32,7 @@ namespace DayBots.VRCAPI
             ServicePointManager.ServerCertificateValidationCallback = ((object s, X509Certificate c, X509Chain cc, SslPolicyErrors ssl) => true);
             return GetRespondsStream(requestclient.GetResponse());
         }
+
         internal static string GetConfig()
         {
             return WebGet("https://api.vrchat.cloud/api/1/config", null);

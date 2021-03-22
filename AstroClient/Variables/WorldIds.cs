@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AstroClient.Variables
+﻿namespace AstroClient.Variables
 {
     public static class WorldIds
     {
-
         // Yes, the mod supports these worlds : = )
 
         public static readonly string Murder2 = "wrld_ccbf8103-c23e-472f-8efb-38a9a9164357";

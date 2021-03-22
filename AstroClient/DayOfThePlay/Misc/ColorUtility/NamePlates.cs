@@ -1,9 +1,4 @@
-﻿using DayClientML2.Utility.Extensions;
-using System;
-using UnityEngine;
-using VRC;
-
-namespace DayClientML2.Utility.ColorUtility
+﻿namespace DayClientML2.Utility.ColorUtility
 {
     internal class NamePlates
     {

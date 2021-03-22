@@ -6,31 +6,24 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using VRC;
-using VRC.Core;
-using UnityEngine.UI;
-using System.IO;
-using Newtonsoft.Json;
 using Color = System.Drawing.Color;
 
 #region AstroClient Imports
 
-using static AstroClient.ObjectMiscOptions;
 using AstroClient.ConsoleUtils;
 using AstroClient.variables;
 using AstroClient.extensions;
-using static AstroClient.ConsoleUtils.ModConsole;
 using VRC.SDKBase;
 using AstroClient.components;
 using DayClientML2.Utility.Extensions;
+
 #endregion AstroClient Imports
 
 namespace AstroClient
 {
     public class LewdVRChat : Overridables
     {
-
         // TODO :  REMAKE THIS TRASH
-
 
         public override void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
         {
@@ -63,8 +56,6 @@ namespace AstroClient
             }
             if (avatar != null && player != null && player.field_Private_APIUser_0 != null)
             {
-
-
                 try
                 {
                     var OldEntry = _AnalyzedPlayers.Where(x => x.player.field_Private_APIUser_0.id == player.field_Private_APIUser_0.id).DefaultIfEmpty(null).First();
@@ -82,8 +73,6 @@ namespace AstroClient
                     ModConsole.DebugError("Error in LewdVRChat Deregistering Avatar " + e);
                 }
 
-
-
                 try
                 {
                     var tmp = new AnalyzedAvatar(player, avatar);
@@ -100,7 +89,6 @@ namespace AstroClient
                 {
                     ModConsole.DebugError("Error in LewdVRChat Registering Avatar " + e);
                 }
-
             }
         }
 
@@ -128,7 +116,6 @@ namespace AstroClient
             }
         }
 
-
         public override void OnWorldReveal()
         {
             if (Bools.DisableNSFWMenu)
@@ -144,16 +131,14 @@ namespace AstroClient
                 return;
             }
             _AnalyzedPlayers.Clear();
-
         }
-
 
         public static IEnumerator AvatarDumper(Transform obj, Player player)
         {
             if (obj == null && player == null)
             {
                 ModConsole.DebugWarning("AvatarDumper Failed To Start!");
-                if(obj != null)
+                if (obj != null)
                 {
                     ModConsole.DebugWarning("AvatarDumper Obj is not null!");
                 }
@@ -206,7 +191,6 @@ namespace AstroClient
             yield return null;
         }
 
-
         public static void AvatarPickupEditor(Transform Body, Player player)
         {
             if (Body == null)
@@ -251,22 +235,20 @@ namespace AstroClient
                             continue;
                         }
                         _DumpedNames.Add(item.name);
-                           var control = item.GetComponentInChildren<PickupController>();
-                            if(control == null)
-                            {
-                                control = item.AddComponent<PickupController>();
-                            }
-                            if(control != null)
-                            {
+                        var control = item.GetComponentInChildren<PickupController>();
+                        if (control == null)
+                        {
+                            control = item.AddComponent<PickupController>();
+                        }
+                        if (control != null)
+                        {
                             control.ForceComponent = true;
-                                Pickup.SetPickupable(item, true);
-                                Pickup.SetDisallowTheft(item);
+                            Pickup.SetPickupable(item, true);
+                            Pickup.SetDisallowTheft(item);
                             ModConsole.Log("Added Pickup in Object [ " + item.name + " ] in " + username + "'s avatar", Color.Yellow);
-
                         }
 
                         item.AddCollider();
-
                     }
                 }
             }
@@ -354,15 +336,10 @@ namespace AstroClient
             }
         }
 
-
-
-    
         public static string GetDisplayName(Player player)
         {
             return player.GetAPIUser().displayName;
         }
-
-
 
         public static void DumpSelectedAviComponents()
         {
@@ -378,8 +355,6 @@ namespace AstroClient
             }
         }
 
-
-
         public static void PickupAviObjects()
         {
             var apiuser = QuickMenuUtils.GetSelectedUser();
@@ -393,7 +368,6 @@ namespace AstroClient
             }
         }
 
-
         public static void InitButtons(QMNestedButton main, float x, float y, bool btnHalf)
         {
             if (Bools.DisableNSFWMenu)
@@ -401,8 +375,6 @@ namespace AstroClient
                 return;
             }
             var menu = new QMNestedButton(main, x, y, "Lewd NSFW Revealer", "Lewd Revealer", null, null, null, null, btnHalf);
-
-            
         }
 
         public static void InitUserMenu(QMNestedButton main, float x, float y)
@@ -412,14 +384,10 @@ namespace AstroClient
                 return;
             }
             var menu = new QMNestedButton(main, x, y, "Lewd NSFW Menu", "Lewd Menu", null, null, null, null, false);
-                //new QMSingleButton(menu, 1, 0, "Force Lewdify", new Action(ScanPlayerforNSFW), "Scan Player For NSFW.", null, null);
-                new QMSingleButton(menu, 3, 0, "Dump Avatar Renderer Components", new Action(DumpSelectedAviComponents), "Print all visible components names in console.", null, null);
-                new QMSingleButton(menu, 1, 1, "Add Pickup Component to extra avatar parts (WIP).", new Action(PickupAviObjects), "Pickup Avatar Objects.", null, null);
-
+            //new QMSingleButton(menu, 1, 0, "Force Lewdify", new Action(ScanPlayerforNSFW), "Scan Player For NSFW.", null, null);
+            new QMSingleButton(menu, 3, 0, "Dump Avatar Renderer Components", new Action(DumpSelectedAviComponents), "Print all visible components names in console.", null, null);
+            new QMSingleButton(menu, 1, 1, "Add Pickup Component to extra avatar parts (WIP).", new Action(PickupAviObjects), "Pickup Avatar Objects.", null, null);
         }
-
-
-
 
         private static void ReloadAllAvatars()
         {
@@ -429,11 +397,10 @@ namespace AstroClient
             }
             foreach (var player in PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0)
             {
-                    if (player != null && player.field_Internal_VRCPlayer_0 != null)
-                    {
-                        ReloadAvatar(player.field_Internal_VRCPlayer_0);
-                    }
-                
+                if (player != null && player.field_Internal_VRCPlayer_0 != null)
+                {
+                    ReloadAvatar(player.field_Internal_VRCPlayer_0);
+                }
             }
         }
 
@@ -444,7 +411,6 @@ namespace AstroClient
                 player.Method_Public_Void_Boolean_0();
             }
         }
-
 
         public static void AddPickupComponentsToAvi()
         {
@@ -459,9 +425,6 @@ namespace AstroClient
                 }
             }
         }
-
-
-
 
         public static List<string> _DumpedNames;
 
@@ -505,24 +468,19 @@ namespace AstroClient
             }
         }
 
-
-
         public static List<AnalyzedAvatar> _AnalyzedPlayers = new List<AnalyzedAvatar>();
         public static List<string> _NSFWNamePlayer = new List<string>();
-
-
 
         public class AnalyzedAvatar
         {
             public Transform Avatar { get; set; }
             public Player player { get; set; }
+
             public AnalyzedAvatar(Player player, Transform Avatar)
             {
                 this.Avatar = Avatar;
                 this.player = player;
             }
         }
-
-
     }
 }

@@ -1,17 +1,10 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.components;
     using AstroClient.ConsoleUtils;
     using AstroClient.Startup.Hooks;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Management.Instrumentation;
-    using System.Text;
-    using System.Threading.Tasks;
     using UnityEngine;
     using VRC.SDKBase;
-
 
     // thanks TO Cheeto aka Craig on discord, he's been really helpful!
     public class Overridables // TODO: GET A BETTER NAME
@@ -36,9 +29,7 @@
 
                 // PATCHES
 
-
-
-                // HOOKS 
+                // HOOKS
                 OnWorldRevealHook.Event_OnWorldReveal += Internal_OnWorldReveal;
                 SpawnEmojiRPCHook.Event_SpawnEmojiRPC += Internal_SpawnEmojiRPC;
                 TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += Internal_VRC_EventDispatcherRFC_triggerEvent;
@@ -47,7 +38,7 @@
                 NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
                 NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ModConsole.ErrorExc(e);
             }
@@ -105,7 +96,6 @@
         {
             try
             {
-
                 OnLevelLoaded();
             }
             catch (Exception Exc)
@@ -114,8 +104,6 @@
             }
 
             // TODO : REMOVE AND MERGE INTO THE COMPONENT DIRECTLY
-
-
         }
 
         private void Internal_OnPlayerLeft(object sender, PlayerEventArgs e)
@@ -154,19 +142,16 @@
             }
         }
 
-
         private void Internal_OnWorldReveal(object sender, EventArgs e)
         {
             try
             {
                 OnWorldReveal();
-
             }
             catch (Exception Exc)
             {
                 ModConsole.ErrorExc(Exc);
             }
-
         }
 
         private void Internal_VRC_EventDispatcherRFC_triggerEvent(object sender, VRC_EventDispatcherRFC_TriggerEventArgs e)
@@ -193,66 +178,48 @@
             }
         }
 
-
         public virtual void VRChat_OnUiManagerInit()
         {
-
         }
 
         public virtual void OnApplicationStart()
         {
-
         }
 
         public virtual void OnUpdate()
         {
-
         }
 
         public virtual void OnLateUpdate()
         {
-
         }
 
         public virtual void OnLevelLoaded()
         {
-
         }
-
-
 
         public virtual void OnPlayerLeft(VRC.Player player)
         {
-
         }
 
         public virtual void OnPlayerJoined(VRC.Player player)
         {
-
         }
 
-        public virtual void SpawnEmojiRPC(VRCPlayer player,  int emoji)
+        public virtual void SpawnEmojiRPC(VRCPlayer player, int emoji)
         {
-
         }
-
 
         public virtual void VRC_EventDispatcherRFC_triggerEvent(VRC_EventHandler VRC_EventHandler, VRC_EventHandler.VrcEvent VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int UnknownInt, float UnknownFloat)
         {
-
         }
 
         public virtual void OnAvatarSpawn(GameObject avatar, VRC.SDKBase.VRC_AvatarDescriptor DescriptorObj, bool state)
         {
-
         }
 
         public virtual void OnWorldReveal()
         {
-
         }
-
-
     }
-
 }

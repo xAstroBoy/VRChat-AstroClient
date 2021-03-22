@@ -1,21 +1,9 @@
-﻿using Harmony;
-using MelonLoader;
-using RubyButtonAPI;
+﻿using AstroClient.ConsoleUtils;
+using Harmony;
 using System;
-using System.Collections;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using UnhollowerBaseLib;
 using UnhollowerRuntimeLib.XrefScans;
-using UnityEngine;
-using VRC;
-using UnityEngine.UI;
-using Console = CheetosConsole.Console;
-using Color = System.Drawing.Color;
-using AstroClient.components;
 using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
-using AstroClient.ConsoleUtils;
-using AstroClient.World.Hub;
 
 namespace AstroClient.Startup.Hooks
 {
@@ -25,13 +13,10 @@ namespace AstroClient.Startup.Hooks
 
         public static event EventHandler<VRC_EventDispatcherRFC_TriggerEventArgs> Event_VRC_EventDispatcherRFC_triggerEvent;
 
-
-
         public override void OnApplicationStart()
         {
             HookTriggerEvent();
         }
-
 
         private void HookTriggerEvent()
         {
@@ -64,7 +49,5 @@ namespace AstroClient.Startup.Hooks
                 return true;
             }
         }
-
-
     }
 }

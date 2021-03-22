@@ -3,7 +3,6 @@ using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
 using AstroClient.Finder;
 using AstroClient.Variables;
-using System;
 using VRC.SDKBase;
 using Color = System.Drawing.Color;
 
@@ -59,7 +58,7 @@ namespace AstroClient.Worlds
                             Cloned_trigger.interactText = "Lockpick Door";
                         }
                     }
-                    
+
                     if (Cloned_trigger != null)
                     {
                         Cloned_trigger.gameObject.AddCollider();
@@ -67,7 +66,6 @@ namespace AstroClient.Worlds
                     }
                 }
             }
-
             else if (WorldUtils.GetWorldID() == WorldIds.FBTHeaven)
             {
                 ModConsole.Log("Recognized FBT Heaven! Removing Blinders and Dividers...");
@@ -161,7 +159,6 @@ namespace AstroClient.Worlds
                         }
                     }
 
-
                     if (Cloned_trigger != null)
                     {
                         Door_3_Visual.AddCollider();
@@ -196,7 +193,6 @@ namespace AstroClient.Worlds
                     }
                 }
             }
-
             else if (WorldUtils.GetWorldID() == WorldIds.SnoozeScaryMaze5)
             {
                 ModConsole.Log("Recognized The Snooze's Scary Maze 5, Removing Anti-cheat protections..");
@@ -231,7 +227,6 @@ namespace AstroClient.Worlds
                     ItemTweakerMain.WorldObjects.AddGameObject(hammer);
                 }
             }
-
             else if (WorldUtils.GetWorldID() == WorldIds.TheGreatPug)
             {
                 ModConsole.Log("Recognized The Great Pug World, Removing Basement Door & Kitchen Door.");

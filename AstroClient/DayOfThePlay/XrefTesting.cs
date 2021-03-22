@@ -10,7 +10,6 @@ namespace DayClientML2.Utility
 {
     internal static class XrefTesting
     {
-
         internal static MethodInfo OnPhotonPlayerJoinMethod
         {
             get
@@ -46,7 +45,9 @@ namespace DayClientML2.Utility
                 });
             }
         }
+
         private static MethodInfo _OnPhotonPlayerJoinMethod;
+
         internal static MethodInfo OnPhotonPlayerLeftMethod
         {
             get
@@ -83,9 +84,8 @@ namespace DayClientML2.Utility
                 });
             }
         }
+
         private static MethodInfo _OnPhotonPlayerLeftMethod;
-
-
 
         internal static MethodInfo ShowScreenMethod
         {
@@ -113,7 +113,9 @@ namespace DayClientML2.Utility
                 });
             }
         }
+
         private static MethodInfo _ShowScreenMethod;
+
         internal static MethodInfo IsRoomAuthor
         {
             get
@@ -130,7 +132,7 @@ namespace DayClientML2.Utility
                         {
                             if (jt.Type == XrefType.Method
                             && jt.TryResolve() != null
-                            && jt.TryResolve().IsPublic 
+                            && jt.TryResolve().IsPublic
                             && !jt.TryResolve().IsStatic
                             )
                             {
@@ -144,7 +146,9 @@ namespace DayClientML2.Utility
                 });
             }
         }
+
         private static MethodInfo _IsRoomAuthor;
+
         internal static MethodInfo DestroyPortal
         {
             get
@@ -153,33 +157,33 @@ namespace DayClientML2.Utility
                 {
                     try
                     {
-                       return _destroyportal = typeof(PortalInternal).GetMethods(BindingFlags.Instance | BindingFlags.Public).Single(delegate (MethodInfo it)
-                       {
+                        return _destroyportal = typeof(PortalInternal).GetMethods(BindingFlags.Instance | BindingFlags.Public).Single(delegate (MethodInfo it)
+                        {
                             if (it.ReturnType == typeof(void) && it.GetParameters().Length == 0)
                             {
                                 return XrefScanner.XrefScan(it).Any(jt =>
-                                {
-                                    if (jt.Type == XrefType.Global)
-                                    {
-                                        Il2CppSystem.Object @object = jt.ReadAsObject();
-                                        return ((@object != null) ? @object.ToString() : null).Contains("DestroyPortal");
-                                    }
-                                    if (jt.Type == XrefType.Method
-                                    && jt.TryResolve() != null
-                                    && jt.TryResolve().GetParameters().Length == 2
-                                    && jt.TryResolve().GetParameters()[1].ParameterType == typeof(PortalInternal)
-                                    && jt.TryResolve().IsStatic
-                                    )
-                                    {
-                                        _destroyportal = it;
-                                        ModConsole.Log($"[Debug] Found Destroy Portal Method! [{jt.TryResolve().DeclaringType.Name}.{jt.TryResolve().Name}] in [{it.Name}]");
-                                        return true;
-                                    }
-                                    return false;
-                                });
+                               {
+                                     if (jt.Type == XrefType.Global)
+                                     {
+                                         Il2CppSystem.Object @object = jt.ReadAsObject();
+                                         return ((@object != null) ? @object.ToString() : null).Contains("DestroyPortal");
+                                     }
+                                     if (jt.Type == XrefType.Method
+                                     && jt.TryResolve() != null
+                                     && jt.TryResolve().GetParameters().Length == 2
+                                     && jt.TryResolve().GetParameters()[1].ParameterType == typeof(PortalInternal)
+                                     && jt.TryResolve().IsStatic
+                                     )
+                                     {
+                                         _destroyportal = it;
+                                         ModConsole.Log($"[Debug] Found Destroy Portal Method! [{jt.TryResolve().DeclaringType.Name}.{jt.TryResolve().Name}] in [{it.Name}]");
+                                         return true;
+                                     }
+                                     return false;
+                                 });
                             }
                             return false;
-                       });
+                        });
                     }
                     catch
                     {

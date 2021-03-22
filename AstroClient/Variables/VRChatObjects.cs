@@ -1,10 +1,5 @@
 ﻿using AstroClient.Finder;
 using AstroClient.variables;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace AstroClient.Variables
@@ -39,7 +34,5 @@ namespace AstroClient.Variables
                 return _ScreenFade;
             }
         }
-
-
     }
 }

@@ -1,5 +1,4 @@
 ﻿using AstroClient.ConsoleUtils;
-using MelonLoader;
 using UnityEngine;
 using VRC.SDKBase;
 

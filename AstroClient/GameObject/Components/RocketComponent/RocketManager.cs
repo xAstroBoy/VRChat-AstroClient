@@ -5,10 +5,8 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnhollowerRuntimeLib;
 using UnityEngine;
-using UnityEngine.UI;
-using Color = System.Drawing.Color;
-
 using static AstroClient.variables.InstanceBuilder;
+using Color = System.Drawing.Color;
 
 namespace AstroClient.components
 {
@@ -138,7 +136,7 @@ namespace AstroClient.components
             var Timer = obj.GetComponent<RocketObject>();
             if (Timer != null)
             {
-                RocketTimer.setButtonText( "Timer : " + Timer.RocketTimer);
+                RocketTimer.setButtonText("Timer : " + Timer.RocketTimer);
             }
             else
             {
@@ -170,7 +168,7 @@ namespace AstroClient.components
             ClearList();
             if (RocketTimer != null)
             {
-                RocketTimer.setButtonText( "none");
+                RocketTimer.setButtonText("none");
             }
         }
 

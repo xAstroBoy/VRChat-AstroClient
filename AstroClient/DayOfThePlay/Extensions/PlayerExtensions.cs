@@ -531,7 +531,6 @@ namespace DayClientML2.Utility.Extensions
             return instance.field_Private_Player_0;
         }
 
-
         #endregion SelectedPlayers
     }
 }

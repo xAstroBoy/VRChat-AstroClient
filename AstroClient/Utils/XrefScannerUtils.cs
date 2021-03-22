@@ -1,14 +1,11 @@
-
+using AstroClient.ConsoleUtils;
 using System;
 using System.Linq;
 using System.Reflection;
 using UnhollowerRuntimeLib.XrefScans;
-using MelonLoader;
-using AstroClient.ConsoleUtils;
 
 public static class XrefScannerUtils
 {
-
     /// <summary>
     ///     Scans global instances for the specific search-term
     /// </summary>
@@ -106,5 +103,4 @@ public static class XrefScannerUtils
         ModConsole.Error($"XRefScanMethodCount \"{methodBase}\" has all null/empty parameters. Returning -1");
         return -1;
     }
-
 }

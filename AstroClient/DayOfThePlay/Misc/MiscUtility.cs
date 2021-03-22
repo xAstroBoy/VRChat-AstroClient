@@ -76,7 +76,7 @@ namespace DayClientML2.Utility
             button.getGameObject().transform.Rotate(new Vector3(0f, 0f, rotation));
         }
 
-        public static void SetButtonToArrow(QMSingleButton button,ArrowDirection direction)
+        public static void SetButtonToArrow(QMSingleButton button, ArrowDirection direction)
         {
             button.getGameObject().GetComponent<Image>().sprite = Utils.QuickMenu.transform.Find("QuickMenu_NewElements/_CONTEXT/QM_Context_User_Selected/NextArrow_Button").GetComponent<Image>().sprite;
             switch (direction)
@@ -84,17 +84,21 @@ namespace DayClientML2.Utility
                 case ArrowDirection.Up:
                     // Dont do anything cus its already up
                     break;
+
                 case ArrowDirection.Down:
                     RotateButton(button, 180);
                     break;
+
                 case ArrowDirection.Left:
                     RotateButton(button, -90);
                     break;
+
                 case ArrowDirection.Right:
                     RotateButton(button, 90);
                     break;
             }
         }
+
         public enum ArrowDirection
         {
             Up,

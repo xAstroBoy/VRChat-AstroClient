@@ -15,10 +15,9 @@ namespace AstroClient
 {
     internal class ScaleEditor : Overridables
     {
-
         private static float ModifiedVectorX()
         {
-            if(ObjectMiscOptions.EditVectorX)
+            if (ObjectMiscOptions.EditVectorX)
             {
                 return ScaleValueToUse;
             }

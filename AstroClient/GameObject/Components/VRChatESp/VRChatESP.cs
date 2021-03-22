@@ -1,9 +1,6 @@
 ﻿using AstroClient.ConsoleUtils;
 using System;
-using System.Runtime.InteropServices;
-using UnhollowerRuntimeLib;
 using UnityEngine;
-
 
 namespace AstroClient.components
 {
@@ -11,9 +8,7 @@ namespace AstroClient.components
     {
         public VRChatESP(IntPtr ptr) : base(ptr)
         {
-
         }
-
 
         // Use this for initialization
         public void Start()
@@ -21,7 +16,7 @@ namespace AstroClient.components
             try
             {
                 var rend = GetComponentInChildren<MeshRenderer>(true);
-                if(rend != null)
+                if (rend != null)
                 {
                     ModConsole.DebugError("Added ESP to object : " + this.gameObject.name);
                     renderer = rend;
@@ -35,11 +30,9 @@ namespace AstroClient.components
             catch { }
         }
 
-
-
         public void OnDestroy()
         {
-            if(renderer != null)
+            if (renderer != null)
             {
                 HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(renderer, false);
             }
@@ -50,7 +43,7 @@ namespace AstroClient.components
         {
             if (renderer != null)
             {
-             HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(renderer, true);
+                HighlightsFX.prop_HighlightsFX_0.Method_Public_Void_Renderer_Boolean_0(renderer, true);
             }
             else
             {
@@ -58,7 +51,6 @@ namespace AstroClient.components
                 UnityEngine.Object.Destroy(this);
             }
         }
-
 
         private MeshRenderer renderer;
     }

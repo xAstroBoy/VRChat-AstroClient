@@ -73,13 +73,10 @@ namespace AstroClient.extensions
                     ModConsole.Log("Does " + obj.name + "have a rigidbody?");
                 }
             }
-
         }
-
 
         public static void KillForces(this GameObject obj)
         {
-
             RemoveForces(obj, TakeOwnership);
         }
 
@@ -161,14 +158,12 @@ namespace AstroClient.extensions
         public static void ForceSyncPhysic(this GameObject obj)
         {
             var control = obj.GetComponent<RigidBodyController>();
-            if(control == null)
+            if (control == null)
             {
                 control = obj.AddComponent<RigidBodyController>();
             }
             control.ForcedMode = true;
         }
-
-
 
         public static void AddSpinForceX(this GameObject obj)
         {
@@ -177,7 +172,6 @@ namespace AstroClient.extensions
                 var item = obj;
                 if (item != null)
                 {
-
                     if (!ObjectSpinnerManager.ObjectSpinners.Contains(item))
                     {
                         ObjectSpinnerManager.ObjectSpinners.Add(item);
@@ -209,7 +203,6 @@ namespace AstroClient.extensions
         {
             try
             {
-
                 if (!ObjectSpinnerManager.ObjectSpinners.Contains(obj))
                 {
                     ObjectSpinnerManager.ObjectSpinners.Add(obj);
@@ -369,27 +362,21 @@ namespace AstroClient.extensions
 
         public static void IncRocketSpeed(this GameObject obj)
         {
-
             RocketManager.IncreaseObjTimer(obj);
         }
 
         public static void DecRocketSpeed(this GameObject obj)
         {
-
             RocketManager.DecreaseObjTimer(obj);
         }
 
-
         public static void AddConstraint(this GameObject obj, RigidbodyConstraints constraint)
         {
-
             Forces.AddConstraint(obj, constraint);
         }
 
-
         public static void RemoveConstraint(this GameObject obj, RigidbodyConstraints constraint)
         {
-
             Forces.RemoveConstraint(obj, constraint);
         }
 
@@ -397,6 +384,7 @@ namespace AstroClient.extensions
         {
             Forces.RemoveAllObjConstraints(obj);
         }
+
         public static void SetGravity(this GameObject obj, bool useGravity)
         {
             if (obj != null)
@@ -414,6 +402,7 @@ namespace AstroClient.extensions
                 control.isKinematic = false;
             }
         }
+
         public static bool GetGravity(this GameObject obj)
         {
             if (obj != null)
@@ -449,7 +438,6 @@ namespace AstroClient.extensions
             }
         }
 
-
         public static void SetKinematic(this GameObject obj, bool isKinematic)
         {
             if (obj != null)
@@ -464,28 +452,25 @@ namespace AstroClient.extensions
                     control.EditMode = true;
                 }
                 control.isKinematic = isKinematic;
-
             }
         }
-   
 
-    public static bool GetKinematic(this GameObject obj)
-    {
-        if (obj != null)
+        public static bool GetKinematic(this GameObject obj)
         {
-            var control = obj.GetComponent<RigidBodyController>();
-            if (control == null)
+            if (obj != null)
             {
-                control = obj.AddComponent<RigidBodyController>();
+                var control = obj.GetComponent<RigidBodyController>();
+                if (control == null)
+                {
+                    control = obj.AddComponent<RigidBodyController>();
+                }
+
+                return control.isKinematic;
             }
-
-            return control.isKinematic;
+            return false;
         }
-        return false;
-    }
 
-
-    public static void SetKinematic(this List<GameObject> GameObjects, bool isKinematic)
+        public static void SetKinematic(this List<GameObject> GameObjects, bool isKinematic)
         {
             foreach (var obj in GameObjects)
             {
@@ -519,10 +504,8 @@ namespace AstroClient.extensions
                     control.EditMode = true;
                 }
                 control.DetectCollisions = DetectCollisions;
-
             }
         }
-
 
         public static void SetDetectCollision(this List<GameObject> GameObjects, bool DetectCollisions)
         {
@@ -544,16 +527,13 @@ namespace AstroClient.extensions
             }
         }
 
-        
         public static void DestroyObject(this GameObject obj)
         {
-
             if (!obj.DestroyMeOnline())
             {
                 obj.DestroyMeLocal();
             }
         }
-
 
         public static void AddCollider(this GameObject obj)
         {
@@ -562,8 +542,6 @@ namespace AstroClient.extensions
                 ColliderEditors.AddCollider(obj);
             }
         }
-
-
 
         public static void RegisterChildsInPath(this List<GameObject> Original, string path)
         {
@@ -580,8 +558,8 @@ namespace AstroClient.extensions
             }
         }
 
-
         private static bool GetCopyOfDebugMode = false;
+
         private static void DebugGetCopyOf(string msg)
         {
             if (GetCopyOfDebugMode)
@@ -695,16 +673,15 @@ namespace AstroClient.extensions
             }
             DebugGetCopyOf("GetCopyOf End");
             return comp as T;
-
         }
 
         public static T CopyComponent<T>(this GameObject go, T toAdd) where T : Component
         {
-            if(go == null)
+            if (go == null)
             {
                 ModConsole.Log("CopyComponent GameObject Go is null");
             }
-            if(toAdd == null)
+            if (toAdd == null)
             {
                 ModConsole.Log("CopyComponent toAdd is null");
             }
@@ -739,12 +716,6 @@ namespace AstroClient.extensions
             return false;
         }
 
-
-
-
-
-
-
         //public static bool CopyParticleSystemRenderer(this ParticleSystemRenderer target, ParticleSystemRenderer toCopy)
         //{
         //    if (target != null && toCopy != null)
@@ -772,8 +743,6 @@ namespace AstroClient.extensions
         //    }
         //    return false;
         //}
-
-
 
         public static bool CopyTransform(this Transform target, Transform toCopy)
         {
@@ -958,7 +927,6 @@ namespace AstroClient.extensions
             }
         }
 
-
         public static void OrbitSelf(this GameObject obj)
         {
             if (obj != null)
@@ -1098,16 +1066,13 @@ namespace AstroClient.extensions
             }
         }
 
-
         public static void ExecuteUdonEvent(this CachedUdonEvent udonvar)
         {
-            if(udonvar.Action != null)
+            if (udonvar.Action != null)
             {
                 udonvar.Action.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, udonvar.EventKey);
             }
-
         }
-
 
         public static void ExecuteUdonEvent(this List<CachedUdonEvent> udonlist)
         {
@@ -1118,19 +1083,17 @@ namespace AstroClient.extensions
                     cachedudon.Action.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, cachedudon.EventKey);
                 }
             }
-
         }
-
 
         public static bool IsEmpty<T>(this List<T> list)
         {
             return list == null || list.Count == 0;
         }
+
         public static bool isNotEmpty<T>(this List<T> list)
         {
             return list.Count != 0;
         }
-
 
         public static bool IsNull<T>(this T obj) where T : class
         {
@@ -1454,7 +1417,7 @@ namespace AstroClient.extensions
                         obj.SetActive(false);
                     }
                 }
-                else if(SDK3 != null)
+                else if (SDK3 != null)
                 {
                     if (!SDK3.enabled)
                     {
@@ -1475,7 +1438,6 @@ namespace AstroClient.extensions
                 }
             }
         }
-
 
         public static void TriggerClick(this GameObject obj)
         {
@@ -1538,11 +1500,8 @@ namespace AstroClient.extensions
             }
         }
 
-
         public static void RestoreOriginalSettings(this GameObject obj)
         {
-
-
             if (obj != null)
             {
                 var control = obj.GetComponent<RigidBodyController>();
@@ -1552,7 +1511,6 @@ namespace AstroClient.extensions
                 }
             }
         }
-
 
         public static void IncreaseHoldItemScale(this GameObject obj)
         {
@@ -1564,7 +1522,6 @@ namespace AstroClient.extensions
 
         public static void RestoreOriginalScaleItem(this GameObject obj)
         {
-
             if (obj != null)
             {
                 ObjectMiscOptions.RestoreOriginalScaleItem(obj);
@@ -1573,19 +1530,14 @@ namespace AstroClient.extensions
 
         public static void DecreaseHoldItemScale(this GameObject obj)
         {
-
             if (obj != null)
             {
                 ObjectMiscOptions.DecreaseHoldItemScale(obj);
             }
         }
 
-
-
-
         public static void SetActiveStatus(this GameObject obj, bool SetActive)
         {
-
             if (obj != null)
             {
                 obj.SetActive(SetActive);
@@ -1618,7 +1570,7 @@ namespace AstroClient.extensions
             else
             {
                 ModConsole.Log("Destroyed Server-side Object : " + name, Color.Green);
-                if(refreshhandutils)
+                if (refreshhandutils)
                 {
                     HandsUtils.GameObjectToEdit = null;
                 }

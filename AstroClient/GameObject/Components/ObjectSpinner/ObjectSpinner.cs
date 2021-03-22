@@ -3,7 +3,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using UnhollowerRuntimeLib;
 using UnityEngine;
-using VRC.SDKBase;
 
 #region AstroClient Imports
 
@@ -133,7 +132,6 @@ namespace AstroClient.components
                     SpinObject(obj, ForceX, 0, 0);
                     SpinObject(obj, 0, ForceY, 0);
                     SpinObject(obj, 0, 0, ForceZ);
-
 
                     LastTimeCheck = Time.time;
                 }

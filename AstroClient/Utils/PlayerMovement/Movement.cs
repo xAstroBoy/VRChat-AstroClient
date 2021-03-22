@@ -1,5 +1,4 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
+﻿using AstroClient.extensions;
 using AstroClient.variables;
 using RealisticEyeMovements;
 using RootMotion.FinalIK;
@@ -7,10 +6,8 @@ using RubyButtonAPI;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using VRC;
 using VRC.SDKBase;
 using static AstroClient.LocalPlayerUtils;
-
 
 namespace AstroClient.AstroUtils.PlayerMovement
 {
@@ -25,10 +22,7 @@ namespace AstroClient.AstroUtils.PlayerMovement
             FreezePlayerOnQMOpenToggle = new QMToggleButton(temp, 4, 0, "Freeze On QM open \n ON", new Action(ToggleFreezePlayerOnQMOpen), "Freeze On QM Open \n OFF", new Action(ToggleFreezePlayerOnQMOpen), "Freeze Player On QuickMenu Open event.", null, null, null, false);
             new QMSingleButton(temp, 1, 1, "Spawn Avatar Clone", new Action(() => { SpawnClone(); }), "Spawns current avi clone", null, null, true);
             new QMSingleButton(temp, 1, 1.5f, "Remove Avatar Clones", new Action(() => { RemoveClones(); }), "Spawns current avi clone", null, null, true);
-
         }
-
-
 
         public override void OnUpdate()
         {
@@ -65,8 +59,8 @@ namespace AstroClient.AstroUtils.PlayerMovement
             ClonesCapsules.Clear();
         }
 
-
         private static bool HasCheckedJump = false;
+
         private static void FixJumpMissing()
         {
             try
@@ -85,7 +79,6 @@ namespace AstroClient.AstroUtils.PlayerMovement
                             HasCheckedJump = true;
                         }
                     }
-
                 }
             }
             catch
@@ -120,7 +113,6 @@ namespace AstroClient.AstroUtils.PlayerMovement
                 {
                     if (InputUtils.IsImputJumpCalled())
                     {
-
                         if (LocalPlayerUtils.isPlayerGrounded() && IsJumpOverriden)
                         {
                             EmulatedJump();
@@ -132,7 +124,6 @@ namespace AstroClient.AstroUtils.PlayerMovement
                                 EmulatedJump();
                             }
                         }
-
                     }
                 }
             }
@@ -231,9 +222,9 @@ namespace AstroClient.AstroUtils.PlayerMovement
         {
             try
             {
-                foreach(var clone in ClonesCapsules)
+                foreach (var clone in ClonesCapsules)
                 {
-                    if(clone != null)
+                    if (clone != null)
                     {
                         clone.gameObject.DestroyMeLocal();
                     }
@@ -242,7 +233,6 @@ namespace AstroClient.AstroUtils.PlayerMovement
             }
             catch { }
         }
-
 
         public static void ToggleSerializer()
         {

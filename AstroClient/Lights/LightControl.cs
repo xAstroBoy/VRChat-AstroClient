@@ -7,7 +7,6 @@ using UnityEngine.Rendering;
 
 using VRC;
 using AstroClient.ConsoleUtils;
-using static AstroClient.ConsoleUtils.ModConsole;
 using static AstroClient.variables.CustomLists;
 using static AstroClient.variables.GlobalLists;
 using AstroClient.extensions;

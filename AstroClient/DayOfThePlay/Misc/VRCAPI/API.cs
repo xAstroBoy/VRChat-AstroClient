@@ -1,19 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using DayBots.VRCAPI.Endpoints;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Security;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using DayBots.VRCAPI.Endpoints;
 
 namespace DayBots.VRCAPI
 {
-    class API
+    internal class API
     {
         internal const string APIKEYLONG = "?apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26";
         internal const string APIKEY = "JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26";

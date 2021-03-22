@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-
 
 namespace DayClientML2.Utility.Menu
 {
-    class UnityUIUtils
+    internal class UnityUIUtils
     {
         public static Transform CreateScrollView(RectTransform parentTransform, float viewWidth, float viewHeight, float maxWidth, float maxHeight, bool scrollHorizontally, bool scrollVertically)
         {
@@ -24,7 +18,6 @@ namespace DayClientML2.Utility.Menu
             scrollView.GetComponent<ScrollRect>().horizontal = scrollHorizontally;
             scrollView.GetComponent<ScrollRect>().vertical = scrollVertically;
             scrollView.layer = parentTransform.gameObject.layer;
-
 
             GameObject viewport = new GameObject("Viewport");
             viewport.AddComponent<RectTransform>();
@@ -45,7 +38,6 @@ namespace DayClientML2.Utility.Menu
             //tex.Apply();
             //viewport.GetComponent<Image>().sprite = Sprite.Create(tex, new Rect(0.0f, 0.0f, tex.width, tex.height), new Vector2(0.5f, 0.5f));
             viewport.GetComponent<Image>().sprite = GameObject.Find("UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport").GetComponent<Image>().sprite;
-
 
             GameObject content = new GameObject("Content");
             content.AddComponent<RectTransform>();

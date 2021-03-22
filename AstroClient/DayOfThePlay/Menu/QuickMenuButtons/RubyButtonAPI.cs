@@ -54,8 +54,6 @@ namespace RubyButtonAPI
         protected Color OrigBackground;
         protected Color OrigText;
 
-
-        
         public GameObject getGameObject()
         {
             return button;
@@ -145,12 +143,10 @@ namespace RubyButtonAPI
             button.transform.SetParent(Parent);
         }
 
-
         public void SetResizeTextForBestFit(bool resizeTextForBestFit)
         {
             button.gameObject.GetComponentInChildren<Text>().resizeTextForBestFit = resizeTextForBestFit;
         }
-
 
         public virtual void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
         {
@@ -183,6 +179,7 @@ namespace RubyButtonAPI
         {
             return button;
         }
+
         public GameObject getIcon()
         {
             if (Icon == null)
@@ -271,12 +268,12 @@ namespace RubyButtonAPI
 
     public class QMTabButton : QMTabBase
     {
-        public QMTabButton(float btnXLocation, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null,String ImageURL = null)
+        public QMTabButton(float btnXLocation, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, String ImageURL = null)
         {
             initButton(btnXLocation, btnAction, btnToolTip, btnBackgroundColor, ImageURL);
         }
 
-        private void initButton(float btnXLocation, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null,String ImageURL = null)
+        private void initButton(float btnXLocation, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, String ImageURL = null)
         {
             btnType = "QMTabButton";
             button = UnityEngine.Object.Instantiate(QuickMenuStuff.TabButtonTemplate(), QuickMenuStuff.TabButtonTemplate().transform.parent, true);
@@ -292,7 +289,7 @@ namespace RubyButtonAPI
             else
                 OrigBackground = button.GetComponent<Image>().color;
 
-            if(ImageURL != null)
+            if (ImageURL != null)
                 LoadSprite(ImageURL);
 
             setActive(true);
@@ -329,10 +326,9 @@ namespace RubyButtonAPI
         protected string btnQMLoc;
         protected string btnType;
 
-
         public QMTabMenu(float btnXLocation, String btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, String ImageURL = null)
         {
-            initButton(btnXLocation, btnToolTip,btnBackgroundColor, backbtnBackgroundColor, backbtnTextColor, ImageURL);
+            initButton(btnXLocation, btnToolTip, btnBackgroundColor, backbtnBackgroundColor, backbtnTextColor, ImageURL);
         }
 
         public void initButton(float btnXLocation, String btnToolTip, Color? btnBackgroundColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, String ImageURL = null)
@@ -359,7 +355,7 @@ namespace RubyButtonAPI
             {
                 backbtnTextColor = Color.yellow;
             }
-           // backButton = new QMSingleButton(menuName, 5, 2, "Back", () => { QuickMenuStuff.ShowQuickmenuPage("ShortcutMenu"); }, "Go Back", backbtnBackgroundColor, backbtnTextColor);
+            // backButton = new QMSingleButton(menuName, 5, 2, "Back", () => { QuickMenuStuff.ShowQuickmenuPage("ShortcutMenu"); }, "Go Back", backbtnBackgroundColor, backbtnTextColor);
         }
 
         public string getMenuName()
@@ -404,6 +400,7 @@ namespace RubyButtonAPI
                 button.GetComponentInChildren<RectTransform>().sizeDelta /= new Vector2(1f, 2.0175f);
             }
         }
+
         public QMSingleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.getMenuName();
@@ -493,8 +490,6 @@ namespace RubyButtonAPI
             if (save)
                 OrigText = (Color)buttonTextColor;
         }
-
-
     }
 
     public class QMToggleButton : QMButtonBase
@@ -513,6 +508,7 @@ namespace RubyButtonAPI
             btnQMLoc = btnMenu.getMenuName();
             initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, shouldSaveInConfig, defaultPosition);
         }
+
         public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, String btnTextOn, System.Action btnActionOn, String btnTextOff, System.Action btnActionOff, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConfig = true, bool defaultPosition = false)
         {
             btnQMLoc = btnMenu.getMenuName();
@@ -696,6 +692,7 @@ namespace RubyButtonAPI
             }
             initButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
         }
+
         public QMSingleToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, String btnONText, System.Action btnONAction, String btnOffText, System.Action btnOFFction, String btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.getMenuName();
@@ -842,8 +839,6 @@ namespace RubyButtonAPI
                 button.GetComponent<RectTransform>().sizeDelta = Size;
             }
         }
-
-
     }
 
     public class QMNestedButton
@@ -859,6 +854,7 @@ namespace RubyButtonAPI
             btnQMLoc = btnMenu.getMenuName();
             initButton(btnXLocation, btnYLocation, btnText, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
         }
+
         public QMNestedButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, String btnText, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             btnQMLoc = btnMenu.getMenuName();
@@ -929,8 +925,7 @@ namespace RubyButtonAPI
 
     // TODO : ADD TWO ACTIONS THAT CAN RUN WHEN THE SCROLL IS OPEN OR CLOSED.
     public class QMHalfScroll
-    { 
-
+    {
         public class ScrollObject
         {
             public QMButtonBase ButtonBase;
@@ -1107,7 +1102,6 @@ namespace RubyButtonAPI
             });
         }
 
-
         public void Add(QMButtonBase Button, int Page, bool ShouldChangePos, float POSX = 0f, float POSY = 0f)
         {
             if (ShouldChangePos)
@@ -1128,7 +1122,6 @@ namespace RubyButtonAPI
                 }
             }
         }
-
 
         public void Add(QMButtonBase Button, int Page, float POSX = 0, float POSY = 0)
         {
@@ -1553,10 +1546,11 @@ namespace RubyButtonAPI
                 SingleButtonReference = GetQuickMenuInstance().transform.Find("ShortcutMenu/WorldsButton").gameObject;
             return SingleButtonReference;
         }
+
         public static GameObject TabButtonTemplate()
         {
-           // var Tab1 = GameObject.Find("/UserInterface/QuickMenu/QuickModeTabs/HomeTab");
-           // var Tab2 = GameObject.Find("/UserInterface/QuickMenu/QuickModeTabs/NotificationsTab");
+            // var Tab1 = GameObject.Find("/UserInterface/QuickMenu/QuickModeTabs/HomeTab");
+            // var Tab2 = GameObject.Find("/UserInterface/QuickMenu/QuickModeTabs/NotificationsTab");
             if (TabButtonReference == null)
                 TabButtonReference = GameObject.Find("/UserInterface/QuickMenu/QuickModeTabs/HomeTab");
             return TabButtonReference;
@@ -1602,8 +1596,9 @@ namespace RubyButtonAPI
             return vrcuimInstance;
         }
 
-               // Cache the FieldInfo for getting the current page. Hope to god this works!
+        // Cache the FieldInfo for getting the current page. Hope to god this works!
         private static FieldInfo currentPageGetter;
+
         private static GameObject shortcutMenu;
         private static GameObject userInteractMenu;
 
@@ -1622,7 +1617,6 @@ namespace RubyButtonAPI
                 GameObject shortcutMenu = quickmenu.transform.Find("ShortcutMenu").gameObject;
                 if (!shortcutMenu.activeInHierarchy)
                     shortcutMenu = quickmenu.transform.Find("UserInteractMenu").gameObject;
-
 
                 FieldInfo[] fis = Il2CppType.Of<QuickMenu>().GetFields(BindingFlags.NonPublic | BindingFlags.Instance).Where((fi) => fi.FieldType == Il2CppType.Of<GameObject>()).ToArray();
                 //MelonLoader.MelonModLogger.Log("[QMStuff] GameObject Fields in QuickMenu:");

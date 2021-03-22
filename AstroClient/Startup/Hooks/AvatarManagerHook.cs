@@ -1,30 +1,21 @@
 ﻿using AstroClient.ConsoleUtils;
-using AstroClient.variables;
 using Harmony;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
-using VRC;
 
 namespace AstroClient.Startup.Hooks
 {
     public class AvatarManagerHook : Overridables
     {
-
         private HarmonyInstance harmony;
 
         public static event EventHandler<OnAvatarSpawnArgs> Event_OnAvatarSpawn;
-
 
         public override void OnApplicationStart()
         {
             HookAvatarManager();
         }
-
 
         private void HookAvatarManager()
         {
@@ -49,8 +40,7 @@ namespace AstroClient.Startup.Hooks
 
         private static void OnAvatarSpawnEvent(GameObject avatar, VRC.SDKBase.VRC_AvatarDescriptor DescriptorObj, bool state)
         {
-             Event_OnAvatarSpawn?.Invoke(null, new OnAvatarSpawnArgs(avatar, DescriptorObj, state));
+            Event_OnAvatarSpawn?.Invoke(null, new OnAvatarSpawnArgs(avatar, DescriptorObj, state));
         }
-
     }
 }

@@ -31,7 +31,7 @@ namespace AstroClient
                                 ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
                                 continue;
                             }
-                            if(item.name =="Kill Trigger For Maze Part 2")
+                            if (item.name == "Kill Trigger For Maze Part 2")
                             {
                                 ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
                                 continue;
@@ -54,7 +54,6 @@ namespace AstroClient
                             }
 
                             item.AddComponent<VRChatESP>();
-
                         }
                         else
                         {
@@ -65,6 +64,7 @@ namespace AstroClient
             }
             catch (Exception) { }
         }
+
         public static void RemoveESPToTriggers()
         {
             var items = WorldUtils.GetAllWorldTriggers();
@@ -75,7 +75,7 @@ namespace AstroClient
                     if (item != null)
                     {
                         var ESP = item.GetComponent<VRChatESP>();
-                        if(ESP != null)
+                        if (ESP != null)
                         {
                             UnityEngine.Object.Destroy(ESP);
                         }
@@ -84,7 +84,6 @@ namespace AstroClient
             }
             catch (Exception) { }
         }
-
 
         public static void AddESPToMurderProps()
         {
@@ -101,6 +100,7 @@ namespace AstroClient
             }
             catch (Exception) { }
         }
+
         public static void RemoveESPToMurderProps()
         {
             isMurderItemsESPActivated = false;
@@ -145,7 +145,7 @@ namespace AstroClient
             {
                 foreach (var item in items)
                 {
-                    if(item != null)
+                    if (item != null)
                     {
                         item.AddComponent<VRChatESP>();
                     }
@@ -172,7 +172,6 @@ namespace AstroClient
             MurderESPItems.Clear();
         }
 
-
         public static bool isMurderItemsESPActivated = false;
         public static List<GameObject> TriggerESPItems = new List<GameObject>();
         public static List<GameObject> MurderESPItems = new List<GameObject>();
@@ -180,7 +179,5 @@ namespace AstroClient
         public static QMToggleButton TriggerESPToggler;
         public static QMSingleToggleButton Murder2ESPtoggler;
         public static QMSingleToggleButton Murder4ESPtoggler;
-
-
     }
 }

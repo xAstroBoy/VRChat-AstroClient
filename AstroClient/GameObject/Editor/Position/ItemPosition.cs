@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using VRC;
 using AstroClient.extensions;
+
 #region AstroClient Imports
 
 using AstroClient.components;

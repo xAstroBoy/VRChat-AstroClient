@@ -1,5 +1,4 @@
 ﻿using RubyButtonAPI;
-using System;
 using UnityEngine;
 using VRC;
 using VRC.Animation;
@@ -10,7 +9,6 @@ namespace AstroClient
 {
     public class LocalPlayerUtils : Overridables
     {
-
         public override void OnUpdate()
         {
             if (!FreezePlayerOnQMOpen)
@@ -161,7 +159,6 @@ namespace AstroClient
             catch
             {
                 return null;
-
             }
             return null;
         }
@@ -184,7 +181,7 @@ namespace AstroClient
         public static void ToggleFreezePlayerOnQMOpen()
         {
             FreezePlayerOnQMOpen = !FreezePlayerOnQMOpen;
-            if(FreezePlayerOnQMOpen != null)
+            if (FreezePlayerOnQMOpen != null)
             {
                 FreezePlayerOnQMOpenToggle.setToggleState(FreezePlayerOnQMOpen);
             }

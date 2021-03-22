@@ -11,6 +11,7 @@ namespace DayClientML2.Utility.Extensions
             //return WorldStuff2.GetWorld() != null || WorldStuff2.GetWorldInstance() != null;
             return GetWorld() != null || GetWorldInstance() != null;
         }
+
         //public static bool IsMaster()
         //{
         //    RoomManager.

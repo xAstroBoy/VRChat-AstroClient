@@ -2,15 +2,12 @@
 using AstroClient.extensions;
 using AstroClient.GameObjectDebug;
 using AstroClient.variables;
-using DayClientML2.Utility.ButtonApi;
 using DayClientML2.Utility.Extensions;
-using DayClientML2.Utility.MenuApi;
 using RubyButtonAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
 
@@ -24,13 +21,13 @@ namespace AstroClient.AstroUtils.ItemTweaker
             new QMSingleButton(menu, -1, -2f, "Force Sync Physic", new Action(() => { HandsUtils.GetGameObjectToEdit().ForceSyncPhysic(); }), "Force Sync Physic", null, null, true);
 
             GameObjMenu.InitTogglerMenu(menu, -1, -1.5f, true);
-     HandsUtils.GameObjToEdit = new QMSingleButton(menu, -1, -1f, "None", new Action(() => { HandsUtils.GetGameObjectToEdit(); }), "GameObject To Edit", null, null);
+            HandsUtils.GameObjToEdit = new QMSingleButton(menu, -1, -1f, "None", new Action(() => { HandsUtils.GetGameObjectToEdit(); }), "GameObject To Edit", null, null);
 
             ObjectActiveToggle = new QMSingleToggleButton(menu, -1, 0f, "Enabled", () =>
             {
                 HandsUtils.GetGameObjectToEdit().SetActiveStatus(true);
-            }, "Disabled", () => {
-
+            }, "Disabled", () =>
+            {
                 HandsUtils.GetGameObjectToEdit().SetActiveStatus(false);
             }, "Toggles SetActive", Color.green, Color.red, null, false, true);
             Main_CurrentObjOwner = new QMSingleButton(menu, -1, 0.5f, "Current Owner : null", null, "Shows Current object owner.", null, null, true);
@@ -43,7 +40,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
 
             SubMenuTeleportToTarget = new QMSingleButton(menu, -1, 2.5f, GetTeleportToTargetText, new Action(() => { HandsUtils.GetGameObjectToEdit().TeleportToTarget(); }), GetTeleportToTargetText, null, null);
             SubMenuTeleportToTarget.SetResizeTextForBestFit(true);
-
 
             new QMSingleButton(menu, 2, 1.5f, "Restore Rigidbody", new Action(() => { HandsUtils.GetGameObjectToEdit().RestoreOriginalSettings(); }), "Restore Default RigidBody Config.", null, null, true);
             new QMSingleButton(menu, 1, 1.5f, "Remove Add-ons", new Action(KillCustomComponents), "Kill All Custom Add-ons.", null, null, true);
@@ -76,8 +72,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
             InternalTriggerQMScroll(menu, 4, 2, true);
             VRC_InteractableSubMenu(menu, 4, 2.5f, true);
 
-
-
             new QMSingleButton(menu, 5, -1, "DANGER : Destroy item.", new Action(() => { HandsUtils.GetGameObjectToEdit().DestroyObject(); }), "Destroys Object , You need to reload the world to restore it back.", null, Color.red);
             SpawnedPickupsCounter = new QMSingleButton(menu, 6, 0, GetClonesPickupText, null, GetClonesPickupText, null, Color.cyan, true);
             SpawnedPrefabsCounter = new QMSingleButton(menu, 6, 0.5f, GetSpawnedPrefabText, null, GetSpawnedPrefabText, null, Color.cyan, true);
@@ -92,8 +86,8 @@ namespace AstroClient.AstroUtils.ItemTweaker
                     }
                     control.PreventOthersFromGrabbing = true;
                 }
-            }, "Interaction block OFF", () => {
-
+            }, "Interaction block OFF", () =>
+            {
                 var control = HandsUtils.GetGameObjectToEdit().GetComponent<RigidBodyController>();
                 if (control != null)
                 {
@@ -105,8 +99,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
                 }
             }, "Prevents Others from interacting with the object", Color.green, Color.red, null, false, true);
 
-
-
             ForceSubMenu(menu, 4, 0, true);
             RocketComponentSubMenu(menu, 4, 0.5f, true);
             CrazyComponentSubMenu(menu, 4, 1f, true);
@@ -117,16 +109,14 @@ namespace AstroClient.AstroUtils.ItemTweaker
             Forces.TakeOwnerShipToggle = new QMSingleToggleButton(menu, 5, 0, "Take Ownership : ON", () =>
             {
                 Forces.TakeOwnership = true;
-            }, "Take Ownership : OFF", () => {
-
+            }, "Take Ownership : OFF", () =>
+            {
                 Forces.TakeOwnership = false;
             }, "Control if Forces should get ownership of objects", Color.green, Color.red, null, false, true);
-
 
             new QMSingleButton(menu, 5, 0.5f, "Activates all Colliders", new Action(() => { HandsUtils.GetGameObjectToEdit().enablecolliders(); }), "Enables all colliders bound to the object", null, null, true);
             new QMSingleButton(menu, 5, 1f, "Add Collider", new Action(() => { HandsUtils.GetGameObjectToEdit().AddCollider(); }), "Adds A Collider to the object (use it in case it doesn't have any!)", null, null, true);
             new QMSingleButton(menu, 5, 1.5f, "Drop Object", new Action(() => { HandsUtils.GetGameObjectToEdit().ClaimOwnership(); }), "Make Whatever Player, drop the object.", null, Color.cyan, true);
-
         }
 
         public static void AddToWorldUtilsMenu(GameObject obj)
@@ -206,8 +196,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
             SelPickup_IsHeld = new QMSingleButton(menu, -1, -1f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
             SelPickup_CurrentObjOwner = new QMSingleButton(menu, -1, 0.5f, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
             SelPickup_CurrentObjOwner.SetResizeTextForBestFit(true);
-
-
 
             PickupQMScroll.SetAction(delegate
             {
@@ -302,7 +290,8 @@ namespace AstroClient.AstroUtils.ItemTweaker
                     {
                         Pickup_DisallowTheft.setToggleState(false);
                     }
-                    #endregion
+
+                    #endregion DisallowTheft
                 }
                 else
                 {
@@ -311,7 +300,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
                         HasPickupComponent.setTextColor(Color.green);
                     }
                 }
-                
             }
         }
 
@@ -332,9 +320,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
             });
         }
 
-
-
-
         public static List<GameObject> GetObjectTriggers(GameObject obj)
         {
             var ContainedTriggers = new List<GameObject>();
@@ -354,7 +339,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
                     }
                     return ContainedTriggers;
                 }
-               else if(list2.Count() != 0)
+                else if (list2.Count() != 0)
                 {
                     foreach (var item in list2)
                     {
@@ -423,8 +408,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
             return null;
         }
 
-
-
         public static void VRC_InteractableSubMenu(QMNestedButton main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Internal VRC_Interactable ", "Interact with Internal VRC_Interactable Triggers", null, null, null, null, btnHalf);
@@ -446,7 +429,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
                 }
             });
         }
-
 
         public static Color GetObjectStatus(GameObject obj)
         {
@@ -546,8 +528,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
             }
         }
 
-
-
         public static void ScaleSubMenuButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var ScaleEditor = new QMNestedButton(menu, x, y, "Scale", "Scale Editor Menu!", null, null, null, null, btnHalf);
@@ -563,7 +543,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
             ObjectMiscOptions.GameObjectActualScale = new QMSingleButton(ScaleEditor, 5, 0, string.Empty, null, "Current Inflater Object Scale", null, null);
             ObjectMiscOptions.CurrentScaleButton = new QMSingleButton(ScaleEditor, 5, 1, string.Empty, null, "Current Item Scale", null, null);
 
-
             new QMSingleButton(ScaleEditor, 1, 1, "+ Scale", new Action(() => { HandsUtils.GetGameObjectToEdit().IncreaseHoldItemScale(); }), "Increase item scale!", null, null, true);
             new QMSingleButton(ScaleEditor, 1, 1.5f, "- Scale", new Action(() => { HandsUtils.GetGameObjectToEdit().DecreaseHoldItemScale(); }), "Decrease item scale!", null, null, true);
 
@@ -573,7 +552,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
             ObjectMiscOptions.ScaleEditX = new QMSingleToggleButton(ScaleEditor, 2, 1, "Edit X", new Action(() => { ObjectMiscOptions.EditVectorX = true; }), "Ignore X", new Action(() => { ObjectMiscOptions.EditVectorX = false; }), "Make Inflater Edit X", Color.green, Color.red, null, false, true);
             ObjectMiscOptions.ScaleEditY = new QMSingleToggleButton(ScaleEditor, 2, 1.5f, "Edit Y", new Action(() => { ObjectMiscOptions.EditVectorY = true; }), "Ignore Y", new Action(() => { ObjectMiscOptions.EditVectorY = false; }), "Make Inflater Edit Y", Color.green, Color.red, null, false, true);
             ObjectMiscOptions.ScaleEditZ = new QMSingleToggleButton(ScaleEditor, 2, 2, "Edit Z", new Action(() => { ObjectMiscOptions.EditVectorZ = true; }), "Ignore Z", new Action(() => { ObjectMiscOptions.EditVectorZ = false; }), "Make Inflater Edit Z", Color.green, Color.red, null, false, true);
-
         }
 
         public static void PhysicSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
@@ -607,7 +585,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
 
             Forces_Pickup_IsHeld = new QMSingleButton(ForceSubMenu, 0, -1.5f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
 
-            Forces_CurrentObjHolder = new QMSingleButton(ForceSubMenu, 0 , -1, "Current holder : null", null, "Who is the current object Holder.", null, null, false);
+            Forces_CurrentObjHolder = new QMSingleButton(ForceSubMenu, 0, -1, "Current holder : null", null, "Who is the current object Holder.", null, null, false);
             Forces_CurrentObjHolder.SetResizeTextForBestFit(true);
 
             Forces_SelPickup_CurrentObjOwner = new QMSingleButton(ForceSubMenu, 5, -1, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
@@ -697,8 +675,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
             new QMSingleButton(submenu, 3, 2, "+1 Timer", new Action(() => { HandsUtils.GetGameObjectToEdit().IncSpinnerSpeed(); }), "Edits the Spinner Speed", null, null);
             new QMSingleButton(submenu, 4, 2, "-1 Timer", new Action(() => { HandsUtils.GetGameObjectToEdit().DecSpinnerSpeed(); }), "Edits the Spinner Speed", null, null);
         }
-
-
 
         public static void KillSpawnedPrefabs()
         {
@@ -792,9 +768,9 @@ namespace AstroClient.AstroUtils.ItemTweaker
                 Pickup_DisallowTheft.setToggleState(false);
             }
 
-            #endregion DisallowTheft       
-        }
+            #endregion DisallowTheft
 
+        }
 
         public static void KillCustomComponents()
         {
@@ -822,7 +798,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
                     SelWorld_TeleportToTargetPickup.setButtonText(GetTeleportToTargetText);
                     SelWorld_TeleportToTargetPickup.setToolTip(GetTeleportToTargetText);
                 }
-
             }
             catch { }
         }
@@ -867,7 +842,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
             HasPickupComponent = new QMSingleButton(PickupEditor, 0, -1f, "Force Pickup Component", new Action(() => { Pickup.ForcePickupComponentPresence(HandsUtils.GetGameObjectToEdit()); }), "Forces Pickup component in case there's none.", null, null, true);
             Pickup_IsEditMode = new QMSingleButton(PickupEditor, 0, -0.5f, "Edit Mode : OFF", null, "Shows if Pickup properties are currently being overriden.", null, null, true);
 
-
             new QMSingleButton(PickupEditor, 0, 0, "Reset Properties", new Action(() => { Pickup.RestoreOriginalProperty(HandsUtils.GetGameObjectToEdit()); }), "Revert Pickup Properties Edits. (disabling editmode)", null, null, true);
             Pickup_IsHeld = new QMSingleButton(PickupEditor, 0, 0.5f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
             Pickup_CurrentObjOwner = new QMSingleButton(PickupEditor, 0, 1f, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
@@ -892,13 +866,11 @@ namespace AstroClient.AstroUtils.ItemTweaker
             Pickup_DisallowTheft = new QMToggleButton(PickupEditor, 4, 2, "Allow Theft", new Action(() => { Pickup.SetDisallowTheft(HandsUtils.GetGameObjectToEdit(), true); }), "Block Theft", new Action(() => { Pickup.SetDisallowTheft(HandsUtils.GetGameObjectToEdit(), false); }), "Control DisallowTheft property", null, null, null);
         }
 
-
-        public static void InitProximitySliderSubmenu(QMNestedButton menu, float x , float y , bool btnHalf)
+        public static void InitProximitySliderSubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var slider = new QMNestedButton(menu, x, y, "Proximity", "Value Slider Editor!", null, null, null, null, btnHalf);
             PickupProximitySlider = new QMSlider(Utils.QuickMenu.transform.Find(slider.getMenuName()), "Proximity : ", 250, -720, delegate (float value)
 {
-
     Pickup.SetProximity(HandsUtils.GetGameObjectToEdit(), (int)value);
 }, 5, 1000, 0, true);
             PickupProximitySlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
@@ -971,11 +943,8 @@ namespace AstroClient.AstroUtils.ItemTweaker
         public static QMSingleButton Forces_SelPickup_CurrentObjOwner;
         public static QMSingleButton Forces_CurrentObjHolder;
 
-
         public static QMSlider PickupProximitySlider;
 
         public static QMSingleToggleButton ObjectActiveToggle;
-
-
     }
 }

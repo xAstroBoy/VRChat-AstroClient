@@ -1,42 +1,29 @@
 ﻿using RubyButtonAPI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 #region AstroClient Imports
 
 using AstroClient.Finder;
-using AstroClient.variables;
 using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
-using System.Collections;
-using UnityEngine.UI;
-using VRC;
-using MelonLoader;
-using AstroClient.components;
-using System.Threading.Tasks;
-using System.Threading;
 using AstroClient.UdonExploits;
-using AstroClient.ButtonShortcut;
 using AstroClient.Variables;
 using VRC.Udon;
 using static AstroClient.variables.CustomLists;
+
 #endregion AstroClient Imports
 
 namespace AstroClient
 {
-    public  class AmongUSCheats : Overridables
+    public class AmongUSCheats : Overridables
     {
-
         public override void OnLevelLoaded()
         {
             StartGameEvent = null;
             AbortGameEvent = null;
             VictoryCrewmateEvent = null;
             VictoryImpostorEvent = null;
-
-
         }
 
         public static void FindAmongUsObjects()
@@ -50,7 +37,7 @@ namespace AstroClient
             ModConsole.Log("Removing Invisible Walls");
             var invisiblewall = GameObjectFinder.Find("Environment/Invisible wall");
             var invisiblewall_1 = GameObjectFinder.Find("Environment/Invisible wall (1)");
-            if(invisiblewall != null)
+            if (invisiblewall != null)
             {
                 invisiblewall.DestroyMeLocal();
             }
@@ -91,10 +78,9 @@ namespace AstroClient
                             break;
                         }
                     }
-
                 }
             }
-            if(GameStartbtn != null)
+            if (GameStartbtn != null)
             {
                 GameStartbtn.setActive(StartGameEvent.isNotNull());
                 GameStartbtn.setIntractable(StartGameEvent.isNotNull());
@@ -115,7 +101,6 @@ namespace AstroClient
                 GameVictoryImpostorBtn.setIntractable(VictoryImpostorEvent.isNotNull());
             }
         }
-
 
         public override void OnWorldReveal()
         {
@@ -141,7 +126,6 @@ namespace AstroClient
             }
         }
 
-
         public static void AmongUSCheatsButtons(QMNestedButton submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
         {
             AmongUsCheatsPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Among US Cheats", "Manage Among US Cheats", null, null, null, null, btnHalf);
@@ -158,31 +142,16 @@ namespace AstroClient
             AmongUSUdonExploits.Init_ForcePlayerEject_Menu(AmongUsCheatsPage, 4f, 0.5f, true);
 
             GameStartbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
-            GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1.5f, "Abort Game", new Action(() => {AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
+            GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1.5f, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
 
             GameVictoryCrewmateBtn = new QMSingleButton(AmongUsCheatsPage, 1, 2, "Victory Crewmate", new Action(() => { VictoryCrewmateEvent.ExecuteUdonEvent(); }), "Force Victory Crewmate Event", null, Color.green, true);
-            GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, 1, 2.5f, "Victory Impostor", new Action(() => { VictoryImpostorEvent.ExecuteUdonEvent();}), "Force Victory Impostor Event", null, Color.red, true);
-
-
-
-
-
-
-
+            GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, 1, 2.5f, "Victory Impostor", new Action(() => { VictoryImpostorEvent.ExecuteUdonEvent(); }), "Force Victory Impostor Event", null, Color.red, true);
         }
-
-
-
-
-
-
-
 
         public static QMSingleButton GameStartbtn;
         public static QMSingleButton GameAbortbtn;
         public static QMSingleButton GameVictoryCrewmateBtn;
         public static QMSingleButton GameVictoryImpostorBtn;
-
 
         public static QMNestedButton AmongUsCheatsPage;
 
@@ -193,8 +162,5 @@ namespace AstroClient
 
         public static CachedUdonEvent VictoryCrewmateEvent;
         public static CachedUdonEvent VictoryImpostorEvent;
-
-
-
     }
 }

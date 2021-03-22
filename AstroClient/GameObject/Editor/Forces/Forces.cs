@@ -23,6 +23,7 @@ namespace AstroClient
         public static readonly float DefaultForce = 1f;
         public static readonly float DefaultSpinForce = 100f;
         private static bool _TakeOwnership;
+
         public static bool TakeOwnership
         {
             get
@@ -32,7 +33,7 @@ namespace AstroClient
             set
             {
                 _TakeOwnership = value;
-                if(Forces.TakeOwnerShipToggle != null)
+                if (Forces.TakeOwnerShipToggle != null)
                 {
                     TakeOwnerShipToggle.setToggleState(value);
                 }

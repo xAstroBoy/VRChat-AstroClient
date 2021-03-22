@@ -224,6 +224,7 @@ namespace DayClientML2.Utility.Api.Object
         public Details details { get; set; }
         public DateTime created_at { get; set; }
     }
+
     public class FileData
     {
         public string fileName { get; set; }

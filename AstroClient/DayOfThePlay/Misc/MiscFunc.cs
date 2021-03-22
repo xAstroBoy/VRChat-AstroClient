@@ -10,7 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
-using Transmtn.DTO;
 using Transmtn.DTO.Notifications;
 using UnityEngine;
 using UnityEngine.UI;
@@ -398,7 +397,7 @@ namespace DayClientML2.Utility
                 "[DAY]----------------------------Done Adding players--------------------------------");
         }
 
-        public static void SendInvite(string Message, string WorldID,string worldname, string playerID)
+        public static void SendInvite(string Message, string WorldID, string worldname, string playerID)
         {
             try
             {
@@ -417,6 +416,7 @@ namespace DayClientML2.Utility
                 MelonLogger.Msg("Invite Failed");
             }
         }
+
         public static void SendRequestMessage(string Message, string playerID)
         {
             try
@@ -436,7 +436,6 @@ namespace DayClientML2.Utility
                 MelonLogger.Msg("Invite Failed");
             }
         }
-
 
         public static void requestInvite(string UserID, int NumOfTimes)
         {

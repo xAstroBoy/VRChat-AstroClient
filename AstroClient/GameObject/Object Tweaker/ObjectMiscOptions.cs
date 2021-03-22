@@ -1,15 +1,11 @@
 ﻿using RubyButtonAPI;
 using UnityEngine;
-using UnityEngine.UI;
 using System;
 using VRC;
-using Color = System.Drawing.Color;
 
 #region AstroClient Imports
 
 using AstroClient.components;
-using static AstroClient.HandsUtils;
-using static AstroClient.Forces;
 using AstroClient.ConsoleUtils;
 using AstroClient.GameObjectDebug;
 using AstroClient.AstroUtils.ItemTweaker;
@@ -21,8 +17,6 @@ namespace AstroClient
 {
     public class ObjectMiscOptions : Overridables
     {
-
-
         public override void OnPlayerLeft(Player player)
         {
             if (player != null)
@@ -33,7 +27,6 @@ namespace AstroClient
                 }
             }
         }
-
 
         public override void OnLevelLoaded()
         {
@@ -46,7 +39,6 @@ namespace AstroClient
             EditVectorY = true;
             EditVectorZ = true;
             InflaterScaleMode = false;
-
         }
 
         public override void OnWorldReveal()
@@ -170,7 +162,6 @@ namespace AstroClient
             catch (Exception) { }
         }
 
-
         public static void AllWorldPickupsWatchTarget()
         {
             try
@@ -203,11 +194,8 @@ namespace AstroClient
             catch (Exception) { }
         }
 
-
-
         public static void RemoveAttackerFromobj(GameObject obj)
         {
-            
             if (obj != null)
             {
                 var attacker = obj.GetComponent<PlayerAttacker>();
@@ -220,7 +208,6 @@ namespace AstroClient
 
         public static void RemoveWatcherFromobj(GameObject obj)
         {
-
             if (obj != null)
             {
                 var watcher = obj.GetComponent<PlayerWatcher>();
@@ -231,10 +218,8 @@ namespace AstroClient
             }
         }
 
-
         public static void RemoveOrbitingObject(GameObject obj)
         {
-            
             if (obj != null)
             {
                 var orbit = obj.GetComponent<Orbit>();
@@ -252,7 +237,6 @@ namespace AstroClient
                 var targetuser = CurrentTarget;
                 if (targetuser != null)
                 {
-                    
                     if (obj != null)
                     {
                         OrbitManager.AddOrbitObject(obj, CurrentTarget);
@@ -286,8 +270,6 @@ namespace AstroClient
             catch (Exception) { }
         }
 
-
-
         public static void MakeObjectWatchTarget(GameObject obj)
         {
             try
@@ -307,7 +289,6 @@ namespace AstroClient
             }
             catch (Exception) { }
         }
-
 
         public static void MakeObjectOrbitToTarget(GameObject obj)
         {
@@ -329,7 +310,6 @@ namespace AstroClient
             catch (Exception) { }
         }
 
-
         public static void RemoveAllWatchersPlayer()
         {
             try
@@ -342,7 +322,6 @@ namespace AstroClient
             }
             catch (Exception) { }
         }
-
 
         public static void RemoveAllAttackPlayer()
         {
@@ -372,21 +351,18 @@ namespace AstroClient
 
         public static void IncreaseHoldItemScale(GameObject obj)
         {
-            
             ScaleEditor.EditScaleSize(obj, true);
             UpdateScaleButton(obj);
         }
 
         public static void RestoreOriginalScaleItem(GameObject obj)
         {
-            
             ScaleEditor.RestoreOriginalScale(obj);
             UpdateScaleButton(obj);
         }
 
         public static void DecreaseHoldItemScale(GameObject obj)
         {
-            
             ScaleEditor.EditScaleSize(obj, false);
             UpdateScaleButton(obj);
         }
@@ -420,7 +396,6 @@ namespace AstroClient
                             CurrentScaleButton.setButtonText("Object 's scale : " + obj.GetComponent<ItemInflater>().NewSize.ToString());
                             return;
                         }
-
                     }
                 }
 
@@ -464,7 +439,6 @@ namespace AstroClient
 
         public static void ToggleInteractionLock(GameObject obj, bool value)
         {
-            
             if (obj != null)
             {
                 var control = obj.GetComponent<RigidBodyController>();
@@ -484,13 +458,11 @@ namespace AstroClient
         public static QMSingleButton CurrentScaleButton;
         public static QMSingleToggleButton InflaterModeButton;
 
-
         public static QMSingleToggleButton ScaleEditX;
         public static QMSingleToggleButton ScaleEditY;
         public static QMSingleToggleButton ScaleEditZ;
 
         public static float ScaleValueToUse = 0.1f;
-
 
         private static bool _InflaterScaleMode = false;
 
@@ -514,7 +486,6 @@ namespace AstroClient
         private static bool _EditVectorY = true;
         private static bool _EditVectorZ = true;
 
-
         public static bool EditVectorX
         {
             get
@@ -523,13 +494,14 @@ namespace AstroClient
             }
             set
             {
-                if(ScaleEditX != null)
+                if (ScaleEditX != null)
                 {
                     ScaleEditX.setToggleState(value);
                 }
                 _EditVectorX = value;
             }
         }
+
         public static bool EditVectorY
         {
             get
@@ -545,6 +517,7 @@ namespace AstroClient
                 _EditVectorY = value;
             }
         }
+
         public static bool EditVectorZ
         {
             get
@@ -560,7 +533,6 @@ namespace AstroClient
                 _EditVectorZ = value;
             }
         }
-
 
         private static Player _CurrentTarget;
 

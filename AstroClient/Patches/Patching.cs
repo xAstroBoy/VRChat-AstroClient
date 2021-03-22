@@ -1,35 +1,11 @@
 ﻿using AstroClient.ConsoleUtils;
 using AstroClient.variables;
-using DayClientML2.Utility;
-using DayClientML2.Utility.Extensions;
 using ExitGames.Client.Photon;
 using Harmony;
-using MelonLoader;
-using RootMotion.FinalIK;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.Reflection;
-using Transmtn;
-using Transmtn.DTO.Notifications;
-using UnhollowerBaseLib;
-using UnityEngine;
-using UnityEngine.UI;
-using VRC;
-using VRC.Core;
-using VRC.Management;
-using VRC.SDKBase;
-using VRCSDK2.Validation.Performance;
-using static VRC.SDKBase.VRC_EventHandler;
-using Action = System.Action;
-using Console = System.Console;
-using IntPtr = System.IntPtr;
-using Random = System.Random;
-
-using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
 
 namespace AstroClient.BetterPatch
 {
@@ -39,7 +15,6 @@ namespace AstroClient.BetterPatch
         {
             return new HarmonyMethod(typeof(Patching).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
-
 
         public class Patch
         {
@@ -72,7 +47,7 @@ namespace AstroClient.BetterPatch
                         ModConsole.Log($"[Patches] Patching {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {(patch.PrefixMethod?.method.Name)}{(patch.PostfixMethod?.method.Name)}");
                         patch.Instance.Patch(patch.TargetMethod, patch.PrefixMethod, patch.PostfixMethod);
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         ModConsole.Error($"[Patches] Failed At {patch.TargetMethod?.Name} | {patch.PrefixMethod?.method.Name} | with AstroClient {patch.PostfixMethod?.method.Name}");
                         ModConsole.ErrorExc(e);
@@ -80,6 +55,7 @@ namespace AstroClient.BetterPatch
                 }
                 ModConsole.Log($"[Patches] Done! Patched {Patches.Count} Methods!");
             }
+
             public static void UnDoPatches()
             {
                 foreach (var patch in Patches)
@@ -97,7 +73,6 @@ namespace AstroClient.BetterPatch
                 ModConsole.Log($"[Patches] Done! UnPatched {Patches.Count} Methods!");
             }
         }
-
 
         private IEnumerator Init()
         {
@@ -119,11 +94,6 @@ namespace AstroClient.BetterPatch
             catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
             finally { }
         }
-
-
-
-
-
 
         private static bool OpRaiseEvent(ref byte __0, ref Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object> __1, ref SendOptions __2)
         {

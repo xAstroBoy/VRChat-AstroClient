@@ -1,5 +1,4 @@
 ﻿using System;
-using VRC;
 
 namespace AstroClient
 {

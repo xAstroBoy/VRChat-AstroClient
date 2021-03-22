@@ -1,13 +1,8 @@
 ﻿using AstroClient.ConsoleUtils;
 using MelonLoader;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using UnhollowerBaseLib;
 
 namespace AstroClient.Startup.Hooks
@@ -16,13 +11,10 @@ namespace AstroClient.Startup.Hooks
     {
         public static event EventHandler Event_OnWorldReveal;
 
-
-
         public override void OnApplicationStart()
         {
             HookFadeTo();
         }
-
 
         private static void HookFadeTo()
         {

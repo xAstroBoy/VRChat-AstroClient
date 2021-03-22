@@ -1,21 +1,12 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using UnhollowerRuntimeLib;
+﻿using AstroClient.Components;
+using AstroClient.ConsoleUtils;
+using DayClientML2.Utility.Extensions;
+using System;
+using System.Linq;
+using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using VRC;
-using Delegate = System.Delegate;
-using Time = UnityEngine.Time;
-using AstroClient.GameObjectDebug;
-using AstroClient.ConsoleUtils;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DayClientML2.Utility.Extensions;
 using Object = UnityEngine.Object;
-using UnhollowerBaseLib.Attributes;
-using AstroClient.Components;
 
 namespace AstroClient.components
 {
@@ -30,8 +21,8 @@ namespace AstroClient.components
         }
 
         private bool DebugMode = false;
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         private void Debug(string msg)
         {
             if (DebugMode)
@@ -39,6 +30,7 @@ namespace AstroClient.components
                 ModConsole.DebugLog($"[SingleTag Debug] : {msg}");
             }
         }
+
         // Use this for initialization
         public void Start()
         {
@@ -83,7 +75,7 @@ namespace AstroClient.components
                 if (SpawnedTag == null)
                 {
                     Debug($"Starting Tag Generation..");
-                    
+
                     SpawnedTag = Object.Instantiate(Player_QuickStats, Player_QuickStats.parent, false);
                     if (SpawnedTag != null)
                     {
@@ -137,7 +129,6 @@ namespace AstroClient.components
             }
         }
 
-
         public void OnDestroy()
         {
             if (player != null)
@@ -172,9 +163,6 @@ namespace AstroClient.components
             }
         }
 
-
-
-
         // Update is called once per frame
         public void Update()
         {
@@ -190,7 +178,6 @@ namespace AstroClient.components
                     {
                         SpawnedTag.gameObject.SetActive(ShowTag);
                     }
-
 
                     if (LabelText != null)
                     {
@@ -218,12 +205,9 @@ namespace AstroClient.components
             }
         }
 
-
-
         internal string TagName
         {
             [HideFromIl2Cpp]
-
             get
             {
                 return $"SingleTag:{_allocatedStack}";
@@ -231,16 +215,15 @@ namespace AstroClient.components
         }
 
         private int _allocatedStack;
+
         private int AllocatedStack
         {
             [HideFromIl2Cpp]
-
             get
             {
                 return _allocatedStack;
             }
             [HideFromIl2Cpp]
-
             set
             {
                 if (SpawnedTag != null)
@@ -259,6 +242,7 @@ namespace AstroClient.components
         internal int InternalStack;
 
         private Player _player;
+
         internal Player player
         {
             get
@@ -271,14 +255,14 @@ namespace AstroClient.components
 
         private Transform SpawnedTag;
 
-
         // TAG TEXT
         private Transform Label;
+
         private TMPro.TextMeshProUGUI LabelText;
         internal Color Label_TextColor = Color.white;
         internal string Label_Text;
 
-        // STATS 
+        // STATS
         private Transform Player_QuickStats;
 
         private ImageThreeSlice SpawnedStatsImage;

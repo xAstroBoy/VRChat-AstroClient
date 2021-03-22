@@ -6,16 +6,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.SceneManagement;
-using VRC;
 using UnityEngine.UI;
+using VRC;
 
 namespace AstroClient
 {
-    public  class GameObjMenu : Overridables
+    public class GameObjMenu : Overridables
     {
-
         public override void OnLevelLoaded()
         {
             CurrentSelection.Clear();
@@ -46,11 +44,10 @@ namespace AstroClient
         private static bool _isDestroyMode = false;
         private static bool _PassToTweakerMode = false;
 
-
         private static bool StartRoutineOfRefreshAction = false;
 
         private static bool _IsOnRootScene = true;
-        
+
         public static bool IsOnRootScene
         {
             get
@@ -59,7 +56,6 @@ namespace AstroClient
             }
             set
             {
-
                 ModConsole.DebugWarning("IsOnRootScene bool has been set to : " + value);
                 _IsOnRootScene = value;
             }
@@ -182,7 +178,7 @@ namespace AstroClient
                         }
                     }
                 }
-                else               
+                else
                 {
                     if (!_PassToTweakerMode)
                     {
@@ -234,7 +230,7 @@ namespace AstroClient
                 }
                 else
                 {
-                    if(!_PassToTweakerMode && !_isDestroyMode)
+                    if (!_PassToTweakerMode && !_isDestroyMode)
                     {
                         return;
                     }
@@ -249,9 +245,6 @@ namespace AstroClient
 
         private static List<Transform> CurrentSelection = new List<Transform>();
 
-
-
-
         private static Transform _Current;
 
         public static Transform Current
@@ -262,7 +255,6 @@ namespace AstroClient
             }
             set
             {
-
                 _Current = value;
                 if (_Current != null)
                 {
@@ -283,9 +275,6 @@ namespace AstroClient
             }
         }
 
-
-
-
         public static QMNestedButton gameobjtogglermenu;
 
         public static QMSingleButton GoToParentBtn;
@@ -298,22 +287,18 @@ namespace AstroClient
         private static QMHalfScroll MainScroll; // Original : MainScroll
         private static QMHalfScroll subscroll; // Original : subscroll
 
-
         public static void ReturnToRoot()
         {
-           CurrentSelection.Clear();
-           CurrentSelection = GetAllCurrentSceneObjects();
+            CurrentSelection.Clear();
+            CurrentSelection = GetAllCurrentSceneObjects();
             MainScroll.Refresh();
             subscroll.Refresh();
             ModConsole.DebugLog("ResetGameObjToggler fired.");
         }
 
-
         public static void InitTogglerMenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
-            var main = new QMSingleButton(menu, x, y, "Advanced GameObject Toggler", new Action(() => { ReturnToRoot(); gameobjtogglermenu.getMainButton().getGameObject().GetComponent<Button>().onClick.Invoke(); }),"Advanced GameObject Toggler", null, null, btnHalf);
-
-
+            var main = new QMSingleButton(menu, x, y, "Advanced GameObject Toggler", new Action(() => { ReturnToRoot(); gameobjtogglermenu.getMainButton().getGameObject().GetComponent<Button>().onClick.Invoke(); }), "Advanced GameObject Toggler", null, null, btnHalf);
 
             gameobjtogglermenu = new QMNestedButton(menu, -100, -100, "Advanced GameObject Toggler (HIDDEN BUTTON)", "Advanced GameObject Toggler (HIDDEN BUTTON)", null, null, null, null, btnHalf);
             gameobjtogglermenu.getMainButton().setActive(false);
@@ -322,13 +307,11 @@ namespace AstroClient
             MainScroll = new QMHalfScroll(registersub);
             subscroll = new QMHalfScroll(gameobjtogglermenu);
 
-
-
-            new QMSingleButton(gameobjtogglermenu, -1, -1, "Root Transforms", new Action(() => {CurrentSelection = GetAllCurrentSceneObjects(); MainScroll.Refresh(); subscroll.Refresh(); }), "Return To Root Objects", null, null, true);
+            new QMSingleButton(gameobjtogglermenu, -1, -1, "Root Transforms", new Action(() => { CurrentSelection = GetAllCurrentSceneObjects(); MainScroll.Refresh(); subscroll.Refresh(); }), "Return To Root Objects", null, null, true);
             GoToParentBtn = new QMSingleButton(gameobjtogglermenu, -1, 0f, "previous parent", new Action(() => { ReturnToParent(); }), "Go Back to previous parent", null, null, true);
-            ToggleModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 0.5f, "Toggle Object", new Action(() => { isToggleMode = true; }), "Toggle Object", new Action(() => {isToggleMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
-            DestroyModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 1f, "Destroy Object", new Action(() => { isDestroyMode = true;}), "Destroy Object", new Action(() => {isDestroyMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
-            PasstoTweakerModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 1.5f, "Edit with Item Tweaker", new Action(() => { PassToTweakerMode = true;}), "Edit with Item Tweaker", new Action(() => { PassToTweakerMode = false;}), "Changes between Supported options", Color.green, Color.red, null, false, true);
+            ToggleModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 0.5f, "Toggle Object", new Action(() => { isToggleMode = true; }), "Toggle Object", new Action(() => { isToggleMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
+            DestroyModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 1f, "Destroy Object", new Action(() => { isDestroyMode = true; }), "Destroy Object", new Action(() => { isDestroyMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
+            PasstoTweakerModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 1.5f, "Edit with Item Tweaker", new Action(() => { PassToTweakerMode = true; }), "Edit with Item Tweaker", new Action(() => { PassToTweakerMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
             GameObjMenuObjectToEdit = new QMSingleButton(gameobjtogglermenu, -1, 2f, "Not Selected", null, "Shows what item is current set on the item tweaker", null, null, false);
             if (DestroyModeSwitch != null)
             {
@@ -385,11 +368,10 @@ namespace AstroClient
                                }
                                MainScroll.Refresh();
                                subscroll.Refresh();
-
                            }
                            if (PassToTweakerMode)
-                           {    
-                                   HandsUtils.GameObjectToEdit = item.gameObject;
+                           {
+                               HandsUtils.GameObjectToEdit = item.gameObject;
                            }
                        }));
                         newbtn.getGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(newbtn.getGameObject().GetComponent<RectTransform>().sizeDelta.x - 100f, newbtn.getGameObject().GetComponent<RectTransform>().sizeDelta.y);
@@ -469,16 +451,12 @@ namespace AstroClient
             return TransformsInScene;
         }
 
-
-            
-        
         public static void ReturnToParent()
         {
             if (Current != null)
             {
                 if (!IsARootParent)
                 {
-
                     ModConsole.DebugLog($"Parsing Childrens present in parent of {Current.parent.name}");
                     CurrentSelection.Clear();
                     CurrentSelection = GetAllChildObjects(Current.parent, true, true);
@@ -503,10 +481,6 @@ namespace AstroClient
             }
         }
 
-
-
-
-
         public static bool SetCurrentParent(Transform Parent)
         {
             if (Parent != null)
@@ -529,10 +503,9 @@ namespace AstroClient
                 }
             }
 
-
             if (Parent != null)
             {
-                if(IsOnRootScene)
+                if (IsOnRootScene)
                 {
                     IsOnRootScene = false;
                 }
@@ -570,7 +543,7 @@ namespace AstroClient
             return false;
         }
 
-        public static List<Transform> GetAllChildObjects(Transform item,  bool SetParent, bool RevealTransformCount)
+        public static List<Transform> GetAllChildObjects(Transform item, bool SetParent, bool RevealTransformCount)
         {
             var FoundChilds = new List<Transform>();
             Transform ChildToUseForParent = null;
@@ -623,25 +596,19 @@ namespace AstroClient
                             }
                         }
                     }
-                    
                 }
                 if (RevealTransformCount)
                 {
                     ModConsole.DebugLog($"GetAllChildObjects returned a list with {FoundChilds.Count()} Transforms.");
                 }
-               return FoundChilds;
+                return FoundChilds;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ModConsole.Error("Exception in GetAllChildObjects");
                 ModConsole.ErrorExc(e);
             }
             return FoundChilds;
         }
-
-
-
-
-
     }
 }

@@ -142,6 +142,7 @@ namespace AstroClient.components
         public static List<GameObject> ObjectEditors = new List<GameObject>();
 
         public static ItemInflaterManager Instance { get; set; }
+
         #endregion Module
     }
 }

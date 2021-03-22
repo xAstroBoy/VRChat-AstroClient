@@ -15,7 +15,6 @@ namespace AstroClient
 
         public static event Action<Player> OnLeave;
 
-
         public static EventHandler<PlayerEventArgs> Event_OnPlayerJoin;
 
         public static EventHandler<PlayerEventArgs> Event_OnPlayerLeft;
@@ -24,7 +23,6 @@ namespace AstroClient
         {
             MelonCoroutines.Start(HookNetworkManager());
         }
-
 
         public static IEnumerator HookNetworkManager()
         {
@@ -37,8 +35,6 @@ namespace AstroClient
             NetworkManagerHooks.OnLeave += OnPlayerLeftEvent;
         }
 
-
-
         public static void OnPlayerJoinedEvent(Player player)
         {
             Event_OnPlayerJoin?.Invoke(null, new PlayerEventArgs(player));
@@ -48,9 +44,6 @@ namespace AstroClient
         {
             Event_OnPlayerLeft?.Invoke(null, new PlayerEventArgs(player));
         }
-
-
-
 
         public static void EventHandlerA(Player player)
         {

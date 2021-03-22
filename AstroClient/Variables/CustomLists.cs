@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using VRC;
 using VRC.Udon;
 
 namespace AstroClient.variables
@@ -39,7 +37,6 @@ namespace AstroClient.variables
                 HasCustomCollider = collider;
             }
         }
-
 
         public class RigidBodyChecker
         {
@@ -83,11 +80,9 @@ namespace AstroClient.variables
             }
         }
 
-
         public static List<RendererSaver> RendererSaverIndex = new List<RendererSaver>();
         public static List<ColliderChecker> ColliderCheck = new List<ColliderChecker>();
         public static List<RigidBodyChecker> RigidBodyCheck = new List<RigidBodyChecker>();
         public static List<GameObjScales> ScaleCheck = new List<GameObjScales>();
-
     }
 }

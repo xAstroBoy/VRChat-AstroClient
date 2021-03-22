@@ -1,15 +1,9 @@
 ﻿using AstroClient.ConsoleUtils;
 using MelonLoader;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using UnhollowerBaseLib;
-
 
 namespace AstroClient.Startup.Hooks
 {
@@ -17,13 +11,11 @@ namespace AstroClient.Startup.Hooks
     {
         public static event EventHandler<SpawnEmojiArgs> Event_SpawnEmojiRPC;
 
-
-
         public override void OnApplicationStart()
         {
             HookSpawnEmojiRPC();
         }
-    
+
         private void HookSpawnEmojiRPC()
         {
             unsafe
@@ -50,7 +42,6 @@ namespace AstroClient.Startup.Hooks
                 catch (Exception e)
                 {
                     ModConsole.Error("Failed to hook SpawnEmojiRPC!, ERROR : " + e);
-
                 }
             }
         }
@@ -83,6 +74,5 @@ namespace AstroClient.Startup.Hooks
                 _SpawnEmojiRPCDelegate(thisPtr, emoji, PlayerPtr);
             }
         }
-
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using UnhollowerRuntimeLib;
 using UnityEngine;
@@ -79,7 +78,6 @@ namespace AstroClient.components
                     ModConsole.Warning("PlayerWatcher : Object Still Has No RigidBody (Probably Udon World) , Watcher Will be broken!");
                 }
 
-
                 if (player == null)
                 {
                     ModConsole.Error("PlayerWatcher : , Player Is not registered!");
@@ -150,25 +148,21 @@ namespace AstroClient.components
 
                     OnlineEditor.TakeObjectOwnership(obj);
                     obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-
                 }
-                
             }
             catch
             {
             }
         }
 
-
-        void OnDestroy()
+        private void OnDestroy()
         {
-                control.RestoreOriginalBody();
-                GameObjectUtils.RestoreOriginalLocation(obj, false);
-                PlayerWatcherManager.RemoveSelf(obj);
-                OnlineEditor.RemoveOwnerShip(obj);
-                PlayerWatcherManager.Deregister(this);
+            control.RestoreOriginalBody();
+            GameObjectUtils.RestoreOriginalLocation(obj, false);
+            PlayerWatcherManager.RemoveSelf(obj);
+            OnlineEditor.RemoveOwnerShip(obj);
+            PlayerWatcherManager.Deregister(this);
         }
-
 
         public static Transform PositionOfBone(Player player, HumanBodyBones bone)
         {
@@ -191,13 +185,11 @@ namespace AstroClient.components
         private float LastTimeCheck2 = 0;
         private bool HasRequiredSettings = false;
 
-
         internal Player player;
         internal bool IsLockDeactivated = false;
         private GameObject obj = null;
         private Rigidbody body = null;
         private RigidBodyController control;
         private PickupController pickup;
-
     }
 }

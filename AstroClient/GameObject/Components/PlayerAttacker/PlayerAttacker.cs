@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using UnhollowerRuntimeLib;
 using UnityEngine;
@@ -63,15 +62,14 @@ namespace AstroClient.components
                     control = obj.AddComponent<RigidBodyController>();
                 }
                 HasRequiredSettings = false;
-            
+
                 pickup = GetComponent<PickupController>();
-            if (pickup == null)
-            {
-                pickup = obj.AddComponent<PickupController>();
-            }
+                if (pickup == null)
+                {
+                    pickup = obj.AddComponent<PickupController>();
+                }
 
-
-            if (GetComponent<RigidBodyController>() == null)
+                if (GetComponent<RigidBodyController>() == null)
                 {
                     ModConsole.Warning("PlayerAttacker : Object Still Has No RigidBodyController (Probably Udon World) , Attacker Will be broken!");
                 }
@@ -192,14 +190,13 @@ namespace AstroClient.components
             }
         }
 
-
-        void OnDestroy()
+        private void OnDestroy()
         {
-                control.RestoreOriginalBody();
-                GameObjectUtils.RestoreOriginalLocation(obj, false);
-                PlayerAttackerManager.RemoveSelf(obj);
-                OnlineEditor.RemoveOwnerShip(obj);
-                PlayerAttackerManager.Deregister(this);
+            control.RestoreOriginalBody();
+            GameObjectUtils.RestoreOriginalLocation(obj, false);
+            PlayerAttackerManager.RemoveSelf(obj);
+            OnlineEditor.RemoveOwnerShip(obj);
+            PlayerAttackerManager.Deregister(this);
         }
 
         private void ApplyForceX()

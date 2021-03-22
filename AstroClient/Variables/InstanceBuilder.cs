@@ -1,5 +1,4 @@
 ﻿using AstroClient.ConsoleUtils;
-using System;
 using UnityEngine;
 using Color = System.Drawing.Color;
 

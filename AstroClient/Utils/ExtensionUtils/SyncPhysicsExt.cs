@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AstroClient.SyncPhysicExt
 {
@@ -11,7 +6,7 @@ namespace AstroClient.SyncPhysicExt
     {
         public static void RefreshProperties(this SyncPhysics instance)
         {
-            if(instance != null)
+            if (instance != null)
             {
                 instance.Method_Public_Void_PDM_2();
             }
@@ -25,12 +20,9 @@ namespace AstroClient.SyncPhysicExt
             }
         }
 
-
-
         public static Rigidbody GetRigidBody(this SyncPhysics instance)
         {
             return instance.field_Private_Rigidbody_0;
         }
-
     }
 }

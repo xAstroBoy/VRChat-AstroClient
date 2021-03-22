@@ -222,7 +222,7 @@ namespace DayClientML2.Utility
                         break;
                 }
                 Button.transform.SetParent(Parent);
-                Button.name =  text + BuildInfo.Name; //Better than Favorite Button(Clone) all the time but no one sees this.
+                Button.name = text + BuildInfo.Name; //Better than Favorite Button(Clone) all the time but no one sees this.
                 foreach (Text text2 in Button.GetComponentsInChildren<Text>(true))
                 {
                     text2.text = "";
@@ -315,7 +315,7 @@ namespace DayClientML2.Utility
                         break;
                 }
                 Button.transform.SetParent(Parent);
-                Button.name =  text + BuildInfo.Name; //Better than Favorite Button(Clone) all the time but no one sees this.
+                Button.name = text + BuildInfo.Name; //Better than Favorite Button(Clone) all the time but no one sees this.
                 foreach (Text text2 in Button.GetComponentsInChildren<Text>(true))
                 {
                     text2.text = "";
@@ -390,6 +390,7 @@ namespace DayClientML2.Utility
             //}
             Button.GetComponentInChildren<Button>().interactable = result;
         }
+
         private Color SavedColor;
         public GameObject Button;
         public GameObject UserInfoPage;

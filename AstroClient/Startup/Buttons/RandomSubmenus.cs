@@ -1,17 +1,11 @@
 ﻿using AstroClient.AstroUtils.ItemTweaker;
 using AstroClient.extensions;
 using RubyButtonAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AstroClient
 {
-    class RandomSubmenus
+    internal class RandomSubmenus
     {
-
         public static void VRC_InteractableSubMenu(QMNestedButton main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Interact VRC_Interactable", "Interact with VRC_Interactable Triggers", null, null, null, null, btnHalf);
@@ -33,7 +27,6 @@ namespace AstroClient
             });
         }
 
-
         public static void TriggerSubMenu(QMNestedButton main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Interact Triggers", "Interact with Level Triggers", null, null, null, null, btnHalf);
@@ -54,7 +47,5 @@ namespace AstroClient
                 }
             });
         }
-
-
     }
 }

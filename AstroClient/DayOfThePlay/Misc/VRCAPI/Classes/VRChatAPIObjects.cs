@@ -37,6 +37,7 @@ namespace DayBots.VRCAPI.Classes
         public int popularity { get; set; }
         public int heat { get; set; }
     }
+
     public class WorldInstanceLite
     {
         public string RoomID { get; set; }
@@ -46,17 +47,21 @@ namespace DayBots.VRCAPI.Classes
         public string name { get; set; }
         public DateTime TimeOfJoin { get; set; }
     }
+
     public class WorldInstanceResponse
     {
         public string id { get; set; }
         public string name { get; set; }
+
         [JsonProperty(PropertyName = "private")]
         public List<WorldInstanceUserResponse> privateUsers { get; set; }
+
         public List<WorldInstanceUserResponse> friends { get; set; }
         public List<WorldInstanceUserResponse> users { get; set; }
         public string hidden { get; set; }
         public string nonce { get; set; }
     }
+
     public class WorldInstanceUserResponse
     {
         public string id { get; set; }
@@ -70,6 +75,7 @@ namespace DayBots.VRCAPI.Classes
         public string statusDescription { get; set; }
         public string networkSessionId { get; set; }
     }
+
     public class User
     {
         public string id { get; set; }
@@ -86,6 +92,7 @@ namespace DayBots.VRCAPI.Classes
         public string developerType { get; set; }
         public bool isFriend { get; set; }
     }
+
     public class WorldInstance
     {
         public string id { get; set; }
@@ -111,11 +118,13 @@ namespace DayBots.VRCAPI.Classes
         public bool permanent { get; set; }
         public string @private { get; set; }
     }
+
     public class Details
     {
         public string worldId { get; set; }
         public string worldName { get; set; }
     }
+
     public class Notification
     {
         public string id { get; set; }
@@ -127,6 +136,7 @@ namespace DayBots.VRCAPI.Classes
         public Details details { get; set; }
         public DateTime created_at { get; set; }
     }
+
     public class PastDisplayName
     {
         public string displayName { get; set; }
@@ -151,15 +161,16 @@ namespace DayBots.VRCAPI.Classes
         public JObject steamDetails { get; set; }
         public static bool hasLoggedInFromClient { get; set; }
     }
+
     public class error
     {
         public string message { get; set; }
         public int status_code { get; set; }
     }
+
     public class RoomPassword
     {
         public byte version { get; set; }
         public string token { get; set; }
     }
-
 }

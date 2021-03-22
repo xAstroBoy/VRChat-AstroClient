@@ -16,7 +16,6 @@ namespace AstroClient
 {
     public class WorldUtils : Overridables
     {
-
         public static List<GameObject> GetAllWorldPrefabs()
         {
             var PrefabList = new List<GameObject>();
@@ -66,7 +65,6 @@ namespace AstroClient
 
         public static Player GetPlayerByID(string id)
         {
-
             var zero = PlayerManager.Method_Public_Static_Player_String_0(id);
             //var one = PlayerManager.Method_Public_Static_Player_String_PDM_0(id);
             //if (one != null)
@@ -84,7 +82,6 @@ namespace AstroClient
             return null;
         }
 
-
         public static Player GetPlayerByDisplayName(string name)
         {
             if (GetAllPlayers0() != null)
@@ -93,9 +90,9 @@ namespace AstroClient
                 {
                     if (player != null)
                     {
-                        if(player.prop_APIUser_0 != null)
+                        if (player.prop_APIUser_0 != null)
                         {
-                            if(player.prop_APIUser_0.displayName == name)
+                            if (player.prop_APIUser_0.displayName == name)
                             {
                                 return player;
                             }
@@ -105,7 +102,6 @@ namespace AstroClient
             }
             return null;
         }
-
 
         public static Player GetPlayerByVRCPlayer(VRCPlayer target)
         {

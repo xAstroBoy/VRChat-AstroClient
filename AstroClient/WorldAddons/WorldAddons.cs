@@ -1,5 +1,4 @@
-﻿using AstroClient.ButtonShortcut;
-using AstroClient.ConsoleUtils;
+﻿using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
 using AstroClient.Finder;
 using AstroClient.Variables;
@@ -49,7 +48,6 @@ namespace AstroClient.Worlds
                 {
                     SandBagCheat.setIntractable(false);
                     SandBagCheat.setTextColor(Color.red);
-   
                 }
             }
             if (WorldUtils.GetWorldID() == WorldIds.VRChatDefaultHub)
@@ -67,7 +65,6 @@ namespace AstroClient.Worlds
                 {
                     HubButtonsControl.VRChat_Hub_Addons.getMainButton().setIntractable(false);
                     HubButtonsControl.VRChat_Hub_Addons.getMainButton().setTextColor(Color.red);
-
                 }
             }
 
@@ -130,7 +127,7 @@ namespace AstroClient.Worlds
                 }
             }
         }
-        
+
         public static QMSingleButton SandBagCheat;
         public static GameObject SandBag = null;
     }

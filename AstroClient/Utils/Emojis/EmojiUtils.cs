@@ -4,8 +4,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnhollowerBaseLib;
-using UnhollowerRuntimeLib;
 using UnityEngine;
 using VRC;
 using VRC.SDKBase;
@@ -55,7 +53,6 @@ namespace AstroClient
             UpdateEmojiSpawning(true);
         }
 
-
         public override void SpawnEmojiRPC(VRCPlayer player, int Emoji)
         {
             if (player == VRCPlayer.field_Internal_Static_VRCPlayer_0)
@@ -81,7 +78,6 @@ namespace AstroClient
             SpawnLocalEmoji(player, Emoji);
         }
 
-
         public override void OnUpdate()
         {
             if (IsVRChatCooldownActive)
@@ -93,7 +89,8 @@ namespace AstroClient
                     Cooldown = 0f;
                 }
             }
-            try {
+            try
+            {
                 UpdateEmojiSpawning();
             }
             catch (Exception e)
@@ -101,9 +98,6 @@ namespace AstroClient
                 ModConsole.Error("Error in EmojiUtils OnUpdate : " + e);
             }
         }
-
-
-
 
         public static void DecreaseEmojiInt()
         {
@@ -250,7 +244,7 @@ namespace AstroClient
         {
             if (player != null)
             {
-                var EmojiGen = player.field_Private_MonoBehaviourPublicGaVoInStInStVoInStVoUnique_0 ;
+                var EmojiGen = player.field_Private_MonoBehaviourPublicGaVoInStInStVoInStVoUnique_0;
                 if (EmojiGen != null)
                 {
                     EmojiGen.Method_Public_Void_Int32_0(emoji);
@@ -580,6 +574,5 @@ namespace AstroClient
         public static QMSingleButton LastSpawnedEmojiName;
 
         public static QMSingleButton EmojiStatusEmojiSpawner;
-
     }
 }

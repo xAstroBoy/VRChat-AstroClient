@@ -41,8 +41,6 @@ namespace AstroClient.variables
 
         internal static bool DisableBlackScreenFade = true;
 
-
         internal static bool SerializerEnabled;
-
     }
 }

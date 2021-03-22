@@ -1,8 +1,4 @@
-﻿#region AstroClient Imports
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
     public static class BuildInfo
     {

@@ -51,7 +51,6 @@ namespace AstroClient.components
             OnlineEditor.TakeObjectOwnership(obj);
             control = GetComponent<RigidBodyController>();
 
-
             if (control == null)
             {
                 control = obj.AddComponent<RigidBodyController>();
@@ -67,7 +66,6 @@ namespace AstroClient.components
             {
                 pickup = obj.AddComponent<PickupController>();
             }
-
         }
 
         // Update is called once per frame
@@ -85,7 +83,7 @@ namespace AstroClient.components
                             control.RestoreOriginalBody();
                             HasRequiredSettings = false;
                         }
-                       return;
+                        return;
                     }
 
                     if (!HasRequiredSettings)

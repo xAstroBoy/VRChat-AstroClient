@@ -1,22 +1,17 @@
 ﻿using AstroClient.variables;
-using MelonLoader;
 using System;
-using Console = CheetosConsole.Console;
 using System.Drawing;
 using System.IO;
-using System.Collections;
 using System.Threading.Tasks;
+using Console = CheetosConsole.Console;
 
 namespace AstroClient.ConsoleUtils
 {
-
-    
-        public class ModConsole
+    public class ModConsole
     {
         private static bool HasRenamedOldLogFile = false;
 
         private static bool HasInitiated = false;
-
 
         private static bool DebugMode
         {
@@ -25,8 +20,6 @@ namespace AstroClient.ConsoleUtils
                 return Bools.isDebugMode;
             }
         }
-
-
 
         private static string LogsPath
         {
@@ -74,7 +67,6 @@ namespace AstroClient.ConsoleUtils
             }
         }
 
-
         public static void InitLogsSetup()
         {
             if (!HasInitiated)
@@ -99,27 +91,20 @@ namespace AstroClient.ConsoleUtils
                 InitLogsSetup();
             }
 
-
             ConsoleMutex.WaitOne();
             File.AppendAllText(LatestLogFile, msg);
             ConsoleMutex.ReleaseMutex();
         }
-
-
-
-
 
         public enum LogTypes
         {
             LOG,
             WARNING,
             ERROR,
-            DEBUG_LOG, 
+            DEBUG_LOG,
             DEBUG_WARNING,
             DEBUG_ERROR
         }
-
-
 
         public static void LogExc<T>(T e)
         {
@@ -129,7 +114,6 @@ namespace AstroClient.ConsoleUtils
         public static void WarningExc<T>(T e)
         {
             Exception((e as System.Exception), LogTypes.WARNING);
-
         }
 
         public static void ErrorExc<T>(T e)
@@ -141,18 +125,16 @@ namespace AstroClient.ConsoleUtils
         {
             Exception((e as System.Exception), LogTypes.DEBUG_LOG);
         }
+
         public static void DebugWarningExc<T>(T e)
         {
             Exception((e as System.Exception), LogTypes.DEBUG_WARNING);
-
         }
 
         public static void DebugErrorExc<T>(T e)
         {
             Exception((e as System.Exception), LogTypes.DEBUG_ERROR);
         }
-
-
 
         public static void Log(string msg, Color? textcolor = null)
         {
@@ -163,6 +145,7 @@ namespace AstroClient.ConsoleUtils
             PrintTags(LogTypes.LOG);
             PrintLine(msg, textcolor.Value);
         }
+
         public static void Warning(string msg, Color? textcolor = null)
         {
             if (textcolor == null)
@@ -211,7 +194,6 @@ namespace AstroClient.ConsoleUtils
             PrintLine(msg, textcolor.Value);
         }
 
-
         public static void DebugError(string msg, Color? textcolor = null)
         {
             if (!DebugMode)
@@ -228,7 +210,7 @@ namespace AstroClient.ConsoleUtils
 
         public static void Exception<T>(T e, LogTypes logType = LogTypes.LOG, Color? color = null)
         {
-            if (logType == LogTypes.DEBUG_LOG  || logType == LogTypes.DEBUG_WARNING || logType == LogTypes.DEBUG_ERROR && !DebugMode)
+            if (logType == LogTypes.DEBUG_LOG || logType == LogTypes.DEBUG_WARNING || logType == LogTypes.DEBUG_ERROR && !DebugMode)
             {
                 return;
             }
@@ -236,7 +218,6 @@ namespace AstroClient.ConsoleUtils
             {
                 color = Color.Red;
             }
-
 
             PrintTags(logType);
 
@@ -249,10 +230,8 @@ namespace AstroClient.ConsoleUtils
 
         public static void PrintLine(string msg = "", Color? color = null)
         {
-
             Console.Write(msg + Environment.NewLine, color.Value);
             Task.Run(() => { Write(msg + Environment.NewLine); });
-            
         }
 
         private static void PrintTags(LogTypes logType = LogTypes.LOG)
@@ -265,32 +244,36 @@ namespace AstroClient.ConsoleUtils
                 case LogTypes.LOG:
                     PrintLogTag();
                     break;
+
                 case LogTypes.WARNING:
                     PrintWarningTag();
                     break;
+
                 case LogTypes.ERROR:
                     PrintErrorTag();
                     break;
+
                 case LogTypes.DEBUG_LOG:
                     PrintDebugLogTag();
                     break;
+
                 case LogTypes.DEBUG_WARNING:
                     PrintDebugWarningTag();
                     break;
+
                 case LogTypes.DEBUG_ERROR:
                     PrintDebugErrorTag();
                     break;
-
             }
         }
+
         private static void PrintLogTag()
         {
             Console.Write("[", Color.White);
             Console.Write("LOG", Color.Aqua);
             Console.Write("]: ", Color.White);
-           Task.Run(() => { Write("[LOG]: "); });
+            Task.Run(() => { Write("[LOG]: "); });
         }
-
 
         private static void PrintWarningTag()
         {
@@ -298,7 +281,6 @@ namespace AstroClient.ConsoleUtils
             Console.Write("WARNING", Color.Orange);
             Console.Write("]: ", Color.White);
             Task.Run(() => { Write("[WARNING]: "); });
-
         }
 
         private static void PrintErrorTag()
@@ -307,19 +289,14 @@ namespace AstroClient.ConsoleUtils
             Console.Write("ERROR", Color.Red);
             Console.Write("]: ", Color.White);
             Task.Run(() => { Write("[ERROR]: "); });
-
         }
-
-
-
 
         private static void PrintDebugLogTag()
         {
             Console.Write("[", Color.White);
             Console.Write("DEBUG LOG", Color.Aquamarine);
             Console.Write("]: ", Color.White);
-          Task.Run(() => { Write("[DEBUG LOG]: "); });
-
+            Task.Run(() => { Write("[DEBUG LOG]: "); });
         }
 
         private static void PrintDebugWarningTag()
@@ -327,18 +304,15 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write("DEBUG WARNING", Color.Orange);
             Console.Write("]: ", Color.White);
-           Task.Run(() => { Write("[DEBUG WARNING]: "); });
-
+            Task.Run(() => { Write("[DEBUG WARNING]: "); });
         }
-
 
         private static void PrintDebugErrorTag()
         {
             Console.Write("[", Color.White);
             Console.Write("DEBUG ERROR", Color.Red);
             Console.Write("]: ", Color.White);
-           Task.Run(() => {  Write("[DEBUG ERROR]: "); });
-
+            Task.Run(() => { Write("[DEBUG ERROR]: "); });
         }
 
         private static void PrintModStamp()
@@ -346,8 +320,7 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write(BuildInfo.Name, Color.Gold);
             Console.Write("] ", Color.White);
-            Task.Run(() => {  Write($"[{BuildInfo.Name}] "); });
-
+            Task.Run(() => { Write($"[{BuildInfo.Name}] "); });
         }
 
         private static void PrintTimestamp()
@@ -356,12 +329,9 @@ namespace AstroClient.ConsoleUtils
             Console.Write("[", Color.White);
             Console.Write(time, Color.LightGreen);
             Console.Write("] ", Color.White);
-            Task.Run(() => {  Write($"[{time}] "); });
-
+            Task.Run(() => { Write($"[{time}] "); });
         }
 
         private static System.Threading.Mutex ConsoleMutex = new System.Threading.Mutex();
     }
-
-
 }

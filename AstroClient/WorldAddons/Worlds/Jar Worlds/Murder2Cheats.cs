@@ -10,7 +10,6 @@ using AstroClient.ConsoleUtils;
 using AstroClient.variables;
 using AstroClient.Finder;
 using AstroClient.extensions;
-using AstroClient.ButtonShortcut;
 using AstroClient.Variables;
 
 #endregion AstroClient Imports
@@ -21,11 +20,6 @@ namespace AstroClient
     {
         public static void FindGameMurderObjects()
         {
-
-            
-
-
-
             item_detectiveGun = GameObjectFinder.Find("Murder Logic 3/Weapons/Gun Revolver");
             item_SilencedGun = GameObjectFinder.Find("Murder Logic 3/Weapons/Gun Silenced");
             item_clue_0 = GameObjectFinder.Find("Murder Logic 3/ClueCollecting/Clues/Clue/Clue hidden/Clue interact");
@@ -248,8 +242,6 @@ namespace AstroClient
             new QMSingleButton(MurderItemWatcherMenu, 2, 1, "Silenced Guns Watchs you!", new Action(() => { SilencedGuns.WatchSelf(); }), "Make Silenced Gun Watch you", null, null);
             new QMSingleButton(MurderItemWatcherMenu, 3, 1, "Knifes Watchs you!", new Action(() => { Knifes.WatchSelf(); }), "Make Knifes Watch you", null, null);
             new QMSingleButton(MurderItemWatcherMenu, 4, 1, "Clues Watchs you!", new Action(() => { Clues.WatchSelf(); }), "Make Clues Watch you", null, null);
-
-
 
             GodModeMurder2 = new QMSingleToggleButton(Murder2CheatPage, 4, 0, "Normal Mode", new Action(ToggleDeathComponent), "God Mode", new Action(ToggleDeathComponent), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
             GameObjectESP.Murder4ESPtoggler = new QMSingleToggleButton(Murder2CheatPage, 4, 0.5f, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", Color.green, Color.red, null, false, true);

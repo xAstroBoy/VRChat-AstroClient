@@ -18,6 +18,7 @@ namespace DayClientML2.Utility.Extensions
             Il2CppSystem.Object Object = MiscUtility.Serialization.FromManagedToIL2CPP<Il2CppSystem.Object>(customObject);
             OpRaiseEvent(code, Object, RaiseEventOptions, sendOptions);
         }
+
         public static void OpRaiseEvent(byte code, Il2CppSystem.Object customObject, Photon.Realtime.RaiseEventOptions RaiseEventOptions, SendOptions sendOptions)
         {
             PhotonHandler.

@@ -1,30 +1,21 @@
-﻿using AstroClient.World.Hub;
+﻿using AstroClient.Variables;
+using AstroClient.World.Hub;
+using AstroClient.Worlds;
 using RubyButtonAPI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
-using AstroClient.Worlds;
-using AstroClient.Variables;
 
 namespace AstroClient.ButtonShortcut
 {
     public class CheatsShortcutButton : Overridables
     {
-
         private static QMSingleButton WorldCheatsShortcut;
-
 
         public static void Init_Cheats_ShortcutBtn(float x, float y, bool btnHalf)
         {
-           WorldCheatsShortcut = new QMSingleButton("ShortcutMenu", x, y, "Cheats Shortcut", null, "Cheats Shortcut", null, null, btnHalf);
-            
+            WorldCheatsShortcut = new QMSingleButton("ShortcutMenu", x, y, "Cheats Shortcut", null, "Cheats Shortcut", null, null, btnHalf);
         }
-
-
 
         public override void OnWorldReveal()
         {
@@ -84,8 +75,6 @@ namespace AstroClient.ButtonShortcut
             }
         }
 
-
-
         public static void SetButtonText(string ButtonText)
         {
             if (WorldCheatsShortcut != null)
@@ -94,6 +83,7 @@ namespace AstroClient.ButtonShortcut
                 WorldCheatsShortcut.setToolTip(ButtonText + " Shortcut.");
             }
         }
+
         public static void SetButtonText(string ButtonText, string ButtonToolTip)
         {
             if (WorldCheatsShortcut != null)
@@ -119,16 +109,13 @@ namespace AstroClient.ButtonShortcut
             }
         }
 
-
         public static void SetButtonShortcut(QMSingleButton btn)
         {
-            if(WorldCheatsShortcut != null)
+            if (WorldCheatsShortcut != null)
             {
                 WorldCheatsShortcut.setAction(new Action(() => { btn.getGameObject().GetComponent<Button>().onClick.Invoke(); }));
             }
         }
-
-
 
         public static void ClearButtonAction()
         {
@@ -146,7 +133,5 @@ namespace AstroClient.ButtonShortcut
                 WorldCheatsShortcut.setIntractable(isActive);
             }
         }
-
-
     }
 }

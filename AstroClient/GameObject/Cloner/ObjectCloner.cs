@@ -3,7 +3,6 @@
 #region AstroClient Imports
 
 using static AstroClient.variables.GlobalLists;
-using AstroClient.variables;
 using AstroClient.ConsoleUtils;
 using AstroClient.AstroUtils.ItemTweaker;
 using AstroClient.extensions;
@@ -32,8 +31,6 @@ namespace AstroClient.Cloner
 
             ItemTweakerMain.UpdateSpawnedPickupsBtn();
         }
-
-
 
         private static GameObject _Holder;
 

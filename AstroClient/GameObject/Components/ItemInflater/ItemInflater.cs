@@ -3,7 +3,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using UnhollowerRuntimeLib;
 using UnityEngine;
-using UnityEngine.UI;
 
 #region AstroClient Imports
 
@@ -77,7 +76,6 @@ namespace AstroClient.components
                     {
                         if (obj.transform.localScale != NewSize)
                         {
-
                             // X
                             FixX();
                             // Y
@@ -87,7 +85,7 @@ namespace AstroClient.components
                             // Update Button
                             if (obj == HandsUtils.GameObjectToEdit)
                             {
-                                GameObjectActualScale.setButtonText( "Object 's Current scale : " + obj.transform.localScale.ToString());
+                                GameObjectActualScale.setButtonText("Object 's Current scale : " + obj.transform.localScale.ToString());
                             }
                         }
                         LastTimeCheck = Time.time;

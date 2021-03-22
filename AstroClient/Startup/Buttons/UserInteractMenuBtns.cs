@@ -9,9 +9,9 @@ namespace AstroClient.Startup.Buttons
         public static void InitButtons(float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton("UserInteractMenu", x, y, "AstroClient Menu.", "AstroClient Menu", null, null, null, null, btnHalf);
-           var tmp = new QMSingleButton("UserInteractMenu", x, y + 0.5f, "AstroClient : Set Target.", new Action(ObjectMiscOptions.MarkPlayerAsTarget), "Mark this player as target.", null, null, true); ;
+            var tmp = new QMSingleButton("UserInteractMenu", x, y + 0.5f, "AstroClient : Set Target.", new Action(ObjectMiscOptions.MarkPlayerAsTarget), "Mark this player as target.", null, null, true); ;
             tmp.SetResizeTextForBestFit(true);
-            
+
             new QMSingleButton(menu, 1, 0, "Teleport All\nPickups\nTo\nplayer.", new Action(ObjectMiscOptions.TeleportAllWorldPickupsToPlayer), "Teleport World Pickups To Player.", null, null); ;
             if (Bools.AllowAttackerComponent)
             {
@@ -26,9 +26,7 @@ namespace AstroClient.Startup.Buttons
             new QMSingleButton(menu, 1, 2, "Remove\nPlayer (bound) Watchers", new Action(ObjectMiscOptions.RemoveAllWatchersPlayer), "Removes any Watchers bound to this player.", null, null);
             new QMSingleButton(menu, 2, 2, "All Pickups Watch player.", new Action(ObjectMiscOptions.AllWorldPickupsWatchTarget), "Make the victim feel observed.", null, null);
 
-
             LewdVRChat.InitUserMenu(menu, 4, 1);
         }
     }
 }
-

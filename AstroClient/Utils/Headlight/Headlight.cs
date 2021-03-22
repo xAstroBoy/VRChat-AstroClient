@@ -1,12 +1,11 @@
-﻿using System;
-using System.Windows.Forms;
-using MelonLoader;
-using UnityEngine;
-using RubyButtonAPI;
-using Object = UnityEngine.Object;
-using AstroClient.ConsoleUtils;
+﻿using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
+using RubyButtonAPI;
+using System;
+using System.Windows.Forms;
+using UnityEngine;
 using VRC;
+using Object = UnityEngine.Object;
 
 namespace AstroClient.Headlight
 {
@@ -17,6 +16,7 @@ namespace AstroClient.Headlight
         public static float LightIntensity = 1f;
         public static float LightAngle = 80f;
         private static bool _DesktopHeadlight;
+
         public static bool DesktopHeadlightBool
         {
             get
@@ -34,8 +34,8 @@ namespace AstroClient.Headlight
             }
         }
 
-
         private static bool _VRHeadlight;
+
         public static bool VRHeadLightBool
         {
             get
@@ -52,7 +52,6 @@ namespace AstroClient.Headlight
                 _VRHeadlight = value;
             }
         }
-
 
         public static QMSingleToggleButton DesktopHeadlightBtn;
         public static QMSingleToggleButton VRHeadlightBtn;
@@ -72,10 +71,10 @@ namespace AstroClient.Headlight
             QMNestedButton HeadlightConfig = new QMNestedButton(menu, x, y, "Custom Headlight", "Headlight Settings", null, null, null, null, btnHalf);
 
             QMNestedButton HeadlightColor = new QMNestedButton(HeadlightConfig, 4, 0, "Headlight Color", "Configure the Color For the Headlight", null, null, null);
-            DesktopHeadlightBtn =  new QMSingleToggleButton(HeadlightConfig, 0, 0, "Desktop Headlight On", () =>
-            {
-                DesktopHeadlightBool = true;
-            }, "Desktop Headlight Off", () => { DesktopHeadlightBool = false; }, "Headlight for dark places or whatever", Color.green, Color.red, null, false, true);
+            DesktopHeadlightBtn = new QMSingleToggleButton(HeadlightConfig, 0, 0, "Desktop Headlight On", () =>
+           {
+               DesktopHeadlightBool = true;
+           }, "Desktop Headlight Off", () => { DesktopHeadlightBool = false; }, "Headlight for dark places or whatever", Color.green, Color.red, null, false, true);
             DesktopHeadlightBtn.SetResizeTextForBestFit(true);
 
             VRHeadlightBtn = new QMSingleToggleButton(HeadlightConfig, 0, 0.5f, "VR Headlight On", () =>
@@ -84,108 +83,106 @@ namespace AstroClient.Headlight
             }, "VR Headlight Off", () => { VRHeadLightBool = false; }, "Headlight for dark places or whatever", Color.green, Color.red, null, false, true);
             VRHeadlightBtn.SetResizeTextForBestFit(true);
 
-
-
             new QMSingleButton(HeadlightConfig, 1, 0, "+ \n Intensity \n +", () =>
             {
                 LightIntensity += 1f;
                 UpdateLights();
             }, "Increase Intensity of the Headlight");
-            
+
             new QMSingleButton(HeadlightConfig, 1, 1, "- \n Intensity \n -", () =>
             {
                 LightIntensity -= 1f;
                 UpdateLights();
             }, "Decrease Intensity of the Headlight");
-            
+
             new QMSingleButton(HeadlightConfig, 1, 2, "Reset", () =>
             {
                 LightIntensity = 1f;
                 UpdateLights();
             }, "Reset Intensity of the Headlight");
-            
+
             new QMSingleButton(HeadlightConfig, 2, 0, "+ \n Angle \n +", () =>
             {
                 LightAngle += 10f;
                 UpdateLights();
             }, "Increase Angle of the Headlight");
-            
+
             new QMSingleButton(HeadlightConfig, 2, 1, "- \n Angle \n -", () =>
             {
                 LightAngle -= 10f;
                 UpdateLights();
             }, "Decrease Angle of the Headlight");
-            
+
             new QMSingleButton(HeadlightConfig, 2, 2, "Reset", () =>
             {
                 LightAngle = 80f;
                 UpdateLights();
             }, "Reset Angle of the Headlight");
-            
+
             new QMSingleButton(HeadlightConfig, 3, 0, "+ \n Range \n +", () =>
             {
                 LightRange += 10f;
                 UpdateLights();
             }, "Increase Range of the Headlight");
-            
+
             new QMSingleButton(HeadlightConfig, 3, 1, "- \n Range \n -", () =>
             {
                 LightRange -= 10f;
                 UpdateLights();
             }, "Decrease Range of the Headlight");
-            
+
             new QMSingleButton(HeadlightConfig, 3, 2, "Reset", () =>
             {
                 LightRange = 10f;
                 UpdateLights();
             }, "Reset Range of the Headlight");
-            
+
             new QMSingleButton(HeadlightColor, 1, 0, "White", () =>
             {
                 LightColor = Color.white;
                 UpdateLights();
             }, "Changes Headlight Color", Color.white, Color.white);
-            
+
             new QMSingleButton(HeadlightColor, 2, 0, "Red", () =>
             {
                 LightColor = Color.red;
                 UpdateLights();
             }, "Changes Headlight Color", Color.red, Color.red);
-            
+
             new QMSingleButton(HeadlightColor, 3, 0, "Green", () =>
             {
                 LightColor = Color.green;
                 UpdateLights();
             }, "Changes Headlight Color", Color.green, Color.green);
-            
+
             new QMSingleButton(HeadlightColor, 4, 0, "Blue", () =>
             {
                 LightColor = Color.blue;
                 UpdateLights();
             }, "Changes Headlight Color", Color.blue, Color.blue);
-            
+
             new QMSingleButton(HeadlightColor, 1, 1, "Magenta", () =>
             {
                 LightColor = Color.magenta;
                 UpdateLights();
             }, "Changes Headlight Color", Color.magenta, Color.magenta);
-            
+
             new QMSingleButton(HeadlightColor, 2, 1, "Yellow", () =>
             {
-                LightColor = Color.yellow ;
+                LightColor = Color.yellow;
                 UpdateLights();
             }, "Changes Headlight Color", Color.yellow, Color.yellow);
-            
+
             new QMSingleButton(HeadlightColor, 3, 1, "Cyan", () =>
             {
-                LightColor = Color.cyan ;
+                LightColor = Color.cyan;
                 UpdateLights();
             }, "Changes Headlight Color", Color.cyan, Color.cyan);
-            
+
             new QMSingleButton(HeadlightColor, 4, 1, "Hex From Clipboard", () =>
             {
                 try
-                {                                                                                                               
+                {
                     LightColor = ColorConverter.HexToColor(Clipboard.GetText());
                     UpdateLights();
                 }
@@ -199,7 +196,6 @@ namespace AstroClient.Headlight
         public static Light DesktopLight;
         public static Light VRLight;
 
-
         public static void UpdateLights()
         {
             if (DesktopLight != null)
@@ -211,7 +207,7 @@ namespace AstroClient.Headlight
                 DesktopLight.spotAngle = LightAngle;
                 DesktopLight.intensity = LightIntensity;
             }
-            if(VRLight != null)
+            if (VRLight != null)
             {
                 VRLight.color = LightColor;
                 VRLight.type = LightType.Spot;
@@ -221,10 +217,6 @@ namespace AstroClient.Headlight
                 VRLight.intensity = LightIntensity;
             }
         }
-
-
-
-
 
         public static void VRHeadLight(bool state)
         {
@@ -253,12 +245,8 @@ namespace AstroClient.Headlight
             else { ModConsole.Log("[Headlight] I Can't find Player's GameObject, try again!"); }
         }
 
-
-
         private static void DesktopHeadLight(bool state)
         {
-
-
             if (Camera.main != null)
             {
                 Transform cam = Camera.main.transform;

@@ -1,7 +1,7 @@
 ﻿namespace CheetosConsole
 {
-    using System.Text;
     using System.Drawing;
+    using System.Text;
 
     internal static class VirtualTerminalSequences
     {
@@ -12,7 +12,6 @@
         internal static readonly string Bold = SgrCommand(1);
         internal static readonly string Underline = SgrCommand(4);
         internal static readonly string NoUnderline = SgrCommand(24);
-
 
         private static readonly string SgrStart = "\x1b[";
 

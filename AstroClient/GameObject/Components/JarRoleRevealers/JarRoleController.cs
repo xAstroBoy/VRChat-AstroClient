@@ -1,23 +1,19 @@
 ﻿using AstroClient.components;
 using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
 using AstroClient.Finder;
 using AstroClient.Variables;
 using RubyButtonAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnhollowerBaseLib;
 using UnityEngine;
 using VRC;
 
 namespace AstroClient
 {
-    public  class JarRoleController : Overridables
+    public class JarRoleController : Overridables
     {
-        
         private static bool _IsMurder4World;
         private static bool _isAmongUsWorld;
         private static bool _ViewRoles;
@@ -38,6 +34,7 @@ namespace AstroClient
                 _IsMurder4World = value;
             }
         }
+
         public static bool isAmongUsWorld
         {
             get
@@ -53,6 +50,7 @@ namespace AstroClient
                 _isAmongUsWorld = value;
             }
         }
+
         public static bool ViewRoles
         {
             get
@@ -76,10 +74,8 @@ namespace AstroClient
                         AmongUSRolesRevealerToggle.setToggleState(value);
                     }
                 }
-
             }
         }
-
 
         public static QMSingleToggleButton Murder4RolesRevealerToggle;
         public static QMSingleToggleButton AmongUSRolesRevealerToggle;
@@ -88,12 +84,10 @@ namespace AstroClient
 
         public static List<JarRoleESP> RoleEspComponents = new List<JarRoleESP>();
 
-
         public static LinkedNodes GetLinkedNode(int value)
         {
             return JarRoleLinks.Where(x => x.nodevalue == value).DefaultIfEmpty(null).First();
         }
-
 
         public static JarRoleESP GetLinkedComponent(int value)
         {
@@ -110,7 +104,6 @@ namespace AstroClient
             AmongUSRolesRevealerToggle.setToggleState(false);
             ViewRoles = false;
         }
-
 
         public override void OnPlayerJoined(Player player)
         {
@@ -136,13 +129,12 @@ namespace AstroClient
             }
         }
 
-
-
         public class LinkedNodes
         {
-            public Transform Entry{ get; set; }
+            public Transform Entry { get; set; }
             public Transform Node { get; set; }
             public int nodevalue { get; set; }
+
             public LinkedNodes(Transform EntryObj, Transform Nodeobj, int linknumber)
             {
                 Entry = EntryObj;
@@ -150,19 +142,16 @@ namespace AstroClient
                 nodevalue = linknumber;
             }
         }
-    
 
-
-
-    public static string DescPart
+        public static string DescPart
         {
             get
             {
-                if(isAmongUsWorld)
+                if (isAmongUsWorld)
                 {
                     return "ability To see who is the impostor";
                 }
-                if(IsMurder4World)
+                if (IsMurder4World)
                 {
                     return "ability to see who is the murderer";
                 }
@@ -171,21 +160,20 @@ namespace AstroClient
             }
         }
 
-
         public static bool DebugMsg = true;
+
         public static void Debug(string msg)
         {
-            if(DebugMsg)
+            if (DebugMsg)
             {
                 ModConsole.DebugLog($"[Jar Role Linker Debug] : {msg}");
             }
         }
 
-
         public static int? RemoveNodeText(Transform node)
         {
             var replacedstring = node.name.Replace("Player Node ", String.Empty).Replace("(", String.Empty).Replace(")", String.Empty).Replace(" ", String.Empty);
-            if (!String.IsNullOrEmpty(replacedstring) && !String.IsNullOrWhiteSpace(replacedstring)) 
+            if (!String.IsNullOrEmpty(replacedstring) && !String.IsNullOrWhiteSpace(replacedstring))
             {
                 int.TryParse(replacedstring, out int value);
                 return value;
@@ -204,7 +192,6 @@ namespace AstroClient
             return null;
         }
 
-
         public override void OnWorldReveal()
         {
             isAmongUsWorld = (WorldUtils.GetWorldID() == WorldIds.AmongUS);
@@ -216,7 +203,7 @@ namespace AstroClient
                 var GameNodes = GameObjectFinder.Find("Game Logic/Player Nodes"); // SHOULD WORK IN MURDER 4 AND AMONG US.
                 Il2CppArrayBase<Transform> EntryChilds;
                 Il2CppArrayBase<Transform> NodeChilds;
-                
+
                 if (PlayerEntries != null)
                 {
                     EntryChilds = PlayerEntries.GetComponentsInChildren<Transform>(true);
@@ -236,10 +223,8 @@ namespace AstroClient
                     return;
                 }
 
-
                 if (PlayerEntries != null)
                 {
-
                     foreach (var Entry in EntryChilds)
                     {
                         if (Entry != null)
@@ -255,11 +240,10 @@ namespace AstroClient
                                         if (node != null)
                                         {
                                             int? NodeNumber = RemoveNodeText(node);
-                                            if(NodeNumber != null)
+                                            if (NodeNumber != null)
                                             {
-
                                                 Debug($"Comparing Entry Nr. {EntryNumber} Having Name {Entry.name} with Node nr {NodeNumber} having Name {node.name}");
-                                                if(NodeNumber == EntryNumber)
+                                                if (NodeNumber == EntryNumber)
                                                 {
                                                     Debug($"Linked Player Entry : {Entry.name}, With node : {node.name}, with link : {NodeNumber}");
                                                     var addme = new LinkedNodes(Entry, node, NodeNumber.Value);
@@ -288,12 +272,11 @@ namespace AstroClient
                 }
                 else
                 {
-
-                    if(IsMurder4World)
+                    if (IsMurder4World)
                     {
                         ModConsole.Error("Player List Group Path in Murder 4 Changed! Unable to Reveal Roles!");
                     }
-                    if(isAmongUsWorld)
+                    if (isAmongUsWorld)
                     {
                         ModConsole.Error("Player List Group Path in Among us Changed! Unable to Reveal Roles!");
                     }

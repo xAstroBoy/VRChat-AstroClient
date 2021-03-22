@@ -1,10 +1,5 @@
 ﻿using RubyButtonAPI;
-using System;
 using UnityEngine;
-using UnityEngine.UI;
-using AstroClient.extensions;
-using static AstroClient.AstroUtils.ItemTweaker.ItemTweakerMain;
-
 
 #region AstroClient Imports
 
@@ -13,14 +8,13 @@ using static AstroClient.LocalPlayerUtils;
 using AstroClient.ConsoleUtils;
 using AstroClient.Finder;
 using AstroClient.AstroUtils.ItemTweaker;
-using VRC.SDKBase;
 using System.Linq;
 
 #endregion AstroClient Imports
 
 namespace AstroClient
 {
-    public  class HandsUtils : Overridables
+    public class HandsUtils : Overridables
     {
         public static string GetObjectToEditName
         {
@@ -59,7 +53,6 @@ namespace AstroClient
                 }
             }
         }
-
 
         public static void SetEditLock(bool status)
         {
@@ -198,7 +191,6 @@ namespace AstroClient
             }
         }
 
-
         public static void UpdateCapturedObject(GameObject obj)
         {
             if (obj != null)
@@ -212,7 +204,6 @@ namespace AstroClient
                 {
                     GameObjMenu.GameObjMenuObjectToEdit.setButtonText("Editing: " + obj.name);
                     GameObjMenu.GameObjMenuObjectToEdit.setToolTip("Editing: " + obj.name);
-
                 }
                 UpdateCapturedButtonColor(obj.active);
             }
@@ -244,7 +235,7 @@ namespace AstroClient
         }
 
         private static bool _DoNotPickOtherItems;
-        
+
         public static bool DoNotPickOtherItems
         {
             get
@@ -254,13 +245,12 @@ namespace AstroClient
             set
             {
                 _DoNotPickOtherItems = value;
-                if(LockHoldItem != null)
+                if (LockHoldItem != null)
                 {
                     LockHoldItem.setToggleState(value);
                 }
             }
         }
-
 
         private static bool _CurrentSelectedItemEnabledESP = false;
 
@@ -273,7 +263,7 @@ namespace AstroClient
             set
             {
                 _CurrentSelectedItemEnabledESP = value;
-                if(value)
+                if (value)
                 {
                     if (GameObjectToEdit != null)
                     {
@@ -323,7 +313,7 @@ namespace AstroClient
             }
             set
             {
-                if(_ObjectToEdit == value)
+                if (_ObjectToEdit == value)
                 {
                     return;
                 }
@@ -365,8 +355,8 @@ namespace AstroClient
 
                 if (value.GetComponent<RigidBodyController>() == null)
                 {
-                  var comp =  value.AddComponent<RigidBodyController>();
-                    if(comp != null)
+                    var comp = value.AddComponent<RigidBodyController>();
+                    if (comp != null)
                     {
                         comp.EditMode = false;
                     }
@@ -388,10 +378,9 @@ namespace AstroClient
                 UpdateCapturedObject(value);
                 ItemTweakerMain.UpdateTargetButtons();
                 ItemTweakerMain.UpdateTeleportToMeBtns();
-
             }
         }
-        
+
         public static bool ObjectToEditLock = false;
         public static QMSingleButton GameObjToEdit;
         public static QMSingleToggleButton LockHoldItem;

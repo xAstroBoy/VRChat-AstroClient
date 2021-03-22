@@ -3,7 +3,6 @@ using System.Runtime.InteropServices;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 
-
 namespace AstroClient.components
 {
     public class ESP : MonoBehaviour
@@ -40,26 +39,18 @@ namespace AstroClient.components
         {
             try
             {
-
-
-
                 ESPManager.Register(this);
             }
             catch { }
         }
 
-
-
         private void OnDestroy()
         {
-
         }
 
         // Update is called once per frame
         private void Update()
         {
-          
         }
-
     }
 }

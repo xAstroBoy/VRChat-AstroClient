@@ -40,9 +40,9 @@ namespace AstroClient
             {
                 if (obj.name.ToLower().Contains("penmanager"))
                 {
-                    if(PenManagers != null)
+                    if (PenManagers != null)
                     {
-                        if(!PenManagers.Contains(obj))
+                        if (!PenManagers.Contains(obj))
                         {
                             PenManagers.Add(obj);
                         }
@@ -51,7 +51,6 @@ namespace AstroClient
             }
             if (PenManagers.Count() != 0)
             {
-
                 ModConsole.Log("Found " + PenManagers.Count() + " Pen Managers!, Registering Clear Trigger!");
                 GetAllResetGlobals();
             }
@@ -59,7 +58,6 @@ namespace AstroClient
 
         public static void GetAllResetGlobals()
         {
-
             foreach (var pen in PenManagers)
             {
                 if (pen != null)
@@ -87,7 +85,6 @@ namespace AstroClient
                     }
                 }
             }
-
 
             ModConsole.Log("Found " + TriggerSDKBase.Count() + " QVPens Clear SDKBase Triggers.");
             ModConsole.Log("Found " + TriggerSDK2.Count() + " QVPens Clear VRCSDK2 Triggers.");

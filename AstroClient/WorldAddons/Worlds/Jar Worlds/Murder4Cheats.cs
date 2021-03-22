@@ -10,28 +10,21 @@ using AstroClient.Finder;
 using AstroClient.variables;
 using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
-using System.Collections;
-using UnityEngine.UI;
-using VRC;
-using MelonLoader;
 using AstroClient.components;
-using System.Threading.Tasks;
-using System.Threading;
 using AstroClient.UdonExploits;
-using AstroClient.ButtonShortcut;
 using AstroClient.Variables;
 using static AstroClient.variables.CustomLists;
 using VRC.Udon;
+
 #endregion AstroClient Imports
 
 namespace AstroClient
 {
-    public  class Murder4Cheats : Overridables
+    public class Murder4Cheats : Overridables
     {
         // TODO: FIGURE HOW TO FIX PARTICLES (ONLY GOLD CAMO WORKS)
         public static void UnlockPatreonTiers()
         {
-
             //PatreonFlairtoggle = GameObjectFinder.Find("Game Logic/Options Canvas/Contents/Toggle (Patron Flair)");
             //if (PatreonFlairtoggle != null)
             //{
@@ -57,7 +50,6 @@ namespace AstroClient
             //        toggle.isOn = true;
             //    }
             //}
-
 
             //ModConsole.Log("Unlocking Gold Revolver camo (patreon only)...");
             //var DetectiveRecoil = GameObjectFinder.Find("Game Logic/Weapons/Revolver/Recoil Anim/Recoil");
@@ -85,7 +77,6 @@ namespace AstroClient
             //                //var PatreonParticles = patreonskin.transform.Find("Patron gun particles");
             //                //if (PatreonParticles != null)
             //                //{
-
             //                //    var particleholder = new GameObject();
             //                //    if (particleholder != null)
             //                //    {
@@ -119,7 +110,6 @@ namespace AstroClient
 
             //                //        }
 
-
             //                //        particleholder.SetActiveRecursively(true);
             //                //    }
             //                //}
@@ -129,7 +119,6 @@ namespace AstroClient
             //}
         }
 
-
         public static void FindGameMurderObjects()
         {
             ModConsole.Log("Removing Anti-Peek Protection...");
@@ -137,7 +126,7 @@ namespace AstroClient
             var occlusion = GameObjectFinder.Find("Environment/Occlusion");
             if (occlusion != null)
             {
-               occlusion.DestroyMeLocal();
+                occlusion.DestroyMeLocal();
             }
 
             item_DetectiveRevolver = GameObjectFinder.Find("Game Logic/Weapons/Revolver");
@@ -150,7 +139,7 @@ namespace AstroClient
             if (!isChristmasMode)
             {
                 Clue_Present = GameObjectFinder.Find("Game Logic/Clues (xmas)/Clue (present) (5)");
-                if(Clue_Present != null)
+                if (Clue_Present != null)
                 {
                     isChristmasMode = true;
                 }
@@ -173,7 +162,6 @@ namespace AstroClient
             item_Silenced_Revolver_0 = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Luger (0)");
             item_Silenced_Revolver_1 = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Luger (1)");
             item_Grenade = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Frag (0)");
-
 
             foreach (var action in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
             {
@@ -292,7 +280,6 @@ namespace AstroClient
             ModConsole.Log("Found Tot Bear Traps : " + BearTraps.Count());
             ModConsole.Log("Found Tot Grenades : " + Grenades.Count());
             ModConsole.Log("Found Tot Knifes : " + Knifes.Count());
-
         }
 
         public static void SetMurderItemsGravity(bool ShouldFloat)
@@ -329,8 +316,6 @@ namespace AstroClient
             ShotGuns.AddCrazyComponent(false);
         }
 
-
-
         public override void OnWorldReveal()
         {
             if (WorldUtils.GetWorldID() == WorldIds.Murder4)
@@ -351,7 +336,6 @@ namespace AstroClient
                 {
                     Murder4CheatPage.getMainButton().setIntractable(false);
                     Murder4CheatPage.getMainButton().setTextColor(Color.red);
-
                 }
             }
         }
@@ -406,7 +390,9 @@ namespace AstroClient
             Murder4CheatPage.getMainButton().SetResizeTextForBestFit(true);
 
             QMNestedButton MurderItemTeleporter = new QMNestedButton(Murder4CheatPage, 1, 0, "Item Teleporter", "Size Items Editor", null, null, null, null, true);
+
             #region Item Teleporter
+
             DoUnlockedSoundbtn = new QMSingleToggleButton(MurderItemTeleporter, 0, 0, "Do Sound", new Action(() => { DoUnlockedSound = true; }), "Quiet Mode", new Action(() => { DoUnlockedSound = false; }), "Should i run the Sound action on pickups teleport.", Color.green, Color.red, null, false, true);
             new QMSingleButton(MurderItemTeleporter, 1, 0, "Clues!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
             new QMSingleButton(MurderItemTeleporter, 2, 0, "Photograph!", new Action(() => { Clue_photograph.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
@@ -418,14 +404,16 @@ namespace AstroClient
             new QMSingleButton(MurderItemTeleporter, 4, 0.5f, "Detective Gun!", new Action(() => { item_DetectiveRevolver.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Detective Gun Teleporter!", null, null, true);
             new QMSingleButton(MurderItemTeleporter, 1, 1f, "Silenced Gun 1!", new Action(() => { item_Silenced_Revolver_0.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Silenced Gun Teleporter!", null, null, true);
             new QMSingleButton(MurderItemTeleporter, 2, 1f, "Silenced Gun 2!", new Action(() => { item_Silenced_Revolver_1.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Silenced Gun Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 3, 1, "Grenade!", new Action(() => { item_Grenade.TeleportToMe();  if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Grenade Teleporter!", null, null, true);
+            new QMSingleButton(MurderItemTeleporter, 3, 1, "Grenade!", new Action(() => { item_Grenade.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Grenade Teleporter!", null, null, true);
             new QMSingleButton(MurderItemTeleporter, 4, 1f, "Traps!", new Action(() => { BearTraps.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Silenced Gun Teleporter!", null, null, true);
             PresentTeleporter = new QMSingleButton(MurderItemTeleporter, 1, 2, "Present!", new Action(() => { Clue_Present.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
-            #endregion
 
+            #endregion Item Teleporter
 
             QMNestedButton MurderItemTweaker = new QMNestedButton(Murder4CheatPage, 1, 0.5f, "Item Tweaker", "Item Tweaks!", null, null, null, null, true);
+
             #region Item Tweaker
+
             new QMSingleButton(MurderItemTweaker, 3, 0, "Knifes (Rockets)!", new Action(() => { Knifes.AddRocketComponent(false); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
             new QMSingleButton(MurderItemTweaker, 3, 0.5f, "Guns (Rockets)!", new Action(() => { MurderGunsRockets(); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
             new QMSingleButton(MurderItemTweaker, 3, 1, "Grenades (Rockets)!", new Action(() => { Grenades.AddRocketComponent(false); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
@@ -438,19 +426,19 @@ namespace AstroClient
             new QMSingleButton(MurderItemTweaker, 4, 1.5f, "Grenade (Crazy)!", new Action(() => { Grenades.AddCrazyComponent(false); }), "Make Grenade in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
             new QMSingleButton(MurderItemTweaker, 4, 2, "Bear Trap (Crazy)!", new Action(() => { BearTraps.AddCrazyComponent(false); }), "Make Grenade in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
 
-
             new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!", null, null, true);
             new QMSingleToggleButton(MurderItemTweaker, 1, 0.5f, "Float (Space Mode)", new Action(() => { SetMurderItemsGravity(true); }), "Fall (World Gravity)", new Action(() => { SetMurderItemsGravity(false); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
             KnifesGrabbableToggle = new QMSingleToggleButton(MurderItemTweaker, 1, 1, "Can Grab Knifes", new Action(() => { ToggleKnifesGrab(true); }), "Cannot Grab Knifes", new Action(() => { ToggleKnifesGrab(false); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
             var one = new QMSingleButton(MurderItemTweaker, 1, 1.5f, "Knifes Grabbable from far!", new Action(() => { MakeKnifeGrabbableFromFar(); }), "Make Knifes Grabbable from far!", null, null, true);
             var two = new QMSingleButton(MurderItemTweaker, 1, 2, "Restore Knifes Properties to world!", new Action(() => { RestoreKnifeToWorldControl(); }), "Restore Control to world!", null, null, true);
-           
-            
+
             one.SetResizeTextForBestFit(true);
             two.SetResizeTextForBestFit(true);
-            #endregion
+
+            #endregion Item Tweaker
 
             QMNestedButton MurderItemSpawner = new QMNestedButton(Murder4CheatPage, 1, 1f, "Item Spawner", "Item Spawner!", null, null, null, null, true);
+
             #region Item Spawner
 
             new QMSingleButton(MurderItemSpawner, 1, 0, "Spawn Detective Gun", new Action(() => { item_DetectiveRevolver.CloneObject(); }), "Detective Gun Cloner!", null, null, true);
@@ -465,13 +453,15 @@ namespace AstroClient
             new QMSingleButton(MurderItemSpawner, 2, 1.5f, "Spawn PocketWatch!", new Action(() => { Clue_PocketWatch.CloneObject(); }), "Clue Cloner!", null, null, true);
             new QMSingleButton(MurderItemSpawner, 2, 2, "Spawn Postcard!", new Action(() => { Clue_Postcard.CloneObject(); }), "Clue Cloner!", null, null, true);
             PresentSpawner = new QMSingleButton(MurderItemSpawner, 2, 2.5f, "Spawn Present!", new Action(() => { Clue_Present.CloneObject(); }), "Clue Teleporter!", null, null, true);
-            
-            #endregion
+
+            #endregion Item Spawner
 
             if (Bools.AllowAttackerComponent)
             {
                 QMNestedButton MurderItemAttackerMenu = new QMNestedButton(Murder4CheatPage, 1, 1.5f, "Followers", "Murder item Followers!", null, null, null, null, true);
+
                 #region Followers
+
                 new QMSingleButton(MurderItemAttackerMenu, 1, 0, "Detective Gun (target)!", new Action(() => { DetectiveGuns.AttackTarget(); }), "Make Detective Gun follow Target", null, null, true).SetResizeTextForBestFit(true);
                 new QMSingleButton(MurderItemAttackerMenu, 2, 0, "Silenced Guns (target)!", new Action(() => { SilencedGuns.AttackTarget(); }), "Make Silenced Gun follow Target", null, null, true).SetResizeTextForBestFit(true);
                 new QMSingleButton(MurderItemAttackerMenu, 3, 0, "Knifes (target)!", new Action(() => { Knifes.AttackTarget(); }), "Make Knifes follow Target", null, null, true).SetResizeTextForBestFit(true);
@@ -480,7 +470,6 @@ namespace AstroClient
                 new QMSingleButton(MurderItemAttackerMenu, 2, 0.5f, "Shotgun (target)!", new Action(() => { ShotGuns.AttackTarget(); }), "Make Bear Traps follow Target", null, null, true).SetResizeTextForBestFit(true);
                 new QMSingleButton(MurderItemAttackerMenu, 3, 0.5f, "Bear traps (target)!", new Action(() => { BearTraps.AttackTarget(); }), "Make Bear Traps follow Target", null, null, true).SetResizeTextForBestFit(true);
 
-
                 new QMSingleButton(MurderItemAttackerMenu, 1, 1.5f, "Detective Gun (you)!", new Action(() => { DetectiveGuns.AttackSelf(); }), "Make Detective Gun follow you", null, null, true).SetResizeTextForBestFit(true);
                 new QMSingleButton(MurderItemAttackerMenu, 2, 1.5f, "Silenced Guns (you)!", new Action(() => { SilencedGuns.AttackSelf(); }), "Make Silenced Gun follow you", null, null, true).SetResizeTextForBestFit(true);
                 new QMSingleButton(MurderItemAttackerMenu, 3, 1.5f, "Knifes (you)!", new Action(() => { Knifes.AttackSelf(); }), "Make Knifes follow you", null, null, true).SetResizeTextForBestFit(true);
@@ -488,12 +477,13 @@ namespace AstroClient
                 new QMSingleButton(MurderItemAttackerMenu, 1, 2, "Grenade (you)!", new Action(() => { Grenades.AttackSelf(); }), "Make Grenade follow you", null, null, true).SetResizeTextForBestFit(true);
                 new QMSingleButton(MurderItemAttackerMenu, 2, 2, "Shotgun (you)!", new Action(() => { ShotGuns.AttackSelf(); }), "Make Shotgun follow you", null, null, true).SetResizeTextForBestFit(true);
                 new QMSingleButton(MurderItemAttackerMenu, 3, 2, "Bear traps (you)!", new Action(() => { BearTraps.AttackSelf(); }), "Make Bear Traps follow you", null, null, true).SetResizeTextForBestFit(true);
-                #endregion
 
+                #endregion Followers
             }
             if (Bools.AllowOrbitComponent)
             {
                 QMNestedButton MurderItemOrbiterMenu = new QMNestedButton(Murder4CheatPage, 1, 2, "Orbiters", "Murder item Orbits!", null, null, null, null, true);
+
                 #region orbiters
 
                 new QMSingleButton(MurderItemOrbiterMenu, 1, 0, "Detective Gun (target)!", new Action(() => { DetectiveGuns.OrbitTarget(); }), "Make Detective Gun orbit around Target", null, null, true).SetResizeTextForBestFit(true);
@@ -503,7 +493,7 @@ namespace AstroClient
                 new QMSingleButton(MurderItemOrbiterMenu, 1, 0.5f, "Clues (target)!", new Action(() => { Clues.OrbitTarget(); }), "Make Clues orbit around Target", null, null, true).SetResizeTextForBestFit(true);
                 new QMSingleButton(MurderItemOrbiterMenu, 2, 0.5f, "Grenade (target)!", new Action(() => { Grenades.OrbitTarget(); }), "Make Grenade orbit around Target", null, null, true).SetResizeTextForBestFit(true);
                 new QMSingleButton(MurderItemOrbiterMenu, 3, 0.5f, "Bear Trap (target)!", new Action(() => { BearTraps.OrbitTarget(); }), "Make Bear Traps orbit around Target", null, null, true).SetResizeTextForBestFit(true);
-                
+
                 new QMSingleButton(MurderItemOrbiterMenu, 1, 1.5f, "Detective Gun (you)!", new Action(() => { DetectiveGuns.OrbitSelf(); }), "Make Detective Gun orbit around you", null, null, true).SetResizeTextForBestFit(true);
                 new QMSingleButton(MurderItemOrbiterMenu, 2, 1.5f, "Silenced Guns (you)!", new Action(() => { SilencedGuns.OrbitSelf(); }), "Make Silenced Gun around orbit you", null, null, true).SetResizeTextForBestFit(true);
                 new QMSingleButton(MurderItemOrbiterMenu, 3, 1.5f, "Shotgun (you)!", new Action(() => { ShotGuns.OrbitSelf(); }), "Make ShotGun orbit around you", null, null, true).SetResizeTextForBestFit(true);
@@ -511,11 +501,12 @@ namespace AstroClient
                 new QMSingleButton(MurderItemOrbiterMenu, 1, 2, "Clues (you)!", new Action(() => { Clues.OrbitSelf(); }), "Make Clues orbit around you", null, null, true).SetResizeTextForBestFit(true);
                 new QMSingleButton(MurderItemOrbiterMenu, 2, 2, "Grenade (you)!", new Action(() => { Grenades.OrbitSelf(); }), "Make Grenade orbit around you", null, null, true).SetResizeTextForBestFit(true);
                 new QMSingleButton(MurderItemOrbiterMenu, 3, 2, "Bear Trap (you)!", new Action(() => { BearTraps.OrbitSelf(); }), "Make Bear Traps orbit around you", null, null, true).SetResizeTextForBestFit(true);
-                #endregion
+
+                #endregion orbiters
             }
 
-
             QMNestedButton MurderItemClicker = new QMNestedButton(Murder4CheatPage, 1, 2.5f, "Items Clicker", "Interact with Items!", null, null, null, null, true);
+
             #region Items Clicker
 
             new QMSingleButton(MurderItemClicker, 1, 0, "Click photograph!", new Action(() => { Clue_photograph.VRC_Interactable_Click(); }), "Click!", null, null, true);
@@ -524,11 +515,13 @@ namespace AstroClient
             new QMSingleButton(MurderItemClicker, 1, 1.5f, "Click PocketWatch!", new Action(() => { Clue_PocketWatch.VRC_Interactable_Click(); }), "Click!", null, null, true);
             new QMSingleButton(MurderItemClicker, 1, 2, "Click Postcard!", new Action(() => { Clue_Postcard.VRC_Interactable_Click(); }), "Click!", null, null, true);
             PresentClicker = new QMSingleButton(MurderItemSpawner, 2, 0, "Click Present!", new Action(() => { Clue_Present.VRC_Interactable_Click(); }), "Click!", null, null, true);
-            
+
             new QMSingleButton(MurderItemClicker, 2, 0.5f, "Unlock Random Weapon!", new Action(() => { Clues.VRC_Interactable_Click(); }), "Unlock Random Weapon!", null, null, true);
-            #endregion
+
+            #endregion Items Clicker
 
             QMNestedButton MurderItemWatchMenu = new QMNestedButton(Murder4CheatPage, 2, 0f, "Watchers", "Murder item Watchers!", null, null, null, null, true);
+
             #region Watchers
 
             new QMSingleButton(MurderItemWatchMenu, 1, 0, "Detective Gun (target)!", new Action(() => { DetectiveGuns.WatchTarget(); }), "Make Detective Gun Watch Target", null, null, true).SetResizeTextForBestFit(true);
@@ -546,10 +539,8 @@ namespace AstroClient
             new QMSingleButton(MurderItemWatchMenu, 1, 2, "Grenade (you)!", new Action(() => { Grenades.WatchSelf(); }), "Make Grenade Watch you", null, null, true).SetResizeTextForBestFit(true);
             new QMSingleButton(MurderItemWatchMenu, 2, 2, "Shotgun (you)!", new Action(() => { ShotGuns.WatchSelf(); }), "Make Bear Traps Watch you", null, null, true).SetResizeTextForBestFit(true);
             new QMSingleButton(MurderItemWatchMenu, 3, 2, "Bear traps (you)!", new Action(() => { BearTraps.WatchSelf(); }), "Make Bear Traps Watch you", null, null, true).SetResizeTextForBestFit(true);
-            #endregion
 
-
-
+            #endregion Watchers
 
             GameObjectESP.Murder4ESPtoggler = new QMSingleToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
             JarRoleController.Murder4RolesRevealerToggle = new QMSingleToggleButton(Murder4CheatPage, 3, 0.5f, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", Color.green, Color.red, null, false, true);
@@ -557,17 +548,12 @@ namespace AstroClient
             Murder4UdonExploits.Init_Filtered_Nodes_Btn(Murder4CheatPage, 4, 0.5f, true);
             Murder4UdonExploits.Init_Unfiltered_Nodes_btn(Murder4CheatPage, 4, 1f, true);
 
-
             GameStartbtn = new QMSingleButton(Murder4CheatPage, 3, 2, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
             GameAbortbtn = new QMSingleButton(Murder4CheatPage, 3, 2.5f, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
 
             GameVictoryBystanderBtn = new QMSingleButton(Murder4CheatPage, 4, 2, "Victory Bystander", new Action(() => { VictoryBystanderEvent.ExecuteUdonEvent(); }), "Force Victory Bystander Event", null, Color.green, true);
             GameVictoryMurdererBtn = new QMSingleButton(Murder4CheatPage, 4, 2.5f, "Victory Murderer", new Action(() => { VictoryMurdererEvent.ExecuteUdonEvent(); }), "Force Victory Murderer Event", null, Color.red, true);
-
-
         }
-
-
 
         public static void ToggleKnifesGrab(bool Pickupable)
         {
@@ -607,14 +593,7 @@ namespace AstroClient
             }
         }
 
-
-
-
-
         // MAP GameObjects Required for control.
-
-
-
 
         public static QMSingleButton GameStartbtn;
         public static QMSingleButton GameAbortbtn;
@@ -638,18 +617,18 @@ namespace AstroClient
             set
             {
                 _DoUnlockedSound = value;
-                if(DoUnlockedSoundbtn != null)
+                if (DoUnlockedSoundbtn != null)
                 {
                     DoUnlockedSoundbtn.setToggleState(value);
                 }
             }
         }
 
-
         public static QMSingleToggleButton KnifesGrabbableToggle;
 
         public static QMSingleButton KnifesGrabFromFar;
         private static bool _isChristmasMode;
+
         public static bool isChristmasMode
         {
             get
@@ -659,7 +638,7 @@ namespace AstroClient
             set
             {
                 _isChristmasMode = value;
-                if(PresentClicker != null)
+                if (PresentClicker != null)
                 {
                     PresentClicker.setActive(value);
                 }
@@ -667,7 +646,7 @@ namespace AstroClient
                 {
                     PresentSpawner.setActive(value);
                 }
-                if(PresentTeleporter != null)
+                if (PresentTeleporter != null)
                 {
                     PresentTeleporter.setActive(value);
                 }
@@ -725,6 +704,5 @@ namespace AstroClient
         public static CachedUdonEvent VictoryMurdererEvent;
 
         public static bool HasMurder4WorldLoaded = false;
-
     }
 }

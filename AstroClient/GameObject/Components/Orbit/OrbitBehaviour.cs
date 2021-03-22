@@ -76,6 +76,7 @@ namespace AstroClient.components
         private float InterpolationMinX = 1f;
         private float InterpolationTempX = 0f;
         private PickupController pickup;
+
         public void Start()
         {
             FirstRotation = transform.rotation;
@@ -152,7 +153,7 @@ namespace AstroClient.components
             }
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             GameObjectUtils.RestoreOriginalLocation(obj, false);
             OnlineEditor.RemoveOwnerShip(obj);

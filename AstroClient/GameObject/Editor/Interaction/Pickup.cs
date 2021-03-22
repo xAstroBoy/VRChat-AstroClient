@@ -1,7 +1,6 @@
 ﻿using AstroClient.AstroUtils.ItemTweaker;
 using AstroClient.components;
 using AstroClient.ConsoleUtils;
-using System;
 using UnityEngine;
 using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 
@@ -9,7 +8,6 @@ namespace AstroClient
 {
     public class Pickup
     {
-
         public static void RestoreOriginalProperty(GameObject obj)
         {
             if (obj != null)
@@ -23,6 +21,7 @@ namespace AstroClient
                 ItemTweakerMain.CheckIfContainsPickupProperties(obj);
             }
         }
+
         public static void ForcePickupComponentPresence(GameObject obj)
         {
             if (obj != null)
@@ -56,14 +55,13 @@ namespace AstroClient
             if (obj != null)
             {
                 var pickupEditor = obj.GetComponent<PickupController>();
-                if(pickupEditor == null)
+                if (pickupEditor == null)
                 {
                     pickupEditor = obj.AddComponent<PickupController>();
                 }
                 pickupEditor.EditMode = true;
                 pickupEditor.orientation = orientation;
                 ItemTweakerMain.CheckIfContainsPickupProperties(obj);
-
             }
         }
 
@@ -86,7 +84,6 @@ namespace AstroClient
         {
             if (obj != null)
             {
-
                 var pickupEditor = obj.GetComponent<PickupController>();
                 if (pickupEditor == null)
                 {
@@ -157,7 +154,5 @@ namespace AstroClient
                 ItemTweakerMain.CheckIfContainsPickupProperties(obj);
             }
         }
-
-
     }
 }

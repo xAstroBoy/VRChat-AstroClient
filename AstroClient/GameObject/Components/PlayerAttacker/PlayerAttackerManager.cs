@@ -8,6 +8,7 @@ using VRC;
 using System.Linq;
 using AstroClient.extensions;
 using Color = System.Drawing.Color;
+
 #region AstroClient Imports
 
 using AstroClient.ConsoleUtils;

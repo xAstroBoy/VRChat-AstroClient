@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
-using System.Text;
 using UnityEngine;
 using VRC.Core;
 
@@ -128,6 +127,7 @@ namespace DayClientML2.Utility.Api
                 }),
             }, param, false, 3600);
         }
+
         public static List<ApiAvatar> AvatarSearch(string userid, int startingfrom, int amount)
         {
             var _return = new List<ApiAvatar>();

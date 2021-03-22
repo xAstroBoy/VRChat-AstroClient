@@ -3,7 +3,6 @@ using MelonLoader;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -157,6 +156,7 @@ namespace DayClientML2.Utility.Extensions
                     ModConsole.Log("Error Couldnt Fetch User\n" + Error);
                 }));
         }
+
         internal static void GetAvatarAuthorFromSocial(this APIUser Instance)
         {
             var avatarLink = new Uri(Instance.currentAvatarImageUrl);
@@ -189,7 +189,7 @@ namespace DayClientML2.Utility.Extensions
 
             response.Close();
         }
-       
+
         internal static void RefreshMenu()
         {
             UiUserList[] userLists = Utils.VRCUiManager.GetComponentsInChildren<UiUserList>(true);

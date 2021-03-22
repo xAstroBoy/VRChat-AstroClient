@@ -1,14 +1,8 @@
-﻿using AstroClient.AstroUtils.ItemTweaker;
-using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
+﻿using AstroClient.ConsoleUtils;
 using System;
-using System.Runtime.InteropServices;
 using UnhollowerBaseLib.Attributes;
-using UnhollowerRuntimeLib;
 using UnityEngine;
-using VRC;
 using VRC.SDKBase;
-using VRCSDK2;
 using static AstroClient.AstroUtils.ItemTweaker.ItemTweakerMain;
 using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 
@@ -18,27 +12,24 @@ namespace AstroClient.components
     {
         public PickupController(IntPtr ptr) : base(ptr)
         {
-
         }
 
         // Use this for initialization
         public void Start()
         {
-
-                obj = gameObject;
-                Pickup1 = GetComponent<VRC.SDKBase.VRC_Pickup>();
-                Pickup2 = GetComponent<VRCSDK2.VRC_Pickup>();
-                Pickup3 = GetComponent<VRC.SDK3.Components.VRCPickup>();
-                BackupOriginalProperties();
-                EditMode = false;
-                Locked = false;
+            obj = gameObject;
+            Pickup1 = GetComponent<VRC.SDKBase.VRC_Pickup>();
+            Pickup2 = GetComponent<VRCSDK2.VRC_Pickup>();
+            Pickup3 = GetComponent<VRC.SDK3.Components.VRCPickup>();
+            BackupOriginalProperties();
+            EditMode = false;
+            Locked = false;
             ModConsole.DebugLog("Attacked Successfully PickupController to object " + obj.name);
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         private void BackupOriginalProperties()
         {
-
             if (Pickup1 != null)
             {
                 Original_allowManipulationWhenEquipped = Pickup1.allowManipulationWhenEquipped;
@@ -88,10 +79,9 @@ namespace AstroClient.components
             {
                 Pickup1 = obj.AddComponent<VRC.SDKBase.VRC_Pickup>();
             }
-
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         internal void RestoreOriginalProperties()
         {
             Locked = true;
@@ -119,7 +109,6 @@ namespace AstroClient.components
                 Pickup2.AutoHold = AutoHold;
                 Pickup2.orientation = orientation;
                 Pickup2.proximity = proximity;
-
             }
             else if (Pickup3 != null)
             {
@@ -132,7 +121,6 @@ namespace AstroClient.components
             }
             EditMode = false;
             Locked = false;
-
         }
 
         // Update is called once per frame
@@ -166,13 +154,9 @@ namespace AstroClient.components
                         {
                             Pickup1 = obj.AddComponent<VRC.SDKBase.VRC_Pickup>();
                             Pickup1.hideFlags = HideFlags.HideAndDontSave;
-
                         }
-
                     }
                 }
-
-
 
                 if (EditMode)
                 {
@@ -525,18 +509,15 @@ namespace AstroClient.components
             }
             catch
             {
-
             }
         }
 
-        void OnDestroy()
+        private void OnDestroy()
         {
             ModConsole.DebugLog("PickupController Got Destroyed from " + obj.name);
-
         }
 
         [HideFromIl2Cpp]
-
         private void UpdatePickupOwnerBtns()
         {
             if (HandsUtils.GameObjectToEdit == obj)
@@ -564,12 +545,11 @@ namespace AstroClient.components
                 }
             }
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         internal string CurrentOwner
         {
             [HideFromIl2Cpp]
-
             get
             {
                 return Networking.GetOwner(obj).displayName;
@@ -577,11 +557,9 @@ namespace AstroClient.components
         }
 
         [HideFromIl2Cpp]
-
         public string CurrentOwnerBtnText
         {
             [HideFromIl2Cpp]
-
             get
             {
                 return "Current owner : \n" + CurrentOwner;
@@ -589,7 +567,6 @@ namespace AstroClient.components
         }
 
         [HideFromIl2Cpp]
-
         private void UpdatePickupOrientationBtn()
         {
             if (obj != null)
@@ -632,8 +609,8 @@ namespace AstroClient.components
                 }
             }
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         private void UpdateAutoHold()
         {
             if (obj != null)
@@ -676,8 +653,8 @@ namespace AstroClient.components
                 }
             }
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         private void UpdateAutoHoldMode()
         {
             if (obj != null)
@@ -691,8 +668,8 @@ namespace AstroClient.components
                 }
             }
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         private void Updatepickupable()
         {
             if (obj != null)
@@ -706,8 +683,8 @@ namespace AstroClient.components
                 }
             }
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         private void UpdateDisallowTheft()
         {
             if (obj != null)
@@ -721,8 +698,8 @@ namespace AstroClient.components
                 }
             }
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         private void UpdateProximitySlider()
         {
             if (obj != null)
@@ -736,8 +713,8 @@ namespace AstroClient.components
                 }
             }
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         private void UpdateIsHeld()
         {
             if (HandsUtils.GameObjectToEdit == obj)
@@ -764,8 +741,8 @@ namespace AstroClient.components
                 }
             }
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         private void UpdateHeldOwnerBtn()
         {
             if (HandsUtils.GameObjectToEdit == obj)
@@ -793,13 +770,10 @@ namespace AstroClient.components
             }
         }
 
-
         [HideFromIl2Cpp]
-
         internal bool isHeld
         {
             [HideFromIl2Cpp]
-
             get
             {
                 if (Pickup1 != null)
@@ -809,12 +783,10 @@ namespace AstroClient.components
                 else if (Pickup2 != null)
                 {
                     return Pickup2.IsHeld;
-
                 }
                 else if (Pickup3 != null)
                 {
                     return Pickup3.IsHeld;
-
                 }
                 else
                 {
@@ -822,12 +794,11 @@ namespace AstroClient.components
                 }
             }
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         private string CurrentObjectHolder
         {
             [HideFromIl2Cpp]
-
             get
             {
                 try
@@ -837,7 +808,7 @@ namespace AstroClient.components
                         var user = Pickup1.currentPlayer;
                         if (user != null)
                         {
-                                return user.displayName;
+                            return user.displayName;
                         }
                     }
                     else if (Pickup2 != null)
@@ -850,7 +821,6 @@ namespace AstroClient.components
                     }
                     else if (Pickup3 != null)
                     {
-
                         var user = Pickup3.currentPlayer;
                         if (user != null)
                         {
@@ -860,18 +830,15 @@ namespace AstroClient.components
                 }
                 catch
                 {
-
                 }
                 return "None";
             }
         }
 
         [HideFromIl2Cpp]
-
         private string PickupHeldButtonText
         {
             [HideFromIl2Cpp]
-
             get
             {
                 if (isHeld)
@@ -884,25 +851,21 @@ namespace AstroClient.components
                 }
             }
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         private string PickupHolderBtnText
         {
             [HideFromIl2Cpp]
-
             get
             {
                 return "Current holder: \n " + CurrentObjectHolder;
- 
             }
         }
+
         [HideFromIl2Cpp]
-
-
         private Color PickupHeldButtonColor
         {
             [HideFromIl2Cpp]
-
             get
             {
                 if (isHeld)
@@ -915,8 +878,8 @@ namespace AstroClient.components
                 }
             }
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         private void UpdateEditMode()
         {
             if (HandsUtils.GameObjectToEdit == obj)
@@ -933,7 +896,6 @@ namespace AstroClient.components
                 }
             }
         }
-
 
         private VRC.SDKBase.VRC_Pickup Pickup1;
         private VRCSDK2.VRC_Pickup Pickup2;
@@ -957,10 +919,5 @@ namespace AstroClient.components
         internal float proximity;
         internal VRC.SDKBase.VRC_Pickup.AutoHoldMode AutoHold;
         internal VRC.SDKBase.VRC_Pickup.PickupOrientation orientation;
-
-
-
-
-
     }
 }

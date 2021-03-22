@@ -1,34 +1,26 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.variables;
-using MelonLoader;
+﻿using AstroClient.Components;
+using AstroClient.ConsoleUtils;
+using AstroClient.extensions;
+using DayClientML2.Utility.Extensions;
 using System;
-using System.Collections;
-using System.Linq;
-using System.Runtime.InteropServices;
 using UnhollowerBaseLib.Attributes;
-using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;
 using VRC;
 using VRC.Core;
-using AstroClient.extensions;
-using Object = UnityEngine.Object;
-using DayClientML2.Utility.Extensions;
-using AstroClient.Components;
 using static AstroClient.JarRoleController;
+using Object = UnityEngine.Object;
 
 namespace AstroClient.components
 {
     public class JarRoleESP : MonoBehaviour
     {
-
         public JarRoleESP(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
 
-        Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object> AntiGarbageCollection = new Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object>();
-
+        private Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object> AntiGarbageCollection = new Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object>();
 
         // Use this for initialization
         private void Start()
@@ -47,7 +39,6 @@ namespace AstroClient.components
 
                 if (Internal_player != null)
                 {
-
                     if (Internal_player.prop_APIUser_0 != null)
                     {
                         Internal_user = Internal_player.prop_APIUser_0;
@@ -58,7 +49,6 @@ namespace AstroClient.components
                 {
                     SetTag(NoRoles, DefaultTextColor, NoRolesColor);
                     GameRoleTag.ShowTag = false;
-
                 }
                 else
                 {
@@ -69,16 +59,12 @@ namespace AstroClient.components
                 {
                     Murder4CurrentRole = Murder4Roles.Unassigned;
                     ModConsole.DebugLog("Registered " + Internal_user.displayName + " On Murder 4 Role ESP.");
-
                 }
                 if (JarRoleController.isAmongUsWorld)
                 {
                     AmongUsCurrentRole = AmongUsRoles.Unassigned;
                     ModConsole.DebugLog("Registered " + Internal_user.displayName + " On Among US Role ESP.");
-
                 }
-                
-
             }
             catch (Exception e)
             {
@@ -181,7 +167,6 @@ namespace AstroClient.components
         }
 
         [HideFromIl2Cpp]
-
         private bool VerifyEntry(GameObject Entry)
         {
             if (Entry != null)
@@ -200,7 +185,6 @@ namespace AstroClient.components
             }
             return false;
         }
-
 
         [HideFromIl2Cpp]
         private void FindEntryWithUser()
@@ -227,7 +211,6 @@ namespace AstroClient.components
                 }
             }
         }
-
 
         [HideFromIl2Cpp]
         public Color? Murder4GetNamePlateColor()
@@ -357,8 +340,6 @@ namespace AstroClient.components
                         Debug($"Updating SingleTag Tag_Color for {Internal_player.DisplayName()}, with TagColor : {TagColor.ToString()}");
                     }
                 }
-
-
             }
         }
 
@@ -376,10 +357,9 @@ namespace AstroClient.components
             {
                 _AssignedPlayerNode.RenameObject("Unassigned Node");
             }
-            
+
             JarRoleController.RoleEspComponents.Remove(this);
         }
-
 
         [HideFromIl2Cpp]
         private string GetCurrentSingleTagText()
@@ -398,7 +378,7 @@ namespace AstroClient.components
 
                 if (GameRoleTag != null)
                 {
-                    if(GameRoleTag.ShowTag != JarRoleController.ViewRoles)
+                    if (GameRoleTag.ShowTag != JarRoleController.ViewRoles)
                     {
                         GameRoleTag.ShowTag = JarRoleController.ViewRoles;
                     }
@@ -476,15 +456,14 @@ namespace AstroClient.components
             catch (Exception e) { ModConsole.DebugError("JarRoleRevealer OnUpdate Exception : " + e); }
         }
 
-
         private readonly string HiddenRole = "Role Hidden";
         private readonly string NoRoles = "No Role";
 
         private readonly Color NoRolesColor = Color.yellow;
         private readonly Color HiddenRolesColor = Color.green;
 
-
         private readonly Color DefaultTextColor = Color.white;
+
         internal Murder4Roles AssignedMurder4Role
         {
             [HideFromIl2Cpp]
@@ -502,7 +481,6 @@ namespace AstroClient.components
                 return AmongUsCurrentRole;
             }
         }
-
 
         internal enum Murder4Roles
         {
@@ -524,13 +502,11 @@ namespace AstroClient.components
         private LinkedNodes Internal_SavedEntry
         {
             [HideFromIl2Cpp]
-
             get
             {
                 return _SavedEntry;
             }
             [HideFromIl2Cpp]
-
             set
             {
                 _SavedEntry = value;
@@ -538,9 +514,6 @@ namespace AstroClient.components
                 Internal_AssignedPlayerNode = value.Node.gameObject;
             }
         }
-
-
-
 
         internal LinkedNodes LinkedEntry
         {
@@ -554,58 +527,47 @@ namespace AstroClient.components
         private GameObject Internal_AssignedPlayerEntry
         {
             [HideFromIl2Cpp]
-
             get
             {
                 return _AssignedPlayerEntry;
             }
             [HideFromIl2Cpp]
-
             set
             {
                 _AssignedPlayerEntry = value;
-                
             }
         }
 
         internal GameObject Entry
         {
             [HideFromIl2Cpp]
-
             get
             {
                 return Internal_AssignedPlayerEntry;
             }
         }
 
-
         internal APIUser apiuser
         {
             [HideFromIl2Cpp]
-
             get
             {
                 return Internal_user;
             }
         }
 
-
-
         private GameObject _AssignedPlayerNode;
 
         private GameObject Internal_AssignedPlayerNode
         {
             [HideFromIl2Cpp]
-
             get
             {
                 return _AssignedPlayerNode;
             }
             [HideFromIl2Cpp]
-
             set
             {
-
                 if (_AssignedPlayerNode != null)
                 {
                     if (value != _AssignedPlayerNode)
@@ -618,7 +580,6 @@ namespace AstroClient.components
             }
         }
 
-
         internal GameObject Node
         {
             [HideFromIl2Cpp]
@@ -627,7 +588,6 @@ namespace AstroClient.components
                 return Internal_AssignedPlayerNode;
             }
         }
-
 
         private Murder4Roles Murder4CurrentRole;
         private AmongUsRoles AmongUsCurrentRole;
@@ -639,17 +599,18 @@ namespace AstroClient.components
 
         // MURDER 4 MAP
         private readonly Color MurderColor = new Color(0.5377358f, 0.1648718f, 0.1728278f, 1f);
+
         private readonly Color BystanderColor = new Color(0.3428266f, 0.5883213f, 0.6792453f, 1f);
         private readonly Color DetectiveColor = new Color(0.2976544f, 0.251424f, 0.4716981f, 1f);
 
         // AMONG US MAP
         private readonly Color ImpostorColor = new Color(0.5377358f, 0.1648718f, 0.1728278f, 1f);
-        private readonly Color CrewmateColor = new Color(0f, 0.3228593f, 0.8396226f, 1f);
 
+        private readonly Color CrewmateColor = new Color(0f, 0.3228593f, 0.8396226f, 1f);
 
         // GENERAL
         private readonly Color Unassigned = new Color(0.5f, 0.5f, 0.5f, 1f);
-        private readonly Color NoRolesAssigned = new Color(0f, 0f, 0f, 0f);
 
+        private readonly Color NoRolesAssigned = new Color(0f, 0f, 0f, 0f);
     }
 }

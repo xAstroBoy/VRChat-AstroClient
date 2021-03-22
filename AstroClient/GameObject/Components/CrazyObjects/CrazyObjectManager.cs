@@ -5,8 +5,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnhollowerRuntimeLib;
 using UnityEngine;
-using UnityEngine.UI;
-using static AstroClient.ConsoleUtils.ModConsole;
 using Color = System.Drawing.Color;
 
 #region AstroClient Imports
@@ -17,7 +15,7 @@ using static AstroClient.variables.InstanceBuilder;
 
 namespace AstroClient.components
 {
-    public class CrazyObjectManager : MonoBehaviour 
+    public class CrazyObjectManager : MonoBehaviour
     {
         #region Internal
 
@@ -135,7 +133,7 @@ namespace AstroClient.components
                 var Timer = obj.GetComponent<CrazyObject>();
                 if (Timer != null)
                 {
-                    CrazyTimerBtn.setButtonText( "Timer : " + Timer.CrazyTimer);
+                    CrazyTimerBtn.setButtonText("Timer : " + Timer.CrazyTimer);
                 }
                 else
                 {
@@ -172,7 +170,7 @@ namespace AstroClient.components
             ClearList();
             if (CrazyTimerBtn != null)
             {
-                CrazyTimerBtn.setButtonText( "none");
+                CrazyTimerBtn.setButtonText("none");
             }
         }
 

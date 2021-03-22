@@ -99,6 +99,7 @@ namespace DayClientML2.Utility.Extensions
             Instance.color = Color.white;
             yield break;
         }
+
         public static bool XRefScanForGlobal(this MethodBase methodBase, string searchTerm, bool ignoreCase = true)
         {
             if (!string.IsNullOrEmpty(searchTerm))
@@ -181,6 +182,7 @@ namespace DayClientML2.Utility.Extensions
             ModConsole.Error($"XRefScanMethodCount \"{methodBase}\" has all null/empty parameters. Returning -1");
             return -1;
         }
+
         public static bool checkXref(this MethodBase m, string match)
         {
             try

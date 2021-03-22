@@ -1,17 +1,11 @@
 ﻿using AstroClient.components;
 using AstroClient.ConsoleUtils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AstroClient
 {
     // TODO : REMOVE IT.
-    public  class TempFix : Overridables
+    public class TempFix : Overridables
     {
-
         public override void OnWorldReveal()
         {
             ModConsole.Log("You entered this world : " + WorldUtils.GetWorldName(), System.Drawing.Color.Goldenrod);
@@ -29,6 +23,5 @@ namespace AstroClient
             ItemInflaterManager.OnLevelLoad();
             ObjectSpinnerManager.OnLevelLoad();
         }
-
     }
 }

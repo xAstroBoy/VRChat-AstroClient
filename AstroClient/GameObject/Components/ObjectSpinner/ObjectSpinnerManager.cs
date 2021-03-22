@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnhollowerRuntimeLib;
 using UnityEngine;
-using UnityEngine.UI;
 using Color = System.Drawing.Color;
 
 #region AstroClient Imports
@@ -87,11 +86,11 @@ namespace AstroClient.components
             var spin = obj.GetComponent<ObjectSpinner>();
             if (spin != null)
             {
-                SpinAmountTell.setButtonText( "X : " + spin.ForceX + " Y : " + spin.ForceY + " Z :" + spin.ForceZ);
+                SpinAmountTell.setButtonText("X : " + spin.ForceX + " Y : " + spin.ForceY + " Z :" + spin.ForceZ);
             }
             else
             {
-                SpinAmountTell.setButtonText( "X : " + "0" + " Y : " + "0" + " Z :" + "0");
+                SpinAmountTell.setButtonText("X : " + "0" + " Y : " + "0" + " Z :" + "0");
             }
         }
 
@@ -108,11 +107,11 @@ namespace AstroClient.components
             var Timer = obj.GetComponent<ObjectSpinner>();
             if (Timer != null)
             {
-                SpinnerTimerBtn.setButtonText( "Timer : " + Timer.SpinnerTimer);
+                SpinnerTimerBtn.setButtonText("Timer : " + Timer.SpinnerTimer);
             }
             else
             {
-                SpinnerTimerBtn.setButtonText( "Timer : " + "0");
+                SpinnerTimerBtn.setButtonText("Timer : " + "0");
             }
         }
 
@@ -136,11 +135,11 @@ namespace AstroClient.components
             ClearList();
             if (SpinnerTimerBtn != null)
             {
-                SpinnerTimerBtn.setButtonText( "none");
+                SpinnerTimerBtn.setButtonText("none");
             }
             if (SpinAmountTell != null)
             {
-                SpinAmountTell.setButtonText( "none");
+                SpinAmountTell.setButtonText("none");
             }
         }
 

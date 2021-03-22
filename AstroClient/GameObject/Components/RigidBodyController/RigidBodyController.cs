@@ -1,14 +1,9 @@
 ﻿using AstroClient.AstroUtils.ItemTweaker;
 using AstroClient.ConsoleUtils;
-using System;
-using System.Runtime.InteropServices;
-using UnhollowerBaseLib.Attributes;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-using VRC.SDKBase;
-using VRCSDK2;
-using static AstroClient.AstroUtils.ItemTweaker.ItemTweakerMain;
 using AstroClient.SyncPhysicExt;
+using System;
+using UnhollowerBaseLib.Attributes;
+using UnityEngine;
 
 namespace AstroClient.components
 {
@@ -16,7 +11,6 @@ namespace AstroClient.components
     {
         public RigidBodyController(IntPtr ptr) : base(ptr)
         {
-
         }
 
         // Use this for initialization
@@ -27,8 +21,6 @@ namespace AstroClient.components
                 obj = gameObject;
                 RigidBody = GetComponent<Rigidbody>();
                 Sync = GetComponent<SyncPhysics>();
-
-
 
                 BackupBasicBody();
                 EditMode = false;
@@ -43,7 +35,7 @@ namespace AstroClient.components
                 if (Sync.GetRigidBody() != null)
                 {
                     ModConsole.DebugLog($"Backupping from Sync.GetRigidBody() properties for object  {obj.name}");
-                    
+
                     if (Sync.GetRigidBody().useGravity != OrigUseGravity)
                     {
                         OrigUseGravity = Sync.GetRigidBody().useGravity;
@@ -61,7 +53,6 @@ namespace AstroClient.components
                     {
                         isKinematic = Sync.GetRigidBody().isKinematic;
                     }
-
 
                     if (Sync.GetRigidBody().constraints != OrigConstraints)
                     {
@@ -117,7 +108,6 @@ namespace AstroClient.components
                 Constraints = RigidBody.constraints;
             }
             EditMode = false;
-
         }
 
         internal void RestoreOriginalBody()
@@ -146,7 +136,6 @@ namespace AstroClient.components
         {
             try
             {
-
                 if (ForcedMode)
                 {
                     if (Sync == null)
@@ -210,7 +199,7 @@ namespace AstroClient.components
                         if (Sync.GetRigidBody().angularDrag != AngularDrag)
                         {
                             Sync.GetRigidBody().angularDrag = AngularDrag;
-                             Sync.RefreshProperties();
+                            Sync.RefreshProperties();
                         }
                     }
                 }
@@ -235,7 +224,6 @@ namespace AstroClient.components
                         {
                             isKinematic = Sync.GetRigidBody().isKinematic;
                         }
-
 
                         if (Sync.GetRigidBody().constraints != OrigConstraints)
                         {
@@ -275,12 +263,11 @@ namespace AstroClient.components
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ModConsole.DebugError($"RigidBodyController assigned to  {obj.name} thrown a exception {e}");
             }
         }
-
 
         [HideFromIl2Cpp]
         internal bool UpdateAngularDrag(float newdrag)
@@ -315,12 +302,9 @@ namespace AstroClient.components
             return false;
         }
 
-        
-
         private GameObject obj = null;
         private SyncPhysics Sync = null;
         private Rigidbody RigidBody = null;
-
 
         internal bool EditMode = false;
 
@@ -339,8 +323,6 @@ namespace AstroClient.components
         internal bool DetectCollisions = true;
         internal float Drag = 0f;
         internal float AngularDrag = 0f;
-
-
 
         internal RigidbodyConstraints Constraints;
     }

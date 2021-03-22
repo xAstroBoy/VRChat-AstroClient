@@ -97,7 +97,7 @@ namespace AstroClient.components
 
                 if (!HasRequiredSettings)
                 {
-                    if(!control.EditMode)
+                    if (!control.EditMode)
                     {
                         control.EditMode = true;
                     }

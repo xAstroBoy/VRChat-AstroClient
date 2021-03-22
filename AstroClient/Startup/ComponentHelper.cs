@@ -30,7 +30,6 @@ namespace AstroClient.Startup
 
             ClassInjector.RegisterTypeInIl2Cpp<JarRoleESP>();
 
-
             if (Bools.AllowAttackerComponent)
             {
                 ClassInjector.RegisterTypeInIl2Cpp<PlayerAttackerManager>();

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using UnityEngine;
 using static AstroClient.variables.CustomLists;
 
@@ -10,7 +6,6 @@ namespace AstroClient.extensions
 {
     public static class CustomListExtensions
     {
-
         public static void RemoveObjFromCustomLists(this GameObject obj)
         {
             var objectcollider = ColliderCheck.FirstOrDefault(item => item.TargetObj == obj);
@@ -40,7 +35,5 @@ namespace AstroClient.extensions
         {
             return RendererSaverIndex.Where(x => x.TargetObj == obj).Select(x => x.isSavedObj).DefaultIfEmpty(false).First();
         }
-
-
     }
 }

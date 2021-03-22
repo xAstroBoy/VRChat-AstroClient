@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace CheetosConsole
 {
-    // NOTE: The StyledString class is meant to replace a number of instances of System.String in this project.  
+    // NOTE: The StyledString class is meant to replace a number of instances of System.String in this project.
     //       However, it's currently only used in the WriteLineStyled method, becuase I'd like to have better
     //       test coverage before using it in the rest of the project.
 
@@ -16,8 +16,9 @@ namespace CheetosConsole
         /// The one-dimensional representation of the StyledString.  Maps 1:1 with System.String.
         /// </summary>
         public string AbstractValue { get; }
+
         /// <summary>
-        /// The n-dimensional (n &le; 2, in this case) representation of the StyledString.  
+        /// The n-dimensional (n &le; 2, in this case) representation of the StyledString.
         /// In the case of FIGlet fonts, for example, this would be the string's two-dimensional FIGlet representation.
         /// </summary>
         public string ConcreteValue { get; }
