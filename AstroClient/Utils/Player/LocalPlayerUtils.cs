@@ -1,4 +1,5 @@
 ﻿using RubyButtonAPI;
+using System;
 using UnityEngine;
 using VRC;
 using VRC.Animation;
@@ -7,19 +8,38 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace AstroClient
 {
-    public class LocalPlayerUtils
+    public class LocalPlayerUtils : CheetoComponent
     {
+        public LocalPlayerUtils() : base()
+        {
+        }
 
+        public override void Update()
+        {
+            if (!FreezePlayerOnQMOpen)
+            {
+                if (GetPlayerCharControl() != null)
+                {
+                    GetPlayerCharControl().enabled = true;
+                }
+                return;
+            }
+            try
+            {
+                if (GetPlayerCharControl() != null)
+                {
+                    GetPlayerCharControl().enabled = !IsQuickMenuOpen;
+                }
+            }
+            catch
+            {
+            }
+        }
 
-
-
-
-
-
-
-
-
-
+        public static void OnLevelLoad()
+        {
+            LocalMotionState = null;
+        }
 
         public static Vector3 PlayerPositionBones(Player player, HumanBodyBones bone)
         {
@@ -110,28 +130,6 @@ namespace AstroClient
             return GetLocalVRCPlayer().gameObject;
         }
 
-        public static void OnUpdate()
-        {
-            if(!FreezePlayerOnQMOpen)
-            {
-                if(GetPlayerCharControl() != null)
-                {
-                    GetPlayerCharControl().enabled = true;
-                }
-                return;
-            }
-            try
-            {
-                if (GetPlayerCharControl() != null)
-                {
-                    GetPlayerCharControl().enabled = !IsQuickMenuOpen;
-                }
-            }
-            catch
-            {
-            }
-        }
-
         public static bool IsQuickMenuOpen
         {
             get
@@ -184,11 +182,6 @@ namespace AstroClient
                 LocalMotionState = GetPlayerGameObject().GetComponent<VRC.Animation.VRCMotionState>();
                 return LocalMotionState;
             }
-        }
-
-        public static void OnLevelLoad()
-        {
-            LocalMotionState = null;
         }
 
         public static void ToggleFreezePlayerOnQMOpen()
