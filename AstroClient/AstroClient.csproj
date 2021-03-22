@@ -24,10 +24,21 @@
     <LangVersion>preview</LangVersion>
     <NoWarn>CS0169;CS0472</NoWarn>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <OutputPath>D:\Steam Library\steamapps\common\VRChat\mods\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <NoWarn>CS0169;CS0472</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="BuildInfo.cs" />
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
     <Compile Include="Cheetos\AssemblySpy.cs" />
+    <Compile Include="Cheetos\AssemlySpy_Extensions.cs" />
     <Compile Include="EventArgs\OnAvatarSpawnArgs.cs" />
     <Compile Include="EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
     <Compile Include="EventArgs\SpawnEmojiArgs.cs" />
@@ -363,7 +374,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="MelonLoader">
-      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\MelonLoader.dll</HintPath>
+      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure">

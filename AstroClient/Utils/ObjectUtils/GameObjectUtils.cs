@@ -258,7 +258,7 @@ namespace AstroClient.GameObjectDebug
             GrabGameObjDumper.setIntractable(false);
             new Thread(() =>
             {
-                string path = Path.Combine(Environment.CurrentDirectory + @$"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_VRCPickups.txt");
+                string path = Path.Combine(Environment.CurrentDirectory + $@"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_VRCPickups.txt");
                 Thread.CurrentThread.IsBackground = true;
                 var listg = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>();
                 using (var txtFile = File.AppendText(path))
@@ -288,7 +288,7 @@ namespace AstroClient.GameObjectDebug
             GameObjDumper.setIntractable(false);
             new Thread(() =>
             {
-                string path = Path.Combine(Environment.CurrentDirectory + @$"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_GameObjects.txt");
+                string path = Path.Combine(Environment.CurrentDirectory + $@"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_GameObjects.txt");
                 Thread.CurrentThread.IsBackground = true;
                 var listg = Resources.FindObjectsOfTypeAll<Transform>();
                 using (var txtFile = File.AppendText(path))
@@ -336,7 +336,7 @@ namespace AstroClient.GameObjectDebug
         public static void GameObjDumperWithComponents()
         {
             ObjDumperWithComponentsBtn.setIntractable(false);
-            string path = Path.Combine(Environment.CurrentDirectory + @$"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_GameObjects_With_components.txt");
+            string path = Path.Combine(Environment.CurrentDirectory + $@"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_GameObjects_With_components.txt");
             var listg = Resources.FindObjectsOfTypeAll<GameObject>();
             using (var txtFile = File.AppendText(path))
             {

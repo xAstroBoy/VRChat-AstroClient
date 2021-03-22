@@ -1,13 +1,10 @@
-﻿using DayClientML2.Utility.Extensions;
-
-namespace AstroClient.Cheetos
+﻿namespace AstroClient.Cheetos
 {
+    using AstroClient.ConsoleUtils;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using System.Text;
-    using System.Threading.Tasks;
 
     public class AssemblySpy : Overridables
     {
@@ -17,9 +14,17 @@ namespace AstroClient.Cheetos
         {
         }
 
-        public override void OnUpdate()
+        public override void VRChat_OnUiManagerInit()
         {
+            // Eventually define debug like this probably.
+#if DEBUG
+            ModConsole.DebugLog($"AppDomain: {AppDomain.CurrentDomain}");
+#endif
+
             assembllies = AppDomain.CurrentDomain.GetAssemblies().ToList();
+#if DEBUG
+            ModConsole.DebugLog($"{assembllies.Count} assemblies found");
+#endif
         }
 
         public static List<Assembly> GetAssemblies()
