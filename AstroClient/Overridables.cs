@@ -38,7 +38,7 @@
                 NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
                 NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
 
-                TemporaryTests.Event_OnRayCast += Internal_OnRayCast;
+                RayCastHook.Event_RayCastHit += Internal_OnRayCast;
             }
             catch (Exception e)
             {
@@ -94,7 +94,7 @@
             }
         }
 
-        private void Internal_OnRayCast(object sender, EventRayCastArgs e)
+        private void Internal_OnRayCast(object sender, RayCastEventArgs e)
         {
             try
             {
