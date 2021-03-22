@@ -42,31 +42,24 @@ using System.Linq;
 using AstroClient.UdonExploits;
 using AstroClient.ButtonShortcut;
 using CheetosConsole;
+using Transmtn;
 #endregion AstroClient Imports
 
 namespace AstroClient
 {
-    public static class BuildInfo
-    {
-        public const string Name = "AstroClient"; // Name of the Mod.  (MUST BE SET)
-        public const string Author = "xAstroBoy"; // Author of the Mod.  (Set as null if none)
-        public const string Company = null; // Company that made the Mod.  (Set as null if none)
-        public const string Version = "1.0.0"; // Version of the Mod.  (MUST BE SET)
-        public const string DownloadLink = null; // Download Link for the Mod.  (Set as null if none)
-    }
-
     [Serializable]
     public class Main : MelonMod
     {
-
-
         // Thanks Kirai <3
         // LETS TEST
 
+        public static event EventHandler Start;
 
+        public static event EventHandler Update;
 
+        //public EventHandler<EventArgs> PlayerJoin;
 
-
+        //public EventHandler<EventArgs> PlayerLeave;
 
         public override void OnApplicationStart()
         {
@@ -87,7 +80,31 @@ namespace AstroClient
             HookAvatarManager();
 
             //ItemTweakerMain.InitActionMenu();
+
+            ScanMods(); // Rename this, it's dumb
+            Start?.Invoke(this, new EventArgs());
         }
+
+        public static void ScanMods()
+        {
+            Console.WriteLine("ModManager: Scanning for mods..");
+            string[] folders = Directory.GetDirectories(@"Mods\");
+
+            var assembly = Assembly.GetExecutingAssembly();
+            var types = assembly.GetTypes();
+
+            foreach (var type in types)
+            {
+                var btype = type.BaseType;
+
+                if (btype != null && btype.Equals(typeof(CheetoComponent)))
+                {
+                    CheetoComponent component = assembly.CreateInstance(type.ToString(), true) as CheetoComponent;
+                    //component.Start(); Add this later
+                }
+            }
+        }
+
 
         public IEnumerator HookNetworkManager()
         {
@@ -168,9 +185,6 @@ namespace AstroClient
             }
         }
 
-
-
-
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
             switch (buildIndex)
@@ -185,7 +199,6 @@ namespace AstroClient
             }
         }
 
-
         public void OnPlayerJoined(Player player)
         {
             LewdVRChat.OnPlayerJoined(player);
@@ -195,9 +208,6 @@ namespace AstroClient
 
         }
 
-
-
-
         public void OnPlayerLeft(Player player)
         {
             ObjectMiscOptions.OnPlayerLeft(player);
@@ -205,9 +215,11 @@ namespace AstroClient
             SingleTagsUtils.onPlayerLeft(player);
         }
 
-
         public override void OnUpdate()
         {
+            Update?.Invoke(this, new EventArgs());
+
+            // Move these to new CheetoComponents
             LocalPlayerUtils.OnUpdate();
             EmojiUtils.OnUpdate();
             LewdVRChat.OnUpdate();
@@ -218,11 +230,8 @@ namespace AstroClient
             Movement.OnUpdate();
             HubButtonsControl.OnUpdate();
 
-
-
             // RANDOM SHIT
             VRChatObjects.OnUpdate();
-
         }
 
         public override void OnLateUpdate()
@@ -316,10 +325,6 @@ namespace AstroClient
 
         }
 
-
-
-
-
         public static void InitMainsButtons(float x, float y, bool btnHalf)
         {
             QMNestedButton AstroClient = new QMNestedButton("ShortcutMenu", x, y, "AstroClient Menu", "AstroClient Menu", null, null, null, null, btnHalf);  // Menu Main Button
@@ -339,8 +344,6 @@ namespace AstroClient
         }
 
         public static QMSingleToggleButton ToggleDebugInfo;
-
-
 
         public static void TriggerSubMenu(QMNestedButton main, float x, float y, bool btnHalf)
         {
@@ -383,7 +386,6 @@ namespace AstroClient
                 }
             });
         }
-
 
         private static void OnFadeToEvent()
         {
