@@ -32,7 +32,7 @@ namespace AstroClient.Startup.Hooks
             {
                 harmony = HarmonyInstance.Create(BuildInfo.Name + " AvatarManagerHook");
             }
-            harmony.Patch(typeof(VRCAvatarManager).GetMethod("Awake", BindingFlags.Instance | BindingFlags.Public), null, new HarmonyMethod(typeof(Main).GetMethod("OnVRCAMAwake", BindingFlags.Static | BindingFlags.NonPublic)));
+            harmony.Patch(typeof(VRCAvatarManager).GetMethod("Awake", BindingFlags.Instance | BindingFlags.Public), null, new HarmonyMethod(typeof(AvatarManagerHook).GetMethod(nameof(OnVRCAMAwake), BindingFlags.Static | BindingFlags.NonPublic)));
             ModConsole.Log("Hooked VRCAvatarManager");
         }
 

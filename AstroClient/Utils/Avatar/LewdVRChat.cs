@@ -36,8 +36,6 @@ namespace AstroClient
         {
             if (avatar != null && DescriptorObj != null)
             {
-                Event_OnAvatarSpawn?.Invoke(null, new OnAvatarSpawnArgs(avatar, DescriptorObj, state));
-
                 GameObjHelper.CheckTransform(avatar.transform);
 
                 if (GameObjHelper._GameObjects == null)
@@ -52,7 +50,7 @@ namespace AstroClient
 
                 if (!Bools.DisableNSFWMenu)
                 {
-                    LewdVRChat.AvatarLoaded(avatar.transform, avatar.transform.root.GetComponentInChildren<Player>());
+                    AvatarLoaded(avatar.transform, avatar.transform.root.GetComponentInChildren<Player>());
                 }
             }
         }

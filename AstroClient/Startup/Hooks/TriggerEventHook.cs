@@ -46,13 +46,13 @@ namespace AstroClient.Startup.Hooks
                 if (x.Type == XrefType.Method && x.TryResolve() != null && x.TryResolve().DeclaringType == typeof(VRC_EventDispatcherRFC))
                 {
                     var methodToPatch = (MethodInfo)x.TryResolve();
-                    harmony.Patch(methodToPatch, new HarmonyMethod(typeof(Main).GetMethod("TriggerEventHook", BindingFlags.Public | BindingFlags.Static)));
+                    harmony.Patch(methodToPatch, new HarmonyMethod(typeof(TriggerEventHook).GetMethod(nameof(TriggerEventHookEvent), BindingFlags.Public | BindingFlags.Static)));
                     break;
                 }
             }
         }
 
-        public static bool TriggerEventHookEvemt(VRC_EventHandler __0, VRC_EventHandler.VrcEvent __1, VRC_EventHandler.VrcBroadcastType __2, int __3, float __4)
+        public static bool TriggerEventHookEvent(VRC_EventHandler __0, VRC_EventHandler.VrcEvent __1, VRC_EventHandler.VrcBroadcastType __2, int __3, float __4)
         {
             try
             {

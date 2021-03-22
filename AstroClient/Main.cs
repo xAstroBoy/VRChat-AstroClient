@@ -52,7 +52,7 @@ namespace AstroClient
     public class Main : MelonMod
     {
 
-        public static event EventHandler Event_OnApplicationStart;
+        //public static event EventHandler Event_OnApplicationStart;
 
         public static event EventHandler Event_OnUpdate;
 
@@ -80,12 +80,7 @@ namespace AstroClient
 
              
             InitializeOverridables();
-            Event_OnApplicationStart?.Invoke(this, new EventArgs());
-
-
-            HookAvatarManager();
-
-
+            //Event_OnApplicationStart?.Invoke(this, new EventArgs());
         }
 
         public static void InitializeOverridables()

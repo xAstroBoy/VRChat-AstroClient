@@ -36,7 +36,7 @@ namespace AstroClient.Startup.Hooks
                             typeof(VRCPlayer).GetMethod(
                                 nameof(VRCPlayer
                                     .SpawnEmojiRPC))).GetValue(null);
-                    MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), typeof(Main).GetMethod(nameof(SpawnEmojiRPCPatch), BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer());
+                    MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), typeof(SpawnEmojiRPCHook).GetMethod(nameof(SpawnEmojiRPCPatch), BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer());
                     _SpawnEmojiRPCDelegate = Marshal.GetDelegateForFunctionPointer<SpawnEmojiRPCDelegate>(originalMethod);
                     if (_SpawnEmojiRPCDelegate != null)
                     {

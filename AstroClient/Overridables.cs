@@ -20,97 +20,187 @@
 
         public Overridables()
         {
-            if (Instance == null)
+            try
             {
-                Instance = this;
+                if (Instance == null)
+                {
+                    Instance = this;
+                }
+
+                // ML Events
+                //Main.Event_OnApplicationStart += Internal_OnApplicationStart;
+                Main.Event_OnUpdate += Internal_OnUpdate;
+                Main.Event_LateUpdate += Internal_OnLateUpdate;
+                Main.Event_VRChat_OnUiManagerInit += Internal_VRChat_OnUiManagerInit;
+
+
+                // PATCHES
+
+
+
+                // HOOKS 
+                OnWorldRevealHook.Event_OnWorldReveal += Internal_OnWorldReveal;
+                SpawnEmojiRPCHook.Event_SpawnEmojiRPC += Internal_SpawnEmojiRPC;
+                TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += Internal_VRC_EventDispatcherRFC_triggerEvent;
+                AvatarManagerHook.Event_OnAvatarSpawn += Internal_OnAvatarSpawn;
+
+                NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
+                NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
             }
-
-            // ML Events
-            Main.Event_OnApplicationStart += Internal_OnApplicationStart;
-            Main.Event_OnUpdate += Internal_OnUpdate;
-            Main.Event_LateUpdate += Internal_OnLateUpdate;
-            Main.Event_VRChat_OnUiManagerInit += Internal_VRChat_OnUiManagerInit;
-            // PATCHES
-
-            // HOOKS 
-            OnWorldRevealHook.Event_OnWorldReveal += Internal_OnWorldReveal;
-            SpawnEmojiRPCHook.Event_SpawnEmojiRPC += Internal_SpawnEmojiRPC;
-            TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += Internal_VRC_EventDispatcherRFC_triggerEvent;
-            AvatarManagerHook.Event_OnAvatarSpawn += Internal_VRC_EventDispatcherRFC_triggerEvent;
-
-            NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
-            NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
+            catch(Exception e)
+            {
+                ModConsole.ErrorExc(e);
+            }
         }
 
         private void Internal_OnApplicationStart(object sender, EventArgs e)
         {
-            OnApplicationStart();
+            try
+            {
+                OnApplicationStart();
+            }
+            catch (Exception Exc)
+            {
+                ModConsole.ErrorExc(Exc);
+            }
         }
 
         private void Internal_VRChat_OnUiManagerInit(object sender, EventArgs e)
         {
-            VRChat_OnUiManagerInit();
+            try
+            {
+                VRChat_OnUiManagerInit();
+            }
+            catch (Exception Exc)
+            {
+                ModConsole.ErrorExc(Exc);
+            }
         }
 
         private void Internal_OnUpdate(object sender, EventArgs e)
         {
-            OnUpdate();
+            try
+            {
+                OnUpdate();
+            }
+            catch (Exception Exc)
+            {
+                ModConsole.ErrorExc(Exc);
+            }
         }
 
         private void Internal_OnLateUpdate(object sender, EventArgs e)
         {
-            OnLateUpdate();
+            try
+            {
+                OnLateUpdate();
+            }
+            catch (Exception Exc)
+            {
+                ModConsole.ErrorExc(Exc);
+            }
         }
 
         private void internal_OnLevelLoaded(object sender, EventArgs e)
         {
+            try
+            {
+                OrbitManager.OnLevelLoad();
+                PlayerWatcherManager.OnLevelLoad();
+                PlayerAttackerManager.OnLevelLoad();
+                RocketManager.OnLevelLoad();
+                CrazyObjectManager.OnLevelLoad();
+                ItemInflaterManager.OnLevelLoad();
+                ObjectSpinnerManager.OnLevelLoad();
+
+
+                OnLevelLoaded();
+            }
+            catch (Exception Exc)
+            {
+                ModConsole.ErrorExc(Exc);
+            }
 
             // TODO : REMOVE AND MERGE INTO THE COMPONENT DIRECTLY
 
-            OrbitManager.OnLevelLoad();
-            PlayerWatcherManager.OnLevelLoad();
-            PlayerAttackerManager.OnLevelLoad();
-            RocketManager.OnLevelLoad();
-            CrazyObjectManager.OnLevelLoad();
-            ItemInflaterManager.OnLevelLoad();
-            ObjectSpinnerManager.OnLevelLoad();
 
-
-            OnLevelLoaded();
         }
 
         private void Internal_OnPlayerLeft(object sender, PlayerEventArgs e)
         {
-            OnPlayerLeft(e.player);
+            try
+            {
+                OnPlayerLeft(e.player);
+            }
+            catch (Exception Exc)
+            {
+                ModConsole.ErrorExc(Exc);
+            }
         }
 
         private void Internal_OnPlayerJoined(object sender, PlayerEventArgs e)
         {
-            OnPlayerJoined(e.player);
+            try
+            {
+                OnPlayerJoined(e.player);
+            }
+            catch (Exception Exc)
+            {
+                ModConsole.ErrorExc(Exc);
+            }
         }
 
         private void Internal_SpawnEmojiRPC(object sender, SpawnEmojiArgs e)
         {
-            SpawnEmojiRPC(e.player, e.Emoji);
+            try
+            {
+                SpawnEmojiRPC(e.player, e.Emoji);
+            }
+            catch (Exception Exc)
+            {
+                ModConsole.ErrorExc(Exc);
+            }
         }
 
 
         private void Internal_OnWorldReveal(object sender, EventArgs e)
         {
-            OnWorldReveal();
-            ModConsole.Log("You entered this world : " + WorldUtils.GetWorldName(), System.Drawing.Color.Goldenrod);
-            ModConsole.Log("World ID : " + WorldUtils.GetWorldID(), System.Drawing.Color.Goldenrod);
-            ModConsole.Log("World Asset URL : " + WorldUtils.GetWorldAssetURL(), System.Drawing.Color.Goldenrod);
+            try
+            {
+                OnWorldReveal();
+                ModConsole.Log("You entered this world : " + WorldUtils.GetWorldName(), System.Drawing.Color.Goldenrod);
+                ModConsole.Log("World ID : " + WorldUtils.GetWorldID(), System.Drawing.Color.Goldenrod);
+                ModConsole.Log("World Asset URL : " + WorldUtils.GetWorldAssetURL(), System.Drawing.Color.Goldenrod);
+            }
+            catch (Exception Exc)
+            {
+                ModConsole.ErrorExc(Exc);
+            }
+
         }
 
         private void Internal_VRC_EventDispatcherRFC_triggerEvent(object sender, VRC_EventDispatcherRFC_TriggerEventArgs e)
         {
-            VRC_EventDispatcherRFC_triggerEvent(e.VRC_EventHandler, e.VrcEvent, e.VrcBroadcastType, e.UnknownInt, e.UnknownFloat);
+            try
+            {
+                VRC_EventDispatcherRFC_triggerEvent(e.VRC_EventHandler, e.VrcEvent, e.VrcBroadcastType, e.UnknownInt, e.UnknownFloat);
+            }
+            catch (Exception Exc)
+            {
+                ModConsole.ErrorExc(Exc);
+            }
         }
 
         private void Internal_OnAvatarSpawn(object sender, OnAvatarSpawnArgs e)
         {
-            OnAvatarSpawn(e.Avatar, e.VRC_AvatarDescriptor, e.state);
+            try
+            {
+                OnAvatarSpawn(e.Avatar, e.VRC_AvatarDescriptor, e.state);
+            }
+            catch (Exception Exc)
+            {
+                ModConsole.ErrorExc(Exc);
+            }
         }
 
 
