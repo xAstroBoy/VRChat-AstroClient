@@ -59,7 +59,7 @@ namespace AstroClient.Startup.Hooks
                     if (fadeType.Equals("BlackFade") && duration.Equals(0f) &&
                         RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
                     {
-                        MelonCoroutines.Start(StartOnWorldRevealEvent());
+                        Task.Run(() => { Event_OnWorldReveal?.Invoke(null, new EventArgs()); });
                     }
                 }
             }
@@ -72,15 +72,5 @@ namespace AstroClient.Startup.Hooks
                 _fadeToDelegate(thisPtr, fadeTypePtr, duration, action);
             }
         }
-
-
-        private static IEnumerator StartOnWorldRevealEvent()
-        {
-            Event_OnWorldReveal?.Invoke(null, new EventArgs());
-            yield break;
-        }
-
-
-
     }
 }

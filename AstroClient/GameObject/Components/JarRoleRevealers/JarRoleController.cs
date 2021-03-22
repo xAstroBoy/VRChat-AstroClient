@@ -172,7 +172,7 @@ namespace AstroClient
         }
 
 
-        public static bool DebugMsg = false;
+        public static bool DebugMsg = true;
         public static void Debug(string msg)
         {
             if(DebugMsg)

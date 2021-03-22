@@ -44,6 +44,7 @@ using AstroClient.ButtonShortcut;
 using CheetosConsole;
 using Transmtn;
 using Mono.CSharp;
+using System.Threading.Tasks;
 #endregion AstroClient Imports
 
 namespace AstroClient
@@ -111,7 +112,11 @@ namespace AstroClient
                     break;
 
                 default:
-                    MelonCoroutines.Start(OnLevelLoadEvents());
+                    Task.Run(() => { Event_OnLevelLoaded?.Invoke(this, new EventArgs()); });
+                    if (ToggleDebugInfo != null)
+                    {
+                        ToggleDebugInfo.setToggleState(Bools.isDebugMode);
+                    }
                     break;
             }
         }
@@ -128,15 +133,6 @@ namespace AstroClient
             Event_LateUpdate?.Invoke(this, new EventArgs());
         }
 
-        private static IEnumerator OnLevelLoadEvents()
-        {
-            Event_OnLevelLoaded?.Invoke(null, new EventArgs());
-            if (ToggleDebugInfo != null)
-            {
-                ToggleDebugInfo.setToggleState(Bools.isDebugMode);
-            }
-            yield break;
-        }
 
 
 

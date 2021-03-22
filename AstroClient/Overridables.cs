@@ -106,8 +106,6 @@
             try
             {
 
-
-
                 OnLevelLoaded();
             }
             catch (Exception Exc)
