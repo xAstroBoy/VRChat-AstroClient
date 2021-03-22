@@ -112,7 +112,8 @@ namespace AstroClient
                     break;
 
                 default:
-                    Task.Run(() => { Event_OnLevelLoaded?.Invoke(this, new EventArgs()); });
+                    //Task.Run(() => {  });
+                    Event_OnLevelLoaded?.Invoke(this, new EventArgs());
                     if (ToggleDebugInfo != null)
                     {
                         ToggleDebugInfo.setToggleState(Bools.isDebugMode);

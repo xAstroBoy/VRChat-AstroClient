@@ -59,7 +59,8 @@ namespace AstroClient.Startup.Hooks
                     if (fadeType.Equals("BlackFade") && duration.Equals(0f) &&
                         RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
                     {
-                        Task.Run(() => { Event_OnWorldReveal?.Invoke(null, new EventArgs()); });
+                        Event_OnWorldReveal?.Invoke(null, new EventArgs());
+                        //Task.Run(() => {  });
                     }
                 }
             }
