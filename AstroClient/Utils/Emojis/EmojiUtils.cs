@@ -18,7 +18,7 @@ using AstroClient.ConsoleUtils;
 
 namespace AstroClient
 {
-    public class EmojiUtils
+    public class EmojiUtils : Overridables
     {
         public static void SpawnlastEmoji()
         {
@@ -80,7 +80,7 @@ namespace AstroClient
             SpawnLocalEmoji(player, emoji);
         }
 
-        public static void OnUpdate()
+        public override void OnUpdate()
         {
             if (IsVRChatCooldownActive)
             {

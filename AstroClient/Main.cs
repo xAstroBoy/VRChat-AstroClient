@@ -54,17 +54,22 @@ namespace AstroClient
         // Thanks Kirai <3
         // LETS TEST
 
-        public static event EventHandler Start;
+        public static event EventHandler Event_OnApplicationStart;
 
-        public static event EventHandler Update;
+        public static event EventHandler Event_OnUpdate;
 
-        public static event EventHandler LateUpdate;
+        public static event EventHandler Event_LateUpdate;
 
-        public static EventHandler<EventArgs> PlayerJoin;
+        public static event EventHandler Event_OnWorldReveal;
 
-        public static EventHandler<EventArgs> PlayerLeft;
 
-        public static EventHandler<EventArgs> LevelLoaded;
+
+        public static EventHandler<EventArgs> Event_OnPlayerJoin;
+
+        public static EventHandler<EventArgs> Event_OnPlayerLeft;
+
+        public static EventHandler<EventArgs> Event_OnLevelLoaded;
+
 
         public override void OnApplicationStart()
         {
@@ -77,7 +82,11 @@ namespace AstroClient
                 ModConsole.Error("Failed To generate Gradient, the Embeded file doesn't exist!");
                 ModConsole.ErrorExc(e);
             }
-            ComponentHelper.RegisterComponents();
+
+             
+            InitalizeEventOverridables(); // Rename this, it's dumb x2
+            Event_OnApplicationStart?.Invoke(this, new EventArgs());
+
             HookFadeTo();
             HookSpawnEmojiRPC();
             MelonCoroutines.Start(HookNetworkManager());
@@ -86,20 +95,18 @@ namespace AstroClient
 
             //ItemTweakerMain.InitActionMenu();
 
-            ScanMods(); // Rename this, it's dumb
-            Start?.Invoke(this, new EventArgs());
         }
 
-        public static void ScanMods()
+        public static void InitalizeEventOverridables()
         {
             foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
             {
                 var btype = type.BaseType;
 
-                if (btype != null && btype.Equals(typeof(CheetoComponent)))
+                if (btype != null && btype.Equals(typeof(Overridables)))
                 {
-                    CheetoComponent component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as CheetoComponent;
-                    component.Start();
+                    Overridables component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as Overridables;
+                    component.OnApplicationStart();
                 }
             }
         }
@@ -193,7 +200,8 @@ namespace AstroClient
                     break;
 
                 default:
-                    MelonCoroutines.Start(OnLevelLoadEvents());
+                    MelonCoroutines.Start(Event_OnLevelLoaded?.Invoke(null, new EventArgs());
+);
                     break;
             }
         }
@@ -204,7 +212,7 @@ namespace AstroClient
             JarRoleController.OnPlayerJoined(player);
             // DEMO
 
-            PlayerJoin?.Invoke(this, new PlayerEventArgs(player));
+            Event_OnPlayerJoin?.Invoke(this, new PlayerEventArgs(player));
         }
 
         public void OnPlayerLeft(Player player)
@@ -213,37 +221,17 @@ namespace AstroClient
             LewdVRChat.OnPlayerLeft(player);
             SingleTagsUtils.onPlayerLeft(player);
 
-            PlayerLeft?.Invoke(this, new PlayerEventArgs(player));
+            Event_OnPlayerLeft?.Invoke(this, new PlayerEventArgs(player));
         }
 
         public override void OnUpdate()
         {
-            Update?.Invoke(this, new EventArgs());
-
-            // Move these to new CheetoComponents
-
-            //LocalPlayerUtils.OnUpdate();
-            EmojiUtils.OnUpdate();
-            LewdVRChat.OnUpdate();
-            QuickMenuUtils.OnUpdate();
-            ComponentHelper.OnUpdate();
-            ColliderDisplay.OnUpdate();
-            EmojiUtils.OnUpdate();
-            Movement.OnUpdate();
-            HubButtonsControl.OnUpdate();
-
-            // RANDOM SHIT
-            VRChatObjects.OnUpdate();
+            Event_OnUpdate?.Invoke(this, new EventArgs());
         }
 
         public override void OnLateUpdate()
         {
-            if (!Bools.DisableNSFWMenu)
-            {
-                LewdVRChat.OnLateUpdate();
-            }
-
-            LateUpdate?.Invoke(this, new EventArgs());
+            Event_LateUpdate?.Invoke(this, new EventArgs());
         }
 
         private static IEnumerator OnWorldReveal()
@@ -266,7 +254,6 @@ namespace AstroClient
 
         private static IEnumerator OnLevelLoadEvents()
         {
-            LevelLoaded?.Invoke(null, new EventArgs());
 
             // Change these later
             SingleTagsUtils.OnLevelLoad();
@@ -309,11 +296,7 @@ namespace AstroClient
             yield break;
         }
 
-        private IEnumerator Init()
-        {
-            Patching.InitPatch();
-            yield break;
-        }
+
 
         public override void VRChat_OnUiManagerInit()
         {

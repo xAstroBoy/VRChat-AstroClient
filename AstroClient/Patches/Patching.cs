@@ -33,7 +33,7 @@ using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
 
 namespace AstroClient.BetterPatch
 {
-    internal class Patching
+    internal class Patching : Overridables
     {
         public static HarmonyInstance Instance = HarmonyInstance.Create("AstroClientPatches");
 
@@ -100,6 +100,12 @@ namespace AstroClient.BetterPatch
             }
         }
 
+
+        private IEnumerator Init()
+        {
+            Patching.InitPatch();
+            yield break;
+        }
 
         public static void InitPatch()
         {

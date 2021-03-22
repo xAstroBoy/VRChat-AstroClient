@@ -28,6 +28,10 @@ namespace AstroClient
 {
     public class LewdVRChat
     {
+
+        // TODO :  REMAKE THIS TRASH
+
+
         public static void AvatarLoaded(Transform avatar, Player player)
         {
             if (Bools.DisableNSFWMenu)
@@ -327,20 +331,7 @@ namespace AstroClient
             }
         }
 
-        public static void OnLateUpdate()
-        {
-        }
 
-
-        public static void OnUpdate()
-        {
-        }
-
-
-        public static void MakePlayerAvatarInteractable(AnalyzedAvatar playeravi)
-        {
-
-        }
 
     
         public static string GetDisplayName(Player player)

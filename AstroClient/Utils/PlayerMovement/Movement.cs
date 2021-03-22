@@ -14,7 +14,7 @@ using static AstroClient.LocalPlayerUtils;
 
 namespace AstroClient.AstroUtils.PlayerMovement
 {
-    public class Movement
+    public class Movement : Overridables
     {
         public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
@@ -30,7 +30,7 @@ namespace AstroClient.AstroUtils.PlayerMovement
 
 
 
-        public static void OnUpdate()
+        public override void OnUpdate()
         {
             CheckForJumpUpdates();
             FixJumpMissing();

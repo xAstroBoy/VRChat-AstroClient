@@ -9,9 +9,9 @@ using UnityEngine;
 
 namespace AstroClient.Variables
 {
-    public class VRChatObjects
+    public class VRChatObjects : Overridables
     {
-        public static void OnUpdate()
+        public override void OnUpdate()
         {
             if (Bools.DisableBlackScreenFade)
             {

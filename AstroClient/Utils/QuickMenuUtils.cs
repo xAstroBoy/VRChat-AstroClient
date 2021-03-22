@@ -3,7 +3,7 @@ using VRC.Core;
 
 namespace AstroClient
 {
-    public class QuickMenuUtils
+    public class QuickMenuUtils : Overridables
     {
         public static APIUser GetSelectedUser()
         {
@@ -24,7 +24,7 @@ namespace AstroClient
             HasQuickMenuBoxColliderCalled = true;
         }
 
-        public static void OnUpdate()
+        public override void OnUpdate()
         {
             if (HasQuickMenuBoxColliderCalled)
             {

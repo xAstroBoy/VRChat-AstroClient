@@ -16,7 +16,7 @@ using AstroClient.Variables;
 namespace AstroClient.World.Hub
 
 {
-    public class HubButtonsControl
+    public class HubButtonsControl : Overridables
     {
         public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
@@ -77,7 +77,7 @@ namespace AstroClient.World.Hub
             }
         }
 
-        public static void OnUpdate()
+        public override void OnUpdate()
         {
             if (isHubWorldLoaded)
             {

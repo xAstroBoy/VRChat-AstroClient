@@ -8,13 +8,13 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace AstroClient
 {
-    public class LocalPlayerUtils : CheetoComponent
+    public class LocalPlayerUtils : Overridables
     {
         public LocalPlayerUtils() : base()
         {
         }
 
-        public override void Update()
+        public override void OnUpdate()
         {
             if (!FreezePlayerOnQMOpen)
             {

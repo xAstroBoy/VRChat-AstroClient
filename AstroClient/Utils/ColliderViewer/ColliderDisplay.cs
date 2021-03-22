@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 namespace AstroClient
 {
-    public class ColliderDisplay
+    public class ColliderDisplay : Overridables
     {
         private static string ShaderName
         {
@@ -169,7 +169,7 @@ namespace AstroClient
             }
         }
 
-        public static void OnUpdate()
+        public override void OnUpdate()
         {
             ColliderDisplay.Update<SphereCollider, ColliderDisplay.Sphere>(ColliderDisplay.SphereCache, ColliderDisplay.SphereColliders);
             ColliderDisplay.Update<BoxCollider, ColliderDisplay.Cube>(ColliderDisplay.CubeCache, ColliderDisplay.BoxColliders);
@@ -205,7 +205,7 @@ namespace AstroClient
             ColliderDisplay.Regenerate<SphereCollider, ColliderDisplay.Sphere>(ColliderDisplay.SphereCache, count, ColliderDisplay.SphereColliders);
             ColliderDisplay.Regenerate<BoxCollider, ColliderDisplay.Cube>(ColliderDisplay.CubeCache, count2, ColliderDisplay.BoxColliders);
             ColliderDisplay.Regenerate<CapsuleCollider, ColliderDisplay.Capsule>(ColliderDisplay.CapsuleCache, count3, ColliderDisplay.CapsuleColliders);
-            ModConsole.Log(string.Format("No longer showing {0} sphere colliders, {1} box colliders, and {2} capsule colliders", count, count2, count3));
+            ModConsole.DebugLog(string.Format("No longer showing {0} sphere colliders, {1} box colliders, and {2} capsule colliders", count, count2, count3));
         }
 
         public static readonly HashSet<int> MyRenderers = new HashSet<int>();
