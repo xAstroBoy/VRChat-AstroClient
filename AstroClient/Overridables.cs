@@ -37,6 +37,8 @@
 
                 NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
                 NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
+
+                TemporaryTests.Event_OnRayCast += Internal_OnRayCast;
             }
             catch (Exception e)
             {
@@ -81,6 +83,18 @@
         }
 
         private void Internal_OnLateUpdate(object sender, EventArgs e)
+        {
+            try
+            {
+                OnLateUpdate();
+            }
+            catch (Exception Exc)
+            {
+                ModConsole.ErrorExc(Exc);
+            }
+        }
+
+        private void Internal_OnRayCast(object sender, EventRayCastArgs e)
         {
             try
             {
@@ -191,6 +205,10 @@
         }
 
         public virtual void OnLateUpdate()
+        {
+        }
+
+        public virtual void OnRayCast(RaycastHit hit)
         {
         }
 

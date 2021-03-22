@@ -12,6 +12,9 @@ namespace AstroClient.variables
         {
             get
             {
+#if DEBUG
+                return true;
+#endif
                 return _isDebugMode;
             }
             set

@@ -10,10 +10,6 @@
     {
         public List<Assembly> assembllies { get; private set; } = new List<Assembly>();
 
-        public AssemblySpy() : base()
-        {
-        }
-
         public override void VRChat_OnUiManagerInit()
         {
             // Eventually define debug like this probably.
