@@ -1,7 +1,4 @@
-
-.vs/AstroClient/v16/.suo
-AstroClient/obj/Release/AstroClient.csproj.FileListAbsolute.txt
+AstroClient/obj/*
+AstroClient/bin/*
+.vs/*
 *.cache
-AstroClient/obj/Release/AstroClient.csprojAssemblyReference.cache
-.vs/Supercharger/_/DTabsHistory.dat
-.vs/Supercharger/_/DTabsHistory.dat
