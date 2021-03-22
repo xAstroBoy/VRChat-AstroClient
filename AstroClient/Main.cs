@@ -87,19 +87,13 @@ namespace AstroClient
 
         public static void ScanMods()
         {
-            Console.WriteLine("ModManager: Scanning for mods..");
-            string[] folders = Directory.GetDirectories(@"Mods\");
-
-            var assembly = Assembly.GetExecutingAssembly();
-            var types = assembly.GetTypes();
-
-            foreach (var type in types)
+            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
             {
                 var btype = type.BaseType;
 
                 if (btype != null && btype.Equals(typeof(CheetoComponent)))
                 {
-                    CheetoComponent component = assembly.CreateInstance(type.ToString(), true) as CheetoComponent;
+                    CheetoComponent component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as CheetoComponent;
                     component.Start();
                 }
             }

@@ -14,6 +14,11 @@
             Main.Update += OnUpdate;
         }
 
+        private void OnStart(object sender, EventArgs e)
+        {
+            Start();
+        }
+
         private void OnUpdate(object sender, EventArgs e)
         {
             Update();
