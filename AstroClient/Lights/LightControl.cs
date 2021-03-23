@@ -10,6 +10,12 @@ using AstroClient.ConsoleUtils;
 using static AstroClient.variables.CustomLists;
 using static AstroClient.variables.GlobalLists;
 using AstroClient.extensions;
+using System.IO;
+using System.Reflection;
+using System.Linq;
+using UnhollowerRuntimeLib;
+using System.Threading.Tasks;
+using System.Collections;
 
 #endregion AstroClient Imports
 
@@ -334,6 +340,78 @@ namespace AstroClient.WorldLights
             }
         }
 
+
+        private static AssetBundle MesaNebula;
+
+
+
+        public override void OnApplicationStart()
+        {
+            MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
+        }
+        public static IEnumerator FindAndLoadBundle()
+        {
+            if (MesaNebula == null)
+            {
+                var BundlePath = Path.Combine(Environment.CurrentDirectory, $"AstroBundles\\mesanebulabundle");
+                if (File.Exists(BundlePath))
+                {
+                    ModConsole.Log("Found Custom Skybox : " + BundlePath);
+                    var stream = File.ReadAllBytes(BundlePath);
+
+                    MesaNebula = AssetBundle.LoadFromMemory(stream.ToArray(), 0);
+                    MesaNebula.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                    //foreach (var assetname in MesaNebula.GetAllAssetNames())
+                    //{
+                    //    ModConsole.Log("Found assetname : " + assetname);
+                    //}
+                    //ModConsole.Error("Failed to Load Material, the path is invalid or it cannot find it.");
+                    //foreach (var scenepath in MesaNebula.GetAllScenePaths())
+                    //{
+                    //    ModConsole.Log("Found scenepath: " + scenepath);
+                    //}
+                    
+                }
+                else
+                {
+                    ModConsole.Error("Failed to Find Mesa Bundle in path " + BundlePath);
+                }
+            }
+            yield return null;
+        }
+
+        public static void ChangeBtnToSpace()
+        {
+
+            if (MesaNebula != null)
+            {
+                try
+                {
+                    var material = MesaNebula.LoadAsset_Internal("assets/mesanebula/nebula_mesa_4k.mat", Il2CppType.Of<Material>()).Cast<Material>();
+                    if (material != null)
+                    {
+                        RenderSettings.skybox = material;
+                    }
+                    else
+                    {
+                        ModConsole.Error("Failed to Load Material, the path is invalid or it cannot find it.");
+                        foreach (var intern in MesaNebula.GetAllAssetNames())
+                        {
+                            ModConsole.Log("Found Intern: " + intern);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    ModConsole.ErrorExc(e);
+                    ModConsole.Error("Failed to Load Material, the path is invalid or it cannot find it.");
+
+                }
+            }
+        }
+
+
+
         public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var temp = new QMNestedButton(menu, x, y, "Light Menu", "Control Avatar & World Lights!", null, null, null, null, btnHalf);
@@ -341,6 +419,8 @@ namespace AstroClient.WorldLights
             ModifyRenderOptions = new QMToggleButton(temp, 2, 0, "Render Fullbright ON", new Action(SetRenderSettings), "Render Fullbright OFF", new Action(RestoreRenderSettings), "Tweaks Level RenderSettings", null, null, null, false);
             ToggleLightmaps = new QMToggleButton(temp, 3, 0, "Baked Lightings ON", new Action(ToggleLightMaps), "Baked Lightings OFF", new Action(ToggleLightMaps), "Toggles Lightmaps (baked lightings)", null, null, null, false);
             FogSwitch = new QMToggleButton(temp, 4, 0, "Fog ON", new Action(ToggleFog), "Fog OFF", new Action(ToggleFog), "Toggles Fog", null, null, null, false);
+            new QMSingleButton(temp, 1, 1, "Change Skybox To With Space", new Action(() => { ChangeBtnToSpace();  }), "Set a Visible space image as skybox", null, null, false);
+
         }
 
         public static Light newSun;
