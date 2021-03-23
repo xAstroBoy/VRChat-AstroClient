@@ -1115,6 +1115,9 @@ namespace AstroClient.extensions
             return obj.HasValue;
         }
 
+
+
+
         public static void AddString(this List<string> list, string text)
         {
             if (list != null && !string.IsNullOrEmpty((text)))

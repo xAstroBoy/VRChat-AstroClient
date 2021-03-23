@@ -122,6 +122,7 @@
     <Compile Include="GameObject\Editor\ESP\GameObjectESP.cs" />
     <Compile Include="Patches\Patching.cs" />
     <Compile Include="EventArgs\PlayerEventArgs.cs" />
+    <Compile Include="Skyboxes\SkyboxEditor.cs" />
     <Compile Include="Startup\Buttons\RandomSubmenus.cs" />
     <Compile Include="Startup\Buttons\WorldPickupsBtn.cs" />
     <Compile Include="Startup\Buttons\QuickMenuBtns.cs" />
