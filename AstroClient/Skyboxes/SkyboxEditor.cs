@@ -45,15 +45,23 @@ namespace AstroClient.Skyboxes
 
         public override void OnWorldReveal()
         {
-            if (MiskExtension.IsInVR())
+            if(!HasLoadedCachedSkyboxes)
             {
-                OriginalSkybox = RenderSettings.skybox;
-                if (!HasLoadedCachedSkyboxes)
+                if (!MiskExtension.IsInVR())
                 {
                     ModConsole.Log("[Skybox Loader ] : This will Probably take awhile...");
                     MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
-                    HasLoadedCachedSkyboxes = true;
                 }
+                else
+                {
+                    ModConsole.Warning("VR Mode Detected, Ignoring Custom Skyboxes Until VR Camera gets fixed.");
+                }
+                HasLoadedCachedSkyboxes = true;
+            }
+            if (MiskExtension.IsInVR())
+            {
+                OriginalSkybox = RenderSettings.skybox;
+               
             }
         }
 
@@ -66,6 +74,7 @@ namespace AstroClient.Skyboxes
         {
             if (Directory.Exists(SkyboxesPath))
             {
+                
                 var files = Directory.GetFiles(SkyboxesPath).ToList();
                 if (files.isNotEmpty())
                 {
@@ -155,10 +164,8 @@ namespace AstroClient.Skyboxes
 
         private static void SetNewSkybox(Material mat)
         {
-            if (!MiskExtension.IsInVR())
-            {
-                RenderSettings.skybox = mat;
-            }
+            RenderSettings.skybox = mat;
+
 
 
             //if (MiskExtension.IsInVR())
