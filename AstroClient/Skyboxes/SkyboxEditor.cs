@@ -152,11 +152,14 @@ namespace AstroClient.Skyboxes
 
         }
 
+        // TODO : FIX WHY THE HELL IN VR IT BREAKS!
 
         private static void SetNewSkybox(Material mat)
         {
-            RenderSettings.skybox = mat;
-
+            if (!MiskExtension.IsInVR())
+            {
+                RenderSettings.skybox = mat;
+            }
 
 
             //if (MiskExtension.IsInVR())

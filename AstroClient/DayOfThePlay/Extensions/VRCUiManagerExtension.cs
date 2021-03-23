@@ -145,8 +145,8 @@ namespace DayClientML2.Utility.Extensions
                     PageUserInfo pageUserInfo = Utils.VRCUiManager.GetMenuContent().GetComponentInChildren<PageUserInfo>();
                     if (pageUserInfo != null)
                     {
-                        pageUserInfo.Method_Private_Boolean_APIUser_0(userapi);
                         pageUserInfo.Method_Private_Boolean_APIUser_PDM_0(userapi);
+                        pageUserInfo.Method_Private_Boolean_APIUser_PDM_1(userapi);
 
                         ModConsole.Log("Refreshed user: " + userapi.id);
                     }
