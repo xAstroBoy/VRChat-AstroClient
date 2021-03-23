@@ -41,28 +41,36 @@ namespace AstroClient.Skyboxes
 
         private static bool HasLoadedCachedSkyboxes = false;
 
+        private readonly static bool SkipVRBlock = false;
+
         private static Material OriginalSkybox;
 
         public override void OnWorldReveal()
         {
             if(!HasLoadedCachedSkyboxes)
             {
-                if (!MiskExtension.IsInVR())
+
+                if (!SkipVRBlock)
+                {
+                    if (!MiskExtension.IsInVR())
+                    {
+                        ModConsole.Log("[Skybox Loader ] : This will Probably take awhile...");
+                        MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
+                    }
+                    else
+                    {
+                        ModConsole.Warning("VR Mode Detected, Ignoring Custom Skyboxes Until VR Camera gets fixed.");
+                    }
+                }
+                else
                 {
                     ModConsole.Log("[Skybox Loader ] : This will Probably take awhile...");
                     MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
                 }
-                else
-                {
-                    ModConsole.Warning("VR Mode Detected, Ignoring Custom Skyboxes Until VR Camera gets fixed.");
-                }
                 HasLoadedCachedSkyboxes = true;
             }
-            if (MiskExtension.IsInVR())
-            {
-                OriginalSkybox = RenderSettings.skybox;
-               
-            }
+            OriginalSkybox = RenderSettings.skybox;
+
         }
 
         public override void OnLevelLoaded()
