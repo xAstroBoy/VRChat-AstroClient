@@ -38,7 +38,6 @@ namespace AstroClient.Skyboxes
         }
 
         public static List<Skyboxes> LoadedSkyboxes = new List<Skyboxes>();
-        public static List<Camera> ActiveCameras = new List<Camera>();
 
         private static bool HasLoadedCachedSkyboxes = false;
 
@@ -46,21 +45,21 @@ namespace AstroClient.Skyboxes
 
         public override void OnWorldReveal()
         {
-            OriginalSkybox = RenderSettings.skybox;
-            if (!HasLoadedCachedSkyboxes)
+            if (MiskExtension.IsInVR())
             {
-                ModConsole.Log("[Skybox Loader ] : This will Probably take awhile...");
-                MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
-                HasLoadedCachedSkyboxes = true;
+                OriginalSkybox = RenderSettings.skybox;
+                if (!HasLoadedCachedSkyboxes)
+                {
+                    ModConsole.Log("[Skybox Loader ] : This will Probably take awhile...");
+                    MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
+                    HasLoadedCachedSkyboxes = true;
+                }
             }
-
-            ActiveCameras = Resources.FindObjectsOfTypeAll<Camera>().ToList();
         }
 
         public override void OnLevelLoaded()
         {
             OriginalSkybox = null;
-            ActiveCameras.Clear();
         }
 
         public static IEnumerator FindAndLoadBundle()
