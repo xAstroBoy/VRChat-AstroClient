@@ -27,7 +27,6 @@ namespace AstroClient.Skyboxes
         {
             public AssetBundle SkyboxBundle { get; set; }
             public string SkyboxName { get; set; }
-
             public string SkyboxMaterialPath { get; set; }
             public Skyboxes(AssetBundle SkyboxBundle, string SkyboxName, string SkyboxMaterialPath)
             {
@@ -41,8 +40,6 @@ namespace AstroClient.Skyboxes
 
         private static bool HasLoadedCachedSkyboxes = false;
 
-        private readonly static bool SkipVRBlock = true;
-
         private static Material OriginalSkybox;
 
         public override void OnWorldReveal()
@@ -50,23 +47,8 @@ namespace AstroClient.Skyboxes
             if(!HasLoadedCachedSkyboxes)
             {
 
-                if (!SkipVRBlock)
-                {
-                    if (!MiskExtension.IsInVR())
-                    {
-                        ModConsole.Log("[Skybox Loader ] : This will Probably take awhile...");
-                        MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
-                    }
-                    else
-                    {
-                        ModConsole.Warning("VR Mode Detected, Ignoring Custom Skyboxes Until VR Camera gets fixed.");
-                    }
-                }
-                else
-                {
-                    ModConsole.Log("[Skybox Loader (VR MODE) ] : This will Probably take awhile...");
-                    MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
-                }
+                ModConsole.Log("[Skybox Loader ] : This will Probably take awhile...");
+                MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
                 HasLoadedCachedSkyboxes = true;
             }
             OriginalSkybox = RenderSettings.skybox;
@@ -76,6 +58,11 @@ namespace AstroClient.Skyboxes
         public override void OnLevelLoaded()
         {
             OriginalSkybox = null;
+        }
+
+        public static bool IsFileAlreadyRegistered(string filename)
+        {
+            return LoadedSkyboxes.Where(x => x.SkyboxName == filename).Any();;
         }
 
         public static IEnumerator FindAndLoadBundle()
@@ -88,37 +75,45 @@ namespace AstroClient.Skyboxes
                 {
                     foreach (var file in files)
                     {
-                        ModConsole.Log("Found Custom Skybox : " + Path.GetFileName(file));
-                        var stream = File.ReadAllBytes(file);
-                        var bundle = AssetBundle.LoadFromMemory(stream.ToArray(), 0);
-                        bundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-                        var materialpath = String.Empty;
-                        foreach (var assetname in bundle.GetAllAssetNames()) 
+                        if (!IsFileAlreadyRegistered(Path.GetFileName(file)))
                         {
-                            ModConsole.DebugLog("Searching for Mat File in path : " + assetname);
-                            if (assetname.ToLower().EndsWith(".mat"))
+                            ModConsole.Log("Found Custom Skybox : " + Path.GetFileName(file));
+                            var stream = File.ReadAllBytes(file);
+                            var bundle = AssetBundle.LoadFromMemory(stream.ToArray(), 0);
+                            bundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+                            var materialpath = String.Empty;
+                            foreach (var assetname in bundle.GetAllAssetNames())
                             {
-                                ModConsole.DebugLog("Found Material File :" + assetname);
-                                materialpath = assetname;
-                                break;
-                            }
-                        }
-                        if (!string.IsNullOrWhiteSpace(materialpath) && !string.IsNullOrEmpty(materialpath))
-                        {
-                            ModConsole.Log($"Parsed Skybox : {Path.GetFileName(file)} Succesfully!");
-                            var cachedskybox = new Skyboxes(bundle, Path.GetFileName(file), materialpath);
-                            if (LoadedSkyboxes != null)
-                            {
-                                if (!LoadedSkyboxes.Contains(cachedskybox))
+                                ModConsole.DebugLog("Searching for Mat File in path : " + assetname);
+                                if (assetname.ToLower().EndsWith(".mat"))
                                 {
-                                    ModConsole.DebugLog($"Saved Skybox in list");
-                                    LoadedSkyboxes.Add(cachedskybox);
+                                    ModConsole.DebugLog("Found Material File :" + assetname);
+                                    materialpath = assetname;
+                                    break;
                                 }
+                            }
+                            if (!string.IsNullOrWhiteSpace(materialpath) && !string.IsNullOrEmpty(materialpath))
+                            {
+                                ModConsole.Log($"Parsed Skybox : {Path.GetFileName(file)} Succesfully!");
+                                var cachedskybox = new Skyboxes(bundle, Path.GetFileName(file), materialpath);
+                                if (LoadedSkyboxes != null)
+                                {
+                                    if (!LoadedSkyboxes.Contains(cachedskybox))
+                                    {
+                                        ModConsole.DebugLog($"Saved Skybox in list");
+                                        LoadedSkyboxes.Add(cachedskybox);
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                ModConsole.Warning($"Failed to parse Skybox : {Path.GetFileName(file)} Succesfully!");
                             }
                         }
                         else
                         {
-                            ModConsole.Warning($"Failed to parse Skybox : {Path.GetFileName(file)} Succesfully!");
+                            ModConsole.Warning("Skipping Registered Skybox :" + Path.GetFileName(file));
+                            continue;
                         }
                     }
                 }
@@ -137,59 +132,12 @@ namespace AstroClient.Skyboxes
         }
 
 
-        public static void ClearFlagsInVRCameras()
-        {
-            //VRCVrCamera camera = Utils.VRCVrCamera;
-            //var type = camera.GetIl2CppType();
-            //if (type == Il2CppType.Of<VRCVrCameraSteam>())
-            //{
-            //    VRCVrCameraSteam steam = camera.Cast<VRCVrCameraSteam>();
-            //    Transform transform1 = steam.field_Private_Transform_0;
-            //    Transform transform2 = steam.field_Private_Transform_1;
-            //    if (transform1.name == "Camera (eye)")
-            //    {
-            //        var eyecam = transform1.gameObject.GetComponentInChildren<Camera>();
-            //        if (eyecam != null)
-            //        {
-            //            ModConsole.Log("Found a Eye 1 camera, Setting flag.");
-            //            eyecam.clearFlags = CameraClearFlags.Skybox;
-            //        }
-            //    }
-            //    if (transform2.name == "Camera (eye)")
-            //    {
-            //        var eyecam = transform1.gameObject.GetComponentInChildren<Camera>();
-            //        if (eyecam != null)
-            //        {
-            //            ModConsole.Log("Found a Eye 2 camera, Setting flag.");
-            //            eyecam.clearFlags = CameraClearFlags.Skybox;
-            //        }
-            //    }
-            //}
-
-        }
-
-        // TODO : FIX WHY THE HELL IN VR IT BREAKS!
-
         private static void SetNewSkybox(Material mat)
         {
             RenderSettings.skybox = mat;
-
-
-
-            //if (MiskExtension.IsInVR())
-            //{
-            //    ModConsole.DebugWarning("Detected VR Device, running camera fix.");
-            //    foreach (var camera in ActiveCameras)
-            //    {
-            //        if (camera.name.ToLower() == "camera (eye)")
-            //        {
-            //            int mask = camera.cullingMask;
-            //            mask = (mask | ~(1 << LayerMask.NameToLayer("Transparent")));
-            //            camera.cullingMask = mask;
-            //        }
-            //    }
-            //}
         }
+
+
 
         public static void CustomSkyboxesMenu(QMNestedButton main, float x, float y, bool btnHalf)
         {
@@ -203,10 +151,10 @@ namespace AstroClient.Skyboxes
             {
                 SetNewSkybox(OriginalSkybox);
             }, "", null, null, true);
-            new QMSingleButton(menu, 0, 0f, "Fix Camera Skybox", delegate
+            new QMSingleButton(menu, 0, 0f, "Reload bundles", delegate
             {
-                ClearFlagsInVRCameras();
-
+                ModConsole.Log("[Skybox Loader (VR MODE) ] : This will Probably take awhile...");
+                MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
             }, "", null, null, true);
             scroll.SetAction(delegate
             {
