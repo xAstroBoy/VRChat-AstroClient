@@ -18,23 +18,26 @@
     /// </summary>
     public class CheetoUI : Overridables
     {
-        private QMSingleButton showPlayersButton;
+        private QMSingleButton playersButton;
 
         private List<QMSingleButton> playerButtons { get; } = new List<QMSingleButton>();
 
-        private bool showPlayerList = true; // Make this a setting eventually, in case they run Plagues POS
+        private bool showPlayerList = true;
+
+        private bool showPlayersButton = true; // Make this a setting eventually, in case they run Plagues POS
 
         public override void VRChat_OnUiManagerInit()
         {
-            showPlayersButton = new QMSingleButton("ShortcutMenu", -1, 0, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
+            playersButton = new QMSingleButton("ShortcutMenu", -1, 0, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
+            playersButton.setActive(showPlayersButton);
 
             if (showPlayerList)
             {
-                showPlayersButton.setTextColor(UnityEngine.Color.green);
+                playersButton.setTextColor(UnityEngine.Color.green);
             }
             else
             {
-                showPlayersButton.setTextColor(UnityEngine.Color.red);
+                playersButton.setTextColor(UnityEngine.Color.red);
             }
         }
 
@@ -71,16 +74,14 @@
             }
 
             float yPos_start = 0.5f;
-            float yPos_max = 3f;
+            float yPos_max = 4f;
             float yPos = yPos_start;
             float xPos = -1f;
 
             ResetButtons();
             foreach (var player in temp_list)
             {
-                //ModConsole.DebugLog($"Player Button Created {player.DisplayName()}, {xPos}, {yPos}");
                 var playerAPI = player.GetVRCPlayerApi();
-
                 var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, player.DisplayName(), () => { SelectPlayer(player); }, $"Select {player.DisplayName()}", null, null, true);
 
                 if (player.GetIsMaster())
@@ -90,11 +91,14 @@
 
                 var rank = player.GetAPIUser().GetRankEnum();
 
-                if (rank == PlayerExtensions.RankType.Moderator || rank == PlayerExtensions.RankType.Admin)
+                if (rank != null)
                 {
-                    ModConsole.Warning($"WARNING: There's a moderator or admin in your lobby! {player.DisplayName()}");
-                    playerButton.setTextColor(UnityEngine.Color.yellow);
-                    playerButton.setBackgroundColor(UnityEngine.Color.yellow);
+                    if (rank == PlayerExtensions.RankType.Moderator || rank == PlayerExtensions.RankType.Admin)
+                    {
+                        ModConsole.Warning($"WARNING: There's a moderator or admin in your lobby! {player.DisplayName()}");
+                        playerButton.setTextColor(UnityEngine.Color.yellow);
+                        playerButton.setBackgroundColor(UnityEngine.Color.yellow);
+                    }
                 }
 
                 playerButton.setActive(showPlayerList);
@@ -128,16 +132,22 @@
             showPlayerList = !showPlayerList;
             if (showPlayerList)
             {
-                showPlayersButton.setTextColor(UnityEngine.Color.green);
+                playersButton.setTextColor(UnityEngine.Color.green);
             } else
             {
-                showPlayersButton.setTextColor(UnityEngine.Color.red);
+                playersButton.setTextColor(UnityEngine.Color.red);
             }
 
             foreach (var playerButton in playerButtons)
             {
                 playerButton.setActive(showPlayerList);
             }
+        }
+
+        public static void SetPlayerButtonActive(bool b)
+        {
+            (Instance as CheetoUI).showPlayersButton = b;
+            (Instance as CheetoUI).playersButton.setActive(b);
         }
     }
 }
