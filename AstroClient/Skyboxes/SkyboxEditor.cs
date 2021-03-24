@@ -41,7 +41,7 @@ namespace AstroClient.Skyboxes
 
         private static bool HasLoadedCachedSkyboxes = false;
 
-        private readonly static bool SkipVRBlock = false;
+        private readonly static bool SkipVRBlock = true;
 
         private static Material OriginalSkybox;
 
@@ -64,7 +64,7 @@ namespace AstroClient.Skyboxes
                 }
                 else
                 {
-                    ModConsole.Log("[Skybox Loader ] : This will Probably take awhile...");
+                    ModConsole.Log("[Skybox Loader (VR MODE) ] : This will Probably take awhile...");
                     MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
                 }
                 HasLoadedCachedSkyboxes = true;
