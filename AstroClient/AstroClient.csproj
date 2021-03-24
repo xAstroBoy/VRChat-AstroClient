@@ -39,6 +39,7 @@
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
     <Compile Include="Cheetos\AssemblySpy.cs" />
     <Compile Include="Cheetos\AssemlySpy_Extensions.cs" />
+    <Compile Include="Cheetos\CheetoUI.cs" />
     <Compile Include="Cheetos\RayCastHook.cs" />
     <Compile Include="EventArgs\OnAvatarSpawnArgs.cs" />
     <Compile Include="EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
@@ -378,6 +379,7 @@
     </Reference>
     <Reference Include="MelonLoader">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure">
