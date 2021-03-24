@@ -85,7 +85,16 @@
 
                 if (player.GetIsMaster())
                 {
+                    playerButton.setTextColor(UnityEngine.Color.blue);
+                }
+
+                var rank = player.GetAPIUser().GetRank();
+
+                if (rank.Equals("Moderation User") || rank.Equals("Admin User"))
+                {
+                    ModConsole.Warning($"WARNING: There's a moderator or admin in your lobby! {player.DisplayName()}");
                     playerButton.setTextColor(UnityEngine.Color.yellow);
+                    playerButton.setBackgroundColor(UnityEngine.Color.yellow);
                 }
 
                 playerButton.setActive(showPlayerList);
