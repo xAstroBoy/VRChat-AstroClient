@@ -156,15 +156,17 @@ namespace AstroClient.components
                     {
                         ItemTweakerMain.ProtectionInteractor.setToggleState(PreventOthersFromGrabbing);
                     }
-                }
 
-                if (obj == HandsUtils.GameObjectToEdit)
-                {
                     if (!Forces.UpdateFreezeAllConstraints(Constraints))
                     {
                         Forces.UpdatePositionConstraints(Constraints);
                         Forces.UpdateRotationSection(Constraints);
                     }
+                    if (obj.transform != null)
+                    {
+                        ItemTweakerMain.CurrentObjectCoordsBtn.setButtonText($"X: {obj.transform.position.x} \n Y: {obj.transform.position.y} \n Z: {obj.transform.position.z}");
+                    }
+                    
                 }
 
                 if (EditMode)

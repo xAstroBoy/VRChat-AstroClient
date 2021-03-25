@@ -10,6 +10,7 @@ using System.Linq;
 using UnityEngine;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
+using Color = UnityEngine.Color;
 
 namespace AstroClient.AstroUtils.ItemTweaker
 {
@@ -71,8 +72,11 @@ namespace AstroClient.AstroUtils.ItemTweaker
             WorldObjectSeletionQMScroll(menu, 3, 2.5f, true);
             InternalTriggerQMScroll(menu, 4, 2, true);
             VRC_InteractableSubMenu(menu, 4, 2.5f, true);
+            CurrentObjectCoordsBtn = new QMSingleButton(menu, 5, -1, "", null, "Shows Object Coords", null, null, false);
+            CurrentObjectCoordsBtn.getGameObject().GetComponent<UnityEngine.UI.Image>().enabled = false;
+            CurrentObjectCoordsBtn.SetResizeTextForBestFit(true);
 
-            new QMSingleButton(menu, 5, -1, "DANGER : Destroy item.", new Action(() => { HandsUtils.GetGameObjectToEdit().DestroyObject(); }), "Destroys Object , You need to reload the world to restore it back.", null, Color.red);
+            new QMSingleButton(menu, 6, -1, "DANGER : Destroy item.", new Action(() => { HandsUtils.GetGameObjectToEdit().DestroyObject(); }), "Destroys Object , You need to reload the world to restore it back.", null, Color.red, true);
             SpawnedPickupsCounter = new QMSingleButton(menu, 6, 0, GetClonesPickupText, null, GetClonesPickupText, null, Color.cyan, true);
             SpawnedPrefabsCounter = new QMSingleButton(menu, 6, 0.5f, GetSpawnedPrefabText, null, GetSpawnedPrefabText, null, Color.cyan, true);
             ProtectionInteractor = new QMSingleToggleButton(menu, 6, 1, "Interaction block ON", () =>
@@ -942,6 +946,9 @@ namespace AstroClient.AstroUtils.ItemTweaker
         public static QMSingleButton Forces_Pickup_IsHeld;
         public static QMSingleButton Forces_SelPickup_CurrentObjOwner;
         public static QMSingleButton Forces_CurrentObjHolder;
+
+        public static QMSingleButton CurrentObjectCoordsBtn;
+
 
         public static QMSlider PickupProximitySlider;
 
