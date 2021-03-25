@@ -245,6 +245,22 @@ namespace AstroClient.Worlds
                 frame.removeCollider();
                 rope.removeCollider();
             }
+            else if(WorldUtils.GetWorldID() == WorldIds.FreezeTag)
+            {
+                ModConsole.Log("Recognized Freeze Tag World, removing anti-cheat mechanism!");
+                var SpawnRoof = GameObjectFinder.Find("spawn/mainroom 2/ceiling");
+                var Barriers = GameObjectFinder.Find("packmanmap/barriors");
+                var OutsideMazePlane = GameObjectFinder.Find("packmanmap/Plane (4)");
+                var InternalMazePlane = GameObjectFinder.Find("packmanmap/Plane (3)");
+                var possiblenaticheatplane = GameObjectFinder.Find("packmanmap/Plane (2)");
+                SpawnRoof.DestroyMeLocal();
+                Barriers.DestroyMeLocal();
+                OutsideMazePlane.DestroyMeLocal();
+                InternalMazePlane.DestroyMeLocal();
+                possiblenaticheatplane.DestroyMeLocal();
+
+
+            }
             else
             {
                 ModConsole.Log("No Known Worlds Recognized.");

@@ -25,5 +25,9 @@
         public static readonly string FBTHeaven = "wrld_d319c58a-dcec-47de-b5fc-21200116462c";
 
         public static readonly string TheGreatPug = "wrld_6caf5200-70e1-46c2-b043-e3c4abe69e0f";
+
+        public static readonly string FreezeTag = "wrld_7487d91a-3ef4-44c6-ad6d-9bdc7dee5efd";
+
+
     }
 }
