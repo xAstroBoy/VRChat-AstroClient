@@ -47,7 +47,7 @@ namespace AstroClient.Skyboxes
             if(!HasLoadedCachedSkyboxes)
             {
 
-                ModConsole.Log("[Skybox Loader ] : This will Probably take awhile...");
+                ModConsole.Log("[Skybox Loader] : This will Probably take awhile...");
                 MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
                 HasLoadedCachedSkyboxes = true;
             }

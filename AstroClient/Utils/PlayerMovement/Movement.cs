@@ -182,6 +182,7 @@ namespace AstroClient.AstroUtils.PlayerMovement
 
         private static List<GameObject> ClonesCapsules = new List<GameObject>();
 
+        //Credit : Dayclient Owner ( dayoftheplay )
         public static void SpawnClone()
         {
             try
