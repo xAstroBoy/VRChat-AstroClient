@@ -703,6 +703,10 @@ namespace AstroClient.AstroUtils.ItemTweaker
             UpdateTeleportToMeBtns();
             UpdateTargetButtons();
             UpdateSpawnedPrefabsBtn();
+            if (CurrentObjectCoordsBtn != null)
+            {
+                CurrentObjectCoordsBtn.setButtonText($"X: 0 \n Y: 0 \n Z: 0");
+            }
             if (Pickup_IsEditMode != null)
             {
                 Pickup_IsEditMode.setButtonText("Edit Mode : OFF");
