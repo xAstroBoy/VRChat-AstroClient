@@ -1,0 +1,112 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using VRC;
+using VRC.Core;
+using VRC.SDKBase;
+using AstroClient.components;
+using Color = System.Drawing.Color;
+
+#region AstroClient Imports
+
+using AstroClient.Cloner;
+using AstroClient.ConsoleUtils;
+using AstroClient.Finder;
+using System.Reflection;
+using RubyButtonAPI;
+using UnityEngine.UI;
+using DayClientML2.Utility.Extensions;
+using AstroClient.AstroUtils.ItemTweaker;
+using static AstroClient.Forces;
+using VRC.SDK3.Components;
+using static AstroClient.variables.CustomLists;
+
+#endregion AstroClient Imports
+
+
+namespace AstroClient.extensions
+{
+    public static class PickupExtensions
+    {
+        public static void SetPickupTheft(this List<GameObject> list, bool DisallowTheft = false)
+        {
+            foreach (var obj in list)
+            {
+                if (obj != null)
+                {
+                    Pickup.SetDisallowTheft(obj, DisallowTheft);
+                }
+            }
+        }
+
+        public static void SetPickupTheft(this GameObject obj, bool DisallowTheft = false)
+        {
+            Pickup.SetDisallowTheft(obj, DisallowTheft);
+        }
+
+
+
+        public static void PreventOthersFromPicking(this GameObject obj, bool PreventOthersFromGrabbing)
+        {
+            if (obj != null)
+            {
+                var control = obj.GetComponent<RigidBodyController>();
+                if (control == null)
+                {
+                    control = obj.AddComponent<RigidBodyController>();
+                }
+                if (control != null)
+                {
+                    if (!control.EditMode)
+                    {
+                        control.EditMode = true;
+                    }
+                    control.PreventOthersFromGrabbing = PreventOthersFromGrabbing;
+                }
+            }
+        }
+
+        public static void SetPickupOrientation(this GameObject obj, VRC_Pickup.PickupOrientation orientation)
+        {
+            if (obj != null)
+            {
+                Pickup.SetPickupOrientation(obj, orientation);
+            }
+        }
+
+        public static void SetAutoHoldMode(this GameObject obj, VRC_Pickup.AutoHoldMode holdmode)
+        {
+            if (obj != null)
+            {
+                Pickup.SetAutoHoldMode(obj, holdmode);
+            }
+        }
+
+        public static void SetDisallowTheft(this GameObject obj, bool DisallowTheft)
+        {
+            if (obj != null)
+            {
+                Pickup.SetDisallowTheft(obj, DisallowTheft);
+            }
+        }
+
+        public static void SetPickupable(this GameObject obj, bool pickupable)
+        {
+            if (obj != null)
+            {
+                Pickup.SetPickupable(obj, pickupable);
+            }
+        }
+
+        public static void SetallowManipulationWhenEquipped(this GameObject obj, bool allowManipulationWhenEquipped)
+        {
+            if (obj != null)
+            {
+                Pickup.SetallowManipulationWhenEquipped(obj, allowManipulationWhenEquipped);
+            }
+        }
+
+
+    }
+}

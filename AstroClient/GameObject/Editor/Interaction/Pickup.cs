@@ -26,25 +26,15 @@ namespace AstroClient
         {
             if (obj != null)
             {
-                var pickup1 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
-                var pickup2 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
-                var pickup3 = obj.GetComponent<VRC.SDK3.Components.VRCPickup>();
-                if (pickup1 != null || pickup2 != null || pickup3 != null)
+                var pickupEditor = obj.GetComponent<PickupController>();
+                if (pickupEditor == null)
                 {
-                    return;
+                    pickupEditor = obj.AddComponent<PickupController>();
                 }
-                else
+                if (!pickupEditor.ForceComponent)
                 {
-                    var pickupEditor = obj.GetComponent<PickupController>();
-                    if (pickupEditor == null)
-                    {
-                        pickupEditor = obj.AddComponent<PickupController>();
-                    }
-                    if (!pickupEditor.ForceComponent)
-                    {
-                        pickupEditor.ForceComponent = true;
-                        ModConsole.Log("Added Pickup Component to " + obj.name);
-                    }
+                    pickupEditor.ForceComponent = true;
+                    ModConsole.Log("Added Pickup Component to " + obj.name);
                 }
                 ItemTweakerMain.CheckIfContainsPickupProperties(obj);
             }

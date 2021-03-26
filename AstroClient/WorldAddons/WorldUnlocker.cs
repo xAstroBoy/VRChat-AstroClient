@@ -65,6 +65,7 @@ namespace AstroClient.Worlds
                         ModConsole.Log("Added Successfully Lockpick Door");
                     }
                 }
+                return;
             }
             else if (WorldUtils.GetWorldID() == WorldIds.FBTHeaven)
             {
@@ -138,6 +139,8 @@ namespace AstroClient.Worlds
                         Door_2_Visual.AddCollider();
                         ModConsole.Log("Added Successfully Force unlock Door 2");
                     }
+                    return;
+
                 }
                 if (Door_3_Interactive != null && Door_3_Visual != null)
                 {
@@ -224,8 +227,10 @@ namespace AstroClient.Worlds
                         ModConsole.DebugLog("Disabling SDK 2 Internal Trigger on Hammer..");
                         item.enabled = false;
                     }
-                    ItemTweakerMain.WorldObjects.AddGameObject(hammer);
+                    hammer.AddToWorldUtilsMenu();
                 }
+                return;
+
             }
             else if (WorldUtils.GetWorldID() == WorldIds.TheGreatPug)
             {
@@ -244,6 +249,8 @@ namespace AstroClient.Worlds
                 kitchen2.DestroyMeLocal();
                 frame.removeCollider();
                 rope.removeCollider();
+                return;
+
             }
             else if(WorldUtils.GetWorldID() == WorldIds.FreezeTag)
             {
@@ -259,7 +266,19 @@ namespace AstroClient.Worlds
                 InternalMazePlane.DestroyMeLocal();
                 possiblenaticheatplane.DestroyMeLocal();
 
+                return;
 
+            }
+            else if(WorldUtils.GetWorldID() == WorldIds.SmashContest)
+            {
+                ModConsole.DebugLog("Recognized Smash Contest, Searching For Sandbag");
+                var sandbag = GameObjectFinder.Find("SandBag");
+                if(sandbag != null)
+                {
+                    ModConsole.Log("Registered Sandbag To World objects!");
+                    sandbag.AddToWorldUtilsMenu();
+                }
+                return;
             }
             else
             {

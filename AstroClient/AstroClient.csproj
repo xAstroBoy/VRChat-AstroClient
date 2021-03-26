@@ -35,6 +35,16 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AstroExtensions\ButtonsExtensions.cs" />
+    <Compile Include="AstroExtensions\PlayerExtensions.cs" />
+    <Compile Include="AstroExtensions\ListExtensions.cs" />
+    <Compile Include="AstroExtensions\ItemTweakerExtensions.cs" />
+    <Compile Include="AstroExtensions\PickupExtensions.cs" />
+    <Compile Include="AstroExtensions\PositionExtensions.cs" />
+    <Compile Include="AstroExtensions\EspExtensions.cs" />
+    <Compile Include="AstroExtensions\CodingExtensions.cs" />
+    <Compile Include="AstroExtensions\UdonExtensions.cs" />
+    <Compile Include="AstroExtensions\ScaleExtensions.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
     <Compile Include="Cheetos\AssemblySpy.cs" />
@@ -140,8 +150,15 @@
     <Compile Include="Udon\Exploits\Global\GlobalUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Murder4\Murder4UdonExploits.cs" />
     <Compile Include="Udon\Exploits\AmongUS\AmongUSUdonExploits.cs" />
-    <Compile Include="Utils\ExtensionUtils\CustomListExtensions.cs" />
-    <Compile Include="Utils\ExtensionUtils\SyncPhysicsExt.cs" />
+    <Compile Include="AstroExtensions\OnlineExtensions.cs" />
+    <Compile Include="AstroExtensions\EngineExtensions.cs" />
+    <Compile Include="AstroExtensions\DeepCloneExtension.cs" />
+    <Compile Include="AstroExtensions\CustomListExtensions.cs" />
+    <Compile Include="AstroExtensions\ForcesExtensions.cs" />
+    <Compile Include="AstroExtensions\CustomComponentExtensions.cs" />
+    <Compile Include="AstroExtensions\ColliderExtensions.cs" />
+    <Compile Include="AstroExtensions\RigidbodyExtensions.cs" />
+    <Compile Include="AstroExtensions\SyncPhysicsExt.cs" />
     <Compile Include="Utils\Headlight\ColorConverter.cs" />
     <Compile Include="Utils\Headlight\Headlight.cs" />
     <Compile Include="Utils\PlayerMovement\Movement.cs" />
@@ -156,7 +173,7 @@
     <Compile Include="Utils\ColliderViewer\ColliderToggler.cs" />
     <Compile Include="Utils\ColliderViewer\XRay.cs" />
     <Compile Include="Utils\Emojis\EmojiUtils.cs" />
-    <Compile Include="Utils\ExtensionUtils\ExtensionUtils.cs" />
+    <Compile Include="AstroExtensions\ClickExtensions.cs" />
     <Compile Include="Utils\GameObject\ObjectFinder.cs" />
     <Compile Include="Utils\Input\InputUtils.cs" />
     <Compile Include="Utils\Player\LocalPlayerUtils.cs" />

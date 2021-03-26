@@ -56,16 +56,6 @@ namespace AstroClient.ButtonShortcut
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-            else if (WorldUtils.GetWorldID() == WorldIds.SmashContest)
-            {
-                if (WorldAddons.SandBagCheat != null)
-                {
-                    SetButtonText("Select Sandbag", "Select SandBag in Item Tweaker");
-                    SetButtonShortcut(WorldAddons.SandBagCheat);
-                    SetButtonColor(Color.green);
-                    ToggleButtonVisibilityAndInteractivity(true);
-                }
-            }
             else
             {
                 SetButtonColor(Color.red);

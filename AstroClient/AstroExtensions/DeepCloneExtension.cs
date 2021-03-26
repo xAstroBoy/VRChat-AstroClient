@@ -1,0 +1,166 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using VRC;
+using VRC.Core;
+using VRC.SDKBase;
+using AstroClient.components;
+using Color = System.Drawing.Color;
+
+#region AstroClient Imports
+
+using AstroClient.Cloner;
+using AstroClient.ConsoleUtils;
+using AstroClient.Finder;
+using System.Reflection;
+using RubyButtonAPI;
+using UnityEngine.UI;
+using DayClientML2.Utility.Extensions;
+using AstroClient.AstroUtils.ItemTweaker;
+using static AstroClient.Forces;
+using VRC.SDK3.Components;
+using static AstroClient.variables.CustomLists;
+
+#endregion AstroClient Imports
+
+
+namespace AstroClient.extensions
+{
+    public static class DeepCloneExtension
+    {
+        private static bool GetCopyOfDebugMode = false;
+
+        private static void DebugGetCopyOf(string msg)
+        {
+            if (GetCopyOfDebugMode)
+            {
+                ModConsole.DebugWarning("GetCopyOf Debug :" + msg);
+            }
+        }
+
+        private const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Default | BindingFlags.DeclaredOnly;
+
+        public static T GetCopyOf<T>(this Component comp, T other) where T : Component
+        {
+            if (comp == null) return null;
+            if (other.GetType() == null) return null;
+            Type type = comp.GetType();
+            if (type != other.GetType()) return null; // type mis-match
+            DebugGetCopyOf("GetCopyOf 1");
+            List<Type> derivedTypes = new List<Type>();
+            Type derived = type.BaseType;
+            DebugGetCopyOf("GetCopyOf 2");
+
+            while (derived != null)
+            {
+                if (derived != null)
+                {
+                    if (derived == typeof(MonoBehaviour))
+                    {
+                        break;
+                    }
+                    derivedTypes.Add(derived);
+                    derived = derived.BaseType;
+                }
+            }
+            DebugGetCopyOf("GetCopyOf 3");
+            IEnumerable<PropertyInfo> pinfos = type.GetProperties(bindingFlags);
+            foreach (Type derivedType in derivedTypes)
+            {
+                if (derivedType != null)
+                {
+                    pinfos = pinfos.Concat(derivedType.GetProperties(bindingFlags));
+                }
+            }
+            DebugGetCopyOf("GetCopyOf 4");
+            pinfos = from property in pinfos
+                     where !(type == typeof(Rigidbody) && property.Name == "inertiaTensor") // Special case for Rigidbodies inertiaTensor which isn't catched for some reason.
+                     where !property.CustomAttributes.Any(attribute => attribute.AttributeType == typeof(ObsoleteAttribute))
+                     select property;
+            DebugGetCopyOf("GetCopyOf 5");
+
+            foreach (var pinfo in pinfos)
+            {
+                if (pinfo != null)
+                {
+                    if (pinfo.CanWrite)
+                    {
+                        if (pinfos.Any(e => e.Name == $"shared{char.ToUpper(pinfo.Name[0])}{pinfo.Name.Substring(1)}"))
+                        {
+                            continue;
+                        }
+                        try
+                        {
+                            pinfo.SetValue(comp, pinfo.GetValue(other, null), null);
+                        }
+                        catch { } // In case of NotImplementedException being thrown. For some reason specifying that exception didn't seem to catch it, so I didn't catch anything specific.
+                    }
+                }
+            }
+            DebugGetCopyOf("GetCopyOf 6");
+
+            IEnumerable<FieldInfo> finfos = type.GetFields(bindingFlags);
+            DebugGetCopyOf("GetCopyOf 7");
+
+            foreach (var finfo in finfos)
+            {
+                if (finfo != null)
+                {
+                    foreach (Type derivedType in derivedTypes)
+                    {
+                        if (derivedType != null)
+                        {
+                            if (finfos.Any(e => e.Name == $"shared{char.ToUpper(finfo.Name[0])}{finfo.Name.Substring(1)}"))
+                            {
+                                continue;
+                            }
+                            finfos = finfos.Concat(derivedType.GetFields(bindingFlags));
+                        }
+                    }
+                }
+            }
+            DebugGetCopyOf("GetCopyOf 8");
+
+            foreach (var finfo in finfos)
+            {
+                if (finfo != null)
+                {
+                    finfo.SetValue(comp, finfo.GetValue(other));
+                }
+            }
+            DebugGetCopyOf("GetCopyOf 9");
+
+            finfos = from field in finfos
+                     where field.CustomAttributes.Any(attribute => attribute.AttributeType == typeof(ObsoleteAttribute))
+                     select field;
+            DebugGetCopyOf("GetCopyOf 10");
+            foreach (var finfo in finfos)
+            {
+                if (finfo != null)
+                {
+                    finfo.SetValue(comp, finfo.GetValue(other));
+                }
+            }
+            DebugGetCopyOf("GetCopyOf End");
+            return comp as T;
+        }
+
+        public static T CopyComponent<T>(this GameObject go, T toAdd) where T : Component
+        {
+            if (go == null)
+            {
+                ModConsole.Log("CopyComponent GameObject Go is null");
+            }
+            if (toAdd == null)
+            {
+                ModConsole.Log("CopyComponent toAdd is null");
+            }
+            return go.AddComponent<T>().GetCopyOf(toAdd) as T;
+        }
+
+
+
+
+    }
+}
