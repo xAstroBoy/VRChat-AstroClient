@@ -28,7 +28,7 @@
 
         public override void VRChat_OnUiManagerInit()
         {
-            playersButton = new QMSingleButton("ShortcutMenu", -1, 0, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
+            playersButton = new QMSingleButton("ShortcutMenu", -2, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
             playersButton.setActive(showPlayersButton);
 
             if (showPlayerList)
@@ -73,10 +73,10 @@
                 }
             }
 
-            float yPos_start = 0.5f;
-            float yPos_max = 4f;
+            float yPos_start = -0.5f;
+            float yPos_max = 12f;
             float yPos = yPos_start;
-            float xPos = -1f;
+            float xPos = -2f;
 
             ResetButtons();
             foreach (var player in temp_list)
@@ -86,7 +86,7 @@
 
                 if (player.GetIsMaster())
                 {
-                    playerButton.setTextColor(UnityEngine.Color.blue);
+                    playerButton.setTextColor(new UnityEngine.Color(158, 213, 255));
                 }
 
                 var rank = player.GetAPIUser().GetRankEnum();
@@ -108,7 +108,7 @@
                 if (yPos >= yPos_max)
                 {
                     yPos = yPos_start;
-                    xPos -= 1f;
+                    xPos -= -2f;
                 }
             }
         }
