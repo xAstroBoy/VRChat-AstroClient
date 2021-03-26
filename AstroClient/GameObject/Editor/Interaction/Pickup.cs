@@ -34,7 +34,6 @@ namespace AstroClient
                 if (!pickupEditor.ForceComponent)
                 {
                     pickupEditor.ForceComponent = true;
-                    ModConsole.Log("Added Pickup Component to " + obj.name);
                 }
                 ItemTweakerMain.CheckIfContainsPickupProperties(obj);
             }

@@ -319,7 +319,10 @@ namespace AstroClient
                 }
                 if (_ObjectToEdit != null)
                 {
-                    if (_ObjectToEdit.GetComponent<VRChatESP>() != null)
+
+
+                    VRChatESP installedESP = _ObjectToEdit.GetComponent<VRChatESP>();
+                    if (installedESP != null)
                     {
                         if (GameObjectESP.isMurderItemsESPActivated)
                         {
@@ -329,14 +332,14 @@ namespace AstroClient
                                 {
                                     if (!GameObjectESP.isMurderItemsESPActivated)
                                     {
-                                        UnityEngine.Object.Destroy(_ObjectToEdit.GetComponent<VRChatESP>());
+                                        UnityEngine.Object.Destroy(installedESP);
                                     }
                                 }
                             }
                         }
                         else
                         {
-                            UnityEngine.Object.Destroy(_ObjectToEdit.GetComponent<VRChatESP>());
+                            UnityEngine.Object.Destroy(installedESP);
                         }
                     }
                 }
@@ -346,29 +349,34 @@ namespace AstroClient
                 {
                     if (value != null)
                     {
-                        if (value.GetComponent<VRChatESP>() == null)
+                        VRChatESP esp = value.GetComponent<VRChatESP>();
+                        if (esp == null)
                         {
-                            value.AddComponent<VRChatESP>();
+                            esp = value.AddComponent<VRChatESP>();
                         }
                     }
                 }
+                
+                RigidBodyController RigidBodyController = value.GetComponent<RigidBodyController>();
+                if (RigidBodyController == null)
+                {
+                    RigidBodyController = value.AddComponent<RigidBodyController>();
+                    if (RigidBodyController != null)
+                    {
+                        RigidBodyController.EditMode = false;
+                    }
+                }
 
-                if (value.GetComponent<RigidBodyController>() == null)
+                PickupController PickupController = value.GetComponent<PickupController>();
+                if (PickupController == null)
                 {
-                    var comp = value.AddComponent<RigidBodyController>();
-                    if (comp != null)
+                    PickupController = value.AddComponent<PickupController>();
+                    if (PickupController != null)
                     {
-                        comp.EditMode = false;
+                        PickupController.EditMode = false;
                     }
                 }
-                if (value.GetComponent<PickupController>() == null)
-                {
-                    var comp = value.AddComponent<PickupController>();
-                    if (comp != null)
-                    {
-                        comp.EditMode = false;
-                    }
-                }
+
                 CrazyObjectManager.UpdateTimeButton(value);
                 ObjectSpinnerManager.UpdateSpinnerButton(value);
                 ObjectSpinnerManager.UpdateTimerButton(value);

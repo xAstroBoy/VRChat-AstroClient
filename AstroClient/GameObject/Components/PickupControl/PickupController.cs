@@ -1,4 +1,5 @@
 ﻿using AstroClient.ConsoleUtils;
+using AstroClient.extensions;
 using System;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
@@ -128,16 +129,19 @@ namespace AstroClient.components
         {
             try
             {
-                UpdateHeldOwnerBtn();
-                UpdateEditMode();
-                UpdatePickupOwnerBtns();
-                UpdateIsHeld();
-                UpdatePickupOrientationBtn();
-                UpdateAutoHold();
-                UpdateAutoHoldMode();
-                Updatepickupable();
-                UpdateDisallowTheft();
-                UpdateProximitySlider();
+                if (HandsUtils.GameObjectToEdit == obj)
+                {
+                    UpdateHeldOwnerBtn();
+                    UpdateEditMode();
+                    UpdatePickupOwnerBtns();
+                    UpdateIsHeld();
+                    UpdatePickupOrientationBtn();
+                    UpdateAutoHold();
+                    UpdateAutoHoldMode();
+                    Updatepickupable();
+                    UpdateDisallowTheft();
+                    UpdateProximitySlider();
+                }
 
                 if (Locked)
                 {
@@ -146,14 +150,19 @@ namespace AstroClient.components
 
                 if (ForceComponent)
                 {
-                    if (Pickup1 == null && Pickup2 == null && Pickup3 == null)
+                    if (Pickup1.IsNull())
                     {
-                        ModConsole.DebugLog("PickupController : Added VRC_Pickup to object " + obj.name);
-                        Pickup1 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
-                        if (Pickup1 == null)
+                        if (Pickup2.IsNull())
                         {
-                            Pickup1 = obj.AddComponent<VRC.SDKBase.VRC_Pickup>();
-                            Pickup1.hideFlags = HideFlags.HideAndDontSave;
+                            if (Pickup3.IsNull())
+                            {
+                                ModConsole.DebugLog("PickupController : Added VRC_Pickup to object " + obj.name);
+                                Pickup1 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
+                                if (Pickup1 == null)
+                                {
+                                    Pickup1 = obj.AddComponent<VRC.SDKBase.VRC_Pickup>();
+                                }
+                            }
                         }
                     }
                 }
@@ -507,8 +516,10 @@ namespace AstroClient.components
                     }
                 }
             }
-            catch
+            catch(Exception e)
             {
+                ModConsole.DebugError("Error in PickupController Bound to : " + obj.name);
+                ModConsole.DebugErrorExc(e);
             }
         }
 
