@@ -3,6 +3,7 @@ using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
 using AstroClient.Finder;
 using AstroClient.Variables;
+using UnityEngine;
 using VRC.SDKBase;
 using Color = System.Drawing.Color;
 
@@ -10,6 +11,33 @@ namespace AstroClient.Worlds
 {
     internal class WorldUnlocker : Overridables
     {
+
+        public static void CloneTriggerToObject(GameObject OrigObj, GameObject DisplayObj, string InteractText)
+        {
+            var DeleteTrigger = DisplayObj.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
+            var WorkingTrigger = OrigObj.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
+            VRC_Trigger Cloned_trigger = null;
+
+            if (DeleteTrigger != null)
+            {
+                DeleteTrigger.DestroyMeLocal();
+            }
+            if (WorkingTrigger != null)
+            {
+                Cloned_trigger = DisplayObj.AddComponent<VRCSDK2.VRC_Trigger>().GetCopyOf(WorkingTrigger);
+                if (Cloned_trigger != null)
+                {
+                    Cloned_trigger.interactText = InteractText;
+                }
+            }
+            if (Cloned_trigger != null)
+            {
+                DisplayObj.AddCollider();
+                ModConsole.Log($"Added Successfully {InteractText}");
+            }
+        }
+
+
         public override void OnWorldReveal()
         {
             if (WorldUtils.GetWorldID() == WorldIds.Meroom)
@@ -42,28 +70,7 @@ namespace AstroClient.Worlds
 
                 if (PrivateRoomSwitchTrigger != null && DisplaySwitchTrigger != null)
                 {
-                    var DeleteTrigger = DisplaySwitchTrigger.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
-                    var WorkingTrigger = PrivateRoomSwitchTrigger.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
-                    VRCSDK2.VRC_Trigger Cloned_trigger = null;
-
-                    if (DeleteTrigger != null)
-                    {
-                        DeleteTrigger.DestroyMeLocal();
-                    }
-                    if (WorkingTrigger != null)
-                    {
-                        Cloned_trigger = DisplaySwitchTrigger.AddComponent<VRCSDK2.VRC_Trigger>().GetCopyOf(WorkingTrigger);
-                        if (Cloned_trigger != null)
-                        {
-                            Cloned_trigger.interactText = "Lockpick Door";
-                        }
-                    }
-
-                    if (Cloned_trigger != null)
-                    {
-                        Cloned_trigger.gameObject.AddCollider();
-                        ModConsole.Log("Added Successfully Lockpick Door");
-                    }
+                    CloneTriggerToObject(PrivateRoomSwitchTrigger, DisplaySwitchTrigger, "(AstroClient) : Lockpick Door");
                 }
                 return;
             }
@@ -89,112 +96,28 @@ namespace AstroClient.Worlds
 
                 if (Door_1_Interactive != null && Door_1_Visual != null)
                 {
-                    ModConsole.Log("Editing Port 1 Sign..");
-                    var DeleteTrigger = Door_1_Visual.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
-                    var WorkingTrigger = Door_1_Interactive.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
-                    VRC_Trigger Cloned_trigger = null;
+                    ModConsole.Log("Adding Lockpick Private Door 1");
+                    CloneTriggerToObject(Door_1_Interactive, Door_1_Visual, "(AstroClient) : Lockpick door 1");
 
-                    if (DeleteTrigger != null)
-                    {
-                        DeleteTrigger.DestroyMeLocal();
-                    }
-                    if (WorkingTrigger != null)
-                    {
-                        Cloned_trigger = Door_1_Visual.AddComponent<VRCSDK2.VRC_Trigger>().GetCopyOf(WorkingTrigger);
-                        if (Cloned_trigger != null)
-                        {
-                            Cloned_trigger.interactText = "Force Unlock Door 1";
-                        }
-                    }
-                    if (Cloned_trigger != null)
-                    {
-                        Door_1_Visual.AddCollider();
-                        ModConsole.Log("Added Successfully Force unlock Door 1");
-                    }
                 }
                 if (Door_2_Interactive != null && Door_2_Visual != null)
                 {
-                    ModConsole.Log("Editing Port 2 Sign..");
-                    var DeleteTrigger = Door_2_Visual.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
-
-                    var WorkingTrigger = Door_2_Interactive.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
-
-                    VRC_Trigger Cloned_trigger = null;
-
-                    if (DeleteTrigger != null)
-                    {
-                        DeleteTrigger.DestroyMeLocal();
-                    }
-                    if (WorkingTrigger != null)
-                    {
-                        Cloned_trigger = Door_2_Visual.AddComponent<VRCSDK2.VRC_Trigger>().GetCopyOf(WorkingTrigger);
-                        if (Cloned_trigger != null)
-                        {
-                            Cloned_trigger.interactText = "Force Unlock Door 2";
-                        }
-                    }
-
-                    if (Cloned_trigger != null)
-                    {
-                        Door_2_Visual.AddCollider();
-                        ModConsole.Log("Added Successfully Force unlock Door 2");
-                    }
-                    return;
+                    ModConsole.Log("Adding Lockpick Private Door 2");
+                    CloneTriggerToObject(Door_2_Interactive, Door_2_Visual, "(AstroClient) : Lockpick door 2");
 
                 }
                 if (Door_3_Interactive != null && Door_3_Visual != null)
                 {
-                    ModConsole.Log("Editing Port 3 Sign..");
-                    var DeleteTrigger = Door_3_Visual.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
-                    var WorkingTrigger = Door_3_Interactive.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
+                    ModConsole.Log("Adding Lockpick Private Door 3");
+                    CloneTriggerToObject(Door_3_Interactive, Door_3_Visual, "(AstroClient) : Lockpick door 3");
 
-                    VRC_Trigger Cloned_trigger = null;
-                    if (DeleteTrigger != null)
-                    {
-                        DeleteTrigger.DestroyMeLocal();
-                    }
-                    if (WorkingTrigger != null)
-                    {
-                        Cloned_trigger = Door_3_Visual.AddComponent<VRCSDK2.VRC_Trigger>().GetCopyOf(WorkingTrigger);
-                        if (Cloned_trigger != null)
-                        {
-                            Cloned_trigger.interactText = "Force Unlock Door 3";
-                        }
-                    }
-
-                    if (Cloned_trigger != null)
-                    {
-                        Door_3_Visual.AddCollider();
-                        ModConsole.Log("Added Successfully Force unlock Door 3");
-                    }
                 }
                 if (Door_4_Interactive != null && Door_4_Visual != null)
                 {
-                    ModConsole.Log("Editing Port 4 Sign..");
-                    var DeleteTrigger = Door_4_Visual.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
-
-                    var WorkingTrigger = Door_4_Interactive.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
-
-                    VRC_Trigger Cloned_trigger = null;
-
-                    if (DeleteTrigger != null)
-                    {
-                        DeleteTrigger.DestroyMeLocal();
-                    }
-                    if (WorkingTrigger != null)
-                    {
-                        Cloned_trigger = Door_4_Visual.AddComponent<VRCSDK2.VRC_Trigger>().GetCopyOf(WorkingTrigger);
-                        if (Cloned_trigger != null)
-                        {
-                            Cloned_trigger.interactText = "Force Unlock Door 4";
-                        }
-                    }
-                    if (Cloned_trigger != null)
-                    {
-                        Door_4_Visual.AddCollider();
-                        ModConsole.Log("Added Successfully Force unlock Door 4");
-                    }
+                    ModConsole.Log("Adding Lockpick Private Door 4");
+                    CloneTriggerToObject(Door_4_Interactive, Door_4_Visual, "(AstroClient) : Lockpick door 4");
                 }
+                return;
             }
             else if (WorldUtils.GetWorldID() == WorldIds.SnoozeScaryMaze5)
             {

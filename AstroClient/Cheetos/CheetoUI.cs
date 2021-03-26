@@ -77,7 +77,7 @@
             }
 
             float yPos_start = -0.5f;
-            float yPos_max = 12f;
+            float yPos_max = 5f;
             float yPos = yPos_start;
             float xPos = -2f;
 
