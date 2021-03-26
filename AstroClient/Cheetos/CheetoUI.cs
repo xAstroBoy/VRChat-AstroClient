@@ -111,7 +111,7 @@
                 if (yPos >= yPos_max)
                 {
                     yPos = yPos_start;
-                    xPos -= -2f;
+                    xPos += 1f;
                 }
             }
         }
