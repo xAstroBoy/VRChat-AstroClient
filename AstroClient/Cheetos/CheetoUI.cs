@@ -27,7 +27,7 @@
 
         private bool showPlayersButton = true; // Make this a setting eventually, in case they run Plagues POS
 
-        private readonly Color InstanceMasterColor = new UnityEngine.Color(158, 213, 255, 1); // Light Blue
+        private readonly Color InstanceMasterColor = Color.cyan; // Light Blue
 
         public override void VRChat_OnUiManagerInit()
         {
