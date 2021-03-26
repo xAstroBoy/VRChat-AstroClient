@@ -166,6 +166,7 @@
     <Compile Include="Variables\GDBUser.cs" />
     <Compile Include="Variables\VRChatObjects.cs" />
     <Compile Include="Variables\WorldIds.cs" />
+    <Compile Include="VRCAC\VRCAntiCrash_InitButtons.cs" />
     <Compile Include="WorldAddons\Worlds\Jar Worlds\AmongUSCheats.cs" />
     <Compile Include="WorldAddons\Worlds\Jar Worlds\Murder4Cheats.cs" />
     <Compile Include="Utils\Avatar\LewdVRChat.cs" />
