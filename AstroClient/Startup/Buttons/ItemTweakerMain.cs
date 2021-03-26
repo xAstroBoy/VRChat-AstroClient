@@ -120,7 +120,8 @@ namespace AstroClient.AstroUtils.ItemTweaker
 
             new QMSingleButton(menu, 5, 0.5f, "Activates all Colliders", new Action(() => { HandsUtils.GetGameObjectToEdit().enablecolliders(); }), "Enables all colliders bound to the object", null, null, true);
             new QMSingleButton(menu, 5, 1f, "Add Collider", new Action(() => { HandsUtils.GetGameObjectToEdit().AddCollider(); }), "Adds A Collider to the object (use it in case it doesn't have any!)", null, null, true);
-            new QMSingleButton(menu, 5, 1.5f, "Drop Object", new Action(() => { HandsUtils.GetGameObjectToEdit().ClaimOwnership(); }), "Make Whatever Player, drop the object.", null, Color.cyan, true);
+            new QMSingleButton(menu, 5, 1.5f, "Add Trigger Collider", new Action(() => { HandsUtils.GetGameObjectToEdit().AddTriggerCollider(); }), "Adds A Collider to the object (use it in case it doesn't have any!)", null, null, true);
+            new QMSingleButton(menu, 6, 1.5f, "Drop Object", new Action(() => { HandsUtils.GetGameObjectToEdit().ClaimOwnership(); }), "Make Whatever Player, drop the object.", null, Color.cyan, true);
         }
 
         public static void AddToWorldUtilsMenu(GameObject obj)

@@ -13,6 +13,16 @@ namespace AstroClient.extensions
             }
         }
 
+        public static void AddTriggerCollider(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                ColliderEditors.AddTriggerCollider(obj);
+            }
+        }
+
+
+
         public static void removeCollider(this GameObject obj)
         {
             if (obj != null)
