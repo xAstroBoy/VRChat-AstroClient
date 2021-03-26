@@ -1,33 +1,12 @@
-﻿using System;
+﻿using AstroClient.components;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using VRC;
-using VRC.Core;
-using VRC.SDKBase;
-using AstroClient.components;
-using Color = System.Drawing.Color;
 
-#region AstroClient Imports
-
-using AstroClient.Cloner;
-using AstroClient.ConsoleUtils;
-using AstroClient.Finder;
-using System.Reflection;
-using RubyButtonAPI;
-using UnityEngine.UI;
-using DayClientML2.Utility.Extensions;
-using AstroClient.AstroUtils.ItemTweaker;
-using static AstroClient.Forces;
-using VRC.SDK3.Components;
-using static AstroClient.variables.CustomLists;
-
-#endregion AstroClient Imports
 namespace AstroClient.extensions
 {
     public static class CustomComponentExtensions
     {
-
         public static void MakeRocketItemWithG(this GameObject obj)
         {
             RocketManager.AddObject(obj, false);
@@ -58,7 +37,6 @@ namespace AstroClient.extensions
             CrazyObjectManager.AddObject(obj, true);
         }
 
-
         public static void ForceSyncPhysic(this GameObject obj)
         {
             var control = obj.GetComponent<RigidBodyController>();
@@ -69,7 +47,7 @@ namespace AstroClient.extensions
             control.ForcedMode = true;
         }
 
-                public static void AddSpinForceX(this GameObject obj)
+        public static void AddSpinForceX(this GameObject obj)
         {
             try
             {
@@ -274,7 +252,7 @@ namespace AstroClient.extensions
             RocketManager.DecreaseObjTimer(obj);
         }
 
-                public static void AddRocketComponent(this List<GameObject> list, bool ShouldFloat, bool HasRelativeForce = true)
+        public static void AddRocketComponent(this List<GameObject> list, bool ShouldFloat, bool HasRelativeForce = true)
         {
             foreach (var obj in list)
             {
@@ -452,10 +430,5 @@ namespace AstroClient.extensions
                 }
             }
         }
-
-
-
-
-
     }
 }

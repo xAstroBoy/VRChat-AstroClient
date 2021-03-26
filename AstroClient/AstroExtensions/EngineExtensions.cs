@@ -1,35 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using VRC;
-using VRC.Core;
+﻿using UnityEngine;
 using VRC.SDKBase;
-using AstroClient.components;
 using Color = System.Drawing.Color;
 
 #region AstroClient Imports
 
 using AstroClient.Cloner;
 using AstroClient.ConsoleUtils;
-using AstroClient.Finder;
-using System.Reflection;
-using RubyButtonAPI;
-using UnityEngine.UI;
-using DayClientML2.Utility.Extensions;
 using AstroClient.AstroUtils.ItemTweaker;
-using static AstroClient.Forces;
-using VRC.SDK3.Components;
-using static AstroClient.variables.CustomLists;
 
 #endregion AstroClient Imports
-
 
 namespace AstroClient.extensions
 {
     public static class EngineExtensions
     {
-
         public static void DestroyObject(this GameObject obj)
         {
             if (!obj.DestroyMeOnline())
@@ -54,6 +38,7 @@ namespace AstroClient.extensions
                 ObjectCloner.CloneGameObject(obj);
             }
         }
+
         public static bool DestroyMeOnline(this GameObject obj)
         {
             bool refreshhandutils = false;
@@ -82,7 +67,6 @@ namespace AstroClient.extensions
                 return true;
             }
         }
-
 
         public static void DestroyMeLocal(this UnityEngine.Object obj)
         {
@@ -135,7 +119,5 @@ namespace AstroClient.extensions
                 ItemTweakerMain.ObjectActiveToggle.setToggleState(obj.active);
             }
         }
-
-
     }
 }
