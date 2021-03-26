@@ -150,17 +150,74 @@ namespace AstroClient.components
 
                 if (ForceComponent)
                 {
-                    if (Pickup1.IsNull())
+                    if (!hasRequiredComponentBeenAdded)
                     {
-                        if (Pickup2.IsNull())
+                        if (Pickup1.IsNull())
                         {
-                            if (Pickup3.IsNull())
+                            if (Pickup2.IsNull())
                             {
-                                ModConsole.DebugLog("PickupController : Added VRC_Pickup to object " + obj.name);
-                                Pickup1 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
-                                if (Pickup1 == null)
+                                if (Pickup3.IsNull())
                                 {
-                                    Pickup1 = obj.AddComponent<VRC.SDKBase.VRC_Pickup>();
+                                    Pickup1 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
+                                    Pickup2 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
+                                    Pickup3 = obj.GetComponent<VRC.SDK3.Components.VRCPickup>();
+                                    if (Pickup1 == null && !HasTriedWithPickup1)
+                                    {
+                                        ModConsole.DebugLog("PickupController : Attempting to add  VRC.SDKBase.VRC_Pickup to object " + obj.name);
+                                        Pickup1 = obj.AddComponent<VRC.SDKBase.VRC_Pickup>();
+                                        if (Pickup1 == null)
+                                        {
+                                            ModConsole.DebugLog("PickupController : Failed to add  VRC.SDKBase.VRC_Pickup to object " + obj.name);
+                                            HasTriedWithPickup1 = true;
+                                        }
+                                        else
+                                        {
+                                            ModConsole.DebugLog("PickupController : Added VRC.SDKBase.VRC_Pickup to object " + obj.name);
+                                            hasRequiredComponentBeenAdded = true;
+                                        }
+                                    }
+                                    else if (Pickup2 == null && !HasTriedWithPickup2 && HasTriedWithPickup1)
+                                    {
+                                        ModConsole.DebugLog("PickupController : Attempting to add  VRCSDK2.VRC_Pickup to object " + obj.name);
+                                        Pickup2 = obj.AddComponent<VRCSDK2.VRC_Pickup>();
+                                        if (Pickup2 == null)
+                                        {
+                                            ModConsole.DebugLog("PickupController : Failed to add  VRCSDK2.VRC_Pickup to object " + obj.name);
+                                            HasTriedWithPickup2 = true;
+                                        }
+                                        else
+                                        {
+                                            ModConsole.DebugLog("PickupController : Added VRCSDK2.VRC_Pickup to object " + obj.name);
+                                            hasRequiredComponentBeenAdded = true;
+                                        }
+                                    }
+                                    else if (Pickup3 == null && !HasTriedWithPickup3 && HasTriedWithPickup1 && HasTriedWithPickup2)
+                                    {
+                                        ModConsole.DebugLog("PickupController : Attempting to add  VRC.SDK3.Components.VRCPickup to object " + obj.name);
+                                        Pickup3 = obj.AddComponent<VRC.SDK3.Components.VRCPickup>();
+                                        if (Pickup3 == null)
+                                        {
+                                            ModConsole.DebugLog("PickupController : Failed to add  VRC.SDK3.Components.VRCPickup to object " + obj.name);
+                                            HasTriedWithPickup3 = true;
+                                        }
+                                        else
+                                        {
+                                            ModConsole.DebugLog("PickupController : Added VRC.SDK3.Components.VRCPickup to object " + obj.name);
+                                            hasRequiredComponentBeenAdded = true;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (!hasRequiredComponentBeenAdded)
+                                        {
+                                            ModConsole.DebugWarning("Failed to add A Pickup Component to the object : " + obj.name);
+                                            ForceComponent = false;
+                                            HasTriedWithPickup1 = false;
+                                            HasTriedWithPickup2 = false;
+                                            HasTriedWithPickup3 = false;
+                                            hasRequiredComponentBeenAdded = false;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -516,7 +573,7 @@ namespace AstroClient.components
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ModConsole.DebugError("Error in PickupController Bound to : " + obj.name);
                 ModConsole.DebugErrorExc(e);
@@ -912,6 +969,12 @@ namespace AstroClient.components
         private VRCSDK2.VRC_Pickup Pickup2;
         private VRC.SDK3.Components.VRCPickup Pickup3;
         private GameObject obj = null;
+
+        private bool HasTriedWithPickup1 = false;
+        private bool HasTriedWithPickup2 = false;
+        private bool HasTriedWithPickup3 = false;
+
+        private bool hasRequiredComponentBeenAdded = false;
 
         private bool Original_allowManipulationWhenEquipped;
         private bool Original_pickupable;
