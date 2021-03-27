@@ -10,8 +10,8 @@
 
     public class PlayerListUIData : SaveData
     {
-        public bool showPlayerList = true;
-        public bool showPlayersButton = true;
+        public bool showPlayerList { get; set; }
+        public bool showPlayersButton { get; set; }
     }
 
     public class PlayerListUI : Overridables
