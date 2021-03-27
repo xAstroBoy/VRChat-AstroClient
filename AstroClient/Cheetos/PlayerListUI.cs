@@ -3,15 +3,9 @@
     using AstroClient.ConsoleUtils;
     using DayClientML2.Utility.Extensions;
     using RubyButtonAPI;
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using UnityEngine;
     using VRC;
-    using VRC.SDKBase;
-    using VRC.Udon.Wrapper.Modules;
 
     public class PlayerListUIData : SaveData
     {
