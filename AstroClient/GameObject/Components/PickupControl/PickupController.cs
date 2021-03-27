@@ -166,6 +166,8 @@ namespace AstroClient.components
                                         if (RigidBodyController.Internal_Sync == null)
                                         {
                                             RigidBodyController.ForcedMode = true;
+                                            RigidBodyController.EditMode = true;
+                                            RigidBodyController.isKinematic = true;
                                         }
                                         HasAddedRigidBodyController = true;
 
