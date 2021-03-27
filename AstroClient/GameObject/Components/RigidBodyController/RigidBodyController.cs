@@ -1,5 +1,6 @@
 ﻿using AstroClient.AstroUtils.ItemTweaker;
 using AstroClient.ConsoleUtils;
+using AstroClient.ItemTweaker;
 using AstroClient.SyncPhysicExt;
 using System;
 using UnhollowerBaseLib.Attributes;
@@ -94,7 +95,7 @@ namespace AstroClient.components
             else
             {
                 ModConsole.DebugLog($"Backupping from RigidBody properties for object  {obj.name}");
-                OrigKinematic = RigidBody.isKinematic;
+                OrigKinematic = true;
                 OrigUseGravity = RigidBody.useGravity;
                 OrigDetectCollisions = RigidBody.detectCollisions;
                 OrigConstraints = RigidBody.constraints;
@@ -150,7 +151,7 @@ namespace AstroClient.components
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
                 }
-                if (obj == HandsUtils.GameObjectToEdit)
+                if (obj.transform == Tweaker_Object.CurrentSelectedObject)
                 {
                     if (ItemTweakerMain.ProtectionInteractor != null)
                     {

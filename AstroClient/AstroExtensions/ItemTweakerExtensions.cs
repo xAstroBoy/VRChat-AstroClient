@@ -15,7 +15,7 @@ namespace AstroClient.extensions
         {
             if (obj != null)
             {
-                ItemTweakerMain.AddToWorldUtilsMenu(obj);
+                ItemTweakerMain.AddToWorldUtilsMenu(obj.transform);
             }
         }
 
@@ -25,7 +25,7 @@ namespace AstroClient.extensions
             {
                 if (obj != null)
                 {
-                    ItemTweakerMain.AddToWorldUtilsMenu(obj);
+                    ItemTweakerMain.AddToWorldUtilsMenu(obj.transform);
                 }
             }
         }

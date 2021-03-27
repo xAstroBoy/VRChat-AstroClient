@@ -6,6 +6,7 @@ using static AstroClient.variables.GlobalLists;
 using AstroClient.ConsoleUtils;
 using AstroClient.AstroUtils.ItemTweaker;
 using AstroClient.extensions;
+using AstroClient.ItemTweaker;
 
 #endregion AstroClient Imports
 
@@ -68,7 +69,7 @@ namespace AstroClient.Cloner
                     ItemTweakerMain.UpdateSpawnedPickupsBtn();
                 }
                 ModConsole.Log("Spawned A Copy Successfully!, cloned " + obj.name);
-                HandsUtils.SetObjectToEdit(obj);
+                Tweaker_Object.SetObjectToEdit(obj.transform);
             }
             else
             {

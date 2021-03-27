@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AstroClient.ItemTweaker;
+using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using UnhollowerRuntimeLib;
@@ -83,7 +84,7 @@ namespace AstroClient.components
                             // Z
                             FixZ();
                             // Update Button
-                            if (obj == HandsUtils.GameObjectToEdit)
+                            if (obj.transform == Tweaker_Object.CurrentSelectedObject)
                             {
                                 GameObjectActualScale.setButtonText("Object 's Current scale : " + obj.transform.localScale.ToString());
                             }

@@ -1,5 +1,6 @@
 ﻿using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
+using AstroClient.ItemTweaker;
 using System;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
@@ -129,7 +130,7 @@ namespace AstroClient.components
         {
             try
             {
-                if (HandsUtils.GameObjectToEdit == obj)
+                if (Tweaker_Object.CurrentSelectedObject == obj)
                 {
                     UpdateHeldOwnerBtn();
                     UpdateEditMode();
@@ -168,7 +169,6 @@ namespace AstroClient.components
                                         // IF INTERNAL SYNC IS NULL, FORCE ADD IT THEN REPLACE DEFAULT KINEMATIC TO TRUE BY DEFAULT TO AVOID OBJECTS FALLING IN THE WORLD.
                                         if (RigidBodyController.Internal_Sync == null)
                                         {
-                                            RigidBodyController.OverrideInternalKinematic(true);
                                             RigidBodyController.ForcedMode = true;
                                         }
                                         HasAddedRigidBodyController = true;
@@ -604,7 +604,7 @@ namespace AstroClient.components
         [HideFromIl2Cpp]
         private void UpdatePickupOwnerBtns()
         {
-            if (HandsUtils.GameObjectToEdit == obj)
+            if (Tweaker_Object.CurrentSelectedObject == obj.transform)
             {
                 if (Pickup_CurrentObjOwner != null)
                 {
@@ -655,7 +655,7 @@ namespace AstroClient.components
         {
             if (obj != null)
             {
-                if (HandsUtils.GameObjectToEdit == obj)
+                if (Tweaker_Object.CurrentSelectedObject == obj.transform)
                 {
                     if (Pickup_PickupOrientation_prop_any != null)
                     {
@@ -699,7 +699,7 @@ namespace AstroClient.components
         {
             if (obj != null)
             {
-                if (HandsUtils.GameObjectToEdit == obj)
+                if (Tweaker_Object.CurrentSelectedObject == obj.transform)
                 {
                     if (Pickup_AutoHoldMode_prop_AutoDetect != null)
                     {
@@ -743,7 +743,7 @@ namespace AstroClient.components
         {
             if (obj != null)
             {
-                if (HandsUtils.GameObjectToEdit == obj)
+                if (Tweaker_Object.CurrentSelectedObject == obj.transform)
                 {
                     if (Pickup_allowManipulationWhenEquipped != null)
                     {
@@ -758,7 +758,7 @@ namespace AstroClient.components
         {
             if (obj != null)
             {
-                if (HandsUtils.GameObjectToEdit == obj)
+                if (Tweaker_Object.CurrentSelectedObject == obj.transform)
                 {
                     if (Pickup_pickupable != null)
                     {
@@ -773,7 +773,7 @@ namespace AstroClient.components
         {
             if (obj != null)
             {
-                if (HandsUtils.GameObjectToEdit == obj)
+                if (Tweaker_Object.CurrentSelectedObject == obj.transform)
                 {
                     if (Pickup_DisallowTheft != null)
                     {
@@ -788,7 +788,7 @@ namespace AstroClient.components
         {
             if (obj != null)
             {
-                if (HandsUtils.GameObjectToEdit == obj)
+                if (Tweaker_Object.CurrentSelectedObject == obj.transform)
                 {
                     if (PickupProximitySlider != null)
                     {
@@ -801,7 +801,7 @@ namespace AstroClient.components
         [HideFromIl2Cpp]
         private void UpdateIsHeld()
         {
-            if (HandsUtils.GameObjectToEdit == obj)
+            if (Tweaker_Object.CurrentSelectedObject == obj.transform)
             {
                 if (Pickup_IsHeld != null)
                 {
@@ -829,7 +829,7 @@ namespace AstroClient.components
         [HideFromIl2Cpp]
         private void UpdateHeldOwnerBtn()
         {
-            if (HandsUtils.GameObjectToEdit == obj)
+            if (Tweaker_Object.CurrentSelectedObject == obj.transform)
             {
                 if (Forces_CurrentObjHolder != null)
                 {
@@ -966,7 +966,7 @@ namespace AstroClient.components
         [HideFromIl2Cpp]
         private void UpdateEditMode()
         {
-            if (HandsUtils.GameObjectToEdit == obj)
+            if (Tweaker_Object.CurrentSelectedObject == obj.transform)
             {
                 if (EditMode)
                 {
