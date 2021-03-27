@@ -19,7 +19,6 @@ using AstroClient.Components;
 using AstroClient.UdonExploits;
 using AstroClient.ButtonShortcut;
 using CheetosConsole;
-using AstroClient.Cheetos;
 
 #endregion AstroClient Imports
 

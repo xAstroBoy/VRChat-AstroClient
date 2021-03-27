@@ -1,4 +1,4 @@
-﻿namespace AstroClient.Cheetos
+﻿namespace AstroClient
 {
     using AstroClient.ConsoleUtils;
     using DayClientML2.Utility.Extensions;
