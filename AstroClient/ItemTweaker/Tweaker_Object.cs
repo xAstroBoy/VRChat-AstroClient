@@ -19,7 +19,7 @@ namespace AstroClient.ItemTweaker
 
         public static void SetEditLock(bool status)
         {
-            if (TransformToEdit != null)
+            if (CurrentSelectedObject != null)
             {
                 ObjectToEditLock = status;
                 LockHoldItem.setToggleState(status);
@@ -33,9 +33,9 @@ namespace AstroClient.ItemTweaker
             {
                 UpdateCapturedObject(null);
             }
-            if (TransformToEdit != null)
+            if (CurrentSelectedObject != null)
             {
-                TransformToEdit = null;
+                CurrentSelectedObject = null;
             }
             CurrentSelectedItemEnabledESP = false;
             if (LockHoldItem != null)
@@ -53,9 +53,9 @@ namespace AstroClient.ItemTweaker
         {
             get
             {
-                if (TransformToEdit != null)
+                if (CurrentSelectedObject != null)
                 {
-                    return TransformToEdit.name;
+                    return CurrentSelectedObject.name;
                 }
                 else
                 {
@@ -139,36 +139,36 @@ namespace AstroClient.ItemTweaker
                 _CurrentSelectedItemEnabledESP = value;
                 if (value)
                 {
-                    if (TransformToEdit != null)
+                    if (CurrentSelectedObject != null)
                     {
-                        if (TransformToEdit.GetComponent<VRChatESP>() == null)
+                        if (CurrentSelectedObject.GetComponent<VRChatESP>() == null)
                         {
-                            TransformToEdit.gameObject.AddComponent<VRChatESP>();
+                            CurrentSelectedObject.gameObject.AddComponent<VRChatESP>();
                         }
                     }
                 }
                 else
                 {
-                    if (TransformToEdit != null)
+                    if (CurrentSelectedObject != null)
                     {
-                        if (TransformToEdit.GetComponent<VRChatESP>() != null)
+                        if (CurrentSelectedObject.GetComponent<VRChatESP>() != null)
                         {
                             if (GameObjectESP.isMurderItemsESPActivated)
                             {
                                 if (GameObjectESP.MurderESPItems != null && GameObjectESP.MurderESPItems.Count() != 0)
                                 {
-                                    if (GameObjectESP.MurderESPItems.Contains(TransformToEdit.gameObject))
+                                    if (GameObjectESP.MurderESPItems.Contains(CurrentSelectedObject.gameObject))
                                     {
                                         if (!GameObjectESP.isMurderItemsESPActivated)
                                         {
-                                            UnityEngine.Object.Destroy(TransformToEdit.GetComponent<VRChatESP>());
+                                            UnityEngine.Object.Destroy(CurrentSelectedObject.GetComponent<VRChatESP>());
                                         }
                                     }
                                 }
                             }
                             else
                             {
-                                UnityEngine.Object.Destroy(TransformToEdit.GetComponent<VRChatESP>());
+                                UnityEngine.Object.Destroy(CurrentSelectedObject.GetComponent<VRChatESP>());
                             }
                         }
                     }
@@ -177,32 +177,32 @@ namespace AstroClient.ItemTweaker
             }
         }
 
-        private static Transform _TransformToEdit;
+        private static Transform _CurrentSelectedObject;
 
-        public static Transform TransformToEdit
+        public static Transform CurrentSelectedObject
         {
             get
             {
-                return _TransformToEdit;
+                return _CurrentSelectedObject;
             }
             set
             {
-                if (_TransformToEdit == value)
+                if (_CurrentSelectedObject == value)
                 {
                     return;
                 }
-                if (_TransformToEdit != null)
+                if (_CurrentSelectedObject != null)
                 {
 
 
-                    VRChatESP installedESP = _TransformToEdit.GetComponent<VRChatESP>();
+                    VRChatESP installedESP = _CurrentSelectedObject.GetComponent<VRChatESP>();
                     if (installedESP != null)
                     {
                         if (GameObjectESP.isMurderItemsESPActivated)
                         {
                             if (GameObjectESP.MurderESPItems != null && GameObjectESP.MurderESPItems.Count() != 0)
                             {
-                                if (GameObjectESP.MurderESPItems.Contains(_TransformToEdit.gameObject))
+                                if (GameObjectESP.MurderESPItems.Contains(_CurrentSelectedObject.gameObject))
                                 {
                                     if (!GameObjectESP.isMurderItemsESPActivated)
                                     {
@@ -218,7 +218,7 @@ namespace AstroClient.ItemTweaker
                     }
                 }
 
-                _TransformToEdit = value;
+                _CurrentSelectedObject = value;
                 if (CurrentSelectedItemEnabledESP)
                 {
                     if (value != null)
@@ -271,7 +271,7 @@ namespace AstroClient.ItemTweaker
             if (obj != null)
             {
                 ModConsole.Log("Path is valid, Found Gameobject obj : " + obj.name + "Using path " + objpath);
-                TransformToEdit = obj;
+                CurrentSelectedObject = obj;
                 return obj;
             }
             else
@@ -286,7 +286,7 @@ namespace AstroClient.ItemTweaker
             {
                 return;
             }
-            TransformToEdit = obj.transform;
+            CurrentSelectedObject = obj.transform;
         }
 
 
@@ -300,33 +300,26 @@ namespace AstroClient.ItemTweaker
                     var item = PlayerHands.GetHoldTransform();
                     if (item != null)
                     {
-                        TransformToEdit = item;
+                        CurrentSelectedObject = item;
                     }
-                    return TransformToEdit;
+                    return CurrentSelectedObject;
                 }
                 else
                 {
-                    return TransformToEdit;
+                    return CurrentSelectedObject;
                 }
             }
             catch
             {
-                return TransformToEdit;
+                return CurrentSelectedObject;
             }
         }
 
         public static GameObject GetGameObjectToEdit()
         {
-            return GetTransformToEdit().gameObject;
+            return CurrentSelectedObject.gameObject;
         }
-
-        public static Transform CurrentSelectedObject
-        {
-            get
-            {
-                return TransformToEdit;
-            }
-        }
+ 
 
 
         public static bool ObjectToEditLock = false;

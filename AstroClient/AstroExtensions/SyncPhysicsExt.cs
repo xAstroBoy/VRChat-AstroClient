@@ -24,5 +24,10 @@ namespace AstroClient.SyncPhysicExt
         {
             return instance.field_Private_Rigidbody_0;
         }
+
+        public static void SpawnRigidBody(this SyncPhysics instance)
+        {
+            instance.field_Private_Rigidbody_0 = new Rigidbody();            
+        }
     }
 }

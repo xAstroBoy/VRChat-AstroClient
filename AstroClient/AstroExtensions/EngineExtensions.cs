@@ -43,7 +43,7 @@ namespace AstroClient.extensions
         public static bool DestroyMeOnline(this GameObject obj)
         {
             bool refreshhandutils = false;
-            if (Tweaker_Object.TransformToEdit == obj.transform)
+            if (Tweaker_Object.CurrentSelectedObject == obj.transform)
             {
                 refreshhandutils = true;
             }
@@ -63,7 +63,7 @@ namespace AstroClient.extensions
                 ModConsole.Log("Destroyed Server-side Object : " + name, Color.Green);
                 if (refreshhandutils)
                 {
-                    Tweaker_Object.TransformToEdit = null;
+                    Tweaker_Object.CurrentSelectedObject = null;
                 }
                 return true;
             }

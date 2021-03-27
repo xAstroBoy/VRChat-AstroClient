@@ -470,7 +470,7 @@ namespace AstroClient.GameObjectDebug
             }
             else
             {
-                CheckObjComponents(PlayerHands.GetHoldTransform());
+                CheckObjComponents(Tweaker_Object.CurrentSelectedObject);
             }
         }
 
