@@ -19,6 +19,7 @@ using AstroClient.Components;
 using AstroClient.UdonExploits;
 using AstroClient.ButtonShortcut;
 using CheetosConsole;
+using System.Collections.Generic;
 
 #endregion AstroClient Imports
 
@@ -36,6 +37,8 @@ namespace AstroClient
         public static event EventHandler Event_VRChat_OnUiManagerInit;
 
         public static event EventHandler Event_OnLevelLoaded;
+
+        public static List<Overridables> Overridable_List = new List<Overridables>();
 
         public override void OnApplicationStart()
         {
@@ -63,6 +66,7 @@ namespace AstroClient
                 {
                     Overridables component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as Overridables;
                     component.OnApplicationStart();
+                    Overridable_List.Add(component);
                 }
             }
         }

@@ -6,20 +6,20 @@
     using UnityEngine;
     using VRC.SDKBase;
 
+    [Serializable]
+    public class SaveData
+    {
+    }
+
     // thanks TO Cheeto aka Craig on discord, he's been really helpful!
     public class Overridables // TODO: GET A BETTER NAME
     {
-        public static Overridables Instance;
+        public SaveData saveData;
 
         public Overridables()
         {
             try
             {
-                if (Instance == null)
-                {
-                    Instance = this;
-                }
-
                 // ML Events
                 //Main.Event_OnApplicationStart += Internal_OnApplicationStart;
                 Main.Event_OnUpdate += Internal_OnUpdate;

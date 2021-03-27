@@ -13,11 +13,17 @@
     using VRC.SDKBase;
     using VRC.Udon.Wrapper.Modules;
 
+    public class PlayerListUIData : SaveData
+    {
+        public bool showPlayerList = true;
+        public bool showPlayersButton = true;
+    }
+
     /// <summary>
     /// This is a temporary name/place for this class and contents.
     /// Everything in it should be moved eventually.
     /// </summary>
-    public class CheetoUI : Overridables
+    public class PlayerListUI : Overridables
     {
         private QMSingleButton playersButton;
 
@@ -147,10 +153,10 @@
             }
         }
 
-        public static void SetPlayerButtonActive(bool b)
+        public void SetPlayerButtonActive(bool b)
         {
-            (Instance as CheetoUI).showPlayersButton = b;
-            (Instance as CheetoUI).playersButton.setActive(b);
+            showPlayersButton = b;
+            playersButton.setActive(b);
         }
     }
 }
