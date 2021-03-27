@@ -19,10 +19,6 @@
         public bool showPlayersButton = true;
     }
 
-    /// <summary>
-    /// This is a temporary name/place for this class and contents.
-    /// Everything in it should be moved eventually.
-    /// </summary>
     public class PlayerListUI : Overridables
     {
         public PlayerListUIData saveData = new PlayerListUIData();
@@ -53,11 +49,19 @@
             PopulateButtons();
         }
 
+        /// <summary>
+        /// Stop doing this, add to the list rather than refresh all of it -- Cheetos
+        /// </summary>
+        /// <param name="player"></param>
         public override void OnPlayerJoined(Player player)
         {
             PopulateButtons();
         }
 
+        /// <summary>
+        /// Stop doing this, remove from the list rather than refresh all of it -- Cheetos
+        /// </summary>
+        /// <param name="player"></param>
         public override void OnPlayerLeft(Player player)
         {
             PopulateButtons();
@@ -65,7 +69,6 @@
 
         private void PopulateButtons()
         {
-            // If there's a better way to fetch all of the players, lemme know lol
             var players = WorldUtils.GetAllPlayers0();
             var temp_list = new List<Player>();
 
@@ -102,6 +105,8 @@
                 {
                     if (rank == PlayerExtensions.RankType.Moderator || rank == PlayerExtensions.RankType.Admin)
                     {
+                        // Stop printing to the console, it's not useful, use Days code to display a notification somehow.
+                        // However this needs to be done after the button refresh fix -- Cheetos
                         ModConsole.Warning($"WARNING: There's a moderator or admin in your lobby! {player.DisplayName()}");
                         playerButton.setTextColor(UnityEngine.Color.yellow);
                         playerButton.setBackgroundColor(UnityEngine.Color.yellow);
