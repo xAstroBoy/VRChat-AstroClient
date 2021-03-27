@@ -1,5 +1,6 @@
 ﻿using AstroClient.AstroUtils.ItemTweaker;
 using AstroClient.ConsoleUtils;
+using AstroClient.ItemTweaker;
 using AstroClient.SyncPhysicExt;
 using System;
 using UnhollowerBaseLib.Attributes;
@@ -19,9 +20,14 @@ namespace AstroClient.components
             try
             {
                 obj = gameObject;
-                RigidBody = GetComponent<Rigidbody>();
-                Sync = GetComponent<SyncPhysics>();
+                body = obj.GetComponent<Rigidbody>();
+                if(body == null)
+                {
+                    body = obj.GetComponentInChildren<Rigidbody>();
+                }
 
+
+                Sync = obj.GetComponent<SyncPhysics>();
                 BackupBasicBody();
                 EditMode = false;
             }
@@ -90,22 +96,25 @@ namespace AstroClient.components
                         AngularDrag = Sync.GetRigidBody().angularDrag;
                     }
                 }
+                else
+                {
+                    OrigKinematic = true;
+                }
             }
             else
             {
                 ModConsole.DebugLog($"Backupping from RigidBody properties for object  {obj.name}");
-                OrigKinematic = RigidBody.isKinematic;
-                OrigUseGravity = RigidBody.useGravity;
-                OrigDetectCollisions = RigidBody.detectCollisions;
-                OrigConstraints = RigidBody.constraints;
-                OrigDrag = RigidBody.drag;
-                OrigAngularDrag = RigidBody.angularDrag;
-                isKinematic = RigidBody.isKinematic;
-                useGravity = RigidBody.useGravity;
-                DetectCollisions = RigidBody.detectCollisions;
-                AngularDrag = RigidBody.angularDrag;
-                Drag = RigidBody.drag;
-                Constraints = RigidBody.constraints;
+                OrigUseGravity = body.useGravity;
+                OrigDetectCollisions = body.detectCollisions;
+                OrigConstraints = body.constraints;
+                OrigDrag = body.drag;
+                OrigAngularDrag = body.angularDrag;
+                isKinematic = body.isKinematic;
+                useGravity = body.useGravity;
+                DetectCollisions = body.detectCollisions;
+                AngularDrag = body.angularDrag;
+                Drag = body.drag;
+                Constraints = body.constraints;
             }
             EditMode = false;
         }
@@ -120,12 +129,15 @@ namespace AstroClient.components
             Constraints = OrigConstraints;
             if (Sync != null)
             {
-                Sync.GetRigidBody().useGravity = OrigUseGravity;
-                Sync.GetRigidBody().isKinematic = OrigKinematic;
-                Sync.GetRigidBody().constraints = OrigConstraints;
-                Sync.GetRigidBody().detectCollisions = OrigDetectCollisions;
-                Sync.GetRigidBody().drag = OrigDrag;
-                Sync.GetRigidBody().angularDrag = OrigAngularDrag;
+                if (Sync.GetRigidBody() != null)
+                {
+                    Sync.GetRigidBody().useGravity = OrigUseGravity;
+                    Sync.GetRigidBody().isKinematic = OrigKinematic;
+                    Sync.GetRigidBody().constraints = OrigConstraints;
+                    Sync.GetRigidBody().detectCollisions = OrigDetectCollisions;
+                    Sync.GetRigidBody().drag = OrigDrag;
+                    Sync.GetRigidBody().angularDrag = OrigAngularDrag;
+                }
             }
             Sync.RefreshProperties();
             EditMode = false;
@@ -136,13 +148,48 @@ namespace AstroClient.components
         {
             try
             {
-                if (ForcedMode)
+                try
                 {
-                    if (Sync == null)
+                    if (ForcedMode)
                     {
-                        Sync = obj.AddComponent<SyncPhysics>();
+                        if (Sync == null)
+                        {
+                            Sync = obj.AddComponent<SyncPhysics>();
+                        }
+
+                        if (Sync.field_Private_Rigidbody_0 == null)
+                        {
+                            if (obj.GetComponent<Rigidbody>() != null && Sync.field_Private_Rigidbody_0 == null)
+                            {
+                                ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Rigidbody in SyncPhysic as is Null..");
+                                Sync.field_Private_Rigidbody_0 = obj.GetComponent<Rigidbody>();
+                                return;
+                            }
+    
+                                if (obj.GetComponentInChildren<Rigidbody>() != null && Sync.field_Private_Rigidbody_0 == null)
+                                {
+                                    ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Rigidbody in SyncPhysic as is Null..");
+                                    Sync.field_Private_Rigidbody_0 = obj.GetComponentInChildren<Rigidbody>();
+                                    return;
+                                }
+                            if (obj.GetComponentInChildren<Rigidbody>() == null && obj.GetComponent<Rigidbody>() == null && Sync.field_Private_Rigidbody_0 == null)
+                            {
+                                ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Spawned Rigidbody in SyncPhysic as is Null..");
+                                body = obj.AddComponent<Rigidbody>();
+                                Sync.field_Private_Rigidbody_0 = body;
+                                body.isKinematic = true;
+                                return;
+                            }
+
+                        }
                     }
                 }
+                catch (Exception e)
+                {
+                    ModConsole.DebugError($"RigidBodyController : Failed to Bind a Rigidbody to Object {obj.name}, Retrying...");
+                    return;
+                }
+
                 if (PreventOthersFromGrabbing)
                 {
                     if (!OnlineEditor.IsLocalPlayerOwner(obj))
@@ -150,7 +197,7 @@ namespace AstroClient.components
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
                 }
-                if (obj == HandsUtils.GameObjectToEdit)
+                if (Tweaker_Object.CurrentSelectedObject == obj)
                 {
                     if (ItemTweakerMain.ProtectionInteractor != null)
                     {
@@ -173,35 +220,38 @@ namespace AstroClient.components
                 {
                     if (Sync != null)
                     {
-                        if (Sync.GetRigidBody().useGravity != useGravity)
+                        if (Sync.GetRigidBody() != null)
                         {
-                            Sync.GetRigidBody().useGravity = useGravity;
-                            Sync.RefreshProperties();
-                        }
-                        if (Sync.GetRigidBody().isKinematic != isKinematic)
-                        {
-                            Sync.GetRigidBody().isKinematic = isKinematic;
-                            Sync.RefreshProperties();
-                        }
-                        if (Sync.GetRigidBody().constraints != Constraints)
-                        {
-                            Sync.GetRigidBody().constraints = Constraints;
-                            Sync.RefreshProperties();
-                        }
-                        if (Sync.GetRigidBody().detectCollisions != DetectCollisions)
-                        {
-                            Sync.GetRigidBody().detectCollisions = DetectCollisions;
-                            Sync.RefreshProperties();
-                        }
-                        if (Sync.GetRigidBody().drag != Drag)
-                        {
-                            Sync.GetRigidBody().drag = Drag;
-                            Sync.RefreshProperties();
-                        }
-                        if (Sync.GetRigidBody().angularDrag != AngularDrag)
-                        {
-                            Sync.GetRigidBody().angularDrag = AngularDrag;
-                            Sync.RefreshProperties();
+                            if (Sync.GetRigidBody().useGravity != useGravity)
+                            {
+                                Sync.GetRigidBody().useGravity = useGravity;
+                                Sync.RefreshProperties();
+                            }
+                            if (Sync.GetRigidBody().isKinematic != isKinematic)
+                            {
+                                Sync.GetRigidBody().isKinematic = isKinematic;
+                                Sync.RefreshProperties();
+                            }
+                            if (Sync.GetRigidBody().constraints != Constraints)
+                            {
+                                Sync.GetRigidBody().constraints = Constraints;
+                                Sync.RefreshProperties();
+                            }
+                            if (Sync.GetRigidBody().detectCollisions != DetectCollisions)
+                            {
+                                Sync.GetRigidBody().detectCollisions = DetectCollisions;
+                                Sync.RefreshProperties();
+                            }
+                            if (Sync.GetRigidBody().drag != Drag)
+                            {
+                                Sync.GetRigidBody().drag = Drag;
+                                Sync.RefreshProperties();
+                            }
+                            if (Sync.GetRigidBody().angularDrag != AngularDrag)
+                            {
+                                Sync.GetRigidBody().angularDrag = AngularDrag;
+                                Sync.RefreshProperties();
+                            }
                         }
                     }
                 }
@@ -209,58 +259,61 @@ namespace AstroClient.components
                 {
                     if (Sync != null)
                     {
-                        if (Sync.GetRigidBody().useGravity != OrigUseGravity)
+                        if (Sync.GetRigidBody() != null)
                         {
-                            OrigUseGravity = Sync.GetRigidBody().useGravity;
-                        }
-                        if (Sync.GetRigidBody().useGravity != useGravity)
-                        {
-                            useGravity = Sync.GetRigidBody().useGravity;
-                        }
+                            if (Sync.GetRigidBody().useGravity != OrigUseGravity)
+                            {
+                                OrigUseGravity = Sync.GetRigidBody().useGravity;
+                            }
+                            if (Sync.GetRigidBody().useGravity != useGravity)
+                            {
+                                useGravity = Sync.GetRigidBody().useGravity;
+                            }
 
-                        if (Sync.GetRigidBody().isKinematic != OrigKinematic)
-                        {
-                            OrigKinematic = Sync.GetRigidBody().isKinematic;
-                        }
-                        if (Sync.GetRigidBody().isKinematic != isKinematic)
-                        {
-                            isKinematic = Sync.GetRigidBody().isKinematic;
-                        }
+                            if (Sync.GetRigidBody().isKinematic != OrigKinematic)
+                            {
+                                OrigKinematic = Sync.GetRigidBody().isKinematic;
+                            }
+                            if (Sync.GetRigidBody().isKinematic != isKinematic)
+                            {
+                                isKinematic = Sync.GetRigidBody().isKinematic;
+                            }
 
-                        if (Sync.GetRigidBody().constraints != OrigConstraints)
-                        {
-                            OrigConstraints = Sync.GetRigidBody().constraints;
-                        }
-                        if (Sync.GetRigidBody().constraints != Constraints)
-                        {
-                            Constraints = Sync.GetRigidBody().constraints;
-                        }
+                            if (Sync.GetRigidBody().constraints != OrigConstraints)
+                            {
+                                OrigConstraints = Sync.GetRigidBody().constraints;
+                            }
+                            if (Sync.GetRigidBody().constraints != Constraints)
+                            {
+                                Constraints = Sync.GetRigidBody().constraints;
+                            }
 
-                        if (Sync.GetRigidBody().detectCollisions != OrigDetectCollisions)
-                        {
-                            OrigDetectCollisions = Sync.GetRigidBody().detectCollisions;
-                        }
-                        if (Sync.GetRigidBody().detectCollisions != DetectCollisions)
-                        {
-                            DetectCollisions = Sync.GetRigidBody().detectCollisions;
-                        }
+                            if (Sync.GetRigidBody().detectCollisions != OrigDetectCollisions)
+                            {
+                                OrigDetectCollisions = Sync.GetRigidBody().detectCollisions;
+                            }
+                            if (Sync.GetRigidBody().detectCollisions != DetectCollisions)
+                            {
+                                DetectCollisions = Sync.GetRigidBody().detectCollisions;
+                            }
 
-                        if (Sync.GetRigidBody().drag != OrigDrag)
-                        {
-                            OrigDrag = Sync.GetRigidBody().drag;
-                        }
-                        if (Sync.GetRigidBody().drag != Drag)
-                        {
-                            Drag = Sync.GetRigidBody().drag;
-                        }
+                            if (Sync.GetRigidBody().drag != OrigDrag)
+                            {
+                                OrigDrag = Sync.GetRigidBody().drag;
+                            }
+                            if (Sync.GetRigidBody().drag != Drag)
+                            {
+                                Drag = Sync.GetRigidBody().drag;
+                            }
 
-                        if (Sync.GetRigidBody().angularDrag != OrigAngularDrag)
-                        {
-                            OrigAngularDrag = Sync.GetRigidBody().angularDrag;
-                        }
-                        if (Sync.GetRigidBody().angularDrag != AngularDrag)
-                        {
-                            AngularDrag = Sync.GetRigidBody().angularDrag;
+                            if (Sync.GetRigidBody().angularDrag != OrigAngularDrag)
+                            {
+                                OrigAngularDrag = Sync.GetRigidBody().angularDrag;
+                            }
+                            if (Sync.GetRigidBody().angularDrag != AngularDrag)
+                            {
+                                AngularDrag = Sync.GetRigidBody().angularDrag;
+                            }
                         }
                     }
                 }
@@ -321,7 +374,7 @@ namespace AstroClient.components
 
         private GameObject obj = null;
         private SyncPhysics Sync = null;
-        private Rigidbody RigidBody = null;
+        private Rigidbody body = null;
 
         internal bool EditMode = false;
 

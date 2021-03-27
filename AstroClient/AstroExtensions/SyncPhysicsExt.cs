@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AstroClient.ConsoleUtils;
+using UnityEngine;
 
 namespace AstroClient.SyncPhysicExt
 {
@@ -22,7 +23,14 @@ namespace AstroClient.SyncPhysicExt
 
         public static Rigidbody GetRigidBody(this SyncPhysics instance)
         {
-            return instance.field_Private_Rigidbody_0;
+            if (instance != null)
+            {
+                return instance.field_Private_Rigidbody_0;
+            }
+            return null;
         }
+
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
+using AstroClient.ItemTweaker;
 using RubyButtonAPI;
 using System;
 using System.Collections;
@@ -371,7 +372,7 @@ namespace AstroClient
                            }
                            if (PassToTweakerMode)
                            {
-                               HandsUtils.GameObjectToEdit = item.gameObject;
+                               Tweaker_Object.CurrentSelectedObject = item.gameObject;
                            }
                        }));
                         newbtn.getGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(newbtn.getGameObject().GetComponent<RectTransform>().sizeDelta.x - 100f, newbtn.getGameObject().GetComponent<RectTransform>().sizeDelta.y);

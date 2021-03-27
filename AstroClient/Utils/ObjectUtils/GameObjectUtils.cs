@@ -22,6 +22,7 @@ using AstroClient.ConsoleUtils;
 using DayClientML2.Utility.Extensions;
 using AstroClient.extensions;
 using AstroClient.SyncPhysicExt;
+using AstroClient.ItemTweaker;
 
 #endregion AstroClient Imports
 
@@ -36,7 +37,7 @@ namespace AstroClient.GameObjectDebug
             new QMSingleButton(GameObjectsMenus, 2, 0, "Print GameObject Components in console", new Action(GameObjectUtils.DumpHoldingGameObjComponent), "Prints Gameobj components in console", null, null);
             GameObjectUtils.GrabGameObjDumper = new QMSingleButton(GameObjectsMenus, 3, 0, "Grabbable name Dumper", new Action(GameObjectUtils.GrabbableGameObjDumper), "Dump All Grabbable GameObjects's names in a file!", null, null);
             GameObjectUtils.ObjDumperWithComponentsBtn = new QMSingleButton(GameObjectsMenus, 4, 0, "Dump World GameObjects with components", new Action(GameObjectUtils.GameObjDumperWithComponents), "Dump All World GameObjects's along with their components!", null, null);
-            new QMSingleButton(GameObjectsMenus, 1, 1, "Print RigidBody Info In Console", new Action(() => { HandsUtils.GetGameObjectToEdit().PrintAllRigidBodySettings(); }), "Print RigidBody Details in console!", null, null);
+            new QMSingleButton(GameObjectsMenus, 1, 1, "Print RigidBody Info In Console", new Action(() => { Tweaker_Object.GetGameObjectToEdit().gameObject.PrintAllRigidBodySettings(); }), "Print RigidBody Details in console!", null, null);
             new QMSingleButton(GameObjectsMenus, 2, 1, "Find who is controlling pickups", new Action(GameObjectUtils.GetAllPickupsOwners), "Print Pickups Owners in console!", null, null);
             new QMSingleButton(GameObjectsMenus, 3, 1, "Print VideoPlayer Links in console.", new Action(GameObjectUtils.DumpVideoPlayerURLS), "Print VideoPlayers URLS Queque in console!", null, null);
             new QMSingleButton(GameObjectsMenus, 4, 1, "Cleans Queque in Videoplayers", new Action(GameObjectUtils.ClearVideoPlayers), "Clears Queque in VideoPlayers.", null, null);
@@ -462,14 +463,10 @@ namespace AstroClient.GameObjectDebug
 
         public static void DumpHoldingGameObjComponent()
         {
-            var held = HandsUtils.GetHoldGameObject();
+            var held = Tweaker_Object.GetGameObjectToEdit();
             if (held != null)
             {
                 CheckObjComponents(held);
-            }
-            else
-            {
-                CheckObjComponents(HandsUtils.GetGameObjectToEdit());
             }
         }
 

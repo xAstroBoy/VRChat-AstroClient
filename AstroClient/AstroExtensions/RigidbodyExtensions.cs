@@ -221,9 +221,11 @@ namespace AstroClient.extensions
                     {
                         control.EditMode = true;
                     }
-                    control.isKinematic = DetectCollisions;
+                    control.DetectCollisions = DetectCollisions;
                 }
             }
         }
+
+
     }
 }

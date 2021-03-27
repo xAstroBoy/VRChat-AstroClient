@@ -57,6 +57,7 @@
     <Compile Include="EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
     <Compile Include="EventArgs\SpawnEmojiArgs.cs" />
     <Compile Include="EventArgs\RayCastEventArgs.cs" />
+    <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Overridables.cs" />
     <Compile Include="Console\CheetosConsole\Console.cs" />
     <Compile Include="Console\CheetosConsole\DefaultFonts.cs" />
@@ -144,7 +145,7 @@
     <Compile Include="Startup\ComponentHelper.cs" />
     <Compile Include="Startup\Hooks\AvatarManagerHook.cs" />
     <Compile Include="Startup\Hooks\NetworkManagerHooks.cs" />
-    <Compile Include="Buttons\ItemTweakerMain.cs" />
+    <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
     <Compile Include="GameObjMenu.cs" />
     <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
     <Compile Include="Startup\Hooks\SpawnEmojiRPCHook.cs" />
@@ -181,7 +182,7 @@
     <Compile Include="Utils\GameObject\ObjectFinder.cs" />
     <Compile Include="Utils\Input\InputUtils.cs" />
     <Compile Include="Utils\Player\LocalPlayerUtils.cs" />
-    <Compile Include="Utils\Player\HandsUtils.cs" />
+    <Compile Include="Utils\Player\PlayerHands.cs" />
     <Compile Include="Utils\ObjectUtils\GameObjectUtils.cs" />
     <Compile Include="GameObject\Cloner\ObjectCloner.cs" />
     <Compile Include="GameObject\Editor\Colliders\ColliderEditors.cs" />

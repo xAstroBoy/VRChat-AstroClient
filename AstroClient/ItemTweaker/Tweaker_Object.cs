@@ -12,51 +12,14 @@ using System.Linq;
 
 #endregion AstroClient Imports
 
-namespace AstroClient
+namespace AstroClient.ItemTweaker
 {
-    public class HandsUtils : Overridables
+    public class Tweaker_Object : Overridables
     {
-        public static string GetObjectToEditName
-        {
-            get
-            {
-                if (GameObjectToEdit != null)
-                {
-                    return GameObjectToEdit.name;
-                }
-                else
-                {
-                    return "Not Selected Yet";
-                }
-            }
-        }
-
-        public static void DropObject(GameObject obj)
-        {
-            if (GetSelfVRCPlayerApi() != null)
-            {
-                var lefthand = GetSelfVRCPlayerApi().GetPickupInHand(VRC.SDKBase.VRC_Pickup.PickupHand.Left);
-                var righthand = GetSelfVRCPlayerApi().GetPickupInHand(VRC.SDKBase.VRC_Pickup.PickupHand.Right);
-                if (lefthand != null)
-                {
-                    if (lefthand.gameObject == obj)
-                    {
-                        lefthand.Drop();
-                    }
-                }
-                if (righthand != null)
-                {
-                    if (righthand.gameObject == obj)
-                    {
-                        righthand.Drop();
-                    }
-                }
-            }
-        }
 
         public static void SetEditLock(bool status)
         {
-            if (GameObjectToEdit != null)
+            if (CurrentSelectedObject != null)
             {
                 ObjectToEditLock = status;
                 LockHoldItem.setToggleState(status);
@@ -66,13 +29,13 @@ namespace AstroClient
         public override void OnLevelLoaded()
         {
             SetEditLock(false);
-            if (GameObjToEdit != null)
+            if (TransformToEditBtn != null)
             {
                 UpdateCapturedObject(null);
             }
-            if (GameObjectToEdit != null)
+            if (CurrentSelectedObject != null)
             {
-                GameObjectToEdit = null;
+                CurrentSelectedObject = null;
             }
             CurrentSelectedItemEnabledESP = false;
             if (LockHoldItem != null)
@@ -86,119 +49,30 @@ namespace AstroClient
             }
         }
 
-        public static GameObject GetHoldGameObject()
+        public static string GetObjectToEditName
         {
-            if (GetSelfVRCPlayerApi() != null)
+            get
             {
-                var lefthand = GetSelfVRCPlayerApi().GetPickupInHand(VRC.SDKBase.VRC_Pickup.PickupHand.Left);
-                var righthand = GetSelfVRCPlayerApi().GetPickupInHand(VRC.SDKBase.VRC_Pickup.PickupHand.Right);
-                if (righthand != null)
+                if (CurrentSelectedObject != null)
                 {
-                    if (righthand.gameObject != null)
-                    {
-                        return righthand.gameObject;
-                    }
-                }
-                else if (lefthand != null)
-                {
-                    if (lefthand.gameObject != null)
-                    {
-                        return lefthand.gameObject;
-                    }
-                }
-            }
-            return null;
-        }
-
-        public static GameObject GetLeftHoldObject()
-        {
-            if (GetSelfVRCPlayerApi() != null)
-            {
-                var lefthand = GetSelfVRCPlayerApi().GetPickupInHand(VRC.SDKBase.VRC_Pickup.PickupHand.Left);
-                if (lefthand != null)
-                {
-                    if (lefthand.gameObject != null)
-                    {
-                        return lefthand.gameObject;
-                    }
-                }
-            }
-            return null;
-        }
-
-        public static GameObject GetRightHoldObject()
-        {
-            if (GetSelfVRCPlayerApi() != null)
-            {
-                var RightHand = GetSelfVRCPlayerApi().GetPickupInHand(VRC.SDKBase.VRC_Pickup.PickupHand.Right);
-                if (RightHand != null)
-                {
-                    if (RightHand.gameObject != null)
-                    {
-                        return RightHand.gameObject;
-                    }
-                }
-            }
-            return null;
-        }
-
-        public static GameObject SetObjectToEditWithPath(string objpath)
-        {
-            var obj = GameObjectFinder.Find(objpath);
-            if (obj != null)
-            {
-                ModConsole.Log("Path is valid, Found Gameobject obj : " + obj.name + "Using path " + objpath);
-                GameObjectToEdit = obj;
-                return obj;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public static void SetObjectToEdit(GameObject obj)
-        {
-            if (ObjectToEditLock)
-            {
-                return;
-            }
-            GameObjectToEdit = obj;
-        }
-
-        // DONT CALL THIS ON COMPONENTS OR ONUPDATE, CALL THE OBJECT DIRECTLY!
-        public static GameObject GetGameObjectToEdit()
-        {
-            try
-            {
-                if (!ObjectToEditLock)
-                {
-                    var item = GetHoldGameObject();
-                    if (item != null)
-                    {
-                        GameObjectToEdit = item;
-                    }
-                    return GameObjectToEdit;
+                    return CurrentSelectedObject.name;
                 }
                 else
                 {
-                    return GameObjectToEdit;
+                    return "Not Selected Yet";
                 }
             }
-            catch
-            {
-                return GameObjectToEdit;
-            }
         }
+
 
         public static void UpdateCapturedObject(GameObject obj)
         {
             if (obj != null)
             {
-                if (GameObjToEdit != null)
+                if (TransformToEditBtn != null)
                 {
-                    GameObjToEdit.setButtonText("Editing: " + obj.name);
-                    GameObjToEdit.setToolTip("Editing: " + obj.name);
+                    TransformToEditBtn.setButtonText("Editing: " + obj.name);
+                    TransformToEditBtn.setToolTip("Editing: " + obj.name);
                 }
                 if (GameObjMenu.GameObjMenuObjectToEdit != null)
                 {
@@ -209,10 +83,10 @@ namespace AstroClient
             }
             else
             {
-                if (GameObjToEdit != null)
+                if (TransformToEditBtn != null)
                 {
-                    GameObjToEdit.setButtonText("Pick a Gameobject to start!");
-                    GameObjToEdit.setToolTip("Pick a Gameobject to start!");
+                    TransformToEditBtn.setButtonText("Pick a Gameobject to start!");
+                    TransformToEditBtn.setToolTip("Pick a Gameobject to start!");
                 }
                 if (GameObjMenu.GameObjMenuObjectToEdit != null)
                 {
@@ -226,11 +100,11 @@ namespace AstroClient
         {
             if (isActive)
             {
-                GameObjToEdit.setTextColor(Color.green);
+                TransformToEditBtn.setTextColor(Color.green);
             }
             else
             {
-                GameObjToEdit.setTextColor(Color.red);
+                TransformToEditBtn.setTextColor(Color.red);
             }
         }
 
@@ -265,36 +139,36 @@ namespace AstroClient
                 _CurrentSelectedItemEnabledESP = value;
                 if (value)
                 {
-                    if (GameObjectToEdit != null)
+                    if (CurrentSelectedObject != null)
                     {
-                        if (GameObjectToEdit.GetComponent<VRChatESP>() == null)
+                        if (CurrentSelectedObject.GetComponent<VRChatESP>() == null)
                         {
-                            GameObjectToEdit.AddComponent<VRChatESP>();
+                            CurrentSelectedObject.AddComponent<VRChatESP>();
                         }
                     }
                 }
                 else
                 {
-                    if (GameObjectToEdit != null)
+                    if (CurrentSelectedObject != null)
                     {
-                        if (GameObjectToEdit.GetComponent<VRChatESP>() != null)
+                        if (CurrentSelectedObject.GetComponent<VRChatESP>() != null)
                         {
                             if (GameObjectESP.isMurderItemsESPActivated)
                             {
                                 if (GameObjectESP.MurderESPItems != null && GameObjectESP.MurderESPItems.Count() != 0)
                                 {
-                                    if (GameObjectESP.MurderESPItems.Contains(GameObjectToEdit))
+                                    if (GameObjectESP.MurderESPItems.Contains(CurrentSelectedObject))
                                     {
                                         if (!GameObjectESP.isMurderItemsESPActivated)
                                         {
-                                            UnityEngine.Object.Destroy(GameObjectToEdit.GetComponent<VRChatESP>());
+                                            UnityEngine.Object.Destroy(CurrentSelectedObject.GetComponent<VRChatESP>());
                                         }
                                     }
                                 }
                             }
                             else
                             {
-                                UnityEngine.Object.Destroy(GameObjectToEdit.GetComponent<VRChatESP>());
+                                UnityEngine.Object.Destroy(CurrentSelectedObject.GetComponent<VRChatESP>());
                             }
                         }
                     }
@@ -303,32 +177,32 @@ namespace AstroClient
             }
         }
 
-        private static GameObject _ObjectToEdit;
+        private static GameObject _CurrentSelectedObject;
 
-        public static GameObject GameObjectToEdit
+        public static GameObject CurrentSelectedObject
         {
             get
             {
-                return _ObjectToEdit;
+                return _CurrentSelectedObject;
             }
             set
             {
-                if (_ObjectToEdit == value)
+                if (_CurrentSelectedObject == value)
                 {
                     return;
                 }
-                if (_ObjectToEdit != null)
+                if (_CurrentSelectedObject != null)
                 {
 
 
-                    VRChatESP installedESP = _ObjectToEdit.GetComponent<VRChatESP>();
+                    VRChatESP installedESP = _CurrentSelectedObject.GetComponent<VRChatESP>();
                     if (installedESP != null)
                     {
                         if (GameObjectESP.isMurderItemsESPActivated)
                         {
                             if (GameObjectESP.MurderESPItems != null && GameObjectESP.MurderESPItems.Count() != 0)
                             {
-                                if (GameObjectESP.MurderESPItems.Contains(_ObjectToEdit))
+                                if (GameObjectESP.MurderESPItems.Contains(_CurrentSelectedObject))
                                 {
                                     if (!GameObjectESP.isMurderItemsESPActivated)
                                     {
@@ -344,7 +218,7 @@ namespace AstroClient
                     }
                 }
 
-                _ObjectToEdit = value;
+                _CurrentSelectedObject = value;
                 if (CurrentSelectedItemEnabledESP)
                 {
                     if (value != null)
@@ -389,8 +263,66 @@ namespace AstroClient
             }
         }
 
+
+
+        public static GameObject SetObjectToEditWithPath(string objpath)
+        {
+            var obj = GameObjectFinder.Find(objpath);
+            if (obj != null)
+            {
+                ModConsole.Log("Path is valid, Found Gameobject obj : " + obj.name + "Using path " + objpath);
+                CurrentSelectedObject = obj;
+                return obj;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static void SetObjectToEdit(GameObject obj)
+        {
+            if (ObjectToEditLock)
+            {
+                return;
+            }
+            CurrentSelectedObject = obj;
+        }
+
+
+
+        public static GameObject GetGameObjectToEdit()
+        {
+            try
+            {
+                if (!ObjectToEditLock)
+                {
+                    var item = PlayerHands.GetHoldTransform();
+                    if (item != null)
+                    {
+                        CurrentSelectedObject = item;
+                    }
+                    return CurrentSelectedObject;
+                }
+                else
+                {
+                    return CurrentSelectedObject;
+                }
+            }
+            catch
+            {
+                return CurrentSelectedObject;
+            }
+        }
+
+
+
         public static bool ObjectToEditLock = false;
-        public static QMSingleButton GameObjToEdit;
+
+
+        public static QMSingleButton TransformToEditBtn;
         public static QMSingleToggleButton LockHoldItem;
+
+
     }
 }

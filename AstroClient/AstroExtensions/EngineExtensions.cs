@@ -7,6 +7,7 @@ using Color = System.Drawing.Color;
 using AstroClient.Cloner;
 using AstroClient.ConsoleUtils;
 using AstroClient.AstroUtils.ItemTweaker;
+using AstroClient.ItemTweaker;
 
 #endregion AstroClient Imports
 
@@ -42,7 +43,7 @@ namespace AstroClient.extensions
         public static bool DestroyMeOnline(this GameObject obj)
         {
             bool refreshhandutils = false;
-            if (HandsUtils.GameObjectToEdit == obj)
+            if (Tweaker_Object.CurrentSelectedObject == obj)
             {
                 refreshhandutils = true;
             }
@@ -62,7 +63,7 @@ namespace AstroClient.extensions
                 ModConsole.Log("Destroyed Server-side Object : " + name, Color.Green);
                 if (refreshhandutils)
                 {
-                    HandsUtils.GameObjectToEdit = null;
+                    Tweaker_Object.CurrentSelectedObject = null;
                 }
                 return true;
             }
@@ -112,7 +113,7 @@ namespace AstroClient.extensions
             if (obj != null)
             {
                 obj.SetActive(SetActive);
-                HandsUtils.UpdateCapturedButtonColor(obj.active);
+                Tweaker_Object.UpdateCapturedButtonColor(obj.active);
             }
             if (ItemTweakerMain.ObjectActiveToggle != null)
             {
