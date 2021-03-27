@@ -6,16 +6,9 @@
     using UnityEngine;
     using VRC.SDKBase;
 
-    [Serializable]
-    public class SaveData
-    {
-    }
-
     // thanks TO Cheeto aka Craig on discord, he's been really helpful!
     public class Overridables // TODO: GET A BETTER NAME
     {
-        public SaveData saveData;
-
         public Overridables()
         {
             try

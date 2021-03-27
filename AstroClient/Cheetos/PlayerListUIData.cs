@@ -25,22 +25,20 @@
     /// </summary>
     public class PlayerListUI : Overridables
     {
+        public PlayerListUIData saveData = new PlayerListUIData();
+
         private QMSingleButton playersButton;
 
         private List<QMSingleButton> playerButtons { get; } = new List<QMSingleButton>();
-
-        private bool showPlayerList = true;
-
-        private bool showPlayersButton = true; // Make this a setting eventually, in case they run Plagues POS
 
         private readonly Color InstanceMasterColor = Color.cyan; // Light Blue
 
         public override void VRChat_OnUiManagerInit()
         {
             playersButton = new QMSingleButton("ShortcutMenu", -2, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
-            playersButton.setActive(showPlayersButton);
+            playersButton.setActive(saveData.showPlayersButton);
 
-            if (showPlayerList)
+            if (saveData.showPlayerList)
             {
                 playersButton.setTextColor(UnityEngine.Color.green);
             }
@@ -110,7 +108,7 @@
                     }
                 }
 
-                playerButton.setActive(showPlayerList);
+                playerButton.setActive(saveData.showPlayerList);
                 playerButtons.Add(playerButton);
 
                 yPos += 0.5f;
@@ -138,8 +136,8 @@
 
         private void PlayerListToggle()
         {
-            showPlayerList = !showPlayerList;
-            if (showPlayerList)
+            saveData.showPlayerList = !saveData.showPlayerList;
+            if (saveData.showPlayerList)
             {
                 playersButton.setTextColor(UnityEngine.Color.green);
             } else
@@ -149,14 +147,8 @@
 
             foreach (var playerButton in playerButtons)
             {
-                playerButton.setActive(showPlayerList);
+                playerButton.setActive(saveData.showPlayerList);
             }
-        }
-
-        public void SetPlayerButtonActive(bool b)
-        {
-            showPlayersButton = b;
-            playersButton.setActive(b);
         }
     }
 }

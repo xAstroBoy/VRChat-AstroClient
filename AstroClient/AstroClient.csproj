@@ -49,7 +49,6 @@
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
     <Compile Include="Cheetos\AssemblySpy.cs" />
     <Compile Include="Cheetos\AssemlySpy_Extensions.cs" />
-    <Compile Include="Cheetos\CheetosDebugMenu.cs" />
     <Compile Include="Cheetos\PlayerListUIData.cs" />
     <Compile Include="Cheetos\RayCastHook.cs" />
     <Compile Include="Cheetos\SettingsManager.cs" />
@@ -135,6 +134,7 @@
     <Compile Include="GameObject\Editor\ESP\GameObjectESP.cs" />
     <Compile Include="Patches\Patching.cs" />
     <Compile Include="EventArgs\PlayerEventArgs.cs" />
+    <Compile Include="Cheetos\SaveData.cs" />
     <Compile Include="Skyboxes\SkyboxEditor.cs" />
     <Compile Include="Buttons\RandomSubmenus.cs" />
     <Compile Include="Buttons\WorldPickupsBtn.cs" />

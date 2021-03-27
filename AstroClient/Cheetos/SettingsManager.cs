@@ -12,16 +12,8 @@
     using System.Threading.Tasks;
     using UIWidgets;
 
-    public static class SettingsManager
+    public static class JSonWriter
     {
-        public static void Save()
-        {
-        }
-
-        public static void Load()
-        {
-        }
-
         /// <summary>
         /// Writes the given object instance to a Json file.
         /// <para>Object type must have a parameterless constructor.</para>
