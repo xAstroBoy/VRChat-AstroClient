@@ -84,7 +84,7 @@ namespace AstroClient.components
                             // Z
                             FixZ();
                             // Update Button
-                            if (obj.transform == Tweaker_Object.CurrentSelectedObject)
+                            if (Tweaker_Object.CurrentSelectedObject == obj)
                             {
                                 GameObjectActualScale.setButtonText("Object 's Current scale : " + obj.transform.localScale.ToString());
                             }

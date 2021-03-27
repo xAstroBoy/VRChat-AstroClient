@@ -463,14 +463,10 @@ namespace AstroClient.GameObjectDebug
 
         public static void DumpHoldingGameObjComponent()
         {
-            var held = PlayerHands.GetHoldTransform();
+            var held = Tweaker_Object.GetGameObjectToEdit();
             if (held != null)
             {
                 CheckObjComponents(held);
-            }
-            else
-            {
-                CheckObjComponents(Tweaker_Object.CurrentSelectedObject);
             }
         }
 

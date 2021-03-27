@@ -205,7 +205,7 @@ namespace AstroClient.components
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
                 }
-                if (obj.transform == Tweaker_Object.CurrentSelectedObject)
+                if (Tweaker_Object.CurrentSelectedObject == obj)
                 {
                     if (ItemTweakerMain.ProtectionInteractor != null)
                     {

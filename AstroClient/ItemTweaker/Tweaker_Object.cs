@@ -143,7 +143,7 @@ namespace AstroClient.ItemTweaker
                     {
                         if (CurrentSelectedObject.GetComponent<VRChatESP>() == null)
                         {
-                            CurrentSelectedObject.gameObject.AddComponent<VRChatESP>();
+                            CurrentSelectedObject.AddComponent<VRChatESP>();
                         }
                     }
                 }
@@ -157,7 +157,7 @@ namespace AstroClient.ItemTweaker
                             {
                                 if (GameObjectESP.MurderESPItems != null && GameObjectESP.MurderESPItems.Count() != 0)
                                 {
-                                    if (GameObjectESP.MurderESPItems.Contains(CurrentSelectedObject.gameObject))
+                                    if (GameObjectESP.MurderESPItems.Contains(CurrentSelectedObject))
                                     {
                                         if (!GameObjectESP.isMurderItemsESPActivated)
                                         {
@@ -202,7 +202,7 @@ namespace AstroClient.ItemTweaker
                         {
                             if (GameObjectESP.MurderESPItems != null && GameObjectESP.MurderESPItems.Count() != 0)
                             {
-                                if (GameObjectESP.MurderESPItems.Contains(_CurrentSelectedObject.gameObject))
+                                if (GameObjectESP.MurderESPItems.Contains(_CurrentSelectedObject))
                                 {
                                     if (!GameObjectESP.isMurderItemsESPActivated)
                                     {
@@ -226,7 +226,7 @@ namespace AstroClient.ItemTweaker
                         VRChatESP esp = value.GetComponent<VRChatESP>();
                         if (esp == null)
                         {
-                            esp = value.gameObject.AddComponent<VRChatESP>();
+                            esp = value.AddComponent<VRChatESP>();
                         }
                     }
                 }
@@ -234,7 +234,7 @@ namespace AstroClient.ItemTweaker
                 RigidBodyController RigidBodyController = value.GetComponent<RigidBodyController>();
                 if (RigidBodyController == null)
                 {
-                    RigidBodyController = value.gameObject.AddComponent<RigidBodyController>();
+                    RigidBodyController = value.AddComponent<RigidBodyController>();
                     if (RigidBodyController != null)
                     {
                         RigidBodyController.EditMode = false;
@@ -244,7 +244,7 @@ namespace AstroClient.ItemTweaker
                 PickupController PickupController = value.GetComponent<PickupController>();
                 if (PickupController == null)
                 {
-                    PickupController = value.gameObject.AddComponent<PickupController>();
+                    PickupController = value.AddComponent<PickupController>();
                     if (PickupController != null)
                     {
                         PickupController.EditMode = false;

@@ -43,7 +43,7 @@ namespace AstroClient.extensions
         public static bool DestroyMeOnline(this GameObject obj)
         {
             bool refreshhandutils = false;
-            if (Tweaker_Object.CurrentSelectedObject == obj.transform)
+            if (Tweaker_Object.CurrentSelectedObject == obj)
             {
                 refreshhandutils = true;
             }

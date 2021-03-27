@@ -226,78 +226,81 @@ namespace AstroClient.AstroUtils.ItemTweaker
 
         internal static void CheckIfContainsPickupProperties(GameObject obj)
         {
-            if (obj != null && obj.transform == Tweaker_Object.CurrentSelectedObject)
+            if (obj != null )
             {
-                var pickup1 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
-                var pickup2 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
-                var pickup3 = obj.GetComponent<VRC.SDK3.Components.VRCPickup>();
-                if (pickup1 == null && pickup2 == null && pickup3 == null)
+                if (obj == Tweaker_Object.CurrentSelectedObject)
                 {
-                    if (HasPickupComponent != null)
+                    var pickup1 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
+                    var pickup2 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
+                    var pickup3 = obj.GetComponent<VRC.SDK3.Components.VRCPickup>();
+                    if (pickup1 == null && pickup2 == null && pickup3 == null)
                     {
-                        HasPickupComponent.setTextColor(Color.red);
+                        if (HasPickupComponent != null)
+                        {
+                            HasPickupComponent.setTextColor(Color.red);
+                        }
+
+                        #region PickupOrientation
+
+                        if (Pickup_PickupOrientation_prop_any != null)
+                        {
+                            Pickup_PickupOrientation_prop_any.setTextColor(Color.red);
+                        }
+                        if (Pickup_PickupOrientation_prop_Grip != null)
+                        {
+                            Pickup_PickupOrientation_prop_Grip.setTextColor(Color.red);
+                        }
+                        if (Pickup_PickupOrientation_prop_Gun != null)
+                        {
+                            Pickup_PickupOrientation_prop_Gun.setTextColor(Color.red);
+                        }
+
+                        #endregion PickupOrientation
+
+                        #region Autohold
+
+                        if (Pickup_AutoHoldMode_prop_AutoDetect != null)
+                        {
+                            Pickup_AutoHoldMode_prop_AutoDetect.setTextColor(Color.red);
+                        }
+                        if (Pickup_AutoHoldMode_prop_Yes != null)
+                        {
+                            Pickup_AutoHoldMode_prop_Yes.setTextColor(Color.red);
+                        }
+                        if (Pickup_AutoHoldMode_prop_No != null)
+                        {
+                            Pickup_AutoHoldMode_prop_No.setTextColor(Color.red);
+                        }
+
+                        #endregion Autohold
+
+                        #region AllowManipulationWhenEquipped
+
+                        if (Pickup_allowManipulationWhenEquipped != null)
+                        {
+                            Pickup_allowManipulationWhenEquipped.setToggleState(false);
+                        }
+
+                        #endregion AllowManipulationWhenEquipped
+
+                        #region Pickupable
+
+                        if (Pickup_pickupable != null)
+                        {
+                            Pickup_pickupable.setToggleState(false);
+                        }
+
+                        #endregion Pickupable
+
+                        #region DisallowTheft
+
+                        if (Pickup_DisallowTheft != null)
+                        {
+                            Pickup_DisallowTheft.setToggleState(false);
+                        }
+
+                        #endregion DisallowTheft
                     }
-
-                    #region PickupOrientation
-
-                    if (Pickup_PickupOrientation_prop_any != null)
-                    {
-                        Pickup_PickupOrientation_prop_any.setTextColor(Color.red);
-                    }
-                    if (Pickup_PickupOrientation_prop_Grip != null)
-                    {
-                        Pickup_PickupOrientation_prop_Grip.setTextColor(Color.red);
-                    }
-                    if (Pickup_PickupOrientation_prop_Gun != null)
-                    {
-                        Pickup_PickupOrientation_prop_Gun.setTextColor(Color.red);
-                    }
-
-                    #endregion PickupOrientation
-
-                    #region Autohold
-
-                    if (Pickup_AutoHoldMode_prop_AutoDetect != null)
-                    {
-                        Pickup_AutoHoldMode_prop_AutoDetect.setTextColor(Color.red);
-                    }
-                    if (Pickup_AutoHoldMode_prop_Yes != null)
-                    {
-                        Pickup_AutoHoldMode_prop_Yes.setTextColor(Color.red);
-                    }
-                    if (Pickup_AutoHoldMode_prop_No != null)
-                    {
-                        Pickup_AutoHoldMode_prop_No.setTextColor(Color.red);
-                    }
-
-                    #endregion Autohold
-
-                    #region AllowManipulationWhenEquipped
-
-                    if (Pickup_allowManipulationWhenEquipped != null)
-                    {
-                        Pickup_allowManipulationWhenEquipped.setToggleState(false);
-                    }
-
-                    #endregion AllowManipulationWhenEquipped
-
-                    #region Pickupable
-
-                    if (Pickup_pickupable != null)
-                    {
-                        Pickup_pickupable.setToggleState(false);
-                    }
-
-                    #endregion Pickupable
-
-                    #region DisallowTheft
-
-                    if (Pickup_DisallowTheft != null)
-                    {
-                        Pickup_DisallowTheft.setToggleState(false);
-                    }
-
-                    #endregion DisallowTheft
                 }
                 else
                 {

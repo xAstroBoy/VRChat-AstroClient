@@ -126,7 +126,7 @@ namespace AstroClient.components
         {
             try
             {
-                if (Tweaker_Object.CurrentSelectedObject == obj.transform)
+                if (Tweaker_Object.CurrentSelectedObject == obj)
                 {
                     UpdateHeldOwnerBtn();
                     UpdateEditMode();
@@ -602,7 +602,7 @@ namespace AstroClient.components
         [HideFromIl2Cpp]
         private void UpdatePickupOwnerBtns()
         {
-            if (Tweaker_Object.CurrentSelectedObject == obj.transform)
+            if (Tweaker_Object.CurrentSelectedObject == obj)
             {
                 if (Pickup_CurrentObjOwner != null)
                 {
@@ -653,7 +653,7 @@ namespace AstroClient.components
         {
             if (obj != null)
             {
-                if (Tweaker_Object.CurrentSelectedObject == obj.transform)
+                if (Tweaker_Object.CurrentSelectedObject == obj)
                 {
                     if (Pickup_PickupOrientation_prop_any != null)
                     {
@@ -697,7 +697,7 @@ namespace AstroClient.components
         {
             if (obj != null)
             {
-                if (Tweaker_Object.CurrentSelectedObject == obj.transform)
+                if (Tweaker_Object.CurrentSelectedObject == obj)
                 {
                     if (Pickup_AutoHoldMode_prop_AutoDetect != null)
                     {
@@ -741,7 +741,7 @@ namespace AstroClient.components
         {
             if (obj != null)
             {
-                if (Tweaker_Object.CurrentSelectedObject == obj.transform)
+                if (Tweaker_Object.CurrentSelectedObject == obj)
                 {
                     if (Pickup_allowManipulationWhenEquipped != null)
                     {
@@ -756,7 +756,7 @@ namespace AstroClient.components
         {
             if (obj != null)
             {
-                if (Tweaker_Object.CurrentSelectedObject == obj.transform)
+                if (Tweaker_Object.CurrentSelectedObject == obj)
                 {
                     if (Pickup_pickupable != null)
                     {
@@ -771,7 +771,7 @@ namespace AstroClient.components
         {
             if (obj != null)
             {
-                if (Tweaker_Object.CurrentSelectedObject == obj.transform)
+                if (Tweaker_Object.CurrentSelectedObject == obj)
                 {
                     if (Pickup_DisallowTheft != null)
                     {
@@ -786,7 +786,7 @@ namespace AstroClient.components
         {
             if (obj != null)
             {
-                if (Tweaker_Object.CurrentSelectedObject == obj.transform)
+                if (Tweaker_Object.CurrentSelectedObject == obj)
                 {
                     if (PickupProximitySlider != null)
                     {
@@ -799,7 +799,7 @@ namespace AstroClient.components
         [HideFromIl2Cpp]
         private void UpdateIsHeld()
         {
-            if (Tweaker_Object.CurrentSelectedObject == obj.transform)
+            if (Tweaker_Object.CurrentSelectedObject == obj)
             {
                 if (Pickup_IsHeld != null)
                 {
@@ -827,7 +827,7 @@ namespace AstroClient.components
         [HideFromIl2Cpp]
         private void UpdateHeldOwnerBtn()
         {
-            if (Tweaker_Object.CurrentSelectedObject == obj.transform)
+            if (Tweaker_Object.CurrentSelectedObject == obj)
             {
                 if (Forces_CurrentObjHolder != null)
                 {
@@ -964,7 +964,7 @@ namespace AstroClient.components
         [HideFromIl2Cpp]
         private void UpdateEditMode()
         {
-            if (Tweaker_Object.CurrentSelectedObject == obj.transform)
+            if (Tweaker_Object.CurrentSelectedObject == obj)
             {
                 if (EditMode)
                 {
