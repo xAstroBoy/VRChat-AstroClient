@@ -25,8 +25,9 @@ namespace AstroClient.components
                 {
                     body = obj.GetComponentInChildren<Rigidbody>();
                 }
-                Sync = obj.GetComponent<SyncPhysics>();
 
+
+                Sync = obj.GetComponent<SyncPhysics>();
                 BackupBasicBody();
                 EditMode = false;
             }
@@ -155,40 +156,31 @@ namespace AstroClient.components
                         {
                             Sync = obj.AddComponent<SyncPhysics>();
                         }
+
                         if (Sync.field_Private_Rigidbody_0 == null)
                         {
-                            if (obj.GetComponent<Rigidbody>() != null)
+                            if (obj.GetComponent<Rigidbody>() != null && Sync.field_Private_Rigidbody_0 == null)
                             {
                                 ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Rigidbody in SyncPhysic as is Null..");
                                 Sync.field_Private_Rigidbody_0 = obj.GetComponent<Rigidbody>();
+                                return;
                             }
-                        }
-
-                        if (Sync.field_Private_Rigidbody_0 == null)
-                        {
-                            if (obj.GetComponentInChildren<Rigidbody>() != null)
+    
+                                if (obj.GetComponentInChildren<Rigidbody>() != null && Sync.field_Private_Rigidbody_0 == null)
+                                {
+                                    ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Rigidbody in SyncPhysic as is Null..");
+                                    Sync.field_Private_Rigidbody_0 = obj.GetComponentInChildren<Rigidbody>();
+                                    return;
+                                }
+                            if (obj.GetComponentInChildren<Rigidbody>() == null && obj.GetComponent<Rigidbody>() == null && Sync.field_Private_Rigidbody_0 == null)
                             {
-                                ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Rigidbody in SyncPhysic as is Null..");
-                                Sync.field_Private_Rigidbody_0 = obj.GetComponentInChildren<Rigidbody>();
+                                ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Spawned Rigidbody in SyncPhysic as is Null..");
+                                body = obj.AddComponent<Rigidbody>();
+                                Sync.field_Private_Rigidbody_0 = body;
+                                body.isKinematic = true;
+                                return;
                             }
-                        }
-                    }
 
-                    if (Sync.field_Private_Rigidbody_0 == null)
-                    {
-                        if (obj.GetComponent<Rigidbody>() != null)
-                        {
-                            ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Rigidbody in SyncPhysic as is Null..");
-                            Sync.field_Private_Rigidbody_0 = obj.GetComponent<Rigidbody>();
-                        }
-                    }
-
-                    if (Sync.field_Private_Rigidbody_0 == null)
-                    {
-                        if (obj.GetComponentInChildren<Rigidbody>() != null)
-                        {
-                            ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Rigidbody in SyncPhysic as is Null..");
-                            Sync.field_Private_Rigidbody_0 = obj.GetComponentInChildren<Rigidbody>();
                         }
                     }
                 }
