@@ -3,6 +3,7 @@
     using AstroClient.ConsoleUtils;
     using Cinemachine;
     using DG.Tweening.Plugins.Core.PathCore;
+    using Mono.CSharp;
     using System;
     using System.Collections.Generic;
     using System.IO;
@@ -14,18 +15,19 @@
     {
         public static void Save<SaveData>(this SaveData saveData)
         {
-            SaveDataManager.Save(saveData);
+            SaveDataManager.Save<SaveData>(saveData);
         }
     }
 
     public static class SaveDataManager
     {
-        public static void Save<SaveData>(SaveData saveData)
+        public static void Save<T>(T saveData)
         {
             string path = GetAndCheckLocation(saveData);
+            JSonWriter.WriteToJsonFile<T>(path, saveData);
         }
 
-        private static string GetAndCheckLocation<SaveData>(SaveData saveData)
+        private static string GetAndCheckLocation<T>(T saveData)
         {
             string path = $@"{Environment.CurrentDirectory}\Config\{BuildInfo.Name}\";
             if (!Directory.Exists(path))

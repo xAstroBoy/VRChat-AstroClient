@@ -3,6 +3,7 @@
     using AstroClient.ConsoleUtils;
     using DayClientML2.Utility.Extensions;
     using RubyButtonAPI;
+    using System;
     using System.Collections.Generic;
     using UnityEngine;
     using VRC;
