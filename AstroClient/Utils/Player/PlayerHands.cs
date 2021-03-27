@@ -42,7 +42,7 @@ namespace AstroClient
         }
 
 
-        public static Transform GetHoldTransform()
+        public static GameObject GetHoldTransform()
         {
             if (GetSelfVRCPlayerApi() != null)
             {
@@ -52,14 +52,14 @@ namespace AstroClient
                 {
                     if (righthand.gameObject != null)
                     {
-                        return righthand.gameObject.transform;
+                        return righthand.gameObject;
                     }
                 }
                 else if (lefthand != null)
                 {
                     if (lefthand.gameObject != null)
                     {
-                        return lefthand.gameObject.transform;
+                        return lefthand.gameObject;
                     }
                 }
             }

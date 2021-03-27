@@ -25,19 +25,12 @@ namespace AstroClient.SyncPhysicExt
         {
             if (instance != null)
             {
-                if (instance.field_Private_Rigidbody_0 == null)
-                {
-                    var body = instance.gameObject.GetComponent<Rigidbody>();
-                    if (body != null)
-                    {
-                        ModConsole.DebugLog("SyncPhysic Instance returned null, Linking Current object Rigidbody...!");
-                        instance.field_Private_Rigidbody_0 = body;
-                    }
-                }
                 return instance.field_Private_Rigidbody_0;
             }
             return null;
         }
+
+
 
     }
 }

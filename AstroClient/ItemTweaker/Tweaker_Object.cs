@@ -65,7 +65,7 @@ namespace AstroClient.ItemTweaker
         }
 
 
-        public static void UpdateCapturedObject(Transform obj)
+        public static void UpdateCapturedObject(GameObject obj)
         {
             if (obj != null)
             {
@@ -79,7 +79,7 @@ namespace AstroClient.ItemTweaker
                     GameObjMenu.GameObjMenuObjectToEdit.setButtonText("Editing: " + obj.name);
                     GameObjMenu.GameObjMenuObjectToEdit.setToolTip("Editing: " + obj.name);
                 }
-                UpdateCapturedButtonColor(obj.gameObject.active);
+                UpdateCapturedButtonColor(obj.active);
             }
             else
             {
@@ -177,9 +177,9 @@ namespace AstroClient.ItemTweaker
             }
         }
 
-        private static Transform _CurrentSelectedObject;
+        private static GameObject _CurrentSelectedObject;
 
-        public static Transform CurrentSelectedObject
+        public static GameObject CurrentSelectedObject
         {
             get
             {
@@ -251,11 +251,11 @@ namespace AstroClient.ItemTweaker
                     }
                 }
 
-                CrazyObjectManager.UpdateTimeButton(value.gameObject);
-                ObjectSpinnerManager.UpdateSpinnerButton(value.gameObject);
-                ObjectSpinnerManager.UpdateTimerButton(value.gameObject);
-                RocketManager.UpdateButton(value.gameObject);
-                ItemTweakerMain.CheckIfContainsPickupProperties(value.gameObject);
+                CrazyObjectManager.UpdateTimeButton(value);
+                ObjectSpinnerManager.UpdateSpinnerButton(value);
+                ObjectSpinnerManager.UpdateTimerButton(value);
+                RocketManager.UpdateButton(value);
+                ItemTweakerMain.CheckIfContainsPickupProperties(value);
                 ItemTweakerMain.SetActiveButtonStatus(value);
                 UpdateCapturedObject(value);
                 ItemTweakerMain.UpdateTargetButtons();
@@ -265,9 +265,9 @@ namespace AstroClient.ItemTweaker
 
 
 
-        public static Transform SetObjectToEditWithPath(string objpath)
+        public static GameObject SetObjectToEditWithPath(string objpath)
         {
-            var obj = GameObjectFinder.Find(objpath).transform;
+            var obj = GameObjectFinder.Find(objpath);
             if (obj != null)
             {
                 ModConsole.Log("Path is valid, Found Gameobject obj : " + obj.name + "Using path " + objpath);
@@ -280,18 +280,18 @@ namespace AstroClient.ItemTweaker
             }
         }
 
-        public static void SetObjectToEdit(Transform obj)
+        public static void SetObjectToEdit(GameObject obj)
         {
             if (ObjectToEditLock)
             {
                 return;
             }
-            CurrentSelectedObject = obj.transform;
+            CurrentSelectedObject = obj;
         }
 
 
 
-        public static Transform GetTransformToEdit()
+        public static GameObject GetGameObjectToEdit()
         {
             try
             {
@@ -315,11 +315,6 @@ namespace AstroClient.ItemTweaker
             }
         }
 
-        public static GameObject GetGameObjectToEdit()
-        {
-            return CurrentSelectedObject.gameObject;
-        }
- 
 
 
         public static bool ObjectToEditLock = false;

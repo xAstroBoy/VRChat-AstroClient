@@ -125,7 +125,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             new QMSingleButton(menu, 6, 1.5f, "Drop Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().ClaimOwnership(); }), "Make Whatever Player, drop the object.", null, Color.cyan, true);
         }
 
-        public static void AddToWorldUtilsMenu(Transform obj)
+        public static void AddToWorldUtilsMenu(GameObject obj)
         {
             if (obj != null)
             {
@@ -218,7 +218,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
                     PickupQMScroll.Add(
                     new QMSingleButton(PickupQMScroll.BaseMenu, 0, 0, $"Select {pickup.name}", delegate
                     {
-                        Tweaker_Object.SetObjectToEdit(pickup.transform);
+                        Tweaker_Object.SetObjectToEdit(pickup);
                     }, $"Select {pickup.name}", null, GetObjectStatus(pickup)));
                 }
             });
@@ -467,7 +467,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
                         if (newprefab != null)
                         {
                             RegisterPrefab(newprefab);
-                            Tweaker_Object.SetObjectToEdit(newprefab.transform);
+                            Tweaker_Object.SetObjectToEdit(newprefab);
                         }
                     }, $"Spawn {prefab.name}"));
                 }
@@ -886,13 +886,13 @@ namespace AstroClient.AstroUtils.ItemTweaker
             PickupProximitySlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
         }
 
-        public static void SetActiveButtonStatus(Transform obj)
+        public static void SetActiveButtonStatus(GameObject obj)
         {
             if (obj != null)
             {
                 if (ObjectActiveToggle != null)
                 {
-                    ObjectActiveToggle.setToggleState(obj.gameObject.active);
+                    ObjectActiveToggle.setToggleState(obj.active);
                 }
             }
         }
@@ -911,7 +911,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
 
         public static QMSingleToggleButton ProtectionInteractor;
 
-        public static List<Transform> WorldObjects = new List<Transform>();
+        public static List<GameObject> WorldObjects = new List<GameObject>();
 
         public static QMSingleButton Object_no_Gravity;
         public static QMSingleButton Object_Gravity;

@@ -372,7 +372,7 @@ namespace AstroClient
                            }
                            if (PassToTweakerMode)
                            {
-                               Tweaker_Object.CurrentSelectedObject = item;
+                               Tweaker_Object.CurrentSelectedObject = item.gameObject;
                            }
                        }));
                         newbtn.getGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(newbtn.getGameObject().GetComponent<RectTransform>().sizeDelta.x - 100f, newbtn.getGameObject().GetComponent<RectTransform>().sizeDelta.y);

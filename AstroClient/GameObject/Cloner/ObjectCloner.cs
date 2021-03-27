@@ -69,7 +69,7 @@ namespace AstroClient.Cloner
                     ItemTweakerMain.UpdateSpawnedPickupsBtn();
                 }
                 ModConsole.Log("Spawned A Copy Successfully!, cloned " + obj.name);
-                Tweaker_Object.SetObjectToEdit(obj.transform);
+                Tweaker_Object.SetObjectToEdit(obj);
             }
             else
             {
