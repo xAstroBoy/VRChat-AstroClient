@@ -158,6 +158,22 @@ namespace AstroClient.components
                             {
                                 if (Pickup3.IsNull())
                                 {
+                                    if (!HasAddedRigidBodyController)
+                                    {
+                                        var RigidBodyController = obj.GetComponent<RigidBodyController>();
+                                        if (RigidBodyController == null)
+                                        {
+                                            RigidBodyController = obj.AddComponent<RigidBodyController>();
+                                        }
+                                        // IF INTERNAL SYNC IS NULL, FORCE ADD IT THEN REPLACE DEFAULT KINEMATIC TO TRUE BY DEFAULT TO AVOID OBJECTS FALLING IN THE WORLD.
+                                        if (RigidBodyController.Internal_Sync == null)
+                                        {
+                                            RigidBodyController.OverrideInternalKinematic(true);
+                                            RigidBodyController.ForcedMode = true;
+                                        }
+                                        HasAddedRigidBodyController = true;
+
+                                    }
                                     Pickup1 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
                                     Pickup2 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
                                     Pickup3 = obj.GetComponent<VRC.SDK3.Components.VRCPickup>();
@@ -973,6 +989,7 @@ namespace AstroClient.components
         private bool HasTriedWithPickup1 = false;
         private bool HasTriedWithPickup2 = false;
         private bool HasTriedWithPickup3 = false;
+        private bool HasAddedRigidBodyController = false;
 
         private bool hasRequiredComponentBeenAdded = false;
 

@@ -47,11 +47,12 @@
     <Compile Include="AstroExtensions\ScaleExtensions.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
-    <Compile Include="Cheetos\AssemblySpy.cs" />
-    <Compile Include="Cheetos\AssemlySpy_Extensions.cs" />
-    <Compile Include="Cheetos\PlayerListUIData.cs" />
-    <Compile Include="Cheetos\RayCastHook.cs" />
-    <Compile Include="Cheetos\SettingsManager.cs" />
+    <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />
+    <Compile Include="Cheetos\AssemblySpy\AssemlySpy_Extensions.cs" />
+    <Compile Include="Cheetos\Config\JSonWriter.cs" />
+    <Compile Include="Cheetos\Config\SaveData.cs" />
+    <Compile Include="Cheetos\Hooks\RayCastHook.cs" />
+    <Compile Include="Cheetos\PlayerListUI.cs" />
     <Compile Include="EventArgs\OnAvatarSpawnArgs.cs" />
     <Compile Include="EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
     <Compile Include="EventArgs\SpawnEmojiArgs.cs" />
@@ -134,7 +135,6 @@
     <Compile Include="GameObject\Editor\ESP\GameObjectESP.cs" />
     <Compile Include="Patches\Patching.cs" />
     <Compile Include="EventArgs\PlayerEventArgs.cs" />
-    <Compile Include="Cheetos\SaveData.cs" />
     <Compile Include="Skyboxes\SkyboxEditor.cs" />
     <Compile Include="Buttons\RandomSubmenus.cs" />
     <Compile Include="Buttons\WorldPickupsBtn.cs" />

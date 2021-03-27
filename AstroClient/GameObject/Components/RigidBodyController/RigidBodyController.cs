@@ -304,6 +304,21 @@ namespace AstroClient.components
             return false;
         }
 
+        [HideFromIl2Cpp]
+        internal void OverrideInternalKinematic(bool Kinematic)
+        {
+            OrigKinematic = Kinematic;
+        }
+
+        [HideFromIl2Cpp]
+        internal SyncPhysics Internal_Sync
+        {
+            get
+            {
+                return Sync;
+            }
+        }
+
         private GameObject obj = null;
         private SyncPhysics Sync = null;
         private Rigidbody RigidBody = null;
