@@ -148,6 +148,8 @@
             {
                 playerButton.setActive(saveData.showPlayerList);
             }
+
+            saveData.Save();
         }
     }
 }
