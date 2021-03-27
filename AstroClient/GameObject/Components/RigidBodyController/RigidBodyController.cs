@@ -91,11 +91,14 @@ namespace AstroClient.components
                         AngularDrag = Sync.GetRigidBody().angularDrag;
                     }
                 }
+                else
+                {
+                    OrigKinematic = true;
+                }
             }
             else
             {
                 ModConsole.DebugLog($"Backupping from RigidBody properties for object  {obj.name}");
-                OrigKinematic = true;
                 OrigUseGravity = RigidBody.useGravity;
                 OrigDetectCollisions = RigidBody.detectCollisions;
                 OrigConstraints = RigidBody.constraints;
@@ -211,14 +214,6 @@ namespace AstroClient.components
                             }
                         }
                     }
-                    else
-                    {
-                        if (Sync.GetRigidBody() == null)
-                        {
-                            ModConsole.DebugLog($"Adding New Rigidbody to : {obj.name}, Due to Sync RigidBody Being null!");
-                            Sync.SpawnRigidBody();
-                        }
-                    }
                 }
                 else
                 {
@@ -279,14 +274,6 @@ namespace AstroClient.components
                             {
                                 AngularDrag = Sync.GetRigidBody().angularDrag;
                             }
-                        }
-                    }
-                    else
-                    {
-                        if (Sync.GetRigidBody() == null)
-                        {
-                            ModConsole.DebugLog($"Adding New Rigidbody to : {obj.name}, Due to Sync RigidBody Being null!");
-                            Sync.SpawnRigidBody();
                         }
                     }
                 }

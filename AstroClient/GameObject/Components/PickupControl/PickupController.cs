@@ -77,10 +77,6 @@ namespace AstroClient.components
                 AutoHold = Pickup3.AutoHold;
                 orientation = Pickup3.orientation;
             }
-            else
-            {
-                Pickup1 = obj.AddComponent<VRC.SDKBase.VRC_Pickup>();
-            }
         }
 
         [HideFromIl2Cpp]
@@ -130,7 +126,7 @@ namespace AstroClient.components
         {
             try
             {
-                if (Tweaker_Object.CurrentSelectedObject == obj)
+                if (Tweaker_Object.CurrentSelectedObject == obj.transform)
                 {
                     UpdateHeldOwnerBtn();
                     UpdateEditMode();

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AstroClient.ConsoleUtils;
+using UnityEngine;
 
 namespace AstroClient.SyncPhysicExt
 {
@@ -22,12 +23,21 @@ namespace AstroClient.SyncPhysicExt
 
         public static Rigidbody GetRigidBody(this SyncPhysics instance)
         {
-            return instance.field_Private_Rigidbody_0;
+            if (instance != null)
+            {
+                if (instance.field_Private_Rigidbody_0 == null)
+                {
+                    var body = instance.gameObject.GetComponent<Rigidbody>();
+                    if (body != null)
+                    {
+                        ModConsole.DebugLog("SyncPhysic Instance returned null, Linking Current object Rigidbody...!");
+                        instance.field_Private_Rigidbody_0 = body;
+                    }
+                }
+                return instance.field_Private_Rigidbody_0;
+            }
+            return null;
         }
 
-        public static void SpawnRigidBody(this SyncPhysics instance)
-        {
-            instance.field_Private_Rigidbody_0 = new Rigidbody();            
-        }
     }
 }
