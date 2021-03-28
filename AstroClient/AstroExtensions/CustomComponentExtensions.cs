@@ -45,6 +45,8 @@ namespace AstroClient.extensions
                 control = obj.AddComponent<RigidBodyController>();
             }
             control.ForcedMode = true;
+            control.EditMode = true;
+            control.isKinematic = true;
         }
 
         public static void AddSpinForceX(this GameObject obj)

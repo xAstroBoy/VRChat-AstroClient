@@ -182,6 +182,17 @@ namespace AstroClient.components
                                 else
                                 {
                                     ModConsole.DebugLog("PickupController : Added VRC.SDKBase.VRC_Pickup to object " + obj.name);
+                                    if(Pickup1.ExactGrip == null)
+                                    {
+                                        Pickup1.ExactGrip = obj.transform;
+                                        ModConsole.DebugLog("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGrip to object transform " + obj.name);
+                                    }
+                                    if (Pickup1.ExactGun == null)
+                                    {
+                                        Pickup1.ExactGun = obj.transform;
+                                        ModConsole.DebugLog("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGun to object transform " + obj.name);
+                                    }
+
                                     hasRequiredComponentBeenAdded = true;
                                     HasTriedWithPickup1 = true;
                                 }
@@ -202,6 +213,16 @@ namespace AstroClient.components
                                 else
                                 {
                                     ModConsole.DebugLog("PickupController : Added VRCSDK2.VRC_Pickup to object " + obj.name);
+                                    if (Pickup2.ExactGrip == null)
+                                    {
+                                        Pickup2.ExactGrip = obj.transform;
+                                        ModConsole.DebugLog("PickupController : Linked VRCSDK2.VRC_Pickup ExactGrip to object transform " + obj.name);
+                                    }
+                                    if (Pickup2.ExactGun == null)
+                                    {
+                                        Pickup2.ExactGun = obj.transform;
+                                        ModConsole.DebugLog("PickupController : Linked VRCSDK2.VRC_Pickup ExactGun to object transform " + obj.name);
+                                    }
                                     hasRequiredComponentBeenAdded = true;
                                     HasTriedWithPickup2 = true;
                                 }
@@ -222,6 +243,17 @@ namespace AstroClient.components
                                 else
                                 {
                                     ModConsole.DebugLog("PickupController : Added VRC.SDK3.Components.VRCPickup to object " + obj.name);
+                                    if (Pickup3.ExactGrip == null)
+                                    {
+                                        Pickup3.ExactGrip = obj.transform;
+                                        ModConsole.DebugLog("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGrip to object transform " + obj.name);
+                                    }
+                                    if (Pickup3.ExactGun == null)
+                                    {
+                                        Pickup3.ExactGun = obj.transform;
+                                        ModConsole.DebugLog("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGun to object transform " + obj.name);
+                                    }
+
                                     hasRequiredComponentBeenAdded = true;
                                     HasTriedWithPickup3 = true;
                                 }
