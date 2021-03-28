@@ -19,9 +19,16 @@ namespace AstroClient.components
         public void Start()
         {
             obj = gameObject;
-            Pickup1 = GetComponent<VRC.SDKBase.VRC_Pickup>();
-            Pickup2 = GetComponent<VRCSDK2.VRC_Pickup>();
-            Pickup3 = GetComponent<VRC.SDK3.Components.VRCPickup>();
+            Pickup1 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
+            Pickup2 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
+            Pickup3 = obj.GetComponent<VRC.SDK3.Components.VRCPickup>();
+
+            control = obj.GetComponent<RigidBodyController>();
+            if(control == null)
+            {
+                control = obj.AddComponent<RigidBodyController>();
+            }
+
             BackupOriginalProperties();
             EditMode = false;
             Locked = false;
@@ -120,6 +127,39 @@ namespace AstroClient.components
             Locked = false;
         }
 
+
+
+        internal void SetRigidbody()
+        {
+            if (HasSetRigidbodyController)
+            {
+                return;
+            }
+            if (!HasSetRigidbodyController)
+            {
+                if (control != null)
+                {
+                    // IF INTERNAL SYNC IS NULL, FORCE ADD IT THEN REPLACE DEFAULT KINEMATIC TO TRUE BY DEFAULT TO AVOID OBJECTS FALLING IN THE WORLD.
+                    if (control.Internal_Sync == null)
+                    {
+                        if (!control.ForcedMode)
+                        {
+                            control.ForcedMode = true;
+                        }
+                        if (!control.EditMode)
+                        {
+                            control.EditMode = true;
+                        }
+                        if (!control.isKinematic)
+                        {
+                            control.isKinematic = true;
+                        }
+                    }
+
+                }
+                HasSetRigidbodyController = true;
+            }
+        }
         // Update is called once per frame
         public void Update()
         {
@@ -147,24 +187,11 @@ namespace AstroClient.components
 
                 if (ForceComponent)
                 {
+                    SetRigidbody();
+
                     if (!hasRequiredComponentBeenAdded)
                     {
-                        if (!HasAddedRigidBodyController)
-                        {
-                            var RigidBodyController = obj.GetComponent<RigidBodyController>();
-                            if (RigidBodyController == null)
-                            {
-                                RigidBodyController = obj.AddComponent<RigidBodyController>();
-                            }
-                            // IF INTERNAL SYNC IS NULL, FORCE ADD IT THEN REPLACE DEFAULT KINEMATIC TO TRUE BY DEFAULT TO AVOID OBJECTS FALLING IN THE WORLD.
-                            if (RigidBodyController.Internal_Sync == null)
-                            {
-                                RigidBodyController.ForcedMode = true;
-                                RigidBodyController.EditMode = true;
-                                RigidBodyController.isKinematic = true;
-                            }
-                            HasAddedRigidBodyController = true;
-                        }
+                
                         Pickup1 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
                         Pickup2 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
                         Pickup3 = obj.GetComponent<VRC.SDK3.Components.VRCPickup>();
@@ -1047,11 +1074,12 @@ namespace AstroClient.components
         private VRCSDK2.VRC_Pickup Pickup2;
         private VRC.SDK3.Components.VRCPickup Pickup3;
         private GameObject obj = null;
+        private RigidBodyController control = null;
 
         private bool HasTriedWithPickup1 = false;
         private bool HasTriedWithPickup2 = false;
         private bool HasTriedWithPickup3 = false;
-        private bool HasAddedRigidBodyController = false;
+        private bool HasSetRigidbodyController = false;
 
         private bool hasRequiredComponentBeenAdded = false;
 
