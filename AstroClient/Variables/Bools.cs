@@ -12,7 +12,7 @@ namespace AstroClient.variables
         {
             get
             {
-#if DEBUG
+#if CHEETOS
                 return true;
 #endif
                 return _isDebugMode;

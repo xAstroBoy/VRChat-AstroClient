@@ -34,6 +34,17 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_Cheetos|AnyCPU'">
+    <OutputPath>D:\Steam Library\steamapps\common\VRChat\mods\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CHEETOS</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <NoWarn>CS0169;CS0472</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="AstroExtensions\ButtonsExtensions.cs" />
     <Compile Include="AstroExtensions\PlayerExtensions.cs" />
