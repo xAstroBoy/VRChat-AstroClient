@@ -30,8 +30,6 @@
 
                 NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
                 NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
-
-                RayCastHook.Event_RayCastHit += Internal_OnRayCast;
             }
             catch (Exception e)
             {
@@ -76,18 +74,6 @@
         }
 
         private void Internal_OnLateUpdate(object sender, EventArgs e)
-        {
-            try
-            {
-                OnLateUpdate();
-            }
-            catch (Exception Exc)
-            {
-                ModConsole.ErrorExc(Exc);
-            }
-        }
-
-        private void Internal_OnRayCast(object sender, RayCastEventArgs e)
         {
             try
             {
