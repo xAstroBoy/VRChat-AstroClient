@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using VRC.SDKBase;
-
+using AstroClient.extensions;
 namespace AstroClient
 {
     public class BClubWorld : Overridables
@@ -153,7 +153,13 @@ namespace AstroClient
 
                 if(room_1_BedroomPreview != null && room_1_ToggleLocking != null && room_1_ToggleLock != null && room_1_ToggleIncognito != null && room_1_DND != null)
                 {
-                    ModConsole.Log("Found all Private Room 1 Buttons Exteriors!");
+                    ModConsole.Log("Found all Private Room 1 Buttons!");
+                    room_1_BedroomPreview.AddToWorldUtilsMenu();
+                    room_1_ToggleLocking.AddToWorldUtilsMenu();
+                    room_1_ToggleLock.AddToWorldUtilsMenu();
+                    room_1_ToggleIncognito.AddToWorldUtilsMenu();
+                    room_1_DND.AddToWorldUtilsMenu();
+
                 }
                 else
                 {
@@ -168,7 +174,7 @@ namespace AstroClient
 
                 if (room_2_BedroomPreview != null && room_2_ToggleLocking != null && room_2_ToggleLock != null && room_2_ToggleIncognito != null && room_2_DND != null)
                 {
-                    ModConsole.Log("Found all Private Room 2 Buttons Exteriors!");
+                    ModConsole.Log("Found all Private Room 2 Buttons!");
                 }
                 else
                 {
@@ -183,7 +189,7 @@ namespace AstroClient
 
                 if (room_3_BedroomPreview != null && room_3_ToggleLocking != null && room_3_ToggleLock != null && room_3_ToggleIncognito != null && room_3_DND != null)
                 {
-                    ModConsole.Log("Found all Private Room 3 Buttons Exteriors!");
+                    ModConsole.Log("Found all Private Room 3 Buttons!");
                 }
                 else
                 {
@@ -199,7 +205,7 @@ namespace AstroClient
 
                 if (room_4_BedroomPreview != null && room_4_ToggleLocking != null && room_4_ToggleLock != null && room_4_ToggleIncognito != null && room_4_DND != null)
                 {
-                    ModConsole.Log("Found all Private Room 4 Buttons Exteriors!");
+                    ModConsole.Log("Found all Private Room 4 Buttons!");
                 }
                 else
                 {
@@ -214,7 +220,7 @@ namespace AstroClient
 
                 if (room_5_BedroomPreview != null && room_5_ToggleLocking != null && room_5_ToggleLock != null && room_5_ToggleIncognito != null && room_5_DND != null)
                 {
-                    ModConsole.Log("Found all Private Room 5 Buttons Exteriors!");
+                    ModConsole.Log("Found all Private Room 5 Buttons ");
                 }
                 else
                 {
@@ -229,7 +235,7 @@ namespace AstroClient
 
                 if (room_6_BedroomPreview != null && room_6_ToggleLocking != null && room_6_ToggleLock != null && room_6_ToggleIncognito != null && room_6_DND != null)
                 {
-                    ModConsole.Log("Found all Private Room 6 Buttons Exteriors!");
+                    ModConsole.Log("Found all Private Room 6 Buttons!");
                 }
                 else
                 {
