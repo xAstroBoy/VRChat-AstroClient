@@ -42,16 +42,18 @@ namespace AstroClient.Finder
             }
         }
 
-        public static GameObject InactiveFind(string name)
+        public static GameObject InactiveFind(string path)
         {
             foreach (GameObject gameObj in Resources.FindObjectsOfTypeAll<GameObject>())
             {
                 //ModConsole.DebugLog($"SPAM: {GetGameObjectPath(gameObj)}");
-                if (GetGameObjectPath(gameObj).Equals(name))
+                if (GetGameObjectPath(gameObj).Equals(path))
                 {
+                    
                     return gameObj;
                 }
             }
+            ModConsole.Warning("[WARNING (InactiveFind) ]  Gameobject on path [ " + path + " ]  is Invalid, No Object Found!");
             return null;
         }
 
@@ -65,39 +67,5 @@ namespace AstroClient.Finder
             }
             return path;
         }
-
-        /**
-        public static GameObject InactiveFind(string search)
-        {
-            GameObject result = null;
-            foreach (var root in SceneManager.GetActiveScene().GetRootGameObjects())
-            {
-                if (root.name.Equals(search)) return root;
-
-                result = FindRecursive(root, search);
-
-                if (result) break;
-            }
-
-            return result;
-        }
-
-        private static GameObject FindRecursive(GameObject obj, string search)
-        {
-            GameObject result = null;
-            foreach (Transform child in obj.transform)
-            {
-                if (child.name.Equals(search)) {
-                    return child.gameObject;
-                }
-
-                result = FindRecursive(child.gameObject, search);
-
-                if (result) break;
-            }
-
-            return result;
-        }
-        **/
     }
 }
