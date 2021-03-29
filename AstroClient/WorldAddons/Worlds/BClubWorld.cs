@@ -36,6 +36,41 @@ namespace AstroClient
         private static GameObject room_1_DND;
 
 
+
+        private static GameObject room_2_BedroomPreview;
+        private static GameObject room_2_ToggleLocking;
+        private static GameObject room_2_ToggleLock;
+        private static GameObject room_2_ToggleIncognito;
+        private static GameObject room_2_DND;
+
+
+        private static GameObject room_3_BedroomPreview;
+        private static GameObject room_3_ToggleLocking;
+        private static GameObject room_3_ToggleLock;
+        private static GameObject room_3_ToggleIncognito;
+        private static GameObject room_3_DND;
+
+        private static GameObject room_4_BedroomPreview;
+        private static GameObject room_4_ToggleLocking;
+        private static GameObject room_4_ToggleLock;
+        private static GameObject room_4_ToggleIncognito;
+        private static GameObject room_4_DND;
+
+
+        private static GameObject room_5_BedroomPreview;
+        private static GameObject room_5_ToggleLocking;
+        private static GameObject room_5_ToggleLock;
+        private static GameObject room_5_ToggleIncognito;
+        private static GameObject room_5_DND;
+
+        private static GameObject room_6_BedroomPreview;
+        private static GameObject room_6_ToggleLocking;
+        private static GameObject room_6_ToggleLock;
+        private static GameObject room_6_ToggleIncognito;
+        private static GameObject room_6_DND;
+
+
+
         public override void OnLevelLoaded()
         {
             room1 = null;
@@ -51,6 +86,37 @@ namespace AstroClient
             room_1_ToggleIncognito = null;
             room_1_DND = null;
 
+
+            room_2_BedroomPreview = null;
+            room_2_ToggleLocking = null;
+            room_2_ToggleLock = null;
+            room_2_ToggleIncognito = null;
+            room_2_DND = null;
+
+            room_3_BedroomPreview = null;
+            room_3_ToggleLocking = null;
+            room_3_ToggleLock = null;
+            room_3_ToggleIncognito = null;
+            room_3_DND = null;
+
+            room_4_BedroomPreview = null;
+            room_4_ToggleLocking = null;
+            room_4_ToggleLock = null;
+            room_4_ToggleIncognito = null;
+            room_4_DND = null;
+
+
+            room_5_BedroomPreview = null;
+            room_5_ToggleLocking = null;
+            room_5_ToggleLock = null;
+            room_5_ToggleIncognito = null;
+            room_5_DND = null;
+
+            room_6_BedroomPreview = null;
+            room_6_ToggleLocking = null;
+            room_6_ToggleLock = null;
+            room_6_ToggleIncognito = null;
+            room_6_DND = null;
 
         }
 
@@ -84,6 +150,91 @@ namespace AstroClient
                 room_1_ToggleLock = GameObjectFinder.Find("/Bedrooms/Bedroom 1/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
                 room_1_ToggleIncognito = GameObjectFinder.Find("/Bedrooms/Bedroom 1/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
                 room_1_DND = GameObjectFinder.Find("/Bedrooms/Bedroom 1/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
+
+                if(room_1_BedroomPreview != null && room_1_ToggleLocking != null && room_1_ToggleLock != null && room_1_ToggleIncognito != null && room_1_DND != null)
+                {
+                    ModConsole.Log("Found all Private Room 1 Buttons Exteriors!");
+                }
+                else
+                {
+                    ModConsole.Error("Failed to Find Private Room 1 Buttons!");
+                }
+
+                room_2_BedroomPreview = GameObjectFinder.Find("/Bedrooms/Bedroom 2/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
+                room_2_ToggleLocking = GameObjectFinder.Find("/Bedrooms/Bedroom 2/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Looking");
+                room_2_ToggleLock = GameObjectFinder.Find("/Bedrooms/Bedroom 2/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
+                room_2_ToggleIncognito = GameObjectFinder.Find("/Bedrooms/Bedroom 2/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
+                room_2_DND = GameObjectFinder.Find("/Bedrooms/Bedroom 2/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
+
+                if (room_2_BedroomPreview != null && room_2_ToggleLocking != null && room_2_ToggleLock != null && room_2_ToggleIncognito != null && room_2_DND != null)
+                {
+                    ModConsole.Log("Found all Private Room 2 Buttons Exteriors!");
+                }
+                else
+                {
+                    ModConsole.Error("Failed to Find Private Room 2 Buttons!");
+                }
+
+                room_3_BedroomPreview = GameObjectFinder.Find("/Bedrooms/Bedroom 3/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
+                room_3_ToggleLocking = GameObjectFinder.Find("/Bedrooms/Bedroom 3/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Looking");
+                room_3_ToggleLock = GameObjectFinder.Find("/Bedrooms/Bedroom 3/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
+                room_3_ToggleIncognito = GameObjectFinder.Find("/Bedrooms/Bedroom 3/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
+                room_3_DND = GameObjectFinder.Find("/Bedrooms/Bedroom 3/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
+
+                if (room_3_BedroomPreview != null && room_3_ToggleLocking != null && room_3_ToggleLock != null && room_3_ToggleIncognito != null && room_3_DND != null)
+                {
+                    ModConsole.Log("Found all Private Room 3 Buttons Exteriors!");
+                }
+                else
+                {
+                    ModConsole.Error("Failed to Find Private Room 3 Buttons!");
+                }
+
+
+                room_4_BedroomPreview = GameObjectFinder.Find("/Bedrooms/Bedroom 4/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
+                room_4_ToggleLocking = GameObjectFinder.Find("/Bedrooms/Bedroom 4/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Looking");
+                room_4_ToggleLock = GameObjectFinder.Find("/Bedrooms/Bedroom 4/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
+                room_4_ToggleIncognito = GameObjectFinder.Find("/Bedrooms/Bedroom 4/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
+                room_4_DND = GameObjectFinder.Find("/Bedrooms/Bedroom 4/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
+
+                if (room_4_BedroomPreview != null && room_4_ToggleLocking != null && room_4_ToggleLock != null && room_4_ToggleIncognito != null && room_4_DND != null)
+                {
+                    ModConsole.Log("Found all Private Room 4 Buttons Exteriors!");
+                }
+                else
+                {
+                    ModConsole.Error("Failed to Find Private Room 4 Buttons!");
+                }
+
+                room_5_BedroomPreview = GameObjectFinder.Find("/Bedrooms/Bedroom 5/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
+                room_5_ToggleLocking = GameObjectFinder.Find("/Bedrooms/Bedroom 5/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Looking");
+                room_5_ToggleLock = GameObjectFinder.Find("/Bedrooms/Bedroom 5/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
+                room_5_ToggleIncognito = GameObjectFinder.Find("/Bedrooms/Bedroom 5/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
+                room_5_DND = GameObjectFinder.Find("/Bedrooms/Bedroom 5/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
+
+                if (room_5_BedroomPreview != null && room_5_ToggleLocking != null && room_5_ToggleLock != null && room_5_ToggleIncognito != null && room_5_DND != null)
+                {
+                    ModConsole.Log("Found all Private Room 5 Buttons Exteriors!");
+                }
+                else
+                {
+                    ModConsole.Error("Failed to Find Private Room 5 Buttons!");
+                }
+
+                room_6_BedroomPreview = GameObjectFinder.Find("/Bedrooms/Bedroom 6/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
+                room_6_ToggleLocking = GameObjectFinder.Find("/Bedrooms/Bedroom 6/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Looking");
+                room_6_ToggleLock = GameObjectFinder.Find("/Bedrooms/Bedroom 6/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
+                room_6_ToggleIncognito = GameObjectFinder.Find("/Bedrooms/Bedroom 6/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
+                room_6_DND = GameObjectFinder.Find("/Bedrooms/Bedroom 6/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
+
+                if (room_6_BedroomPreview != null && room_6_ToggleLocking != null && room_6_ToggleLock != null && room_6_ToggleIncognito != null && room_6_DND != null)
+                {
+                    ModConsole.Log("Found all Private Room 6 Buttons Exteriors!");
+                }
+                else
+                {
+                    ModConsole.Error("Failed to Find Private Room 6 Buttons!");
+                }
 
 
             }
