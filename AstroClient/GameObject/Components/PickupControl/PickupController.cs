@@ -128,7 +128,7 @@ namespace AstroClient.components
         }
 
 
-
+        [HideFromIl2Cpp]
         internal void SetRigidbody()
         {
             if (HasSetRigidbodyController)
@@ -142,9 +142,9 @@ namespace AstroClient.components
                     // IF INTERNAL SYNC IS NULL, FORCE ADD IT THEN REPLACE DEFAULT KINEMATIC TO TRUE BY DEFAULT TO AVOID OBJECTS FALLING IN THE WORLD.
                     if (control.Internal_Sync == null)
                     {
-                        if (!control.ForcedMode)
+                        if (!control.Forced_RigidBody)
                         {
-                            control.ForcedMode = true;
+                            control.Forced_RigidBody = true;
                         }
                         if (!control.EditMode)
                         {

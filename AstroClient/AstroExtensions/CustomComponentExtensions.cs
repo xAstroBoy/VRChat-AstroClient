@@ -44,7 +44,7 @@ namespace AstroClient.extensions
             {
                 control = obj.AddComponent<RigidBodyController>();
             }
-            control.ForcedMode = true;
+            control.Forced_SyncPhysic = true;
             control.EditMode = true;
             control.isKinematic = true;
         }

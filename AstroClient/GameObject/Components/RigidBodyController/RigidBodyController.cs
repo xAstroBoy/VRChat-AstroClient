@@ -150,7 +150,7 @@ namespace AstroClient.components
             {
                 try
                 {
-                    if (ForcedMode)
+                    if (Forced_SyncPhysic)
                     {
                         if (Sync == null)
                         {
@@ -177,6 +177,36 @@ namespace AstroClient.components
                                 ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Spawned Rigidbody in SyncPhysic as is Null..");
                                 body = obj.AddComponent<Rigidbody>();
                                 Sync.field_Private_Rigidbody_0 = body;
+                                body.isKinematic = true;
+                                return;
+                            }
+
+                        }
+                    }
+
+                    if(Forced_RigidBody)
+                    {
+                        if (body == null)
+                        {
+                            if (obj.GetComponent<Rigidbody>() != null && body == null)
+                            {
+                                ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Rigidbody..");
+                                body = obj.GetComponent<Rigidbody>();
+                                body.isKinematic = true;
+                                return;
+                            }
+
+                            if (obj.GetComponentInChildren<Rigidbody>() != null && Sync.field_Private_Rigidbody_0 == null)
+                            {
+                                ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Rigidbody..");
+                                body = obj.GetComponentInChildren<Rigidbody>();
+                                body.isKinematic = true;
+                                return;
+                            }
+                            if (obj.GetComponentInChildren<Rigidbody>() == null && obj.GetComponent<Rigidbody>() == null && Sync.field_Private_Rigidbody_0 == null)
+                            {
+                                ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Spawned Rigidbody..");
+                                body = obj.AddComponent<Rigidbody>();
                                 body.isKinematic = true;
                                 return;
                             }
@@ -254,6 +284,34 @@ namespace AstroClient.components
                             }
                         }
                     }
+
+                    if(body != null)
+                    {
+                        if (body.useGravity != useGravity)
+                        {
+                            body.useGravity = useGravity;
+                        }
+                        if (body.isKinematic != isKinematic)
+                        {
+                            body.isKinematic = isKinematic;
+                        }
+                        if (body.constraints != Constraints)
+                        {
+                            body.constraints = Constraints;
+                        }
+                        if (body.detectCollisions != DetectCollisions)
+                        {
+                            body.detectCollisions = DetectCollisions;
+                        }
+                        if (body.drag != Drag)
+                        {
+                            body.drag = Drag;
+                        }
+                        if (body.angularDrag != AngularDrag)
+                        {
+                            body.angularDrag = AngularDrag;
+                        }
+                    }
                 }
                 else
                 {
@@ -316,6 +374,64 @@ namespace AstroClient.components
                             }
                         }
                     }
+
+                    if (body != null)
+                    {
+                        if (body.useGravity != OrigUseGravity)
+                        {
+                            OrigUseGravity = body.useGravity;
+                        }
+                        if (body.useGravity != useGravity)
+                        {
+                            useGravity = body.useGravity;
+                        }
+
+                        if (body.isKinematic != OrigKinematic)
+                        {
+                            OrigKinematic = body.isKinematic;
+                        }
+                        if (body.isKinematic != isKinematic)
+                        {
+                            isKinematic = body.isKinematic;
+                        }
+
+                        if (body.constraints != OrigConstraints)
+                        {
+                            OrigConstraints = body.constraints;
+                        }
+                        if (body.constraints != Constraints)
+                        {
+                            Constraints = body.constraints;
+                        }
+
+                        if (body.detectCollisions != OrigDetectCollisions)
+                        {
+                            OrigDetectCollisions = body.detectCollisions;
+                        }
+                        if (body.detectCollisions != DetectCollisions)
+                        {
+                            DetectCollisions = body.detectCollisions;
+                        }
+
+                        if (body.drag != OrigDrag)
+                        {
+                            OrigDrag = body.drag;
+                        }
+                        if (body.drag != Drag)
+                        {
+                            Drag = body.drag;
+                        }
+
+                        if (body.angularDrag != OrigAngularDrag)
+                        {
+                            OrigAngularDrag = body.angularDrag;
+                        }
+                        if (body.angularDrag != AngularDrag)
+                        {
+                            AngularDrag = body.angularDrag;
+                        }
+                    }
+
                 }
             }
             catch (Exception e)
@@ -385,7 +501,8 @@ namespace AstroClient.components
         private float OrigAngularDrag = 0f;
         private RigidbodyConstraints OrigConstraints;
 
-        internal bool ForcedMode;
+        internal bool Forced_SyncPhysic;
+        internal bool Forced_RigidBody;
 
         internal bool useGravity = false;
         internal bool isKinematic = false;
