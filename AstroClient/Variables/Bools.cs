@@ -35,6 +35,17 @@ namespace AstroClient.variables
             }
         }
 
+        internal static bool isCheetosMode
+        {
+            get
+            {
+#if DEBUG
+                return true;
+#endif
+                return false;
+            }
+        }
+
         internal static bool SkipMenuChecks = true;
 
         // TOGGLE "Malicious" COMPONENTS

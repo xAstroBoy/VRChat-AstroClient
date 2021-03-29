@@ -49,6 +49,7 @@
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemlySpy_Extensions.cs" />
+    <Compile Include="Cheetos\CheetosUI.cs" />
     <Compile Include="Cheetos\Config\SaveDataTempStuff.cs" />
     <Compile Include="Cheetos\PlayerListUI.cs" />
     <Compile Include="Cheetos\Hooks\RayCastHook.cs" />
