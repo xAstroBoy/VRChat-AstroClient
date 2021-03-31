@@ -178,6 +178,7 @@
     <Compile Include="Utils\Headlight\ColorConverter.cs" />
     <Compile Include="Utils\Headlight\Headlight.cs" />
     <Compile Include="Utils\PlayerMovement\Movement.cs" />
+    <Compile Include="Utils\UdonSearcher\UdonSearch.cs" />
     <Compile Include="Utils\XrefScannerUtils.cs" />
     <Compile Include="Variables\GDBUser.cs" />
     <Compile Include="Variables\VRChatObjects.cs" />
