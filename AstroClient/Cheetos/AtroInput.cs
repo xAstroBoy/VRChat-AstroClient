@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.Cheetos
 {
     using AstroClient.ConsoleUtils;
+    using AstroClient.Finder;
     using DayClientML2.Utility.Extensions;
     using System;
     using System.Collections.Generic;
@@ -63,8 +64,28 @@
 
             if (localPlayer.GetIsInVR())
             {
-                // TODO: VR inputs
-            } else
+                // _Application/TrackingVolume/TrackingHandProxy(Clone)/Left/PointerOrigin
+                // _Application/TrackingVolume/TrackingHandProxy(Clone)/Right/PointerOrigin
+
+                // _Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Controller (left)/PointerOrigin
+                // _Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Controller (right)/PointerOrigin
+
+                //var leftHand = GameObjectFinder.Find("_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Controller (left)/PointerOrigin");
+                //var rightHand = GameObjectFinder.Find("_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Controller (right)/PointerOrigin");
+
+                var inputManager = GameObjectFinder.Find("_Application/InputManager");
+
+                var daydreamComp = inputManager.GetComponent<VRCInputProcessorDaydream>();
+
+                var rightTrigger = daydreamComp.field_Private_VRCInput_10;
+
+                if(rightTrigger.prop_Boolean_2)
+                {
+                    var uiManager = VRCUiManager.prop_VRCUiManager_0;
+                    PopupManager.QueHudMessage(uiManager, "VR Right Trigger");
+                }
+            }
+            else
             {
                 if (Input.GetMouseButtonDown(0))
                 {

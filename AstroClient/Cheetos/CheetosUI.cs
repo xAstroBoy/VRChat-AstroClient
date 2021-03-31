@@ -12,6 +12,8 @@
     using CheetosConsole;
     using AstroClient.Finder;
     using AstroClient.Variables;
+    using UnityEngine;
+    using DayClientML2.Utility.Extensions;
 
     public class CheetosPrivateStuff : Overridables
     {
@@ -19,6 +21,17 @@
         {
 #if CHEETOS
             CheetosConsole.Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), "Cheetos Mode", System.Drawing.Color.LightYellow, System.Drawing.Color.DarkOrange);
+
+            string VRChatVersion = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.prop_String_2;
+            ModConsole.DebugLog($"VRChat Version: {VRChatVersion}");
+#endif
+        }
+
+        public override void OnWorldReveal()
+        {
+#if CHEETOS
+            var uiManager = VRCUiManager.prop_VRCUiManager_0;
+            PopupManager.QueHudMessage(uiManager, "Cheetos Mode!");
 #endif
         }
     }
@@ -32,10 +45,13 @@
 
         public QMScrollMenu MainScroller { get; private set; }
 
+        public QMSingleButton RestartButton { get; private set; }
+
         public override void VRChat_OnUiManagerInit()
         {
             MainButton = new QMNestedButton("ShortcutMenu", 6, 0, "Cheeto's Menu", "Cheeto's secret WIP features", null, null, null, null, true);
             MainScroller = new QMScrollMenu(MainButton);
+            RestartButton = new QMSingleButton(MainButton, 0, 0, "Close Game", () => { Environment.Exit(0); }, "Close the game");
 
             if (!Bools.isCheetosMode)
             {
