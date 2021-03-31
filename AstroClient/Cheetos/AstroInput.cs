@@ -79,7 +79,6 @@
 
             if (localPlayer.GetIsInVR())
             {
-#if CHEETOS
                 if (LeftHandPointer == null)
                 {
                     LeftHandPointer = GameObjectFinder.Find("_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Controller (left)/PointerOrigin");
@@ -104,14 +103,14 @@
                 if (leftTrigger.prop_Boolean_2 && CanClick)
                 {
                     currentTriggerPointer = LeftHandPointer.transform;
-                    PopupManager.QueHudMessage(uiManager, "VR Left Trigger");
                     CanClick = false;
                 } else if (rightTrigger.prop_Boolean_2 && CanClick)
                 {
                     currentTriggerPointer = RightHandPointer.transform;
-                    PopupManager.QueHudMessage(uiManager, "VR Right Trigger");
                     CanClick = false;
-                } else
+                }
+
+                if (!leftTrigger.prop_Boolean_2 && !rightTrigger.prop_Boolean_2)
                 {
                     CanClick = true;
                 }
@@ -124,7 +123,6 @@
                         CheckHitObject(gameObject);
                     }
                 }
-#endif
             }
             else
             {
@@ -136,10 +134,6 @@
                         var gameObject = hit.collider.transform.gameObject;
                         CheckHitObject(gameObject);
                     }
-                    CanClick = false;
-                } else
-                {
-                    CanClick = true;
                 }
             }
         }
