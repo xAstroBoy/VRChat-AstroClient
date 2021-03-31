@@ -82,5 +82,13 @@ namespace AstroClient.extensions
                 Pickup.SetallowManipulationWhenEquipped(obj, allowManipulationWhenEquipped);
             }
         }
+
+        public static void ForcePickupComponent(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                Pickup.ForcePickupComponentPresence(obj);
+            }
+        }
     }
 }

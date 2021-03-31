@@ -1,8 +1,9 @@
-﻿namespace AstroClient.Cheetos
+﻿namespace AstroClient
 {
     using AstroClient.ConsoleUtils;
     using AstroClient.Finder;
     using DayClientML2.Utility.Extensions;
+    using Mono.CSharp;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -14,6 +15,15 @@
     using UnityEngine;
     using UnityEngine.Experimental.UIElements;
     using VRC;
+
+    public static class Astro_Interactable_Extensions
+    {
+        public static void AddAstroInteractable(this GameObject gameObject, Action action)
+        {
+            gameObject.AddComponent<Astro_Interactable>();
+            gameObject.GetComponent<Astro_Interactable>().Action = action;
+        }
+    }
 
     public class Astro_Interactable : MonoBehaviour
     {
@@ -38,7 +48,8 @@
 
     public class AtroInput : Overridables
     {
-        public bool IsReady = false;
+        public GameObject LeftHandPointer { get; private set; }
+        public GameObject RightHandPointer { get; private set; }
 
         public override void OnApplicationStart()
         {
@@ -49,17 +60,17 @@
         public override void OnWorldReveal()
         {
 #if CHEETOS
-            var testButton = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            testButton.transform.position = LocalPlayerUtils.GetSelfPlayer().transform.position;
-            testButton.AddComponent<Astro_Interactable>();
-            testButton.GetComponent<Astro_Interactable>().Action = () => { ModConsole.DebugLog("Astro_Interactable: I was invoked.."); };
+            //var testButton = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            //testButton.transform.position = LocalPlayerUtils.GetSelfPlayer().transform.position;
+            //testButton.AddComponent<Astro_Interactable>();
+            //testButton.GetComponent<Astro_Interactable>().Action = () => { ModConsole.DebugLog("Astro_Interactable: I was invoked.."); };
 #endif
         }
 
         public override void OnLateUpdate()
         {
             var localPlayer = LocalPlayerUtils.GetSelfPlayer();
-            if (WorldUtils.GetWorldID() == null || localPlayer == null || !localPlayer.isActiveAndEnabled)
+            if (WorldUtils.GetWorldID() == null || localPlayer == null || !localPlayer.isActiveAndEnabled || LocalPlayerUtils.IsQuickMenuOpen)
             {
                 return;
             }
@@ -67,25 +78,46 @@
             if (localPlayer.GetIsInVR())
             {
 #if CHEETOS
-                // _Application/TrackingVolume/TrackingHandProxy(Clone)/Left/PointerOrigin
-                // _Application/TrackingVolume/TrackingHandProxy(Clone)/Right/PointerOrigin
+                if (LeftHandPointer == null)
+                {
+                    LeftHandPointer = GameObjectFinder.Find("_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Controller (left)/PointerOrigin");
+                }
 
-                // _Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Controller (left)/PointerOrigin
-                // _Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Controller (right)/PointerOrigin
-
-                //var leftHand = GameObjectFinder.Find("_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Controller (left)/PointerOrigin");
-                //var rightHand = GameObjectFinder.Find("_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Controller (right)/PointerOrigin");
+                if (RightHandPointer == null)
+                {
+                    RightHandPointer = GameObjectFinder.Find("_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Controller (right)/PointerOrigin");
+                }
 
                 var inputManager = GameObjectFinder.Find("_Application/InputManager");
 
                 var daydreamComp = inputManager.GetComponent<VRCInputProcessorDaydream>();
 
+                var leftTrigger = daydreamComp.field_Private_VRCInput_12;
                 var rightTrigger = daydreamComp.field_Private_VRCInput_10;
+                var uiManager = VRCUiManager.prop_VRCUiManager_0;
 
-                if(rightTrigger.prop_Boolean_2)
+                RaycastHit hit;
+                Transform currentTriggerPointer = null;
+
+                if (leftTrigger.prop_Boolean_2)
                 {
-                    var uiManager = VRCUiManager.prop_VRCUiManager_0;
+                    currentTriggerPointer = LeftHandPointer.transform;
+                    PopupManager.QueHudMessage(uiManager, "VR Left Trigger");
+                }
+
+                if (rightTrigger.prop_Boolean_2)
+                {
+                    currentTriggerPointer = RightHandPointer.transform;
                     PopupManager.QueHudMessage(uiManager, "VR Right Trigger");
+                }
+
+                if (currentTriggerPointer != null)
+                {
+                    if (Physics.Raycast(currentTriggerPointer.position, currentTriggerPointer.transform.forward, out hit, float.MaxValue))
+                    {
+                        var gameObject = hit.transform.gameObject;
+                        CheckHitObject(gameObject);
+                    }
                 }
 #endif
             }
