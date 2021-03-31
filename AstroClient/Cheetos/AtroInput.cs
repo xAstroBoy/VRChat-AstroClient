@@ -48,10 +48,12 @@
 
         public override void OnWorldReveal()
         {
+#if CHEETOS
             var testButton = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             testButton.transform.position = LocalPlayerUtils.GetSelfPlayer().transform.position;
             testButton.AddComponent<Astro_Interactable>();
             testButton.GetComponent<Astro_Interactable>().Action = () => { ModConsole.DebugLog("Astro_Interactable: I was invoked.."); };
+#endif
         }
 
         public override void OnLateUpdate()
@@ -64,6 +66,7 @@
 
             if (localPlayer.GetIsInVR())
             {
+#if CHEETOS
                 // _Application/TrackingVolume/TrackingHandProxy(Clone)/Left/PointerOrigin
                 // _Application/TrackingVolume/TrackingHandProxy(Clone)/Right/PointerOrigin
 
@@ -84,6 +87,7 @@
                     var uiManager = VRCUiManager.prop_VRCUiManager_0;
                     PopupManager.QueHudMessage(uiManager, "VR Right Trigger");
                 }
+#endif
             }
             else
             {
