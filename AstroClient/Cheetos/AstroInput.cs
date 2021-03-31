@@ -46,10 +46,12 @@
         }
     }
 
-    public class AtroInput : Overridables
+    public class AstroInput : Overridables
     {
         public GameObject LeftHandPointer { get; private set; }
         public GameObject RightHandPointer { get; private set; }
+
+        public bool CanClick { get; private set; }
 
         public override void OnApplicationStart()
         {
@@ -99,23 +101,26 @@
                 RaycastHit hit;
                 Transform currentTriggerPointer = null;
 
-                if (leftTrigger.prop_Boolean_2)
+                if (leftTrigger.prop_Boolean_2 && CanClick)
                 {
                     currentTriggerPointer = LeftHandPointer.transform;
                     PopupManager.QueHudMessage(uiManager, "VR Left Trigger");
-                }
-
-                if (rightTrigger.prop_Boolean_2)
+                    CanClick = false;
+                } else if (rightTrigger.prop_Boolean_2 && CanClick)
                 {
                     currentTriggerPointer = RightHandPointer.transform;
                     PopupManager.QueHudMessage(uiManager, "VR Right Trigger");
+                    CanClick = false;
+                } else
+                {
+                    CanClick = true;
                 }
 
                 if (currentTriggerPointer != null)
                 {
                     if (Physics.Raycast(currentTriggerPointer.position, currentTriggerPointer.transform.forward, out hit, float.MaxValue))
                     {
-                        var gameObject = hit.transform.gameObject;
+                        var gameObject = hit.collider.transform.gameObject;
                         CheckHitObject(gameObject);
                     }
                 }
@@ -123,20 +128,25 @@
             }
             else
             {
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButtonDown(0) && CanClick)
                 {
                     RaycastHit hit;
                     if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hit, float.MaxValue))
                     {
-                        var gameObject = hit.transform.gameObject;
+                        var gameObject = hit.collider.transform.gameObject;
                         CheckHitObject(gameObject);
                     }
+                    CanClick = false;
+                } else
+                {
+                    CanClick = true;
                 }
             }
         }
 
         public void CheckHitObject(GameObject gameObject)
         {
+            ModConsole.DebugLog($"CheckHitObject: {gameObject.name}");
             var interactable = gameObject.GetComponent<Astro_Interactable>();
             if (interactable!=null)
             {

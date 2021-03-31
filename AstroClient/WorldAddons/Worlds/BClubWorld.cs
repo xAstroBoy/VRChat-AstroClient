@@ -27,8 +27,7 @@ namespace AstroClient
 
                 ModConsole.Log("Searching for Private Rooms Exteriors...");
 
-                CreateButtonGroup(1, new Vector3(-68.75317f, 15.9341f, -0.3320923f), new Quaternion(-0.5209573f, -0.4646181f, -0.5404834f, -0.469693f));
-
+                var buttonGroup = CreateButtonGroup(1, new Vector3(-68.75317f, 15.9341f, -0.3320923f), new Quaternion(0.5209573f, 0.4646181f, -0.5404834f, -0.469693f));
                 //foreach (var action in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
                 //{
                 //    if (action.name.ToLower() == "photozonemaster")
@@ -152,6 +151,11 @@ namespace AstroClient
                         clone.transform.SetParent(buttonGroup.transform);
                         clone.transform.position = buttonGroup.transform.position;
                         clone.transform.localPosition += new Vector3(2f, 0f, 0f);
+
+                        Vector3 rot = clone.transform.rotation.eulerAngles;
+                        rot = new Vector3(rot.x, rot.y, rot.z + 180);
+                        clone.transform.rotation = Quaternion.Euler(rot);
+
                         clone.AddToWorldUtilsMenu();
                         clone.RenameObject($"Do Not Disturb {doorID}");
 
