@@ -52,7 +52,7 @@ namespace AstroClient
             var room_ToggleIncognito = GameObjectFinder.Find($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
             var room_DND = GameObjectFinder.Find($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
 
-            GameObject buttonGroup = new GameObject(); // Removed primitive sphere as is not needed unless debug.
+            GameObject buttonGroup = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             buttonGroup.transform.SetParent(room.transform);
             //buttonGroup.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Just so I can see where the parent is for now
             buttonGroup.transform.position = position;
@@ -60,9 +60,9 @@ namespace AstroClient
             buttonGroup.transform.position += new Vector3(0, 0.02f, 0);
             buttonGroup.AddToWorldUtilsMenu();
             buttonGroup.RenameObject($"ButtonGroup {doorID}");
-            //buttonGroup.enablecolliders();
-            //buttonGroup.ForcePickupComponent();
-            //buttonGroup.SetPickupable(true);
+            //buttonGroup.AddTriggerCollider();
+            buttonGroup.ForcePickupComponent();
+            buttonGroup.SetPickupable(true);
 
             // add buttons
             if (room_BedroomPreview != null && room_ToggleLooking != null && room_ToggleLock != null && room_ToggleIncognito != null && room_DND != null)
