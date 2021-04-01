@@ -27,7 +27,7 @@ namespace AstroClient.Worlds
                 Cloned_trigger = DisplayObj.AddComponent<VRCSDK2.VRC_Trigger>().GetCopyOf(WorkingTrigger);
                 if (Cloned_trigger != null)
                 {
-                    Cloned_trigger.interactText = InteractText;
+                    Cloned_trigger.interactText = "[AstroClient]: "+  InteractText;
                 }
             }
             if (Cloned_trigger != null)
@@ -70,7 +70,7 @@ namespace AstroClient.Worlds
 
                 if (PrivateRoomSwitchTrigger != null && DisplaySwitchTrigger != null)
                 {
-                    CloneTriggerToObject(PrivateRoomSwitchTrigger, DisplaySwitchTrigger, "(AstroClient) : Lockpick Door");
+                    CloneTriggerToObject(PrivateRoomSwitchTrigger, DisplaySwitchTrigger, "Lockpick Door");
                 }
                 return;
             }
@@ -97,25 +97,25 @@ namespace AstroClient.Worlds
                 if (Door_1_Interactive != null && Door_1_Visual != null)
                 {
                     ModConsole.Log("Adding Lockpick Private Door 1");
-                    CloneTriggerToObject(Door_1_Interactive, Door_1_Visual, "(AstroClient) : Lockpick door 1");
+                    CloneTriggerToObject(Door_1_Interactive, Door_1_Visual, "Lockpick door 1");
 
                 }
                 if (Door_2_Interactive != null && Door_2_Visual != null)
                 {
                     ModConsole.Log("Adding Lockpick Private Door 2");
-                    CloneTriggerToObject(Door_2_Interactive, Door_2_Visual, "(AstroClient) : Lockpick door 2");
+                    CloneTriggerToObject(Door_2_Interactive, Door_2_Visual, "Lockpick door 2");
 
                 }
                 if (Door_3_Interactive != null && Door_3_Visual != null)
                 {
                     ModConsole.Log("Adding Lockpick Private Door 3");
-                    CloneTriggerToObject(Door_3_Interactive, Door_3_Visual, "(AstroClient) : Lockpick door 3");
+                    CloneTriggerToObject(Door_3_Interactive, Door_3_Visual, "Lockpick door 3");
 
                 }
                 if (Door_4_Interactive != null && Door_4_Visual != null)
                 {
                     ModConsole.Log("Adding Lockpick Private Door 4");
-                    CloneTriggerToObject(Door_4_Interactive, Door_4_Visual, "(AstroClient) : Lockpick door 4");
+                    CloneTriggerToObject(Door_4_Interactive, Door_4_Visual, "Lockpick door 4");
                 }
                 return;
             }

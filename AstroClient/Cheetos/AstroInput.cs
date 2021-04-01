@@ -62,10 +62,10 @@
         public override void OnWorldReveal()
         {
 #if CHEETOS
-            var testButton = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            testButton.transform.position = LocalPlayerUtils.GetSelfPlayer().transform.position;
-            testButton.AddComponent<Astro_Interactable>();
-            testButton.GetComponent<Astro_Interactable>().Action = () => { ModConsole.DebugLog("Astro_Interactable: I was invoked.."); };
+            //var testButton = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            //testButton.transform.position = LocalPlayerUtils.GetSelfPlayer().transform.position;
+            //testButton.AddComponent<Astro_Interactable>();
+            //testButton.GetComponent<Astro_Interactable>().Action = () => { ModConsole.DebugLog("Astro_Interactable: I was invoked.."); };
 #endif
         }
 

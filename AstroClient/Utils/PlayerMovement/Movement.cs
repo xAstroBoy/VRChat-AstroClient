@@ -17,9 +17,9 @@ namespace AstroClient.AstroUtils.PlayerMovement
         {
             var temp = new QMNestedButton(menu, x, y, "Movement Options", "Control Your Movements", null, null, null, null, btnHalf);
             UnlimitedJumpToggle = new QMSingleToggleButton(temp, 1, 0, "Unlimited Jumps", new Action(() => { IsUnlimitedJumpActive = true; }), "Unlimited Jumps OFF", new Action(() => { IsUnlimitedJumpActive = false; }), "Allows you to Unlimited jump", Color.green, Color.red, null, false, true);
-            RocketJumpToggle = new QMSingleToggleButton(temp, 1, 0.5f, "Rocket Jump", new Action(() => { isRocketJumpActive = true; }), "Rocket Jump", new Action(() => { isRocketJumpActive = true; }), "Allows you to Unlimited jump", Color.green, Color.red, null, false, true);
+            RocketJumpToggle = new QMSingleToggleButton(temp, 1, 0.5f, "Rocket Jump", new Action(() => { isRocketJumpActive = true; }), "Rocket Jump", new Action(() => { isRocketJumpActive = false; }), "Allows you to Unlimited jump", Color.green, Color.red, null, false, true);
 
-            JumpOverrideToggle = new QMToggleButton(temp, 2, 0, "Jump Override ON", new Action(ToggleJumpOverride), "Jump Override OFF", new Action(ToggleJumpOverride), "Allows you to Bypass jump Block in certain worlds.", null, null, null, false);
+            JumpOverrideToggle = new QMToggleButton(temp, 2, 0, "Jump Override ON", new Action(() => { IsJumpOverriden = true; }), "Jump Override OFF", new Action(() => { IsJumpOverriden = true; }), "Allows you to Bypass jump Block in certain worlds.", null, null, null, false);
             SerializerBtn = new QMToggleButton(temp, 3, 0, "Serializer ON", new Action(ToggleSerializer), "Serializer OFF", new Action(ToggleSerializer), "Blocks Movement packets (allows you to be invisible to others)", null, null, null, false);
             FreezePlayerOnQMOpenToggle = new QMToggleButton(temp, 4, 0, "Freeze On QM open \n ON", new Action(ToggleFreezePlayerOnQMOpen), "Freeze On QM Open \n OFF", new Action(ToggleFreezePlayerOnQMOpen), "Freeze Player On QuickMenu Open event.", null, null, null, false);
             new QMSingleButton(temp, 1, 1, "Spawn Avatar Clone", new Action(() => { SpawnClone(); }), "Spawns current avi clone", null, null, true);
@@ -84,23 +84,6 @@ namespace AstroClient.AstroUtils.PlayerMovement
             }
         }
 
-        public static void ToggleUnlimitedJump()
-        {
-            IsUnlimitedJumpActive = !IsUnlimitedJumpActive;
-            if (UnlimitedJumpToggle != null)
-            {
-                UnlimitedJumpToggle.setToggleState(IsUnlimitedJumpActive);
-            }
-        }
-
-        public static void ToggleJumpOverride()
-        {
-            IsJumpOverriden = !IsJumpOverriden;
-            if (JumpOverrideToggle != null)
-            {
-                JumpOverrideToggle.setToggleState(IsJumpOverriden);
-            }
-        }
 
         public static void CheckForJumpUpdates()
         {
@@ -123,7 +106,7 @@ namespace AstroClient.AstroUtils.PlayerMovement
                         }
                     }
 
-                    if (!InputUtils.isInputJumpPressed() && isRocketJumpActive)
+                    if (InputUtils.isInputJumpPressed() && isRocketJumpActive)
                     {
                         EmulatedJump();
                     }
