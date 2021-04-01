@@ -45,14 +45,22 @@ namespace AstroClient
 
         private GameObject CreateButtonGroup(int doorID, Vector3 position, Quaternion rotation, bool flip = false)
         {
-            var room = GameObjectFinder.InactiveFind($"nLobby/Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");
-            var room_BedroomPreview = GameObjectFinder.InactiveFind($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
-            var room_ToggleLooking = GameObjectFinder.InactiveFind($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Looking");
-            var room_ToggleLock = GameObjectFinder.InactiveFind($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
-            var room_ToggleIncognito = GameObjectFinder.InactiveFind($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
-            var room_DND = GameObjectFinder.InactiveFind($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
+            GameObject nlobby = SceneManager.GetActiveScene().GetRootGameObjects().Where(x => x.gameObject.name == "nLobby").First();
+            GameObject Bedrooms = SceneManager.GetActiveScene().GetRootGameObjects().Where(x => x.gameObject.name == "Bedrooms").First();
+            if (nlobby != null && Bedrooms != null)
+            {
+                ModConsole.Log("Found nlobby and Bedrooms!");
 
-            GameObject buttonGroup = GameObject.CreatePrimitive(PrimitiveType.Plane);
+
+                var room = nlobby.transform.Find($"Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");
+                var room_BedroomPreview = Bedrooms.transform.Find($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
+                var room_ToggleLooking = Bedrooms.transform.Find($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Looking");
+                var room_ToggleLock = Bedrooms.transform.Find($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
+                var room_ToggleIncognito = Bedrooms.transform.Find($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
+                var room_DND = Bedrooms.transform.Find($"Bedroom {doorID}/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
+
+
+                GameObject buttonGroup = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 buttonGroup.transform.SetParent(room.transform);
                 buttonGroup.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Just so I can see where the parent is for now
 
@@ -66,140 +74,186 @@ namespace AstroClient
 
                 buttonGroup.GetComponent<Renderer>().enabled = false;
 
-            // add buttons
-            if (room != null && room_BedroomPreview != null && room_ToggleLooking != null && room_ToggleLock != null && room_ToggleIncognito != null && room_DND != null)
-            {
-                ModConsole.Log($"Found all Private Room {doorID} Buttons!");
-
-                if (room_BedroomPreview != null)
+                // add buttons
+                if (room != null)
                 {
-                    var clone = room_BedroomPreview.InstantiateObject();
-                    if (clone != null)
+                    ModConsole.Log($"Found all Private Room {doorID} Buttons!");
+
+                    if (room_BedroomPreview != null)
                     {
-                        clone.transform.SetParent(buttonGroup.transform);
-                        clone.transform.position = buttonGroup.transform.position;
-                        clone.transform.localPosition = new Vector3(-2.335898f, 0, -3.828288f);
-                        clone.RenameObject($"Intercom {doorID}");
-                        clone.AddCollider();
-
-                        var udonEvent = UdonSearch.FindUdonEvent("PhotozoneMaster", $"EnableIntercomIn{doorID}");
-                        Action action = () => { udonEvent.ExecuteUdonEvent(); };
-                        clone.AddAstroInteractable(action);
-
-                        clone.AddToWorldUtilsMenu();
-
-                        var old = clone.transform.Find("Button Interactable");
-                        if (old!=null)
+                        ModConsole.DebugLog("Found Bedroom Preview Button!, spawning..");
+                        var clone = room_BedroomPreview.InstantiateObject();
+                        if (clone != null)
                         {
-                            old.gameObject.DestroyMeLocal();
+                            clone.transform.SetParent(buttonGroup.transform);
+                            clone.transform.position = buttonGroup.transform.position;
+                            clone.transform.localPosition = new Vector3(-2.335898f, 0, -3.828288f);
+                            clone.RenameObject($"Intercom {doorID}");
+                            clone.AddCollider();
+
+                            var udonEvent = UdonSearch.FindUdonEvent("PhotozoneMaster", $"EnableIntercomIn{doorID}");
+                            Action action = () => { udonEvent.ExecuteUdonEvent(); };
+                            clone.AddAstroInteractable(action);
+
+                            clone.AddToWorldUtilsMenu();
+
+                            var old = clone.transform.Find("Button Interactable");
+                            if (old != null)
+                            {
+                                old.gameObject.DestroyMeLocal();
+                            }
                         }
                     }
-                }
-                if (room_ToggleLock != null)
-                {
-                    var clone = room_ToggleLock.InstantiateObject();
-                    if (clone != null)
+                    else
                     {
-                        clone.transform.SetParent(buttonGroup.transform);
-                        clone.transform.position = buttonGroup.transform.position;
-                        clone.transform.localPosition = new Vector3(-2.335898f, 0, -1.828288f);
-                        clone.RenameObject($"Lock {doorID}");
-                        clone.AddCollider();
+                        ModConsole.DebugWarning("Failed to find Bedroom Preview Button!");
+                    }
 
-                        var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleLock{doorID}");
-                        Action action = () => { udonEvent.ExecuteUdonEvent(); };
-                        clone.AddAstroInteractable(action);
-
-                        clone.AddToWorldUtilsMenu();
-
-                        var old = clone.transform.Find("Button Interactable - Toggle Lock");
-                        if (old != null)
+                    if (room_ToggleLock != null)
+                    {
+                        ModConsole.DebugLog("Found Bedroom Toggle Lock Button!, spawning..");
+                        var clone = room_ToggleLock.InstantiateObject();
+                        if (clone != null)
                         {
-                            old.gameObject.DestroyMeLocal();
+                            clone.transform.SetParent(buttonGroup.transform);
+                            clone.transform.position = buttonGroup.transform.position;
+                            clone.transform.localPosition = new Vector3(-2.335898f, 0, -1.828288f);
+                            clone.RenameObject($"Lock {doorID}");
+                            clone.AddCollider();
+
+                            var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleLock{doorID}");
+                            Action action = () => { udonEvent.ExecuteUdonEvent(); };
+                            clone.AddAstroInteractable(action);
+
+                            clone.AddToWorldUtilsMenu();
+
+                            var old = clone.transform.Find("Button Interactable - Toggle Lock");
+                            if (old != null)
+                            {
+                                old.gameObject.DestroyMeLocal();
+                            }
                         }
                     }
-                }
-                if (room_ToggleLooking != null)
-                {
-                    var clone = room_ToggleLooking.InstantiateObject();
-                    if (clone != null)
+                    else
                     {
-                        clone.transform.SetParent(buttonGroup.transform);
-                        clone.transform.position = buttonGroup.transform.position;
-                        clone.transform.localPosition = new Vector3(-4.335898f, 0, -1.828288f);
-                        clone.RenameObject($"Looking {doorID}");
-                        clone.AddCollider();
+                        ModConsole.DebugWarning("Failed to find Bedroom Toggle Lock Button!");
+                    }
 
-                        var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleLooking{doorID}");
-                        Action action = () => { udonEvent.ExecuteUdonEvent(); };
-                        clone.AddAstroInteractable(action);
+                    if (room_ToggleLooking != null)
+                    {
+                        ModConsole.DebugLog("Found Bedroom Toggle Looking Button!, spawning..");
 
-                        clone.AddToWorldUtilsMenu();
-
-                        var old = clone.transform.Find("Button Interactable - Looking");
-                        if (old != null)
+                        var clone = room_ToggleLooking.InstantiateObject();
+                        if (clone != null)
                         {
-                            old.gameObject.DestroyMeLocal();
+                            clone.transform.SetParent(buttonGroup.transform);
+                            clone.transform.position = buttonGroup.transform.position;
+                            clone.transform.localPosition = new Vector3(-4.335898f, 0, -1.828288f);
+                            clone.RenameObject($"Looking {doorID}");
+                            clone.AddCollider();
+
+                            var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleLooking{doorID}");
+                            Action action = () => { udonEvent.ExecuteUdonEvent(); };
+                            clone.AddAstroInteractable(action);
+
+                            clone.AddToWorldUtilsMenu();
+
+                            var old = clone.transform.Find("Button Interactable - Looking");
+                            if (old != null)
+                            {
+                                old.gameObject.DestroyMeLocal();
+                            }
                         }
+                    }
+                    else
+                    {
+                        ModConsole.DebugWarning("Failed to find Bedroom Toggle Looking Button!");
+                    }
+
+
+
+                    if (room_ToggleIncognito != null)
+                    {
+                        ModConsole.DebugLog("Found Bedroom Toggle Incognito Button!, spawning..");
+
+                        var clone = room_ToggleIncognito.InstantiateObject();
+                        if (clone != null)
+                        {
+                            clone.transform.SetParent(buttonGroup.transform);
+                            clone.transform.position = buttonGroup.transform.position;
+                            clone.transform.localPosition = new Vector3(-6.335898f, 0, -1.828288f);
+                            clone.RenameObject($"Incognito {doorID}");
+                            clone.AddCollider();
+
+                            var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleAnon{doorID}");
+                            Action action = () => { udonEvent.ExecuteUdonEvent(); };
+                            clone.AddAstroInteractable(action);
+
+                            clone.AddToWorldUtilsMenu();
+
+                            var old = clone.transform.Find("Button Interactable - Anon");
+                            if (old != null)
+                            {
+                                old.gameObject.DestroyMeLocal();
+                            }
+                        }
+                        else
+                        {
+                            ModConsole.DebugWarning("Failed to find Bedroom Incognito Button!");
+                        }
+                    }
+                    if (room_DND != null)
+                    {
+                        ModConsole.DebugLog("Found Bedroom Toggle Do Not Disturb Button!, spawning..");
+                        var clone = room_DND.InstantiateObject();
+                        if (clone != null)
+                        {
+                            clone.transform.SetParent(buttonGroup.transform);
+                            clone.transform.position = buttonGroup.transform.position;
+                            clone.transform.localPosition = new Vector3(-0.1719699f, 0, -2.196038f);
+                            clone.transform.rotation = new Quaternion(0.5198629f, 0.5198629f, 0.5198629f, 0.5198629f);
+                            clone.RenameObject($"Do Not Disturb {doorID}");
+                            clone.AddCollider();
+
+                            var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleDoorbell{doorID}");
+                            Action action = () => { udonEvent.ExecuteUdonEvent(); };
+                            clone.AddAstroInteractable(action);
+
+                            clone.AddToWorldUtilsMenu();
+
+                            var old = clone.transform.Find("Button Interactable DND");
+                            if (old != null)
+                            {
+                                old.gameObject.DestroyMeLocal();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ModConsole.DebugWarning("Failed to find  Bedroom Toggle Do Not Disturb Button!");
                     }
                 }
 
-                if (room_ToggleIncognito != null)
+                if (flip)
                 {
-                    var clone = room_ToggleIncognito.InstantiateObject();
-                    if (clone != null)
-                    {
-                        clone.transform.SetParent(buttonGroup.transform);
-                        clone.transform.position = buttonGroup.transform.position;
-                        clone.transform.localPosition = new Vector3(-6.335898f, 0, -1.828288f);
-                        clone.RenameObject($"Incognito {doorID}");
-                        clone.AddCollider();
-
-                        var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleAnon{doorID}");
-                        Action action = () => { udonEvent.ExecuteUdonEvent(); };
-                        clone.AddAstroInteractable(action);
-
-                        clone.AddToWorldUtilsMenu();
-
-                        var old = clone.transform.Find("Button Interactable - Anon");
-                        if (old != null)
-                        {
-                            old.gameObject.DestroyMeLocal();
-                        }
-                    }
+                    buttonGroup.transform.eulerAngles += new Vector3(0, 180, 0);
                 }
-                if (room_DND != null)
-                {
-                    var clone = room_DND.InstantiateObject();
-                    if (clone != null)
-                    {
-                        clone.transform.SetParent(buttonGroup.transform);
-                        clone.transform.position = buttonGroup.transform.position;
-                        clone.transform.localPosition = new Vector3(-0.1719699f, 0, -2.196038f);
-                        clone.transform.rotation = new Quaternion(0.5198629f, 0.5198629f, 0.5198629f, 0.5198629f);
-                        clone.RenameObject($"Do Not Disturb {doorID}");
-                        clone.AddCollider();
 
-                        var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleDoorbell{doorID}");
-                        Action action = () => { udonEvent.ExecuteUdonEvent(); };
-                        clone.AddAstroInteractable(action);
-
-                        clone.AddToWorldUtilsMenu();
-
-                        var old = clone.transform.Find("Button Interactable DND");
-                        if (old != null)
-                        {
-                            old.gameObject.DestroyMeLocal();
-                        }
-                    }
-                }
+                return buttonGroup;
             }
-
-            if (flip)
+            else
             {
-                buttonGroup.transform.eulerAngles += new Vector3(0, 180, 0);
+                if(nlobby == null)
+                {
+                    ModConsole.Error("Failed to Find NLobby!");
+                }
+                if(Bedrooms == null)
+                {
+                    ModConsole.Error("Failed to Find Bedrooms!");
+                }
+
             }
-            return buttonGroup;
+            return null;
         }
     }
 }

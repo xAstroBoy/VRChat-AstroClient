@@ -64,6 +64,16 @@ namespace AstroClient.extensions
             return null;
         }
 
+        public static GameObject InstantiateObject(this Transform obj)
+        {
+            if (obj != null)
+            {
+                return UnityEngine.Object.Instantiate(obj.gameObject);
+            }
+            return null;
+        }
+
+
         public static void CloneObject(this GameObject obj)
         {
             if (obj != null)
