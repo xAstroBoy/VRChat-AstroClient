@@ -129,7 +129,8 @@
                 if (Input.GetMouseButtonDown(0))
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hit, float.MaxValue))
+                    Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
+                    if (Physics.Raycast(ray, out hit, float.MaxValue))
                     {
                         var gameObject = hit.collider.transform.gameObject;
                         CheckHitObject(gameObject);

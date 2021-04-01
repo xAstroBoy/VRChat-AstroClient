@@ -133,7 +133,13 @@ namespace AstroClient.ConsoleUtils
 
         public static void DebugErrorExc<T>(T e)
         {
-            Exception((e as System.Exception), LogTypes.DEBUG_ERROR);
+            if (e == null)
+            {
+                ModConsole.DebugError("Fuck me");
+            } else
+            {
+                Exception((e as System.Exception), LogTypes.DEBUG_ERROR);
+            }
         }
 
         public static void Log(string msg, Color? textcolor = null)
@@ -210,6 +216,12 @@ namespace AstroClient.ConsoleUtils
 
         public static void Exception<T>(T e, LogTypes logType = LogTypes.LOG, Color? color = null)
         {
+            if (e == null)
+            {
+                ModConsole.DebugError($"Fatal Error, Exception was null..");
+                return;
+            }
+
             if (logType == LogTypes.DEBUG_LOG || logType == LogTypes.DEBUG_WARNING || logType == LogTypes.DEBUG_ERROR && !DebugMode)
             {
                 return;
@@ -222,10 +234,43 @@ namespace AstroClient.ConsoleUtils
             PrintTags(logType);
 
             PrintLine(); // Basically an easy way to newline
-            PrintLine($"Exception Message: {(e as System.Exception).Message}", color.Value);
-            PrintLine($"Exception StackTrace: {(e as System.Exception).StackTrace}", color.Value);
-            PrintLine($"Exception TargetSite: {(e as System.Exception).TargetSite}");
-            PrintLine($"Exception Source: {(e as System.Exception).Source}");
+
+            var message = (e as System.Exception).Message;
+            var stackTrace = (e as System.Exception).StackTrace;
+            var targetSite = (e as System.Exception).TargetSite;
+            var source = (e as System.Exception).Source;
+
+            if (message != null)
+            {
+                PrintLine($"Exception Message: {message}", color.Value);
+            } else
+            {
+                ModConsole.DebugError("Fatal Error, Exception message was null..");
+            }
+
+            if (stackTrace != null)
+            {
+                PrintLine($"Exception StackTrace: {stackTrace}", color.Value);
+            } else
+            {
+                ModConsole.DebugError("Fatal Error, Exception stackTrace was null..");
+            }
+
+            if (targetSite != null)
+            {
+                PrintLine($"Exception TargetSite: {targetSite}");
+            } else
+            {
+                ModConsole.DebugError("Fatal Error, Exception targetSite was null..");
+            }
+
+            if (source != null)
+            {
+                PrintLine($"Exception Source: {source}");
+            } else
+            {
+                ModConsole.DebugError("Fatal Error, Exception source was null..");
+            }
         }
 
         public static void PrintLine(string msg = "", Color? color = null)

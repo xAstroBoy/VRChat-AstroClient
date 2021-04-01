@@ -26,40 +26,45 @@ namespace AstroClient
         {
             if(WorldUtils.GetWorldID() == WorldIds.BClub)
             {
-                ModConsole.Log("Recognized " + WorldUtils.GetWorldName() + " World!");
-                ModConsole.Log("Searching for Private Rooms Exteriors...");
-                CreateButtonGroup(1, new Vector3(-84.76529f, 15.75226f, -0.3361053f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
-                CreateButtonGroup(2, new Vector3(-83.04877f, 15.81609f, -4.297329f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
-                CreateButtonGroup(3, new Vector3(-76.76254f, 15.85877f, -0.3256264f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
-                CreateButtonGroup(4, new Vector3(-75.04338f, 15.79742f, -4.307182f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
-                CreateButtonGroup(5, new Vector3(-68.77336f, 15.78151f, -0.3279915f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
-                CreateButtonGroup(6, new Vector3(-67.04791f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+                try
+                {
+                    ModConsole.Log("Recognized BClub World!");
+                    ModConsole.Log("Searching for Private Rooms Exteriors...");
+                    CreateButtonGroup(1, new Vector3(-84.76529f, 15.75226f, -0.3361053f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+                    CreateButtonGroup(2, new Vector3(-83.04877f, 15.81609f, -4.297329f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+                    CreateButtonGroup(3, new Vector3(-76.76254f, 15.85877f, -0.3256264f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+                    CreateButtonGroup(4, new Vector3(-75.04338f, 15.79742f, -4.307182f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+                    CreateButtonGroup(5, new Vector3(-68.77336f, 15.78151f, -0.3279915f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+                    CreateButtonGroup(6, new Vector3(-67.04791f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+                } catch (Exception e)
+                {
+                    ModConsole.DebugErrorExc(e);
+                }
             }
         }
 
         private GameObject CreateButtonGroup(int doorID, Vector3 position, Quaternion rotation, bool flip = false)
         {
-            var room = GameObjectFinder.Find($"nLobby/Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");
-            var room_BedroomPreview = GameObjectFinder.Find($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
-            var room_ToggleLooking = GameObjectFinder.Find($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Looking");
-            var room_ToggleLock = GameObjectFinder.Find($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
-            var room_ToggleIncognito = GameObjectFinder.Find($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
-            var room_DND = GameObjectFinder.Find($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
+            var room = GameObjectFinder.InactiveFind($"nLobby/Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");
+            var room_BedroomPreview = GameObjectFinder.InactiveFind($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
+            var room_ToggleLooking = GameObjectFinder.InactiveFind($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Looking");
+            var room_ToggleLock = GameObjectFinder.InactiveFind($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
+            var room_ToggleIncognito = GameObjectFinder.InactiveFind($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
+            var room_DND = GameObjectFinder.InactiveFind($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
 
             GameObject buttonGroup = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            buttonGroup.transform.SetParent(room.transform);
+                buttonGroup.transform.SetParent(room.transform);
+                buttonGroup.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Just so I can see where the parent is for now
 
-            buttonGroup.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Just so I can see where the parent is for now
+                buttonGroup.transform.position = position;
+                buttonGroup.transform.rotation = rotation;
 
-            buttonGroup.transform.position = position;
-            buttonGroup.transform.rotation = rotation;
+                //buttonGroup.transform.position += new Vector3(0, 0.02f, 0);
+                buttonGroup.removeColliders();
+                buttonGroup.AddToWorldUtilsMenu();
+                buttonGroup.RenameObject($"ButtonGroup {doorID}");
 
-            //buttonGroup.transform.position += new Vector3(0, 0.02f, 0);
-            buttonGroup.removeColliders();
-            buttonGroup.AddToWorldUtilsMenu();
-            buttonGroup.RenameObject($"ButtonGroup {doorID}");
-
-            buttonGroup.GetComponent<Renderer>().enabled = false;
+                buttonGroup.GetComponent<Renderer>().enabled = false;
 
             // add buttons
             if (room != null && room_BedroomPreview != null && room_ToggleLooking != null && room_ToggleLock != null && room_ToggleIncognito != null && room_DND != null)
@@ -82,6 +87,12 @@ namespace AstroClient
                         clone.AddAstroInteractable(action);
 
                         clone.AddToWorldUtilsMenu();
+
+                        var old = clone.transform.Find("Button Interactable");
+                        if (old!=null)
+                        {
+                            old.gameObject.DestroyMeLocal();
+                        }
                     }
                 }
                 if (room_ToggleLock != null)
@@ -100,6 +111,12 @@ namespace AstroClient
                         clone.AddAstroInteractable(action);
 
                         clone.AddToWorldUtilsMenu();
+
+                        var old = clone.transform.Find("Button Interactable - Toggle Lock");
+                        if (old != null)
+                        {
+                            old.gameObject.DestroyMeLocal();
+                        }
                     }
                 }
                 if (room_ToggleLooking != null)
@@ -118,6 +135,12 @@ namespace AstroClient
                         clone.AddAstroInteractable(action);
 
                         clone.AddToWorldUtilsMenu();
+
+                        var old = clone.transform.Find("Button Interactable - Looking");
+                        if (old != null)
+                        {
+                            old.gameObject.DestroyMeLocal();
+                        }
                     }
                 }
 
@@ -137,6 +160,12 @@ namespace AstroClient
                         clone.AddAstroInteractable(action);
 
                         clone.AddToWorldUtilsMenu();
+
+                        var old = clone.transform.Find("Button Interactable - Anon");
+                        if (old != null)
+                        {
+                            old.gameObject.DestroyMeLocal();
+                        }
                     }
                 }
                 if (room_DND != null)
@@ -156,6 +185,12 @@ namespace AstroClient
                         clone.AddAstroInteractable(action);
 
                         clone.AddToWorldUtilsMenu();
+
+                        var old = clone.transform.Find("Button Interactable DND");
+                        if (old != null)
+                        {
+                            old.gameObject.DestroyMeLocal();
+                        }
                     }
                 }
             }

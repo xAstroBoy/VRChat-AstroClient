@@ -56,9 +56,9 @@ namespace AstroClient.Startup.Hooks
                     }
                 }
             }
-            catch (Exception e)
+            catch
             {
-                ModConsole.Exception(e);
+
             }
             finally
             {
