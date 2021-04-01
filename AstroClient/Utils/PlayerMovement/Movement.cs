@@ -16,7 +16,9 @@ namespace AstroClient.AstroUtils.PlayerMovement
         public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var temp = new QMNestedButton(menu, x, y, "Movement Options", "Control Your Movements", null, null, null, null, btnHalf);
-            UnlimitedJumpToggle = new QMToggleButton(temp, 1, 0, "Unlimited Jumps ON", new Action(ToggleUnlimitedJump), "Unlimited Jumps OFF", new Action(ToggleUnlimitedJump), "Allows you to Unlimited jump", null, null, null, false);
+            UnlimitedJumpToggle = new QMSingleToggleButton(temp, 1, 0, "Unlimited Jumps", new Action(() => { IsUnlimitedJumpActive = true; }), "Unlimited Jumps OFF", new Action(() => { IsUnlimitedJumpActive = false; }), "Allows you to Unlimited jump", Color.green, Color.red, null, false, true);
+            RocketJumpToggle = new QMSingleToggleButton(temp, 1, 0.5f, "Rocket Jump", new Action(() => { isRocketJumpActive = true; }), "Rocket Jump", new Action(() => { isRocketJumpActive = true; }), "Allows you to Unlimited jump", Color.green, Color.red, null, false, true);
+
             JumpOverrideToggle = new QMToggleButton(temp, 2, 0, "Jump Override ON", new Action(ToggleJumpOverride), "Jump Override OFF", new Action(ToggleJumpOverride), "Allows you to Bypass jump Block in certain worlds.", null, null, null, false);
             SerializerBtn = new QMToggleButton(temp, 3, 0, "Serializer ON", new Action(ToggleSerializer), "Serializer OFF", new Action(ToggleSerializer), "Blocks Movement packets (allows you to be invisible to others)", null, null, null, false);
             FreezePlayerOnQMOpenToggle = new QMToggleButton(temp, 4, 0, "Freeze On QM open \n ON", new Action(ToggleFreezePlayerOnQMOpen), "Freeze On QM Open \n OFF", new Action(ToggleFreezePlayerOnQMOpen), "Freeze Player On QuickMenu Open event.", null, null, null, false);
@@ -37,17 +39,12 @@ namespace AstroClient.AstroUtils.PlayerMovement
 
         public static void OnLevelLoad()
         {
-            IsUnlimitedJumpActive = false;
+
+
             IsJumpOverriden = false;
             Bools.SerializerEnabled = false;
-            if (UnlimitedJumpToggle != null)
-            {
-                UnlimitedJumpToggle.setToggleState(false);
-            }
-            if (JumpOverrideToggle != null)
-            {
-                JumpOverrideToggle.setToggleState(false);
-            }
+
+
             if (Capsule != null)
             {
                 Capsule.DestroyMeLocal();
@@ -125,7 +122,15 @@ namespace AstroClient.AstroUtils.PlayerMovement
                             }
                         }
                     }
+
+                    if (!InputUtils.isInputJumpPressed() && isRocketJumpActive)
+                    {
+                        EmulatedJump();
+                    }
+
                 }
+
+
             }
         }
 
@@ -245,11 +250,72 @@ namespace AstroClient.AstroUtils.PlayerMovement
             }
         }
 
-        public static bool IsUnlimitedJumpActive;
-        public static bool IsJumpOverriden;
+        private static bool _IsUnlimitedJumpActive;
+
+        public static QMSingleToggleButton UnlimitedJumpToggle;
+        public static bool IsUnlimitedJumpActive
+        {
+            get
+            {
+                return _IsUnlimitedJumpActive;
+            }
+            set
+            {
+                _IsUnlimitedJumpActive = value;
+                if (UnlimitedJumpToggle != null)
+                {
+                    UnlimitedJumpToggle.setToggleState(value);
+                }
+            }
+        }
+
+        public static QMSingleToggleButton RocketJumpToggle;
+
+        private static bool _isRocketJumpActive;
+        public static bool isRocketJumpActive
+        {
+            get
+            {
+                return _isRocketJumpActive;
+            }
+            set
+            {
+                _isRocketJumpActive = value;
+                if (RocketJumpToggle != null)
+                {
+                    RocketJumpToggle.setToggleState(value);
+                }
+            }
+        }
+
+
+
+        public static QMToggleButton JumpOverrideToggle;
+        private static bool _IsJumpOverriden;
+        public static bool IsJumpOverriden
+        {
+            get
+            {
+                return _IsJumpOverriden;
+            }
+            set
+            {
+                _IsJumpOverriden = value;
+                if(JumpOverrideToggle != null)
+                {
+                    JumpOverrideToggle.setToggleState(value);
+                }
+            }
+        }
+
+
+
         private static QMToggleButton SerializerBtn;
         public static GameObject Capsule;
-        public static QMToggleButton JumpOverrideToggle;
-        public static QMToggleButton UnlimitedJumpToggle;
+
+
+
+
+
     }
 }
