@@ -62,10 +62,10 @@
         public override void OnWorldReveal()
         {
 #if CHEETOS
-            //var testButton = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            //testButton.transform.position = LocalPlayerUtils.GetSelfPlayer().transform.position;
-            //testButton.AddComponent<Astro_Interactable>();
-            //testButton.GetComponent<Astro_Interactable>().Action = () => { ModConsole.DebugLog("Astro_Interactable: I was invoked.."); };
+            var testButton = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            testButton.transform.position = LocalPlayerUtils.GetSelfPlayer().transform.position;
+            testButton.AddComponent<Astro_Interactable>();
+            testButton.GetComponent<Astro_Interactable>().Action = () => { ModConsole.DebugLog("Astro_Interactable: I was invoked.."); };
 #endif
         }
 
@@ -126,13 +126,14 @@
             }
             else
             {
-                if (Input.GetMouseButtonDown(0) && CanClick)
+                if (Input.GetMouseButtonDown(0))
                 {
                     RaycastHit hit;
                     if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.TransformDirection(Vector3.forward), out hit, float.MaxValue))
                     {
                         var gameObject = hit.collider.transform.gameObject;
                         CheckHitObject(gameObject);
+                        ModConsole.DebugLog($"Racycast hit on: {gameObject.name}");
                     }
                 }
             }
@@ -144,7 +145,7 @@
             var interactable = gameObject.GetComponent<Astro_Interactable>();
             if (interactable!=null)
             {
-                interactable?.Action.Invoke();
+                interactable.Action.Invoke();
                 ModConsole.DebugLog("Astro_Interactable invoked..");
             }
         }

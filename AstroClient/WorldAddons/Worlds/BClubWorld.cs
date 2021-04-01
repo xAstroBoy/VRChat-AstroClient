@@ -18,9 +18,9 @@ namespace AstroClient
     public class BClubWorld : Overridables
     {
 
-        private static GameObject Room1Buttons;
-        private static GameObject Room3Buttons;
-        private static GameObject Room5Buttons;
+        //private static GameObject Room1Buttons;
+        //private static GameObject Room3Buttons;
+        //private static GameObject Room5Buttons;
 
         public override void OnWorldReveal()
         {
@@ -37,10 +37,6 @@ namespace AstroClient
             }
         }
 
-
-
-
-
         private GameObject CreateButtonGroup(int doorID, Vector3 position, Quaternion rotation, bool flip = false)
         {
             var room = GameObjectFinder.Find($"nLobby/Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");
@@ -53,8 +49,7 @@ namespace AstroClient
             GameObject buttonGroup = GameObject.CreatePrimitive(PrimitiveType.Plane);
             buttonGroup.transform.SetParent(room.transform);
 
-                buttonGroup.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Just so I can see where the parent is for now
-
+            buttonGroup.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Just so I can see where the parent is for now
 
             buttonGroup.transform.position = position;
             buttonGroup.transform.rotation = rotation;
@@ -64,11 +59,10 @@ namespace AstroClient
             buttonGroup.AddToWorldUtilsMenu();
             buttonGroup.RenameObject($"ButtonGroup {doorID}");
 
-
             buttonGroup.GetComponent<Renderer>().enabled = false;
 
             // add buttons
-            if (room_BedroomPreview != null && room_ToggleLooking != null && room_ToggleLock != null && room_ToggleIncognito != null && room_DND != null)
+            if (room != null && room_BedroomPreview != null && room_ToggleLooking != null && room_ToggleLock != null && room_ToggleIncognito != null && room_DND != null)
             {
                 ModConsole.Log($"Found all Private Room {doorID} Buttons!");
 
@@ -86,6 +80,8 @@ namespace AstroClient
                         var udonEvent = UdonSearch.FindUdonEvent("PhotozoneMaster", $"EnableIntercomIn{doorID}");
                         Action action = () => { udonEvent.ExecuteUdonEvent(); };
                         clone.AddAstroInteractable(action);
+
+                        clone.AddToWorldUtilsMenu();
                     }
                 }
                 if (room_ToggleLock != null)
@@ -96,12 +92,14 @@ namespace AstroClient
                         clone.transform.SetParent(buttonGroup.transform);
                         clone.transform.position = buttonGroup.transform.position;
                         clone.transform.localPosition = new Vector3(-2.335898f, 0, -1.828288f);
-                        clone.AddCollider();
                         clone.RenameObject($"Lock {doorID}");
+                        clone.AddCollider();
 
                         var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleLock{doorID}");
                         Action action = () => { udonEvent.ExecuteUdonEvent(); };
                         clone.AddAstroInteractable(action);
+
+                        clone.AddToWorldUtilsMenu();
                     }
                 }
                 if (room_ToggleLooking != null)
@@ -118,6 +116,8 @@ namespace AstroClient
                         var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleLooking{doorID}");
                         Action action = () => { udonEvent.ExecuteUdonEvent(); };
                         clone.AddAstroInteractable(action);
+
+                        clone.AddToWorldUtilsMenu();
                     }
                 }
 
@@ -135,6 +135,8 @@ namespace AstroClient
                         var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleAnon{doorID}");
                         Action action = () => { udonEvent.ExecuteUdonEvent(); };
                         clone.AddAstroInteractable(action);
+
+                        clone.AddToWorldUtilsMenu();
                     }
                 }
                 if (room_DND != null)
@@ -146,12 +148,14 @@ namespace AstroClient
                         clone.transform.position = buttonGroup.transform.position;
                         clone.transform.localPosition = new Vector3(-0.1719699f, 0, -2.196038f);
                         clone.transform.rotation = new Quaternion(0.5198629f, 0.5198629f, 0.5198629f, 0.5198629f);
-                        clone.AddCollider();
                         clone.RenameObject($"Do Not Disturb {doorID}");
+                        clone.AddCollider();
 
                         var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleDoorbell{doorID}");
                         Action action = () => { udonEvent.ExecuteUdonEvent(); };
                         clone.AddAstroInteractable(action);
+
+                        clone.AddToWorldUtilsMenu();
                     }
                 }
             }
