@@ -71,7 +71,20 @@ namespace AstroClient.extensions
 
         public static void AddConstraint(this GameObject obj, RigidbodyConstraints constraint)
         {
-            Forces.AddConstraint(obj, constraint);
+            var itemedit = obj.GetComponent<RigidBodyController>();
+            if (itemedit == null)
+            {
+                itemedit = obj.AddComponent<RigidBodyController>();
+            }
+            if (itemedit != null)
+            {
+                if (!itemedit.EditMode)
+                {
+                    itemedit.EditMode = true;
+                }
+                    itemedit.Constraints = itemedit.Constraints | constraint;
+                
+            }
         }
 
         public static void RemoveConstraint(this GameObject obj, RigidbodyConstraints constraint)

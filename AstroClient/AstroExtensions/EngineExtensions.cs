@@ -21,9 +21,9 @@ namespace AstroClient.extensions
         {
             if(obj != null)
             {
-                ModConsole.Log($"{obj.name} rotation is : new Quaternion({obj.transform.rotation.x}f, {obj.transform.rotation.y}f, {obj.transform.rotation.z}f, {obj.transform.rotation.w}f);");
-                ModConsole.Log($"The Position been copied on the clipboard.");
-                Clipboard.SetText($"new Quaternion({obj.transform.rotation.x}f, {obj.transform.rotation.y}f, {obj.transform.rotation.z}f, {obj.transform.rotation.w}f);");
+                ModConsole.Log($"{obj.name} rotation is : new Quaternion({obj.transform.rotation.x}f, {obj.transform.rotation.y}f, {obj.transform.rotation.z}f, {obj.transform.rotation.w}f)");
+                ModConsole.Log($"The rotation been copied on the clipboard.");
+                Clipboard.SetText($"new Quaternion({obj.transform.rotation.x}f, {obj.transform.rotation.y}f, {obj.transform.rotation.z}f, {obj.transform.rotation.w}f)");
             }
         }
 
@@ -31,12 +31,21 @@ namespace AstroClient.extensions
         {
             if (obj != null)
             {
-                ModConsole.Log($"{obj.name} position is : new Vector3({obj.transform.position.x}f, {obj.transform.position.y}f, {obj.transform.position.z}f);");
+                ModConsole.Log($"{obj.name} position is : new Vector3({obj.transform.position.x}f, {obj.transform.position.y}f, {obj.transform.position.z}f)");
                 ModConsole.Log($"The Position been copied on the clipboard.");
-                Clipboard.SetText($"new Vector3({obj.transform.position.x}f, {obj.transform.position.y}f, {obj.transform.position.z}f);");
+                Clipboard.SetText($"new Vector3({obj.transform.position.x}f, {obj.transform.position.y}f, {obj.transform.position.z}f)");
             }
         }
 
+        public static void CopyLocalPosition(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                ModConsole.Log($"{obj.name} Local position is : new Vector3({obj.transform.localPosition.x}f, {obj.transform.localPosition.y}f, {obj.transform.localPosition.z}f)");
+                ModConsole.Log($"The Local Position been copied on the clipboard.");
+                Clipboard.SetText($"new Vector3({obj.transform.localPosition.x}f, {obj.transform.localPosition.y}f, {obj.transform.localPosition.z}f)");
+            }
+        }
 
         public static void DestroyObject(this GameObject obj)
         {

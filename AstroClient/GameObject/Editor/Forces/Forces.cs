@@ -50,22 +50,7 @@ namespace AstroClient
 
         public static void AddConstraint(GameObject obj, RigidbodyConstraints constraint)
         {
-            var itemedit = obj.GetComponent<RigidBodyController>();
-            if (itemedit == null)
-            {
-                itemedit = obj.AddComponent<RigidBodyController>();
-            }
-            if (itemedit != null)
-            {
-                if (!itemedit.EditMode)
-                {
-                    itemedit.EditMode = true;
-                }
-                if (!itemedit.Constraints.HasFlag(constraint))
-                {
-                    itemedit.Constraints = itemedit.Constraints | constraint;
-                }
-            }
+
         }
 
         public static void ApplyBackwardsForce(GameObject obj, bool TakeOwnership = true)

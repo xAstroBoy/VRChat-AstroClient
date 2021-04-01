@@ -170,8 +170,8 @@ namespace AstroClient.Worlds
                 BasementDoor.DestroyMeLocal();
                 Kitchen1.DestroyMeLocal();
                 kitchen2.DestroyMeLocal();
-                frame.removeCollider();
-                rope.removeCollider();
+                frame.removeAllCollider();
+                rope.removeAllCollider();
                 return;
 
             }

@@ -17,33 +17,31 @@ namespace AstroClient
 {
     public class BClubWorld : Overridables
     {
+
+        private static GameObject Room1Buttons;
+        private static GameObject Room3Buttons;
+        private static GameObject Room5Buttons;
+
         public override void OnWorldReveal()
         {
             if(WorldUtils.GetWorldID() == WorldIds.BClub)
             {
-
-
                 ModConsole.Log("Recognized " + WorldUtils.GetWorldName() + " World!");
-
                 ModConsole.Log("Searching for Private Rooms Exteriors...");
-
-                CreateButtonGroup(1, new Vector3(-84.66739f, 15.92832f, -0.3096771f), new Quaternion(-0.5241396f, -0.4620785f, -0.5343743f, -0.4756105f));
-                CreateButtonGroup(2, new Vector3(-83.13092f, 15.94455f, -4.310131f),  new Quaternion(0.5096976f, 0.4497673f, -0.5503947f, -0.4847511f));
-                CreateButtonGroup(3, new Vector3(-76.66214f, 15.96891f, -0.2979507f), new Quaternion(0.5298369f, 0.4824114f, 0.5115112f, 0.4742453f));
-
-                CreateButtonGroup(4, new Vector3(-75.11559f, 15.92268f, -4.314186f), new Quaternion(0.5099828f, 0.4617184f, -0.5431892f, -0.4813308f));
-                CreateButtonGroup(5, new Vector3(-68.67709f, 15.94213f, -0.3036766f), new Quaternion(0.5483611f, 0.4571108f, 0.5301241f, 0.4575135f));
-                CreateButtonGroup(6, new Vector3(-67.13814f, 15.9624f, -4.320908f), new Quaternion(0.5246134f, 0.4534206f, -0.5460359f, -0.4701442f));
-
-
+                CreateButtonGroup(1, new Vector3(-84.76529f, 15.75226f, -0.3361053f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+                CreateButtonGroup(2, new Vector3(-83.04877f, 15.81609f, -4.297329f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+                CreateButtonGroup(3, new Vector3(-76.76254f, 15.85877f, -0.3256264f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+                CreateButtonGroup(4, new Vector3(-75.04338f, 15.79742f, -4.307182f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+                CreateButtonGroup(5, new Vector3(-68.77336f, 15.78151f, -0.3279915f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+                CreateButtonGroup(6, new Vector3(-67.04791f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
             }
         }
 
-        public override void OnLevelLoaded()
-        {
-        }
 
-        private GameObject CreateButtonGroup(int doorID, Vector3 position, Quaternion rotation)
+
+
+
+        private GameObject CreateButtonGroup(int doorID, Vector3 position, Quaternion rotation, bool flip = false)
         {
             var room = GameObjectFinder.Find($"nLobby/Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");
             var room_BedroomPreview = GameObjectFinder.Find($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
@@ -52,17 +50,22 @@ namespace AstroClient
             var room_ToggleIncognito = GameObjectFinder.Find($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
             var room_DND = GameObjectFinder.Find($"/Bedrooms/Bedroom {doorID}/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
 
-            GameObject buttonGroup = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            GameObject buttonGroup = GameObject.CreatePrimitive(PrimitiveType.Plane);
             buttonGroup.transform.SetParent(room.transform);
-            //buttonGroup.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Just so I can see where the parent is for now
+
+                buttonGroup.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f); // Just so I can see where the parent is for now
+
+
             buttonGroup.transform.position = position;
             buttonGroup.transform.rotation = rotation;
-            buttonGroup.transform.position += new Vector3(0, 0.02f, 0);
+
+            //buttonGroup.transform.position += new Vector3(0, 0.02f, 0);
+            buttonGroup.removeColliders();
             buttonGroup.AddToWorldUtilsMenu();
             buttonGroup.RenameObject($"ButtonGroup {doorID}");
-            //buttonGroup.AddTriggerCollider();
-            buttonGroup.ForcePickupComponent();
-            buttonGroup.SetPickupable(true);
+
+
+            buttonGroup.GetComponent<Renderer>().enabled = false;
 
             // add buttons
             if (room_BedroomPreview != null && room_ToggleLooking != null && room_ToggleLock != null && room_ToggleIncognito != null && room_DND != null)
@@ -76,27 +79,11 @@ namespace AstroClient
                     {
                         clone.transform.SetParent(buttonGroup.transform);
                         clone.transform.position = buttonGroup.transform.position;
-                        clone.transform.localPosition += new Vector3(-2, 0f, 0f);
-                        clone.AddToWorldUtilsMenu();
+                        clone.transform.localPosition = new Vector3(-2.335898f, 0, -3.828288f);
                         clone.RenameObject($"Intercom {doorID}");
+                        clone.AddCollider();
 
                         var udonEvent = UdonSearch.FindUdonEvent("PhotozoneMaster", $"EnableIntercomIn{doorID}");
-                        Action action = () => { udonEvent.ExecuteUdonEvent(); };
-                        clone.AddAstroInteractable(action);
-                    }
-                }
-                if (room_ToggleLooking != null)
-                {
-                    var clone = room_ToggleLooking.InstantiateObject();
-                    if (clone != null)
-                    {
-                        clone.transform.SetParent(buttonGroup.transform);
-                        clone.transform.position = buttonGroup.transform.position;
-                        clone.transform.localPosition += new Vector3(-2f, 0f, 2f);
-                        clone.AddToWorldUtilsMenu();
-                        clone.RenameObject($"Looking {doorID}");
-
-                        var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleLooking{doorID}");
                         Action action = () => { udonEvent.ExecuteUdonEvent(); };
                         clone.AddAstroInteractable(action);
                     }
@@ -108,8 +95,8 @@ namespace AstroClient
                     {
                         clone.transform.SetParent(buttonGroup.transform);
                         clone.transform.position = buttonGroup.transform.position;
-                        clone.transform.localPosition += new Vector3(0f, 0f, 2f);
-                        clone.AddToWorldUtilsMenu();
+                        clone.transform.localPosition = new Vector3(-2.335898f, 0, -1.828288f);
+                        clone.AddCollider();
                         clone.RenameObject($"Lock {doorID}");
 
                         var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleLock{doorID}");
@@ -117,6 +104,23 @@ namespace AstroClient
                         clone.AddAstroInteractable(action);
                     }
                 }
+                if (room_ToggleLooking != null)
+                {
+                    var clone = room_ToggleLooking.InstantiateObject();
+                    if (clone != null)
+                    {
+                        clone.transform.SetParent(buttonGroup.transform);
+                        clone.transform.position = buttonGroup.transform.position;
+                        clone.transform.localPosition = new Vector3(-4.335898f, 0, -1.828288f);
+                        clone.RenameObject($"Looking {doorID}");
+                        clone.AddCollider();
+
+                        var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleLooking{doorID}");
+                        Action action = () => { udonEvent.ExecuteUdonEvent(); };
+                        clone.AddAstroInteractable(action);
+                    }
+                }
+
                 if (room_ToggleIncognito != null)
                 {
                     var clone = room_ToggleIncognito.InstantiateObject();
@@ -124,9 +128,9 @@ namespace AstroClient
                     {
                         clone.transform.SetParent(buttonGroup.transform);
                         clone.transform.position = buttonGroup.transform.position;
-                        clone.transform.localPosition += new Vector3(0f, 0f, 0f);
-                        clone.AddToWorldUtilsMenu();
+                        clone.transform.localPosition = new Vector3(-6.335898f, 0, -1.828288f);
                         clone.RenameObject($"Incognito {doorID}");
+                        clone.AddCollider();
 
                         var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleAnon{doorID}");
                         Action action = () => { udonEvent.ExecuteUdonEvent(); };
@@ -140,10 +144,9 @@ namespace AstroClient
                     {
                         clone.transform.SetParent(buttonGroup.transform);
                         clone.transform.position = buttonGroup.transform.position;
-                        clone.transform.localPosition += new Vector3(2f, 0f, 0f);
-                        clone.transform.rotation = new Quaternion(0f, 272f, 90f, 0f);
-
-                        clone.AddToWorldUtilsMenu();
+                        clone.transform.localPosition = new Vector3(-0.1719699f, 0, -2.196038f);
+                        clone.transform.rotation = new Quaternion(0.5198629f, 0.5198629f, 0.5198629f, 0.5198629f);
+                        clone.AddCollider();
                         clone.RenameObject($"Do Not Disturb {doorID}");
 
                         var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleDoorbell{doorID}");
@@ -153,6 +156,10 @@ namespace AstroClient
                 }
             }
 
+            if (flip)
+            {
+                buttonGroup.transform.eulerAngles += new Vector3(0, 180, 0);
+            }
             return buttonGroup;
         }
     }

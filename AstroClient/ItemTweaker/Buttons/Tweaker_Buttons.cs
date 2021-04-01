@@ -77,8 +77,9 @@ namespace AstroClient.AstroUtils.ItemTweaker
             CurrentObjectCoordsBtn.getGameObject().GetComponent<UnityEngine.UI.Image>().enabled = false;
             CurrentObjectCoordsBtn.SetResizeTextForBestFit(true);
 
-            new QMSingleButton(menu, 6, -1.5f, "Copy Position.", new Action(() => { Tweaker_Object.GetGameObjectToEdit().CopyPosition(); }), "Copies Object Current Position in clipboard.", null, Color.red, true);
-            new QMSingleButton(menu, 6, -1f, "Copy Rotation.", new Action(() => { Tweaker_Object.GetGameObjectToEdit().CopyRotation(); }), "Copies Object Current Rotation in clipboard.", null, Color.red, true);
+            new QMSingleButton(menu, 6, -2f, "Copy Local Position.", new Action(() => { Tweaker_Object.GetGameObjectToEdit().CopyLocalPosition(); }), "Copies Object Current Local Position in clipboard.", null, Color.yellow, true);
+            new QMSingleButton(menu, 6, -1.5f, "Copy Position.", new Action(() => { Tweaker_Object.GetGameObjectToEdit().CopyPosition(); }), "Copies Object Current Position in clipboard.", null, Color.yellow, true);
+            new QMSingleButton(menu, 6, -1f, "Copy Rotation.", new Action(() => { Tweaker_Object.GetGameObjectToEdit().CopyRotation(); }), "Copies Object Current Rotation in clipboard.", null, Color.yellow, true);
 
             new QMSingleButton(menu, 6, 2f, "DANGER : Destroy item.", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DestroyObject(); }), "Destroys Object , You need to reload the world to restore it back.", null, Color.red, true);
             SpawnedPickupsCounter = new QMSingleButton(menu, 6, 0, GetClonesPickupText, null, GetClonesPickupText, null, Color.cyan, true);

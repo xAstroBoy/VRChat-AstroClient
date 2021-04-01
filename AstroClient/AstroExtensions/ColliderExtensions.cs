@@ -22,8 +22,19 @@ namespace AstroClient.extensions
         }
 
 
+        public static void removeColliders(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                foreach (var c in obj.GetComponents<Collider>())
+                {
+                    UnityEngine.Object.DestroyImmediate(c);
+                }
+            }
+        }
 
-        public static void removeCollider(this GameObject obj)
+
+        public static void removeAllCollider(this GameObject obj)
         {
             if (obj != null)
             {
@@ -34,7 +45,20 @@ namespace AstroClient.extensions
             }
         }
 
-        public static void disablecolliders(this GameObject obj)
+
+        public static void disablecollider(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                foreach (var c in obj.GetComponents<Collider>())
+                {
+                    c.enabled = false;
+                }
+            }
+        }
+
+
+        public static void DisableAllColliders(this GameObject obj)
         {
             if (obj != null)
             {
