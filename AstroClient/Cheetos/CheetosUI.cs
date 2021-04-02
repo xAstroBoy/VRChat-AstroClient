@@ -8,7 +8,6 @@
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
-    using System.Drawing;
     using CheetosConsole;
     using AstroClient.Finder;
     using AstroClient.Variables;
@@ -24,9 +23,9 @@
 #if CHEETOS
             CheetosConsole.Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), "Cheetos Mode", System.Drawing.Color.LightYellow, System.Drawing.Color.DarkOrange);
 
-            string VRChatVersion = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.prop_String_2;
-            ModConsole.CheetoLog($"VRChat Version: {VRChatVersion}");
-#endif
+            string VRChatVersion = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_1;
+            string VRChatBuild = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_0;
+            ModConsole.CheetoLog($"VRChat Version: {VRChatVersion}, {VRChatBuild}");
 
             // Find and remove shitty UI shit
             var crap1 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/ReportWorldButton");
@@ -65,6 +64,7 @@
             {
                 crap6.DestroyMeLocal();
             }
+#endif
         }
 
         public override void OnWorldReveal()
