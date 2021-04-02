@@ -9,17 +9,13 @@
     using UnityEngine;
     using VRC;
 
-    public class PlayerListUIData : SaveData
-    {
-        public bool showPlayerList { get; set; } = true;
-        public bool showPlayersButton { get; set; } = true;
-    }
-
     public class PlayerListUI : Overridables
     {
         public static PlayerListUI Instance { get; private set; }
 
-        public PlayerListUIData saveData = new PlayerListUIData();
+        public bool showPlayerList { get; set; } = true;
+
+        public bool showPlayersButton { get; set; } = true;
 
         private QMSingleButton playersButton;
 
@@ -27,23 +23,23 @@
 
         private readonly Color InstanceMasterColor = Color.cyan; // Light Blue
 
-        public override void VRChat_OnUiManagerInit()
+        public static void Initialize()
         {
             if (Instance == null)
             {
-                Instance = this;
+                Instance = new PlayerListUI();
             }
 
-            playersButton = new QMSingleButton("ShortcutMenu", -2, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
-            playersButton.setActive(saveData.showPlayersButton);
+            Instance.playersButton = new QMSingleButton("ShortcutMenu", -2, -1f, "Players", () => { Instance.PlayerListToggle(); }, "Show/Hide player list", null, null, true);
+            Instance.playersButton.setActive(Instance.showPlayersButton);
 
-            if (saveData.showPlayerList)
+            if (Instance.showPlayerList)
             {
-                playersButton.setTextColor(UnityEngine.Color.green);
+                Instance.playersButton.setTextColor(UnityEngine.Color.green);
             }
             else
             {
-                playersButton.setTextColor(UnityEngine.Color.red);
+                Instance.playersButton.setTextColor(UnityEngine.Color.red);
             }
         }
 
@@ -131,7 +127,7 @@
                     }
                 }
 
-                playerButton.setActive(saveData.showPlayerList);
+                playerButton.setActive(showPlayerList);
                 playerButtons.Add(player.UserID(), playerButton);
 
                 yPos += 0.5f;
@@ -159,8 +155,8 @@
 
         private void PlayerListToggle()
         {
-            saveData.showPlayerList = !saveData.showPlayerList;
-            if (saveData.showPlayerList)
+            showPlayerList = !showPlayerList;
+            if (showPlayerList)
             {
                 playersButton.setTextColor(UnityEngine.Color.green);
             }
@@ -171,15 +167,13 @@
 
             foreach (var keyValuePair in playerButtons)
             {
-                keyValuePair.Value.setActive(saveData.showPlayerList);
+                keyValuePair.Value.setActive(showPlayerList);
             }
-
-            saveData.Save();
         }
 
         public static void ShowPlayerList()
         {
-            Instance.saveData.showPlayersButton = true;
+            Instance.showPlayersButton = true;
             Instance.playersButton.setTextColor(UnityEngine.Color.red);
 
             Instance.playersButton.setActive(true);
@@ -188,13 +182,11 @@
             {
                 keyValuePair.Value.setActive(true);
             }
-
-            Instance.saveData.Save();
         }
 
         public static void HidePlayerList()
         {
-            Instance.saveData.showPlayersButton = false;
+            Instance.showPlayersButton = false;
             Instance.playersButton.setTextColor(UnityEngine.Color.red);
 
             Instance.playersButton.setActive(false);
@@ -204,7 +196,7 @@
                 keyValuePair.Value.setActive(false);
             }
 
-            Instance.saveData.Save();
+            Instance.Save();
         }
     }
 }

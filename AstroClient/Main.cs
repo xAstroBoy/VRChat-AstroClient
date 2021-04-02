@@ -117,8 +117,11 @@ namespace AstroClient
 
         public static void InitMainsButtons(float x, float y, bool btnHalf)
         {
+            PlayerListUI.Initialize();
+
             QMNestedButton AstroClient = new QMNestedButton("ShortcutMenu", x, y, "AstroClient Menu", "AstroClient Menu", null, null, null, null, btnHalf);  // Menu Main Button
             ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", new Action(() => { Bools.isDebugMode = true; }), "Debug Console OFF", new Action(() => { Bools.isDebugMode = false; }), "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+
             WorldAddons.InitButtons(AstroClient, 1, 0, true);
             LightControl.InitButtons(AstroClient, 1, 0.5f, true);
             Movement.InitButtons(AstroClient, 1, 1, true);
@@ -131,6 +134,8 @@ namespace AstroClient
             GlobalUdonExploits.InitButtons(AstroClient, 2, 1.5f, true);
             RandomSubmenus.VRC_InteractableSubMenu(AstroClient, 2, 2, true);
             Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
+
+            SettingsBtn.InitButtons(AstroClient, 3, 2.5f, true);
         }
 
         public static QMSingleToggleButton ToggleDebugInfo;

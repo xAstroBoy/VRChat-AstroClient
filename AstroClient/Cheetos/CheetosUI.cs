@@ -55,13 +55,8 @@
         public override void VRChat_OnUiManagerInit()
         {
             MainButton = new QMNestedButton("ShortcutMenu", 5, 3, "Cheeto's Menu", "Cheeto's secret WIP features", null, null, null, null, true);
-            SettingsButton = new QMNestedButton(MainButton, 1, 0, "Cheeto's Settings", "Cheeto's secret WIP settings", null, null, null, null, true);
             MainScroller = new QMScrollMenu(MainButton);
             RestartButton = new QMSingleButton(MainButton, 0, 0, "Close Game", () => { Environment.Exit(0); }, "Close the game");
-
-            // Settings Buttons
-            PlayerListToggle = new QMToggleButton(SettingsButton, 1, 0, "PlayerList ON", () => { PlayerListUI.ShowPlayerList(); }, "PlayerList OFF", () => { PlayerListUI.HidePlayerList(); }, "Show/Hide PlayerList");
-            PlayerListToggle.setToggleState(PlayerListUI.Instance.saveData.showPlayersButton, false);
 
             if (!Bools.isCheetosMode)
             {

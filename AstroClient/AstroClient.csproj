@@ -58,6 +58,7 @@
     <Compile Include="AstroExtensions\ScaleExtensions.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
+    <Compile Include="Buttons\SettingsBtn.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemlySpy_Extensions.cs" />
     <Compile Include="Cheetos\CheetosUI.cs" />
