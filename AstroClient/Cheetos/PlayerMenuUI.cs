@@ -9,37 +9,30 @@
     using UnityEngine;
     using VRC;
 
-    public class PlayerListUI : Overridables
+    public class PlayerMenuUI : Overridables
     {
-        public static PlayerListUI Instance { get; private set; }
+        public static bool ShowPlayersMenu = true;
 
-        public bool showPlayerList { get; set; } = true;
+        public static bool ShowPlayersList = true;
 
-        public bool showPlayersButton { get; set; } = true;
+        private static QMSingleButton playersButton;
 
-        private QMSingleButton playersButton;
+        private static Dictionary<string, QMSingleButton> playerButtons { get; } = new Dictionary<string, QMSingleButton>();
 
-        private Dictionary<string, QMSingleButton> playerButtons { get; } = new Dictionary<string, QMSingleButton>();
+        private static readonly Color InstanceMasterColor = Color.cyan; // Light Blue
 
-        private readonly Color InstanceMasterColor = Color.cyan; // Light Blue
-
-        public static void Initialize()
+        public override void VRChat_OnUiManagerInit()
         {
-            if (Instance == null)
-            {
-                Instance = new PlayerListUI();
-            }
+            playersButton = new QMSingleButton("ShortcutMenu", -2, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
+            playersButton.setActive(ShowPlayersMenu);
 
-            Instance.playersButton = new QMSingleButton("ShortcutMenu", -2, -1f, "Players", () => { Instance.PlayerListToggle(); }, "Show/Hide player list", null, null, true);
-            Instance.playersButton.setActive(Instance.showPlayersButton);
-
-            if (Instance.showPlayerList)
+            if (ShowPlayersList)
             {
-                Instance.playersButton.setTextColor(UnityEngine.Color.green);
+                playersButton.setTextColor(UnityEngine.Color.green);
             }
             else
             {
-                Instance.playersButton.setTextColor(UnityEngine.Color.red);
+                playersButton.setTextColor(UnityEngine.Color.red);
             }
         }
 
@@ -127,7 +120,7 @@
                     }
                 }
 
-                playerButton.setActive(showPlayerList);
+                playerButton.setActive(ShowPlayersList);
                 playerButtons.Add(player.UserID(), playerButton);
 
                 yPos += 0.5f;
@@ -155,8 +148,8 @@
 
         private void PlayerListToggle()
         {
-            showPlayerList = !showPlayerList;
-            if (showPlayerList)
+            ShowPlayersList = !ShowPlayersList;
+            if (ShowPlayersList)
             {
                 playersButton.setTextColor(UnityEngine.Color.green);
             }
@@ -167,36 +160,34 @@
 
             foreach (var keyValuePair in playerButtons)
             {
-                keyValuePair.Value.setActive(showPlayerList);
+                keyValuePair.Value.setActive(ShowPlayersList);
             }
         }
 
-        public static void ShowPlayerList()
+        public static void ShowPlayerMenu()
         {
-            Instance.showPlayersButton = true;
-            Instance.playersButton.setTextColor(UnityEngine.Color.red);
+            ShowPlayersMenu = true;
+            playersButton.setTextColor(UnityEngine.Color.red);
 
-            Instance.playersButton.setActive(true);
+            playersButton.setActive(true);
 
-            foreach (var keyValuePair in Instance.playerButtons)
+            foreach (var keyValuePair in playerButtons)
             {
                 keyValuePair.Value.setActive(true);
             }
         }
 
-        public static void HidePlayerList()
+        public static void HidePlayerMenu()
         {
-            Instance.showPlayersButton = false;
-            Instance.playersButton.setTextColor(UnityEngine.Color.red);
+            ShowPlayersMenu = false;
+            playersButton.setTextColor(UnityEngine.Color.red);
 
-            Instance.playersButton.setActive(false);
+            playersButton.setActive(false);
 
-            foreach (var keyValuePair in Instance.playerButtons)
+            foreach (var keyValuePair in playerButtons)
             {
                 keyValuePair.Value.setActive(false);
             }
-
-            Instance.Save();
         }
     }
 }
