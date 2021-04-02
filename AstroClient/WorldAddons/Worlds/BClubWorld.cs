@@ -17,12 +17,6 @@ namespace AstroClient
 {
     public class BClubWorld : Overridables
     {
-
-        //private static GameObject Room1Buttons;
-        //private static GameObject Room3Buttons;
-        //private static GameObject Room5Buttons;
-
-
         public static void CloneTriggerToObject(GameObject OrigObj, GameObject DisplayObj, string InteractText)
         {
             try
@@ -115,7 +109,7 @@ namespace AstroClient
 
                     if (room_BedroomPreview != null)
                     {
-                        ModConsole.DebugLog("Found Bedroom Preview Button!, spawning..");
+                        //ModConsole.DebugLog("Found Bedroom Preview Button!, spawning..");
                         var clone = room_BedroomPreview.InstantiateObject();
                         if (clone != null)
                         {
@@ -156,7 +150,7 @@ namespace AstroClient
 
                     if (room_ToggleLock != null)
                     {
-                        ModConsole.DebugLog("Found Bedroom Toggle Lock Button!, spawning..");
+                        //ModConsole.DebugLog("Found Bedroom Toggle Lock Button!, spawning..");
                         var clone = room_ToggleLock.InstantiateObject();
                         if (clone != null)
                         {
@@ -193,7 +187,7 @@ namespace AstroClient
 
                     if (room_ToggleLooking != null)
                     {
-                        ModConsole.DebugLog("Found Bedroom Toggle Looking Button!, spawning..");
+                        //ModConsole.DebugLog("Found Bedroom Toggle Looking Button!, spawning..");
 
                         var clone = room_ToggleLooking.InstantiateObject();
                         if (clone != null)
@@ -235,7 +229,7 @@ namespace AstroClient
 
                     if (room_ToggleIncognito != null)
                     {
-                        ModConsole.DebugLog("Found Bedroom Toggle Incognito Button!, spawning..");
+                        //ModConsole.DebugLog("Found Bedroom Toggle Incognito Button!, spawning..");
 
                         var clone = room_ToggleIncognito.InstantiateObject();
                         if (clone != null)
@@ -274,7 +268,7 @@ namespace AstroClient
                     }
                     if (room_DND != null)
                     {
-                        ModConsole.DebugLog("Found Bedroom Toggle Do Not Disturb Button!, spawning..");
+                        //ModConsole.DebugLog("Found Bedroom Toggle Do Not Disturb Button!, spawning..");
                         var clone = room_DND.InstantiateObject();
                         if (clone != null)
                         {

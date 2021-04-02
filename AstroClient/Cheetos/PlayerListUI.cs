@@ -100,9 +100,9 @@
                 {
                     if (rank == PlayerExtensions.RankType.Moderator || rank == PlayerExtensions.RankType.Admin)
                     {
-                        // Stop printing to the console, it's not useful, use Days code to display a notification somehow.
-                        // However this needs to be done after the button refresh fix -- Cheetos
-                        ModConsole.Warning($"WARNING: There's a moderator or admin in your lobby! {player.DisplayName()}");
+                        var uiManager = VRCUiManager.prop_VRCUiManager_0;
+                        PopupManager.QueHudMessage(uiManager, $"Warning {player.DisplayName()} is an admin/moderator!");
+
                         playerButton.setTextColor(UnityEngine.Color.yellow);
                         playerButton.setBackgroundColor(UnityEngine.Color.yellow);
                     }

@@ -36,13 +36,11 @@
         // Use this for initialization
         void Start()
         {
-            ModConsole.DebugError("Astro_Interactable Created..");
         }
 
         // Update is called once per frame
         void Update()
         {
-
         }
     }
 
@@ -134,7 +132,6 @@
                     {
                         var gameObject = hit.collider.transform.gameObject;
                         CheckHitObject(gameObject);
-                        ModConsole.DebugLog($"Racycast hit on: {gameObject.name}");
                     }
                 }
             }
@@ -142,12 +139,10 @@
 
         public void CheckHitObject(GameObject gameObject)
         {
-            ModConsole.DebugLog($"CheckHitObject: {gameObject.name}");
             var interactable = gameObject.GetComponent<Astro_Interactable>();
             if (interactable!=null)
             {
                 interactable.Action.Invoke();
-                ModConsole.DebugLog("Astro_Interactable invoked..");
             }
         }
     }
