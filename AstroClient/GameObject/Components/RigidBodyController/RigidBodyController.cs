@@ -214,7 +214,7 @@ namespace AstroClient.components
                         }
                     }
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     ModConsole.DebugError($"RigidBodyController : Failed to Bind a Rigidbody to Object {obj.name}, Retrying...");
                     return;
