@@ -166,6 +166,17 @@ namespace AstroClient.ConsoleUtils
             PrintLine(msg, textcolor.Value);
         }
 
+        /// <summary>
+        /// I did this because I can trace the references easier, as I tend to do a lot of console spam during development.
+        /// I know you'll never understand me :3
+        /// </summary>
+        /// <param name="msg"></param>
+        /// <param name="textcolor"></param>
+        public static void CheetoLog(string msg, Color? textcolor = null)
+        {
+            DebugLog($"[CHEETOS] {msg}", textcolor);
+        }
+
         public static void DebugLog(string msg, Color? textcolor = null)
         {
             if (!DebugMode)

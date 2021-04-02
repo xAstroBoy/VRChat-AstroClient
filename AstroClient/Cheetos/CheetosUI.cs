@@ -1,4 +1,4 @@
-﻿namespace AstroClient.Cheetos
+﻿namespace AstroClient
 {
     using AstroClient.ConsoleUtils;
     using AstroClient.variables;
@@ -24,7 +24,7 @@
             CheetosConsole.Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), "Cheetos Mode", System.Drawing.Color.LightYellow, System.Drawing.Color.DarkOrange);
 
             string VRChatVersion = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.prop_String_2;
-            ModConsole.DebugLog($"VRChat Version: {VRChatVersion}");
+            ModConsole.CheetoLog($"VRChat Version: {VRChatVersion}");
 #endif
         }
 
