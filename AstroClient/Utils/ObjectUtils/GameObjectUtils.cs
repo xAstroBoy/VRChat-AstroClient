@@ -89,6 +89,25 @@ namespace AstroClient.GameObjectDebug
             }
         }
 
+
+        public static void CheckObjComponents(Transform Obj)
+        {
+            try
+            {
+                if (Obj != null)
+                {
+                    var components = Obj.GetComponentsInChildren<Component>(true);
+                    foreach (Component OriginalComponent in components)
+                    {
+                        ModConsole.Log(Obj.name + " component : " + OriginalComponent.ToString());
+                    }
+                }
+            }
+            catch (Exception) { }
+        }
+
+
+
         public static void CheckObjComponents(GameObject Obj)
         {
             try
@@ -467,6 +486,22 @@ namespace AstroClient.GameObjectDebug
             if (held != null)
             {
                 CheckObjComponents(held);
+            }
+        }
+
+        public static void DumpObjectComponent(GameObject obj)
+        {
+            if (obj != null)
+            {
+                CheckObjComponents(obj);
+            }
+        }
+
+        public static void DumpObjectComponent(Transform obj)
+        {
+            if (obj != null)
+            {
+                CheckObjComponents(obj);
             }
         }
 

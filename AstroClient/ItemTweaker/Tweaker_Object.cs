@@ -9,6 +9,7 @@ using AstroClient.ConsoleUtils;
 using AstroClient.Finder;
 using AstroClient.AstroUtils.ItemTweaker;
 using System.Linq;
+using DayClientML2.Utility.Extensions;
 
 #endregion AstroClient Imports
 
@@ -47,6 +48,8 @@ namespace AstroClient.ItemTweaker
             {
                 LockHoldItem.setToggleState(false);
             }
+
+
         }
 
         public static string GetObjectToEditName
@@ -314,6 +317,7 @@ namespace AstroClient.ItemTweaker
                 return CurrentSelectedObject;
             }
         }
+
 
 
 

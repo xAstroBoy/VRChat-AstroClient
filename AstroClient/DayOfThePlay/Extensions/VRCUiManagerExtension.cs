@@ -130,8 +130,6 @@ namespace DayClientML2.Utility.Extensions
 
         public delegate VRCUiPage ShowScreenAction(VRCUiPage page);
 
-#warning This needs fixed, update 1069 broke it
-        /**
         internal static void RefreshUser()
         {
             APIUser user = Utils.VRCUiManager.field_Public_GameObject_0.GetComponentInChildren<PageUserInfo>().GetUser();
@@ -148,7 +146,6 @@ namespace DayClientML2.Utility.Extensions
                     if (pageUserInfo != null)
                     {
                         pageUserInfo.Method_Private_Boolean_APIUser_PDM_0(userapi);
-                        pageUserInfo.Method_Private_Boolean_APIUser_PDM_1(userapi);
 
                         ModConsole.Log("Refreshed user: " + userapi.id);
                     }
@@ -158,7 +155,6 @@ namespace DayClientML2.Utility.Extensions
                     ModConsole.Log("Error Couldnt Fetch User\n" + Error);
                 }));
         }
-        **/
 
         internal static void GetAvatarAuthorFromSocial(this APIUser Instance)
         {
@@ -193,18 +189,17 @@ namespace DayClientML2.Utility.Extensions
             response.Close();
         }
 
-#warning This needs fixed, update 1069 broke it
         internal static void RefreshMenu()
         {
-            //UiUserList[] userLists = Utils.VRCUiManager.GetComponentsInChildren<UiUserList>(true);
+            MonoBehaviour1PublicVoUnique[] userLists = Utils.VRCUiManager.GetComponentsInChildren<MonoBehaviour1PublicVoUnique>(true);
 
-            //foreach (UiUserList userList in userLists)
-            //{
-            //    userList.Method_Public_Void_0();
-            //    userList.Method_Public_Void_1();
-            //    userList.Method_Public_Void_2();
-            //}
-            //ModConsole.Log("Refreshed social lists!");
+            foreach (MonoBehaviour1PublicVoUnique userList in userLists)
+            {
+                userList.Method_Public_Void_0();
+                userList.Method_Public_Void_1();
+                userList.Method_Public_Void_2();
+            }
+            ModConsole.Log("Refreshed social lists!");
         }
 
         internal static GameObject GetMenuContent(this VRCUiManager Instance)
