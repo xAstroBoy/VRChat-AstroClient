@@ -6,8 +6,14 @@ using System.Threading.Tasks;
 using RubyButtonAPI;
 using UnityEngine;
 
-namespace AstroClient.VRCAC
+namespace AstroClient.AntiCrash
 {
+    /// <summary>
+    /// I don't recommend calling it VRCAC.
+    /// As I'm not going to be straight up ripping the code.
+    /// I'm rewriting and using VRCAC as a reference.
+    /// This is going to be our own AntiCrash :)
+    /// </summary>
     public class VRCAntiCrash_InitButtons : Overridables
     {
         // MOST ACTIONS REQUIRE A CONFIG!

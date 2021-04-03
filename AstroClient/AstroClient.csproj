@@ -46,6 +46,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AntiCrash\AntiCrash.cs" />
     <Compile Include="AstroExtensions\ButtonsExtensions.cs" />
     <Compile Include="AstroExtensions\PlayerExtensions.cs" />
     <Compile Include="AstroExtensions\ListExtensions.cs" />
@@ -183,7 +184,7 @@
     <Compile Include="Variables\GDBUser.cs" />
     <Compile Include="Variables\VRChatObjects.cs" />
     <Compile Include="Variables\WorldIds.cs" />
-    <Compile Include="VRCAC\VRCAntiCrash_InitButtons.cs" />
+    <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />
     <Compile Include="WorldAddons\Worlds\BClubWorld.cs" />
     <Compile Include="WorldAddons\Worlds\Jar Worlds\AmongUSCheats.cs" />
     <Compile Include="WorldAddons\Worlds\Jar Worlds\Murder4Cheats.cs" />
