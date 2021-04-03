@@ -6,18 +6,21 @@
     using System;
     using System.Collections.Generic;
     using System.Management.Instrumentation;
+    using UnhollowerRuntimeLib;
     using UnityEngine;
     using VRC;
 
     public class PlayerMenuUI : Overridables
     {
+        public static string SpoofedName = string.Empty;
+
         public static bool ShowPlayersMenu = true;
 
         public static bool ShowPlayersList = true;
 
         private static QMSingleButton playersButton;
 
-        private static Dictionary<string, QMSingleButton> playerButtons { get; } = new Dictionary<string, QMSingleButton>();
+        public static Dictionary<string, QMSingleButton> playerButtons { get; } = new Dictionary<string, QMSingleButton>();
 
         private static readonly Color InstanceMasterColor = Color.cyan; // Light Blue
 
@@ -76,6 +79,7 @@
 
         private void InitializeButtons()
         {
+            var selfID = LocalPlayerUtils.GetSelfPlayer().UserID();
             var players = WorldUtils.GetAllPlayers0();
             var temp_list = new List<Player>();
 

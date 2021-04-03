@@ -14,13 +14,13 @@
         {
             if (descriptorObj != null)
             {
-                AntiCrashUtils.TempLog($"Descriptor found: {descriptorObj.name}");
+                //AntiCrashUtils.TempLog($"Descriptor found: {descriptorObj.name}");
             }
 
             if (avatar != null)
             {
                 var player = avatar.transform.root.GetComponentInChildren<Player>();
-                AntiCrashUtils.TempLog($"Scanning {player.DisplayName()}'s avatar..");
+                //AntiCrashUtils.TempLog($"Scanning {player.DisplayName()}'s avatar..");
                 InitiateScan(avatar);
             }
         }
@@ -33,7 +33,7 @@
 
             foreach (var renderer in renderers)
             {
-                AntiCrashUtils.TempLog($"Renderer found: {renderer.name}");
+                //AntiCrashUtils.TempLog($"Renderer found: {renderer.name}");
 
                 foreach (var material in renderer.materials)
                 {
@@ -43,13 +43,13 @@
 
             foreach (var particleSystem in particleSystems)
             {
-                AntiCrashUtils.TempLog($"ParticleSystem found: {particleSystem.name}");
+                //AntiCrashUtils.TempLog($"ParticleSystem found: {particleSystem.name}");
                 ScanParticleSystem(particleSystem);
             }
 
             foreach (var skinnedMeshRenderer in skinnedMeshRenderers)
             {
-                AntiCrashUtils.TempLog($"SkinnedMeshRenderer found: {skinnedMeshRenderer.name}");
+                //AntiCrashUtils.TempLog($"SkinnedMeshRenderer found: {skinnedMeshRenderer.name}");
                 ScanSkinnedMeshRenderer(skinnedMeshRenderer);
             }
         }
@@ -57,10 +57,10 @@
         private static void ScanMaterial(Material material)
         {
             // TODO: Use blacklist instead
-            AntiCrashUtils.TempLog($"Shader: {material.shader.name} found.");
+            //AntiCrashUtils.TempLog($"Shader: {material.shader.name} found.");
             if (material.shader.name != "Standard")
             {
-                AntiCrashUtils.TempLog($"Shader: {material.shader.name} reset to default.");
+                //AntiCrashUtils.TempLog($"Shader: {material.shader.name} reset to default.");
                 material = DefaultMaterial;
             }
         }
@@ -69,13 +69,13 @@
         {
             if (particleSystem.maxParticles >= 1)
             {
-                AntiCrashUtils.TempLog($"ParticleSystem: {particleSystem.name} with {particleSystem.maxParticles} particles disabled.");
+                //AntiCrashUtils.TempLog($"ParticleSystem: {particleSystem.name} with {particleSystem.maxParticles} particles disabled.");
                 particleSystem.enableEmission = false;
             }
 
             if (particleSystem.collision.maxCollisionShapes >= 1)
             {
-                AntiCrashUtils.TempLog($"ParticleSystem: {particleSystem.name} with {particleSystem.collision.maxCollisionShapes} collision shapes disabled.");
+                //AntiCrashUtils.TempLog($"ParticleSystem: {particleSystem.name} with {particleSystem.collision.maxCollisionShapes} collision shapes disabled.");
                 particleSystem.enableEmission = false;
             }
 
@@ -88,7 +88,7 @@
 
             if (polyCount >= 1)
             {
-                AntiCrashUtils.TempLog($"SkinnedMeshRenderer: with {polyCount} polys disabled.");
+                //AntiCrashUtils.TempLog($"SkinnedMeshRenderer: with {polyCount} polys disabled.");
                 skinnedMeshRenderer.sharedMesh.DestroyMeLocal();
             }
         }

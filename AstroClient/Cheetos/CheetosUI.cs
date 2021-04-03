@@ -108,6 +108,29 @@
 
         public override void OnWorldReveal()
         {
+
+            string userid = LocalPlayerUtils.GetSelfPlayer().UserID();
+            ModConsole.DebugLog($"UserID: {userid}");
+            try
+            {
+                PlayerMenuUI.playerButtons.TryGetValue(userid, out QMSingleButton button);
+
+                if (button != null)
+                {
+                    ModConsole.DebugLog($"My spoofed name is: {button.getButtonText()}");
+                    ModConsole.DebugLog($"My spoofed name is: {button.getButtonText()}");
+                    ModConsole.DebugLog($"My spoofed name is: {button.getButtonText()}");
+                    ModConsole.DebugLog($"My spoofed name is: {button.getButtonText()}");
+                    ModConsole.DebugLog($"My spoofed name is: {button.getButtonText()}");
+                    ModConsole.DebugLog($"My spoofed name is: {button.getButtonText()}");
+                } else
+                {
+                    ModConsole.DebugError($"BUTTON WAS NULL");
+                }
+            } catch (Exception e)
+            {
+                ModConsole.DebugErrorExc(e);
+            }
         }
     }
 }
