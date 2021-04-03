@@ -191,9 +191,9 @@ namespace DayClientML2.Utility.Extensions
 
         internal static void RefreshMenu()
         {
-            MonoBehaviour1PublicVoUnique[] userLists = Utils.VRCUiManager.GetComponentsInChildren<MonoBehaviour1PublicVoUnique>(true);
+            UiVRCList[] userLists = Utils.VRCUiManager.GetComponentsInChildren<UiVRCList>(true);
 
-            foreach (MonoBehaviour1PublicVoUnique userList in userLists)
+            foreach (UiVRCList userList in userLists)
             {
                 userList.Method_Public_Void_0();
                 userList.Method_Public_Void_1();
