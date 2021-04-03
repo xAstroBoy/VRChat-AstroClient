@@ -28,6 +28,8 @@
         private static void InitiateScan(GameObject avatar)
         {
             var renderers = avatar.GetComponentsInChildren<Renderer>();
+            var particleSystems = avatar.GetComponentsInChildren<ParticleSystem>();
+            var skinnedMeshRenderers = avatar.GetComponentsInChildren<SkinnedMeshRenderer>();
 
             foreach (var renderer in renderers)
             {
@@ -38,21 +40,67 @@
                     ScanMaterial(material);
                 }
             }
+
+            foreach (var particleSystem in particleSystems)
+            {
+                AntiCrashUtils.TempLog($"ParticleSystem found: {particleSystem.name}");
+                ScanParticleSystem(particleSystem);
+            }
+
+            foreach (var skinnedMeshRenderer in skinnedMeshRenderers)
+            {
+                AntiCrashUtils.TempLog($"SkinnedMeshRenderer found: {skinnedMeshRenderer.name}");
+                ScanSkinnedMeshRenderer(skinnedMeshRenderer);
+            }
         }
 
         private static void ScanMaterial(Material material)
         {
             // TODO: Use blacklist instead
-            AntiCrashUtils.TempLog($"Shader: {material.shader.name}");
+            AntiCrashUtils.TempLog($"Shader: {material.shader.name} found.");
             if (material.shader.name != "Standard")
             {
+                AntiCrashUtils.TempLog($"Shader: {material.shader.name} reset to default.");
                 material = DefaultMaterial;
             }
         }
 
-        private static int GetPolyCount(GameObject avatar)
+        private static void ScanParticleSystem(ParticleSystem particleSystem)
         {
-            return 0; // WIP
+            if (particleSystem.maxParticles >= 1)
+            {
+                AntiCrashUtils.TempLog($"ParticleSystem: {particleSystem.name} with {particleSystem.maxParticles} particles disabled.");
+                particleSystem.enableEmission = false;
+            }
+
+            if (particleSystem.collision.maxCollisionShapes >= 1)
+            {
+                AntiCrashUtils.TempLog($"ParticleSystem: {particleSystem.name} with {particleSystem.collision.maxCollisionShapes} collision shapes disabled.");
+                particleSystem.enableEmission = false;
+            }
+
+            // TODO: Check bursts
+        }
+
+        private static void ScanSkinnedMeshRenderer(SkinnedMeshRenderer skinnedMeshRenderer)
+        {
+            var polyCount = GetPolyCount(skinnedMeshRenderer.sharedMesh);
+
+            if (polyCount >= 1)
+            {
+                AntiCrashUtils.TempLog($"SkinnedMeshRenderer: with {polyCount} polys disabled.");
+                skinnedMeshRenderer.sharedMesh.DestroyMeLocal();
+            }
+        }
+
+        private static int GetPolyCount(Mesh sourceMesh)
+        {
+            int num = 0;
+            for (int i = 0; i < sourceMesh.subMeshCount; i++)
+            {
+                num += sourceMesh.GetTriangles(i).Length / 3;
+            }
+            return num;
         }
     }
 }
