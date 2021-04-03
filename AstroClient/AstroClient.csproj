@@ -47,6 +47,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AntiCrash\AntiCrash.cs" />
+    <Compile Include="AntiCrash\AntiCrashScanner.cs" />
     <Compile Include="AstroExtensions\ButtonsExtensions.cs" />
     <Compile Include="AstroExtensions\PlayerExtensions.cs" />
     <Compile Include="AstroExtensions\ListExtensions.cs" />

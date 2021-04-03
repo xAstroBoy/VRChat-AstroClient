@@ -100,6 +100,9 @@
             if (!Bools.isCheetosMode)
             {
                 MainButton.getMainButton().setActive(false);
+            } else
+            {
+                QMTabMenu cheetosTab = new QMTabMenu(0, "Cheeto's Menu", null, null, null, @"https://craig.se/AstroClient/tab_button.png");
             }
         }
 
