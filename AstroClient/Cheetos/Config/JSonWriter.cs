@@ -1,16 +1,7 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.ConsoleUtils;
-    using Cinemachine;
     using Newtonsoft.Json;
-    using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Reflection;
-    using System.Text;
-    using System.Threading.Tasks;
-    using UIWidgets;
 
     public static class JSonWriter
     {

@@ -1,14 +1,8 @@
-﻿using RubyButtonAPI;
-using UnityEngine;
+﻿using UnityEngine;
 
 #region AstroClient Imports
 
-using AstroClient.components;
 using static AstroClient.LocalPlayerUtils;
-using AstroClient.ConsoleUtils;
-using AstroClient.Finder;
-using AstroClient.AstroUtils.ItemTweaker;
-using System.Linq;
 
 #endregion AstroClient Imports
 

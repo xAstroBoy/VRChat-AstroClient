@@ -1,19 +1,13 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.ConsoleUtils;
     using DayClientML2.Utility.Extensions;
     using RubyButtonAPI;
-    using System;
     using System.Collections.Generic;
-    using System.Management.Instrumentation;
-    using UnhollowerRuntimeLib;
     using UnityEngine;
     using VRC;
 
     public class PlayerMenuUI : Overridables
     {
-        public static string SpoofedName = string.Empty;
-
         public static bool ShowPlayersMenu = true;
 
         public static bool ShowPlayersList = true;

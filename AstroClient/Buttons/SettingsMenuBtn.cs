@@ -1,7 +1,5 @@
 ﻿using AstroClient.Cheetos;
-using AstroClient.GameObjectDebug;
 using RubyButtonAPI;
-using System;
 using UnityEngine;
 
 namespace AstroClient.Startup.Buttons

@@ -1,11 +1,5 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.ConsoleUtils;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-
     public class AssemblySpy : Overridables
     {
 //        public List<Assembly> assembllies { get; private set; } = new List<Assembly>();

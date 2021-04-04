@@ -1,13 +1,8 @@
 ﻿namespace AstroClient.AntiCrash
 {
     using AstroClient.ConsoleUtils;
-    using AstroClient.extensions;
     using AstroClient.variables;
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using UnityEngine;
     using VRC.SDKBase;
 

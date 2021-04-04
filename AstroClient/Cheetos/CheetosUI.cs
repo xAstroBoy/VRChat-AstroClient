@@ -4,16 +4,9 @@
     using AstroClient.variables;
     using RubyButtonAPI;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using CheetosConsole;
     using AstroClient.Finder;
-    using AstroClient.Variables;
-    using UnityEngine;
     using DayClientML2.Utility.Extensions;
-    using VRC;
     using AstroClient.extensions;
 
     public class CheetosPrivateStuff : Overridables
@@ -102,35 +95,12 @@
                 MainButton.getMainButton().setActive(false);
             } else
             {
-                QMTabMenu cheetosTab = new QMTabMenu(0, "Cheeto's Menu", null, null, null, @"https://craig.se/AstroClient/tab_button.png");
+                //QMTabMenu cheetosTab = new QMTabMenu(0, "Cheeto's Menu", null, null, null, @"https://craig.se/AstroClient/tab_button.png");
             }
         }
 
         public override void OnWorldReveal()
         {
-
-            string userid = LocalPlayerUtils.GetSelfPlayer().UserID();
-            ModConsole.DebugLog($"UserID: {userid}");
-            try
-            {
-                PlayerMenuUI.playerButtons.TryGetValue(userid, out QMSingleButton button);
-
-                if (button != null)
-                {
-                    ModConsole.DebugLog($"My spoofed name is: {button.getButtonText()}");
-                    ModConsole.DebugLog($"My spoofed name is: {button.getButtonText()}");
-                    ModConsole.DebugLog($"My spoofed name is: {button.getButtonText()}");
-                    ModConsole.DebugLog($"My spoofed name is: {button.getButtonText()}");
-                    ModConsole.DebugLog($"My spoofed name is: {button.getButtonText()}");
-                    ModConsole.DebugLog($"My spoofed name is: {button.getButtonText()}");
-                } else
-                {
-                    ModConsole.DebugError($"BUTTON WAS NULL");
-                }
-            } catch (Exception e)
-            {
-                ModConsole.DebugErrorExc(e);
-            }
         }
     }
 }

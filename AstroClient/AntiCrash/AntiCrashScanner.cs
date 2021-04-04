@@ -1,7 +1,6 @@
 ﻿namespace AstroClient.AntiCrash
 {
     using AstroClient.extensions;
-    using DayClientML2.Utility.Extensions;
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;

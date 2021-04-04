@@ -4,12 +4,10 @@ using UnityEngine;
 #region AstroClient Imports
 
 using AstroClient.components;
-using static AstroClient.LocalPlayerUtils;
 using AstroClient.ConsoleUtils;
 using AstroClient.Finder;
 using AstroClient.AstroUtils.ItemTweaker;
 using System.Linq;
-using DayClientML2.Utility.Extensions;
 
 #endregion AstroClient Imports
 
