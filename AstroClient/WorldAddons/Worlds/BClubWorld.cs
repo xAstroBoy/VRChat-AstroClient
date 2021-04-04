@@ -79,9 +79,6 @@ namespace AstroClient
             GameObject Bedrooms = SceneManager.GetActiveScene().GetRootGameObjects().Where(x => x.gameObject.name == "Bedrooms").First();
             if (nlobby != null && Bedrooms != null)
             {
-                ModConsole.Log("Found nlobby and Bedrooms!");
-
-
                 var room = nlobby.transform.Find($"Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");
                 var room_BedroomPreview = Bedrooms.transform.Find($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
                 var room_ToggleLooking = Bedrooms.transform.Find($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Looking");
@@ -107,11 +104,8 @@ namespace AstroClient
                 // add buttons
                 if (room != null)
                 {
-                    ModConsole.Log($"Found all Private Room {doorID} Buttons!");
-
                     if (room_BedroomPreview != null)
                     {
-                        //ModConsole.DebugLog("Found Bedroom Preview Button!, spawning..");
                         var clone = room_BedroomPreview.InstantiateObject();
                         if (clone != null)
                         {
@@ -152,7 +146,6 @@ namespace AstroClient
 
                     if (room_ToggleLock != null)
                     {
-                        //ModConsole.DebugLog("Found Bedroom Toggle Lock Button!, spawning..");
                         var clone = room_ToggleLock.InstantiateObject();
                         if (clone != null)
                         {
@@ -189,8 +182,6 @@ namespace AstroClient
 
                     if (room_ToggleLooking != null)
                     {
-                        //ModConsole.DebugLog("Found Bedroom Toggle Looking Button!, spawning..");
-
                         var clone = room_ToggleLooking.InstantiateObject();
                         if (clone != null)
                         {
@@ -231,8 +222,6 @@ namespace AstroClient
 
                     if (room_ToggleIncognito != null)
                     {
-                        //ModConsole.DebugLog("Found Bedroom Toggle Incognito Button!, spawning..");
-
                         var clone = room_ToggleIncognito.InstantiateObject();
                         if (clone != null)
                         {
@@ -270,7 +259,6 @@ namespace AstroClient
                     }
                     if (room_DND != null)
                     {
-                        //ModConsole.DebugLog("Found Bedroom Toggle Do Not Disturb Button!, spawning..");
                         var clone = room_DND.InstantiateObject();
                         if (clone != null)
                         {

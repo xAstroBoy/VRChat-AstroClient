@@ -1,7 +1,9 @@
 ﻿using AstroClient.variables;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using Console = CheetosConsole.Console;
 
@@ -106,33 +108,39 @@ namespace AstroClient.ConsoleUtils
             DEBUG_ERROR
         }
 
-        public static void LogExc<T>(T e)
+        public static void LogExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
         {
+            PrintCallerTag(callerName, callerLine);
             Exception((e as System.Exception), LogTypes.LOG);
         }
 
-        public static void WarningExc<T>(T e)
+        public static void WarningExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
         {
+            PrintCallerTag(callerName, callerLine);
             Exception((e as System.Exception), LogTypes.WARNING);
         }
 
-        public static void ErrorExc<T>(T e)
+        public static void ErrorExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
         {
+            PrintCallerTag(callerName, callerLine);
             Exception((e as System.Exception), LogTypes.ERROR);
         }
 
-        public static void DebugLogExc<T>(T e)
+        public static void DebugLogExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
         {
+            PrintCallerTag(callerName, callerLine);
             Exception((e as System.Exception), LogTypes.DEBUG_LOG);
         }
 
-        public static void DebugWarningExc<T>(T e)
+        public static void DebugWarningExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
         {
+            PrintCallerTag(callerName, callerLine);
             Exception((e as System.Exception), LogTypes.DEBUG_WARNING);
         }
 
-        public static void DebugErrorExc<T>(T e)
+        public static void DebugErrorExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
         {
+            PrintCallerTag(callerName, callerLine);
             Exception((e as System.Exception), LogTypes.DEBUG_ERROR);
         }
 
@@ -177,7 +185,7 @@ namespace AstroClient.ConsoleUtils
             DebugLog($"[CHEETOS] {msg}", textcolor);
         }
 
-        public static void DebugLog(string msg, Color? textcolor = null)
+        public static void DebugLog(string msg, Color? textcolor = null, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
         {
             if (!DebugMode)
             {
@@ -188,10 +196,11 @@ namespace AstroClient.ConsoleUtils
                 textcolor = Color.PapayaWhip;
             }
             PrintTags(LogTypes.DEBUG_LOG);
+            PrintCallerTag(callerName, callerLine);
             PrintLine(msg, textcolor.Value);
         }
 
-        public static void DebugWarning(string msg, Color? textcolor = null)
+        public static void DebugWarning(string msg, Color? textcolor = null, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
         {
             if (!DebugMode)
             {
@@ -202,10 +211,11 @@ namespace AstroClient.ConsoleUtils
                 textcolor = Color.Yellow;
             }
             PrintTags(LogTypes.DEBUG_LOG);
+            PrintCallerTag(callerName, callerLine);
             PrintLine(msg, textcolor.Value);
         }
 
-        public static void DebugError(string msg, Color? textcolor = null)
+        public static void DebugError(string msg, Color? textcolor = null, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
         {
             if (!DebugMode)
             {
@@ -216,6 +226,7 @@ namespace AstroClient.ConsoleUtils
                 textcolor = Color.Red;
             }
             PrintTags(LogTypes.DEBUG_LOG);
+            PrintCallerTag(callerName, callerLine);
             PrintLine(msg, textcolor.Value);
         }
 
@@ -282,6 +293,16 @@ namespace AstroClient.ConsoleUtils
                     PrintDebugErrorTag();
                     break;
             }
+        }
+
+        private static void PrintCallerTag(string callerName, int callerLine)
+        {
+            Console.Write("[", Color.White);
+            Console.Write(callerName, Color.Olive);
+            Console.Write(":", Color.White);
+            Console.Write(callerLine.ToString(), Color.Green);
+            Console.Write("]: ", Color.White);
+            Task.Run(() => { Write("[LOG]: "); });
         }
 
         private static void PrintLogTag()
