@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using AstroClient.extensions;
 using VRCSDK2;
+using AstroClient.Finder;
 
 namespace AstroClient
 {
@@ -58,6 +59,13 @@ namespace AstroClient
                     CreateButtonGroup(4, new Vector3(-75.04338f, 15.79742f, -4.307182f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
                     CreateButtonGroup(5, new Vector3(-68.77336f, 15.78151f, -0.3279915f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
                     CreateButtonGroup(6, new Vector3(-67.04791f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+
+                    // Remove stupid warning in elevator.
+                    var warning = GameObjectFinder.Find("Lobby/Warning");
+                    if (warning != null)
+                    {
+                        warning.SetActive(false);
+                    }
                 } catch (Exception e)
                 {
                     ModConsole.DebugErrorExc(e);
