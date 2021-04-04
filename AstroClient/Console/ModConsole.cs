@@ -333,7 +333,7 @@ namespace AstroClient.ConsoleUtils
         {
             Console.Write("[", Color.White);
             Console.Write("DEBUG LOG", Color.Aquamarine);
-            Console.Write("]: ", Color.White);
+            Console.Write("] ", Color.White);
             Task.Run(() => { Write("[DEBUG LOG]: "); });
         }
 
@@ -341,7 +341,7 @@ namespace AstroClient.ConsoleUtils
         {
             Console.Write("[", Color.White);
             Console.Write("DEBUG WARNING", Color.Orange);
-            Console.Write("]: ", Color.White);
+            Console.Write("] ", Color.White);
             Task.Run(() => { Write("[DEBUG WARNING]: "); });
         }
 
@@ -349,7 +349,7 @@ namespace AstroClient.ConsoleUtils
         {
             Console.Write("[", Color.White);
             Console.Write("DEBUG ERROR", Color.Red);
-            Console.Write("]: ", Color.White);
+            Console.Write("] ", Color.White);
             Task.Run(() => { Write("[DEBUG ERROR]: "); });
         }
 
