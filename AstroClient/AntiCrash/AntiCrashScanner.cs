@@ -61,21 +61,21 @@
             if (material.shader.name != "Standard")
             {
                 //AntiCrashUtils.TempLog($"Shader: {material.shader.name} reset to default.");
-                material = DefaultMaterial;
+                //material = DefaultMaterial;
             }
         }
 
         private static void ScanParticleSystem(ParticleSystem particleSystem)
         {
-            if (particleSystem.maxParticles >= 1)
+            if (particleSystem.maxParticles >= 10000)
             {
-                //AntiCrashUtils.TempLog($"ParticleSystem: {particleSystem.name} with {particleSystem.maxParticles} particles disabled.");
+                AntiCrashUtils.TempLog($"ParticleSystem: {particleSystem.name} with {particleSystem.maxParticles} particles disabled.");
                 particleSystem.enableEmission = false;
             }
 
-            if (particleSystem.collision.maxCollisionShapes >= 1)
+            if (particleSystem.collision.maxCollisionShapes >= 10000)
             {
-                //AntiCrashUtils.TempLog($"ParticleSystem: {particleSystem.name} with {particleSystem.collision.maxCollisionShapes} collision shapes disabled.");
+                AntiCrashUtils.TempLog($"ParticleSystem: {particleSystem.name} with {particleSystem.collision.maxCollisionShapes} collision shapes disabled.");
                 particleSystem.enableEmission = false;
             }
 
@@ -86,9 +86,9 @@
         {
             var polyCount = GetPolyCount(skinnedMeshRenderer.sharedMesh);
 
-            if (polyCount >= 1)
+            if (polyCount >= 1000000)
             {
-                //AntiCrashUtils.TempLog($"SkinnedMeshRenderer: with {polyCount} polys disabled.");
+                AntiCrashUtils.TempLog($"SkinnedMeshRenderer: with {polyCount} polys disabled.");
                 skinnedMeshRenderer.sharedMesh.DestroyMeLocal();
             }
         }
