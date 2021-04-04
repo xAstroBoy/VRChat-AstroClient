@@ -1,11 +1,8 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.ConsoleUtils;
     using DayClientML2.Utility.Extensions;
     using RubyButtonAPI;
-    using System;
     using System.Collections.Generic;
-    using System.Management.Instrumentation;
     using UnityEngine;
     using VRC;
 
@@ -17,7 +14,7 @@
 
         private static QMSingleButton playersButton;
 
-        private static Dictionary<string, QMSingleButton> playerButtons { get; } = new Dictionary<string, QMSingleButton>();
+        public static Dictionary<string, QMSingleButton> playerButtons { get; } = new Dictionary<string, QMSingleButton>();
 
         private static readonly Color InstanceMasterColor = Color.cyan; // Light Blue
 
@@ -76,6 +73,7 @@
 
         private void InitializeButtons()
         {
+            var selfID = LocalPlayerUtils.GetSelfPlayer().UserID();
             var players = WorldUtils.GetAllPlayers0();
             var temp_list = new List<Player>();
 

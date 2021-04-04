@@ -1,14 +1,8 @@
 ﻿namespace AstroClient.AntiCrash
 {
     using AstroClient.ConsoleUtils;
-    using AstroClient.extensions;
     using AstroClient.variables;
-    using Il2CppSystem.Collections.Generic;
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using UnityEngine;
     using VRC.SDKBase;
 
@@ -26,39 +20,15 @@
 
     public static class AntiCrash_Lists
     {
-        public static string[] GenitalNames = { "dick", "cock", "penis", "pussy", "vagina", "clit", "anus", "ass", "willy", "shlong", "cum", "sperm", "陰茎", "dildo", "strap on", "strap-on" };
-    }
+        public static List<string> GenitalNames = new List<string>();
 
-    public static class AntiCrashScanner
-    {
-        public static void ScanAvatar(GameObject avatar)
+        public static List<string> CrasherCreators = new List<string>();
+
+        public static List<string> CrashShaderTerms = new List<string>();
+
+        public static void DownloadLists()
         {
-            if (avatar != null)
-            {
-                Transform transform = avatar.transform.parent.Find("_AvatarMirrorClone");
-                Transform transform2 = avatar.transform.parent.Find("_AvatarShadowClone");
-                Transform transform3 = avatar.transform.parent.Find("IK");
 
-                if (transform != null)
-                {
-                    AntiCrashUtils.TempLog($"Found: {transform.name}");
-                }
-
-                if (transform2 != null)
-                {
-                    AntiCrashUtils.TempLog($"Found: {transform2.name}");
-                }
-
-                if (transform3 != null)
-                {
-                    AntiCrashUtils.TempLog($"Found: {transform3.name}");
-                }
-            }
-        }
-
-        public static int GetPolyCount(GameObject avatar)
-        {
-            return 0; // WIP
         }
     }
 
@@ -80,8 +50,11 @@
 
         public override void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
         {
-            // Check and scan :)
-            AntiCrashScanner.ScanAvatar(avatar);
+            if (Enabled)
+            {
+                // Check and scan :)
+                AntiCrashScanner.ScanAvatar(avatar, DescriptorObj);
+            }
         }
     }
 }

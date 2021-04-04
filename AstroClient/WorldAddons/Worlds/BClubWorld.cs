@@ -1,17 +1,12 @@
 ﻿using AstroClient.ConsoleUtils;
-using AstroClient.Finder;
 using AstroClient.Variables;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using AstroClient.extensions;
-using VRC.Udon;
-using static AstroClient.variables.CustomLists;
 using VRCSDK2;
+using AstroClient.Finder;
 
 namespace AstroClient
 {
@@ -64,6 +59,13 @@ namespace AstroClient
                     CreateButtonGroup(4, new Vector3(-75.04338f, 15.79742f, -4.307182f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
                     CreateButtonGroup(5, new Vector3(-68.77336f, 15.78151f, -0.3279915f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
                     CreateButtonGroup(6, new Vector3(-67.04791f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+
+                    // Remove stupid warning in elevator.
+                    var warning = GameObjectFinder.Find("Lobby/Warning");
+                    if (warning != null)
+                    {
+                        warning.SetActive(false);
+                    }
                 } catch (Exception e)
                 {
                     ModConsole.DebugErrorExc(e);
@@ -77,9 +79,6 @@ namespace AstroClient
             GameObject Bedrooms = SceneManager.GetActiveScene().GetRootGameObjects().Where(x => x.gameObject.name == "Bedrooms").First();
             if (nlobby != null && Bedrooms != null)
             {
-                ModConsole.Log("Found nlobby and Bedrooms!");
-
-
                 var room = nlobby.transform.Find($"Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");
                 var room_BedroomPreview = Bedrooms.transform.Find($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
                 var room_ToggleLooking = Bedrooms.transform.Find($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Looking");
@@ -105,11 +104,8 @@ namespace AstroClient
                 // add buttons
                 if (room != null)
                 {
-                    ModConsole.Log($"Found all Private Room {doorID} Buttons!");
-
                     if (room_BedroomPreview != null)
                     {
-                        //ModConsole.DebugLog("Found Bedroom Preview Button!, spawning..");
                         var clone = room_BedroomPreview.InstantiateObject();
                         if (clone != null)
                         {
@@ -150,7 +146,6 @@ namespace AstroClient
 
                     if (room_ToggleLock != null)
                     {
-                        //ModConsole.DebugLog("Found Bedroom Toggle Lock Button!, spawning..");
                         var clone = room_ToggleLock.InstantiateObject();
                         if (clone != null)
                         {
@@ -187,8 +182,6 @@ namespace AstroClient
 
                     if (room_ToggleLooking != null)
                     {
-                        //ModConsole.DebugLog("Found Bedroom Toggle Looking Button!, spawning..");
-
                         var clone = room_ToggleLooking.InstantiateObject();
                         if (clone != null)
                         {
@@ -229,8 +222,6 @@ namespace AstroClient
 
                     if (room_ToggleIncognito != null)
                     {
-                        //ModConsole.DebugLog("Found Bedroom Toggle Incognito Button!, spawning..");
-
                         var clone = room_ToggleIncognito.InstantiateObject();
                         if (clone != null)
                         {
@@ -268,7 +259,6 @@ namespace AstroClient
                     }
                     if (room_DND != null)
                     {
-                        //ModConsole.DebugLog("Found Bedroom Toggle Do Not Disturb Button!, spawning..");
                         var clone = room_DND.InstantiateObject();
                         if (clone != null)
                         {

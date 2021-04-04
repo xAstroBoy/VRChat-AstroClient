@@ -1,5 +1,4 @@
-﻿using AstroClient.AstroUtils.ItemTweaker;
-using AstroClient.ConsoleUtils;
+﻿using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
 using AstroClient.Finder;
 using AstroClient.Variables;

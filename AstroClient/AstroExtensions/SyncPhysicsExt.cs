@@ -1,5 +1,4 @@
-﻿using AstroClient.ConsoleUtils;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace AstroClient.SyncPhysicExt
 {

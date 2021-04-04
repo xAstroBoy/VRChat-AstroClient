@@ -4,11 +4,9 @@ using AstroClient.Finder;
 using AstroClient.Variables;
 using AstroClient.World.Hub;
 using RubyButtonAPI;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using static AstroClient.PlayerHands;
 
 namespace AstroClient.Worlds
 {

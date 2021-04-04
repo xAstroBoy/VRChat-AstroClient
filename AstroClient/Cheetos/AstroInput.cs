@@ -1,20 +1,10 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.ConsoleUtils;
     using AstroClient.Finder;
     using DayClientML2.Utility.Extensions;
-    using Mono.CSharp;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using UnhollowerBaseLib;
-    using UnhollowerBaseLib.Runtime;
     using UnhollowerRuntimeLib;
     using UnityEngine;
-    using UnityEngine.Experimental.UIElements;
-    using VRC;
 
     public static class Astro_Interactable_Extensions
     {

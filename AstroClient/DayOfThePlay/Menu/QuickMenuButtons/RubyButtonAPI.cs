@@ -460,6 +460,11 @@ namespace RubyButtonAPI
             button.GetComponentInChildren<Text>().text = buttonText;
         }
 
+        public string getButtonText()
+        {
+            return button.GetComponentInChildren<Text>().text;
+        }
+
         public void setAction(System.Action buttonAction)
         {
             button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();

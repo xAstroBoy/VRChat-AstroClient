@@ -2,7 +2,6 @@
 using AstroClient.extensions;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace AstroClient.Finder
 {
