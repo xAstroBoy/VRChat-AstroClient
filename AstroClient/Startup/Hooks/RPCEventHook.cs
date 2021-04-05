@@ -11,8 +11,10 @@
     using System.Reflection;
     using System.Text;
     using System.Threading.Tasks;
+    using UnhollowerBaseLib;
     using VRC;
     using VRC.SDKBase;
+    using static DayClientML2.Utility.MiscUtility;
 
     public class RPCEventHook : Overridables
     {
@@ -36,7 +38,16 @@
 
         private static void OnRPCEvent(ref Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
         {
-            ModConsole.DebugLog($"RPC: {__0.DisplayName()}, {__1.ParameterObject.name}, {__2.ToString()}, {__3}, {__4}");
+            var array = Networking.DecodeParameters(__1.ParameterBytes);
+            string text = string.Empty;
+
+            foreach (var item in array)
+            {
+                text += $"[{item.ToString()}] ";
+                //ModConsole.DebugLog(item.ToString());
+            }
+
+            ModConsole.DebugLog($"RPC: {__0.DisplayName()}, {__1.ParameterObject.name}, {__1.ParameterString}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
         }
     }
 }
