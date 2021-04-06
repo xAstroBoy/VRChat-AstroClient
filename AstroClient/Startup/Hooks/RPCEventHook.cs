@@ -47,7 +47,23 @@
                 //ModConsole.DebugLog(item.ToString());
             }
 
-            ModConsole.DebugLog($"RPC: {__0.DisplayName()}, {__1.ParameterObject.name}, {__1.ParameterString}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
+            // USpeak
+
+            var name = __1.ParameterObject.name;
+            var parameter = __1.ParameterString;
+
+            bool log = true;
+
+            if (name.Equals("USpeak"))
+            {
+                log = false;
+            }
+
+            if (log)
+            {
+                ModConsole.DebugLog($"RPC: {__0.DisplayName()}, {name}, {parameter}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
+            }
+
         }
     }
 }

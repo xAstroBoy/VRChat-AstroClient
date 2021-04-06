@@ -231,7 +231,7 @@ namespace AstroClient
                         {
                             if (Entry.name.StartsWith("Player Entry"))
                             {
-                                Debug($"Found Entry : {Entry.name}, Finding Link in Nodes...");
+                                //Debug($"Found Entry : {Entry.name}, Finding Link in Nodes...");
                                 int? EntryNumber = RemoveEntryText(Entry);
                                 if (EntryNumber != null)
                                 {
@@ -242,10 +242,10 @@ namespace AstroClient
                                             int? NodeNumber = RemoveNodeText(node);
                                             if (NodeNumber != null)
                                             {
-                                                Debug($"Comparing Entry Nr. {EntryNumber} Having Name {Entry.name} with Node nr {NodeNumber} having Name {node.name}");
+                                                //Debug($"Comparing Entry Nr. {EntryNumber} Having Name {Entry.name} with Node nr {NodeNumber} having Name {node.name}");
                                                 if (NodeNumber == EntryNumber)
                                                 {
-                                                    Debug($"Linked Player Entry : {Entry.name}, With node : {node.name}, with link : {NodeNumber}");
+                                                    //Debug($"Linked Player Entry : {Entry.name}, With node : {node.name}, with link : {NodeNumber}");
                                                     var addme = new LinkedNodes(Entry, node, NodeNumber.Value);
                                                     if (GetLinkedNode(addme.nodevalue) != null)
                                                     {
@@ -256,7 +256,7 @@ namespace AstroClient
                                                         if (!JarRoleLinks.Contains(addme))
                                                         {
                                                             JarRoleLinks.Add(addme);
-                                                            Debug($"Registered Player Entry : {addme.Entry.name}, With node : {addme.Node.name} with Link nr. {addme.nodevalue}");
+                                                            //Debug($"Registered Player Entry : {addme.Entry.name}, With node : {addme.Node.name} with Link nr. {addme.nodevalue}");
                                                             break;
                                                         }
                                                     }
