@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace AstroClient.Worlds
 {
-    public class WorldAddons : Overridables
+    public class WorldsCheats : Overridables
     {
 
 
@@ -21,6 +21,7 @@ namespace AstroClient.Worlds
             Murder4Cheats.Murder4CheatsButtons(WorldCheats, 1, 0.5f, true);
             AmongUSCheats.AmongUSCheatsButtons(WorldCheats, 1, 1f, true);
             HubButtonsControl.InitButtons(WorldCheats, 1, 1.5f, true);
+            FreezeTag.InitButtons(WorldCheats, 1, 2, true);
         }
 
         public override void OnWorldReveal(string id, string name, string asseturl)

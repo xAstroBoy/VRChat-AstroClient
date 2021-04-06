@@ -57,7 +57,6 @@ namespace AstroClient
             }
             set
             {
-                ModConsole.DebugWarning("IsOnRootScene bool has been set to : " + value);
                 _IsOnRootScene = value;
             }
         }

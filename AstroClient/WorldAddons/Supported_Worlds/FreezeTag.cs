@@ -1,8 +1,10 @@
-﻿using AstroClient.ConsoleUtils;
+﻿using AstroClient.AstroUtils.ItemTweaker;
+using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
 using AstroClient.Finder;
 using AstroClient.Variables;
 using DayClientML2.Utility.Extensions;
+using RubyButtonAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,8 @@ using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
 using VRC;
+using VRC.Udon;
+using VRC.Udon.Common.Interfaces;
 using static AstroClient.variables.CustomLists;
 
 namespace AstroClient
@@ -19,18 +23,49 @@ namespace AstroClient
 
         private static bool IsFreezeTag;
 
-        private static bool AutomaticallyUnfreeze; // Hoping it works lol
+        private static bool _AutomaticallyUnfreeze;
+
+        public static bool AutomaticallyUnfreeze
+        {
+            get
+            {
+                return _AutomaticallyUnfreeze;
+            }
+            set
+            {
+
+                _AutomaticallyUnfreeze = value;
+                if(UnfreezeAutoMode != null)
+                {
+                    UnfreezeAutoMode.setToggleState(value);
+                }
+
+            }
+        }
 
         private static GameObject SelfNode;
 
         private static bool HasFoundAssignedNode;
+
+        public static QMNestedButton FreezeTagCheatsPage;
+
+        public static QMToggleButton UnfreezeAutoMode;
+
+
+        public static void InitButtons(QMNestedButton main, float x, float y, bool btnhalf)
+        {
+            FreezeTagCheatsPage = new QMNestedButton(main, x, y, "Freeze Tag", "Freeze Tag Cheats", null, null, null, null, true);
+            UnfreezeAutoMode = new QMToggleButton(FreezeTagCheatsPage, 1, 0, "Auto Unfreeze ON", new Action(() => { AutomaticallyUnfreeze = true; }), "Auto Unfreeze OFF", new Action(() => { AutomaticallyUnfreeze = false; }), "Unfreezes you automatically", null, null, null);
+            NodeControlSubmenu(FreezeTagCheatsPage, 2, 0, false);
+        }
+
 
 
         public override void OnLevelLoaded()
         {
             IsFreezeTag = false;
             SelfNode = null;
-            AutomaticallyUnfreeze = true; // Hoping it works lol
+            AutomaticallyUnfreeze = false; // Hoping it works lol
             HasFoundAssignedNode = false;
             UnfreezeMeUdonEvent = null;
 
@@ -42,7 +77,11 @@ namespace AstroClient
             if (id == WorldIds.FreezeTag)
             {
                 IsFreezeTag = true;
-
+                if (FreezeTagCheatsPage != null)
+                {
+                    FreezeTagCheatsPage.getMainButton().setIntractable(true);
+                    FreezeTagCheatsPage.getMainButton().setTextColor(Color.green);
+                }
                 ModConsole.Log($"Recognized {name} World, removing anti-cheat mechanism!");
                 var SpawnRoof = GameObjectFinder.Find("spawn/mainroom 2/ceiling");
                 var Barriers = GameObjectFinder.Find("packmanmap/barriors");
@@ -56,9 +95,46 @@ namespace AstroClient
                 possiblenaticheatplane.DestroyMeLocal();
 
             }
+            else
+            {
+                IsFreezeTag = false;
+                if (FreezeTagCheatsPage != null)
+                {
+                    FreezeTagCheatsPage.getMainButton().setIntractable(false);
+                    FreezeTagCheatsPage.getMainButton().setTextColor(Color.red);
+                }
+            }
         }
 
         private static CachedUdonEvent UnfreezeMeUdonEvent;
+
+
+
+
+
+
+        public static void NodeControlSubmenu(QMNestedButton main, float x, float y, bool btnHalf)
+        {
+            var menu = new QMNestedButton(main, x, y, "Interact Node", "Interact with Node  Events", null, null, null, null, btnHalf);
+            var scroll = new QMHalfScroll(menu);
+            new QMSingleButton(menu, 0, -1, "Refresh", delegate
+            {
+                scroll.Refresh();
+            }, "", null, null, true);
+            scroll.SetAction(delegate
+            {
+                var udoneventholder = SelfNode.GetComponentInChildren<UdonBehaviour>(true);
+                foreach (var subaction in udoneventholder._eventTable)
+                {
+                    scroll.Add(
+                    new QMSingleButton(scroll.BaseMenu, 0, 0, $"{subaction.Key.ToString()}", delegate
+                    {
+                        udoneventholder.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
+                    }, $"Execute {subaction.Key}", null, null, true));
+                }
+            });
+        }
+
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
@@ -70,7 +146,6 @@ namespace AstroClient
                 }
                 try
                 {
-                    ModConsole.Log($"Sender : {sender.DisplayName()}, obj {obj.name} , Action : {action} ");
                     if (SelfNode == null)
                     {
                         if (sender.DisplayName() == LocalPlayerUtils.GetSelfPlayer().DisplayName())

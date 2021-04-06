@@ -241,7 +241,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\Murder2Cheats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WorldAddons\WorldAddons.cs" />
+    <Compile Include="WorldAddons\WorldsCheats.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\FBTHeaven.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\Meroom.cs" />
   </ItemGroup>
