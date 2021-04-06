@@ -2,6 +2,7 @@
 using AstroClient.variables;
 using ExitGames.Client.Photon;
 using Harmony;
+using MelonLoader;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -72,6 +73,11 @@ namespace AstroClient.BetterPatch
                 }
                 ModConsole.Log($"[Patches] Done! UnPatched {Patches.Count} Methods!");
             }
+        }
+
+        public override void OnApplicationStart()
+        {
+            MelonCoroutines.Start(Init());
         }
 
         private IEnumerator Init()

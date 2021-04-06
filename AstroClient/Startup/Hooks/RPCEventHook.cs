@@ -18,12 +18,18 @@
 
     public class RPCEventHook : Overridables
     {
+
+        // TODO : MAKE A UDONRPC OVERRIDABLE.
+
+
+        //public static 
         private HarmonyInstance harmony;
 
-        public override void OnWorldReveal(string id, string name, string asseturl)
+        public override void OnApplicationStart()
         {
             HookRPCEvents();
         }
+
 
         public void HookRPCEvents()
         {
@@ -64,6 +70,10 @@
                 ModConsole.DebugLog($"RPC: {__0.DisplayName()}, {name}, {parameter}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
             }
 
+            //if(parameter == "UdonSyncRunProgramAsRPC")
+            //{
+
+            //}
         }
     }
 }
