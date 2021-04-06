@@ -1,0 +1,59 @@
+﻿using AstroClient.ConsoleUtils;
+using AstroClient.extensions;
+using AstroClient.Finder;
+using AstroClient.Variables;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VRC.SDKBase;
+
+namespace AstroClient
+{
+    public class SnoozeScaryMaze5 : Overridables
+    {
+
+        public override void OnWorldReveal()
+        {
+            if (WorldUtils.GetWorldID() == WorldIds.SnoozeScaryMaze5)
+            {
+                ModConsole.Log("Recognized The Snooze's Scary Maze 5, Removing Anti-cheat protections..");
+                var roofanticheat = GameObjectFinder.Find("World/Roof & Preventions");
+                var cheatingroom = GameObjectFinder.Find("World/Cheating Room");
+                cheatingroom.DestroyMeLocal();
+                roofanticheat.DestroyMeLocal();
+                var snoozetools = GameObjectFinder.FindRootSceneObject("Snooze Tools");
+                if (snoozetools != null)
+                {
+                    var hammer = snoozetools.transform.FindObject("GameObject/Object").gameObject;
+                    if (hammer != null)
+                    {
+                        ModConsole.Log("Prepping Snooze Hammer for be used...");
+                        ModConsole.Log("Found Hammer! Modifying ...");
+                        hammer.RenameObject("Hammer");
+                        hammer.enablecolliders();
+                        hammer.SetPickupable(true);
+                        hammer.SetPickupOrientation(VRC.SDKBase.VRC_Pickup.PickupOrientation.Gun);
+                        hammer.SetPickupTheft(false);
+                        foreach (var item in hammer.GetComponentsInChildren<VRC_Trigger>(true))
+                        {
+                            ModConsole.DebugLog("Disabling SDK 1 Internal Trigger on Hammer..");
+                            item.enabled = false;
+                        }
+                        foreach (var item in hammer.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true))
+                        {
+                            ModConsole.DebugLog("Disabling SDK 2 Internal Trigger on Hammer..");
+                            item.enabled = false;
+                        }
+                        hammer.AddToWorldUtilsMenu();
+                    }
+                }
+                else
+                {
+                    ModConsole.Warning("Failed to find Snooze Tools!");
+                }
+            }
+        }
+    }
+}

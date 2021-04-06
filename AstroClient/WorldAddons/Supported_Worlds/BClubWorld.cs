@@ -12,39 +12,6 @@ namespace AstroClient
 {
     public class BClubWorld : Overridables
     {
-        public static void CloneTriggerToObject(GameObject OrigObj, GameObject DisplayObj, string InteractText)
-        {
-            try
-            {
-                var DeleteTrigger = DisplayObj.GetComponent<VRC_Trigger>();
-                var WorkingTrigger = OrigObj.GetComponent<VRC_Trigger>();
-                VRC_Trigger Cloned_trigger = null;
-
-                if (DeleteTrigger != null)
-                {
-                    DeleteTrigger.DestroyMeLocal();
-                }
-                if (WorkingTrigger != null)
-                {
-                    Cloned_trigger = DisplayObj.AddComponent<VRC_Trigger>().GetCopyOf(WorkingTrigger);
-                    if (Cloned_trigger != null)
-                    {
-                        Cloned_trigger.interactText = "[AstroClient]: " + InteractText;
-                    }
-                }
-                if (Cloned_trigger != null)
-                {
-                    DisplayObj.AddCollider();
-                    ModConsole.Log($"Added Successfully {InteractText}");
-                }
-            }
-            catch (Exception e)
-            {
-                ModConsole.DebugErrorExc(e);
-            }
-        }
-
-
         public override void OnWorldReveal()
         {
             if(WorldUtils.GetWorldID() == WorldIds.BClub)
@@ -75,16 +42,17 @@ namespace AstroClient
 
         private GameObject CreateButtonGroup(int doorID, Vector3 position, Quaternion rotation, bool flip = false)
         {
-            GameObject nlobby = SceneManager.GetActiveScene().GetRootGameObjects().Where(x => x.gameObject.name == "nLobby").First();
-            GameObject Bedrooms = SceneManager.GetActiveScene().GetRootGameObjects().Where(x => x.gameObject.name == "Bedrooms").First();
+            GameObject nlobby = GameObjectFinder.FindRootSceneObject("nLobby");
+            GameObject Bedrooms = GameObjectFinder.FindRootSceneObject("Bedrooms");
+                
             if (nlobby != null && Bedrooms != null)
             {
-                var room = nlobby.transform.Find($"Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");
-                var room_BedroomPreview = Bedrooms.transform.Find($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
-                var room_ToggleLooking = Bedrooms.transform.Find($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Looking");
-                var room_ToggleLock = Bedrooms.transform.Find($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
-                var room_ToggleIncognito = Bedrooms.transform.Find($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
-                var room_DND = Bedrooms.transform.Find($"Bedroom {doorID}/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
+                var room = nlobby.transform.FindObject($"Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");
+                var room_BedroomPreview = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
+                var room_ToggleLooking = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Looking");
+                var room_ToggleLock = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
+                var room_ToggleIncognito = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
+                var room_DND = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
 
 
                 GameObject buttonGroup = GameObject.CreatePrimitive(PrimitiveType.Plane);

@@ -178,6 +178,7 @@
     <Compile Include="AstroExtensions\ColliderExtensions.cs" />
     <Compile Include="AstroExtensions\RigidbodyExtensions.cs" />
     <Compile Include="AstroExtensions\SyncPhysicsExt.cs" />
+    <Compile Include="Utils\DeepCloneUtils\TriggersCloner.cs" />
     <Compile Include="Utils\Headlight\ColorConverter.cs" />
     <Compile Include="Utils\Headlight\Headlight.cs" />
     <Compile Include="Utils\PlayerMovement\Movement.cs" />
@@ -187,9 +188,13 @@
     <Compile Include="Variables\VRChatObjects.cs" />
     <Compile Include="Variables\WorldIds.cs" />
     <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />
-    <Compile Include="WorldAddons\Worlds\BClubWorld.cs" />
-    <Compile Include="WorldAddons\Worlds\Jar Worlds\AmongUSCheats.cs" />
-    <Compile Include="WorldAddons\Worlds\Jar Worlds\Murder4Cheats.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\BClubWorld.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\FreezeTag.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\SmashContest.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\TheGreatPug.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\SnoozeScaryMaze5.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\AmongUSCheats.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\Murder4Cheats.cs" />
     <Compile Include="Utils\Avatar\LewdVRChat.cs" />
     <Compile Include="Utils\ColliderViewer\ColliderDisplay.cs" />
     <Compile Include="Utils\ColliderViewer\ColliderToggler.cs" />
@@ -218,7 +223,7 @@
     <Compile Include="GameObject\Editor\Scale\ScaleEditor.cs" />
     <Compile Include="GameObject\Editor\Forces\Forces.cs" />
     <Compile Include="GameObject\Helpers\Helper.cs" />
-    <Compile Include="WorldAddons\Worlds\Hub.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\VRChatHub.cs" />
     <Compile Include="Utils\QPens\QVPensUtils.cs" />
     <Compile Include="Utils\QuickMenuUtils.cs" />
     <Compile Include="Utils\World\WorldUtils.cs" />
@@ -232,10 +237,11 @@
     <Compile Include="GameObject\Object Tweaker\ObjectMiscOptions.cs" />
     <Compile Include="Console\ModConsole.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="WorldAddons\Worlds\Jar Worlds\Murder2Cheats.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\Murder2Cheats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WorldAddons\WorldAddons.cs" />
-    <Compile Include="WorldAddons\WorldUnlocker.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\FBTHeaven.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\Meroom.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

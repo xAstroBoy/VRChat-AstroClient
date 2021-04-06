@@ -1,11 +1,13 @@
 ﻿using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace AstroClient.Finder
 {
-    public class GameObjectFinder
+    public static class GameObjectFinder
     {
         public static GameObject Find(string path)
         {
@@ -19,6 +21,31 @@ namespace AstroClient.Finder
                 ModConsole.Warning("[WARNING (Find) ]  Gameobject on path [ " + path + " ]  is Invalid, No Object Found!");
                 return null;
             }
+        }
+
+        public static GameObject FindRootSceneObject(string name)
+        {
+            GameObject obj = SceneManager.GetActiveScene().GetRootGameObjects().Where(x => x.gameObject.name == name).First();
+
+            if(obj == null)
+            {
+                ModConsole.Warning("[WARNING (FindRootSceneObject) ]  Root Gameobject name [ " + name + " ]  is Invalid, No Object Found!");
+            }
+
+            return obj;
+        }
+
+
+        public static Transform FindObject(this Transform transform, string path)
+        {
+            Transform obj = transform.Find(path);
+
+            if (obj == null)
+            {
+                ModConsole.Warning($"[WARNING (FindRootSceneObject) ]  Transform {transform.name} Doesnt have a object in path [ {path} ] !");
+            }
+
+            return obj;
         }
 
         public static List<GameObject> ListFind(string path)
