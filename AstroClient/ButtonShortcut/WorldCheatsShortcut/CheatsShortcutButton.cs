@@ -16,16 +16,16 @@ namespace AstroClient.ButtonShortcut
             WorldCheatsShortcut = new QMSingleButton("ShortcutMenu", x, y, "Cheats Shortcut", null, "Cheats Shortcut", null, null, btnHalf);
         }
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            if (WorldUtils.GetWorldID() == WorldIds.VRChatDefaultHub)
+            if (id == WorldIds.VRChatDefaultHub)
             {
                 SetButtonText("Hub Mods", "Control HUB World.");
                 SetButtonShortcut(HubButtonsControl.VRChat_Hub_Addons);
                 SetButtonColor(Color.green);
                 ToggleButtonVisibilityAndInteractivity(true);
             }
-            else if (WorldUtils.GetWorldID() == WorldIds.AmongUS)
+            else if (id == WorldIds.AmongUS)
             {
                 if (AmongUSCheats.AmongUsCheatsPage != null)
                 {
@@ -35,7 +35,7 @@ namespace AstroClient.ButtonShortcut
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-            else if (WorldUtils.GetWorldID() == WorldIds.Murder2)
+            else if (id == WorldIds.Murder2)
             {
                 if (Murder2Cheats.Murder2CheatPage != null)
                 {
@@ -45,7 +45,7 @@ namespace AstroClient.ButtonShortcut
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-            else if (WorldUtils.GetWorldID() == WorldIds.Murder4)
+            else if (id == WorldIds.Murder4)
             {
                 if (Murder4Cheats.Murder4CheatPage != null)
                 {

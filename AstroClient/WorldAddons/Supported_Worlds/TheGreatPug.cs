@@ -13,11 +13,11 @@ namespace AstroClient
     public class TheGreatPug : Overridables
     {
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            if (WorldUtils.GetWorldID() == WorldIds.TheGreatPug)
+            if (id == WorldIds.TheGreatPug)
             {
-                ModConsole.Log("Recognized The Great Pug World, Removing Basement Door & Kitchen Door.");
+                ModConsole.Log($"Recognized {name} World, Removing Basement Door & Kitchen Door.");
                 var BasementDoor = GameObjectFinder.Find(" - Props/Props (Static) - Hallways - First Floor/door-private");
                 var Kitchen1 = GameObjectFinder.Find("great_pug/kitchen_door");
                 var kitchen2 = GameObjectFinder.Find("great_pug/kitchen_door_chrome");

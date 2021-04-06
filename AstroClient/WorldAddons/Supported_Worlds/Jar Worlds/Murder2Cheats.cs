@@ -139,13 +139,13 @@ namespace AstroClient
             }
         }
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            if (WorldUtils.GetWorldID() == WorldIds.Murder2)
+            if (id == WorldIds.Murder2)
             {
                 if (Murder2CheatPage != null)
                 {
-                    ModConsole.Log("Recognized Murder 2's world, Unlocking Murder 2 cheats menu!", System.Drawing.Color.Green);
+                    ModConsole.Log($"Recognized {name} World, Unlocking Murder 2 cheats menu!", System.Drawing.Color.Green);
                     Murder2CheatPage.getMainButton().setIntractable(true);
                     Murder2CheatPage.getMainButton().setTextColor(Color.green);
                 }

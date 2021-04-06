@@ -47,7 +47,7 @@
             ClassInjector.RegisterTypeInIl2Cpp<Astro_Interactable>();
         }
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
 #if CHEETOS
             //var testButton = GameObject.CreatePrimitive(PrimitiveType.Sphere);

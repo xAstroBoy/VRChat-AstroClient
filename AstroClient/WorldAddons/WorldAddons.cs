@@ -23,13 +23,13 @@ namespace AstroClient.Worlds
             HubButtonsControl.InitButtons(WorldCheats, 1, 1.5f, true);
         }
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            if (WorldUtils.GetWorldID() == WorldIds.VRChatDefaultHub)
+            if (id == WorldIds.VRChatDefaultHub)
             {
                 if (HubButtonsControl.VRChat_Hub_Addons != null)
                 {
-                    ModConsole.Log("Recognized VRCHat Hub's world, revealing Hub Addons Submenu Button!", System.Drawing.Color.Green);
+                    ModConsole.Log($"Recognized {name} World, revealing Hub Addons Submenu Button!", System.Drawing.Color.Green);
                     HubButtonsControl.VRChat_Hub_Addons.getMainButton().setIntractable(true);
                     HubButtonsControl.VRChat_Hub_Addons.getMainButton().setTextColor(Color.green);
                 }
@@ -43,9 +43,9 @@ namespace AstroClient.Worlds
                 }
             }
 
-            if (WorldUtils.GetWorldID() == WorldIds.TermalTreatment)
+            if (id == WorldIds.TermalTreatment)
             {
-                ModConsole.Log("Recognized Thermal Treatment World, Finding Platforms Gameobjects!...");
+                ModConsole.Log($"Recognized {name} World, Finding Platforms Gameobjects!...");
                 var list = new List<GameObject>();
                 list = GameObjectFinder.ListFind("Platforms");
                 if (list != null && list.Count() != 0)
@@ -53,9 +53,9 @@ namespace AstroClient.Worlds
                     list.AddToWorldUtilsMenu();
                 }
             }
-            if (WorldUtils.GetWorldID() == WorldIds.DontTripWorld)
+            if (id == WorldIds.DontTripWorld)
             {
-                ModConsole.Log("Recognized Dont Trip World, Finding Entity Gameobjects!...");
+                ModConsole.Log($"Recognized {name} World, Finding Entity Gameobjects!...");
                 GameObjectFinder.Find("GameObject/Level/cube (5)/what the fuck").AddToWorldUtilsMenu();
             }
         }

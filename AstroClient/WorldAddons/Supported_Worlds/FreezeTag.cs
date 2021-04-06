@@ -13,11 +13,11 @@ namespace AstroClient
     public class FreezeTag : Overridables
     {
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            if (WorldUtils.GetWorldID() == WorldIds.FreezeTag)
+            if (id == WorldIds.FreezeTag)
             {
-                ModConsole.Log("Recognized Freeze Tag World, removing anti-cheat mechanism!");
+                ModConsole.Log($"Recognized {name} World, removing anti-cheat mechanism!");
                 var SpawnRoof = GameObjectFinder.Find("spawn/mainroom 2/ceiling");
                 var Barriers = GameObjectFinder.Find("packmanmap/barriors");
                 var OutsideMazePlane = GameObjectFinder.Find("packmanmap/Plane (4)");

@@ -316,14 +316,14 @@ namespace AstroClient
             ShotGuns.AddCrazyComponent(false);
         }
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            if (WorldUtils.GetWorldID() == WorldIds.Murder4)
+            if (id == WorldIds.Murder4)
             {
                 HasMurder4WorldLoaded = true;
                 if (Murder4CheatPage != null)
                 {
-                    ModConsole.Log("Recognized Murder 4's world, Unlocking Murder 4 cheats menu!", System.Drawing.Color.Green);
+                    ModConsole.Log($"Recognized {name} World, Unlocking Murder 4 cheats menu!", System.Drawing.Color.Green);
                     Murder4CheatPage.getMainButton().setIntractable(true);
                     Murder4CheatPage.getMainButton().setTextColor(Color.green);
                 }

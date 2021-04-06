@@ -14,11 +14,11 @@ namespace AstroClient
     public class SnoozeScaryMaze5 : Overridables
     {
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            if (WorldUtils.GetWorldID() == WorldIds.SnoozeScaryMaze5)
+            if (id == WorldIds.SnoozeScaryMaze5)
             {
-                ModConsole.Log("Recognized The Snooze's Scary Maze 5, Removing Anti-cheat protections..");
+                ModConsole.Log($"Recognized {name} World, Removing Anti-cheat protections..");
                 var roofanticheat = GameObjectFinder.Find("World/Roof & Preventions");
                 var cheatingroom = GameObjectFinder.Find("World/Cheating Room");
                 cheatingroom.DestroyMeLocal();

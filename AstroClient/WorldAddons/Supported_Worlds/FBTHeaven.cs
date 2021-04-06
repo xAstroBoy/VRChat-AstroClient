@@ -13,11 +13,11 @@ namespace AstroClient
     public class FBTHeaven : Overridables
     {
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            if (WorldUtils.GetWorldID() == WorldIds.FBTHeaven)
+            if (id == WorldIds.FBTHeaven)
             {
-                ModConsole.Log("Recognized FBT Heaven! Removing Blinders and Dividers...");
+                ModConsole.Log($"Recognized {name} World,  Removing Blinders and Dividers...");
                 var blinders = GameObjectFinder.Find("[AREA_DEVIDERS]");
                 if (blinders != null)
                 {

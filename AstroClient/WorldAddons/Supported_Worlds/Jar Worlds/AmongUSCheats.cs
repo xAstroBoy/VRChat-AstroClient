@@ -102,14 +102,14 @@ namespace AstroClient
             }
         }
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            if (WorldUtils.GetWorldID() == WorldIds.AmongUS)
+            if (id == WorldIds.AmongUS)
             {
                 HasAmongUsWorldLoaded = true;
                 if (AmongUsCheatsPage != null)
                 {
-                    ModConsole.Log("Recognized Among US world, Unlocking Among US cheats menu!", System.Drawing.Color.Green);
+                    ModConsole.Log($"Recognized {name} World, Unlocking Among US cheats menu!", System.Drawing.Color.Green);
                     AmongUsCheatsPage.getMainButton().setIntractable(true);
                     AmongUsCheatsPage.getMainButton().setTextColor(Color.green);
                 }

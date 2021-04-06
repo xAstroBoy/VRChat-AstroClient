@@ -192,10 +192,10 @@ namespace AstroClient
             return null;
         }
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            isAmongUsWorld = (WorldUtils.GetWorldID() == WorldIds.AmongUS);
-            IsMurder4World = (WorldUtils.GetWorldID() == WorldIds.Murder4);
+            isAmongUsWorld = (id == WorldIds.AmongUS);
+            IsMurder4World = (id == WorldIds.Murder4);
 
             if (isAmongUsWorld || IsMurder4World)
             {

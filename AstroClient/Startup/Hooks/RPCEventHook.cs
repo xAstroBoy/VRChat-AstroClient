@@ -20,7 +20,7 @@
     {
         private HarmonyInstance harmony;
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
             HookRPCEvents();
         }

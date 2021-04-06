@@ -13,9 +13,9 @@ namespace AstroClient
     public class SmashContest : Overridables
     {
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            if (WorldUtils.GetWorldID() == WorldIds.SmashContest)
+            if (id == WorldIds.SmashContest)
             {
                 ModConsole.DebugLog("Recognized Smash Contest, Searching For Sandbag");
                 var sandbag = GameObjectFinder.Find("SandBag");

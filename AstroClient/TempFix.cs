@@ -6,11 +6,13 @@ namespace AstroClient
     // TODO : REMOVE IT.
     public class TempFix : Overridables
     {
-        public override void OnWorldReveal()
+        // TODO : REMOVE AND MERGE INTO THE COMPONENT DIRECTLY
+
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            ModConsole.Log("You entered this world : " + WorldUtils.GetWorldName(), System.Drawing.Color.Goldenrod);
-            ModConsole.Log("World ID : " + WorldUtils.GetWorldID(), System.Drawing.Color.Goldenrod);
-            ModConsole.Log("World Asset URL : " + WorldUtils.GetWorldAssetURL(), System.Drawing.Color.Goldenrod);
+            ModConsole.Log("You entered this world : " + name, System.Drawing.Color.Goldenrod);
+            ModConsole.Log("World ID : " + id, System.Drawing.Color.Goldenrod);
+            ModConsole.Log("World Asset URL : " + asseturl, System.Drawing.Color.Goldenrod);
         }
 
         public override void OnLevelLoaded()

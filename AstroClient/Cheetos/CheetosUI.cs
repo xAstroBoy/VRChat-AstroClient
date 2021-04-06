@@ -60,7 +60,7 @@
 #endif
         }
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
 #if CHEETOS
             var uiManager = VRCUiManager.prop_VRCUiManager_0;
@@ -99,7 +99,7 @@
             }
         }
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
         }
     }

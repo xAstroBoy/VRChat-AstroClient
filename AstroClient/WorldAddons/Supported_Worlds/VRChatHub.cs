@@ -81,6 +81,7 @@ namespace AstroClient.World.Hub
         {
             if (isHubWorldLoaded)
             {
+
                 if (!HasAnalyzedHubGameObjects)
                 {
                     AnalyzeHubForGameObjects();
@@ -97,9 +98,9 @@ namespace AstroClient.World.Hub
             }
         }
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            if (GetWorldID() == WorldIds.VRChatDefaultHub)
+            if (id == WorldIds.VRChatDefaultHub)
             {
                 isHubWorldLoaded = true;
             }
@@ -111,7 +112,7 @@ namespace AstroClient.World.Hub
 
         public static void AnalyzeHubForGameObjects()
         {
-            if (GetWorldID() == WorldIds.VRChatDefaultHub)
+            if (isHubWorldLoaded)
             {
                 if (Button_toggle_Table_Props == null && Button_toggle_MirrorProps == null && Button_toggle_BeachBall == null && Button_toggle_CrystalBlocks == null && Button_toggle_Boats == null)
                 {
@@ -173,6 +174,7 @@ namespace AstroClient.World.Hub
                     HasAnalyzedHubGameObjects = true;
                 }
             }
+
         }
 
         public static void ToggleHubButtonLock()

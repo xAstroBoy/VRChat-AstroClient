@@ -54,7 +54,7 @@ namespace AstroClient.Skyboxes
 
         private static Material OriginalSkybox;
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
             if(!HasLoadedCachedSkyboxes)
             {

@@ -12,11 +12,11 @@ namespace AstroClient
 {
     public class Meroom : Overridables
     {
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            if (WorldUtils.GetWorldID() == WorldIds.Meroom)
+            if (id == WorldIds.Meroom)
             {
-                ModConsole.Log("Recognized Meroom, Spawning Lockpick Trigger.");
+                ModConsole.Log($"Recognized {name} World, Spawning Lockpick Trigger.");
 
                 var PrivateRoomSwitchTrigger = GameObjectFinder.Find("Private room/Button/switch");
                 var DisplaySwitchTrigger = GameObjectFinder.Find("Living room/Button/switch (1)");

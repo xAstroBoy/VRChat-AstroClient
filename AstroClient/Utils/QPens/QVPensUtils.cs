@@ -13,7 +13,7 @@ namespace AstroClient
 {
     public class QVPensUtils : Overridables
     {
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
             FindQVPenSet();
         }

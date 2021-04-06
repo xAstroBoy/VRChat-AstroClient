@@ -108,7 +108,7 @@ namespace AstroClient
             return target.field_Private_Player_0;
         }
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
             ModConsole.Log("This instance has " + GetAllPlayers0().Count() + " Players.", Color.Gold);
         }

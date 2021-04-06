@@ -96,7 +96,6 @@
                 ModConsole.ErrorExc(Exc);
             }
 
-            // TODO : REMOVE AND MERGE INTO THE COMPONENT DIRECTLY
         }
 
         private void Internal_OnPlayerLeft(object sender, PlayerEventArgs e)
@@ -135,11 +134,11 @@
             }
         }
 
-        private void Internal_OnWorldReveal(object sender, EventArgs e)
+        private void Internal_OnWorldReveal(object sender, OnWorldRevealArgs e)
         {
             try
             {
-                OnWorldReveal();
+                OnWorldReveal(e.ID, e.Name, e.AssetUrl);
             }
             catch (Exception Exc)
             {
@@ -215,7 +214,7 @@
         {
         }
 
-        public virtual void OnWorldReveal()
+        public virtual void OnWorldReveal(string id, string Name, string AssetURL)
         {
         }
     }

@@ -41,7 +41,7 @@ namespace AstroClient
             InflaterScaleMode = false;
         }
 
-        public override void OnWorldReveal()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
             if (CurrentTarget == null)
             {
