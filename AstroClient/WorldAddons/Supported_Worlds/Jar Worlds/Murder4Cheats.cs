@@ -15,6 +15,8 @@ using AstroClient.UdonExploits;
 using AstroClient.Variables;
 using static AstroClient.variables.CustomLists;
 using VRC.Udon;
+using VRC;
+using DayClientML2.Utility.Extensions;
 
 #endregion AstroClient Imports
 
@@ -22,103 +24,6 @@ namespace AstroClient
 {
     public class Murder4Cheats : Overridables
     {
-        // TODO: FIGURE HOW TO FIX PARTICLES (ONLY GOLD CAMO WORKS)
-        public static void UnlockPatreonTiers()
-        {
-            //PatreonFlairtoggle = GameObjectFinder.Find("Game Logic/Options Canvas/Contents/Toggle (Patron Flair)");
-            //if (PatreonFlairtoggle != null)
-            //{
-            //    var patreonlbl = PatreonFlairtoggle.transform.Find("Label (Patrons)");
-            //    var nonpatreonlbl = PatreonFlairtoggle.transform.Find("Label (Non patrons)");
-            //    if (patreonlbl != null && nonpatreonlbl != null)
-            //    {
-            //        var text1 = nonpatreonlbl.GetComponentInChildren<Text>();
-            //        var text2 = patreonlbl.GetComponentInChildren<Text>();
-
-            //        if (text1 != null && text2 != null)
-            //        {
-            //            text1.color = Color.yellow;
-            //            text1.text = "Hacked " + text2.text;
-            //        }
-            //    }
-
-            //    var toggle = PatreonFlairtoggle.GetComponent<UnityEngine.UI.Toggle>();
-            //    if (toggle != null)
-            //    {
-            //        ModConsole.Log("Found Patreon Internal Toggle, Unlocking..!");
-            //        toggle.interactable = true;
-            //        toggle.isOn = true;
-            //    }
-            //}
-
-            //ModConsole.Log("Unlocking Gold Revolver camo (patreon only)...");
-            //var DetectiveRecoil = GameObjectFinder.Find("Game Logic/Weapons/Revolver/Recoil Anim/Recoil");
-            //if (DetectiveRecoil != null)
-            //{
-            //    var patreonskin = DetectiveRecoil.transform.Find("geo (patron)");
-            //    var nonpatreon = DetectiveRecoil.transform.Find("geo");
-            //    if (patreonskin != null && nonpatreon != null)
-            //    {
-            //        ModConsole.Log("Replacing non patreon skin.");
-            //        var oldrend = nonpatreon.GetComponent<MeshRenderer>();
-            //        var patreonrend = patreonskin.GetComponent<MeshRenderer>();
-            //        if (oldrend != null && patreonrend != null)
-            //        {
-            //            oldrend.DestroyMeLocal();
-            //        }
-            //        if (oldrend == null && patreonrend != null)
-            //        {
-            //            oldrend = nonpatreon.gameObject.CopyComponent(patreonrend);
-            //            if (oldrend != null)
-            //            {
-            //                oldrend.enabled = true;
-            //                ModConsole.Log("Replaced Revolver Skin with Patreon Camo");
-            //                //ModConsole.Log("Adding Particles...");
-            //                //var PatreonParticles = patreonskin.transform.Find("Patron gun particles");
-            //                //if (PatreonParticles != null)
-            //                //{
-            //                //    var particleholder = new GameObject();
-            //                //    if (particleholder != null)
-            //                //    {
-            //                //        particleholder.RenameObject("Gun Particles");
-
-            //                //        var particlesystem = PatreonParticles.GetComponentInChildren<ParticleSystem>();
-            //                //        var particlesystemrenderer = PatreonParticles.GetComponentInChildren<ParticleSystemRenderer>();
-
-            //                //        var Clone_particlesystem = particleholder.GetComponentInChildren<ParticleSystem>();
-            //                //        var Clone_particlesystemrenderer = particleholder.GetComponentInChildren<ParticleSystemRenderer>();
-            //                //        if (Clone_particlesystem != null)
-            //                //        {
-            //                //            Clone_particlesystem.DestroyMeLocal();
-            //                //        }
-            //                //        if(Clone_particlesystemrenderer != null)
-            //                //        {
-            //                //            Clone_particlesystemrenderer.DestroyMeLocal();
-            //                //        }
-            //                //        //particleholder.transform.CopyTransform(PatreonParticles.transform);
-            //                //        particleholder.transform.SetParent(nonpatreon);
-
-            //                //        if(Clone_particlesystemrenderer == null)
-            //                //        {
-            //                //            Clone_particlesystemrenderer = particleholder.AddComponent<ParticleSystemRenderer>().GetCopyOf<ParticleSystemRenderer>(particlesystemrenderer);
-            //                //            ModConsole.Log("Clone_particlesystemrenderer set to : " + Clone_particlesystemrenderer.transform.name);
-            //                //        }
-            //                //        if (Clone_particlesystem == null)
-            //                //        {
-            //                //            Clone_particlesystem = particleholder.AddComponent<ParticleSystem>().GetCopyOf<ParticleSystem>(particlesystem);
-            //                //            ModConsole.Log("Clone_particlesystem set to : " + Clone_particlesystem.transform.name);
-
-            //                //        }
-
-            //                //        particleholder.SetActiveRecursively(true);
-            //                //    }
-            //                //}
-            //            }
-            //        }
-            //    }
-            //}
-        }
-
         public static void FindGameMurderObjects()
         {
             ModConsole.Log("Removing Anti-Peek Protection...");
@@ -270,8 +175,6 @@ namespace AstroClient
             Knifes.RegisterMurderItemEsp();
 
             Clues.AddToWorldUtilsMenu();
-            float box = 0.03f;
-            Clues.AddBoxCollider(new Vector3(box, box, box));
 
             ModConsole.Log("Found Tot Clues : " + Clues.Count());
             ModConsole.Log("Found Tot Detective Guns : " + DetectiveGuns.Count());
@@ -382,6 +285,11 @@ namespace AstroClient
             isChristmasMode = false;
             DoUnlockedSound = false;
             OnPlayerUnlockedClues = null;
+            TargetNode = null;
+            HasBystanderRole = false;
+            HasDetectiveRole = false;
+            hasMurdererRole = false;
+            SelfNode = null;
         }
 
         public static void Murder4CheatsButtons(QMNestedButton submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
@@ -542,6 +450,10 @@ namespace AstroClient
 
             #endregion Watchers
 
+            // FUCK NO CLUE WHERE TO PLACE THE NEW BUTTONS LOL BRB
+            Murder4UdonExploits.Init_RoleSwap_Menu(Murder4CheatPage, 2, 0.5f, true);
+
+
             GameObjectESP.Murder4ESPtoggler = new QMSingleToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
             JarRoleController.Murder4RolesRevealerToggle = new QMSingleToggleButton(Murder4CheatPage, 3, 0.5f, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", Color.green, Color.red, null, false, true);
             Murder4UdonExploits.Init_GameController_Btn(Murder4CheatPage, 4, 0, true);
@@ -592,6 +504,19 @@ namespace AstroClient
                 Pickup.RestoreOriginalProperty(knife);
             }
         }
+
+
+
+
+
+
+
+
+        private static bool HasBystanderRole;
+        private static bool HasDetectiveRole;
+        private static bool hasMurdererRole;
+        private static GameObject TargetNode;
+        private static GameObject SelfNode;
 
         // MAP GameObjects Required for control.
 
@@ -704,5 +629,6 @@ namespace AstroClient
         public static CachedUdonEvent VictoryMurdererEvent;
 
         public static bool HasMurder4WorldLoaded = false;
+
     }
 }

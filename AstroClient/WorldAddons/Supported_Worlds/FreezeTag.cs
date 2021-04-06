@@ -107,6 +107,7 @@ namespace AstroClient
         }
 
         private static CachedUdonEvent UnfreezeMeUdonEvent;
+        private static CachedUdonEvent RefreezeMeUdonEvent;
 
 
 
