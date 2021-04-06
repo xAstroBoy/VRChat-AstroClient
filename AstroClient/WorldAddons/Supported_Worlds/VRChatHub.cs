@@ -5,11 +5,11 @@ using static VRC.SDKBase.VRC_EventHandler;
 
 #region AstroClient Imports
 
-using static AstroClient.WorldUtils;
 using static AstroClient.LocalPlayerUtils;
 using System;
 using AstroClient.ConsoleUtils;
 using AstroClient.Variables;
+using AstroClient.Finder;
 
 #endregion AstroClient Imports
 
@@ -81,10 +81,9 @@ namespace AstroClient.World.Hub
         {
             if (isHubWorldLoaded)
             {
-
                 if (!HasAnalyzedHubGameObjects)
                 {
-                    AnalyzeHubForGameObjects();
+                    FindHubButtons();
                 }
                 if ((Time.time - LastTimeCheck > 0.9f))
                 {
@@ -98,11 +97,45 @@ namespace AstroClient.World.Hub
             }
         }
 
+        public static void FindHubButtons()
+        {
+            if (!HasAnalyzedHubGameObjects)
+            {
+                if (Button_toggle_Boats == null)
+                {
+                    Button_toggle_Boats = GameObjectFinder.Find("_UI/UI_HotSpring_Buttons/Button_Prop_Boats");
+                }
+
+                if (Button_toggle_BeachBall == null)
+                {
+                    Button_toggle_BeachBall = GameObjectFinder.Find("_UI/UI_HotSpring_Buttons/Button_Prop_BeachBall");
+                }
+
+                if (Button_toggle_CrystalBlocks == null)
+                {
+                    Button_toggle_CrystalBlocks = GameObjectFinder.Find("_UI/UI_Crystal_Buttons/Button_CrystalBlocks");
+                }
+
+                if (Button_toggle_MirrorProps == null)
+                {
+                    Button_toggle_MirrorProps = GameObjectFinder.Find("_UI/UI_Mirror_Buttons/Button_Enable_Props");
+                }
+
+                if (Button_toggle_Table_Props == null)
+                {
+                    Button_toggle_Table_Props = GameObjectFinder.Find("_UI/UI_Mirror_Buttons/Button_Enable_Table_Props");
+                }
+
+                HasAnalyzedHubGameObjects = true;
+            }
+        }
+
         public override void OnWorldReveal(string id, string name, string asseturl)
         {
             if (id == WorldIds.VRChatDefaultHub)
             {
                 isHubWorldLoaded = true;
+                FindHubButtons();
             }
             else
             {
@@ -110,79 +143,8 @@ namespace AstroClient.World.Hub
             }
         }
 
-        public static void AnalyzeHubForGameObjects()
-        {
-            if (isHubWorldLoaded)
-            {
-                if (Button_toggle_Table_Props == null && Button_toggle_MirrorProps == null && Button_toggle_BeachBall == null && Button_toggle_CrystalBlocks == null && Button_toggle_Boats == null)
-                {
-                    var list = Resources.FindObjectsOfTypeAll<GameObject>();
-                    foreach (var item in list)
-                    {
-                        if (item != null)
-                        {
-                            if (item.name.ToLower() == "button_enable_table_props")
-                            {
-                                if (Button_toggle_Table_Props == null)
-                                {
-                                    Button_toggle_Table_Props = item;
-                                    //OriginalColor_Buttontoggle_Table_Props = item.GetComponentInChildren<Renderer>().material.color;
-                                    ModConsole.Log("Found Button_Enable_Table_Props");
-                                }
-                            }
-                            if (item.name.ToLower() == "button_enable_props")
-                            {
-                                if (Button_toggle_MirrorProps == null)
-                                {
-                                    Button_toggle_MirrorProps = item;
-                                    //OriginalColor_Buttontoggle_MirrorProps = item.GetComponentInChildren<Renderer>().material.color;
-                                    ModConsole.Log("Found Button_Enable_MirrorProps");
-                                }
-                            }
-                            if (item.name.ToLower() == "button_prop_beachball")
-                            {
-                                if (Button_toggle_BeachBall == null)
-                                {
-                                    Button_toggle_BeachBall = item;
-                                    //OriginalColor_Buttontoggle_BeachBall = item.GetComponentInChildren<Renderer>().material.color;
-                                    ModConsole.Log("Found Button_Prop_BeachBall");
-                                }
-                            }
-                            if (item.name.ToLower() == "button_crystalblocks")
-                            {
-                                if (Button_toggle_CrystalBlocks == null)
-                                {
-                                    Button_toggle_CrystalBlocks = item;
-                                    //OriginalColor_Buttontoggle_CrystalBlocks = item.GetComponentInChildren<Renderer>().material.color;
-                                    ModConsole.Log("Found Button_CrystalBlocks");
-                                }
-                            }
-                            if (item.name.ToLower() == "button_prop_boats")
-                            {
-                                if (Button_toggle_Boats == null)
-                                {
-                                    Button_toggle_Boats = item;
-                                    //OriginalColor_Buttontoggle_Boats = item.GetComponentInChildren<Renderer>().material.color;
-                                    ModConsole.Log("Found Button_Prop_Boats");
-                                }
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    HasAnalyzedHubGameObjects = true;
-                }
-            }
-
-        }
-
         public static void ToggleHubButtonLock()
         {
-            if (!HasAnalyzedHubGameObjects)
-            {
-                AnalyzeHubForGameObjects();
-            }
             IsHubButtonLocked = !IsHubButtonLocked;
         }
 
