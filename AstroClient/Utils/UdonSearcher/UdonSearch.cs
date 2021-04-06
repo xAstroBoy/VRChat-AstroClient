@@ -31,5 +31,26 @@ namespace AstroClient
             return null;
         }
 
+
+        public static CachedUdonEvent FindUdonEvent(GameObject obj, string subaction)
+        {
+            var actionObject = obj.GetComponentInChildren<UdonBehaviour>(true);
+            if (actionObject != null)
+            {
+                foreach (var actionkeys in actionObject._eventTable)
+                {
+                    if (actionkeys.key == subaction)
+                    {
+                        ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {actionObject.gameObject.name}");
+                        return new CachedUdonEvent(actionObject, actionkeys.key);
+                    }
+                }
+            }
+
+            return null;
+        }
+
+
+
     }
 }

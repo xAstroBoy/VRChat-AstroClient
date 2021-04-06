@@ -68,11 +68,12 @@
     <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
     <Compile Include="Cheetos\PlayerMenuUI.cs" />
     <Compile Include="Cheetos\Config\JSonWriter.cs" />
-    <Compile Include="EventArgs\OnAvatarSpawnArgs.cs" />
-    <Compile Include="EventArgs\OnWorldRevealArgs.cs" />
-    <Compile Include="EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
-    <Compile Include="EventArgs\SpawnEmojiArgs.cs" />
-    <Compile Include="EventArgs\RayCastEventArgs.cs" />
+    <Compile Include="Startup\EventArgs\OnAvatarSpawnArgs.cs" />
+    <Compile Include="Startup\EventArgs\UdonSyncRPCEventArgs.cs" />
+    <Compile Include="Startup\EventArgs\OnWorldRevealArgs.cs" />
+    <Compile Include="Startup\EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
+    <Compile Include="Startup\EventArgs\SpawnEmojiArgs.cs" />
+    <Compile Include="Startup\EventArgs\RayCastEventArgs.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Overridables.cs" />
     <Compile Include="Console\CheetosConsole\Console.cs" />
@@ -151,7 +152,7 @@
     <Compile Include="GameObject\Components\PlayerAttacker\PlayerAttackerManager.cs" />
     <Compile Include="GameObject\Editor\ESP\GameObjectESP.cs" />
     <Compile Include="Patches\Patching.cs" />
-    <Compile Include="EventArgs\PlayerEventArgs.cs" />
+    <Compile Include="Startup\EventArgs\PlayerEventArgs.cs" />
     <Compile Include="Skyboxes\SkyboxEditor.cs" />
     <Compile Include="Buttons\RandomSubmenus.cs" />
     <Compile Include="Buttons\WorldPickupsBtn.cs" />

@@ -4,6 +4,7 @@
     using AstroClient.Startup.Hooks;
     using System;
     using UnityEngine;
+    using VRC;
     using VRC.SDKBase;
 
     // thanks TO Cheeto aka Craig on discord, he's been really helpful!
@@ -26,6 +27,10 @@
                 OnWorldRevealHook.Event_OnWorldReveal += Internal_OnWorldReveal;
                 SpawnEmojiRPCHook.Event_SpawnEmojiRPC += Internal_SpawnEmojiRPC;
                 TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += Internal_VRC_EventDispatcherRFC_triggerEvent;
+
+                RPCEventHook.Event_OnUdonSyncRPC += Internal_OnUdonSyncRPCEvent;
+
+
                 AvatarManagerHook.Event_OnAvatarSpawn += Internal_OnAvatarSpawn;
 
                 NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
@@ -158,6 +163,19 @@
             }
         }
 
+        private void Internal_OnUdonSyncRPCEvent(object sender, UdonSyncRPCEventArgs e)
+        {
+            try
+            {
+                OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
+            }
+            catch (Exception Exc)
+            {
+                ModConsole.ErrorExc(Exc);
+            }
+        }
+
+
         private void Internal_OnAvatarSpawn(object sender, OnAvatarSpawnArgs e)
         {
             try
@@ -213,6 +231,13 @@
         public virtual void OnAvatarSpawn(GameObject avatar, VRC.SDKBase.VRC_AvatarDescriptor DescriptorObj, bool state)
         {
         }
+
+        public virtual void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        {
+        }
+
+
+
 
         public virtual void OnWorldReveal(string id, string Name, string AssetURL)
         {

@@ -21,6 +21,7 @@
 
         // TODO : MAKE A UDONRPC OVERRIDABLE.
 
+        public static event EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
 
         //public static 
         private HarmonyInstance harmony;
@@ -46,10 +47,12 @@
         {
             var array = Networking.DecodeParameters(__1.ParameterBytes);
             string text = string.Empty;
+            string actiontext = string.Empty;
 
             foreach (var item in array)
             {
-                text += $"[{item.ToString()}] ";
+                text += $"[{item.ToString()}]";
+                actiontext += item.ToString();
                 //ModConsole.DebugLog(item.ToString());
             }
 
@@ -65,15 +68,19 @@
                 log = false;
             }
 
+
+            if (parameter == "UdonSyncRunProgramAsRPC")
+            {
+                Event_OnUdonSyncRPC?.Invoke(null, new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
+
+            }
+
             if (log)
             {
                 ModConsole.DebugLog($"RPC: {__0.DisplayName()}, {name}, {parameter}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
             }
 
-            //if(parameter == "UdonSyncRunProgramAsRPC")
-            //{
 
-            //}
         }
     }
 }
