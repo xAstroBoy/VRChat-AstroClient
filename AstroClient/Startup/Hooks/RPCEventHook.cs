@@ -46,6 +46,7 @@
         private static void OnRPCEvent(ref Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
         {
             var array = Networking.DecodeParameters(__1.ParameterBytes);
+            string textSelf = LocalPlayerUtils.GetSelfPlayer().DisplayName();
             string text = string.Empty;
             string actiontext = string.Empty;
 
@@ -68,7 +69,6 @@
                 log = false;
             }
 
-
             if (parameter == "UdonSyncRunProgramAsRPC")
             {
                 Event_OnUdonSyncRPC?.Invoke(null, new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
@@ -79,8 +79,6 @@
             {
                 ModConsole.DebugLog($"RPC: {__0.DisplayName()}, {name}, {parameter}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
             }
-
-
         }
     }
 }
