@@ -268,8 +268,6 @@ namespace AstroClient
                     {
                         //JarRoleController.RoleEspComponents.All(c => { c.AmongUSHasVoted = false; c.AmongUSVoteRevealTag.ShowTag = false;  SetTag(c.AmongUSVoteRevealTag, $"No Votes", Color.white, ColorConverter.HexToColor("#61ffe6"));  return true; }); // IDK IF THIS WORKS.
 
-
-
                         foreach (var ESP in JarRoleController.RoleEspComponents)
                         {
                             if (ESP != null)

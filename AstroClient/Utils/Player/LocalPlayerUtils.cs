@@ -1,4 +1,5 @@
-﻿using RubyButtonAPI;
+﻿using AstroClient.ConsoleUtils;
+using RubyButtonAPI;
 using UnityEngine;
 using VRC;
 using VRC.Animation;
@@ -11,29 +12,45 @@ namespace AstroClient
     {
         public override void OnUpdate()
         {
-            if (!FreezePlayerOnQMOpen)
+            if (FreezePlayerOnQMOpen)
             {
-                if (GetPlayerCharControl() != null)
+                try
                 {
-                    GetPlayerCharControl().enabled = true;
+                    if (GetPlayerCharControl() != null)
+                    {
+                        GetPlayerCharControl().enabled = !IsQuickMenuOpen;
+                    }
+                }
+                catch
+                {
+                }
+            }
+            else
+            {
+                if(!UnfreezePlayerOnce)
+                {
+                    if (GetPlayerCharControl() != null)
+                    {
+                        if (!GetPlayerCharControl().enabled)
+                        {
+                            GetPlayerCharControl().enabled = true;
+                        }
+                    }
+                    UnfreezePlayerOnce = true;
                 }
                 return;
-            }
-            try
-            {
-                if (GetPlayerCharControl() != null)
-                {
-                    GetPlayerCharControl().enabled = !IsQuickMenuOpen;
-                }
-            }
-            catch
-            {
             }
         }
 
         public override void OnLevelLoaded()
         {
             LocalMotionState = null;
+            if (FreezePlayerOnQMOpenToggle != null)
+            {
+                FreezePlayerOnQMOpenToggle.setToggleState(FreezePlayerOnQMOpen);
+            }
+            UnfreezePlayerOnce = true;
+
         }
 
         public static Vector3 PlayerPositionBones(Player player, HumanBodyBones bone)
@@ -181,11 +198,14 @@ namespace AstroClient
         public static void ToggleFreezePlayerOnQMOpen()
         {
             FreezePlayerOnQMOpen = !FreezePlayerOnQMOpen;
-            if (FreezePlayerOnQMOpen != null)
+            if (FreezePlayerOnQMOpenToggle != null)
             {
                 FreezePlayerOnQMOpenToggle.setToggleState(FreezePlayerOnQMOpen);
             }
+            UnfreezePlayerOnce = false;
         }
+
+        private static bool UnfreezePlayerOnce;
 
         public static VRCMotionState LocalMotionState;
 

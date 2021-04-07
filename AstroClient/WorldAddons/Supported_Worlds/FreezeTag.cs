@@ -153,7 +153,7 @@ namespace AstroClient
                         if (sender.DisplayName() == LocalPlayerUtils.GetSelfPlayer().DisplayName())
                         {
 
-                            if (obj.name.ToLower().Contains("tagplayerctrl") && action.ToLower().Contains("seestuck")) 
+                            if (obj.name.ToLower().Contains("tagplayerctrl") && action.ToLower().Contains("seestuck"))
                             {
                                 SelfNode = obj;
                                 ModConsole.Log($"Found Self Assigned Node! {SelfNode.name}");
@@ -166,9 +166,10 @@ namespace AstroClient
 
                         }
                     }
-                    if (AutomaticallyUnfreeze)
+
+                    if (SelfNode != null)
                     {
-                        if (SelfNode != null)
+                        if (AutomaticallyUnfreeze)
                         {
                             if (obj.name.ToLower() == SelfNode.name.ToLower() && action.ToLower() == "freezeme")
                             {
@@ -184,7 +185,7 @@ namespace AstroClient
                                     }
                                     else
                                     {
-                                        UnfreezeMeUdonEvent = UdonSearch.FindUdonEvent(SelfNode.name, "unfreezeme");
+                                        UnfreezeMeUdonEvent = UdonSearch.FindUdonEvent(SelfNode, "unfreezeme");
                                         UnfreezeMeUdonEvent.ExecuteUdonEvent();
                                         ModConsole.Log("Detected Freeze!, Unfreezing!", System.Drawing.Color.LawnGreen);
 
@@ -197,7 +198,6 @@ namespace AstroClient
 
                             }
                         }
-
                     }
                 }
                 catch(Exception e)
