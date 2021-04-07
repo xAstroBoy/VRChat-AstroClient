@@ -115,6 +115,10 @@
                 }
 
                 playerButton.setActive(ConfigManager.UI.ShowPlayersList);
+                if (ConfigManager.UI.ShowPlayersMenu != true)
+                {
+                    playerButton.setActive(false);
+                }
                 playerButtons.Add(player.UserID(), playerButton);
 
                 yPos += 0.5f;
