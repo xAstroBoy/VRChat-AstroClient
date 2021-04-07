@@ -64,7 +64,7 @@
                 var name = __1.ParameterObject.name;
                 var parameter = __1.ParameterString;
 
-                bool log = true;
+                bool log = ConfigManager.General.LogRPCEvents;
 
                 if (name.Equals("USpeak"))
                 {

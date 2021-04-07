@@ -16,6 +16,9 @@ namespace AstroClient.Startup.Buttons
             QMSingleToggleButton joinLeaveToggle = new QMSingleToggleButton(sub, 2, 0, "Join/Leave ON", () => { ConfigManager.General.JoinLeave = true; }, "Join/Leave OFF", () => { ConfigManager.General.JoinLeave = false; }, "Notification when someone joins/leaves", Color.green, Color.red, null, ConfigManager.General.JoinLeave, true);
             joinLeaveToggle.setToggleState(ConfigManager.General.JoinLeave, false);
 
+            QMSingleToggleButton rpcLogToggle = new QMSingleToggleButton(sub, 3, 0, "RPC Log ON", () => { ConfigManager.General.LogRPCEvents = true; }, "RPC Log OFF", () => { ConfigManager.General.LogRPCEvents = false; }, "Log RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogRPCEvents, true);
+            rpcLogToggle.setToggleState(ConfigManager.General.LogRPCEvents, false);
+
             QMNestedButton subHideElements = new QMNestedButton(sub, 1, 2f, "Hide Elements", "Hide Elements", null, null, null, null, false);
             sub.getMainButton().setTextColor(Color.cyan);
 
