@@ -512,7 +512,7 @@ namespace AstroClient
             return JarRoleController.RoleEspComponents.Where(x => x.apiuser.displayName == LocalPlayerUtils.GetSelfPlayer().DisplayName()).First();
         }
 
-        public override void OnUdonSyncRPCEvent(Player? sender, GameObject? obj, string action)
+        public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             if (HasMurder4WorldLoaded)
             {
@@ -533,11 +533,11 @@ namespace AstroClient
                                 TargetNode = obj;
                                 AssignedTargetRole = action;
                             }
-                        }
-                        RoleSwapper_GetDetectiveRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
-                    }
 
-                    if (RoleSwapper_GetMurdererRole)
+                            RoleSwapper_GetDetectiveRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                        }
+                    }
+                    else if (RoleSwapper_GetMurdererRole)
                     {
                         if (!SafetySwap) // In case it grabs and update the current ones already!
                         {
@@ -551,9 +551,10 @@ namespace AstroClient
                                 TargetNode = obj;
                                 AssignedTargetRole = action;
                             }
-                        }
 
-                        RoleSwapper_GetMurdererRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                            RoleSwapper_GetMurdererRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+
+                        }
                     }
                 }
             }
@@ -566,20 +567,30 @@ namespace AstroClient
 
         public static bool SwapRoles(GameObject SelfNode, GameObject TargetNode, string AssignedSelfRole, string AssignedTargetRole)
         {
-            if (SelfNode == null && TargetNode == null && string.IsNullOrEmpty(AssignedSelfRole) && string.IsNullOrWhiteSpace(AssignedSelfRole) && string.IsNullOrEmpty(AssignedTargetRole) && string.IsNullOrWhiteSpace(AssignedTargetRole))
+            if (SelfNode == null && TargetNode == null && AssignedSelfRole == null && AssignedTargetRole == null)
             {
                 SafetySwap = false;
                 return true; // Keep it active.
             }
+            if(string.IsNullOrEmpty(AssignedSelfRole) && string.IsNullOrWhiteSpace(AssignedSelfRole))
+            {
+                SafetySwap = false;
+                return true;
+            }
+            if (string.IsNullOrEmpty(AssignedTargetRole) && string.IsNullOrWhiteSpace(AssignedTargetRole))
+            {
+                SafetySwap = false;
+                return true;
+            }
             if (SelfNode == TargetNode)
             {
-                ModConsole.Log("Target Node and SelfNode are the same!");
+                ModConsole.DebugLog("Target Node and SelfNode are the same!");
                 SafetySwap = false;
                 return false; // Deactivate..
             }
-            if (AssignedSelfRole == AssignedTargetRole)
+            if (AssignedTargetRole == AssignedSelfRole)
             {
-                ModConsole.Log("Target Role String and Self Role String are the same!");
+                ModConsole.DebugLog("Target Role String and Self Role String are the same!");
                 SafetySwap = false;
                 return false;
             }
@@ -587,13 +598,13 @@ namespace AstroClient
 
             SafetySwap = true;
 
-            ModConsole.Log($"Executing Role Swapping!, Target Has Role : {AssignedTargetRole}, You have {AssignedSelfRole}.");
+            ModConsole.DebugLog($"Executing Role Swapping!, Target Has Role : {AssignedTargetRole}, You have {AssignedSelfRole}.");
 
-            UdonSearch.FindUdonEvent(SelfNode.name, AssignedTargetRole).ExecuteUdonEvent(); // Give Self Target Role.             
-            ModConsole.Log($"Assigned To Self Target's role!.");
+            UdonSearch.FindUdonEvent(SelfNode, AssignedTargetRole).ExecuteUdonEvent(); // Give Self Target Role.             
+            ModConsole.DebugLog($"Assigned To Self Target's role!.");
 
-            UdonSearch.FindUdonEvent(TargetNode.name, AssignedSelfRole).ExecuteUdonEvent(); // Give Target Self Role.             
-            ModConsole.Log($"Assigned To Target Self's role!.");
+            UdonSearch.FindUdonEvent(TargetNode, AssignedSelfRole).ExecuteUdonEvent(); // Give Target Self Role.             
+            ModConsole.DebugLog($"Assigned To Target Self's role!.");
 
             SafetySwap = false;
             return false; // Deactivate.
@@ -740,6 +751,10 @@ namespace AstroClient
             }
             set
             {
+                if(value == _RoleSwapper_GetDetectiveRole)
+                {
+                    return;
+                }
                 _RoleSwapper_GetDetectiveRole = value;
                 if(GetDetectiveRoleBtn != null)
                 {
@@ -748,8 +763,8 @@ namespace AstroClient
 
                 if (value)
                 {
-                    AssignedSelfRole = string.Empty;
-                    AssignedTargetRole = string.Empty;
+                    AssignedSelfRole = null;
+                    AssignedTargetRole = null;
                     TargetNode = null;
                     SafetySwap = false;
                 }
@@ -768,6 +783,10 @@ namespace AstroClient
             }
             set
             {
+                if (value == _RoleSwapper_GetMurdererRole)
+                {
+                    return;
+                }
                 _RoleSwapper_GetMurdererRole = value;
                 if (GetMurdererRoleBtn != null)
                 {
@@ -775,8 +794,8 @@ namespace AstroClient
                 }
                 if (value)
                 {
-                    AssignedSelfRole = string.Empty;
-                    AssignedTargetRole = string.Empty;
+                    AssignedSelfRole = null;
+                    AssignedTargetRole = null;
                     TargetNode = null;
                     SafetySwap = false;
                 }

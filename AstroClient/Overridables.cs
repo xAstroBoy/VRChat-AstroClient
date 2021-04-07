@@ -232,7 +232,7 @@
         {
         }
 
-        public virtual void OnUdonSyncRPCEvent(Player? sender, GameObject? obj, string action)
+        public virtual void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
         }
 

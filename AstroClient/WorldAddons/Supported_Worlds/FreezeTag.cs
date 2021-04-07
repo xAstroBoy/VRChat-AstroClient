@@ -152,7 +152,7 @@ namespace AstroClient
                         if (sender.DisplayName() == LocalPlayerUtils.GetSelfPlayer().DisplayName())
                         {
 
-                            if (obj.name.ToLower().Contains("tagplayerctrl") && action.ToLower().Contains("seestuck")) ;
+                            if (obj.name.ToLower().Contains("tagplayerctrl") && action.ToLower().Contains("seestuck")) 
                             {
                                 SelfNode = obj;
                                 ModConsole.Log($"Found Self Assigned Node! {SelfNode.name}");
