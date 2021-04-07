@@ -249,7 +249,7 @@ namespace AstroClient
                                 if (against != null)
                                 {
                                     actionexecuted.AmongUSVoteRevealTag.ShowTag = true;
-                                    SetTag(actionexecuted.AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#d7b800"));
+                                    SetTag(actionexecuted.AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#F35858"));
                                 }
                             }
                         }
@@ -266,20 +266,25 @@ namespace AstroClient
                     }
                     else if (action == "SyncEndVotingPhase" || action == "SyncAbort" || action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncStart")
                     {
-                        JarRoleController.RoleEspComponents.All(c => { c.AmongUSHasVoted = false; c.AmongUSVoteRevealTag.ShowTag = false;  SetTag(c.AmongUSVoteRevealTag, $"No Votes", Color.white, ColorConverter.HexToColor("#61ffe6"));  return true; }); // IDK IF THIS WORKS.
+                        //JarRoleController.RoleEspComponents.All(c => { c.AmongUSHasVoted = false; c.AmongUSVoteRevealTag.ShowTag = false;  SetTag(c.AmongUSVoteRevealTag, $"No Votes", Color.white, ColorConverter.HexToColor("#61ffe6"));  return true; }); // IDK IF THIS WORKS.
 
 
 
-                        //foreach (var ESP in JarRoleController.RoleEspComponents)
-                        //{
-                        //    if(ESP != null)
-                        //    {
-                        //        if(ESP.AmongUSHasVoted)
-                        //        {
-                        //            ESP.AmongUSHasVoted = false;
-                        //        }
-                        //    }
-                        //}
+                        foreach (var ESP in JarRoleController.RoleEspComponents)
+                        {
+                            if (ESP != null)
+                            {
+                                if (ESP.AmongUSHasVoted)
+                                {
+                                    ESP.AmongUSHasVoted = false;
+                                }
+                                if (ESP.AmongUSVoteRevealTag != null)
+                                {
+                                    SetTag(ESP.AmongUSVoteRevealTag, $"No Votes", Color.white, ColorConverter.HexToColor("#61ffe6"));
+                                    ESP.AmongUSVoteRevealTag.ShowTag = false;
+                                }
+                            }
+                        }
 
                     }
 
