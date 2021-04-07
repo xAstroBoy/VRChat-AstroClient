@@ -1,5 +1,4 @@
-﻿using AstroClient.Cheetos;
-using RubyButtonAPI;
+﻿using RubyButtonAPI;
 using UnityEngine;
 
 namespace AstroClient.Startup.Buttons
@@ -12,10 +11,10 @@ namespace AstroClient.Startup.Buttons
             sub.getMainButton().setTextColor(Color.cyan);
 
             QMToggleButton playerListToggle = new QMToggleButton(sub, 1, 0, "PlayerList ON", () => { PlayerMenuUI.ShowPlayerMenu(); }, "PlayerList OFF", () => { PlayerMenuUI.HidePlayerMenu(); }, "Show/Hide PlayerList");
-            playerListToggle.setToggleState(PlayerMenuUI.ShowPlayersMenu, false);
+            playerListToggle.setToggleState(ConfigManager.Configuration.ShowPlayersMenu, false);
 
-            QMToggleButton joinLeaveToggle = new QMToggleButton(sub, 2, 0, "Join/Leave ON", () => { JoinLeaveNotifier.Enabled = true; }, "Join/Leave OFF", () => { JoinLeaveNotifier.Enabled = false; }, "Notification when someone joins/leaves");
-            joinLeaveToggle.setToggleState(JoinLeaveNotifier.Enabled, false);
+            QMToggleButton joinLeaveToggle = new QMToggleButton(sub, 2, 0, "Join/Leave ON", () => { ConfigManager.Configuration.JoinLeave = true; }, "Join/Leave OFF", () => { ConfigManager.Configuration.JoinLeave = false; }, "Notification when someone joins/leaves");
+            joinLeaveToggle.setToggleState(ConfigManager.Configuration.JoinLeave, false);
         }
     }
 }

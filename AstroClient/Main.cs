@@ -42,6 +42,9 @@ namespace AstroClient
 
         public override void OnApplicationStart()
         {
+            ConfigManager.Validate();
+            ConfigManager.Load();
+
             try
             {
                 Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);
@@ -54,6 +57,11 @@ namespace AstroClient
 
             InitializeOverridables();
             //Event_OnApplicationStart?.Invoke(this, new EventArgs());
+        }
+
+        public override void OnPreferencesSaved()
+        {
+            ConfigManager.Save();
         }
 
         public static void InitializeOverridables()
