@@ -15,49 +15,65 @@
         {
 #if CHEETOS
             CheetosConsole.Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), "Cheetos Mode", System.Drawing.Color.LightYellow, System.Drawing.Color.DarkOrange);
+#endif
 
             string VRChatVersion = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_1;
             string VRChatBuild = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_0;
             ModConsole.CheetoLog($"VRChat Version: {VRChatVersion}, {VRChatBuild}");
 
-            // Find and remove shitty UI shit
-            var crap1 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/ReportWorldButton");
-            var crap2 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/UserIconButton");
-            var crap3 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusMiniBanner");
-            var crap4 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/HeaderContainer/VRCPlusBanner");
-            var crap5 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/UserIconCameraButton");
-            var crap6 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusThankYou");
-
-            if (crap1 != null)
+            if (ConfigManager.UI.RemoveReportButton)
             {
-                crap1.DestroyMeLocal();
+                var crap1 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/ReportWorldButton");
+                if (crap1 != null)
+                {
+                    crap1.DestroyMeLocal();
+                }
             }
 
-            if (crap2 != null)
+            if (ConfigManager.UI.RemoveUserIconButton)
             {
-                crap2.DestroyMeLocal();
+                var crap2 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/UserIconButton");
+                if (crap2 != null)
+                {
+                    crap2.DestroyMeLocal();
+                }
             }
 
-            if (crap3 != null)
+            if (ConfigManager.UI.RemoveVRCPlusMiniBanner)
             {
-                crap3.DestroyMeLocal();
+                var crap3 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusMiniBanner");
+                if (crap3 != null)
+                {
+                    crap3.DestroyMeLocal();
+                }
             }
 
-            if (crap4 != null)
+            if (ConfigManager.UI.RemoveVRCPlusBanner)
             {
-                crap4.DestroyMeLocal();
+                var crap4 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/HeaderContainer/VRCPlusBanner");
+                if (crap4 != null)
+                {
+                    crap4.DestroyMeLocal();
+                }
             }
 
-            if (crap5 != null)
+            if (ConfigManager.UI.RemoveUserIconCameraButton)
             {
-                crap5.DestroyMeLocal();
+                var crap5 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/UserIconCameraButton");
+                if (crap5 != null)
+                {
+                    crap5.DestroyMeLocal();
+                }
             }
 
-            if (crap6 != null)
+            if (ConfigManager.UI.RemoveVRCPlusThankYou)
             {
-                crap6.DestroyMeLocal();
+                var crap6 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusThankYou");
+                if (crap6 != null)
+                {
+                    crap6.DestroyMeLocal();
+                }
             }
-#endif
         }
 
         public override void OnWorldReveal(string id, string name, string asseturl)

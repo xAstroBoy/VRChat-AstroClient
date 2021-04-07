@@ -17,9 +17,9 @@
         public override void VRChat_OnUiManagerInit()
         {
             playersButton = new QMSingleButton("ShortcutMenu", -2, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
-            playersButton.setActive(ConfigManager.Configuration.ShowPlayersMenu);
+            playersButton.setActive(ConfigManager.UI.ShowPlayersMenu);
 
-            if (ConfigManager.Configuration.ShowPlayersList)
+            if (ConfigManager.UI.ShowPlayersList)
             {
                 playersButton.setTextColor(UnityEngine.Color.green);
             }
@@ -114,7 +114,7 @@
                     }
                 }
 
-                playerButton.setActive(ConfigManager.Configuration.ShowPlayersList);
+                playerButton.setActive(ConfigManager.UI.ShowPlayersList);
                 playerButtons.Add(player.UserID(), playerButton);
 
                 yPos += 0.5f;
@@ -142,8 +142,8 @@
 
         private void PlayerListToggle()
         {
-            ConfigManager.Configuration.ShowPlayersList = !ConfigManager.Configuration.ShowPlayersList;
-            if (ConfigManager.Configuration.ShowPlayersList)
+            ConfigManager.UI.ShowPlayersList = !ConfigManager.UI.ShowPlayersList;
+            if (ConfigManager.UI.ShowPlayersList)
             {
                 playersButton.setTextColor(UnityEngine.Color.green);
             }
@@ -154,13 +154,13 @@
 
             foreach (var keyValuePair in playerButtons)
             {
-                keyValuePair.Value.setActive(ConfigManager.Configuration.ShowPlayersList);
+                keyValuePair.Value.setActive(ConfigManager.UI.ShowPlayersList);
             }
         }
 
         public static void ShowPlayerMenu()
         {
-            ConfigManager.Configuration.ShowPlayersMenu = true;
+            ConfigManager.UI.ShowPlayersMenu = true;
             playersButton.setTextColor(UnityEngine.Color.red);
 
             playersButton.setActive(true);
@@ -173,7 +173,7 @@
 
         public static void HidePlayerMenu()
         {
-            ConfigManager.Configuration.ShowPlayersMenu = false;
+            ConfigManager.UI.ShowPlayersMenu = false;
             playersButton.setTextColor(UnityEngine.Color.red);
 
             playersButton.setActive(false);

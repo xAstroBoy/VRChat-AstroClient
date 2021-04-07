@@ -7,7 +7,7 @@
     {
         public override void OnPlayerJoined(Player player)
         {
-            if (ConfigManager.Configuration.JoinLeave)
+            if (ConfigManager.General.JoinLeave)
             {
                 var uiManager = VRCUiManager.prop_VRCUiManager_0;
                 PopupManager.QueHudMessage(uiManager, $"Join: {player.DisplayName()}");
@@ -16,7 +16,7 @@
 
         public override void OnPlayerLeft(Player player)
         {
-            if (ConfigManager.Configuration.JoinLeave)
+            if (ConfigManager.General.JoinLeave)
             {
                 var uiManager = VRCUiManager.prop_VRCUiManager_0;
                 PopupManager.QueHudMessage(uiManager, $"Leave: {player.DisplayName()}");
