@@ -70,7 +70,6 @@
                     log = false;
                 }
 
-
                 if (parameter == "UdonSyncRunProgramAsRPC")
                 {
                     Event_OnUdonSyncRPC?.Invoke(null, new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
@@ -83,10 +82,9 @@
                         ModConsole.DebugLog($"RPC: {__0.DisplayName()}, {name}, {parameter}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
                     }
                 }
-
             }
-            catch { } // Suppress errors as who tf needs em.
 
+            catch { } // Suppress errors as who tf needs em.
         }
     }
 }
