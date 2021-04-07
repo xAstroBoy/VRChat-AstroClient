@@ -11,6 +11,11 @@ using AstroClient.UdonExploits;
 using AstroClient.Variables;
 using VRC.Udon;
 using static AstroClient.variables.CustomLists;
+using DayClientML2.Utility;
+using VRC;
+using AstroClient.components;
+using System.Linq;
+using DayClientML2.Utility.Extensions;
 
 #endregion AstroClient Imports
 
@@ -24,6 +29,13 @@ namespace AstroClient
             AbortGameEvent = null;
             VictoryCrewmateEvent = null;
             VictoryImpostorEvent = null;
+
+            AssignedSelfRole = null;
+            AssignedTargetRole = null;
+            TargetNode = null;
+            SafetySwap = false;
+
+            RoleSwapper_GetImpostorRole = false;
         }
 
         public static void FindAmongUsObjects()
@@ -142,6 +154,7 @@ namespace AstroClient
             AmongUSUdonExploits.Init_ForcePlayerEject_Menu(AmongUsCheatsPage, 4f, 0.5f, true);
 
             AmongUSUdonExploits.Init_RoleSwap_Menu(AmongUsCheatsPage, 4f, 1f, true);
+            GetImpostorRoleBtn = new QMSingleToggleButton(AmongUsCheatsPage, 4, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetImpostorRole = true; }), "Get Murderer Role", new Action(() => { RoleSwapper_GetImpostorRole = false; }), "Assign Yourself Impostor Role on Next Round!", Color.green, Color.red, null, false, true);
 
             GameStartbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
             GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1.5f, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
@@ -150,10 +163,159 @@ namespace AstroClient
             GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, 1, 2.5f, "Victory Impostor", new Action(() => { VictoryImpostorEvent.ExecuteUdonEvent(); }), "Force Victory Impostor Event", null, Color.red, true);
         }
 
+
+        private static JarRoleESP GetLocalPlayerNode()
+        {
+            return JarRoleController.RoleEspComponents.Where(x => x.apiuser.displayName == LocalPlayerUtils.GetSelfPlayer().DisplayName()).First();
+        }
+
+
+        public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        {
+            if (HasAmongUsWorldLoaded)
+            {
+
+                if (obj != null && action.StartsWith("SyncAssign") && GetLocalPlayerNode().Node != null)
+                {
+                    if (RoleSwapper_GetImpostorRole)
+                    {
+                        if (!SafetySwap) // In case it grabs and update the current ones already!
+                        {
+                            if (obj == GetLocalPlayerNode().Node)
+                            {
+                                AssignedSelfRole = action;
+                            }
+
+                            if (action == "SyncAssignM")
+                            {
+                                TargetNode = obj;
+                                AssignedTargetRole = action;
+                            }
+
+                            RoleSwapper_GetImpostorRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                        }
+                    }
+                }
+            }
+
+        }
+
+
+
+
+
+        public static bool SwapRoles(GameObject SelfNode, GameObject TargetNode, string AssignedSelfRole, string AssignedTargetRole)
+        {
+            if (SelfNode == null && TargetNode == null && AssignedSelfRole == null && AssignedTargetRole == null)
+            {
+                SafetySwap = false;
+                return true; // Keep it active.
+            }
+            if (string.IsNullOrEmpty(AssignedSelfRole) && string.IsNullOrWhiteSpace(AssignedSelfRole))
+            {
+                SafetySwap = false;
+                return true;
+            }
+            if (string.IsNullOrEmpty(AssignedTargetRole) && string.IsNullOrWhiteSpace(AssignedTargetRole))
+            {
+                SafetySwap = false;
+                return true;
+            }
+            if (SelfNode == TargetNode)
+            {
+                ModConsole.DebugLog("Target Node and SelfNode are the same!");
+                SafetySwap = false;
+                return false; // Deactivate..
+            }
+            if (AssignedTargetRole == AssignedSelfRole)
+            {
+                ModConsole.DebugLog("Target Role String and Self Role String are the same!");
+                SafetySwap = false;
+                return false;
+            }
+
+
+            MiscUtility.DelayFunction(0.01f, new Action(() =>
+            {
+
+                ModConsole.DebugLog($"Executing Role Swapping!, Target Has Role : {AssignedTargetRole}, You have {AssignedSelfRole}.");
+                var TargetEvent = UdonSearch.FindUdonEvent(TargetNode, AssignedSelfRole);
+                if (TargetEvent != null)
+                {
+                    TargetEvent.ExecuteUdonEvent();
+                }
+
+                var selfevent = UdonSearch.FindUdonEvent(SelfNode, AssignedTargetRole);
+                if (selfevent != null)
+                {
+                    selfevent.ExecuteUdonEvent();
+                }
+
+
+            }));
+
+            SafetySwap = true;
+
+
+
+
+            SafetySwap = false;
+            return false; // Deactivate.
+
+
+        }
+
+
+
+
+
+
+
+
+        private static GameObject TargetNode;
+        private static string AssignedTargetRole;
+        private static string AssignedSelfRole;
+
+        private static bool SafetySwap;
+
+
+        public static bool _RoleSwapper_GetImpostorRole;
+        public static bool RoleSwapper_GetImpostorRole
+        {
+            get
+            {
+                return _RoleSwapper_GetImpostorRole;
+            }
+            set
+            {
+                if (value == _RoleSwapper_GetImpostorRole)
+                {
+                    return;
+                }
+                _RoleSwapper_GetImpostorRole = value;
+                if (GetImpostorRoleBtn != null)
+                {
+                    GetImpostorRoleBtn.setToggleState(value);
+                }
+                if (value)
+                {
+                    AssignedSelfRole = null;
+                    AssignedTargetRole = null;
+                    TargetNode = null;
+                    SafetySwap = false;
+                }
+                if (!value)
+                {
+                    SafetySwap = false;
+                }
+            }
+        }
         public static QMSingleButton GameStartbtn;
         public static QMSingleButton GameAbortbtn;
         public static QMSingleButton GameVictoryCrewmateBtn;
         public static QMSingleButton GameVictoryImpostorBtn;
+
+        public static QMSingleToggleButton GetImpostorRoleBtn;
 
         public static QMNestedButton AmongUsCheatsPage;
 

@@ -292,6 +292,8 @@ namespace AstroClient
             AssignedTargetRole = string.Empty;
             TargetNode = null;
             SafetySwap = false;
+            RoleSwapper_GetDetectiveRole = false;
+            RoleSwapper_GetMurdererRole = false;
         }
 
         public static void Murder4CheatsButtons(QMNestedButton submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
@@ -455,7 +457,7 @@ namespace AstroClient
             // FUCK NO CLUE WHERE TO PLACE THE NEW BUTTONS LOL BRB
             Murder4UdonExploits.Init_RoleSwap_Menu(Murder4CheatPage, 2, 0.5f, true);
             GetDetectiveRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1, "Get Detective Role", new Action(() => {RoleSwapper_GetDetectiveRole = true; RoleSwapper_GetMurdererRole = false; }), "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = false; }), "Assign Yourself Detective Role on Next Round!", Color.green, Color.red, null, false, true);
-            GetMurdererRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = true; RoleSwapper_GetDetectiveRole = false; }), "Get Murderer Role", new Action(() => {RoleSwapper_GetMurdererRole = false;}), "Assign Yourself Detective Role on Next Round!", Color.green, Color.red, null, false, true);
+            GetMurdererRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = true; RoleSwapper_GetDetectiveRole = false; }), "Get Murderer Role", new Action(() => {RoleSwapper_GetMurdererRole = false;}), "Assign Yourself Murderer Role on Next Round!", Color.green, Color.red, null, false, true);
 
             GameObjectESP.Murder4ESPtoggler = new QMSingleToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
             JarRoleController.Murder4RolesRevealerToggle = new QMSingleToggleButton(Murder4CheatPage, 3, 0.5f, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", Color.green, Color.red, null, false, true);
@@ -757,11 +759,10 @@ namespace AstroClient
         public static QMSingleToggleButton GetMurdererRoleBtn;
 
 
+
+
+
         public static bool _RoleSwapper_GetDetectiveRole;
-        public static bool _RoleSwapper_GetMurdererRole;
-
-
-
 
         public static bool RoleSwapper_GetDetectiveRole
         {
@@ -795,6 +796,8 @@ namespace AstroClient
 
             }
         }
+
+        public static bool _RoleSwapper_GetMurdererRole;
         public static bool RoleSwapper_GetMurdererRole
         {
             get
