@@ -285,11 +285,10 @@ namespace AstroClient
             isChristmasMode = false;
             DoUnlockedSound = false;
             OnPlayerUnlockedClues = null;
+            AssignedSelfRole = string.Empty;
+            AssignedTargetRole = string.Empty;
             TargetNode = null;
-            HasBystanderRole = false;
-            HasDetectiveRole = false;
-            hasMurdererRole = false;
-            SelfNode = null;
+            SafetySwap = false;
         }
 
         public static void Murder4CheatsButtons(QMNestedButton submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
@@ -452,13 +451,16 @@ namespace AstroClient
 
             // FUCK NO CLUE WHERE TO PLACE THE NEW BUTTONS LOL BRB
             Murder4UdonExploits.Init_RoleSwap_Menu(Murder4CheatPage, 2, 0.5f, true);
-
+            GetDetectiveRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1, "Get Detective Role", new Action(() => {RoleSwapper_GetDetectiveRole = true; RoleSwapper_GetMurdererRole = false; }), "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = false; }), "Assign Yourself Detective Role on Next Round!", Color.green, Color.red, null, false, true);
+            GetMurdererRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = true; RoleSwapper_GetDetectiveRole = false; }), "Get Murderer Role", new Action(() => {RoleSwapper_GetMurdererRole = false;}), "Assign Yourself Detective Role on Next Round!", Color.green, Color.red, null, false, true);
 
             GameObjectESP.Murder4ESPtoggler = new QMSingleToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
             JarRoleController.Murder4RolesRevealerToggle = new QMSingleToggleButton(Murder4CheatPage, 3, 0.5f, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", Color.green, Color.red, null, false, true);
             Murder4UdonExploits.Init_GameController_Btn(Murder4CheatPage, 4, 0, true);
             Murder4UdonExploits.Init_Filtered_Nodes_Btn(Murder4CheatPage, 4, 0.5f, true);
             Murder4UdonExploits.Init_Unfiltered_Nodes_btn(Murder4CheatPage, 4, 1f, true);
+
+
 
             GameStartbtn = new QMSingleButton(Murder4CheatPage, 3, 2, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
             GameAbortbtn = new QMSingleButton(Murder4CheatPage, 3, 2.5f, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
@@ -505,18 +507,104 @@ namespace AstroClient
             }
         }
 
+        private static JarRoleESP GetLocalPlayerNode()
+        {
+            return JarRoleController.RoleEspComponents.Where(x => x.apiuser.displayName == LocalPlayerUtils.GetSelfPlayer().DisplayName()).First();
+        }
+
+        public override void OnUdonSyncRPCEvent(Player? sender, GameObject? obj, string action)
+        {
+            if (HasMurder4WorldLoaded)
+            {
+
+                if (obj != null && action.StartsWith("SyncAssign") && GetLocalPlayerNode().Node != null)
+                {
+                    if (RoleSwapper_GetDetectiveRole)
+                    {
+                        if (!SafetySwap)
+                        {
+                            if (obj == GetLocalPlayerNode().Node)
+                            {
+                                AssignedSelfRole = action;
+                            }
+
+                            if (action == "SyncAssignD")
+                            {
+                                TargetNode = obj;
+                            }
+                        }
+                        RoleSwapper_GetDetectiveRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                    }
+
+                    if (RoleSwapper_GetMurdererRole)
+                    {
+                        if (!SafetySwap) // In case it grabs and update the current ones already!
+                        {
+                            if (obj == GetLocalPlayerNode().Node)
+                            {
+                                ModConsole.Log("");
+                                AssignedSelfRole = action;
+                            }
+
+                            if (action == "SyncAssignM")
+                            {
+                                TargetNode = obj;
+                            }
+                        }
+
+                        RoleSwapper_GetMurdererRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                    }
+                }
+            }
+
+        }
 
 
 
 
 
+        public static bool SwapRoles(GameObject SelfNode, GameObject TargetNode, string AssignedSelfRole, string AssignedTargetRole)
+        {
+            if (SelfNode == null && TargetNode == null && string.IsNullOrEmpty(AssignedSelfRole) && string.IsNullOrWhiteSpace(AssignedSelfRole) && string.IsNullOrEmpty(AssignedTargetRole) && string.IsNullOrWhiteSpace(AssignedTargetRole))
+            {
+                return true; // Keep it active.
+            }
+            if (SelfNode == TargetNode)
+            {
+                ModConsole.Log("Target Node and SelfNode are the same!");
+                return false; // Deactivate..
+            }
+            if (AssignedSelfRole == AssignedTargetRole)
+            {
+                ModConsole.Log("Target Role String and Self Role String are the same!");
+
+            }
 
 
-        private static bool HasBystanderRole;
-        private static bool HasDetectiveRole;
-        private static bool hasMurdererRole;
+            SafetySwap = true;
+            ModConsole.Log($"Executing Role Swapping!, Target Has Role : {AssignedTargetRole}, You have {AssignedSelfRole}.");
+
+            UdonSearch.FindUdonEvent(SelfNode.name, AssignedTargetRole).ExecuteUdonEvent(); // Give Self Target Role.             
+            ModConsole.Log($"Sent Self Role to Target!.");
+
+            UdonSearch.FindUdonEvent(TargetNode.name, AssignedSelfRole).ExecuteUdonEvent(); // Give Target Self Role.             
+            ModConsole.Log($"Sent Target Role to Self!.");
+
+            return false; // Deactivate.
+
+
+        }
+
+
+
+
+
         private static GameObject TargetNode;
-        private static GameObject SelfNode;
+        private static string AssignedTargetRole;
+
+        private static string AssignedSelfRole;
+
+        private static bool SafetySwap;
 
         // MAP GameObjects Required for control.
 
@@ -628,6 +716,70 @@ namespace AstroClient
         public static CachedUdonEvent VictoryBystanderEvent;
         public static CachedUdonEvent VictoryMurdererEvent;
 
+        public static QMSingleToggleButton GetDetectiveRoleBtn;
+        public static QMSingleToggleButton GetMurdererRoleBtn;
+
+
+        public static bool _RoleSwapper_GetDetectiveRole;
+        public static bool _RoleSwapper_GetMurdererRole;
+
+
+
+
+        public static bool RoleSwapper_GetDetectiveRole
+        {
+            get
+            {
+                return _RoleSwapper_GetDetectiveRole;
+            }
+            set
+            {
+                _RoleSwapper_GetDetectiveRole = value;
+                if(GetDetectiveRoleBtn != null)
+                {
+                    GetDetectiveRoleBtn.setToggleState(value);
+                }
+
+                if (value)
+                {
+                    AssignedSelfRole = string.Empty;
+                    AssignedTargetRole = string.Empty;
+                    TargetNode = null;
+                    SafetySwap = false;
+                }
+                if (!value)
+                {
+                    SafetySwap = false;
+                }
+
+            }
+        }
+        public static bool RoleSwapper_GetMurdererRole
+        {
+            get
+            {
+                return _RoleSwapper_GetMurdererRole;
+            }
+            set
+            {
+                _RoleSwapper_GetMurdererRole = value;
+                if (GetMurdererRoleBtn != null)
+                {
+                    GetMurdererRoleBtn.setToggleState(value);
+                }
+                if (value)
+                {
+                    AssignedSelfRole = string.Empty;
+                    AssignedTargetRole = string.Empty;
+                    TargetNode = null;
+                    SafetySwap = false;
+                }
+                if(!value)
+                {
+                    SafetySwap = false;
+                }
+            }
+        }
         public static bool HasMurder4WorldLoaded = false;
 
     }

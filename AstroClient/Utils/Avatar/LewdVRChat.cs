@@ -29,6 +29,10 @@ namespace AstroClient
         {
             if (avatar != null && DescriptorObj != null)
             {
+                if (Bools.DisableNSFWMenu)
+                {
+                    return;
+                }
                 GameObjHelper.CheckTransform(avatar.transform);
 
                 if (GameObjHelper._GameObjects == null)
@@ -162,97 +166,6 @@ namespace AstroClient
             yield return null;
         }
 
-        public static IEnumerator AvatarPickup(Transform obj, Player player)
-        {
-            if (obj == null && player == null)
-            {
-                ModConsole.DebugWarning("AvatarPickup Failed To Start!");
-
-                if (obj != null)
-                {
-                    ModConsole.DebugWarning("AvatarPickup Obj is not null!");
-                }
-                else
-                {
-                    ModConsole.DebugWarning("AvatarPickup Obj is null!");
-                }
-
-                if (player != null)
-                {
-                    ModConsole.DebugWarning("AvatarPickup player is not null!");
-                }
-                else
-                {
-                    ModConsole.DebugWarning("AvatarPickup player is null!");
-                }
-                yield return null;
-            }
-            AvatarPickupEditor(obj, player);
-            yield return null;
-        }
-
-        public static void AvatarPickupEditor(Transform Body, Player player)
-        {
-            if (Body == null)
-            {
-                ModConsole.Log("Couldn't find avatar body , is the player using a invisible avatar?", Color.Red);
-                return;
-            }
-
-            ModConsole.Log("[AVATAR Pickup] : Finding All Render Components of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
-            if (player.prop_ApiAvatar_0 != null)
-            {
-                ModConsole.Log("[AVATAR ANALYZER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
-            }
-            AvatarHelper.CheckTransform(Body.transform);
-            var username = GetDisplayName(player);
-            //Don't Check This Player's GameObjects As None Were Found
-            if (AvatarHelper._GameObjects == null)
-            {
-                ModConsole.Log("Failed to find Objects for User : " + username);
-                return;
-            }
-            _DumpedNames = new List<string>();
-            ModConsole.Log("Adding Pickup To Avatar Internals ...", Color.Green);
-
-            foreach (var obj in AvatarHelper._GameObjects)
-            {
-                if (obj != null)
-                {
-                    var item = obj.gameObject;
-                    var TransformRenderer = item.GetComponentInChildren<Renderer>();
-                    var GameObjectRenderer = obj.GetComponentInChildren<Renderer>();
-                    if (GameObjectRenderer == null || TransformRenderer == null)
-                    {
-                        // IGNORE, NO RENDERER!
-                        continue;
-                    }
-
-                    if (!_DumpedNames.Contains(item.name))
-                    {
-                        if (item.name.ToLower() == "avatar" || item.name.ToLower() == "body")
-                        {
-                            continue;
-                        }
-                        _DumpedNames.Add(item.name);
-                        var control = item.GetComponentInChildren<PickupController>();
-                        if (control == null)
-                        {
-                            control = item.AddComponent<PickupController>();
-                        }
-                        if (control != null)
-                        {
-                            control.ForceComponent = true;
-                            Pickup.SetPickupable(item, true);
-                            Pickup.SetDisallowTheft(item);
-                            ModConsole.Log("Added Pickup in Object [ " + item.name + " ] in " + username + "'s avatar", Color.Yellow);
-                        }
-
-                        item.AddCollider();
-                    }
-                }
-            }
-        }
 
         public static void Avatar_Object_Dumper(Transform Body, Player player)
         {
@@ -355,18 +268,7 @@ namespace AstroClient
             }
         }
 
-        public static void PickupAviObjects()
-        {
-            var apiuser = QuickMenuUtils.GetSelectedUser();
-            if (apiuser != null)
-            {
-                var ScannedUser = _AnalyzedPlayers.Where(x => x.player.GetAPIUser().id == apiuser.id).DefaultIfEmpty(null).First();
-                if (ScannedUser != null)
-                {
-                    MelonCoroutines.Start(AvatarPickup(ScannedUser.Avatar, ScannedUser.player));
-                }
-            }
-        }
+
 
         public static void InitButtons(QMNestedButton main, float x, float y, bool btnHalf)
         {
@@ -386,7 +288,6 @@ namespace AstroClient
             var menu = new QMNestedButton(main, x, y, "Lewd NSFW Menu", "Lewd Menu", null, null, null, null, false);
             //new QMSingleButton(menu, 1, 0, "Force Lewdify", new Action(ScanPlayerforNSFW), "Scan Player For NSFW.", null, null);
             new QMSingleButton(menu, 3, 0, "Dump Avatar Renderer Components", new Action(DumpSelectedAviComponents), "Print all visible components names in console.", null, null);
-            new QMSingleButton(menu, 1, 1, "Add Pickup Component to extra avatar parts (WIP).", new Action(PickupAviObjects), "Pickup Avatar Objects.", null, null);
         }
 
         private static void ReloadAllAvatars()

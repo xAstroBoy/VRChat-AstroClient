@@ -17,3 +17,6 @@ dotnet_diagnostic.CS0219.severity = none
 
 # CS0414: The field 'API.Auth' is assigned but its value is never used
 dotnet_diagnostic.CS0414.severity = none
+
+# CS8632: The annotation for nullable reference types should only be used in code within a '#nullable' annotations context.
+dotnet_diagnostic.CS8632.severity = none
