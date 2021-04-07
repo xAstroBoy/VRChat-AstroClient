@@ -531,6 +531,7 @@ namespace AstroClient
                             if (action == "SyncAssignD")
                             {
                                 TargetNode = obj;
+                                AssignedTargetRole = action;
                             }
                         }
                         RoleSwapper_GetDetectiveRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
@@ -542,13 +543,13 @@ namespace AstroClient
                         {
                             if (obj == GetLocalPlayerNode().Node)
                             {
-                                ModConsole.Log("");
                                 AssignedSelfRole = action;
                             }
 
                             if (action == "SyncAssignM")
                             {
                                 TargetNode = obj;
+                                AssignedTargetRole = action;
                             }
                         }
 
@@ -567,29 +568,34 @@ namespace AstroClient
         {
             if (SelfNode == null && TargetNode == null && string.IsNullOrEmpty(AssignedSelfRole) && string.IsNullOrWhiteSpace(AssignedSelfRole) && string.IsNullOrEmpty(AssignedTargetRole) && string.IsNullOrWhiteSpace(AssignedTargetRole))
             {
+                SafetySwap = false;
                 return true; // Keep it active.
             }
             if (SelfNode == TargetNode)
             {
                 ModConsole.Log("Target Node and SelfNode are the same!");
+                SafetySwap = false;
                 return false; // Deactivate..
             }
             if (AssignedSelfRole == AssignedTargetRole)
             {
                 ModConsole.Log("Target Role String and Self Role String are the same!");
-
+                SafetySwap = false;
+                return false;
             }
 
 
             SafetySwap = true;
+
             ModConsole.Log($"Executing Role Swapping!, Target Has Role : {AssignedTargetRole}, You have {AssignedSelfRole}.");
 
             UdonSearch.FindUdonEvent(SelfNode.name, AssignedTargetRole).ExecuteUdonEvent(); // Give Self Target Role.             
-            ModConsole.Log($"Sent Self Role to Target!.");
+            ModConsole.Log($"Assigned To Self Target's role!.");
 
             UdonSearch.FindUdonEvent(TargetNode.name, AssignedSelfRole).ExecuteUdonEvent(); // Give Target Self Role.             
-            ModConsole.Log($"Sent Target Role to Self!.");
+            ModConsole.Log($"Assigned To Target Self's role!.");
 
+            SafetySwap = false;
             return false; // Deactivate.
 
 
