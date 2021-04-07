@@ -45,14 +45,18 @@ namespace AstroClient.components
                     }
                 }
                 GameRoleTag = SingleTagsUtils.AddSingleTag(Internal_player);
+                if (isAmongUsWorld)
+                {
+                AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Internal_player);
+                }
                 if (JarRoleController.ViewRoles)
                 {
-                    SetTag(NoRoles, DefaultTextColor, NoRolesColor);
+                    SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
                     GameRoleTag.ShowTag = false;
                 }
                 else
                 {
-                    SetTag(HiddenRole, DefaultTextColor, HiddenRolesColor);
+                    SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
                     GameRoleTag.ShowTag = false;
                 }
                 if (JarRoleController.IsMurder4World)
@@ -318,25 +322,25 @@ namespace AstroClient.components
         }
 
         [HideFromIl2Cpp]
-        private void SetTag(string text, Color TextColor, Color TagColor)
+        private void SetTag(SingleTag tag, string text, Color TextColor, Color TagColor)
         {
             if (Internal_player != null)
             {
-                if (GameRoleTag != null)
+                if (tag != null)
                 {
-                    if (GameRoleTag.Label_Text != text)
+                    if (tag.Label_Text != text)
                     {
-                        GameRoleTag.Label_Text = text;
+                        tag.Label_Text = text;
                         Debug($"Updating SingleTag Label_Text for {Internal_player.DisplayName()}, with text : {text} ");
                     }
-                    if (GameRoleTag.Label_TextColor != TextColor)
+                    if (tag.Label_TextColor != TextColor)
                     {
-                        GameRoleTag.Label_TextColor = TextColor;
+                        tag.Label_TextColor = TextColor;
                         Debug($"Updating SingleTag Label_TextColor for {Internal_player.DisplayName()}, with TextColor : {TextColor.ToString()}");
                     }
-                    if (GameRoleTag.Tag_Color != TagColor)
+                    if (tag.Tag_Color != TagColor)
                     {
-                        GameRoleTag.Tag_Color = TagColor;
+                        tag.Tag_Color = TagColor;
                         Debug($"Updating SingleTag Tag_Color for {Internal_player.DisplayName()}, with TagColor : {TagColor.ToString()}");
                     }
                 }
@@ -348,6 +352,10 @@ namespace AstroClient.components
             if (GameRoleTag != null)
             {
                 Object.Destroy(GameRoleTag);
+            }
+            if (AmongUSVoteRevealTag != null)
+            {
+                Object.Destroy(AmongUSVoteRevealTag);
             }
             //if (_AssignedPlayerEntry != null)
             //{
@@ -384,6 +392,7 @@ namespace AstroClient.components
                     }
                 }
 
+
                 if (JarRoleController.IsMurder4World)
                 {
                     var ReturnedRole = GetPlayerRoleMurder4();
@@ -398,14 +407,14 @@ namespace AstroClient.components
                         {
                             if (GetCurrentSingleTagText() != ReturnedRole.ToString())
                             {
-                                SetTag(ReturnedRole.ToString(), DefaultTextColor, color.Value);
+                                SetTag(GameRoleTag, ReturnedRole.ToString(), DefaultTextColor, color.Value);
                             }
                         }
                         else
                         {
                             if (GetCurrentSingleTagText() != NoRoles)
                             {
-                                SetTag(NoRoles, DefaultTextColor, NoRolesColor);
+                                SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
                             }
                         }
                     }
@@ -413,13 +422,15 @@ namespace AstroClient.components
                     {
                         if (GetCurrentSingleTagText() != HiddenRole)
                         {
-                            SetTag(HiddenRole, DefaultTextColor, HiddenRolesColor);
+                            SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
                         }
                     }
                     return;
                 }
                 if (JarRoleController.isAmongUsWorld)
                 {
+
+
                     var ReturnedRole = GetPlayerRoleAmongUS();
                     if (ReturnedRole != AmongUsCurrentRole)
                     {
@@ -427,19 +438,42 @@ namespace AstroClient.components
                     }
                     if (JarRoleController.ViewRoles)
                     {
+
+                        if (AmongUSVoteRevealTag != null)
+                        {
+                            if (JarRoleController.ViewRoles)
+                            {
+                                if (!AmongUSHasVoted)
+                                {
+                                    if (AmongUSVoteRevealTag.ShowTag != AmongUSCanVote)
+                                    {
+                                        AmongUSVoteRevealTag.ShowTag = AmongUSCanVote;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                if (AmongUSVoteRevealTag.ShowTag != JarRoleController.ViewRoles)
+                                {
+                                    AmongUSVoteRevealTag.ShowTag = JarRoleController.ViewRoles;
+                                }
+                            }
+                        }
+
                         var color = AmongUsGetNamePlateColor();
                         if (color != null)
                         {
                             if (GetCurrentSingleTagText() != ReturnedRole.ToString())
                             {
-                                SetTag(ReturnedRole.ToString(), DefaultTextColor, color.Value);
+                                SetTag(GameRoleTag, ReturnedRole.ToString(), DefaultTextColor, color.Value);
                             }
                         }
                         else
                         {
                             if (GetCurrentSingleTagText() != NoRoles)
                             {
-                                SetTag(NoRoles, DefaultTextColor, NoRolesColor);
+                                SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
+                                AmongUSHasVoted = false;
                             }
                         }
                     }
@@ -447,7 +481,7 @@ namespace AstroClient.components
                     {
                         if (GetCurrentSingleTagText() != HiddenRole)
                         {
-                            SetTag(HiddenRole, DefaultTextColor, HiddenRolesColor);
+                            SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
                         }
                     }
                     return;
@@ -589,12 +623,64 @@ namespace AstroClient.components
             }
         }
 
+
+        internal bool AmongUSHasVoted;
+
+        internal bool AmongUSCanVote
+        {
+            get
+            {
+
+                if (AmongUsCurrentRole == AmongUsRoles.Crewmate)
+                {
+                    if (!AmongUSHasVoted)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else if (AmongUsCurrentRole == AmongUsRoles.Impostor)
+                {
+                    if (!AmongUSHasVoted)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else if (AmongUsCurrentRole == AmongUsRoles.Unassigned)
+                {
+                    return false;
+                }
+                else if (AmongUsCurrentRole == AmongUsRoles.None)
+                {
+                    return false;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+
+        }
+
         private Murder4Roles Murder4CurrentRole;
         private AmongUsRoles AmongUsCurrentRole;
         private Player Internal_player;
         private APIUser Internal_user;
         private GameObject _AssignedPlayerEntry;
         private SingleTag GameRoleTag;
+
+        internal SingleTag AmongUSVoteRevealTag;
+
+
+
         private LinkedNodes _SavedEntry;
 
         // MURDER 4 MAP

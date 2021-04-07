@@ -154,7 +154,7 @@ namespace AstroClient
             AmongUSUdonExploits.Init_ForcePlayerEject_Menu(AmongUsCheatsPage, 4f, 0.5f, true);
 
             AmongUSUdonExploits.Init_RoleSwap_Menu(AmongUsCheatsPage, 4f, 1f, true);
-            GetImpostorRoleBtn = new QMSingleToggleButton(AmongUsCheatsPage, 4, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetImpostorRole = true; }), "Get Murderer Role", new Action(() => { RoleSwapper_GetImpostorRole = false; }), "Assign Yourself Impostor Role on Next Round!", Color.green, Color.red, null, false, true);
+            GetImpostorRoleBtn = new QMSingleToggleButton(AmongUsCheatsPage, 4, 1.5f, "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = true; }), "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = false; }), "Assign Yourself Impostor Role on Next Round!", Color.green, Color.red, null, false, true);
 
             GameStartbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
             GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1.5f, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
@@ -170,31 +170,124 @@ namespace AstroClient
         }
 
 
+        private static JarRoleESP TranslateSyncVotedFor(int value)
+        {
+            return JarRoleController.RoleEspComponents.Where(x => x.LinkedEntry.nodevalue == value).First();
+        }
+
+        private static int RemoveSyncVotedForText(string key)
+        {
+            var removedtext = key.ToLower().Replace("syncvotedfor", string.Empty).Replace(" ", string.Empty);
+            int.TryParse(removedtext, out var value);
+            return value;
+        }
+
+        private static JarRoleESP GetEventNode(GameObject node)
+        {
+            return JarRoleController.RoleEspComponents.Where(x => x.Node == node).First();
+        }
+
+        private void SetTag(SingleTag tag, string text, Color TextColor, Color TagColor)
+        {
+
+            if (tag != null)
+            {
+                if (tag.Label_Text != text)
+                {
+                    tag.Label_Text = text;
+                }
+                if (tag.Label_TextColor != TextColor)
+                {
+                    tag.Label_TextColor = TextColor;
+                }
+                if (tag.Tag_Color != TagColor)
+                {
+                    tag.Tag_Color = TagColor;
+                }
+            }
+
+        }
+
+
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             if (HasAmongUsWorldLoaded)
             {
-
-                if (obj != null && action.StartsWith("SyncAssign") && GetLocalPlayerNode().Node != null)
+                if (obj != null)
                 {
-                    if (RoleSwapper_GetImpostorRole)
+
+                    if (action.StartsWith("SyncAssign") && GetLocalPlayerNode().Node != null)
                     {
-                        if (!SafetySwap) // In case it grabs and update the current ones already!
+                        if (RoleSwapper_GetImpostorRole)
                         {
-                            if (obj == GetLocalPlayerNode().Node)
+                            if (!SafetySwap) // In case it grabs and update the current ones already!
                             {
-                                AssignedSelfRole = action;
-                            }
+                                if (obj == GetLocalPlayerNode().Node)
+                                {
+                                    AssignedSelfRole = action;
+                                }
 
-                            if (action == "SyncAssignM")
-                            {
-                                TargetNode = obj;
-                                AssignedTargetRole = action;
-                            }
+                                if (action == "SyncAssignM")
+                                {
+                                    TargetNode = obj;
+                                    AssignedTargetRole = action;
+                                }
 
-                            RoleSwapper_GetImpostorRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                                RoleSwapper_GetImpostorRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                            }
                         }
                     }
+                    else if (action.StartsWith("SyncVotedFor") || action.ToLower() == "syncabstainedvoting")
+                    {
+                        if (action.StartsWith("SyncVotedFor"))
+                        {
+                            var actionexecuted = GetEventNode(obj);
+                            if (actionexecuted != null)
+                            {
+                                actionexecuted.AmongUSHasVoted = true;
+                                var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
+                                if (against != null)
+                                {
+                                    actionexecuted.AmongUSVoteRevealTag.ShowTag = true;
+                                    SetTag(actionexecuted.AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#F35858"));
+                                }
+                            }
+                        }
+                        if(action.ToLower() == "syncabstainedvoting")
+                        {
+                            var esp = GetEventNode(obj);
+                            if(esp != null)
+                            {
+                                esp.AmongUSHasVoted = true;
+                                SetTag(esp.AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorConverter.HexToColor("#61ffe6"));
+                            }
+                        }
+
+                    }
+                    else if (action == "SyncEndVotingPhase" || action == "SyncAbort" || action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncStart")
+                    {
+                        //JarRoleController.RoleEspComponents.All(c => { c.AmongUSHasVoted = false; c.AmongUSVoteRevealTag.ShowTag = false;  SetTag(c.AmongUSVoteRevealTag, $"No Votes", Color.white, ColorConverter.HexToColor("#61ffe6"));  return true; }); // IDK IF THIS WORKS.
+
+
+
+                        foreach (var ESP in JarRoleController.RoleEspComponents)
+                        {
+                            if (ESP != null)
+                            {
+                                if (ESP.AmongUSHasVoted)
+                                {
+                                    ESP.AmongUSHasVoted = false;
+                                }
+                                if (ESP.AmongUSVoteRevealTag != null)
+                                {
+                                    SetTag(ESP.AmongUSVoteRevealTag, $"No Votes", Color.white, ColorConverter.HexToColor("#61ffe6"));
+                                    ESP.AmongUSVoteRevealTag.ShowTag = false;
+                                }
+                            }
+                        }
+
+                    }
+
                 }
             }
 
