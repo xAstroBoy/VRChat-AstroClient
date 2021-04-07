@@ -16,7 +16,7 @@ namespace AstroClient.Startup.Buttons
             QMSingleToggleButton joinLeaveToggle = new QMSingleToggleButton(sub, 2, 0, "Join/Leave ON", () => { ConfigManager.General.JoinLeave = true; }, "Join/Leave OFF", () => { ConfigManager.General.JoinLeave = false; }, "Notification when someone joins/leaves", Color.green, Color.red, null, ConfigManager.General.JoinLeave, true);
             joinLeaveToggle.setToggleState(ConfigManager.General.JoinLeave, false);
 
-            QMNestedButton subHideElements = new QMNestedButton(sub, 1, 2.5f, "Hide Elements", "Hide Elements", null, null, null, null, true);
+            QMNestedButton subHideElements = new QMNestedButton(sub, 1, 2f, "Hide Elements", "Hide Elements", null, null, null, null, false);
             sub.getMainButton().setTextColor(Color.cyan);
 
             QMToggleButton removeVRCPlusToggle = new QMToggleButton(subHideElements, 1, 0, "Remove VRCPlus", () => { ConfigManager.UI.RemoveVRCPlus = true; }, "Keep VRCPlus", () => { ConfigManager.UI.RemoveVRCPlus = false; }, "Requires Restart");
