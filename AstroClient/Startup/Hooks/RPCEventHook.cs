@@ -48,6 +48,7 @@
             try
             {
                 var array = Networking.DecodeParameters(__1.ParameterBytes);
+                string textSelf = LocalPlayerUtils.GetSelfPlayer().DisplayName();
                 string text = string.Empty;
                 string actiontext = string.Empty;
 
