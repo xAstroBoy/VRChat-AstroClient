@@ -17,6 +17,9 @@ using static AstroClient.variables.CustomLists;
 using VRC.Udon;
 using VRC;
 using DayClientML2.Utility.Extensions;
+using MelonLoader;
+using System.Collections;
+using DayClientML2.Utility;
 
 #endregion AstroClient Imports
 
@@ -596,21 +599,38 @@ namespace AstroClient
             }
 
 
+            MiscUtility.DelayFunction(0.01f, new Action(() => {
+
+
+                var TargetEvent = UdonSearch.FindUdonEvent(TargetNode, AssignedSelfRole);
+                if (TargetEvent != null)
+                {
+                    TargetEvent.ExecuteUdonEvent();
+                }
+
+                var selfevent = UdonSearch.FindUdonEvent(SelfNode, AssignedTargetRole);
+                if (selfevent != null)
+                {
+                    selfevent.ExecuteUdonEvent();
+                }
+
+
+            }));
+
             SafetySwap = true;
 
             ModConsole.DebugLog($"Executing Role Swapping!, Target Has Role : {AssignedTargetRole}, You have {AssignedSelfRole}.");
 
-            UdonSearch.FindUdonEvent(SelfNode, AssignedTargetRole).ExecuteUdonEvent(); // Give Self Target Role.             
-            ModConsole.DebugLog($"Assigned To Self Target's role!.");
 
-            UdonSearch.FindUdonEvent(TargetNode, AssignedSelfRole).ExecuteUdonEvent(); // Give Target Self Role.             
-            ModConsole.DebugLog($"Assigned To Target Self's role!.");
 
             SafetySwap = false;
             return false; // Deactivate.
 
 
         }
+
+
+
 
 
 

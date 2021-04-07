@@ -3,6 +3,7 @@ using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
 using AstroClient.Finder;
 using AstroClient.Variables;
+using DayClientML2.Utility;
 using DayClientML2.Utility.Extensions;
 using RubyButtonAPI;
 using System;
@@ -171,19 +172,27 @@ namespace AstroClient
                         {
                             if (obj.name.ToLower() == SelfNode.name.ToLower() && action.ToLower() == "freezeme")
                             {
-
-                                if (UnfreezeMeUdonEvent != null)
+                                MiscUtility.DelayFunction(0.01f, new Action(() =>
                                 {
-                                    UnfreezeMeUdonEvent.ExecuteUdonEvent();
-                                    ModConsole.Log("Detected Freeze!, Unfreezing!", System.Drawing.Color.LawnGreen);
-                                }
-                                else
-                                {
-                                    UnfreezeMeUdonEvent = UdonSearch.FindUdonEvent(SelfNode.name, "unfreezeme");
-                                    UnfreezeMeUdonEvent.ExecuteUdonEvent();
-                                    ModConsole.Log("Detected Freeze!, Unfreezing!", System.Drawing.Color.LawnGreen);
 
-                                }
+
+
+                                    if (UnfreezeMeUdonEvent != null)
+                                    {
+                                        UnfreezeMeUdonEvent.ExecuteUdonEvent();
+                                        ModConsole.Log("Detected Freeze!, Unfreezing!", System.Drawing.Color.LawnGreen);
+                                    }
+                                    else
+                                    {
+                                        UnfreezeMeUdonEvent = UdonSearch.FindUdonEvent(SelfNode.name, "unfreezeme");
+                                        UnfreezeMeUdonEvent.ExecuteUdonEvent();
+                                        ModConsole.Log("Detected Freeze!, Unfreezing!", System.Drawing.Color.LawnGreen);
+
+                                    }
+
+
+                                }));
+
 
 
                             }
