@@ -11,7 +11,7 @@ namespace AstroClient
         public int UnknownInt;
         public float UnknownFloat;
 
-        public VRC_EventDispatcherRFC_TriggerEventArgs(VRC_EventHandler VRC_EventHandler, VRC_EventHandler.VrcEvent VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int UnknownInt, float UnknownFloat)
+        public VRC_EventDispatcherRFC_TriggerEventArgs(VRC_EventHandler? VRC_EventHandler, VRC_EventHandler.VrcEvent? VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int UnknownInt, float UnknownFloat)
         {
             this.VRC_EventHandler = VRC_EventHandler;
             this.VrcEvent = VrcEvent;

@@ -77,7 +77,28 @@
 
                     if (ConfigManager.General.LogUdonEvents)
                     {
-                        ModConsole.DebugLog($"Udon RPC: Sender : {__0.DisplayName()}, GameObject : {__1.ParameterObject.name}, Action : {actiontext}");
+                        string sender = string.Empty;
+                        string GameObjName = string.Empty;
+
+                        if(__0 != null)
+                        {
+                            sender = __0.DisplayName();
+                        }
+                        else
+                        {
+                            sender = "null";
+                        }
+
+                        if(__1.ParameterObject != null)
+                        {
+                            GameObjName = __1.ParameterObject.name;
+                        }
+                        else
+                        {
+                            GameObjName = "null";
+                        }
+
+                        ModConsole.DebugLog($"Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
                     }
                     Event_OnUdonSyncRPC?.Invoke(null, new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
                 }
@@ -91,6 +112,10 @@
                         if (__0 != null)
                         {
                             ModConsole.DebugLog($"RPC: {__0.DisplayName()}, {name}, {parameter}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
+                        }
+                        else
+                        {
+                            ModConsole.DebugLog($"RPC: Null , {name}, {parameter}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
                         }
                     }
                 }

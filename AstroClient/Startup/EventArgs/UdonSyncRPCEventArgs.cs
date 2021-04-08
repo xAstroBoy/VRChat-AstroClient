@@ -11,7 +11,7 @@ namespace AstroClient
         public string action;
 
 
-        public UdonSyncRPCEventArgs(Player sender, GameObject obj, string action)
+        public UdonSyncRPCEventArgs(Player? sender, GameObject? obj, string action)
         {
             this.sender = sender;
             this.obj = obj;
