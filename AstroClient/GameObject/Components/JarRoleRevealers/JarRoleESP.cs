@@ -3,6 +3,7 @@ using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
 using DayClientML2.Utility.Extensions;
 using System;
+using System.Linq;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,7 +24,7 @@ namespace AstroClient.components
         private Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object> AntiGarbageCollection = new Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object>();
 
         // Use this for initialization
-        private void Start()
+        public void Start()
         {
             try
             {
@@ -77,6 +78,96 @@ namespace AstroClient.components
         }
 
         private bool JarRoleEspDebug = false;
+
+        [HideFromIl2Cpp]
+        private static JarRoleESP TranslateSyncVotedFor(int value)
+        {
+            return RoleEspComponents.Where(x => x.LinkedEntry.nodevalue == value).First();
+        }
+        [HideFromIl2Cpp]
+
+        private static int RemoveSyncVotedForText(string key)
+        {
+            var removedtext = key.ToLower().Replace("syncvotedfor", string.Empty).Replace(" ", string.Empty);
+            int.TryParse(removedtext, out var value);
+            return value;
+        }
+        [HideFromIl2Cpp]
+
+        private static JarRoleESP GetEventNode(GameObject node)
+        {
+            return RoleEspComponents.Where(x => x.Node == node).First();
+        }
+
+
+        [HideFromIl2Cpp]
+
+        public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        {
+            if (isAmongUsWorld)
+            {
+                if (Internal_AssignedPlayerNode != null)
+                {
+                    if (obj != null && obj == Internal_AssignedPlayerNode)
+                    {
+
+                        if (action.StartsWith("SyncVotedFor"))
+                        {
+                            var actionexecuted = GetEventNode(obj);
+                            if (actionexecuted != null)
+                            {
+                                actionexecuted.AmongUSHasVoted = true;
+                                var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
+                                if (against != null)
+                                {
+                                    actionexecuted.AmongUSVoteRevealTag.ShowTag = true;
+                                    if(against != JarRoleController.GetLocalPlayerNode())
+                                    {
+                                        SetTag(actionexecuted.AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#44DBAC"));
+                                    }
+                                    else
+                                    {
+                                        SetTag(actionexecuted.AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#C22B26"));
+
+                                    }
+                                }
+                                
+                            }
+
+                        }
+                        else if (action.ToLower() == "syncabstainedvoting")
+                        {
+                            AmongUSHasVoted = true;
+                            if (!AmongUSVoteRevealTag.ShowTag)
+                            {
+                                AmongUSVoteRevealTag.ShowTag = true;
+                            }
+                            SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorConverter.HexToColor("#1BA039"));
+
+                        }
+                    }
+
+
+                    if (action == "SyncEndVotingPhase" || action == "SyncAbort" || action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncStart")
+                    {
+                        if (AmongUSHasVoted)
+                        {
+                            AmongUSHasVoted = false;
+                        }
+                        if (AmongUSVoteRevealTag != null)
+                        {
+                            SetTag(AmongUSVoteRevealTag, $"No Votes", Color.white, ColorConverter.HexToColor("#034989"));
+                            if (AmongUSVoteRevealTag.ShowTag)
+                            {
+                                AmongUSVoteRevealTag.ShowTag = false;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
 
         [HideFromIl2Cpp]
         private void Debug(string msg)
@@ -425,9 +516,8 @@ namespace AstroClient.components
                             SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
                         }
                     }
-                    return;
                 }
-                if (JarRoleController.isAmongUsWorld)
+                else if (JarRoleController.isAmongUsWorld)
                 {
 
 
@@ -443,19 +533,38 @@ namespace AstroClient.components
                         {
                             if (JarRoleController.ViewRoles)
                             {
-                                if (!AmongUSHasVoted)
+                                if (AmongUsCurrentRole == AmongUsRoles.Crewmate || AmongUsCurrentRole == AmongUsRoles.Impostor)
                                 {
-                                    if (AmongUSVoteRevealTag.ShowTag != AmongUSCanVote)
+
+                                    if (!AmongUSHasVoted)
                                     {
-                                        AmongUSVoteRevealTag.ShowTag = AmongUSCanVote;
+                                        if (AmongUSVoteRevealTag.ShowTag)
+                                        {
+                                            AmongUSVoteRevealTag.ShowTag = false;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (!AmongUSVoteRevealTag.ShowTag)
+                                        {
+                                            AmongUSVoteRevealTag.ShowTag = true;
+                                        }
+                                    }
+
+                                }
+                                else
+                                {
+                                    if (AmongUSVoteRevealTag.ShowTag)
+                                    {
+                                        AmongUSVoteRevealTag.ShowTag = false;
                                     }
                                 }
                             }
                             else
                             {
-                                if (AmongUSVoteRevealTag.ShowTag != JarRoleController.ViewRoles)
+                                if (AmongUSVoteRevealTag.ShowTag)
                                 {
-                                    AmongUSVoteRevealTag.ShowTag = JarRoleController.ViewRoles;
+                                    AmongUSVoteRevealTag.ShowTag = false;
                                 }
                             }
                         }
@@ -676,7 +785,7 @@ namespace AstroClient.components
         private APIUser Internal_user;
         private GameObject _AssignedPlayerEntry;
         private SingleTag GameRoleTag;
-
+        
         internal SingleTag AmongUSVoteRevealTag;
 
 

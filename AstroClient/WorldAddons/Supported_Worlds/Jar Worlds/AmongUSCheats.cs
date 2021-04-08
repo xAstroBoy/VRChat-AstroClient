@@ -170,43 +170,9 @@ namespace AstroClient
         }
 
 
-        private static JarRoleESP TranslateSyncVotedFor(int value)
-        {
-            return JarRoleController.RoleEspComponents.Where(x => x.LinkedEntry.nodevalue == value).First();
-        }
 
-        private static int RemoveSyncVotedForText(string key)
-        {
-            var removedtext = key.ToLower().Replace("syncvotedfor", string.Empty).Replace(" ", string.Empty);
-            int.TryParse(removedtext, out var value);
-            return value;
-        }
 
-        private static JarRoleESP GetEventNode(GameObject node)
-        {
-            return JarRoleController.RoleEspComponents.Where(x => x.Node == node).First();
-        }
-
-        private void SetTag(SingleTag tag, string text, Color TextColor, Color TagColor)
-        {
-
-            if (tag != null)
-            {
-                if (tag.Label_Text != text)
-                {
-                    tag.Label_Text = text;
-                }
-                if (tag.Label_TextColor != TextColor)
-                {
-                    tag.Label_TextColor = TextColor;
-                }
-                if (tag.Tag_Color != TagColor)
-                {
-                    tag.Tag_Color = TagColor;
-                }
-            }
-
-        }
+        
 
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
@@ -236,54 +202,6 @@ namespace AstroClient
                                 RoleSwapper_GetImpostorRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
                             }
                         }
-                    }
-                    else if (action.StartsWith("SyncVotedFor") || action.ToLower() == "syncabstainedvoting")
-                    {
-                        if (action.StartsWith("SyncVotedFor"))
-                        {
-                            var actionexecuted = GetEventNode(obj);
-                            if (actionexecuted != null)
-                            {
-                                actionexecuted.AmongUSHasVoted = true;
-                                var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
-                                if (against != null)
-                                {
-                                    actionexecuted.AmongUSVoteRevealTag.ShowTag = true;
-                                    SetTag(actionexecuted.AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#F35858"));
-                                }
-                            }
-                        }
-                        if(action.ToLower() == "syncabstainedvoting")
-                        {
-                            var esp = GetEventNode(obj);
-                            if(esp != null)
-                            {
-                                esp.AmongUSHasVoted = true;
-                                SetTag(esp.AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorConverter.HexToColor("#61ffe6"));
-                            }
-                        }
-
-                    }
-                    else if (action == "SyncEndVotingPhase" || action == "SyncAbort" || action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncStart")
-                    {
-                        //JarRoleController.RoleEspComponents.All(c => { c.AmongUSHasVoted = false; c.AmongUSVoteRevealTag.ShowTag = false;  SetTag(c.AmongUSVoteRevealTag, $"No Votes", Color.white, ColorConverter.HexToColor("#61ffe6"));  return true; }); // IDK IF THIS WORKS.
-
-                        foreach (var ESP in JarRoleController.RoleEspComponents)
-                        {
-                            if (ESP != null)
-                            {
-                                if (ESP.AmongUSHasVoted)
-                                {
-                                    ESP.AmongUSHasVoted = false;
-                                }
-                                if (ESP.AmongUSVoteRevealTag != null)
-                                {
-                                    SetTag(ESP.AmongUSVoteRevealTag, $"No Votes", Color.white, ColorConverter.HexToColor("#61ffe6"));
-                                    ESP.AmongUSVoteRevealTag.ShowTag = false;
-                                }
-                            }
-                        }
-
                     }
 
                 }

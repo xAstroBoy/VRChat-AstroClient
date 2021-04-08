@@ -2,6 +2,7 @@
 using AstroClient.ConsoleUtils;
 using AstroClient.Finder;
 using AstroClient.Variables;
+using DayClientML2.Utility.Extensions;
 using RubyButtonAPI;
 using System;
 using System.Collections.Generic;
@@ -190,6 +191,11 @@ namespace AstroClient
                 return value;
             }
             return null;
+        }
+
+        public static JarRoleESP GetLocalPlayerNode()
+        {
+            return RoleEspComponents.Where(x => x.apiuser.displayName == LocalPlayerUtils.GetSelfPlayer().DisplayName()).First();
         }
 
         public override void OnWorldReveal(string id, string name, string asseturl)
