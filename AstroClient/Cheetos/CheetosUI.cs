@@ -99,7 +99,7 @@
         public QMSingleButton RestartButton { get; private set; }
 
         public QMToggleButton PlayerListToggle { get; private set; }
-
+        
         public override void VRChat_OnUiManagerInit()
         {
             MainButton = new QMNestedButton("ShortcutMenu", 5, 3, "Cheeto's Menu", "Cheeto's secret WIP features", null, null, null, null, true);
