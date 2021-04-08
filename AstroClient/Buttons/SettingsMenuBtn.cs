@@ -19,6 +19,12 @@ namespace AstroClient.Startup.Buttons
             QMSingleToggleButton rpcLogToggle = new QMSingleToggleButton(sub, 3, 0, "RPC Log ON", () => { ConfigManager.General.LogRPCEvents = true; }, "RPC Log OFF", () => { ConfigManager.General.LogRPCEvents = false; }, "Log RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogRPCEvents, true);
             rpcLogToggle.setToggleState(ConfigManager.General.LogRPCEvents, false);
 
+            QMSingleToggleButton udonRPCToggle = new QMSingleToggleButton(sub, 4, 0, "Udon Log ON", () => { ConfigManager.General.LogUdonEvents = true; }, "Udon Log OFF", () => { ConfigManager.General.LogUdonEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogUdonEvents, true);
+            udonRPCToggle.setToggleState(ConfigManager.General.LogUdonEvents, false);
+
+            QMSingleToggleButton TriggerEventToggle = new QMSingleToggleButton(sub, 1, 0.5f, "Trigger Log ON", () => { ConfigManager.General.LogTriggerEvents = true; }, "Trigger Log OFF", () => { ConfigManager.General.LogTriggerEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogTriggerEvents, true);
+            TriggerEventToggle.setToggleState(ConfigManager.General.LogTriggerEvents, false);
+
             QMNestedButton subHideElements = new QMNestedButton(sub, 1, 2f, "Hide Elements", "Hide Elements", null, null, null, null, false);
             sub.getMainButton().setTextColor(Color.cyan);
 

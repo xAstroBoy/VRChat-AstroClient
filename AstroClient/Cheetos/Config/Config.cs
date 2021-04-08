@@ -36,5 +36,11 @@
         public bool JoinLeave = false;
 
         public bool LogRPCEvents = false;
+
+        public bool LogUdonEvents = false;
+
+        public bool LogTriggerEvents = false;
+
+
     }
 }

@@ -73,16 +73,30 @@
 
                 if (parameter == "UdonSyncRunProgramAsRPC")
                 {
+
+
+                    if (ConfigManager.General.LogUdonEvents)
+                    {
+                        ModConsole.DebugLog($"Udon RPC: Sender : {__0.DisplayName()}, GameObject : {__1.ParameterObject.name}, Action : {actiontext}");
+                    }
                     Event_OnUdonSyncRPC?.Invoke(null, new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
                 }
 
+
                 if (log)
                 {
-                    if (__0 != null)
+
+                    if (parameter != "UdonSyncRunProgramAsRPC")
                     {
-                        ModConsole.DebugLog($"RPC: {__0.DisplayName()}, {name}, {parameter}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
+                        if (__0 != null)
+                        {
+                            ModConsole.DebugLog($"RPC: {__0.DisplayName()}, {name}, {parameter}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
+                        }
                     }
                 }
+
+
+
             }
 
             catch { } // Suppress errors as who tf needs em.
