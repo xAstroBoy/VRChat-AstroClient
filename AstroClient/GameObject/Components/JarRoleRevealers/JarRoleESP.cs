@@ -92,12 +92,6 @@ namespace AstroClient.components
             int.TryParse(removedtext, out var value);
             return value;
         }
-        [HideFromIl2Cpp]
-
-        private static JarRoleESP GetEventNode(GameObject node)
-        {
-            return RoleEspComponents.Where(x => x.Node == node).First();
-        }
 
 
         [HideFromIl2Cpp]
@@ -113,34 +107,41 @@ namespace AstroClient.components
 
                         if (action.StartsWith("SyncVotedFor"))
                         {
-                            var actionexecuted = GetEventNode(obj);
-                            if (actionexecuted != null)
-                            {
-                                actionexecuted.AmongUSHasVoted = true;
-                                var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
-                                if (against != null)
-                                {
-                                    actionexecuted.AmongUSVoteRevealTag.ShowTag = true;
-                                    if(against != JarRoleController.GetLocalPlayerNode())
-                                    {
-                                        SetTag(actionexecuted.AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#44DBAC"));
-                                    }
-                                    else
-                                    {
-                                        SetTag(actionexecuted.AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#C22B26"));
 
+                            AmongUSHasVoted = true;
+                            var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
+                            if (against != null)
+                            {
+                                if (JarRoleController.ViewRoles)
+                                {
+                                    if (!AmongUSVoteRevealTag.ShowTag)
+                                    {
+                                        AmongUSVoteRevealTag.ShowTag = true;
                                     }
                                 }
-                                
+                                if (against != GetLocalPlayerNode())
+                                {
+                                    SetTag(AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#44DBAC"));
+                                }
+                                else
+                                {
+                                    SetTag(AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#C22B26"));
+
+                                }
                             }
+
+
 
                         }
                         else if (action.ToLower() == "syncabstainedvoting")
                         {
                             AmongUSHasVoted = true;
-                            if (!AmongUSVoteRevealTag.ShowTag)
+                            if (JarRoleController.ViewRoles)
                             {
-                                AmongUSVoteRevealTag.ShowTag = true;
+                                if (!AmongUSVoteRevealTag.ShowTag)
+                                {
+                                    AmongUSVoteRevealTag.ShowTag = true;
+                                }
                             }
                             SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorConverter.HexToColor("#1BA039"));
 
@@ -156,10 +157,13 @@ namespace AstroClient.components
                         }
                         if (AmongUSVoteRevealTag != null)
                         {
-                            SetTag(AmongUSVoteRevealTag, $"No Votes", Color.white, ColorConverter.HexToColor("#034989"));
-                            if (AmongUSVoteRevealTag.ShowTag)
+                            SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorConverter.HexToColor("#034989"));
+                            if (JarRoleController.ViewRoles)
                             {
-                                AmongUSVoteRevealTag.ShowTag = false;
+                                if (AmongUSVoteRevealTag.ShowTag)
+                                {
+                                    AmongUSVoteRevealTag.ShowTag = false;
+                                }
                             }
                         }
 
@@ -481,6 +485,7 @@ namespace AstroClient.components
                     {
                         GameRoleTag.ShowTag = JarRoleController.ViewRoles;
                     }
+
                 }
 
 
@@ -526,31 +531,19 @@ namespace AstroClient.components
                     {
                         AmongUsCurrentRole = ReturnedRole;
                     }
-                    if (JarRoleController.ViewRoles)
+
+                    if (AmongUSVoteRevealTag != null)
                     {
-
-                        if (AmongUSVoteRevealTag != null)
+                        if (JarRoleController.ViewRoles)
                         {
-                            if (JarRoleController.ViewRoles)
+                            if (AmongUsCurrentRole == AmongUsRoles.Crewmate || AmongUsCurrentRole == AmongUsRoles.Impostor)
                             {
-                                if (AmongUsCurrentRole == AmongUsRoles.Crewmate || AmongUsCurrentRole == AmongUsRoles.Impostor)
+                                if (AmongUSHasVoted)
                                 {
-
-                                    if (!AmongUSHasVoted)
+                                    if (!AmongUSVoteRevealTag.ShowTag)
                                     {
-                                        if (AmongUSVoteRevealTag.ShowTag)
-                                        {
-                                            AmongUSVoteRevealTag.ShowTag = false;
-                                        }
+                                        AmongUSVoteRevealTag.ShowTag = true;
                                     }
-                                    else
-                                    {
-                                        if (!AmongUSVoteRevealTag.ShowTag)
-                                        {
-                                            AmongUSVoteRevealTag.ShowTag = true;
-                                        }
-                                    }
-
                                 }
                                 else
                                 {
@@ -560,15 +553,19 @@ namespace AstroClient.components
                                     }
                                 }
                             }
-                            else
+                        }
+                        else
+                        {
+                            if (AmongUSVoteRevealTag.ShowTag)
                             {
-                                if (AmongUSVoteRevealTag.ShowTag)
-                                {
-                                    AmongUSVoteRevealTag.ShowTag = false;
-                                }
+                                AmongUSVoteRevealTag.ShowTag = false;
                             }
                         }
 
+                    }
+
+                    if (JarRoleController.ViewRoles)
+                    {
                         var color = AmongUsGetNamePlateColor();
                         if (color != null)
                         {
@@ -732,11 +729,26 @@ namespace AstroClient.components
             }
         }
 
+        private bool _AmongUSHasVoted;
+        internal bool AmongUSHasVoted
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return _AmongUSHasVoted;
+            }
+            [HideFromIl2Cpp]
 
-        internal bool AmongUSHasVoted;
+            set
+            {
+                _AmongUSHasVoted = value;
+             
+            }
+        }
 
         internal bool AmongUSCanVote
         {
+            [HideFromIl2Cpp]
             get
             {
 
