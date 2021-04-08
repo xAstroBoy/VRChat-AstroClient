@@ -9,7 +9,7 @@ using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 
 namespace AstroClient.components
 {
-    public class PickupController : MonoBehaviour
+    public class PickupController : GameEventsBehaviour
     {
         public PickupController(IntPtr ptr) : base(ptr)
         {

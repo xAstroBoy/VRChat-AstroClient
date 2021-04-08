@@ -11,7 +11,7 @@ using static AstroClient.LocalPlayerUtils;
 
 namespace AstroClient.AstroUtils.PlayerMovement
 {
-    public class Movement : Overridables
+    public class Movement : GameEvents
     {
         public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {

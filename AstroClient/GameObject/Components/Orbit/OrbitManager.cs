@@ -18,17 +18,17 @@ using AstroClient.ConsoleUtils;
 
 namespace AstroClient.components
 {
-    public class OrbitManager : MonoBehaviour
+    public class OrbitManager : GameEventsBehaviour
     {
         #region Internal
 
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
         public OrbitManager(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -53,12 +53,12 @@ namespace AstroClient.components
 
         #region Module
 
-        public static Il2CppSystem.Collections.Generic.List<MonoBehaviour> OrbitBehaviours;
+        public static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> OrbitBehaviours;
         public static float Offset = 0f;
 
         public void Start()
         {
-            OrbitBehaviours = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>();
+            OrbitBehaviours = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
             Instance = this;
         }
 
@@ -163,7 +163,7 @@ namespace AstroClient.components
             }
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             ClearList();
             _OrbitObjects.Clear();

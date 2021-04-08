@@ -8,7 +8,7 @@ using VRC.Core;
 
 namespace AstroClient.Components
 {
-    internal class SingleTagsUtils : Overridables
+    internal class SingleTagsUtils : GameEvents
     {
         public override void OnLevelLoaded()
         {

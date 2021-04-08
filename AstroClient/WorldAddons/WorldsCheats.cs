@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace AstroClient.Worlds
 {
-    public class WorldsCheats : Overridables
+    public class WorldsCheats : GameEvents
     {
 
 

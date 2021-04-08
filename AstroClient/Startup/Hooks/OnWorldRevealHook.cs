@@ -7,11 +7,11 @@ using UnhollowerBaseLib;
 
 namespace AstroClient.Startup.Hooks
 {
-    public class OnWorldRevealHook : Overridables
+    public class OnWorldRevealHook : GameEvents
     {
         public static event EventHandler<OnWorldRevealArgs> Event_OnWorldReveal;
 
-        public override void OnApplicationStart()
+        public override void ExecutePriorityPatches()
         {
             HookFadeTo();
         }

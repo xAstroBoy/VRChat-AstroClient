@@ -69,11 +69,10 @@
     <Compile Include="Cheetos\AstroInput.cs" />
     <Compile Include="Cheetos\Config\Config.cs" />
     <Compile Include="Cheetos\Config\ConfigManager.cs" />
-    <Compile Include="Cheetos\DamnItMeap.cs" />
     <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
     <Compile Include="Cheetos\PlayerMenuUI.cs" />
     <Compile Include="Cheetos\Config\JSonWriter.cs" />
-    <Compile Include="Cheetos\GenericOverridables.cs" />
+    <Compile Include="Cheetos\GenericGameEvents.cs" />
     <Compile Include="Networking\HandleClient.cs" />
     <Compile Include="Networking\NetworkingExtensions.cs" />
     <Compile Include="Networking\ReceivedDataEventArgs.cs" />
@@ -84,7 +83,7 @@
     <Compile Include="Startup\EventArgs\SpawnEmojiArgs.cs" />
     <Compile Include="Startup\EventArgs\RayCastEventArgs.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
-    <Compile Include="Overridables.cs" />
+    <Compile Include="GameEvents.cs" />
     <Compile Include="Console\CheetosConsole\Console.cs" />
     <Compile Include="Console\CheetosConsole\DefaultFonts.cs" />
     <Compile Include="Console\CheetosConsole\Extensions.cs" />

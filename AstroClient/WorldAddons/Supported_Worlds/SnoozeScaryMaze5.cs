@@ -11,7 +11,7 @@ using VRC.SDKBase;
 
 namespace AstroClient
 {
-    public class SnoozeScaryMaze5 : Overridables
+    public class SnoozeScaryMaze5 : GameEvents
     {
 
         public override void OnWorldReveal(string id, string name, string asseturl)

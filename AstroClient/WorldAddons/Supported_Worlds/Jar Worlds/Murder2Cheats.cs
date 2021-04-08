@@ -16,7 +16,7 @@ using AstroClient.Variables;
 
 namespace AstroClient
 {
-    public class Murder2Cheats : Overridables
+    public class Murder2Cheats : GameEvents
     {
         public static void FindGameMurderObjects()
         {

@@ -4,10 +4,12 @@ using UnhollowerRuntimeLib;
 
 namespace AstroClient.Startup
 {
-    public class ComponentHelper : Overridables
+    public class ComponentHelper : GameEvents
     {
         public override void OnApplicationStart()
         {
+            ClassInjector.RegisterTypeInIl2Cpp<GameEventsBehaviour>();
+
             ClassInjector.RegisterTypeInIl2Cpp<RocketManager>();
             ClassInjector.RegisterTypeInIl2Cpp<RocketObject>();
 
@@ -48,7 +50,6 @@ namespace AstroClient.Startup
 
         public override void OnUpdate()
         {
-            DamnItMeap.MakeInstance();
             RocketManager.MakeInstance();
             CrazyObjectManager.MakeInstance();
             ObjectSpinnerManager.MakeInstance();
@@ -62,6 +63,8 @@ namespace AstroClient.Startup
                 OrbitManager.MakeInstance();
             }
             PlayerWatcherManager.MakeInstance();
+
+            
         }
     }
 }

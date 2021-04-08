@@ -19,7 +19,7 @@ using static AstroClient.variables.CustomLists;
 
 namespace AstroClient
 {
-    public class FreezeTag : Overridables
+    public class FreezeTag : GameEvents
     {
 
         private static bool IsFreezeTag;

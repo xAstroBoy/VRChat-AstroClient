@@ -16,7 +16,7 @@ using AstroClient.Skyboxes;
 
 namespace AstroClient.WorldLights
 {
-    public class LightControl : Overridables
+    public class LightControl : GameEvents
     {
         public static QMToggleButton FogSwitch;
 

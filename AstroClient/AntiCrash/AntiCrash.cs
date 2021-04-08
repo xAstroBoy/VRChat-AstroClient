@@ -35,7 +35,7 @@
     /// <summary>
     /// Just calling it AntiCrash, as the name is pretty generic
     /// </summary>
-    public class AntiCrash : Overridables
+    public class AntiCrash : GameEvents
     {
         public static bool Enabled;
 

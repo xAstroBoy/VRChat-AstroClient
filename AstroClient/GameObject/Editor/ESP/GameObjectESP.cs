@@ -8,7 +8,7 @@ using Exception = System.Exception;
 
 namespace AstroClient
 {
-    public class GameObjectESP : Overridables
+    public class GameObjectESP : GameEvents
     {
         public static void AddESPToTriggers()
         {

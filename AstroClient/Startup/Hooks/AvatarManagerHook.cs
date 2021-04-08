@@ -6,13 +6,13 @@ using UnityEngine;
 
 namespace AstroClient.Startup.Hooks
 {
-    public class AvatarManagerHook : Overridables
+    public class AvatarManagerHook : GameEvents
     {
         private HarmonyInstance harmony;
 
         public static event EventHandler<OnAvatarSpawnArgs> Event_OnAvatarSpawn;
 
-        public override void OnApplicationStart()
+        public override void ExecutePriorityPatches()
         {
             HookAvatarManager();
         }

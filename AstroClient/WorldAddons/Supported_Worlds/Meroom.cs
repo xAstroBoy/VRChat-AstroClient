@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AstroClient
 {
-    public class Meroom : Overridables
+    public class Meroom : GameEvents
     {
         public override void OnWorldReveal(string id, string name, string asseturl)
         {

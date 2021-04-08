@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AstroClient.components
 {
-    public class VRChatESP : MonoBehaviour
+    public class VRChatESP : GameEventsBehaviour
     {
         public VRChatESP(IntPtr ptr) : base(ptr)
         {

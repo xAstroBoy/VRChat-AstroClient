@@ -13,7 +13,7 @@ using static AstroClient.variables.CustomLists;
 
 namespace AstroClient
 {
-    internal class ScaleEditor : Overridables
+    internal class ScaleEditor : GameEvents
     {
         private static float ModifiedVectorX()
         {

@@ -15,7 +15,7 @@
         }
     }
 
-    public class Astro_Interactable : MonoBehaviour
+    public class Astro_Interactable : GameEventsBehaviour
     {
         public Astro_Interactable(IntPtr ptr) : base(ptr) { }
 
@@ -32,7 +32,7 @@
         }
     }
 
-    public class AstroInput : Overridables
+    public class AstroInput : GameEvents
     {
         public GameObject LeftHandPointer { get; private set; }
         public GameObject RightHandPointer { get; private set; }

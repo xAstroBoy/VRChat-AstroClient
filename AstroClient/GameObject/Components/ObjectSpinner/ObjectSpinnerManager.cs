@@ -15,17 +15,17 @@ using static AstroClient.variables.InstanceBuilder;
 
 namespace AstroClient.components
 {
-    public class ObjectSpinnerManager : MonoBehaviour
+    public class ObjectSpinnerManager : GameEventsBehaviour
     {
         #region Internal
 
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
         public ObjectSpinnerManager(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -50,11 +50,11 @@ namespace AstroClient.components
 
         #region Module
 
-        public static Il2CppSystem.Collections.Generic.List<MonoBehaviour> ObjectSpinnerBehaviors;
+        public static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ObjectSpinnerBehaviors;
 
         public void Start()
         {
-            ObjectSpinnerBehaviors = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>();
+            ObjectSpinnerBehaviors = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
             Instance = this;
         }
 
@@ -129,7 +129,7 @@ namespace AstroClient.components
             ObjectSpinners.Clear();
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             ObjectSpinners.Clear();
             ClearList();

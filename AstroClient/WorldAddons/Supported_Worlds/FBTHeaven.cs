@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AstroClient
 {
-    public class FBTHeaven : Overridables
+    public class FBTHeaven : GameEvents
     {
 
         public override void OnWorldReveal(string id, string name, string asseturl)

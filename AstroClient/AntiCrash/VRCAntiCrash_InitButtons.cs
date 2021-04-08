@@ -9,7 +9,7 @@ namespace AstroClient.AntiCrash
     /// I'm rewriting and using VRCAC as a reference.
     /// This is going to be our own AntiCrash :)
     /// </summary>
-    public class VRCAntiCrash_InitButtons : Overridables
+    public class VRCAntiCrash_InitButtons : GameEvents
     {
         // MOST ACTIONS REQUIRE A CONFIG!
         // FOR FULL PORT WE NEED A CONFIG .

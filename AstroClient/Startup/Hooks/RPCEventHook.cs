@@ -16,7 +16,7 @@
     using VRC.SDKBase;
     using static DayClientML2.Utility.MiscUtility;
 
-    public class RPCEventHook : Overridables
+    public class RPCEventHook : GameEvents
     {
 
         // TODO : MAKE A UDONRPC OVERRIDABLE.
@@ -26,7 +26,7 @@
         //public static 
         private HarmonyInstance harmony;
 
-        public override void OnApplicationStart()
+        public override void ExecutePriorityPatches()
         {
             HookRPCEvents();
         }

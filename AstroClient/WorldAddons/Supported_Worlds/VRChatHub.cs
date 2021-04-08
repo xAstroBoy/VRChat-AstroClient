@@ -16,7 +16,7 @@ using AstroClient.Finder;
 namespace AstroClient.World.Hub
 
 {
-    public class HubButtonsControl : Overridables
+    public class HubButtonsControl : GameEvents
     {
         public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {

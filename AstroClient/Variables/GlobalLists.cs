@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace AstroClient.variables
 {
-    public class GlobalLists : Overridables
+    public class GlobalLists : GameEvents
     {
         public static List<GameObject> ClonedObjects = new List<GameObject>();
         public static List<Renderer> RenderObjects = new List<Renderer>();

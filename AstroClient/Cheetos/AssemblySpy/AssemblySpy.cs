@@ -1,6 +1,6 @@
 ﻿namespace AstroClient
 {
-    public class AssemblySpy : Overridables
+    public class AssemblySpy : GameEvents
     {
 //        public List<Assembly> assembllies { get; private set; } = new List<Assembly>();
 

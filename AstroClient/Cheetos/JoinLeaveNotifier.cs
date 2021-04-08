@@ -3,7 +3,7 @@
     using DayClientML2.Utility.Extensions;
     using VRC;
 
-    internal class JoinLeaveNotifier : Overridables
+    internal class JoinLeaveNotifier : GameEvents
     {
         public override void OnPlayerJoined(Player player)
         {

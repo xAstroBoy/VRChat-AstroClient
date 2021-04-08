@@ -11,7 +11,7 @@ using RubyButtonAPI;
 
 namespace AstroClient.Skyboxes
 {
-    public class SkyboxEditor : Overridables
+    public class SkyboxEditor : GameEvents
     {
         public static string SkyboxesPath
         {

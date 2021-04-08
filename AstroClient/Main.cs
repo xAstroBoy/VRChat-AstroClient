@@ -38,7 +38,7 @@ namespace AstroClient
 
         public static event EventHandler Event_OnLevelLoaded;
 
-        public static List<Overridables> Overridable_List = new List<Overridables>();
+        public static List<GameEvents> Overridable_List = new List<GameEvents>();
 
         public override void OnApplicationStart()
         {
@@ -70,9 +70,11 @@ namespace AstroClient
             {
                 var btype = type.BaseType;
 
-                if (btype != null && btype.Equals(typeof(Overridables)))
+                if (btype != null && btype.Equals(typeof(GameEvents)))
                 {
-                    Overridables component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as Overridables;
+                    GameEvents component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as GameEvents;
+                    component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
+
                     component.OnApplicationStart();
                     Overridable_List.Add(component);
                 }

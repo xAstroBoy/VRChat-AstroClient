@@ -4,7 +4,7 @@ using VRC.Udon;
 
 namespace AstroClient.variables
 {
-    public class CustomLists : Overridables
+    public class CustomLists : GameEvents
     {
         public override void OnLevelLoaded()
         {

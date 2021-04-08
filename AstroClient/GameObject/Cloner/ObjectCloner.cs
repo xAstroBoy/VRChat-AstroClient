@@ -12,7 +12,7 @@ using AstroClient.ItemTweaker;
 
 namespace AstroClient.Cloner
 {
-    public class ObjectCloner : Overridables
+    public class ObjectCloner : GameEvents
     {
         public override void OnLevelLoaded()
         {

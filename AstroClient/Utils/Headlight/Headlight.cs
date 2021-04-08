@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 
 namespace AstroClient.Headlight
 {
-    public class Headlight : Overridables
+    public class Headlight : GameEvents
     {
         public static float LightRange = 10f;
         public static Color LightColor = Color.white;

@@ -9,7 +9,7 @@
     using DayClientML2.Utility.Extensions;
     using AstroClient.extensions;
 
-    public class CheetosPrivateStuff : Overridables
+    public class CheetosPrivateStuff : GameEvents
     {
         public override void VRChat_OnUiManagerInit()
         {
@@ -88,7 +88,7 @@
     /// <summary>
     /// Cheeto's temporary UI for new/wip features
     /// </summary>
-    public class CheetosUI : Overridables
+    public class CheetosUI : GameEvents
     {
         public QMNestedButton MainButton { get; private set; }
 

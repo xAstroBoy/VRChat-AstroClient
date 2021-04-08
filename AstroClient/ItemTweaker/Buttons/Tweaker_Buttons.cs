@@ -15,7 +15,7 @@ using Color = UnityEngine.Color;
 
 namespace AstroClient.AstroUtils.ItemTweaker
 {
-    public class ItemTweakerMain : Overridables
+    public class ItemTweakerMain : GameEvents
     {
         public static void InitButtons(float x, float y, bool btnHalf)
         {

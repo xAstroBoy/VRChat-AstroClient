@@ -10,17 +10,17 @@ using Color = System.Drawing.Color;
 
 namespace AstroClient.components
 {
-    public class RocketManager : MonoBehaviour
+    public class RocketManager : GameEventsBehaviour
     {
         #region Internal
 
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
         public RocketManager(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -45,11 +45,11 @@ namespace AstroClient.components
 
         #region Module
 
-        public static Il2CppSystem.Collections.Generic.List<MonoBehaviour> RocketBehaviours;
+        public static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> RocketBehaviours;
 
         public void Start()
         {
-            RocketBehaviours = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>();
+            RocketBehaviours = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
             Instance = this;
         }
 
@@ -162,7 +162,7 @@ namespace AstroClient.components
             Rockets.Clear();
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             Rockets.Clear();
             ClearList();

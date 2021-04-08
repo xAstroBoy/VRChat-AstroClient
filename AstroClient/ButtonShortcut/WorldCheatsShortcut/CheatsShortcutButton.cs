@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 namespace AstroClient.ButtonShortcut
 {
-    public class CheatsShortcutButton : Overridables
+    public class CheatsShortcutButton : GameEvents
     {
         private static QMSingleButton WorldCheatsShortcut;
 

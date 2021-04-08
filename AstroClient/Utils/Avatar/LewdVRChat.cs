@@ -21,7 +21,7 @@ using DayClientML2.Utility.Extensions;
 
 namespace AstroClient
 {
-    public class LewdVRChat : Overridables
+    public class LewdVRChat : GameEvents
     {
         // TODO :  REMAKE THIS TRASH
 

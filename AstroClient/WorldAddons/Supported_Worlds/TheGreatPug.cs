@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AstroClient
 {
-    public class TheGreatPug : Overridables
+    public class TheGreatPug : GameEvents
     {
 
         public override void OnWorldReveal(string id, string name, string asseturl)

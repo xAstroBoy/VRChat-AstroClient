@@ -15,7 +15,7 @@ using AstroClient.extensions;
 
 namespace AstroClient
 {
-    public class ObjectMiscOptions : Overridables
+    public class ObjectMiscOptions : GameEvents
     {
         public override void OnPlayerLeft(Player player)
         {

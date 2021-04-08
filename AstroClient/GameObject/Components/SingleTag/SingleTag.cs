@@ -10,13 +10,13 @@ using Object = UnityEngine.Object;
 
 namespace AstroClient.components
 {
-    public class SingleTag : MonoBehaviour
+    public class SingleTag : GameEventsBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
         public SingleTag(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 

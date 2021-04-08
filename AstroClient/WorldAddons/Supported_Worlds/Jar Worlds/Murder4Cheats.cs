@@ -25,7 +25,7 @@ using DayClientML2.Utility;
 
 namespace AstroClient
 {
-    public class Murder4Cheats : Overridables
+    public class Murder4Cheats : GameEvents
     {
         public static void FindGameMurderObjects()
         {

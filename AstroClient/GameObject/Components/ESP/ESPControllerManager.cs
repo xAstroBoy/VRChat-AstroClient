@@ -14,17 +14,17 @@ using AstroClient.ConsoleUtils;
 
 namespace AstroClient.components
 {
-    public class ESPManager : MonoBehaviour
+    public class ESPManager : GameEventsBehaviour
     {
         #region Internal
 
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
         public ESPManager(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -49,11 +49,11 @@ namespace AstroClient.components
 
         #region Module
 
-        public static Il2CppSystem.Collections.Generic.List<MonoBehaviour> ESPEditorBehaviours;
+        public static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ESPEditorBehaviours;
 
         public void Start()
         {
-            ESPEditorBehaviours = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>();
+            ESPEditorBehaviours = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
             Instance = this;
         }
 

@@ -10,7 +10,7 @@ using System.Reflection;
 
 namespace AstroClient.BetterPatch
 {
-    internal class Patching : Overridables
+    internal class Patching : GameEvents
     {
         private static HarmonyMethod GetPatch(string name)
         {
@@ -75,7 +75,7 @@ namespace AstroClient.BetterPatch
             }
         }
 
-        public override void OnApplicationStart()
+        public override void ExecutePriorityPatches()
         {
             MelonCoroutines.Start(Init());
         }

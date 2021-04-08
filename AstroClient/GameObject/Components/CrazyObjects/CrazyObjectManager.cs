@@ -15,17 +15,17 @@ using static AstroClient.variables.InstanceBuilder;
 
 namespace AstroClient.components
 {
-    public class CrazyObjectManager : MonoBehaviour
+    public class CrazyObjectManager : GameEventsBehaviour
     {
         #region Internal
 
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
         public CrazyObjectManager(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -50,11 +50,11 @@ namespace AstroClient.components
 
         #region Module
 
-        public static Il2CppSystem.Collections.Generic.List<MonoBehaviour> CrazyObjectBehaviors;
+        public static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> CrazyObjectBehaviors;
 
         public void Start()
         {
-            CrazyObjectBehaviors = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>();
+            CrazyObjectBehaviors = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
             Instance = this;
         }
 
@@ -164,7 +164,7 @@ namespace AstroClient.components
             CrazyObjects.Clear();
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             CrazyObjects.Clear();
             ClearList();

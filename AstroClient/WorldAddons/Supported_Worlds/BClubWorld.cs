@@ -10,7 +10,7 @@ using AstroClient.Finder;
 
 namespace AstroClient
 {
-    public class BClubWorld : Overridables
+    public class BClubWorld : GameEvents
     {
         public override void OnWorldReveal(string id, string name, string asseturl)
         {

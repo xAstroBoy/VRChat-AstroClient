@@ -13,7 +13,7 @@ using Object = UnityEngine.Object;
 
 namespace AstroClient.components
 {
-    public class JarRoleESP : MonoBehaviour
+    public class JarRoleESP : GameEventsBehaviour
     {
         public JarRoleESP(IntPtr ptr) : base(ptr)
         {

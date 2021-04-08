@@ -13,7 +13,7 @@ using VRC;
 
 namespace AstroClient
 {
-    public class GameObjMenu : Overridables
+    public class GameObjMenu : GameEvents
     {
         public override void OnLevelLoaded()
         {

@@ -8,7 +8,7 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace AstroClient
 {
-    public class LocalPlayerUtils : Overridables
+    public class LocalPlayerUtils : GameEvents
     {
         public override void OnUpdate()
         {

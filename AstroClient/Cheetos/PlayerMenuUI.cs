@@ -6,7 +6,7 @@
     using UnityEngine;
     using VRC;
 
-    public class PlayerMenuUI : Overridables
+    public class PlayerMenuUI : GameEvents
     {
         private static QMSingleButton playersButton;
 

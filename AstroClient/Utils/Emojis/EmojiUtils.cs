@@ -16,7 +16,7 @@ using AstroClient.ConsoleUtils;
 
 namespace AstroClient
 {
-    public class EmojiUtils : Overridables
+    public class EmojiUtils : GameEvents
     {
         public static void SpawnlastEmoji()
         {

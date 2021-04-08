@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace AstroClient.components
 {
-    public class RigidBodyController : MonoBehaviour
+    public class RigidBodyController : GameEventsBehaviour
     {
         public RigidBodyController(IntPtr ptr) : base(ptr)
         {

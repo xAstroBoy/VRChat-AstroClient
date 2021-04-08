@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace AstroClient.ItemTweaker
 {
-    public class Tweaker_Object : Overridables
+    public class Tweaker_Object : GameEvents
     {
 
         public static void SetEditLock(bool status)

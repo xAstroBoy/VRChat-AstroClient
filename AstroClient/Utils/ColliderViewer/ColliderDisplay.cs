@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 namespace AstroClient
 {
-    public class ColliderDisplay : Overridables
+    public class ColliderDisplay : GameEvents
     {
         private static string ShaderName
         {

@@ -11,7 +11,7 @@ using AstroClient.extensions;
 
 namespace AstroClient
 {
-    public class QVPensUtils : Overridables
+    public class QVPensUtils : GameEvents
     {
         public override void OnWorldReveal(string id, string name, string asseturl)
         {

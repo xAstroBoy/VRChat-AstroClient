@@ -14,7 +14,7 @@ using AstroClient.ConsoleUtils;
 
 namespace AstroClient
 {
-    public class WorldUtils : Overridables
+    public class WorldUtils : GameEvents
     {
         public static List<GameObject> GetAllWorldPrefabs()
         {

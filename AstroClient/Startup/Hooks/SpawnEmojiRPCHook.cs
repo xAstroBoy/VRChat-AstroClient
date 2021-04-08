@@ -7,11 +7,11 @@ using UnhollowerBaseLib;
 
 namespace AstroClient.Startup.Hooks
 {
-    public class SpawnEmojiRPCHook : Overridables
+    public class SpawnEmojiRPCHook : GameEvents
     {
         public static event EventHandler<SpawnEmojiArgs> Event_SpawnEmojiRPC;
 
-        public override void OnApplicationStart()
+        public override void ExecutePriorityPatches()
         {
             HookSpawnEmojiRPC();
         }

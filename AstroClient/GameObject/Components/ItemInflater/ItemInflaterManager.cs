@@ -14,17 +14,17 @@ using AstroClient.ConsoleUtils;
 
 namespace AstroClient.components
 {
-    public class ItemInflaterManager : MonoBehaviour
+    public class ItemInflaterManager : GameEventsBehaviour
     {
         #region Internal
 
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
         public ItemInflaterManager(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -49,11 +49,11 @@ namespace AstroClient.components
 
         #region Module
 
-        public static Il2CppSystem.Collections.Generic.List<MonoBehaviour> ObjectEditorBehaviors;
+        public static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ObjectEditorBehaviors;
 
         public void Start()
         {
-            ObjectEditorBehaviors = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>();
+            ObjectEditorBehaviors = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
             Instance = this;
         }
 
@@ -118,7 +118,7 @@ namespace AstroClient.components
             ObjectEditors.Clear();
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             ObjectEditors.Clear();
             ClearList();

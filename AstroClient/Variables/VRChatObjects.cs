@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AstroClient.Variables
 {
-    public class VRChatObjects : Overridables
+    public class VRChatObjects : GameEvents
     {
         public override void OnUpdate()
         {

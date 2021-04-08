@@ -12,7 +12,7 @@ using VRC;
 
 namespace AstroClient
 {
-    public class JarRoleController : Overridables
+    public class JarRoleController : GameEvents
     {
         private static bool _IsMurder4World;
         private static bool _isAmongUsWorld;

@@ -5,7 +5,7 @@ using VRC;
 
 namespace AstroClient
 {
-    public class NetworkManagerHooks : Overridables
+    public class NetworkManagerHooks : GameEvents
     {
         private static bool IsInitialized;
         private static bool SeenFire;
@@ -19,7 +19,7 @@ namespace AstroClient
 
         public static EventHandler<PlayerEventArgs> Event_OnPlayerLeft;
 
-        public override void OnApplicationStart()
+        public override void ExecutePriorityPatches()
         {
             MelonCoroutines.Start(HookNetworkManager());
         }

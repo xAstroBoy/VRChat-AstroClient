@@ -21,7 +21,7 @@ using DayClientML2.Utility.Extensions;
 
 namespace AstroClient
 {
-    public class AmongUSCheats : Overridables
+    public class AmongUSCheats : GameEvents
     {
         public override void OnLevelLoaded()
         {

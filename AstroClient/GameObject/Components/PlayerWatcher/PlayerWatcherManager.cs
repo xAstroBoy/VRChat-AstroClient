@@ -19,17 +19,17 @@ using static AstroClient.variables.InstanceBuilder;
 
 namespace AstroClient.components
 {
-    public class PlayerWatcherManager : MonoBehaviour
+    public class PlayerWatcherManager : GameEventsBehaviour
     {
         #region Internal
 
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<MonoBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
         public PlayerWatcherManager(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>(1);
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
@@ -54,11 +54,11 @@ namespace AstroClient.components
 
         #region Module
 
-        public static Il2CppSystem.Collections.Generic.List<MonoBehaviour> PlayerWatcherBehaviors;
+        public static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> PlayerWatcherBehaviors;
 
         public void Start()
         {
-            PlayerWatcherBehaviors = new Il2CppSystem.Collections.Generic.List<MonoBehaviour>();
+            PlayerWatcherBehaviors = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
             Instance = this;
         }
 
@@ -192,7 +192,7 @@ namespace AstroClient.components
             ClearList();
         }
 
-        public static void OnLevelLoad()
+        public override void OnLevelLoaded()
         {
             OriginalPlayerWatchers.Clear();
             if (SnapshotPlayerWatchers != null)

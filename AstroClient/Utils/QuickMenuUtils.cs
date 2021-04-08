@@ -3,7 +3,7 @@ using VRC.Core;
 
 namespace AstroClient
 {
-    public class QuickMenuUtils : Overridables
+    public class QuickMenuUtils : GameEvents
     {
         public static APIUser GetSelectedUser()
         {

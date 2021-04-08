@@ -28,7 +28,7 @@ using AstroClient.ItemTweaker;
 
 namespace AstroClient.GameObjectDebug
 {
-    public class GameObjectUtils : Overridables
+    public class GameObjectUtils : GameEvents
     {
         public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {

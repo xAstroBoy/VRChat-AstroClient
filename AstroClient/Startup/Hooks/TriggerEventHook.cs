@@ -7,13 +7,13 @@ using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
 
 namespace AstroClient.Startup.Hooks
 {
-    public class TriggerEventHook : Overridables
+    public class TriggerEventHook : GameEvents
     {
         private HarmonyInstance harmony;
 
         public static event EventHandler<VRC_EventDispatcherRFC_TriggerEventArgs> Event_VRC_EventDispatcherRFC_triggerEvent;
 
-        public override void OnApplicationStart()
+        public override void ExecutePriorityPatches()
         {
             HookTriggerEvent();
         }
