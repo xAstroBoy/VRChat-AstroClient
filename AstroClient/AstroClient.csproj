@@ -33,7 +33,7 @@
     <NoWarn>CS0169;CS0472</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-	<LangVersion>8.0</LangVersion>
+    <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_Cheetos|AnyCPU'">
@@ -69,9 +69,11 @@
     <Compile Include="Cheetos\AstroInput.cs" />
     <Compile Include="Cheetos\Config\Config.cs" />
     <Compile Include="Cheetos\Config\ConfigManager.cs" />
+    <Compile Include="Cheetos\DamnItMeap.cs" />
     <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
     <Compile Include="Cheetos\PlayerMenuUI.cs" />
     <Compile Include="Cheetos\Config\JSonWriter.cs" />
+    <Compile Include="Cheetos\GenericOverridables.cs" />
     <Compile Include="Networking\HandleClient.cs" />
     <Compile Include="Networking\NetworkingExtensions.cs" />
     <Compile Include="Networking\ReceivedDataEventArgs.cs" />

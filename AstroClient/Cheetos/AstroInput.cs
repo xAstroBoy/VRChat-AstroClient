@@ -17,8 +17,6 @@
 
     public class Astro_Interactable : MonoBehaviour
     {
-        // https://melonwiki.xyz/#/modders/melonloaderdifferences?id=custom-components-il2cpp-type-inheritance
-
         public Astro_Interactable(IntPtr ptr) : base(ptr) { }
 
         public Action Action;
@@ -40,12 +38,6 @@
         public GameObject RightHandPointer { get; private set; }
 
         public bool CanClick { get; private set; }
-
-        public override void OnApplicationStart()
-        {
-            // https://github.com/knah/Il2CppAssemblyUnhollower#class-injection
-            ClassInjector.RegisterTypeInIl2Cpp<Astro_Interactable>();
-        }
 
         public override void OnWorldReveal(string id, string name, string asseturl)
         {

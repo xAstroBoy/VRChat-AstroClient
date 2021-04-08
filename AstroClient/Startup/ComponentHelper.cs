@@ -43,10 +43,12 @@ namespace AstroClient.Startup
             }
             ClassInjector.RegisterTypeInIl2Cpp<PlayerWatcherManager>();
             ClassInjector.RegisterTypeInIl2Cpp<PlayerWatcher>();
+            ClassInjector.RegisterTypeInIl2Cpp<Astro_Interactable>();
         }
 
         public override void OnUpdate()
         {
+            DamnItMeap.MakeInstance();
             RocketManager.MakeInstance();
             CrazyObjectManager.MakeInstance();
             ObjectSpinnerManager.MakeInstance();
