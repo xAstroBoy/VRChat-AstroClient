@@ -6,8 +6,8 @@ namespace AstroClient
 {
     public class UdonSyncRPCEventArgs : EventArgs
     {
-        public Player sender;
-        public GameObject obj;
+        public Player? sender;
+        public GameObject? obj;
         public string action;
 
 

@@ -5,8 +5,8 @@ namespace AstroClient
 {
     public class VRC_EventDispatcherRFC_TriggerEventArgs : EventArgs
     {
-        public VRC_EventHandler VRC_EventHandler;
-        public VRC_EventHandler.VrcEvent VrcEvent;
+        public VRC_EventHandler? VRC_EventHandler;
+        public VRC_EventHandler.VrcEvent? VrcEvent;
         public VRC_EventHandler.VrcBroadcastType VrcBroadcastType;
         public int UnknownInt;
         public float UnknownFloat;
