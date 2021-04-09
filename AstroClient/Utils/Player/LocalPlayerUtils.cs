@@ -1,5 +1,4 @@
-﻿using AstroClient.ConsoleUtils;
-using RubyButtonAPI;
+﻿using RubyButtonAPI;
 using UnityEngine;
 using VRC;
 using VRC.Animation;

@@ -1,11 +1,8 @@
 ﻿using AstroClient.ConsoleUtils;
 using AstroClient.Variables;
 using System;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using AstroClient.extensions;
-using VRCSDK2;
 using AstroClient.Finder;
 
 namespace AstroClient

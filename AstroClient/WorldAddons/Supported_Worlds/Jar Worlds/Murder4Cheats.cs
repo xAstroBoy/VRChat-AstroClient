@@ -17,8 +17,6 @@ using static AstroClient.variables.CustomLists;
 using VRC.Udon;
 using VRC;
 using DayClientML2.Utility.Extensions;
-using MelonLoader;
-using System.Collections;
 using DayClientML2.Utility;
 
 #endregion AstroClient Imports

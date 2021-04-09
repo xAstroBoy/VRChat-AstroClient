@@ -3,7 +3,6 @@
     using AstroClient.Finder;
     using DayClientML2.Utility.Extensions;
     using System;
-    using UnhollowerRuntimeLib;
     using UnityEngine;
 
     public static class Astro_Interactable_Extensions

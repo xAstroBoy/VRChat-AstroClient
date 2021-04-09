@@ -1,6 +1,5 @@
 ﻿using AstroClient.variables;
 using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Runtime.CompilerServices;

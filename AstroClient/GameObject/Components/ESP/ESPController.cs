@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using UnhollowerRuntimeLib;
-using UnityEngine;
 
 namespace AstroClient.components
 {

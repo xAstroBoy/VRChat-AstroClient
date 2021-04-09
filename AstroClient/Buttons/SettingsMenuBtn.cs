@@ -7,6 +7,7 @@ namespace AstroClient.Startup.Buttons
     {
         public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
+            // Main Settings Menu
             QMNestedButton sub = new QMNestedButton(menu, x, y, "Settings", "Settings", null, null, null, null, btnHalf);
             sub.getMainButton().setTextColor(Color.cyan);
 
@@ -25,6 +26,7 @@ namespace AstroClient.Startup.Buttons
             QMSingleToggleButton TriggerEventToggle = new QMSingleToggleButton(sub, 1, 0.5f, "Trigger Log ON", () => { ConfigManager.General.LogTriggerEvents = true; }, "Trigger Log OFF", () => { ConfigManager.General.LogTriggerEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogTriggerEvents, true);
             TriggerEventToggle.setToggleState(ConfigManager.General.LogTriggerEvents, false);
 
+            // Hide Elements Menu
             QMNestedButton subHideElements = new QMNestedButton(sub, 1, 2f, "Hide Elements", "Hide Elements", null, null, null, null, false);
             sub.getMainButton().setTextColor(Color.cyan);
 

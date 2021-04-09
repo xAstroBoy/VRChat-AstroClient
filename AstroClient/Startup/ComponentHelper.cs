@@ -8,6 +8,8 @@ namespace AstroClient.Startup
     {
         public override void OnApplicationStart()
         {
+
+            ClassInjector.RegisterTypeInIl2Cpp<CheetoMenu>();
             ClassInjector.RegisterTypeInIl2Cpp<GameEventsBehaviour>();
 
             ClassInjector.RegisterTypeInIl2Cpp<RocketManager>();

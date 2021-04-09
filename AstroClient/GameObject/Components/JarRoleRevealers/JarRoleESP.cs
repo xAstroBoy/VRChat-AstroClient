@@ -1,7 +1,6 @@
 ﻿using AstroClient.Components;
 using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
-using DayClientML2.Utility.Extensions;
 using System;
 using System.Linq;
 using UnhollowerBaseLib.Attributes;

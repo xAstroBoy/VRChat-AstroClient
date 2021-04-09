@@ -12,9 +12,7 @@ using Color = System.Drawing.Color;
 
 using AstroClient.ConsoleUtils;
 using AstroClient.variables;
-using AstroClient.extensions;
 using VRC.SDKBase;
-using AstroClient.components;
 using DayClientML2.Utility.Extensions;
 
 #endregion AstroClient Imports

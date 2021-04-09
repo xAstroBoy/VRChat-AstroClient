@@ -1,5 +1,4 @@
-﻿using AstroClient.AstroUtils.ItemTweaker;
-using AstroClient.ConsoleUtils;
+﻿using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
 using AstroClient.Finder;
 using AstroClient.Variables;
@@ -7,10 +6,6 @@ using DayClientML2.Utility;
 using DayClientML2.Utility.Extensions;
 using RubyButtonAPI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using VRC;
 using VRC.Udon;

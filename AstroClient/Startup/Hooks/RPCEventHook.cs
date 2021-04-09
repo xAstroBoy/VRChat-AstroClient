@@ -3,18 +3,10 @@
     using AstroClient.ConsoleUtils;
     using DayClientML2.Utility.Extensions;
     using Harmony;
-    using MelonLoader;
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Reflection;
-    using System.Text;
-    using System.Threading.Tasks;
-    using UnhollowerBaseLib;
     using VRC;
     using VRC.SDKBase;
-    using static DayClientML2.Utility.MiscUtility;
 
     public class RPCEventHook : GameEvents
     {
