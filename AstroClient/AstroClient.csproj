@@ -58,6 +58,7 @@
     <Compile Include="AstroExtensions\PositionExtensions.cs" />
     <Compile Include="AstroExtensions\EspExtensions.cs" />
     <Compile Include="AstroExtensions\CodingExtensions.cs" />
+    <Compile Include="AstroExtensions\SingleTagExtension.cs" />
     <Compile Include="AstroExtensions\UdonExtensions.cs" />
     <Compile Include="AstroExtensions\ScaleExtensions.cs" />
     <Compile Include="BuildInfo.cs" />

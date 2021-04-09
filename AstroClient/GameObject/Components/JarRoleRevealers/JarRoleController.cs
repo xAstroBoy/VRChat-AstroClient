@@ -26,14 +26,6 @@ namespace AstroClient
             {
                 return _IsMurder4World;
             }
-            set
-            {
-                if (value)
-                {
-                    _isAmongUsWorld = false;
-                }
-                _IsMurder4World = value;
-            }
         }
 
         public static bool isAmongUsWorld
@@ -41,14 +33,6 @@ namespace AstroClient
             get
             {
                 return _isAmongUsWorld;
-            }
-            set
-            {
-                if (value)
-                {
-                    _IsMurder4World = false;
-                }
-                _isAmongUsWorld = value;
             }
         }
 
@@ -99,11 +83,11 @@ namespace AstroClient
         {
             JarRoleLinks.Clear();
             RoleEspComponents.Clear();
-            isAmongUsWorld = false;
-            IsMurder4World = false;
             Murder4RolesRevealerToggle.setToggleState(false);
             AmongUSRolesRevealerToggle.setToggleState(false);
             ViewRoles = false;
+            _isAmongUsWorld = false;
+            _IsMurder4World = false;
         }
 
         public override void OnPlayerJoined(Player player)
@@ -200,8 +184,8 @@ namespace AstroClient
 
         public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            isAmongUsWorld = (id == WorldIds.AmongUS);
-            IsMurder4World = (id == WorldIds.Murder4);
+            _isAmongUsWorld = id.Equals(WorldIds.AmongUS);
+            _IsMurder4World = id.Equals(WorldIds.Murder4);
 
             if (isAmongUsWorld || IsMurder4World)
             {
