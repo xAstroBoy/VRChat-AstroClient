@@ -129,10 +129,11 @@ namespace AstroClient.components
                                         SetTag(AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#C22B26"));
                                     }
                                 }
+                                return;
                             }
 
 
-                           else if (action.ToLower().Equals("syncabstainedvoting"))
+                            else if (action.Equals("SyncAbstainedVoting"))
                             {
                                 AmongUSHasVoted = true;
                                 if (JarRoleController.ViewRoles)
@@ -140,30 +141,32 @@ namespace AstroClient.components
                                     AmongUSVoteRevealTag.ShowTag = true;
                                 }
                                 SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorConverter.HexToColor("#1BA039"));
-                            }
-
-
-
-                          else if (action.Equals("SyncEndVotingPhase") || action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
-                            {
-                                if (AmongUSHasVoted)
-                                {
-                                    AmongUSHasVoted = false;
-                                }
-                                if (AmongUSVoteRevealTag != null)
-                                {
-                                    SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorConverter.HexToColor("#034989"));
-                                    if (JarRoleController.ViewRoles)
-                                    {
-                                        AmongUSVoteRevealTag.ShowTag = false;
-                                    }
-                                }
                                 return;
                             }
                         }
                     }
                 }
             }
+
+            if (isAmongUsWorld) // Reset Mechanism.
+            {
+                if (action.Equals("SyncEndVotingPhase") || action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
+                {
+                    if (AmongUSHasVoted)
+                    {
+                        AmongUSHasVoted = false;
+                    }
+                    if (AmongUSVoteRevealTag != null)
+                    {
+                        SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorConverter.HexToColor("#034989"));
+                        if (JarRoleController.ViewRoles)
+                        {
+                            AmongUSVoteRevealTag.ShowTag = false;
+                        }
+                    }
+                }
+            }
+
         }
 
 
