@@ -49,6 +49,8 @@ namespace AstroClient.components
                 if (isAmongUsWorld)
                 {
                 AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Internal_player);
+                    AmongUSVoteRevealTag.ShowTag = false;
+
                 }
                 if (JarRoleController.ViewRoles)
                 {
@@ -98,16 +100,15 @@ namespace AstroClient.components
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-            if (obj != null)
+            if (Internal_AssignedPlayerNode != null)
             {
-                if (isAmongUsWorld)
+                if (obj != null)
                 {
-                    if (Internal_AssignedPlayerNode != null)
+                    if (obj.Equals(Internal_AssignedPlayerNode))
                     {
-                        if (obj == Internal_AssignedPlayerNode)
+                        if (isAmongUsWorld)
                         {
-
-                            if (action.StartsWith("SyncVotedFor"))
+                            if (action.Contains("SyncVotedFor"))
                             {
 
                                 AmongUSHasVoted = true;
@@ -128,11 +129,10 @@ namespace AstroClient.components
                                         SetTag(AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#C22B26"));
                                     }
                                 }
-
-
-
                             }
-                            else if (action.ToLower() == "syncabstainedvoting")
+
+
+                           else if (action.ToLower().Equals("syncabstainedvoting"))
                             {
                                 AmongUSHasVoted = true;
                                 if (JarRoleController.ViewRoles)
@@ -140,26 +140,26 @@ namespace AstroClient.components
                                     AmongUSVoteRevealTag.ShowTag = true;
                                 }
                                 SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorConverter.HexToColor("#1BA039"));
-
                             }
-                        }
 
 
-                        if (action == "SyncEndVotingPhase" || action == "SyncAbort" || action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncStart")
-                        {
-                            if (AmongUSHasVoted)
+
+                          else if (action.Equals("SyncEndVotingPhase") || action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
                             {
-                                AmongUSHasVoted = false;
-                            }
-                            if (AmongUSVoteRevealTag != null)
-                            {
-                                SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorConverter.HexToColor("#034989"));
-                                if (JarRoleController.ViewRoles)
+                                if (AmongUSHasVoted)
                                 {
-                                    AmongUSVoteRevealTag.ShowTag = false;
+                                    AmongUSHasVoted = false;
                                 }
+                                if (AmongUSVoteRevealTag != null)
+                                {
+                                    SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorConverter.HexToColor("#034989"));
+                                    if (JarRoleController.ViewRoles)
+                                    {
+                                        AmongUSVoteRevealTag.ShowTag = false;
+                                    }
+                                }
+                                return;
                             }
-
                         }
                     }
                 }
