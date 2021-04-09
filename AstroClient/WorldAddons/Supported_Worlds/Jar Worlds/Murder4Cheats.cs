@@ -296,7 +296,7 @@ namespace AstroClient
             RoleSwapper_GetMurdererRole = false;
         }
 
-        public static void Murder4CheatsButtons(QMNestedButton submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
+        public static void Murder4CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
         {
             Murder4CheatPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Murder 4 Cheats", "Manage Murder 4 Cheats", null, null, null, null, btnHalf);
             Murder4CheatPage.getMainButton().SetResizeTextForBestFit(true);

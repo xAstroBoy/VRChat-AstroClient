@@ -296,7 +296,7 @@ namespace AstroClient
             ModConsole.DebugLog("ResetGameObjToggler fired.");
         }
 
-        public static void InitTogglerMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void InitTogglerMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var main = new QMSingleButton(menu, x, y, "Advanced GameObject Toggler", new Action(() => { ReturnToRoot(); gameobjtogglermenu.getMainButton().getGameObject().GetComponent<Button>().onClick.Invoke(); }), "Advanced GameObject Toggler", null, null, btnHalf);
 

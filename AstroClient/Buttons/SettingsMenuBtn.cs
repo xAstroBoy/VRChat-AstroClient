@@ -5,7 +5,7 @@ namespace AstroClient.Startup.Buttons
 {
     internal class SettingsMenuBtn
     {
-        public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             QMNestedButton sub = new QMNestedButton(menu, x, y, "Settings", "Settings", null, null, null, null, btnHalf);
             sub.getMainButton().setTextColor(Color.cyan);

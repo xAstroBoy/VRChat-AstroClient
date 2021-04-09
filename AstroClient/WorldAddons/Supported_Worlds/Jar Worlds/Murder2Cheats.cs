@@ -185,7 +185,7 @@ namespace AstroClient
             Knifes.Clear();
         }
 
-        public static void Murder2CheatsButtons(QMNestedButton submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
+        public static void Murder2CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
         {
             Murder2CheatPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Murder 2 Cheats", "Manage Murder 2 Cheats", null, null, null, null, btnHalf);
             Murder2CheatPage.getMainButton().SetResizeTextForBestFit(true);

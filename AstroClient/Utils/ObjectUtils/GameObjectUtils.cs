@@ -30,7 +30,7 @@ namespace AstroClient.GameObjectDebug
 {
     public class GameObjectUtils : GameEvents
     {
-        public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var GameObjectsMenus = new QMNestedButton(menu, x, y, "GameObjects DebugMenu", "Find Whatever is in these VRChat GameObjects in console", null, null, null, null, btnHalf);
             GameObjectUtils.GameObjDumper = new QMSingleButton(GameObjectsMenus, 1, 0, "World's Gameobject Dumper", new Action(GameObjectUtils.GameObjectDumper), "Dump All World GameObjects's names in a file!", null, null);

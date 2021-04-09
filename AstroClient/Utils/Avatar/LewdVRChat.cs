@@ -270,7 +270,7 @@ namespace AstroClient
 
 
 
-        public static void InitButtons(QMNestedButton main, float x, float y, bool btnHalf)
+        public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             if (Bools.DisableNSFWMenu)
             {

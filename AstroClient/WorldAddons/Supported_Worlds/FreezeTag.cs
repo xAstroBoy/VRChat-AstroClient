@@ -53,7 +53,7 @@ namespace AstroClient
         public static QMToggleButton UnfreezeAutoMode;
 
 
-        public static void InitButtons(QMNestedButton main, float x, float y, bool btnhalf)
+        public static void InitButtons(QMTabMenu main, float x, float y, bool btnhalf)
         {
             FreezeTagCheatsPage = new QMNestedButton(main, x, y, "Freeze Tag", "Freeze Tag Cheats", null, null, null, null, true);
             UnfreezeAutoMode = new QMToggleButton(FreezeTagCheatsPage, 1, 0, "Auto Unfreeze ON", new Action(() => { AutomaticallyUnfreeze = true; }), "Auto Unfreeze OFF", new Action(() => { AutomaticallyUnfreeze = false; }), "Unfreezes you automatically", null, null, null);

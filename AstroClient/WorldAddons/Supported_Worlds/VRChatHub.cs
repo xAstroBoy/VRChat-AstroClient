@@ -18,7 +18,7 @@ namespace AstroClient.World.Hub
 {
     public class HubButtonsControl : GameEvents
     {
-        public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             VRChat_Hub_Addons = new QMNestedButton(menu, x, y, "Hub Mods", "Control HUB World.", null, null, null, null, btnHalf);
             VRChat_Hub_Addons.getMainButton().SetResizeTextForBestFit(true);

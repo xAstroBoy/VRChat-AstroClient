@@ -8,7 +8,7 @@ namespace AstroClient.Components
 {
     public static class ComponentsBtn
     {
-        public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var temp = new QMNestedButton(menu, x, y, "Component Menu", "Control Object Custom Components!", null, null, null, null, btnHalf);
             if (Bools.AllowAttackerComponent)

@@ -454,7 +454,7 @@ namespace AstroClient
             }
         }
 
-        public static void InitButton(QMNestedButton main, float x, float y, bool btnHalf)
+        public static void InitButton(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var EmojiSpawnerButtons = new QMNestedButton(main, x, y, "Emoji Spawner", "Manual Emoji Spawner.", null, null, null, null, btnHalf);
             EmojiUtils.EmojiIntReveal = new QMSingleButton(EmojiSpawnerButtons, 3, 0, EmojiUtils.EmojiNames.Smile.ToString(), new Action(EmojiUtils.SpawnEmoji), "Spawn Emoji.", null, null);

@@ -6,7 +6,7 @@ namespace AstroClient
 {
     internal class RandomSubmenus
     {
-        public static void VRC_InteractableSubMenu(QMNestedButton main, float x, float y, bool btnHalf)
+        public static void VRC_InteractableSubMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Interact VRC_Interactable", "Interact with VRC_Interactable Triggers", null, null, null, null, btnHalf);
             var scroll = new QMScrollMenu(menu);
@@ -27,7 +27,7 @@ namespace AstroClient
             });
         }
 
-        public static void TriggerSubMenu(QMNestedButton main, float x, float y, bool btnHalf)
+        public static void TriggerSubMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Interact Triggers", "Interact with Level Triggers", null, null, null, null, btnHalf);
             var scroll = new QMScrollMenu(menu);

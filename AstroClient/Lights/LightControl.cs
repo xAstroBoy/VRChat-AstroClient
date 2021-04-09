@@ -346,7 +346,7 @@ namespace AstroClient.WorldLights
 
 
 
-        public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var temp = new QMNestedButton(menu, x, y, "Light Menu", "Control Avatar & World Lights!", null, null, null, null, btnHalf);
             ToggleFullbright = new QMToggleButton(temp, 1, 0, "Player Fullbright ON", new Action(ToggleFullbrightHeadLight), "Player Fullbright OFF", new Action(ToggleFullbrightHeadLight), "Toggles Player Fullbright", null, null, null, false);

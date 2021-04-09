@@ -6,7 +6,7 @@ namespace AstroClient.Startup.Buttons
 {
     internal class WorldPickupsBtn
     {
-        public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var sub = new QMNestedButton(menu, x, y, "Pickup Control", "Pickup Control", null, null, null, null, btnHalf);
             new QMSingleButton(sub, 1, 0, "Reveal all world pickups", new Action(GameObjectUtils.EnableAllWorldPickups), "Enables all world pickups!", null, null);

@@ -19,7 +19,8 @@ namespace AstroClient.AstroUtils.ItemTweaker
     {
         public static void InitButtons(float x, float y, bool btnHalf)
         {
-            var menu = new QMNestedButton("ShortcutMenu", x, y, "Item Tweaker", "Item Tweaker!", null, null, null, null, btnHalf);
+            //var menu = new QMNestedButton("ShortcutMenu", x, y, "Item Tweaker", "Item Tweaker!", null, null, null, null, btnHalf);
+            QMTabMenu menu = new QMTabMenu(2f, "Item Tweaker", null, null, null, Environment.CurrentDirectory + @"\AstroClient\Resources\box.png");
             new QMSingleButton(menu, -1, -2f, "Force Sync Physic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().ForceSyncPhysic(); }), "Force Sync Physic", null, null, true);
 
             GameObjMenu.InitTogglerMenu(menu, -1, -1.5f, true);
@@ -140,7 +141,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             }
         }
 
-        public static void WorldObjectSeletionQMScroll(QMNestedButton main, float x, float y, bool btnHalf)
+        public static void WorldObjectSeletionQMScroll(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Select W.Objects", "Select World Objects to edit", null, null, null, null, btnHalf);
             var scroll = new QMScrollMenu(menu);
@@ -180,7 +181,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             });
         }
 
-        public static void PickupSelectionQMScroll(QMNestedButton main, float x, float y, bool btnHalf)
+        public static void PickupSelectionQMScroll(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Select Pickup", "Select World Pickup to edit", null, null, null, null, btnHalf);
             var PickupQMScroll = new QMScrollMenu(menu);
@@ -316,7 +317,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             }
         }
 
-        public static void InternalTriggerQMScroll(QMNestedButton main, float x, float y, bool btnHalf)
+        public static void InternalTriggerQMScroll(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Interact Triggers", "Interact with Selected Pickup Triggers", null, null, null, null, btnHalf);
             var scroll = new QMScrollMenu(menu);
@@ -421,7 +422,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             return null;
         }
 
-        public static void VRC_InteractableSubMenu(QMNestedButton main, float x, float y, bool btnHalf)
+        public static void VRC_InteractableSubMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Internal VRC_Interactable ", "Interact with Internal VRC_Interactable Triggers", null, null, null, null, btnHalf);
             menu.getMainButton().SetResizeTextForBestFit(true);
@@ -459,7 +460,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             return Color.red;
         }
 
-        public static void PrefabSpawnerQMScroll(QMNestedButton main, float x, float y, bool btnHalf)
+        public static void PrefabSpawnerQMScroll(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Spawn Prefabs", "Spawn World Prefabs", null, null, null, null, btnHalf);
             var prefabQMScroll = new QMScrollMenu(menu);
@@ -541,7 +542,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             }
         }
 
-        public static void ScaleSubMenuButtons(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void ScaleSubMenuButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var ScaleEditor = new QMNestedButton(menu, x, y, "Scale", "Scale Editor Menu!", null, null, null, null, btnHalf);
 
@@ -567,7 +568,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             ObjectMiscOptions.ScaleEditZ = new QMSingleToggleButton(ScaleEditor, 2, 2, "Edit Z", new Action(() => { ObjectMiscOptions.EditVectorZ = true; }), "Ignore Z", new Action(() => { ObjectMiscOptions.EditVectorZ = false; }), "Make Inflater Edit Z", Color.green, Color.red, null, false, true);
         }
 
-        public static void PhysicSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void PhysicSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var PhysicEditor = new QMNestedButton(menu, x, y, "Physics", "Item Physics Editor Menu!", null, null, null, null, btnHalf);
             new QMSingleButton(PhysicEditor, 1, 0, "Enable Collisions", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetDetectCollision(true); }), "Make the object affected by colliders!", null, null);
@@ -576,7 +577,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             new QMSingleButton(PhysicEditor, 2, 1, "Disable Kinematic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetKinematic(false); }), "Disables Kinematic!", null, null);
         }
 
-        public static void ConstraintSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void ConstraintSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var ConstraintMenu = new QMNestedButton(menu, x, y, "Constraints", "Item Constraints Options", null, null, null, null, btnHalf);
             Forces.Constraint_X_Toggle = new QMToggleButton(ConstraintMenu, 1, 0, "Block X Movement", new Action(() => { Tweaker_Object.GetGameObjectToEdit().AddConstraint(RigidbodyConstraints.FreezePositionX); }), "Unlock X Movement", new Action(() => { Tweaker_Object.GetGameObjectToEdit().RemoveConstraint(RigidbodyConstraints.FreezePositionX); }), "Control Current Object Constraints!", null, null, null, false);
@@ -592,7 +593,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             new QMSingleButton(ConstraintMenu, 1, 2, "Remove all Object Constraints", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Remove_all_constraints(); }), "Delete all object Constraints", null, null);
         }
 
-        public static void ForceSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void ForceSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var ForceSubMenu = new QMNestedButton(menu, x, y, "Forces", "You have the Force! Dont abuse it! <3!", null, null, null, null, btnHalf);
 
@@ -648,7 +649,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             new QMSingleButton(ForceSubMenu, 1, 2, "Rotate Z", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SpinZ(); }), string.Empty, null, null);
         }
 
-        public static void RocketComponentSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void RocketComponentSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var submenu = new QMNestedButton(menu, x, y, "Rocket Maker", "Turn Items Into Rockets, Be careful as they will explode on impact!", null, null, null, null, btnHalf);
             new QMSingleButton(submenu, 1, 0, "Rocket Object Direction (With Gravity)", new Action(() => { Tweaker_Object.GetGameObjectToEdit().MakeRocketItemWithG(); }), "Turn Held Object Into a rocket!", null, null);
@@ -661,7 +662,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             new QMSingleButton(submenu, 2, 2, "-1 Timer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DecRocketSpeed(); }), "Edits the Rocket Speed", null, null);
         }
 
-        public static void CrazyComponentSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void CrazyComponentSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var submenu = new QMNestedButton(menu, x, y, "Crazy Object", "Make Items fly in random directions lol!", null, null, null, null, btnHalf);
             new QMSingleButton(submenu, 1, 0, "Crazy Object (With Gravity)", new Action(() => { Tweaker_Object.GetGameObjectToEdit().GoNutsWithGravity(); }), "Make Held Object Go Nuts!", null, null);
@@ -672,7 +673,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             new QMSingleButton(submenu, 2, 1, "-1 Timer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DecCrazySpeed(); }), "Edits the CrazyObj Speed", null, null);
         }
 
-        public static void SpinnerSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void SpinnerSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var submenu = new QMNestedButton(menu, x, y, "Spin Control", "Make them spiiiiin!", null, null, null, null, btnHalf);
             new QMSingleButton(submenu, 1, 0, "+ 1 x", new Action(() => { Tweaker_Object.GetGameObjectToEdit().AddSpinForceX(); }), "Add Spin Force to spinner!", null, null);
@@ -853,7 +854,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             }
         }
 
-        public static void PickupPropertySubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void PickupPropertySubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var PickupEditor = new QMNestedButton(menu, x, y, "Pickup Property", "Pickup Property Editor Menu!", null, null, null, null, btnHalf);
             HasPickupComponent = new QMSingleButton(PickupEditor, 0, -1f, "Force Pickup Component", new Action(() => { Pickup.ForcePickupComponentPresence(Tweaker_Object.GetGameObjectToEdit()); }), "Forces Pickup component in case there's none.", null, null, true);
