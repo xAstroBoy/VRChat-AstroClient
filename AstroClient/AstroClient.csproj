@@ -9,14 +9,14 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>AstroClient</RootNamespace>
     <AssemblyName>AstroClient</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>D:\Steam Library\steamapps\common\VRChat\mods\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -32,9 +32,24 @@
     <NoWarn>CS0169;CS0472</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>8.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_Cheetos|AnyCPU'">
+    <OutputPath>D:\Steam Library\steamapps\common\VRChat\mods\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;CHEETOS</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <NoWarn>CS0169;CS0472</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AntiCrash\AntiCrash.cs" />
+    <Compile Include="AntiCrash\AntiCrashScanner.cs" />
+    <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />
     <Compile Include="AstroExtensions\ButtonsExtensions.cs" />
     <Compile Include="AstroExtensions\PlayerExtensions.cs" />
     <Compile Include="AstroExtensions\ListExtensions.cs" />
@@ -47,21 +62,24 @@
     <Compile Include="AstroExtensions\ScaleExtensions.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
+    <Compile Include="Buttons\SettingsMenuBtn.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemlySpy_Extensions.cs" />
-    <Compile Include="Cheetos\Config\SaveDataTempStuff.cs" />
-    <Compile Include="Cheetos\PlayerListUI.cs" />
-    <Compile Include="Cheetos\Hooks\RayCastHook.cs" />
+    <Compile Include="Cheetos\AstroInput.cs" />
+    <Compile Include="Cheetos\CheetosHelpers.cs" />
+    <Compile Include="Cheetos\CheetosUI.cs" />
+    <Compile Include="Cheetos\Config\Config.cs" />
+    <Compile Include="Cheetos\Config\ConfigManager.cs" />
+    <Compile Include="Cheetos\GameEventsBehaviour.cs" />
+    <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
     <Compile Include="Cheetos\Config\JSonWriter.cs" />
-    <Compile Include="Cheetos\Config\JSonWriter.cs" />
-    <Compile Include="Cheetos\Config\SaveData.cs" />
-    <Compile Include="Cheetos\Hooks\RayCastHook.cs" />
-    <Compile Include="Cheetos\PlayerListUI.cs" />
-    <Compile Include="EventArgs\OnAvatarSpawnArgs.cs" />
-    <Compile Include="EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
-    <Compile Include="EventArgs\SpawnEmojiArgs.cs" />
-    <Compile Include="EventArgs\RayCastEventArgs.cs" />
-    <Compile Include="Overridables.cs" />
+    <Compile Include="Cheetos\PlayerMenuUI.cs" />
+    <Compile Include="GameEvents.cs" />
+    <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
+    <Compile Include="ItemTweaker\Tweaker_Object.cs" />
+    <Compile Include="Networking\HandleClient.cs" />
+    <Compile Include="Networking\NetworkingExtensions.cs" />
+    <Compile Include="Networking\ReceivedDataEventArgs.cs" />
     <Compile Include="Console\CheetosConsole\Console.cs" />
     <Compile Include="Console\CheetosConsole\DefaultFonts.cs" />
     <Compile Include="Console\CheetosConsole\Extensions.cs" />
@@ -138,19 +156,24 @@
     <Compile Include="GameObject\Components\PlayerAttacker\PlayerAttackerManager.cs" />
     <Compile Include="GameObject\Editor\ESP\GameObjectESP.cs" />
     <Compile Include="Patches\Patching.cs" />
-    <Compile Include="EventArgs\PlayerEventArgs.cs" />
-    <Compile Include="Cheetos\Config\SaveData.cs" />
     <Compile Include="Skyboxes\SkyboxEditor.cs" />
     <Compile Include="Buttons\RandomSubmenus.cs" />
     <Compile Include="Buttons\WorldPickupsBtn.cs" />
     <Compile Include="Buttons\QuickMenuBtns.cs" />
     <Compile Include="Buttons\UserInteractMenuBtns.cs" />
     <Compile Include="Startup\ComponentHelper.cs" />
+    <Compile Include="Startup\EventArgs\OnAvatarSpawnArgs.cs" />
+    <Compile Include="Startup\EventArgs\OnWorldRevealArgs.cs" />
+    <Compile Include="Startup\EventArgs\PlayerEventArgs.cs" />
+    <Compile Include="Startup\EventArgs\RayCastEventArgs.cs" />
+    <Compile Include="Startup\EventArgs\SpawnEmojiArgs.cs" />
+    <Compile Include="Startup\EventArgs\UdonSyncRPCEventArgs.cs" />
+    <Compile Include="Startup\EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
     <Compile Include="Startup\Hooks\AvatarManagerHook.cs" />
     <Compile Include="Startup\Hooks\NetworkManagerHooks.cs" />
-    <Compile Include="Buttons\ItemTweakerMain.cs" />
     <Compile Include="GameObjMenu.cs" />
     <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
+    <Compile Include="Startup\Hooks\RPCEventHook.cs" />
     <Compile Include="Startup\Hooks\SpawnEmojiRPCHook.cs" />
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
     <Compile Include="Startup\WorldJoinMsg.cs" />
@@ -166,16 +189,36 @@
     <Compile Include="AstroExtensions\ColliderExtensions.cs" />
     <Compile Include="AstroExtensions\RigidbodyExtensions.cs" />
     <Compile Include="AstroExtensions\SyncPhysicsExt.cs" />
+    <Compile Include="Utils\DeepCloneUtils\TriggersCloner.cs" />
     <Compile Include="Utils\Headlight\ColorConverter.cs" />
     <Compile Include="Utils\Headlight\Headlight.cs" />
     <Compile Include="Utils\PlayerMovement\Movement.cs" />
+    <Compile Include="Utils\Player\PlayerHands.cs" />
+    <Compile Include="Utils\SmartCopier\ComponentProvider.cs" />
+    <Compile Include="Utils\SmartCopier\ComponentWrapper.cs" />
+    <Compile Include="Utils\SmartCopier\CopyContext.cs" />
+    <Compile Include="Utils\SmartCopier\CopyMode.cs" />
+    <Compile Include="Utils\SmartCopier\PropertyFilter.cs" />
+    <Compile Include="Utils\SmartCopier\PropertyProvider.cs" />
+    <Compile Include="Utils\SmartCopier\PropertyWrapper.cs" />
+    <Compile Include="Utils\SmartCopier\SmartCopier.cs" />
+    <Compile Include="Utils\UdonSearcher\UdonSearch.cs" />
     <Compile Include="Utils\XrefScannerUtils.cs" />
     <Compile Include="Variables\GDBUser.cs" />
     <Compile Include="Variables\VRChatObjects.cs" />
     <Compile Include="Variables\WorldIds.cs" />
-    <Compile Include="VRCAC\VRCAntiCrash_InitButtons.cs" />
-    <Compile Include="WorldAddons\Worlds\Jar Worlds\AmongUSCheats.cs" />
-    <Compile Include="WorldAddons\Worlds\Jar Worlds\Murder4Cheats.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\BClubWorld.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\FBTHeaven.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\FreezeTag.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\AmongUSCheats.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\Murder2Cheats.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\Murder4Cheats.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\Meroom.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\SmashContest.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\SnoozeScaryMaze5.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\TheGreatPug.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\VRChatHub.cs" />
+    <Compile Include="WorldAddons\WorldsCheats.cs" />
     <Compile Include="Utils\Avatar\LewdVRChat.cs" />
     <Compile Include="Utils\ColliderViewer\ColliderDisplay.cs" />
     <Compile Include="Utils\ColliderViewer\ColliderToggler.cs" />
@@ -185,7 +228,6 @@
     <Compile Include="Utils\GameObject\ObjectFinder.cs" />
     <Compile Include="Utils\Input\InputUtils.cs" />
     <Compile Include="Utils\Player\LocalPlayerUtils.cs" />
-    <Compile Include="Utils\Player\HandsUtils.cs" />
     <Compile Include="Utils\ObjectUtils\GameObjectUtils.cs" />
     <Compile Include="GameObject\Cloner\ObjectCloner.cs" />
     <Compile Include="GameObject\Editor\Colliders\ColliderEditors.cs" />
@@ -204,7 +246,6 @@
     <Compile Include="GameObject\Editor\Scale\ScaleEditor.cs" />
     <Compile Include="GameObject\Editor\Forces\Forces.cs" />
     <Compile Include="GameObject\Helpers\Helper.cs" />
-    <Compile Include="WorldAddons\Worlds\Hub.cs" />
     <Compile Include="Utils\QPens\QVPensUtils.cs" />
     <Compile Include="Utils\QuickMenuUtils.cs" />
     <Compile Include="Utils\World\WorldUtils.cs" />
@@ -218,10 +259,7 @@
     <Compile Include="GameObject\Object Tweaker\ObjectMiscOptions.cs" />
     <Compile Include="Console\ModConsole.cs" />
     <Compile Include="Main.cs" />
-    <Compile Include="WorldAddons\Worlds\Jar Worlds\Murder2Cheats.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WorldAddons\WorldAddons.cs" />
-    <Compile Include="WorldAddons\WorldUnlocker.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GameObject\Editor\Gravity\" />
