@@ -194,14 +194,6 @@
     <Compile Include="Utils\Headlight\Headlight.cs" />
     <Compile Include="Utils\PlayerMovement\Movement.cs" />
     <Compile Include="Utils\Player\PlayerHands.cs" />
-    <Compile Include="Utils\SmartCopier\ComponentProvider.cs" />
-    <Compile Include="Utils\SmartCopier\ComponentWrapper.cs" />
-    <Compile Include="Utils\SmartCopier\CopyContext.cs" />
-    <Compile Include="Utils\SmartCopier\CopyMode.cs" />
-    <Compile Include="Utils\SmartCopier\PropertyFilter.cs" />
-    <Compile Include="Utils\SmartCopier\PropertyProvider.cs" />
-    <Compile Include="Utils\SmartCopier\PropertyWrapper.cs" />
-    <Compile Include="Utils\SmartCopier\SmartCopier.cs" />
     <Compile Include="Utils\UdonSearcher\UdonSearch.cs" />
     <Compile Include="Utils\XrefScannerUtils.cs" />
     <Compile Include="Variables\GDBUser.cs" />
