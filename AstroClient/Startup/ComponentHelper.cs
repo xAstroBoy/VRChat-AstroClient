@@ -8,8 +8,6 @@ namespace AstroClient.Startup
     {
         public override void OnApplicationStart()
         {
-
-            ClassInjector.RegisterTypeInIl2Cpp<CheetoMenu>();
             ClassInjector.RegisterTypeInIl2Cpp<GameEventsBehaviour>();
 
             ClassInjector.RegisterTypeInIl2Cpp<RocketManager>();
@@ -48,10 +46,13 @@ namespace AstroClient.Startup
             ClassInjector.RegisterTypeInIl2Cpp<PlayerWatcherManager>();
             ClassInjector.RegisterTypeInIl2Cpp<PlayerWatcher>();
             ClassInjector.RegisterTypeInIl2Cpp<Astro_Interactable>();
+
+            ClassInjector.RegisterTypeInIl2Cpp<CheetoMenu>();
         }
 
         public override void OnUpdate()
         {
+            CheetoMenu.MakeInstance();
             RocketManager.MakeInstance();
             CrazyObjectManager.MakeInstance();
             ObjectSpinnerManager.MakeInstance();

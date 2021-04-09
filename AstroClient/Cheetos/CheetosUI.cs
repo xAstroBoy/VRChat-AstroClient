@@ -8,6 +8,7 @@
     using AstroClient.Finder;
     using DayClientML2.Utility.Extensions;
     using AstroClient.extensions;
+    using System.Runtime.InteropServices;
 
     public class CheetosPrivateStuff : GameEvents
     {
@@ -19,6 +20,9 @@
 
             string VRChatVersion = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_1;
             string VRChatBuild = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_0;
+
+            var userInterface = GameObjectFinder.Find("UserInterface");
+            userInterface.AddComponent<CheetoMenu>();
 
             var infoBar = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar");
 
