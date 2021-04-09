@@ -1,4 +1,5 @@
 ﻿using AstroClient;
+using AstroClient.Cheetos;
 using DayClientML2.Utility.Extensions;
 using Il2CppSystem.Reflection;
 using System;
@@ -230,25 +231,12 @@ namespace RubyButtonAPI
             catch { }
         }
 
-        public void LoadSprite(string url)
+        public void LoadSprite(string path)
         {
             var image = getIcon().GetComponent<Image>();
-            MelonLoader.MelonCoroutines.Start(LoadSprite(image, url));
-        }
-
-        private static IEnumerator LoadSprite(Image Instance, string url)
-        {
-            while (VRCPlayer.field_Internal_Static_VRCPlayer_0 != true) yield return null;
-            var Sprite = new Sprite();
-            IntPtr UrlPtr = new IntPtr(Convert.ToInt32(url, 16));
-            WWW www = new WWW(UrlPtr);
-            yield return www;
-            {
-                Sprite = Sprite.CreateSprite(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
-            }
-            Instance.sprite = Sprite;
-            Instance.color = Color.white;
-            yield break;
+            var texture = CheetosHelpers.LoadPNG(path);
+            image.sprite = Sprite.CreateSprite(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+            image.color = Color.white;
         }
 
         public void SetParent(QMNestedButton Parent)

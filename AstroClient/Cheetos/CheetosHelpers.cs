@@ -1,0 +1,29 @@
+﻿namespace AstroClient.Cheetos
+{
+    using AstroClient.ConsoleUtils;
+    using System.IO;
+    using UnityEngine;
+
+    public static class CheetosHelpers
+    {
+        public static Texture2D LoadPNG(string filePath)
+        {
+
+            Texture2D tex = null;
+            byte[] fileData;
+
+            if (File.Exists(filePath))
+            {
+                fileData = File.ReadAllBytes(filePath);
+                tex = new Texture2D(2, 2);
+                ImageConversion.LoadImage(tex, fileData); //..this will auto-resize the texture dimensions.
+                return tex;
+            }
+            else
+            {
+                ModConsole.Error($"Could not load: {filePath}");
+                return null;
+            }
+        }
+    }
+}

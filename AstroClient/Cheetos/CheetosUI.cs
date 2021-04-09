@@ -111,7 +111,8 @@
                 MainButton.getMainButton().setActive(false);
             } else
             {
-                //QMTabMenu cheetosTab = new QMTabMenu(0, "Cheeto's Menu", null, null, null, @"https://craig.se/AstroClient/tab_button.png");
+                //QMTabMenu cheetosTab = new QMTabMenu(0, "Cheeto's Menu", null, null, null, null);
+                QMTabMenu cheetosTab = new QMTabMenu(0, "Cheeto's Menu", null, null, null, Environment.CurrentDirectory + @"\AstroClient\Resources\planet.png");
             }
         }
 
