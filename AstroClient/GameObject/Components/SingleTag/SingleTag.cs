@@ -269,6 +269,22 @@ namespace AstroClient.components
 
         internal Color Tag_Color = Color.grey;
 
-        internal bool ShowTag = true;
+        private bool _ShowTag = true;
+        internal bool ShowTag
+        {
+            get
+            {
+                return _ShowTag;
+            }
+            set
+            {
+                if(value = _ShowTag)
+                {
+                    return;
+                }
+
+                _ShowTag = value;
+            }
+        }
     }
 }

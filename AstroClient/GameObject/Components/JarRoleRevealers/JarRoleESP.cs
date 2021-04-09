@@ -98,75 +98,69 @@ namespace AstroClient.components
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-            if (isAmongUsWorld)
+            if (obj != null)
             {
-                if (Internal_AssignedPlayerNode != null)
+                if (isAmongUsWorld)
                 {
-                    if (obj != null && obj == Internal_AssignedPlayerNode)
+                    if (Internal_AssignedPlayerNode != null)
                     {
-
-                        if (action.StartsWith("SyncVotedFor"))
+                        if (obj == Internal_AssignedPlayerNode)
                         {
 
-                            AmongUSHasVoted = true;
-                            var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
-                            if (against != null)
+                            if (action.StartsWith("SyncVotedFor"))
                             {
-                                if (JarRoleController.ViewRoles)
+
+                                AmongUSHasVoted = true;
+                                var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
+                                if (against != null)
                                 {
-                                    if (!AmongUSVoteRevealTag.ShowTag)
+                                    if (JarRoleController.ViewRoles)
                                     {
                                         AmongUSVoteRevealTag.ShowTag = true;
+
+                                    }
+                                    if (against != GetLocalPlayerNode())
+                                    {
+                                        SetTag(AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#44DBAC"));
+                                    }
+                                    else
+                                    {
+                                        SetTag(AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#C22B26"));
                                     }
                                 }
-                                if (against != GetLocalPlayerNode())
-                                {
-                                    SetTag(AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#44DBAC"));
-                                }
-                                else
-                                {
-                                    SetTag(AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#C22B26"));
 
-                                }
+
+
                             }
-
-
-
-                        }
-                        else if (action.ToLower() == "syncabstainedvoting")
-                        {
-                            AmongUSHasVoted = true;
-                            if (JarRoleController.ViewRoles)
+                            else if (action.ToLower() == "syncabstainedvoting")
                             {
-                                if (!AmongUSVoteRevealTag.ShowTag)
+                                AmongUSHasVoted = true;
+                                if (JarRoleController.ViewRoles)
                                 {
                                     AmongUSVoteRevealTag.ShowTag = true;
                                 }
+                                SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorConverter.HexToColor("#1BA039"));
+
                             }
-                            SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorConverter.HexToColor("#1BA039"));
-
                         }
-                    }
 
 
-                    if (action == "SyncEndVotingPhase" || action == "SyncAbort" || action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncStart")
-                    {
-                        if (AmongUSHasVoted)
+                        if (action == "SyncEndVotingPhase" || action == "SyncAbort" || action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncStart")
                         {
-                            AmongUSHasVoted = false;
-                        }
-                        if (AmongUSVoteRevealTag != null)
-                        {
-                            SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorConverter.HexToColor("#034989"));
-                            if (JarRoleController.ViewRoles)
+                            if (AmongUSHasVoted)
                             {
-                                if (AmongUSVoteRevealTag.ShowTag)
+                                AmongUSHasVoted = false;
+                            }
+                            if (AmongUSVoteRevealTag != null)
+                            {
+                                SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorConverter.HexToColor("#034989"));
+                                if (JarRoleController.ViewRoles)
                                 {
                                     AmongUSVoteRevealTag.ShowTag = false;
                                 }
                             }
-                        }
 
+                        }
                     }
                 }
             }
@@ -426,17 +420,14 @@ namespace AstroClient.components
                     if (tag.Label_Text != text)
                     {
                         tag.Label_Text = text;
-                        Debug($"Updating SingleTag Label_Text for {Internal_player.DisplayName()}, with text : {text} ");
                     }
                     if (tag.Label_TextColor != TextColor)
                     {
                         tag.Label_TextColor = TextColor;
-                        Debug($"Updating SingleTag Label_TextColor for {Internal_player.DisplayName()}, with TextColor : {TextColor.ToString()}");
                     }
                     if (tag.Tag_Color != TagColor)
                     {
                         tag.Tag_Color = TagColor;
-                        Debug($"Updating SingleTag Tag_Color for {Internal_player.DisplayName()}, with TagColor : {TagColor.ToString()}");
                     }
                 }
             }
@@ -540,26 +531,17 @@ namespace AstroClient.components
                             {
                                 if (AmongUSHasVoted)
                                 {
-                                    if (!AmongUSVoteRevealTag.ShowTag)
-                                    {
-                                        AmongUSVoteRevealTag.ShowTag = true;
-                                    }
+                                    AmongUSVoteRevealTag.ShowTag = true;
                                 }
                                 else
                                 {
-                                    if (AmongUSVoteRevealTag.ShowTag)
-                                    {
-                                        AmongUSVoteRevealTag.ShowTag = false;
-                                    }
+                                    AmongUSVoteRevealTag.ShowTag = false;
                                 }
                             }
                         }
                         else
                         {
-                            if (AmongUSVoteRevealTag.ShowTag)
-                            {
-                                AmongUSVoteRevealTag.ShowTag = false;
-                            }
+                            AmongUSVoteRevealTag.ShowTag = false;
                         }
 
                     }

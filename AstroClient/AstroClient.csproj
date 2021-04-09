@@ -69,10 +69,10 @@
     <Compile Include="Cheetos\AstroInput.cs" />
     <Compile Include="Cheetos\Config\Config.cs" />
     <Compile Include="Cheetos\Config\ConfigManager.cs" />
+    <Compile Include="Cheetos\GameEventsBehaviour.cs" />
     <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
     <Compile Include="Cheetos\PlayerMenuUI.cs" />
     <Compile Include="Cheetos\Config\JSonWriter.cs" />
-    <Compile Include="Cheetos\GenericGameEvents.cs" />
     <Compile Include="Networking\HandleClient.cs" />
     <Compile Include="Networking\NetworkingExtensions.cs" />
     <Compile Include="Networking\ReceivedDataEventArgs.cs" />
@@ -175,7 +175,7 @@
     <Compile Include="Startup\Hooks\RPCEventHook.cs" />
     <Compile Include="Startup\Hooks\SpawnEmojiRPCHook.cs" />
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
-    <Compile Include="TempFix.cs" />
+    <Compile Include="Startup\WorldJoinMsg.cs" />
     <Compile Include="Udon\Exploits\Global\GlobalUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Murder4\Murder4UdonExploits.cs" />
     <Compile Include="Udon\Exploits\AmongUS\AmongUSUdonExploits.cs" />
