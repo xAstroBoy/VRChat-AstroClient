@@ -17,7 +17,7 @@ namespace AstroClient.Worlds
 
         public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
-            QMTabMenu WorldCheats = new QMTabMenu(2f, "WorldCheats Menu", null, null, null, Environment.CurrentDirectory + @"\AstroClient\Resources\thief.png");
+            QMTabMenu WorldCheats = new QMTabMenu(5f, "WorldCheats Menu", null, null, null, Environment.CurrentDirectory + @"\AstroClient\Resources\thief.png");
             Murder2Cheats.Murder2CheatsButtons(WorldCheats, 1, 0, true);
             Murder4Cheats.Murder4CheatsButtons(WorldCheats, 1, 0.5f, true);
             AmongUSCheats.AmongUSCheatsButtons(WorldCheats, 1, 1f, true);
