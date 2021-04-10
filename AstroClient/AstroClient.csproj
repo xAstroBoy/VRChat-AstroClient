@@ -79,6 +79,7 @@
     <Compile Include="GameEvents.cs" />
     <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
+    <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\HandleClient.cs" />
     <Compile Include="Networking\NetworkingExtensions.cs" />
     <Compile Include="Networking\ReceivedDataEventArgs.cs" />
