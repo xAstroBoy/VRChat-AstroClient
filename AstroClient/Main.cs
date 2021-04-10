@@ -20,6 +20,7 @@ using AstroClient.UdonExploits;
 using AstroClient.ButtonShortcut;
 using CheetosConsole;
 using System.Collections.Generic;
+using System.IO;
 
 #endregion AstroClient Imports
 
@@ -45,12 +46,12 @@ namespace AstroClient
             ConfigManager.Validate();
             ConfigManager.Load();
 
+            KeyManager.ReadKey();
+
             AstroNetworkClient.Initialize();
 
-            if (!AstroNetworkClient.Client.IsConnected)
+            while (!KeyManager.IsAuthed)
             {
-                System.Console.Beep();
-                Environment.Exit(0);
             }
 
             try
@@ -69,7 +70,10 @@ namespace AstroClient
 
         public override void OnPreferencesSaved()
         {
-            ConfigManager.Save();
+            if (KeyManager.IsAuthed)
+            {
+                ConfigManager.Save();
+            }
         }
 
         public static void InitializeOverridables()
@@ -120,22 +124,25 @@ namespace AstroClient
 
         public override void VRChat_OnUiManagerInit()
         {
-            QuickMenuUtils.SetQuickMenuCollider(5, 5);
-            UserInteractMenuBtns.InitButtons(-1, 1, true); //UserMenu Main Button
+            if (KeyManager.IsAuthed == true)
+            {
+                QuickMenuUtils.SetQuickMenuCollider(5, 5);
+                UserInteractMenuBtns.InitButtons(-1, 1, true); //UserMenu Main Button
 
-            InitMainsButtons(5, 0, true);
-            ItemTweakerMain.InitButtons(5, 0.5f, true); //ItemTweaker Main Button
-            new QMSingleButton("ShortcutMenu", 5, 1f, "GameObject Toggler", new Action(() =>
-            { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.getMainButton().getGameObject().GetComponent<Button>().onClick.Invoke(); }
-            ), "Advanced GameObject Toggler", null, null, true);
-            CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 1.5f, true);
+                InitMainsButtons(5, 0, true);
+                ItemTweakerMain.InitButtons(5, 0.5f, true); //ItemTweaker Main Button
+                new QMSingleButton("ShortcutMenu", 5, 1f, "GameObject Toggler", new Action(() =>
+                { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.getMainButton().getGameObject().GetComponent<Button>().onClick.Invoke(); }
+                ), "Advanced GameObject Toggler", null, null, true);
+                CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 1.5f, true);
 
-            Event_VRChat_OnUiManagerInit?.Invoke(this, new EventArgs());
+                Event_VRChat_OnUiManagerInit?.Invoke(this, new EventArgs());
+            }
         }
 
         public static void InitMainsButtons(float x, float y, bool btnHalf)
         {
-            if (AstroNetworkClient.Client.IsConnected)
+            if (KeyManager.IsAuthed == true)
             {
                 //QMNestedButton AstroClient = new QMNestedButton("ShortcutMenu", x, y, "AstroClient Menu", "AstroClient Menu", null, null, null, null, btnHalf);  // Menu Main Button
                 QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, Environment.CurrentDirectory + @"\AstroClient\Resources\planet.png");

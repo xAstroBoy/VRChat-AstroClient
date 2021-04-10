@@ -2,10 +2,32 @@
 {
     using AstroClient.ConsoleUtils;
     using System;
+    using System.IO;
     using System.Net.Sockets;
-    using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
+
+    internal static class KeyManager
+    {
+        public static string AuthKey = string.Empty;
+
+        public static bool IsAuthed = false;
+
+        public static void ReadKey()
+        {
+            string keyPath = Environment.CurrentDirectory + @"\AstroClient\key.txt";
+
+            if (File.Exists(keyPath))
+            {
+                AuthKey = File.ReadAllText(keyPath);
+            }
+            else
+            {
+                System.Console.Beep();
+                Environment.Exit(0);
+            }
+        }
+    }
 
     internal class AstroNetworkClient
     {
@@ -40,17 +62,19 @@
                 //Environment.Exit(0);
             } else if (cmds[0].Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
             {
-                Client.Send("key:12345");
+                Client.Send($"key:{KeyManager.AuthKey}");
                 ModConsole.DebugLog("Auth Requested");
             } else if (cmds[0].Equals("authed", StringComparison.InvariantCultureIgnoreCase))
             {
                 if (cmds[1].Equals("true", StringComparison.InvariantCultureIgnoreCase))
                 {
                     // I'm authed
+                    KeyManager.IsAuthed = true;
                     ModConsole.DebugLog("Successfully Authed");
                 }
                 else
                 {
+                    KeyManager.IsAuthed = false;
                     ModConsole.DebugLog("Failed to Auth");
                     Console.Beep();
                     // I'm not authed

@@ -51,6 +51,18 @@
             }
         }
 
+        private static bool IsValidKey(string authKey)
+        {
+            foreach (string key in AuthKeys)
+            {
+                if (key.Equals(authKey))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         private static void ProcessInput(object sender, string input)
         {
             Client client = sender as Client;
@@ -63,7 +75,7 @@
                 string key = cmds[1];
                 Console.WriteLine("Trying to auth with: " + key);
                 //if (key.Equals("12345", StringComparison.InvariantCultureIgnoreCase))
-                if (AuthKeys.Contains(key))
+                if (IsValidKey(key))
                 {
                     client.Send("authed:true");
                     client.IsAuthed = true;
