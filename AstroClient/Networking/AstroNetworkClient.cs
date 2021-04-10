@@ -32,20 +32,19 @@
 
         private static void ProcessInput(object sender, string input)
         {
+            ModConsole.DebugLog($"Received: {input}");
             string[] cmds = input.Trim().Split(':');
 
             if (cmds[0].Equals("exit"))
             {
                 //Environment.Exit(0);
-            }
-            if (cmds[0].Equals("auth-request"))
+            } else if (cmds[0].Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
             {
                 Client.Send("key:12345");
                 ModConsole.DebugLog("Auth Requested");
-            }
-            else if (cmds[0].Equals("authed"))
+            } else if (cmds[0].Equals("authed", StringComparison.InvariantCultureIgnoreCase))
             {
-                if (cmds[1].Equals("true"))
+                if (cmds[1].Equals("true", StringComparison.InvariantCultureIgnoreCase))
                 {
                     // I'm authed
                     ModConsole.DebugLog("Successfully Authed");
@@ -57,6 +56,10 @@
                     // I'm not authed
                     //Environment.Exit(0);
                 }
+            }
+            else
+            {
+                Console.WriteLine($"Unknown packet: {input}");
             }
         }
 
@@ -88,8 +91,6 @@
                     if (!string.IsNullOrEmpty(e.Message) && !string.IsNullOrWhiteSpace(e.Message))
                     {
                         var data = e.Message;
-                        //Console.WriteLine($"Received {e.ClientID}: {e.Message} \n");
-                        ModConsole.DebugLog($"Received: {data}");
                         ProcessInput(sender, data);
                     }
                     else

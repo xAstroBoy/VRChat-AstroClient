@@ -12,7 +12,7 @@
 
         internal static List<Client> Clients { get; private set; }
 
-        internal static Dictionary<string, string> AuthKeys = new Dictionary<string, string>();
+        internal static List<string> AuthKeys = new List<string>();
 
         internal Server()
         {
@@ -27,7 +27,12 @@
             Console.WriteLine("Server Started.");
 
             // Load AuthKeys, eventually going to use a database or something
-            AuthKeys.Add("12345", "Test Key");
+
+            // Cheetos Key
+            AuthKeys.Add("KeXYLwEwyPsYT4IrSbWWrupYqjzT8C3VEWN2uWb1DpjjB1kcoOJICsbmjnXRmeRzjxoXcuX6CCWZVwltPGTWGE2AFJENcYA1EWh7FRXCvMS66u75LIZeWl5Gd8XqKnyR8YFlKw9U2cAXTZhjovlQvy94Up1VbM5PP3IhdAIKpSBlOBTcrgCz7tTTx81gcwslOLJW6P61");
+            
+            // Astro's Key
+            AuthKeys.Add("hQhe2Y2mcVkfUSJbBcfZSO5WLMaiBzzXL4v9aA3Ze1fxOx9CHgwcp8akxeenKcHIsALBBRgVyVt2v7jCp8gOTLe6CgJpIYyarZpBGIlPzC66peQyMnw58OXcHDUXbNW6P6oMIPYpjICJwY2QW1MARvCW48x8v09EdcOzpHOPx3JFeCOdCwKCxPubaZWmTmNpwPF0EMdV");
 
             // Key count
             Console.WriteLine($"There are {AuthKeys.Count} valid keys stored.");
@@ -50,13 +55,15 @@
         {
             Client client = sender as Client;
 
-            string[] cmds = input.Trim().Split(":");
+            Console.WriteLine($"Received: {input}");
+            string[] cmds = input.Split(":");
 
-            if (cmds[0].Equals("key", StringComparison.Ordinal))
+            if (cmds[0].Equals("key"))
             {
                 string key = cmds[1];
                 Console.WriteLine("Trying to auth with: " + key);
-                if (AuthKeys.ContainsKey(key))
+                //if (key.Equals("12345", StringComparison.InvariantCultureIgnoreCase))
+                if (AuthKeys.Contains(key))
                 {
                     client.Send("authed:true");
                     client.IsAuthed = true;
@@ -69,6 +76,10 @@
                     client.Disconnect();
                     Console.WriteLine("Invalig Auth Key");
                 }
+            }
+            else
+            {
+                Console.WriteLine($"Unknown packet: {input}");
             }
         }
 
@@ -134,7 +145,6 @@
             if (!string.IsNullOrEmpty(e.Message) && !string.IsNullOrWhiteSpace(e.Message))
             {
                 var data = e.Message;
-                Console.WriteLine($"Received {e.ClientID}: {data} \n");
                 ProcessInput(sender, data);
             }
             else

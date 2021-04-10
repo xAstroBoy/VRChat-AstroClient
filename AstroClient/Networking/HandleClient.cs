@@ -1,6 +1,5 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.ConsoleUtils;
     using System;
     using System.IO;
     using System.Net.Sockets;
@@ -39,9 +38,7 @@
         private void SendSecret()
         {
             byte[] secretHeader = BitConverter.GetBytes(SecretKeyPlain);
-
-            //Console.WriteLine($"Sending Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
-
+            Console.WriteLine($"Sending Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
             try
             {
                 _clientStream.Write(secretHeader, 0, secretHeader.Length);
@@ -56,8 +53,6 @@
         public void SendHeaderLength(byte[] msg)
         {
             byte[] headerLength = BitConverter.GetBytes(msg.Length);
-            //Console.WriteLine($"Sending Length: {BitConverter.ToUInt32(headerLength, 0)}");
-
             try
             {
                 _clientStream.Write(headerLength, 0, headerLength.Length);
@@ -144,13 +139,17 @@
             if (secret != SecretKeyPlain)
             {
                 IsConnected = false;
-                ModConsole.DebugLog("Failed to provide correct secret key");
+                Console.WriteLine("Failed to provide correct secret key");
+            }
+            else
+            {
+                Console.WriteLine("Correct secret key received");
             }
 
             int len = ReceiveHeaderLength();
             if (len > 0)
             {
-                //Console.WriteLine($"Received Header Length {len}");
+                Console.WriteLine($"Received Header Length {len}");
 
                 int remaining = len;
                 int totalRead = 0;

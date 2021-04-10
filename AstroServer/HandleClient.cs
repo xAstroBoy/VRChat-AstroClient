@@ -38,7 +38,7 @@
         private void SendSecret()
         {
             byte[] secretHeader = BitConverter.GetBytes(SecretKeyPlain);
-            //Console.WriteLine($"Sending Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
+            Console.WriteLine($"Sending Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
             try
             {
                 _clientStream.Write(secretHeader, 0, secretHeader.Length);
@@ -141,11 +141,15 @@
                 IsConnected = false;
                 Console.WriteLine("Failed to provide correct secret key");
             }
+            else
+            {
+                Console.WriteLine("Correct secret key received");
+            }
 
             int len = ReceiveHeaderLength();
             if (len > 0)
             {
-                //Console.WriteLine($"Received Header Length {len}");
+                Console.WriteLine($"Received Header Length {len}");
 
                 int remaining = len;
                 int totalRead = 0;

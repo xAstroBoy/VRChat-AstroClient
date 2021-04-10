@@ -47,6 +47,12 @@ namespace AstroClient
 
             AstroNetworkClient.Initialize();
 
+            if (!AstroNetworkClient.Client.IsConnected)
+            {
+                System.Console.Beep();
+                Environment.Exit(0);
+            }
+
             try
             {
                 Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);
@@ -129,24 +135,27 @@ namespace AstroClient
 
         public static void InitMainsButtons(float x, float y, bool btnHalf)
         {
-            //QMNestedButton AstroClient = new QMNestedButton("ShortcutMenu", x, y, "AstroClient Menu", "AstroClient Menu", null, null, null, null, btnHalf);  // Menu Main Button
-            QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, Environment.CurrentDirectory + @"\AstroClient\Resources\planet.png");
-            ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", new Action(() => { Bools.isDebugMode = true; }), "Debug Console OFF", new Action(() => { Bools.isDebugMode = false; }), "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            if (AstroNetworkClient.Client.IsConnected)
+            {
+                //QMNestedButton AstroClient = new QMNestedButton("ShortcutMenu", x, y, "AstroClient Menu", "AstroClient Menu", null, null, null, null, btnHalf);  // Menu Main Button
+                QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, Environment.CurrentDirectory + @"\AstroClient\Resources\planet.png");
+                ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", new Action(() => { Bools.isDebugMode = true; }), "Debug Console OFF", new Action(() => { Bools.isDebugMode = false; }), "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 
-            WorldsCheats.InitButtons(AstroClient, 1, 0, true);
-            LightControl.InitButtons(AstroClient, 1, 0.5f, true);
-            Movement.InitButtons(AstroClient, 1, 1, true);
-            GameObjectUtils.InitButtons(AstroClient, 1, 1.5f, true);
-            EmojiUtils.InitButton(AstroClient, 1, 2, true);
-            LewdVRChat.InitButtons(AstroClient, 1, 2.5f, true);
-            WorldPickupsBtn.InitButtons(AstroClient, 2, 0, true);
-            ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
-            RandomSubmenus.TriggerSubMenu(AstroClient, 2, 1, true);
-            GlobalUdonExploits.InitButtons(AstroClient, 2, 1.5f, true);
-            RandomSubmenus.VRC_InteractableSubMenu(AstroClient, 2, 2, true);
-            Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
+                WorldsCheats.InitButtons(AstroClient, 1, 0, true);
+                LightControl.InitButtons(AstroClient, 1, 0.5f, true);
+                Movement.InitButtons(AstroClient, 1, 1, true);
+                GameObjectUtils.InitButtons(AstroClient, 1, 1.5f, true);
+                EmojiUtils.InitButton(AstroClient, 1, 2, true);
+                LewdVRChat.InitButtons(AstroClient, 1, 2.5f, true);
+                WorldPickupsBtn.InitButtons(AstroClient, 2, 0, true);
+                ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
+                RandomSubmenus.TriggerSubMenu(AstroClient, 2, 1, true);
+                GlobalUdonExploits.InitButtons(AstroClient, 2, 1.5f, true);
+                RandomSubmenus.VRC_InteractableSubMenu(AstroClient, 2, 2, true);
+                Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
 
-            SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
+                SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
+            }
         }
 
         public static QMSingleToggleButton ToggleDebugInfo;
