@@ -2,3 +2,4 @@
 /AstroClient/obj/Debug
 /.vs/
 *.cache
+/AstroServer/obj
