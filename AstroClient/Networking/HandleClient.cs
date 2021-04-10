@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+    using AstroClient.ConsoleUtils;
     using System;
     using System.IO;
     using System.Net.Sockets;
@@ -143,7 +144,7 @@
             if (secret != SecretKeyPlain)
             {
                 IsConnected = false;
-                Console.WriteLine("Failed to provide correct secret key");
+                ModConsole.DebugLog("Failed to provide correct secret key");
             }
 
             int len = ReceiveHeaderLength();

@@ -72,7 +72,7 @@
             {
                 for (; ; )
                 {
-                    Console.WriteLine("Lost connection to server, retrying in 10 seconds...");
+                    ModConsole.DebugError("Lost connection to server, retrying in 10 seconds...");
                     Thread.Sleep(10000);
                     try { Connect(); break; } catch { }
                 }

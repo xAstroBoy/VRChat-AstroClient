@@ -51,22 +51,18 @@
                     //ModConsole.DebugLog(item.ToString());
                 }
 
-                // USpeak
-
                 var name = __1.ParameterObject.name;
                 var parameter = __1.ParameterString;
 
                 bool log = ConfigManager.General.LogRPCEvents;
 
-                if (name.Equals("USpeak"))
+                if (name.Equals("USpeak") || name.Equals("SceneEventHandlerAndInstantiator"))
                 {
                     log = false;
                 }
 
-                if (parameter == "UdonSyncRunProgramAsRPC")
+                if (parameter.Equals("UdonSyncRunProgramAsRPC"))
                 {
-
-
                     if (ConfigManager.General.LogUdonEvents)
                     {
                         string sender = string.Empty;
