@@ -3,3 +3,4 @@
 /.vs/
 *.cache
 /AstroServer/obj
+/AstroServer/bin/Debug/net5.0

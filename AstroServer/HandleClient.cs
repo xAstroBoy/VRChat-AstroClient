@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroServer
 {
     using System;
     using System.IO;
@@ -39,7 +39,7 @@
         {
             byte[] secretHeader = BitConverter.GetBytes(SecretKeyPlain);
 
-            Console.WriteLine($"Sending Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
+            Console.WriteLine($"Sending Secret: {BitConverter.ToUInt32(secretHeader)}");
 
             try
             {
@@ -55,7 +55,7 @@
         public void SendHeaderLength(byte[] msg)
         {
             byte[] headerLength = BitConverter.GetBytes(msg.Length);
-            Console.WriteLine($"Sending Length: {BitConverter.ToUInt32(headerLength, 0)}");
+            Console.WriteLine($"Sending Length: {BitConverter.ToUInt32(headerLength)}");
 
             try
             {
@@ -111,7 +111,7 @@
             {
                 byte[] received = new byte[4];
                 _clientStream.Read(received, 0, received.Length);
-                int length = BitConverter.ToInt32(received, 0);
+                int length = BitConverter.ToInt32(received);
                 return length;
             }
             catch
@@ -127,7 +127,7 @@
             {
                 byte[] received = new byte[4];
                 _clientStream.Read(received, 0, received.Length);
-                int length = BitConverter.ToInt32(received, 0);
+                int length = BitConverter.ToInt32(received);
                 return length;
             }
             catch
