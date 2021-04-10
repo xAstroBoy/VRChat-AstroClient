@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+    using AstroClient.ConsoleUtils;
     using System;
     using System.Net.Sockets;
     using System.Text;
@@ -10,15 +11,16 @@
     {
         internal static HandleClient Client;
 
-        public AstroNetworkClient()
+        public static void Initialize()
         {
+            ModConsole.DebugLog("Client Conneting..");
             Connect();
         }
 
-        private void Connect()
+        private static void Connect()
         {
             Client = null;
-            TcpClient tcpClient = new TcpClient("localhost", 42069);
+            TcpClient tcpClient = new TcpClient("craig.se", 42069);
             Client = new HandleClient();
 
             Client.Connected += OnConnected;
@@ -28,28 +30,43 @@
             Client.StartClient(tcpClient, 0);
         }
 
-        private void OnConnected(object sender, EventArgs e)
+        private static void ProcessInput(object sender, string input)
         {
-            int i = 0;
+            string[] cmds = input.Trim().Split(':');
 
-            StringBuilder stringBuilder = new StringBuilder();
-            while (i < 99)
+            if (cmds[0].Equals("exit"))
             {
-                stringBuilder.Append("junk");
-                i++;
+                //Environment.Exit(0);
             }
-            stringBuilder.Append("[end]");
-
-            Client.Send(stringBuilder.ToString());
-            return;
-            Task.Run(() =>
+            if (cmds[0].Equals("auth-request"))
             {
-                Console.WriteLine("Connected to server.");
-                Client.Send("Auth");
-            });
+                Client.Send("key:12345");
+                ModConsole.DebugLog("Auth Requested");
+            }
+            else if (cmds[0].Equals("authed"))
+            {
+                if (cmds[1].Equals("true"))
+                {
+                    // I'm authed
+                    ModConsole.DebugLog("Successfully Authed");
+                }
+                else
+                {
+                    ModConsole.DebugLog("Failed to Auth");
+                    Console.Beep();
+                    // I'm not authed
+                    //Environment.Exit(0);
+                }
+            }
         }
 
-        private void OnDisconnect(object sender, EventArgs e)
+        private static void OnConnected(object sender, EventArgs e)
+        {
+            ModConsole.DebugLog("Client Connected..");
+            return;
+        }
+
+        private static void OnDisconnect(object sender, EventArgs e)
         {
             Task.Run(() =>
             {
@@ -62,7 +79,7 @@
             });
         }
 
-        private void OnReceived(object sender, ReceivedTextEventArgs e)
+        private static void OnReceived(object sender, ReceivedTextEventArgs e)
         {
             Task.Run(() =>
             {
@@ -72,12 +89,13 @@
                     {
                         var data = e.Message;
                         //Console.WriteLine($"Received {e.ClientID}: {e.Message} \n");
-                        Console.WriteLine($"Received: {data}");
+                        ModConsole.DebugLog($"Received: {data}");
+                        ProcessInput(sender, data);
                     }
                     else
                     {
                         Client.Disconnect();
-                        Console.WriteLine("Empty request.");
+                        ModConsole.DebugLog("Empty request.");
                     }
                 }
                 catch { }

@@ -12,6 +12,8 @@
 
         internal static List<Client> Clients { get; private set; }
 
+        internal static Dictionary<string, string> AuthKeys = new Dictionary<string, string>();
+
         internal Server()
         {
             Console.WriteLine("Starting Server");
@@ -24,6 +26,12 @@
             serverSocket.Start();
             Console.WriteLine("Server Started.");
 
+            // Load AuthKeys, eventually going to use a database or something
+            AuthKeys.Add("12345", "Test Key");
+
+            // Key count
+            Console.WriteLine($"There are {AuthKeys.Count} valid keys stored.");
+
             Clients = new List<Client>();
             while (true)
             {
@@ -34,8 +42,6 @@
                 client.Disconnected += Disconnected;
                 client.Received += Received;
 
-                client.LoggedIn += LoggedIn;
-
                 client.StartClient(clientSocket, GetNewClientID());
             }
         }
@@ -43,6 +49,27 @@
         private static void ProcessInput(object sender, string input)
         {
             Client client = sender as Client;
+
+            string[] cmds = input.Trim().Split(":");
+
+            if (cmds[0].Equals("key", StringComparison.Ordinal))
+            {
+                string key = cmds[1];
+                Console.WriteLine("Trying to auth with: " + key);
+                if (AuthKeys.ContainsKey(key))
+                {
+                    client.Send("authed:true");
+                    client.IsAuthed = true;
+                    client.Key = key;
+                    Console.WriteLine("Successfully Authed");
+                } else
+                {
+                    client.Send("authed:false");
+                    client.Send("exit:invalid auth key");
+                    client.Disconnect();
+                    Console.WriteLine("Invalig Auth Key");
+                }
+            }
         }
 
         public void SendAll(string msg)
@@ -51,13 +78,6 @@
             {
                 client.Send(msg);
             }
-        }
-
-        private static void LoggedIn(object sender, EventArgs e)
-        {
-            Client client = sender as Client;
-            //SendAll($"Client {client.ClientID}: Logged In as {client.Name}");
-            Console.WriteLine($"Client {client.ClientID}: Logged In as {client.Name}");
         }
 
         private static void Disconnected(object sender, EventArgs e)
@@ -76,7 +96,7 @@
 
         internal static int GetNewClientID()
         {
-            int i = 0;
+            int i = 1;
             while (true)
             {
                 IEnumerable<Client> result = Clients.Where(client => client.ClientID == i);
@@ -98,8 +118,7 @@
                 {
                     Clients.Add(client);
                     Console.WriteLine($"Client added: {client.ClientID} / {Clients.Count}");
-                    //client.Send("ping".ConvertToBytes());
-                    //client.SendEncrypted("Test from Server..");
+                    client.Send("auth-request");
                 }
                 Console.WriteLine($"Client Connected: {client.ClientID} / {Clients.Count}");
             }
@@ -115,14 +134,6 @@
             if (!string.IsNullOrEmpty(e.Message) && !string.IsNullOrWhiteSpace(e.Message))
             {
                 var data = e.Message;
-                //if (e.Message.EndsWith("=")) // Data is likely encrypted since encrypted data ends with =
-                //{
-                //    data = Framework.Decrypt(e.Message);
-                //}
-                //else
-                //{
-                //    data = e.Message;
-                //}
                 Console.WriteLine($"Received {e.ClientID}: {data} \n");
                 ProcessInput(sender, data);
             }

@@ -45,6 +45,8 @@ namespace AstroClient
             ConfigManager.Validate();
             ConfigManager.Load();
 
+            AstroNetworkClient.Initialize();
+
             try
             {
                 Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);

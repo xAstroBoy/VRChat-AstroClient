@@ -4,15 +4,17 @@
 
     internal class Client : HandleClient
     {
-        public EventHandler<EventArgs> LoggedIn;
+        internal string Name = string.Empty;
 
-        internal string Name { get; private set; }
+        internal string Key = string.Empty;
 
-        internal bool IsLoggedIn { get; private set; }
+        internal bool IsAuthed = false;
 
         internal Client()
         {
             Name = "Temp"; // We'll get this later from the client after authentication is implemented
+            Key = "";
+            IsAuthed = false;
         }
     }
 }

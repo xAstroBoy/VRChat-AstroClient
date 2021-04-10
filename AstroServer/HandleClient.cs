@@ -38,9 +38,7 @@
         private void SendSecret()
         {
             byte[] secretHeader = BitConverter.GetBytes(SecretKeyPlain);
-
-            Console.WriteLine($"Sending Secret: {BitConverter.ToUInt32(secretHeader)}");
-
+            //Console.WriteLine($"Sending Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
             try
             {
                 _clientStream.Write(secretHeader, 0, secretHeader.Length);
@@ -55,8 +53,6 @@
         public void SendHeaderLength(byte[] msg)
         {
             byte[] headerLength = BitConverter.GetBytes(msg.Length);
-            Console.WriteLine($"Sending Length: {BitConverter.ToUInt32(headerLength)}");
-
             try
             {
                 _clientStream.Write(headerLength, 0, headerLength.Length);
@@ -83,7 +79,6 @@
                 {
                     _clientStream.Write(msg, 0, msg.Length);
                     _clientStream.Flush();
-                    Console.WriteLine($"Sent {msg.Length}: {msg.ConvertToString()}");
                 }
                 catch
                 {
@@ -111,7 +106,7 @@
             {
                 byte[] received = new byte[4];
                 _clientStream.Read(received, 0, received.Length);
-                int length = BitConverter.ToInt32(received);
+                int length = BitConverter.ToInt32(received, 0);
                 return length;
             }
             catch
@@ -127,7 +122,7 @@
             {
                 byte[] received = new byte[4];
                 _clientStream.Read(received, 0, received.Length);
-                int length = BitConverter.ToInt32(received);
+                int length = BitConverter.ToInt32(received, 0);
                 return length;
             }
             catch
@@ -150,7 +145,7 @@
             int len = ReceiveHeaderLength();
             if (len > 0)
             {
-                Console.WriteLine($"Received Header Length {len}");
+                //Console.WriteLine($"Received Header Length {len}");
 
                 int remaining = len;
                 int totalRead = 0;
@@ -165,7 +160,7 @@
                         totalRead += read;
                         remaining -= read;
                         memoryStream.Write(received, 0, received.Length);
-                        Console.WriteLine($"Read: {totalRead} / {remaining} / {len}");
+                        //Console.WriteLine($"Read: {totalRead} / {remaining} / {len}");
                     }
                     catch
                     {
@@ -173,10 +168,10 @@
                     }
                 }
 
-                Console.WriteLine($"End Read: {totalRead}");
+                //Console.WriteLine($"End Read: {totalRead}");
                 byte[] data = memoryStream.GetBuffer();
                 string message = data.ConvertToString();
-                Console.WriteLine($"Received: {message}");
+                //Console.WriteLine($"Received: {message}");
                 Received?.Invoke(this, new ReceivedTextEventArgs(ClientID, message));
             }
         }
