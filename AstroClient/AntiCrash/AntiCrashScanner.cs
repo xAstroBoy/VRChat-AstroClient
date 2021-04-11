@@ -1,6 +1,8 @@
 ﻿namespace AstroClient.AntiCrash
 {
+    using AstroClient.ConsoleUtils;
     using AstroClient.extensions;
+    using DayClientML2.Utility.Extensions;
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;
@@ -18,9 +20,11 @@
 
             if (avatar != null)
             {
+                avatar.SetActive(false);
                 var player = avatar.transform.root.GetComponentInChildren<Player>();
                 //AntiCrashUtils.TempLog($"Scanning {player.DisplayName()}'s avatar..");
                 InitiateScan(avatar);
+                avatar.SetActive(true);
             }
         }
 
@@ -29,6 +33,20 @@
             var renderers = avatar.GetComponentsInChildren<Renderer>();
             var particleSystems = avatar.GetComponentsInChildren<ParticleSystem>();
             var skinnedMeshRenderers = avatar.GetComponentsInChildren<SkinnedMeshRenderer>();
+            var audioSources = avatar.GetComponentsInChildren<AudioSource>();
+
+            int audioSourcesCount = audioSources.Count;
+            foreach (var audioSource in audioSources)
+            {
+                //AntiCrashUtils.TempLog($"AudioSources: {audioSourcesCount}");
+                if (audioSourcesCount >= 25)
+                {
+                    audioSource.DestroyMeLocal();
+                    AntiCrashUtils.TempLog($"AudioSources: destroyed, max reached.");
+                }
+                //AntiCrashUtils.TempLog($"SkinnedMeshRenderer found: {skinnedMeshRenderer.name}");
+                // ScanAudioSources(audioSources);
+            }
 
             foreach (var renderer in renderers)
             {
@@ -68,14 +86,16 @@
         {
             if (particleSystem.maxParticles >= 10000)
             {
-                AntiCrashUtils.TempLog($"ParticleSystem: {particleSystem.name} with {particleSystem.maxParticles} particles disabled.");
-                particleSystem.enableEmission = false;
+                AntiCrashUtils.TempLog($"ParticleSystem: {particleSystem.name} with {particleSystem.maxParticles} particles destroyed.");
+                //particleSystem.enableEmission = false;
+                particleSystem.DestroyMeLocal();
             }
 
             if (particleSystem.collision.maxCollisionShapes >= 10000)
             {
-                AntiCrashUtils.TempLog($"ParticleSystem: {particleSystem.name} with {particleSystem.collision.maxCollisionShapes} collision shapes disabled.");
-                particleSystem.enableEmission = false;
+                AntiCrashUtils.TempLog($"ParticleSystem: {particleSystem.name} with {particleSystem.collision.maxCollisionShapes} collision shapes destroyed.");
+                //particleSystem.enableEmission = false;
+                particleSystem.DestroyMeLocal();
             }
 
             // TODO: Check bursts
@@ -87,9 +107,13 @@
 
             if (polyCount >= 1000000)
             {
-                AntiCrashUtils.TempLog($"SkinnedMeshRenderer: with {polyCount} polys disabled.");
+                AntiCrashUtils.TempLog($"SkinnedMeshRenderer: with {polyCount} polys destroyed.");
                 skinnedMeshRenderer.sharedMesh.DestroyMeLocal();
             }
+        }
+
+        private static void ScanAudioSources(AudioSource audioSource)
+        {
         }
 
         private static int GetPolyCount(Mesh sourceMesh)
