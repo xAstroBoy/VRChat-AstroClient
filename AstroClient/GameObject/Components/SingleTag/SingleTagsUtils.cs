@@ -32,7 +32,7 @@ namespace AstroClient.Components
             return Counter.Where(x => x.user.id == TargetUser.id).DefaultIfEmpty(null).First();
         }
 
-        private static bool DebugMode = false;
+        private static readonly bool DebugMode = false;
 
         public static void Debug(string msg)
         {

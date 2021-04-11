@@ -4,6 +4,7 @@
     using DayClientML2.Utility.Extensions;
     using Harmony;
     using System;
+    using System.Linq;
     using System.Reflection;
     using VRC;
     using VRC.SDKBase;
@@ -39,19 +40,27 @@
         {
             try
             {
-                var array = Networking.DecodeParameters(__1.ParameterBytes); // KIRAI SUGGESTS TO USE utf8 decode and discard the first 6 characters.
-                string text = string.Empty;
+                //var array = Networking.DecodeParameters(__1.ParameterBytes); // KIRAI SUGGESTS TO USE utf8 decode and discard the first 6 characters.
+                string actionstring = string.Empty;
                 string actiontext = string.Empty;
+                if (__1.ParameterBytes != null && __1.ParameterBytes.Count() != 0)
+                {
+                    actionstring = System.Text.Encoding.UTF8.GetString(__1.ParameterBytes);
+
+                    actiontext = actionstring.Substring(6);
+
+                }
+                else
+                {
+                    actiontext = null;
+                }
+
+
+
 
                 string sender = string.Empty;
                 string GameObjName = string.Empty;
 
-                foreach (var item in array)
-                {
-                    text += $"[{item.ToString()}]";
-                    actiontext += item.ToString();
-                    //ModConsole.DebugLog(item.ToString());
-                }
 
                 var name = __1.ParameterObject.name;
                 var parameter = __1.ParameterString;
@@ -99,7 +108,7 @@
 
                     if (parameter != "UdonSyncRunProgramAsRPC")
                     {
-                        ModConsole.DebugLog($"RPC: {sender}, {name}, {parameter}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
+                        ModConsole.DebugLog($"RPC: {sender}, {name}, {parameter}, [{actiontext}], {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
 
                     }
                 }
@@ -110,6 +119,7 @@
 
             catch (Exception e)
             {
+                ModConsole.Error("Error Intercepting RPC Event!");
                 ModConsole.ErrorExc(e);
             }
         }

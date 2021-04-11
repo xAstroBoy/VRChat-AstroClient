@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using VRC.SDKBase;
 
 #region AstroClient Imports
 
@@ -14,7 +15,15 @@ namespace AstroClient.extensions
         {
             if (udonvar.Action != null)
             {
-                udonvar.Action.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, udonvar.EventKey);
+
+                if (udonvar.EventKey.StartsWith("_"))
+                {
+                    udonvar.Action.SendCustomEvent(udonvar.EventKey);
+                }
+                else
+                {
+                    udonvar.Action.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, udonvar.EventKey);
+                }
             }
         }
 
@@ -24,7 +33,14 @@ namespace AstroClient.extensions
             {
                 if (cachedudon.Action != null)
                 {
-                    cachedudon.Action.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, cachedudon.EventKey);
+                    if (cachedudon.EventKey.StartsWith("_"))
+                    {
+                        cachedudon.Action.SendCustomEvent(cachedudon.EventKey);
+                    }
+                    else
+                    {
+                        cachedudon.Action.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, cachedudon.EventKey);
+                    }
                 }
             }
         }
