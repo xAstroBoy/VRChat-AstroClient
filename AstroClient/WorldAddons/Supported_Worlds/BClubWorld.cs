@@ -4,6 +4,8 @@ using System;
 using UnityEngine;
 using AstroClient.extensions;
 using AstroClient.Finder;
+using VRC.Udon;
+using System.Linq;
 
 namespace AstroClient
 {
@@ -37,6 +39,8 @@ namespace AstroClient
             }
         }
 
+
+        // TODO : FIX THE UDON EVENT OR MAKE A LOCAL TELEPORT AND ENABLE THE ROOM WITH ONE BUTTON.
         private GameObject CreateButtonGroup(int doorID, Vector3 position, Quaternion rotation, bool flip = false)
         {
             GameObject nlobby = GameObjectFinder.FindRootSceneObject("nLobby");
@@ -83,8 +87,15 @@ namespace AstroClient
                             var udonEvent = UdonSearch.FindUdonEvent("PhotozoneMaster", $"EnableIntercomIn{doorID}");
                             Action action = () => { udonEvent.ExecuteUdonEvent(); };
 
-
                             clone.gameObject.AddAstroInteractable(action);
+                            var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
+                            if (behaviourevent != null && behaviourevent.Count() != 0)
+                            {
+                                foreach (var e in behaviourevent)
+                                {
+                                    e.DestroyMeLocal();
+                                }
+                            }
                             clone.AddToWorldUtilsMenu();
                             try
                             {
@@ -119,10 +130,17 @@ namespace AstroClient
                             clone.transform.localPosition = new Vector3(-2.335898f, 0, -1.828288f);
                             clone.RenameObject($"Lock {doorID}");
                             clone.AddCollider();
-                            var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleLock{doorID}");
+                            var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}");
                             Action action = () => { udonEvent.ExecuteUdonEvent(); };
                             clone.gameObject.AddAstroInteractable(action);
-
+                            var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
+                            if (behaviourevent != null && behaviourevent.Count() != 0)
+                            {
+                                foreach (var e in behaviourevent)
+                                {
+                                    e.DestroyMeLocal();
+                                }
+                            }
                             clone.AddToWorldUtilsMenu();
                             try
                             {
@@ -155,10 +173,17 @@ namespace AstroClient
                             clone.transform.localPosition = new Vector3(-4.335898f, 0, -1.828288f);
                             clone.RenameObject($"Looking {doorID}");
                             clone.AddCollider();
-                            var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleLooking{doorID}");
+                            var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLooking{doorID}");
                             Action action = () => { udonEvent.ExecuteUdonEvent(); };
                             clone.gameObject.AddAstroInteractable(action);
-
+                            var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
+                            if(behaviourevent != null && behaviourevent.Count() != 0)
+                            {
+                                foreach(var e in behaviourevent)
+                                {
+                                    e.DestroyMeLocal();
+                                }
+                            }
                             clone.AddToWorldUtilsMenu();
 
                             try
@@ -196,10 +221,17 @@ namespace AstroClient
                             clone.RenameObject($"Incognito {doorID}");
                             clone.AddCollider();
 
-                            var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleAnon{doorID}");
+                            var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleAnon{doorID}");
                             Action action = () => { udonEvent.ExecuteUdonEvent(); };
                             clone.gameObject.AddAstroInteractable(action);
-
+                            var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
+                            if (behaviourevent != null && behaviourevent.Count() != 0)
+                            {
+                                foreach (var e in behaviourevent)
+                                {
+                                    e.DestroyMeLocal();
+                                }
+                            }
 
                             clone.AddToWorldUtilsMenu();
                             try
@@ -233,10 +265,17 @@ namespace AstroClient
                             clone.transform.rotation = new Quaternion(0.5198629f, 0.5198629f, 0.5198629f, 0.5198629f);
                             clone.RenameObject($"Do Not Disturb {doorID}");
                             clone.AddCollider();
-                            var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"ToggleDoorbell{doorID}");
+                            var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleDoorbell{doorID}");
                             Action action = () => { udonEvent.ExecuteUdonEvent(); };
                             clone.gameObject.AddAstroInteractable(action);
-
+                            var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
+                            if (behaviourevent != null && behaviourevent.Count() != 0)
+                            {
+                                foreach (var e in behaviourevent)
+                                {
+                                    e.DestroyMeLocal();
+                                }
+                            }
                             clone.AddToWorldUtilsMenu();
                             try
                             {

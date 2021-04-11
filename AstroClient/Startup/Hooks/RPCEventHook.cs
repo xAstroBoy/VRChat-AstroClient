@@ -39,10 +39,12 @@
         {
             try
             {
-                var array = Networking.DecodeParameters(__1.ParameterBytes);
-                string textSelf = LocalPlayerUtils.GetSelfPlayer().DisplayName();
+                var array = Networking.DecodeParameters(__1.ParameterBytes); // KIRAI SUGGESTS TO USE utf8 decode and discard the first 6 characters.
                 string text = string.Empty;
                 string actiontext = string.Empty;
+
+                string sender = string.Empty;
+                string GameObjName = string.Empty;
 
                 foreach (var item in array)
                 {
@@ -61,30 +63,30 @@
                     log = false;
                 }
 
+                if (__0 != null)
+                {
+                    sender = __0.DisplayName();
+                }
+                else
+                {
+                    sender = "null";
+                }
+
+                if (__1.ParameterObject != null)
+                {
+                    GameObjName = __1.ParameterObject.name;
+                }
+                else
+                {
+                    GameObjName = "null";
+                }
+
+
+
                 if (parameter.Equals("UdonSyncRunProgramAsRPC"))
                 {
                     if (ConfigManager.General.LogUdonEvents)
                     {
-                        string sender = string.Empty;
-                        string GameObjName = string.Empty;
-
-                        if(__0 != null)
-                        {
-                            sender = __0.DisplayName();
-                        }
-                        else
-                        {
-                            sender = "null";
-                        }
-
-                        if(__1.ParameterObject != null)
-                        {
-                            GameObjName = __1.ParameterObject.name;
-                        }
-                        else
-                        {
-                            GameObjName = "null";
-                        }
 
                         ModConsole.DebugLog($"Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
                     }
@@ -97,14 +99,8 @@
 
                     if (parameter != "UdonSyncRunProgramAsRPC")
                     {
-                        if (__0 != null)
-                        {
-                            ModConsole.DebugLog($"RPC: {__0.DisplayName()}, {name}, {parameter}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
-                        }
-                        else
-                        {
-                            ModConsole.DebugLog($"RPC: Null , {name}, {parameter}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
-                        }
+                        ModConsole.DebugLog($"RPC: {sender}, {name}, {parameter}, {text}, {__1.EventType}, {__2.ToString()}, {__3}, {__4}");
+
                     }
                 }
 
@@ -112,7 +108,10 @@
 
             }
 
-            catch { } // Suppress errors as who tf needs em.
+            catch (Exception e)
+            {
+                ModConsole.ErrorExc(e);
+            }
         }
     }
 }
