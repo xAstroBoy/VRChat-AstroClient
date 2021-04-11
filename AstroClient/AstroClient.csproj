@@ -82,6 +82,7 @@
     <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\HandleClient.cs" />
     <Compile Include="Networking\NetworkingExtensions.cs" />
+    <Compile Include="Networking\ReceivedDataEventArgs.cs" />
     <Compile Include="Networking\ReceivedTextEventArgs.cs" />
     <Compile Include="Console\CheetosConsole\Console.cs" />
     <Compile Include="Console\CheetosConsole\DefaultFonts.cs" />

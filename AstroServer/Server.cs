@@ -45,7 +45,7 @@
 
                 client.Connected += Connected;
                 client.Disconnected += Disconnected;
-                client.Received += Received;
+                client.ReceivedText += ReceivedText;
 
                 client.StartClient(clientSocket, GetNewClientID());
             }
@@ -152,7 +152,7 @@
             }
         }
 
-        private static void Received(object sender, ReceivedTextEventArgs e)
+        private static void ReceivedText(object sender, ReceivedTextEventArgs e)
         {
             if (!string.IsNullOrEmpty(e.Message) && !string.IsNullOrWhiteSpace(e.Message))
             {

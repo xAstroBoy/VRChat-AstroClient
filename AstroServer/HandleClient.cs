@@ -11,7 +11,8 @@
 
         public event EventHandler<EventArgs> Connected;
         public event EventHandler<EventArgs> Disconnected;
-        public event EventHandler<ReceivedTextEventArgs> Received;
+        public event EventHandler<ReceivedTextEventArgs> ReceivedText;
+        public event EventHandler<ReceivedDataEventArgs> ReceivedData;
 
         public bool IsConnected { get; private set; }
 
@@ -176,7 +177,7 @@
                 byte[] data = memoryStream.GetBuffer();
                 string message = data.ConvertToString();
                 //Console.WriteLine($"Received: {message}");
-                Received?.Invoke(this, new ReceivedTextEventArgs(ClientID, message));
+                ReceivedText?.Invoke(this, new ReceivedTextEventArgs(ClientID, message));
             }
         }
     }
