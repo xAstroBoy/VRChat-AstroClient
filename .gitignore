@@ -4,3 +4,4 @@
 *.cache
 /AstroServer/obj
 /AstroServer/bin/Debug/net5.0
+/AstroLoader/obj/Debug
