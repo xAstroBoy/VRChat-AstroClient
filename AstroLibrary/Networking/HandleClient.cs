@@ -18,9 +18,12 @@
 
         public int ClientID { get; private set; }
 
+        public bool IsClient = true;
+
         private NetworkStream _clientStream;
 
-        private static int SecretKeyPlain = 5234;
+        private static readonly int SecretKeyClient = 5234;
+        private static readonly int SecretKeyLoader = 2563;
 
         public void StartClient(TcpClient clientSocket, int clientId)
         {
@@ -34,6 +37,21 @@
         public void Disconnect()
         {
             IsConnected = false;
+        }
+
+        private void SendClientLoaderHeader(int value = 0)
+        {
+            byte[] header = BitConverter.GetBytes(value);
+            Console.WriteLine($"Sending HeaderType: {BitConverter.ToUInt32(header, 0)}");
+            try
+            {
+                _clientStream.Write(header, 0, header.Length);
+                _clientStream.Flush();
+            }
+            catch
+            {
+                IsConnected = false;
+            }
         }
 
         private void SendHeaderType(int headerType = 1000) // 1000 is plain text
@@ -53,8 +71,18 @@
 
         private void SendSecret()
         {
-            byte[] secretHeader = BitConverter.GetBytes(SecretKeyPlain);
-            Console.WriteLine($"Sending Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
+            byte[] secretHeader;
+
+            if (IsClient)
+            {
+                secretHeader = BitConverter.GetBytes(SecretKeyClient);
+                Console.WriteLine($"Sending Client Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
+            } else
+            {
+                secretHeader = BitConverter.GetBytes(SecretKeyLoader);
+                Console.WriteLine($"Sending Loader Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
+            }
+
             try
             {
                 _clientStream.Write(secretHeader, 0, secretHeader.Length);
@@ -85,7 +113,7 @@
             Send(msg.ConvertToBytes());
         }
 
-        public void Send(byte[] msg, int headerType = 1000)
+        public void Send(byte[] msg, int headerType = 1000, int cl = 0) // 0 = client, 1 = loader
         {
             SendSecret();
             SendHeaderType(headerType);
@@ -169,14 +197,20 @@
         {
             int secret = ReceiveSecret();
 
-            if (secret != SecretKeyPlain)
+            if (secret != SecretKeyClient && IsClient)
             {
                 IsConnected = false;
-                Console.WriteLine("Failed to provide correct secret key");
+                Console.WriteLine("Failed to provide client secret key");
+            }
+            else if (secret != SecretKeyLoader && !IsClient)
+            {
+                IsConnected = false;
+                Console.WriteLine("Failed to provide loader secret key");
             }
             else
             {
-                Console.WriteLine("Correct secret key received");
+                var cl = IsClient ? "client" : "loader";
+                Console.WriteLine($"Correct secret key received: {cl}");
             }
 
             int headerType = RecieveHeaderType();

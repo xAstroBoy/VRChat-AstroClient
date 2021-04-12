@@ -148,9 +148,23 @@
             }
         }
 
+        private static void CheckExistingClientsWithKey(Client client)
+        {
+            foreach (var other in Clients)
+            {
+                if (client.Key.Equals(other.Key) && client.ClientID != other.ClientID)
+                {
+                    other.Send("exit:key in use somewhere else");
+                    other.Disconnect();
+                }
+            }
+        }
+
         private static void Connected(object sender, EventArgs e)
         {
             Client client = sender as Client;
+
+            CheckExistingClientsWithKey(client);
 
             if (Clients.Count < _maxConnections)
             {

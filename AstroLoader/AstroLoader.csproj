@@ -61,7 +61,7 @@
       <Link>Networking\ReceivedTextEventArgs.cs</Link>
     </Compile>
     <Compile Include="AstroLoader.cs" />
-    <Compile Include="AstroNetworkClient.cs" />
+    <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

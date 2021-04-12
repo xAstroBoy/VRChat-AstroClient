@@ -45,6 +45,7 @@
             Client = null;
             TcpClient tcpClient = new TcpClient("craig.se", 42069);
             Client = new HandleClient();
+            Client.IsClient = true; // Indicate that this is the client
 
             Client.Connected += OnConnected;
             Client.Disconnected += OnDisconnect;
