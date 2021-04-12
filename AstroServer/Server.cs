@@ -6,6 +6,16 @@
     using System.Net;
     using System.Net.Sockets;
 
+    [Serializable]
+    internal class UserData // #TODO Make this work
+    {
+        public string Name = string.Empty;
+
+        public string Key = string.Empty;
+
+        public string Discord = string.Empty;
+    }
+
     internal class Server
     {
         private static readonly int _maxConnections = 1000;
@@ -33,6 +43,12 @@
             
             // Astro's Key
             AuthKeys.Add("hQhe2Y2mcVkfUSJbBcfZSO5WLMaiBzzXL4v9aA3Ze1fxOx9CHgwcp8akxeenKcHIsALBBRgVyVt2v7jCp8gOTLe6CgJpIYyarZpBGIlPzC66peQyMnw58OXcHDUXbNW6P6oMIPYpjICJwY2QW1MARvCW48x8v09EdcOzpHOPx3JFeCOdCwKCxPubaZWmTmNpwPF0EMdV");
+
+            // Moon's Key
+            AuthKeys.Add("UYbVYfMiaSIZqtYBUqaq2b3HGY0VcbN6y6NJWbbjkpPXRYXtO11yYHtSdXtKtFObXHatPNbe4BVOIDtZAoD44KWHKkm9UYHhk47OxvA3TshJhvHLXDm0O6wV9UpKP18xV4rm5qn0A3HweQSIrE7ItB7PqohStvSmr2xKSmwmvyxZY7yhBRm4jTKGejmGNAOqoWzw5zR9");
+
+            // Grizzly's Key
+            AuthKeys.Add("pG0iZoVJCbN5AmCxXxsdQwLmoDgBmg73KqhYgPkdhYgorIKR9pEPjESC5KRlL50cw7LqpW9ZGmxWv0ognoAf1Wx2dshIIFMu9LaqueBmNk5jfY9A6ayuBIkobusQgjtC4axd0RN8KLu6o7ZE9R8ep1zSdaFN1v7y6NAxm9Dsk0B1hSV7N39a8wDN7G73vGNUy7e8ujnv");
 
             // Key count
             Console.WriteLine($"There are {AuthKeys.Count} valid keys stored.");
