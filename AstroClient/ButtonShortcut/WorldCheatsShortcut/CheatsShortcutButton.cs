@@ -65,6 +65,16 @@ namespace AstroClient.ButtonShortcut
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
+            else if (id == WorldIds.AimFactory)
+            {
+                if (AimFactory.AimFactoryCheatPage != null)
+                {
+                    SetButtonText("Aim Factory Cheats", "Manage Aim Factory Cheats");
+                    SetButtonShortcut(AimFactory.AimFactoryCheatPage);
+                    SetButtonColor(Color.green);
+                    ToggleButtonVisibilityAndInteractivity(true);
+                }
+            }
             else
             {
                 SetButtonColor(Color.red);

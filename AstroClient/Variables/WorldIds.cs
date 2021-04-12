@@ -29,5 +29,7 @@
         public static readonly string FreezeTag = "wrld_7487d91a-3ef4-44c6-ad6d-9bdc7dee5efd";
 
         public static readonly string BClub = "wrld_1b3b3259-0a1f-4311-984e-826abab6f481";
+
+        public static readonly string AimFactory = "wrld_97a21a21-9e5e-4152-b1c6-bc899a041d3f";
     }
 }

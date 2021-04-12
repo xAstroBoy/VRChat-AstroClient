@@ -135,14 +135,13 @@ namespace AstroClient
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
+            try { 
             if(IsFreezeTag)
             {
                 if(action == "netping")
                 {
                     return; // WTF THE SPAM WITH THIS SHIT ACTION WOT
                 }
-                try
-                {
                     if (SelfNode == null)
                     {
                         if (sender.DisplayName() == LocalPlayerUtils.GetSelfPlayer().DisplayName())
@@ -195,10 +194,11 @@ namespace AstroClient
                         }
                     }
                 }
-                catch(Exception e)
-                {
-                    ModConsole.DebugErrorExc(e);
-                }
+            }
+            catch (Exception e)
+            {
+                ModConsole.Error("Error in FreezeTag OnUdonSync");
+                ModConsole.ErrorExc(e);
             }
         }
     }

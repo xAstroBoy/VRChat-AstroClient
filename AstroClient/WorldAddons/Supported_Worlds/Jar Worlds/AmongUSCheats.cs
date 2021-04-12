@@ -177,34 +177,42 @@ namespace AstroClient
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-            if (HasAmongUsWorldLoaded)
+            try
             {
-                if (obj != null)
+                if (HasAmongUsWorldLoaded)
                 {
-
-                    if (action.StartsWith("SyncAssign") && GetLocalPlayerNode().Node != null)
+                    if (obj != null)
                     {
-                        if (RoleSwapper_GetImpostorRole)
+
+                        if (action.StartsWith("SyncAssign") && GetLocalPlayerNode().Node != null)
                         {
-                            if (!SafetySwap) // In case it grabs and update the current ones already!
+                            if (RoleSwapper_GetImpostorRole)
                             {
-                                if (obj == GetLocalPlayerNode().Node)
+                                if (!SafetySwap) // In case it grabs and update the current ones already!
                                 {
-                                    AssignedSelfRole = action;
-                                }
+                                    if (obj == GetLocalPlayerNode().Node)
+                                    {
+                                        AssignedSelfRole = action;
+                                    }
 
-                                if (action == "SyncAssignM")
-                                {
-                                    TargetNode = obj;
-                                    AssignedTargetRole = action;
-                                }
+                                    if (action == "SyncAssignM")
+                                    {
+                                        TargetNode = obj;
+                                        AssignedTargetRole = action;
+                                    }
 
-                                RoleSwapper_GetImpostorRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                                    RoleSwapper_GetImpostorRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                                }
                             }
                         }
-                    }
 
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                ModConsole.Error("Error in AmongUsCheats OnUdonSync");
+                ModConsole.ErrorExc(e);
             }
 
         }

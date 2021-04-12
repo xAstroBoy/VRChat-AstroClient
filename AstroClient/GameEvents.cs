@@ -169,7 +169,8 @@ namespace AstroClient
         {
             try
             {
-                OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
+                    OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
+                
             }
             catch (Exception Exc)
             {

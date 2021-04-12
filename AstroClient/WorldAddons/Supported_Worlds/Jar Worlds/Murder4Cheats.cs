@@ -517,51 +517,58 @@ namespace AstroClient
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-            if (HasMurder4WorldLoaded)
+            try
             {
-
-                if (obj != null && action.StartsWith("SyncAssign") && GetLocalPlayerNode().Node != null)
+                if (HasMurder4WorldLoaded)
                 {
-                    if (RoleSwapper_GetDetectiveRole)
+
+                    if (obj != null && action.StartsWith("SyncAssign") && GetLocalPlayerNode().Node != null)
                     {
-                        if (!SafetySwap)
+                        if (RoleSwapper_GetDetectiveRole)
                         {
-                            if (obj == GetLocalPlayerNode().Node)
+                            if (!SafetySwap)
                             {
-                                AssignedSelfRole = action;
-                            }
+                                if (obj == GetLocalPlayerNode().Node)
+                                {
+                                    AssignedSelfRole = action;
+                                }
 
-                            if (action == "SyncAssignD")
-                            {
-                                TargetNode = obj;
-                                AssignedTargetRole = action;
-                            }
+                                if (action == "SyncAssignD")
+                                {
+                                    TargetNode = obj;
+                                    AssignedTargetRole = action;
+                                }
 
-                            RoleSwapper_GetDetectiveRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                                RoleSwapper_GetDetectiveRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                            }
                         }
-                    }
-                    else if (RoleSwapper_GetMurdererRole)
-                    {
-                        if (!SafetySwap) // In case it grabs and update the current ones already!
+                        else if (RoleSwapper_GetMurdererRole)
                         {
-                            if (obj == GetLocalPlayerNode().Node)
+                            if (!SafetySwap) // In case it grabs and update the current ones already!
                             {
-                                AssignedSelfRole = action;
+                                if (obj == GetLocalPlayerNode().Node)
+                                {
+                                    AssignedSelfRole = action;
+                                }
+
+                                if (action == "SyncAssignM")
+                                {
+                                    TargetNode = obj;
+                                    AssignedTargetRole = action;
+                                }
+
+                                RoleSwapper_GetMurdererRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+
                             }
-
-                            if (action == "SyncAssignM")
-                            {
-                                TargetNode = obj;
-                                AssignedTargetRole = action;
-                            }
-
-                            RoleSwapper_GetMurdererRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
-
                         }
                     }
                 }
             }
-
+            catch (Exception e)
+            {
+                ModConsole.Error("Error in Murder4Cheats OnUdonSync");
+                ModConsole.ErrorExc(e);
+            }
         }
 
 

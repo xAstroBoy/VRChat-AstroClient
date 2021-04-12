@@ -35,6 +35,7 @@ namespace AstroClient
         public static CachedUdonEvent FindUdonEvent(GameObject obj, string subaction)
         {
             var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
+
             foreach (var actionobject in actionObjects)
             {
                 if (actionobject != null)
@@ -43,7 +44,7 @@ namespace AstroClient
                     {
                         if (actionkeys.key == subaction)
                         {
-                            ModConsole.Log($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
+                            ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
                             return new CachedUdonEvent(actionobject, actionkeys.key);
                         }
                     }

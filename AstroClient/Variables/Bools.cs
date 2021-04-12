@@ -6,15 +6,17 @@ namespace AstroClient.variables
     {
         internal static bool DisableNSFWMenu = true;
 
+#if CHEETOS
+        private static bool _isDebugMode = true; 
+#else
         private static bool _isDebugMode = false;
+#endif
+
 
         internal static bool isDebugMode
         {
             get
             {
-#if CHEETOS
-                return true;
-#endif
                 return _isDebugMode;
             }
             set

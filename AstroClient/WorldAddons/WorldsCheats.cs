@@ -23,6 +23,7 @@ namespace AstroClient.Worlds
             AmongUSCheats.AmongUSCheatsButtons(WorldCheats, 1, 1f, true);
             HubButtonsControl.InitButtons(WorldCheats, 1, 1.5f, true);
             FreezeTag.InitButtons(WorldCheats, 1, 2, true);
+            AimFactory.InitButtons(WorldCheats, 1, 2.5f, true);
         }
 
         public override void OnWorldReveal(string id, string name, string asseturl)
