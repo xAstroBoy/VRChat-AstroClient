@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroLibrary.Networking
 {
     public class ReceivedDataEventArgs
     {

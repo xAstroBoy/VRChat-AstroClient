@@ -1,6 +1,6 @@
 ﻿namespace AstroServer
 {
-    using System;
+    using AstroLibrary.Networking;
 
     internal class Client : HandleClient
     {

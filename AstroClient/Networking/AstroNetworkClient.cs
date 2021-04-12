@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
     using AstroClient.ConsoleUtils;
+    using AstroLibrary.Networking;
     using System;
     using System.IO;
     using System.Net.Sockets;

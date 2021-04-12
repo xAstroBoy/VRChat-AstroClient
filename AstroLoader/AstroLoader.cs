@@ -5,5 +5,8 @@
     public class AstroLoader : MelonMod
     {
 
+        public AstroLoader()
+        {
+        }
     }
 }

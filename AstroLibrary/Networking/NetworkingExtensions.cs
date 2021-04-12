@@ -1,9 +1,9 @@
-﻿namespace AstroServer
+﻿namespace AstroLibrary.Networking
 {
     using System;
     using System.Text;
 
-    public static class Extensions
+    public static class NetworkingExtensions
     {
         public static string ConvertToString(this byte[] bytes)
         {
