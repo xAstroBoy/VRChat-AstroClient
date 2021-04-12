@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroLibrary.Networking
 {
     using System;
     using System.IO;
@@ -213,7 +213,8 @@
                 {
                     string message = data.ConvertToString();
                     ReceivedText?.Invoke(this, new ReceivedTextEventArgs(ClientID, message));
-                } else if (headerType == 1001) // Data
+                }
+                else if (headerType == 1001) // Data
                 {
                     ReceivedData?.Invoke(this, new ReceivedDataEventArgs(ClientID, data));
                 }

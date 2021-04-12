@@ -47,6 +47,18 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\AstroLibrary\Networking\HandleClient.cs">
+      <Link>Networking\HandleClient.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroLibrary\Networking\NetworkingExtensions.cs">
+      <Link>Networking\NetworkingExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroLibrary\Networking\ReceivedDataEventArgs.cs">
+      <Link>Networking\ReceivedDataEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroLibrary\Networking\ReceivedTextEventArgs.cs">
+      <Link>Networking\ReceivedTextEventArgs.cs</Link>
+    </Compile>
     <Compile Include="AntiCrash\AntiCrash.cs" />
     <Compile Include="AntiCrash\AntiCrashScanner.cs" />
     <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />
@@ -80,10 +92,6 @@
     <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Networking\AstroNetworkClient.cs" />
-    <Compile Include="Networking\HandleClient.cs" />
-    <Compile Include="Networking\NetworkingExtensions.cs" />
-    <Compile Include="Networking\ReceivedDataEventArgs.cs" />
-    <Compile Include="Networking\ReceivedTextEventArgs.cs" />
     <Compile Include="Console\CheetosConsole\Console.cs" />
     <Compile Include="Console\CheetosConsole\DefaultFonts.cs" />
     <Compile Include="Console\CheetosConsole\Extensions.cs" />

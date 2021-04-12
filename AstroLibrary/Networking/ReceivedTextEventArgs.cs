@@ -1,4 +1,4 @@
-﻿namespace AstroServer
+﻿namespace AstroLibrary.Networking
 {
     using System;
     using System.Text.RegularExpressions;

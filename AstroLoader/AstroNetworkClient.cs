@@ -1,6 +1,5 @@
-﻿namespace AstroClient
+﻿namespace AstroLoader
 {
-    using AstroClient.ConsoleUtils;
     using AstroLibrary.Networking;
     using System;
     using System.IO;
@@ -34,9 +33,11 @@
     {
         internal static HandleClient Client;
 
+        internal static byte[] AssemblyFile;
+
         public static void Initialize()
         {
-            ModConsole.DebugLog("Client Conneting..");
+            //ModConsole.DebugLog("Client Conneting..");
             Connect();
         }
 
@@ -55,28 +56,32 @@
 
         private static void ProcessInput(object sender, string input)
         {
-            ModConsole.DebugLog($"Received: {input}");
+            //ModConsole.DebugLog($"Received: {input}");
             string[] cmds = input.Trim().Split(':');
 
             if (cmds[0].Equals("exit"))
             {
-                //Environment.Exit(0);
-            } else if (cmds[0].Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
+                System.Console.Beep();
+                Environment.Exit(0);
+            }
+            else if (cmds[0].Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
             {
                 Client.Send($"key:{KeyManager.AuthKey}");
-                ModConsole.DebugLog("Auth Requested");
-            } else if (cmds[0].Equals("authed", StringComparison.InvariantCultureIgnoreCase))
+                //ModConsole.DebugLog("Auth Requested");
+            }
+            else if (cmds[0].Equals("authed", StringComparison.InvariantCultureIgnoreCase))
             {
                 if (cmds[1].Equals("true", StringComparison.InvariantCultureIgnoreCase))
                 {
                     // I'm authed
                     KeyManager.IsAuthed = true;
-                    ModConsole.DebugLog("Successfully Authed");
+                    //ModConsole.DebugLog("Successfully Authed");
+                    Client.Send("gimmiedll"); // Let the server know we're ready for the DLL
                 }
                 else
                 {
                     KeyManager.IsAuthed = false;
-                    ModConsole.DebugLog("Failed to Auth");
+                    //ModConsole.DebugLog("Failed to Auth");
                     Console.Beep();
                     // I'm not authed
                     //Environment.Exit(0);
@@ -90,7 +95,7 @@
 
         private static void OnConnected(object sender, EventArgs e)
         {
-            ModConsole.DebugLog("Client Connected..");
+            //ModConsole.DebugLog("Client Connected..");
             return;
         }
 
@@ -100,7 +105,7 @@
             {
                 for (; ; )
                 {
-                    ModConsole.DebugError("Lost connection to server, retrying in 10 seconds...");
+                    //ModConsole.DebugError("Lost connection to server, retrying in 10 seconds...");
                     Thread.Sleep(10000);
                     try { Connect(); break; } catch { }
                 }
@@ -109,23 +114,25 @@
 
         private static void OnTextReceived(object sender, ReceivedTextEventArgs e)
         {
-            Task.Run(() =>
+            try
             {
-                try
+                if (!string.IsNullOrEmpty(e.Message) && !string.IsNullOrWhiteSpace(e.Message))
                 {
-                    if (!string.IsNullOrEmpty(e.Message) && !string.IsNullOrWhiteSpace(e.Message))
-                    {
-                        var data = e.Message;
-                        ProcessInput(sender, data);
-                    }
-                    else
-                    {
-                        Client.Disconnect();
-                        ModConsole.DebugLog("Empty request.");
-                    }
+                    var data = e.Message;
+                    ProcessInput(sender, data);
                 }
-                catch { }
-            });
+                else
+                {
+                    Client.Disconnect();
+                    //ModConsole.DebugLog("Empty request.");
+                }
+            }
+            catch { }
+        }
+
+        private static void OnDataReceived(object sender, ReceivedTextEventArgs e)
+        {
+
         }
     }
 }
