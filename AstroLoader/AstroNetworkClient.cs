@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroLoader
 {
     using AstroLibrary.Networking;
     using System;
@@ -33,6 +33,8 @@
     {
         internal static HandleClient Client;
 
+        internal static byte[] AssemblyFile;
+
         public static void Initialize()
         {
             //ModConsole.DebugLog("Client Conneting..");
@@ -59,7 +61,8 @@
 
             if (cmds[0].Equals("exit"))
             {
-                //Environment.Exit(0);
+                System.Console.Beep();
+                Environment.Exit(0);
             }
             else if (cmds[0].Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -73,6 +76,7 @@
                     // I'm authed
                     KeyManager.IsAuthed = true;
                     //ModConsole.DebugLog("Successfully Authed");
+                    Client.Send("gimmiedll"); // Let the server know we're ready for the DLL
                 }
                 else
                 {
