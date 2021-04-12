@@ -11,7 +11,8 @@
 
         public event EventHandler<EventArgs> Connected;
         public event EventHandler<EventArgs> Disconnected;
-        public event EventHandler<ReceivedTextEventArgs> Received;
+        public event EventHandler<ReceivedTextEventArgs> ReceivedText;
+        public event EventHandler<ReceivedDataEventArgs> ReceivedData;
 
         public bool IsConnected { get; private set; }
 
@@ -33,6 +34,21 @@
         public void Disconnect()
         {
             IsConnected = false;
+        }
+
+        private void SendHeaderType(int headerType = 1000) // 1000 is plain text
+        {
+            byte[] header = BitConverter.GetBytes(headerType);
+            Console.WriteLine($"Sending HeaderType: {BitConverter.ToUInt32(header, 0)}");
+            try
+            {
+                _clientStream.Write(header, 0, header.Length);
+                _clientStream.Flush();
+            }
+            catch
+            {
+                IsConnected = false;
+            }
         }
 
         private void SendSecret()
@@ -69,9 +85,10 @@
             Send(msg.ConvertToBytes());
         }
 
-        public void Send(byte[] msg)
+        public void Send(byte[] msg, int headerType = 1000)
         {
             SendSecret();
+            SendHeaderType(headerType);
             SendHeaderLength(msg);
             if (msg != null && msg.Length > 0)
             {
@@ -98,6 +115,22 @@
             }
 
             Disconnected?.Invoke(this, new EventArgs());
+        }
+
+        private int RecieveHeaderType()
+        {
+            try
+            {
+                byte[] received = new byte[4];
+                _clientStream.Read(received, 0, received.Length);
+                int length = BitConverter.ToInt32(received, 0);
+                return length;
+            }
+            catch
+            {
+                IsConnected = false;
+                return 0;
+            }
         }
 
         private int ReceiveSecret()
@@ -146,6 +179,9 @@
                 Console.WriteLine("Correct secret key received");
             }
 
+            int headerType = RecieveHeaderType();
+            Console.WriteLine($"Received Header Type {headerType}");
+
             int len = ReceiveHeaderLength();
             if (len > 0)
             {
@@ -171,12 +207,16 @@
                         IsConnected = false;
                     }
                 }
-
-                //Console.WriteLine($"End Read: {totalRead}");
                 byte[] data = memoryStream.GetBuffer();
-                string message = data.ConvertToString();
-                //Console.WriteLine($"Received: {message}");
-                Received?.Invoke(this, new ReceivedTextEventArgs(ClientID, message));
+
+                if (headerType == 1000) // Text
+                {
+                    string message = data.ConvertToString();
+                    ReceivedText?.Invoke(this, new ReceivedTextEventArgs(ClientID, message));
+                } else if (headerType == 1001) // Data
+                {
+                    ReceivedData?.Invoke(this, new ReceivedDataEventArgs(ClientID, data));
+                }
             }
         }
     }

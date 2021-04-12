@@ -47,7 +47,7 @@
 
             Client.Connected += OnConnected;
             Client.Disconnected += OnDisconnect;
-            Client.Received += OnReceived;
+            Client.ReceivedText += OnTextReceived;
 
             Client.StartClient(tcpClient, 0);
         }
@@ -106,7 +106,7 @@
             });
         }
 
-        private static void OnReceived(object sender, ReceivedTextEventArgs e)
+        private static void OnTextReceived(object sender, ReceivedTextEventArgs e)
         {
             Task.Run(() =>
             {
