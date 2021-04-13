@@ -9,6 +9,8 @@ using System.Linq;
 using VRC;
 using RubyButtonAPI;
 using System.Collections.Generic;
+using Random = System.Random;
+using System.Collections;
 
 namespace AstroClient
 {
@@ -27,7 +29,8 @@ namespace AstroClient
             IsAlwaysPerfectHit = false;
             MapTargets.Clear();
             IsAimFactory = false;
-            SelectedBeforeTarget = null;
+            IsPoppingTarget = false;
+            prevtarget = null;
         }
 
 
@@ -35,52 +38,42 @@ namespace AstroClient
         private static QMToggleButton AlwaysPerfectHitToggle;
 
 
-        private static List<ShootingTarget> MapTargets = new List<ShootingTarget>();
+        private static List<GameObject> MapTargets = new List<GameObject>();
 
+        private static GameObject prevtarget = null;
 
         private static bool _IsAlwaysPerfectHit = false;
-        private static ShootingTarget SelectedBeforeTarget;
 
 
-        public class ShootingTarget
+
+        private static Random r = new Random();
+
+        private static GameObject GetRandomtarget()
         {
-            public GameObject TargetObj { get; set; }
-            public bool HasPopped { get; set; }
-
-            public ShootingTarget(GameObject obj, bool hasPopped)
+            if (MapTargets.Count() == 0)
             {
-                TargetObj = obj;
-                HasPopped = hasPopped;
+                return null;
             }
+            var FilteredLists = MapTargets.Where(x => x.active).ToList();
+            if (FilteredLists.Count() == 0)
+            {
+                return null;
+            }
+            ModConsole.DebugLog($"Filtered {MapTargets.Count()} Objects, only {FilteredLists.Count()} are Active.");
+            var obj = FilteredLists[r.Next(FilteredLists.Count())];
+            if (prevtarget != null)
+            {
+                if (obj == prevtarget)
+                {
+                    return GetRandomtarget();
+                }
+            }
+
+            prevtarget = obj;
+            return obj;
+
         }
 
-
-        private static ShootingTarget FindTargetObject(GameObject obj)
-        {
-            return MapTargets.Where(x => x.TargetObj == obj).First();
-
-        }
-
-
-
-        private static ShootingTarget GetRandomtarget()
-        {
-            int val = ran.Next(MapTargets.Count);
-            var target = MapTargets[val];
-            if (target.HasPopped)
-            {
-                return GetRandomtarget();
-            }
-            else if (target == SelectedBeforeTarget)
-            {
-                return GetRandomtarget();
-            }
-            else
-            {
-                SelectedBeforeTarget = target;
-                return target;
-            }
-        }
 
         private static bool IsAlwaysPerfectHit
         {
@@ -100,9 +93,7 @@ namespace AstroClient
 
 
         private static bool IsAimFactory = false;
-
-        private static System.Random ran = new System.Random();
-
+        private static bool IsPoppingTarget = false;
 
         public override void OnWorldReveal(string id, string name, string asseturl)
         {
@@ -113,6 +104,28 @@ namespace AstroClient
                 {
                     AimFactoryCheatPage.getMainButton().setIntractable(true);
                     AimFactoryCheatPage.getMainButton().setTextColor(Color.green);
+                }
+
+                var Gamesound = GameObjectFinder.FindRootSceneObject("GameSound");
+                if (Gamesound != null)
+                {
+                    Gamesound.DestroyMeLocal();
+                }
+
+                var TargetsRootScene = GameObjectFinder.FindRootSceneObject("Targets");
+                if (TargetsRootScene != null)
+                {
+                    foreach (var target in TargetsRootScene.GetComponentsInChildren<Transform>(true))
+                    {
+                        if (target.name.ToLower().StartsWith("target"))
+                        {
+                            if (!MapTargets.Contains(target.gameObject))
+                            {
+                                ModConsole.DebugLog($"Registered Obj {target.name} in target list.");
+                                MapTargets.Add(target.gameObject);
+                            }
+                        }
+                    }
                 }
             }
             else
@@ -126,75 +139,76 @@ namespace AstroClient
             }
         }
 
-        public static void PopTarget()
+        public static IEnumerator PopTarget()
         {
-            var target = GetRandomtarget();
-            float cooldown = 0.3f;
-            DayClientML2.Utility.MiscUtility.DelayFunction(cooldown, new Action(() => { if (!target.HasPopped) { UdonSearch.FindUdonEvent(target.TargetObj, "AllwaysHit").ExecuteUdonEvent(); } else { target.HasPopped = false; PopTarget(); } }));
+            //float cooldown = 0.f;
+            //DayClientML2.Utility.MiscUtility.DelayFunction(cooldown, new Action(() =>
+            //{
 
+            //}));
+            if (IsPoppingTarget)
+            {
+               var RandomTarget = GetRandomtarget();
+                if (RandomTarget != null)
+                {
+                    if (RandomTarget != null)
+                    {
+                        var udonevent1 = UdonSearch.FindUdonEvent(RandomTarget, "Hit");
+                        if (udonevent1 != null)
+                        {
+                            ModConsole.DebugLog($"Sent Hit Event on {RandomTarget.name}");
+                            udonevent1.Action.SendCustomEvent(udonevent1.EventKey);
+                        }
+                        var udonevent = UdonSearch.FindUdonEvent(RandomTarget, "AllwaysHit");
+                        if (udonevent != null)
+                        {
+                            ModConsole.DebugLog($"Sent AllwaysHit Event on {RandomTarget.name}");
+                            udonevent.Action.SendCustomEvent(udonevent.EventKey);
+                        }
+                    }
+                }
+            }
+            IsPoppingTarget = false;
+            yield return null;
         }
+
+
+
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
+
             try
             {
                 if (IsAimFactory)
                 {
                     if (obj != null)
                     {
-                        if (obj.name.ToLower().StartsWith("target"))
+                        if (IsAlwaysPerfectHit)
                         {
-                            if (MapTargets.Count() != 0)
+                            if (sender != null)
                             {
-                                if (FindTargetObject(obj) == null)
+                                if (sender == LocalPlayerUtils.GetSelfPlayer())
                                 {
-                                    if (!MapTargets.Contains(new ShootingTarget(obj, false)))
+                                    if (obj.name.Equals("Handgun_M1911A (Model)"))
                                     {
-                                        MapTargets.Add(new ShootingTarget(obj, false));
-                                    }
-                                }
-                                else
-                                {
-                                    MapTargets.Add(new ShootingTarget(obj, false));
 
-                                }
-                            }
-
-                            if (IsAlwaysPerfectHit)
-                            {
-                                if (sender != null)
-                                {
-                                    if (sender == LocalPlayerUtils.GetSelfPlayer())
-                                    {
-                                        if (obj.name.ToLower().StartsWith("target"))
+                                        if (action == "AllwaysTrigger")
                                         {
-                                            if (action.Equals("AllwaysHit"))
+                                            if (!IsPoppingTarget)
                                             {
-                                                var foundtarget = FindTargetObject(obj);
-                                                if (foundtarget != null)
-                                                {
-                                                    foundtarget.HasPopped = true;
-                                                }
-                                            }
-                                        }
-
-                                        if (obj.name.Equals("Handgun_M1911A (Model)"))
-                                        {
-
-                                            if (action == "AllwaysTrigger")
-                                            {
-                                                PopTarget();
+                                                IsPoppingTarget = true;
+                                                MelonLoader.MelonCoroutines.Start(PopTarget());
                                             }
                                         }
                                     }
                                 }
-
                             }
                         }
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 ModConsole.Error("Error in AimFactory OnUdonSync");
                 ModConsole.ErrorExc(e);
