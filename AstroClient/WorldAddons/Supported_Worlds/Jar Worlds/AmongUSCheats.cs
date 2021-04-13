@@ -177,8 +177,7 @@ namespace AstroClient
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-            try
-            {
+
                 if (HasAmongUsWorldLoaded)
                 {
                     if (obj != null)
@@ -208,12 +207,6 @@ namespace AstroClient
 
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                ModConsole.Error("Error in AmongUsCheats OnUdonSync");
-                ModConsole.ErrorExc(e);
-            }
 
         }
 

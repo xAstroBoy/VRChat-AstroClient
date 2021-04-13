@@ -135,7 +135,6 @@ namespace AstroClient
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-            try { 
             if(IsFreezeTag)
             {
                 if(action == "netping")
@@ -194,12 +193,6 @@ namespace AstroClient
                         }
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                ModConsole.Error("Error in FreezeTag OnUdonSync");
-                ModConsole.ErrorExc(e);
-            }
         }
     }
 }

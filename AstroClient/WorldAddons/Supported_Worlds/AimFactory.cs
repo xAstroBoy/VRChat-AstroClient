@@ -157,13 +157,13 @@ namespace AstroClient
                         if (udonevent1 != null)
                         {
                             ModConsole.DebugLog($"Sent Hit Event on {RandomTarget.name}");
-                            udonevent1.Action.SendCustomEvent(udonevent1.EventKey);
+                            udonevent1.ExecuteUdonEvent();
                         }
                         var udonevent = UdonSearch.FindUdonEvent(RandomTarget, "AllwaysHit");
                         if (udonevent != null)
                         {
                             ModConsole.DebugLog($"Sent AllwaysHit Event on {RandomTarget.name}");
-                            udonevent.Action.SendCustomEvent(udonevent.EventKey);
+                            udonevent.ExecuteUdonEvent();
                         }
                     }
                 }
@@ -177,9 +177,6 @@ namespace AstroClient
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-
-            try
-            {
                 if (IsAimFactory)
                 {
                     if (obj != null)
@@ -207,12 +204,6 @@ namespace AstroClient
                         }
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                ModConsole.Error("Error in AimFactory OnUdonSync");
-                ModConsole.ErrorExc(e);
-            }
         }
     }
 }

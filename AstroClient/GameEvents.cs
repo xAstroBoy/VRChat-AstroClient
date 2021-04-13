@@ -167,15 +167,9 @@ namespace AstroClient
 
         private void Internal_OnUdonSyncRPCEvent(object sender, UdonSyncRPCEventArgs e)
         {
-            try
-            {
+           
                     OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
                 
-            }
-            catch (Exception Exc)
-            {
-                ModConsole.ErrorExc(Exc);
-            }
         }
 
 

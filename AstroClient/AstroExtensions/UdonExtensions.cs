@@ -16,7 +16,7 @@ namespace AstroClient.extensions
         {
             if (udonvar.Action != null && udonvar.EventKey != null && udonvar != null)
             {
-                if (!string.IsNullOrEmpty(udonvar.EventKey) && string.IsNullOrWhiteSpace(udonvar.EventKey))
+                if (!string.IsNullOrEmpty(udonvar.EventKey) && !string.IsNullOrWhiteSpace(udonvar.EventKey))
                 {
                     if (udonvar.EventKey.StartsWith("_"))
                     {
@@ -44,7 +44,7 @@ namespace AstroClient.extensions
             {
                 if (udonvar.Action != null && udonvar.EventKey != null && udonvar != null)
                 {
-                    if (!string.IsNullOrEmpty(udonvar.EventKey) && string.IsNullOrWhiteSpace(udonvar.EventKey))
+                    if (!string.IsNullOrEmpty(udonvar.EventKey) && !string.IsNullOrWhiteSpace(udonvar.EventKey))
                     {
 
                         if (udonvar.EventKey.StartsWith("_"))

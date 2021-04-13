@@ -517,8 +517,6 @@ namespace AstroClient
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-            try
-            {
                 if (HasMurder4WorldLoaded)
                 {
 
@@ -563,12 +561,6 @@ namespace AstroClient
                         }
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                ModConsole.Error("Error in Murder4Cheats OnUdonSync");
-                ModConsole.ErrorExc(e);
-            }
         }
 
 
