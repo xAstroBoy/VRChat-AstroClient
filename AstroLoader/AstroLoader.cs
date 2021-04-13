@@ -27,7 +27,7 @@
 
                     foreach (Type type in types)
                     {
-                        if (type.BaseType.Name.Contains("AstroClient"))
+                        if (type.BaseType.Name.Contains("Main"))
                         {
                             Console.WriteLine($"Loading -> {type}");
                             dll.CreateInstance(type.ToString(), true);
