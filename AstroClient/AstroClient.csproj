@@ -12,11 +12,12 @@
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>D:\Steam Library\steamapps\common\VRChat\mods\</OutputPath>
+    <OutputPath>..\AstroLoaderServer\bin\Release\net5.0\AstroClient</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -47,228 +48,13 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\AstroLibrary\Networking\HandleClient.cs">
-      <Link>Networking\HandleClient.cs</Link>
+    <Compile Include="..\AstroLibrary\ModBase.cs">
+      <Link>ModBase.cs</Link>
     </Compile>
-    <Compile Include="..\AstroLibrary\Networking\NetworkingExtensions.cs">
-      <Link>Networking\NetworkingExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\AstroLibrary\Networking\ReceivedDataEventArgs.cs">
-      <Link>Networking\ReceivedDataEventArgs.cs</Link>
-    </Compile>
-    <Compile Include="..\AstroLibrary\Networking\ReceivedTextEventArgs.cs">
-      <Link>Networking\ReceivedTextEventArgs.cs</Link>
-    </Compile>
-    <Compile Include="AntiCrash\AntiCrash.cs" />
-    <Compile Include="AntiCrash\AntiCrashScanner.cs" />
-    <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />
-    <Compile Include="AstroExtensions\ButtonsExtensions.cs" />
-    <Compile Include="AstroExtensions\PlayerExtensions.cs" />
-    <Compile Include="AstroExtensions\ListExtensions.cs" />
-    <Compile Include="AstroExtensions\ItemTweakerExtensions.cs" />
-    <Compile Include="AstroExtensions\PickupExtensions.cs" />
-    <Compile Include="AstroExtensions\PositionExtensions.cs" />
-    <Compile Include="AstroExtensions\EspExtensions.cs" />
-    <Compile Include="AstroExtensions\CodingExtensions.cs" />
-    <Compile Include="AstroExtensions\SingleTagExtension.cs" />
-    <Compile Include="AstroExtensions\UdonExtensions.cs" />
-    <Compile Include="AstroExtensions\ScaleExtensions.cs" />
-    <Compile Include="BuildInfo.cs" />
-    <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
-    <Compile Include="Buttons\SettingsMenuBtn.cs" />
-    <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />
-    <Compile Include="Cheetos\AssemblySpy\AssemlySpy_Extensions.cs" />
-    <Compile Include="Cheetos\AstroInput.cs" />
-    <Compile Include="Cheetos\CheetoMenu.cs" />
-    <Compile Include="Cheetos\CheetosHelpers.cs" />
-    <Compile Include="Cheetos\CheetosUI.cs" />
-    <Compile Include="Cheetos\Config\Config.cs" />
-    <Compile Include="Cheetos\Config\ConfigManager.cs" />
-    <Compile Include="Cheetos\GameEventsBehaviour.cs" />
-    <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
-    <Compile Include="Cheetos\Config\JSonWriter.cs" />
-    <Compile Include="Cheetos\PlayerMenuUI.cs" />
-    <Compile Include="GameEvents.cs" />
-    <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
-    <Compile Include="ItemTweaker\Tweaker_Object.cs" />
-    <Compile Include="Networking\AstroNetworkClient.cs" />
-    <Compile Include="Console\CheetosConsole\Console.cs" />
-    <Compile Include="Console\CheetosConsole\DefaultFonts.cs" />
-    <Compile Include="Console\CheetosConsole\Extensions.cs" />
-    <Compile Include="Console\CheetosConsole\Figlet.cs" />
-    <Compile Include="Console\CheetosConsole\FigletFont.cs" />
-    <Compile Include="Console\CheetosConsole\NativeMethods.cs" />
-    <Compile Include="Console\CheetosConsole\StyledString.cs" />
-    <Compile Include="Console\CheetosConsole\VirtualTerminalSequences.cs" />
-    <Compile Include="DayOfThePlay\Extensions\CameraExtension.cs" />
-    <Compile Include="DayOfThePlay\Extensions\MiskExtension.cs" />
-    <Compile Include="DayOfThePlay\Extensions\ModerationManagerExtension.cs" />
-    <Compile Include="DayOfThePlay\Extensions\NetworkingExt.cs" />
-    <Compile Include="DayOfThePlay\Extensions\NotificationManagerExtension.cs" />
-    <Compile Include="DayOfThePlay\Extensions\PhotonExtensions.cs" />
-    <Compile Include="DayOfThePlay\Extensions\PlayerExtensions.cs" />
-    <Compile Include="DayOfThePlay\Extensions\PlayerManagerExtension.cs" />
-    <Compile Include="DayOfThePlay\Extensions\PopupManagerExtension.cs" />
-    <Compile Include="DayOfThePlay\Extensions\QuickMenuExtension.cs" />
-    <Compile Include="DayOfThePlay\Extensions\RoomManagerExtension.cs" />
-    <Compile Include="DayOfThePlay\Extensions\Utils.cs" />
-    <Compile Include="DayOfThePlay\Extensions\VRCUiManagerExtension.cs" />
-    <Compile Include="DayOfThePlay\Extensions\VRInput.cs" />
-    <Compile Include="DayOfThePlay\Managers\AchievmentsManager.cs" />
-    <Compile Include="DayOfThePlay\Managers\Assets.cs" />
-    <Compile Include="DayOfThePlay\Managers\AssetsManager.cs" />
-    <Compile Include="DayOfThePlay\Managers\ConversionManager.cs" />
-    <Compile Include="DayOfThePlay\Managers\CustomJsonTypes.cs" />
-    <Compile Include="DayOfThePlay\Managers\ExploitManager.cs" />
-    <Compile Include="DayOfThePlay\Managers\FileManager.cs" />
-    <Compile Include="DayOfThePlay\Menu\MenuApi\MenuArrow.cs" />
-    <Compile Include="DayOfThePlay\Menu\MenuApi\MenuButtonAPI.cs" />
-    <Compile Include="DayOfThePlay\Menu\MenuApi\MenuButtonType.cs" />
-    <Compile Include="DayOfThePlay\Menu\MenuApi\MenuCheckbox.cs" />
-    <Compile Include="DayOfThePlay\Menu\MenuApi\MenuSlider.cs" />
-    <Compile Include="DayOfThePlay\Menu\MenuApi\MenuSocialText.cs" />
-    <Compile Include="DayOfThePlay\Menu\MenuApi\MenuText.cs" />
-    <Compile Include="DayOfThePlay\Menu\MenuApi\MenuType.cs" />
-    <Compile Include="DayOfThePlay\Menu\MenuApi\VRCList.cs" />
-    <Compile Include="DayOfThePlay\Menu\MenuApi\VRCMenuAPI.cs" />
-    <Compile Include="DayOfThePlay\Menu\QuickMenuButtons\RubyButtonAPI.cs" />
-    <Compile Include="DayOfThePlay\Menu\UnityUIUtils.cs" />
-    <Compile Include="DayOfThePlay\Misc\Api\API.cs" />
-    <Compile Include="DayOfThePlay\Misc\Api\Object\VRChatAPIObjects.cs" />
-    <Compile Include="DayOfThePlay\Misc\Api\Object\WebSocketObject.cs" />
-    <Compile Include="DayOfThePlay\Misc\ColorUtility\HSBColor.cs" />
-    <Compile Include="DayOfThePlay\Misc\ColorUtility\NamePlates.cs" />
-    <Compile Include="DayOfThePlay\Misc\ColorUtility\UIColor.cs" />
-    <Compile Include="DayOfThePlay\Misc\MiscFunc.cs" />
-    <Compile Include="DayOfThePlay\Misc\MiscUtility.cs" />
-    <Compile Include="DayOfThePlay\Misc\VRCAPI\API.cs" />
-    <Compile Include="DayOfThePlay\Misc\VRCAPI\Classes\VRChatAPIObjects.cs" />
-    <Compile Include="DayOfThePlay\Misc\VRCAPI\Endpoints\AuthEndpoint.cs" />
-    <Compile Include="DayOfThePlay\Misc\VRCAPI\Endpoints\Avatar.cs" />
-    <Compile Include="DayOfThePlay\Misc\VRCAPI\Endpoints\MiscEndpoint.cs" />
-    <Compile Include="DayOfThePlay\Misc\VRCAPI\Utils.cs" />
-    <Compile Include="DayOfThePlay\Misc\VRCAPI\Variables.cs" />
-    <Compile Include="DayOfThePlay\VRChabObjects.cs" />
-    <Compile Include="DayOfThePlay\XrefTesting.cs" />
-    <Compile Include="GameObject\Components\ComponentsBtn.cs" />
-    <Compile Include="GameObject\Components\JarRoleRevealers\JarRoleController.cs" />
-    <Compile Include="GameObject\Components\JarRoleRevealers\JarRoleESP.cs" />
-    <Compile Include="GameObject\Components\PlayerWatcher\PlayerWatcher.cs" />
-    <Compile Include="GameObject\Components\PlayerWatcher\PlayerWatcherManager.cs" />
-    <Compile Include="GameObject\Components\SingleTag\SingleTag.cs" />
-    <Compile Include="GameObject\Components\SingleTag\SingleTagsUtils.cs" />
-    <Compile Include="GameObject\Components\VRChatESp\VRChatESP.cs" />
-    <Compile Include="GameObject\Components\ESP\ESPController.cs" />
-    <Compile Include="GameObject\Components\ESP\ESPControllerManager.cs" />
-    <Compile Include="GameObject\Components\PickupControl\PickupController.cs" />
-    <Compile Include="Lights\LightControl.cs" />
-    <Compile Include="GameObject\Components\Orbit\OrbitManager.cs" />
-    <Compile Include="GameObject\Components\Orbit\OrbitBehaviour.cs" />
-    <Compile Include="GameObject\Components\PlayerAttacker\PlayerAttacker.cs" />
-    <Compile Include="GameObject\Components\PlayerAttacker\PlayerAttackerManager.cs" />
-    <Compile Include="GameObject\Editor\ESP\GameObjectESP.cs" />
-    <Compile Include="Patches\Patching.cs" />
-    <Compile Include="Skyboxes\SkyboxEditor.cs" />
-    <Compile Include="Buttons\RandomSubmenus.cs" />
-    <Compile Include="Buttons\WorldPickupsBtn.cs" />
-    <Compile Include="Buttons\QuickMenuBtns.cs" />
-    <Compile Include="Buttons\UserInteractMenuBtns.cs" />
-    <Compile Include="Startup\ComponentHelper.cs" />
-    <Compile Include="Startup\EventArgs\OnAvatarSpawnArgs.cs" />
-    <Compile Include="Startup\EventArgs\OnWorldRevealArgs.cs" />
-    <Compile Include="Startup\EventArgs\PlayerEventArgs.cs" />
-    <Compile Include="Startup\EventArgs\RayCastEventArgs.cs" />
-    <Compile Include="Startup\EventArgs\SpawnEmojiArgs.cs" />
-    <Compile Include="Startup\EventArgs\UdonSyncRPCEventArgs.cs" />
-    <Compile Include="Startup\EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
-    <Compile Include="Startup\Hooks\AvatarManagerHook.cs" />
-    <Compile Include="Startup\Hooks\NetworkManagerHooks.cs" />
-    <Compile Include="GameObjMenu.cs" />
-    <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
-    <Compile Include="Startup\Hooks\RPCEventHook.cs" />
-    <Compile Include="Startup\Hooks\SpawnEmojiRPCHook.cs" />
-    <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
-    <Compile Include="Startup\WorldJoinMsg.cs" />
-    <Compile Include="Udon\Exploits\Global\GlobalUdonExploits.cs" />
-    <Compile Include="Udon\Exploits\Murder4\Murder4UdonExploits.cs" />
-    <Compile Include="Udon\Exploits\AmongUS\AmongUSUdonExploits.cs" />
-    <Compile Include="AstroExtensions\OnlineExtensions.cs" />
-    <Compile Include="AstroExtensions\EngineExtensions.cs" />
-    <Compile Include="AstroExtensions\DeepCloneExtension.cs" />
-    <Compile Include="AstroExtensions\CustomListExtensions.cs" />
-    <Compile Include="AstroExtensions\ForcesExtensions.cs" />
-    <Compile Include="AstroExtensions\CustomComponentExtensions.cs" />
-    <Compile Include="AstroExtensions\ColliderExtensions.cs" />
-    <Compile Include="AstroExtensions\RigidbodyExtensions.cs" />
-    <Compile Include="AstroExtensions\SyncPhysicsExt.cs" />
-    <Compile Include="Utils\DeepCloneUtils\TriggersCloner.cs" />
-    <Compile Include="Utils\Headlight\ColorConverter.cs" />
-    <Compile Include="Utils\Headlight\Headlight.cs" />
-    <Compile Include="Utils\PlayerMovement\Movement.cs" />
-    <Compile Include="Utils\Player\PlayerHands.cs" />
-    <Compile Include="Utils\UdonSearcher\UdonSearch.cs" />
-    <Compile Include="Utils\XrefScannerUtils.cs" />
-    <Compile Include="Variables\GDBUser.cs" />
-    <Compile Include="Variables\VRChatObjects.cs" />
-    <Compile Include="Variables\WorldIds.cs" />
-    <Compile Include="WorldAddons\Supported_Worlds\AimFactory.cs" />
-    <Compile Include="WorldAddons\Supported_Worlds\BClubWorld.cs" />
-    <Compile Include="WorldAddons\Supported_Worlds\FBTHeaven.cs" />
-    <Compile Include="WorldAddons\Supported_Worlds\FreezeTag.cs" />
-    <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\AmongUSCheats.cs" />
-    <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\Murder2Cheats.cs" />
-    <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\Murder4Cheats.cs" />
-    <Compile Include="WorldAddons\Supported_Worlds\Meroom.cs" />
-    <Compile Include="WorldAddons\Supported_Worlds\SmashContest.cs" />
-    <Compile Include="WorldAddons\Supported_Worlds\SnoozeScaryMaze5.cs" />
-    <Compile Include="WorldAddons\Supported_Worlds\TheGreatPug.cs" />
-    <Compile Include="WorldAddons\Supported_Worlds\VRChatHub.cs" />
-    <Compile Include="WorldAddons\WorldsCheats.cs" />
-    <Compile Include="Utils\Avatar\LewdVRChat.cs" />
-    <Compile Include="Utils\ColliderViewer\ColliderDisplay.cs" />
-    <Compile Include="Utils\ColliderViewer\ColliderToggler.cs" />
-    <Compile Include="Utils\ColliderViewer\XRay.cs" />
-    <Compile Include="Utils\Emojis\EmojiUtils.cs" />
-    <Compile Include="AstroExtensions\ClickExtensions.cs" />
-    <Compile Include="Utils\GameObject\ObjectFinder.cs" />
-    <Compile Include="Utils\Input\InputUtils.cs" />
-    <Compile Include="Utils\Player\LocalPlayerUtils.cs" />
-    <Compile Include="Utils\ObjectUtils\GameObjectUtils.cs" />
-    <Compile Include="GameObject\Cloner\ObjectCloner.cs" />
-    <Compile Include="GameObject\Editor\Colliders\ColliderEditors.cs" />
-    <Compile Include="GameObject\Components\ItemInflater\ItemInflater.cs" />
-    <Compile Include="GameObject\Components\ItemInflater\ItemInflaterManager.cs" />
-    <Compile Include="GameObject\Components\RigidBodyController\RigidBodyController.cs" />
-    <Compile Include="GameObject\Components\ObjectSpinner\ObjectSpinner.cs" />
-    <Compile Include="GameObject\Components\ObjectSpinner\ObjectSpinnerManager.cs" />
-    <Compile Include="GameObject\Components\CrazyObjects\CrazyObjectManager.cs" />
-    <Compile Include="GameObject\Components\CrazyObjects\CrazyObject.cs" />
-    <Compile Include="GameObject\Components\RocketComponent\RocketManager.cs" />
-    <Compile Include="GameObject\Components\RocketComponent\RocketObject.cs" />
-    <Compile Include="GameObject\Editor\Color\ColorEditor.cs" />
-    <Compile Include="GameObject\Editor\Interaction\Pickup.cs" />
-    <Compile Include="GameObject\Editor\Position\ItemPosition.cs" />
-    <Compile Include="GameObject\Editor\Scale\ScaleEditor.cs" />
-    <Compile Include="GameObject\Editor\Forces\Forces.cs" />
-    <Compile Include="GameObject\Helpers\Helper.cs" />
-    <Compile Include="Utils\QPens\QVPensUtils.cs" />
-    <Compile Include="Utils\QuickMenuUtils.cs" />
-    <Compile Include="Utils\World\WorldUtils.cs" />
-    <Compile Include="Variables\Bools.cs" />
-    <Compile Include="Variables\InstanceBuilder.cs" />
-    <Compile Include="Variables\CustomLists.cs" />
-    <Compile Include="Variables\GlobalLists.cs" />
-    <Compile Include="Variables\Strings.cs" />
-    <Compile Include="Variables\Vectors.cs" />
-    <Compile Include="GameObject\Online\OnlineEditor.cs" />
-    <Compile Include="GameObject\Object Tweaker\ObjectMiscOptions.cs" />
-    <Compile Include="Console\ModConsole.cs" />
-    <Compile Include="Main.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Main.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="GameObject\Editor\Gravity\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="Assembly-CSharp">
@@ -896,7 +682,6 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <EmbeddedResource Include="Figlet\Larry3D.flf" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

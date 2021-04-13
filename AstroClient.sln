@@ -14,7 +14,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroServer", "AstroServer\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroLoader", "AstroLoader\AstroLoader.csproj", "{2BAFFC37-7A0E-4589-BAA0-8F4E2C318747}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroLibrary", "AstroLibrary\AstroLibrary.csproj", "{A98C1060-6804-4551-9CEC-8FD8FFC7D98C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroLibrary", "AstroLibrary\AstroLibrary.csproj", "{A98C1060-6804-4551-9CEC-8FD8FFC7D98C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroLoaderServer", "AstroLoaderServer\AstroLoaderServer.csproj", "{09AB9DC6-B390-47D6-A26C-356A4BE1A298}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,12 @@ Global
 		{A98C1060-6804-4551-9CEC-8FD8FFC7D98C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A98C1060-6804-4551-9CEC-8FD8FFC7D98C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A98C1060-6804-4551-9CEC-8FD8FFC7D98C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09AB9DC6-B390-47D6-A26C-356A4BE1A298}.Debug_Cheetos|Any CPU.ActiveCfg = Debug|Any CPU
+		{09AB9DC6-B390-47D6-A26C-356A4BE1A298}.Debug_Cheetos|Any CPU.Build.0 = Debug|Any CPU
+		{09AB9DC6-B390-47D6-A26C-356A4BE1A298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09AB9DC6-B390-47D6-A26C-356A4BE1A298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09AB9DC6-B390-47D6-A26C-356A4BE1A298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09AB9DC6-B390-47D6-A26C-356A4BE1A298}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

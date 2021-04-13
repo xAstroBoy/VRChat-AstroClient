@@ -39,21 +39,6 @@
             IsConnected = false;
         }
 
-        private void SendClientLoaderHeader(int value = 0)
-        {
-            byte[] header = BitConverter.GetBytes(value);
-            Console.WriteLine($"Sending HeaderType: {BitConverter.ToUInt32(header, 0)}");
-            try
-            {
-                _clientStream.Write(header, 0, header.Length);
-                _clientStream.Flush();
-            }
-            catch
-            {
-                IsConnected = false;
-            }
-        }
-
         private void SendHeaderType(int headerType = 1000) // 1000 is plain text
         {
             byte[] header = BitConverter.GetBytes(headerType);
@@ -113,7 +98,7 @@
             Send(msg.ConvertToBytes());
         }
 
-        public void Send(byte[] msg, int headerType = 1000, int cl = 0) // 0 = client, 1 = loader
+        public void Send(byte[] msg, int headerType = 1000) // 0 = client, 1 = loader
         {
             SendSecret();
             SendHeaderType(headerType);
@@ -151,8 +136,7 @@
             {
                 byte[] received = new byte[4];
                 _clientStream.Read(received, 0, received.Length);
-                int length = BitConverter.ToInt32(received, 0);
-                return length;
+                return BitConverter.ToInt32(received, 0);
             }
             catch
             {
@@ -167,8 +151,7 @@
             {
                 byte[] received = new byte[4];
                 _clientStream.Read(received, 0, received.Length);
-                int length = BitConverter.ToInt32(received, 0);
-                return length;
+                return BitConverter.ToInt32(received, 0);
             }
             catch
             {
@@ -183,8 +166,7 @@
             {
                 byte[] received = new byte[4];
                 _clientStream.Read(received, 0, received.Length);
-                int length = BitConverter.ToInt32(received, 0);
-                return length;
+                return BitConverter.ToInt32(received, 0);;
             }
             catch
             {
@@ -225,32 +207,42 @@
                 int totalRead = 0;
                 MemoryStream memoryStream = new MemoryStream();
 
+                int toRead = 1024;
                 while (remaining > 0)
                 {
                     try
                     {
-                        byte[] received = new byte[2];
+                        byte[] received = new byte[toRead];
                         int read = _clientStream.Read(received, 0, received.Length);
                         totalRead += read;
                         remaining -= read;
                         memoryStream.Write(received, 0, received.Length);
-                        //Console.WriteLine($"Read: {totalRead} / {remaining} / {len}");
                     }
                     catch
                     {
                         IsConnected = false;
                     }
+                    finally
+                    {
+                        Console.WriteLine($"Read: {totalRead} / {remaining} / {len}");
+                    }
                 }
+
                 byte[] data = memoryStream.GetBuffer();
 
                 if (headerType == 1000) // Text
                 {
+                    Console.WriteLine("Read Text Finished");
                     string message = data.ConvertToString();
                     ReceivedText?.Invoke(this, new ReceivedTextEventArgs(ClientID, message));
                 }
                 else if (headerType == 1001) // Data
                 {
+                    Console.WriteLine("Read Data Finished");
                     ReceivedData?.Invoke(this, new ReceivedDataEventArgs(ClientID, data));
+                } else
+                {
+                    Console.WriteLine($"Something Went Wrong.. {headerType}");
                 }
             }
         }

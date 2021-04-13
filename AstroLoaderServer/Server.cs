@@ -1,8 +1,9 @@
-﻿namespace AstroServer
+﻿namespace AstroLoaderServer
 {
     using AstroLibrary.Networking;
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Net;
     using System.Net.Sockets;
@@ -33,14 +34,9 @@
 
         private void StartServer()
         {
-
-        }
-
-        private void StartClientServer()
-        {
-            TcpListener serverSocket = new TcpListener(new IPEndPoint(IPAddress.Any, 42069));
+            TcpListener serverSocket = new TcpListener(new IPEndPoint(IPAddress.Any, 42070));
             serverSocket.Start();
-            Console.WriteLine("Server Started.");
+            Console.WriteLine("Client Server Started.");
 
             // Load AuthKeys, eventually going to use a database or something
 
@@ -60,11 +56,12 @@
             Console.WriteLine($"There are {AuthKeys.Count} valid keys stored.");
 
             Clients = new List<Client>();
+
             while (true)
             {
                 TcpClient clientSocket = serverSocket.AcceptTcpClient();
                 Client client = new Client();
-                client.IsClient = true;
+                client.IsClient = false;
 
                 client.Connected += Connected;
                 client.Disconnected += Disconnected;
@@ -93,7 +90,18 @@
             Console.WriteLine($"Received: {input}");
             string[] cmds = input.Split(":");
 
-            if (cmds[0].Equals("key"))
+            if (cmds[0].Equals("gimmiedll") && client.IsAuthed)
+            {
+                var path = Environment.CurrentDirectory + "/AstroClient/AstroClient.dll";
+                byte[] data = File.ReadAllBytes(path);
+                client.Send(data, 1001);
+            }
+            else if (cmds[0].Equals("gotdll"))
+            {
+                client.Disconnect();
+                Console.WriteLine("DLL Sent to: {}");
+                client.IsReady = true;
+            } else if (cmds[0].Equals("key"))
             {
                 string key = cmds[1];
                 Console.WriteLine("Trying to auth with: " + key);
