@@ -1,12 +1,12 @@
-﻿namespace AstroClient.AntiCrash
-{
-    using AstroClient.ConsoleUtils;
-    using AstroClient.extensions;
-    using DayClientML2.Utility.Extensions;
-    using UnityEngine;
-    using VRC;
-    using VRC.SDKBase;
+﻿using AstroClient.ConsoleUtils;
+using AstroClient.extensions;
+using DayClientML2.Utility.Extensions;
+using UnityEngine;
+using VRC;
+using VRC.SDKBase;
 
+namespace AstroClient.AntiCrash
+{
     public static class AntiCrashScanner
     {
         public static Material DefaultMaterial = new Material(Shader.Find("Standard"));

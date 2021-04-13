@@ -1,13 +1,13 @@
-﻿namespace AstroClient
-{
-    using AstroClient.ConsoleUtils;
-    using AstroClient.Startup.Hooks;
-    using System;
-    using UnhollowerBaseLib.Attributes;
-    using UnityEngine;
-    using VRC;
-    using VRC.SDKBase;
+﻿using AstroClient.ConsoleUtils;
+using AstroClient.Startup.Hooks;
+using System;
+using UnhollowerBaseLib.Attributes;
+using UnityEngine;
+using VRC;
+using VRC.SDKBase;
 
+namespace AstroClient
+{
     public class GameEventsBehaviour : MonoBehaviour // name?
     {
 

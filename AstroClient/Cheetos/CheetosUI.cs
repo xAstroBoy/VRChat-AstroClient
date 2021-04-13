@@ -1,15 +1,15 @@
-﻿namespace AstroClient
-{
-    using AstroClient.ConsoleUtils;
-    using AstroClient.variables;
-    using RubyButtonAPI;
-    using System;
-    using CheetosConsole;
-    using AstroClient.Finder;
-    using DayClientML2.Utility.Extensions;
-    using AstroClient.extensions;
-    using System.Runtime.InteropServices;
+﻿using AstroClient.ConsoleUtils;
+using AstroClient.variables;
+using RubyButtonAPI;
+using System;
+using CheetosConsole;
+using AstroClient.Finder;
+using DayClientML2.Utility.Extensions;
+using AstroClient.extensions;
+using System.Runtime.InteropServices;
 
+namespace AstroClient
+{
     public class CheetosPrivateStuff : GameEvents
     {
         public override void VRChat_OnUiManagerInit()

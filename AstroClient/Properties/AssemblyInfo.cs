@@ -1,22 +1,28 @@
-﻿using System.Reflection;
+﻿using MelonLoader;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("AstroClient")]
+[assembly: AssemblyTitle(AstroClient.BuildInfo.Name)]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("AstroTest")]
-[assembly: AssemblyCopyright("Copyright ©  2021")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany(AstroClient.BuildInfo.Company)]
+[assembly: AssemblyProduct(AstroClient.BuildInfo.Name)]
+[assembly: AssemblyCopyright("Created by " + AstroClient.BuildInfo.Author)]
+[assembly: AssemblyTrademark(AstroClient.BuildInfo.Company)]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
+
+[assembly: MelonInfo(typeof(AstroClient.Main), AstroClient.BuildInfo.Name, AstroClient.BuildInfo.Version, AstroClient.BuildInfo.Author, AstroClient.BuildInfo.DownloadLink)]
+[assembly: InternalsVisibleTo("UnityExplorer.ML.IL2CPP")]
+[assembly: MelonGame(null, null)] 
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("6506F83F-9665-4EC9-9D7F-6F88E1652BBA")]

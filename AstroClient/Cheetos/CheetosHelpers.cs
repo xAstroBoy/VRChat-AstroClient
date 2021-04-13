@@ -1,9 +1,9 @@
-﻿namespace AstroClient.Cheetos
-{
-    using AstroClient.ConsoleUtils;
-    using System.IO;
-    using UnityEngine;
+﻿using AstroClient.ConsoleUtils;
+using System.IO;
+using UnityEngine;
 
+namespace AstroClient.Cheetos
+{
     public static class CheetosHelpers
     {
         public static Texture2D LoadPNG(string filePath)

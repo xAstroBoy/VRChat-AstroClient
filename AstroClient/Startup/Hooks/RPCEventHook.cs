@@ -1,15 +1,15 @@
-﻿namespace AstroClient
-{
-    using AstroClient.ConsoleUtils;
-    using DayClientML2.Utility;
-    using DayClientML2.Utility.Extensions;
-    using Harmony;
-    using System;
-    using System.Linq;
-    using System.Reflection;
-    using VRC;
-    using VRC.SDKBase;
+﻿using AstroClient.ConsoleUtils;
+using DayClientML2.Utility;
+using DayClientML2.Utility.Extensions;
+using Harmony;
+using System;
+using System.Linq;
+using System.Reflection;
+using VRC;
+using VRC.SDKBase;
 
+namespace AstroClient
+{
     public class RPCEventHook : GameEvents
     {
 

@@ -1,37 +1,34 @@
-﻿//using MelonLoader;
-//using RubyButtonAPI;
-using AstroLoader;
-using System;
-//using System.Reflection;
-//using UnityEngine.UI;
-//using Console = CheetosConsole.Console;
+﻿using MelonLoader;
+using RubyButtonAPI;
 
-//using AstroClient.WorldLights;
-//using AstroClient.variables;
-//using AstroClient.ConsoleUtils;
-//using AstroClient.GameObjectDebug;
-//using AstroClient.Worlds;
-//using AstroClient.Startup.Buttons;
-//using AstroClient.AstroUtils.PlayerMovement;
-//using AstroClient.AstroUtils.ItemTweaker;
-//using AstroClient.Components;
-//using AstroClient.UdonExploits;
-//using AstroClient.ButtonShortcut;
-//using CheetosConsole;
-//using System.Collections.Generic;
-//using System.IO;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using UnityEngine.UI;
+using Console = CheetosConsole.Console;
+
+using AstroClient.WorldLights;
+using AstroClient.variables;
+using AstroClient.ConsoleUtils;
+using AstroClient.GameObjectDebug;
+using AstroClient.Worlds;
+using AstroClient.Startup.Buttons;
+using AstroClient.AstroUtils.PlayerMovement;
+using AstroClient.AstroUtils.ItemTweaker;
+using AstroClient.Components;
+using AstroClient.UdonExploits;
+using AstroClient.ButtonShortcut;
+using CheetosConsole;
 
 namespace AstroClient
 {
-    public class AstroClient : ModBase
+    public class Main : MelonMod
     {
-        public AstroClient()
+        public Main()
         {
             Console.WriteLine("AstroClient Loading");
         }
 
-        // #TODO Implement
-        /**
 
         //public static event EventHandler Event_OnApplicationStart;
 
@@ -170,7 +167,5 @@ namespace AstroClient
         }
 
         public static QMSingleToggleButton ToggleDebugInfo;
-    }
-    **/
     }
 }

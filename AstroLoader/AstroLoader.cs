@@ -1,6 +1,5 @@
 ﻿namespace AstroLoader
 {
-    using AstroLibrary;
     using MelonLoader;
     using System;
     using System.Reflection;
@@ -8,14 +7,6 @@
     public class AstroLoader : MelonMod
     {
         public static byte[] AssemblyFile;
-
-        public static event EventHandler Event_OnUpdate;
-
-        public static event EventHandler Event_LateUpdate;
-
-        public static event EventHandler Event_VRChat_OnUiManagerInit;
-
-        public static event EventHandler Event_OnLevelLoaded;
 
         public AstroLoader()
         {
@@ -36,10 +27,10 @@
 
                     foreach (Type type in types)
                     {
-                        if (type.BaseType == typeof(ModBase))
+                        if (type.BaseType.Name.Contains("AstroClient"))
                         {
-                            //Debug.Log($"Loading -> {type}");
-                            ModBase mod = dll.CreateInstance(type.ToString(), true) as ModBase;
+                            Console.WriteLine($"Loading -> {type}");
+                            dll.CreateInstance(type.ToString(), true);
                         }
                     }
                 }
@@ -56,7 +47,5 @@
                 Console.WriteLine("Failed to load assembly, it was null");
             }
         }
-
-
     }
 }

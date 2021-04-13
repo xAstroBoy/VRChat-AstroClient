@@ -1,12 +1,13 @@
-﻿namespace AstroClient
+﻿using AstroClient.ConsoleUtils;
+using AstroLibrary.Networking;
+using System;
+using System.IO;
+using System.Net.Sockets;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace AstroClient
 {
-    using AstroClient.ConsoleUtils;
-    using AstroLibrary.Networking;
-    using System;
-    using System.IO;
-    using System.Net.Sockets;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     internal static class KeyManager
     {

@@ -1,10 +1,10 @@
-﻿namespace AstroClient
-{
-    using AstroClient.Finder;
-    using DayClientML2.Utility.Extensions;
-    using System;
-    using UnityEngine;
+﻿using AstroClient.Finder;
+using DayClientML2.Utility.Extensions;
+using System;
+using UnityEngine;
 
+namespace AstroClient
+{
     public static class Astro_Interactable_Extensions
     {
         public static void AddAstroInteractable(this GameObject gameObject, Action action)

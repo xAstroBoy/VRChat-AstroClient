@@ -1,10 +1,10 @@
-﻿namespace AstroClient
-{
-    using AstroClient.ConsoleUtils;
-    using System;
-    using static AstroClient.variables.InstanceBuilder;
-    using Color = System.Drawing.Color;
+﻿using AstroClient.ConsoleUtils;
+using System;
+using static AstroClient.variables.InstanceBuilder;
+using Color = System.Drawing.Color;
 
+namespace AstroClient
+{
     public class CheetoMenu : GameEventsBehaviour
     {
         public static CheetoMenu Instance;
