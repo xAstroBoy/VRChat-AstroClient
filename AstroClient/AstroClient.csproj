@@ -48,13 +48,16 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\AstroLibrary\ModBase.cs">
-      <Link>ModBase.cs</Link>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\AstroLoader\AstroLoader.csproj">
+      <Project>{2baffc37-7a0e-4589-baa0-8f4e2c318747}</Project>
+      <Name>AstroLoader</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="Assembly-CSharp">

@@ -1,5 +1,6 @@
 ﻿//using MelonLoader;
 //using RubyButtonAPI;
+using AstroLoader;
 using System;
 //using System.Reflection;
 //using UnityEngine.UI;
@@ -22,17 +23,16 @@ using System;
 
 namespace AstroClient
 {
-    public class AstroClient
+    public class AstroClient : ModBase
     {
         public AstroClient()
         {
-            Console.WriteLine("AstroClient Loaded.");
+            Console.WriteLine("AstroClient Loading");
         }
-    }
-    /**
-    [Serializable]
-    public class Main : MelonMod
-    {
+
+        // #TODO Implement
+        /**
+
         //public static event EventHandler Event_OnApplicationStart;
 
         public static event EventHandler Event_OnUpdate;
@@ -172,4 +172,5 @@ namespace AstroClient
         public static QMSingleToggleButton ToggleDebugInfo;
     }
     **/
+    }
 }

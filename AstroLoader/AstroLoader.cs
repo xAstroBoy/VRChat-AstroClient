@@ -9,6 +9,14 @@
     {
         public static byte[] AssemblyFile;
 
+        public static event EventHandler Event_OnUpdate;
+
+        public static event EventHandler Event_LateUpdate;
+
+        public static event EventHandler Event_VRChat_OnUiManagerInit;
+
+        public static event EventHandler Event_OnLevelLoaded;
+
         public AstroLoader()
         {
             KeyManager.ReadKey();
@@ -48,5 +56,7 @@
                 Console.WriteLine("Failed to load assembly, it was null");
             }
         }
+
+
     }
 }
