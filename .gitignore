@@ -8,9 +8,9 @@
 /AstroLoader/bin/Debug
 /AstroLibrary/bin/Debug/net5.0
 /AstroLibrary/obj
-/AstroLoader
 /AstroLibrary/bin/Release/net5.0
 /AstroServer/bin/Release/net5.0
 /AstroLoaderServer/obj
 /AstroLoaderServer/bin/Release/net5.0/AstroClient
 /AstroLoaderServer/bin/Release/net5.0
+/AstroLoader/obj/Release
