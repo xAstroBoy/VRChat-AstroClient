@@ -23,16 +23,7 @@
                 try
                 {
                     var dll = Assembly.Load(AstroNetworkLoader.AssemblyFile);
-                    Type[] types = dll.GetTypes();
-
-                    foreach (Type type in types)
-                    {
-                        if (type.BaseType.Name.Contains("Main"))
-                        {
-                            Console.WriteLine($"Loading -> {type}");
-                            dll.CreateInstance(type.ToString(), true);
-                        }
-                    }
+                    MelonHandler.LoadFromAssembly(dll, @"mods\AstroLoader.dll");
                 }
                 catch (BadImageFormatException e)
                 {
