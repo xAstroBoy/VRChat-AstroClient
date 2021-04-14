@@ -30,8 +30,6 @@
             ClientID = clientId;
             ClientSocket = clientSocket;
             _clientStream = ClientSocket.GetStream();
-            _clientStream.ReadTimeout = 6000;
-            _clientStream.WriteTimeout = 6000;
             Task task = new Task(StartThread);
             task.Start();
         }
@@ -44,7 +42,7 @@
         private void SendHeaderType(int headerType = 1000) // 1000 is plain text
         {
             byte[] header = BitConverter.GetBytes(headerType);
-            Console.WriteLine($"Sending HeaderType: {BitConverter.ToUInt32(header, 0)}");
+            //Console.WriteLine($"Sending HeaderType: {BitConverter.ToUInt32(header, 0)}");
             try
             {
                 _clientStream.Write(header, 0, header.Length);
@@ -63,11 +61,11 @@
             if (IsClient)
             {
                 secretHeader = BitConverter.GetBytes(SecretKeyClient);
-                Console.WriteLine($"Sending Client Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
+                //Console.WriteLine($"Sending Client Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
             } else
             {
                 secretHeader = BitConverter.GetBytes(SecretKeyLoader);
-                Console.WriteLine($"Sending Loader Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
+                //Console.WriteLine($"Sending Loader Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
             }
 
             try
@@ -84,7 +82,7 @@
         public void SendHeaderLength(byte[] msg)
         {
             byte[] headerLength = BitConverter.GetBytes(msg.Length);
-            Console.WriteLine($"Sending Header Length: {BitConverter.ToUInt32(headerLength, 0)}");
+            //Console.WriteLine($"Sending Header Length: {BitConverter.ToUInt32(headerLength, 0)}");
             try
             {
                 _clientStream.Write(headerLength, 0, headerLength.Length);
@@ -195,17 +193,17 @@
             }
             else
             {
-                var cl = IsClient ? "client" : "loader";
-                Console.WriteLine($"Correct secret key received: {cl}");
+                //var cl = IsClient ? "client" : "loader";
+                //Console.WriteLine($"Correct secret key received: {cl}");
             }
 
             int headerType = RecieveHeaderType();
-            Console.WriteLine($"Received Header Type {headerType}");
+            //Console.WriteLine($"Received Header Type {headerType}");
 
             int len = ReceiveHeaderLength();
             if (len > 0)
             {
-                Console.WriteLine($"Received Header Length {len}");
+                //Console.WriteLine($"Received Header Length {len}");
 
                 int remaining = len;
                 int totalRead = 0;
@@ -237,7 +235,7 @@
                     }
                     finally
                     {
-                        Console.WriteLine($"Read: {totalRead} / {remaining} / {len}");
+                        //Console.WriteLine($"Read: {totalRead} / {remaining} / {len}");
                     }
                 }
 
@@ -245,13 +243,13 @@
 
                 if (headerType == 1000) // Text
                 {
-                    Console.WriteLine("Read Text Finished");
+                    //Console.WriteLine("Read Text Finished");
                     string message = data.ConvertToString();
                     ReceivedText?.Invoke(this, new ReceivedTextEventArgs(ClientID, message));
                 }
                 else if (headerType == 1001) // Data
                 {
-                    Console.WriteLine("Read Data Finished");
+                    //Console.WriteLine("Read Data Finished");
                     ReceivedData?.Invoke(this, new ReceivedDataEventArgs(ClientID, data));
                 } else
                 {
