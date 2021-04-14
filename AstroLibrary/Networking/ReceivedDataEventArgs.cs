@@ -1,4 +1,6 @@
-﻿namespace AstroLibrary.Networking
+﻿using System;
+
+namespace AstroLibrary.Networking
 {
     public class ReceivedDataEventArgs
     {
@@ -9,6 +11,7 @@
         public ReceivedDataEventArgs(int clientID, byte[] data)
         {
             Data = data;
+            Console.WriteLine($"ReceivedDataEventArgs: data.Length = {data.Length}");
             ClientID = clientID;
         }
     }

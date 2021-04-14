@@ -2,14 +2,26 @@
 {
     using MelonLoader;
     using System;
+#if DEBUG
+    using System.IO;
+#endif
     using System.Reflection;
 
     public class AstroLoader : MelonMod
     {
         public static byte[] AssemblyFile;
 
+#if DEBUG
+        public static string DebugPath = Environment.CurrentDirectory + @"\Dependencies\AstroClient.dll";
+#endif
+
         public AstroLoader()
         {
+#if DEBUG
+            LoadDebug();
+            return;
+#endif
+
             KeyManager.ReadKey();
 
             AstroNetworkLoader.Initialize();
@@ -38,5 +50,13 @@
                 Console.WriteLine("Failed to load assembly, it was null");
             }
         }
+
+#if DEBUG
+        public void LoadDebug()
+        {
+            var dll = Assembly.LoadFile(DebugPath);
+            MelonHandler.LoadFromAssembly(dll, DebugPath);
+        }
+#endif
     }
 }

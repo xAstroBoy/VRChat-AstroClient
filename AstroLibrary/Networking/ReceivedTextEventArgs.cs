@@ -12,7 +12,7 @@
         public ReceivedTextEventArgs(int clientID, string message, bool encrypted = false)
         {
             string text1 = message;
-            //Message = Regex.Replace(text1, @"[^\w\d\s]", " ").Trim();
+            Message = Regex.Replace(text1, @"[^\w\d\s]", " ").Trim();
             Message = Regex.Replace(text1, @"[^a-zA-Z0-9@#$%&*+\-_(),+':;?.,!\[\]\s\\/]+$", string.Empty).Trim();
             ClientID = clientID;
         }

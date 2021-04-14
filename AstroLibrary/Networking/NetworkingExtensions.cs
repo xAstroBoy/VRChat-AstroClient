@@ -11,12 +11,12 @@
             {
                 throw new ArgumentNullException(nameof(bytes), "ConvertToString bytes was null");
             }
-            return Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+            return Encoding.ASCII.GetString(bytes, 0, bytes.Length);
         }
 
         public static byte[] ConvertToBytes(this string msg)
         {
-            return Encoding.UTF8.GetBytes(msg);
+            return Encoding.ASCII.GetBytes(msg);
         }
     }
 }

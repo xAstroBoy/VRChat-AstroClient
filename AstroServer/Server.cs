@@ -33,11 +33,6 @@
 
         private void StartServer()
         {
-
-        }
-
-        private void StartClientServer()
-        {
             TcpListener serverSocket = new TcpListener(new IPEndPoint(IPAddress.Any, 42069));
             serverSocket.Start();
             Console.WriteLine("Server Started.");

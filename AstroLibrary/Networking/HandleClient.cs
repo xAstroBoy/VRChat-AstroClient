@@ -30,6 +30,8 @@
             ClientID = clientId;
             ClientSocket = clientSocket;
             _clientStream = ClientSocket.GetStream();
+            _clientStream.ReadTimeout = 6000;
+            _clientStream.WriteTimeout = 6000;
             Task task = new Task(StartThread);
             task.Start();
         }
@@ -82,6 +84,7 @@
         public void SendHeaderLength(byte[] msg)
         {
             byte[] headerLength = BitConverter.GetBytes(msg.Length);
+            Console.WriteLine($"Sending Header Length: {BitConverter.ToUInt32(headerLength, 0)}");
             try
             {
                 _clientStream.Write(headerLength, 0, headerLength.Length);
@@ -103,6 +106,7 @@
             SendSecret();
             SendHeaderType(headerType);
             SendHeaderLength(msg);
+
             if (msg != null && msg.Length > 0)
             {
                 try
@@ -214,9 +218,18 @@
                     {
                         byte[] received = new byte[toRead];
                         int read = _clientStream.Read(received, 0, received.Length);
+                        //int read = _clientStream.Read(received, 0, received.Length);
                         totalRead += read;
                         remaining -= read;
-                        memoryStream.Write(received, 0, received.Length);
+
+                        byte[] a = new byte[read];
+
+                        for (int i = 0; i < read; i++)
+                        {
+                            a[i] = received[i];
+                        }
+
+                        memoryStream.Write(a, 0, a.Length);
                     }
                     catch
                     {
