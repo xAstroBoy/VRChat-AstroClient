@@ -22,8 +22,10 @@
 
         private NetworkStream _clientStream;
 
-        private static readonly int SecretKeyClient = 5234;
-        private static readonly int SecretKeyLoader = 2563;
+        private const int SecretKeyClient = 6354;
+        private const int SecretKeyLoader = 2353;
+
+        private const int PacketSize = 2048;
 
         public void StartClient(TcpClient clientSocket, int clientId)
         {
@@ -208,15 +210,13 @@
                 int remaining = len;
                 int totalRead = 0;
                 MemoryStream memoryStream = new MemoryStream();
-
-                int toRead = 1024;
                 while (remaining > 0)
                 {
                     try
                     {
-                        byte[] received = new byte[toRead];
+                        byte[] received = new byte[PacketSize];
                         int read = _clientStream.Read(received, 0, received.Length);
-                        //int read = _clientStream.Read(received, 0, received.Length);
+
                         totalRead += read;
                         remaining -= read;
 
