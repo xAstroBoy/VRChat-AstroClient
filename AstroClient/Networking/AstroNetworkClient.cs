@@ -41,11 +41,9 @@ namespace AstroClient
 
             if (cmds[0].Equals("exit"))
             {
-                //Environment.Exit(0);
+                Environment.Exit(0);
             } else if (cmds[0].Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
             {
-                //Client.Send($"name:{player.name}");
-                //Client.Send($"userid:{player.UserID()}");
                 Client.Send($"key:{KeyManager.AuthKey}");
             } else if (cmds[0].Equals("authed", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -60,7 +58,7 @@ namespace AstroClient
                     ModConsole.DebugLog("Failed to Auth");
                     // I'm not authed
                     Console.Beep();
-                    //Environment.Exit(0);
+                    Environment.Exit(0);
                 }
             }
             else if (cmds[0].Equals("notify-dev"))
