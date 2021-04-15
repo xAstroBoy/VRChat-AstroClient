@@ -1,10 +1,10 @@
-﻿namespace AstroLibrary.Networking
-{
-    using System;
-    using System.IO;
-    using System.Net.Sockets;
-    using System.Threading.Tasks;
+﻿using System;
+using System.IO;
+using System.Net.Sockets;
+using System.Threading.Tasks;
 
+namespace AstroLibrary.Networking
+{
     public class HandleClient
     {
         public TcpClient ClientSocket { get; private set; }
@@ -25,7 +25,7 @@
         private const int SecretKeyClient = 6354;
         private const int SecretKeyLoader = 2353;
 
-        private const int PacketSize = 1024 * 4;
+        private const int PacketSize = 1024;
 
         public void StartClient(TcpClient clientSocket, int clientId)
         {

@@ -1,7 +1,7 @@
-﻿namespace AstroClient
-{
-    using System;
+﻿using System;
 
+namespace AstroClient
+{
     [Serializable]
     public class ConfigUI
     {

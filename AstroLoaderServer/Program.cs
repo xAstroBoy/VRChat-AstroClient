@@ -1,7 +1,7 @@
-﻿namespace AstroLoaderServer
-{
-    using System;
+﻿using System;
 
+namespace AstroLoaderServer
+{
     class Program
     {
         internal static Server Server1;

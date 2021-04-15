@@ -1,8 +1,8 @@
-﻿namespace CheetosConsole
-{
-    using System;
-    using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
 
+namespace CheetosConsole
+{
     internal static class NativeMethods
     {
         private const string Kernel32 = "kernel32.dll";

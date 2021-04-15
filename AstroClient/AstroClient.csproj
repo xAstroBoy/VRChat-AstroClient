@@ -203,6 +203,7 @@
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Lights\LightControl.cs" />
     <Compile Include="Networking\AstroNetworkClient.cs" />
+    <Compile Include="Networking\KeyManager.cs" />
     <Compile Include="Patches\Patching.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />

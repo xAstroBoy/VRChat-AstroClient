@@ -1,10 +1,10 @@
-﻿namespace AstroLoader
-{
-    using AstroLibrary.Networking;
-    using System;
-    using System.IO;
-    using System.Net.Sockets;
+﻿using AstroLibrary.Networking;
+using System;
+using System.IO;
+using System.Net.Sockets;
 
+namespace AstroLoader
+{
     internal static class KeyManager
     {
         public static string AuthKey = string.Empty;

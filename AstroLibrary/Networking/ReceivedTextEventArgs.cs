@@ -1,8 +1,8 @@
-﻿namespace AstroLibrary.Networking
-{
-    using System;
-    using System.Text.RegularExpressions;
+﻿using System;
+using System.Text.RegularExpressions;
 
+namespace AstroLibrary.Networking
+{
     public class ReceivedTextEventArgs
     {
         public string Message { get; private set; }

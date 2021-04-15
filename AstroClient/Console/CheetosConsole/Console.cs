@@ -1,10 +1,10 @@
-﻿namespace CheetosConsole
-{
-    using System;
-    using System.Drawing;
-    using System.Linq;
-    using NativeConsole = System.Console;
+﻿using System;
+using System.Drawing;
+using System.Linq;
+using NativeConsole = System.Console;
 
+namespace CheetosConsole
+{
     public static class Console
     {
         public static bool HasInitialized { get; private set; }

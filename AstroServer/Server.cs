@@ -1,13 +1,13 @@
-﻿namespace AstroServer
-{
-    using AstroLibrary.Networking;
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Sockets;
+﻿using AstroLibrary.Networking;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 
+namespace AstroServer
+{
     [Serializable]
     internal class UserData // #TODO Make this work
     {
