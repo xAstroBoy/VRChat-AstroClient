@@ -117,13 +117,14 @@ namespace AstroServer
                     if (IsDevKey(key))
                     {
                         client.IsDeveloper = true;
-                        SendToAllDevelopers($"notify-dev:AstroClient developer connected: {client.Name}");
+                        //SendToAllDevelopers(sender, $"notify-dev:AstroClient developer connected: {client.Name}");
                     }
                     else
                     {
-                        SendToAllDevelopers($"notify-dev:AstroClient connected: {client.Name}");
+                        //SendToAllDevelopers(sender, $"notify-dev:AstroClient connected: {client.Name}");
                     }
-                } else
+                }
+                else
                 {
                     client.Send("authed:false");
                     client.Send("exit:invalid auth key");

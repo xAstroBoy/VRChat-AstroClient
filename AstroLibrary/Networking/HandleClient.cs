@@ -22,7 +22,7 @@ namespace AstroLibrary.Networking
 
         private NetworkStream _clientStream;
 
-        private const int SecretKeyClient = 6354;
+        private const int SecretKeyClient = 2454;
         private const int SecretKeyLoader = 2353;
 
         private const int PacketSize = 1024;
@@ -57,7 +57,16 @@ namespace AstroLibrary.Networking
 
         private void SendSecret()
         {
-            byte[] secretHeader = IsClient ? BitConverter.GetBytes(SecretKeyClient) : BitConverter.GetBytes(SecretKeyLoader);
+            byte[] secretHeader;
+
+            if (IsClient)
+            {
+                secretHeader = BitConverter.GetBytes(SecretKeyClient);
+            } else
+            {
+                secretHeader = BitConverter.GetBytes(SecretKeyLoader);
+            }
+
             try
             {
                 _clientStream.Write(secretHeader, 0, secretHeader.Length);
@@ -88,7 +97,7 @@ namespace AstroLibrary.Networking
             Send(msg.ConvertToBytes());
         }
 
-        public void Send(byte[] msg, int headerType = 1000) // 0 = client, 1 = loader
+        public void Send(byte[] msg, int headerType = 1000) // 0 = text, 1 = data
         {
             SendSecret();
             SendHeaderType(headerType);
@@ -170,19 +179,26 @@ namespace AstroLibrary.Networking
         {
             int secret = ReceiveSecret();
 
+            Console.WriteLine($"Secret key: {secret}");
+
             if (secret != SecretKeyClient && IsClient)
             {
                 IsConnected = false;
-                Console.WriteLine("Failed to provide client secret key");
+                Console.WriteLine($"Failed to provide client secret key: {SecretKeyClient}");
             }
             else if (secret != SecretKeyLoader && !IsClient)
             {
                 IsConnected = false;
-                Console.WriteLine("Failed to provide loader secret key");
+                Console.WriteLine($"Failed to provide loader secret key: {SecretKeyLoader}");
             }
 
             int headerType = RecieveHeaderType();
             int len = ReceiveHeaderLength();
+
+            Console.WriteLine($"Header type: {headerType}");
+            Console.WriteLine($"Header lenghh: {len}");
+
+
             if (len > 0)
             {
                 int remaining = len;

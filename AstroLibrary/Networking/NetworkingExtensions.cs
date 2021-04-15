@@ -9,12 +9,12 @@ namespace AstroLibrary.Networking
         {
             return bytes == null
                 ? throw new ArgumentNullException(nameof(bytes), "ConvertToString bytes was null")
-                : Encoding.ASCII.GetString(bytes, 0, bytes.Length);
+                : Encoding.UTF8.GetString(bytes, 0, bytes.Length);
         }
 
         public static byte[] ConvertToBytes(this string msg)
         {
-            return Encoding.ASCII.GetBytes(msg);
+            return Encoding.UTF8.GetBytes(msg);
         }
     }
 }

@@ -16,6 +16,11 @@ namespace AstroServer
 
         internal Client()
         {
+            Name = "";
+            Key = "";
+            UserID = "";
+            IsAuthed = false;
+            IsDeveloper = false;
         }
     }
 }

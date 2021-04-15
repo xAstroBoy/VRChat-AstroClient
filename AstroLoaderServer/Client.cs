@@ -8,12 +8,18 @@ namespace AstroLoaderServer
 
         internal string Key = string.Empty;
 
+        internal string UserID = string.Empty;
+
         internal bool IsAuthed;
 
         internal bool IsReady;
 
         internal Client()
         {
+            Name = "";
+            Key = "";
+            UserID = "";
+            IsAuthed = false;
         }
     }
 }

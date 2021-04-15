@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AstroLibrary\AstroLibrary.csproj" />
+    <ProjectReference Include="..\AstroLibrary\AstroLibrary.csproj">
+      <Private>true</Private>
+	</ProjectReference>
   </ItemGroup>
 
 </Project>
