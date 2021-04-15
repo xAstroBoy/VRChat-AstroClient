@@ -4,8 +4,6 @@
     using System;
     using System.IO;
     using System.Net.Sockets;
-    using System.Threading;
-    using System.Threading.Tasks;
 
     internal static class KeyManager
     {
@@ -87,8 +85,7 @@
                     KeyManager.IsAuthed = false;
                     //ModConsole.DebugLog("Failed to Auth");
                     Console.Beep();
-                    // I'm not authed
-                    //Environment.Exit(0);
+                    Environment.Exit(0);
                 }
             }
             else
@@ -130,7 +127,7 @@
         {
             var client = sender as HandleClient;
             AssemblyFile = e.Data;
-            Console.WriteLine("Received Assembly File Data");
+            //Console.WriteLine("Received Assembly File Data");
             client.Send("gotdll");
             IsReady = true;
         }

@@ -34,7 +34,7 @@
         {
             TcpListener serverSocket = new TcpListener(new IPEndPoint(IPAddress.Any, 42069));
             serverSocket.Start();
-            Console.WriteLine("Server Started.");
+            Console.WriteLine("Client Server Started..");
 
             // Key count
             Console.WriteLine($"There are {GetKeyCount()} valid keys stored.");
@@ -56,7 +56,7 @@
 
         private static int GetKeyCount()
         {
-            return File.ReadAllLines(@"/root/keys.txt").Count();
+            return File.ReadAllLines(@"/root/keys.txt").Length;
         }
 
         private static bool IsValidKey(string authKey)
@@ -74,15 +74,12 @@
         private static void ProcessInput(object sender, string input)
         {
             Client client = sender as Client;
-
-            Console.WriteLine($"Received: {input}");
             string[] cmds = input.Split(":");
 
             if (cmds[0].Equals("key"))
             {
                 string key = cmds[1];
                 Console.WriteLine("Trying to auth with: " + key);
-                //if (key.Equals("12345", StringComparison.InvariantCultureIgnoreCase))
                 if (IsValidKey(key))
                 {
                     client.Send("authed:true");
@@ -94,7 +91,7 @@
                     client.Send("authed:false");
                     client.Send("exit:invalid auth key");
                     client.Disconnect();
-                    Console.WriteLine("Invalig Auth Key");
+                    Console.WriteLine("Invalid Auth Key");
                 }
             }
             else

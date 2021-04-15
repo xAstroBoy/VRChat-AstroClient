@@ -8,7 +8,7 @@
 
         internal static void Main(string[] args)
         {
-            Console.WriteLine("Starting Server..");
+            Console.WriteLine("Starting Client Server..");
             Server1 = new Server();
         }
     }

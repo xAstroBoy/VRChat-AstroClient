@@ -25,7 +25,7 @@
         private const int SecretKeyClient = 6354;
         private const int SecretKeyLoader = 2353;
 
-        private const int PacketSize = 2048;
+        private const int PacketSize = 1024 * 4;
 
         public void StartClient(TcpClient clientSocket, int clientId)
         {
