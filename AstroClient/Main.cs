@@ -24,12 +24,6 @@ namespace AstroClient
 {
     public class Main : MelonMod
     {
-        public Main()
-        {
-            Console.WriteLine("AstroClient Loading");
-        }
-
-
         //public static event EventHandler Event_OnApplicationStart;
 
         public static event EventHandler Event_OnUpdate;

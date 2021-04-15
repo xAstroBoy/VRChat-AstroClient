@@ -31,7 +31,7 @@ namespace AstroLoaderServer
             StartServer();
         }
 
-        private void StartServer()
+        private static void StartServer()
         {
             TcpListener serverSocket = new TcpListener(new IPEndPoint(IPAddress.Any, 42070));
             serverSocket.Start();
@@ -113,7 +113,7 @@ namespace AstroLoaderServer
             }
         }
 
-        public void SendAll(string msg)
+        public static void SendAll(string msg)
         {
             foreach (Client client in Clients)
             {
@@ -126,12 +126,8 @@ namespace AstroLoaderServer
             Client client = sender as Client;
             if (Clients.Contains(client))
             {
-                //Settings.AuthenticatedUsers.Remove(client);
                 Clients.Remove(client);
-                //Console.WriteLine($"Client removed: {client.ClientID}");
             }
-
-            //SendAll($"Client Disconnected: {client.ClientID} of {Clients.Count} / {_maxConnections}");
             Console.WriteLine($"Client Disconnected: {client.ClientID} of {Clients.Count} / {_maxConnections}");
         }
 

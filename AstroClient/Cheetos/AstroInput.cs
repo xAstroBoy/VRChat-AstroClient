@@ -76,7 +76,6 @@ namespace AstroClient
                 var rightTrigger = daydreamComp.field_Private_VRCInput_10;
                 var uiManager = VRCUiManager.prop_VRCUiManager_0;
 
-                RaycastHit hit;
                 Transform currentTriggerPointer = null;
 
                 if (leftTrigger.prop_Boolean_2 && CanClick)
@@ -96,7 +95,7 @@ namespace AstroClient
 
                 if (currentTriggerPointer != null)
                 {
-                    if (Physics.Raycast(currentTriggerPointer.position, currentTriggerPointer.transform.forward, out hit, float.MaxValue))
+                    if (Physics.Raycast(currentTriggerPointer.position, currentTriggerPointer.transform.forward, out RaycastHit hit, float.MaxValue))
                     {
                         var gameObject = hit.collider.transform.gameObject;
                         CheckHitObject(gameObject);
@@ -107,9 +106,8 @@ namespace AstroClient
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    RaycastHit hit;
                     Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5F, 0.5F, 0));
-                    if (Physics.Raycast(ray, out hit, float.MaxValue))
+                    if (Physics.Raycast(ray, out RaycastHit hit, float.MaxValue))
                     {
                         var gameObject = hit.collider.transform.gameObject;
                         CheckHitObject(gameObject);

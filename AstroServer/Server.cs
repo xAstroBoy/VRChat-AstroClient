@@ -30,7 +30,7 @@ namespace AstroServer
             StartServer();
         }
 
-        private void StartServer()
+        private static void StartServer()
         {
             TcpListener serverSocket = new TcpListener(new IPEndPoint(IPAddress.Any, 42069));
             serverSocket.Start();
@@ -43,8 +43,10 @@ namespace AstroServer
             while (true)
             {
                 TcpClient clientSocket = serverSocket.AcceptTcpClient();
-                Client client = new Client();
-                client.IsClient = true;
+                Client client = new Client
+                {
+                    IsClient = true
+                };
 
                 client.Connected += Connected;
                 client.Disconnected += Disconnected;
@@ -100,7 +102,7 @@ namespace AstroServer
             }
         }
 
-        public void SendAll(string msg)
+        public static void SendAll(string msg)
         {
             foreach (Client client in Clients)
             {

@@ -35,7 +35,6 @@ namespace AstroClient
 
         private static void ProcessInput(object sender, string input)
         {
-            ModConsole.DebugLog($"Received: {input}");
             string[] cmds = input.Trim().Split(':');
 
             if (cmds[0].Equals("exit"))

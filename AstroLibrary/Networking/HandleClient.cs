@@ -57,16 +57,7 @@ namespace AstroLibrary.Networking
 
         private void SendSecret()
         {
-            byte[] secretHeader;
-
-            if (IsClient)
-            {
-                secretHeader = BitConverter.GetBytes(SecretKeyClient);
-            } else
-            {
-                secretHeader = BitConverter.GetBytes(SecretKeyLoader);
-            }
-
+            byte[] secretHeader = IsClient ? BitConverter.GetBytes(SecretKeyClient) : BitConverter.GetBytes(SecretKeyLoader);
             try
             {
                 _clientStream.Write(secretHeader, 0, secretHeader.Length);

@@ -7,11 +7,9 @@ namespace AstroLibrary.Networking
     {
         public static string ConvertToString(this byte[] bytes)
         {
-            if (bytes == null)
-            {
-                throw new ArgumentNullException(nameof(bytes), "ConvertToString bytes was null");
-            }
-            return Encoding.ASCII.GetString(bytes, 0, bytes.Length);
+            return bytes == null
+                ? throw new ArgumentNullException(nameof(bytes), "ConvertToString bytes was null")
+                : Encoding.ASCII.GetString(bytes, 0, bytes.Length);
         }
 
         public static byte[] ConvertToBytes(this string msg)
