@@ -44,7 +44,6 @@ namespace AstroLibrary.Networking
         private void SendHeaderType(int headerType = 1000) // 1000 is plain text
         {
             byte[] header = BitConverter.GetBytes(headerType);
-            //Console.WriteLine($"Sending HeaderType: {BitConverter.ToUInt32(header, 0)}");
             try
             {
                 _clientStream.Write(header, 0, header.Length);
@@ -63,11 +62,9 @@ namespace AstroLibrary.Networking
             if (IsClient)
             {
                 secretHeader = BitConverter.GetBytes(SecretKeyClient);
-                //Console.WriteLine($"Sending Client Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
             } else
             {
                 secretHeader = BitConverter.GetBytes(SecretKeyLoader);
-                //Console.WriteLine($"Sending Loader Secret: {BitConverter.ToUInt32(secretHeader, 0)}");
             }
 
             try
@@ -84,7 +81,6 @@ namespace AstroLibrary.Networking
         public void SendHeaderLength(byte[] msg)
         {
             byte[] headerLength = BitConverter.GetBytes(msg.Length);
-            //Console.WriteLine($"Sending Header Length: {BitConverter.ToUInt32(headerLength, 0)}");
             try
             {
                 _clientStream.Write(headerLength, 0, headerLength.Length);
@@ -193,20 +189,11 @@ namespace AstroLibrary.Networking
                 IsConnected = false;
                 Console.WriteLine("Failed to provide loader secret key");
             }
-            else
-            {
-                //var cl = IsClient ? "client" : "loader";
-                //Console.WriteLine($"Correct secret key received: {cl}");
-            }
 
             int headerType = RecieveHeaderType();
-            //Console.WriteLine($"Received Header Type {headerType}");
-
             int len = ReceiveHeaderLength();
             if (len > 0)
             {
-                //Console.WriteLine($"Received Header Length {len}");
-
                 int remaining = len;
                 int totalRead = 0;
                 MemoryStream memoryStream = new MemoryStream();
@@ -233,23 +220,17 @@ namespace AstroLibrary.Networking
                     {
                         IsConnected = false;
                     }
-                    finally
-                    {
-                        //Console.WriteLine($"Read: {totalRead} / {remaining} / {len}");
-                    }
                 }
 
                 byte[] data = memoryStream.GetBuffer();
 
                 if (headerType == 1000) // Text
                 {
-                    //Console.WriteLine("Read Text Finished");
                     string message = data.ConvertToString();
                     ReceivedText?.Invoke(this, new ReceivedTextEventArgs(ClientID, message));
                 }
                 else if (headerType == 1001) // Data
                 {
-                    //Console.WriteLine("Read Data Finished");
                     ReceivedData?.Invoke(this, new ReceivedDataEventArgs(ClientID, data));
                 } else
                 {
