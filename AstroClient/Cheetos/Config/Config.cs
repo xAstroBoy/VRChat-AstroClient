@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Reflection;
 
 namespace AstroClient
 {
-    [Serializable]
+    [Serializable, Obfuscation]
     public class ConfigUI
     {
         public bool RemoveVRCPlus = false;
@@ -25,7 +26,7 @@ namespace AstroClient
         public bool ShowPlayersList = true;
     }
 
-    [Serializable]
+    [Serializable, Obfuscation]
     public class Config
     {
         public bool JoinLeave = false;
