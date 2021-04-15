@@ -63,6 +63,13 @@ namespace AstroLoaderServer
 
         private static bool IsValidKey(string authKey)
         {
+            foreach (var key in File.ReadLines("/root/devs.txt"))
+            {
+                if (key.Equals(authKey))
+                {
+                    return true;
+                }
+            }
             foreach (var key in File.ReadLines("/root/keys.txt"))
             {
                 if (key.Equals(authKey))
