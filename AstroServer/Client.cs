@@ -8,13 +8,14 @@ namespace AstroServer
 
         internal string Key = string.Empty;
 
-        internal bool IsAuthed = false;
+        internal string UserID = string.Empty;
+
+        internal bool IsAuthed;
+
+        internal bool IsDeveloper;
 
         internal Client()
         {
-            Name = "Temp"; // We'll get this later from the client after authentication is implemented
-            Key = "";
-            IsAuthed = false;
         }
     }
 }

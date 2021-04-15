@@ -1,4 +1,5 @@
-﻿using DayClientML2.Utility.Extensions;
+﻿using AstroClient.Cheetos;
+using DayClientML2.Utility.Extensions;
 using VRC;
 
 namespace AstroClient
@@ -9,8 +10,7 @@ namespace AstroClient
         {
             if (ConfigManager.General.JoinLeave)
             {
-                var uiManager = VRCUiManager.prop_VRCUiManager_0;
-                PopupManager.QueHudMessage(uiManager, $"Join: {player.DisplayName()}");
+                CheetosHelpers.SendHudNotification($"Join: {player.DisplayName()}");
             }
         }
 
@@ -18,8 +18,7 @@ namespace AstroClient
         {
             if (ConfigManager.General.JoinLeave)
             {
-                var uiManager = VRCUiManager.prop_VRCUiManager_0;
-                PopupManager.QueHudMessage(uiManager, $"Leave: {player.DisplayName()}");
+                CheetosHelpers.SendHudNotification($"Leave: {player.DisplayName()}");
             }
         }
     }

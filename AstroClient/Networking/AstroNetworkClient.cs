@@ -1,5 +1,7 @@
-﻿using AstroClient.ConsoleUtils;
+﻿using AstroClient.Cheetos;
+using AstroClient.ConsoleUtils;
 using AstroLibrary.Networking;
+using DayClientML2.Utility.Extensions;
 using System;
 using System.Net.Sockets;
 using System.Threading;
@@ -42,6 +44,10 @@ namespace AstroClient
                 Environment.Exit(0);
             } else if (cmds[0].Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
             {
+                var player = LocalPlayerUtils.GetSelfPlayer();
+
+                Client.Send($"name:{player.name}");
+                Client.Send($"userid:{player.UserID()}");
                 Client.Send($"key:{KeyManager.AuthKey}");
             } else if (cmds[0].Equals("authed", StringComparison.InvariantCultureIgnoreCase))
             {
@@ -58,6 +64,10 @@ namespace AstroClient
                     Console.Beep();
                     Environment.Exit(0);
                 }
+            }
+            else if (cmds[0].Equals("notify-dev"))
+            {
+                CheetosHelpers.SendHudNotification(cmds[1]);
             }
             else
             {

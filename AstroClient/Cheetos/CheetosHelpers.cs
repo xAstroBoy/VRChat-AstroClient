@@ -1,4 +1,5 @@
 ﻿using AstroClient.ConsoleUtils;
+using DayClientML2.Utility.Extensions;
 using System.IO;
 using UnityEngine;
 
@@ -24,6 +25,16 @@ namespace AstroClient.Cheetos
                 ModConsole.Error($"Could not load: {filePath}");
                 return null;
             }
+        }
+
+        /// <summary>
+        /// Send a notification message to the player's HUD
+        /// </summary>
+        /// <param name="msg"></param>
+        public static void SendHudNotification(string msg)
+        {
+            var uiManager = VRCUiManager.prop_VRCUiManager_0;
+            PopupManager.QueHudMessage(uiManager, msg);
         }
     }
 }

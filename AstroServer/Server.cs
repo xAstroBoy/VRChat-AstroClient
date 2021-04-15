@@ -37,6 +37,7 @@ namespace AstroServer
             Console.WriteLine("Client Server Started..");
 
             // Key count
+            Console.WriteLine($"There are {GetDevKeyCount()} dev keys stored.");
             Console.WriteLine($"There are {GetKeyCount()} valid keys stored.");
 
             Clients = new List<Client>();
@@ -56,13 +57,37 @@ namespace AstroServer
             }
         }
 
+        private static int GetDevKeyCount()
+        {
+            return File.ReadAllLines("/root/devs.txt").Length;
+        }
+
         private static int GetKeyCount()
         {
-            return File.ReadAllLines(@"/root/keys.txt").Length;
+            return File.ReadAllLines("/root/keys.txt").Length;
+        }
+
+        private static bool IsDevKey(string authKey)
+        {
+            foreach (var key in File.ReadLines("/root/devs.txt"))
+            {
+                if (key.Equals(authKey))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private static bool IsValidKey(string authKey)
         {
+            foreach (var key in File.ReadLines("/root/devs.txt"))
+            {
+                if (key.Equals(authKey))
+                {
+                    return true;
+                }
+            }
             foreach (var key in File.ReadLines("/root/keys.txt"))
             {
                 if (key.Equals(authKey))
@@ -88,6 +113,16 @@ namespace AstroServer
                     client.IsAuthed = true;
                     client.Key = key;
                     Console.WriteLine("Successfully Authed");
+
+                    if (IsDevKey(key))
+                    {
+                        client.IsDeveloper = true;
+                        SendToAllDevelopers($"notify-dev:AstroClient developer connected: {client.Name}");
+                    }
+                    else
+                    {
+                        SendToAllDevelopers($"notify-dev:AstroClient connected: {client.Name}");
+                    }
                 } else
                 {
                     client.Send("authed:false");
@@ -95,6 +130,14 @@ namespace AstroServer
                     client.Disconnect();
                     Console.WriteLine("Invalid Auth Key");
                 }
+            }
+            else if (cmds[0].Equals("name"))
+            {
+                client.Name = cmds[1];
+            }
+            else if (cmds[0].Equals("userid"))
+            {
+                client.UserID = cmds[1];
             }
             else
             {
@@ -107,6 +150,17 @@ namespace AstroServer
             foreach (Client client in Clients)
             {
                 client.Send(msg);
+            }
+        }
+
+        public static void SendToAllDevelopers(string msg)
+        {
+            foreach (Client client in Clients)
+            {
+                if (client.IsDeveloper)
+                {
+                    client.Send(msg);
+                }
             }
         }
 
