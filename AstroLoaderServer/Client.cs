@@ -8,15 +8,12 @@ namespace AstroLoaderServer
 
         internal string Key = string.Empty;
 
-        internal bool IsAuthed = false;
+        internal bool IsAuthed;
 
-        internal bool IsReady = false;
+        internal bool IsReady;
 
         internal Client()
         {
-            Name = "Temp"; // We'll get this later from the client after authentication is implemented
-            Key = "";
-            IsAuthed = false;
         }
     }
 }

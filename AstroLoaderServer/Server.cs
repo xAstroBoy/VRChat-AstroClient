@@ -46,8 +46,10 @@ namespace AstroLoaderServer
             while (true)
             {
                 TcpClient clientSocket = serverSocket.AcceptTcpClient();
-                Client client = new Client();
-                client.IsClient = false;
+                Client client = new Client
+                {
+                    IsClient = false
+                };
 
                 client.Connected += Connected;
                 client.Disconnected += Disconnected;
