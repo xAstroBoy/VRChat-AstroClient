@@ -184,12 +184,12 @@ namespace AstroLibrary.Networking
             if (secret != SecretKeyClient && IsClient)
             {
                 IsConnected = false;
-                Console.WriteLine($"Failed to provide client secret key: {SecretKeyClient}");
+                //Console.WriteLine($"Failed to provide client secret key: {SecretKeyClient}");
             }
             else if (secret != SecretKeyLoader && !IsClient)
             {
                 IsConnected = false;
-                Console.WriteLine($"Failed to provide loader secret key: {SecretKeyLoader}");
+                //Console.WriteLine($"Failed to provide loader secret key: {SecretKeyLoader}");
             }
 
             int headerType = RecieveHeaderType();
