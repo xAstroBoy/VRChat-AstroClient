@@ -1,13 +1,14 @@
-﻿namespace AstroLoaderServer
-{
-    using AstroLibrary.Networking;
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Net;
-    using System.Net.Sockets;
+﻿using AstroLibrary.Networking;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Security.Cryptography;
 
+namespace AstroLoaderServer
+{
     [Serializable]
     internal class UserData // #TODO Make this work
     {
@@ -24,36 +25,20 @@
 
         internal static List<Client> Clients { get; private set; }
 
-        internal static List<string> AuthKeys = new List<string>();
-
         internal Server()
         {
             Console.WriteLine("Starting Server");
             StartServer();
         }
 
-        private void StartServer()
+        private static void StartServer()
         {
             TcpListener serverSocket = new TcpListener(new IPEndPoint(IPAddress.Any, 42070));
             serverSocket.Start();
-            Console.WriteLine("Client Server Started.");
-
-            // Load AuthKeys, eventually going to use a database or something
-
-            // Cheetos Key
-            AuthKeys.Add("KeXYLwEwyPsYT4IrSbWWrupYqjzT8C3VEWN2uWb1DpjjB1kcoOJICsbmjnXRmeRzjxoXcuX6CCWZVwltPGTWGE2AFJENcYA1EWh7FRXCvMS66u75LIZeWl5Gd8XqKnyR8YFlKw9U2cAXTZhjovlQvy94Up1VbM5PP3IhdAIKpSBlOBTcrgCz7tTTx81gcwslOLJW6P61");
-            
-            // Astro's Key
-            AuthKeys.Add("hQhe2Y2mcVkfUSJbBcfZSO5WLMaiBzzXL4v9aA3Ze1fxOx9CHgwcp8akxeenKcHIsALBBRgVyVt2v7jCp8gOTLe6CgJpIYyarZpBGIlPzC66peQyMnw58OXcHDUXbNW6P6oMIPYpjICJwY2QW1MARvCW48x8v09EdcOzpHOPx3JFeCOdCwKCxPubaZWmTmNpwPF0EMdV");
-
-            // Moon's Key
-            AuthKeys.Add("UYbVYfMiaSIZqtYBUqaq2b3HGY0VcbN6y6NJWbbjkpPXRYXtO11yYHtSdXtKtFObXHatPNbe4BVOIDtZAoD44KWHKkm9UYHhk47OxvA3TshJhvHLXDm0O6wV9UpKP18xV4rm5qn0A3HweQSIrE7ItB7PqohStvSmr2xKSmwmvyxZY7yhBRm4jTKGejmGNAOqoWzw5zR9");
-
-            // Grizzly's Key
-            AuthKeys.Add("pG0iZoVJCbN5AmCxXxsdQwLmoDgBmg73KqhYgPkdhYgorIKR9pEPjESC5KRlL50cw7LqpW9ZGmxWv0ognoAf1Wx2dshIIFMu9LaqueBmNk5jfY9A6ayuBIkobusQgjtC4axd0RN8KLu6o7ZE9R8ep1zSdaFN1v7y6NAxm9Dsk0B1hSV7N39a8wDN7G73vGNUy7e8ujnv");
+            Console.WriteLine("Loader Server Started.");
 
             // Key count
-            Console.WriteLine($"There are {AuthKeys.Count} valid keys stored.");
+            Console.WriteLine($"There are {GetKeyCount()} valid keys stored.");
 
             Clients = new List<Client>();
 
@@ -71,9 +56,14 @@
             }
         }
 
+        private static int GetKeyCount()
+        {
+            return File.ReadAllLines(@"/root/keys.txt").Length;
+        }
+
         private static bool IsValidKey(string authKey)
         {
-            foreach (string key in AuthKeys)
+            foreach (var key in File.ReadLines("/root/keys.txt"))
             {
                 if (key.Equals(authKey))
                 {
@@ -86,8 +76,6 @@
         private static void ProcessInput(object sender, string input)
         {
             Client client = sender as Client;
-
-            Console.WriteLine($"Received: {input}");
             string[] cmds = input.Split(":");
 
             if (cmds[0].Equals("gimmiedll") && client.IsAuthed)
@@ -99,13 +87,12 @@
             else if (cmds[0].Equals("gotdll"))
             {
                 client.Disconnect();
-                Console.WriteLine("DLL Sent to: {}");
+                Console.WriteLine($"DLL Sent");
                 client.IsReady = true;
             } else if (cmds[0].Equals("key"))
             {
                 string key = cmds[1];
                 Console.WriteLine("Trying to auth with: " + key);
-                //if (key.Equals("12345", StringComparison.InvariantCultureIgnoreCase))
                 if (IsValidKey(key))
                 {
                     client.Send("authed:true");
@@ -117,7 +104,7 @@
                     client.Send("authed:false");
                     client.Send("exit:invalid auth key");
                     client.Disconnect();
-                    Console.WriteLine("Invalig Auth Key");
+                    Console.WriteLine("Invalid Auth Key");
                 }
             }
             else
@@ -126,7 +113,7 @@
             }
         }
 
-        public void SendAll(string msg)
+        public static void SendAll(string msg)
         {
             foreach (Client client in Clients)
             {
@@ -139,12 +126,8 @@
             Client client = sender as Client;
             if (Clients.Contains(client))
             {
-                //Settings.AuthenticatedUsers.Remove(client);
                 Clients.Remove(client);
-                //Console.WriteLine($"Client removed: {client.ClientID}");
             }
-
-            //SendAll($"Client Disconnected: {client.ClientID} of {Clients.Count} / {_maxConnections}");
             Console.WriteLine($"Client Disconnected: {client.ClientID} of {Clients.Count} / {_maxConnections}");
         }
 

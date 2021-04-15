@@ -1,14 +1,14 @@
-﻿namespace AstroServer
-{
-    using System;
+﻿using System;
 
+namespace AstroServer
+{
     class Program
     {
         internal static Server Server1;
 
         internal static void Main(string[] args)
         {
-            Console.WriteLine("Starting Server..");
+            Console.WriteLine("Starting Client Server..");
             Server1 = new Server();
         }
     }

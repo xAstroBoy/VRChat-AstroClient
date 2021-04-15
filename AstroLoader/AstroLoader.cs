@@ -1,12 +1,12 @@
-﻿namespace AstroLoader
-{
-    using MelonLoader;
-    using System;
+﻿using MelonLoader;
+using System;
 #if DEBUG
     using System.IO;
 #endif
-    using System.Reflection;
+using System.Reflection;
 
+namespace AstroLoader
+{
     public class AstroLoader : MelonMod
     {
         public static byte[] AssemblyFile;

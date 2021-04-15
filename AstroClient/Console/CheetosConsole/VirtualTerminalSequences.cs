@@ -1,8 +1,8 @@
-﻿namespace CheetosConsole
-{
-    using System.Drawing;
-    using System.Text;
+﻿using System.Drawing;
+using System.Text;
 
+namespace CheetosConsole
+{
     internal static class VirtualTerminalSequences
     {
         private const char Escape = '\x1b';

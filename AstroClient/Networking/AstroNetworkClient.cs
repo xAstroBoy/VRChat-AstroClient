@@ -1,36 +1,12 @@
 ﻿using AstroClient.ConsoleUtils;
 using AstroLibrary.Networking;
 using System;
-using System.IO;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace AstroClient
 {
-
-    internal static class KeyManager
-    {
-        public static string AuthKey = string.Empty;
-
-        public static bool IsAuthed = false;
-
-        public static void ReadKey()
-        {
-            string keyPath = Environment.CurrentDirectory + @"\AstroClient\key.txt";
-
-            if (File.Exists(keyPath))
-            {
-                AuthKey = File.ReadAllText(keyPath);
-            }
-            else
-            {
-                System.Console.Beep();
-                Environment.Exit(0);
-            }
-        }
-    }
-
     internal class AstroNetworkClient
     {
         internal static HandleClient Client;
@@ -45,8 +21,10 @@ namespace AstroClient
         {
             Client = null;
             TcpClient tcpClient = new TcpClient("craig.se", 42069);
-            Client = new HandleClient();
-            Client.IsClient = true; // Indicate that this is the client
+            Client = new HandleClient
+            {
+                IsClient = true // Indicate that this is the client
+            };
 
             Client.Connected += OnConnected;
             Client.Disconnected += OnDisconnect;
@@ -57,31 +35,28 @@ namespace AstroClient
 
         private static void ProcessInput(object sender, string input)
         {
-            ModConsole.DebugLog($"Received: {input}");
             string[] cmds = input.Trim().Split(':');
 
             if (cmds[0].Equals("exit"))
             {
-                //Environment.Exit(0);
+                Environment.Exit(0);
             } else if (cmds[0].Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
             {
                 Client.Send($"key:{KeyManager.AuthKey}");
-                ModConsole.DebugLog("Auth Requested");
             } else if (cmds[0].Equals("authed", StringComparison.InvariantCultureIgnoreCase))
             {
                 if (cmds[1].Equals("true", StringComparison.InvariantCultureIgnoreCase))
                 {
                     // I'm authed
                     KeyManager.IsAuthed = true;
-                    ModConsole.DebugLog("Successfully Authed");
                 }
                 else
                 {
                     KeyManager.IsAuthed = false;
                     ModConsole.DebugLog("Failed to Auth");
-                    Console.Beep();
                     // I'm not authed
-                    //Environment.Exit(0);
+                    Console.Beep();
+                    Environment.Exit(0);
                 }
             }
             else
@@ -92,7 +67,6 @@ namespace AstroClient
 
         private static void OnConnected(object sender, EventArgs e)
         {
-            ModConsole.DebugLog("Client Connected..");
             return;
         }
 

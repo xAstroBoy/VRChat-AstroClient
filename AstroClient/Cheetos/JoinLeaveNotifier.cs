@@ -1,8 +1,8 @@
-﻿namespace AstroClient
-{
-    using DayClientML2.Utility.Extensions;
-    using VRC;
+﻿using DayClientML2.Utility.Extensions;
+using VRC;
 
+namespace AstroClient
+{
     internal class JoinLeaveNotifier : GameEvents
     {
         public override void OnPlayerJoined(Player player)
