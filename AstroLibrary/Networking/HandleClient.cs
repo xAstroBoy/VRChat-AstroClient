@@ -179,7 +179,7 @@ namespace AstroLibrary.Networking
         {
             int secret = ReceiveSecret();
 
-            Console.WriteLine($"Secret key: {secret}");
+            //Console.WriteLine($"Secret key: {secret}");
 
             if (secret != SecretKeyClient && IsClient)
             {
@@ -195,9 +195,8 @@ namespace AstroLibrary.Networking
             int headerType = RecieveHeaderType();
             int len = ReceiveHeaderLength();
 
-            Console.WriteLine($"Header type: {headerType}");
-            Console.WriteLine($"Header lenghh: {len}");
-
+            //Console.WriteLine($"Header type: {headerType}");
+            //Console.WriteLine($"Header lenghh: {len}");
 
             if (len > 0)
             {
