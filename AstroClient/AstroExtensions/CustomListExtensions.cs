@@ -33,7 +33,7 @@ namespace AstroClient.extensions
 
         public static bool RenderisSaved(this GameObject obj)
         {
-            return RendererSaverIndex.Where(x => x.TargetObj == obj).Select(x => x.isSavedObj).DefaultIfEmpty(false).First();
+            return RendererSaverIndex.Where(x => x.TargetObj == obj).Select(x => x.IsSavedObj).DefaultIfEmpty(false).First();
         }
     }
 }

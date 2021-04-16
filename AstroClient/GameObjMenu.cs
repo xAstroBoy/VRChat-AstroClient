@@ -20,7 +20,7 @@ namespace AstroClient
             CurrentSelection.Clear();
             Current = null;
             //Previous = null;
-            isToggleMode = true;
+            IsToggleMode = true;
             IsOnRootScene = true;
             if (DestroyModeSwitch != null)
             {
@@ -150,7 +150,7 @@ namespace AstroClient
             }
         }
 
-        private static bool isDestroyMode
+        private static bool IsDestroyMode
         {
             get
             {
@@ -200,7 +200,7 @@ namespace AstroClient
             }
         }
 
-        private static bool isToggleMode
+        private static bool IsToggleMode
         {
             get
             {
@@ -309,13 +309,13 @@ namespace AstroClient
 
             new QMSingleButton(gameobjtogglermenu, -1, -1, "Root Transforms", new Action(() => { CurrentSelection = GetAllCurrentSceneObjects(); MainScroll.Refresh(); subscroll.Refresh(); }), "Return To Root Objects", null, null, true);
             GoToParentBtn = new QMSingleButton(gameobjtogglermenu, -1, 0f, "previous parent", new Action(() => { ReturnToParent(); }), "Go Back to previous parent", null, null, true);
-            ToggleModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 0.5f, "Toggle Object", new Action(() => { isToggleMode = true; }), "Toggle Object", new Action(() => { isToggleMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
-            DestroyModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 1f, "Destroy Object", new Action(() => { isDestroyMode = true; }), "Destroy Object", new Action(() => { isDestroyMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
+            ToggleModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 0.5f, "Toggle Object", new Action(() => { IsToggleMode = true; }), "Toggle Object", new Action(() => { IsToggleMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
+            DestroyModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 1f, "Destroy Object", new Action(() => { IsDestroyMode = true; }), "Destroy Object", new Action(() => { IsDestroyMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
             PasstoTweakerModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 1.5f, "Edit with Item Tweaker", new Action(() => { PassToTweakerMode = true; }), "Edit with Item Tweaker", new Action(() => { PassToTweakerMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
             GameObjMenuObjectToEdit = new QMSingleButton(gameobjtogglermenu, -1, 2f, "Not Selected", null, "Shows what item is current set on the item tweaker", null, null, false);
             if (DestroyModeSwitch != null)
             {
-                DestroyModeSwitch.setToggleState(isDestroyMode);
+                DestroyModeSwitch.setToggleState(IsDestroyMode);
             }
             if (PasstoTweakerModeSwitch != null)
             {
@@ -323,7 +323,7 @@ namespace AstroClient
             }
             if (ToggleModeSwitch != null)
             {
-                ToggleModeSwitch.setToggleState(isToggleMode);
+                ToggleModeSwitch.setToggleState(IsToggleMode);
             }
             subscroll.SetAction(delegate
             {
@@ -354,12 +354,12 @@ namespace AstroClient
 
                         newbtn.setAction(new Action(() =>
                        {
-                           if (isToggleMode)
+                           if (IsToggleMode)
                            {
                                item.gameObject.SetActive(!item.gameObject.active);
                                newbtn.setTextColor(GetObjectStatus(item));
                            }
-                           if (isDestroyMode)
+                           if (IsDestroyMode)
                            {
                                item.gameObject.DestroyMeLocal();
                                if (CurrentSelection.Contains(item))

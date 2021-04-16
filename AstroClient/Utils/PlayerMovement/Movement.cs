@@ -93,20 +93,20 @@ namespace AstroClient.AstroUtils.PlayerMovement
                 {
                     if (InputUtils.IsImputJumpCalled())
                     {
-                        if (LocalPlayerUtils.isPlayerGrounded() && IsJumpOverriden)
+                        if (LocalPlayerUtils.IsPlayerGrounded() && IsJumpOverriden)
                         {
                             EmulatedJump();
                         }
                         else
                         {
-                            if (!LocalPlayerUtils.isPlayerGrounded() && IsUnlimitedJumpActive)
+                            if (!LocalPlayerUtils.IsPlayerGrounded() && IsUnlimitedJumpActive)
                             {
                                 EmulatedJump();
                             }
                         }
                     }
 
-                    if (InputUtils.isInputJumpPressed() && isRocketJumpActive)
+                    if (InputUtils.IsInputJumpPressed() && isRocketJumpActive)
                     {
                         EmulatedJump();
                     }

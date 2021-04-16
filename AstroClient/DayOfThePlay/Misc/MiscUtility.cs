@@ -141,12 +141,12 @@ namespace DayClientML2.Utility
 
         public static bool TakeOwnershipIfNecessary(GameObject gameObject)
         {
-            if (getOwnerOfGameObject(gameObject) != Utils.CurrentUser.field_Private_Player_0)
+            if (GetOwnerOfGameObject(gameObject) != Utils.CurrentUser.field_Private_Player_0)
                 Networking.SetOwner(Utils.CurrentUser.field_Private_VRCPlayerApi_0, gameObject);
-            return getOwnerOfGameObject(gameObject) != Utils.CurrentUser.field_Private_Player_0;
+            return GetOwnerOfGameObject(gameObject) != Utils.CurrentUser.field_Private_Player_0;
         }
 
-        public static Player getOwnerOfGameObject(GameObject gameObject)
+        public static Player GetOwnerOfGameObject(GameObject gameObject)
         {
             foreach (Player player in Utils.PlayerManager.AllPlayers())
             {
@@ -156,7 +156,7 @@ namespace DayClientML2.Utility
             return null;
         }
 
-        public static Player getOwnerOfGameObjectButBetter(GameObject gameObject) => Utils.PlayerManager.AllPlayers().Where(plr => plr.GetVRCPlayerApi().IsOwner(gameObject)).FirstOrDefault();
+        public static Player GetOwnerOfGameObjectButBetter(GameObject gameObject) => Utils.PlayerManager.AllPlayers().Where(plr => plr.GetVRCPlayerApi().IsOwner(gameObject)).FirstOrDefault();
 
         public static string GetPath(GameObject obj)
         {

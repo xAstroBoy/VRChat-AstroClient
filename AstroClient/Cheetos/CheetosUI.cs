@@ -118,7 +118,7 @@ namespace AstroClient
             MainScroller = new QMScrollMenu(MainButton);
             RestartButton = new QMSingleButton(MainButton, 0, 0, "Close Game", () => { Environment.Exit(0); }, "Close the game");
 
-            if (!Bools.isCheetosMode)
+            if (!Bools.IsCheetosMode)
             {
                 MainButton.getMainButton().setActive(false);
             } else

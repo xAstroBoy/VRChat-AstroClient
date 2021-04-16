@@ -60,12 +60,12 @@ namespace AstroClient
             {
                 try
                 {
-                    var OldEntry = _AnalyzedPlayers.Where(x => x.player.field_Private_APIUser_0.id == player.field_Private_APIUser_0.id).DefaultIfEmpty(null).First();
+                    var OldEntry = _AnalyzedPlayers.Where(x => x.Player.field_Private_APIUser_0.id == player.field_Private_APIUser_0.id).DefaultIfEmpty(null).First();
                     if (OldEntry != null)
                     {
                         if (_AnalyzedPlayers.Contains(OldEntry))
                         {
-                            ModConsole.DebugLog($"Deregistered User {OldEntry.player.DisplayName()} in LewdVRChat ");
+                            ModConsole.DebugLog($"Deregistered User {OldEntry.Player.DisplayName()} in LewdVRChat ");
                             _AnalyzedPlayers.Remove(OldEntry);
                         }
                     }
@@ -82,7 +82,7 @@ namespace AstroClient
                     {
                         if (!_AnalyzedPlayers.Contains(tmp))
                         {
-                            ModConsole.DebugLog($"Registered User {tmp.player.DisplayName()} in LewdVRChat ");
+                            ModConsole.DebugLog($"Registered User {tmp.Player.DisplayName()} in LewdVRChat ");
                             _AnalyzedPlayers.Add(tmp);
                         }
                     }
@@ -110,7 +110,7 @@ namespace AstroClient
             }
             if (player != null)
             {
-                var user = _AnalyzedPlayers.Where(x => x.player.GetAPIUser().id == player.GetAPIUser().id).DefaultIfEmpty(null).First();
+                var user = _AnalyzedPlayers.Where(x => x.Player.GetAPIUser().id == player.GetAPIUser().id).DefaultIfEmpty(null).First();
                 if (_AnalyzedPlayers.Contains(user))
                 {
                     _AnalyzedPlayers.Remove(user);
@@ -257,11 +257,11 @@ namespace AstroClient
             var apiuser = QuickMenuUtils.GetSelectedUser();
             if (apiuser != null)
             {
-                var ScannedUser = _AnalyzedPlayers.Where(x => x.player.GetAPIUser().id == apiuser.id).DefaultIfEmpty(null).First();
+                var ScannedUser = _AnalyzedPlayers.Where(x => x.Player.GetAPIUser().id == apiuser.id).DefaultIfEmpty(null).First();
                 if (ScannedUser != null)
                 {
-                    ModConsole.Log("Dumping renderer components in player : " + ScannedUser.player.field_Private_APIUser_0.displayName);
-                    MelonCoroutines.Start(AvatarDumper(ScannedUser.Avatar, ScannedUser.player));
+                    ModConsole.Log("Dumping renderer components in player : " + ScannedUser.Player.field_Private_APIUser_0.displayName);
+                    MelonCoroutines.Start(AvatarDumper(ScannedUser.Avatar, ScannedUser.Player));
                 }
             }
         }
@@ -316,11 +316,11 @@ namespace AstroClient
             var apiuser = QuickMenuUtils.GetSelectedUser();
             if (apiuser != null)
             {
-                var ScannedUser = _AnalyzedPlayers.Where(x => x.player.GetAPIUser().id == apiuser.id).DefaultIfEmpty(null).First();
+                var ScannedUser = _AnalyzedPlayers.Where(x => x.Player.GetAPIUser().id == apiuser.id).DefaultIfEmpty(null).First();
                 if (ScannedUser != null)
                 {
-                    ModConsole.Log("Dumping renderer components in player : " + ScannedUser.player.field_Private_APIUser_0.displayName);
-                    MelonCoroutines.Start(AvatarDumper(ScannedUser.Avatar, ScannedUser.player));
+                    ModConsole.Log("Dumping renderer components in player : " + ScannedUser.Player.field_Private_APIUser_0.displayName);
+                    MelonCoroutines.Start(AvatarDumper(ScannedUser.Avatar, ScannedUser.Player));
                 }
             }
         }
@@ -373,12 +373,12 @@ namespace AstroClient
         public class AnalyzedAvatar
         {
             public Transform Avatar { get; set; }
-            public Player player { get; set; }
+            public Player Player { get; set; }
 
             public AnalyzedAvatar(Player player, Transform Avatar)
             {
                 this.Avatar = Avatar;
-                this.player = player;
+                this.Player = player;
             }
         }
     }

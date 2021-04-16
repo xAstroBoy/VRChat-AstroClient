@@ -121,7 +121,7 @@ namespace AstroClient
             return Player.prop_Player_0;
         }
 
-        public static bool isPlayerGrounded()
+        public static bool IsPlayerGrounded()
         {
             return GetLocalPlayerAPI().IsPlayerGrounded();
         }

@@ -18,7 +18,7 @@ namespace AstroClient.ConsoleUtils
         {
             get
             {
-                return Bools.isDebugMode;
+                return Bools.IsDebugMode;
             }
         }
 

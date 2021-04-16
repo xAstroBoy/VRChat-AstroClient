@@ -20,7 +20,7 @@ namespace AstroClient
                 Main.Event_OnUpdate += Internal_OnUpdate;
                 Main.Event_LateUpdate += Internal_OnLateUpdate;
                 Main.Event_VRChat_OnUiManagerInit += Internal_VRChat_OnUiManagerInit;
-                Main.Event_OnLevelLoaded += internal_OnLevelLoaded;
+                Main.Event_OnLevelLoaded += Internal_OnLevelLoaded;
 
                 // PATCHES
 
@@ -92,7 +92,7 @@ namespace AstroClient
             }
         }
 
-        private void internal_OnLevelLoaded(object sender, EventArgs e)
+        private void Internal_OnLevelLoaded(object sender, EventArgs e)
         {
             try
             {

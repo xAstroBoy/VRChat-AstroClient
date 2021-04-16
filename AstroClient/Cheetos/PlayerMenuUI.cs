@@ -10,7 +10,7 @@ namespace AstroClient
     {
         private static QMSingleButton playersButton;
 
-        public static Dictionary<string, QMSingleButton> playerButtons { get; } = new Dictionary<string, QMSingleButton>();
+        public static Dictionary<string, QMSingleButton> PlayerButtons { get; } = new Dictionary<string, QMSingleButton>();
 
         private static readonly Color InstanceMasterColor = Color.cyan; // Light Blue
 
@@ -119,7 +119,7 @@ namespace AstroClient
                 {
                     playerButton.setActive(false);
                 }
-                playerButtons.Add(player.UserID(), playerButton);
+                PlayerButtons.Add(player.UserID(), playerButton);
 
                 yPos += 0.5f;
                 if (yPos >= yPos_max)
@@ -132,11 +132,11 @@ namespace AstroClient
 
         private void ResetButtons()
         {
-            foreach(var keyValuePair in playerButtons)
+            foreach(var keyValuePair in PlayerButtons)
             {
                 keyValuePair.Value.DestroyMe();
             }
-            playerButtons.Clear();
+            PlayerButtons.Clear();
         }
 
         private void SelectPlayer(Player player)
@@ -156,7 +156,7 @@ namespace AstroClient
                 playersButton.setTextColor(UnityEngine.Color.red);
             }
 
-            foreach (var keyValuePair in playerButtons)
+            foreach (var keyValuePair in PlayerButtons)
             {
                 keyValuePair.Value.setActive(ConfigManager.UI.ShowPlayersList);
             }
@@ -169,7 +169,7 @@ namespace AstroClient
 
             playersButton.setActive(true);
 
-            foreach (var keyValuePair in playerButtons)
+            foreach (var keyValuePair in PlayerButtons)
             {
                 keyValuePair.Value.setActive(true);
             }
@@ -182,7 +182,7 @@ namespace AstroClient
 
             playersButton.setActive(false);
 
-            foreach (var keyValuePair in playerButtons)
+            foreach (var keyValuePair in PlayerButtons)
             {
                 keyValuePair.Value.setActive(false);
             }

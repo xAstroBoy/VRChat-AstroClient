@@ -70,13 +70,13 @@ namespace AstroClient.variables
             public GameObject TargetObj { get; set; }
             public int OriglightmapIndex { get; set; }
 
-            public bool isSavedObj { get; set; }
+            public bool IsSavedObj { get; set; }
 
             public RendererSaver(GameObject obj, int lightmapIndex, bool isSaved = true)
             {
                 TargetObj = obj;
                 OriglightmapIndex = lightmapIndex;
-                isSavedObj = isSaved;
+                IsSavedObj = isSaved;
             }
         }
 

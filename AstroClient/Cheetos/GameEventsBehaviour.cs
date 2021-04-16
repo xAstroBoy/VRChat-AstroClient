@@ -15,7 +15,7 @@ namespace AstroClient
         {
             try
             {
-                Main.Event_OnLevelLoaded += internal_OnLevelLoaded;
+                Main.Event_OnLevelLoaded += Internal_OnLevelLoaded;
                 NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
                 NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
                 SpawnEmojiRPCHook.Event_SpawnEmojiRPC += Internal_SpawnEmojiRPC;
@@ -28,7 +28,7 @@ namespace AstroClient
 
 
 
-        private void internal_OnLevelLoaded(object sender, EventArgs e)
+        private void Internal_OnLevelLoaded(object sender, EventArgs e)
         {
             try
             {

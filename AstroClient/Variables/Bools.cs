@@ -13,7 +13,7 @@ namespace AstroClient.variables
 #endif
 
 
-        internal static bool isDebugMode
+        internal static bool IsDebugMode
         {
             get
             {
@@ -37,7 +37,7 @@ namespace AstroClient.variables
             }
         }
 
-        internal static bool isCheetosMode
+        internal static bool IsCheetosMode
         {
             get
             {

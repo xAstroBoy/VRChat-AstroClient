@@ -42,7 +42,7 @@ namespace AstroClient.AntiCrash
         public override void OnApplicationStart()
         {
             // Just while it's being developed
-            if (Bools.isCheetosMode)
+            if (Bools.IsCheetosMode)
             {
                 Enabled = true;
             }
