@@ -39,6 +39,7 @@ namespace AstroClient
 
         private static void ProcessInput(object sender, string input)
         {
+            ModConsole.DebugLog(input);
             string[] cmds = input.Trim().Split(':');
 
             if (cmds[0].Equals("exit"))
@@ -78,7 +79,7 @@ namespace AstroClient
                 {
                     Bools.IsDeveloper = false;
                 }
-            } 
+            }
             else
             {
                 if (Bools.IsDeveloper)

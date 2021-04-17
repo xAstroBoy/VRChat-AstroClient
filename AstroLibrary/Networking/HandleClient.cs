@@ -203,11 +203,20 @@ namespace AstroLibrary.Networking
                 int remaining = len;
                 int totalRead = 0;
                 MemoryStream memoryStream = new MemoryStream();
+                int toRead = PacketSize;
                 while (remaining > 0)
                 {
+                    if (remaining > PacketSize)
+                    {
+                        toRead = PacketSize;
+                    } else
+                    {
+                        toRead = remaining;
+                    }
+                    //Console.WriteLine($"toRead / remaining / totalRead : {toRead} / {remaining} / {totalRead}");
                     try
                     {
-                        byte[] received = new byte[PacketSize];
+                        byte[] received = new byte[toRead];
                         int read = _clientStream.Read(received, 0, received.Length);
 
                         totalRead += read;
@@ -220,6 +229,7 @@ namespace AstroLibrary.Networking
                             a[i] = received[i];
                         }
 
+                        //Console.WriteLine($"read / received.Length {read} / {received.Length}");
                         memoryStream.Write(a, 0, a.Length);
                     }
                     catch
