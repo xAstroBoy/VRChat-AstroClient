@@ -2,6 +2,7 @@
 {
     using Discord.Commands;
     using System.Linq;
+    using System.Text;
     using System.Threading.Tasks;
 
     [Name("Admin")]
@@ -13,11 +14,33 @@
         [Summary("Test command")]
         public async Task Test()
         {
-            var id = Context.Message.Author.Id;
+            await ReplyAsync($"I can respond to you!");
+        }
 
-            if (AstroBot.DeveloperIDs.Contains(id))
+        [Command("List")]
+        [Summary("List command")]
+        public async Task List()
+        {
+            if (Server.Clients.Count > 0)
             {
-                await ReplyAsync($"I can respond to you!");
+                StringBuilder stringBuilder = new StringBuilder();
+
+                stringBuilder.Append($"Client Count: {Server.Clients.Count()} \r\n");
+                foreach (var client in Server.Clients)
+                {
+                    string prefix = "Client";
+
+                    if (client.IsDeveloper)
+                    {
+                        prefix = "Developer";
+                    }
+
+                    stringBuilder.Append($"{client.ClientID}: [{prefix}] {client.Name}, {client.UserID} \r\n");
+                }
+                await ReplyAsync(stringBuilder.ToString());
+            } else
+            {
+                await ReplyAsync("There are no clients currently connected");
             }
         }
     }
