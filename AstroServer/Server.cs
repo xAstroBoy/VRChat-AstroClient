@@ -1,30 +1,19 @@
 ﻿using AstroLibrary.Networking;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 
 namespace AstroServer
 {
-    [Serializable]
-    internal class UserData // #TODO Make this work
-    {
-        public string Name = string.Empty;
-
-        public string Key = string.Empty;
-
-        public string Discord = string.Empty;
-    }
-
     internal class Server
     {
         private static readonly int _maxConnections = 1000;
 
-        internal static List<Client> Clients { get; private set; }
+        public static List<Client> Clients { get; private set; }
 
-        internal Server()
+        public Server()
         {
             Console.WriteLine("Starting Server");
             StartServer();
@@ -37,8 +26,8 @@ namespace AstroServer
             Console.WriteLine("Client Server Started..");
 
             // Key count
-            Console.WriteLine($"There are {GetDevKeyCount()} dev keys stored.");
-            Console.WriteLine($"There are {GetKeyCount()} valid keys stored.");
+            Console.WriteLine($"There are {KeyManager.GetDevKeyCount()} dev keys stored.");
+            Console.WriteLine($"There are {KeyManager.GetKeyCount()} valid keys stored.");
 
             Clients = new List<Client>();
             while (true)
@@ -57,47 +46,6 @@ namespace AstroServer
             }
         }
 
-        private static int GetDevKeyCount()
-        {
-            return File.ReadAllLines("/root/devs.txt").Length;
-        }
-
-        private static int GetKeyCount()
-        {
-            return File.ReadAllLines("/root/keys.txt").Length;
-        }
-
-        private static bool IsDevKey(string authKey)
-        {
-            foreach (var key in File.ReadLines("/root/devs.txt"))
-            {
-                if (key.Equals(authKey))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private static bool IsValidKey(string authKey)
-        {
-            foreach (var key in File.ReadLines("/root/devs.txt"))
-            {
-                if (key.Equals(authKey))
-                {
-                    return true;
-                }
-            }
-            foreach (var key in File.ReadLines("/root/keys.txt"))
-            {
-                if (key.Equals(authKey))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         private static void ProcessInput(object sender, string input)
         {
             Client client = sender as Client;
@@ -107,14 +55,14 @@ namespace AstroServer
             {
                 string key = cmds[1];
                 Console.WriteLine("Trying to auth with: " + key);
-                if (IsValidKey(key))
+                if (KeyManager.IsValidKey(key))
                 {
                     client.Send("authed:true");
                     client.IsAuthed = true;
                     client.Key = key;
                     Console.WriteLine("Successfully Authed");
 
-                    if (IsDevKey(key))
+                    if (KeyManager.IsDevKey(key))
                     {
                         client.IsDeveloper = true;
                         //SendToAllDevelopers(sender, $"notify-dev:AstroClient developer connected: {client.Name}");
