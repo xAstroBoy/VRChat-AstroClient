@@ -96,6 +96,7 @@
     <Compile Include="Cheetos\AstroInput.cs" />
     <Compile Include="Cheetos\CheetoMenu.cs" />
     <Compile Include="Cheetos\CheetosHelpers.cs" />
+    <Compile Include="Cheetos\CheetosPrivateStuff.cs" />
     <Compile Include="Cheetos\CheetosUI.cs" />
     <Compile Include="Cheetos\Config\Config.cs" />
     <Compile Include="Cheetos\Config\ConfigManager.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Lights\LightControl.cs" />
     <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
+    <Compile Include="Networking\NetworkingManager.cs" />
     <Compile Include="Patches\Patching.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />

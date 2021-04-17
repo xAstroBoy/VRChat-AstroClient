@@ -1,7 +1,6 @@
 ﻿using AstroClient.Cheetos;
 using AstroClient.ConsoleUtils;
 using AstroLibrary.Networking;
-using DayClientML2.Utility.Extensions;
 using System;
 using System.Net.Sockets;
 using System.Threading;
@@ -15,7 +14,7 @@ namespace AstroClient
 
         public static void Initialize()
         {
-            ModConsole.DebugLog("Client Conneting..");
+            //ModConsole.DebugLog("Client Connecting..");
             Connect();
         }
 
@@ -73,6 +72,8 @@ namespace AstroClient
 
         private static void OnConnected(object sender, EventArgs e)
         {
+            NetworkingManager.SendClientInfo();
+            ModConsole.DebugLog("Client Connected.");
             return;
         }
 
