@@ -28,7 +28,7 @@ namespace AstroClient
         private static void SetPingTimer()
         {
             // Create a timer with a two second interval.
-            pingTimer = new Timer(2000);
+            pingTimer = new Timer(60000);
             // Hook up the Elapsed event for the timer. 
             pingTimer.Elapsed += OnPingEvent;
             pingTimer.AutoReset = true;
@@ -102,6 +102,9 @@ namespace AstroClient
             else if (cmds[0].Equals("ping"))
             {
                 Client.Send("pong");
+            }
+            else if (cmds[0].Equals("pong"))
+            {
             }
             else
             {
