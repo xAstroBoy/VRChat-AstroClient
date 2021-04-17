@@ -188,6 +188,8 @@ namespace AstroServer
         {
             Client client = sender as Client;
 
+            Console.WriteLine($"Connecting from {client.ClientSocket.Client.RemoteEndPoint}");
+
             CheckExistingClientsWithKey(client);
 
             if (Clients.Count < _maxConnections)

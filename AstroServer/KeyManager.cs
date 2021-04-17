@@ -4,6 +4,15 @@ namespace AstroServer
 {
     internal static class KeyManager
     {
+        /// <summary>
+        /// Returns the auth token for the DiscordBot
+        /// </summary>
+        /// <returns></returns>
+        public static string GetBotToken()
+        {
+            return File.ReadAllText("/root/discordtoken.txt");
+        }
+
         public static int GetDevKeyCount()
         {
             return File.ReadAllLines("/root/devs.txt").Length;
