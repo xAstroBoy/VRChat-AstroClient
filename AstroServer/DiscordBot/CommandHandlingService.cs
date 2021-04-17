@@ -24,13 +24,31 @@
             commands.CommandExecuted += CommandExecutedAsync;
             // Hook MessageReceived so we can process each message to see
             // if it qualifies as a command.
-            //discord.MessageReceived += MessageReceivedAsync;
+            discord.MessageReceived += MessageReceivedAsync;
         }
 
         public async Task InitializeAsync()
         {
             // Register modules that are public and inherit ModuleBase<T>.
             await commands.AddModulesAsync(Assembly.GetEntryAssembly(), services);
+        }
+
+        public async Task MessageReceivedAsync(SocketMessage _rawMessage)
+        {
+            if (_rawMessage is not SocketUserMessage message) return;
+            if (message.Source != MessageSource.User) return;
+
+            SocketGuild guild = _rawMessage.Channel.GetGuild();
+            SocketUser me = AstroBot.Client.CurrentUser;
+            int argPos = 0;
+
+            //if (message.HasMentionPrefix(me, ref argPos) || message.HasCharPrefix(guild.GetPrefix(), ref argPos))
+            if (message.HasMentionPrefix(me, ref argPos))
+            {
+                SocketCommandContext context = new(discord, message);
+                await commands.ExecuteAsync(context, argPos, services);
+                Console.WriteLine($"Command: '{context.Message}' from '{context.User.Username}#{context.User.Discriminator}' in '{context.Guild.Name}'");
+            }
         }
 
         public static async Task CommandExecutedAsync(Optional<CommandInfo> _command, ICommandContext _context, IResult _result)

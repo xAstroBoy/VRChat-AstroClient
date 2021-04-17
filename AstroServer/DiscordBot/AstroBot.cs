@@ -1,5 +1,6 @@
 ﻿using Discord;
 using Discord.WebSocket;
+using System;
 using System.Threading.Tasks;
 
 namespace AstroServer.DiscordBot
@@ -21,6 +22,7 @@ namespace AstroServer.DiscordBot
             Client = client;
 
             Client.Connected += OnConntected;
+            Client.Ready += OnReady;
             //Client.MessageReceived += OnMessage;
         }
 
@@ -28,6 +30,12 @@ namespace AstroServer.DiscordBot
         {
             await Client.LoginAsync(TokenType.Bot, AuthToken);
             await Client.StartAsync();
+        }
+
+        private Task OnReady()
+        {
+            Console.WriteLine("DiscordBot is ready.");
+            return Task.CompletedTask;
         }
 
         private Task OnConntected()
