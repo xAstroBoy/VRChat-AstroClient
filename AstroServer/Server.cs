@@ -180,10 +180,13 @@ namespace AstroServer
             {
                 if (client.Key.Equals(other.Key) && client.ClientID != other.ClientID)
                 {
+                    AstroBot.SendLogMessageAsync($"Possible key sharing from: "
+                        + $"Booted: {other.Name}, {other.UserID}, {other.ClientSocket.Client.RemoteEndPoint}. \r\n " 
+                        + $"Logged in: {client.Name}, {client.UserID}, {client.ClientSocket.Client.RemoteEndPoint}. \r\n " 
+                        + "\r\n\r\n" +
+                        $"```{client.Key}```");
                     other.Send("exit:key in use somewhere else");
                     other.Disconnect();
-                    AstroBot.SendLogMessageAsync($"Possible key sharing from: {client.Name}, {client.UserID}, {client.ClientSocket.Client.RemoteEndPoint}. \r\n\r\n" +
-                        $"{client.Key}");
                 }
             }
         }
