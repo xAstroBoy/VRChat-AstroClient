@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Timers;
 
 namespace AstroServer
 {
@@ -12,6 +13,9 @@ namespace AstroServer
         private static readonly int _maxConnections = 1000;
 
         public static List<Client> Clients { get; private set; }
+
+        private static Timer pingTimer;
+
 
         public Server()
         {
@@ -30,6 +34,9 @@ namespace AstroServer
             Console.WriteLine($"There are {KeyManager.GetKeyCount()} valid keys stored.");
 
             Clients = new List<Client>();
+
+            SetPingTimer();
+
             while (true)
             {
                 TcpClient clientSocket = serverSocket.AcceptTcpClient();
@@ -44,6 +51,21 @@ namespace AstroServer
 
                 client.StartClient(clientSocket, GetNewClientID());
             }
+        }
+
+        private static void SetPingTimer()
+        {
+            // Create a timer with a two second interval.
+            pingTimer = new System.Timers.Timer(2000);
+            // Hook up the Elapsed event for the timer. 
+            pingTimer.Elapsed += OnPingEvent;
+            pingTimer.AutoReset = true;
+            pingTimer.Enabled = true;
+        }
+
+        private static void OnPingEvent(Object source, ElapsedEventArgs e)
+        {
+            SendAll("ping");
         }
 
         private static void ProcessInput(object sender, string input)
@@ -89,6 +111,10 @@ namespace AstroServer
             else if (cmds[0].Equals("userid"))
             {
                 client.UserID = cmds[1];
+            }
+            else if (cmds[0].Equals("ping"))
+            {
+                client.Send("pong");
             }
             else
             {

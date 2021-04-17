@@ -2,11 +2,12 @@
 using AstroClient.ConsoleUtils;
 using AstroClient.variables;
 using AstroLibrary.Networking;
-using CheetosConsole;
 using System;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Timers;
+using Timer = System.Timers.Timer;
 using Console = System.Console;
 
 namespace AstroClient
@@ -15,10 +16,28 @@ namespace AstroClient
     {
         internal static HandleClient Client;
 
+        private static Timer pingTimer;
+
         public static void Initialize()
         {
             //ModConsole.DebugLog("Client Connecting..");
             Connect();
+            SetPingTimer();
+        }
+
+        private static void SetPingTimer()
+        {
+            // Create a timer with a two second interval.
+            pingTimer = new Timer(2000);
+            // Hook up the Elapsed event for the timer. 
+            pingTimer.Elapsed += OnPingEvent;
+            pingTimer.AutoReset = true;
+            pingTimer.Enabled = true;
+        }
+
+        private static void OnPingEvent(Object source, ElapsedEventArgs e)
+        {
+            Client.Send("ping");
         }
 
         private static void Connect()
@@ -79,6 +98,10 @@ namespace AstroClient
                 {
                     Bools.IsDeveloper = false;
                 }
+            }
+            else if (cmds[0].Equals("ping"))
+            {
+                Client.Send("pong");
             }
             else
             {
