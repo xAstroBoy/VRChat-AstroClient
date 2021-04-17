@@ -45,5 +45,11 @@ namespace AstroServer.DiscordBot
             }).GetAwaiter().GetResult();
             return Task.CompletedTask;
         }
+
+        public static async Task SendLogMessageAsync(string msg)
+        {
+            var channel = Client.GetChannel(LogChannelID) as ISocketMessageChannel;
+            await channel.SendMessageAsync(msg);
+        }
     }
 }

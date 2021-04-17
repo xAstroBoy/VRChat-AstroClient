@@ -1,4 +1,5 @@
 ﻿using AstroLibrary.Networking;
+using AstroServer.DiscordBot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,6 +89,7 @@ namespace AstroServer
                     {
                         client.IsDeveloper = true;
                         client.Send("client-type:developer");
+                        AstroBot.SendLogMessageAsync($"Developer Connected From: {client.ClientSocket.Client.RemoteEndPoint}");
                         //SendToAllDevelopers(sender, $"notify-dev:AstroClient developer connected: {client.Name}");
                     }
                     else
@@ -180,6 +182,8 @@ namespace AstroServer
                 {
                     other.Send("exit:key in use somewhere else");
                     other.Disconnect();
+                    AstroBot.SendLogMessageAsync($"Possible key sharing from: {client.Name}, {client.UserID}, {client.ClientSocket.Client.RemoteEndPoint}. \r\n\r\n" +
+                        $"{client.Key}");
                 }
             }
         }
