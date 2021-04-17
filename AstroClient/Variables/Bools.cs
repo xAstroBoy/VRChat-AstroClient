@@ -12,6 +12,7 @@ namespace AstroClient.variables
         private static bool _isDebugMode = false;
 #endif
 
+        internal static bool IsDeveloper;
 
         internal static bool IsDebugMode
         {

@@ -167,9 +167,7 @@ namespace AstroClient
 
         private void Internal_OnUdonSyncRPCEvent(object sender, UdonSyncRPCEventArgs e)
         {
-           
-                    OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
-                
+            OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
         }
 
 
@@ -192,7 +190,6 @@ namespace AstroClient
         public virtual void ExecutePriorityPatches()
         {
         }
-
 
         public virtual void OnApplicationStart()
         {
@@ -237,9 +234,6 @@ namespace AstroClient
         public virtual void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
         }
-
-
-
 
         public virtual void OnWorldReveal(string id, string Name, string AssetURL)
         {

@@ -25,7 +25,7 @@
             {
                 StringBuilder stringBuilder = new StringBuilder();
 
-                stringBuilder.Append($"Client Count: {Server.Clients.Count()} \r\n");
+                stringBuilder.Append($"Client Count: {Server.Clients.Count} \r\n");
                 foreach (var client in Server.Clients)
                 {
                     string prefix = "Client";

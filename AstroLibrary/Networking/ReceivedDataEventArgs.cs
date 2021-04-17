@@ -11,7 +11,6 @@ namespace AstroLibrary.Networking
         public ReceivedDataEventArgs(int clientID, byte[] data)
         {
             Data = data;
-            Console.WriteLine($"ReceivedDataEventArgs: data.Length = {data.Length}");
             ClientID = clientID;
         }
     }

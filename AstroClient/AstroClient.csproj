@@ -94,6 +94,7 @@
     <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemlySpy_Extensions.cs" />
     <Compile Include="Cheetos\AstroInput.cs" />
+    <Compile Include="Cheetos\AvatarHider.cs" />
     <Compile Include="Cheetos\CheetoMenu.cs" />
     <Compile Include="Cheetos\CheetosHelpers.cs" />
     <Compile Include="Cheetos\CheetosPrivateStuff.cs" />

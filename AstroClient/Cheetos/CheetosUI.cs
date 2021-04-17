@@ -22,16 +22,13 @@ namespace AstroClient
         
         public override void VRChat_OnUiManagerInit()
         {
-            MainButton = new QMNestedButton("ShortcutMenu", 5, 3, "Cheeto's Menu", "Cheeto's secret WIP features", null, null, null, null, true);
+            MainButton = new QMNestedButton("ShortcutMenu", 5, 3, "Admin Menu", "AstroClient's Admin Menu", null, null, null, null, true);
             MainScroller = new QMScrollMenu(MainButton);
             RestartButton = new QMSingleButton(MainButton, 0, 0, "Close Game", () => { Environment.Exit(0); }, "Close the game");
 
-            if (!Bools.IsCheetosMode)
+            if (!Bools.IsDeveloper)
             {
                 MainButton.getMainButton().setActive(false);
-            } else
-            {
-                //QMTabMenu cheetosTab = new QMTabMenu(0, "Cheeto's Menu", null, null, null, null);
             }
         }
 

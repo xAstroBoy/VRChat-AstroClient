@@ -24,12 +24,13 @@ namespace AstroClient
             }
         }
 
-        public override void VRChat_OnUiManagerInit()
+        public override void OnWorldReveal(string id, string name, string asseturl)
         {
             var self = LocalPlayerUtils.GetSelfPlayer();
             Name = self.DisplayName();
             UserID = self.UserID();
             Initialized = true;
+            SendClientInfo();
         }
     }
 }
