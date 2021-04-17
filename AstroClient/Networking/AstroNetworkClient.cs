@@ -73,7 +73,7 @@ namespace AstroClient
                 if (cmds[1].Equals("developer"))
                 {
                     Bools.IsDeveloper = true;
-                    CheetosConsole.Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), "Developer Mode", System.Drawing.Color.LightYellow, System.Drawing.Color.DarkOrange);
+                    ModConsole.Log("Developer Mode!");
                 }
                 else
                 {
