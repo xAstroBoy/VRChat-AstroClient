@@ -37,7 +37,7 @@ namespace AstroLoader
 
         public static void Initialize()
         {
-            Console.WriteLine("Loader Conneting..");
+            Console.WriteLine("Loader Connecting..");
             Connect();
         }
 
