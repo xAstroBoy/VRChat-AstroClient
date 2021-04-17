@@ -65,11 +65,13 @@ namespace AstroServer
                     if (KeyManager.IsDevKey(key))
                     {
                         client.IsDeveloper = true;
+                        client.Send("client-type:developer");
                         //SendToAllDevelopers(sender, $"notify-dev:AstroClient developer connected: {client.Name}");
                     }
                     else
                     {
                         //SendToAllDevelopers(sender, $"notify-dev:AstroClient connected: {client.Name}");
+                        client.Send("client-type:client");
                     }
                 }
                 else

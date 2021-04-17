@@ -1,10 +1,13 @@
 ﻿using AstroClient.Cheetos;
 using AstroClient.ConsoleUtils;
+using AstroClient.variables;
 using AstroLibrary.Networking;
+using CheetosConsole;
 using System;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
+using Console = System.Console;
 
 namespace AstroClient
 {
@@ -64,9 +67,24 @@ namespace AstroClient
             {
                 CheetosHelpers.SendHudNotification(cmds[1]);
             }
+            else if (cmds[0].Equals("client-type"))
+            {
+                if (cmds[1].Equals("developer"))
+                {
+                    Bools.IsDeveloper = true;
+                    CheetosConsole.Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), "Developer Mode", System.Drawing.Color.LightYellow, System.Drawing.Color.DarkOrange);
+                }
+                else
+                {
+                    Bools.IsDeveloper = false;
+                }
+            } 
             else
             {
-                Console.WriteLine($"Unknown packet: {input}");
+                if (Bools.IsDeveloper)
+                {
+                    ModConsole.DebugLog($"Unknown packet: {input}");
+                }
             }
         }
 

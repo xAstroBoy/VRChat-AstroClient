@@ -1,4 +1,5 @@
 ﻿using AstroClient.ConsoleUtils;
+using AstroClient.variables;
 using DayClientML2.Utility.Extensions;
 
 namespace AstroClient
@@ -18,7 +19,10 @@ namespace AstroClient
         {
             if (Initialized)
             {
-                ModConsole.DebugLog("Sending Client Information");
+                if (Bools.IsDeveloper)
+                {
+                    ModConsole.DebugLog($"Sending Client Information: {Name}, {UserID}");
+                }
                 AstroNetworkClient.Client.Send($"name:{Name}");
                 AstroNetworkClient.Client.Send($"userid:{UserID}");
             }
