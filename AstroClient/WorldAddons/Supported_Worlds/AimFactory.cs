@@ -139,6 +139,8 @@ namespace AstroClient
             }
         }
 
+
+        // WORKS but the map doesn't count the objects, there must be something that triggers the point count!
         public static IEnumerator PopTarget()
         {
             //float cooldown = 0.f;
