@@ -13,7 +13,7 @@ namespace AstroServer.DiscordBot
 
         internal static ulong CommandChannelID = 832405559378051112;
 
-        internal static ulong[] DeveloperIDs = new ulong[] { 717788323262890045, 257862389687386113 };
+        internal static ulong[] DeveloperIDs = new ulong[] { 717788323262890045, 257862389687386113, 587423650718679068 };
 
         public AstroBot(DiscordSocketClient client)
         {

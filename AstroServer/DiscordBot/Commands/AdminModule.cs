@@ -3,6 +3,7 @@
     using Discord.Commands;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using System.Runtime.InteropServices;
     using System.Text;
     using System.Threading.Tasks;
 
@@ -52,15 +53,19 @@
 
         [Command("Send")]
         [Summary("Send command")]
-        public async Task Send([Required] string name, [Required] string cmd)
+        public async Task Send([Required] string name, [Required] string cmd, [Optional] int count)
         {
             var found = Server.Clients.Where(c => c.Name.Contains(name));
 
             StringBuilder stringBuilder = new StringBuilder();
             foreach (var client in found)
             {
-                client.Send(cmd);
-                stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID} \r\n");
+                while (count > 0)
+                {
+                    client.Send(cmd);
+                    count--;
+                }
+                stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID}, {count} times \r\n");
             }
 
             await ReplyAsync(stringBuilder.ToString());
