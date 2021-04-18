@@ -126,11 +126,11 @@ namespace AstroClient
         {
             Task.Run(() =>
             {
-                while (!Client.IsConnected)
+                for (; ; )
                 {
-                    ModConsole.DebugError("Lost connection to server, retrying in 1 second...");
-                    Thread.Sleep(1000);
-                    Connect();
+                    ModConsole.DebugError("Lost connection to server, retrying in 10 seconds...");
+                    Thread.Sleep(10000);
+                    try { Connect(); break; } catch { }
                 }
             });
         }
