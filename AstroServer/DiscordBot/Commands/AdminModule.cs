@@ -18,9 +18,25 @@
             await ReplyAsync($"I can respond to you!");
         }
 
+        [Command("Notify")]
+        [Summary("Notify command")]
+        public async Task Notify([Required] string name, [Required] string msg)
+        {
+            var found = Server.Clients.Where(c => c.Name.Contains(name));
+
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var client in found)
+            {
+                client.Send($"notify-dev:{msg}");
+                stringBuilder.Append($"Notified: {client.Name}, {client.UserID} \r\n");
+            }
+
+            await ReplyAsync(stringBuilder.ToString());
+        }
+
         [Command("SendAll")]
         [Summary("SendAll command")]
-        public async Task Send([Required] string cmd)
+        public async Task SendAll([Required] string cmd)
         {
             var found = Server.Clients;
 
