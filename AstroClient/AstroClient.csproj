@@ -204,6 +204,7 @@
     <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Lights\LightControl.cs" />
+    <Compile Include="Mora\MouseTp.cs" />
     <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
     <Compile Include="Networking\NetworkingManager.cs" />
@@ -259,11 +260,13 @@
     <Compile Include="Variables\WorldIds.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\AimFactory.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\BClubWorld.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\Club808.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\FBTHeaven.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\FreezeTag.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\AmongUSCheats.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\Murder2Cheats.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\Murder4Cheats.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\lpd.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\Meroom.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\SmashContest.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\SnoozeScaryMaze5.cs" />
