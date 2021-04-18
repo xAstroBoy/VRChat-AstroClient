@@ -60,14 +60,20 @@
             StringBuilder stringBuilder = new StringBuilder();
             foreach (var client in found)
             {
-                while (count > 0)
+                if (count > 0)
+                {
+                    while (count > 0)
+                    {
+                        client.Send(cmd);
+                        count--;
+                    }
+                    stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID}, {count} times \r\n");
+                } else
                 {
                     client.Send(cmd);
-                    count--;
+                    stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID} \r\n");
                 }
-                stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID}, {count} times \r\n");
             }
-
             await ReplyAsync(stringBuilder.ToString());
         }
 
