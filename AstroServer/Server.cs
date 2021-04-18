@@ -1,4 +1,5 @@
 ﻿using AstroLibrary.Networking;
+using AstroServer.DiscordBot;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -88,6 +89,7 @@ namespace AstroServer
                     {
                         client.IsDeveloper = true;
                         client.Send("client-type:developer");
+                        AstroBot.SendLogMessageAsync($"Developer Connected From: {client.ClientSocket.Client.RemoteEndPoint}");
                         //SendToAllDevelopers(sender, $"notify-dev:AstroClient developer connected: {client.Name}");
                     }
                     else
@@ -178,6 +180,11 @@ namespace AstroServer
             {
                 if (client.Key.Equals(other.Key) && client.ClientID != other.ClientID)
                 {
+                    AstroBot.SendLogMessageAsync($"Possible key sharing from: "
+                        + $"Booted: {other.Name}, {other.UserID}, {other.ClientSocket.Client.RemoteEndPoint}. \r\n " 
+                        + $"Logged in: {client.Name}, {client.UserID}, {client.ClientSocket.Client.RemoteEndPoint}. \r\n " 
+                        + "\r\n\r\n" +
+                        $"```{client.Key}```");
                     other.Send("exit:key in use somewhere else");
                     other.Disconnect();
                 }
@@ -187,6 +194,8 @@ namespace AstroServer
         private static void Connected(object sender, EventArgs e)
         {
             Client client = sender as Client;
+
+            Console.WriteLine($"Connecting from {client.ClientSocket.Client.RemoteEndPoint}");
 
             CheckExistingClientsWithKey(client);
 

@@ -9,8 +9,6 @@ namespace AstroServer.DiscordBot
     {
         public static DiscordSocketClient Client { get; set; }
 
-        internal static string AuthToken = "ODMyNDAzODMxNjY0ODAzODcw.YHjSeg.32LVhPPwLw-AbJBkB_K9LG_NmHs";
-
         internal static ulong LogChannelID = 832405505774190682;
 
         internal static ulong CommandChannelID = 832405559378051112;
@@ -28,7 +26,7 @@ namespace AstroServer.DiscordBot
 
         public async Task Start()
         {
-            await Client.LoginAsync(TokenType.Bot, AuthToken);
+            await Client.LoginAsync(TokenType.Bot, KeyManager.GetBotToken());
             await Client.StartAsync();
         }
 
@@ -46,6 +44,12 @@ namespace AstroServer.DiscordBot
                 Type = ActivityType.Watching,
             }).GetAwaiter().GetResult();
             return Task.CompletedTask;
+        }
+
+        public static async Task SendLogMessageAsync(string msg)
+        {
+            var channel = Client.GetChannel(LogChannelID) as ISocketMessageChannel;
+            await channel.SendMessageAsync(msg);
         }
     }
 }

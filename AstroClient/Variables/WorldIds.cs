@@ -31,5 +31,7 @@
         public static readonly string BClub = "wrld_1b3b3259-0a1f-4311-984e-826abab6f481";
 
         public static readonly string AimFactory = "wrld_97a21a21-9e5e-4152-b1c6-bc899a041d3f";
+
+        public static readonly string LPD = "wrld_0d3bc22f-eb0c-48f6-9d22-1b7ef764a60a";
     }
 }
