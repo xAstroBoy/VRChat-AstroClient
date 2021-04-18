@@ -53,26 +53,15 @@
 
         [Command("Send")]
         [Summary("Send command")]
-        public async Task Send([Required] string name, [Required] string cmd, [Optional] int count)
+        public async Task Send([Required] string name, [Required] string cmd)
         {
             var found = Server.Clients.Where(c => c.Name.Contains(name));
 
             StringBuilder stringBuilder = new StringBuilder();
             foreach (var client in found)
             {
-                if (count > 0)
-                {
-                    while (count > 0)
-                    {
-                        client.Send(cmd);
-                        count--;
-                    }
-                    stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID}, {count} times \r\n");
-                } else
-                {
-                    client.Send(cmd);
-                    stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID} \r\n");
-                }
+                client.Send(cmd);
+                stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID} \r\n");
             }
             await ReplyAsync(stringBuilder.ToString());
         }
