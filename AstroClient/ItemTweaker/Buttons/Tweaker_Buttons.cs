@@ -11,6 +11,8 @@ using System.Linq;
 using UnityEngine;
 using VRC.SDK3.Components;
 using VRC.SDKBase;
+using VRC.Udon;
+using VRC.Udon.Common.Interfaces;
 using Color = UnityEngine.Color;
 
 namespace AstroClient.AstroUtils.ItemTweaker
@@ -74,6 +76,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             WorldObjectSeletionQMScroll(menu, 3, 2.5f, true);
             InternalTriggerQMScroll(menu, 4, 2, true);
             VRC_InteractableSubMenu(menu, 4, 2.5f, true);
+            Internal_UdonEvents(menu, 4, 3, true);
             CurrentObjectCoordsBtn = new QMSingleButton(menu, 5, -1, "", null, "Shows Object Coords", null, null, false);
             CurrentObjectCoordsBtn.getGameObject().GetComponent<UnityEngine.UI.Image>().enabled = false;
             CurrentObjectCoordsBtn.SetResizeTextForBestFit(true);
@@ -369,6 +372,36 @@ namespace AstroClient.AstroUtils.ItemTweaker
             return ContainedTriggers;
         }
 
+
+        public static List<UdonBehaviour> GetObjectUdonVRC(GameObject obj)
+        {
+            if (obj != null)
+            {
+                try
+                {
+                    var Internal_UdonBehaviour = new List<UdonBehaviour>();
+                    var list1 = obj.GetComponentsInChildren<UdonBehaviour>(true);
+                    if (list1.Count() != 0)
+                    {
+                        foreach (var item in list1)
+                        {
+                            if (!Internal_UdonBehaviour.Contains(item))
+                            {
+                                Internal_UdonBehaviour.Add(item);
+                            }
+                        }
+                        return Internal_UdonBehaviour;
+                    }
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
+            }
+            return null;
+        }
+
+
         public static List<GameObject> GeObjectVRC_Interactables(GameObject obj)
         {
             if (obj != null)
@@ -421,6 +454,50 @@ namespace AstroClient.AstroUtils.ItemTweaker
             }
             return null;
         }
+
+
+        public static void Internal_UdonEvents(QMTabMenu main, float x, float y, bool btnHalf)
+        {
+            var Menu = new QMNestedButton(main, x, y, "Internal Udon Events ", "Interact with Internal Udon Events", null, null, null, null, btnHalf);
+            var whytfisthishere = new QMNestedButton(Menu, -5f, -5f, "", "");
+            whytfisthishere.getMainButton().setActive(false);
+            var MainScroll = new QMScrollMenu(whytfisthishere);
+            var subscroll = new QMScrollMenu(Menu);
+            new QMSingleButton(Menu, 0, -1.5f, "Refresh", delegate
+            {
+                MainScroll.Refresh();
+                subscroll.Refresh();
+            }, "", null, null, true);
+            subscroll.SetAction(delegate
+            {
+            foreach (var action in GetObjectUdonVRC(Tweaker_Object.GetGameObjectToEdit()))
+                {
+                    subscroll.Add(new QMSingleButton(Menu, 0f, 0f, action.gameObject.name, delegate
+                    {
+                        MainScroll.SetAction(delegate
+                        {
+                            foreach (var subaction in action._eventTable)
+                            {
+                                MainScroll.Add(new QMSingleButton(MainScroll.BaseMenu, 0f, 0f, subaction.Key, delegate
+                                {
+                                    if (subaction.key.StartsWith("_"))
+                                    {
+                                        action.SendCustomEvent(subaction.Key);
+                                    }
+                                    else
+                                    {
+                                        action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
+                                    }
+                                }, (action.gameObject)?.ToString() + " Run " + subaction.Key));
+                            }
+                        });
+                        MainScroll.BaseMenu.getMainButton().getGameObject().GetComponent<UnityEngine.UI.Button>()
+                            .onClick.Invoke();
+                    }, action.interactText));
+                }
+            });
+        }
+
 
         public static void VRC_InteractableSubMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {

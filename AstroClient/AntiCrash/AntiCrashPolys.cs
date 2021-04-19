@@ -46,7 +46,8 @@ namespace AstroClient.AntiCrash
 			return num;
 
 
+		}
 #endif
-		}
-		}
-	}
+
+    }
+}
