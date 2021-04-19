@@ -76,7 +76,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             WorldObjectSeletionQMScroll(menu, 3, 2.5f, true);
             InternalTriggerQMScroll(menu, 4, 2, true);
             VRC_InteractableSubMenu(menu, 4, 2.5f, true);
-            Internal_UdonEvents(menu, 4, 3, true);
+            Internal_UdonEvents(menu, 5, 2, true);
             CurrentObjectCoordsBtn = new QMSingleButton(menu, 5, -1, "", null, "Shows Object Coords", null, null, false);
             CurrentObjectCoordsBtn.getGameObject().GetComponent<UnityEngine.UI.Image>().enabled = false;
             CurrentObjectCoordsBtn.SetResizeTextForBestFit(true);
