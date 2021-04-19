@@ -60,6 +60,9 @@
     <Compile Include="..\AstroLibrary\Networking\ReceivedTextEventArgs.cs">
       <Link>Networking\ReceivedTextEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\AstroLibrary\Serializable\AvatarData.cs">
+      <Link>Networking\Serializable\AvatarData.cs</Link>
+    </Compile>
     <Compile Include="AntiCrash\AntiCrash.cs" />
     <Compile Include="AntiCrash\AntiCrashScanner.cs" />
     <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />

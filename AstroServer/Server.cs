@@ -1,5 +1,7 @@
 ﻿using AstroLibrary.Networking;
+using AstroLibrary.Serializable;
 using AstroServer.DiscordBot;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -120,6 +122,11 @@ namespace AstroServer
             }
             else if (cmds[0].Equals("pong"))
             {
+            }
+            else if (cmds[0].Equals("avatar-log"))
+            {
+                AvatarData data = JsonConvert.DeserializeObject<AvatarData>(cmds[1]);
+                AstroBot.SendLogMessageAsync($"Received avatar data for {data.ID}");
             }
             else
             {

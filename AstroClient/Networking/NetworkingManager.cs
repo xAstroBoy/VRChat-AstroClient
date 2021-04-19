@@ -1,6 +1,8 @@
 ﻿using AstroClient.ConsoleUtils;
 using AstroClient.variables;
+using AstroLibrary.Serializable;
 using DayClientML2.Utility.Extensions;
+using Newtonsoft.Json;
 
 namespace AstroClient
 {
@@ -14,6 +16,12 @@ namespace AstroClient
         public static string Name = string.Empty;
 
         public static string UserID = string.Empty;
+
+        public static void SendAvatarLog(AvatarData data)
+        {
+            string json = JsonConvert.SerializeObject(data);
+            AstroNetworkClient.Client.Send($"avatar-log:{json}");
+        }
 
         public static void SendClientInfo()
         {
