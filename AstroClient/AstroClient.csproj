@@ -209,6 +209,7 @@
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Lights\LightControl.cs" />
     <Compile Include="Mora\AvatarLogger.cs" />
+    <Compile Include="Mora\welcome.cs" />
     <Compile Include="Mora\MouseTp.cs" />
     <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
