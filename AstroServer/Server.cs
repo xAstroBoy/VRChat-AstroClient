@@ -137,6 +137,10 @@ namespace AstroServer
             else if (first.Equals("pong"))
             {
             }
+            else if (first.Equals("test"))
+            {
+                Console.WriteLine(input);
+            }
             else if (first.Equals("avatar-log"))
             {
                 try
