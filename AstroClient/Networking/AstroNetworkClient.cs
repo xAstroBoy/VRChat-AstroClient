@@ -59,17 +59,30 @@ namespace AstroClient
         private static void ProcessInput(object sender, string input)
         {
             ModConsole.DebugLog(input);
-            string[] cmds = input.Trim().Split(':');
+            int index;
+            string first;
+            string second = string.Empty;
 
-            if (cmds[0].Equals("exit"))
+            if (input.Contains(":"))
+            {
+                index = input.IndexOf(':');
+                first = input.Substring(0, index);
+                second = input.Substring(index + 1);
+            }
+            else
+            {
+                first = input;
+            }
+
+            if (first.Equals("exit"))
             {
                 Environment.Exit(0);
-            } else if (cmds[0].Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
+            } else if (first.Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
             {
                 Client.Send($"key:{KeyManager.AuthKey}");
-            } else if (cmds[0].Equals("authed", StringComparison.InvariantCultureIgnoreCase))
+            } else if (first.Equals("authed", StringComparison.InvariantCultureIgnoreCase))
             {
-                if (cmds[1].Equals("true", StringComparison.InvariantCultureIgnoreCase))
+                if (second.Equals("true", StringComparison.InvariantCultureIgnoreCase))
                 {
                     // I'm authed
                     KeyManager.IsAuthed = true;
@@ -83,13 +96,13 @@ namespace AstroClient
                     Environment.Exit(0);
                 }
             }
-            else if (cmds[0].Equals("notify-dev"))
+            else if (first.Equals("notify-dev"))
             {
-                CheetosHelpers.SendHudNotification(cmds[1]);
+                CheetosHelpers.SendHudNotification(second);
             }
-            else if (cmds[0].Equals("client-type"))
+            else if (first.Equals("client-type"))
             {
-                if (cmds[1].Equals("developer"))
+                if (second.Equals("developer"))
                 {
                     Bools.IsDeveloper = true;
                     ModConsole.Log("Developer Mode!");
@@ -99,11 +112,11 @@ namespace AstroClient
                     Bools.IsDeveloper = false;
                 }
             }
-            else if (cmds[0].Equals("ping"))
+            else if (first.Equals("ping"))
             {
                 Client.Send("pong");
             }
-            else if (cmds[0].Equals("pong"))
+            else if (first.Equals("pong"))
             {
             }
             else

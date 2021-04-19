@@ -74,11 +74,25 @@ namespace AstroServer
         private static void ProcessInput(object sender, string input)
         {
             Client client = sender as Client;
-            string[] cmds = input.Split(":");
 
-            if (cmds[0].Equals("key"))
+            int index;
+            string first;
+            string second = string.Empty;
+
+            if (input.Contains(":"))
             {
-                string key = cmds[1];
+                index = input.IndexOf(':');
+                first = input.Substring(0, index);
+                second = input.Substring(index + 1);
+            }
+            else
+            {
+                first = input;
+            }
+
+            if (first.Equals("key"))
+            {
+                string key = second;
                 Console.WriteLine("Trying to auth with: " + key);
                 if (KeyManager.IsValidKey(key))
                 {
@@ -108,25 +122,33 @@ namespace AstroServer
                     Console.WriteLine("Invalid Auth Key");
                 }
             }
-            else if (cmds[0].Equals("name"))
+            else if (first.Equals("name"))
             {
-                client.Name = cmds[1];
+                client.Name = second;
             }
-            else if (cmds[0].Equals("userid"))
+            else if (first.Equals("userid"))
             {
-                client.UserID = cmds[1];
+                client.UserID = second;
             }
-            else if (cmds[0].Equals("ping"))
+            else if (first.Equals("ping"))
             {
                 client.Send("pong");
             }
-            else if (cmds[0].Equals("pong"))
+            else if (first.Equals("pong"))
             {
             }
-            else if (cmds[0].Equals("avatar-log"))
+            else if (first.Equals("avatar-log"))
             {
-                AvatarData data = JsonConvert.DeserializeObject<AvatarData>(cmds[1]);
-                AstroBot.SendLogMessageAsync($"Received avatar data for {data.ID}");
+                try
+                {
+                    AvatarData data = JsonConvert.DeserializeObject<AvatarData>(second);
+                    AstroBot.SendLogMessageAsync($"Received avatar data for {data.ID}");
+                    Console.WriteLine($"Received avatar data for {data.ID}");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
             else
             {
