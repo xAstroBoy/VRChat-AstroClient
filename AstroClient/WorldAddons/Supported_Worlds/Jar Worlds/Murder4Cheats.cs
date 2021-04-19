@@ -186,14 +186,14 @@ namespace AstroClient
             ModConsole.Log("Found Tot Knifes : " + Knifes.Count());
         }
 
-        public static void SetMurderItemsGravity(bool ShouldFloat)
+        public static void SetMurderItemsGravity(bool useGravity)
         {
-            DetectiveGuns.SetGravity(ShouldFloat);
-            SilencedGuns.SetGravity(ShouldFloat);
-            ShotGuns.SetGravity(ShouldFloat);
-            BearTraps.SetGravity(ShouldFloat);
-            Grenades.SetGravity(ShouldFloat);
-            Knifes.SetGravity(ShouldFloat);
+            DetectiveGuns.SetGravity(useGravity);
+            SilencedGuns.SetGravity(useGravity);
+            ShotGuns.SetGravity(useGravity);
+            BearTraps.SetGravity(useGravity);
+            Grenades.SetGravity(useGravity);
+            Knifes.SetGravity(useGravity);
         }
 
         public static void AllowTheft()
@@ -337,7 +337,8 @@ namespace AstroClient
             new QMSingleButton(MurderItemTweaker, 4, 2, "Bear Trap (Crazy)!", new Action(() => { BearTraps.AddCrazyComponent(false); }), "Make Grenade in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
 
             new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!", null, null, true);
-            new QMSingleToggleButton(MurderItemTweaker, 1, 0.5f, "Float (Space Mode)", new Action(() => { SetMurderItemsGravity(true); }), "Fall (World Gravity)", new Action(() => { SetMurderItemsGravity(false); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
+            new QMSingleToggleButton(MurderItemTweaker, 1, 0.5f, "Float (Space Mode)", new Action(() => { SetMurderItemsGravity(false); }), "Fall (World Gravity)", new Action(() => { SetMurderItemsGravity(true); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
+
             KnifesGrabbableToggle = new QMSingleToggleButton(MurderItemTweaker, 1, 1, "Can Grab Knifes", new Action(() => { ToggleKnifesGrab(true); }), "Cannot Grab Knifes", new Action(() => { ToggleKnifesGrab(false); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
             var one = new QMSingleButton(MurderItemTweaker, 1, 1.5f, "Knifes Grabbable from far!", new Action(() => { MakeKnifeGrabbableFromFar(); }), "Make Knifes Grabbable from far!", null, null, true);
             var two = new QMSingleButton(MurderItemTweaker, 1, 2, "Restore Knifes Properties to world!", new Action(() => { RestoreKnifeToWorldControl(); }), "Restore Control to world!", null, null, true);

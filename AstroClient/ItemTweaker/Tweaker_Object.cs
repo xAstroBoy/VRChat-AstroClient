@@ -16,18 +16,9 @@ namespace AstroClient.ItemTweaker
     public class Tweaker_Object : GameEvents
     {
 
-        public static void SetEditLock(bool status)
-        {
-            if (CurrentSelectedObject != null)
-            {
-                ObjectToEditLock = status;
-                LockHoldItem.setToggleState(status);
-            }
-        }
-
         public override void OnLevelLoaded()
         {
-            SetEditLock(false);
+            DoNotPickOtherItems = false;
             if (TransformToEditBtn != null)
             {
                 UpdateCapturedObject(null);
@@ -119,6 +110,10 @@ namespace AstroClient.ItemTweaker
             }
             set
             {
+                if (CurrentSelectedObject == null)
+                {
+                    value = false;
+                }
                 _DoNotPickOtherItems = value;
                 if (LockHoldItem != null)
                 {
@@ -283,7 +278,7 @@ namespace AstroClient.ItemTweaker
 
         public static void SetObjectToEdit(GameObject obj)
         {
-            if (ObjectToEditLock)
+            if (DoNotPickOtherItems)
             {
                 return;
             }
@@ -296,7 +291,7 @@ namespace AstroClient.ItemTweaker
         {
             try
             {
-                if (!ObjectToEditLock)
+                if (!DoNotPickOtherItems)
                 {
                     var item = PlayerHands.GetHoldTransform();
                     if (item != null)
@@ -318,8 +313,6 @@ namespace AstroClient.ItemTweaker
 
 
 
-
-        public static bool ObjectToEditLock = false;
 
 
         public static QMSingleButton TransformToEditBtn;
