@@ -226,7 +226,7 @@ namespace AstroLibrary.Networking
                         received.CopyTo(data, totalRead - read);
 
                         //Console.WriteLine($"read / received.Length {read} / {received.Length}");
-                        Console.WriteLine(received.ConvertToString());
+                        //Console.WriteLine(received.ConvertToString());
                     }
                     catch
                     {
