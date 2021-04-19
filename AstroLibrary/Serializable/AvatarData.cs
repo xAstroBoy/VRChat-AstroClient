@@ -13,7 +13,9 @@
 
         public string AuthorID = string.Empty;
 
-        public string Version = string.Empty;
+        public string AuthorName = string.Empty;
+
+        public int Version = 0;
 
         public string ReleaseStatus = string.Empty;
 

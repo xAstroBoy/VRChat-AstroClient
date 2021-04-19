@@ -141,6 +141,7 @@ namespace AstroServer
             {
                 try
                 {
+                    Console.WriteLine(second + Environment.NewLine);
                     AvatarData data = JsonConvert.DeserializeObject<AvatarData>(second);
                     AstroBot.SendLogMessageAsync($"Received avatar data for {data.ID}");
                     Console.WriteLine($"Received avatar data for {data.ID}");
