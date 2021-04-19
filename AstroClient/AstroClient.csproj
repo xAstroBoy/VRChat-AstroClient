@@ -64,6 +64,7 @@
       <Link>Networking\Serializable\AvatarData.cs</Link>
     </Compile>
     <Compile Include="AntiCrash\AntiCrash.cs" />
+    <Compile Include="AntiCrash\AntiCrashPolys.cs" />
     <Compile Include="AntiCrash\AntiCrashScanner.cs" />
     <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />
     <Compile Include="AstroExtensions\ButtonsExtensions.cs" />
@@ -207,6 +208,7 @@
     <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Lights\LightControl.cs" />
+    <Compile Include="Mora\AvatarLogger.cs" />
     <Compile Include="Mora\MouseTp.cs" />
     <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
