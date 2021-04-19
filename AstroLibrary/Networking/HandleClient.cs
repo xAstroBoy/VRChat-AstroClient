@@ -202,11 +202,12 @@ namespace AstroLibrary.Networking
             {
                 int remaining = len;
                 int totalRead = 0;
-                MemoryStream memoryStream = new MemoryStream();
+                byte[] data = new byte[len];
+
                 int toRead = PacketSize;
                 while (remaining > 0)
                 {
-                    if (remaining > PacketSize)
+                    if (remaining >= PacketSize)
                     {
                         toRead = PacketSize;
                     } else
@@ -222,23 +223,16 @@ namespace AstroLibrary.Networking
                         totalRead += read;
                         remaining -= read;
 
-                        byte[] a = new byte[read];
-
-                        for (int i = 0; i < read; i++)
-                        {
-                            a[i] = received[i];
-                        }
+                        received.CopyTo(data, totalRead - read);
 
                         //Console.WriteLine($"read / received.Length {read} / {received.Length}");
-                        memoryStream.Write(a, 0, a.Length);
+                        Console.WriteLine(received.ConvertToString());
                     }
                     catch
                     {
                         IsConnected = false;
                     }
                 }
-
-                byte[] data = memoryStream.GetBuffer();
 
                 if (headerType == 1000) // Text
                 {

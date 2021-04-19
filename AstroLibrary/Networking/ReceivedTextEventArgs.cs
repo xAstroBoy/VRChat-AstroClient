@@ -12,7 +12,7 @@ namespace AstroLibrary.Networking
         public ReceivedTextEventArgs(int clientID, string message)
         {
             string text1 = message;
-            Message = Regex.Replace(text1, @"[^a-zA-Z0-9@#$%&*+\-_(),+':;?.,!\[\]\s\\/]+$", string.Empty).Trim();
+            Message = Regex.Replace(text1, @"[^a-zA-Z0-9{}@#$%&*+\-_(),+':;?.,!\[\]\s\\/]+$", string.Empty).Trim();
             ClientID = clientID;
         }
     }
