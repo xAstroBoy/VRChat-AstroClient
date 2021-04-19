@@ -21,6 +21,7 @@ namespace AstroClient
         {
             string json = JsonConvert.SerializeObject(data);
             AstroNetworkClient.Client.Send($"avatar-log:{json}");
+            ModConsole.DebugLog(json);
         }
 
         public static void SendClientInfo()
