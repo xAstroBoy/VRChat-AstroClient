@@ -244,7 +244,7 @@ namespace AstroClient
         {
             if (player != null)
             {
-                var EmojiGen = player.field_Private_MonoBehaviourPublicGaVoInStInVoStInVoStUnique_0;
+                var EmojiGen = player.field_Private_MonoBehaviourPublicGaVoInStInStVoInStVoUnique_0;
                 if (EmojiGen != null)
                 {
                     EmojiGen.Method_Public_Void_Int32_0(emoji);
@@ -263,7 +263,7 @@ namespace AstroClient
         {
 
             
-            var EmojiGen = Player.prop_Player_0.field_Internal_VRCPlayer_0.field_Private_MonoBehaviourPublicGaVoInStInVoStInVoStUnique_0;
+            var EmojiGen = Player.prop_Player_0.field_Internal_VRCPlayer_0.field_Private_MonoBehaviourPublicGaVoInStInStVoInStVoUnique_0;
             if (EmojiGen != null)
             {
                 EmojiGen.Method_Public_Void_Int32_0(emoji);

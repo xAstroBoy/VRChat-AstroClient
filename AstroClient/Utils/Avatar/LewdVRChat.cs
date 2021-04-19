@@ -307,7 +307,7 @@ namespace AstroClient
         {
             if (VRCPlayer.field_Internal_Static_VRCPlayer_0 != null && player != null)
             {
-                player.Method_Public_Void_Boolean_1();
+                player.Method_Public_Void_Boolean_0();
             }
         }
 
