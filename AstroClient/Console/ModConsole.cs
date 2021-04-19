@@ -104,7 +104,9 @@ namespace AstroClient.ConsoleUtils
             ERROR,
             DEBUG_LOG,
             DEBUG_WARNING,
-            DEBUG_ERROR
+            DEBUG_ERROR,
+            ANTI_CRASH,
+            CHEETOS_LOG
         }
 
         public static void LogExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
@@ -179,9 +181,19 @@ namespace AstroClient.ConsoleUtils
         /// </summary>
         /// <param name="msg"></param>
         /// <param name="textcolor"></param>
-        public static void CheetoLog(string msg, Color? textcolor = null)
+        public static void CheetoLog(string msg, Color? textcolor = null, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
         {
-            DebugLog($"[CHEETOS] {msg}", textcolor);
+            if (!DebugMode)
+            {
+                return;
+            }
+            if (textcolor == null)
+            {
+                textcolor = Color.PapayaWhip;
+            }
+            PrintTags(LogTypes.CHEETOS_LOG);
+            PrintCallerTag(callerName, callerLine);
+            PrintLine(msg, textcolor.Value);
         }
 
         public static void DebugLog(string msg, Color? textcolor = null, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
@@ -225,6 +237,21 @@ namespace AstroClient.ConsoleUtils
                 textcolor = Color.Red;
             }
             PrintTags(LogTypes.DEBUG_LOG);
+            PrintCallerTag(callerName, callerLine);
+            PrintLine(msg, textcolor.Value);
+        }
+
+        public static void AntiCrash(string msg, Color? textcolor = null, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
+        {
+            if (!DebugMode)
+            {
+                return;
+            }
+            if (textcolor == null)
+            {
+                textcolor = Color.Red;
+            }
+            PrintTags(LogTypes.ANTI_CRASH);
             PrintCallerTag(callerName, callerLine);
             PrintLine(msg, textcolor.Value);
         }
@@ -291,6 +318,14 @@ namespace AstroClient.ConsoleUtils
                 case LogTypes.DEBUG_ERROR:
                     PrintDebugErrorTag();
                     break;
+
+                case LogTypes.ANTI_CRASH:
+                    PrintAntiCrashTag();
+                    break;
+
+                case LogTypes.CHEETOS_LOG:
+                    PrintAntiCrashTag();
+                    break;
             }
         }
 
@@ -302,6 +337,22 @@ namespace AstroClient.ConsoleUtils
             Console.Write(callerLine.ToString(), Color.Green);
             Console.Write("]: ", Color.White);
             Task.Run(() => { Write("[LOG]: "); });
+        }
+
+        private static void PrintCheetosTag()
+        {
+            Console.Write("[", Color.White);
+            Console.Write("LOG", Color.PaleVioletRed);
+            Console.Write("]: ", Color.White);
+            Task.Run(() => { Write("[CHEETOS]: "); });
+        }
+
+        private static void PrintAntiCrashTag()
+        {
+            Console.Write("[", Color.White);
+            Console.Write("LOG", Color.PaleVioletRed);
+            Console.Write("]: ", Color.White);
+            Task.Run(() => { Write("[ANTICRASH]: "); });
         }
 
         private static void PrintLogTag()
