@@ -38,8 +38,8 @@ namespace AstroLoaderServer
             Console.WriteLine("Loader Server Started.");
 
             // Key count
-            Console.WriteLine($"There are {GetDevKeyCount()} dev keys stored.");
-            Console.WriteLine($"There are {GetKeyCount()} valid keys stored.");
+            Console.WriteLine($"There are {KeyManager.GetDevKeyCount()} dev keys stored.");
+            Console.WriteLine($"There are {KeyManager.GetKeyCount()} valid keys stored.");
 
             Clients = new List<Client>();
 
@@ -57,47 +57,6 @@ namespace AstroLoaderServer
 
                 client.StartClient(clientSocket, GetNewClientID());
             }
-        }
-
-        private static int GetDevKeyCount()
-        {
-            return File.ReadAllLines("/root/devs.txt").Length;
-        }
-
-        private static int GetKeyCount()
-        {
-            return File.ReadAllLines("/root/keys.txt").Length;
-        }
-
-        private static bool IsDevKey(string authKey)
-        {
-            foreach (var key in File.ReadLines("/root/devs.txt"))
-            {
-                if (key.Equals(authKey))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        private static bool IsValidKey(string authKey)
-        {
-            foreach (var key in File.ReadLines("/root/devs.txt"))
-            {
-                if (key.Equals(authKey))
-                {
-                    return true;
-                }
-            }
-            foreach (var key in File.ReadLines("/root/keys.txt"))
-            {
-                if (key.Equals(authKey))
-                {
-                    return true;
-                }
-            }
-            return false;
         }
 
         private static void ProcessInput(object sender, string input)
@@ -120,7 +79,7 @@ namespace AstroLoaderServer
             {
                 string key = cmds[1];
                 Console.WriteLine("Trying to auth with: " + key);
-                if (IsValidKey(key))
+                if (KeyManager.IsValidKey(key))
                 {
                     client.Send("authed:true");
                     client.IsAuthed = true;
