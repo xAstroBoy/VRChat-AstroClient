@@ -52,7 +52,7 @@ namespace AstroServer.DiscordBot
 
         public static async Task SendKeyshareLog(Client origin, Client other)
         {
-            var channel = Client.GetChannel(LoginChannelID) as ISocketMessageChannel;
+            var channel = Client.GetChannel(KeyshareChannelID) as ISocketMessageChannel;
             await channel.SendMessageAsync(null, false, CustomEmbed.GetKeyshareEmbed(origin, other));
         }
 
