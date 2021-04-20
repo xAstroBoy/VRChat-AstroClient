@@ -185,12 +185,8 @@ namespace AstroServer
             Client client = sender as Client;
             if (Clients.Contains(client))
             {
-                //Settings.AuthenticatedUsers.Remove(client);
                 Clients.Remove(client);
-                //Console.WriteLine($"Client removed: {client.ClientID}");
             }
-
-            //SendAll($"Client Disconnected: {client.ClientID} of {Clients.Count} / {_maxConnections}");
             Console.WriteLine($"Client Disconnected: {client.ClientID} of {Clients.Count} / {_maxConnections}");
         }
 
@@ -214,12 +210,7 @@ namespace AstroServer
             {
                 if (client.Key.Equals(other.Key) && client.ClientID != other.ClientID)
                 {
-                    AstroBot.SendLogMessageAsync($"Possible key sharing from: "
-                        + $"Discord: {DiscordUtils.GetDiscordName(client.DiscordID)} \r\n"
-                        + $"Booted: {other.Name}, {other.UserID}, {other.ClientSocket.Client.RemoteEndPoint}. \r\n " 
-                        + $"Logged in: {client.Name}, {client.UserID}, {client.ClientSocket.Client.RemoteEndPoint}. \r\n " 
-                        + "\r\n\r\n" +
-                        $"```{client.Key}```");
+                    AstroBot.SendKeyshareLog(client, other);
                     other.Send("exit:key in use somewhere else");
                     other.Disconnect();
                 }

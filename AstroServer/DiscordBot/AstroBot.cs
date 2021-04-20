@@ -9,7 +9,11 @@ namespace AstroServer.DiscordBot
     {
         public static DiscordSocketClient Client { get; set; }
 
-        internal static ulong LogChannelID = 832405505774190682;
+        internal static ulong LogChannelID = 834125750365192210;
+
+        internal static ulong LoginChannelID = 832405505774190682;
+
+        internal static ulong KeyshareChannelID = 834125559578624050;
 
         internal static ulong CommandChannelID = 832405559378051112;
 
@@ -46,9 +50,15 @@ namespace AstroServer.DiscordBot
             return Task.CompletedTask;
         }
 
+        public static async Task SendKeyshareLog(Client origin, Client other)
+        {
+            var channel = Client.GetChannel(LoginChannelID) as ISocketMessageChannel;
+            await channel.SendMessageAsync(null, false, CustomEmbed.GetKeyshareEmbed(origin, other));
+        }
+
         public static async Task SendLoggedInLog(Client client)
         {
-            var channel = Client.GetChannel(LogChannelID) as ISocketMessageChannel;
+            var channel = Client.GetChannel(LoginChannelID) as ISocketMessageChannel;
             await channel.SendMessageAsync(null, false, CustomEmbed.GetLoggedInEmbed(client));
         }
 
