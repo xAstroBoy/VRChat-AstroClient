@@ -21,13 +21,20 @@ namespace AstroServer
 
         public static Embed GetLoggedInEmbed(Client client)
         {
+            var color = Color.Blue;
+
+            if (client.IsDeveloper)
+            {
+                color = Color.Red;
+            }
+
             var discordId = KeyManager.GetKeysDiscordOwner(client.Key);
             var discordUser = AstroBot.Client.GetUser(discordId);
 
             EmbedBuilder embedBuilder = new EmbedBuilder()
             {
                 Title = DiscordUtils.GetDiscordName(discordId),
-                Color = Color.Blue,
+                Color = color,
                 ThumbnailUrl = discordUser.GetAvatarUrl()
             };
 
@@ -53,13 +60,20 @@ namespace AstroServer
 
         public static Embed GetKeyEmbed(string authKey)
         {
+            var color = Color.Blue;
+
+            if (KeyManager.IsDevKey(authKey))
+            {
+                color = Color.Red;
+            }
+
             var discordId = KeyManager.GetKeysDiscordOwner(authKey);
             var discordUser = AstroBot.Client.GetUser(discordId);
 
             EmbedBuilder embedBuilder = new EmbedBuilder()
             {
                 Title = DiscordUtils.GetDiscordName(discordId),
-                Color = Color.Blue,
+                Color = color,
                 ThumbnailUrl = discordUser.GetAvatarUrl()
             };
 
