@@ -46,6 +46,12 @@ namespace AstroServer.DiscordBot
             return Task.CompletedTask;
         }
 
+        public static async Task SendLoggedInLog(Client client)
+        {
+            var channel = Client.GetChannel(LogChannelID) as ISocketMessageChannel;
+            await channel.SendMessageAsync(null, false, CustomEmbed.GetLoggedInEmbed(client));
+        }
+
         public static async Task SendLogMessageAsync(string msg)
         {
             var channel = Client.GetChannel(LogChannelID) as ISocketMessageChannel;

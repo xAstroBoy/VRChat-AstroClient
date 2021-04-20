@@ -1,5 +1,6 @@
 ﻿using AstroServer.DiscordBot;
 using Discord;
+using System;
 
 namespace AstroServer
 {
@@ -15,6 +16,38 @@ namespace AstroServer
 
             embedBuilder.AddField("Developers", KeyManager.GetDevKeyCount());
             embedBuilder.AddField("Clients", KeyManager.GetDevKeyCount());
+            return embedBuilder.Build();
+        }
+
+        public static Embed GetLoggedInEmbed(Client client)
+        {
+            var discordId = KeyManager.GetKeysDiscordOwner(client.Key);
+            var discordUser = AstroBot.Client.GetUser(discordId);
+
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+            {
+                Title = DiscordUtils.GetDiscordName(discordId),
+                Color = Color.Blue,
+                ThumbnailUrl = discordUser.GetAvatarUrl()
+            };
+
+            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
+
+            if (KeyManager.IsDevKey(client.Key))
+            {
+                embedFooterBuilder.Text = "Developer";
+            }
+            else
+            {
+                embedFooterBuilder.Text = "Client";
+            }
+
+            embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
+            embedBuilder.AddField("Time", DateTime.Now.ToLongDateString());
+            embedBuilder.AddField("Key", client.Key);
+
+            embedBuilder.Footer = embedFooterBuilder;
+
             return embedBuilder.Build();
         }
 

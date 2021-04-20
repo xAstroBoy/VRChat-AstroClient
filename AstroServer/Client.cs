@@ -2,19 +2,19 @@
 
 namespace AstroServer
 {
-    internal class Client : HandleClient
+    public class Client : HandleClient
     {
-        internal string Name = string.Empty;
+        public string Name = string.Empty;
 
-        internal string Key = string.Empty;
+        public string Key = string.Empty;
 
-        internal string UserID = string.Empty;
+        public string UserID = string.Empty;
 
-        internal ulong DiscordID = 0;
+        public ulong DiscordID = 0;
 
-        internal bool IsAuthed;
+        public bool IsAuthed;
 
-        internal bool IsDeveloper;
+        public bool IsDeveloper;
 
         internal Client()
         {

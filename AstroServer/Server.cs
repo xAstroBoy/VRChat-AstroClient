@@ -100,21 +100,19 @@ namespace AstroServer
                     client.IsAuthed = true;
                     client.Key = key;
                     Console.WriteLine("Successfully Authed");
-
                     client.DiscordID = KeyManager.GetKeysDiscordOwner(key);
 
                     if (KeyManager.IsDevKey(key))
                     {
                         client.IsDeveloper = true;
                         client.Send("client-type:developer");
-                        AstroBot.SendLogMessageAsync($"Developer: {DiscordUtils.GetDiscordName(client.DiscordID)}: Connected From: {client.ClientSocket.Client.RemoteEndPoint}");
-                        //SendToAllDevelopers(sender, $"notify-dev:AstroClient developer connected: {client.Name}");
                     }
                     else
                     {
-                        //SendToAllDevelopers(sender, $"notify-dev:AstroClient connected: {client.Name}");
                         client.Send("client-type:client");
                     }
+                    AstroBot.SendLoggedInLog(client);
+
                 }
                 else
                 {
