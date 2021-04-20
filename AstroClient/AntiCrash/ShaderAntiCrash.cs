@@ -17,7 +17,7 @@ namespace AstroClient.AntiCrash
         //taken from knah and made it a bit better btw its GPL-3.0 so its ok for me to use his code
         public override void OnApplicationStart()
         {
-            var pluginsPath = MelonUtils.GetGameDataDirectory() + "/Plugins";
+            var pluginsPath = MelonUtils.GetGameDataDirectory() + "AstroClient/Plugins";
             var dllName = ShaderFilterApi.DLLName + ".dll";
 
             try
