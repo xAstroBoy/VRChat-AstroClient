@@ -66,6 +66,8 @@
     <Compile Include="AntiCrash\AntiCrash.cs" />
     <Compile Include="AntiCrash\AntiCrashPolys.cs" />
     <Compile Include="AntiCrash\AntiCrashScanner.cs" />
+    <Compile Include="AntiCrash\ShaderAntiCrash.cs" />
+    <Compile Include="AntiCrash\ShaderFilter.cs" />
     <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />
     <Compile Include="AstroExtensions\ButtonsExtensions.cs" />
     <Compile Include="AstroExtensions\ClickExtensions.cs" />
