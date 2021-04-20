@@ -107,6 +107,7 @@
     <Compile Include="Cheetos\Config\ConfigManager.cs" />
     <Compile Include="Cheetos\Config\JSonWriter.cs" />
     <Compile Include="Cheetos\GameEventsBehaviour.cs" />
+    <Compile Include="Cheetos\GPLStuff\FOV.cs" />
     <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
     <Compile Include="Cheetos\PlayerMenuUI.cs" />
     <Compile Include="Console\CheetosConsole\Console.cs" />

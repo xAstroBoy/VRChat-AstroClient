@@ -26,6 +26,8 @@ namespace AstroClient.Startup.Buttons
             QMSingleToggleButton TriggerEventToggle = new QMSingleToggleButton(sub, 1, 0.5f, "Trigger Log ON", () => { ConfigManager.General.LogTriggerEvents = true; }, "Trigger Log OFF", () => { ConfigManager.General.LogTriggerEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogTriggerEvents, true);
             TriggerEventToggle.setToggleState(ConfigManager.General.LogTriggerEvents, false);
 
+            QMSlider fovSlider = new QMSlider(sub, "FOV", 1, 2, delegate (float value) { FOV.Set_Camera_FOV(value); }, 80, 120, 40, true);
+
             // Hide Elements Menu
             QMNestedButton subHideElements = new QMNestedButton(sub, 1, 2f, "Hide Elements", "Hide Elements", null, null, null, null, false);
             sub.getMainButton().setTextColor(Color.cyan);
