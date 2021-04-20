@@ -10,6 +10,8 @@ namespace AstroServer
 
         internal string UserID = string.Empty;
 
+        internal ulong DiscordID = 0;
+
         internal bool IsAuthed;
 
         internal bool IsDeveloper;
@@ -19,6 +21,7 @@ namespace AstroServer
             Name = "";
             Key = "";
             UserID = "";
+            DiscordID = 0;
             IsAuthed = false;
             IsDeveloper = false;
         }

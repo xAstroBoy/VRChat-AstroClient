@@ -83,7 +83,7 @@ namespace AstroServer
             return false;
         }
 
-        public static long GetKeysDiscordOwner(string authKey)
+        public static ulong GetKeysDiscordOwner(string authKey)
         {
             foreach (var keyinfo in File.ReadLines("/root/devs.txt"))
             {
@@ -91,7 +91,7 @@ namespace AstroServer
 
                 if (info[0].Equals(authKey))
                 {
-                    return long.Parse(info[1]);
+                    return ulong.Parse(info[1]);
                 }
             }
             foreach (var keyinfo in File.ReadLines("/root/keys.txt"))
@@ -100,7 +100,7 @@ namespace AstroServer
 
                 if (info[0].Equals(authKey))
                 {
-                    return long.Parse(info[1]);
+                    return ulong.Parse(info[1]);
                 }
             }
             return 0;

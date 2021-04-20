@@ -101,11 +101,13 @@ namespace AstroServer
                     client.Key = key;
                     Console.WriteLine("Successfully Authed");
 
+                    client.DiscordID = KeyManager.GetKeysDiscordOwner(key);
+
                     if (KeyManager.IsDevKey(key))
                     {
                         client.IsDeveloper = true;
                         client.Send("client-type:developer");
-                        AstroBot.SendLogMessageAsync($"Developer Connected From: {client.ClientSocket.Client.RemoteEndPoint}");
+                        AstroBot.SendLogMessageAsync($"Developer: {DiscordUtils.GetDiscordName(client.DiscordID)}: Connected From: {client.ClientSocket.Client.RemoteEndPoint}");
                         //SendToAllDevelopers(sender, $"notify-dev:AstroClient developer connected: {client.Name}");
                     }
                     else
@@ -215,6 +217,7 @@ namespace AstroServer
                 if (client.Key.Equals(other.Key) && client.ClientID != other.ClientID)
                 {
                     AstroBot.SendLogMessageAsync($"Possible key sharing from: "
+                        + $"Discord: {DiscordUtils.GetDiscordName(client.DiscordID)} \r\n"
                         + $"Booted: {other.Name}, {other.UserID}, {other.ClientSocket.Client.RemoteEndPoint}. \r\n " 
                         + $"Logged in: {client.Name}, {client.UserID}, {client.ClientSocket.Client.RemoteEndPoint}. \r\n " 
                         + "\r\n\r\n" +
