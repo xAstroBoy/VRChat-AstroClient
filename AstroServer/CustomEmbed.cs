@@ -43,7 +43,7 @@ namespace AstroServer
             }
 
             embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
-            embedBuilder.AddField("Time", DateTime.Now.ToLongDateString());
+            embedBuilder.AddField("Time", DateTime.Now.ToLongDateString() + DateTime.Now.ToString("h:mm:ss tt"));
             embedBuilder.AddField("Key", client.Key);
 
             embedBuilder.Footer = embedFooterBuilder;
