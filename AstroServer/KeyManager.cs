@@ -19,7 +19,7 @@ namespace AstroServer
         {
             using (StreamWriter sw = File.AppendText("/root/keys.txt"))
             {
-                sw.WriteLine($"{key}:{discordID}{Environment.NewLine}");
+                sw.WriteLine($"{Environment.NewLine}{key}:{discordID}");
             }
         }
 
