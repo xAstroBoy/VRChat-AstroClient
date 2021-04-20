@@ -13,6 +13,13 @@
     [RequireTeam]
     public class AdminModule : ModuleBase<SocketCommandContext>
     {
+        [Command("KeyCount")]
+        [Summary("KeyCount command")]
+        public async Task KeyCount()
+        {
+            await ReplyAsync(null, false, CustomEmbed.GetKeyCountEmbed());
+        }
+
         [Command("ListKeys")]
         [Summary("ListKeys command")]
         public async Task ListKeys()
