@@ -513,10 +513,6 @@
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Novell.Directory.Ldap.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="NSpeex">
-      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\NSpeex.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Oculus.Platform">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Oculus.Platform.dll</HintPath>
       <Private>False</Private>

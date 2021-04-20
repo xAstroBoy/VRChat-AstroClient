@@ -14,6 +14,14 @@ namespace AstroServer
             return File.ReadAllText("/root/discordtoken.txt");
         }
 
+        public static void AddKey(string key, ulong discordID)
+        {
+            using (StreamWriter sw = File.AppendText("/root/keys.txt"))
+            {
+                sw.WriteLine($"{key}:{discordID}");
+            }
+        }
+
         public static int GetDevKeyCount()
         {
             return File.ReadAllLines("/root/devs.txt").Length;

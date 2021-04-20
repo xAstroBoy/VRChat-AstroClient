@@ -13,6 +13,30 @@
     [RequireTeam]
     public class AdminModule : ModuleBase<SocketCommandContext>
     {
+        [Command("GenKey")]
+        [Summary("GenKey command")]
+        public async Task GenKey([Required] ulong discordID)
+        {
+            var key = RandomOrg.GetRandomKey();
+
+            if (key!=string.Empty)
+            {
+                if (!KeyManager.IsValidKey(key))
+                {
+                    await ReplyAsync(null, false, CustomEmbed.GetNewKeyEmbed(key, discordID, true));
+                    KeyManager.AddKey(key, discordID);
+                }
+                else
+                {
+                    await ReplyAsync(null, false, CustomEmbed.GetNewKeyEmbed(key, discordID, false));
+                }
+            }
+            else
+            {
+                await ReplyAsync("Failed to generate key, string.Empty was returned.");
+            }
+        }
+
         [Command("KeyCount")]
         [Summary("KeyCount command")]
         public async Task KeyCount()

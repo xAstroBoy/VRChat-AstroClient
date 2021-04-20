@@ -19,6 +19,32 @@ namespace AstroServer
             return embedBuilder.Build();
         }
 
+        public static Embed GetNewKeyEmbed(string authkey, ulong discordID, bool successful)
+        {
+            if (successful)
+            {
+                EmbedBuilder embedBuilder = new EmbedBuilder()
+                {
+                    Title = "New Key Generated",
+                    Color = Color.Green,
+                };
+
+                embedBuilder.AddField("Discord", DiscordUtils.GetDiscordName(discordID));
+                embedBuilder.AddField("Key", authkey);
+                return embedBuilder.Build();
+            }
+            else
+            {
+                EmbedBuilder embedBuilder = new EmbedBuilder()
+                {
+                    Title = "New Key Failed",
+                    Color = Color.Red,
+                };
+
+                return embedBuilder.Build();
+            }
+        }
+
         public static Embed GetKeyshareEmbed(Client origin, Client other)
         {
             var discordId = KeyManager.GetKeysDiscordOwner(origin.Key);
