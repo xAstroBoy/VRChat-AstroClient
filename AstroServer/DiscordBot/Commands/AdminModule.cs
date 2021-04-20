@@ -1,5 +1,6 @@
 ﻿namespace AstroServer.DiscordBot.Commands
 {
+    using Discord;
     using Discord.Commands;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -16,57 +17,28 @@
         [Summary("ListKeys command")]
         public async Task ListKeys()
         {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append($"There are {KeyManager.GetDevKeyCount()} developer keys \r\n");
-            stringBuilder.Append($"There are {KeyManager.GetKeyCount()} client keys \r\n");
-            await ReplyAsync(stringBuilder.ToString());
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+            {
+                Title = "Key Count",
+                Color = Color.Blue,
+            };
+
+            embedBuilder.AddField("Developers", KeyManager.GetDevKeyCount());
+            embedBuilder.AddField("Clients", KeyManager.GetDevKeyCount());
+            await ReplyAsync(null, false, embedBuilder.Build());
 
             foreach (var kvp in KeyManager.GetAllDevKeyInfo())
             {
-                StringBuilder stringBuilder1 = new StringBuilder();
-                var discorduser = AstroBot.Client.GetUser(kvp.Value);
-                if (discorduser != null)
-                {
-                    stringBuilder1.Append($"[Developer] {discorduser.Username}#{discorduser.Discriminator} \r\n {kvp.Key} \r\n\r\n");
-                }
-                else
-                {
-                    stringBuilder1.Append($"[Developer] {kvp.Value} \r\n {kvp.Key} \r\n\r\n");
-                }
-                await ReplyAsync(stringBuilder1.ToString());
+                var embed = CustomEmbed.GetKeyEmbed(kvp.Key);
+                await ReplyAsync(null, false, embed);
             }
 
             foreach (var kvp in KeyManager.GetAllKeyInfo())
             {
-                StringBuilder stringBuilder2 = new StringBuilder();
-                var discorduser = AstroBot.Client.GetUser(kvp.Value);
-                if (discorduser != null)
-                {
-                    stringBuilder2.Append($"[Client] {discorduser.Username}#{discorduser.Discriminator} \r\n {kvp.Key} \r\n\r\n");
-                }
-                else
-                {
-                    stringBuilder2.Append($"[Client] {kvp.Value} \r\n {kvp.Key} \r\n\r\n");
-                }
-                await ReplyAsync(stringBuilder2.ToString());
+
+                var embed = CustomEmbed.GetKeyEmbed(kvp.Key);
+                await ReplyAsync(null, false, embed);
             }
-        }
-
-        [Command("ValidateKeys")]
-        [Summary("ValidateKeys command")]
-        public async Task ValidateKeys([Required] string name, [Required] string msg)
-        {
-
-            var found = Server.Clients.Where(c => c.Name.Contains(name));
-
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (var client in found)
-            {
-                client.Send($"notify-dev:{msg}");
-                stringBuilder.Append($"Notified: {client.Name}, {client.UserID} \r\n");
-            }
-
-            await ReplyAsync(stringBuilder.ToString());
         }
 
         [Command("Notify")]
