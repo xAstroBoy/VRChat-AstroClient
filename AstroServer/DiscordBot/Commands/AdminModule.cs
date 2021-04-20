@@ -12,11 +12,47 @@
     [RequireTeam]
     public class AdminModule : ModuleBase<SocketCommandContext>
     {
-        [Command("Test")]
-        [Summary("Test command")]
-        public async Task Test()
+        [Command("ListKeys")]
+        [Summary("ListKeys command")]
+        public async Task ListKeys()
         {
-            await ReplyAsync($"I can respond to you!");
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.Append($"There are {KeyManager.GetDevKeyCount()} developer keys \r\n");
+            stringBuilder.Append($"There are {KeyManager.GetKeyCount()} client keys \r\n");
+            await ReplyAsync(stringBuilder.ToString());
+
+            foreach (var kvp in KeyManager.GetAllDevKeyInfo())
+            {
+                StringBuilder stringBuilder1 = new StringBuilder();
+                var discorduser = AstroBot.Client.GetUser(kvp.Value);
+                stringBuilder1.Append($"[Developer] {discorduser.Mention} \r\n {kvp.Key} \r\n\r\n");
+                await ReplyAsync(stringBuilder1.ToString());
+            }
+
+            foreach (var kvp in KeyManager.GetAllKeyInfo())
+            {
+                StringBuilder stringBuilder2 = new StringBuilder();
+                var discorduser = AstroBot.Client.GetUser(kvp.Value);
+                stringBuilder2.Append($"[Client] {discorduser.Mention} \r\n {kvp.Key} \r\n\r\n");
+                await ReplyAsync(stringBuilder2.ToString());
+            }
+        }
+
+        [Command("ValidateKeys")]
+        [Summary("ValidateKeys command")]
+        public async Task ValidateKeys([Required] string name, [Required] string msg)
+        {
+
+            var found = Server.Clients.Where(c => c.Name.Contains(name));
+
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var client in found)
+            {
+                client.Send($"notify-dev:{msg}");
+                stringBuilder.Append($"Notified: {client.Name}, {client.UserID} \r\n");
+            }
+
+            await ReplyAsync(stringBuilder.ToString());
         }
 
         [Command("Notify")]

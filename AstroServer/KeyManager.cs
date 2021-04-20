@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 
 namespace AstroServer
 {
@@ -21,6 +22,28 @@ namespace AstroServer
         public static int GetKeyCount()
         {
             return File.ReadAllLines("/root/keys.txt").Length;
+        }
+
+        public static Dictionary<string, ulong> GetAllDevKeyInfo()
+        {
+            Dictionary<string, ulong> pairs = new Dictionary<string, ulong>();
+            foreach (var keyinfo in File.ReadLines("/root/devs.txt"))
+            {
+                var info = keyinfo.Split(":");
+                pairs.Add(info[0], ulong.Parse(info[1]));
+            }
+            return pairs;
+        }
+
+        public static Dictionary<string, ulong> GetAllKeyInfo()
+        {
+            Dictionary<string, ulong> pairs = new Dictionary<string, ulong>();
+            foreach (var keyinfo in File.ReadLines("/root/keys.txt"))
+            {
+                var info = keyinfo.Split(":");
+                pairs.Add(info[0], ulong.Parse(info[1]));
+            }
+            return pairs;
         }
 
         public static bool IsDevKey(string authKey)
