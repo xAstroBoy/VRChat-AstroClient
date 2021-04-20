@@ -17,27 +17,17 @@
         [Summary("ListKeys command")]
         public async Task ListKeys()
         {
-            EmbedBuilder embedBuilder = new EmbedBuilder()
-            {
-                Title = "Key Count",
-                Color = Color.Blue,
-            };
-
-            embedBuilder.AddField("Developers", KeyManager.GetDevKeyCount());
-            embedBuilder.AddField("Clients", KeyManager.GetDevKeyCount());
-            await ReplyAsync(null, false, embedBuilder.Build());
+            await ReplyAsync(null, false, CustomEmbed.GetKeyCountEmbed());
 
             foreach (var kvp in KeyManager.GetAllDevKeyInfo())
             {
-                var embed = CustomEmbed.GetKeyEmbed(kvp.Key);
-                await ReplyAsync(null, false, embed);
+                await base.ReplyAsync(null, false, CustomEmbed.GetKeyEmbed(kvp.Key));
             }
 
             foreach (var kvp in KeyManager.GetAllKeyInfo())
             {
 
-                var embed = CustomEmbed.GetKeyEmbed(kvp.Key);
-                await ReplyAsync(null, false, embed);
+                await base.ReplyAsync(null, false, CustomEmbed.GetKeyEmbed(kvp.Key));
             }
         }
 

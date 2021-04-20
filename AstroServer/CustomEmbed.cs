@@ -5,6 +5,19 @@ namespace AstroServer
 {
     public static class CustomEmbed
     {
+        public static Embed GetKeyCountEmbed()
+        {
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+            {
+                Title = "Key Count",
+                Color = Color.Blue,
+            };
+
+            embedBuilder.AddField("Developers", KeyManager.GetDevKeyCount());
+            embedBuilder.AddField("Clients", KeyManager.GetDevKeyCount());
+            return embedBuilder.Build();
+        }
+
         public static Embed GetKeyEmbed(string authKey)
         {
             var discordId = KeyManager.GetKeysDiscordOwner(authKey);
