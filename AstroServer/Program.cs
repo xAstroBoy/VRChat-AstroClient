@@ -1,4 +1,5 @@
 ﻿using AstroServer.DiscordBot;
+using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,10 @@ namespace AstroServer
                 .BuildServiceProvider();
             DiscordSocketClient client = Services.GetRequiredService<DiscordSocketClient>();
             DiscordSocketConfig config = Services.GetRequiredService<DiscordSocketConfig>();
+
+            config.GatewayIntents = ~GatewayIntents.None; // All intents
+            config.AlwaysDownloadUsers = true;
+            config.DefaultRetryMode = ~RetryMode.AlwaysFail; // Always retry
 
             await new AstroBot(client).Start();
 

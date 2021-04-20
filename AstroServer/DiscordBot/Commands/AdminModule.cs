@@ -25,7 +25,14 @@
             {
                 StringBuilder stringBuilder1 = new StringBuilder();
                 var discorduser = AstroBot.Client.GetUser(kvp.Value);
-                stringBuilder1.Append($"[Developer] {discorduser.Mention} \r\n {kvp.Key} \r\n\r\n");
+                if (discorduser != null)
+                {
+                    stringBuilder1.Append($"[Developer] {discorduser.Username}#{discorduser.Discriminator} \r\n {kvp.Key} \r\n\r\n");
+                }
+                else
+                {
+                    stringBuilder1.Append($"[Developer] {kvp.Value} \r\n {kvp.Key} \r\n\r\n");
+                }
                 await ReplyAsync(stringBuilder1.ToString());
             }
 
@@ -33,7 +40,14 @@
             {
                 StringBuilder stringBuilder2 = new StringBuilder();
                 var discorduser = AstroBot.Client.GetUser(kvp.Value);
-                stringBuilder2.Append($"[Client] {discorduser.Mention} \r\n {kvp.Key} \r\n\r\n");
+                if (discorduser != null)
+                {
+                    stringBuilder2.Append($"[Client] {discorduser.Username}#{discorduser.Discriminator} \r\n {kvp.Key} \r\n\r\n");
+                }
+                else
+                {
+                    stringBuilder2.Append($"[Client] {kvp.Value} \r\n {kvp.Key} \r\n\r\n");
+                }
                 await ReplyAsync(stringBuilder2.ToString());
             }
         }
