@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 
 namespace AstroServer
@@ -18,7 +19,7 @@ namespace AstroServer
         {
             using (StreamWriter sw = File.AppendText("/root/keys.txt"))
             {
-                sw.WriteLine($"{key}:{discordID}");
+                sw.WriteLine($"{key}:{discordID}{Environment.NewLine}");
             }
         }
 
