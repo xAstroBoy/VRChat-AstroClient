@@ -112,6 +112,7 @@
     <Compile Include="Cheetos\GPLStuff\FOV.cs" />
     <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
     <Compile Include="Cheetos\PlayerMenuUI.cs" />
+    <Compile Include="Cheetos\StreamerProtector.cs" />
     <Compile Include="Console\CheetosConsole\Console.cs" />
     <Compile Include="Console\CheetosConsole\DefaultFonts.cs" />
     <Compile Include="Console\CheetosConsole\Extensions.cs" />
