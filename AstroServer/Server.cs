@@ -133,6 +133,7 @@ namespace AstroServer
             else if (first.Equals("instanceID"))
             {
                 client.InstanceID = second;
+                InstanceManager.ClientJoinedInstance(client);
             }
             else if (first.Equals("ping"))
             {
