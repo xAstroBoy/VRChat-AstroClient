@@ -34,8 +34,7 @@ namespace AstroClient.components
         public void Start()
         {
             obj = this.gameObject;
-            //ObjRenderers = obj.GetComponentsInChildren<Renderer>(true).ToList();
-            ObjMeshRenderers = obj.GetComponentsInChildren<MeshRenderer>(true).ToList();
+            ObjMeshRenderers = obj.GetComponentsInChildren<MeshRenderer>().ToList();
 
             if (ObjMeshRenderers == null  && ObjMeshRenderers.Count() == 0) 
             {
@@ -52,13 +51,6 @@ namespace AstroClient.components
                 }
                 if (HighLightOptions != null)
                 {
-                    //foreach (var ObjRenderer in ObjRenderers)
-                    //{
-                    //    if (ObjRenderer != null)
-                    //    {
-                    //        HighLightOptions.SetHighLighter(ObjRenderer, Color.green, true);
-                    //    }
-                    //}
                     foreach (var ObjMeshRenderer in ObjMeshRenderers)
                     {
                         if (ObjMeshRenderer != null)
@@ -72,32 +64,19 @@ namespace AstroClient.components
             }
         }
 
-        //public void Update()
-        //{
-        //    if (obj != null)
-        //    {
 
-        //        if (HighLightOptions != null)
-        //        {
-        //            if (HighLightOptions.enabled != obj.active)
-        //            {
-        //                HighLightOptions.enabled = obj.active;
-        //            }
-        //        }
-        //    }
-        //}
+        internal void ResetColor()
+        {
+            HighLightOptions.ResetHighlighterColor();
+        }
+
+
+
 
         public void OnDestroy()
         {
             if (HighLightOptions != null)
             {
-                //foreach (var ObjRenderer in ObjRenderers)
-                //{
-                //    if (ObjRenderer != null)
-                //    {
-                //        HighLightOptions.SetHighLighter(ObjRenderer, false);
-                //    }
-                //}
                 foreach (var ObjMeshRenderer in ObjMeshRenderers)
                 {
                     if (ObjMeshRenderer != null)
@@ -114,13 +93,6 @@ namespace AstroClient.components
         {
             if (HighLightOptions != null)
             {
-                //foreach (var ObjRenderer in ObjRenderers)
-                //{
-                //    if (ObjRenderer != null)
-                //    {
-                //        HighLightOptions.SetHighLighter(ObjRenderer, true);
-                //    }
-                //}
                 foreach (var ObjMeshRenderer in ObjMeshRenderers)
                 {
                     if (ObjMeshRenderer != null)
@@ -135,13 +107,6 @@ namespace AstroClient.components
         {
             if (HighLightOptions != null)
             {
-                //foreach (var ObjRenderer in ObjRenderers)
-                //{
-                //    if (ObjRenderer != null)
-                //    {
-                //        HighLightOptions.SetHighLighter(ObjRenderer, false);
-                //    }
-                //}
                 foreach (var ObjMeshRenderer in ObjMeshRenderers)
                 {
                     if (ObjMeshRenderer != null)
@@ -169,16 +134,8 @@ namespace AstroClient.components
 
 
         private GameObject obj;
-        //private List<Renderer> ObjRenderers = new List<Renderer>();
         private List<MeshRenderer> ObjMeshRenderers = new List<MeshRenderer>();
         private HighlightsFXStandalone HighLightOptions;
 
-        internal GameObject AssignedObject
-        {
-            get
-            {
-                return obj;
-            }
-        }
     }
 }

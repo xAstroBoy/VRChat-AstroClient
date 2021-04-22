@@ -168,6 +168,13 @@ namespace AstroClient.components
         }
 
 
+        internal void ResetColor()
+        {
+            HighLightOptions.ResetHighlighterColor();
+        }
+
+
+
         internal Color GetCurrentESPColor
         {
             get

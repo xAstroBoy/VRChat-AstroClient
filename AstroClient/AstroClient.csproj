@@ -236,7 +236,7 @@
     <Compile Include="Startup\Hooks\SpawnEmojiRPCHook.cs" />
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
     <Compile Include="Startup\WorldJoinMsg.cs" />
-    <Compile Include="Test.cs" />
+    <Compile Include="PlayerESPControl.cs" />
     <Compile Include="Udon\Exploits\AmongUS\AmongUSUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Global\GlobalUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Murder4\Murder4UdonExploits.cs" />

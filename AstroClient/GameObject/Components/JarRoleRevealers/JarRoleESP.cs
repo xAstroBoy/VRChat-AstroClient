@@ -54,11 +54,13 @@ namespace AstroClient.components
                 if (JarRoleController.ViewRoles)
                 {
                    SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
+                    ResetESPColor();
                     GameRoleTag.ShowTag = false;
                 }
                 else
                 {
                     SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
+                    ResetESPColor();
                     GameRoleTag.ShowTag = false;
                 }
                 if (JarRoleController.IsMurder4World)
@@ -464,6 +466,42 @@ namespace AstroClient.components
             return GameRoleTag.Label_Text;
         }
 
+
+        private void SetEspColorIfExists(Color color)
+        {
+            if (Internal_player != null)
+            {
+                if (PlayerESPControl.EnabledESP)
+                {
+                    var esp = Internal_player.gameObject.GetComponent<PlayerESP>();
+                    if (esp != null)
+                    {
+                        esp.ChangeColor(color);
+                    }
+
+                }
+            }
+        }
+
+
+        private void ResetESPColor()
+        {
+            if (Internal_player != null)
+            {
+                if (PlayerESPControl.EnabledESP)
+                {
+                    var esp = Internal_player.gameObject.GetComponent<PlayerESP>();
+                    if (esp != null)
+                    {
+                        esp.ResetColor();
+                    }
+
+                }
+            }
+        }
+
+
+
         public void Update()
         {
             try
@@ -497,6 +535,7 @@ namespace AstroClient.components
                             if (GetCurrentSingleTagText() != ReturnedRole.ToString())
                             {
                                 SetTag(GameRoleTag, ReturnedRole.ToString(), DefaultTextColor, color.Value);
+                                SetEspColorIfExists(color.Value);
                             }
                         }
                         else
@@ -504,6 +543,7 @@ namespace AstroClient.components
                             if (GetCurrentSingleTagText() != NoRoles)
                             {
                                 SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
+                                ResetESPColor();
                             }
                         }
                     }
@@ -512,6 +552,7 @@ namespace AstroClient.components
                         if (GetCurrentSingleTagText() != HiddenRole)
                         {
                             SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
+                            ResetESPColor();
                         }
                     }
                 }
@@ -563,6 +604,8 @@ namespace AstroClient.components
                             if (GetCurrentSingleTagText() != ReturnedRole.ToString())
                             {
                                 SetTag(GameRoleTag, ReturnedRole.ToString(), DefaultTextColor, color.Value);
+                                SetEspColorIfExists(color.Value);
+
                             }
                         }
                         else
@@ -570,6 +613,7 @@ namespace AstroClient.components
                             if (GetCurrentSingleTagText() != NoRoles)
                             {
                                 SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
+                                ResetESPColor();
                                 AmongUSHasVoted = false;
                             }
                         }
@@ -579,6 +623,7 @@ namespace AstroClient.components
                         if (GetCurrentSingleTagText() != HiddenRole)
                         {
                             SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
+                            ResetESPColor();
                         }
                     }
                     return;
