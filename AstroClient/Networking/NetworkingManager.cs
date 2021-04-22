@@ -65,7 +65,10 @@ namespace AstroClient
             Initialized = true;
             SendClientInfo();
 
-            AstroNetworkClient.Client.Send($"world:{id}");
+            var worldInstance = RoomManager.field_Internal_Static_ApiWorldInstance_0;
+            var instanceID = worldInstance.idOnly;
+
+            AstroNetworkClient.Client.Send($"instanceID:{instanceID}");
         }
     }
 }

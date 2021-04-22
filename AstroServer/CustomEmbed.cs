@@ -113,20 +113,9 @@ namespace AstroServer
 
             embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
 
-            if (client.Name != string.Empty)
-            {
-                embedBuilder.AddField("Name", client.Name);
-            }
-
-            if (client.UserID != string.Empty)
-            {
-                embedBuilder.AddField("UserID", client.UserID);
-            }
-
-            if (client.WorldID != string.Empty)
-            {
-                embedBuilder.AddField("World", client.WorldID);
-            }
+            embedBuilder.AddField("Name", client.Name);
+            embedBuilder.AddField("UserID", client.UserID);
+            embedBuilder.AddField("InstanceID", client.InstanceID);
 
             embedBuilder.Footer = embedFooterBuilder;
 

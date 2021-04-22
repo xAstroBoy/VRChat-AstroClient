@@ -10,7 +10,7 @@ namespace AstroServer
 
         public string UserID = string.Empty;
 
-        public string WorldID = string.Empty;
+        public string InstanceID = string.Empty;
 
         public ulong DiscordID = 0;
 
@@ -20,9 +20,10 @@ namespace AstroServer
 
         internal Client()
         {
-            Name = "";
-            Key = "";
-            UserID = "";
+            Name = "N/A";
+            Key = "N/A";
+            UserID = "N/A";
+            InstanceID = "N/A";
             DiscordID = 0;
             IsAuthed = false;
             IsDeveloper = false;

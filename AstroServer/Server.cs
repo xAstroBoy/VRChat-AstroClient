@@ -130,9 +130,9 @@ namespace AstroServer
             {
                 client.UserID = second;
             }
-            else if (first.Equals("world"))
+            else if (first.Equals("instanceID"))
             {
-                client.WorldID = second;
+                client.InstanceID = second;
             }
             else if (first.Equals("ping"))
             {
