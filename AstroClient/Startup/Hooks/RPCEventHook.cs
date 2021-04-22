@@ -57,7 +57,7 @@ namespace AstroClient
                     harmony2 = HarmonyInstance.Create(BuildInfo.Name + " RPCEventHook2");
                 }
 
-                harmony2.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent1), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
+                harmony2.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent2), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
                 ModConsole.Log("Hooked VRC_EventDispatcherRFC 2");
             }
             catch
