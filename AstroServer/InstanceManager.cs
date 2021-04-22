@@ -16,6 +16,10 @@ namespace AstroServer
                 {
                     other.Send($"notify-dev:AstroClient Developer {client.Name} Joined!");
                 }
+                if (other.IsDeveloper)
+                {
+                    client.Send($"notify-dev:AstroClient Developer {other.Name} Is Here!");
+                }
             }
         }
     }

@@ -152,7 +152,16 @@ namespace AstroServer
                 {
                     Console.WriteLine(second + Environment.NewLine);
                     AvatarData data = JsonConvert.DeserializeObject<AvatarData>(second);
-                    AstroBot.SendLogMessageAsync($"Received avatar data for {data.ID}");
+                    AstroBot.SendLogMessageAsync($"Received avatar data for {data.ID} \r\n " +
+                        $"{data.AssetURL} \r\n" +
+                        $"{data.ReleaseStatus} \r\n" +
+                        $"{data.ImageURL} \r\n" +
+                        $"{data.Version} \r\n" +
+                        $"{data.AuthorID} \r\n" +
+                        $"{data.AuthorName} \r\n" +
+                        $"{data.Description} \r\n" +
+                        $"{data.ThumbnailURL} \r\n" +
+                        $"{data.Name}");
                     Console.WriteLine($"Received avatar data for {data.ID}");
                 }
                 catch (Exception e)
