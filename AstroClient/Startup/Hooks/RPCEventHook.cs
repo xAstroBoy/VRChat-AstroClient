@@ -38,7 +38,7 @@ namespace AstroClient
                     harmony1 = HarmonyInstance.Create(BuildInfo.Name + " RPCEventHook1");
                 }
 
-                harmony1.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent1), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
+                harmony1.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Boolean_Player_VrcEvent_VrcBroadcastType_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent1), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
                 ModConsole.Log("Hooked VRC_EventDispatcherRFC 1");
             }
             catch
@@ -158,7 +158,7 @@ namespace AstroClient
             }
         }
 
-        private static void OnRPCEvent1(ref Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
+        private static void OnRPCEvent1(ref Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2)
         {
             //var array = Networking.DecodeParameters(__1.ParameterBytes); // KIRAI SUGGESTS TO USE utf8 decode and discard the first 6 characters.
             string actionstring = string.Empty;
@@ -254,7 +254,7 @@ namespace AstroClient
             {
                 if (parameter != "UdonSyncRunProgramAsRPC")
                 {
-                    ModConsole.DebugLog($"RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}, {__3}, {__4}");
+                    ModConsole.DebugLog($"RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
                 }
             }
         }
