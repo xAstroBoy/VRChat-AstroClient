@@ -1,6 +1,9 @@
 ﻿using DayClientML2.Utility.Extensions;
+using Mono.CSharp;
 using RubyButtonAPI;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using VRC;
 
@@ -12,7 +15,13 @@ namespace AstroClient
 
         public static Dictionary<string, QMSingleButton> PlayerButtons { get; } = new Dictionary<string, QMSingleButton>();
 
-        private static readonly Color InstanceMasterColor = Color.cyan; // Light Blue
+        private static readonly Color InstanceMasterColor = Color.cyan;
+
+        private static readonly Color FriendColor = Color.green;
+
+        private static readonly Color ModeratorColor = Color.yellow;
+
+        private static readonly Color SelfColor = Color.magenta;
 
         public override void VRChat_OnUiManagerInit()
         {
@@ -21,11 +30,11 @@ namespace AstroClient
 
             if (ConfigManager.UI.ShowPlayersList)
             {
-                playersButton.setTextColor(UnityEngine.Color.green);
+                playersButton.setTextColor(Color.green);
             }
             else
             {
-                playersButton.setTextColor(UnityEngine.Color.red);
+                playersButton.setTextColor(Color.red);
             }
         }
 
@@ -52,37 +61,10 @@ namespace AstroClient
             InitializeButtons();
         }
 
-        private void AddButton(Player player)
-        {
-
-        }
-
-        private void RemoveButton(Player player)
-        {
-
-        }
-
-        private void LobbyOwnerCheck()
-        {
-
-        }
-
         private void InitializeButtons()
         {
-            var selfID = LocalPlayerUtils.GetSelfPlayer().UserID();
             var players = WorldUtils.GetAllPlayers0();
-            var temp_list = new List<Player>();
-
-            foreach (var player in players)
-            {
-                if (player.GetIsMaster())
-                {
-                    temp_list.Insert(0, player);
-                } else
-                {
-                    temp_list.Add(player);
-                }
-            }
+            var temp_list = players.OrderBy(p => p.GetIsMaster()).ThenBy(p => p.GetAPIUser().IsSelf).ThenBy(p => p.GetAPIUser().isFriend);
 
             float yPos_start = -0.5f;
             float yPos_max = 5f;
@@ -90,17 +72,27 @@ namespace AstroClient
             float xPos = -2f;
 
             ResetButtons();
-            foreach (var player in temp_list)
+            foreach (var player in temp_list.Reverse())
             {
                 var playerAPI = player.GetVRCPlayerApi();
                 var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, player.DisplayName(), () => { SelectPlayer(player); }, $"Select {player.DisplayName()}", null, null, true);
+
+                var rank = player.GetAPIUser().GetRankEnum();
 
                 if (player.GetIsMaster())
                 {
                     playerButton.setTextColor(InstanceMasterColor);
                 }
-
-                var rank = player.GetAPIUser().GetRankEnum();
+                else if (player.GetAPIUser().IsSelf)
+                {
+                    playerButton.setTextColor(SelfColor);
+                    playerButton.setBackgroundColor(SelfColor);
+                }
+                else if (player.GetAPIUser().isFriend)
+                {
+                    playerButton.setBackgroundColor(FriendColor);
+                    playerButton.setTextColor(FriendColor);
+                }
 
                 if (rank != null)
                 {
@@ -109,8 +101,8 @@ namespace AstroClient
                         var uiManager = VRCUiManager.prop_VRCUiManager_0;
                         PopupManager.QueHudMessage(uiManager, $"Warning {player.DisplayName()} is an admin/moderator!");
 
-                        playerButton.setTextColor(UnityEngine.Color.yellow);
-                        playerButton.setBackgroundColor(UnityEngine.Color.yellow);
+                        playerButton.setTextColor(ModeratorColor);
+                        playerButton.setBackgroundColor(ModeratorColor);
                     }
                 }
 
@@ -149,11 +141,11 @@ namespace AstroClient
             ConfigManager.UI.ShowPlayersList = !ConfigManager.UI.ShowPlayersList;
             if (ConfigManager.UI.ShowPlayersList)
             {
-                playersButton.setTextColor(UnityEngine.Color.green);
+                playersButton.setTextColor(Color.green);
             }
             else
             {
-                playersButton.setTextColor(UnityEngine.Color.red);
+                playersButton.setTextColor(Color.red);
             }
 
             foreach (var keyValuePair in PlayerButtons)
@@ -165,7 +157,7 @@ namespace AstroClient
         public static void ShowPlayerMenu()
         {
             ConfigManager.UI.ShowPlayersMenu = true;
-            playersButton.setTextColor(UnityEngine.Color.red);
+            playersButton.setTextColor(Color.green);
 
             playersButton.setActive(true);
 
@@ -178,7 +170,7 @@ namespace AstroClient
         public static void HidePlayerMenu()
         {
             ConfigManager.UI.ShowPlayersMenu = false;
-            playersButton.setTextColor(UnityEngine.Color.red);
+            playersButton.setTextColor(Color.red);
 
             playersButton.setActive(false);
 
