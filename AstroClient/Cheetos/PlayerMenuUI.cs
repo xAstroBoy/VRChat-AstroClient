@@ -67,6 +67,10 @@ namespace AstroClient
 
             foreach (var player in players)
             {
+                if (player.GetAPIUser().isFriend)
+                {
+                    temp_list.Insert(0, player);
+                }
                 if (player.UserID().Equals(selfID))
                 {
                     temp_list.Insert(0, player);
@@ -105,7 +109,7 @@ namespace AstroClient
                     playerButton.setBackgroundColor(SelfColor);
                 }
 
-                if (player.field_Private_APIUser_0.isFriend)
+                if (player.GetAPIUser().isFriend)
                 {
                     playerButton.setBackgroundColor(FriendColor);
                     playerButton.setTextColor(FriendColor);
