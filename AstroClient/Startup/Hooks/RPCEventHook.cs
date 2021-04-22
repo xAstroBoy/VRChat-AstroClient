@@ -70,6 +70,7 @@ namespace AstroClient
         private static void OnRPCEvent2(ref VRC_EventHandler __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
         {
             //var array = Networking.DecodeParameters(__1.ParameterBytes); // KIRAI SUGGESTS TO USE utf8 decode and discard the first 6 characters.
+
             string actionstring = string.Empty;
             string actiontext = string.Empty;
             string GameObjName = string.Empty;
@@ -161,6 +162,7 @@ namespace AstroClient
         private static void OnRPCEvent1(ref Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2)
         {
             //var array = Networking.DecodeParameters(__1.ParameterBytes); // KIRAI SUGGESTS TO USE utf8 decode and discard the first 6 characters.
+
             string actionstring = string.Empty;
             string actiontext = string.Empty;
             string sender = string.Empty;
