@@ -28,7 +28,7 @@ namespace AstroClient.components
             {
                 if (_HighlightFXCamera == null)
                 {
-                    var obj = GameObjectFinder.Find("_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Neck/Camera (eye)");
+                    var obj = HighlightsFX.prop_HighlightsFX_0.gameObject;
                     if (obj != null)
                     {
                         _HighlightFXCamera = obj;
