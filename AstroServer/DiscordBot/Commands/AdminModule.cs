@@ -131,21 +131,12 @@
         {
             if (Server.Clients.Count > 0)
             {
-                StringBuilder stringBuilder = new StringBuilder();
+                //stringBuilder.Append($"Client Count: {Server.Clients.Count} \r\n");
 
-                stringBuilder.Append($"Client Count: {Server.Clients.Count} \r\n");
                 foreach (var client in Server.Clients)
                 {
-                    string prefix = "Client";
-
-                    if (client.IsDeveloper)
-                    {
-                        prefix = "Developer";
-                    }
-
-                    stringBuilder.Append($"{client.ClientID}: [{prefix}] {client.Name}, {client.UserID}, {client.ClientSocket.Client.RemoteEndPoint} \r\n");
+                    await ReplyAsync(null, false, CustomEmbed.GetClientEmbed(client));
                 }
-                await ReplyAsync(stringBuilder.ToString());
             } else
             {
                 await ReplyAsync("There are no clients currently connected");

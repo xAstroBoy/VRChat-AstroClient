@@ -81,6 +81,58 @@ namespace AstroServer
             return embedBuilder.Build();
         }
 
+        public static Embed GetClientEmbed(Client client)
+        {
+            var color = Color.Blue;
+
+            if (client.IsDeveloper)
+            {
+                color = Color.Red;
+            }
+
+            var discordId = KeyManager.GetKeysDiscordOwner(client.Key);
+            var discordUser = AstroBot.Client.GetUser(discordId);
+
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+            {
+                Title = DiscordUtils.GetDiscordName(discordId),
+                Color = color,
+                ThumbnailUrl = discordUser.GetAvatarUrl()
+            };
+
+            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
+
+            if (KeyManager.IsDevKey(client.Key))
+            {
+                embedFooterBuilder.Text = "Developer";
+            }
+            else
+            {
+                embedFooterBuilder.Text = "Client";
+            }
+
+            embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
+
+            if (client.Name != string.Empty)
+            {
+                embedBuilder.AddField("Name", client.Name);
+            }
+
+            if (client.UserID != string.Empty)
+            {
+                embedBuilder.AddField("UserID", client.UserID);
+            }
+
+            if (client.WorldID != string.Empty)
+            {
+                embedBuilder.AddField("World", client.WorldID);
+            }
+
+            embedBuilder.Footer = embedFooterBuilder;
+
+            return embedBuilder.Build();
+        }
+
         public static Embed GetLoggedInEmbed(Client client)
         {
             var color = Color.Blue;

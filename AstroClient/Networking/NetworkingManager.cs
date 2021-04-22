@@ -64,6 +64,8 @@ namespace AstroClient
             UserID = self.UserID();
             Initialized = true;
             SendClientInfo();
+
+            AstroNetworkClient.Client.Send($"world:{id}");
         }
     }
 }

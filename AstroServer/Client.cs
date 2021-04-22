@@ -10,6 +10,8 @@ namespace AstroServer
 
         public string UserID = string.Empty;
 
+        public string WorldID = string.Empty;
+
         public ulong DiscordID = 0;
 
         public bool IsAuthed;
