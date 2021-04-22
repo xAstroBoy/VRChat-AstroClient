@@ -72,7 +72,7 @@ namespace AstroClient
                 {
                     temp_list.Insert(0, player);
                 }
-                else if (player.UserID().Equals(selfID))
+                else if (player.GetAPIUser().IsSelf)
                 {
                     temp_list.Insert(1, player);
                 }
@@ -99,7 +99,7 @@ namespace AstroClient
                 {
                     playerButton.setTextColor(InstanceMasterColor);
                 }
-                else if (player.UserID().Equals(selfID))
+                else if (player.GetAPIUser().IsSelf)
                 {
                     playerButton.setTextColor(SelfColor);
                     playerButton.setBackgroundColor(SelfColor);
