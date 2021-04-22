@@ -183,7 +183,7 @@ namespace AstroClient.Headlight
             {
                 try
                 {
-                    LightColor = ColorConverter.HexToColor(Clipboard.GetText());
+                    LightColor = ColorUtils.HexToColor(Clipboard.GetText());
                     UpdateLights();
                 }
                 catch (Exception)

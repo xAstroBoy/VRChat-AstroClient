@@ -121,11 +121,11 @@ namespace AstroClient.components
                                     }
                                     if (against != GetLocalPlayerNode())
                                     {
-                                        SetTag(AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#44DBAC"));
+                                        SetTag(AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorUtils.HexToColor("#44DBAC"));
                                     }
                                     else
                                     {
-                                        SetTag(AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorConverter.HexToColor("#C22B26"));
+                                        SetTag(AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorUtils.HexToColor("#C22B26"));
                                     }
                                 }
                                 return;
@@ -137,7 +137,7 @@ namespace AstroClient.components
                                 {
                                     AmongUSVoteRevealTag.ShowTag = true;
                                 }
-                                SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorConverter.HexToColor("#1BA039"));
+                                SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
                                 return;
                             }
                         }
@@ -155,7 +155,7 @@ namespace AstroClient.components
                     }
                     if (AmongUSVoteRevealTag != null)
                     {
-                        SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorConverter.HexToColor("#034989"));
+                        SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
                         if (JarRoleController.ViewRoles)
                         {
                             AmongUSVoteRevealTag.ShowTag = false;

@@ -53,11 +53,11 @@ namespace AstroClient
                                 }
                             }
 
-                            item.AddComponent<VRChatESP>();
+                            item.AddComponent<ObjectESP>();
                         }
                         else
                         {
-                            item.AddComponent<VRChatESP>();
+                            item.AddComponent<ObjectESP>();
                         }
                     }
                 }
@@ -74,7 +74,7 @@ namespace AstroClient
                 {
                     if (item != null)
                     {
-                        var ESP = item.GetComponent<VRChatESP>();
+                        var ESP = item.GetComponent<ObjectESP>();
                         if (ESP != null)
                         {
                             UnityEngine.Object.Destroy(ESP);
@@ -94,7 +94,7 @@ namespace AstroClient
                 {
                     if (item != null)
                     {
-                        item.AddComponent<VRChatESP>();
+                        item.AddComponent<ObjectESP>();
                     }
                 }
             }
@@ -110,7 +110,7 @@ namespace AstroClient
                 {
                     if (item != null)
                     {
-                        var ESP = item.GetComponent<VRChatESP>();
+                        var ESP = item.GetComponent<ObjectESP>();
                         if (ESP != null)
                         {
                             UnityEngine.Object.Destroy(ESP);
@@ -128,7 +128,7 @@ namespace AstroClient
             {
                 foreach (var item in items)
                 {
-                    var ESP = item.GetComponent<VRChatESP>();
+                    var ESP = item.GetComponent<ObjectESP>();
                     if (ESP != null)
                     {
                         UnityEngine.Object.Destroy(ESP);
@@ -147,7 +147,7 @@ namespace AstroClient
                 {
                     if (item != null)
                     {
-                        item.AddComponent<VRChatESP>();
+                        item.AddComponent<ObjectESP>();
                     }
                 }
             }

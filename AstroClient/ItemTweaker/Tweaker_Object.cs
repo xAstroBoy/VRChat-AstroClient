@@ -137,9 +137,9 @@ namespace AstroClient.ItemTweaker
                 {
                     if (CurrentSelectedObject != null)
                     {
-                        if (CurrentSelectedObject.GetComponent<VRChatESP>() == null)
+                        if (CurrentSelectedObject.GetComponent<ObjectESP>() == null)
                         {
-                            CurrentSelectedObject.AddComponent<VRChatESP>();
+                            CurrentSelectedObject.AddComponent<ObjectESP>();
                         }
                     }
                 }
@@ -147,7 +147,7 @@ namespace AstroClient.ItemTweaker
                 {
                     if (CurrentSelectedObject != null)
                     {
-                        if (CurrentSelectedObject.GetComponent<VRChatESP>() != null)
+                        if (CurrentSelectedObject.GetComponent<ObjectESP>() != null)
                         {
                             if (GameObjectESP.isMurderItemsESPActivated)
                             {
@@ -157,14 +157,14 @@ namespace AstroClient.ItemTweaker
                                     {
                                         if (!GameObjectESP.isMurderItemsESPActivated)
                                         {
-                                            UnityEngine.Object.Destroy(CurrentSelectedObject.GetComponent<VRChatESP>());
+                                            UnityEngine.Object.Destroy(CurrentSelectedObject.GetComponent<ObjectESP>());
                                         }
                                     }
                                 }
                             }
                             else
                             {
-                                UnityEngine.Object.Destroy(CurrentSelectedObject.GetComponent<VRChatESP>());
+                                UnityEngine.Object.Destroy(CurrentSelectedObject.GetComponent<ObjectESP>());
                             }
                         }
                     }
@@ -191,7 +191,7 @@ namespace AstroClient.ItemTweaker
                 {
 
 
-                    VRChatESP installedESP = _CurrentSelectedObject.GetComponent<VRChatESP>();
+                    ObjectESP installedESP = _CurrentSelectedObject.GetComponent<ObjectESP>();
                     if (installedESP != null)
                     {
                         if (GameObjectESP.isMurderItemsESPActivated)
@@ -219,10 +219,10 @@ namespace AstroClient.ItemTweaker
                 {
                     if (value != null)
                     {
-                        VRChatESP esp = value.GetComponent<VRChatESP>();
+                        ObjectESP esp = value.GetComponent<ObjectESP>();
                         if (esp == null)
                         {
-                            esp = value.AddComponent<VRChatESP>();
+                            esp = value.AddComponent<ObjectESP>();
                         }
                     }
                 }
