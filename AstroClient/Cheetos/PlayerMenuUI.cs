@@ -62,7 +62,6 @@ namespace AstroClient
 
         private void InitializeButtons()
         {
-            var selfID = LocalPlayerUtils.GetSelfPlayer().UserID();
             var players = WorldUtils.GetAllPlayers0();
             var temp_list = new List<Player>();
 
