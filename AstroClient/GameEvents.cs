@@ -1,168 +1,86 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.Startup.Hooks;
+﻿using AstroClient.Startup.Hooks;
 using System;
 using UnityEngine;
 using VRC;
 using VRC.SDKBase;
 
-
 namespace AstroClient
 {
     // thanks TO Cheeto aka Craig on discord, he's been really helpful!
-    public class GameEvents 
+    public class GameEvents
     {
         public GameEvents()
         {
-            try
-            {
-                // ML Events
-                //Main.Event_OnApplicationStart += Internal_OnApplicationStart;
-                Main.Event_OnUpdate += Internal_OnUpdate;
-                Main.Event_LateUpdate += Internal_OnLateUpdate;
-                Main.Event_VRChat_OnUiManagerInit += Internal_VRChat_OnUiManagerInit;
-                Main.Event_OnLevelLoaded += Internal_OnLevelLoaded;
+            // ML Events
+            //Main.Event_OnApplicationStart += Internal_OnApplicationStart;
+            Main.Event_OnUpdate += Internal_OnUpdate;
+            Main.Event_LateUpdate += Internal_OnLateUpdate;
+            Main.Event_VRChat_OnUiManagerInit += Internal_VRChat_OnUiManagerInit;
+            Main.Event_OnLevelLoaded += Internal_OnLevelLoaded;
 
-                // PATCHES
+            // PATCHES
 
-                // HOOKS
-                OnWorldRevealHook.Event_OnWorldReveal += Internal_OnWorldReveal;
-                SpawnEmojiRPCHook.Event_SpawnEmojiRPC += Internal_SpawnEmojiRPC;
-                TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += Internal_VRC_EventDispatcherRFC_triggerEvent;
+            // HOOKS
+            OnWorldRevealHook.Event_OnWorldReveal += Internal_OnWorldReveal;
+            SpawnEmojiRPCHook.Event_SpawnEmojiRPC += Internal_SpawnEmojiRPC;
+            TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += Internal_VRC_EventDispatcherRFC_triggerEvent;
 
-                RPCEventHook.Event_OnUdonSyncRPC += Internal_OnUdonSyncRPCEvent;
+            RPCEventHook.Event_OnUdonSyncRPC += Internal_OnUdonSyncRPCEvent;
 
+            AvatarManagerHook.Event_OnAvatarSpawn += Internal_OnAvatarSpawn;
 
-                AvatarManagerHook.Event_OnAvatarSpawn += Internal_OnAvatarSpawn;
-
-                NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
-                NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
-
-            }
-            catch (Exception e)
-            {
-                ModConsole.ErrorExc(e);
-            }
+            NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
+            NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
         }
 
         private void Internal_OnApplicationStart(object sender, EventArgs e)
         {
-            try
-            {
-                OnApplicationStart();
-            }
-            catch (Exception Exc)
-            {
-                ModConsole.ErrorExc(Exc);
-            }
+            OnApplicationStart();
         }
 
         private void Internal_VRChat_OnUiManagerInit(object sender, EventArgs e)
         {
-            try
-            {
-                VRChat_OnUiManagerInit();
-            }
-            catch (Exception Exc)
-            {
-                ModConsole.ErrorExc(Exc);
-            }
+            VRChat_OnUiManagerInit();
         }
 
         private void Internal_OnUpdate(object sender, EventArgs e)
         {
-            try
-            {
-                OnUpdate();
-            }
-            catch (Exception Exc)
-            {
-                ModConsole.ErrorExc(Exc);
-            }
+            OnUpdate();
         }
 
         private void Internal_OnLateUpdate(object sender, EventArgs e)
         {
-            try
-            {
-                OnLateUpdate();
-            }
-            catch (Exception Exc)
-            {
-                ModConsole.ErrorExc(Exc);
-            }
+            OnLateUpdate();
         }
 
         private void Internal_OnLevelLoaded(object sender, EventArgs e)
         {
-            try
-            {
-                OnLevelLoaded();
-            }
-            catch (Exception Exc)
-            {
-                ModConsole.ErrorExc(Exc);
-            }
-
+            OnLevelLoaded();
         }
 
         private void Internal_OnPlayerLeft(object sender, PlayerEventArgs e)
         {
-            try
-            {
-                OnPlayerLeft(e.player);
-            }
-            catch (Exception Exc)
-            {
-                ModConsole.ErrorExc(Exc);
-            }
+            OnPlayerLeft(e.player);
         }
 
         private void Internal_OnPlayerJoined(object sender, PlayerEventArgs e)
         {
-            try
-            {
-                OnPlayerJoined(e.player);
-            }
-            catch (Exception Exc)
-            {
-                ModConsole.ErrorExc(Exc);
-            }
+            OnPlayerJoined(e.player);
         }
 
         private void Internal_SpawnEmojiRPC(object sender, SpawnEmojiArgs e)
         {
-            try
-            {
-                SpawnEmojiRPC(e.player, e.Emoji);
-            }
-            catch (Exception Exc)
-            {
-                ModConsole.ErrorExc(Exc);
-            }
+            SpawnEmojiRPC(e.player, e.Emoji);
         }
 
         private void Internal_OnWorldReveal(object sender, OnWorldRevealArgs e)
         {
-            try
-            {
-                OnWorldReveal(e.ID, e.Name, e.AssetUrl);
-            }
-            catch (Exception Exc)
-            {
-                ModConsole.ErrorExc(Exc);
-            }
+            OnWorldReveal(e.ID, e.Name, e.AssetUrl);
         }
 
         private void Internal_VRC_EventDispatcherRFC_triggerEvent(object sender, VRC_EventDispatcherRFC_TriggerEventArgs e)
         {
-            try
-            {
-                VRC_EventDispatcherRFC_triggerEvent(e.VRC_EventHandler, e.VrcEvent, e.VrcBroadcastType, e.UnknownInt, e.UnknownFloat);
-            }
-            catch (Exception Exc)
-            {
-                ModConsole.ErrorExc(Exc);
-            }
+            VRC_EventDispatcherRFC_triggerEvent(e.VRC_EventHandler, e.VrcEvent, e.VrcBroadcastType, e.UnknownInt, e.UnknownFloat);
         }
 
         private void Internal_OnUdonSyncRPCEvent(object sender, UdonSyncRPCEventArgs e)
@@ -170,17 +88,9 @@ namespace AstroClient
             OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
         }
 
-
         private void Internal_OnAvatarSpawn(object sender, OnAvatarSpawnArgs e)
         {
-            try
-            {
-                OnAvatarSpawn(e.Avatar, e.VRC_AvatarDescriptor, e.state);
-            }
-            catch (Exception Exc)
-            {
-                ModConsole.ErrorExc(Exc);
-            }
+            OnAvatarSpawn(e.Avatar, e.VRC_AvatarDescriptor, e.state);
         }
 
         public virtual void VRChat_OnUiManagerInit()
