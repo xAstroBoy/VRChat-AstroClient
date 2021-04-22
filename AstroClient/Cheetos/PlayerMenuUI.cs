@@ -1,6 +1,7 @@
 ﻿using DayClientML2.Utility.Extensions;
 using Mono.CSharp;
 using RubyButtonAPI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -63,23 +64,7 @@ namespace AstroClient
         private void InitializeButtons()
         {
             var players = WorldUtils.GetAllPlayers0();
-            var temp_list = new List<Player>();
-
-            foreach (var player in players)
-            {
-                if (player.GetIsMaster())
-                {
-                    temp_list.Insert(0, player);
-                }
-                else if (player.GetAPIUser().IsSelf)
-                {
-                    temp_list.Insert(1, player);
-                }
-                else
-                {
-                    temp_list.Add(player);
-                }
-            }
+            var temp_list = players.OrderBy(p => p.GetIsMaster()).ThenBy(p => p.GetAPIUser().IsSelf).ThenBy(p => p.GetAPIUser().isFriend);
 
             float yPos_start = -0.5f;
             float yPos_max = 5f;
@@ -87,7 +72,7 @@ namespace AstroClient
             float xPos = -2f;
 
             ResetButtons();
-            foreach (var player in temp_list)
+            foreach (var player in temp_list.Reverse())
             {
                 var playerAPI = player.GetVRCPlayerApi();
                 var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, player.DisplayName(), () => { SelectPlayer(player); }, $"Select {player.DisplayName()}", null, null, true);
