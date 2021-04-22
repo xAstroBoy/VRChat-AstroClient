@@ -175,8 +175,6 @@
     <Compile Include="GameObject\Components\ComponentsBtn.cs" />
     <Compile Include="GameObject\Components\CrazyObjects\CrazyObject.cs" />
     <Compile Include="GameObject\Components\CrazyObjects\CrazyObjectManager.cs" />
-    <Compile Include="GameObject\Components\ESP\ESPController.cs" />
-    <Compile Include="GameObject\Components\ESP\ESPControllerManager.cs" />
     <Compile Include="GameObject\Components\ItemInflater\ItemInflater.cs" />
     <Compile Include="GameObject\Components\ItemInflater\ItemInflaterManager.cs" />
     <Compile Include="GameObject\Components\JarRoleRevealers\JarRoleController.cs" />
