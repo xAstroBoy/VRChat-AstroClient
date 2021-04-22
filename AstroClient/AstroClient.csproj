@@ -176,6 +176,7 @@
     <Compile Include="GameObject\Components\ComponentsBtn.cs" />
     <Compile Include="GameObject\Components\CrazyObjects\CrazyObject.cs" />
     <Compile Include="GameObject\Components\CrazyObjects\CrazyObjectManager.cs" />
+    <Compile Include="GameObject\Components\ESP\EspHelper.cs" />
     <Compile Include="GameObject\Components\ESP\ObjectESP.cs" />
     <Compile Include="GameObject\Components\ItemInflater\ItemInflater.cs" />
     <Compile Include="GameObject\Components\ItemInflater\ItemInflaterManager.cs" />

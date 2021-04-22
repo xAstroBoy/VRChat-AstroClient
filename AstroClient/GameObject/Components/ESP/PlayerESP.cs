@@ -3,6 +3,7 @@ using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
 using DayClientML2.Utility.Extensions;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
@@ -56,26 +57,38 @@ namespace AstroClient.components
                 else
                 {
                     Debug($"Found SelectRegion Transform Assigned in {player.DisplayName()}!");
-                    SelectRegionRenderer = SelectRegion.GetComponent<Renderer>();
-                    if (SelectRegionRenderer == null)
+                    ObjRenderers = SelectRegion.GetComponentsInChildren<Renderer>(true).ToList();
+                    ObjMeshRenderers = SelectRegion.GetComponentsInChildren<MeshRenderer>(true).ToList();
+                    if (ObjMeshRenderers == null && ObjRenderers == null && ObjMeshRenderers.Count() == 0 && ObjRenderers.Count() == 0)
                     {
                         ModConsole.Error($"Failed to Generate a PlayerESP for Player {player.DisplayName()}, Due to SelectRegion Renderer Missing!");
                         Object.Destroy(this);
+                        return;
                     }
                     else
                     {
                         Debug($"Found SelectRegion Renderer in {player.DisplayName()}, Activating ESP !");
                         if (HighLightOptions == null)
                         {
-                            HighLightOptions = HighlightsFX.prop_HighlightsFX_0.gameObject.AddComponent<HighlightsFXStandalone>();
+                            HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
                             if (HighLightOptions != null)
                             {
                                 Debug("Added HighlightsFXStandalone in SelectRegion For Custom Color Option for ESP!");
                             }
                         }
-                        if (HighLightOptions != null)
+                        foreach (var ObjRenderer in ObjRenderers)
                         {
-                            HighLightOptions.SetHighLighter(SelectRegionRenderer, true);
+                            if (ObjRenderer != null)
+                            {
+                                HighLightOptions.SetHighLighter(ObjRenderer, true);
+                            }
+                        }
+                        foreach (var ObjMeshRenderer in ObjMeshRenderers)
+                        {
+                            if (ObjMeshRenderer != null)
+                            {
+                                HighLightOptions.SetHighLighter(ObjMeshRenderer, true);
+                            }
                         }
                     }
                 }
@@ -83,12 +96,69 @@ namespace AstroClient.components
 
         }
 
-
-
         public void OnDestroy()
         {
-            HighLightOptions.SetHighLighter(SelectRegionRenderer, false);
-            HighLightOptions.DestroyMeLocal();
+            if (HighLightOptions != null)
+            {
+                foreach (var ObjRenderer in ObjRenderers)
+                {
+                    if (ObjRenderer != null)
+                    {
+                        HighLightOptions.SetHighLighter(ObjRenderer, false);
+                    }
+                }
+                foreach (var ObjMeshRenderer in ObjMeshRenderers)
+                {
+                    if (ObjMeshRenderer != null)
+                    {
+                        HighLightOptions.SetHighLighter(ObjMeshRenderer, false);
+                    }
+                }
+            }
+            HighLightOptions.DestroyHighlighter();
+        }
+
+
+        public void OnEnable()
+        {
+            if (HighLightOptions != null)
+            {
+                foreach (var ObjRenderer in ObjRenderers)
+                {
+                    if (ObjRenderer != null)
+                    {
+                        HighLightOptions.SetHighLighter(ObjRenderer, true);
+                    }
+                }
+                foreach (var ObjMeshRenderer in ObjMeshRenderers)
+                {
+                    if (ObjMeshRenderer != null)
+                    {
+                        HighLightOptions.SetHighLighter(ObjMeshRenderer, true);
+                    }
+                }
+            }
+        }
+
+        public void OnDisable()
+        {
+            if (HighLightOptions != null)
+            {
+                foreach (var ObjRenderer in ObjRenderers)
+                {
+                    if (ObjRenderer != null)
+                    {
+                        HighLightOptions.SetHighLighter(ObjRenderer, false);
+                    }
+                }
+                foreach (var ObjMeshRenderer in ObjMeshRenderers)
+                {
+                    if (ObjMeshRenderer != null)
+                    {
+                        HighLightOptions.SetHighLighter(ObjMeshRenderer, false);
+                    }
+                }
+            }
         }
 
 
@@ -112,7 +182,8 @@ namespace AstroClient.components
 
         private Player player;
         private Transform SelectRegion;
-        private Renderer SelectRegionRenderer;
+        private List<Renderer> ObjRenderers = new List<Renderer>();
+        private List<MeshRenderer> ObjMeshRenderers = new List<MeshRenderer>();
         private HighlightsFXStandalone HighLightOptions;
 
         internal Player AssignedPlayer

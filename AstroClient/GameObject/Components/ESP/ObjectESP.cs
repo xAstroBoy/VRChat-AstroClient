@@ -1,6 +1,8 @@
 ﻿using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -32,12 +34,10 @@ namespace AstroClient.components
         public void Start()
         {
             obj = this.gameObject;
-            ObjRenderer = obj.GetComponentInChildren<Renderer>(true);
-            if (ObjRenderer == null)
-            {
-                ObjMeshRenderer = obj.GetComponentInChildren<MeshRenderer>(true);
-            }
-            if (ObjMeshRenderer == null && ObjRenderer == null)
+            //ObjRenderers = obj.GetComponentsInChildren<Renderer>(true).ToList();
+            ObjMeshRenderers = obj.GetComponentsInChildren<MeshRenderer>(true).ToList();
+
+            if (ObjMeshRenderers == null  && ObjMeshRenderers.Count() == 0) 
             {
                 ModConsole.DebugError($"Unable to add ObjectESP to  {obj.name} due to MeshRenderer and Renderer Being null");
                 Object.Destroy(this);
@@ -48,70 +48,114 @@ namespace AstroClient.components
                 Debug($"Found Renderer in {obj.name}, Activating ESP !");
                 if (HighLightOptions == null)
                 {
-                    HighLightOptions = HighlightsFX.prop_HighlightsFX_0.gameObject.AddComponent<HighlightsFXStandalone>();
+                    HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
                 }
                 if (HighLightOptions != null)
                 {
-                    if (ObjRenderer != null)
+                    //foreach (var ObjRenderer in ObjRenderers)
+                    //{
+                    //    if (ObjRenderer != null)
+                    //    {
+                    //        HighLightOptions.SetHighLighter(ObjRenderer, Color.green, true);
+                    //    }
+                    //}
+                    foreach (var ObjMeshRenderer in ObjMeshRenderers)
                     {
-                        HighLightOptions.SetHighLighter(ObjRenderer, Color.green, true);
-                    }
-                    else if (ObjMeshRenderer != null)
-                    {
-                        HighLightOptions.SetHighLighter(ObjMeshRenderer, Color.green, true);
+                        if (ObjMeshRenderer != null)
+                        {
+                            HighLightOptions.SetHighLighter(ObjMeshRenderer, Color.green, true);
+                        }
                     }
                 }
+                HighLightOptions.enabled = obj.active;
+
             }
         }
 
+        //public void Update()
+        //{
+        //    if (obj != null)
+        //    {
+
+        //        if (HighLightOptions != null)
+        //        {
+        //            if (HighLightOptions.enabled != obj.active)
+        //            {
+        //                HighLightOptions.enabled = obj.active;
+        //            }
+        //        }
+        //    }
+        //}
+
         public void OnDestroy()
         {
-            if (ObjRenderer != null)
+            if (HighLightOptions != null)
             {
-                HighLightOptions.SetHighLighter(ObjRenderer, false);
+                //foreach (var ObjRenderer in ObjRenderers)
+                //{
+                //    if (ObjRenderer != null)
+                //    {
+                //        HighLightOptions.SetHighLighter(ObjRenderer, false);
+                //    }
+                //}
+                foreach (var ObjMeshRenderer in ObjMeshRenderers)
+                {
+                    if (ObjMeshRenderer != null)
+                    {
+                        HighLightOptions.SetHighLighter(ObjMeshRenderer, false);
+                    }
+                }
             }
-            else if (ObjMeshRenderer != null)
-            {
-                HighLightOptions.SetHighLighter(ObjMeshRenderer, false);
-            }
-            HighLightOptions.DestroyMeLocal();
+            HighLightOptions.DestroyHighlighter();
         }
 
         
         public void OnEnable()
         {
-            if (ObjRenderer != null)
+            if (HighLightOptions != null)
             {
-                HighLightOptions.SetHighLighter(ObjRenderer, true);
-            }
-            else if (ObjMeshRenderer != null)
-            {
-                HighLightOptions.SetHighLighter(ObjMeshRenderer, true);
+                //foreach (var ObjRenderer in ObjRenderers)
+                //{
+                //    if (ObjRenderer != null)
+                //    {
+                //        HighLightOptions.SetHighLighter(ObjRenderer, true);
+                //    }
+                //}
+                foreach (var ObjMeshRenderer in ObjMeshRenderers)
+                {
+                    if (ObjMeshRenderer != null)
+                    {
+                        HighLightOptions.SetHighLighter(ObjMeshRenderer, true);
+                    }
+                }
             }
         }
 
         public void OnDisable()
         {
-            if (ObjRenderer != null)
+            if (HighLightOptions != null)
             {
-                HighLightOptions.SetHighLighter(ObjRenderer, false);
-            }
-            else if (ObjMeshRenderer != null)
-            {
-                HighLightOptions.SetHighLighter(ObjMeshRenderer, false);
+                //foreach (var ObjRenderer in ObjRenderers)
+                //{
+                //    if (ObjRenderer != null)
+                //    {
+                //        HighLightOptions.SetHighLighter(ObjRenderer, false);
+                //    }
+                //}
+                foreach (var ObjMeshRenderer in ObjMeshRenderers)
+                {
+                    if (ObjMeshRenderer != null)
+                    {
+                        HighLightOptions.SetHighLighter(ObjMeshRenderer, false);
+                    }
+                }
             }
         }
 
+
         internal void ChangeColor(Color newcolor)
         {
-            if (ObjRenderer != null)
-            {
-                HighLightOptions.SetHighLighterColor(newcolor);
-            }
-            else if (ObjMeshRenderer != null)
-            {
-                HighLightOptions.SetHighLighterColor(newcolor);
-            }
+            HighLightOptions.SetHighLighterColor(newcolor);
         }
 
         internal Color GetCurrentESPColor
@@ -122,9 +166,11 @@ namespace AstroClient.components
             }
         }
 
+
+
         private GameObject obj;
-        private Renderer ObjRenderer;
-        private MeshRenderer ObjMeshRenderer;
+        //private List<Renderer> ObjRenderers = new List<Renderer>();
+        private List<MeshRenderer> ObjMeshRenderers = new List<MeshRenderer>();
         private HighlightsFXStandalone HighLightOptions;
 
         internal GameObject AssignedObject

@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using AstroClient.components;
+using AstroClient.Finder;
+using UnityEngine;
 
 namespace AstroClient.extensions
 {
@@ -46,6 +48,33 @@ namespace AstroClient.extensions
             }
         }
 
+        public static HighlightsFXStandalone AddHighlighter(this GameObject obj)
+        {
+            var item = obj.AddComponent<HighlightsFXStandalone>();
+            if(item != null)
+            {
+                if(!EspHelper.SpawnedESPsHolders.Contains(item))
+                {
+                    EspHelper.SpawnedESPsHolders.Add(item);
+                }
+            }
+
+            return item;
+        }
+
+
+        public static void DestroyHighlighter(this HighlightsFXStandalone item)
+        {
+            if (item != null)
+            {
+                if (EspHelper.SpawnedESPsHolders.Contains(item))
+                {
+                    EspHelper.SpawnedESPsHolders.Remove(item);
+                }
+            }
+            UnityEngine.Object.DestroyImmediate(item);
+        }
+
 
         public static void SetHighLighter(this HighlightsFXStandalone item, MeshRenderer rend, Color color, bool status)
         {
@@ -74,5 +103,8 @@ namespace AstroClient.extensions
                 item.highlightColor = new Color(0.5019608f, 0.5019608f, 0.5019608f, 1f);
             }
         }
+
+
+
     }
 }

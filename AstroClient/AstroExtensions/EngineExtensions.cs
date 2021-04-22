@@ -130,12 +130,12 @@ namespace AstroClient.extensions
                 }
                 if (obj != null)
                 {
-                    ModConsole.Log("Failed To Destroy Object : " + obj.name, Color.Red);
-                    ModConsole.Log("Try To Destroy His GameObject in case you are trying to destroy the transform.", Color.Yellow);
+                    ModConsole.DebugLog("Failed To Destroy Object : " + obj.name, Color.Red);
+                    ModConsole.DebugLog("Try To Destroy His GameObject in case you are trying to destroy the transform.", Color.Yellow);
                 }
                 else
                 {
-                    ModConsole.Log("Destroyed Client-side Object : " + name, Color.Green);
+                    ModConsole.DebugLog("Destroyed Client-side Object : " + name, Color.Green);
                 }
             }
         }
