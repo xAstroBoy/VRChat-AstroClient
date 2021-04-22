@@ -2,6 +2,7 @@
 using Mono.CSharp;
 using RubyButtonAPI;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using VRC;
 
@@ -67,21 +68,17 @@ namespace AstroClient
 
             foreach (var player in players)
             {
-                if (player.GetAPIUser().isFriend)
+                if (player.GetIsMaster())
                 {
                     temp_list.Insert(0, player);
                 }
-                if (player.UserID().Equals(selfID))
+                else if (player.UserID().Equals(selfID))
                 {
-                    temp_list.Insert(0, player);
-                }
-                else if (player.GetIsMaster())
-                {
-                    temp_list.Insert(0, player);
+                    temp_list.Insert(1, player);
                 }
                 else
                 {
-                    temp_list.Add(player);
+                    temp_list.Append(player);
                 }
             }
 
