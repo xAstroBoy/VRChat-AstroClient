@@ -78,7 +78,7 @@ namespace AstroClient
                 }
                 else
                 {
-                    temp_list.Append(player);
+                    temp_list.Add(player);
                 }
             }
 
@@ -93,20 +93,18 @@ namespace AstroClient
                 var playerAPI = player.GetVRCPlayerApi();
                 var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, player.DisplayName(), () => { SelectPlayer(player); }, $"Select {player.DisplayName()}", null, null, true);
 
+                var rank = player.GetAPIUser().GetRankEnum();
+
                 if (player.GetIsMaster())
                 {
                     playerButton.setTextColor(InstanceMasterColor);
                 }
-
-                var rank = player.GetAPIUser().GetRankEnum();
-
-                if (player.UserID().Equals(selfID))
+                else if (player.UserID().Equals(selfID))
                 {
                     playerButton.setTextColor(SelfColor);
                     playerButton.setBackgroundColor(SelfColor);
                 }
-
-                if (player.GetAPIUser().isFriend)
+                else if (player.GetAPIUser().isFriend)
                 {
                     playerButton.setBackgroundColor(FriendColor);
                     playerButton.setTextColor(FriendColor);
@@ -175,7 +173,7 @@ namespace AstroClient
         public static void ShowPlayerMenu()
         {
             ConfigManager.UI.ShowPlayersMenu = true;
-            playersButton.setTextColor(Color.red);
+            playersButton.setTextColor(Color.green);
 
             playersButton.setActive(true);
 
