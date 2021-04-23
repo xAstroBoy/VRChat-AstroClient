@@ -42,7 +42,10 @@ namespace DayClientML2.Utility.Extensions
             if (true)
             {
                 if (HudMessage1 == null)
+                {
                     HudMessage1 = CreateTextNear(CreateImage("yes", 100f), 110f, TextAnchor.LowerCenter);
+                    HudMessage1.supportRichText = true;
+                }
                 MelonCoroutines.Start(ShowMessage(HudMessage1, MessagesList, Message));
             }
             else
