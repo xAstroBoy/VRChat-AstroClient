@@ -36,6 +36,8 @@ namespace AstroClient.Startup
 
             ClassInjector.RegisterTypeInIl2Cpp<PlayerESP>();
 
+            ClassInjector.RegisterTypeInIl2Cpp<Murder4PatronUnlocker>();
+
 
 
             if (Bools.AllowAttackerComponent)
