@@ -10,7 +10,7 @@ namespace AstroClient.Cheetos
         public static Texture2D LoadPNG(string filePath)
         {
 
-            Texture2D tex = null;
+            Texture2D tex;
             byte[] fileData;
 
             if (File.Exists(filePath))
