@@ -184,8 +184,16 @@ namespace AstroClient
 
             if (__1.ParameterBytes != null && __1.ParameterBytes.Count != 0)
             {
+
                 actionstring = System.Text.Encoding.UTF8.GetString(__1.ParameterBytes);
-                actiontext = actionstring.Substring(6);
+                if (actionstring.Length >= 6)
+                {
+                    actiontext = actionstring.Substring(6);
+                }
+                else
+                {
+                    return; // INVALID EVENT
+                }
             }
             else
             {
