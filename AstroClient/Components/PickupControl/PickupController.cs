@@ -940,7 +940,7 @@ namespace AstroClient.components
         }
 
         [HideFromIl2Cpp]
-        private string CurrentObjectHolder
+        internal string CurrentObjectHolder
         {
             [HideFromIl2Cpp]
             get
@@ -978,6 +978,48 @@ namespace AstroClient.components
                 return "None";
             }
         }
+
+
+        internal VRCPlayerApi CurrentObjectHolderPlayer
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                try
+                {
+                    if (Pickup1 != null)
+                    {
+                        var user = Pickup1.currentPlayer;
+                        if (user != null)
+                        {
+                            return user;
+                        }
+                    }
+                    else if (Pickup2 != null)
+                    {
+                        var user = Pickup3.currentPlayer;
+                        if (user != null)
+                        {
+                            return user;
+                        }
+                    }
+                    else if (Pickup3 != null)
+                    {
+                        var user = Pickup3.currentPlayer;
+                        if (user != null)
+                        {
+                            return user;
+                        }
+                    }
+                }
+                catch
+                {
+                }
+                return null;
+            }
+        }
+
+
 
         [HideFromIl2Cpp]
         private string PickupHeldButtonText

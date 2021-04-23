@@ -36,7 +36,10 @@ namespace AstroClient
             }
 
             item_DetectiveRevolver = GameObjectFinder.Find("Game Logic/Weapons/Revolver");
-
+            if(item_DetectiveRevolver != null)
+            {
+                DetectiveGunPerkUnlocker = item_DetectiveRevolver.AddComponent<Murder4PatronUnlocker>();
+            }    
             Clue_photograph = GameObjectFinder.Find("Game Logic/Clues/Clue (photograph)");
             Clue_notebook = GameObjectFinder.Find("Game Logic/Clues/Clue (notebook)");
             Clue_Locket = GameObjectFinder.Find("Game Logic/Clues/Clue (locket)");
@@ -54,7 +57,6 @@ namespace AstroClient
                     ModConsole.Log("Could Not Find The Present Clue!");
                 }
             }
-            item_DetectiveRevolver = GameObjectFinder.Find("Game Logic/Weapons/Revolver");
             item_Knife_0 = GameObjectFinder.Find("Game Logic/Weapons/Knife (0)");
             item_Knife_1 = GameObjectFinder.Find("Game Logic/Weapons/Knife (1)");
             item_Knife_2 = GameObjectFinder.Find("Game Logic/Weapons/Knife (2)");
@@ -292,6 +294,8 @@ namespace AstroClient
             SafetySwap = false;
             RoleSwapper_GetDetectiveRole = false;
             RoleSwapper_GetMurdererRole = false;
+            EveryoneHasPatreonPerk = false;
+            OnlySelfHasPatreonPerk = false;
         }
 
         public static void Murder4CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
@@ -455,8 +459,12 @@ namespace AstroClient
 
             // FUCK NO CLUE WHERE TO PLACE THE NEW BUTTONS LOL BRB
             Murder4UdonExploits.Init_RoleSwap_Menu(Murder4CheatPage, 2, 0.5f, true);
-            GetDetectiveRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1, "Get Detective Role", new Action(() => {RoleSwapper_GetDetectiveRole = true; RoleSwapper_GetMurdererRole = false; }), "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = false; }), "Assign Yourself Detective Role on Next Round!", Color.green, Color.red, null, false, true);
-            GetMurdererRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = true; RoleSwapper_GetDetectiveRole = false; }), "Get Murderer Role", new Action(() => {RoleSwapper_GetMurdererRole = false;}), "Assign Yourself Murderer Role on Next Round!", Color.green, Color.red, null, false, true);
+            GetSelfPatreonGunBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1, "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = true; EveryoneHasPatreonPerk = false; }), "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For You!", Color.green, Color.red, null, false, true);
+            GetEveryonePatreonGunBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1.5f, "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = true; OnlySelfHasPatreonPerk = false; }), "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For Everyone!", Color.green, Color.red, null, false, true);
+
+
+            GetDetectiveRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 3, 1, "Get Detective Role", new Action(() => {RoleSwapper_GetDetectiveRole = true; RoleSwapper_GetMurdererRole = false; }), "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = false; }), "Assign Yourself Detective Role on Next Round!", Color.green, Color.red, null, false, true);
+            GetMurdererRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 3, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = true; RoleSwapper_GetDetectiveRole = false; }), "Get Murderer Role", new Action(() => {RoleSwapper_GetMurdererRole = false;}), "Assign Yourself Murderer Role on Next Round!", Color.green, Color.red, null, false, true);
 
             GameObjectESP.Murder4ESPtoggler = new QMSingleToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
             JarRoleController.Murder4RolesRevealerToggle = new QMSingleToggleButton(Murder4CheatPage, 3, 0.5f, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", Color.green, Color.red, null, false, true);
@@ -477,10 +485,6 @@ namespace AstroClient
         {
             foreach (var knife in Knifes)
             {
-                if (knife.GetComponent<PickupController>() == null)
-                {
-                    knife.AddComponent<PickupController>();
-                }
                 Pickup.SetPickupable(knife, Pickupable);
             }
         }
@@ -489,11 +493,6 @@ namespace AstroClient
         {
             foreach (var knife in Knifes)
             {
-                if (knife.GetComponent<PickupController>() == null)
-                {
-                    knife.AddComponent<PickupController>();
-                }
-
                 Pickup.SetPickupOrientation(knife, VRC.SDKBase.VRC_Pickup.PickupOrientation.Grip);
                 Pickup.SetProximity(knife, 500f);
             }
@@ -503,10 +502,6 @@ namespace AstroClient
         {
             foreach (var knife in Knifes)
             {
-                if (knife.GetComponent<PickupController>() == null)
-                {
-                    knife.AddComponent<PickupController>();
-                }
                 Pickup.RestoreOriginalProperty(knife);
             }
         }
@@ -632,9 +627,55 @@ namespace AstroClient
 
 
 
+        private static bool _OnlySelfHasPatreonPerk;
+        public static bool OnlySelfHasPatreonPerk
+        {
+            get
+            {
+                return _OnlySelfHasPatreonPerk;
+            }
+            set
+            {
+                _OnlySelfHasPatreonPerk = value;
+                if(GetSelfPatreonGunBtn != null)
+                {
+                    GetSelfPatreonGunBtn.setToggleState(value);
+                }
+                if (value)
+                {
+                    DetectiveGunPerkUnlocker.SendOnlySelfPatreonSkinEvent();
+                }
+            }
+        }
 
 
 
+        private static bool _EveryoneHasPatreonPerk;
+        public static bool EveryoneHasPatreonPerk
+        {
+            get
+            {
+                return _EveryoneHasPatreonPerk;
+            }
+            set
+            {
+                _EveryoneHasPatreonPerk = value;
+                if (GetEveryonePatreonGunBtn != null)
+                {
+                    GetEveryonePatreonGunBtn.setToggleState(value);
+                }
+                if (value)
+                {
+                    if (DetectiveGunPerkUnlocker != null)
+                    {
+                        DetectiveGunPerkUnlocker.SendPublicPatreonSkinEvent();
+                    }
+                }
+            }
+        }
+
+
+        private static Murder4PatronUnlocker DetectiveGunPerkUnlocker;
 
         private static GameObject TargetNode;
         private static string AssignedTargetRole;
@@ -756,6 +797,9 @@ namespace AstroClient
         public static QMSingleToggleButton GetDetectiveRoleBtn;
         public static QMSingleToggleButton GetMurdererRoleBtn;
 
+
+        public static QMSingleToggleButton GetSelfPatreonGunBtn;
+        public static QMSingleToggleButton GetEveryonePatreonGunBtn;
 
 
 
