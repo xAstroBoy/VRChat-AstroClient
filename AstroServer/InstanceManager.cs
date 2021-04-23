@@ -14,11 +14,13 @@ namespace AstroServer
             {
                 if (client.IsDeveloper)
                 {
-                    //other.Send($"notify-dev:AstroClient Developer {client.Name} Joined!");
+                    client.Send($"add-tag:{other.UserID},AstroClient");
+                    other.Send($"add-tag:{client.UserID},AstroClient Developer");
                 }
                 if (other.IsDeveloper)
                 {
-                    //client.Send($"notify-dev:AstroClient Developer {other.Name} Is Here!");
+                    client.Send($"add-tag:{other.UserID},AstroClient Developer");
+                    other.Send($"add-tag:{client.UserID},AstroClient");
                 }
             }
         }

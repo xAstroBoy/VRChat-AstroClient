@@ -63,6 +63,9 @@
     <Compile Include="..\AstroLibrary\Serializable\AvatarData.cs">
       <Link>Networking\Serializable\AvatarData.cs</Link>
     </Compile>
+    <Compile Include="..\AstroLibrary\Serializable\TagData.cs">
+      <Link>Networking\Serializable\TagData.cs</Link>
+    </Compile>
     <Compile Include="AntiCrash\AntiCrash.cs" />
     <Compile Include="AntiCrash\AntiCrashPolys.cs" />
     <Compile Include="AntiCrash\AntiCrashScanner.cs" />

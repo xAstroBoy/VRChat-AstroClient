@@ -2,11 +2,27 @@
 using DayClientML2.Utility.Extensions;
 using System.IO;
 using UnityEngine;
+using VRC;
 
 namespace AstroClient.Cheetos
 {
     public static class CheetosHelpers
     {
+        public static Player GetPlayerByID(string id)
+        {
+            var players = WorldUtils.GetAllPlayers0();
+
+            foreach(var player in players)
+            {
+                if (player.UserID().Equals(id))
+                {
+                    return player;
+                }
+            }
+
+            return null;
+        }
+
         public static Texture2D LoadPNG(string filePath)
         {
 

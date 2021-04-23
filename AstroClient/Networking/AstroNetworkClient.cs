@@ -119,6 +119,15 @@ namespace AstroClient
             else if (first.Equals("pong"))
             {
             }
+            else if (first.Equals("add-tag"))
+            {
+                //var info = second.Split(',');
+                //var otherPlayer = CheetosHelpers.GetPlayerByID(info[0]);
+                //var tag = SingleTagsUtils.AddSingleTag(otherPlayer);
+                //tag.Label_Text = "AstroClient Developer";
+                //tag.Label_TextColor = Color.cyan;
+                //tag.Tag_Color = Color.yellow;
+            }
             else
             {
                 if (Bools.IsDeveloper)

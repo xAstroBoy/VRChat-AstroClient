@@ -2,7 +2,6 @@
 using AstroClient.variables;
 using AstroLibrary.Serializable;
 using DayClientML2.Utility.Extensions;
-using Il2CppSystem.Text;
 using Newtonsoft.Json;
 
 namespace AstroClient
