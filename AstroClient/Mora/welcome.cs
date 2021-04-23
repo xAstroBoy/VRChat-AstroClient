@@ -1,6 +1,7 @@
 ﻿using System;
 using AstroClient.Cheetos;
 using DayClientML2.Utility.Extensions;
+using TMPro;
 
 namespace AstroClient
 {
@@ -13,8 +14,8 @@ namespace AstroClient
 
             if (!booleanhere)
             {
-                
-                CheetosHelpers.SendHudNotification($"Welcome Back {LocalPlayerUtils.GetSelfPlayer().DisplayName()} \n AstroClient Made By\n AstroBoy, Cheetos, Mora");
+
+                CheetosHelpers.SendHudNotification($"Welcome Back <Color=#c242f5>{ LocalPlayerUtils.GetSelfPlayer().DisplayName()}</color> \n 	<color=#42f5f2>AstroClient</color> Made By\n <color=#2A3EBF>AstroBoy</color>, <color=#F79239>Cheetos</color>, <color=#b619ff>Mora</color>");
                 booleanhere = true;
             }
         }
