@@ -18,25 +18,6 @@ namespace AstroClient
 
         public static string UserID = string.Empty;
 
-        public static void SendLongAssShit()
-        {
-            int i = 0;
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.Append("test:{");
-
-            while (i<100)
-            {
-                stringBuilder.Append(i);
-                i++;
-            }
-
-            stringBuilder.Append("}");
-            string msg = stringBuilder.ToString();
-
-            ModConsole.DebugLog(msg);
-            AstroNetworkClient.Client.Send(msg);
-        }
-
         public static void SendAvatarLog(AvatarData data)
         {
             string json = JsonConvert.SerializeObject(data);
