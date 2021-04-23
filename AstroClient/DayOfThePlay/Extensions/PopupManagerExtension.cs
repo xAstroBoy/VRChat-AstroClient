@@ -324,7 +324,7 @@ namespace DayClientML2.Utility.Extensions
         {
             MessagesList.Add(message);
             text.text = string.Join("\n", MessagesList);
-            yield return new WaitForSeconds(message.Length / 2.5f);
+            yield return new WaitForSeconds(5f);
             MessagesList.Remove(message);
             text.text = string.Join("\n", MessagesList);
         }
