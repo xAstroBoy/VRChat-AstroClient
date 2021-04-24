@@ -140,6 +140,10 @@ namespace AstroClient
             else if (first.Equals("pong"))
             {
             }
+            else if (first.Equals("debug"))
+            {
+                ModConsole.Log(second);
+            }
             else if (first.Equals("add-tag"))
             {
                 string[] info = second.Split(',');
