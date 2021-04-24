@@ -92,8 +92,8 @@ namespace RubyButtonAPI
 
         public void setRawLocation(float buttonXLoc, float buttonYLoc)
         {
-            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuStuff.SingleButtonTemplate().GetComponent<RectTransform>().anchoredPosition + Vector2.right * (420 * (buttonXLoc + initShift[0]));
-            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuStuff.SingleButtonTemplate().GetComponent<RectTransform>().anchoredPosition + Vector2.down * (420 * (buttonYLoc + initShift[1]));
+            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuStuff.SingleButtonTemplate().GetComponent<RectTransform>().anchoredPosition + (Vector2.right * (420 * (buttonXLoc + initShift[0])));
+            button.GetComponent<RectTransform>().anchoredPosition = QuickMenuStuff.SingleButtonTemplate().GetComponent<RectTransform>().anchoredPosition + (Vector2.down * (420 * (buttonYLoc + initShift[1])));
 
             btnTag = "(" + buttonXLoc + "," + buttonYLoc + ")";
             button.name = btnQMLoc + "/" + btnType + btnTag;
@@ -1063,7 +1063,7 @@ namespace RubyButtonAPI
                 if (Posx > 5 && Posy < 2.5)
                 {
                     Posx = 2;
-                    Posy = Posy + 0.5f;
+                    Posy += 0.5f;
                 }
                 if (Pos == 24)
                 {

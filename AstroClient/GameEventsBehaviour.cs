@@ -1,5 +1,4 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.Startup.Hooks;
+﻿using AstroClient.Startup.Hooks;
 using System;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;

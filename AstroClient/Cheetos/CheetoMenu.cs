@@ -26,8 +26,8 @@ namespace AstroClient
             {
                 string name = "CheetoMenu";
                 var gameobj = GetInstanceHolder(name);
-                Instance = gameobj.AddComponent<CheetoMenu>() as CheetoMenu;
-                UnityEngine.Object.DontDestroyOnLoad(gameobj);
+                Instance = gameobj.AddComponent<CheetoMenu>();
+                DontDestroyOnLoad(gameobj);
                 if (Instance != null)
                 {
                     ModConsole.Log("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);

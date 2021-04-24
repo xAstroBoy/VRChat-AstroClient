@@ -16,7 +16,7 @@
             var web = new HtmlWeb();
             var doc = web.Load(Source);
 
-            foreach (HtmlNode node in doc.DocumentNode.SelectNodes("//pre[@class='" + ClassToGet + "']"))
+            foreach (HtmlNode node in doc.DocumentNode.SelectNodes($"//pre[@class='{ClassToGet}']"))
             {
                 key = node.InnerText;
                 key = key.Replace("\r", string.Empty);

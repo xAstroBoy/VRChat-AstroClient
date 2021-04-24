@@ -5,7 +5,7 @@ using TMPro;
 
 namespace AstroClient
 {
-    class welcome : GameEvents
+    class Welcome : GameEvents
     {
 
         internal static bool booleanhere = false;

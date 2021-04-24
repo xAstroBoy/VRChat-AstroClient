@@ -202,7 +202,7 @@ namespace DayClientML2.Utility.Extensions
                             if (jt.Type == XrefType.Global)
                             {
                                 Il2CppSystem.Object @object = jt.ReadAsObject();
-                                return ((@object != null) ? @object.ToString() : null) == "UserInterface/MenuContent/Popups/StandardPopup";
+                                return (@object?.ToString()) == "UserInterface/MenuContent/Popups/StandardPopup";
                             }
                             return false;
                         });
@@ -303,7 +303,7 @@ namespace DayClientML2.Utility.Extensions
             gameObject.AddComponent<Text>();
             gameObject.transform.SetParent(image.transform, false);
             gameObject.transform.localScale = Vector3.one;
-            gameObject.transform.localPosition = Vector3.up * offset + Vector3.right * 300f;
+            gameObject.transform.localPosition = (Vector3.up * offset) + (Vector3.right * 300f);
             var text = gameObject.GetComponent<Text>();
             text.color = Color.white;
             text.fontStyle = FontStyle.Bold;

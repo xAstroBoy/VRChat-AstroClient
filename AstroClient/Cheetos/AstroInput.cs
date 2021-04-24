@@ -74,7 +74,6 @@ namespace AstroClient
 
                 var leftTrigger = daydreamComp.field_Private_VRCInput_12;
                 var rightTrigger = daydreamComp.field_Private_VRCInput_10;
-                var uiManager = VRCUiManager.prop_VRCUiManager_0;
 
                 Transform currentTriggerPointer = null;
 
