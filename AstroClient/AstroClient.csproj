@@ -173,7 +173,7 @@
     <Compile Include="DayOfThePlay\Misc\VRCAPI\Endpoints\MiscEndpoint.cs" />
     <Compile Include="DayOfThePlay\Misc\VRCAPI\Utils.cs" />
     <Compile Include="DayOfThePlay\Misc\VRCAPI\Variables.cs" />
-    <Compile Include="DayOfThePlay\VRChabObjects.cs" />
+    <Compile Include="DayOfThePlay\VRChatObjects.cs" />
     <Compile Include="DayOfThePlay\XrefTesting.cs" />
     <Compile Include="GameEvents.cs" />
     <Compile Include="GameObject\Cloner\ObjectCloner.cs" />
