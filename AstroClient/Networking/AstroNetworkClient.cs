@@ -1,4 +1,6 @@
 ﻿using AstroClient.Cheetos;
+using AstroClient.components;
+using AstroClient.Components;
 using AstroClient.ConsoleUtils;
 using AstroClient.variables;
 using AstroLibrary.Networking;
@@ -8,6 +10,7 @@ using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
+using UnityEngine;
 using VRC;
 using Console = System.Console;
 using Timer = System.Timers.Timer;
@@ -37,7 +40,7 @@ namespace AstroClient
             pingTimer.Enabled = true;
         }
 
-        private static void OnPingEvent(Object source, ElapsedEventArgs e)
+        private static void OnPingEvent(System.Object source, ElapsedEventArgs e)
         {
             Client.Send("ping");
         }
@@ -141,17 +144,15 @@ namespace AstroClient
 
                 if (player != null)
                 {
-                    try
+
+                    SingleTag tag = SingleTagsUtils.AddSingleTag(player);
+                    if (tag != null)
                     {
-                        //SingleTag tag = SingleTagsUtils.AddSingleTag(player);
-                        //tag.Label_Text = info[1];
-                        //tag.Label_TextColor = Color.cyan;
-                        //tag.Tag_Color = Color.cyan;
+                        tag.Label_Text = info[1];
+                        tag.Label_TextColor = Color.cyan;
+                        tag.Tag_Color = Color.cyan;
                     }
-                    catch (Exception e)
-                    {
-                        ModConsole.DebugErrorExc(e);
-                    }
+
                 }
                 else
                 {

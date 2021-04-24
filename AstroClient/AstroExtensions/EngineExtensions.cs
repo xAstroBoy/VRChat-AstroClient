@@ -9,6 +9,7 @@ using AstroClient.ConsoleUtils;
 using AstroClient.AstroUtils.ItemTweaker;
 using AstroClient.ItemTweaker;
 using System.Windows.Forms;
+using AstroClient.Finder;
 
 #endregion AstroClient Imports
 
@@ -16,12 +17,27 @@ namespace AstroClient.extensions
 {
     public static class EngineExtensions
     {
+
+        public static void CopyPath(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                string path = GameObjectFinder.GetGameObjectPath(obj);
+                if (!string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path))
+                {
+                    ModConsole.Log($"{obj.name} Path is : {path}");
+                    ModConsole.Log($"The Path has been copied on the clipboard.");
+                    Clipboard.SetText(path);
+                }
+            }
+        }
+
         public static void CopyRotation(this GameObject obj)
         {
             if (obj != null)
             {
                 ModConsole.Log($"{obj.name} rotation is : new Quaternion({obj.transform.rotation.x}f, {obj.transform.rotation.y}f, {obj.transform.rotation.z}f, {obj.transform.rotation.w}f)");
-                ModConsole.Log($"The rotation been copied on the clipboard.");
+                ModConsole.Log($"The rotation has been copied on the clipboard.");
                 Clipboard.SetText($"new Quaternion({obj.transform.rotation.x}f, {obj.transform.rotation.y}f, {obj.transform.rotation.z}f, {obj.transform.rotation.w}f)");
             }
         }
@@ -31,7 +47,7 @@ namespace AstroClient.extensions
             if (obj != null)
             {
                 ModConsole.Log($"{obj.name} position is : new Vector3({obj.transform.position.x}f, {obj.transform.position.y}f, {obj.transform.position.z}f)");
-                ModConsole.Log($"The Position been copied on the clipboard.");
+                ModConsole.Log($"The Position has been copied on the clipboard.");
                 Clipboard.SetText($"new Vector3({obj.transform.position.x}f, {obj.transform.position.y}f, {obj.transform.position.z}f)");
             }
         }
@@ -41,7 +57,7 @@ namespace AstroClient.extensions
             if (obj != null)
             {
                 ModConsole.Log($"{obj.name} Local position is : new Vector3({obj.transform.localPosition.x}f, {obj.transform.localPosition.y}f, {obj.transform.localPosition.z}f)");
-                ModConsole.Log($"The Local Position been copied on the clipboard.");
+                ModConsole.Log($"The Local Position has been copied on the clipboard.");
                 Clipboard.SetText($"new Vector3({obj.transform.localPosition.x}f, {obj.transform.localPosition.y}f, {obj.transform.localPosition.z}f)");
             }
         }
