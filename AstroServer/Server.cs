@@ -42,15 +42,14 @@
             while (true)
             {
                 TcpClient clientSocket = serverSocket.AcceptTcpClient();
-                clientSocket.SendTimeout = 2000;
                 Client client = new Client
                 {
                     IsClient = true
                 };
 
-                client.Connected += Connected;
-                client.Disconnected += Disconnected;
-                client.ReceivedText += ReceivedText;
+                client.Connected += OnConnected;
+                client.Disconnected += OnDisconnected;
+                client.ReceivedText += OnReceivedText;
 
                 client.StartClient(clientSocket, GetNewClientID());
             }
@@ -214,7 +213,7 @@
             }
         }
 
-        private static void Disconnected(object sender, EventArgs e)
+        private static void OnDisconnected(object sender, EventArgs e)
         {
             Client client = sender as Client;
             if (Clients.Contains(client))
@@ -251,7 +250,7 @@
             }
         }
 
-        private static void Connected(object sender, EventArgs e)
+        private static void OnConnected(object sender, EventArgs e)
         {
             Client client = sender as Client;
 
@@ -274,7 +273,7 @@
             }
         }
 
-        private static void ReceivedText(object sender, ReceivedTextEventArgs e)
+        private static void OnReceivedText(object sender, ReceivedTextEventArgs e)
         {
             if (!string.IsNullOrEmpty(e.Message) && !string.IsNullOrWhiteSpace(e.Message))
             {

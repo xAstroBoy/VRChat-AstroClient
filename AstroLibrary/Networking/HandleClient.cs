@@ -16,13 +16,13 @@ namespace AstroLibrary.Networking
 
         public event EventHandler<ReceivedDataEventArgs> ReceivedData;
 
-        public bool IsConnected { get; private set; }
-
         public int ClientID { get; private set; }
 
         public bool IsClient = true;
 
-        private NetworkStream _clientStream;
+        public bool ShouldReconnect = true;
+
+        private NetworkStream clientStream;
 
         private const int SecretKeyClient = 2454;
         private const int SecretKeyLoader = 2353;
@@ -33,14 +33,17 @@ namespace AstroLibrary.Networking
         {
             ClientID = clientId;
             ClientSocket = clientSocket;
-            _clientStream = ClientSocket.GetStream();
+            ClientSocket.SendTimeout = 2000;
+            clientStream = ClientSocket.GetStream();
             Task task = new Task(StartThread);
             task.Start();
         }
 
-        public void Disconnect()
+        public void Disconnect(bool reconnect = false)
         {
-            IsConnected = false;
+            ShouldReconnect = reconnect;
+            clientStream.Close();
+            ClientSocket.Close();
         }
 
         private void SendHeaderType(int headerType = 1000) // 1000 is plain text
@@ -48,12 +51,12 @@ namespace AstroLibrary.Networking
             byte[] header = BitConverter.GetBytes(headerType);
             try
             {
-                _clientStream.Write(header, 0, header.Length);
-                _clientStream.Flush();
+                clientStream.Write(header, 0, header.Length);
+                clientStream.Flush();
             }
             catch
             {
-                IsConnected = false;
+                Disconnect();
             }
         }
 
@@ -72,12 +75,12 @@ namespace AstroLibrary.Networking
 
             try
             {
-                _clientStream.Write(secretHeader, 0, secretHeader.Length);
-                _clientStream.Flush();
+                clientStream.Write(secretHeader, 0, secretHeader.Length);
+                clientStream.Flush();
             }
             catch
             {
-                IsConnected = false;
+                Disconnect();
             }
         }
 
@@ -86,12 +89,12 @@ namespace AstroLibrary.Networking
             byte[] headerLength = BitConverter.GetBytes(msg.Length);
             try
             {
-                _clientStream.Write(headerLength, 0, headerLength.Length);
-                _clientStream.Flush();
+                clientStream.Write(headerLength, 0, headerLength.Length);
+                clientStream.Flush();
             }
             catch
             {
-                IsConnected = false;
+                Disconnect();
             }
         }
 
@@ -110,12 +113,12 @@ namespace AstroLibrary.Networking
             {
                 try
                 {
-                    _clientStream.Write(msg, 0, msg.Length);
-                    _clientStream.Flush();
+                    clientStream.Write(msg, 0, msg.Length);
+                    clientStream.Flush();
                 }
                 catch
                 {
-                    IsConnected = false;
+                    Disconnect();
                 }
             }
         }
@@ -124,8 +127,7 @@ namespace AstroLibrary.Networking
         {
             Connected?.Invoke(this, new EventArgs());
 
-            IsConnected = true;
-            while (IsConnected)
+            while (ClientSocket.Connected)
             {
                 Receive();
             }
@@ -138,12 +140,12 @@ namespace AstroLibrary.Networking
             try
             {
                 byte[] received = new byte[4];
-                _clientStream.Read(received, 0, received.Length);
+                clientStream.Read(received, 0, received.Length);
                 return BitConverter.ToInt32(received, 0);
             }
             catch
             {
-                IsConnected = false;
+                Disconnect();
                 return 0;
             }
         }
@@ -153,12 +155,12 @@ namespace AstroLibrary.Networking
             try
             {
                 byte[] received = new byte[4];
-                _clientStream.Read(received, 0, received.Length);
+                clientStream.Read(received, 0, received.Length);
                 return BitConverter.ToInt32(received, 0);
             }
             catch
             {
-                IsConnected = false;
+                Disconnect();
                 return 0;
             }
         }
@@ -168,12 +170,12 @@ namespace AstroLibrary.Networking
             try
             {
                 byte[] received = new byte[4];
-                _clientStream.Read(received, 0, received.Length);
+                clientStream.Read(received, 0, received.Length);
                 return BitConverter.ToInt32(received, 0); ;
             }
             catch
             {
-                IsConnected = false;
+                Disconnect();
                 return 0;
             }
         }
@@ -182,24 +184,17 @@ namespace AstroLibrary.Networking
         {
             int secret = ReceiveSecret();
 
-            //Console.WriteLine($"Secret key: {secret}");
-
             if (secret != SecretKeyClient && IsClient)
             {
-                IsConnected = false;
-                //Console.WriteLine($"Failed to provide client secret key: {SecretKeyClient}");
+                Disconnect();
             }
             else if (secret != SecretKeyLoader && !IsClient)
             {
-                IsConnected = false;
-                //Console.WriteLine($"Failed to provide loader secret key: {SecretKeyLoader}");
+                Disconnect();
             }
 
             int headerType = RecieveHeaderType();
             int len = ReceiveHeaderLength();
-
-            //Console.WriteLine($"Header type: {headerType}");
-            //Console.WriteLine($"Header lenghh: {len}");
 
             if (len > 0)
             {
@@ -218,23 +213,19 @@ namespace AstroLibrary.Networking
                     {
                         toRead = remaining;
                     }
-                    //Console.WriteLine($"toRead / remaining / totalRead : {toRead} / {remaining} / {totalRead}");
                     try
                     {
                         byte[] received = new byte[toRead];
-                        int read = _clientStream.Read(received, 0, received.Length);
+                        int read = clientStream.Read(received, 0, received.Length);
 
                         totalRead += read;
                         remaining -= read;
 
                         received.CopyTo(data, totalRead - read);
-
-                        //Console.WriteLine($"read / received.Length {read} / {received.Length}");
-                        //Console.WriteLine(received.ConvertToString());
                     }
                     catch
                     {
-                        IsConnected = false;
+                        Disconnect();
                     }
                 }
 

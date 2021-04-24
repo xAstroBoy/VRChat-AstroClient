@@ -53,7 +53,6 @@ namespace AstroClient
 
             TcpClient tcpClient = new TcpClient();
             var result = tcpClient.BeginConnect("craig.se", 42069, null, null);
-            tcpClient.SendTimeout = 2000;
             var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(1));
 
             if (!success)
@@ -79,7 +78,6 @@ namespace AstroClient
 
         private static void ProcessInput(object sender, string input)
         {
-            ModConsole.DebugLog(input);
             int index;
             string first;
             string second = string.Empty;
@@ -211,9 +209,16 @@ namespace AstroClient
             {
                 for (; ; )
                 {
-                    ModConsole.DebugError("Lost connection to server, retrying in 60 seconds...");
-                    Thread.Sleep(60000);
-                    try { Connect(); break; } catch { }
+                    if (Client.ShouldReconnect)
+                    {
+                        ModConsole.DebugError("Lost connection to server, retrying in 60 seconds...");
+                        Thread.Sleep(60000);
+                        try { Connect(); break; } catch { }
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             });
         }
