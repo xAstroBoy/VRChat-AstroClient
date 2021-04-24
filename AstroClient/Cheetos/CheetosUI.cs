@@ -28,7 +28,7 @@ namespace AstroClient
         {
             MainButton = new QMNestedButton("ShortcutMenu", 5, 3, "Admin Menu", "AstroClient's Admin Menu", null, null, null, null, true);
             MainScroller = new QMScrollMenu(MainButton);
-            CloseButton = new QMSingleButton(MainButton, 0, 0, "Close Game", () => { Environment.Exit(0); }, "Close the game");
+            CloseButton = new QMSingleButton(MainButton, 0, 0, "Close Game", () => { Process.GetCurrentProcess().Kill(); }, "Close the game");
             RestartButton = new QMSingleButton(MainButton, 0, 1, "Restart Game", () =>
             {
                 Process.Start(Directory.GetParent(Application.dataPath) + "\\VRChat.exe");
