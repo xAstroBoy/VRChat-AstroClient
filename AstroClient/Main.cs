@@ -154,7 +154,13 @@ namespace AstroClient
                 WorldPickupsBtn.InitButtons(AstroClient, 2, 0, true);
                 ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
                 RandomSubmenus.TriggerSubMenu(AstroClient, 2, 1, true);
-                GlobalUdonExploits.InitButtons(AstroClient, 2, 1.5f, true);
+
+                if (Bools.IsDeveloper) // KEEP DANGEROUS STUFF LIMITED TILL WE HAVE A CONTROL MECHANISM IN PLACE.
+                {
+                    GlobalUdonExploits.InitButtons(AstroClient, 2, 1.5f, true);
+                }
+
+
                 RandomSubmenus.VRC_InteractableSubMenu(AstroClient, 2, 2, true);
                 Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
 
