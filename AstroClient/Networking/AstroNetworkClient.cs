@@ -212,7 +212,7 @@ namespace AstroClient
                     if (Client.ShouldReconnect)
                     {
                         ModConsole.DebugError("Lost connection to server, retrying in 60 seconds...");
-                        Thread.Sleep(60000);
+                        Thread.Sleep(5000);
                         try { Connect(); break; } catch { }
                     }
                     else

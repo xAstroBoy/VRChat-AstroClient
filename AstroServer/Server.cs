@@ -148,13 +148,13 @@
             }
             else if (first.Equals("player-info"))
             {
-                Console.WriteLine($"Received (player-info) for {second} from {client.UserID}");
-                var other = Clients.Where(c => c.UserID.Equals(second)).First();
-                if (other == null)
-                {
-                    Console.WriteLine("player-info other was null");
-                    return;
-                }
+                //Console.WriteLine($"Received (player-info) for {second} from {client.UserID}");
+                //var other = Clients.Where(c => c.UserID.Equals(second)).First();
+                //if (other == null)
+                //{
+                //    Console.WriteLine("player-info other was null");
+                //    return;
+                //}
                 //if (other.IsDeveloper)
                 //{
                 //    Console.WriteLine("Sending developer tag");
