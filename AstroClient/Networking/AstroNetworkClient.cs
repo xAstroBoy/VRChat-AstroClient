@@ -4,6 +4,7 @@ using AstroClient.Components;
 using AstroClient.ConsoleUtils;
 using AstroClient.variables;
 using AstroLibrary.Networking;
+using DayClientML2.Utility;
 using DayClientML2.Utility.Extensions;
 using System;
 using System.Net.Sockets;
@@ -141,23 +142,25 @@ namespace AstroClient
                     ModConsole.DebugLog("Wants to add tag to someone else");
                     player = WorldUtils.GetPlayerByID(info[1]);
                 }
-
-                if (player != null)
-                {
-
-                    SingleTag tag = SingleTagsUtils.AddSingleTag(player);
-                    if (tag != null)
+                // You gotta delay it, let's delay it to some seconds
+                MiscUtility.DelayFunction(0.5f, new Action(() => {
+                    if (player != null)
                     {
-                        tag.Label_Text = info[1];
-                        tag.Label_TextColor = Color.cyan;
-                        tag.Tag_Color = Color.cyan;
-                    }
 
-                }
-                else
-                {
-                    ModConsole.Error("Player for setting tag from server was null!");
-                }
+                        SingleTag tag = SingleTagsUtils.AddSingleTag(player);
+                        if (tag != null)
+                        {
+                            tag.Label_Text = info[1];
+                            tag.Label_TextColor = Color.cyan;
+                            tag.Tag_Color = Color.cyan;
+                        }
+                    }
+                    else
+                    {
+                        ModConsole.Error("Player for setting tag from server was null!");
+                    }
+                }));
+            
             }
             else
             {
