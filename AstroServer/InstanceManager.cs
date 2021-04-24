@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace AstroServer
 {
@@ -10,10 +11,11 @@ namespace AstroServer
         /// <param name="client"></param>
         public static void PlayerInfo(Client client)
         {
-            foreach (Client other in Server.Clients.Where(c => c.InstanceID == client.InstanceID))
+            foreach (Client other in Server.Clients.Where(c => c.InstanceID.Equals(client.InstanceID)))
             {
                 //client.Send($"add-tag:{client.UserID},AstroClient Developer");
                 client.Send($"debug:{other.UserID}");
+                Console.WriteLine($"IM,PI: {other.UserID}, {other.InstanceID}");
             }
         }
     }
