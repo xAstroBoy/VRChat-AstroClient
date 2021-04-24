@@ -89,7 +89,6 @@ namespace AstroClient.GameObjectDebug
             }
         }
 
-
         public static void CheckObjComponents(Transform Obj)
         {
             try
@@ -105,8 +104,6 @@ namespace AstroClient.GameObjectDebug
             }
             catch (Exception) { }
         }
-
-
 
         public static void CheckObjComponents(GameObject Obj)
         {

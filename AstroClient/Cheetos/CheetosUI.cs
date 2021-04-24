@@ -4,7 +4,6 @@ using System;
 
 namespace AstroClient
 {
-
     /// <summary>
     /// Cheeto's temporary UI for new/wip features
     /// </summary>
@@ -12,14 +11,10 @@ namespace AstroClient
     {
         public QMNestedButton MainButton { get; private set; }
 
-        public QMNestedButton SettingsButton { get; private set; }
-
         public QMScrollMenu MainScroller { get; private set; }
 
         public QMSingleButton RestartButton { get; private set; }
 
-        public QMToggleButton PlayerListToggle { get; private set; }
-        
         public override void VRChat_OnUiManagerInit()
         {
             MainButton = new QMNestedButton("ShortcutMenu", 5, 3, "Admin Menu", "AstroClient's Admin Menu", null, null, null, null, true);

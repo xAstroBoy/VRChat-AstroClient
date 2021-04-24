@@ -1,12 +1,10 @@
 ﻿using AstroClient.components;
-using AstroClient.Finder;
 using UnityEngine;
 
 namespace AstroClient.extensions
 {
     public static class HighlighterExtensions
     {
-
         private static void RemoveRendFromUnlistedHighLighter(Renderer rend)
         {
             HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Remove(rend);
@@ -51,9 +49,9 @@ namespace AstroClient.extensions
         public static HighlightsFXStandalone AddHighlighter(this GameObject obj)
         {
             var item = obj.AddComponent<HighlightsFXStandalone>();
-            if(item != null)
+            if (item != null)
             {
-                if(!EspHelper.SpawnedESPsHolders.Contains(item))
+                if (!EspHelper.SpawnedESPsHolders.Contains(item))
                 {
                     EspHelper.SpawnedESPsHolders.Add(item);
                 }
@@ -61,7 +59,6 @@ namespace AstroClient.extensions
 
             return item;
         }
-
 
         public static void DestroyHighlighter(this HighlightsFXStandalone item)
         {
@@ -75,7 +72,6 @@ namespace AstroClient.extensions
             UnityEngine.Object.DestroyImmediate(item);
         }
 
-
         public static void SetHighLighter(this HighlightsFXStandalone item, MeshRenderer rend, Color color, bool status)
         {
             if (item != null)
@@ -86,7 +82,6 @@ namespace AstroClient.extensions
                 item.Method_Public_Void_Renderer_Boolean_0(rend, status);
             }
         }
-
 
         public static void SetHighLighterColor(this HighlightsFXStandalone item, Color color)
         {
@@ -103,8 +98,5 @@ namespace AstroClient.extensions
                 item.highlightColor = new Color(0.5019608f, 0.5019608f, 0.5019608f, 1f);
             }
         }
-
-
-
     }
 }

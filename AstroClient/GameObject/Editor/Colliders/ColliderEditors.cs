@@ -83,7 +83,6 @@ namespace AstroClient
             }
         }
 
-
         public static void AddTriggerCollider(GameObject obj)
         {
             var Missing_boxCollider = obj.GetComponent<BoxCollider>();
@@ -141,7 +140,6 @@ namespace AstroClient
                 }
             }
         }
-
 
         public static void AddBoxCollider(GameObject obj, Vector3 size)
         {

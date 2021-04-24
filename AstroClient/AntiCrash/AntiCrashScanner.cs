@@ -1,6 +1,4 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using DayClientML2.Utility.Extensions;
+﻿using AstroClient.extensions;
 using UnityEngine;
 using VRC;
 using VRC.SDKBase;

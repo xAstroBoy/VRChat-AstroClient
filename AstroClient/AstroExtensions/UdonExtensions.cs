@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VRC.SDKBase;
 
 #region AstroClient Imports
 
@@ -46,7 +45,6 @@ namespace AstroClient.extensions
                 {
                     if (!string.IsNullOrEmpty(udonvar.EventKey) && !string.IsNullOrWhiteSpace(udonvar.EventKey))
                     {
-
                         if (udonvar.EventKey.StartsWith("_"))
                         {
                             udonvar.Action.SendCustomEvent(udonvar.EventKey);

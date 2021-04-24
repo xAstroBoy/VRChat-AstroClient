@@ -38,7 +38,6 @@
             if (_rawMessage is not SocketUserMessage message) return;
             if (message.Source != MessageSource.User) return;
 
-            SocketGuild guild = _rawMessage.Channel.GetGuild();
             SocketUser me = AstroBot.Client.CurrentUser;
             int argPos = 0;
 

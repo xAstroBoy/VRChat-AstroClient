@@ -13,8 +13,6 @@ namespace AstroClient.Worlds
 {
     public class WorldsCheats : GameEvents
     {
-
-
         public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             QMTabMenu WorldCheats = new QMTabMenu(5f, "WorldCheats Menu", null, null, null, Environment.CurrentDirectory + @"\AstroClient\Resources\thief.png");
@@ -62,7 +60,5 @@ namespace AstroClient.Worlds
                 GameObjectFinder.Find("GameObject/Level/cube (5)/what the fuck").AddToWorldUtilsMenu();
             }
         }
-
-
     }
 }

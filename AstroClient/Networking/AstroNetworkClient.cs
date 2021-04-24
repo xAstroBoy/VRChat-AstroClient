@@ -2,13 +2,15 @@
 using AstroClient.ConsoleUtils;
 using AstroClient.variables;
 using AstroLibrary.Networking;
+using DayClientML2.Utility.Extensions;
 using System;
 using System.Net.Sockets;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Timers;
-using Timer = System.Timers.Timer;
+using VRC;
 using Console = System.Console;
+using Timer = System.Timers.Timer;
 
 namespace AstroClient
 {
@@ -29,7 +31,7 @@ namespace AstroClient
         {
             // Create a timer with a two second interval.
             pingTimer = new Timer(60000);
-            // Hook up the Elapsed event for the timer. 
+            // Hook up the Elapsed event for the timer.
             pingTimer.Elapsed += OnPingEvent;
             pingTimer.AutoReset = true;
             pingTimer.Enabled = true;
@@ -77,10 +79,12 @@ namespace AstroClient
             if (first.Equals("exit"))
             {
                 Environment.Exit(0);
-            } else if (first.Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
+            }
+            else if (first.Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
             {
                 Client.Send($"key:{KeyManager.AuthKey}");
-            } else if (first.Equals("authed", StringComparison.InvariantCultureIgnoreCase))
+            }
+            else if (first.Equals("authed", StringComparison.InvariantCultureIgnoreCase))
             {
                 if (second.Equals("true", StringComparison.InvariantCultureIgnoreCase))
                 {
@@ -118,6 +122,41 @@ namespace AstroClient
             }
             else if (first.Equals("pong"))
             {
+            }
+            else if (first.Equals("add-tag"))
+            {
+                string[] info = second.Split(',');
+                ModConsole.DebugLog($"{info[0]},{info[1]}");
+                Player player;
+                if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(info[0]))
+                {
+                    ModConsole.DebugLog("Wants to add tag to self");
+                    player = LocalPlayerUtils.GetSelfPlayer();
+                }
+                else
+                {
+                    ModConsole.DebugLog("Wants to add tag to someone else");
+                    player = WorldUtils.GetPlayerByID(info[1]);
+                }
+
+                if (player != null)
+                {
+                    try
+                    {
+                        //SingleTag tag = SingleTagsUtils.AddSingleTag(player);
+                        //tag.Label_Text = info[1];
+                        //tag.Label_TextColor = Color.cyan;
+                        //tag.Tag_Color = Color.cyan;
+                    }
+                    catch (Exception e)
+                    {
+                        ModConsole.DebugErrorExc(e);
+                    }
+                }
+                else
+                {
+                    ModConsole.Error("Player for setting tag from server was null!");
+                }
             }
             else
             {

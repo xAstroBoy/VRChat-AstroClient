@@ -1,24 +1,18 @@
-﻿using AstroClient.Finder;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace AstroClient.components
 {
-    class EspHelper : GameEvents
+    internal class EspHelper : GameEvents
     {
         public override void OnLevelLoaded()
         {
-            foreach(var item in SpawnedESPsHolders)
+            foreach (var item in SpawnedESPsHolders)
             {
                 UnityEngine.Object.DestroyImmediate(item);
             }
             SpawnedESPsHolders.Clear();
         }
-
 
         private static GameObject _HighlightFXCamera;
 
@@ -39,10 +33,8 @@ namespace AstroClient.components
                 {
                     return _HighlightFXCamera;
                 }
-
             }
         }
-
 
         public static List<HighlightsFXStandalone> SpawnedESPsHolders = new List<HighlightsFXStandalone>();
     }

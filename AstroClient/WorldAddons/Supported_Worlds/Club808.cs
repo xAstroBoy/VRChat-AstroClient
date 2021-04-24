@@ -1,16 +1,12 @@
 ﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.Finder;
 using AstroClient.Variables;
-using VRC.SDKBase;
-using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AstroClient
 {
-    class Club808 : GameEvents
+    internal class Club808 : GameEvents
     {
-       
         public override void OnWorldReveal(string id, string name, string asseturl)
         {
             if (id == WorldIds.Club808)
@@ -32,9 +28,7 @@ namespace AstroClient
                 Dancers.text = "c: 7593";
 
                 DJRoom2.text = "c: 3312";
-               
             }
-
         }
     }
 }

@@ -1,16 +1,16 @@
-﻿using AstroLibrary.Networking;
-using AstroLibrary.Serializable;
-using AstroServer.DiscordBot;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Timers;
-
-namespace AstroServer
+﻿namespace AstroServer
 {
+    using AstroLibrary.Networking;
+    using AstroLibrary.Serializable;
+    using AstroServer.DiscordBot;
+    using Newtonsoft.Json;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Timers;
+
     internal class Server
     {
         private static readonly int _maxConnections = 1000;
@@ -18,7 +18,6 @@ namespace AstroServer
         public static List<Client> Clients { get; private set; }
 
         private static Timer pingTimer;
-
 
         public Server()
         {
@@ -60,7 +59,7 @@ namespace AstroServer
         {
             // Create a timer with a two second interval.
             pingTimer = new Timer(60000);
-            // Hook up the Elapsed event for the timer. 
+            // Hook up the Elapsed event for the timer.
             pingTimer.Elapsed += OnPingEvent;
             pingTimer.AutoReset = true;
             pingTimer.Enabled = true;
@@ -112,7 +111,6 @@ namespace AstroServer
                         client.Send("client-type:client");
                     }
                     AstroBot.SendLoggedInLog(client);
-
                 }
                 else
                 {
@@ -133,7 +131,6 @@ namespace AstroServer
             else if (first.Equals("instanceID"))
             {
                 client.InstanceID = second;
-                InstanceManager.ClientJoinedInstance(client);
             }
             else if (first.Equals("ping"))
             {
@@ -145,6 +142,25 @@ namespace AstroServer
             else if (first.Equals("test"))
             {
                 Console.WriteLine(input);
+            }
+            else if (first.Equals("player-info"))
+            {
+                var other = Clients.Where(c => c.UserID.Equals(second)).First();
+                if (other == null)
+                {
+                    Console.WriteLine("player-info other was null");
+                    return;
+                }
+                if (other.IsDeveloper)
+                {
+                    Console.WriteLine("Sending developer tag");
+                    client.Send($"add-tag:{other.UserID},AstroClient Developer");
+                }
+                else
+                {
+                    Console.WriteLine("Sending client tag");
+                    client.Send($"add-tag:{other.UserID},AstroClient");
+                }
             }
             else if (first.Equals("avatar-log"))
             {

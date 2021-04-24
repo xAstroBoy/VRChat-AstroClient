@@ -234,7 +234,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
 
         internal static void CheckIfContainsPickupProperties(GameObject obj)
         {
-            if (obj != null )
+            if (obj != null)
             {
                 if (obj == Tweaker_Object.CurrentSelectedObject)
                 {
@@ -372,7 +372,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
             return ContainedTriggers;
         }
 
-
         public static List<UdonBehaviour> GetObjectUdonVRC(GameObject obj)
         {
             if (obj != null)
@@ -400,7 +399,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
             }
             return null;
         }
-
 
         public static List<GameObject> GeObjectVRC_Interactables(GameObject obj)
         {
@@ -455,7 +453,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
             return null;
         }
 
-
         public static void Internal_UdonEvents(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var Menu = new QMNestedButton(main, x, y, "Internal Udon Events ", "Interact with Internal Udon Events", null, null, null, null, btnHalf);
@@ -470,7 +467,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
             }, "", null, null, true);
             subscroll.SetAction(delegate
             {
-            foreach (var action in GetObjectUdonVRC(Tweaker_Object.GetGameObjectToEdit()))
+                foreach (var action in GetObjectUdonVRC(Tweaker_Object.GetGameObjectToEdit()))
                 {
                     subscroll.Add(new QMSingleButton(Menu, 0f, 0f, action.gameObject.name, delegate
                     {
@@ -497,7 +494,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
                 }
             });
         }
-
 
         public static void VRC_InteractableSubMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
@@ -864,7 +860,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
             }
 
             #endregion DisallowTheft
-
         }
 
         public static void KillCustomComponents()
@@ -1039,7 +1034,6 @@ namespace AstroClient.AstroUtils.ItemTweaker
         public static QMSingleButton Forces_CurrentObjHolder;
 
         public static QMSingleButton CurrentObjectCoordsBtn;
-
 
         public static QMSlider PickupProximitySlider;
 

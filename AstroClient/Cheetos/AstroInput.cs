@@ -16,17 +16,19 @@ namespace AstroClient
 
     public class Astro_Interactable : GameEventsBehaviour
     {
-        public Astro_Interactable(IntPtr ptr) : base(ptr) { }
+        public Astro_Interactable(IntPtr ptr) : base(ptr)
+        {
+        }
 
         public Action Action;
 
         // Use this for initialization
-        void Start()
+        private void Start()
         {
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
         }
     }
@@ -74,7 +76,6 @@ namespace AstroClient
 
                 var leftTrigger = daydreamComp.field_Private_VRCInput_12;
                 var rightTrigger = daydreamComp.field_Private_VRCInput_10;
-                var uiManager = VRCUiManager.prop_VRCUiManager_0;
 
                 Transform currentTriggerPointer = null;
 
@@ -82,7 +83,8 @@ namespace AstroClient
                 {
                     currentTriggerPointer = LeftHandPointer.transform;
                     CanClick = false;
-                } else if (rightTrigger.prop_Boolean_2 && CanClick)
+                }
+                else if (rightTrigger.prop_Boolean_2 && CanClick)
                 {
                     currentTriggerPointer = RightHandPointer.transform;
                     CanClick = false;
@@ -119,7 +121,7 @@ namespace AstroClient
         public void CheckHitObject(GameObject gameObject)
         {
             var interactable = gameObject.GetComponent<Astro_Interactable>();
-            if (interactable!=null)
+            if (interactable != null)
             {
                 interactable.Action.Invoke();
             }

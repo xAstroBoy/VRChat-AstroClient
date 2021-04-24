@@ -36,10 +36,10 @@ namespace AstroClient
             }
 
             item_DetectiveRevolver = GameObjectFinder.Find("Game Logic/Weapons/Revolver");
-            if(item_DetectiveRevolver != null)
+            if (item_DetectiveRevolver != null)
             {
                 DetectiveGunPerkUnlocker = item_DetectiveRevolver.AddComponent<Murder4PatronUnlocker>();
-            }    
+            }
             Clue_photograph = GameObjectFinder.Find("Game Logic/Clues/Clue (photograph)");
             Clue_notebook = GameObjectFinder.Find("Game Logic/Clues/Clue (notebook)");
             Clue_Locket = GameObjectFinder.Find("Game Logic/Clues/Clue (locket)");
@@ -462,17 +462,14 @@ namespace AstroClient
             GetSelfPatreonGunBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1, "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = true; EveryoneHasPatreonPerk = false; }), "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For You!", Color.green, Color.red, null, false, true);
             GetEveryonePatreonGunBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1.5f, "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = true; OnlySelfHasPatreonPerk = false; }), "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For Everyone!", Color.green, Color.red, null, false, true);
 
-
-            GetDetectiveRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 3, 1, "Get Detective Role", new Action(() => {RoleSwapper_GetDetectiveRole = true; RoleSwapper_GetMurdererRole = false; }), "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = false; }), "Assign Yourself Detective Role on Next Round!", Color.green, Color.red, null, false, true);
-            GetMurdererRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 3, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = true; RoleSwapper_GetDetectiveRole = false; }), "Get Murderer Role", new Action(() => {RoleSwapper_GetMurdererRole = false;}), "Assign Yourself Murderer Role on Next Round!", Color.green, Color.red, null, false, true);
+            GetDetectiveRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 3, 1, "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = true; RoleSwapper_GetMurdererRole = false; }), "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = false; }), "Assign Yourself Detective Role on Next Round!", Color.green, Color.red, null, false, true);
+            GetMurdererRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 3, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = true; RoleSwapper_GetDetectiveRole = false; }), "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = false; }), "Assign Yourself Murderer Role on Next Round!", Color.green, Color.red, null, false, true);
 
             GameObjectESP.Murder4ESPtoggler = new QMSingleToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
             JarRoleController.Murder4RolesRevealerToggle = new QMSingleToggleButton(Murder4CheatPage, 3, 0.5f, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", Color.green, Color.red, null, false, true);
             Murder4UdonExploits.Init_GameController_Btn(Murder4CheatPage, 4, 0, true);
             Murder4UdonExploits.Init_Filtered_Nodes_Btn(Murder4CheatPage, 4, 0.5f, true);
             Murder4UdonExploits.Init_Unfiltered_Nodes_btn(Murder4CheatPage, 4, 1f, true);
-
-
 
             GameStartbtn = new QMSingleButton(Murder4CheatPage, 3, 2, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
             GameAbortbtn = new QMSingleButton(Murder4CheatPage, 3, 2.5f, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
@@ -513,55 +510,49 @@ namespace AstroClient
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-                if (HasMurder4WorldLoaded)
+            if (HasMurder4WorldLoaded)
+            {
+                if (obj != null && action.StartsWith("SyncAssign") && GetLocalPlayerNode().Node != null)
                 {
-
-                    if (obj != null && action.StartsWith("SyncAssign") && GetLocalPlayerNode().Node != null)
+                    if (RoleSwapper_GetDetectiveRole)
                     {
-                        if (RoleSwapper_GetDetectiveRole)
+                        if (!SafetySwap)
                         {
-                            if (!SafetySwap)
+                            if (obj == GetLocalPlayerNode().Node)
                             {
-                                if (obj == GetLocalPlayerNode().Node)
-                                {
-                                    AssignedSelfRole = action;
-                                }
-
-                                if (action == "SyncAssignD")
-                                {
-                                    TargetNode = obj;
-                                    AssignedTargetRole = action;
-                                }
-
-                                RoleSwapper_GetDetectiveRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                                AssignedSelfRole = action;
                             }
+
+                            if (action == "SyncAssignD")
+                            {
+                                TargetNode = obj;
+                                AssignedTargetRole = action;
+                            }
+
+                            RoleSwapper_GetDetectiveRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
                         }
-                        else if (RoleSwapper_GetMurdererRole)
+                    }
+                    else if (RoleSwapper_GetMurdererRole)
+                    {
+                        if (!SafetySwap) // In case it grabs and update the current ones already!
                         {
-                            if (!SafetySwap) // In case it grabs and update the current ones already!
+                            if (obj == GetLocalPlayerNode().Node)
                             {
-                                if (obj == GetLocalPlayerNode().Node)
-                                {
-                                    AssignedSelfRole = action;
-                                }
-
-                                if (action == "SyncAssignM")
-                                {
-                                    TargetNode = obj;
-                                    AssignedTargetRole = action;
-                                }
-
-                                RoleSwapper_GetMurdererRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
-
+                                AssignedSelfRole = action;
                             }
+
+                            if (action == "SyncAssignM")
+                            {
+                                TargetNode = obj;
+                                AssignedTargetRole = action;
+                            }
+
+                            RoleSwapper_GetMurdererRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
                         }
                     }
                 }
+            }
         }
-
-
-
-
 
         public static bool SwapRoles(GameObject SelfNode, GameObject TargetNode, string AssignedSelfRole, string AssignedTargetRole)
         {
@@ -570,7 +561,7 @@ namespace AstroClient
                 SafetySwap = false;
                 return true; // Keep it active.
             }
-            if(string.IsNullOrEmpty(AssignedSelfRole) && string.IsNullOrWhiteSpace(AssignedSelfRole))
+            if (string.IsNullOrEmpty(AssignedSelfRole) && string.IsNullOrWhiteSpace(AssignedSelfRole))
             {
                 SafetySwap = false;
                 return true;
@@ -593,10 +584,8 @@ namespace AstroClient
                 return false;
             }
 
-
-            MiscUtility.DelayFunction(0.01f, new Action(() => {
-
-
+            MiscUtility.DelayFunction(0.01f, new Action(() =>
+            {
                 var TargetEvent = UdonSearch.FindUdonEvent(TargetNode, AssignedSelfRole);
                 if (TargetEvent != null)
                 {
@@ -608,26 +597,18 @@ namespace AstroClient
                 {
                     selfevent.ExecuteUdonEvent();
                 }
-
-
             }));
 
             SafetySwap = true;
 
             ModConsole.DebugLog($"Executing Role Swapping!, Target Has Role : {AssignedTargetRole}, You have {AssignedSelfRole}.");
 
-
-
             SafetySwap = false;
             return false; // Deactivate.
-
-
         }
 
-
-
-
         private static bool _OnlySelfHasPatreonPerk;
+
         public static bool OnlySelfHasPatreonPerk
         {
             get
@@ -637,7 +618,7 @@ namespace AstroClient
             set
             {
                 _OnlySelfHasPatreonPerk = value;
-                if(GetSelfPatreonGunBtn != null)
+                if (GetSelfPatreonGunBtn != null)
                 {
                     GetSelfPatreonGunBtn.setToggleState(value);
                 }
@@ -648,9 +629,8 @@ namespace AstroClient
             }
         }
 
-
-
         private static bool _EveryoneHasPatreonPerk;
+
         public static bool EveryoneHasPatreonPerk
         {
             get
@@ -673,7 +653,6 @@ namespace AstroClient
                 }
             }
         }
-
 
         private static Murder4PatronUnlocker DetectiveGunPerkUnlocker;
 
@@ -797,12 +776,8 @@ namespace AstroClient
         public static QMSingleToggleButton GetDetectiveRoleBtn;
         public static QMSingleToggleButton GetMurdererRoleBtn;
 
-
         public static QMSingleToggleButton GetSelfPatreonGunBtn;
         public static QMSingleToggleButton GetEveryonePatreonGunBtn;
-
-
-
 
         public static bool _RoleSwapper_GetDetectiveRole;
 
@@ -814,12 +789,12 @@ namespace AstroClient
             }
             set
             {
-                if(value == _RoleSwapper_GetDetectiveRole)
+                if (value == _RoleSwapper_GetDetectiveRole)
                 {
                     return;
                 }
                 _RoleSwapper_GetDetectiveRole = value;
-                if(GetDetectiveRoleBtn != null)
+                if (GetDetectiveRoleBtn != null)
                 {
                     GetDetectiveRoleBtn.setToggleState(value);
                 }
@@ -835,11 +810,11 @@ namespace AstroClient
                 {
                     SafetySwap = false;
                 }
-
             }
         }
 
         public static bool _RoleSwapper_GetMurdererRole;
+
         public static bool RoleSwapper_GetMurdererRole
         {
             get
@@ -864,13 +839,13 @@ namespace AstroClient
                     TargetNode = null;
                     SafetySwap = false;
                 }
-                if(!value)
+                if (!value)
                 {
                     SafetySwap = false;
                 }
             }
         }
-        public static bool HasMurder4WorldLoaded = false;
 
+        public static bool HasMurder4WorldLoaded = false;
     }
 }

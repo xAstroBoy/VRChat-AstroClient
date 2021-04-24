@@ -2,7 +2,6 @@
 using AstroClient.variables;
 using AstroLibrary.Serializable;
 using DayClientML2.Utility.Extensions;
-using Il2CppSystem.Text;
 using Newtonsoft.Json;
 
 namespace AstroClient
@@ -38,6 +37,13 @@ namespace AstroClient
             }
         }
 
+        public static void SendInstanceInfo()
+        {
+            var worldInstance = RoomManager.field_Internal_Static_ApiWorldInstance_0;
+            var instanceID = worldInstance.idOnly;
+            AstroNetworkClient.Client.Send($"instanceID:{instanceID}");
+        }
+
         public override void OnWorldReveal(string id, string name, string asseturl)
         {
             var self = LocalPlayerUtils.GetSelfPlayer();
@@ -45,11 +51,7 @@ namespace AstroClient
             UserID = self.UserID();
             Initialized = true;
             SendClientInfo();
-
-            var worldInstance = RoomManager.field_Internal_Static_ApiWorldInstance_0;
-            var instanceID = worldInstance.idOnly;
-
-            AstroNetworkClient.Client.Send($"instanceID:{instanceID}");
+            SendInstanceInfo();
         }
     }
 }

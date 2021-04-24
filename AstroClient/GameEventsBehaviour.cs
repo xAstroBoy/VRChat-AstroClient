@@ -1,5 +1,4 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.Startup.Hooks;
+﻿using AstroClient.Startup.Hooks;
 using System;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
@@ -8,7 +7,7 @@ using VRC.SDKBase;
 
 namespace AstroClient
 {
-    public class GameEventsBehaviour : MonoBehaviour 
+    public class GameEventsBehaviour : MonoBehaviour
     {
         public GameEventsBehaviour(IntPtr obj0) : base(obj0)
         {

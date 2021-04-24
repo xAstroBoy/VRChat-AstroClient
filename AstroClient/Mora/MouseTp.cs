@@ -1,17 +1,8 @@
-﻿using DayClientML2.Utility.Extensions;
-using RubyButtonAPI;
-using System.Collections.Generic;
-using UnityEngine;
-using VRC;
-using AstroClient;
-using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.Finder;
-using AstroClient.Variables;
+﻿using UnityEngine;
 
 namespace AstroClient
 {
-    class MouseTp : GameEvents
+    internal class MouseTp : GameEvents
     {
         public override void OnUpdate()
         {
@@ -27,6 +18,4 @@ namespace AstroClient
 #endif
         }
     }
- }
-
-
+}

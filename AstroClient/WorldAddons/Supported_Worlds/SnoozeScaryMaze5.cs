@@ -8,7 +8,6 @@ namespace AstroClient
 {
     public class SnoozeScaryMaze5 : GameEvents
     {
-
         public override void OnWorldReveal(string id, string name, string asseturl)
         {
             if (id == WorldIds.SnoozeScaryMaze5)

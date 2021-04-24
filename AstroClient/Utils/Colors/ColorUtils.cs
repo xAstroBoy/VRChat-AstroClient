@@ -18,13 +18,12 @@ public class ColorUtils : GameEvents
         return new Color(r, g, b);
     }
 
-
     public static Color GenerateHSVColor()
     {
         var color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        if(GeneratedColors != null)
+        if (GeneratedColors != null)
         {
-            if(GeneratedColors.Contains(color))
+            if (GeneratedColors.Contains(color))
             {
                 return GenerateHSVColor();
             }
@@ -41,8 +40,5 @@ public class ColorUtils : GameEvents
         GeneratedColors.Clear();
     }
 
-
-
     private static List<Color> GeneratedColors = new List<Color>();
-
 }

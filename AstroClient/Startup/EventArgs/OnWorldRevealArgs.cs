@@ -13,7 +13,6 @@ namespace AstroClient
             this.ID = ID;
             this.Name = Name;
             this.AssetUrl = AssetUrl;
-
         }
     }
 }

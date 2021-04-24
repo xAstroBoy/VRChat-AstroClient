@@ -15,7 +15,6 @@ namespace AstroClient.ItemTweaker
 {
     public class Tweaker_Object : GameEvents
     {
-
         public override void OnLevelLoaded()
         {
             DoNotPickOtherItems = false;
@@ -37,8 +36,6 @@ namespace AstroClient.ItemTweaker
             {
                 LockHoldItem.setToggleState(false);
             }
-
-
         }
 
         public static string GetObjectToEditName
@@ -55,7 +52,6 @@ namespace AstroClient.ItemTweaker
                 }
             }
         }
-
 
         public static void UpdateCapturedObject(GameObject obj)
         {
@@ -189,8 +185,6 @@ namespace AstroClient.ItemTweaker
                 }
                 if (_CurrentSelectedObject != null)
                 {
-
-
                     ObjectESP installedESP = _CurrentSelectedObject.GetComponent<ObjectESP>();
                     if (installedESP != null)
                     {
@@ -226,7 +220,7 @@ namespace AstroClient.ItemTweaker
                         }
                     }
                 }
-                
+
                 RigidBodyController RigidBodyController = value.GetComponent<RigidBodyController>();
                 if (RigidBodyController == null)
                 {
@@ -259,8 +253,6 @@ namespace AstroClient.ItemTweaker
             }
         }
 
-
-
         public static GameObject SetObjectToEditWithPath(string objpath)
         {
             var obj = GameObjectFinder.Find(objpath);
@@ -284,8 +276,6 @@ namespace AstroClient.ItemTweaker
             }
             CurrentSelectedObject = obj;
         }
-
-
 
         public static GameObject GetGameObjectToEdit()
         {
@@ -311,13 +301,7 @@ namespace AstroClient.ItemTweaker
             }
         }
 
-
-
-
-
         public static QMSingleButton TransformToEditBtn;
         public static QMSingleToggleButton LockHoldItem;
-
-
     }
 }

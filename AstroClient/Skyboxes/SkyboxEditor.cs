@@ -1,13 +1,13 @@
 ﻿using AstroClient.ConsoleUtils;
+using AstroClient.extensions;
+using RubyButtonAPI;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using UnityEngine;
-using AstroClient.extensions;
 using UnhollowerRuntimeLib;
-using RubyButtonAPI;
+using UnityEngine;
 
 namespace AstroClient.Skyboxes
 {
@@ -20,11 +20,13 @@ namespace AstroClient.Skyboxes
                 return Path.Combine(Environment.CurrentDirectory, $"AstroSkyboxes");
             }
         }
+
         public class AssetBundleSkyboxes
         {
             public AssetBundle SkyboxBundle { get; set; }
             public string SkyboxName { get; set; }
             public string SkyboxMaterialPath { get; set; }
+
             public AssetBundleSkyboxes(AssetBundle SkyboxBundle, string SkyboxName, string SkyboxMaterialPath)
             {
                 this.SkyboxBundle = SkyboxBundle;
@@ -38,6 +40,7 @@ namespace AstroClient.Skyboxes
             public Material SkyboxBundle { get; set; }
             public string SkyboxName { get; set; }
             public string SkyboxMaterialPath { get; set; }
+
             public MaterialSkyboxes(Material SkyboxBundle, string SkyboxName, string SkyboxMaterialPath)
             {
                 this.SkyboxBundle = SkyboxBundle;
@@ -45,7 +48,6 @@ namespace AstroClient.Skyboxes
                 this.SkyboxMaterialPath = SkyboxMaterialPath;
             }
         }
-
 
         public static List<AssetBundleSkyboxes> LoadedSkyboxesBundles = new List<AssetBundleSkyboxes>();
         public static List<MaterialSkyboxes> LoadedSkyboxesMaterials = new List<MaterialSkyboxes>();
@@ -56,15 +58,13 @@ namespace AstroClient.Skyboxes
 
         public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            if(!HasLoadedCachedSkyboxes)
+            if (!HasLoadedCachedSkyboxes)
             {
-
                 ModConsole.Log("[Skybox Loader] : This will Probably take awhile...");
                 MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
                 HasLoadedCachedSkyboxes = true;
             }
             OriginalSkybox = RenderSettings.skybox;
-
         }
 
         public override void OnLevelLoaded()
@@ -74,15 +74,13 @@ namespace AstroClient.Skyboxes
 
         public static bool IsBundleAlreadyRegistered(string filename)
         {
-            return LoadedSkyboxesBundles.Where(x => x.SkyboxName == filename).Any();;
+            return LoadedSkyboxesBundles.Where(x => x.SkyboxName == filename).Any(); ;
         }
 
         public static bool IsMaterialAlreadyRegistered(string filename)
         {
             return LoadedSkyboxesMaterials.Where(x => x.SkyboxName == filename).Any(); ;
         }
-
-
 
         //public static void SaveCurrentSkybox()
         //{
@@ -92,13 +90,10 @@ namespace AstroClient.Skyboxes
         //    }
         //}
 
-
-
         public static IEnumerator FindAndLoadBundle()
         {
             if (Directory.Exists(SkyboxesPath))
             {
-                
                 var files = Directory.GetFiles(SkyboxesPath).ToList();
                 if (files.isNotEmpty())
                 {
@@ -154,11 +149,6 @@ namespace AstroClient.Skyboxes
                         //            {
                         //            }
 
-
-
-
-
-
                         //        }
                         //    }
                         //}
@@ -178,18 +168,14 @@ namespace AstroClient.Skyboxes
             {
                 Directory.CreateDirectory(SkyboxesPath);
                 ModConsole.Warning("To Add custom Skyboxes , import the skyboxes assetbundles here : " + SkyboxesPath);
-
             }
             yield return null;
         }
-
 
         private static void SetNewSkybox(Material mat)
         {
             RenderSettings.skybox = mat;
         }
-
-
 
         public static void CustomSkyboxesMenu(QMNestedButton main, float x, float y, bool btnHalf)
         {
@@ -218,7 +204,6 @@ namespace AstroClient.Skyboxes
                             tmp.setAction(new Action(() =>
                             {
                                 SetNewSkybox(skybox.SkyboxBundle.LoadAsset_Internal(skybox.SkyboxMaterialPath, Il2CppType.Of<Material>()).Cast<Material>());
-
                             }));
                             scroll.Add(tmp);
                         }
@@ -231,7 +216,5 @@ namespace AstroClient.Skyboxes
                 }
             });
         }
-
-
     }
 }

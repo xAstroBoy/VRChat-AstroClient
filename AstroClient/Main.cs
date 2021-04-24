@@ -1,25 +1,23 @@
-﻿using MelonLoader;
+﻿using AstroClient.AstroUtils.ItemTweaker;
+using AstroClient.AstroUtils.PlayerMovement;
+using AstroClient.ButtonShortcut;
+using AstroClient.Cheetos;
+using AstroClient.Components;
+using AstroClient.ConsoleUtils;
+using AstroClient.GameObjectDebug;
+using AstroClient.Startup.Buttons;
+using AstroClient.UdonExploits;
+using AstroClient.variables;
+using AstroClient.WorldLights;
+using AstroClient.Worlds;
+using CheetosConsole;
+using MelonLoader;
 using RubyButtonAPI;
-
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine.UI;
 using Console = CheetosConsole.Console;
-
-using AstroClient.WorldLights;
-using AstroClient.variables;
-using AstroClient.ConsoleUtils;
-using AstroClient.GameObjectDebug;
-using AstroClient.Worlds;
-using AstroClient.Startup.Buttons;
-using AstroClient.AstroUtils.PlayerMovement;
-using AstroClient.AstroUtils.ItemTweaker;
-using AstroClient.Components;
-using AstroClient.UdonExploits;
-using AstroClient.ButtonShortcut;
-using CheetosConsole;
-using AstroClient.Cheetos;
 
 namespace AstroClient
 {

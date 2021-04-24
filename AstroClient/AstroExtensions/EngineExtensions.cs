@@ -16,10 +16,9 @@ namespace AstroClient.extensions
 {
     public static class EngineExtensions
     {
-
         public static void CopyRotation(this GameObject obj)
         {
-            if(obj != null)
+            if (obj != null)
             {
                 ModConsole.Log($"{obj.name} rotation is : new Quaternion({obj.transform.rotation.x}f, {obj.transform.rotation.y}f, {obj.transform.rotation.z}f, {obj.transform.rotation.w}f)");
                 ModConsole.Log($"The rotation been copied on the clipboard.");
@@ -72,7 +71,6 @@ namespace AstroClient.extensions
             }
             return null;
         }
-
 
         public static void CloneObject(this GameObject obj)
         {

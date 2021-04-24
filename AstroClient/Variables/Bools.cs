@@ -7,7 +7,7 @@ namespace AstroClient.variables
         internal static bool DisableNSFWMenu = true;
 
 #if CHEETOS
-        private static bool _isDebugMode = true; 
+        private static bool _isDebugMode = true;
 #else
         private static bool _isDebugMode = false;
 #endif

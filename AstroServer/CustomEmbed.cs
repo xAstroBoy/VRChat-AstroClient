@@ -1,9 +1,9 @@
-﻿using AstroServer.DiscordBot;
-using Discord;
-using System;
-
-namespace AstroServer
+﻿namespace AstroServer
 {
+    using AstroServer.DiscordBot;
+    using Discord;
+    using System;
+
     public static class CustomEmbed
     {
         public static Embed GetKeyCountEmbed()

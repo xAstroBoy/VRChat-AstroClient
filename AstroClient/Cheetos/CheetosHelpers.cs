@@ -1,16 +1,15 @@
-﻿using AstroClient.ConsoleUtils;
-using DayClientML2.Utility.Extensions;
-using System.IO;
-using UnityEngine;
-
-namespace AstroClient.Cheetos
+﻿namespace AstroClient.Cheetos
 {
+    using AstroClient.ConsoleUtils;
+    using DayClientML2.Utility.Extensions;
+    using System.IO;
+    using UnityEngine;
+
     public static class CheetosHelpers
     {
         public static Texture2D LoadPNG(string filePath)
         {
-
-            Texture2D tex = null;
+            Texture2D tex;
             byte[] fileData;
 
             if (File.Exists(filePath))

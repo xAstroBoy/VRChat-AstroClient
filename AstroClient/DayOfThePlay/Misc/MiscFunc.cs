@@ -68,7 +68,7 @@ namespace DayClientML2.Utility
             {
                 if (Toggle)
                 {
-                    Capsule = GameObject.Instantiate(Utils.CurrentUser.prop_VRCAvatarManager_0.prop_GameObject_0, null, true);
+                    Capsule = UnityEngine.Object.Instantiate(Utils.CurrentUser.prop_VRCAvatarManager_0.prop_GameObject_0, null, true);
                     var animator = Capsule.GetComponent<Animator>();
                     if (animator != null
                         && animator.isHuman)
@@ -145,7 +145,7 @@ namespace DayClientML2.Utility
             cached.gameObject.SetActive(!state);
         }
 
-        public static void copytoclip(string copytext)
+        public static void CopyToClipboard(string copytext)
         {
             TextEditor textEditor = new TextEditor();
             textEditor.text = copytext;
@@ -216,13 +216,13 @@ namespace DayClientML2.Utility
                 {
                     ModConsole.Error("[Friends] Skipping " + id);
                 }
-                ModConsole.Log($"[Friends] {((float)requests * 100 / (float)Friends.Length).ToString("0.00")}%");
+                ModConsole.Log($"[Friends] {(float)requests * 100 / Friends.Length:0.00}%");
             }
 
             stopwatch.Stop();
             Console.WriteLine("=============================");
             Console.WriteLine(
-                $"Summary:\n with {File.ReadAllLines(FileManager.PathFriends).Length} friends\n Took {stopwatch.Elapsed.ToString()}");
+                $"Summary:\n with {File.ReadAllLines(FileManager.PathFriends).Length} friends\n Took {stopwatch.Elapsed}");
             yield break;
         }
 
@@ -368,8 +368,8 @@ namespace DayClientML2.Utility
         public static void AddEveryone()
         {
             NotificationManager xxx = Utils.NotificationManager;
-            System.Console.Clear();
-            System.Console.WriteLine(
+            Console.Clear();
+            Console.WriteLine(
                 "[DAY]-----------------------------------Add players-----------------------------------");
             VRC.Player[] allPlayers = Utils.PlayerManager.AllPlayers().ToArray();
             for (int i = 0; i < allPlayers.Length; i++)
@@ -378,22 +378,22 @@ namespace DayClientML2.Utility
                 string id = x.GetAPIUser().id;
                 if (x.field_Private_APIUser_0.isFriend)
                 {
-                    System.Console.ForegroundColor = ConsoleColor.Red;
-                    System.Console.WriteLine("[DAY] Not Addeding Friend ---> [" + x.GetAPIUser().displayName +
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("[DAY] Not Addeding Friend ---> [" + x.GetAPIUser().displayName +
                                              " [User ID] = " + id + "]");
-                    System.Console.ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 else
                 {
                     Notification xx = FriendRequest.Create(id);
-                    System.Console.ForegroundColor = ConsoleColor.Green;
-                    System.Console.WriteLine("[DAY] Adding ---> " + x.GetAPIUser().displayName + " [User ID] = " + id);
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine("[DAY] Adding ---> " + x.GetAPIUser().displayName + " [User ID] = " + id);
                     VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
-                    System.Console.ForegroundColor = ConsoleColor.White;
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
             }
 
-            System.Console.WriteLine(
+            Console.WriteLine(
                 "[DAY]----------------------------Done Adding players--------------------------------");
         }
 
@@ -563,7 +563,7 @@ namespace DayClientML2.Utility
                     invite++;
                 }
 
-                System.Console.WriteLine(string.Concat(new object[]
+                Console.WriteLine(string.Concat(new object[]
                 {
                     "[Day]---~-Summary-~---",
                     Environment.NewLine,
@@ -585,8 +585,8 @@ namespace DayClientML2.Utility
         {
             try
             {
-                System.Console.Clear();
-                System.Console.WriteLine(
+                Console.Clear();
+                Console.WriteLine(
                     "[DAY]-----------------------------------Request Friends-----------------------------------");
                 APIUser.CurrentUser.Fetch();
                 int number = APIUser.CurrentUser.friendIDs.Count;
@@ -597,7 +597,7 @@ namespace DayClientML2.Utility
                     invite++;
                 }
 
-                System.Console.WriteLine(string.Concat(new object[]
+                Console.WriteLine(string.Concat(new object[]
                 {
                     "[Day]---~-Summary-~---",
                     Environment.NewLine,

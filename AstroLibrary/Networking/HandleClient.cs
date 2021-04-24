@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
@@ -10,8 +9,11 @@ namespace AstroLibrary.Networking
         public TcpClient ClientSocket { get; private set; }
 
         public event EventHandler<EventArgs> Connected;
+
         public event EventHandler<EventArgs> Disconnected;
+
         public event EventHandler<ReceivedTextEventArgs> ReceivedText;
+
         public event EventHandler<ReceivedDataEventArgs> ReceivedData;
 
         public bool IsConnected { get; private set; }
@@ -62,7 +64,8 @@ namespace AstroLibrary.Networking
             if (IsClient)
             {
                 secretHeader = BitConverter.GetBytes(SecretKeyClient);
-            } else
+            }
+            else
             {
                 secretHeader = BitConverter.GetBytes(SecretKeyLoader);
             }
@@ -166,7 +169,7 @@ namespace AstroLibrary.Networking
             {
                 byte[] received = new byte[4];
                 _clientStream.Read(received, 0, received.Length);
-                return BitConverter.ToInt32(received, 0);;
+                return BitConverter.ToInt32(received, 0); ;
             }
             catch
             {
@@ -210,7 +213,8 @@ namespace AstroLibrary.Networking
                     if (remaining >= PacketSize)
                     {
                         toRead = PacketSize;
-                    } else
+                    }
+                    else
                     {
                         toRead = remaining;
                     }
@@ -242,7 +246,8 @@ namespace AstroLibrary.Networking
                 else if (headerType == 1001) // Data
                 {
                     ReceivedData?.Invoke(this, new ReceivedDataEventArgs(ClientID, data));
-                } else
+                }
+                else
                 {
                     Console.WriteLine($"Something Went Wrong.. {headerType}");
                 }

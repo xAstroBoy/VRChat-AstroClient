@@ -2,14 +2,11 @@
 using AstroClient.extensions;
 using DayClientML2.Utility;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using VRC;
 using VRC.Udon;
 using static AstroClient.variables.CustomLists;
-using Object = UnityEngine.Object;
 
 namespace AstroClient.components
 {
@@ -78,9 +75,6 @@ namespace AstroClient.components
             }
         }
 
-
-
-
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             if (!IgnoreEventReceiver)
@@ -123,7 +117,6 @@ namespace AstroClient.components
                         }
                     }
                 }
-
             }
         }
 
@@ -136,7 +129,6 @@ namespace AstroClient.components
                 IgnoreEventReceiver = false;
             }
         }
-
 
         internal void SendOnlySelfPatreonSkinEvent()
         {
@@ -156,8 +148,6 @@ namespace AstroClient.components
                 }
             }
         }
-
-
 
         internal CachedUdonEvent SyncNonPatronSkin
         {
@@ -180,8 +170,5 @@ namespace AstroClient.components
         private bool IgnoreEventReceiver;
         private CachedUdonEvent _SyncNonPatronSkin;
         private CachedUdonEvent _SyncPatronSkin;
-        
-
-
     }
 }

@@ -1,11 +1,11 @@
 ﻿using AstroClient.ConsoleUtils;
-using AstroClient.Variables;
-using System;
-using UnityEngine;
 using AstroClient.extensions;
 using AstroClient.Finder;
-using VRC.Udon;
+using AstroClient.Variables;
+using System;
 using System.Linq;
+using UnityEngine;
+using VRC.Udon;
 
 namespace AstroClient
 {
@@ -13,7 +13,7 @@ namespace AstroClient
     {
         public override void OnWorldReveal(string id, string name, string asseturl)
         {
-            if(id == WorldIds.BClub)
+            if (id == WorldIds.BClub)
             {
                 try
                 {
@@ -32,20 +32,20 @@ namespace AstroClient
                     {
                         warning.SetActive(false);
                     }
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     ModConsole.DebugErrorExc(e);
                 }
             }
         }
 
-
         // TODO : FIX THE UDON EVENT OR MAKE A LOCAL TELEPORT AND ENABLE THE ROOM WITH ONE BUTTON.
         private GameObject CreateButtonGroup(int doorID, Vector3 position, Quaternion rotation, bool flip = false)
         {
             GameObject nlobby = GameObjectFinder.FindRootSceneObject("nLobby");
             GameObject Bedrooms = GameObjectFinder.FindRootSceneObject("Bedrooms");
-                
+
             if (nlobby != null && Bedrooms != null)
             {
                 var room = nlobby.transform.FindObject($"Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");
@@ -54,7 +54,6 @@ namespace AstroClient
                 var room_ToggleLock = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Lock");
                 var room_ToggleIncognito = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonWide - Toggle Incognito");
                 var room_DND = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet Intercom/BlueButtonWide - Doorbell In DND");
-
 
                 GameObject buttonGroup = GameObject.CreatePrimitive(PrimitiveType.Plane);
                 buttonGroup.transform.SetParent(room.transform);
@@ -103,16 +102,14 @@ namespace AstroClient
                                 var TriggerComponent = clone.transform.Find(path);
                                 if (TriggerComponent != null)
                                 {
-                                    
                                     TriggerComponent.gameObject.AddAstroInteractable(action);
                                     TriggerComponent.gameObject.RenameObject($"Intercom {doorID} - Trigger");
                                 }
                             }
-                            catch(Exception e)
+                            catch (Exception e)
                             {
                                 ModConsole.DebugWarningExc(e);
                             }
-
                         }
                     }
                     else
@@ -177,9 +174,9 @@ namespace AstroClient
                             Action action = () => { udonEvent.ExecuteUdonEvent(); };
                             clone.gameObject.AddAstroInteractable(action);
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
-                            if(behaviourevent != null && behaviourevent.Count() != 0)
+                            if (behaviourevent != null && behaviourevent.Count() != 0)
                             {
-                                foreach(var e in behaviourevent)
+                                foreach (var e in behaviourevent)
                                 {
                                     e.DestroyMeLocal();
                                 }
@@ -188,7 +185,6 @@ namespace AstroClient
 
                             try
                             {
-
                                 string path = "Button Interactable - Looking";
                                 var TriggerComponent = clone.transform.Find(path);
                                 if (TriggerComponent != null)
@@ -207,8 +203,6 @@ namespace AstroClient
                     {
                         ModConsole.DebugWarning("Failed to find Bedroom Toggle Looking Button!");
                     }
-
-
 
                     if (room_ToggleIncognito != null)
                     {
@@ -308,15 +302,14 @@ namespace AstroClient
             }
             else
             {
-                if(nlobby == null)
+                if (nlobby == null)
                 {
                     ModConsole.Error("Failed to Find NLobby!");
                 }
-                if(Bedrooms == null)
+                if (Bedrooms == null)
                 {
                     ModConsole.Error("Failed to Find Bedrooms!");
                 }
-
             }
             return null;
         }

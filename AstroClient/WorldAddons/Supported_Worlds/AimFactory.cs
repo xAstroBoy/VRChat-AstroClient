@@ -1,27 +1,24 @@
 ﻿using AstroClient.ConsoleUtils;
-using AstroClient.Variables;
-using System;
-using UnityEngine;
 using AstroClient.extensions;
 using AstroClient.Finder;
-using VRC.Udon;
-using System.Linq;
-using VRC;
+using AstroClient.Variables;
 using RubyButtonAPI;
-using System.Collections.Generic;
-using Random = System.Random;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using VRC;
+using Random = System.Random;
 
 namespace AstroClient
 {
     public class AimFactory : GameEvents
     {
-
         public static void InitButtons(QMTabMenu main, float x, float y, bool btnhalf)
         {
             AimFactoryCheatPage = new QMNestedButton(main, x, y, "Aim Factory", "Aim Factory Cheats", null, null, null, null, true);
             AlwaysPerfectHitToggle = new QMToggleButton(AimFactoryCheatPage, 1, 0, "Always Hit ON", new Action(() => { IsAlwaysPerfectHit = true; }), "Always Hit OFF", new Action(() => { IsAlwaysPerfectHit = false; }), "Unfreezes you automatically", null, null, null);
-
         }
 
         public override void OnLevelLoaded()
@@ -33,18 +30,14 @@ namespace AstroClient
             prevtarget = null;
         }
 
-
         public static QMNestedButton AimFactoryCheatPage;
         private static QMToggleButton AlwaysPerfectHitToggle;
-
 
         private static List<GameObject> MapTargets = new List<GameObject>();
 
         private static GameObject prevtarget = null;
 
         private static bool _IsAlwaysPerfectHit = false;
-
-
 
         private static Random r = new Random();
 
@@ -71,9 +64,7 @@ namespace AstroClient
 
             prevtarget = obj;
             return obj;
-
         }
-
 
         private static bool IsAlwaysPerfectHit
         {
@@ -90,7 +81,6 @@ namespace AstroClient
                 }
             }
         }
-
 
         private static bool IsAimFactory = false;
         private static bool IsPoppingTarget = false;
@@ -139,18 +129,16 @@ namespace AstroClient
             }
         }
 
-
         // WORKS but the map doesn't count the objects, there must be something that triggers the point count!
         public static IEnumerator PopTarget()
         {
             //float cooldown = 0.f;
             //DayClientML2.Utility.MiscUtility.DelayFunction(cooldown, new Action(() =>
             //{
-
             //}));
             if (IsPoppingTarget)
             {
-               var RandomTarget = GetRandomtarget();
+                var RandomTarget = GetRandomtarget();
                 if (RandomTarget != null)
                 {
                     if (RandomTarget != null)
@@ -174,31 +162,26 @@ namespace AstroClient
             yield return null;
         }
 
-
-
-
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-                if (IsAimFactory)
+            if (IsAimFactory)
+            {
+                if (obj != null)
                 {
-                    if (obj != null)
+                    if (IsAlwaysPerfectHit)
                     {
-                        if (IsAlwaysPerfectHit)
+                        if (sender != null)
                         {
-                            if (sender != null)
+                            if (sender == LocalPlayerUtils.GetSelfPlayer())
                             {
-                                if (sender == LocalPlayerUtils.GetSelfPlayer())
+                                if (obj.name.Equals("Handgun_M1911A (Model)"))
                                 {
-                                    if (obj.name.Equals("Handgun_M1911A (Model)"))
+                                    if (action == "AllwaysTrigger")
                                     {
-
-                                        if (action == "AllwaysTrigger")
+                                        if (!IsPoppingTarget)
                                         {
-                                            if (!IsPoppingTarget)
-                                            {
-                                                IsPoppingTarget = true;
-                                                MelonLoader.MelonCoroutines.Start(PopTarget());
-                                            }
+                                            IsPoppingTarget = true;
+                                            MelonLoader.MelonCoroutines.Start(PopTarget());
                                         }
                                     }
                                 }
@@ -206,7 +189,7 @@ namespace AstroClient
                         }
                     }
                 }
+            }
         }
     }
 }
-

@@ -21,7 +21,6 @@ namespace AstroClient.extensions
             }
         }
 
-
         public static void removeColliders(this GameObject obj)
         {
             if (obj != null)
@@ -32,7 +31,6 @@ namespace AstroClient.extensions
                 }
             }
         }
-
 
         public static void removeAllCollider(this GameObject obj)
         {
@@ -45,7 +43,6 @@ namespace AstroClient.extensions
             }
         }
 
-
         public static void disablecollider(this GameObject obj)
         {
             if (obj != null)
@@ -56,7 +53,6 @@ namespace AstroClient.extensions
                 }
             }
         }
-
 
         public static void DisableAllColliders(this GameObject obj)
         {

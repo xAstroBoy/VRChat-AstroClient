@@ -7,7 +7,6 @@ namespace AstroClient
 {
     public static class TriggersCloner
     {
-
         public static void CloneVRC2SDKTrigger(GameObject OrigObj, GameObject DisplayObj, string InteractText)
         {
             var DeleteTrigger = DisplayObj.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
@@ -32,7 +31,5 @@ namespace AstroClient
                 ModConsole.Log($"Added Successfully {InteractText}");
             }
         }
-
-
     }
 }

@@ -28,7 +28,6 @@ namespace AstroClient.AntiCrash
 
         public static void DownloadLists()
         {
-
         }
     }
 

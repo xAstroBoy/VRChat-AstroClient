@@ -7,7 +7,6 @@ namespace AstroClient
 {
     public class SmashContest : GameEvents
     {
-
         public override void OnWorldReveal(string id, string name, string asseturl)
         {
             if (id == WorldIds.SmashContest)
@@ -21,6 +20,5 @@ namespace AstroClient
                 }
             }
         }
-
     }
 }

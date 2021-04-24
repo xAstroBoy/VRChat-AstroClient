@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace AstroServer
+﻿namespace AstroServer
 {
     public static class InstanceManager
     {
@@ -8,19 +6,21 @@ namespace AstroServer
         /// Checks who's in the same instance and sends information etc..
         /// </summary>
         /// <param name="client"></param>
-        public static void ClientJoinedInstance(Client client)
+        public static void PlayerInfo(Client client)
         {
-            foreach (Client other in Server.Clients.Where(c => c.InstanceID == client.InstanceID))
-            {
-                if (client.IsDeveloper)
-                {
-                    //other.Send($"notify-dev:AstroClient Developer {client.Name} Joined!");
-                }
-                if (other.IsDeveloper)
-                {
-                    //client.Send($"notify-dev:AstroClient Developer {other.Name} Is Here!");
-                }
-            }
+            //foreach (Client other in Server.Clients.Where(c => c.InstanceID == client.InstanceID))
+            //{
+            //    if (client.IsDeveloper)
+            //    {
+            //        client.Send($"add-tag:{other.UserID},AstroClient");
+            //        other.Send($"add-tag:{client.UserID},AstroClient Developer");
+            //    }
+            //    if (other.IsDeveloper)
+            //    {
+            //        client.Send($"add-tag:{other.UserID},AstroClient Developer");
+            //        other.Send($"add-tag:{client.UserID},AstroClient");
+            //    }
+            //}
         }
     }
 }

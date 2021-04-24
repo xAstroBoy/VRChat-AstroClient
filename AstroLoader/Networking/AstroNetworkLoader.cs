@@ -102,7 +102,6 @@ namespace AstroLoader
 
         private static void OnDisconnect(object sender, EventArgs e)
         {
-            
         }
 
         private static void OnTextReceived(object sender, ReceivedTextEventArgs e)

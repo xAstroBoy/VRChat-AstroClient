@@ -256,13 +256,8 @@ namespace AstroClient
             }
         }
 
-
-
-
         public static void SpawnOfflineEmoji(int emoji, bool MakeOthersSeeit)
         {
-
-            
             var EmojiGen = Player.prop_Player_0.field_Internal_VRCPlayer_0.field_Private_MonoBehaviourPublicGaVoInStInStVoInStVoUnique_0;
             if (EmojiGen != null)
             {

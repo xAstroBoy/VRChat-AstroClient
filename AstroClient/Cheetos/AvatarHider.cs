@@ -2,7 +2,6 @@
 {
     using AstroClient.ConsoleUtils;
     using AstroClient.extensions;
-    using Cinemachine;
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;

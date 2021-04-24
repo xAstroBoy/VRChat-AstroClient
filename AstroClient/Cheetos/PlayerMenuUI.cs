@@ -1,7 +1,5 @@
 ﻿using DayClientML2.Utility.Extensions;
-using Mono.CSharp;
 using RubyButtonAPI;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -50,6 +48,7 @@ namespace AstroClient
         public override void OnPlayerJoined(Player player)
         {
             InitializeButtons();
+            AstroNetworkClient.Client.Send($"player-info:{player.UserID()}");
         }
 
         /// <summary>
@@ -124,7 +123,7 @@ namespace AstroClient
 
         private void ResetButtons()
         {
-            foreach(var keyValuePair in PlayerButtons)
+            foreach (var keyValuePair in PlayerButtons)
             {
                 keyValuePair.Value.DestroyMe();
             }

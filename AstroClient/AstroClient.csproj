@@ -63,6 +63,9 @@
     <Compile Include="..\AstroLibrary\Serializable\AvatarData.cs">
       <Link>Networking\Serializable\AvatarData.cs</Link>
     </Compile>
+    <Compile Include="..\AstroLibrary\Serializable\TagData.cs">
+      <Link>Networking\Serializable\TagData.cs</Link>
+    </Compile>
     <Compile Include="AntiCrash\AntiCrash.cs" />
     <Compile Include="AntiCrash\AntiCrashPolys.cs" />
     <Compile Include="AntiCrash\AntiCrashScanner.cs" />
@@ -107,7 +110,7 @@
     <Compile Include="Cheetos\Config\Config.cs" />
     <Compile Include="Cheetos\Config\ConfigManager.cs" />
     <Compile Include="Cheetos\Config\JSonWriter.cs" />
-    <Compile Include="Cheetos\GameEventsBehaviour.cs" />
+    <Compile Include="GameEventsBehaviour.cs" />
     <Compile Include="Cheetos\GPLStuff\FOV.cs" />
     <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
     <Compile Include="Cheetos\PlayerMenuUI.cs" />
@@ -170,7 +173,7 @@
     <Compile Include="DayOfThePlay\Misc\VRCAPI\Endpoints\MiscEndpoint.cs" />
     <Compile Include="DayOfThePlay\Misc\VRCAPI\Utils.cs" />
     <Compile Include="DayOfThePlay\Misc\VRCAPI\Variables.cs" />
-    <Compile Include="DayOfThePlay\VRChabObjects.cs" />
+    <Compile Include="DayOfThePlay\VRChatObjects.cs" />
     <Compile Include="DayOfThePlay\XrefTesting.cs" />
     <Compile Include="GameEvents.cs" />
     <Compile Include="GameObject\Cloner\ObjectCloner.cs" />
@@ -213,7 +216,7 @@
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Lights\LightControl.cs" />
     <Compile Include="Mora\AvatarLogger.cs" />
-    <Compile Include="Mora\welcome.cs" />
+    <Compile Include="Mora\Welcome.cs" />
     <Compile Include="Mora\MouseTp.cs" />
     <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
