@@ -1,13 +1,5 @@
 ﻿using AstroClient.components;
-using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.Finder;
 using RubyButtonAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using VRC;
 

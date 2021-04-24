@@ -1,8 +1,6 @@
 ﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
 using AstroClient.Finder;
 using AstroClient.Variables;
-using VRC.SDKBase;
 
 namespace AstroClient
 {

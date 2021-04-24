@@ -2,14 +2,11 @@
 using AstroClient.extensions;
 using DayClientML2.Utility;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnhollowerBaseLib.Attributes;
 using UnityEngine;
 using VRC;
 using VRC.Udon;
 using static AstroClient.variables.CustomLists;
-using Object = UnityEngine.Object;
 
 namespace AstroClient.components
 {

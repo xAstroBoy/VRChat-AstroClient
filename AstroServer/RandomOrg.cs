@@ -1,7 +1,6 @@
 ﻿namespace AstroServer
 {
     using HtmlAgilityPack;
-    using System.Net;
 
     public static class RandomOrg
     {

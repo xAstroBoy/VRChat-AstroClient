@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using VRC.SDKBase;
 
 #region AstroClient Imports
 

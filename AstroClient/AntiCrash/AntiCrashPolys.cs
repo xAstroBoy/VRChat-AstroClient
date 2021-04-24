@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
 using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.Finder;
-using AstroClient.Variables;
-using VRC.SDKBase;
-using UnityEngine.UI;
 
 namespace AstroClient.AntiCrash
 {
-	class AntiCrashPolys
+    class AntiCrashPolys
 	{
 #if DEBUG
 		internal static int count_polys(Renderer r)

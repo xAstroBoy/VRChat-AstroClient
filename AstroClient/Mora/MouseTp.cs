@@ -1,13 +1,4 @@
-﻿using DayClientML2.Utility.Extensions;
-using RubyButtonAPI;
-using System.Collections.Generic;
-using UnityEngine;
-using VRC;
-using AstroClient;
-using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.Finder;
-using AstroClient.Variables;
+﻿using UnityEngine;
 
 namespace AstroClient
 {
@@ -28,5 +19,3 @@ namespace AstroClient
         }
     }
  }
-
-

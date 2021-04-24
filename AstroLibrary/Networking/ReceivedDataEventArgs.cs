@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace AstroLibrary.Networking
+﻿namespace AstroLibrary.Networking
 {
     public class ReceivedDataEventArgs
     {

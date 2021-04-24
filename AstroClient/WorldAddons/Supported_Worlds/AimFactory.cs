@@ -4,7 +4,6 @@ using System;
 using UnityEngine;
 using AstroClient.extensions;
 using AstroClient.Finder;
-using VRC.Udon;
 using System.Linq;
 using VRC;
 using RubyButtonAPI;

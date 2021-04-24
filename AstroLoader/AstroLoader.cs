@@ -1,7 +1,6 @@
 ﻿using MelonLoader;
 using System;
 #if DEBUG
-    using System.IO;
 #endif
 using System.Reflection;
 

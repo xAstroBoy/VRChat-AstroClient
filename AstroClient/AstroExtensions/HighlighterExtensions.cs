@@ -1,5 +1,4 @@
 ﻿using AstroClient.components;
-using AstroClient.Finder;
 using UnityEngine;
 
 namespace AstroClient.extensions

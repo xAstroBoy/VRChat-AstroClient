@@ -9,12 +9,8 @@ using System.Threading.Tasks;
 using System.Timers;
 using Timer = System.Timers.Timer;
 using Console = System.Console;
-using Color = UnityEngine.Color;
-using AstroClient.Components;
 using VRC;
 using DayClientML2.Utility.Extensions;
-using AstroClient.components;
-using UnhollowerBaseLib.Attributes;
 
 namespace AstroClient
 {
