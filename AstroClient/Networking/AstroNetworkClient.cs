@@ -34,7 +34,7 @@ namespace AstroClient
         private static void SetPingTimer()
         {
             // Create a timer with a two second interval.
-            pingTimer = new Timer(60000);
+            pingTimer = new Timer(2000);
             // Hook up the Elapsed event for the timer.
             pingTimer.Elapsed += OnPingEvent;
             pingTimer.AutoReset = true;
@@ -49,7 +49,22 @@ namespace AstroClient
         private static void Connect()
         {
             Client = null;
-            TcpClient tcpClient = new TcpClient("craig.se", 42069);
+            //TcpClient tcpClient = new TcpClient("craig.se", 42069);
+            //tcpClient.SendTimeout = 500;
+
+            TcpClient tcpClient = new TcpClient();
+            var result = tcpClient.BeginConnect("craig.se", 42069, null, null);
+            var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(1));
+
+            if (!success)
+            {
+                ModConsole.Error("Failed to connect..");
+                return;
+                //throw new Exception("Failed to connect.");
+            }
+
+            tcpClient.EndConnect(result);
+
             Client = new HandleClient
             {
                 IsClient = true // Indicate that this is the client
@@ -130,7 +145,6 @@ namespace AstroClient
             else if (first.Equals("add-tag"))
             {
                 string[] info = second.Split(',');
-                ModConsole.DebugLog($"{info[0]},{info[1]}");
                 Player player;
                 if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(info[0]))
                 {
@@ -140,10 +154,16 @@ namespace AstroClient
                 else
                 {
                     ModConsole.DebugLog("Wants to add tag to someone else");
-                    player = WorldUtils.GetPlayerByID(info[1]);
+                    player = WorldUtils.GetPlayerByID(info[0]);
                 }
-                SpawnTag(player, info[1], Color.white, Color.blue);
-            
+                if (player != null)
+                {
+                    SpawnTag(player, info[1], Color.white, Color.blue);
+                }
+                else
+                {
+                    ModConsole.DebugLog($"Player ({info[0]}) returned null");
+                }
             }
             else
             {
@@ -191,8 +211,8 @@ namespace AstroClient
             {
                 for (; ; )
                 {
-                    ModConsole.DebugError("Lost connection to server, retrying in 10 seconds...");
-                    Thread.Sleep(10000);
+                    Thread.Sleep(1000);
+                    ModConsole.DebugError("Lost connection to server, retrying...");
                     try { Connect(); break; } catch { }
                 }
             });

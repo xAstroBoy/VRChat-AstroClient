@@ -15,11 +15,14 @@ namespace AstroClient
 
         public QMSingleButton RestartButton { get; private set; }
 
+        public QMSingleButton DisconectButton { get; private set; }
+
         public override void VRChat_OnUiManagerInit()
         {
             MainButton = new QMNestedButton("ShortcutMenu", 5, 3, "Admin Menu", "AstroClient's Admin Menu", null, null, null, null, true);
             MainScroller = new QMScrollMenu(MainButton);
             RestartButton = new QMSingleButton(MainButton, 0, 0, "Close Game", () => { Environment.Exit(0); }, "Close the game");
+            DisconectButton = new QMSingleButton(MainButton, 1, 0, "Disconnect", () => { AstroNetworkClient.Client.Disconnect(); }, "Disconnect");
 
             if (!Bools.IsDeveloper)
             {
