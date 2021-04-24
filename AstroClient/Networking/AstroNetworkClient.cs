@@ -179,8 +179,8 @@ namespace AstroClient
             {
                 if (player != null)
                 {
-        
-                     SingleTag tag = SingleTagsUtils.AddSingleTag(player);
+
+                    SingleTag tag = SingleTagsUtils.AddSingleTag(player);
                     if (tag != null)
                     {
                         tag.Label_Text = text;
@@ -209,39 +209,29 @@ namespace AstroClient
             {
                 for (; ; )
                 {
-                    if (Client.ShouldReconnect)
-                    {
-                        ModConsole.DebugError("Lost connection to server, retrying in 60 seconds...");
-                        Thread.Sleep(5000);
-                        try { Connect(); break; } catch { }
-                    }
-                    else
-                    {
-                        break;
-                    }
+                    ModConsole.DebugError("Lost connection to server, retrying in 60 seconds...");
+                    Thread.Sleep(5000);
+                    try { Connect(); break; } catch { }
                 }
             });
         }
 
         private static void OnTextReceived(object sender, ReceivedTextEventArgs e)
         {
-            Task.Run(() =>
+            try
             {
-                try
+                if (!string.IsNullOrEmpty(e.Message) && !string.IsNullOrWhiteSpace(e.Message))
                 {
-                    if (!string.IsNullOrEmpty(e.Message) && !string.IsNullOrWhiteSpace(e.Message))
-                    {
-                        var data = e.Message;
-                        ProcessInput(sender, data);
-                    }
-                    else
-                    {
-                        Client.Disconnect();
-                        ModConsole.DebugLog("Empty request.");
-                    }
+                    var data = e.Message;
+                    ProcessInput(sender, data);
                 }
-                catch { }
-            });
+                else
+                {
+                    Client.Disconnect();
+                    ModConsole.DebugLog("Empty request.");
+                }
+            }
+            catch { }
         }
     }
 }

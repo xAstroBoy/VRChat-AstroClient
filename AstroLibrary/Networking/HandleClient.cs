@@ -20,6 +20,8 @@ namespace AstroLibrary.Networking
 
         public bool IsClient = true;
 
+        public bool IsConnected;
+
         public bool ShouldReconnect = true;
 
         private NetworkStream clientStream;
@@ -41,9 +43,18 @@ namespace AstroLibrary.Networking
 
         public void Disconnect(bool reconnect = false)
         {
+            IsConnected = false;
             ShouldReconnect = reconnect;
-            clientStream.Close();
-            ClientSocket.Close();
+
+            try
+            {
+                clientStream.Close();
+                ClientSocket.Close();
+            }
+            catch
+            {
+
+            }
         }
 
         private void SendHeaderType(int headerType = 1000) // 1000 is plain text
@@ -127,7 +138,8 @@ namespace AstroLibrary.Networking
         {
             Connected?.Invoke(this, new EventArgs());
 
-            while (ClientSocket.Connected)
+            IsConnected = true;
+            while (IsConnected)
             {
                 Receive();
             }
