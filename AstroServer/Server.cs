@@ -101,6 +101,8 @@
                     Console.WriteLine("Successfully Authed");
                     client.DiscordID = KeyManager.GetKeysDiscordOwner(key);
 
+                    CheckExistingClientsWithKey(client);
+
                     if (KeyManager.IsDevKey(key))
                     {
                         client.IsDeveloper = true;
@@ -157,8 +159,11 @@
                     Console.WriteLine("Sending developer tag");
                     client.Send($"add-tag:{other.UserID},AstroClient Developer");
                 }
-                Console.WriteLine("Sending client tag");
-                client.Send($"add-tag:{other.UserID},AstroClient");
+                else
+                {
+                    Console.WriteLine("Sending client tag");
+                    client.Send($"add-tag:{other.UserID},AstroClient");
+                }
             }
             else if (first.Equals("avatar-log"))
             {
@@ -250,8 +255,6 @@
             Client client = sender as Client;
 
             Console.WriteLine($"Connecting from {client.ClientSocket.Client.RemoteEndPoint}");
-
-            CheckExistingClientsWithKey(client);
 
             if (Clients.Count < _maxConnections)
             {
