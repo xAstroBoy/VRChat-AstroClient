@@ -19,7 +19,6 @@
 
         private static Timer pingTimer;
 
-
         public Server()
         {
             Console.WriteLine("Starting Server");
@@ -60,7 +59,7 @@
         {
             // Create a timer with a two second interval.
             pingTimer = new Timer(60000);
-            // Hook up the Elapsed event for the timer. 
+            // Hook up the Elapsed event for the timer.
             pingTimer.Elapsed += OnPingEvent;
             pingTimer.AutoReset = true;
             pingTimer.Enabled = true;
@@ -112,7 +111,6 @@
                         client.Send("client-type:client");
                     }
                     AstroBot.SendLoggedInLog(client);
-
                 }
                 else
                 {

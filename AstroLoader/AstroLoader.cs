@@ -1,7 +1,9 @@
 ﻿using MelonLoader;
 using System;
+
 #if DEBUG
 #endif
+
 using System.Reflection;
 
 namespace AstroLoader
@@ -51,11 +53,13 @@ namespace AstroLoader
         }
 
 #if DEBUG
+
         public void LoadDebug()
         {
             var dll = Assembly.LoadFile(DebugPath);
             MelonHandler.LoadFromAssembly(dll, DebugPath);
         }
+
 #endif
     }
 }

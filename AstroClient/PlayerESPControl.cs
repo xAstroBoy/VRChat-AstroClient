@@ -5,9 +5,8 @@ using VRC;
 
 namespace AstroClient
 {
-    class PlayerESPControl : GameEvents
+    internal class PlayerESPControl : GameEvents
     {
-
         public static QMSingleToggleButton PlayerESPToggleBtn;
         private static bool _EnableESP;
 
@@ -29,13 +28,12 @@ namespace AstroClient
                 }
 
                 _EnableESP = value;
-                if(PlayerESPToggleBtn != null)
+                if (PlayerESPToggleBtn != null)
                 {
                     PlayerESPToggleBtn.setToggleState(value);
                 }
             }
         }
-
 
         public override void OnPlayerJoined(Player player)
         {
@@ -48,27 +46,23 @@ namespace AstroClient
             }
         }
 
-
         public static void AddESPToAllPlayers()
         {
             foreach (var item in WorldUtils.GetAllPlayers0())
             {
-                if(item.gameObject.GetComponent<PlayerESP>() == null)
+                if (item.gameObject.GetComponent<PlayerESP>() == null)
                 {
                     item.gameObject.AddComponent<PlayerESP>();
                 }
             }
         }
 
-
-
         public static void RemoveAllActivePlayerEsps()
         {
-            foreach(var item in Resources.FindObjectsOfTypeAll<PlayerESP>())
+            foreach (var item in Resources.FindObjectsOfTypeAll<PlayerESP>())
             {
                 UnityEngine.Object.Destroy(item);
             }
         }
-
     }
 }

@@ -24,7 +24,7 @@ namespace AstroClient.components
             Pickup3 = obj.GetComponent<VRC.SDK3.Components.VRCPickup>();
 
             control = obj.GetComponent<RigidBodyController>();
-            if(control == null)
+            if (control == null)
             {
                 control = obj.AddComponent<RigidBodyController>();
             }
@@ -127,7 +127,6 @@ namespace AstroClient.components
             Locked = false;
         }
 
-
         [HideFromIl2Cpp]
         internal void SetRigidbody()
         {
@@ -155,11 +154,11 @@ namespace AstroClient.components
                             control.isKinematic = true;
                         }
                     }
-
                 }
                 HasSetRigidbodyController = true;
             }
         }
+
         // Update is called once per frame
         public void Update()
         {
@@ -191,7 +190,6 @@ namespace AstroClient.components
 
                     if (!hasRequiredComponentBeenAdded)
                     {
-                
                         Pickup1 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
                         Pickup2 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
                         Pickup3 = obj.GetComponent<VRC.SDK3.Components.VRCPickup>();
@@ -209,7 +207,7 @@ namespace AstroClient.components
                                 else
                                 {
                                     ModConsole.DebugLog("PickupController : Added VRC.SDKBase.VRC_Pickup to object " + obj.name);
-                                    if(Pickup1.ExactGrip == null)
+                                    if (Pickup1.ExactGrip == null)
                                     {
                                         Pickup1.ExactGrip = obj.transform;
                                         ModConsole.DebugLog("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGrip to object transform " + obj.name);
@@ -979,7 +977,6 @@ namespace AstroClient.components
             }
         }
 
-
         internal VRCPlayerApi CurrentObjectHolderPlayer
         {
             [HideFromIl2Cpp]
@@ -1018,8 +1015,6 @@ namespace AstroClient.components
                 return null;
             }
         }
-
-
 
         [HideFromIl2Cpp]
         private string PickupHeldButtonText
@@ -1105,12 +1100,10 @@ namespace AstroClient.components
                 }
                 else
                 {
-
                     HasPickupComponent.setTextColor(Color.red);
                 }
             }
         }
-
 
         private VRC.SDKBase.VRC_Pickup Pickup1;
         private VRCSDK2.VRC_Pickup Pickup2;

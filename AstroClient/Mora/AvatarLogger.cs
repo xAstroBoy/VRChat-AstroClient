@@ -1,17 +1,17 @@
-﻿using System;
+﻿using AstroLibrary.Serializable;
+using Harmony;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Reflection;
-using Harmony;
+using System.Text;
 using VRC.Core;
-using AstroLibrary.Serializable;
 
 namespace AstroClient
 {
-    class AvatarLogger : GameEvents
+    internal class AvatarLogger : GameEvents
     {
         private const string PublicAvatarFile = "AstroClient\\AvatarLog\\Avatars.html";
         private static string _avatarIDs = "";
@@ -33,13 +33,11 @@ namespace AstroClient
                 if (line.Contains("Avatar ID"))
                     _avatarIDs += line.Replace("Avatar ID:", "");
 
-
             var patchMan = HarmonyInstance.Create("nya");
             patchMan.Patch(
                 typeof(AssetBundleDownloadManager).GetMethods().FirstOrDefault(mi =>
                     mi.GetParameters().Length == 1 && mi.GetParameters().First().ParameterType == typeof(ApiAvatar) &&
                     mi.ReturnType == typeof(void)), GetPatch("ApiAvatarDownloadPatch"));
-
         }
 
         private static bool ApiAvatarDownloadPatch(ApiAvatar __0)
@@ -60,7 +58,6 @@ namespace AstroClient
                 sb.AppendLine(Environment.NewLine);
                 File.AppendAllText(PublicAvatarFile, sb.ToString());
                 sb.Clear();
-
             }
 
             AvatarData data = new AvatarData();

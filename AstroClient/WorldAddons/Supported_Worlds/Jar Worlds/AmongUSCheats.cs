@@ -163,56 +163,41 @@ namespace AstroClient
             GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, 1, 2.5f, "Victory Impostor", new Action(() => { VictoryImpostorEvent.ExecuteUdonEvent(); }), "Force Victory Impostor Event", null, Color.red, true);
         }
 
-
         private static JarRoleESP GetLocalPlayerNode()
         {
             return JarRoleController.RoleEspComponents.Where(x => x.apiuser.displayName == LocalPlayerUtils.GetSelfPlayer().DisplayName()).First();
         }
 
-
-
-
-        
-
-
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-
-                if (HasAmongUsWorldLoaded)
+            if (HasAmongUsWorldLoaded)
+            {
+                if (obj != null)
                 {
-                    if (obj != null)
+                    if (action.StartsWith("SyncAssign") && GetLocalPlayerNode().Node != null)
                     {
-
-                        if (action.StartsWith("SyncAssign") && GetLocalPlayerNode().Node != null)
+                        if (RoleSwapper_GetImpostorRole)
                         {
-                            if (RoleSwapper_GetImpostorRole)
+                            if (!SafetySwap) // In case it grabs and update the current ones already!
                             {
-                                if (!SafetySwap) // In case it grabs and update the current ones already!
+                                if (obj == GetLocalPlayerNode().Node)
                                 {
-                                    if (obj == GetLocalPlayerNode().Node)
-                                    {
-                                        AssignedSelfRole = action;
-                                    }
-
-                                    if (action == "SyncAssignM")
-                                    {
-                                        TargetNode = obj;
-                                        AssignedTargetRole = action;
-                                    }
-
-                                    RoleSwapper_GetImpostorRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                                    AssignedSelfRole = action;
                                 }
+
+                                if (action == "SyncAssignM")
+                                {
+                                    TargetNode = obj;
+                                    AssignedTargetRole = action;
+                                }
+
+                                RoleSwapper_GetImpostorRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
                             }
                         }
-
                     }
                 }
-
+            }
         }
-
-
-
-
 
         public static bool SwapRoles(GameObject SelfNode, GameObject TargetNode, string AssignedSelfRole, string AssignedTargetRole)
         {
@@ -244,10 +229,8 @@ namespace AstroClient
                 return false;
             }
 
-
             MiscUtility.DelayFunction(0.01f, new Action(() =>
             {
-
                 ModConsole.DebugLog($"Executing Role Swapping!, Target Has Role : {AssignedTargetRole}, You have {AssignedSelfRole}.");
                 var TargetEvent = UdonSearch.FindUdonEvent(TargetNode, AssignedSelfRole);
                 if (TargetEvent != null)
@@ -260,27 +243,13 @@ namespace AstroClient
                 {
                     selfevent.ExecuteUdonEvent();
                 }
-
-
             }));
 
             SafetySwap = true;
 
-
-
-
             SafetySwap = false;
             return false; // Deactivate.
-
-
         }
-
-
-
-
-
-
-
 
         private static GameObject TargetNode;
         private static string AssignedTargetRole;
@@ -288,8 +257,8 @@ namespace AstroClient
 
         private static bool SafetySwap;
 
-
         public static bool _RoleSwapper_GetImpostorRole;
+
         public static bool RoleSwapper_GetImpostorRole
         {
             get
@@ -320,6 +289,7 @@ namespace AstroClient
                 }
             }
         }
+
         public static QMSingleButton GameStartbtn;
         public static QMSingleButton GameAbortbtn;
         public static QMSingleButton GameVictoryCrewmateBtn;

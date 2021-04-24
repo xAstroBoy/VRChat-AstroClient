@@ -19,10 +19,9 @@ using System.Runtime.InteropServices;
 // to COM components.  If you need to access a type in this assembly from
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
-
 [assembly: MelonInfo(typeof(AstroClient.Main), AstroClient.BuildInfo.Name, AstroClient.BuildInfo.Version, AstroClient.BuildInfo.Author, AstroClient.BuildInfo.DownloadLink)]
 [assembly: InternalsVisibleTo("UnityExplorer.ML.IL2CPP")]
-[assembly: MelonGame(null, null)] 
+[assembly: MelonGame(null, null)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("6506F83F-9665-4EC9-9D7F-6F88E1652BBA")]

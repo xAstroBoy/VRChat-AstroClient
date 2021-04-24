@@ -6,7 +6,6 @@ namespace AstroClient
 {
     public class LPD : GameEvents
     {
-
         public override void OnWorldReveal(string id, string name, string asseturl)
         {
             if (id == WorldIds.LPD)

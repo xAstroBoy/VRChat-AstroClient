@@ -49,11 +49,10 @@ namespace AstroClient.components
                 {
                     AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Internal_player);
                     AmongUSVoteRevealTag.ShowTag = false;
-
                 }
                 if (JarRoleController.ViewRoles)
                 {
-                   SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
+                    SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
                     ResetESPColor();
                     GameRoleTag.ShowTag = false;
                 }
@@ -87,8 +86,8 @@ namespace AstroClient.components
         {
             return RoleEspComponents.Where(x => x.LinkedEntry.nodevalue == value).First();
         }
-        [HideFromIl2Cpp]
 
+        [HideFromIl2Cpp]
         private static int RemoveSyncVotedForText(string key)
         {
             var removedtext = key.ToLower().Replace("syncvotedfor", string.Empty).Replace(" ", string.Empty);
@@ -96,9 +95,7 @@ namespace AstroClient.components
             return value;
         }
 
-
         [HideFromIl2Cpp]
-
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             if (Internal_AssignedPlayerNode != null)
@@ -111,7 +108,6 @@ namespace AstroClient.components
                         {
                             if (action.Contains("SyncVotedFor"))
                             {
-
                                 AmongUSHasVoted = true;
                                 var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
                                 if (against != null)
@@ -119,7 +115,6 @@ namespace AstroClient.components
                                     if (JarRoleController.ViewRoles)
                                     {
                                         AmongUSVoteRevealTag.ShowTag = true;
-
                                     }
                                     if (against != GetLocalPlayerNode())
                                     {
@@ -165,9 +160,7 @@ namespace AstroClient.components
                     }
                 }
             }
-
         }
-
 
         [HideFromIl2Cpp]
         private void Debug(string msg)
@@ -466,7 +459,6 @@ namespace AstroClient.components
             return GameRoleTag.Label_Text;
         }
 
-
         private void SetEspColorIfExists(Color color)
         {
             if (Internal_player != null)
@@ -478,11 +470,9 @@ namespace AstroClient.components
                     {
                         esp.ChangeColor(color);
                     }
-
                 }
             }
         }
-
 
         private void ResetESPColor()
         {
@@ -495,12 +485,9 @@ namespace AstroClient.components
                     {
                         esp.ResetColor();
                     }
-
                 }
             }
         }
-
-
 
         public void Update()
         {
@@ -517,7 +504,6 @@ namespace AstroClient.components
                     {
                         GameRoleTag.ShowTag = JarRoleController.ViewRoles;
                     }
-                    
                 }
 
                 if (JarRoleController.IsMurder4World)
@@ -558,8 +544,6 @@ namespace AstroClient.components
                 }
                 else if (JarRoleController.isAmongUsWorld)
                 {
-
-
                     var ReturnedRole = GetPlayerRoleAmongUS();
                     if (ReturnedRole != AmongUsCurrentRole)
                     {
@@ -571,14 +555,12 @@ namespace AstroClient.components
                         AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Internal_player);
                     }
 
-
                     if (AmongUSVoteRevealTag != null)
                     {
                         if (JarRoleController.ViewRoles)
                         {
                             if (AmongUsCurrentRole == AmongUsRoles.Crewmate || AmongUsCurrentRole == AmongUsRoles.Impostor)
                             {
-
                                 if (AmongUSHasVoted)
                                 {
                                     AmongUSVoteRevealTag.ShowTag = true;
@@ -593,7 +575,6 @@ namespace AstroClient.components
                         {
                             AmongUSVoteRevealTag.ShowTag = false;
                         }
-
                     }
 
                     if (JarRoleController.ViewRoles)
@@ -605,7 +586,6 @@ namespace AstroClient.components
                             {
                                 SetTag(GameRoleTag, ReturnedRole.ToString(), DefaultTextColor, color.Value);
                                 SetEspColorIfExists(color.Value);
-
                             }
                         }
                         else
@@ -766,6 +746,7 @@ namespace AstroClient.components
         }
 
         private bool _AmongUSHasVoted;
+
         internal bool AmongUSHasVoted
         {
             [HideFromIl2Cpp]
@@ -774,11 +755,9 @@ namespace AstroClient.components
                 return _AmongUSHasVoted;
             }
             [HideFromIl2Cpp]
-
             set
             {
                 _AmongUSHasVoted = value;
-             
             }
         }
 
@@ -787,7 +766,6 @@ namespace AstroClient.components
             [HideFromIl2Cpp]
             get
             {
-
                 if (AmongUsCurrentRole == AmongUsRoles.Crewmate)
                 {
                     if (!AmongUSHasVoted)
@@ -822,9 +800,7 @@ namespace AstroClient.components
                 {
                     return false;
                 }
-
             }
-
         }
 
         private Murder4Roles Murder4CurrentRole;
@@ -833,10 +809,8 @@ namespace AstroClient.components
         private APIUser Internal_user;
         private GameObject _AssignedPlayerEntry;
         private SingleTag GameRoleTag;
-        
+
         internal SingleTag AmongUSVoteRevealTag;
-
-
 
         private LinkedNodes _SavedEntry;
 

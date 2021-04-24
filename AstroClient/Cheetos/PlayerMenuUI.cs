@@ -123,7 +123,7 @@ namespace AstroClient
 
         private void ResetButtons()
         {
-            foreach(var keyValuePair in PlayerButtons)
+            foreach (var keyValuePair in PlayerButtons)
             {
                 keyValuePair.Value.DestroyMe();
             }

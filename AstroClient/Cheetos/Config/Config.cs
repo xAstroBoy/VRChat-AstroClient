@@ -36,7 +36,5 @@ namespace AstroClient
         public bool LogUdonEvents = false;
 
         public bool LogTriggerEvents = false;
-
-
     }
 }

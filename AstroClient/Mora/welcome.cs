@@ -3,7 +3,7 @@ using DayClientML2.Utility.Extensions;
 
 namespace AstroClient
 {
-    class Welcome : GameEvents
+    internal class Welcome : GameEvents
     {
         internal static bool booleanhere = false;
 

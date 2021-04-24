@@ -7,7 +7,7 @@ using VRC.SDKBase;
 
 namespace AstroClient
 {
-    public class GameEventsBehaviour : MonoBehaviour 
+    public class GameEventsBehaviour : MonoBehaviour
     {
         public GameEventsBehaviour(IntPtr obj0) : base(obj0)
         {

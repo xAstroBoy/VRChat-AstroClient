@@ -16,12 +16,10 @@ namespace AstroClient.AntiCrash
 
         public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
-
-
             var main = new QMNestedButton(menu, x, y, "VRCAntiCrash", "Ported VRCAntiCrash Features", null, null, null, null, btnHalf);
             new QMSingleButton(menu, 0, -0.5f, "Pay Respect", () => { }, "Pay Respect To All Crashers Who Will fail to Crash You", null, null, true); // NEEDS ACTION AND CONFIG;
-            new QMSingleButton(menu, 0, 0, "Select Self", () => { }, "Select Your Own User.", null, null, true); // NEEDS ACTION 
-            new QMSingleButton(menu, 0, 0.5f, "Reload Avatars", () => { }, "Reload All Avatars in Your Current instance.", null, null, true); // NEEDS ACTION 
+            new QMSingleButton(menu, 0, 0, "Select Self", () => { }, "Select Your Own User.", null, null, true); // NEEDS ACTION
+            new QMSingleButton(menu, 0, 0.5f, "Reload Avatars", () => { }, "Reload All Avatars in Your Current instance.", null, null, true); // NEEDS ACTION
             InitKinkySubmenu(menu, 0, 1f, true);
 
             new QMSingleToggleButton(menu, 1, 0, "Fly", () => { }, "Fly", () => { }, "Toggle Fly With VR Support", Color.green, Color.red, null, false, true);
@@ -29,7 +27,7 @@ namespace AstroClient.AntiCrash
             new QMSingleToggleButton(menu, 3, 0, "Force Clone", () => { }, "Force Clone", () => { }, "Toggle Forrce Clone", Color.green, Color.red, null, false, true);
             new QMSingleToggleButton(menu, 4, 0, "Player ESP", () => { }, "Player ESP", () => { }, "Toggle Player ESP , (Bubbles Around Player)", Color.green, Color.red, null, false, true);
 
-            new QMSingleToggleButton(menu, 1, 0.5f, "Delete Portals", () => { }, "Delete Portals", () => { }, "Toggle Deleting Portals if you fail entering them due to checks", Color.green, Color.red, null, false, true); 
+            new QMSingleToggleButton(menu, 1, 0.5f, "Delete Portals", () => { }, "Delete Portals", () => { }, "Toggle Deleting Portals if you fail entering them due to checks", Color.green, Color.red, null, false, true);
             new QMSingleToggleButton(menu, 2, 0.5f, "Info +", () => { }, "Info +", () => { }, "Toggle Info + - Adds Information To The Userinfo Page, and more", Color.green, Color.red, null, false, true);
             new QMSingleToggleButton(menu, 3, 0.5f, "Speed +", () => { }, "Speed +", () => { }, "Toggle Speed + - Sliders on the next page.", Color.green, Color.red, null, false, true);
             new QMSingleToggleButton(menu, 4, 0.5f, "Allow Friends", () => { }, "Allow Friends", () => { }, "Toggle Allow Friends , To allow friends portals to be entered.", Color.green, Color.red, null, false, true);
@@ -43,44 +41,16 @@ namespace AstroClient.AntiCrash
             new QMSingleToggleButton(menu, 2, 1.5f, "Fly OnPress", () => { }, "Fly OnPress", () => { }, "Toggle Fly OnPress , Make Fly/NoClip Fly Up/Down When Q/E Are HELD , With this Off it will be toggle-Mode.", Color.green, Color.red, null, false, true);
             new QMSingleToggleButton(menu, 3, 1.5f, "Anti-Pickup Crash", () => { }, "Anti-Pickup Crash", () => { }, "Toggle Anti-Pickup Crash , Automatically Gets Rid of pickups Being Used to Crash you upon Being teleported to you.", Color.green, Color.red, null, false, true);
             new QMSingleToggleButton(menu, 4, 1.5f, "Anti-World Triggers", () => { }, "Anti-World Triggers", () => { }, "Toggle Anti-World Triggers , Stop Clients with World Triggers From Affecting You.", Color.green, Color.red, null, false, true);
-
-
-
-
-
-
-
-
-
-
-
-
         }
 
         public static void InitKinkySubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
-
-
             var main = new QMNestedButton(menu, x, y, "Kinky Options", "Ported VRCAntiCrash Kinky Features", null, null, null, null, btnHalf);
             new QMSingleButton(menu, 1, 0, "Leash", () => { }, "Toggles A Leash To your Master", null, null, true); // NEEDS ACTION;
             new QMSingleButton(menu, 1, 0.5f, "Auto Lewdify", () => { }, "Automatically lewdifies avatars that spawns in.", null, null, true); // NEEDS ACTION ;
             new QMSingleButton(menu, 1, 1, "Force Lewdify", () => { }, "Destroy meshes to bypass avatars 3.0 attempting to stop lewdify function", null, null, true); // NEEDS ACTION;
 
-
             // ADD SLIDER
-
-
-
-
-
-
-
-
-
         }
-
-
-        
-
     }
 }

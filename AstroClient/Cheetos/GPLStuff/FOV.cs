@@ -2,7 +2,7 @@
 {
     using UnityEngine;
 
-    class FOV
+    internal class FOV
     {
         public static void Set_Camera_FOV(float v)
         {

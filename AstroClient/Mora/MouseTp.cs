@@ -2,7 +2,7 @@
 
 namespace AstroClient
 {
-    class MouseTp : GameEvents
+    internal class MouseTp : GameEvents
     {
         public override void OnUpdate()
         {
@@ -18,4 +18,4 @@ namespace AstroClient
 #endif
         }
     }
- }
+}

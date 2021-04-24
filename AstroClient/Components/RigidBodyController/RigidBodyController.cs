@@ -21,11 +21,10 @@ namespace AstroClient.components
             {
                 obj = gameObject;
                 body = obj.GetComponent<Rigidbody>();
-                if(body == null)
+                if (body == null)
                 {
                     body = obj.GetComponentInChildren<Rigidbody>();
                 }
-
 
                 Sync = obj.GetComponent<SyncPhysics>();
                 BackupBasicBody();
@@ -165,13 +164,13 @@ namespace AstroClient.components
                                 Sync.field_Private_Rigidbody_0 = obj.GetComponent<Rigidbody>();
                                 return;
                             }
-    
-                                if (obj.GetComponentInChildren<Rigidbody>() != null && Sync.field_Private_Rigidbody_0 == null)
-                                {
-                                    ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Rigidbody in SyncPhysic as is Null..");
-                                    Sync.field_Private_Rigidbody_0 = obj.GetComponentInChildren<Rigidbody>();
-                                    return;
-                                }
+
+                            if (obj.GetComponentInChildren<Rigidbody>() != null && Sync.field_Private_Rigidbody_0 == null)
+                            {
+                                ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Rigidbody in SyncPhysic as is Null..");
+                                Sync.field_Private_Rigidbody_0 = obj.GetComponentInChildren<Rigidbody>();
+                                return;
+                            }
                             if (obj.GetComponentInChildren<Rigidbody>() == null && obj.GetComponent<Rigidbody>() == null && Sync.field_Private_Rigidbody_0 == null)
                             {
                                 ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Spawned Rigidbody in SyncPhysic as is Null..");
@@ -180,11 +179,10 @@ namespace AstroClient.components
                                 body.isKinematic = true;
                                 return;
                             }
-
                         }
                     }
 
-                    if(Forced_RigidBody)
+                    if (Forced_RigidBody)
                     {
                         if (body == null)
                         {
@@ -210,7 +208,6 @@ namespace AstroClient.components
                                 body.isKinematic = true;
                                 return;
                             }
-
                         }
                     }
                 }
@@ -243,7 +240,6 @@ namespace AstroClient.components
                     {
                         ItemTweakerMain.CurrentObjectCoordsBtn.setButtonText($"X: {obj.transform.position.x} \n Y: {obj.transform.position.y} \n Z: {obj.transform.position.z}");
                     }
-                    
                 }
 
                 if (EditMode)
@@ -285,7 +281,7 @@ namespace AstroClient.components
                         }
                     }
 
-                    if(body != null)
+                    if (body != null)
                     {
                         if (body.useGravity != useGravity)
                         {
@@ -431,7 +427,6 @@ namespace AstroClient.components
                             AngularDrag = body.angularDrag;
                         }
                     }
-
                 }
             }
             catch (Exception e)

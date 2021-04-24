@@ -46,10 +46,10 @@ namespace AstroClient.components
             {
                 Object.Destroy(this);
             }
-            if(player != null)
+            if (player != null)
             {
                 SelectRegion = player.transform.Find("SelectRegion");
-                if(SelectRegion == null)
+                if (SelectRegion == null)
                 {
                     Object.Destroy(this);
                 }
@@ -92,7 +92,6 @@ namespace AstroClient.components
                     }
                 }
             }
-
         }
 
         public void OnDestroy()
@@ -116,7 +115,6 @@ namespace AstroClient.components
             }
             HighLightOptions.DestroyHighlighter();
         }
-
 
         public void OnEnable()
         {
@@ -160,19 +158,15 @@ namespace AstroClient.components
             }
         }
 
-
         internal void ChangeColor(Color newcolor)
         {
             HighLightOptions.SetHighLighterColor(newcolor);
         }
 
-
         internal void ResetColor()
         {
             HighLightOptions.ResetHighlighterColor();
         }
-
-
 
         internal Color GetCurrentESPColor
         {

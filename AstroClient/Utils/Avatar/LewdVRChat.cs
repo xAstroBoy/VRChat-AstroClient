@@ -164,7 +164,6 @@ namespace AstroClient
             yield return null;
         }
 
-
         public static void Avatar_Object_Dumper(Transform Body, Player player)
         {
             if (Body == null)
@@ -265,8 +264,6 @@ namespace AstroClient
                 }
             }
         }
-
-
 
         public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {

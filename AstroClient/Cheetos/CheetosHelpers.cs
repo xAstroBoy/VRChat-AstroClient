@@ -9,7 +9,6 @@
     {
         public static Texture2D LoadPNG(string filePath)
         {
-
             Texture2D tex;
             byte[] fileData;
 

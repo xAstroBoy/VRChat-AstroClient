@@ -74,7 +74,8 @@ namespace AstroLoaderServer
                 client.Disconnect();
                 Console.WriteLine($"DLL Sent");
                 client.IsReady = true;
-            } else if (cmds[0].Equals("key"))
+            }
+            else if (cmds[0].Equals("key"))
             {
                 string key = cmds[1];
                 Console.WriteLine("Trying to auth with: " + key);
@@ -84,7 +85,8 @@ namespace AstroLoaderServer
                     client.IsAuthed = true;
                     client.Key = key;
                     Console.WriteLine("Successfully Authed");
-                } else
+                }
+                else
                 {
                     client.Send("authed:false");
                     client.Send("exit:invalid auth key");

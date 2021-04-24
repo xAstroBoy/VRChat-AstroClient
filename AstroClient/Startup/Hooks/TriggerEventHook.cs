@@ -41,12 +41,11 @@ namespace AstroClient.Startup.Hooks
         {
             try
             {
-
                 if (ConfigManager.General.LogTriggerEvents)
                 {
                     string eventhandler = string.Empty;
                     string vrcevent = string.Empty;
-                    if(__0 != null)
+                    if (__0 != null)
                     {
                         eventhandler = __0.ToString();
                     }
@@ -66,8 +65,6 @@ namespace AstroClient.Startup.Hooks
 
                     ModConsole.DebugLog($"Event : VRC_EventHandler : {eventhandler}, VrcEvent : {vrcevent}, VrcBroadcastType : {__2}, UnknownInt : {__3}, UnknownFloat : {__4}");
                 }
-
-
 
                 Event_VRC_EventDispatcherRFC_triggerEvent?.Invoke(null, new VRC_EventDispatcherRFC_TriggerEventArgs(__0, __1, __2, __3, __4));
                 return true;

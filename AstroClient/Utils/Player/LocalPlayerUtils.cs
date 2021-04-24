@@ -26,7 +26,7 @@ namespace AstroClient
             }
             else
             {
-                if(!UnfreezePlayerOnce)
+                if (!UnfreezePlayerOnce)
                 {
                     if (GetPlayerCharControl() != null)
                     {
@@ -49,7 +49,6 @@ namespace AstroClient
                 FreezePlayerOnQMOpenToggle.setToggleState(FreezePlayerOnQMOpen);
             }
             UnfreezePlayerOnce = true;
-
         }
 
         public static Vector3 PlayerPositionBones(Player player, HumanBodyBones bone)

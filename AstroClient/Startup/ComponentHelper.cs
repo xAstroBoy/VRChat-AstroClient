@@ -30,15 +30,11 @@ namespace AstroClient.Startup
 
             ClassInjector.RegisterTypeInIl2Cpp<JarRoleESP>();
 
-
             ClassInjector.RegisterTypeInIl2Cpp<ObjectESP>();
-
 
             ClassInjector.RegisterTypeInIl2Cpp<PlayerESP>();
 
             ClassInjector.RegisterTypeInIl2Cpp<Murder4PatronUnlocker>();
-
-
 
             if (Bools.AllowAttackerComponent)
             {
@@ -74,8 +70,6 @@ namespace AstroClient.Startup
                 OrbitManager.MakeInstance();
             }
             PlayerWatcherManager.MakeInstance();
-
-            
         }
     }
 }

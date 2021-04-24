@@ -7,7 +7,6 @@ namespace AstroClient
 {
     public class FBTHeaven : GameEvents
     {
-
         public override void OnWorldReveal(string id, string name, string asseturl)
         {
             if (id == WorldIds.FBTHeaven)
@@ -34,19 +33,16 @@ namespace AstroClient
                 {
                     ModConsole.Log("Adding Lockpick Private Door 1");
                     TriggersCloner.CloneVRC2SDKTrigger(Door_1_Interactive, Door_1_Visual, "Lockpick door 1");
-
                 }
                 if (Door_2_Interactive != null && Door_2_Visual != null)
                 {
                     ModConsole.Log("Adding Lockpick Private Door 2");
                     TriggersCloner.CloneVRC2SDKTrigger(Door_2_Interactive, Door_2_Visual, "Lockpick door 2");
-
                 }
                 if (Door_3_Interactive != null && Door_3_Visual != null)
                 {
                     ModConsole.Log("Adding Lockpick Private Door 3");
                     TriggersCloner.CloneVRC2SDKTrigger(Door_3_Interactive, Door_3_Visual, "Lockpick door 3");
-
                 }
                 if (Door_4_Interactive != null && Door_4_Visual != null)
                 {

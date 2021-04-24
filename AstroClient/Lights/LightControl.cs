@@ -335,16 +335,7 @@ namespace AstroClient.WorldLights
             }
         }
 
-
         private static AssetBundle MesaNebula;
-
-
-
-
-
-
-
-
 
         public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
@@ -354,9 +345,6 @@ namespace AstroClient.WorldLights
             ToggleLightmaps = new QMToggleButton(temp, 3, 0, "Baked Lightings ON", new Action(ToggleLightMaps), "Baked Lightings OFF", new Action(ToggleLightMaps), "Toggles Lightmaps (baked lightings)", null, null, null, false);
             FogSwitch = new QMToggleButton(temp, 4, 0, "Fog ON", new Action(ToggleFog), "Fog OFF", new Action(ToggleFog), "Toggles Fog", null, null, null, false);
             SkyboxEditor.CustomSkyboxesMenu(temp, 1, 1, false);
-
-
-
         }
 
         public static Light newSun;

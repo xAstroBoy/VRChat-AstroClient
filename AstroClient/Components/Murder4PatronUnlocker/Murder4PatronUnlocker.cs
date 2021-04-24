@@ -75,9 +75,6 @@ namespace AstroClient.components
             }
         }
 
-
-
-
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             if (!IgnoreEventReceiver)
@@ -120,7 +117,6 @@ namespace AstroClient.components
                         }
                     }
                 }
-
             }
         }
 
@@ -133,7 +129,6 @@ namespace AstroClient.components
                 IgnoreEventReceiver = false;
             }
         }
-
 
         internal void SendOnlySelfPatreonSkinEvent()
         {
@@ -153,8 +148,6 @@ namespace AstroClient.components
                 }
             }
         }
-
-
 
         internal CachedUdonEvent SyncNonPatronSkin
         {
@@ -177,8 +170,5 @@ namespace AstroClient.components
         private bool IgnoreEventReceiver;
         private CachedUdonEvent _SyncNonPatronSkin;
         private CachedUdonEvent _SyncPatronSkin;
-        
-
-
     }
 }

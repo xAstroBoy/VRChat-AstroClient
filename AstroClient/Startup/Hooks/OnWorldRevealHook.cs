@@ -58,7 +58,6 @@ namespace AstroClient.Startup.Hooks
             }
             catch
             {
-
             }
             finally
             {

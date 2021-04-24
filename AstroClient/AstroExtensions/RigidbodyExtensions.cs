@@ -82,8 +82,7 @@ namespace AstroClient.extensions
                 {
                     itemedit.EditMode = true;
                 }
-                    itemedit.Constraints = itemedit.Constraints | constraint;
-                
+                itemedit.Constraints = itemedit.Constraints | constraint;
             }
         }
 
@@ -238,7 +237,5 @@ namespace AstroClient.extensions
                 }
             }
         }
-
-
     }
 }

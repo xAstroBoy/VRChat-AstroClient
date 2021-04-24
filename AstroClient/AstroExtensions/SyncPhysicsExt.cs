@@ -28,8 +28,5 @@ namespace AstroClient.SyncPhysicExt
             }
             return null;
         }
-
-
-
     }
 }

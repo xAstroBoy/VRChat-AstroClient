@@ -1,8 +1,8 @@
 ﻿using AstroClient.ConsoleUtils;
-using CheetosConsole;
-using AstroClient.Finder;
-using DayClientML2.Utility.Extensions;
 using AstroClient.extensions;
+using AstroClient.Finder;
+using CheetosConsole;
+using DayClientML2.Utility.Extensions;
 
 namespace AstroClient
 {

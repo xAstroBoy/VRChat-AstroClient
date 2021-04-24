@@ -27,14 +27,13 @@ namespace AstroClient.Finder
         {
             GameObject obj = SceneManager.GetActiveScene().GetRootGameObjects().Where(x => x.gameObject.name == name).First();
 
-            if(obj == null)
+            if (obj == null)
             {
                 ModConsole.Warning("[WARNING (FindRootSceneObject) ]  Root Gameobject name [ " + name + " ]  is Invalid, No Object Found!");
             }
 
             return obj;
         }
-
 
         public static Transform FindObject(this Transform transform, string path)
         {
@@ -75,7 +74,6 @@ namespace AstroClient.Finder
                 //ModConsole.DebugLog($"SPAM: {GetGameObjectPath(gameObj)}");
                 if (GetGameObjectPath(gameObj).Equals(path))
                 {
-                    
                     return gameObj;
                 }
             }

@@ -2,7 +2,7 @@
 
 namespace AstroLoaderServer
 {
-    class Program
+    internal class Program
     {
         internal static Server Server1;
 

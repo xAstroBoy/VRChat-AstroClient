@@ -148,7 +148,6 @@ namespace AstroClient
         //    }
         //}
 
-
         public void HookRPCEvent2()
         {
             try
@@ -182,7 +181,6 @@ namespace AstroClient
 
             if (__1.ParameterBytes != null && __1.ParameterBytes.Count != 0)
             {
-
                 actionstring = System.Text.Encoding.UTF8.GetString(__1.ParameterBytes);
                 if (actionstring.Length >= 6)
                 {
@@ -267,6 +265,5 @@ namespace AstroClient
                 }
             }
         }
-
     }
 }

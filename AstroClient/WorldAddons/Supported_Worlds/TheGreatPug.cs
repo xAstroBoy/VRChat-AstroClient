@@ -7,7 +7,6 @@ namespace AstroClient
 {
     public class TheGreatPug : GameEvents
     {
-
         public override void OnWorldReveal(string id, string name, string asseturl)
         {
             if (id == WorldIds.TheGreatPug)
@@ -28,7 +27,6 @@ namespace AstroClient
                 frame.removeAllCollider();
                 rope.removeAllCollider();
             }
-
         }
     }
 }

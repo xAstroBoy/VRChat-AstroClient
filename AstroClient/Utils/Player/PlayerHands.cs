@@ -8,10 +8,8 @@ using static AstroClient.LocalPlayerUtils;
 
 namespace AstroClient
 {
-    public static class PlayerHands 
+    public static class PlayerHands
     {
-
-
         public static void DropObject(GameObject obj)
         {
             if (GetSelfVRCPlayerApi() != null)
@@ -34,7 +32,6 @@ namespace AstroClient
                 }
             }
         }
-
 
         public static GameObject GetHoldTransform()
         {
@@ -91,6 +88,5 @@ namespace AstroClient
             }
             return null;
         }
-
     }
 }

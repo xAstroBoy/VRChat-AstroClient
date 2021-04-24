@@ -39,11 +39,8 @@ namespace AstroClient.AstroUtils.PlayerMovement
 
         public static void OnLevelLoad()
         {
-
-
             IsJumpOverriden = false;
             Bools.SerializerEnabled = false;
-
 
             if (Capsule != null)
             {
@@ -84,7 +81,6 @@ namespace AstroClient.AstroUtils.PlayerMovement
             }
         }
 
-
         public static void CheckForJumpUpdates()
         {
             if (GetLocalVRCPlayer() != null)
@@ -110,10 +106,7 @@ namespace AstroClient.AstroUtils.PlayerMovement
                     {
                         EmulatedJump();
                     }
-
                 }
-
-
             }
         }
 
@@ -236,6 +229,7 @@ namespace AstroClient.AstroUtils.PlayerMovement
         private static bool _IsUnlimitedJumpActive;
 
         public static QMSingleToggleButton UnlimitedJumpToggle;
+
         public static bool IsUnlimitedJumpActive
         {
             get
@@ -255,6 +249,7 @@ namespace AstroClient.AstroUtils.PlayerMovement
         public static QMSingleToggleButton RocketJumpToggle;
 
         private static bool _isRocketJumpActive;
+
         public static bool isRocketJumpActive
         {
             get
@@ -271,10 +266,9 @@ namespace AstroClient.AstroUtils.PlayerMovement
             }
         }
 
-
-
         public static QMToggleButton JumpOverrideToggle;
         private static bool _IsJumpOverriden;
+
         public static bool IsJumpOverriden
         {
             get
@@ -284,21 +278,14 @@ namespace AstroClient.AstroUtils.PlayerMovement
             set
             {
                 _IsJumpOverriden = value;
-                if(JumpOverrideToggle != null)
+                if (JumpOverrideToggle != null)
                 {
                     JumpOverrideToggle.setToggleState(value);
                 }
             }
         }
 
-
-
         private static QMToggleButton SerializerBtn;
         public static GameObject Capsule;
-
-
-
-
-
     }
 }

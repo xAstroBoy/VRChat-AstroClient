@@ -17,7 +17,7 @@
         {
             var key = RandomOrg.GetRandomKey();
 
-            if (key!=string.Empty)
+            if (key != string.Empty)
             {
                 if (!KeyManager.IsValidKey(key))
                 {
@@ -55,7 +55,6 @@
 
             foreach (var kvp in KeyManager.GetAllKeyInfo())
             {
-
                 await base.ReplyAsync(null, false, CustomEmbed.GetKeyEmbed(kvp.Key));
             }
         }
@@ -135,7 +134,8 @@
                 {
                     await ReplyAsync(null, false, CustomEmbed.GetClientEmbed(client));
                 }
-            } else
+            }
+            else
             {
                 await ReplyAsync("There are no clients currently connected");
             }

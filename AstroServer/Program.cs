@@ -9,7 +9,7 @@
     using System.Net.Http;
     using System.Threading.Tasks;
 
-    class Program
+    internal class Program
     {
         public static ServiceProvider Services { get; private set; }
 
