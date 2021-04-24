@@ -1,14 +1,14 @@
-﻿using AstroServer.DiscordBot;
-using Discord;
-using Discord.Commands;
-using Discord.WebSocket;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace AstroServer
+﻿namespace AstroServer
 {
+    using AstroServer.DiscordBot;
+    using Discord;
+    using Discord.Commands;
+    using Discord.WebSocket;
+    using Microsoft.Extensions.DependencyInjection;
+    using System;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+
     class Program
     {
         public static ServiceProvider Services { get; private set; }

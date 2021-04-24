@@ -1,10 +1,8 @@
 ﻿namespace AstroServer.DiscordBot.Commands
 {
-    using Discord;
     using Discord.Commands;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using System.Runtime.InteropServices;
     using System.Text;
     using System.Threading.Tasks;
 

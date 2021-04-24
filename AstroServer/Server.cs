@@ -1,16 +1,16 @@
-﻿using AstroLibrary.Networking;
-using AstroLibrary.Serializable;
-using AstroServer.DiscordBot;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Sockets;
-using System.Timers;
-
-namespace AstroServer
+﻿namespace AstroServer
 {
+    using AstroLibrary.Networking;
+    using AstroLibrary.Serializable;
+    using AstroServer.DiscordBot;
+    using Newtonsoft.Json;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Timers;
+
     internal class Server
     {
         private static readonly int _maxConnections = 1000;

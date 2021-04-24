@@ -1,7 +1,7 @@
-﻿using AstroLibrary.Networking;
-
-namespace AstroServer
+﻿namespace AstroServer
 {
+    using AstroLibrary.Networking;
+
     public class Client : HandleClient
     {
         public string Name = string.Empty;

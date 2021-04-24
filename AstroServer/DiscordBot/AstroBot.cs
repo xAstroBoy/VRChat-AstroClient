@@ -1,10 +1,10 @@
-﻿using Discord;
-using Discord.WebSocket;
-using System;
-using System.Threading.Tasks;
+﻿namespace AstroServer.DiscordBot
+{
+    using Discord;
+    using Discord.WebSocket;
+    using System;
+    using System.Threading.Tasks;
 
-namespace AstroServer.DiscordBot
-{   
     public class AstroBot
     {
         public static DiscordSocketClient Client { get; set; }
