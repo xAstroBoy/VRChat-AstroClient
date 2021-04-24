@@ -1,6 +1,9 @@
 ﻿using AstroClient.variables;
 using RubyButtonAPI;
 using System;
+using System.Diagnostics;
+using System.IO;
+using UnityEngine;
 
 namespace AstroClient
 {
@@ -13,6 +16,8 @@ namespace AstroClient
 
         public QMScrollMenu MainScroller { get; private set; }
 
+        public QMSingleButton CloseButton { get; private set; }
+
         public QMSingleButton RestartButton { get; private set; }
 
         public QMSingleButton DisconectButton { get; private set; }
@@ -23,7 +28,12 @@ namespace AstroClient
         {
             MainButton = new QMNestedButton("ShortcutMenu", 5, 3, "Admin Menu", "AstroClient's Admin Menu", null, null, null, null, true);
             MainScroller = new QMScrollMenu(MainButton);
-            RestartButton = new QMSingleButton(MainButton, 0, 0, "Close Game", () => { Environment.Exit(0); }, "Close the game");
+            CloseButton = new QMSingleButton(MainButton, 0, 0, "Close Game", () => { Environment.Exit(0); }, "Close the game");
+            RestartButton = new QMSingleButton(MainButton, 0, 1, "Restart Game", () =>
+            {
+                Process.Start(Directory.GetParent(Application.dataPath) + "\\VRChat.exe");
+                Process.GetCurrentProcess().Kill();
+            }, "Restart the game");
             DisconectButton = new QMSingleButton(MainButton, 1, 0, "Disconnect", () => { AstroNetworkClient.Client.Disconnect(false); }, "Disconnect");
             ReconnectButton = new QMSingleButton(MainButton, 1, 1, "Reconnect", () => { AstroNetworkClient.Client.Disconnect(true); }, "Reconnect");
 
