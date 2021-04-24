@@ -42,6 +42,7 @@
             while (true)
             {
                 TcpClient clientSocket = serverSocket.AcceptTcpClient();
+                clientSocket.SendTimeout = 2000;
                 Client client = new Client
                 {
                     IsClient = true
@@ -58,7 +59,7 @@
         private static void SetPingTimer()
         {
             // Create a timer with a two second interval.
-            pingTimer = new Timer(60000);
+            pingTimer = new Timer(2000);
             // Hook up the Elapsed event for the timer.
             pingTimer.Elapsed += OnPingEvent;
             pingTimer.AutoReset = true;

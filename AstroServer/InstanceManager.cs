@@ -1,4 +1,6 @@
-﻿namespace AstroServer
+﻿using System.Linq;
+
+namespace AstroServer
 {
     public static class InstanceManager
     {

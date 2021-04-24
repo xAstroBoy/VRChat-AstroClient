@@ -50,10 +50,10 @@ namespace AstroClient
         {
             Client = null;
             //TcpClient tcpClient = new TcpClient("craig.se", 42069);
-            //tcpClient.SendTimeout = 500;
 
             TcpClient tcpClient = new TcpClient();
             var result = tcpClient.BeginConnect("craig.se", 42069, null, null);
+            tcpClient.SendTimeout = 2000;
             var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(1));
 
             if (!success)
@@ -211,8 +211,8 @@ namespace AstroClient
             {
                 for (; ; )
                 {
-                    Thread.Sleep(1000);
-                    ModConsole.DebugError("Lost connection to server, retrying...");
+                    ModConsole.DebugError("Lost connection to server, retrying in 60 seconds...");
+                    Thread.Sleep(60000);
                     try { Connect(); break; } catch { }
                 }
             });
