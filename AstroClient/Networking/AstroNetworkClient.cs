@@ -142,24 +142,7 @@ namespace AstroClient
                     ModConsole.DebugLog("Wants to add tag to someone else");
                     player = WorldUtils.GetPlayerByID(info[1]);
                 }
-                // You gotta delay it, let's delay it to some seconds
-                MiscUtility.DelayFunction(0.5f, new Action(() => {
-                    if (player != null)
-                    {
-
-                        SingleTag tag = SingleTagsUtils.AddSingleTag(player);
-                        if (tag != null)
-                        {
-                            tag.Label_Text = info[1];
-                            tag.Label_TextColor = Color.cyan;
-                            tag.Tag_Color = Color.cyan;
-                        }
-                    }
-                    else
-                    {
-                        ModConsole.Error("Player for setting tag from server was null!");
-                    }
-                }));
+                SpawnTag(player, info[1], Color.white, Color.blue);
             
             }
             else
@@ -169,6 +152,30 @@ namespace AstroClient
                     ModConsole.DebugLog($"Unknown packet: {input}");
                 }
             }
+        }
+
+        // You gotta delay it, let's delay it to some seconds
+        private static void SpawnTag(Player player, string text, Color TextColor, Color Tagcolor)
+        {
+            MiscUtility.DelayFunction(0.5f, new Action(() =>
+            {
+                if (player != null)
+                {
+        
+                     SingleTag tag = SingleTagsUtils.AddSingleTag(player);
+                    if (tag != null)
+                    {
+                        tag.Label_Text = text;
+                        tag.Label_TextColor = TextColor;
+                        tag.Tag_Color = Tagcolor;
+                    }
+                }
+                else
+                {
+                    ModConsole.Error("Player for setting tag from server was null!");
+                }
+            }));
+
         }
 
         private static void OnConnected(object sender, EventArgs e)

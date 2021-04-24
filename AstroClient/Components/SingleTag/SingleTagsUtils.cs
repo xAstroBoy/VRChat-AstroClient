@@ -19,7 +19,7 @@ namespace AstroClient.Components
         {
             if (player != null)
             {
-                var entry = GetEntry(player.GetAPIUser());
+                var entry = GetEntry(player);
                 if (entry != null)
                 {
                     RemoveCounter(entry);
@@ -27,9 +27,9 @@ namespace AstroClient.Components
             }
         }
 
-        public static PlayerTagCounter GetEntry(APIUser TargetUser)
+        public static PlayerTagCounter GetEntry(Player player)
         {
-            return Counter.Where(x => x.user.id == TargetUser.id).DefaultIfEmpty(null).First();
+            return Counter.Where(x => x.Player == player).DefaultIfEmpty(null).First();
         }
 
         private static readonly bool DebugMode = false;
@@ -52,7 +52,7 @@ namespace AstroClient.Components
                 int stack = 2;
                 Debug("Searching for Entries To Parse stack order...");
                 // I HOPE THIS WORKS CAUSE WHY TF IT DOESNT COUNT EM
-                var entry = GetEntry(player.GetAPIUser());
+                var entry = GetEntry(player);
                 if (entry != null)
                 {
                     Debug($"Found existing stack for {player.DisplayName()} having current stack value : {entry.AssignedStack}");
@@ -69,7 +69,7 @@ namespace AstroClient.Components
                 newtag.InternalStack = stack;
                 if (AddNewPlayer)
                 {
-                    var addme = new PlayerTagCounter(player.GetAPIUser(), stack);
+                    var addme = new PlayerTagCounter(player, stack);
                     if (Counter != null)
                     {
                         if (!Counter.Contains(addme))
@@ -81,6 +81,25 @@ namespace AstroClient.Components
                 }
             }
             return newtag;
+        }
+
+        public static List<PlayerTagCounter> GetAssignedTagsToPlayer(Player player)
+        {
+            List<PlayerTagCounter> AssignedTags = new List<PlayerTagCounter>();
+            if(player != null)
+            {
+                foreach (var tag in Counter)
+                {
+                    if (tag != null && tag.Player != null)
+                    {
+                        if (tag.Player == player)
+                        {
+                            AssignedTags.Add(tag);
+                        }
+                    }
+                }
+            }
+            return AssignedTags;
         }
 
         public static List<PlayerTagCounter> Counter = new List<PlayerTagCounter>();
@@ -98,12 +117,12 @@ namespace AstroClient.Components
 
         public class PlayerTagCounter
         {
-            public APIUser user { get; set; }
+            public Player Player { get; set; }
             public int AssignedStack { get; set; }
 
-            public PlayerTagCounter(APIUser apiuser, int stack)
+            public PlayerTagCounter(Player user, int stack)
             {
-                user = apiuser;
+                this.Player = user;
                 AssignedStack = stack;
             }
         }

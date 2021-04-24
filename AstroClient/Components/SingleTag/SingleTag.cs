@@ -155,7 +155,7 @@ namespace AstroClient.components
                         }
                     }
                 }
-                var entry = SingleTagsUtils.GetEntry(player.GetAPIUser());
+                var entry = SingleTagsUtils.GetEntry(player);
                 if (entry != null)
                 {
                     entry.AssignedStack--;
