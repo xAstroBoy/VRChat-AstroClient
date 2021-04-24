@@ -133,6 +133,7 @@
             else if (first.Equals("instanceID"))
             {
                 client.InstanceID = second;
+                InstanceManager.PlayerInfo(client);
             }
             else if (first.Equals("ping"))
             {
@@ -154,16 +155,16 @@
                     Console.WriteLine("player-info other was null");
                     return;
                 }
-                if (other.IsDeveloper)
-                {
-                    Console.WriteLine("Sending developer tag");
-                    client.Send($"add-tag:{other.UserID},AstroClient Developer");
-                }
-                else
-                {
-                    Console.WriteLine("Sending client tag");
-                    client.Send($"add-tag:{other.UserID},AstroClient");
-                }
+                //if (other.IsDeveloper)
+                //{
+                //    Console.WriteLine("Sending developer tag");
+                //    client.Send($"add-tag:{other.UserID},AstroClient Developer");
+                //}
+                //else
+                //{
+                //    Console.WriteLine("Sending client tag");
+                //    client.Send($"add-tag:{other.UserID},AstroClient");
+                //}
             }
             else if (first.Equals("avatar-log"))
             {

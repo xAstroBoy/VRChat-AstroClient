@@ -175,7 +175,7 @@ namespace AstroClient
         // You gotta delay it, let's delay it to some seconds
         private static void SpawnTag(Player player, string text, Color TextColor, Color Tagcolor)
         {
-            MiscUtility.DelayFunction(0.5f, new Action(() =>
+            MiscUtility.DelayFunction(2f, new Action(() =>
             {
                 if (player != null)
                 {
