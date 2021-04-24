@@ -284,7 +284,7 @@ namespace AstroClient
             var instance = RoomManager.field_Internal_Static_ApiWorld_0;
             if (instance != null)
             {
-                if (instance.id != null)
+                if (instance.assetUrl != null)
                 {
                     return instance.assetUrl;
                 }

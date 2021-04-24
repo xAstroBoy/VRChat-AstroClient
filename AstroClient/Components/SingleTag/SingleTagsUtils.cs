@@ -44,35 +44,39 @@ namespace AstroClient.Components
 
         public static SingleTag AddSingleTag(Player player)
         {
-            bool AddNewPlayer = false;
-            var newtag = player.gameObject.AddComponent<SingleTag>();
-            int stack = 2;
-            Debug("Searching for Entries To Parse stack order...");
-            // I HOPE THIS WORKS CAUSE WHY TF IT DOESNT COUNT EM
-            var entry = GetEntry(player.GetAPIUser());
-            if (entry != null)
+            SingleTag newtag = null;
+            if (player != null)
             {
-                Debug($"Found existing stack for {player.DisplayName()} having current stack value : {entry.AssignedStack}");
-                entry.AssignedStack++;
-                stack = entry.AssignedStack;
-            }
-            else
-            {
-                Debug($"No Entry Found for player {player.DisplayName()} , using default stack value {stack} for generated SingleTag");
-                AddNewPlayer = true;
-            }
-            Debug($"Assigned to newly Generated SingleTag a stack value of {stack}");
-
-            newtag.InternalStack = stack;
-            if (AddNewPlayer)
-            {
-                var addme = new PlayerTagCounter(player.GetAPIUser(), stack);
-                if (Counter != null)
+                bool AddNewPlayer = false;
+                newtag = player.gameObject.AddComponent<SingleTag>();
+                int stack = 2;
+                Debug("Searching for Entries To Parse stack order...");
+                // I HOPE THIS WORKS CAUSE WHY TF IT DOESNT COUNT EM
+                var entry = GetEntry(player.GetAPIUser());
+                if (entry != null)
                 {
-                    if (!Counter.Contains(addme))
+                    Debug($"Found existing stack for {player.DisplayName()} having current stack value : {entry.AssignedStack}");
+                    entry.AssignedStack++;
+                    stack = entry.AssignedStack;
+                }
+                else
+                {
+                    Debug($"No Entry Found for player {player.DisplayName()} , using default stack value {stack} for generated SingleTag");
+                    AddNewPlayer = true;
+                }
+                Debug($"Assigned to newly Generated SingleTag a stack value of {stack}");
+
+                newtag.InternalStack = stack;
+                if (AddNewPlayer)
+                {
+                    var addme = new PlayerTagCounter(player.GetAPIUser(), stack);
+                    if (Counter != null)
                     {
-                        Debug($"Added New Entry for Player : {player.GetAPIUser().DisplayName()} using stack {addme.AssignedStack}");
-                        Counter.Add(addme);
+                        if (!Counter.Contains(addme))
+                        {
+                            Debug($"Added New Entry for Player : {player.GetAPIUser().DisplayName()} using stack {addme.AssignedStack}");
+                            Counter.Add(addme);
+                        }
                     }
                 }
             }
