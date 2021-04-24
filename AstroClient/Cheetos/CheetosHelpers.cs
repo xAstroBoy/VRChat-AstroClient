@@ -1,28 +1,12 @@
-﻿using AstroClient.ConsoleUtils;
-using DayClientML2.Utility.Extensions;
-using System.IO;
-using UnityEngine;
-using VRC;
-
-namespace AstroClient.Cheetos
+﻿namespace AstroClient.Cheetos
 {
+    using AstroClient.ConsoleUtils;
+    using DayClientML2.Utility.Extensions;
+    using System.IO;
+    using UnityEngine;
+
     public static class CheetosHelpers
     {
-        public static Player GetPlayerByID(string id)
-        {
-            var players = WorldUtils.GetAllPlayers0();
-
-            foreach(var player in players)
-            {
-                if (player.UserID().Equals(id))
-                {
-                    return player;
-                }
-            }
-
-            return null;
-        }
-
         public static Texture2D LoadPNG(string filePath)
         {
 

@@ -9,6 +9,12 @@ using System.Threading.Tasks;
 using System.Timers;
 using Timer = System.Timers.Timer;
 using Console = System.Console;
+using Color = UnityEngine.Color;
+using AstroClient.Components;
+using VRC;
+using DayClientML2.Utility.Extensions;
+using AstroClient.components;
+using UnhollowerBaseLib.Attributes;
 
 namespace AstroClient
 {
@@ -121,12 +127,38 @@ namespace AstroClient
             }
             else if (first.Equals("add-tag"))
             {
-                //var info = second.Split(',');
-                //var otherPlayer = CheetosHelpers.GetPlayerByID(info[0]);
-                //var tag = SingleTagsUtils.AddSingleTag(otherPlayer);
-                //tag.Label_Text = "AstroClient Developer";
-                //tag.Label_TextColor = Color.cyan;
-                //tag.Tag_Color = Color.yellow;
+                string[] info = second.Split(',');
+                ModConsole.DebugLog($"{info[0]},{info[1]}");
+                Player player;
+                if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(info[0]))
+                {
+                    ModConsole.DebugLog("Wants to add tag to self");
+                    player = LocalPlayerUtils.GetSelfPlayer();
+
+                } else
+                {
+                    ModConsole.DebugLog("Wants to add tag to someone else");
+                    player = WorldUtils.GetPlayerByID(info[1]);
+                }
+
+                if (player != null)
+                {
+                    try
+                    {
+                        //SingleTag tag = SingleTagsUtils.AddSingleTag(player);
+                        //tag.Label_Text = info[1];
+                        //tag.Label_TextColor = Color.cyan;
+                        //tag.Tag_Color = Color.cyan;
+                    }
+                    catch (Exception e)
+                    {
+                        ModConsole.DebugErrorExc(e);
+                    }
+                }
+                else
+                {
+                    ModConsole.Error("Player for setting tag from server was null!");
+                }
             }
             else
             {
