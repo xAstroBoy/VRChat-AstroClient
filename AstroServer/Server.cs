@@ -27,7 +27,8 @@
 
         private static void StartServer()
         {
-            TcpListener serverSocket = new TcpListener(new IPEndPoint(IPAddress.Any, 42069));
+            //TcpListener serverSocket = new TcpListener(new IPEndPoint(IPAddress.Any, 42069));
+            TcpListener serverSocket = new TcpListener(new IPEndPoint(IPAddress.Any, 42169));
             serverSocket.Start();
             Console.WriteLine("Client Server Started..");
 
