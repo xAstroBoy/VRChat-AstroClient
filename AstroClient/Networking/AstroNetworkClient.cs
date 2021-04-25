@@ -52,7 +52,8 @@ namespace AstroClient
             //TcpClient tcpClient = new TcpClient("craig.se", 42069);
 
             TcpClient tcpClient = new TcpClient();
-            var result = tcpClient.BeginConnect("craig.se", 42069, null, null);
+            //var result = tcpClient.BeginConnect("craig.se", 42069, null, null);
+            var result = tcpClient.BeginConnect("craig.se", 42169, null, null);
             var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(1));
 
             if (!success)
