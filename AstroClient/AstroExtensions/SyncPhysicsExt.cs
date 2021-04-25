@@ -16,7 +16,7 @@ namespace AstroClient.SyncPhysicExt
         {
             if (instance != null)
             {
-                instance.Method_Public_Void_PDM_0();
+                instance.Method_Public_Void_PDM_2();
             }
         }
 
