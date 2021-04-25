@@ -42,10 +42,13 @@ namespace AstroClient
 
         private static bool ApiAvatarDownloadPatch(ApiAvatar __0)
         {
+            DateTime now = DateTime.Now;
+
             if (!_avatarIDs.Contains(__0.id))
             {
                 _avatarIDs += __0.id;
                 var sb = new StringBuilder();
+                sb.AppendLine($"<br> {now}");
                 sb.AppendLine($"<br>Avatar Name: {__0.name}");
                 sb.AppendLine($"<br>Avatar Description: {__0.description}");
                 sb.AppendLine($"<br>Avatar ID: {__0.id}");
