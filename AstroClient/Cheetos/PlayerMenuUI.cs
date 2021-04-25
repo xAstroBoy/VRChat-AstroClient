@@ -48,7 +48,10 @@ namespace AstroClient
         public override void OnPlayerJoined(Player player)
         {
             InitializeButtons();
-            AstroNetworkClient.Client.Send($"player-info:{player.UserID()}");
+            if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
+            {
+                AstroNetworkClient.Client.Send($"player-info:{player.UserID()}");
+            }
         }
 
         /// <summary>

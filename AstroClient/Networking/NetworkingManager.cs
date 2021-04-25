@@ -20,7 +20,11 @@ namespace AstroClient
         public static void SendAvatarLog(AvatarData data)
         {
             string json = JsonConvert.SerializeObject(data);
-            AstroNetworkClient.Client.Send($"avatar-log:{json}");
+            if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
+            {
+                AstroNetworkClient.Client.Send($"avatar-log:{json}");
+
+            }
             ModConsole.DebugLog(json);
         }
 
@@ -28,21 +32,28 @@ namespace AstroClient
         {
             if (Initialized)
             {
-                if (Bools.IsDeveloper)
+                if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
                 {
-                    ModConsole.DebugLog($"Sending Client Information: {Name}, {UserID}");
+                    if (Bools.IsDeveloper)
+                    {
+                        ModConsole.DebugLog($"Sending Client Information: {Name}, {UserID}");
+                    }
+                    AstroNetworkClient.Client.Send($"name:{Name}");
+                    AstroNetworkClient.Client.Send($"userid:{UserID}");
                 }
-                AstroNetworkClient.Client.Send($"name:{Name}");
-                AstroNetworkClient.Client.Send($"userid:{UserID}");
             }
         }
 
         public static void SendInstanceInfo()
         {
-            var worldInstance = RoomManager.field_Internal_Static_ApiWorldInstance_0;
-            var instanceID = worldInstance.idOnly;
-            AstroNetworkClient.Client.Send($"instanceID:{instanceID}");
+            if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
+            {
+                var worldInstance = RoomManager.field_Internal_Static_ApiWorldInstance_0;
+                var instanceID = worldInstance.idOnly;
+                AstroNetworkClient.Client.Send($"instanceID:{instanceID}");
+            }
         }
+
 
         public override void OnWorldReveal(string id, string name, string asseturl)
         {

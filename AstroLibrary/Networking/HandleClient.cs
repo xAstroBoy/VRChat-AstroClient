@@ -111,7 +111,10 @@ namespace AstroLibrary.Networking
 
         public void Send(string msg)
         {
-            Send(msg.ConvertToBytes());
+            if (IsConnected)
+            {
+                Send(msg.ConvertToBytes());
+            }
         }
 
         public void Send(byte[] msg, int headerType = 1000) // 0 = text, 1 = data
