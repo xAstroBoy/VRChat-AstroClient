@@ -37,20 +37,21 @@ namespace AstroClient
 
         public override void OnApplicationStart()
         {
-            //ConfigManager.Validate();
-            //ConfigManager.Load();
-
-            //KeyManager.ReadKey();
-
-            //AstroNetworkClient.Initialize();
-
-            //while (!KeyManager.IsAuthed)
-            //{
-            //}
-
-
+#if DEBUG
             KeyManager.IsAuthed = true;
             Bools.IsDeveloper = true;
+#else
+            ConfigManager.Validate();
+            ConfigManager.Load();
+
+            KeyManager.ReadKey();
+
+            AstroNetworkClient.Initialize();
+
+            while (!KeyManager.IsAuthed)
+            {
+            }
+#endif
 
             try
             {
