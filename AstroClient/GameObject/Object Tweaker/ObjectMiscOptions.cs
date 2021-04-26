@@ -81,7 +81,7 @@ namespace AstroClient
                     if (targetuser != null)
                     {
                         CurrentTarget = targetuser;
-                        foreach (var item in WorldUtils.GetAllWorldPickups())
+                        foreach (var item in WorldUtils.GetPickups())
                         {
                             if (item != null)
                             {
@@ -109,7 +109,7 @@ namespace AstroClient
                     if (targetuser != null)
                     {
                         CurrentTarget = targetuser;
-                        foreach (var item in WorldUtils.GetAllWorldPickups())
+                        foreach (var item in WorldUtils.GetPickups())
                         {
                             if (item != null)
                             {
@@ -141,7 +141,7 @@ namespace AstroClient
                     if (targetuser != null)
                     {
                         CurrentTarget = targetuser;
-                        foreach (var item in WorldUtils.GetAllWorldPickups())
+                        foreach (var item in WorldUtils.GetPickups())
                         {
                             if (item != null)
                             {
@@ -173,7 +173,7 @@ namespace AstroClient
                     if (targetuser != null)
                     {
                         CurrentTarget = targetuser;
-                        foreach (var item in WorldUtils.GetAllWorldPickups())
+                        foreach (var item in WorldUtils.GetPickups())
                         {
                             if (item != null)
                             {

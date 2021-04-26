@@ -10,7 +10,7 @@ namespace AstroClient.extensions
             HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Remove(rend);
         }
 
-        private static void RemoveRendFromUnlistedHighLighter(MeshRenderer rend)
+        private static bool RemoveRendFromUnlistedHighLighter(MeshRenderer rend)
         {
             HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Remove(rend);
         }
@@ -19,8 +19,15 @@ namespace AstroClient.extensions
         {
             if (item != null)
             {
-                RemoveRendFromUnlistedHighLighter(rend);
-                item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                if (status)
+                {
+                    RemoveRendFromUnlistedHighLighter(rend);
+                    item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                }
+                else
+                {
+                    item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+                }
                 item.Method_Public_Void_Renderer_Boolean_0(rend, status);
             }
         }
@@ -29,8 +36,15 @@ namespace AstroClient.extensions
         {
             if (item != null)
             {
-                RemoveRendFromUnlistedHighLighter(rend);
-                item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                if (status)
+                {
+                    RemoveRendFromUnlistedHighLighter(rend);
+                    item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                }
+                else
+                {
+                    item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+                }
                 item.Method_Public_Void_Renderer_Boolean_0(rend, status);
             }
         }
@@ -39,12 +53,22 @@ namespace AstroClient.extensions
         {
             if (item != null)
             {
-                RemoveRendFromUnlistedHighLighter(rend);
-                item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                if (status)
+                {
+                    RemoveRendFromUnlistedHighLighter(rend);
+                    item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                }
+                else
+                {
+                    item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+                }
                 item.highlightColor = color;
                 item.Method_Public_Void_Renderer_Boolean_0(rend, status);
             }
         }
+
+
+
 
         public static HighlightsFXStandalone AddHighlighter(this GameObject obj)
         {
@@ -68,8 +92,8 @@ namespace AstroClient.extensions
                 {
                     EspHelper.SpawnedESPsHolders.Remove(item);
                 }
+                UnityEngine.Object.Destroy(item);
             }
-            UnityEngine.Object.DestroyImmediate(item);
         }
 
         public static void SetHighLighter(this HighlightsFXStandalone item, MeshRenderer rend, Color color, bool status)
@@ -77,15 +101,59 @@ namespace AstroClient.extensions
             if (item != null)
             {
                 RemoveRendFromUnlistedHighLighter(rend);
-                item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                if (status)
+                {
+                    RemoveRendFromUnlistedHighLighter(rend);
+                    item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                }
+                else
+                {
+                    item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+                }
                 item.highlightColor = color;
                 item.Method_Public_Void_Renderer_Boolean_0(rend, status);
             }
         }
 
+
+        public static void AddRenderer(this HighlightsFXStandalone item, MeshRenderer rend)
+        {
+            if (item != null)
+            {
+                item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+            }
+        }
+
+
+        public static void AddRenderer(this HighlightsFXStandalone item, Renderer rend)
+        {
+            if (item != null)
+            {
+                item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+            }
+        }
+
+
+
+        public static void RemoveRenderer(this HighlightsFXStandalone item, MeshRenderer rend)
+        {
+            if (item != null)
+            {
+                item.field_Protected_HashSet_1_Renderer_0.Remove(rend);   
+            }
+        }
+
+        public static void RemoveRenderer(this HighlightsFXStandalone item, Renderer rend)
+        {
+            if (item != null)
+            {
+                item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+            }
+        }
+
         public static void SetHighLighterColor(this HighlightsFXStandalone item, Color color)
         {
-            if (item != null && item.field_Protected_Material_0 != null)
+            if (item != null)
             {
                 item.highlightColor = color;
             }

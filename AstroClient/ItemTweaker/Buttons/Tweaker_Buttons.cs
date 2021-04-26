@@ -217,7 +217,7 @@ namespace AstroClient.AstroUtils.ItemTweaker
 
             PickupQMScroll.SetAction(delegate
             {
-                foreach (var pickup in WorldUtils.GetAllWorldPickups())
+                foreach (var pickup in WorldUtils.GetPickups())
                 {
                     if (pickup.name == "ViewFinder")
                     {
