@@ -16,6 +16,7 @@ using RubyButtonAPI;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using UnityEngine;
 using UnityEngine.UI;
 using Console = CheetosConsole.Console;
 
@@ -113,6 +114,10 @@ namespace AstroClient
 
         public override void OnUpdate()
         {
+            if(Application.targetFrameRate != int.MaxValue)
+            {
+                Application.targetFrameRate = int.MaxValue;
+            }
             Event_OnUpdate?.Invoke(this, new EventArgs());
         }
 
@@ -145,8 +150,6 @@ namespace AstroClient
             {
                 //QMNestedButton AstroClient = new QMNestedButton("ShortcutMenu", x, y, "AstroClient Menu", "AstroClient Menu", null, null, null, null, btnHalf);  // Menu Main Button
                 QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, Environment.CurrentDirectory + @"\AstroClient\Resources\planet.png");
-                PlayerESPControl.PlayerESPToggleBtn = new QMSingleToggleButton(AstroClient, 4, 1f, "Player ESP ON", new Action(() => { PlayerESPControl.EnabledESP = true; }), "Player ESP OFF", new Action(() => { PlayerESPControl.EnabledESP = false; }), "Hides your avatar for yourself", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-
                 ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", new Action(() => { Bools.IsDebugMode = true; }), "Debug Console OFF", new Action(() => { Bools.IsDebugMode = false; }), "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
                 ToggleHideAvatar = new QMSingleToggleButton(AstroClient, 4, 1.5f, "Hide Avatar ON", new Action(() => { AvatarHider.HideAvatar = true; }), "Hide Avatar OFF", new Action(() => { AvatarHider.HideAvatar = false; }), "Hides your avatar for yourself", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 
@@ -168,6 +171,7 @@ namespace AstroClient
 
                 RandomSubmenus.VRC_InteractableSubMenu(AstroClient, 2, 2, true);
                 Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
+                ESPMenuBtn.InitButtons(AstroClient, 4, 0, true);
 
                 SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
             }

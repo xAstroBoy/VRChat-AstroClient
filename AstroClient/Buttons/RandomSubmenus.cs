@@ -37,7 +37,7 @@ namespace AstroClient
             }, "", null, null, true);
             scroll.SetAction(delegate
             {
-                foreach (var trigger in WorldUtils.GetAllWorldTriggers())
+                foreach (var trigger in WorldUtils.GetTriggers())
                 {
                     scroll.Add(
                     new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {trigger.name}", delegate

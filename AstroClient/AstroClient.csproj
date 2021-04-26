@@ -94,10 +94,10 @@
     <Compile Include="AstroExtensions\UdonExtensions.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
-    <Compile Include="Buttons\QuickMenuBtns.cs" />
     <Compile Include="Buttons\RandomSubmenus.cs" />
     <Compile Include="Buttons\SettingsMenuBtn.cs" />
     <Compile Include="Buttons\UserInteractMenuBtns.cs" />
+    <Compile Include="Buttons\ESPMenuBtn.cs" />
     <Compile Include="Buttons\WorldPickupsBtn.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemlySpy_Extensions.cs" />
@@ -240,7 +240,6 @@
     <Compile Include="Startup\Hooks\SpawnEmojiRPCHook.cs" />
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
     <Compile Include="Startup\WorldJoinMsg.cs" />
-    <Compile Include="PlayerESPControl.cs" />
     <Compile Include="Udon\Exploits\AmongUS\AmongUSUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Global\GlobalUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Murder4\Murder4UdonExploits.cs" />

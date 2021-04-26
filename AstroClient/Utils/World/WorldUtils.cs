@@ -9,6 +9,7 @@ using Color = System.Drawing.Color;
 #region AstroClient Imports
 
 using AstroClient.ConsoleUtils;
+using VRC.Udon;
 
 #endregion AstroClient Imports
 
@@ -113,7 +114,7 @@ namespace AstroClient
             ModConsole.Log("This instance has " + GetAllPlayers0().Count() + " Players.", Color.Gold);
         }
 
-        public static List<GameObject> GetAllWorldPickups()
+        public static List<GameObject> GetPickups()
         {
             try
             {
@@ -221,7 +222,7 @@ namespace AstroClient
             }
         }
 
-        public static List<GameObject> GetAllWorldTriggers()
+        public static List<GameObject> GetTriggers()
         {
             var Triggers = new List<GameObject>();
             var list = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Trigger>();
@@ -252,6 +253,27 @@ namespace AstroClient
             }
             return Triggers;
         }
+
+
+        public static List<GameObject> GetUdonBehaviours()
+        {
+            var UdonBehaviourObjects = new List<GameObject>();
+            var list = Resources.FindObjectsOfTypeAll<UdonBehaviour>();
+            if (list.Count() != 0)
+            {
+                foreach (var item in list)
+                {
+                    if (!UdonBehaviourObjects.Contains(item.gameObject))
+                    {
+                        UdonBehaviourObjects.Add(item.gameObject);
+                    }
+                }
+                return UdonBehaviourObjects;
+            }
+            return UdonBehaviourObjects;
+        }
+
+
 
         public static string GetWorldName()
         {

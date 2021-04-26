@@ -33,33 +33,48 @@ namespace AstroClient.components
         // Use this for initialization
         public void Start()
         {
-            obj = this.gameObject;
-            ObjMeshRenderers = obj.GetComponentsInChildren<MeshRenderer>().ToList();
-
+            ObjMeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true).ToList();
             if (ObjMeshRenderers == null && ObjMeshRenderers.Count() == 0)
             {
-                ModConsole.DebugError($"Unable to add ObjectESP to  {obj.name} due to MeshRenderer and Renderer Being null");
+                ModConsole.DebugError($"Unable to add ObjectESP to  {gameObject.name} due to MeshRenderer Being null or empty");
                 Object.Destroy(this);
                 return;
             }
-            else
+        }
+
+
+        private void SetupHighlighter()
+        {
+            if (HighLightOptions == null)
             {
-                Debug($"Found Renderer in {obj.name}, Activating ESP !");
-                if (HighLightOptions == null)
+                HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
+                if(HighLightOptions != null)
                 {
-                    HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
+                    HighLightOptions.SetHighLighterColor(ESPColor);
                 }
-                if (HighLightOptions != null)
+            }
+            
+        }
+        public void Update()
+        {
+            if (HighLightOptions == null)
+            {
+                SetupHighlighter();
+            }
+            if (HighLightOptions != null)
+            {
+                // CHECK FOR INTERNAL MESH RENDERERS IF ACTIVE OR DEACTIVE AND ACT ACCORDINGLY BY ADDING/REMOVING IT.
+                foreach (var obj in ObjMeshRenderers)
                 {
-                    foreach (var ObjMeshRenderer in ObjMeshRenderers)
+                    if (obj != null && obj.gameObject.active)
                     {
-                        if (ObjMeshRenderer != null)
-                        {
-                            HighLightOptions.SetHighLighter(ObjMeshRenderer, Color.green, true);
-                        }
+                        HighLightOptions.SetHighLighter(obj, true);
+                    }
+                    else
+                    {
+                        HighLightOptions.SetHighLighter(obj, false);
                     }
                 }
-                HighLightOptions.enabled = obj.active;
             }
         }
 
@@ -70,51 +85,40 @@ namespace AstroClient.components
 
         public void OnDestroy()
         {
-            if (HighLightOptions != null)
-            {
-                foreach (var ObjMeshRenderer in ObjMeshRenderers)
-                {
-                    if (ObjMeshRenderer != null)
-                    {
-                        HighLightOptions.SetHighLighter(ObjMeshRenderer, false);
-                    }
-                }
-            }
             HighLightOptions.DestroyHighlighter();
         }
 
         public void OnEnable()
         {
-            if (HighLightOptions != null)
-            {
-                foreach (var ObjMeshRenderer in ObjMeshRenderers)
-                {
-                    if (ObjMeshRenderer != null)
-                    {
-                        HighLightOptions.SetHighLighter(ObjMeshRenderer, true);
-                    }
-                }
-            }
+            SetupHighlighter();
         }
 
         public void OnDisable()
         {
-            if (HighLightOptions != null)
-            {
-                foreach (var ObjMeshRenderer in ObjMeshRenderers)
-                {
-                    if (ObjMeshRenderer != null)
-                    {
-                        HighLightOptions.SetHighLighter(ObjMeshRenderer, false);
-                    }
-                }
-            }
+            HighLightOptions.DestroyHighlighter();
+
         }
 
         internal void ChangeColor(Color newcolor)
         {
-            HighLightOptions.SetHighLighterColor(newcolor);
+            ESPColor = newcolor;
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighLighterColor(newcolor);
+            }
         }
+
+        internal void ChangeColor(string HexColor)
+        {
+            Color hextocolor = ColorUtils.HexToColor(HexColor);
+            ESPColor = hextocolor;
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighLighterColor(hextocolor);
+            }
+        }
+
+
 
         internal Color GetCurrentESPColor
         {
@@ -124,7 +128,9 @@ namespace AstroClient.components
             }
         }
 
-        private GameObject obj;
+
+
+        private Color ESPColor;
         private List<MeshRenderer> ObjMeshRenderers = new List<MeshRenderer>();
         private HighlightsFXStandalone HighLightOptions;
     }

@@ -45,7 +45,6 @@ namespace AstroClient.GameObjectDebug
             ColliderDisplay.ToggleColliderInvisibleXRayBtn = new QMToggleButton(GameObjectsMenus, 2, 2, "Invisible Xray ON", new Action(() => { XRay.ToggleDisabledRenderers(); }), "Invisible XRay OFF", new Action(() => { XRay.ToggleDisabledRenderers(); }), "Reveals Invisible colliders.", null, null, null, false);
 
             ColliderDisplay.ToggleColliderDisplayBtn = new QMToggleButton(GameObjectsMenus, 3, 2, "Collider Viewer ON", new Action(() => { ColliderDisplay.ToggleDisplays(true); }), "Collider Viewer OFF", new Action(() => { ColliderDisplay.ToggleDisplays(false); }), "Reveals all world triggers available.", null, null, null, false);
-            GameObjectESP.TriggerESPToggler = new QMToggleButton(GameObjectsMenus, 4, 2, "Trigger ESP ON", new Action(GameObjectESP.AddESPToTriggers), "Trigger ESP OFF", new Action(GameObjectESP.RemoveESPToTriggers), "Reveals all world triggers available.", null, null, null, false);
         }
 
         public static Il2CppArrayBase<VRC_SyncVideoPlayer> GetVRC_SyncVideoPlayers()
@@ -145,7 +144,7 @@ namespace AstroClient.GameObjectDebug
 
         public static void EnableAllWorldPickups()
         {
-            var pickups = WorldUtils.GetAllWorldPickups();
+            var pickups = WorldUtils.GetPickups();
             foreach (var component in pickups)
             {
                 if (component.gameObject.name == "ViewFinder")
@@ -216,7 +215,7 @@ namespace AstroClient.GameObjectDebug
 
         public static void TeleportPickupsToTheirDefaultPosition()
         {
-            foreach (var Pickup in WorldUtils.GetAllWorldPickups())
+            foreach (var Pickup in WorldUtils.GetPickups())
             {
                 if (Pickup != null)
                 {
@@ -332,7 +331,7 @@ namespace AstroClient.GameObjectDebug
 
         public static void GetAllPickupsOwners()
         {
-            foreach (var item in WorldUtils.GetAllWorldPickups())
+            foreach (var item in WorldUtils.GetPickups())
             {
                 if (item != null)
                 {

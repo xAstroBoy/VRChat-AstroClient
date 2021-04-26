@@ -1,6 +1,7 @@
 ﻿using AstroClient.Components;
 using AstroClient.ConsoleUtils;
 using AstroClient.extensions;
+using AstroClient.Startup.Buttons;
 using System;
 using System.Linq;
 using UnhollowerBaseLib.Attributes;
@@ -463,7 +464,7 @@ namespace AstroClient.components
         {
             if (Internal_player != null)
             {
-                if (PlayerESPControl.EnabledESP)
+                if (ESPMenuBtn.EnabledPlayerESP)
                 {
                     var esp = Internal_player.gameObject.GetComponent<PlayerESP>();
                     if (esp != null)
@@ -478,7 +479,7 @@ namespace AstroClient.components
         {
             if (Internal_player != null)
             {
-                if (PlayerESPControl.EnabledESP)
+                if (ESPMenuBtn.EnabledPlayerESP)
                 {
                     var esp = Internal_player.gameObject.GetComponent<PlayerESP>();
                     if (esp != null)
