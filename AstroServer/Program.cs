@@ -17,34 +17,30 @@
 
         public static async Task Main()
         {
-            Console.WriteLine("Welcome to AstroServer.");
+            Console.WriteLine("Welcome to AstroServer!");
+            await Database.Initialize();
+            Console.WriteLine("Starting Discord bot..");
+            Services = new ServiceCollection()
+                .AddSingleton<DiscordSocketClient>()
+                .AddSingleton<DiscordSocketConfig>()
+                .AddSingleton<CommandService>()
+                .AddSingleton<CommandHandlingService>()
+                .AddSingleton<HttpClient>()
+                .BuildServiceProvider();
+            DiscordSocketClient client = Services.GetRequiredService<DiscordSocketClient>();
+            DiscordSocketConfig config = Services.GetRequiredService<DiscordSocketConfig>();
 
-            Database.Test();
+            config.GatewayIntents = ~GatewayIntents.None; // All intents
+            config.AlwaysDownloadUsers = true;
+            config.DefaultRetryMode = ~RetryMode.AlwaysFail; // Always retry
 
-            Console.ReadLine();
+            await new AstroBot(client).Start();
 
-            //Console.WriteLine("Starting Discord bot..");
-            //Services = new ServiceCollection()
-            //    .AddSingleton<DiscordSocketClient>()
-            //    .AddSingleton<DiscordSocketConfig>()
-            //    .AddSingleton<CommandService>()
-            //    .AddSingleton<CommandHandlingService>()
-            //    .AddSingleton<HttpClient>()
-            //    .BuildServiceProvider();
-            //DiscordSocketClient client = Services.GetRequiredService<DiscordSocketClient>();
-            //DiscordSocketConfig config = Services.GetRequiredService<DiscordSocketConfig>();
+            // Here we initialize the logic required to register our commands.
+            await Services.GetRequiredService<CommandHandlingService>().InitializeAsync();
 
-            //config.GatewayIntents = ~GatewayIntents.None; // All intents
-            //config.AlwaysDownloadUsers = true;
-            //config.DefaultRetryMode = ~RetryMode.AlwaysFail; // Always retry
-
-            //await new AstroBot(client).Start();
-
-            //// Here we initialize the logic required to register our commands.
-            //await Services.GetRequiredService<CommandHandlingService>().InitializeAsync();
-
-            //Console.WriteLine("Starting Client Server..");
-            //Server1 = new Server();
+            Console.WriteLine("Starting Client Server..");
+            Server1 = new Server();
         }
     }
 }

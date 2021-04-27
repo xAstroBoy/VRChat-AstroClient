@@ -1,21 +1,17 @@
 ﻿namespace AstroServer
 {
     using System;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
-    using MongoDB.Bson;
     using MongoDB.Driver;
+    using MongoDB.Entities;
 
     class Database
     {
-        public static void Test()
+        public async static Task Initialize()
         {
-            // ...
-            var client = new MongoClient(GetConnectionString());
-            var database = client.GetDatabase("astro");
+            await DB.InitAsync("astro", MongoClientSettings.FromConnectionString(GetConnectionString()));
+            Console.WriteLine("Database Initialized..");
         }
 
         public static string GetConnectionString()
