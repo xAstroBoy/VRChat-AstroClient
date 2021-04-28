@@ -10,7 +10,7 @@ namespace AstroClient.extensions
             HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Remove(rend);
         }
 
-        private static bool RemoveRendFromUnlistedHighLighter(MeshRenderer rend)
+        private static void RemoveRendFromUnlistedHighLighter(MeshRenderer rend)
         {
             HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Remove(rend);
         }
