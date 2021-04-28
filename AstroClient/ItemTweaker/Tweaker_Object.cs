@@ -8,6 +8,7 @@ using AstroClient.ConsoleUtils;
 using AstroClient.Finder;
 using AstroClient.AstroUtils.ItemTweaker;
 using System.Linq;
+using AstroClient.extensions;
 
 #endregion AstroClient Imports
 
@@ -119,7 +120,7 @@ namespace AstroClient.ItemTweaker
         }
 
         private static bool _CurrentSelectedItemEnabledESP = false;
-
+        private static readonly string SelectedItemESPIdentifier = "Selected_item_ID";
         public static bool CurrentSelectedItemEnabledESP
         {
             get
@@ -133,36 +134,24 @@ namespace AstroClient.ItemTweaker
                 {
                     if (CurrentSelectedObject != null)
                     {
-                        if (CurrentSelectedObject.GetComponent<ObjectESP>() == null)
+                        var RegisteredESPs  = CurrentSelectedObject.GetESPByID(SelectedItemESPIdentifier);
+
+                        if (RegisteredESPs == null && RegisteredESPs.Count() == 0)
                         {
-                            CurrentSelectedObject.AddComponent<ObjectESP>();
+                           var ESP = CurrentSelectedObject.AddComponent<ObjectESP>();
+                            if (ESP != null)
+                            {
+                                ESP.SetIdentifier(SelectedItemESPIdentifier);
+                            }
                         }
+                       
                     }
                 }
                 else
                 {
                     if (CurrentSelectedObject != null)
                     {
-                        if (CurrentSelectedObject.GetComponent<ObjectESP>() != null)
-                        {
-                            if (GameObjectESP.isMurderItemsESPActivated)
-                            {
-                                if (GameObjectESP.MurderESPItems != null && GameObjectESP.MurderESPItems.Count() != 0)
-                                {
-                                    if (GameObjectESP.MurderESPItems.Contains(CurrentSelectedObject))
-                                    {
-                                        if (!GameObjectESP.isMurderItemsESPActivated)
-                                        {
-                                            UnityEngine.Object.Destroy(CurrentSelectedObject.GetComponent<ObjectESP>());
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                UnityEngine.Object.Destroy(CurrentSelectedObject.GetComponent<ObjectESP>());
-                            }
-                        }
+                         CurrentSelectedObject.DestroyESPByIdentifier(SelectedItemESPIdentifier);
                     }
                 }
                 _CurrentSelectedItemEnabledESP = value;
@@ -185,27 +174,8 @@ namespace AstroClient.ItemTweaker
                 }
                 if (_CurrentSelectedObject != null)
                 {
-                    ObjectESP installedESP = _CurrentSelectedObject.GetComponent<ObjectESP>();
-                    if (installedESP != null)
-                    {
-                        if (GameObjectESP.isMurderItemsESPActivated)
-                        {
-                            if (GameObjectESP.MurderESPItems != null && GameObjectESP.MurderESPItems.Count() != 0)
-                            {
-                                if (GameObjectESP.MurderESPItems.Contains(_CurrentSelectedObject))
-                                {
-                                    if (!GameObjectESP.isMurderItemsESPActivated)
-                                    {
-                                        UnityEngine.Object.Destroy(installedESP);
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            UnityEngine.Object.Destroy(installedESP);
-                        }
-                    }
+                    _CurrentSelectedObject.DestroyESPByIdentifier(SelectedItemESPIdentifier);
+                    
                 }
 
                 _CurrentSelectedObject = value;
@@ -213,10 +183,14 @@ namespace AstroClient.ItemTweaker
                 {
                     if (value != null)
                     {
-                        ObjectESP esp = value.GetComponent<ObjectESP>();
-                        if (esp == null)
+                        var esps = value.GetESPByID(SelectedItemESPIdentifier);
+                        if (esps != null && esps.Count() == 0)
                         {
-                            esp = value.AddComponent<ObjectESP>();
+                            var esp = value.AddComponent<ObjectESP>();
+                            if (esp != null)
+                            {
+                                esp.SetIdentifier(SelectedItemESPIdentifier);
+                            }
                         }
                     }
                 }

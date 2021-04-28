@@ -67,9 +67,6 @@ namespace AstroClient.extensions
             }
         }
 
-
-
-
         public static HighlightsFXStandalone AddHighlighter(this GameObject obj)
         {
             var item = obj.AddComponent<HighlightsFXStandalone>();
@@ -115,7 +112,6 @@ namespace AstroClient.extensions
             }
         }
 
-
         public static void AddRenderer(this HighlightsFXStandalone item, MeshRenderer rend)
         {
             if (item != null)
@@ -123,7 +119,6 @@ namespace AstroClient.extensions
                 item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
             }
         }
-
 
         public static void AddRenderer(this HighlightsFXStandalone item, Renderer rend)
         {
@@ -133,13 +128,11 @@ namespace AstroClient.extensions
             }
         }
 
-
-
         public static void RemoveRenderer(this HighlightsFXStandalone item, MeshRenderer rend)
         {
             if (item != null)
             {
-                item.field_Protected_HashSet_1_Renderer_0.Remove(rend);   
+                item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
             }
         }
 

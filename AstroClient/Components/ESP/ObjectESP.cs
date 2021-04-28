@@ -68,11 +68,11 @@ namespace AstroClient.components
                 {
                     if (obj != null && obj.gameObject.active)
                     {
-                        HighLightOptions.SetHighLighter(obj, true);
+                        HighLightOptions.AddRenderer(obj);
                     }
                     else
                     {
-                        HighLightOptions.SetHighLighter(obj, false);
+                        HighLightOptions.RemoveRenderer(obj);
                     }
                 }
             }
@@ -118,6 +118,16 @@ namespace AstroClient.components
             }
         }
 
+        internal void SetIdentifier(string newidentifier)
+        {
+            ESPIdentifier = newidentifier;
+        }
+
+
+        internal string GetIdentifier()
+        {
+            return ESPIdentifier;
+        }
 
 
         internal Color GetCurrentESPColor
@@ -129,6 +139,7 @@ namespace AstroClient.components
         }
 
 
+        private string ESPIdentifier;
 
         private Color ESPColor;
         private List<MeshRenderer> ObjMeshRenderers = new List<MeshRenderer>();

@@ -2,12 +2,14 @@
 using AstroClient.ConsoleUtils;
 using AstroClient.Variables;
 using RubyButtonAPI;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Exception = System.Exception;
 
 namespace AstroClient
 {
+    [Obsolete("This Class will be deleted, as the new ESP Can edit colors and it has identifiers!")]
     public class GameObjectESP : GameEvents
     {
 

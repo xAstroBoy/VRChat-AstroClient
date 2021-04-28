@@ -17,7 +17,6 @@ namespace AstroClient.extensions
 {
     public static class EngineExtensions
     {
-
         public static void CopyPath(this GameObject obj)
         {
             if (obj != null)

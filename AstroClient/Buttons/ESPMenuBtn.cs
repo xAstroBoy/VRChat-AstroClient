@@ -1,9 +1,7 @@
 ﻿using AstroClient.components;
-using AstroClient.GameObjectDebug;
+using AstroClient.extensions;
 using RubyButtonAPI;
 using System;
-using System.Collections.Generic;
-using UnityEngine;
 using VRC;
 
 namespace AstroClient.Startup.Buttons
@@ -14,7 +12,7 @@ namespace AstroClient.Startup.Buttons
         {
             var main = new QMNestedButton(menu, x, y, "ESP Menu", "ESP Options", null, null, null, null, btnHalf);
             PlayerESPToggleBtn = new QMSingleToggleButton(main, 1, 0f, "Player ESP ON", new Action(() => { EnabledPlayerESP = true; }), "Player ESP OFF", new Action(() => { EnabledPlayerESP = false; }), "Toggles Player ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-            
+
             PickupESPToggleBtn = new QMSingleToggleButton(main, 2, 0f, "Pickup ESP ON", new Action(() => { EnabledPickupESP = true; }), "Pickup ESP OFF", new Action(() => { EnabledPickupESP = false; }), "Toggle Pickup ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
             VRCInteractableESPToggleBtn = new QMSingleToggleButton(main, 2, 0.5f, "VRC Interactable ESP ON", new Action(() => { EnabledVRCInteractableESP = true; }), "VRC Interactable ESP OFF", new Action(() => { EnabledVRCInteractableESP = false; }), "Toggle VRC Interactable ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
             TriggerESPToggleBtn = new QMSingleToggleButton(main, 2, 1f, "Trigger ESP ON", new Action(() => { EnabledTriggerESP = true; }), "Trigger ESP OFF", new Action(() => { EnabledTriggerESP = false; }), "Toggle Trigger ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
@@ -29,18 +27,21 @@ namespace AstroClient.Startup.Buttons
             EnabledUdonBehaviourESP = false;
         }
 
+        public readonly static string Pickup_Identifier = "Pickup_ID";
+        public readonly static string VRCInteractable_Identifier = "VRCInteractable_ID";
+        public readonly static string Trigger_Identifier = "Trigger_ID";
+        public readonly static string UdonBehaviour_Identifier = "UdonBehaviour_ID";
 
-        public readonly static string PickupESPColorHex = "4AB30D";
-        public readonly static string VRCInteractableESPColorHex = "E47D39";
-        public readonly static string TriggerESPColorHex = "EF2C3F";
-        public readonly static string UdonBehaviourESPColorHex = "CD14C7";
+        public readonly static string Default_PickupESPColorHex = "4AB30D";
+        public readonly static string Default_VRCInteractableESPColorHex = "E47D39";
+        public readonly static string Default_TriggerESPColorHex = "EF2C3F";
+        public readonly static string Default_UdonBehaviourESPColorHex = "CD14C7";
 
         private static QMSingleToggleButton PlayerESPToggleBtn;
         private static QMSingleToggleButton VRCInteractableESPToggleBtn;
         private static QMSingleToggleButton PickupESPToggleBtn;
         private static QMSingleToggleButton TriggerESPToggleBtn;
         private static QMSingleToggleButton UdonBehaviourESPToggleBtn;
-
 
         #region VRCInteractableESP
 
@@ -81,7 +82,8 @@ namespace AstroClient.Startup.Buttons
                     ObjectESP VRCInteractable = item.AddComponent<ObjectESP>();
                     if (VRCInteractable != null)
                     {
-                        VRCInteractable.ChangeColor(VRCInteractableESPColorHex);
+                        VRCInteractable.SetIdentifier(VRCInteractable_Identifier);
+                        VRCInteractable.ChangeColor(Default_VRCInteractableESPColorHex);
                     }
                 }
             }
@@ -92,18 +94,11 @@ namespace AstroClient.Startup.Buttons
             var items = WorldUtils.GetAllVRCInteractables();
             foreach (var item in items)
             {
-                if (item != null)
-                {
-                    var ESP = item.GetComponent<ObjectESP>();
-                    if (ESP != null)
-                    {
-                        UnityEngine.Object.Destroy(ESP);
-                    }
-                }
+                item.DestroyESPByIdentifier(VRCInteractable_Identifier);
             }
         }
 
-        #endregion
+        #endregion VRCInteractableESP
 
         #region PickupESP
 
@@ -144,7 +139,8 @@ namespace AstroClient.Startup.Buttons
                     var Pickup = item.AddComponent<ObjectESP>();
                     if (Pickup != null)
                     {
-                        Pickup.ChangeColor(PickupESPColorHex);
+                        Pickup.SetIdentifier(Pickup_Identifier);
+                        Pickup.ChangeColor(Default_PickupESPColorHex);
                     }
                 }
             }
@@ -155,18 +151,11 @@ namespace AstroClient.Startup.Buttons
             var items = WorldUtils.GetPickups();
             foreach (var item in items)
             {
-                if (item != null)
-                {
-                    var ESP = item.GetComponent<ObjectESP>();
-                    if (ESP != null)
-                    {
-                        UnityEngine.Object.Destroy(ESP);
-                    }
-                }
+                item.DestroyESPByIdentifier(Pickup_Identifier);
             }
         }
 
-        #endregion
+        #endregion PickupESP
 
         #region TriggerESP
 
@@ -200,57 +189,58 @@ namespace AstroClient.Startup.Buttons
         private static void AddESPToTriggers()
         {
             var items = WorldUtils.GetTriggers();
-                foreach (var item in items)
+            foreach (var item in items)
+            {
+                if (item != null)
                 {
-                    if (item != null)
+                    var trigger = item.AddComponent<ObjectESP>();
+                    if (trigger != null)
                     {
-                          var trigger = item.AddComponent<ObjectESP>();
-                    if(trigger != null)
-                    {
-                        trigger.ChangeColor(TriggerESPColorHex);
+                        trigger.SetIdentifier(Trigger_Identifier);
+                        trigger.ChangeColor(Default_TriggerESPColorHex);
                     }
-                        //if (WorldUtils.GetWorldID() == WorldIds.SnoozeScaryMaze5)
-                        //{
-                        //    if (item.name == "The Doctor Watcher Activate")
-                        //    {
-                        //        ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
-                        //        continue;
-                        //    }
-                        //    if (item.name == "Teddy Watcher Activate")
-                        //    {
-                        //        ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
-                        //        continue;
-                        //    }
-                        //    if (item.name == "Kill Trigger For Maze Part 2")
-                        //    {
-                        //        ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
-                        //        continue;
-                        //    }
-                        //    if (item.name == "Kill Trigger For Maze")
-                        //    {
-                        //        ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
-                        //        continue;
-                        //    }
-                        //    if (item.transform.parent != null && item.transform.parent.gameObject != null)
-                        //    {
-                        //        if (item.transform.parent.gameObject.name == "Do Something Easter Egg")
-                        //        {
-                        //            if (item.name == "Area Trigger")
-                        //            {
-                        //                ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name + " With parent : " + item.transform.parent.gameObject.name);
-                        //                continue;
-                        //            }
-                        //        }
-                        //    }
+                    //if (WorldUtils.GetWorldID() == WorldIds.SnoozeScaryMaze5)
+                    //{
+                    //    if (item.name == "The Doctor Watcher Activate")
+                    //    {
+                    //        ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
+                    //        continue;
+                    //    }
+                    //    if (item.name == "Teddy Watcher Activate")
+                    //    {
+                    //        ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
+                    //        continue;
+                    //    }
+                    //    if (item.name == "Kill Trigger For Maze Part 2")
+                    //    {
+                    //        ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
+                    //        continue;
+                    //    }
+                    //    if (item.name == "Kill Trigger For Maze")
+                    //    {
+                    //        ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
+                    //        continue;
+                    //    }
+                    //    if (item.transform.parent != null && item.transform.parent.gameObject != null)
+                    //    {
+                    //        if (item.transform.parent.gameObject.name == "Do Something Easter Egg")
+                    //        {
+                    //            if (item.name == "Area Trigger")
+                    //            {
+                    //                ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name + " With parent : " + item.transform.parent.gameObject.name);
+                    //                continue;
+                    //            }
+                    //        }
+                    //    }
 
-                        //    item.AddComponent<ObjectESP>();
-                        //}
-                        //else
-                        //{
-                        //    item.AddComponent<ObjectESP>();
-                        //}
-                    }
+                    //    item.AddComponent<ObjectESP>();
+                    //}
+                    //else
+                    //{
+                    //    item.AddComponent<ObjectESP>();
+                    //}
                 }
+            }
         }
 
         private static void RemoveESPToTriggers()
@@ -258,20 +248,14 @@ namespace AstroClient.Startup.Buttons
             var items = WorldUtils.GetTriggers();
             foreach (var item in items)
             {
-                if (item != null)
-                {
-                    var ESP = item.GetComponent<ObjectESP>();
-                    if (ESP != null)
-                    {
-                        UnityEngine.Object.Destroy(ESP);
-                    }
-                }
+                item.DestroyESPByIdentifier(Trigger_Identifier);
             }
         }
 
-        #endregion
+        #endregion TriggerESP
 
         #region playerESP
+
         private static bool _EnabledPlayerESP;
 
         public static bool EnabledPlayerESP
@@ -299,14 +283,14 @@ namespace AstroClient.Startup.Buttons
             }
         }
 
-
         public override void OnPlayerJoined(Player player)
         {
             if (EnabledPlayerESP)
             {
                 if (player != null && player != LocalPlayerUtils.GetSelfPlayer())
                 {
-                    var esp = player.gameObject.AddComponent<PlayerESP>();                }
+                    player.gameObject.AddComponent<PlayerESP>();
+                }
             }
         }
 
@@ -316,9 +300,9 @@ namespace AstroClient.Startup.Buttons
             {
                 if (item != LocalPlayerUtils.GetSelfPlayer())
                 {
-                   if (item.gameObject.GetComponent<PlayerESP>() == null)
+                    if (item.gameObject.GetComponent<PlayerESP>() == null)
                     {
-                       var esp = item.gameObject.AddComponent<PlayerESP>();
+                        item.gameObject.AddComponent<PlayerESP>();
                     }
                 }
             }
@@ -328,7 +312,6 @@ namespace AstroClient.Startup.Buttons
         {
             foreach (var player in WorldUtils.GetAllPlayers0())
             {
-
                 var esp = player.gameObject.GetComponent<PlayerESP>();
                 if (esp != null)
                 {
@@ -337,11 +320,12 @@ namespace AstroClient.Startup.Buttons
             }
         }
 
-        #endregion
+        #endregion playerESP
 
         #region UdonBehaviourESP
 
         private static bool _EnabledUdonBehaviourESP;
+
         private static bool EnabledUdonBehaviourESP
         {
             get
@@ -377,7 +361,8 @@ namespace AstroClient.Startup.Buttons
                     var UdonBehaviour = item.AddComponent<ObjectESP>();
                     if (UdonBehaviour != null)
                     {
-                        UdonBehaviour.ChangeColor(UdonBehaviourESPColorHex);
+                        UdonBehaviour.SetIdentifier(UdonBehaviour_Identifier);
+                        UdonBehaviour.ChangeColor(Default_UdonBehaviourESPColorHex);
                     }
                 }
             }
@@ -388,19 +373,10 @@ namespace AstroClient.Startup.Buttons
             var items = WorldUtils.GetUdonBehaviours();
             foreach (var item in items)
             {
-                if (item != null)
-                {
-                    var ESP = item.GetComponent<ObjectESP>();
-                    if (ESP != null)
-                    {
-                        UnityEngine.Object.Destroy(ESP);
-                    }
-                }
+                item.DestroyESPByIdentifier(UdonBehaviour_Identifier);
             }
         }
 
-        #endregion
-
-
+        #endregion UdonBehaviourESP
     }
 }

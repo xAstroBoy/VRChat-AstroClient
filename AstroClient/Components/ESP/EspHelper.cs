@@ -5,6 +5,7 @@ namespace AstroClient.components
 {
     internal class EspHelper : GameEvents
     {
+
         public override void OnLevelLoaded()
         {
             foreach (var item in SpawnedESPsHolders)
