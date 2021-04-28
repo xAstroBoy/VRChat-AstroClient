@@ -66,8 +66,20 @@
             pingTimer.Enabled = true;
         }
 
+        private static void DoChecks()
+        {
+            foreach (Client client in Clients)
+            {
+                if (client == null)
+                {
+                    Console.WriteLine("Null client found!");
+                }
+            }
+        }
+
         private static void OnPingEvent(Object source, ElapsedEventArgs e)
         {
+            DoChecks();
             SendAll("ping");
         }
 

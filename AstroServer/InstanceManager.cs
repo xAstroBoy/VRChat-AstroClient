@@ -11,11 +11,19 @@ namespace AstroServer
         /// <param name="client"></param>
         public static void PlayerInfo(Client client)
         {
-            foreach (Client other in Server.Clients.Where(c => c.InstanceID.Equals(client.InstanceID)))
+            var clients = Server.Clients.Where((c => c.InstanceID.Equals(client.InstanceID)));
+
+            if (clients.Any())
             {
-                //client.Send($"add-tag:{client.UserID},AstroClient Developer");
-                client.Send($"debug:{other.UserID}");
-                Console.WriteLine($"IM,PI: {other.UserID}, {other.InstanceID}");
+                foreach (Client other in Server.Clients.Where(c => c.InstanceID.Equals(client.InstanceID)))
+                {
+                    if (other.IsDeveloper)
+                    {
+                        //client.Send($"debug:{other.UserID}");
+                        client.Send($"add-tag:{other.UserID},AstroClient Developer");
+                    }
+                    Console.WriteLine($"IM,PI: {other.UserID}, {other.InstanceID}");
+                }
             }
         }
     }
