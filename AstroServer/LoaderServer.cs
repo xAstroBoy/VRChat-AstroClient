@@ -8,16 +8,6 @@ using System.Net.Sockets;
 
 namespace AstroServer
 {
-    [Serializable]
-    internal class UserData // #TODO Make this work
-    {
-        public string Name = string.Empty;
-
-        public string Key = string.Empty;
-
-        public string Discord = string.Empty;
-    }
-
     internal class LoaderServer
     {
         private static readonly int maxConnections = 1000;
