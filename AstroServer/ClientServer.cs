@@ -13,7 +13,7 @@
 
     internal class ClientServer
     {
-        private static readonly int _maxConnections = 1000;
+        private static readonly int maxConnections = 1000;
 
         public static List<Client> Clients { get; private set; }
 
@@ -40,8 +40,8 @@
 
             SetPingTimer();
 
-            while (true)
-            {
+            //while (true)
+            //{
                 TcpClient clientSocket = serverSocket.AcceptTcpClient();
                 Client client = new Client
                 {
@@ -53,7 +53,7 @@
                 client.ReceivedText += OnReceivedText;
 
                 client.StartClient(clientSocket, GetNewClientID());
-            }
+            //}
         }
 
         private static void SetPingTimer()
@@ -234,7 +234,7 @@
             {
                 Clients.Remove(client);
             }
-            Console.WriteLine($"Client Disconnected: {client.ClientID} of {Clients.Count} / {_maxConnections}");
+            Console.WriteLine($"Client Disconnected: {client.ClientID} of {Clients.Count} / {maxConnections}");
         }
 
         internal static int GetNewClientID()
@@ -270,7 +270,7 @@
 
             Console.WriteLine($"Connecting from {client.ClientSocket.Client.RemoteEndPoint}");
 
-            if (Clients.Count < _maxConnections)
+            if (Clients.Count < maxConnections)
             {
                 if (!Clients.Contains(client))
                 {

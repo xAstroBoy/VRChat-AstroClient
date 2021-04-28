@@ -20,7 +20,7 @@ namespace AstroServer
 
     internal class LoaderServer
     {
-        private static readonly int _maxConnections = 1000;
+        private static readonly int maxConnections = 1000;
 
         internal static List<Client> Clients { get; private set; }
 
@@ -42,8 +42,8 @@ namespace AstroServer
 
             Clients = new List<Client>();
 
-            while (true)
-            {
+            //while (true)
+            //{
                 TcpClient clientSocket = serverSocket.AcceptTcpClient();
                 Client client = new Client
                 {
@@ -55,7 +55,7 @@ namespace AstroServer
                 client.ReceivedText += ReceivedText;
 
                 client.StartClient(clientSocket, GetNewClientID());
-            }
+            //}
         }
 
         private static void ProcessInput(object sender, string input)
@@ -115,7 +115,7 @@ namespace AstroServer
             {
                 Clients.Remove(client);
             }
-            Console.WriteLine($"Client Disconnected: {client.ClientID} of {Clients.Count} / {_maxConnections}");
+            Console.WriteLine($"Client Disconnected: {client.ClientID} of {Clients.Count} / {maxConnections}");
         }
 
         internal static int GetNewClientID()
@@ -150,7 +150,7 @@ namespace AstroServer
 
             CheckExistingClientsWithKey(client);
 
-            if (Clients.Count < _maxConnections)
+            if (Clients.Count < maxConnections)
             {
                 if (!Clients.Contains(client))
                 {

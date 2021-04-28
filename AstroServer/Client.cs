@@ -18,6 +18,8 @@
 
         public bool IsDeveloper;
 
+        public bool IsReady;
+
         internal Client()
         {
             Name = "N/A";
@@ -27,6 +29,7 @@
             DiscordID = 0;
             IsAuthed = false;
             IsDeveloper = false;
+            IsReady = false;
         }
     }
 }
