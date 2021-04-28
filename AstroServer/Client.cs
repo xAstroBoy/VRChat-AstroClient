@@ -1,6 +1,7 @@
 ﻿namespace AstroServer
 {
     using AstroLibrary.Networking;
+    using AstroServer.Serializable;
 
     public class Client : HandleClient
     {
@@ -19,6 +20,8 @@
         public bool IsDeveloper;
 
         public bool IsReady;
+
+        public AccountData Data;
 
         internal Client()
         {
