@@ -13,7 +13,7 @@
     {
         public static ServiceProvider Services { get; private set; }
 
-        internal static Server Server1;
+        internal static ClientServer Server1;
 
         public static async Task Main()
         {
@@ -40,7 +40,7 @@
             await Services.GetRequiredService<CommandHandlingService>().InitializeAsync();
 
             Console.WriteLine("Starting Client Server..");
-            Server1 = new Server();
+            Server1 = new ClientServer();
         }
     }
 }

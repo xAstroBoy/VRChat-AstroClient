@@ -11,7 +11,7 @@
     using System.Net.Sockets;
     using System.Timers;
 
-    internal class Server
+    internal class ClientServer
     {
         private static readonly int _maxConnections = 1000;
 
@@ -19,9 +19,9 @@
 
         private static Timer pingTimer;
 
-        public Server()
+        public ClientServer()
         {
-            Console.WriteLine("Starting Server");
+            Console.WriteLine("Starting Client Server..");
             StartServer();
         }
 

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 
-namespace AstroLoaderServer
+namespace AstroServer
 {
     [Serializable]
     internal class UserData // #TODO Make this work
@@ -18,15 +18,15 @@ namespace AstroLoaderServer
         public string Discord = string.Empty;
     }
 
-    internal class Server
+    internal class LoaderServer
     {
         private static readonly int _maxConnections = 1000;
 
         internal static List<Client> Clients { get; private set; }
 
-        internal Server()
+        internal LoaderServer()
         {
-            Console.WriteLine("Starting Server");
+            Console.WriteLine("Starting Loader Server..");
             StartServer();
         }
 

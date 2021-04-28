@@ -63,7 +63,7 @@
         [Summary("Notify command")]
         public async Task Notify([Required] string name, [Required] string msg)
         {
-            var found = Server.Clients.Where(c => c.Name.Contains(name));
+            var found = ClientServer.Clients.Where(c => c.Name.Contains(name));
 
             StringBuilder stringBuilder = new StringBuilder();
             foreach (var client in found)
@@ -79,7 +79,7 @@
         [Summary("SendAll command")]
         public async Task SendAll([Required] string cmd)
         {
-            var found = Server.Clients;
+            var found = ClientServer.Clients;
 
             StringBuilder stringBuilder = new StringBuilder();
             foreach (var client in found)
@@ -95,7 +95,7 @@
         [Summary("Send command")]
         public async Task Send([Required] string name, [Required] string cmd)
         {
-            var found = Server.Clients.Where(c => c.Name.Contains(name));
+            var found = ClientServer.Clients.Where(c => c.Name.Contains(name));
 
             StringBuilder stringBuilder = new StringBuilder();
             foreach (var client in found)
@@ -110,7 +110,7 @@
         [Summary("Kick command")]
         public async Task Kick([Required] string name)
         {
-            var found = Server.Clients.Where(c => c.Name.Contains(name));
+            var found = ClientServer.Clients.Where(c => c.Name.Contains(name));
 
             StringBuilder stringBuilder = new StringBuilder();
             foreach (var client in found)
@@ -126,11 +126,11 @@
         [Summary("List command")]
         public async Task List()
         {
-            if (Server.Clients.Count > 0)
+            if (ClientServer.Clients.Count > 0)
             {
                 //stringBuilder.Append($"Client Count: {Server.Clients.Count} \r\n");
 
-                foreach (var client in Server.Clients)
+                foreach (var client in ClientServer.Clients)
                 {
                     await ReplyAsync(null, false, CustomEmbed.GetClientEmbed(client));
                 }
