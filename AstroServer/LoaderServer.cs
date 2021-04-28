@@ -32,20 +32,17 @@ namespace AstroServer
 
             Clients = new List<Client>();
 
-            //while (true)
-            //{
-                TcpClient clientSocket = serverSocket.AcceptTcpClient();
-                Client client = new Client
-                {
-                    IsClient = false
-                };
+            TcpClient clientSocket = serverSocket.AcceptTcpClient();
+            Client client = new Client
+            {
+                IsClient = false
+            };
 
-                client.Connected += Connected;
-                client.Disconnected += Disconnected;
-                client.ReceivedText += ReceivedText;
+            client.Connected += Connected;
+            client.Disconnected += Disconnected;
+            client.ReceivedText += ReceivedText;
 
-                client.StartClient(clientSocket, GetNewClientID());
-            //}
+            client.StartClient(clientSocket, GetNewClientID());
         }
 
         private static void ProcessInput(object sender, string input)

@@ -27,8 +27,7 @@
 
         private static void StartServer()
         {
-            //TcpListener serverSocket = new TcpListener(new IPEndPoint(IPAddress.Any, 42069));
-            TcpListener serverSocket = new TcpListener(new IPEndPoint(IPAddress.Any, 42169));
+            TcpListener serverSocket = new TcpListener(new IPEndPoint(IPAddress.Any, 42069));
             serverSocket.Start();
             Console.WriteLine("Client Server Started..");
 
@@ -40,20 +39,17 @@
 
             SetPingTimer();
 
-            //while (true)
-            //{
-                TcpClient clientSocket = serverSocket.AcceptTcpClient();
-                Client client = new Client
-                {
-                    IsClient = true
-                };
+            TcpClient clientSocket = serverSocket.AcceptTcpClient();
+            Client client = new Client
+            {
+                IsClient = true
+            };
 
-                client.Connected += OnConnected;
-                client.Disconnected += OnDisconnected;
-                client.ReceivedText += OnReceivedText;
+            client.Connected += OnConnected;
+            client.Disconnected += OnDisconnected;
+            client.ReceivedText += OnReceivedText;
 
-                client.StartClient(clientSocket, GetNewClientID());
-            //}
+            client.StartClient(clientSocket, GetNewClientID());
         }
 
         private static void SetPingTimer()
@@ -77,7 +73,7 @@
             }
         }
 
-        private static void OnPingEvent(Object source, ElapsedEventArgs e)
+        private static void OnPingEvent(object source, ElapsedEventArgs e)
         {
             DoChecks();
             SendAll("ping");
