@@ -17,6 +17,8 @@
 
         public static async Task Main()
         {
+            Console.WriteLine("Welcome to AstroServer!");
+            await Database.Initialize();
             Console.WriteLine("Starting Discord bot..");
             Services = new ServiceCollection()
                 .AddSingleton<DiscordSocketClient>()

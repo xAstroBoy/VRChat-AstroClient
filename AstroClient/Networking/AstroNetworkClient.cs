@@ -49,21 +49,22 @@ namespace AstroClient
         private static void Connect()
         {
             Client = null;
-            //TcpClient tcpClient = new TcpClient("craig.se", 42069);
+            TcpClient tcpClient = new TcpClient("craig.se", 42069);
 
-            TcpClient tcpClient = new TcpClient();
+            //TcpClient tcpClient = new TcpClient();
             //var result = tcpClient.BeginConnect("craig.se", 42069, null, null);
-            var result = tcpClient.BeginConnect("craig.se", 42169, null, null);
-            var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(1));
 
-            if (!success)
-            {
-                ModConsole.Error("Failed to connect..");
-                return;
-                //throw new Exception("Failed to connect.");
-            }
+            //var result = tcpClient.BeginConnect("craig.se", 42169, null, null);
+            //var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(1));
 
-            tcpClient.EndConnect(result);
+            //if (!success)
+            //{
+            //    ModConsole.Error("Failed to connect..");
+            //    return;
+            //    //throw new Exception("Failed to connect.");
+            //}
+
+            //tcpClient.EndConnect(result);
 
             Client = new HandleClient
             {
