@@ -8,7 +8,7 @@
 	{
 		public static byte[] AssemblyFile;
 
-#if DEBUG
+#if OFFLINE
 		public static string[] DebugMelonPaths =
 		{
 			@"Debug\AstroClient.dll",
@@ -23,7 +23,7 @@
 
 		public AstroLoader()
 		{
-#if DEBUG
+#if OFFLINE
 			LoadDebug();
 			return;
 #endif
@@ -57,7 +57,7 @@
 			//}
 		}
 
-#if DEBUG
+#if OFFLINE
 		public void LoadDebug()
 		{
 			Console.WriteLine("Loader is in debug mode.");
