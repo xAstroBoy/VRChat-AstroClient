@@ -1,5 +1,6 @@
 ﻿namespace AstroServer.DiscordBot.Commands
 {
+    using AstroServer.DiscordBot.Attributes;
     using Discord.Commands;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;

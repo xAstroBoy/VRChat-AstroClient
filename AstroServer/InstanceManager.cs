@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
-
-namespace AstroServer
+﻿namespace AstroServer
 {
+    using System;
+    using System.Linq;
+
     public static class InstanceManager
     {
         /// <summary>

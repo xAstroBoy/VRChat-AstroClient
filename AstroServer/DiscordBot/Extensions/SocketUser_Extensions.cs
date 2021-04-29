@@ -1,4 +1,4 @@
-﻿namespace AstroServer.DiscordBot
+﻿namespace AstroServer.DiscordBot.Extensions
 {
     using Discord.WebSocket;
     using System;

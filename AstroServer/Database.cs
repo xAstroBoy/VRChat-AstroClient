@@ -1,12 +1,12 @@
 ﻿namespace AstroServer
 {
+    using MongoDB.Driver;
+    using MongoDB.Entities;
     using System;
     using System.IO;
     using System.Threading.Tasks;
-    using MongoDB.Driver;
-    using MongoDB.Entities;
 
-    class Database
+    internal class Database
     {
         public async static Task Initialize()
         {
