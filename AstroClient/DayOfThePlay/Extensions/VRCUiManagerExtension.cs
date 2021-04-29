@@ -1,19 +1,19 @@
-﻿using AstroClient.ConsoleUtils;
-using MelonLoader;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Reflection;
-using UnhollowerRuntimeLib.XrefScans;
-using UnityEngine;
-using VRC.Core;
-using VRC.UI;
-
-namespace DayClientML2.Utility.Extensions
+﻿namespace DayClientML2.Utility.Extensions
 {
+	using AstroClient.ConsoleUtils;
+	using MelonLoader;
+	using Newtonsoft.Json;
+	using Newtonsoft.Json.Linq;
+	using System;
+	using System.IO;
+	using System.Linq;
+	using System.Net;
+	using System.Reflection;
+	using UnhollowerRuntimeLib.XrefScans;
+	using UnityEngine;
+	using VRC.Core;
+	using VRC.UI;
+
 	public static class VRCUiManagerExtension
 	{
 		public static APIUser SelectedAPIUser(this VRCUiManager Instance)

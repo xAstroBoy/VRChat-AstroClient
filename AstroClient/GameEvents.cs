@@ -1,11 +1,11 @@
-﻿using AstroClient.Startup.Hooks;
-using System;
-using UnityEngine;
-using VRC;
-using VRC.SDKBase;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.Startup.Hooks;
+	using System;
+	using UnityEngine;
+	using VRC;
+	using VRC.SDKBase;
+
 	// thanks TO Cheeto aka Craig on discord, he's been really helpful!
 	public class GameEvents
 	{

@@ -1,9 +1,9 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace DayClientML2.Utility.MenuApi
+﻿namespace DayClientML2.Utility.MenuApi
 {
+	using System;
+	using UnityEngine;
+	using UnityEngine.UI;
+
 	public class MenuArrow
 	{
 		public MenuArrow(Transform parent, float PosX, float PosY, Action act, bool prev)

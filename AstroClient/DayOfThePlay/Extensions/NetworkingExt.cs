@@ -1,10 +1,10 @@
-﻿using ExitGames.Client.Photon;
-using Photon.Pun;
-using UnityEngine;
-using VRC.SDKBase;
-
-namespace DayClientML2.Utility.Extensions
+﻿namespace DayClientML2.Utility.Extensions
 {
+	using ExitGames.Client.Photon;
+	using Photon.Pun;
+	using UnityEngine;
+	using VRC.SDKBase;
+
 	internal class NetworkingExt
 	{
 		public static void RPC(RPC.Destination targetClients, GameObject targetObject, string methodname, object[] parameters)

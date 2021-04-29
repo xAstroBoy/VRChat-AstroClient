@@ -1,18 +1,13 @@
-﻿using System.Linq;
-using UnityEngine;
-using VRC.Udon;
-
-#region AstroClient Imports
-
-using AstroClient.components;
-using static AstroClient.ObjectMiscOptions;
-using AstroClient.ConsoleUtils;
-using static AstroClient.variables.CustomLists;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using System.Linq;
+	using UnityEngine;
+	using VRC.Udon;
+	using AstroClient.components;
+	using static AstroClient.ObjectMiscOptions;
+	using AstroClient.ConsoleUtils;
+	using static AstroClient.variables.CustomLists;
+
 	internal class ScaleEditor : GameEvents
 	{
 		private static float ModifiedVectorX()

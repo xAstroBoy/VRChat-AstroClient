@@ -1,12 +1,12 @@
-﻿using AstroClient.variables;
-using RubyButtonAPI;
-using System;
-using System.Diagnostics;
-using System.IO;
-using UnityEngine;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.variables;
+	using RubyButtonAPI;
+	using System;
+	using System.Diagnostics;
+	using System.IO;
+	using UnityEngine;
+
 	/// <summary>
 	/// Cheeto's temporary UI for new/wip features
 	/// </summary>

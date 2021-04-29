@@ -1,12 +1,12 @@
-﻿using UnhollowerRuntimeLib;
-using UnityEngine;
-using UnityEngine.XR;
-using VRC;
-using VRC.SDKBase;
-using VRC.UserCamera;
-
-namespace DayClientML2.Utility.Extensions
+﻿namespace DayClientML2.Utility.Extensions
 {
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
+	using UnityEngine.XR;
+	using VRC;
+	using VRC.SDKBase;
+	using VRC.UserCamera;
+
 	public static class Utils
 	{
 		public static VRCUiCursorManager VRCUiCursorManager

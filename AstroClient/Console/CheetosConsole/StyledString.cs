@@ -1,8 +1,8 @@
-﻿using System;
-using System.Drawing;
-
-namespace CheetosConsole
+﻿namespace CheetosConsole
 {
+	using System;
+	using System.Drawing;
+
 	// NOTE: The StyledString class is meant to replace a number of instances of System.String in this project.
 	//       However, it's currently only used in the WriteLineStyled method, becuase I'd like to have better
 	//       test coverage before using it in the rest of the project.

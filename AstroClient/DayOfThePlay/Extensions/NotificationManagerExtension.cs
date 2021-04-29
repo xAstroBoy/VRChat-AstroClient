@@ -1,11 +1,11 @@
-﻿using AstroClient.ConsoleUtils;
-using Transmtn.DTO;
-using Transmtn.DTO.Notifications;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace DayClientML2.Utility.Extensions
+﻿namespace DayClientML2.Utility.Extensions
 {
+	using AstroClient.ConsoleUtils;
+	using Transmtn.DTO;
+	using Transmtn.DTO.Notifications;
+	using UnityEngine;
+	using UnityEngine.UI;
+
 	public static class NotificationManagerExtension
 	{
 		public static void SendNotification(this NotificationManager Instance, string UserID, string Type, string IDKISEMPTY, NotificationDetails notificationDetails)

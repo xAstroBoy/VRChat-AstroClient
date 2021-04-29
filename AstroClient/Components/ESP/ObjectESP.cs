@@ -1,14 +1,14 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnhollowerBaseLib.Attributes;
-using UnityEngine;
-using Object = UnityEngine.Object;
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnhollowerBaseLib.Attributes;
+	using UnityEngine;
+	using Object = UnityEngine.Object;
+
 	public class ObjectESP : GameEventsBehaviour
 	{
 		public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;

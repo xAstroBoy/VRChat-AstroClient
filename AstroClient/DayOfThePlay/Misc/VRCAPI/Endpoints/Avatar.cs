@@ -1,10 +1,10 @@
-﻿using AstroClient.ConsoleUtils;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-
-namespace DayBots.VRCAPI.Endpoints
+﻿namespace DayBots.VRCAPI.Endpoints
 {
+	using AstroClient.ConsoleUtils;
+	using Newtonsoft.Json;
+	using System.Collections.Generic;
+	using System.Threading.Tasks;
+
 	internal class AvatarEndpoint
 	{
 		public Variables Variables { get; set; }

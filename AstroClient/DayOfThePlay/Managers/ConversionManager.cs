@@ -1,8 +1,8 @@
-﻿using System.Globalization;
-using UnityEngine;
-
-namespace DayClientML2.Managers
+﻿namespace DayClientML2.Managers
 {
+	using System.Globalization;
+	using UnityEngine;
+
 	public static class ConversionManager
 	{   // Converting ColorManager.cs colors R G B values out of 1 to hex for PlayerList.cs
 		public static string ConvertRGBtoHEX(float r, float g, float b)

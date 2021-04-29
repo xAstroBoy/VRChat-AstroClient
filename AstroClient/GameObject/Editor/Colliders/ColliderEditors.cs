@@ -1,14 +1,9 @@
-﻿using System.Linq;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using static AstroClient.variables.CustomLists;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using System.Linq;
+	using UnityEngine;
+	using static AstroClient.variables.CustomLists;
+
 	public class ColliderEditors
 	{
 		public static bool HasAlreadyAColliderAdded(GameObject obj)

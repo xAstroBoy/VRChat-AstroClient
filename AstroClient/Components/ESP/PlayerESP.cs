@@ -1,17 +1,17 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.Startup.Buttons;
-using DayClientML2.Utility.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnhollowerBaseLib.Attributes;
-using UnityEngine;
-using VRC;
-using Object = UnityEngine.Object;
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.Startup.Buttons;
+	using DayClientML2.Utility.Extensions;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnhollowerBaseLib.Attributes;
+	using UnityEngine;
+	using VRC;
+	using Object = UnityEngine.Object;
+
 	public class PlayerESP : GameEventsBehaviour
 	{
 		public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;

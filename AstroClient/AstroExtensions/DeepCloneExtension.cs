@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using AstroClient.ConsoleUtils;
-using System.Reflection;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using AstroClient.ConsoleUtils;
+	using System.Reflection;
+
 	public static class DeepCloneExtension
 	{
 		private static bool GetCopyOfDebugMode = false;

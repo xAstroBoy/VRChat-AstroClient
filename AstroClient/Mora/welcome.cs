@@ -1,8 +1,8 @@
-﻿using AstroClient.Cheetos;
-using DayClientML2.Utility.Extensions;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.Cheetos;
+	using DayClientML2.Utility.Extensions;
+
 	internal class Welcome : GameEvents
 	{
 		internal static bool booleanhere = false;

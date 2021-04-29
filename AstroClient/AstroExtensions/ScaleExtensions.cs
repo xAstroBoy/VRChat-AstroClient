@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using UnityEngine;
+
 	public static class ScaleExtensions
 	{
 		public static void IncreaseHoldItemScale(this GameObject obj)

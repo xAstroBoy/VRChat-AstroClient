@@ -1,11 +1,11 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.variables;
-using AstroNetworkingLibrary.Serializable;
-using DayClientML2.Utility.Extensions;
-using Newtonsoft.Json;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.variables;
+	using AstroNetworkingLibrary.Serializable;
+	using DayClientML2.Utility.Extensions;
+	using Newtonsoft.Json;
+
 	public class NetworkingManager : GameEvents
 	{
 		/// <summary>

@@ -1,12 +1,12 @@
-﻿using AstroClient.ConsoleUtils;
-using MelonLoader;
-using System;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using UnhollowerBaseLib;
-
-namespace AstroClient.Startup.Hooks
+﻿namespace AstroClient.Startup.Hooks
 {
+	using AstroClient.ConsoleUtils;
+	using MelonLoader;
+	using System;
+	using System.Reflection;
+	using System.Runtime.InteropServices;
+	using UnhollowerBaseLib;
+
 	public class OnWorldRevealHook : GameEvents
 	{
 		public static event EventHandler<OnWorldRevealArgs> Event_OnWorldReveal;

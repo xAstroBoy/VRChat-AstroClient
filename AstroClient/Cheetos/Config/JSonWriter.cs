@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System.IO;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using Newtonsoft.Json;
+	using System.IO;
+
 	public static class JSonWriter
 	{
 		/// <summary>

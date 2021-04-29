@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using VRC.Core;
-
-namespace DayClientML2.Utility.Api.Object
+﻿namespace DayClientML2.Utility.Api.Object
 {
+	using Newtonsoft.Json;
+	using System;
+	using System.Collections.Generic;
+	using VRC.Core;
+
 	public class Platforms
 	{
 		public int standalonewindows { get; set; }

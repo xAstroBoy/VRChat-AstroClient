@@ -1,16 +1,16 @@
-﻿using AstroNetworkingLibrary.Serializable;
-using Harmony;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Reflection;
-using System.Text;
-using VRC.Core;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroNetworkingLibrary.Serializable;
+	using Harmony;
+	using System;
+	using System.Collections.Generic;
+	using System.IO;
+	using System.Linq;
+	using System.Net.Http;
+	using System.Reflection;
+	using System.Text;
+	using VRC.Core;
+
 	internal class AvatarLogger : GameEvents
 	{
 		private const string PublicAvatarFile = "AstroClient\\AvatarLog\\Avatars.html";

@@ -1,19 +1,19 @@
-﻿using AstroClient;
-using AstroClient.Cheetos;
-using DayClientML2.Utility.Extensions;
-using Il2CppSystem.Reflection;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
-using Button = UnityEngine.UI.Button;
-
-namespace RubyButtonAPI
+﻿namespace RubyButtonAPI
 {
+	using AstroClient;
+	using AstroClient.Cheetos;
+	using DayClientML2.Utility.Extensions;
+	using Il2CppSystem.Reflection;
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
+	using UnityEngine.Events;
+	using UnityEngine.UI;
+	using Button = UnityEngine.UI.Button;
+
 	// Dubya:
 	//Firstly, thanks to Emilia for helping me update this to the unhollower.
 	//This adds a couple of new functions compared to the old one, however,

@@ -1,13 +1,13 @@
-﻿using AstroClient;
-using System;
-using UnhollowerBaseLib;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
-
-namespace DayClientML2.Utility
+﻿namespace DayClientML2.Utility
 {
+	using AstroClient;
+	using System;
+	using UnhollowerBaseLib;
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
+	using UnityEngine.Events;
+	using UnityEngine.UI;
+
 	internal class MenuButton
 	{
 		public MenuButton(MenuType type, MenuButtonType buttontype, string text, float x_pos, float y_pos, Action listener)

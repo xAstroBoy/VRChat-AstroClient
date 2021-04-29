@@ -1,10 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-
-namespace DayBots.VRCAPI.Endpoints
+﻿namespace DayBots.VRCAPI.Endpoints
 {
+	using System;
+	using System.Linq;
+	using System.Net;
+	using System.Threading.Tasks;
+
 	public class AuthEndpoint
 	{
 		public string Username { get; set; }

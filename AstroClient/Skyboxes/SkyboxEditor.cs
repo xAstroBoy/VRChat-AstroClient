@@ -1,16 +1,16 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using RubyButtonAPI;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-
-namespace AstroClient.Skyboxes
+﻿namespace AstroClient.Skyboxes
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using RubyButtonAPI;
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.IO;
+	using System.Linq;
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
+
 	public class SkyboxEditor : GameEvents
 	{
 		public static string SkyboxesPath

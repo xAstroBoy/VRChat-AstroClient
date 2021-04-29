@@ -1,16 +1,16 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.Finder;
-using AstroClient.Variables;
-using AstroClient.World.Hub;
-using RubyButtonAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
-namespace AstroClient.Worlds
+﻿namespace AstroClient.Worlds
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.Finder;
+	using AstroClient.Variables;
+	using AstroClient.World.Hub;
+	using RubyButtonAPI;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+
 	public class WorldsCheats : GameEvents
 	{
 		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)

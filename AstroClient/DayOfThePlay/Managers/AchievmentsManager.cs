@@ -1,12 +1,12 @@
-﻿using AstroClient.ConsoleUtils;
-using DayClientML2.Managers;
-using DayClientML2.Utility.Extensions;
-using Newtonsoft.Json;
-using System.IO;
-using VRC.Core;
-
-namespace DayClientML2.Utility.Managers
+﻿namespace DayClientML2.Utility.Managers
 {
+	using AstroClient.ConsoleUtils;
+	using DayClientML2.Managers;
+	using DayClientML2.Utility.Extensions;
+	using Newtonsoft.Json;
+	using System.IO;
+	using VRC.Core;
+
 	internal class Achievments_Managers
 	{
 		public static void Init()

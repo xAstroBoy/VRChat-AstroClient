@@ -1,16 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+
 	public class QVPensUtils : GameEvents
 	{
 		public override void OnWorldReveal(string id, string name, string asseturl)

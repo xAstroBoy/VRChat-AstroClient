@@ -1,8 +1,8 @@
-﻿using System;
-using UnityEngine;
-
-namespace DayClientML2.Utility.ColorUtility
+﻿namespace DayClientML2.Utility.ColorUtility
 {
+	using System;
+	using UnityEngine;
+
 	[Serializable]
 	public struct HSBColor
 	{

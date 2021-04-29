@@ -1,11 +1,11 @@
-﻿using AstroClient.ConsoleUtils;
-using System.Linq;
-using UnityEngine;
-using VRC.Udon;
-using static AstroClient.variables.CustomLists;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using System.Linq;
+	using UnityEngine;
+	using VRC.Udon;
+	using static AstroClient.variables.CustomLists;
+
 	public static class UdonSearch
 	{
 		public static CachedUdonEvent FindUdonEvent(string action, string subaction)

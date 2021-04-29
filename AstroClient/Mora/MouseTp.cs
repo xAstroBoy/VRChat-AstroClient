@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using UnityEngine;
+
 	internal class MouseTp : GameEvents
 	{
 		public override void OnUpdate()

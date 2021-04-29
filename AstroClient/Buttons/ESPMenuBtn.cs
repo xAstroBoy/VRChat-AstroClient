@@ -1,11 +1,11 @@
-﻿using AstroClient.components;
-using AstroClient.extensions;
-using RubyButtonAPI;
-using System;
-using VRC;
-
-namespace AstroClient.Startup.Buttons
+﻿namespace AstroClient.Startup.Buttons
 {
+	using AstroClient.components;
+	using AstroClient.extensions;
+	using RubyButtonAPI;
+	using System;
+	using VRC;
+
 	internal class ESPMenuBtn : GameEvents
 	{
 		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)

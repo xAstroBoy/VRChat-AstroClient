@@ -1,9 +1,9 @@
-﻿using System.Linq;
-using UnityEngine;
-using static AstroClient.variables.CustomLists;
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using System.Linq;
+	using UnityEngine;
+	using static AstroClient.variables.CustomLists;
+
 	public static class CustomListExtensions
 	{
 		public static void RemoveObjFromCustomLists(this GameObject obj)

@@ -1,17 +1,12 @@
-﻿using UnityEngine;
-
-#region AstroClient Imports
-
-using static AstroClient.variables.GlobalLists;
-using AstroClient.ConsoleUtils;
-using AstroClient.AstroUtils.ItemTweaker;
-using AstroClient.extensions;
-using AstroClient.ItemTweaker;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.Cloner
+﻿namespace AstroClient.Cloner
 {
+	using UnityEngine;
+	using static AstroClient.variables.GlobalLists;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.AstroUtils.ItemTweaker;
+	using AstroClient.extensions;
+	using AstroClient.ItemTweaker;
+
 	public class ObjectCloner : GameEvents
 	{
 		public override void OnLevelLoaded()

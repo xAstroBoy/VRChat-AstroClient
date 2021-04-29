@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using System.Collections.Generic;
+	using UnityEngine;
+
 	public static class PositionExtensions
 	{
 		public static void TeleportToTarget(this List<GameObject> list)

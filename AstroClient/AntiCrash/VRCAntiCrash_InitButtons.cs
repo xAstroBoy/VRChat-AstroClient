@@ -1,8 +1,8 @@
-﻿using RubyButtonAPI;
-using UnityEngine;
-
-namespace AstroClient.AntiCrash
+﻿namespace AstroClient.AntiCrash
 {
+	using RubyButtonAPI;
+	using UnityEngine;
+
 	/// <summary>
 	/// I don't recommend calling it VRCAC.
 	/// As I'm not going to be straight up ripping the code.

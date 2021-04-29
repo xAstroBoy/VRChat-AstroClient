@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-
-namespace CheetosConsole
+﻿namespace CheetosConsole
 {
+	using System;
+	using System.Collections.Generic;
+	using System.IO;
+	using System.Linq;
+	using System.Reflection;
+
 	public class FigletFont
 	{
 		public static FigletFont Default => Parse(DefaultFonts.SmallSlant);

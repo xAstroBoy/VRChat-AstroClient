@@ -1,23 +1,23 @@
-﻿using AstroClient.Cheetos;
-using AstroClient.components;
-using AstroClient.Components;
-using AstroClient.ConsoleUtils;
-using AstroClient.variables;
-using AstroNetworkingLibrary;
-using DayClientML2.Utility;
-using DayClientML2.Utility.Extensions;
-using System;
-using System.Net.Sockets;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Timers;
-using UnityEngine;
-using VRC;
-using Console = System.Console;
-using Timer = System.Timers.Timer;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.Cheetos;
+	using AstroClient.components;
+	using AstroClient.Components;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.variables;
+	using AstroNetworkingLibrary;
+	using DayClientML2.Utility;
+	using DayClientML2.Utility.Extensions;
+	using System;
+	using System.Net.Sockets;
+	using System.Threading;
+	using System.Threading.Tasks;
+	using System.Timers;
+	using UnityEngine;
+	using VRC;
+	using Console = System.Console;
+	using Timer = System.Timers.Timer;
+
 	internal class AstroNetworkClient
 	{
 		internal static HandleClient Client;

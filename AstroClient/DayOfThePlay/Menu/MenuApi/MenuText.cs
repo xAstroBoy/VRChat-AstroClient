@@ -1,10 +1,10 @@
-﻿using DayClientML2.Utility.Extensions;
-using RubyButtonAPI;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace DayClientML2.Utility
+﻿namespace DayClientML2.Utility
 {
+	using DayClientML2.Utility.Extensions;
+	using RubyButtonAPI;
+	using UnityEngine;
+	using UnityEngine.UI;
+
 	public class MenuText
 	{
 		public MenuText(QMNestedButton menuBase, float posx, float poxy, string text)

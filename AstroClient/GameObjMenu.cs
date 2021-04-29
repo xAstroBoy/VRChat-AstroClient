@@ -1,18 +1,18 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.ItemTweaker;
-using RubyButtonAPI;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using VRC;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.ItemTweaker;
+	using RubyButtonAPI;
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using UnityEngine.SceneManagement;
+	using UnityEngine.UI;
+	using VRC;
+
 	public class GameObjMenu : GameEvents
 	{
 		public override void OnLevelLoaded()

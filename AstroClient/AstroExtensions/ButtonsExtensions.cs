@@ -1,15 +1,10 @@
-﻿using UnityEngine;
-
-#region AstroClient Imports
-
-using RubyButtonAPI;
-using UnityEngine.UI;
-using DayClientML2.Utility.Extensions;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using UnityEngine;
+	using RubyButtonAPI;
+	using UnityEngine.UI;
+	using DayClientML2.Utility.Extensions;
+
 	public static class ButtonsExtensions
 	{
 		public static void SetButtonToArrow(this QMSingleButton button)

@@ -1,14 +1,14 @@
-﻿using MelonLoader;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using UnhollowerRuntimeLib.XrefScans;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace DayClientML2.Utility.Extensions
+﻿namespace DayClientML2.Utility.Extensions
 {
+	using MelonLoader;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Reflection;
+	using UnhollowerRuntimeLib.XrefScans;
+	using UnityEngine;
+	using UnityEngine.UI;
+
 	public static class PopupManager
 	{
 		public static void Alert(this VRCUiPopupManager instance, string title, string Content, string buttonname, Action onSucces, Action<VRCUiPopup> onPopupShown = null)

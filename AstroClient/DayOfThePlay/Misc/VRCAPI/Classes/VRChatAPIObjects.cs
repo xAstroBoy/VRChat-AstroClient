@@ -1,10 +1,10 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-
-namespace DayBots.VRCAPI.Classes
+﻿namespace DayBots.VRCAPI.Classes
 {
+	using Newtonsoft.Json;
+	using Newtonsoft.Json.Linq;
+	using System;
+	using System.Collections.Generic;
+
 	public class Platforms
 	{
 		public int standalonewindows { get; set; }

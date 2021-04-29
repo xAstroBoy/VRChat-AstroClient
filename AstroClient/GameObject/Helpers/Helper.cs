@@ -1,14 +1,9 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using AstroClient.ConsoleUtils;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using System.Collections.Generic;
+	using UnityEngine;
+	using AstroClient.ConsoleUtils;
+
 	public class GameObjHelper
 	{
 		public static List<GameObject> _GameObjects;

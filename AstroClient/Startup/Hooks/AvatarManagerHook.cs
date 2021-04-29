@@ -1,11 +1,11 @@
-﻿using AstroClient.ConsoleUtils;
-using Harmony;
-using System;
-using System.Reflection;
-using UnityEngine;
-
-namespace AstroClient.Startup.Hooks
+﻿namespace AstroClient.Startup.Hooks
 {
+	using AstroClient.ConsoleUtils;
+	using Harmony;
+	using System;
+	using System.Reflection;
+	using UnityEngine;
+
 	public class AvatarManagerHook : GameEvents
 	{
 		private HarmonyInstance harmony;

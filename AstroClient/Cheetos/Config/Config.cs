@@ -1,8 +1,8 @@
-﻿using System;
-using System.Reflection;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using System;
+	using System.Reflection;
+
 	[Serializable, Obfuscation]
 	public class ConfigUI
 	{

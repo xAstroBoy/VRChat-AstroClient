@@ -1,8 +1,8 @@
-﻿using DayClientML2.Utility.Extensions;
-using UnityEngine;
-
-namespace DayClientML2.Utility
+﻿namespace DayClientML2.Utility
 {
+	using DayClientML2.Utility.Extensions;
+	using UnityEngine;
+
 	internal class VRChatObjects
 	{
 		#region Pages

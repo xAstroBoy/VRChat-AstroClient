@@ -1,13 +1,13 @@
-﻿using AstroClient.variables;
-using System;
-using System.Drawing;
-using System.IO;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
-using Console = CheetosConsole.Console;
-
-namespace AstroClient.ConsoleUtils
+﻿namespace AstroClient.ConsoleUtils
 {
+	using AstroClient.variables;
+	using System;
+	using System.Drawing;
+	using System.IO;
+	using System.Runtime.CompilerServices;
+	using System.Threading.Tasks;
+	using Console = CheetosConsole.Console;
+
 	public class ModConsole
 	{
 		private static bool HasRenamedOldLogFile = false;

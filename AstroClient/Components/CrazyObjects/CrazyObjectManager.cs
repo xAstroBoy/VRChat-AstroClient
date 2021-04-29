@@ -1,20 +1,15 @@
-﻿using AstroClient.ConsoleUtils;
-using RubyButtonAPI;
-using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-using Color = System.Drawing.Color;
-
-#region AstroClient Imports
-
-using static AstroClient.variables.InstanceBuilder;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using AstroClient.ConsoleUtils;
+	using RubyButtonAPI;
+	using System;
+	using System.Collections.Generic;
+	using System.Runtime.InteropServices;
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
+	using Color = System.Drawing.Color;
+	using static AstroClient.variables.InstanceBuilder;
+
 	public class CrazyObjectManager : GameEventsBehaviour
 	{
 		#region Internal

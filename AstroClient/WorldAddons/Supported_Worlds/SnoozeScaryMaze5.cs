@@ -1,11 +1,11 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.Finder;
-using AstroClient.Variables;
-using VRC.SDKBase;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.Finder;
+	using AstroClient.Variables;
+	using VRC.SDKBase;
+
 	public class SnoozeScaryMaze5 : GameEvents
 	{
 		public override void OnWorldReveal(string id, string name, string asseturl)

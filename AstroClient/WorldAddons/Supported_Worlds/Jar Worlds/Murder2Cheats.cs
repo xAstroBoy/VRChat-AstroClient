@@ -1,21 +1,16 @@
-﻿using RubyButtonAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using AstroClient.ConsoleUtils;
-using AstroClient.variables;
-using AstroClient.Finder;
-using AstroClient.extensions;
-using AstroClient.Variables;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using RubyButtonAPI;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.variables;
+	using AstroClient.Finder;
+	using AstroClient.extensions;
+	using AstroClient.Variables;
+
 	public class Murder2Cheats : GameEvents
 	{
 		public static void FindGameMurderObjects()

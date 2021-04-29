@@ -1,14 +1,14 @@
-﻿using AstroClient.ConsoleUtils;
-using DayClientML2.Utility;
-using DayClientML2.Utility.Extensions;
-using Harmony;
-using System;
-using System.Reflection;
-using VRC;
-using VRC.SDKBase;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using DayClientML2.Utility;
+	using DayClientML2.Utility.Extensions;
+	using Harmony;
+	using System;
+	using System.Reflection;
+	using VRC;
+	using VRC.SDKBase;
+
 	public class RPCEventHook : GameEvents
 	{
 		// TODO : MAKE A UDONRPC OVERRIDABLE.

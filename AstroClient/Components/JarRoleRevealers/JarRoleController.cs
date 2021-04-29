@@ -1,18 +1,18 @@
-﻿using AstroClient.components;
-using AstroClient.ConsoleUtils;
-using AstroClient.Finder;
-using AstroClient.Variables;
-using DayClientML2.Utility.Extensions;
-using RubyButtonAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnhollowerBaseLib;
-using UnityEngine;
-using VRC;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.components;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.Finder;
+	using AstroClient.Variables;
+	using DayClientML2.Utility.Extensions;
+	using RubyButtonAPI;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnhollowerBaseLib;
+	using UnityEngine;
+	using VRC;
+
 	public class JarRoleController : GameEvents
 	{
 		private static bool _IsMurder4World;

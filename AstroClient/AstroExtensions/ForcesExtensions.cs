@@ -1,13 +1,8 @@
-﻿using UnityEngine;
-
-#region AstroClient Imports
-
-using static AstroClient.Forces;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using UnityEngine;
+	using static AstroClient.Forces;
+
 	public static class ForcesExtensions
 	{
 		public static void KillForces(this GameObject obj)

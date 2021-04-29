@@ -1,10 +1,10 @@
-﻿using AstroClient.components;
-using System.Collections.Generic;
-using UnityEngine;
-using VRC.SDKBase;
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using AstroClient.components;
+	using System.Collections.Generic;
+	using UnityEngine;
+	using VRC.SDKBase;
+
 	public static class PickupExtensions
 	{
 		public static void SetPickupTheft(this List<GameObject> list, bool DisallowTheft = false)

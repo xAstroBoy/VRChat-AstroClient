@@ -1,12 +1,12 @@
-﻿using DayClientML2.Utility.Extensions;
-using RubyButtonAPI;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using VRC;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using DayClientML2.Utility.Extensions;
+	using RubyButtonAPI;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using VRC;
+
 	public class PlayerMenuUI : GameEvents
 	{
 		private static QMSingleButton playersButton;

@@ -1,15 +1,15 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.variables;
-using ExitGames.Client.Photon;
-using Harmony;
-using MelonLoader;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace AstroClient.BetterPatch
+﻿namespace AstroClient.BetterPatch
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.variables;
+	using ExitGames.Client.Photon;
+	using Harmony;
+	using MelonLoader;
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Reflection;
+
 	internal class Patching : GameEvents
 	{
 		private static HarmonyMethod GetPatch(string name)

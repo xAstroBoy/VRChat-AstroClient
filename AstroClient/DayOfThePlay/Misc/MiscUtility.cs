@@ -1,17 +1,17 @@
-﻿using AstroClient.ConsoleUtils;
-using DayClientML2.Utility.Extensions;
-using RubyButtonAPI;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.UI;
-using VRC;
-using VRC.SDKBase;
-
-namespace DayClientML2.Utility
+﻿namespace DayClientML2.Utility
 {
+	using AstroClient.ConsoleUtils;
+	using DayClientML2.Utility.Extensions;
+	using RubyButtonAPI;
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using UnityEngine.UI;
+	using VRC;
+	using VRC.SDKBase;
+
 	internal static class MiscUtility
 	{
 		public static Vector2 GetButtonPosition(float x, float y)

@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-
-namespace DayClientML2.Utility.Extensions
+﻿namespace DayClientML2.Utility.Extensions
 {
+	using UnityEngine;
+
 	internal class VRInput
 	{
 		public class Vive

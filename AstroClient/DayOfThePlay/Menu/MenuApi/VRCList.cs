@@ -1,9 +1,9 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-using VRC.Core;
-
-namespace DayClientML2.Utility.MenuApi
+﻿namespace DayClientML2.Utility.MenuApi
 {
+	using UnityEngine;
+	using UnityEngine.UI;
+	using VRC.Core;
+
 	public class VRCList
 	{
 		public VRCList(Transform parent, string name, int Position = 0)

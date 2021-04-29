@@ -1,24 +1,19 @@
-﻿using MelonLoader;
-using RubyButtonAPI;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using VRC;
-using Color = System.Drawing.Color;
-
-#region AstroClient Imports
-
-using AstroClient.ConsoleUtils;
-using AstroClient.variables;
-using VRC.SDKBase;
-using DayClientML2.Utility.Extensions;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using MelonLoader;
+	using RubyButtonAPI;
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using VRC;
+	using Color = System.Drawing.Color;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.variables;
+	using VRC.SDKBase;
+	using DayClientML2.Utility.Extensions;
+
 	public class LewdVRChat : GameEvents
 	{
 		// TODO :  REMAKE THIS TRASH

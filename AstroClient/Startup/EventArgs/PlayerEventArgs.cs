@@ -1,8 +1,8 @@
-﻿using System;
-using VRC;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using System;
+	using VRC;
+
 	public class PlayerEventArgs : EventArgs
 	{
 		public Player player;

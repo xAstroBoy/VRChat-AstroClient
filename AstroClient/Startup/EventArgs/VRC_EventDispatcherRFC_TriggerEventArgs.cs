@@ -1,8 +1,8 @@
-﻿using System;
-using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using System;
+	using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
+
 	public class VRC_EventDispatcherRFC_TriggerEventArgs : EventArgs
 	{
 		public VRC_EventHandler VRC_EventHandler;

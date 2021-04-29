@@ -1,15 +1,15 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using DayClientML2.Utility;
-using System;
-using UnhollowerBaseLib.Attributes;
-using UnityEngine;
-using VRC;
-using VRC.Udon;
-using static AstroClient.variables.CustomLists;
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using DayClientML2.Utility;
+	using System;
+	using UnhollowerBaseLib.Attributes;
+	using UnityEngine;
+	using VRC;
+	using VRC.Udon;
+	using static AstroClient.variables.CustomLists;
+
 	public class Murder4PatronUnlocker : GameEventsBehaviour
 	{
 		public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;

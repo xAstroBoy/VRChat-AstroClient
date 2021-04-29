@@ -1,17 +1,17 @@
-﻿using AstroClient.ConsoleUtils;
-using DayClientML2.Managers;
-using DayClientML2.Utility.Api.Object;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Net;
-using UnityEngine;
-using VRC.Core;
-
-namespace DayClientML2.Utility.Api
+﻿namespace DayClientML2.Utility.Api
 {
+	using AstroClient.ConsoleUtils;
+	using DayClientML2.Managers;
+	using DayClientML2.Utility.Api.Object;
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Diagnostics;
+	using System.IO;
+	using System.Net;
+	using UnityEngine;
+	using VRC.Core;
+
 	internal class API
 	{
 		private const string APIKEYLONG = "?apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26";

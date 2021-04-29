@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-
-namespace DayClientML2.Utility.Managers
+﻿namespace DayClientML2.Utility.Managers
 {
+	using UnityEngine;
+
 	public class JsonColor
 	{
 		public float R { get; set; }

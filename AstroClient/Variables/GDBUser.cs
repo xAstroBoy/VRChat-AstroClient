@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using VRC;
-
-namespace AstroClient.variables
+﻿namespace AstroClient.variables
 {
+	using UnityEngine;
+	using VRC;
+
 	public class GDBUser
 	{
 		public Player vrcPlayer;

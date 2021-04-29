@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using VRC.Core;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using UnityEngine;
+	using VRC.Core;
+
 	public class QuickMenuUtils : GameEvents
 	{
 		public static APIUser GetSelectedUser()

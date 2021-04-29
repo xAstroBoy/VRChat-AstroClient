@@ -1,8 +1,8 @@
-﻿using AstroClient.components;
-using UnityEngine;
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using AstroClient.components;
+	using UnityEngine;
+
 	public static class HighlighterExtensions
 	{
 		private static void RemoveRendFromUnlistedHighLighter(Renderer rend)

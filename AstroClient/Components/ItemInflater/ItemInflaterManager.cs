@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-using Color = System.Drawing.Color;
-
-#region AstroClient Imports
-
-using static AstroClient.variables.InstanceBuilder;
-using AstroClient.ConsoleUtils;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Runtime.InteropServices;
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
+	using Color = System.Drawing.Color;
+	using static AstroClient.variables.InstanceBuilder;
+	using AstroClient.ConsoleUtils;
+
 	public class ItemInflaterManager : GameEventsBehaviour
 	{
 		#region Internal

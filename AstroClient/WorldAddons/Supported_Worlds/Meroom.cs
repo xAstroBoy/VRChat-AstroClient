@@ -1,10 +1,10 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.Finder;
-using AstroClient.Variables;
-using System.Drawing;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.Finder;
+	using AstroClient.Variables;
+	using System.Drawing;
+
 	public class Meroom : GameEvents
 	{
 		public override void OnWorldReveal(string id, string name, string asseturl)

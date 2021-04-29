@@ -1,13 +1,13 @@
-﻿using AstroClient.AstroUtils.ItemTweaker;
-using AstroClient.ConsoleUtils;
-using AstroClient.ItemTweaker;
-using AstroClient.SyncPhysicExt;
-using System;
-using UnhollowerBaseLib.Attributes;
-using UnityEngine;
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using AstroClient.AstroUtils.ItemTweaker;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.ItemTweaker;
+	using AstroClient.SyncPhysicExt;
+	using System;
+	using UnhollowerBaseLib.Attributes;
+	using UnityEngine;
+
 	public class RigidBodyController : GameEventsBehaviour
 	{
 		public RigidBodyController(IntPtr ptr) : base(ptr)

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using VRC.Udon;
-
-namespace AstroClient.variables
+﻿namespace AstroClient.variables
 {
+	using System.Collections.Generic;
+	using UnityEngine;
+	using VRC.Udon;
+
 	public class CustomLists : GameEvents
 	{
 		public override void OnLevelLoaded()

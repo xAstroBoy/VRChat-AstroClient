@@ -1,14 +1,14 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using RubyButtonAPI;
-using System;
-using System.Windows.Forms;
-using UnityEngine;
-using VRC;
-using Object = UnityEngine.Object;
-
-namespace AstroClient.Headlight
+﻿namespace AstroClient.Headlight
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using RubyButtonAPI;
+	using System;
+	using System.Windows.Forms;
+	using UnityEngine;
+	using VRC;
+	using Object = UnityEngine.Object;
+
 	public class Headlight : GameEvents
 	{
 		public static float LightRange = 10f;

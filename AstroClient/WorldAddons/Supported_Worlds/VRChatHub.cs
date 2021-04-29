@@ -1,21 +1,16 @@
-﻿using RubyButtonAPI;
-using UnityEngine;
-using VRC.SDKBase;
-using static VRC.SDKBase.VRC_EventHandler;
-
-#region AstroClient Imports
-
-using static AstroClient.LocalPlayerUtils;
-using System;
-using AstroClient.ConsoleUtils;
-using AstroClient.Variables;
-using AstroClient.Finder;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.World.Hub
+﻿namespace AstroClient.World.Hub
 
 {
+	using RubyButtonAPI;
+	using UnityEngine;
+	using VRC.SDKBase;
+	using static VRC.SDKBase.VRC_EventHandler;
+	using static AstroClient.LocalPlayerUtils;
+	using System;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.Variables;
+	using AstroClient.Finder;
+
 	public class HubButtonsControl : GameEvents
 	{
 		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)

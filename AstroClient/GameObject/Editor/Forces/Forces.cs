@@ -1,15 +1,10 @@
-﻿using RubyButtonAPI;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using AstroClient.components;
-using AstroClient.AstroUtils.ItemTweaker;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using RubyButtonAPI;
+	using UnityEngine;
+	using AstroClient.components;
+	using AstroClient.AstroUtils.ItemTweaker;
+
 	public class Forces
 	{
 		public static QMToggleButton Constraint_Rot_X_Toggle;

@@ -1,12 +1,12 @@
-﻿using AstroClient.Variables;
-using AstroClient.World.Hub;
-using RubyButtonAPI;
-using System;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace AstroClient.ButtonShortcut
+﻿namespace AstroClient.ButtonShortcut
 {
+	using AstroClient.Variables;
+	using AstroClient.World.Hub;
+	using RubyButtonAPI;
+	using System;
+	using UnityEngine;
+	using UnityEngine.UI;
+
 	public class CheatsShortcutButton : GameEvents
 	{
 		private static QMSingleButton WorldCheatsShortcut;

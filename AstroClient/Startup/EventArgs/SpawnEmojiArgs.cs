@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using System;
+
 	public class SpawnEmojiArgs : EventArgs
 	{
 		public VRCPlayer player;

@@ -1,13 +1,13 @@
-﻿using AstroClient.ConsoleUtils;
-using DayClientML2.Utility.Extensions;
-using System;
-using System.Linq;
-using System.Reflection;
-using UnhollowerRuntimeLib.XrefScans;
-using UnityEngine;
-
-namespace DayClientML2.Utility
+﻿namespace DayClientML2.Utility
 {
+	using AstroClient.ConsoleUtils;
+	using DayClientML2.Utility.Extensions;
+	using System;
+	using System.Linq;
+	using System.Reflection;
+	using UnhollowerRuntimeLib.XrefScans;
+	using UnityEngine;
+
 	internal static class XrefTesting
 	{
 		internal static MethodInfo OnPhotonPlayerJoinMethod

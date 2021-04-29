@@ -1,17 +1,12 @@
-﻿using System;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using static AstroClient.Forces;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using System;
+	using System.Runtime.CompilerServices;
+	using System.Runtime.InteropServices;
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
+	using static AstroClient.Forces;
+
 	public class ObjectSpinner : GameEventsBehaviour
 	{
 		public Delegate ReferencedDelegate;

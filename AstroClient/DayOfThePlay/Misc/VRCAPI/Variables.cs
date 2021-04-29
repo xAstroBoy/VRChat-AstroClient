@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace DayBots.VRCAPI
+﻿namespace DayBots.VRCAPI
 {
+	using System.Collections.Generic;
+	using System.Net;
+	using System.Net.Http;
+	using System.Threading.Tasks;
+
 	public class Variables
 	{
 		public HttpClient HttpClient { get; set; }

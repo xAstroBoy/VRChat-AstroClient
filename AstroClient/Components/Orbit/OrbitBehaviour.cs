@@ -1,14 +1,14 @@
-﻿using AstroClient.GameObjectDebug;
-using System;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-using VRC;
-using VRC.SDKBase;
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using AstroClient.GameObjectDebug;
+	using System;
+	using System.Runtime.CompilerServices;
+	using System.Runtime.InteropServices;
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
+	using VRC;
+	using VRC.SDKBase;
+
 	public class Orbit : GameEventsBehaviour
 	{
 		#region Internal

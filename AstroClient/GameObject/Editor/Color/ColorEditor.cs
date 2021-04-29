@@ -1,14 +1,9 @@
-﻿using System.Threading.Tasks;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using AstroClient.ConsoleUtils;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using System.Threading.Tasks;
+	using UnityEngine;
+	using AstroClient.ConsoleUtils;
+
 	public class ColorEditor
 	{
 		public static void ChangeObjColor(GameObject obj, Color color)

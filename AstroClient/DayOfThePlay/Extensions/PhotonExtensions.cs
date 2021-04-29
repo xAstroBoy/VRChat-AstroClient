@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace DayClientML2.Utility.Extensions
+﻿namespace DayClientML2.Utility.Extensions
 {
+	using System.Collections.Generic;
+
 	public static class PhotonExtensions
 	{
 		public static string GetUsername(this Photon.Realtime.Player player)

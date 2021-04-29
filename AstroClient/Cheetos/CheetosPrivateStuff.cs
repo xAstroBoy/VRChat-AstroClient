@@ -1,11 +1,11 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.Finder;
-using CheetosConsole;
-using DayClientML2.Utility.Extensions;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.Finder;
+	using CheetosConsole;
+	using DayClientML2.Utility.Extensions;
+
 	public class CheetosPrivateStuff : GameEvents
 	{
 		public override void VRChat_OnUiManagerInit()

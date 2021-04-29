@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace CheetosConsole
+﻿namespace CheetosConsole
 {
+	using System;
+	using System.Collections.Generic;
+
 	public static class Extensions
 	{
 		public static System.Drawing.Color ToDrawingColor(this ConsoleColor c)

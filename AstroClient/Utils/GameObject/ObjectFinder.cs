@@ -1,12 +1,12 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-
-namespace AstroClient.Finder
+﻿namespace AstroClient.Finder
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using UnityEngine.SceneManagement;
+
 	public static class GameObjectFinder
 	{
 		public static GameObject Find(string path)

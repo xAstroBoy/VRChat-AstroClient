@@ -1,11 +1,11 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.variables;
-using System.Collections.Generic;
-using UnityEngine;
-using VRC.SDKBase;
-
-namespace AstroClient.AntiCrash
+﻿namespace AstroClient.AntiCrash
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.variables;
+	using System.Collections.Generic;
+	using UnityEngine;
+	using VRC.SDKBase;
+
 	public static class AntiCrashUtils
 	{
 		/// <summary>

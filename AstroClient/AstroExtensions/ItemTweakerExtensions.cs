@@ -1,14 +1,9 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using AstroClient.AstroUtils.ItemTweaker;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using System.Collections.Generic;
+	using UnityEngine;
+	using AstroClient.AstroUtils.ItemTweaker;
+
 	public static class ItemTweakerExtensions
 	{
 		public static void AddToWorldUtilsMenu(this GameObject obj)

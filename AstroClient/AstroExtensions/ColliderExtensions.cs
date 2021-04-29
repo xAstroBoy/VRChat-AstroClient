@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using System.Collections.Generic;
+	using UnityEngine;
+
 	public static class ColliderExtensions
 	{
 		public static void AddCollider(this GameObject obj)

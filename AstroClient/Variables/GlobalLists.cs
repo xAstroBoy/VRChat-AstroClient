@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-namespace AstroClient.variables
+﻿namespace AstroClient.variables
 {
+	using System.Collections.Generic;
+	using UnityEngine;
+
 	public class GlobalLists : GameEvents
 	{
 		public static List<GameObject> ClonedObjects = new List<GameObject>();

@@ -1,18 +1,18 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.Finder;
-using AstroClient.Variables;
-using RubyButtonAPI;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using VRC;
-using Random = System.Random;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.Finder;
+	using AstroClient.Variables;
+	using RubyButtonAPI;
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using VRC;
+	using Random = System.Random;
+
 	public class AimFactory : GameEvents
 	{
 		public static void InitButtons(QMTabMenu main, float x, float y, bool btnhalf)

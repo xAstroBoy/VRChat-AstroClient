@@ -1,9 +1,9 @@
-﻿using AstroClient.ConsoleUtils;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using System.Collections.Generic;
+	using UnityEngine;
+
 	internal static class ColliderToggler
 	{
 		public static void ReenableAll()

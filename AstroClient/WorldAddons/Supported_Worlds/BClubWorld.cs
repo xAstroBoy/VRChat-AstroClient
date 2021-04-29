@@ -1,14 +1,14 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.Finder;
-using AstroClient.Variables;
-using System;
-using System.Linq;
-using UnityEngine;
-using VRC.Udon;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.Finder;
+	using AstroClient.Variables;
+	using System;
+	using System.Linq;
+	using UnityEngine;
+	using VRC.Udon;
+
 	public class BClubWorld : GameEvents
 	{
 		public override void OnWorldReveal(string id, string name, string asseturl)

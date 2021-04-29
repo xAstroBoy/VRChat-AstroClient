@@ -1,8 +1,8 @@
-﻿using System;
-using System.IO;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using System;
+	using System.IO;
+
 	internal static class KeyManager
 	{
 		public static string AuthKey = string.Empty;

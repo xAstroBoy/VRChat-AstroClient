@@ -1,9 +1,9 @@
-﻿using AstroClient.GameObjectDebug;
-using RubyButtonAPI;
-using System;
-
-namespace AstroClient.Startup.Buttons
+﻿namespace AstroClient.Startup.Buttons
 {
+	using AstroClient.GameObjectDebug;
+	using RubyButtonAPI;
+	using System;
+
 	internal class WorldPickupsBtn
 	{
 		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)

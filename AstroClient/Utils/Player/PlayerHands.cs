@@ -1,13 +1,8 @@
-﻿using UnityEngine;
-
-#region AstroClient Imports
-
-using static AstroClient.LocalPlayerUtils;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using UnityEngine;
+	using static AstroClient.LocalPlayerUtils;
+
 	public static class PlayerHands
 	{
 		public static void DropObject(GameObject obj)

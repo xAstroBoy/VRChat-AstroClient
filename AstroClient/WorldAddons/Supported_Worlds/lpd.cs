@@ -1,9 +1,9 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.Finder;
-using AstroClient.Variables;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.Finder;
+	using AstroClient.Variables;
+
 	public class LPD : GameEvents
 	{
 		public override void OnWorldReveal(string id, string name, string asseturl)

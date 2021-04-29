@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-
-namespace AstroClient.SyncPhysicExt
+﻿namespace AstroClient.SyncPhysicExt
 {
+	using UnityEngine;
+
 	public static class SyncPhysicsExt
 	{
 		public static void RefreshProperties(this SyncPhysics instance)

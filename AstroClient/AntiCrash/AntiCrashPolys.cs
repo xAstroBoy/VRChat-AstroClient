@@ -1,8 +1,8 @@
-﻿using AstroClient.ConsoleUtils;
-using UnityEngine;
-
-namespace AstroClient.AntiCrash
+﻿namespace AstroClient.AntiCrash
 {
+	using AstroClient.ConsoleUtils;
+	using UnityEngine;
+
 	internal class AntiCrashPolys
 	{
 #if DEBUG

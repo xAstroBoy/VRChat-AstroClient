@@ -1,22 +1,22 @@
-﻿using AstroClient.components;
-using AstroClient.extensions;
-using AstroClient.GameObjectDebug;
-using AstroClient.ItemTweaker;
-using AstroClient.variables;
-using DayClientML2.Utility.Extensions;
-using RubyButtonAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using VRC.SDK3.Components;
-using VRC.SDKBase;
-using VRC.Udon;
-using VRC.Udon.Common.Interfaces;
-using Color = UnityEngine.Color;
-
-namespace AstroClient.AstroUtils.ItemTweaker
+﻿namespace AstroClient.AstroUtils.ItemTweaker
 {
+	using AstroClient.components;
+	using AstroClient.extensions;
+	using AstroClient.GameObjectDebug;
+	using AstroClient.ItemTweaker;
+	using AstroClient.variables;
+	using DayClientML2.Utility.Extensions;
+	using RubyButtonAPI;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using VRC.SDK3.Components;
+	using VRC.SDKBase;
+	using VRC.Udon;
+	using VRC.Udon.Common.Interfaces;
+	using Color = UnityEngine.Color;
+
 	public class ItemTweakerMain : GameEvents
 	{
 		public static void InitButtons(float x, float y, bool btnHalf)

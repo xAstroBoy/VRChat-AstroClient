@@ -1,14 +1,14 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.ItemTweaker;
-using System;
-using UnhollowerBaseLib.Attributes;
-using UnityEngine;
-using VRC.SDKBase;
-using static AstroClient.AstroUtils.ItemTweaker.ItemTweakerMain;
-using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.ItemTweaker;
+	using System;
+	using UnhollowerBaseLib.Attributes;
+	using UnityEngine;
+	using VRC.SDKBase;
+	using static AstroClient.AstroUtils.ItemTweaker.ItemTweakerMain;
+	using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
+
 	public class PickupController : GameEventsBehaviour
 	{
 		public PickupController(IntPtr ptr) : base(ptr)

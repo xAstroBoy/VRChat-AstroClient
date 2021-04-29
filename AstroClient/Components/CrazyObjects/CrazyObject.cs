@@ -1,17 +1,12 @@
-﻿using System;
-using System.Runtime.InteropServices;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-using Random = UnityEngine.Random;
-
-#region AstroClient Imports
-
-using static AstroClient.Forces;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using System;
+	using System.Runtime.InteropServices;
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
+	using Random = UnityEngine.Random;
+	using static AstroClient.Forces;
+
 	public class CrazyObject : GameEventsBehaviour
 	{
 		public Delegate ReferencedDelegate;

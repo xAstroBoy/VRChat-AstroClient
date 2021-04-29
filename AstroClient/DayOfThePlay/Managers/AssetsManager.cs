@@ -1,13 +1,13 @@
-﻿using AstroClient.ConsoleUtils;
-using System;
-using System.Collections;
-using System.Linq;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-using UnityEngine.Networking;
-
-namespace DayClientML2.Managers
+﻿namespace DayClientML2.Managers
 {
+	using AstroClient.ConsoleUtils;
+	using System;
+	using System.Collections;
+	using System.Linq;
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
+	using UnityEngine.Networking;
+
 	internal class AssetsManager
 	{
 		private static AssetBundle assetBundle;

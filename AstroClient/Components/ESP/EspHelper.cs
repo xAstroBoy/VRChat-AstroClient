@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using System.Collections.Generic;
+	using UnityEngine;
+
 	internal class EspHelper : GameEvents
 	{
 

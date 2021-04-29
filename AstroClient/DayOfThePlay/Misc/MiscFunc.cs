@@ -1,26 +1,26 @@
-﻿using AstroClient.ConsoleUtils;
-using DayClientML2.Managers;
-using DayClientML2.Utility.Extensions;
-using MelonLoader;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Runtime.InteropServices;
-using Transmtn.DTO.Notifications;
-using UnityEngine;
-using UnityEngine.UI;
-using VRC;
-using VRC.Core;
-using VRC.SDKBase;
-using VRC.UI;
-using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
-
-namespace DayClientML2.Utility
+﻿namespace DayClientML2.Utility
 {
+	using AstroClient.ConsoleUtils;
+	using DayClientML2.Managers;
+	using DayClientML2.Utility.Extensions;
+	using MelonLoader;
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Diagnostics;
+	using System.IO;
+	using System.Linq;
+	using System.Net;
+	using System.Runtime.InteropServices;
+	using Transmtn.DTO.Notifications;
+	using UnityEngine;
+	using UnityEngine.UI;
+	using VRC;
+	using VRC.Core;
+	using VRC.SDKBase;
+	using VRC.UI;
+	using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
+
 	internal class MiscFunc
 	{
 		public static void CleanRoom()

@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace DayClientML2.Utility.Managers
+﻿namespace DayClientML2.Utility.Managers
 {
+	using System.Collections.Generic;
+
 	internal class Assets
 	{
 		public static List<string> KissGifs = new List<string>()

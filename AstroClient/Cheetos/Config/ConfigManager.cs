@@ -1,9 +1,9 @@
-﻿using AstroClient.ConsoleUtils;
-using System;
-using System.IO;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using System;
+	using System.IO;
+
 	public static class ConfigManager
 	{
 		private static string ConfigFolder = Environment.CurrentDirectory + @"\AstroClient";

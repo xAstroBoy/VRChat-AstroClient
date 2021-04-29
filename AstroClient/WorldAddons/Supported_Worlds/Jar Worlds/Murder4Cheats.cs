@@ -1,28 +1,23 @@
-﻿using RubyButtonAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using AstroClient.Finder;
-using AstroClient.variables;
-using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.components;
-using AstroClient.UdonExploits;
-using AstroClient.Variables;
-using static AstroClient.variables.CustomLists;
-using VRC.Udon;
-using VRC;
-using DayClientML2.Utility.Extensions;
-using DayClientML2.Utility;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using RubyButtonAPI;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using AstroClient.Finder;
+	using AstroClient.variables;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.components;
+	using AstroClient.UdonExploits;
+	using AstroClient.Variables;
+	using static AstroClient.variables.CustomLists;
+	using VRC.Udon;
+	using VRC;
+	using DayClientML2.Utility.Extensions;
+	using DayClientML2.Utility;
+
 	public class Murder4Cheats : GameEvents
 	{
 		public static void FindGameMurderObjects()

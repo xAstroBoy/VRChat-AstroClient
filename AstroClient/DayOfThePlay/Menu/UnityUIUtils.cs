@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using UnityEngine.UI;
-
-namespace DayClientML2.Utility.Menu
+﻿namespace DayClientML2.Utility.Menu
 {
+	using UnityEngine;
+	using UnityEngine.UI;
+
 	internal class UnityUIUtils
 	{
 		public static Transform CreateScrollView(RectTransform parentTransform, float viewWidth, float viewHeight, float maxWidth, float maxHeight, bool scrollHorizontally, bool scrollVertically)

@@ -1,9 +1,9 @@
-﻿using AstroClient.ConsoleUtils;
-using UnityEngine;
-using Color = System.Drawing.Color;
-
-namespace AstroClient.variables
+﻿namespace AstroClient.variables
 {
+	using AstroClient.ConsoleUtils;
+	using UnityEngine;
+	using Color = System.Drawing.Color;
+
 	public static class InstanceBuilder
 	{
 		public static GameObject InstanceHolder;

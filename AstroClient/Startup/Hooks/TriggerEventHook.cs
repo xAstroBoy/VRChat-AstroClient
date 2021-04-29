@@ -1,12 +1,12 @@
-﻿using AstroClient.ConsoleUtils;
-using Harmony;
-using System;
-using System.Reflection;
-using UnhollowerRuntimeLib.XrefScans;
-using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
-
-namespace AstroClient.Startup.Hooks
+﻿namespace AstroClient.Startup.Hooks
 {
+	using AstroClient.ConsoleUtils;
+	using Harmony;
+	using System;
+	using System.Reflection;
+	using UnhollowerRuntimeLib.XrefScans;
+	using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
+
 	public class TriggerEventHook : GameEvents
 	{
 		private HarmonyInstance harmony;

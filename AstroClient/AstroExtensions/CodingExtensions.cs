@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using System.Collections.Generic;
+
 	public static class CodingExtensions
 	{
 		public static bool IsEmpty<T>(this List<T> list)

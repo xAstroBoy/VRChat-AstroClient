@@ -1,24 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-using VRC.Core;
-using VRC;
-using System.Linq;
-using AstroClient.extensions;
-using Color = System.Drawing.Color;
-
-#region AstroClient Imports
-
-using AstroClient.ConsoleUtils;
-
-#endregion AstroClient Imports
-
-using static AstroClient.variables.InstanceBuilder;
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Runtime.InteropServices;
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
+	using VRC.Core;
+	using VRC;
+	using System.Linq;
+	using AstroClient.extensions;
+	using Color = System.Drawing.Color;
+
+	#region AstroClient Imports
+
+	using AstroClient.ConsoleUtils;
+
+	#endregion AstroClient Imports
+
+	using static AstroClient.variables.InstanceBuilder;
+
 	public class PlayerAttackerManager : GameEventsBehaviour
 	{
 		#region Internal

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Linq;
-using VRC.Core;
-
-namespace DayClientML2.Utility.Extensions
+﻿namespace DayClientML2.Utility.Extensions
 {
+	using System;
+	using System.Linq;
+	using VRC.Core;
+
 	internal static class RoomManagerExtension
 	{
 		public static bool IsInWorld()

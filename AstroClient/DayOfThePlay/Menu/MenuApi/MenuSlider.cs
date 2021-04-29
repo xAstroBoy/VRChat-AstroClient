@@ -1,11 +1,11 @@
-﻿using DayClientML2.Utility.Extensions;
-using RubyButtonAPI;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
-
-namespace DayClientML2.Utility
+﻿namespace DayClientML2.Utility
 {
+	using DayClientML2.Utility.Extensions;
+	using RubyButtonAPI;
+	using UnityEngine;
+	using UnityEngine.Events;
+	using UnityEngine.UI;
+
 	internal class MenuSlider
 	{
 		public MenuSlider(string parentPath, float x, float y, UnityAction<float> evt, float defaultValue = 0f, float MaxValue = 1f, float MinValue = 0f)

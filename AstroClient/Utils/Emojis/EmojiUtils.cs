@@ -1,21 +1,16 @@
-﻿using MelonLoader;
-using RubyButtonAPI;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using VRC;
-using VRC.SDKBase;
-
-#region AstroClient Imports
-
-using AstroClient.ConsoleUtils;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using MelonLoader;
+	using RubyButtonAPI;
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using VRC;
+	using VRC.SDKBase;
+	using AstroClient.ConsoleUtils;
+
 	public class EmojiUtils : GameEvents
 	{
 		public static void SpawnlastEmoji()

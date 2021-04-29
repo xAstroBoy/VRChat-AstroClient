@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using VRC.UserCamera;
-
-namespace DayClientML2.Utility.Extensions
+﻿namespace DayClientML2.Utility.Extensions
 {
+	using System.Collections.Generic;
+	using UnityEngine;
+	using VRC.UserCamera;
+
 	internal static class CameraExtension
 	{
 		public static void ResetCamera()

@@ -1,8 +1,8 @@
-﻿using System;
-using UnityEngine;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using System;
+	using UnityEngine;
+
 	public class OnAvatarSpawnArgs : EventArgs
 	{
 		public GameObject Avatar;

@@ -1,8 +1,8 @@
-﻿using RubyButtonAPI;
-using UnityEngine;
-
-namespace AstroClient.Startup.Buttons
+﻿namespace AstroClient.Startup.Buttons
 {
+	using RubyButtonAPI;
+	using UnityEngine;
+
 	internal class SettingsMenuBtn
 	{
 		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)

@@ -1,8 +1,8 @@
-﻿using VRC;
-using VRC.Core;
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using VRC;
+	using VRC.Core;
+
 	public static class PlayerExtensions
 	{
 		public static Player GetPlayer(this APIUser api)

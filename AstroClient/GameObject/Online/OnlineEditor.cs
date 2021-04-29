@@ -1,9 +1,9 @@
-﻿using AstroClient.ConsoleUtils;
-using UnityEngine;
-using VRC.SDKBase;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using UnityEngine;
+	using VRC.SDKBase;
+
 	public class OnlineEditor
 	{
 		public static void TakeObjectOwnership(GameObject obj)

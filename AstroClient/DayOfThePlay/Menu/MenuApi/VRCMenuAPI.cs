@@ -1,12 +1,12 @@
-﻿using AstroClient;
-using AstroClient.ConsoleUtils;
-using DayClientML2.Utility.Extensions;
-using System;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace DayClientML2.Utility.ButtonApi
+﻿namespace DayClientML2.Utility.ButtonApi
 {
+	using AstroClient;
+	using AstroClient.ConsoleUtils;
+	using DayClientML2.Utility.Extensions;
+	using System;
+	using UnityEngine;
+	using UnityEngine.UI;
+
 	internal class VRCMenu
 	{
 		public VRCMenu(Transform Parent, MenuButtonType buttonType, string name, float x, float y, Action OnPageShown = null, Action OnPageClose = null)

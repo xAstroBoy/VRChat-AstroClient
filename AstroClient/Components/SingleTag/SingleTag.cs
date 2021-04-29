@@ -1,15 +1,15 @@
-﻿using AstroClient.Components;
-using AstroClient.ConsoleUtils;
-using DayClientML2.Utility.Extensions;
-using System;
-using System.Linq;
-using UnhollowerBaseLib.Attributes;
-using UnityEngine;
-using VRC;
-using Object = UnityEngine.Object;
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using AstroClient.Components;
+	using AstroClient.ConsoleUtils;
+	using DayClientML2.Utility.Extensions;
+	using System;
+	using System.Linq;
+	using UnhollowerBaseLib.Attributes;
+	using UnityEngine;
+	using VRC;
+	using Object = UnityEngine.Object;
+
 	public class SingleTag : GameEventsBehaviour
 	{
 		public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;

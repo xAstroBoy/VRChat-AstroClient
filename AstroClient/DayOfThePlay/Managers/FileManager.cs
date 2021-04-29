@@ -1,8 +1,8 @@
-﻿using System.IO;
-using UnityEngine;
-
-namespace DayClientML2.Managers
+﻿namespace DayClientML2.Managers
 {
+	using System.IO;
+	using UnityEngine;
+
 	internal class FileManager
 	{
 		public static string ClientPath = Directory.GetParent(Application.dataPath) + "/DayClient";

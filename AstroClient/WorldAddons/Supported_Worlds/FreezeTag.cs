@@ -1,19 +1,19 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.Finder;
-using AstroClient.Variables;
-using DayClientML2.Utility;
-using DayClientML2.Utility.Extensions;
-using RubyButtonAPI;
-using System;
-using UnityEngine;
-using VRC;
-using VRC.Udon;
-using VRC.Udon.Common.Interfaces;
-using static AstroClient.variables.CustomLists;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.Finder;
+	using AstroClient.Variables;
+	using DayClientML2.Utility;
+	using DayClientML2.Utility.Extensions;
+	using RubyButtonAPI;
+	using System;
+	using UnityEngine;
+	using VRC;
+	using VRC.Udon;
+	using VRC.Udon.Common.Interfaces;
+	using static AstroClient.variables.CustomLists;
+
 	public class FreezeTag : GameEvents
 	{
 		private static bool IsFreezeTag;

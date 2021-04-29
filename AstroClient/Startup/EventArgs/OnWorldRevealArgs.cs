@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using System;
+
 	public class OnWorldRevealArgs : EventArgs
 	{
 		public string ID;

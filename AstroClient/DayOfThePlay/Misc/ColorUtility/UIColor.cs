@@ -1,11 +1,11 @@
-﻿using DayClientML2.Utility.Extensions;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace DayClientML2.Utility.ColorUtility
+﻿namespace DayClientML2.Utility.ColorUtility
 {
+	using DayClientML2.Utility.Extensions;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using UnityEngine.UI;
+
 	internal class UIColor
 	{
 		public static Transform UIRoot { get; private set; }

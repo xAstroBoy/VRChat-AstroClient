@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using VRC;
-using VRC.SDKBase;
-
-namespace DayClientML2.Utility.Extensions
+﻿namespace DayClientML2.Utility.Extensions
 {
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using VRC;
+	using VRC.SDKBase;
+
 	public static class PlayerManagerExtension
 	{
 		public static List<Player> AllPlayers(this PlayerManager Instance)

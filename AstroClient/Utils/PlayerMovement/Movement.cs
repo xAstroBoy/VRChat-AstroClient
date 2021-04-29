@@ -1,16 +1,16 @@
-﻿using AstroClient.extensions;
-using AstroClient.variables;
-using RealisticEyeMovements;
-using RootMotion.FinalIK;
-using RubyButtonAPI;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-using VRC.SDKBase;
-using static AstroClient.LocalPlayerUtils;
-
-namespace AstroClient.AstroUtils.PlayerMovement
+﻿namespace AstroClient.AstroUtils.PlayerMovement
 {
+	using AstroClient.extensions;
+	using AstroClient.variables;
+	using RealisticEyeMovements;
+	using RootMotion.FinalIK;
+	using RubyButtonAPI;
+	using System;
+	using System.Collections.Generic;
+	using UnityEngine;
+	using VRC.SDKBase;
+	using static AstroClient.LocalPlayerUtils;
+
 	public class Movement : GameEvents
 	{
 		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)

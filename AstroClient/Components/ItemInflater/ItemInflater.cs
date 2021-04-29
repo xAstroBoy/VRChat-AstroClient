@@ -1,18 +1,13 @@
-﻿using AstroClient.ItemTweaker;
-using System;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using static AstroClient.ObjectMiscOptions;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using AstroClient.ItemTweaker;
+	using System;
+	using System.Runtime.CompilerServices;
+	using System.Runtime.InteropServices;
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
+	using static AstroClient.ObjectMiscOptions;
+
 	public class ItemInflater : GameEventsBehaviour
 	{
 		public Delegate ReferencedDelegate;

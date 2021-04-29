@@ -1,19 +1,14 @@
-﻿using RubyButtonAPI;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using AstroClient.components;
-using AstroClient.ConsoleUtils;
-using AstroClient.Finder;
-using AstroClient.AstroUtils.ItemTweaker;
-using System.Linq;
-using AstroClient.extensions;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.ItemTweaker
+﻿namespace AstroClient.ItemTweaker
 {
+	using RubyButtonAPI;
+	using UnityEngine;
+	using AstroClient.components;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.Finder;
+	using AstroClient.AstroUtils.ItemTweaker;
+	using System.Linq;
+	using AstroClient.extensions;
+
 	public class Tweaker_Object : GameEvents
 	{
 		public override void OnLevelLoaded()

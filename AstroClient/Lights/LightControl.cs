@@ -1,21 +1,16 @@
-﻿using RubyButtonAPI;
-using System;
-using UnityEngine;
-using UnityEngine.Rendering;
-
-#region AstroClient Imports
-
-using VRC;
-using AstroClient.ConsoleUtils;
-using static AstroClient.variables.CustomLists;
-using static AstroClient.variables.GlobalLists;
-using AstroClient.extensions;
-using AstroClient.Skyboxes;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.WorldLights
+﻿namespace AstroClient.WorldLights
 {
+	using RubyButtonAPI;
+	using System;
+	using UnityEngine;
+	using UnityEngine.Rendering;
+	using VRC;
+	using AstroClient.ConsoleUtils;
+	using static AstroClient.variables.CustomLists;
+	using static AstroClient.variables.GlobalLists;
+	using AstroClient.extensions;
+	using AstroClient.Skyboxes;
+
 	public class LightControl : GameEvents
 	{
 		public static QMToggleButton FogSwitch;

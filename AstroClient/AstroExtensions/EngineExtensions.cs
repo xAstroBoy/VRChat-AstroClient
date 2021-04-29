@@ -1,20 +1,15 @@
-﻿using UnityEngine;
-using VRC.SDKBase;
-using Color = System.Drawing.Color;
-
-#region AstroClient Imports
-
-using AstroClient.Cloner;
-using AstroClient.ConsoleUtils;
-using AstroClient.AstroUtils.ItemTweaker;
-using AstroClient.ItemTweaker;
-using System.Windows.Forms;
-using AstroClient.Finder;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using UnityEngine;
+	using VRC.SDKBase;
+	using Color = System.Drawing.Color;
+	using AstroClient.Cloner;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.AstroUtils.ItemTweaker;
+	using AstroClient.ItemTweaker;
+	using System.Windows.Forms;
+	using AstroClient.Finder;
+
 	public static class EngineExtensions
 	{
 		public static void CopyPath(this GameObject obj)

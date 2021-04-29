@@ -1,11 +1,11 @@
-﻿using DayClientML2.Managers;
-using UnityEngine;
-using VRC;
-using VRC.Core;
-using VRC.SDKBase;
-
-namespace DayClientML2.Utility.Extensions
+﻿namespace DayClientML2.Utility.Extensions
 {
+	using DayClientML2.Managers;
+	using UnityEngine;
+	using VRC;
+	using VRC.Core;
+	using VRC.SDKBase;
+
 	internal static class PlayerExtensions
 	{
 		#region ApiUser

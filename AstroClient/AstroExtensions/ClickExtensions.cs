@@ -1,15 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using VRC.SDK3.Components;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using VRC.SDK3.Components;
+
 	public static class ExtensionUtils
 	{
 		public static void VRC_Trigger_UpdateInteractionText(this GameObject obj, string NewText)

@@ -1,11 +1,11 @@
-﻿using DayBots.VRCAPI.Endpoints;
-using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-
-namespace DayBots.VRCAPI
+﻿namespace DayBots.VRCAPI
 {
+	using DayBots.VRCAPI.Endpoints;
+	using System;
+	using System.Collections.Generic;
+	using System.Net;
+	using System.Net.Http;
+
 	internal class API
 	{
 		internal const string APIKEYLONG = "?apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26";

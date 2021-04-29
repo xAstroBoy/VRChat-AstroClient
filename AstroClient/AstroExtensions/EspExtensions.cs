@@ -1,11 +1,11 @@
-﻿using AstroClient.components;
-using AstroClient.ConsoleUtils;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using AstroClient.components;
+	using AstroClient.ConsoleUtils;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+
 	public static class EspExtensions
 	{
 		public static List<ObjectESP> GetESPByID(this GameObject obj, string identifier)

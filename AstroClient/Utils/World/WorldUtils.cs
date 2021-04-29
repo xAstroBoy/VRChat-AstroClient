@@ -1,20 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using VRC;
-using VRC.SDK3.Components;
-using Color = System.Drawing.Color;
-
-#region AstroClient Imports
-
-using AstroClient.ConsoleUtils;
-using VRC.Udon;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using VRC;
+	using VRC.SDK3.Components;
+	using Color = System.Drawing.Color;
+	using AstroClient.ConsoleUtils;
+	using VRC.Udon;
+
 	public class WorldUtils : GameEvents
 	{
 		public static List<GameObject> GetAllWorldPrefabs()

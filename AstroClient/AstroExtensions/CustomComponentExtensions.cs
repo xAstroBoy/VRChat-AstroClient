@@ -1,10 +1,10 @@
-﻿using AstroClient.components;
-using System;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using AstroClient.components;
+	using System;
+	using System.Collections.Generic;
+	using UnityEngine;
+
 	public static class CustomComponentExtensions
 	{
 		public static void MakeRocketItemWithG(this GameObject obj)

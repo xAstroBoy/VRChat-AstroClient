@@ -1,16 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using AstroClient.ConsoleUtils;
-using AstroClient.Finder;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.Finder;
+
 	public static class ListExtensions
 	{
 		public static void RegisterChildsInPath(this List<GameObject> Original, string path)

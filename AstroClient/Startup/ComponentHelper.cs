@@ -1,9 +1,9 @@
-﻿using AstroClient.components;
-using AstroClient.variables;
-using UnhollowerRuntimeLib;
-
-namespace AstroClient.Startup
+﻿namespace AstroClient.Startup
 {
+	using AstroClient.components;
+	using AstroClient.variables;
+	using UnhollowerRuntimeLib;
+
 	public class ComponentHelper : GameEvents
 	{
 		public override void OnApplicationStart()

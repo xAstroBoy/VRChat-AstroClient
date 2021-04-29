@@ -1,14 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-#region AstroClient Imports
-
-using static AstroClient.variables.CustomLists;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using System.Collections.Generic;
+	using System.Linq;
+	using static AstroClient.variables.CustomLists;
+
 	public static class UdonExtensions
 	{
 		public static void ExecuteUdonEvent(this CachedUdonEvent udonvar)

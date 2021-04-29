@@ -1,9 +1,9 @@
-﻿using AstroClient.Finder;
-using AstroClient.variables;
-using UnityEngine;
-
-namespace AstroClient.Variables
+﻿namespace AstroClient.Variables
 {
+	using AstroClient.Finder;
+	using AstroClient.variables;
+	using UnityEngine;
+
 	public class VRChatObjects : GameEvents
 	{
 		public override void OnUpdate()

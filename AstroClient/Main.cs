@@ -1,27 +1,27 @@
-﻿using AstroClient.AstroUtils.ItemTweaker;
-using AstroClient.AstroUtils.PlayerMovement;
-using AstroClient.ButtonShortcut;
-using AstroClient.Cheetos;
-using AstroClient.Components;
-using AstroClient.ConsoleUtils;
-using AstroClient.GameObjectDebug;
-using AstroClient.Startup.Buttons;
-using AstroClient.UdonExploits;
-using AstroClient.variables;
-using AstroClient.WorldLights;
-using AstroClient.Worlds;
-using CheetosConsole;
-using MelonLoader;
-using RubyButtonAPI;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using UnityEngine;
-using UnityEngine.UI;
-using Console = CheetosConsole.Console;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.AstroUtils.ItemTweaker;
+	using AstroClient.AstroUtils.PlayerMovement;
+	using AstroClient.ButtonShortcut;
+	using AstroClient.Cheetos;
+	using AstroClient.Components;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.GameObjectDebug;
+	using AstroClient.Startup.Buttons;
+	using AstroClient.UdonExploits;
+	using AstroClient.variables;
+	using AstroClient.WorldLights;
+	using AstroClient.Worlds;
+	using CheetosConsole;
+	using MelonLoader;
+	using RubyButtonAPI;
+	using System;
+	using System.Collections.Generic;
+	using System.Reflection;
+	using UnityEngine;
+	using UnityEngine.UI;
+	using Console = CheetosConsole.Console;
+
 	public class Main : MelonMod
 	{
 		//public static event EventHandler Event_OnApplicationStart;

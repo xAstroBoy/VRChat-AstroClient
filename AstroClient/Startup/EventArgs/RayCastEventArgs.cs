@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using UnityEngine;
+
 	public class RayCastEventArgs
 	{
 		public RaycastHit hit;

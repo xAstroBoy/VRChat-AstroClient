@@ -1,19 +1,19 @@
-﻿using AstroClient.ConsoleUtils;
-using MelonLoader;
-using System;
-using System.Collections;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using UnhollowerRuntimeLib.XrefScans;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.XR;
-using VRC.SDKBase;
-
-namespace DayClientML2.Utility.Extensions
+﻿namespace DayClientML2.Utility.Extensions
 {
+	using AstroClient.ConsoleUtils;
+	using MelonLoader;
+	using System;
+	using System.Collections;
+	using System.IO;
+	using System.Linq;
+	using System.Reflection;
+	using UnhollowerRuntimeLib.XrefScans;
+	using UnityEngine;
+	using UnityEngine.SceneManagement;
+	using UnityEngine.UI;
+	using UnityEngine.XR;
+	using VRC.SDKBase;
+
 	public static class MiskExtension
 	{
 		public static GameObject GetUniqueGameObject(string name)

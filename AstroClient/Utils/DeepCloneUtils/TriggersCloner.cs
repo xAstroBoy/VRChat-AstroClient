@@ -1,10 +1,10 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using UnityEngine;
-using VRCSDK2;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using UnityEngine;
+	using VRCSDK2;
+
 	public static class TriggersCloner
 	{
 		public static void CloneVRC2SDKTrigger(GameObject OrigObj, GameObject DisplayObj, string InteractText)

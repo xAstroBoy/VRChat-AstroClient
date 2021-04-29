@@ -1,7 +1,7 @@
-﻿using AstroClient.ConsoleUtils;
-
-namespace AstroClient.variables
+﻿namespace AstroClient.variables
 {
+	using AstroClient.ConsoleUtils;
+
 	public class Bools
 	{
 		internal static bool DisableNSFWMenu = true;

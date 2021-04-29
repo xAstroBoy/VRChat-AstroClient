@@ -1,10 +1,10 @@
-﻿using MelonLoader;
-using System;
-using System.Collections;
-using VRC;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using MelonLoader;
+	using System;
+	using System.Collections;
+	using VRC;
+
 	public class NetworkManagerHooks : GameEvents
 	{
 		private static bool IsInitialized;

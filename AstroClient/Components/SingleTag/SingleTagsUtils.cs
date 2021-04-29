@@ -1,13 +1,13 @@
-﻿using AstroClient.components;
-using AstroClient.ConsoleUtils;
-using DayClientML2.Utility.Extensions;
-using System.Collections.Generic;
-using System.Linq;
-using VRC;
-using VRC.Core;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.Components
 {
+	using AstroClient.components;
+	using AstroClient.ConsoleUtils;
+	using DayClientML2.Utility.Extensions;
+	using System.Collections.Generic;
+	using System.Linq;
+	using VRC;
+	using VRC.Core;
+
 	internal class SingleTagsUtils : GameEvents
 	{
 		public override void OnLevelLoaded()

@@ -1,10 +1,10 @@
-﻿using AstroClient.AstroUtils.ItemTweaker;
-using AstroClient.components;
-using UnityEngine;
-using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.AstroUtils.ItemTweaker;
+	using AstroClient.components;
+	using UnityEngine;
+	using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
+
 	public class Pickup
 	{
 		public static void RestoreOriginalProperty(GameObject obj)

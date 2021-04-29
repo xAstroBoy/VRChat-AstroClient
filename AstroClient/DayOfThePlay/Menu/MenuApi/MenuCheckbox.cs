@@ -1,12 +1,12 @@
-﻿using AstroClient;
-using AstroClient.ConsoleUtils;
-using System;
-using UnityEngine;
-using UnityEngine.UI;
-using Object = UnityEngine.GameObject;
-
-namespace DayClientML2.Utility
+﻿namespace DayClientML2.Utility
 {
+	using AstroClient;
+	using AstroClient.ConsoleUtils;
+	using System;
+	using UnityEngine;
+	using UnityEngine.UI;
+	using Object = UnityEngine.GameObject;
+
 	internal class MenuCheckbox
 	{
 		// public MenuCheckbox();

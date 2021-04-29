@@ -1,10 +1,10 @@
-﻿using AstroClient.ConsoleUtils;
-using AstroClient.Variables;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.Variables;
+	using UnityEngine;
+	using UnityEngine.UI;
+
 	internal class Club808 : GameEvents
 	{
 		public override void OnWorldReveal(string id, string name, string asseturl)

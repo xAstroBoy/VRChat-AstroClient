@@ -1,12 +1,12 @@
-﻿using RubyButtonAPI;
-using UnityEngine;
-using VRC;
-using VRC.Animation;
-using VRC.SDKBase;
-using Vector3 = UnityEngine.Vector3;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using RubyButtonAPI;
+	using UnityEngine;
+	using VRC;
+	using VRC.Animation;
+	using VRC.SDKBase;
+	using Vector3 = UnityEngine.Vector3;
+
 	public class LocalPlayerUtils : GameEvents
 	{
 		public override void OnUpdate()

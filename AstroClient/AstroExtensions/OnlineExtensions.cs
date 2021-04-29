@@ -1,7 +1,7 @@
-﻿using UnityEngine;
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using UnityEngine;
+
 	public static class OnlineExtensions
 	{
 		public static void ClaimOwnership(this GameObject obj)

@@ -1,8 +1,8 @@
-﻿using System.Linq;
-using VRC.Core;
-
-namespace DayClientML2.Utility.Extensions
+﻿namespace DayClientML2.Utility.Extensions
 {
+	using System.Linq;
+	using VRC.Core;
+
 	internal static class ModerationManagerExtension
 	{
 		public static bool GetIsBlocked(this VRC.Management.ModerationManager instance, string UserID)

@@ -1,9 +1,9 @@
-﻿using AstroClient.variables;
-using RubyButtonAPI;
-using System;
-
-namespace AstroClient.Startup.Buttons
+﻿namespace AstroClient.Startup.Buttons
 {
+	using AstroClient.variables;
+	using RubyButtonAPI;
+	using System;
+
 	internal class UserInteractMenuBtns
 	{
 		public static void InitButtons(float x, float y, bool btnHalf)

@@ -1,19 +1,19 @@
-﻿using AstroClient.Components;
-using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.Startup.Buttons;
-using System;
-using System.Linq;
-using UnhollowerBaseLib.Attributes;
-using UnityEngine;
-using UnityEngine.UI;
-using VRC;
-using VRC.Core;
-using static AstroClient.JarRoleController;
-using Object = UnityEngine.Object;
-
-namespace AstroClient.components
+﻿namespace AstroClient.components
 {
+	using AstroClient.Components;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.Startup.Buttons;
+	using System;
+	using System.Linq;
+	using UnhollowerBaseLib.Attributes;
+	using UnityEngine;
+	using UnityEngine.UI;
+	using VRC;
+	using VRC.Core;
+	using static AstroClient.JarRoleController;
+	using Object = UnityEngine.Object;
+
 	public class JarRoleESP : GameEventsBehaviour
 	{
 		public JarRoleESP(IntPtr ptr) : base(ptr)

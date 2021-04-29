@@ -1,9 +1,9 @@
-﻿using System;
-using UnityEngine;
-using VRC;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using System;
+	using UnityEngine;
+	using VRC;
+
 	public class UdonSyncRPCEventArgs : EventArgs
 	{
 		public Player sender;

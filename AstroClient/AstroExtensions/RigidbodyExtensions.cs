@@ -1,15 +1,10 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using AstroClient.components;
-
-#region AstroClient Imports
-
-using AstroClient.ConsoleUtils;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.extensions
+﻿namespace AstroClient.extensions
 {
+	using System.Collections.Generic;
+	using UnityEngine;
+	using AstroClient.components;
+	using AstroClient.ConsoleUtils;
+
 	public static class RigidbodyExtensions
 	{
 		public static void PrintAllRigidBodySettings(this GameObject obj)

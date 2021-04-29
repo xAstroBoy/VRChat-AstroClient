@@ -1,8 +1,8 @@
-﻿using Transmtn.DTO.Notifications;
-using UnityEngine;
-
-namespace DayClientML2.Utility.Extensions
+﻿namespace DayClientML2.Utility.Extensions
 {
+	using Transmtn.DTO.Notifications;
+	using UnityEngine;
+
 	internal static class QuickMenuExtension
 	{
 		public static void SelectPlayer(this QuickMenu Instance, VRCPlayer Instance2)

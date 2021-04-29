@@ -1,33 +1,28 @@
-﻿using Boo.Lang;
-using Il2CppSystem.Text;
-using RubyButtonAPI;
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using UnhollowerBaseLib;
-using UnityEngine;
-using VRC.SDK3.Components;
-using VRC.SDKBase;
-using VRCSDK2;
-using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
-using Photon.Pun;
-using VRC;
-using Color = System.Drawing.Color;
-
-#region AstroClient Imports
-
-using AstroClient.components;
-using AstroClient.ConsoleUtils;
-using DayClientML2.Utility.Extensions;
-using AstroClient.extensions;
-using AstroClient.SyncPhysicExt;
-using AstroClient.ItemTweaker;
-
-#endregion AstroClient Imports
-
-namespace AstroClient.GameObjectDebug
+﻿namespace AstroClient.GameObjectDebug
 {
+	using Boo.Lang;
+	using Il2CppSystem.Text;
+	using RubyButtonAPI;
+	using System;
+	using System.IO;
+	using System.Linq;
+	using System.Threading;
+	using UnhollowerBaseLib;
+	using UnityEngine;
+	using VRC.SDK3.Components;
+	using VRC.SDKBase;
+	using VRCSDK2;
+	using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
+	using Photon.Pun;
+	using VRC;
+	using Color = System.Drawing.Color;
+	using AstroClient.components;
+	using AstroClient.ConsoleUtils;
+	using DayClientML2.Utility.Extensions;
+	using AstroClient.extensions;
+	using AstroClient.SyncPhysicExt;
+	using AstroClient.ItemTweaker;
+
 	public class GameObjectUtils : GameEvents
 	{
 		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)

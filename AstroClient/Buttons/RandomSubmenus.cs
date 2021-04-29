@@ -1,9 +1,9 @@
-﻿using AstroClient.AstroUtils.ItemTweaker;
-using AstroClient.extensions;
-using RubyButtonAPI;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using AstroClient.AstroUtils.ItemTweaker;
+	using AstroClient.extensions;
+	using RubyButtonAPI;
+
 	internal class RandomSubmenus
 	{
 		public static void VRC_InteractableSubMenu(QMTabMenu main, float x, float y, bool btnHalf)

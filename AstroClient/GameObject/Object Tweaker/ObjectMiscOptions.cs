@@ -1,20 +1,15 @@
-﻿using RubyButtonAPI;
-using UnityEngine;
-using System;
-using VRC;
-
-#region AstroClient Imports
-
-using AstroClient.components;
-using AstroClient.ConsoleUtils;
-using AstroClient.GameObjectDebug;
-using AstroClient.AstroUtils.ItemTweaker;
-using AstroClient.extensions;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using RubyButtonAPI;
+	using UnityEngine;
+	using System;
+	using VRC;
+	using AstroClient.components;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.GameObjectDebug;
+	using AstroClient.AstroUtils.ItemTweaker;
+	using AstroClient.extensions;
+
 	public class ObjectMiscOptions : GameEvents
 	{
 		public override void OnPlayerLeft(Player player)

@@ -1,17 +1,12 @@
-﻿using UnityEngine;
-using VRC;
-using AstroClient.extensions;
-
-#region AstroClient Imports
-
-using AstroClient.components;
-using static AstroClient.LocalPlayerUtils;
-using AstroClient.variables;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using UnityEngine;
+	using VRC;
+	using AstroClient.extensions;
+	using AstroClient.components;
+	using static AstroClient.LocalPlayerUtils;
+	using AstroClient.variables;
+
 	public class ItemPosition
 	{
 		public static void TeleportObject(GameObject obj)

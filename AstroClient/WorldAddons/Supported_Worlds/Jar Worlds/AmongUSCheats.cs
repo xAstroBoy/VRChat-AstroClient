@@ -1,26 +1,21 @@
-﻿using RubyButtonAPI;
-using System;
-using UnityEngine;
-
-#region AstroClient Imports
-
-using AstroClient.Finder;
-using AstroClient.ConsoleUtils;
-using AstroClient.extensions;
-using AstroClient.UdonExploits;
-using AstroClient.Variables;
-using VRC.Udon;
-using static AstroClient.variables.CustomLists;
-using DayClientML2.Utility;
-using VRC;
-using AstroClient.components;
-using System.Linq;
-using DayClientML2.Utility.Extensions;
-
-#endregion AstroClient Imports
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+	using RubyButtonAPI;
+	using System;
+	using UnityEngine;
+	using AstroClient.Finder;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.UdonExploits;
+	using AstroClient.Variables;
+	using VRC.Udon;
+	using static AstroClient.variables.CustomLists;
+	using DayClientML2.Utility;
+	using VRC;
+	using AstroClient.components;
+	using System.Linq;
+	using DayClientML2.Utility.Extensions;
+
 	public class AmongUSCheats : GameEvents
 	{
 		public override void OnLevelLoaded()

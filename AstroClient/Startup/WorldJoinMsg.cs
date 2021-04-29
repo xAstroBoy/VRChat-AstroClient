@@ -1,7 +1,7 @@
-﻿using AstroClient.ConsoleUtils;
-
-namespace AstroClient.Startup
+﻿namespace AstroClient.Startup
 {
+	using AstroClient.ConsoleUtils;
+
 	internal class WorldJoinMsg : GameEvents
 	{
 		public override void OnWorldReveal(string id, string name, string asseturl)
