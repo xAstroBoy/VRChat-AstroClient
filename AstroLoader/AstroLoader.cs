@@ -81,8 +81,7 @@
 			{
 				try
 				{
-					//var dll = Assembly.LoadFile(path);
-					Thread.GetDomain().ExecuteAssembly(path);
+					_ = Assembly.LoadFile(path);
 					Console.WriteLine($"Injected: {path}");
 				}
 				catch (Exception e)
