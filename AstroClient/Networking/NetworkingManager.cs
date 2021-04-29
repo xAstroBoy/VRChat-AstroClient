@@ -1,6 +1,6 @@
 ﻿using AstroClient.ConsoleUtils;
 using AstroClient.variables;
-using AstroLibrary.Serializable;
+using AstroNetworkingLibrary.Serializable;
 using DayClientML2.Utility.Extensions;
 using Newtonsoft.Json;
 

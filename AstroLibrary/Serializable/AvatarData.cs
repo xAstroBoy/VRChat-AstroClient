@@ -1,4 +1,4 @@
-﻿namespace AstroLibrary.Serializable
+﻿namespace AstroNetworkingLibrary.Serializable
 {
     using System;
     using System.Reflection;

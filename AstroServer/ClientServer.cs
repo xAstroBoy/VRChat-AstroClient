@@ -1,7 +1,7 @@
 ﻿namespace AstroServer
 {
-    using AstroLibrary.Networking;
-    using AstroLibrary.Serializable;
+    using AstroNetworkingLibrary;
+    using AstroNetworkingLibrary.Serializable;
     using AstroServer.DiscordBot;
     using Newtonsoft.Json;
     using System;

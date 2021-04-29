@@ -1,4 +1,4 @@
-﻿namespace AstroLibrary.Networking
+﻿namespace AstroNetworkingLibrary
 {
     using System;
     using System.Text;

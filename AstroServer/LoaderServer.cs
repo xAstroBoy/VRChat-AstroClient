@@ -1,6 +1,6 @@
 ﻿namespace AstroServer
 {
-    using AstroLibrary.Networking;
+    using AstroNetworkingLibrary;
     using System;
     using System.Collections.Generic;
     using System.IO;

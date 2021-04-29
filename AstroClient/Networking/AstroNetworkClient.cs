@@ -3,7 +3,7 @@ using AstroClient.components;
 using AstroClient.Components;
 using AstroClient.ConsoleUtils;
 using AstroClient.variables;
-using AstroLibrary.Networking;
+using AstroNetworkingLibrary;
 using DayClientML2.Utility;
 using DayClientML2.Utility.Extensions;
 using System;
