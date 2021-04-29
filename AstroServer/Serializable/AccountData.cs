@@ -1,10 +1,10 @@
 ﻿namespace AstroServer.Serializable
-	{
+{
 	using System;
 
 	[Serializable]
 	public class AccountData
-		{
+	{
 		public string Name = string.Empty;
 
 		public string DiscordID = string.Empty;
@@ -22,5 +22,5 @@
 		public bool HasAmongUs = false;
 
 		public bool HasFreezeTag = false;
-		}
 	}
+}

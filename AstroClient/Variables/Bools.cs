@@ -2,62 +2,62 @@
 
 namespace AstroClient.variables
 {
-    public class Bools
-    {
-        internal static bool DisableNSFWMenu = true;
+	public class Bools
+	{
+		internal static bool DisableNSFWMenu = true;
 
 #if CHEETOS
-        private static bool _isDebugMode = true;
+		private static bool _isDebugMode = true;
 #else
         private static bool _isDebugMode = false;
 #endif
 
-        internal static bool IsDeveloper;
+		internal static bool IsDeveloper;
 
-        internal static bool IsDebugMode
-        {
-            get
-            {
-                return _isDebugMode;
-            }
-            set
-            {
-                _isDebugMode = value;
-                if (Main.ToggleDebugInfo != null)
-                {
-                    Main.ToggleDebugInfo.setToggleState(value);
-                }
-                if (value)
-                {
-                    ModConsole.Log("Debug Info Enabled", System.Drawing.Color.Green);
-                }
-                else
-                {
-                    ModConsole.Log("Debug Info disabled", System.Drawing.Color.Red);
-                }
-            }
-        }
+		internal static bool IsDebugMode
+		{
+			get
+			{
+				return _isDebugMode;
+			}
+			set
+			{
+				_isDebugMode = value;
+				if (Main.ToggleDebugInfo != null)
+				{
+					Main.ToggleDebugInfo.setToggleState(value);
+				}
+				if (value)
+				{
+					ModConsole.Log("Debug Info Enabled", System.Drawing.Color.Green);
+				}
+				else
+				{
+					ModConsole.Log("Debug Info disabled", System.Drawing.Color.Red);
+				}
+			}
+		}
 
-        internal static bool IsCheetosMode
-        {
-            get
-            {
+		internal static bool IsCheetosMode
+		{
+			get
+			{
 #if DEBUG
-                return true;
+				return true;
 #endif
-                return false;
-            }
-        }
+				return false;
+			}
+		}
 
-        internal static bool SkipMenuChecks = true;
+		internal static bool SkipMenuChecks = true;
 
-        // TOGGLE "Malicious" COMPONENTS
-        internal static bool AllowOrbitComponent = true;
+		// TOGGLE "Malicious" COMPONENTS
+		internal static bool AllowOrbitComponent = true;
 
-        internal static bool AllowAttackerComponent = true;
+		internal static bool AllowAttackerComponent = true;
 
-        internal static bool DisableBlackScreenFade = true;
+		internal static bool DisableBlackScreenFade = true;
 
-        internal static bool SerializerEnabled;
-    }
+		internal static bool SerializerEnabled;
+	}
 }

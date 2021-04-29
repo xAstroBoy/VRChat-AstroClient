@@ -3,38 +3,38 @@ using System.Reflection;
 
 namespace AstroClient
 {
-    [Serializable, Obfuscation]
-    public class ConfigUI
-    {
-        public bool RemoveVRCPlus = false;
+	[Serializable, Obfuscation]
+	public class ConfigUI
+	{
+		public bool RemoveVRCPlus = false;
 
-        public bool RemoveReportButton = false;
+		public bool RemoveReportButton = false;
 
-        public bool RemoveUserIconButton = false;
+		public bool RemoveUserIconButton = false;
 
-        public bool RemoveVRCPlusMiniBanner = false;
+		public bool RemoveVRCPlusMiniBanner = false;
 
-        public bool RemoveVRCPlusBanner = false;
+		public bool RemoveVRCPlusBanner = false;
 
-        public bool RemoveUserIconCameraButton = false;
+		public bool RemoveUserIconCameraButton = false;
 
-        public bool RemoveVRCPlusThankYou = false;
+		public bool RemoveVRCPlusThankYou = false;
 
-        // Player List UI
-        public bool ShowPlayersMenu = true;
+		// Player List UI
+		public bool ShowPlayersMenu = true;
 
-        public bool ShowPlayersList = true;
-    }
+		public bool ShowPlayersList = true;
+	}
 
-    [Serializable, Obfuscation]
-    public class Config
-    {
-        public bool JoinLeave = false;
+	[Serializable, Obfuscation]
+	public class Config
+	{
+		public bool JoinLeave = false;
 
-        public bool LogRPCEvents = false;
+		public bool LogRPCEvents = false;
 
-        public bool LogUdonEvents = false;
+		public bool LogUdonEvents = false;
 
-        public bool LogTriggerEvents = false;
-    }
+		public bool LogTriggerEvents = false;
+	}
 }

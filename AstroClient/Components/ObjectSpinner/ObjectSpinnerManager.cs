@@ -15,176 +15,176 @@ using static AstroClient.variables.InstanceBuilder;
 
 namespace AstroClient.components
 {
-    public class ObjectSpinnerManager : GameEventsBehaviour
-    {
-        #region Internal
+	public class ObjectSpinnerManager : GameEventsBehaviour
+	{
+		#region Internal
 
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+		public Delegate ReferencedDelegate;
+		public IntPtr MethodInfo;
+		public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public ObjectSpinnerManager(IntPtr obj0) : base(obj0)
-        {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
-            AntiGcList.Add(this);
-        }
+		public ObjectSpinnerManager(IntPtr obj0) : base(obj0)
+		{
+			AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+			AntiGcList.Add(this);
+		}
 
-        public ObjectSpinnerManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ObjectSpinnerManager>())
-        {
-            ClassInjector.DerivedConstructorBody(this);
+		public ObjectSpinnerManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ObjectSpinnerManager>())
+		{
+			ClassInjector.DerivedConstructorBody(this);
 
-            ReferencedDelegate = referencedDelegate;
-            MethodInfo = methodInfo;
-        }
+			ReferencedDelegate = referencedDelegate;
+			MethodInfo = methodInfo;
+		}
 
-        ~ObjectSpinnerManager()
-        {
-            Marshal.FreeHGlobal(MethodInfo);
-            MethodInfo = IntPtr.Zero;
-            ReferencedDelegate = null;
-            AntiGcList.Remove(this);
-            AntiGcList = null;
-        }
+		~ObjectSpinnerManager()
+		{
+			Marshal.FreeHGlobal(MethodInfo);
+			MethodInfo = IntPtr.Zero;
+			ReferencedDelegate = null;
+			AntiGcList.Remove(this);
+			AntiGcList = null;
+		}
 
-        #endregion Internal
+		#endregion Internal
 
-        #region Module
+		#region Module
 
-        public static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ObjectSpinnerBehaviors;
+		public static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ObjectSpinnerBehaviors;
 
-        public void Start()
-        {
-            ObjectSpinnerBehaviors = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
-            Instance = this;
-        }
+		public void Start()
+		{
+			ObjectSpinnerBehaviors = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
+			Instance = this;
+		}
 
-        public static void MakeInstance()
-        {
-            if (Instance == null)
-            {
-                string name = "ObjectSpinnerManager";
-                var gameobj = GetInstanceHolder(name);
-                Instance = gameobj.AddComponent<ObjectSpinnerManager>() as ObjectSpinnerManager;
-                UnityEngine.Object.DontDestroyOnLoad(gameobj);
-                if (Instance != null)
-                {
-                    ModConsole.Log("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
-                }
-                else
-                {
-                    ModConsole.Log("[ " + name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
-                }
-            }
-        }
+		public static void MakeInstance()
+		{
+			if (Instance == null)
+			{
+				string name = "ObjectSpinnerManager";
+				var gameobj = GetInstanceHolder(name);
+				Instance = gameobj.AddComponent<ObjectSpinnerManager>() as ObjectSpinnerManager;
+				UnityEngine.Object.DontDestroyOnLoad(gameobj);
+				if (Instance != null)
+				{
+					ModConsole.Log("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
+				}
+				else
+				{
+					ModConsole.Log("[ " + name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
+				}
+			}
+		}
 
-        public static void Update()
-        {
-        }
+		public static void Update()
+		{
+		}
 
-        public static void UpdateSpinnerButton(GameObject obj)
-        {
-            var spin = obj.GetComponent<ObjectSpinner>();
-            if (spin != null)
-            {
-                SpinAmountTell.setButtonText("X : " + spin.ForceX + " Y : " + spin.ForceY + " Z :" + spin.ForceZ);
-            }
-            else
-            {
-                SpinAmountTell.setButtonText("X : " + "0" + " Y : " + "0" + " Z :" + "0");
-            }
-        }
+		public static void UpdateSpinnerButton(GameObject obj)
+		{
+			var spin = obj.GetComponent<ObjectSpinner>();
+			if (spin != null)
+			{
+				SpinAmountTell.setButtonText("X : " + spin.ForceX + " Y : " + spin.ForceY + " Z :" + spin.ForceZ);
+			}
+			else
+			{
+				SpinAmountTell.setButtonText("X : " + "0" + " Y : " + "0" + " Z :" + "0");
+			}
+		}
 
-        public static void RemoveObject(GameObject obj)
-        {
-            if (ObjectSpinners.Contains(obj))
-            {
-                ObjectSpinners.Remove(obj);
-            }
-        }
+		public static void RemoveObject(GameObject obj)
+		{
+			if (ObjectSpinners.Contains(obj))
+			{
+				ObjectSpinners.Remove(obj);
+			}
+		}
 
-        public static void UpdateTimerButton(GameObject obj)
-        {
-            var Timer = obj.GetComponent<ObjectSpinner>();
-            if (Timer != null)
-            {
-                SpinnerTimerBtn.setButtonText("Timer : " + Timer.SpinnerTimer);
-            }
-            else
-            {
-                SpinnerTimerBtn.setButtonText("Timer : " + "0");
-            }
-        }
+		public static void UpdateTimerButton(GameObject obj)
+		{
+			var Timer = obj.GetComponent<ObjectSpinner>();
+			if (Timer != null)
+			{
+				SpinnerTimerBtn.setButtonText("Timer : " + Timer.SpinnerTimer);
+			}
+			else
+			{
+				SpinnerTimerBtn.setButtonText("Timer : " + "0");
+			}
+		}
 
-        public static void KillObjectSpinners()
-        {
-            foreach (var obj in ObjectSpinners)
-            {
-                var spinner = obj.GetComponent<ObjectSpinner>();
-                if (spinner != null)
-                {
-                    spinner.SelfDestroy();
-                }
-            }
+		public static void KillObjectSpinners()
+		{
+			foreach (var obj in ObjectSpinners)
+			{
+				var spinner = obj.GetComponent<ObjectSpinner>();
+				if (spinner != null)
+				{
+					spinner.SelfDestroy();
+				}
+			}
 
-            ObjectSpinners.Clear();
-        }
+			ObjectSpinners.Clear();
+		}
 
-        public override void OnLevelLoaded()
-        {
-            ObjectSpinners.Clear();
-            ClearList();
-            if (SpinnerTimerBtn != null)
-            {
-                SpinnerTimerBtn.setButtonText("none");
-            }
-            if (SpinAmountTell != null)
-            {
-                SpinAmountTell.setButtonText("none");
-            }
-        }
+		public override void OnLevelLoaded()
+		{
+			ObjectSpinners.Clear();
+			ClearList();
+			if (SpinnerTimerBtn != null)
+			{
+				SpinnerTimerBtn.setButtonText("none");
+			}
+			if (SpinAmountTell != null)
+			{
+				SpinAmountTell.setButtonText("none");
+			}
+		}
 
-        public static void IncreaseObjTimer(GameObject obj)
-        {
-            var TuneTime = obj.GetComponent<ObjectSpinner>();
-            if (TuneTime != null)
-            {
-                TuneTime.SpinnerTimer = TuneTime.SpinnerTimer + 0.01f;
-                UpdateTimerButton(obj);
-            }
-        }
+		public static void IncreaseObjTimer(GameObject obj)
+		{
+			var TuneTime = obj.GetComponent<ObjectSpinner>();
+			if (TuneTime != null)
+			{
+				TuneTime.SpinnerTimer = TuneTime.SpinnerTimer + 0.01f;
+				UpdateTimerButton(obj);
+			}
+		}
 
-        public static void DecreaseObjTimer(GameObject obj)
-        {
-            var TuneTime = obj.GetComponent<ObjectSpinner>();
-            if (TuneTime != null)
-            {
-                TuneTime.SpinnerTimer = TuneTime.SpinnerTimer - 0.01f;
-                UpdateTimerButton(obj);
-            }
-        }
+		public static void DecreaseObjTimer(GameObject obj)
+		{
+			var TuneTime = obj.GetComponent<ObjectSpinner>();
+			if (TuneTime != null)
+			{
+				TuneTime.SpinnerTimer = TuneTime.SpinnerTimer - 0.01f;
+				UpdateTimerButton(obj);
+			}
+		}
 
-        public static void Register(ObjectSpinner ObjectSpinnerBehaviour)
-        {
-            ObjectSpinnerBehaviors.Add(ObjectSpinnerBehaviour);
-        }
+		public static void Register(ObjectSpinner ObjectSpinnerBehaviour)
+		{
+			ObjectSpinnerBehaviors.Add(ObjectSpinnerBehaviour);
+		}
 
-        public static void Deregister(ObjectSpinner ObjectSpinnerBehaviour)
-        {
-            ObjectSpinnerBehaviors.Remove(ObjectSpinnerBehaviour);
-        }
+		public static void Deregister(ObjectSpinner ObjectSpinnerBehaviour)
+		{
+			ObjectSpinnerBehaviors.Remove(ObjectSpinnerBehaviour);
+		}
 
-        public static void ClearList()
-        {
-            ObjectSpinnerBehaviors.Clear();
-        }
+		public static void ClearList()
+		{
+			ObjectSpinnerBehaviors.Clear();
+		}
 
-        public static List<GameObject> ObjectSpinners = new List<GameObject>();
+		public static List<GameObject> ObjectSpinners = new List<GameObject>();
 
-        public static ObjectSpinnerManager Instance { get; set; }
+		public static ObjectSpinnerManager Instance { get; set; }
 
-        public static QMSingleButton SpinnerTimerBtn;
-        public static QMSingleButton SpinAmountTell;
+		public static QMSingleButton SpinnerTimerBtn;
+		public static QMSingleButton SpinAmountTell;
 
-        #endregion Module
-    }
+		#endregion Module
+	}
 }

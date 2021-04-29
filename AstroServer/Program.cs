@@ -1,5 +1,5 @@
 ﻿namespace AstroServer
-	{
+{
 	using AstroServer.DiscordBot;
 	using Discord;
 	using Discord.Commands;
@@ -10,7 +10,7 @@
 	using System.Threading.Tasks;
 
 	internal class Program
-		{
+	{
 		public static ServiceProvider Services { get; private set; }
 
 		internal static ClientServer CServer;
@@ -20,7 +20,7 @@
 		internal static bool Running;
 
 		public static async Task Main()
-			{
+		{
 			Console.WriteLine("Welcome to AstroServer!");
 			await Database.Initialize();
 			Console.WriteLine("Starting Discord bot..");
@@ -51,9 +51,9 @@
 
 			// Gonna make this better later, but for now, fuck it lmao
 			while (Running)
-				{
+			{
 				Console.ReadLine();
-				}
 			}
 		}
 	}
+}

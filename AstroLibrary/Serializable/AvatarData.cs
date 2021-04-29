@@ -1,11 +1,11 @@
 ﻿namespace AstroNetworkingLibrary.Serializable
-	{
+{
 	using System;
 	using System.Reflection;
 
 	[Serializable, Obfuscation]
 	public class AvatarData
-		{
+	{
 		public string ID = string.Empty;
 
 		public string Name = string.Empty;
@@ -25,5 +25,5 @@
 		public string ImageURL = string.Empty;
 
 		public string ThumbnailURL = string.Empty;
-		}
 	}
+}

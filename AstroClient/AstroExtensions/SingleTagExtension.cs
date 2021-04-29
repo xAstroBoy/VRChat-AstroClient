@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.AstroExtensions
 {
-    public static class SingleTagExtension
-    {
-    }
+	public static class SingleTagExtension
+	{
+	}
 }

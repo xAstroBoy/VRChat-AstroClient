@@ -1,11 +1,11 @@
 ﻿namespace AstroLoader
-	{
+{
 	using MelonLoader;
 	using System;
 	using System.Reflection;
 
 	public class AstroLoader : MelonPlugin
-		{
+	{
 		public static byte[] AssemblyFile;
 
 #if DEBUG
@@ -17,7 +17,7 @@
 #endif
 
 		public AstroLoader()
-			{
+		{
 #if DEBUG
 			LoadDebug();
 			return;
@@ -28,8 +28,8 @@
 			AstroNetworkLoader.Initialize();
 
 			while (!AstroNetworkLoader.IsReady)
-				{
-				}
+			{
+			}
 
 			//if (AstroNetworkLoader.AssemblyFile != null)
 			//{
@@ -50,18 +50,18 @@
 			//{
 			//    Console.WriteLine("Failed to load assembly, it was null");
 			//}
-			}
+		}
 
 #if DEBUG
 		public void LoadDebug()
-			{
+		{
 			Console.WriteLine("Loader is in debug mode.");
 			foreach (var path in DebugPaths)
-				{
+			{
 				var dll = Assembly.LoadFile(path);
 				MelonHandler.LoadFromAssembly(dll, path);
-				}
 			}
-#endif
 		}
+#endif
 	}
+}

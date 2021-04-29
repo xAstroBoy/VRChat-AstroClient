@@ -9,25 +9,25 @@ using AstroClient.AstroUtils.ItemTweaker;
 
 namespace AstroClient.extensions
 {
-    public static class ItemTweakerExtensions
-    {
-        public static void AddToWorldUtilsMenu(this GameObject obj)
-        {
-            if (obj != null)
-            {
-                ItemTweakerMain.AddToWorldUtilsMenu(obj);
-            }
-        }
+	public static class ItemTweakerExtensions
+	{
+		public static void AddToWorldUtilsMenu(this GameObject obj)
+		{
+			if (obj != null)
+			{
+				ItemTweakerMain.AddToWorldUtilsMenu(obj);
+			}
+		}
 
-        public static void AddToWorldUtilsMenu(this List<GameObject> list)
-        {
-            foreach (var obj in list)
-            {
-                if (obj != null)
-                {
-                    ItemTweakerMain.AddToWorldUtilsMenu(obj);
-                }
-            }
-        }
-    }
+		public static void AddToWorldUtilsMenu(this List<GameObject> list)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+					ItemTweakerMain.AddToWorldUtilsMenu(obj);
+				}
+			}
+		}
+	}
 }

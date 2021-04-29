@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Cheetos
 {
-    public class StreamerProtector : GameEvents
-    {
-    }
+	public class StreamerProtector : GameEvents
+	{
+	}
 }
