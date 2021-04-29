@@ -8,12 +8,13 @@ using System.Reflection;
 
 namespace AstroLoader
 {
-    public class AstroLoader : MelonMod
+    public class AstroLoader : MelonPlugin
     {
         public static byte[] AssemblyFile;
 
 #if DEBUG
-        public static string DebugPath = Environment.CurrentDirectory + @"\Dependencies\AstroClient.dll";
+        public static string DebugPath1 = Environment.CurrentDirectory + @"\Debug\AstroClient.dll";
+        public static string DebugPath2 = Environment.CurrentDirectory + @"\Debug\DontTouchMyClient.dll";
 #endif
 
         public AstroLoader()
@@ -56,8 +57,10 @@ namespace AstroLoader
 
         public void LoadDebug()
         {
-            var dll = Assembly.LoadFile(DebugPath);
-            MelonHandler.LoadFromAssembly(dll, DebugPath);
+            var dll1 = Assembly.LoadFile(DebugPath1);
+            var dll2 = Assembly.LoadFile(DebugPath2);
+            MelonHandler.LoadFromAssembly(dll1, DebugPath1);
+            MelonHandler.LoadFromAssembly(dll2, DebugPath2);
         }
 
 #endif
