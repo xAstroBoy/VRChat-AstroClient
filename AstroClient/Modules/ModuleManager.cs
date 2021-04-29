@@ -5,6 +5,7 @@
 	using System.Diagnostics;
 	using System.Linq;
 	using System.Reflection;
+	using System.Threading;
 
 	public static class ModuleManager
 	{
@@ -12,48 +13,26 @@
 
 		public static void LoadModules()
 		{
-			//ModConsole.Log("Loading Modules...");
+			ModConsole.Log("Loading Modules...");
 
-   //         StackFrame[] frames = new StackTrace().GetFrames();
-			//var assemblies = (from f in frames select f.GetMethod().ReflectedType.Assembly);
+			var assemblies = Thread.GetDomain().GetAssemblies();
 
-			//foreach (var assembly in assemblies)
-			//{
-			//	var types = assembly.GetTypes();
-
-			//	foreach (var type in types)
-			//	{
-			//		var btype = type.BaseType;
-
-			//		if (btype != null && btype.Equals(typeof(BaseModule)))
-			//		{
-			//			BaseModule module = assembly.CreateInstance(type.ToString(), true) as BaseModule;
-			//			Modules.Add(module);
-			//			ModConsole.Log($"ModuleManager Loaded Module: {module.name}");
-			//		}
-
-			//		ModConsole.Log($"type: {type}, of {btype}");
-			//	}
-			//}
-
-			//var assembly = Assembly.GetExecutingAssembly();
-
-            ModConsole.Log("Loading Modules...");
-            var assembly = Assembly.GetExecutingAssembly();
-			var types = assembly.GetTypes();
-
-			foreach (var type in types)
+			foreach (var assembly in assemblies)
 			{
-				var btype = type.BaseType;
-
-				if (btype != null && btype.Equals(typeof(BaseModule)))
+				var types = assembly.GetTypes();
+				foreach (var type in types)
 				{
-					BaseModule module = assembly.CreateInstance(type.ToString(), true) as BaseModule;
-					Modules.Add(module);
-					ModConsole.Log($"ModuleManager Loaded Module: {module.name}");
-				}
+					var btype = type.BaseType;
 
-				ModConsole.Log($"type: {type}, of {btype}");
+					if (btype != null && btype.Equals(typeof(BaseModule)))
+					{
+						BaseModule module = assembly.CreateInstance(type.ToString(), true) as BaseModule;
+						Modules.Add(module);
+						ModConsole.Log($"ModuleManager Loaded Module: {module.GetType()}");
+					}
+
+					//ModConsole.Log($"type: {type}, of {btype}");
+				}
 			}
 		}
 	}

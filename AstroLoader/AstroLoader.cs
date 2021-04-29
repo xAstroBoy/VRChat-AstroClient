@@ -3,6 +3,7 @@
 	using MelonLoader;
 	using System;
 	using System.Reflection;
+	using System.Threading;
 
 	public class AstroLoader : MelonPlugin
 	{
@@ -61,6 +62,8 @@
 		public void LoadDebug()
 		{
 			Console.WriteLine("Loader is in debug mode.");
+			//Console.WriteLine(Thread.GetDomain().ExecuteAssembly);
+			//Console.WriteLine(Assembly.GetExecutingAssembly().FullName);
 			foreach (var path in DebugMelonPaths)
 			{
 				try
@@ -78,7 +81,8 @@
 			{
 				try
 				{
-					var dll = Assembly.LoadFile(path);
+					//var dll = Assembly.LoadFile(path);
+					Thread.GetDomain().ExecuteAssembly(path);
 					Console.WriteLine($"Injected: {path}");
 				}
 				catch (Exception e)
