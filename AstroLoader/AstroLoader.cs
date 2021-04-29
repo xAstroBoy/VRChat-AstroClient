@@ -3,13 +3,13 @@
 	using MelonLoader;
 	using System;
 	using System.Reflection;
-	using System.Threading;
 
 	public class AstroLoader : MelonPlugin
 	{
 		public static byte[] AssemblyFile;
 
 #if OFFLINE
+
 		public static string[] DebugMelonPaths =
 		{
 			@"Debug\AstroClient.dll",
@@ -26,6 +26,7 @@
 {
 			@"Debug\Module\AstroTestModule.dll"
 		};
+
 #endif
 
 		public AstroLoader()
@@ -65,6 +66,7 @@
 		}
 
 #if OFFLINE
+
 		public void LoadDebug()
 		{
 			Console.WriteLine("Loader is in debug mode.");
@@ -73,7 +75,7 @@
 			{
 				try
 				{
-                    var dll = Assembly.LoadFrom(path);
+					var dll = Assembly.LoadFrom(path);
 					Console.WriteLine($"Injected Library: {path}");
 				}
 				catch
@@ -109,6 +111,7 @@
 				}
 			}
 		}
+
 #endif
 	}
 }

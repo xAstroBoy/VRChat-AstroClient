@@ -1,15 +1,15 @@
 ﻿namespace AstroClient.WorldLights
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.Skyboxes;
 	using RubyButtonAPI;
 	using System;
 	using UnityEngine;
 	using UnityEngine.Rendering;
 	using VRC;
-	using AstroClient.ConsoleUtils;
 	using static AstroClient.variables.CustomLists;
 	using static AstroClient.variables.GlobalLists;
-	using AstroClient.extensions;
-	using AstroClient.Skyboxes;
 
 	public class LightControl : GameEvents
 	{

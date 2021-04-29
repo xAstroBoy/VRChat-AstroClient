@@ -1,9 +1,7 @@
 ﻿namespace AstroClient.Startup
 {
 	using AstroClient.components;
-	using AstroClient.Modules;
 	using AstroClient.variables;
-	using Mono.CSharp;
 	using UnhollowerRuntimeLib;
 
 	public class ComponentHelper : GameEvents

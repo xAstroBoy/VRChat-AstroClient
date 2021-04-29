@@ -10,8 +10,6 @@
 	[Obsolete("This Class will be deleted, as the new ESP Can edit colors and it has identifiers!")]
 	public class GameObjectESP : GameEvents
 	{
-
-
 		public static void AddESPToMurderProps()
 		{
 			isMurderItemsESPActivated = true;
@@ -47,7 +45,6 @@
 			}
 			catch (Exception) { }
 		}
-
 
 		public override void OnLevelLoaded()
 		{

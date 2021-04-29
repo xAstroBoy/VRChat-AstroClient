@@ -1,11 +1,11 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.components;
+	using AstroClient.extensions;
+	using AstroClient.variables;
 	using UnityEngine;
 	using VRC;
-	using AstroClient.extensions;
-	using AstroClient.components;
 	using static AstroClient.LocalPlayerUtils;
-	using AstroClient.variables;
 
 	public class ItemPosition
 	{

@@ -1,20 +1,20 @@
 ﻿namespace AstroClient
 {
-	using RubyButtonAPI;
-	using System;
-	using UnityEngine;
-	using AstroClient.Finder;
+	using AstroClient.components;
 	using AstroClient.ConsoleUtils;
 	using AstroClient.extensions;
+	using AstroClient.Finder;
 	using AstroClient.UdonExploits;
 	using AstroClient.Variables;
+	using DayClientML2.Utility;
+	using DayClientML2.Utility.Extensions;
+	using RubyButtonAPI;
+	using System;
+	using System.Linq;
+	using UnityEngine;
+	using VRC;
 	using VRC.Udon;
 	using static AstroClient.variables.CustomLists;
-	using DayClientML2.Utility;
-	using VRC;
-	using AstroClient.components;
-	using System.Linq;
-	using DayClientML2.Utility.Extensions;
 
 	public class AmongUSCheats : GameEvents
 	{

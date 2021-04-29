@@ -1,10 +1,10 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
-	using AstroClient.ConsoleUtils;
-	using AstroClient.extensions;
 
 	public class QVPensUtils : GameEvents
 	{

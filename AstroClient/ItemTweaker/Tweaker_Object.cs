@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.ItemTweaker
 {
-	using RubyButtonAPI;
-	using UnityEngine;
+	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.components;
 	using AstroClient.ConsoleUtils;
-	using AstroClient.Finder;
-	using AstroClient.AstroUtils.ItemTweaker;
-	using System.Linq;
 	using AstroClient.extensions;
+	using AstroClient.Finder;
+	using RubyButtonAPI;
+	using System.Linq;
+	using UnityEngine;
 
 	public class Tweaker_Object : GameEvents
 	{
@@ -116,6 +116,7 @@
 
 		private static bool _CurrentSelectedItemEnabledESP = false;
 		private static readonly string SelectedItemESPIdentifier = "Selected_item_ID";
+
 		public static bool CurrentSelectedItemEnabledESP
 		{
 			get
@@ -139,7 +140,6 @@
 								ESP.Identifier = SelectedItemESPIdentifier;
 							}
 						}
-
 					}
 				}
 				else
@@ -170,7 +170,6 @@
 				if (_CurrentSelectedObject != null)
 				{
 					_CurrentSelectedObject.DestroyESPByIdentifier(SelectedItemESPIdentifier);
-
 				}
 
 				_CurrentSelectedObject = value;

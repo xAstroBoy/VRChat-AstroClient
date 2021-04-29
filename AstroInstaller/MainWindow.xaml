@@ -8,7 +8,6 @@
         mc:Ignorable="d"
         Title="Notorious Installer                                                                                       discord.gg/NotoriousV2" Height="450" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Icon="icon.ico" ShowIconOnTitleBar="False">
     <Grid>
-        <Image x:Name="image" HorizontalAlignment="Left" Height="450" VerticalAlignment="Top" Width="805" Source="banner.png" Margin="0,0,-11,-29"/>
-
+        <Image x:Name="image" HorizontalAlignment="Left" Height="450" VerticalAlignment="Top" Width="805" Source="banner.png" Margin="0,0,-11,-29" />
     </Grid>
 </mah:MetroWindow>

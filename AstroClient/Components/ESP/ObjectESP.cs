@@ -46,7 +46,6 @@
 			}
 		}
 
-
 		private void SetupHighlighter()
 		{
 			if (HighLightOptions == null)
@@ -57,8 +56,8 @@
 					HighLightOptions.SetHighLighterColor(ESPColor);
 				}
 			}
-
 		}
+
 		public void Update()
 		{
 			if (HighLightOptions == null)
@@ -100,7 +99,6 @@
 		public void OnDisable()
 		{
 			HighLightOptions.DestroyHighlighter();
-
 		}
 
 		internal void ChangeColor(Color newcolor)

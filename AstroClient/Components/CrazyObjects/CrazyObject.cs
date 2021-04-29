@@ -4,8 +4,8 @@
 	using System.Runtime.InteropServices;
 	using UnhollowerRuntimeLib;
 	using UnityEngine;
-	using Random = UnityEngine.Random;
 	using static AstroClient.Forces;
+	using Random = UnityEngine.Random;
 
 	public class CrazyObject : GameEventsBehaviour
 	{

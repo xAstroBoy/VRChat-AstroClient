@@ -1,14 +1,14 @@
 ﻿namespace AstroClient
 {
-	using RubyButtonAPI;
-	using UnityEngine;
-	using System;
-	using VRC;
+	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.components;
 	using AstroClient.ConsoleUtils;
-	using AstroClient.GameObjectDebug;
-	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.extensions;
+	using AstroClient.GameObjectDebug;
+	using RubyButtonAPI;
+	using System;
+	using UnityEngine;
+	using VRC;
 
 	public class ObjectMiscOptions : GameEvents
 	{

@@ -185,7 +185,6 @@
 			{
 				if (player != null)
 				{
-
 					SingleTag tag = SingleTagsUtils.AddSingleTag(player);
 					if (tag != null)
 					{
@@ -199,7 +198,6 @@
 					ModConsole.Error("Player for setting tag from server was null!");
 				}
 			}));
-
 		}
 
 		private static void OnConnected(object sender, EventArgs e)

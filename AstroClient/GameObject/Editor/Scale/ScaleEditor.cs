@@ -1,11 +1,11 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.components;
+	using AstroClient.ConsoleUtils;
 	using System.Linq;
 	using UnityEngine;
 	using VRC.Udon;
-	using AstroClient.components;
 	using static AstroClient.ObjectMiscOptions;
-	using AstroClient.ConsoleUtils;
 	using static AstroClient.variables.CustomLists;
 
 	internal class ScaleEditor : GameEvents

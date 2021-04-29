@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.extensions
 {
+	using AstroClient.ConsoleUtils;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using UnityEngine;
-	using AstroClient.ConsoleUtils;
 	using System.Reflection;
+	using UnityEngine;
 
 	public static class DeepCloneExtension
 	{

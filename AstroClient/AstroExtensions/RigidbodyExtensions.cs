@@ -1,9 +1,9 @@
 ﻿namespace AstroClient.extensions
 {
-	using System.Collections.Generic;
-	using UnityEngine;
 	using AstroClient.components;
 	using AstroClient.ConsoleUtils;
+	using System.Collections.Generic;
+	using UnityEngine;
 
 	public static class RigidbodyExtensions
 	{

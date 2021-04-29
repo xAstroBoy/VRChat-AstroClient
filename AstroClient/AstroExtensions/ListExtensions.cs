@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.extensions
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.Finder;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
-	using AstroClient.ConsoleUtils;
-	using AstroClient.Finder;
 
 	public static class ListExtensions
 	{

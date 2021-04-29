@@ -1,22 +1,22 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.components;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.Finder;
+	using AstroClient.UdonExploits;
+	using AstroClient.variables;
+	using AstroClient.Variables;
+	using DayClientML2.Utility;
+	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
-	using AstroClient.Finder;
-	using AstroClient.variables;
-	using AstroClient.ConsoleUtils;
-	using AstroClient.extensions;
-	using AstroClient.components;
-	using AstroClient.UdonExploits;
-	using AstroClient.Variables;
-	using static AstroClient.variables.CustomLists;
-	using VRC.Udon;
 	using VRC;
-	using DayClientML2.Utility.Extensions;
-	using DayClientML2.Utility;
+	using VRC.Udon;
+	using static AstroClient.variables.CustomLists;
 
 	public class Murder4Cheats : GameEvents
 	{

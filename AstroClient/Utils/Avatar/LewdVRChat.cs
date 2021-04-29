@@ -1,5 +1,8 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.variables;
+	using DayClientML2.Utility.Extensions;
 	using MelonLoader;
 	using RubyButtonAPI;
 	using System;
@@ -8,11 +11,8 @@
 	using System.Linq;
 	using UnityEngine;
 	using VRC;
-	using Color = System.Drawing.Color;
-	using AstroClient.ConsoleUtils;
-	using AstroClient.variables;
 	using VRC.SDKBase;
-	using DayClientML2.Utility.Extensions;
+	using Color = System.Drawing.Color;
 
 	public class LewdVRChat : GameEvents
 	{

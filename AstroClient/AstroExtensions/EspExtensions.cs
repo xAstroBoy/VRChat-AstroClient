@@ -9,7 +9,6 @@
 	{
 		public static List<ObjectESP> GetESPByID(this GameObject obj, string identifier)
 		{
-
 			//return obj.GetComponents<ObjectESP>().ToList().Where(x => x.ESPIdentifier == identifier).ToList();
 
 			// TODO : REPLACE IT WITH LINQ

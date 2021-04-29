@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.components
 {
+	using AstroClient.ConsoleUtils;
 	using System;
 	using System.Collections.Generic;
 	using System.Runtime.InteropServices;
 	using UnhollowerRuntimeLib;
 	using UnityEngine;
-	using Color = System.Drawing.Color;
 	using static AstroClient.variables.InstanceBuilder;
-	using AstroClient.ConsoleUtils;
+	using Color = System.Drawing.Color;
 
 	public class ItemInflaterManager : GameEventsBehaviour
 	{

@@ -1,15 +1,15 @@
 ﻿namespace AstroClient.World.Hub
 
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.Finder;
+	using AstroClient.Variables;
 	using RubyButtonAPI;
+	using System;
 	using UnityEngine;
 	using VRC.SDKBase;
-	using static VRC.SDKBase.VRC_EventHandler;
 	using static AstroClient.LocalPlayerUtils;
-	using System;
-	using AstroClient.ConsoleUtils;
-	using AstroClient.Variables;
-	using AstroClient.Finder;
+	using static VRC.SDKBase.VRC_EventHandler;
 
 	public class HubButtonsControl : GameEvents
 	{

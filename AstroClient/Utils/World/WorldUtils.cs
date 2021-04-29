@@ -1,14 +1,14 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
 	using VRC;
 	using VRC.SDK3.Components;
-	using Color = System.Drawing.Color;
-	using AstroClient.ConsoleUtils;
 	using VRC.Udon;
+	using Color = System.Drawing.Color;
 
 	public class WorldUtils : GameEvents
 	{
@@ -249,7 +249,6 @@
 			return Triggers;
 		}
 
-
 		public static List<GameObject> GetUdonBehaviours()
 		{
 			var UdonBehaviourObjects = new List<GameObject>();
@@ -267,8 +266,6 @@
 			}
 			return UdonBehaviourObjects;
 		}
-
-
 
 		public static string GetWorldName()
 		{

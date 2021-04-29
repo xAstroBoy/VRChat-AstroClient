@@ -6,7 +6,7 @@
 	{
 		internal static bool DisableNSFWMenu = true;
 
-        private static bool _isDebugMode = false;
+		private static bool _isDebugMode = false;
 
 		internal static bool IsDeveloper;
 

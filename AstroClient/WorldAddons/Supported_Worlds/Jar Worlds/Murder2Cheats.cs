@@ -1,15 +1,15 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.Finder;
+	using AstroClient.variables;
+	using AstroClient.Variables;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
-	using AstroClient.ConsoleUtils;
-	using AstroClient.variables;
-	using AstroClient.Finder;
-	using AstroClient.extensions;
-	using AstroClient.Variables;
 
 	public class Murder2Cheats : GameEvents
 	{

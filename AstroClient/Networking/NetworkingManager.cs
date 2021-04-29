@@ -23,7 +23,6 @@
 			if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
 			{
 				AstroNetworkClient.Client.Send($"avatar-log:{json}");
-
 			}
 			ModConsole.DebugLog(json);
 		}
@@ -53,7 +52,6 @@
 				AstroNetworkClient.Client.Send($"instanceID:{instanceID}");
 			}
 		}
-
 
 		public override void OnWorldReveal(string id, string name, string asseturl)
 		{

@@ -1,8 +1,8 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
 	using System.Collections.Generic;
 	using UnityEngine;
-	using AstroClient.ConsoleUtils;
 
 	public class GameObjHelper
 	{

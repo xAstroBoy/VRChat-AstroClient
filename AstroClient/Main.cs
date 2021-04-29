@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
 	#region Imports
+
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroClient.ButtonShortcut;
@@ -24,7 +25,8 @@
 	using UnityEngine;
 	using UnityEngine.UI;
 	using Console = CheetosConsole.Console;
-	#endregion
+
+	#endregion Imports
 
 	public class Main : MelonMod
 	{
@@ -174,7 +176,6 @@
 				{
 					GlobalUdonExploits.InitButtons(AstroClient, 2, 1.5f, true);
 				}
-
 
 				RandomSubmenus.VRC_InteractableSubMenu(AstroClient, 2, 2, true);
 				Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);

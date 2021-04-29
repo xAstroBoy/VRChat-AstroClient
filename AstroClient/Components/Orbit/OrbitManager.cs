@@ -1,5 +1,7 @@
 ﻿namespace AstroClient.components
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -8,10 +10,8 @@
 	using UnityEngine;
 	using VRC;
 	using VRC.Core;
-	using AstroClient.extensions;
-	using Color = System.Drawing.Color;
 	using static AstroClient.variables.InstanceBuilder;
-	using AstroClient.ConsoleUtils;
+	using Color = System.Drawing.Color;
 
 	public class OrbitManager : GameEventsBehaviour
 	{

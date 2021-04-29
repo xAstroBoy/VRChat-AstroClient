@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
 	using MelonLoader;
 	using RubyButtonAPI;
 	using System;
@@ -9,7 +10,6 @@
 	using UnityEngine;
 	using VRC;
 	using VRC.SDKBase;
-	using AstroClient.ConsoleUtils;
 
 	public class EmojiUtils : GameEvents
 	{

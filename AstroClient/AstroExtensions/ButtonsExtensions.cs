@@ -1,9 +1,9 @@
 ﻿namespace AstroClient.extensions
 {
-	using UnityEngine;
-	using RubyButtonAPI;
-	using UnityEngine.UI;
 	using DayClientML2.Utility.Extensions;
+	using RubyButtonAPI;
+	using UnityEngine;
+	using UnityEngine.UI;
 
 	public static class ButtonsExtensions
 	{

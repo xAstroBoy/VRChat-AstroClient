@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.Cloner
 {
-	using UnityEngine;
-	using static AstroClient.variables.GlobalLists;
-	using AstroClient.ConsoleUtils;
 	using AstroClient.AstroUtils.ItemTweaker;
+	using AstroClient.ConsoleUtils;
 	using AstroClient.extensions;
 	using AstroClient.ItemTweaker;
+	using UnityEngine;
+	using static AstroClient.variables.GlobalLists;
 
 	public class ObjectCloner : GameEvents
 	{

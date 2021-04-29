@@ -1,9 +1,9 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.AstroUtils.ItemTweaker;
+	using AstroClient.components;
 	using RubyButtonAPI;
 	using UnityEngine;
-	using AstroClient.components;
-	using AstroClient.AstroUtils.ItemTweaker;
 
 	public class Forces
 	{

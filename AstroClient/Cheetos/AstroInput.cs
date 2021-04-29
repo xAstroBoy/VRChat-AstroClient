@@ -1,11 +1,13 @@
 ﻿namespace AstroClient
 {
 	#region Imports
+
 	using AstroClient.Finder;
 	using DayClientML2.Utility.Extensions;
 	using System;
 	using UnityEngine;
-	#endregion
+
+	#endregion Imports
 
 	public static class Astro_Interactable_Extensions
 	{

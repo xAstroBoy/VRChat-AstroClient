@@ -1,7 +1,14 @@
 ﻿namespace AstroClient.GameObjectDebug
 {
+	using AstroClient.components;
+	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
+	using AstroClient.ItemTweaker;
+	using AstroClient.SyncPhysicExt;
 	using Boo.Lang;
+	using DayClientML2.Utility.Extensions;
 	using Il2CppSystem.Text;
+	using Photon.Pun;
 	using RubyButtonAPI;
 	using System;
 	using System.IO;
@@ -9,19 +16,12 @@
 	using System.Threading;
 	using UnhollowerBaseLib;
 	using UnityEngine;
+	using VRC;
 	using VRC.SDK3.Components;
 	using VRC.SDKBase;
 	using VRCSDK2;
-	using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
-	using Photon.Pun;
-	using VRC;
 	using Color = System.Drawing.Color;
-	using AstroClient.components;
-	using AstroClient.ConsoleUtils;
-	using DayClientML2.Utility.Extensions;
-	using AstroClient.extensions;
-	using AstroClient.SyncPhysicExt;
-	using AstroClient.ItemTweaker;
+	using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 
 	public class GameObjectUtils : GameEvents
 	{

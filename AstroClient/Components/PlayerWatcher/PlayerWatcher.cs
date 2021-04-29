@@ -1,5 +1,7 @@
 ﻿namespace AstroClient.components
 {
+	using AstroClient.ConsoleUtils;
+	using AstroClient.GameObjectDebug;
 	using System;
 	using System.Runtime.InteropServices;
 	using UnhollowerRuntimeLib;
@@ -7,8 +9,6 @@
 	using VRC;
 	using Delegate = System.Delegate;
 	using Time = UnityEngine.Time;
-	using AstroClient.GameObjectDebug;
-	using AstroClient.ConsoleUtils;
 
 	public class PlayerWatcher : GameEventsBehaviour
 	{

@@ -1,11 +1,13 @@
 ﻿namespace AstroClient.Cheetos
 {
 	#region Imports
+
 	using AstroClient.ConsoleUtils;
 	using DayClientML2.Utility.Extensions;
 	using System.IO;
 	using UnityEngine;
-	#endregion
+
+	#endregion Imports
 
 	public static class CheetosHelpers
 	{

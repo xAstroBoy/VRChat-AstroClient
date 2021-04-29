@@ -7,8 +7,8 @@
 	using System.Runtime.InteropServices;
 	using UnhollowerRuntimeLib;
 	using UnityEngine;
-	using Color = System.Drawing.Color;
 	using static AstroClient.variables.InstanceBuilder;
+	using Color = System.Drawing.Color;
 
 	public class CrazyObjectManager : GameEventsBehaviour
 	{

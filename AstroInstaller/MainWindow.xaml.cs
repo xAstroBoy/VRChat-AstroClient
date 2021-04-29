@@ -1,20 +1,19 @@
 ﻿namespace Notorious_Installer
 {
-	using System;
-	using System.Linq;
-	using System.Threading.Tasks;
 	using MahApps.Metro.Controls;
 	using MahApps.Metro.Controls.Dialogs;
-	using System.IO;
 	using Microsoft.Win32;
-	using System.Net;
-	using System.IO.Compression;
+	using System;
 	using System.Diagnostics;
+	using System.IO;
+	using System.IO.Compression;
+	using System.Linq;
+	using System.Net;
 	using System.Threading;
+	using System.Threading.Tasks;
 
 	public partial class MainWindow : MetroWindow
 	{
-
 		private protected static string CurrentVersion = "2.1";
 		private protected static string VRChatInstallDir;
 		private protected static string AppdataDir = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\Notorious";
@@ -26,16 +25,12 @@
 		private protected static bool StandaloneLovense = false;
 		private protected static bool ClickedNoForStandaloneLovense = false;
 
-
-
 		public MainWindow()
 		{
 			InitializeComponent();
 
 			CheckForUpdates(); // Start the application.
 		}
-
-
 
 		private protected async void CheckForUpdates()
 		{
@@ -78,14 +73,10 @@
 
 			// Start the rest of the application.
 			ValidateLicense();
-
 		}
-
-
 
 		private protected async void ValidateLicense()
 		{
-
 			//if (!ClickedNoForStandaloneLovense)
 			//{
 			//    var LVNSYesNo = new MetroDialogSettings() { AffirmativeButtonText = "Yes", NegativeButtonText = "No", };
@@ -121,12 +112,9 @@
 			//    }
 			//}
 
-
-
 			string LicenseKey;
 			if (File.Exists(AuthFile))
 			{
-
 				// Read all content from the auth file and turn it into a string.
 				string content = File.ReadAllText(AuthFile);
 
@@ -163,11 +151,9 @@
 				{
 					FindInstallDir();
 				}
-
 			}
 			else // Auth file does not exist.
 			{
-
 				// Ask user for license key and write it into Auth file.
 				LicenseKey = await this.ShowInputAsync("Welcome", "Please enter your Notorious license key.\n\nDon't own a license key?\nGet one here: meap.gg/buy");
 
@@ -196,12 +182,8 @@
 				File.WriteAllText(AuthFile, LicenseKey);
 
 				FindInstallDir();
-
 			}
-
 		}
-
-
 
 		private protected async void InstallStandaloneLovense(string path)
 		{
@@ -240,7 +222,6 @@
 			}
 			catch (Exception ex) // An error occurred during the installation.
 			{
-
 				// Closes the progress message window since the installation encountered an error.
 				await controller.CloseAsync();
 
@@ -261,17 +242,14 @@
 					Process.Start(Directory.GetCurrentDirectory());
 				}
 				Environment.Exit(0); // Closes the application.
-
 			}
 		}
 
-
-
 		private protected ProgressDialogController controller;
 		private protected static bool RanBefore = false;
+
 		private protected async void FindInstallDir()
 		{
-
 			if (!RanBefore)
 			{
 				RanBefore = true; // Makes sure this won't run again.
@@ -282,8 +260,6 @@
 				else if (File.Exists(SteamVRChatInstallDirAlternative))
 					VRChatInstallDir = SteamVRChatInstallDirAlternative;
 			}
-
-
 
 			if (VRChatInstallDir != null)
 			{
@@ -316,14 +292,10 @@
 			{
 				ShowFileDialog();
 			}
-
 		}
-
-
 
 		private protected async void ShowFileDialog()
 		{
-
 			VRChatInstallDir = null;
 			await this.ShowMessageAsync("Please select VRChat executable", "Please navigate to the game install directory and select VRChat.exe", MessageDialogStyle.Affirmative);
 
@@ -339,12 +311,10 @@
 				// If the path is not empty and contains 'VRChat.exe' then continue.
 				if (!string.IsNullOrEmpty(VRChatExecutablePath) && VRChatExecutablePath.Contains("VRChat.exe"))
 				{
-
 					// Remove 'VRChat.exe' from the filepath leaving us with just the game directory.
 					VRChatInstallDir = VRChatExecutablePath.Replace(@"\VRChat.exe", "");
 
 					Install(VRChatInstallDir);
-
 				}
 				else // Selected file is not 'VRChat.exe'
 				{
@@ -357,10 +327,7 @@
 				await this.ShowMessageAsync("Goodbye!", "The installer will now close.", MessageDialogStyle.Affirmative);
 				Environment.Exit(0);
 			}
-
 		}
-
-
 
 		private protected async void Install(string path)
 		{
@@ -399,7 +366,6 @@
 			}
 			catch (Exception ex) // An error occurred during the installation.
 			{
-
 				// Closes the progress message window since the installation encountered an error.
 				await controller.CloseAsync();
 
@@ -420,9 +386,7 @@
 					Process.Start(Directory.GetCurrentDirectory());
 				}
 				Environment.Exit(0); // Closes the application.
-
 			}
-
 		}
 
 		private protected void HeavyWorkload(string path)
@@ -471,6 +435,5 @@
 			double Percentage = Math.Round(BytesReceived / BytesToReceive * 100, 0);
 			controller.SetMessage("Downloading loader files: " + Percentage + "%");
 		}
-
 	}
 }
