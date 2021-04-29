@@ -1,9 +1,8 @@
 ﻿namespace AstroClient.Modules
 {
 	using AstroClient.ConsoleUtils;
-	using System;
 
-	public class BaseModule
+	public class BaseModule : GameEvents
 	{
 		public BaseModule()
 		{

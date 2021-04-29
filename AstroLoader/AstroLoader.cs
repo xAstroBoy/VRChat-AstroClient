@@ -3,6 +3,7 @@
 	using MelonLoader;
 	using System;
 	using System.Reflection;
+	using System.Threading;
 
 	public class AstroLoader : MelonPlugin
 	{
@@ -13,6 +14,12 @@
 		{
 			@"Debug\AstroClient.dll",
 			@"Debug\DontTouchMyClient.dll",
+			@"Debug\UnityExplorer.ML.IL2CPP.dll",
+		};
+
+		public static string[] DebugLibraryPaths =
+{
+			@"Debug\Libs\AstroLibrary.dll"
 		};
 
 		public static string[] DebugModulePaths =
@@ -62,16 +69,30 @@
 		{
 			Console.WriteLine("Loader is in debug mode.");
 
+			foreach (var path in DebugLibraryPaths)
+			{
+				try
+				{
+                    var dll = Assembly.LoadFrom(path);
+					Console.WriteLine($"Injected Library: {path}");
+				}
+				catch
+				{
+					Console.WriteLine($"Failed to inject: {path}");
+				}
+			}
+
 			foreach (var path in DebugMelonPaths)
 			{
 				try
 				{
 					var dll = Assembly.LoadFile(path);
 					MelonHandler.LoadFromAssembly(dll, path);
+					Console.WriteLine($"Injected MelonMod/MelonPlugin: {path}");
 				}
-				catch (Exception e)
+				catch
 				{
-					Console.WriteLine(e.Message);
+					Console.WriteLine($"Failed to inject: {path}");
 				}
 			}
 
@@ -82,9 +103,9 @@
 					_ = Assembly.LoadFile(path);
 					Console.WriteLine($"Injected: {path}");
 				}
-				catch (Exception e)
+				catch
 				{
-					Console.WriteLine(e.Message);
+					Console.WriteLine($"Failed to inject: {path}");
 				}
 			}
 		}

@@ -116,12 +116,6 @@
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\JSonWriter.cs" />
-    <Compile Include="GameEventsBehaviour.cs" />
-    <Compile Include="Cheetos\GPLStuff\FOV.cs" />
-    <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
-    <Compile Include="Cheetos\PlayerMenuUI.cs" />
-    <Compile Include="Cheetos\StreamerProtector.cs" />
-    <Compile Include="Components\Murder4PatronUnlocker\Murder4PatronUnlocker.cs" />
     <Compile Include="Console\CheetosConsole\Console.cs" />
     <Compile Include="Console\CheetosConsole\DefaultFonts.cs" />
     <Compile Include="Console\CheetosConsole\Extensions.cs" />
@@ -131,6 +125,12 @@
     <Compile Include="Console\CheetosConsole\StyledString.cs" />
     <Compile Include="Console\CheetosConsole\VirtualTerminalSequences.cs" />
     <Compile Include="Console\ModConsole.cs" />
+    <Compile Include="GameEventsBehaviour.cs" />
+    <Compile Include="Cheetos\GPLStuff\FOV.cs" />
+    <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
+    <Compile Include="Cheetos\PlayerMenuUI.cs" />
+    <Compile Include="Cheetos\StreamerProtector.cs" />
+    <Compile Include="Components\Murder4PatronUnlocker\Murder4PatronUnlocker.cs" />
     <Compile Include="DayOfThePlay\Extensions\CameraExtension.cs" />
     <Compile Include="DayOfThePlay\Extensions\MiskExtension.cs" />
     <Compile Include="DayOfThePlay\Extensions\ModerationManagerExtension.cs" />
@@ -922,7 +922,13 @@
   <ItemGroup>
     <EmbeddedResource Include="Figlet\Larry3D.flf" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\AstroLibrary\AstroLibrary.csproj">
+      <Project>{4613c712-5463-44c6-ab48-081a2b3ae61d}</Project>
+      <Name>AstroLibrary</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

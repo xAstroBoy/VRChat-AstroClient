@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroInstaller", "AstroInst
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroTestModule", "AstroTestModule\AstroTestModule.csproj", "{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroLibrary", "AstroLibrary\AstroLibrary.csproj", "{4613C712-5463-44C6-AB48-081A2B3AE61D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Offline|Any CPU = Debug_Offline|Any CPU
@@ -63,6 +65,12 @@ Global
 		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4613C712-5463-44C6-AB48-081A2B3AE61D}.Debug_Offline|Any CPU.ActiveCfg = Debug|Any CPU
+		{4613C712-5463-44C6-AB48-081A2B3AE61D}.Debug_Offline|Any CPU.Build.0 = Debug|Any CPU
+		{4613C712-5463-44C6-AB48-081A2B3AE61D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4613C712-5463-44C6-AB48-081A2B3AE61D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4613C712-5463-44C6-AB48-081A2B3AE61D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4613C712-5463-44C6-AB48-081A2B3AE61D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

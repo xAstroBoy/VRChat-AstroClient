@@ -14,6 +14,7 @@
 	using AstroClient.variables;
 	using AstroClient.WorldLights;
 	using AstroClient.Worlds;
+	using AstroLibrary;
 	using CheetosConsole;
 	using MelonLoader;
 	using RubyButtonAPI;
@@ -67,6 +68,7 @@
 				ModConsole.ErrorExc(e);
 			}
 
+			LibraryTests.Test();
 			ModuleManager.LoadModules();
 
 			InitializeOverridables();

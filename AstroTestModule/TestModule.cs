@@ -7,7 +7,12 @@
 	{
 		public TestModule()
 		{
-            ModConsole.Log("TestModule Works!");
+			ModConsole.Log("TestModule Works!");
+		}
+
+		public override void VRChat_OnUiManagerInit()
+		{
+			ModConsole.Log("TestModule: OnUiManagerInit()");
 		}
 	}
 }
