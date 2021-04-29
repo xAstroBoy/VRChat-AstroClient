@@ -67,7 +67,6 @@
 				ModConsole.ErrorExc(e);
 			}
 
-			ModConsole.Log("Initializing Module Management..");
 			ModuleManager.LoadModules();
 
 			InitializeOverridables();

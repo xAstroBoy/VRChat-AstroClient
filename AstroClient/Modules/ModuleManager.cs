@@ -2,9 +2,6 @@
 {
 	using AstroClient.ConsoleUtils;
 	using System.Collections.Generic;
-	using System.Diagnostics;
-	using System.Linq;
-	using System.Reflection;
 	using System.Threading;
 
 	public static class ModuleManager
@@ -30,8 +27,6 @@
 						Modules.Add(module);
 						ModConsole.Log($"ModuleManager Loaded Module: {module.GetType()}");
 					}
-
-					//ModConsole.Log($"type: {type}, of {btype}");
 				}
 			}
 		}
