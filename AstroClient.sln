@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroNetworkingLibrary", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroInstaller", "AstroInstaller\AstroInstaller.csproj", "{4998A709-F158-4CEF-968D-554ED9874B17}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroTestModule", "AstroTestModule\AstroTestModule.csproj", "{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Cheetos|Any CPU = Debug_Cheetos|Any CPU
@@ -55,6 +57,12 @@ Global
 		{4998A709-F158-4CEF-968D-554ED9874B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4998A709-F158-4CEF-968D-554ED9874B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4998A709-F158-4CEF-968D-554ED9874B17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Debug_Cheetos|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Debug_Cheetos|Any CPU.Build.0 = Debug|Any CPU
+		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
