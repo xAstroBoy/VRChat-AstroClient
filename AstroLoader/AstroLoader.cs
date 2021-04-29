@@ -15,8 +15,8 @@ namespace AstroLoader
 #if DEBUG
         public static string[] DebugPaths =
         {
-            @"\Debug\AstroClient.dll",
-            @"\Debug\DontTouchMyClient.dll",
+            @"Debug\AstroClient.dll",
+            @"Debug\DontTouchMyClient.dll",
         };
 #endif
 
@@ -40,7 +40,7 @@ namespace AstroLoader
                 try
                 {
                     var dll = Assembly.Load(AstroNetworkLoader.AssemblyFile);
-                    MelonHandler.LoadFromAssembly(dll, @"mods\AstroLoader.dll");
+                    MelonHandler.LoadFromAssembly(dll, @"plugins\AstroLoader.dll");
                 }
                 catch (BadImageFormatException e)
                 {
