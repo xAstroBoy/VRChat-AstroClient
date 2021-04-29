@@ -8,7 +8,7 @@
 
 	internal class Database
 	{
-		public async static Task Initialize()
+		public static async Task Initialize()
 		{
 			await DB.InitAsync("astro", MongoClientSettings.FromConnectionString(GetConnectionString()));
 			Console.WriteLine("Database Initialized..");
