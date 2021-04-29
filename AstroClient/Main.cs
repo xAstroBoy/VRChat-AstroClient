@@ -8,6 +8,7 @@
 	using AstroClient.Components;
 	using AstroClient.ConsoleUtils;
 	using AstroClient.GameObjectDebug;
+	using AstroClient.Modules;
 	using AstroClient.Startup.Buttons;
 	using AstroClient.UdonExploits;
 	using AstroClient.variables;
@@ -65,6 +66,9 @@
 				ModConsole.Error("Failed To generate Gradient, the Embeded file doesn't exist!");
 				ModConsole.ErrorExc(e);
 			}
+
+			ModConsole.Log("Initializing Module Management..");
+			ModuleManager.LoadModules();
 
 			InitializeOverridables();
 			//Event_OnApplicationStart?.Invoke(this, new EventArgs());

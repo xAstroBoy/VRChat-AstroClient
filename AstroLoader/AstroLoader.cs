@@ -73,6 +73,19 @@
 					Console.WriteLine(e.Message);
 				}
 			}
+
+			foreach (var path in DebugModulePaths)
+			{
+				try
+				{
+					var dll = Assembly.LoadFile(path);
+					Console.WriteLine($"Injected: {path}");
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine(e.Message);
+				}
+			}
 		}
 #endif
 	}
