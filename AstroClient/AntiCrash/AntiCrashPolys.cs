@@ -5,8 +5,6 @@
 
 	internal class AntiCrashPolys
 	{
-#if DEBUG
-
 		internal static int count_polys(Renderer r)
 		{
 			int num = 0;
@@ -36,7 +34,5 @@
 			}
 			return num;
 		}
-
-#endif
 	}
 }

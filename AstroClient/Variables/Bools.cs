@@ -6,11 +6,7 @@
 	{
 		internal static bool DisableNSFWMenu = true;
 
-#if CHEETOS
-		private static bool _isDebugMode = true;
-#else
         private static bool _isDebugMode = false;
-#endif
 
 		internal static bool IsDeveloper;
 
@@ -44,8 +40,9 @@
 			{
 #if DEBUG
 				return true;
-#endif
+#else
 				return false;
+#endif
 			}
 		}
 
