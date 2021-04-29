@@ -2,7 +2,7 @@
 {
 	using AstroClient.ConsoleUtils;
 
-	public class BaseModule
+	public class BaseModule : GameEventsBehaviour
 	{
 		public BaseModule()
 		{
