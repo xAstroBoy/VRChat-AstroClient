@@ -44,5 +44,12 @@
     <Compile Include="TestModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AstroClient\AstroClient.csproj">
+      <Project>{6506f83f-9665-4ec9-9d7f-6f88e1652bba}</Project>
+      <Name>AstroClient</Name>
+      <Private>False</Private>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

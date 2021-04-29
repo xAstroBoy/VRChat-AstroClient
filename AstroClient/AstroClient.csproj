@@ -219,6 +219,8 @@
     <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Lights\LightControl.cs" />
+    <Compile Include="Modules\BaseModule.cs" />
+    <Compile Include="Modules\ModuleManager.cs" />
     <Compile Include="Mora\AvatarLogger.cs" />
     <Compile Include="Mora\Welcome.cs" />
     <Compile Include="Mora\MouseTp.cs" />
