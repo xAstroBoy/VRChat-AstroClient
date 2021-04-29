@@ -9,10 +9,15 @@
 		public static byte[] AssemblyFile;
 
 #if DEBUG
-		public static string[] DebugPaths =
+		public static string[] DebugMelonPaths =
 		{
 			@"Debug\AstroClient.dll",
 			@"Debug\DontTouchMyClient.dll",
+		};
+
+		public static string[] DebugModulePaths =
+{
+			@"Debug\Module\AstroTestModule.dll"
 		};
 #endif
 
@@ -56,10 +61,17 @@
 		public void LoadDebug()
 		{
 			Console.WriteLine("Loader is in debug mode.");
-			foreach (var path in DebugPaths)
+			foreach (var path in DebugMelonPaths)
 			{
-				var dll = Assembly.LoadFile(path);
-				MelonHandler.LoadFromAssembly(dll, path);
+				try
+				{
+					var dll = Assembly.LoadFile(path);
+					MelonHandler.LoadFromAssembly(dll, path);
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine(e.Message);
+				}
 			}
 		}
 #endif
