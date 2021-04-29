@@ -13,9 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AstroLibrary\AstroNetworkingLibrary.csproj">
-      <Private>true</Private>
-    </ProjectReference>
+    <ProjectReference Include="..\AstroNetworkingLibrary\AstroNetworkingLibrary.csproj" />
   </ItemGroup>
 
 </Project>

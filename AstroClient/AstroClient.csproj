@@ -49,22 +49,25 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\AstroLibrary\HandleClient.cs">
+    <Compile Include="..\AstroNetworkingLibrary\HandleClient.cs">
       <Link>Networking\HandleClient.cs</Link>
     </Compile>
-    <Compile Include="..\AstroLibrary\NetworkingExtensions.cs">
+    <Compile Include="..\AstroNetworkingLibrary\NetworkingExtensions.cs">
       <Link>Networking\NetworkingExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\AstroLibrary\ReceivedDataEventArgs.cs">
+    <Compile Include="..\AstroNetworkingLibrary\ReceivedDataEventArgs.cs">
       <Link>Networking\ReceivedDataEventArgs.cs</Link>
     </Compile>
-    <Compile Include="..\AstroLibrary\ReceivedTextEventArgs.cs">
+    <Compile Include="..\AstroNetworkingLibrary\ReceivedTextEventArgs.cs">
       <Link>Networking\ReceivedTextEventArgs.cs</Link>
     </Compile>
-    <Compile Include="..\AstroLibrary\Serializable\AvatarData.cs">
+    <Compile Include="..\AstroNetworkingLibrary\Serializable\AvatarData.cs">
       <Link>Networking\Serializable\AvatarData.cs</Link>
     </Compile>
-    <Compile Include="..\AstroLibrary\Serializable\TagData.cs">
+    <Compile Include="..\AstroNetworkingLibrary\Serializable\StreamerData.cs">
+      <Link>Networking\Serializable\StreamerData.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroNetworkingLibrary\Serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
     <Compile Include="AntiCrash\AntiCrash.cs" />

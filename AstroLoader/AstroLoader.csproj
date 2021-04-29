@@ -54,16 +54,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\AstroLibrary\HandleClient.cs">
+    <Compile Include="..\AstroNetworkingLibrary\HandleClient.cs">
       <Link>Networking\HandleClient.cs</Link>
     </Compile>
-    <Compile Include="..\AstroLibrary\NetworkingExtensions.cs">
+    <Compile Include="..\AstroNetworkingLibrary\NetworkingExtensions.cs">
       <Link>Networking\NetworkingExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\AstroLibrary\ReceivedDataEventArgs.cs">
+    <Compile Include="..\AstroNetworkingLibrary\ReceivedDataEventArgs.cs">
       <Link>Networking\ReceivedDataEventArgs.cs</Link>
     </Compile>
-    <Compile Include="..\AstroLibrary\ReceivedTextEventArgs.cs">
+    <Compile Include="..\AstroNetworkingLibrary\ReceivedTextEventArgs.cs">
       <Link>Networking\ReceivedTextEventArgs.cs</Link>
     </Compile>
     <Compile Include="AstroLoader.cs" />
