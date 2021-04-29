@@ -15,12 +15,12 @@ namespace AstroClient.extensions
 
             // TODO : REPLACE IT WITH LINQ
             List<ObjectESP> ESPs = new List<ObjectESP>();
-            foreach (var comp in obj.GetComponents<ObjectESP>().ToList())
+            foreach (var comp in obj.GetComponents<ObjectESP>())
             {
+                ModConsole.DebugWarning($"Found ObjectESP bound to {comp.gameObject.name} having Identifier {comp.Identifier}");
                 if (comp != null)
                 {
-                    ModConsole.DebugWarning($"Found ObjectESP bound to {comp.gameObject.name} having Identifier {comp.GetCurrentID()}");
-                    if (comp.GetCurrentID() == identifier)
+                    if (comp.Identifier == identifier)
                     {
                         if (!ESPs.Contains(comp))
                         {
