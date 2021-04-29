@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	#region Imports
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroClient.ButtonShortcut;
@@ -21,6 +22,7 @@
 	using UnityEngine;
 	using UnityEngine.UI;
 	using Console = CheetosConsole.Console;
+	#endregion
 
 	public class Main : MelonMod
 	{
@@ -38,7 +40,7 @@
 
 		public override void OnApplicationStart()
 		{
-#if DEBUG
+#if OFFLINE
 			KeyManager.IsAuthed = true;
 			Bools.IsDeveloper = true;
 #else

@@ -1,8 +1,6 @@
 ﻿namespace AstroClient
 {
 	using AstroClient.components;
-	using AstroClient.ConsoleUtils;
-	using AstroClient.Variables;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;

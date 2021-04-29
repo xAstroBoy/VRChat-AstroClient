@@ -2,7 +2,6 @@
 {
 	using AstroClient.variables;
 	using RubyButtonAPI;
-	using System;
 	using System.Diagnostics;
 	using System.IO;
 	using UnityEngine;

@@ -1,9 +1,11 @@
 ﻿namespace AstroClient
 {
+	#region Imports
 	using AstroClient.Finder;
 	using DayClientML2.Utility.Extensions;
 	using System;
 	using UnityEngine;
+	#endregion
 
 	public static class Astro_Interactable_Extensions
 	{
@@ -39,16 +41,6 @@
 		public GameObject RightHandPointer { get; private set; }
 
 		public bool CanClick { get; private set; }
-
-		public override void OnWorldReveal(string id, string name, string asseturl)
-		{
-#if CHEETOS
-			//var testButton = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-			//testButton.transform.position = LocalPlayerUtils.GetSelfPlayer().transform.position;
-			//testButton.AddComponent<Astro_Interactable>();
-			//testButton.GetComponent<Astro_Interactable>().Action = () => { ModConsole.DebugLog("Astro_Interactable: I was invoked.."); };
-#endif
-		}
 
 		public override void OnLateUpdate()
 		{

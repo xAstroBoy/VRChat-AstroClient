@@ -3,7 +3,6 @@
 	using AstroClient.components;
 	using AstroClient.ConsoleUtils;
 	using System.Collections.Generic;
-	using System.Linq;
 	using UnityEngine;
 
 	public static class EspExtensions

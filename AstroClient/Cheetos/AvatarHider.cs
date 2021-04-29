@@ -1,10 +1,12 @@
 ﻿namespace AstroClient.Cheetos
 {
+	#region Imports
 	using AstroClient.ConsoleUtils;
 	using AstroClient.extensions;
 	using UnityEngine;
 	using VRC;
 	using VRC.SDKBase;
+	#endregion
 
 	public class AvatarHider : GameEvents
 	{

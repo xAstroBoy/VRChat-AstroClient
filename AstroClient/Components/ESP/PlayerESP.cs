@@ -2,7 +2,6 @@
 {
 	using AstroClient.ConsoleUtils;
 	using AstroClient.extensions;
-	using AstroClient.Startup.Buttons;
 	using DayClientML2.Utility.Extensions;
 	using System;
 	using System.Collections.Generic;

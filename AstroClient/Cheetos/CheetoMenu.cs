@@ -1,9 +1,11 @@
 ﻿namespace AstroClient
 {
+	#region Imports
 	using AstroClient.ConsoleUtils;
 	using System;
 	using static AstroClient.variables.InstanceBuilder;
 	using Color = System.Drawing.Color;
+	#endregion
 
 	public class CheetoMenu : GameEventsBehaviour
 	{

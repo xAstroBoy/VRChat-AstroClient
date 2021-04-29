@@ -1,19 +1,17 @@
 ﻿namespace AstroClient
 {
+	#region Imports
 	using AstroClient.ConsoleUtils;
 	using AstroClient.extensions;
 	using AstroClient.Finder;
-	using CheetosConsole;
+	using AstroClient.variables;
 	using DayClientML2.Utility.Extensions;
+	#endregion
 
 	public class CheetosPrivateStuff : GameEvents
 	{
 		public override void VRChat_OnUiManagerInit()
 		{
-#if CHEETOS
-			CheetosConsole.Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), "Cheetos Mode", System.Drawing.Color.LightYellow, System.Drawing.Color.DarkOrange);
-#endif
-
 			string VRChatVersion = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_1;
 			string VRChatBuild = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_0;
 
@@ -86,10 +84,11 @@
 
 		public override void OnWorldReveal(string id, string name, string asseturl)
 		{
-#if CHEETOS
-			var uiManager = VRCUiManager.prop_VRCUiManager_0;
-			PopupManager.QueHudMessage(uiManager, "Cheetos Mode!");
-#endif
+			if (Bools.IsDeveloper)
+			{
+				var uiManager = VRCUiManager.prop_VRCUiManager_0;
+				PopupManager.QueHudMessage(uiManager, "Developer Mode!");
+			}
 		}
 	}
 }
