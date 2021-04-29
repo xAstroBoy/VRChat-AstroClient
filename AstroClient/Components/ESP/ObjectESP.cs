@@ -40,6 +40,10 @@ namespace AstroClient.components
                 Object.Destroy(this);
                 return;
             }
+            if(string.IsNullOrEmpty(Identifier) && string.IsNullOrWhiteSpace(Identifier))
+            {
+                Identifier = "NO_IDENTIFIER_SET";
+            }
         }
 
 
@@ -118,11 +122,6 @@ namespace AstroClient.components
             }
         }
 
-        internal string GetCurrentID()
-        {
-            return _Id;
-        }
-
         internal Color GetCurrentESPColor
         {
             get
@@ -131,18 +130,18 @@ namespace AstroClient.components
             }
         }
         
-        private string _Id = "NO_IDENTIFIER_SET";  
+        private string _Identifier;  
 
-        internal string Id
+        internal string Identifier
         {
             get
             {
-                return _Id;
+                return _Identifier;
             }
             set
             {
-                _Id = value;
-                ModConsole.DebugLog($"Identifier for ObjectESP bound to {gameObject.name}, should be set to {value} , currently _ID = {_Id}");
+                _Identifier = value;
+                ModConsole.DebugLog($"Identifier for ObjectESP bound to {gameObject.name}, should be set to {value} , currently _ID = {_Identifier}, Current ID {Identifier}");
             }
         }
 

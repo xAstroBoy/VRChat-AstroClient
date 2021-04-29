@@ -82,7 +82,7 @@ namespace AstroClient.Startup.Buttons
                     ObjectESP ESP = item.AddComponent<ObjectESP>();
                     if (ESP != null)
                     {
-                        ESP.Id = VRCInteractable_Identifier;
+                        ESP.Identifier = VRCInteractable_Identifier;
                         ESP.ChangeColor(Default_VRCInteractableESPColorHex);
                     }
                 }
@@ -139,7 +139,7 @@ namespace AstroClient.Startup.Buttons
                     var ESP = item.AddComponent<ObjectESP>();
                     if (ESP != null)
                     {
-                        ESP.Id = Pickup_Identifier;
+                        ESP.Identifier = Pickup_Identifier;
                         ESP.ChangeColor(Default_PickupESPColorHex);
                     }
                 }
@@ -196,7 +196,7 @@ namespace AstroClient.Startup.Buttons
                     ObjectESP ESP = item.AddComponent<ObjectESP>();
                     if (ESP != null)
                     {
-                        ESP.Id = Trigger_Identifier;
+                        ESP.Identifier = Trigger_Identifier;
                         ESP.ChangeColor(Default_TriggerESPColorHex);
                     }
                     //if (WorldUtils.GetWorldID() == WorldIds.SnoozeScaryMaze5)
@@ -361,7 +361,7 @@ namespace AstroClient.Startup.Buttons
                     var ESP = item.AddComponent<ObjectESP>();
                     if (ESP != null)
                     {
-                        ESP.Id = UdonBehaviour_Identifier;
+                        ESP.Identifier = UdonBehaviour_Identifier;
                         ESP.ChangeColor(Default_UdonBehaviourESPColorHex);
                     }
                 }
