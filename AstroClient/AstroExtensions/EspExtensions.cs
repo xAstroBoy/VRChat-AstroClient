@@ -9,7 +9,25 @@ namespace AstroClient.extensions
     {
         public static List<ObjectESP> GetESPByID(this GameObject obj, string identifier)
         {
-            return obj.GetComponents<ObjectESP>().ToList().Where(x => x.GetIdentifier() == identifier).ToList();
+            
+            //return obj.GetComponents<ObjectESP>().ToList().Where(x => x.GetIdentifier() == identifier).Select();
+
+            // TODO : REPLACE IT WITH LINQ
+            List<ObjectESP> ESPs = new List<ObjectESP>();
+            foreach(var comp in obj.GetComponents<ObjectESP>())
+            {
+                if(comp != null)
+                {
+                    if(comp.GetIdentifier() == identifier)
+                    {
+                        if(!ESPs.Contains(comp))
+                        {
+                            ESPs.Add(comp);
+                        }
+                    }
+                }
+            }
+            return ESPs;
         }
 
         public static List<ObjectESP> GetESPByID(this List<GameObject> list, string identifier)
