@@ -17,13 +17,14 @@
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <NoWarn>CS0169;CS0472</NoWarn>
-    <OutputPath>..\AstroLoaderServer\bin\Release\net5.0\AstroClient\</OutputPath>
+    <OutputPath>D:\Steam Library\steamapps\common\VRChat\mods\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <LangVersion>8.0</LangVersion>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <OutputPath>D:\Steam Library\steamapps\common\VRChat\mods\</OutputPath>

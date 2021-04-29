@@ -27,15 +27,15 @@ namespace AstroClient.Startup.Buttons
             EnabledUdonBehaviourESP = false;
         }
 
-        public readonly static string Pickup_Identifier = "Pickup_ID";
-        public readonly static string VRCInteractable_Identifier = "VRCInteractable_ID";
-        public readonly static string Trigger_Identifier = "Trigger_ID";
-        public readonly static string UdonBehaviour_Identifier = "UdonBehaviour_ID";
+        public static string Pickup_Identifier { get; private set; } = "Pickup_ID";
+        public static string VRCInteractable_Identifier{ get; private set; } = "VRCInteractable_ID";
+        public static string Trigger_Identifier { get; private set; } = "Trigger_ID";
+        public static string UdonBehaviour_Identifier { get; private set; } = "UdonBehaviour_ID";
 
-        public readonly static string Default_PickupESPColorHex = "4AB30D";
-        public readonly static string Default_VRCInteractableESPColorHex = "E47D39";
-        public readonly static string Default_TriggerESPColorHex = "EF2C3F";
-        public readonly static string Default_UdonBehaviourESPColorHex = "CD14C7";
+        public static string Default_PickupESPColorHex { get; private set; } = "4AB30D";
+        public static string Default_VRCInteractableESPColorHex { get; private set; } = "E47D39";
+        public static string Default_TriggerESPColorHex { get; private set; } = "EF2C3F";
+        public static string Default_UdonBehaviourESPColorHex { get; private set; } = "CD14C7";
 
         private static QMSingleToggleButton PlayerESPToggleBtn;
         private static QMSingleToggleButton VRCInteractableESPToggleBtn;
@@ -79,11 +79,11 @@ namespace AstroClient.Startup.Buttons
             {
                 if (item != null)
                 {
-                    ObjectESP VRCInteractable = item.AddComponent<ObjectESP>();
-                    if (VRCInteractable != null)
+                    ObjectESP ESP = item.AddComponent<ObjectESP>();
+                    if (ESP != null)
                     {
-                        VRCInteractable.SetIdentifier(VRCInteractable_Identifier);
-                        VRCInteractable.ChangeColor(Default_VRCInteractableESPColorHex);
+                        ESP.Id = VRCInteractable_Identifier;
+                        ESP.ChangeColor(Default_VRCInteractableESPColorHex);
                     }
                 }
             }
@@ -136,11 +136,11 @@ namespace AstroClient.Startup.Buttons
             {
                 if (item != null)
                 {
-                    var Pickup = item.AddComponent<ObjectESP>();
-                    if (Pickup != null)
+                    var ESP = item.AddComponent<ObjectESP>();
+                    if (ESP != null)
                     {
-                        Pickup.SetIdentifier(Pickup_Identifier);
-                        Pickup.ChangeColor(Default_PickupESPColorHex);
+                        ESP.Id = Pickup_Identifier;
+                        ESP.ChangeColor(Default_PickupESPColorHex);
                     }
                 }
             }
@@ -193,11 +193,11 @@ namespace AstroClient.Startup.Buttons
             {
                 if (item != null)
                 {
-                    var trigger = item.AddComponent<ObjectESP>();
-                    if (trigger != null)
+                    ObjectESP ESP = item.AddComponent<ObjectESP>();
+                    if (ESP != null)
                     {
-                        trigger.SetIdentifier(Trigger_Identifier);
-                        trigger.ChangeColor(Default_TriggerESPColorHex);
+                        ESP.Id = Trigger_Identifier;
+                        ESP.ChangeColor(Default_TriggerESPColorHex);
                     }
                     //if (WorldUtils.GetWorldID() == WorldIds.SnoozeScaryMaze5)
                     //{
@@ -358,11 +358,11 @@ namespace AstroClient.Startup.Buttons
             {
                 if (item != null)
                 {
-                    var UdonBehaviour = item.AddComponent<ObjectESP>();
-                    if (UdonBehaviour != null)
+                    var ESP = item.AddComponent<ObjectESP>();
+                    if (ESP != null)
                     {
-                        UdonBehaviour.SetIdentifier(UdonBehaviour_Identifier);
-                        UdonBehaviour.ChangeColor(Default_UdonBehaviourESPColorHex);
+                        ESP.Id = UdonBehaviour_Identifier;
+                        ESP.ChangeColor(Default_UdonBehaviourESPColorHex);
                     }
                 }
             }
