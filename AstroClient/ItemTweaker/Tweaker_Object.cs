@@ -141,7 +141,7 @@ namespace AstroClient.ItemTweaker
                            var ESP = CurrentSelectedObject.AddComponent<ObjectESP>();
                             if (ESP != null)
                             {
-                                ESP.SetIdentifier(SelectedItemESPIdentifier);
+                                ESP.Id = SelectedItemESPIdentifier;
                             }
                         }
                        
@@ -186,10 +186,10 @@ namespace AstroClient.ItemTweaker
                         var esps = value.GetESPByID(SelectedItemESPIdentifier);
                         if (esps != null && esps.Count() == 0)
                         {
-                            var esp = value.AddComponent<ObjectESP>();
-                            if (esp != null)
+                            var ESP = value.AddComponent<ObjectESP>();
+                            if (ESP != null)
                             {
-                                esp.SetIdentifier(SelectedItemESPIdentifier);
+                                ESP.Id = SelectedItemESPIdentifier;
                             }
                         }
                     }

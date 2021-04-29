@@ -118,17 +118,10 @@ namespace AstroClient.components
             }
         }
 
-        internal void SetIdentifier(string newidentifier)
+        internal string GetCurrentID()
         {
-            ESPIdentifier = newidentifier;
+            return _Id;
         }
-
-
-        internal string GetIdentifier()
-        {
-            return ESPIdentifier;
-        }
-
 
         internal Color GetCurrentESPColor
         {
@@ -137,9 +130,21 @@ namespace AstroClient.components
                 return HighLightOptions.highlightColor;
             }
         }
+        
+        private string _Id = "NO_IDENTIFIER_SET";  
 
-
-        private string ESPIdentifier;
+        internal string Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                _Id = value;
+                ModConsole.DebugLog($"Identifier for ObjectESP bound to {gameObject.name}, should be set to {value} , currently _ID = {_Id}");
+            }
+        }
 
         private Color ESPColor;
         private List<MeshRenderer> ObjMeshRenderers = new List<MeshRenderer>();

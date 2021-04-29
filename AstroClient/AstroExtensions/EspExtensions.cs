@@ -1,4 +1,5 @@
 ﻿using AstroClient.components;
+using AstroClient.ConsoleUtils;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,18 +10,19 @@ namespace AstroClient.extensions
     {
         public static List<ObjectESP> GetESPByID(this GameObject obj, string identifier)
         {
-            
-            //return obj.GetComponents<ObjectESP>().ToList().Where(x => x.GetIdentifier() == identifier).Select();
+
+            //return obj.GetComponents<ObjectESP>().ToList().Where(x => x.ESPIdentifier == identifier).ToList();
 
             // TODO : REPLACE IT WITH LINQ
             List<ObjectESP> ESPs = new List<ObjectESP>();
-            foreach(var comp in obj.GetComponents<ObjectESP>())
+            foreach (var comp in obj.GetComponents<ObjectESP>().ToList())
             {
-                if(comp != null)
+                if (comp != null)
                 {
-                    if(comp.GetIdentifier() == identifier)
+                    ModConsole.DebugWarning($"Found ObjectESP bound to {comp.gameObject.name} having Identifier {comp.GetCurrentID()}");
+                    if (comp.GetCurrentID() == identifier)
                     {
-                        if(!ESPs.Contains(comp))
+                        if (!ESPs.Contains(comp))
                         {
                             ESPs.Add(comp);
                         }
