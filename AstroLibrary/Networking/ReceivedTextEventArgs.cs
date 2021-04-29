@@ -1,7 +1,7 @@
-﻿using System.Text.RegularExpressions;
-
-namespace AstroLibrary.Networking
+﻿namespace AstroLibrary.Networking
 {
+    using System.Text.RegularExpressions;
+
     public class ReceivedTextEventArgs
     {
         public string Message { get; private set; }

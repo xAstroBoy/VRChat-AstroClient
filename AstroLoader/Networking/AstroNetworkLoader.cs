@@ -1,37 +1,16 @@
-﻿using AstroLibrary.Networking;
-using System;
-using System.IO;
-using System.Net.Sockets;
-
-namespace AstroLoader
+﻿namespace AstroLoader
 {
-    internal static class KeyManager
-    {
-        public static string AuthKey = string.Empty;
+    using AstroLibrary.Networking;
+    using System;
+    using System.Collections.Generic;
+    using System.Net.Sockets;
 
-        public static bool IsAuthed = false;
-
-        public static void ReadKey()
-        {
-            string keyPath = Environment.CurrentDirectory + @"\AstroClient\key.txt";
-
-            if (File.Exists(keyPath))
-            {
-                AuthKey = File.ReadAllText(keyPath);
-            }
-            else
-            {
-                System.Console.Beep();
-                Environment.Exit(0);
-            }
-        }
-    }
-
+    // TODO: Make this retreive multiple assemblies and resources
     internal class AstroNetworkLoader
     {
         internal static HandleClient Client;
 
-        internal static byte[] AssemblyFile;
+        internal static List<byte[]> AssemblyFiles;
 
         internal static bool IsReady = false;
 
@@ -125,7 +104,7 @@ namespace AstroLoader
         private static void OnDataReceived(object sender, ReceivedDataEventArgs e)
         {
             var client = sender as HandleClient;
-            AssemblyFile = e.Data;
+            AssemblyFiles.Add(e.Data);
             //Console.WriteLine("Received Assembly File Data");
             client.Send("gotdll");
             IsReady = true;

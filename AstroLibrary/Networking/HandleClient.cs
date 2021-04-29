@@ -1,9 +1,9 @@
-﻿using System;
-using System.Net.Sockets;
-using System.Threading.Tasks;
-
-namespace AstroLibrary.Networking
+﻿namespace AstroLibrary.Networking
 {
+    using System;
+    using System.Net.Sockets;
+    using System.Threading.Tasks;
+
     public class HandleClient
     {
         public TcpClient ClientSocket { get; private set; }

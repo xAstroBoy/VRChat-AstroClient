@@ -1,8 +1,8 @@
-﻿using System;
-using System.Text;
-
-namespace AstroLibrary.Networking
+﻿namespace AstroLibrary.Networking
 {
+    using System;
+    using System.Text;
+
     public static class NetworkingExtensions
     {
         public static string ConvertToString(this byte[] bytes)

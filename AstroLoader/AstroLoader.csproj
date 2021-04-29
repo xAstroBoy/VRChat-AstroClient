@@ -69,6 +69,7 @@
     <Compile Include="AstroLoader.cs" />
     <Compile Include="Networking\AstroNetworkLoader.cs" />
     <Compile Include="BuildInfo.cs" />
+    <Compile Include="Networking\KeyManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

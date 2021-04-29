@@ -1,13 +1,9 @@
-﻿using MelonLoader;
-using System;
-
-#if DEBUG
-#endif
-
-using System.Reflection;
-
-namespace AstroLoader
+﻿namespace AstroLoader
 {
+    using MelonLoader;
+    using System;
+    using System.Reflection;
+
     public class AstroLoader : MelonPlugin
     {
         public static byte[] AssemblyFile;
@@ -35,25 +31,25 @@ namespace AstroLoader
             {
             }
 
-            if (AstroNetworkLoader.AssemblyFile != null)
-            {
-                try
-                {
-                    var dll = Assembly.Load(AstroNetworkLoader.AssemblyFile);
-                    MelonHandler.LoadFromAssembly(dll, @"plugins\AstroLoader.dll");
-                }
-                catch (BadImageFormatException e)
-                {
-                    Console.WriteLine("Bad Image Format Exception");
-                    Console.WriteLine(e.Message);
-                    Console.WriteLine(e.StackTrace);
-                    Console.WriteLine(e.Source);
-                }
-            }
-            else
-            {
-                Console.WriteLine("Failed to load assembly, it was null");
-            }
+            //if (AstroNetworkLoader.AssemblyFile != null)
+            //{
+            //    try
+            //    {
+            //        var dll = Assembly.Load(AstroNetworkLoader.AssemblyFile);
+            //        MelonHandler.LoadFromAssembly(dll, @"plugins\AstroLoader.dll");
+            //    }
+            //    catch (BadImageFormatException e)
+            //    {
+            //        Console.WriteLine("Bad Image Format Exception");
+            //        Console.WriteLine(e.Message);
+            //        Console.WriteLine(e.StackTrace);
+            //        Console.WriteLine(e.Source);
+            //    }
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Failed to load assembly, it was null");
+            //}
         }
 
 #if DEBUG
