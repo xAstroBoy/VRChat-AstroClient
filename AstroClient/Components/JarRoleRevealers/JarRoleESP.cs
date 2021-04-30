@@ -464,7 +464,7 @@
 		{
 			if (Internal_player != null)
 			{
-				if (ESPMenuBtn.EnabledPlayerESP)
+				if (ESPMenu.Toggle_Player_ESP)
 				{
 					var esp = Internal_player.gameObject.GetComponent<PlayerESP>();
 					if (esp != null)
@@ -479,7 +479,7 @@
 		{
 			if (Internal_player != null)
 			{
-				if (ESPMenuBtn.EnabledPlayerESP)
+				if (ESPMenu.Toggle_Player_ESP)
 				{
 					var esp = Internal_player.gameObject.GetComponent<PlayerESP>();
 					if (esp != null)

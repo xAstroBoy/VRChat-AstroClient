@@ -3,6 +3,7 @@
 	using AstroClient.ConsoleUtils;
 	using AstroClient.extensions;
 	using AstroClient.Finder;
+	using AstroClient.Startup.Buttons;
 	using AstroClient.variables;
 	using AstroClient.Variables;
 	using RubyButtonAPI;
@@ -38,12 +39,7 @@
 			Clues.AddGameObject(item_clue_3);
 			SilencedGuns.AddGameObject(item_SilencedGun);
 			DetectiveGuns.AddGameObject(item_detectiveGun);
-			item_clue_0.RegisterMurderItemEsp();
-			item_clue_1.RegisterMurderItemEsp();
-			item_clue_2.RegisterMurderItemEsp();
-			item_clue_3.RegisterMurderItemEsp();
-			item_SilencedGun.RegisterMurderItemEsp();
-			item_detectiveGun.RegisterMurderItemEsp();
+
 			Knifes.AddGameObject(item_knife_0);
 			Knifes.AddGameObject(item_knife_1);
 			Knifes.AddGameObject(item_knife_2);
@@ -54,15 +50,6 @@
 			Knifes.AddGameObject(item_knife_7);
 			Knifes.AddGameObject(item_knife_8);
 
-			item_knife_0.RegisterMurderItemEsp();
-			item_knife_1.RegisterMurderItemEsp();
-			item_knife_2.RegisterMurderItemEsp();
-			item_knife_3.RegisterMurderItemEsp();
-			item_knife_4.RegisterMurderItemEsp();
-			item_knife_5.RegisterMurderItemEsp();
-			item_knife_6.RegisterMurderItemEsp();
-			item_knife_7.RegisterMurderItemEsp();
-			item_knife_8.RegisterMurderItemEsp();
 
 			item_knife_0.RegisterCustomCollider(true);
 			item_knife_1.RegisterCustomCollider(true);
@@ -178,7 +165,26 @@
 			DetectiveGuns.Clear();
 			SilencedGuns.Clear();
 			Knifes.Clear();
+			if(Murder2ESPtoggler != null)
+			{
+				Murder2ESPtoggler.setToggleState(false);
+			}
 		}
+
+
+		public static void ToggleItemESP(bool value)
+		{
+			ESPMenu.Toggle_Pickup_ESP = value;
+			if (value)
+			{
+
+				Clues.Set_Pickup_ESP_Color("33ff66");
+				DetectiveGuns.Set_Pickup_ESP_Color("3366ff");
+				SilencedGuns.Set_Pickup_ESP_Color("ff9933");
+				Knifes.Set_Pickup_ESP_Color("ff0000");
+			}
+		}
+
 
 		public static void Murder2CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
 		{
@@ -239,7 +245,7 @@
 			new QMSingleButton(MurderItemWatcherMenu, 4, 1, "Clues Watchs you!", new Action(() => { Clues.WatchSelf(); }), "Make Clues Watch you", null, null);
 
 			GodModeMurder2 = new QMSingleToggleButton(Murder2CheatPage, 4, 0, "Normal Mode", new Action(ToggleDeathComponent), "God Mode", new Action(ToggleDeathComponent), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
-			GameObjectESP.Murder4ESPtoggler = new QMSingleToggleButton(Murder2CheatPage, 4, 0.5f, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
+			Murder2ESPtoggler = new QMSingleToggleButton(Murder2CheatPage, 4, 0.5f, "Item ESP On", new Action(() => { ToggleItemESP(true); }), "Item ESP Off", new Action(() => { ToggleItemESP(false); }), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
 		}
 
 		// MAP GameObjects Required for control.
@@ -269,5 +275,7 @@
 		public static GameObject item_knife_8 = null;
 		public static QMNestedButton Murder2CheatPage;
 		public static QMSingleToggleButton GodModeMurder2;
+		public static QMSingleToggleButton Murder2ESPtoggler;
+
 	}
 }

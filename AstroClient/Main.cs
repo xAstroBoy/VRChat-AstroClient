@@ -179,7 +179,7 @@
 
 				RandomSubmenus.VRC_InteractableSubMenu(AstroClient, 2, 2, true);
 				Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
-				ESPMenuBtn.InitButtons(AstroClient, 4, 0, true);
+				ESPMenu.InitButtons(AstroClient, 4, 0, true);
 
 				SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
 			}

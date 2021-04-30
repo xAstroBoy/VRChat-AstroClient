@@ -4,6 +4,7 @@
 	using AstroClient.ConsoleUtils;
 	using AstroClient.extensions;
 	using AstroClient.Finder;
+	using AstroClient.Startup.Buttons;
 	using AstroClient.UdonExploits;
 	using AstroClient.variables;
 	using AstroClient.Variables;
@@ -144,10 +145,6 @@
 			Clues.RegisterChildsInPath("Game Logic/Clues");
 
 			var weapons = GameObjectFinder.ListFind("Game Logic/Weapons");
-			if (weapons.Count != 0)
-			{
-				weapons.RegisterMurderItemEsp();
-			}
 
 			DetectiveGuns.AddGameObject(item_DetectiveRevolver);
 			SilencedGuns.AddGameObject(item_Silenced_Revolver_0);
@@ -163,14 +160,6 @@
 			BearTraps.AddGameObject(item_Bear_trap_0);
 			BearTraps.AddGameObject(item_Bear_trap_0);
 			Grenades.AddGameObject(item_Grenade);
-
-			Clues.RegisterMurderItemEsp();
-			DetectiveGuns.RegisterMurderItemEsp();
-			SilencedGuns.RegisterMurderItemEsp();
-			ShotGuns.RegisterMurderItemEsp();
-			BearTraps.RegisterMurderItemEsp();
-			Grenades.RegisterMurderItemEsp();
-			Knifes.RegisterMurderItemEsp();
 
 			Clues.AddToWorldUtilsMenu();
 
@@ -275,7 +264,6 @@
 			DetectiveGuns.Clear();
 			SilencedGuns.Clear();
 			ShotGuns.Clear();
-			ClonedKnife.Clear();
 			Knifes.Clear();
 			BearTraps.Clear();
 			Grenades.Clear();
@@ -291,8 +279,28 @@
 			RoleSwapper_GetMurdererRole = false;
 			EveryoneHasPatreonPerk = false;
 			OnlySelfHasPatreonPerk = false;
+			if (Murder4ESPtoggler != null)
+			{
+				Murder4ESPtoggler.setToggleState(false);
+			}
 		}
 
+
+		public static void ToggleItemESP(bool value)
+		{
+			ESPMenu.Toggle_Pickup_ESP = value; // ESSENTIAL
+			if (value)
+			{
+
+				Clues.Set_Pickup_ESP_Color("33ff66");
+				DetectiveGuns.Set_Pickup_ESP_Color("3366ff");
+				SilencedGuns.Set_Pickup_ESP_Color("ff9933");
+				ShotGuns.Set_Pickup_ESP_Color("ff9933");
+				Knifes.Set_Pickup_ESP_Color("ff0000");
+				BearTraps.Set_Pickup_ESP_Color("ff9933");
+				Grenades.Set_Pickup_ESP_Color("ff9933");
+			}
+		}
 		public static void Murder4CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
 		{
 			Murder4CheatPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Murder 4 Cheats", "Manage Murder 4 Cheats", null, null, null, null, btnHalf);
@@ -460,7 +468,7 @@
 			GetDetectiveRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 3, 1, "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = true; RoleSwapper_GetMurdererRole = false; }), "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = false; }), "Assign Yourself Detective Role on Next Round!", Color.green, Color.red, null, false, true);
 			GetMurdererRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 3, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = true; RoleSwapper_GetDetectiveRole = false; }), "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = false; }), "Assign Yourself Murderer Role on Next Round!", Color.green, Color.red, null, false, true);
 
-			GameObjectESP.Murder4ESPtoggler = new QMSingleToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(GameObjectESP.AddESPToMurderProps), "Item ESP Off", new Action(GameObjectESP.RemoveESPToMurderProps), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
+			Murder4ESPtoggler = new QMSingleToggleButton(Murder4CheatPage, 3, 0, "Item ESP On", new Action(() => { ToggleItemESP(true); }), "Item ESP Off", new Action(() => { ToggleItemESP(false); }), "Reveals All murder items position.", Color.green, Color.red, null, false, true);
 			JarRoleController.Murder4RolesRevealerToggle = new QMSingleToggleButton(Murder4CheatPage, 3, 0.5f, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", Color.green, Color.red, null, false, true);
 			Murder4UdonExploits.Init_GameController_Btn(Murder4CheatPage, 4, 0, true);
 			Murder4UdonExploits.Init_Filtered_Nodes_Btn(Murder4CheatPage, 4, 0.5f, true);
@@ -659,7 +667,7 @@
 		private static bool SafetySwap;
 
 		// MAP GameObjects Required for control.
-
+		public static QMSingleToggleButton Murder4ESPtoggler;
 		public static QMSingleButton GameStartbtn;
 		public static QMSingleButton GameAbortbtn;
 		public static QMSingleButton GameVictoryBystanderBtn;
@@ -753,7 +761,6 @@
 		public static List<GameObject> SilencedGuns = new List<GameObject>();
 		public static List<GameObject> ShotGuns = new List<GameObject>();
 
-		public static List<GameObject> ClonedKnife = new List<GameObject>();
 		public static List<GameObject> Knifes = new List<GameObject>();
 		public static List<GameObject> BearTraps = new List<GameObject>();
 		public static List<GameObject> Grenades = new List<GameObject>();

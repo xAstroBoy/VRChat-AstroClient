@@ -103,7 +103,7 @@
     <Compile Include="Buttons\RandomSubmenus.cs" />
     <Compile Include="Buttons\SettingsMenuBtn.cs" />
     <Compile Include="Buttons\UserInteractMenuBtns.cs" />
-    <Compile Include="Buttons\ESPMenuBtn.cs" />
+    <Compile Include="Buttons\ESPMenu.cs" />
     <Compile Include="Buttons\WorldPickupsBtn.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemlySpy_Extensions.cs" />
@@ -115,7 +115,7 @@
     <Compile Include="Cheetos\CheetosUI.cs" />
     <Compile Include="Components\ESP\Pickup\ESP_Pickup.cs" />
     <Compile Include="Components\ESP\Trigger\ESP_Trigger.cs" />
-    <Compile Include="Components\ESP\Tweaker\ESP_ItemTweaker.cs" />
+    <Compile Include="Components\ESP\ItemTweaker\ESP_ItemTweaker.cs" />
     <Compile Include="Components\ESP\UdonBehaviour\ESP_UdonBehaviour.cs" />
     <Compile Include="Components\ESP\VRCInteractable\ESP_VRCInteractable.cs" />
     <Compile Include="Config\Config.cs" />
@@ -213,7 +213,6 @@
     <Compile Include="Components\SingleTag\SingleTagsUtils.cs" />
     <Compile Include="GameObject\Editor\Colliders\ColliderEditors.cs" />
     <Compile Include="GameObject\Editor\Color\ColorEditor.cs" />
-    <Compile Include="GameObject\Editor\ESP\GameObjectESP.cs" />
     <Compile Include="GameObject\Editor\Forces\Forces.cs" />
     <Compile Include="GameObject\Editor\Interaction\Pickup.cs" />
     <Compile Include="GameObject\Editor\Position\ItemPosition.cs" />

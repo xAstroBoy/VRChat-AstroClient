@@ -7,33 +7,128 @@
 
 	public static class EspExtensions
 	{
-
-		// TODO : REMOVE THIS
-		// MAKE GAMEOBJECTESP OBSOLETE AND NOT NEEDED ANYMORE AND IS GOING TO BE DELETED!
-		public static void RegisterMurderItemEsp(this GameObject obj)
+		public static void Set_Pickup_ESP_Color(this GameObject obj, Color Color)
 		{
 			if (obj != null)
 			{
-				if (obj != null)
+				var ESP = obj.GetComponent<ESP_Pickup>();
+				if(ESP != null)
 				{
-					if (!GameObjectESP.MurderESPItems.Contains(obj))
-					{
-						GameObjectESP.MurderESPItems.Add(obj);
-					}
+					ESP.ChangeColor(Color);
 				}
 			}
 		}
 
-		public static void RegisterMurderItemEsp(this List<GameObject> list)
+		public static void Set_Pickup_ESP_Color(this GameObject obj, string Color)
+		{
+			if (obj != null)
+			{
+				var ESP = obj.GetComponent<ESP_Pickup>();
+				if (ESP != null)
+				{
+					ESP.ChangeColor(Color);
+				}
+			}
+		}
+
+		public static void Set_Pickup_ESP_Color(this List<GameObject> list, Color color)
 		{
 			foreach (var obj in list)
 			{
 				if (obj != null)
 				{
-					if (!GameObjectESP.MurderESPItems.Contains(obj))
-					{
-						GameObjectESP.MurderESPItems.Add(obj);
-					}
+					obj.Set_Pickup_ESP_Color(color);
+				}
+			}
+		}
+
+		public static void Set_Pickup_ESP_Color(this List<GameObject> list, string color)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+					obj.Set_Pickup_ESP_Color(color);
+				}
+			}
+		}
+		public static void Set_Trigger_ESP_Color(this GameObject obj, Color Color)
+		{
+			if (obj != null)
+			{
+				var ESP = obj.GetComponent<ESP_Trigger>();
+				if (ESP != null)
+				{
+					ESP.ChangeColor(Color);
+				}
+			}
+		}
+
+		public static void Set_Trigger_ESP_Color(this GameObject obj, string Color)
+		{
+			if (obj != null)
+			{
+				var ESP = obj.GetComponent<ESP_Trigger>();
+				if (ESP != null)
+				{
+					ESP.ChangeColor(Color);
+				}
+			}
+		}
+
+		public static void Set_Trigger_ESP_Color(this List<GameObject> list, Color color)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+					obj.Set_Trigger_ESP_Color(color);
+				}
+			}
+		}
+
+		public static void Set_Trigger_ESP_Color(this List<GameObject> list, string color)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+					obj.Set_Trigger_ESP_Color(color);
+				}
+			}
+		}
+
+		public static void Set_ItemTweaker_ESP_Color(this GameObject obj, Color Color)
+		{
+			if (obj != null)
+			{
+				var ESP = obj.GetComponent<ESP_ItemTweaker>();
+				if (ESP != null)
+				{
+					ESP.ChangeColor(Color);
+				}
+			}
+		}
+
+		public static void Set_ItemTweaker_ESP_Color(this GameObject obj, string Color)
+		{
+			if (obj != null)
+			{
+				var ESP = obj.GetComponent<ESP_ItemTweaker>();
+				if (ESP != null)
+				{
+					ESP.ChangeColor(Color);
+				}
+			}
+		}
+
+		public static void Set_ItemTweaker_ESP_Color(this List<GameObject> list, Color color)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+					obj.Set_ItemTweaker_ESP_Color(color);
 				}
 			}
 		}

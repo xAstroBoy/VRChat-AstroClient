@@ -6,25 +6,25 @@
 	using System;
 	using VRC;
 
-	internal class ESPMenuBtn : GameEvents
+	internal class ESPMenu : GameEvents
 	{
 		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
 			var main = new QMNestedButton(menu, x, y, "ESP Menu", "ESP Options", null, null, null, null, btnHalf);
-			PlayerESPToggleBtn = new QMSingleToggleButton(main, 1, 0f, "Player ESP ON", new Action(() => { EnabledPlayerESP = true; }), "Player ESP OFF", new Action(() => { EnabledPlayerESP = false; }), "Toggles Player ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+			PlayerESPToggleBtn = new QMSingleToggleButton(main, 1, 0f, "Player ESP ON", new Action(() => { Toggle_Player_ESP = true; }), "Player ESP OFF", new Action(() => { Toggle_Player_ESP = false; }), "Toggles Player ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 
-			PickupESPToggleBtn = new QMSingleToggleButton(main, 2, 0f, "Pickup ESP ON", new Action(() => { EnabledPickupESP = true; }), "Pickup ESP OFF", new Action(() => { EnabledPickupESP = false; }), "Toggle Pickup ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-			VRCInteractableESPToggleBtn = new QMSingleToggleButton(main, 2, 0.5f, "VRC Interactable ESP ON", new Action(() => { EnabledVRCInteractableESP = true; }), "VRC Interactable ESP OFF", new Action(() => { EnabledVRCInteractableESP = false; }), "Toggle VRC Interactable ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-			TriggerESPToggleBtn = new QMSingleToggleButton(main, 2, 1f, "Trigger ESP ON", new Action(() => { EnabledTriggerESP = true; }), "Trigger ESP OFF", new Action(() => { EnabledTriggerESP = false; }), "Toggle Trigger ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-			UdonBehaviourESPToggleBtn = new QMSingleToggleButton(main, 2, 1.5f, "Udon Behaviour ESP ON", new Action(() => { EnabledUdonBehaviourESP = true; }), "Udon Behaviour ESP OFF", new Action(() => { EnabledUdonBehaviourESP = false; }), "Toggle Udon Behaviour ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+			PickupESPToggleBtn = new QMSingleToggleButton(main, 2, 0f, "Pickup ESP ON", new Action(() => { Toggle_Pickup_ESP = true; }), "Pickup ESP OFF", new Action(() => { Toggle_Pickup_ESP = false; }), "Toggle Pickup ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+			VRCInteractableESPToggleBtn = new QMSingleToggleButton(main, 2, 0.5f, "VRC Interactable ESP ON", new Action(() => { Toggle_VRCInteractable_ESP = true; }), "VRC Interactable ESP OFF", new Action(() => { Toggle_VRCInteractable_ESP = false; }), "Toggle VRC Interactable ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+			TriggerESPToggleBtn = new QMSingleToggleButton(main, 2, 1f, "Trigger ESP ON", new Action(() => { Toggle_Trigger_ESP = true; }), "Trigger ESP OFF", new Action(() => { Toggle_Trigger_ESP = false; }), "Toggle Trigger ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+			UdonBehaviourESPToggleBtn = new QMSingleToggleButton(main, 2, 1.5f, "Udon Behaviour ESP ON", new Action(() => { Toggle_UdonBehaviour_ESP = true; }), "Udon Behaviour ESP OFF", new Action(() => { Toggle_UdonBehaviour_ESP = false; }), "Toggle Udon Behaviour ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 		}
 
 		public override void OnLevelLoaded()
 		{
-			EnabledPickupESP = false;
-			EnabledVRCInteractableESP = false;
-			EnabledTriggerESP = false;
-			EnabledUdonBehaviourESP = false;
+			Toggle_Pickup_ESP = false;
+			_Toggle_VRCInteractable_ESP = false;
+			Toggle_Trigger_ESP = false;
+			Toggle_UdonBehaviour_ESP = false;
 		}
 
 		private static QMSingleToggleButton PlayerESPToggleBtn;
@@ -35,13 +35,13 @@
 
 		#region VRCInteractableESP
 
-		private static bool _EnabledVRCInteractableESP;
+		private static bool _Toggle_VRCInteractable_ESP;
 
-		private static bool EnabledVRCInteractableESP
+		public static bool Toggle_VRCInteractable_ESP
 		{
 			get
 			{
-				return _EnabledVRCInteractableESP;
+				return _Toggle_VRCInteractable_ESP;
 			}
 			set
 			{
@@ -54,7 +54,7 @@
 					RemoveESPToVRCInteractables();
 				}
 
-				_EnabledVRCInteractableESP = value;
+				_Toggle_VRCInteractable_ESP = value;
 				if (VRCInteractableESPToggleBtn != null)
 				{
 					VRCInteractableESPToggleBtn.setToggleState(value);
@@ -96,13 +96,13 @@
 
 		#region PickupESP
 
-		private static bool _EnabledPickupESP;
+		private static bool _Toggle_Pickup_ESP;
 
-		private static bool EnabledPickupESP
+		public static bool Toggle_Pickup_ESP
 		{
 			get
 			{
-				return _EnabledPickupESP;
+				return _Toggle_Pickup_ESP;
 			}
 			set
 			{
@@ -115,7 +115,7 @@
 					RemoveESPToPickups();
 				}
 
-				_EnabledPickupESP = value;
+				_Toggle_Pickup_ESP = value;
 				if (PickupESPToggleBtn != null)
 				{
 					PickupESPToggleBtn.setToggleState(value);
@@ -156,13 +156,13 @@
 
 		#region TriggerESP
 
-		private static bool _EnabledTriggerESP;
+		private static bool _Toggle_Trigger_ESP;
 
-		private static bool EnabledTriggerESP
+		public static bool Toggle_Trigger_ESP
 		{
 			get
 			{
-				return _EnabledTriggerESP;
+				return _Toggle_Trigger_ESP;
 			}
 			set
 			{
@@ -175,7 +175,7 @@
 					RemoveESPToTriggers();
 				}
 
-				_EnabledTriggerESP = value;
+				_Toggle_Trigger_ESP = value;
 				if (TriggerESPToggleBtn != null)
 				{
 					TriggerESPToggleBtn.setToggleState(value);
@@ -256,13 +256,13 @@
 
 		#region playerESP
 
-		private static bool _EnabledPlayerESP;
+		private static bool _Toggle_Player_ESP;
 
-		public static bool EnabledPlayerESP
+		public static bool Toggle_Player_ESP
 		{
 			get
 			{
-				return _EnabledPlayerESP;
+				return _Toggle_Player_ESP;
 			}
 			set
 			{
@@ -275,7 +275,7 @@
 					RemoveAllActivePlayerESPs();
 				}
 
-				_EnabledPlayerESP = value;
+				_Toggle_Player_ESP = value;
 				if (PlayerESPToggleBtn != null)
 				{
 					PlayerESPToggleBtn.setToggleState(value);
@@ -285,7 +285,7 @@
 
 		public override void OnPlayerJoined(Player player)
 		{
-			if (EnabledPlayerESP)
+			if (Toggle_Player_ESP)
 			{
 				if (player != null && player != LocalPlayerUtils.GetSelfPlayer())
 				{
@@ -324,13 +324,13 @@
 
 		#region UdonBehaviourESP
 
-		private static bool _EnabledUdonBehaviourESP;
+		private static bool _Toggle_UdonBehaviour_ESP;
 
-		private static bool EnabledUdonBehaviourESP
+		private static bool Toggle_UdonBehaviour_ESP
 		{
 			get
 			{
-				return _EnabledUdonBehaviourESP;
+				return _Toggle_UdonBehaviour_ESP;
 			}
 			set
 			{
@@ -343,7 +343,7 @@
 					RemoveESPToUdonBehaviours();
 				}
 
-				_EnabledUdonBehaviourESP = value;
+				_Toggle_UdonBehaviour_ESP = value;
 				if (UdonBehaviourESPToggleBtn != null)
 				{
 					UdonBehaviourESPToggleBtn.setToggleState(value);
