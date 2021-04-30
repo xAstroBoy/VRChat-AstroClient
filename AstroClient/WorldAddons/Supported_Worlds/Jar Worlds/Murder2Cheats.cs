@@ -6,6 +6,7 @@
 	using AstroClient.Startup.Buttons;
 	using AstroClient.variables;
 	using AstroClient.Variables;
+	using DayClientML2.Utility;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;
@@ -177,11 +178,14 @@
 			ESPMenu.Toggle_Pickup_ESP = value;
 			if (value)
 			{
+				MiscUtility.DelayFunction(1, new Action(() =>
+				{
 
-				Clues.Set_Pickup_ESP_Color("33ff66");
-				DetectiveGuns.Set_Pickup_ESP_Color("3366ff");
-				SilencedGuns.Set_Pickup_ESP_Color("ff9933");
-				Knifes.Set_Pickup_ESP_Color("ff0000");
+					Clues.Set_Pickup_ESP_Color("84F962");
+					DetectiveGuns.Set_Pickup_ESP_Color("62DBF9");
+					SilencedGuns.Set_Pickup_ESP_Color("D6F962");
+					Knifes.Set_Pickup_ESP_Color("F96262");
+				}));
 			}
 		}
 

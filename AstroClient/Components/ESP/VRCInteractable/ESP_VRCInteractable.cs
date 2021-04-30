@@ -34,7 +34,7 @@
 		// Use this for initialization
 		public void Start()
 		{
-			ESPColor = GetDefaultColor();
+			SetColor = GetDefaultColor();
 			ObjMeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true);
 			if (ObjMeshRenderers == null && ObjMeshRenderers.Count() == 0)
 			{
@@ -70,7 +70,7 @@
 			}
 			if (HighLightOptions != null)
 			{
-				HighLightOptions.SetHighLighterColor(ESPColor);
+				HighLightOptions.SetHighLighterColor(SetColor);
 			}
 		}
 
@@ -99,7 +99,7 @@
 
 		internal void ResetColor()
 		{
-			ESPColor = GetDefaultColor();
+			SetColor = GetDefaultColor();
 			if (HighLightOptions != null)
 			{
 				HighLightOptions.SetHighLighterColor(GetDefaultColor());
@@ -123,7 +123,7 @@
 
 		internal void ChangeColor(Color newcolor)
 		{
-			ESPColor = newcolor;
+			SetColor = newcolor;
 			if (HighLightOptions != null)
 			{
 				HighLightOptions.SetHighLighterColor(newcolor);
@@ -133,7 +133,7 @@
 		internal void ChangeColor(string HexColor)
 		{
 			Color hextocolor = ColorUtils.HexToColor(HexColor);
-			ESPColor = hextocolor;
+			SetColor = hextocolor;
 			if (HighLightOptions != null)
 			{
 				HighLightOptions.SetHighLighterColor(hextocolor);
@@ -146,10 +146,14 @@
 			{
 				return HighLightOptions.highlightColor;
 			}
+			set
+			{
+				HighLightOptions.highlightColor = value;
+			}
 		}
 
 
-		internal Color ESPColor { get; private set; }
+		internal Color SetColor { get; private set; }
 		internal HighlightsFXStandalone HighLightOptions { get; private set; }
 		private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
 	}

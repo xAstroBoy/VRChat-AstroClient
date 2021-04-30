@@ -157,8 +157,8 @@
 			Knifes.AddGameObject(item_Knife_5);
 			ShotGuns.AddGameObject(item_Shotgun);
 			BearTraps.AddGameObject(item_Bear_trap_0);
-			BearTraps.AddGameObject(item_Bear_trap_0);
-			BearTraps.AddGameObject(item_Bear_trap_0);
+			BearTraps.AddGameObject(item_Bear_trap_1);
+			BearTraps.AddGameObject(item_Bear_trap_2);
 			Grenades.AddGameObject(item_Grenade);
 
 			Clues.AddToWorldUtilsMenu();
@@ -291,14 +291,15 @@
 			ESPMenu.Toggle_Pickup_ESP = value; // ESSENTIAL
 			if (value)
 			{
-
-				Clues.Set_Pickup_ESP_Color("33ff66");
-				DetectiveGuns.Set_Pickup_ESP_Color("3366ff");
-				SilencedGuns.Set_Pickup_ESP_Color("ff9933");
-				ShotGuns.Set_Pickup_ESP_Color("ff9933");
-				Knifes.Set_Pickup_ESP_Color("ff0000");
-				BearTraps.Set_Pickup_ESP_Color("ff9933");
-				Grenades.Set_Pickup_ESP_Color("ff9933");
+				MiscUtility.DelayFunction(1, new Action(() => { 
+				Clues.Set_Pickup_ESP_Color("87F368");
+				DetectiveGuns.Set_Pickup_ESP_Color("688CF3");
+				SilencedGuns.Set_Pickup_ESP_Color("C8F36D");
+				ShotGuns.Set_Pickup_ESP_Color("C8F36D");
+				Knifes.Set_Pickup_ESP_Color("F96262");
+				BearTraps.Set_Pickup_ESP_Color("F96262");
+				Grenades.Set_Pickup_ESP_Color("F96262");
+                    }));
 			}
 		}
 		public static void Murder4CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)

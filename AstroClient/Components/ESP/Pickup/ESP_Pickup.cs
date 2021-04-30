@@ -113,17 +113,7 @@
 			ESPColor = newcolor;
 			if (HighLightOptions != null)
 			{
-				HighLightOptions.SetHighLighterColor(newcolor);
-			}
-		}
-
-		internal void ChangeColor(string HexColor)
-		{
-			Color hextocolor = ColorUtils.HexToColor(HexColor);
-			ESPColor = hextocolor;
-			if (HighLightOptions != null)
-			{
-				HighLightOptions.SetHighLighterColor(hextocolor);
+				HighLightOptions.highlightColor = newcolor;
 			}
 		}
 

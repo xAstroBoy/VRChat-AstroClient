@@ -62,7 +62,7 @@
 				{
 					item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
 				}
-				item.highlightColor = color;
+				item.SetHighLighterColor(color);
 				item.Method_Public_Void_Renderer_Boolean_0(rend, status);
 			}
 		}
@@ -107,7 +107,7 @@
 				{
 					item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
 				}
-				item.highlightColor = color;
+				item.SetHighLighterColor(color);
 				item.Method_Public_Void_Renderer_Boolean_0(rend, status);
 			}
 		}
@@ -156,7 +156,7 @@
 		{
 			if (item != null)
 			{
-				item.highlightColor = ColorUtils.HexToColor(hex);
+				item.SetHighLighterColor(ColorUtils.HexToColor(hex));
 			}
 		}
 

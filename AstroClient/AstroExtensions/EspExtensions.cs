@@ -21,12 +21,13 @@
 
 		public static void Set_Pickup_ESP_Color(this GameObject obj, string Color)
 		{
+			Color hextocolor = ColorUtils.HexToColor(Color);
 			if (obj != null)
 			{
 				var ESP = obj.GetComponent<ESP_Pickup>();
 				if (ESP != null)
 				{
-					ESP.ChangeColor(Color);
+					ESP.ChangeColor(hextocolor);
 				}
 			}
 		}
@@ -37,18 +38,24 @@
 			{
 				if (obj != null)
 				{
-					obj.Set_Pickup_ESP_Color(color);
+					var ESP = obj.GetComponent<ESP_Pickup>();
+					if (ESP != null)
+					{
+						ESP.ChangeColor(color);
+					}
 				}
 			}
 		}
 
 		public static void Set_Pickup_ESP_Color(this List<GameObject> list, string color)
 		{
+			Color hextocolor = ColorUtils.HexToColor(color);
 			foreach (var obj in list)
 			{
-				if (obj != null)
+				var ESP = obj.GetComponent<ESP_Pickup>();
+				if (ESP != null)
 				{
-					obj.Set_Pickup_ESP_Color(color);
+					ESP.ChangeColor(hextocolor);
 				}
 			}
 		}
@@ -82,7 +89,11 @@
 			{
 				if (obj != null)
 				{
-					obj.Set_Trigger_ESP_Color(color);
+					var ESP = obj.GetComponent<ESP_Trigger>();
+					if (ESP != null)
+					{
+						ESP.ChangeColor(color);
+					}
 				}
 			}
 		}
@@ -93,7 +104,11 @@
 			{
 				if (obj != null)
 				{
-					obj.Set_Trigger_ESP_Color(color);
+					var ESP = obj.GetComponent<ESP_Trigger>();
+					if (ESP != null)
+					{
+						ESP.ChangeColor(color);
+					}
 				}
 			}
 		}
@@ -128,7 +143,11 @@
 			{
 				if (obj != null)
 				{
-					obj.Set_ItemTweaker_ESP_Color(color);
+					var ESP = obj.GetComponent<ESP_ItemTweaker>();
+					if (ESP != null)
+					{
+						ESP.ChangeColor(color);
+					}
 				}
 			}
 		}
@@ -139,7 +158,11 @@
 			{
 				if (obj != null)
 				{
-					obj.Set_ItemTweaker_ESP_Color(color);
+					var ESP = obj.GetComponent<ESP_ItemTweaker>();
+					if (ESP != null)
+					{
+						ESP.ChangeColor(color);
+					}
 				}
 			}
 		}
@@ -174,7 +197,11 @@
 			{
 				if (obj != null)
 				{
-					obj.Set_UdonBehaviour_ESP_Color(color);
+					var ESP = obj.GetComponent<ESP_UdonBehaviour>();
+					if (ESP != null)
+					{
+						ESP.ChangeColor(color);
+					}
 				}
 			}
 		}
@@ -185,7 +212,11 @@
 			{
 				if (obj != null)
 				{
-					obj.Set_UdonBehaviour_ESP_Color(color);
+					var ESP = obj.GetComponent<ESP_UdonBehaviour>();
+					if (ESP != null)
+					{
+						ESP.ChangeColor(color);
+					}
 				}
 			}
 		}
@@ -220,7 +251,11 @@
 			{
 				if (obj != null)
 				{
-					obj.Set_VRCInteractable_ESP_Color(color);
+					var ESP = obj.GetComponent<ESP_VRCInteractable>();
+					if (ESP != null)
+					{
+						ESP.ChangeColor(color);
+					}
 				}
 			}
 		}
@@ -231,7 +266,11 @@
 			{
 				if (obj != null)
 				{
-					obj.Set_VRCInteractable_ESP_Color(color);
+					var ESP = obj.GetComponent<ESP_VRCInteractable>();
+					if (ESP != null)
+					{
+						ESP.ChangeColor(color);
+					}
 				}
 			}
 		}
