@@ -55,6 +55,5 @@
 
 		internal static bool DisableBlackScreenFade = true;
 
-		internal static bool SerializerEnabled;
 	}
 }

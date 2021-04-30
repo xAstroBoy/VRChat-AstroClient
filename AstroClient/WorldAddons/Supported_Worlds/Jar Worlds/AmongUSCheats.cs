@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroClient.components;
 	using AstroClient.ConsoleUtils;
 	using AstroClient.extensions;
@@ -31,6 +32,12 @@
 			SafetySwap = false;
 
 			RoleSwapper_GetImpostorRole = false;
+			SerializerRot = new Quaternion(0,0,0,0);
+			SerializerPos = Vector3.zero;
+			if(ToggleSerializerShortcut != null)
+			{
+				ToggleSerializerShortcut.setToggleState(false);
+			}
 		}
 
 		public static void FindAmongUsObjects()
@@ -150,6 +157,7 @@
 
 			AmongUSUdonExploits.Init_RoleSwap_Menu(AmongUsCheatsPage, 4f, 1f, true);
 			GetImpostorRoleBtn = new QMSingleToggleButton(AmongUsCheatsPage, 4, 1.5f, "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = true; }), "Get Impostor Role", new Action(() => { RoleSwapper_GetImpostorRole = false; }), "Assign Yourself Impostor Role on Next Round!", Color.green, Color.red, null, false, true);
+			ToggleSerializerShortcut = new QMSingleToggleButton(AmongUsCheatsPage, 4, 2f, "Toggle Serializer", new Action(() => { AmongUsSerializer = true; }), "Toggle Serializer", new Action(() => { AmongUsSerializer = false;  }), "Serialize For Stealth or to frame someone else!", Color.green, Color.red, null, false, true);
 
 			GameStartbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1, "Start Game", new Action(() => { StartGameEvent.ExecuteUdonEvent(); }), "Force Start Game Event", null, Color.green, true);
 			GameAbortbtn = new QMSingleButton(AmongUsCheatsPage, 1, 1.5f, "Abort Game", new Action(() => { AbortGameEvent.ExecuteUdonEvent(); }), "Force Abort Game Event", null, Color.green, true);
@@ -284,6 +292,32 @@
 				}
 			}
 		}
+		
+
+		private static bool AmongUsSerializer
+		{
+			set
+			{
+				Movement.SerializerEnabled = value;
+				if(value)
+				{
+					SerializerPos = Utils.CurrentUser.transform.position;
+					SerializerRot = Utils.CurrentUser.transform.rotation;
+				}
+				else
+				{
+					Utils.CurrentUser.transform.position = SerializerPos;
+					Utils.CurrentUser.transform.rotation = SerializerRot;
+
+					SerializerRot = new Quaternion(0, 0, 0, 0);
+					SerializerPos = Vector3.zero;
+				}
+			}
+		}
+
+
+		private static Vector3 SerializerPos;
+		private static Quaternion SerializerRot;
 
 		public static QMSingleButton GameStartbtn;
 		public static QMSingleButton GameAbortbtn;
@@ -291,6 +325,7 @@
 		public static QMSingleButton GameVictoryImpostorBtn;
 
 		public static QMSingleToggleButton GetImpostorRoleBtn;
+		public static QMSingleToggleButton ToggleSerializerShortcut;
 
 		public static QMNestedButton AmongUsCheatsPage;
 

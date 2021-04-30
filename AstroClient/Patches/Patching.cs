@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.BetterPatch
 {
+	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroClient.ConsoleUtils;
 	using AstroClient.variables;
 	using ExitGames.Client.Photon;
@@ -107,7 +108,7 @@
 			{
 				if (__0 == 7 || __0 == 206 || __0 == 201 || __0 == 1)
 				{
-					return !Bools.SerializerEnabled;
+					return !Movement.SerializerEnabled;
 				}
 			}
 			catch { }

@@ -20,7 +20,7 @@
 			RocketJumpToggle = new QMSingleToggleButton(temp, 1, 0.5f, "Rocket Jump", new Action(() => { isRocketJumpActive = true; }), "Rocket Jump", new Action(() => { isRocketJumpActive = false; }), "Allows you to Unlimited jump", Color.green, Color.red, null, false, true);
 
 			JumpOverrideToggle = new QMToggleButton(temp, 2, 0, "Jump Override ON", new Action(() => { IsJumpOverriden = true; }), "Jump Override OFF", new Action(() => { IsJumpOverriden = false; }), "Allows you to Bypass jump Block in certain worlds.", null, null, null, false);
-			SerializerBtn = new QMToggleButton(temp, 3, 0, "Serializer ON", new Action(ToggleSerializer), "Serializer OFF", new Action(ToggleSerializer), "Blocks Movement packets (allows you to be invisible to others)", null, null, null, false);
+			SerializerBtn = new QMToggleButton(temp, 3, 0, "Serializer ON", new Action(() => { SerializerEnabled = true; }), "Serializer OFF", new Action(() => { SerializerEnabled = false; }), "Blocks Movement packets (allows you to be invisible to others)", null, null, null, false);
 			FreezePlayerOnQMOpenToggle = new QMToggleButton(temp, 4, 0, "Freeze On QM open \n ON", new Action(ToggleFreezePlayerOnQMOpen), "Freeze On QM Open \n OFF", new Action(ToggleFreezePlayerOnQMOpen), "Freeze Player On QuickMenu Open event.", null, null, null, false);
 			new QMSingleButton(temp, 1, 1, "Spawn Avatar Clone", new Action(() => { SpawnClone(); }), "Spawns current avi clone", null, null, true);
 			new QMSingleButton(temp, 1, 1.5f, "Remove Avatar Clones", new Action(() => { RemoveClones(); }), "Spawns current avi clone", null, null, true);
@@ -40,7 +40,7 @@
 		public static void OnLevelLoad()
 		{
 			IsJumpOverriden = false;
-			Bools.SerializerEnabled = false;
+			SerializerEnabled = false;
 
 			if (Capsule != null)
 			{
@@ -189,7 +189,7 @@
 							clone.GetComponent<FullBodyBipedIK>().enabled = false;
 							clone.GetComponent<LimbIK>().enabled = false;
 							clone.GetComponent<VRIK>().enabled = false;
-							//clone.GetComponent<LookTargetController>().enabled = false;
+							clone.GetComponent<LookTargetController>().enabled = false;
 							clone.transform.position = original.transform.position;
 							clone.transform.rotation = original.transform.rotation;
 							ClonesCapsules.Add(clone);
@@ -216,15 +216,26 @@
 			catch { }
 		}
 
-		public static void ToggleSerializer()
+		private static bool _SerializerEnabled;
+		public static bool SerializerEnabled
 		{
-			Bools.SerializerEnabled = !Bools.SerializerEnabled;
-			CustomSerialize(Bools.SerializerEnabled);
-			if (SerializerBtn != null)
+			get
 			{
-				SerializerBtn.setToggleState(Bools.SerializerEnabled);
+				return _SerializerEnabled;
+			}
+			set
+			{
+				
+				_SerializerEnabled = value;
+				if (SerializerBtn != null)
+				{
+					SerializerBtn.setToggleState(value);
+				}
+				//CustomSerialize(value);
+
 			}
 		}
+
 
 		private static bool _IsUnlimitedJumpActive;
 
