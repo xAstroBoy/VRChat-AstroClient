@@ -78,8 +78,9 @@
 					var dll = Assembly.LoadFrom(path);
 					Console.WriteLine($"Injected Library: {path}");
 				}
-				catch
+				catch (Exception e)
 				{
+					Console.WriteLine(e.Message);
 					Console.WriteLine($"Failed to inject: {path}");
 				}
 			}
@@ -92,8 +93,9 @@
 					MelonHandler.LoadFromAssembly(dll, path);
 					Console.WriteLine($"Injected MelonMod/MelonPlugin: {path}");
 				}
-				catch
+				catch (Exception e)
 				{
+					Console.WriteLine(e.Message);
 					Console.WriteLine($"Failed to inject: {path}");
 				}
 			}
@@ -105,8 +107,9 @@
 					_ = Assembly.LoadFile(path);
 					Console.WriteLine($"Injected: {path}");
 				}
-				catch
+				catch (Exception e)
 				{
+					Console.WriteLine(e.Message);
 					Console.WriteLine($"Failed to inject: {path}");
 				}
 			}
