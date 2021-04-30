@@ -117,49 +117,57 @@
 			Networking.LocalPlayer.SetVelocity(velocity);
 		}
 
-		//Credit : Dayclient Owner ( dayoftheplay )
+
+		// CREDITS : Unreal (Day's one is broken and refused to stay in place)
 		public static void CustomSerialize(bool Toggle)
 		{
 			try
 			{
-				if (VRC.Core.APIUser.CurrentUser != null)
+				if (Toggle)
 				{
-					if (VRC.Core.APIUser.CurrentUser.GetPlayer() != null)
+					if (VRC.Core.APIUser.CurrentUser != null)
 					{
-						var original = VRC.Core.APIUser.CurrentUser.GetPlayer().prop_VRCPlayer_0.prop_VRCAvatarManager_0.prop_GameObject_0;
-						if (original != null)
+						if (VRC.Core.APIUser.CurrentUser.GetPlayer() != null)
 						{
-							if (Toggle)
+							var original = VRC.Core.APIUser.CurrentUser.GetPlayer().prop_VRCPlayer_0.prop_VRCAvatarManager_0.prop_GameObject_0;
+							if (original != null)
 							{
-								Capsule = GameObject.Instantiate(original, null, true);
-								var animator = Capsule.GetComponent<Animator>();
-								if (animator != null
-									&& animator.isHuman)
+								Capsule = UnityEngine.Object.Instantiate<GameObject>(original, null, true);
+								Animator animator = Capsule.GetComponent<Animator>();
+								if (animator != null && animator.isHuman)
 								{
-									var headTransform = animator.GetBoneTransform(HumanBodyBones.Head);
-									if (headTransform != null)
-										headTransform.localScale = Vector3.one;
+									Transform boneTransform = animator.GetBoneTransform(HumanBodyBones.Head);
+									if (boneTransform != null)
+									{
+										boneTransform.localScale = Vector3.one;
+									}
 								}
 								Capsule.name = "Serialize Capsule";
-								animator.enabled = false;
-								Capsule.GetComponent<FullBodyBipedIK>().enabled = false;
-								Capsule.GetComponent<LimbIK>().enabled = false;
-								Capsule.GetComponent<VRIK>().enabled = false;
-								Capsule.GetComponent<LookTargetController>().enabled = false;
+								foreach (Component comp in Capsule.GetComponents<Component>())
+								{
+									if (!(comp is Transform) || !(comp is Renderer) || !(comp is MeshRenderer) || !(comp is Rigidbody))
+									{
+										UnityEngine.Object.Destroy(comp);
+									}
+								}
 								Capsule.transform.position = original.transform.position;
 								Capsule.transform.rotation = original.transform.rotation;
-							}
-							if (!Toggle)
-							{
-								UnityEngine.Object.Destroy(Capsule);
-								//Utils.CurrentUser.gameObject.GetComponentInChildren<FlatBufferNetworkSerializer>().enabled = true;
 							}
 						}
 					}
 				}
+				else
+				{
+										
+					UnityEngine.Object.Destroy(Capsule);
+				}
 			}
-			catch { }
+			catch
+			{
+			}
 		}
+
+
 
 		private static List<GameObject> ClonesCapsules = new List<GameObject>();
 
@@ -175,24 +183,27 @@
 						var original = VRC.Core.APIUser.CurrentUser.GetPlayer().prop_VRCPlayer_0.prop_VRCAvatarManager_0.prop_GameObject_0;
 						if (original != null)
 						{
-							var clone = GameObject.Instantiate(original, null, true);
-							var animator = clone.GetComponent<Animator>();
-							if (animator != null
-								&& animator.isHuman)
+							Capsule = UnityEngine.Object.Instantiate<GameObject>(original, null, true);
+							Animator animator = Capsule.GetComponent<Animator>();
+							if (animator != null && animator.isHuman)
 							{
-								var headTransform = animator.GetBoneTransform(HumanBodyBones.Head);
-								if (headTransform != null)
-									headTransform.localScale = Vector3.one;
+								Transform boneTransform = animator.GetBoneTransform(HumanBodyBones.Head);
+								if (boneTransform != null)
+								{
+									boneTransform.localScale = Vector3.one;
+								}
 							}
-							clone.name = "Avatar Local Clone";
-							animator.enabled = false;
-							clone.GetComponent<FullBodyBipedIK>().enabled = false;
-							clone.GetComponent<LimbIK>().enabled = false;
-							clone.GetComponent<VRIK>().enabled = false;
-							clone.GetComponent<LookTargetController>().enabled = false;
-							clone.transform.position = original.transform.position;
-							clone.transform.rotation = original.transform.rotation;
-							ClonesCapsules.Add(clone);
+							Capsule.name = "Avatar Clone";
+							foreach (Component comp in Capsule.GetComponents<Component>())
+							{
+								if (!(comp is Transform) || !(comp is Renderer) || !(comp is MeshRenderer) || !(comp is Rigidbody))
+								{
+									UnityEngine.Object.Destroy(comp);
+								}
+							}
+							Capsule.transform.position = original.transform.position;
+							Capsule.transform.rotation = original.transform.rotation;
+							ClonesCapsules.Add(Capsule);
 						}
 					}
 				}
@@ -231,7 +242,7 @@
 				{
 					SerializerBtn.setToggleState(value);
 				}
-				//CustomSerialize(value);
+				CustomSerialize(value);
 
 			}
 		}
