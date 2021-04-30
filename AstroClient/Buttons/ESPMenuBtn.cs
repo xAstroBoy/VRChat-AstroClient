@@ -27,16 +27,6 @@
 			EnabledUdonBehaviourESP = false;
 		}
 
-		public static string Pickup_Identifier { get; private set; } = "Pickup_ID";
-		public static string VRCInteractable_Identifier { get; private set; } = "VRCInteractable_ID";
-		public static string Trigger_Identifier { get; private set; } = "Trigger_ID";
-		public static string UdonBehaviour_Identifier { get; private set; } = "UdonBehaviour_ID";
-
-		public static string Default_PickupESPColorHex { get; private set; } = "4AB30D";
-		public static string Default_VRCInteractableESPColorHex { get; private set; } = "E47D39";
-		public static string Default_TriggerESPColorHex { get; private set; } = "EF2C3F";
-		public static string Default_UdonBehaviourESPColorHex { get; private set; } = "CD14C7";
-
 		private static QMSingleToggleButton PlayerESPToggleBtn;
 		private static QMSingleToggleButton VRCInteractableESPToggleBtn;
 		private static QMSingleToggleButton PickupESPToggleBtn;
@@ -79,11 +69,11 @@
 			{
 				if (item != null)
 				{
-					ObjectESP ESP = item.AddComponent<ObjectESP>();
-					if (ESP != null)
+					
+					var ESP = item.GetComponent<ESP_VRCInteractable>();
+					if(ESP == null)
 					{
-						ESP.Identifier = VRCInteractable_Identifier;
-						ESP.ChangeColor(Default_VRCInteractableESPColorHex);
+						item.AddComponent<ESP_VRCInteractable>();
 					}
 				}
 			}
@@ -94,7 +84,11 @@
 			var items = WorldUtils.GetAllVRCInteractables();
 			foreach (var item in items)
 			{
-				item.DestroyESPByIdentifier(VRCInteractable_Identifier);
+				var ESP = item.GetComponent<ESP_VRCInteractable>();
+				if (ESP != null)
+				{
+					ESP.DestroyMeLocal();
+				}
 			}
 		}
 
@@ -136,11 +130,10 @@
 			{
 				if (item != null)
 				{
-					var ESP = item.AddComponent<ObjectESP>();
-					if (ESP != null)
+					var ESP = item.GetComponent<ESP_Pickup>();
+					if (ESP == null)
 					{
-						ESP.Identifier = Pickup_Identifier;
-						ESP.ChangeColor(Default_PickupESPColorHex);
+						item.AddComponent<ESP_Pickup>();
 					}
 				}
 			}
@@ -151,7 +144,11 @@
 			var items = WorldUtils.GetPickups();
 			foreach (var item in items)
 			{
-				item.DestroyESPByIdentifier(Pickup_Identifier);
+				var ESP = item.GetComponent<ESP_Pickup>();
+				if (ESP != null)
+				{
+					ESP.DestroyMeLocal();
+				}
 			}
 		}
 
@@ -193,11 +190,10 @@
 			{
 				if (item != null)
 				{
-					ObjectESP ESP = item.AddComponent<ObjectESP>();
-					if (ESP != null)
+					var ESP = item.GetComponent<ESP_Trigger>();
+					if (ESP == null)
 					{
-						ESP.Identifier = Trigger_Identifier;
-						ESP.ChangeColor(Default_TriggerESPColorHex);
+						item.AddComponent<ESP_Trigger>();
 					}
 					//if (WorldUtils.GetWorldID() == WorldIds.SnoozeScaryMaze5)
 					//{
@@ -248,7 +244,11 @@
 			var items = WorldUtils.GetTriggers();
 			foreach (var item in items)
 			{
-				item.DestroyESPByIdentifier(Trigger_Identifier);
+				var ESP = item.GetComponent<ESP_Trigger>();
+				if (ESP != null)
+				{
+					ESP.DestroyMeLocal();
+				}
 			}
 		}
 
@@ -358,11 +358,10 @@
 			{
 				if (item != null)
 				{
-					var ESP = item.AddComponent<ObjectESP>();
-					if (ESP != null)
+					var ESP = item.GetComponent<ESP_UdonBehaviour>();
+					if (ESP == null)
 					{
-						ESP.Identifier = UdonBehaviour_Identifier;
-						ESP.ChangeColor(Default_UdonBehaviourESPColorHex);
+						item.AddComponent<ESP_UdonBehaviour>();
 					}
 				}
 			}
@@ -373,7 +372,11 @@
 			var items = WorldUtils.GetUdonBehaviours();
 			foreach (var item in items)
 			{
-				item.DestroyESPByIdentifier(UdonBehaviour_Identifier);
+				var ESP = item.GetComponent<ESP_UdonBehaviour>();
+				if (ESP != null)
+				{
+					ESP.DestroyMeLocal();
+				}
 			}
 		}
 

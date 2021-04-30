@@ -30,7 +30,12 @@
 
 			ClassInjector.RegisterTypeInIl2Cpp<JarRoleESP>();
 
-			ClassInjector.RegisterTypeInIl2Cpp<ObjectESP>();
+			ClassInjector.RegisterTypeInIl2Cpp<ESP_Pickup>();
+			ClassInjector.RegisterTypeInIl2Cpp<ESP_Trigger>();
+			ClassInjector.RegisterTypeInIl2Cpp<ESP_ItemTweaker>();
+			ClassInjector.RegisterTypeInIl2Cpp<ESP_UdonBehaviour>();
+			ClassInjector.RegisterTypeInIl2Cpp<ESP_VRCInteractable>();
+
 
 			ClassInjector.RegisterTypeInIl2Cpp<PlayerESP>();
 

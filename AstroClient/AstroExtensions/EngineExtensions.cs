@@ -124,18 +124,18 @@
 			if (obj != null)
 			{
 				var name = obj.name;
-				if (obj != null)
-				{
-					UnityEngine.Object.DestroyImmediate(obj);
-				}
+				//if (obj != null)
+				//{
+				//	UnityEngine.Object.DestroyImmediate(obj);
+				//}
 				if (obj != null)
 				{
 					UnityEngine.Object.Destroy(obj);
 				}
-				if (obj != null)
-				{
-					UnityEngine.Object.DestroyObject(obj);
-				}
+				//if (obj != null)
+				//{
+				//	UnityEngine.Object.DestroyObject(obj);
+				//}
 				if (obj != null)
 				{
 					ModConsole.DebugLog("Failed To Destroy Object : " + obj.name, Color.Red);

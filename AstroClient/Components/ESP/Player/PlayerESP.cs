@@ -30,6 +30,7 @@
 			{
 				ModConsole.DebugLog($"[PlayerESP Debug] : {msg}");
 			}
+
 		}
 
 		// Use this for initialization
@@ -56,8 +57,8 @@
 				else
 				{
 					Debug($"Found SelectRegion Transform Assigned in {player.DisplayName()}!");
-					ObjRenderers = SelectRegion.GetComponentsInChildren<Renderer>(true).ToList();
-					ObjMeshRenderers = SelectRegion.GetComponentsInChildren<MeshRenderer>(true).ToList();
+					ObjRenderers = SelectRegion.GetComponentsInChildren<Renderer>(true);
+					ObjMeshRenderers = SelectRegion.GetComponentsInChildren<MeshRenderer>(true);
 					if (ObjMeshRenderers == null && ObjRenderers == null && ObjMeshRenderers.Count() == 0 && ObjRenderers.Count() == 0)
 					{
 						ModConsole.Error($"Failed to Generate a PlayerESP for Player {player.DisplayName()}, Due to SelectRegion Renderer Missing!");
@@ -96,24 +97,6 @@
 
 		public void OnDestroy()
 		{
-			if (HighLightOptions != null)
-			{
-				foreach (var ObjRenderer in ObjRenderers)
-				{
-					if (ObjRenderer != null)
-					{
-						HighLightOptions.SetHighLighter(ObjRenderer, false);
-					}
-				}
-				foreach (var ObjMeshRenderer in ObjMeshRenderers)
-				{
-					if (ObjMeshRenderer != null)
-					{
-						HighLightOptions.SetHighLighter(ObjMeshRenderer, false);
-					}
-				}
-			}
-
 			HighLightOptions.DestroyHighlighter();
 		}
 
@@ -133,27 +116,6 @@
 					if (ObjMeshRenderer != null)
 					{
 						HighLightOptions.SetHighLighter(ObjMeshRenderer, true);
-					}
-				}
-			}
-		}
-
-		public void OnDisable()
-		{
-			if (HighLightOptions != null)
-			{
-				foreach (var ObjRenderer in ObjRenderers)
-				{
-					if (ObjRenderer != null)
-					{
-						HighLightOptions.SetHighLighter(ObjRenderer, false);
-					}
-				}
-				foreach (var ObjMeshRenderer in ObjMeshRenderers)
-				{
-					if (ObjMeshRenderer != null)
-					{
-						HighLightOptions.SetHighLighter(ObjMeshRenderer, false);
 					}
 				}
 			}
@@ -183,8 +145,8 @@
 
 		private Player player;
 		private Transform SelectRegion;
-		private List<Renderer> ObjRenderers = new List<Renderer>();
-		private List<MeshRenderer> ObjMeshRenderers = new List<MeshRenderer>();
+		private UnhollowerBaseLib.Il2CppArrayBase<Renderer> ObjRenderers;
+		private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
 		private HighlightsFXStandalone HighLightOptions;
 
 		internal Player AssignedPlayer

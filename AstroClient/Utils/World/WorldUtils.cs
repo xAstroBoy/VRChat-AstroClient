@@ -121,6 +121,14 @@
 				{
 					foreach (var item in list1)
 					{
+						if (item.gameObject.name == "ViewFinder")
+						{
+							continue;
+						}
+						if (item.gameObject.name == "AvatarDebugConsole")
+						{
+							continue;
+						}
 						if (!Pickups.Contains(item.gameObject))
 						{
 							Pickups.Add(item.gameObject);
@@ -133,6 +141,14 @@
 				{
 					foreach (var item in list2)
 					{
+						if (item.gameObject.name == "ViewFinder")
+						{
+							continue;
+						}
+						if (item.gameObject.name == "AvatarDebugConsole")
+						{
+							continue;
+						}
 						if (!Pickups.Contains(item.gameObject))
 						{
 							Pickups.Add(item.gameObject);
@@ -146,6 +162,14 @@
 				{
 					foreach (var item in list3)
 					{
+						if (item.gameObject.name == "ViewFinder")
+						{
+							continue;
+						}
+						if (item.gameObject.name == "AvatarDebugConsole")
+						{
+							continue;
+						}
 						if (!Pickups.Contains(item.gameObject))
 						{
 							Pickups.Add(item.gameObject);

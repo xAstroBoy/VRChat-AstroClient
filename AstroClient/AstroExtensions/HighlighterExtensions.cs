@@ -152,6 +152,15 @@
 			}
 		}
 
+		public static void SetHighLighterColor(this HighlightsFXStandalone item, string hex)
+		{
+			if (item != null)
+			{
+				item.highlightColor = ColorUtils.HexToColor(hex);
+			}
+		}
+
+
 		public static void ResetHighlighterColor(this HighlightsFXStandalone item)
 		{
 			if (item != null && item.highlightColor != null)

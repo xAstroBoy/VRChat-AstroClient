@@ -19,7 +19,11 @@
 				{
 					if (item != null)
 					{
-						item.AddComponent<ObjectESP>();
+						var ESP = item.GetComponent<ESP_Pickup>();
+						if (ESP == null)
+						{
+							item.AddComponent<ESP_Pickup>();
+						}
 					}
 				}
 			}
@@ -35,7 +39,7 @@
 				{
 					if (item != null)
 					{
-						var ESP = item.GetComponent<ObjectESP>();
+						var ESP = item.GetComponent<ESP_Pickup>();
 						if (ESP != null)
 						{
 							UnityEngine.Object.Destroy(ESP);

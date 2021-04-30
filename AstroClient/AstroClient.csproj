@@ -113,6 +113,11 @@
     <Compile Include="Cheetos\CheetosHelpers.cs" />
     <Compile Include="Cheetos\CheetosPrivateStuff.cs" />
     <Compile Include="Cheetos\CheetosUI.cs" />
+    <Compile Include="Components\ESP\Pickup\ESP_Pickup.cs" />
+    <Compile Include="Components\ESP\Trigger\ESP_Trigger.cs" />
+    <Compile Include="Components\ESP\Tweaker\ESP_ItemTweaker.cs" />
+    <Compile Include="Components\ESP\UdonBehaviour\ESP_UdonBehaviour.cs" />
+    <Compile Include="Components\ESP\VRCInteractable\ESP_VRCInteractable.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\JSonWriter.cs" />
@@ -187,7 +192,6 @@
     <Compile Include="Components\CrazyObjects\CrazyObject.cs" />
     <Compile Include="Components\CrazyObjects\CrazyObjectManager.cs" />
     <Compile Include="Components\ESP\EspHelper.cs" />
-    <Compile Include="Components\ESP\ObjectESP.cs" />
     <Compile Include="Components\ItemInflater\ItemInflater.cs" />
     <Compile Include="Components\ItemInflater\ItemInflaterManager.cs" />
     <Compile Include="Components\JarRoleRevealers\JarRoleController.cs" />
@@ -204,7 +208,7 @@
     <Compile Include="Components\RigidBodyController\RigidBodyController.cs" />
     <Compile Include="Components\RocketComponent\RocketManager.cs" />
     <Compile Include="Components\RocketComponent\RocketObject.cs" />
-    <Compile Include="Components\ESP\PlayerESP.cs" />
+    <Compile Include="Components\ESP\Player\PlayerESP.cs" />
     <Compile Include="Components\SingleTag\SingleTag.cs" />
     <Compile Include="Components\SingleTag\SingleTagsUtils.cs" />
     <Compile Include="GameObject\Editor\Colliders\ColliderEditors.cs" />
@@ -929,6 +933,7 @@
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

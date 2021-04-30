@@ -139,20 +139,11 @@
 
 		public static void EnableAllWorldPickups()
 		{
-			var pickups = WorldUtils.GetPickups();
-			foreach (var component in pickups)
+			foreach (var item in WorldUtils.GetPickups())
 			{
-				if (component.gameObject.name == "ViewFinder")
+				if (!item.active)
 				{
-					continue;
-				}
-				if (component.gameObject.name == "AvatarDebugConsole")
-				{
-					continue;
-				}
-				if (!component.gameObject.active)
-				{
-					component.gameObject.SetActive(true);
+					item.SetActive(true);
 				}
 			}
 		}
@@ -229,37 +220,11 @@
 
 		public static void DisableAllWorldPickups()
 		{
-			Thread.CurrentThread.IsBackground = true;
-			var basepickup = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>();
-			foreach (var component in basepickup)
+			foreach (var item in WorldUtils.GetPickups())
 			{
-				if (component.gameObject.name == "ViewFinder")
+				if (!item.active)
 				{
-					continue;
-				}
-				if (component.gameObject.name == "AvatarDebugConsole")
-				{
-					continue;
-				}
-				if (component.gameObject.active)
-				{
-					component.gameObject.SetActive(false);
-				}
-			}
-			var SDK3Pickup = Resources.FindObjectsOfTypeAll<VRC.SDK3.Components.VRCPickup>();
-			foreach (var component in basepickup)
-			{
-				if (component.gameObject.name == "ViewFinder")
-				{
-					continue;
-				}
-				if (component.gameObject.name == "AvatarDebugConsole")
-				{
-					continue;
-				}
-				if (!component.gameObject.active)
-				{
-					component.gameObject.SetActive(true);
+					item.SetActive(false);
 				}
 			}
 		}

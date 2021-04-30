@@ -130,23 +130,24 @@
 				{
 					if (CurrentSelectedObject != null)
 					{
-						var RegisteredESPs = CurrentSelectedObject.GetESPByID(SelectedItemESPIdentifier);
 
-						if (RegisteredESPs == null && RegisteredESPs.Count() == 0)
+						var ESP = CurrentSelectedObject.GetComponent<ESP_ItemTweaker>();
+						if (ESP == null)
 						{
-							var ESP = CurrentSelectedObject.AddComponent<ObjectESP>();
-							if (ESP != null)
-							{
-								ESP.Identifier = SelectedItemESPIdentifier;
-							}
+							CurrentSelectedObject.AddComponent<ESP_ItemTweaker>();
 						}
+
 					}
 				}
 				else
 				{
-					if (CurrentSelectedObject != null)
+					if (_CurrentSelectedObject != null)
 					{
-						CurrentSelectedObject.DestroyESPByIdentifier(SelectedItemESPIdentifier);
+						var ESP = _CurrentSelectedObject.GetComponent<ESP_ItemTweaker>();
+						if (ESP != null)
+						{
+							ESP.DestroyMeLocal();
+						}
 					}
 				}
 				_CurrentSelectedItemEnabledESP = value;
@@ -169,7 +170,12 @@
 				}
 				if (_CurrentSelectedObject != null)
 				{
-					_CurrentSelectedObject.DestroyESPByIdentifier(SelectedItemESPIdentifier);
+
+					var ESP = _CurrentSelectedObject.GetComponent<ESP_ItemTweaker>();
+					if (ESP != null)
+					{
+						ESP.DestroyMeLocal();
+					}
 				}
 
 				_CurrentSelectedObject = value;
@@ -177,15 +183,13 @@
 				{
 					if (value != null)
 					{
-						var esps = value.GetESPByID(SelectedItemESPIdentifier);
-						if (esps != null && esps.Count() == 0)
+
+						var ESP = value.GetComponent<ESP_ItemTweaker>();
+						if (ESP == null)
 						{
-							var ESP = value.AddComponent<ObjectESP>();
-							if (ESP != null)
-							{
-								ESP.Identifier = SelectedItemESPIdentifier;
-							}
+							value.AddComponent<ESP_ItemTweaker>();
 						}
+
 					}
 				}
 
