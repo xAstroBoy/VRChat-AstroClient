@@ -132,5 +132,109 @@
 				}
 			}
 		}
+
+		public static void Set_ItemTweaker_ESP_Color(this List<GameObject> list, string color)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+					obj.Set_ItemTweaker_ESP_Color(color);
+				}
+			}
+		}
+
+		public static void Set_UdonBehaviour_ESP_Color(this GameObject obj, Color Color)
+		{
+			if (obj != null)
+			{
+				var ESP = obj.GetComponent<ESP_UdonBehaviour>();
+				if (ESP != null)
+				{
+					ESP.ChangeColor(Color);
+				}
+			}
+		}
+
+		public static void Set_UdonBehaviour_ESP_Color(this GameObject obj, string Color)
+		{
+			if (obj != null)
+			{
+				var ESP = obj.GetComponent<ESP_UdonBehaviour>();
+				if (ESP != null)
+				{
+					ESP.ChangeColor(Color);
+				}
+			}
+		}
+
+		public static void Set_UdonBehaviour_ESP_Color(this List<GameObject> list, Color color)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+					obj.Set_UdonBehaviour_ESP_Color(color);
+				}
+			}
+		}
+
+		public static void Set_UdonBehaviour_ESP_Color(this List<GameObject> list, string color)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+					obj.Set_UdonBehaviour_ESP_Color(color);
+				}
+			}
+		}
+
+		public static void Set_VRCInteractable_ESP_Color(this GameObject obj, Color Color)
+		{
+			if (obj != null)
+			{
+				var ESP = obj.GetComponent<ESP_VRCInteractable>();
+				if (ESP != null)
+				{
+					ESP.ChangeColor(Color);
+				}
+			}
+		}
+
+		public static void Set_VRCInteractable_ESP_Color(this GameObject obj, string Color)
+		{
+			if (obj != null)
+			{
+				var ESP = obj.GetComponent<ESP_VRCInteractable>();
+				if (ESP != null)
+				{
+					ESP.ChangeColor(Color);
+				}
+			}
+		}
+
+		public static void Set_VRCInteractable_ESP_Color(this List<GameObject> list, Color color)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+					obj.Set_VRCInteractable_ESP_Color(color);
+				}
+			}
+		}
+
+		public static void Set_VRCInteractable_ESP_Color(this List<GameObject> list, string color)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+					obj.Set_VRCInteractable_ESP_Color(color);
+				}
+			}
+		}
+
 	}
 }
