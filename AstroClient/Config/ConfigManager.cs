@@ -26,7 +26,7 @@
 
 			if (!File.Exists(ConfigPath))
 			{
-				var fs = new FileStream(ConfigPath, FileMode.Create);
+				FileStream fs = new FileStream(ConfigPath, FileMode.Create);
 				fs.Dispose();
 				Save();
 				ModConsole.DebugWarning($"Config File Created: {ConfigPath}");
@@ -34,7 +34,7 @@
 
 			if (!File.Exists(ConfigUIPath))
 			{
-				var fs = new FileStream(ConfigUIPath, FileMode.Create);
+				FileStream fs = new FileStream(ConfigUIPath, FileMode.Create);
 				fs.Dispose();
 				Save();
 				ModConsole.DebugWarning($"ConfigUI File Created: {ConfigUIPath}");
@@ -45,12 +45,14 @@
 		{
 			JSonWriter.WriteToJsonFile(ConfigPath, General);
 			JSonWriter.WriteToJsonFile(ConfigUIPath, UI);
+			ModConsole.DebugLog("Config Saved.");
 		}
 
 		public static void Load()
 		{
 			UI = JSonWriter.ReadFromJsonFile<ConfigUI>(ConfigUIPath);
 			General = JSonWriter.ReadFromJsonFile<Config>(ConfigPath);
+			ModConsole.DebugLog("Config Loaded.");
 		}
 	}
 }

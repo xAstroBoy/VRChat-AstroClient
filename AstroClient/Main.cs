@@ -44,12 +44,13 @@
 
 		public override void OnApplicationStart()
 		{
+			ConfigManager.Load();
+
 #if OFFLINE
 			KeyManager.IsAuthed = true;
 			Bools.IsDeveloper = true;
 #else
             ConfigManager.Validate();
-            ConfigManager.Load();
 
             KeyManager.ReadKey();
 
