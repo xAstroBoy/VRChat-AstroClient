@@ -34,7 +34,7 @@
 				var crap1 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/ReportWorldButton");
 				if (crap1 != null)
 				{
-					crap1.DestroyMeLocal();
+					crap1.SetActive(false);
 				}
 			}
 
@@ -43,7 +43,7 @@
 				var crap2 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/UserIconButton");
 				if (crap2 != null)
 				{
-					crap2.DestroyMeLocal();
+					crap2.SetActive(false);
 				}
 			}
 
@@ -52,7 +52,7 @@
 				var crap3 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusMiniBanner");
 				if (crap3 != null)
 				{
-					crap3.DestroyMeLocal();
+					crap3.SetActive(false);
 				}
 			}
 
@@ -61,7 +61,7 @@
 				var crap4 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/HeaderContainer/VRCPlusBanner");
 				if (crap4 != null)
 				{
-					crap4.DestroyMeLocal();
+					crap4.SetActive(false);
 				}
 			}
 
@@ -70,7 +70,7 @@
 				var crap5 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/UserIconCameraButton");
 				if (crap5 != null)
 				{
-					crap5.DestroyMeLocal();
+					crap5.SetActive(false);
 				}
 			}
 
@@ -79,7 +79,7 @@
 				var crap6 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusThankYou");
 				if (crap6 != null)
 				{
-					crap6.DestroyMeLocal();
+					crap6.SetActive(false);
 				}
 			}
 		}
