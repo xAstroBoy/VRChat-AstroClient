@@ -1,62 +1,78 @@
 ﻿namespace AstroClient.Startup
 {
 	using AstroClient.components;
+	using AstroClient.ConsoleUtils;
 	using AstroClient.variables;
+	using System;
 	using UnhollowerRuntimeLib;
 
 	public class ComponentHelper : GameEvents
 	{
+		public static void RegisterComponent<T>() where T : class
+		{
+			try
+			{
+				ClassInjector.RegisterTypeInIl2Cpp<T>();
+				ModConsole.DebugLog($"Registered: {typeof(T).FullName}");
+			}
+			catch (Exception e)
+			{
+				ModConsole.Error($"Failed to Register: {typeof(T).FullName}");
+				ModConsole.ErrorExc(e);
+			}
+		}
+
 		public override void OnApplicationStart()
 		{
-			ClassInjector.RegisterTypeInIl2Cpp<GameEventsBehaviour>();
+			RegisterComponent<GameEventsBehaviour>();
 
-			ClassInjector.RegisterTypeInIl2Cpp<RocketManager>();
-			ClassInjector.RegisterTypeInIl2Cpp<RocketObject>();
+			RegisterComponent<RocketManager>();
+			RegisterComponent<RocketObject>();
 
-			ClassInjector.RegisterTypeInIl2Cpp<ObjectSpinnerManager>();
-			ClassInjector.RegisterTypeInIl2Cpp<ObjectSpinner>();
+			RegisterComponent<ObjectSpinnerManager>();
+			RegisterComponent<ObjectSpinner>();
 
-			ClassInjector.RegisterTypeInIl2Cpp<CrazyObjectManager>();
-			ClassInjector.RegisterTypeInIl2Cpp<CrazyObject>();
+			RegisterComponent<CrazyObjectManager>();
+			RegisterComponent<CrazyObject>();
 
-			ClassInjector.RegisterTypeInIl2Cpp<RigidBodyController>();
+			RegisterComponent<RigidBodyController>();
 
-			ClassInjector.RegisterTypeInIl2Cpp<ItemInflaterManager>();
-			ClassInjector.RegisterTypeInIl2Cpp<ItemInflater>();
+			RegisterComponent<ItemInflaterManager>();
+			RegisterComponent<ItemInflater>();
 
-			ClassInjector.RegisterTypeInIl2Cpp<PickupController>();
+			RegisterComponent<PickupController>();
 
-			ClassInjector.RegisterTypeInIl2Cpp<SingleTag>();
+			RegisterComponent<SingleTag>();
 
-			ClassInjector.RegisterTypeInIl2Cpp<JarRoleESP>();
+			RegisterComponent<JarRoleESP>();
 
-			ClassInjector.RegisterTypeInIl2Cpp<ESP_Pickup>();
-			ClassInjector.RegisterTypeInIl2Cpp<ESP_Trigger>();
-			ClassInjector.RegisterTypeInIl2Cpp<ESP_ItemTweaker>();
-			ClassInjector.RegisterTypeInIl2Cpp<ESP_UdonBehaviour>();
-			ClassInjector.RegisterTypeInIl2Cpp<ESP_VRCInteractable>();
+			RegisterComponent<ESP_Pickup>();
+			RegisterComponent<ESP_Trigger>();
+			RegisterComponent<ESP_ItemTweaker>();
+			RegisterComponent<ESP_UdonBehaviour>();
+			RegisterComponent<ESP_VRCInteractable>();
 
 
-			ClassInjector.RegisterTypeInIl2Cpp<PlayerESP>();
+			RegisterComponent<PlayerESP>();
 
-			ClassInjector.RegisterTypeInIl2Cpp<Murder4PatronUnlocker>();
+			RegisterComponent<Murder4PatronUnlocker>();
 
 			if (Bools.AllowAttackerComponent)
 			{
-				ClassInjector.RegisterTypeInIl2Cpp<PlayerAttackerManager>();
-				ClassInjector.RegisterTypeInIl2Cpp<PlayerAttacker>();
+				RegisterComponent<PlayerAttackerManager>();
+				RegisterComponent<PlayerAttacker>();
 			}
 
 			if (Bools.AllowOrbitComponent)
 			{
-				ClassInjector.RegisterTypeInIl2Cpp<OrbitManager>();
-				ClassInjector.RegisterTypeInIl2Cpp<Orbit>();
+				RegisterComponent<OrbitManager>();
+				RegisterComponent<Orbit>();
 			}
-			ClassInjector.RegisterTypeInIl2Cpp<PlayerWatcherManager>();
-			ClassInjector.RegisterTypeInIl2Cpp<PlayerWatcher>();
-			ClassInjector.RegisterTypeInIl2Cpp<Astro_Interactable>();
+			RegisterComponent<PlayerWatcherManager>();
+			RegisterComponent<PlayerWatcher>();
+			RegisterComponent<Astro_Interactable>();
 
-			ClassInjector.RegisterTypeInIl2Cpp<CheetoMenu>();
+			RegisterComponent<CheetoMenu>();
 		}
 
 		public override void OnUpdate()

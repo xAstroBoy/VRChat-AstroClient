@@ -14,7 +14,11 @@
 		{
 			get
 			{
+#if DEBUG
+				return true;
+#else
 				return _isDebugMode;
+#endif
 			}
 			set
 			{
@@ -31,18 +35,6 @@
 				{
 					ModConsole.Log("Debug Info disabled", System.Drawing.Color.Red);
 				}
-			}
-		}
-
-		internal static bool IsCheetosMode
-		{
-			get
-			{
-#if DEBUG
-				return true;
-#else
-				return false;
-#endif
 			}
 		}
 
