@@ -14,9 +14,7 @@
 	{
 		public override async Task<PreconditionResult> CheckPermissionsAsync(ICommandContext _context, CommandInfo _command, IServiceProvider _services)
 		{
-			SocketUser user = _context.User as SocketUser;
-
-			return !await user.IsBotDeveloperAsync()
+			return !await (_context.User as SocketUser).IsBotDeveloperAsync()
 				? PreconditionResult.FromError("This command can only be ran by a developer.")
 				: PreconditionResult.FromSuccess();
 		}

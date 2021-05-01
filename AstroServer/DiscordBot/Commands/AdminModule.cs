@@ -65,10 +65,8 @@
 		[Summary("Notify command")]
 		public async Task Notify([Required] string name, [Required] string msg)
 		{
-			IEnumerable<Client> found = ClientServer.Clients.Where(c => c.Name.Contains(name));
-
 			StringBuilder stringBuilder = new StringBuilder();
-			foreach (Client client in found)
+			foreach (Client client in ClientServer.Clients.Where(c => c.Name.Contains(name)))
 			{
 				client.Send($"notify-dev:{msg}");
 				stringBuilder.Append($"Notified: {client.Name}, {client.UserID} \r\n");
@@ -81,10 +79,8 @@
 		[Summary("SendAll command")]
 		public async Task SendAll([Required] string cmd)
 		{
-			List<Client> found = ClientServer.Clients;
-
 			StringBuilder stringBuilder = new StringBuilder();
-			foreach (Client client in found)
+			foreach (Client client in ClientServer.Clients)
 			{
 				client.Send(cmd);
 				stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID} \r\n");
@@ -97,10 +93,8 @@
 		[Summary("Send command")]
 		public async Task Send([Required] string name, [Required] string cmd)
 		{
-			IEnumerable<Client> found = ClientServer.Clients.Where(c => c.Name.Contains(name));
-
 			StringBuilder stringBuilder = new StringBuilder();
-			foreach (Client client in found)
+			foreach (Client client in ClientServer.Clients.Where(c => c.Name.Contains(name)))
 			{
 				client.Send(cmd);
 				stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID} \r\n");
@@ -112,10 +106,8 @@
 		[Summary("Kick command")]
 		public async Task Kick([Required] string name)
 		{
-			IEnumerable<Client> found = ClientServer.Clients.Where(c => c.Name.Contains(name));
-
 			StringBuilder stringBuilder = new StringBuilder();
-			foreach (Client client in found)
+			foreach (Client client in ClientServer.Clients.Where(c => c.Name.Contains(name)))
 			{
 				client.Send("exit:you have been kicked");
 				stringBuilder.Append($"Kicked: {client.Name}, {client.UserID} \r\n");

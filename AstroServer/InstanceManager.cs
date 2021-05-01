@@ -11,9 +11,7 @@
 		/// <param name="client"></param>
 		public static void PlayerInfo(Client client)
 		{
-			var clients = ClientServer.Clients.Where((c => c.InstanceID.Equals(client.InstanceID)));
-
-			if (clients.Any())
+			if (ClientServer.Clients.Where((c => c.InstanceID.Equals(client.InstanceID))).Any())
 			{
 				foreach (Client other in ClientServer.Clients.Where(c => c.InstanceID.Equals(client.InstanceID)))
 				{
