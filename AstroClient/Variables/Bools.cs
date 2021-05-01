@@ -6,23 +6,17 @@
 	{
 		internal static bool DisableNSFWMenu = true;
 
-		private static bool _isDebugMode = false;
-
 		internal static bool IsDeveloper;
 
 		internal static bool IsDebugMode
 		{
 			get
 			{
-#if DEBUG
-				return true;
-#else
-				return _isDebugMode;
-#endif
+				return ConfigManager.General.DebugLog;
 			}
 			set
 			{
-				_isDebugMode = value;
+				ConfigManager.General.DebugLog = value;
 				if (Main.ToggleDebugInfo != null)
 				{
 					Main.ToggleDebugInfo.setToggleState(value);

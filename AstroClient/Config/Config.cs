@@ -29,6 +29,8 @@
 	[Serializable, Obfuscation]
 	public class Config
 	{
+		public bool DebugLog = false;
+
 		public bool JoinLeave = false;
 
 		public bool LogRPCEvents = false;
