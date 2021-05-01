@@ -1,25 +1,31 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.ConsoleUtils;
+	using System.Threading;
+
 	public class AssemblySpy : GameEvents
 	{
-		//        public List<Assembly> assembllies { get; private set; } = new List<Assembly>();
+		public static void Scan(string query)
+		{
+			ModConsole.Log("Scanning Assemblies...");
 
-		//        public override void VRChat_OnUiManagerInit()
-		//        {
-		//            // Eventually define debug like this probably.
-		//#if DEBUG
-		//            ModConsole.DebugLog($"AppDomain: {AppDomain.CurrentDomain}");
-		//#endif
+			var assemblies = Thread.GetDomain().GetAssemblies();
 
-		//            assembllies = AppDomain.CurrentDomain.GetAssemblies().ToList();
-		//#if DEBUG
-		//            ModConsole.DebugLog($"{assembllies.Count} assemblies found");
-		//#endif
-		//        }
-
-		//        public static List<Assembly> GetAssemblies()
-		//        {
-		//            return (Instance as AssemblySpy).assembllies;
-		//        }
+			foreach (var assembly in assemblies)
+			{
+				var types = assembly.GetTypes();
+				foreach (var type in types)
+				{
+					if (type != null && type.Name.Contains(query))
+					{
+						ModConsole.Log($"Found: {type.FullName}");
+						foreach (var method in type.GetMethods())
+						{
+							ModConsole.Log($"{method.Name}");
+						}
+					}
+				}
+			}
+		}
 	}
 }
