@@ -50,9 +50,14 @@
 			if (ConfigManager.UI.RemoveVRCPlusMiniBanner)
 			{
 				var crap3 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusMiniBanner");
+				var crap3_2 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusMiniBanner/Image");
 				if (crap3 != null)
 				{
 					crap3.SetActive(false);
+				}
+				if (crap3_2 != null)
+				{
+					crap3_2.SetActive(false);
 				}
 			}
 
