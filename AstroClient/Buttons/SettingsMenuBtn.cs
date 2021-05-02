@@ -1,6 +1,9 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
+	using AstroClient.Cheetos;
+	using Il2CppSystem;
 	using RubyButtonAPI;
+	using System.Diagnostics;
 	using UnityEngine;
 
 	internal class SettingsMenuBtn
@@ -22,6 +25,9 @@
 
 			QMSingleToggleButton udonRPCToggle = new QMSingleToggleButton(sub, 4, 0, "Udon Log ON", () => { ConfigManager.General.LogUdonEvents = true; }, "Udon Log OFF", () => { ConfigManager.General.LogUdonEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogUdonEvents, true);
 			udonRPCToggle.setToggleState(ConfigManager.General.LogUdonEvents, false);
+
+			QMSingleToggleButton processPriorityToggle = new QMSingleToggleButton(sub, 4, 2.5f, "Priority High", () => { Priority.CurrentPriority = ProcessPriorityClass.High; }, "Priority Normal", () => { Priority.CurrentPriority = ProcessPriorityClass.Normal; }, "Sets the process priority", Color.green, Color.red, null, Priority.CurrentPriority == ProcessPriorityClass.High, true);
+			processPriorityToggle.setToggleState(Priority.CurrentPriority == ProcessPriorityClass.High, false);
 
 			QMSingleToggleButton TriggerEventToggle = new QMSingleToggleButton(sub, 1, 0.5f, "Trigger Log ON", () => { ConfigManager.General.LogTriggerEvents = true; }, "Trigger Log OFF", () => { ConfigManager.General.LogTriggerEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogTriggerEvents, true);
 			TriggerEventToggle.setToggleState(ConfigManager.General.LogTriggerEvents, false);
