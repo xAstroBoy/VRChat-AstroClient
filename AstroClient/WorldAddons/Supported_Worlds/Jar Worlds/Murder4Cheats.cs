@@ -289,9 +289,23 @@
 		public static void ToggleItemESP(bool value)
 		{
 			ESPMenu.Toggle_Pickup_ESP = value; // ESSENTIAL
+
 			if (value)
 			{
+
+				foreach (var item in Clues)
+				{
+					var esp = item.GetComponent<ESP_Pickup>();
+					if(esp == null)
+					{
+						esp = item.AddComponent<ESP_Pickup>();
+					}
+				}
+
+
 				MiscUtility.DelayFunction(1, new Action(() => { 
+
+
 				Clues.Set_Pickup_ESP_Color("87F368");
 				DetectiveGuns.Set_Pickup_ESP_Color("688CF3");
 				SilencedGuns.Set_Pickup_ESP_Color("C8F36D");
@@ -300,6 +314,17 @@
 				BearTraps.Set_Pickup_ESP_Color("F96262");
 				Grenades.Set_Pickup_ESP_Color("F96262");
                     }));
+			}
+			else
+			{
+				foreach (var item in Clues)
+				{
+					var esp = item.GetComponent<ESP_Pickup>();
+					if (esp != null)
+					{
+						esp.DestroyMeLocal();
+					}
+				}
 			}
 		}
 		public static void Murder4CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
