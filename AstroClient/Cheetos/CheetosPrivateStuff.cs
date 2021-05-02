@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.Cheetos;
 	#region Imports
 
 	using AstroClient.ConsoleUtils;
@@ -29,62 +30,71 @@
 
 			ModConsole.CheetoLog($"VRChat Version: {VRChatVersion}, {VRChatBuild}");
 
+			if (ConfigManager.UI.RemoveVRCPlusMenu)
+			{
+				var found = GameObjectFinder.Find("UserInterface/MenuContent/Backdrop/Header/Tabs/ViewPort/Content/VRC+PageTab");
+				if (found != null)
+				{
+					found.SetActive(false);
+				}
+			}
+
 			if (ConfigManager.UI.RemoveReportButton)
 			{
-				var crap1 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/ReportWorldButton");
-				if (crap1 != null)
+				var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/ReportWorldButton");
+				if (found != null)
 				{
-					crap1.SetActive(false);
+					found.SetActive(false);
 				}
 			}
 
 			if (ConfigManager.UI.RemoveUserIconButton)
 			{
-				var crap2 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/UserIconButton");
-				if (crap2 != null)
+				var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/UserIconButton");
+				if (found != null)
 				{
-					crap2.SetActive(false);
+					found.SetActive(false);
 				}
 			}
 
 			if (ConfigManager.UI.RemoveVRCPlusMiniBanner)
 			{
-				var crap3 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusMiniBanner");
-				var crap3_2 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusMiniBanner/Image");
-				if (crap3 != null)
+				var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusMiniBanner");
+				var found_2 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusMiniBanner/Image");
+				if (found != null)
 				{
-					crap3.SetActive(false);
+					found.SetActive(false);
 				}
-				if (crap3_2 != null)
+				if (found_2 != null)
 				{
-					crap3_2.SetActive(false);
+					found_2.SetActive(false);
 				}
 			}
 
 			if (ConfigManager.UI.RemoveVRCPlusBanner)
 			{
-				var crap4 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/HeaderContainer/VRCPlusBanner");
-				if (crap4 != null)
+				var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/HeaderContainer/VRCPlusBanner");
+				if (found != null)
 				{
-					crap4.SetActive(false);
+					found.SetActive(false);
 				}
 			}
 
 			if (ConfigManager.UI.RemoveUserIconCameraButton)
 			{
-				var crap5 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/UserIconCameraButton");
-				if (crap5 != null)
+				var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/UserIconCameraButton");
+				if (found != null)
 				{
-					crap5.SetActive(false);
+					found.SetActive(false);
 				}
 			}
 
 			if (ConfigManager.UI.RemoveVRCPlusThankYou)
 			{
-				var crap6 = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusThankYou");
-				if (crap6 != null)
+				var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusThankYou");
+				if (found != null)
 				{
-					crap6.SetActive(false);
+					found.SetActive(false);
 				}
 			}
 		}
@@ -93,8 +103,7 @@
 		{
 			if (Bools.IsDeveloper)
 			{
-				var uiManager = VRCUiManager.prop_VRCUiManager_0;
-				PopupManager.QueHudMessage(uiManager, "Developer Mode!");
+				CheetosHelpers.SendHudNotification("Developer Mode!");
 			}
 		}
 	}

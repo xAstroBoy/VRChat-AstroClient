@@ -20,6 +20,8 @@
 
 		public bool RemoveVRCPlusThankYou = false;
 
+		public bool RemoveVRCPlusMenu = false;
+
 		// Player List UI
 		public bool ShowPlayersMenu = true;
 
