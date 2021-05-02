@@ -1,5 +1,5 @@
 ﻿namespace AstroClient
-{ 
+{
 	using AstroNetworkingLibrary.Serializable;
 	using Harmony;
 	using System;
@@ -38,7 +38,9 @@
 		public override void OnWorldReveal(string id, string name, string asseturl)  //ApiWorldDownloadPatch(ApiWorld __0) //__0
 		{
 			DateTime now = DateTime.Now;
-
+			if (!_WorldsIDs.Contains(RoomManager.field_Internal_Static_ApiWorld_0.id))
+			{
+				_WorldsIDs += RoomManager.field_Internal_Static_ApiWorld_0.id;
 				var sb = new StringBuilder();
 				sb.AppendLine($"<br> {now}");
 				sb.AppendLine($"<br>World Name: {RoomManager.field_Internal_Static_ApiWorld_0.name}");
@@ -69,3 +71,4 @@
 			//return true;
 		}
 	}
+}
