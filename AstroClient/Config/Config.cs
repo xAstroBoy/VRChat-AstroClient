@@ -41,4 +41,18 @@
 
 		public bool LogTriggerEvents = false;
 	}
+
+	[Serializable, Obfuscation]
+	public class ConfigESP
+	{
+		public bool PlayerESP = false;
+
+		public bool PickupESP = false;
+
+		public bool TriggerESP = false;
+
+		public bool UdonESP = false;
+
+		public bool VRCInteractableESP = false;
+	}
 }

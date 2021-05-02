@@ -12,9 +12,13 @@
 
 		private static string ConfigUIPath = ConfigFolder + @"\ConfigUI.json";
 
+		private static string ConfigESPPath = ConfigFolder + @"\ConfigESP.json";
+
 		public static Config General = new Config();
 
 		public static ConfigUI UI = new ConfigUI();
+
+		public static ConfigESP ESP = new ConfigESP();
 
 		public static void Validate()
 		{
