@@ -101,30 +101,30 @@
 					{
 						if (!IsBundleAlreadyRegistered(Path.GetFileName(file)))
 						{
-							ModConsole.Log("Found Custom Skybox : " + Path.GetFileName(file));
+							//ModConsole.Log("Found Custom Skybox : " + Path.GetFileName(file));
 							var stream = File.ReadAllBytes(file);
 							var bundle = AssetBundle.LoadFromMemory(stream.ToArray(), 0);
 							bundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
 							var materialpath = String.Empty;
 							foreach (var assetname in bundle.GetAllAssetNames())
 							{
-								ModConsole.DebugLog("Searching for Mat File in path : " + assetname);
+								//ModConsole.DebugLog("Searching for Mat File in path : " + assetname);
 								if (assetname.ToLower().EndsWith(".mat"))
 								{
-									ModConsole.DebugLog("Found Material File :" + assetname);
+									//ModConsole.DebugLog("Found Material File :" + assetname);
 									materialpath = assetname;
 									break;
 								}
 							}
 							if (!string.IsNullOrWhiteSpace(materialpath) && !string.IsNullOrEmpty(materialpath))
 							{
-								ModConsole.Log($"Parsed Skybox : {Path.GetFileName(file)} Succesfully!");
+								//ModConsole.Log($"Parsed Skybox : {Path.GetFileName(file)} Succesfully!");
 								var cachedskybox = new AssetBundleSkyboxes(bundle, Path.GetFileName(file), materialpath);
 								if (LoadedSkyboxesBundles != null)
 								{
 									if (!LoadedSkyboxesBundles.Contains(cachedskybox))
 									{
-										ModConsole.DebugLog($"Saved Skybox in list");
+										//ModConsole.DebugLog($"Saved Skybox in list");
 										LoadedSkyboxesBundles.Add(cachedskybox);
 									}
 								}

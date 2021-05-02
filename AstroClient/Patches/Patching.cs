@@ -2,6 +2,7 @@
 {
 	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroClient.ConsoleUtils;
+	using DayClientML2.Utility;
 	using ExitGames.Client.Photon;
 	using Harmony;
 	using MelonLoader;
@@ -39,7 +40,7 @@
 				Patches.Add(this);
 			}
 
-			public static void DoPatches()
+			public static async void DoPatches()
 			{
 				foreach (var patch in Patches)
 				{
@@ -57,7 +58,7 @@
 				ModConsole.Log($"[Patches] Done! Patched {Patches.Count} Methods!");
 			}
 
-			public static void UnDoPatches()
+			public static async void UnDoPatches()
 			{
 				foreach (var patch in Patches)
 				{
@@ -86,19 +87,33 @@
 			yield break;
 		}
 
-		public static void InitPatch()
+		public static async void InitPatch()
 		{
 			try
 			{
 				ModConsole.Log("[Patches] Start. . .");
 
 				new Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
+				//new Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_Final_New_Void_Player_0)), GetPatch(nameof(OpRaiseEvent2)));
+				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
 
 				ModConsole.Log("[AstroClient Patches] DONE!");
 				Patch.DoPatches();
 			}
 			catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
 			finally { }
+		}
+
+		private static void OnPhotonPlayerJoin(ref Photon.Realtime.Player __0)
+		{
+			try
+			{
+				ModConsole.Log($"[PHOTON] {__0.Method_Public_String_0()} [{__0.field_Private_Int32_0}] -> Joined!");
+			}
+			catch
+			{
+				ModConsole.Log($"[Photon] OnPhotonPlayerJoin Failed!");
+			}
 		}
 
 		private static bool OpRaiseEvent(ref byte __0, ref Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object> __1, ref SendOptions __2)
@@ -108,6 +123,25 @@
 				if (__0 == 7 || __0 == 206 || __0 == 201 || __0 == 1)
 				{
 					return !Movement.SerializerEnabled;
+				}
+				if (__0 == 33 || __0 == 202)
+				{
+					ModConsole.Log($"Photon {__0} received..");
+					//if (__1 != null)
+					//{
+					//	foreach (var kvp in __1)
+					//	{
+					//		if (kvp.Key != null)
+					//		{
+					//			ModConsole.Log($"{kvp.key}");
+					//		}
+					//		if (kvp.value != null)
+					//		{
+					//			ModConsole.Log($"{kvp.value.GetIl2CppType()}");
+					//		}
+					//	}
+					//}
+					return false;
 				}
 			}
 			catch { }
