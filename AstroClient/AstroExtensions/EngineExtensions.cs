@@ -121,9 +121,12 @@
 
 		public static void DestroyMeLocal(this UnityEngine.Object obj)
 		{
+			string Objectname = "";
+			string GameObjectName = "";
 			if (obj != null)
 			{
-				var name = obj.name;
+				GameObjectName = obj.name;
+				Objectname = obj.GetType().ToString();
 				//if (obj != null)
 				//{
 				//	UnityEngine.Object.DestroyImmediate(obj);
@@ -138,12 +141,12 @@
 				//}
 				if (obj != null)
 				{
-					ModConsole.DebugLog("Failed To Destroy Object : " + obj.name, Color.Red);
+					ModConsole.DebugLog($"Failed To Destroy Object {Objectname} Contained in {GameObjectName}", Color.Red);
 					ModConsole.DebugLog("Try To Destroy His GameObject in case you are trying to destroy the transform.", Color.Yellow);
 				}
 				else
 				{
-					ModConsole.DebugLog("Destroyed Client-side Object : " + name, Color.Green);
+					ModConsole.DebugLog($"Destroyed Client-side Object {Objectname} Contained in {GameObjectName}", Color.Green);
 				}
 			}
 		}

@@ -34,6 +34,14 @@
 		private static QMSingleToggleButton TriggerESPToggleBtn;
 		private static QMSingleToggleButton UdonBehaviourESPToggleBtn;
 
+
+		public override void OnLevelLoaded()
+		{
+			Toggle_VRCInteractable_ESP = false;
+			Toggle_Trigger_ESP = false;
+			Toggle_UdonBehaviour_ESP = false;
+			Toggle_Pickup_ESP = false;
+		}
 		#region VRCInteractableESP
 
 		public static bool Toggle_VRCInteractable_ESP
