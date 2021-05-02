@@ -56,7 +56,6 @@
 				sb.AppendLine($"<br>Avatar Author ID: {__0.authorId}");
 				sb.AppendLine($"<br>Avatar Release Status: {__0.releaseStatus}");
 				sb.AppendLine($"<br>Avatar Asset URL: <a href='{ __0.assetUrl}' > Click Me </a> ");
-				sb.AppendLine($"<br>Avatar Release Status: {__0.releaseStatus}");
 				sb.AppendLine($"<br>Avatar Version: {__0.version} <br>Avatar Thumbnail Image URL: <br><img src='{__0.thumbnailImageUrl}' width=200 height=200 /><br><br><br>");
 				sb.AppendLine(Environment.NewLine);
 				File.AppendAllText(PublicAvatarFile, sb.ToString());

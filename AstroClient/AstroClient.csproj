@@ -232,6 +232,7 @@
     <Compile Include="Mora\AvatarLogger.cs" />
     <Compile Include="Mora\Welcome.cs" />
     <Compile Include="Mora\MouseTp.cs" />
+    <Compile Include="Mora\WorldLogger.cs" />
     <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
     <Compile Include="Networking\NetworkingManager.cs" />
