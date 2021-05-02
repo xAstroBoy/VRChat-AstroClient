@@ -6,7 +6,6 @@
 	using AstroClient.extensions;
 	using AstroClient.Finder;
 	using RubyButtonAPI;
-	using System.Linq;
 	using UnityEngine;
 
 	public class Tweaker_Object : GameEvents

@@ -1,9 +1,6 @@
 ﻿namespace AstroClient.AstroUtils.PlayerMovement
 {
 	using AstroClient.extensions;
-	using AstroClient.variables;
-	using RealisticEyeMovements;
-	using RootMotion.FinalIK;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;

@@ -1,7 +1,6 @@
 ﻿namespace AstroClient.extensions
 {
 	using AstroClient.components;
-	using AstroClient.ConsoleUtils;
 	using System.Collections.Generic;
 	using UnityEngine;
 

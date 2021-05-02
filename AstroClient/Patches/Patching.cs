@@ -2,7 +2,6 @@
 {
 	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroClient.ConsoleUtils;
-	using AstroClient.variables;
 	using ExitGames.Client.Photon;
 	using Harmony;
 	using MelonLoader;

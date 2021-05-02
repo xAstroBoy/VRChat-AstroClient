@@ -2,9 +2,7 @@
 {
 	using AstroClient.ConsoleUtils;
 	using AstroClient.extensions;
-	using AstroClient.Startup.Buttons;
 	using System;
-	using System.Collections.Generic;
 	using System.Linq;
 	using UnhollowerBaseLib.Attributes;
 	using UnityEngine;

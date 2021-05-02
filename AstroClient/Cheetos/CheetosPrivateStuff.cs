@@ -1,14 +1,10 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Cheetos;
 	#region Imports
-
+	using AstroClient.Cheetos;
 	using AstroClient.ConsoleUtils;
-	using AstroClient.extensions;
 	using AstroClient.Finder;
 	using AstroClient.variables;
-	using DayClientML2.Utility.Extensions;
-
 	#endregion Imports
 
 	public class CheetosPrivateStuff : GameEvents
