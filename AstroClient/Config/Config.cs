@@ -55,4 +55,14 @@
 
 		public bool VRCInteractableESP = false;
 	}
+
+	[Serializable, Obfuscation]
+	public class ConfigFlight
+	{
+		public float VRFlySpeed = 1f;
+
+		public float DesktopFlySpeed = 1f;
+
+		public bool BasicFly = false;
+	}
 }

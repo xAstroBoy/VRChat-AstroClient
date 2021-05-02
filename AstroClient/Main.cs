@@ -44,16 +44,14 @@
 
 		public override void OnApplicationStart()
 		{
+			ConfigManager.Validate();
 			ConfigManager.Load();
 
 #if OFFLINE
 			KeyManager.IsAuthed = true;
 			Bools.IsDeveloper = true;
 #else
-            ConfigManager.Validate();
-
             KeyManager.ReadKey();
-
             AstroNetworkClient.Initialize();
 
             while (!KeyManager.IsAuthed)
@@ -163,6 +161,9 @@
 				ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", new Action(() => { Bools.IsDebugMode = true; }), "Debug Console OFF", new Action(() => { Bools.IsDebugMode = false; }), "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 				ToggleHideAvatar = new QMSingleToggleButton(AstroClient, 4, 1.5f, "Hide Avatar ON", new Action(() => { AvatarHider.HideAvatar = true; }), "Hide Avatar OFF", new Action(() => { AvatarHider.HideAvatar = false; }), "Hides your avatar for yourself", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 
+				ToggleFly = new QMSingleToggleButton(AstroClient, -1, 0, "Fly", () => { Flight.FlyEnabled = true; }, "Fly", () => { Flight.FlyEnabled = false; }, "Enable/Disable Flight", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.FlyEnabled, true);
+				ToggleNoClip = new QMSingleToggleButton(AstroClient, -1, 0.5f, "NoClip", () => { Flight.NoClipEnabled = true; }, "NoClip", () => { Flight.NoClipEnabled = false; }, "Enable/Disable NoClip", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.NoClipEnabled, true);
+
 				WorldsCheats.InitButtons(AstroClient, 1, 0, true);
 				LightControl.InitButtons(AstroClient, 1, 0.5f, true);
 				Movement.InitButtons(AstroClient, 1, 1, true);
@@ -188,5 +189,8 @@
 
 		public static QMSingleToggleButton ToggleDebugInfo;
 		public static QMSingleToggleButton ToggleHideAvatar;
+
+		public static QMSingleToggleButton ToggleFly;
+		public static QMSingleToggleButton ToggleNoClip;
 	}
 }
