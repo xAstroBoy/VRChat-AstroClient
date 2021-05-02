@@ -6,13 +6,11 @@
 
 	internal class Priority
 	{
-		private static ProcessPriorityClass priority = ProcessPriorityClass.Normal;
-
 		public static ProcessPriorityClass CurrentPriority
 		{
 			get
 			{
-				return priority;
+				return Process.GetCurrentProcess().PriorityClass;
 			}
 			set
 			{
