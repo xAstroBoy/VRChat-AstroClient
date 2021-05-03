@@ -117,6 +117,7 @@
 				{
 					return;
 				}
+				var streamer = GameObject.Find("UserInterface/MenuContent/Screens/Settings/ComfortSafetyPanel/StreamerModeToggle").GetComponent<UnityEngine.UI.Toggle>().isOn;
 
 				var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, player.DisplayName(), () => { SelectPlayer(player); }, $"Select {player.DisplayName()}", null, null, true);
 
@@ -124,7 +125,7 @@
 
 				if (playerAPI.isMaster)
 				{
-					if (GameObject.Find("UserInterface/MenuContent/Screens/Settings/ComfortSafetyPanel/StreamerModeToggle").GetComponent<UnityEngine.UI.Toggle>().isOn = true)
+					if (streamer == true)
 					{
 						playerButton.setButtonText("Vrchat User");
 						playerButton.setTextColor(InstanceMasterColor);
@@ -136,7 +137,7 @@
 					}
 				else if (player.GetAPIUser().IsSelf)
 				{
-					if (GameObject.Find("UserInterface/MenuContent/Screens/Settings/ComfortSafetyPanel/StreamerModeToggle").GetComponent<UnityEngine.UI.Toggle>().isOn = true)
+					if (streamer == true)
 					{
 						playerButton.setButtonText("Vrchat User");
 						playerButton.setTextColor(SelfColor);
