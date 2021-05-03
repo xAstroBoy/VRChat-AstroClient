@@ -3,9 +3,11 @@
 	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroClient.ConsoleUtils;
 	using DayClientML2.Utility;
+	using DayClientML2.Utility.Extensions;
 	using ExitGames.Client.Photon;
 	using Harmony;
 	using MelonLoader;
+	using Photon.Pun;
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
@@ -124,24 +126,29 @@
 				{
 					return !Movement.SerializerEnabled;
 				}
-				if (__0 == 33 || __0 == 202)
+				if (__0 == 33)
 				{
 					ModConsole.Log($"Photon {__0} received..");
+
 					//if (__1 != null)
 					//{
 					//	foreach (var kvp in __1)
 					//	{
 					//		if (kvp.Key != null)
 					//		{
-					//			ModConsole.Log($"{kvp.key}");
+					//			ModConsole.Log($"Key: {kvp.Key}");
 					//		}
-					//		if (kvp.value != null)
+					//		if (kvp.Value != null)
 					//		{
-					//			ModConsole.Log($"{kvp.value.GetIl2CppType()}");
+					//			ModConsole.Log($"Value: {kvp.Value}");
 					//		}
 					//	}
 					//}
 					return true;
+				}
+				if (__0 == 202)
+				{
+					ModConsole.Log($"Photon {__0} received..");
 				}
 			}
 			catch { }

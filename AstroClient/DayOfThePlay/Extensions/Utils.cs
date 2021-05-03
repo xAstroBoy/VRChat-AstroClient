@@ -1,5 +1,6 @@
 ﻿namespace DayClientML2.Utility.Extensions
 {
+	using Photon.Pun;
 	using UnhollowerRuntimeLib;
 	using UnityEngine;
 	using UnityEngine.XR;
@@ -38,6 +39,20 @@
 			get
 			{
 				return VRC.Management.ModerationManager.prop_ModerationManager_0;
+			}
+		}
+		public static Photon.Realtime.LoadBalancingClient LoadBalancingPeer
+		{
+			get
+			{
+				return PhotonHandler.prop_LoadBalancingClient_0;
+			}
+		}
+		public static PhotonHandler PhotonHandler
+		{
+			get
+			{
+				return PhotonHandler.field_Internal_Static_PhotonHandler_0;
 			}
 		}
 
