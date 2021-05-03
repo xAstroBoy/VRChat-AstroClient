@@ -124,12 +124,29 @@
 
 				if (playerAPI.isMaster)
 				{
-					playerButton.setTextColor(InstanceMasterColor);
-				}
+					if (GameObject.Find("UserInterface/MenuContent/Screens/Settings/ComfortSafetyPanel/StreamerModeToggle").GetComponent<UnityEngine.UI.Toggle>().isOn = true)
+					{
+						playerButton.setButtonText("Vrchat User");
+						playerButton.setTextColor(InstanceMasterColor);
+					}
+					else
+					{
+                        playerButton.setTextColor(InstanceMasterColor);
+					}
+					}
 				else if (player.GetAPIUser().IsSelf)
 				{
-					playerButton.setTextColor(SelfColor);
-					playerButton.setBackgroundColor(SelfColor);
+					if (GameObject.Find("UserInterface/MenuContent/Screens/Settings/ComfortSafetyPanel/StreamerModeToggle").GetComponent<UnityEngine.UI.Toggle>().isOn = true)
+					{
+						playerButton.setButtonText("Vrchat User");
+						playerButton.setTextColor(SelfColor);
+						playerButton.setBackgroundColor(SelfColor);
+					}
+					else
+					{
+						playerButton.setTextColor(SelfColor);
+						playerButton.setBackgroundColor(SelfColor);
+					}
 				}
 				else if (player.GetAPIUser().GetIsFriend())
 				{
