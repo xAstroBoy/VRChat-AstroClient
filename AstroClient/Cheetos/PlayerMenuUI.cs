@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.Cheetos;
 	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using System.Collections.Generic;
@@ -38,7 +39,7 @@
 
 		public override void OnWorldReveal(string id, string name, string asseturl)
 		{
-			InitializeButtons();
+			RefreshButtons();
 		}
 
 		/// <summary>
@@ -47,7 +48,7 @@
 		/// <param name="player"></param>
 		public override void OnPlayerJoined(Player player)
 		{
-			InitializeButtons();
+			RefreshButtons();
 			if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
 			{
 				AstroNetworkClient.Client.Send($"player-info:{player.UserID()}");
@@ -60,12 +61,36 @@
 		/// <param name="player"></param>
 		public override void OnPlayerLeft(Player player)
 		{
-			InitializeButtons();
+			RefreshButtons();
 		}
 
-		private void InitializeButtons()
+		private bool IsInvisible(Player player)
 		{
-			var players = WorldUtils.GetAllPlayers0();
+			var photonPlayers = Utils.LoadBalancingPeer.prop_Room_0.prop_Dictionary_2_Int32_Player_0;
+
+			foreach (var kvp in photonPlayers)
+			{
+				var players = WorldUtils.GetAllPlayers0();
+
+				if (!players.Contains(kvp.Value.GetPlayer()))
+				{
+					//CheetosHelpers.SendHudNotification($"Player: {player.DisplayName()} is invisible!");
+					return true;
+				}
+			}
+			return false;
+		}
+
+		private void RefreshButtons()
+		{
+			var photonPlayers = Utils.LoadBalancingPeer.prop_Room_0.prop_Dictionary_2_Int32_Player_0;
+			var players = new List<Player>();
+
+			foreach (var kvp in photonPlayers)
+			{
+				players.Add(kvp.Value.GetPlayer());
+			}
+
 			var temp_list = players.OrderBy(p => p.GetIsMaster()).ThenBy(p => p.GetAPIUser().IsSelf).ThenBy(p => p.GetAPIUser().isFriend);
 
 			float yPos_start = -0.5f;
@@ -95,6 +120,12 @@
 					playerButton.setBackgroundColor(FriendColor);
 					playerButton.setTextColor(FriendColor);
 				}
+
+				//if (IsInvisible(player))
+				//{
+				//	playerButton.setButtonText($"[Invis]\n{playerButton.getButtonText()}");
+				//	playerButton.setBackgroundColor(Color.black);
+				//}
 
 				if (rank != null)
 				{
