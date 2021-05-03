@@ -90,7 +90,7 @@
 					playerButton.setTextColor(SelfColor);
 					playerButton.setBackgroundColor(SelfColor);
 				}
-				else if (player.GetAPIUser().isFriend)
+				else if (player.GetAPIUser().GetIsFriend())
 				{
 					playerButton.setBackgroundColor(FriendColor);
 					playerButton.setTextColor(FriendColor);
