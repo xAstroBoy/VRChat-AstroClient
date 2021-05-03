@@ -125,7 +125,7 @@
 
 				if (playerAPI.isMaster)
 				{
-					if (streamer == true)
+					if (streamer == true && player.GetAPIUser().IsSelf)
 					{
 						playerButton.setButtonText("Vrchat User");
 						playerButton.setTextColor(InstanceMasterColor);
