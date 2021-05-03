@@ -61,10 +61,10 @@
 	[Serializable, Obfuscation]
 	public class ConfigFlight
 	{
-		public float VRFlySpeed = 1f;
+		public float VRFlySpeed = 3f;
 
-		public float DesktopFlySpeed = 1f;
+		public float DesktopFlySpeed = 3f;
 
-		public bool BasicFly = false;
+		public bool BasicFly = true;
 	}
 }
