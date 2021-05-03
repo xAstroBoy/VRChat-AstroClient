@@ -113,6 +113,12 @@
 			foreach (var player in temp_list.Reverse())
 			{
 				var playerAPI = player.GetVRCPlayerApi();
+
+				if (player == null)
+				{
+					return;
+				}
+
 				var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, player.DisplayName(), () => { SelectPlayer(player); }, $"Select {player.DisplayName()}", null, null, true);
 
 				var rank = player.GetAPIUser().GetRankEnum();
