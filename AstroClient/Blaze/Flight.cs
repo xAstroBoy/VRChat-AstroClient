@@ -19,6 +19,13 @@
 		private static bool flyEnabled;
 		private static bool noClipEnabled;
 
+		// Broken for some reason, gotta investigate
+		//public override void OnWorldReveal(string id, string Name, string AssetURL)
+		//{
+		//	FlyEnabled = false;
+		//	NoClipEnabled = false;
+		//}
+
 		public static bool FlyEnabled
 		{
 			get => flyEnabled;
@@ -93,11 +100,10 @@
 				{
 					float flySpeed = isInVR ? ConfigManager.Flight.VRFlySpeed : ConfigManager.Flight.DesktopFlySpeed;
 
-					if (Input.GetKeyDown(KeyCode.LeftShift))
+					if (Input.GetKey(KeyCode.LeftShift))
+					{
 						flySpeed *= 2;
-
-					if (Input.GetKeyUp(KeyCode.LeftShift))
-						flySpeed /= 2;
+					}
 
 					if (ConfigManager.Flight.BasicFly)
 					{

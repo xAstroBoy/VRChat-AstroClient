@@ -65,12 +65,12 @@
 			RefreshButtons();
 		}
 
-		public override void OnPhotonPlayerJoined(Photon.Realtime.Player player)
+		public override void OnPhotonJoined(Photon.Realtime.Player player)
 		{
 			ModConsole.Log($"[PHOTON] {player.GetDisplayName()} [{player.field_Private_Int32_0}] -> Joined!");
 		}
 
-		public override void OnPhotonPlayerLeft(Photon.Realtime.Player player)
+		public override void OnPhotonLeft(Photon.Realtime.Player player)
 		{
 			ModConsole.Log($"[PHOTON] {player.GetDisplayName()} [{player.field_Private_Int32_0}] -> Left!");
 		}
@@ -114,7 +114,7 @@
 			{
 				var playerAPI = player.GetVRCPlayerApi();
 
-				if (player == null)
+				if (player == null || playerAPI == null)
 				{
 					return;
 				}
@@ -123,7 +123,7 @@
 
 				var rank = player.GetAPIUser().GetRankEnum();
 
-				if (player.GetIsMaster())
+				if (playerAPI.isMaster)
 				{
 					playerButton.setTextColor(InstanceMasterColor);
 				}

@@ -73,12 +73,12 @@
 
 		private void Internal_OnPhotonPlayerLeft(object sender, PhotonPlayerEventArgs e)
 		{
-			OnPhotonPlayerLeft(e.player);
+			OnPhotonLeft(e.player);
 		}
 
 		private void Internal_OnPhotonPlayerJoined(object sender, PhotonPlayerEventArgs e)
 		{
-			OnPhotonPlayerJoined(e.player);
+			OnPhotonJoined(e.player);
 		}
 
 		private void Internal_SpawnEmojiRPC(object sender, SpawnEmojiArgs e)
@@ -142,11 +142,11 @@
 		{
 		}
 
-		public virtual void OnPhotonPlayerLeft(Photon.Realtime.Player player)
+		public virtual void OnPhotonLeft(Photon.Realtime.Player player)
 		{
 		}
 
-		public virtual void OnPhotonPlayerJoined(Photon.Realtime.Player player)
+		public virtual void OnPhotonJoined(Photon.Realtime.Player player)
 		{
 		}
 
