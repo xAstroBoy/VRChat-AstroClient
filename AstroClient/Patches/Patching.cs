@@ -110,7 +110,7 @@
 		{
 			try
 			{
-				ModConsole.Log($"[PHOTON] {__0.Method_Public_String_0()} [{__0.field_Private_Int32_0}] -> Joined!");
+				ModConsole.Log($"[PHOTON] {__0.GetDisplayName()} [{__0.field_Private_Int32_0}] -> Joined!");
 			}
 			catch
 			{

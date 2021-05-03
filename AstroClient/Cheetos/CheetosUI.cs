@@ -3,10 +3,12 @@
 	using AstroClient.ConsoleUtils;
 	using AstroClient.variables;
 	using Photon.Pun;
+	using Photon.Realtime;
 	using RubyButtonAPI;
 	using System.Diagnostics;
 	using System.IO;
 	using UnityEngine;
+	using DayClientML2.Utility.Extensions;
 
 	/// <summary>
 	/// Cheeto's temporary UI for new/wip features
@@ -47,27 +49,27 @@
 
 		public void PrintPhotonPlayers()
 		{
-			//var room = PhotonNetwork.field_Private_Static_Room_0;
+			var room = Utils.LoadBalancingPeer.prop_Room_0;
 
-			//if (room == null)
-			//{
-			//	ModConsole.Log("Room was null");
-			//	return;
-			//}
+			if (room == null)
+			{
+				ModConsole.Log("Room was null");
+				return;
+			}
 
-			//var players = room.prop_Dictionary_2_Int32_Player_0;
+			var players = room.prop_Dictionary_2_Int32_Player_0;
 
-			//if (players == null)
-			//{
-			//	ModConsole.Log("Players was null");
-			//	return;
-			//}
+			if (players == null)
+			{
+				ModConsole.Log("Players was null");
+				return;
+			}
 
-			//foreach (var player in players)
-			//{
-			//	ModConsole.Log($"Key: {player.Key}");
-			//	//ModConsole.Log($"Value: {player.Value}");
-			//}
+			foreach (var player in players)
+			{
+				ModConsole.Log($"Key: {player.Key}");
+				ModConsole.Log($"Value: {player.Value.GetDisplayName()}");
+			}
 		}
 
 		public override void OnWorldReveal(string id, string name, string asseturl)
