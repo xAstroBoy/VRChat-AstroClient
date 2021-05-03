@@ -1,7 +1,6 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
 	using AstroClient.Cheetos;
-	using Il2CppSystem;
 	using RubyButtonAPI;
 	using System.Diagnostics;
 	using UnityEngine;

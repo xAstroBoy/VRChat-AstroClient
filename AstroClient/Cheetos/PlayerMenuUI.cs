@@ -1,6 +1,5 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Cheetos;
 	using AstroClient.ConsoleUtils;
 	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;

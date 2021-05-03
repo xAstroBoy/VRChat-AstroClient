@@ -1,21 +1,5 @@
 ﻿namespace AstroClient.AntiCrash
 {
-	using AstroClient.ConsoleUtils;
-	using UnityEngine;
-	using MelonLoader;
-	using System;
-	using System.Collections.Generic;
-	using UnhollowerBaseLib;
-	using VRC;
-	using VRCSDK2;
-	using System.IO;
-	using System.Linq;
-	using System.Net;
-	using System.Net.Cache;
-	using System.Net.Security;
-	using System.Security.Cryptography.X509Certificates;
-	using VRC.Core;
-	using VRC.UI;
 	internal class AntiCrashPolys
 	{/*
         public static Dictionary<string, avatar_data> anti_crash_list = new Dictionary<string, avatar_data>();

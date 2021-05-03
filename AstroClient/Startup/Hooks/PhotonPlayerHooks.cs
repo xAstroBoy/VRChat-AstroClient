@@ -3,7 +3,6 @@
 	#region Imports
 	using AstroClient.ConsoleUtils;
 	using DayClientML2.Utility;
-	using DayClientML2.Utility.Extensions;
 	using Harmony;
 	using MelonLoader;
 	using Photon.Realtime;

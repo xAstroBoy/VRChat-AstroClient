@@ -2,8 +2,6 @@
 {
 	using AstroClient.ConsoleUtils;
 	using AstroClient.variables;
-	using Photon.Pun;
-	using Photon.Realtime;
 	using RubyButtonAPI;
 	using System.Diagnostics;
 	using System.IO;
