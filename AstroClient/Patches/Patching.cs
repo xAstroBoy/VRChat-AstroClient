@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.BetterPatch
 {
+	#region Imports
 	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroClient.ConsoleUtils;
 	using DayClientML2.Utility;
@@ -7,11 +8,11 @@
 	using ExitGames.Client.Photon;
 	using Harmony;
 	using MelonLoader;
-	using Photon.Pun;
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
 	using System.Reflection;
+	#endregion
 
 	internal class Patching : GameEvents
 	{

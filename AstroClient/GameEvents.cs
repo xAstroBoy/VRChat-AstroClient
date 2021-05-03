@@ -31,6 +31,9 @@
 
 			NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
 			NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
+
+			PhotonPlayerHooks.Event_OnPhotonPlayerJoin += Internal_OnPhotonPlayerJoined;
+			PhotonPlayerHooks.Event_OnPhotonPlayerLeft += Internal_OnPhotonPlayerLeft;
 		}
 
 		private void Internal_OnApplicationStart(object sender, EventArgs e)
@@ -66,6 +69,16 @@
 		private void Internal_OnPlayerJoined(object sender, PlayerEventArgs e)
 		{
 			OnPlayerJoined(e.player);
+		}
+
+		private void Internal_OnPhotonPlayerLeft(object sender, PhotonPlayerEventArgs e)
+		{
+			OnPhotonPlayerLeft(e.player);
+		}
+
+		private void Internal_OnPhotonPlayerJoined(object sender, PhotonPlayerEventArgs e)
+		{
+			OnPhotonPlayerJoined(e.player);
 		}
 
 		private void Internal_SpawnEmojiRPC(object sender, SpawnEmojiArgs e)
@@ -126,6 +139,14 @@
 		}
 
 		public virtual void OnPlayerJoined(VRC.Player player)
+		{
+		}
+
+		public virtual void OnPhotonPlayerLeft(Photon.Realtime.Player player)
+		{
+		}
+
+		public virtual void OnPhotonPlayerJoined(Photon.Realtime.Player player)
 		{
 		}
 

@@ -26,6 +26,8 @@
 		public bool ShowPlayersMenu = true;
 
 		public bool ShowPlayersList = true;
+
+		public int PlayerListOffset = 0;
 	}
 
 	[Serializable, Obfuscation]

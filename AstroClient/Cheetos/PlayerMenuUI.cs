@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroClient.Cheetos;
+	using AstroClient.ConsoleUtils;
 	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using System.Collections.Generic;
@@ -24,7 +25,7 @@
 
 		public override void VRChat_OnUiManagerInit()
 		{
-			playersButton = new QMSingleButton("ShortcutMenu", -2, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
+			playersButton = new QMSingleButton("ShortcutMenu", -1 + ConfigManager.UI.PlayerListOffset, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
 			playersButton.setActive(ConfigManager.UI.ShowPlayersMenu);
 
 			if (ConfigManager.UI.ShowPlayersList)
@@ -64,6 +65,16 @@
 			RefreshButtons();
 		}
 
+		public override void OnPhotonPlayerJoined(Photon.Realtime.Player player)
+		{
+			ModConsole.Log($"[PHOTON] {player.GetDisplayName()} [{player.field_Private_Int32_0}] -> Joined!");
+		}
+
+		public override void OnPhotonPlayerLeft(Photon.Realtime.Player player)
+		{
+			ModConsole.Log($"[PHOTON] {player.GetDisplayName()} [{player.field_Private_Int32_0}] -> Left!");
+		}
+
 		private bool IsInvisible(Player player)
 		{
 			var photonPlayers = Utils.LoadBalancingPeer.prop_Room_0.prop_Dictionary_2_Int32_Player_0;
@@ -96,7 +107,7 @@
 			float yPos_start = -0.5f;
 			float yPos_max = 5f;
 			float yPos = yPos_start;
-			float xPos = -2f;
+			float xPos = -1f + ConfigManager.UI.PlayerListOffset;
 
 			ResetButtons();
 			foreach (var player in temp_list.Reverse())

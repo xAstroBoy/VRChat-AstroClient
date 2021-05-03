@@ -243,6 +243,7 @@
     <Compile Include="Startup\ComponentHelper.cs" />
     <Compile Include="Startup\EventArgs\OnAvatarSpawnArgs.cs" />
     <Compile Include="Startup\EventArgs\OnWorldRevealArgs.cs" />
+    <Compile Include="Startup\EventArgs\PhotonPlayerEventArgs.cs" />
     <Compile Include="Startup\EventArgs\PlayerEventArgs.cs" />
     <Compile Include="Startup\EventArgs\RayCastEventArgs.cs" />
     <Compile Include="Startup\EventArgs\SpawnEmojiArgs.cs" />
@@ -251,6 +252,7 @@
     <Compile Include="Startup\Hooks\AvatarManagerHook.cs" />
     <Compile Include="Startup\Hooks\NetworkManagerHooks.cs" />
     <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
+    <Compile Include="Startup\Hooks\PhotonPlayerHooks.cs" />
     <Compile Include="Startup\Hooks\RPCEventHook.cs" />
     <Compile Include="Startup\Hooks\SpawnEmojiRPCHook.cs" />
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
