@@ -2,6 +2,7 @@
 {
 	using AstroClient.ConsoleUtils;
 	using AstroClient.GameObjectDebug;
+	using DayClientML2.Utility.Extensions;
 	using System;
 	using System.Runtime.InteropServices;
 	using UnhollowerRuntimeLib;
