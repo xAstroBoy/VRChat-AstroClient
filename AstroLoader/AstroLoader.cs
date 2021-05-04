@@ -14,6 +14,7 @@
 		{
 			@"Debug\AstroClient.dll",
 			@"Debug\DontTouchMyClient.dll",
+			@"Debug\MonoDumper.dll",
 			@"Debug\UnityExplorer.ML.IL2CPP.dll",
 		};
 
