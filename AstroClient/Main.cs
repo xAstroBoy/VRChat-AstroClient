@@ -161,16 +161,21 @@
 				QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, Environment.CurrentDirectory + @"\AstroClient\Resources\planet.png");
 				ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", new Action(() => { Bools.IsDebugMode = true; }), "Debug Console OFF", new Action(() => { Bools.IsDebugMode = false; }), "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 				ToggleHideAvatar = new QMSingleToggleButton(AstroClient, 4, 1.5f, "Hide Avatar ON", new Action(() => { AvatarHider.HideAvatar = true; }), "Hide Avatar OFF", new Action(() => { AvatarHider.HideAvatar = false; }), "Hides your avatar for yourself", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-if (File.Exists(Environment.CurrentDirectory + @"\RubyClient\RubyClient.dll")) {
+				
+				if (File.Exists(Environment.CurrentDirectory + @"\RubyClient\RubyClient.dll"))
+				{
 					ModConsole.Log("RubyClient Detected Buttons Moved");
-				ToggleFly = new QMSingleToggleButton(AstroClient, -1, 0, "Fly", () => { Flight.FlyEnabled = true; }, "Fly", () => { Flight.FlyEnabled = false; }, "Enable/Disable Flight", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.FlyEnabled, true);
-				ToggleNoClip = new QMSingleToggleButton(AstroClient, -1, 0.5f, "NoClip", () => { Flight.NoClipEnabled = true; }, "NoClip", () => { Flight.NoClipEnabled = false; }, "Enable/Disable NoClip", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.NoClipEnabled, true);
-} else {
+					ToggleFly = new QMSingleToggleButton(AstroClient, -1, 0, "Fly", () => { Flight.FlyEnabled = true; }, "Fly", () => { Flight.FlyEnabled = false; }, "Enable/Disable Flight", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.FlyEnabled, true);
+					ToggleNoClip = new QMSingleToggleButton(AstroClient, -1, 0.5f, "NoClip", () => { Flight.NoClipEnabled = true; }, "NoClip", () => { Flight.NoClipEnabled = false; }, "Enable/Disable NoClip", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.NoClipEnabled, true);
+				}
+				else
+				{
 					ToggleFly = new QMSingleToggleButton(AstroClient, 0, 0, "Fly", () => { Flight.FlyEnabled = true; }, "Fly", () => { Flight.FlyEnabled = false; }, "Enable/Disable Flight", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.FlyEnabled, true);
 					ToggleNoClip = new QMSingleToggleButton(AstroClient, 0, 0.5f, "NoClip", () => { Flight.NoClipEnabled = true; }, "NoClip", () => { Flight.NoClipEnabled = false; }, "Enable/Disable NoClip", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.NoClipEnabled, true);
-}
+				}
 
-					WorldsCheats.InitButtons(AstroClient, 1, 0, true);
+				FlightMenu.InitButtons(AstroClient, 1, 0, true);
+				WorldsCheats.InitButtons(AstroClient, 1, 0, true);
 				LightControl.InitButtons(AstroClient, 1, 0.5f, true);
 				Movement.InitButtons(AstroClient, 1, 1, true);
 				GameObjectUtils.InitButtons(AstroClient, 1, 1.5f, true);

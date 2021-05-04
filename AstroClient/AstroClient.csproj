@@ -101,6 +101,7 @@
     <Compile Include="Blaze\Flight.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
+    <Compile Include="Buttons\FlightMenu.cs" />
     <Compile Include="Buttons\RandomSubmenus.cs" />
     <Compile Include="Buttons\SettingsMenuBtn.cs" />
     <Compile Include="Buttons\UserInteractMenuBtns.cs" />
