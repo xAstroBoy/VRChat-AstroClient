@@ -5,6 +5,7 @@
 	using AstroClient.ConsoleUtils;
 	using AstroClient.extensions;
 	using AstroClient.GameObjectDebug;
+	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using System;
 	using UnityEngine;

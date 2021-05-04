@@ -101,7 +101,7 @@
 
 		public static Player GetPlayerByVRCPlayer(VRCPlayer target)
 		{
-			return target.field_Private_Player_0;
+			return target._player;
 		}
 
 		public override void OnWorldReveal(string id, string name, string asseturl)
