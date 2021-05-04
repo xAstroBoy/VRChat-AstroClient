@@ -1,9 +1,9 @@
 ﻿namespace DayClientML2.Utility.Extensions
 {
 	using ExitGames.Client.Photon;
-	using Photon.Pun;
 	using UnityEngine;
 	using VRC.SDKBase;
+	using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
 
 	internal class NetworkingExt
 	{
@@ -21,7 +21,7 @@
 
 		public static void OpRaiseEvent(byte code, Il2CppSystem.Object customObject, Photon.Realtime.RaiseEventOptions RaiseEventOptions, SendOptions sendOptions)
 		{
-			MonoBehaviour1PrivateObInPrInBoInInInInUnique.
+			PhotonHandler.
 				field_Internal_Static_MonoBehaviour1PrivateObInPrInBoInInInInUnique_0.prop_LoadBalancingClient_0.
 			 Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0
 			(code,

@@ -7,6 +7,7 @@
 	using System;
 	using UnhollowerBaseLib.Attributes;
 	using UnityEngine;
+	using SyncPhysics = MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique;
 
 	public class RigidBodyController : GameEventsBehaviour
 	{
@@ -26,7 +27,7 @@
 					body = obj.GetComponentInChildren<Rigidbody>();
 				}
 
-				Sync = obj.GetComponent<MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique>();
+				Sync = obj.GetComponent<SyncPhysics>();
 				BackupBasicBody();
 				EditMode = false;
 			}
@@ -153,7 +154,7 @@
 					{
 						if (Sync == null)
 						{
-							Sync = obj.AddComponent<MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique>();
+							Sync = obj.AddComponent<SyncPhysics>();
 						}
 
 						if (Sync.field_Private_Rigidbody_0 == null)
@@ -475,7 +476,7 @@
 		}
 
 		[HideFromIl2Cpp]
-		internal MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique Internal_Sync
+		internal SyncPhysics Internal_Sync
 		{
 			get
 			{
@@ -484,7 +485,7 @@
 		}
 
 		private GameObject obj = null;
-		private MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique Sync = null;
+		private SyncPhysics Sync = null;
 		private Rigidbody body = null;
 
 		internal bool EditMode = false;

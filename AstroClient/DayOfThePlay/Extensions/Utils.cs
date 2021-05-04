@@ -1,12 +1,12 @@
 ﻿namespace DayClientML2.Utility.Extensions
 {
-	using Photon.Pun;
 	using UnhollowerRuntimeLib;
 	using UnityEngine;
 	using UnityEngine.XR;
 	using VRC;
 	using VRC.SDKBase;
 	using VRC.UserCamera;
+	using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
 
 	public static class Utils
 	{
@@ -48,11 +48,11 @@
 				return PhotonHandler.prop_LoadBalancingClient_0;
 			}
 		}
-		public static MonoBehaviour1PrivateObInPrInBoInInInInUnique PhotonHandler
+		public static PhotonHandler PhotonHandler
 		{
 			get
 			{
-				return MonoBehaviour1PrivateObInPrInBoInInInInUnique.field_Internal_Static_MonoBehaviour1PrivateObInPrInBoInInInInUnique_0;
+				return PhotonHandler.field_Internal_Static_MonoBehaviour1PrivateObInPrInBoInInInInUnique_0;
 			}
 		}
 

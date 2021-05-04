@@ -22,6 +22,7 @@
 	using VRCSDK2;
 	using Color = System.Drawing.Color;
 	using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
+	using SyncPhysics = MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique;
 
 	public class GameObjectUtils : GameEvents
 	{
@@ -160,7 +161,7 @@
 		{
 			if (obj != null)
 			{
-				var PhysicSync = obj.GetComponentInChildren<MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique>();
+				var PhysicSync = obj.GetComponentInChildren<SyncPhysics>();
 				var control = obj.GetComponent<RigidBodyController>();
 				if (RestoreBodySettings)
 				{

@@ -1,12 +1,11 @@
 ﻿namespace AstroClient.SyncPhysicExt
 {
 	using UnityEngine;
+	using SyncPhysics = MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique;
 
 	public static class SyncPhysicsExt
 	{
-
-		// SyncPhysics = MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique
-		public static void RefreshProperties(this MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique instance)
+		public static void RefreshProperties(this SyncPhysics instance)
 		{
 			if (instance != null)
 			{
@@ -14,7 +13,7 @@
 			}
 		}
 
-		public static void RespawnItem(this MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique instance)
+		public static void RespawnItem(this SyncPhysics instance)
 		{
 			if (instance != null)
 			{
@@ -22,7 +21,7 @@
 			}
 		}
 
-		public static Rigidbody GetRigidBody(this MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique instance)
+		public static Rigidbody GetRigidBody(this SyncPhysics instance)
 		{
 			if (instance != null)
 			{
