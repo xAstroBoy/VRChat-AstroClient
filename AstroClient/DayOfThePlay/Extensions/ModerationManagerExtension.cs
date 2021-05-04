@@ -4,6 +4,7 @@
 	using System;
 	using VRC.Core;
 
+	// #ToFix Everything in this class...
 	internal static class ModerationManagerExtension
 	{
 		[Obsolete("Possibly Borked, needs checked")]
