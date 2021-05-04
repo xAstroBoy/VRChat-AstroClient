@@ -26,6 +26,16 @@
 		//	NoClipEnabled = false;
 		//}
 
+		public static void SetDesktopFlySpeed(float v)
+		{
+			ConfigManager.Flight.DesktopFlySpeed = v;
+		}
+
+		public static void SetVRFlySpeed(float v)
+		{
+			ConfigManager.Flight.VRFlySpeed = v;
+		}
+
 		public static bool FlyEnabled
 		{
 			get => flyEnabled;
