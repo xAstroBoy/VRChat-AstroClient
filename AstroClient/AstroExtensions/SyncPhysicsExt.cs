@@ -4,7 +4,9 @@
 
 	public static class SyncPhysicsExt
 	{
-		public static void RefreshProperties(this SyncPhysics instance)
+
+		// SyncPhysics = MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique
+		public static void RefreshProperties(this MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique instance)
 		{
 			if (instance != null)
 			{
@@ -12,15 +14,15 @@
 			}
 		}
 
-		public static void RespawnItem(this SyncPhysics instance)
+		public static void RespawnItem(this MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique instance)
 		{
 			if (instance != null)
 			{
-				instance.Method_Public_Void_PDM_2();
+				instance.Method_Public_Void_2();
 			}
 		}
 
-		public static Rigidbody GetRigidBody(this SyncPhysics instance)
+		public static Rigidbody GetRigidBody(this MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique instance)
 		{
 			if (instance != null)
 			{

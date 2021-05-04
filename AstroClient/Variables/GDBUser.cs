@@ -11,7 +11,7 @@
 		public GDBUser(Player vrcPlayer)
 		{
 			this.vrcPlayer = vrcPlayer;
-			this.avatarObject = vrcPlayer.field_Internal_VRCPlayer_0.field_Internal_GameObject_0;
+			this.avatarObject = vrcPlayer.GetVRCPlayer().field_Internal_GameObject_0;
 		}
 	}
 }

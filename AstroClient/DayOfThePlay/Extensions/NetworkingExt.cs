@@ -21,7 +21,7 @@
 
 		public static void OpRaiseEvent(byte code, Il2CppSystem.Object customObject, Photon.Realtime.RaiseEventOptions RaiseEventOptions, SendOptions sendOptions)
 		{
-			PhotonHandler.
+			MonoBehaviour1PrivateObInPrInBoInInInInUnique.
 			 field_Internal_Static_PhotonHandler_0.prop_LoadBalancingClient_0.
 			 Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0
 			(code,

@@ -48,11 +48,11 @@
 				return PhotonHandler.prop_LoadBalancingClient_0;
 			}
 		}
-		public static PhotonHandler PhotonHandler
+		public static MonoBehaviour1PrivateObInPrInBoInInInInUnique PhotonHandler
 		{
 			get
 			{
-				return PhotonHandler.field_Internal_Static_PhotonHandler_0;
+				return MonoBehaviour1PrivateObInPrInBoInInInInUnique.field_Internal_Static_MonoBehaviour1PrivateObInPrInBoInInInInUnique_0;
 			}
 		}
 

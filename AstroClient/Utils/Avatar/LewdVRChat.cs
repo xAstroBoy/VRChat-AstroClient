@@ -51,11 +51,11 @@
 			{
 				return;
 			}
-			if (avatar != null && player != null && player.field_Private_APIUser_0 != null)
+			if (avatar != null && player != null && player.GetAPIUser() != null)
 			{
 				try
 				{
-					var OldEntry = _AnalyzedPlayers.Where(x => x.Player.field_Private_APIUser_0.id == player.field_Private_APIUser_0.id).DefaultIfEmpty(null).First();
+					var OldEntry = _AnalyzedPlayers.Where(x => x.Player.GetAPIUser().id == player.GetAPIUser().id).DefaultIfEmpty(null).First();
 					if (OldEntry != null)
 					{
 						if (_AnalyzedPlayers.Contains(OldEntry))
@@ -254,7 +254,7 @@
 				var ScannedUser = _AnalyzedPlayers.Where(x => x.Player.GetAPIUser().id == apiuser.id).DefaultIfEmpty(null).First();
 				if (ScannedUser != null)
 				{
-					ModConsole.Log("Dumping renderer components in player : " + ScannedUser.Player.field_Private_APIUser_0.displayName);
+					ModConsole.Log("Dumping renderer components in player : " + ScannedUser.Player.GetAPIUser().displayName);
 					MelonCoroutines.Start(AvatarDumper(ScannedUser.Avatar, ScannedUser.Player));
 				}
 			}
@@ -288,9 +288,9 @@
 			}
 			foreach (var player in PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0)
 			{
-				if (player != null && player.field_Internal_VRCPlayer_0 != null)
+				if (player != null && player.GetVRCPlayer() != null)
 				{
-					ReloadAvatar(player.field_Internal_VRCPlayer_0);
+					ReloadAvatar(player.GetVRCPlayer());
 				}
 			}
 		}
@@ -311,7 +311,7 @@
 				var ScannedUser = _AnalyzedPlayers.Where(x => x.Player.GetAPIUser().id == apiuser.id).DefaultIfEmpty(null).First();
 				if (ScannedUser != null)
 				{
-					ModConsole.Log("Dumping renderer components in player : " + ScannedUser.Player.field_Private_APIUser_0.displayName);
+					ModConsole.Log("Dumping renderer components in player : " + ScannedUser.Player.GetAPIUser().displayName);
 					MelonCoroutines.Start(AvatarDumper(ScannedUser.Avatar, ScannedUser.Player));
 				}
 			}

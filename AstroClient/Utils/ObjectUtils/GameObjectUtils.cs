@@ -160,7 +160,7 @@
 		{
 			if (obj != null)
 			{
-				var PhysicSync = obj.GetComponentInChildren<SyncPhysics>();
+				var PhysicSync = obj.GetComponentInChildren<MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique>();
 				var control = obj.GetComponent<RigidBodyController>();
 				if (RestoreBodySettings)
 				{

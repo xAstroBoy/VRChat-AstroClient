@@ -16,7 +16,7 @@
 		{
 			if (player != null)
 			{
-				if (CurrentTarget == player.field_Internal_VRCPlayer_0)
+				if (CurrentTarget == player.GetVRCPlayer())
 				{
 					CurrentTarget = null;
 				}

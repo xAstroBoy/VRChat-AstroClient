@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using UnityEngine;
 	using VRC;
@@ -54,7 +55,7 @@
 		public static Vector3 PlayerPositionBones(Player player, HumanBodyBones bone)
 		{
 			Vector3 bonePosition = player.transform.position;
-			VRCAvatarManager avatarManager = player.field_Internal_VRCPlayer_0.prop_VRCAvatarManager_0;
+			VRCAvatarManager avatarManager = player.GetVRCPlayer().prop_VRCAvatarManager_0;
 			if (!avatarManager)
 				return bonePosition;
 			Animator animator = avatarManager.field_Private_Animator_0;
@@ -70,7 +71,7 @@
 		{
 			var player = Player.prop_Player_0;
 			Vector3 bonePosition = player.transform.position;
-			VRCAvatarManager avatarManager = player.field_Internal_VRCPlayer_0.prop_VRCAvatarManager_0;
+			VRCAvatarManager avatarManager = player.GetVRCPlayer().prop_VRCAvatarManager_0;
 			if (!avatarManager)
 				return bonePosition;
 			Animator animator = avatarManager.field_Private_Animator_0;
@@ -87,7 +88,7 @@
 		{
 			var player = Player.prop_Player_0;
 			Transform bonetransform = player.transform;
-			VRCAvatarManager avatarManager = player.field_Internal_VRCPlayer_0.prop_VRCAvatarManager_0;
+			VRCAvatarManager avatarManager = player.GetVRCPlayer().prop_VRCAvatarManager_0;
 			if (!avatarManager)
 				return bonetransform;
 			Animator animator = avatarManager.field_Private_Animator_0;

@@ -26,7 +26,7 @@
 					body = obj.GetComponentInChildren<Rigidbody>();
 				}
 
-				Sync = obj.GetComponent<SyncPhysics>();
+				Sync = obj.GetComponent<MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique>();
 				BackupBasicBody();
 				EditMode = false;
 			}
@@ -153,7 +153,7 @@
 					{
 						if (Sync == null)
 						{
-							Sync = obj.AddComponent<SyncPhysics>();
+							Sync = obj.AddComponent<MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique>();
 						}
 
 						if (Sync.field_Private_Rigidbody_0 == null)
@@ -475,7 +475,7 @@
 		}
 
 		[HideFromIl2Cpp]
-		internal SyncPhysics Internal_Sync
+		internal MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique Internal_Sync
 		{
 			get
 			{
@@ -484,7 +484,7 @@
 		}
 
 		private GameObject obj = null;
-		private SyncPhysics Sync = null;
+		private MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique Sync = null;
 		private Rigidbody body = null;
 
 		internal bool EditMode = false;

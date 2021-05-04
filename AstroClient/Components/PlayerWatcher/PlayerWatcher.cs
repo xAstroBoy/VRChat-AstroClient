@@ -2,6 +2,7 @@
 {
 	using AstroClient.ConsoleUtils;
 	using AstroClient.GameObjectDebug;
+	using DayClientML2.Utility.Extensions;
 	using System;
 	using System.Runtime.InteropServices;
 	using UnhollowerRuntimeLib;
@@ -162,7 +163,7 @@
 		public static Transform PositionOfBone(Player player, HumanBodyBones bone)
 		{
 			Transform bonePosition = player.transform;
-			VRCAvatarManager avatarManager = player.field_Internal_VRCPlayer_0.prop_VRCAvatarManager_0;
+			VRCAvatarManager avatarManager = player.GetVRCPlayer().prop_VRCAvatarManager_0;
 			if (!avatarManager)
 				return bonePosition;
 			Animator animator = avatarManager.field_Private_Animator_0;

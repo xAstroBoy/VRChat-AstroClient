@@ -1,5 +1,6 @@
 ﻿namespace DayClientML2.Utility.Extensions
 {
+	using Il2CppSystem.Collections.Generic;
 	using System.Linq;
 	using VRC.Core;
 
@@ -88,7 +89,7 @@
 		{
 			ApiModeration.LocalFetchAll(new System.Action<Il2CppSystem.Collections.Generic.IEnumerable<ApiModeration>>((mods) =>
 			{
-				var newlist = new Il2CppSystem.Collections.Generic.List<ApiModeration>();
+				var newlist = new Il2CppSystem.Collections.Generic.Dictionary<string, List<ApiModeration>>();
 				newlist.AddRange(mods);
 				GlobalModerations = newlist;
 			}), null);
@@ -106,39 +107,39 @@
 			}), null);
 		}
 
-		private static Il2CppSystem.Collections.Generic.List<ApiPlayerModeration> ModerationAgainstMe
+		private static Il2CppSystem.Collections.Generic.Dictionary<string, List<ApiModeration>> ModerationAgainstMe
 		{
 			get
 			{
-				return Utils.ModerationManager.field_Private_List_1_ApiPlayerModeration_0;
+				return Utils.ModerationManager.field_Private_Dictionary_2_String_List_1_ApiModeration_0;
 			}
 			set
 			{
-				Utils.ModerationManager.field_Private_List_1_ApiPlayerModeration_0 = value;
+				Utils.ModerationManager.field_Private_Dictionary_2_String_List_1_ApiModeration_0 = value;
 			}
 		}
 
-		private static Il2CppSystem.Collections.Generic.List<ApiPlayerModeration> ModerationFromMe
+		private static Il2CppSystem.Collections.Generic.Dictionary<string, List<ApiPlayerModeration>> ModerationFromMe
 		{
 			get
 			{
-				return Utils.ModerationManager.field_Private_List_1_ApiPlayerModeration_0;
+				return Utils.ModerationManager.field_Private_Dictionary_2_String_List_1_ApiPlayerModeration_0;
 			}
 			set
 			{
-				Utils.ModerationManager.field_Private_List_1_ApiPlayerModeration_0 = value;
+				Utils.ModerationManager.field_Private_Dictionary_2_String_List_1_ApiPlayerModeration_0 = value;
 			}
 		}
 
-		private static Il2CppSystem.Collections.Generic.List<ApiModeration> GlobalModerations
+		private static Il2CppSystem.Collections.Generic.Dictionary<string, List<ApiModeration>> GlobalModerations
 		{
 			get
 			{
-				return Utils.ModerationManager.field_Private_List_1_ApiModeration_0;
+				return Utils.ModerationManager.field_Private_Dictionary_2_String_List_1_ApiModeration_0;
 			}
 			set
 			{
-				Utils.ModerationManager.field_Private_List_1_ApiModeration_0 = value;
+				Utils.ModerationManager.field_Private_Dictionary_2_String_List_1_ApiModeration_0 = value;
 			}
 		}
 	}

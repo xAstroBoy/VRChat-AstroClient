@@ -31,7 +31,7 @@
 
 		public static Player GetPlayer(this VRCPlayer Instance)
 		{
-			return Instance == null ? null : Instance.field_Private_Player_0;
+			return Instance == null ? null : Instance._player;
 		}
 
 		public static Player GetPlayer(this PlayerNet Instance)
@@ -55,12 +55,12 @@
 
 		public static VRCPlayer GetVRCPlayer(this Player Instance)
 		{
-			return Instance == null ? null : Instance.field_Internal_VRCPlayer_0;
+			return Instance == null ? null : Instance._vrcplayer;
 		}
 
 		public static VRCPlayer GetVRCPlayer(this PlayerNet Instance)
 		{
-			return Instance == null ? null : Instance.field_Internal_VRCPlayer_0;
+			return Instance == null ? null : Instance._vrcPlayer;
 		}
 
 		public static VRCPlayer GetVRCPlayer(this VRCPlayerApi Instance)
@@ -482,8 +482,8 @@
 		{
 			if (Instance.prop_GameObject_0 != null)
 				return Instance.prop_GameObject_0;
-			if (Instance.field_Private_GameObject_1 != null)
-				return Instance.field_Private_GameObject_1;
+			//if (Instance.prop_GameObject_0 != null)
+			//	return Instance.field_Private_GameObject_1;
 			return null;
 		}
 

@@ -3,6 +3,7 @@
 	using AstroClient.ConsoleUtils;
 	using AstroClient.extensions;
 	using AstroClient.ItemTweaker;
+	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections;
@@ -344,9 +345,9 @@
 							for (int k = 0; k < allPlayers.Count; k++)
 							{
 								Player player = allPlayers[k];
-								if (player.field_Internal_VRCPlayer_0 != null && player.field_Private_APIUser_0 != null && player.field_Internal_VRCPlayer_0.name == item.name)
+								if (player.GetVRCPlayer() != null && player.GetAPIUser() != null && player.GetVRCPlayer().name == item.name)
 								{
-									objname = player.field_Private_APIUser_0.displayName + "'s Current Avatar" + ((!(player.field_Internal_VRCPlayer_0.prop_VRCAvatarManager_0 != null)) ? "" : ((player.field_Internal_VRCPlayer_0.prop_VRCAvatarManager_0.field_Private_ApiAvatar_0 != null) ? (": " + player.field_Internal_VRCPlayer_0.prop_VRCAvatarManager_0.field_Private_ApiAvatar_0.name + " By: " + player.field_Internal_VRCPlayer_0.prop_VRCAvatarManager_0.field_Private_ApiAvatar_0.authorName + " Version: " + player.field_Internal_VRCPlayer_0.prop_VRCAvatarManager_0.field_Private_ApiAvatar_0.version) : ""));
+									objname = player.GetAPIUser().displayName + "'s Current Avatar" + ((!(player.GetVRCPlayer().prop_VRCAvatarManager_0 != null)) ? "" : ((player.GetVRCPlayer().prop_VRCAvatarManager_0.field_Private_ApiAvatar_0 != null) ? (": " + player.GetVRCPlayer().prop_VRCAvatarManager_0.field_Private_ApiAvatar_0.name + " By: " + player.GetVRCPlayer().prop_VRCAvatarManager_0.field_Private_ApiAvatar_0.authorName + " Version: " + player.GetVRCPlayer().prop_VRCAvatarManager_0.field_Private_ApiAvatar_0.version) : ""));
 								}
 							}
 						}
@@ -410,9 +411,9 @@
 					for (int k = 0; k < allPlayers.Count; k++)
 					{
 						Player player = allPlayers[k];
-						if (player.field_Internal_VRCPlayer_0 != null && player.field_Private_APIUser_0 != null && player.field_Internal_VRCPlayer_0.name == item.name)
+						if (player.GetVRCPlayer() != null && player.GetAPIUser() != null && player.GetVRCPlayer().name == item.name)
 						{
-							objname = player.field_Private_APIUser_0.displayName + "'s Current Avatar" + ((!(player.field_Internal_VRCPlayer_0.prop_VRCAvatarManager_0 != null)) ? "" : ((player.field_Internal_VRCPlayer_0.prop_VRCAvatarManager_0.field_Private_ApiAvatar_0 != null) ? (": " + player.field_Internal_VRCPlayer_0.prop_VRCAvatarManager_0.field_Private_ApiAvatar_0.name + " By: " + player.field_Internal_VRCPlayer_0.prop_VRCAvatarManager_0.field_Private_ApiAvatar_0.authorName + " Version: " + player.field_Internal_VRCPlayer_0.prop_VRCAvatarManager_0.field_Private_ApiAvatar_0.version) : ""));
+							objname = player.GetAPIUser().displayName + "'s Current Avatar" + ((!(player.GetVRCPlayer().prop_VRCAvatarManager_0 != null)) ? "" : ((player.GetVRCPlayer().prop_VRCAvatarManager_0.field_Private_ApiAvatar_0 != null) ? (": " + player.GetVRCPlayer().prop_VRCAvatarManager_0.field_Private_ApiAvatar_0.name + " By: " + player.GetVRCPlayer().prop_VRCAvatarManager_0.field_Private_ApiAvatar_0.authorName + " Version: " + player.GetVRCPlayer().prop_VRCAvatarManager_0.field_Private_ApiAvatar_0.version) : ""));
 						}
 					}
 				}
