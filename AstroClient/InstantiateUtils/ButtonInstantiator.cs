@@ -28,15 +28,31 @@
 			var textholder = new GameObject();
 			if(textholder != null)
 			{
-				textholder.transform.name = "Text";
+				textholder.transform.name = "TextMeshPro";
 				textholder.transform.SetParent(Body.transform);
 				textholder.transform.localPosition = new Vector3(0.4f, 0.1f, -0.5f);
-				//textholder.transform.localScale = Body.transform.localScale;
+				textholder.transform.localScale = Body.transform.localScale;
 				var text = textholder.AddComponent<TextMeshPro>();
 				if(text != null)
 				{
 					text.text = BtnText;
 					text.color = TextColor;
+					//text.isOverlay = true;
+					text.autoSizeTextContainer = true;
+					text.horizontalAlignment = HorizontalAlignmentOptions.Center;
+					text.richText = true;
+
+					text.ForceMeshUpdate();
+					
+					Bounds bounds = text.textBounds;
+					Vector2 newPos = new Vector2(-bounds.center.x, -bounds.center.y);
+					
+					RectTransform rt = Body.transform.GetComponent<RectTransform>();
+					if(rt == null)
+					{
+                        rt = Body.transform.gameObject.AddComponent<RectTransform>();
+					}
+					rt.localPosition = newPos;
 				}
 			}
 			if(!string.IsNullOrEmpty(OnInteractionText) && !string.IsNullOrWhiteSpace(OnInteractionText))

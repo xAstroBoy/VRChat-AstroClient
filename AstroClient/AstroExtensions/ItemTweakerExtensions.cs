@@ -24,5 +24,13 @@
 				}
 			}
 		}
+
+		public static void SetObjectToEdit(this GameObject obj)
+		{
+			if (obj != null)
+			{
+				ItemTweaker.Tweaker_Object.SetObjectToEdit(obj);
+			}
+		}
 	}
 }
