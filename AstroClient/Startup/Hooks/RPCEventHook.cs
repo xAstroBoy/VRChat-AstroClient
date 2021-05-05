@@ -4,6 +4,7 @@
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using Harmony;
+	using Mono.CSharp;
 	using System;
 	using System.Reflection;
 	using VRC;
@@ -38,7 +39,9 @@
 					harmony1 = HarmonyInstance.Create(BuildInfo.Name + " RPCEventHook1");
 				}
 
-				harmony1.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Boolean_Player_VrcEvent_VrcBroadcastType_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent1), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
+				//harmony1.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Boolean_Player_VrcEvent_VrcBroadcastType_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent1), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
+				harmony1.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(CaughtEventPatch), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
+				
 				ModConsole.Log("Hooked VRC_EventDispatcherRFC 1");
 			}
 			catch
@@ -48,7 +51,12 @@
 			}
 		}
 
-		private static void OnRPCEvent1(ref Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2)
+		private static bool CaughtEventPatch(ref VRC.Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
+		{
+			return true;
+		}
+
+		private static bool OnRPCEvent1(Player __0, VRC_EventHandler.VrcEvent __1, VRC_EventHandler.VrcBroadcastType __2, int __3, float __4)
 		{
 			string actionstring = string.Empty;
 			string actiontext = string.Empty;
@@ -57,6 +65,12 @@
 			string parameter = string.Empty;
 			string eventtype = string.Empty;
 			string broadcasttype = string.Empty;
+
+			if (__0 == null || __1 == null || __2 == null)
+			{
+				ModConsole.Log("RPC Blocked, something was null.");
+				return false;
+			}
 
 			if (__1.ParameterBytes != null && __1.ParameterBytes.Count != 0)
 			{
@@ -67,7 +81,7 @@
 				}
 				else
 				{
-					return; // INVALID EVENT
+					return false; // INVALID EVENT
 				}
 			}
 			else
@@ -112,9 +126,14 @@
 			}
 			bool log = ConfigManager.General.LogRPCEvents;
 
-			if (name.Equals("USpeak") || name.Equals("SceneEventHandlerAndInstantiator"))
+			if (name.Equals("USpeak"))
 			{
-				log = false;
+				log = true;
+			}
+
+			if (name.Equals("SceneEventHandlerAndInstantiator"))
+			{
+				log = true;
 			}
 
 			if (__1.ParameterObject != null)
@@ -143,6 +162,8 @@
 					ModConsole.DebugLog($"RPC: {__0.DisplayName()}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
 				}
 			}
+
+			return true;
 		}
 
 		//public void HookRPCEvent2()

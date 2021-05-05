@@ -3,7 +3,9 @@
 	#region Imports
 	using AstroClient.ConsoleUtils;
 	using DayClientML2.Utility;
+	using DayClientML2.Utility.Extensions;
 	using Harmony;
+	using I18N.MidEast;
 	using MelonLoader;
 	using Photon.Realtime;
 	using System;
@@ -75,6 +77,7 @@
 		{
 			try
 			{
+				ModConsole.Log($"[Photon] Player Joined: {__0.GetDisplayName()}");
 				Event_OnPhotonPlayerJoin?.Invoke(null, new PhotonPlayerEventArgs(__0));
 			}
 			catch
@@ -87,6 +90,7 @@
 		{
 			try
 			{
+				ModConsole.Log($"[Photon] Player Left: {__0.GetDisplayName()}");
 				Event_OnPhotonPlayerLeft?.Invoke(null, new PhotonPlayerEventArgs(__0));
 			}
 			catch
