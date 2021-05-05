@@ -225,6 +225,8 @@
     <Compile Include="GameObject\Object Tweaker\ObjectMiscOptions.cs" />
     <Compile Include="GameObject\Online\OnlineEditor.cs" />
     <Compile Include="GameObjMenu.cs" />
+    <Compile Include="InstantiateUtils\ButtonInstantiator.cs" />
+    <Compile Include="InstantiateUtils\MapEditorMenu.cs" />
     <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Lights\LightControl.cs" />

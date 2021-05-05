@@ -180,7 +180,11 @@
 				Movement.InitButtons(AstroClient, 1, 1, true);
 				GameObjectUtils.InitButtons(AstroClient, 1, 1.5f, true);
 				EmojiUtils.InitButton(AstroClient, 1, 2, true);
-				LewdVRChat.InitButtons(AstroClient, 1, 2.5f, true);
+				if(Bools.IsDeveloper)
+				{
+					MapEditorMenu.InitButtons(AstroClient, 1, 2.5f, true);
+				}
+				//LewdVRChat.InitButtons(AstroClient, 1, 2.5f, true);
 				WorldPickupsBtn.InitButtons(AstroClient, 2, 0, true);
 				ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
 				RandomSubmenus.TriggerSubMenu(AstroClient, 2, 1, true);
