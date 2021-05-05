@@ -40,10 +40,11 @@
 				var text = textholder.AddComponent<TextMeshPro>();
 				if(text != null)
 				{
+					text.enableAutoSizing = true;
 					text.text = BtnText;
 					text.color = TextColor;
 					//text.isOverlay = true;
-					text.autoSizeTextContainer = true;
+					//text.autoSizeTextContainer = true;
 					text.horizontalAlignment = HorizontalAlignmentOptions.Center;
 					text.richText = true;
 
