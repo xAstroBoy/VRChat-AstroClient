@@ -101,7 +101,7 @@
 				players.Add(kvp.Value.GetPlayer());
 			}
 
-			var temp_list = players.OrderBy(p => p.GetIsMaster()).ThenBy(p => p.GetAPIUser().IsSelf).ThenBy(p => p.GetAPIUser().isFriend);
+			var temp_list = players.OrderBy(p => p.GetIsMaster()).ThenBy(p => p.GetAPIUser().IsSelf).ThenBy(p => p.GetAPIUser().GetIsFriend());
 
 			float yPos_start = -0.5f;
 			float yPos_max = 5f;
