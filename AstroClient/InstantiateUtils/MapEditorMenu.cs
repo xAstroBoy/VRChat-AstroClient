@@ -17,7 +17,7 @@
 		{
 			var menu = new QMNestedButton(main, x, y, "Map Editor Utils", "Map Editor", null, null, null, null, btnHalf);
 			new QMSingleButton(menu, 1, 0, "Spawn Empty Button", new Action(() => { 
-				var btn = ButtonInstantiator.InstantiateBtn(null, "Template",  Color.black, "Interaction Text", null);
+				var btn = ButtonInstantiator.InstantiateBtn(null, "Template",  Color.black , null);
 				btn.TeleportToMe();
 				btn.ForcePickupComponent();
 				btn.SetPickupable(true);
