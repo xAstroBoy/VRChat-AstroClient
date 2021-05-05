@@ -26,7 +26,12 @@
 				}
 			}
 			var textholder = new GameObject();
-			if(textholder != null)
+			RectTransform rt = Body.transform.GetComponent<RectTransform>();
+			if (rt == null)
+			{
+				rt = Body.transform.gameObject.AddComponent<RectTransform>();
+			}
+			if (textholder != null)
 			{
 				textholder.transform.name = "TextMeshPro";
 				textholder.transform.SetParent(Body.transform);
@@ -35,10 +40,11 @@
 				var text = textholder.AddComponent<TextMeshPro>();
 				if(text != null)
 				{
+					text.enableAutoSizing = true;
 					text.text = BtnText;
 					text.color = TextColor;
 					//text.isOverlay = true;
-					text.autoSizeTextContainer = true;
+					//text.autoSizeTextContainer = true;
 					text.horizontalAlignment = HorizontalAlignmentOptions.Center;
 					text.richText = true;
 
@@ -46,13 +52,9 @@
 					
 					Bounds bounds = text.textBounds;
 					Vector2 newPos = new Vector2(-bounds.center.x, -bounds.center.y);
-					
-					RectTransform rt = Body.transform.GetComponent<RectTransform>();
-					if(rt == null)
-					{
-                        rt = Body.transform.gameObject.AddComponent<RectTransform>();
-					}
 					rt.localPosition = newPos;
+					text.ForceMeshUpdate();
+
 				}
 			}
 			if(!string.IsNullOrEmpty(OnInteractionText) && !string.IsNullOrWhiteSpace(OnInteractionText))
