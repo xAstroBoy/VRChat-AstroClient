@@ -136,44 +136,6 @@
 			}, VrcBroadcastType.AlwaysUnbuffered, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, 0f);
 		}
 
-		private static System.Random random = new System.Random();
-
-		private string GetRandomName()
-		{
-			int rand = random.Next(0, 6);
-
-			return rand switch
-			{
-				0 => "USpeak",
-				1 => "AddHealth",
-				2 => "TeleportTo",
-				3 => "Indicator",
-				4 => "AddDamage",
-				5 => "DestroyObject",
-				6 => "Shit",
-				7 => "Cock",
-				8 => null,
-				_ => "",
-			};
-		}
-
-		private string GetRandomFunction()
-		{
-			int rand = random.Next(0, 6);
-
-			return rand switch
-			{
-				0 => "ReceiveVoiceStatsSyncRPC",
-				1 => "PhotoCapture",
-				2 => "InformOfBadConnection",
-				3 => "SuckMyPepe",
-				4 => "Smeckles",
-				5 => "Gringo",
-				6 => "Lol",
-				_ => null,
-			};
-		}
-
 		public System.Collections.IEnumerator Clap1()
 		{
 			for (int i = 0; i < int.MaxValue; i++)
