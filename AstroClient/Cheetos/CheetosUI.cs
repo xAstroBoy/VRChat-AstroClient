@@ -129,25 +129,25 @@
 			int i2 = 0;
 
 			StringBuilder stringBuilder = new StringBuilder();
-			
-			
+
+
 			//while (i2 <= 1000)
 			//{
 			//	stringBuilder.AppendLine("Test");
 			//	i2++;
 			//}
 
-				//handler.TriggerEvent(new VrcEvent
-				//{
-				//	EventType = VrcEventType.SendRPC,
-				//	Name = "SendRPC",
-				//	ParameterObject = handler.gameObject,
-				//	ParameterInt = Utils.LocalPlayer.playerId,
-				//	ParameterFloat = 0f,
-				//	ParameterString = "UdonSyncRunProgramAsRPC",
-				//	ParameterBoolOp = VrcBooleanOp.Unused,
-				//	ParameterBytes = Networking.EncodeParameters(new Il2CppSystem.Object[] { "boop" })
-				//}, VrcBroadcastType.AlwaysUnbuffered, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, 0f);
+			//handler.TriggerEvent(new VrcEvent
+			//{
+			//	EventType = VrcEventType.SendRPC,
+			//	Name = "SendRPC",
+			//	ParameterObject = handler.gameObject,
+			//	ParameterInt = Utils.LocalPlayer.playerId,
+			//	ParameterFloat = 0f,
+			//	ParameterString = "UdonSyncRunProgramAsRPC",
+			//	ParameterBoolOp = VrcBooleanOp.Unused,
+			//	ParameterBytes = Networking.EncodeParameters(new Il2CppSystem.Object[] { "boop" })
+			//}, VrcBroadcastType.AlwaysUnbuffered, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, 0f);
 			//foreach (var player in WorldUtils.GetAllPlayers0())
 			//{
 			//	handler.TriggerEvent(new VrcEvent
@@ -170,7 +170,7 @@
 		{
 			int rand = random.Next(0, 6);
 
-			switch(rand)
+			switch (rand)
 			{
 				case 0:
 					return "USpeak";
