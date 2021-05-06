@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	#region Imports
 	using AstroClient.ConsoleUtils;
 	using AstroClient.variables;
 	using RubyButtonAPI;
@@ -11,10 +12,7 @@
 	using static VRC.SDKBase.VRC_EventHandler;
 	using Il2CppSystem.Text;
 	using System.Threading;
-	using Il2CppSystem.Collections;
-	using MelonLoader;
-	using DayClientML2.Utility;
-	using System.Management;
+	#endregion
 
 	/// <summary>
 	/// Cheeto's temporary UI for new/wip features
