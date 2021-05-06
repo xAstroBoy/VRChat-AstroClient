@@ -12,6 +12,7 @@
 	using static VRC.SDKBase.VRC_EventHandler;
 	using Il2CppSystem.Text;
 	using System.Threading;
+	using AstroClient.Cheetos;
 	#endregion
 
 	/// <summary>
@@ -45,11 +46,17 @@
 				}, "Restart the game");
 				DisconectButton = new QMSingleButton(MainButton, 1, 0, "Disconnect", () => { AstroNetworkClient.Client.Disconnect(false); }, "Disconnect");
 				ReconnectButton = new QMSingleButton(MainButton, 1, 1, "Reconnect", () => { AstroNetworkClient.Client.Disconnect(true); }, "Reconnect");
+				new QMSingleButton(MainButton, 3, 1, "Create Button", () => { CreateButton(); }, ":3");
 				new QMSingleButton(MainButton, 3, 2, "Photon", () => { PrintPhotonPlayers(); }, "Photon");
 				new QMSingleButton(MainButton, 4, 0, "RPC Test #1", () => { RPCClapTest1(); }, "RPC");
 				new QMSingleButton(MainButton, 4, 1, "RPC Test #2", () => { RPCClapTest2(); }, "RPC");
 				new QMSingleButton(MainButton, 4, 2, "RPC Test #3", () => { RPCClapTest3(); }, "RPC");
 			}
+		}
+
+		private void CreateButton()
+		{
+			ButtonCreator.Create();
 		}
 
 		public VRC_EventHandler handler;
