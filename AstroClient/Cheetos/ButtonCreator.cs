@@ -5,9 +5,10 @@
 
 	public static class ButtonCreator
 	{
-		public static GameObject Create(Vector3 position, Quaternion rotation)
+		public static GameObject Create(string text, Vector3 position, Quaternion rotation)
 		{
 			var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+			go.name = "Button " + text;
 			go.transform.position = position;
 			go.transform.rotation = rotation;
 			go.transform.localScale = new Vector3(0.2f, 0.1f, 0.1f);
@@ -19,10 +20,10 @@
 			rect.transform.position = new Vector3(0, 0, -0.51f);
 			rect.transform.rotation = go.transform.rotation;
 			rect.transform.localScale = new Vector3(0.09999999f, 0.09999999f, 1);
-			var text = textObject.AddComponent<TextMeshPro>();
-			text.text = "Button";
-			text.color = Color.black;
-			text.autoSizeTextContainer = true;
+			var textComp = textObject.AddComponent<TextMeshPro>();
+			textComp.text = text;
+			textComp.color = Color.black;
+			textComp.autoSizeTextContainer = true;
 
 			return go;
 		}
