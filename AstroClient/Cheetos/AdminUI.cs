@@ -1,17 +1,8 @@
 ﻿namespace AstroClient
 {
 	#region Imports
-	using AstroClient.ConsoleUtils;
 	using AstroClient.variables;
 	using RubyButtonAPI;
-	using System.Diagnostics;
-	using System.IO;
-	using UnityEngine;
-	using DayClientML2.Utility.Extensions;
-	using VRC.SDKBase;
-	using static VRC.SDKBase.VRC_EventHandler;
-	using Il2CppSystem.Text;
-	using System.Threading;
 	#endregion
 
 	/// <summary>
