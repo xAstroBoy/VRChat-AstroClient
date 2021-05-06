@@ -189,33 +189,37 @@
 
 		public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
 		{
-			if (HasAmongUsWorldLoaded)
+			try
 			{
-				if (obj != null)
+				if (HasAmongUsWorldLoaded)
 				{
-					if (action.StartsWith("SyncAssign") && JarRoleController.GetLocalPlayerNode().Node != null)
+					if (obj != null)
 					{
-						if (RoleSwapper_GetImpostorRole)
+						if (action.StartsWith("SyncAssign") && JarRoleController.GetLocalPlayerNode().Node != null)
 						{
-							if (!SafetySwap) // In case it grabs and update the current ones already!
+							if (RoleSwapper_GetImpostorRole)
 							{
-								if (obj == JarRoleController.GetLocalPlayerNode().Node)
+								if (!SafetySwap) // In case it grabs and update the current ones already!
 								{
-									AssignedSelfRole = action;
-								}
+									if (obj == JarRoleController.GetLocalPlayerNode().Node)
+									{
+										AssignedSelfRole = action;
+									}
 
-								if (action == "SyncAssignM")
-								{
-									TargetNode = obj;
-									AssignedTargetRole = action;
-								}
+									if (action == "SyncAssignM")
+									{
+										TargetNode = obj;
+										AssignedTargetRole = action;
+									}
 
-								RoleSwapper_GetImpostorRole = SwapRoles(JarRoleController.GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+									RoleSwapper_GetImpostorRole = SwapRoles(JarRoleController.GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+								}
 							}
 						}
 					}
 				}
 			}
+			catch { }
 		}
 
 		public static bool SwapRoles(GameObject SelfNode, GameObject TargetNode, string AssignedSelfRole, string AssignedTargetRole)

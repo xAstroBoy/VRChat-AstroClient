@@ -120,53 +120,57 @@
 
 		public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
 		{
-			if (IsFreezeTag)
+			try
 			{
-				if (action == "netping")
+				if (IsFreezeTag)
 				{
-					return; // WTF THE SPAM WITH THIS SHIT ACTION WOT
-				}
-				if (SelfNode == null)
-				{
-					if (sender.DisplayName() == LocalPlayerUtils.GetSelfPlayer().DisplayName())
+					if (action == "netping")
 					{
-						if (obj.name.ToLower().Contains("tagplayerctrl") && action.ToLower().Contains("seestuck"))
+						return; // WTF THE SPAM WITH THIS SHIT ACTION WOT
+					}
+					if (SelfNode == null)
+					{
+						if (sender.DisplayName() == LocalPlayerUtils.GetSelfPlayer().DisplayName())
 						{
-							SelfNode = obj;
-							ModConsole.Log($"Found Self Assigned Node! {SelfNode.name}");
-							UnfreezeMeUdonEvent = UdonSearch.FindUdonEvent(SelfNode.name, "unfreezeme");
-							if (UnfreezeMeUdonEvent != null)
+							if (obj.name.ToLower().Contains("tagplayerctrl") && action.ToLower().Contains("seestuck"))
 							{
-								ModConsole.Log("Found Self Unfreeze Event!");
+								SelfNode = obj;
+								ModConsole.Log($"Found Self Assigned Node! {SelfNode.name}");
+								UnfreezeMeUdonEvent = UdonSearch.FindUdonEvent(SelfNode.name, "unfreezeme");
+								if (UnfreezeMeUdonEvent != null)
+								{
+									ModConsole.Log("Found Self Unfreeze Event!");
+								}
+							}
+						}
+					}
+
+					if (SelfNode != null)
+					{
+						if (AutomaticallyUnfreeze)
+						{
+							if (obj.name.ToLower() == SelfNode.name.ToLower() && action.ToLower() == "freezeme")
+							{
+								MiscUtility.DelayFunction(0.01f, new Action(() =>
+								{
+									if (UnfreezeMeUdonEvent != null)
+									{
+										UnfreezeMeUdonEvent.ExecuteUdonEvent();
+										ModConsole.Log("Detected Freeze!, Unfreezing!", System.Drawing.Color.LawnGreen);
+									}
+									else
+									{
+										UnfreezeMeUdonEvent = UdonSearch.FindUdonEvent(SelfNode, "unfreezeme");
+										UnfreezeMeUdonEvent.ExecuteUdonEvent();
+										ModConsole.Log("Detected Freeze!, Unfreezing!", System.Drawing.Color.LawnGreen);
+									}
+								}));
 							}
 						}
 					}
 				}
-
-				if (SelfNode != null)
-				{
-					if (AutomaticallyUnfreeze)
-					{
-						if (obj.name.ToLower() == SelfNode.name.ToLower() && action.ToLower() == "freezeme")
-						{
-							MiscUtility.DelayFunction(0.01f, new Action(() =>
-							{
-								if (UnfreezeMeUdonEvent != null)
-								{
-									UnfreezeMeUdonEvent.ExecuteUdonEvent();
-									ModConsole.Log("Detected Freeze!, Unfreezing!", System.Drawing.Color.LawnGreen);
-								}
-								else
-								{
-									UnfreezeMeUdonEvent = UdonSearch.FindUdonEvent(SelfNode, "unfreezeme");
-									UnfreezeMeUdonEvent.ExecuteUdonEvent();
-									ModConsole.Log("Detected Freeze!, Unfreezing!", System.Drawing.Color.LawnGreen);
-								}
-							}));
-						}
-					}
-				}
 			}
+			catch { }
 		}
 	}
 }

@@ -535,48 +535,52 @@
 
 		public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
 		{
-			if (HasMurder4WorldLoaded)
+			try
 			{
-				if (obj != null && action.StartsWith("SyncAssign") && JarRoleController.GetLocalPlayerNode().Node != null)
+				if (HasMurder4WorldLoaded)
 				{
-					if (RoleSwapper_GetDetectiveRole)
+					if (obj != null && action.StartsWith("SyncAssign") && JarRoleController.GetLocalPlayerNode().Node != null)
 					{
-						if (!SafetySwap)
+						if (RoleSwapper_GetDetectiveRole)
 						{
-							if (obj == JarRoleController.GetLocalPlayerNode().Node)
+							if (!SafetySwap)
 							{
-								AssignedSelfRole = action;
-							}
+								if (obj == JarRoleController.GetLocalPlayerNode().Node)
+								{
+									AssignedSelfRole = action;
+								}
 
-							if (action == "SyncAssignD")
-							{
-								TargetNode = obj;
-								AssignedTargetRole = action;
-							}
+								if (action == "SyncAssignD")
+								{
+									TargetNode = obj;
+									AssignedTargetRole = action;
+								}
 
-							RoleSwapper_GetDetectiveRole = SwapRoles(JarRoleController.GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+								RoleSwapper_GetDetectiveRole = SwapRoles(JarRoleController.GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+							}
 						}
-					}
-					else if (RoleSwapper_GetMurdererRole)
-					{
-						if (!SafetySwap) // In case it grabs and update the current ones already!
+						else if (RoleSwapper_GetMurdererRole)
 						{
-							if (obj == JarRoleController.GetLocalPlayerNode().Node)
+							if (!SafetySwap) // In case it grabs and update the current ones already!
 							{
-								AssignedSelfRole = action;
-							}
+								if (obj == JarRoleController.GetLocalPlayerNode().Node)
+								{
+									AssignedSelfRole = action;
+								}
 
-							if (action == "SyncAssignM")
-							{
-								TargetNode = obj;
-								AssignedTargetRole = action;
-							}
+								if (action == "SyncAssignM")
+								{
+									TargetNode = obj;
+									AssignedTargetRole = action;
+								}
 
-							RoleSwapper_GetMurdererRole = SwapRoles(JarRoleController.GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+								RoleSwapper_GetMurdererRole = SwapRoles(JarRoleController.GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+							}
 						}
 					}
 				}
 			}
+			catch { }
 		}
 
 		public static bool SwapRoles(GameObject SelfNode, GameObject TargetNode, string AssignedSelfRole, string AssignedTargetRole)
@@ -674,6 +678,13 @@
 					if (DetectiveGunPerkUnlocker != null)
 					{
 						DetectiveGunPerkUnlocker.SendPublicPatreonSkinEvent();
+					}
+				}
+				else
+				{
+					if (DetectiveGunPerkUnlocker != null)
+					{
+						DetectiveGunPerkUnlocker.SendPublicNonPatreonSkinEvent();
 					}
 				}
 			}
