@@ -230,6 +230,10 @@
 					{
 						if (Entry != null)
 						{
+							if(Entry == PlayerEntries) // CRITICAL AS THE GETCOMPONENTSINCHILDREN INCLUDE THE PARENT APPARENTLY AS WELL
+							{
+								continue;
+							}
 							if (Entry.name.StartsWith("Player Entry"))
 							{
 								//Debug($"Found Entry : {Entry.name}, Finding Link in Nodes...");
@@ -240,11 +244,11 @@
 									{
 										if (node != null)
 										{
-											if(node.name.Equals("Player Nodes"))
-											{
-												continue;
-											}
-											if(node == GameNodes)
+											//if(node.name.Equals("Player Nodes"))
+											//{
+											//	continue;
+											//}
+											if(node == GameNodes) // CRITICAL AS THE GETCOMPONENTSINCHILDREN INCLUDE THE PARENT APPARENTLY AS WELL
 											{
 												continue;
 											}
