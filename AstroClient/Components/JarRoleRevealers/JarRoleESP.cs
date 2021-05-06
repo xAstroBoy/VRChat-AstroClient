@@ -98,163 +98,175 @@
 
 		public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
 		{
-			if (sender == null)
+			try
 			{
-				return;
-			}
-			if (obj == null)
-			{
-				return;
-			}
-			if (string.IsNullOrEmpty(action))
-			{
-				return;
-			}
-			if (string.IsNullOrWhiteSpace(action))
-			{
-				return;
-			}
-
-
-			if (Internal_player != null)
-			{
-				if (sender != null)
+				if (sender == null)
 				{
-					ModConsole.DebugLog($"JarRoleESP : {sender.DisplayName()} Sent RPC on Node {obj.name} , Matching {Internal_AssignedNode.name} assigned to {Internal_player.DisplayName()}, Having action {action}");
+					return;
 				}
-				else
+				if (obj == null)
 				{
-					ModConsole.DebugLog($"JarRoleESP : Detected RPC on Node {obj.name} , Matching {Internal_AssignedNode.name} assigned to {Internal_player.DisplayName()} , Having action {action}");
-
+					return;
 				}
-			}
-
-			if (obj != null)
-			{
-				if (isAmongUsWorld)
+				if (string.IsNullOrEmpty(action))
 				{
-					if (Internal_AssignedNode != null)
+					return;
+				}
+				if (string.IsNullOrWhiteSpace(action))
+				{
+					return;
+				}
+
+
+				if (Internal_player != null)
+				{
+					if (sender != null)
 					{
-
-						if (obj.Equals(Internal_AssignedNode))
-						{
-
-							if (action == "SyncAssignB")
-							{
-								AmongUsCurrentRole = AmongUsRoles.Crewmate;
-								if (!isRPCActive)
-								{
-									isRPCActive = true;
-								}
-							}
-							else if (action == "SyncAssignM")
-							{
-								AmongUsCurrentRole = AmongUsRoles.Impostor;
-								if (!isRPCActive)
-								{
-									isRPCActive = true;
-								}
-							}
-							else if (action == "SyncKill")
-							{
-								AmongUsCurrentRole = AmongUsRoles.None;
-								AmongUSHasVoted = false;
-								if (!isRPCActive)
-								{
-									isRPCActive = true;
-								}
-							}
-							else if (action == "SyncVotedOut")
-							{
-								AmongUsCurrentRole = AmongUsRoles.None;
-								AmongUSHasVoted = false;
-								if (!isRPCActive)
-								{
-									isRPCActive = true;
-								}
-							}
-							else if (action.Contains("SyncVotedFor"))
-							{
-								var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
-								if (against != null)
-								{
-									if (against != GetLocalPlayerNode())
-									{
-										SetTag(AmongUSVoteRevealTag, $"Voted: {against.Apiuser.displayName}", Color.white, ColorUtils.HexToColor("#44DBAC"));
-									}
-									else
-									{
-										SetTag(AmongUSVoteRevealTag, $"Voted: {against.Apiuser.displayName}", Color.white, ColorUtils.HexToColor("#C22B26"));
-									}
-								}
-								AmongUSHasVoted = true;
-								if (!isRPCActive)
-								{
-									isRPCActive = true;
-								}
-							}
-							else if (action.Equals("SyncAbstainedVoting"))
-							{
-								AmongUSHasVoted = true;
-								SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
-								if (!isRPCActive)
-								{
-									isRPCActive = true;
-								}
-							}
-						}
+						ModConsole.DebugLog($"JarRoleESP : {sender.DisplayName()} Sent RPC on Node {obj.name} , Matching {Internal_AssignedNode.name} assigned to {Internal_player.DisplayName()}, Having action {action}");
 					}
-
-					if (action.Equals("SyncEndVotingPhase") || action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
+					else
 					{
-						AmongUSHasVoted = false;
-						if (AmongUSVoteRevealTag != null)
+						ModConsole.DebugLog($"JarRoleESP : Detected RPC on Node {obj.name} , Matching {Internal_AssignedNode.name} assigned to {Internal_player.DisplayName()} , Having action {action}");
+
+					}
+				}
+
+				if (obj != null)
+				{
+					if (isAmongUsWorld)
+					{
+						if (Internal_AssignedNode != null)
 						{
-							SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
+
+							if (obj.Equals(Internal_AssignedNode))
+							{
+
+								if (action == "SyncAssignB")
+								{
+									AmongUsCurrentRole = AmongUsRoles.Crewmate;
+									if (!isRPCActive)
+									{
+										isRPCActive = true;
+									}
+								}
+								else if (action == "SyncAssignM")
+								{
+									AmongUsCurrentRole = AmongUsRoles.Impostor;
+									if (!isRPCActive)
+									{
+										isRPCActive = true;
+									}
+								}
+								else if (action == "SyncKill")
+								{
+									AmongUsCurrentRole = AmongUsRoles.None;
+									AmongUSHasVoted = false;
+									if (!isRPCActive)
+									{
+										isRPCActive = true;
+									}
+								}
+								else if (action == "SyncVotedOut")
+								{
+									AmongUsCurrentRole = AmongUsRoles.None;
+									AmongUSHasVoted = false;
+									if (!isRPCActive)
+									{
+										isRPCActive = true;
+									}
+								}
+								else if (action.Contains("SyncVotedFor"))
+								{
+									var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
+									if (against != null)
+									{
+										if (against != GetLocalPlayerNode())
+										{
+											SetTag(AmongUSVoteRevealTag, $"Voted: {against.Apiuser.displayName}", Color.white, ColorUtils.HexToColor("#44DBAC"));
+										}
+										else
+										{
+											SetTag(AmongUSVoteRevealTag, $"Voted: {against.Apiuser.displayName}", Color.white, ColorUtils.HexToColor("#C22B26"));
+										}
+									}
+									AmongUSHasVoted = true;
+									if (!isRPCActive)
+									{
+										isRPCActive = true;
+									}
+								}
+								else if (action.Equals("SyncAbstainedVoting"))
+								{
+									AmongUSHasVoted = true;
+									SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
+									if (!isRPCActive)
+									{
+										isRPCActive = true;
+									}
+								}
+							}
 						}
-						if (action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
+
+						if (action.Equals("SyncEndVotingPhase") || action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
 						{
-							AmongUsCurrentRole = AmongUsRoles.None;
 							AmongUSHasVoted = false;
-						}
-						if (!isRPCActive)
-						{
-							isRPCActive = true;
+							if (AmongUSVoteRevealTag != null)
+							{
+								SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
+							}
+							if (action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
+							{
+								AmongUsCurrentRole = AmongUsRoles.None;
+								AmongUSHasVoted = false;
+							}
+							if (!isRPCActive)
+							{
+								isRPCActive = true;
+							}
 						}
 					}
-				}
-				else if (IsMurder4World)
-				{
-					if (Internal_AssignedNode != null)
+					else if (IsMurder4World)
 					{
-
-						if (obj.Equals(Internal_AssignedNode))
+						if (Internal_AssignedNode != null)
 						{
-							if (action == "SyncAssignB")
+
+							if (obj.Equals(Internal_AssignedNode))
 							{
-								Murder4CurrentRole = Murder4Roles.Bystander;
-								if (!isRPCActive)
+								if (action == "SyncAssignB")
 								{
-									isRPCActive = true;
+									Murder4CurrentRole = Murder4Roles.Bystander;
+									if (!isRPCActive)
+									{
+										isRPCActive = true;
+									}
+								}
+								else if (action == "SyncAssignD")
+								{
+									Murder4CurrentRole = Murder4Roles.Detective;
+									if (!isRPCActive)
+									{
+										isRPCActive = true;
+									}
+								}
+								else if (action == "SyncAssignM")
+								{
+									Murder4CurrentRole = Murder4Roles.Murderer;
+									if (!isRPCActive)
+									{
+										isRPCActive = true;
+									}
+								}
+								else if (action == "SyncKill")
+								{
+									Murder4CurrentRole = Murder4Roles.None;
+									if (!isRPCActive)
+									{
+										isRPCActive = true;
+									}
 								}
 							}
-							else if (action == "SyncAssignD")
-							{
-								Murder4CurrentRole = Murder4Roles.Detective;
-								if (!isRPCActive)
-								{
-									isRPCActive = true;
-								}
-							}
-							else if (action == "SyncAssignM")
-							{
-								Murder4CurrentRole = Murder4Roles.Murderer;
-								if (!isRPCActive)
-								{
-									isRPCActive = true;
-								}
-							}
-							else if (action == "SyncKill")
+
+							if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action == "SyncAbort" || action.Equals("SyncStart"))
 							{
 								Murder4CurrentRole = Murder4Roles.None;
 								if (!isRPCActive)
@@ -263,19 +275,13 @@
 								}
 							}
 						}
-
-						if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action == "SyncAbort" || action.Equals("SyncStart"))
-						{
-							Murder4CurrentRole = Murder4Roles.None;
-							if (!isRPCActive)
-							{
-								isRPCActive = true;
-							}
-						}
 					}
 				}
 			}
-
+			catch (Exception e)
+			{
+				ModConsole.DebugErrorExc(e);
+			}
 		}
 
 
