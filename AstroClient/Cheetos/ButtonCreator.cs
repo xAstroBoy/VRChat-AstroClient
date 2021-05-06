@@ -13,12 +13,12 @@
 			go.transform.localScale = new Vector3(0.2f, 0.1f, 0.1f);
 
 			var textObject = new GameObject("Text");
+			textObject.transform.parent = go.transform;
 			var rect = textObject.AddComponent<RectTransform>();
 			rect.sizeDelta = new Vector2(1f, 1f);
-			rect.transform.position = go.transform.position;
+			rect.transform.position = new Vector3(0, 0, -0.51f);
 			rect.transform.rotation = go.transform.rotation;
 			rect.transform.localScale = new Vector3(0.09999999f, 0.09999999f, 1);
-			rect.transform.position += new Vector3(0, 0, -0.51f);
 			var text = textObject.AddComponent<TextMeshPro>();
 			text.text = "Button";
 			text.color = Color.black;
