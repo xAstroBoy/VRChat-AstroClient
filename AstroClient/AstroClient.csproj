@@ -113,6 +113,7 @@
     <Compile Include="Cheetos\AvatarHider.cs" />
     <Compile Include="Cheetos\CheetoMenu.cs" />
     <Compile Include="Cheetos\CheetosHelpers.cs" />
+    <Compile Include="Cheetos\AdminUI.cs" />
     <Compile Include="Cheetos\VRCPlusHider.cs" />
     <Compile Include="Cheetos\CheetosTestStuff.cs" />
     <Compile Include="Cheetos\CheetosUI.cs" />
