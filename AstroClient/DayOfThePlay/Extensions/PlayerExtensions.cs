@@ -12,17 +12,17 @@
 
 		public static APIUser GetAPIUser(this Player Instance)
 		{
-			return Instance == null ? null : Instance.prop_APIUser_0;
+			return Instance?.prop_APIUser_0;
 		}
 
 		public static APIUser GetAPIUser(this VRCPlayer Instance)
 		{
-			return Instance == null ? null : Instance.GetPlayer().GetAPIUser();
+			return Instance?.GetPlayer().GetAPIUser();
 		}
 
 		public static APIUser GetAPIUser(this PlayerNet Instance)
 		{
-			return Instance == null ? null : Instance.GetPlayer().GetAPIUser();
+			return Instance?.GetPlayer().GetAPIUser();
 		}
 
 		#endregion ApiUser
@@ -31,12 +31,12 @@
 
 		public static Player GetPlayer(this VRCPlayer Instance)
 		{
-			return Instance == null ? null : Instance._player;
+			return Instance?._player;
 		}
 
 		public static Player GetPlayer(this PlayerNet Instance)
 		{
-			return Instance == null ? null : Instance.prop_Player_0;
+			return Instance?.prop_Player_0;
 		}
 
 		public static Player GetPlayer(this VRCPlayerApi Instance)
@@ -55,12 +55,12 @@
 
 		public static VRCPlayer GetVRCPlayer(this Player Instance)
 		{
-			return Instance == null ? null : Instance._vrcplayer;
+			return Instance?._vrcplayer;
 		}
 
 		public static VRCPlayer GetVRCPlayer(this PlayerNet Instance)
 		{
-			return Instance == null ? null : Instance._vrcPlayer;
+			return Instance?._vrcPlayer;
 		}
 
 		public static VRCPlayer GetVRCPlayer(this VRCPlayerApi Instance)
@@ -74,17 +74,17 @@
 
 		public static VRCPlayerApi GetVRCPlayerApi(this Player Instance)
 		{
-			return Instance == null ? null : Instance.prop_VRCPlayerApi_0;
+			return Instance?.prop_VRCPlayerApi_0;
 		}
 
 		public static VRCPlayerApi GetVRCPlayerApi(this VRCPlayer Instance)
 		{
-			return Instance == null ? null : Instance.prop_VRCPlayerApi_0;
+			return Instance?.prop_VRCPlayerApi_0;
 		}
 
 		public static VRCPlayerApi GetVRCPlayerApi(this PlayerNet Instance)
 		{
-			return Instance == null ? null : Instance.GetVRCPlayer().GetVRCPlayerApi();
+			return Instance?.GetVRCPlayer().GetVRCPlayerApi();
 		}
 
 		#endregion VRCPlayerAPI
@@ -93,12 +93,12 @@
 
 		public static PlayerNet GetPlayerNet(this Player Instance)
 		{
-			return Instance == null ? null : Instance.prop_PlayerNet_0;
+			return Instance?.prop_PlayerNet_0;
 		}
 
 		public static PlayerNet GetPlayerNet(this VRCPlayer Instance)
 		{
-			return Instance == null ? null : Instance.prop_PlayerNet_0;
+			return Instance?.prop_PlayerNet_0;
 		}
 
 		#endregion PlayerNet
