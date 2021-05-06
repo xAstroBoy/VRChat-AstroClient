@@ -77,29 +77,13 @@
 
 		public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
 		{
-			if (!IgnoreEventReceiver)
+			try
 			{
-				if (obj == LocalObject)
+				if (!IgnoreEventReceiver)
 				{
-					if (Murder4Cheats.EveryoneHasPatreonPerk)
+					if (obj == LocalObject)
 					{
-						if (action == _SyncNonPatronSkin.EventKey)
-						{
-							// Fight back by disabling receiver and sending a delayed event after.
-							MiscUtility.DelayFunction(0.2f, new Action(() =>
-							{
-								if (_SyncPatronSkin != null)
-								{
-									IgnoreEventReceiver = true;
-									_SyncPatronSkin.ExecuteUdonEvent();
-									IgnoreEventReceiver = false;
-								}
-							}));
-						}
-					}
-					if (Murder4Cheats.OnlySelfHasPatreonPerk)
-					{
-						if (sender == LocalPlayerUtils.GetSelfPlayer())
+						if (Murder4Cheats.EveryoneHasPatreonPerk)
 						{
 							if (action == _SyncNonPatronSkin.EventKey)
 							{
@@ -115,9 +99,29 @@
 								}));
 							}
 						}
+						if (Murder4Cheats.OnlySelfHasPatreonPerk)
+						{
+							if (sender == LocalPlayerUtils.GetSelfPlayer())
+							{
+								if (action == _SyncNonPatronSkin.EventKey)
+								{
+									// Fight back by disabling receiver and sending a delayed event after.
+									MiscUtility.DelayFunction(0.2f, new Action(() =>
+									{
+										if (_SyncPatronSkin != null)
+										{
+											IgnoreEventReceiver = true;
+											_SyncPatronSkin.ExecuteUdonEvent();
+											IgnoreEventReceiver = false;
+										}
+									}));
+								}
+							}
+						}
 					}
 				}
 			}
+			catch { }
 		}
 
 		internal void SendPublicPatreonSkinEvent()
@@ -129,6 +133,37 @@
 				IgnoreEventReceiver = false;
 			}
 		}
+
+		internal void SendPublicNonPatreonSkinEvent()
+		{
+			if (_SyncPatronSkin != null)
+			{
+				IgnoreEventReceiver = true;
+				_SyncNonPatronSkin.ExecuteUdonEvent();
+				IgnoreEventReceiver = false;
+			}
+		}
+
+
+		internal void SendOnlySelfNonPatreonSkinEvent()
+		{
+			if (pickup != null)
+			{
+				if (pickup.isHeld)
+				{
+					if (pickup.CurrentObjectHolderPlayer == LocalPlayerUtils.GetSelfVRCPlayerApi())
+					{
+						if (_SyncPatronSkin != null)
+						{
+							IgnoreEventReceiver = true;
+							_SyncNonPatronSkin.ExecuteUdonEvent();
+							IgnoreEventReceiver = false;
+						}
+					}
+				}
+			}
+		}
+
 
 		internal void SendOnlySelfPatreonSkinEvent()
 		{
