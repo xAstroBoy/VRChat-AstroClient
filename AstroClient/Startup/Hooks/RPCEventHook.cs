@@ -61,6 +61,7 @@
 			string parameter = string.Empty;
 			string eventtype = string.Empty;
 			string broadcasttype = string.Empty;
+			string sender = string.Empty;
 
 			if (__0 == null || __1 == null || __2 == null)
 			{
@@ -140,12 +141,27 @@
 			{
 				GameObjName = "null";
 			}
+			if(__0 != null)
+			{
+				if(__0.GetAPIUser() != null)
+				{
+					sender = __0.GetAPIUser().displayName;
+				}
+				else
+				{
+					sender = "null";
+				}
+			}
+			else
+			{
+				sender = "null";
+			}
 
 			if (parameter.Equals("UdonSyncRunProgramAsRPC"))
 			{
 				if (ConfigManager.General.LogUdonEvents)
 				{
-					ModConsole.DebugLog($"Udon RPC: Sender : {__0.DisplayName()} , GameObject : {GameObjName}, Action : {actiontext}");
+					ModConsole.DebugLog($"Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
 				}
 
 				Event_OnUdonSyncRPC?.Invoke(null, new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
@@ -155,7 +171,7 @@
 			{
 				if (parameter != "UdonSyncRunProgramAsRPC")
 				{
-					ModConsole.DebugLog($"RPC: {__0.DisplayName()}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
+					ModConsole.DebugLog($"RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
 				}
 			}
 
