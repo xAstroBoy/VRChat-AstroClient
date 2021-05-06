@@ -59,27 +59,8 @@
 		[HideFromIl2Cpp]
 		private void Internal_OnUdonSyncRPCEvent(object sender, UdonSyncRPCEventArgs e)
 		{
-			if(e.sender == null)
-			{
-				return;
-			}
-			if(e.obj == null)
-			{
-				return;
-			}
-			if(string.IsNullOrEmpty(e.action))
-			{
-				return;
-			}
-			if (string.IsNullOrWhiteSpace(e.action))
-			{
-				return;
-			}
-			MiscUtility.DelayFunction(0.5f, new Action(() =>
-			{
-				OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
+			OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
 
-			}));
 		}
 
 		[HideFromIl2Cpp]
