@@ -57,7 +57,8 @@
 		private void CreateButton()
 		{
 			var buttonPosition = LocalPlayerUtils.CenterOfPlayer();
-			ButtonCreator.Create(buttonPosition);
+			var buttonRotation = LocalPlayerUtils.GetSelfPlayer().gameObject.transform.rotation;
+			ButtonCreator.Create(buttonPosition, buttonRotation);
 		}
 
 		public VRC_EventHandler handler;
