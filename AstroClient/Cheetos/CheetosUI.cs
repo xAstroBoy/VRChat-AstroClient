@@ -123,43 +123,17 @@
 
 		public void RPCSendMessage(string msg)
 		{
-			int i = 0;
-			int i2 = 0;
-
-			StringBuilder stringBuilder = new StringBuilder();
-
-
-			//while (i2 <= 1000)
-			//{
-			//	stringBuilder.AppendLine("Test");
-			//	i2++;
-			//}
-
-			//handler.TriggerEvent(new VrcEvent
-			//{
-			//	EventType = VrcEventType.SendRPC,
-			//	Name = "SendRPC",
-			//	ParameterObject = handler.gameObject,
-			//	ParameterInt = Utils.LocalPlayer.playerId,
-			//	ParameterFloat = 0f,
-			//	ParameterString = "UdonSyncRunProgramAsRPC",
-			//	ParameterBoolOp = VrcBooleanOp.Unused,
-			//	ParameterBytes = Networking.EncodeParameters(new Il2CppSystem.Object[] { "boop" })
-			//}, VrcBroadcastType.AlwaysUnbuffered, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, 0f);
-			//foreach (var player in WorldUtils.GetAllPlayers0())
-			//{
-			//	handler.TriggerEvent(new VrcEvent
-			//	{
-			//		EventType = VrcEventType.SendMessage,
-			//		Name = null,
-			//		ParameterObject = null,
-			//		ParameterInt = 0,
-			//		ParameterFloat = 0f,
-			//		ParameterString = null,
-			//		ParameterBoolOp = VrcBooleanOp.Unused,
-			//		ParameterBytes = null
-			//	}, VrcBroadcastType.AlwaysUnbuffered, Utils.LocalPlayer.gameObject, float.MinValue);
-			//}
+			handler.TriggerEvent(new VrcEvent
+			{
+				EventType = VrcEventType.SendRPC,
+				Name = "SendRPC",
+				ParameterObject = handler.gameObject,
+				ParameterInt = Utils.LocalPlayer.playerId,
+				ParameterFloat = 0f,
+				ParameterString = "UdonSyncRunProgramAsRPC",
+				ParameterBoolOp = VrcBooleanOp.Unused,
+				ParameterBytes = Networking.EncodeParameters(new Il2CppSystem.Object[] { msg })
+			}, VrcBroadcastType.AlwaysUnbuffered, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, 0f);
 		}
 
 		private static System.Random random = new System.Random();
