@@ -240,6 +240,14 @@
 									{
 										if (node != null)
 										{
+											if(node.name.Equals("Player Nodes"))
+											{
+												continue;
+											}
+											if(node == GameNodes)
+											{
+												continue;
+											}
 											int? NodeNumber = RemoveNodeText(node);
 											if (NodeNumber != null)
 											{
