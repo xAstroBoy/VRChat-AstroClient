@@ -532,22 +532,18 @@
 			}
 		}
 
-		private static JarRoleESP GetLocalPlayerNode()
-		{
-			return JarRoleController.RoleEspComponents.Where(x => x.apiuser.displayName == LocalPlayerUtils.GetSelfPlayer().DisplayName()).First();
-		}
 
 		public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
 		{
 			if (HasMurder4WorldLoaded)
 			{
-				if (obj != null && action.StartsWith("SyncAssign") && GetLocalPlayerNode().Node != null)
+				if (obj != null && action.StartsWith("SyncAssign") && JarRoleController.GetLocalPlayerNode().Node != null)
 				{
 					if (RoleSwapper_GetDetectiveRole)
 					{
 						if (!SafetySwap)
 						{
-							if (obj == GetLocalPlayerNode().Node)
+							if (obj == JarRoleController.GetLocalPlayerNode().Node)
 							{
 								AssignedSelfRole = action;
 							}
@@ -558,14 +554,14 @@
 								AssignedTargetRole = action;
 							}
 
-							RoleSwapper_GetDetectiveRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+							RoleSwapper_GetDetectiveRole = SwapRoles(JarRoleController.GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
 						}
 					}
 					else if (RoleSwapper_GetMurdererRole)
 					{
 						if (!SafetySwap) // In case it grabs and update the current ones already!
 						{
-							if (obj == GetLocalPlayerNode().Node)
+							if (obj == JarRoleController.GetLocalPlayerNode().Node)
 							{
 								AssignedSelfRole = action;
 							}
@@ -576,7 +572,7 @@
 								AssignedTargetRole = action;
 							}
 
-							RoleSwapper_GetMurdererRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+							RoleSwapper_GetMurdererRole = SwapRoles(JarRoleController.GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
 						}
 					}
 				}

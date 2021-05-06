@@ -166,10 +166,6 @@
 			GameVictoryImpostorBtn = new QMSingleButton(AmongUsCheatsPage, 1, 2.5f, "Victory Impostor", new Action(() => { VictoryImpostorEvent.ExecuteUdonEvent(); }), "Force Victory Impostor Event", null, Color.red, true);
 		}
 
-		private static JarRoleESP GetLocalPlayerNode()
-		{
-			return JarRoleController.RoleEspComponents.Where(x => x.apiuser.displayName == LocalPlayerUtils.GetSelfPlayer().DisplayName()).First();
-		}
 
 		public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
 		{
@@ -177,13 +173,13 @@
 			{
 				if (obj != null)
 				{
-					if (action.StartsWith("SyncAssign") && GetLocalPlayerNode().Node != null)
+					if (action.StartsWith("SyncAssign") && JarRoleController.GetLocalPlayerNode().Node != null)
 					{
 						if (RoleSwapper_GetImpostorRole)
 						{
 							if (!SafetySwap) // In case it grabs and update the current ones already!
 							{
-								if (obj == GetLocalPlayerNode().Node)
+								if (obj == JarRoleController.GetLocalPlayerNode().Node)
 								{
 									AssignedSelfRole = action;
 								}
@@ -194,7 +190,7 @@
 									AssignedTargetRole = action;
 								}
 
-								RoleSwapper_GetImpostorRole = SwapRoles(GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+								RoleSwapper_GetImpostorRole = SwapRoles(JarRoleController.GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
 							}
 						}
 					}

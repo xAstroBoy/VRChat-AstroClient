@@ -23,6 +23,7 @@
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Reflection;
+	using UnhollowerBaseLib;
 	using UnityEngine;
 	using UnityEngine.UI;
 	using Console = CheetosConsole.Console;
@@ -45,6 +46,7 @@
 
 		public override void OnApplicationStart()
 		{
+			LogSupport.RemoveAllHandlers();
 			ConfigManager.Validate();
 			ConfigManager.Load();
 

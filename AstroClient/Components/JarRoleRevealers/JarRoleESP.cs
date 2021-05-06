@@ -27,8 +27,7 @@
 		// Use this for initialization
 		public void Start()
 		{
-			try
-			{
+
 				var p = GetComponent<Player>();
 				if (p != null)
 				{
@@ -38,13 +37,17 @@
 				{
 					UnityEngine.Object.Destroy(this);
 				}
-
+				isRPCActive = false;
 				if (Internal_player != null)
 				{
 					if (Internal_player.prop_APIUser_0 != null)
 					{
 						Internal_user = Internal_player.prop_APIUser_0;
 					}
+				}
+				if (Internal_AssignedEntry == null)
+				{
+					FindEntryWithUser();
 				}
 				GameRoleTag = SingleTagsUtils.AddSingleTag(Internal_player);
 				if (isAmongUsWorld)
@@ -75,22 +78,16 @@
 					AmongUsCurrentRole = AmongUsRoles.Unassigned;
 					ModConsole.DebugLog("Registered " + Internal_user.displayName + " On Among US Role ESP.");
 				}
-			}
-			catch (Exception e)
-			{
-				ModConsole.Error("[Murder4RoleRevealer] :  Error Registering Player " + this.GetComponent<Player>().prop_APIUser_0.displayName + " : " + e);
-			}
+			
 		}
 
-		private bool JarRoleEspDebug = false;
-
-		[HideFromIl2Cpp]
+		
 		private static JarRoleESP TranslateSyncVotedFor(int value)
 		{
 			return RoleEspComponents.Where(x => x.LinkedEntry.nodevalue == value).First();
 		}
 
-		[HideFromIl2Cpp]
+		
 		private static int RemoveSyncVotedForText(string key)
 		{
 			var removedtext = key.ToLower().Replace("syncvotedfor", string.Empty).Replace(" ", string.Empty);
@@ -98,136 +95,166 @@
 			return value;
 		}
 
-		[HideFromIl2Cpp]
+		
 		public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
 		{
-			try {
-				if (obj != null)
+			if (Internal_player != null)
+			{
+				if (sender != null)
 				{
-					if (isAmongUsWorld)
+					ModConsole.DebugLog($"JarRoleESP : {sender.DisplayName()} Sent RPC on Node {obj.name} , Matching {Internal_AssignedNode.name} assigned to {Internal_player.DisplayName()}, Having action {action}");
+				}
+				else
+				{
+					ModConsole.DebugLog($"JarRoleESP : Detected RPC on Node {obj.name} , Matching {Internal_AssignedNode.name} assigned to {Internal_player.DisplayName()} , Having action {action}");
+
+				}
+			}
+
+			if (obj != null)
+			{
+				if (isAmongUsWorld)
+				{
+					if (Internal_AssignedNode != null)
 					{
-						if (Internal_AssignedPlayerNode != null)
-						{
-							ModConsole.DebugLog($"JarRoleESP :  Detected RPC on Node {obj.name} , Matching {Internal_AssignedPlayerNode.name} , Having action {action}");
 
-							if (obj == Internal_AssignedPlayerNode)
-							{
-								if (action == "SyncAssignB")
-								{
-									AmongUsCurrentRole = AmongUsRoles.Crewmate;
-								}
-								else if (action == "SyncAssignM")
-								{
-									AmongUsCurrentRole = AmongUsRoles.Impostor;
-								}
-								else if (action == "SyncKill")
-								{
-									AmongUsCurrentRole = AmongUsRoles.None;
-									AmongUSHasVoted = false;
-								}
-								else if (action.Contains("SyncVotedFor"))
-								{
-									var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
-									if (against != null)
-									{
-										if (against != GetLocalPlayerNode())
-										{
-											SetTag(AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorUtils.HexToColor("#44DBAC"));
-										}
-										else
-										{
-											SetTag(AmongUSVoteRevealTag, $"Voted: {against.apiuser.displayName}", Color.white, ColorUtils.HexToColor("#C22B26"));
-										}
-									}
-									AmongUSHasVoted = true;
-								}
-								else if (action.Equals("SyncAbstainedVoting"))
-								{
-									AmongUSHasVoted = true;
-									SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
-								}
-							}
-						}
-						else
+						if (obj.Equals(Internal_AssignedNode))
 						{
-							if (Internal_player != null)
-							{
-								ModConsole.DebugError($"JarRoleESP : AssignedPlayerNode is Null on player  {Internal_player.DisplayName()}");
-							}
-						}
-						if (action.Equals("SyncEndVotingPhase") || action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
-						{
-							AmongUSHasVoted = false;
-							if (AmongUSVoteRevealTag != null)
-							{
-								SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
 
+							if (action == "SyncAssignB")
+							{
+								AmongUsCurrentRole = AmongUsRoles.Crewmate;
+								if (!isRPCActive)
+								{
+									isRPCActive = true;
+								}
 							}
-							if (action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
+							else if (action == "SyncAssignM")
+							{
+								AmongUsCurrentRole = AmongUsRoles.Impostor;
+								if (!isRPCActive)
+								{
+									isRPCActive = true;
+								}
+							}
+							else if (action == "SyncKill")
 							{
 								AmongUsCurrentRole = AmongUsRoles.None;
 								AmongUSHasVoted = false;
+								if (!isRPCActive)
+								{
+									isRPCActive = true;
+								}
+							}
+							else if (action.Contains("SyncVotedFor"))
+							{
+								var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
+								if (against != null)
+								{
+									if (against != GetLocalPlayerNode())
+									{
+										SetTag(AmongUSVoteRevealTag, $"Voted: {against.Apiuser.displayName}", Color.white, ColorUtils.HexToColor("#44DBAC"));
+									}
+									else
+									{
+										SetTag(AmongUSVoteRevealTag, $"Voted: {against.Apiuser.displayName}", Color.white, ColorUtils.HexToColor("#C22B26"));
+									}
+								}
+								AmongUSHasVoted = true;
+								if (!isRPCActive)
+								{
+									isRPCActive = true;
+								}
+							}
+							else if (action.Equals("SyncAbstainedVoting"))
+							{
+								AmongUSHasVoted = true;
+								SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
+								if (!isRPCActive)
+								{
+									isRPCActive = true;
+								}
 							}
 						}
 					}
-					else if (IsMurder4World)
+
+					if (action.Equals("SyncEndVotingPhase") || action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
 					{
-						if (Internal_AssignedPlayerNode != null)
+						AmongUSHasVoted = false;
+						if (AmongUSVoteRevealTag != null)
 						{
-							if (obj == Internal_AssignedPlayerNode)
+							SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
+						}
+						if (action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
+						{
+							AmongUsCurrentRole = AmongUsRoles.None;
+							AmongUSHasVoted = false;
+						}
+						if (!isRPCActive)
+						{
+							isRPCActive = true;
+						}
+					}
+				}
+				else if (IsMurder4World)
+				{
+					if (Internal_AssignedNode != null)
+					{
+
+						if (obj.Equals(Internal_AssignedNode))
+						{
+							if (action == "SyncAssignB")
 							{
-								ModConsole.DebugLog($"JarRoleESP :  Detected RPC on Node {obj.name} , Matching {Internal_AssignedPlayerNode.name} , Having action {action}");
-								if (action == "SyncAssignB")
+								Murder4CurrentRole = Murder4Roles.Bystander;
+								if (!isRPCActive)
 								{
-									Murder4CurrentRole = Murder4Roles.Bystander;
-								}
-								else if (action == "SyncAssignD")
-								{
-									Murder4CurrentRole = Murder4Roles.Detective;
-								}
-								else if (action == "SyncAssignM")
-								{
-									Murder4CurrentRole = Murder4Roles.Murderer;
-								}
-								else if (action == "SyncKill")
-								{
-									Murder4CurrentRole = Murder4Roles.None;
+									isRPCActive = true;
 								}
 							}
-
-							if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action == "SyncAbort" || action.Equals("SyncStart"))
+							else if (action == "SyncAssignD")
+							{
+								Murder4CurrentRole = Murder4Roles.Detective;
+								if (!isRPCActive)
+								{
+									isRPCActive = true;
+								}
+							}
+							else if (action == "SyncAssignM")
+							{
+								Murder4CurrentRole = Murder4Roles.Murderer;
+								if (!isRPCActive)
+								{
+									isRPCActive = true;
+								}
+							}
+							else if (action == "SyncKill")
 							{
 								Murder4CurrentRole = Murder4Roles.None;
+								if (!isRPCActive)
+								{
+									isRPCActive = true;
+								}
 							}
 						}
-						else
+
+						if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action == "SyncAbort" || action.Equals("SyncStart"))
 						{
-							if (Internal_player != null)
+							Murder4CurrentRole = Murder4Roles.None;
+							if (!isRPCActive)
 							{
-								ModConsole.DebugError($"JarRoleESP : AssignedPlayerNode is Null on player  {Internal_player.DisplayName()}");
+								isRPCActive = true;
 							}
 						}
 					}
 				}
-				
 			}
-			catch(Exception e)
-			{
-				ModConsole.DebugError("JarRoleESP Has Encountered a Error!");
-				ModConsole.DebugErrorExc(e);
-			}
-		}
 
-		[HideFromIl2Cpp]
-		private void Debug(string msg)
-		{
-			if (JarRoleEspDebug)
-			{
-				ModConsole.DebugLog($"[Jar Role ESP Debug] : {msg}");
-			}
 		}
+	
 
-		[HideFromIl2Cpp]
+
+
+		
 		private AmongUsRoles CheckEntryAmongUS(GameObject Entry)
 		{
 			if (Entry != null)
@@ -266,51 +293,51 @@
 			return AmongUsRoles.Unassigned;
 		}
 
-		//[HideFromIl2Cpp]
-		//private AmongUsRoles GetPlayerRoleAmongUS()
-		//{
-		//	if (Internal_AssignedPlayerEntry != null)
-		//	{
-		//		if (VerifyEntry(Internal_AssignedPlayerEntry))
-		//		{
-		//			return CheckEntryAmongUS(Internal_AssignedPlayerEntry);
-		//		}
-		//		else
-		//		{
-		//			FindEntryWithUser();
-		//			return CheckEntryAmongUS(Internal_AssignedPlayerEntry);
-		//		}
-		//	}
-		//	else
-		//	{
-		//		FindEntryWithUser();
-		//		return CheckEntryAmongUS(Internal_AssignedPlayerEntry);
-		//	}
-		//}
+		
+		private AmongUsRoles GetPlayerRoleAmongUS()
+		{
+			if (Internal_AssignedEntry != null)
+			{
+				if (VerifyEntry(Internal_AssignedEntry))
+				{
+					return CheckEntryAmongUS(Internal_AssignedEntry);
+				}
+				else
+				{
+					FindEntryWithUser();
+					return CheckEntryAmongUS(Internal_AssignedEntry);
+				}
+			}
+			else
+			{
+				FindEntryWithUser();
+				return CheckEntryAmongUS(Internal_AssignedEntry);
+			}
+		}
 
-		//[HideFromIl2Cpp]
-		//private Murder4Roles GetPlayerRoleMurder4()
-		//{
-		//	if (Internal_AssignedPlayerEntry != null)
-		//	{
-		//		if (VerifyEntry(Internal_AssignedPlayerEntry))
-		//		{
-		//			return CheckEntryMurder4(Internal_AssignedPlayerEntry);
-		//		}
-		//		else
-		//		{
-		//			FindEntryWithUser();
-		//			return CheckEntryMurder4(Internal_AssignedPlayerEntry);
-		//		}
-		//	}
-		//	else
-		//	{
-		//		FindEntryWithUser();
-		//		return CheckEntryMurder4(Internal_AssignedPlayerEntry);
-		//	}
-		//}
+		
+		private Murder4Roles GetPlayerRoleMurder4()
+		{
+			if (Internal_AssignedEntry != null)
+			{
+				if (VerifyEntry(Internal_AssignedEntry))
+				{
+					return CheckEntryMurder4(Internal_AssignedEntry);
+				}
+				else
+				{
+					FindEntryWithUser();
+					return CheckEntryMurder4(Internal_AssignedEntry);
+				}
+			}
+			else
+			{
+				FindEntryWithUser();
+				return CheckEntryMurder4(Internal_AssignedEntry);
+			}
+		}
 
-		[HideFromIl2Cpp]
+		
 		private bool VerifyEntry(GameObject Entry)
 		{
 			if (Entry != null)
@@ -326,11 +353,11 @@
 						}
 					}
 				}
-			}
+			} 
 			return false;
 		}
 
-		[HideFromIl2Cpp]
+		
 		private void FindEntryWithUser()
 		{
 			foreach (var item in JarRoleController.JarRoleLinks)
@@ -356,7 +383,7 @@
 			}
 		}
 
-		[HideFromIl2Cpp]
+		
 		public Color? Murder4GetNamePlateColor()
 		{
 			if (Murder4CurrentRole == Murder4Roles.Detective)
@@ -382,7 +409,7 @@
 			return null;
 		}
 
-		[HideFromIl2Cpp]
+		
 		public Color? AmongUsGetNamePlateColor()
 		{
 			if (AmongUsCurrentRole == AmongUsRoles.Crewmate)
@@ -404,7 +431,7 @@
 			return null;
 		}
 
-		[HideFromIl2Cpp]
+		
 		private Murder4Roles CheckEntryMurder4(GameObject Entry)
 		{
 			if (Entry != null)
@@ -447,7 +474,7 @@
 			return Murder4Roles.Unassigned;
 		}
 
-		[HideFromIl2Cpp]
+		
 		private Color GetPlayerEntryColor(GameObject Entry)
 		{
 			if (Entry != null)
@@ -461,7 +488,7 @@
 			return Color.white;
 		}
 
-		[HideFromIl2Cpp]
+		
 		private SingleTag SetTag(SingleTag tag, string text, Color TextColor, Color TagColor)
 		{
 			if (tag != null)
@@ -509,7 +536,7 @@
 			JarRoleController.RoleEspComponents.Remove(this);
 		}
 
-		[HideFromIl2Cpp]
+		
 		private string GetCurrentSingleTagText()
 		{
 			return GameRoleTag.Label_Text;
@@ -549,12 +576,18 @@
 		{
 			try
 			{
-				if (Internal_SavedEntry == null || Internal_AssignedPlayerNode == null)
+				if(Internal_AssignedEntry == null)
 				{
 					FindEntryWithUser();
 				}
 				else
 				{
+					if(!VerifyEntry(Internal_AssignedEntry))
+					{
+						FindEntryWithUser();
+					}
+				}
+
 					if (GameRoleTag != null)
 					{
 						if (GameRoleTag.ShowTag != JarRoleController.ViewRoles)
@@ -565,7 +598,15 @@
 					}
 					if (JarRoleController.IsMurder4World)
 					{
-						if (JarRoleController.ViewRoles)
+					if (!isRPCActive)
+					{
+						var ReturnedRole = GetPlayerRoleMurder4();
+						if (ReturnedRole != Murder4CurrentRole)
+						{
+							Murder4CurrentRole = ReturnedRole;
+						}
+					}
+					if (JarRoleController.ViewRoles)
 						{
 							if (AssignedMurder4Role != Murder4Roles.None && AssignedMurder4Role != Murder4Roles.Unassigned)
 							{
@@ -599,7 +640,15 @@
 					}
 					else if (JarRoleController.isAmongUsWorld)
 					{
-						if (AmongUSVoteRevealTag == null)
+					if (!isRPCActive)
+					{
+						var ReturnedRole = GetPlayerRoleAmongUS();
+						if (ReturnedRole != AmongUsCurrentRole)
+						{
+							AmongUsCurrentRole = ReturnedRole;
+						}
+					}
+					if (AmongUSVoteRevealTag == null)
 						{
 							AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Internal_player);
 						}
@@ -651,7 +700,7 @@
 								ResetESPColor();
 							}
 						}
-					}
+					
 				}
 			}
 			catch (Exception e) { ModConsole.DebugError("JarRoleRevealer OnUpdate Exception : " + e); }
@@ -662,12 +711,11 @@
 
 		private readonly Color NoRolesColor = Color.yellow;
 		private readonly Color HiddenRolesColor = Color.green;
-
 		private readonly Color DefaultTextColor = Color.white;
 
 		internal Murder4Roles AssignedMurder4Role
 		{
-			[HideFromIl2Cpp]
+			
 			get
 			{
 				return Murder4CurrentRole;
@@ -676,7 +724,7 @@
 
 		internal AmongUsRoles AssignedAmongUS4Role
 		{
-			[HideFromIl2Cpp]
+			
 			get
 			{
 				return AmongUsCurrentRole;
@@ -702,37 +750,37 @@
 
 		private LinkedNodes Internal_SavedEntry
 		{
-			[HideFromIl2Cpp]
+			
 			get
 			{
 				return _SavedEntry;
 			}
-			[HideFromIl2Cpp]
+			
 			set
 			{
 				_SavedEntry = value;
-				Internal_AssignedPlayerEntry = value.Entry.gameObject;
-				Internal_AssignedPlayerNode = value.Node.gameObject;
+				Internal_AssignedEntry = value.Entry.gameObject;
+				Internal_AssignedNode = value.Node.gameObject;
 			}
 		}
 
 		internal LinkedNodes LinkedEntry
 		{
-			[HideFromIl2Cpp]
+			
 			get
 			{
 				return Internal_SavedEntry;
 			}
 		}
 
-		private GameObject Internal_AssignedPlayerEntry
+		private GameObject Internal_AssignedEntry
 		{
-			[HideFromIl2Cpp]
+			
 			get
 			{
 				return _AssignedPlayerEntry;
 			}
-			[HideFromIl2Cpp]
+			
 			set
 			{
 				_AssignedPlayerEntry = value;
@@ -741,16 +789,16 @@
 
 		internal GameObject Entry
 		{
-			[HideFromIl2Cpp]
+			
 			get
 			{
-				return Internal_AssignedPlayerEntry;
+				return Internal_AssignedEntry;
 			}
 		}
 
-		internal APIUser apiuser
+		internal APIUser Apiuser
 		{
-			[HideFromIl2Cpp]
+			
 			get
 			{
 				return Internal_user;
@@ -759,14 +807,14 @@
 
 		private GameObject _AssignedPlayerNode;
 
-		private GameObject Internal_AssignedPlayerNode
+		private GameObject Internal_AssignedNode
 		{
-			[HideFromIl2Cpp]
+			
 			get
 			{
 				return _AssignedPlayerNode;
 			}
-			[HideFromIl2Cpp]
+			
 			set
 			{
 				if (_AssignedPlayerNode != null)
@@ -783,10 +831,10 @@
 
 		internal GameObject Node
 		{
-			[HideFromIl2Cpp]
+			
 			get
 			{
-				return Internal_AssignedPlayerNode;
+				return Internal_AssignedNode;
 			}
 		}
 
@@ -794,12 +842,12 @@
 
 		internal bool AmongUSHasVoted
 		{
-			[HideFromIl2Cpp]
+			
 			get
 			{
 				return _AmongUSHasVoted;
 			}
-			[HideFromIl2Cpp]
+			
 			set
 			{
 				if (AmongUSVoteRevealTag != null)
@@ -823,7 +871,7 @@
 
 		internal bool AmongUSCanVote
 		{
-			[HideFromIl2Cpp]
+			
 			get
 			{
 				if (AmongUsCurrentRole == AmongUsRoles.Crewmate)
@@ -862,17 +910,17 @@
 				}
 			}
 		}
+		internal bool isRPCActive { get; set; } = false;
+		internal Murder4Roles Murder4CurrentRole { get; set; } = Murder4Roles.Unassigned;
+		internal AmongUsRoles AmongUsCurrentRole { get; set; } = AmongUsRoles.Unassigned;
+		internal Player Internal_player { get; private set; } = null;
+		internal APIUser Internal_user { get; private set; } = null;
+		internal GameObject _AssignedPlayerEntry { get; private set; } = null;
+		internal SingleTag GameRoleTag { get; private set; } = null;
 
-		private Murder4Roles Murder4CurrentRole;
-		private AmongUsRoles AmongUsCurrentRole;
-		private Player Internal_player;
-		private APIUser Internal_user;
-		private GameObject _AssignedPlayerEntry;
-		private SingleTag GameRoleTag;
+		internal SingleTag AmongUSVoteRevealTag { get; private set; } = null;
 
-		internal SingleTag AmongUSVoteRevealTag;
-
-		private LinkedNodes _SavedEntry;
+		internal LinkedNodes _SavedEntry { get; private set; } = null;
 
 		// MURDER 4 MAP
 		private readonly Color MurderColor = new Color(0.5377358f, 0.1648718f, 0.1728278f, 1f);

@@ -4,6 +4,7 @@
 	using AstroClient.ConsoleUtils;
 	using AstroClient.Finder;
 	using AstroClient.Variables;
+	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using System;
@@ -92,26 +93,29 @@
 
 		public override void OnPlayerJoined(Player player)
 		{
-			if (JarRoleLinks.Count() != 0)
+			MiscUtility.DelayFunction(0.5f, new Action(() =>
 			{
-				if (IsMurder4World || isAmongUsWorld)
+				if (JarRoleLinks.Count() != 0)
 				{
-					if (player != null)
+					if (IsMurder4World || isAmongUsWorld)
 					{
-						if (player.gameObject.GetComponent<JarRoleESP>() == null)
+						if (player != null)
 						{
-							var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
-							if (RoleRevealer != null)
+							if (player.gameObject.GetComponent<JarRoleESP>() == null)
 							{
-								if (!RoleEspComponents.Contains(RoleRevealer))
+								var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
+								if (RoleRevealer != null)
 								{
-									RoleEspComponents.Add(RoleRevealer);
+									if (!RoleEspComponents.Contains(RoleRevealer))
+									{
+										RoleEspComponents.Add(RoleRevealer);
+									}
 								}
 							}
 						}
 					}
 				}
-			}
+			}));
 		}
 
 		public class LinkedNodes
@@ -179,7 +183,14 @@
 
 		public static JarRoleESP GetLocalPlayerNode()
 		{
-			return RoleEspComponents.Where(x => x.apiuser.displayName == LocalPlayerUtils.GetSelfPlayer().DisplayName()).First();
+			if (RoleEspComponents.Count() == 0 || RoleEspComponents == null)
+			{
+				return null;
+			}
+			else
+			{
+				return RoleEspComponents.Where(x => x.Apiuser.displayName == LocalPlayerUtils.GetSelfPlayer().DisplayName()).First();
+			}
 		}
 
 		public override void OnWorldReveal(string id, string name, string asseturl)
