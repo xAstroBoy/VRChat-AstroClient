@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroClient.Startup.Hooks;
+	using DayClientML2.Utility;
 	using System;
 	using UnhollowerBaseLib.Attributes;
 	using UnityEngine;
@@ -58,7 +59,27 @@
 		[HideFromIl2Cpp]
 		private void Internal_OnUdonSyncRPCEvent(object sender, UdonSyncRPCEventArgs e)
 		{
-			OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
+			if(e.sender == null)
+			{
+				return;
+			}
+			if(e.obj == null)
+			{
+				return;
+			}
+			if(string.IsNullOrEmpty(e.action))
+			{
+				return;
+			}
+			if (string.IsNullOrWhiteSpace(e.action))
+			{
+				return;
+			}
+			MiscUtility.DelayFunction(0.5f, new Action(() =>
+			{
+				OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
+
+			}));
 		}
 
 		[HideFromIl2Cpp]
