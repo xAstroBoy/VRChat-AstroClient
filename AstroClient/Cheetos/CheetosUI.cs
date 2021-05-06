@@ -170,52 +170,36 @@
 		{
 			int rand = random.Next(0, 6);
 
-			switch (rand)
+			return rand switch
 			{
-				case 0:
-					return "USpeak";
-				case 1:
-					return "AddHealth";
-				case 2:
-					return "TeleportTo";
-				case 3:
-					return "Indicator";
-				case 4:
-					return "AddDamage";
-				case 5:
-					return "DestroyObject";
-				case 6:
-					return "Shit";
-				case 7:
-					return "Cock";
-				case 8:
-					return null;
-			}
-			return "";
+				0 => "USpeak",
+				1 => "AddHealth",
+				2 => "TeleportTo",
+				3 => "Indicator",
+				4 => "AddDamage",
+				5 => "DestroyObject",
+				6 => "Shit",
+				7 => "Cock",
+				8 => null,
+				_ => "",
+			};
 		}
 
 		private string GetRandomFunction()
 		{
 			int rand = random.Next(0, 6);
 
-			switch (rand)
+			return rand switch
 			{
-				case 0:
-					return "ReceiveVoiceStatsSyncRPC";
-				case 1:
-					return "PhotoCapture";
-				case 2:
-					return "InformOfBadConnection";
-				case 3:
-					return "SuckMyPepe";
-				case 4:
-					return "Smeckles";
-				case 5:
-					return "Gringo";
-				case 6:
-					return null;
-			}
-			return "";
+				0 => "ReceiveVoiceStatsSyncRPC",
+				1 => "PhotoCapture",
+				2 => "InformOfBadConnection",
+				3 => "SuckMyPepe",
+				4 => "Smeckles",
+				5 => "Gringo",
+				6 => "Lol",
+				_ => null,
+			};
 		}
 
 		public System.Collections.IEnumerator Clap1()
