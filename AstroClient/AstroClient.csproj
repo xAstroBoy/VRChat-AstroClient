@@ -113,7 +113,8 @@
     <Compile Include="Cheetos\AvatarHider.cs" />
     <Compile Include="Cheetos\CheetoMenu.cs" />
     <Compile Include="Cheetos\CheetosHelpers.cs" />
-    <Compile Include="Cheetos\CheetosPrivateStuff.cs" />
+    <Compile Include="Cheetos\VRCPlusHider.cs" />
+    <Compile Include="Cheetos\CheetosTestStuff.cs" />
     <Compile Include="Cheetos\CheetosUI.cs" />
     <Compile Include="Cheetos\MediaController\MediaController.cs" />
     <Compile Include="Cheetos\Priority.cs" />
