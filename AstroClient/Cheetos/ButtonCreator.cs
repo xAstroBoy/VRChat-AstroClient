@@ -5,9 +5,10 @@
 
 	public static class ButtonCreator
 	{
-		public static GameObject Create()
+		public static GameObject Create(Vector3 position)
 		{
 			var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
+			go.transform.position = position;
 
 			var textObject = new GameObject("Text");
 			var rect = textObject.AddComponent<RectTransform>();

@@ -56,7 +56,8 @@
 
 		private void CreateButton()
 		{
-			ButtonCreator.Create();
+			var buttonPosition = LocalPlayerUtils.CenterOfPlayer();
+			ButtonCreator.Create(buttonPosition);
 		}
 
 		public VRC_EventHandler handler;
