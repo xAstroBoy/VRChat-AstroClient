@@ -10,9 +10,7 @@
 	using DayClientML2.Utility.Extensions;
 	using VRC.SDKBase;
 	using static VRC.SDKBase.VRC_EventHandler;
-	using Il2CppSystem.Text;
 	using System.Threading;
-	using AstroClient.Cheetos;
 	#endregion
 
 	/// <summary>
@@ -58,7 +56,7 @@
 		{
 			var buttonPosition = LocalPlayerUtils.CenterOfPlayer();
 			var buttonRotation = LocalPlayerUtils.GetSelfPlayer().gameObject.transform.rotation;
-			ButtonCreator.Create("Test", buttonPosition, buttonRotation);
+			ButtonCreator.Create("Test", buttonPosition, buttonRotation, () => { ModConsole.Log("TestButton Clicked"); });
 		}
 
 		public VRC_EventHandler handler;
