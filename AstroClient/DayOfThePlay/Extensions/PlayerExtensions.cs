@@ -12,7 +12,7 @@
 
 		public static APIUser GetAPIUser(this Player Instance)
 		{
-			return Instance == null ? null : Instance.field_Private_APIUser_0;
+			return Instance == null ? null : Instance.prop_APIUser_0;
 		}
 
 		public static APIUser GetAPIUser(this VRCPlayer Instance)
