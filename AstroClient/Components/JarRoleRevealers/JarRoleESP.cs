@@ -100,37 +100,6 @@
 		{
 			try
 			{
-				if (sender == null)
-				{
-					return;
-				}
-				if (obj == null)
-				{
-					return;
-				}
-				if (string.IsNullOrEmpty(action))
-				{
-					return;
-				}
-				if (string.IsNullOrWhiteSpace(action))
-				{
-					return;
-				}
-
-
-				if (Internal_player != null)
-				{
-					if (sender != null)
-					{
-						ModConsole.DebugLog($"JarRoleESP : {sender.DisplayName()} Sent RPC on Node {obj.name} , Matching {Internal_AssignedNode.name} assigned to {Internal_player.DisplayName()}, Having action {action}");
-					}
-					else
-					{
-						ModConsole.DebugLog($"JarRoleESP : Detected RPC on Node {obj.name} , Matching {Internal_AssignedNode.name} assigned to {Internal_player.DisplayName()} , Having action {action}");
-
-					}
-				}
-
 				if (obj != null)
 				{
 					if (isAmongUsWorld)
@@ -266,7 +235,7 @@
 								}
 							}
 
-							if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action == "SyncAbort" || action.Equals("SyncStart"))
+							if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action.Equals("SyncStart"))
 							{
 								Murder4CurrentRole = Murder4Roles.None;
 								if (!isRPCActive)
@@ -278,10 +247,7 @@
 					}
 				}
 			}
-			catch (Exception e)
-			{
-				ModConsole.DebugErrorExc(e);
-			}
+			catch { }
 		}
 
 
