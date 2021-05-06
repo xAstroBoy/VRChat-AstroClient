@@ -164,6 +164,15 @@
 									isRPCActive = true;
 								}
 							}
+							else if (action == "SyncVotedOut")
+							{
+								AmongUsCurrentRole = AmongUsRoles.None;
+								AmongUSHasVoted = false;
+								if (!isRPCActive)
+								{
+									isRPCActive = true;
+								}
+							}
 							else if (action.Contains("SyncVotedFor"))
 							{
 								var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
@@ -613,30 +622,30 @@
 						FindEntryWithUser();
 					}
 				}
-				if ((Time.time - LastTimeCheck > 0.5f))
-				{
+				//if ((Time.time - LastTimeCheck > 0.5f))
+				//{
 
-					if (IsMurder4World)
-					{
-						if (AssignedMurder4Role == Murder4Roles.None || AssignedMurder4Role == Murder4Roles.Unassigned)
-						{
-							isRPCActive = false;
-							UpdateMurder4ESPMechanism();
-						}
+				//	if (IsMurder4World)
+				//	{
+				//		if (AssignedMurder4Role == Murder4Roles.None || AssignedMurder4Role == Murder4Roles.Unassigned)
+				//		{
+				//			isRPCActive = false;
+				//			UpdateMurder4ESPMechanism();
+				//		}
 
-					}
-					else if (isAmongUsWorld)
-					{
-						if (AmongUsCurrentRole == AmongUsRoles.None || AmongUsCurrentRole == AmongUsRoles.Unassigned)
-						{
-							isRPCActive = false;
-							UpdateMurder4ESPMechanism();
-						}
+				//	}
+				//	else if (isAmongUsWorld)
+				//	{
+				//		if (AmongUsCurrentRole == AmongUsRoles.None || AmongUsCurrentRole == AmongUsRoles.Unassigned)
+				//		{
+				//			isRPCActive = false;
+				//			UpdateMurder4ESPMechanism();
+				//		}
 
-					}
+				//	}
 
-					LastTimeCheck = Time.time;
-				}
+				//	LastTimeCheck = Time.time;
+				//}
 
 
 
