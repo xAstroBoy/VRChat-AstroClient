@@ -18,9 +18,10 @@
 			textObject.transform.parent = go.transform;
 			var rect = textObject.AddComponent<RectTransform>();
 			rect.sizeDelta = new Vector2(1f, 1f);
-			rect.transform.position = new Vector3(0, 0, -2f);
-			rect.transform.rotation = go.transform.rotation;
-			rect.transform.localScale = new Vector3(0.09999999f, 0.09999999f, 1);
+			textObject.transform.parent = textObject.transform;
+			textObject.transform.localPosition = new Vector3(0, 0, -0.51f);
+			textObject.transform.rotation = go.transform.rotation;
+			textObject.transform.localScale = new Vector3(0.1f, 0.1f, 1);
 			var textComp = textObject.AddComponent<TextMeshPro>();
 			textComp.text = text;
 			textComp.color = Color.black;
