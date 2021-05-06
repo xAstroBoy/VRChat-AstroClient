@@ -68,7 +68,7 @@
 		{
 			if (obj != null)
 			{
-				return UnityEngine.Object.Instantiate(obj);
+				return GameObject.Instantiate(obj);
 			}
 			return null;
 		}

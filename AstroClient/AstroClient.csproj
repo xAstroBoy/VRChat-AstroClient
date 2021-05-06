@@ -928,7 +928,6 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
-    <EmbeddedResource Include="Prefabs\Button.prefab" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Figlet\Larry3D.flf" />

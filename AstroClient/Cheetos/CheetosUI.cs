@@ -35,24 +35,22 @@
 
 		public override void VRChat_OnUiManagerInit()
 		{
-			MainButton = new QMNestedButton("ShortcutMenu", 5, 3, "Admin Menu", "AstroClient's Admin Menu", null, null, null, null, true);
-			MainScroller = new QMScrollMenu(MainButton);
-			CloseButton = new QMSingleButton(MainButton, 0, 0, "Close Game", () => { Process.GetCurrentProcess().Kill(); }, "Close the game");
-			RestartButton = new QMSingleButton(MainButton, 0, 1, "Restart Game", () =>
+			if (Bools.IsDeveloper)
 			{
-				Process.Start(Directory.GetParent(Application.dataPath) + "\\VRChat.exe");
-				Process.GetCurrentProcess().Kill();
-			}, "Restart the game");
-			DisconectButton = new QMSingleButton(MainButton, 1, 0, "Disconnect", () => { AstroNetworkClient.Client.Disconnect(false); }, "Disconnect");
-			ReconnectButton = new QMSingleButton(MainButton, 1, 1, "Reconnect", () => { AstroNetworkClient.Client.Disconnect(true); }, "Reconnect");
-			ReconnectButton = new QMSingleButton(MainButton, 3, 2, "Photon", () => { PrintPhotonPlayers(); }, "Photon");
-			ReconnectButton = new QMSingleButton(MainButton, 4, 0, "RPC Test #1", () => { RPCClapTest1(); }, "RPC");
-			ReconnectButton = new QMSingleButton(MainButton, 4, 0, "RPC Test #2", () => { RPCClapTest2(); }, "RPC");
-			ReconnectButton = new QMSingleButton(MainButton, 4, 2, "RPC Test #3", () => { RPCClapTest3(); }, "RPC");
-
-			if (!Bools.IsDeveloper)
-			{
-				MainButton.getMainButton().setActive(false);
+				MainButton = new QMNestedButton("ShortcutMenu", 5, 3, "Admin Menu", "AstroClient's Admin Menu", null, null, null, null, true);
+				MainScroller = new QMScrollMenu(MainButton);
+				CloseButton = new QMSingleButton(MainButton, 0, 0, "Close Game", () => { Process.GetCurrentProcess().Kill(); }, "Close the game");
+				RestartButton = new QMSingleButton(MainButton, 0, 1, "Restart Game", () =>
+				{
+					Process.Start(Directory.GetParent(Application.dataPath) + "\\VRChat.exe");
+					Process.GetCurrentProcess().Kill();
+				}, "Restart the game");
+				DisconectButton = new QMSingleButton(MainButton, 1, 0, "Disconnect", () => { AstroNetworkClient.Client.Disconnect(false); }, "Disconnect");
+				ReconnectButton = new QMSingleButton(MainButton, 1, 1, "Reconnect", () => { AstroNetworkClient.Client.Disconnect(true); }, "Reconnect");
+				new QMSingleButton(MainButton, 3, 2, "Photon", () => { PrintPhotonPlayers(); }, "Photon");
+				new QMSingleButton(MainButton, 4, 0, "RPC Test #1", () => { RPCClapTest1(); }, "RPC");
+				new QMSingleButton(MainButton, 4, 0, "RPC Test #2", () => { RPCClapTest2(); }, "RPC");
+				new QMSingleButton(MainButton, 4, 2, "RPC Test #3", () => { RPCClapTest3(); }, "RPC");
 			}
 		}
 

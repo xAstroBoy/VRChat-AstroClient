@@ -40,7 +40,7 @@
 				}
 
 				//harmony1.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Boolean_Player_VrcEvent_VrcBroadcastType_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent1), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
-				harmony1.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(CaughtEventPatch), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
+				harmony1.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent1), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
 				
 				ModConsole.Log("Hooked VRC_EventDispatcherRFC 1");
 			}
@@ -51,10 +51,6 @@
 			}
 		}
 
-		private static bool CaughtEventPatch(ref VRC.Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
-		{
-			return true;
-		}
 
 		private static bool OnRPCEvent1(Player __0, VRC_EventHandler.VrcEvent __1, VRC_EventHandler.VrcBroadcastType __2, int __3, float __4)
 		{
@@ -68,7 +64,7 @@
 
 			if (__0 == null || __1 == null || __2 == null)
 			{
-				ModConsole.Log("RPC Blocked, something was null.");
+				//ModConsole.Log("RPC Blocked, something was null.");
 				return false;
 			}
 
