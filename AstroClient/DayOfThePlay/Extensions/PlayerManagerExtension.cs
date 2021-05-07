@@ -15,10 +15,8 @@
 
 		public static List<int> AllPlayersIDs(this PlayerManager Instance)
 		{
-			List<int> PhotonIDs = new List<int>();
-			foreach (var p in Instance.AllPlayers())
-				PhotonIDs.Add(p.GetVRCPlayerApi().playerId);
-			return PhotonIDs;
+			return (from p in Instance.AllPlayers()
+					select p.GetVRCPlayerApi().playerId).ToList();
 		}
 
 		public static Player GetPlayer(this PlayerManager Instance, int Index)
@@ -39,19 +37,19 @@
 		public static Player GetPlayer(this PlayerManager Instance, string UserID)
 		{
 			var Players = Instance.AllPlayers();
-			for (int i = 0; i < Players.Count; i++)
+			foreach (var player in from player in Players
+								   where player.GetAPIUser().UserID() == UserID
+								   select player)
 			{
-				var player = Players[i];
-				if (player.GetAPIUser().UserID() == UserID)
-					return Players[i];
+				return player;
 			}
+
 			return null;
 		}
 
 		public static Player GetPlayerByRayCast(this RaycastHit RayCast)
 		{
-			var gameObject = RayCast.transform.gameObject;
-			return GetPlayer(Utils.PlayerManager, VRCPlayerApi.GetPlayerByGameObject(gameObject).playerId);
+			return GetPlayer(Utils.PlayerManager, VRCPlayerApi.GetPlayerByGameObject(RayCast.transform.gameObject).playerId);
 		}
 	}
 }
