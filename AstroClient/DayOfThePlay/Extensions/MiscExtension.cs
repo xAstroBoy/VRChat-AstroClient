@@ -1,5 +1,6 @@
 ﻿namespace DayClientML2.Utility.Extensions
 {
+	#region Imports
 	using AstroClient.ConsoleUtils;
 	using MelonLoader;
 	using System;
@@ -13,16 +14,18 @@
 	using UnityEngine.UI;
 	using UnityEngine.XR;
 	using VRC.SDKBase;
+	#endregion
 
-	public static class MiskExtension
+	public static class MiscExtension
 	{
 		public static GameObject GetUniqueGameObject(string name)
 		{
 			var Gameobjects = SceneManager.GetActiveScene().GetRootGameObjects().ToArray();
-			//var Gameobjects = Resources.FindObjectsOfTypeAll<GameObject>().ToArray();
-			for (int i = 0; i < Gameobjects.Length; i++)
-				if (Networking.GetUniqueName(Gameobjects[i]) == name)
-					return Gameobjects[i];
+			foreach (var v in Gameobjects.Where(v => Networking.GetUniqueName(v) == name))
+			{
+				return v;
+			}
+
 			return null;
 		}
 
@@ -203,8 +206,7 @@
 
 		internal static bool IsRunningNotorious()
 		{
-			bool _return = false;
-			_return = Assembly.GetExecutingAssembly().GetType("Notorious") != null;
+			bool _return = Assembly.GetExecutingAssembly().GetType("Notorious") != null;
 			return _return;
 		}
 

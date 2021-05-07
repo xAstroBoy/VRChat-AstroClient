@@ -231,7 +231,7 @@
 			}
 			if (type == Il2CppType.Of<VRCVrCameraUnity>())
 			{
-				if (MiskExtension.IsInVR())
+				if (MiscExtension.IsInVR())
 				{
 					return camera.transform.localPosition + InputTracking.GetLocalPosition(XRNode.CenterEye);
 				}

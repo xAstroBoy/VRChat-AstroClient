@@ -85,7 +85,7 @@
 				if (currentPlayer == null || transform == null)
 				{
 					currentPlayer = LocalPlayerUtils.GetLocalVRCPlayer();
-					isInVR = MiskExtension.IsInVR();
+					isInVR = MiscExtension.IsInVR();
 					transform = Camera.main.transform;
 				}
 

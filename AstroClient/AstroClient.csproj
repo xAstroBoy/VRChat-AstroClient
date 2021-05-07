@@ -145,7 +145,7 @@
     <Compile Include="Cheetos\StreamerProtector.cs" />
     <Compile Include="Components\Murder4PatronUnlocker\Murder4PatronUnlocker.cs" />
     <Compile Include="DayOfThePlay\Extensions\CameraExtension.cs" />
-    <Compile Include="DayOfThePlay\Extensions\MiskExtension.cs" />
+    <Compile Include="DayOfThePlay\Extensions\MiscExtension.cs" />
     <Compile Include="DayOfThePlay\Extensions\ModerationManagerExtension.cs" />
     <Compile Include="DayOfThePlay\Extensions\NetworkingExt.cs" />
     <Compile Include="DayOfThePlay\Extensions\NotificationManagerExtension.cs" />
