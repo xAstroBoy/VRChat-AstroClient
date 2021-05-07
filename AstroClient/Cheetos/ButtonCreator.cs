@@ -2,6 +2,8 @@
 {
 	using TMPro;
 	using UnityEngine;
+	using AstroExtensions;
+	using AstroClient.extensions;
 
 	public static class ButtonCreator
 	{
@@ -26,7 +28,8 @@
 			textComp.text = text;
 			textComp.color = Color.black;
 			textComp.autoSizeTextContainer = true;
-
+			go.removeAllCollider();
+			go.AddTriggerCollider();
 			return go;
 		}
 	}
