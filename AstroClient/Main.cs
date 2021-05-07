@@ -30,6 +30,8 @@
 	using Application = UnityEngine.Application;
 	using Button = UnityEngine.UI.Button;
 	using Console = CheetosConsole.Console;
+	using VRC;
+	using System.Linq;
 
 	#endregion Imports
 
@@ -170,8 +172,8 @@
 				if (File.Exists(Environment.CurrentDirectory + @"\RubyClient\RubyClient.dll"))
 				{
 					ModConsole.Log("RubyClient Detected Buttons Moved");
-					ToggleFly = new QMSingleToggleButton(AstroClient, -1, 0, "Fly", () => { Flight.FlyEnabled = true; }, "Fly", () => { Flight.FlyEnabled = false; }, "Enable/Disable Flight", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.FlyEnabled, true);
-					ToggleNoClip = new QMSingleToggleButton(AstroClient, -1, 0.5f, "NoClip", () => { Flight.NoClipEnabled = true; }, "NoClip", () => { Flight.NoClipEnabled = false; }, "Enable/Disable NoClip", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.NoClipEnabled, true);
+					ToggleFly = new QMSingleToggleButton(AstroClient, 0.5f, 0, "Fly", () => { Flight.FlyEnabled = true; }, "Fly", () => { Flight.FlyEnabled = false; }, "Enable/Disable Flight", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.FlyEnabled, true);
+					ToggleNoClip = new QMSingleToggleButton(AstroClient, 0.5f, 0.5f, "NoClip", () => { Flight.NoClipEnabled = true; }, "NoClip", () => { Flight.NoClipEnabled = false; }, "Enable/Disable NoClip", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.NoClipEnabled, true);
 				}
 				else
 				{
