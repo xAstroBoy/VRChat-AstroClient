@@ -29,7 +29,7 @@
 		{
 			if (Bools.IsDeveloper)
 			{
-				MainButton = new QMNestedButton("ShortcutMenu", 5, 3.5f, "Dev Menu", "AstroClient's Admin Menu", null, null, null, null, true);
+				MainButton = new QMNestedButton("ShortcutMenu", 5, 3, "Dev Menu", "AstroClient's Admin Menu", null, null, null, null, true);
 				MainScroller = new QMScrollMenu(MainButton);
 
 				CloseButton = new QMSingleButton(MainButton, 0, 0, "Close Game", () => { Process.GetCurrentProcess().Kill(); }, "Close the game");
