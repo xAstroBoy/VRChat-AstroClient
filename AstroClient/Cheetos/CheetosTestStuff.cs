@@ -3,6 +3,8 @@
 	using AstroClient.ConsoleUtils;
 	using AstroClient.Finder;
 	using AstroClient.variables;
+	using System;
+	using System.IO;
 
 	class CheetosTestStuff : GameEvents
 	{
@@ -16,9 +18,18 @@
 
 			var infoBar = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar");
 
-			if (infoBar != null)
+			if (File.Exists(Environment.CurrentDirectory + @"\Mods\Notorious.dll"))
 			{
-				infoBar.transform.localPosition -= new UnityEngine.Vector3(0, 110, 0);
+				if (infoBar != null)
+				{
+					infoBar.transform.localPosition -= new UnityEngine.Vector3(0, 110, 0);
+				}
+			} else
+			{
+				if (infoBar != null)
+				{
+					infoBar.transform.localPosition += new UnityEngine.Vector3(0, 80, 0);
+				}
 			}
 
 			ModConsole.CheetoLog($"VRChat Version: {VRChatVersion}, {VRChatBuild}");
