@@ -11,7 +11,7 @@
 
 		public static void ReadKey()
 		{
-			string keyPath = Environment.CurrentDirectory + @"\AstroClient\key.txt";
+			string keyPath = $@"{Environment.CurrentDirectory}\AstroClient\key.txt";
 
 			if (File.Exists(keyPath))
 			{

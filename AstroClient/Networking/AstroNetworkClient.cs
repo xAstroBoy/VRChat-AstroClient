@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	#region Imports
 	using AstroClient.Cheetos;
 	using AstroClient.components;
 	using AstroClient.Components;
@@ -17,6 +18,7 @@
 	using VRC;
 	using Console = System.Console;
 	using Timer = System.Timers.Timer;
+	#endregion
 
 	internal class AstroNetworkClient
 	{

@@ -16,7 +16,7 @@
 	{
 		public static Vector2 GetButtonPosition(float x, float y)
 		{
-			return new Vector2(-1050f + x * 420f, 1570 + y * -420f);
+			return new Vector2(-1050f + (x * 420f), 1570 + (y * -420f));
 		}
 
 		public static Vector2 GetButtonPosition2(float x, float y)
@@ -193,7 +193,7 @@
 			int result = 0;
 			while (num > 0)
 			{
-				result = (result * 10) + num % 10;
+				result = (result * 10) + (num % 10);
 				num /= 10;
 			}
 			return result;
