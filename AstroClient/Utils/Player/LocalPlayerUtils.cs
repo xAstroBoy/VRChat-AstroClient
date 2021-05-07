@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	#region Imports
 	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using UnityEngine;
@@ -7,6 +8,7 @@
 	using VRC.Animation;
 	using VRC.SDKBase;
 	using Vector3 = UnityEngine.Vector3;
+	#endregion
 
 	public class LocalPlayerUtils : GameEvents
 	{
@@ -189,7 +191,7 @@
 			}
 			else
 			{
-				LocalMotionState = GetPlayerGameObject().GetComponent<VRC.Animation.VRCMotionState>();
+				LocalMotionState = GetPlayerGameObject().GetComponent<VRCMotionState>();
 				return LocalMotionState;
 			}
 		}
