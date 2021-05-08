@@ -16,6 +16,8 @@
 
 		public event EventHandler<ReceivedDataEventArgs> ReceivedData;
 
+		public event EventHandler<ReceivedPacketEventArgs> ReceivedPacket;
+
 		public int ClientID { get; private set; }
 
 		public bool IsClient = true;

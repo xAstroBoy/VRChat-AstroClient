@@ -73,8 +73,14 @@
     <Compile Include="..\AstroNetworkingLibrary\ReceivedDataEventArgs.cs">
       <Link>Networking\ReceivedDataEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\AstroNetworkingLibrary\ReceivedPacketEventArgs.cs">
+      <Link>Networking\ReceivedPacketEventArgs.cs</Link>
+    </Compile>
     <Compile Include="..\AstroNetworkingLibrary\ReceivedTextEventArgs.cs">
       <Link>Networking\ReceivedTextEventArgs.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroNetworkingLibrary\Serializable\PacketData.cs">
+      <Link>Networking\Serializable\PacketData.cs</Link>
     </Compile>
     <Compile Include="AstroLoader.cs" />
     <Compile Include="Networking\AstroNetworkLoader.cs" />
