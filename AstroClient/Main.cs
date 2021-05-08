@@ -130,10 +130,10 @@
 
 		public override void OnUpdate()
 		{
-			if (Application.targetFrameRate != int.MaxValue)
-			{
-				Application.targetFrameRate = int.MaxValue;
-			}
+			//if (Application.targetFrameRate != int.MaxValue)
+			//{
+				//Application.targetFrameRate = int.MaxValue;
+			//}
 			Event_OnUpdate?.Invoke(this, new EventArgs());
 		}
 
