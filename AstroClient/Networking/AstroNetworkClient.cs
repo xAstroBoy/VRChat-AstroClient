@@ -7,6 +7,7 @@
 	using AstroClient.ConsoleUtils;
 	using AstroClient.variables;
 	using AstroNetworkingLibrary;
+	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using System;
@@ -75,109 +76,109 @@
 
 			Client.Connected += OnConnected;
 			Client.Disconnected += OnDisconnect;
-			Client.ReceivedText += OnTextReceived;
+			Client.ReceivedPacket += OnPacketReceived;
 
 			Client.StartClient(tcpClient, 0);
 		}
 
-		private static void ProcessInput(object sender, string input)
+		private static void ProcessInput(object sender, PacketData packetData)
 		{
-			int index;
-			string first;
-			string second = string.Empty;
+			//int index;
+			//string first;
+			//string second = string.Empty;
 
-			if (input.Contains(":"))
-			{
-				index = input.IndexOf(':');
-				first = input.Substring(0, index);
-				second = input.Substring(index + 1);
-			}
-			else
-			{
-				first = input;
-			}
+			//if (input.Contains(":"))
+			//{
+			//	index = input.IndexOf(':');
+			//	first = input.Substring(0, index);
+			//	second = input.Substring(index + 1);
+			//}
+			//else
+			//{
+			//	first = input;
+			//}
 
-			if (first.Equals("exit"))
-			{
-				Environment.Exit(0);
-			}
-			else if (first.Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
-			{
-				Client.Send($"key:{KeyManager.AuthKey}");
-			}
-			else if (first.Equals("authed", StringComparison.InvariantCultureIgnoreCase))
-			{
-				if (second.Equals("true", StringComparison.InvariantCultureIgnoreCase))
-				{
-					// I'm authed
-					KeyManager.IsAuthed = true;
-				}
-				else
-				{
-					KeyManager.IsAuthed = false;
-					ModConsole.DebugLog("Failed to Auth");
-					// I'm not authed
-					Console.Beep();
-					Environment.Exit(0);
-				}
-			}
-			else if (first.Equals("notify-dev"))
-			{
-				CheetosHelpers.SendHudNotification(second);
-			}
-			else if (first.Equals("client-type"))
-			{
-				if (second.Equals("developer"))
-				{
-					Bools.IsDeveloper = true;
-					ModConsole.Log("Developer Mode!");
-				}
-				else
-				{
-					Bools.IsDeveloper = false;
-				}
-			}
-			else if (first.Equals("ping"))
-			{
-				Client.Send("pong");
-			}
-			else if (first.Equals("pong"))
-			{
-			}
-			else if (first.Equals("debug"))
-			{
-				ModConsole.Log(second);
-			}
-			else if (first.Equals("add-tag"))
-			{
-				string[] info = second.Split(',');
-				Player player;
-				if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(info[0]))
-				{
-					ModConsole.DebugLog("Wants to add tag to self");
-					player = LocalPlayerUtils.GetSelfPlayer();
-				}
-				else
-				{
-					ModConsole.DebugLog("Wants to add tag to someone else");
-					player = WorldUtils.GetPlayerByID(info[0]);
-				}
-				if (player != null)
-				{
-					SpawnTag(player, info[1], Color.white, Color.blue);
-				}
-				else
-				{
-					ModConsole.DebugLog($"Player ({info[0]}) returned null");
-				}
-			}
-			else
-			{
-				if (Bools.IsDeveloper)
-				{
-					ModConsole.DebugLog($"Unknown packet: {input}");
-				}
-			}
+			//if (first.Equals("exit"))
+			//{
+			//	Environment.Exit(0);
+			//}
+			//else if (first.Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
+			//{
+			//	Client.Send($"key:{KeyManager.AuthKey}");
+			//}
+			//else if (first.Equals("authed", StringComparison.InvariantCultureIgnoreCase))
+			//{
+			//	if (second.Equals("true", StringComparison.InvariantCultureIgnoreCase))
+			//	{
+			//		// I'm authed
+			//		KeyManager.IsAuthed = true;
+			//	}
+			//	else
+			//	{
+			//		KeyManager.IsAuthed = false;
+			//		ModConsole.DebugLog("Failed to Auth");
+			//		// I'm not authed
+			//		Console.Beep();
+			//		Environment.Exit(0);
+			//	}
+			//}
+			//else if (first.Equals("notify-dev"))
+			//{
+			//	CheetosHelpers.SendHudNotification(second);
+			//}
+			//else if (first.Equals("client-type"))
+			//{
+			//	if (second.Equals("developer"))
+			//	{
+			//		Bools.IsDeveloper = true;
+			//		ModConsole.Log("Developer Mode!");
+			//	}
+			//	else
+			//	{
+			//		Bools.IsDeveloper = false;
+			//	}
+			//}
+			//else if (first.Equals("ping"))
+			//{
+			//	Client.Send("pong");
+			//}
+			//else if (first.Equals("pong"))
+			//{
+			//}
+			//else if (first.Equals("debug"))
+			//{
+			//	ModConsole.Log(second);
+			//}
+			//else if (first.Equals("add-tag"))
+			//{
+			//	string[] info = second.Split(',');
+			//	Player player;
+			//	if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(info[0]))
+			//	{
+			//		ModConsole.DebugLog("Wants to add tag to self");
+			//		player = LocalPlayerUtils.GetSelfPlayer();
+			//	}
+			//	else
+			//	{
+			//		ModConsole.DebugLog("Wants to add tag to someone else");
+			//		player = WorldUtils.GetPlayerByID(info[0]);
+			//	}
+			//	if (player != null)
+			//	{
+			//		SpawnTag(player, info[1], Color.white, Color.blue);
+			//	}
+			//	else
+			//	{
+			//		ModConsole.DebugLog($"Player ({info[0]}) returned null");
+			//	}
+			//}
+			//else
+			//{
+			//	if (Bools.IsDeveloper)
+			//	{
+			//		ModConsole.DebugLog($"Unknown packet: {input}");
+			//	}
+			//}
 		}
 
 		// You gotta delay it, let's delay it to some seconds
@@ -222,22 +223,9 @@
 			});
 		}
 
-		private static void OnTextReceived(object sender, ReceivedTextEventArgs e)
+		private static void OnPacketReceived(object sender, ReceivedPacketEventArgs e)
 		{
-			try
-			{
-				if (!string.IsNullOrEmpty(e.Message) && !string.IsNullOrWhiteSpace(e.Message))
-				{
-					var data = e.Message;
-					ProcessInput(sender, data);
-				}
-				else
-				{
-					Client.Disconnect();
-					ModConsole.DebugLog("Empty request.");
-				}
-			}
-			catch { }
+			ProcessInput(sender, e.Data);
 		}
 	}
 }

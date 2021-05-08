@@ -29,7 +29,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>D:\Steam Library\steamapps\common\VRChat\plugins\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;OFFLINE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
@@ -70,14 +70,8 @@
     <Compile Include="..\AstroNetworkingLibrary\NetworkingExtensions.cs">
       <Link>Networking\NetworkingExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\AstroNetworkingLibrary\ReceivedDataEventArgs.cs">
-      <Link>Networking\ReceivedDataEventArgs.cs</Link>
-    </Compile>
     <Compile Include="..\AstroNetworkingLibrary\ReceivedPacketEventArgs.cs">
       <Link>Networking\ReceivedPacketEventArgs.cs</Link>
-    </Compile>
-    <Compile Include="..\AstroNetworkingLibrary\ReceivedTextEventArgs.cs">
-      <Link>Networking\ReceivedTextEventArgs.cs</Link>
     </Compile>
     <Compile Include="..\AstroNetworkingLibrary\Serializable\PacketData.cs">
       <Link>Networking\Serializable\PacketData.cs</Link>

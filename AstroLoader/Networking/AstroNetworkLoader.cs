@@ -1,6 +1,7 @@
 ﻿namespace AstroLoader
 {
 	using AstroNetworkingLibrary;
+	using AstroNetworkingLibrary.Serializable;
 	using System;
 	using System.Collections.Generic;
 	using System.Net.Sockets;
@@ -10,7 +11,9 @@
 	{
 		internal static HandleClient Client;
 
-		internal static List<byte[]> AssemblyFiles;
+		internal static List<byte[]> LibraryFiles;
+		internal static List<byte[]> MelonFiles;
+		internal static List<byte[]> ModuleFiles;
 
 		internal static bool IsReady = false;
 
@@ -29,48 +32,47 @@
 
 			Client.Connected += OnConnected;
 			Client.Disconnected += OnDisconnect;
-			Client.ReceivedText += OnTextReceived;
-			Client.ReceivedData += OnDataReceived;
+			Client.ReceivedPacket += OnPacketReceived;
 
 			Client.StartClient(tcpClient, 0);
 		}
 
-		private static void ProcessInput(object sender, string input)
+		private static void ProcessInput(object sender, PacketData packetData)
 		{
 			//ModConsole.DebugLog($"Received: {input}");
-			string[] cmds = input.Trim().Split(':');
+			//string[] cmds = input.Trim().Split(':');
 
-			if (cmds[0].Equals("exit"))
-			{
-				System.Console.Beep();
-				Environment.Exit(0);
-			}
-			else if (cmds[0].Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
-			{
-				Client.Send($"key:{KeyManager.AuthKey}");
-				//ModConsole.DebugLog("Auth Requested");
-			}
-			else if (cmds[0].Equals("authed", StringComparison.InvariantCultureIgnoreCase))
-			{
-				if (cmds[1].Equals("true", StringComparison.InvariantCultureIgnoreCase))
-				{
-					// I'm authed
-					KeyManager.IsAuthed = true;
-					//ModConsole.DebugLog("Successfully Authed");
-					Client.Send("gimmiedll");
-				}
-				else
-				{
-					KeyManager.IsAuthed = false;
-					//ModConsole.DebugLog("Failed to Auth");
-					Console.Beep();
-					Environment.Exit(0);
-				}
-			}
-			else
-			{
-				Console.WriteLine($"Unknown packet: {input}");
-			}
+			//if (cmds[0].Equals("exit"))
+			//{
+			//	System.Console.Beep();
+			//	Environment.Exit(0);
+			//}
+			//else if (cmds[0].Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
+			//{
+			//	Client.Send($"key:{KeyManager.AuthKey}");
+			//	//ModConsole.DebugLog("Auth Requested");
+			//}
+			//else if (cmds[0].Equals("authed", StringComparison.InvariantCultureIgnoreCase))
+			//{
+			//	if (cmds[1].Equals("true", StringComparison.InvariantCultureIgnoreCase))
+			//	{
+			//		// I'm authed
+			//		KeyManager.IsAuthed = true;
+			//		//ModConsole.DebugLog("Successfully Authed");
+			//		Client.Send("gimmiedll");
+			//	}
+			//	else
+			//	{
+			//		KeyManager.IsAuthed = false;
+			//		//ModConsole.DebugLog("Failed to Auth");
+			//		Console.Beep();
+			//		Environment.Exit(0);
+			//	}
+			//}
+			//else
+			//{
+			//	Console.WriteLine($"Unknown packet: {input}");
+			//}
 		}
 
 		private static void OnConnected(object sender, EventArgs e)
@@ -83,31 +85,9 @@
 		{
 		}
 
-		private static void OnTextReceived(object sender, ReceivedTextEventArgs e)
+		private static void OnPacketReceived(object sender, ReceivedPacketEventArgs e)
 		{
-			try
-			{
-				if (!string.IsNullOrEmpty(e.Message) && !string.IsNullOrWhiteSpace(e.Message))
-				{
-					var data = e.Message;
-					ProcessInput(sender, data);
-				}
-				else
-				{
-					Client.Disconnect();
-					//ModConsole.DebugLog("Empty request.");
-				}
-			}
-			catch { }
-		}
-
-		private static void OnDataReceived(object sender, ReceivedDataEventArgs e)
-		{
-			var client = sender as HandleClient;
-			AssemblyFiles.Add(e.Data);
-			//Console.WriteLine("Received Assembly File Data");
-			client.Send("gotdll");
-			IsReady = true;
+			ProcessInput(sender, e.Data);
 		}
 	}
 }

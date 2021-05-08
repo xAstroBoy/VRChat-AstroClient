@@ -12,10 +12,6 @@
 
 		public event EventHandler<EventArgs> Disconnected;
 
-		public event EventHandler<ReceivedTextEventArgs> ReceivedText;
-
-		public event EventHandler<ReceivedDataEventArgs> ReceivedData;
-
 		public event EventHandler<ReceivedPacketEventArgs> ReceivedPacket;
 
 		public int ClientID { get; private set; }
@@ -245,19 +241,19 @@
 					}
 				}
 
-				if (headerType == 1000) // Text
-				{
-					string message = data.ConvertToString();
-					ReceivedText?.Invoke(this, new ReceivedTextEventArgs(ClientID, message));
-				}
-				else if (headerType == 1001) // Data
-				{
-					ReceivedData?.Invoke(this, new ReceivedDataEventArgs(ClientID, data));
-				}
-				else
-				{
-					Console.WriteLine($"Something Went Wrong.. {headerType}");
-				}
+				//if (headerType == 1000) // Text
+				//{
+				//	string message = data.ConvertToString();
+				//	ReceivedText?.Invoke(this, new ReceivedTextEventArgs(ClientID, message));
+				//}
+				//else if (headerType == 1001) // Data
+				//{
+				//	ReceivedData?.Invoke(this, new ReceivedDataEventArgs(ClientID, data));
+				//}
+				//else
+				//{
+				//	Console.WriteLine($"Something Went Wrong.. {headerType}");
+				//}
 			}
 		}
 	}

@@ -55,14 +55,8 @@
     <Compile Include="..\AstroNetworkingLibrary\NetworkingExtensions.cs">
       <Link>Networking\NetworkingExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\AstroNetworkingLibrary\ReceivedDataEventArgs.cs">
-      <Link>Networking\ReceivedDataEventArgs.cs</Link>
-    </Compile>
     <Compile Include="..\AstroNetworkingLibrary\ReceivedPacketEventArgs.cs">
       <Link>Networking\ReceivedPacketEventArgs.cs</Link>
-    </Compile>
-    <Compile Include="..\AstroNetworkingLibrary\ReceivedTextEventArgs.cs">
-      <Link>Networking\ReceivedTextEventArgs.cs</Link>
     </Compile>
     <Compile Include="..\AstroNetworkingLibrary\Serializable\AvatarData.cs">
       <Link>Networking\Serializable\AvatarData.cs</Link>
