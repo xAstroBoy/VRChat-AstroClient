@@ -26,7 +26,7 @@
 		{
 			if (Bools.IsDeveloper)
 			{
-				MainButton = new QMNestedButton("ShortcutMenu", 5, 3, "Admin Menu", "AstroClient's Admin Menu", null, null, null, null, true);
+				MainButton = new QMNestedButton("ShortcutMenu", 5, 2.5f, "Admin Menu", "AstroClient's Admin Menu", null, null, null, null, true);
 				MainScroller = new QMScrollMenu(MainButton);
 			}
 		}

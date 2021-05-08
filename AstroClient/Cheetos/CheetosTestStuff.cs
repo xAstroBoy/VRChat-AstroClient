@@ -5,6 +5,8 @@
 	using AstroClient.variables;
 	using System;
 	using System.IO;
+	using UnityEngine;
+	using UnityEngine.UI;
 
 	class CheetosTestStuff : GameEvents
 	{
@@ -17,6 +19,9 @@
 			userInterface.AddComponent<CheetoMenu>();
 
 			var infoBar = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar");
+			var infobartext = GameObject.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar/EarlyAccessText").GetComponent<UnityEngine.UI.Text>();
+			infobartext.color= new Color(1, 0, 1, 1);
+			
 
 			if (File.Exists(Environment.CurrentDirectory + @"\Mods\Notorious.dll"))
 			{
@@ -28,7 +33,8 @@
 			{
 				if (infoBar != null)
 				{
-					infoBar.transform.localPosition += new UnityEngine.Vector3(0, 80, 0);
+					infoBar.transform.localPosition += new UnityEngine.Vector3(0, 85, 0);
+					infobartext.GetComponent<UnityEngine.UI.Text>().text = "AstroClient";
 				}
 			}
 
