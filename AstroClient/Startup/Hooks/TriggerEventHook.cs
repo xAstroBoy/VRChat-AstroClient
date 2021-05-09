@@ -24,7 +24,7 @@
 			{
 				harmony = HarmonyInstance.Create(BuildInfo.Name + " TriggerEventHook");
 			}
-			ModConsole.Log("Hooking TriggerEvent");
+			ModConsole.DebugLog("Hooking TriggerEvent");
 			var xrefs = XrefScanner.XrefScan(typeof(VRC_EventDispatcherRFC).GetMethod(nameof(VRC_EventDispatcherRFC.TriggerEvent)));
 			foreach (var x in xrefs)
 			{

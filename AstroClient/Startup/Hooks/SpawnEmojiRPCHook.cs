@@ -22,7 +22,7 @@
 			{
 				try
 				{
-					ModConsole.Log("Hooking SpawnEmojiRPC");
+					ModConsole.DebugLog("Hooking SpawnEmojiRPC");
 					var originalMethod = *(IntPtr*)(IntPtr)UnhollowerUtils
 						.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(
 							typeof(VRCPlayer).GetMethod(
@@ -32,7 +32,7 @@
 					_SpawnEmojiRPCDelegate = Marshal.GetDelegateForFunctionPointer<SpawnEmojiRPCDelegate>(originalMethod);
 					if (_SpawnEmojiRPCDelegate != null)
 					{
-						ModConsole.Log("Hooked SpawnEmojiRPC");
+						ModConsole.DebugLog("Hooked SpawnEmojiRPC");
 					}
 					else
 					{

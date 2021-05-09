@@ -20,13 +20,13 @@
 		{
 			unsafe
 			{
-				ModConsole.Log("Hooking FadeTo");
+				ModConsole.DebugLog("Hooking FadeTo");
 				var originalMethod = *(IntPtr*)(IntPtr)UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(typeof(VRCUiManager).GetMethod(nameof(VRCUiManager.Method_Public_Void_String_Single_Action_0))).GetValue(null);
 				MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), typeof(OnWorldRevealHook).GetMethod(nameof(FadeToPatch), BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer());
 				_fadeToDelegate = Marshal.GetDelegateForFunctionPointer<FadeToDelegate>(originalMethod);
 				if (_fadeToDelegate != null)
 				{
-					ModConsole.Log("Hooked OnFadeTo");
+					ModConsole.DebugLog("Hooked OnFadeTo");
 				}
 				else
 				{

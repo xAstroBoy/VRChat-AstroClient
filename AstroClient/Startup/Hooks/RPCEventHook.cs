@@ -37,7 +37,7 @@
 				}
 
 				harmony1.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent1), BindingFlags.Static | BindingFlags.NonPublic)), null, null);				
-				ModConsole.Log("Hooked VRC_EventDispatcherRFC 1");
+				ModConsole.DebugLog("Hooked VRC_EventDispatcherRFC 1");
 			}
 			catch
 			{
@@ -151,7 +151,7 @@
 				Event_OnUdonSyncRPC?.Invoke(null, new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
 				if (ConfigManager.General.LogUdonEvents)
 				{
-					ModConsole.DebugLog($"Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
+					ModConsole.Log($"Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
 				}
 				return true;
 			}
@@ -160,7 +160,7 @@
 			{
 				if (parameter != "UdonSyncRunProgramAsRPC")
 				{
-					ModConsole.DebugLog($"RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
+					ModConsole.Log($"RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
 				}
 			}
 

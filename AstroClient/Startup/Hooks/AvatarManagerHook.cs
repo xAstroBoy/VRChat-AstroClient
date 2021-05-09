@@ -24,7 +24,7 @@
 				harmony = HarmonyInstance.Create(BuildInfo.Name + " AvatarManagerHook");
 			}
 			harmony.Patch(typeof(VRCAvatarManager).GetMethod("Awake", BindingFlags.Instance | BindingFlags.Public), null, new HarmonyMethod(typeof(AvatarManagerHook).GetMethod(nameof(OnVRCAMAwake), BindingFlags.Static | BindingFlags.NonPublic)));
-			ModConsole.Log("Hooked VRCAvatarManager");
+			ModConsole.DebugLog("Hooked VRCAvatarManager");
 		}
 
 		private static void OnVRCAMAwake(VRCAvatarManager __instance)
