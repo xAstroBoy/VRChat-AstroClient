@@ -176,6 +176,7 @@
 				}
 
 				playerButton.setTextColor(player.GetAPIUser().GetRankColor());
+				playerButton.setBackgroundColor(player.GetAPIUser().GetRankColor());
 
 				playerButton.setActive(ConfigManager.UI.ShowPlayersList);
 				if (ConfigManager.UI.ShowPlayersMenu != true)
