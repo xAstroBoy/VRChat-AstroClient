@@ -14,8 +14,12 @@
 
 	#endregion
 
-	internal class CheetosPatches : GameEvents
+	internal class CheetosHooks : GameEvents
 	{
+		public static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonJoin;
+
+		public static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonLeft;
+
 		public class Patch
 		{
 			private static List<Patch> Patches = new List<Patch>();
@@ -76,7 +80,7 @@
 
 		private static HarmonyMethod GetPatch(string name)
 		{
-			return new HarmonyMethod(typeof(CheetosPatches).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+			return new HarmonyMethod(typeof(CheetosHooks).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
 		}
 
 		public override void ExecutePriorityPatches()
@@ -96,7 +100,6 @@
 			{
 				ModConsole.DebugLog("[AstroClient Cheetos Patches] Start. . .");
 
-				//new Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_Final_New_Void_Player_0)), GetPatch(nameof(OpRaiseEvent2)));
 				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
 				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
 
@@ -107,7 +110,7 @@
 			finally { }
 		}
 
-		private static void OnPhotonPlayerJoin(Photon.Realtime.Player __0)
+		private static void OnPhotonPlayerJoin(ref Photon.Realtime.Player __0)
 		{
 			if (__0 != null)
 			{
@@ -119,7 +122,7 @@
 			}
 		}
 
-		private static void OnPhotonPlayerLeft(Photon.Realtime.Player __0)
+		private static void OnPhotonPlayerLeft(ref Photon.Realtime.Player __0)
 		{
 			if (__0 != null)
 			{

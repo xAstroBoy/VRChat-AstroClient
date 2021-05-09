@@ -64,16 +64,6 @@
 			RefreshButtons();
 		}
 
-		public override void OnPhotonJoined(Photon.Realtime.Player player)
-		{
-			ModConsole.Log($"[PHOTON] {player.GetDisplayName()} [{player.field_Private_Int32_0}] -> Joined!");
-		}
-
-		public override void OnPhotonLeft(Photon.Realtime.Player player)
-		{
-			ModConsole.Log($"[PHOTON] {player.GetDisplayName()} [{player.field_Private_Int32_0}] -> Left!");
-		}
-
 		private bool IsInvisible(Player player)
 		{
 			var photonPlayers = Utils.LoadBalancingPeer.prop_Room_0.prop_Dictionary_2_Int32_Player_0;
