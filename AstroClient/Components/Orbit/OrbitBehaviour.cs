@@ -67,7 +67,7 @@
 
 		public float UpdateTimer = 0f;
 		public float Timer = 0f;
-		public float TimerOffset = 0f;
+		public float TimerOffset = 16.33f;
 
 		private float InterpolationMaxY = 1f;
 		private float InterpolationMinY = -1f;
@@ -142,7 +142,7 @@
 					//VrcPickup.DisallowTheft = true;
 				}
 
-				Timer += Time.deltaTime * RotationSpeed + TimerOffset;
+				Timer += (Time.deltaTime * RotationSpeed) + TimerOffset;
 				Rotate();
 				UpdateTimer -= Time.deltaTime;
 				if (UpdateTimer <= 0f)
