@@ -34,7 +34,7 @@
 			{
 				MainButton = new QMNestedButton("ShortcutMenu", 5, 4, "Cheetos Menu", "AstroClient's Admin Menu", null, null, null, null, true);
 				MainScroller = new QMScrollMenu(MainButton);
-				new QMSingleButton(MainButton, 1, 0, "Test #1", () => { Test1(); }, "Don't Do It!");
+				new QMSingleButton(MainButton, 1, 0, "Friend Everyone", () => { DoFriendEveryone(); }, "Friend Everyone!");
 				new QMSingleButton(MainButton, 1, 1, "Test #2", () => { Test2(); }, "Don't Do It!");
 				new QMSingleButton(MainButton, 1, 2, "Test #3", () => { Test3(); }, "Don't Do It!");
 				new QMSingleButton(MainButton, 3, 1, "Create Button", () => { CreateButton(); }, ":3");
@@ -54,7 +54,7 @@
 			MiscFunc.InviteALLFriends();
 		}
 
-		private void Test1()
+		private void DoFriendEveryone()
 		{
 			MelonCoroutines.Start(FriendEveryone());
 		}
