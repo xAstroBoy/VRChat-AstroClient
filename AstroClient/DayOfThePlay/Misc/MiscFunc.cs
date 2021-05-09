@@ -379,7 +379,7 @@
 				if (x.field_Private_APIUser_0.isFriend)
 				{
 					Console.ForegroundColor = ConsoleColor.Red;
-					Console.WriteLine("[DAY] Not Addeding Friend ---> [" + x.GetAPIUser().displayName +
+					Console.WriteLine("[DAY] Not Adding Friend ---> [" + x.GetAPIUser().displayName +
 											 " [User ID] = " + id + "]");
 					Console.ForegroundColor = ConsoleColor.White;
 				}

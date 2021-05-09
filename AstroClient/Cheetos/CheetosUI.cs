@@ -11,6 +11,11 @@
 	using VRC.SDKBase;
 	using static VRC.SDKBase.VRC_EventHandler;
 	using System.Threading;
+	using System.Collections;
+	using MelonLoader;
+	using DayClientML2.Utility;
+	using Transmtn.DTO.Notifications;
+	using AstroClient.Cheetos;
 	#endregion
 
 	/// <summary>
@@ -28,12 +33,37 @@
 			{
 				MainButton = new QMNestedButton("ShortcutMenu", 5, 4, "Cheetos Menu", "AstroClient's Admin Menu", null, null, null, null, true);
 				MainScroller = new QMScrollMenu(MainButton);
+				new QMSingleButton(MainButton, 1, 1, "Test #1", () => { Test1(); }, "Don't Do It!");
 				new QMSingleButton(MainButton, 3, 1, "Create Button", () => { CreateButton(); }, ":3");
 				new QMSingleButton(MainButton, 3, 2, "Photon", () => { PrintPhotonPlayers(); }, "Photon");
 				new QMSingleButton(MainButton, 4, 0, "RPC Test #1", () => { RPCClapTest1(); }, "RPC");
 				new QMSingleButton(MainButton, 4, 1, "RPC Test #2", () => { RPCClapTest2(); }, "RPC");
 				new QMSingleButton(MainButton, 4, 2, "RPC Test #3", () => { RPCClapTest3(); }, "RPC");
 			}
+		}
+
+		private void Test1()
+		{
+			MelonCoroutines.Start(FriendEveryone());
+		}
+
+		private IEnumerator FriendEveryone()
+		{
+			var players = WorldUtils.GetAllPlayers0();
+
+			foreach (var player in players)
+			{
+				if (!player.GetAPIUser().GetIsFriend())
+				{
+					Notification xx = FriendRequest.Create(player.UserID());
+					VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
+					CheetosHelpers.SendHudNotification($"Friend Request Sent: {player.DisplayName()}");
+				}
+				Thread.Sleep(5000);
+				yield return null;
+			}
+
+			yield break;
 		}
 
 		private void CreateButton()

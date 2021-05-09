@@ -208,7 +208,7 @@
 		{
 			foreach (Client client in Clients)
 			{
-				client.Send(msg);
+				//client.Send(msg);
 			}
 		}
 
@@ -218,7 +218,7 @@
 			{
 				if (client.IsDeveloper)
 				{
-					client.Send(msg);
+					//client.Send(msg);
 				}
 			}
 		}
@@ -254,7 +254,7 @@
 				if (client.Key.Equals(other.Key) && client.ClientID != other.ClientID)
 				{
 					AstroBot.SendKeyshareLog(client, other);
-					other.Send("exit:key in use somewhere else");
+					//other.Send("exit:key in use somewhere else");
 					other.Disconnect();
 				}
 			}
@@ -272,7 +272,7 @@
 				{
 					Clients.Add(client);
 					Console.WriteLine($"Client added: {client.ClientID} / {Clients.Count}");
-					client.Send("auth-request");
+					//client.Send("auth-request");
 				}
 				Console.WriteLine($"Client Connected: {client.ClientID} / {Clients.Count}");
 			}
