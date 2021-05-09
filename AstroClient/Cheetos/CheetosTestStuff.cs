@@ -32,7 +32,7 @@
 			{
 				if (infoBar != null)
 				{
-					infoBar.transform.localPosition += new UnityEngine.Vector3(0, 85, 0);
+					infoBar.transform.localPosition += new UnityEngine.Vector3(0, 80, 0);
 					infobartext.GetComponent<UnityEngine.UI.Text>().text = "AstroClient";
 				}
 			}

@@ -3,6 +3,7 @@
 	#region Imports
 	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroClient.ConsoleUtils;
+	using AstroClient.Startup.Hooks;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using ExitGames.Client.Photon;
@@ -11,11 +12,18 @@
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
+	using System.Linq;
 	using System.Reflection;
 	#endregion
 
+	using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
+
 	internal class Patching : GameEvents
 	{
+		public static event EventHandler<PhotonPlayerEventArgs> Event_OnPhotonPlayerJoin;
+
+		public static event EventHandler<PhotonPlayerEventArgs> Event_OnPhotonPlayerLeft;
+
 		private static HarmonyMethod GetPatch(string name)
 		{
 			return new HarmonyMethod(typeof(Patching).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
@@ -31,7 +39,7 @@
 
 			public Patch(MethodInfo targetMethod, HarmonyMethod Before = null, HarmonyMethod After = null)
 			{
-				if (targetMethod == null || Before == null && After == null)
+				if (targetMethod == null || (Before == null && After == null))
 				{
 					ModConsole.Error("[Patches] TargetMethod is NULL or Pre And PostFix are Null");
 					return;
@@ -49,7 +57,7 @@
 				{
 					try
 					{
-						ModConsole.Log($"[Patches] Patching {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {(patch.PrefixMethod?.method.Name)}{(patch.PostfixMethod?.method.Name)}");
+						ModConsole.DebugLog($"[Patches] Patching {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {(patch.PrefixMethod?.method.Name)}{(patch.PostfixMethod?.method.Name)}");
 						patch.Instance.Patch(patch.TargetMethod, patch.PrefixMethod, patch.PostfixMethod);
 					}
 					catch (Exception e)
@@ -94,28 +102,57 @@
 		{
 			try
 			{
-				ModConsole.Log("[Patches] Start. . .");
+				ModConsole.DebugLog("[Patches] Start. . .");
 
 				new Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
 				//new Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_Final_New_Void_Player_0)), GetPatch(nameof(OpRaiseEvent2)));
 				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
+				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
 
-				ModConsole.Log("[AstroClient Patches] DONE!");
+				ModConsole.DebugLog("[AstroClient Patches] DONE!");
 				Patch.DoPatches();
 			}
 			catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
 			finally { }
 		}
 
-		private static void OnPhotonPlayerJoin(ref Photon.Realtime.Player __0)
+		private static void OnPhotonPlayerJoin(Photon.Realtime.Player __0)
 		{
-			try
+			if (__0 != null)
 			{
-				ModConsole.Log($"[PHOTON] {__0.GetDisplayName()} [{__0.field_Private_Int32_0}] -> Joined!");
+				try
+				{
+					ModConsole.Log($"[PHOTON] {__0.GetDisplayName()} [{__0.field_Private_Int32_0}] -> Joined!");
+				}
+				catch (Exception e)
+				{
+					ModConsole.Error($"[Photon] OnPhotonPlayerJoin Failed!");
+					ModConsole.ErrorExc(e);
+				}
 			}
-			catch
+			else
 			{
-				ModConsole.Log($"[Photon] OnPhotonPlayerJoin Failed!");
+				ModConsole.Error($"[Photon] OnPhotonPlayerJoin Failed! __0 was null.");
+			}
+		}
+
+		private static void OnPhotonPlayerLeft(Photon.Realtime.Player __0)
+		{
+			if (__0 != null)
+			{
+				try
+				{
+					ModConsole.Log($"[PHOTON] {__0.GetDisplayName()} [{__0.field_Private_Int32_0}] -> Left!");
+				}
+				catch (Exception e)
+				{
+					ModConsole.Error($"[Photon] OnPhotonPlayerLeft Failed!");
+					ModConsole.ErrorExc(e);
+				}
+			}
+			else
+			{
+				ModConsole.Error($"[Photon] OnPhotonPlayerLeft Failed! __0 was null.");
 			}
 		}
 
@@ -126,30 +163,6 @@
 				if (__0 == 7 || __0 == 206 || __0 == 201 || __0 == 1)
 				{
 					return !Movement.SerializerEnabled;
-				}
-				if (__0 == 33)
-				{
-					ModConsole.Log($"Photon {__0} received..");
-
-					//if (__1 != null)
-					//{
-					//	foreach (var kvp in __1)
-					//	{
-					//		if (kvp.Key != null)
-					//		{
-					//			ModConsole.Log($"Key: {kvp.Key}");
-					//		}
-					//		if (kvp.Value != null)
-					//		{
-					//			ModConsole.Log($"Value: {kvp.Value}");
-					//		}
-					//	}
-					//}
-					return true;
-				}
-				if (__0 == 202)
-				{
-					ModConsole.Log($"Photon {__0} received..");
 				}
 			}
 			catch { }

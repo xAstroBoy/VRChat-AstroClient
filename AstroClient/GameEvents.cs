@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.BetterPatch;
 	using AstroClient.Startup.Hooks;
 	using System;
 	using UnityEngine;
@@ -32,8 +33,8 @@
 			NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
 			NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
 
-			PhotonPlayerHooks.Event_OnPhotonPlayerJoin += Internal_OnPhotonPlayerJoined;
-			PhotonPlayerHooks.Event_OnPhotonPlayerLeft += Internal_OnPhotonPlayerLeft;
+			Patching.Event_OnPhotonPlayerJoin += Internal_OnPhotonPlayerJoined;
+			Patching.Event_OnPhotonPlayerLeft += Internal_OnPhotonPlayerLeft;
 		}
 
 		private void Internal_OnApplicationStart(object sender, EventArgs e)
