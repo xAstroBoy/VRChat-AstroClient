@@ -1,15 +1,12 @@
 ﻿namespace AstroClient
 {
 	#region Imports
-	using AstroClient.Cheetos;
 	using AstroClient.components;
 	using AstroClient.Components;
 	using AstroClient.ConsoleUtils;
-	using AstroClient.variables;
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
-	using DayClientML2.Utility.Extensions;
 	using System;
 	using System.Net.Sockets;
 	using System.Threading;
@@ -17,7 +14,6 @@
 	using System.Timers;
 	using UnityEngine;
 	using VRC;
-	using Console = System.Console;
 	using Timer = System.Timers.Timer;
 	#endregion
 

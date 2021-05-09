@@ -1,5 +1,6 @@
 ﻿namespace DayClientML2.Utility
 {
+	#region Imports
 	using AstroClient.ConsoleUtils;
 	using DayClientML2.Managers;
 	using DayClientML2.Utility.Extensions;
@@ -20,6 +21,7 @@
 	using VRC.SDKBase;
 	using VRC.UI;
 	using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
+	#endregion
 
 	internal class MiscFunc
 	{

@@ -4,7 +4,6 @@
 	using AstroClient.ConsoleUtils;
 	using AstroClient.variables;
 	using RubyButtonAPI;
-	using UnityEngine;
 	using DayClientML2.Utility.Extensions;
 	using VRC.SDKBase;
 	using static VRC.SDKBase.VRC_EventHandler;
