@@ -46,7 +46,7 @@
 		/// Stop doing this, add to the list rather than refresh all of it -- Cheetos
 		/// </summary>
 		/// <param name="player"></param>
-		public override void OnPlayerJoined(Player player)
+		public override void OnPhotonJoined(Photon.Realtime.Player player)
 		{
 			RefreshButtons();
 			if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
@@ -59,7 +59,7 @@
 		/// Stop doing this, remove from the list rather than refresh all of it -- Cheetos
 		/// </summary>
 		/// <param name="player"></param>
-		public override void OnPlayerLeft(Player player)
+		public override void OnPhotonLeft(Photon.Realtime.Player player)
 		{
 			RefreshButtons();
 		}
@@ -101,16 +101,23 @@
 			ResetButtons();
 			foreach (var player in temp_list.Reverse())
 			{
-				var playerAPI = player.GetVRCPlayerApi();
-
-				if (player == null || playerAPI == null)
+				if (player == null || player.GetVRCPlayerApi() == null)
 				{
-					return;
+					ModConsole.Error($"Photon Player Was Null");
+					break;
 				}
+
+				if (IsInvisible(player))
+				{
+					ModConsole.Error($"Player was invisible");
+					break;
+				}
+
 				var streamer = GameObject.Find("UserInterface/MenuContent/Screens/Settings/ComfortSafetyPanel/StreamerModeToggle").GetComponent<UnityEngine.UI.Toggle>().isOn;
 
 				var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, player.DisplayName(), () => { SelectPlayer(player); }, $"Select {player.DisplayName()}", null, null, true);
 
+				var playerAPI = player.GetVRCPlayerApi();
 				var rank = player.GetAPIUser().GetRankEnum();
 
 				if (playerAPI.isMaster)
