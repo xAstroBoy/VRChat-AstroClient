@@ -114,7 +114,7 @@
 		{
 			if (__0 != null)
 			{
-				CheetosHelpers.SendHudNotification($"[PHOTON] {__0.GetDisplayName()} [{__0.field_Private_Int32_0}] -> Joined!");
+				CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {__0.GetDisplayName()} Joined!");
 			}
 			else
 			{
@@ -126,7 +126,7 @@
 		{
 			if (__0 != null)
 			{
-				CheetosHelpers.SendHudNotification($"[PHOTON] {__0.GetDisplayName()} [{__0.field_Private_Int32_0}] -> Left!");
+				CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {__0.GetDisplayName()} Left!");
 			}
 			else
 			{

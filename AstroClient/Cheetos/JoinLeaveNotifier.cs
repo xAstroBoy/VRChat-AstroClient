@@ -37,20 +37,20 @@
 		{
 			ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Joined!");
 
-			if (ConfigManager.General.JoinLeave && isReady)
-			{
-				CheetosHelpers.SendHudNotification($"<color=cyan>Photon Join</color>: {player?.GetUsername()}");
-			}
+			//if (ConfigManager.General.JoinLeave && isReady)
+			//{
+			//	CheetosHelpers.SendHudNotification($"<color=cyan>Photon Join</color>: {player?.GetUsername()}");
+			//}
 		}
 
 		public override void OnPhotonLeft(Photon.Realtime.Player player)
 		{
 			ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Left!");
 
-			if (ConfigManager.General.JoinLeave && isReady)
-			{
-				CheetosHelpers.SendHudNotification($"<color=cyan>Photon Leave</color>: {player?.GetUsername()}");
-			}
+			//if (ConfigManager.General.JoinLeave && isReady)
+			//{
+			//	CheetosHelpers.SendHudNotification($"<color=cyan>Photon Leave</color>: {player?.GetUsername()}");
+			//}
 		}
 	}
 }
