@@ -107,12 +107,6 @@
 					break;
 				}
 
-				if (IsInvisible(player))
-				{
-					ModConsole.Error($"Player was invisible");
-					break;
-				}
-
 				var streamer = GameObject.Find("UserInterface/MenuContent/Screens/Settings/ComfortSafetyPanel/StreamerModeToggle").GetComponent<UnityEngine.UI.Toggle>().isOn;
 
 				var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, player.DisplayName(), () => { SelectPlayer(player); }, $"Select {player.DisplayName()}", null, null, true);
