@@ -12,6 +12,8 @@
 	using Transmtn.DTO.Notifications;
 	using AstroClient.Cheetos;
 	using System.Threading.Tasks;
+	using System.Collections;
+	using MelonLoader;
 	#endregion
 
 	/// <summary>
@@ -29,7 +31,7 @@
 			{
 				MainButton = new QMNestedButton("ShortcutMenu", 5, 4, "Cheetos Menu", "AstroClient's Admin Menu", null, null, null, null, true);
 				MainScroller = new QMScrollMenu(MainButton);
-				new QMSingleButton(MainButton, 1, 1, "Test #1", () => { FriendEveryone(); }, "Don't Do It!");
+				new QMSingleButton(MainButton, 1, 1, "Test #1", () => { Test1(); }, "Don't Do It!");
 				new QMSingleButton(MainButton, 3, 1, "Create Button", () => { CreateButton(); }, ":3");
 				new QMSingleButton(MainButton, 3, 2, "Photon", () => { PrintPhotonPlayers(); }, "Photon");
 				new QMSingleButton(MainButton, 4, 0, "RPC Test #1", () => { RPCClapTest1(); }, "RPC");
@@ -38,24 +40,26 @@
 			}
 		}
 
-		private void FriendEveryone()
+		private void Test1()
 		{
-			Task task = new Task(() =>
-			{
-				var players = WorldUtils.GetAllPlayers0();
+			MelonCoroutines.Start(FriendEveryone());
+		}
 
-				foreach (var player in players)
+		private IEnumerator FriendEveryone()
+		{
+			var players = WorldUtils.GetAllPlayers0();
+
+			foreach (var player in players)
+			{
+				if (!player.GetAPIUser().GetIsFriend())
 				{
-					if (!player.GetAPIUser().GetIsFriend())
-					{
-						Notification xx = FriendRequest.Create(player.UserID());
-						VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
-						CheetosHelpers.SendHudNotification($"Friend Request Sent: {player.DisplayName()}");
-					}
-					Thread.Sleep(5000);
+					Notification xx = FriendRequest.Create(player.UserID());
+					VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
+					CheetosHelpers.SendHudNotification($"Friend Request Sent: {player.DisplayName()}");
 				}
-			});
-			task.Start();
+				yield return null;
+			}
+			yield break;
 		}
 
 		private void CreateButton()
