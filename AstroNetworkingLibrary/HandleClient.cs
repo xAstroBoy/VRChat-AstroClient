@@ -1,5 +1,6 @@
 ﻿namespace AstroNetworkingLibrary
 {
+	using AstroNetworkingLibrary.Serializable;
 	using System;
 	using System.Net.Sockets;
 	using System.Threading.Tasks;
@@ -106,32 +107,24 @@
 			}
 		}
 
-		public void Send(string msg)
+		public void Send(PacketData packetData) // 0 = text, 1 = data
 		{
-			if (IsConnected)
-			{
-				Send(msg.ConvertToBytes());
-			}
-		}
+			//SendSecret();
+			////SendHeaderType(headerType);
+			//SendHeaderLength(msg);
 
-		public void Send(byte[] msg, int headerType = 1000) // 0 = text, 1 = data
-		{
-			SendSecret();
-			SendHeaderType(headerType);
-			SendHeaderLength(msg);
-
-			if (msg != null && msg.Length > 0)
-			{
-				try
-				{
-					clientStream.Write(msg, 0, msg.Length);
-					clientStream.Flush();
-				}
-				catch
-				{
-					Disconnect();
-				}
-			}
+			//if (msg != null && msg.Length > 0)
+			//{
+			//	try
+			//	{
+			//		clientStream.Write(msg, 0, msg.Length);
+			//		clientStream.Flush();
+			//	}
+			//	catch
+			//	{
+			//		Disconnect();
+			//	}
+			//}
 		}
 
 		private void StartThread()
@@ -145,21 +138,6 @@
 			}
 
 			Disconnected?.Invoke(this, new EventArgs());
-		}
-
-		private int RecieveHeaderType()
-		{
-			try
-			{
-				byte[] received = new byte[4];
-				clientStream.Read(received, 0, received.Length);
-				return BitConverter.ToInt32(received, 0);
-			}
-			catch
-			{
-				Disconnect();
-				return 0;
-			}
 		}
 
 		private int ReceiveSecret()
@@ -205,7 +183,6 @@
 				Disconnect();
 			}
 
-			int headerType = RecieveHeaderType();
 			int len = ReceiveHeaderLength();
 
 			if (len > 0)
