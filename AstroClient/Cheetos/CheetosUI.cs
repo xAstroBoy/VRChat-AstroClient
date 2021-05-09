@@ -32,7 +32,7 @@
 		{
 			if (Bools.IsDeveloper)
 			{
-				MainButton = new QMNestedButton("ShortcutMenu", 5, 4, "Cheetos Menu", "AstroClient's Admin Menu", null, null, null, null, true);
+				MainButton = new QMNestedButton("ShortcutMenu", 5, 4, "<color=orange>Cheetos Menu</color>", "<color=orange>Cheeto's</color> Personal Menu", null, null, null, null, true);
 				MainScroller = new QMScrollMenu(MainButton);
 				new QMSingleButton(MainButton, 1, 0, "Friend Everyone", () => { DoFriendEveryone(); }, "Friend Everyone!");
 				new QMSingleButton(MainButton, 1, 1, "Test #2", () => { Test2(); }, "Don't Do It!");

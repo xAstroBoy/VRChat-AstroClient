@@ -26,13 +26,24 @@
 
 		public static IEnumerator HookNetworkManager()
 		{
-			while (ReferenceEquals(NetworkManager.field_Internal_Static_NetworkManager_0, null)) yield return null;
-			while (ReferenceEquals(VRCAudioManager.field_Private_Static_VRCAudioManager_0, null)) yield return null;
-			while (ReferenceEquals(VRCUiManager.prop_VRCUiManager_0, null)) yield return null;
+			while (NetworkManager.field_Internal_Static_NetworkManager_0 is null)
+			{
+				yield return null;
+			}
 
-			NetworkManagerHooks.Initialize();
-			NetworkManagerHooks.OnJoin += OnPlayerJoinedEvent;
-			NetworkManagerHooks.OnLeave += OnPlayerLeftEvent;
+			while (VRCAudioManager.field_Private_Static_VRCAudioManager_0 is null)
+			{
+				yield return null;
+			}
+
+			while (VRCUiManager.prop_VRCUiManager_0 is null)
+			{
+				yield return null;
+			}
+
+			Initialize();
+			OnJoin += OnPlayerJoinedEvent;
+			OnLeave += OnPlayerLeftEvent;
 		}
 
 		public static void OnPlayerJoinedEvent(Player player)
@@ -70,7 +81,7 @@
 		public static void Initialize()
 		{
 			if (IsInitialized) return;
-			if (ReferenceEquals(NetworkManager.field_Internal_Static_NetworkManager_0, null)) return;
+			if (NetworkManager.field_Internal_Static_NetworkManager_0 is null) return;
 
 			var field0 = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_0;
 			var field1 = NetworkManager.field_Internal_Static_NetworkManager_0.field_Internal_VRCEventDelegate_1_Player_1;
