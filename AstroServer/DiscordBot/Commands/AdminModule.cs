@@ -68,7 +68,7 @@
 			StringBuilder stringBuilder = new StringBuilder();
 			foreach (Client client in ClientServer.Clients.Where(c => c.Name.Contains(name)))
 			{
-				client.Send($"notify-dev:{msg}");
+				//client.Send($"notify-dev:{msg}");
 				stringBuilder.Append($"Notified: {client.Name}, {client.UserID} \r\n");
 			}
 
@@ -82,7 +82,7 @@
 			StringBuilder stringBuilder = new StringBuilder();
 			foreach (Client client in ClientServer.Clients)
 			{
-				client.Send(cmd);
+				//client.Send(cmd);
 				stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID} \r\n");
 			}
 
@@ -96,7 +96,7 @@
 			StringBuilder stringBuilder = new StringBuilder();
 			foreach (Client client in ClientServer.Clients.Where(c => c.Name.Contains(name)))
 			{
-				client.Send(cmd);
+				//client.Send(cmd);
 				stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID} \r\n");
 			}
 			_ = await ReplyAsync(stringBuilder.ToString());
@@ -109,7 +109,7 @@
 			StringBuilder stringBuilder = new StringBuilder();
 			foreach (Client client in ClientServer.Clients.Where(c => c.Name.Contains(name)))
 			{
-				client.Send("exit:you have been kicked");
+				//client.Send("exit:you have been kicked");
 				stringBuilder.Append($"Kicked: {client.Name}, {client.UserID} \r\n");
 			}
 
