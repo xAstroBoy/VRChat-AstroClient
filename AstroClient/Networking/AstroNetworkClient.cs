@@ -46,7 +46,7 @@
 
 		private static void OnPingEvent(System.Object source, ElapsedEventArgs e)
 		{
-			Client.Send("ping");
+			//Client.Send("ping");
 		}
 
 		private static void Connect()
