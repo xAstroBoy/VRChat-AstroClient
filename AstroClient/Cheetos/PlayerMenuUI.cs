@@ -5,6 +5,7 @@
 	using RubyButtonAPI;
 	using System.Collections.Generic;
 	using System.Linq;
+	using System.Net;
 	using UnityEngine;
 	using VRC;
 
@@ -110,6 +111,7 @@
 					break;
 				}
 
+				var prefix = string.Empty;
 				var streamer = GameObject.Find("UserInterface/MenuContent/Screens/Settings/ComfortSafetyPanel/StreamerModeToggle").GetComponent<UnityEngine.UI.Toggle>().isOn;
 
 				var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, player.DisplayName(), () => { SelectPlayer(player); }, $"Select {player.DisplayName()}", null, null, true);
@@ -126,6 +128,7 @@
 					}
 					else
 					{
+						prefix += "[IM]";
 						playerButton.setTextColor(InstanceMasterColor);
 					}
 				}
@@ -145,8 +148,18 @@
 				}
 				else if (player.GetAPIUser().GetIsFriend())
 				{
+					prefix += "[F]";
 					playerButton.setBackgroundColor(FriendColor);
 					playerButton.setTextColor(FriendColor);
+				}
+
+				if (player.GetIsInVR())
+				{
+					prefix += "[VR]";
+				}
+				else
+				{
+					prefix += "[PC]";
 				}
 
 				//if (IsInvisible(player))
@@ -155,16 +168,11 @@
 				//	playerButton.setBackgroundColor(Color.black);
 				//}
 
-				if (rank != null)
+				if (player.GetVRCPlayer().GetIsDANGER())
 				{
-					if (rank == PlayerExtensions.RankType.Moderator || rank == PlayerExtensions.RankType.Admin)
-					{
-						var uiManager = VRCUiManager.prop_VRCUiManager_0;
-						PopupManager.QueHudMessage(uiManager, $"Warning {player.DisplayName()} is an admin/moderator!");
-
-						playerButton.setTextColor(ModeratorColor);
-						playerButton.setBackgroundColor(ModeratorColor);
-					}
+					prefix += "[DANGER]";
+					playerButton.setTextColor(ModeratorColor);
+					playerButton.setBackgroundColor(ModeratorColor);
 				}
 
 				playerButton.setActive(ConfigManager.UI.ShowPlayersList);
@@ -172,6 +180,13 @@
 				{
 					playerButton.setActive(false);
 				}
+
+				if (prefix != string.Empty)
+				{
+					prefix += "\n";
+				}
+
+				playerButton.setButtonText(prefix + player.DisplayName());
 				PlayerButtons.Add(player.UserID(), playerButton);
 
 				yPos += 0.5f;
