@@ -46,7 +46,7 @@
 		/// Stop doing this, add to the list rather than refresh all of it -- Cheetos
 		/// </summary>
 		/// <param name="player"></param>
-		public override void OnPhotonJoined(Photon.Realtime.Player player)
+		public override void OnPlayerJoined(Player player)
 		{
 			RefreshButtons();
 			if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
@@ -59,7 +59,7 @@
 		/// Stop doing this, remove from the list rather than refresh all of it -- Cheetos
 		/// </summary>
 		/// <param name="player"></param>
-		public override void OnPhotonLeft(Photon.Realtime.Player player)
+		public override void OnPlayerLeft(Player player)
 		{
 			RefreshButtons();
 		}

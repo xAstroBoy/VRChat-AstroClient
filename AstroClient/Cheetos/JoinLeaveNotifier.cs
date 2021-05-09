@@ -39,7 +39,7 @@
 
 			if (ConfigManager.General.JoinLeave && isReady)
 			{
-				CheetosHelpers.SendHudNotification($"Photon Join: {player?.GetUsername()}");
+				CheetosHelpers.SendHudNotification($"<color=cyan>Photon Join</color>: {player?.GetUsername()}");
 			}
 		}
 
@@ -49,23 +49,7 @@
 
 			if (ConfigManager.General.JoinLeave && isReady)
 			{
-				CheetosHelpers.SendHudNotification($"Photon Leave: {player?.GetUsername()}");
-			}
-		}
-
-		public override void OnPlayerJoined(Player player)
-		{
-			if (ConfigManager.General.JoinLeave && isReady)
-			{
-				CheetosHelpers.SendHudNotification($"Join: {player.DisplayName()}");
-			}
-		}
-
-		public override void OnPlayerLeft(Player player)
-		{
-			if (ConfigManager.General.JoinLeave && isReady)
-			{
-				CheetosHelpers.SendHudNotification($"Leave: {player.DisplayName()}");
+				CheetosHelpers.SendHudNotification($"<color=cyan>Photon Leave</color>: {player?.GetUsername()}");
 			}
 		}
 	}
