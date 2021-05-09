@@ -11,6 +11,7 @@
 	using RubyButtonAPI;
 	using System;
 	using System.Collections;
+	using System.Linq;
 	using System.Threading;
 	using Transmtn.DTO.Notifications;
 	using VRC.SDKBase;
@@ -62,15 +63,20 @@
 		{
 			var players = WorldUtils.GetAllPlayers0();
 
+			int count = 0;
 			foreach (var player in players)
 			{
 				if (!player.GetAPIUser().GetIsFriend() && !player.UserID().Equals(LocalPlayerUtils.GetSelfPlayer().UserID()))
 				{
 					try
 					{
-						Notification xx = FriendRequest.Create(player.UserID());
-						VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
-						CheetosHelpers.SendHudNotification($"Friend Request Sent: {player.DisplayName()}");
+						MiscUtility.DelayFunction(2 * count, () =>
+						{
+							Notification xx = FriendRequest.Create(player.UserID());
+							VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
+							CheetosHelpers.SendHudNotification($"Friend Request Sent: {player.DisplayName()}");
+						});
+						count++;
 					}
 					catch (Exception e)
 					{
