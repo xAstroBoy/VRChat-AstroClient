@@ -18,6 +18,11 @@
 				Directory.CreateDirectory(dumpFolderPath);
 			}
 
+			if (File.Exists(dumpFilePath))
+			{
+				File.Delete(dumpFilePath);
+			}
+
 			if (!File.Exists(dumpFilePath))
 			{
 				FileStream fs = new FileStream(dumpFilePath, FileMode.Create);
