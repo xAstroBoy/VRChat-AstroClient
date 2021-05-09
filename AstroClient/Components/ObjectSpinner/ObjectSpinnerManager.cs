@@ -63,11 +63,11 @@
 				UnityEngine.Object.DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{
-					ModConsole.Log("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
+					ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
 				}
 				else
 				{
-					ModConsole.Log("[ " + name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
+					ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
 				}
 			}
 		}

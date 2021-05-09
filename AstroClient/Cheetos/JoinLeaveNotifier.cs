@@ -32,6 +32,22 @@
 			isReady = true;
 		}
 
+		public override void OnPhotonJoined(Photon.Realtime.Player player)
+		{
+			if (ConfigManager.General.JoinLeave && isReady)
+			{
+				CheetosHelpers.SendHudNotification($"Photon Join: {player.field_Public_Player_0.DisplayName()}");
+			}
+		}
+
+		public override void OnPhotonLeft(Photon.Realtime.Player player)
+		{
+			if (ConfigManager.General.JoinLeave && isReady)
+			{
+				CheetosHelpers.SendHudNotification($"Photon Leave: {player.field_Public_Player_0.DisplayName()}");
+			}
+		}
+
 		public override void OnPlayerJoined(Player player)
 		{
 			if (ConfigManager.General.JoinLeave && isReady)

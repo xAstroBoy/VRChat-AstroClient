@@ -35,12 +35,17 @@
 				MainScroller = new QMScrollMenu(MainButton);
 				new QMSingleButton(MainButton, 1, 0, "Test #1", () => { Test1(); }, "Don't Do It!");
 				new QMSingleButton(MainButton, 1, 1, "Test #2", () => { Test2(); }, "Don't Do It!");
+				new QMSingleButton(MainButton, 1, 2, "Test #3", () => { Test3(); }, "Don't Do It!");
 				new QMSingleButton(MainButton, 3, 1, "Create Button", () => { CreateButton(); }, ":3");
 				new QMSingleButton(MainButton, 3, 2, "Photon", () => { PrintPhotonPlayers(); }, "Photon");
 				new QMSingleButton(MainButton, 4, 0, "RPC Test #1", () => { RPCClapTest1(); }, "RPC");
 				new QMSingleButton(MainButton, 4, 1, "RPC Test #2", () => { RPCClapTest2(); }, "RPC");
 				new QMSingleButton(MainButton, 4, 2, "RPC Test #3", () => { RPCClapTest3(); }, "RPC");
 			}
+		}
+
+		private void Test3()
+		{
 		}
 
 		private void Test2()

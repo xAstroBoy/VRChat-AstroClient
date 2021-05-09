@@ -281,7 +281,7 @@
 							}
 						}
 					}
-					ModConsole.Log($"[Jar Role Revealer] Registered {JarRoleLinks.Count()} Linked Nodes and Player Entries. ({DescPart})");
+					ModConsole.DebugLog($"[Jar Role Revealer] Registered {JarRoleLinks.Count()} Linked Nodes and Player Entries. ({DescPart})");
 				}
 				else
 				{
