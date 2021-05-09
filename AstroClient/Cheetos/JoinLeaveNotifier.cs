@@ -36,7 +36,7 @@
 		{
 			if (ConfigManager.General.JoinLeave && isReady)
 			{
-				CheetosHelpers.SendHudNotification($"Photon Join: {player.field_Public_Player_0.DisplayName()}");
+				CheetosHelpers.SendHudNotification($"Photon Join: {player?.GetUsername()}");
 			}
 		}
 
@@ -44,7 +44,7 @@
 		{
 			if (ConfigManager.General.JoinLeave && isReady)
 			{
-				CheetosHelpers.SendHudNotification($"Photon Leave: {player.field_Public_Player_0.DisplayName()}");
+				CheetosHelpers.SendHudNotification($"Photon Leave: {player?.GetUsername()}");
 			}
 		}
 
