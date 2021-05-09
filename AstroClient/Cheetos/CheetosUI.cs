@@ -85,6 +85,7 @@
 				}
 				yield return null;
 			}
+			CheetosHelpers.SendHudNotification("Done Sending Friend Requests!");
 			yield break;
 		}
 
