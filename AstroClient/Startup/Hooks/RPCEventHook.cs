@@ -1,14 +1,17 @@
 ﻿namespace AstroClient
 {
+	#region Imports
+
 	using AstroClient.ConsoleUtils;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using Harmony;
-	using Mono.CSharp;
 	using System;
 	using System.Reflection;
 	using VRC;
 	using VRC.SDKBase;
+
+	#endregion
 
 	public class RPCEventHook : GameEvents
 	{

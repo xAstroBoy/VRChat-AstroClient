@@ -60,7 +60,7 @@
 						ModConsole.ErrorExc(e);
 					}
 				}
-				ModConsole.Log($"[Patches] Done! Patched {Patches.Count} Methods!");
+				ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods!");
 			}
 
 			public static async void UnDoPatches()
@@ -77,7 +77,7 @@
 						ModConsole.ErrorExc(e);
 					}
 				}
-				ModConsole.Log($"[Patches] Done! UnPatched {Patches.Count} Methods!");
+				ModConsole.DebugLog($"[Patches] Done! UnPatched {Patches.Count} Methods!");
 			}
 		}
 

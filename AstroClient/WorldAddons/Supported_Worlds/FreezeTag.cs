@@ -70,7 +70,7 @@
 					FreezeTagCheatsPage.getMainButton().setIntractable(true);
 					FreezeTagCheatsPage.getMainButton().setTextColor(Color.green);
 				}
-				ModConsole.Log($"Recognized {name} World, removing anti-cheat mechanism!");
+				ModConsole.DebugLog($"Recognized {name} World, removing anti-cheat mechanism!");
 				var SpawnRoof = GameObjectFinder.Find("spawn/mainroom 2/ceiling");
 				var Barriers = GameObjectFinder.Find("packmanmap/barriors");
 				var OutsideMazePlane = GameObjectFinder.Find("packmanmap/Plane (4)");
@@ -135,11 +135,11 @@
 							if (obj.name.ToLower().Contains("tagplayerctrl") && action.ToLower().Contains("seestuck"))
 							{
 								SelfNode = obj;
-								ModConsole.Log($"Found Self Assigned Node! {SelfNode.name}");
+								ModConsole.DebugLog($"Found Self Assigned Node! {SelfNode.name}");
 								UnfreezeMeUdonEvent = UdonSearch.FindUdonEvent(SelfNode.name, "unfreezeme");
 								if (UnfreezeMeUdonEvent != null)
 								{
-									ModConsole.Log("Found Self Unfreeze Event!");
+									ModConsole.DebugLog("Found Self Unfreeze Event!");
 								}
 							}
 						}
@@ -156,13 +156,13 @@
 									if (UnfreezeMeUdonEvent != null)
 									{
 										UnfreezeMeUdonEvent.ExecuteUdonEvent();
-										ModConsole.Log("Detected Freeze!, Unfreezing!", System.Drawing.Color.LawnGreen);
+										ModConsole.DebugLog("Detected Freeze!, Unfreezing!", System.Drawing.Color.LawnGreen);
 									}
 									else
 									{
 										UnfreezeMeUdonEvent = UdonSearch.FindUdonEvent(SelfNode, "unfreezeme");
 										UnfreezeMeUdonEvent.ExecuteUdonEvent();
-										ModConsole.Log("Detected Freeze!, Unfreezing!", System.Drawing.Color.LawnGreen);
+										ModConsole.DebugLog("Detected Freeze!, Unfreezing!", System.Drawing.Color.LawnGreen);
 									}
 								}));
 							}

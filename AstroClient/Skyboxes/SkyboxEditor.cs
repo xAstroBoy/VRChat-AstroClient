@@ -60,7 +60,7 @@
 		{
 			if (!HasLoadedCachedSkyboxes)
 			{
-				ModConsole.Log("[Skybox Loader] : This will Probably take awhile...");
+				ModConsole.DebugLog("[Skybox Loader] : This will Probably take awhile...");
 				MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
 				HasLoadedCachedSkyboxes = true;
 			}
@@ -183,7 +183,7 @@
 			var scroll = new QMHalfScroll(menu);
 			new QMSingleButton(menu, 0, -1, "Refresh", delegate
 			{
-				ModConsole.Log("[Skybox Loader (VR MODE) ] : This will Probably take awhile...");
+				ModConsole.DebugLog("[Skybox Loader (VR MODE) ] : This will Probably take awhile...");
 				MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
 				scroll.Refresh();
 			}, "", null, null, true);

@@ -86,7 +86,7 @@
 				}
 				else
 				{
-					ModConsole.Log("Spawning a new sun!");
+					ModConsole.DebugLog("Spawning a new sun!");
 					newSun = new Light();
 					isUsingASpawnedSun = true;
 					if (newSun != null)
@@ -98,7 +98,7 @@
 						newSun.color = Color.white;
 						newSun.intensity = 1f;
 					}
-					ModConsole.Log("Attempting to Set Sun to RenderSettings.Sun");
+					ModConsole.DebugLog("Attempting to Set Sun to RenderSettings.Sun");
 					newSun.transform.SetParent(RenderSettings.sun.transform);
 					newSun.transform.rotation = RenderSettings.sun.transform.rotation;
 				}
@@ -203,11 +203,11 @@
 					UnityEngine.Object.DestroyImmediate(newSun);
 					if (newSun == null)
 					{
-						ModConsole.Log("The Generated Sun has been destroyed  : " + newSun.ToString());
+						ModConsole.DebugLog("The Generated Sun has been destroyed  : " + newSun.ToString());
 					}
 					else
 					{
-						ModConsole.Log("Something went wrong while destroying the Generated Sun!");
+						ModConsole.DebugLog("Something went wrong while destroying the Generated Sun!");
 					}
 					isUsingASpawnedSun = false;
 				}
@@ -226,12 +226,12 @@
 			if (!AreLightMapsEnabled)
 			{
 				DisableLightMaps();
-				ModConsole.Log("Lightmaps should be deactivated");
+				ModConsole.DebugLog("Lightmaps should be deactivated");
 			}
 			else
 			{
 				EnableLightMaps();
-				ModConsole.Log("Lightmaps should be Enabled");
+				ModConsole.DebugLog("Lightmaps should be Enabled");
 			}
 		}
 
@@ -309,16 +309,16 @@
 						light.range = 999f;
 						light.spotAngle = float.MaxValue;
 						light.color = Color.white;
-						ModConsole.Log("Fullbright Enabled!");
+						ModConsole.DebugLog("Fullbright Enabled!");
 					}
 					else
 					{
 						light.enabled = false;
-						ModConsole.Log("Fullbright Deactivated!");
+						ModConsole.DebugLog("Fullbright Deactivated!");
 					}
 				}
 			}
-			else { ModConsole.Log("I Can't find Player's GameObject, try again!"); }
+			else { ModConsole.DebugLog("I Can't find Player's GameObject, try again!"); }
 		}
 
 		public static void ToggleFullbrightHeadLight()
