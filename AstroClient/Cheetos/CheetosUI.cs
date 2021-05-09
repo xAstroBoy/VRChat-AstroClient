@@ -43,7 +43,7 @@
 
 		private void Test2()
 		{
-			MiscFunc.RequestALLFriends();
+			MiscFunc.InviteALLFriends();
 		}
 
 		private void Test1()
