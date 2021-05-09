@@ -21,7 +21,7 @@
 		{
 			// Create a timer with a two second interval.
 			aTimer = new System.Timers.Timer(5000);
-			// Hook up the Elapsed event for the timer. 
+			// Hook up the Elapsed event for the timer.
 			aTimer.Elapsed += OnTimedEvent;
 			aTimer.AutoReset = false;
 			aTimer.Enabled = true;

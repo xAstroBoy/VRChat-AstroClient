@@ -1,9 +1,8 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.extensions;
 	using TMPro;
 	using UnityEngine;
-	using AstroExtensions;
-	using AstroClient.extensions;
 
 	public static class ButtonCreator
 	{

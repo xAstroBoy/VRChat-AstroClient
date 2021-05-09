@@ -1,9 +1,11 @@
 ﻿namespace AstroClient
 {
 	#region Imports
+
 	using AstroClient.variables;
 	using RubyButtonAPI;
-	#endregion
+
+	#endregion Imports
 
 	/// <summary>
 	/// Cheeto's temporary UI for new/wip features

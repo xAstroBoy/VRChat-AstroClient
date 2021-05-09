@@ -1,10 +1,9 @@
 ﻿namespace AstroClient
 {
 	#region Imports
-	using AstroClient.Cheetos;
-	using AstroClient.ConsoleUtils;
+
 	using AstroClient.Finder;
-	using AstroClient.variables;
+
 	#endregion Imports
 
 	public class VRCPlusHider : GameEvents

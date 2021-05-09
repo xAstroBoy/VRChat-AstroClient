@@ -12,7 +12,7 @@
 		private static bool ExploitCheck()
 		{
 			var players = WorldUtils.GetAllPlayers0();
-			
+
 			foreach (var player in players)
 			{
 				if (StreamerIDs.Contains(player.UserID()))

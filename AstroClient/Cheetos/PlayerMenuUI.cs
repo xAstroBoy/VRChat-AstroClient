@@ -132,9 +132,9 @@
 					}
 					else
 					{
-                        playerButton.setTextColor(InstanceMasterColor);
+						playerButton.setTextColor(InstanceMasterColor);
 					}
-					}
+				}
 				else if (player.GetAPIUser().IsSelf)
 				{
 					if (streamer == true)

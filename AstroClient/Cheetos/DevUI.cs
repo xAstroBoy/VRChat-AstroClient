@@ -1,12 +1,14 @@
 ﻿namespace AstroClient
 {
 	#region Imports
+
 	using AstroClient.variables;
 	using RubyButtonAPI;
 	using System.Diagnostics;
 	using System.IO;
 	using UnityEngine;
-	#endregion
+
+	#endregion Imports
 
 	/// <summary>
 	/// Cheeto's temporary UI for new/wip features

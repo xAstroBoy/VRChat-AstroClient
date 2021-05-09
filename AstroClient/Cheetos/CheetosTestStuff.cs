@@ -6,9 +6,8 @@
 	using System;
 	using System.IO;
 	using UnityEngine;
-	using UnityEngine.UI;
 
-	class CheetosTestStuff : GameEvents
+	internal class CheetosTestStuff : GameEvents
 	{
 		public override void VRChat_OnUiManagerInit()
 		{
@@ -20,8 +19,7 @@
 
 			var infoBar = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar");
 			var infobartext = GameObject.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar/EarlyAccessText").GetComponent<UnityEngine.UI.Text>();
-			infobartext.color= new Color(1, 0, 1, 1);
-			
+			infobartext.color = new Color(1, 0, 1, 1);
 
 			if (File.Exists(Environment.CurrentDirectory + @"\Mods\Notorious.dll"))
 			{
@@ -29,7 +27,8 @@
 				{
 					infoBar.transform.localPosition -= new UnityEngine.Vector3(0, 110, 0);
 				}
-			} else
+			}
+			else
 			{
 				if (infoBar != null)
 				{
