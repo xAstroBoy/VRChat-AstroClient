@@ -142,7 +142,7 @@
 					//VrcPickup.DisallowTheft = true;
 				}
 
-				Timer += Time.deltaTime * RotationSpeed + TimerOffset;
+				Timer += (Time.deltaTime * RotationSpeed) + TimerOffset;
 				Rotate();
 				UpdateTimer -= Time.deltaTime;
 				if (UpdateTimer <= 0f)

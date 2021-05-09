@@ -114,7 +114,7 @@
 						return;
 					}
 
-					if ((Time.time - LastTimeCheck2 > 0.9f))
+					if (Time.time - LastTimeCheck2 > 16.33f)
 					{
 						if (!HasRequiredSettings)
 						{
@@ -140,10 +140,10 @@
 							LastTimeCheck2 = Time.time;
 							HasRequiredSettings = true;
 						}
-					}
 
-					OnlineEditor.TakeObjectOwnership(obj);
-					obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+						OnlineEditor.TakeObjectOwnership(obj);
+						obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+					}
 				}
 			}
 			catch

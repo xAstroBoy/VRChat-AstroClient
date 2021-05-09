@@ -115,7 +115,7 @@
 						return;
 					}
 
-					if ((Time.time - LastTimeCheck2 > 0.9f))
+					if (Time.time - LastTimeCheck2 > 16.33f)
 					{
 						if (!HasRequiredSettings)
 						{
