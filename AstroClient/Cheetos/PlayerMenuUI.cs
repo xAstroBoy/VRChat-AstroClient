@@ -124,12 +124,12 @@
 					if (streamer == true && player.GetAPIUser().IsSelf)
 					{
 						playerButton.setButtonText("Vrchat User");
-						playerButton.setTextColor(InstanceMasterColor);
+						//playerButton.setTextColor(InstanceMasterColor);
 					}
 					else
 					{
-						prefix += "[IM]";
-						playerButton.setTextColor(InstanceMasterColor);
+						prefix += "<color=cyan>[IM]</color>";
+						//playerButton.setTextColor(InstanceMasterColor);
 					}
 				}
 				else if (player.GetAPIUser().IsSelf)
@@ -137,29 +137,29 @@
 					if (streamer == true)
 					{
 						playerButton.setButtonText("Vrchat User");
-						playerButton.setTextColor(SelfColor);
-						playerButton.setBackgroundColor(SelfColor);
+						//playerButton.setTextColor(SelfColor);
+						//playerButton.setBackgroundColor(SelfColor);
 					}
 					else
 					{
-						playerButton.setTextColor(SelfColor);
-						playerButton.setBackgroundColor(SelfColor);
+						//playerButton.setTextColor(SelfColor);
+						//playerButton.setBackgroundColor(SelfColor);
 					}
 				}
 				else if (player.GetAPIUser().GetIsFriend())
 				{
-					prefix += "[F]";
-					playerButton.setBackgroundColor(FriendColor);
-					playerButton.setTextColor(FriendColor);
+					prefix += "<color=green>[F]</color>";
+					//playerButton.setBackgroundColor(FriendColor);
+					//playerButton.setTextColor(FriendColor);
 				}
 
 				if (player.GetIsInVR())
 				{
-					prefix += "[VR]";
+					prefix += "<color=silver>[VR]</color>";
 				}
 				else
 				{
-					prefix += "[PC]";
+					prefix += "<color=silver>[PC]</color>";
 				}
 
 				//if (IsInvisible(player))
@@ -170,10 +170,12 @@
 
 				if (player.GetVRCPlayer().GetIsDANGER())
 				{
-					prefix += "[DANGER]";
-					playerButton.setTextColor(ModeratorColor);
-					playerButton.setBackgroundColor(ModeratorColor);
+					prefix += "<color=red>[DANGER]</color>";
+					//playerButton.setTextColor(ModeratorColor);
+					//playerButton.setBackgroundColor(ModeratorColor);
 				}
+
+				playerButton.setTextColor(player.GetAPIUser().GetRankColor());
 
 				playerButton.setActive(ConfigManager.UI.ShowPlayersList);
 				if (ConfigManager.UI.ShowPlayersMenu != true)
