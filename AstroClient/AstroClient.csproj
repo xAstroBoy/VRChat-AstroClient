@@ -107,6 +107,7 @@
     <Compile Include="Buttons\UserInteractMenuBtns.cs" />
     <Compile Include="Buttons\ESPMenu.cs" />
     <Compile Include="Buttons\WorldPickupsBtn.cs" />
+    <Compile Include="Cheetos\CheetosPatches.cs" />
     <Compile Include="Cheetos\DevUI.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemlySpy_Extensions.cs" />

@@ -33,8 +33,8 @@
 			NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
 			NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
 
-			Patching.Event_OnPhotonPlayerJoin += Internal_OnPhotonPlayerJoined;
-			Patching.Event_OnPhotonPlayerLeft += Internal_OnPhotonPlayerLeft;
+			//CheetosPatching.Event_OnPhotonPlayerJoin += Internal_OnPhotonPlayerJoined;
+			//CheetosPatching.Event_OnPhotonPlayerLeft += Internal_OnPhotonPlayerLeft;
 		}
 
 		private void Internal_OnApplicationStart(object sender, EventArgs e)

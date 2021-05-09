@@ -1,28 +1,21 @@
-﻿namespace AstroClient.BetterPatch
+﻿namespace AstroClient.Cheetos
 {
 	#region Imports
-	using AstroClient.AstroUtils.PlayerMovement;
+
 	using AstroClient.ConsoleUtils;
-	using AstroClient.Startup.Hooks;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
-	using ExitGames.Client.Photon;
 	using Harmony;
 	using MelonLoader;
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
-	using System.Linq;
 	using System.Reflection;
+
 	#endregion
 
-	internal class Patching : GameEvents
+	internal class CheetosPatches : GameEvents
 	{
-		private static HarmonyMethod GetPatch(string name)
-		{
-			return new HarmonyMethod(typeof(Patching).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
-		}
-
 		public class Patch
 		{
 			private static List<Patch> Patches = new List<Patch>();
@@ -81,6 +74,11 @@
 			}
 		}
 
+		private static HarmonyMethod GetPatch(string name)
+		{
+			return new HarmonyMethod(typeof(CheetosPatches).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+		}
+
 		public override void ExecutePriorityPatches()
 		{
 			MelonCoroutines.Start(Init());
@@ -88,7 +86,7 @@
 
 		private IEnumerator Init()
 		{
-			Patching.InitPatch();
+			InitPatch();
 			yield break;
 		}
 
@@ -96,29 +94,41 @@
 		{
 			try
 			{
-				ModConsole.DebugLog("[Patches] Start. . .");
+				ModConsole.DebugLog("[AstroClient Cheetos Patches] Start. . .");
 
-				new Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
 				//new Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_Final_New_Void_Player_0)), GetPatch(nameof(OpRaiseEvent2)));
+				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
+				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
 
-				ModConsole.DebugLog("[AstroClient Patches] DONE!");
+				ModConsole.DebugLog("[AstroClient Cheetos Patches] DONE!");
 				Patch.DoPatches();
 			}
 			catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
 			finally { }
 		}
 
-		private static bool OpRaiseEvent(ref byte __0, ref Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object> __1, ref SendOptions __2)
+		private static void OnPhotonPlayerJoin(Photon.Realtime.Player __0)
 		{
-			try
+			if (__0 != null)
 			{
-				if (__0 == 7 || __0 == 206 || __0 == 201 || __0 == 1)
-				{
-					return !Movement.SerializerEnabled;
-				}
+				CheetosHelpers.SendHudNotification($"[PHOTON] {__0.GetDisplayName()} [{__0.field_Private_Int32_0}] -> Joined!");
 			}
-			catch { }
-			return true;
+			else
+			{
+				ModConsole.Error($"[Photon] OnPhotonPlayerJoin Failed! __0 was null.");
+			}
+		}
+
+		private static void OnPhotonPlayerLeft(Photon.Realtime.Player __0)
+		{
+			if (__0 != null)
+			{
+				CheetosHelpers.SendHudNotification($"[PHOTON] {__0.GetDisplayName()} [{__0.field_Private_Int32_0}] -> Left!");
+			}
+			else
+			{
+				ModConsole.Error($"[Photon] OnPhotonPlayerLeft Failed! __0 was null.");
+			}
 		}
 	}
 }
