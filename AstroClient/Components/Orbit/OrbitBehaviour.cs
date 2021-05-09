@@ -67,7 +67,7 @@
 
 		public float UpdateTimer = 0f;
 		public float Timer = 0f;
-		public float TimerOffset = 0f;
+		public float TimerOffset = 16.33f;
 
 		private float InterpolationMaxY = 1f;
 		private float InterpolationMinY = -1f;
