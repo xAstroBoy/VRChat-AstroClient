@@ -256,7 +256,7 @@
 			PrintLine(msg, textcolor.Value);
 		}
 
-		public static void Exception<T>(T e, LogTypes logType = LogTypes.LOG, Color? color = null)
+		public static void Exception<T>(T e, LogTypes logType = LogTypes.LOG, Color? color = null, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
 		{
 			if (logType == LogTypes.DEBUG_LOG || logType == LogTypes.DEBUG_WARNING || logType == LogTypes.DEBUG_ERROR && !DebugMode)
 			{
@@ -276,6 +276,8 @@
 			var targetSite = (e as System.Exception).TargetSite;
 			var source = (e as System.Exception).Source;
 
+			PrintCallerTag(callerName, callerLine);
+			PrintLine(); // Basically an easy way to newline
 			PrintLine($"Exception Message: {message}", color.Value);
 			PrintLine($"Exception StackTrace: {stackTrace}", color.Value);
 			PrintLine($"Exception TargetSite: {targetSite}");
