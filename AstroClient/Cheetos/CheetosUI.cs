@@ -64,7 +64,7 @@
 
 			foreach (var player in players)
 			{
-				if (!player.GetAPIUser().GetIsFriend())
+				if (!player.GetAPIUser().GetIsFriend() && !player.UserID().Equals(LocalPlayerUtils.GetSelfPlayer().UserID()))
 				{
 					try
 					{
