@@ -88,7 +88,10 @@
 
 			foreach (var kvp in photonPlayers)
 			{
-				players.Add(kvp.Value.GetPlayer());
+				if (kvp.value.GetPlayer() != null)
+				{
+					players.Add(kvp.Value.GetPlayer());
+				}
 			}
 
 			var temp_list = players.OrderBy(p => p.GetIsMaster()).ThenBy(p => p.GetAPIUser().IsSelf).ThenBy(p => p.GetAPIUser().GetIsFriend());
