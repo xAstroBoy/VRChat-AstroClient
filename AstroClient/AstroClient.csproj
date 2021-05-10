@@ -71,7 +71,6 @@
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
     <Compile Include="AntiCrash\AntiCrash.cs" />
-    <Compile Include="AntiCrash\AntiCrashPolys.cs" />
     <Compile Include="AntiCrash\AntiCrashScanner.cs" />
     <Compile Include="AntiCrash\AntiCrashUtils.cs" />
     <Compile Include="AntiCrash\AntiCrash_Lists.cs" />
@@ -241,6 +240,8 @@
     <Compile Include="Lights\LightControl.cs" />
     <Compile Include="Modules\BaseModule.cs" />
     <Compile Include="Modules\ModuleManager.cs" />
+    <Compile Include="Mora\AntiCrashPolys.cs" />
+    <Compile Include="Mora\anticrashwrappers.cs" />
     <Compile Include="Mora\AvatarLogger.cs" />
     <Compile Include="Mora\Welcome.cs" />
     <Compile Include="Mora\MouseTp.cs" />
