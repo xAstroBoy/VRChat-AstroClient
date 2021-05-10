@@ -29,14 +29,14 @@
 		{
 			get
 			{
-				return new Color(ConfigManager.ESP.ESPColor[0], ConfigManager.ESP.ESPColor[1], ConfigManager.ESP.ESPColor[2], ConfigManager.ESP.ESPColor[3]);
+				return new Color(ESP.ESPColor[0], ESP.ESPColor[1], ESP.ESPColor[2], ESP.ESPColor[3]);
 			}
 			set
 			{
-				ConfigManager.ESP.ESPColor[0] = value.r;
-				ConfigManager.ESP.ESPColor[1] = value.g;
-				ConfigManager.ESP.ESPColor[2] = value.b;
-				ConfigManager.ESP.ESPColor[3] = value.a;
+				ESP.ESPColor[0] = value.r;
+				ESP.ESPColor[1] = value.g;
+				ESP.ESPColor[2] = value.b;
+				ESP.ESPColor[3] = value.a;
 			}
 		}
 
