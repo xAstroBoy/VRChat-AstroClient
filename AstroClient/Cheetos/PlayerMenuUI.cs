@@ -76,10 +76,10 @@
 				if (!players.Contains(kvp.Value.GetPlayer()))
 				{
 					//CheetosHelpers.SendHudNotification($"Player: {player.DisplayName()} is invisible!");
-					return true;
+					return false;
 				}
 			}
-			return false;
+			return true;
 		}
 
 		private void RefreshButtons()
