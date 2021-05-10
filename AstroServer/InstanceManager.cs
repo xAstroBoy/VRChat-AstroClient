@@ -17,7 +17,7 @@
 				{
 					if (other.IsDeveloper)
 					{
-						client.Send($"add-tag:{other.UserID},AstroClient Developer");
+						//client.Send($"add-tag:{other.UserID},AstroClient Developer");
 					}
 					Console.WriteLine($"IM,PI: {other.UserID}, {other.InstanceID}");
 				}

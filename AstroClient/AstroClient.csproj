@@ -140,6 +140,7 @@
     <Compile Include="Console\CheetosConsole\StyledString.cs" />
     <Compile Include="Console\CheetosConsole\VirtualTerminalSequences.cs" />
     <Compile Include="Console\ModConsole.cs" />
+    <Compile Include="GameEvents.cs" />
     <Compile Include="GameEventsBehaviour.cs" />
     <Compile Include="Cheetos\GPLStuff\FOV.cs" />
     <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
@@ -196,7 +197,6 @@
     <Compile Include="DayOfThePlay\Misc\VRCAPI\Variables.cs" />
     <Compile Include="DayOfThePlay\VRChatObjects.cs" />
     <Compile Include="DayOfThePlay\XrefTesting.cs" />
-    <Compile Include="GameEvents.cs" />
     <Compile Include="GameObject\Cloner\ObjectCloner.cs" />
     <Compile Include="Components\ComponentsBtn.cs" />
     <Compile Include="Components\CrazyObjects\CrazyObject.cs" />
