@@ -163,11 +163,16 @@
 					prefix += "<color=silver>[PC]</color>";
 				}
 
-				//if (IsInvisible(player))
-				//{
-				//	playerButton.setButtonText($"[Invis]\n{playerButton.getButtonText()}");
-				//	playerButton.setBackgroundColor(Color.black);
-				//}
+				if (IsInvisible(player))
+				{
+					prefix += "<color=silver>[INVISIBLE]</color>";
+					//playerButton.setButtonText($"[Invis]\n{playerButton.getButtonText()}");
+					playerButton.setBackgroundColor(Color.black);
+				}
+				else
+				{
+					playerButton.setBackgroundColor(player.GetAPIUser().GetRankColor());
+				}
 
 				if (player.GetVRCPlayer().GetIsDANGER())
 				{
@@ -177,7 +182,6 @@
 				}
 
 				playerButton.setTextColor(player.GetAPIUser().GetRankColor());
-				playerButton.setBackgroundColor(player.GetAPIUser().GetRankColor());
 
 				playerButton.setActive(ConfigManager.UI.ShowPlayersList);
 				if (ConfigManager.UI.ShowPlayersMenu != true)
