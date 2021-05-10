@@ -16,14 +16,6 @@
 
 		public QMScrollMenu MainScroller { get; private set; }
 
-		public QMSingleButton CloseButton { get; private set; }
-
-		public QMSingleButton RestartButton { get; private set; }
-
-		public QMSingleButton DisconectButton { get; private set; }
-
-		public QMSingleButton ReconnectButton { get; private set; }
-
 		public override void VRChat_OnUiManagerInit()
 		{
 			if (Bools.IsDeveloper)
