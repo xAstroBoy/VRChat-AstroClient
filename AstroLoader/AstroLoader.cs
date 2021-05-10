@@ -20,6 +20,7 @@
 
 		public static string[] DebugLibraryPaths =
 {
+			@"Debug\Libs\Newtonsoft.Json.dll",
 			@"Debug\Libs\Newtonsoft.Json.Bson.dll",
 			@"Debug\Libs\AstroLibrary.dll"
 		};
