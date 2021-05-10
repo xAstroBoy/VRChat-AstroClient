@@ -129,13 +129,11 @@
 				{
 					if (CurrentSelectedObject != null)
 					{
-
 						var ESP = CurrentSelectedObject.GetComponent<ESP_ItemTweaker>();
 						if (ESP == null)
 						{
 							CurrentSelectedObject.AddComponent<ESP_ItemTweaker>();
 						}
-
 					}
 				}
 				else
@@ -169,7 +167,6 @@
 				}
 				if (_CurrentSelectedObject != null)
 				{
-
 					var ESP = _CurrentSelectedObject.GetComponent<ESP_ItemTweaker>();
 					if (ESP != null)
 					{
@@ -182,13 +179,11 @@
 				{
 					if (value != null)
 					{
-
 						var ESP = value.GetComponent<ESP_ItemTweaker>();
 						if (ESP == null)
 						{
 							value.AddComponent<ESP_ItemTweaker>();
 						}
-
 					}
 				}
 

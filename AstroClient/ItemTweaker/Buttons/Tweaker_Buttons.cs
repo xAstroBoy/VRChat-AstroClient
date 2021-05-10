@@ -1,5 +1,7 @@
 ﻿namespace AstroClient.AstroUtils.ItemTweaker
 {
+	#region Imports
+
 	using AstroClient.components;
 	using AstroClient.extensions;
 	using AstroClient.GameObjectDebug;
@@ -16,6 +18,8 @@
 	using VRC.Udon;
 	using VRC.Udon.Common.Interfaces;
 	using Color = UnityEngine.Color;
+
+	#endregion Imports
 
 	public class ItemTweakerMain : GameEvents
 	{
