@@ -73,6 +73,7 @@
 			RegisterComponent<Astro_Interactable>();
 
 			RegisterComponent<CheetoMenu>();
+			RegisterComponent<Bouncer>();
 		}
 
 		public override void OnUpdate()

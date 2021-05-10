@@ -84,6 +84,7 @@
 			{
 				Internal_UdonEvents(menu, 5, 2, true);
 			}
+
 			CurrentObjectCoordsBtn = new QMSingleButton(menu, 5, -1, "", null, "Shows Object Coords", null, null, false);
 			CurrentObjectCoordsBtn.getGameObject().GetComponent<UnityEngine.UI.Image>().enabled = false;
 			CurrentObjectCoordsBtn.SetResizeTextForBestFit(true);
@@ -652,10 +653,55 @@
 		public static void PhysicSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
 			var PhysicEditor = new QMNestedButton(menu, x, y, "Physics", "Item Physics Editor Menu!", null, null, null, null, btnHalf);
-			new QMSingleButton(PhysicEditor, 1, 0, "Enable Collisions", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetDetectCollision(true); }), "Make the object affected by colliders!", null, null);
-			new QMSingleButton(PhysicEditor, 1, 1, "Disable Collisions", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetDetectCollision(false); }), "Make the object unaffected by colliders!", null, null);
-			new QMSingleButton(PhysicEditor, 2, 0, "Enable Kinematic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetKinematic(true); }), "Make the object Kinematic!", null, null);
-			new QMSingleButton(PhysicEditor, 2, 1, "Disable Kinematic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetKinematic(false); }), "Disables Kinematic!", null, null);
+			new QMSingleButton(PhysicEditor, 1, 0, "Enable Collisions", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetDetectCollision(true); }), "Make the object affected by colliders!", null, null, true);
+			new QMSingleButton(PhysicEditor, 1, 0.5f, "Disable Collisions", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetDetectCollision(false); }), "Make the object unaffected by colliders!", null, null, true);
+			new QMSingleButton(PhysicEditor, 2, 0, "Enable Kinematic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetKinematic(true); }), "Make the object Kinematic!", null, null, true);
+			new QMSingleButton(PhysicEditor, 2, 0.5f, "Disable Kinematic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetKinematic(false); }), "Disables Kinematic!", null, null, true);
+			new QMSingleButton(PhysicEditor, 3, 0f, "Make It bouncy", new Action(() => {
+
+				var item = Tweaker_Object.GetGameObjectToEdit();
+				if (item != null)
+				{
+					var bouncer = item.GetComponent<Bouncer>();
+					if (bouncer == null)
+					{
+						bouncer =  item.AddComponent<Bouncer>();
+					}
+					if(bouncer != null)
+					{
+						bouncer.BounceTowardPlayer = false;
+					}
+				}
+			}), "Make It Bouncy!", null, null, true);
+			new QMSingleButton(PhysicEditor, 3, 0.5f, "Make It bouncy toward player", new Action(() =>
+			{
+
+				var item = Tweaker_Object.GetGameObjectToEdit();
+				if (item != null)
+				{
+					var bouncer = item.GetComponent<Bouncer>();
+					if (bouncer == null)
+					{
+						bouncer = item.AddComponent<Bouncer>();
+					}
+					if(bouncer != null)
+					{
+						bouncer.BounceTowardPlayer = true;
+					}
+				}
+			}), "Make It Bouncy!", null, null, true);
+			new QMSingleButton(PhysicEditor, 3, 1f, "Remove Bouncy", new Action(() => {
+				var item = Tweaker_Object.GetGameObjectToEdit();
+				if (item != null)
+				{
+					var bouncer = item.GetComponent<Bouncer>();
+					if (bouncer != null)
+					{
+						bouncer.DestroyMeLocal();
+					}
+				}
+			}), "Kill the Bouncyness!!", null, null, true);
+
 		}
 
 		public static void ConstraintSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)

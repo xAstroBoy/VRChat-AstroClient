@@ -129,6 +129,7 @@
     <Compile Include="Components\ESP\ItemTweaker\ESP_ItemTweaker.cs" />
     <Compile Include="Components\ESP\UdonBehaviour\ESP_UdonBehaviour.cs" />
     <Compile Include="Components\ESP\VRCInteractable\ESP_VRCInteractable.cs" />
+    <Compile Include="Components\Bounce\Bouncer.cs" />
     <Compile Include="Config\BSonWriter.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigManager.cs" />

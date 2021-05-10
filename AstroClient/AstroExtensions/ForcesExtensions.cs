@@ -10,6 +10,7 @@
 			RemoveForces(obj, TakeOwnership);
 		}
 
+
 		public static void Left(this GameObject obj)
 		{
 			ApplyLeftForce(obj, TakeOwnership);
@@ -54,5 +55,57 @@
 		{
 			SpinObjectZ(obj, TakeOwnership);
 		}
+
+		public static void KillForces(this GameObject obj, bool TakeOwnership)
+		{
+			RemoveForces(obj, TakeOwnership);
+		}
+
+
+		public static void Left(this GameObject obj, bool TakeOwnership)
+		{
+			ApplyLeftForce(obj, TakeOwnership);
+		}
+
+		public static void Right(this GameObject obj, bool TakeOwnership)
+		{
+			ApplyRightForce(obj, TakeOwnership);
+		}
+
+		public static void Foward(this GameObject obj, bool TakeOwnership)
+		{
+			ApplyFowardForce(obj, TakeOwnership);
+		}
+
+		public static void Backward(this GameObject obj, bool TakeOwnership)
+		{
+			ApplyBackwardsForce(obj, TakeOwnership);
+		}
+
+		public static void Push(this GameObject obj, bool TakeOwnership)
+		{
+			PushObject(obj, TakeOwnership);
+		}
+
+		public static void Pull(this GameObject obj, bool TakeOwnership)
+		{
+			PullObject(obj, TakeOwnership);
+		}
+
+		public static void SpinX(this GameObject obj, bool TakeOwnership)
+		{
+			SpinObjectX(obj, TakeOwnership);
+		}
+
+		public static void SpinY(this GameObject obj, bool TakeOwnership)
+		{
+			SpinObjectY(obj, TakeOwnership);
+		}
+
+		public static void SpinZ(this GameObject obj, bool TakeOwnership)
+		{
+			SpinObjectZ(obj, TakeOwnership);
+		}
+
 	}
 }
