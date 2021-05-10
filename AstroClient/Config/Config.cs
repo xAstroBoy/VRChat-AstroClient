@@ -2,7 +2,6 @@
 {
 	using System;
 	using System.Reflection;
-	using UnityEngine;
 
 	[Serializable, Obfuscation]
 	public class ConfigUI
@@ -32,7 +31,7 @@
 	}
 
 	[Serializable, Obfuscation]
-	public class Config
+	public class ConfigGeneral
 	{
 		public bool DebugLog = false;
 

@@ -17,7 +17,7 @@
 
 		private static string ConfigFlightPath = ConfigFolder + @"\ConfigFlight.json";
 
-		public static Config General = new Config();
+		public static ConfigGeneral General = new ConfigGeneral();
 
 		public static ConfigUI UI = new ConfigUI();
 
@@ -92,7 +92,7 @@
 
 		public static void Load()
 		{
-			General = JSonWriter.ReadFromJsonFile<Config>(ConfigPath);
+			General = JSonWriter.ReadFromJsonFile<ConfigGeneral>(ConfigPath);
 			UI = JSonWriter.ReadFromJsonFile<ConfigUI>(ConfigUIPath);
 			ESP = JSonWriter.ReadFromJsonFile<ConfigESP>(ConfigESPPath);
 			Flight = JSonWriter.ReadFromJsonFile<ConfigFlight>(ConfigFlightPath);

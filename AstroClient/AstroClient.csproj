@@ -129,6 +129,7 @@
     <Compile Include="Components\ESP\ItemTweaker\ESP_ItemTweaker.cs" />
     <Compile Include="Components\ESP\UdonBehaviour\ESP_UdonBehaviour.cs" />
     <Compile Include="Components\ESP\VRCInteractable\ESP_VRCInteractable.cs" />
+    <Compile Include="Config\BSonWriter.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Config\JSonWriter.cs" />
@@ -532,9 +533,11 @@
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Mono.WebBrowser.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Novell.Directory.Ldap">
@@ -934,6 +937,7 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Figlet\Larry3D.flf" />

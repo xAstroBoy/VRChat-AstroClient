@@ -109,6 +109,7 @@
 
 		public void Send(PacketData packetData) // 0 = text, 1 = data
 		{
+
 			//SendSecret();
 			////SendHeaderType(headerType);
 			//SendHeaderLength(msg);
