@@ -115,6 +115,7 @@
 				var streamer = GameObject.Find("UserInterface/MenuContent/Screens/Settings/ComfortSafetyPanel/StreamerModeToggle").GetComponent<UnityEngine.UI.Toggle>().isOn;
 
 				var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, player.DisplayName(), () => { SelectPlayer(player); }, $"Select {player.DisplayName()}", null, null, true);
+				playerButton.SetResizeTextForBestFit(true);
 
 				var playerAPI = player.GetVRCPlayerApi();
 				var rank = player.GetAPIUser().GetRankEnum();
