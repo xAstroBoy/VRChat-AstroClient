@@ -4,13 +4,16 @@
 	using AstroClient.variables;
 	using RubyButtonAPI;
 	using System;
+	using UnityEngine;
 
-	internal class UserInteractMenuBtns
+	internal class UserInteractMenuBtns : GameEvents
 	{
+		public static GameObject OldCloneButton;
+
 		public static void InitButtons(float x, float y, bool btnHalf)
 		{
-			var oldCloneButton = Finder.GameObjectFinder.Find("UserInterface/QuickMenu/UserInteractMenu/CloneAvatarButton");
-			oldCloneButton?.SetActive(false);
+			OldCloneButton = Finder.GameObjectFinder.Find("UserInterface/QuickMenu/UserInteractMenu/CloneAvatarButton");
+			OldCloneButton?.SetActive(false);
 
 			var menu = new QMNestedButton("UserInteractMenu", x, y, "AstroClient Menu.", "AstroClient Menu", null, null, null, null, btnHalf);
 			var tmp = new QMSingleButton("UserInteractMenu", x, y + 0.5f, "AstroClient : Set Target.", new Action(ObjectMiscOptions.MarkPlayerAsTarget), "Mark this player as target.", null, null, true); ;
@@ -41,6 +44,11 @@
 
 
 			LewdVRChat.InitUserMenu(menu, 4, 1);
+		}
+
+		public override void OnLateUpdate()
+		{
+			OldCloneButton?.SetActive(false);
 		}
 	}
 }
