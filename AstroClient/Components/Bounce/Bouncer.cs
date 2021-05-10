@@ -47,6 +47,7 @@
 
 		private void OnCollisionEnter(Collision collision)
 		{
+			MiscUtility.TakeOwnershipIfNecessary(gameObject);
 			if (!BounceTowardPlayer)
 			{
 				Bounce(collision.contacts[0].normal);

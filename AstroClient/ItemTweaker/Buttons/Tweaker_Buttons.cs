@@ -673,7 +673,7 @@
 					}
 				}
 			}), "Make It Bouncy!", null, null, true);
-			new QMSingleButton(PhysicEditor, 3, 0.5f, "Make It bouncy toward player", new Action(() =>
+			 new QMSingleButton(PhysicEditor, 3, 0.5f, "Make It bouncy toward player", new Action(() =>
 			{
 
 				var item = Tweaker_Object.GetGameObjectToEdit();
@@ -689,7 +689,8 @@
 						bouncer.BounceTowardPlayer = true;
 					}
 				}
-			}), "Make It Bouncy!", null, null, true);
+			}), "Make It bouncy toward player!", null, null, true).SetResizeTextForBestFit(true);
+			
 			new QMSingleButton(PhysicEditor, 3, 1f, "Remove Bouncy", new Action(() => {
 				var item = Tweaker_Object.GetGameObjectToEdit();
 				if (item != null)
