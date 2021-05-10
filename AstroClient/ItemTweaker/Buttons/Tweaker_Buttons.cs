@@ -26,7 +26,7 @@
 		public static void InitButtons(float x, float y, bool btnHalf)
 		{
 			//var menu = new QMNestedButton("ShortcutMenu", x, y, "Item Tweaker", "Item Tweaker!", null, null, null, null, btnHalf);
-			QMTabMenu menu = new QMTabMenu(2f, "Item Tweaker", null, null, null, "AstroClient.Resources.box.png");
+			QMTabMenu menu = new QMTabMenu(3f, "Item Tweaker", null, null, null, "AstroClient.Resources.box.png");
 			new QMSingleButton(menu, -1, -2f, "Force Sync Physic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().ForceSyncPhysic(); }), "Force Sync Physic", null, null, true);
 
 			GameObjMenu.InitTogglerMenu(menu, -1, -1.5f, true);

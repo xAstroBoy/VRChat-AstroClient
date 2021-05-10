@@ -5,7 +5,6 @@
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroClient.ButtonShortcut;
-	using AstroClient.Cheetos;
 	using AstroClient.Components;
 	using AstroClient.ConsoleUtils;
 	using AstroClient.GameObjectDebug;
@@ -21,13 +20,10 @@
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;
-	using System.IO;
 	using System.Reflection;
 	using UnhollowerBaseLib;
 	using System.Windows.Forms;
 	using UnityEngine;
-	using UnityEngine.UI;
-	using Application = UnityEngine.Application;
 	using Button = UnityEngine.UI.Button;
 	using Console = CheetosConsole.Console;
 	using VRC;
@@ -167,19 +163,6 @@
 				//QMNestedButton AstroClient = new QMNestedButton("ShortcutMenu", x, y, "AstroClient Menu", "AstroClient Menu", null, null, null, null, btnHalf);  // Menu Main Button
 				QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, "AstroClient.Resources.planet.png");
 				ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", new Action(() => { Bools.IsDebugMode = true; }), "Debug Console OFF", new Action(() => { Bools.IsDebugMode = false; }), "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-				ToggleHideAvatar = new QMSingleToggleButton(AstroClient, 4, 1.5f, "Hide Avatar ON", () => { AvatarHider.HideAvatar = true; }, "Hide Avatar OFF", new Action(() => { AvatarHider.HideAvatar = false; }), "Hides your avatar for yourself", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-
-				if (File.Exists(Environment.CurrentDirectory + @"\RubyClient\RubyClient.dll"))
-				{
-					ModConsole.Log("RubyClient Detected Buttons Moved");
-					ToggleFly = new QMSingleToggleButton(AstroClient, -0.6f, -1, "Fly", () => { Flight.FlyEnabled = true; }, "Fly", () => { Flight.FlyEnabled = false; }, "Enable/Disable Flight", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.FlyEnabled, true);
-					ToggleNoClip = new QMSingleToggleButton(AstroClient, -0.6f, -0.5f, "NoClip", () => { Flight.NoClipEnabled = true; }, "NoClip", () => { Flight.NoClipEnabled = false; }, "Enable/Disable NoClip", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.NoClipEnabled, true);
-				}
-				else
-				{
-					ToggleFly = new QMSingleToggleButton(AstroClient, 0, -1, "Fly", () => { Flight.FlyEnabled = true; }, "Fly", () => { Flight.FlyEnabled = false; }, "Enable/Disable Flight", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.FlyEnabled, true);
-					ToggleNoClip = new QMSingleToggleButton(AstroClient, 0, -0.5f, "NoClip", () => { Flight.NoClipEnabled = true; }, "NoClip", () => { Flight.NoClipEnabled = false; }, "Enable/Disable NoClip", UnityEngine.Color.green, UnityEngine.Color.red, null, Flight.NoClipEnabled, true);
-				}
 
 				CopyIDButton = new QMSingleButton(AstroClient, 5, -1, "Copy\nInstance ID", delegate () { Clipboard.SetText($"{RoomManager.field_Internal_Static_ApiWorld_0.id}:{RoomManager.field_Internal_Static_ApiWorldInstance_0.idWithTags}"); }, "Copy the ID of the current instance.", null, null, true);
 				JoinInstanceButton = new QMSingleButton(AstroClient, 5, -0.5f, "Join\nInstance", delegate () { new PortalInternal().Method_Private_Void_String_String_PDM_0(Clipboard.GetText().Split(':')[0], Clipboard.GetText().Split(':')[1]); }, "Join an instance via your clipboard.", null, null, true);
@@ -189,7 +172,7 @@
 				ExploitsMenu.InitButtons(AstroClient, 1, 0, true);
 				WorldsCheats.InitButtons(AstroClient, 1, 0, true);
 				LightControl.InitButtons(AstroClient, 1, 0.5f, true);
-				Movement.InitButtons(AstroClient, 1, 1, true);
+
 				GameObjectUtils.InitButtons(AstroClient, 1, 1.5f, true);
 				EmojiUtils.InitButton(AstroClient, 1, 2, true);
 				if (Bools.IsDeveloper)
@@ -201,24 +184,14 @@
 				ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
 				RandomSubmenus.TriggerSubMenu(AstroClient, 2, 1, true);
 
-				if (Bools.IsDeveloper) // KEEP DANGEROUS STUFF LIMITED TILL WE HAVE A CONTROL MECHANISM IN PLACE.
-				{
-					GlobalUdonExploits.InitButtons(AstroClient, 2, 1.5f, true);
-				}
-
 				RandomSubmenus.VRC_InteractableSubMenu(AstroClient, 2, 2, true);
 				Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
-				ESPMenu.InitButtons(AstroClient, 4, 0, true);
 
 				SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
 			}
 		}
 
 		public static QMSingleToggleButton ToggleDebugInfo;
-		public static QMSingleToggleButton ToggleHideAvatar;
-
-		public static QMSingleToggleButton ToggleFly;
-		public static QMSingleToggleButton ToggleNoClip;
 
 		public static QMSingleButton CopyIDButton;
 		public static QMSingleButton JoinInstanceButton;
