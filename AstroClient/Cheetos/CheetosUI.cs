@@ -107,7 +107,7 @@
 				{
 					try
 					{
-						MiscUtility.DelayFunction(2 * count, () =>
+						MiscUtility.DelayFunction(5 * count, () =>
 						{
 							Notification xx = FriendRequest.Create(player.UserID());
 							VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
@@ -122,7 +122,6 @@
 				}
 				yield return null;
 			}
-			CheetosHelpers.SendHudNotification("Done Sending Friend Requests!");
 			yield break;
 		}
 
