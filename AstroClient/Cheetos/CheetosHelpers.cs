@@ -2,14 +2,8 @@
 {
 	#region Imports
 
-	using AstroClient.ConsoleUtils;
-	using Boo.Lang.Compiler.Util;
 	using DayClientML2.Utility.Extensions;
-	using Discord;
-	using Harmony;
-	using System;
 	using System.IO;
-	using System.Reflection;
 	using UnityEngine;
 
 	#endregion Imports
