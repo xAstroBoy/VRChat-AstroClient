@@ -18,11 +18,8 @@
 	{
 		public static Texture2D LoadPNG(string filePath)
 		{
-			Texture2D tex;
-			byte[] fileData;
-
-			fileData = ExtractResource(filePath);
-			tex = new Texture2D(2, 2);
+			byte[] fileData = ExtractResource(filePath);
+			Texture2D tex = new Texture2D(2, 2);
 			ImageConversion.LoadImage(tex, fileData); //..this will auto-resize the texture dimensions.
 			return tex;
 		}
