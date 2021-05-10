@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
+	using AstroClient.Cheetos;
 	using AstroClient.variables;
 	using RubyButtonAPI;
 	using System;
@@ -8,9 +9,14 @@
 	{
 		public static void InitButtons(float x, float y, bool btnHalf)
 		{
+			var oldCloneButton = Finder.GameObjectFinder.Find("UserInterface/QuickMenu/UserInteractMenu/CloneAvatarButton");
+			oldCloneButton?.SetActive(false);
+
 			var menu = new QMNestedButton("UserInteractMenu", x, y, "AstroClient Menu.", "AstroClient Menu", null, null, null, null, btnHalf);
 			var tmp = new QMSingleButton("UserInteractMenu", x, y + 0.5f, "AstroClient : Set Target.", new Action(ObjectMiscOptions.MarkPlayerAsTarget), "Mark this player as target.", null, null, true); ;
 			tmp.SetResizeTextForBestFit(true);
+
+			var forceClone = new QMSingleButton("UserInteractMenu", 5, 0, "Force Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar", null, null, false);
 
 			new QMSingleButton(menu, 1, 0, "Teleport All\nPickups\nTo\nplayer.", new Action(ObjectMiscOptions.TeleportAllWorldPickupsToPlayer), "Teleport World Pickups To Player.", null, null); ;
 			if (Bools.AllowOrbitComponent)
