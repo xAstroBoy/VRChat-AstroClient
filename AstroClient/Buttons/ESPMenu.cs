@@ -45,10 +45,10 @@
 
 		public static void ChangeColor(UnityEngine.Color color)
 		{
-			ConfigManager.ESP.ESPColor = color;
+			ConfigManager.ESPColor = color;
 			foreach (var player in WorldUtils.GetAllPlayers0())
 			{
-				player.GetComponent<PlayerESP>().ChangeColor(ConfigManager.ESP.ESPColor);
+				player.GetComponent<PlayerESP>().ChangeColor(ConfigManager.ESPColor);
 			}
 		}
 
@@ -308,6 +308,7 @@
 				if (player != null && player != LocalPlayerUtils.GetSelfPlayer())
 				{
 					player.gameObject.AddComponent<PlayerESP>();
+					player.gameObject.GetComponent<PlayerESP>().ChangeColor(ConfigManager.ESPColor);
 				}
 			}
 		}
@@ -321,7 +322,7 @@
 					if (item.gameObject.GetComponent<PlayerESP>() == null)
 					{
 						item.gameObject.AddComponent<PlayerESP>();
-						item.gameObject.GetComponent<PlayerESP>().ChangeColor(ConfigManager.ESP.ESPColor);
+						item.gameObject.GetComponent<PlayerESP>().ChangeColor(ConfigManager.ESPColor);
 					}
 				}
 			}

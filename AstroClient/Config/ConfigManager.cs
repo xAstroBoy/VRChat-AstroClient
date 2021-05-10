@@ -3,6 +3,7 @@
 	using AstroClient.ConsoleUtils;
 	using System;
 	using System.IO;
+	using UnityEngine;
 
 	public static class ConfigManager
 	{
@@ -23,6 +24,21 @@
 		public static ConfigESP ESP = new ConfigESP();
 
 		public static ConfigFlight Flight = new ConfigFlight();
+
+		public static UnityEngine.Color ESPColor
+		{
+			get
+			{
+				return new Color(ConfigManager.ESP.ESPColor[0], ConfigManager.ESP.ESPColor[1], ConfigManager.ESP.ESPColor[2], ConfigManager.ESP.ESPColor[3]);
+			}
+			set
+			{
+				ConfigManager.ESP.ESPColor[0] = value.r;
+				ConfigManager.ESP.ESPColor[1] = value.g;
+				ConfigManager.ESP.ESPColor[2] = value.b;
+				ConfigManager.ESP.ESPColor[3] = value.a;
+			}
+		}
 
 		public static void Validate()
 		{

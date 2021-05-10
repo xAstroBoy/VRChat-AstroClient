@@ -2,6 +2,7 @@
 {
 	using System;
 	using System.Reflection;
+	using UnityEngine;
 
 	[Serializable, Obfuscation]
 	public class ConfigUI
@@ -59,7 +60,7 @@
 
 		public bool VRCInteractableESP = false;
 
-		public UnityEngine.Color ESPColor = UnityEngine.Color.cyan;
+		public float[] ESPColor = new float[4];
 	}
 
 	[Serializable, Obfuscation]
