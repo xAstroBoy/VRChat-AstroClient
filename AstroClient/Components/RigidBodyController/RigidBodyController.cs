@@ -180,6 +180,36 @@
 								body.isKinematic = true;
 								return;
 							}
+
+							if(Sync.field_Private_VRC_Pickup_0 == null)
+							{
+								if (obj.GetComponent<VRC.SDKBase.VRC_Pickup>() != null && Sync.field_Private_VRC_Pickup_0 == null)
+								{
+									ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} VRC_Pickup in SyncPhysic as is Null..");
+									Sync.field_Private_VRC_Pickup_0 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
+									return;
+								}
+
+								if (obj.GetComponentInChildren<VRC.SDKBase.VRC_Pickup>() != null && Sync.field_Private_VRC_Pickup_0 == null)
+								{
+									ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} VRC_Pickup in SyncPhysic as is Null..");
+									Sync.field_Private_VRC_Pickup_0 = obj.GetComponentInChildren<VRC.SDKBase.VRC_Pickup>();
+									return;
+								}
+								if (obj.GetComponent<VRCSDK2.VRC_Pickup>() != null && Sync.field_Private_VRC_Pickup_0 == null)
+								{
+									ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} VRC_Pickup in SyncPhysic as is Null..");
+									Sync.field_Private_VRC_Pickup_0 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
+									return;
+								}
+
+								if (obj.GetComponentInChildren<VRCSDK2.VRC_Pickup>() != null && Sync.field_Private_VRC_Pickup_0 == null)
+								{
+									ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} VRC_Pickup in SyncPhysic as is Null..");
+									Sync.field_Private_VRC_Pickup_0 = obj.GetComponentInChildren<VRCSDK2.VRC_Pickup>();
+									return;
+								}
+							}
 						}
 					}
 

@@ -28,32 +28,32 @@
 
 		public GameObject Console;
 
-		public override void VRChat_OnUiManagerInit()
-		{
-			QMBackgroundPanel = Finder.GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_Background/Panel");
-			QM = Finder.GameObjectFinder.Find("UserInterface/QuickMenu");
+		//public override void VRChat_OnUiManagerInit()
+		//{
+		//	QMBackgroundPanel = Finder.GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_Background/Panel");
+		//	QM = Finder.GameObjectFinder.Find("UserInterface/QuickMenu");
 
-			Console = new GameObject();
-			Console.transform.parent = QM.transform;
-			Console.transform.position = QM.transform.position;
-			Console.transform.rotation = QM.transform.rotation;
-			Console.AddComponent<CanvasRenderer>();
-			Console.AddComponent<CanvasScaler>();
+		//	Console = new GameObject();
+		//	Console.transform.parent = QM.transform;
+		//	Console.transform.position = QM.transform.position;
+		//	Console.transform.rotation = QM.transform.rotation;
+		//	Console.AddComponent<CanvasRenderer>();
+		//	Console.AddComponent<CanvasScaler>();
 
-			var backgroundObject = new GameObject();
-			backgroundObject.transform.parent = Console.transform;
-			backgroundObject.transform.position = Console.transform.position + new Vector3(0, 400f, 0);
-			backgroundObject.transform.rotation = Console.transform.rotation;
-			backgroundObject.AddComponent<Image>().sprite = QMBackgroundPanel.GetComponent<Image>().sprite;
-		}
+		//	var backgroundObject = new GameObject();
+		//	backgroundObject.transform.parent = Console.transform;
+		//	backgroundObject.transform.position = Console.transform.position + new Vector3(0, 400f, 0);
+		//	backgroundObject.transform.rotation = Console.transform.rotation;
+		//	backgroundObject.AddComponent<Image>().sprite = QMBackgroundPanel.GetComponent<Image>().sprite;
+		//}
 
-		public override void OnLateUpdate()
-		{
-			if (Console != null && QM != null)
-			{
-				Console.SetActive(QM.activeSelf);
-			}
-		}
+		//public override void OnLateUpdate()
+		//{
+		//	if (Console != null && QM != null)
+		//	{
+		//		Console.SetActive(QM.activeSelf);
+		//	}
+		//}
 	}
 
 	/// <summary>
