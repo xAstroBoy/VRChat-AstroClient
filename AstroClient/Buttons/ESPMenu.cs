@@ -4,6 +4,7 @@
 	using AstroClient.extensions;
 	using RubyButtonAPI;
 	using System;
+	using UnityEngine;
 	using VRC;
 
 	internal class ESPMenu : GameEvents
@@ -26,6 +27,13 @@
 
 			UdonBehaviourESPToggleBtn = new QMSingleToggleButton(main, 2, 1.5f, "Udon Behaviour ESP ON", new Action(() => { Toggle_UdonBehaviour_ESP = true; }), "Udon Behaviour ESP OFF", new Action(() => { Toggle_UdonBehaviour_ESP = false; }), "Toggle Udon Behaviour ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 			UdonBehaviourESPToggleBtn.setToggleState(ConfigManager.ESP.UdonESP);
+
+			new QMSingleButton(main, 4, 0, "Blue", () => { ChangeColor(Color.blue); }, null, null, null, false);
+			new QMSingleButton(main, 4, 1, "Red", () => { ChangeColor(Color.red); }, null, null, null, false);
+			new QMSingleButton(main, 4, 2, "Green", () => { ChangeColor(Color.green); }, null, null, null, false);
+			new QMSingleButton(main, 3, 0, "Yellow", () => { ChangeColor(Color.yellow); }, null, null, null, false);
+			new QMSingleButton(main, 3, 1, "Cyan", () => { ChangeColor(Color.cyan); }, null, null, null, false);
+			new QMSingleButton(main, 3, 2, "White", () => { ChangeColor(Color.white); }, null, null, null, false);
 		}
 
 		private static QMSingleToggleButton PlayerESPToggleBtn;
@@ -34,6 +42,15 @@
 		private static QMSingleToggleButton TriggerESPToggleBtn;
 		private static QMSingleToggleButton UdonBehaviourESPToggleBtn;
 
+
+		public static void ChangeColor(UnityEngine.Color color)
+		{
+			ConfigManager.ESP.ESPColor = color;
+			foreach (var player in WorldUtils.GetAllPlayers0())
+			{
+				player.GetComponent<PlayerESP>().ChangeColor(ConfigManager.ESP.ESPColor);
+			}
+		}
 
 		public override void OnLevelLoaded()
 		{
@@ -304,6 +321,7 @@
 					if (item.gameObject.GetComponent<PlayerESP>() == null)
 					{
 						item.gameObject.AddComponent<PlayerESP>();
+						item.gameObject.GetComponent<PlayerESP>().ChangeColor(ConfigManager.ESP.ESPColor);
 					}
 				}
 			}

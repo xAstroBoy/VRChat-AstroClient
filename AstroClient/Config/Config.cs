@@ -58,6 +58,8 @@
 		public bool UdonESP = false;
 
 		public bool VRCInteractableESP = false;
+
+		public UnityEngine.Color ESPColor = UnityEngine.Color.cyan;
 	}
 
 	[Serializable, Obfuscation]
