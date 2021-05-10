@@ -19,6 +19,7 @@
 	using AstroClient.Cheetos;
 	using static AstroClient.Mora.anticrashwrappers;
 	using AstroClient.Mora;
+	using RubyButtonAPI;
 
 	internal class AntiCrashPolys : GameEvents
 	{
@@ -34,7 +35,10 @@
 
 			public int polys;
 		}
-
+		public override void VRChat_OnUiManagerInit()
+		{
+			new QMSingleButton("ShortcutMenu", 5, -0.5f, "check\nblacklist", delegate () { CheetosHelpers.SendHudNotification($"{shader_list_local}"); }, "checks the shader list.", null, null, true);
+		}
 			public static void set_pickups(bool state)
 		{
 			foreach (VRC_Pickup vrc_Pickup in Resources.FindObjectsOfTypeAll<VRC_Pickup>())
@@ -107,6 +111,6 @@
 			}
 			return result;
 		}
-
+        public static QMSingleButton CheckBlackList;
 	}
 }
