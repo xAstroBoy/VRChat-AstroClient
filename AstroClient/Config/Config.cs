@@ -42,6 +42,8 @@
 		public bool LogUdonEvents = false;
 
 		public bool LogTriggerEvents = false;
+
+		public float FOV = 61f;
 	}
 
 	[Serializable, Obfuscation]
