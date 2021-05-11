@@ -1,10 +1,8 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Cheetos;
 	using AstroClient.ConsoleUtils;
 	using DayClientML2.Utility.Extensions;
 	using System.Timers;
-	using VRC;
 
 	internal class JoinLeaveNotifier : GameEvents
 	{

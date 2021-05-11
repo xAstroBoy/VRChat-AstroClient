@@ -6,7 +6,6 @@
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
-	using Newtonsoft.Json;
 
 	public class NetworkingManager : GameEvents
 	{
@@ -21,12 +20,11 @@
 
 		public static void SendAvatarLog(AvatarData data)
 		{
-			string json = JsonConvert.SerializeObject(data);
 			if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
 			{
-				//AstroNetworkClient.Client.Send($"avatar-log:{json}");
+				string bson = BSonWriter.ToBson(data);
+				AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, "", bson.ConvertToBytes()));
 			}
-			ModConsole.DebugLog(json);
 		}
 
 		public static void SendClientInfo()

@@ -8,6 +8,7 @@
 		public const ulong SEND_PLAYER_USERID = 11;
 		public const ulong SEND_PLAYER_NAME = 12;
 		public const ulong WORLD_JOIN = 20;
+		public const ulong AVATAR_DATA = 21;
 		public const ulong KEEP_ALIVE = 100;
 	}
 
