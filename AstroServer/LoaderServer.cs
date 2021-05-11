@@ -202,7 +202,7 @@
 				{
 					Clients.Add(client);
 					Console.WriteLine($"Client added: {client.ClientID} / {Clients.Count}");
-					//client.Send("auth-request");
+					client.Send(new PacketData(PacketServerType.CONNECTED));
 				}
 				Console.WriteLine($"Client Connected: {client.ClientID} / {Clients.Count}");
 			}
