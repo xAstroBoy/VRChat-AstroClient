@@ -101,6 +101,7 @@
 				{
 					client.IsAuthed = true;
 					client.Key = key;
+					client.DiscordID = KeyManager.GetKeysDiscordOwner(key);
 
 					client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
 
@@ -146,92 +147,6 @@
 
 				Console.WriteLine($"AvatarData for {avatarData.ID} received.");
 			}
-
-			//if (first.Equals("key"))
-			//{
-			//	string key = second;
-			//	Console.WriteLine("Trying to auth with: " + key);
-			//	if (KeyManager.IsValidKey(key))
-			//	{
-			//		client.Send("authed:true");
-			//		client.IsAuthed = true;
-			//		client.Key = key;
-			//		Console.WriteLine("Successfully Authed");
-			//		client.DiscordID = KeyManager.GetKeysDiscordOwner(key);
-
-			//		CheckExistingClientsWithKey(client);
-
-			//		if (KeyManager.IsDevKey(key))
-			//		{
-			//			client.IsDeveloper = true;
-			//			client.Send("client-type:developer");
-			//		}
-			//		else
-			//		{
-			//			client.Send("client-type:client");
-			//		}
-			//		AstroBot.SendLoggedInLog(client);
-			//	}
-			//	else
-			//	{
-			//		client.Send("authed:false");
-			//		client.Send("exit:invalid auth key");
-			//		client.Disconnect();
-			//		Console.WriteLine("Invalid Auth Key");
-			//	}
-			//}
-
-			//else if (first.Equals("test"))
-			//{
-			//	Console.WriteLine(input);
-			//}
-			//else if (first.Equals("player-info"))
-			//{
-			//	//Console.WriteLine($"Received (player-info) for {second} from {client.UserID}");
-			//	//var other = Clients.Where(c => c.UserID.Equals(second)).First();
-			//	//if (other == null)
-			//	//{
-			//	//    Console.WriteLine("player-info other was null");
-			//	//    return;
-			//	//}
-			//	//if (other.IsDeveloper)
-			//	//{
-			//	//    Console.WriteLine("Sending developer tag");
-			//	//    client.Send($"add-tag:{other.UserID},AstroClient Developer");
-			//	//}
-			//	//else
-			//	//{
-			//	//    Console.WriteLine("Sending client tag");
-			//	//    client.Send($"add-tag:{other.UserID},AstroClient");
-			//	//}
-			//}
-			//else if (first.Equals("avatar-log"))
-			//{
-			//	try
-			//	{
-			//		Console.WriteLine(second + Environment.NewLine);
-			//		AvatarData data = JsonConvert.DeserializeObject<AvatarData>(second);
-			//		AstroBot.SendLogMessageAsync($"Received avatar data for {data.ID} \r\n " +
-			//			$"{data.AssetURL} \r\n" +
-			//			$"{data.ReleaseStatus} \r\n" +
-			//			$"{data.ImageURL} \r\n" +
-			//			$"{data.Version} \r\n" +
-			//			$"{data.AuthorID} \r\n" +
-			//			$"{data.AuthorName} \r\n" +
-			//			$"{data.Description} \r\n" +
-			//			$"{data.ThumbnailURL} \r\n" +
-			//			$"{data.Name}");
-			//		Console.WriteLine($"Received avatar data for {data.ID}");
-			//	}
-			//	catch (Exception e)
-			//	{
-			//		Console.WriteLine(e.Message);
-			//	}
-			//}
-			//else
-			//{
-			//	Console.WriteLine($"Unknown packet: {input}");
-			//}
 		}
 
 		public static void SendAll(PacketData packetData)
