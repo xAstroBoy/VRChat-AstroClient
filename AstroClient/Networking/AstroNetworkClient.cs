@@ -105,17 +105,17 @@
 
 			if (packetData.NetworkEventID == PacketServerType.ADD_TAG)
 			{
-				MiscUtility.DelayFunction(1f, () =>
+				MiscUtility.DelayFunction(3f, () =>
 				{
 					Player player;
 					if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(packetData.TagData.UserID))
 					{
-						ModConsole.DebugLog("Wants to add tag to self");
+						ModConsole.Log("Wants to add tag to self");
 						player = LocalPlayerUtils.GetSelfPlayer();
 					}
 					else
 					{
-						ModConsole.DebugLog("Wants to add tag to someone else");
+						ModConsole.Log("Wants to add tag to someone else");
 						player = WorldUtils.GetPlayerByID(packetData.TagData.UserID);
 					}
 					if (player != null)
@@ -124,7 +124,7 @@
 					}
 					else
 					{
-						ModConsole.DebugLog($"Player ({packetData.TagData.UserID}) returned null");
+						ModConsole.Log($"Player ({packetData.TagData.UserID}) returned null");
 					}
 				});
 			}
@@ -148,23 +148,20 @@
 		// You gotta delay it, let's delay it to some seconds
 		private static void SpawnTag(Player player, string text, Color TextColor, Color Tagcolor)
 		{
-			MiscUtility.DelayFunction(2f, new Action(() =>
+			if (player != null)
 			{
-				if (player != null)
+				SingleTag tag = SingleTagsUtils.AddSingleTag(player);
+				if (tag != null)
 				{
-					SingleTag tag = SingleTagsUtils.AddSingleTag(player);
-					if (tag != null)
-					{
-						tag.Label_Text = text;
-						tag.Label_TextColor = TextColor;
-						tag.Tag_Color = Tagcolor;
-					}
+					tag.Label_Text = text;
+					tag.Label_TextColor = TextColor;
+					tag.Tag_Color = Tagcolor;
 				}
-				else
-				{
-					ModConsole.Error("Player for setting tag from server was null!");
-				}
-			}));
+			}
+			else
+			{
+				ModConsole.Error("Player for setting tag from server was null!");
+			}
 		}
 
 		private static void OnConnected(object sender, EventArgs e)
