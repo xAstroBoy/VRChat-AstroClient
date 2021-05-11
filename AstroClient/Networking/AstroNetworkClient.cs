@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.Cheetos;
 	#region Imports
 	using AstroClient.components;
 	using AstroClient.Components;
@@ -137,6 +138,16 @@
 				}
 			}
 
+			if (packetData.NetworkEventID == PacketServerType.NOTIFY)
+			{
+				CheetosHelpers.SendHudNotification(packetData.TextData);
+			}
+
+			if (packetData.NetworkEventID == PacketServerType.DEBUG)
+			{
+				ModConsole.DebugLog(packetData.TextData);
+			}
+
 			//else if (first.Equals("authed", StringComparison.InvariantCultureIgnoreCase))
 			//{
 			//	if (second.Equals("true", StringComparison.InvariantCultureIgnoreCase))
@@ -151,22 +162,6 @@
 			//		// I'm not authed
 			//		Console.Beep();
 			//		Environment.Exit(0);
-			//	}
-			//}
-			//else if (first.Equals("notify-dev"))
-			//{
-			//	CheetosHelpers.SendHudNotification(second);
-			//}
-			//else if (first.Equals("client-type"))
-			//{
-			//	if (second.Equals("developer"))
-			//	{
-			//		Bools.IsDeveloper = true;
-			//		ModConsole.Log("Developer Mode!");
-			//	}
-			//	else
-			//	{
-			//		Bools.IsDeveloper = false;
 			//	}
 			//}
 			//else if (first.Equals("debug"))

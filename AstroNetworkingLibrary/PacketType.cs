@@ -26,5 +26,9 @@
 		public const ulong LOADER_LIBRARY = 200;
 		public const ulong LOADER_MELON = 201;
 		public const ulong LOADER_MODULE = 202;
+
+		// Other Stuff
+		public const ulong NOTIFY = 300;
+		public const ulong DEBUG = 301;
 	}
 }
