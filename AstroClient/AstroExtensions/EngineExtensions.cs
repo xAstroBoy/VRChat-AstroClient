@@ -127,6 +127,18 @@
 			{
 				GameObjectName = obj.name;
 				Objectname = obj.GetType().ToString();
+
+				if (obj.GetType() == typeof(Transform))
+				{
+
+					Transform objtransf = (Transform)obj;
+					if(objtransf != null)
+					{
+						objtransf.gameObject.DestroyObject();
+					}
+					return;
+				}
+				
 				//if (obj != null)
 				//{
 				//	UnityEngine.Object.DestroyImmediate(obj);
