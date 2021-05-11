@@ -208,7 +208,6 @@
 				}
 
 				string base64 = data.ConvertToString();
-				Console.WriteLine(base64);
 				var packetData = BSonWriter.FromBson<PacketData>(base64);
 				ReceivedPacket?.Invoke(this, new ReceivedPacketEventArgs(ClientID, packetData));
 

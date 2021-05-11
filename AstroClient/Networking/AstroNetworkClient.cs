@@ -45,7 +45,7 @@
 
 		private static void OnPingEvent(System.Object source, ElapsedEventArgs e)
 		{
-			//Client.Send("ping");
+			Client.Send(new PacketData(PacketClientType.KEEP_ALIVE));
 		}
 
 		private static void Connect()

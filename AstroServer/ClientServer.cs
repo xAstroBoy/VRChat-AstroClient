@@ -58,7 +58,7 @@
 		private static void SetPingTimer()
 		{
 			// Create a timer with a two second interval.
-			pingTimer = new Timer(2000);
+			pingTimer = new Timer(5000);
 			// Hook up the Elapsed event for the timer.
 			pingTimer.Elapsed += OnPingEvent;
 			pingTimer.AutoReset = true;
@@ -79,7 +79,7 @@
 		private static void OnPingEvent(object source, ElapsedEventArgs e)
 		{
 			DoChecks();
-			SendAll("ping");
+			SendAll(new PacketData(PacketServerType.KEEP_ALIVE));
 		}
 
 		private static void ProcessInput(object sender, PacketData packetData)
@@ -233,21 +233,21 @@
 			//}
 		}
 
-		public static void SendAll(string msg)
+		public static void SendAll(PacketData packetData)
 		{
 			foreach (Client client in Clients)
 			{
-				//client.Send(msg);
+				client.Send(packetData);
 			}
 		}
 
-		public static void SendToAllDevelopers(string msg)
+		public static void SendToAllDevelopers(PacketData packetData)
 		{
 			foreach (Client client in Clients)
 			{
 				if (client.IsDeveloper)
 				{
-					//client.Send(msg);
+					client.Send(packetData);
 				}
 			}
 		}
