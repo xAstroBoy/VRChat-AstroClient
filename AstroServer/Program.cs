@@ -43,17 +43,8 @@
 			// Here we initialize the logic required to register our commands.
 			await Services.GetRequiredService<CommandHandlingService>().InitializeAsync();
 
-			Console.WriteLine("Starting Servers..");
-			//LServer = new LoaderServer();
+			Console.WriteLine("Starting Server..");
 			CServer = new ClientServer();
-
-			Running = true;
-
-			// Gonna make this better later, but for now, fuck it lmao
-			while (Running)
-			{
-				Console.ReadLine();
-			}
 		}
 	}
 }

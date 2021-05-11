@@ -39,17 +39,20 @@
 
 			SetPingTimer();
 
-			TcpClient clientSocket = serverSocket.AcceptTcpClient();
-			Client client = new Client
+			while (true)
 			{
-				IsClient = true
-			};
+				TcpClient clientSocket = serverSocket.AcceptTcpClient();
+				Client client = new Client
+				{
+					IsClient = true
+				};
 
-			client.Connected += OnConnected;
-			client.Disconnected += OnDisconnected;
-			client.ReceivedPacket += OnReceivedPacket;
+				client.Connected += OnConnected;
+				client.Disconnected += OnDisconnected;
+				client.ReceivedPacket += OnReceivedPacket;
 
-			client.StartClient(clientSocket, GetNewClientID());
+				client.StartClient(clientSocket, GetNewClientID());
+			}
 		}
 
 		private static void SetPingTimer()

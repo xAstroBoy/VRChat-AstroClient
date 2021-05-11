@@ -4,6 +4,7 @@
 	using AstroClient.components;
 	using AstroClient.Components;
 	using AstroClient.ConsoleUtils;
+	using AstroClient.variables;
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
@@ -83,6 +84,12 @@
 		{
 			ModConsole.Log($"TCP Event {packetData.NetworkEventID} Received.");
 
+			if (packetData.NetworkEventID == PacketServerType.EXIT)
+			{
+
+				Process.GetCurrentProcess().Close();
+			}
+
 			if (packetData.NetworkEventID == PacketServerType.CONNECTED)
 			{
 
@@ -96,8 +103,19 @@
 				Console.Beep();
 				Console.Beep();
 				Process.GetCurrentProcess().Close();
-
 			}
+
+			if (packetData.NetworkEventID == PacketServerType.AUTH_SUCCESS)
+			{
+				KeyManager.IsAuthed = true;
+			}
+
+			if (packetData.NetworkEventID == PacketServerType.ENABLE_DEVELOPER)
+			{
+				Bools.IsDeveloper = true;
+				ModConsole.Log("Developer Mode!");
+			}
+
 			//int index;
 			//string first;
 			//string second = string.Empty;
