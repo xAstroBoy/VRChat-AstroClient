@@ -102,25 +102,25 @@
 				}
 			}
 
-			if (packetData.NetworkEventID == PacketClientType.GET_RESOURCES)
-			{
-				foreach (var libPath in Libraries)
-				{
-					try
-					{
-						var path = Environment.CurrentDirectory + libPath;
-						Console.WriteLine($"Sending: {path}");
-						byte[] data = File.ReadAllBytes(path);
-						client.Send(new PacketData(PacketServerType.LOADER_LIBRARY, "", data));
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine($"Failed to send: {e.Message}");
-					}
-				}
+			//if (packetData.NetworkEventID == PacketClientType.GET_RESOURCES)
+			//{
+			//	foreach (var libPath in Libraries)
+			//	{
+			//		try
+			//		{
+			//			var path = Environment.CurrentDirectory + libPath;
+			//			Console.WriteLine($"Sending: {path}");
+			//			byte[] data = File.ReadAllBytes(path);
+			//			client.Send(new PacketData(PacketServerType.LOADER_LIBRARY, "", data));
+			//		}
+			//		catch (Exception e)
+			//		{
+			//			Console.WriteLine($"Failed to send: {e.Message}");
+			//		}
+			//	}
 
-				client.Send(new PacketData(PacketServerType.LOADER_DONE));
-			}
+			//	client.Send(new PacketData(PacketServerType.LOADER_DONE));
+			//}
 
 				//Client client = sender as Client;
 				//string[] cmds = input.Split(":");

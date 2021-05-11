@@ -109,28 +109,26 @@
 
 			if (packetData.NetworkEventID == PacketServerType.ADD_TAG)
 			{
-				MiscUtility.DelayFunction(3f, () =>
+				var tagData = BSonWriter.FromBson<TagData>(packetData.TextData);
+				Player player;
+				if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(tagData.UserID))
 				{
-					Player player;
-					if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(packetData.TagData.UserID))
-					{
-						ModConsole.Log("Wants to add tag to self");
-						player = LocalPlayerUtils.GetSelfPlayer();
-					}
-					else
-					{
-						ModConsole.Log("Wants to add tag to someone else");
-						player = WorldUtils.GetPlayerByID(packetData.TagData.UserID);
-					}
-					if (player != null)
-					{
-						SpawnTag(player, packetData.TagData.Text, Color.white, Color.cyan);
-					}
-					else
-					{
-						ModConsole.Log($"Player ({packetData.TagData.UserID}) returned null");
-					}
-				});
+					ModConsole.Log("Wants to add tag to self");
+					player = LocalPlayerUtils.GetSelfPlayer();
+				}
+				else
+				{
+					ModConsole.Log("Wants to add tag to someone else");
+					player = WorldUtils.GetPlayerByID(tagData.UserID);
+				}
+				if (player != null)
+				{
+					SpawnTag(player, tagData.Text, Color.white, Color.cyan);
+				}
+				else
+				{
+					ModConsole.Log($"Player ({tagData.UserID}) returned null");
+				}
 			}
 
 			if (packetData.NetworkEventID == PacketServerType.NOTIFY)
@@ -152,20 +150,23 @@
 		// You gotta delay it, let's delay it to some seconds
 		private static void SpawnTag(Player player, string text, Color TextColor, Color Tagcolor)
 		{
-			if (player != null)
+			MiscUtility.DelayFunction(1f, () =>
 			{
-				SingleTag tag = SingleTagsUtils.AddSingleTag(player);
-				if (tag != null)
+				if (player != null)
 				{
-					tag.Label_Text = text;
-					tag.Label_TextColor = TextColor;
-					tag.Tag_Color = Tagcolor;
+					SingleTag tag = SingleTagsUtils.AddSingleTag(player);
+					if (tag != null)
+					{
+						tag.Label_Text = text;
+						tag.Label_TextColor = TextColor;
+						tag.Tag_Color = Tagcolor;
+					}
 				}
-			}
-			else
-			{
-				ModConsole.Error("Player for setting tag from server was null!");
-			}
+				else
+				{
+					ModConsole.Error("Player for setting tag from server was null!");
+				}
+			});
 		}
 
 		private static void OnConnected(object sender, EventArgs e)

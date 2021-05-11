@@ -141,12 +141,12 @@
 				InstanceManager.InstanceJoined(client);
 			}
 
-			if (packetData.NetworkEventID == PacketClientType.AVATAR_DATA)
-			{
-				AvatarData avatarData = BSonWriter.FromBson<AvatarData>(packetData.ByteData.ConvertToString());
+			//if (packetData.NetworkEventID == PacketClientType.AVATAR_DATA)
+			//{
+			//	AvatarData avatarData = BSonWriter.FromBson<AvatarData>(packetData.ByteData.ConvertToString());
 
-				Console.WriteLine($"AvatarData for {avatarData.ID} received.");
-			}
+			//	Console.WriteLine($"AvatarData for {avatarData.ID} received.");
+			//}
 		}
 
 		public static void SendAll(PacketData packetData)
