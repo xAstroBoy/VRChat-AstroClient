@@ -3,7 +3,6 @@
 	using AstroNetworkingLibrary.Serializable;
 	using System;
 	using System.Net.Sockets;
-	using System.Text;
 	using System.Threading.Tasks;
 
 	public class HandleClient
@@ -210,20 +209,6 @@
 				string base64 = data.ConvertToString();
 				var packetData = BSonWriter.FromBson<PacketData>(base64);
 				ReceivedPacket?.Invoke(this, new ReceivedPacketEventArgs(ClientID, packetData));
-
-				//if (headerType == 1000) // Text
-				//{
-				//	string message = data.ConvertToString();
-				//	ReceivedText?.Invoke(this, new ReceivedTextEventArgs(ClientID, message));
-				//}
-				//else if (headerType == 1001) // Data
-				//{
-				//	ReceivedData?.Invoke(this, new ReceivedDataEventArgs(ClientID, data));
-				//}
-				//else
-				//{
-				//	Console.WriteLine($"Something Went Wrong.. {headerType}");
-				//}
 			}
 		}
 	}
