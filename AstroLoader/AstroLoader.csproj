@@ -93,6 +93,9 @@
     <Compile Include="..\AstroNetworkingLibrary\Serializable\PacketData.cs">
       <Link>Networking\Serializable\PacketData.cs</Link>
     </Compile>
+    <Compile Include="..\AstroNetworkingLibrary\Serializable\TagData.cs">
+      <Link>Networking\Serializable\TagData.cs</Link>
+    </Compile>
     <Compile Include="AstroLoader.cs" />
     <Compile Include="Networking\AstroNetworkLoader.cs" />
     <Compile Include="BuildInfo.cs" />
