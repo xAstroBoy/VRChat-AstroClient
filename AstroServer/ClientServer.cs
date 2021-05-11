@@ -86,7 +86,11 @@
 
 		private static void ProcessInput(object sender, PacketData packetData)
 		{
-			Console.WriteLine($"TCP Event {packetData.NetworkEventID} Received.");
+			if (packetData.NetworkEventID != PacketClientType.KEEP_ALIVE)
+			{
+				Console.WriteLine($"TCP Event {packetData.NetworkEventID} Received.");
+			}
+
 			Client client = sender as Client;
 
 			if (packetData.NetworkEventID == PacketClientType.AUTH)

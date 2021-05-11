@@ -67,7 +67,10 @@
 
 		private static void ProcessInput(object sender, PacketData packetData)
 		{
-			ModConsole.Log($"TCP Event {packetData.NetworkEventID} Received.");
+			if (packetData.NetworkEventID != PacketServerType.KEEP_ALIVE)
+			{
+				ModConsole.Log($"TCP Event {packetData.NetworkEventID} Received.");
+			}
 
 			if (packetData.NetworkEventID == PacketServerType.EXIT)
 			{
