@@ -3,6 +3,7 @@
 	using AstroNetworkingLibrary.Serializable;
 	using System;
 	using System.Net.Sockets;
+	using System.Text;
 	using System.Threading.Tasks;
 
 	public class HandleClient
@@ -55,20 +56,6 @@
 			}
 		}
 
-		private void SendHeaderType(int headerType = 1000) // 1000 is plain text
-		{
-			byte[] header = BitConverter.GetBytes(headerType);
-			try
-			{
-				clientStream.Write(header, 0, header.Length);
-				clientStream.Flush();
-			}
-			catch
-			{
-				Disconnect();
-			}
-		}
-
 		private void SendSecret()
 		{
 			byte[] secretHeader;
@@ -109,23 +96,25 @@
 
 		public void Send(PacketData packetData) // 0 = text, 1 = data
 		{
+			var bson = BSonWriter.ToBson(packetData);
+			var msg = Encoding.Base64Encode(bson);
+			var bytes = msg.ConvertToBytes();
 
-			//SendSecret();
-			////SendHeaderType(headerType);
-			//SendHeaderLength(msg);
+			SendSecret();
+			SendHeaderLength(bytes);
 
-			//if (msg != null && msg.Length > 0)
-			//{
-			//	try
-			//	{
-			//		clientStream.Write(msg, 0, msg.Length);
-			//		clientStream.Flush();
-			//	}
-			//	catch
-			//	{
-			//		Disconnect();
-			//	}
-			//}
+			if (bytes != null && bytes.Length > 0)
+			{
+				try
+				{
+					clientStream.Write(bytes, 0, bytes.Length);
+					clientStream.Flush();
+				}
+				catch
+				{
+					Disconnect();
+				}
+			}
 		}
 
 		private void StartThread()
