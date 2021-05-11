@@ -8,7 +8,7 @@
 	{
 		public static byte[] AssemblyFile;
 
-#if OFFLINE
+#if DEBUG
 
 		public static string[] DebugMelonPaths =
 		{
@@ -34,7 +34,7 @@
 
 		public AstroLoader()
 		{
-#if OFFLINE
+#if DEBUG
 			LoadDebug();
 			return;
 #endif
@@ -68,7 +68,7 @@
 			//}
 		}
 
-#if OFFLINE
+#if DEBUG
 
 		public void LoadDebug()
 		{
