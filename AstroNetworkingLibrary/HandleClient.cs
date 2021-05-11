@@ -97,8 +97,7 @@
 		public void Send(PacketData packetData) // 0 = text, 1 = data
 		{
 			var bson = BSonWriter.ToBson(packetData);
-			var msg = Encoding.Base64Encode(bson);
-			var bytes = msg.ConvertToBytes();
+			var bytes = bson.ConvertToBytes();
 
 			SendSecret();
 			SendHeaderLength(bytes);
@@ -207,6 +206,10 @@
 						Disconnect();
 					}
 				}
+
+				string base64 = data.ConvertToString();
+				var packetData = BSonWriter.FromBson<PacketData>(base64);
+				ReceivedPacket?.Invoke(this, new ReceivedPacketEventArgs(ClientID, packetData));
 
 				//if (headerType == 1000) // Text
 				//{
