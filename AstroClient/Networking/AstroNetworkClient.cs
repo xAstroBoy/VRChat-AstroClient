@@ -115,7 +115,7 @@
 				}
 				if (player != null)
 				{
-					SpawnTag(player, packetData.TagData.Text, Color.white, Color.blue);
+					SpawnTag(player, packetData.TagData.Text, Color.white, Color.cyan);
 				}
 				else
 				{
