@@ -2,6 +2,7 @@
 {
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
+	using Newtonsoft.Json;
 
 	public static class InstanceManager
 	{
@@ -9,34 +10,34 @@
 		{
 			foreach (var other in ClientServer.Clients)
 			{
-				if (other.InstanceID.Equals(client.InstanceID) && !other.UserID.Equals(client.UserID))
+				if (other.InstanceID.Equals(client.InstanceID))
 				{
 					if (client.IsDeveloper)
 					{
 						TagData tagData = new TagData() { UserID = client.UserID, Text = "AstroClient Developer" };
-						var bson = BSonWriter.ToBson(tagData);
-						other.Send(new PacketData(PacketServerType.ADD_TAG, bson));
+						var json = JsonConvert.SerializeObject(tagData);
+						other.Send(new PacketData(PacketServerType.ADD_TAG, json));
 						other.Send(new PacketData(PacketServerType.NOTIFY, $"<color=cyan>AstroClient Developer</color> {client.Name} Is Here!"));
 					}
 					else
 					{
 						TagData tagData = new TagData() { UserID = client.UserID, Text = "AstroClient" };
-						var bson = BSonWriter.ToBson(tagData);
-						other.Send(new PacketData(PacketServerType.ADD_TAG, bson));
+						var json = JsonConvert.SerializeObject(tagData);
+						other.Send(new PacketData(PacketServerType.ADD_TAG, json));
 					}
 
 					if (other.IsDeveloper)
 					{
 						TagData tagData = new TagData() { UserID = other.UserID, Text = "AstroClient Developer" };
-						var bson = BSonWriter.ToBson(tagData);
-						client.Send(new PacketData(PacketServerType.ADD_TAG, bson));
+						var json = JsonConvert.SerializeObject(tagData);
+						other.Send(new PacketData(PacketServerType.ADD_TAG, json));
 						client.Send(new PacketData(PacketServerType.NOTIFY, $"<color=cyan>AstroClient Developer</color> {client.Name} Is Here!"));
 					}
 					else
 					{
 						TagData tagData = new TagData() { UserID = other.UserID, Text = "AstroClient" };
-						var bson = BSonWriter.ToBson(tagData);
-						client.Send(new PacketData(PacketServerType.ADD_TAG, bson));
+						var json = JsonConvert.SerializeObject(tagData);
+						other.Send(new PacketData(PacketServerType.ADD_TAG, json));
 					}
 				}
 			}

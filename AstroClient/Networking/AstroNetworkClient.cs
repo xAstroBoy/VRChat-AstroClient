@@ -10,6 +10,7 @@
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
+	using Newtonsoft.Json;
 	using System;
 	using System.Diagnostics;
 	using System.Net;
@@ -109,7 +110,7 @@
 
 			if (packetData.NetworkEventID == PacketServerType.ADD_TAG)
 			{
-				var tagData = BSonWriter.FromBson<TagData>(packetData.TextData);
+				var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
 				Player player;
 				if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(tagData.UserID))
 				{
