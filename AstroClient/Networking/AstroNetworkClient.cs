@@ -98,8 +98,7 @@
 			{
 				ModConsole.Error("Failed to authenticate!");
 				Console.Beep();
-				Console.Beep();
-				Console.Beep();
+				Console.ReadLine();
 				Process.GetCurrentProcess().Close();
 			}
 
@@ -114,29 +113,6 @@
 				ModConsole.Log("Developer Mode!");
 			}
 
-			//int index;
-			//string first;
-			//string second = string.Empty;
-
-			//if (input.Contains(":"))
-			//{
-			//	index = input.IndexOf(':');
-			//	first = input.Substring(0, index);
-			//	second = input.Substring(index + 1);
-			//}
-			//else
-			//{
-			//	first = input;
-			//}
-
-			//if (first.Equals("exit"))
-			//{
-			//	Environment.Exit(0);
-			//}
-			//else if (first.Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
-			//{
-			//	Client.Send($"key:{KeyManager.AuthKey}");
-			//}
 			//else if (first.Equals("authed", StringComparison.InvariantCultureIgnoreCase))
 			//{
 			//	if (second.Equals("true", StringComparison.InvariantCultureIgnoreCase))
@@ -168,13 +144,6 @@
 			//	{
 			//		Bools.IsDeveloper = false;
 			//	}
-			//}
-			//else if (first.Equals("ping"))
-			//{
-			//	Client.Send("pong");
-			//}
-			//else if (first.Equals("pong"))
-			//{
 			//}
 			//else if (first.Equals("debug"))
 			//{
