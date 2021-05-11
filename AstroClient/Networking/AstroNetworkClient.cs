@@ -8,6 +8,7 @@
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
+	using DayClientML2.Utility.Extensions;
 	using System;
 	using System.Diagnostics;
 	using System.Net;
@@ -111,6 +112,29 @@
 			{
 				Bools.IsDeveloper = true;
 				ModConsole.Log("Developer Mode!");
+			}
+
+			if (packetData.NetworkEventID == PacketServerType.ADD_TAG)
+			{
+				Player player;
+				if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(packetData.TagData.UserID))
+				{
+					ModConsole.DebugLog("Wants to add tag to self");
+					player = LocalPlayerUtils.GetSelfPlayer();
+				}
+				else
+				{
+					ModConsole.DebugLog("Wants to add tag to someone else");
+					player = WorldUtils.GetPlayerByID(packetData.TagData.UserID);
+				}
+				if (player != null)
+				{
+					SpawnTag(player, packetData.TagData.Text, Color.white, Color.blue);
+				}
+				else
+				{
+					ModConsole.DebugLog($"Player ({packetData.TagData.UserID}) returned null");
+				}
 			}
 
 			//else if (first.Equals("authed", StringComparison.InvariantCultureIgnoreCase))
