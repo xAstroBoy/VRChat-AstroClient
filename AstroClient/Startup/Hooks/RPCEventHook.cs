@@ -61,21 +61,28 @@
 			string broadcasttype = string.Empty;
 			string sender = string.Empty;
 
-			if (__1.ParameterBytes != null && __1.ParameterBytes.Count != 0)
+			try
 			{
-				actionstring = System.Text.Encoding.UTF8.GetString(__1.ParameterBytes);
-				if (actionstring.Length >= 6)
+				if (__1.ParameterBytes != null && __1.ParameterBytes.Count != 0)
 				{
-					actiontext = actionstring.Substring(6);
+					actionstring = System.Text.Encoding.UTF8.GetString(__1.ParameterBytes);
+					if (actionstring.Length >= 6)
+					{
+						actiontext = actionstring.Substring(6);
+					}
+					else
+					{
+						actiontext = "Unknown Event";
+					}
 				}
 				else
 				{
-					actiontext = "Unknown Event";
+					actiontext = "null";
 				}
 			}
-			else
+			catch
 			{
-				actiontext = "null";
+				return true;
 			}
 
 			if (__1.ParameterObject != null)
