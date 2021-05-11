@@ -54,6 +54,35 @@
 
 		private static void ProcessInput(object sender, PacketData packetData)
 		{
+			Client client = sender as Client;
+
+			if (packetData.NetworkEventID == PacketClientType.AUTH)
+			{
+				string key = packetData.TextData;
+
+				if (KeyManager.IsValidKey(key))
+				{
+					client.IsAuthed = true;
+					client.Key = key;
+					client.DiscordID = KeyManager.GetKeysDiscordOwner(key);
+
+					client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
+
+					if (KeyManager.IsDevKey(key))
+					{
+						client.IsDeveloper = true;
+					}
+
+					client.Send(new PacketData(PacketServerType.DISCONNECT));
+				}
+				else
+				{
+					client.Send(new PacketData(PacketServerType.AUTH_FAIlED));
+					client.Send(new PacketData(PacketServerType.EXIT));
+					client.Disconnect();
+				}
+			}
+
 			//Client client = sender as Client;
 			//string[] cmds = input.Split(":");
 

@@ -80,8 +80,12 @@
 
 			if (packetData.NetworkEventID == PacketServerType.CONNECTED)
 			{
-
 				Client.Send(new PacketData(PacketClientType.AUTH, KeyManager.AuthKey));
+			}
+
+			if (packetData.NetworkEventID == PacketServerType.DISCONNECT)
+			{
+				Client.Disconnect();
 			}
 
 			if (packetData.NetworkEventID == PacketServerType.AUTH_FAIlED)

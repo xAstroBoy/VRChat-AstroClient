@@ -39,6 +39,15 @@
 
 		private static void ProcessInput(object sender, PacketData packetData)
 		{
+			if (packetData.NetworkEventID == PacketServerType.CONNECTED)
+			{
+				Client.Send(new PacketData(PacketClientType.AUTH, KeyManager.AuthKey));
+			}
+
+			if (packetData.NetworkEventID == PacketServerType.DISCONNECT)
+			{
+				Client.Disconnect();
+			}
 
 			//ModConsole.DebugLog($"Received: {input}");
 			//string[] cmds = input.Trim().Split(':');
