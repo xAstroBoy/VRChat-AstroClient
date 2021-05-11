@@ -37,7 +37,9 @@
 		}
 		public override void VRChat_OnUiManagerInit()
 		{
-			new QMSingleButton("ShortcutMenu", 5, -0.5f, "check\nblacklist", delegate () { CheetosHelpers.SendHudNotification($"{shader_list_local}"); }, "checks the shader list.", null, null, true);
+			#if DEBUG
+			new QMSingleButton("ShortcutMenu", 5, -0.5f, "check\nblacklist", delegate () { MelonLogger.Log($"{shader_list_local}"); }, "checks the shader list.", null, null, true);
+            #endif
 		}
 			public static void set_pickups(bool state)
 		{
