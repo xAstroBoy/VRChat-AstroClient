@@ -52,6 +52,9 @@
     <Compile Include="..\AstroNetworkingLibrary\BSonWriter.cs">
       <Link>Networking\BSonWriter.cs</Link>
     </Compile>
+    <Compile Include="..\AstroNetworkingLibrary\Encoding.cs">
+      <Link>Networking\Encoding.cs</Link>
+    </Compile>
     <Compile Include="..\AstroNetworkingLibrary\HandleClient.cs">
       <Link>Networking\HandleClient.cs</Link>
     </Compile>

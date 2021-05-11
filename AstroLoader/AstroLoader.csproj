@@ -49,6 +49,14 @@
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -64,8 +72,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\AstroNetworkingLibrary\BSonWriter.cs">
+      <Link>Networking\BSonWriter.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroNetworkingLibrary\Encoding.cs">
+      <Link>Networking\Encoding.cs</Link>
+    </Compile>
     <Compile Include="..\AstroNetworkingLibrary\HandleClient.cs">
       <Link>Networking\HandleClient.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroNetworkingLibrary\JSonWriter.cs">
+      <Link>Networking\JSonWriter.cs</Link>
     </Compile>
     <Compile Include="..\AstroNetworkingLibrary\NetworkingExtensions.cs">
       <Link>Networking\NetworkingExtensions.cs</Link>
@@ -81,6 +98,10 @@
     <Compile Include="BuildInfo.cs" />
     <Compile Include="Networking\KeyManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
