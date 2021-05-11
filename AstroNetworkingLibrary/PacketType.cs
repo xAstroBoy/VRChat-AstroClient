@@ -10,6 +10,8 @@
 		public const ulong WORLD_JOIN = 20;
 		public const ulong AVATAR_DATA = 21;
 		public const ulong KEEP_ALIVE = 100;
+
+		public static ulong GET_RESOURCES = 200;
 	}
 
 	public static class PacketServerType
@@ -24,9 +26,10 @@
 		public const ulong KEEP_ALIVE = 100;
 
 		// Loader Stuff
-		public const ulong LOADER_LIBRARY = 200;
-		public const ulong LOADER_MELON = 201;
-		public const ulong LOADER_MODULE = 202;
+		public const ulong LOADER_DONE = 200;
+		public const ulong LOADER_LIBRARY = 201;
+		public const ulong LOADER_MELON = 202;
+		public const ulong LOADER_MODULE = 203;
 
 		// Other Stuff
 		public const ulong LOG = 300;

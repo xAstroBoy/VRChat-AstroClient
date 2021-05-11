@@ -4,6 +4,7 @@
 	using AstroNetworkingLibrary.Serializable;
 	using System;
 	using System.Collections.Generic;
+	using System.IO;
 	using System.Linq;
 	using System.Net;
 	using System.Net.Sockets;
@@ -52,8 +53,20 @@
 			task.Start();
 		}
 
+		public static List<string> Libraries = new List<string>()
+		{
+			"/AstroClient/Libs/Newtonsoft.Json.dll",
+			"/AstroClient/Libs/Newtonsoft.Json.Bson.dll",
+			"/AstroClient/Libs/AstroLibrary.dll"
+		};
+
 		private static void ProcessInput(object sender, PacketData packetData)
 		{
+			if (packetData.NetworkEventID != PacketServerType.KEEP_ALIVE)
+			{
+				Console.WriteLine($"TCP Event {packetData.NetworkEventID} Received.");
+			}
+
 			Client client = sender as Client;
 
 			if (packetData.NetworkEventID == PacketClientType.AUTH)
@@ -72,8 +85,6 @@
 					{
 						client.IsDeveloper = true;
 					}
-
-					client.Send(new PacketData(PacketServerType.DISCONNECT));
 				}
 				else
 				{
@@ -83,45 +94,57 @@
 				}
 			}
 
-			//Client client = sender as Client;
-			//string[] cmds = input.Split(":");
+			if (packetData.NetworkEventID == PacketClientType.GET_RESOURCES)
+			{
+				foreach (var libPath in Libraries)
+				{
+					var path = Environment.CurrentDirectory + libPath;
+					byte[] data = File.ReadAllBytes(path);
+					client.Send(new PacketData(PacketServerType.LOADER_LIBRARY, "", data));
+				}
 
-			//if (cmds[0].Equals("gimmiedll") && client.IsAuthed)
-			//{
-			//	var path = Environment.CurrentDirectory + "/AstroClient/AstroClient.dll";
-			//	byte[] data = File.ReadAllBytes(path);
-			//	client.Send(data, 1001);
-			//}
-			//else if (cmds[0].Equals("gotdll"))
-			//{
-			//	client.Disconnect();
-			//	Console.WriteLine($"DLL Sent");
-			//	client.IsReady = true;
-			//}
-			//else if (cmds[0].Equals("key"))
-			//{
-			//	string key = cmds[1];
-			//	Console.WriteLine("Trying to auth with: " + key);
-			//	if (KeyManager.IsValidKey(key))
-			//	{
-			//		client.Send("authed:true");
-			//		client.IsAuthed = true;
-			//		client.Key = key;
-			//		Console.WriteLine("Successfully Authed");
-			//	}
-			//	else
-			//	{
-			//		client.Send("authed:false");
-			//		client.Send("exit:invalid auth key");
-			//		client.Disconnect();
-			//		Console.WriteLine("Invalid Auth Key");
-			//	}
-			//}
-			//else
-			//{
-			//	Console.WriteLine($"Unknown packet: {input}");
-			//}
-		}
+				client.Send(new PacketData(PacketServerType.LOADER_DONE));
+			}
+
+				//Client client = sender as Client;
+				//string[] cmds = input.Split(":");
+
+				//if (cmds[0].Equals("gimmiedll") && client.IsAuthed)
+				//{
+				//	var path = Environment.CurrentDirectory + "/AstroClient/AstroClient.dll";
+				//	byte[] data = File.ReadAllBytes(path);
+				//	client.Send(data, 1001);
+				//}
+				//else if (cmds[0].Equals("gotdll"))
+				//{
+				//	client.Disconnect();
+				//	Console.WriteLine($"DLL Sent");
+				//	client.IsReady = true;
+				//}
+				//else if (cmds[0].Equals("key"))
+				//{
+				//	string key = cmds[1];
+				//	Console.WriteLine("Trying to auth with: " + key);
+				//	if (KeyManager.IsValidKey(key))
+				//	{
+				//		client.Send("authed:true");
+				//		client.IsAuthed = true;
+				//		client.Key = key;
+				//		Console.WriteLine("Successfully Authed");
+				//	}
+				//	else
+				//	{
+				//		client.Send("authed:false");
+				//		client.Send("exit:invalid auth key");
+				//		client.Disconnect();
+				//		Console.WriteLine("Invalid Auth Key");
+				//	}
+				//}
+				//else
+				//{
+				//	Console.WriteLine($"Unknown packet: {input}");
+				//}
+			}
 
 		public static void SendAll(string msg)
 		{
