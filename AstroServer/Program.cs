@@ -44,7 +44,14 @@
 			await Services.GetRequiredService<CommandHandlingService>().InitializeAsync();
 
 			Console.WriteLine("Starting Server..");
+			LServer = new LoaderServer();
 			CServer = new ClientServer();
+
+			Running = true;
+			while (Running)
+			{
+				Console.ReadLine();
+			}
 		}
 	}
 }

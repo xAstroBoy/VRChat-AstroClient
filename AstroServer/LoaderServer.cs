@@ -7,6 +7,7 @@
 	using System.Linq;
 	using System.Net;
 	using System.Net.Sockets;
+	using System.Threading.Tasks;
 
 	internal class LoaderServer
 	{
@@ -31,18 +32,23 @@
 			Console.WriteLine($"There are {KeyManager.GetKeyCount()} valid keys stored.");
 
 			Clients = new List<Client>();
-
-			TcpClient clientSocket = serverSocket.AcceptTcpClient();
-			Client client = new Client
+			Task task = new Task(() =>
 			{
-				IsClient = false
-			};
+				while (true)
+				{
+					TcpClient clientSocket = serverSocket.AcceptTcpClient();
+					Client client = new Client
+					{
+						IsClient = false
+					};
 
-			client.Connected += Connected;
-			client.Disconnected += Disconnected;
-			client.ReceivedPacket += OnReceivedPacket;
+					client.Connected += Connected;
+					client.Disconnected += Disconnected;
+					client.ReceivedPacket += OnReceivedPacket;
 
-			client.StartClient(clientSocket, GetNewClientID());
+					client.StartClient(clientSocket, GetNewClientID());
+				}
+			});
 		}
 
 		private static void ProcessInput(object sender, PacketData packetData)

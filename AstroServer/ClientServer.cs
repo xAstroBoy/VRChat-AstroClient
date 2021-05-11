@@ -9,6 +9,7 @@
 	using System.Linq;
 	using System.Net;
 	using System.Net.Sockets;
+	using System.Threading.Tasks;
 	using System.Timers;
 	#endregion
 
@@ -38,21 +39,24 @@
 			Console.WriteLine($"There are {KeyManager.GetKeyCount()} valid keys stored.");
 
 			SetPingTimer();
-
-			while (true)
+			Task task = new Task(() =>
 			{
-				TcpClient clientSocket = serverSocket.AcceptTcpClient();
-				Client client = new Client
+				while (true)
 				{
-					IsClient = true
-				};
+					TcpClient clientSocket = serverSocket.AcceptTcpClient();
+					Client client = new Client
+					{
+						IsClient = true
+					};
 
-				client.Connected += OnConnected;
-				client.Disconnected += OnDisconnected;
-				client.ReceivedPacket += OnReceivedPacket;
+					client.Connected += OnConnected;
+					client.Disconnected += OnDisconnected;
+					client.ReceivedPacket += OnReceivedPacket;
 
-				client.StartClient(clientSocket, GetNewClientID());
-			}
+					client.StartClient(clientSocket, GetNewClientID());
+				}
+			});
+			task.Start();
 		}
 
 		private static void SetPingTimer()
@@ -108,6 +112,11 @@
 					client.Send(new PacketData(PacketServerType.EXIT));
 					client.Disconnect();
 				}
+			}
+
+			if (packetData.NetworkEventID == PacketClientType.DISCONNECT)
+			{
+				client.Disconnect();
 			}
 
 			if (packetData.NetworkEventID == PacketClientType.SEND_PLAYER_NAME)
