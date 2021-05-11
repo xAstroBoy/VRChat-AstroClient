@@ -10,8 +10,7 @@
 		public const ulong WORLD_JOIN = 20;
 		public const ulong AVATAR_DATA = 21;
 		public const ulong KEEP_ALIVE = 100;
-
-		public static ulong GET_RESOURCES = 200;
+		public const ulong GET_RESOURCES = 200;
 	}
 
 	public static class PacketServerType
