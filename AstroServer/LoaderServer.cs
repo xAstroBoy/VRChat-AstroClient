@@ -4,6 +4,7 @@
 	using AstroNetworkingLibrary.Serializable;
 	using System;
 	using System.Collections.Generic;
+	using System.IO;
 	using System.Linq;
 	using System.Net;
 	using System.Net.Sockets;
@@ -52,47 +53,98 @@
 			task.Start();
 		}
 
+		public static List<string> Libraries = new List<string>()
+		{
+			"/AstroClient/Libs/Newtonsoft.Json.dll",
+			"/AstroClient/Libs/Newtonsoft.Json.Bson.dll",
+			"/AstroClient/Libs/AstroLibrary.dll"
+		};
+
 		private static void ProcessInput(object sender, PacketData packetData)
 		{
-			//Client client = sender as Client;
-			//string[] cmds = input.Split(":");
+			if (packetData.NetworkEventID != PacketServerType.KEEP_ALIVE)
+			{
+				Console.WriteLine($"TCP Event {packetData.NetworkEventID} Received.");
+			}
 
-			//if (cmds[0].Equals("gimmiedll") && client.IsAuthed)
-			//{
-			//	var path = Environment.CurrentDirectory + "/AstroClient/AstroClient.dll";
-			//	byte[] data = File.ReadAllBytes(path);
-			//	client.Send(data, 1001);
-			//}
-			//else if (cmds[0].Equals("gotdll"))
-			//{
-			//	client.Disconnect();
-			//	Console.WriteLine($"DLL Sent");
-			//	client.IsReady = true;
-			//}
-			//else if (cmds[0].Equals("key"))
-			//{
-			//	string key = cmds[1];
-			//	Console.WriteLine("Trying to auth with: " + key);
-			//	if (KeyManager.IsValidKey(key))
-			//	{
-			//		client.Send("authed:true");
-			//		client.IsAuthed = true;
-			//		client.Key = key;
-			//		Console.WriteLine("Successfully Authed");
-			//	}
-			//	else
-			//	{
-			//		client.Send("authed:false");
-			//		client.Send("exit:invalid auth key");
-			//		client.Disconnect();
-			//		Console.WriteLine("Invalid Auth Key");
-			//	}
-			//}
-			//else
-			//{
-			//	Console.WriteLine($"Unknown packet: {input}");
-			//}
-		}
+			Client client = sender as Client;
+
+			if (packetData.NetworkEventID == PacketClientType.AUTH)
+			{
+				string key = packetData.TextData;
+
+				if (KeyManager.IsValidKey(key))
+				{
+					client.IsAuthed = true;
+					client.Key = key;
+					client.DiscordID = KeyManager.GetKeysDiscordOwner(key);
+
+					client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
+
+					if (KeyManager.IsDevKey(key))
+					{
+						client.IsDeveloper = true;
+					}
+				}
+				else
+				{
+					client.Send(new PacketData(PacketServerType.AUTH_FAIlED));
+					client.Send(new PacketData(PacketServerType.EXIT));
+					client.Disconnect();
+				}
+			}
+
+			if (packetData.NetworkEventID == PacketClientType.GET_RESOURCES)
+			{
+				foreach (var libPath in Libraries)
+				{
+					var path = Environment.CurrentDirectory + libPath;
+					byte[] data = File.ReadAllBytes(path);
+					client.Send(new PacketData(PacketServerType.LOADER_LIBRARY, "", data));
+				}
+
+				client.Send(new PacketData(PacketServerType.LOADER_DONE));
+			}
+
+				//Client client = sender as Client;
+				//string[] cmds = input.Split(":");
+
+				//if (cmds[0].Equals("gimmiedll") && client.IsAuthed)
+				//{
+				//	var path = Environment.CurrentDirectory + "/AstroClient/AstroClient.dll";
+				//	byte[] data = File.ReadAllBytes(path);
+				//	client.Send(data, 1001);
+				//}
+				//else if (cmds[0].Equals("gotdll"))
+				//{
+				//	client.Disconnect();
+				//	Console.WriteLine($"DLL Sent");
+				//	client.IsReady = true;
+				//}
+				//else if (cmds[0].Equals("key"))
+				//{
+				//	string key = cmds[1];
+				//	Console.WriteLine("Trying to auth with: " + key);
+				//	if (KeyManager.IsValidKey(key))
+				//	{
+				//		client.Send("authed:true");
+				//		client.IsAuthed = true;
+				//		client.Key = key;
+				//		Console.WriteLine("Successfully Authed");
+				//	}
+				//	else
+				//	{
+				//		client.Send("authed:false");
+				//		client.Send("exit:invalid auth key");
+				//		client.Disconnect();
+				//		Console.WriteLine("Invalid Auth Key");
+				//	}
+				//}
+				//else
+				//{
+				//	Console.WriteLine($"Unknown packet: {input}");
+				//}
+			}
 
 		public static void SendAll(string msg)
 		{
@@ -150,7 +202,7 @@
 				{
 					Clients.Add(client);
 					Console.WriteLine($"Client added: {client.ClientID} / {Clients.Count}");
-					//client.Send("auth-request");
+					client.Send(new PacketData(PacketServerType.CONNECTED));
 				}
 				Console.WriteLine($"Client Connected: {client.ClientID} / {Clients.Count}");
 			}

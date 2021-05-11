@@ -4,6 +4,7 @@
 	using AstroNetworkingLibrary.Serializable;
 	using System;
 	using System.Collections.Generic;
+	using System.Diagnostics;
 	using System.Net.Sockets;
 
 	// TODO: Make this retreive multiple assemblies and resources
@@ -39,6 +40,32 @@
 
 		private static void ProcessInput(object sender, PacketData packetData)
 		{
+			if (packetData.NetworkEventID != PacketServerType.KEEP_ALIVE)
+			{
+				Console.WriteLine($"TCP Event {packetData.NetworkEventID} Received.");
+			}
+
+			if (packetData.NetworkEventID == PacketServerType.CONNECTED)
+			{
+				Client.Send(new PacketData(PacketClientType.AUTH, KeyManager.AuthKey));
+			}
+
+			if (packetData.NetworkEventID == PacketServerType.DISCONNECT)
+			{
+				Client.Disconnect();
+			}
+
+			if (packetData.NetworkEventID == PacketServerType.AUTH_FAIlED)
+			{
+				Console.Beep();
+				Console.ReadLine();
+				Process.GetCurrentProcess().Close();
+			}
+
+			if (packetData.NetworkEventID == PacketServerType.AUTH_SUCCESS)
+			{
+				KeyManager.IsAuthed = true;
+			}
 
 			//ModConsole.DebugLog($"Received: {input}");
 			//string[] cmds = input.Trim().Split(':');
