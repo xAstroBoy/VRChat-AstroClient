@@ -105,25 +105,28 @@
 
 			if (packetData.NetworkEventID == PacketServerType.ADD_TAG)
 			{
-				Player player;
-				if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(packetData.TagData.UserID))
+				MiscUtility.DelayFunction(1f, () =>
 				{
-					ModConsole.DebugLog("Wants to add tag to self");
-					player = LocalPlayerUtils.GetSelfPlayer();
-				}
-				else
-				{
-					ModConsole.DebugLog("Wants to add tag to someone else");
-					player = WorldUtils.GetPlayerByID(packetData.TagData.UserID);
-				}
-				if (player != null)
-				{
-					SpawnTag(player, packetData.TagData.Text, Color.white, Color.cyan);
-				}
-				else
-				{
-					ModConsole.DebugLog($"Player ({packetData.TagData.UserID}) returned null");
-				}
+					Player player;
+					if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(packetData.TagData.UserID))
+					{
+						ModConsole.DebugLog("Wants to add tag to self");
+						player = LocalPlayerUtils.GetSelfPlayer();
+					}
+					else
+					{
+						ModConsole.DebugLog("Wants to add tag to someone else");
+						player = WorldUtils.GetPlayerByID(packetData.TagData.UserID);
+					}
+					if (player != null)
+					{
+						SpawnTag(player, packetData.TagData.Text, Color.white, Color.cyan);
+					}
+					else
+					{
+						ModConsole.DebugLog($"Player ({packetData.TagData.UserID}) returned null");
+					}
+				});
 			}
 
 			if (packetData.NetworkEventID == PacketServerType.NOTIFY)
