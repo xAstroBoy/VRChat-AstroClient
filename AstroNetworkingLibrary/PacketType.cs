@@ -28,7 +28,8 @@
 		public const ulong LOADER_MODULE = 202;
 
 		// Other Stuff
-		public const ulong NOTIFY = 300;
+		public const ulong LOG = 300;
 		public const ulong DEBUG = 301;
+		public const ulong NOTIFY = 302;
 	}
 }

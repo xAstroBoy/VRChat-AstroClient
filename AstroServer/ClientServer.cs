@@ -104,6 +104,7 @@
 					{
 						client.IsDeveloper = true;
 						client.Send(new PacketData(PacketServerType.ENABLE_DEVELOPER));
+						client.Send(new PacketData(PacketServerType.LOG, "Server sent this!"));
 					}
 				}
 				else
