@@ -49,8 +49,14 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\AstroNetworkingLibrary\BSonWriter.cs">
+      <Link>Networking\BSonWriter.cs</Link>
+    </Compile>
     <Compile Include="..\AstroNetworkingLibrary\HandleClient.cs">
       <Link>Networking\HandleClient.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroNetworkingLibrary\JSonWriter.cs">
+      <Link>Networking\JSonWriter.cs</Link>
     </Compile>
     <Compile Include="..\AstroNetworkingLibrary\NetworkingExtensions.cs">
       <Link>Networking\NetworkingExtensions.cs</Link>
@@ -129,10 +135,8 @@
     <Compile Include="Components\ESP\UdonBehaviour\ESP_UdonBehaviour.cs" />
     <Compile Include="Components\ESP\VRCInteractable\ESP_VRCInteractable.cs" />
     <Compile Include="Components\Bounce\Bouncer.cs" />
-    <Compile Include="Config\BSonWriter.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigManager.cs" />
-    <Compile Include="Config\JSonWriter.cs" />
     <Compile Include="Console\CheetosConsole\Console.cs" />
     <Compile Include="Console\CheetosConsole\DefaultFonts.cs" />
     <Compile Include="Console\CheetosConsole\Extensions.cs" />

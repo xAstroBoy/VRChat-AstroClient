@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroNetworkingLibrary
 {
 	using Newtonsoft.Json;
 	using System.IO;
