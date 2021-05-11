@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.components
 {
 	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;
@@ -151,12 +152,7 @@
 				var rocket = obj.GetComponent<RocketObject>();
 				if (rocket != null)
 				{
-					rocket.SelfDestroy();
-				}
-				var control = obj.GetComponent<RigidBodyController>();
-				if (control != null)
-				{
-					control.RestoreOriginalBody();
+					rocket.DestroyMeLocal();
 				}
 			}
 			Rockets.Clear();

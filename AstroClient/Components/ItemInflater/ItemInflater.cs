@@ -47,16 +47,14 @@
 			OnlineEditor.TakeObjectOwnership(obj);
 		}
 
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public void SelfDestroy()
+		void OnDestroy()
 		{
 			try
 			{
 				OnlineEditor.RemoveOwnerShip(obj);
 				ItemInflaterManager.RemoveObject(obj);
-				DestroyImmediate(this);
 			}
-			catch (Exception)
+			catch
 			{
 			}
 		}

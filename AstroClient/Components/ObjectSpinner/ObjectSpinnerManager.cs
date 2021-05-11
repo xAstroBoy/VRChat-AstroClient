@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.components
 {
 	using AstroClient.ConsoleUtils;
+	using AstroClient.extensions;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;
@@ -117,7 +118,7 @@
 				var spinner = obj.GetComponent<ObjectSpinner>();
 				if (spinner != null)
 				{
-					spinner.SelfDestroy();
+					spinner.DestroyMeLocal();
 				}
 			}
 

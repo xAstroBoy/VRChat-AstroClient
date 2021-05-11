@@ -27,7 +27,9 @@
 		{
 			//var menu = new QMNestedButton("ShortcutMenu", x, y, "Item Tweaker", "Item Tweaker!", null, null, null, null, btnHalf);
 			QMTabMenu menu = new QMTabMenu(3f, "Item Tweaker", null, null, null, "AstroClient.Resources.box.png");
-			new QMSingleButton(menu, -1, -2f, "Force Sync Physic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().ForceSyncPhysic(); }), "Force Sync Physic", null, null, true);
+
+			// DONT USE SYNCPHYSIC UNLESS OBJECT IS SYNCED , (On progress to make unsynced objects synced as well) 
+			//new QMSingleButton(menu, -1, -2f, "Force Sync Physic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().ForceSyncPhysic(); }), "Force Sync Physic", null, null, true);
 
 			GameObjMenu.InitTogglerMenu(menu, -1, -1.5f, true);
 			Tweaker_Object.TransformToEditBtn = new QMSingleButton(menu, -1, -1f, "None", new Action(() => { Tweaker_Object.GetGameObjectToEdit(); }), "GameObject To Edit", null, null);
@@ -804,16 +806,16 @@
 		public static void SpinnerSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
 			var submenu = new QMNestedButton(menu, x, y, "Spin Control", "Make them spiiiiin!", null, null, null, null, btnHalf);
-			new QMSingleButton(submenu, 1, 0, "+ 1 x", new Action(() => { Tweaker_Object.GetGameObjectToEdit().AddSpinForceX(); }), "Add Spin Force to spinner!", null, null);
-			new QMSingleButton(submenu, 2, 0, "+ 1 Y", new Action(() => { Tweaker_Object.GetGameObjectToEdit().AddSpinForceY(); }), "Add Spin Force to spinner!", null, null);
-			new QMSingleButton(submenu, 3, 0, "+ 1 Z", new Action(() => { Tweaker_Object.GetGameObjectToEdit().AddSpinForceZ(); }), "Add Spin Force to spinner!", null, null);
+			new QMSingleButton(submenu, 1, 0, "+ 1 x", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_SpinForceX(); }), "Add Spin Force to spinner!", null, null);
+			new QMSingleButton(submenu, 2, 0, "+ 1 Y", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_SpinForceY(); }), "Add Spin Force to spinner!", null, null);
+			new QMSingleButton(submenu, 3, 0, "+ 1 Z", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_SpinForceZ(); }), "Add Spin Force to spinner!", null, null);
 			ObjectSpinnerManager.SpinAmountTell = new QMSingleButton(submenu, 4, 0, "none", null, "Tells What's the spin force of the spinner!", null, null);
 			new QMSingleButton(submenu, 1, 1, "- 1 x", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SubtractSpinForceX(); }), "Subtract Spin Force to spinner!", null, null);
 			new QMSingleButton(submenu, 2, 1, "- 1 Y", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SubtractSpinForceY(); }), "Subtract Spin Force to spinner!", null, null);
 			new QMSingleButton(submenu, 3, 1, "- 1 Z", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SubtractSpinForceZ(); }), "Subtract Spin Force to spinner!", null, null);
 			ObjectSpinnerManager.SpinnerTimerBtn = new QMSingleButton(submenu, 4, 1, "none", null, "Tells What's the spin Speed!", null, null);
 			new QMSingleButton(submenu, 2, 2, "Remove all Spinner Objects", new Action(ObjectSpinnerManager.KillObjectSpinners), "Removes all Spinner components from objects!", null, null);
-			new QMSingleButton(submenu, 1, 2, "Remove Spinner from Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().RemoveSpinner(); }), "Removes all Spinner components from object!", null, null);
+			new QMSingleButton(submenu, 1, 2, "Remove Spinner from Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Remove_Spinner(); }), "Removes all Spinner components from object!", null, null);
 			new QMSingleButton(submenu, 3, 2, "+1 Timer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().IncSpinnerSpeed(); }), "Edits the Spinner Speed", null, null);
 			new QMSingleButton(submenu, 4, 2, "-1 Timer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DecSpinnerSpeed(); }), "Edits the Spinner Speed", null, null);
 		}

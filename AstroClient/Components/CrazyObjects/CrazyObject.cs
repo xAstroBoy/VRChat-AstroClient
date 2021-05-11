@@ -60,16 +60,15 @@
 			}
 		}
 
-		public void SelfDestroy()
+		void OnDestroy()
 		{
 			try
 			{
 				control.RestoreOriginalBody();
 				OnlineEditor.RemoveOwnerShip(obj);
 				CrazyObjectManager.RemoveObject(obj);
-				DestroyImmediate(this);
 			}
-			catch (Exception)
+			catch
 			{
 			}
 		}
