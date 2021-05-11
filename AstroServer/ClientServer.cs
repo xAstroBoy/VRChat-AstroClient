@@ -1,6 +1,7 @@
 ﻿namespace AstroServer
 {
 	#region Imports
+
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
 	using AstroServer.DiscordBot;
@@ -11,6 +12,7 @@
 	using System.Net.Sockets;
 	using System.Threading.Tasks;
 	using System.Timers;
+
 	#endregion
 
 	internal class ClientServer
@@ -109,8 +111,9 @@
 					{
 						client.IsDeveloper = true;
 						client.Send(new PacketData(PacketServerType.ENABLE_DEVELOPER));
-						client.Send(new PacketData(PacketServerType.LOG, "Server sent this!"));
 					}
+
+					CheckExistingClientsWithKey(client);
 				}
 				else
 				{
@@ -140,13 +143,6 @@
 				client.InstanceID = packetData.TextData;
 				InstanceManager.InstanceJoined(client);
 			}
-
-			//if (packetData.NetworkEventID == PacketClientType.AVATAR_DATA)
-			//{
-			//	AvatarData avatarData = BSonWriter.FromBson<AvatarData>(packetData.ByteData.ConvertToString());
-
-			//	Console.WriteLine($"AvatarData for {avatarData.ID} received.");
-			//}
 		}
 
 		public static void SendAll(PacketData packetData)
@@ -199,7 +195,6 @@
 				if (client.Key.Equals(other.Key) && client.ClientID != other.ClientID)
 				{
 					AstroBot.SendKeyshareLog(client, other);
-					//other.Send("exit:key in use somewhere else");
 					other.Send(new PacketData(PacketServerType.EXIT, "Key in use somewhere else"));
 					other.Disconnect();
 				}
