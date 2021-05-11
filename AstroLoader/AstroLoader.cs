@@ -1,5 +1,6 @@
 ﻿namespace AstroLoader
 {
+	using AstroClient.Cheetos;
 	using MelonLoader;
 	using System;
 	using System.Reflection;
@@ -20,9 +21,7 @@
 
 		public static string[] DebugLibraryPaths =
 {
-			@"Debug\Libs\Newtonsoft.Json.dll",
-			@"Debug\Libs\Newtonsoft.Json.Bson.dll",
-			@"Debug\Libs\AstroLibrary.dll"
+			@"Debug\Libs\AstroLibrary.dll",
 		};
 
 		public static string[] DebugModulePaths =
@@ -32,8 +31,17 @@
 
 #endif
 
+		public static string[] EmbededLibraryPaths =
+		{
+			@"AstroLoader.Resources.Newtonsoft.Json.dll",
+			@"AstroLoader.Resources.Newtonsoft.Json.Bson.dll",
+		};
+
+
 		public AstroLoader()
 		{
+			LoadEmbeddedLibraries();
+
 #if OFFLINE
 			LoadDebug();
 			return;
@@ -66,6 +74,24 @@
 			//{
 			//    Console.WriteLine("Failed to load assembly, it was null");
 			//}
+		}
+
+		public void LoadEmbeddedLibraries()
+		{
+			foreach (var path in EmbededLibraryPaths)
+			{
+				try
+				{
+					var bytes = CheetosHelpers.ExtractResource(path);
+					var dll = Assembly.Load(bytes);
+					Console.WriteLine($"Injected Embedded Library: {path}");
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine(e.Message);
+					Console.WriteLine($"Failed to inject embedded library: {path}");
+				}
+			}
 		}
 
 #if OFFLINE
@@ -119,5 +145,5 @@
 		}
 
 #endif
-	}
+		}
 }

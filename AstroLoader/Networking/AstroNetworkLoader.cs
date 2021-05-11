@@ -27,9 +27,12 @@
 		private static void Connect()
 		{
 			Client = null;
-			TcpClient tcpClient = new TcpClient("craig.se", 42070);
-			Client = new HandleClient();
-			Client.IsClient = false; // Indicate that this is the loader
+			TcpClient tcpClient = new TcpClient("client.craig.se", 42070);
+
+			Client = new HandleClient
+			{
+				IsClient = false // Indicate that this is the loader
+			};
 
 			Client.Connected += OnConnected;
 			Client.Disconnected += OnDisconnect;
@@ -65,6 +68,13 @@
 			if (packetData.NetworkEventID == PacketServerType.AUTH_SUCCESS)
 			{
 				KeyManager.IsAuthed = true;
+				Client.Send(new PacketData(PacketClientType.GET_RESOURCES));
+			}
+
+			if (packetData.NetworkEventID == PacketServerType.LOADER_DONE)
+			{
+				Client.Disconnect();
+				IsReady = true;
 			}
 
 			//ModConsole.DebugLog($"Received: {input}");
@@ -105,7 +115,7 @@
 
 		private static void OnConnected(object sender, EventArgs e)
 		{
-			//ModConsole.DebugLog("Client Connected..");
+			Console.WriteLine("Loader Connected..");
 			return;
 		}
 

@@ -19,6 +19,7 @@
 		internal LoaderServer()
 		{
 			Console.WriteLine("Starting Loader Server..");
+			Clients = new List<Client>();
 			StartServer();
 		}
 
@@ -32,7 +33,6 @@
 			Console.WriteLine($"There are {KeyManager.GetDevKeyCount()} dev keys stored.");
 			Console.WriteLine($"There are {KeyManager.GetKeyCount()} valid keys stored.");
 
-			Clients = new List<Client>();
 			Task task = new Task(() =>
 			{
 				while (true)
@@ -161,7 +161,7 @@
 			{
 				Clients.Remove(client);
 			}
-			Console.WriteLine($"Client Disconnected: {client.ClientID} of {Clients.Count} / {maxConnections}");
+			Console.WriteLine($"Loader Disconnected: {client.ClientID} of {Clients.Count} / {maxConnections}");
 		}
 
 		internal static int GetNewClientID()
@@ -201,14 +201,14 @@
 				if (!Clients.Contains(client))
 				{
 					Clients.Add(client);
-					Console.WriteLine($"Client added: {client.ClientID} / {Clients.Count}");
+					Console.WriteLine($"Loader added: {client.ClientID} / {Clients.Count}");
 					client.Send(new PacketData(PacketServerType.CONNECTED));
 				}
-				Console.WriteLine($"Client Connected: {client.ClientID} / {Clients.Count}");
+				Console.WriteLine($"Loader Connected: {client.ClientID} / {Clients.Count}");
 			}
 			else
 			{
-				Console.WriteLine($"Client Failed - Too Many Connections: {client.ClientID} / {Clients.Count}");
+				Console.WriteLine($"Loader Failed - Too Many Connections: {client.ClientID} / {Clients.Count}");
 				client.Disconnect();
 			}
 		}
