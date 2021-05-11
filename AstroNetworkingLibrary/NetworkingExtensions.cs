@@ -1,7 +1,6 @@
 ﻿namespace AstroNetworkingLibrary
 {
 	using System;
-	using System.Text;
 
 	public static class NetworkingExtensions
 	{
@@ -9,12 +8,12 @@
 		{
 			return bytes == null
 				? throw new ArgumentNullException(nameof(bytes), "ConvertToString bytes was null")
-				: Encoding.UTF8.GetString(bytes, 0, bytes.Length);
+				: System.Text.Encoding.UTF8.GetString(bytes, 0, bytes.Length);
 		}
 
 		public static byte[] ConvertToBytes(this string msg)
 		{
-			return Encoding.UTF8.GetBytes(msg);
+			return System.Text.Encoding.UTF8.GetBytes(msg);
 		}
 	}
 }

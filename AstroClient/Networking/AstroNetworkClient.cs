@@ -79,6 +79,7 @@
 
 		private static void ProcessInput(object sender, PacketData packetData)
 		{
+			ModConsole.Log($"TCP Event {packetData.NetworkEventID} Received.");
 			//int index;
 			//string first;
 			//string second = string.Empty;
