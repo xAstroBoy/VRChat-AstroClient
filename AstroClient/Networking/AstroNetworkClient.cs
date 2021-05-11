@@ -53,21 +53,6 @@
 			Client = null;
 			TcpClient tcpClient = new TcpClient("client.craig.se", 42069);
 
-			//TcpClient tcpClient = new TcpClient();
-			//var result = tcpClient.BeginConnect("craig.se", 42069, null, null);
-
-			//var result = tcpClient.BeginConnect("craig.se", 42169, null, null);
-			//var success = result.AsyncWaitHandle.WaitOne(TimeSpan.FromSeconds(1));
-
-			//if (!success)
-			//{
-			//    ModConsole.Error("Failed to connect..");
-			//    return;
-			//    //throw new Exception("Failed to connect.");
-			//}
-
-			//tcpClient.EndConnect(result);
-
 			Client = new HandleClient
 			{
 				IsClient = true // Indicate that this is the client
@@ -147,57 +132,6 @@
 			{
 				ModConsole.DebugLog(packetData.TextData);
 			}
-
-			//else if (first.Equals("authed", StringComparison.InvariantCultureIgnoreCase))
-			//{
-			//	if (second.Equals("true", StringComparison.InvariantCultureIgnoreCase))
-			//	{
-			//		// I'm authed
-			//		KeyManager.IsAuthed = true;
-			//	}
-			//	else
-			//	{
-			//		KeyManager.IsAuthed = false;
-			//		ModConsole.DebugLog("Failed to Auth");
-			//		// I'm not authed
-			//		Console.Beep();
-			//		Environment.Exit(0);
-			//	}
-			//}
-			//else if (first.Equals("debug"))
-			//{
-			//	ModConsole.Log(second);
-			//}
-			//else if (first.Equals("add-tag"))
-			//{
-			//	string[] info = second.Split(',');
-			//	Player player;
-			//	if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(info[0]))
-			//	{
-			//		ModConsole.DebugLog("Wants to add tag to self");
-			//		player = LocalPlayerUtils.GetSelfPlayer();
-			//	}
-			//	else
-			//	{
-			//		ModConsole.DebugLog("Wants to add tag to someone else");
-			//		player = WorldUtils.GetPlayerByID(info[0]);
-			//	}
-			//	if (player != null)
-			//	{
-			//		SpawnTag(player, info[1], Color.white, Color.blue);
-			//	}
-			//	else
-			//	{
-			//		ModConsole.DebugLog($"Player ({info[0]}) returned null");
-			//	}
-			//}
-			//else
-			//{
-			//	if (Bools.IsDeveloper)
-			//	{
-			//		ModConsole.DebugLog($"Unknown packet: {input}");
-			//	}
-			//}
 		}
 
 		// You gotta delay it, let's delay it to some seconds
