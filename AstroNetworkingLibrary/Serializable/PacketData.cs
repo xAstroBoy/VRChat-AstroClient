@@ -10,13 +10,16 @@
 
 		public string TextData = string.Empty;
 
+		public TagData TagData;
+
 		public byte[] ByteData;
 
-		public PacketData(ulong networkEventID, string textData = "", byte[] byteData = null)
+		public PacketData(ulong networkEventID, string textData = "", byte[] byteData = null, TagData tagData = null)
 		{
 			NetworkEventID = networkEventID;
 			TextData = textData;
 			ByteData = byteData;
+			TagData = tagData;
 		}
 	}
 }

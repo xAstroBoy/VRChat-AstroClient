@@ -17,6 +17,7 @@
 		public const ulong AUTH_SUCCESS = 3;
 		public const ulong AUTH_FAIlED = 4;
 		public const ulong ENABLE_DEVELOPER = 10;
+		public const ulong ADD_TAG = 30;
 		public const ulong KEEP_ALIVE = 100;
 	}
 }

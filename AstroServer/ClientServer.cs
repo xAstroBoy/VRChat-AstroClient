@@ -125,6 +125,7 @@
 			if (packetData.NetworkEventID == PacketClientType.WORLD_JOIN)
 			{
 				client.InstanceID = packetData.TextData;
+				InstanceManager.InstanceJoined(client);
 			}
 
 			//if (first.Equals("key"))
