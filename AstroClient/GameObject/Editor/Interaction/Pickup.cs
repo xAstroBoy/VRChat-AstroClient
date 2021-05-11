@@ -91,7 +91,7 @@
 				if (pickupEditor == null)
 				{
 					pickupEditor = obj.AddComponent<PickupController>();
-				}
+				} 
 				pickupEditor.EditMode = true;
 				pickupEditor.pickupable = pickupable;
 				ItemTweakerMain.CheckIfContainsPickupProperties(obj);

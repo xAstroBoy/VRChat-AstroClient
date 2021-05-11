@@ -172,16 +172,6 @@
 			ModConsole.Log("Found Tot Knifes : " + Knifes.Count());
 		}
 
-		public static void SetMurderItemsGravity(bool useGravity)
-		{
-			DetectiveGuns.SetGravity(useGravity);
-			SilencedGuns.SetGravity(useGravity);
-			ShotGuns.SetGravity(useGravity);
-			BearTraps.SetGravity(useGravity);
-			Grenades.SetGravity(useGravity);
-			Knifes.SetGravity(useGravity);
-		}
-
 		public static void AllowTheft()
 		{
 			DetectiveGuns.SetPickupTheft(false);
@@ -319,13 +309,32 @@
 			{
 				Murder4ESPtoggler.setToggleState(false);
 			}
-			if(ToggleGravityMode  != null)
-			{
-				ToggleGravityMode.setToggleState(false);
-			}
+			UseGravity = true;
 		}
 
+		private static bool _UseGravity;
+		public static bool UseGravity
+		{
+			get
+			{
+				return _UseGravity;
+			}
+			set
+			{
+				DetectiveGuns.SetGravity(value);
+				SilencedGuns.SetGravity(value);
+				ShotGuns.SetGravity(value);
+				BearTraps.SetGravity(value);
+				Grenades.SetGravity(value);
+				Knifes.SetGravity(value);
+				if (ToggleGravityMode != null)
+				{
+					ToggleGravityMode.setToggleState(value);
+				}
+				_UseGravity = value;
 
+			}
+		}
 		public static void ToggleItemESP(bool value)
 		{
 			ESPMenu.Toggle_Pickup_ESP = value; // ESSENTIAL
@@ -420,14 +429,11 @@
 			new QMSingleButton(MurderItemTweaker, 4, 2.5f, "Kill Crazy Effects!", new Action(() => { RemoveCrazy(); }), "Remove Crazy effect to all items", null, null, true).SetResizeTextForBestFit(true);
 
 			new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!", null, null, true);
-			ToggleGravityMode = new QMSingleToggleButton(MurderItemTweaker, 1, 0.5f, "Fall (World Gravity)", new Action(() => { SetMurderItemsGravity(false); }), "Float (Space Mode)", new Action(() => { SetMurderItemsGravity(false); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
+			ToggleGravityMode = new QMSingleToggleButton(MurderItemTweaker, 1, 0.5f, "Fall (World Gravity)", new Action(() => { UseGravity = true; }), "Float (Space Mode)", new Action(() => { UseGravity = false; }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
 
 			KnifesGrabbableToggle = new QMSingleToggleButton(MurderItemTweaker, 1, 1, "Can Grab Knifes", new Action(() => { ToggleKnifesGrab(true); }), "Cannot Grab Knifes", new Action(() => { ToggleKnifesGrab(false); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
-			var one = new QMSingleButton(MurderItemTweaker, 1, 1.5f, "Knifes Grabbable from far!", new Action(() => { MakeKnifeGrabbableFromFar(); }), "Make Knifes Grabbable from far!", null, null, true);
-			var two = new QMSingleButton(MurderItemTweaker, 1, 2, "Restore Knifes Properties to world!", new Action(() => { RestoreKnifeToWorldControl(); }), "Restore Control to world!", null, null, true);
-
-			one.SetResizeTextForBestFit(true);
-			two.SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 1, 1.5f, "Knifes Grabbable from far!", new Action(() => { MakeKnifeGrabbableFromFar(); }), "Make Knifes Grabbable from far!", null, null, true).SetResizeTextForBestFit(true);;
+			new QMSingleButton(MurderItemTweaker, 1, 2, "Restore Knifes Properties to world!", new Action(() => { RestoreKnifeToWorldControl(); }), "Restore Control to world!", null, null, true).SetResizeTextForBestFit(true);;
 
 			#endregion Item Tweaker
 
@@ -583,12 +589,34 @@
 		}
 
 
+
+
 		public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
 		{
 			try
 			{
 				if (HasMurder4WorldLoaded)
 				{
+
+
+					if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action == "SyncStart")
+					{
+
+
+
+						Knifes.KillCustomScripts(false);
+						DetectiveGuns.KillCustomScripts(false);
+						SilencedGuns.KillCustomScripts(false);
+						ShotGuns.KillCustomScripts(false);
+						BearTraps.KillCustomScripts(false);
+						Grenades.KillCustomScripts(false);
+						Knifes.KillCustomScripts(false);
+						if (!UseGravity)
+						{
+							UseGravity = true;
+						}
+					}
+
 					if (obj != null && action.StartsWith("SyncAssign") && JarRoleController.GetLocalPlayerNode().Node != null)
 					{
 						if (RoleSwapper_GetDetectiveRole)

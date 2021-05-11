@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.extensions
 {
 	using AstroClient.components;
+	using AstroClient.variables;
 	using System;
 	using System.Collections.Generic;
 	using UnityEngine;
@@ -673,6 +674,76 @@
 				if (Orbit != null)
 				{
 					Orbit.DestroyMeLocal();
+				}
+			}
+		}
+
+		public static void KillCustomScripts(this List<GameObject> list, bool ResetRigidBody)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+					obj.KillCustomScripts(ResetRigidBody);
+				}
+			}
+		}
+
+
+
+		// KILL ( ROCKET | CRAZY | SPINNER | Attacker | Watcher | Orbit | Bouncer) COMPONENT IF PRESENT
+		public static void KillCustomScripts(this GameObject obj, bool ResetRigidBody)
+		{
+			if (obj != null)
+			{
+				var rocket = obj.GetComponent<RocketObject>();
+				var crazy = obj.GetComponent<CrazyObject>();
+				var spinner = obj.GetComponent<ObjectSpinner>();
+				var control = obj.GetComponent<RigidBodyController>();
+				var bouncer = obj.GetComponent<Bouncer>();
+				var watcher = obj.GetComponent<PlayerWatcher>();
+				if (Bools.AllowAttackerComponent)
+				{
+					var attacker = obj.GetComponent<PlayerAttacker>();
+					if (attacker != null)
+					{
+						attacker.DestroyMeLocal();
+					}
+				}
+				if (Bools.AllowOrbitComponent)
+				{
+					var orbit = obj.GetComponent<Orbit>();
+					if (orbit != null)
+					{
+						orbit.DestroyMeLocal();
+					}
+				}
+				if (watcher != null)
+				{
+					watcher.DestroyMeLocal();
+				}
+				if (rocket != null)
+				{
+					rocket.DestroyMeLocal();
+				}
+				if (crazy != null)
+				{
+					crazy.DestroyMeLocal();
+				}
+				if (spinner != null)
+				{
+					spinner.DestroyMeLocal();
+				}
+				if (bouncer != null)
+				{
+					bouncer.DestroyMeLocal();
+				}
+				if (ResetRigidBody)
+				{
+					if (control != null)
+					{
+						control.RestoreOriginalBody();
+					}
 				}
 			}
 		}
