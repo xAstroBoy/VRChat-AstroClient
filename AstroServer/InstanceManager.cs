@@ -15,6 +15,7 @@
 					{
 						TagData tagData = new TagData() { UserID = client.UserID, Text = "AstroClient Developer" };
 						other.Send(new PacketData(PacketServerType.ADD_TAG, "", null, tagData));
+						other.Send(new PacketData(PacketServerType.NOTIFY, $"<color=cyan>AstroClient Developer</color> {client.Name} Is Here!"));
 					}
 					else
 					{
