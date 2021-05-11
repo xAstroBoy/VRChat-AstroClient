@@ -73,8 +73,6 @@
 			data.ThumbnailURL = __0.thumbnailImageUrl;
 			data.ReleaseStatus = __0.releaseStatus;
 			data.Version = __0.version;
-			// NetworkingManager.SendAvatarLog(data);
-			// NetworkingManager.SendLongAssShit();
 			return true;
 		}
 	}

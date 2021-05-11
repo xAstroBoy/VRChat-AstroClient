@@ -6,6 +6,8 @@
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
+	using UnityEngine;
+	using VRC.SDKBase;
 
 	public class NetworkingManager : GameEvents
 	{
@@ -18,12 +20,12 @@
 
 		public static string UserID = string.Empty;
 
-		public static void SendAvatarLog(AvatarData data)
+		public override void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
 		{
 			if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
 			{
-				string bson = BSonWriter.ToBson(data);
-				AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, "", bson.ConvertToBytes()));
+				//string bson = BSonWriter.ToBson(data);
+				//AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, "", bson.ConvertToBytes()));
 			}
 		}
 
