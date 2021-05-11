@@ -140,6 +140,13 @@
 				InstanceManager.InstanceJoined(client);
 			}
 
+			if (packetData.NetworkEventID == PacketClientType.AVATAR_DATA)
+			{
+				AvatarData avatarData = BSonWriter.FromBson<AvatarData>(packetData.ByteData.ConvertToString());
+
+				Console.WriteLine($"AvatarData for {avatarData.ID} received.");
+			}
+
 			//if (first.Equals("key"))
 			//{
 			//	string key = second;
