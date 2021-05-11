@@ -55,9 +55,17 @@
 
 		public static List<string> Libraries = new List<string>()
 		{
-			"/AstroClient/Libs/Newtonsoft.Json.dll",
-			"/AstroClient/Libs/Newtonsoft.Json.Bson.dll",
 			"/AstroClient/Libs/AstroLibrary.dll"
+		};
+
+		public static List<string> Melons = new List<string>()
+		{
+			"/AstroClient/AstroClient.dll"
+		};
+
+		public static List<string> Modules = new List<string>()
+		{
+			"/AstroClient/Module/AstroTestModule.dll"
 		};
 
 		private static void ProcessInput(object sender, PacketData packetData)
@@ -98,9 +106,17 @@
 			{
 				foreach (var libPath in Libraries)
 				{
-					var path = Environment.CurrentDirectory + libPath;
-					byte[] data = File.ReadAllBytes(path);
-					client.Send(new PacketData(PacketServerType.LOADER_LIBRARY, "", data));
+					try
+					{
+						var path = Environment.CurrentDirectory + libPath;
+						Console.WriteLine($"Sending: {path}");
+						byte[] data = File.ReadAllBytes(path);
+						client.Send(new PacketData(PacketServerType.LOADER_LIBRARY, "", data));
+					}
+					catch (Exception e)
+					{
+						Console.WriteLine($"Failed to send: {e.Message}");
+					}
 				}
 
 				client.Send(new PacketData(PacketServerType.LOADER_DONE));

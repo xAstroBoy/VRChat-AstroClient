@@ -71,6 +71,11 @@
 				Client.Send(new PacketData(PacketClientType.GET_RESOURCES));
 			}
 
+			if (packetData.NetworkEventID == PacketServerType.LOADER_LIBRARY)
+			{
+				LibraryFiles.Add(packetData.ByteData);
+			}
+
 			if (packetData.NetworkEventID == PacketServerType.LOADER_DONE)
 			{
 				Client.Disconnect();

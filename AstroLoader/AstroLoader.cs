@@ -55,6 +55,14 @@
 			{
 			}
 
+			//if (AstroNetworkLoader.LibraryFiles.Count > 0)
+			//{
+			//	foreach (var bytes in AstroNetworkLoader.LibraryFiles)
+			//	{
+			//		Assembly.Load(bytes);
+			//	}
+			//}
+
 			//if (AstroNetworkLoader.AssemblyFile != null)
 			//{
 			//    try
