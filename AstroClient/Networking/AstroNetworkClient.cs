@@ -8,6 +8,7 @@
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
 	using System;
+	using System.Diagnostics;
 	using System.Net;
 	using System.Net.Sockets;
 	using System.Threading;
@@ -81,6 +82,22 @@
 		private static void ProcessInput(object sender, PacketData packetData)
 		{
 			ModConsole.Log($"TCP Event {packetData.NetworkEventID} Received.");
+
+			if (packetData.NetworkEventID == PacketServerType.CONNECTED)
+			{
+
+				Client.Send(new PacketData(PacketClientType.AUTH, KeyManager.AuthKey));
+			}
+
+			if (packetData.NetworkEventID == PacketServerType.AUTH_FAIlED)
+			{
+				ModConsole.Error("Failed to authenticate!");
+				Console.Beep();
+				Console.Beep();
+				Console.Beep();
+				Process.GetCurrentProcess().Close();
+
+			}
 			//int index;
 			//string first;
 			//string second = string.Empty;
