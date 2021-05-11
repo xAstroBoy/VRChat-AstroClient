@@ -44,7 +44,7 @@
 			await Services.GetRequiredService<CommandHandlingService>().InitializeAsync();
 
 			Console.WriteLine("Starting Servers..");
-			LServer = new LoaderServer();
+			//LServer = new LoaderServer();
 			CServer = new ClientServer();
 
 			Running = true;

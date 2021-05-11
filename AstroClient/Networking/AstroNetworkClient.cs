@@ -8,6 +8,7 @@
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
 	using System;
+	using System.Net;
 	using System.Net.Sockets;
 	using System.Threading;
 	using System.Threading.Tasks;
@@ -25,7 +26,7 @@
 
 		public static void Initialize()
 		{
-			//ModConsole.DebugLog("Client Connecting..");
+			ModConsole.Log("Client Connecting..");
 			Connect();
 			SetPingTimer();
 		}
@@ -33,7 +34,7 @@
 		private static void SetPingTimer()
 		{
 			// Create a timer with a two second interval.
-			pingTimer = new Timer(2000);
+			pingTimer = new Timer(5000);
 			// Hook up the Elapsed event for the timer.
 			pingTimer.Elapsed += OnPingEvent;
 			pingTimer.AutoReset = true;
@@ -48,7 +49,7 @@
 		private static void Connect()
 		{
 			Client = null;
-			TcpClient tcpClient = new TcpClient("craig.se", 42069);
+			TcpClient tcpClient = new TcpClient("client.craig.se", 42069);
 
 			//TcpClient tcpClient = new TcpClient();
 			//var result = tcpClient.BeginConnect("craig.se", 42069, null, null);

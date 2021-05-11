@@ -39,6 +39,7 @@
 
 		private static void ProcessInput(object sender, PacketData packetData)
 		{
+
 			//ModConsole.DebugLog($"Received: {input}");
 			//string[] cmds = input.Trim().Split(':');
 

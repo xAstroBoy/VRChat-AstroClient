@@ -12,7 +12,7 @@
 
 		public byte[] ByteData;
 
-		public PacketData(ulong networkEventID, string textData, byte[] byteData)
+		public PacketData(ulong networkEventID, string textData = "", byte[] byteData = null)
 		{
 			NetworkEventID = networkEventID;
 			TextData = textData;

@@ -23,6 +23,7 @@
 		public ClientServer()
 		{
 			Console.WriteLine("Starting Client Server..");
+			Clients = new List<Client>();
 			StartServer();
 		}
 
@@ -35,8 +36,6 @@
 			// Key count
 			Console.WriteLine($"There are {KeyManager.GetDevKeyCount()} dev keys stored.");
 			Console.WriteLine($"There are {KeyManager.GetKeyCount()} valid keys stored.");
-
-			Clients = new List<Client>();
 
 			SetPingTimer();
 
@@ -82,8 +81,34 @@
 
 		private static void ProcessInput(object sender, PacketData packetData)
 		{
+			Console.WriteLine($"TCP Event {packetData.NetworkEventID} Received.");
 			Client client = sender as Client;
 
+			if (packetData.NetworkEventID == PacketClientType.AUTH)
+			{
+				string key = packetData.TextData;
+
+				if (KeyManager.IsValidKey(key))
+				{
+					client.IsAuthed = true;
+					client.Key = key;
+
+					client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
+
+					if (KeyManager.IsDevKey(key))
+					{
+						client.IsDeveloper = true;
+						client.Send(new PacketData(PacketServerType.ENABLE_DEVELOPER));
+					}
+				}
+				else
+				{
+					client.Send(new PacketData(PacketServerType.AUTH_FAIlED));
+					client.Send(new PacketData(PacketServerType.EXIT));
+					client.Disconnect();
+				}
+			}
+			//Client client = sender as Client;
 			//int index;
 			//string first;
 			//string second = string.Empty;
@@ -256,6 +281,7 @@
 				{
 					AstroBot.SendKeyshareLog(client, other);
 					//other.Send("exit:key in use somewhere else");
+					other.Send(new PacketData(PacketServerType.EXIT, "Key in use somewhere else"));
 					other.Disconnect();
 				}
 			}
@@ -273,7 +299,7 @@
 				{
 					Clients.Add(client);
 					Console.WriteLine($"Client added: {client.ClientID} / {Clients.Count}");
-					//client.Send("auth-request");
+					client.Send(new PacketData(PacketServerType.CONNECTED));
 				}
 				Console.WriteLine($"Client Connected: {client.ClientID} / {Clients.Count}");
 			}
