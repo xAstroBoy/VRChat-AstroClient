@@ -49,6 +49,7 @@
 					client.StartClient(clientSocket, GetNewClientID());
 				}
 			});
+			task.Start();
 		}
 
 		private static void ProcessInput(object sender, PacketData packetData)
