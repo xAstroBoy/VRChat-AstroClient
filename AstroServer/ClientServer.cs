@@ -57,9 +57,7 @@
 
 		private static void SetPingTimer()
 		{
-			// Create a timer with a two second interval.
-			pingTimer = new Timer(5000);
-			// Hook up the Elapsed event for the timer.
+			pingTimer = new Timer(10000);
 			pingTimer.Elapsed += OnPingEvent;
 			pingTimer.AutoReset = true;
 			pingTimer.Enabled = true;
