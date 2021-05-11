@@ -17,7 +17,7 @@
 				var physic = obj.GetComponent<Rigidbody>();
 				obj.transform.position = GetPlayerBoneTransform(HumanBodyBones.RightHand).position;
 
-				obj.KillCustomScripts(true);
+				obj.KillCustomComponents(true);
 				obj.KillForces(true);
 			}
 		}
@@ -29,7 +29,7 @@
 				OnlineEditor.TakeObjectOwnership(obj);
 				if (SkipKillScripts)
 				{
-					obj.KillCustomScripts(true);
+					obj.KillCustomComponents(true);
 				}
 				obj.transform.position = NewPos;
 			}
@@ -42,7 +42,7 @@
 				OnlineEditor.TakeObjectOwnership(obj);
 				if (SkipKillScripts)
 				{
-					obj.KillCustomScripts(true);
+					obj.KillCustomComponents(true);
 				}
 
 				obj.transform.position = LocalPlayerUtils.PlayerPositionBones(player, targetbone);

@@ -604,13 +604,13 @@
 
 
 
-						Knifes.KillCustomScripts(false);
-						DetectiveGuns.KillCustomScripts(false);
-						SilencedGuns.KillCustomScripts(false);
-						ShotGuns.KillCustomScripts(false);
-						BearTraps.KillCustomScripts(false);
-						Grenades.KillCustomScripts(false);
-						Knifes.KillCustomScripts(false);
+						Knifes.KillCustomComponents(false);
+						DetectiveGuns.KillCustomComponents(false);
+						SilencedGuns.KillCustomComponents(false);
+						ShotGuns.KillCustomComponents(false);
+						BearTraps.KillCustomComponents(false);
+						Grenades.KillCustomComponents(false);
+						Knifes.KillCustomComponents(false);
 						if (!UseGravity)
 						{
 							UseGravity = true;

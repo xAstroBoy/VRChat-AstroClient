@@ -678,13 +678,13 @@
 			}
 		}
 
-		public static void KillCustomScripts(this List<GameObject> list, bool ResetRigidBody)
+		public static void KillCustomComponents(this List<GameObject> list, bool ResetRigidBody)
 		{
 			foreach (var obj in list)
 			{
 				if (obj != null)
 				{
-					obj.KillCustomScripts(ResetRigidBody);
+					obj.KillCustomComponents(ResetRigidBody);
 				}
 			}
 		}
@@ -692,7 +692,7 @@
 
 
 		// KILL ( ROCKET | CRAZY | SPINNER | Attacker | Watcher | Orbit | Bouncer) COMPONENT IF PRESENT
-		public static void KillCustomScripts(this GameObject obj, bool ResetRigidBody)
+		public static void KillCustomComponents(this GameObject obj, bool ResetRigidBody = false, bool ResetPickupProperties = false)
 		{
 			if (obj != null)
 			{
@@ -702,6 +702,7 @@
 				var control = obj.GetComponent<RigidBodyController>();
 				var bouncer = obj.GetComponent<Bouncer>();
 				var watcher = obj.GetComponent<PlayerWatcher>();
+				var PickupController = obj.GetComponent<PickupController>();
 				if (Bools.AllowAttackerComponent)
 				{
 					var attacker = obj.GetComponent<PlayerAttacker>();
@@ -743,6 +744,13 @@
 					if (control != null)
 					{
 						control.RestoreOriginalBody();
+					}
+				}
+				if(ResetPickupProperties)
+				{
+					if(PickupController != null)
+					{
+						PickupController.RestoreOriginalProperties();
 					}
 				}
 			}
