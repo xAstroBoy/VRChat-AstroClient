@@ -3,6 +3,9 @@
 	public static class PacketClientType
 	{
 		public const ulong AUTH = 1;
+		public const ulong SEND_PLAYER_USERID = 2;
+		public const ulong SEND_PLAYER_NAME = 3;
+		public const ulong WORLD_JOIN = 20;
 		public const ulong KEEP_ALIVE = 100;
 	}
 

@@ -111,21 +111,21 @@
 					client.Disconnect();
 				}
 			}
-			//Client client = sender as Client;
-			//int index;
-			//string first;
-			//string second = string.Empty;
 
-			//if (input.Contains(":"))
-			//{
-			//	index = input.IndexOf(':');
-			//	first = input.Substring(0, index);
-			//	second = input.Substring(index + 1);
-			//}
-			//else
-			//{
-			//	first = input;
-			//}
+			if (packetData.NetworkEventID == PacketClientType.SEND_PLAYER_NAME)
+			{
+				client.Name = packetData.TextData;
+			}
+
+			if (packetData.NetworkEventID == PacketClientType.SEND_PLAYER_USERID)
+			{
+				client.UserID = packetData.TextData;
+			}
+
+			if (packetData.NetworkEventID == PacketClientType.WORLD_JOIN)
+			{
+				client.InstanceID = packetData.TextData;
+			}
 
 			//if (first.Equals("key"))
 			//{
@@ -160,26 +160,7 @@
 			//		Console.WriteLine("Invalid Auth Key");
 			//	}
 			//}
-			//else if (first.Equals("name"))
-			//{
-			//	client.Name = second;
-			//}
-			//else if (first.Equals("userid"))
-			//{
-			//	client.UserID = second;
-			//}
-			//else if (first.Equals("instanceID"))
-			//{
-			//	client.InstanceID = second;
-			//	InstanceManager.PlayerInfo(client);
-			//}
-			//else if (first.Equals("ping"))
-			//{
-			//	client.Send("pong");
-			//}
-			//else if (first.Equals("pong"))
-			//{
-			//}
+
 			//else if (first.Equals("test"))
 			//{
 			//	Console.WriteLine(input);
