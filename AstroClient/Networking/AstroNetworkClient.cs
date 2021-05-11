@@ -132,6 +132,11 @@
 			{
 				ModConsole.DebugLog(packetData.TextData);
 			}
+
+			if (packetData.NetworkEventID == PacketServerType.LOG)
+			{
+				ModConsole.Log(packetData.TextData);
+			}
 		}
 
 		// You gotta delay it, let's delay it to some seconds
