@@ -55,13 +55,15 @@
 			}
 		}
 
-		// KILL ( ROCKET | CRAZY | SPINNER | Attacker | Watcher | Orbit) COMPONENT IF PRESENT
+		// KILL ( ROCKET | CRAZY | SPINNER | Attacker | Watcher | Orbit | Bouncer) COMPONENT IF PRESENT
 		public static void KillCustomScripts(GameObject obj)
 		{
 			var rocket = obj.GetComponent<RocketObject>();
 			var crazy = obj.GetComponent<CrazyObject>();
 			var spinner = obj.GetComponent<ObjectSpinner>();
 			var control = obj.GetComponent<RigidBodyController>();
+			var bouncer = obj.GetComponent<Bouncer>();
+			var watcher = obj.GetComponent<PlayerWatcher>();
 			if (Bools.AllowAttackerComponent)
 			{
 				var attacker = obj.GetComponent<PlayerAttacker>();
@@ -78,22 +80,25 @@
 					orbit.DestroyMeLocal();
 				}
 			}
-			var watcher = obj.GetComponent<PlayerWatcher>();
 			if (watcher != null)
 			{
 				watcher.DestroyMeLocal();
 			}
 			if (rocket != null)
 			{
-				rocket.SelfDestroy();
+				rocket.DestroyMeLocal();
 			}
 			if (crazy != null)
 			{
-				crazy.SelfDestroy();
+				crazy.DestroyMeLocal();
 			}
 			if (spinner != null)
 			{
-				spinner.SelfDestroy();
+				spinner.DestroyMeLocal();
+			}
+			if(bouncer != null)
+			{
+				bouncer.DestroyMeLocal();
 			}
 			if (control != null)
 			{

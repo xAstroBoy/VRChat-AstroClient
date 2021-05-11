@@ -5,7 +5,7 @@
 	using System.Collections.Generic;
 	using UnityEngine;
 
-	public static class CustomComponentExtensions
+	public static class Custom_ComponentExtensions
 	{
 		public static void MakeRocketItemWithG(this GameObject obj)
 		{
@@ -37,19 +37,19 @@
 			CrazyObjectManager.AddObject(obj, true);
 		}
 
-		public static void ForceSyncPhysic(this GameObject obj)
-		{
-			var control = obj.GetComponent<RigidBodyController>();
-			if (control == null)
-			{
-				control = obj.AddComponent<RigidBodyController>();
-			}
-			control.Forced_SyncPhysic = true;
-			control.EditMode = true;
-			control.isKinematic = true;
-		}
+		//public static void ForceSyncPhysic(this GameObject obj)
+		//{
+		//	var control = obj.GetComponent<RigidBodyController>();
+		//	if (control == null)
+		//	{
+		//		control = obj.AddComponent<RigidBodyController>();
+		//	}
+		//	control.Forced_SyncPhysic = true;
+		//	control.EditMode = true;
+		//	control.isKinematic = true;
+		//}
 
-		public static void AddSpinForceX(this GameObject obj)
+		public static void Add_SpinForceX(this GameObject obj)
 		{
 			try
 			{
@@ -110,7 +110,7 @@
 			catch (Exception) { }
 		}
 
-		public static void AddSpinForceY(this GameObject obj)
+		public static void Add_SpinForceY(this GameObject obj)
 		{
 			try
 			{
@@ -165,7 +165,7 @@
 			catch (Exception) { }
 		}
 
-		public static void AddSpinForceZ(this GameObject obj)
+		public static void Add_SpinForceZ(this GameObject obj)
 		{
 			try
 			{
@@ -219,7 +219,7 @@
 			catch (Exception) { }
 		}
 
-		public static void RemoveSpinner(this GameObject obj)
+		public static void Remove_Spinner(this GameObject obj)
 		{
 			ObjectSpinnerManager.RemoveObject(obj);
 		}
@@ -254,7 +254,48 @@
 			RocketManager.DecreaseObjTimer(obj);
 		}
 
-		public static void AddRocketComponent(this List<GameObject> list, bool ShouldFloat, bool HasRelativeForce = true)
+		public static void Add_Bounce_Component(this GameObject obj, bool BounceTowardPlayer)
+		{
+			if (obj != null)
+			{
+
+				Bouncer bouncer = obj.GetComponent<Bouncer>();
+				if (bouncer == null)
+				{
+					bouncer = obj.AddComponent<Bouncer>();
+				}
+				if (bouncer != null)
+				{
+					bouncer.BounceTowardPlayer = BounceTowardPlayer;
+				}
+			}
+
+		}
+
+
+
+		public static void Add_Bounce_Component(this List<GameObject> list, bool BounceTowardPlayer)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+
+					Bouncer bouncer = obj.GetComponent<Bouncer>();
+					if (bouncer == null)
+					{
+						bouncer = obj.AddComponent<Bouncer>();
+					}
+					if (bouncer != null)
+					{
+						bouncer.BounceTowardPlayer = BounceTowardPlayer;
+					}
+				}
+			}
+		}
+
+
+		public static void Add_Rocket_Component(this List<GameObject> list, bool ShouldFloat, bool HasRelativeForce = true)
 		{
 			foreach (var obj in list)
 			{
@@ -265,7 +306,7 @@
 			}
 		}
 
-		public static void AddCrazyComponent(this List<GameObject> list, bool ShouldFloat)
+		public static void Add_Crazy_Component(this List<GameObject> list, bool ShouldFloat)
 		{
 			foreach (var obj in list)
 			{
@@ -276,7 +317,7 @@
 			}
 		}
 
-		public static void AddRocketComponent(this GameObject obj, bool ShouldFloat, bool HasRelativeForce = true)
+		public static void Add_Rocket_Component(this GameObject obj, bool ShouldFloat, bool HasRelativeForce = true)
 		{
 			if (obj != null)
 			{
@@ -284,7 +325,7 @@
 			}
 		}
 
-		public static void AddCrazyComponent(this GameObject obj, bool ShouldFloat)
+		public static void Add_Crazy_Component(this GameObject obj, bool ShouldFloat)
 		{
 			if (obj != null)
 			{
@@ -432,5 +473,210 @@
 				}
 			}
 		}
+
+		public static void Remove_RocketObject_Component(this List<GameObject> list)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+
+					RocketObject RocketObject = obj.GetComponent<RocketObject>();
+					if (RocketObject != null)
+					{
+						RocketObject.DestroyMeLocal();
+					}
+				}
+			}
+		}
+
+		public static void Remove_RocketObject_Component(this GameObject obj)
+		{
+			if (obj != null)
+			{
+
+				RocketObject RocketObject = obj.GetComponent<RocketObject>();
+				if (RocketObject != null)
+				{
+					RocketObject.DestroyMeLocal();
+				}
+			}
+		}
+
+		public static void Remove_CrazyObject_Component(this List<GameObject> list)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+
+					CrazyObject CrazyObject = obj.GetComponent<CrazyObject>();
+					if (CrazyObject != null)
+					{
+						CrazyObject.DestroyMeLocal();
+					}
+				}
+			}
+		}
+
+		public static void Remove_CrazyObject_Component(this GameObject obj)
+		{
+			if (obj != null)
+			{
+
+				CrazyObject CrazyObject = obj.GetComponent<CrazyObject>();
+				if (CrazyObject != null)
+				{
+					CrazyObject.DestroyMeLocal();
+				}
+			}
+		}
+
+		public static void Remove_ObjectSpinner_Component(this List<GameObject> list)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+
+					ObjectSpinner ObjectSpinner = obj.GetComponent<ObjectSpinner>();
+					if (ObjectSpinner != null)
+					{
+						ObjectSpinner.DestroyMeLocal();
+					}
+				}
+			}
+		}
+
+		public static void Remove_ObjectSpinner_Component(this GameObject obj)
+		{
+			if (obj != null)
+			{
+
+				ObjectSpinner ObjectSpinner = obj.GetComponent<ObjectSpinner>();
+				if (ObjectSpinner != null)
+				{
+					ObjectSpinner.DestroyMeLocal();
+				}
+			}
+		}
+
+		public static void Remove_Bouncer_Component(this List<GameObject> list)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+
+					Bouncer Bouncer = obj.GetComponent<Bouncer>();
+					if (Bouncer != null)
+					{
+						Bouncer.DestroyMeLocal();
+					}
+				}
+			}
+		}
+
+		public static void Remove_Bouncer_Component(this GameObject obj)
+		{
+			if (obj != null)
+			{
+
+				Bouncer Bouncer = obj.GetComponent<Bouncer>();
+				if (Bouncer != null)
+				{
+					Bouncer.DestroyMeLocal();
+				}
+			}
+		}
+
+		public static void Remove_PlayerWatcher_Component(this List<GameObject> list)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+
+					PlayerWatcher PlayerWatcher = obj.GetComponent<PlayerWatcher>();
+					if (PlayerWatcher != null)
+					{
+						PlayerWatcher.DestroyMeLocal();
+					}
+				}
+			}
+		}
+
+		public static void Remove_PlayerWatcher_Component(this GameObject obj)
+		{
+			if (obj != null)
+			{
+
+				PlayerWatcher PlayerWatcher = obj.GetComponent<PlayerWatcher>();
+				if (PlayerWatcher != null)
+				{
+					PlayerWatcher.DestroyMeLocal();
+				}
+			}
+		}
+
+		public static void Remove_PlayerAttacker_Component(this List<GameObject> list)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+
+					PlayerAttacker PlayerAttacker = obj.GetComponent<PlayerAttacker>();
+					if (PlayerAttacker != null)
+					{
+						PlayerAttacker.DestroyMeLocal();
+					}
+				}
+			}
+		}
+
+		public static void Remove_PlayerAttacker_Component(this GameObject obj)
+		{
+			if (obj != null)
+			{
+
+				PlayerAttacker PlayerAttacker = obj.GetComponent<PlayerAttacker>();
+				if (PlayerAttacker != null)
+				{
+					PlayerAttacker.DestroyMeLocal();
+				}
+			}
+		}
+
+		public static void Remove_Orbit_Component(this List<GameObject> list)
+		{
+			foreach (var obj in list)
+			{
+				if (obj != null)
+				{
+
+					Orbit Orbit = obj.GetComponent<Orbit>();
+					if (Orbit != null)
+					{
+						Orbit.DestroyMeLocal();
+					}
+				}
+			}
+		}
+
+		public static void Remove_Orbit_Component(this GameObject obj)
+		{
+			if (obj != null)
+			{
+
+				Orbit Orbit = obj.GetComponent<Orbit>();
+				if (Orbit != null)
+				{
+					Orbit.DestroyMeLocal();
+				}
+			}
+		}
+
+
 	}
 }

@@ -100,14 +100,14 @@
 
 		public static void MurderGunsRockets()
 		{
-			DetectiveGuns.AddRocketComponent(false);
-			SilencedGuns.AddRocketComponent(false);
+			DetectiveGuns.Add_Rocket_Component(false);
+			SilencedGuns.Add_Rocket_Component(false);
 		}
 
 		public static void MurderGunsCrazy()
 		{
-			DetectiveGuns.AddCrazyComponent(false);
-			SilencedGuns.AddCrazyComponent(false);
+			DetectiveGuns.Add_Crazy_Component(false);
+			SilencedGuns.Add_Crazy_Component(false);
 		}
 
 		public static void ToggleDeathComponent()
@@ -202,12 +202,12 @@
 			QMNestedButton MurderItemTweaker = new QMNestedButton(Murder2CheatPage, 1, 0.5f, "Item Tweaker", "Item Tweaks!", null, null, null, null, true);
 			new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!", null, null);
 			new QMToggleButton(MurderItemTweaker, 2, 0, "Float (Space Mode)", new Action(() => { SetMurderItemsGravity(true); }), "Fall (World Gravity)", new Action(() => { SetMurderItemsGravity(false); }), "Tweaks all Murder! items gravity!", null, null, null, false);
-			new QMSingleButton(MurderItemTweaker, 3, 0, "Turn Knifes into rockets!", new Action(() => { Knifes.AddRocketComponent(false); }), "Make Knifes in Instance go nuts!", null, null);
+			new QMSingleButton(MurderItemTweaker, 3, 0, "Turn Knifes into rockets!", new Action(() => { Knifes.Add_Rocket_Component(false); }), "Make Knifes in Instance go nuts!", null, null);
 			new QMSingleButton(MurderItemTweaker, 4, 0, "Turn Guns into rockets!", new Action(() => { MurderGunsRockets(); }), "Make Guns in Instance go nuts!", null, null);
-			new QMSingleButton(MurderItemTweaker, 1, 1, "Turn Clues into rockets!", new Action(() => { Clues.AddRocketComponent(false); }), "Make Clues in Instance go nuts!", null, null);
-			new QMSingleButton(MurderItemTweaker, 2, 1, "Turn Knifes into Crazy!", new Action(() => { Knifes.AddCrazyComponent(false); }), "Make Knifes in Instance go nuts!", null, null);
+			new QMSingleButton(MurderItemTweaker, 1, 1, "Turn Clues into rockets!", new Action(() => { Clues.Add_Rocket_Component(false); }), "Make Clues in Instance go nuts!", null, null);
+			new QMSingleButton(MurderItemTweaker, 2, 1, "Turn Knifes into Crazy!", new Action(() => { Knifes.Add_Crazy_Component(false); }), "Make Knifes in Instance go nuts!", null, null);
 			new QMSingleButton(MurderItemTweaker, 3, 1, "Turn Guns into Crazy!", new Action(MurderGunsCrazy), "Make Guns in Instance go nuts!", null, null);
-			new QMSingleButton(MurderItemTweaker, 4, 1, "Turn Clues into Crazy!", new Action(() => { Clues.AddCrazyComponent(false); }), "Make Clues in Instance go nuts!", null, null);
+			new QMSingleButton(MurderItemTweaker, 4, 1, "Turn Clues into Crazy!", new Action(() => { Clues.Add_Crazy_Component(false); }), "Make Clues in Instance go nuts!", null, null);
 
 			QMNestedButton MurderItemSpawner = new QMNestedButton(Murder2CheatPage, 1, 1, "Item Spawner", "Item Spawner!", null, null, null, null, true);
 			new QMSingleButton(MurderItemSpawner, 1, 0, "Spawn Detective Gun", new Action(() => { item_detectiveGun.CloneObject(); }), "Detective Gun Cloner!", null, null);

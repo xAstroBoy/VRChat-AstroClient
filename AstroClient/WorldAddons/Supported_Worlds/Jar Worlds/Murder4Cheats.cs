@@ -194,16 +194,52 @@
 
 		public static void MurderGunsRockets()
 		{
-			DetectiveGuns.AddRocketComponent(false);
-			SilencedGuns.AddRocketComponent(false);
-			ShotGuns.AddRocketComponent(false);
+			DetectiveGuns.Add_Rocket_Component(false);
+			SilencedGuns.Add_Rocket_Component(false);
+			ShotGuns.Add_Rocket_Component(false);
 		}
 
+		public static void MurderGunsBounce()
+		{
+			DetectiveGuns.Add_Bounce_Component(false);
+			SilencedGuns.Add_Bounce_Component(false);
+			ShotGuns.Add_Bounce_Component(false);
+		}
+
+		public static void RemoveRockets()
+		{
+			DetectiveGuns.Remove_RocketObject_Component();
+			SilencedGuns.Remove_RocketObject_Component();
+			ShotGuns.Remove_RocketObject_Component();
+			BearTraps.Remove_RocketObject_Component();
+			Grenades.Remove_RocketObject_Component();
+			Knifes.Remove_RocketObject_Component();
+		}
+
+		public static void RemoveCrazy()
+		{
+			DetectiveGuns.Remove_CrazyObject_Component();
+			SilencedGuns.Remove_CrazyObject_Component();
+			ShotGuns.Remove_CrazyObject_Component();
+			BearTraps.Remove_CrazyObject_Component();
+			Grenades.Remove_CrazyObject_Component();
+			Knifes.Remove_CrazyObject_Component();
+		}
+
+		public static void RemoveBouncers()
+		{
+			DetectiveGuns.Remove_Bouncer_Component();
+			SilencedGuns.Remove_Bouncer_Component();
+			ShotGuns.Remove_Bouncer_Component();
+			BearTraps.Remove_Bouncer_Component();
+			Grenades.Remove_Bouncer_Component();
+			Knifes.Remove_Bouncer_Component();
+		}
 		public static void MurderGunsCrazy()
 		{
-			DetectiveGuns.AddCrazyComponent(false);
-			SilencedGuns.AddCrazyComponent(false);
-			ShotGuns.AddCrazyComponent(false);
+			DetectiveGuns.Add_Crazy_Component(false);
+			SilencedGuns.Add_Crazy_Component(false);
+			ShotGuns.Add_Crazy_Component(false);
 		}
 
 		public override void OnWorldReveal(string id, string name, string asseturl)
@@ -283,6 +319,10 @@
 			{
 				Murder4ESPtoggler.setToggleState(false);
 			}
+			if(ToggleGravityMode  != null)
+			{
+				ToggleGravityMode.setToggleState(false);
+			}
 		}
 
 
@@ -357,20 +397,30 @@
 
 			#region Item Tweaker
 
-			new QMSingleButton(MurderItemTweaker, 3, 0, "Knifes (Rockets)!", new Action(() => { Knifes.AddRocketComponent(false); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
-			new QMSingleButton(MurderItemTweaker, 3, 0.5f, "Guns (Rockets)!", new Action(() => { MurderGunsRockets(); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
-			new QMSingleButton(MurderItemTweaker, 3, 1, "Grenades (Rockets)!", new Action(() => { Grenades.AddRocketComponent(false); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
-			new QMSingleButton(MurderItemTweaker, 3, 1.5f, "Bear Trap (Rockets)!", new Action(() => { BearTraps.AddRocketComponent(false); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
-			new QMSingleButton(MurderItemTweaker, 3, 2, "Clues (Rockets)!", new Action(() => { Clues.AddRocketComponent(false); }), "Rockets", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 2, 0, "Knifes (Bouncer)!", new Action(() => { Knifes.Add_Bounce_Component(false); }), "Bouncer!", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 2, 0.5f, "Guns (Bouncer)!", new Action(() => { MurderGunsBounce(); }), "Bouncer!", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 2, 1, "Grenades (Bouncer)!", new Action(() => { Grenades.Add_Bounce_Component(false); }), "Bouncer!", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 2, 1.5f, "Bear Trap (Bouncer)!", new Action(() => { BearTraps.Add_Bounce_Component(false); }), "Bouncer!", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 2, 2, "Clues (Bouncer)!", new Action(() => { Clues.Add_Bounce_Component(false); }), "Bouncer", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 2, 2.5f, "Kill Bouncer Effects!", new Action(() => { RemoveBouncers(); }), "Remove Bouncing effect to all items", null, null, true).SetResizeTextForBestFit(true);
 
-			new QMSingleButton(MurderItemTweaker, 4, 0, "Knifes (Crazy)!", new Action(() => { Knifes.AddCrazyComponent(false); }), "Make Knifes in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
+
+			new QMSingleButton(MurderItemTweaker, 3, 0, "Knifes (Rockets)!", new Action(() => { Knifes.Add_Rocket_Component(false); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 3, 0.5f, "Guns (Rockets)!", new Action(() => { MurderGunsRockets(); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 3, 1, "Grenades (Rockets)!", new Action(() => { Grenades.Add_Rocket_Component(false); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 3, 1.5f, "Bear Trap (Rockets)!", new Action(() => { BearTraps.Add_Rocket_Component(false); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 3, 2, "Clues (Rockets)!", new Action(() => { Clues.Add_Rocket_Component(false); }), "Rockets", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 3, 2.5f, "Kill Rocket Effects!", new Action(() => { RemoveRockets(); }), "Remove Rocket effect to all items", null, null, true).SetResizeTextForBestFit(true);
+
+			new QMSingleButton(MurderItemTweaker, 4, 0, "Knifes (Crazy)!", new Action(() => { Knifes.Add_Crazy_Component(false); }), "Make Knifes in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
 			new QMSingleButton(MurderItemTweaker, 4, 0.5f, "Guns (Crazy)!", new Action(MurderGunsCrazy), "Make Guns in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
-			new QMSingleButton(MurderItemTweaker, 4, 1, "Clues (Crazy)!", new Action(() => { Clues.AddCrazyComponent(false); }), "Make Clues in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
-			new QMSingleButton(MurderItemTweaker, 4, 1.5f, "Grenade (Crazy)!", new Action(() => { Grenades.AddCrazyComponent(false); }), "Make Grenade in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
-			new QMSingleButton(MurderItemTweaker, 4, 2, "Bear Trap (Crazy)!", new Action(() => { BearTraps.AddCrazyComponent(false); }), "Make Grenade in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 4, 1, "Clues (Crazy)!", new Action(() => { Clues.Add_Crazy_Component(false); }), "Make Clues in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 4, 1.5f, "Grenade (Crazy)!", new Action(() => { Grenades.Add_Crazy_Component(false); }), "Make Grenade in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 4, 2, "Bear Trap (Crazy)!", new Action(() => { BearTraps.Add_Crazy_Component(false); }), "Make Grenade in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
+			new QMSingleButton(MurderItemTweaker, 4, 2.5f, "Kill Crazy Effects!", new Action(() => { RemoveCrazy(); }), "Remove Crazy effect to all items", null, null, true).SetResizeTextForBestFit(true);
 
 			new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!", null, null, true);
-			new QMSingleToggleButton(MurderItemTweaker, 1, 0.5f, "Float (Space Mode)", new Action(() => { SetMurderItemsGravity(false); }), "Fall (World Gravity)", new Action(() => { SetMurderItemsGravity(true); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
+			ToggleGravityMode = new QMSingleToggleButton(MurderItemTweaker, 1, 0.5f, "Fall (World Gravity)", new Action(() => { SetMurderItemsGravity(false); }), "Float (Space Mode)", new Action(() => { SetMurderItemsGravity(false); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
 
 			KnifesGrabbableToggle = new QMSingleToggleButton(MurderItemTweaker, 1, 1, "Can Grab Knifes", new Action(() => { ToggleKnifesGrab(true); }), "Cannot Grab Knifes", new Action(() => { ToggleKnifesGrab(false); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
 			var one = new QMSingleButton(MurderItemTweaker, 1, 1.5f, "Knifes Grabbable from far!", new Action(() => { MakeKnifeGrabbableFromFar(); }), "Make Knifes Grabbable from far!", null, null, true);
@@ -813,6 +863,7 @@
 
 		public static QMSingleToggleButton GetSelfPatreonGunBtn;
 		public static QMSingleToggleButton GetEveryonePatreonGunBtn;
+		public static QMSingleToggleButton ToggleGravityMode;
 
 		public static bool _RoleSwapper_GetDetectiveRole;
 

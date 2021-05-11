@@ -59,18 +59,15 @@
 				HasRequiredSettings = false;
 			}
 		}
-
-		[MethodImpl(MethodImplOptions.AggressiveInlining)]
-		public void SelfDestroy()
+		void OnDestroy()
 		{
 			try
 			{
 				control.RestoreOriginalBody();
 				OnlineEditor.RemoveOwnerShip(obj);
 				ObjectSpinnerManager.RemoveObject(obj);
-				DestroyImmediate(this);
 			}
-			catch (Exception)
+			catch
 			{
 			}
 		}
