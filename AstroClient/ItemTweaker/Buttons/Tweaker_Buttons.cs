@@ -348,9 +348,9 @@
 			});
 		}
 
-		public static List<GameObject> GetObjectTriggers(GameObject obj)
+		public static List<VRC.SDKBase.VRC_Trigger> GetObjectTriggers(GameObject obj)
 		{
-			var ContainedTriggers = new List<GameObject>();
+			var ContainedTriggers = new List<VRC.SDKBase.VRC_Trigger>();
 
 			if (obj != null)
 			{
@@ -360,9 +360,9 @@
 				{
 					foreach (var item in list)
 					{
-						if (!ContainedTriggers.Contains(item.gameObject))
+						if (!ContainedTriggers.Contains(item))
 						{
-							ContainedTriggers.Add(item.gameObject);
+							ContainedTriggers.Add(item);
 						}
 					}
 					return ContainedTriggers;
@@ -371,9 +371,9 @@
 				{
 					foreach (var item in list2)
 					{
-						if (!ContainedTriggers.Contains(item.gameObject))
+						if (!ContainedTriggers.Contains(item))
 						{
-							ContainedTriggers.Add(item.gameObject);
+							ContainedTriggers.Add(item);
 						}
 					}
 					return ContainedTriggers;
@@ -543,6 +543,23 @@
 			}
 			return Color.red;
 		}
+
+		public static Color GetObjectStatus(VRC_Trigger obj)
+		{
+			if (obj != null)
+			{
+				if (obj.enabled)
+				{
+					return Color.green;
+				}
+				else
+				{
+					return Color.red;
+				}
+			}
+			return Color.red;
+		}
+
 
 		public static void PrefabSpawnerQMScroll(QMTabMenu main, float x, float y, bool btnHalf)
 		{

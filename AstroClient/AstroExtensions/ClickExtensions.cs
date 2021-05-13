@@ -4,6 +4,7 @@
 	using System.Linq;
 	using UnityEngine;
 	using VRC.SDK3.Components;
+	using VRC.SDKBase;
 
 	public static class ExtensionUtils
 	{
@@ -124,6 +125,69 @@
 			}
 		}
 
+
+		public static void TriggerClick(this VRC_Trigger obj)
+		{
+			bool ObjHasBeenActivated = false;
+			bool TriggerHasBeenEnabled = false;
+
+			if (obj != null)
+			{
+				OnlineEditor.TakeObjectOwnership(obj.gameObject);
+
+				var SDKbase = obj.GetComponent<VRC.SDKBase.VRC_Trigger>();
+				var SDK2 = obj.GetComponent<VRCSDK2.VRC_Trigger>();
+				if (!obj.gameObject.active)
+				{
+					ObjHasBeenActivated = true;
+					obj.gameObject.SetActive(true);
+				}
+
+				if (SDKbase != null)
+				{
+					if (!SDKbase.enabled)
+					{
+						TriggerHasBeenEnabled = true;
+						SDKbase.enabled = true;
+					}
+
+					SDKbase.Interact();
+					if (TriggerHasBeenEnabled)
+					{
+						SDKbase.enabled = false;
+					}
+
+					if (ObjHasBeenActivated)
+					{
+						obj.gameObject.SetActive(false);
+					}
+				}
+				else if (SDK2 != null)
+				{
+					if (!SDK2.enabled)
+					{
+						TriggerHasBeenEnabled = true;
+						SDK2.enabled = true;
+					}
+
+					SDK2.Interact();
+					if (TriggerHasBeenEnabled)
+					{
+						SDK2.enabled = false;
+					}
+
+					if (ObjHasBeenActivated)
+					{
+						obj.gameObject.SetActive(false);
+					}
+
+				}
+				OnlineEditor.RemoveOwnerShip(obj.gameObject);
+
+			}
+		}
+
+
 		public static void TriggerClick(this GameObject obj)
 		{
 			bool ObjHasBeenActivated = false;
@@ -159,7 +223,6 @@
 					{
 						obj.SetActive(false);
 					}
-					OnlineEditor.RemoveOwnerShip(obj);
 				}
 				else if (SDK2 != null)
 				{
@@ -179,9 +242,9 @@
 					{
 						obj.SetActive(false);
 					}
-
-					OnlineEditor.RemoveOwnerShip(obj);
 				}
+				OnlineEditor.RemoveOwnerShip(obj);
+
 			}
 		}
 	}
