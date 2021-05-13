@@ -59,7 +59,11 @@
 
 		public bool VRCInteractableESP = false;
 
-		public float[] ESPColor = new float[4];
+		public float[] PublicESPColor = new float[4];
+
+		public float[] ESPFriendColor = new float[4];
+
+
 	}
 
 	[Serializable, Obfuscation]
