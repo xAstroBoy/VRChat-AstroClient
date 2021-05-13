@@ -122,45 +122,45 @@
 			//	client.Send(new PacketData(PacketServerType.LOADER_DONE));
 			//}
 
-				//Client client = sender as Client;
-				//string[] cmds = input.Split(":");
+			//Client client = sender as Client;
+			//string[] cmds = input.Split(":");
 
-				//if (cmds[0].Equals("gimmiedll") && client.IsAuthed)
-				//{
-				//	var path = Environment.CurrentDirectory + "/AstroClient/AstroClient.dll";
-				//	byte[] data = File.ReadAllBytes(path);
-				//	client.Send(data, 1001);
-				//}
-				//else if (cmds[0].Equals("gotdll"))
-				//{
-				//	client.Disconnect();
-				//	Console.WriteLine($"DLL Sent");
-				//	client.IsReady = true;
-				//}
-				//else if (cmds[0].Equals("key"))
-				//{
-				//	string key = cmds[1];
-				//	Console.WriteLine("Trying to auth with: " + key);
-				//	if (KeyManager.IsValidKey(key))
-				//	{
-				//		client.Send("authed:true");
-				//		client.IsAuthed = true;
-				//		client.Key = key;
-				//		Console.WriteLine("Successfully Authed");
-				//	}
-				//	else
-				//	{
-				//		client.Send("authed:false");
-				//		client.Send("exit:invalid auth key");
-				//		client.Disconnect();
-				//		Console.WriteLine("Invalid Auth Key");
-				//	}
-				//}
-				//else
-				//{
-				//	Console.WriteLine($"Unknown packet: {input}");
-				//}
-			}
+			//if (cmds[0].Equals("gimmiedll") && client.IsAuthed)
+			//{
+			//	var path = Environment.CurrentDirectory + "/AstroClient/AstroClient.dll";
+			//	byte[] data = File.ReadAllBytes(path);
+			//	client.Send(data, 1001);
+			//}
+			//else if (cmds[0].Equals("gotdll"))
+			//{
+			//	client.Disconnect();
+			//	Console.WriteLine($"DLL Sent");
+			//	client.IsReady = true;
+			//}
+			//else if (cmds[0].Equals("key"))
+			//{
+			//	string key = cmds[1];
+			//	Console.WriteLine("Trying to auth with: " + key);
+			//	if (KeyManager.IsValidKey(key))
+			//	{
+			//		client.Send("authed:true");
+			//		client.IsAuthed = true;
+			//		client.Key = key;
+			//		Console.WriteLine("Successfully Authed");
+			//	}
+			//	else
+			//	{
+			//		client.Send("authed:false");
+			//		client.Send("exit:invalid auth key");
+			//		client.Disconnect();
+			//		Console.WriteLine("Invalid Auth Key");
+			//	}
+			//}
+			//else
+			//{
+			//	Console.WriteLine($"Unknown packet: {input}");
+			//}
+		}
 
 		public static void SendAll(string msg)
 		{
