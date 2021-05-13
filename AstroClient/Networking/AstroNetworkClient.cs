@@ -183,7 +183,7 @@
 			{
 				for (; ; )
 				{
-					ModConsole.DebugError("Lost connection to server, retrying in 60 seconds...");
+					ModConsole.DebugError("Lost connection to server, retrying in 5 seconds...");
 					Thread.Sleep(5000);
 					try { Connect(); break; } catch { }
 				}
