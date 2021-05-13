@@ -1,7 +1,8 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Cheetos;
 	#region Imports
+
+	using AstroClient.Cheetos;
 	using AstroClient.components;
 	using AstroClient.Components;
 	using AstroClient.ConsoleUtils;
@@ -13,7 +14,6 @@
 	using Newtonsoft.Json;
 	using System;
 	using System.Diagnostics;
-	using System.Net;
 	using System.Net.Sockets;
 	using System.Threading;
 	using System.Threading.Tasks;
@@ -21,6 +21,7 @@
 	using UnityEngine;
 	using VRC;
 	using Timer = System.Timers.Timer;
+
 	#endregion
 
 	internal class AstroNetworkClient
