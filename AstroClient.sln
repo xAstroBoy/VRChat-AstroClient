@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroLibrary", "AstroLibrar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDumper", "MonoDumper\MonoDumper.csproj", "{B29C09FF-1FCC-4302-8AB4-8FE673693845}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroClientCore", "AstroClientCore\AstroClientCore.csproj", "{02AADCAD-17DF-4909-B898-BCE001D9CAC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Offline|Any CPU = Debug_Offline|Any CPU
@@ -79,6 +81,12 @@ Global
 		{B29C09FF-1FCC-4302-8AB4-8FE673693845}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B29C09FF-1FCC-4302-8AB4-8FE673693845}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B29C09FF-1FCC-4302-8AB4-8FE673693845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02AADCAD-17DF-4909-B898-BCE001D9CAC8}.Debug_Offline|Any CPU.ActiveCfg = Debug|Any CPU
+		{02AADCAD-17DF-4909-B898-BCE001D9CAC8}.Debug_Offline|Any CPU.Build.0 = Debug|Any CPU
+		{02AADCAD-17DF-4909-B898-BCE001D9CAC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02AADCAD-17DF-4909-B898-BCE001D9CAC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02AADCAD-17DF-4909-B898-BCE001D9CAC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02AADCAD-17DF-4909-B898-BCE001D9CAC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
