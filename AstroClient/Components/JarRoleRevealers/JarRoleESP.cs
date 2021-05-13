@@ -45,6 +45,10 @@
 					Internal_user = Internal_player.prop_APIUser_0;
 				}
 			}
+			if(ESP == null)
+			{
+				ESP = Internal_player.gameObject.GetComponent<PlayerESP>();
+			}
 			if (Internal_AssignedEntry == null)
 			{
 				FindEntryWithUser();
@@ -555,10 +559,13 @@
 			{
 				if (ESPMenu.Toggle_Player_ESP)
 				{
-					var esp = Internal_player.gameObject.GetComponent<PlayerESP>();
-					if (esp != null)
+					
+					if (ESP != null)
 					{
-						esp.ChangeColor(color);
+						if (ESP.useCustomColor)
+						{
+							ESP.ChangeColor(color);
+						}
 					}
 				}
 			}
@@ -629,6 +636,13 @@
 					}
 
 				}
+				if (ESPMenu.Toggle_Player_ESP)
+				{
+					if (ESP == null)
+					{
+						ESP = Internal_player.gameObject.GetComponent<PlayerESP>();
+					}
+				}
 				if (JarRoleController.IsMurder4World)
 				{
 					UpdateMurder4ESPMechanism();
@@ -650,6 +664,13 @@
 			if (ReturnedRole != Murder4CurrentRole)
 			{
 				Murder4CurrentRole = ReturnedRole;
+			}
+			if (ESP != null)
+			{
+				if (ESP.useCustomColor != JarRoleController.ViewRoles)
+				{
+					ESP.useCustomColor = JarRoleController.ViewRoles;
+				}
 			}
 			if (JarRoleController.ViewRoles)
 			{
@@ -697,7 +718,13 @@
 			{
 				AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Internal_player);
 			}
-
+			if (ESP != null)
+			{
+				if (ESP.useCustomColor != JarRoleController.ViewRoles)
+				{
+					ESP.useCustomColor = JarRoleController.ViewRoles;
+				}
+			}
 			if (JarRoleController.ViewRoles)
 			{
 				if (AmongUSHasVoted)
@@ -707,6 +734,7 @@
 						AmongUSVoteRevealTag.ShowTag = true;
 					}
 				}
+
 				if (ReturnedRole != AmongUsRoles.None && ReturnedRole != AmongUsRoles.Unassigned)
 				{
 					if (GetCurrentSingleTagText() != ReturnedRole.ToString())
@@ -957,6 +985,8 @@
 		internal Murder4Roles Murder4CurrentRole { get; set; } = Murder4Roles.Unassigned;
 		internal AmongUsRoles AmongUsCurrentRole { get; set; } = AmongUsRoles.Unassigned;
 		internal Player Internal_player { get; private set; } = null;
+
+		internal PlayerESP ESP { get; private set; } = null;
 		internal APIUser Internal_user { get; private set; } = null;
 		internal GameObject _AssignedPlayerEntry { get; private set; } = null;
 		internal SingleTag GameRoleTag { get; private set; } = null;
@@ -965,7 +995,7 @@
 
 		internal LinkedNodes _SavedEntry { get; private set; } = null;
 
-
+		
 
 		// MURDER 4 MAP
 		private readonly Color MurderColor = new Color(0.5377358f, 0.1648718f, 0.1728278f, 1f);

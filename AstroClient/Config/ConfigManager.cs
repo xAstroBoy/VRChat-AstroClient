@@ -26,20 +26,36 @@
 
 		public static ConfigFlight Flight = new ConfigFlight();
 
-		public static UnityEngine.Color ESPColor
+		public static UnityEngine.Color PublicESPColor
 		{
 			get
 			{
-				return new Color(ESP.ESPColor[0], ESP.ESPColor[1], ESP.ESPColor[2], ESP.ESPColor[3]);
+				return new Color(ESP.PublicESPColor[0], ESP.PublicESPColor[1], ESP.PublicESPColor[2], ESP.PublicESPColor[3]);
 			}
 			set
 			{
-				ESP.ESPColor[0] = value.r;
-				ESP.ESPColor[1] = value.g;
-				ESP.ESPColor[2] = value.b;
-				ESP.ESPColor[3] = value.a;
+				ESP.PublicESPColor[0] = value.r;
+				ESP.PublicESPColor[1] = value.g;
+				ESP.PublicESPColor[2] = value.b;
+				ESP.PublicESPColor[3] = value.a;
 			}
 		}
+
+		public static UnityEngine.Color ESPFriendColor
+		{
+			get
+			{
+				return new Color(ESP.ESPFriendColor[0], ESP.ESPFriendColor[1], ESP.ESPFriendColor[2], ESP.ESPFriendColor[3]);
+			}
+			set
+			{
+				ESP.ESPFriendColor[0] = value.r;
+				ESP.ESPFriendColor[1] = value.g;
+				ESP.ESPFriendColor[2] = value.b;
+				ESP.ESPFriendColor[3] = value.a;
+			}
+		}
+
 
 		public static void Validate()
 		{

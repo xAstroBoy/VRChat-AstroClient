@@ -6,6 +6,7 @@
 	using System;
 	using UnityEngine;
 	using VRC;
+	using DayClientML2.Utility.Extensions;
 
 	internal class ESPMenu : GameEvents
 	{
@@ -28,12 +29,26 @@
 			UdonBehaviourESPToggleBtn = new QMSingleToggleButton(main, 2, 1.5f, "Udon Behaviour ESP ON", new Action(() => { Toggle_UdonBehaviour_ESP = true; }), "Udon Behaviour ESP OFF", new Action(() => { Toggle_UdonBehaviour_ESP = false; }), "Toggle Udon Behaviour ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 			UdonBehaviourESPToggleBtn.setToggleState(ConfigManager.ESP.UdonESP);
 
-			new QMSingleButton(main, 4, 0, "Blue", () => { ChangeColor(Color.blue); }, null, null, null, false);
-			new QMSingleButton(main, 4, 1, "Red", () => { ChangeColor(Color.red); }, null, null, null, false);
-			new QMSingleButton(main, 4, 2, "Green", () => { ChangeColor(Color.green); }, null, null, null, false);
-			new QMSingleButton(main, 3, 0, "Yellow", () => { ChangeColor(Color.yellow); }, null, null, null, false);
-			new QMSingleButton(main, 3, 1, "Cyan", () => { ChangeColor(Color.cyan); }, null, null, null, false);
-			new QMSingleButton(main, 3, 2, "White", () => { ChangeColor(Color.white); }, null, null, null, false);
+
+			// TOOD : ADD A STRING Parser and allow people  to set HEX colors as well.
+			var PublicESP = new QMNestedButton(main, 3, 0, "Global ESP Colors", "Set Player ESP Default Color", null, null, null, null, true);
+			new QMSingleButton(PublicESP, 1, 0, "Blue", () => { ConfigManager.PublicESPColor = Color.blue; }, null, null, null, true);
+			new QMSingleButton(PublicESP, 1, 0.5f, "Red", () => { ConfigManager.PublicESPColor = Color.red; }, null, null, null, true);
+			new QMSingleButton(PublicESP, 1, 1, "Green", () => { ConfigManager.PublicESPColor = Color.green; }, null, null, null, true);
+			new QMSingleButton(PublicESP, 1, 1.5f, "Yellow", () => { ConfigManager.PublicESPColor = Color.yellow; }, null, null, null, true);
+			new QMSingleButton(PublicESP, 1, 2, "Cyan", () => { ConfigManager.PublicESPColor = Color.cyan; }, null, null, null, true);
+			new QMSingleButton(PublicESP, 1, 2.5f, "White", () => { ConfigManager.PublicESPColor = Color.white; }, null, null, null, true);
+
+
+			var FriendESP = new QMNestedButton(main, 3, 0.5f, "Friend ESP Colors", "Set Player ESP Friend Color", null, null, null, null, true);
+			new QMSingleButton(FriendESP, 1, 0, "Blue", () => { ConfigManager.ESPFriendColor = Color.blue; }, null, null, null, true);
+			new QMSingleButton(FriendESP, 1, 0.5f, "Red", () => { ConfigManager.ESPFriendColor = Color.red; }, null, null, null, true);
+			new QMSingleButton(FriendESP, 1, 1, "Green", () => { ConfigManager.ESPFriendColor = Color.green; }, null, null, null, true);
+			new QMSingleButton(FriendESP, 1, 1.5f, "Yellow", () => { ConfigManager.ESPFriendColor = Color.yellow; }, null, null, null, true);
+			new QMSingleButton(FriendESP, 1, 2, "Cyan", () => { ConfigManager.ESPFriendColor = Color.cyan; }, null, null, null, true);
+			new QMSingleButton(FriendESP, 1, 2.5f, "White", () => { ConfigManager.ESPFriendColor = Color.white; }, null, null, null, true);
+
+
 		}
 
 		private static QMSingleToggleButton PlayerESPToggleBtn;
@@ -43,14 +58,6 @@
 		private static QMSingleToggleButton UdonBehaviourESPToggleBtn;
 
 
-		public static void ChangeColor(UnityEngine.Color color)
-		{
-			ConfigManager.ESPColor = color;
-			foreach (var player in WorldUtils.GetAllPlayers0())
-			{
-				player.GetComponent<PlayerESP>().ChangeColor(ConfigManager.ESPColor);
-			}
-		}
 
 		public override void OnLevelLoaded()
 		{
@@ -274,8 +281,10 @@
 
 		#endregion TriggerESP
 
-		#region playerESP
+		#region playerESP 
 
+
+		// TODO: MAKE ESP FRIEND COLOR BE SETTABLE
 		public static bool Toggle_Player_ESP
 		{
 			get
@@ -305,10 +314,13 @@
 		{
 			if (Toggle_Player_ESP)
 			{
+
 				if (player != null && player != LocalPlayerUtils.GetSelfPlayer())
 				{
-					player.gameObject.AddComponent<PlayerESP>();
-					player.gameObject.GetComponent<PlayerESP>().ChangeColor(ConfigManager.ESPColor);
+					if (!player.gameObject.GetComponent<PlayerESP>())
+					{
+						player.gameObject.AddComponent<PlayerESP>();
+					}
 				}
 			}
 		}
@@ -319,10 +331,9 @@
 			{
 				if (item != LocalPlayerUtils.GetSelfPlayer())
 				{
-					if (item.gameObject.GetComponent<PlayerESP>() == null)
+					if (!item.gameObject.GetComponent<PlayerESP>())
 					{
 						item.gameObject.AddComponent<PlayerESP>();
-						item.gameObject.GetComponent<PlayerESP>().ChangeColor(ConfigManager.ESPColor);
 					}
 				}
 			}

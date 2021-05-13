@@ -94,6 +94,52 @@
 			}
 		}
 
+		public void LateUpdate()
+		{
+			if (!useCustomColor)
+			{
+				if (HighLightOptions != null)
+				{
+					if (player != null)
+					{
+						if (player.GetAPIUser() != null)
+						{
+							if (player.GetAPIUser().GetIsFriend())
+							{
+                                if(HighLightOptions.highlightColor != FriendColor)
+								{
+									HighLightOptions.highlightColor = FriendColor;
+								}
+							}
+							else
+							{
+								if (HighLightOptions.highlightColor != ESPColor)
+								{
+									HighLightOptions.highlightColor = ESPColor;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+
+		private Color FriendColor
+		{
+			get
+			{
+				return ConfigManager.ESPFriendColor;
+			}
+		}
+
+		private Color ESPColor
+		{
+			get
+			{
+				return ConfigManager.PublicESPColor;
+			}
+		}
+
 		public void OnDestroy()
 		{
 			HighLightOptions.DestroyHighlighter();
@@ -127,7 +173,29 @@
 
 		internal void ResetColor()
 		{
-			HighLightOptions.ResetHighlighterColor();
+			if (HighLightOptions != null)
+			{
+				if (player != null)
+				{
+					if (player.GetAPIUser() != null)
+					{
+						if (player.GetAPIUser().GetIsFriend())
+						{
+							if (HighLightOptions.highlightColor != FriendColor)
+							{
+								HighLightOptions.highlightColor = FriendColor;
+							}
+						}
+						else
+						{
+							if (HighLightOptions.highlightColor != ESPColor)
+							{
+								HighLightOptions.highlightColor = ESPColor;
+							}
+						}
+					}
+				}
+			}
 		}
 
 		internal Color GetCurrentESPColor
@@ -147,6 +215,7 @@
 		private UnhollowerBaseLib.Il2CppArrayBase<Renderer> ObjRenderers;
 		private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
 		private HighlightsFXStandalone HighLightOptions;
+		internal bool useCustomColor { get; set; } = false;
 
 		internal Player AssignedPlayer
 		{
@@ -155,5 +224,6 @@
 				return player;
 			}
 		}
+
 	}
 }
