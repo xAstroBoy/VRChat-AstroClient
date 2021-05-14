@@ -15,7 +15,7 @@
 
 		public static void LoadModules()
 		{
-			ModConsole.DebugLog("Loading Modules...");
+			ModConsole.Log("ModuleManager: Loading Modules...");
 
 			var assemblies = Thread.GetDomain().GetAssemblies();
 
@@ -30,7 +30,7 @@
 					{
 						BaseModule module = assembly.CreateInstance(type.ToString(), true) as BaseModule;
 						Modules.Add(module);
-						ModConsole.DebugLog($"ModuleManager Loaded Module: {module.GetType()}");
+						ModConsole.Log($"ModuleManager: Loaded Module ({module.GetType()})");
 					}
 				}
 			}
