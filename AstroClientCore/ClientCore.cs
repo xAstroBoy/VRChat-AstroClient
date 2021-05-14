@@ -4,6 +4,7 @@
 
 	using AstroClientCore.ConsoleUtils;
 	using AstroClientCore.Managers;
+	using AstroClientCore.Variables;
 	using MelonLoader;
 
 	#endregion
@@ -12,7 +13,7 @@
 	{
 		public override void OnApplicationStart()
 		{
-			ModConsole.Log("Welcome to AstroClient");
+			ModConsole.Log($"Welcome to AstroClient, {GlobalVariables.Version}");
 
 			ModuleManager.LoadModules();
 		}
