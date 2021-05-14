@@ -143,14 +143,6 @@
     <Compile Include="Components\Bounce\Bouncer.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigManager.cs" />
-    <Compile Include="Console\CheetosConsole\Console.cs" />
-    <Compile Include="Console\CheetosConsole\DefaultFonts.cs" />
-    <Compile Include="Console\CheetosConsole\Extensions.cs" />
-    <Compile Include="Console\CheetosConsole\Figlet.cs" />
-    <Compile Include="Console\CheetosConsole\FigletFont.cs" />
-    <Compile Include="Console\CheetosConsole\NativeMethods.cs" />
-    <Compile Include="Console\CheetosConsole\StyledString.cs" />
-    <Compile Include="Console\CheetosConsole\VirtualTerminalSequences.cs" />
     <Compile Include="Console\ModConsole.cs" />
     <Compile Include="GameEvents.cs" />
     <Compile Include="GameEventsBehaviour.cs" />

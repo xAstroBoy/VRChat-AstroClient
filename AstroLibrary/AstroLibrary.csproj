@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,6 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheetosConsole\Console.cs" />
+    <Compile Include="CheetosConsole\DefaultFonts.cs" />
+    <Compile Include="CheetosConsole\Extensions.cs" />
+    <Compile Include="CheetosConsole\Figlet.cs" />
+    <Compile Include="CheetosConsole\FigletFont.cs" />
+    <Compile Include="CheetosConsole\NativeMethods.cs" />
+    <Compile Include="CheetosConsole\StyledString.cs" />
+    <Compile Include="CheetosConsole\VirtualTerminalSequences.cs" />
     <Compile Include="LibraryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
