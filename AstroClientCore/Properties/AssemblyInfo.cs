@@ -6,20 +6,20 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle(AstroClient.BuildInfo.Name)]
+[assembly: AssemblyTitle(AstroClientCore.BuildInfo.Name)]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany(AstroClient.BuildInfo.Company)]
-[assembly: AssemblyProduct(AstroClient.BuildInfo.Name)]
-[assembly: AssemblyCopyright("Created by " + AstroClient.BuildInfo.Author)]
-[assembly: AssemblyTrademark(AstroClient.BuildInfo.Company)]
+[assembly: AssemblyCompany(AstroClientCore.BuildInfo.Company)]
+[assembly: AssemblyProduct(AstroClientCore.BuildInfo.Name)]
+[assembly: AssemblyCopyright("Created by " + AstroClientCore.BuildInfo.Author)]
+[assembly: AssemblyTrademark(AstroClientCore.BuildInfo.Company)]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
 // to COM components.  If you need to access a type in this assembly from
 // COM, set the ComVisible attribute to true on that type.
 [assembly: ComVisible(false)]
-[assembly: MelonInfo(typeof(AstroClient.Main), AstroClient.BuildInfo.Name, AstroClient.BuildInfo.Version, AstroClient.BuildInfo.Author, AstroClient.BuildInfo.DownloadLink)]
+[assembly: MelonInfo(typeof(AstroClientCore.ClientCore), AstroClientCore.BuildInfo.Name, AstroClientCore.BuildInfo.Version, AstroClientCore.BuildInfo.Author, AstroClientCore.BuildInfo.DownloadLink)]
 [assembly: InternalsVisibleTo("UnityExplorer.ML.IL2CPP")]
 [assembly: MelonGame(null, null)]
 
