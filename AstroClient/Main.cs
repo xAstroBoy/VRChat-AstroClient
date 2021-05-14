@@ -60,15 +60,15 @@
 			}
 #endif
 
-			try
-			{
-				Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);
-			}
-			catch (Exception e)
-			{
-				ModConsole.Error("Failed To generate Gradient, the Embeded file doesn't exist!");
-				ModConsole.ErrorExc(e);
-			}
+			//try
+			//{
+			//	Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);
+			//}
+			//catch (Exception e)
+			//{
+			//	ModConsole.Error("Failed To generate Gradient, the Embeded file doesn't exist!");
+			//	ModConsole.ErrorExc(e);
+			//}
 
 			InitializeOverridables();
 			//Event_OnApplicationStart?.Invoke(this, new EventArgs());
