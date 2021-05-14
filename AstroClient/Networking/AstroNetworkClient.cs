@@ -45,7 +45,7 @@
 			pingTimer.Enabled = true;
 		}
 
-		private static void OnPingEvent(System.Object source, ElapsedEventArgs e)
+		private static void OnPingEvent(object source, ElapsedEventArgs e)
 		{
 			Client.Send(new PacketData(PacketClientType.KEEP_ALIVE));
 		}
@@ -67,7 +67,7 @@
 			Client.StartClient(tcpClient, 0);
 		}
 
-		private static void ProcessInput(object sender, PacketData packetData)
+		private static void ProcessInput(PacketData packetData)
 		{
 			if (packetData.NetworkEventID != PacketServerType.KEEP_ALIVE)
 			{
@@ -193,7 +193,7 @@
 
 		private static void OnPacketReceived(object sender, ReceivedPacketEventArgs e)
 		{
-			ProcessInput(sender, e.Data);
+			ProcessInput(e.Data);
 		}
 	}
 }

@@ -4,5 +4,9 @@
 
 	public class ClientCore : MelonMod
 	{
+		public override void OnApplicationStart()
+		{
+
+		}
 	}
 }
