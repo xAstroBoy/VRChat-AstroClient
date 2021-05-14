@@ -34,17 +34,17 @@
 			}
 		}
 
-		internal static void OnGUI()
+		public static void OnGUI()
 		{
 			Modules.ForEach(m => m.OnGUI());
 		}
 
-		internal static void OnApplicationQuit()
+		public static void OnApplicationQuit()
 		{
 			Modules.ForEach(m => m.OnApplicationQuit());
 		}
 
-		internal static void VRChat_OnUiManagerInit()
+		public static void VRChat_OnUiManagerInit()
 		{
 			Modules.ForEach(m => m.VRChat_OnUiManagerInit());
 		}
