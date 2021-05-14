@@ -17,5 +17,15 @@
 
 			ModuleManager.LoadModules();
 		}
+
+		public override void OnUpdate()
+		{
+			ModuleManager.Update();
+		}
+
+		public override void OnLateUpdate()
+		{
+			ModuleManager.LateUpdate();
+		}
 	}
 }

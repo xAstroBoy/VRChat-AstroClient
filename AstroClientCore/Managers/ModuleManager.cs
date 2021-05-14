@@ -33,5 +33,15 @@
 				}
 			}
 		}
+
+		public static void Update()
+		{
+			Modules.ForEach(m => m.Update());
+		}
+
+		public static void LateUpdate()
+		{
+			Modules.ForEach(m => m.LateUpdate());
+		}
 	}
 }
