@@ -39,8 +39,8 @@
 
 		public static string GetNewFileName()
 		{
-			var result = GetCurrentInt();
-			var newfilename = BuildInfo.Name + "-Log-" + DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + " (" + result + ").log";
+			int result = GetCurrentInt();
+			string newfilename = $"{BuildInfo.Name}-Log-{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year} ({result}).log";
 			return !File.Exists(Path.Combine(LogsPath, newfilename)) ? Path.Combine(LogsPath, newfilename) : GetNewFileName();
 		}
 

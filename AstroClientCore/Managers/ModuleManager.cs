@@ -17,9 +17,7 @@
 		{
 			ModConsole.Log("ModuleManager: Loading Modules...");
 
-			var assemblies = Thread.GetDomain().GetAssemblies();
-
-			foreach (var assembly in assemblies)
+			foreach (var assembly in Thread.GetDomain().GetAssemblies())
 			{
 				foreach (var type in assembly.GetTypes())
 				{
