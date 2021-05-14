@@ -32,5 +32,15 @@
 		{
 			ModuleManager.VRChat_OnUiManagerInit();
 		}
+
+		public override void OnApplicationQuit()
+		{
+			ModuleManager.OnApplicationQuit();
+		}
+
+		public override void OnGUI()
+		{
+			ModuleManager.OnGUI();
+		}
 	}
 }

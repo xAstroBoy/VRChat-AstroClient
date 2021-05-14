@@ -5,7 +5,7 @@
 
 	public class TestModule : BaseModule
 	{
-		public TestModule()
+		public TestModule() : base()
 		{
 			ModConsole.Log("TestModule Works!");
 		}

@@ -21,5 +21,13 @@
 		public virtual void VRChat_OnUiManagerInit()
 		{
 		}
+
+		public virtual void OnApplicationQuit()
+		{
+		}
+
+		public virtual void OnGUI()
+		{
+		}
 	}
 }
