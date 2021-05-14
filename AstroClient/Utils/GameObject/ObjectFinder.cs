@@ -2,6 +2,7 @@
 {
 	using AstroClient.ConsoleUtils;
 	using AstroClient.extensions;
+	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
@@ -67,6 +68,7 @@
 			}
 		}
 
+		[Obsolete("Avoid Using This, use Another approach Unless Really required.")]
 		public static GameObject InactiveFind(string path)
 		{
 			foreach (GameObject gameObj in Resources.FindObjectsOfTypeAll<GameObject>())

@@ -280,28 +280,7 @@
 			new QMSingleButton(menu, 3, 0, "Dump Avatar Renderer Components", new Action(DumpSelectedAviComponents), "Print all visible components names in console.", null, null);
 		}
 
-		private static void ReloadAllAvatars()
-		{
-			if (VRCPlayer.field_Internal_Static_VRCPlayer_0 == null)
-			{
-				return;
-			}
-			foreach (var player in PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0)
-			{
-				if (player != null && player.GetVRCPlayer() != null)
-				{
-					ReloadAvatar(player.GetVRCPlayer());
-				}
-			}
-		}
 
-		private static void ReloadAvatar(VRCPlayer player)
-		{
-			if (VRCPlayer.field_Internal_Static_VRCPlayer_0 != null && player != null)
-			{
-				player.Method_Public_Void_Boolean_0();
-			}
-		}
 
 		public static void AddPickupComponentsToAvi()
 		{

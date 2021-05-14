@@ -25,6 +25,7 @@
 	using Console = CheetosConsole.Console;
 	using VRC;
 	using System.Linq;
+	using AstroClient.AvatarMods;
 
 	#endregion Imports
 
@@ -166,19 +167,16 @@
 				ExploitsMenu.InitButtons(AstroClient, 1, 0, true);
 				WorldsCheats.InitButtons(AstroClient, 1, 0, true);
 				LightControl.InitButtons(AstroClient, 1, 0.5f, true);
-
+				AvatarModifier.InitButtons(AstroClient, 1, 1, true);
 				GameObjectUtils.InitButtons(AstroClient, 1, 1.5f, true);
 				EmojiUtils.InitButton(AstroClient, 1, 2, true);
 				if (Bools.IsDeveloper)
 				{
 					MapEditorMenu.InitButtons(AstroClient, 1, 2.5f, true);
 				}
-				//LewdVRChat.InitButtons(AstroClient, 1, 2.5f, true);
 				WorldPickupsBtn.InitButtons(AstroClient, 2, 0, true);
 				ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
-				RandomSubmenus.TriggerSubMenu(AstroClient, 2, 1, true);
 
-				RandomSubmenus.VRC_InteractableSubMenu(AstroClient, 2, 2, true);
 				Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
 
 				SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);

@@ -5,6 +5,8 @@
 	using AstroClient.ConsoleUtils;
 	using AstroClient.Finder;
 	using AstroClient.ItemTweaker;
+	using AstroClient.Startup;
+	using DayClientML2.Utility;
 	using System.Windows.Forms;
 	using UnityEngine;
 	using VRC.SDKBase;
@@ -121,44 +123,86 @@
 
 		public static void DestroyMeLocal(this UnityEngine.Object obj)
 		{
-			string Objectname = "";
-			string GameObjectName = "";
 			if (obj != null)
 			{
-				GameObjectName = obj.name;
-				Objectname = obj.GetType().ToString();
+				string objname = obj.name;
+				string typename = obj.GetType().ToString();
 
-				if (obj.GetType() == typeof(Transform))
+				if (ComponentHelper.RegisteredComponentsTypes.Contains(obj.GetType()))
 				{
-
-					Transform objtransf = (Transform)obj;
-					if(objtransf != null)
-					{
-						objtransf.gameObject.DestroyObject();
-					}
+					var item = obj as Component;
+					if (item != null)
+						{
+							UnityEngine.Object.DestroyImmediate(item);
+						}
+						if (item != null)
+						{
+							ModConsole.DebugError($"Failed To Destroy Object {typename} Contained in {objname}");
+						}
+						else
+						{
+							ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+						}
+					
 					return;
 				}
-				
-				//if (obj != null)
-				//{
-				//	UnityEngine.Object.DestroyImmediate(obj);
-				//}
-				if (obj != null)
+				else if (obj is GameObject)
 				{
-					UnityEngine.Object.Destroy(obj);
+
+					var item = obj as GameObject;
+					if (item != null)
+					{
+						UnityEngine.Object.Destroy(item);
+					}
+					MiscUtility.DelayFunction(0.5f, () => {
+						if (item != null)
+						{
+							ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
+						}
+						else
+						{
+							ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+						}
+					});
 				}
-				//if (obj != null)
-				//{
-				//	UnityEngine.Object.DestroyObject(obj);
-				//}
-				if (obj != null)
+				else if (obj is Transform)
 				{
-					ModConsole.DebugLog($"Failed To Destroy Object {Objectname} Contained in {GameObjectName}", Color.Red);
-					ModConsole.DebugLog("Try To Destroy His GameObject in case you are trying to destroy the transform.", Color.Yellow);
+
+					var item = obj as Transform;
+					if (item != null)
+					{
+						UnityEngine.Object.Destroy(item.gameObject);
+					}
+					MiscUtility.DelayFunction(0.5f, () =>
+					{
+						if (item != null)
+						{
+							ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
+						}
+						else
+						{
+							ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+						}
+					});
 				}
 				else
 				{
-					ModConsole.DebugLog($"Destroyed Client-side Object {Objectname} Contained in {GameObjectName}", Color.Green);
+					if (obj != null)
+					{
+						UnityEngine.Object.Destroy(obj);
+					}
+					MiscUtility.DelayFunction(0.5f, () =>
+					{
+						if (obj != null)
+						{
+							ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
+							ModConsole.DebugLog("Try To Destroy His GameObject in case you are trying to destroy the transform.", Color.Yellow);
+						}
+						else
+						{
+							ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+						}
+					});
 				}
 			}
 		}

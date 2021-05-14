@@ -4,6 +4,7 @@
 	using AstroClient.ConsoleUtils;
 	using AstroClient.variables;
 	using System;
+	using System.Collections.Generic;
 	using UnhollowerRuntimeLib;
 
 	public class ComponentHelper : GameEvents
@@ -14,6 +15,10 @@
 			{
 				ClassInjector.RegisterTypeInIl2Cpp<T>();
 				ModConsole.DebugLog($"Registered: {typeof(T).FullName}");
+				if(!ComponentTypes.Contains(typeof(T)))
+				{
+					ComponentTypes.Add(typeof(T));
+				}
 			}
 			catch (Exception e)
 			{
@@ -92,6 +97,18 @@
 				OrbitManager.MakeInstance();
 			}
 			PlayerWatcherManager.MakeInstance();
+		}
+
+
+		
+
+		private static List<System.Type> ComponentTypes = new List<Type>();
+		public static List<System.Type> RegisteredComponentsTypes
+		{
+			get
+			{
+				return ComponentTypes;
+			}
 		}
 	}
 }
