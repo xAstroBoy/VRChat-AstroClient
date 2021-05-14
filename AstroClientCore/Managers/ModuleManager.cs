@@ -21,12 +21,9 @@
 
 			foreach (var assembly in assemblies)
 			{
-				var types = assembly.GetTypes();
-				foreach (var type in types)
+				foreach (var type in assembly.GetTypes())
 				{
-					var btype = type.BaseType;
-
-					if (btype != null && btype.Equals(typeof(BaseModule)))
+					if (type.BaseType != null && type.BaseType.Equals(typeof(BaseModule)))
 					{
 						BaseModule module = assembly.CreateInstance(type.ToString(), true) as BaseModule;
 						Modules.Add(module);
