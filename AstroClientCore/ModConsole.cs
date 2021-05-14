@@ -313,6 +313,9 @@
 				case LogTypes.CHEETOS_LOG:
 					PrintAntiCrashTag();
 					break;
+
+				default:
+					break;
 			}
 		}
 
