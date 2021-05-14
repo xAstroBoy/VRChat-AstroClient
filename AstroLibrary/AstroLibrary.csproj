@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseModule.cs" />
     <Compile Include="CheetosConsole\Console.cs" />
     <Compile Include="CheetosConsole\DefaultFonts.cs" />
     <Compile Include="CheetosConsole\Extensions.cs" />

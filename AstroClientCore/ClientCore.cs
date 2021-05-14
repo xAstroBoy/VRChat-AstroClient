@@ -14,7 +14,7 @@
 		{
 			ModConsole.Log("Welcome to AstroClient");
 
-			ModuleManager.Initialize();
+			ModuleManager.LoadModules();
 		}
 	}
 }
