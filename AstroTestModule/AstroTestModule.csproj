@@ -34,7 +34,7 @@
     <Compile Include="TestModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-    <ItemGroup>
+  <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="Assembly-CSharp">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Assembly-CSharp.dll</HintPath>
@@ -654,10 +654,13 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AstroClient\AstroClient.csproj">
-      <Project>{6506f83f-9665-4ec9-9d7f-6f88e1652bba}</Project>
-      <Name>AstroClient</Name>
-      <Private>False</Private>
+    <ProjectReference Include="..\AstroClientCore\AstroClientCore.csproj">
+      <Project>{02AADCAD-17DF-4909-B898-BCE001D9CAC8}</Project>
+      <Name>AstroClientCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\AstroLibrary\AstroLibrary.csproj">
+      <Project>{4613C712-5463-44C6-AB48-081A2B3AE61D}</Project>
+      <Name>AstroLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
