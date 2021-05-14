@@ -27,5 +27,10 @@
 		{
 			ModuleManager.LateUpdate();
 		}
+
+		public override void VRChat_OnUiManagerInit()
+		{
+			ModuleManager.VRChat_OnUiManagerInit();
+		}
 	}
 }

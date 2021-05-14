@@ -34,6 +34,11 @@
 			}
 		}
 
+		internal static void VRChat_OnUiManagerInit()
+		{
+			Modules.ForEach(m => m.VRChat_OnUiManagerInit());
+		}
+
 		public static void Update()
 		{
 			Modules.ForEach(m => m.Update());

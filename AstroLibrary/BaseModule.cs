@@ -17,5 +17,9 @@
 		public virtual void LateUpdate()
 		{
 		}
+
+		public virtual void VRChat_OnUiManagerInit()
+		{
+		}
 	}
 }
