@@ -2,7 +2,7 @@
 {
 	public class GlobalVariables
 	{
-		private static string version = "0.0 Beta";
+		private static string version = "0.0 Alpha";
 
 		public static string Version
 		{
