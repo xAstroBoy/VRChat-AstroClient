@@ -943,9 +943,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Figlet\Larry3D.flf" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\AstroLibrary\AstroLibrary.csproj">
       <Project>{4613c712-5463-44c6-ab48-081a2b3ae61d}</Project>
       <Name>AstroLibrary</Name>
