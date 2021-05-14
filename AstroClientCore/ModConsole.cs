@@ -90,8 +90,7 @@
 			DEBUG_LOG,
 			DEBUG_WARNING,
 			DEBUG_ERROR,
-			ANTI_CRASH,
-			CHEETOS_LOG
+			ANTI_CRASH
 		}
 
 		public static void LogExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
@@ -157,27 +156,6 @@
 				textcolor = Color.Red;
 			}
 			PrintTags(LogTypes.ERROR);
-			PrintLine(msg, textcolor.Value);
-		}
-
-		/// <summary>
-		/// I did this because I can trace the references easier, as I tend to do a lot of console spam during development.
-		/// I know you'll never understand me :3
-		/// </summary>
-		/// <param name="msg"></param>
-		/// <param name="textcolor"></param>
-		public static void CheetoLog(string msg, Color? textcolor = null, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
-		{
-			if (!GlobalVariables.IsDebug)
-			{
-				return;
-			}
-			if (textcolor == null)
-			{
-				textcolor = Color.PapayaWhip;
-			}
-			PrintTags(LogTypes.CHEETOS_LOG);
-			PrintCallerTag(callerName, callerLine);
 			PrintLine(msg, textcolor.Value);
 		}
 
@@ -307,10 +285,6 @@
 					break;
 
 				case LogTypes.ANTI_CRASH:
-					PrintAntiCrashTag();
-					break;
-
-				case LogTypes.CHEETOS_LOG:
 					PrintAntiCrashTag();
 					break;
 
