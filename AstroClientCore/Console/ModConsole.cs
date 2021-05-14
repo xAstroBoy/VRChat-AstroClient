@@ -1,4 +1,4 @@
-﻿namespace AstroClientCore.ConsoleUtils
+﻿namespace AstroClientCore.Console
 {
 	using AstroClientCore.Variables;
 	using System;

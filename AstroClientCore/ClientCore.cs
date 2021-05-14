@@ -2,7 +2,7 @@
 {
 	#region Imports
 
-	using AstroClientCore.ConsoleUtils;
+	using AstroClientCore.Console;
 	using AstroClientCore.Managers;
 	using AstroClientCore.Variables;
 	using MelonLoader;
