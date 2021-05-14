@@ -30,6 +30,7 @@
 					{
 						BaseModule module = assembly.CreateInstance(type.ToString(), true) as BaseModule;
 						Modules.Add(module);
+						module.Start();
 						ModConsole.Log($"ModuleManager: Loaded Module ({module.GetType()})");
 					}
 				}

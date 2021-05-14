@@ -5,5 +5,9 @@
 		public BaseModule()
 		{
 		}
+
+		public virtual void Start()
+		{
+		}
 	}
 }

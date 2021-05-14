@@ -9,5 +9,10 @@
 		{
 			ModConsole.Log("TestModule Works!");
 		}
+
+		public override void Start()
+		{
+			ModConsole.Log("TestModule Started.");
+		}
 	}
 }
