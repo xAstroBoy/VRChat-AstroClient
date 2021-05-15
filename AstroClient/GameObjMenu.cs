@@ -341,7 +341,7 @@
 						string objname = item.name;
 						if (item.name.Contains("VRCPlayer"))
 						{
-							System.Collections.Generic.List<Player> allPlayers = WorldUtils.Get_Players().ToArray().ToList();
+							List<Player> allPlayers = WorldUtils.Get_Players().ToArray().ToList();
 							for (int k = 0; k < allPlayers.Count; k++)
 							{
 								Player player = allPlayers[k];
@@ -396,7 +396,7 @@
 				string objname = item.name;
 				if (item.name.Contains("VRCPlayer"))
 				{
-					System.Collections.Generic.List<Player> allPlayers = WorldUtils.Get_Players().ToArray().ToList();
+					List<Player> allPlayers = WorldUtils.Get_Players().ToArray().ToList();
 					for (int k = 0; k < allPlayers.Count; k++)
 					{
 						Player player = allPlayers[k];
@@ -426,7 +426,7 @@
 			Current = null;
 			//Previous = null;
 			IsOnRootScene = true;
-			var TransformsInScene = new System.Collections.Generic.List<Transform>();
+			var TransformsInScene = new List<Transform>();
 			foreach (var obj in SceneManager.GetActiveScene().GetRootGameObjects())
 			{
 				if (obj != null && obj.transform != null)

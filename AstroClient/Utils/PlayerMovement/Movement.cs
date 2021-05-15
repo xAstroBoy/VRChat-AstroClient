@@ -129,7 +129,7 @@
 							var original = VRC.Core.APIUser.CurrentUser.GetPlayer().prop_VRCPlayer_0.prop_VRCAvatarManager_0.prop_GameObject_0;
 							if (original != null)
 							{
-								Capsule = UnityEngine.Object.Instantiate<GameObject>(original, null, true);
+								Capsule = UnityEngine.Object.Instantiate(original, null, true);
 								Animator animator = Capsule.GetComponent<Animator>();
 								if (animator != null && animator.isHuman)
 								{
@@ -180,7 +180,7 @@
 						var original = VRC.Core.APIUser.CurrentUser.GetPlayer().prop_VRCPlayer_0.prop_VRCAvatarManager_0.prop_GameObject_0;
 						if (original != null)
 						{
-							Capsule = UnityEngine.Object.Instantiate<GameObject>(original, null, true);
+							Capsule = UnityEngine.Object.Instantiate(original, null, true);
 							Animator animator = Capsule.GetComponent<Animator>();
 							if (animator != null && animator.isHuman)
 							{

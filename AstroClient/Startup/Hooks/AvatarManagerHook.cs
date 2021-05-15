@@ -29,7 +29,7 @@
 
 		private static void OnVRCAMAwake(VRCAvatarManager __instance)
 		{
-			VRCAvatarManager.MulticastDelegateNPublicSealedVoGaVRBoUnique multicastDelegateNPublicSealedVoGaVRBoUnique = (System.Action<GameObject, VRC.SDKBase.VRC_AvatarDescriptor, bool>)OnAvatarSpawnEvent;
+			VRCAvatarManager.MulticastDelegateNPublicSealedVoGaVRBoUnique multicastDelegateNPublicSealedVoGaVRBoUnique = (Action<GameObject, VRC.SDKBase.VRC_AvatarDescriptor, bool>)OnAvatarSpawnEvent;
 			VRCAvatarManager.MulticastDelegateNPublicSealedVoGaVRBoUnique field_Internal_MulticastDelegateNPublicSealedVoGaVRBoUnique_ = __instance.field_Internal_MulticastDelegateNPublicSealedVoGaVRBoUnique_0;
 			VRCAvatarManager.MulticastDelegateNPublicSealedVoGaVRBoUnique field_Internal_MulticastDelegateNPublicSealedVoGaVRBoUnique_2 = __instance.field_Internal_MulticastDelegateNPublicSealedVoGaVRBoUnique_1;
 			field_Internal_MulticastDelegateNPublicSealedVoGaVRBoUnique_ = ((field_Internal_MulticastDelegateNPublicSealedVoGaVRBoUnique_ == null) ? multicastDelegateNPublicSealedVoGaVRBoUnique : Il2CppSystem.Delegate.Combine(field_Internal_MulticastDelegateNPublicSealedVoGaVRBoUnique_, multicastDelegateNPublicSealedVoGaVRBoUnique).Cast<VRCAvatarManager.MulticastDelegateNPublicSealedVoGaVRBoUnique>());

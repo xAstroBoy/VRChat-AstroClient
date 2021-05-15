@@ -57,7 +57,7 @@
 				ServicePointManager.ServerCertificateValidationCallback = ((object s, X509Certificate c, X509Chain cc, SslPolicyErrors ssl) => true);
 				return (from x in to_array(webRequest.GetResponse())
 						where !string.IsNullOrEmpty(x)
-						select x).ToArray<string>();
+						select x).ToArray();
 			}
 		}
 	}

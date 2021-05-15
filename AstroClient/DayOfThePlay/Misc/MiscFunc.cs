@@ -29,7 +29,7 @@
 		{
 			GameObject gameObject = (from x in UnityEngine.Object.FindObjectsOfType<GameObject>()
 									 where x.name == "DrawingManager"
-									 select x).First<GameObject>();
+									 select x).First();
 			Networking.RPC(0, gameObject, "CleanRoomRPC", null);
 		}
 
@@ -373,10 +373,10 @@
 			Console.Clear();
 			Console.WriteLine(
 				"[DAY]-----------------------------------Add players-----------------------------------");
-			VRC.Player[] allPlayers = Utils.PlayerManager.AllPlayers().ToArray();
+			Player[] allPlayers = Utils.PlayerManager.AllPlayers().ToArray();
 			for (int i = 0; i < allPlayers.Length; i++)
 			{
-				VRC.Player x = allPlayers[i];
+				Player x = allPlayers[i];
 				string id = x.GetAPIUser().id;
 				if (x.field_Private_APIUser_0.isFriend)
 				{
@@ -450,11 +450,11 @@
 						.SendNotification(UserID, "requestInvite",
 							string.Empty, notificationDetails);
 				}
-				catch (System.Exception e)
+				catch (Exception e)
 				{
 					ModConsole.Error("Request Invite Failed, Exception | " + e);
 					Utils.VRCUiPopupManager.Alert("Request Invite Failed", "Please report this to Love#3000", "Okay",
-						new System.Action(() => { Utils.VRCUiPopupManager.HideCurrentPopUp(); }));
+						new Action(() => { Utils.VRCUiPopupManager.HideCurrentPopUp(); }));
 				}
 			}
 

@@ -8,7 +8,7 @@
 	{
 		public VRCList(Transform parent, string name, int Position = 0)
 		{
-			GameObject = UnityEngine.Object.Instantiate<GameObject>(PublicAvatarList.gameObject, parent);
+			GameObject = UnityEngine.Object.Instantiate(PublicAvatarList.gameObject, parent);
 			GameObject.GetComponent<UiAvatarList>().field_Public_EnumNPublicSealedvaInPuMiFaSpClPuLiCrUnique_0 = UiAvatarList.EnumNPublicSealedvaInPuMiFaSpClPuLiCrUnique.SpecificList;
 			UiVRCList = GameObject.GetComponent<UiVRCList>();
 			Text = GameObject.transform.Find("Button").GetComponentInChildren<Text>();
@@ -35,7 +35,7 @@
 		//}
 		public void RenderElement(Il2CppSystem.Collections.Generic.List<ApiAvatar> AvatarList)
 		{
-			UiVRCList.Method_Protected_Void_List_1_T_Int32_Boolean_VRCUiContentButton_0<ApiAvatar>(AvatarList, 0, true);
+			UiVRCList.Method_Protected_Void_List_1_T_Int32_Boolean_VRCUiContentButton_0(AvatarList, 0, true);
 		}
 
 		//public void RenderElement(Il2CppSystem.Collections.Generic.List<APIUser> UserList)

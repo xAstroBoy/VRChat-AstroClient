@@ -17,9 +17,9 @@
 			Variables = variables;
 		}
 
-		public async Task<Classes.UserSelf> GetSelf()
+		public async Task<UserSelf> GetSelf()
 		{
-			var user = JsonConvert.DeserializeObject<Classes.UserSelf>(await Variables.SendRequest(Variables.HTTPMethods.GET, "auth/user", null));
+			var user = JsonConvert.DeserializeObject<UserSelf>(await Variables.SendRequest(Variables.HTTPMethods.GET, "auth/user", null));
 			Variables.Self = user;
 			return user;
 		}
@@ -71,9 +71,9 @@
 			return await (Variables.SendRequest(Variables.HTTPMethods.GET, "visits", null));
 		}
 
-		public async Task<Classes.WorldInstanceResponse> GetInstance(string worldId, string instanceId)
+		public async Task<WorldInstanceResponse> GetInstance(string worldId, string instanceId)
 		{
-			return JsonConvert.DeserializeObject<Classes.WorldInstanceResponse>(await Variables.SendRequest(Variables.HTTPMethods.GET, $"{API.WorldCommand}/{worldId}/{instanceId}", null));
+			return JsonConvert.DeserializeObject<WorldInstanceResponse>(await Variables.SendRequest(Variables.HTTPMethods.GET, $"{API.WorldCommand}/{worldId}/{instanceId}", null));
 		}
 
 		public async void SendNotification(NotificationType type, string userid)
@@ -96,13 +96,13 @@
 			}
 		}
 
-		public async Task<List<Classes.Notification>> GetAllNotification(NotificationType type, bool urs, DateTime after)
+		public async Task<List<Notification>> GetAllNotification(NotificationType type, bool urs, DateTime after)
 		{
 			var Headers = new Dictionary<string, string>();
 			Headers.Add("type", type.ToString());
 			Headers.Add("sent", urs.ToString());
 			Headers.Add("after", after.ToString());
-			return JsonConvert.DeserializeObject<List<Classes.Notification>>(await Variables.SendRequest(Variables.HTTPMethods.GET, "user/notifications", Headers));
+			return JsonConvert.DeserializeObject<List<Notification>>(await Variables.SendRequest(Variables.HTTPMethods.GET, "user/notifications", Headers));
 		}
 
 		public enum NotificationType

@@ -69,6 +69,6 @@
 
 		public Text Text;
 		public Toggle Toggle;
-		public GameObject Checkbox;
+		public Object Checkbox;
 	}
 }

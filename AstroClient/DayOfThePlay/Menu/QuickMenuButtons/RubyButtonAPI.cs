@@ -256,12 +256,12 @@
 
 	public class QMTabButton : QMTabBase
 	{
-		public QMTabButton(float btnXLocation, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, String ImageURL = null)
+		public QMTabButton(float btnXLocation, Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, String ImageURL = null)
 		{
 			initButton(btnXLocation, btnAction, btnToolTip, btnBackgroundColor, ImageURL);
 		}
 
-		private void initButton(float btnXLocation, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, String ImageURL = null)
+		private void initButton(float btnXLocation, Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, String ImageURL = null)
 		{
 			btnType = "QMTabButton";
 			button = UnityEngine.Object.Instantiate(QuickMenuStuff.TabButtonTemplate(), QuickMenuStuff.TabButtonTemplate().transform.parent, true);
@@ -283,7 +283,7 @@
 			setActive(true);
 		}
 
-		public void setAction(System.Action buttonAction)
+		public void setAction(Action buttonAction)
 		{
 			button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
 			if (buttonAction != null)
@@ -295,7 +295,7 @@
 			//button.GetComponentInChildren<UnityEngine.UI.Image>().color = buttonBackgroundColor;
 			if (save)
 				OrigBackground = (Color)buttonBackgroundColor;
-			button.GetComponentInChildren<UnityEngine.UI.Button>().colors = new ColorBlock()
+			button.GetComponentInChildren<Button>().colors = new ColorBlock()
 			{
 				colorMultiplier = 1f,
 				disabledColor = Color.grey,
@@ -323,7 +323,7 @@
 		{
 			btnType = "QMTabMenu";
 
-			Transform menu = UnityEngine.Object.Instantiate<Transform>(QuickMenuStuff.NestedMenuTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform);
+			Transform menu = UnityEngine.Object.Instantiate(QuickMenuStuff.NestedMenuTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform);
 			menuName = QMButtonAPI.identifier + btnQMLoc + "_" + btnXLocation + "_" + btnToolTip;
 			menu.name = menuName;
 
@@ -375,7 +375,7 @@
 
 	public class QMSingleButton : QMButtonBase
 	{
-		public QMSingleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool btnHalf = false)
+		public QMSingleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnText, Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool btnHalf = false)
 		{
 			btnQMLoc = btnMenu.getMenuName();
 			if (btnHalf)
@@ -389,7 +389,7 @@
 			}
 		}
 
-		public QMSingleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool btnHalf = false)
+		public QMSingleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, String btnText, Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool btnHalf = false)
 		{
 			btnQMLoc = btnMenu.getMenuName();
 			if (btnHalf)
@@ -403,7 +403,7 @@
 			}
 		}
 
-		public QMSingleButton(string btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool btnHalf = false)
+		public QMSingleButton(string btnMenu, float btnXLocation, float btnYLocation, String btnText, Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool btnHalf = false)
 		{
 			btnQMLoc = btnMenu;
 			if (btnHalf)
@@ -417,7 +417,7 @@
 			}
 		}
 
-		private void initButton(float btnXLocation, float btnYLocation, String btnText, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null)
+		private void initButton(float btnXLocation, float btnYLocation, String btnText, Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null)
 		{
 			btnType = "SingleButton";
 			button = UnityEngine.Object.Instantiate(QuickMenuStuff.SingleButtonTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform.Find(btnQMLoc), true);
@@ -432,7 +432,7 @@
 			if (btnBackgroundColor != null)
 				setBackgroundColor((Color)btnBackgroundColor);
 			else
-				OrigBackground = button.GetComponentInChildren<UnityEngine.UI.Image>().color;
+				OrigBackground = button.GetComponentInChildren<Image>().color;
 
 			if (btnTextColor != null)
 				setTextColor((Color)btnTextColor);
@@ -453,7 +453,7 @@
 			return button.GetComponentInChildren<Text>().text;
 		}
 
-		public void setAction(System.Action buttonAction)
+		public void setAction(Action buttonAction)
 		{
 			button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
 			if (buttonAction != null)
@@ -467,7 +467,7 @@
 				OrigBackground = (Color)buttonBackgroundColor;
 			//UnityEngine.UI.Image[] btnBgColorList = ((btnOn.GetComponentsInChildren<UnityEngine.UI.Image>()).Concat(btnOff.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray()).Concat(button.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray();
 			//foreach (UnityEngine.UI.Image btnBackground in btnBgColorList) btnBackground.color = buttonBackgroundColor;
-			button.GetComponentInChildren<UnityEngine.UI.Button>().colors = new ColorBlock()
+			button.GetComponentInChildren<Button>().colors = new ColorBlock()
 			{
 				colorMultiplier = 1f,
 				disabledColor = Color.grey,
@@ -493,31 +493,31 @@
 		public List<QMButtonBase> hideWhenOn = new List<QMButtonBase>();
 		public bool shouldSaveInConfig = false;
 
-		private System.Action btnOnAction = null;
-		private System.Action btnOffAction = null;
+		private Action btnOnAction = null;
+		private Action btnOffAction = null;
 
-		public QMToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnTextOn, System.Action btnActionOn, String btnTextOff, System.Action btnActionOff, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConfig = true, bool defaultPosition = false)
+		public QMToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnTextOn, Action btnActionOn, String btnTextOff, Action btnActionOff, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConfig = true, bool defaultPosition = false)
 		{
 			btnQMLoc = btnMenu.getMenuName();
 			initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, shouldSaveInConfig, defaultPosition);
 		}
 
-		public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, String btnTextOn, System.Action btnActionOn, String btnTextOff, System.Action btnActionOff, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConfig = true, bool defaultPosition = false)
+		public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, String btnTextOn, Action btnActionOn, String btnTextOff, Action btnActionOff, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConfig = true, bool defaultPosition = false)
 		{
 			btnQMLoc = btnMenu.getMenuName();
 			initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, shouldSaveInConfig, defaultPosition);
 		}
 
-		public QMToggleButton(string btnMenu, float btnXLocation, float btnYLocation, String btnTextOn, System.Action btnActionOn, String btnTextOff, System.Action btnActionOff, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConfig = true, bool defaultPosition = false)
+		public QMToggleButton(string btnMenu, float btnXLocation, float btnYLocation, String btnTextOn, Action btnActionOn, String btnTextOff, Action btnActionOff, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConfig = true, bool defaultPosition = false)
 		{
 			btnQMLoc = btnMenu;
 			initButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, shouldSaveInConfig, defaultPosition);
 		}
 
-		private void initButton(float btnXLocation, float btnYLocation, String btnTextOn, System.Action btnActionOn, String btnTextOff, System.Action btnActionOff, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConf = true, bool defaultPosition = false)
+		private void initButton(float btnXLocation, float btnYLocation, String btnTextOn, Action btnActionOn, String btnTextOff, Action btnActionOff, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConf = true, bool defaultPosition = false)
 		{
 			btnType = "ToggleButton";
-			button = UnityEngine.Object.Instantiate<GameObject>(QuickMenuStuff.ToggleButtonTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform.Find(btnQMLoc), true);
+			button = UnityEngine.Object.Instantiate(QuickMenuStuff.ToggleButtonTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform.Find(btnQMLoc), true);
 
 			btnOn = button.transform.Find("Toggle_States_Visible/ON").gameObject;
 			btnOff = button.transform.Find("Toggle_States_Visible/OFF").gameObject;
@@ -558,12 +558,12 @@
 			if (btnTextColorOn != null)
 				setTextColorOn((Color)btnTextColorOn);
 			else
-				OrigText = btnOn.GetComponentsInChildren<UnityEngine.UI.Image>().First().color;
+				OrigText = btnOn.GetComponentsInChildren<Image>().First().color;
 
 			if (btnTextColorOff != null)
 				setTextColorOff((Color)btnTextColorOff);
 			else
-				OrigText = btnOn.GetComponentsInChildren<UnityEngine.UI.Image>().First().color;
+				OrigText = btnOn.GetComponentsInChildren<Image>().First().color;
 
 			setActive(true);
 			shouldSaveInConfig = shouldSaveInConf;
@@ -578,8 +578,8 @@
 
 		public override void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
 		{
-			UnityEngine.UI.Image[] btnBgColorList = ((btnOn.GetComponentsInChildren<UnityEngine.UI.Image>()).Concat(btnOff.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray()).Concat(button.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray();
-			foreach (UnityEngine.UI.Image btnBackground in btnBgColorList) btnBackground.color = buttonBackgroundColor;
+			Image[] btnBgColorList = ((btnOn.GetComponentsInChildren<Image>()).Concat(btnOff.GetComponentsInChildren<Image>()).ToArray()).Concat(button.GetComponentsInChildren<Image>()).ToArray();
+			foreach (Image btnBackground in btnBgColorList) btnBackground.color = buttonBackgroundColor;
 			if (save)
 				OrigBackground = (Color)buttonBackgroundColor;
 		}
@@ -600,13 +600,13 @@
 				OrigText = (Color)buttonTextColorOff;
 		}
 
-		public void setAction(System.Action buttonOnAction, System.Action buttonOffAction)
+		public void setAction(Action buttonOnAction, Action buttonOffAction)
 		{
 			btnOnAction = buttonOnAction;
 			btnOffAction = buttonOffAction;
 
 			button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
-			button.GetComponent<Button>().onClick.AddListener(UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<UnityAction>((System.Action)(() =>
+			button.GetComponent<Button>().onClick.AddListener(UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<UnityAction>((Action)(() =>
 		  {
 			  if (btnOn.activeSelf)
 			  {
@@ -676,7 +676,7 @@
 		private Action OffAction { get; set; }
 		private Action OnAction { get; set; }
 
-		public QMSingleToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnONText, System.Action btnONAction, String btnOffText, System.Action btnOFFction, String btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
+		public QMSingleToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnONText, Action btnONAction, String btnOffText, Action btnOFFction, String btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
 		{
 			btnQMLoc = btnMenu.getMenuName();
 			if (btnHalf)
@@ -686,7 +686,7 @@
 			initButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
 		}
 
-		public QMSingleToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, String btnONText, System.Action btnONAction, String btnOffText, System.Action btnOFFction, String btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
+		public QMSingleToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, String btnONText, Action btnONAction, String btnOffText, Action btnOFFction, String btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
 		{
 			btnQMLoc = btnMenu.getMenuName();
 			if (btnHalf)
@@ -696,7 +696,7 @@
 			initButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
 		}
 
-		public QMSingleToggleButton(string btnMenu, float btnXLocation, float btnYLocation, String btnONText, System.Action btnONAction, String btnOffText, System.Action btnOFFction, String btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
+		public QMSingleToggleButton(string btnMenu, float btnXLocation, float btnYLocation, String btnONText, Action btnONAction, String btnOffText, Action btnOFFction, String btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
 		{
 			btnQMLoc = btnMenu;
 			if (btnHalf)
@@ -706,7 +706,7 @@
 			initButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
 		}
 
-		private void initButton(float btnXLocation, float btnYLocation, String btnONText, System.Action btnONAction, String btnOffText, System.Action btnOFFAction, String btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
+		private void initButton(float btnXLocation, float btnYLocation, String btnONText, Action btnONAction, String btnOffText, Action btnOFFAction, String btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
 		{
 			btnType = "SingleToggleButton";
 			button = UnityEngine.Object.Instantiate(QuickMenuStuff.SingleButtonTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform.Find(btnQMLoc), true);
@@ -726,7 +726,7 @@
 			if (btnBackgroundColor != null)
 				setBackgroundColor((Color)btnBackgroundColor);
 			else
-				OrigBackground = button.GetComponentInChildren<UnityEngine.UI.Image>().color;
+				OrigBackground = button.GetComponentInChildren<Image>().color;
 
 			setTextColor(position ? (Color)btnOnColor : (Color)btnOFFColor);
 			//OrigText = button.GetComponentInChildren<Text>().color;
@@ -745,11 +745,11 @@
 			button.GetComponentInChildren<Text>().text = buttonText;
 		}
 
-		public void setAction(System.Action buttonONAction, System.Action buttonOFFAction)
+		public void setAction(Action buttonONAction, Action buttonOFFAction)
 		{
 			button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
 			if (buttonONAction != null && buttonOFFAction != null)
-				button.GetComponent<Button>().onClick.AddListener(new System.Action(() =>
+				button.GetComponent<Button>().onClick.AddListener(new Action(() =>
 				{
 					state = !state;
 					if (state)
@@ -770,7 +770,7 @@
 				OrigBackground = (Color)buttonBackgroundColor;
 			//UnityEngine.UI.Image[] btnBgColorList = ((btnOn.GetComponentsInChildren<UnityEngine.UI.Image>()).Concat(btnOff.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray()).Concat(button.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray();
 			//foreach (UnityEngine.UI.Image btnBackground in btnBgColorList) btnBackground.color = buttonBackgroundColor;
-			button.GetComponentInChildren<UnityEngine.UI.Button>().colors = new ColorBlock()
+			button.GetComponentInChildren<Button>().colors = new ColorBlock()
 			{
 				colorMultiplier = 1f,
 				disabledColor = Color.grey,
@@ -864,7 +864,7 @@
 		{
 			btnType = "NestedButton";
 
-			Transform menu = UnityEngine.Object.Instantiate<Transform>(QuickMenuStuff.NestedMenuTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform);
+			Transform menu = UnityEngine.Object.Instantiate(QuickMenuStuff.NestedMenuTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform);
 			menuName = QMButtonAPI.identifier + btnQMLoc + "_" + btnXLocation + "_" + btnYLocation;
 			menu.name = menuName;
 
@@ -941,7 +941,7 @@
 		public bool AllowOverStepping = false;
 		public bool IgnoreEverything = false;
 
-		public QMHalfScroll(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action<QMHalfScroll> MenuOpenAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
+		public QMHalfScroll(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnText, Action<QMHalfScroll> MenuOpenAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
 		{
 			BaseMenu = new QMNestedButton(btnMenu, btnXLocation, btnYLocation, btnText, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
 			SetAction(MenuOpenAction);
@@ -1160,7 +1160,7 @@
 		public bool AllowOverStepping = false;
 		public bool IgnoreEverything = false;
 
-		public QMScrollMenu(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action<QMScrollMenu> MenuOpenAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
+		public QMScrollMenu(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnText, Action<QMScrollMenu> MenuOpenAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
 		{
 			BaseMenu = new QMNestedButton(btnMenu, btnXLocation, btnYLocation, btnText, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor, btnHalf);
 			SetAction(MenuOpenAction);

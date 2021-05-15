@@ -222,7 +222,7 @@
 			{
 				string path = Path.Combine(Environment.CurrentDirectory + $@"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_VRCPickups.txt");
 				Thread.CurrentThread.IsBackground = true;
-				var listg = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>();
+				var listg = Resources.FindObjectsOfTypeAll<VRC_Pickup>();
 				using (var txtFile = File.AppendText(path))
 				{
 					foreach (var gameobj in listg)
@@ -330,7 +330,7 @@
 		public static List<GameObject> GetAllPickupObjects()
 		{
 			List<GameObject> Objects = new List<GameObject>();
-			var listg = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>();
+			var listg = Resources.FindObjectsOfTypeAll<VRC_Pickup>();
 			foreach (var obj in listg)
 			{
 				if (!Objects.Contains(obj.gameObject))

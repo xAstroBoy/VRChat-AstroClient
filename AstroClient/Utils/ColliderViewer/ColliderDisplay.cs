@@ -34,7 +34,7 @@
 			if (flag2)
 			{
 				ModConsole.Log("Failed to find transparent shader for colliders");
-				shader2 = source.FirstOrDefault<Shader>();
+				shader2 = source.FirstOrDefault();
 			}
 			else
 			{
@@ -115,7 +115,7 @@
 			}
 		}
 
-		private static void GetAllColliders<T>(System.Collections.Generic.List<T> colliderList)
+		private static void GetAllColliders<T>(List<T> colliderList)
 		{
 			int sceneCount = SceneManager.sceneCount;
 			for (int i = 0; i < sceneCount; i++)
@@ -135,7 +135,7 @@
 			}
 		}
 
-		private static void Regenerate<T, TSelf>(System.Collections.Generic.IList<TSelf> cache, int oldCount, System.Collections.Generic.List<T> colliders) where T : Collider where TSelf : class, ColliderDisplay.IDisplay<T, TSelf>, new()
+		private static void Regenerate<T, TSelf>(IList<TSelf> cache, int oldCount, List<T> colliders) where T : Collider where TSelf : class, IDisplay<T, TSelf>, new()
 		{
 			bool flag = colliders.Count < oldCount;
 			if (flag)
@@ -176,7 +176,7 @@
 			ColliderDisplay.Update<CapsuleCollider, ColliderDisplay.Capsule>(ColliderDisplay.CapsuleCache, ColliderDisplay.CapsuleColliders);
 		}
 
-		private static void Update<T, TSelf>(System.Collections.Generic.IList<TSelf> cache, List<T> colliders) where T : Collider where TSelf : class, ColliderDisplay.IDisplay<T, TSelf>, new()
+		private static void Update<T, TSelf>(IList<TSelf> cache, List<T> colliders) where T : Collider where TSelf : class, IDisplay<T, TSelf>, new()
 		{
 			int num = 0;
 			for (int i = colliders.Count - 1; i >= 0; i--)
@@ -210,15 +210,15 @@
 
 		public static readonly HashSet<int> MyRenderers = new HashSet<int>();
 
-		private static readonly List<ColliderDisplay.Sphere> SphereCache = new List<ColliderDisplay.Sphere>();
+		private static readonly List<Sphere> SphereCache = new List<Sphere>();
 
-		private static readonly List<ColliderDisplay.Cube> CubeCache = new List<ColliderDisplay.Cube>();
+		private static readonly List<Cube> CubeCache = new List<Cube>();
 
-		private static readonly List<ColliderDisplay.Capsule> CapsuleCache = new List<ColliderDisplay.Capsule>();
+		private static readonly List<Capsule> CapsuleCache = new List<Capsule>();
 
 		private static readonly List<SphereCollider> SphereColliders = new List<SphereCollider>();
 
-		private static readonly System.Collections.Generic.List<BoxCollider> BoxColliders = new List<BoxCollider>();
+		private static readonly List<BoxCollider> BoxColliders = new List<BoxCollider>();
 
 		private static readonly List<CapsuleCollider> CapsuleColliders = new List<CapsuleCollider>();
 
@@ -226,14 +226,14 @@
 
 		private static Material _solidMaterial;
 
-		private interface IDisplay<in T, TSelf> where T : Collider where TSelf : class, ColliderDisplay.IDisplay<T, TSelf>, new()
+		private interface IDisplay<in T, TSelf> where T : Collider where TSelf : class, IDisplay<T, TSelf>, new()
 		{
 			bool Enabled { get; set; }
 
 			void Update(T collider);
 		}
 
-		private class Sphere : ColliderDisplay.IDisplay<SphereCollider, ColliderDisplay.Sphere>
+		private class Sphere : IDisplay<SphereCollider, Sphere>
 		{
 			public bool Enabled
 			{
@@ -278,7 +278,7 @@
 			private readonly Renderer _renderer;
 		}
 
-		private class Cube : ColliderDisplay.IDisplay<BoxCollider, ColliderDisplay.Cube>
+		private class Cube : IDisplay<BoxCollider, Cube>
 		{
 			public bool Enabled
 			{
@@ -316,7 +316,7 @@
 			private readonly Renderer _renderer;
 		}
 
-		public class Capsule : ColliderDisplay.IDisplay<CapsuleCollider, ColliderDisplay.Capsule>
+		public class Capsule : IDisplay<CapsuleCollider, Capsule>
 		{
 			public bool Enabled
 			{

@@ -215,7 +215,7 @@
 			}, VrcBroadcastType.AlwaysUnbuffered, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, 0f);
 		}
 
-		public System.Collections.IEnumerator Clap1()
+		public IEnumerator Clap1()
 		{
 			for (int i = 0; i < int.MaxValue; i++)
 			{

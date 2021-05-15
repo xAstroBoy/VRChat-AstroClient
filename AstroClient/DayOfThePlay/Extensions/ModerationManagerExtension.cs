@@ -195,7 +195,7 @@
 		//	}
 		//}
 
-		private static Il2CppSystem.Collections.Generic.Dictionary<string, List<ApiPlayerModeration>> PlayerModerations
+		private static Dictionary<string, List<ApiPlayerModeration>> PlayerModerations
 		{
 			get
 			{
@@ -207,7 +207,7 @@
 			}
 		}
 
-		private static Il2CppSystem.Collections.Generic.Dictionary<string, List<ApiModeration>> GlobalModerations
+		private static Dictionary<string, List<ApiModeration>> GlobalModerations
 		{
 			get
 			{

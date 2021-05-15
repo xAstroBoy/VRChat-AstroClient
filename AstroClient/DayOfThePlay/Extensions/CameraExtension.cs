@@ -73,17 +73,17 @@
 			return dictionary;
 		}
 
-		public static void SetCameraMode(CameraExtension.CameraMode mode)
+		public static void SetCameraMode(CameraMode mode)
 		{
 			Utils.UserCameraController.field_Private_UserCameraMode_0 = (UserCameraMode)mode;
 		}
 
-		public static void SetCameraSpace(CameraExtension.CameraSpace mode)
+		public static void SetCameraSpace(CameraSpace mode)
 		{
 			Utils.UserCameraController.field_Private_UserCameraSpace_0 = (UserCameraSpace)mode;
 		}
 
-		public static void SetCameraSpace(CameraExtension.CameraBehaviour mode)
+		public static void SetCameraSpace(CameraBehaviour mode)
 		{
 			Utils.UserCameraController.field_Private_UserCameraMovementBehaviour_0 = (UserCameraMovementBehaviour)mode;
 		}
@@ -132,19 +132,19 @@
 			}
 		}
 
-		public static CameraExtension.CameraBehaviour GetCameraBehaviour()
+		public static CameraBehaviour GetCameraBehaviour()
 		{
-			return (CameraExtension.CameraBehaviour)Utils.UserCameraController.field_Private_UserCameraMovementBehaviour_0;
+			return (CameraBehaviour)Utils.UserCameraController.field_Private_UserCameraMovementBehaviour_0;
 		}
 
-		public static CameraExtension.CameraSpace GetCameraSpace()
+		public static CameraSpace GetCameraSpace()
 		{
-			return (CameraExtension.CameraSpace)Utils.UserCameraController.field_Private_UserCameraSpace_0;
+			return (CameraSpace)Utils.UserCameraController.field_Private_UserCameraSpace_0;
 		}
 
-		public static CameraExtension.Pin GetCurrentPin()
+		public static Pin GetCurrentPin()
 		{
-			return (CameraExtension.Pin)Utils.UserCameraController.prop_Int32_0;
+			return (Pin)Utils.UserCameraController.prop_Int32_0;
 		}
 
 		public enum CameraMode

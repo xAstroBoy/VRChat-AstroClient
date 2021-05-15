@@ -110,37 +110,37 @@
 		public static void LogExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
 		{
 			PrintCallerTag(callerName, callerLine);
-			Exception((e as System.Exception), LogTypes.LOG);
+			Exception((e as Exception), LogTypes.LOG);
 		}
 
 		public static void WarningExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
 		{
 			PrintCallerTag(callerName, callerLine);
-			Exception((e as System.Exception), LogTypes.WARNING);
+			Exception((e as Exception), LogTypes.WARNING);
 		}
 
 		public static void ErrorExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
 		{
 			PrintCallerTag(callerName, callerLine);
-			Exception((e as System.Exception), LogTypes.ERROR);
+			Exception((e as Exception), LogTypes.ERROR);
 		}
 
 		public static void DebugLogExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
 		{
 			PrintCallerTag(callerName, callerLine);
-			Exception((e as System.Exception), LogTypes.DEBUG_LOG);
+			Exception((e as Exception), LogTypes.DEBUG_LOG);
 		}
 
 		public static void DebugWarningExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
 		{
 			PrintCallerTag(callerName, callerLine);
-			Exception((e as System.Exception), LogTypes.DEBUG_WARNING);
+			Exception((e as Exception), LogTypes.DEBUG_WARNING);
 		}
 
 		public static void DebugErrorExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
 		{
 			PrintCallerTag(callerName, callerLine);
-			Exception((e as System.Exception), LogTypes.DEBUG_ERROR);
+			Exception((e as Exception), LogTypes.DEBUG_ERROR);
 		}
 
 		public static void Log(string msg, Color? textcolor = null)
@@ -269,10 +269,10 @@
 
 			PrintLine(); // Basically an easy way to newline
 
-			var message = (e as System.Exception).Message;
-			var stackTrace = (e as System.Exception).StackTrace;
-			var targetSite = (e as System.Exception).TargetSite;
-			var source = (e as System.Exception).Source;
+			var message = (e as Exception).Message;
+			var stackTrace = (e as Exception).StackTrace;
+			var targetSite = (e as Exception).TargetSite;
+			var source = (e as Exception).Source;
 
 			PrintCallerTag(callerName, callerLine);
 			PrintLine(); // Basically an easy way to newline

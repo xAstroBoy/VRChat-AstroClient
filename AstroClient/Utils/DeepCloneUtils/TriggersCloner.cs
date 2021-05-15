@@ -9,8 +9,8 @@
 	{
 		public static void CloneVRC2SDKTrigger(GameObject OrigObj, GameObject DisplayObj, string InteractText)
 		{
-			var DeleteTrigger = DisplayObj.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
-			var WorkingTrigger = OrigObj.GetComponentInChildren<VRCSDK2.VRC_Trigger>(true);
+			var DeleteTrigger = DisplayObj.GetComponentInChildren<VRC_Trigger>(true);
+			var WorkingTrigger = OrigObj.GetComponentInChildren<VRC_Trigger>(true);
 			VRC_Trigger Cloned_trigger = null;
 
 			if (DeleteTrigger != null)
@@ -19,7 +19,7 @@
 			}
 			if (WorkingTrigger != null)
 			{
-				Cloned_trigger = DisplayObj.AddComponent<VRCSDK2.VRC_Trigger>().GetCopyOf(WorkingTrigger);
+				Cloned_trigger = DisplayObj.AddComponent<VRC_Trigger>().GetCopyOf(WorkingTrigger);
 				if (Cloned_trigger != null)
 				{
 					Cloned_trigger.interactText = "[AstroClient]: " + InteractText;

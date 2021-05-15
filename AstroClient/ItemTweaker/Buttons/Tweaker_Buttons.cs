@@ -249,9 +249,9 @@
 			{
 				if (obj == Tweaker_Object.CurrentSelectedObject)
 				{
-					var pickup1 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
+					var pickup1 = obj.GetComponent<VRC_Pickup>();
 					var pickup2 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
-					var pickup3 = obj.GetComponent<VRC.SDK3.Components.VRCPickup>();
+					var pickup3 = obj.GetComponent<VRCPickup>();
 					if (pickup1 == null && pickup2 == null && pickup3 == null)
 					{
 						if (HasPickupComponent != null)
@@ -348,13 +348,13 @@
 			});
 		}
 
-		public static List<VRC.SDKBase.VRC_Trigger> GetObjectTriggers(GameObject obj)
+		public static List<VRC_Trigger> GetObjectTriggers(GameObject obj)
 		{
-			var ContainedTriggers = new List<VRC.SDKBase.VRC_Trigger>();
+			var ContainedTriggers = new List<VRC_Trigger>();
 
 			if (obj != null)
 			{
-				var list = obj.GetComponentsInChildren<VRC.SDKBase.VRC_Trigger>(true);
+				var list = obj.GetComponentsInChildren<VRC_Trigger>(true);
 				var list2 = obj.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true);
 				if (list.Count() != 0)
 				{
@@ -418,7 +418,7 @@
 				try
 				{
 					var VRC_Interactables = new List<GameObject>();
-					var list1 = obj.GetComponentsInChildren<VRC.SDKBase.VRC_Interactable>(true);
+					var list1 = obj.GetComponentsInChildren<VRC_Interactable>(true);
 					var list2 = obj.GetComponentsInChildren<VRCSDK2.VRC_Interactable>(true);
 					var list3 = obj.GetComponentsInChildren<VRCInteractable>(true);
 					if (list1.Count() != 0)

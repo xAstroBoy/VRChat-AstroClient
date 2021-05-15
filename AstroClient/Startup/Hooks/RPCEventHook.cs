@@ -66,14 +66,7 @@
 				if (__1.ParameterBytes != null && __1.ParameterBytes.Count != 0)
 				{
 					actionstring = System.Text.Encoding.UTF8.GetString(__1.ParameterBytes);
-					if (actionstring.Length >= 6)
-					{
-						actiontext = actionstring.Substring(6);
-					}
-					else
-					{
-						actiontext = "Unknown Event";
-					}
+					actiontext = actionstring.Length >= 6 ? actionstring.Substring(6) : "Unknown Event";
 				}
 				else
 				{
@@ -85,41 +78,11 @@
 				return true;
 			}
 
-			if (__1.ParameterObject != null)
-			{
-				name = __1.ParameterObject.name;
-			}
-			else
-			{
-				name = "null";
-			}
+			name = __1.ParameterObject != null ? __1.ParameterObject.name : "null";
+			parameter = __1.ParameterString != null ? __1.ParameterString : "null";
+			eventtype = __1.EventType != null ? __1.EventType.ToString() : "null";
+			broadcasttype = __2 != null ? __2.ToString() : "Null";
 
-			if (__1.ParameterString != null)
-			{
-				parameter = __1.ParameterString;
-			}
-			else
-			{
-				parameter = "null";
-			}
-
-			if (__1.EventType != null)
-			{
-				eventtype = __1.EventType.ToString();
-			}
-			else
-			{
-				eventtype = "null";
-			}
-
-			if (__2 != null)
-			{
-				broadcasttype = __2.ToString();
-			}
-			else
-			{
-				broadcasttype = "Null";
-			}
 			bool log = ConfigManager.General.LogRPCEvents;
 
 			if (name.Equals("USpeak"))
@@ -132,24 +95,11 @@
 			//	log = true;
 			//}
 
-			if (__1.ParameterObject != null)
-			{
-				GameObjName = __1.ParameterObject.name;
-			}
-			else
-			{
-				GameObjName = "null";
-			}
+			GameObjName = __1.ParameterObject != null ? __1.ParameterObject.name : "null";
+
 			if (__0 != null)
 			{
-				if (__0.GetAPIUser() != null)
-				{
-					sender = __0.GetAPIUser().displayName;
-				}
-				else
-				{
-					sender = "null";
-				}
+				sender = __0.GetAPIUser() != null ? __0.GetAPIUser().displayName : "null";
 			}
 			else
 			{

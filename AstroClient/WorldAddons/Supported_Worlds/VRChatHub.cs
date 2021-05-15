@@ -290,17 +290,17 @@
 			};
 		}
 
-		public override void VRC_EventDispatcherRFC_triggerEvent(VRC_EventHandler EventHandler, VRC_EventHandler.VrcEvent VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int value, float floatvalue)
+		public override void VRC_EventDispatcherRFC_triggerEvent(VRC_EventHandler EventHandler, VrcEvent VrcEvent, VrcBroadcastType VrcBroadcastType, int value, float floatvalue)
 		{
 			HubObjectPatcher(EventHandler, VrcEvent);
 			UpdateVariablesHub(EventHandler, VrcEvent);
 		}
 
-		public static void HubObjectPatcher(VRC_EventHandler EventHandler, VRC_EventHandler.VrcEvent VrcEvent)
+		public static void HubObjectPatcher(VRC_EventHandler EventHandler, VrcEvent VrcEvent)
 		{
 			if (EventHandler != null && VrcEvent != null)
 			{
-				if (EventHandler.ToString() != GetSelfVRCPlayerApi().displayName && EventHandler.ToString() != AstroClient.variables.Strings.AstroClientAuthor || IgnoreSelf)
+				if ((EventHandler.ToString() != GetSelfVRCPlayerApi().displayName && EventHandler.ToString() != AstroClient.variables.Strings.AstroClientAuthor) || IgnoreSelf)
 				{
 					if (IsHubButtonLocked)
 					{
@@ -360,7 +360,7 @@
 			}
 		}
 
-		public static void UpdateVariablesHub(VRC_EventHandler EventHandler, VRC_EventHandler.VrcEvent VrcEvent)
+		public static void UpdateVariablesHub(VRC_EventHandler EventHandler, VrcEvent VrcEvent)
 		{
 			if (EventHandler != null && VrcEvent != null)
 			{

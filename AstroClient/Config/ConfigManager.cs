@@ -26,7 +26,7 @@
 
 		public static ConfigFlight Flight = new ConfigFlight();
 
-		public static UnityEngine.Color PublicESPColor
+		public static Color PublicESPColor
 		{
 			get
 			{
@@ -41,7 +41,7 @@
 			}
 		}
 
-		public static UnityEngine.Color ESPFriendColor
+		public static Color ESPFriendColor
 		{
 			get
 			{

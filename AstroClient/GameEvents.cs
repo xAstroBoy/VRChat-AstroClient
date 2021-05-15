@@ -135,11 +135,11 @@
 		{
 		}
 
-		public virtual void OnPlayerLeft(VRC.Player player)
+		public virtual void OnPlayerLeft(Player player)
 		{
 		}
 
-		public virtual void OnPlayerJoined(VRC.Player player)
+		public virtual void OnPlayerJoined(Player player)
 		{
 		}
 
@@ -159,7 +159,7 @@
 		{
 		}
 
-		public virtual void OnAvatarSpawn(GameObject avatar, VRC.SDKBase.VRC_AvatarDescriptor DescriptorObj, bool state)
+		public virtual void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
 		{
 		}
 

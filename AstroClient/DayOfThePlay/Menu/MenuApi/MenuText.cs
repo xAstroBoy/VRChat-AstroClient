@@ -9,7 +9,7 @@
 	{
 		public MenuText(QMNestedButton menuBase, float posx, float poxy, string text)
 		{
-			menuTitle = UnityEngine.Object.Instantiate<GameObject>(QuickMenuStuff.GetQuickMenuInstance().transform.Find("ShortcutMenu/EarlyAccessText").gameObject, menuBase.getBackButton().getGameObject().transform.parent);
+			menuTitle = UnityEngine.Object.Instantiate(QuickMenuStuff.GetQuickMenuInstance().transform.Find("ShortcutMenu/EarlyAccessText").gameObject, menuBase.getBackButton().getGameObject().transform.parent);
 			menuTitle.GetComponent<Text>().fontStyle = FontStyle.Normal;
 			menuTitle.GetComponent<Text>().alignment = TextAnchor.MiddleLeft;
 			menuTitle.GetComponent<Text>().text = text;
@@ -23,7 +23,7 @@
 
 		public MenuText(string MenuName, float posx, float poxy, string text)
 		{
-			menuTitle = UnityEngine.Object.Instantiate<GameObject>(Utils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, Utils.QuickMenu.transform.Find(MenuName));
+			menuTitle = UnityEngine.Object.Instantiate(Utils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, Utils.QuickMenu.transform.Find(MenuName));
 			menuTitle.GetComponent<Text>().fontStyle = FontStyle.Normal;
 			menuTitle.GetComponent<Text>().alignment = TextAnchor.MiddleLeft;
 			menuTitle.GetComponent<Text>().text = text;
@@ -37,7 +37,7 @@
 
 		public MenuText(Transform parent, float posx, float poxy, string text)
 		{
-			menuTitle = UnityEngine.Object.Instantiate<GameObject>(Utils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, parent);
+			menuTitle = UnityEngine.Object.Instantiate(Utils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, parent);
 			menuTitle.GetComponent<Text>().fontStyle = FontStyle.Normal;
 			menuTitle.GetComponent<Text>().alignment = TextAnchor.MiddleLeft;
 			menuTitle.GetComponent<Text>().text = text;
@@ -51,7 +51,7 @@
 
 		public MenuText(Transform parent, float posx, float poxy, string text, int size)
 		{
-			menuTitle = UnityEngine.Object.Instantiate<GameObject>(Utils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, parent);
+			menuTitle = UnityEngine.Object.Instantiate(Utils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, parent);
 			menuTitle.name = text;
 			menuTitle.GetComponent<Text>().fontStyle = FontStyle.Normal;
 			menuTitle.GetComponent<Text>().alignment = TextAnchor.MiddleLeft;
