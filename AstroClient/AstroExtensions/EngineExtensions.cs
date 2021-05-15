@@ -2,11 +2,12 @@
 {
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.Cloner;
-	using AstroLibrary.Console;
 	using AstroClient.Finder;
 	using AstroClient.ItemTweaker;
 	using AstroClient.Startup;
+	using AstroLibrary.Console;
 	using DayClientML2.Utility;
+	using System.Collections.Generic;
 	using System.Windows.Forms;
 	using UnityEngine;
 	using VRC.SDKBase;
@@ -132,29 +133,29 @@
 				{
 					var item = obj as Component;
 					if (item != null)
-						{
-							UnityEngine.Object.DestroyImmediate(item);
-						}
-						if (item != null)
-						{
-							ModConsole.DebugError($"Failed To Destroy Object {typename} Contained in {objname}");
-						}
-						else
-						{
-							ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
-						}
-					
+					{
+						UnityEngine.Object.DestroyImmediate(item);
+					}
+					if (item != null)
+					{
+						ModConsole.DebugError($"Failed To Destroy Object {typename} Contained in {objname}");
+					}
+					else
+					{
+						ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+					}
+
 					return;
 				}
 				else if (obj is GameObject)
 				{
-
 					var item = obj as GameObject;
 					if (item != null)
 					{
 						UnityEngine.Object.Destroy(item);
 					}
-					MiscUtility.DelayFunction(0.5f, () => {
+					MiscUtility.DelayFunction(0.5f, () =>
+					{
 						if (item != null)
 						{
 							ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
@@ -167,7 +168,6 @@
 				}
 				else if (obj is Transform)
 				{
-
 					var item = obj as Transform;
 					if (item != null)
 					{
@@ -227,6 +227,62 @@
 			if (ItemTweakerMain.ObjectActiveToggle != null)
 			{
 				ItemTweakerMain.ObjectActiveToggle.setToggleState(obj.active);
+			}
+		}
+
+
+		public static List<Transform> Get_Childs(this Transform obj)
+		{
+			List<Transform> childs = new List<Transform>();
+			for (var i = 0; i < obj.childCount; i++)
+			{
+				var item = obj.GetChild(i);
+				if (item != null)
+				{
+					if(!childs.Contains(item))
+					{
+						childs.Add(item);
+					}
+				}
+			}
+			return childs;
+		}
+
+		public static List<Transform> Get_All_Childs(this Transform item)
+		{
+			CheckTransform(item);
+			return _Transforms;
+		}
+
+		private static List<Transform> _Transforms;
+
+		//Recursive
+		private static void CheckTransform(Transform transform)
+		{
+			_Transforms = new List<Transform>();
+
+			//MelonLoader.MelonLogger.ModConsole.Log("Debug: Start CheckTransform Recursive Checker");
+			if (transform == null)
+			{
+				ModConsole.Log("Debug: CheckTransform transform is null");
+				return;
+			}
+
+			GetChildren(transform);
+		}
+
+		private static void GetChildren(Transform transform)
+		{
+			//MelonLogger.ModConsole.Log("Debug: GetChildren current transform: " + transform.gameObject.name);
+
+			if (!_Transforms.Contains(transform))
+			{
+				_Transforms.Add(transform);
+			}
+
+			for (var i = 0; i < transform.childCount; i++)
+			{
+				GetChildren(transform.GetChild(i));
 			}
 		}
 	}

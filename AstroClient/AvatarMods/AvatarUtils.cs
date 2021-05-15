@@ -1,6 +1,8 @@
 ﻿namespace AstroClient.AvatarMods
 {
 	using AstroClient.Finder;
+	using AstroClient.AstroExtensions;
+	using Extensions;
 	using AstroLibrary.Console;
 	using DayClientML2.Utility.Extensions;
 	using System.Collections.Generic;
@@ -29,16 +31,23 @@
 		public static List<Transform> AvatarParents(Transform avatar, Transform Armature, Transform Body)
 		{
 			List<Transform> AllChilds = new List<Transform>();
-			foreach (var item in avatar.GetComponents<Transform>())
+			foreach (var item in avatar.Get_Childs())
 			{
-				if (item == Armature || item == avatar || item == Body)
+				if (item != null)
 				{
-					continue;
-				}
+					if (item == Armature || item == avatar || item == Body)
+					{
+						continue;
+					}
+					if (item.IsChildOf(Armature))
+					{
+						continue;
+					}
 
-				if (!AllChilds.Contains(item))
-				{
-					AllChilds.Add(item);
+					if (!AllChilds.Contains(item))
+					{
+						AllChilds.Add(item);
+					}
 				}
 			}
 			return AllChilds;
@@ -74,6 +83,38 @@
 				}
 			}
 		}
+
+		public static void Avatar_MeshRenderer_Dumper(this Player player)
+		{
+			if (player != null)
+			{
+				var body = player.gameObject.transform.Get_Body();
+				var Avatar = player.gameObject.transform.Get_Avatar();
+				var Armature = player.gameObject.transform.Get_Armature();
+				if (body != null && Avatar != null && Armature != null)
+				{
+					var parents = AvatarParents(Avatar, Armature, body);
+					if (parents.Count() != 0)
+					{
+						ModConsole.Log("[AVATAR MESHRENDERER DUMPER] : Dumping All Renderers of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
+						ModConsole.Log("[AVATAR MESHRENDERER DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
+						ModConsole.Log("Dumping Mesh Renderers names ...", Color.Green);
+						foreach (var item in parents)
+						{
+							foreach (var name in Dump_Renderers(item))
+							{
+								ModConsole.Log("Found Mesh Renderer [ " + name + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
+							}
+						}
+					}
+					else
+					{
+						ModConsole.Log("[AVATAR MESHRENDERER DUMPER] : No Renderers Found.", Color.Green);
+					}
+				}
+			}
+		}
+
 
 		public static void Avatar_Transform_Dumper(this Player player)
 		{
@@ -111,11 +152,16 @@
 				var Armature = player.gameObject.transform.Get_Armature();
 				if (body != null && Avatar != null && Armature != null)
 				{
+					ModConsole.Log("[AVATAR MATERIAL DUMPER] : Dumping All Materials of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
+					ModConsole.Log("[AVATAR MATERIAL DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
+					ModConsole.Log("[AVATAR MATERIAL DUMPER] : Dumping Body Materials..", Color.Green);
+					foreach (var item in Dump_Materials(body))
+					{
+						ModConsole.Log("Found Material [ " + item + " ] in " + player.DisplayName() + "'s avatar Body", Color.Yellow);
+					}
 					var parents = AvatarParents(Avatar, Armature, body);
 					if (parents.Count() != 0)
 					{
-						ModConsole.Log("[AVATAR MATERIAL DUMPER] : Dumping All Materials of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
-						ModConsole.Log("[AVATAR MATERIAL DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
 						ModConsole.Log("Dumping Materials names ...", Color.Green);
 						foreach (var child in parents)
 						{
@@ -124,10 +170,7 @@
 								ModConsole.Log("Found Material [ " + item + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
 							}
 						}
-						foreach (var item in Dump_Materials(body))
-						{
-							ModConsole.Log("Found Material [ " + item + " ] in " + player.DisplayName() + "'s avatar Body", Color.Yellow);
-						}
+
 					}
 				}
 			}
@@ -139,26 +182,15 @@
 			if (item != null)
 			{
 				var TransformRenderers = item.GetComponentsInChildren<Renderer>(true);
-				var GameObjectRenderers = item.GetComponentsInChildren<Renderer>(true);
-				if (GameObjectRenderers == null || TransformRenderers == null)
+				if (TransformRenderers == null)
 				{
 					return dumpednames;
 				}
-				if (TransformRenderers.Count() == 0 || GameObjectRenderers.Count() == 0)
+				if (TransformRenderers.Count() == 0)
 				{
 					return dumpednames;
 				}
 				foreach (var obj in TransformRenderers)
-				{
-					if (obj != null)
-					{
-						if (!dumpednames.Contains(obj.name))
-						{
-							dumpednames.Add(obj.name);
-						}
-					}
-				}
-				foreach (var obj in GameObjectRenderers)
 				{
 					if (obj != null)
 					{
@@ -172,18 +204,18 @@
 			return dumpednames;
 		}
 
-		public static List<string> Dump_Materials(this Transform item)
+
+		public static List<string> Dump_Mesh_Renderers(this Transform item)
 		{
 			var dumpednames = new List<string>();
 			if (item != null)
 			{
-				var TransformRenderers = item.GetComponentsInChildren<Renderer>(true);
-				var GameObjectRenderers = item.GetComponentsInChildren<Renderer>(true);
-				if (GameObjectRenderers == null || TransformRenderers == null)
+				var TransformRenderers = item.GetComponentsInChildren<MeshRenderer>(true);
+				if (TransformRenderers == null)
 				{
 					return dumpednames;
 				}
-				if (TransformRenderers.Count() == 0 || GameObjectRenderers.Count() == 0)
+				if (TransformRenderers.Count() == 0)
 				{
 					return dumpednames;
 				}
@@ -191,13 +223,33 @@
 				{
 					if (obj != null)
 					{
-						if (!dumpednames.Contains(obj.material.name))
+						if (!dumpednames.Contains(obj.name))
 						{
-							dumpednames.Add(obj.material.name);
+							dumpednames.Add(obj.name);
 						}
 					}
 				}
-				foreach (var obj in GameObjectRenderers)
+			}
+			return dumpednames;
+		}
+
+
+		public static List<string> Dump_Materials(this Transform item)
+		{
+			var dumpednames = new List<string>();
+			if (item != null)
+			{
+				var TransformRenderers = item.GetComponentsInChildren<Renderer>(true);
+
+				if (TransformRenderers == null)
+				{
+					return dumpednames;
+				}
+				if (TransformRenderers.Count() == 0)
+				{
+					return dumpednames;
+				}
+				foreach (var obj in TransformRenderers)
 				{
 					if (obj != null)
 					{
