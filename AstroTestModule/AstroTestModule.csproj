@@ -657,10 +657,12 @@
     <ProjectReference Include="..\AstroClientCore\AstroClientCore.csproj">
       <Project>{02AADCAD-17DF-4909-B898-BCE001D9CAC8}</Project>
       <Name>AstroClientCore</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\AstroLibrary\AstroLibrary.csproj">
       <Project>{4613C712-5463-44C6-AB48-081A2B3AE61D}</Project>
       <Name>AstroLibrary</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
