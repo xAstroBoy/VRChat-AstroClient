@@ -1,7 +1,7 @@
 ﻿namespace AstroTestModule
 {
-	using AstroClientCore.Console;
 	using AstroLibrary;
+	using AstroLibrary.Console;
 
 	public class TestModule : BaseModule
 	{
