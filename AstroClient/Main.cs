@@ -139,7 +139,7 @@
 			if (KeyManager.IsAuthed == true)
 			{
 				QuickMenuUtils.SetQuickMenuCollider(5, 5);
-				UserInteractMenuBtns.InitButtons(1, 3, false); //UserMenu Main Button
+				UserInteractMenuBtns.InitButtons(1, 3, true); //UserMenu Main Button
 
 				InitMainsButtons(5, 0, true);
 				ItemTweakerMain.InitButtons(5, 0.5f, true); //ItemTweaker Main Button
@@ -168,7 +168,7 @@
 				ExploitsMenu.InitButtons(AstroClient, 1, 0, true);
 				WorldsCheats.InitButtons(AstroClient, 1, 0, true);
 				LightControl.InitButtons(AstroClient, 1, 0.5f, true);
-				AvatarModifier.InitButtons(AstroClient, 1, 1, true);
+				AvatarModifier.InitQMMenu(AstroClient, 1, 1, true);
 				GameObjectUtils.InitButtons(AstroClient, 1, 1.5f, true);
 				EmojiUtils.InitButton(AstroClient, 1, 2, true);
 				if (Bools.IsDeveloper)

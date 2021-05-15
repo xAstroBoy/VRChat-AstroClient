@@ -53,11 +53,11 @@
 				var Armature = player.gameObject.transform.Get_Armature();
 				if (body != null && Avatar != null && Armature != null)
 				{
-					ModConsole.Log("[AVATAR RENDERER DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
 					var parents = AvatarParents(Avatar, Armature, body);
 					if (parents.Count() != 0)
 					{
 						ModConsole.Log("[AVATAR RENDERER DUMPER] : Dumping All Renderers of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
+						ModConsole.Log("[AVATAR RENDERER DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
 						ModConsole.Log("Dumping Renderers names ...", Color.Green);
 						foreach (var item in parents)
 						{
@@ -69,7 +69,7 @@
 					}
 					else
 					{
-						ModConsole.Log("[AVATAR RENDERER DUMPER] : No Materials Found.", Color.Green);
+						ModConsole.Log("[AVATAR RENDERER DUMPER] : No Renderers Found.", Color.Green);
 					}
 				}
 			}
@@ -84,12 +84,11 @@
 				var Armature = player.gameObject.transform.Get_Armature();
 				if (body != null && Avatar != null && Armature != null)
 				{
-					ModConsole.Log("[AVATAR TRANSFORM DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
-					var dumpednames = new List<string>();
 					var parents = AvatarParents(Avatar, Armature, body);
 					if (parents.Count() != 0)
 					{
 						ModConsole.Log("[AVATAR TRANSFORM DUMPER] : Dumping All Transforms of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
+						ModConsole.Log("[AVATAR TRANSFORM DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
 						ModConsole.Log("Dumping Transforms names ...", Color.Green);
 						foreach (var child in parents)
 						{
@@ -98,10 +97,6 @@
 								ModConsole.Log("Found Transform [ " + item + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
 							}
 						}
-					}
-					else
-					{
-						ModConsole.Log("[AVATAR TRANSFORM DUMPER] : No Materials Found.", Color.Green);
 					}
 				}
 			}
@@ -116,11 +111,11 @@
 				var Armature = player.gameObject.transform.Get_Armature();
 				if (body != null && Avatar != null && Armature != null)
 				{
-					ModConsole.Log("[AVATAR MATERIAL DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
 					var parents = AvatarParents(Avatar, Armature, body);
 					if (parents.Count() != 0)
 					{
 						ModConsole.Log("[AVATAR MATERIAL DUMPER] : Dumping All Materials of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
+						ModConsole.Log("[AVATAR MATERIAL DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
 						ModConsole.Log("Dumping Materials names ...", Color.Green);
 						foreach (var child in parents)
 						{
