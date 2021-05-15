@@ -3,7 +3,7 @@
 	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroClient.components;
 	using AstroLibrary.Console;
-	using AstroClient.extensions;
+	using AstroClient.Extensions;
 	using AstroClient.Finder;
 	using AstroClient.UdonExploits;
 	using AstroClient.Variables;

@@ -1,4 +1,4 @@
-﻿namespace AstroClient.extensions
+﻿namespace AstroClient.Extensions
 {
 	using AstroClient.AstroUtils.ItemTweaker;
 	using System.Collections.Generic;

@@ -2,7 +2,7 @@
 {
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroLibrary.Console;
-	using AstroClient.extensions;
+	using AstroClient.Extensions;
 	using AstroClient.ItemTweaker;
 	using UnityEngine;
 	using static AstroClient.variables.GlobalLists;

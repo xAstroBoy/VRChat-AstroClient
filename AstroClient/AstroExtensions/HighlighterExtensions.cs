@@ -1,4 +1,4 @@
-﻿namespace AstroClient.extensions
+﻿namespace AstroClient.Extensions
 {
 	using AstroClient.components;
 	using UnityEngine;

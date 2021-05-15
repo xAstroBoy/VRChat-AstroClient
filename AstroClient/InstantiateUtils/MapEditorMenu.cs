@@ -8,7 +8,7 @@
 	using System.Text;
 	using System.Threading.Tasks;
 	using UnityEngine;
-	using AstroClient.extensions;
+	using AstroClient.Extensions;
 	using AstroExtensions;
 
 	public static class MapEditorMenu

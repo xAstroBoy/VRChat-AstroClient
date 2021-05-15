@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.AvatarMods
 {
-	using AstroClient.extensions;
+	using AstroClient.Extensions;
 	using Photon.Realtime;
 	using RubyButtonAPI;
 	using System;

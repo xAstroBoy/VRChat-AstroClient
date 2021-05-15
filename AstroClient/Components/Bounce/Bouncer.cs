@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.components
 {
 	using AstroLibrary.Console;
-	using AstroClient.extensions;
+	using AstroClient.Extensions;
 	using DayClientML2.Utility;
 	using System;
 	using UnhollowerBaseLib.Attributes;

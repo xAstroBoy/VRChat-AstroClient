@@ -3,7 +3,7 @@
 	#region Imports
 
 	using AstroLibrary.Console;
-	using AstroClient.extensions;
+	using AstroClient.Extensions;
 	using UnityEngine;
 	using VRC;
 	using VRC.SDKBase;

@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.AstroUtils.PlayerMovement
 {
-	using AstroClient.extensions;
+	using AstroClient.Extensions;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;

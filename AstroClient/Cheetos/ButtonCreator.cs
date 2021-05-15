@@ -1,6 +1,6 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.extensions;
+	using AstroClient.Extensions;
 	using TMPro;
 	using UnityEngine;
 

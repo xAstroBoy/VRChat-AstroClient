@@ -3,7 +3,7 @@
 	#region Imports
 
 	using AstroClient.components;
-	using AstroClient.extensions;
+	using AstroClient.Extensions;
 	using AstroClient.Extensions;
 	using AstroClient.GameObjectDebug;
 	using AstroClient.ItemTweaker;

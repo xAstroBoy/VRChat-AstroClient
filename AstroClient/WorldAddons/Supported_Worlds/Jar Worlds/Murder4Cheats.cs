@@ -2,7 +2,7 @@
 {
 	using AstroClient.components;
 	using AstroLibrary.Console;
-	using AstroClient.extensions;
+	using AstroClient.Extensions;
 	using AstroClient.Finder;
 	using AstroClient.Startup.Buttons;
 	using AstroClient.UdonExploits;

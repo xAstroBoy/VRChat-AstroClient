@@ -10,7 +10,7 @@
 	using System.Threading.Tasks;
 	using UnityEngine;
 	using AstroExtensions;
-	using AstroClient.extensions;
+	using AstroClient.Extensions;
 
 	public class PrefabLoader : GameEvents
 	{

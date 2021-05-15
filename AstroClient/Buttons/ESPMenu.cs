@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
 	using AstroClient.components;
-	using AstroClient.extensions;
+	using AstroClient.Extensions;
 	using RubyButtonAPI;
 	using System;
 	using UnityEngine;

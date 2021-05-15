@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Headlight
 {
 	using AstroLibrary.Console;
-	using AstroClient.extensions;
+	using AstroClient.Extensions;
 	using RubyButtonAPI;
 	using System;
 	using System.Windows.Forms;
