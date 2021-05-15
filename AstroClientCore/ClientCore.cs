@@ -13,7 +13,7 @@
 	{
 		public override void OnApplicationStart()
 		{
-			ModConsole.ModName = "AstroClient-Core";
+			ModConsole.ModName = "AstroClient";
 			ModConsole.Log($"Welcome to AstroClient, {GlobalVariables.Version}");
 
 			ModuleManager.LoadModules();
