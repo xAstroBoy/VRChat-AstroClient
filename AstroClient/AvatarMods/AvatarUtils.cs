@@ -1,34 +1,27 @@
 ﻿namespace AstroClient.AvatarMods
 {
-	using System;
+	using AstroClient.Finder;
+	using AstroLibrary.Console;
+	using DayClientML2.Utility.Extensions;
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using UnityEngine;
-	using AstroClient.AstroExtensions;
-	using AstroExtensions;
-	using DayClientML2.Utility.Extensions;
-	using AstroClient.Finder;
 	using VRC;
 	using Color = System.Drawing.Color;
-	using AstroLibrary.Console;
 
 	public static class AvatarUtils
 	{
-
-		public static Transform GetAvatar(this Transform obj)
+		public static Transform Get_Avatar(this Transform obj)
 		{
 			return obj.FindObject("ForwardDirection/Avatar");
 		}
 
-
-		public static Transform GetArmature(this Transform obj)
+		public static Transform Get_Armature(this Transform obj)
 		{
 			return obj.FindObject("ForwardDirection/Avatar/Armature");
 		}
 
-		public static Transform GetBody(this Transform obj)
+		public static Transform Get_Body(this Transform obj)
 		{
 			return obj.FindObject("ForwardDirection/Avatar/Body");
 		}
@@ -50,13 +43,14 @@
 			}
 			return AllChilds;
 		}
-		public static void AvatarRendererDumper(this Player player)
+
+		public static void Avatar_Renderer_Dumper(this Player player)
 		{
 			if (player != null)
 			{
-				var body = player.gameObject.transform.GetBody();
-				var Avatar = player.gameObject.transform.GetAvatar();
-				var Armature = player.gameObject.transform.GetArmature();
+				var body = player.gameObject.transform.Get_Body();
+				var Avatar = player.gameObject.transform.Get_Avatar();
+				var Armature = player.gameObject.transform.Get_Armature();
 				if (body != null && Avatar != null && Armature != null)
 				{
 					ModConsole.Log("[AVATAR RENDERER DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
@@ -76,12 +70,73 @@
 					else
 					{
 						ModConsole.Log("[AVATAR RENDERER DUMPER] : No Materials Found.", Color.Green);
-
 					}
 				}
 			}
 		}
 
+		public static void Avatar_Transform_Dumper(this Player player)
+		{
+			if (player != null)
+			{
+				var body = player.gameObject.transform.Get_Body();
+				var Avatar = player.gameObject.transform.Get_Avatar();
+				var Armature = player.gameObject.transform.Get_Armature();
+				if (body != null && Avatar != null && Armature != null)
+				{
+					ModConsole.Log("[AVATAR TRANSFORM DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
+					var dumpednames = new List<string>();
+					var parents = AvatarParents(Avatar, Armature, body);
+					if (parents.Count() != 0)
+					{
+						ModConsole.Log("[AVATAR TRANSFORM DUMPER] : Dumping All Transforms of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
+						ModConsole.Log("Dumping Transforms names ...", Color.Green);
+						foreach (var child in parents)
+						{
+							foreach (var item in Dump_Transforms(child))
+							{
+								ModConsole.Log("Found Transform [ " + item + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
+							}
+						}
+					}
+					else
+					{
+						ModConsole.Log("[AVATAR TRANSFORM DUMPER] : No Materials Found.", Color.Green);
+					}
+				}
+			}
+		}
+
+		public static void Avatar_Material_Dumper(this Player player)
+		{
+			if (player != null)
+			{
+				var body = player.gameObject.transform.Get_Body();
+				var Avatar = player.gameObject.transform.Get_Avatar();
+				var Armature = player.gameObject.transform.Get_Armature();
+				if (body != null && Avatar != null && Armature != null)
+				{
+					ModConsole.Log("[AVATAR MATERIAL DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
+					var parents = AvatarParents(Avatar, Armature, body);
+					if (parents.Count() != 0)
+					{
+						ModConsole.Log("[AVATAR MATERIAL DUMPER] : Dumping All Materials of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
+						ModConsole.Log("Dumping Materials names ...", Color.Green);
+						foreach (var child in parents)
+						{
+							foreach (var item in Dump_Materials(child))
+							{
+								ModConsole.Log("Found Material [ " + item + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
+							}
+						}
+						foreach (var item in Dump_Materials(body))
+						{
+							ModConsole.Log("Found Material [ " + item + " ] in " + player.DisplayName() + "'s avatar Body", Color.Yellow);
+						}
+					}
+				}
+			}
+		}
 
 		public static List<string> Dump_Renderers(this Transform item)
 		{
@@ -122,7 +177,6 @@
 			return dumpednames;
 		}
 
-
 		public static List<string> Dump_Materials(this Transform item)
 		{
 			var dumpednames = new List<string>();
@@ -162,67 +216,51 @@
 			return dumpednames;
 		}
 
-
-
-		public static void AvatarMaterialDumper(this Player player)
+		public static List<string> Dump_Transforms(this Transform item)
 		{
-			if (player != null)
+			var dumpednames = new List<string>();
+			if (item != null)
 			{
-				var body = player.gameObject.transform.GetBody();
-				var Avatar = player.gameObject.transform.GetAvatar();
-				var Armature = player.gameObject.transform.GetArmature();
-				if (body != null && Avatar != null && Armature != null)
+				var childs = item.GetComponentsInChildren<Transform>(true);
+				if (childs == null)
 				{
-					ModConsole.Log("[AVATAR MATERIAL DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
-					var dumpednames = new List<string>();
-					var parents = AvatarParents(Avatar, Armature, body);
-					if (parents.Count() != 0)
+					return dumpednames;
+				}
+				if (childs.Count() == 0)
+				{
+					return dumpednames;
+				}
+				foreach (var obj in childs)
+				{
+					if (obj != null)
 					{
-						ModConsole.Log("[AVATAR MATERIAL DUMPER] : Dumping All Materials of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
-						ModConsole.Log("Dumping Materials names ...", Color.Green);
-						foreach (var child in parents)
+						if (!dumpednames.Contains(obj.name))
 						{
-							foreach (var item in Dump_Materials(child))
-							{
-								ModConsole.Log("Found Material [ " + item + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
-							}
+							dumpednames.Add(obj.name);
 						}
-						foreach (var item in Dump_Materials(body))
-						{
-							ModConsole.Log("Found Material [ " + item + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
-						}
-					}
-					else
-					{
-						ModConsole.Log("[AVATAR MATERIAL DUMPER] : No Materials Found.", Color.Green);
-
 					}
 				}
 			}
+			return dumpednames;
 		}
 
-		public static void ReloadAllAvatars()
+		public static void Reload_All_Avatars()
 		{
-			if (VRCPlayer.field_Internal_Static_VRCPlayer_0 == null)
-			{
-				return;
-			}
-			foreach (var player in PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0)
+			foreach (var player in WorldUtils.Get_Players())
 			{
 				if (player != null && player.GetVRCPlayer() != null)
 				{
-					ReloadAvatar(player.GetVRCPlayer());
+					Reload_Avatars(player.GetVRCPlayer());
 				}
 			}
 		}
 
-		public static void ReloadAvatar(VRCPlayer player)
+		public static void Reload_Avatars(VRCPlayer player)
 		{
-			if (VRCPlayer.field_Internal_Static_VRCPlayer_0 != null && player != null)
+			if (player != null)
 			{
 				player.Method_Public_Void_Boolean_0();
 			}
 		}
-
 	}
 }

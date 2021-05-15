@@ -95,7 +95,7 @@
 
 		public static void AddESPToVRCInteractables()
 		{
-			var items = WorldUtils.GetAllVRCInteractables();
+			var items = WorldUtils.Get_VRCInteractables();
 			foreach (var item in items)
 			{
 				if (item != null)
@@ -112,7 +112,7 @@
 
 		public static void RemoveESPToVRCInteractables()
 		{
-			var items = WorldUtils.GetAllVRCInteractables();
+			var items = WorldUtils.Get_VRCInteractables();
 			foreach (var item in items)
 			{
 				var ESP = item.GetComponent<ESP_VRCInteractable>();
@@ -154,7 +154,7 @@
 
 		private static void AddESPToPickups()
 		{
-			var items = WorldUtils.GetPickups();
+			var items = WorldUtils.Get_Pickups();
 			foreach (var item in items)
 			{
 				if (item != null)
@@ -170,7 +170,7 @@
 
 		private static void RemoveESPToPickups()
 		{
-			var items = WorldUtils.GetPickups();
+			var items = WorldUtils.Get_Pickups();
 			foreach (var item in items)
 			{
 				var ESP = item.GetComponent<ESP_Pickup>();
@@ -212,7 +212,7 @@
 
 		private static void AddESPToTriggers()
 		{
-			var items = WorldUtils.GetTriggers();
+			var items = WorldUtils.Get_Triggers();
 			foreach (var item in items)
 			{
 				if (item != null)
@@ -268,7 +268,7 @@
 
 		private static void RemoveESPToTriggers()
 		{
-			var items = WorldUtils.GetTriggers();
+			var items = WorldUtils.Get_Triggers();
 			foreach (var item in items)
 			{
 				var ESP = item.GetComponent<ESP_Trigger>();
@@ -327,7 +327,7 @@
 
 		private static void AddESPToAllPlayers()
 		{
-			foreach (var item in WorldUtils.GetAllPlayers0())
+			foreach (var item in WorldUtils.Get_Players())
 			{
 				if (item != LocalPlayerUtils.GetSelfPlayer())
 				{
@@ -341,7 +341,7 @@
 
 		private static void RemoveAllActivePlayerESPs()
 		{
-			foreach (var player in WorldUtils.GetAllPlayers0())
+			foreach (var player in WorldUtils.Get_Players())
 			{
 				var esp = player.gameObject.GetComponent<PlayerESP>();
 				if (esp != null)
@@ -382,7 +382,7 @@
 
 		private static void AddESPToUdonBehaviours()
 		{
-			var items = WorldUtils.GetUdonBehaviours();
+			var items = WorldUtils.Get_UdonBehaviours();
 			foreach (var item in items)
 			{
 				if (item != null)
@@ -398,7 +398,7 @@
 
 		private static void RemoveESPToUdonBehaviours()
 		{
-			var items = WorldUtils.GetUdonBehaviours();
+			var items = WorldUtils.Get_UdonBehaviours();
 			foreach (var item in items)
 			{
 				var ESP = item.GetComponent<ESP_UdonBehaviour>();

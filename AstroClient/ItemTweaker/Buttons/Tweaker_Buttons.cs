@@ -225,7 +225,7 @@
 
 			PickupQMScroll.SetAction(delegate
 			{
-				foreach (var pickup in WorldUtils.GetPickups())
+				foreach (var pickup in WorldUtils.Get_Pickups())
 				{
 					if (pickup.name == "ViewFinder")
 					{
@@ -568,7 +568,7 @@
 			var prefabQMScroll = new QMScrollMenu(menu);
 			prefabQMScroll.SetAction(delegate
 			{
-				foreach (var prefab in WorldUtils.GetAllWorldPrefabs())
+				foreach (var prefab in WorldUtils.Get_Prefabs())
 				{
 					prefabQMScroll.Add(
 					new QMSingleButton(prefabQMScroll.BaseMenu, 0, 0, $"Spawn {prefab.name}", delegate

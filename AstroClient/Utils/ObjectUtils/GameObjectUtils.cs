@@ -140,7 +140,7 @@
 
 		public static void EnableAllWorldPickups()
 		{
-			foreach (var item in WorldUtils.GetPickups())
+			foreach (var item in WorldUtils.Get_Pickups())
 			{
 				if (!item.active)
 				{
@@ -202,7 +202,7 @@
 
 		public static void TeleportPickupsToTheirDefaultPosition()
 		{
-			foreach (var Pickup in WorldUtils.GetPickups())
+			foreach (var Pickup in WorldUtils.Get_Pickups())
 			{
 				if (Pickup != null)
 				{
@@ -221,7 +221,7 @@
 
 		public static void DisableAllWorldPickups()
 		{
-			foreach (var item in WorldUtils.GetPickups())
+			foreach (var item in WorldUtils.Get_Pickups())
 			{
 				if (!item.active)
 				{
@@ -292,7 +292,7 @@
 
 		public static void GetAllPickupsOwners()
 		{
-			foreach (var item in WorldUtils.GetPickups())
+			foreach (var item in WorldUtils.Get_Pickups())
 			{
 				if (item != null)
 				{

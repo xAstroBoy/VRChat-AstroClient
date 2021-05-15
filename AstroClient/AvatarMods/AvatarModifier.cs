@@ -17,7 +17,7 @@
 		public static void InitButtons(QMTabMenu tab , float x, float y, bool btnHalf)
 		{
 			var tmp = new QMNestedButton(tab, x, y, "Avatar Modifiers", "Modify Other's avatars", null, null, null, null, btnHalf);
-			new QMSingleButton(tmp, 5, 0, "Reload All Avatars", () => { AvatarUtils.ReloadAllAvatars(); }, "Reloads All avatars", null, null, true);
+			new QMSingleButton(tmp, 5, 0, "Reload All Avatars", () => { AvatarUtils.Reload_All_Avatars(); }, "Reloads All avatars", null, null, true);
 			RemoveMasksToggle = new QMSingleToggleButton(tmp, 1, 0, "Remove Masks", () => { MaskDeleter = true; }, "Remove Masks", () => { MaskDeleter = false; }, "Remove Masks From all avatars (Requires Avatar Reload)", Color.green, Color.red, null, false, true);
 			LewdifyToggle = new QMSingleToggleButton(tmp, 1, 0.5f, "Lewdify", () => { Lewdify = true; }, "Lewdify", () => { Lewdify = false; }, "Lewdify avatars (Requires a Avatar Reload)", Color.green, Color.red, null, false, true);
 
@@ -49,9 +49,9 @@
 										// APPLY EDITS HERE, AS THIS WORKS BUT FILTER ALWAYS ARMATURE Childs out.
 
 
-										var AvatarHolder = root.GetAvatar();
-										var Armature = root.GetArmature();
-										var Body = root.GetBody();
+										var AvatarHolder = root.Get_Avatar();
+										var Armature = root.Get_Armature();
+										var Body = root.Get_Body();
 
 										if (AvatarHolder != null && Armature != null && Body != null)
 										{

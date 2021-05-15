@@ -7,9 +7,9 @@
 	{
 		public static Player GetPlayer(this APIUser api)
 		{
-			if (WorldUtils.GetAllPlayers0() != null)
+			if (WorldUtils.Get_Players() != null)
 			{
-				foreach (var player in WorldUtils.GetAllPlayers0())
+				foreach (var player in WorldUtils.Get_Players())
 				{
 					if (player != null)
 					{

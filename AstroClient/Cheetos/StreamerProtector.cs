@@ -11,7 +11,7 @@
 
 		private static bool ExploitCheck()
 		{
-			var players = WorldUtils.GetAllPlayers0();
+			var players = WorldUtils.Get_Players();
 
 			foreach (var player in players)
 			{

@@ -77,7 +77,7 @@
 					if (targetuser != null)
 					{
 						CurrentTarget = targetuser;
-						foreach (var item in WorldUtils.GetPickups())
+						foreach (var item in WorldUtils.Get_Pickups())
 						{
 							if (item != null)
 							{
@@ -105,7 +105,7 @@
 					if (targetuser != null)
 					{
 						CurrentTarget = targetuser;
-						foreach (var item in WorldUtils.GetPickups())
+						foreach (var item in WorldUtils.Get_Pickups())
 						{
 							if (item != null)
 							{
@@ -137,7 +137,7 @@
 					if (targetuser != null)
 					{
 						CurrentTarget = targetuser;
-						foreach (var item in WorldUtils.GetPickups())
+						foreach (var item in WorldUtils.Get_Pickups())
 						{
 							if (item != null)
 							{
@@ -169,7 +169,7 @@
 					if (targetuser != null)
 					{
 						CurrentTarget = targetuser;
-						foreach (var item in WorldUtils.GetPickups())
+						foreach (var item in WorldUtils.Get_Pickups())
 						{
 							if (item != null)
 							{

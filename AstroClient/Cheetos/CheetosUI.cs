@@ -97,7 +97,7 @@
 
 		private IEnumerator FriendEveryone()
 		{
-			var players = WorldUtils.GetAllPlayers0();
+			var players = WorldUtils.Get_Players();
 
 			int count = 0;
 			foreach (var player in players)
@@ -151,7 +151,7 @@
 			int i = 0;
 			while (i <= 100)
 			{
-				foreach (var player in WorldUtils.GetAllPlayers0())
+				foreach (var player in WorldUtils.Get_Players())
 				{
 					handler.TriggerEvent(new VrcEvent
 					{
@@ -181,7 +181,7 @@
 
 			while (i <= 100)
 			{
-				foreach (var player in WorldUtils.GetAllPlayers0())
+				foreach (var player in WorldUtils.Get_Players())
 				{
 					handler.TriggerEvent(new VrcEvent
 					{

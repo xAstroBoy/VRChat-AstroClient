@@ -16,7 +16,7 @@
 			}, "", null, null, true);
 			scroll.SetAction(delegate
 			{
-				foreach (var obj in WorldUtils.GetAllVRCInteractables())
+				foreach (var obj in WorldUtils.Get_VRCInteractables())
 				{
 					scroll.Add(
 					new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {obj.name}", delegate
@@ -37,7 +37,7 @@
 			}, "", null, null, true);
 			scroll.SetAction(delegate
 			{
-				foreach (var trigger in WorldUtils.GetTriggers())
+				foreach (var trigger in WorldUtils.Get_Triggers())
 				{
 					scroll.Add(
 					new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {trigger.name}", delegate

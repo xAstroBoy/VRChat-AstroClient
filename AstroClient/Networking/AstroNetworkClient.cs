@@ -121,7 +121,7 @@
 				else
 				{
 					ModConsole.Log("Wants to add tag to someone else");
-					player = WorldUtils.GetPlayerByID(tagData.UserID);
+					player = WorldUtils.Get_Player_By_ID(tagData.UserID);
 				}
 				if (player != null)
 				{

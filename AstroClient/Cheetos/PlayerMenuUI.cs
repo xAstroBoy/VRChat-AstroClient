@@ -70,7 +70,7 @@
 
 			foreach (var kvp in photonPlayers)
 			{
-				var players = WorldUtils.GetAllPlayers0();
+				var players = WorldUtils.Get_Players();
 
 				if (!players.Contains(kvp.Value.GetPlayer()))
 				{

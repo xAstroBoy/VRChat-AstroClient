@@ -12,7 +12,7 @@
 
 	public class WorldUtils : GameEvents
 	{
-		public static List<GameObject> GetAllWorldPrefabs()
+		public static List<GameObject> Get_Prefabs()
 		{
 			var PrefabList = new List<GameObject>();
 			if (VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs != null)
@@ -54,20 +54,14 @@
 			return PrefabList;
 		}
 
-		public static IEnumerable<Player> GetAllPlayers0()
+		public static IEnumerable<Player> Get_Players()
 		{
 			return PlayerManager.Method_Public_Static_ArrayOf_Player_0();
 		}
 
-		public static Player GetPlayerByID(string id)
+		public static Player Get_Player_By_ID(string id)
 		{
 			var zero = PlayerManager.Method_Public_Static_Player_String_0(id);
-			//var one = PlayerManager.Method_Public_Static_Player_String_PDM_0(id);
-			//if (one != null)
-			//{
-			//    ModConsole.Log("returned Method_Public_Static_Player_String_1");
-			//    return one;
-			//}
 			if (zero != null)
 			{
 				ModConsole.DebugLog("returned Method_Public_Static_Player_String_PDM_0");
@@ -78,11 +72,11 @@
 			return null;
 		}
 
-		public static Player GetPlayerByDisplayName(string name)
+		public static Player Get_Player_With_DisplayName(string name)
 		{
-			if (GetAllPlayers0() != null)
+			if (Get_Players() != null)
 			{
-				foreach (var player in GetAllPlayers0())
+				foreach (var player in Get_Players())
 				{
 					if (player != null)
 					{
@@ -99,17 +93,13 @@
 			return null;
 		}
 
-		public static Player GetPlayerByVRCPlayer(VRCPlayer target)
-		{
-			return target._player;
-		}
 
 		public override void OnWorldReveal(string id, string name, string asseturl)
 		{
-			ModConsole.Log("This instance has " + GetAllPlayers0().Count() + " Players.", Color.Gold);
+			ModConsole.Log("This instance has " + Get_Players().Count() + " Players.", Color.Gold);
 		}
 
-		public static List<GameObject> GetPickups()
+		public static List<GameObject> Get_Pickups()
 		{
 			try
 			{
@@ -187,7 +177,7 @@
 			}
 		}
 
-		public static List<GameObject> GetAllVRCInteractables()
+		public static List<GameObject> Get_VRCInteractables()
 		{
 			try
 			{
@@ -241,7 +231,7 @@
 			}
 		}
 
-		public static List<GameObject> GetTriggers()
+		public static List<GameObject> Get_Triggers()
 		{
 			var Triggers = new List<GameObject>();
 			var list = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Trigger>();
@@ -273,7 +263,7 @@
 			return Triggers;
 		}
 
-		public static List<GameObject> GetUdonBehaviours()
+		public static List<GameObject> Get_UdonBehaviours()
 		{
 			var UdonBehaviourObjects = new List<GameObject>();
 			var list = Resources.FindObjectsOfTypeAll<UdonBehaviour>();
@@ -291,7 +281,7 @@
 			return UdonBehaviourObjects;
 		}
 
-		public static string GetWorldName()
+		public static string Get_World_Name()
 		{
 			var instance = RoomManager.field_Internal_Static_ApiWorld_0;
 			if (instance != null)
@@ -304,7 +294,7 @@
 			return null;
 		}
 
-		public static string GetWorldID()
+		public static string Get_World_ID()
 		{
 			var instance = RoomManager.field_Internal_Static_ApiWorld_0;
 			if (instance != null)
@@ -317,7 +307,7 @@
 			return null;
 		}
 
-		public static string GetWorldAssetURL()
+		public static string Get_World_AssetUrl()
 		{
 			var instance = RoomManager.field_Internal_Static_ApiWorld_0;
 			if (instance != null)

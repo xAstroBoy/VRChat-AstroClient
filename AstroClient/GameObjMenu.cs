@@ -343,7 +343,7 @@
 						string objname = item.name;
 						if (item.name.Contains("VRCPlayer"))
 						{
-							System.Collections.Generic.List<Player> allPlayers = WorldUtils.GetAllPlayers0().ToArray().ToList();
+							System.Collections.Generic.List<Player> allPlayers = WorldUtils.Get_Players().ToArray().ToList();
 							for (int k = 0; k < allPlayers.Count; k++)
 							{
 								Player player = allPlayers[k];
@@ -409,7 +409,7 @@
 				string objname = item.name;
 				if (item.name.Contains("VRCPlayer"))
 				{
-					System.Collections.Generic.List<Player> allPlayers = WorldUtils.GetAllPlayers0().ToArray().ToList();
+					System.Collections.Generic.List<Player> allPlayers = WorldUtils.Get_Players().ToArray().ToList();
 					for (int k = 0; k < allPlayers.Count; k++)
 					{
 						Player player = allPlayers[k];
