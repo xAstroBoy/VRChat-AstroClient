@@ -23,11 +23,7 @@
 
 		public static Rigidbody GetRigidBody(this SyncPhysics instance)
 		{
-			if (instance != null)
-			{
-				return instance.field_Private_Rigidbody_0;
-			}
-			return null;
+			return instance?.field_Private_Rigidbody_0;
 		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Extensions
 {
+	using System.Linq;
 	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using System.Collections.Generic;
@@ -126,21 +127,20 @@
 
 		public static void SetGravity(this List<GameObject> GameObjects, bool useGravity)
 		{
-			foreach (var obj in GameObjects)
+			foreach (GameObject obj in GameObjects.Where(obj => obj != null))
 			{
-				if (obj != null)
+				var control = obj.GetComponent<RigidBodyController>();
+				if (control == null)
 				{
-					var control = obj.GetComponent<RigidBodyController>();
-					if (control == null)
-					{
-						control = obj.AddComponent<RigidBodyController>();
-					}
-					if (!control.EditMode)
-					{
-						control.EditMode = true;
-					}
-					control.useGravity = useGravity;
+					control = obj.AddComponent<RigidBodyController>();
 				}
+
+				if (!control.EditMode)
+				{
+					control.EditMode = true;
+				}
+
+				control.useGravity = useGravity;
 			}
 		}
 
@@ -178,21 +178,20 @@
 
 		public static void SetKinematic(this List<GameObject> GameObjects, bool isKinematic)
 		{
-			foreach (var obj in GameObjects)
+			foreach (GameObject obj in GameObjects.Where(obj => obj != null))
 			{
-				if (obj != null)
+				var control = obj.GetComponent<RigidBodyController>();
+				if (control == null)
 				{
-					var control = obj.GetComponent<RigidBodyController>();
-					if (control == null)
-					{
-						control = obj.AddComponent<RigidBodyController>();
-					}
-					if (!control.EditMode)
-					{
-						control.EditMode = true;
-					}
-					control.isKinematic = isKinematic;
+					control = obj.AddComponent<RigidBodyController>();
 				}
+
+				if (!control.EditMode)
+				{
+					control.EditMode = true;
+				}
+
+				control.isKinematic = isKinematic;
 			}
 		}
 
@@ -215,21 +214,20 @@
 
 		public static void SetDetectCollision(this List<GameObject> GameObjects, bool DetectCollisions)
 		{
-			foreach (var obj in GameObjects)
+			foreach (GameObject obj in GameObjects.Where(obj => obj != null))
 			{
-				if (obj != null)
+				var control = obj.GetComponent<RigidBodyController>();
+				if (control == null)
 				{
-					var control = obj.GetComponent<RigidBodyController>();
-					if (control == null)
-					{
-						control = obj.AddComponent<RigidBodyController>();
-					}
-					if (!control.EditMode)
-					{
-						control.EditMode = true;
-					}
-					control.DetectCollisions = DetectCollisions;
+					control = obj.AddComponent<RigidBodyController>();
 				}
+
+				if (!control.EditMode)
+				{
+					control.EditMode = true;
+				}
+
+				control.DetectCollisions = DetectCollisions;
 			}
 		}
 	}

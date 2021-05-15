@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Extensions
 {
+	using System.Linq;
 	using VRC;
 	using VRC.Core;
 
@@ -9,15 +10,9 @@
 		{
 			if (WorldUtils.Get_Players() != null)
 			{
-				foreach (var player in WorldUtils.Get_Players())
+				foreach (Player player in WorldUtils.Get_Players().Where(player => player != null).Where(player => player.prop_APIUser_0.id == api.id))
 				{
-					if (player != null)
-					{
-						if (player.prop_APIUser_0.id == api.id)
-						{
-							return player;
-						}
-					}
+					return player;
 				}
 			}
 			return null;
