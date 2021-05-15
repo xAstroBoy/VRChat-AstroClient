@@ -11,8 +11,8 @@
 	using DayClientML2.Utility.Extensions;
 	using AstroClient.Finder;
 	using VRC;
-	using AstroClient.ConsoleUtils;
 	using Color = System.Drawing.Color;
+	using AstroLibrary.Console;
 
 	public static class AvatarUtils
 	{
