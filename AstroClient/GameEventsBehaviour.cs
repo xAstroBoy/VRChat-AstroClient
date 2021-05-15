@@ -59,7 +59,6 @@
 		private void Internal_OnUdonSyncRPCEvent(object sender, UdonSyncRPCEventArgs e)
 		{
 			OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
-
 		}
 
 		[HideFromIl2Cpp]

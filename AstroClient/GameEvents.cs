@@ -1,6 +1,5 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.BetterPatch;
 	using AstroClient.Cheetos;
 	using AstroClient.Startup.Hooks;
 	using System;

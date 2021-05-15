@@ -1,8 +1,8 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
 	using AstroClient.Extensions;
 	using AstroClient.ItemTweaker;
+	using AstroLibrary.Console;
 	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using System;
@@ -16,8 +16,6 @@
 
 	public class GameObjMenu : GameEvents
 	{
-
-		
 		public override void OnLevelLoaded()
 		{
 			CurrentSelection.Clear();
