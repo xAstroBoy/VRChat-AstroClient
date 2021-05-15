@@ -37,14 +37,7 @@
 		{
 			get
 			{
-				if (CurrentSelectedObject != null)
-				{
-					return CurrentSelectedObject.name;
-				}
-				else
-				{
-					return "Not Selected Yet";
-				}
+				return CurrentSelectedObject != null ? CurrentSelectedObject.name : "Not Selected Yet";
 			}
 		}
 

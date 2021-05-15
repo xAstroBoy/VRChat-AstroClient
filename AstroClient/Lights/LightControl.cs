@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.WorldLights
 {
+	using System.Linq;
 	using AstroLibrary.Console;
 	using AstroClient.Extensions;
 	using AstroClient.Skyboxes;
@@ -237,26 +238,16 @@
 
 		public static void EnableLightMaps()
 		{
-			foreach (var obj in RenderObjects)
+			foreach (var obj in RenderObjects.Where(obj => obj.gameObject.RenderisSaved()))
 			{
-				if (obj.gameObject.RenderisSaved())
-				{
-					var value = obj.gameObject.GetOriginalLightMapIndex();
-					if (value != -999999999)
-					{
-						obj.lightmapIndex = value;
-					}
-					else
-					{
-						obj.lightmapIndex = 0;
-					}
-				}
+				var value = obj.gameObject.GetOriginalLightMapIndex();
+				obj.lightmapIndex = value != -999999999 ? value : 0;
 			}
 		}
 
 		public static void DisableLightMaps()
 		{
-			foreach (var obj in RenderObjects)
+			foreach (Renderer obj in RenderObjects)
 			{
 				obj.lightmapIndex = -1;
 			}
@@ -266,8 +257,7 @@
 		{
 			if (!HasLightmapsStored)
 			{
-				var Objects = Resources.FindObjectsOfTypeAll<GameObject>();
-				foreach (var obj in Objects)
+				foreach (GameObject obj in Resources.FindObjectsOfTypeAll<GameObject>())
 				{
 					var renderer = obj.GetComponentInChildren<Renderer>(true);
 					if (renderer != null)

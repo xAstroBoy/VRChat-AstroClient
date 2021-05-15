@@ -385,18 +385,7 @@
 
 		public static Color GetObjectStatus(Transform obj)
 		{
-			if (obj != null)
-			{
-				if (obj.gameObject.active)
-				{
-					return Color.green;
-				}
-				else
-				{
-					return Color.red;
-				}
-			}
-			return Color.red;
+			return obj != null ? obj.gameObject.active ? Color.green : Color.red : Color.red;
 		}
 
 		public static void AddEnterChildObj(QMNestedButton page, QMSingleButton parentbtn, Transform item)
