@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Extensions
 {
-	using AstroClient.components;
+	using AstroClient.Components;
 	using AstroClient.variables;
 	using System;
 	using System.Collections.Generic;

@@ -1,4 +1,4 @@
-﻿namespace AstroClient.components
+﻿namespace AstroClient.Components
 {
 	using AstroLibrary.Console;
 	using AstroClient.Extensions;
@@ -6,9 +6,6 @@
 	using System;
 	using UnhollowerBaseLib.Attributes;
 	using UnityEngine;
-	using VRC;
-	using VRC.Udon;
-	using static AstroClient.variables.CustomLists;
 
 	public class Bouncer : GameEventsBehaviour
 	{

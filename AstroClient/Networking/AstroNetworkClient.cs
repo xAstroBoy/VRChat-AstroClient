@@ -3,7 +3,7 @@
 	#region Imports
 
 	using AstroClient.Cheetos;
-	using AstroClient.components;
+	using AstroClient.Components;
 	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using AstroClient.variables;

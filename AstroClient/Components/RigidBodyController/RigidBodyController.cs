@@ -1,4 +1,4 @@
-﻿namespace AstroClient.components
+﻿namespace AstroClient.Components
 {
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroLibrary.Console;

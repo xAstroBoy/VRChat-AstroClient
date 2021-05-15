@@ -2,7 +2,7 @@
 {
 	#region Imports
 
-	using AstroClient.components;
+	using AstroClient.Components;
 	using AstroClient.Extensions;
 	using AstroClient.Extensions;
 	using AstroClient.GameObjectDebug;

@@ -1,6 +1,6 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.components;
+	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using System.Linq;
 	using UnityEngine;

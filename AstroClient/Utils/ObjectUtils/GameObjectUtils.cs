@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.GameObjectDebug
 {
-	using AstroClient.components;
+	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using AstroClient.ItemTweaker;
 	using AstroClient.SyncPhysicExt;

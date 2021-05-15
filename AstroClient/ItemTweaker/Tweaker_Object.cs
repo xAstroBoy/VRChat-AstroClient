@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.ItemTweaker
 {
 	using AstroClient.AstroUtils.ItemTweaker;
-	using AstroClient.components;
+	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using AstroClient.Extensions;
 	using AstroClient.Finder;

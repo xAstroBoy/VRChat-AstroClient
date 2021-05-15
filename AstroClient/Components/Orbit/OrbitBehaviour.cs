@@ -1,4 +1,4 @@
-﻿namespace AstroClient.components
+﻿namespace AstroClient.Components
 {
 	using AstroClient.GameObjectDebug;
 	using DayClientML2.Utility.Extensions;

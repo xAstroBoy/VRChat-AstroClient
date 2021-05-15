@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Extensions
 {
-	using AstroClient.components;
+	using AstroClient.Components;
 	using UnityEngine;
 
 	public static class HighlighterExtensions
