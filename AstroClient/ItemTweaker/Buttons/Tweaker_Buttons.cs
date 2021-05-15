@@ -530,34 +530,12 @@
 
 		public static Color GetObjectStatus(GameObject obj)
 		{
-			if (obj != null)
-			{
-				if (obj.active)
-				{
-					return Color.green;
-				}
-				else
-				{
-					return Color.red;
-				}
-			}
-			return Color.red;
+			return obj != null ? obj.active ? Color.green : Color.red : Color.red;
 		}
 
 		public static Color GetObjectStatus(VRC_Trigger obj)
 		{
-			if (obj != null)
-			{
-				if (obj.enabled)
-				{
-					return Color.green;
-				}
-				else
-				{
-					return Color.red;
-				}
-			}
-			return Color.red;
+			return obj != null ? obj.enabled ? Color.green : Color.red : Color.red;
 		}
 
 
@@ -610,7 +588,7 @@
 		{
 			get
 			{
-				return "Teleport\nto\nyou:\n" + Tweaker_Object.GetObjectToEditName;
+				return $"Teleport\nto\nyou:\n{Tweaker_Object.GetObjectToEditName}";
 			}
 		}
 
@@ -618,14 +596,9 @@
 		{
 			get
 			{
-				if (ObjectMiscOptions.CurrentTarget != null)
-				{
-					return "Teleport\n" + Tweaker_Object.GetObjectToEditName + "\nto:\n" + ObjectMiscOptions.CurrentTarget.field_Private_APIUser_0.displayName;
-				}
-				else
-				{
-					return "Teleport\nto:\n null";
-				}
+				return ObjectMiscOptions.CurrentTarget != null
+					? $"Teleport\n{Tweaker_Object.GetObjectToEditName}\nto:\n{ObjectMiscOptions.CurrentTarget.field_Private_APIUser_0.displayName}"
+					: "Teleport\nto:\n null";
 			}
 		}
 

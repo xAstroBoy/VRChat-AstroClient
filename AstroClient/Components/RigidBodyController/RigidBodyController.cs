@@ -470,33 +470,21 @@
 		internal bool UpdateAngularDrag(float newdrag)
 		{
 			AngularDrag = newdrag;
-			if (AngularDrag == newdrag)
-			{
-				return true;
-			}
-			return false;
+			return AngularDrag == newdrag;
 		}
 
 		[HideFromIl2Cpp]
 		internal bool UpdateDrag(float newdrag)
 		{
 			Drag = newdrag;
-			if (Drag == newdrag)
-			{
-				return true;
-			}
-			return false;
+			return Drag == newdrag;
 		}
 
 		[HideFromIl2Cpp]
 		internal bool UpdateKinematic(bool Kinematic)
 		{
 			isKinematic = Kinematic;
-			if (isKinematic == Kinematic)
-			{
-				return true;
-			}
-			return false;
+			return isKinematic == Kinematic;
 		}
 
 		[HideFromIl2Cpp]

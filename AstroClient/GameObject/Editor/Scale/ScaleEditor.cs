@@ -12,38 +12,17 @@
 	{
 		private static float ModifiedVectorX()
 		{
-			if (ObjectMiscOptions.EditVectorX)
-			{
-				return ScaleValueToUse;
-			}
-			else
-			{
-				return 0;
-			}
+			return EditVectorX ? ScaleValueToUse : 0;
 		}
 
 		private static float ModifiedVectorY()
 		{
-			if (ObjectMiscOptions.EditVectorY)
-			{
-				return ScaleValueToUse;
-			}
-			else
-			{
-				return 0;
-			}
+			return EditVectorY ? ScaleValueToUse : 0;
 		}
 
 		private static float ModifiedVectorZ()
 		{
-			if (ObjectMiscOptions.EditVectorZ)
-			{
-				return ScaleValueToUse;
-			}
-			else
-			{
-				return 0;
-			}
+			return EditVectorZ ? ScaleValueToUse : 0;
 		}
 
 		internal static void EditScaleSize(GameObject obj, bool increase)
