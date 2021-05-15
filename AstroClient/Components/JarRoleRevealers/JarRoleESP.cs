@@ -1,13 +1,10 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using AstroClient.Extensions;
 	using AstroClient.Startup.Buttons;
-	using DayClientML2.Utility.Extensions;
 	using System;
 	using System.Linq;
-	using UnhollowerBaseLib.Attributes;
 	using UnityEngine;
 	using UnityEngine.UI;
 	using VRC;
@@ -45,7 +42,7 @@
 					Internal_user = Internal_player.prop_APIUser_0;
 				}
 			}
-			if(ESP == null)
+			if (ESP == null)
 			{
 				ESP = Internal_player.gameObject.GetComponent<PlayerESP>();
 			}
@@ -559,7 +556,7 @@
 			{
 				if (ESPMenu.Toggle_Player_ESP)
 				{
-					
+
 					if (ESP != null)
 					{
 						if (ESP.UseCustomColor)
@@ -774,7 +771,7 @@
 				}
 			}
 		}
-	
+
 
 		private readonly string HiddenRole = "Role Hidden";
 		private readonly string NoRoles = "No Role";
@@ -785,7 +782,7 @@
 
 		internal Murder4Roles AssignedMurder4Role
 		{
-			
+
 			get
 			{
 				return Murder4CurrentRole;
@@ -794,7 +791,7 @@
 
 		internal AmongUsRoles AssignedAmongUS4Role
 		{
-			
+
 			get
 			{
 				return AmongUsCurrentRole;
@@ -820,12 +817,12 @@
 
 		private LinkedNodes Internal_SavedEntry
 		{
-			
+
 			get
 			{
 				return _SavedEntry;
 			}
-			
+
 			set
 			{
 				_SavedEntry = value;
@@ -836,7 +833,7 @@
 
 		internal LinkedNodes LinkedEntry
 		{
-			
+
 			get
 			{
 				return Internal_SavedEntry;
@@ -845,12 +842,12 @@
 
 		private GameObject Internal_AssignedEntry
 		{
-			
+
 			get
 			{
 				return _AssignedPlayerEntry;
 			}
-			
+
 			set
 			{
 				_AssignedPlayerEntry = value;
@@ -859,7 +856,7 @@
 
 		internal GameObject Entry
 		{
-			
+
 			get
 			{
 				return Internal_AssignedEntry;
@@ -868,7 +865,7 @@
 
 		internal APIUser Apiuser
 		{
-			
+
 			get
 			{
 				return Internal_user;
@@ -879,12 +876,12 @@
 
 		private GameObject Internal_AssignedNode
 		{
-			
+
 			get
 			{
 				return _AssignedPlayerNode;
 			}
-			
+
 			set
 			{
 				if (_AssignedPlayerNode != null)
@@ -901,7 +898,7 @@
 
 		internal GameObject Node
 		{
-			
+
 			get
 			{
 				return Internal_AssignedNode;
@@ -913,12 +910,12 @@
 
 		internal bool AmongUSHasVoted
 		{
-			
+
 			get
 			{
 				return _AmongUSHasVoted;
 			}
-			
+
 			set
 			{
 				if (AmongUSVoteRevealTag != null)
@@ -942,7 +939,7 @@
 
 		internal bool AmongUSCanVote
 		{
-			
+
 			get
 			{
 				if (AmongUsCurrentRole == AmongUsRoles.Crewmate)
@@ -981,7 +978,7 @@
 
 		internal LinkedNodes _SavedEntry { get; private set; } = null;
 
-		
+
 
 		// MURDER 4 MAP
 		private readonly Color MurderColor = new Color(0.5377358f, 0.1648718f, 0.1728278f, 1f);

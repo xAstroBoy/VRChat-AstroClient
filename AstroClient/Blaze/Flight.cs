@@ -65,7 +65,7 @@
 			{
 				noClipEnabled = value;
 				LocalPlayerUtils.GetLocalVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = !value;
-				
+
 				if (!value && flyEnabled)
 				{
 					FlyEnabled = false;

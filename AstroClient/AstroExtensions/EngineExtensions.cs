@@ -231,7 +231,7 @@
 				var item = obj.GetChild(i);
 				if (item != null)
 				{
-					if(!childs.Contains(item))
+					if (!childs.Contains(item))
 					{
 						childs.Add(item);
 					}

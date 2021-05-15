@@ -2,14 +2,10 @@
 {
 	using AstroLibrary.Console;
 	using System;
-	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
 	using System.Reflection;
-	using System.Text;
-	using System.Threading.Tasks;
 	using UnityEngine;
-	using AstroExtensions;
 	using AstroClient.Extensions;
 
 	public class PrefabLoader : GameEvents
@@ -24,7 +20,7 @@
 		private static AssetBundle buttonBundle;
 		public static GameObject InstantiateButton()
 		{
-			if(File.Exists(Environment.CurrentDirectory + @"\AstroClient\buttons"))
+			if (File.Exists(Environment.CurrentDirectory + @"\AstroClient\buttons"))
 			{
 				ModConsole.DebugLog("Found Button Bundle");
 			}

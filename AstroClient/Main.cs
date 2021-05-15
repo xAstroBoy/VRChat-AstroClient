@@ -11,8 +11,6 @@
 	using AstroClient.variables;
 	using AstroClient.WorldLights;
 	using AstroClient.Worlds;
-	using AstroLibrary;
-	using CheetosConsole;
 	using MelonLoader;
 	using RubyButtonAPI;
 	using System;
@@ -22,7 +20,6 @@
 	using System.Windows.Forms;
 	using UnityEngine;
 	using Button = UnityEngine.UI.Button;
-	using Console = CheetosConsole.Console;
 	using VRC;
 	using System.Linq;
 	using AstroClient.AvatarMods;

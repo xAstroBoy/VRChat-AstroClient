@@ -746,9 +746,9 @@
 						control.RestoreOriginalBody();
 					}
 				}
-				if(ResetPickupProperties)
+				if (ResetPickupProperties)
 				{
-					if(PickupController != null)
+					if (PickupController != null)
 					{
 						PickupController.RestoreOriginalProperties();
 					}

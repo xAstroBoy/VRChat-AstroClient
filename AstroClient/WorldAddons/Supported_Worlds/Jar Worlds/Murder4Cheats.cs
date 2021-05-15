@@ -20,7 +20,7 @@
 	using VRC.Udon;
 	using static AstroClient.variables.CustomLists;
 
-#endregion
+	#endregion
 
 	public class Murder4Cheats : GameEvents
 	{
@@ -348,24 +348,25 @@
 				foreach (var item in Clues)
 				{
 					var esp = item.GetComponent<ESP_Pickup>();
-					if(esp == null)
+					if (esp == null)
 					{
 						esp = item.AddComponent<ESP_Pickup>();
 					}
 				}
 
 
-				MiscUtility.DelayFunction(1, new Action(() => { 
+				MiscUtility.DelayFunction(1, new Action(() =>
+				{
 
 
-				Clues.Set_Pickup_ESP_Color("87F368");
-				DetectiveGuns.Set_Pickup_ESP_Color("688CF3");
-				SilencedGuns.Set_Pickup_ESP_Color("C8F36D");
-				ShotGuns.Set_Pickup_ESP_Color("C8F36D");
-				Knifes.Set_Pickup_ESP_Color("F96262");
-				BearTraps.Set_Pickup_ESP_Color("F96262");
-				Grenades.Set_Pickup_ESP_Color("F96262");
-                    }));
+					Clues.Set_Pickup_ESP_Color("87F368");
+					DetectiveGuns.Set_Pickup_ESP_Color("688CF3");
+					SilencedGuns.Set_Pickup_ESP_Color("C8F36D");
+					ShotGuns.Set_Pickup_ESP_Color("C8F36D");
+					Knifes.Set_Pickup_ESP_Color("F96262");
+					BearTraps.Set_Pickup_ESP_Color("F96262");
+					Grenades.Set_Pickup_ESP_Color("F96262");
+				}));
 			}
 			else
 			{
@@ -435,8 +436,8 @@
 			ToggleGravityMode = new QMSingleToggleButton(MurderItemTweaker, 1, 0.5f, "Fall (World Gravity)", new Action(() => { UseGravity = true; }), "Float (Space Mode)", new Action(() => { UseGravity = false; }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
 
 			KnifesGrabbableToggle = new QMSingleToggleButton(MurderItemTweaker, 1, 1, "Can Grab Knifes", new Action(() => { ToggleKnifesGrab(true); }), "Cannot Grab Knifes", new Action(() => { ToggleKnifesGrab(false); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
-			new QMSingleButton(MurderItemTweaker, 1, 1.5f, "Knifes Grabbable from far!", new Action(() => { MakeKnifeGrabbableFromFar(); }), "Make Knifes Grabbable from far!", null, null, true).SetResizeTextForBestFit(true);;
-			new QMSingleButton(MurderItemTweaker, 1, 2, "Restore Knifes Properties to world!", new Action(() => { RestoreKnifeToWorldControl(); }), "Restore Control to world!", null, null, true).SetResizeTextForBestFit(true);;
+			new QMSingleButton(MurderItemTweaker, 1, 1.5f, "Knifes Grabbable from far!", new Action(() => { MakeKnifeGrabbableFromFar(); }), "Make Knifes Grabbable from far!", null, null, true).SetResizeTextForBestFit(true); ;
+			new QMSingleButton(MurderItemTweaker, 1, 2, "Restore Knifes Properties to world!", new Action(() => { RestoreKnifeToWorldControl(); }), "Restore Control to world!", null, null, true).SetResizeTextForBestFit(true); ;
 
 			#endregion Item Tweaker
 

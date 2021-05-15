@@ -170,7 +170,7 @@
 			DetectiveGuns.Clear();
 			SilencedGuns.Clear();
 			Knifes.Clear();
-			if(Murder2ESPtoggler != null)
+			if (Murder2ESPtoggler != null)
 			{
 				Murder2ESPtoggler.setToggleState(false);
 			}

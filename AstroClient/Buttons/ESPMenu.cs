@@ -6,7 +6,6 @@
 	using System;
 	using UnityEngine;
 	using VRC;
-	using DayClientML2.Utility.Extensions;
 
 	internal class ESPMenu : GameEvents
 	{
@@ -19,7 +18,7 @@
 
 			PickupESPToggleBtn = new QMSingleToggleButton(main, 2, 0f, "Pickup ESP ON", new Action(() => { Toggle_Pickup_ESP = true; }), "Pickup ESP OFF", new Action(() => { Toggle_Pickup_ESP = false; }), "Toggle Pickup ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 			PickupESPToggleBtn.setToggleState(ConfigManager.ESP.PickupESP);
-			
+
 			VRCInteractableESPToggleBtn = new QMSingleToggleButton(main, 2, 0.5f, "VRC Interactable ESP ON", new Action(() => { Toggle_VRCInteractable_ESP = true; }), "VRC Interactable ESP OFF", new Action(() => { Toggle_VRCInteractable_ESP = false; }), "Toggle VRC Interactable ESP", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 			VRCInteractableESPToggleBtn.setToggleState(ConfigManager.ESP.VRCInteractableESP);
 
@@ -100,9 +99,9 @@
 			{
 				if (item != null)
 				{
-					
+
 					var ESP = item.GetComponent<ESP_VRCInteractable>();
-					if(ESP == null)
+					if (ESP == null)
 					{
 						item.AddComponent<ESP_VRCInteractable>();
 					}

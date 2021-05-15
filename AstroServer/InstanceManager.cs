@@ -1,9 +1,5 @@
 ﻿namespace AstroServer
 {
-	using AstroNetworkingLibrary;
-	using AstroNetworkingLibrary.Serializable;
-	using Newtonsoft.Json;
-
 	public static class InstanceManager
 	{
 		internal static void InstanceJoined(Client client)

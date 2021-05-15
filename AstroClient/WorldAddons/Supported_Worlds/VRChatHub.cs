@@ -10,7 +10,6 @@
 	using VRC.SDKBase;
 	using static AstroClient.LocalPlayerUtils;
 	using static VRC.SDKBase.VRC_EventHandler;
-	using System.Windows.Forms.DataVisualization.Charting;
 
 	public class HubButtonsControl : GameEvents
 	{

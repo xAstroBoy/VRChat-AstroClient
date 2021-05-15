@@ -3,18 +3,15 @@
 	using AstroClient.Extensions;
 	using Photon.Realtime;
 	using RubyButtonAPI;
-	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using UnityEngine;
 	using VRC.SDKBase;
 
 	class AvatarModifier : GameEvents
 	{
 
-		public static void InitQMMenu(QMTabMenu tab , float x, float y, bool btnHalf)
+		public static void InitQMMenu(QMTabMenu tab, float x, float y, bool btnHalf)
 		{
 			var tmp = new QMNestedButton(tab, x, y, "Avatar Modifiers", "Modify Other's avatars", null, null, null, null, btnHalf);
 			new QMSingleButton(tmp, 5, 0, "Reload All Avatars", () => { AvatarUtils.Reload_All_Avatars(); }, "Reloads All avatars", null, null, true);
@@ -23,9 +20,9 @@
 
 		}
 
-		public static void InitUserMenu(float x , float y, bool btnHalf)
+		public static void InitUserMenu(float x, float y, bool btnHalf)
 		{
-			var menu  = new QMNestedButton("UserInteractMenu", x, y, "Avatar Utilities", "AstroClient Avatar utilities", null, null, null, null, btnHalf);
+			var menu = new QMNestedButton("UserInteractMenu", x, y, "Avatar Utilities", "AstroClient Avatar utilities", null, null, null, null, btnHalf);
 			new QMSingleButton(menu, 1, 0, "Dump Avatar Transforms", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Avatar_Transform_Dumper(); }, "Dump Avatar Transforms", null, null, true);
 			new QMSingleButton(menu, 1, 0.5f, "Dump Avatar Renderers", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Avatar_Renderer_Dumper(); }, "Dump Avatar Renderers", null, null, true);
 			new QMSingleButton(menu, 1, 1, "Dump Avatar Materials", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Avatar_Material_Dumper(); }, "Dump Avatar Materials", null, null, true);
@@ -72,9 +69,9 @@
 												{
 													RemoveMasks(childs);
 												}
-												if(Lewdify)
+												if (Lewdify)
 												{
-													
+
 												}
 											}
 										}
@@ -87,7 +84,7 @@
 			}
 		}
 
-		
+
 		public static void RemoveClothes(List<Transform> items)
 		{
 
@@ -102,9 +99,9 @@
 		// Destroys Masks.
 		public static void RemoveMasks(List<Transform> items)
 		{
-			foreach(var item in items)
+			foreach (var item in items)
 			{
-				if(item != null)
+				if (item != null)
 				{
 					if (item.name.ToLower() == "mask")
 					{
@@ -166,7 +163,7 @@
 			set
 			{
 				_MaskDeleter = value;
-				if(RemoveMasksToggle != null)
+				if (RemoveMasksToggle != null)
 				{
 					RemoveMasksToggle.setToggleState(value);
 				}

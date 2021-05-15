@@ -3,16 +3,12 @@
 	#region Imports
 	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroLibrary.Console;
-	using AstroClient.Startup.Hooks;
-	using DayClientML2.Utility;
-	using DayClientML2.Utility.Extensions;
 	using ExitGames.Client.Photon;
 	using Harmony;
 	using MelonLoader;
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
-	using System.Linq;
 	using System.Reflection;
 	#endregion
 

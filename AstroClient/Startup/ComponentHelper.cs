@@ -15,7 +15,7 @@
 			{
 				ClassInjector.RegisterTypeInIl2Cpp<T>();
 				ModConsole.DebugLog($"Registered: {typeof(T).FullName}");
-				if(!RegisteredComponentsTypes.Contains(typeof(T)))
+				if (!RegisteredComponentsTypes.Contains(typeof(T)))
 				{
 					RegisteredComponentsTypes.Add(typeof(T));
 				}

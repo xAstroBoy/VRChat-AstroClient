@@ -181,7 +181,7 @@
 								return;
 							}
 
-							if(Sync.field_Private_VRC_Pickup_0 == null)
+							if (Sync.field_Private_VRC_Pickup_0 == null)
 							{
 								if (obj.GetComponent<VRC.SDKBase.VRC_Pickup>() != null && Sync.field_Private_VRC_Pickup_0 == null)
 								{

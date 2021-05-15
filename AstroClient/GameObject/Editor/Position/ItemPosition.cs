@@ -1,8 +1,6 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Components;
 	using AstroClient.Extensions;
-	using AstroClient.variables;
 	using UnityEngine;
 	using VRC;
 	using static AstroClient.LocalPlayerUtils;

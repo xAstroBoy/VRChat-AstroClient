@@ -11,7 +11,7 @@
 			if (obj != null)
 			{
 				var ESP = obj.GetComponent<ESP_Pickup>();
-				if(ESP != null)
+				if (ESP != null)
 				{
 					ESP.ChangeColor(Color);
 				}

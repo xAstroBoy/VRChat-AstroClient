@@ -1,6 +1,5 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using DayClientML2.Utility.Extensions;
 	using System;

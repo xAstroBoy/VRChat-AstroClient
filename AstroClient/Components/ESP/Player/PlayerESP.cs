@@ -106,7 +106,7 @@
 						{
 							if (player.GetAPIUser().GetIsFriend())
 							{
-                                if(HighLightOptions.highlightColor != FriendColor)
+								if (HighLightOptions.highlightColor != FriendColor)
 								{
 									HighLightOptions.highlightColor = FriendColor;
 								}

@@ -225,7 +225,7 @@
 					{
 						if (Entry != null)
 						{
-							if(Entry.gameObject == PlayerEntries) // CRITICAL AS THE GETCOMPONENTSINCHILDREN INCLUDE THE PARENT APPARENTLY AS WELL
+							if (Entry.gameObject == PlayerEntries) // CRITICAL AS THE GETCOMPONENTSINCHILDREN INCLUDE THE PARENT APPARENTLY AS WELL
 							{
 								continue;
 							}
@@ -243,7 +243,7 @@
 											//{
 											//	continue;
 											//}
-											if(node.gameObject == GameNodes) // CRITICAL AS THE GETCOMPONENTSINCHILDREN INCLUDE THE PARENT APPARENTLY AS WELL
+											if (node.gameObject == GameNodes) // CRITICAL AS THE GETCOMPONENTSINCHILDREN INCLUDE THE PARENT APPARENTLY AS WELL
 											{
 												continue;
 											}

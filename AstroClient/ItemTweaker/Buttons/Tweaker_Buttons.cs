@@ -649,23 +649,7 @@
 			new QMSingleButton(PhysicEditor, 1, 0.5f, "Disable Collisions", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetDetectCollision(false); }), "Make the object unaffected by colliders!", null, null, true);
 			new QMSingleButton(PhysicEditor, 2, 0, "Enable Kinematic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetKinematic(true); }), "Make the object Kinematic!", null, null, true);
 			new QMSingleButton(PhysicEditor, 2, 0.5f, "Disable Kinematic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetKinematic(false); }), "Disables Kinematic!", null, null, true);
-			new QMSingleButton(PhysicEditor, 3, 0f, "Make It bouncy", new Action(() => {
-
-				var item = Tweaker_Object.GetGameObjectToEdit();
-				if (item != null)
-				{
-					var bouncer = item.GetComponent<Bouncer>();
-					if (bouncer == null)
-					{
-						bouncer =  item.AddComponent<Bouncer>();
-					}
-					if(bouncer != null)
-					{
-						bouncer.BounceTowardPlayer = false;
-					}
-				}
-			}), "Make It Bouncy!", null, null, true);
-			 new QMSingleButton(PhysicEditor, 3, 0.5f, "Make It bouncy toward player", new Action(() =>
+			new QMSingleButton(PhysicEditor, 3, 0f, "Make It bouncy", new Action(() =>
 			{
 
 				var item = Tweaker_Object.GetGameObjectToEdit();
@@ -676,14 +660,32 @@
 					{
 						bouncer = item.AddComponent<Bouncer>();
 					}
-					if(bouncer != null)
+					if (bouncer != null)
 					{
-						bouncer.BounceTowardPlayer = true;
+						bouncer.BounceTowardPlayer = false;
 					}
 				}
-			}), "Make It bouncy toward player!", null, null, true).SetResizeTextForBestFit(true);
-			
-			new QMSingleButton(PhysicEditor, 3, 1f, "Remove Bouncy", new Action(() => {
+			}), "Make It Bouncy!", null, null, true);
+			new QMSingleButton(PhysicEditor, 3, 0.5f, "Make It bouncy toward player", new Action(() =>
+		   {
+
+			   var item = Tweaker_Object.GetGameObjectToEdit();
+			   if (item != null)
+			   {
+				   var bouncer = item.GetComponent<Bouncer>();
+				   if (bouncer == null)
+				   {
+					   bouncer = item.AddComponent<Bouncer>();
+				   }
+				   if (bouncer != null)
+				   {
+					   bouncer.BounceTowardPlayer = true;
+				   }
+			   }
+		   }), "Make It bouncy toward player!", null, null, true).SetResizeTextForBestFit(true);
+
+			new QMSingleButton(PhysicEditor, 3, 1f, "Remove Bouncy", new Action(() =>
+			{
 				var item = Tweaker_Object.GetGameObjectToEdit();
 				if (item != null)
 				{

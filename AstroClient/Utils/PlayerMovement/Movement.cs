@@ -155,7 +155,7 @@
 				}
 				else
 				{
-										
+
 					UnityEngine.Object.Destroy(Capsule);
 				}
 			}
@@ -233,7 +233,7 @@
 			}
 			set
 			{
-				
+
 				_SerializerEnabled = value;
 				if (SerializerBtn != null)
 				{

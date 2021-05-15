@@ -39,7 +39,7 @@
 					harmony1 = HarmonyInstance.Create(BuildInfo.Name + " RPCEventHook1");
 				}
 
-				harmony1.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent1), BindingFlags.Static | BindingFlags.NonPublic)), null, null);				
+				harmony1.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent1), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
 				ModConsole.DebugLog("Hooked VRC_EventDispatcherRFC 1");
 			}
 			catch
@@ -140,9 +140,9 @@
 			{
 				GameObjName = "null";
 			}
-			if(__0 != null)
+			if (__0 != null)
 			{
-				if(__0.GetAPIUser() != null)
+				if (__0.GetAPIUser() != null)
 				{
 					sender = __0.GetAPIUser().displayName;
 				}
@@ -177,6 +177,6 @@
 			return true;
 		}
 
-		
+
 	}
 }

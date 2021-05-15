@@ -1,7 +1,5 @@
 ﻿namespace AstroClient.Mora
 {
-
-	using Newtonsoft.Json;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
@@ -10,11 +8,8 @@
 	using System.Net.Cache;
 	using System.Net.Security;
 	using System.Security.Cryptography.X509Certificates;
-	using UnhollowerBaseLib;
 	using UnityEngine;
 	using VRC;
-	using VRC.Core;
-	using VRC.UI;
 
 	class anticrashwrappers
 	{

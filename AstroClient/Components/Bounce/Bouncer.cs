@@ -85,7 +85,7 @@
 		}
 
 
-		private Vector3 initialVelocity = new Vector3(0,0,0);
+		private Vector3 initialVelocity = new Vector3(0, 0, 0);
 		private Vector3 lastFrameVelocity;
 		private Rigidbody rb;
 		private float minVelocity = 10f;
