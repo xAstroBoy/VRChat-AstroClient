@@ -54,7 +54,7 @@
 				FindEntryWithUser();
 			}
 			GameRoleTag = SingleTagsUtils.AddSingleTag(Internal_player);
-			if (isAmongUsWorld)
+			if (IsAmongUsWorld)
 			{
 				AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Internal_player);
 				AmongUSVoteRevealTag.ShowTag = false;
@@ -77,7 +77,7 @@
 				Murder4CurrentRole = Murder4Roles.Unassigned;
 				ModConsole.DebugLog("Registered " + Internal_user.displayName + " On Murder 4 Role ESP.");
 			}
-			if (JarRoleController.isAmongUsWorld)
+			if (JarRoleController.IsAmongUsWorld)
 			{
 				AmongUsCurrentRole = AmongUsRoles.Unassigned;
 				ModConsole.DebugLog("Registered " + Internal_user.displayName + " On Among US Role ESP.");
@@ -88,7 +88,7 @@
 
 		private static JarRoleESP TranslateSyncVotedFor(int value)
 		{
-			return RoleEspComponents.Where(x => x.LinkedEntry.nodevalue == value).First();
+			return RoleEspComponents.Where(x => x.LinkedEntry.Nodevalue == value).First();
 		}
 
 
@@ -106,7 +106,7 @@
 			{
 				if (obj != null)
 				{
-					if (isAmongUsWorld)
+					if (IsAmongUsWorld)
 					{
 						if (Internal_AssignedNode != null)
 						{
@@ -647,7 +647,7 @@
 				{
 					UpdateMurder4ESPMechanism();
 				}
-				else if (JarRoleController.isAmongUsWorld)
+				else if (JarRoleController.IsAmongUsWorld)
 				{
 					UpdateAmongUSESpMechanism();
 				}

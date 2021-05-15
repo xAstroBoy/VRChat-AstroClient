@@ -9,7 +9,7 @@
 			return list == null || list.Count == 0;
 		}
 
-		public static bool isNotEmpty<T>(this List<T> list)
+		public static bool IsNotEmpty<T>(this List<T> list)
 		{
 			return list.Count != 0;
 		}
@@ -24,12 +24,12 @@
 			return !obj.HasValue;
 		}
 
-		public static bool isNotNull<T>(this T obj) where T : class
+		public static bool IsNotNull<T>(this T obj) where T : class
 		{
 			return obj != null;
 		}
 
-		public static bool isNotNull<T>(this T? obj) where T : struct
+		public static bool IsNotNull<T>(this T? obj) where T : struct
 		{
 			return obj.HasValue;
 		}

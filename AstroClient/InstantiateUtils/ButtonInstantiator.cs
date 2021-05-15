@@ -33,7 +33,7 @@
 					text.richText = true;
 				}
 			
-			Body.removeAllCollider();
+			Body.RemoveAllColliders();
 			Body.AddTriggerCollider();
 			if(Action != null)
 			{

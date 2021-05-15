@@ -26,7 +26,7 @@
 						ModConsole.Log("Prepping Snooze Hammer for be used...");
 						ModConsole.Log("Found Hammer! Modifying ...");
 						hammer.RenameObject("Hammer");
-						hammer.enablecolliders();
+						hammer.EnableColliders();
 						hammer.SetPickupable(true);
 						hammer.SetPickupOrientation(VRC.SDKBase.VRC_Pickup.PickupOrientation.Gun);
 						hammer.SetPickupTheft(false);

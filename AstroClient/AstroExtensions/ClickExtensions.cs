@@ -12,7 +12,7 @@
 		{
 			if (obj != null)
 			{
-				var one = obj.GetComponentsInChildren<VRC.SDKBase.VRC_Trigger>(true);
+				var one = obj.GetComponentsInChildren<VRC_Trigger>(true);
 				var two = obj.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true);
 
 				if (one.Count() != 0)
@@ -55,7 +55,7 @@
 			bool TriggerHasBeenEnabled = false;
 			if (obj != null)
 			{
-				var SDKbase = obj.GetComponent<VRC.SDKBase.VRC_Interactable>();
+				var SDKbase = obj.GetComponent<VRC_Interactable>();
 				var SDK2 = obj.GetComponent<VRCSDK2.VRC_Interactable>();
 				var SDK3 = obj.GetComponent<VRCInteractable>();
 
@@ -135,7 +135,7 @@
 			{
 				OnlineEditor.TakeObjectOwnership(obj.gameObject);
 
-				var SDKbase = obj.GetComponent<VRC.SDKBase.VRC_Trigger>();
+				var SDKbase = obj.GetComponent<VRC_Trigger>();
 				var SDK2 = obj.GetComponent<VRCSDK2.VRC_Trigger>();
 				if (!obj.gameObject.active)
 				{
@@ -197,7 +197,7 @@
 			{
 				OnlineEditor.TakeObjectOwnership(obj);
 
-				var SDKbase = obj.GetComponent<VRC.SDKBase.VRC_Trigger>();
+				var SDKbase = obj.GetComponent<VRC_Trigger>();
 				var SDK2 = obj.GetComponent<VRCSDK2.VRC_Trigger>();
 				if (!obj.active)
 				{

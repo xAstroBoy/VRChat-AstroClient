@@ -95,7 +95,7 @@
 			if (Directory.Exists(SkyboxesPath))
 			{
 				var files = Directory.GetFiles(SkyboxesPath).ToList();
-				if (files.isNotEmpty())
+				if (files.IsNotEmpty())
 				{
 					foreach (var file in files)
 					{

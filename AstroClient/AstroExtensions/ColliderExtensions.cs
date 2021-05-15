@@ -21,29 +21,29 @@
 			}
 		}
 
-		public static void removeColliders(this GameObject obj)
+		public static void RemoveColliders(this GameObject obj)
 		{
 			if (obj != null)
 			{
 				foreach (var c in obj.GetComponents<Collider>())
 				{
-					UnityEngine.Object.DestroyImmediate(c);
+					Object.DestroyImmediate(c);
 				}
 			}
 		}
 
-		public static void removeAllCollider(this GameObject obj)
+		public static void RemoveAllColliders(this GameObject obj)
 		{
 			if (obj != null)
 			{
 				foreach (var c in obj.GetComponentsInChildren<Collider>(true))
 				{
-					UnityEngine.Object.DestroyImmediate(c);
+					Object.DestroyImmediate(c);
 				}
 			}
 		}
 
-		public static void disablecollider(this GameObject obj)
+		public static void Disablecollider(this GameObject obj)
 		{
 			if (obj != null)
 			{
@@ -65,7 +65,7 @@
 			}
 		}
 
-		public static void enablecolliders(this GameObject obj)
+		public static void EnableColliders(this GameObject obj)
 		{
 			if (obj != null)
 			{

@@ -99,23 +99,23 @@
 			}
 			if (GameStartbtn != null)
 			{
-				GameStartbtn.setActive(StartGameEvent.isNotNull());
-				GameStartbtn.setIntractable(StartGameEvent.isNotNull());
+				GameStartbtn.setActive(StartGameEvent.IsNotNull());
+				GameStartbtn.setIntractable(StartGameEvent.IsNotNull());
 			}
 			if (GameAbortbtn != null)
 			{
-				GameAbortbtn.setActive(AbortGameEvent.isNotNull());
-				GameAbortbtn.setIntractable(AbortGameEvent.isNotNull());
+				GameAbortbtn.setActive(AbortGameEvent.IsNotNull());
+				GameAbortbtn.setIntractable(AbortGameEvent.IsNotNull());
 			}
 			if (GameVictoryCrewmateBtn != null)
 			{
-				GameVictoryCrewmateBtn.setActive(VictoryCrewmateEvent.isNotNull());
-				GameVictoryCrewmateBtn.setIntractable(VictoryCrewmateEvent.isNotNull());
+				GameVictoryCrewmateBtn.setActive(VictoryCrewmateEvent.IsNotNull());
+				GameVictoryCrewmateBtn.setIntractable(VictoryCrewmateEvent.IsNotNull());
 			}
 			if (GameVictoryImpostorBtn != null)
 			{
-				GameVictoryImpostorBtn.setActive(VictoryImpostorEvent.isNotNull());
-				GameVictoryImpostorBtn.setIntractable(VictoryImpostorEvent.isNotNull());
+				GameVictoryImpostorBtn.setActive(VictoryImpostorEvent.IsNotNull());
+				GameVictoryImpostorBtn.setIntractable(VictoryImpostorEvent.IsNotNull());
 			}
 			if (JarRoleController.JarRoleLinks.Count() != 0)
 			{

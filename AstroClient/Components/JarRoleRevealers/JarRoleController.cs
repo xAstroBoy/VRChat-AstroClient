@@ -29,7 +29,7 @@
 			}
 		}
 
-		public static bool isAmongUsWorld
+		public static bool IsAmongUsWorld
 		{
 			get
 			{
@@ -55,7 +55,7 @@
 				}
 				if (AmongUSRolesRevealerToggle != null)
 				{
-					if (isAmongUsWorld)
+					if (IsAmongUsWorld)
 					{
 						AmongUSRolesRevealerToggle.setToggleState(value);
 					}
@@ -72,12 +72,12 @@
 
 		public static LinkedNodes GetLinkedNode(int value)
 		{
-			return JarRoleLinks.Where(x => x.nodevalue == value).DefaultIfEmpty(null).First();
+			return JarRoleLinks.Where(x => x.Nodevalue == value).DefaultIfEmpty(null).First();
 		}
 
 		public static JarRoleESP GetLinkedComponent(int value)
 		{
-			return RoleEspComponents.Where(x => x.LinkedEntry.nodevalue == value).DefaultIfEmpty(null).First();
+			return RoleEspComponents.Where(x => x.LinkedEntry.Nodevalue == value).DefaultIfEmpty(null).First();
 		}
 
 		public override void OnLevelLoaded()
@@ -97,7 +97,7 @@
 			{
 				if (JarRoleLinks.Count() != 0)
 				{
-					if (IsMurder4World || isAmongUsWorld)
+					if (IsMurder4World || IsAmongUsWorld)
 					{
 						if (player != null)
 						{
@@ -122,13 +122,13 @@
 		{
 			public Transform Entry { get; set; }
 			public Transform Node { get; set; }
-			public int nodevalue { get; set; }
+			public int Nodevalue { get; set; }
 
 			public LinkedNodes(Transform EntryObj, Transform Nodeobj, int linknumber)
 			{
 				Entry = EntryObj;
 				Node = Nodeobj;
-				nodevalue = linknumber;
+				Nodevalue = linknumber;
 			}
 		}
 
@@ -136,7 +136,7 @@
 		{
 			get
 			{
-				if (isAmongUsWorld)
+				if (IsAmongUsWorld)
 				{
 					return "ability To see who is the impostor";
 				}
@@ -193,7 +193,7 @@
 			_isAmongUsWorld = id.Equals(WorldIds.AmongUS);
 			_IsMurder4World = id.Equals(WorldIds.Murder4);
 
-			if (isAmongUsWorld || IsMurder4World)
+			if (IsAmongUsWorld || IsMurder4World)
 			{
 				var PlayerEntries = GameObjectFinder.Find("Game Logic/Game Canvas/Game In Progress/Player List/Player List Group"); // SHOULD WORK IN MURDER 4 AND AMONG US.
 				var GameNodes = GameObjectFinder.Find("Game Logic/Player Nodes"); // SHOULD WORK IN MURDER 4 AND AMONG US.
@@ -255,7 +255,7 @@
 												{
 													//Debug($"Linked Player Entry : {Entry.name}, With node : {node.name}, with link : {NodeNumber}");
 													var addme = new LinkedNodes(Entry, node, NodeNumber.Value);
-													if (GetLinkedNode(addme.nodevalue) != null)
+													if (GetLinkedNode(addme.Nodevalue) != null)
 													{
 														continue;
 													}
@@ -284,7 +284,7 @@
 					{
 						ModConsole.Error("Player List Group Path in Murder 4 Changed! Unable to Reveal Roles!");
 					}
-					if (isAmongUsWorld)
+					if (IsAmongUsWorld)
 					{
 						ModConsole.Error("Player List Group Path in Among us Changed! Unable to Reveal Roles!");
 					}

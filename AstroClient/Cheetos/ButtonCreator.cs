@@ -27,7 +27,7 @@
 			textComp.text = text;
 			textComp.color = Color.black;
 			textComp.autoSizeTextContainer = true;
-			go.removeAllCollider();
+			go.RemoveAllColliders();
 			go.AddTriggerCollider();
 			return go;
 		}

@@ -112,23 +112,23 @@
 
 			if (GameStartbtn != null)
 			{
-				GameStartbtn.setActive(StartGameEvent.isNotNull());
-				GameStartbtn.setIntractable(StartGameEvent.isNotNull());
+				GameStartbtn.setActive(StartGameEvent.IsNotNull());
+				GameStartbtn.setIntractable(StartGameEvent.IsNotNull());
 			}
 			if (GameAbortbtn != null)
 			{
-				GameAbortbtn.setActive(AbortGameEvent.isNotNull());
-				GameAbortbtn.setIntractable(AbortGameEvent.isNotNull());
+				GameAbortbtn.setActive(AbortGameEvent.IsNotNull());
+				GameAbortbtn.setIntractable(AbortGameEvent.IsNotNull());
 			}
 			if (GameVictoryBystanderBtn != null)
 			{
-				GameVictoryBystanderBtn.setActive(VictoryBystanderEvent.isNotNull());
-				GameVictoryBystanderBtn.setIntractable(VictoryBystanderEvent.isNotNull());
+				GameVictoryBystanderBtn.setActive(VictoryBystanderEvent.IsNotNull());
+				GameVictoryBystanderBtn.setIntractable(VictoryBystanderEvent.IsNotNull());
 			}
 			if (GameVictoryMurdererBtn != null)
 			{
-				GameVictoryMurdererBtn.setActive(VictoryMurdererEvent.isNotNull());
-				GameVictoryMurdererBtn.setIntractable(VictoryMurdererEvent.isNotNull());
+				GameVictoryMurdererBtn.setActive(VictoryMurdererEvent.IsNotNull());
+				GameVictoryMurdererBtn.setIntractable(VictoryMurdererEvent.IsNotNull());
 			}
 
 			item_Grenade.RenameObject("Grenade");

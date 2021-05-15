@@ -63,7 +63,7 @@
 				buttonGroup.transform.rotation = rotation;
 
 				//buttonGroup.transform.position += new Vector3(0, 0.02f, 0);
-				buttonGroup.removeColliders();
+				buttonGroup.RemoveColliders();
 				buttonGroup.AddToWorldUtilsMenu();
 				buttonGroup.RenameObject($"ButtonGroup {doorID}");
 

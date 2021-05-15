@@ -24,8 +24,8 @@
 				BasementDoor.DestroyMeLocal();
 				Kitchen1.DestroyMeLocal();
 				kitchen2.DestroyMeLocal();
-				frame.removeAllCollider();
-				rope.removeAllCollider();
+				frame.RemoveAllColliders();
+				rope.RemoveAllColliders();
 			}
 		}
 	}
