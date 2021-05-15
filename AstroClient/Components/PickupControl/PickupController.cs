@@ -19,7 +19,7 @@
 		public void Start()
 		{
 			obj = gameObject;
-			Pickup1 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
+			Pickup1 = obj.GetComponent<VRC_Pickup>();
 			Pickup2 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
 			Pickup3 = obj.GetComponent<VRC.SDK3.Components.VRCPickup>();
 
@@ -190,7 +190,7 @@
 
 					if (!hasRequiredComponentBeenAdded)
 					{
-						Pickup1 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
+						Pickup1 = obj.GetComponent<VRC_Pickup>();
 						Pickup2 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
 						Pickup3 = obj.GetComponent<VRC.SDK3.Components.VRCPickup>();
 						if (!HasTriedWithPickup1)
@@ -198,7 +198,7 @@
 							if (Pickup1 == null)
 							{
 								ModConsole.DebugLog("PickupController : Attempting to add  VRC.SDKBase.VRC_Pickup to object " + obj.name);
-								Pickup1 = obj.AddComponent<VRC.SDKBase.VRC_Pickup>();
+								Pickup1 = obj.AddComponent<VRC_Pickup>();
 								if (Pickup1 == null)
 								{
 									ModConsole.DebugLog("PickupController : Failed to add  VRC.SDKBase.VRC_Pickup to object " + obj.name);
@@ -1022,14 +1022,7 @@
 			[HideFromIl2Cpp]
 			get
 			{
-				if (isHeld)
-				{
-					return "Held : Yes";
-				}
-				else
-				{
-					return "Held : No";
-				}
+				return isHeld ? "Held : Yes" : "Held : No";
 			}
 		}
 
@@ -1039,7 +1032,7 @@
 			[HideFromIl2Cpp]
 			get
 			{
-				return "Current holder: \n " + CurrentObjectHolder;
+				return $"Current holder: \n {CurrentObjectHolder}";
 			}
 		}
 
@@ -1049,14 +1042,7 @@
 			[HideFromIl2Cpp]
 			get
 			{
-				if (isHeld)
-				{
-					return Color.green;
-				}
-				else
-				{
-					return Color.red;
-				}
+				return isHeld ? Color.green : Color.red;
 			}
 		}
 
@@ -1105,7 +1091,7 @@
 			}
 		}
 
-		private VRC.SDKBase.VRC_Pickup Pickup1;
+		private VRC_Pickup Pickup1;
 		private VRCSDK2.VRC_Pickup Pickup2;
 		private VRC.SDK3.Components.VRCPickup Pickup3;
 		private GameObject obj = null;
@@ -1124,8 +1110,8 @@
 		private float Original_Proximity;
 
 		internal bool EditMode = false;
-		internal VRC.SDKBase.VRC_Pickup.AutoHoldMode Original_AutoHold;
-		internal VRC.SDKBase.VRC_Pickup.PickupOrientation Original_orientation;
+		internal VRC_Pickup.AutoHoldMode Original_AutoHold;
+		internal VRC_Pickup.PickupOrientation Original_orientation;
 		private protected bool Locked = false;
 		internal bool ForceComponent = false;
 
@@ -1133,7 +1119,7 @@
 		internal bool pickupable;
 		internal bool DisallowTheft;
 		internal float proximity;
-		internal VRC.SDKBase.VRC_Pickup.AutoHoldMode AutoHold;
-		internal VRC.SDKBase.VRC_Pickup.PickupOrientation orientation;
+		internal VRC_Pickup.AutoHoldMode AutoHold;
+		internal VRC_Pickup.PickupOrientation orientation;
 	}
 }

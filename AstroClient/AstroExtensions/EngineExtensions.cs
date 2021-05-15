@@ -69,20 +69,12 @@
 
 		public static GameObject InstantiateObject(this GameObject obj)
 		{
-			if (obj != null)
-			{
-				return GameObject.Instantiate(obj);
-			}
-			return null;
+			return obj != null ? Object.Instantiate(obj) : null;
 		}
 
 		public static GameObject InstantiateObject(this Transform obj)
 		{
-			if (obj != null)
-			{
-				return UnityEngine.Object.Instantiate(obj.gameObject);
-			}
-			return null;
+			return obj != null ? Object.Instantiate(obj.gameObject) : null;
 		}
 
 		public static void CloneObject(this GameObject obj)
@@ -122,7 +114,7 @@
 			}
 		}
 
-		public static void DestroyMeLocal(this UnityEngine.Object obj)
+		public static void DestroyMeLocal(this Object obj)
 		{
 			if (obj != null)
 			{
@@ -134,7 +126,7 @@
 					var item = obj as Component;
 					if (item != null)
 					{
-						UnityEngine.Object.DestroyImmediate(item);
+						Object.DestroyImmediate(item);
 					}
 					if (item != null)
 					{
@@ -152,7 +144,7 @@
 					var item = obj as GameObject;
 					if (item != null)
 					{
-						UnityEngine.Object.Destroy(item);
+						Object.Destroy(item);
 					}
 					MiscUtility.DelayFunction(0.5f, () =>
 					{
@@ -171,7 +163,7 @@
 					var item = obj as Transform;
 					if (item != null)
 					{
-						UnityEngine.Object.Destroy(item.gameObject);
+						Object.Destroy(item.gameObject);
 					}
 					MiscUtility.DelayFunction(0.5f, () =>
 					{
@@ -189,7 +181,7 @@
 				{
 					if (obj != null)
 					{
-						UnityEngine.Object.Destroy(obj);
+						Object.Destroy(obj);
 					}
 					MiscUtility.DelayFunction(0.5f, () =>
 					{

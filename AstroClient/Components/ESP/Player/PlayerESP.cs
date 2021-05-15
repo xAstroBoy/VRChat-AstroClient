@@ -96,7 +96,7 @@
 
 		public void LateUpdate()
 		{
-			if (!useCustomColor)
+			if (!UseCustomColor)
 			{
 				if (HighLightOptions != null)
 				{
@@ -215,7 +215,7 @@
 		private UnhollowerBaseLib.Il2CppArrayBase<Renderer> ObjRenderers;
 		private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
 		private HighlightsFXStandalone HighLightOptions;
-		internal bool useCustomColor { get; set; } = false;
+		internal bool UseCustomColor { get; set; } = false;
 
 		internal Player AssignedPlayer
 		{

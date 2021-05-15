@@ -339,14 +339,6 @@
 			Task.Run(() => { Write("[LOG]: "); });
 		}
 
-		private static void PrintCheetosTag()
-		{
-			Console.Write("[", Color.White);
-			Console.Write("LOG", Color.PaleVioletRed);
-			Console.Write("]: ", Color.White);
-			Task.Run(() => { Write("[CHEETOS]: "); });
-		}
-
 		private static void PrintAntiCrashTag()
 		{
 			Console.Write("[", Color.White);

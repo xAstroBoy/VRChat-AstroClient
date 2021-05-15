@@ -562,7 +562,7 @@
 					
 					if (ESP != null)
 					{
-						if (ESP.useCustomColor)
+						if (ESP.UseCustomColor)
 						{
 							ESP.ChangeColor(color);
 						}
@@ -667,9 +667,9 @@
 			}
 			if (ESP != null)
 			{
-				if (ESP.useCustomColor != JarRoleController.ViewRoles)
+				if (ESP.UseCustomColor != JarRoleController.ViewRoles)
 				{
-					ESP.useCustomColor = JarRoleController.ViewRoles;
+					ESP.UseCustomColor = JarRoleController.ViewRoles;
 				}
 			}
 			if (JarRoleController.ViewRoles)
@@ -720,9 +720,9 @@
 			}
 			if (ESP != null)
 			{
-				if (ESP.useCustomColor != JarRoleController.ViewRoles)
+				if (ESP.UseCustomColor != JarRoleController.ViewRoles)
 				{
-					ESP.useCustomColor = JarRoleController.ViewRoles;
+					ESP.UseCustomColor = JarRoleController.ViewRoles;
 				}
 			}
 			if (JarRoleController.ViewRoles)
@@ -947,25 +947,11 @@
 			{
 				if (AmongUsCurrentRole == AmongUsRoles.Crewmate)
 				{
-					if (!AmongUSHasVoted)
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
+					return !AmongUSHasVoted;
 				}
 				else if (AmongUsCurrentRole == AmongUsRoles.Impostor)
 				{
-					if (!AmongUSHasVoted)
-					{
-						return true;
-					}
-					else
-					{
-						return false;
-					}
+					return !AmongUSHasVoted;
 				}
 				else if (AmongUsCurrentRole == AmongUsRoles.Unassigned)
 				{
