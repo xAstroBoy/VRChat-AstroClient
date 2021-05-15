@@ -2,9 +2,9 @@
 {
 	#region Imports
 
-	using AstroClientCore.Console;
 	using AstroClientCore.Managers;
 	using AstroClientCore.Variables;
+	using AstroLibrary.Console;
 	using MelonLoader;
 
 	#endregion
@@ -13,6 +13,7 @@
 	{
 		public override void OnApplicationStart()
 		{
+			ModConsole.ModName = "AstroClient-Core";
 			ModConsole.Log($"Welcome to AstroClient, {GlobalVariables.Version}");
 
 			ModuleManager.LoadModules();

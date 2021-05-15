@@ -45,6 +45,7 @@
 
 		public override void OnApplicationStart()
 		{
+			ModConsole.ModName = "AstroClient";
 			LogSupport.RemoveAllHandlers();
 			ConfigManager.Validate();
 			ConfigManager.Load();
