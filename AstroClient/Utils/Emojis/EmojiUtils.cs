@@ -276,37 +276,37 @@
 
 		public static void add_x1()
 		{
-			EmojiSpammerInt = EmojiSpammerInt + 1;
+			EmojiSpammerInt++;
 			UpdateEmojiSpamCounter();
 		}
 
 		public static void add_x10()
 		{
-			EmojiSpammerInt = EmojiSpammerInt + 10;
+			EmojiSpammerInt += 10;
 			UpdateEmojiSpamCounter();
 		}
 
 		public static void add_x100()
 		{
-			EmojiSpammerInt = EmojiSpammerInt + 100;
+			EmojiSpammerInt += 100;
 			UpdateEmojiSpamCounter();
 		}
 
 		public static void sub_x1()
 		{
-			EmojiSpammerInt = EmojiSpammerInt - 1;
+			EmojiSpammerInt--;
 			UpdateEmojiSpamCounter();
 		}
 
 		public static void sub_x10()
 		{
-			EmojiSpammerInt = EmojiSpammerInt - 10;
+			EmojiSpammerInt -= 10;
 			UpdateEmojiSpamCounter();
 		}
 
 		public static void sub_x100()
 		{
-			EmojiSpammerInt = EmojiSpammerInt - 100;
+			EmojiSpammerInt -= 100;
 			UpdateEmojiSpamCounter();
 		}
 

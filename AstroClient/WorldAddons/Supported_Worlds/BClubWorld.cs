@@ -84,7 +84,7 @@
 							clone.AddCollider();
 
 							var udonEvent = UdonSearch.FindUdonEvent("PhotozoneMaster", $"EnableIntercomIn{doorID}");
-							Action action = () => { udonEvent.ExecuteUdonEvent(); };
+							void action() { udonEvent.ExecuteUdonEvent(); }
 
 							clone.gameObject.AddAstroInteractable(action);
 							var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
@@ -128,7 +128,7 @@
 							clone.RenameObject($"Lock {doorID}");
 							clone.AddCollider();
 							var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}");
-							Action action = () => { udonEvent.ExecuteUdonEvent(); };
+							void action() { udonEvent.ExecuteUdonEvent(); }
 							clone.gameObject.AddAstroInteractable(action);
 							var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
 							if (behaviourevent != null && behaviourevent.Count() != 0)
@@ -171,7 +171,7 @@
 							clone.RenameObject($"Looking {doorID}");
 							clone.AddCollider();
 							var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLooking{doorID}");
-							Action action = () => { udonEvent.ExecuteUdonEvent(); };
+							void action() { udonEvent.ExecuteUdonEvent(); }
 							clone.gameObject.AddAstroInteractable(action);
 							var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
 							if (behaviourevent != null && behaviourevent.Count() != 0)
@@ -216,7 +216,7 @@
 							clone.AddCollider();
 
 							var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleAnon{doorID}");
-							Action action = () => { udonEvent.ExecuteUdonEvent(); };
+							void action() { udonEvent.ExecuteUdonEvent(); }
 							clone.gameObject.AddAstroInteractable(action);
 							var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
 							if (behaviourevent != null && behaviourevent.Count() != 0)
@@ -260,7 +260,7 @@
 							clone.RenameObject($"Do Not Disturb {doorID}");
 							clone.AddCollider();
 							var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleDoorbell{doorID}");
-							Action action = () => { udonEvent.ExecuteUdonEvent(); };
+							void action() { udonEvent.ExecuteUdonEvent(); }
 							clone.gameObject.AddAstroInteractable(action);
 							var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
 							if (behaviourevent != null && behaviourevent.Count() != 0)

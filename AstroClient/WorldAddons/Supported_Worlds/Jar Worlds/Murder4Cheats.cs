@@ -44,12 +44,12 @@
 			Clue_Locket = GameObjectFinder.Find("Game Logic/Clues/Clue (locket)");
 			Clue_PocketWatch = GameObjectFinder.Find("Game Logic/Clues/Clue (pocketwatch)");
 			Clue_Postcard = GameObjectFinder.Find("Game Logic/Clues/Clue (postcard)");
-			if (!isChristmasMode)
+			if (!IsChristmasMode)
 			{
 				Clue_Present = GameObjectFinder.Find("Game Logic/Clues (xmas)/Clue (present) (5)");
 				if (Clue_Present != null)
 				{
-					isChristmasMode = true;
+					IsChristmasMode = true;
 				}
 				else
 				{
@@ -297,7 +297,7 @@
 			BearTraps.Clear();
 			Grenades.Clear();
 			PatreonFlairtoggle = null;
-			isChristmasMode = false;
+			IsChristmasMode = false;
 			DoUnlockedSound = false;
 			OnPlayerUnlockedClues = null;
 			AssignedSelfRole = string.Empty;
@@ -816,7 +816,7 @@
 		public static QMSingleButton KnifesGrabFromFar;
 		private static bool _isChristmasMode;
 
-		public static bool isChristmasMode
+		public static bool IsChristmasMode
 		{
 			get
 			{

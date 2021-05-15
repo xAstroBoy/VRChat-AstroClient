@@ -10,6 +10,7 @@
 	using VRC.SDKBase;
 	using static AstroClient.LocalPlayerUtils;
 	using static VRC.SDKBase.VRC_EventHandler;
+	using System.Windows.Forms.DataVisualization.Charting;
 
 	public class HubButtonsControl : GameEvents
 	{
@@ -160,7 +161,7 @@
 					var One = item.GetComponentInChildren<VRC_Trigger>();
 					if (One != null)
 					{
-						if (Status_BeachBalls_Props != BeachBalls_Props && isOnUpdate || !isOnUpdate)
+						if ((Status_BeachBalls_Props != BeachBalls_Props && isOnUpdate) || !isOnUpdate)
 						{
 							// BlinkColorObject(item, Color.green, //OriginalColor_Buttontoggle_BeachBall);
 							ModConsole.Log("Clicked " + item.name);
@@ -186,7 +187,7 @@
 					var One = item.GetComponentInChildren<VRC_Trigger>();
 					if (One != null)
 					{
-						if (Status_Mirror_Props != Mirror_Props && isOnUpdate || !isOnUpdate)
+						if ((Status_Mirror_Props != Mirror_Props && isOnUpdate) || !isOnUpdate)
 						{
 							ModConsole.Log("Clicked " + item.name);
 							// BlinkColorObject(item, Color.green, //OriginalColor_Buttontoggle_MirrorProps);
@@ -212,7 +213,7 @@
 					var One = item.GetComponentInChildren<VRC_Trigger>();
 					if (One != null)
 					{
-						if (Status_Table_Props != Table_Props && isOnUpdate || !isOnUpdate)
+						if ((Status_Table_Props != Table_Props && isOnUpdate) || !isOnUpdate)
 						{
 							ModConsole.Log("Clicked " + item.name);
 							// BlinkColorObject(item, Color.green, //OriginalColor_Buttontoggle_Table_Props);
@@ -238,7 +239,7 @@
 					var One = item.GetComponentInChildren<VRC_Trigger>();
 					if (One != null)
 					{
-						if (Status_CrystalBlock_Props != CrystalBlock_Props && isOnUpdate || !isOnUpdate)
+						if ((Status_CrystalBlock_Props != CrystalBlock_Props && isOnUpdate) || !isOnUpdate)
 						{
 							ModConsole.Log("Clicked " + item.name);
 							// BlinkColorObject(item, Color.green, //OriginalColor_Buttontoggle_CrystalBlocks);
@@ -264,7 +265,7 @@
 					var One = item.GetComponentInChildren<VRC_Trigger>();
 					if (One != null)
 					{
-						if (Status_Boats_Props != Boats_Props && isOnUpdate || !isOnUpdate)
+						if ((Status_Boats_Props != Boats_Props && isOnUpdate) || !isOnUpdate)
 						{
 							ModConsole.Log("Clicked " + item.name);
 							// BlinkColorObject(item, Color.green, //OriginalColor_Buttontoggle_Boats);
@@ -282,15 +283,12 @@
 
 		public static bool ConvertVrcBool(VrcBooleanOp Value)
 		{
-			if (Value == VrcBooleanOp.True)
+			return Value switch
 			{
-				return true;
-			}
-			if (Value == VrcBooleanOp.False)
-			{
-				return false;
-			}
-			return false;
+				VrcBooleanOp.True => true,
+				VrcBooleanOp.False => false,
+				_ => false,
+			};
 		}
 
 		public override void VRC_EventDispatcherRFC_triggerEvent(VRC_EventHandler EventHandler, VRC_EventHandler.VrcEvent VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int value, float floatvalue)
