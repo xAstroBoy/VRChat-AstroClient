@@ -37,7 +37,7 @@
 			if (ObjMeshRenderers == null && ObjMeshRenderers.Count() == 0)
 			{
 				ModConsole.DebugError($"Unable to add ESP_Tweaker to  {gameObject.name} due to MeshRenderer Being null or empty");
-				Object.Destroy(this);
+				Destroy(this);
 				return;
 			}
 			SetupHighlighter();

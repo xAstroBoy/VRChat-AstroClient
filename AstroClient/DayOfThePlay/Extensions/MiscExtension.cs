@@ -86,7 +86,7 @@
 
 		internal static void LoadSprite(this Image Instance, string url)
 		{
-			MelonLoader.MelonCoroutines.Start(LoadSpriteEnum(Instance, url));
+			MelonCoroutines.Start(LoadSpriteEnum(Instance, url));
 		}
 
 		private static IEnumerator LoadSpriteEnum(this Image Instance, string url)

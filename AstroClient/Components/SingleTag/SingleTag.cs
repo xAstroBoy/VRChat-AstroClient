@@ -43,7 +43,7 @@
 			else
 			{
 				ModConsole.Error($"Failed to Generate a SingleTag for Player {player.DisplayName()}");
-				Object.Destroy(this);
+				Destroy(this);
 			}
 			Debug($"Pre-assigned InternalStack {InternalStack}");
 			// FIND ESSENTIALS TO GENERATE A TAG.
@@ -75,7 +75,7 @@
 				{
 					Debug($"Starting Tag Generation..");
 
-					SpawnedTag = Object.Instantiate(Player_QuickStats, Player_QuickStats.parent, false);
+					SpawnedTag = Instantiate(Player_QuickStats, Player_QuickStats.parent, false);
 					if (SpawnedTag != null)
 					{
 						Debug($"Spawned SingleTag for {player.DisplayName()}!");
@@ -98,7 +98,7 @@
 								continue;
 							}
 							Debug($"Removed Child {child.name} in {SpawnedTag.name} allocated on {player.DisplayName()}");
-							Object.Destroy(child.gameObject);
+							Destroy(child.gameObject);
 							if (!SpawnedTag.gameObject.active)
 							{
 								SpawnedTag.gameObject.SetActive(true);

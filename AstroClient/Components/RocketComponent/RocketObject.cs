@@ -88,7 +88,7 @@
 						}
 						if (!OnlineEditor.IsLocalPlayerOwner(obj))
 						{
-							if (Forces.TakeOwnership)
+							if (TakeOwnership)
 							{
 								OnlineEditor.TakeObjectOwnership(obj);
 							}
@@ -113,7 +113,7 @@
 						HasRequiredSettings = true;
 					}
 
-					if (Forces.TakeOwnership)
+					if (TakeOwnership)
 					{
 						OnlineEditor.TakeObjectOwnership(obj);
 					}

@@ -13,7 +13,7 @@
 			ModConsole.Log("Generating Instance Holder", Color.LimeGreen);
 			InstanceHolder = new GameObject();
 			InstanceHolder.name = "Instance Holder " + BuildInfo.Name;
-			UnityEngine.Object.DontDestroyOnLoad(InstanceHolder);
+			Object.DontDestroyOnLoad(InstanceHolder);
 		}
 
 		public static GameObject GetInstanceHolder(string instancename = "INSTANCE_OBJECT_ADDED")
@@ -24,7 +24,7 @@
 				{
 					ModConsole.Log(instancename + " is now Added!", Color.Orange);
 				}
-				UnityEngine.Object.DontDestroyOnLoad(InstanceHolder);
+				Object.DontDestroyOnLoad(InstanceHolder);
 				return InstanceHolder;
 			}
 			else

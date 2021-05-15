@@ -84,7 +84,7 @@
 
 		private IEnumerator Init()
 		{
-			Patching.InitPatch();
+			InitPatch();
 			yield break;
 		}
 

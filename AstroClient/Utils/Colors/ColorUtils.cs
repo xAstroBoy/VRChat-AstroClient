@@ -20,7 +20,7 @@ public class ColorUtils : GameEvents
 
 	public static Color GenerateHSVColor()
 	{
-		var color = UnityEngine.Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+		var color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
 		if (GeneratedColors != null)
 		{
 			if (GeneratedColors.Contains(color))

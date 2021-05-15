@@ -9,7 +9,7 @@
 		{
 			foreach (var item in SpawnedESPsHolders)
 			{
-				UnityEngine.Object.DestroyImmediate(item);
+				Object.DestroyImmediate(item);
 			}
 			SpawnedESPsHolders.Clear();
 		}

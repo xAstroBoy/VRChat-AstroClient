@@ -59,7 +59,7 @@
 				string name = "ItemInflaterManager";
 				var gameobj = GetInstanceHolder(name);
 				Instance = gameobj.AddComponent<ItemInflaterManager>() as ItemInflaterManager;
-				UnityEngine.Object.DontDestroyOnLoad(gameobj);
+				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{
 					ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);

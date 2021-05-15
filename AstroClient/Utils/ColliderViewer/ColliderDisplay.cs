@@ -19,11 +19,11 @@
 		private static void CreateMaterials()
 		{
 			Il2CppArrayBase<Shader> source = Resources.FindObjectsOfTypeAll<Shader>();
-			Shader shader2 = Shader.Find(ColliderDisplay.ShaderName);
+			Shader shader2 = Shader.Find(ShaderName);
 			bool flag = shader2 == null;
 			if (flag)
 			{
-				ModConsole.Log("Failed to find shader with name " + ColliderDisplay.ShaderName + ". Valid shaders:\n" +
+				ModConsole.Log("Failed to find shader with name " + ShaderName + ". Valid shaders:\n" +
 							   string.Join("\n", from shader in source
 												 select shader.name));
 				shader2 = source.FirstOrDefault((Shader shader) =>
@@ -41,10 +41,10 @@
 				ModConsole.Log("Creating material with shader " + shader2.name);
 			}
 
-			ColliderDisplay._triggerMaterial = new Material(shader2);
-			ColliderDisplay._solidMaterial = new Material(shader2);
-			ColliderDisplay._triggerMaterial.color = new Color(1f, 0f, 0f, 0.25f);
-			ColliderDisplay._solidMaterial.color = new Color(0f, 1f, 0f, 0.25f);
+			_triggerMaterial = new Material(shader2);
+			_solidMaterial = new Material(shader2);
+			_triggerMaterial.color = new Color(1f, 0f, 0f, 0.25f);
+			_solidMaterial.color = new Color(0f, 1f, 0f, 0.25f);
 			Resources.UnloadUnusedAssets();
 		}
 
@@ -99,19 +99,19 @@
 			{
 				return;
 			}
-			ColliderDisplay.CreateMaterials();
-			int count = ColliderDisplay.SphereColliders.Count();
-			int count2 = ColliderDisplay.BoxColliders.Count();
-			int count3 = ColliderDisplay.CapsuleColliders.Count();
-			ColliderDisplay.GetAllColliders<SphereCollider>(ColliderDisplay.SphereColliders);
-			ColliderDisplay.GetAllColliders<BoxCollider>(ColliderDisplay.BoxColliders);
-			ColliderDisplay.GetAllColliders<CapsuleCollider>(ColliderDisplay.CapsuleColliders);
-			ColliderDisplay.Regenerate<SphereCollider, ColliderDisplay.Sphere>(ColliderDisplay.SphereCache, count, ColliderDisplay.SphereColliders);
-			ColliderDisplay.Regenerate<BoxCollider, ColliderDisplay.Cube>(ColliderDisplay.CubeCache, count2, ColliderDisplay.BoxColliders);
-			ColliderDisplay.Regenerate<CapsuleCollider, ColliderDisplay.Capsule>(ColliderDisplay.CapsuleCache, count3, ColliderDisplay.CapsuleColliders);
+			CreateMaterials();
+			int count = SphereColliders.Count();
+			int count2 = BoxColliders.Count();
+			int count3 = CapsuleColliders.Count();
+			GetAllColliders(SphereColliders);
+			GetAllColliders(BoxColliders);
+			GetAllColliders(CapsuleColliders);
+			Regenerate(SphereCache, count, SphereColliders);
+			Regenerate(CubeCache, count2, BoxColliders);
+			Regenerate(CapsuleCache, count3, CapsuleColliders);
 			if (!isOnUpdate)
 			{
-				ModConsole.Log(string.Format("Showing {0} sphere colliders, {1} box colliders, and {2} capsule colliders", ColliderDisplay.SphereColliders.Count, ColliderDisplay.BoxColliders.Count, ColliderDisplay.CapsuleColliders.Count));
+				ModConsole.Log(string.Format("Showing {0} sphere colliders, {1} box colliders, and {2} capsule colliders", SphereColliders.Count, BoxColliders.Count, CapsuleColliders.Count));
 			}
 		}
 
@@ -171,9 +171,9 @@
 
 		public override void OnUpdate()
 		{
-			ColliderDisplay.Update<SphereCollider, ColliderDisplay.Sphere>(ColliderDisplay.SphereCache, ColliderDisplay.SphereColliders);
-			ColliderDisplay.Update<BoxCollider, ColliderDisplay.Cube>(ColliderDisplay.CubeCache, ColliderDisplay.BoxColliders);
-			ColliderDisplay.Update<CapsuleCollider, ColliderDisplay.Capsule>(ColliderDisplay.CapsuleCache, ColliderDisplay.CapsuleColliders);
+			Update(SphereCache, SphereColliders);
+			Update(CubeCache, BoxColliders);
+			Update(CapsuleCache, CapsuleColliders);
 		}
 
 		private static void Update<T, TSelf>(IList<TSelf> cache, List<T> colliders) where T : Collider where TSelf : class, IDisplay<T, TSelf>, new()
@@ -196,15 +196,15 @@
 
 		public static void DisableAll()
 		{
-			int count = ColliderDisplay.SphereColliders.Count;
-			int count2 = ColliderDisplay.BoxColliders.Count;
-			int count3 = ColliderDisplay.CapsuleColliders.Count;
-			ColliderDisplay.SphereColliders.Clear();
-			ColliderDisplay.BoxColliders.Clear();
-			ColliderDisplay.CapsuleColliders.Clear();
-			ColliderDisplay.Regenerate<SphereCollider, ColliderDisplay.Sphere>(ColliderDisplay.SphereCache, count, ColliderDisplay.SphereColliders);
-			ColliderDisplay.Regenerate<BoxCollider, ColliderDisplay.Cube>(ColliderDisplay.CubeCache, count2, ColliderDisplay.BoxColliders);
-			ColliderDisplay.Regenerate<CapsuleCollider, ColliderDisplay.Capsule>(ColliderDisplay.CapsuleCache, count3, ColliderDisplay.CapsuleColliders);
+			int count = SphereColliders.Count;
+			int count2 = BoxColliders.Count;
+			int count3 = CapsuleColliders.Count;
+			SphereColliders.Clear();
+			BoxColliders.Clear();
+			CapsuleColliders.Clear();
+			Regenerate(SphereCache, count, SphereColliders);
+			Regenerate(CubeCache, count2, BoxColliders);
+			Regenerate(CapsuleCache, count3, CapsuleColliders);
 			ModConsole.DebugLog(string.Format("No longer showing {0} sphere colliders, {1} box colliders, and {2} capsule colliders", count, count2, count3));
 		}
 
@@ -254,7 +254,7 @@
 				UnityEngine.Object.Destroy(gameObject.GetComponent<Collider>());
 				_transform = gameObject.transform;
 				_renderer = gameObject.GetComponent<Renderer>();
-				ColliderDisplay.MyRenderers.Add((int)_renderer.GetCachedPtr());
+				MyRenderers.Add((int)_renderer.GetCachedPtr());
 			}
 
 			private static float Max(float a, float b, float c)
@@ -266,11 +266,11 @@
 			{
 				Transform transform = collider.transform;
 				Vector3 lossyScale = transform.lossyScale;
-				float num = collider.radius * ColliderDisplay.Sphere.Max(lossyScale.x, lossyScale.y, lossyScale.z) * 2f;
+				float num = collider.radius * Max(lossyScale.x, lossyScale.y, lossyScale.z) * 2f;
 				Vector3 position = transform.TransformPoint(collider.center);
 				_transform.localScale = Vector3.one * num;
 				_transform.position = position;
-				_renderer.sharedMaterial = (collider.isTrigger ? ColliderDisplay._triggerMaterial : ColliderDisplay._solidMaterial);
+				_renderer.sharedMaterial = (collider.isTrigger ? _triggerMaterial : _solidMaterial);
 			}
 
 			private readonly Transform _transform;
@@ -299,7 +299,7 @@
 				UnityEngine.Object.Destroy(gameObject.GetComponent<Collider>());
 				_transform = gameObject.transform;
 				_renderer = gameObject.GetComponent<Renderer>();
-				ColliderDisplay.MyRenderers.Add((int)_renderer.GetCachedPtr());
+				MyRenderers.Add((int)_renderer.GetCachedPtr());
 			}
 
 			public void Update(BoxCollider collider)
@@ -308,7 +308,7 @@
 				_transform.localScale = Vector3.Scale(transform.lossyScale, collider.size);
 				_transform.position = transform.TransformPoint(collider.center);
 				_transform.rotation = transform.rotation;
-				_renderer.sharedMaterial = (collider.isTrigger ? ColliderDisplay._triggerMaterial : ColliderDisplay._solidMaterial);
+				_renderer.sharedMaterial = (collider.isTrigger ? _triggerMaterial : _solidMaterial);
 			}
 
 			private readonly Transform _transform;
@@ -347,9 +347,9 @@
 				_topRenderer = _topSphere.GetComponent<Renderer>();
 				_bottomRenderer = _bottomSphere.GetComponent<Renderer>();
 				_middleRenderer = _middleCylinder.GetComponent<Renderer>();
-				ColliderDisplay.MyRenderers.Add((int)_topRenderer.GetCachedPtr());
-				ColliderDisplay.MyRenderers.Add((int)_bottomRenderer.GetCachedPtr());
-				ColliderDisplay.MyRenderers.Add((int)_middleRenderer.GetCachedPtr());
+				MyRenderers.Add((int)_topRenderer.GetCachedPtr());
+				MyRenderers.Add((int)_bottomRenderer.GetCachedPtr());
+				MyRenderers.Add((int)_middleRenderer.GetCachedPtr());
 			}
 
 			private static float Max(float a, float b)
@@ -365,7 +365,7 @@
 				Vector3 position = transform.TransformPoint(collider.center);
 				Quaternion quaternion = transform.rotation;
 				float num = collider.height * lossyScale[direction];
-				float num2 = collider.radius * ColliderDisplay.Capsule.Max(lossyScale[(direction + 1) % 3], lossyScale[(direction + 2) % 3]);
+				float num2 = collider.radius * Max(lossyScale[(direction + 1) % 3], lossyScale[(direction + 2) % 3]);
 				int num3 = direction;
 				if (num3 != 0)
 				{
@@ -390,15 +390,15 @@
 				bool isTrigger = collider.isTrigger;
 				if (isTrigger)
 				{
-					_topRenderer.sharedMaterial = ColliderDisplay._triggerMaterial;
-					_bottomRenderer.sharedMaterial = ColliderDisplay._triggerMaterial;
-					_middleRenderer.sharedMaterial = ColliderDisplay._triggerMaterial;
+					_topRenderer.sharedMaterial = _triggerMaterial;
+					_bottomRenderer.sharedMaterial = _triggerMaterial;
+					_middleRenderer.sharedMaterial = _triggerMaterial;
 				}
 				else
 				{
-					_topRenderer.sharedMaterial = ColliderDisplay._solidMaterial;
-					_bottomRenderer.sharedMaterial = ColliderDisplay._solidMaterial;
-					_middleRenderer.sharedMaterial = ColliderDisplay._solidMaterial;
+					_topRenderer.sharedMaterial = _solidMaterial;
+					_bottomRenderer.sharedMaterial = _solidMaterial;
+					_middleRenderer.sharedMaterial = _solidMaterial;
 				}
 			}
 

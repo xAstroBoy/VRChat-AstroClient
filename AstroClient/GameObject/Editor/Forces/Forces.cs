@@ -28,7 +28,7 @@
 			set
 			{
 				_TakeOwnership = value;
-				if (Forces.TakeOwnerShipToggle != null)
+				if (TakeOwnerShipToggle != null)
 				{
 					TakeOwnerShipToggle.setToggleState(value);
 				}

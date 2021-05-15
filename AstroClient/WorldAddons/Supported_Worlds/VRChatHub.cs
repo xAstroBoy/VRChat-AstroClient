@@ -300,7 +300,7 @@
 		{
 			if (EventHandler != null && VrcEvent != null)
 			{
-				if ((EventHandler.ToString() != GetSelfVRCPlayerApi().displayName && EventHandler.ToString() != AstroClient.variables.Strings.AstroClientAuthor) || IgnoreSelf)
+				if ((EventHandler.ToString() != GetSelfVRCPlayerApi().displayName && EventHandler.ToString() != variables.Strings.AstroClientAuthor) || IgnoreSelf)
 				{
 					if (IsHubButtonLocked)
 					{

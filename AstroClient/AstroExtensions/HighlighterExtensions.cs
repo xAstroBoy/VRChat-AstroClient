@@ -89,7 +89,7 @@
 				{
 					EspHelper.SpawnedESPsHolders.Remove(item);
 				}
-				UnityEngine.Object.Destroy(item);
+				Object.Destroy(item);
 			}
 		}
 

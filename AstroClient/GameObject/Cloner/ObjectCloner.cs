@@ -21,7 +21,7 @@
 			foreach (var obj in ClonedObjects)
 			{
 				obj.RemoveObjFromCustomLists();
-				UnityEngine.Object.DestroyImmediate(obj);
+				Object.DestroyImmediate(obj);
 			}
 			ClonedObjects.Clear();
 
@@ -50,7 +50,7 @@
 		public static void CloneGameObject(GameObject GameObject)
 		{
 			ModConsole.DebugLog("Found A Target GameObject  :" + GameObject.name);
-			var obj = NetworkManager.Instantiate(GameObject);
+			var obj = Object.Instantiate(GameObject);
 			if (obj != null)
 			{
 				obj.transform.SetParent(GetClonedHolder().transform);

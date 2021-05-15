@@ -61,7 +61,7 @@
 				string name = "CrazyObjectManager";
 				var gameobj = GetInstanceHolder(name);
 				Instance = gameobj.AddComponent<CrazyObjectManager>() as CrazyObjectManager;
-				UnityEngine.Object.DontDestroyOnLoad(gameobj);
+				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{
 					ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);

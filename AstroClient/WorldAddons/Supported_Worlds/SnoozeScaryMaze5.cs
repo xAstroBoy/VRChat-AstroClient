@@ -28,7 +28,7 @@
 						hammer.RenameObject("Hammer");
 						hammer.EnableColliders();
 						hammer.SetPickupable(true);
-						hammer.SetPickupOrientation(VRC.SDKBase.VRC_Pickup.PickupOrientation.Gun);
+						hammer.SetPickupOrientation(VRC_Pickup.PickupOrientation.Gun);
 						hammer.SetPickupTheft(false);
 						foreach (var item in hammer.GetComponentsInChildren<VRC_Trigger>(true))
 						{

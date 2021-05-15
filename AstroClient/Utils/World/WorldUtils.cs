@@ -33,11 +33,11 @@
 					return PrefabList;
 				}
 			}
-			if (VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs != null)
+			if (VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs != null)
 			{
-				if (VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.Count == 0 && VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs.Count != 0)
+				if (VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.Count == 0 && VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.Count != 0)
 				{
-					foreach (var obj in VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs)
+					foreach (var obj in VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs)
 					{
 						if (obj != null)
 						{

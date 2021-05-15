@@ -97,7 +97,7 @@
 					}
 					if (!OnlineEditor.IsLocalPlayerOwner(obj))
 					{
-						if (Forces.TakeOwnership)
+						if (TakeOwnership)
 						{
 							OnlineEditor.TakeObjectOwnership(obj);
 						}
@@ -124,7 +124,7 @@
 
 				if ((Time.time - LastTimeCheck2 > ImpulseTimer))
 				{
-					if (Forces.TakeOwnership)
+					if (TakeOwnership)
 					{
 						OnlineEditor.TakeObjectOwnership(obj);
 					}
@@ -150,7 +150,7 @@
 
 				if ((Time.time - LastTimeCheck > CrazyTimer))
 				{
-					if (Forces.TakeOwnership)
+					if (TakeOwnership)
 					{
 						OnlineEditor.TakeObjectOwnership(obj);
 					}

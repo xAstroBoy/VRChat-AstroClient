@@ -523,7 +523,7 @@
 					new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {obj.name}", delegate
 					{
 						obj.VRC_Interactable_Click();
-					}, $"Click {obj.name}", null, ItemTweakerMain.GetObjectStatus(obj)));
+					}, $"Click {obj.name}", null, GetObjectStatus(obj)));
 				}
 			});
 		}

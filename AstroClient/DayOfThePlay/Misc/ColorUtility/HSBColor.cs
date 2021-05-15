@@ -24,7 +24,7 @@
 
 		public HSBColor(Color color_0)
 		{
-			HSBColor hsbcolor = HSBColor.FromColor(color_0);
+			HSBColor hsbcolor = FromColor(color_0);
 			this.h = hsbcolor.h;
 			this.s = hsbcolor.s;
 			this.b = hsbcolor.b;
@@ -151,7 +151,7 @@
 
 		public Color ToColor()
 		{
-			return HSBColor.ToColor(this);
+			return ToColor(this);
 		}
 
 		public override string ToString()

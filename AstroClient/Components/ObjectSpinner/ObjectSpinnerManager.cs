@@ -61,7 +61,7 @@
 				string name = "ObjectSpinnerManager";
 				var gameobj = GetInstanceHolder(name);
 				Instance = gameobj.AddComponent<ObjectSpinnerManager>() as ObjectSpinnerManager;
-				UnityEngine.Object.DontDestroyOnLoad(gameobj);
+				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{
 					ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);

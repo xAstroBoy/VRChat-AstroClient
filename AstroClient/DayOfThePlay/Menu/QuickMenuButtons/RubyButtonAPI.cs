@@ -287,7 +287,7 @@
 		{
 			button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
 			if (buttonAction != null)
-				button.GetComponent<Button>().onClick.AddListener(UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
+				button.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
 		}
 
 		public override void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
@@ -457,7 +457,7 @@
 		{
 			button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
 			if (buttonAction != null)
-				button.GetComponent<Button>().onClick.AddListener(UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
+				button.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
 		}
 
 		public override void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
@@ -606,7 +606,7 @@
 			btnOffAction = buttonOffAction;
 
 			button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
-			button.GetComponent<Button>().onClick.AddListener(UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<UnityAction>((Action)(() =>
+			button.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>((Action)(() =>
 		  {
 			  if (btnOn.activeSelf)
 			  {
@@ -1336,7 +1336,7 @@
 
 		public QMInfo(Transform Parent, string text, float Pos_X, float Pos_Y, float Scale_X, float Scale_Y, bool infoIcon = true)
 		{
-			InfoGameObject = GameObject.Instantiate(QuickMenuStuff.GetQuickMenuInstance().transform.Find("/UserInterface/QuickMenu/UserIconMenu/Info").gameObject, Parent);
+			InfoGameObject = UnityEngine.Object.Instantiate(QuickMenuStuff.GetQuickMenuInstance().transform.Find("/UserInterface/QuickMenu/UserIconMenu/Info").gameObject, Parent);
 			InfoGameObject.name = $"QMInfo_{Pos_X}_{Pos_Y}";
 			Image = InfoGameObject.GetComponent<Image>();
 			InfoIconObject = InfoGameObject.transform.Find("InfoIcon").gameObject;
@@ -1353,7 +1353,7 @@
 
 		public QMInfo(QMNestedButton Parent, string text, float Pos_X, float Pos_Y, float Scale_X, float Scale_Y, bool infoIcon = true)
 		{
-			InfoGameObject = GameObject.Instantiate(QuickMenuStuff.GetQuickMenuInstance().transform.Find("/UserInterface/QuickMenu/UserIconMenu/Info").gameObject,
+			InfoGameObject = UnityEngine.Object.Instantiate(QuickMenuStuff.GetQuickMenuInstance().transform.Find("/UserInterface/QuickMenu/UserIconMenu/Info").gameObject,
 				QuickMenuStuff.GetQuickMenuInstance().transform.Find(Parent.getMenuName()));
 			InfoGameObject.name = $"QMInfo_{Pos_X}_{Pos_Y}";
 			Image = InfoGameObject.GetComponent<Image>();
@@ -1403,7 +1403,7 @@
 		public QMSlider(Transform parent, string name, float x, float y, Action<float> evt, float defaultValue = 0f, float MaxValue = 1f, float MinValue = 0f, bool DisplayState = true)
 		{
 			Slider = UnityEngine.Object.Instantiate(QuickMenuStuff.GetVRCUiMInstance().GetMenuContent().transform.Find("Screens/Settings/VolumePanel/VolumeGameWorld"), parent).gameObject;
-			GameObject.Destroy(Slider.GetComponent<UiSettingConfig>());
+			UnityEngine.Object.Destroy(Slider.GetComponent<UiSettingConfig>());
 			Slider.name = "QMSlider";
 			labelObj = Slider.transform.Find("Label").gameObject;
 			label = labelObj.GetComponent<Text>();
@@ -1432,7 +1432,7 @@
 		public QMSlider(QMNestedButton parent, string name, float x, float y, Action<float> evt, float defaultValue = 0f, float MaxValue = 1f, float MinValue = 0f, bool DisplayState = true)
 		{
 			Slider = UnityEngine.Object.Instantiate(QuickMenuStuff.GetVRCUiMInstance().GetMenuContent().transform.Find("Screens/Settings/VolumePanel/VolumeGameWorld"), QuickMenuStuff.GetQuickMenuInstance().transform.Find(parent.getMenuName())).gameObject;
-			GameObject.Destroy(Slider.GetComponent<UiSettingConfig>());
+			UnityEngine.Object.Destroy(Slider.GetComponent<UiSettingConfig>());
 			Slider.transform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
 			Slider.name = "QMSlider";
 			labelObj = Slider.transform.Find("Label").gameObject;

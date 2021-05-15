@@ -25,8 +25,8 @@
 				//GameObject.Find("UserInterface/MenuContent/Screens/Settings/OtherOptionsPanel/DesktopReticle/Label").GetComponent<ContentSizeFitter>().horizontalFit = (ContentSizeFitter.FitMode)2;
 				//GameObject.Find("UserInterface/MenuContent/Screens/Settings/OtherOptionsPanel/DesktopReticle/Label").GetComponent<RectTransform>().transform.right = new Vector2(0, 50f);
 				//GameObject.Find("UserInterface/MenuContent/Screens/Settings/OtherOptionsPanel/DesktopReticle/Label").GetComponent<RectTransform>().offsetMax = new Vector2(25, 21.5f);
-				Checkbox = Object.Instantiate(Object.Find("UserInterface/MenuContent/Screens/Settings/OtherOptionsPanel/DesktopReticle"), parent, false);
-				Object.DestroyImmediate(Checkbox.GetComponent<UiSettingConfig>());
+				Checkbox = UnityEngine.Object.Instantiate(Object.Find("UserInterface/MenuContent/Screens/Settings/OtherOptionsPanel/DesktopReticle"), parent, false);
+				UnityEngine.Object.DestroyImmediate(Checkbox.GetComponent<UiSettingConfig>());
 				Checkbox.name = "Check_" + text + BuildInfo.Name;
 				Checkbox.GetComponent<RectTransform>().anchoredPosition = new Vector2(XPos, YPos);
 				Text = Checkbox.GetComponentInChildren<Text>();

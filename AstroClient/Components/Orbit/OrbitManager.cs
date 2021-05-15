@@ -65,7 +65,7 @@
 				string name = "OrbitManager";
 				var gameobj = GetInstanceHolder(name);
 				Instance = gameobj.AddComponent<OrbitManager>() as OrbitManager;
-				UnityEngine.Object.DontDestroyOnLoad(gameobj);
+				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{
 					ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);

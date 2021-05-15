@@ -43,7 +43,7 @@
 					obj.KillCustomComponents(true);
 				}
 
-				obj.transform.position = LocalPlayerUtils.PlayerPositionBones(player, targetbone);
+				obj.transform.position = PlayerPositionBones(player, targetbone);
 				OnlineEditor.RemoveOwnerShip(obj);
 			}
 		}

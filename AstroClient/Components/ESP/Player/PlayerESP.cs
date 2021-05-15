@@ -44,14 +44,14 @@
 			}
 			else
 			{
-				Object.Destroy(this);
+				Destroy(this);
 			}
 			if (player != null)
 			{
 				SelectRegion = player.transform.Find("SelectRegion");
 				if (SelectRegion == null)
 				{
-					Object.Destroy(this);
+					Destroy(this);
 				}
 				else
 				{
@@ -61,7 +61,7 @@
 					if (ObjMeshRenderers == null && ObjRenderers == null && ObjMeshRenderers.Count() == 0 && ObjRenderers.Count() == 0)
 					{
 						ModConsole.Error($"Failed to Generate a PlayerESP for Player {player.DisplayName()}, Due to SelectRegion Renderer Missing!");
-						Object.Destroy(this);
+						Destroy(this);
 						return;
 					}
 					else

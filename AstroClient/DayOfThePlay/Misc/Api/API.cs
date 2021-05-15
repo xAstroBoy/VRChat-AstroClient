@@ -95,7 +95,7 @@
 			param.Add("order", "descending");
 			VRC.Core.API.SendGetRequest(string.Concat(new object[]
 			{
-					DayClientML2.Utility.Api.API.AvatarCommand,
+					AvatarCommand,
 			}), new ApiModelListContainer<ApiAvatar>()
 			{
 				OnSuccess = new Action<ApiContainer>((m) =>
@@ -141,7 +141,7 @@
 		{
 			VRC.Core.API.SendGetRequest(string.Concat(new object[]
 			{
-					DayClientML2.Utility.Api.API.WorldCommand,
+					WorldCommand,
 					worldId,
 					"/",
 					instanceId

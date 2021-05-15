@@ -116,7 +116,7 @@
 						HasRequiredSettings = true;
 					}
 
-					if (Forces.TakeOwnership)
+					if (TakeOwnership)
 					{
 						OnlineEditor.TakeObjectOwnership(obj);
 					}

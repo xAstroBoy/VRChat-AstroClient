@@ -14,12 +14,12 @@
 
 		public static void ToggleEnabledRenderers()
 		{
-			XRay.ToggleRenderers(XRay.OriginallyEnabled, true);
+			ToggleRenderers(OriginallyEnabled, true);
 		}
 
 		public static void ToggleDisabledRenderers()
 		{
-			XRay.ToggleRenderers(XRay.OriginallyDisabled, false);
+			ToggleRenderers(OriginallyDisabled, false);
 		}
 
 		private static void ToggleRenderers(IDictionary<int, Renderer> mutableRendererCollection, bool toggleEnabled)
@@ -42,16 +42,16 @@
 			else
 			{
 				int num = 0;
-				foreach (Renderer renderer2 in XRay.AllRenderers())
+				foreach (Renderer renderer2 in AllRenderers())
 				{
 					bool flag3 = renderer2.enabled != toggleEnabled;
 					if (!flag3)
 					{
 						int num2 = (int)renderer2.GetCachedPtr();
-						bool flag4 = XRay.OriginallyEnabled.ContainsKey(num2);
+						bool flag4 = OriginallyEnabled.ContainsKey(num2);
 						if (!flag4)
 						{
-							bool flag5 = XRay.OriginallyDisabled.ContainsKey(num2);
+							bool flag5 = OriginallyDisabled.ContainsKey(num2);
 							if (!flag5)
 							{
 								bool flag6 = ColliderDisplay.MyRenderers.Contains(num2);
@@ -78,7 +78,7 @@
 				Il2CppReferenceArray<GameObject> rootGameObjects = SceneManager.GetSceneAt(i).GetRootGameObjects();
 				foreach (GameObject go in rootGameObjects)
 				{
-					XRay.IterateObject(go, list);
+					IterateObject(go, list);
 				}
 			}
 			return list;
@@ -96,7 +96,7 @@
 			for (int i = 0; i < childCount; i++)
 			{
 				Transform child = go.transform.GetChild(i);
-				XRay.IterateObject(child.gameObject, mutableRendererCollection);
+				IterateObject(child.gameObject, mutableRendererCollection);
 			}
 		}
 	}

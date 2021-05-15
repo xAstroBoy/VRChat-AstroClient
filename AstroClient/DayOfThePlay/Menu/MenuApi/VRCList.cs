@@ -8,7 +8,7 @@
 	{
 		public VRCList(Transform parent, string name, int Position = 0)
 		{
-			GameObject = UnityEngine.Object.Instantiate(PublicAvatarList.gameObject, parent);
+			GameObject = Object.Instantiate(PublicAvatarList.gameObject, parent);
 			GameObject.GetComponent<UiAvatarList>().field_Public_EnumNPublicSealedvaInPuMiFaSpClPuLiCrUnique_0 = UiAvatarList.EnumNPublicSealedvaInPuMiFaSpClPuLiCrUnique.SpecificList;
 			UiVRCList = GameObject.GetComponent<UiVRCList>();
 			Text = GameObject.transform.Find("Button").GetComponentInChildren<Text>();

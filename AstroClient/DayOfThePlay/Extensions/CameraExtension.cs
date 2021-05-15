@@ -8,12 +8,12 @@
 	{
 		public static void ResetCamera()
 		{
-			CameraExtension.SetCameraMode(CameraExtension.CameraMode.Off);
-			CameraExtension.SetCameraMode(CameraExtension.CameraMode.Photo);
+			SetCameraMode(CameraMode.Off);
+			SetCameraMode(CameraMode.Photo);
 			UserCameraController userCameraController = Utils.UserCameraController;
-			CameraExtension.worldCameraVector = userCameraController.field_Public_Transform_0.transform.position;
-			CameraExtension.worldCameraQuaternion = userCameraController.field_Public_Transform_0.transform.rotation;
-			CameraExtension.worldCameraQuaternion *= Quaternion.Euler(90f, 0f, 180f);
+			worldCameraVector = userCameraController.field_Public_Transform_0.transform.position;
+			worldCameraQuaternion = userCameraController.field_Public_Transform_0.transform.rotation;
+			worldCameraQuaternion *= Quaternion.Euler(90f, 0f, 180f);
 			userCameraController.field_Internal_UserCameraIndicator_0.transform.position = userCameraController.field_Public_Transform_0.transform.position;
 			userCameraController.field_Internal_UserCameraIndicator_0.transform.rotation = userCameraController.field_Public_Transform_0.transform.rotation;
 		}

@@ -174,7 +174,7 @@
 
 		public static Vector3 GetWorldCameraPosition()
 		{
-			VRCVrCamera camera = Utils.VRCVrCamera;
+			VRCVrCamera camera = VRCVrCamera;
 			var type = camera.GetIl2CppType();
 			if (type == Il2CppType.Of<VRCVrCameraSteam>())
 			{
@@ -205,7 +205,7 @@
 
 		public static Vector3 GetLocalCameraPosition()
 		{
-			VRCVrCamera camera = Utils.VRCVrCamera;
+			VRCVrCamera camera = VRCVrCamera;
 			var type = camera.GetIl2CppType();
 			if (type == Il2CppType.Of<VRCVrCamera>())
 			{

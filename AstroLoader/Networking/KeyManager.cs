@@ -19,7 +19,7 @@
 			}
 			else
 			{
-				System.Console.Beep();
+				Console.Beep();
 				Environment.Exit(0);
 			}
 		}

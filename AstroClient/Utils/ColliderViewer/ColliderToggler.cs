@@ -10,7 +10,7 @@
 		{
 			int num = 0;
 			int num2 = 0;
-			foreach (Collider collider in ColliderToggler.ToggledColliders)
+			foreach (Collider collider in ToggledColliders)
 			{
 				bool flag = collider == null;
 				if (flag)
@@ -23,7 +23,7 @@
 					collider.enabled = true;
 				}
 			}
-			ColliderToggler.ToggledColliders.Clear();
+			ToggledColliders.Clear();
 			ModConsole.Log(string.Format("Reenabled {0} colliders, skipped {1} colliders", num, num2));
 		}
 
@@ -33,8 +33,8 @@
 			if (!flag)
 			{
 				collider.enabled = false;
-				ColliderToggler.ToggledColliders.Add(collider);
-				string colliderName = ColliderToggler.GetColliderName(collider);
+				ToggledColliders.Add(collider);
+				string colliderName = GetColliderName(collider);
 				ModConsole.Log("Toggled collider " + colliderName);
 			}
 		}

@@ -12,7 +12,7 @@
 		{
 			basePosition = new QMSingleButton(parentPath, x, y, "", null, "", null, null);
 			basePosition.setActive(false);
-			Slider = UnityEngine.Object.Instantiate(Extensions.Utils.VRCUiManager.GetMenuContent().transform.Find("Screens/Settings/AudioDevicePanel/VolumeSlider"), QuickMenuStuff.GetQuickMenuInstance().transform.Find(parentPath)).gameObject;
+			Slider = Object.Instantiate(Utils.VRCUiManager.GetMenuContent().transform.Find("Screens/Settings/AudioDevicePanel/VolumeSlider"), QuickMenuStuff.GetQuickMenuInstance().transform.Find(parentPath)).gameObject;
 			Slider.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 			Slider.transform.localPosition = basePosition.getGameObject().transform.localPosition;
 			Slider.GetComponentInChildren<RectTransform>().anchorMin += new Vector2(0.06f, 0f);
@@ -26,7 +26,7 @@
 
 		public MenuSlider(Transform parent, float x, float y, UnityAction<float> evt, float defaultValue = 0f, float MaxValue = 1f, float MinValue = 0f)
 		{
-			Slider = UnityEngine.Object.Instantiate(Extensions.Utils.VRCUiManager.GetMenuContent().transform.Find("Screens/Settings/AudioDevicePanel/VolumeSlider"), parent).gameObject;
+			Slider = Object.Instantiate(Utils.VRCUiManager.GetMenuContent().transform.Find("Screens/Settings/AudioDevicePanel/VolumeSlider"), parent).gameObject;
 			//Slider.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 			Slider.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y);
 			Slider.GetComponentInChildren<RectTransform>().anchorMin += new Vector2(0.06f, 0f);
@@ -42,7 +42,7 @@
 		{
 			basePosition = new QMSingleButton(parentPath, x, y, "", null, "", null, null);
 			basePosition.setActive(false);
-			Slider = UnityEngine.Object.Instantiate(Extensions.Utils.VRCUiManager.GetMenuContent().transform.Find("Screens/Settings/AudioDevicePanel/VolumeSlider"), QuickMenuStuff.GetQuickMenuInstance().transform.Find(parentPath)).gameObject;
+			Slider = Object.Instantiate(Utils.VRCUiManager.GetMenuContent().transform.Find("Screens/Settings/AudioDevicePanel/VolumeSlider"), QuickMenuStuff.GetQuickMenuInstance().transform.Find(parentPath)).gameObject;
 			Slider.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
 			Slider.transform.localPosition = basePosition.getGameObject().transform.localPosition;
 			Slider.GetComponentInChildren<Text>().text = name;

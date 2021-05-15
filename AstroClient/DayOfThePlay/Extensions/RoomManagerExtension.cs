@@ -34,7 +34,7 @@
 
 		public static string GetInstanceID()
 		{
-			return RoomManagerExtension.GetWorld().id + ":" + RoomManagerExtension.GetWorldInstance().idWithTags;
+			return GetWorld().id + ":" + GetWorldInstance().idWithTags;
 		}
 
 		public static int GetWorldOccupants()

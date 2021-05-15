@@ -232,7 +232,7 @@
 				DoHandlerThing();
 			}
 
-			MelonLoader.MelonCoroutines.Start(Clap1());
+			MelonCoroutines.Start(Clap1());
 		}
 
 		public void DoHandlerThing()

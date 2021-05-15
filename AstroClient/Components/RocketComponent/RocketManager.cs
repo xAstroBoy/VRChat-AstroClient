@@ -61,7 +61,7 @@
 				string name = "RocketManager";
 				var gameobj = GetInstanceHolder(name);
 				Instance = gameobj.AddComponent<RocketManager>() as RocketManager;
-				UnityEngine.Object.DontDestroyOnLoad(gameobj);
+				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{
 					ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);

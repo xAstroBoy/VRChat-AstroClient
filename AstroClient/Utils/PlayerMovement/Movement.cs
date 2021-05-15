@@ -82,17 +82,17 @@
 		{
 			if (GetLocalVRCPlayer() != null)
 			{
-				if (LocalPlayerUtils.GetLocalPlayerAPI() != null)
+				if (GetLocalPlayerAPI() != null)
 				{
 					if (InputUtils.IsImputJumpCalled())
 					{
-						if (LocalPlayerUtils.IsPlayerGrounded() && IsJumpOverriden)
+						if (IsPlayerGrounded() && IsJumpOverriden)
 						{
 							EmulatedJump();
 						}
 						else
 						{
-							if (!LocalPlayerUtils.IsPlayerGrounded() && IsUnlimitedJumpActive)
+							if (!IsPlayerGrounded() && IsUnlimitedJumpActive)
 							{
 								EmulatedJump();
 							}

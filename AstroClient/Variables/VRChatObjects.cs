@@ -10,11 +10,11 @@
 		{
 			if (Bools.DisableBlackScreenFade)
 			{
-				if (VRChatObjects.ScreenFade != null)
+				if (ScreenFade != null)
 				{
-					if (VRChatObjects.ScreenFade.active)
+					if (ScreenFade.active)
 					{
-						VRChatObjects.ScreenFade.SetActive(false);
+						ScreenFade.SetActive(false);
 					}
 				}
 			}

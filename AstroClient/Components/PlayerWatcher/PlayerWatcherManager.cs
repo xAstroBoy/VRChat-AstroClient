@@ -69,7 +69,7 @@
 				string name = "PlayerWatcherManager";
 				var gameobj = GetInstanceHolder(name);
 				Instance = gameobj.AddComponent<PlayerWatcherManager>() as PlayerWatcherManager;
-				UnityEngine.Object.DontDestroyOnLoad(gameobj);
+				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{
 					ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
@@ -139,7 +139,7 @@
 						{
 							if (component.player.prop_APIUser_0.id == player.id)
 							{
-								UnityEngine.Object.Destroy(component);
+								Destroy(component);
 								i++;
 								continue;
 							}
@@ -179,7 +179,7 @@
 					var attacker = obj.GetComponent<PlayerWatcher>();
 					if (attacker != null)
 					{
-						UnityEngine.Object.Destroy(attacker);
+						Destroy(attacker);
 						attacker.DestroyMeLocal();
 					}
 				}

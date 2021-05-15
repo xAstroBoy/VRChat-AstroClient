@@ -32,7 +32,7 @@
 			}
 			else
 			{
-				UnityEngine.Object.Destroy(this);
+				Destroy(this);
 			}
 			isRPCActive = false;
 			if (Internal_player != null)
@@ -57,7 +57,7 @@
 				AmongUSVoteRevealTag.ShowTag = false;
 				AmongUSHasVoted = false;
 			}
-			if (JarRoleController.ViewRoles)
+			if (ViewRoles)
 			{
 				SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
 				ResetESPColor();
@@ -69,12 +69,12 @@
 				ResetESPColor();
 				GameRoleTag.ShowTag = false;
 			}
-			if (JarRoleController.IsMurder4World)
+			if (IsMurder4World)
 			{
 				Murder4CurrentRole = Murder4Roles.Unassigned;
 				ModConsole.DebugLog("Registered " + Internal_user.displayName + " On Murder 4 Role ESP.");
 			}
-			if (JarRoleController.IsAmongUsWorld)
+			if (IsAmongUsWorld)
 			{
 				AmongUsCurrentRole = AmongUsRoles.Unassigned;
 				ModConsole.DebugLog("Registered " + Internal_user.displayName + " On Among US Role ESP.");
@@ -368,7 +368,7 @@
 
 		private void FindEntryWithUser()
 		{
-			foreach (var item in JarRoleController.JarRoleLinks)
+			foreach (var item in JarRoleLinks)
 			{
 				if (item != null)
 				{
@@ -526,11 +526,11 @@
 		{
 			if (GameRoleTag != null)
 			{
-				Object.Destroy(GameRoleTag);
+				Destroy(GameRoleTag);
 			}
 			if (AmongUSVoteRevealTag != null)
 			{
-				Object.Destroy(AmongUSVoteRevealTag);
+				Destroy(AmongUSVoteRevealTag);
 			}
 			//if (_AssignedPlayerEntry != null)
 			//{
@@ -541,7 +541,7 @@
 				_AssignedPlayerNode.RenameObject("Unassigned Node");
 			}
 
-			JarRoleController.RoleEspComponents.Remove(this);
+			RoleEspComponents.Remove(this);
 		}
 
 
@@ -627,9 +627,9 @@
 
 				if (GameRoleTag != null)
 				{
-					if (GameRoleTag.ShowTag != JarRoleController.ViewRoles)
+					if (GameRoleTag.ShowTag != ViewRoles)
 					{
-						GameRoleTag.ShowTag = JarRoleController.ViewRoles;
+						GameRoleTag.ShowTag = ViewRoles;
 					}
 
 				}
@@ -640,11 +640,11 @@
 						ESP = Internal_player.gameObject.GetComponent<PlayerESP>();
 					}
 				}
-				if (JarRoleController.IsMurder4World)
+				if (IsMurder4World)
 				{
 					UpdateMurder4ESPMechanism();
 				}
-				else if (JarRoleController.IsAmongUsWorld)
+				else if (IsAmongUsWorld)
 				{
 					UpdateAmongUSESpMechanism();
 				}
@@ -664,12 +664,12 @@
 			}
 			if (ESP != null)
 			{
-				if (ESP.UseCustomColor != JarRoleController.ViewRoles)
+				if (ESP.UseCustomColor != ViewRoles)
 				{
-					ESP.UseCustomColor = JarRoleController.ViewRoles;
+					ESP.UseCustomColor = ViewRoles;
 				}
 			}
-			if (JarRoleController.ViewRoles)
+			if (ViewRoles)
 			{
 				if (ReturnedRole != Murder4Roles.None && ReturnedRole != Murder4Roles.Unassigned)
 				{
@@ -717,12 +717,12 @@
 			}
 			if (ESP != null)
 			{
-				if (ESP.UseCustomColor != JarRoleController.ViewRoles)
+				if (ESP.UseCustomColor != ViewRoles)
 				{
-					ESP.UseCustomColor = JarRoleController.ViewRoles;
+					ESP.UseCustomColor = ViewRoles;
 				}
 			}
-			if (JarRoleController.ViewRoles)
+			if (ViewRoles)
 			{
 				if (AmongUSHasVoted)
 				{
@@ -920,7 +920,7 @@
 			{
 				if (AmongUSVoteRevealTag != null)
 				{
-					if (JarRoleController.ViewRoles)
+					if (ViewRoles)
 					{
 						if (AmongUsCurrentRole == AmongUsRoles.Crewmate || AmongUsCurrentRole == AmongUsRoles.Impostor)
 						{

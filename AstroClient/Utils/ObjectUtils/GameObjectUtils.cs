@@ -29,14 +29,14 @@
 		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
 			var GameObjectsMenus = new QMNestedButton(menu, x, y, "GameObjects DebugMenu", "Find Whatever is in these VRChat GameObjects in console", null, null, null, null, btnHalf);
-			GameObjectUtils.GameObjDumper = new QMSingleButton(GameObjectsMenus, 1, 0, "World's Gameobject Dumper", new Action(GameObjectUtils.GameObjectDumper), "Dump All World GameObjects's names in a file!", null, null);
-			new QMSingleButton(GameObjectsMenus, 2, 0, "Print GameObject Components in console", new Action(GameObjectUtils.DumpHoldingGameObjComponent), "Prints Gameobj components in console", null, null);
-			GameObjectUtils.GrabGameObjDumper = new QMSingleButton(GameObjectsMenus, 3, 0, "Grabbable name Dumper", new Action(GameObjectUtils.GrabbableGameObjDumper), "Dump All Grabbable GameObjects's names in a file!", null, null);
-			GameObjectUtils.ObjDumperWithComponentsBtn = new QMSingleButton(GameObjectsMenus, 4, 0, "Dump World GameObjects with components", new Action(GameObjectUtils.GameObjDumperWithComponents), "Dump All World GameObjects's along with their components!", null, null);
+			GameObjDumper = new QMSingleButton(GameObjectsMenus, 1, 0, "World's Gameobject Dumper", new Action(GameObjectDumper), "Dump All World GameObjects's names in a file!", null, null);
+			new QMSingleButton(GameObjectsMenus, 2, 0, "Print GameObject Components in console", new Action(DumpHoldingGameObjComponent), "Prints Gameobj components in console", null, null);
+			GrabGameObjDumper = new QMSingleButton(GameObjectsMenus, 3, 0, "Grabbable name Dumper", new Action(GrabbableGameObjDumper), "Dump All Grabbable GameObjects's names in a file!", null, null);
+			ObjDumperWithComponentsBtn = new QMSingleButton(GameObjectsMenus, 4, 0, "Dump World GameObjects with components", new Action(GameObjDumperWithComponents), "Dump All World GameObjects's along with their components!", null, null);
 			new QMSingleButton(GameObjectsMenus, 1, 1, "Print RigidBody Info In Console", new Action(() => { Tweaker_Object.GetGameObjectToEdit().gameObject.PrintAllRigidBodySettings(); }), "Print RigidBody Details in console!", null, null);
-			new QMSingleButton(GameObjectsMenus, 2, 1, "Find who is controlling pickups", new Action(GameObjectUtils.GetAllPickupsOwners), "Print Pickups Owners in console!", null, null);
-			new QMSingleButton(GameObjectsMenus, 3, 1, "Print VideoPlayer Links in console.", new Action(GameObjectUtils.DumpVideoPlayerURLS), "Print VideoPlayers URLS Queque in console!", null, null);
-			new QMSingleButton(GameObjectsMenus, 4, 1, "Cleans Queque in Videoplayers", new Action(GameObjectUtils.ClearVideoPlayers), "Clears Queque in VideoPlayers.", null, null);
+			new QMSingleButton(GameObjectsMenus, 2, 1, "Find who is controlling pickups", new Action(GetAllPickupsOwners), "Print Pickups Owners in console!", null, null);
+			new QMSingleButton(GameObjectsMenus, 3, 1, "Print VideoPlayer Links in console.", new Action(DumpVideoPlayerURLS), "Print VideoPlayers URLS Queque in console!", null, null);
+			new QMSingleButton(GameObjectsMenus, 4, 1, "Cleans Queque in Videoplayers", new Action(ClearVideoPlayers), "Clears Queque in VideoPlayers.", null, null);
 			ColliderDisplay.ToggleColliderXRayBtn = new QMToggleButton(GameObjectsMenus, 1, 2, "XRay ON", new Action(() => { XRay.ToggleEnabledRenderers(); }), "XRay OFF", new Action(() => { XRay.ToggleEnabledRenderers(); }), "Reveals Colliders.", null, null, null, false);
 			ColliderDisplay.ToggleColliderInvisibleXRayBtn = new QMToggleButton(GameObjectsMenus, 2, 2, "Invisible Xray ON", new Action(() => { XRay.ToggleDisabledRenderers(); }), "Invisible XRay OFF", new Action(() => { XRay.ToggleDisabledRenderers(); }), "Reveals Invisible colliders.", null, null, null, false);
 
