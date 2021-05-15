@@ -4,7 +4,6 @@
 
 	using AstroClient.Components;
 	using AstroClient.Extensions;
-	using AstroClient.Extensions;
 	using AstroClient.GameObjectDebug;
 	using AstroClient.ItemTweaker;
 	using AstroClient.variables;

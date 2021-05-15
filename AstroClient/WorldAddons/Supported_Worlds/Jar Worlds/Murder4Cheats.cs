@@ -1,5 +1,7 @@
 ﻿namespace AstroClient
 {
+	#region Imports
+
 	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using AstroClient.Extensions;
@@ -17,7 +19,8 @@
 	using VRC;
 	using VRC.Udon;
 	using static AstroClient.variables.CustomLists;
-	using AstroClient.Extensions;
+
+#endregion
 
 	public class Murder4Cheats : GameEvents
 	{

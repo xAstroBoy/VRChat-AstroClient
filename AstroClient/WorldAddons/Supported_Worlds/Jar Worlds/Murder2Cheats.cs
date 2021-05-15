@@ -1,5 +1,7 @@
 ﻿namespace AstroClient
 {
+	#region Imports
+
 	using AstroLibrary.Console;
 	using AstroClient.Extensions;
 	using AstroClient.Finder;
@@ -12,7 +14,8 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
-	using AstroClient.Extensions;
+
+	#endregion
 
 	public class Murder2Cheats : GameEvents
 	{
