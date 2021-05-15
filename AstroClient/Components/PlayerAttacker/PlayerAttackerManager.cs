@@ -68,7 +68,7 @@
 			{
 				string name = "PlayerAttackerManager";
 				var gameobj = GetInstanceHolder(name);
-				Instance = gameobj.AddComponent<PlayerAttackerManager>() as PlayerAttackerManager;
+				Instance = gameobj.AddComponent<PlayerAttackerManager>();
 				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{

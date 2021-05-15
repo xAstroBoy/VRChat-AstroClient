@@ -7,7 +7,6 @@
 	using UnhollowerBaseLib.Attributes;
 	using UnityEngine;
 	using VRC;
-	using Object = UnityEngine.Object;
 
 	public class SingleTag : GameEventsBehaviour
 	{

@@ -60,7 +60,7 @@
 			{
 				string name = "RocketManager";
 				var gameobj = GetInstanceHolder(name);
-				Instance = gameobj.AddComponent<RocketManager>() as RocketManager;
+				Instance = gameobj.AddComponent<RocketManager>();
 				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{

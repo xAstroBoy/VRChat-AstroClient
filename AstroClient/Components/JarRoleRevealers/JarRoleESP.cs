@@ -10,7 +10,6 @@
 	using VRC;
 	using VRC.Core;
 	using static AstroClient.JarRoleController;
-	using Object = UnityEngine.Object;
 
 	public class JarRoleESP : GameEventsBehaviour
 	{

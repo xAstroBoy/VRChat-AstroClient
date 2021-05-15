@@ -294,7 +294,7 @@
 		{
 			//button.GetComponentInChildren<UnityEngine.UI.Image>().color = buttonBackgroundColor;
 			if (save)
-				OrigBackground = (Color)buttonBackgroundColor;
+				OrigBackground = buttonBackgroundColor;
 			button.GetComponentInChildren<Button>().colors = new ColorBlock()
 			{
 				colorMultiplier = 1f,
@@ -464,7 +464,7 @@
 		{
 			//button.GetComponentInChildren<UnityEngine.UI.Image>().color = buttonBackgroundColor;
 			if (save)
-				OrigBackground = (Color)buttonBackgroundColor;
+				OrigBackground = buttonBackgroundColor;
 			//UnityEngine.UI.Image[] btnBgColorList = ((btnOn.GetComponentsInChildren<UnityEngine.UI.Image>()).Concat(btnOff.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray()).Concat(button.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray();
 			//foreach (UnityEngine.UI.Image btnBackground in btnBgColorList) btnBackground.color = buttonBackgroundColor;
 			button.GetComponentInChildren<Button>().colors = new ColorBlock()
@@ -481,7 +481,7 @@
 		{
 			button.GetComponentInChildren<Text>().color = buttonTextColor;
 			if (save)
-				OrigText = (Color)buttonTextColor;
+				OrigText = buttonTextColor;
 		}
 	}
 
@@ -581,7 +581,7 @@
 			Image[] btnBgColorList = ((btnOn.GetComponentsInChildren<Image>()).Concat(btnOff.GetComponentsInChildren<Image>()).ToArray()).Concat(button.GetComponentsInChildren<Image>()).ToArray();
 			foreach (Image btnBackground in btnBgColorList) btnBackground.color = buttonBackgroundColor;
 			if (save)
-				OrigBackground = (Color)buttonBackgroundColor;
+				OrigBackground = buttonBackgroundColor;
 		}
 
 		public override void setTextColorOn(Color buttonTextColorOn, bool save = true)
@@ -589,7 +589,7 @@
 			Text[] btnTxtColorOnList = (btnOn.GetComponentsInChildren<Text>()).ToArray();
 			foreach (Text btnText in btnTxtColorOnList) btnText.color = buttonTextColorOn;
 			if (save)
-				OrigText = (Color)buttonTextColorOn;
+				OrigText = buttonTextColorOn;
 		}
 
 		public override void setTextColorOff(Color buttonTextColorOff, bool save = true)
@@ -597,7 +597,7 @@
 			Text[] btnTxtColorOffList = (btnOff.GetComponentsInChildren<Text>()).ToArray();
 			foreach (Text btnText in btnTxtColorOffList) btnText.color = buttonTextColorOff;
 			if (save)
-				OrigText = (Color)buttonTextColorOff;
+				OrigText = buttonTextColorOff;
 		}
 
 		public void setAction(Action buttonOnAction, Action buttonOffAction)
@@ -767,7 +767,7 @@
 		{
 			//button.GetComponentInChildren<UnityEngine.UI.Image>().color = buttonBackgroundColor;
 			if (save)
-				OrigBackground = (Color)buttonBackgroundColor;
+				OrigBackground = buttonBackgroundColor;
 			//UnityEngine.UI.Image[] btnBgColorList = ((btnOn.GetComponentsInChildren<UnityEngine.UI.Image>()).Concat(btnOff.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray()).Concat(button.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray();
 			//foreach (UnityEngine.UI.Image btnBackground in btnBgColorList) btnBackground.color = buttonBackgroundColor;
 			button.GetComponentInChildren<Button>().colors = new ColorBlock()

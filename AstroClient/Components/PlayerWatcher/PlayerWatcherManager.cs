@@ -68,7 +68,7 @@
 			{
 				string name = "PlayerWatcherManager";
 				var gameobj = GetInstanceHolder(name);
-				Instance = gameobj.AddComponent<PlayerWatcherManager>() as PlayerWatcherManager;
+				Instance = gameobj.AddComponent<PlayerWatcherManager>();
 				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{

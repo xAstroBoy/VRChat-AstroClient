@@ -182,7 +182,7 @@
 
 		public static int GetFrames(this VRCPlayer Instance)
 		{
-			return (Instance.GetPlayerNet().prop_Byte_0 != 0 ? (int)(1000f / (float)Instance.GetPlayerNet().prop_Byte_0) : 0);
+			return (Instance.GetPlayerNet().prop_Byte_0 != 0 ? (int)(1000f / Instance.GetPlayerNet().prop_Byte_0) : 0);
 		}
 
 		public static float GetQuality(this VRCPlayer Instance)
@@ -193,9 +193,9 @@
 		public static double GetDelay(this VRCPlayer Instance)
 		{
 			// -Day: Still working on it
-			int num = Mathf.FloorToInt((float)(Instance.GetPing() + 50) / 10f);
+			int num = Mathf.FloorToInt((Instance.GetPing() + 50) / 10f);
 			int num2 = Mathf.FloorToInt((1f - Instance.GetQuality()) * 10f);
-			double num3 = (double)Mathf.Min(2f, (float)(num + num2));
+			double num3 = Mathf.Min(2f, num + num2);
 			return 0.20f * num3;
 		}
 

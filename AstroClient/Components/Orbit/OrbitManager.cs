@@ -64,7 +64,7 @@
 			{
 				string name = "OrbitManager";
 				var gameobj = GetInstanceHolder(name);
-				Instance = gameobj.AddComponent<OrbitManager>() as OrbitManager;
+				Instance = gameobj.AddComponent<OrbitManager>();
 				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{

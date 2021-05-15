@@ -60,7 +60,7 @@
 			{
 				string name = "ObjectSpinnerManager";
 				var gameobj = GetInstanceHolder(name);
-				Instance = gameobj.AddComponent<ObjectSpinnerManager>() as ObjectSpinnerManager;
+				Instance = gameobj.AddComponent<ObjectSpinnerManager>();
 				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{

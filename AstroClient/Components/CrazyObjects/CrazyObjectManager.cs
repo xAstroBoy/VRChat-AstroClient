@@ -60,7 +60,7 @@
 			{
 				string name = "CrazyObjectManager";
 				var gameobj = GetInstanceHolder(name);
-				Instance = gameobj.AddComponent<CrazyObjectManager>() as CrazyObjectManager;
+				Instance = gameobj.AddComponent<CrazyObjectManager>();
 				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{

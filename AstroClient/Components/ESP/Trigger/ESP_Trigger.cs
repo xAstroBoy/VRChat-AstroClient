@@ -6,7 +6,6 @@
 	using System.Linq;
 	using UnhollowerBaseLib.Attributes;
 	using UnityEngine;
-	using Object = UnityEngine.Object;
 
 	public class ESP_Trigger : GameEventsBehaviour
 	{

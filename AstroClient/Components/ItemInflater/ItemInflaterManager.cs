@@ -58,7 +58,7 @@
 			{
 				string name = "ItemInflaterManager";
 				var gameobj = GetInstanceHolder(name);
-				Instance = gameobj.AddComponent<ItemInflaterManager>() as ItemInflaterManager;
+				Instance = gameobj.AddComponent<ItemInflaterManager>();
 				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{
