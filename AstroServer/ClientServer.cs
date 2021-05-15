@@ -113,7 +113,7 @@
 						client.Send(new PacketData(PacketServerType.ENABLE_DEVELOPER));
 					}
 
-					CheckExistingClientsWithKey(client);
+					//CheckExistingClientsWithKey(client);
 				}
 				else
 				{
