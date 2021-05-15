@@ -144,7 +144,7 @@
 			var TuneTime = obj.GetComponent<ObjectSpinner>();
 			if (TuneTime != null)
 			{
-				TuneTime.SpinnerTimer = TuneTime.SpinnerTimer + 0.01f;
+				TuneTime.SpinnerTimer += 0.01f;
 				UpdateTimerButton(obj);
 			}
 		}
@@ -154,7 +154,7 @@
 			var TuneTime = obj.GetComponent<ObjectSpinner>();
 			if (TuneTime != null)
 			{
-				TuneTime.SpinnerTimer = TuneTime.SpinnerTimer - 0.01f;
+				TuneTime.SpinnerTimer -= 0.01f;
 				UpdateTimerButton(obj);
 			}
 		}

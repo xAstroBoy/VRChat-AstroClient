@@ -107,7 +107,7 @@
 			var TuneTime = obj.GetComponent<CrazyObject>();
 			if (TuneTime != null)
 			{
-				TuneTime.CrazyTimer = TuneTime.CrazyTimer + 0.01f;
+				TuneTime.CrazyTimer += 0.01f;
 				UpdateTimeButton(obj);
 			}
 		}
@@ -117,7 +117,7 @@
 			var TuneTime = obj.GetComponent<CrazyObject>();
 			if (TuneTime != null)
 			{
-				TuneTime.CrazyTimer = TuneTime.CrazyTimer - 0.01f;
+				TuneTime.CrazyTimer -= 0.01f;
 				UpdateTimeButton(obj);
 			}
 		}

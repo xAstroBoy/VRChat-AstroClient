@@ -119,7 +119,7 @@
 			var TuneTime = obj.GetComponent<RocketObject>();
 			if (TuneTime != null)
 			{
-				TuneTime.RocketTimer = TuneTime.RocketTimer + 0.01f;
+				TuneTime.RocketTimer += 0.01f;
 			}
 		}
 
@@ -128,7 +128,7 @@
 			var TuneTime = obj.GetComponent<RocketObject>();
 			if (TuneTime != null)
 			{
-				TuneTime.RocketTimer = TuneTime.RocketTimer - 0.01f;
+				TuneTime.RocketTimer -= 0.01f;
 			}
 		}
 

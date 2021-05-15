@@ -65,7 +65,7 @@
 
 					if (spin != null)
 					{
-						spin.ForceX = spin.ForceX + 1f;
+						spin.ForceX++;
 					}
 					else
 					{
@@ -95,7 +95,7 @@
 				var spin = obj.GetComponent<ObjectSpinner>();
 				if (spin != null)
 				{
-					spin.ForceX = spin.ForceX - 1f;
+					spin.ForceX--;
 				}
 				else
 				{
@@ -122,7 +122,7 @@
 				var spin = obj.GetComponent<ObjectSpinner>();
 				if (spin != null)
 				{
-					spin.ForceY = spin.ForceY + 1f;
+					spin.ForceY++;
 				}
 				else
 				{
@@ -150,7 +150,7 @@
 				var spin = obj.GetComponent<ObjectSpinner>();
 				if (spin != null)
 				{
-					spin.ForceY = spin.ForceY - 1f;
+					spin.ForceY--;
 				}
 				else
 				{
@@ -177,7 +177,7 @@
 				var spin = obj.GetComponent<ObjectSpinner>();
 				if (spin != null)
 				{
-					spin.ForceZ = spin.ForceZ + 1f;
+					spin.ForceZ++;
 				}
 				else
 				{
@@ -204,7 +204,7 @@
 				var spin = obj.GetComponent<ObjectSpinner>();
 				if (spin != null)
 				{
-					spin.ForceZ = spin.ForceZ - 1f;
+					spin.ForceZ--;
 				}
 				else
 				{

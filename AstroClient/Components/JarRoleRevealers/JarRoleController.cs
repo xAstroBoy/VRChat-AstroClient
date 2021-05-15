@@ -183,14 +183,9 @@
 
 		public static JarRoleESP GetLocalPlayerNode()
 		{
-			if (RoleEspComponents.Count() == 0 || RoleEspComponents == null)
-			{
-				return null;
-			}
-			else
-			{
-				return RoleEspComponents.Where(x => x.Apiuser.displayName == LocalPlayerUtils.GetSelfPlayer().DisplayName()).First();
-			}
+			return RoleEspComponents.Count() != 0 && RoleEspComponents != null
+				? RoleEspComponents.Where(x => x.Apiuser.displayName == LocalPlayerUtils.GetSelfPlayer().DisplayName()).First()
+				: null;
 		}
 
 		public override void OnWorldReveal(string id, string name, string asseturl)

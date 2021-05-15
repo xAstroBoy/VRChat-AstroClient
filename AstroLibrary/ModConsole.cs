@@ -256,7 +256,7 @@
 
 		public static void Exception<T>(T e, LogTypes logType = LogTypes.LOG, Color? color = null, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
 		{
-			if (logType == LogTypes.DEBUG_LOG || logType == LogTypes.DEBUG_WARNING || logType == LogTypes.DEBUG_ERROR && !DebugMode)
+			if (logType == LogTypes.DEBUG_LOG || logType == LogTypes.DEBUG_WARNING || (logType == LogTypes.DEBUG_ERROR && !DebugMode))
 			{
 				return;
 			}
