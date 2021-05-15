@@ -97,14 +97,7 @@
 					{
 						CheetosHelpers.SendHudNotification($"[!!!] nuked shaders for \"" + user.field_Private_APIUser_0.displayName.ToString() + "\"");
 					}
-					if (flag5)
-					{
-						result = true;
-					}
-					else
-					{
-						result = false;
-					}
+					result = flag5;
 				}
 			}
 			catch (Exception)

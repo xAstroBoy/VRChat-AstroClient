@@ -15,9 +15,9 @@
 			{
 				ClassInjector.RegisterTypeInIl2Cpp<T>();
 				ModConsole.DebugLog($"Registered: {typeof(T).FullName}");
-				if(!ComponentTypes.Contains(typeof(T)))
+				if(!RegisteredComponentsTypes.Contains(typeof(T)))
 				{
-					ComponentTypes.Add(typeof(T));
+					RegisteredComponentsTypes.Add(typeof(T));
 				}
 			}
 			catch (Exception e)
@@ -99,16 +99,6 @@
 			PlayerWatcherManager.MakeInstance();
 		}
 
-
-		
-
-		private static List<System.Type> ComponentTypes = new List<Type>();
-		public static List<System.Type> RegisteredComponentsTypes
-		{
-			get
-			{
-				return ComponentTypes;
-			}
-		}
+		public static List<Type> RegisteredComponentsTypes { get; } = new List<Type>();
 	}
 }

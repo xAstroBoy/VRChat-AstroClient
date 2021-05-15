@@ -182,15 +182,7 @@
 
 		public static bool IsLocalPlayerHoldingObject(GameObject obj)
 		{
-			var pickup = obj.GetComponent<VRC_Pickup>();
-			if (pickup != null)
-			{
-				return pickup.currentPlayer.displayName == LocalPlayerUtils.GetSelfVRCPlayerApi().displayName;
-			}
-			else
-			{
-				return false;
-			}
+			return obj.GetComponent<VRC_Pickup>() != null && obj.GetComponent<VRC_Pickup>().currentPlayer.displayName == LocalPlayerUtils.GetSelfVRCPlayerApi().displayName;
 		}
 
 		public static void TeleportPickupsToTheirDefaultPosition()

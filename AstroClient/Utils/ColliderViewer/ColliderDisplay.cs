@@ -239,11 +239,11 @@
 			{
 				get
 				{
-					return this._transform.gameObject.activeSelf;
+					return _transform.gameObject.activeSelf;
 				}
 				set
 				{
-					this._transform.gameObject.SetActive(value);
+					_transform.gameObject.SetActive(value);
 				}
 			}
 
@@ -252,9 +252,9 @@
 				GameObject gameObject = GameObject.CreatePrimitive(0);
 				UnityEngine.Object.DontDestroyOnLoad(gameObject);
 				UnityEngine.Object.Destroy(gameObject.GetComponent<Collider>());
-				this._transform = gameObject.transform;
-				this._renderer = gameObject.GetComponent<Renderer>();
-				ColliderDisplay.MyRenderers.Add((int)this._renderer.GetCachedPtr());
+				_transform = gameObject.transform;
+				_renderer = gameObject.GetComponent<Renderer>();
+				ColliderDisplay.MyRenderers.Add((int)_renderer.GetCachedPtr());
 			}
 
 			private static float Max(float a, float b, float c)
@@ -268,9 +268,9 @@
 				Vector3 lossyScale = transform.lossyScale;
 				float num = collider.radius * ColliderDisplay.Sphere.Max(lossyScale.x, lossyScale.y, lossyScale.z) * 2f;
 				Vector3 position = transform.TransformPoint(collider.center);
-				this._transform.localScale = Vector3.one * num;
-				this._transform.position = position;
-				this._renderer.sharedMaterial = (collider.isTrigger ? ColliderDisplay._triggerMaterial : ColliderDisplay._solidMaterial);
+				_transform.localScale = Vector3.one * num;
+				_transform.position = position;
+				_renderer.sharedMaterial = (collider.isTrigger ? ColliderDisplay._triggerMaterial : ColliderDisplay._solidMaterial);
 			}
 
 			private readonly Transform _transform;
@@ -284,11 +284,11 @@
 			{
 				get
 				{
-					return this._transform.gameObject.activeSelf;
+					return _transform.gameObject.activeSelf;
 				}
 				set
 				{
-					this._transform.gameObject.SetActive(value);
+					_transform.gameObject.SetActive(value);
 				}
 			}
 
@@ -297,18 +297,18 @@
 				GameObject gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
 				UnityEngine.Object.DontDestroyOnLoad(gameObject);
 				UnityEngine.Object.Destroy(gameObject.GetComponent<Collider>());
-				this._transform = gameObject.transform;
-				this._renderer = gameObject.GetComponent<Renderer>();
-				ColliderDisplay.MyRenderers.Add((int)this._renderer.GetCachedPtr());
+				_transform = gameObject.transform;
+				_renderer = gameObject.GetComponent<Renderer>();
+				ColliderDisplay.MyRenderers.Add((int)_renderer.GetCachedPtr());
 			}
 
 			public void Update(BoxCollider collider)
 			{
 				Transform transform = collider.transform;
-				this._transform.localScale = Vector3.Scale(transform.lossyScale, collider.size);
-				this._transform.position = transform.TransformPoint(collider.center);
-				this._transform.rotation = transform.rotation;
-				this._renderer.sharedMaterial = (collider.isTrigger ? ColliderDisplay._triggerMaterial : ColliderDisplay._solidMaterial);
+				_transform.localScale = Vector3.Scale(transform.lossyScale, collider.size);
+				_transform.position = transform.TransformPoint(collider.center);
+				_transform.rotation = transform.rotation;
+				_renderer.sharedMaterial = (collider.isTrigger ? ColliderDisplay._triggerMaterial : ColliderDisplay._solidMaterial);
 			}
 
 			private readonly Transform _transform;
@@ -322,34 +322,34 @@
 			{
 				get
 				{
-					return this._parent.gameObject.activeSelf;
+					return _parent.gameObject.activeSelf;
 				}
 				set
 				{
-					this._parent.gameObject.SetActive(value);
+					_parent.gameObject.SetActive(value);
 				}
 			}
 
 			public Capsule()
 			{
-				this._parent = new GameObject("Capsule").transform;
-				UnityEngine.Object.DontDestroyOnLoad(this._parent);
-				this._topSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
-				this._topSphere.parent = this._parent;
-				UnityEngine.Object.Destroy(this._topSphere.GetComponent<Collider>());
-				this._bottomSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
-				this._bottomSphere.parent = this._parent;
-				UnityEngine.Object.Destroy(this._bottomSphere.GetComponent<Collider>());
-				this._middleCylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder).transform;
-				this._middleCylinder.parent = this._parent;
-				UnityEngine.Object.Destroy(this._middleCylinder.GetComponent<Collider>());
-				this._bottomSphere.Rotate(180f, 0f, 0f);
-				this._topRenderer = this._topSphere.GetComponent<Renderer>();
-				this._bottomRenderer = this._bottomSphere.GetComponent<Renderer>();
-				this._middleRenderer = this._middleCylinder.GetComponent<Renderer>();
-				ColliderDisplay.MyRenderers.Add((int)this._topRenderer.GetCachedPtr());
-				ColliderDisplay.MyRenderers.Add((int)this._bottomRenderer.GetCachedPtr());
-				ColliderDisplay.MyRenderers.Add((int)this._middleRenderer.GetCachedPtr());
+				_parent = new GameObject("Capsule").transform;
+				UnityEngine.Object.DontDestroyOnLoad(_parent);
+				_topSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
+				_topSphere.parent = _parent;
+				UnityEngine.Object.Destroy(_topSphere.GetComponent<Collider>());
+				_bottomSphere = GameObject.CreatePrimitive(PrimitiveType.Sphere).transform;
+				_bottomSphere.parent = _parent;
+				UnityEngine.Object.Destroy(_bottomSphere.GetComponent<Collider>());
+				_middleCylinder = GameObject.CreatePrimitive(PrimitiveType.Cylinder).transform;
+				_middleCylinder.parent = _parent;
+				UnityEngine.Object.Destroy(_middleCylinder.GetComponent<Collider>());
+				_bottomSphere.Rotate(180f, 0f, 0f);
+				_topRenderer = _topSphere.GetComponent<Renderer>();
+				_bottomRenderer = _bottomSphere.GetComponent<Renderer>();
+				_middleRenderer = _middleCylinder.GetComponent<Renderer>();
+				ColliderDisplay.MyRenderers.Add((int)_topRenderer.GetCachedPtr());
+				ColliderDisplay.MyRenderers.Add((int)_bottomRenderer.GetCachedPtr());
+				ColliderDisplay.MyRenderers.Add((int)_middleRenderer.GetCachedPtr());
 			}
 
 			private static float Max(float a, float b)
@@ -379,26 +379,26 @@
 					quaternion *= new Quaternion(0.707106769f, -0.707106769f, 0f, 0f);
 				}
 				float num4 = num2 * 2f;
-				float num5 = num / 2f - num2;
-				this._parent.position = position;
-				this._parent.rotation = quaternion;
-				this._topSphere.localScale = Vector3.one * num4;
-				this._topSphere.localPosition = Vector3.up * num5;
-				this._bottomSphere.localScale = Vector3.one * num4;
-				this._bottomSphere.localPosition = -Vector3.up * num5;
-				this._middleCylinder.localScale = new Vector3(num4, num5, num4);
+				float num5 = (num / 2f) - num2;
+				_parent.position = position;
+				_parent.rotation = quaternion;
+				_topSphere.localScale = Vector3.one * num4;
+				_topSphere.localPosition = Vector3.up * num5;
+				_bottomSphere.localScale = Vector3.one * num4;
+				_bottomSphere.localPosition = -Vector3.up * num5;
+				_middleCylinder.localScale = new Vector3(num4, num5, num4);
 				bool isTrigger = collider.isTrigger;
 				if (isTrigger)
 				{
-					this._topRenderer.sharedMaterial = ColliderDisplay._triggerMaterial;
-					this._bottomRenderer.sharedMaterial = ColliderDisplay._triggerMaterial;
-					this._middleRenderer.sharedMaterial = ColliderDisplay._triggerMaterial;
+					_topRenderer.sharedMaterial = ColliderDisplay._triggerMaterial;
+					_bottomRenderer.sharedMaterial = ColliderDisplay._triggerMaterial;
+					_middleRenderer.sharedMaterial = ColliderDisplay._triggerMaterial;
 				}
 				else
 				{
-					this._topRenderer.sharedMaterial = ColliderDisplay._solidMaterial;
-					this._bottomRenderer.sharedMaterial = ColliderDisplay._solidMaterial;
-					this._middleRenderer.sharedMaterial = ColliderDisplay._solidMaterial;
+					_topRenderer.sharedMaterial = ColliderDisplay._solidMaterial;
+					_bottomRenderer.sharedMaterial = ColliderDisplay._solidMaterial;
+					_middleRenderer.sharedMaterial = ColliderDisplay._solidMaterial;
 				}
 			}
 
