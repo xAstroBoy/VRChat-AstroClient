@@ -46,38 +46,31 @@
 			}
 			DebugGetCopyOf("GetCopyOf 3");
 			IEnumerable<PropertyInfo> pinfos = type.GetProperties(bindingFlags);
-			foreach (Type derivedType in derivedTypes)
+			foreach (Type derivedType in derivedTypes.Where(derivedType => derivedType != null))
 			{
-				if (derivedType != null)
-				{
-					pinfos = pinfos.Concat(derivedType.GetProperties(bindingFlags));
-				}
+				pinfos = pinfos.Concat(derivedType.GetProperties(bindingFlags));
 			}
+
 			DebugGetCopyOf("GetCopyOf 4");
 			pinfos = from property in pinfos
 					 where !(type == typeof(Rigidbody) && property.Name == "inertiaTensor") // Special case for Rigidbodies inertiaTensor which isn't catched for some reason.
 					 where !property.CustomAttributes.Any(attribute => attribute.AttributeType == typeof(ObsoleteAttribute))
 					 select property;
 			DebugGetCopyOf("GetCopyOf 5");
-
-			foreach (var pinfo in pinfos)
+			foreach (PropertyInfo pinfo in pinfos.Where(pinfo => pinfo != null).Where(pinfo => pinfo.CanWrite))
 			{
-				if (pinfo != null)
+				if (pinfos.Any(e => e.Name == $"shared{char.ToUpper(pinfo.Name[0])}{pinfo.Name.Substring(1)}"))
 				{
-					if (pinfo.CanWrite)
-					{
-						if (pinfos.Any(e => e.Name == $"shared{char.ToUpper(pinfo.Name[0])}{pinfo.Name.Substring(1)}"))
-						{
-							continue;
-						}
-						try
-						{
-							pinfo.SetValue(comp, pinfo.GetValue(other, null), null);
-						}
-						catch { } // In case of NotImplementedException being thrown. For some reason specifying that exception didn't seem to catch it, so I didn't catch anything specific.
-					}
+					continue;
 				}
+
+				try
+				{
+					pinfo.SetValue(comp, pinfo.GetValue(other, null), null);
+				}
+				catch { }// In case of NotImplementedException being thrown. For some reason specifying that exception didn't seem to catch it, so I didn't catch anything specific.
 			}
+
 			DebugGetCopyOf("GetCopyOf 6");
 
 			IEnumerable<FieldInfo> finfos = type.GetFields(bindingFlags);
@@ -101,27 +94,22 @@
 				}
 			}
 			DebugGetCopyOf("GetCopyOf 8");
-
-			foreach (var finfo in finfos)
+			foreach (var finfo in finfos.Where(finfo => finfo != null))
 			{
-				if (finfo != null)
-				{
-					finfo.SetValue(comp, finfo.GetValue(other));
-				}
+				finfo.SetValue(comp, finfo.GetValue(other));
 			}
+
 			DebugGetCopyOf("GetCopyOf 9");
 
 			finfos = from field in finfos
 					 where field.CustomAttributes.Any(attribute => attribute.AttributeType == typeof(ObsoleteAttribute))
 					 select field;
 			DebugGetCopyOf("GetCopyOf 10");
-			foreach (var finfo in finfos)
+			foreach (var finfo in finfos.Where(finfo => finfo != null))
 			{
-				if (finfo != null)
-				{
-					finfo.SetValue(comp, finfo.GetValue(other));
-				}
+				finfo.SetValue(comp, finfo.GetValue(other));
 			}
+
 			DebugGetCopyOf("GetCopyOf End");
 			return comp as T;
 		}
@@ -136,7 +124,7 @@
 			{
 				ModConsole.Log("CopyComponent toAdd is null");
 			}
-			return go.AddComponent<T>().GetCopyOf(toAdd) as T;
+			return go.AddComponent<T>().GetCopyOf(toAdd);
 		}
 	}
 }
