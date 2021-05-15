@@ -110,7 +110,7 @@
 				foreach (var subaction in udoneventholder._eventTable)
 				{
 					scroll.Add(
-					new QMSingleButton(scroll.BaseMenu, 0, 0, $"{subaction.Key.ToString()}", delegate
+					new QMSingleButton(scroll.BaseMenu, 0, 0, $"{subaction.Key}", delegate
 					{
 						udoneventholder.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
 					}, $"Execute {subaction.Key}", null, null, true));

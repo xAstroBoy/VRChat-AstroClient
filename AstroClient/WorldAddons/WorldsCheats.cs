@@ -46,8 +46,7 @@
 			if (id == WorldIds.TermalTreatment)
 			{
 				ModConsole.Log($"Recognized {name} World, Finding Platforms Gameobjects!...");
-				var list = new List<GameObject>();
-				list = GameObjectFinder.ListFind("Platforms");
+				List<GameObject> list = GameObjectFinder.ListFind("Platforms");
 				if (list != null && list.Count() != 0)
 				{
 					list.AddToWorldUtilsMenu();

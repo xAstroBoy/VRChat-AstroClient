@@ -185,14 +185,7 @@
 			var pickup = obj.GetComponent<VRC_Pickup>();
 			if (pickup != null)
 			{
-				if (pickup.currentPlayer.displayName != LocalPlayerUtils.GetSelfVRCPlayerApi().displayName)
-				{
-					return false;
-				}
-				else
-				{
-					return true;
-				}
+				return pickup.currentPlayer.displayName == LocalPlayerUtils.GetSelfVRCPlayerApi().displayName;
 			}
 			else
 			{
