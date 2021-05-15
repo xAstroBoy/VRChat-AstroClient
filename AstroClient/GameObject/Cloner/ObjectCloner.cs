@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Cloner
 {
 	using AstroClient.AstroUtils.ItemTweaker;
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.extensions;
 	using AstroClient.ItemTweaker;
 	using UnityEngine;

@@ -3,7 +3,7 @@
 	#region Imports
 
 	using AstroClient.Cheetos;
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.variables;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
@@ -14,7 +14,6 @@
 	using System.Threading;
 	using Transmtn.DTO.Notifications;
 	using UnityEngine;
-	using UnityEngine.UI;
 	using VRC.SDKBase;
 	using static VRC.SDKBase.VRC_EventHandler;
 

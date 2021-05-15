@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Skyboxes
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.extensions;
 	using RubyButtonAPI;
 	using System;

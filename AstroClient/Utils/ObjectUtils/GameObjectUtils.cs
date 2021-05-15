@@ -1,8 +1,7 @@
 ﻿namespace AstroClient.GameObjectDebug
 {
 	using AstroClient.components;
-	using AstroClient.ConsoleUtils;
-	using AstroClient.extensions;
+	using AstroLibrary.Console;
 	using AstroClient.ItemTweaker;
 	using AstroClient.SyncPhysicExt;
 	using Boo.Lang;
@@ -23,6 +22,7 @@
 	using Color = System.Drawing.Color;
 	using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 	using SyncPhysics = MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique;
+	using AstroClient.Extensions;
 
 	public class GameObjectUtils : GameEvents
 	{

@@ -2,7 +2,7 @@
 {
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.Cloner;
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.Finder;
 	using AstroClient.ItemTweaker;
 	using AstroClient.Startup;

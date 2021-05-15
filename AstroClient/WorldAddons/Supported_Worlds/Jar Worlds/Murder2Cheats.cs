@@ -1,6 +1,6 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.extensions;
 	using AstroClient.Finder;
 	using AstroClient.Startup.Buttons;
@@ -12,6 +12,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
+	using AstroClient.Extensions;
 
 	public class Murder2Cheats : GameEvents
 	{

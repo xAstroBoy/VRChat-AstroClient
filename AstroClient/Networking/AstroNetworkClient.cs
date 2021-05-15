@@ -5,7 +5,7 @@
 	using AstroClient.Cheetos;
 	using AstroClient.components;
 	using AstroClient.Components;
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.variables;
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;

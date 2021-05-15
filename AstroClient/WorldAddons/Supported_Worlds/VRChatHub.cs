@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.World.Hub
 
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.Finder;
 	using AstroClient.Variables;
 	using RubyButtonAPI;

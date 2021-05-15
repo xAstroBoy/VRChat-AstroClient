@@ -1,6 +1,6 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.Finder;
 	using AstroClient.Variables;
 	using System.Drawing;

@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.components
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using System;
 	using System.Collections.Generic;
 	using System.Runtime.InteropServices;

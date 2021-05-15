@@ -1,7 +1,7 @@
 ﻿namespace DayClientML2.Utility
 {
 	using AstroClient;
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using System;
 	using UnityEngine;
 	using UnityEngine.UI;

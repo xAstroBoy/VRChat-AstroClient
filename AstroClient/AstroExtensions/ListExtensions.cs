@@ -1,6 +1,6 @@
-﻿namespace AstroClient.extensions
+﻿namespace AstroClient.Extensions
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.Finder;
 	using System.Collections.Generic;
 	using System.Linq;

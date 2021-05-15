@@ -1,7 +1,7 @@
 ﻿namespace DayClientML2.Utility.ButtonApi
 {
 	using AstroClient;
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using DayClientML2.Utility.Extensions;
 	using System;
 	using UnityEngine;

@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Startup
 {
 	using AstroClient.components;
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.variables;
 	using System;
 	using System.Collections.Generic;

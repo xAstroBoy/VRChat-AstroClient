@@ -2,7 +2,7 @@
 {
 	#region Imports
 
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using Harmony;

@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Cheetos
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.Finder;
 	using AstroClient.variables;
 	using System;

@@ -1,6 +1,5 @@
-﻿namespace AstroClient.ConsoleUtils
+﻿namespace AstroLibrary.Console
 {
-	using AstroClient.variables;
 	using System;
 	using System.Drawing;
 	using System.IO;
@@ -10,6 +9,8 @@
 
 	public class ModConsole
 	{
+		public static string ModName = string.Empty;
+
 		private static bool HasRenamedOldLogFile = false;
 
 		private static bool HasInitiated = false;
@@ -18,7 +19,11 @@
 		{
 			get
 			{
-				return Bools.IsDebugMode;
+#if DEBUG
+				return true;
+#else
+				return false;
+#endif
 			}
 		}
 
@@ -26,7 +31,7 @@
 		{
 			get
 			{
-				return Path.Combine(Environment.CurrentDirectory, $"External Logs\\{BuildInfo.Name}");
+				return Path.Combine(Environment.CurrentDirectory, $"External Logs\\{ModName}");
 			}
 		}
 
@@ -34,7 +39,7 @@
 		{
 			get
 			{
-				return Path.Combine(LogsPath, BuildInfo.Name + "_Latest.log");
+				return Path.Combine(LogsPath, $"{ModName}_Latest.log");
 			}
 		}
 
@@ -48,15 +53,8 @@
 		public static string GetNewFileName()
 		{
 			var result = GetCurrentInt();
-			var newfilename = BuildInfo.Name + "-Log-" + DateTime.Now.Day + "-" + DateTime.Now.Month + "-" + DateTime.Now.Year + " (" + result + ").log";
-			if (!File.Exists(Path.Combine(LogsPath, newfilename)))
-			{
-				return Path.Combine(LogsPath, newfilename);
-			}
-			else
-			{
-				return GetNewFileName();
-			}
+			var newfilename = $"{ModName}-Log-{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year} ({result}).log";
+			return !File.Exists(Path.Combine(LogsPath, newfilename)) ? Path.Combine(LogsPath, newfilename) : GetNewFileName();
 		}
 
 		public static void ReplaceOldLatestFile()
@@ -408,9 +406,9 @@
 		private static void PrintModStamp()
 		{
 			Console.Write("[", Color.White);
-			Console.Write(BuildInfo.Name, Color.Gold);
+			Console.Write(ModName, Color.Gold);
 			Console.Write("] ", Color.White);
-			Task.Run(() => { Write($"[{BuildInfo.Name}] "); });
+			Task.Run(() => { Write($"[{ModName}] "); });
 		}
 
 		private static void PrintTimestamp()

@@ -1,7 +1,7 @@
 ﻿namespace DayClientML2.Utility.Extensions
 {
 	#region Imports
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using MelonLoader;
 	using System;
 	using System.Collections;

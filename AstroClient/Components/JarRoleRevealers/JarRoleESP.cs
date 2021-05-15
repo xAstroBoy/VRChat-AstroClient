@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.components
 {
 	using AstroClient.Components;
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.extensions;
 	using AstroClient.Startup.Buttons;
 	using DayClientML2.Utility.Extensions;

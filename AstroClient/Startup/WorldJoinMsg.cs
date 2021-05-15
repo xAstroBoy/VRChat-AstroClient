@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Startup
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 
 	internal class WorldJoinMsg : GameEvents
 	{

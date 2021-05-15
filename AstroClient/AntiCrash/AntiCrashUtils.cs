@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.AntiCrash
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 
 	public static class AntiCrashUtils
 	{

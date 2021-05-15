@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Cheetos
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using System;
 	using System.Diagnostics;
 

@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.AntiCrash
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using UnityEngine;
 	using MelonLoader;
 	using System;

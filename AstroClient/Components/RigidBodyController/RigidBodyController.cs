@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.components
 {
 	using AstroClient.AstroUtils.ItemTweaker;
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.ItemTweaker;
 	using AstroClient.SyncPhysicExt;
 	using System;

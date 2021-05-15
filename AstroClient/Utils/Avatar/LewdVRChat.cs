@@ -1,6 +1,6 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.variables;
 	using DayClientML2.Utility.Extensions;
 	using MelonLoader;

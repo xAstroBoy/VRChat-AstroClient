@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.WorldLights
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.extensions;
 	using AstroClient.Skyboxes;
 	using RubyButtonAPI;

@@ -145,7 +145,6 @@
     <Compile Include="Components\Bounce\Bouncer.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigManager.cs" />
-    <Compile Include="Console\ModConsole.cs" />
     <Compile Include="GameEvents.cs" />
     <Compile Include="GameEventsBehaviour.cs" />
     <Compile Include="Cheetos\GPLStuff\FOV.cs" />
@@ -959,6 +958,7 @@
     <EmbeddedResource Include="Resources\planet.png" />
     <EmbeddedResource Include="Resources\thief.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

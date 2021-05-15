@@ -1,6 +1,6 @@
 ﻿namespace DayClientML2.Managers
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using System;
 	using System.Collections;
 	using System.Linq;

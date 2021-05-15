@@ -1,7 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroClient.components;
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.extensions;
 	using AstroClient.Finder;
 	using AstroClient.Startup.Buttons;
@@ -9,7 +9,6 @@
 	using AstroClient.variables;
 	using AstroClient.Variables;
 	using DayClientML2.Utility;
-	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;
@@ -18,6 +17,7 @@
 	using VRC;
 	using VRC.Udon;
 	using static AstroClient.variables.CustomLists;
+	using AstroClient.Extensions;
 
 	public class Murder4Cheats : GameEvents
 	{

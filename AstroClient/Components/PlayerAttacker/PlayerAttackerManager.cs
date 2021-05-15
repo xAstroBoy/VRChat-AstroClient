@@ -13,7 +13,7 @@
 
 	#region AstroClient Imports
 
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 
 	#endregion AstroClient Imports
 

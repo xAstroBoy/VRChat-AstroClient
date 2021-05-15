@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.variables
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 
 	public class Bools
 	{

@@ -6,7 +6,7 @@
 	{
 		public static void Test()
 		{
-			Console.WriteLine("LibraryTests: Test()");
+			System.Console.WriteLine("LibraryTests: Test()");
 		}
 	}
 }

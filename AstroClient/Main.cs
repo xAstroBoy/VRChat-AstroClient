@@ -5,7 +5,7 @@
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.ButtonShortcut;
 	using AstroClient.Components;
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.GameObjectDebug;
 	using AstroClient.Startup.Buttons;
 	using AstroClient.variables;

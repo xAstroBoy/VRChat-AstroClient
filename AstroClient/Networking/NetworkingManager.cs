@@ -1,6 +1,6 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.variables;
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;

@@ -1,7 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroClient.components;
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using System.Linq;
 	using UnityEngine;
 	using VRC.Udon;

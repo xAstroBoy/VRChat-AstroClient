@@ -2,7 +2,7 @@
 {
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.components;
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.extensions;
 	using AstroClient.GameObjectDebug;
 	using DayClientML2.Utility.Extensions;

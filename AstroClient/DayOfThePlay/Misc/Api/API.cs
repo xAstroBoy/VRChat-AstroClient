@@ -1,6 +1,6 @@
 ﻿namespace DayClientML2.Utility.Api
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using DayClientML2.Managers;
 	using DayClientML2.Utility.Api.Object;
 	using System;

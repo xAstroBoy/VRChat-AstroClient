@@ -1,6 +1,6 @@
 ﻿namespace DayBots.VRCAPI.Endpoints
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using Newtonsoft.Json;
 	using System.Collections.Generic;
 	using System.Threading.Tasks;

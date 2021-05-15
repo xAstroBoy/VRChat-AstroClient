@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Prefabs
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;

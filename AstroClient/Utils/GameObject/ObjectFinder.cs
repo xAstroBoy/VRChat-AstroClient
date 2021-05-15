@@ -1,12 +1,13 @@
 ﻿namespace AstroClient.Finder
 {
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.extensions;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
 	using UnityEngine.SceneManagement;
+	using AstroClient.Extensions;
 
 	public static class GameObjectFinder
 	{

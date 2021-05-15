@@ -2,7 +2,7 @@
 {
 	#region Imports
 	using AstroClient.AstroUtils.PlayerMovement;
-	using AstroClient.ConsoleUtils;
+	using AstroLibrary.Console;
 	using AstroClient.Startup.Hooks;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
