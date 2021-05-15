@@ -53,14 +53,7 @@
 		private static bool OnRPCEvent1(Player __0, VRC_EventHandler.VrcEvent __1, VRC_EventHandler.VrcBroadcastType __2, int __3, float __4)
 		{
 			string actionstring = string.Empty;
-			string actiontext = string.Empty;
-			string GameObjName = string.Empty;
-			string name = string.Empty;
-			string parameter = string.Empty;
-			string eventtype = string.Empty;
-			string broadcasttype = string.Empty;
-			string sender = string.Empty;
-
+			string actiontext;
 			try
 			{
 				if (__1.ParameterBytes != null && __1.ParameterBytes.Count != 0)
@@ -78,10 +71,10 @@
 				return true;
 			}
 
-			name = __1.ParameterObject != null ? __1.ParameterObject.name : "null";
-			parameter = __1.ParameterString != null ? __1.ParameterString : "null";
-			eventtype = __1.EventType != null ? __1.EventType.ToString() : "null";
-			broadcasttype = __2 != null ? __2.ToString() : "Null";
+			string name = __1.ParameterObject != null ? __1.ParameterObject.name : "null";
+			string parameter = __1.ParameterString != null ? __1.ParameterString : "null";
+			string eventtype = __1.EventType != null ? __1.EventType.ToString() : "null";
+			string broadcasttype = __2 != null ? __2.ToString() : "Null";
 
 			bool log = ConfigManager.General.LogRPCEvents;
 
@@ -95,8 +88,8 @@
 			//	log = true;
 			//}
 
-			GameObjName = __1.ParameterObject != null ? __1.ParameterObject.name : "null";
-
+			string GameObjName = __1.ParameterObject != null ? __1.ParameterObject.name : "null";
+			string sender;
 			if (__0 != null)
 			{
 				sender = __0.GetAPIUser() != null ? __0.GetAPIUser().displayName : "null";
