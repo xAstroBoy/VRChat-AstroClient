@@ -19,9 +19,11 @@
 			var tmp = new QMNestedButton(tab, x, y, "Avatar Modifiers", "Modify Other's avatars", null, null, null, null, btnHalf);
 			new QMSingleButton(tmp, 5, 0, "Reload All Avatars", () => { AvatarUtils.ReloadAllAvatars(); }, "Reloads All avatars", null, null, true);
 			RemoveMasksToggle = new QMSingleToggleButton(tmp, 1, 0, "Remove Masks", () => { MaskDeleter = true; }, "Remove Masks", () => { MaskDeleter = false; }, "Remove Masks From all avatars (Requires Avatar Reload)", Color.green, Color.red, null, false, true);
-
+			LewdifyToggle = new QMSingleToggleButton(tmp, 1, 0.5f, "Lewdify", () => { Lewdify = true; }, "Lewdify", () => { Lewdify = false; }, "Lewdify avatars (Requires a Avatar Reload)", Color.green, Color.red, null, false, true);
 
 		}
+
+
 
 		public override void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
 		{
@@ -47,19 +49,23 @@
 										// APPLY EDITS HERE, AS THIS WORKS BUT FILTER ALWAYS ARMATURE Childs out.
 
 
-										var AvatarHolder = root.GetAvatarGameObject();
-										var Armature = root.GetAvatarArmature();
-										var Body = root.GetAvatarBody();
+										var AvatarHolder = root.GetAvatar();
+										var Armature = root.GetArmature();
+										var Body = root.GetBody();
 
 										if (AvatarHolder != null && Armature != null && Body != null)
 										{
 
-											var childs = AvatarUtils.AvatarChilds(AvatarHolder, Armature, Body);
+											var childs = AvatarUtils.AvatarParents(AvatarHolder, Armature, Body);
 											if (childs.Count() != 0 && childs != null)
 											{
 												if (MaskDeleter)
 												{
 													RemoveMasks(childs);
+												}
+												if(Lewdify)
+												{
+													
 												}
 											}
 										}
@@ -73,22 +79,69 @@
 		}
 
 		
+		public static void RemoveClothes(List<Transform> items)
+		{
+
+		}
+
+		public static void EnableNSFW(List<Transform> items)
+		{
+
+		}
+
 
 		// Destroys Masks.
-		public static void RemoveMasks(List<Transform> avatarchilds)
+		public static void RemoveMasks(List<Transform> items)
 		{
-			foreach(var child in avatarchilds)
+			foreach(var item in items)
 			{
-				if(child != null)
+				if(item != null)
 				{
-					if(child.name.ToLower() == "mask")
+					if (item.name.ToLower() == "mask")
 					{
-						child.gameObject.DestroyMeLocal();
+						item.gameObject.DestroyMeLocal();
+					}
+					else
+					{
+						foreach (var child in item.GetComponentsInChildren<Transform>(true))
+						{
+							if (child != null)
+							{
+								if (child.name.ToLower() == "mask")
+								{
+									child.gameObject.DestroyMeLocal();
+								}
+							}
+						}
 					}
 				}
 			}
 
 		}
+
+
+
+
+		public static QMSingleToggleButton LewdifyToggle { get; set; }
+
+		private static bool _Lewdify = false;
+		public static bool Lewdify
+		{
+			get
+			{
+				return _Lewdify;
+			}
+			set
+			{
+				_Lewdify = value;
+				if (Lewdify != null)
+				{
+					LewdifyToggle.setToggleState(value);
+				}
+			}
+		}
+
+
 
 
 

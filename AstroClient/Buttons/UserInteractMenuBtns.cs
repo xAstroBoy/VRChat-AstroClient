@@ -41,9 +41,6 @@
 				ObjectMiscOptions.RemoveAllWatchersPlayer();
 			}
 			, "Removes everything bound to this player.", null, null);
-
-
-			LewdVRChat.InitUserMenu(menu, 4, 1);
 		}
 
 		public override void OnLateUpdate()

@@ -16,6 +16,8 @@
 
 	public class GameObjMenu : GameEvents
 	{
+
+		
 		public override void OnLevelLoaded()
 		{
 			CurrentSelection.Clear();
@@ -357,7 +359,7 @@
 					   {
 						   if (IsToggleMode)
 						   {
-							   item.gameObject.SetActive(!item.gameObject.active);
+							   item.gameObject.active = !item.gameObject.active;
 							   newbtn.setTextColor(GetObjectStatus(item));
 						   }
 						   if (IsDestroyMode)
