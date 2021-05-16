@@ -2,7 +2,7 @@
 {
 	#region Imports
 
-	using AstroClient.Finder;
+	using AstroLibrary.Finder;
 	using DayClientML2.Utility.Extensions;
 	using System;
 	using UnityEngine;

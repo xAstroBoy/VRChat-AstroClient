@@ -4,7 +4,7 @@
 
 	using AstroLibrary.Console;
 	using AstroClient.Extensions;
-	using AstroClient.Finder;
+	using AstroLibrary.Finder;
 	using AstroClient.Startup.Buttons;
 	using AstroClient.variables;
 	using AstroClient.Variables;
@@ -14,6 +14,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
+	using AstroLibrary.Extensions;
 
 	#endregion
 

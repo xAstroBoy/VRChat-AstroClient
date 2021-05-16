@@ -5,7 +5,7 @@
 	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using AstroClient.Extensions;
-	using AstroClient.Finder;
+	using AstroLibrary.Finder;
 	using AstroClient.Startup.Buttons;
 	using AstroClient.UdonExploits;
 	using AstroClient.variables;
@@ -19,6 +19,7 @@
 	using VRC;
 	using VRC.Udon;
 	using static AstroClient.variables.CustomLists;
+	using AstroLibrary.Extensions;
 
 	#endregion
 

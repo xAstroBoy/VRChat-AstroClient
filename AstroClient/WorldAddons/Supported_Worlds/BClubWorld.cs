@@ -2,7 +2,7 @@
 {
 	using AstroLibrary.Console;
 	using AstroClient.Extensions;
-	using AstroClient.Finder;
+	using AstroLibrary.Finder;
 	using AstroClient.Variables;
 	using System;
 	using System.Linq;

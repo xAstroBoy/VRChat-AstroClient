@@ -1,9 +1,9 @@
 ﻿namespace AstroClient.Cheetos
 {
 	using AstroLibrary.Console;
-	using AstroLibrary.Finder;
 	using AstroClient.variables;
 	using UnityEngine;
+	using AstroLibrary.Finder;
 
 	internal class CheetosTestStuff : GameEvents
 	{

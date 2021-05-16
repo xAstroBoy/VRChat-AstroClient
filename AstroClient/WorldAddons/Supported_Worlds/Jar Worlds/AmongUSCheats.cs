@@ -4,7 +4,7 @@
 	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using AstroClient.Extensions;
-	using AstroClient.Finder;
+	using AstroLibrary.Finder;
 	using AstroClient.UdonExploits;
 	using AstroClient.Variables;
 	using DayClientML2.Utility;

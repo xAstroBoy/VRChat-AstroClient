@@ -2,7 +2,7 @@
 {
 	#region Imports
 
-	using AstroClient.Finder;
+	using AstroLibrary.Finder;
 
 	#endregion Imports
 
