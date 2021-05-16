@@ -57,23 +57,6 @@
 			}
 		}
 
-		[Command("ListKeys")]
-		[Summary("ListKeys command")]
-		public async Task ListKeys()
-		{
-			_ = await ReplyAsync(null, false, CustomEmbed.GetKeyCountEmbed());
-
-			foreach (KeyValuePair<string, ulong> kvp in KeyManager.GetAllDevKeyInfo())
-			{
-				_ = await base.ReplyAsync(null, false, CustomEmbed.GetKeyEmbed(kvp.Key));
-			}
-
-			foreach (KeyValuePair<string, ulong> kvp in KeyManager.GetAllKeyInfo())
-			{
-				_ = await base.ReplyAsync(null, false, CustomEmbed.GetKeyEmbed(kvp.Key));
-			}
-		}
-
 		[Command("Notify")]
 		[Summary("Notify command")]
 		public async Task Notify([Required] string name, [Required] string msg)
