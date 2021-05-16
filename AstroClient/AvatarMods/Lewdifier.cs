@@ -5,11 +5,10 @@
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using UnityEngine;
 	using AstroClient.Extensions;
 	using AstroLibrary.Console;
+	using AstroNetworkingLibrary;
 
 	public class Lewdifier : GameEvents
 	{
@@ -21,7 +20,7 @@
 		}
 
 
-
+		
 
 		public static List<string> TermsToToggleOn { get; private set; } = new List<string>();
 		public static List<string> TermsToToggleOff { get; private set; } = new List<string>();
@@ -32,6 +31,13 @@
 		private static string TermsToEnableOffPath { get; } = Environment.CurrentDirectory + @"\AstroClient\Lewdify\TermsToDisable.json";
 		private static string AvatarsToSkipPath { get; } = Environment.CurrentDirectory + @"\AstroClient\Lewdify\IgnoredAvatars.json";
 
+
+		public static void SaveAll()
+		{
+			JSonWriter.WriteToJsonFile(TermsToEnableOnPath, TermsToToggleOn);
+			JSonWriter.WriteToJsonFile(TermsToEnableOffPath, TermsToToggleOff);
+			JSonWriter.WriteToJsonFile(AvatarsToSkipPath, AvatarsToSkip);
+		}
 
 		public static void RefreshAll()
 		{
