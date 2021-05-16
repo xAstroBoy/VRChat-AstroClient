@@ -26,9 +26,9 @@
 		public static List<string> AvatarsToSkip { get; private set; } = new List<string>();
 
 
-		private static string TermsToEnableOnPath { get; } = Environment.CurrentDirectory + @"\AstroClient\TermsToEnable.json";
-		private static string TermsToEnableOffPath { get; } = Environment.CurrentDirectory + @"\AstroClient\TermsToDisable.json";
-		private static string AvatarsToSkipPath { get; } = Environment.CurrentDirectory + @"\AstroClient\IgnoredAvatars.json";
+		private static string TermsToEnableOnPath { get; } = Environment.CurrentDirectory + @"\AstroClient\Lewdify\TermsToEnable.json";
+		private static string TermsToEnableOffPath { get; } = Environment.CurrentDirectory + @"\AstroClient\Lewdify\TermsToDisable.json";
+		private static string AvatarsToSkipPath { get; } = Environment.CurrentDirectory + @"\AstroClient\Lewdify\IgnoredAvatars.json";
 
 
 		public static void RefreshAll()
@@ -36,8 +36,23 @@
 			Refresh_termsToToggleOn();
 			Refresh_termsToToggleOff();
 			Refresh_AvatarsToSkip();
+			if (AvatarModifier.LewdifyLists != null)
+			{
+				AvatarModifier.LewdifyLists.setButtonText(ListButtonText);
+			}
 		}
 
+
+		public static string ListButtonText
+		{
+			get
+			{
+				return $"Terms To Enable : {TermsToToggleOn.Count} \n" +
+					   $"Terms To Disable : {TermsToToggleOff.Count} \n" +
+					   $"Avatars to Skip : {AvatarsToSkip.Count} \n";
+			}
+
+		}
 
 
 		public static void Refresh_termsToToggleOn()
