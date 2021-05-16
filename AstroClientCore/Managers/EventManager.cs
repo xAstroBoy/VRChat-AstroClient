@@ -5,8 +5,6 @@
 
 	public static class EventManager
 	{
-		public static List<GameEvents> Overridable_List = new List<GameEvents>();
-
 		public static EventHandler<EventArgs> ApplicationStart;
 		public static EventHandler<EventArgs> ApplicationQuit;
 		public static EventHandler<EventArgs> Update;
