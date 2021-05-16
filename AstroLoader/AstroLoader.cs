@@ -7,8 +7,6 @@
 
 	public class AstroLoader : MelonPlugin
 	{
-		public static byte[] AssemblyFile;
-
 #if DEBUG
 
 		public static string[] DebugMelonPaths =
@@ -43,7 +41,7 @@
 		{
 			LoadEmbeddedLibraries();
 
-#if DEBUG
+#if OFFLINE
 			LoadDebug();
 			return;
 #endif
@@ -56,13 +54,13 @@
 			{
 			}
 
-			//if (AstroNetworkLoader.LibraryFiles.Count > 0)
-			//{
-			//	foreach (var bytes in AstroNetworkLoader.LibraryFiles)
-			//	{
-			//		Assembly.Load(bytes);
-			//	}
-			//}
+			if (AstroNetworkLoader.LibraryFiles.Count > 0)
+			{
+				foreach (var bytes in AstroNetworkLoader.LibraryFiles)
+				{
+					Assembly.Load(bytes);
+				}
+			}
 
 			//if (AstroNetworkLoader.AssemblyFile != null)
 			//{

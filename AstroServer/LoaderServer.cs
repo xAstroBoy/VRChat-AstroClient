@@ -4,6 +4,7 @@
 	using AstroNetworkingLibrary.Serializable;
 	using System;
 	using System.Collections.Generic;
+	using System.IO;
 	using System.Linq;
 	using System.Net;
 	using System.Net.Sockets;
@@ -97,25 +98,55 @@
 				}
 			}
 
-			//if (packetData.NetworkEventID == PacketClientType.GET_RESOURCES)
-			//{
-			//	foreach (var libPath in Libraries)
-			//	{
-			//		try
-			//		{
-			//			var path = Environment.CurrentDirectory + libPath;
-			//			Console.WriteLine($"Sending: {path}");
-			//			byte[] data = File.ReadAllBytes(path);
-			//			client.Send(new PacketData(PacketServerType.LOADER_LIBRARY, "", data));
-			//		}
-			//		catch (Exception e)
-			//		{
-			//			Console.WriteLine($"Failed to send: {e.Message}");
-			//		}
-			//	}
+			if (packetData.NetworkEventID == PacketClientType.GET_RESOURCES)
+			{
+				foreach (var libPath in Libraries)
+				{
+					try
+					{
+						var path = Environment.CurrentDirectory + libPath;
+						byte[] data = File.ReadAllBytes(path);
+						var encoded = Encoding.Base64Encode(data.ConvertToString());
+						client.Send(new PacketData(PacketServerType.LOADER_LIBRARY, encoded));
+					}
+					catch (Exception e)
+					{
+						Console.WriteLine($"Failed to send: {e.Message}");
+					}
+				}
 
-			//	client.Send(new PacketData(PacketServerType.LOADER_DONE));
-			//}
+				foreach (var libPath in Melons)
+				{
+					try
+					{
+						var path = Environment.CurrentDirectory + libPath;
+						byte[] data = File.ReadAllBytes(path);
+						var encoded = Encoding.Base64Encode(data.ConvertToString());
+						client.Send(new PacketData(PacketServerType.LOADER_MELON, encoded));
+					}
+					catch (Exception e)
+					{
+						Console.WriteLine($"Failed to send: {e.Message}");
+					}
+				}
+
+				foreach (var libPath in Modules)
+				{
+					try
+					{
+						var path = Environment.CurrentDirectory + libPath;
+						byte[] data = File.ReadAllBytes(path);
+						var encoded = Encoding.Base64Encode(data.ConvertToString());
+						client.Send(new PacketData(PacketServerType.LOADER_MODULE, encoded));
+					}
+					catch (Exception e)
+					{
+						Console.WriteLine($"Failed to send: {e.Message}");
+					}
+				}
+
+				client.Send(new PacketData(PacketServerType.LOADER_DONE));
+			}
 
 			//Client client = sender as Client;
 			//string[] cmds = input.Split(":");

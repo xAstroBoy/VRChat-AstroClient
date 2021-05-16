@@ -12,9 +12,9 @@
 	{
 		internal static HandleClient Client;
 
-		internal static List<byte[]> LibraryFiles;
-		internal static List<byte[]> MelonFiles;
-		internal static List<byte[]> ModuleFiles;
+		internal static List<byte[]> LibraryFiles = new List<byte[]>();
+		internal static List<byte[]> MelonFiles = new List<byte[]>();
+		internal static List<byte[]> ModuleFiles = new List<byte[]>();
 
 		internal static bool IsReady = false;
 
@@ -71,10 +71,10 @@
 				Client.Send(new PacketData(PacketClientType.GET_RESOURCES));
 			}
 
-			//if (packetData.NetworkEventID == PacketServerType.LOADER_LIBRARY)
-			//{
-			//	LibraryFiles.Add(packetData.ByteData);
-			//}
+			if (packetData.NetworkEventID == PacketServerType.LOADER_LIBRARY)
+			{
+				LibraryFiles.Add(Encoding.Base64Decode(packetData.TextData).ConvertToBytes());
+			}
 
 			if (packetData.NetworkEventID == PacketServerType.LOADER_DONE)
 			{
