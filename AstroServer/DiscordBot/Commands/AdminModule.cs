@@ -1,14 +1,16 @@
 ﻿namespace AstroServer.DiscordBot.Commands
 {
 	using AstroServer.DiscordBot.Attributes;
+	using AstroServer.Serializable;
 	using Discord.Commands;
+	using MongoDB.Entities;
 	using System.Collections.Generic;
 	using System.ComponentModel.DataAnnotations;
 	using System.Linq;
 	using System.Text;
 	using System.Threading.Tasks;
 
-	[Name("Admin")]
+	[Discord.Commands.Name("Admin")]
 	[RequireContext(ContextType.Guild, ErrorMessage = "Sorry, this command must be ran from within a server, not a DM!")]
 	[RequireTeam]
 	public class AdminModule : ModuleBase<SocketCommandContext>
@@ -42,6 +44,17 @@
 		public async Task KeyCount()
 		{
 			_ = await ReplyAsync(null, false, CustomEmbed.GetKeyCountEmbed());
+		}
+
+		[Command("Accounts")]
+		[Summary("Accounts command")]
+		public async Task Accounts()
+		{
+			var accounts = DB.Queryable<AccountData>();
+			foreach (var account in accounts)
+			{
+				_ = await base.ReplyAsync(null, false, CustomEmbed.GetAccountEmbed(account));
+			}
 		}
 
 		[Command("ListKeys")]

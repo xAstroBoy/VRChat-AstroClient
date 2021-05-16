@@ -8,7 +8,7 @@
 	{
 		public string Name = string.Empty;
 
-		public string DiscordID = string.Empty;
+		public ulong DiscordID = 0;
 
 		public string Key = string.Empty;
 

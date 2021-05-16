@@ -1,5 +1,6 @@
 ﻿namespace AstroServer
 {
+	using AstroServer.Serializable;
 	using MongoDB.Driver;
 	using MongoDB.Entities;
 	using System;

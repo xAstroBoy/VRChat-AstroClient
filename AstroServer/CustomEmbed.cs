@@ -1,6 +1,7 @@
 ﻿namespace AstroServer
 {
 	using AstroServer.DiscordBot;
+	using AstroServer.Serializable;
 	using Discord;
 	using System;
 
@@ -75,6 +76,44 @@
 			embedBuilder.AddField("Other IP", other.ClientSocket.Client.RemoteEndPoint);
 			embedBuilder.AddField("Time", $"{DateTime.Now.ToLongDateString()}, {DateTime.Now:HH:mm:ss tt}");
 			embedBuilder.AddField("Key", origin.Key);
+
+			embedBuilder.Footer = embedFooterBuilder;
+
+			return embedBuilder.Build();
+		}
+
+		public static Embed GetAccountEmbed(AccountData account)
+		{
+			var color = Color.Blue;
+
+			if (account.IsDeveloper)
+			{
+				color = Color.Red;
+			}
+
+			var discordId = KeyManager.GetKeysDiscordOwner(account.Key);
+			var discordUser = AstroBot.Client.GetUser(discordId);
+
+			EmbedBuilder embedBuilder = new EmbedBuilder()
+			{
+				Title = DiscordUtils.GetDiscordName(discordId),
+				Color = color,
+				ThumbnailUrl = discordUser.GetAvatarUrl()
+			};
+
+			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
+
+			if (KeyManager.IsDevKey(account.Key))
+			{
+				embedFooterBuilder.Text = "Developer";
+			}
+			else
+			{
+				embedFooterBuilder.Text = "Client";
+			}
+
+			embedBuilder.AddField("Name", account.Name);
+			embedBuilder.AddField("Discord", account.DiscordID);
 
 			embedBuilder.Footer = embedFooterBuilder;
 
