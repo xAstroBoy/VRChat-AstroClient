@@ -4,6 +4,7 @@
 	using AstroServer.Serializable;
 	using Discord;
 	using System;
+	using System.Text;
 
 	public static class CustomEmbed
 	{
@@ -114,6 +115,36 @@
 
 			embedBuilder.AddField("Name", account.Name);
 			embedBuilder.AddField("Discord", account.DiscordID);
+
+			StringBuilder sb = new StringBuilder();
+
+			if (account.HasExploits)
+			{
+				sb.Append("HasExploits ");
+			}
+
+			if (account.HasUdon)
+			{
+				sb.Append("HasUdon ");
+			}
+
+			if (account.HasAmongUs)
+			{
+				sb.Append("HasAmongUs ");
+			}
+
+			if (account.HasFreezeTag)
+			{
+				sb.Append("HasFreezeTag ");
+			}
+
+			if (account.HasMurder4)
+			{
+				sb.Append("HasMurder4 ");
+			}
+
+			embedBuilder.AddField("Permissions", sb.ToString());
+			embedBuilder.AddField("Key", account.Key);
 
 			embedBuilder.Footer = embedFooterBuilder;
 
