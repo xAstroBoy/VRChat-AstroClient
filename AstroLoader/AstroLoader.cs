@@ -42,8 +42,8 @@
 			LoadEmbeddedLibraries();
 
 #if DEBUG
-			LoadDebug();
-			return;
+			//LoadDebug();
+			//return;
 #endif
 
 			KeyManager.ReadKey();

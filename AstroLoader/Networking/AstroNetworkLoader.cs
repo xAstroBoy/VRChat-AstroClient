@@ -7,7 +7,7 @@
 	using System.Diagnostics;
 	using System.Net.Sockets;
 
-	// TODO: Make this retreive multiple assemblies and resources
+	// #TODO  Make this retreive multiple assemblies and resources
 	internal class AstroNetworkLoader
 	{
 		internal static HandleClient Client;
@@ -73,7 +73,20 @@
 
 			if (packetData.NetworkEventID == PacketServerType.LOADER_LIBRARY)
 			{
-				LibraryFiles.Add(Encoding.Base64Decode(packetData.TextData).ConvertToBytes());
+				var data = Convert.FromBase64String(packetData.TextData);
+				LibraryFiles.Add(data);
+			}
+
+			if (packetData.NetworkEventID == PacketServerType.LOADER_MELON)
+			{
+				var data = Convert.FromBase64String(packetData.TextData);
+				MelonFiles.Add(data);
+			}
+
+			if (packetData.NetworkEventID == PacketServerType.LOADER_MODULE)
+			{
+				var data = Convert.FromBase64String(packetData.TextData);
+				ModuleFiles.Add(data);
 			}
 
 			if (packetData.NetworkEventID == PacketServerType.LOADER_DONE)

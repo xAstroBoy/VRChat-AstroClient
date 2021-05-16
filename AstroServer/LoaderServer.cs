@@ -106,8 +106,8 @@
 					{
 						var path = Environment.CurrentDirectory + libPath;
 						byte[] data = File.ReadAllBytes(path);
-						var encoded = Encoding.Base64Encode(data.ConvertToString());
-						client.Send(new PacketData(PacketServerType.LOADER_LIBRARY, encoded));
+						var converted = Convert.ToBase64String(data);
+						client.Send(new PacketData(PacketServerType.LOADER_LIBRARY, converted));
 					}
 					catch (Exception e)
 					{
@@ -121,8 +121,8 @@
 					{
 						var path = Environment.CurrentDirectory + libPath;
 						byte[] data = File.ReadAllBytes(path);
-						var encoded = Encoding.Base64Encode(data.ConvertToString());
-						client.Send(new PacketData(PacketServerType.LOADER_MELON, encoded));
+						var converted = Convert.ToBase64String(data);
+						client.Send(new PacketData(PacketServerType.LOADER_MELON, converted));
 					}
 					catch (Exception e)
 					{
@@ -136,8 +136,8 @@
 					{
 						var path = Environment.CurrentDirectory + libPath;
 						byte[] data = File.ReadAllBytes(path);
-						var encoded = Encoding.Base64Encode(data.ConvertToString());
-						client.Send(new PacketData(PacketServerType.LOADER_MODULE, encoded));
+						var converted = Convert.ToBase64String(data);
+						client.Send(new PacketData(PacketServerType.LOADER_MODULE, converted));
 					}
 					catch (Exception e)
 					{
