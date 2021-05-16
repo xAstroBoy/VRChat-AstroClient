@@ -18,7 +18,23 @@
 			ModConsole.Log($"Welcome to AstroClient, {GlobalVariables.Version}");
 
 			ModuleManager.LoadModules();
-			EventManager.ApplicationStart?.Invoke(null, new EventArgs());
+			InitializeOverridables();
+		}
+
+		public static void InitializeOverridables()
+		{
+			foreach (var type in System.Reflection.Assembly.GetExecutingAssembly().GetTypes())
+			{
+				var btype = type.BaseType;
+
+				if (btype != null && btype.Equals(typeof(GameEvents)))
+				{
+					GameEvents component = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as GameEvents;
+					EventManager.Overridable_List.Add(component);
+				}
+			}
+
+			EventManager.Overridable_List.ForEach(o => o.OnApplicationStart());
 		}
 
 		public override void OnSceneWasInitialized(int buildIndex, string sceneName)

@@ -12,7 +12,6 @@
 		public GameEvents()
 		{
 			// ML Events
-			EventManager.ApplicationStart += Internal_OnApplicationStart;
 			EventManager.ApplicationQuit += Internal_OnApplicationQuit;
 			EventManager.Update += Internal_OnUpdate;
 			EventManager.LateUpdate += Internal_OnLateUpdate;
