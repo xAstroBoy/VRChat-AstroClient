@@ -10,5 +10,6 @@
 		public static EventHandler<EventArgs> LateUpdate;
 		public static EventHandler<EventArgs> GUI;
 		public static EventHandler<EventArgs> UiManagerInit;
+		public static EventHandler<EventArgs> LevelLoaded;
 	}
 }

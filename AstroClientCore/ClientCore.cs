@@ -21,6 +21,20 @@
 			EventManager.ApplicationStart?.Invoke(null, new EventArgs());
 		}
 
+		public override void OnSceneWasInitialized(int buildIndex, string sceneName)
+		{
+			switch (buildIndex)
+			{
+				case 0: // app
+				case 1: // ui
+					break;
+
+				default:
+					EventManager.LevelLoaded?.Invoke(this, new EventArgs());
+					break;
+			}
+		}
+
 		public override void OnUpdate()
 		{
 			ModuleManager.Update();
