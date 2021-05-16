@@ -143,7 +143,12 @@
 				sb.Append("HasMurder4 ");
 			}
 
-			embedBuilder.AddField("Permissions", sb.ToString());
+			var perms = sb.ToString();
+
+			if (perms != null && perms != string.Empty)
+			{
+				embedBuilder.AddField("Permissions", sb.ToString());
+			}
 			embedBuilder.AddField("Key", account.Key);
 
 			embedBuilder.Footer = embedFooterBuilder;
