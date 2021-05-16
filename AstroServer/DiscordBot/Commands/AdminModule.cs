@@ -5,7 +5,7 @@
 	using AstroServer.Serializable;
 	using Discord.Commands;
 	using MongoDB.Entities;
-	using System.Collections.Generic;
+	using System;
 	using System.ComponentModel.DataAnnotations;
 	using System.Linq;
 	using System.Text;
@@ -60,16 +60,25 @@
 
 		[Command("Notify")]
 		[Summary("Notify command")]
-		public async Task Notify([Required] string name, [Required] string msg)
+		public async Task Notify([Required] ulong discordID, [Required] string msg)
 		{
 			StringBuilder stringBuilder = new StringBuilder();
-			foreach (Client client in ClientServer.Clients.Where(c => c.Name.Contains(name)))
+			foreach (Client client in ClientServer.Clients.Where(c => c.DiscordID == discordID))
 			{
 				client.Send(new AstroNetworkingLibrary.Serializable.PacketData(PacketServerType.NOTIFY, msg));
 				stringBuilder.Append($"Notified: {client.Name}, {client.UserID} \r\n");
 			}
 
-			_ = await ReplyAsync(stringBuilder.ToString());
+			var repy = stringBuilder.ToString();
+
+			if (repy != null && repy != string.Empty)
+			{
+				_ = await ReplyAsync(repy);
+			}
+			else
+			{
+				_ = await ReplyAsync($"Nobody found with the discord ID '{discordID}'");
+			}
 		}
 
 		[Command("SendAll")]
@@ -83,19 +92,6 @@
 				stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID} \r\n");
 			}
 
-			_ = await ReplyAsync(stringBuilder.ToString());
-		}
-
-		[Command("Send")]
-		[Summary("Send command")]
-		public async Task Send([Required] string name, [Required] string cmd)
-		{
-			StringBuilder stringBuilder = new StringBuilder();
-			foreach (Client client in ClientServer.Clients.Where(c => c.Name.Contains(name)))
-			{
-				//client.Send(cmd);
-				stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID} \r\n");
-			}
 			_ = await ReplyAsync(stringBuilder.ToString());
 		}
 
@@ -117,11 +113,10 @@
 		[Summary("List command")]
 		public async Task List()
 		{
-			if (ClientServer.Clients.Count > 0)
+			var clients = ClientServer.Clients.Where(c => c.IsConnected);
+			if (clients.Any())
 			{
-				//stringBuilder.Append($"Client Count: {Server.Clients.Count} \r\n");
-
-				foreach (Client client in ClientServer.Clients)
+				foreach (Client client in clients)
 				{
 					_ = await ReplyAsync(null, false, CustomEmbed.GetClientEmbed(client));
 				}
