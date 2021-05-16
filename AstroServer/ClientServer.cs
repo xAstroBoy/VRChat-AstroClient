@@ -82,6 +82,7 @@
 			if (packetData.NetworkEventID == PacketClientType.AUTH)
 			{
 				string key = packetData.TextData;
+				CheckExistingClientsWithKey(client);
 
 				if (KeyManager.IsValidKey(key))
 				{
@@ -97,7 +98,6 @@
 						client.Send(new PacketData(PacketServerType.ENABLE_DEVELOPER));
 					}
 
-					//CheckExistingClientsWithKey(client);
 				}
 				else
 				{
