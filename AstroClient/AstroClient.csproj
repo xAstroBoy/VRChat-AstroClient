@@ -17,7 +17,7 @@
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <NoWarn>CS0169;CS0472</NoWarn>
-    <OutputPath>\bin\release</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
