@@ -132,7 +132,7 @@
 						ModConsole.DebugLog($"Checking {childitem.name} in TermsToToggleOff");
 						if (TermsToToggleOff.Contains(childitem.name.ToLower()))
 						{
-							ModConsole.DebugLog($"{childitem.name} Found in TermsToToggleOff");
+							ModConsole.DebugLog($"{childitem.name} Found in TermsToToggleOff", System.Drawing.Color.Green);
 
 							flag = true;
 							if (AvatarModifier.ForceLewdify)
@@ -144,7 +144,9 @@
 								var parent = childitem.Get_root_of_avatar_child();
 								if(parent != null)
 								{
-									foreach(var animator in parent.GetComponentsInChildren<Animator>(true))
+									ModConsole.DebugLog($"Got root of  {childitem.name} , Root is : {parent.name}");
+
+									foreach (var animator in parent.GetComponentsInChildren<Animator>(true))
 									{
 										if (animator != null)
 										{
@@ -176,16 +178,31 @@
 				{
 					foreach (var childitem in item.Get_All_Childs())
 					{
-						ModConsole.DebugLog($"Checking {childitem.name} in TermsToToggleOff");
+						ModConsole.DebugLog($"Checking {childitem.name} in TermsToToggleOn");
 
 						if (TermsToToggleOn.Contains(childitem.name.ToLower()))
 						{
-							ModConsole.DebugLog($"{childitem.name} Found in TermsToToggleOn");
+							ModConsole.DebugLog($"{childitem.name} Found in TermsToToggleOn", System.Drawing.Color.Green);
 
 							flag = true;
 							var parent = childitem.Get_root_of_avatar_child();
+							ModConsole.DebugLog($"Got root of  {childitem.name} , Root is : {parent.name}");
+
 							if (parent != null)
 							{
+								ModConsole.DebugLog($"Enabling Parent.. {parent.name}...");
+
+								if (!parent.gameObject.active)
+								{
+									parent.gameObject.active = true;
+								}
+								if (!childitem.gameObject.active)
+								{
+									childitem.gameObject.SetActiveRecursively(true);
+								}
+
+								ModConsole.DebugLog($"Enabling Animators of {parent.name}...");
+
 								foreach (var animator in parent.GetComponentsInChildren<Animator>(true))
 								{
 									if (animator != null)
@@ -197,14 +214,7 @@
 									}
 								}
 							}
-							if (!parent.gameObject.active)
-							{
-								parent.gameObject.active = true;
-							}
-							if (!childitem.gameObject.active)
-							{
-								childitem.gameObject.SetActiveRecursively(true);
-							}
+
 						}
 					}
 				}
