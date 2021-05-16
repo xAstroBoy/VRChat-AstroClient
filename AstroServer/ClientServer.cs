@@ -84,7 +84,7 @@
 				string key = packetData.TextData;
 				CheckExistingClientsWithKey(client);
 
-				if (KeyManager.IsValidKey(key))
+				if (KeyManager.IsKeyValidAsync(key).Result)
 				{
 					client.IsAuthed = true;
 					client.Key = key;
