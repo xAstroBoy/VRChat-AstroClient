@@ -115,7 +115,6 @@
 
 			embedBuilder.AddField("Name", client.Name);
 			embedBuilder.AddField("UserID", client.UserID);
-			embedBuilder.AddField("InstanceID", client.InstanceID);
 
 			embedBuilder.Footer = embedFooterBuilder;
 
