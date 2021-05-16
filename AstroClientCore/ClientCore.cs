@@ -7,6 +7,7 @@
 	using AstroLibrary.Console;
 	using MelonLoader;
 	using System;
+	using System.Linq;
 
 	#endregion
 
@@ -23,18 +24,19 @@
 
 		public static void InitializeOverridables()
 		{
-			foreach (var type in System.Reflection.Assembly.GetExecutingAssembly().GetTypes())
+			foreach (var assembly in ModuleManager.Assemblies)
 			{
-				var btype = type.BaseType;
-
-				if (btype != null && btype.Equals(typeof(GameEvents)))
+				foreach (var type in assembly.GetTypes())
 				{
-					GameEvents component = System.Reflection.Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as GameEvents;
-					EventManager.Overridable_List.Add(component);
+					var btype = type.BaseType;
+					if (btype != null && btype.Equals(typeof(GameEvents)))
+					{
+						GameEvents component = assembly.CreateInstance(type.ToString(), true) as GameEvents;
+						component.OnApplicationStart();
+						ModConsole.Log($"GameEvent Component Loaded: {type}");
+					}
 				}
 			}
-
-			EventManager.Overridable_List.ForEach(o => o.OnApplicationStart());
 		}
 
 		public override void OnSceneWasInitialized(int buildIndex, string sceneName)

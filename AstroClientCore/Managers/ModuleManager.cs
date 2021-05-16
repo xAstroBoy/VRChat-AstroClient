@@ -5,6 +5,7 @@
 	using AstroLibrary;
 	using AstroLibrary.Console;
 	using System.Collections.Generic;
+	using System.Reflection;
 	using System.Threading;
 
 	#endregion
@@ -12,6 +13,8 @@
 	public static class ModuleManager
 	{
 		public static List<BaseModule> Modules = new List<BaseModule>();
+
+		public static List<Assembly> Assemblies = new List<Assembly>();
 
 		public static void LoadModules()
 		{
@@ -27,6 +30,11 @@
 						Modules.Add(module);
 						module.Start();
 						ModConsole.Log($"ModuleManager: Loaded Module ({module.GetType()})");
+
+						if (!Assemblies.Contains(assembly))
+						{
+							Assemblies.Add(assembly);
+						}
 					}
 				}
 			}
