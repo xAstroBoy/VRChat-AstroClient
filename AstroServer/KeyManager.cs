@@ -6,7 +6,6 @@
 	using System.Collections.Generic;
 	using System.IO;
 	using System.Linq;
-	using System.Threading.Tasks;
 
 	internal static class KeyManager
 	{
@@ -21,10 +20,10 @@
 
 		public static void AddKey(string key, ulong discordID)
 		{
-			using (StreamWriter sw = File.AppendText("/root/keys.txt"))
-			{
-				sw.WriteLine($"{Environment.NewLine}{key}:{discordID}");
-			}
+			//using (StreamWriter sw = File.AppendText("/root/keys.txt"))
+			//{
+			//	sw.WriteLine($"{Environment.NewLine}{key}:{discordID}");
+			//}
 		}
 
 		public static int GetDevKeyCount()
@@ -63,29 +62,6 @@
 		{
 			return DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(authKey) && a.IsDeveloper).Result.Any();
 		}
-
-		//public static bool IsValidKey(string authKey)
-		//{
-		//	foreach (var keyinfo in File.ReadLines("/root/devs.txt"))
-		//	{
-		//		var info = keyinfo.Split(":");
-
-		//		if (info[0].Equals(authKey))
-		//		{
-		//			return true;
-		//		}
-		//	}
-		//	foreach (var keyinfo in File.ReadLines("/root/keys.txt"))
-		//	{
-		//		var info = keyinfo.Split(":");
-
-		//		if (info[0].Equals(authKey))
-		//		{
-		//			return true;
-		//		}
-		//	}
-		//	return false;
-		//}
 
 		public static bool IsKeyValid(string key)
 		{
