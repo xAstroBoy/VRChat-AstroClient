@@ -110,6 +110,7 @@
     <Compile Include="AstroExtensions\UdonExtensions.cs" />
     <Compile Include="AvatarMods\AvatarModifier.cs" />
     <Compile Include="AvatarMods\AvatarUtils.cs" />
+    <Compile Include="AvatarMods\Lewdifier.cs" />
     <Compile Include="Blaze\Flight.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
