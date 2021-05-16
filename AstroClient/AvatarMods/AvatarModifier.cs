@@ -91,65 +91,17 @@
 												{
 													RemoveMasks(childs);
 												}
-												if (Lewdify)
-												{
-													if (!Lewdifier.AvatarsToSkip.Contains(apiavatar.id))
-													{
-														childs.Lewdify(out var OffChilds, out var OnChilds);
-														if (OffChilds && !OnChilds)
-														{
-															if (!player.HasTagWithText(PossiblyNSFW))
-															{
-																var tag = player.AddSingleTag();
-																MiscUtility.DelayFunction(0.5f, () =>
-															{
-																if (tag != null)
-																{
-																	tag.Label_Text = PossiblyNSFW;
-																	tag.Tag_Color = ColorUtils.HexToColor("#FFA500");
-																	tag.Label_TextColor = UnityEngine.Color.white;
-																}
-															});
-															}
-														}
-														else if (!OffChilds && OnChilds)
-														{
-															if (!player.HasTagWithText(PossiblyNSFW))
-															{
-																var tag = player.AddSingleTag();
-																MiscUtility.DelayFunction(0.5f, () =>
-																{
-																	if (tag != null)
-																	{
-																		tag.Label_Text = PossiblyNSFW;
-																		tag.Tag_Color = ColorUtils.HexToColor("#FFA500");
-																		tag.Label_TextColor = UnityEngine.Color.white;
-																	}
-																});
-															}
-														}
-														else if (OnChilds && OffChilds)
-														{
-															if (!player.HasTagWithText(NSFW))
-															{
-																var tag = player.AddSingleTag();
-																MiscUtility.DelayFunction(0.5f, () =>
-																{
-																	if (tag != null)
-																	{
-																		tag.Label_Text = NSFW;
-																		tag.Tag_Color = UnityEngine.Color.red;
-																		tag.Label_TextColor = UnityEngine.Color.white;
-																	}
-																});
-															}
-														}
-													}
-													else
-													{
-														ModConsole.DebugLog("Skipped A Avatar, As is in AvatarsToSkip");
-													}
-												}
+											}
+										}
+										if (Lewdify)
+										{
+											if (!Lewdifier.AvatarsToSkip.Contains(apiavatar.id))
+											{
+												player.Lewdify();
+											}
+											else
+											{
+												ModConsole.DebugLog("Skipped A Avatar, As is in AvatarsToSkip");
 											}
 										}
 									}

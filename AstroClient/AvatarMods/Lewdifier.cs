@@ -9,6 +9,8 @@
 	using System.Threading.Tasks;
 	using UnityEngine;
 	using AstroClient.Extensions;
+	using AstroLibrary.Console;
+
 	public class Lewdifier : GameEvents
 	{
 
@@ -127,8 +129,11 @@
 				{
 					foreach (var childitem in item.Get_All_Childs())
 					{
+						ModConsole.DebugLog($"Checking {childitem.name} in TermsToToggleOff");
 						if (TermsToToggleOff.Contains(childitem.name.ToLower()))
 						{
+							ModConsole.DebugLog($"{childitem.name} Found in TermsToToggleOff");
+
 							flag = true;
 							if (AvatarModifier.ForceLewdify)
 							{
@@ -171,8 +176,12 @@
 				{
 					foreach (var childitem in item.Get_All_Childs())
 					{
+						ModConsole.DebugLog($"Checking {childitem.name} in TermsToToggleOff");
+
 						if (TermsToToggleOn.Contains(childitem.name.ToLower()))
 						{
+							ModConsole.DebugLog($"{childitem.name} Found in TermsToToggleOn");
+
 							flag = true;
 							var parent = childitem.Get_root_of_avatar_child();
 							if (parent != null)
