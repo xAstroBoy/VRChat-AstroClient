@@ -22,16 +22,19 @@
 		public override void OnUpdate()
 		{
 			ModuleManager.Update();
+			EventManager.Update?.Invoke(null, new System.EventArgs());
 		}
 
 		public override void OnLateUpdate()
 		{
 			ModuleManager.LateUpdate();
+			EventManager.LateUpdate?.Invoke(null, new System.EventArgs());
 		}
 
 		public override void VRChat_OnUiManagerInit()
 		{
 			ModuleManager.VRChat_OnUiManagerInit();
+			EventManager.VRChat_OnUiManagerInit?.Invoke(null, new System.EventArgs());
 		}
 
 		public override void OnApplicationQuit()
