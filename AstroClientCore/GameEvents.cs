@@ -17,7 +17,7 @@
 			EventManager.Update += Internal_OnUpdate;
 			EventManager.LateUpdate += Internal_OnLateUpdate;
 			EventManager.UiManagerInit += Internal_VRChat_OnUiManagerInit;
-			//Main.Event_OnLevelLoaded += Internal_OnLevelLoaded;
+			EventManager.LevelLoaded += Internal_OnLevelLoaded;
 
 			//// PATCHES
 
