@@ -15,7 +15,7 @@
 	{
 
 
-		public override void OnApplicationStart()
+		public override void OnLevelLoaded()
 		{
 			RefreshAll();
 		}
