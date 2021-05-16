@@ -16,6 +16,7 @@
 			}
 			set
 			{
+				ModConsole.DebugMode = value;
 				ConfigManager.General.DebugLog = value;
 				if (Main.ToggleDebugInfo != null)
 				{

@@ -11,21 +11,11 @@
 	{
 		public static string ModName = string.Empty;
 
+		public static bool DebugMode = false;
+
 		private static bool HasRenamedOldLogFile = false;
 
 		private static bool HasInitiated = false;
-
-		private static bool DebugMode
-		{
-			get
-			{
-#if DEBUG
-				return true;
-#else
-				return false;
-#endif
-			}
-		}
 
 		private static string LogsPath
 		{
