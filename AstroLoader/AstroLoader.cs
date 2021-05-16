@@ -41,7 +41,7 @@
 		{
 			LoadEmbeddedLibraries();
 
-#if OFFLINE
+#if DEBUG
 			LoadDebug();
 			return;
 #endif
