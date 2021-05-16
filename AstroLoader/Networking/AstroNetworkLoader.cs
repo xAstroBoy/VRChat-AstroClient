@@ -94,41 +94,6 @@
 				Client.Disconnect();
 				IsReady = true;
 			}
-
-			//ModConsole.DebugLog($"Received: {input}");
-			//string[] cmds = input.Trim().Split(':');
-
-			//if (cmds[0].Equals("exit"))
-			//{
-			//	System.Console.Beep();
-			//	Environment.Exit(0);
-			//}
-			//else if (cmds[0].Equals("auth-request", StringComparison.InvariantCultureIgnoreCase))
-			//{
-			//	Client.Send($"key:{KeyManager.AuthKey}");
-			//	//ModConsole.DebugLog("Auth Requested");
-			//}
-			//else if (cmds[0].Equals("authed", StringComparison.InvariantCultureIgnoreCase))
-			//{
-			//	if (cmds[1].Equals("true", StringComparison.InvariantCultureIgnoreCase))
-			//	{
-			//		// I'm authed
-			//		KeyManager.IsAuthed = true;
-			//		//ModConsole.DebugLog("Successfully Authed");
-			//		Client.Send("gimmiedll");
-			//	}
-			//	else
-			//	{
-			//		KeyManager.IsAuthed = false;
-			//		//ModConsole.DebugLog("Failed to Auth");
-			//		Console.Beep();
-			//		Environment.Exit(0);
-			//	}
-			//}
-			//else
-			//{
-			//	Console.WriteLine($"Unknown packet: {input}");
-			//}
 		}
 
 		private static void OnConnected(object sender, EventArgs e)
