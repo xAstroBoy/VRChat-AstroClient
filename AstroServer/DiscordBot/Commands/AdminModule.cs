@@ -1,5 +1,6 @@
 ﻿namespace AstroServer.DiscordBot.Commands
 {
+	using AstroNetworkingLibrary;
 	using AstroServer.DiscordBot.Attributes;
 	using AstroServer.Serializable;
 	using Discord.Commands;
@@ -64,7 +65,7 @@
 			StringBuilder stringBuilder = new StringBuilder();
 			foreach (Client client in ClientServer.Clients.Where(c => c.Name.Contains(name)))
 			{
-				//client.Send($"notify-dev:{msg}");
+				client.Send(new AstroNetworkingLibrary.Serializable.PacketData(PacketServerType.NOTIFY, msg));
 				stringBuilder.Append($"Notified: {client.Name}, {client.UserID} \r\n");
 			}
 
@@ -105,7 +106,7 @@
 			StringBuilder stringBuilder = new StringBuilder();
 			foreach (Client client in ClientServer.Clients.Where(c => c.Name.Contains(name)))
 			{
-				//client.Send("exit:you have been kicked");
+				client.Send(new AstroNetworkingLibrary.Serializable.PacketData(PacketServerType.EXIT, "You have been kicked"));
 				stringBuilder.Append($"Kicked: {client.Name}, {client.UserID} \r\n");
 			}
 
