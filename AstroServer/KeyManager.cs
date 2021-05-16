@@ -29,12 +29,12 @@
 
 		public static int GetDevKeyCount()
 		{
-			return File.ReadAllLines("/root/devs.txt").Length;
+			return DB.Find<AccountData>().ManyAsync(a => a.IsDeveloper).Result.Count;
 		}
 
 		public static int GetKeyCount()
 		{
-			return File.ReadAllLines("/root/keys.txt").Length;
+			return DB.Find<AccountData>().ManyAsync(a => !a.IsDeveloper).Result.Count;
 		}
 
 		public static Dictionary<string, ulong> GetAllDevKeyInfo()
@@ -61,16 +61,7 @@
 
 		public static bool IsDevKey(string authKey)
 		{
-			foreach (var keyinfo in File.ReadLines("/root/devs.txt"))
-			{
-				var info = keyinfo.Split(":");
-
-				if (info[0].Equals(authKey))
-				{
-					return true;
-				}
-			}
-			return false;
+			return DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(authKey) && a.IsDeveloper).Result.Any();
 		}
 
 		//public static bool IsValidKey(string authKey)
@@ -96,32 +87,15 @@
 		//	return false;
 		//}
 
-		public static async Task<bool> IsKeyValidAsync(string key)
+		public static bool IsKeyValid(string key)
 		{
-			return (await DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(key))).Any();
+			return (DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(key))).Result.Any();
 		}
 
 		public static ulong GetKeysDiscordOwner(string authKey)
 		{
-			foreach (var keyinfo in File.ReadLines("/root/devs.txt"))
-			{
-				var info = keyinfo.Split(":");
-
-				if (info[0].Equals(authKey))
-				{
-					return ulong.Parse(info[1]);
-				}
-			}
-			foreach (var keyinfo in File.ReadLines("/root/keys.txt"))
-			{
-				var info = keyinfo.Split(":");
-
-				if (info[0].Equals(authKey))
-				{
-					return ulong.Parse(info[1]);
-				}
-			}
-			return 0;
+			var account = DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(authKey)).Result.First();
+			return account != null ? account.DiscordID : 0;
 		}
 	}
 }
