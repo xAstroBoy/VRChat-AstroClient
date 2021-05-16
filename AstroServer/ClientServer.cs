@@ -36,10 +36,6 @@
 			serverSocket.Start();
 			Console.WriteLine("Client Server Started..");
 
-			// Key count
-			Console.WriteLine($"There are {KeyManager.GetDevKeyCount()} dev keys stored.");
-			Console.WriteLine($"There are {KeyManager.GetKeyCount()} valid keys stored.");
-
 			SetPingTimer();
 			Task task = new Task(() =>
 			{

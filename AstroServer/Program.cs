@@ -43,6 +43,10 @@
 			// Here we initialize the logic required to register our commands.
 			await Services.GetRequiredService<CommandHandlingService>().InitializeAsync();
 
+			// Key count
+			Console.WriteLine($"There are {KeyManager.GetDevKeyCount()} dev keys stored.");
+			Console.WriteLine($"There are {KeyManager.GetKeyCount()} valid keys stored.");
+
 			Console.WriteLine("Starting Server..");
 			LServer = new LoaderServer();
 			CServer = new ClientServer();
