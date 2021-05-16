@@ -188,8 +188,15 @@
 
 			embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
 
-			embedBuilder.AddField("Name", client.Name);
-			embedBuilder.AddField("UserID", client.UserID);
+			if (client.Name != null && client.Name != string.Empty)
+			{
+				embedBuilder.AddField("Name", client.Name);
+			}
+
+			if (client.UserID != null && client.UserID != string.Empty)
+			{
+				embedBuilder.AddField("UserID", client.UserID);
+			}
 
 			embedBuilder.Footer = embedFooterBuilder;
 
