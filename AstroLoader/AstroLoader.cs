@@ -42,8 +42,8 @@
 			LoadEmbeddedLibraries();
 
 #if DEBUG
-			//LoadDebug();
-			//return;
+			LoadDebug();
+			return;
 #endif
 
 			KeyManager.ReadKey();
@@ -57,6 +57,23 @@
 			if (AstroNetworkLoader.LibraryFiles.Count > 0)
 			{
 				foreach (var bytes in AstroNetworkLoader.LibraryFiles)
+				{
+					Assembly.Load(bytes);
+				}
+			}
+
+			if (AstroNetworkLoader.MelonFiles.Count > 0)
+			{
+				foreach (var bytes in AstroNetworkLoader.MelonFiles)
+				{
+					var dll = Assembly.Load(bytes);
+					MelonHandler.LoadFromAssembly(dll, Environment.CurrentDirectory + @"\Plugins\AstroLoader.dll");
+				}
+			}
+
+			if (AstroNetworkLoader.ModuleFiles.Count > 0)
+			{
+				foreach (var bytes in AstroNetworkLoader.ModuleFiles)
 				{
 					Assembly.Load(bytes);
 				}
