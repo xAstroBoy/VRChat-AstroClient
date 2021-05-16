@@ -35,7 +35,6 @@
 			@"AstroLoader.Resources.Newtonsoft.Json.Bson.dll",
 		};
 
-
 		public AstroLoader()
 		{
 			LoadEmbeddedLibraries();
@@ -77,26 +76,6 @@
 					Assembly.Load(bytes);
 				}
 			}
-
-			//if (AstroNetworkLoader.AssemblyFile != null)
-			//{
-			//    try
-			//    {
-			//        var dll = Assembly.Load(AstroNetworkLoader.AssemblyFile);
-			//        MelonHandler.LoadFromAssembly(dll, @"plugins\AstroLoader.dll");
-			//    }
-			//    catch (BadImageFormatException e)
-			//    {
-			//        Console.WriteLine("Bad Image Format Exception");
-			//        Console.WriteLine(e.Message);
-			//        Console.WriteLine(e.StackTrace);
-			//        Console.WriteLine(e.Source);
-			//    }
-			//}
-			//else
-			//{
-			//    Console.WriteLine("Failed to load assembly, it was null");
-			//}
 		}
 
 		public void LoadEmbeddedLibraries()
