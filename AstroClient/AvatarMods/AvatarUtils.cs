@@ -1,6 +1,5 @@
 ﻿namespace AstroClient.AvatarMods
 {
-	using AstroClient.Finder;
 	using Extensions;
 	using AstroLibrary.Console;
 	using DayClientML2.Utility.Extensions;
@@ -9,6 +8,8 @@
 	using UnityEngine;
 	using VRC;
 	using Color = System.Drawing.Color;
+	using DayClientML2.Utility;
+	using AstroLibrary.Finder;
 
 	public static class AvatarUtils
 	{
@@ -27,6 +28,27 @@
 			return obj.FindObject("ForwardDirection/Avatar/Body");
 		}
 
+		public static Transform Get_root_of_avatar_child(this Transform obj)
+		{
+			var root = obj.root;
+			if(root != null)
+			{
+				var avatar = root.Get_Avatar();
+				if(avatar != null)
+				{
+					foreach(var child in avatar.Get_Childs())
+					{
+						if(obj.IsChildOf(child))
+						{
+							return child;
+						}	
+					}
+				}
+			}
+			return null;
+		}
+
+
 		public static List<Transform> AvatarParents(Transform avatar, Transform Armature, Transform Body)
 		{
 			List<Transform> AllChilds = new List<Transform>();
@@ -34,19 +56,35 @@
 			{
 				if (item != null)
 				{
-					if (item == Armature || item == avatar || item == Body)
+
+					// Some avatars don't have armature apparently , Probably renamed. 
+					// TODO: MAKE A ARMATURE FINDER TO BE 100% accurate of what to skip.
+					if (Armature != null)
 					{
-						continue;
+						if (item == Armature)
+						{
+							continue;
+						}
+
+						if (item.IsChildOf(Armature))
+						{
+							continue;
+						}
 					}
-					if (item.IsChildOf(Armature))
+					// As well for "body" , as is renamed.
+					if(Body != null)
+					{
+						if(item == Body)
+						{
+							continue;
+						}
+					}
+					if(item == avatar)
 					{
 						continue;
 					}
 
-					if (!AllChilds.Contains(item))
-					{
-						AllChilds.Add(item);
-					}
+					AllChilds.Add(item);
 				}
 			}
 			return AllChilds;
@@ -59,8 +97,7 @@
 				var body = player.gameObject.transform.Get_Body();
 				var Avatar = player.gameObject.transform.Get_Avatar();
 				var Armature = player.gameObject.transform.Get_Armature();
-				if (body != null && Avatar != null && Armature != null)
-				{
+
 					var parents = AvatarParents(Avatar, Armature, body);
 					if (parents.Count() != 0)
 					{
@@ -80,7 +117,7 @@
 						ModConsole.Log("[AVATAR RENDERER DUMPER] : No Renderers Found.", Color.Green);
 					}
 				}
-			}
+			
 		}
 
 		public static void Avatar_MeshRenderer_Dumper(this Player player)
@@ -90,8 +127,7 @@
 				var body = player.gameObject.transform.Get_Body();
 				var Avatar = player.gameObject.transform.Get_Avatar();
 				var Armature = player.gameObject.transform.Get_Armature();
-				if (body != null && Avatar != null && Armature != null)
-				{
+
 					var parents = AvatarParents(Avatar, Armature, body);
 					if (parents.Count() != 0)
 					{
@@ -110,10 +146,80 @@
 					{
 						ModConsole.Log("[AVATAR MESHRENDERER DUMPER] : No Renderers Found.", Color.Green);
 					}
-				}
+				
 			}
 		}
 
+
+		public static void Lewdify(this List<Transform> list, out bool HasTurnedOffChilds, out bool HasTurnedOnLewdChilds)
+		{
+			HasTurnedOffChilds = Lewdifier.LewdifyTermsToTurnOff(list);
+			HasTurnedOnLewdChilds = Lewdifier.LewdifyTermsToToggleOn(list);
+		}
+
+		public static void Lewdify(this Player player)
+		{
+			if (player != null)
+			{
+				var body = player.gameObject.transform.Get_Body();
+				var Avatar = player.gameObject.transform.Get_Avatar();
+				var Armature = player.gameObject.transform.Get_Armature();
+				var parents = AvatarParents(Avatar, Armature, body);
+				if (parents.Count() != 0)
+				{
+					parents.Lewdify(out var OffChilds, out var OnChilds);
+					if (OffChilds && !OnChilds)
+					{
+						if (!player.HasTagWithText(AvatarModifier.PossiblyNSFW))
+						{
+							var tag = player.AddSingleTag();
+							MiscUtility.DelayFunction(0.5f, () =>
+						{
+							if (tag != null)
+							{
+								tag.Label_Text = AvatarModifier.PossiblyNSFW;
+								tag.Tag_Color = ColorUtils.HexToColor("#FFA500");
+								tag.Label_TextColor = UnityEngine.Color.white;
+							}
+						});
+						}
+					}
+					else if (!OffChilds && OnChilds)
+					{
+						if (!player.HasTagWithText(AvatarModifier.PossiblyNSFW))
+						{
+							var tag = player.AddSingleTag();
+							MiscUtility.DelayFunction(0.5f, () =>
+							{
+								if (tag != null)
+								{
+									tag.Label_Text = AvatarModifier.PossiblyNSFW;
+									tag.Tag_Color = ColorUtils.HexToColor("#FFA500");
+									tag.Label_TextColor = UnityEngine.Color.white;
+								}
+							});
+						}
+					}
+					else if (OnChilds && OffChilds)
+					{
+						if (!player.HasTagWithText(AvatarModifier.NSFW))
+						{
+							var tag = player.AddSingleTag();
+							MiscUtility.DelayFunction(0.5f, () =>
+							{
+								if (tag != null)
+								{
+									tag.Label_Text = AvatarModifier.NSFW;
+									tag.Tag_Color = UnityEngine.Color.red;
+									tag.Label_TextColor = UnityEngine.Color.white;
+								}
+							});
+						}
+					}
+
+				}
+			}
+		}
 
 		public static void Avatar_Transform_Dumper(this Player player)
 		{
@@ -122,8 +228,7 @@
 				var body = player.gameObject.transform.Get_Body();
 				var Avatar = player.gameObject.transform.Get_Avatar();
 				var Armature = player.gameObject.transform.Get_Armature();
-				if (body != null && Avatar != null && Armature != null)
-				{
+
 					var parents = AvatarParents(Avatar, Armature, body);
 					if (parents.Count() != 0)
 					{
@@ -139,7 +244,7 @@
 						}
 					}
 				}
-			}
+			
 		}
 
 		public static void Avatar_Material_Dumper(this Player player)
@@ -149,8 +254,7 @@
 				var body = player.gameObject.transform.Get_Body();
 				var Avatar = player.gameObject.transform.Get_Avatar();
 				var Armature = player.gameObject.transform.Get_Armature();
-				if (body != null && Avatar != null && Armature != null)
-				{
+
 					ModConsole.Log("[AVATAR MATERIAL DUMPER] : Dumping All Materials of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
 					ModConsole.Log("[AVATAR MATERIAL DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
 					ModConsole.Log("[AVATAR MATERIAL DUMPER] : Dumping Body Materials..", Color.Green);
@@ -170,7 +274,7 @@
 							}
 						}
 
-					}
+					
 				}
 			}
 		}

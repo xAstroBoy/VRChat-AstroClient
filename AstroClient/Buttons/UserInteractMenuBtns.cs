@@ -6,6 +6,7 @@
 	using RubyButtonAPI;
 	using System;
 	using UnityEngine;
+	using Finder = AstroLibrary.Finder;
 
 	internal class UserInteractMenuBtns : GameEvents
 	{

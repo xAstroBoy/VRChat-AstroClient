@@ -2,10 +2,10 @@
 {
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.Cloner;
-	using AstroClient.Finder;
 	using AstroClient.ItemTweaker;
 	using AstroClient.Startup;
 	using AstroLibrary.Console;
+	using AstroLibrary.Finder;
 	using DayClientML2.Utility;
 	using System.Collections.Generic;
 	using System.Windows.Forms;
@@ -231,10 +231,7 @@
 				var item = obj.GetChild(i);
 				if (item != null)
 				{
-					if (!childs.Contains(item))
-					{
-						childs.Add(item);
-					}
+					childs.Add(item);
 				}
 			}
 			return childs;
