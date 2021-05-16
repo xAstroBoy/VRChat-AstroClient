@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Cheetos
 {
 	using AstroLibrary.Console;
-	using AstroClient.Finder;
+	using AstroLibrary.Finder;
 	using AstroClient.variables;
 	using UnityEngine;
 

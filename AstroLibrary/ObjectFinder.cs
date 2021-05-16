@@ -1,7 +1,7 @@
-﻿namespace AstroClient.Finder
+﻿namespace AstroLibrary.Finder
 {
 	using AstroLibrary.Console;
-	using AstroClient.Extensions;
+	using AstroLibrary.Extensions;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
