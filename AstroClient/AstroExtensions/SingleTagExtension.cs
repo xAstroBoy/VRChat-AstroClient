@@ -9,38 +9,36 @@ namespace AstroClient.Extensions
 	{
 
 
-		public static bool HasTagWithText(this Player player, string text)
+		public static bool HasTagWithText(this Player player, string searchtext)
 		{
-			var tags = player.gameObject.GetComponentsInChildren<SingleTag>(true);
-			if (tags.Count() != 0)
+			var tags = player.GetComponents<SingleTag>();
+
+			foreach (var tag in tags)
 			{
-				foreach (var tag in tags)
+				if (tag.Label_Text.ToLower() == searchtext.ToLower())
 				{
-					if (tag.Label_Text == text)
-					{
-						return true;
-					}
+					return true;
 				}
 			}
+
 			return false;
 		}
 
 
-		public static List<SingleTag> SearchTags(this Player player, string text)
+		public static List<SingleTag> SearchTags(this Player player, string searchtext)
 		{
 			List<SingleTag> FoundTags = new List<SingleTag>();
 
-			var tags = player.gameObject.GetComponentsInChildren<SingleTag>(true);
-			if (tags.Count() != 0)
+			var tags = player.GetComponents<SingleTag>();
+
+			foreach (var tag in tags)
 			{
-				foreach (var tag in tags)
+				if (tag.Label_Text == searchtext)
 				{
-					if (tag.Label_Text == text)
-					{
-						FoundTags.Add(tag);
-					}
+					FoundTags.Add(tag);
 				}
 			}
+
 			return FoundTags;
 		}
 

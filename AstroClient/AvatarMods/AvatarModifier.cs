@@ -36,26 +36,7 @@
 
 		}
 
-		public static string PossiblyNSFW { get; } = "Possibly NSFW";
-		public static string NSFW { get; } = "NSFW Avatar";
 
-		public void RemoveLewdNSFWTags(Player player)
-		{
-			foreach (var tag in player.SearchTags(PossiblyNSFW))
-			{
-				if (tag != null)
-				{
-					tag.DestroyMeLocal();
-				}
-			}
-			foreach (var tag in player.SearchTags(NSFW))
-			{
-				if (tag != null)
-				{
-					tag.DestroyMeLocal();
-				}
-			}
-		}
 
 		public override void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
 		{
@@ -64,7 +45,6 @@
 				var player = avatar.transform.root.GetComponentInChildren<Player>();
 				if (player != null)
 				{
-					RemoveLewdNSFWTags(player);
 					var manager = player._vrcplayer.prop_VRCAvatarManager_0;
 					if (manager != null)
 					{

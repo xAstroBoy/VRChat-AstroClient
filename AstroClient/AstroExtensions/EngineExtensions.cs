@@ -126,16 +126,19 @@
 					var item = obj as Component;
 					if (item != null)
 					{
-						Object.DestroyImmediate(item);
+						Object.Destroy(item);
 					}
-					if (item != null)
+					MiscUtility.DelayFunction(0.5f, () =>
 					{
-						ModConsole.DebugError($"Failed To Destroy Object {typename} Contained in {objname}");
-					}
-					else
-					{
-						ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
-					}
+						if (item != null)
+						{
+							ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
+						}
+						else
+						{
+							ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+						}
+					});
 
 					return;
 				}
