@@ -2,6 +2,7 @@
 {
 	using AstroLibrary;
 	using AstroLibrary.Console;
+	using System.Web.UI.WebControls;
 
 	public class TestModule : BaseModule
 	{
@@ -13,6 +14,11 @@
 		public override void Start()
 		{
 			ModConsole.Log("TestModule Started.");
+		}
+
+		public override void VRChat_OnUiManagerInit()
+		{
+			ModConsole.Log("TestModule VRChat_OnUiManagerInit()");
 		}
 	}
 }
