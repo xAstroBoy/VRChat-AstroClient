@@ -12,11 +12,11 @@
 		public GameEvents()
 		{
 			// ML Events
-			//Main.Event_OnApplicationStart += Internal_OnApplicationStart;
-
+			EventManager.ApplicationStart += Internal_OnApplicationStart;
+			EventManager.ApplicationQuit += Internal_OnApplicationQuit;
 			EventManager.Update += Internal_OnUpdate;
 			EventManager.LateUpdate += Internal_OnLateUpdate;
-			EventManager.VRChat_OnUiManagerInit += Internal_VRChat_OnUiManagerInit;
+			EventManager.UiManagerInit += Internal_VRChat_OnUiManagerInit;
 			//Main.Event_OnLevelLoaded += Internal_OnLevelLoaded;
 
 			//// PATCHES
@@ -40,6 +40,11 @@
 		private void Internal_OnApplicationStart(object sender, EventArgs e)
 		{
 			OnApplicationStart();
+		}
+
+		private void Internal_OnApplicationQuit(object sender, EventArgs e)
+		{
+			OnApplicationQuit();
 		}
 
 		private void Internal_VRChat_OnUiManagerInit(object sender, EventArgs e)
@@ -116,6 +121,10 @@
 		}
 
 		public virtual void OnApplicationStart()
+		{
+		}
+
+		public virtual void OnApplicationQuit()
 		{
 		}
 
