@@ -49,9 +49,9 @@
 		{
 			get
 			{
-				return $"Terms To Enable : {TermsToToggleOn.Count} \n" +
-					   $"Terms To Disable : {TermsToToggleOff.Count} \n" +
-					   $"Avatars to Skip : {AvatarsToSkip.Count} \n";
+				return $"Terms To Enable : {TermsToToggleOn.Count}\n" +
+					   $"Terms To Disable : {TermsToToggleOff.Count}\n" +
+					   $"Avatars to Skip : {AvatarsToSkip.Count}";
 			}
 
 		}
