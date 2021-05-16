@@ -2,7 +2,6 @@
 {
 	using AstroLibrary.Finder;
 	using AstroClient.variables;
-	using AstroLibrary.Finder;
 	using UnityEngine;
 
 	public class VRChatObjects : GameEvents
