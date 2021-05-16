@@ -157,10 +157,31 @@
 			HasTurnedOnLewdChilds = Lewdifier.LewdifyTermsToToggleOn(list);
 		}
 
+
+		public static void RemoveLewdNSFWTags(Player player)
+		{
+			foreach (var tag in player.SearchTags("Possibly NSFW"))
+			{
+				if (tag != null)
+				{
+					tag.DestroyMeLocal();
+				}
+			}
+			foreach (var tag in player.SearchTags("NSFW Avatar"))
+			{
+				if (tag != null)
+				{
+					tag.DestroyMeLocal();
+				}
+			}
+		}
+
+
 		public static void Lewdify(this Player player)
 		{
 			if (player != null)
 			{
+				RemoveLewdNSFWTags(player);
 				var body = player.gameObject.transform.Get_Body();
 				var Avatar = player.gameObject.transform.Get_Avatar();
 				var Armature = player.gameObject.transform.Get_Armature();
@@ -170,14 +191,14 @@
 					parents.Lewdify(out var OffChilds, out var OnChilds);
 					if (OffChilds && !OnChilds)
 					{
-						if (!player.HasTagWithText(AvatarModifier.PossiblyNSFW))
+						if (!player.HasTagWithText("Possibly NSFW"))
 						{
 							var tag = player.AddSingleTag();
 							MiscUtility.DelayFunction(0.5f, () =>
 						{
 							if (tag != null)
 							{
-								tag.Label_Text = AvatarModifier.PossiblyNSFW;
+								tag.Label_Text = "Possibly NSFW";
 								tag.Tag_Color = ColorUtils.HexToColor("#FFA500");
 								tag.Label_TextColor = UnityEngine.Color.white;
 							}
@@ -186,14 +207,14 @@
 					}
 					else if (!OffChilds && OnChilds)
 					{
-						if (!player.HasTagWithText(AvatarModifier.PossiblyNSFW))
+						if (!player.HasTagWithText("Possibly NSFW"))
 						{
 							var tag = player.AddSingleTag();
 							MiscUtility.DelayFunction(0.5f, () =>
 							{
 								if (tag != null)
 								{
-									tag.Label_Text = AvatarModifier.PossiblyNSFW;
+									tag.Label_Text = "Possibly NSFW";
 									tag.Tag_Color = ColorUtils.HexToColor("#FFA500");
 									tag.Label_TextColor = UnityEngine.Color.white;
 								}
@@ -202,14 +223,14 @@
 					}
 					else if (OnChilds && OffChilds)
 					{
-						if (!player.HasTagWithText(AvatarModifier.NSFW))
+						if (!player.HasTagWithText("NSFW Avatar"))
 						{
 							var tag = player.AddSingleTag();
 							MiscUtility.DelayFunction(0.5f, () =>
 							{
 								if (tag != null)
 								{
-									tag.Label_Text = AvatarModifier.NSFW;
+									tag.Label_Text = "NSFW Avatar";
 									tag.Tag_Color = UnityEngine.Color.red;
 									tag.Label_TextColor = UnityEngine.Color.white;
 								}
