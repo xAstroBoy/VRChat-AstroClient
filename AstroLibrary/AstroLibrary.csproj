@@ -51,7 +51,6 @@
     <Compile Include="CheetosConsole\NativeMethods.cs" />
     <Compile Include="CheetosConsole\StyledString.cs" />
     <Compile Include="CheetosConsole\VirtualTerminalSequences.cs" />
-    <Compile Include="LibraryTests.cs" />
     <Compile Include="ModConsole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
