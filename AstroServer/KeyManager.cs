@@ -1,8 +1,12 @@
 ﻿namespace AstroServer
 {
+	using AstroServer.Serializable;
+	using MongoDB.Entities;
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
+	using System.Linq;
+	using System.Threading.Tasks;
 
 	internal static class KeyManager
 	{
@@ -69,27 +73,32 @@
 			return false;
 		}
 
-		public static bool IsValidKey(string authKey)
+		//public static bool IsValidKey(string authKey)
+		//{
+		//	foreach (var keyinfo in File.ReadLines("/root/devs.txt"))
+		//	{
+		//		var info = keyinfo.Split(":");
+
+		//		if (info[0].Equals(authKey))
+		//		{
+		//			return true;
+		//		}
+		//	}
+		//	foreach (var keyinfo in File.ReadLines("/root/keys.txt"))
+		//	{
+		//		var info = keyinfo.Split(":");
+
+		//		if (info[0].Equals(authKey))
+		//		{
+		//			return true;
+		//		}
+		//	}
+		//	return false;
+		//}
+
+		public static async Task<bool> IsKeyValidAsync(string key)
 		{
-			foreach (var keyinfo in File.ReadLines("/root/devs.txt"))
-			{
-				var info = keyinfo.Split(":");
-
-				if (info[0].Equals(authKey))
-				{
-					return true;
-				}
-			}
-			foreach (var keyinfo in File.ReadLines("/root/keys.txt"))
-			{
-				var info = keyinfo.Split(":");
-
-				if (info[0].Equals(authKey))
-				{
-					return true;
-				}
-			}
-			return false;
+			return (await DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(key))).Any();
 		}
 
 		public static ulong GetKeysDiscordOwner(string authKey)

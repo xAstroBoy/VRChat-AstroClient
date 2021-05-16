@@ -1,9 +1,10 @@
 ﻿namespace AstroServer.Serializable
 {
+	using MongoDB.Entities;
 	using System;
 
 	[Serializable]
-	public class AccountData
+	public class AccountData : Entity
 	{
 		public string Name = string.Empty;
 
