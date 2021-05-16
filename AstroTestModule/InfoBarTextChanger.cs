@@ -3,11 +3,11 @@
 	using AstroClientCore;
 	using AstroLibrary.Console;
 
-	class InfoBarTextChanger : GameEvents
+	class TestEvents : GameEvents
 	{
 		public override void OnWorldReveal(string id, string Name, string AssetURL)
 		{
-			ModConsole.Log("InfoBarTextChanger OnWorldReveal()");
+			ModConsole.Log("TestEvents OnWorldReveal()");
 		}
 	}
 }
