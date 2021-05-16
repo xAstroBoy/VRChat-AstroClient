@@ -15,7 +15,6 @@
 			@"Debug\AstroClientCore.dll",
 			@"Debug\DontTouchMyClient.dll",
 			@"Debug\MonoDumper.dll",
-			@"Debug\UnityExplorer.ML.IL2CPP.dll",
 		};
 
 		public static string[] DebugLibraryPaths =
