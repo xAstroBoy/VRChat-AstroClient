@@ -307,6 +307,32 @@
 			return dumpednames;
 		}
 
+		public static string GetAvatarID(this Player player)
+		{
+			if (player != null)
+			{
+				if(player._vrcplayer != null && player._vrcplayer.GetApiAvatar() != null)
+				{
+					return player._vrcplayer.GetApiAvatar().id;
+				}
+			}
+			return null;
+		}
+
+
+		public static void BlackListAvatar_Lewdifier(this Player player)
+		{
+			if(player != null)
+			{
+				var avatarid = player.GetAvatarID();
+				if(avatarid != null)
+				{
+					Lewdifier.AvatarsToSkip.Add(avatarid);
+					Lewdifier.Save_AvatarToSkip();
+					Lewdifier.Refresh_AvatarsToSkip();
+				}
+			}
+		}
 
 		public static List<string> Dump_Mesh_Renderers(this Transform item)
 		{

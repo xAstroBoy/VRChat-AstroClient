@@ -19,12 +19,15 @@
 			RefreshAll();
 		}
 
+		public override void OnApplicationQuit()
+		{
+			SaveAll();
+		}
 
-		
 
-		public static List<string> TermsToToggleOn { get; private set; } = new List<string>();
-		public static List<string> TermsToToggleOff { get; private set; } = new List<string>();
-		public static List<string> AvatarsToSkip { get; private set; } = new List<string>();
+		public static List<string> TermsToToggleOn { get; set; } = new List<string>();
+		public static List<string> TermsToToggleOff { get; set; } = new List<string>();
+		public static List<string> AvatarsToSkip { get; set; } = new List<string>();
 
 
 		private static string TermsToEnableOnPath { get; } = Environment.CurrentDirectory + @"\AstroClient\Lewdify\TermsToEnable.json";
@@ -34,8 +37,23 @@
 
 		public static void SaveAll()
 		{
+			Save_TermsToToggleOn();
+			Save_TermsToToggleOff();
+			Save_AvatarToSkip();
+		}
+
+		public static void Save_TermsToToggleOn()
+		{
 			JSonWriter.WriteToJsonFile(TermsToEnableOnPath, TermsToToggleOn);
+		}
+
+		public static void Save_TermsToToggleOff()
+		{
 			JSonWriter.WriteToJsonFile(TermsToEnableOffPath, TermsToToggleOff);
+		}
+
+		public static void Save_AvatarToSkip()
+		{
 			JSonWriter.WriteToJsonFile(AvatarsToSkipPath, AvatarsToSkip);
 		}
 
@@ -44,10 +62,7 @@
 			Refresh_termsToToggleOn();
 			Refresh_termsToToggleOff();
 			Refresh_AvatarsToSkip();
-			if (AvatarModifier.LewdifyLists != null)
-			{
-				AvatarModifier.LewdifyLists.setButtonText(ListButtonText);
-			}
+
 		}
 
 
@@ -81,6 +96,10 @@
 			{
 				File.Create(TermsToEnableOnPath);
 			}
+			if (AvatarModifier.LewdifyLists != null)
+			{
+				AvatarModifier.LewdifyLists.setButtonText(ListButtonText);
+			}
 		}
 
 		public static void Refresh_termsToToggleOff()
@@ -100,6 +119,10 @@
 			else
 			{
 				File.Create(TermsToEnableOffPath);
+			}
+			if (AvatarModifier.LewdifyLists != null)
+			{
+				AvatarModifier.LewdifyLists.setButtonText(ListButtonText);
 			}
 		}
 
@@ -122,6 +145,10 @@
 			else
 			{
 				File.Create(AvatarsToSkipPath);
+			}
+			if (AvatarModifier.LewdifyLists != null)
+			{
+				AvatarModifier.LewdifyLists.setButtonText(ListButtonText);
 			}
 		}
 

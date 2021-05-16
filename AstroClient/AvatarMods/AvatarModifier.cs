@@ -31,7 +31,7 @@
 			new QMSingleButton(menu, 1, 0.5f, "Dump Avatar Renderers", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Avatar_Renderer_Dumper(); }, "Dump Avatar Renderers", null, null, true);
 			new QMSingleButton(menu, 1, 1, "Dump Avatar Materials", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Avatar_Material_Dumper(); }, "Dump Avatar Materials", null, null, true);
 			new QMSingleButton(menu, 1, 1.5f, "Lewdify", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Lewdify(); }, "Lewdify This Player Avatar", null, null, true);
-			new QMSingleButton(menu, 1, 2, "Skip Avatar Lewdifying.", () => {  }, "Skip This Avatar From being Lewdified.", null, null, true);
+			new QMSingleButton(menu, 1, 2, "Skip Avatar Lewdifying.", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().BlackListAvatar_Lewdifier(); }, "Skip This Avatar From being Lewdified.", null, null, true);
 
 
 		}

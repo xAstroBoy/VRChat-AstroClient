@@ -38,6 +38,9 @@
 
 		public static event EventHandler Event_OnLevelLoaded;
 
+		public static event EventHandler Event_OnApplicationQuit;
+
+
 		public static List<GameEvents> Overridable_List = new List<GameEvents>();
 
 		public override void OnApplicationStart()
@@ -72,6 +75,13 @@
 			InitializeOverridables();
 			//Event_OnApplicationStart?.Invoke(this, new EventArgs());
 		}
+
+
+		public override void OnApplicationQuit()
+		{
+			Event_OnApplicationQuit?.Invoke(this, new EventArgs());
+		}
+
 
 		public override void OnPreferencesSaved()
 		{

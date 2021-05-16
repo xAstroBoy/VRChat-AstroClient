@@ -18,6 +18,7 @@
 			Main.Event_LateUpdate += Internal_OnLateUpdate;
 			Main.Event_VRChat_OnUiManagerInit += Internal_VRChat_OnUiManagerInit;
 			Main.Event_OnLevelLoaded += Internal_OnLevelLoaded;
+			Main.Event_OnLevelLoaded += Internal_OnApplicationQuit;
 
 			// PATCHES
 
@@ -52,6 +53,10 @@
 			OnUpdate();
 		}
 
+		private void Internal_OnApplicationQuit(object sender, EventArgs e)
+		{
+			OnApplicationQuit();
+		}
 		private void Internal_OnLateUpdate(object sender, EventArgs e)
 		{
 			OnLateUpdate();
@@ -116,6 +121,10 @@
 		}
 
 		public virtual void OnApplicationStart()
+		{
+		}
+
+		public virtual void OnApplicationQuit()
 		{
 		}
 
