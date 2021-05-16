@@ -98,6 +98,8 @@
 						client.Send(new PacketData(PacketServerType.ENABLE_DEVELOPER));
 					}
 
+					AstroBot.SendLoggedInLog(client);
+
 				}
 				else
 				{
