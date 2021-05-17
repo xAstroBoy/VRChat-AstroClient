@@ -131,6 +131,7 @@
 		{
 			if (player != null)
 			{
+				Destroy(SpawnedTag.gameObject);
 				var sorted = (from s in player.GetComponentsInChildren<SingleTag>(true) orderby s.AllocatedStack descending select s).ToList();
 				if (sorted.Count() != 0 && sorted.Count() != 1)
 				{
@@ -159,7 +160,6 @@
 					entry.AssignedStack--;
 				}
 			}
-			Destroy(SpawnedTag);
 		}
 
 		// Update is called once per frame
