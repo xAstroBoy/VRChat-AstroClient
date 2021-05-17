@@ -23,7 +23,7 @@
 			AntiGcList.Add(this);
 		}
 
-		private bool DebugMode = false;
+		private bool DebugMode = true;
 
 		[HideFromIl2Cpp]
 		private void Debug(string msg)
@@ -165,80 +165,105 @@
 			bool flag = false;
 			if (avataritems.Count() != 0)
 			{
-				foreach (var item in avataritems)
+				foreach (var parent in avataritems)
 				{
-					foreach (var childitem in item.Get_All_Childs())
+					flag = CheckForTermsToToggleOff(parent);
+					if (parent != null)
 					{
-						Debug($"Checking {childitem.name} in TermsToToggleOff");
-						if (LewdifierUtils.TermsToToggleOff.Contains(childitem.name.ToLower()))
-						{
-							Debug($"{childitem.name} Found in TermsToToggleOff");
 
-							flag = true;
-							if (AvatarModifier.ForceLewdify)
-							{
-								childitem.DestroyMeLocal();
-							}
-							else
-							{
-								if (childitem.gameObject.active)
-								{
-									childitem.gameObject.SetActiveRecursively(false);
-								}
-								if(!ChildsToKeepOff.Contains(childitem))
-								{
-									ChildsToKeepOff.Add(childitem);
-								}
-							}
+						foreach (var child in parent.Get_All_Childs())
+						{
+							flag = CheckForTermsToToggleOff(child);
 						}
 					}
 				}
 			}
 			return flag;
 		}
+	
+		private bool CheckForTermsToToggleOff(Transform item)
+		{
+			bool flag = false;
+			Debug($"Checking {item.name} in TermsToToggleOff");
+			if (LewdifierUtils.TermsToToggleOff.Contains(item.name.ToLower()))
+			{
+				Debug($"{item.name} Found in TermsToToggleOff");
+
+				flag = true;
+				if (AvatarModifier.ForceLewdify)
+				{
+					item.DestroyMeLocal();
+				}
+				else
+				{
+					if (item.gameObject.active)
+					{
+						item.gameObject.SetActiveRecursively(false);
+					}
+					if (!ChildsToKeepOff.Contains(item))
+					{
+						ChildsToKeepOff.Add(item);
+					}
+				}
+			}
+			return flag;
+		}
+
+
+
 
 		private bool Lewdify_Terms_To_turn_On(List<Transform> avataritems)
 		{
 			bool flag = false;
 			if (avataritems.Count() != 0)
 			{
-				foreach (var item in avataritems)
+				foreach (var parent in avataritems)
 				{
-					foreach (var childitem in item.Get_All_Childs())
+					flag = CheckForTermsToToggleOn(parent);
+
+					foreach (var child in parent.Get_All_Childs())
 					{
-						Debug($"Checking {childitem.name} in TermsToToggleOn");
-
-						if (LewdifierUtils.TermsToToggleOn.Contains(childitem.name.ToLower()))
-						{
-							Debug($"{childitem.name} Found in TermsToToggleOn");
-
-							flag = true;
-							var parent = childitem.Get_root_of_avatar_child();
-							ModConsole.DebugLog($"Got root of  {childitem.name} , Root is : {parent.name}");
-
-							if (parent != null)
-							{
-								ModConsole.DebugLog($"Enabling Parent.. {parent.name}...");
-
-
-								if (!parent.gameObject.active)
-								{
-									parent.gameObject.active = true;
-								}
-								if (!childitem.gameObject.active)
-								{
-									childitem.gameObject.SetActiveRecursively(true);
-								}
-
-
-							}
-
-						}
+						flag = CheckForTermsToToggleOn(child);
 					}
 				}
 			}
 			return flag;
 		}
+
+		private bool CheckForTermsToToggleOn(Transform item)
+		{
+			bool flag = false;
+			Debug($"Checking {item.name} in TermsToToggleOn");
+
+			if (LewdifierUtils.TermsToToggleOn.Contains(item.name.ToLower()))
+			{
+				Debug($"{item.name} Found in TermsToToggleOn");
+
+				flag = true;
+				var parent = item.Get_root_of_avatar_child();
+				ModConsole.DebugLog($"Got root of  {item.name} , Root is : {parent.name}");
+
+				if (parent != null)
+				{
+					ModConsole.DebugLog($"Enabling Parent.. {parent.name}...");
+
+
+					if (!parent.gameObject.active)
+					{
+						parent.gameObject.active = true;
+					}
+					if (!item.gameObject.active)
+					{
+						item.gameObject.SetActiveRecursively(true);
+					}
+
+
+				}
+
+			}
+			return flag;
+		}
+
 
 
 		// TODO: Figure how to Edit the animator to Be able to toggle the Objects with animator active.

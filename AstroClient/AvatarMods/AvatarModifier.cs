@@ -4,6 +4,7 @@
 	using AstroLibrary.Console;
 	using DayClientML2.Utility;
 	using RubyButtonAPI;
+	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
@@ -19,8 +20,8 @@
 			RemoveMasksToggle = new QMSingleToggleButton(tmp, 1, 0, "Auto Remove Masks", () => { MaskDeleter = true; }, "Auto Remove Masks", () => { MaskDeleter = false; }, "Remove Masks From all avatars (Will make all Avatars Reload)", Color.green, Color.red, null, false, true);
 			LewdifyToggle = new QMSingleToggleButton(tmp, 1, 0.5f, "Auto Lewdify", () => { Lewdify = true; }, "Auto Lewdify", () => { Lewdify = false; }, "Lewdifies All avatars In Instance (Will make all Avatars Reload)", Color.green, Color.red, null, false, true);
 			ForceLewdifyToggle = new QMSingleToggleButton(tmp, 1, 1f, "Forced Lewdify", () => { ForceLewdify = true; }, "Forced Lewdify", () => { ForceLewdify = false; }, "Force Lewdify avatars (Destroys the Transforms, Due to SDK3 Avatars Refusing to toggle them.) (Will make all Avatars Reload)", Color.green, Color.red, null, false, true);
-			LewdifyLists = new QMSingleButton(tmp, 1, 1.5f, "NOT SET", () => { LewdifierUtils.RefreshAll(); }, "Refresh Current Lists", null, null, false);
-			LewdifyLists.SetResizeTextForBestFit(true);
+			LewdifierUtils.LewdifyLists = new QMSingleButton(tmp, 1, 1.5f, "NOT SET", new Action(() => { LewdifierUtils.RefreshAll(); }), "Refresh Current Lists", null, null, false);
+			LewdifierUtils.LewdifyLists.SetResizeTextForBestFit(true);
 			
 		}
 
@@ -46,13 +47,16 @@
 		{
 			if (player != null)
 			{
-				if (Lewdify)
+				if (player != LocalPlayerUtils.GetSelfPlayer())
 				{
-					player.Add_Lewdify();
-				}
-				if (MaskDeleter)
-				{
-					player.Add_MaskRemover();
+					if (Lewdify)
+					{
+						player.Add_Lewdify();
+					}
+					if (MaskDeleter)
+					{
+						player.Add_MaskRemover();
+					}
 				}
 			}
 
@@ -103,9 +107,12 @@
 				{
 					foreach (var player in WorldUtils.Get_Players())
 					{
-						if (player != null)
+						if (player != LocalPlayerUtils.GetSelfPlayer())
 						{
-							player.Add_Lewdify();
+							if (player != null)
+							{
+								player.Add_Lewdify();
+							}
 						}
 					}
 				}
@@ -113,9 +120,12 @@
 				{
 					foreach (var player in WorldUtils.Get_Players())
 					{
-						if (player != null)
+						if (player != LocalPlayerUtils.GetSelfPlayer())
 						{
-							player.Remove_Lewdify();
+							if (player != null)
+							{
+								player.Remove_Lewdify();
+							}
 						}
 					}
 				}
@@ -143,9 +153,12 @@
 				{
 					foreach(var player in WorldUtils.Get_Players())
 					{
-						if(player != null)
+						if (player != LocalPlayerUtils.GetSelfPlayer())
 						{
-							player.Add_MaskRemover();
+							if (player != null)
+							{
+								player.Add_MaskRemover();
+							}
 						}
 					}
 				}
@@ -153,16 +166,18 @@
 				{
 					foreach (var player in WorldUtils.Get_Players())
 					{
-						if (player != null)
+						if (player != LocalPlayerUtils.GetSelfPlayer())
 						{
-							player.Remove_MaskRemover();
+							if (player != null)
+							{
+								player.Remove_MaskRemover();
+							}
 						}
 					}
 				}
 			}
 		}
 
-		public static QMSingleButton LewdifyLists { get; set; }
 
 
 

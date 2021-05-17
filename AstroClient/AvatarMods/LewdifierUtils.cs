@@ -9,6 +9,7 @@
 	using AstroClient.Extensions;
 	using AstroLibrary.Console;
 	using AstroNetworkingLibrary;
+	using RubyButtonAPI;
 
 	public class LewdifierUtils : GameEvents
 	{
@@ -24,6 +25,7 @@
 			SaveAll();
 		}
 
+		public static QMSingleButton LewdifyLists;
 
 		public static List<string> TermsToToggleOn { get; set; } = new List<string>();
 		public static List<string> TermsToToggleOff { get; set; } = new List<string>();
@@ -62,9 +64,9 @@
 			Refresh_termsToToggleOn();
 			Refresh_termsToToggleOff();
 			Refresh_AvatarsToSkip();
-			if (AvatarModifier.LewdifyLists != null)
+			if (LewdifyLists != null)
 			{
-				AvatarModifier.LewdifyLists.setButtonText(ListButtonText);
+				LewdifyLists.setButtonText(ListButtonText);
 			}
 		}
 
@@ -89,9 +91,15 @@
 				foreach (var item in list)
 				{
 					// Duplicate Check.
+					ModConsole.DebugLog($"Found Term : {item}");
 					if (!TermsToToggleOn.Contains(item.ToLower()))
 					{
+						ModConsole.DebugLog($"Registered Term in TermsToToggleOn : {item}");
 						TermsToToggleOn.Add(item.ToLower());
+					}
+					else
+					{
+						ModConsole.DebugLog($"Found Duplicated Term in TermsToToggleOn : {item}");
 					}
 				}
 				Save_TermsToToggleOn();
@@ -109,10 +117,15 @@
 				List<string> list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(TermsToEnableOffPath));
 				foreach (var item in list)
 				{
-					// Duplicate Check.
+					ModConsole.DebugLog($"Found Term : {item}");
 					if (!TermsToToggleOff.Contains(item.ToLower()))
 					{
+						ModConsole.DebugLog($"Registered Term in TermsToToggleOff : {item}");
 						TermsToToggleOff.Add(item.ToLower());
+					}
+					else
+					{
+						ModConsole.DebugLog($"Found Duplicated Term in TermsToToggleOff : {item}");
 					}
 				}
 				Save_TermsToToggleOff();
@@ -132,10 +145,15 @@
 				List<string> list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(AvatarsToSkipPath));
 				foreach (var item in list)
 				{
-					// Duplicate Check.
-					if (!AvatarsToSkip.Contains(item.ToLower()))
+					ModConsole.DebugLog($"Found Term : {item}");
+					if (!AvatarsToSkip.Contains(item))
 					{
-						AvatarsToSkip.Add(item.ToLower());
+						ModConsole.DebugLog($"Registered Term in AvatarsToSkip : {item}");
+						AvatarsToSkip.Add(item);
+					}
+					else
+					{
+						ModConsole.DebugLog($"Found Duplicated Term in AvatarsToSkip : {item}");
 					}
 				}
 				Save_AvatarToSkip();
