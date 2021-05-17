@@ -11,6 +11,7 @@
 	using VRC.SDKBase;
 	using System.Collections.Generic;
 	using System.Linq;
+	using DayClientML2.Utility.Extensions;
 
 	public class Lewdifier : GameEventsBehaviour
 	{
@@ -75,6 +76,7 @@
 						Body = null;
 						ChildsToKeepOff.Clear();
 						ChildsTokeepOn.Clear();
+						PlayerTag.ShowTag = false;
 						var manager = AvatarPlayer._vrcplayer.prop_VRCAvatarManager_0;
 						if (manager != null)
 						{
@@ -85,7 +87,6 @@
 								{
 									if (!string.IsNullOrEmpty(apiavatar.assetUrl) && !string.IsNullOrEmpty(apiavatar.id))
 									{
-										AvatarRoot = avatar.transform.root;
 										if (AvatarRoot != null)
 										{
 											Avatar = AvatarRoot.Get_Avatar();
@@ -143,7 +144,11 @@
 											}
 											else
 											{
-												ModConsole.DebugLog("Skipped A Avatar, As is in AvatarsToSkip");
+												if (PlayerTag != null)
+												{
+													PlayerTag.ShowTag = false;
+												}
+												Debug("Skipped A Avatar, As is in AvatarsToSkip");
 											}
 										}
 									}
@@ -164,10 +169,10 @@
 				{
 					foreach (var childitem in item.Get_All_Childs())
 					{
-						ModConsole.DebugLog($"Checking {childitem.name} in TermsToToggleOff");
+						Debug($"Checking {childitem.name} in TermsToToggleOff");
 						if (LewdifierUtils.TermsToToggleOff.Contains(childitem.name.ToLower()))
 						{
-							ModConsole.DebugLog($"{childitem.name} Found in TermsToToggleOff", System.Drawing.Color.Green);
+							Debug($"{childitem.name} Found in TermsToToggleOff");
 
 							flag = true;
 							if (AvatarModifier.ForceLewdify)
@@ -201,11 +206,11 @@
 				{
 					foreach (var childitem in item.Get_All_Childs())
 					{
-						ModConsole.DebugLog($"Checking {childitem.name} in TermsToToggleOn");
+						Debug($"Checking {childitem.name} in TermsToToggleOn");
 
 						if (LewdifierUtils.TermsToToggleOn.Contains(childitem.name.ToLower()))
 						{
-							ModConsole.DebugLog($"{childitem.name} Found in TermsToToggleOn", System.Drawing.Color.Green);
+							Debug($"{childitem.name} Found in TermsToToggleOn");
 
 							flag = true;
 							var parent = childitem.Get_root_of_avatar_child();
@@ -243,21 +248,26 @@
 
 		private void LateUpdate()
 		{
-			if(AvatarModifier.ForceLewdify)
+			if (AvatarModifier.ForceLewdify)
 			{
-				if(ChildsToKeepOff.Count() != 0)
+				try
 				{
-					foreach(var child in ChildsToKeepOff)
+					if (ChildsToKeepOff.Count() != 0)
 					{
-						if (child != null)
+						foreach (var child in ChildsToKeepOff)
 						{
-							if (child.gameObject.active)
+							if (child != null)
 							{
-								child.DestroyMeLocal();
+								if (child.gameObject.active)
+								{
+									ChildsToKeepOff.Remove(child);
+									child.DestroyMeLocal();
+								}
 							}
 						}
 					}
 				}
+				catch { }
 			}
 		}
 

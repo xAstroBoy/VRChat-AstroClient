@@ -11,6 +11,7 @@
 	using VRC.SDKBase;
 	using System.Collections.Generic;
 	using System.Linq;
+	using DayClientML2.Utility.Extensions;
 
 	public class MaskRemover : GameEventsBehaviour
 	{

@@ -261,7 +261,7 @@
 					LewdifierUtils.AvatarsToSkip.Add(avatarid);
 					LewdifierUtils.Save_AvatarToSkip();
 					LewdifierUtils.Refresh_AvatarsToSkip();
-					ReloadAvatar(player._vrcplayer);
+					player.ReloadAvatar();
 				}
 			}
 		}
@@ -356,9 +356,10 @@
 		{
 			foreach (var player in WorldUtils.Get_Players())
 			{
-				if (player != null && player.GetVRCPlayer() != null)
+				if (player != null)
 				{
-					ReloadAvatar(player.GetVRCPlayer());
+					player.ReloadAvatar();
+
 				}
 			}
 		}
@@ -412,23 +413,6 @@
 				{
 					item.DestroyMeLocal();
 				}
-			}
-		}
-
-
-		public static void ReloadAvatar(this Player player)
-		{
-			if (player != null)
-			{
-				ReloadAvatar(player._vrcplayer);
-			}
-		}
-
-		public static void ReloadAvatar(this VRCPlayer player)
-		{
-			if (player != null)
-			{
-				player.Method_Public_Void_Boolean_0();
 			}
 		}
 	}
