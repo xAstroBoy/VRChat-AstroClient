@@ -79,6 +79,8 @@
 
 			RegisterComponent<CheetoMenu>();
 			RegisterComponent<Bouncer>();
+			RegisterComponent<Lewdifier>();
+			RegisterComponent<MaskRemover>();
 		}
 
 		public override void OnUpdate()

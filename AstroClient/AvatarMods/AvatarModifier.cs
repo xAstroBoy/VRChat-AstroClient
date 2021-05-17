@@ -16,10 +16,10 @@
 		{
 			var tmp = new QMNestedButton(tab, x, y, "Avatar Modifiers", "Modify Other's avatars", null, null, null, null, btnHalf);
 			new QMSingleButton(tmp, 5, 0, "Reload All Avatars", () => { AvatarUtils.Reload_All_Avatars(); }, "Reloads All avatars", null, null, true);
-			RemoveMasksToggle = new QMSingleToggleButton(tmp, 1, 0, "Remove Masks", () => { MaskDeleter = true; }, "Remove Masks", () => { MaskDeleter = false; }, "Remove Masks From all avatars (Requires Avatar Reload)", Color.green, Color.red, null, false, true);
-			LewdifyToggle = new QMSingleToggleButton(tmp, 1, 0.5f, "Lewdify", () => { Lewdify = true; }, "Lewdify", () => { Lewdify = false; }, "Lewdify avatars (Requires a Avatar Reload)", Color.green, Color.red, null, false, true);
-			ForceLewdifyToggle = new QMSingleToggleButton(tmp, 1, 1f, "Forced Lewdify", () => { ForceLewdify = true; }, "Forced Lewdify", () => { ForceLewdify = false; }, "Force Lewdify avatars (Destroys the Transforms, Due to SDK3 Avatars Refusing to toggle them.) (Requires a Avatar Reload)", Color.green, Color.red, null, false, true);
-			LewdifyLists = new QMSingleButton(tmp, 1, 1.5f, "NOT SET", () => { Lewdifier.RefreshAll(); }, "Refresh Current Lists", null, null, false);
+			RemoveMasksToggle = new QMSingleToggleButton(tmp, 1, 0, "Auto Remove Masks", () => { MaskDeleter = true; }, "Auto Remove Masks", () => { MaskDeleter = false; }, "Remove Masks From all avatars (Will make all Avatars Reload)", Color.green, Color.red, null, false, true);
+			LewdifyToggle = new QMSingleToggleButton(tmp, 1, 0.5f, "Auto Lewdify", () => { Lewdify = true; }, "Auto Lewdify", () => { Lewdify = false; }, "Lewdifies All avatars In Instance (Will make all Avatars Reload)", Color.green, Color.red, null, false, true);
+			ForceLewdifyToggle = new QMSingleToggleButton(tmp, 1, 1f, "Forced Lewdify", () => { ForceLewdify = true; }, "Forced Lewdify", () => { ForceLewdify = false; }, "Force Lewdify avatars (Destroys the Transforms, Due to SDK3 Avatars Refusing to toggle them.) (Will make all Avatars Reload)", Color.green, Color.red, null, false, true);
+			LewdifyLists = new QMSingleButton(tmp, 1, 1.5f, "NOT SET", () => { LewdifierUtils.RefreshAll(); }, "Refresh Current Lists", null, null, false);
 			LewdifyLists.SetResizeTextForBestFit(true);
 			
 		}
@@ -30,96 +30,37 @@
 			new QMSingleButton(menu, 1, 0, "Dump Avatar Transforms", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Avatar_Transform_Dumper(); }, "Dump Avatar Transforms", null, null, true);
 			new QMSingleButton(menu, 1, 0.5f, "Dump Avatar Renderers", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Avatar_Renderer_Dumper(); }, "Dump Avatar Renderers", null, null, true);
 			new QMSingleButton(menu, 1, 1, "Dump Avatar Materials", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Avatar_Material_Dumper(); }, "Dump Avatar Materials", null, null, true);
-			new QMSingleButton(menu, 1, 1.5f, "Lewdify", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Lewdify(); }, "Lewdify This Player Avatar", null, null, true);
-			new QMSingleButton(menu, 1, 2, "Skip Avatar Lewdifying.", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().BlackListAvatar_Lewdifier(); }, "Skip This Avatar From being Lewdified.", null, null, true);
+			new QMSingleButton(menu, 1, 1.5f, "Lewdify", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Add_Lewdify(); }, "Lewdify This Player Avatar", null, null, true);
+			new QMSingleButton(menu, 1, 2, "Remove Lewdify Effect.", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Remove_Lewdify(); }, "Remove the Lewdifier On this user..", null, null, true);
+			new QMSingleButton(menu, 1, 2.5f, "Skip Avatar Lewdifying.", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().BlackListAvatar_Lewdifier(); }, "Skip This Avatar From being Lewdified.", null, null, true);
+
+
+			new QMSingleButton(menu, 2, 0f, "Add Mask Remover", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Add_MaskRemover(); }, "Remove The Annoying Mask Theme on this user.", null, null, true);
+			new QMSingleButton(menu, 2, 0.5f, "Remove Mask Remover", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Add_MaskRemover(); }, "Remove The Mask Remover on this user.", null, null, true);
 
 
 		}
 
 
-
-		public override void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
+		public override void OnPlayerJoined(Player player)
 		{
-			if (avatar != null && DescriptorObj != null)
+			if (player != null)
 			{
-				var player = avatar.transform.root.GetComponentInChildren<Player>();
-				if (player != null)
+				if (Lewdify)
 				{
-					var manager = player._vrcplayer.prop_VRCAvatarManager_0;
-					if (manager != null)
-					{
-						if (manager.prop_VRCAvatarDescriptor_0 != null && manager.prop_VRC_AvatarDescriptor_0 != null)
-						{
-							var apiavatar = manager.field_Private_ApiAvatar_1;
-							if (apiavatar != null)
-							{
-								if (!string.IsNullOrEmpty(apiavatar.assetUrl) && !string.IsNullOrEmpty(apiavatar.id))
-								{
-									Transform root = avatar.transform.root;
-									if (root != null)
-									{
-										Transform AvatarHolder = root.Get_Avatar();
-										Transform Armature = root.Get_Armature();
-										Transform Body = root.Get_Body();
-
-										if (AvatarHolder != null)
-										{
-											var childs = AvatarUtils.AvatarParents(AvatarHolder, Armature, Body);
-											if (childs.Count() != 0 && childs != null)
-											{
-												if (MaskDeleter)
-												{
-													RemoveMasks(childs);
-												}
-											}
-										}
-										if (Lewdify)
-										{
-											if (!Lewdifier.AvatarsToSkip.Contains(apiavatar.id))
-											{
-												player.Lewdify();
-											}
-											else
-											{
-												ModConsole.DebugLog("Skipped A Avatar, As is in AvatarsToSkip");
-											}
-										}
-									}
-								}
-							}
-						}
-					}
+					player.Add_Lewdify();
+				}
+				if (MaskDeleter)
+				{
+					player.Add_MaskRemover();
 				}
 			}
+
 		}
 
-		// Destroys Masks.
-		public static void RemoveMasks(List<Transform> items)
-		{
-			foreach (var item in items)
-			{
-				if (item != null)
-				{
-					if (item.name.ToLower() == "mask")
-					{
-						item.gameObject.DestroyMeLocal();
-					}
-					else
-					{
-						foreach (var child in item.GetComponentsInChildren<Transform>(true))
-						{
-							if (child != null)
-							{
-								if (child.name.ToLower() == "mask")
-								{
-									child.gameObject.DestroyMeLocal();
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+
+
+
 
 		public static QMSingleToggleButton ForceLewdifyToggle { get; set; }
 
@@ -158,6 +99,26 @@
 				{
 					LewdifyToggle.setToggleState(value);
 				}
+				if(value)
+				{
+					foreach (var player in WorldUtils.Get_Players())
+					{
+						if (player != null)
+						{
+							player.Add_Lewdify();
+						}
+					}
+				}
+				else
+				{
+					foreach (var player in WorldUtils.Get_Players())
+					{
+						if (player != null)
+						{
+							player.Add_Lewdify();
+						}
+					}
+				}
 			}
 		}
 
@@ -177,6 +138,20 @@
 				if (RemoveMasksToggle != null)
 				{
 					RemoveMasksToggle.setToggleState(value);
+				}
+				if(value)
+				{
+					foreach(var player in WorldUtils.Get_Players())
+					{
+						if(player != null)
+						{
+							player.Add_MaskRemover();
+						}
+					}
+				}
+				else
+				{
+
 				}
 			}
 		}

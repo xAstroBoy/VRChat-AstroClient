@@ -10,6 +10,7 @@
 	using Color = System.Drawing.Color;
 	using DayClientML2.Utility;
 	using AstroLibrary.Finder;
+	using AstroClient.Components;
 
 	public static class AvatarUtils
 	{
@@ -151,97 +152,6 @@
 		}
 
 
-		public static void Lewdify(this List<Transform> list, out bool HasTurnedOffChilds, out bool HasTurnedOnLewdChilds)
-		{
-			HasTurnedOffChilds = Lewdifier.LewdifyTermsToTurnOff(list);
-			HasTurnedOnLewdChilds = Lewdifier.LewdifyTermsToToggleOn(list);
-		}
-
-
-		public static void RemoveLewdNSFWTags(Player player)
-		{
-			foreach (var tag in player.SearchTags("Possibly NSFW"))
-			{
-				if (tag != null)
-				{
-					tag.DestroyMeLocal();
-				}
-			}
-			foreach (var tag in player.SearchTags("NSFW Avatar"))
-			{
-				if (tag != null)
-				{
-					tag.DestroyMeLocal();
-				}
-			}
-		}
-
-
-		public static void Lewdify(this Player player)
-		{
-			if (player != null)
-			{
-				RemoveLewdNSFWTags(player);
-				var body = player.gameObject.transform.Get_Body();
-				var Avatar = player.gameObject.transform.Get_Avatar();
-				var Armature = player.gameObject.transform.Get_Armature();
-				var parents = AvatarParents(Avatar, Armature, body);
-				if (parents.Count() != 0)
-				{
-					parents.Lewdify(out var OffChilds, out var OnChilds);
-					if (OffChilds && !OnChilds)
-					{
-						if (!player.HasTagWithText("Possibly NSFW"))
-						{
-							var tag = player.AddSingleTag();
-							MiscUtility.DelayFunction(0.5f, () =>
-						{
-							if (tag != null)
-							{
-								tag.Label_Text = "Possibly NSFW";
-								tag.Tag_Color = ColorUtils.HexToColor("#FFA500");
-								tag.Label_TextColor = UnityEngine.Color.white;
-							}
-						});
-						}
-					}
-					else if (!OffChilds && OnChilds)
-					{
-						if (!player.HasTagWithText("Possibly NSFW"))
-						{
-							var tag = player.AddSingleTag();
-							MiscUtility.DelayFunction(0.5f, () =>
-							{
-								if (tag != null)
-								{
-									tag.Label_Text = "Possibly NSFW";
-									tag.Tag_Color = ColorUtils.HexToColor("#FFA500");
-									tag.Label_TextColor = UnityEngine.Color.white;
-								}
-							});
-						}
-					}
-					else if (OnChilds && OffChilds)
-					{
-						if (!player.HasTagWithText("NSFW Avatar"))
-						{
-							var tag = player.AddSingleTag();
-							MiscUtility.DelayFunction(0.5f, () =>
-							{
-								if (tag != null)
-								{
-									tag.Label_Text = "NSFW Avatar";
-									tag.Tag_Color = UnityEngine.Color.red;
-									tag.Label_TextColor = UnityEngine.Color.white;
-								}
-							});
-						}
-					}
-
-				}
-			}
-		}
-
 		public static void Avatar_Transform_Dumper(this Player player)
 		{
 			if (player != null)
@@ -348,9 +258,10 @@
 				var avatarid = player.GetAvatarID();
 				if(avatarid != null)
 				{
-					Lewdifier.AvatarsToSkip.Add(avatarid);
-					Lewdifier.Save_AvatarToSkip();
-					Lewdifier.Refresh_AvatarsToSkip();
+					LewdifierUtils.AvatarsToSkip.Add(avatarid);
+					LewdifierUtils.Save_AvatarToSkip();
+					LewdifierUtils.Refresh_AvatarsToSkip();
+					ReloadAvatar(player._vrcplayer);
 				}
 			}
 		}
@@ -447,12 +358,73 @@
 			{
 				if (player != null && player.GetVRCPlayer() != null)
 				{
-					Reload_Avatars(player.GetVRCPlayer());
+					ReloadAvatar(player.GetVRCPlayer());
 				}
 			}
 		}
 
-		public static void Reload_Avatars(VRCPlayer player)
+		public static void Add_Lewdify(this Player player)
+		{
+			if(player != null)
+			{
+				Lewdifier item = player.GetComponent<Lewdifier>();
+				if(item == null)
+				{
+					 player.gameObject.AddComponent<Lewdifier>();
+				}
+			}
+
+		}
+
+		public static void Add_MaskRemover(this Player player)
+		{
+			if (player != null)
+			{
+				MaskRemover item = player.GetComponent<MaskRemover>();
+				if (item == null)
+				{
+					player.gameObject.AddComponent<MaskRemover>();
+				}
+			}
+
+		}
+		
+
+		public static void Remove_Lewdify(this Player player)
+		{
+			if (player != null)
+			{
+				Lewdifier item = player.GetComponent<Lewdifier>();
+				if (item != null)
+				{
+					item.DestroyMeLocal();
+				}
+			}
+		}
+
+
+		public static void Remove_MaskRemover(this Player player)
+		{
+			if (player != null)
+			{
+				MaskRemover item = player.GetComponent<MaskRemover>();
+				if (item != null)
+				{
+					item.DestroyMeLocal();
+				}
+			}
+		}
+
+
+		public static void ReloadAvatar(this Player player)
+		{
+			if (player != null)
+			{
+				ReloadAvatar(player._vrcplayer);
+			}
+		}
+
+		public static void ReloadAvatar(this VRCPlayer player)
 		{
 			if (player != null)
 			{

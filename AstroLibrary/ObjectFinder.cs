@@ -19,7 +19,7 @@
 			}
 			else
 			{
-				ModConsole.Warning("[WARNING (Find) ]  Gameobject on path [ " + path + " ]  is Invalid, No Object Found!");
+				ModConsole.DebugWarning("[WARNING (Find) ]  Gameobject on path [ " + path + " ]  is Invalid, No Object Found!");
 				return null;
 			}
 		}
@@ -30,7 +30,7 @@
 
 			if (obj == null)
 			{
-				ModConsole.Warning("[WARNING (FindRootSceneObject) ]  Root Gameobject name [ " + name + " ]  is Invalid, No Object Found!");
+				ModConsole.DebugWarning("[WARNING (FindRootSceneObject) ]  Root Gameobject name [ " + name + " ]  is Invalid, No Object Found!");
 			}
 
 			return obj;
@@ -42,7 +42,7 @@
 
 			if (obj == null)
 			{
-				ModConsole.Warning($"[WARNING (FindRootSceneObject) ]  Transform {transform.name} Doesnt have a object in path [ {path} ] !");
+				ModConsole.DebugWarning($"[WARNING (FindObject) ]  Transform {transform.name} Doesnt have a object in path [ {path} ] !");
 			}
 
 			return obj;
@@ -63,7 +63,7 @@
 			}
 			else
 			{
-				ModConsole.Warning("[WARNING (ListFind) ] Gameobject on path [ " + path + " ]  is Invalid, No Object Found!");
+				ModConsole.DebugWarning("[WARNING (ListFind) ] Gameobject on path [ " + path + " ]  is Invalid, No Object Found!");
 				return list;
 			}
 		}
@@ -79,7 +79,7 @@
 					return gameObj;
 				}
 			}
-			ModConsole.Warning("[WARNING (InactiveFind) ]  Gameobject on path [ " + path + " ]  is Invalid, No Object Found!");
+			ModConsole.DebugWarning("[WARNING (InactiveFind) ]  Gameobject on path [ " + path + " ]  is Invalid, No Object Found!");
 			return null;
 		}
 

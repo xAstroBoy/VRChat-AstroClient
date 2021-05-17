@@ -21,7 +21,7 @@
 			try
 			{
 				writer = new StreamWriter(filePath, append);
-				writer.Write(JsonConvert.SerializeObject(objectToWrite));
+				writer.Write(JsonConvert.SerializeObject(objectToWrite, Formatting.Indented));
 			}
 			finally
 			{
@@ -31,6 +31,7 @@
 				}
 			}
 		}
+
 
 		/// <summary>
 		/// Reads an object instance from an Json file.
