@@ -12,6 +12,7 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using DayClientML2.Utility.Extensions;
+	using Object = UnityEngine.Object;
 
 	public class Lewdifier : GameEventsBehaviour
 	{
@@ -30,23 +31,31 @@
 		{
 			if (DebugMode)
 			{
-				ModConsole.DebugLog($"[Lewdifier Debug] : {msg}");
+				if (player != null)
+				{
+					ModConsole.DebugLog($"[Lewdifier Debug] [{player.DisplayName()}] : {msg}");
+				}
+				else
+				{
+					ModConsole.DebugLog($"[Lewdifier Debug] : {msg}");
+
+				}
 			}
 		}
 
 		// Use this for initialization
 		public void Start()
 		{
-			if(player == null)
+			if (player == null)
 			{
 				player = GetComponent<Player>();
 			}
-			if(player != null)
+			if (player != null)
 			{
-				if(PlayerTag == null)
+				if (PlayerTag == null)
 				{
 					PlayerTag = player.AddSingleTag();
-					if(PlayerTag != null)
+					if (PlayerTag != null)
 					{
 						PlayerTag.ShowTag = false;
 					}
@@ -87,70 +96,8 @@
 								{
 									if (!string.IsNullOrEmpty(apiavatar.assetUrl) && !string.IsNullOrEmpty(apiavatar.id))
 									{
-										if (AvatarRoot != null)
-										{
-											Avatar = AvatarRoot.Get_Avatar();
-											Armature = AvatarRoot.Get_Armature();
-											Body = AvatarRoot.Get_Body();
-											AvatarAnimator = Avatar.GetComponentInChildren<Animator>();
-											PlayerTag.ShowTag = false;
-											if (!LewdifierUtils.AvatarsToSkip.Contains(apiavatar.id))
-											{
-												var avichilds = AvatarUtils.AvatarParents(Avatar, Armature, Body);
-												if(avichilds.Count() != 0)
-												{
-													bool hasTurnedOffChilds = Lewdify_Terms_To_turn_Off(avichilds);
-													bool hasTurnedOnChilds = Lewdify_Terms_To_turn_On(avichilds);
-													if(hasTurnedOffChilds && !hasTurnedOnChilds)
-													{
-														if(PlayerTag != null)
-														{
-															PlayerTag.Label_Text = "Possibly NSFW";
-															PlayerTag.Tag_Color = ColorUtils.HexToColor("#FFA500");
-															PlayerTag.ShowTag = true;
-														}
-													}
-													else if(!hasTurnedOffChilds && hasTurnedOnChilds)
-													{
-														if (PlayerTag != null)
-														{
-															PlayerTag.Label_Text = "Possibly NSFW";
-															PlayerTag.Tag_Color = ColorUtils.HexToColor("#FFA500");
-															PlayerTag.ShowTag = true;
-														}
-													}
-													else if(!hasTurnedOffChilds && !hasTurnedOnChilds)
-													{
-														if (PlayerTag != null)
-														{
-															PlayerTag.Label_Text = "NOT NSFW";
-															PlayerTag.Tag_Color = Color.blue;
-															PlayerTag.ShowTag = true;
-														}
-													}
-													else if(hasTurnedOffChilds && hasTurnedOnChilds)
-													{
-														if (PlayerTag != null)
-														{
-															PlayerTag.Label_Text = "NSFW";
-															PlayerTag.Tag_Color = Color.red;
-															PlayerTag.ShowTag = true;
-														}
-													}
-													
-													
-												}
-
-											}
-											else
-											{
-												if (PlayerTag != null)
-												{
-													PlayerTag.ShowTag = false;
-												}
-												Debug("Skipped A Avatar, As is in AvatarsToSkip");
-											}
-										}
+										AvatarID = apiavatar.id;
+										lewdify_Avatar();
 									}
 								}
 							}
@@ -159,6 +106,81 @@
 				}
 			}
 		}
+
+
+		internal void lewdify_Avatar()
+		{
+			if (!LewdifierUtils.AvatarsToSkip.Contains(AvatarID))
+			{
+				if(AvatarRoot == null)
+				{
+					AvatarRoot = this.transform.root;
+				}
+				if (AvatarRoot != null)
+				{
+					Avatar = AvatarRoot.Get_Avatar();
+					Armature = AvatarRoot.Get_Armature();
+					Body = AvatarRoot.Get_Body();
+					AvatarAnimator = Avatar.GetComponentInChildren<Animator>();
+					PlayerTag.ShowTag = false;
+
+					var avichilds = AvatarUtils.AvatarParents(Avatar, Armature, Body);
+					if (avichilds.Count() != 0)
+					{
+						bool hasTurnedOffChilds = Lewdify_Terms_To_turn_Off(avichilds);
+						bool hasTurnedOnChilds = Lewdify_Terms_To_turn_On(avichilds);
+						if (hasTurnedOffChilds && !hasTurnedOnChilds)
+						{
+							if (PlayerTag != null)
+							{
+								PlayerTag.Label_Text = "Possibly NSFW";
+								PlayerTag.Tag_Color = ColorUtils.HexToColor("#FFA500");
+								PlayerTag.ShowTag = true;
+							}
+						}
+						else if (!hasTurnedOffChilds && hasTurnedOnChilds)
+						{
+							if (PlayerTag != null)
+							{
+								PlayerTag.Label_Text = "Possibly NSFW";
+								PlayerTag.Tag_Color = ColorUtils.HexToColor("#FFA500");
+								PlayerTag.ShowTag = true;
+							}
+						}
+						else if (!hasTurnedOffChilds && !hasTurnedOnChilds)
+						{
+							if (PlayerTag != null)
+							{
+								PlayerTag.Label_Text = "NOT NSFW";
+								PlayerTag.Tag_Color = Color.blue;
+								PlayerTag.ShowTag = true;
+							}
+						}
+						else if (hasTurnedOffChilds && hasTurnedOnChilds)
+						{
+							if (PlayerTag != null)
+							{
+								PlayerTag.Label_Text = "NSFW";
+								PlayerTag.Tag_Color = Color.red;
+								PlayerTag.ShowTag = true;
+							}
+						}
+					}
+
+				}
+			}
+			else
+			{
+				if (PlayerTag != null)
+				{
+					PlayerTag.Label_Text = "Skipped Lewdify";
+					PlayerTag.Tag_Color = Color.cyan;
+					PlayerTag.ShowTag = true;
+				}
+			}
+		}
+	
+
 
 		private bool Lewdify_Terms_To_turn_Off(List<Transform> avataritems)
 		{
@@ -280,11 +302,11 @@
 
 
 		// TODO: Figure how to Edit the animator to Be able to toggle the Objects with animator active.
-		private void Update()
+		public void Update()
 		{
 		}
 
-		private void LateUpdate()
+		public void LateUpdate()
 		{
 			if (AvatarModifier.ForceLewdify)
 			{
@@ -311,26 +333,25 @@
 
 
 
-		private void OnDestroy()
+		public void OnDestroy()
 		{
 			ChildsTokeepOn.Clear();
 			ChildsToKeepOff.Clear();
-			PlayerTag.DestroyMeLocal();
+			Destroy(PlayerTag);
 			player.ReloadAvatar();
 		}
 
 
-		internal Transform AvatarRoot { get; private set; } = null;
-
-		internal Transform Avatar { get; private set; } = null;
-		internal Transform Armature { get; private set; } = null;
-		internal Transform Body { get; private set; } = null;
-		internal SingleTag PlayerTag { get; private set; } = null;
-		internal Player player { get; private set; } = null;
-		internal Animator AvatarAnimator { get; private set; } = null;
-
-		internal List<Transform> ChildsToKeepOff  { get; private set; } = new List<Transform>();
-		internal List<Transform> ChildsTokeepOn { get; private set; } = new List<Transform>();
+		private Transform AvatarRoot = null;
+		private Transform Avatar  = null;
+		private Transform Armature  = null;
+		private Transform Body = null;
+		private SingleTag PlayerTag = null;
+		private Player player = null;
+		private Animator AvatarAnimator  = null;
+		private string AvatarID = null;
+		private List<Transform> ChildsToKeepOff  = new List<Transform>();
+		private List<Transform> ChildsTokeepOn = new List<Transform>();
 
 	}
 }

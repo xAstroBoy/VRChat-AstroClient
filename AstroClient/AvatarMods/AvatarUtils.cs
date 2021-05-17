@@ -371,7 +371,11 @@
 				Lewdifier item = player.GetComponent<Lewdifier>();
 				if(item == null)
 				{
-					 player.gameObject.AddComponent<Lewdifier>();
+					 item = player.gameObject.AddComponent<Lewdifier>();
+				}
+				else
+				{
+					item.lewdify_Avatar();
 				}
 			}
 
@@ -398,7 +402,7 @@
 				Lewdifier item = player.GetComponent<Lewdifier>();
 				if (item != null)
 				{
-					item.DestroyMeLocal();
+					Object.Destroy(item);
 				}
 			}
 		}
@@ -411,7 +415,7 @@
 				MaskRemover item = player.GetComponent<MaskRemover>();
 				if (item != null)
 				{
-					item.DestroyMeLocal();
+					Object.Destroy(item);
 				}
 			}
 		}

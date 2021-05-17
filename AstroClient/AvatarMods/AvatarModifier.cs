@@ -34,8 +34,6 @@
 			new QMSingleButton(menu, 1, 1.5f, "Lewdify", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Add_Lewdify(); }, "Lewdify This Player Avatar", null, null, true);
 			new QMSingleButton(menu, 1, 2, "Remove Lewdify Effect.", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Remove_Lewdify(); }, "Remove the Lewdifier On this user..", null, null, true);
 			new QMSingleButton(menu, 1, 2.5f, "Skip Avatar Lewdifying.", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().BlackListAvatar_Lewdifier(); }, "Skip This Avatar From being Lewdified.", null, null, true);
-
-
 			new QMSingleButton(menu, 2, 0f, "Add Mask Remover", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Add_MaskRemover(); }, "Remove The Annoying Mask Theme on this user.", null, null, true);
 			new QMSingleButton(menu, 2, 0.5f, "Remove Mask Remover", () => { QuickMenuUtils.GetSelectedUser().GetPlayer().Add_MaskRemover(); }, "Remove The Mask Remover on this user.", null, null, true);
 
@@ -98,11 +96,7 @@
 			}
 			set
 			{
-				_Lewdify = value;
-				if (Lewdify != null)
-				{
-					LewdifyToggle.setToggleState(value);
-				}
+
 				if(value)
 				{
 					foreach (var player in WorldUtils.Get_Players())
@@ -129,6 +123,11 @@
 						}
 					}
 				}
+				_Lewdify = value;
+				if (Lewdify != null)
+				{
+					LewdifyToggle.setToggleState(value);
+				}
 			}
 		}
 
@@ -144,11 +143,6 @@
 			}
 			set
 			{
-				_MaskDeleter = value;
-				if (RemoveMasksToggle != null)
-				{
-					RemoveMasksToggle.setToggleState(value);
-				}
 				if(value)
 				{
 					foreach(var player in WorldUtils.Get_Players())
@@ -174,6 +168,11 @@
 							}
 						}
 					}
+				}
+				_MaskDeleter = value;
+				if (RemoveMasksToggle != null)
+				{
+					RemoveMasksToggle.setToggleState(value);
 				}
 			}
 		}

@@ -118,18 +118,18 @@
 
 
 
-		private void OnDestroy()
+		public void OnDestroy()
 		{
 			player.ReloadAvatar();
 		}
 
 
-		internal Transform AvatarRoot { get; private set; } = null;
-		internal Transform Avatar { get; private set; } = null;
-		internal Transform Armature { get; private set; } = null;
-		internal Transform Body { get; private set; } = null;
-		internal Player player { get; private set; } = null;
-		internal Animator AvatarAnimator { get; private set; } = null;
+		private Transform AvatarRoot  = null;
+		private Transform Avatar  = null;
+		private Transform Armature  = null;
+		private Transform Body  = null;
+		private Player player  = null;
+		private Animator AvatarAnimator  = null;
 
 
 	}
