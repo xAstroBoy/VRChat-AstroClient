@@ -83,26 +83,32 @@
 											Armature = AvatarRoot.Get_Armature();
 											Body = AvatarRoot.Get_Body();
 											AvatarAnimator = Avatar.GetComponentInChildren<Animator>();
-
-											var avichilds = AvatarUtils.AvatarParents(Avatar, Armature, Body);
-											if (avichilds.Count() != 0)
+											var childs = Avatar.Get_All_Childs();
+											if (childs.Count() != 0)
 											{
-												foreach (var item in avichilds)
+												foreach (var item in childs)
 												{
-													if (item.name.ToLower().Equals("mask"))
+													if (item.gameObject.GetComponent<Renderer>())
 													{
-														item.DestroyMeLocal();
+														if (item.name.ToLower().Equals("mask") || item.name.ToLower().Equals("facemask"))
+														{
+															item.DestroyMeLocal();
+														}
 													}
 													else
 													{
-														foreach(var itemchilds in item.Get_All_Childs())
+														foreach (var itemchilds in item.Get_All_Childs())
 														{
-															if(itemchilds.name.ToLower().Equals("mask"))
+															if (itemchilds.gameObject.GetComponent<Renderer>())
 															{
-																item.DestroyMeLocal();
+																if (itemchilds.name.ToLower().Equals("mask") || itemchilds.name.ToLower().Equals("facemask"))
+																{
+																	itemchilds.DestroyMeLocal();
+																}
 															}
 														}
 													}
+													
 												}
 											}
 										}

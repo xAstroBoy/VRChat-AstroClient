@@ -50,58 +50,15 @@
 		}
 
 
-		public static List<Transform> AvatarParents(Transform avatar, Transform Armature, Transform Body)
-		{
-			List<Transform> AllChilds = new List<Transform>();
-			foreach (var item in avatar.Get_Childs())
-			{
-				if (item != null)
-				{
-
-					// Some avatars don't have armature apparently , Probably renamed. 
-					// TODO: MAKE A ARMATURE FINDER TO BE 100% accurate of what to skip.
-					if (Armature != null)
-					{
-						if (item == Armature)
-						{
-							continue;
-						}
-
-						if (item.IsChildOf(Armature))
-						{
-							continue;
-						}
-					}
-					// As well for "body" , as is renamed.
-					if(Body != null)
-					{
-						if(item == Body)
-						{
-							continue;
-						}
-					}
-					if(item == avatar)
-					{
-						continue;
-					}
-
-					AllChilds.Add(item);
-				}
-			}
-			return AllChilds;
-		}
 
 		public static void Avatar_Renderer_Dumper(this Player player)
 		{
 			if (player != null)
 			{
-				var body = player.gameObject.transform.Get_Body();
 				var Avatar = player.gameObject.transform.Get_Avatar();
-				var Armature = player.gameObject.transform.Get_Armature();
-
-					var parents = AvatarParents(Avatar, Armature, body);
-					if (parents.Count() != 0)
-					{
+				var parents = Avatar.Get_Childs();
+				if (parents.Count() != 0)
+				{
 						ModConsole.Log("[AVATAR RENDERER DUMPER] : Dumping All Renderers of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
 						ModConsole.Log("[AVATAR RENDERER DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
 						ModConsole.Log("Dumping Renderers names ...", Color.Green);
@@ -125,11 +82,8 @@
 		{
 			if (player != null)
 			{
-				var body = player.gameObject.transform.Get_Body();
 				var Avatar = player.gameObject.transform.Get_Avatar();
-				var Armature = player.gameObject.transform.Get_Armature();
-
-					var parents = AvatarParents(Avatar, Armature, body);
+				var parents = Avatar.Get_Childs();
 					if (parents.Count() != 0)
 					{
 						ModConsole.Log("[AVATAR MESHRENDERER DUMPER] : Dumping All Renderers of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
@@ -156,13 +110,10 @@
 		{
 			if (player != null)
 			{
-				var body = player.gameObject.transform.Get_Body();
 				var Avatar = player.gameObject.transform.Get_Avatar();
-				var Armature = player.gameObject.transform.Get_Armature();
-
-					var parents = AvatarParents(Avatar, Armature, body);
-					if (parents.Count() != 0)
-					{
+				var parents = Avatar.Get_Childs();
+				if (parents.Count() != 0)
+				{
 						ModConsole.Log("[AVATAR TRANSFORM DUMPER] : Dumping All Transforms of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
 						ModConsole.Log("[AVATAR TRANSFORM DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
 						ModConsole.Log("Dumping Transforms names ...", Color.Green);
@@ -184,7 +135,6 @@
 			{
 				var body = player.gameObject.transform.Get_Body();
 				var Avatar = player.gameObject.transform.Get_Avatar();
-				var Armature = player.gameObject.transform.Get_Armature();
 
 					ModConsole.Log("[AVATAR MATERIAL DUMPER] : Dumping All Materials of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
 					ModConsole.Log("[AVATAR MATERIAL DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
@@ -193,9 +143,9 @@
 					{
 						ModConsole.Log("Found Material [ " + item + " ] in " + player.DisplayName() + "'s avatar Body", Color.Yellow);
 					}
-					var parents = AvatarParents(Avatar, Armature, body);
-					if (parents.Count() != 0)
-					{
+				var parents = Avatar.Get_Childs();
+				if (parents.Count() != 0)
+				{
 						ModConsole.Log("Dumping Materials names ...", Color.Green);
 						foreach (var child in parents)
 						{
@@ -398,7 +348,7 @@
 		{
 			if (player != null)
 			{
-				var item = player.gameObject.GetComponentInChildren<Lewdifier>();
+				var item = player.transform.root.gameObject.GetComponentInChildren<Lewdifier>();
 				if (item != null)
 				{
 					Object.Destroy(item);
@@ -411,7 +361,7 @@
 		{
 			if (player != null)
 			{
-				var item = player.gameObject.GetComponentInChildren<MaskRemover>();
+				var item = player.transform.root.gameObject.GetComponentInChildren<MaskRemover>();
 				if (item != null)
 				{
 					Object.Destroy(item);

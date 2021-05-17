@@ -124,11 +124,11 @@
 					AvatarAnimator = Avatar.GetComponentInChildren<Animator>();
 					PlayerTag.ShowTag = false;
 
-					var avichilds = AvatarUtils.AvatarParents(Avatar, Armature, Body);
-					if (avichilds.Count() != 0)
+					var avi_parents = Avatar.Get_Childs();
+					if (avi_parents.Count() != 0)
 					{
-						bool hasTurnedOffChilds = Lewdify_Terms_To_turn_Off(avichilds);
-						bool hasTurnedOnChilds = Lewdify_Terms_To_turn_On(avichilds);
+						bool hasTurnedOffChilds = Lewdify_Terms_To_turn_Off(avi_parents);
+						bool hasTurnedOnChilds = Lewdify_Terms_To_turn_On(avi_parents);
 						if (hasTurnedOffChilds && !hasTurnedOnChilds)
 						{
 							if (PlayerTag != null)
@@ -212,26 +212,24 @@
 		private bool CheckForTermsToToggleOff(Transform item)
 		{
 			bool FoundaHit = false;
-			Debug($"Checking {item.name} in TermsToToggleOff");
-			if (LewdifierUtils.TermsToToggleOff.Contains(item.name.ToLower()))
+			if (item.gameObject.GetComponentsInChildren<Renderer>(true).Count() != 0)
 			{
-				Debug($"{item.name} Found in TermsToToggleOff");
+				Debug($"Checking {item.name} in TermsToToggleOff");
+				if (LewdifierUtils.TermsToToggleOff.Contains(item.name.ToLower()))
+				{
+					Debug($"{item.name} Found in TermsToToggleOff");
 
-				FoundaHit = true;
-				if (AvatarModifier.ForceLewdify)
-				{
-					item.DestroyMeLocal();
-				}
-				else
-				{
-					if (item.gameObject.active)
-					{
-						item.gameObject.SetActiveRecursively(false);
-					}
-					if (!ChildsToKeepOff.Contains(item))
-					{
-						ChildsToKeepOff.Add(item);
-					}
+					FoundaHit = true;
+
+						if (item.gameObject.active)
+						{
+							item.gameObject.SetActiveRecursively(false);
+						}
+						if (!ChildsToKeepOff.Contains(item))
+						{
+							ChildsToKeepOff.Add(item);
+						}
+					
 				}
 			}
 			return FoundaHit;
@@ -267,34 +265,37 @@
 		private bool CheckForTermsToToggleOn(Transform item)
 		{
 			bool flag = false;
-			Debug($"Checking {item.name} in TermsToToggleOn");
-
-			if (LewdifierUtils.TermsToToggleOn.Contains(item.name.ToLower()))
+			if (item.gameObject.GetComponentsInChildren<Renderer>(true).Count() != 0)
 			{
-				flag = true;
+				Debug($"Checking {item.name} in TermsToToggleOn");
 
-				Debug($"{item.name} Found in TermsToToggleOn");
-
-				var parent = item.Get_root_of_avatar_child();
-				ModConsole.DebugLog($"Got root of  {item.name} , Root is : {parent.name}");
-
-				if (parent != null)
+				if (LewdifierUtils.TermsToToggleOn.Contains(item.name.ToLower()))
 				{
-					ModConsole.DebugLog($"Enabling Parent.. {parent.name}...");
+					flag = true;
 
+					Debug($"{item.name} Found in TermsToToggleOn");
 
-					if (!parent.gameObject.active)
+					var parent = item.Get_root_of_avatar_child();
+					ModConsole.DebugLog($"Got root of  {item.name} , Root is : {parent.name}");
+
+					if (parent != null)
 					{
-						parent.gameObject.active = true;
-					}
-					if (!item.gameObject.active)
-					{
-						item.gameObject.SetActiveRecursively(true);
-					}
+						ModConsole.DebugLog($"Enabling Parent.. {parent.name}...");
 
+
+						if (!parent.gameObject.active)
+						{
+							parent.gameObject.active = true;
+						}
+						if (!item.gameObject.active)
+						{
+							item.gameObject.SetActiveRecursively(true);
+						}
+
+
+					}
 
 				}
-
 			}
 			return flag;
 		}
@@ -308,6 +309,10 @@
 
 		public void LateUpdate()
 		{
+			if(PlayerTag == null)
+			{
+				PlayerTag = player.AddSingleTag();
+			}
 			if (AvatarModifier.ForceLewdify)
 			{
 				try
@@ -339,6 +344,7 @@
 			ChildsToKeepOff.Clear();
 			Destroy(PlayerTag);
 			player.ReloadAvatar();
+			Destroy(this);
 		}
 
 
