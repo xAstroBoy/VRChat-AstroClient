@@ -359,7 +359,6 @@
 				if (player != null)
 				{
 					player.ReloadAvatar();
-
 				}
 			}
 		}
@@ -368,7 +367,7 @@
 		{
 			if(player != null)
 			{
-				Lewdifier item = player.GetComponent<Lewdifier>();
+				var item = player.gameObject.GetComponentInChildren<Lewdifier>();
 				if(item == null)
 				{
 					 item = player.gameObject.AddComponent<Lewdifier>();
@@ -385,7 +384,7 @@
 		{
 			if (player != null)
 			{
-				MaskRemover item = player.GetComponent<MaskRemover>();
+				var item = player.gameObject.GetComponent<MaskRemover>();
 				if (item == null)
 				{
 					player.gameObject.AddComponent<MaskRemover>();
@@ -399,7 +398,7 @@
 		{
 			if (player != null)
 			{
-				Lewdifier item = player.GetComponent<Lewdifier>();
+				var item = player.gameObject.GetComponentInChildren<Lewdifier>();
 				if (item != null)
 				{
 					Object.Destroy(item);
@@ -412,7 +411,7 @@
 		{
 			if (player != null)
 			{
-				MaskRemover item = player.GetComponent<MaskRemover>();
+				var item = player.gameObject.GetComponentInChildren<MaskRemover>();
 				if (item != null)
 				{
 					Object.Destroy(item);

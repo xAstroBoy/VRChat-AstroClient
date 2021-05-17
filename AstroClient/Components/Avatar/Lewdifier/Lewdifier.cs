@@ -54,7 +54,7 @@
 			{
 				if (PlayerTag == null)
 				{
-					PlayerTag = player.AddSingleTag();
+					PlayerTag = SingleTagsUtils.AddSingleTag(player);
 					if (PlayerTag != null)
 					{
 						PlayerTag.ShowTag = false;
@@ -302,9 +302,9 @@
 
 
 		// TODO: Figure how to Edit the animator to Be able to toggle the Objects with animator active.
-		public void Update()
-		{
-		}
+		//public void Update()
+		//{
+		//}
 
 		public void LateUpdate()
 		{
@@ -342,16 +342,16 @@
 		}
 
 
-		private Transform AvatarRoot = null;
-		private Transform Avatar  = null;
-		private Transform Armature  = null;
-		private Transform Body = null;
-		private SingleTag PlayerTag = null;
-		private Player player = null;
-		private Animator AvatarAnimator  = null;
-		private string AvatarID = null;
-		private List<Transform> ChildsToKeepOff  = new List<Transform>();
-		private List<Transform> ChildsTokeepOn = new List<Transform>();
+		internal Transform AvatarRoot;
+		internal Transform Avatar;
+		internal Transform Armature;
+		internal Transform Body;
+		internal SingleTag PlayerTag;
+		internal Player player;
+		internal Animator AvatarAnimator;
+		internal string AvatarID;
+		internal List<Transform> ChildsToKeepOff  = new List<Transform>();
+		internal List<Transform> ChildsTokeepOn = new List<Transform>();
 
 	}
 }

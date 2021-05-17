@@ -159,6 +159,7 @@
 					entry.AssignedStack--;
 				}
 			}
+			Destroy(SpawnedTag);
 		}
 
 		// Update is called once per frame
