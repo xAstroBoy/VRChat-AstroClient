@@ -162,34 +162,40 @@
 
 		private bool Lewdify_Terms_To_turn_Off(List<Transform> avataritems)
 		{
-			bool flag = false;
+			bool FoundaHit = false;
 			if (avataritems.Count() != 0)
 			{
 				foreach (var parent in avataritems)
 				{
-					flag = CheckForTermsToToggleOff(parent);
+					if (CheckForTermsToToggleOff(parent))
+					{
+						FoundaHit = true;
+					}
 					if (parent != null)
 					{
 
 						foreach (var child in parent.Get_All_Childs())
 						{
-							flag = CheckForTermsToToggleOff(child);
+							if (CheckForTermsToToggleOff(child))
+							{
+								FoundaHit = true;
+							}
 						}
 					}
 				}
 			}
-			return flag;
+			return FoundaHit;
 		}
 	
 		private bool CheckForTermsToToggleOff(Transform item)
 		{
-			bool flag = false;
+			bool FoundaHit = false;
 			Debug($"Checking {item.name} in TermsToToggleOff");
 			if (LewdifierUtils.TermsToToggleOff.Contains(item.name.ToLower()))
 			{
 				Debug($"{item.name} Found in TermsToToggleOff");
 
-				flag = true;
+				FoundaHit = true;
 				if (AvatarModifier.ForceLewdify)
 				{
 					item.DestroyMeLocal();
@@ -206,7 +212,7 @@
 					}
 				}
 			}
-			return flag;
+			return FoundaHit;
 		}
 
 
@@ -214,20 +220,26 @@
 
 		private bool Lewdify_Terms_To_turn_On(List<Transform> avataritems)
 		{
-			bool flag = false;
+			bool FoundaHit = false;
 			if (avataritems.Count() != 0)
 			{
 				foreach (var parent in avataritems)
 				{
-					flag = CheckForTermsToToggleOn(parent);
+					if (CheckForTermsToToggleOn(parent))
+					{
+						FoundaHit = true;
+					}
 
 					foreach (var child in parent.Get_All_Childs())
 					{
-						flag = CheckForTermsToToggleOn(child);
+						if (CheckForTermsToToggleOn(child))
+						{
+							FoundaHit = true;
+						}
 					}
 				}
 			}
-			return flag;
+			return FoundaHit;
 		}
 
 		private bool CheckForTermsToToggleOn(Transform item)
@@ -237,9 +249,10 @@
 
 			if (LewdifierUtils.TermsToToggleOn.Contains(item.name.ToLower()))
 			{
+				flag = true;
+
 				Debug($"{item.name} Found in TermsToToggleOn");
 
-				flag = true;
 				var parent = item.Get_root_of_avatar_child();
 				ModConsole.DebugLog($"Got root of  {item.name} , Root is : {parent.name}");
 
