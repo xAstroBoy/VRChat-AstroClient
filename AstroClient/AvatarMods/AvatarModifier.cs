@@ -115,7 +115,7 @@
 					{
 						if (player != null)
 						{
-							player.Add_Lewdify();
+							player.Remove_Lewdify();
 						}
 					}
 				}
@@ -151,7 +151,13 @@
 				}
 				else
 				{
-
+					foreach (var player in WorldUtils.Get_Players())
+					{
+						if (player != null)
+						{
+							player.Remove_MaskRemover();
+						}
+					}
 				}
 			}
 		}

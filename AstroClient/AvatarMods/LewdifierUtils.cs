@@ -62,7 +62,10 @@
 			Refresh_termsToToggleOn();
 			Refresh_termsToToggleOff();
 			Refresh_AvatarsToSkip();
-
+			if (AvatarModifier.LewdifyLists != null)
+			{
+				AvatarModifier.LewdifyLists.setButtonText(ListButtonText);
+			}
 		}
 
 
@@ -70,9 +73,9 @@
 		{
 			get
 			{
-				return $"Terms To Enable : {TermsToToggleOn.Count}\n" +
-					   $"Terms To Disable : {TermsToToggleOff.Count}\n" +
-					   $"Avatars to Skip : {AvatarsToSkip.Count}";
+				return $"Terms To Enable: {TermsToToggleOn.Count}\n" +
+					   $"Terms To Disable: {TermsToToggleOff.Count}\n" +
+					   $"Avatars to Skip: {AvatarsToSkip.Count}";
 			}
 
 		}
@@ -91,14 +94,11 @@
 						TermsToToggleOn.Add(item.ToLower());
 					}
 				}
+				Save_TermsToToggleOn();
 			}
 			else
 			{
 				File.Create(TermsToEnableOnPath);
-			}
-			if (AvatarModifier.LewdifyLists != null)
-			{
-				AvatarModifier.LewdifyLists.setButtonText(ListButtonText);
 			}
 		}
 
@@ -115,14 +115,11 @@
 						TermsToToggleOff.Add(item.ToLower());
 					}
 				}
+				Save_TermsToToggleOff();
 			}
 			else
 			{
 				File.Create(TermsToEnableOffPath);
-			}
-			if (AvatarModifier.LewdifyLists != null)
-			{
-				AvatarModifier.LewdifyLists.setButtonText(ListButtonText);
 			}
 		}
 
@@ -141,14 +138,11 @@
 						AvatarsToSkip.Add(item.ToLower());
 					}
 				}
+				Save_AvatarToSkip();
 			}
 			else
 			{
 				File.Create(AvatarsToSkipPath);
-			}
-			if (AvatarModifier.LewdifyLists != null)
-			{
-				AvatarModifier.LewdifyLists.setButtonText(ListButtonText);
 			}
 		}
 	}
