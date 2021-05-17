@@ -317,10 +317,10 @@
 		{
 			if(player != null)
 			{
-				var item = player.gameObject.GetComponentInChildren<Lewdifier>();
+				var item = player.transform.root.gameObject.GetComponentInChildren<Lewdifier>();
 				if(item == null)
 				{
-					 item = player.gameObject.AddComponent<Lewdifier>();
+					 item = player.transform.root.gameObject.AddComponent<Lewdifier>();
 				}
 				else
 				{
@@ -334,10 +334,10 @@
 		{
 			if (player != null)
 			{
-				var item = player.gameObject.GetComponent<MaskRemover>();
+				var item = player.transform.root.gameObject.GetComponent<MaskRemover>();
 				if (item == null)
 				{
-					player.gameObject.AddComponent<MaskRemover>();
+					player.transform.root.gameObject.AddComponent<MaskRemover>();
 				}
 			}
 

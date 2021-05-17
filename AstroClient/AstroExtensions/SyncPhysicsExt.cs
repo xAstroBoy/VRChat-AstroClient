@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.SyncPhysicExt
 {
 	using UnityEngine;
-	using SyncPhysics = MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique;
+	using SyncPhysics = SyncPhysics;
 
 	public static class SyncPhysicsExt
 	{
@@ -9,7 +9,7 @@
 		{
 			if (instance != null)
 			{
-				instance.Method_Public_Void_2();
+				instance.Method_Public_Void_1();
 			}
 		}
 

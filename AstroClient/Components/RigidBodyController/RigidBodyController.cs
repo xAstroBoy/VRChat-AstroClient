@@ -7,7 +7,7 @@
 	using System;
 	using UnhollowerBaseLib.Attributes;
 	using UnityEngine;
-	using SyncPhysics = MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique;
+	using SyncPhysics = SyncPhysics;
 
 	public class RigidBodyController : GameEventsBehaviour
 	{

@@ -21,7 +21,7 @@
 	using VRCSDK2;
 	using Color = System.Drawing.Color;
 	using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
-	using SyncPhysics = MonoBehaviour1PublicPiOb1ObBoRiBoNuObRiUnique;
+	using SyncPhysics = SyncPhysics;
 	using AstroClient.Extensions;
 
 	public class GameObjectUtils : GameEvents
