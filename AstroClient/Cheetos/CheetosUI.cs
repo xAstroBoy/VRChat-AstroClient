@@ -106,7 +106,7 @@
 				{
 					try
 					{
-						MiscUtility.DelayFunction(5 * count, () =>
+						MiscUtility.DelayFunction(0.1f * count, () =>
 						{
 							Notification xx = FriendRequest.Create(player.UserID());
 							VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
