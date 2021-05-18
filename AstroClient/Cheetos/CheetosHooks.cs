@@ -117,8 +117,6 @@
 
 		private static bool OnAvatarDownload(ApiAvatar __0)
 		{
-			ModConsole.Log($"Avatar Found: {__0.name}");
-
 			var avatarData = new AvatarData()
 			{
 				AssetURL = __0.assetUrl,
