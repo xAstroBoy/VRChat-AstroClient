@@ -3,11 +3,12 @@
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroLibrary.Console;
 	using AstroClient.ItemTweaker;
-	using AstroClient.SyncPhysicExt;
 	using System;
 	using UnhollowerBaseLib.Attributes;
 	using UnityEngine;
 	using SyncPhysics = SyncPhysics;
+	using VRC.SDK3.Components;
+	using AstroClient.Extensions;
 
 	public class RigidBodyController : GameEventsBehaviour
 	{
@@ -505,7 +506,7 @@
 		private GameObject obj = null;
 		private SyncPhysics Sync = null;
 		private Rigidbody body = null;
-
+		private VRCObjectSync SDK3Sync = null;
 		internal bool EditMode = false;
 
 		private bool OrigKinematic = false;
