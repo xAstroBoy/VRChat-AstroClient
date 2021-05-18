@@ -137,7 +137,7 @@
 			if (packetData.NetworkEventID == PacketClientType.AVATAR_DATA)
 			{
 				var avatarData = Newtonsoft.Json.JsonConvert.DeserializeObject<AvatarData>(packetData.TextData);
-				Console.WriteLine($"Received AvatarData: {avatarData.Name}, {avatarData.AvatarID}");
+				bool save = false;
 
 				AvatarDataEntity avatarDataEntity = new AvatarDataEntity()
 				{
@@ -152,8 +152,26 @@
 					ThumbnailURL = avatarData.ThumbnailURL,
 					Version = avatarData.Version
 				};
-				avatarDataEntity.ID = avatarData.AvatarID;
-				avatarDataEntity.SaveAsync().GetAwaiter().GetResult();
+				var found = DB.Find<AvatarDataEntity>().OneAsync(avatarData.AvatarID).GetAwaiter().GetResult();
+
+				if (found != null)
+				{
+					if (found.Version > avatarData.Version)
+					{
+						save = true;
+					}
+				}
+				else
+				{
+					save = true;
+				}
+
+				if (save)
+				{
+					avatarDataEntity.ID = avatarData.AvatarID;
+					avatarDataEntity.SaveAsync().GetAwaiter().GetResult();
+					Console.WriteLine($"Received New/Updated AvatarData: {avatarData.Name}, {avatarData.AvatarID}");
+				}
 			}
 		}
 
