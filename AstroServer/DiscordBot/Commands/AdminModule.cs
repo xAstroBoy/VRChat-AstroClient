@@ -130,15 +130,25 @@
 
 		[Command("Avatar")]
 		[Summary("Avatar command")]
-		public async Task Avatar([Required] string query)
+		public async Task Avatar([Required] string query, int count = 1)
 		{
+			if (count > 10)
+			{
+				count = 10;
+			}
+			if (count < 1)
+			{
+				count = 1;
+			}
+
 			var avatars = await DB.Find<AvatarDataEntity>().ManyAsync(a => a.Name.Contains(query));
+			var results = avatars.Take(count);
 
 			if (avatars.Any())
 			{
-				foreach (var avatar in avatars)
+				foreach (var avatar in results)
 				{
-					await ReplyAsync($"Found: {avatar.Name} - {avatar.AvatarID}");
+					await ReplyAsync(null, false, CustomEmbed.GetAvatarEmbed(avatar));
 				}
 			}
 			else

@@ -47,6 +47,23 @@
 			}
 		}
 
+		public static Embed GetAvatarEmbed(AvatarDataEntity avatarDataEntity)
+		{
+			EmbedBuilder embedBuilder = new EmbedBuilder()
+			{
+				Title = avatarDataEntity.Name,
+				Color = Color.Blue,
+				ThumbnailUrl = avatarDataEntity.ThumbnailURL,
+			};
+
+			embedBuilder.AddField("ID", avatarDataEntity.AvatarID);
+			embedBuilder.AddField("Author", avatarDataEntity.AuthorName);
+			embedBuilder.AddField("Release", avatarDataEntity.ReleaseStatus);
+			embedBuilder.AddField("Version", avatarDataEntity.Version);
+
+			return embedBuilder.Build();
+		}
+
 		public static Embed GetKeyshareEmbed(Client origin, Client other)
 		{
 			var discordId = KeyManager.GetKeysDiscordOwner(origin.Key);
