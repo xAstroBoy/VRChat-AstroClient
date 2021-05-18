@@ -1,10 +1,12 @@
-﻿namespace AstroNetworkingLibrary.Serializable
+﻿namespace AstroServer.Serializable
 {
+	using MongoDB.Bson.Serialization.Attributes;
+	using MongoDB.Entities;
 	using System;
 	using System.Reflection;
 
 	[Serializable, Obfuscation]
-	public class AvatarData
+	public class AvatarDataEntity : Entity
 	{
 		public string AvatarID = string.Empty;
 

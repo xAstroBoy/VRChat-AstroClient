@@ -3,14 +3,18 @@
 	#region Imports
 
 	using AstroLibrary.Console;
+	using AstroNetworkingLibrary;
+	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using Harmony;
 	using MelonLoader;
+	using Newtonsoft.Json;
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
 	using System.Reflection;
+	using VRC.Core;
 
 	#endregion
 
@@ -98,16 +102,41 @@
 		{
 			try
 			{
-				ModConsole.DebugLog("[AstroClient Cheetos Patches] Start. . .");
+				ModConsole.Log("[AstroClient Cheetos Patches] Start. . .");
 
+				new Patch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_1)), GetPatch(nameof(OnAvatarDownload)));
 				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
 				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
 
-				ModConsole.DebugLog("[AstroClient Cheetos Patches] DONE!");
+				ModConsole.Log("[AstroClient Cheetos Patches] DONE!");
 				Patch.DoPatches();
 			}
 			catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
 			finally { }
+		}
+
+		private static bool OnAvatarDownload(ApiAvatar __0)
+		{
+			ModConsole.Log($"Avatar Found: {__0.name}");
+
+			var avatarData = new AvatarData()
+			{
+				AssetURL = __0.assetUrl,
+				AuthorID = __0.authorId,
+				AuthorName = __0.authorName,
+				Description = __0.description,
+				AvatarID = __0.id,
+				ImageURL = __0.imageUrl,
+				ThumbnailURL = __0.thumbnailImageUrl,
+				Name = __0.name,
+				ReleaseStatus = __0.releaseStatus,
+				Version = __0.version
+			};
+
+			var json = JsonConvert.SerializeObject(avatarData);
+			AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
+
+			return true;
 		}
 
 		private static void OnPhotonPlayerJoin(ref Photon.Realtime.Player __0)

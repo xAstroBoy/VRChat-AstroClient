@@ -1,6 +1,7 @@
 ﻿namespace AstroServer.DiscordBot.Commands
 {
 	using AstroNetworkingLibrary;
+	using AstroNetworkingLibrary.Serializable;
 	using AstroServer.DiscordBot.Attributes;
 	using AstroServer.Serializable;
 	using Discord.Commands;
@@ -124,6 +125,25 @@
 			else
 			{
 				_ = await ReplyAsync("There are no clients currently connected");
+			}
+		}
+
+		[Command("Avatar")]
+		[Summary("Avatar command")]
+		public async Task Avatar([Required] string query)
+		{
+			var avatars = await DB.Find<AvatarDataEntity>().ManyAsync(a => a.Name.Contains(query));
+
+			if (avatars.Any())
+			{
+				foreach (var avatar in avatars)
+				{
+					await ReplyAsync($"Found: {avatar.Name} - {avatar.AvatarID}");
+				}
+			}
+			else
+			{
+				await ReplyAsync("No avatars found!");
 			}
 		}
 	}

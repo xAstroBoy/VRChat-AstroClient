@@ -63,7 +63,7 @@
 			}
 
 			AvatarData data = new AvatarData();
-			data.ID = __0.id;
+			data.AvatarID = __0.id;
 			data.Name = __0.name;
 			data.Description = __0.description;
 			data.AuthorID = __0.authorId;

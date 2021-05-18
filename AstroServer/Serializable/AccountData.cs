@@ -6,11 +6,11 @@
 	[Serializable]
 	public class AccountData : Entity
 	{
+		public string Key = string.Empty;
+
 		public string Name = string.Empty;
 
 		public ulong DiscordID = 0;
-
-		public string Key = string.Empty;
 
 		public bool IsDeveloper = false;
 

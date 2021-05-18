@@ -5,6 +5,10 @@
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
 	using AstroServer.DiscordBot;
+	using AstroServer.Serializable;
+	using MongoDB.Bson.IO;
+	using MongoDB.Entities;
+	using Newtonsoft.Json;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -70,7 +74,7 @@
 			SendAll(new PacketData(PacketServerType.KEEP_ALIVE));
 		}
 
-		private static void ProcessInput(object sender, PacketData packetData)
+		private static void ProcessInputAsync(object sender, PacketData packetData)
 		{
 			if (packetData.NetworkEventID != PacketClientType.KEEP_ALIVE)
 			{
@@ -128,6 +132,28 @@
 			{
 				client.InstanceID = packetData.TextData;
 				InstanceManager.InstanceJoined(client);
+			}
+
+			if (packetData.NetworkEventID == PacketClientType.AVATAR_DATA)
+			{
+				var avatarData = Newtonsoft.Json.JsonConvert.DeserializeObject<AvatarData>(packetData.TextData);
+				Console.WriteLine($"Received AvatarData: {avatarData.Name}, {avatarData.AvatarID}");
+
+				AvatarDataEntity avatarDataEntity = new AvatarDataEntity()
+				{
+					AssetURL = avatarData.AssetURL,
+					AvatarID = avatarData.AvatarID,
+					AuthorName = avatarData.AuthorName,
+					AuthorID = avatarData.AuthorID,
+					Description = avatarData.Description,
+					ImageURL = avatarData.ImageURL,
+					Name = avatarData.Name,
+					ReleaseStatus = avatarData.ReleaseStatus,
+					ThumbnailURL = avatarData.ThumbnailURL,
+					Version = avatarData.Version
+				};
+				avatarDataEntity.ID = avatarData.AvatarID;
+				avatarDataEntity.SaveAsync().GetAwaiter().GetResult();
 			}
 		}
 
@@ -212,7 +238,7 @@
 
 		private static void OnReceivedPacket(object sender, ReceivedPacketEventArgs e)
 		{
-			ProcessInput(sender, e.Data);
+			ProcessInputAsync(sender, e.Data);
 		}
 	}
 }
