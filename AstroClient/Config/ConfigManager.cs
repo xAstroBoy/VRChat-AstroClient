@@ -10,6 +10,8 @@
 	{
 		private static string ConfigFolder = Environment.CurrentDirectory + @"\AstroClient";
 
+        private static string ConfigLewdifyPath = ConfigFolder + @"\Lewdify";
+
 		private static string ConfigPath = ConfigFolder + @"\Config.json";
 
 		private static string ConfigUIPath = ConfigFolder + @"\ConfigUI.json";
@@ -95,6 +97,11 @@
 				fs.Dispose();
 				Save();
 				ModConsole.DebugWarning($"ConfigFlight File Created: {ConfigFlightPath}");
+			}
+			if (!Directory.Exists(ConfigLewdifyPath))
+			{
+				Directory.CreateDirectory(ConfigLewdifyPath);
+				ModConsole.DebugWarning($"ConfigFlight File Created: {ConfigLewdifyPath}");
 			}
 		}
 
