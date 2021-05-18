@@ -3,7 +3,6 @@
 	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using AstroClient.ItemTweaker;
-	using AstroClient.SyncPhysicExt;
 	using Boo.Lang;
 	using DayClientML2.Utility.Extensions;
 	using Il2CppSystem.Text;
