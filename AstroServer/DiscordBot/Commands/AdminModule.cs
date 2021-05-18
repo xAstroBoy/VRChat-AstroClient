@@ -82,20 +82,6 @@
 			}
 		}
 
-		[Command("SendAll")]
-		[Summary("SendAll command")]
-		public async Task SendAll([Required] string cmd)
-		{
-			StringBuilder stringBuilder = new StringBuilder();
-			foreach (Client client in ClientServer.Clients)
-			{
-				//client.Send(cmd);
-				stringBuilder.Append($"Command ran on: {client.Name}, {client.UserID} \r\n");
-			}
-
-			_ = await ReplyAsync(stringBuilder.ToString());
-		}
-
 		[Command("Kick")]
 		[Summary("Kick command")]
 		public async Task Kick([Required] string name)
@@ -103,7 +89,7 @@
 			StringBuilder stringBuilder = new StringBuilder();
 			foreach (Client client in ClientServer.Clients.Where(c => c.Name.Contains(name)))
 			{
-				client.Send(new AstroNetworkingLibrary.Serializable.PacketData(PacketServerType.EXIT, "You have been kicked"));
+				client.Send(new PacketData(PacketServerType.EXIT, "You have been kicked"));
 				stringBuilder.Append($"Kicked: {client.Name}, {client.UserID} \r\n");
 			}
 
@@ -141,12 +127,11 @@
 				count = 1;
 			}
 
-			var avatars = await DB.Find<AvatarDataEntity>().ManyAsync(a => a.Name.Contains(query));
-			var results = avatars.Take(count);
+			var avatars = await DB.Find<AvatarDataEntity>().ManyAsync(a => a.Name.ToLower().Contains(query.ToLower()));
 
 			if (avatars.Any())
 			{
-				foreach (var avatar in results)
+				foreach (var avatar in avatars.Take(count))
 				{
 					await ReplyAsync(null, false, CustomEmbed.GetAvatarEmbed(avatar));
 				}
@@ -154,6 +139,25 @@
 			else
 			{
 				await ReplyAsync("No avatars found!");
+			}
+		}
+
+		[Command("Info")]
+		[Summary("Info command")]
+		public async Task Info(int code = 0)
+		{
+			switch (code)
+			{
+				case 0:
+					{
+						var avatarCount = await DB.CountAsync<AvatarDataEntity>();
+						await ReplyAsync($"There are {avatarCount} avatars in the database.");
+						break;
+					}
+
+				default:
+					await ReplyAsync("Invalid code");
+					break;
 			}
 		}
 	}
