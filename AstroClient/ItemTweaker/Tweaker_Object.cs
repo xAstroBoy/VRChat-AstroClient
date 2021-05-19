@@ -24,12 +24,12 @@
 			CurrentSelectedItemEnabledESP = false;
 			if (LockHoldItem != null)
 			{
-				LockHoldItem.setToggleState(false);
+				LockHoldItem.SetToggleState(false);
 			}
 
 			if (LockHoldItem != null)
 			{
-				LockHoldItem.setToggleState(false);
+				LockHoldItem.SetToggleState(false);
 			}
 		}
 
@@ -47,13 +47,13 @@
 			{
 				if (TransformToEditBtn != null)
 				{
-					TransformToEditBtn.setButtonText("Editing: " + obj.name);
-					TransformToEditBtn.setToolTip("Editing: " + obj.name);
+					TransformToEditBtn.SetButtonText("Editing: " + obj.name);
+					TransformToEditBtn.SetToolTip("Editing: " + obj.name);
 				}
 				if (GameObjMenu.GameObjMenuObjectToEdit != null)
 				{
-					GameObjMenu.GameObjMenuObjectToEdit.setButtonText("Editing: " + obj.name);
-					GameObjMenu.GameObjMenuObjectToEdit.setToolTip("Editing: " + obj.name);
+					GameObjMenu.GameObjMenuObjectToEdit.SetButtonText("Editing: " + obj.name);
+					GameObjMenu.GameObjMenuObjectToEdit.SetToolTip("Editing: " + obj.name);
 				}
 				UpdateCapturedButtonColor(obj.active);
 			}
@@ -61,13 +61,13 @@
 			{
 				if (TransformToEditBtn != null)
 				{
-					TransformToEditBtn.setButtonText("Pick a Gameobject to start!");
-					TransformToEditBtn.setToolTip("Pick a Gameobject to start!");
+					TransformToEditBtn.SetButtonText("Pick a Gameobject to start!");
+					TransformToEditBtn.SetToolTip("Pick a Gameobject to start!");
 				}
 				if (GameObjMenu.GameObjMenuObjectToEdit != null)
 				{
-					GameObjMenu.GameObjMenuObjectToEdit.setButtonText("Pick a Gameobject to start!");
-					GameObjMenu.GameObjMenuObjectToEdit.setToolTip("Pick a Gameobject to start!");
+					GameObjMenu.GameObjMenuObjectToEdit.SetButtonText("Pick a Gameobject to start!");
+					GameObjMenu.GameObjMenuObjectToEdit.SetToolTip("Pick a Gameobject to start!");
 				}
 			}
 		}
@@ -76,11 +76,11 @@
 		{
 			if (isActive)
 			{
-				TransformToEditBtn.setTextColor(Color.green);
+				TransformToEditBtn.SetTextColor(Color.green);
 			}
 			else
 			{
-				TransformToEditBtn.setTextColor(Color.red);
+				TransformToEditBtn.SetTextColor(Color.red);
 			}
 		}
 
@@ -101,7 +101,7 @@
 				_DoNotPickOtherItems = value;
 				if (LockHoldItem != null)
 				{
-					LockHoldItem.setToggleState(value);
+					LockHoldItem.SetToggleState(value);
 				}
 			}
 		}

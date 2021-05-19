@@ -88,8 +88,8 @@
 		{
 			if (WorldCheatsShortcut != null)
 			{
-				WorldCheatsShortcut.setButtonText(ButtonText + " Shortcut.");
-				WorldCheatsShortcut.setToolTip(ButtonText + " Shortcut.");
+				WorldCheatsShortcut.SetButtonText(ButtonText + " Shortcut.");
+				WorldCheatsShortcut.SetToolTip(ButtonText + " Shortcut.");
 			}
 		}
 
@@ -97,8 +97,8 @@
 		{
 			if (WorldCheatsShortcut != null)
 			{
-				WorldCheatsShortcut.setButtonText(ButtonText + " Shortcut.");
-				WorldCheatsShortcut.setToolTip(ButtonToolTip + " Shortcut.");
+				WorldCheatsShortcut.SetButtonText(ButtonText + " Shortcut.");
+				WorldCheatsShortcut.SetToolTip(ButtonToolTip + " Shortcut.");
 			}
 		}
 
@@ -106,7 +106,7 @@
 		{
 			if (WorldCheatsShortcut != null)
 			{
-				WorldCheatsShortcut.setTextColor(color);
+				WorldCheatsShortcut.SetTextColor(color);
 			}
 		}
 
@@ -114,7 +114,7 @@
 		{
 			if (WorldCheatsShortcut != null)
 			{
-				WorldCheatsShortcut.setAction(new Action(() => { btn.getMainButton().getGameObject().GetComponent<Button>().onClick.Invoke(); }));
+				WorldCheatsShortcut.SetAction(new Action(() => { btn.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }));
 			}
 		}
 
@@ -122,7 +122,7 @@
 		{
 			if (WorldCheatsShortcut != null)
 			{
-				WorldCheatsShortcut.setAction(new Action(() => { btn.getGameObject().GetComponent<Button>().onClick.Invoke(); }));
+				WorldCheatsShortcut.SetAction(new Action(() => { btn.GetGameObject().GetComponent<Button>().onClick.Invoke(); }));
 			}
 		}
 
@@ -130,7 +130,7 @@
 		{
 			if (WorldCheatsShortcut != null)
 			{
-				WorldCheatsShortcut.setAction(null);
+				WorldCheatsShortcut.SetAction(null);
 			}
 		}
 
@@ -138,8 +138,8 @@
 		{
 			if (WorldCheatsShortcut != null)
 			{
-				WorldCheatsShortcut.setActive(isActive);
-				WorldCheatsShortcut.setIntractable(isActive);
+				WorldCheatsShortcut.SetActive(isActive);
+				WorldCheatsShortcut.SetIntractable(isActive);
 			}
 		}
 	}

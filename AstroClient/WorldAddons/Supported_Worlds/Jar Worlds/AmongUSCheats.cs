@@ -37,7 +37,7 @@
 			SerializerPos = Vector3.zero;
 			if (ToggleSerializerShortcut != null)
 			{
-				ToggleSerializerShortcut.setToggleState(false);
+				ToggleSerializerShortcut.SetToggleState(false);
 			}
 			BodyOutlines.Clear();
 			BodyESPs = false;
@@ -99,23 +99,23 @@
 			}
 			if (GameStartbtn != null)
 			{
-				GameStartbtn.setActive(StartGameEvent.IsNotNull());
-				GameStartbtn.setIntractable(StartGameEvent.IsNotNull());
+				GameStartbtn.SetActive(StartGameEvent.IsNotNull());
+				GameStartbtn.SetIntractable(StartGameEvent.IsNotNull());
 			}
 			if (GameAbortbtn != null)
 			{
-				GameAbortbtn.setActive(AbortGameEvent.IsNotNull());
-				GameAbortbtn.setIntractable(AbortGameEvent.IsNotNull());
+				GameAbortbtn.SetActive(AbortGameEvent.IsNotNull());
+				GameAbortbtn.SetIntractable(AbortGameEvent.IsNotNull());
 			}
 			if (GameVictoryCrewmateBtn != null)
 			{
-				GameVictoryCrewmateBtn.setActive(VictoryCrewmateEvent.IsNotNull());
-				GameVictoryCrewmateBtn.setIntractable(VictoryCrewmateEvent.IsNotNull());
+				GameVictoryCrewmateBtn.SetActive(VictoryCrewmateEvent.IsNotNull());
+				GameVictoryCrewmateBtn.SetIntractable(VictoryCrewmateEvent.IsNotNull());
 			}
 			if (GameVictoryImpostorBtn != null)
 			{
-				GameVictoryImpostorBtn.setActive(VictoryImpostorEvent.IsNotNull());
-				GameVictoryImpostorBtn.setIntractable(VictoryImpostorEvent.IsNotNull());
+				GameVictoryImpostorBtn.SetActive(VictoryImpostorEvent.IsNotNull());
+				GameVictoryImpostorBtn.SetIntractable(VictoryImpostorEvent.IsNotNull());
 			}
 			if (JarRoleController.JarRoleLinks.Count() != 0)
 			{
@@ -141,8 +141,8 @@
 				if (AmongUsCheatsPage != null)
 				{
 					ModConsole.Log($"Recognized {name} World, Unlocking Among US cheats menu!", System.Drawing.Color.Green);
-					AmongUsCheatsPage.getMainButton().setIntractable(true);
-					AmongUsCheatsPage.getMainButton().setTextColor(Color.green);
+					AmongUsCheatsPage.GetMainButton().SetIntractable(true);
+					AmongUsCheatsPage.GetMainButton().SetTextColor(Color.green);
 				}
 				FindAmongUsObjects();
 			}
@@ -151,8 +151,8 @@
 				HasAmongUsWorldLoaded = false;
 				if (AmongUsCheatsPage != null)
 				{
-					AmongUsCheatsPage.getMainButton().setIntractable(false);
-					AmongUsCheatsPage.getMainButton().setTextColor(Color.red);
+					AmongUsCheatsPage.GetMainButton().SetIntractable(false);
+					AmongUsCheatsPage.GetMainButton().SetTextColor(Color.red);
 				}
 			}
 		}
@@ -297,7 +297,7 @@
 				_RoleSwapper_GetImpostorRole = value;
 				if (GetImpostorRoleBtn != null)
 				{
-					GetImpostorRoleBtn.setToggleState(value);
+					GetImpostorRoleBtn.SetToggleState(value);
 				}
 				if (value)
 				{
@@ -378,7 +378,7 @@
 				_BodyESps = value;
 				if (GameBodyESPBtn != null)
 				{
-					GameBodyESPBtn.setToggleState(value);
+					GameBodyESPBtn.SetToggleState(value);
 				}
 			}
 		}

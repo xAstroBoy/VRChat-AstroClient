@@ -73,12 +73,12 @@
 
 		public static void RotateButton(QMSingleButton button, float rotation)
 		{
-			button.getGameObject().transform.Rotate(new Vector3(0f, 0f, rotation));
+			button.GetGameObject().transform.Rotate(new Vector3(0f, 0f, rotation));
 		}
 
 		public static void SetButtonToArrow(QMSingleButton button, ArrowDirection direction)
 		{
-			button.getGameObject().GetComponent<Image>().sprite = Utils.QuickMenu.transform.Find("QuickMenu_NewElements/_CONTEXT/QM_Context_User_Selected/NextArrow_Button").GetComponent<Image>().sprite;
+			button.GetGameObject().GetComponent<Image>().sprite = Utils.QuickMenu.transform.Find("QuickMenu_NewElements/_CONTEXT/QM_Context_User_Selected/NextArrow_Button").GetComponent<Image>().sprite;
 			switch (direction)
 			{
 				case ArrowDirection.Up:

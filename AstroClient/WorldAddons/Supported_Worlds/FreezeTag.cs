@@ -31,7 +31,7 @@
 				_AutomaticallyUnfreeze = value;
 				if (UnfreezeAutoMode != null)
 				{
-					UnfreezeAutoMode.setToggleState(value);
+					UnfreezeAutoMode.SetToggleState(value);
 				}
 			}
 		}
@@ -67,8 +67,8 @@
 				IsFreezeTag = true;
 				if (FreezeTagCheatsPage != null)
 				{
-					FreezeTagCheatsPage.getMainButton().setIntractable(true);
-					FreezeTagCheatsPage.getMainButton().setTextColor(Color.green);
+					FreezeTagCheatsPage.GetMainButton().SetIntractable(true);
+					FreezeTagCheatsPage.GetMainButton().SetTextColor(Color.green);
 				}
 				ModConsole.DebugLog($"Recognized {name} World, removing anti-cheat mechanism!");
 				var SpawnRoof = GameObjectFinder.Find("spawn/mainroom 2/ceiling");
@@ -87,8 +87,8 @@
 				IsFreezeTag = false;
 				if (FreezeTagCheatsPage != null)
 				{
-					FreezeTagCheatsPage.getMainButton().setIntractable(false);
-					FreezeTagCheatsPage.getMainButton().setTextColor(Color.red);
+					FreezeTagCheatsPage.GetMainButton().SetIntractable(false);
+					FreezeTagCheatsPage.GetMainButton().SetTextColor(Color.red);
 				}
 			}
 		}

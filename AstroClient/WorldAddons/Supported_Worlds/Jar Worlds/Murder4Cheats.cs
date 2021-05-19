@@ -113,23 +113,23 @@
 
 			if (GameStartbtn != null)
 			{
-				GameStartbtn.setActive(StartGameEvent.IsNotNull());
-				GameStartbtn.setIntractable(StartGameEvent.IsNotNull());
+				GameStartbtn.SetActive(StartGameEvent.IsNotNull());
+				GameStartbtn.SetIntractable(StartGameEvent.IsNotNull());
 			}
 			if (GameAbortbtn != null)
 			{
-				GameAbortbtn.setActive(AbortGameEvent.IsNotNull());
-				GameAbortbtn.setIntractable(AbortGameEvent.IsNotNull());
+				GameAbortbtn.SetActive(AbortGameEvent.IsNotNull());
+				GameAbortbtn.SetIntractable(AbortGameEvent.IsNotNull());
 			}
 			if (GameVictoryBystanderBtn != null)
 			{
-				GameVictoryBystanderBtn.setActive(VictoryBystanderEvent.IsNotNull());
-				GameVictoryBystanderBtn.setIntractable(VictoryBystanderEvent.IsNotNull());
+				GameVictoryBystanderBtn.SetActive(VictoryBystanderEvent.IsNotNull());
+				GameVictoryBystanderBtn.SetIntractable(VictoryBystanderEvent.IsNotNull());
 			}
 			if (GameVictoryMurdererBtn != null)
 			{
-				GameVictoryMurdererBtn.setActive(VictoryMurdererEvent.IsNotNull());
-				GameVictoryMurdererBtn.setIntractable(VictoryMurdererEvent.IsNotNull());
+				GameVictoryMurdererBtn.SetActive(VictoryMurdererEvent.IsNotNull());
+				GameVictoryMurdererBtn.SetIntractable(VictoryMurdererEvent.IsNotNull());
 			}
 
 			item_Grenade.RenameObject("Grenade");
@@ -244,8 +244,8 @@
 				if (Murder4CheatPage != null)
 				{
 					ModConsole.Log($"Recognized {name} World, Unlocking Murder 4 cheats menu!", System.Drawing.Color.Green);
-					Murder4CheatPage.getMainButton().setIntractable(true);
-					Murder4CheatPage.getMainButton().setTextColor(Color.green);
+					Murder4CheatPage.GetMainButton().SetIntractable(true);
+					Murder4CheatPage.GetMainButton().SetTextColor(Color.green);
 				}
 				FindGameMurderObjects();
 			}
@@ -254,8 +254,8 @@
 				HasMurder4WorldLoaded = false;
 				if (Murder4CheatPage != null)
 				{
-					Murder4CheatPage.getMainButton().setIntractable(false);
-					Murder4CheatPage.getMainButton().setTextColor(Color.red);
+					Murder4CheatPage.GetMainButton().SetIntractable(false);
+					Murder4CheatPage.GetMainButton().SetTextColor(Color.red);
 				}
 			}
 		}
@@ -264,7 +264,7 @@
 		{
 			if (KnifesGrabbableToggle != null)
 			{
-				KnifesGrabbableToggle.setToggleState(false);
+				KnifesGrabbableToggle.SetToggleState(false);
 			}
 			item_Knife_0 = null;
 			item_Knife_1 = null;
@@ -311,7 +311,7 @@
 			OnlySelfHasPatreonPerk = false;
 			if (Murder4ESPtoggler != null)
 			{
-				Murder4ESPtoggler.setToggleState(false);
+				Murder4ESPtoggler.SetToggleState(false);
 			}
 			UseGravity = true;
 		}
@@ -333,7 +333,7 @@
 				Knifes.SetGravity(value);
 				if (ToggleGravityMode != null)
 				{
-					ToggleGravityMode.setToggleState(value);
+					ToggleGravityMode.SetToggleState(value);
 				}
 				_UseGravity = value;
 
@@ -384,7 +384,7 @@
 		public static void Murder4CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
 		{
 			Murder4CheatPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Murder 4 Cheats", "Manage Murder 4 Cheats", null, null, null, null, btnHalf);
-			Murder4CheatPage.getMainButton().SetResizeTextForBestFit(true);
+			Murder4CheatPage.GetMainButton().SetResizeTextForBestFit(true);
 
 			QMNestedButton MurderItemTeleporter = new QMNestedButton(Murder4CheatPage, 1, 0, "Item Teleporter", "Size Items Editor", null, null, null, null, true);
 
@@ -732,7 +732,7 @@
 				_OnlySelfHasPatreonPerk = value;
 				if (GetSelfPatreonGunBtn != null)
 				{
-					GetSelfPatreonGunBtn.setToggleState(value);
+					GetSelfPatreonGunBtn.SetToggleState(value);
 				}
 				if (value)
 				{
@@ -754,7 +754,7 @@
 				_EveryoneHasPatreonPerk = value;
 				if (GetEveryonePatreonGunBtn != null)
 				{
-					GetEveryonePatreonGunBtn.setToggleState(value);
+					GetEveryonePatreonGunBtn.SetToggleState(value);
 				}
 				if (value)
 				{
@@ -808,7 +808,7 @@
 				_DoUnlockedSound = value;
 				if (DoUnlockedSoundbtn != null)
 				{
-					DoUnlockedSoundbtn.setToggleState(value);
+					DoUnlockedSoundbtn.SetToggleState(value);
 				}
 			}
 		}
@@ -829,15 +829,15 @@
 				_isChristmasMode = value;
 				if (PresentClicker != null)
 				{
-					PresentClicker.setActive(value);
+					PresentClicker.SetActive(value);
 				}
 				if (PresentSpawner != null)
 				{
-					PresentSpawner.setActive(value);
+					PresentSpawner.SetActive(value);
 				}
 				if (PresentTeleporter != null)
 				{
-					PresentTeleporter.setActive(value);
+					PresentTeleporter.SetActive(value);
 				}
 			}
 		}
@@ -915,7 +915,7 @@
 				_RoleSwapper_GetDetectiveRole = value;
 				if (GetDetectiveRoleBtn != null)
 				{
-					GetDetectiveRoleBtn.setToggleState(value);
+					GetDetectiveRoleBtn.SetToggleState(value);
 				}
 
 				if (value)
@@ -949,7 +949,7 @@
 				_RoleSwapper_GetMurdererRole = value;
 				if (GetMurdererRoleBtn != null)
 				{
-					GetMurdererRoleBtn.setToggleState(value);
+					GetMurdererRoleBtn.SetToggleState(value);
 				}
 				if (value)
 				{

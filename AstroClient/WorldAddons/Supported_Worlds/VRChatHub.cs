@@ -16,7 +16,7 @@
 		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
 			VRChat_Hub_Addons = new QMNestedButton(menu, x, y, "Hub Mods", "Control HUB World.", null, null, null, null, btnHalf);
-			VRChat_Hub_Addons.getMainButton().SetResizeTextForBestFit(true);
+			VRChat_Hub_Addons.GetMainButton().SetResizeTextForBestFit(true);
 			HubLock = new QMToggleButton(VRChat_Hub_Addons, 1, 0, "Hub Button Lock ON", new Action(ToggleHubButtonLock), "Hub Button Lock OFF", new Action(ToggleHubButtonLock), "Prevents other people from annoying you in the hub by fighting back!", null, null, null, btnHalf);
 			new QMSingleButton(VRChat_Hub_Addons, 2, 0, "Active all Hub Objects!", new Action(ToggleAllHubObjectOn), "Enable all Hub Props!", null, null);
 			IgnoreSelfFight = new QMToggleButton(VRChat_Hub_Addons, 3, 0, "Ignore Self ON", new Action(ToggleIgnoreSelf), "Ignore Self OFF", new Action(ToggleIgnoreSelf), "Prevents other people from annoying you in the hub by fighting back!", null, null, null, false);
@@ -64,11 +64,11 @@
 			Button_toggle_Boats = null;
 			if (HubLock != null)
 			{
-				HubLock.setToggleState(IsHubButtonLocked);
+				HubLock.SetToggleState(IsHubButtonLocked);
 			}
 			if (IgnoreSelfFight != null)
 			{
-				IgnoreSelfFight.setToggleState(IgnoreSelf);
+				IgnoreSelfFight.SetToggleState(IgnoreSelf);
 			}
 		}
 

@@ -49,7 +49,7 @@
 			LocalMotionState = null;
 			if (FreezePlayerOnQMOpenToggle != null)
 			{
-				FreezePlayerOnQMOpenToggle.setToggleState(FreezePlayerOnQMOpen);
+				FreezePlayerOnQMOpenToggle.SetToggleState(FreezePlayerOnQMOpen);
 			}
 			UnfreezePlayerOnce = true;
 		}
@@ -201,7 +201,7 @@
 			FreezePlayerOnQMOpen = !FreezePlayerOnQMOpen;
 			if (FreezePlayerOnQMOpenToggle != null)
 			{
-				FreezePlayerOnQMOpenToggle.setToggleState(FreezePlayerOnQMOpen);
+				FreezePlayerOnQMOpenToggle.SetToggleState(FreezePlayerOnQMOpen);
 			}
 			UnfreezePlayerOnce = false;
 		}

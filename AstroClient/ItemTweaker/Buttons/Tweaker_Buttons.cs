@@ -88,7 +88,7 @@
 			}
 
 			CurrentObjectCoordsBtn = new QMSingleButton(menu, 5, -1, "", null, "Shows Object Coords", null, null, false);
-			CurrentObjectCoordsBtn.getGameObject().GetComponent<UnityEngine.UI.Image>().enabled = false;
+			CurrentObjectCoordsBtn.GetGameObject().GetComponent<UnityEngine.UI.Image>().enabled = false;
 			CurrentObjectCoordsBtn.SetResizeTextForBestFit(true);
 
 			new QMSingleButton(menu, 6, -2f, "Copy Local Position.", new Action(() => { Tweaker_Object.GetGameObjectToEdit().CopyLocalPosition(); }), "Copies Object Current Local Position in clipboard.", null, Color.yellow, true);
@@ -256,22 +256,22 @@
 					{
 						if (HasPickupComponent != null)
 						{
-							HasPickupComponent.setTextColor(Color.red);
+							HasPickupComponent.SetTextColor(Color.red);
 						}
 
 						#region PickupOrientation
 
 						if (Pickup_PickupOrientation_prop_any != null)
 						{
-							Pickup_PickupOrientation_prop_any.setTextColor(Color.red);
+							Pickup_PickupOrientation_prop_any.SetTextColor(Color.red);
 						}
 						if (Pickup_PickupOrientation_prop_Grip != null)
 						{
-							Pickup_PickupOrientation_prop_Grip.setTextColor(Color.red);
+							Pickup_PickupOrientation_prop_Grip.SetTextColor(Color.red);
 						}
 						if (Pickup_PickupOrientation_prop_Gun != null)
 						{
-							Pickup_PickupOrientation_prop_Gun.setTextColor(Color.red);
+							Pickup_PickupOrientation_prop_Gun.SetTextColor(Color.red);
 						}
 
 						#endregion PickupOrientation
@@ -280,15 +280,15 @@
 
 						if (Pickup_AutoHoldMode_prop_AutoDetect != null)
 						{
-							Pickup_AutoHoldMode_prop_AutoDetect.setTextColor(Color.red);
+							Pickup_AutoHoldMode_prop_AutoDetect.SetTextColor(Color.red);
 						}
 						if (Pickup_AutoHoldMode_prop_Yes != null)
 						{
-							Pickup_AutoHoldMode_prop_Yes.setTextColor(Color.red);
+							Pickup_AutoHoldMode_prop_Yes.SetTextColor(Color.red);
 						}
 						if (Pickup_AutoHoldMode_prop_No != null)
 						{
-							Pickup_AutoHoldMode_prop_No.setTextColor(Color.red);
+							Pickup_AutoHoldMode_prop_No.SetTextColor(Color.red);
 						}
 
 						#endregion Autohold
@@ -297,7 +297,7 @@
 
 						if (Pickup_allowManipulationWhenEquipped != null)
 						{
-							Pickup_allowManipulationWhenEquipped.setToggleState(false);
+							Pickup_allowManipulationWhenEquipped.SetToggleState(false);
 						}
 
 						#endregion AllowManipulationWhenEquipped
@@ -306,7 +306,7 @@
 
 						if (Pickup_pickupable != null)
 						{
-							Pickup_pickupable.setToggleState(false);
+							Pickup_pickupable.SetToggleState(false);
 						}
 
 						#endregion Pickupable
@@ -315,7 +315,7 @@
 
 						if (Pickup_DisallowTheft != null)
 						{
-							Pickup_DisallowTheft.setToggleState(false);
+							Pickup_DisallowTheft.SetToggleState(false);
 						}
 
 						#endregion DisallowTheft
@@ -325,7 +325,7 @@
 				{
 					if (HasPickupComponent != null)
 					{
-						HasPickupComponent.setTextColor(Color.green);
+						HasPickupComponent.SetTextColor(Color.green);
 					}
 				}
 			}
@@ -468,7 +468,7 @@
 		{
 			var Menu = new QMNestedButton(main, x, y, "Internal Udon Events ", "Interact with Internal Udon Events", null, null, null, null, btnHalf);
 			var whytfisthishere = new QMNestedButton(Menu, -5f, -5f, "", "");
-			whytfisthishere.getMainButton().setActive(false);
+			whytfisthishere.GetMainButton().SetActive(false);
 			var MainScroll = new QMScrollMenu(whytfisthishere);
 			var subscroll = new QMScrollMenu(Menu);
 			new QMSingleButton(Menu, 0, -1.5f, "Refresh", delegate
@@ -499,7 +499,7 @@
 								}, (action.gameObject)?.ToString() + " Run " + subaction.Key));
 							}
 						});
-						MainScroll.BaseMenu.getMainButton().getGameObject().GetComponent<UnityEngine.UI.Button>()
+						MainScroll.BaseMenu.GetMainButton().GetGameObject().GetComponent<UnityEngine.UI.Button>()
 							.onClick.Invoke();
 					}, action.interactText));
 				}
@@ -509,7 +509,7 @@
 		public static void VRC_InteractableSubMenu(QMTabMenu main, float x, float y, bool btnHalf)
 		{
 			var menu = new QMNestedButton(main, x, y, "Internal VRC_Interactable ", "Interact with Internal VRC_Interactable Triggers", null, null, null, null, btnHalf);
-			menu.getMainButton().SetResizeTextForBestFit(true);
+			menu.GetMainButton().SetResizeTextForBestFit(true);
 			var scroll = new QMScrollMenu(menu);
 			new QMSingleButton(menu, 0, -1, "Refresh", delegate
 			{
@@ -567,18 +567,18 @@
 			{
 				if (TeleportToMePickup != null)
 				{
-					TeleportToMePickup.setButtonText(GetTeleportToMeBtnText);
-					TeleportToMePickup.setToolTip(GetTeleportToMeBtnText);
+					TeleportToMePickup.SetButtonText(GetTeleportToMeBtnText);
+					TeleportToMePickup.SetToolTip(GetTeleportToMeBtnText);
 				}
 				if (SubMenuTeleportToMe != null)
 				{
-					SubMenuTeleportToMe.setButtonText(GetTeleportToMeBtnText);
-					SubMenuTeleportToMe.setToolTip(GetTeleportToMeBtnText);
+					SubMenuTeleportToMe.SetButtonText(GetTeleportToMeBtnText);
+					SubMenuTeleportToMe.SetToolTip(GetTeleportToMeBtnText);
 				}
 				if (SelWorld_TeleportToMePickup != null)
 				{
-					SelWorld_TeleportToMePickup.setButtonText(GetTeleportToMeBtnText);
-					SelWorld_TeleportToMePickup.setToolTip(GetTeleportToMeBtnText);
+					SelWorld_TeleportToMePickup.SetButtonText(GetTeleportToMeBtnText);
+					SelWorld_TeleportToMePickup.SetToolTip(GetTeleportToMeBtnText);
 				}
 			}
 			catch { }
@@ -620,7 +620,7 @@
 		{
 			var ScaleEditor = new QMNestedButton(menu, x, y, "Scale", "Scale Editor Menu!", null, null, null, null, btnHalf);
 
-			ScaleSlider = new QMSlider(Utils.QuickMenu.transform.Find(ScaleEditor.getMenuName()), "Scale:", 250, -720, delegate (float value)
+			ScaleSlider = new QMSlider(Utils.QuickMenu.transform.Find(ScaleEditor.GetMenuName()), "Scale:", 250, -720, delegate (float value)
 			{
 				ObjectMiscOptions.SetScaleValueToUse(value);
 			}, 0.1f, 20, 0, true);
@@ -735,7 +735,7 @@
 			Forces.ForceAmnt2 = new QMSingleButton(ForceAddControl, 0, 0, "Force : " + Forces.Force, new Action(Forces.ResetForcesVar), string.Empty, null, null);
 			Forces.SpinForceAmnt2 = new QMSingleButton(ForceAddControl, 0, 1, "Spin Force : " + Forces.SpinForce, new Action(Forces.ResetSpinForcesVar), string.Empty, null, null);
 
-			ForceSlider = new QMSlider(Utils.QuickMenu.transform.Find(ForceAddControl.getMenuName()), "Force Power :", 150, -720, delegate (float value)
+			ForceSlider = new QMSlider(Utils.QuickMenu.transform.Find(ForceAddControl.GetMenuName()), "Force Power :", 150, -720, delegate (float value)
 			{
 				Forces.SetForceAmount((int)value);
 			}, Forces.DefaultForce, 1000, 1, true);
@@ -743,7 +743,7 @@
 			ForceSlider.SetTextLabel("");
 			Forces.ResetForcesVar();
 
-			SpinForceSlider = new QMSlider(Utils.QuickMenu.transform.Find(ForceAddControl.getMenuName()), "Spin Power : ", 150, -1120, delegate (float value)
+			SpinForceSlider = new QMSlider(Utils.QuickMenu.transform.Find(ForceAddControl.GetMenuName()), "Spin Power : ", 150, -1120, delegate (float value)
 			{
 				Forces.SetSpinForceAmount((int)value);
 			}, Forces.DefaultSpinForce, 1000, 1, true);
@@ -837,31 +837,31 @@
 			UpdateSpawnedPrefabsBtn();
 			if (CurrentObjectCoordsBtn != null)
 			{
-				CurrentObjectCoordsBtn.setButtonText($"X: 0 \n Y: 0 \n Z: 0");
+				CurrentObjectCoordsBtn.SetButtonText($"X: 0 \n Y: 0 \n Z: 0");
 			}
 			if (Pickup_IsEditMode != null)
 			{
-				Pickup_IsEditMode.setButtonText("Edit Mode : OFF");
-				Pickup_IsEditMode.setTextColor(Color.red);
+				Pickup_IsEditMode.SetButtonText("Edit Mode : OFF");
+				Pickup_IsEditMode.SetTextColor(Color.red);
 			}
 			if (HasPickupComponent != null)
 			{
-				HasPickupComponent.setTextColor(Color.red);
+				HasPickupComponent.SetTextColor(Color.red);
 			}
 
 			#region PickupOrientation
 
 			if (Pickup_PickupOrientation_prop_any != null)
 			{
-				Pickup_PickupOrientation_prop_any.setTextColor(Color.red);
+				Pickup_PickupOrientation_prop_any.SetTextColor(Color.red);
 			}
 			if (Pickup_PickupOrientation_prop_Grip != null)
 			{
-				Pickup_PickupOrientation_prop_Grip.setTextColor(Color.red);
+				Pickup_PickupOrientation_prop_Grip.SetTextColor(Color.red);
 			}
 			if (Pickup_PickupOrientation_prop_Gun != null)
 			{
-				Pickup_PickupOrientation_prop_Gun.setTextColor(Color.red);
+				Pickup_PickupOrientation_prop_Gun.SetTextColor(Color.red);
 			}
 
 			#endregion PickupOrientation
@@ -870,15 +870,15 @@
 
 			if (Pickup_AutoHoldMode_prop_AutoDetect != null)
 			{
-				Pickup_AutoHoldMode_prop_AutoDetect.setTextColor(Color.red);
+				Pickup_AutoHoldMode_prop_AutoDetect.SetTextColor(Color.red);
 			}
 			if (Pickup_AutoHoldMode_prop_Yes != null)
 			{
-				Pickup_AutoHoldMode_prop_Yes.setTextColor(Color.red);
+				Pickup_AutoHoldMode_prop_Yes.SetTextColor(Color.red);
 			}
 			if (Pickup_AutoHoldMode_prop_No != null)
 			{
-				Pickup_AutoHoldMode_prop_No.setTextColor(Color.red);
+				Pickup_AutoHoldMode_prop_No.SetTextColor(Color.red);
 			}
 
 			#endregion Autohold
@@ -887,7 +887,7 @@
 
 			if (Pickup_allowManipulationWhenEquipped != null)
 			{
-				Pickup_allowManipulationWhenEquipped.setToggleState(false);
+				Pickup_allowManipulationWhenEquipped.SetToggleState(false);
 			}
 
 			#endregion AllowManipulationWhenEquipped
@@ -896,7 +896,7 @@
 
 			if (Pickup_pickupable != null)
 			{
-				Pickup_pickupable.setToggleState(false);
+				Pickup_pickupable.SetToggleState(false);
 			}
 
 			#endregion Pickupable
@@ -905,7 +905,7 @@
 
 			if (Pickup_DisallowTheft != null)
 			{
-				Pickup_DisallowTheft.setToggleState(false);
+				Pickup_DisallowTheft.SetToggleState(false);
 			}
 
 			#endregion DisallowTheft
@@ -924,18 +924,18 @@
 			{
 				if (TeleportToTargetPickup != null)
 				{
-					TeleportToTargetPickup.setButtonText(GetTeleportToTargetText);
-					TeleportToTargetPickup.setToolTip(GetTeleportToTargetText);
+					TeleportToTargetPickup.SetButtonText(GetTeleportToTargetText);
+					TeleportToTargetPickup.SetToolTip(GetTeleportToTargetText);
 				}
 				if (SubMenuTeleportToTarget != null)
 				{
-					SubMenuTeleportToTarget.setButtonText(GetTeleportToTargetText);
-					SubMenuTeleportToTarget.setToolTip(GetTeleportToTargetText);
+					SubMenuTeleportToTarget.SetButtonText(GetTeleportToTargetText);
+					SubMenuTeleportToTarget.SetToolTip(GetTeleportToTargetText);
 				}
 				if (SelWorld_TeleportToTargetPickup != null)
 				{
-					SelWorld_TeleportToTargetPickup.setButtonText(GetTeleportToTargetText);
-					SelWorld_TeleportToTargetPickup.setToolTip(GetTeleportToTargetText);
+					SelWorld_TeleportToTargetPickup.SetButtonText(GetTeleportToTargetText);
+					SelWorld_TeleportToTargetPickup.SetToolTip(GetTeleportToTargetText);
 				}
 			}
 			catch { }
@@ -961,8 +961,8 @@
 		{
 			if (SpawnedPickupsCounter != null)
 			{
-				SpawnedPickupsCounter.setButtonText(GetClonesPickupText);
-				SpawnedPickupsCounter.setToolTip(GetClonesPickupText);
+				SpawnedPickupsCounter.SetButtonText(GetClonesPickupText);
+				SpawnedPickupsCounter.SetToolTip(GetClonesPickupText);
 			}
 		}
 
@@ -970,8 +970,8 @@
 		{
 			if (SpawnedPrefabsCounter != null)
 			{
-				SpawnedPrefabsCounter.setButtonText(GetSpawnedPrefabText);
-				SpawnedPrefabsCounter.setToolTip(GetSpawnedPrefabText);
+				SpawnedPrefabsCounter.SetButtonText(GetSpawnedPrefabText);
+				SpawnedPrefabsCounter.SetToolTip(GetSpawnedPrefabText);
 			}
 		}
 
@@ -1008,7 +1008,7 @@
 		public static void InitProximitySliderSubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
 		{
 			var slider = new QMNestedButton(menu, x, y, "Proximity", "Value Slider Editor!", null, null, null, null, btnHalf);
-			PickupProximitySlider = new QMSlider(Utils.QuickMenu.transform.Find(slider.getMenuName()), "Proximity : ", 250, -720, delegate (float value)
+			PickupProximitySlider = new QMSlider(Utils.QuickMenu.transform.Find(slider.GetMenuName()), "Proximity : ", 250, -720, delegate (float value)
 {
 	Pickup.SetProximity(Tweaker_Object.GetGameObjectToEdit(), (int)value);
 }, 5, 1000, 0, true);
@@ -1021,7 +1021,7 @@
 			{
 				if (ObjectActiveToggle != null)
 				{
-					ObjectActiveToggle.setToggleState(obj.active);
+					ObjectActiveToggle.SetToggleState(obj.active);
 				}
 			}
 		}

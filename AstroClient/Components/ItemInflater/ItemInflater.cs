@@ -78,7 +78,7 @@
 							// Update Button
 							if (Tweaker_Object.CurrentSelectedObject == obj)
 							{
-								GameObjectActualScale.setButtonText("Object 's Current scale : " + obj.transform.localScale.ToString());
+								GameObjectActualScale.SetButtonText("Object 's Current scale : " + obj.transform.localScale.ToString());
 							}
 						}
 						LastTimeCheck = Time.time;

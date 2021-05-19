@@ -193,7 +193,7 @@
 
 			string avatarName = selectedPlayer.prop_ApiAvatar_0.name;
 			string aviID = selectedPlayer.prop_VRCPlayer_0.prop_VRCAvatarManager_0.prop_ApiAvatar_0.id;
-			string avatarHash = avatarName.Substring(0, Math.Min(avatarName.Length, 20)) + ":" + String.Format("{0:X}", aviID.GetHashCode()).Substring(4);
+			string avatarHash = avatarName.Substring(0, Math.Min(avatarName.Length, 20)) + ":" + string.Format("{0:X}", aviID.GetHashCode()).Substring(4);
 			dynamictouch.otherAvatarButtonList.Clear();
 
 			
@@ -253,7 +253,7 @@
 				if (bone.m_Root is null || bone.m_Root.Equals(null)) continue;
 				try
 				{
-					string hashBone = avatarName.Substring(0, Math.Min(avatarName.Length, 20)) + ":" + String.Format("{0:X}", aviID.GetHashCode()).Substring(4) + ":db:" + bone.m_Root.name;
+					string hashBone = avatarName.Substring(0, Math.Min(avatarName.Length, 20)) + ":" + string.Format("{0:X}", aviID.GetHashCode()).Substring(4) + ":db:" + bone.m_Root.name;
 					if (dynamictouch.specificButtonList.ContainsKey(hashBone)) continue; //For the instance where a bone may have more than one db/dbc
 					dynamictouch.specificButtonList.Add(hashBone, null);
 					string boneName = bone.m_Root.name; //To stop an NRE if the player leaves or switches when menu is open
@@ -297,7 +297,7 @@
 				if (bone.gameObject is null || bone.gameObject.Equals(null)) continue;
 				try
 				{
-					string hashBone = avatarName.Substring(0, Math.Min(avatarName.Length, 20)) + ":" + String.Format("{0:X}", aviID.GetHashCode()).Substring(4) + ":dbc:" + bone.name;
+					string hashBone = avatarName.Substring(0, Math.Min(avatarName.Length, 20)) + ":" + string.Format("{0:X}", aviID.GetHashCode()).Substring(4) + ":dbc:" + bone.name;
 					if (dynamictouch.specificButtonList.ContainsKey(hashBone)) continue; //For the instance where a bone may have more than one db/dbc
 					dynamictouch.specificButtonList.Add(hashBone, null);
 					string boneName = bone.name; //To stop an NRE if the player leaves or switches when menu is open
@@ -608,7 +608,7 @@
 				{//If modprefs has value, then convert into standlone file 
 					if (IsTextFileEmpty(AvatarsToAdjustDBRadiusPath))
 					{//Check if file already had content, if so, abort and error 
-						NDBConfig.avatarsToAdjustDBRadius = new Dictionary<string, int>(MelonPreferences.GetEntryValue<string>("NDB", "AvatarsToAdjustDBRadius").Split(';').Select(s => s.Split(',')).ToDictionary(p => p[0].Trim(), p => Int32.Parse(p[1].Trim())));
+						NDBConfig.avatarsToAdjustDBRadius = new Dictionary<string, int>(MelonPreferences.GetEntryValue<string>("NDB", "AvatarsToAdjustDBRadius").Split(';').Select(s => s.Split(',')).ToDictionary(p => p[0].Trim(), p => int.Parse(p[1].Trim())));
 						File.WriteAllLines(AvatarsToAdjustDBRadiusPath, NDBConfig.avatarsToAdjustDBRadius.Select(p => string.Format("{0}, {1}", p.Key, p.Value)), Encoding.UTF8); //Save file
 						MelonPreferences.SetEntryValue<string>("NDB", "AvatarsToAdjustDBRadius", "");
 						migrated = true;
@@ -620,7 +620,7 @@
 				{
 					if (!migrated)
 					{
-						NDBConfig.avatarsToAdjustDBRadius = new Dictionary<string, int>(File.ReadAllLines(AvatarsToAdjustDBRadiusPath).Select(s => s.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)).Where(x => x.Length == 2).ToDictionary(p => p[0].Trim(), p => Int32.Parse(p[1].Trim())));
+						NDBConfig.avatarsToAdjustDBRadius = new Dictionary<string, int>(File.ReadAllLines(AvatarsToAdjustDBRadiusPath).Select(s => s.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries)).Where(x => x.Length == 2).ToDictionary(p => p[0].Trim(), p => int.Parse(p[1].Trim())));
 						MelonLogger.Msg(ConsoleColor.DarkBlue, "Loaded - " + AvatarsToAdjustDBRadiusPath);
 					}
 				}
@@ -829,7 +829,7 @@
 					else if (NDBConfig.logLevel >= 1) MelonLogger.Msg(ConsoleColor.Yellow, $"Armature not found for scale");
 					string aviName = avatar.transform.root.GetComponentInChildren<VRCPlayer>().prop_ApiAvatar_0.name;
 					string aviID = avatar.transform.root.GetComponentInChildren<VRCPlayer>().prop_ApiAvatar_0.id;
-					string aviHash = aviName.Substring(0, Math.Min(aviName.Length, 20)) + ":" + String.Format("{0:X}", aviID.GetHashCode()).Substring(4);
+					string aviHash = aviName.Substring(0, Math.Min(aviName.Length, 20)) + ":" + string.Format("{0:X}", aviID.GetHashCode()).Substring(4);
 					if (NDBConfig.logLevel >= 2) MelonLogger.Msg(ConsoleColor.Yellow, $"Avatar: {aviName}, ID: {aviID}");
 
 					AddAutoCollidersToPlayer(avatar, aviHash);

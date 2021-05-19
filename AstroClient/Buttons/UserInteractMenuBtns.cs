@@ -27,7 +27,7 @@
 		public static void Init_UserMenu_Exploits(float x, float y, bool btnHalf)
 		{
 			var menu = new QMNestedButton("UserInteractMenu", x, y, "AstroClient Exploits", "AstroClient Menu", null, null, null, null, btnHalf);
-			menu.getMainButton().SetResizeTextForBestFit(true);
+			menu.GetMainButton().SetResizeTextForBestFit(true);
 
 			new QMSingleButton(menu, 1, 0, "Teleport All\nPickups\nTo\nplayer.", new Action(ObjectMiscOptions.TeleportAllWorldPickupsToPlayer), "Teleport World Pickups To Player.", null, null); ;
 			if (Bools.AllowOrbitComponent)

@@ -27,7 +27,7 @@
 			{
 				if (DesktopHeadlightBtn != null)
 				{
-					DesktopHeadlightBtn.setToggleState(value);
+					DesktopHeadlightBtn.SetToggleState(value);
 				}
 				DesktopHeadLight(value);
 				_DesktopHeadlight = value;
@@ -46,7 +46,7 @@
 			{
 				if (VRHeadlightBtn != null)
 				{
-					VRHeadlightBtn.setToggleState(value);
+					VRHeadlightBtn.SetToggleState(value);
 				}
 				VRHeadLight(value);
 				_VRHeadlight = value;
@@ -273,7 +273,7 @@
 					ModConsole.Error("[Headlight] : Unable to Find Main Camera Transform.");
 					if (DesktopHeadlightBtn != null)
 					{
-						DesktopHeadlightBtn.setToggleState(false);
+						DesktopHeadlightBtn.SetToggleState(false);
 					}
 				}
 			}
@@ -282,7 +282,7 @@
 				ModConsole.Error("[Headlight] : Unable to Find Main Camera.");
 				if (DesktopHeadlightBtn != null)
 				{
-					DesktopHeadlightBtn.setToggleState(false);
+					DesktopHeadlightBtn.SetToggleState(false);
 				}
 			}
 		}

@@ -66,15 +66,15 @@
 			ToggleDisplays(false);
 			if (ToggleColliderDisplayBtn != null)
 			{
-				ToggleColliderDisplayBtn.setToggleState(false);
+				ToggleColliderDisplayBtn.SetToggleState(false);
 			}
 			if (ToggleColliderInvisibleXRayBtn != null)
 			{
-				ToggleColliderInvisibleXRayBtn.setToggleState(false);
+				ToggleColliderInvisibleXRayBtn.SetToggleState(false);
 			}
 			if (ToggleColliderXRayBtn != null)
 			{
-				ToggleColliderXRayBtn.setToggleState(false);
+				ToggleColliderXRayBtn.SetToggleState(false);
 			}
 		}
 

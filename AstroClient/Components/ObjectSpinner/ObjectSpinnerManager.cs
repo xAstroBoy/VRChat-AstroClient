@@ -82,11 +82,11 @@
 			var spin = obj.GetComponent<ObjectSpinner>();
 			if (spin != null)
 			{
-				SpinAmountTell.setButtonText("X : " + spin.ForceX + " Y : " + spin.ForceY + " Z :" + spin.ForceZ);
+				SpinAmountTell.SetButtonText("X : " + spin.ForceX + " Y : " + spin.ForceY + " Z :" + spin.ForceZ);
 			}
 			else
 			{
-				SpinAmountTell.setButtonText("X : " + "0" + " Y : " + "0" + " Z :" + "0");
+				SpinAmountTell.SetButtonText("X : " + "0" + " Y : " + "0" + " Z :" + "0");
 			}
 		}
 
@@ -103,11 +103,11 @@
 			var Timer = obj.GetComponent<ObjectSpinner>();
 			if (Timer != null)
 			{
-				SpinnerTimerBtn.setButtonText("Timer : " + Timer.SpinnerTimer);
+				SpinnerTimerBtn.SetButtonText("Timer : " + Timer.SpinnerTimer);
 			}
 			else
 			{
-				SpinnerTimerBtn.setButtonText("Timer : " + "0");
+				SpinnerTimerBtn.SetButtonText("Timer : " + "0");
 			}
 		}
 
@@ -131,11 +131,11 @@
 			ClearList();
 			if (SpinnerTimerBtn != null)
 			{
-				SpinnerTimerBtn.setButtonText("none");
+				SpinnerTimerBtn.SetButtonText("none");
 			}
 			if (SpinAmountTell != null)
 			{
-				SpinAmountTell.setButtonText("none");
+				SpinAmountTell.SetButtonText("none");
 			}
 		}
 

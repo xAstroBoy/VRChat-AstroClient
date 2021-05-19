@@ -25,15 +25,15 @@
 			IsOnRootScene = true;
 			if (DestroyModeSwitch != null)
 			{
-				DestroyModeSwitch.setToggleState(false);
+				DestroyModeSwitch.SetToggleState(false);
 			}
 			if (PasstoTweakerModeSwitch != null)
 			{
-				PasstoTweakerModeSwitch.setToggleState(false);
+				PasstoTweakerModeSwitch.SetToggleState(false);
 			}
 			if (ToggleModeSwitch != null)
 			{
-				ToggleModeSwitch.setToggleState(true);
+				ToggleModeSwitch.SetToggleState(true);
 			}
 			if (StartRoutineOfRefreshAction)
 			{
@@ -116,7 +116,7 @@
 						_isDestroyMode = false;
 						if (DestroyModeSwitch != null)
 						{
-							DestroyModeSwitch.setToggleState(_isDestroyMode);
+							DestroyModeSwitch.SetToggleState(_isDestroyMode);
 						}
 					}
 					if (_isToggleMode)
@@ -125,7 +125,7 @@
 
 						if (ToggleModeSwitch != null)
 						{
-							ToggleModeSwitch.setToggleState(_isToggleMode);
+							ToggleModeSwitch.SetToggleState(_isToggleMode);
 						}
 					}
 				}
@@ -138,7 +138,7 @@
 							_isToggleMode = true;
 							if (ToggleModeSwitch != null)
 							{
-								ToggleModeSwitch.setToggleState(_isToggleMode);
+								ToggleModeSwitch.SetToggleState(_isToggleMode);
 							}
 						}
 					}
@@ -146,7 +146,7 @@
 				_PassToTweakerMode = value;
 				if (PasstoTweakerModeSwitch != null)
 				{
-					PasstoTweakerModeSwitch.setToggleState(_PassToTweakerMode);
+					PasstoTweakerModeSwitch.SetToggleState(_PassToTweakerMode);
 				}
 			}
 		}
@@ -166,7 +166,7 @@
 						_isToggleMode = false;
 						if (ToggleModeSwitch != null)
 						{
-							ToggleModeSwitch.setToggleState(_isToggleMode);
+							ToggleModeSwitch.SetToggleState(_isToggleMode);
 						}
 					}
 					if (_PassToTweakerMode)
@@ -175,7 +175,7 @@
 
 						if (PasstoTweakerModeSwitch != null)
 						{
-							PasstoTweakerModeSwitch.setToggleState(_PassToTweakerMode);
+							PasstoTweakerModeSwitch.SetToggleState(_PassToTweakerMode);
 						}
 					}
 				}
@@ -188,7 +188,7 @@
 							_isToggleMode = true;
 							if (ToggleModeSwitch != null)
 							{
-								ToggleModeSwitch.setToggleState(_isToggleMode);
+								ToggleModeSwitch.SetToggleState(_isToggleMode);
 							}
 						}
 					}
@@ -196,7 +196,7 @@
 				_isDestroyMode = value;
 				if (DestroyModeSwitch != null)
 				{
-					DestroyModeSwitch.setToggleState(_isDestroyMode);
+					DestroyModeSwitch.SetToggleState(_isDestroyMode);
 				}
 			}
 		}
@@ -216,7 +216,7 @@
 						_isDestroyMode = false;
 						if (DestroyModeSwitch != null)
 						{
-							DestroyModeSwitch.setToggleState(_isDestroyMode);
+							DestroyModeSwitch.SetToggleState(_isDestroyMode);
 						}
 					}
 					if (_PassToTweakerMode)
@@ -225,7 +225,7 @@
 
 						if (PasstoTweakerModeSwitch != null)
 						{
-							PasstoTweakerModeSwitch.setToggleState(_PassToTweakerMode);
+							PasstoTweakerModeSwitch.SetToggleState(_PassToTweakerMode);
 						}
 					}
 				}
@@ -239,7 +239,7 @@
 				_isToggleMode = value;
 				if (ToggleModeSwitch != null)
 				{
-					ToggleModeSwitch.setToggleState(_isToggleMode);
+					ToggleModeSwitch.SetToggleState(_isToggleMode);
 				}
 			}
 		}
@@ -261,7 +261,7 @@
 				{
 					if (GoToParentBtn != null)
 					{
-						GoToParentBtn.setActive(true);
+						GoToParentBtn.SetActive(true);
 					}
 					ModConsole.DebugLog($"Current has been set to Current : {Current.name}");
 				}
@@ -269,7 +269,7 @@
 				{
 					if (GoToParentBtn != null)
 					{
-						GoToParentBtn.setActive(false);
+						GoToParentBtn.SetActive(false);
 					}
 					ModConsole.DebugLog("Current is set to null!");
 				}
@@ -299,12 +299,12 @@
 
 		public static void InitTogglerMenu(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
-			var main = new QMSingleButton(menu, x, y, "Advanced GameObject Toggler", new Action(() => { ReturnToRoot(); gameobjtogglermenu.getMainButton().getGameObject().GetComponent<Button>().onClick.Invoke(); }), "Advanced GameObject Toggler", null, null, btnHalf);
+			var main = new QMSingleButton(menu, x, y, "Advanced GameObject Toggler", new Action(() => { ReturnToRoot(); gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }), "Advanced GameObject Toggler", null, null, btnHalf);
 
 			gameobjtogglermenu = new QMNestedButton(menu, -100, -100, "Advanced GameObject Toggler (HIDDEN BUTTON)", "Advanced GameObject Toggler (HIDDEN BUTTON)", null, null, null, null, btnHalf);
-			gameobjtogglermenu.getMainButton().setActive(false);
+			gameobjtogglermenu.GetMainButton().SetActive(false);
 			var registersub = new QMNestedButton(gameobjtogglermenu, -5f, -5f, "", "");
-			registersub.getMainButton().setActive(false);
+			registersub.GetMainButton().SetActive(false);
 			MainScroll = new QMHalfScroll(registersub);
 			subscroll = new QMHalfScroll(gameobjtogglermenu);
 
@@ -316,15 +316,15 @@
 			GameObjMenuObjectToEdit = new QMSingleButton(gameobjtogglermenu, -1, 2f, "Not Selected", null, "Shows what item is current set on the item tweaker", null, null, false);
 			if (DestroyModeSwitch != null)
 			{
-				DestroyModeSwitch.setToggleState(IsDestroyMode);
+				DestroyModeSwitch.SetToggleState(IsDestroyMode);
 			}
 			if (PasstoTweakerModeSwitch != null)
 			{
-				PasstoTweakerModeSwitch.setToggleState(PassToTweakerMode);
+				PasstoTweakerModeSwitch.SetToggleState(PassToTweakerMode);
 			}
 			if (ToggleModeSwitch != null)
 			{
-				ToggleModeSwitch.setToggleState(IsToggleMode);
+				ToggleModeSwitch.SetToggleState(IsToggleMode);
 			}
 			subscroll.SetAction(delegate
 			{
@@ -353,12 +353,12 @@
 						}
 						QMSingleButton newbtn = new QMSingleButton(gameobjtogglermenu, 0f, 0f, objname, null, objname, null, GetObjectStatus(item), true);
 
-						newbtn.setAction(new Action(() =>
+						newbtn.SetAction(new Action(() =>
 					   {
 						   if (IsToggleMode)
 						   {
 							   item.gameObject.active = !item.gameObject.active;
-							   newbtn.setTextColor(GetObjectStatus(item));
+							   newbtn.SetTextColor(GetObjectStatus(item));
 						   }
 						   if (IsDestroyMode)
 						   {
@@ -375,7 +375,7 @@
 							   Tweaker_Object.CurrentSelectedObject = item.gameObject;
 						   }
 					   }));
-						newbtn.getGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(newbtn.getGameObject().GetComponent<RectTransform>().sizeDelta.x - 100f, newbtn.getGameObject().GetComponent<RectTransform>().sizeDelta.y);
+						newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.x - 100f, newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
 						subscroll.Add(newbtn);
 						AddEnterChildObj(gameobjtogglermenu, newbtn, item);
 					}
@@ -407,7 +407,7 @@
 					}
 				}
 				QMSingleButton enterchildbtn = new QMSingleButton(page, 0f, 0f, ">", null, "Enter childs of " + objname, null, null, true);
-				enterchildbtn.setAction(new Action(() =>
+				enterchildbtn.SetAction(new Action(() =>
 				{
 					CurrentSelection.Clear();
 					CurrentSelection = GetAllChildObjects(item, true, false);
@@ -415,9 +415,9 @@
 					subscroll.Refresh();
 				}));
 				subscroll.AddExtraButton(enterchildbtn);
-				var pos = parentbtn.getGameObject().GetComponent<RectTransform>().anchoredPosition;
-				enterchildbtn.getGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(100f, enterchildbtn.getGameObject().GetComponent<RectTransform>().sizeDelta.y);
-				enterchildbtn.getGameObject().GetComponent<RectTransform>().anchoredPosition = new Vector2(pos.x - 190f, pos.y); // FUCK IT
+				var pos = parentbtn.GetGameObject().GetComponent<RectTransform>().anchoredPosition;
+				enterchildbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(100f, enterchildbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
+				enterchildbtn.GetGameObject().GetComponent<RectTransform>().anchoredPosition = new Vector2(pos.x - 190f, pos.y); // FUCK IT
 			}
 		}
 

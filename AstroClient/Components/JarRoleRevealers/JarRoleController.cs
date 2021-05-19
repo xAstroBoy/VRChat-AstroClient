@@ -50,14 +50,14 @@
 				{
 					if (IsMurder4World)
 					{
-						Murder4RolesRevealerToggle.setToggleState(value);
+						Murder4RolesRevealerToggle.SetToggleState(value);
 					}
 				}
 				if (AmongUSRolesRevealerToggle != null)
 				{
 					if (IsAmongUsWorld)
 					{
-						AmongUSRolesRevealerToggle.setToggleState(value);
+						AmongUSRolesRevealerToggle.SetToggleState(value);
 					}
 				}
 			}
@@ -84,8 +84,8 @@
 		{
 			JarRoleLinks.Clear();
 			RoleEspComponents.Clear();
-			Murder4RolesRevealerToggle.setToggleState(false);
-			AmongUSRolesRevealerToggle.setToggleState(false);
+			Murder4RolesRevealerToggle.SetToggleState(false);
+			AmongUSRolesRevealerToggle.SetToggleState(false);
 			ViewRoles = false;
 			_isAmongUsWorld = false;
 			_IsMurder4World = false;
@@ -161,8 +161,8 @@
 
 		public static int? RemoveNodeText(Transform node)
 		{
-			var replacedstring = node.name.Replace("Player Node ", String.Empty).Replace("(", String.Empty).Replace(")", String.Empty).Replace(" ", String.Empty);
-			if (!String.IsNullOrEmpty(replacedstring) && !String.IsNullOrWhiteSpace(replacedstring))
+			var replacedstring = node.name.Replace("Player Node ", string.Empty).Replace("(", string.Empty).Replace(")", string.Empty).Replace(" ", string.Empty);
+			if (!string.IsNullOrEmpty(replacedstring) && !string.IsNullOrWhiteSpace(replacedstring))
 			{
 				int.TryParse(replacedstring, out int value);
 				return value;
@@ -172,8 +172,8 @@
 
 		public static int? RemoveEntryText(Transform Entry)
 		{
-			var replacedstring = Entry.name.Replace("Player Entry ", String.Empty).Replace("(", String.Empty).Replace(")", String.Empty).Replace(" ", String.Empty); ;
-			if (!String.IsNullOrEmpty(replacedstring) && !String.IsNullOrWhiteSpace(replacedstring))
+			var replacedstring = Entry.name.Replace("Player Entry ", string.Empty).Replace("(", string.Empty).Replace(")", string.Empty).Replace(" ", string.Empty); ;
+			if (!string.IsNullOrEmpty(replacedstring) && !string.IsNullOrWhiteSpace(replacedstring))
 			{
 				int.TryParse(replacedstring, out int value);
 				return value;

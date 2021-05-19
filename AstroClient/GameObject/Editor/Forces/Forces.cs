@@ -30,7 +30,7 @@
 				_TakeOwnership = value;
 				if (TakeOwnerShipToggle != null)
 				{
-					TakeOwnerShipToggle.setToggleState(value);
+					TakeOwnerShipToggle.SetToggleState(value);
 				}
 			}
 		}
@@ -322,51 +322,51 @@
 
 		public static void Update_Constraint_Rot_X_Toggle(bool status)
 		{
-			if (Constraint_Rot_X_Toggle != null) { Constraint_Rot_X_Toggle.setToggleState(status); }
+			if (Constraint_Rot_X_Toggle != null) { Constraint_Rot_X_Toggle.SetToggleState(status); }
 		}
 
 		public static void Update_Constraint_Rot_Y_Toggle(bool status)
 		{
-			if (Constraint_Rot_Y_Toggle != null) { Constraint_Rot_Y_Toggle.setToggleState(status); }
+			if (Constraint_Rot_Y_Toggle != null) { Constraint_Rot_Y_Toggle.SetToggleState(status); }
 		}
 
 		public static void Update_Constraint_Rot_Z_Toggle(bool status)
 		{
-			if (Constraint_Rot_Z_Toggle != null) { Constraint_Rot_Z_Toggle.setToggleState(status); }
+			if (Constraint_Rot_Z_Toggle != null) { Constraint_Rot_Z_Toggle.SetToggleState(status); }
 		}
 
 		public static void Update_Constraint_X_Toggle(bool status)
 		{
-			if (Constraint_X_Toggle != null) { Constraint_X_Toggle.setToggleState(status); }
+			if (Constraint_X_Toggle != null) { Constraint_X_Toggle.SetToggleState(status); }
 		}
 
 		public static void Update_Constraint_Y_Toggle(bool status)
 		{
-			if (Constraint_Y_Toggle != null) { Constraint_Y_Toggle.setToggleState(status); }
+			if (Constraint_Y_Toggle != null) { Constraint_Y_Toggle.SetToggleState(status); }
 		}
 
 		public static void Update_Constraint_Z_Toggle(bool status)
 		{
-			if (Constraint_Z_Toggle != null) { Constraint_Z_Toggle.setToggleState(status); }
+			if (Constraint_Z_Toggle != null) { Constraint_Z_Toggle.SetToggleState(status); }
 		}
 
 		public static void UpdateForceAmountBtns()
 		{
 			if (ForceAmnt1 != null)
 			{
-				ForceAmnt1.setButtonText("Force : " + Force.ToString());
+				ForceAmnt1.SetButtonText("Force : " + Force.ToString());
 			}
 			if (ForceAmnt2 != null)
 			{
-				ForceAmnt2.setButtonText("Force : " + Force.ToString());
+				ForceAmnt2.SetButtonText("Force : " + Force.ToString());
 			}
 			if (SpinForceAmnt1 != null)
 			{
-				SpinForceAmnt1.setButtonText("Spin Force : " + SpinForce.ToString());
+				SpinForceAmnt1.SetButtonText("Spin Force : " + SpinForce.ToString());
 			}
 			if (SpinForceAmnt2 != null)
 			{
-				SpinForceAmnt2.setButtonText("Spin Force : " + SpinForce.ToString());
+				SpinForceAmnt2.SetButtonText("Spin Force : " + SpinForce.ToString());
 			}
 
 			if (ItemTweakerMain.SpinForceSlider != null)

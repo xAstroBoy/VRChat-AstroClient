@@ -77,7 +77,7 @@
 				_IsAlwaysPerfectHit = value;
 				if (AlwaysPerfectHitToggle != null)
 				{
-					AlwaysPerfectHitToggle.setToggleState(value);
+					AlwaysPerfectHitToggle.SetToggleState(value);
 				}
 			}
 		}
@@ -92,8 +92,8 @@
 				IsAimFactory = true;
 				if (AimFactoryCheatPage != null)
 				{
-					AimFactoryCheatPage.getMainButton().setIntractable(true);
-					AimFactoryCheatPage.getMainButton().setTextColor(Color.green);
+					AimFactoryCheatPage.GetMainButton().SetIntractable(true);
+					AimFactoryCheatPage.GetMainButton().SetTextColor(Color.green);
 				}
 
 				var Gamesound = GameObjectFinder.FindRootSceneObject("GameSound");
@@ -123,8 +123,8 @@
 				IsAimFactory = false;
 				if (AimFactoryCheatPage != null)
 				{
-					AimFactoryCheatPage.getMainButton().setIntractable(false);
-					AimFactoryCheatPage.getMainButton().setTextColor(Color.red);
+					AimFactoryCheatPage.GetMainButton().SetIntractable(false);
+					AimFactoryCheatPage.GetMainButton().SetTextColor(Color.red);
 				}
 			}
 		}

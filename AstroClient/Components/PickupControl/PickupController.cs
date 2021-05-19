@@ -666,24 +666,24 @@
 			{
 				if (Pickup_CurrentObjOwner != null)
 				{
-					Pickup_CurrentObjOwner.setButtonText(CurrentOwnerBtnText);
+					Pickup_CurrentObjOwner.SetButtonText(CurrentOwnerBtnText);
 				}
 
 				if (Main_CurrentObjOwner != null)
 				{
-					Main_CurrentObjOwner.setButtonText(CurrentOwnerBtnText);
+					Main_CurrentObjOwner.SetButtonText(CurrentOwnerBtnText);
 				}
 				if (Forces_SelPickup_CurrentObjOwner != null)
 				{
-					Forces_SelPickup_CurrentObjOwner.setButtonText(CurrentOwnerBtnText);
+					Forces_SelPickup_CurrentObjOwner.SetButtonText(CurrentOwnerBtnText);
 				}
 				if (SelPickup_CurrentObjOwner != null)
 				{
-					SelPickup_CurrentObjOwner.setButtonText(CurrentOwnerBtnText);
+					SelPickup_CurrentObjOwner.SetButtonText(CurrentOwnerBtnText);
 				}
 				if (SelWorld_CurrentObjOwner != null)
 				{
-					SelWorld_CurrentObjOwner.setButtonText(CurrentOwnerBtnText);
+					SelWorld_CurrentObjOwner.SetButtonText(CurrentOwnerBtnText);
 				}
 			}
 		}
@@ -719,33 +719,33 @@
 					{
 						if (orientation == VRC_Pickup.PickupOrientation.Any)
 						{
-							Pickup_PickupOrientation_prop_any.setTextColor(Color.green);
+							Pickup_PickupOrientation_prop_any.SetTextColor(Color.green);
 						}
 						else
 						{
-							Pickup_PickupOrientation_prop_any.setTextColor(Color.red);
+							Pickup_PickupOrientation_prop_any.SetTextColor(Color.red);
 						}
 					}
 					if (Pickup_PickupOrientation_prop_Grip != null)
 					{
 						if (orientation == VRC_Pickup.PickupOrientation.Grip)
 						{
-							Pickup_PickupOrientation_prop_Grip.setTextColor(Color.green);
+							Pickup_PickupOrientation_prop_Grip.SetTextColor(Color.green);
 						}
 						else
 						{
-							Pickup_PickupOrientation_prop_Grip.setTextColor(Color.red);
+							Pickup_PickupOrientation_prop_Grip.SetTextColor(Color.red);
 						}
 					}
 					if (Pickup_PickupOrientation_prop_Gun != null)
 					{
 						if (orientation == VRC_Pickup.PickupOrientation.Gun)
 						{
-							Pickup_PickupOrientation_prop_Gun.setTextColor(Color.green);
+							Pickup_PickupOrientation_prop_Gun.SetTextColor(Color.green);
 						}
 						else
 						{
-							Pickup_PickupOrientation_prop_Gun.setTextColor(Color.red);
+							Pickup_PickupOrientation_prop_Gun.SetTextColor(Color.red);
 						}
 					}
 				}
@@ -763,33 +763,33 @@
 					{
 						if (AutoHold == VRC_Pickup.AutoHoldMode.AutoDetect)
 						{
-							Pickup_AutoHoldMode_prop_AutoDetect.setTextColor(Color.green);
+							Pickup_AutoHoldMode_prop_AutoDetect.SetTextColor(Color.green);
 						}
 						else
 						{
-							Pickup_AutoHoldMode_prop_AutoDetect.setTextColor(Color.red);
+							Pickup_AutoHoldMode_prop_AutoDetect.SetTextColor(Color.red);
 						}
 					}
 					if (Pickup_AutoHoldMode_prop_Yes != null)
 					{
 						if (AutoHold == VRC_Pickup.AutoHoldMode.Yes)
 						{
-							Pickup_AutoHoldMode_prop_Yes.setTextColor(Color.green);
+							Pickup_AutoHoldMode_prop_Yes.SetTextColor(Color.green);
 						}
 						else
 						{
-							Pickup_AutoHoldMode_prop_Yes.setTextColor(Color.red);
+							Pickup_AutoHoldMode_prop_Yes.SetTextColor(Color.red);
 						}
 					}
 					if (Pickup_AutoHoldMode_prop_No != null)
 					{
 						if (AutoHold == VRC_Pickup.AutoHoldMode.No)
 						{
-							Pickup_AutoHoldMode_prop_No.setTextColor(Color.green);
+							Pickup_AutoHoldMode_prop_No.SetTextColor(Color.green);
 						}
 						else
 						{
-							Pickup_AutoHoldMode_prop_No.setTextColor(Color.red);
+							Pickup_AutoHoldMode_prop_No.SetTextColor(Color.red);
 						}
 					}
 				}
@@ -805,7 +805,7 @@
 				{
 					if (Pickup_allowManipulationWhenEquipped != null)
 					{
-						Pickup_allowManipulationWhenEquipped.setToggleState(allowManipulationWhenEquipped);
+						Pickup_allowManipulationWhenEquipped.SetToggleState(allowManipulationWhenEquipped);
 					}
 				}
 			}
@@ -820,7 +820,7 @@
 				{
 					if (Pickup_pickupable != null)
 					{
-						Pickup_pickupable.setToggleState(pickupable);
+						Pickup_pickupable.SetToggleState(pickupable);
 					}
 				}
 			}
@@ -835,7 +835,7 @@
 				{
 					if (Pickup_DisallowTheft != null)
 					{
-						Pickup_DisallowTheft.setToggleState(DisallowTheft);
+						Pickup_DisallowTheft.SetToggleState(DisallowTheft);
 					}
 				}
 			}
@@ -863,23 +863,23 @@
 			{
 				if (Pickup_IsHeld != null)
 				{
-					Pickup_IsHeld.setButtonText(PickupHeldButtonText);
-					Pickup_IsHeld.setTextColor(PickupHeldButtonColor);
+					Pickup_IsHeld.SetButtonText(PickupHeldButtonText);
+					Pickup_IsHeld.SetTextColor(PickupHeldButtonColor);
 				}
 				if (Forces_Pickup_IsHeld != null)
 				{
-					Forces_Pickup_IsHeld.setButtonText(PickupHeldButtonText);
-					Forces_Pickup_IsHeld.setTextColor(PickupHeldButtonColor);
+					Forces_Pickup_IsHeld.SetButtonText(PickupHeldButtonText);
+					Forces_Pickup_IsHeld.SetTextColor(PickupHeldButtonColor);
 				}
 				if (SelPickup_IsHeld != null)
 				{
-					SelPickup_IsHeld.setButtonText(PickupHeldButtonText);
-					SelPickup_IsHeld.setTextColor(PickupHeldButtonColor);
+					SelPickup_IsHeld.SetButtonText(PickupHeldButtonText);
+					SelPickup_IsHeld.SetTextColor(PickupHeldButtonColor);
 				}
 				if (SelWorld_IsHeld != null)
 				{
-					SelWorld_IsHeld.setButtonText(PickupHeldButtonText);
-					SelWorld_IsHeld.setTextColor(PickupHeldButtonColor);
+					SelWorld_IsHeld.SetButtonText(PickupHeldButtonText);
+					SelWorld_IsHeld.SetTextColor(PickupHeldButtonColor);
 				}
 			}
 		}
@@ -891,23 +891,23 @@
 			{
 				if (Forces_CurrentObjHolder != null)
 				{
-					Forces_CurrentObjHolder.setButtonText(PickupHolderBtnText);
+					Forces_CurrentObjHolder.SetButtonText(PickupHolderBtnText);
 				}
 				if (SelPickup_CurrentObjHolder != null)
 				{
-					SelPickup_CurrentObjHolder.setButtonText(PickupHolderBtnText);
+					SelPickup_CurrentObjHolder.SetButtonText(PickupHolderBtnText);
 				}
 				if (Main_CurrentObjHolder != null)
 				{
-					Main_CurrentObjHolder.setButtonText(PickupHolderBtnText);
+					Main_CurrentObjHolder.SetButtonText(PickupHolderBtnText);
 				}
 				if (Pickup_CurrentObjHolder != null)
 				{
-					Pickup_CurrentObjHolder.setButtonText(PickupHolderBtnText);
+					Pickup_CurrentObjHolder.SetButtonText(PickupHolderBtnText);
 				}
 				if (SelWorld_CurrentObjHolder != null)
 				{
-					SelWorld_CurrentObjHolder.setButtonText(PickupHolderBtnText);
+					SelWorld_CurrentObjHolder.SetButtonText(PickupHolderBtnText);
 				}
 			}
 		}
@@ -1053,13 +1053,13 @@
 			{
 				if (EditMode)
 				{
-					Pickup_IsEditMode.setButtonText("Edit Mode : ON");
-					Pickup_IsEditMode.setTextColor(Color.green);
+					Pickup_IsEditMode.SetButtonText("Edit Mode : ON");
+					Pickup_IsEditMode.SetTextColor(Color.green);
 				}
 				else
 				{
-					Pickup_IsEditMode.setButtonText("Edit Mode : OFF");
-					Pickup_IsEditMode.setTextColor(Color.red);
+					Pickup_IsEditMode.SetButtonText("Edit Mode : OFF");
+					Pickup_IsEditMode.SetTextColor(Color.red);
 				}
 			}
 		}
@@ -1071,22 +1071,22 @@
 			{
 				if (Pickup1 != null)
 				{
-					HasPickupComponent.setTextColor(Color.green);
+					HasPickupComponent.SetTextColor(Color.green);
 					return;
 				}
 				else if (Pickup2 != null)
 				{
-					HasPickupComponent.setTextColor(Color.green);
+					HasPickupComponent.SetTextColor(Color.green);
 					return;
 				}
 				else if (Pickup3 != null)
 				{
-					HasPickupComponent.setTextColor(Color.green);
+					HasPickupComponent.SetTextColor(Color.green);
 					return;
 				}
 				else
 				{
-					HasPickupComponent.setTextColor(Color.red);
+					HasPickupComponent.SetTextColor(Color.red);
 				}
 			}
 		}

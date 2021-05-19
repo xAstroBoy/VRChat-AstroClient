@@ -25,15 +25,15 @@
 		public override void VRChat_OnUiManagerInit()
 		{
 			playersButton = new QMSingleButton("ShortcutMenu", -1 + ConfigManager.UI.PlayerListOffset, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
-			playersButton.setActive(ConfigManager.UI.ShowPlayersMenu);
+			playersButton.SetActive(ConfigManager.UI.ShowPlayersMenu);
 
 			if (ConfigManager.UI.ShowPlayersList)
 			{
-				playersButton.setTextColor(Color.green);
+				playersButton.SetTextColor(Color.green);
 			}
 			else
 			{
-				playersButton.setTextColor(Color.red);
+				playersButton.SetTextColor(Color.red);
 			}
 		}
 
@@ -123,7 +123,7 @@
 				{
 					if (streamer == true && player.GetAPIUser().IsSelf)
 					{
-						playerButton.setButtonText("Vrchat User");
+						playerButton.SetButtonText("Vrchat User");
 						//playerButton.setTextColor(InstanceMasterColor);
 					}
 					else
@@ -136,7 +136,7 @@
 				{
 					if (streamer == true)
 					{
-						playerButton.setButtonText("Vrchat User");
+						playerButton.SetButtonText("Vrchat User");
 						//playerButton.setTextColor(SelfColor);
 						//playerButton.setBackgroundColor(SelfColor);
 					}
@@ -166,11 +166,11 @@
 				{
 					prefix += "<color=silver>[INVISIBLE]</color>";
 					//playerButton.setButtonText($"[Invis]\n{playerButton.getButtonText()}");
-					playerButton.setBackgroundColor(Color.black);
+					playerButton.SetBackgroundColor(Color.black);
 				}
 				else
 				{
-					playerButton.setBackgroundColor(player.GetAPIUser().GetRankColor());
+					playerButton.SetBackgroundColor(player.GetAPIUser().GetRankColor());
 				}
 
 				if (player.GetVRCPlayer().GetIsDANGER())
@@ -180,12 +180,12 @@
 					//playerButton.setBackgroundColor(ModeratorColor);
 				}
 
-				playerButton.setTextColor(player.GetAPIUser().GetRankColor());
+				playerButton.SetTextColor(player.GetAPIUser().GetRankColor());
 
-				playerButton.setActive(ConfigManager.UI.ShowPlayersList);
+				playerButton.SetActive(ConfigManager.UI.ShowPlayersList);
 				if (ConfigManager.UI.ShowPlayersMenu != true)
 				{
-					playerButton.setActive(false);
+					playerButton.SetActive(false);
 				}
 
 				if (prefix != string.Empty)
@@ -193,7 +193,7 @@
 					prefix += "\n";
 				}
 
-				playerButton.setButtonText(prefix + player.DisplayName());
+				playerButton.SetButtonText(prefix + player.DisplayName());
 				PlayerButtons.Add(player.UserID(), playerButton);
 
 				yPos += 0.5f;
@@ -224,42 +224,42 @@
 			ConfigManager.UI.ShowPlayersList = !ConfigManager.UI.ShowPlayersList;
 			if (ConfigManager.UI.ShowPlayersList)
 			{
-				playersButton.setTextColor(Color.green);
+				playersButton.SetTextColor(Color.green);
 			}
 			else
 			{
-				playersButton.setTextColor(Color.red);
+				playersButton.SetTextColor(Color.red);
 			}
 
 			foreach (var keyValuePair in PlayerButtons)
 			{
-				keyValuePair.Value.setActive(ConfigManager.UI.ShowPlayersList);
+				keyValuePair.Value.SetActive(ConfigManager.UI.ShowPlayersList);
 			}
 		}
 
 		public static void ShowPlayerMenu()
 		{
 			ConfigManager.UI.ShowPlayersMenu = true;
-			playersButton.setTextColor(Color.green);
+			playersButton.SetTextColor(Color.green);
 
-			playersButton.setActive(true);
+			playersButton.SetActive(true);
 
 			foreach (var keyValuePair in PlayerButtons)
 			{
-				keyValuePair.Value.setActive(true);
+				keyValuePair.Value.SetActive(true);
 			}
 		}
 
 		public static void HidePlayerMenu()
 		{
 			ConfigManager.UI.ShowPlayersMenu = false;
-			playersButton.setTextColor(Color.red);
+			playersButton.SetTextColor(Color.red);
 
-			playersButton.setActive(false);
+			playersButton.SetActive(false);
 
 			foreach (var keyValuePair in PlayerButtons)
 			{
-				keyValuePair.Value.setActive(false);
+				keyValuePair.Value.SetActive(false);
 			}
 		}
 	}

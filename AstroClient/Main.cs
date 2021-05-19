@@ -121,7 +121,7 @@
 					Event_OnLevelLoaded?.Invoke(this, new EventArgs());
 					if (ToggleDebugInfo != null)
 					{
-						ToggleDebugInfo.setToggleState(Bools.IsDebugMode);
+						ToggleDebugInfo.SetToggleState(Bools.IsDebugMode);
 					}
 					break;
 			}
@@ -151,7 +151,7 @@
 				InitMainsButtons(5, 0, true);
 				ItemTweakerMain.InitButtons(5, 0.5f, true); //ItemTweaker Main Button
 				new QMSingleButton("ShortcutMenu", 5, 2, "GameObject Toggler", new Action(() =>
-				{ GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.getMainButton().getGameObject().GetComponent<Button>().onClick.Invoke(); }
+				{ GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }
 				), "Advanced GameObject Toggler", null, null, true);
 				CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 1.5f, true);
 

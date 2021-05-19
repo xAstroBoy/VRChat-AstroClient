@@ -105,7 +105,7 @@
 							var stream = File.ReadAllBytes(file);
 							var bundle = AssetBundle.LoadFromMemory(stream.ToArray(), 0);
 							bundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-							var materialpath = String.Empty;
+							var materialpath = string.Empty;
 							foreach (var assetname in bundle.GetAllAssetNames())
 							{
 								//ModConsole.DebugLog("Searching for Mat File in path : " + assetname);
@@ -201,7 +201,7 @@
 						{
 							var tmp = new QMSingleButton(scroll.BaseMenu, 0, 0, $"Set : {skybox.SkyboxName}", null, $"Load Skybox {skybox.SkyboxName} as map Skybox.", null, null, true);
 							tmp.SetResizeTextForBestFit(true);
-							tmp.setAction(new Action(() =>
+							tmp.SetAction(new Action(() =>
 							{
 								SetNewSkybox(skybox.SkyboxBundle.LoadAsset_Internal(skybox.SkyboxMaterialPath, Il2CppType.Of<Material>()).Cast<Material>());
 							}));

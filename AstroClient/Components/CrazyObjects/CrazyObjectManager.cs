@@ -129,11 +129,11 @@
 				var Timer = obj.GetComponent<CrazyObject>();
 				if (Timer != null)
 				{
-					CrazyTimerBtn.setButtonText("Timer : " + Timer.CrazyTimer);
+					CrazyTimerBtn.SetButtonText("Timer : " + Timer.CrazyTimer);
 				}
 				else
 				{
-					CrazyTimerBtn.setButtonText("Timer : " + "0");
+					CrazyTimerBtn.SetButtonText("Timer : " + "0");
 				}
 			}
 			catch (Exception) { }
@@ -166,7 +166,7 @@
 			ClearList();
 			if (CrazyTimerBtn != null)
 			{
-				CrazyTimerBtn.setButtonText("none");
+				CrazyTimerBtn.SetButtonText("none");
 			}
 		}
 

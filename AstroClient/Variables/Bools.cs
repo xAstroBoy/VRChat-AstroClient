@@ -20,7 +20,7 @@
 				ConfigManager.General.DebugLog = value;
 				if (Main.ToggleDebugInfo != null)
 				{
-					Main.ToggleDebugInfo.setToggleState(value);
+					Main.ToggleDebugInfo.SetToggleState(value);
 				}
 				if (value)
 				{

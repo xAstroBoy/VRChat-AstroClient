@@ -29,7 +29,7 @@
 			CurrentTarget = null;
 			if (CurrentScaleButton != null)
 			{
-				CurrentScaleButton.setButtonText(string.Empty);
+				CurrentScaleButton.SetButtonText(string.Empty);
 			}
 			EditVectorX = true;
 			EditVectorY = true;
@@ -389,18 +389,18 @@
 					{
 						if (obj.GetComponent<ItemInflater>().enabled)
 						{
-							CurrentScaleButton.setButtonText("Object 's scale : " + obj.GetComponent<ItemInflater>().NewSize.ToString());
+							CurrentScaleButton.SetButtonText("Object 's scale : " + obj.GetComponent<ItemInflater>().NewSize.ToString());
 							return;
 						}
 					}
 				}
 
-				CurrentScaleButton.setButtonText("Object 's scale : " + obj.transform.localScale.ToString());
+				CurrentScaleButton.SetButtonText("Object 's scale : " + obj.transform.localScale.ToString());
 				return;
 			}
 			else
 			{
-				CurrentScaleButton.setButtonText("");
+				CurrentScaleButton.SetButtonText("");
 			}
 		}
 
@@ -408,7 +408,7 @@
 		{
 			if (CurrentAddValue != null)
 			{
-				CurrentAddValue.setButtonText(ScaleValueToUse.ToString());
+				CurrentAddValue.SetButtonText(ScaleValueToUse.ToString());
 			}
 			if (ItemTweakerMain.ScaleSlider != null)
 			{
@@ -472,7 +472,7 @@
 			{
 				if (InflaterModeButton != null)
 				{
-					InflaterModeButton.setToggleState(value);
+					InflaterModeButton.SetToggleState(value);
 				}
 				_InflaterScaleMode = value;
 			}
@@ -492,7 +492,7 @@
 			{
 				if (ScaleEditX != null)
 				{
-					ScaleEditX.setToggleState(value);
+					ScaleEditX.SetToggleState(value);
 				}
 				_EditVectorX = value;
 			}
@@ -508,7 +508,7 @@
 			{
 				if (ScaleEditY != null)
 				{
-					ScaleEditY.setToggleState(value);
+					ScaleEditY.SetToggleState(value);
 				}
 				_EditVectorY = value;
 			}
@@ -524,7 +524,7 @@
 			{
 				if (ScaleEditZ != null)
 				{
-					ScaleEditZ.setToggleState(value);
+					ScaleEditZ.SetToggleState(value);
 				}
 				_EditVectorZ = value;
 			}

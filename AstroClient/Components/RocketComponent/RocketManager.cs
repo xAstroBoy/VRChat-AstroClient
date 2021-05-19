@@ -137,11 +137,11 @@
 			var Timer = obj.GetComponent<RocketObject>();
 			if (Timer != null)
 			{
-				RocketTimer.setButtonText("Timer : " + Timer.RocketTimer);
+				RocketTimer.SetButtonText("Timer : " + Timer.RocketTimer);
 			}
 			else
 			{
-				RocketTimer.setButtonText("Timer : 0");
+				RocketTimer.SetButtonText("Timer : 0");
 			}
 		}
 
@@ -164,7 +164,7 @@
 			ClearList();
 			if (RocketTimer != null)
 			{
-				RocketTimer.setButtonText("none");
+				RocketTimer.SetButtonText("none");
 			}
 		}
 

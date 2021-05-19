@@ -22,7 +22,7 @@
 		{
 			if (FogSwitch != null)
 			{
-				FogSwitch.setToggleState(RenderSettings.fog);
+				FogSwitch.SetToggleState(RenderSettings.fog);
 			}
 		}
 
@@ -37,15 +37,15 @@
 			AreLightMapsEnabled = true;
 			if (ToggleLightmaps != null)
 			{
-				ToggleLightmaps.setToggleState(AreLightMapsEnabled);
+				ToggleLightmaps.SetToggleState(AreLightMapsEnabled);
 			}
 			if (ToggleFullbright != null)
 			{
-				ToggleFullbright.setToggleState(false);
+				ToggleFullbright.SetToggleState(false);
 			}
 			if (ModifyRenderOptions != null)
 			{
-				ModifyRenderOptions.setToggleState(false);
+				ModifyRenderOptions.SetToggleState(false);
 			}
 		}
 

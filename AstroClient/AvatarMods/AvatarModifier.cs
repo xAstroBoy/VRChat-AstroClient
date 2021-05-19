@@ -79,7 +79,7 @@
 				_ForceLewdify = value;
 				if (ForceLewdify != null)
 				{
-					ForceLewdifyToggle.setToggleState(value);
+					ForceLewdifyToggle.SetToggleState(value);
 				}
 			}
 		}
@@ -126,7 +126,7 @@
 				_Lewdify = value;
 				if (Lewdify != null)
 				{
-					LewdifyToggle.setToggleState(value);
+					LewdifyToggle.SetToggleState(value);
 				}
 			}
 		}
@@ -172,7 +172,7 @@
 				_MaskDeleter = value;
 				if (RemoveMasksToggle != null)
 				{
-					RemoveMasksToggle.setToggleState(value);
+					RemoveMasksToggle.SetToggleState(value);
 				}
 			}
 		}

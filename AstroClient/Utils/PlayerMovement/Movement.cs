@@ -45,7 +45,7 @@
 			}
 			if (SerializerBtn != null)
 			{
-				SerializerBtn.setToggleState(false);
+				SerializerBtn.SetToggleState(false);
 			}
 			ClonesCapsules.Clear();
 		}
@@ -237,7 +237,7 @@
 				_SerializerEnabled = value;
 				if (SerializerBtn != null)
 				{
-					SerializerBtn.setToggleState(value);
+					SerializerBtn.SetToggleState(value);
 				}
 				CustomSerialize(value);
 
@@ -260,7 +260,7 @@
 				_IsUnlimitedJumpActive = value;
 				if (UnlimitedJumpToggle != null)
 				{
-					UnlimitedJumpToggle.setToggleState(value);
+					UnlimitedJumpToggle.SetToggleState(value);
 				}
 			}
 		}
@@ -280,7 +280,7 @@
 				_isRocketJumpActive = value;
 				if (RocketJumpToggle != null)
 				{
-					RocketJumpToggle.setToggleState(value);
+					RocketJumpToggle.SetToggleState(value);
 				}
 			}
 		}
@@ -299,7 +299,7 @@
 				_IsJumpOverriden = value;
 				if (JumpOverrideToggle != null)
 				{
-					JumpOverrideToggle.setToggleState(value);
+					JumpOverrideToggle.SetToggleState(value);
 				}
 			}
 		}

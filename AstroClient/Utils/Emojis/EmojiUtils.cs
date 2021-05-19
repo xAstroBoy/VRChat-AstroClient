@@ -132,7 +132,7 @@
 			if (EmojiIntReveal != null)
 			{
 				var emojiname = (EmojiNames)EmojiInt;
-				EmojiIntReveal.setButtonText(emojiname.ToString());
+				EmojiIntReveal.SetButtonText(emojiname.ToString());
 			}
 		}
 
@@ -142,7 +142,7 @@
 			{
 				LastUsedEmoji = emoji;
 				var emojiname = (EmojiNames)emoji;
-				LastSpawnedEmojiName.setButtonText(emojiname.ToString());
+				LastSpawnedEmojiName.SetButtonText(emojiname.ToString());
 			}
 		}
 
@@ -150,7 +150,7 @@
 		{
 			if (EmojiSpamCounter != null)
 			{
-				EmojiSpamCounter.setButtonText("Spawn " + EmojiSpammerInt + " Emojis (LOCAL)");
+				EmojiSpamCounter.SetButtonText("Spawn " + EmojiSpammerInt + " Emojis (LOCAL)");
 			}
 		}
 
@@ -321,7 +321,7 @@
 			OnlineSpawn = !OnlineSpawn;
 			if (EmojiSpawnerChoices != null)
 			{
-				EmojiSpawnerChoices.setToggleState(OnlineSpawn);
+				EmojiSpawnerChoices.SetToggleState(OnlineSpawn);
 			}
 		}
 
@@ -330,7 +330,7 @@
 			OnlineSpawn = @override;
 			if (EmojiSpawnerChoices != null)
 			{
-				EmojiSpawnerChoices.setToggleState(@override);
+				EmojiSpawnerChoices.SetToggleState(@override);
 			}
 		}
 
@@ -339,11 +339,11 @@
 			SkipVRChatOnlineCooldown = !SkipVRChatOnlineCooldown;
 			if (SpawnOfflineEmojisToggle != null)
 			{
-				SpawnOfflineEmojisToggle.setToggleState(SkipVRChatOnlineCooldown);
+				SpawnOfflineEmojisToggle.SetToggleState(SkipVRChatOnlineCooldown);
 			}
 			if (SpawnOfflineEmojisToggle2 != null)
 			{
-				SpawnOfflineEmojisToggle2.setToggleState(SkipVRChatOnlineCooldown);
+				SpawnOfflineEmojisToggle2.SetToggleState(SkipVRChatOnlineCooldown);
 			}
 		}
 
@@ -352,11 +352,11 @@
 			SkipVRChatOnlineCooldown = !SkipVRChatOnlineCooldown;
 			if (SpawnOfflineEmojisToggle != null)
 			{
-				SpawnOfflineEmojisToggle.setToggleState(SkipVRChatOnlineCooldown);
+				SpawnOfflineEmojisToggle.SetToggleState(SkipVRChatOnlineCooldown);
 			}
 			if (SpawnOfflineEmojisToggle2 != null)
 			{
-				SpawnOfflineEmojisToggle2.setToggleState(SkipVRChatOnlineCooldown);
+				SpawnOfflineEmojisToggle2.SetToggleState(SkipVRChatOnlineCooldown);
 			}
 		}
 
@@ -366,20 +366,20 @@
 			{
 				if (!IsVRChatCooldownActive)
 				{
-					EmojiStatusEmojiMenu.setButtonText("Visible");
-					EmojiStatusEmojiMenu.setTextColor(Color.green);
+					EmojiStatusEmojiMenu.SetButtonText("Visible");
+					EmojiStatusEmojiMenu.SetTextColor(Color.green);
 				}
 				else
 				{
 					if (SkipVRChatOnlineCooldown)
 					{
-						EmojiStatusEmojiMenu.setButtonText("Local");
-						EmojiStatusEmojiMenu.setTextColor(Color.red);
+						EmojiStatusEmojiMenu.SetButtonText("Local");
+						EmojiStatusEmojiMenu.SetTextColor(Color.red);
 					}
 					else
 					{
-						EmojiStatusEmojiMenu.setButtonText("VRChat Cooldown is active.");
-						EmojiStatusEmojiMenu.setTextColor(Color.red);
+						EmojiStatusEmojiMenu.SetButtonText("VRChat Cooldown is active.");
+						EmojiStatusEmojiMenu.SetTextColor(Color.red);
 					}
 				}
 			}
@@ -387,20 +387,20 @@
 			{
 				if (!IsVRChatCooldownActive)
 				{
-					EmojiStatusEmojiSpawner.setButtonText("Visible");
-					EmojiStatusEmojiSpawner.setTextColor(Color.green);
+					EmojiStatusEmojiSpawner.SetButtonText("Visible");
+					EmojiStatusEmojiSpawner.SetTextColor(Color.green);
 				}
 				else
 				{
 					if (SkipVRChatOnlineCooldown)
 					{
-						EmojiStatusEmojiSpawner.setButtonText("Local");
-						EmojiStatusEmojiSpawner.setTextColor(Color.red);
+						EmojiStatusEmojiSpawner.SetButtonText("Local");
+						EmojiStatusEmojiSpawner.SetTextColor(Color.red);
 					}
 					else
 					{
-						EmojiStatusEmojiSpawner.setButtonText("VRChat Cooldown is active.");
-						EmojiStatusEmojiSpawner.setTextColor(Color.red);
+						EmojiStatusEmojiSpawner.SetButtonText("VRChat Cooldown is active.");
+						EmojiStatusEmojiSpawner.SetTextColor(Color.red);
 					}
 				}
 			}
@@ -412,26 +412,26 @@
 			{
 				if (@override)
 				{
-					EmojiStatusEmojiMenu.setButtonText("Visible");
-					EmojiStatusEmojiMenu.setTextColor(Color.green);
+					EmojiStatusEmojiMenu.SetButtonText("Visible");
+					EmojiStatusEmojiMenu.SetTextColor(Color.green);
 				}
 				else
 				{
-					EmojiStatusEmojiMenu.setButtonText("Local");
-					EmojiStatusEmojiMenu.setTextColor(Color.red);
+					EmojiStatusEmojiMenu.SetButtonText("Local");
+					EmojiStatusEmojiMenu.SetTextColor(Color.red);
 				}
 			}
 			if (EmojiStatusEmojiSpawner != null)
 			{
 				if (@override)
 				{
-					EmojiStatusEmojiSpawner.setButtonText("Visible");
-					EmojiStatusEmojiSpawner.setTextColor(Color.green);
+					EmojiStatusEmojiSpawner.SetButtonText("Visible");
+					EmojiStatusEmojiSpawner.SetTextColor(Color.green);
 				}
 				else
 				{
-					EmojiStatusEmojiSpawner.setButtonText("Local");
-					EmojiStatusEmojiSpawner.setTextColor(Color.red);
+					EmojiStatusEmojiSpawner.SetButtonText("Local");
+					EmojiStatusEmojiSpawner.SetTextColor(Color.red);
 				}
 			}
 		}
@@ -441,7 +441,7 @@
 			SlowSpawningAllowed = !SlowSpawningAllowed;
 			if (EmojiSpawnerAllAtOnce != null)
 			{
-				EmojiSpawnerAllAtOnce.setToggleState(SlowSpawningAllowed);
+				EmojiSpawnerAllAtOnce.SetToggleState(SlowSpawningAllowed);
 			}
 		}
 

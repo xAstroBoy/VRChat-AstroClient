@@ -75,14 +75,14 @@
 			if (Death != null)
 			{
 				ModConsole.Log("Found Death Gameobject, God Mode is available!", System.Drawing.Color.Green);
-				GodModeMurder2.setActive(true);
+				GodModeMurder2.SetActive(true);
 			}
 			else
 			{
 				ModConsole.Log("Death Gameobject is Unknown, God Mode is unavailable!", System.Drawing.Color.Red);
 				if (GodModeMurder2 != null)
 				{
-					GodModeMurder2.setActive(false);
+					GodModeMurder2.SetActive(false);
 				}
 			}
 		}
@@ -122,7 +122,7 @@
 				Death.SetActive(!Death.active);
 				if (GodModeMurder2 != null)
 				{
-					GodModeMurder2.setToggleState(Death.active);
+					GodModeMurder2.SetToggleState(Death.active);
 				}
 			}
 		}
@@ -134,8 +134,8 @@
 				if (Murder2CheatPage != null)
 				{
 					ModConsole.Log($"Recognized {name} World, Unlocking Murder 2 cheats menu!", System.Drawing.Color.Green);
-					Murder2CheatPage.getMainButton().setIntractable(true);
-					Murder2CheatPage.getMainButton().setTextColor(Color.green);
+					Murder2CheatPage.GetMainButton().SetIntractable(true);
+					Murder2CheatPage.GetMainButton().SetTextColor(Color.green);
 				}
 				FindGameMurderObjects();
 			}
@@ -143,8 +143,8 @@
 			{
 				if (Murder2CheatPage != null)
 				{
-					Murder2CheatPage.getMainButton().setIntractable(false);
-					Murder2CheatPage.getMainButton().setTextColor(Color.red);
+					Murder2CheatPage.GetMainButton().SetIntractable(false);
+					Murder2CheatPage.GetMainButton().SetTextColor(Color.red);
 				}
 			}
 		}
@@ -173,7 +173,7 @@
 			Knifes.Clear();
 			if (Murder2ESPtoggler != null)
 			{
-				Murder2ESPtoggler.setToggleState(false);
+				Murder2ESPtoggler.SetToggleState(false);
 			}
 		}
 
@@ -198,7 +198,7 @@
 		public static void Murder2CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
 		{
 			Murder2CheatPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Murder 2 Cheats", "Manage Murder 2 Cheats", null, null, null, null, btnHalf);
-			Murder2CheatPage.getMainButton().SetResizeTextForBestFit(true);
+			Murder2CheatPage.GetMainButton().SetResizeTextForBestFit(true);
 			QMNestedButton MurderItemTeleporter = new QMNestedButton(Murder2CheatPage, 1, 0, "Item Teleporter", "", null, null, null, null, true);
 			new QMSingleButton(MurderItemTeleporter, 1, 0, "Teleport The Clues to Your Pos!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!", null, null);
 			new QMSingleButton(MurderItemTeleporter, 2, 0, "Teleport the Detective Gun!", new Action(() => { item_detectiveGun.TeleportToMe(); }), "Detective Gun Teleporter!", null, null);

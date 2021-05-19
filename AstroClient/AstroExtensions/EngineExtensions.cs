@@ -221,7 +221,7 @@
 			}
 			if (ItemTweakerMain.ObjectActiveToggle != null)
 			{
-				ItemTweakerMain.ObjectActiveToggle.setToggleState(obj.active);
+				ItemTweakerMain.ObjectActiveToggle.SetToggleState(obj.active);
 			}
 		}
 

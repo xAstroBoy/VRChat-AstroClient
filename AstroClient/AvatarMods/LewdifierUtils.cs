@@ -66,7 +66,7 @@
 			Refresh_AvatarsToSkip();
 			if (LewdifyLists != null)
 			{
-				LewdifyLists.setButtonText(ListButtonText);
+				LewdifyLists.SetButtonText(ListButtonText);
 			}
 		}
 

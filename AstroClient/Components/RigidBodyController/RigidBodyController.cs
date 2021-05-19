@@ -260,7 +260,7 @@
 				{
 					if (ItemTweakerMain.ProtectionInteractor != null)
 					{
-						ItemTweakerMain.ProtectionInteractor.setToggleState(PreventOthersFromGrabbing);
+						ItemTweakerMain.ProtectionInteractor.SetToggleState(PreventOthersFromGrabbing);
 					}
 
 					if (!Forces.UpdateFreezeAllConstraints(Constraints))
@@ -270,7 +270,7 @@
 					}
 					if (obj.transform != null)
 					{
-						ItemTweakerMain.CurrentObjectCoordsBtn.setButtonText($"X: {obj.transform.position.x} \n Y: {obj.transform.position.y} \n Z: {obj.transform.position.z}");
+						ItemTweakerMain.CurrentObjectCoordsBtn.SetButtonText($"X: {obj.transform.position.x} \n Y: {obj.transform.position.y} \n Z: {obj.transform.position.z}");
 					}
 				}
 

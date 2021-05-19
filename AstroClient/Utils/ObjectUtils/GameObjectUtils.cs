@@ -216,7 +216,7 @@
 
 		public static void GrabbableGameObjDumper()
 		{
-			GrabGameObjDumper.setIntractable(false);
+			GrabGameObjDumper.SetIntractable(false);
 			new Thread(() =>
 			{
 				string path = Path.Combine(Environment.CurrentDirectory + $@"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_VRCPickups.txt");
@@ -246,7 +246,7 @@
 
 		public static void GameObjectDumper()
 		{
-			GameObjDumper.setIntractable(false);
+			GameObjDumper.SetIntractable(false);
 			new Thread(() =>
 			{
 				string path = Path.Combine(Environment.CurrentDirectory + $@"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_GameObjects.txt");
@@ -296,7 +296,7 @@
 
 		public static void GameObjDumperWithComponents()
 		{
-			ObjDumperWithComponentsBtn.setIntractable(false);
+			ObjDumperWithComponentsBtn.SetIntractable(false);
 			string path = Path.Combine(Environment.CurrentDirectory + $@"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_GameObjects_With_components.txt");
 			var listg = Resources.FindObjectsOfTypeAll<GameObject>();
 			using (var txtFile = File.AppendText(path))
@@ -408,16 +408,16 @@
 			Mirrors.Clear();
 			if (GameObjDumper != null)
 			{
-				GameObjDumper.setIntractable(true);
+				GameObjDumper.SetIntractable(true);
 			}
 			if (GrabGameObjDumper != null)
 			{
-				GrabGameObjDumper.setIntractable(true);
+				GrabGameObjDumper.SetIntractable(true);
 			}
 
 			if (ObjDumperWithComponentsBtn != null)
 			{
-				ObjDumperWithComponentsBtn.setIntractable(true);
+				ObjDumperWithComponentsBtn.SetIntractable(true);
 			}
 		}
 
