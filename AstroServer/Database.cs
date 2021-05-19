@@ -1,6 +1,5 @@
 ﻿namespace AstroServer
 {
-	using AstroNetworkingLibrary.Serializable;
 	using MongoDB.Driver;
 	using MongoDB.Entities;
 	using System;
@@ -18,11 +17,6 @@
 		public static string GetConnectionString()
 		{
 			return File.ReadAllText("/root/mono.txt");
-		}
-
-		public static void AddAvatar(AvatarData avatarData)
-		{
-			
 		}
 	}
 }

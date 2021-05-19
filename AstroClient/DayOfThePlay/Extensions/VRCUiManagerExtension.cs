@@ -114,7 +114,7 @@
 							if (jt.Type == XrefType.Global)
 							{
 								Il2CppSystem.Object @object = jt.ReadAsObject();
-								return ((@object != null) ? @object.ToString() : null) == "Screen Not Found - ";
+								return (@object?.ToString()) == "Screen Not Found - ";
 							}
 							return false;
 						});

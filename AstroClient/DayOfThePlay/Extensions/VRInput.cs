@@ -6,25 +6,9 @@
 	{
 		public class Vive
 		{
-			public static ViveController Left
-			{
-				get
-				{
-					if (Left == null)
-						return new ViveController(HandType.Left);
-					return Left;
-				}
-			}
+			public static ViveController Left => Left ?? new ViveController(HandType.Left);
 
-			public static ViveController Right
-			{
-				get
-				{
-					if (Right == null)
-						return new ViveController(HandType.Right);
-					return Right;
-				}
-			}
+			public static ViveController Right => Right ?? new ViveController(HandType.Right);
 		}
 
 		public class ViveController : VRController
@@ -35,23 +19,23 @@
 				HandType = type;
 				Grip = new VRButton()
 				{
-					name = type == HandType.Right ? "Oculus_CrossPlatform_SecondaryHandTrigger" : "Oculus_CrossPlatform_PrimaryHandTrigger",
+					Name = type == HandType.Right ? "Oculus_CrossPlatform_SecondaryHandTrigger" : "Oculus_CrossPlatform_PrimaryHandTrigger",
 				};
 				TrackPad = new VRButton()
 				{
-					name = type == HandType.Right ? "Oculus_CrossPlatform_SecondaryThumbstick" : "Oculus_CrossPlatform_PrimaryThumbstick",
+					Name = type == HandType.Right ? "Oculus_CrossPlatform_SecondaryThumbstick" : "Oculus_CrossPlatform_PrimaryThumbstick",
 				};
 				Vertical = new VRAxis()
 				{
-					name = type == HandType.Right ? "Oculus_CrossPlatform_SecondaryThumbstickVertical" : "Oculus_CrossPlatform_PrimaryThumbstickVertical",
+					Name = type == HandType.Right ? "Oculus_CrossPlatform_SecondaryThumbstickVertical" : "Oculus_CrossPlatform_PrimaryThumbstickVertical",
 				};
 				Horizontal = new VRAxis()
 				{
-					name = type == HandType.Right ? "Oculus_CrossPlatform_SecondaryThumbstickHorizontal" : "Oculus_CrossPlatform_SecondaryThumbstickHorizontal",
+					Name = type == HandType.Right ? "Oculus_CrossPlatform_SecondaryThumbstickHorizontal" : "Oculus_CrossPlatform_SecondaryThumbstickHorizontal",
 				};
 				Trigger = new VRAxis()
 				{
-					name = type == HandType.Right ? "Oculus_CrossPlatform_SecondaryIndexTrigger" : "Oculus_CrossPlatform_PrimaryIndexTrigger",
+					Name = type == HandType.Right ? "Oculus_CrossPlatform_SecondaryIndexTrigger" : "Oculus_CrossPlatform_PrimaryIndexTrigger",
 				};
 			}
 
@@ -77,13 +61,13 @@
 
 		public class VRButton
 		{
-			public string name { get; set; }
+			public string Name { get; set; }
 
 			public bool GetButtonDown
 			{
 				get
 				{
-					return Input.GetKeyDown(name);
+					return Input.GetKeyDown(Name);
 				}
 			}
 
@@ -91,7 +75,7 @@
 			{
 				get
 				{
-					return Input.GetKeyUp(name);
+					return Input.GetKeyUp(Name);
 				}
 			}
 
@@ -99,20 +83,20 @@
 			{
 				get
 				{
-					return Input.GetKey(name);
+					return Input.GetKey(Name);
 				}
 			}
 		}
 
 		public class VRAxis
 		{
-			public string name { get; set; }
+			public string Name { get; set; }
 
 			public float GetAxis
 			{
 				get
 				{
-					return Input.GetAxis(name);
+					return Input.GetAxis(Name);
 				}
 			}
 		}

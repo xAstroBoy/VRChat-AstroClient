@@ -72,14 +72,9 @@
 
 			var repy = stringBuilder.ToString();
 
-			if (repy != null && repy != string.Empty)
-			{
-				_ = await ReplyAsync(repy);
-			}
-			else
-			{
-				_ = await ReplyAsync($"Nobody found with the discord ID '{discordID}'");
-			}
+			_ = repy != null && repy != string.Empty
+				? await ReplyAsync(repy)
+				: await ReplyAsync($"Nobody found with the discord ID '{discordID}'");
 		}
 
 		[Command("Kick")]
