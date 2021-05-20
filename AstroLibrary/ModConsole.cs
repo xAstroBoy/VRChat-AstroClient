@@ -100,37 +100,37 @@
 		public static void LogExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
 		{
 			PrintCallerTag(callerName, callerLine);
-			Exception((e as Exception), LogTypes.LOG);
+			Exception(e as Exception, LogTypes.LOG);
 		}
 
 		public static void WarningExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
 		{
 			PrintCallerTag(callerName, callerLine);
-			Exception((e as Exception), LogTypes.WARNING);
+			Exception(e as Exception, LogTypes.WARNING);
 		}
 
 		public static void ErrorExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
 		{
 			PrintCallerTag(callerName, callerLine);
-			Exception((e as Exception), LogTypes.ERROR);
+			Exception(e as Exception, LogTypes.ERROR);
 		}
 
 		public static void DebugLogExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
 		{
 			PrintCallerTag(callerName, callerLine);
-			Exception((e as Exception), LogTypes.DEBUG_LOG);
+			Exception(e as Exception, LogTypes.DEBUG_LOG);
 		}
 
 		public static void DebugWarningExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
 		{
 			PrintCallerTag(callerName, callerLine);
-			Exception((e as Exception), LogTypes.DEBUG_WARNING);
+			Exception(e as Exception, LogTypes.DEBUG_WARNING);
 		}
 
 		public static void DebugErrorExc<T>(T e, [CallerMemberName] string callerName = "", [CallerLineNumber] int callerLine = 0)
 		{
 			PrintCallerTag(callerName, callerLine);
-			Exception((e as Exception), LogTypes.DEBUG_ERROR);
+			Exception(e as Exception, LogTypes.DEBUG_ERROR);
 		}
 
 		public static void Log(string msg, Color? textcolor = null)

@@ -43,7 +43,7 @@
 
 		public static bool IsKeyValid(string key)
 		{
-			return (DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(key))).Result.Any();
+			return DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(key)).Result.Any();
 		}
 
 		public static ulong GetKeysDiscordOwner(string authKey)

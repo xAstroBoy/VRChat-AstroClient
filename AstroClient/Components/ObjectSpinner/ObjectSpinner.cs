@@ -86,7 +86,7 @@
 					return;
 				}
 
-				if ((Time.time - LastTimeCheck > SpinnerTimer))
+				if (Time.time - LastTimeCheck > SpinnerTimer)
 				{
 					if (!HasRequiredSettings)
 					{

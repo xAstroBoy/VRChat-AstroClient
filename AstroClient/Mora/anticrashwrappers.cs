@@ -33,7 +33,7 @@
 
 			public static bool is_known(string shader)
 			{
-				return (shader_list.Contains(shader)) || shader_list_local.Contains(shader);
+				return shader_list.Contains(shader) || shader_list_local.Contains(shader);
 			}
 
 			public static string convert(WebResponse res)
@@ -54,7 +54,7 @@
 				WebRequest webRequest = WebRequest.Create("https://raw.githubusercontent.com/morag12/vrchat_useful_mod/master/blacklist-shaders.txt");
 				HttpRequestCachePolicy cachePolicy = new HttpRequestCachePolicy(HttpRequestCacheLevel.BypassCache);
 				webRequest.CachePolicy = cachePolicy;
-				ServicePointManager.ServerCertificateValidationCallback = ((object s, X509Certificate c, X509Chain cc, SslPolicyErrors ssl) => true);
+				ServicePointManager.ServerCertificateValidationCallback = (object s, X509Certificate c, X509Chain cc, SslPolicyErrors ssl) => true;
 				return (from x in to_array(webRequest.GetResponse())
 						where !string.IsNullOrEmpty(x)
 						select x).ToArray();

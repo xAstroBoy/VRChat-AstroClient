@@ -37,23 +37,23 @@
 			if (p != null)
 			{
 				Debug($"Found Target Player {p.DisplayName()}, For SingleTag");
-				_player = p;
+				Player = p;
 			}
 			else
 			{
-				ModConsole.Error($"Failed to Generate a SingleTag for Player {player.DisplayName()}");
+				ModConsole.Error($"Failed to Generate a SingleTag for Player {Player.DisplayName()}");
 				Destroy(this);
 			}
 			Debug($"Pre-assigned InternalStack {InternalStack}");
 			// FIND ESSENTIALS TO GENERATE A TAG.
 			if (Player_content == null)
 			{
-				if (player != null)
+				if (Player != null)
 				{
-					Player_content = player.transform.Find("Player Nameplate/Canvas/Nameplate/Contents");
+					Player_content = Player.transform.Find("Player Nameplate/Canvas/Nameplate/Contents");
 					if (Player_content != null)
 					{
-						Debug($"Found {player.DisplayName()}  Nameplate Contents Required to generate a SingleTag (using : {Player_content.name})!");
+						Debug($"Found {Player.DisplayName()}  Nameplate Contents Required to generate a SingleTag (using : {Player_content.name})!");
 					}
 				}
 			}
@@ -62,13 +62,13 @@
 				Player_QuickStats = Player_content.Find("Quick Stats");
 				if (Player_QuickStats != null)
 				{
-					Debug($"Found {player.DisplayName()}  Nameplate Quick Stats Required to generate a SingleTag (using : {Player_QuickStats.name})!");
+					Debug($"Found {Player.DisplayName()}  Nameplate Quick Stats Required to generate a SingleTag (using : {Player_QuickStats.name})!");
 				}
 			}
 			if (Player_content != null && Player_QuickStats != null)
 			{
-				Debug($"Using Content from {player.DisplayName()}  Contents : {Player_content.name})!");
-				Debug($"Using QuickStats from {player.DisplayName()}  Player_QuickStats : {Player_QuickStats.name})!");
+				Debug($"Using Content from {Player.DisplayName()}  Contents : {Player_content.name})!");
+				Debug($"Using QuickStats from {Player.DisplayName()}  Player_QuickStats : {Player_QuickStats.name})!");
 
 				if (SpawnedTag == null)
 				{
@@ -77,18 +77,18 @@
 					SpawnedTag = Instantiate(Player_QuickStats, Player_QuickStats.parent, false);
 					if (SpawnedTag != null)
 					{
-						Debug($"Spawned SingleTag for {player.DisplayName()}!");
+						Debug($"Spawned SingleTag for {Player.DisplayName()}!");
 						SpawnedTag.name = TagName;
 
 						// TODO : MAKE A SYSTEM TO MAKE IT AUTOMATIC STACK!
 
-						Debug($"Purging  {player.DisplayName()}  {SpawnedTag.name} from Useless Internals");
+						Debug($"Purging  {Player.DisplayName()}  {SpawnedTag.name} from Useless Internals");
 						for (int i = SpawnedTag.childCount; i > 0; i--)
 						{
 							Transform child = SpawnedTag.GetChild(i - 1);
 							if (child.name == "Trust Text")
 							{
-								Debug($"Found Child {child.name} As TextChild in {SpawnedTag.name}  allocated on {player.DisplayName()}");
+								Debug($"Found Child {child.name} As TextChild in {SpawnedTag.name}  allocated on {Player.DisplayName()}");
 								Label = child;
 								if (Label != null)
 								{
@@ -96,7 +96,7 @@
 								}
 								continue;
 							}
-							Debug($"Removed Child {child.name} in {SpawnedTag.name} allocated on {player.DisplayName()}");
+							Debug($"Removed Child {child.name} in {SpawnedTag.name} allocated on {Player.DisplayName()}");
 							Destroy(child.gameObject);
 							if (!SpawnedTag.gameObject.active)
 							{
@@ -109,7 +109,7 @@
 							var spawnedimageslice = SpawnedTag.GetComponent<ImageThreeSlice>();
 							if (spawnedimageslice != null)
 							{
-								Debug($"Found ImageThreeSlice Component As SpawnedStatsImage in {SpawnedTag.name}  allocated on {player.DisplayName()}");
+								Debug($"Found ImageThreeSlice Component As SpawnedStatsImage in {SpawnedTag.name}  allocated on {Player.DisplayName()}");
 								SpawnedStatsImage = spawnedimageslice;
 							}
 							else
@@ -117,7 +117,7 @@
 								var statsimageslice = Player_QuickStats.GetComponent<ImageThreeSlice>();
 								if (statsimageslice != null)
 								{
-									Debug($"Using ImageThreeSlice from Original Stats As SpawnedStatsImage in {SpawnedTag.name}  allocated on {player.DisplayName()}");
+									Debug($"Using ImageThreeSlice from Original Stats As SpawnedStatsImage in {SpawnedTag.name}  allocated on {Player.DisplayName()}");
 									SpawnedStatsImage = statsimageslice;
 								}
 							}
@@ -129,10 +129,10 @@
 
 		public void OnDestroy()
 		{
-			if (player != null)
+			if (Player != null)
 			{
 				Destroy(SpawnedTag.gameObject);
-				var sorted = (from s in player.GetComponentsInChildren<SingleTag>(true) orderby s.AllocatedStack descending select s).ToList();
+				var sorted = (from s in Player.GetComponentsInChildren<SingleTag>(true) orderby s.AllocatedStack descending select s).ToList();
 				if (sorted.Count() != 0 && sorted.Count() != 1)
 				{
 					foreach (var tag in sorted)
@@ -154,7 +154,7 @@
 						}
 					}
 				}
-				var entry = SingleTagsUtils.GetEntry(player);
+				var entry = SingleTagsUtils.GetEntry(Player);
 				if (entry != null)
 				{
 					entry.AssignedStack--;
@@ -240,15 +240,7 @@
 
 		internal int InternalStack;
 
-		private Player _player;
-
-		internal Player player
-		{
-			get
-			{
-				return _player;
-			}
-		}
+		internal Player Player { get; private set; }
 
 		private Transform Player_content;
 

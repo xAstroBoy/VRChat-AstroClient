@@ -33,7 +33,7 @@
 			{
 				Destroy(this);
 			}
-			isRPCActive = false;
+			IsRPCActive = false;
 			if (Internal_player != null)
 			{
 				if (Internal_player.prop_APIUser_0 != null)
@@ -113,35 +113,35 @@
 								if (action == "SyncAssignB")
 								{
 									AmongUsCurrentRole = AmongUsRoles.Crewmate;
-									if (!isRPCActive)
+									if (!IsRPCActive)
 									{
-										isRPCActive = true;
+										IsRPCActive = true;
 									}
 								}
 								else if (action == "SyncAssignM")
 								{
 									AmongUsCurrentRole = AmongUsRoles.Impostor;
-									if (!isRPCActive)
+									if (!IsRPCActive)
 									{
-										isRPCActive = true;
+										IsRPCActive = true;
 									}
 								}
 								else if (action == "SyncKill")
 								{
 									AmongUsCurrentRole = AmongUsRoles.None;
 									AmongUSHasVoted = false;
-									if (!isRPCActive)
+									if (!IsRPCActive)
 									{
-										isRPCActive = true;
+										IsRPCActive = true;
 									}
 								}
 								else if (action == "SyncVotedOut")
 								{
 									AmongUsCurrentRole = AmongUsRoles.None;
 									AmongUSHasVoted = false;
-									if (!isRPCActive)
+									if (!IsRPCActive)
 									{
-										isRPCActive = true;
+										IsRPCActive = true;
 									}
 								}
 								else if (action.Contains("SyncVotedFor"))
@@ -159,18 +159,18 @@
 										}
 									}
 									AmongUSHasVoted = true;
-									if (!isRPCActive)
+									if (!IsRPCActive)
 									{
-										isRPCActive = true;
+										IsRPCActive = true;
 									}
 								}
 								else if (action.Equals("SyncAbstainedVoting"))
 								{
 									AmongUSHasVoted = true;
 									SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
-									if (!isRPCActive)
+									if (!IsRPCActive)
 									{
-										isRPCActive = true;
+										IsRPCActive = true;
 									}
 								}
 							}
@@ -188,9 +188,9 @@
 								AmongUsCurrentRole = AmongUsRoles.None;
 								AmongUSHasVoted = false;
 							}
-							if (!isRPCActive)
+							if (!IsRPCActive)
 							{
-								isRPCActive = true;
+								IsRPCActive = true;
 							}
 						}
 					}
@@ -204,33 +204,33 @@
 								if (action == "SyncAssignB")
 								{
 									Murder4CurrentRole = Murder4Roles.Bystander;
-									if (!isRPCActive)
+									if (!IsRPCActive)
 									{
-										isRPCActive = true;
+										IsRPCActive = true;
 									}
 								}
 								else if (action == "SyncAssignD")
 								{
 									Murder4CurrentRole = Murder4Roles.Detective;
-									if (!isRPCActive)
+									if (!IsRPCActive)
 									{
-										isRPCActive = true;
+										IsRPCActive = true;
 									}
 								}
 								else if (action == "SyncAssignM")
 								{
 									Murder4CurrentRole = Murder4Roles.Murderer;
-									if (!isRPCActive)
+									if (!IsRPCActive)
 									{
-										isRPCActive = true;
+										IsRPCActive = true;
 									}
 								}
 								else if (action == "SyncKill")
 								{
 									Murder4CurrentRole = Murder4Roles.None;
-									if (!isRPCActive)
+									if (!IsRPCActive)
 									{
-										isRPCActive = true;
+										IsRPCActive = true;
 									}
 								}
 							}
@@ -238,9 +238,9 @@
 							if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action.Equals("SyncStart"))
 							{
 								Murder4CurrentRole = Murder4Roles.None;
-								if (!isRPCActive)
+								if (!IsRPCActive)
 								{
-									isRPCActive = true;
+									IsRPCActive = true;
 								}
 							}
 						}
@@ -295,7 +295,7 @@
 
 		private AmongUsRoles GetPlayerRoleAmongUS()
 		{
-			if (isRPCActive)
+			if (IsRPCActive)
 			{
 				return AmongUsCurrentRole;
 			}
@@ -321,7 +321,7 @@
 
 		private Murder4Roles GetPlayerRoleMurder4()
 		{
-			if (isRPCActive)
+			if (IsRPCActive)
 			{
 				return Murder4CurrentRole;
 			}
@@ -819,12 +819,12 @@
 
 			get
 			{
-				return _SavedEntry;
+				return SavedEntry;
 			}
 
 			set
 			{
-				_SavedEntry = value;
+				SavedEntry = value;
 				Internal_AssignedEntry = value.Entry.gameObject;
 				Internal_AssignedNode = value.Node.gameObject;
 			}
@@ -844,12 +844,12 @@
 
 			get
 			{
-				return _AssignedPlayerEntry;
+				return AssignedPlayerEntry;
 			}
 
 			set
 			{
-				_AssignedPlayerEntry = value;
+				AssignedPlayerEntry = value;
 			}
 		}
 
@@ -963,19 +963,19 @@
 				}
 			}
 		}
-		internal bool isRPCActive { get; set; } = false;
+		internal bool IsRPCActive { get; set; } = false;
 		internal Murder4Roles Murder4CurrentRole { get; set; } = Murder4Roles.Unassigned;
 		internal AmongUsRoles AmongUsCurrentRole { get; set; } = AmongUsRoles.Unassigned;
 		internal Player Internal_player { get; private set; } = null;
 
 		internal PlayerESP ESP { get; private set; } = null;
 		internal APIUser Internal_user { get; private set; } = null;
-		internal GameObject _AssignedPlayerEntry { get; private set; } = null;
+		internal GameObject AssignedPlayerEntry { get; private set; } = null;
 		internal SingleTag GameRoleTag { get; private set; } = null;
 
 		internal SingleTag AmongUSVoteRevealTag { get; private set; } = null;
 
-		internal LinkedNodes _SavedEntry { get; private set; } = null;
+		internal LinkedNodes SavedEntry { get; private set; } = null;
 
 
 

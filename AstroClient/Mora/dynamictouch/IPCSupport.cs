@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO.Pipes;
-using System.Runtime.InteropServices;
-using System.IO;
-using System.Runtime.InteropServices.ComTypes;
-
-namespace ExternalDynamicBoneEditor
+﻿namespace ExternalDynamicBoneEditor
 {
-    namespace IPCSupport
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Text;
+	using System.IO.Pipes;
+	using System.Runtime.InteropServices;
+	using System.IO;
+
+	namespace IPCSupport
     {
         public enum Message
         {

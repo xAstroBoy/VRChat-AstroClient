@@ -25,7 +25,7 @@
 
 		public static void AddString(this List<string> list, string text)
 		{
-			if (list != null && !string.IsNullOrEmpty((text)))
+			if (list != null && !string.IsNullOrEmpty(text))
 			{
 				if (!list.Contains(text))
 				{
@@ -39,7 +39,7 @@
 					ModConsole.Log("Error, failed to add string " + text + " because " + nameof(list).ToString() + " is null.");
 					return;
 				}
-				if (string.IsNullOrEmpty((text)))
+				if (string.IsNullOrEmpty(text))
 				{
 					return;
 				}
@@ -48,7 +48,7 @@
 
 		public static void RemoveString(this List<string> list, string text)
 		{
-			if (list != null && !string.IsNullOrEmpty((text)))
+			if (list != null && !string.IsNullOrEmpty(text))
 			{
 				if (list.Contains(text))
 				{
@@ -62,7 +62,7 @@
 					ModConsole.Log("Error, failed to remove string " + text + " because " + nameof(list).ToString() + " is null.");
 					return;
 				}
-				if (string.IsNullOrEmpty((text)))
+				if (string.IsNullOrEmpty(text))
 				{
 					return;
 				}

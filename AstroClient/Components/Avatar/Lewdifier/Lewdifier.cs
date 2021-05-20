@@ -97,7 +97,7 @@
 									if (!string.IsNullOrEmpty(apiavatar.assetUrl) && !string.IsNullOrEmpty(apiavatar.id))
 									{
 										AvatarID = apiavatar.id;
-										lewdify_Avatar();
+										Lewdify_Avatar();
 									}
 								}
 							}
@@ -108,7 +108,7 @@
 		}
 
 
-		internal void lewdify_Avatar()
+		internal void Lewdify_Avatar()
 		{
 			if (!LewdifierUtils.AvatarsToSkip.Contains(AvatarID))
 			{

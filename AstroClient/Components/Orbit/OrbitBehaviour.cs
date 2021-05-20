@@ -288,7 +288,7 @@
 		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		public static float Lerp(float a, float b, float t)
 		{
-			return a + (b - a) * Clamp(t);
+			return a + ((b - a) * Clamp(t));
 		}
 
 		public enum RotationMode : byte

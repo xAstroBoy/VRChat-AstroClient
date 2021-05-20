@@ -578,7 +578,7 @@
 
 		public override void SetBackgroundColor(Color buttonBackgroundColor, bool save = true)
 		{
-			Image[] btnBgColorList = ((btnOn.GetComponentsInChildren<Image>()).Concat(btnOff.GetComponentsInChildren<Image>()).ToArray()).Concat(button.GetComponentsInChildren<Image>()).ToArray();
+			Image[] btnBgColorList = btnOn.GetComponentsInChildren<Image>().Concat(btnOff.GetComponentsInChildren<Image>()).ToArray().Concat(button.GetComponentsInChildren<Image>()).ToArray();
 			foreach (Image btnBackground in btnBgColorList) btnBackground.color = buttonBackgroundColor;
 			if (save)
 				OrigBackground = buttonBackgroundColor;
@@ -586,7 +586,7 @@
 
 		public override void SetTextColorOn(Color buttonTextColorOn, bool save = true)
 		{
-			Text[] btnTxtColorOnList = (btnOn.GetComponentsInChildren<Text>()).ToArray();
+			Text[] btnTxtColorOnList = btnOn.GetComponentsInChildren<Text>().ToArray();
 			foreach (Text btnText in btnTxtColorOnList) btnText.color = buttonTextColorOn;
 			if (save)
 				OrigText = buttonTextColorOn;
@@ -594,7 +594,7 @@
 
 		public override void SetTextColorOff(Color buttonTextColorOff, bool save = true)
 		{
-			Text[] btnTxtColorOffList = (btnOff.GetComponentsInChildren<Text>()).ToArray();
+			Text[] btnTxtColorOffList = btnOff.GetComponentsInChildren<Text>().ToArray();
 			foreach (Text btnText in btnTxtColorOffList) btnText.color = buttonTextColorOff;
 			if (save)
 				OrigText = buttonTextColorOff;

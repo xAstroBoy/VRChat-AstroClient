@@ -270,7 +270,7 @@
 				Vector3 position = transform.TransformPoint(collider.center);
 				_transform.localScale = Vector3.one * num;
 				_transform.position = position;
-				_renderer.sharedMaterial = (collider.isTrigger ? _triggerMaterial : _solidMaterial);
+				_renderer.sharedMaterial = collider.isTrigger ? _triggerMaterial : _solidMaterial;
 			}
 
 			private readonly Transform _transform;
@@ -308,7 +308,7 @@
 				_transform.localScale = Vector3.Scale(transform.lossyScale, collider.size);
 				_transform.position = transform.TransformPoint(collider.center);
 				_transform.rotation = transform.rotation;
-				_renderer.sharedMaterial = (collider.isTrigger ? _triggerMaterial : _solidMaterial);
+				_renderer.sharedMaterial = collider.isTrigger ? _triggerMaterial : _solidMaterial;
 			}
 
 			private readonly Transform _transform;

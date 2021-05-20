@@ -122,7 +122,7 @@
 					HasRequiredSettings = true;
 				}
 
-				if ((Time.time - LastTimeCheck2 > ImpulseTimer))
+				if (Time.time - LastTimeCheck2 > ImpulseTimer)
 				{
 					if (TakeOwnership)
 					{
@@ -148,7 +148,7 @@
 					}
 				}
 
-				if ((Time.time - LastTimeCheck > CrazyTimer))
+				if (Time.time - LastTimeCheck > CrazyTimer)
 				{
 					if (TakeOwnership)
 					{

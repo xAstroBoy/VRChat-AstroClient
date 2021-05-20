@@ -67,7 +67,7 @@
 		{
 			try
 			{
-				if ((Time.time - LastTimeCheck > RocketTimer))
+				if (Time.time - LastTimeCheck > RocketTimer)
 				{
 					if (pickup.isHeld)
 					{

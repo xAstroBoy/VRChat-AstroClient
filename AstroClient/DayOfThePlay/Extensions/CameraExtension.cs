@@ -11,22 +11,22 @@
 			SetCameraMode(CameraMode.Off);
 			SetCameraMode(CameraMode.Photo);
 			UserCameraController userCameraController = Utils.UserCameraController;
-			worldCameraVector = userCameraController.field_Public_Transform_0.transform.position;
-			worldCameraQuaternion = userCameraController.field_Public_Transform_0.transform.rotation;
-			worldCameraQuaternion *= Quaternion.Euler(90f, 0f, 180f);
+			WorldCameraVector = userCameraController.field_Public_Transform_0.transform.position;
+			WorldCameraQuaternion = userCameraController.field_Public_Transform_0.transform.rotation;
+			WorldCameraQuaternion *= Quaternion.Euler(90f, 0f, 180f);
 			userCameraController.field_Internal_UserCameraIndicator_0.transform.position = userCameraController.field_Public_Transform_0.transform.position;
 			userCameraController.field_Internal_UserCameraIndicator_0.transform.rotation = userCameraController.field_Public_Transform_0.transform.rotation;
 		}
 
 		public static void RotateAround(Vector3 center, Vector3 axis, float angle)
 		{
-			Vector3 worldCameraVector = CameraExtension.worldCameraVector;
+			Vector3 worldCameraVector = CameraExtension.WorldCameraVector;
 			Quaternion quaternion = Quaternion.AngleAxis(angle, axis);
 			Vector3 vector = worldCameraVector - center;
 			vector = quaternion * vector;
-			CameraExtension.worldCameraVector = center + vector;
-			Quaternion worldCameraQuaternion = CameraExtension.worldCameraQuaternion;
-			CameraExtension.worldCameraQuaternion *= Quaternion.Inverse(worldCameraQuaternion) * quaternion * worldCameraQuaternion;
+			CameraExtension.WorldCameraVector = center + vector;
+			Quaternion worldCameraQuaternion = CameraExtension.WorldCameraQuaternion;
+			CameraExtension.WorldCameraQuaternion *= Quaternion.Inverse(worldCameraQuaternion) * quaternion * worldCameraQuaternion;
 		}
 
 		public static void TakePicture(int timer)
@@ -57,19 +57,21 @@
 
 		public static Dictionary<string, int> Filters()
 		{
-			Dictionary<string, int> dictionary = new Dictionary<string, int>();
-			dictionary.Add("None", 0);
-			dictionary.Add("Blueprint", 10);
-			dictionary.Add("Code", 4);
-			dictionary.Add("Sparkles", 5);
-			dictionary.Add("Green\nScreen", 7);
-			dictionary.Add("Hypno", 6);
-			dictionary.Add("Alpha\nTransparent", 8);
-			dictionary.Add("Drawing", 9);
-			dictionary.Add("Glitch", 3);
-			dictionary.Add("Pixelate", 2);
-			dictionary.Add("Old Timey", 1);
-			dictionary.Add("Trippy", 11);
+			Dictionary<string, int> dictionary = new Dictionary<string, int>
+			{
+				{ "None", 0 },
+				{ "Blueprint", 10 },
+				{ "Code", 4 },
+				{ "Sparkles", 5 },
+				{ "Green\nScreen", 7 },
+				{ "Hypno", 6 },
+				{ "Alpha\nTransparent", 8 },
+				{ "Drawing", 9 },
+				{ "Glitch", 3 },
+				{ "Pixelate", 2 },
+				{ "Old Timey", 1 },
+				{ "Trippy", 11 }
+			};
 			return dictionary;
 		}
 
@@ -108,7 +110,7 @@
 			Utils.UserCameraController.field_Public_Transform_0.transform.Find("PhotoControls/Right_Lock").GetComponent<CameraInteractable>().Interact();
 		}
 
-		public static Vector3 worldCameraVector
+		public static Vector3 WorldCameraVector
 		{
 			get
 			{
@@ -120,7 +122,7 @@
 			}
 		}
 
-		public static Quaternion worldCameraQuaternion
+		public static Quaternion WorldCameraQuaternion
 		{
 			get
 			{

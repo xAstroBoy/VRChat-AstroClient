@@ -67,9 +67,8 @@
 			// of this method.
 
 			List<dynamic> output = new List<dynamic>();
-			dynamic[] inputAsArray = input as dynamic[];
 
-			if (inputAsArray != null)
+			if (input is dynamic[] inputAsArray)
 			{
 				output.AddRange(inputAsArray);
 			}

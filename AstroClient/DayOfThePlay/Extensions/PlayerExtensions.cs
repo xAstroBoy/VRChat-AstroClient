@@ -182,7 +182,7 @@
 
 		public static int GetFrames(this VRCPlayer Instance)
 		{
-			return (Instance.GetPlayerNet().prop_Byte_0 != 0 ? (int)(1000f / Instance.GetPlayerNet().prop_Byte_0) : 0);
+			return Instance.GetPlayerNet().prop_Byte_0 != 0 ? (int)(1000f / Instance.GetPlayerNet().prop_Byte_0) : 0;
 		}
 
 		public static float GetQuality(this VRCPlayer Instance)
@@ -265,7 +265,7 @@
 				return "Admin User";
 			if (Instance.tags.Contains("system_legend") && Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
 				return "Legend";
-			if (Instance.hasLegendTrustLevel || Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
+			if (Instance.hasLegendTrustLevel || (Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted")))
 				return "Veteran";
 			if (Instance.hasVeteranTrustLevel)
 				return "Trusted";
@@ -290,7 +290,7 @@
 				return RankType.Admin;
 			if (Instance.tags.Contains("system_legend") && Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
 				return RankType.Legend;
-			if (Instance.hasLegendTrustLevel || Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
+			if (Instance.hasLegendTrustLevel || (Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted")))
 				return RankType.Veteran;
 			if (Instance.hasVeteranTrustLevel)
 				return RankType.Trusted;
@@ -416,36 +416,17 @@
 		public static Color GetRankColor(this APIUser Instance)
 		{
 			string playerRank = Instance.GetRank();
-			switch (playerRank.ToLower())
+			return playerRank.ToLower() switch
 			{
-				case "legend":
-					return ConversionManager.LegendColor;
-					break;
-
-				case "veteran":
-					return ConversionManager.VeteranColor;
-					break;
-
-				case "trusted":
-					return ConversionManager.TrustedColor;
-					break;
-
-				case "known":
-					return ConversionManager.KnownColor;
-					break;
-
-				case "user":
-					return ConversionManager.UserColor;
-					break;
-
-				case "new user":
-					return ConversionManager.NewUserColor;
-					break;
-
-				case "visitor":
-					return ConversionManager.VisitorsColor;
-					break;
-			}
+				"legend" => ConversionManager.LegendColor,
+				"veteran" => ConversionManager.VeteranColor,
+				"trusted" => ConversionManager.TrustedColor,
+				"known" => ConversionManager.KnownColor,
+				"user" => ConversionManager.UserColor,
+				"new user" => ConversionManager.NewUserColor,
+				"visitor" => ConversionManager.VisitorsColor,
+				_ => Color.white,
+			};
 			return Color.red;
 		}
 
@@ -455,12 +436,12 @@
 
 		public static ApiAvatar GetApiAvatar(this Player Instance)
 		{
-			return Instance.prop_ApiAvatar_0 == null ? Instance.GetVRCPlayer().GetApiAvatar() : Instance.prop_ApiAvatar_0;
+			return Instance.prop_ApiAvatar_0 ?? Instance.GetVRCPlayer().GetApiAvatar();
 		}
 
 		public static ApiAvatar GetApiAvatar(this VRCPlayer Instance)
 		{
-			return Instance.prop_ApiAvatar_0 == null ? Instance.GetPlayer().GetApiAvatar() : Instance.prop_ApiAvatar_0;
+			return Instance.prop_ApiAvatar_0 ?? Instance.GetPlayer().GetApiAvatar();
 		}
 
 		public static GameObject GetAvatar(this Player Instance)

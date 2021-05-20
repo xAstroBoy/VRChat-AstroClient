@@ -73,7 +73,7 @@
 
 		public string Text;
 
-		public void setactive(bool value)
+		public void Setactive(bool value)
 		{
 			menuTitle.SetActive(value);
 		}

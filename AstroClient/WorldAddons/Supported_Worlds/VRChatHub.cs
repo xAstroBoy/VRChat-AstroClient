@@ -80,7 +80,7 @@
 				{
 					FindHubButtons();
 				}
-				if ((Time.time - LastTimeCheck > 0.9f))
+				if (Time.time - LastTimeCheck > 0.9f)
 				{
 					Emulate_beachball_click(true);
 					Emulate_boats_props_click(true);

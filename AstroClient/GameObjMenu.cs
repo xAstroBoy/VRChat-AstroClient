@@ -48,19 +48,7 @@
 
 		private static bool StartRoutineOfRefreshAction = false;
 
-		private static bool _IsOnRootScene = true;
-
-		public static bool IsOnRootScene
-		{
-			get
-			{
-				return _IsOnRootScene;
-			}
-			set
-			{
-				_IsOnRootScene = value;
-			}
-		}
+		public static bool IsOnRootScene { get; set; } = true;
 
 		public static bool IsARootParent
 		{

@@ -496,7 +496,7 @@
 									{
 										action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
 									}
-								}, (action.gameObject)?.ToString() + " Run " + subaction.Key));
+								}, action.gameObject?.ToString() + " Run " + subaction.Key));
 							}
 						});
 						MainScroll.BaseMenu.GetMainButton().GetGameObject().GetComponent<UnityEngine.UI.Button>()

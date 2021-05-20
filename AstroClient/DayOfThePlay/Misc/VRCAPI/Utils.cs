@@ -29,7 +29,7 @@
 			requestclient.Timeout = 500;
 			foreach (var x in Parameter)
 				requestclient.Headers.Add(x.Key, x.Value);
-			ServicePointManager.ServerCertificateValidationCallback = ((object s, X509Certificate c, X509Chain cc, SslPolicyErrors ssl) => true);
+			ServicePointManager.ServerCertificateValidationCallback = (object s, X509Certificate c, X509Chain cc, SslPolicyErrors ssl) => true;
 			return GetRespondsStream(requestclient.GetResponse());
 		}
 

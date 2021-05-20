@@ -68,7 +68,7 @@
 
 		public async Task<string> GetUsersOnline()
 		{
-			return await (Variables.SendRequest(Variables.HTTPMethods.GET, "visits", null));
+			return await Variables.SendRequest(Variables.HTTPMethods.GET, "visits", null);
 		}
 
 		public async Task<WorldInstanceResponse> GetInstance(string worldId, string instanceId)

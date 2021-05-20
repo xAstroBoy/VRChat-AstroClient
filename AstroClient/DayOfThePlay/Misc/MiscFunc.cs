@@ -37,7 +37,7 @@
 		{
 			string[] Location = RoomId.Split(':');
 			DropPortal(Location[0], Location[1], 0,
-				Utils.CurrentUser.transform.position + Utils.CurrentUser.transform.forward * 2f,
+				Utils.CurrentUser.transform.position + (Utils.CurrentUser.transform.forward * 2f),
 				Utils.CurrentUser.transform.rotation);
 		}
 
@@ -186,7 +186,7 @@
 		{
 			string[] Friends = File.ReadAllLines(FileManager.PathFriends);
 			Console.WriteLine(
-				$"[Friends] About to Send {Friends.Length} Friend Requests. ETC {(Friends.Length * 5) + ((Friends.Length / 20) * 75)} Seconds");
+				$"[Friends] About to Send {Friends.Length} Friend Requests. ETC {(Friends.Length * 5) + (Friends.Length / 20 * 75)} Seconds");
 			Stopwatch stopwatch = Stopwatch.StartNew();
 			int i = 0;
 			int requests = 0;
@@ -439,7 +439,7 @@
 			}
 		}
 
-		public static void requestInvite(string UserID, int NumOfTimes)
+		public static void RequestInvite(string UserID, int NumOfTimes)
 		{
 			for (int i = 0; i < NumOfTimes; i++)
 			{
@@ -504,11 +504,11 @@
 
 		public static void TakeOwnershipIfNecessary(GameObject gameObject)
 		{
-			if (getOwnerOfGameObject(gameObject) != Utils.CurrentUser._player)
+			if (GetOwnerOfGameObject(gameObject) != Utils.CurrentUser._player)
 				Networking.SetOwner(Utils.CurrentUser.field_Private_VRCPlayerApi_0, gameObject);
 		}
 
-		public static Player getOwnerOfGameObject(GameObject gameObject)
+		public static Player GetOwnerOfGameObject(GameObject gameObject)
 		{
 			foreach (Player player in Utils.PlayerManager.AllPlayers())
 			{
@@ -595,7 +595,7 @@
 				int invite = 0;
 				foreach (string id in APIUser.CurrentUser.friendIDs)
 				{
-					requestInvite(id, 1);
+					RequestInvite(id, 1);
 					invite++;
 				}
 
@@ -654,7 +654,7 @@
 			}
 		}
 
-		public static void setVideoLink(string url)
+		public static void SetVideoLink(string url)
 		{
 			var videoPlayers = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_SyncVideoPlayer>();
 			if (videoPlayers.Count() > 0)
@@ -667,7 +667,7 @@
 				}
 		}
 
-		public static void copyVideoLink()
+		public static void CopyVideoLink()
 		{
 			var videoPlayers = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_SyncVideoPlayer>();
 			if (videoPlayers.Count() > 0)

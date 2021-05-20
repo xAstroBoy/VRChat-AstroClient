@@ -32,7 +32,7 @@
 			avatars.AddRange(JsonConvert.DeserializeObject<List<DayClientML2.Utility.Api.Object.AvatarObject>>(await Variables.SendRequest(Variables.HTTPMethods.GET, "avatars/", Headers)));
 			if (avatars.Count == amount)
 			{
-				avatars.AddRange(await (GetPublicAvatars(userid, startingfrom + amount, amount)));
+				avatars.AddRange(await GetPublicAvatars(userid, startingfrom + amount, amount));
 			}
 			return avatars;
 		}

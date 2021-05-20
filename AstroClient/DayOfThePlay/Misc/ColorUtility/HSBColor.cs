@@ -52,7 +52,7 @@
 					{
 						if (num == num2)
 						{
-							hsbcolor.h = (r - g) / num4 * 60f + 240f;
+							hsbcolor.h = ((r - g) / num4 * 60f) + 240f;
 						}
 						if (num <= g)
 						{
@@ -60,12 +60,12 @@
 						}
 						else
 						{
-							hsbcolor.h = (g - num) / num4 * 60f + 360f;
+							hsbcolor.h = ((g - num) / num4 * 60f) + 360f;
 						}
 					}
 					else
 					{
-						hsbcolor.h = (num - r) / num4 * 60f + 120f;
+						hsbcolor.h = ((num - r) / num4 * 60f) + 120f;
 					}
 					if (hsbcolor.h < 0f)
 					{
@@ -94,7 +94,7 @@
 				if (num4 < 60f)
 				{
 					value = num;
-					value2 = num4 * num2 / 60f + num3;
+					value2 = (num4 * num2 / 60f) + num3;
 					value3 = num3;
 				}
 				if (num4 >= 120f)
@@ -115,12 +115,12 @@
 								{
 									value = num;
 									value2 = num3;
-									value3 = -(num4 - 360f) * num2 / 60f + num3;
+									value3 = (-(num4 - 360f) * num2 / 60f) + num3;
 								}
 							}
 							else
 							{
-								value = (num4 - 240f) * num2 / 60f + num3;
+								value = ((num4 - 240f) * num2 / 60f) + num3;
 								value2 = num3;
 								value3 = num;
 							}
@@ -128,7 +128,7 @@
 						else
 						{
 							value = num3;
-							value2 = -(num4 - 240f) * num2 / 60f + num3;
+							value2 = (-(num4 - 240f) * num2 / 60f) + num3;
 							value3 = num;
 						}
 					}
@@ -136,12 +136,12 @@
 					{
 						value = num3;
 						value2 = num;
-						value3 = (num4 - 120f) * num2 / 60f + num3;
+						value3 = ((num4 - 120f) * num2 / 60f) + num3;
 					}
 				}
 				else
 				{
-					value = -(num4 - 120f) * num2 / 60f + num3;
+					value = (-(num4 - 120f) * num2 / 60f) + num3;
 					value2 = num;
 					value3 = num3;
 				}

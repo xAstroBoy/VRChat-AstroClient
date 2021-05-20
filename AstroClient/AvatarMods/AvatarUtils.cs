@@ -324,7 +324,7 @@
 				}
 				else
 				{
-					item.lewdify_Avatar();
+					item.Lewdify_Avatar();
 				}
 			}
 

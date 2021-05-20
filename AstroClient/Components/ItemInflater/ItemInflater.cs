@@ -65,7 +65,7 @@
 			{
 				if (obj != null)
 				{
-					if ((Time.time - LastTimeCheck > InflateTimer))
+					if (Time.time - LastTimeCheck > InflateTimer)
 					{
 						if (obj.transform.localScale != NewSize)
 						{

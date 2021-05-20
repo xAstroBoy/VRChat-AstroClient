@@ -824,7 +824,7 @@
 					GameObject armature = GetChildObject("Armature", avatar); //Change to something better than just a named check?
 					if (armature != null)
 					{
-						scaleArmature = ((armature.transform.localScale.x + armature.transform.localScale.y + armature.transform.localScale.z) / 3);
+						scaleArmature = (armature.transform.localScale.x + armature.transform.localScale.y + armature.transform.localScale.z) / 3;
 					}
 					else if (NDBConfig.logLevel >= 1) MelonLogger.Msg(ConsoleColor.Yellow, $"Armature not found for scale");
 					string aviName = avatar.transform.root.GetComponentInChildren<VRCPlayer>().prop_ApiAvatar_0.name;
@@ -1097,7 +1097,7 @@
 					if (adj == 0 || adj == -1) //Replacing length with calculated one
 					{
 						//if (bone.m_Root.transform.GetChildCount() == 0) bone.m_Radius = NDBConfig.endBoneRadius / scale; //No child bones means we can't measure anything
-						if (bone.m_Root.transform.GetChildCount() == 0) bone.m_Radius = (boneTotalLength) / scale; //No child bones means we can't measure anything
+						if (bone.m_Root.transform.GetChildCount() == 0) bone.m_Radius = boneTotalLength / scale; //No child bones means we can't measure anything
 						else
 						{
 							float distance = 0;
@@ -1108,7 +1108,7 @@
 
 							distance = Math.Max(distance1, distance2);
 							if (NDBConfig.logLevel >= 1) MelonLogger.Msg(ConsoleColor.Yellow, $"dist1: {distance1.ToString("F99").TrimEnd('0')} (length {boneTotalLength.ToString("F99").TrimEnd('0')}/depth {depth.ToString("F99").TrimEnd('0')}, dist2 {distance2.ToString("F99").TrimEnd('0')}, Max {distance.ToString("F99").TrimEnd('0')}");
-							bone.m_Radius = (distance / NDBConfig.boneRadiusDivisor) / scale;
+							bone.m_Radius = distance / NDBConfig.boneRadiusDivisor / scale;
 						}
 
 						if (bone.m_Radius == 0) bone.m_Radius = NDBConfig.endBoneRadius / scale; //If 0 still, set default
@@ -1117,7 +1117,7 @@
 					}
 					else if (orgRad != -1)//Multiply existing radius
 					{
-						float radMuti = ((float)adj / 10f);
+						float radMuti = (float)adj / 10f;
 						bone.m_Radius *= radMuti;
 
 						if (orgRad == 0) bone.m_Radius = NDBConfig.endBoneRadius / scale; //If 0 still, set default
@@ -1200,7 +1200,7 @@
 					{ LogDebug(3, ConsoleColor.Red, $"Filtered c.1 - othersInteractSelf.False OtherPlayer is the same as Player && Not localplayer(me)"); continue; }
 
 
-					if ((NDBConfig.onlyForMyBones && !includeAvatar && player.Item1 != localPlayer))
+					if (NDBConfig.onlyForMyBones && !includeAvatar && player.Item1 != localPlayer)
 					{ LogDebug(3, ConsoleColor.Red, $"Filtered c.1 - onlyForMyBones.True Player is not localPlayer(me)"); continue; }
 
 					foreach (DynamicBone otherPlayerDynamicBone in otherPlayerInfo.Item3)
@@ -1253,7 +1253,7 @@
 					if (!NDBConfig.othersInteractSelf && (otherPlayerInfo.Item1 == player.Item1) && !(otherPlayerInfo.Item1 == localPlayer))
 					{ LogDebug(3, ConsoleColor.Red, $"Filtered c.2 - othersInteractSelf.False OtherPlayer is the same as Player && Not localplayer(me)"); continue; }
 
-					if ((NDBConfig.onlyForMyBones && !includeAvatarOther && otherPlayerInfo.Item1 != localPlayer))
+					if (NDBConfig.onlyForMyBones && !includeAvatarOther && otherPlayerInfo.Item1 != localPlayer)
 					{ LogDebug(3, ConsoleColor.Red, $"Filtered c.2  - onlyForMyBones.True OtherPlayer is not localPlayer(me)"); continue; }
 
 					foreach (DynamicBoneCollider otherCollider in otherPlayerInfo.Item4)
@@ -1350,20 +1350,20 @@
 					string hashBone = boneOwner + ":db:" + bone.m_Root.name;
 					if (NDBConfig.bonesToExclude.Contains(hashBone))
 					{
-						if (!(dynamictouch.bonesExcluded.Contains(hashBone))) dynamictouch.bonesExcluded.Add(hashBone);
+						if (!dynamictouch.bonesExcluded.Contains(hashBone)) dynamictouch.bonesExcluded.Add(hashBone);
 						if (NDBConfig.logLevel >= 3) MelonLogger.Msg(ConsoleColor.Red, $"Specific Exclude db {hashBone}");
 						return;
 					}
 					if (NDBConfig.bonesToAlwaysExclude.Contains(bone.m_Root.name))
 					{
-						if (!(dynamictouch.bonesExcluded.Contains(bone.m_Root.name)))dynamictouch.bonesExcluded.Add(bone.m_Root.name);
+						if (!dynamictouch.bonesExcluded.Contains(bone.m_Root.name))dynamictouch.bonesExcluded.Add(bone.m_Root.name);
 						if (NDBConfig.logLevel >= 3) MelonLogger.Msg(ConsoleColor.Red, $"Specific Exclude db {hashBone}");
 						return;
 					}
 					string hashCol = colliderOwner + ":dbc:" + dbc.gameObject.name;
 					if (NDBConfig.collidersToExclude.Contains(hashCol))
 					{
-						if (!(dynamictouch.collidersExcluded.Contains(hashCol))) dynamictouch.collidersExcluded.Add(hashCol);
+						if (!dynamictouch.collidersExcluded.Contains(hashCol)) dynamictouch.collidersExcluded.Add(hashCol);
 						if (NDBConfig.logLevel >= 3) MelonLogger.Msg(ConsoleColor.Red, $"Specific Exclude dbc {hashCol}");
 						return;
 					}
@@ -1388,14 +1388,14 @@
 					return;
 				}
 				if (collider.Equals(null) || collider.transform.Equals(null)) return;
-				float localscale = ((collider.transform.lossyScale.x + collider.transform.lossyScale.y + collider.transform.lossyScale.z) / 3);
+				float localscale = (collider.transform.lossyScale.x + collider.transform.lossyScale.y + collider.transform.lossyScale.z) / 3;
 
 				if ((collider.m_Radius * localscale) > NDBConfig.colliderSizeLimit || (collider.m_Height * localscale) > NDBConfig.colliderSizeLimit)
 				{
-					if (NDBConfig.logLevel >= 2) MelonLogger.Msg(ConsoleColor.Red, $"Collider is too big and will be filtered from being multiplayer'd- avatar:{colliderOwner}, collider name:{collider.name}, localscale: {localscale} radius:{collider.m_Radius} - adjusted rad:{(collider.m_Radius * localscale)}, size limit:{NDBConfig.colliderSizeLimit} ");
+					if (NDBConfig.logLevel >= 2) MelonLogger.Msg(ConsoleColor.Red, $"Collider is too big and will be filtered from being multiplayer'd- avatar:{colliderOwner}, collider name:{collider.name}, localscale: {localscale} radius:{collider.m_Radius} - adjusted rad:{collider.m_Radius * localscale}, size limit:{NDBConfig.colliderSizeLimit} ");
 					return;
 				}
-				if (NDBConfig.logLevel >= 3) MelonLogger.Msg(ConsoleColor.DarkCyan, $"Collider info- avatar:{colliderOwner}, collider name:{collider.name}, localscale: {localscale}, radius:{collider.m_Radius} - adjusted rad:{(localscale * collider.m_Radius)}, height:{collider.m_Height} - adjusted height:{(localscale * collider.m_Height)} size limit:{NDBConfig.colliderSizeLimit} ");
+				if (NDBConfig.logLevel >= 3) MelonLogger.Msg(ConsoleColor.DarkCyan, $"Collider info- avatar:{colliderOwner}, collider name:{collider.name}, localscale: {localscale}, radius:{collider.m_Radius} - adjusted rad:{localscale * collider.m_Radius}, height:{collider.m_Height} - adjusted height:{localscale * collider.m_Height} size limit:{NDBConfig.colliderSizeLimit} ");
 
 				AddColliderToDynamicBone(bone, collider, boneOwner, colliderOwner);
 			}
@@ -1448,8 +1448,8 @@
 					{
 						if (NDBConfig.logLevel >= 1) MelonLogger.Msg(ConsoleColor.Yellow, $"Avatar {avatarHash} was tagged to get colliders added to it's hands but aborted: Hands have no fingers"); return;
 					}
-					float leftlocalscale = ((lefthand.transform.lossyScale.x + lefthand.transform.lossyScale.y + lefthand.transform.lossyScale.z) / 3);
-					float rightlocalscale = ((righthand.transform.lossyScale.x + righthand.transform.lossyScale.y + righthand.transform.lossyScale.z) / 3);
+					float leftlocalscale = (lefthand.transform.lossyScale.x + lefthand.transform.lossyScale.y + lefthand.transform.lossyScale.z) / 3;
+					float rightlocalscale = (righthand.transform.lossyScale.x + righthand.transform.lossyScale.y + righthand.transform.lossyScale.z) / 3;
 
 					lefthand.gameObject.AddComponent<DynamicBoneCollider>().m_Radius = leftDistances.Average() / leftlocalscale;
 					righthand.gameObject.AddComponent<DynamicBoneCollider>().m_Radius = rightDistances.Average() / rightlocalscale;
@@ -1718,30 +1718,30 @@
 					db.m_Inert = GUILayout.HorizontalSlider(db.m_Inert, 0f, 1f, new Il2CppReferenceArray<GUILayoutOption>(0));
 
 					GUILayout.Label("Radius", new GUIStyle() { fontSize = 14 }, new Il2CppReferenceArray<GUILayoutOption>(0));
-					if (float.TryParse(GUILayout.TextField((db.m_Radius).ToString(), new Il2CppReferenceArray<GUILayoutOption>(0)), out float radiusValue))
+					if (float.TryParse(GUILayout.TextField(db.m_Radius.ToString(), new Il2CppReferenceArray<GUILayoutOption>(0)), out float radiusValue))
 					{
 						db.m_Radius = radiusValue;
 					}
 
 					GUILayout.Label("End length", new GUIStyle() { fontSize = 14 }, new Il2CppReferenceArray<GUILayoutOption>(0));
-					if (float.TryParse(GUILayout.TextField((db.m_EndLength).ToString(), new Il2CppReferenceArray<GUILayoutOption>(0)), out float endLengthValue))
+					if (float.TryParse(GUILayout.TextField(db.m_EndLength.ToString(), new Il2CppReferenceArray<GUILayoutOption>(0)), out float endLengthValue))
 					{
 						db.m_Radius = endLengthValue;
 					}
 					GUILayout.Label("End offset", new GUIStyle() { fontSize = 14 }, new Il2CppReferenceArray<GUILayoutOption>(0));
 					GUILayout.Label("X", new GUIStyle() { fontSize = 14 }, Array.Empty<GUILayoutOption>());
 					//if (float.TryParse(GUILayout.TextField((db.m_EndOffset.x).ToString(), new GUIStyle() { margin = new RectOffset((int)GUILayoutUtility.GetLastRect().xMax, 0, 0, 0) }, new Il2CppReferenceArray<GUILayoutOption>(0)), out float xvalue))
-					if (float.TryParse(GUILayout.TextField((db.m_EndOffset.x).ToString(), new Il2CppReferenceArray<GUILayoutOption>(0)), out float xvalue))
+					if (float.TryParse(GUILayout.TextField(db.m_EndOffset.x.ToString(), new Il2CppReferenceArray<GUILayoutOption>(0)), out float xvalue))
 					{
 						db.m_EndOffset.Set(xvalue, db.m_EndOffset.y, db.m_EndOffset.z);
 					}
 					GUILayout.Label("Y", new GUIStyle() { fontSize = 14 }, new Il2CppReferenceArray<GUILayoutOption>(0));
-					if (float.TryParse(GUILayout.TextField((db.m_EndOffset.y).ToString(), new Il2CppReferenceArray<GUILayoutOption>(0)), out float yvalue))
+					if (float.TryParse(GUILayout.TextField(db.m_EndOffset.y.ToString(), new Il2CppReferenceArray<GUILayoutOption>(0)), out float yvalue))
 					{
 						db.m_EndOffset.Set(db.m_EndOffset.x, yvalue, db.m_EndOffset.z);
 					}
 					GUILayout.Label("Z", new GUIStyle() { fontSize = 14 }, new Il2CppReferenceArray<GUILayoutOption>(0));
-					if (float.TryParse(GUILayout.TextField((db.m_EndOffset.z).ToString(), new Il2CppReferenceArray<GUILayoutOption>(0)), out float zvalue))
+					if (float.TryParse(GUILayout.TextField(db.m_EndOffset.z.ToString(), new Il2CppReferenceArray<GUILayoutOption>(0)), out float zvalue))
 					{
 						db.m_EndOffset.Set(db.m_EndOffset.x, db.m_EndOffset.y, zvalue);
 					}
@@ -1781,7 +1781,7 @@
 					bool visible = go.Item1.isVisible;
 					foreach (DynamicBone db in go.Item2)
 					{
-						if (NDBConfig.logLevel >= 3) if (db.enabled != visible) MelonLogger.Msg(ConsoleColor.DarkBlue, $"{db.gameObject.name} is now {((visible) ? "enabled" : "disabled")}");
+						if (NDBConfig.logLevel >= 3) if (db.enabled != visible) MelonLogger.Msg(ConsoleColor.DarkBlue, $"{db.gameObject.name} is now {(visible ? "enabled" : "disabled")}");
 						db.enabled = visible;
 					}
 				}
@@ -1814,7 +1814,7 @@
 
 			try
 			{
-				if (toggleButton != null) toggleButton.GetComponentInChildren<Text>().text = $"Press to {((enabled) ? "disable" : "enable")} Dynamic Bones mod";
+				if (toggleButton != null) toggleButton.GetComponentInChildren<Text>().text = $"Press to {(enabled ? "disable" : "enable")} Dynamic Bones mod";
 			}
 			catch { }
 			//if (NDBConfig.enableFallbackModUi) toggleButton.GetComponentInChildren<Text>().text = $"Press to {((enabled) ? "disable" : "enable")} Dynamic Bones mod"; This does the exact same thing as the line above?
