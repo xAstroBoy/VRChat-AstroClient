@@ -186,7 +186,7 @@
 			return -1;
 		}
 
-		public static bool checkXref(this MethodBase m, string match)
+		public static bool CheckXref(this MethodBase m, string match)
 		{
 			try
 			{
