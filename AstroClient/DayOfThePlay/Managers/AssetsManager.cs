@@ -23,7 +23,6 @@
 					yield return new WaitForSeconds(0.1f);
 				}
 				assetBundle = dlBundle.assetBundle;
-				dlBundle = null;
 			}
 			if (url != null)
 			{
@@ -42,8 +41,6 @@
 					yield return new WaitForSeconds(0.1f);
 				}
 				assetBundle = dlBundle.assetBundle;
-				assetBundleRequest = null;
-				dlBundle = null;
 			}
 			foreach (var item in assetBundle.AllAssetNames().ToArray())
 			{
@@ -99,9 +96,8 @@
 
 		public static Sprite LoadSprite2(string url)
 		{
-			var sprite = new Sprite();
 			WWW www = new WWW(url, null, new Il2CppSystem.Collections.Generic.Dictionary<string, string>());
-			sprite = Sprite.CreateSprite(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+			Sprite sprite = Sprite.CreateSprite(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
 			return sprite;
 		}
 	}

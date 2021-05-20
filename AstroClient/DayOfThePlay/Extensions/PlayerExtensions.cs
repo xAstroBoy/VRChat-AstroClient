@@ -206,7 +206,7 @@
 
 		public static string GetPingColored(this VRCPlayer Instance)
 		{
-			string color = "";
+			string color;
 			if (Instance.GetPing() <= 75)
 				color = "<color=#59D365>";
 			else if (Instance.GetPing() >= 75 && Instance.GetPing() <= 150)
@@ -219,7 +219,7 @@
 
 		public static string GetFramesColored(this VRCPlayer Instance)
 		{
-			string color = "";
+			string color;
 			if (Instance.GetFrames() >= 80)
 				color = "<color=#59D365>";
 			else if (Instance.GetFrames() <= 80 && Instance.GetFrames() >= 30)
