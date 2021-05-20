@@ -14,7 +14,7 @@
 		{
 			var temp = new QMNestedButton(menu, x, y, "Movement Options", "Control Your Movements", null, null, null, null, btnHalf);
 			UnlimitedJumpToggle = new QMSingleToggleButton(temp, 1, 0, "Unlimited Jumps", new Action(() => { IsUnlimitedJumpActive = true; }), "Unlimited Jumps OFF", new Action(() => { IsUnlimitedJumpActive = false; }), "Allows you to Unlimited jump", Color.green, Color.red, null, false, true);
-			RocketJumpToggle = new QMSingleToggleButton(temp, 1, 0.5f, "Rocket Jump", new Action(() => { isRocketJumpActive = true; }), "Rocket Jump", new Action(() => { isRocketJumpActive = false; }), "Allows you to Unlimited jump", Color.green, Color.red, null, false, true);
+			RocketJumpToggle = new QMSingleToggleButton(temp, 1, 0.5f, "Rocket Jump", new Action(() => { IsRocketJumpActive = true; }), "Rocket Jump", new Action(() => { IsRocketJumpActive = false; }), "Allows you to Unlimited jump", Color.green, Color.red, null, false, true);
 
 			JumpOverrideToggle = new QMToggleButton(temp, 2, 0, "Jump Override ON", new Action(() => { IsJumpOverriden = true; }), "Jump Override OFF", new Action(() => { IsJumpOverriden = false; }), "Allows you to Bypass jump Block in certain worlds.", null, null, null, false);
 			SerializerBtn = new QMToggleButton(temp, 3, 0, "Serializer ON", new Action(() => { SerializerEnabled = true; }), "Serializer OFF", new Action(() => { SerializerEnabled = false; }), "Blocks Movement packets (allows you to be invisible to others)", null, null, null, false);
@@ -99,7 +99,7 @@
 						}
 					}
 
-					if (InputUtils.IsInputJumpPressed() && isRocketJumpActive)
+					if (InputUtils.IsInputJumpPressed() && IsRocketJumpActive)
 					{
 						EmulatedJump();
 					}
@@ -269,7 +269,7 @@
 
 		private static bool _isRocketJumpActive;
 
-		public static bool isRocketJumpActive
+		public static bool IsRocketJumpActive
 		{
 			get
 			{

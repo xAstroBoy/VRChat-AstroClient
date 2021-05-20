@@ -32,17 +32,17 @@
 		public static Transform Get_root_of_avatar_child(this Transform obj)
 		{
 			var root = obj.root;
-			if(root != null)
+			if (root != null)
 			{
 				var avatar = root.Get_Avatar();
-				if(avatar != null)
+				if (avatar != null)
 				{
-					foreach(var child in avatar.Get_Childs())
+					foreach (var child in avatar.Get_Childs())
 					{
-						if(obj.IsChildOf(child))
+						if (obj.IsChildOf(child))
 						{
 							return child;
-						}	
+						}
 					}
 				}
 			}
@@ -59,23 +59,23 @@
 				var parents = Avatar.Get_Childs();
 				if (parents.Count() != 0)
 				{
-						ModConsole.Log("[AVATAR RENDERER DUMPER] : Dumping All Renderers of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
-						ModConsole.Log("[AVATAR RENDERER DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
-						ModConsole.Log("Dumping Renderers names ...", Color.Green);
-						foreach (var item in parents)
+					ModConsole.Log("[AVATAR RENDERER DUMPER] : Dumping All Renderers of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
+					ModConsole.Log("[AVATAR RENDERER DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
+					ModConsole.Log("Dumping Renderers names ...", Color.Green);
+					foreach (var item in parents)
+					{
+						foreach (var name in Dump_Renderers(item))
 						{
-							foreach (var name in Dump_Renderers(item))
-							{
-								ModConsole.Log("Found Renderer [ " + name + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
-							}
+							ModConsole.Log("Found Renderer [ " + name + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
 						}
 					}
-					else
-					{
-						ModConsole.Log("[AVATAR RENDERER DUMPER] : No Renderers Found.", Color.Green);
-					}
 				}
-			
+				else
+				{
+					ModConsole.Log("[AVATAR RENDERER DUMPER] : No Renderers Found.", Color.Green);
+				}
+			}
+
 		}
 
 		public static void Avatar_MeshRenderer_Dumper(this Player player)
@@ -84,24 +84,24 @@
 			{
 				var Avatar = player.gameObject.transform.Get_Avatar();
 				var parents = Avatar.Get_Childs();
-					if (parents.Count() != 0)
+				if (parents.Count() != 0)
+				{
+					ModConsole.Log("[AVATAR MESHRENDERER DUMPER] : Dumping All Renderers of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
+					ModConsole.Log("[AVATAR MESHRENDERER DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
+					ModConsole.Log("Dumping Mesh Renderers names ...", Color.Green);
+					foreach (var item in parents)
 					{
-						ModConsole.Log("[AVATAR MESHRENDERER DUMPER] : Dumping All Renderers of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
-						ModConsole.Log("[AVATAR MESHRENDERER DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
-						ModConsole.Log("Dumping Mesh Renderers names ...", Color.Green);
-						foreach (var item in parents)
+						foreach (var name in Dump_Renderers(item))
 						{
-							foreach (var name in Dump_Renderers(item))
-							{
-								ModConsole.Log("Found Mesh Renderer [ " + name + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
-							}
+							ModConsole.Log("Found Mesh Renderer [ " + name + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
 						}
 					}
-					else
-					{
-						ModConsole.Log("[AVATAR MESHRENDERER DUMPER] : No Renderers Found.", Color.Green);
-					}
-				
+				}
+				else
+				{
+					ModConsole.Log("[AVATAR MESHRENDERER DUMPER] : No Renderers Found.", Color.Green);
+				}
+
 			}
 		}
 
@@ -114,19 +114,19 @@
 				var parents = Avatar.Get_Childs();
 				if (parents.Count() != 0)
 				{
-						ModConsole.Log("[AVATAR TRANSFORM DUMPER] : Dumping All Transforms of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
-						ModConsole.Log("[AVATAR TRANSFORM DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
-						ModConsole.Log("Dumping Transforms names ...", Color.Green);
-						foreach (var child in parents)
+					ModConsole.Log("[AVATAR TRANSFORM DUMPER] : Dumping All Transforms of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
+					ModConsole.Log("[AVATAR TRANSFORM DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
+					ModConsole.Log("Dumping Transforms names ...", Color.Green);
+					foreach (var child in parents)
+					{
+						foreach (var item in Dump_Transforms(child))
 						{
-							foreach (var item in Dump_Transforms(child))
-							{
-								ModConsole.Log("Found Transform [ " + item + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
-							}
+							ModConsole.Log("Found Transform [ " + item + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
 						}
 					}
 				}
-			
+			}
+
 		}
 
 		public static void Avatar_Material_Dumper(this Player player)
@@ -136,26 +136,26 @@
 				var body = player.gameObject.transform.Get_Body();
 				var Avatar = player.gameObject.transform.Get_Avatar();
 
-					ModConsole.Log("[AVATAR MATERIAL DUMPER] : Dumping All Materials of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
-					ModConsole.Log("[AVATAR MATERIAL DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
-					ModConsole.Log("[AVATAR MATERIAL DUMPER] : Dumping Body Materials..", Color.Green);
-					foreach (var item in Dump_Materials(body))
-					{
-						ModConsole.Log("Found Material [ " + item + " ] in " + player.DisplayName() + "'s avatar Body", Color.Yellow);
-					}
+				ModConsole.Log("[AVATAR MATERIAL DUMPER] : Dumping All Materials of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
+				ModConsole.Log("[AVATAR MATERIAL DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
+				ModConsole.Log("[AVATAR MATERIAL DUMPER] : Dumping Body Materials..", Color.Green);
+				foreach (var item in Dump_Materials(body))
+				{
+					ModConsole.Log("Found Material [ " + item + " ] in " + player.DisplayName() + "'s avatar Body", Color.Yellow);
+				}
 				var parents = Avatar.Get_Childs();
 				if (parents.Count() != 0)
 				{
-						ModConsole.Log("Dumping Materials names ...", Color.Green);
-						foreach (var child in parents)
+					ModConsole.Log("Dumping Materials names ...", Color.Green);
+					foreach (var child in parents)
+					{
+						foreach (var item in Dump_Materials(child))
 						{
-							foreach (var item in Dump_Materials(child))
-							{
-								ModConsole.Log("Found Material [ " + item + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
-							}
+							ModConsole.Log("Found Material [ " + item + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
 						}
+					}
 
-					
+
 				}
 			}
 		}
@@ -192,7 +192,7 @@
 		{
 			if (player != null)
 			{
-				if(player._vrcplayer != null && player._vrcplayer.GetApiAvatar() != null)
+				if (player._vrcplayer != null && player._vrcplayer.GetApiAvatar() != null)
 				{
 					return player._vrcplayer.GetApiAvatar().id;
 				}
@@ -203,10 +203,10 @@
 
 		public static void BlackListAvatar_Lewdifier(this Player player)
 		{
-			if(player != null)
+			if (player != null)
 			{
 				var avatarid = player.GetAvatarID();
-				if(avatarid != null)
+				if (avatarid != null)
 				{
 					LewdifierUtils.AvatarsToSkip.Add(avatarid);
 					LewdifierUtils.Save_AvatarToSkip();
@@ -315,12 +315,12 @@
 
 		public static void Add_Lewdify(this Player player)
 		{
-			if(player != null)
+			if (player != null)
 			{
 				var item = player.transform.root.gameObject.GetComponentInChildren<Lewdifier>();
-				if(item == null)
+				if (item == null)
 				{
-					 item = player.transform.root.gameObject.AddComponent<Lewdifier>();
+					item = player.transform.root.gameObject.AddComponent<Lewdifier>();
 				}
 				else
 				{
@@ -342,7 +342,7 @@
 			}
 
 		}
-		
+
 
 		public static void Remove_Lewdify(this Player player)
 		{

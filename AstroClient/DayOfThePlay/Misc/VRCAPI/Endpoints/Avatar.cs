@@ -23,11 +23,13 @@
 
 		public async Task<List<DayClientML2.Utility.Api.Object.AvatarObject>> GetPublicAvatars(string userid, int startingfrom, int amount)
 		{
-			var Headers = new Dictionary<string, string>();
-			Headers.Add("userId", userid);
-			Headers.Add("offset", startingfrom.ToString());
-			Headers.Add("n", amount.ToString());
-			Headers.Add("order", "descending");
+			var Headers = new Dictionary<string, string>
+			{
+				{ "userId", userid },
+				{ "offset", startingfrom.ToString() },
+				{ "n", amount.ToString() },
+				{ "order", "descending" }
+			};
 			List<DayClientML2.Utility.Api.Object.AvatarObject> avatars = new List<DayClientML2.Utility.Api.Object.AvatarObject>();
 			avatars.AddRange(JsonConvert.DeserializeObject<List<DayClientML2.Utility.Api.Object.AvatarObject>>(await Variables.SendRequest(Variables.HTTPMethods.GET, "avatars/", Headers)));
 			if (avatars.Count == amount)

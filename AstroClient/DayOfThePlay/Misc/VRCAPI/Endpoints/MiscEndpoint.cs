@@ -26,17 +26,21 @@
 
 		public async void JoinLobby(string worldid)
 		{
-			var Headers = new Dictionary<string, string>();
-			Headers.Add("userId", Variables.Self.id);
-			Headers.Add("worldId", worldid);
+			var Headers = new Dictionary<string, string>
+			{
+				{ "userId", Variables.Self.id },
+				{ "worldId", worldid }
+			};
 			await Variables.SendRequest(Variables.HTTPMethods.PUT, "joins", Headers);
 		}
 
 		public async void VisitLobby(string worldid)
 		{
-			var Headers = new Dictionary<string, string>();
-			Headers.Add("userId", Variables.Self.id);
-			Headers.Add("worldId", worldid);
+			var Headers = new Dictionary<string, string>
+			{
+				{ "userId", Variables.Self.id },
+				{ "worldId", worldid }
+			};
 			await Variables.SendRequest(Variables.HTTPMethods.PUT, "visits", Headers);
 		}
 
@@ -88,9 +92,11 @@
 					break;
 
 				default:
-					var Headers = new Dictionary<string, string>();
-					Headers.Add("message", "API Utils");
-					Headers.Add("type", type.ToString());
+					var Headers = new Dictionary<string, string>
+					{
+						{ "message", "API Utils" },
+						{ "type", type.ToString() }
+					};
 					Variables.SendRequest(Variables.HTTPMethods.POST, $"user/{userid}/notification", null);
 					break;
 			}
@@ -98,10 +104,12 @@
 
 		public async Task<List<Notification>> GetAllNotification(NotificationType type, bool urs, DateTime after)
 		{
-			var Headers = new Dictionary<string, string>();
-			Headers.Add("type", type.ToString());
-			Headers.Add("sent", urs.ToString());
-			Headers.Add("after", after.ToString());
+			var Headers = new Dictionary<string, string>
+			{
+				{ "type", type.ToString() },
+				{ "sent", urs.ToString() },
+				{ "after", after.ToString() }
+			};
 			return JsonConvert.DeserializeObject<List<Notification>>(await Variables.SendRequest(Variables.HTTPMethods.GET, "user/notifications", Headers));
 		}
 

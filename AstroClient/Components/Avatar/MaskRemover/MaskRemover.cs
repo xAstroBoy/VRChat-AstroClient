@@ -37,11 +37,11 @@
 		// Use this for initialization
 		public void Start()
 		{
-			if(player == null)
+			if (player == null)
 			{
 				player = GetComponent<Player>();
 			}
-			if(player != null)
+			if (player != null)
 			{
 				player.ReloadAvatar();
 			}
@@ -108,7 +108,7 @@
 															}
 														}
 													}
-													
+
 												}
 											}
 										}
@@ -130,12 +130,12 @@
 		}
 
 
-		private Transform AvatarRoot  = null;
-		private Transform Avatar  = null;
-		private Transform Armature  = null;
-		private Transform Body  = null;
-		private Player player  = null;
-		private Animator AvatarAnimator  = null;
+		private Transform AvatarRoot = null;
+		private Transform Avatar = null;
+		private Transform Armature = null;
+		private Transform Body = null;
+		private Player player = null;
+		private Animator AvatarAnimator = null;
 
 
 	}

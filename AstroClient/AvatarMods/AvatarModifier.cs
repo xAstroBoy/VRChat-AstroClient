@@ -22,7 +22,7 @@
 			ForceLewdifyToggle = new QMSingleToggleButton(tmp, 1, 1f, "Forced Lewdify", () => { ForceLewdify = true; }, "Forced Lewdify", () => { ForceLewdify = false; }, "Force Lewdify avatars (Destroys the Transforms, Due to SDK3 Avatars Refusing to toggle them.) (Will make all Avatars Reload)", Color.green, Color.red, null, false, true);
 			LewdifierUtils.LewdifyLists = new QMSingleButton(tmp, 1, 1.5f, "NOT SET", new Action(() => { LewdifierUtils.RefreshAll(); }), "Refresh Current Lists", null, null, false);
 			LewdifierUtils.LewdifyLists.SetResizeTextForBestFit(true);
-			
+
 		}
 
 		public static void InitUserMenu(float x, float y, bool btnHalf)
@@ -97,7 +97,7 @@
 			set
 			{
 
-				if(value)
+				if (value)
 				{
 					foreach (var player in WorldUtils.Get_Players())
 					{
@@ -143,9 +143,9 @@
 			}
 			set
 			{
-				if(value)
+				if (value)
 				{
-					foreach(var player in WorldUtils.Get_Players())
+					foreach (var player in WorldUtils.Get_Players())
 					{
 						if (player != LocalPlayerUtils.GetSelfPlayer())
 						{

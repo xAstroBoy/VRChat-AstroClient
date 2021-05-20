@@ -112,7 +112,7 @@
 		{
 			if (!LewdifierUtils.AvatarsToSkip.Contains(AvatarID))
 			{
-				if(AvatarRoot == null)
+				if (AvatarRoot == null)
 				{
 					AvatarRoot = this.transform.root;
 				}
@@ -179,7 +179,7 @@
 				}
 			}
 		}
-	
+
 
 
 		private bool Lewdify_Terms_To_turn_Off(List<Transform> avataritems)
@@ -208,7 +208,7 @@
 			}
 			return FoundaHit;
 		}
-	
+
 		private bool CheckForTermsToToggleOff(Transform item)
 		{
 			bool FoundaHit = false;
@@ -221,15 +221,15 @@
 
 					FoundaHit = true;
 
-						if (item.gameObject.active)
-						{
-							item.gameObject.SetActiveRecursively(false);
-						}
-						if (!ChildsToKeepOff.Contains(item))
-						{
-							ChildsToKeepOff.Add(item);
-						}
-					
+					if (item.gameObject.active)
+					{
+						item.gameObject.SetActiveRecursively(false);
+					}
+					if (!ChildsToKeepOff.Contains(item))
+					{
+						ChildsToKeepOff.Add(item);
+					}
+
 				}
 			}
 			return FoundaHit;
@@ -309,7 +309,7 @@
 
 		public void LateUpdate()
 		{
-			if(PlayerTag == null)
+			if (PlayerTag == null)
 			{
 				PlayerTag = player.AddSingleTag();
 			}
@@ -356,7 +356,7 @@
 		internal Player player;
 		internal Animator AvatarAnimator;
 		internal string AvatarID;
-		internal List<Transform> ChildsToKeepOff  = new List<Transform>();
+		internal List<Transform> ChildsToKeepOff = new List<Transform>();
 		internal List<Transform> ChildsTokeepOn = new List<Transform>();
 
 	}

@@ -28,7 +28,7 @@
 					body = obj.GetComponentInChildren<Rigidbody>();
 				}
 
-				Sync = obj.GetComponent<SyncPhysics>();
+				Internal_Sync = obj.GetComponent<SyncPhysics>();
 				BackupBasicBody();
 				EditMode = false;
 			}
@@ -37,64 +37,64 @@
 
 		private void BackupBasicBody()
 		{
-			if (Sync != null)
+			if (Internal_Sync != null)
 			{
-				if (Sync.GetRigidBody() != null)
+				if (Internal_Sync.GetRigidBody() != null)
 				{
 					ModConsole.DebugLog($"Backupping from Sync.GetRigidBody() properties for object  {obj.name}");
 
-					if (Sync.GetRigidBody().useGravity != OrigUseGravity)
+					if (Internal_Sync.GetRigidBody().useGravity != OrigUseGravity)
 					{
-						OrigUseGravity = Sync.GetRigidBody().useGravity;
+						OrigUseGravity = Internal_Sync.GetRigidBody().useGravity;
 					}
-					if (Sync.GetRigidBody().useGravity != useGravity)
+					if (Internal_Sync.GetRigidBody().useGravity != useGravity)
 					{
-						useGravity = Sync.GetRigidBody().useGravity;
-					}
-
-					if (Sync.GetRigidBody().isKinematic != OrigKinematic)
-					{
-						OrigKinematic = Sync.GetRigidBody().isKinematic;
-					}
-					if (Sync.GetRigidBody().isKinematic != isKinematic)
-					{
-						isKinematic = Sync.GetRigidBody().isKinematic;
+						useGravity = Internal_Sync.GetRigidBody().useGravity;
 					}
 
-					if (Sync.GetRigidBody().constraints != OrigConstraints)
+					if (Internal_Sync.GetRigidBody().isKinematic != OrigKinematic)
 					{
-						OrigConstraints = Sync.GetRigidBody().constraints;
+						OrigKinematic = Internal_Sync.GetRigidBody().isKinematic;
 					}
-					if (Sync.GetRigidBody().constraints != Constraints)
+					if (Internal_Sync.GetRigidBody().isKinematic != isKinematic)
 					{
-						Constraints = Sync.GetRigidBody().constraints;
-					}
-
-					if (Sync.GetRigidBody().detectCollisions != OrigDetectCollisions)
-					{
-						OrigDetectCollisions = Sync.GetRigidBody().detectCollisions;
-					}
-					if (Sync.GetRigidBody().detectCollisions != DetectCollisions)
-					{
-						DetectCollisions = Sync.GetRigidBody().detectCollisions;
+						isKinematic = Internal_Sync.GetRigidBody().isKinematic;
 					}
 
-					if (Sync.GetRigidBody().drag != OrigDrag)
+					if (Internal_Sync.GetRigidBody().constraints != OrigConstraints)
 					{
-						OrigDrag = Sync.GetRigidBody().drag;
+						OrigConstraints = Internal_Sync.GetRigidBody().constraints;
 					}
-					if (Sync.GetRigidBody().drag != Drag)
+					if (Internal_Sync.GetRigidBody().constraints != Constraints)
 					{
-						Drag = Sync.GetRigidBody().drag;
+						Constraints = Internal_Sync.GetRigidBody().constraints;
 					}
 
-					if (Sync.GetRigidBody().angularDrag != OrigAngularDrag)
+					if (Internal_Sync.GetRigidBody().detectCollisions != OrigDetectCollisions)
 					{
-						OrigAngularDrag = Sync.GetRigidBody().angularDrag;
+						OrigDetectCollisions = Internal_Sync.GetRigidBody().detectCollisions;
 					}
-					if (Sync.GetRigidBody().angularDrag != AngularDrag)
+					if (Internal_Sync.GetRigidBody().detectCollisions != DetectCollisions)
 					{
-						AngularDrag = Sync.GetRigidBody().angularDrag;
+						DetectCollisions = Internal_Sync.GetRigidBody().detectCollisions;
+					}
+
+					if (Internal_Sync.GetRigidBody().drag != OrigDrag)
+					{
+						OrigDrag = Internal_Sync.GetRigidBody().drag;
+					}
+					if (Internal_Sync.GetRigidBody().drag != Drag)
+					{
+						Drag = Internal_Sync.GetRigidBody().drag;
+					}
+
+					if (Internal_Sync.GetRigidBody().angularDrag != OrigAngularDrag)
+					{
+						OrigAngularDrag = Internal_Sync.GetRigidBody().angularDrag;
+					}
+					if (Internal_Sync.GetRigidBody().angularDrag != AngularDrag)
+					{
+						AngularDrag = Internal_Sync.GetRigidBody().angularDrag;
 					}
 				}
 				else
@@ -128,19 +128,19 @@
 			UpdateAngularDrag(OrigAngularDrag);
 			UpdateDrag(OrigDrag);
 			Constraints = OrigConstraints;
-			if (Sync != null)
+			if (Internal_Sync != null)
 			{
-				if (Sync.GetRigidBody() != null)
+				if (Internal_Sync.GetRigidBody() != null)
 				{
-					Sync.GetRigidBody().useGravity = OrigUseGravity;
-					Sync.GetRigidBody().isKinematic = OrigKinematic;
-					Sync.GetRigidBody().constraints = OrigConstraints;
-					Sync.GetRigidBody().detectCollisions = OrigDetectCollisions;
-					Sync.GetRigidBody().drag = OrigDrag;
-					Sync.GetRigidBody().angularDrag = OrigAngularDrag;
+					Internal_Sync.GetRigidBody().useGravity = OrigUseGravity;
+					Internal_Sync.GetRigidBody().isKinematic = OrigKinematic;
+					Internal_Sync.GetRigidBody().constraints = OrigConstraints;
+					Internal_Sync.GetRigidBody().detectCollisions = OrigDetectCollisions;
+					Internal_Sync.GetRigidBody().drag = OrigDrag;
+					Internal_Sync.GetRigidBody().angularDrag = OrigAngularDrag;
 				}
 			}
-			Sync.RefreshProperties();
+			Internal_Sync.RefreshProperties();
 			EditMode = false;
 		}
 
@@ -153,61 +153,61 @@
 				{
 					if (Forced_SyncPhysic)
 					{
-						if (Sync == null)
+						if (Internal_Sync == null)
 						{
-							Sync = obj.AddComponent<SyncPhysics>();
+							Internal_Sync = obj.AddComponent<SyncPhysics>();
 						}
 
-						if (Sync.field_Private_Rigidbody_0 == null)
+						if (Internal_Sync.field_Private_Rigidbody_0 == null)
 						{
-							if (obj.GetComponent<Rigidbody>() != null && Sync.field_Private_Rigidbody_0 == null)
+							if (obj.GetComponent<Rigidbody>() != null && Internal_Sync.field_Private_Rigidbody_0 == null)
 							{
 								ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Rigidbody in SyncPhysic as is Null..");
-								Sync.field_Private_Rigidbody_0 = obj.GetComponent<Rigidbody>();
+								Internal_Sync.field_Private_Rigidbody_0 = obj.GetComponent<Rigidbody>();
 								return;
 							}
 
-							if (obj.GetComponentInChildren<Rigidbody>() != null && Sync.field_Private_Rigidbody_0 == null)
+							if (obj.GetComponentInChildren<Rigidbody>() != null && Internal_Sync.field_Private_Rigidbody_0 == null)
 							{
 								ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Rigidbody in SyncPhysic as is Null..");
-								Sync.field_Private_Rigidbody_0 = obj.GetComponentInChildren<Rigidbody>();
+								Internal_Sync.field_Private_Rigidbody_0 = obj.GetComponentInChildren<Rigidbody>();
 								return;
 							}
-							if (obj.GetComponentInChildren<Rigidbody>() == null && obj.GetComponent<Rigidbody>() == null && Sync.field_Private_Rigidbody_0 == null)
+							if (obj.GetComponentInChildren<Rigidbody>() == null && obj.GetComponent<Rigidbody>() == null && Internal_Sync.field_Private_Rigidbody_0 == null)
 							{
 								ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Spawned Rigidbody in SyncPhysic as is Null..");
 								body = obj.AddComponent<Rigidbody>();
-								Sync.field_Private_Rigidbody_0 = body;
+								Internal_Sync.field_Private_Rigidbody_0 = body;
 								body.isKinematic = true;
 								return;
 							}
 
-							if (Sync.field_Private_VRC_Pickup_0 == null)
+							if (Internal_Sync.field_Private_VRC_Pickup_0 == null)
 							{
-								if (obj.GetComponent<VRC.SDKBase.VRC_Pickup>() != null && Sync.field_Private_VRC_Pickup_0 == null)
+								if (obj.GetComponent<VRC.SDKBase.VRC_Pickup>() != null && Internal_Sync.field_Private_VRC_Pickup_0 == null)
 								{
 									ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} VRC_Pickup in SyncPhysic as is Null..");
-									Sync.field_Private_VRC_Pickup_0 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
+									Internal_Sync.field_Private_VRC_Pickup_0 = obj.GetComponent<VRC.SDKBase.VRC_Pickup>();
 									return;
 								}
 
-								if (obj.GetComponentInChildren<VRC.SDKBase.VRC_Pickup>() != null && Sync.field_Private_VRC_Pickup_0 == null)
+								if (obj.GetComponentInChildren<VRC.SDKBase.VRC_Pickup>() != null && Internal_Sync.field_Private_VRC_Pickup_0 == null)
 								{
 									ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} VRC_Pickup in SyncPhysic as is Null..");
-									Sync.field_Private_VRC_Pickup_0 = obj.GetComponentInChildren<VRC.SDKBase.VRC_Pickup>();
+									Internal_Sync.field_Private_VRC_Pickup_0 = obj.GetComponentInChildren<VRC.SDKBase.VRC_Pickup>();
 									return;
 								}
-								if (obj.GetComponent<VRCSDK2.VRC_Pickup>() != null && Sync.field_Private_VRC_Pickup_0 == null)
+								if (obj.GetComponent<VRCSDK2.VRC_Pickup>() != null && Internal_Sync.field_Private_VRC_Pickup_0 == null)
 								{
 									ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} VRC_Pickup in SyncPhysic as is Null..");
-									Sync.field_Private_VRC_Pickup_0 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
+									Internal_Sync.field_Private_VRC_Pickup_0 = obj.GetComponent<VRCSDK2.VRC_Pickup>();
 									return;
 								}
 
-								if (obj.GetComponentInChildren<VRCSDK2.VRC_Pickup>() != null && Sync.field_Private_VRC_Pickup_0 == null)
+								if (obj.GetComponentInChildren<VRCSDK2.VRC_Pickup>() != null && Internal_Sync.field_Private_VRC_Pickup_0 == null)
 								{
 									ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} VRC_Pickup in SyncPhysic as is Null..");
-									Sync.field_Private_VRC_Pickup_0 = obj.GetComponentInChildren<VRCSDK2.VRC_Pickup>();
+									Internal_Sync.field_Private_VRC_Pickup_0 = obj.GetComponentInChildren<VRCSDK2.VRC_Pickup>();
 									return;
 								}
 							}
@@ -226,14 +226,14 @@
 								return;
 							}
 
-							if (obj.GetComponentInChildren<Rigidbody>() != null && Sync.field_Private_Rigidbody_0 == null)
+							if (obj.GetComponentInChildren<Rigidbody>() != null && Internal_Sync.field_Private_Rigidbody_0 == null)
 							{
 								ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Rigidbody..");
 								body = obj.GetComponentInChildren<Rigidbody>();
 								body.isKinematic = true;
 								return;
 							}
-							if (obj.GetComponentInChildren<Rigidbody>() == null && obj.GetComponent<Rigidbody>() == null && Sync.field_Private_Rigidbody_0 == null)
+							if (obj.GetComponentInChildren<Rigidbody>() == null && obj.GetComponent<Rigidbody>() == null && Internal_Sync.field_Private_Rigidbody_0 == null)
 							{
 								ModConsole.DebugLog($"RigidBodyController : Bound Object {obj.name} Spawned Rigidbody..");
 								body = obj.AddComponent<Rigidbody>();
@@ -276,39 +276,39 @@
 
 				if (EditMode)
 				{
-					if (Sync != null)
+					if (Internal_Sync != null)
 					{
-						if (Sync.GetRigidBody() != null)
+						if (Internal_Sync.GetRigidBody() != null)
 						{
-							if (Sync.GetRigidBody().useGravity != useGravity)
+							if (Internal_Sync.GetRigidBody().useGravity != useGravity)
 							{
-								Sync.GetRigidBody().useGravity = useGravity;
-								Sync.RefreshProperties();
+								Internal_Sync.GetRigidBody().useGravity = useGravity;
+								Internal_Sync.RefreshProperties();
 							}
-							if (Sync.GetRigidBody().isKinematic != isKinematic)
+							if (Internal_Sync.GetRigidBody().isKinematic != isKinematic)
 							{
-								Sync.GetRigidBody().isKinematic = isKinematic;
-								Sync.RefreshProperties();
+								Internal_Sync.GetRigidBody().isKinematic = isKinematic;
+								Internal_Sync.RefreshProperties();
 							}
-							if (Sync.GetRigidBody().constraints != Constraints)
+							if (Internal_Sync.GetRigidBody().constraints != Constraints)
 							{
-								Sync.GetRigidBody().constraints = Constraints;
-								Sync.RefreshProperties();
+								Internal_Sync.GetRigidBody().constraints = Constraints;
+								Internal_Sync.RefreshProperties();
 							}
-							if (Sync.GetRigidBody().detectCollisions != DetectCollisions)
+							if (Internal_Sync.GetRigidBody().detectCollisions != DetectCollisions)
 							{
-								Sync.GetRigidBody().detectCollisions = DetectCollisions;
-								Sync.RefreshProperties();
+								Internal_Sync.GetRigidBody().detectCollisions = DetectCollisions;
+								Internal_Sync.RefreshProperties();
 							}
-							if (Sync.GetRigidBody().drag != Drag)
+							if (Internal_Sync.GetRigidBody().drag != Drag)
 							{
-								Sync.GetRigidBody().drag = Drag;
-								Sync.RefreshProperties();
+								Internal_Sync.GetRigidBody().drag = Drag;
+								Internal_Sync.RefreshProperties();
 							}
-							if (Sync.GetRigidBody().angularDrag != AngularDrag)
+							if (Internal_Sync.GetRigidBody().angularDrag != AngularDrag)
 							{
-								Sync.GetRigidBody().angularDrag = AngularDrag;
-								Sync.RefreshProperties();
+								Internal_Sync.GetRigidBody().angularDrag = AngularDrag;
+								Internal_Sync.RefreshProperties();
 							}
 						}
 					}
@@ -343,62 +343,62 @@
 				}
 				else
 				{
-					if (Sync != null)
+					if (Internal_Sync != null)
 					{
-						if (Sync.GetRigidBody() != null)
+						if (Internal_Sync.GetRigidBody() != null)
 						{
-							if (Sync.GetRigidBody().useGravity != OrigUseGravity)
+							if (Internal_Sync.GetRigidBody().useGravity != OrigUseGravity)
 							{
-								OrigUseGravity = Sync.GetRigidBody().useGravity;
+								OrigUseGravity = Internal_Sync.GetRigidBody().useGravity;
 							}
-							if (Sync.GetRigidBody().useGravity != useGravity)
+							if (Internal_Sync.GetRigidBody().useGravity != useGravity)
 							{
-								useGravity = Sync.GetRigidBody().useGravity;
-							}
-
-							if (Sync.GetRigidBody().isKinematic != OrigKinematic)
-							{
-								OrigKinematic = Sync.GetRigidBody().isKinematic;
-							}
-							if (Sync.GetRigidBody().isKinematic != isKinematic)
-							{
-								isKinematic = Sync.GetRigidBody().isKinematic;
+								useGravity = Internal_Sync.GetRigidBody().useGravity;
 							}
 
-							if (Sync.GetRigidBody().constraints != OrigConstraints)
+							if (Internal_Sync.GetRigidBody().isKinematic != OrigKinematic)
 							{
-								OrigConstraints = Sync.GetRigidBody().constraints;
+								OrigKinematic = Internal_Sync.GetRigidBody().isKinematic;
 							}
-							if (Sync.GetRigidBody().constraints != Constraints)
+							if (Internal_Sync.GetRigidBody().isKinematic != isKinematic)
 							{
-								Constraints = Sync.GetRigidBody().constraints;
-							}
-
-							if (Sync.GetRigidBody().detectCollisions != OrigDetectCollisions)
-							{
-								OrigDetectCollisions = Sync.GetRigidBody().detectCollisions;
-							}
-							if (Sync.GetRigidBody().detectCollisions != DetectCollisions)
-							{
-								DetectCollisions = Sync.GetRigidBody().detectCollisions;
+								isKinematic = Internal_Sync.GetRigidBody().isKinematic;
 							}
 
-							if (Sync.GetRigidBody().drag != OrigDrag)
+							if (Internal_Sync.GetRigidBody().constraints != OrigConstraints)
 							{
-								OrigDrag = Sync.GetRigidBody().drag;
+								OrigConstraints = Internal_Sync.GetRigidBody().constraints;
 							}
-							if (Sync.GetRigidBody().drag != Drag)
+							if (Internal_Sync.GetRigidBody().constraints != Constraints)
 							{
-								Drag = Sync.GetRigidBody().drag;
+								Constraints = Internal_Sync.GetRigidBody().constraints;
 							}
 
-							if (Sync.GetRigidBody().angularDrag != OrigAngularDrag)
+							if (Internal_Sync.GetRigidBody().detectCollisions != OrigDetectCollisions)
 							{
-								OrigAngularDrag = Sync.GetRigidBody().angularDrag;
+								OrigDetectCollisions = Internal_Sync.GetRigidBody().detectCollisions;
 							}
-							if (Sync.GetRigidBody().angularDrag != AngularDrag)
+							if (Internal_Sync.GetRigidBody().detectCollisions != DetectCollisions)
 							{
-								AngularDrag = Sync.GetRigidBody().angularDrag;
+								DetectCollisions = Internal_Sync.GetRigidBody().detectCollisions;
+							}
+
+							if (Internal_Sync.GetRigidBody().drag != OrigDrag)
+							{
+								OrigDrag = Internal_Sync.GetRigidBody().drag;
+							}
+							if (Internal_Sync.GetRigidBody().drag != Drag)
+							{
+								Drag = Internal_Sync.GetRigidBody().drag;
+							}
+
+							if (Internal_Sync.GetRigidBody().angularDrag != OrigAngularDrag)
+							{
+								OrigAngularDrag = Internal_Sync.GetRigidBody().angularDrag;
+							}
+							if (Internal_Sync.GetRigidBody().angularDrag != AngularDrag)
+							{
+								AngularDrag = Internal_Sync.GetRigidBody().angularDrag;
 							}
 						}
 					}
@@ -495,16 +495,9 @@
 		}
 
 		[HideFromIl2Cpp]
-		internal SyncPhysics Internal_Sync
-		{
-			get
-			{
-				return Sync;
-			}
-		}
+		internal SyncPhysics Internal_Sync { get; private set; } = null;
 
 		private GameObject obj = null;
-		private SyncPhysics Sync = null;
 		private Rigidbody body = null;
 		private VRCObjectSync SDK3Sync = null;
 		internal bool EditMode = false;

@@ -10,7 +10,7 @@
 	{
 		private static string ConfigFolder = Environment.CurrentDirectory + @"\AstroClient";
 
-        private static string ConfigLewdifyPath = ConfigFolder + @"\Lewdify";
+		private static string ConfigLewdifyPath = ConfigFolder + @"\Lewdify";
 
 		private static string ConfigPath = ConfigFolder + @"\Config.json";
 

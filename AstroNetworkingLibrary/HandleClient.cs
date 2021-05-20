@@ -57,16 +57,7 @@
 
 		private void SendSecret()
 		{
-			byte[] secretHeader;
-
-			if (IsClient)
-			{
-				secretHeader = BitConverter.GetBytes(SecretKeyClient);
-			}
-			else
-			{
-				secretHeader = BitConverter.GetBytes(SecretKeyLoader);
-			}
+			byte[] secretHeader = IsClient ? BitConverter.GetBytes(SecretKeyClient) : BitConverter.GetBytes(SecretKeyLoader);
 
 			try
 			{
@@ -182,14 +173,8 @@
 				int toRead = PacketSize;
 				while (remaining > 0)
 				{
-					if (remaining >= PacketSize)
-					{
-						toRead = PacketSize;
-					}
-					else
-					{
-						toRead = remaining;
-					}
+					toRead = remaining >= PacketSize ? PacketSize : remaining;
+
 					try
 					{
 						byte[] received = new byte[toRead];

@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Mora.dynamictouch
 {
-    using DayClientML2.Utility.Extensions;
+	using DayClientML2.Utility.Extensions;
 	using ExternalDynamicBoneEditor.IPCSupport;
 	using Harmony;
 	using MelonLoader;
@@ -31,9 +31,9 @@
 	using System.Drawing;
 
 	class dynamictouch : MelonMod
- 	{
-        private static class NDBConfig
-        {
+	{
+		private static class NDBConfig
+		{
 			public static float distanceToDisable;
 			public static float colliderSizeLimit;
 			public static int dynamicBoneUpdateRate;
@@ -83,8 +83,8 @@
 		}
 
 
-        struct OriginalBoneInformation
-        {
+		struct OriginalBoneInformation
+		{
 			public float updateRate;
 			public float distanceToDisable;
 			public List<DynamicBoneCollider> colliders;
@@ -98,7 +98,7 @@
 			public bool Enabled;
 		}
 
-        private static dynamictouch _Instance;
+		private static dynamictouch _Instance;
 
 		public Dictionary<string, System.Tuple<GameObject, bool, DynamicBone[], DynamicBoneCollider[], bool, System.Tuple<string, string, float>>> avatarsInScene;
 		private Dictionary<string, List<OriginalBoneInformation>> originalSettings;
@@ -181,7 +181,7 @@
 			//    MelonPreferences.SetEntryValue<bool>("NDB", "HasShownCompatibilityIssueMessage", true);
 			//}
 
-			
+
 			if (MelonPreferences.GetEntryValue<int>("NDB", "QuickMenuButton") == 0) //Quick Menu Button - 1:Settings Menu(default), 2:Just Toggle, 0:Off
 			{
 				MelonLogger.Msg(ConsoleColor.White, $"Quick Menu button is disabled - 'QuickMenuButton' pref is set to 0");
@@ -196,21 +196,21 @@
 			string avatarHash = avatarName.Substring(0, Math.Min(avatarName.Length, 20)) + ":" + string.Format("{0:X}", aviID.GetHashCode()).Substring(4);
 			dynamictouch.otherAvatarButtonList.Clear();
 
-			
-		
+
+
 			string AvatarExcludeText() // True - Exluded, False - Included 
 			{
 				return $"Avatar is currently: {(NDBConfig.avatarsToWhichNotApply.ContainsKey(avatarHash) ? (NDBConfig.avatarsToWhichNotApply[avatarHash] ? "Excluded from MDB" : "Included & Bypassing filters") : "N/A")}";
 			}
-			
+
 			string CurrentText()
 			{
 				return $"Adjust avatar's DB radius based on a Multiplier or replace entirely - Currently: {(NDBConfig.avatarsToAdjustDBRadius.ContainsKey(avatarHash) ? (NDBConfig.avatarsToAdjustDBRadius[avatarHash] == -2 ? "Excluded" : (NDBConfig.avatarsToAdjustDBRadius[avatarHash] == 0 ? $"Replacing" : $"Multiplied by {(float)NDBConfig.avatarsToAdjustDBRadius[avatarHash] / 10f}")) : "N/A")}";
 			}
 
-		
 
-			
+
+
 			string HandCollidersText()
 			{
 				return $"Hand Colliders: {(NDBConfig.avatarsToAddColliders.ContainsKey(avatarHash) ? (NDBConfig.avatarsToAddColliders[avatarHash] ? "Enabled for this Avatar" : "Disabled for this Avatar") : "N/A")}";
@@ -1051,10 +1051,10 @@
 				if (NDBConfig.dynamicBoneUpdateRate != bone.m_UpdateRate && NDBConfig.dynamicBoneUpdateRateAdjSettings)
 				{
 					if (NDBConfig.logLevel >= 2) MelonLogger.Msg(ConsoleColor.Magenta, $"Bone {bone.name}'s update rate of {bone.m_UpdateRate} doesn't match NDB config of {NDBConfig.dynamicBoneUpdateRate} - Applying settings changes");
-					bone.m_Elasticity = bone.m_Elasticity * (bone.m_UpdateRate / NDBConfig.dynamicBoneUpdateRate);
-					bone.m_Stiffness = bone.m_Stiffness * (NDBConfig.dynamicBoneUpdateRate / bone.m_UpdateRate);
-					bone.m_Damping = bone.m_Damping * (NDBConfig.dynamicBoneUpdateRate / bone.m_UpdateRate);
-					bone.m_Inert = bone.m_Inert * (NDBConfig.dynamicBoneUpdateRate / bone.m_UpdateRate);
+					bone.m_Elasticity *= bone.m_UpdateRate / NDBConfig.dynamicBoneUpdateRate;
+					bone.m_Stiffness *= NDBConfig.dynamicBoneUpdateRate / bone.m_UpdateRate;
+					bone.m_Damping *= NDBConfig.dynamicBoneUpdateRate / bone.m_UpdateRate;
+					bone.m_Inert *= NDBConfig.dynamicBoneUpdateRate / bone.m_UpdateRate;
 				}
 				bone.m_DistantDisable = NDBConfig.distanceDisable;
 				bone.m_DistanceToObject = NDBConfig.distanceToDisable;
@@ -1356,7 +1356,7 @@
 					}
 					if (NDBConfig.bonesToAlwaysExclude.Contains(bone.m_Root.name))
 					{
-						if (!dynamictouch.bonesExcluded.Contains(bone.m_Root.name))dynamictouch.bonesExcluded.Add(bone.m_Root.name);
+						if (!dynamictouch.bonesExcluded.Contains(bone.m_Root.name)) dynamictouch.bonesExcluded.Add(bone.m_Root.name);
 						if (NDBConfig.logLevel >= 3) MelonLogger.Msg(ConsoleColor.Red, $"Specific Exclude db {hashBone}");
 						return;
 					}
@@ -1677,9 +1677,9 @@
 			serializedBoneData.inert = db.m_Inert;
 			serializedBoneData.radius = db.m_Radius;
 			serializedBoneData.endLength = db.m_EndLength;
-			serializedBoneData.endOffset = new float3(db.m_EndOffset.x, db.m_EndOffset.y, db.m_EndOffset.z);
-			serializedBoneData.gravity = new float3(db.m_Gravity.x, db.m_Gravity.y, db.m_Gravity.z);
-			serializedBoneData.force = new float3(db.m_Force.x, db.m_Force.y, db.m_Force.z);
+			serializedBoneData.endOffset = new Float3(db.m_EndOffset.x, db.m_EndOffset.y, db.m_EndOffset.z);
+			serializedBoneData.gravity = new Float3(db.m_Gravity.x, db.m_Gravity.y, db.m_Gravity.z);
+			serializedBoneData.force = new Float3(db.m_Force.x, db.m_Force.y, db.m_Force.z);
 			return serializedBoneData;
 		}
 

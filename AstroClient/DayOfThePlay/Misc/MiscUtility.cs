@@ -384,7 +384,7 @@
 
 			public static T FromByteArray<T>(byte[] data)
 			{
-				if (data == null) return default(T);
+				if (data == null) return default;
 				var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 				using (var ms = new System.IO.MemoryStream(data))
 				{
@@ -395,7 +395,7 @@
 
 			public static T IL2CPPFromByteArray<T>(byte[] data)
 			{
-				if (data == null) return default(T);
+				if (data == null) return default;
 				var bf = new Il2CppSystem.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
 				var ms = new Il2CppSystem.IO.MemoryStream(data);
 				object obj = bf.Deserialize(ms);

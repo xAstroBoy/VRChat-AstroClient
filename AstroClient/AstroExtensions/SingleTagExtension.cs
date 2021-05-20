@@ -26,7 +26,7 @@
 		}
 
 
-		public static void  DestroyTagsWithText(this Player player, string searchtext)
+		public static void DestroyTagsWithText(this Player player, string searchtext)
 		{
 			var tags = player.transform.root.GetComponentsInChildren<SingleTag>(true);
 			foreach (var tag in tags)

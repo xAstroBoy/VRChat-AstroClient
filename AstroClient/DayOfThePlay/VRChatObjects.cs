@@ -145,16 +145,16 @@
 
 		#region notifications
 
-		public static GameObject hudRoot { get { return GameObject.Find("UserInterface/UnscaledUI/HudContent/Hud").gameObject; } }
-		public static GameObject inviteObj { get { return hudRoot.transform.Find("NotificationDotParent/InviteDot").gameObject; } }
-		public static GameObject inviteReqObj { get { return hudRoot.transform.Find("NotificationDotParent/InviteRequestDot").gameObject; } }
-		public static GameObject notificationObj { get { return hudRoot.transform.Find("NotificationDotParent/NotificationDot").gameObject; } }
-		public static GameObject voteKickObj { get { return hudRoot.transform.Find("NotificationDotParent/VoteKickDot").gameObject; } }
-		public static GameObject friendRequestObj { get { return hudRoot.transform.Find("NotificationDotParent/FriendRequestDot").gameObject; } }
-		public static GameObject voiceDotObj { get { return hudRoot.transform.Find("VoiceDotParent/VoiceDot").gameObject; } }
-		public static GameObject voiceDotDisabledObj { get { return hudRoot.transform.Find("VoiceDotParent/VoiceDotDisabled").gameObject; } }
-		public static GameObject voicePushToTalkKeybd { get { return hudRoot.transform.Find("VoiceDotParent/PushToTalkKeybd").gameObject; } }
-		public static GameObject voicePushToTalkXboxj { get { return hudRoot.transform.Find("VoiceDotParent/PushToTalkXbox").gameObject; } }
+		public static GameObject HudRoot { get { return GameObject.Find("UserInterface/UnscaledUI/HudContent/Hud").gameObject; } }
+		public static GameObject InviteObj { get { return HudRoot.transform.Find("NotificationDotParent/InviteDot").gameObject; } }
+		public static GameObject InviteReqObj { get { return HudRoot.transform.Find("NotificationDotParent/InviteRequestDot").gameObject; } }
+		public static GameObject NotificationObj { get { return HudRoot.transform.Find("NotificationDotParent/NotificationDot").gameObject; } }
+		public static GameObject VoteKickObj { get { return HudRoot.transform.Find("NotificationDotParent/VoteKickDot").gameObject; } }
+		public static GameObject FriendRequestObj { get { return HudRoot.transform.Find("NotificationDotParent/FriendRequestDot").gameObject; } }
+		public static GameObject VoiceDotObj { get { return HudRoot.transform.Find("VoiceDotParent/VoiceDot").gameObject; } }
+		public static GameObject VoiceDotDisabledObj { get { return HudRoot.transform.Find("VoiceDotParent/VoiceDotDisabled").gameObject; } }
+		public static GameObject VoicePushToTalkKeybd { get { return HudRoot.transform.Find("VoiceDotParent/PushToTalkKeybd").gameObject; } }
+		public static GameObject VoicePushToTalkXboxj { get { return HudRoot.transform.Find("VoiceDotParent/PushToTalkXbox").gameObject; } }
 
 		#endregion notifications
 

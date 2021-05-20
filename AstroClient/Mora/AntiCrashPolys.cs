@@ -1,7 +1,6 @@
 ﻿namespace AstroClient.AntiCrash
 {
 	using UnityEngine;
-	using MelonLoader;
 	using System;
 	using System.Collections.Generic;
 	using UnhollowerBaseLib;
@@ -10,6 +9,7 @@
 	using AstroClient.Cheetos;
 	using static AstroClient.Mora.anticrashwrappers;
 	using RubyButtonAPI;
+	using AstroLibrary.Console;
 
 	internal class AntiCrashPolys : GameEvents
 	{
@@ -28,7 +28,7 @@
 		public override void VRChat_OnUiManagerInit()
 		{
 #if DEBUG
-			new QMSingleButton("ShortcutMenu", 5, -0.5f, "check\nblacklist", delegate () { MelonLogger.Log($"{shader_list_local}"); }, "checks the shader list.", null, null, true);
+			new QMSingleButton("ShortcutMenu", 5, -0.5f, "check\nblacklist", delegate () { ModConsole.Log($"{shader_list_local}"); }, "checks the shader list.", null, null, true);
 #endif
 		}
 		public static void set_pickups(bool state)

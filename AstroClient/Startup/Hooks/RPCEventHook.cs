@@ -72,7 +72,7 @@
 			}
 
 			string name = __1.ParameterObject != null ? __1.ParameterObject.name : "null";
-			string parameter = __1.ParameterString != null ? __1.ParameterString : "null";
+			string parameter = __1.ParameterString ?? "null";
 			string eventtype = __1.EventType != null ? __1.EventType.ToString() : "null";
 			string broadcasttype = __2 != null ? __2.ToString() : "Null";
 
