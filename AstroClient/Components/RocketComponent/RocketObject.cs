@@ -69,7 +69,7 @@
 			{
 				if (Time.time - LastTimeCheck > RocketTimer)
 				{
-					if (pickup.isHeld)
+					if (pickup.IsHeld)
 					{
 						if (HasRequiredSettings)
 						{

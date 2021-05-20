@@ -59,13 +59,7 @@
 		// Does not take styling information into account...and it needs to be taken into account.
 		public bool Equals(StyledString other)
 		{
-			if (other == null)
-			{
-				return false;
-			}
-
-			return AbstractValue == other.AbstractValue
-				&& ConcreteValue == other.ConcreteValue;
+			return other != null && AbstractValue == other.AbstractValue && ConcreteValue == other.ConcreteValue;
 		}
 
 		public override bool Equals(object obj) => Equals(obj as StyledString);

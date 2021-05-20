@@ -232,7 +232,7 @@
 
 		public static string GetQualityColored(this VRCPlayer Instance)
 		{
-			string color = "";
+			string color;
 			if (Instance.GetQuality() >= 90)
 				color = "<color=#59D365>";
 			else if (Instance.GetQuality() <= 90 && Instance.GetQuality() >= 60)

@@ -101,7 +101,7 @@
 				return;
 			}
 
-			if (pickup.isHeld)
+			if (pickup.IsHeld)
 			{
 				return;
 			}

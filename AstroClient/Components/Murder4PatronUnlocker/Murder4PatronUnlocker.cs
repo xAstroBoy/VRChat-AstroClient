@@ -149,7 +149,7 @@
 		{
 			if (pickup != null)
 			{
-				if (pickup.isHeld)
+				if (pickup.IsHeld)
 				{
 					if (pickup.CurrentObjectHolderPlayer == LocalPlayerUtils.GetSelfVRCPlayerApi())
 					{
@@ -169,7 +169,7 @@
 		{
 			if (pickup != null)
 			{
-				if (pickup.isHeld)
+				if (pickup.IsHeld)
 				{
 					if (pickup.CurrentObjectHolderPlayer == LocalPlayerUtils.GetSelfVRCPlayerApi())
 					{

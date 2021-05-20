@@ -913,7 +913,7 @@
 		}
 
 		[HideFromIl2Cpp]
-		internal bool isHeld
+		internal bool IsHeld
 		{
 			[HideFromIl2Cpp]
 			get
@@ -1022,7 +1022,7 @@
 			[HideFromIl2Cpp]
 			get
 			{
-				return isHeld ? "Held : Yes" : "Held : No";
+				return IsHeld ? "Held : Yes" : "Held : No";
 			}
 		}
 
@@ -1042,7 +1042,7 @@
 			[HideFromIl2Cpp]
 			get
 			{
-				return isHeld ? Color.green : Color.red;
+				return IsHeld ? Color.green : Color.red;
 			}
 		}
 

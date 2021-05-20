@@ -16,26 +16,11 @@
 
 	public class JarRoleController : GameEvents
 	{
-		private static bool _IsMurder4World;
-		private static bool _isAmongUsWorld;
 		private static bool _ViewRoles;
-		private static bool _ShowHiddenNodes;
 
-		public static bool IsMurder4World
-		{
-			get
-			{
-				return _IsMurder4World;
-			}
-		}
+		public static bool IsMurder4World { get; private set; }
 
-		public static bool IsAmongUsWorld
-		{
-			get
-			{
-				return _isAmongUsWorld;
-			}
-		}
+		public static bool IsAmongUsWorld { get; private set; }
 
 		public static bool ViewRoles
 		{
@@ -87,8 +72,8 @@
 			Murder4RolesRevealerToggle.SetToggleState(false);
 			AmongUSRolesRevealerToggle.SetToggleState(false);
 			ViewRoles = false;
-			_isAmongUsWorld = false;
-			_IsMurder4World = false;
+			IsAmongUsWorld = false;
+			IsMurder4World = false;
 		}
 
 		public override void OnPlayerJoined(Player player)
@@ -190,8 +175,8 @@
 
 		public override void OnWorldReveal(string id, string name, string asseturl)
 		{
-			_isAmongUsWorld = id.Equals(WorldIds.AmongUS);
-			_IsMurder4World = id.Equals(WorldIds.Murder4);
+			IsAmongUsWorld = id.Equals(WorldIds.AmongUS);
+			IsMurder4World = id.Equals(WorldIds.Murder4);
 
 			if (IsAmongUsWorld || IsMurder4World)
 			{

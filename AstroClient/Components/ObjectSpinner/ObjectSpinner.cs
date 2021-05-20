@@ -76,7 +76,7 @@
 		{
 			try
 			{
-				if (pickup.isHeld)
+				if (pickup.IsHeld)
 				{
 					if (HasRequiredSettings)
 					{

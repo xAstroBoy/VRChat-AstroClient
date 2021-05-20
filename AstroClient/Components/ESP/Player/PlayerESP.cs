@@ -39,33 +39,33 @@
 			if (p != null)
 			{
 				Debug($"Found Target Player {p.DisplayName()}, For PlayerESP");
-				player = p;
+				AssignedPlayer = p;
 			}
 			else
 			{
 				Destroy(this);
 			}
-			if (player != null)
+			if (AssignedPlayer != null)
 			{
-				SelectRegion = player.transform.Find("SelectRegion");
+				SelectRegion = AssignedPlayer.transform.Find("SelectRegion");
 				if (SelectRegion == null)
 				{
 					Destroy(this);
 				}
 				else
 				{
-					Debug($"Found SelectRegion Transform Assigned in {player.DisplayName()}!");
+					Debug($"Found SelectRegion Transform Assigned in {AssignedPlayer.DisplayName()}!");
 					ObjRenderers = SelectRegion.GetComponentsInChildren<Renderer>(true);
 					ObjMeshRenderers = SelectRegion.GetComponentsInChildren<MeshRenderer>(true);
 					if (ObjMeshRenderers == null && ObjRenderers == null && ObjMeshRenderers.Count() == 0 && ObjRenderers.Count() == 0)
 					{
-						ModConsole.Error($"Failed to Generate a PlayerESP for Player {player.DisplayName()}, Due to SelectRegion Renderer Missing!");
+						ModConsole.Error($"Failed to Generate a PlayerESP for Player {AssignedPlayer.DisplayName()}, Due to SelectRegion Renderer Missing!");
 						Destroy(this);
 						return;
 					}
 					else
 					{
-						Debug($"Found SelectRegion Renderer in {player.DisplayName()}, Activating ESP !");
+						Debug($"Found SelectRegion Renderer in {AssignedPlayer.DisplayName()}, Activating ESP !");
 						if (HighLightOptions == null)
 						{
 							HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
@@ -99,11 +99,11 @@
 			{
 				if (HighLightOptions != null)
 				{
-					if (player != null)
+					if (AssignedPlayer != null)
 					{
-						if (player.GetAPIUser() != null)
+						if (AssignedPlayer.GetAPIUser() != null)
 						{
-							if (player.GetAPIUser().GetIsFriend())
+							if (AssignedPlayer.GetAPIUser().GetIsFriend())
 							{
 								if (HighLightOptions.highlightColor != FriendColor)
 								{
@@ -174,11 +174,11 @@
 		{
 			if (HighLightOptions != null)
 			{
-				if (player != null)
+				if (AssignedPlayer != null)
 				{
-					if (player.GetAPIUser() != null)
+					if (AssignedPlayer.GetAPIUser() != null)
 					{
-						if (player.GetAPIUser().GetIsFriend())
+						if (AssignedPlayer.GetAPIUser().GetIsFriend())
 						{
 							if (HighLightOptions.highlightColor != FriendColor)
 							{
@@ -209,20 +209,13 @@
 			}
 		}
 
-		private Player player;
 		private Transform SelectRegion;
 		private UnhollowerBaseLib.Il2CppArrayBase<Renderer> ObjRenderers;
 		private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
 		private HighlightsFXStandalone HighLightOptions;
 		internal bool UseCustomColor { get; set; } = false;
 
-		internal Player AssignedPlayer
-		{
-			get
-			{
-				return player;
-			}
-		}
+		internal Player AssignedPlayer { get; private set; }
 
 	}
 }

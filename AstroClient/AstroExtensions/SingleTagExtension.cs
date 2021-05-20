@@ -1,11 +1,10 @@
-﻿using AstroClient.Components;
-using AstroLibrary.Console;
-using System.Collections.Generic;
-using System.Linq;
-using VRC;
-
-namespace AstroClient.Extensions
+﻿namespace AstroClient.Extensions
 {
+	using AstroClient.Components;
+	using AstroLibrary.Console;
+	using System.Collections.Generic;
+	using VRC;
+
 	public static class SingleTagExtension
 	{
 
