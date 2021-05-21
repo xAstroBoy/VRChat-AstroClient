@@ -4,7 +4,7 @@
 	using VRC;
 	using VRC.Core;
 
-	public static class PlayerExtensions
+	public static class Player_ext
 	{
 		public static Player GetPlayer(this APIUser api)
 		{

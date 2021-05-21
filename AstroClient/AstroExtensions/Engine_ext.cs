@@ -13,7 +13,7 @@
 	using VRC.SDKBase;
 	using Color = System.Drawing.Color;
 
-	public static class EngineExtensions
+	public static class Engine_ext
 	{
 		public static void CopyPath(this GameObject obj)
 		{

@@ -3,7 +3,7 @@
 	using UnityEngine;
 	using static AstroClient.Forces;
 
-	public static class ForcesExtensions
+	public static class Forces_ext
 	{
 		public static void KillForces(this GameObject obj)
 		{

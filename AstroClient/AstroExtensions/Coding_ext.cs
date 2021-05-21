@@ -2,7 +2,7 @@
 {
 	using System.Collections.Generic;
 
-	public static class CodingExtensions
+	public static class Coding_ext
 	{
 		public static bool IsEmpty<T>(this List<T> list)
 		{
