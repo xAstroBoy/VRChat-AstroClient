@@ -13,8 +13,22 @@
 			{
 				if (tags.Count() != 0)
 				{
+					bool isFirst = true;
+					string printtag = string.Empty;
+					foreach (var tag in tags)
+					{
+						if (isFirst)
+						{
+							printtag += $"[ {tag} ]";
+							isFirst = false;
+						}
+						else
+						{
+							printtag += $",[ {tag} ]";
+						}
+					}
 
-					ModConsole.Log("World Tags : " + string.Join(",", tags), System.Drawing.Color.Goldenrod);
+					ModConsole.Log("World Tags : " + printtag, System.Drawing.Color.Goldenrod);
 
 				}
 			}
