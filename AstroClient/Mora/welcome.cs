@@ -2,12 +2,13 @@
 {
 	using AstroClient.Cheetos;
 	using DayClientML2.Utility.Extensions;
+	using System.Collections.Generic;
 
 	internal class Welcome : GameEvents
 	{
 		internal static bool booleanhere = false;
 
-		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (!booleanhere)
 			{

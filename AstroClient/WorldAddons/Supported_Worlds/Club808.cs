@@ -4,10 +4,11 @@
 	using AstroClient.Variables;
 	using UnityEngine;
 	using UnityEngine.UI;
+	using System.Collections.Generic;
 
 	internal class Club808 : GameEvents
 	{
-		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.Club808)
 			{

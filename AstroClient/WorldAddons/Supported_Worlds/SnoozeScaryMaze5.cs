@@ -5,10 +5,11 @@
 	using AstroLibrary.Finder;
 	using AstroClient.Variables;
 	using VRC.SDKBase;
+	using System.Collections.Generic;
 
 	public class SnoozeScaryMaze5 : GameEvents
 	{
-		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.SnoozeScaryMaze5)
 			{

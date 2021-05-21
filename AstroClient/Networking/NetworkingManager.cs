@@ -8,6 +8,7 @@
 	using DayClientML2.Utility.Extensions;
 	using UnityEngine;
 	using VRC.SDKBase;
+	using System.Collections.Generic;
 
 	public class NetworkingManager : GameEvents
 	{
@@ -54,7 +55,7 @@
 			}
 		}
 
-		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			var self = LocalPlayerUtils.GetSelfPlayer();
 			Name = self.DisplayName();

@@ -1,14 +1,15 @@
 ﻿namespace AstroClient
 {
 	using System;
+	using System.Collections.Generic;
 
 	public class OnWorldRevealArgs : EventArgs
 	{
 		public string ID;
 		public string Name;
-		public string WorldTags;
+		public List<string> WorldTags;
 		public string AssetUrl;
-		public OnWorldRevealArgs(string ID, string Name, string WorldTags, string AssetUrl)
+		public OnWorldRevealArgs(string ID, string Name, List<string> WorldTags, string AssetUrl)
 		{
 			this.ID = ID;
 			this.Name = Name;

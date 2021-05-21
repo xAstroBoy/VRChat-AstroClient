@@ -3,10 +3,11 @@
 	using AstroLibrary.Console;
 	using AstroLibrary.Finder;
 	using AstroClient.Variables;
+	using System.Collections.Generic;
 
 	public class LPD : GameEvents
 	{
-		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.LPD)
 			{

@@ -3,6 +3,7 @@
 	using AstroClient.Cheetos;
 	using AstroClient.Startup.Hooks;
 	using System;
+	using System.Collections.Generic;
 	using UnityEngine;
 	using VRC;
 	using VRC.SDKBase;
@@ -176,7 +177,7 @@
 		{
 		}
 
-		public virtual void OnWorldReveal(string id, string Name, string tags, string AssetURL)
+		public virtual void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 		}
 	}

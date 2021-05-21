@@ -23,7 +23,7 @@
 			AimFactory.InitButtons(WorldCheats, 1, 2.5f, true);
 		}
 
-		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.VRChatDefaultHub)
 			{

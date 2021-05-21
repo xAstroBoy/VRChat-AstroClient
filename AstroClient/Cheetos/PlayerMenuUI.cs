@@ -37,7 +37,7 @@
 			}
 		}
 
-		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			RefreshButtons();
 		}

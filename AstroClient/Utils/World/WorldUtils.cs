@@ -94,7 +94,7 @@
 		}
 
 
-		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			ModConsole.Log("This instance has " + Get_Players().Count() + " Players.", Color.Gold);
 		}
@@ -294,14 +294,14 @@
 			return null;
 		}
 
-		public static string Get_World_tags()
+		public static List<string> Get_World_tags()
 		{
 			var instance = RoomManager.field_Internal_Static_ApiWorld_0;
 			if (instance != null)
 			{
 				if (instance.tags != null)
 				{
-					return instance.tags.ToString();
+					return instance.tags.ToArray().ToList();
 				}
 			}
 			return null;

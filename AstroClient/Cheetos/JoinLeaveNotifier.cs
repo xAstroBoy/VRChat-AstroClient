@@ -2,6 +2,7 @@
 {
 	using AstroLibrary.Console;
 	using DayClientML2.Utility.Extensions;
+	using System.Collections.Generic;
 	using System.Timers;
 
 	internal class JoinLeaveNotifier : GameEvents
@@ -10,7 +11,7 @@
 
 		private static bool isReady = false;
 
-		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			SetTimer();
 			isReady = false;

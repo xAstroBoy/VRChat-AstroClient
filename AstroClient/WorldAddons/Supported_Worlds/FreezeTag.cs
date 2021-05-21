@@ -13,6 +13,7 @@
 	using VRC.Udon;
 	using VRC.Udon.Common.Interfaces;
 	using static AstroClient.variables.CustomLists;
+	using System.Collections.Generic;
 
 	public class FreezeTag : GameEvents
 	{
@@ -60,7 +61,7 @@
 			UnfreezeMeUdonEvent = null;
 		}
 
-		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.FreezeTag)
 			{

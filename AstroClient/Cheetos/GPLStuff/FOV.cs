@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using System.Collections.Generic;
 	using UnityEngine;
 
 	internal class FOV : GameEvents
@@ -15,7 +16,7 @@
 			ConfigManager.General.FOV = v;
 		}
 
-		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			Set_Camera_FOV(ConfigManager.General.FOV);
 		}
