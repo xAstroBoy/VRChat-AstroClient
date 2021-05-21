@@ -16,7 +16,7 @@
 			WorldCheatsShortcut = new QMSingleButton("ShortcutMenu", x, y, "Cheats Shortcut", null, "Cheats Shortcut", null, null, btnHalf);
 		}
 
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
 		{
 			if (id == WorldIds.VRChatDefaultHub)
 			{

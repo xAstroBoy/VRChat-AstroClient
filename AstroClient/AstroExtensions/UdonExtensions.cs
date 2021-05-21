@@ -2,10 +2,24 @@
 {
 	using System.Collections.Generic;
 	using System.Linq;
+	using UnityEngine;
+	using VRC.Udon;
 	using static AstroClient.variables.CustomLists;
 
 	public static class UdonExtensions
 	{
+
+		public static CachedUdonEvent FindUdonEvent(this GameObject obj, string subaction)
+		{
+			return UdonSearch.FindUdonEvent(obj, subaction);
+		}
+
+		public static CachedUdonEvent FindUdonEvent(this UdonBehaviour obj, string subaction)
+		{
+			return UdonSearch.FindUdonEvent(obj, subaction);
+		}
+
+
 		public static void ExecuteUdonEvent(this CachedUdonEvent udonvar)
 		{
 			if (udonvar.Action != null && udonvar.EventKey != null && udonvar != null)

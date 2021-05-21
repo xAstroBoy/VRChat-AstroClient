@@ -15,7 +15,7 @@
 			ConfigManager.General.FOV = v;
 		}
 
-		public override void OnWorldReveal(string id, string Name, string AssetURL)
+		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
 		{
 			Set_Camera_FOV(ConfigManager.General.FOV);
 		}

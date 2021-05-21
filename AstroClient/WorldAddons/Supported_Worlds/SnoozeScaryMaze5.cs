@@ -8,11 +8,11 @@
 
 	public class SnoozeScaryMaze5 : GameEvents
 	{
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
 		{
 			if (id == WorldIds.SnoozeScaryMaze5)
 			{
-				ModConsole.Log($"Recognized {name} World, Removing Anti-cheat protections..");
+				ModConsole.Log($"Recognized {Name} World, Removing Anti-cheat protections..");
 				var roofanticheat = GameObjectFinder.Find("World/Roof & Preventions");
 				var cheatingroom = GameObjectFinder.Find("World/Cheating Room");
 				cheatingroom.DestroyMeLocal();

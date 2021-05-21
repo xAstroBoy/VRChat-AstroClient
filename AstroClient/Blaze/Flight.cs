@@ -20,7 +20,7 @@
 		private static bool noClipEnabled;
 
 		// Broken for some reason, gotta investigate
-		//public override void OnWorldReveal(string id, string Name, string AssetURL)
+		//public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
 		//{
 		//	FlyEnabled = false;
 		//	NoClipEnabled = false;

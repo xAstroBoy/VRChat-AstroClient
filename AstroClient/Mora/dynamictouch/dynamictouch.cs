@@ -30,6 +30,8 @@
 	using IntPtr = System.IntPtr;
 	using System.Drawing;
 
+
+	// TODO : Remove MelonMod and make it all bundled in
 	class dynamictouch : MelonMod
 	{
 		private static class NDBConfig

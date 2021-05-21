@@ -25,7 +25,7 @@
 			ModConsole.CheetoLog($"VRChat Version: {VRChatVersion}, {VRChatBuild}");
 		}
 
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
 		{
 			if (Bools.IsDeveloper)
 			{

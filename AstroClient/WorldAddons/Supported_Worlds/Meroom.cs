@@ -7,11 +7,11 @@
 
 	public class Meroom : GameEvents
 	{
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
 		{
 			if (id == WorldIds.Meroom)
 			{
-				ModConsole.Log($"Recognized {name} World, Spawning Lockpick Trigger.");
+				ModConsole.Log($"Recognized {Name} World, Spawning Lockpick Trigger.");
 
 				var PrivateRoomSwitchTrigger = GameObjectFinder.Find("Private room/Button/switch");
 				var DisplaySwitchTrigger = GameObjectFinder.Find("Living room/Button/switch (1)");

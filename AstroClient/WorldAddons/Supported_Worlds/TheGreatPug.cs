@@ -7,11 +7,11 @@
 
 	public class TheGreatPug : GameEvents
 	{
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
 		{
 			if (id == WorldIds.TheGreatPug)
 			{
-				ModConsole.Log($"Recognized {name} World, Removing Basement Door & Kitchen Door.");
+				ModConsole.Log($"Recognized {Name} World, Removing Basement Door & Kitchen Door.");
 				var BasementDoor = GameObjectFinder.Find(" - Props/Props (Static) - Hallways - First Floor/door-private");
 				var Kitchen1 = GameObjectFinder.Find("great_pug/kitchen_door");
 				var kitchen2 = GameObjectFinder.Find("great_pug/kitchen_door_chrome");

@@ -23,13 +23,13 @@
 			AimFactory.InitButtons(WorldCheats, 1, 2.5f, true);
 		}
 
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
 		{
 			if (id == WorldIds.VRChatDefaultHub)
 			{
 				if (HubButtonsControl.VRChat_Hub_Addons != null)
 				{
-					ModConsole.Log($"Recognized {name} World, revealing Hub Addons Submenu Button!", System.Drawing.Color.Green);
+					ModConsole.Log($"Recognized {Name} World, revealing Hub Addons Submenu Button!", System.Drawing.Color.Green);
 					HubButtonsControl.VRChat_Hub_Addons.GetMainButton().SetIntractable(true);
 					HubButtonsControl.VRChat_Hub_Addons.GetMainButton().SetTextColor(Color.green);
 				}
@@ -45,7 +45,7 @@
 
 			if (id == WorldIds.TermalTreatment)
 			{
-				ModConsole.Log($"Recognized {name} World, Finding Platforms Gameobjects!...");
+				ModConsole.Log($"Recognized {Name} World, Finding Platforms Gameobjects!...");
 				List<GameObject> list = GameObjectFinder.ListFind("Platforms");
 				if (list != null && list.Count() != 0)
 				{
@@ -54,7 +54,7 @@
 			}
 			if (id == WorldIds.DontTripWorld)
 			{
-				ModConsole.Log($"Recognized {name} World, Finding Entity Gameobjects!...");
+				ModConsole.Log($"Recognized {Name} World, Finding Entity Gameobjects!...");
 				GameObjectFinder.Find("GameObject/Level/cube (5)/what the fuck").AddToWorldUtilsMenu();
 			}
 		}

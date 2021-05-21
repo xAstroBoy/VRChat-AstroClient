@@ -29,7 +29,26 @@
 			return null;
 		}
 
-		public static CachedUdonEvent FindUdonEvent(GameObject obj, string subaction)
+		public static CachedUdonEvent FindUdonEvent(UdonBehaviour obj, string subaction)
+		{
+			if (obj != null)
+			{
+				foreach (var actionkeys in obj._eventTable)
+				{
+					if (actionkeys.key == subaction)
+					{
+						ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {obj.gameObject.name}");
+						return new CachedUdonEvent(obj, actionkeys.key);
+					}
+				}
+
+			}
+			return null;
+		}
+
+
+
+			public static CachedUdonEvent FindUdonEvent(GameObject obj, string subaction)
 		{
 			var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
 

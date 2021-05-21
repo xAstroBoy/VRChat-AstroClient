@@ -33,7 +33,7 @@
 
 		}
 
-		public override void OnWorldReveal(string id, string name, string asseturl)  //ApiWorldDownloadPatch(ApiWorld __0) //__0
+		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)  //ApiWorldDownloadPatch(ApiWorld __0) //__0
 		{
 			DateTime now = DateTime.Now;
 			if (!_WorldsIDs.Contains(RoomManager.field_Internal_Static_ApiWorld_0.id))

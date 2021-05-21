@@ -10,7 +10,7 @@
 
 		private static bool isReady = false;
 
-		public override void OnWorldReveal(string id, string Name, string AssetURL)
+		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
 		{
 			SetTimer();
 			isReady = false;

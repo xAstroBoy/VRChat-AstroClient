@@ -7,11 +7,11 @@
 
 	public class FBTHeaven : GameEvents
 	{
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, string tags, string AssetURL)
 		{
 			if (id == WorldIds.FBTHeaven)
 			{
-				ModConsole.DebugLog($"Recognized {name} World,  Removing Blinders and Dividers...");
+				ModConsole.DebugLog($"Recognized {Name} World,  Removing Blinders and Dividers...");
 				var blinders = GameObjectFinder.Find("[AREA_DEVIDERS]");
 				if (blinders != null)
 				{
