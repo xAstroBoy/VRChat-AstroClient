@@ -4,7 +4,7 @@
 	using UnityEngine;
 	using static AstroClient.variables.CustomLists;
 
-	public static class CustomListExtensions
+	public static class CustomList_ext
 	{
 		public static void RemoveObjFromCustomLists(this GameObject obj)
 		{

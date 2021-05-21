@@ -7,7 +7,7 @@
 	using System.Reflection;
 	using UnityEngine;
 
-	public static class DeepCloneExtension
+	public static class DeepClone_ext
 	{
 		private static bool GetCopyOfDebugMode = false;
 

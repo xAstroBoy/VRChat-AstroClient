@@ -2,7 +2,7 @@
 {
 	using UnityEngine;
 
-	public static class ScaleExtensions
+	public static class Scale_ext
 	{
 		public static void IncreaseHoldItemScale(this GameObject obj)
 		{

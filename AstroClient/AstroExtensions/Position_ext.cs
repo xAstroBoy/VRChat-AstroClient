@@ -3,7 +3,7 @@
 	using System.Collections.Generic;
 	using UnityEngine;
 
-	public static class PositionExtensions
+	public static class Position_ext
 	{
 		public static void TeleportToTarget(this List<GameObject> list)
 		{

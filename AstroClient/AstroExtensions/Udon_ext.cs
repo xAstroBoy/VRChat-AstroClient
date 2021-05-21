@@ -6,7 +6,7 @@
 	using VRC.Udon;
 	using static AstroClient.variables.CustomLists;
 
-	public static class UdonExtensions
+	public static class Udon_ext
 	{
 
 		public static CachedUdonEvent FindUdonEvent(this GameObject obj, string subaction)

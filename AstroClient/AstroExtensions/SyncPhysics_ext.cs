@@ -3,7 +3,7 @@
 	using UnityEngine;
 	using SyncPhysics = SyncPhysics;
 
-	public static class SyncPhysicsExt
+	public static class SyncPhysics_ext
 	{
 		public static void RefreshProperties(this SyncPhysics instance)
 		{

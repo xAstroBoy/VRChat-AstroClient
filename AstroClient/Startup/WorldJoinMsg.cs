@@ -8,7 +8,7 @@
 	{
 		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
-			ModConsole.Log("You entered this world : " + Name, System.Drawing.Color.Goldenrod);
+			ModConsole.Log("Joined World : " + Name, System.Drawing.Color.Goldenrod);
 			if (tags != null)
 			{
 				if (tags.Count() != 0)

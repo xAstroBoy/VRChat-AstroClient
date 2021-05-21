@@ -5,7 +5,7 @@
 	using System.Collections.Generic;
 	using VRC;
 
-	public static class SingleTagExtension
+	public static class SingleTag_ext
 	{
 
 

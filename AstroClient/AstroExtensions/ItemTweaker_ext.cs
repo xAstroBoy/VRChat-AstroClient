@@ -4,7 +4,7 @@
 	using System.Collections.Generic;
 	using UnityEngine;
 
-	public static class ItemTweakerExtensions
+	public static class ItemTweaker_ext
 	{
 		public static void AddToWorldUtilsMenu(this GameObject obj)
 		{

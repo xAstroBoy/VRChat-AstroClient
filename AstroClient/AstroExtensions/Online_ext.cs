@@ -2,7 +2,7 @@
 {
 	using UnityEngine;
 
-	public static class OnlineExtensions
+	public static class Online_ext
 	{
 		public static void ClaimOwnership(this GameObject obj)
 		{
