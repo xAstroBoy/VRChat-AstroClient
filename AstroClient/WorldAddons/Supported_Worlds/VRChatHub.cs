@@ -10,6 +10,7 @@
 	using VRC.SDKBase;
 	using static AstroClient.LocalPlayerUtils;
 	using static VRC.SDKBase.VRC_EventHandler;
+	using System.Collections.Generic;
 
 	public class HubButtonsControl : GameEvents
 	{
@@ -125,7 +126,7 @@
 			}
 		}
 
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.VRChatDefaultHub)
 			{

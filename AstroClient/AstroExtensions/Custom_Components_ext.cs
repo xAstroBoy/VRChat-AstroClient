@@ -6,7 +6,7 @@
 	using System.Collections.Generic;
 	using UnityEngine;
 
-	public static class Custom_ComponentExtensions
+	public static class Custom_Components_ext
 	{
 		public static void MakeRocketItemWithG(this GameObject obj)
 		{

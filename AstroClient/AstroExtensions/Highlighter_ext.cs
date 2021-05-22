@@ -3,7 +3,7 @@
 	using AstroClient.Components;
 	using UnityEngine;
 
-	public static class HighlighterExtensions
+	public static class Highlighter_ext
 	{
 		private static void RemoveRendFromUnlistedHighLighter(Renderer rend)
 		{

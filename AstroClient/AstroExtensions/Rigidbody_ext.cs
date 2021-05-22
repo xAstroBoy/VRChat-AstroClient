@@ -6,7 +6,7 @@
 	using System.Collections.Generic;
 	using UnityEngine;
 
-	public static class RigidbodyExtensions
+	public static class Rigidbody_ext
 	{
 		public static void PrintAllRigidBodySettings(this GameObject obj)
 		{

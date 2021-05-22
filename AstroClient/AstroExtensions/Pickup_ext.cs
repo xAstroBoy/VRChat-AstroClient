@@ -5,7 +5,7 @@
 	using UnityEngine;
 	using VRC.SDKBase;
 
-	public static class PickupExtensions
+	public static class Pickup_ext
 	{
 		public static void SetPickupTheft(this List<GameObject> list, bool DisallowTheft = false)
 		{

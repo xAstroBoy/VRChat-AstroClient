@@ -4,6 +4,7 @@
 	using AstroClient.World.Hub;
 	using RubyButtonAPI;
 	using System;
+	using System.Collections.Generic;
 	using UnityEngine;
 	using UnityEngine.UI;
 
@@ -16,7 +17,7 @@
 			WorldCheatsShortcut = new QMSingleButton("ShortcutMenu", x, y, "Cheats Shortcut", null, "Cheats Shortcut", null, null, btnHalf);
 		}
 
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.VRChatDefaultHub)
 			{

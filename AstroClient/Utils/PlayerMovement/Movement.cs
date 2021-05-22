@@ -29,7 +29,7 @@
 			FixJumpMissing();
 		}
 
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			HasCheckedJump = false;
 		}

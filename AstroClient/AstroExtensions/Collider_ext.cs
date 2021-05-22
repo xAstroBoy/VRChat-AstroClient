@@ -3,7 +3,7 @@
 	using System.Collections.Generic;
 	using UnityEngine;
 
-	public static class ColliderExtensions
+	public static class Collider_ext
 	{
 		public static void AddCollider(this GameObject obj)
 		{

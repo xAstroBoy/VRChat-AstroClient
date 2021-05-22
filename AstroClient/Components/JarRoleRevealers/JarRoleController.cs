@@ -173,7 +173,7 @@
 				: null;
 		}
 
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			IsAmongUsWorld = id.Equals(WorldIds.AmongUS);
 			IsMurder4World = id.Equals(WorldIds.Murder4);

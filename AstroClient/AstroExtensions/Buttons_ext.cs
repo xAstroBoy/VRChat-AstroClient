@@ -5,7 +5,7 @@
 	using UnityEngine;
 	using UnityEngine.UI;
 
-	public static class ButtonsExtensions
+	public static class Buttons_ext
 	{
 		public static void SetButtonToArrow(this QMSingleButton button)
 		{

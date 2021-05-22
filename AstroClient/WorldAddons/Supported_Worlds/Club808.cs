@@ -4,14 +4,15 @@
 	using AstroClient.Variables;
 	using UnityEngine;
 	using UnityEngine.UI;
+	using System.Collections.Generic;
 
 	internal class Club808 : GameEvents
 	{
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.Club808)
 			{
-				ModConsole.DebugLog($"Recognized {name} World, Showing Door Codes..");
+				ModConsole.DebugLog($"Recognized {Name} World, Showing Door Codes..");
 
 				Text StaffRoom = GameObject.Find("Lobby/Security Door Keypad (Change PIN Here) (1)/keyboard/background/dynamic string/Placeholder").GetComponent<Text>();
 

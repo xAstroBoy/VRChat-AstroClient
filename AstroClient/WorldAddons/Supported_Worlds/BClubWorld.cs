@@ -8,16 +8,17 @@
 	using System.Linq;
 	using UnityEngine;
 	using VRC.Udon;
+	using System.Collections.Generic;
 
 	public class BClubWorld : GameEvents
 	{
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.BClub)
 			{
 				try
 				{
-					ModConsole.DebugLog($"Recognized {name} World!");
+					ModConsole.DebugLog($"Recognized {Name} World!");
 					ModConsole.DebugLog("Searching for Private Rooms Exteriors...");
 					CreateButtonGroup(1, new Vector3(-84.76529f, 15.75226f, -0.3361053f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
 					CreateButtonGroup(2, new Vector3(-83.04877f, 15.81609f, -4.297329f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));

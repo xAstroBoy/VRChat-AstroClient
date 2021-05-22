@@ -6,7 +6,7 @@
 	using VRC.SDK3.Components;
 	using VRC.SDKBase;
 
-	public static class ExtensionUtils
+	public static class Click_ext
 	{
 		public static void VRC_Trigger_UpdateInteractionText(this GameObject obj, string NewText)
 		{

@@ -4,14 +4,15 @@
 	using AstroClient.Extensions;
 	using AstroLibrary.Finder;
 	using AstroClient.Variables;
+	using System.Collections.Generic;
 
 	public class FBTHeaven : GameEvents
 	{
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.FBTHeaven)
 			{
-				ModConsole.DebugLog($"Recognized {name} World,  Removing Blinders and Dividers...");
+				ModConsole.DebugLog($"Recognized {Name} World,  Removing Blinders and Dividers...");
 				var blinders = GameObjectFinder.Find("[AREA_DEVIDERS]");
 				if (blinders != null)
 				{

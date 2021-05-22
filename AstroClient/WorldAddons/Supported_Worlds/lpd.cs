@@ -3,14 +3,15 @@
 	using AstroLibrary.Console;
 	using AstroLibrary.Finder;
 	using AstroClient.Variables;
+	using System.Collections.Generic;
 
 	public class LPD : GameEvents
 	{
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.LPD)
 			{
-				ModConsole.Log($"Recognized {name} World, Enabling doors..");
+				ModConsole.Log($"Recognized {Name} World, Enabling doors..");
 
 				var ToOffice = GameObjectFinder.Find("Waiting Room/Teleporters/ToOffice/Teleporter");
 

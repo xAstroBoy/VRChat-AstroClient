@@ -13,6 +13,7 @@
 	using VRC.Udon;
 	using VRC.Udon.Common.Interfaces;
 	using static AstroClient.variables.CustomLists;
+	using System.Collections.Generic;
 
 	public class FreezeTag : GameEvents
 	{
@@ -60,7 +61,7 @@
 			UnfreezeMeUdonEvent = null;
 		}
 
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.FreezeTag)
 			{
@@ -70,7 +71,7 @@
 					FreezeTagCheatsPage.GetMainButton().SetIntractable(true);
 					FreezeTagCheatsPage.GetMainButton().SetTextColor(Color.green);
 				}
-				ModConsole.DebugLog($"Recognized {name} World, removing anti-cheat mechanism!");
+				ModConsole.DebugLog($"Recognized {Name} World, removing anti-cheat mechanism!");
 				var SpawnRoof = GameObjectFinder.Find("spawn/mainroom 2/ceiling");
 				var Barriers = GameObjectFinder.Find("packmanmap/barriors");
 				var OutsideMazePlane = GameObjectFinder.Find("packmanmap/Plane (4)");

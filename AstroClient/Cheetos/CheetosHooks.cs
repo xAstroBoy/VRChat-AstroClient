@@ -115,24 +115,36 @@
 			finally { }
 		}
 
-		private static bool OnAvatarDownload(ApiAvatar __0)
+		private static bool OnAvatarDownload(ref ApiAvatar __0)
 		{
-			var avatarData = new AvatarData()
-			{
-				AssetURL = __0.assetUrl,
-				AuthorID = __0.authorId,
-				AuthorName = __0.authorName,
-				Description = __0.description,
-				AvatarID = __0.id,
-				ImageURL = __0.imageUrl,
-				ThumbnailURL = __0.thumbnailImageUrl,
-				Name = __0.name,
-				ReleaseStatus = __0.releaseStatus,
-				Version = __0.version
-			};
 
-			var json = JsonConvert.SerializeObject(avatarData);
-			AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
+			try
+			{
+				if (__0 != null)
+				{
+					var avatarData = new AvatarData()
+					{
+						AssetURL = __0.assetUrl,
+						AuthorID = __0.authorId,
+						AuthorName = __0.authorName,
+						Description = __0.description,
+						AvatarID = __0.id,
+						ImageURL = __0.imageUrl,
+						ThumbnailURL = __0.thumbnailImageUrl,
+						Name = __0.name,
+						ReleaseStatus = __0.releaseStatus,
+						Version = __0.version
+					};
+
+					if (avatarData != null)
+					{
+						var json = JsonConvert.SerializeObject(avatarData);
+						AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
+
+					}
+				}
+			}
+			catch { }
 
 			return true;
 		}

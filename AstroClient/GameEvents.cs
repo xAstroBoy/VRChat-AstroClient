@@ -3,6 +3,7 @@
 	using AstroClient.Cheetos;
 	using AstroClient.Startup.Hooks;
 	using System;
+	using System.Collections.Generic;
 	using UnityEngine;
 	using VRC;
 	using VRC.SDKBase;
@@ -94,7 +95,7 @@
 
 		private void Internal_OnWorldReveal(object sender, OnWorldRevealArgs e)
 		{
-			OnWorldReveal(e.ID, e.Name, e.AssetUrl);
+			OnWorldReveal(e.ID, e.Name, e.WorldTags, e.AssetUrl);
 		}
 
 		private void Internal_VRC_EventDispatcherRFC_triggerEvent(object sender, VRC_EventDispatcherRFC_TriggerEventArgs e)
@@ -176,7 +177,7 @@
 		{
 		}
 
-		public virtual void OnWorldReveal(string id, string Name, string AssetURL)
+		public virtual void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 		}
 	}

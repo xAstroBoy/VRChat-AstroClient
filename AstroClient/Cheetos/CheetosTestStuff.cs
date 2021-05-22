@@ -4,9 +4,12 @@
 	using AstroClient.variables;
 	using UnityEngine;
 	using AstroLibrary.Finder;
+	using System.Collections.Generic;
 
 	internal class CheetosTestStuff : GameEvents
 	{
+		private static bool DoOnce;
+
 		public override void VRChat_OnUiManagerInit()
 		{
 			string VRChatVersion = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_1;
@@ -25,11 +28,15 @@
 			ModConsole.CheetoLog($"VRChat Version: {VRChatVersion}, {VRChatBuild}");
 		}
 
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (Bools.IsDeveloper)
 			{
-				CheetosHelpers.SendHudNotification("Developer Mode!");
+				if (!DoOnce)
+				{
+					CheetosHelpers.SendHudNotification("Developer Mode!");
+					DoOnce = true;
+				}
 			}
 		}
 	}

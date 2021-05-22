@@ -127,13 +127,13 @@
 			}
 		}
 
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.Murder2)
 			{
 				if (Murder2CheatPage != null)
 				{
-					ModConsole.Log($"Recognized {name} World, Unlocking Murder 2 cheats menu!", System.Drawing.Color.Green);
+					ModConsole.Log($"Recognized {Name} World, Unlocking Murder 2 cheats menu!", System.Drawing.Color.Green);
 					Murder2CheatPage.GetMainButton().SetIntractable(true);
 					Murder2CheatPage.GetMainButton().SetTextColor(Color.green);
 				}

@@ -133,14 +133,14 @@
 			}
 		}
 
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.AmongUS)
 			{
 				HasAmongUsWorldLoaded = true;
 				if (AmongUsCheatsPage != null)
 				{
-					ModConsole.Log($"Recognized {name} World, Unlocking Among US cheats menu!", System.Drawing.Color.Green);
+					ModConsole.Log($"Recognized {Name} World, Unlocking Among US cheats menu!", System.Drawing.Color.Green);
 					AmongUsCheatsPage.GetMainButton().SetIntractable(true);
 					AmongUsCheatsPage.GetMainButton().SetTextColor(Color.green);
 				}

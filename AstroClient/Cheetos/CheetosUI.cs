@@ -16,6 +16,7 @@
 	using UnityEngine;
 	using VRC.SDKBase;
 	using static VRC.SDKBase.VRC_EventHandler;
+	using System.Collections.Generic;
 
 	#endregion Imports
 
@@ -276,7 +277,7 @@
 			}
 		}
 
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 		}
 	}

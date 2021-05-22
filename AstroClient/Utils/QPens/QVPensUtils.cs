@@ -5,12 +5,15 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
+	using static AstroClient.variables.CustomLists;
+	using VRC.Udon;
 
 	public class QVPensUtils : GameEvents
 	{
-		public override void OnWorldReveal(string id, string name, string asseturl)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
-			FindQVPenSet();
+			FindQVPenSetTriggers();
+			FindUdonPensEvents();
 		}
 
 		public override void OnLevelLoaded()
@@ -27,9 +30,13 @@
 			{
 				TriggerSDK2.Clear();
 			}
+			if(ClearPensUdonEvents != null)
+			{
+				ClearPensUdonEvents.Clear();
+			}
 		}
 
-		public static void FindQVPenSet()
+		public static void FindQVPenSetTriggers()
 		{
 			foreach (var obj in Resources.FindObjectsOfTypeAll<GameObject>())
 			{
@@ -85,26 +92,72 @@
 			ModConsole.Log("Found " + TriggerSDK2.Count() + " QVPens Clear VRCSDK2 Triggers.");
 		}
 
+		public static void FindUdonPensEvents()
+		{
+			foreach (var item in Resources.FindObjectsOfTypeAll<UdonBehaviour>())
+			{
+				if(item != null)
+				{
+					if(item.name.ToLower().Contains("penmanager"))
+					{
+						var action = item.FindUdonEvent("ClearAll");
+						if(action != null)
+						{
+							if (!ClearPensUdonEvents.Contains(action))
+							{
+								ClearPensUdonEvents.Add(action);
+							}
+						}
+					}
+					if(item.name.ToLower().Equals("pen"))
+					{
+						var action = item.FindUdonEvent("Clear");
+						if (action != null)
+						{
+							if (!ClearPensUdonEvents.Contains(action))
+							{
+								ClearPensUdonEvents.Add(action);
+							}
+						}
+					}	
+				}
+			}
+			ModConsole.Log("Found " + ClearPensUdonEvents.Count() + " Clear Pens Udon Events.");
+		}
+
+
 		public static void ResetQPensGlobal()
 		{
-			foreach (var item in TriggerSDKBase)
+			if (TriggerSDKBase.Count() != 0)
 			{
-				if (item != null)
+				foreach (var item in TriggerSDKBase)
 				{
-					item.gameObject.TriggerClick();
+					if (item != null)
+					{
+						item.gameObject.TriggerClick();
+					}
 				}
 			}
-			foreach (var item in TriggerSDK2)
+			if (TriggerSDK2.Count() != 0)
 			{
-				if (item != null)
+				foreach (var item in TriggerSDK2)
 				{
-					item.gameObject.TriggerClick();
+					if (item != null)
+					{
+						item.gameObject.TriggerClick();
+					}
 				}
 			}
+			if(ClearPensUdonEvents.Count() != 0)
+			{
+				ClearPensUdonEvents.ExecuteUdonEvent();
+			}
+
 		}
 
 		public static List<GameObject> PenManagers = new List<GameObject>();
 		public static List<VRC.SDKBase.VRC_Trigger> TriggerSDKBase = new List<VRC.SDKBase.VRC_Trigger>();
 		public static List<VRCSDK2.VRC_Trigger> TriggerSDK2 = new List<VRCSDK2.VRC_Trigger>();
+		public static List<CachedUdonEvent> ClearPensUdonEvents = new List<CachedUdonEvent>();
 	}
 }
