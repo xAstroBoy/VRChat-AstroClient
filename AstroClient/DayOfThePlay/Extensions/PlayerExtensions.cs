@@ -400,7 +400,7 @@
 
 		public static bool GetIsFriend(this APIUser Instance)
 		{
-			return Instance.isFriend || APIUser.IsFriendsWith(Instance.id);
+			return Instance.isFriend || APIUser.IsFriendsWith(Instance.id) || APIUser.CurrentUser.friendIDs.Contains(Instance.id);
 		}
 
 		public static bool GetIsDANGER(this VRCPlayer Instance)
