@@ -73,12 +73,19 @@
 				new QMSingleButton(MainButton, 1, 0, "Friend Everyone", () => { DoFriendEveryone(); }, "Friend Everyone!");
 				new QMSingleButton(MainButton, 1, 1, "Test #2", () => { Test2(); }, "Don't Do It!");
 				new QMSingleButton(MainButton, 1, 2, "Test #3", () => { Test3(); }, "Don't Do It!");
+				new QMSingleButton(MainButton, 3, 0, "Portal", () => { PortalDrop(); }, "Portal");
 				new QMSingleButton(MainButton, 3, 1, "Create Button", () => { CreateButton(); }, ":3");
 				new QMSingleButton(MainButton, 3, 2, "Photon", () => { PrintPhotonPlayers(); }, "Photon");
 				new QMSingleButton(MainButton, 4, 0, "RPC Test #1", () => { RPCClapTest1(); }, "RPC");
 				new QMSingleButton(MainButton, 4, 1, "RPC Test #2", () => { RPCClapTest2(); }, "RPC");
 				new QMSingleButton(MainButton, 4, 2, "RPC Test #3", () => { RPCClapTest3(); }, "RPC");
 			}
+		}
+
+		private void PortalDrop()
+		{
+			var Portal = Networking.Instantiate(VRC_EventHandler.VrcBroadcastType.Always, "Portals/PortalInternalDynamic", new Vector3(777, 777, 777), new Quaternion(float.MaxValue, float.MaxValue, 0, 0));
+			Portal.SetActive(false);
 		}
 
 		private void Test3()
