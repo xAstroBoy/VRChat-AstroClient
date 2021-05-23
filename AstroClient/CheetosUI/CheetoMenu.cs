@@ -29,8 +29,6 @@
 			Menu.AddComponent<Canvas>();
 			Menu.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
 			Menu.GetComponent<Canvas>().worldCamera = Camera.current;
-			Menu.AddComponent<CanvasScaler>();
-			Menu.GetComponent<CanvasScaler>().screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
 
 			_ = new CheetoBackground(Menu.transform);
 			_ = new CheetoText(Menu.transform);
@@ -59,7 +57,7 @@
 				var center = LocalPlayerUtils.CenterOfPlayer();
 				UI.transform.position = center + (ptransform.forward * 0.30f);
 				UI.transform.position += new Vector3(0, 0.05f, 0);
-				UI.transform.localScale = new Vector3(0.0025f, 0.0025f, 0.0025f);
+				UI.transform.localScale = new Vector3(0.00025f, 0.00025f, 0.00025f);
 				UI.transform.LookAt(ptransform);
 				UI.transform.Rotate(new Vector3(45, 180, 0));
 			}

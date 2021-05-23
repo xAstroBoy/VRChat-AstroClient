@@ -16,7 +16,9 @@
 			Background = new GameObject("Background");
 			Background.AddComponent<RectTransform>();
 			Background.transform.SetParent(parent, false);
-			Background.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f, 0.5f);
+			Background.GetComponent<RectTransform>().position = new Vector3(0f, 0f, 0f);
+			Background.GetComponent<RectTransform>().anchorMin = new Vector2(0f, 0f);
+			Background.GetComponent<RectTransform>().anchorMax = new Vector2(1f, 1f);
 			Background.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
 			Background.AddComponent<CanvasRenderer>();
 			Background.AddComponent<Image>();
