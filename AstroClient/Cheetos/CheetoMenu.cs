@@ -1,24 +1,36 @@
 ﻿namespace AstroClient
 {
 	using AstroLibrary.Console;
+	using System.Windows.Forms;
 	#region Imports
 
 	using UnityEngine;
+	using UnityEngine.UI;
 
 	#endregion Imports
 
 	internal class CheetoMenu : GameEvents
 	{
+		public static GameObject UI;
+
 		public static GameObject Menu;
 
 		public bool IsOpen = false;
 
 		public override void VRChat_OnUiManagerInit()
 		{
-			Menu = GameObject.CreatePrimitive(PrimitiveType.Plane);
-			Menu.name = "CheetoMenu";
+			UI = new GameObject() { name = "CheetoUI" };
+			UI.name = "CheetoUI";
+
+			Menu = new GameObject() { name = "CheetoMenu" };
+			Menu.transform.parent = UI.transform;
+			Menu.AddComponent<Canvas>();
+			Menu.AddComponent<CanvasScaler>();
+
+			_ = new CheetoPage(Menu.transform);
+
 			Menu.SetActive(false);
-			Object.DontDestroyOnLoad(Menu);
+			Object.DontDestroyOnLoad(UI);
 		}
 
 		public override void OnUpdate()
@@ -39,10 +51,10 @@
 			{
 				var ptransform = LocalPlayerUtils.GetSelfPlayer().transform;
 				var center = LocalPlayerUtils.CenterOfPlayer();
-				Menu.transform.position = center + (ptransform.forward * 0.5f);
-				Menu.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
-				Menu.transform.LookAt(ptransform);
-				Menu.transform.Rotate(new Vector3(45, 0, 0));
+				UI.transform.position = center + (ptransform.forward * 0.45f);
+				UI.transform.localScale = new Vector3(0.005f, 0.005f, 0.005f);
+				UI.transform.LookAt(ptransform);
+				UI.transform.Rotate(new Vector3(-45, 0, 0));
 			}
 		}
 	}
