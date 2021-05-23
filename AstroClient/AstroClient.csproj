@@ -123,6 +123,7 @@
     <Compile Include="Buttons\UserInteractMenuBtns.cs" />
     <Compile Include="Buttons\ESPMenu.cs" />
     <Compile Include="Buttons\WorldPickupsBtn.cs" />
+    <Compile Include="Cheetos\AvatarSearch.cs" />
     <Compile Include="Cheetos\CheetosHooks.cs" />
     <Compile Include="Cheetos\DevUI.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />
