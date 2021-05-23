@@ -1,36 +1,31 @@
 ﻿namespace AstroClient
 {
+	using AstroLibrary.Console;
 	#region Imports
 
-	using AstroLibrary.Console;
-	using AstroLibrary.Finder;
-	using System;
 	using UnityEngine;
-	using Color = System.Drawing.Color;
 
 	#endregion Imports
 
-	public class CheetoMenu : GameEventsBehaviour
+	internal class CheetoMenu : GameEvents
 	{
-		public static CheetoMenu Instance;
-
 		public static GameObject Menu;
 
 		public bool IsOpen = false;
 
-		public CheetoMenu(IntPtr obj0) : base(obj0)
+		public override void VRChat_OnUiManagerInit()
 		{
+			Menu = GameObject.CreatePrimitive(PrimitiveType.Plane);
+			Menu.name = "CheetoMenu";
+			Menu.SetActive(false);
+			Object.DontDestroyOnLoad(Menu);
 		}
 
-		public void Start()
+		public override void OnUpdate()
 		{
-			Instance = this;
-		}
-
-		public void Update()
-		{
-			if (Input.GetKeyDown(KeyCode.Tilde))
+			if (Input.GetKeyDown(KeyCode.BackQuote))
 			{
+				ModConsole.Log("Attempting to toggle CheetoMenu");
 				ToggleMenu();
 			}
 		}
@@ -39,26 +34,7 @@
 		{
 			IsOpen = !IsOpen;
 			Menu.SetActive(IsOpen);
-		}
-
-		public static void MakeInstance()
-		{
-			if (Instance == null)
-			{
-				Menu = GameObject.CreatePrimitive(PrimitiveType.Plane);
-				Menu.name = "CheetoMenu";
-				Menu.SetActive(false);
-				Instance = Menu.AddComponent<CheetoMenu>();
-				DontDestroyOnLoad(Menu);
-				if (Instance != null)
-				{
-					ModConsole.DebugLog("[ " + Menu.name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
-				}
-				else
-				{
-					ModConsole.DebugLog("[ " + Menu.name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
-				}
-			}
+			Menu.transform.position = LocalPlayerUtils.GetSelfPlayer().transform.position;
 		}
 	}
 }

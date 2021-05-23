@@ -77,7 +77,6 @@
 			RegisterComponent<PlayerWatcher>();
 			RegisterComponent<Astro_Interactable>();
 
-			RegisterComponent<CheetoMenu>();
 			RegisterComponent<Bouncer>();
 			RegisterComponent<Lewdifier>();
 			RegisterComponent<MaskRemover>();
@@ -85,7 +84,6 @@
 
 		public override void OnUpdate()
 		{
-			CheetoMenu.MakeInstance();
 			RocketManager.MakeInstance();
 			CrazyObjectManager.MakeInstance();
 			ObjectSpinnerManager.MakeInstance();
