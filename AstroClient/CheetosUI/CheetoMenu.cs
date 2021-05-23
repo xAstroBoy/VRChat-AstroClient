@@ -22,10 +22,18 @@
 			UI.name = "CheetoUI";
 
 			Menu = new GameObject() { name = "CheetoMenu" };
-			Menu.transform.parent = UI.transform;
+			Menu.AddComponent<RectTransform>();
+			Menu.transform.SetParent(UI.transform, false);
+			Menu.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 600);
+			Menu.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f, 0.5f);
 			Menu.AddComponent<Canvas>();
+			Menu.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
+			Menu.GetComponent<Canvas>().worldCamera = Camera.current;
 			Menu.AddComponent<CanvasScaler>();
+			Menu.GetComponent<CanvasScaler>().screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
 
+			_ = new CheetoBackground(Menu.transform);
+			_ = new CheetoText(Menu.transform);
 			_ = new CheetoPage(Menu.transform);
 
 			Menu.SetActive(false);
@@ -36,7 +44,6 @@
 		{
 			if (Input.GetKeyDown(KeyCode.BackQuote))
 			{
-				ModConsole.Log("Attempting to toggle CheetoMenu");
 				ToggleMenu();
 			}
 		}
@@ -50,10 +57,11 @@
 			{
 				var ptransform = LocalPlayerUtils.GetSelfPlayer().transform;
 				var center = LocalPlayerUtils.CenterOfPlayer();
-				UI.transform.position = center + (ptransform.forward * 0.45f);
-				UI.transform.localScale = new Vector3(0.005f, 0.005f, 0.005f);
+				UI.transform.position = center + (ptransform.forward * 0.30f);
+				UI.transform.position += new Vector3(0, 0.05f, 0);
+				UI.transform.localScale = new Vector3(0.0025f, 0.0025f, 0.0025f);
 				UI.transform.LookAt(ptransform);
-				UI.transform.Rotate(new Vector3(-45, 0, 0));
+				UI.transform.Rotate(new Vector3(45, 180, 0));
 			}
 		}
 	}

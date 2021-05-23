@@ -123,6 +123,8 @@
     <Compile Include="Buttons\UserInteractMenuBtns.cs" />
     <Compile Include="Buttons\ESPMenu.cs" />
     <Compile Include="Buttons\WorldPickupsBtn.cs" />
+    <Compile Include="CheetosUI\CheetoBackground.cs" />
+    <Compile Include="CheetosUI\CheetoText.cs" />
     <Compile Include="Cheetos\AvatarSearch.cs" />
     <Compile Include="CheetosUI\CheetoPage.cs" />
     <Compile Include="Cheetos\CheetosHooks.cs" />
