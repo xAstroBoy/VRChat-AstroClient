@@ -37,6 +37,7 @@
 			Menu.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
 			Menu.GetComponent<Canvas>().worldCamera = camera;
 			Menu.AddComponent<GraphicRaycaster>();
+			Menu.GetComponent<GraphicRaycaster>().m_BlockingMask = 0;
 
 			_ = new CheetoBackground(Menu.transform);
 			_ = new CheetoPage(Menu.transform);
