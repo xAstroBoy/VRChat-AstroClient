@@ -9,7 +9,7 @@
 		{
 			if (instance != null)
 			{
-				instance.Method_Public_Void_PDM_2();
+				instance.Method_Public_Void_0();
 			}
 		}
 

@@ -550,10 +550,10 @@
 					prefabQMScroll.Add(
 					new QMSingleButton(prefabQMScroll.BaseMenu, 0, 0, $"Spawn {prefab.name}", delegate
 					{
-						var broadcast = VRC_EventHandler.VrcBroadcastType.AlwaysUnbuffered;
+						var broadcast = VRC_EventHandler.VrcBroadcastType.Always;
 						var prefabinfo = prefab.name;
 						var position = LocalPlayerUtils.GetPlayerBoneTransform(HumanBodyBones.RightHand).position;
-						var Rotation = new Quaternion(0, 0, 0, 0);
+						var Rotation = prefab.transform.rotation;
 
 						//ModConsole.DebugLog($"Attempting to broadcast  {broadcast} a Spawn Prefab {prefabinfo}, in Vector3 {position.ToString()}, Rotation : {Rotation.ToString()}");
 						//RPC_Experiments.SendSpawnobject(prefab);
