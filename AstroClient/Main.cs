@@ -51,7 +51,10 @@
 			LogSupport.RemoveAllHandlers();
 			ConfigManager.Validate();
 			ConfigManager.Load();
-
+			if (ModConsole.DebugMode != ConfigManager.General.DebugLog)
+			{
+				ModConsole.DebugMode = ConfigManager.General.DebugLog;
+			}
 #if OFFLINE
 			KeyManager.IsAuthed = true;
 			Bools.IsDeveloper = true;
