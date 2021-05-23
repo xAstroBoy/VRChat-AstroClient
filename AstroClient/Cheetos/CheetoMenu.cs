@@ -45,20 +45,18 @@
 		{
 			if (Instance == null)
 			{
-				string name = "CheetoMenu";
-				var ui = GameObjectFinder.Find("UserInterface");
 				Menu = GameObject.CreatePrimitive(PrimitiveType.Plane);
-				Menu.transform.parent = ui.transform;
+				Menu.name = "CheetoMenu";
 				Menu.SetActive(false);
 				Instance = Menu.AddComponent<CheetoMenu>();
 				DontDestroyOnLoad(Menu);
 				if (Instance != null)
 				{
-					ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
+					ModConsole.DebugLog("[ " + Menu.name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
 				}
 				else
 				{
-					ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
+					ModConsole.DebugLog("[ " + Menu.name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
 				}
 			}
 		}
