@@ -123,6 +123,8 @@
     <Compile Include="Buttons\UserInteractMenuBtns.cs" />
     <Compile Include="Buttons\ESPMenu.cs" />
     <Compile Include="Buttons\WorldPickupsBtn.cs" />
+    <Compile Include="Cheetos\AvatarSearch.cs" />
+    <Compile Include="CheetosUI\CheetoPage.cs" />
     <Compile Include="Cheetos\CheetosHooks.cs" />
     <Compile Include="Cheetos\DevUI.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />
@@ -130,7 +132,7 @@
     <Compile Include="Cheetos\AstroInput.cs" />
     <Compile Include="Cheetos\AvatarHider.cs" />
     <Compile Include="Cheetos\ButtonCreator.cs" />
-    <Compile Include="Cheetos\CheetoMenu.cs" />
+    <Compile Include="CheetosUI\CheetoMenu.cs" />
     <Compile Include="Cheetos\CheetosHelpers.cs" />
     <Compile Include="Cheetos\AdminUI.cs" />
     <Compile Include="Cheetos\ForceClone.cs" />
@@ -241,7 +243,6 @@
     <Compile Include="GameObject\Online\OnlineEditor.cs" />
     <Compile Include="GameObjMenu.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="InstantiateUtils\ButtonInstantiator.cs" />
     <Compile Include="InstantiateUtils\MapEditorMenu.cs" />
     <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
@@ -257,7 +258,6 @@
     <Compile Include="Networking\NetworkingManager.cs" />
     <Compile Include="Obfuscation.cs" />
     <Compile Include="Patches\Patching.cs" />
-    <Compile Include="Prefabs\PrefabLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Skyboxes\SkyboxEditor.cs" />
@@ -1017,6 +1017,7 @@
     <EmbeddedResource Include="Resources\thief.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Prefabs\" />
     <Folder Include="Utils\GameObject\" />
   </ItemGroup>
   <ItemGroup>
