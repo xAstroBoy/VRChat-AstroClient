@@ -3,6 +3,7 @@
 	#region Imports
 
 	using AstroLibrary.Console;
+	using AstroLibrary.Finder;
 	using UnityEngine;
 	using UnityEngine.UI;
 
@@ -18,6 +19,8 @@
 
 		public override void VRChat_OnUiManagerInit()
 		{
+			var camera = GameObjectFinder.Find("_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Neck/Camera (head)/Camera (eye)").GetComponent<Camera>();
+
 			UI = new GameObject() { name = "CheetoUI" };
 			UI.name = "CheetoUI";
 			UI.layer = LayerMask.NameToLayer("UI");
@@ -28,12 +31,12 @@
 			Menu.transform.SetParent(UI.transform, false);
 			Menu.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 600);
 			Menu.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f, 0.5f);
-			Menu.AddComponent<GraphicRaycaster>();
-			Menu.AddComponent<Canvas>();
-			Menu.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
-			Menu.GetComponent<Canvas>().worldCamera = Camera.current;
 			Menu.AddComponent<BoxCollider>();
 			Menu.GetComponent<BoxCollider>().enabled = false;
+			Menu.AddComponent<Canvas>();
+			Menu.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
+			Menu.GetComponent<Canvas>().worldCamera = camera;
+			Menu.AddComponent<GraphicRaycaster>();
 
 			_ = new CheetoBackground(Menu.transform);
 			_ = new CheetoPage(Menu.transform);

@@ -19,9 +19,9 @@
 			GetGameObject.AddComponent<RectTransform>();
 			GetGameObject.transform.SetParent(parent, false);
 			GetGameObject.GetComponent<RectTransform>().position = new Vector3(0, 0, 0);
-			GetGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 30);
 			GetGameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 0f);
 			GetGameObject.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
+			GetGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 200);
 			GetGameObject.AddComponent<CanvasRenderer>();
 			GetGameObject.AddComponent<Image>();
 			GetGameObject.GetComponent<Image>().sprite = null;
