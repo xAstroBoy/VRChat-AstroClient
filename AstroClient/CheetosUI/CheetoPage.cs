@@ -1,8 +1,8 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
 	#region Imports
 
+	using AstroLibrary.Console;
 	using UnityEngine;
 
 	#endregion Imports
@@ -14,11 +14,11 @@
 		public CheetoPage(Transform parent)
 		{
 			GetGameObject = new GameObject("CheetoPage");
+			GetGameObject.transform.SetParent(parent, false);
 			GetGameObject.AddComponent<RectTransform>();
-			GetGameObject.transform.parent = parent;
 			_ = new CheetoText(GetGameObject.transform, "Page Content");
 
-			var button = new CheetoButton(GetGameObject.transform, "Test Button", () => { ModConsole.Log("Test Button Clicked!"); });
+			var button = new CheetoButton(GetGameObject.transform, "Test Button");
 			button.GetGameObject.transform.position = new Vector3(200, 200, 0);
 		}
 	}

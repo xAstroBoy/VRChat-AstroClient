@@ -1,8 +1,8 @@
 ﻿namespace AstroClient
 {
-	using System;
 	#region Imports
 
+	using System;
 	using UnityEngine;
 	using UnityEngine.UI;
 
@@ -12,9 +12,7 @@
 	{
 		public GameObject GetGameObject { get; private set; }
 
-		public Action ButtonAction;
-
-		public CheetoButton(Transform parent, string text, Action action)
+		public CheetoButton(Transform parent, string text)
 		{
 			GetGameObject = new GameObject("Button");
 			GetGameObject.AddComponent<RectTransform>();
@@ -24,11 +22,14 @@
 			GetGameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 0f);
 			GetGameObject.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
 			GetGameObject.AddComponent<CanvasRenderer>();
+			GetGameObject.AddComponent<Image>();
+			GetGameObject.GetComponent<Image>().sprite = null;
+			GetGameObject.GetComponent<Image>().color = Color.cyan;
+			GetGameObject.GetComponent<Image>().fillAmount = 1f;
 			GetGameObject.AddComponent<Button>();
-			GetGameObject.GetComponent<Button>().onClick.AddListener(action);
+			GetGameObject.AddComponent<Button>().interactable = true;
 
 			_ = new CheetoText(GetGameObject.transform, text);
 		}
-
 	}
 }
