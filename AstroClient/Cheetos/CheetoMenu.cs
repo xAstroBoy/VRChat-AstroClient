@@ -34,7 +34,16 @@
 		{
 			IsOpen = !IsOpen;
 			Menu.SetActive(IsOpen);
-			Menu.transform.position = LocalPlayerUtils.GetSelfPlayer().transform.position;
+
+			if (IsOpen)
+			{
+				var ptransform = LocalPlayerUtils.GetSelfPlayer().transform;
+				var center = LocalPlayerUtils.CenterOfPlayer();
+				Menu.transform.position = center + (ptransform.forward * 0.5f);
+				Menu.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+				Menu.transform.LookAt(ptransform);
+				Menu.transform.Rotate(new Vector3(45, 0, 0));
+			}
 		}
 	}
 }
