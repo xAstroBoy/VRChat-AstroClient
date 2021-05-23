@@ -242,7 +242,6 @@
     <Compile Include="GameObject\Online\OnlineEditor.cs" />
     <Compile Include="GameObjMenu.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="InstantiateUtils\ButtonInstantiator.cs" />
     <Compile Include="InstantiateUtils\MapEditorMenu.cs" />
     <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
@@ -258,7 +257,6 @@
     <Compile Include="Networking\NetworkingManager.cs" />
     <Compile Include="Obfuscation.cs" />
     <Compile Include="Patches\Patching.cs" />
-    <Compile Include="Prefabs\PrefabLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Skyboxes\SkyboxEditor.cs" />
@@ -1018,6 +1016,7 @@
     <EmbeddedResource Include="Resources\thief.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Prefabs\" />
     <Folder Include="Utils\GameObject\" />
   </ItemGroup>
   <ItemGroup>

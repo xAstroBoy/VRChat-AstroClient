@@ -3,8 +3,9 @@
 	#region Imports
 
 	using AstroLibrary.Console;
+	using AstroLibrary.Finder;
 	using System;
-	using static AstroClient.variables.InstanceBuilder;
+	using UnityEngine;
 	using Color = System.Drawing.Color;
 
 	#endregion Imports
@@ -29,7 +30,9 @@
 			if (Instance == null)
 			{
 				string name = "CheetoMenu";
-				var gameobj = GetInstanceHolder(name);
+				var ui = GameObjectFinder.Find("UserInterface");
+				var gameobj = GameObject.CreatePrimitive(PrimitiveType.Plane);
+				gameobj.transform.parent = ui.transform;
 				Instance = gameobj.AddComponent<CheetoMenu>();
 				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
