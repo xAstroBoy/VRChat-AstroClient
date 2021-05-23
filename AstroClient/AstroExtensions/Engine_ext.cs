@@ -15,6 +15,22 @@
 
 	public static class Engine_ext
 	{
+
+
+		public static void PrintPath(this GameObject obj)
+		{
+			if (obj != null)
+			{
+				string path = GameObjectFinder.GetGameObjectPath(obj);
+				if (!string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path))
+				{
+					ModConsole.Log($"{obj.name} Path is : {path}");
+				}
+			}
+		}
+
+
+
 		public static void CopyPath(this GameObject obj)
 		{
 			if (obj != null)
