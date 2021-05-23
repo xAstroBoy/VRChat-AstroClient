@@ -124,7 +124,7 @@
     <Compile Include="Buttons\ESPMenu.cs" />
     <Compile Include="Buttons\WorldPickupsBtn.cs" />
     <Compile Include="Cheetos\AvatarSearch.cs" />
-    <Compile Include="Cheetos\CheetoPage.cs" />
+    <Compile Include="CheetosUI\CheetoPage.cs" />
     <Compile Include="Cheetos\CheetosHooks.cs" />
     <Compile Include="Cheetos\DevUI.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />
@@ -132,7 +132,7 @@
     <Compile Include="Cheetos\AstroInput.cs" />
     <Compile Include="Cheetos\AvatarHider.cs" />
     <Compile Include="Cheetos\ButtonCreator.cs" />
-    <Compile Include="Cheetos\CheetoMenu.cs" />
+    <Compile Include="CheetosUI\CheetoMenu.cs" />
     <Compile Include="Cheetos\CheetosHelpers.cs" />
     <Compile Include="Cheetos\AdminUI.cs" />
     <Compile Include="Cheetos\ForceClone.cs" />

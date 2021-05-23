@@ -1,9 +1,8 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
-	using System.Windows.Forms;
 	#region Imports
 
+	using AstroLibrary.Console;
 	using UnityEngine;
 	using UnityEngine.UI;
 
