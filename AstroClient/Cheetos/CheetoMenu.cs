@@ -27,6 +27,20 @@
 			Instance = this;
 		}
 
+		public void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.Tilde))
+			{
+				ToggleMenu();
+			}
+		}
+
+		private void ToggleMenu()
+		{
+			IsOpen = !IsOpen;
+			Menu.SetActive(IsOpen);
+		}
+
 		public static void MakeInstance()
 		{
 			if (Instance == null)
