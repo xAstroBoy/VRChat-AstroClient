@@ -14,6 +14,8 @@
 	{
 		public static CheetoMenu Instance;
 
+		public static GameObject Menu;
+
 		public bool IsOpen = false;
 
 		public CheetoMenu(IntPtr obj0) : base(obj0)
@@ -31,10 +33,11 @@
 			{
 				string name = "CheetoMenu";
 				var ui = GameObjectFinder.Find("UserInterface");
-				var gameobj = GameObject.CreatePrimitive(PrimitiveType.Plane);
-				gameobj.transform.parent = ui.transform;
-				Instance = gameobj.AddComponent<CheetoMenu>();
-				DontDestroyOnLoad(gameobj);
+				Menu = GameObject.CreatePrimitive(PrimitiveType.Plane);
+				Menu.transform.parent = ui.transform;
+				Menu.SetActive(false);
+				Instance = Menu.AddComponent<CheetoMenu>();
+				DontDestroyOnLoad(Menu);
 				if (Instance != null)
 				{
 					ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
