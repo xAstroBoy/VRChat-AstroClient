@@ -31,7 +31,6 @@
 			Menu.GetComponent<Canvas>().worldCamera = Camera.current;
 
 			_ = new CheetoBackground(Menu.transform);
-			_ = new CheetoText(Menu.transform);
 			_ = new CheetoPage(Menu.transform);
 
 			Menu.SetActive(false);

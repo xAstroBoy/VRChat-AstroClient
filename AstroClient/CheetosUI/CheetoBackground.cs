@@ -9,22 +9,22 @@
 
 	public class CheetoBackground
 	{
-		public GameObject Background;
+		public GameObject GetGameObject { get; private set; }
 
 		public CheetoBackground(Transform parent)
 		{
-			Background = new GameObject("Background");
-			Background.AddComponent<RectTransform>();
-			Background.transform.SetParent(parent, false);
-			Background.GetComponent<RectTransform>().position = new Vector3(0f, 0f, 0f);
-			Background.GetComponent<RectTransform>().anchorMin = new Vector2(0f, 0f);
-			Background.GetComponent<RectTransform>().anchorMax = new Vector2(1f, 1f);
-			Background.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
-			Background.AddComponent<CanvasRenderer>();
-			Background.AddComponent<Image>();
-			Background.GetComponent<Image>().sprite = null;
-			Background.GetComponent<Image>().fillAmount = 1f;
-			Background.GetComponent<Image>().color = Color.gray;
+			GetGameObject = new GameObject("Background");
+			GetGameObject.AddComponent<RectTransform>();
+			GetGameObject.transform.SetParent(parent, false);
+			GetGameObject.GetComponent<RectTransform>().position = new Vector3(0f, 0f, 0f);
+			GetGameObject.GetComponent<RectTransform>().anchorMin = new Vector2(0f, 0f);
+			GetGameObject.GetComponent<RectTransform>().anchorMax = new Vector2(1f, 1f);
+			GetGameObject.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
+			GetGameObject.AddComponent<CanvasRenderer>();
+			GetGameObject.AddComponent<Image>();
+			GetGameObject.GetComponent<Image>().sprite = null;
+			GetGameObject.GetComponent<Image>().fillAmount = 1f;
+			GetGameObject.GetComponent<Image>().color = Color.gray;
 		}
 	}
 }
