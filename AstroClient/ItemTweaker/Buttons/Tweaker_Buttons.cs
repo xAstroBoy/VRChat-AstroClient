@@ -7,6 +7,7 @@
 	using AstroClient.GameObjectDebug;
 	using AstroClient.ItemTweaker;
 	using AstroClient.variables;
+	using AstroLibrary.Console;
 	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using System;
@@ -550,7 +551,13 @@
 					prefabQMScroll.Add(
 					new QMSingleButton(prefabQMScroll.BaseMenu, 0, 0, $"Spawn {prefab.name}", delegate
 					{
-						var newprefab = Networking.Instantiate(0, prefab.name, LocalPlayerUtils.GetPlayerBoneTransform(HumanBodyBones.RightHand).position, new Quaternion(0, 0, 0, 0));
+						var broadcast = VRC_EventHandler.VrcBroadcastType.Always;
+						var prefabinfo = prefab.name;
+						var position = LocalPlayerUtils.GetPlayerBoneTransform(HumanBodyBones.RightHand).position;
+						var Rotation = new Quaternion(0, 0, 0, 0);
+
+						ModConsole.DebugLog($"Attempting to broadcast with  {broadcast.ToString()} a Spawn Prefab {prefabinfo}, in Vector3 {position.ToString()}, Rotation : {Rotation.ToString()}");
+						var newprefab = Networking.Instantiate(broadcast, prefabinfo, position, Rotation);
 						if (newprefab != null)
 						{
 							RegisterPrefab(newprefab);
