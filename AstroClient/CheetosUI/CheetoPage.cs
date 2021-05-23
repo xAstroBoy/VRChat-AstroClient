@@ -19,7 +19,7 @@
 			_ = new CheetoText(GetGameObject.transform, "Page Content");
 
 			var button = new CheetoButton(GetGameObject.transform, "Test Button", () => ModConsole.Log("Test Button Clicked!"));
-			button.GetGameObject.transform.position = new Vector3(200, 200, 0);
+			button.GetGameObject.transform.position = new Vector3(32, 32, 0);
 		}
 	}
 }

@@ -20,15 +20,20 @@
 		{
 			UI = new GameObject() { name = "CheetoUI" };
 			UI.name = "CheetoUI";
+			UI.layer = LayerMask.NameToLayer("UI");
 
 			Menu = new GameObject() { name = "CheetoMenu" };
+			Menu.layer = LayerMask.NameToLayer("UiMenu");
 			Menu.AddComponent<RectTransform>();
 			Menu.transform.SetParent(UI.transform, false);
 			Menu.GetComponent<RectTransform>().sizeDelta = new Vector2(800, 600);
 			Menu.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f, 0.5f);
+			Menu.AddComponent<GraphicRaycaster>();
 			Menu.AddComponent<Canvas>();
 			Menu.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
 			Menu.GetComponent<Canvas>().worldCamera = Camera.current;
+			Menu.AddComponent<BoxCollider>();
+			Menu.GetComponent<BoxCollider>().enabled = false;
 
 			_ = new CheetoBackground(Menu.transform);
 			_ = new CheetoPage(Menu.transform);
