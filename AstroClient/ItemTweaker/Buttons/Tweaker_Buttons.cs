@@ -556,7 +556,7 @@
 						var position = LocalPlayerUtils.GetPlayerBoneTransform(HumanBodyBones.RightHand).position;
 						var Rotation = new Quaternion(0, 0, 0, 0);
 
-						ModConsole.DebugLog($"Attempting to broadcast with  {broadcast.ToString()} a Spawn Prefab {prefabinfo}, in Vector3 {position.ToString()}, Rotation : {Rotation.ToString()}");
+						ModConsole.DebugLog($"Attempting to broadcast  {broadcast} a Spawn Prefab {prefabinfo}, in Vector3 {position.ToString()}, Rotation : {Rotation.ToString()}");
 						var newprefab = Networking.Instantiate(broadcast, prefabinfo, position, Rotation);
 						if (newprefab != null)
 						{

@@ -3,6 +3,7 @@
 	#region Imports
 	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroLibrary.Console;
+	using DayClientML2.Utility.Extensions;
 	using ExitGames.Client.Photon;
 	using Harmony;
 	using MelonLoader;
@@ -10,6 +11,8 @@
 	using System.Collections;
 	using System.Collections.Generic;
 	using System.Reflection;
+	using UnityEngine;
+	using VRC;
 	#endregion
 
 	internal class Patching : GameEvents
@@ -95,7 +98,7 @@
 				ModConsole.DebugLog("[Patches] Start. . .");
 
 				new Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
-				//new Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_Final_New_Void_Player_0)), GetPatch(nameof(OpRaiseEvent2)));
+				new Patch(typeof(ObjectInstantiator).GetMethod(nameof(ObjectInstantiator._InstantiateObject)), GetPatch(nameof(Debug_ObjectInstantiator)));
 
 				ModConsole.DebugLog("[AstroClient Patches] DONE!");
 				Patch.DoPatches();
@@ -116,5 +119,21 @@
 			catch { }
 			return true;
 		}
+
+		private static void Debug_ObjectInstantiator(ref string __0, ref Vector3 __1, ref Quaternion __2, ref int __3, ref Player __4)
+		{
+
+			if (__4 != null)
+			{
+				ModConsole.DebugLog($"ObjectInstantiator Fired with Params  : {__0}, {__1}, {__2}, {__3}, {__4.DisplayName()}");
+			}
+			else
+			{
+				ModConsole.DebugLog($"ObjectInstantiator Fired with Params  : {__0}, {__1}, {__2}, {__3}");
+			}
+		}
+
+
+
 	}
 }

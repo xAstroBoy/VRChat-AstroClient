@@ -83,10 +83,7 @@
 				log = false;
 			}
 
-			//if (name.Equals("SceneEventHandlerAndInstantiator"))
-			//{
-			//	log = true;
-			//}
+
 
 			string GameObjName = __1.ParameterObject != null ? __1.ParameterObject.name : "null";
 			string sender;
@@ -98,6 +95,12 @@
 			{
 				sender = "null";
 			}
+			if(parameter.Equals("TeleportRPC"))
+			{
+				//TODO: FIGURE AND FIX THE LOGGING ON TELEPORTRPC
+				return true;
+			}
+
 
 			if (parameter.Equals("UdonSyncRunProgramAsRPC"))
 			{

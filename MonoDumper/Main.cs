@@ -8,8 +8,13 @@
 
 	public class Main : MelonMod
 	{
+		private bool DumpDLL = false;
 		public override void OnApplicationStart()
 		{
+			if (!DumpDLL)
+			{
+				return;
+			}
 			var dumpFolderPath = Environment.CurrentDirectory + @"\AstroClient\MonoDumps";
 			var dumpFilePath = dumpFolderPath + @"\MonoDump.txt";
 
