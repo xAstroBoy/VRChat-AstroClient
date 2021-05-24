@@ -2,9 +2,9 @@
 {
 	#region Imports
 
-	using AstroLibrary.Console;
 	using AstroLibrary.Finder;
 	using UnityEngine;
+	using UnityEngine.EventSystems;
 	using UnityEngine.UI;
 
 	#endregion Imports
@@ -15,11 +15,14 @@
 
 		public static GameObject Menu;
 
-		public bool IsOpen = false;
+		public static bool IsOpen = false;
+
+		private VRCStandaloneInputModule standaloneInputModule;
 
 		public override void VRChat_OnUiManagerInit()
 		{
 			var camera = GameObjectFinder.Find("_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Neck/Camera (head)/Camera (eye)").GetComponent<Camera>();
+			standaloneInputModule = GameObjectFinder.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
 
 			UI = new GameObject() { name = "CheetoUI" };
 			UI.name = "CheetoUI";
@@ -37,6 +40,7 @@
 			Menu.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
 			Menu.GetComponent<Canvas>().worldCamera = camera;
 			Menu.AddComponent<GraphicRaycaster>();
+			Menu.GetComponent<GraphicRaycaster>().enabled = true;
 			Menu.GetComponent<GraphicRaycaster>().m_BlockingMask = 0;
 
 			_ = new CheetoBackground(Menu.transform);
@@ -51,6 +55,14 @@
 			if (Input.GetKeyDown(KeyCode.BackQuote))
 			{
 				ToggleMenu();
+			}
+		}
+
+		public override void OnLateUpdate()
+		{
+			if (IsOpen)
+			{
+				EventSystem.current.enabled = true;
 			}
 		}
 
