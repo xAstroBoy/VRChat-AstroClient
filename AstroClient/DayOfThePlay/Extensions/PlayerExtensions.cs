@@ -405,7 +405,7 @@
 
 		public static bool GetIsDANGER(this VRCPlayer Instance)
 		{
-			return Instance.GetVRCPlayerApi().isModerator || Instance.GetAPIUser().hasModerationPowers || Instance.GetAPIUser().hasSuperPowers || Instance.GetAPIUser().hasSuperPowers;
+			return Instance.GetVRCPlayerApi().isModerator || Instance.GetAPIUser().hasModerationPowers || Instance.GetAPIUser().hasSuperPowers;
 		}
 
 		public static bool GetIsBot(this VRCPlayer Instance)
