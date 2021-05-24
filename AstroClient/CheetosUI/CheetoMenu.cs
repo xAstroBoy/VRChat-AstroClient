@@ -19,10 +19,13 @@
 
 		private VRCStandaloneInputModule standaloneInputModule;
 
+		private VRCUiCursorManager cursorManager;
+
 		public override void VRChat_OnUiManagerInit()
 		{
 			var camera = GameObjectFinder.Find("_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Neck/Camera (head)/Camera (eye)").GetComponent<Camera>();
 			standaloneInputModule = GameObjectFinder.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
+			cursorManager = GameObjectFinder.Find("_Application/CursorManager").GetComponent<VRCUiCursorManager>();
 
 			UI = new GameObject() { name = "CheetoUI" };
 			UI.name = "CheetoUI";
@@ -39,6 +42,7 @@
 			Menu.AddComponent<Canvas>();
 			Menu.GetComponent<Canvas>().renderMode = RenderMode.WorldSpace;
 			Menu.GetComponent<Canvas>().worldCamera = camera;
+			Menu.AddComponent<CanvasGroup>();
 			Menu.AddComponent<GraphicRaycaster>();
 			Menu.GetComponent<GraphicRaycaster>().enabled = true;
 			Menu.GetComponent<GraphicRaycaster>().m_BlockingMask = 0;
@@ -63,6 +67,13 @@
 			if (IsOpen)
 			{
 				EventSystem.current.enabled = true;
+
+				//cursorManager.field_Private_Boolean_0 = true;
+				//cursorManager.field_Private_Boolean_1 = true;
+				//cursorManager.field_Private_Boolean_0 = true;
+				//cursorManager.field_Private_Boolean_3 = true;
+				//cursorManager.field_Private_Boolean_4 = true;
+				//cursorManager.field_Private_EnumNPublicSealedvaNoRiLe4vUnique_0 = VRCUiCursor.EnumNPublicSealedvaNoRiLe4vUnique.Right;
 			}
 		}
 
