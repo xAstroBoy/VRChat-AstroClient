@@ -67,7 +67,6 @@
 			if (IsOpen)
 			{
 				EventSystem.current.enabled = true;
-
 				//cursorManager.field_Private_Boolean_0 = true;
 				//cursorManager.field_Private_Boolean_1 = true;
 				//cursorManager.field_Private_Boolean_0 = true;

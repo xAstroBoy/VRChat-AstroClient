@@ -107,6 +107,8 @@
 				new Patch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_1)), GetPatch(nameof(OnAvatarDownload)));
 				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
 				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
+				//new Patch(AccessTools.Property(typeof(PhotonPeer), "RoundTripTime").GetMethod, GetPatch("FakePing"));
+				//new Patch(AccessTools.Property(typeof(Time), "smoothDeltaTime").GetMethod, GetPatch("FakeFrames"));
 
 				ModConsole.Log("[AstroClient Cheetos Patches] DONE!");
 				Patch.DoPatches();
@@ -117,7 +119,6 @@
 
 		private static bool OnAvatarDownload(ref ApiAvatar __0)
 		{
-
 			try
 			{
 				if (__0 != null)
