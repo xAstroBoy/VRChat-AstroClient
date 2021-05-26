@@ -317,6 +317,7 @@
     <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\AmongUSCheats.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\Murder2Cheats.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\Jar Worlds\Murder4Cheats.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\ChuckECheeseExperience.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\lpd.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\Meroom.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\SmashContest.cs" />
