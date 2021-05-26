@@ -104,19 +104,17 @@
 
 		private static bool HasCheckedJump = false;
 
-		private static bool _IsUnlimitedJumpActive;
-
 		public static QMSingleToggleButton UnlimitedJumpToggle;
 
 		public static bool IsUnlimitedJumpActive
 		{
 			get
 			{
-				return _IsUnlimitedJumpActive;
+				return ConfigManager.Movement.UnlimitedJump;
 			}
 			set
 			{
-				_IsUnlimitedJumpActive = value;
+				ConfigManager.Movement.UnlimitedJump = value;
 				if (UnlimitedJumpToggle != null)
 				{
 					UnlimitedJumpToggle.SetToggleState(value);
@@ -127,17 +125,16 @@
 
 		public static QMSingleToggleButton RocketJumpToggle;
 
-		private static bool _isRocketJumpActive;
 
 		public static bool IsRocketJumpActive
 		{
 			get
 			{
-				return _isRocketJumpActive;
+				return ConfigManager.Movement.RocketJump;
 			}
 			set
 			{
-				_isRocketJumpActive = value;
+				ConfigManager.Movement.RocketJump = value;
 				if (RocketJumpToggle != null)
 				{
 					RocketJumpToggle.SetToggleState(value);

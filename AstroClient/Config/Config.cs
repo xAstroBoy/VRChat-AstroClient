@@ -75,4 +75,16 @@
 
 		public bool BasicFly = true;
 	}
+
+
+	[Serializable, Obfuscation]
+	public class ConfigMovement
+	{
+		public bool UnlimitedJump = false;
+
+		public bool RocketJump = false;
+
+		public bool QMFreeze = false;
+	}
+
 }

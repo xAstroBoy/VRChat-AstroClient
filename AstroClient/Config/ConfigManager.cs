@@ -20,6 +20,9 @@
 
 		private static string ConfigFlightPath = ConfigFolder + @"\ConfigFlight.json";
 
+		private static string ConfigMovementPath = ConfigFolder + @"\ConfigMovement.json";
+
+
 		public static ConfigGeneral General = new ConfigGeneral();
 
 		public static ConfigUI UI = new ConfigUI();
@@ -27,6 +30,9 @@
 		public static ConfigESP ESP = new ConfigESP();
 
 		public static ConfigFlight Flight = new ConfigFlight();
+
+		public static ConfigMovement Movement = new ConfigMovement();
+
 
 		public static Color PublicESPColor
 		{
@@ -111,6 +117,7 @@
 			JSonWriter.WriteToJsonFile(ConfigUIPath, UI);
 			JSonWriter.WriteToJsonFile(ConfigESPPath, ESP);
 			JSonWriter.WriteToJsonFile(ConfigFlightPath, Flight);
+			JSonWriter.WriteToJsonFile(ConfigMovementPath, Movement);
 			ModConsole.DebugLog("Config Saved.");
 		}
 
@@ -120,6 +127,8 @@
 			UI = JSonWriter.ReadFromJsonFile<ConfigUI>(ConfigUIPath);
 			ESP = JSonWriter.ReadFromJsonFile<ConfigESP>(ConfigESPPath);
 			Flight = JSonWriter.ReadFromJsonFile<ConfigFlight>(ConfigFlightPath);
+			Movement = JSonWriter.ReadFromJsonFile<ConfigMovement>(ConfigMovementPath);
+
 			ModConsole.DebugLog("Config Loaded.");
 		}
 	}

@@ -157,7 +157,7 @@
     <Compile Include="Features\Player\Clones\Clones.cs" />
     <Compile Include="Features\Player\Movement\Exploit\MovementSerializer.cs" />
     <Compile Include="Features\Player\Movement\JumpModifier.cs" />
-    <Compile Include="Features\Player\QuickMenu\QMFreeze.cs" />
+    <Compile Include="Features\Player\Movement\QuickMenu\QMFreeze.cs" />
     <Compile Include="GameEvents.cs" />
     <Compile Include="GameEventsBehaviour.cs" />
     <Compile Include="Cheetos\GPLStuff\FOV.cs" />
