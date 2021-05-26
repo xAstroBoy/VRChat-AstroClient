@@ -90,7 +90,7 @@
 
 		private Color GetDefaultColor()
 		{
-			return Color.red;
+			return Color.yellow;
 		}
 
 		internal void ResetColor()
