@@ -67,7 +67,14 @@
 		{
 			get
 			{
+				if (QuickMenu.prop_QuickMenu_0 != null)
+				{
 					return QuickMenu.prop_QuickMenu_0.prop_Boolean_0;
+				}
+				else
+				{
+					return false;
+				}
 			}
 		}
 
