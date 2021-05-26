@@ -276,6 +276,7 @@
 		{
 			Console.Write(msg + Environment.NewLine, color.Value);
 			Task.Run(() => { Write(msg + Environment.NewLine); });
+			//Task.Run(() => { Write(msg + Environment.NewLine); });
 		}
 
 		private static void PrintTags(LogTypes logType = LogTypes.LOG)

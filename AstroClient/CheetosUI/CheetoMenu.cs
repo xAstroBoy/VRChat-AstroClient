@@ -18,10 +18,6 @@
 
 		public static bool IsOpen = false;
 
-		private EventSystem cheetoEventSystem;
-
-		private EventSystem originalEventSystem;
-
 		private VRCStandaloneInputModule standaloneInputModule;
 
 		private VRCUiCursorManager cursorManager;
@@ -30,7 +26,6 @@
 		{
 			var camera = GameObjectFinder.Find("_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Neck/Camera (head)/Camera (eye)").GetComponent<Camera>();
 			standaloneInputModule = GameObjectFinder.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
-			originalEventSystem = GameObjectFinder.Find("_Application/UiEventSystem").GetComponent<EventSystem>();
 			cursorManager = GameObjectFinder.Find("_Application/CursorManager").GetComponent<VRCUiCursorManager>();
 			UI = new GameObject() { name = "CheetoUI" };
 			UI.name = "CheetoUI";
@@ -51,9 +46,6 @@
 			Menu.AddComponent<GraphicRaycaster>();
 			Menu.GetComponent<GraphicRaycaster>().enabled = true;
 			Menu.GetComponent<GraphicRaycaster>().m_BlockingMask = 0;
-			Menu.AddComponent<StandaloneInputModule>();
-			Menu.AddComponent<BaseInputModule>();
-			cheetoEventSystem = Menu.AddComponent<EventSystem>();
 
 			_ = new CheetoBackground(Menu.transform);
 			_ = new CheetoPage(Menu.transform);
@@ -78,16 +70,6 @@
 			//cursorManager.field_Private_Boolean_3 = true;
 			//cursorManager.field_Private_Boolean_4 = true;
 			//cursorManager.field_Private_EnumNPublicSealedvaNoRiLe4vUnique_0 = VRCUiCursor.EnumNPublicSealedvaNoRiLe4vUnique.Right;
-
-			if (IsOpen)
-			{
-				EventSystem.current = cheetoEventSystem;
-				EventSystem.current.enabled = true;
-			}
-			else
-			{
-				EventSystem.current = originalEventSystem;
-			}
 		}
 
 		private void ToggleMenu()

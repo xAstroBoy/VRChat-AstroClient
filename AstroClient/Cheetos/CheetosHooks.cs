@@ -8,12 +8,14 @@
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using Harmony;
+	using I18N.MidEast;
 	using MelonLoader;
 	using Newtonsoft.Json;
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
 	using System.Reflection;
+	using UnhollowerBaseLib;
 	using VRC.Core;
 
 	#endregion
@@ -58,6 +60,7 @@
 					catch (Exception e)
 					{
 						ModConsole.Error($"[Patches] Failed At {patch.TargetMethod?.Name} | {patch.PrefixMethod?.method.Name} | with AstroClient {patch.PostfixMethod?.method.Name}");
+						ModConsole.Error(e.Message);
 						ModConsole.ErrorExc(e);
 					}
 				}
@@ -109,12 +112,19 @@
 				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
 				//new Patch(AccessTools.Property(typeof(PhotonPeer), "RoundTripTime").GetMethod, GetPatch("FakePing"));
 				//new Patch(AccessTools.Property(typeof(Time), "smoothDeltaTime").GetMethod, GetPatch("FakeFrames"));
+				//new Patch(typeof(VRCStandaloneInputModule).GetMethod(XrefTesting.OnTest.Name), GetPatch(nameof(OnTestPatch)));
 
 				ModConsole.Log("[AstroClient Cheetos Patches] DONE!");
 				Patch.DoPatches();
 			}
 			catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
 			finally { }
+		}
+
+		private static bool OnTestPatch(ref Il2CppStructArray<bool> __0)
+		{
+			ModConsole.Log("Test!");
+			return true;
 		}
 
 		private static bool OnAvatarDownload(ref ApiAvatar __0)
