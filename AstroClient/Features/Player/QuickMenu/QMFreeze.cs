@@ -8,50 +8,29 @@
 	using System.Threading.Tasks;
 	using UnityEngine;
 	using VRC.Animation;
+	using VRC.SDKBase;
 	using static AstroClient.LocalPlayerUtils;
 
 	public class QMFreeze : GameEvents
 	{
 
-
 		public override void OnLevelLoaded()
 		{
-			LocalMotionState = null;
-			if (FreezePlayerOnQMOpenToggle != null)
-			{
-				FreezePlayerOnQMOpenToggle.SetToggleState(FreezePlayerOnQMOpen);
-			}
-			UnfreezePlayerOnce = true;
+			Frozen = false;
 		}
 
 
-		public override void OnUpdate()
+		public override void OnLateUpdate()
 		{
 			if (FreezePlayerOnQMOpen)
 			{
-				try
+				if(QuickMenuUtils.IsQuickMenuOpen)
 				{
-					if (GetPlayerCharControl() != null)
-					{
-						GetPlayerCharControl().enabled = !QuickMenuUtils.IsQuickMenuOpen;
-					}
+					Freeze();
 				}
-				catch
+				else
 				{
-				}
-			}
-			else
-			{
-				if (!UnfreezePlayerOnce)
-				{
-					if (GetPlayerCharControl() != null)
-					{
-						if (!GetPlayerCharControl().enabled)
-						{
-							GetPlayerCharControl().enabled = true;
-						}
-					}
-					UnfreezePlayerOnce = true;
+					Unfreeze();	
 				}
 			}
 		}
@@ -59,43 +38,36 @@
 
 
 
-		public static CharacterController GetPlayerCharControl()
+		public static void Unfreeze()
 		{
-			try
+			if (Frozen)
 			{
-				if (GetPlayerGameObject() != null && GetLocalVRCPlayer() != null && GetPlayerGameObject().GetComponent<CharacterController>() != null)
+				Physics.gravity = _originalGravity;
+				if (RestoreVelocity)
 				{
-					if (charcontrol == null)
-					{
-						return charcontrol = GetPlayerGameObject().GetComponent<CharacterController>();
-					}
-					else
-					{
-						return charcontrol;
-					}
+					Networking.LocalPlayer.SetVelocity(_originalVelocity);
 				}
+				Frozen = false;
 			}
-			catch
-			{
-				return null;
-			}
-			return null;
 		}
 
-		public static CharacterController charcontrol;
-
-		public static VRCMotionState GetPlayerVRCMotionState()
+		public static void Freeze()
 		{
-			if (LocalMotionState != null)
+			if (!Frozen)
 			{
-				return LocalMotionState;
-			}
-			else
-			{
-				LocalMotionState = GetPlayerGameObject().GetComponent<VRCMotionState>();
-				return LocalMotionState;
+				_originalGravity = Physics.gravity;
+				_originalVelocity = Networking.LocalPlayer.GetVelocity();
+				if (_originalVelocity == Vector3.zero)
+				{
+					return;
+				}
+				Physics.gravity = Vector3.zero;
+				Networking.LocalPlayer.SetVelocity(Vector3.zero);
+				Frozen = true;
 			}
 		}
+
+
 
 
 		private static bool _FreezePlayerOnQMOpen;
@@ -112,20 +84,19 @@
 				{
 					FreezePlayerOnQMOpenToggle.SetToggleState(value);
 				}
-				UnfreezePlayerOnce = false;
 
 			}
 		}
 
-
-
-
-		private static bool UnfreezePlayerOnce;
-
-		public static VRCMotionState LocalMotionState;
-
 		public static QMToggleButton FreezePlayerOnQMOpenToggle;
+		public static bool Frozen;
 
+		private static Vector3 _originalGravity;
+		private static Vector3 _originalVelocity;
+
+
+		internal static bool Opened;
+		internal static bool RestoreVelocity = false;
 
 	}
 }

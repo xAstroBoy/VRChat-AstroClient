@@ -107,7 +107,6 @@
 		}
 
 		private static bool _CurrentSelectedItemEnabledESP = false;
-		private static readonly string SelectedItemESPIdentifier = "Selected_item_ID";
 
 		public static bool CurrentSelectedItemEnabledESP
 		{
