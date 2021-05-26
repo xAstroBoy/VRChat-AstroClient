@@ -3,6 +3,7 @@
 	#region Imports
 
 	using AstroLibrary.Finder;
+	using System.ServiceModel.Channels;
 	using UnityEngine;
 	using UnityEngine.EventSystems;
 	using UnityEngine.UI;
@@ -17,6 +18,10 @@
 
 		public static bool IsOpen = false;
 
+		private EventSystem cheetoEventSystem;
+
+		private EventSystem originalEventSystem;
+
 		private VRCStandaloneInputModule standaloneInputModule;
 
 		private VRCUiCursorManager cursorManager;
@@ -25,8 +30,8 @@
 		{
 			var camera = GameObjectFinder.Find("_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Neck/Camera (head)/Camera (eye)").GetComponent<Camera>();
 			standaloneInputModule = GameObjectFinder.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
+			originalEventSystem = GameObjectFinder.Find("_Application/UiEventSystem").GetComponent<EventSystem>();
 			cursorManager = GameObjectFinder.Find("_Application/CursorManager").GetComponent<VRCUiCursorManager>();
-
 			UI = new GameObject() { name = "CheetoUI" };
 			UI.name = "CheetoUI";
 			UI.layer = LayerMask.NameToLayer("UI");
@@ -48,7 +53,7 @@
 			Menu.GetComponent<GraphicRaycaster>().m_BlockingMask = 0;
 			Menu.AddComponent<StandaloneInputModule>();
 			Menu.AddComponent<BaseInputModule>();
-			Menu.AddComponent<EventSystem>();
+			cheetoEventSystem = Menu.AddComponent<EventSystem>();
 
 			_ = new CheetoBackground(Menu.transform);
 			_ = new CheetoPage(Menu.transform);
@@ -62,6 +67,15 @@
 			if (Input.GetKeyDown(KeyCode.BackQuote))
 			{
 				ToggleMenu();
+			}
+
+			if (IsOpen)
+			{
+				EventSystem.current = cheetoEventSystem;
+			}
+			else
+			{
+				EventSystem.current = originalEventSystem;
 			}
 		}
 
