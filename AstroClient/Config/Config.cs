@@ -59,9 +59,9 @@
 
 		public bool VRCInteractableESP = false;
 
-		public float[] PublicESPColor = new float[4];
+		public float[] PublicESPColor = new float[] { 0f, 1f, 1f, 1f };
 
-		public float[] ESPFriendColor = new float[4];
+		public float[] ESPFriendColor = new float[] { 0f, 1f, 0f, 1f };
 
 
 	}
