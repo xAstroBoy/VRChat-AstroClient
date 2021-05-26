@@ -14,7 +14,10 @@
 	public class QMFreeze : GameEvents
 	{
 
-
+		public override void OnLevelLoaded()
+		{
+			Frozen = false;
+		}
 
 
 		public override void OnLateUpdate()
