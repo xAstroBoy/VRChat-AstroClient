@@ -1,6 +1,5 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using AstroClient.Extensions;

@@ -1,7 +1,6 @@
 ﻿namespace AstroClient.BetterPatch
 {
 	#region Imports
-	using AstroClient.AstroUtils.PlayerMovement;
 	using AstroClient.Features.Player.Movement.Exploit;
 	using AstroLibrary.Console;
 	using DayClientML2.Utility.Extensions;

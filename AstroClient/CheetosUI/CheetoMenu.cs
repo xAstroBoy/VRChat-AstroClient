@@ -46,6 +46,9 @@
 			Menu.AddComponent<GraphicRaycaster>();
 			Menu.GetComponent<GraphicRaycaster>().enabled = true;
 			Menu.GetComponent<GraphicRaycaster>().m_BlockingMask = 0;
+			Menu.AddComponent<StandaloneInputModule>();
+			Menu.AddComponent<BaseInputModule>();
+			Menu.AddComponent<EventSystem>();
 
 			_ = new CheetoBackground(Menu.transform);
 			_ = new CheetoPage(Menu.transform);

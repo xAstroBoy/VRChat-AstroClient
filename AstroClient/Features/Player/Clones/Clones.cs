@@ -1,12 +1,7 @@
 ﻿namespace AstroClient.Features.Player.Clones
 {
 	using AstroClient.Extensions;
-	using AstroClient.Utils.Player;
-	using System;
 	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using UnityEngine;
 
 	public class Clones : GameEvents
