@@ -96,7 +96,6 @@
 				Save();
 				ModConsole.DebugWarning($"ConfigESP File Created: {ConfigESPPath}");
 			}
-
 			if (!File.Exists(ConfigFlightPath))
 			{
 				FileStream fs = new FileStream(ConfigFlightPath, FileMode.Create);
@@ -104,6 +103,14 @@
 				Save();
 				ModConsole.DebugWarning($"ConfigFlight File Created: {ConfigFlightPath}");
 			}
+			if (!File.Exists(ConfigMovementPath))
+			{
+				FileStream fs = new FileStream(ConfigMovementPath, FileMode.Create);
+				fs.Dispose();
+				Save();
+				ModConsole.DebugWarning($"ConfigMovement File Created: {ConfigMovementPath}");
+			}
+
 			if (!Directory.Exists(ConfigLewdifyPath))
 			{
 				Directory.CreateDirectory(ConfigLewdifyPath);
