@@ -252,6 +252,7 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="InstantiateUtils\MapEditorMenu.cs" />
     <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
+    <Compile Include="ItemTweaker\Submenus\Physic\Physic_Tweaker.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Lights\LightControl.cs" />
     <Compile Include="Menu\Movement\Movement_Menu.cs" />
