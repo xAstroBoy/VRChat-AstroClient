@@ -297,7 +297,6 @@
     <Compile Include="Utils\Headlight\Headlight.cs" />
     <Compile Include="Utils\Input\InputUtils.cs" />
     <Compile Include="Utils\ObjectUtils\GameObjectUtils.cs" />
-    <Compile Include="Utils\PlayerMovement\Movement.cs" />
     <Compile Include="Utils\Player\LocalPlayerUtils.cs" />
     <Compile Include="Utils\Player\PlayerCloner.cs" />
     <Compile Include="Utils\Player\PlayerHands.cs" />
