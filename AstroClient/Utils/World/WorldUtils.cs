@@ -263,17 +263,20 @@
 			return Triggers;
 		}
 
-		public static List<GameObject> Get_UdonBehaviours()
+		public static List<UdonBehaviour> Get_UdonBehaviours()
 		{
-			var UdonBehaviourObjects = new List<GameObject>();
+			var UdonBehaviourObjects = new List<UdonBehaviour>();
 			var list = Resources.FindObjectsOfTypeAll<UdonBehaviour>();
 			if (list.Count() != 0)
 			{
 				foreach (var item in list)
 				{
-					if (!UdonBehaviourObjects.Contains(item.gameObject))
+					if (item._eventTable.Keys.Count != 0)
 					{
-						UdonBehaviourObjects.Add(item.gameObject);
+						if (!UdonBehaviourObjects.Contains(item))
+						{
+							UdonBehaviourObjects.Add(item);
+						}
 					}
 				}
 				return UdonBehaviourObjects;

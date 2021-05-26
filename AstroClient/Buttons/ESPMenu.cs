@@ -386,10 +386,10 @@
 			{
 				if (item != null)
 				{
-					var ESP = item.GetComponent<ESP_UdonBehaviour>();
+					var ESP = item.gameObject.GetComponent<ESP_UdonBehaviour>();
 					if (ESP == null)
 					{
-						item.AddComponent<ESP_UdonBehaviour>();
+						item.gameObject.AddComponent<ESP_UdonBehaviour>();
 					}
 				}
 			}

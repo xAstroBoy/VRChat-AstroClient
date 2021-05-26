@@ -94,7 +94,7 @@
 
 		public static void FindUdonPensEvents()
 		{
-			foreach (var item in Resources.FindObjectsOfTypeAll<UdonBehaviour>())
+			foreach (var item in WorldUtils.Get_UdonBehaviours())
 			{
 				if(item != null)
 				{

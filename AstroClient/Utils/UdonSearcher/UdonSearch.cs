@@ -10,18 +10,21 @@
 	{
 		public static CachedUdonEvent FindUdonEvent(string action, string subaction)
 		{
-			var gameobjects = Resources.FindObjectsOfTypeAll<UdonBehaviour>();
+			var gameobjects = WorldUtils.Get_UdonBehaviours();
 
 			var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
 			if (behaviour != null)
 			{
-				ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
-				foreach (var actionkeys in behaviour._eventTable)
+				if (behaviour._eventTable.count != 0)
 				{
-					if (actionkeys.key == subaction)
+					ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+					foreach (var actionkeys in behaviour._eventTable)
 					{
-						ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
-						return new CachedUdonEvent(behaviour, actionkeys.key);
+						if (actionkeys.key == subaction)
+						{
+							ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
+							return new CachedUdonEvent(behaviour, actionkeys.key);
+						}
 					}
 				}
 			}
@@ -33,12 +36,15 @@
 		{
 			if (obj != null)
 			{
-				foreach (var actionkeys in obj._eventTable)
+				if (obj._eventTable.count != 0)
 				{
-					if (actionkeys.key == subaction)
+					foreach (var actionkeys in obj._eventTable)
 					{
-						ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {obj.gameObject.name}");
-						return new CachedUdonEvent(obj, actionkeys.key);
+						if (actionkeys.key == subaction)
+						{
+							ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {obj.gameObject.name}");
+							return new CachedUdonEvent(obj, actionkeys.key);
+						}
 					}
 				}
 

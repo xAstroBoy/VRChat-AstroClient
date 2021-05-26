@@ -57,7 +57,14 @@
 				}
 				else
 				{
-					return _QuickMenuCollider = QuickMenu.prop_QuickMenu_0.GetComponent<BoxCollider>();
+					if (QuickMenu.prop_QuickMenu_0 != null)
+					{
+						return _QuickMenuCollider = QuickMenu.prop_QuickMenu_0.GetComponent<BoxCollider>();
+					}
+					else
+					{
+						return null;
+					}
 				}
 			}
 		}

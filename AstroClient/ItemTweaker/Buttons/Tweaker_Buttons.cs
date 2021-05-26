@@ -395,9 +395,12 @@
 					{
 						foreach (var item in list1)
 						{
-							if (!Internal_UdonBehaviour.Contains(item))
+							if (item._eventTable.keys.Count != 0)
 							{
-								Internal_UdonBehaviour.Add(item);
+								if (!Internal_UdonBehaviour.Contains(item))
+								{
+									Internal_UdonBehaviour.Add(item);
+								}
 							}
 						}
 						return Internal_UdonBehaviour;

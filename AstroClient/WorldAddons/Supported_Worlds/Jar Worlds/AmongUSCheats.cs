@@ -63,7 +63,7 @@
 				invisiblewall_1.DestroyMeLocal();
 			}
 
-			foreach (var action in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+			foreach (var action in WorldUtils.Get_UdonBehaviours())
 			{
 				if (action.gameObject.name == "Game Logic")
 				{

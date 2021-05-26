@@ -71,7 +71,7 @@
 			item_Silenced_Revolver_1 = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Luger (1)");
 			item_Grenade = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Frag (0)");
 
-			foreach (var action in UnityEngine.Object.FindObjectsOfType<UdonBehaviour>())
+			foreach (var action in WorldUtils.Get_UdonBehaviours())
 			{
 				if (action.gameObject.name == "Game Logic")
 				{
