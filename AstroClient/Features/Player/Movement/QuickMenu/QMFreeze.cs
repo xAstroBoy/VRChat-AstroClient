@@ -115,9 +115,12 @@
 			}
 			else
 			{
-				if(Networking.LocalPlayer.GetVelocity() != Vector3.zero)
+				if (InputUtils.IsImputJumpCalled() || InputUtils.IsInputJumpPressed())
 				{
-					Networking.LocalPlayer.SetVelocity(Vector3.zero);
+					if (Networking.LocalPlayer.GetVelocity() != Vector3.zero)
+					{
+						Networking.LocalPlayer.SetVelocity(Vector3.zero);
+					}
 				}
 			}
 		}
