@@ -2,6 +2,7 @@
 {
 	#region Imports
 	using AstroClient.AstroUtils.PlayerMovement;
+	using AstroClient.Features.Player.Movement.Exploit;
 	using AstroLibrary.Console;
 	using DayClientML2.Utility.Extensions;
 	using ExitGames.Client.Photon;
@@ -115,7 +116,7 @@
 			{
 				if (__0 == 7 || __0 == 206 || __0 == 201 || __0 == 1)
 				{
-					return !Movement.SerializerEnabled;
+					return !MovementSerializer.Enabled;
 				}
 			}
 			catch { }

@@ -17,6 +17,7 @@
 	using VRC.Udon;
 	using static AstroClient.variables.CustomLists;
 	using System.Collections.Generic;
+	using AstroClient.Features.Player.Movement.Exploit;
 
 	public class AmongUSCheats : GameEvents
 	{
@@ -332,7 +333,7 @@
 					SerializerRot = new Quaternion(0, 0, 0, 0);
 					SerializerPos = Vector3.zero;
 				}
-				Movement.SerializerEnabled = value;
+				MovementSerializer.Enabled = value;
 			}
 		}
 

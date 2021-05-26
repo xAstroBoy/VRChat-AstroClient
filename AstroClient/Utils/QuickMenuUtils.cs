@@ -46,6 +46,7 @@
 
 		private static BoxCollider _QuickMenuCollider;
 
+
 		public static BoxCollider QuickMenuCollider
 		{
 			get
@@ -60,5 +61,22 @@
 				}
 			}
 		}
+
+
+		public static bool IsQuickMenuOpen
+		{
+			get
+			{
+				try
+				{
+					return QuickMenu.prop_QuickMenu_0.prop_Boolean_0;
+				}
+				catch
+				{
+					return false;
+				}
+			}
+		}
+
 	}
 }

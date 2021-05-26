@@ -154,6 +154,10 @@
     <Compile Include="Components\Bounce\Bouncer.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigManager.cs" />
+    <Compile Include="Features\Player\Clones\Clones.cs" />
+    <Compile Include="Features\Player\Movement\Exploit\MovementSerializer.cs" />
+    <Compile Include="Features\Player\Movement\JumpModifier.cs" />
+    <Compile Include="Features\Player\QuickMenu\QMFreeze.cs" />
     <Compile Include="GameEvents.cs" />
     <Compile Include="GameEventsBehaviour.cs" />
     <Compile Include="Cheetos\GPLStuff\FOV.cs" />
@@ -250,6 +254,7 @@
     <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Lights\LightControl.cs" />
+    <Compile Include="Menu\Movement\Movement_Menu.cs" />
     <Compile Include="Mora\AntiCrashPolys.cs" />
     <Compile Include="Mora\anticrashwrappers.cs" />
     <Compile Include="Mora\AvatarLogger.cs" />
@@ -294,6 +299,7 @@
     <Compile Include="Utils\ObjectUtils\GameObjectUtils.cs" />
     <Compile Include="Utils\PlayerMovement\Movement.cs" />
     <Compile Include="Utils\Player\LocalPlayerUtils.cs" />
+    <Compile Include="Utils\Player\PlayerCloner.cs" />
     <Compile Include="Utils\Player\PlayerHands.cs" />
     <Compile Include="Utils\QPens\QVPensUtils.cs" />
     <Compile Include="Utils\QuickMenuUtils.cs" />
@@ -1022,7 +1028,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Prefabs\" />
-    <Folder Include="Utils\GameObject\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />

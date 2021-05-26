@@ -10,49 +10,10 @@
 	using Vector3 = UnityEngine.Vector3;
 	#endregion
 
-	public class LocalPlayerUtils : GameEvents
+	public static class LocalPlayerUtils
 	{
-		public override void OnUpdate()
-		{
-			if (FreezePlayerOnQMOpen)
-			{
-				try
-				{
-					if (GetPlayerCharControl() != null)
-					{
-						GetPlayerCharControl().enabled = !IsQuickMenuOpen;
-					}
-				}
-				catch
-				{
-				}
-			}
-			else
-			{
-				if (!UnfreezePlayerOnce)
-				{
-					if (GetPlayerCharControl() != null)
-					{
-						if (!GetPlayerCharControl().enabled)
-						{
-							GetPlayerCharControl().enabled = true;
-						}
-					}
-					UnfreezePlayerOnce = true;
-				}
-				return;
-			}
-		}
 
-		public override void OnLevelLoaded()
-		{
-			LocalMotionState = null;
-			if (FreezePlayerOnQMOpenToggle != null)
-			{
-				FreezePlayerOnQMOpenToggle.SetToggleState(FreezePlayerOnQMOpen);
-			}
-			UnfreezePlayerOnce = true;
-		}
+
 
 		public static Vector3 PlayerPositionBones(Player player, HumanBodyBones bone)
 		{
@@ -143,75 +104,5 @@
 			return GetLocalVRCPlayer().gameObject;
 		}
 
-		public static bool IsQuickMenuOpen
-		{
-			get
-			{
-				try
-				{
-					return QuickMenu.prop_QuickMenu_0.prop_Boolean_0;
-				}
-				catch
-				{
-					return false;
-				}
-			}
-		}
-
-		public static CharacterController GetPlayerCharControl()
-		{
-			try
-			{
-				if (GetPlayerGameObject() != null && GetLocalVRCPlayer() != null && GetPlayerGameObject().GetComponent<CharacterController>() != null)
-				{
-					if (charcontrol == null)
-					{
-						return charcontrol = GetPlayerGameObject().GetComponent<CharacterController>();
-					}
-					else
-					{
-						return charcontrol;
-					}
-				}
-			}
-			catch
-			{
-				return null;
-			}
-			return null;
-		}
-
-		public static CharacterController charcontrol;
-
-		public static VRCMotionState GetPlayerVRCMotionState()
-		{
-			if (LocalMotionState != null)
-			{
-				return LocalMotionState;
-			}
-			else
-			{
-				LocalMotionState = GetPlayerGameObject().GetComponent<VRCMotionState>();
-				return LocalMotionState;
-			}
-		}
-
-		public static void ToggleFreezePlayerOnQMOpen()
-		{
-			FreezePlayerOnQMOpen = !FreezePlayerOnQMOpen;
-			if (FreezePlayerOnQMOpenToggle != null)
-			{
-				FreezePlayerOnQMOpenToggle.SetToggleState(FreezePlayerOnQMOpen);
-			}
-			UnfreezePlayerOnce = false;
-		}
-
-		private static bool UnfreezePlayerOnce;
-
-		public static VRCMotionState LocalMotionState;
-
-		public static bool FreezePlayerOnQMOpen;
-
-		public static QMToggleButton FreezePlayerOnQMOpenToggle;
 	}
 }
