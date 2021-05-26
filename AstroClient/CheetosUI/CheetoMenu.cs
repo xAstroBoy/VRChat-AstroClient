@@ -68,28 +68,25 @@
 			{
 				ToggleMenu();
 			}
-
-			if (IsOpen)
-			{
-				EventSystem.current = cheetoEventSystem;
-			}
-			else
-			{
-				EventSystem.current = originalEventSystem;
-			}
 		}
 
 		public override void OnLateUpdate()
 		{
+			//cursorManager.field_Private_Boolean_0 = true;
+			//cursorManager.field_Private_Boolean_1 = true;
+			//cursorManager.field_Private_Boolean_0 = true;
+			//cursorManager.field_Private_Boolean_3 = true;
+			//cursorManager.field_Private_Boolean_4 = true;
+			//cursorManager.field_Private_EnumNPublicSealedvaNoRiLe4vUnique_0 = VRCUiCursor.EnumNPublicSealedvaNoRiLe4vUnique.Right;
+
 			if (IsOpen)
 			{
+				EventSystem.current = cheetoEventSystem;
 				EventSystem.current.enabled = true;
-				//cursorManager.field_Private_Boolean_0 = true;
-				//cursorManager.field_Private_Boolean_1 = true;
-				//cursorManager.field_Private_Boolean_0 = true;
-				//cursorManager.field_Private_Boolean_3 = true;
-				//cursorManager.field_Private_Boolean_4 = true;
-				//cursorManager.field_Private_EnumNPublicSealedvaNoRiLe4vUnique_0 = VRCUiCursor.EnumNPublicSealedvaNoRiLe4vUnique.Right;
+			}
+			else
+			{
+				EventSystem.current = originalEventSystem;
 			}
 		}
 
