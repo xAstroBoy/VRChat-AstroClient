@@ -77,7 +77,7 @@
 			{
 				FileStream fs = new FileStream(ConfigPath, FileMode.Create);
 				fs.Dispose();
-				Save();
+				Save_General();
 				ModConsole.DebugWarning($"Config File Created: {ConfigPath}");
 			}
 
@@ -85,7 +85,7 @@
 			{
 				FileStream fs = new FileStream(ConfigUIPath, FileMode.Create);
 				fs.Dispose();
-				Save();
+				Save_UI();
 				ModConsole.DebugWarning($"ConfigUI File Created: {ConfigUIPath}");
 			}
 
@@ -93,38 +93,73 @@
 			{
 				FileStream fs = new FileStream(ConfigESPPath, FileMode.Create);
 				fs.Dispose();
-				Save();
+				Save_ESP();
 				ModConsole.DebugWarning($"ConfigESP File Created: {ConfigESPPath}");
 			}
 			if (!File.Exists(ConfigFlightPath))
 			{
 				FileStream fs = new FileStream(ConfigFlightPath, FileMode.Create);
 				fs.Dispose();
-				Save();
+				Save_Flight();
 				ModConsole.DebugWarning($"ConfigFlight File Created: {ConfigFlightPath}");
 			}
 			if (!File.Exists(ConfigMovementPath))
 			{
 				FileStream fs = new FileStream(ConfigMovementPath, FileMode.Create);
 				fs.Dispose();
-				Save();
+				Save_Movement();
 				ModConsole.DebugWarning($"ConfigMovement File Created: {ConfigMovementPath}");
 			}
 
 			if (!Directory.Exists(ConfigLewdifyPath))
 			{
 				Directory.CreateDirectory(ConfigLewdifyPath);
-				ModConsole.DebugWarning($"ConfigFlight File Created: {ConfigLewdifyPath}");
+				ModConsole.DebugWarning($"ConfigLewdify File Created: {ConfigLewdifyPath}");
 			}
 		}
 
-		public static void Save()
+
+		public static void Save_General()
 		{
 			JSonWriter.WriteToJsonFile(ConfigPath, General);
+			ModConsole.DebugLog("General Config Saved.");
+		}
+
+		public static void Save_UI()
+		{
 			JSonWriter.WriteToJsonFile(ConfigUIPath, UI);
+			ModConsole.DebugLog("UI Config Saved.");
+		}
+
+		public static void Save_ESP()
+		{
 			JSonWriter.WriteToJsonFile(ConfigESPPath, ESP);
+			ModConsole.DebugLog("ESP Config Saved.");
+		}
+
+
+		public static void Save_Flight()
+		{
 			JSonWriter.WriteToJsonFile(ConfigFlightPath, Flight);
+			ModConsole.DebugLog("Flight Config Saved.");
+		}
+
+
+		public static void Save_Movement()
+		{
 			JSonWriter.WriteToJsonFile(ConfigMovementPath, Movement);
+			ModConsole.DebugLog("Movement Config Saved.");
+
+		}
+
+
+		public static void Save_All()
+		{
+			Save_General();
+			Save_UI();
+			Save_ESP();
+			Save_Flight();
+			Save_Movement();
 			ModConsole.DebugLog("Config Saved.");
 		}
 

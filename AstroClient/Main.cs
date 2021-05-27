@@ -92,7 +92,7 @@
 		{
 			if (KeyManager.IsAuthed)
 			{
-				ConfigManager.Save();
+				ConfigManager.Save_All();
 			}
 		}
 
