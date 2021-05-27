@@ -193,12 +193,13 @@
 				if (Bools.IsDeveloper)
 				{
 					MapEditorMenu.InitButtons(AstroClient, 1, 2.5f, true);
+
 				}
 				WorldPickupsBtn.InitButtons(AstroClient, 2, 0, true);
 				ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
 
 				Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
-
+				//CameraOnTweakerExperiment.InitQMMenu(AstroClient, 3, 0.5f, true);
 				SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
 			}
 		}

@@ -184,7 +184,7 @@
 			return obj.GetComponent<VRC_Pickup>() != null && obj.GetComponent<VRC_Pickup>().currentPlayer.displayName == LocalPlayerUtils.GetSelfVRCPlayerApi().displayName;
 		}
 
-		public static void TeleportPickupsToTheirDefaultPosition()
+		public static void TeleportPickupsToTheirDefaultPosition(bool RestoreBodySettings)
 		{
 			foreach (var Pickup in WorldUtils.Get_Pickups())
 			{
@@ -198,7 +198,7 @@
 					{
 						continue;
 					}
-					RestoreOriginalLocation(Pickup.gameObject, true);
+					RestoreOriginalLocation(Pickup.gameObject, RestoreBodySettings);
 				}
 			}
 		}

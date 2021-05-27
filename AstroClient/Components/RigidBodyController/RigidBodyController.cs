@@ -494,6 +494,11 @@
 			OrigKinematic = Kinematic;
 		}
 
+		internal Rigidbody GetRigidbody()
+		{
+			return body;
+		}
+
 		[HideFromIl2Cpp]
 		internal SyncPhysics Internal_Sync { get; private set; } = null;
 
