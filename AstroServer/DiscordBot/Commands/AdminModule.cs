@@ -11,7 +11,7 @@
 	using System.Text;
 	using System.Threading.Tasks;
 
-	[Discord.Commands.Name("Admin")]
+	[Group("Admin")]
 	[RequireContext(ContextType.Guild, ErrorMessage = "Sorry, this command must be ran from within a server, not a DM!")]
 	[RequireTeam]
 	public class AdminModule : ModuleBase<SocketCommandContext>

@@ -9,7 +9,7 @@
 	using System.Linq;
 	using System.Threading.Tasks;
 
-	[Discord.Commands.Name("Admin")]
+	[Group("Admin")]
 	[RequireContext(ContextType.Guild, ErrorMessage = "Sorry, this command must be ran from within a server, not a DM!")]
 	[RequireTeam]
 	public class AvatarModule : ModuleBase<SocketCommandContext>
