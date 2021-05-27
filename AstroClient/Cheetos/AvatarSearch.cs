@@ -19,7 +19,8 @@
 
 		public static void Search(string query)
 		{
-
+			// Refresh UI
+			NetworkingManager.AvatarSearch(query);
 		}
 	}
 }

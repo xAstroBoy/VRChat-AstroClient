@@ -1,14 +1,16 @@
 ﻿namespace AstroClient
 {
+	#region Imports
+
 	using AstroLibrary.Console;
 	using AstroClient.variables;
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
-	using UnityEngine;
-	using VRC.SDKBase;
 	using System.Collections.Generic;
+
+	#endregion
 
 	public class NetworkingManager : GameEvents
 	{
@@ -21,12 +23,18 @@
 
 		public static string UserID = string.Empty;
 
-		public override void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
+		public static void AvatarSearch(string query)
 		{
-			if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
+			if (Initialized)
 			{
-				//string bson = BSonWriter.ToBson(data);
-				//AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, "", bson.ConvertToBytes()));
+				if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
+				{
+					if (Bools.IsDeveloper)
+					{
+						ModConsole.DebugLog($"Sending Avatar Search: {query}");
+					}
+					AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_SEARCH, query));
+				}
 			}
 		}
 

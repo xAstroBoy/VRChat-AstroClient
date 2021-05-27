@@ -149,8 +149,8 @@
 
 			if (packetData.NetworkEventID == PacketServerType.AVATAR_RESULT)
 			{
-
-				ModConsole.Log(packetData.TextData);
+				var avatarData = JsonConvert.DeserializeObject<AvatarData>(packetData.TextData);
+				ModConsole.Log($"Received Search Result: {avatarData.Name}");
 			}
 		}
 
