@@ -8,7 +8,7 @@
 		public override void VRChat_OnUiManagerInit()
 		{
 			// Avatar Search
-			new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Search", -850f, 125f, delegate ()
+			new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Search", -850f, 125f, delegate ()
 			{
 				Utils.VRCUiPopupManager.AskInGameInput("Astro Avatar Search", "Search", delegate (string text)
 				{
