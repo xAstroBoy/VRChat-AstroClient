@@ -2,37 +2,41 @@
 {
 	public static class PacketClientType
 	{
-		public const ulong AUTH = 1;
-		public const ulong CONNECTED = 1;
-		public const ulong DISCONNECT = 2;
-		public const ulong SEND_PLAYER_USERID = 11;
-		public const ulong SEND_PLAYER_NAME = 12;
-		public const ulong WORLD_JOIN = 20;
-		public const ulong AVATAR_DATA = 21;
-		public const ulong KEEP_ALIVE = 100;
-		public const ulong GET_RESOURCES = 200;
+		public const byte AUTH = 1;
+		public const byte CONNECTED = 1;
+		public const byte DISCONNECT = 2;
+		public const byte SEND_PLAYER_USERID = 11;
+		public const byte SEND_PLAYER_NAME = 12;
+		public const byte WORLD_JOIN = 20;
+		public const byte AVATAR_DATA = 21;
+		public const byte KEEP_ALIVE = 100;
+		public const byte GET_RESOURCES = 200;
+		public const byte AVATAR_SEARCH = 225;
 	}
 
 	public static class PacketServerType
 	{
-		public const ulong EXIT = 0;
-		public const ulong CONNECTED = 1;
-		public const ulong DISCONNECT = 2;
-		public const ulong AUTH_SUCCESS = 3;
-		public const ulong AUTH_FAIlED = 4;
-		public const ulong ENABLE_DEVELOPER = 10;
-		public const ulong ADD_TAG = 30;
-		public const ulong KEEP_ALIVE = 100;
+		public const byte EXIT = 0;
+		public const byte CONNECTED = 1;
+		public const byte DISCONNECT = 2;
+		public const byte AUTH_SUCCESS = 3;
+		public const byte AUTH_FAIlED = 4;
+		public const byte ENABLE_DEVELOPER = 10;
+		public const byte ADD_TAG = 30;
+		public const byte KEEP_ALIVE = 100;
 
 		// Loader Stuff
-		public const ulong LOADER_DONE = 200;
-		public const ulong LOADER_LIBRARY = 201;
-		public const ulong LOADER_MELON = 202;
-		public const ulong LOADER_MODULE = 203;
+		public const byte LOADER_DONE = 200;
+		public const byte LOADER_LIBRARY = 201;
+		public const byte LOADER_MELON = 202;
+		public const byte LOADER_MODULE = 203;
 
 		// Other Stuff
-		public const ulong LOG = 300;
-		public const ulong DEBUG = 301;
-		public const ulong NOTIFY = 302;
+		public const byte LOG = 220;
+		public const byte DEBUG = 221;
+		public const byte NOTIFY = 223;
+
+		// Avatar Stuff
+		public const byte AVATAR_RESULT = 230;
 	}
 }

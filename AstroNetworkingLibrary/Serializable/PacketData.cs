@@ -6,11 +6,11 @@
 	[Serializable, Obfuscation]
 	public class PacketData
 	{
-		public ulong NetworkEventID = 0;
+		public byte NetworkEventID = 0;
 
 		public string TextData = string.Empty;
 
-		public PacketData(ulong networkEventID, string textData = "")
+		public PacketData(byte networkEventID, string textData = "")
 		{
 			NetworkEventID = networkEventID;
 			TextData = textData;

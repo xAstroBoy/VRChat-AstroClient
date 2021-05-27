@@ -85,7 +85,7 @@
 
 		private void PortalDrop()
 		{
-			var Portal = Networking.Instantiate(VRC_EventHandler.VrcBroadcastType.Always, "Portals/PortalInternalDynamic", new Vector3(777, 777, 777), new Quaternion(float.MaxValue, float.MaxValue, 0, 0));
+			var Portal = Networking.Instantiate(VrcBroadcastType.Always, "Portals/PortalInternalDynamic", new Vector3(777, 777, 777), new Quaternion(float.MaxValue, float.MaxValue, 0, 0));
 			Portal.SetActive(false);
 		}
 

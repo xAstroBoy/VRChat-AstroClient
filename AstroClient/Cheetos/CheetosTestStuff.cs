@@ -6,6 +6,8 @@
 	using AstroLibrary.Finder;
 	using System.Collections.Generic;
 	using UnityEngine.UI;
+	using DayClientML2.Utility;
+	using DayClientML2.Utility.Extensions;
 
 	internal class CheetosTestStuff : GameEvents
 	{

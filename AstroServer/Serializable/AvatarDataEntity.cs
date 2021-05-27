@@ -1,6 +1,5 @@
 ﻿namespace AstroServer.Serializable
 {
-	using MongoDB.Bson.Serialization.Attributes;
 	using MongoDB.Entities;
 	using System;
 	using System.Reflection;

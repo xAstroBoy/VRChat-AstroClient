@@ -1,24 +1,25 @@
 ﻿namespace AstroClient.Cheetos
 {
-	using AstroLibrary.Finder;
-	using UnityEngine;
-	using UnityEngine.UI;
+	using DayClientML2.Utility;
+	using DayClientML2.Utility.Extensions;
 
 	class AvatarSearch : GameEvents
 	{
 		public override void VRChat_OnUiManagerInit()
 		{
-			var content = GameObjectFinder.Find("UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content");
-			var pal = GameObjectFinder.Find("UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Personal Avatar List");
-			var search = GameObjectFinder.Find("UserInterface/MenuContent/Backdrop/Header/Tabs/ViewPort/Content/Search/InputField");
+			// Avatar Search
+			new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Search", -850f, 125f, delegate ()
+			{
+				Utils.VRCUiPopupManager.AskInGameInput("Astro Avatar Search", "Search", delegate (string text)
+				{
+					Search(text);
+				}, "Enter Avatar name. . .");
+			}, 1.45f, 1f);
+		}
 
-			search.GetComponent<Button>().interactable = true;
+		public static void Search(string query)
+		{
 
-			var searchList = GameObject.Instantiate(pal, content.transform);
-			searchList.GetComponent<UiAvatarList>().hideWhenEmpty = false;
-			searchList.GetComponent<UiAvatarList>().field_Public_Text_0.text = "Astro Search";
-			searchList.GetComponent<LayoutElement>().minHeight = 280f;
-			searchList.name = "Astro Search";
 		}
 	}
 }

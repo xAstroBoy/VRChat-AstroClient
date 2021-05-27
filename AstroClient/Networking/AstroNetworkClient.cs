@@ -146,6 +146,12 @@
 			{
 				ModConsole.Log(packetData.TextData);
 			}
+
+			if (packetData.NetworkEventID == PacketServerType.AVATAR_RESULT)
+			{
+
+				ModConsole.Log(packetData.TextData);
+			}
 		}
 
 		// You gotta delay it, let's delay it to some seconds

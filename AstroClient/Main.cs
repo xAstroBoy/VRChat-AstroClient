@@ -25,6 +25,7 @@
 	using AstroClient.AvatarMods;
 	using VRC.UI;
 	using VRC.Core;
+	using Il2CppSystem.Diagnostics;
 
 	#endregion Imports
 
@@ -59,6 +60,9 @@
 			KeyManager.IsAuthed = true;
 			Bools.IsDeveloper = true;
 #else
+			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Start();
+
 			KeyManager.ReadKey();
 			AstroNetworkClient.Initialize();
 
@@ -67,6 +71,8 @@
 			}
 #endif
 
+			stopwatch.Stop();
+			ModConsole.Log($"Client Authenticated: Took {stopwatch.ElapsedMilliseconds}ms");
 			//try
 			//{
 			//	Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);

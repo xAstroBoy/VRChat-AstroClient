@@ -139,19 +139,7 @@
 				var avatarData = Newtonsoft.Json.JsonConvert.DeserializeObject<AvatarData>(packetData.TextData);
 				bool save = false;
 
-				AvatarDataEntity avatarDataEntity = new AvatarDataEntity()
-				{
-					AssetURL = avatarData.AssetURL,
-					AvatarID = avatarData.AvatarID,
-					AuthorName = avatarData.AuthorName,
-					AuthorID = avatarData.AuthorID,
-					Description = avatarData.Description,
-					ImageURL = avatarData.ImageURL,
-					Name = avatarData.Name,
-					ReleaseStatus = avatarData.ReleaseStatus,
-					ThumbnailURL = avatarData.ThumbnailURL,
-					Version = avatarData.Version
-				};
+				AvatarDataEntity avatarDataEntity = avatarData.GetAvatarDataEntity();
 				var found = DB.Find<AvatarDataEntity>().OneAsync(avatarData.AvatarID).GetAwaiter().GetResult();
 
 				if (found != null)
@@ -171,6 +159,14 @@
 					avatarDataEntity.ID = avatarData.AvatarID;
 					avatarDataEntity.SaveAsync().GetAwaiter().GetResult();
 					Console.WriteLine($"Received New/Updated AvatarData: {avatarData.Name}, {avatarData.AvatarID}");
+				}
+			}
+
+			if (packetData.NetworkEventID == PacketClientType.AVATAR_SEARCH)
+			{
+				foreach (var avatar in DB.Find<AvatarDataEntity>().ManyAsync(a => a.Name.ToLower().Contains(packetData.TextData.ToLower())).GetAwaiter().GetResult())
+				{
+					client.Send(new PacketData(PacketServerType.AVATAR_RESULT, Newtonsoft.Json.JsonConvert.SerializeObject(avatar.GetAvatarData())));
 				}
 			}
 		}
