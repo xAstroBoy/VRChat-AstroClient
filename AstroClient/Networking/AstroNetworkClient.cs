@@ -155,7 +155,7 @@
 
 			if (packetData.NetworkEventID == PacketServerType.AVATAR_RESULT_DONE)
 			{
-				AvatarSearch.Done();
+				AvatarSearch.IsSearching = false;
 			}
 		}
 

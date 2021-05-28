@@ -6,9 +6,9 @@
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using DayClientML2.Utility.MenuApi;
+	using System.Collections;
 	using System.Diagnostics;
 	using UnityEngine;
-	using UnityEngine.UI;
 	using VRC.Core;
 	using VRC.UI;
 
@@ -22,6 +22,8 @@
 		private static Stopwatch stopwatch;
 
 		private static PageAvatar currPageAvatar;
+
+		public static bool IsSearching = false;
 
 		public override void VRChat_OnUiManagerInit()
 		{
@@ -42,32 +44,53 @@
 
 		public static void Search(string query)
 		{
-			stopwatch = new Stopwatch();
+			if (!IsSearching)
+			{
+				stopwatch = new Stopwatch();
+				stopwatch.Start();
 
-			// Refresh UI
-			foundAvatars.Clear();
-			NetworkingManager.AvatarSearch(query);
+				// Refresh UI
+				foundAvatars.Clear();
+				NetworkingManager.AvatarSearch(query);
+
+				IsSearching = true;
+				MelonLoader.MelonCoroutines.Start(LoopCheck());
+			}
+		}
+
+		public static IEnumerator LoopCheck()
+		{
+			if (!IsSearching) yield break;
+
+			for (; ; )
+			{
+				//yield return new WaitForSeconds(0.01f);
+				yield return new WaitForEndOfFrame();
+				if (!IsSearching)
+				{
+					Done();
+					yield break;
+				}
+			}
 		}
 
 		public static void Done()
 		{
+			IsSearching = false;
 			stopwatch.Stop();
 			list.UiVRCList.expandedHeight *= 2f;
 			list.UiVRCList.extendRows = 4;
-			list.UiVRCList.startExpanded = true;
-			Utils.VRCUiManager.ShowScreen(currPageAvatar);
-			//MiscUtility.DelayFunction(1f, () =>
-			//{
-			//	list.RenderElement(foundAvatars);
-			//});
+			list.UiVRCList.startExpanded = false;
+			//Utils.VRCUiManager.ShowScreen(currPageAvatar);
+			list.RenderElement(foundAvatars);
 			list.Text.text = $"<color=cyan>Astro Search</color> Found: <color=yellow>{foundAvatars.Count}</color> in {stopwatch.ElapsedMilliseconds}ms";
 			ModConsole.Log($"Avatar Search Completed: found {foundAvatars.Count} avatars in {stopwatch.ElapsedMilliseconds}ms");
 		}
 
 		public static void AddAvatar(AvatarData avatarData)
 		{
-			var avatarObject = avatarData.GetAvatarObject();
-			foundAvatars.Add(avatarObject.ToApiAvatar());
+			var apiAvatar = avatarData.ToApiAvatar();
+			foundAvatars.Add(apiAvatar);
 
 		}
 	}

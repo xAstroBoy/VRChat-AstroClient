@@ -2,6 +2,7 @@
 {
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility.Api.Object;
+	using VRC.Core;
 
 	public static class CheetosExtensions
 	{
@@ -23,9 +24,9 @@
 			};
 		}
 
-		public static AvatarObject GetAvatarObject(this AvatarData instance)
+		public static ApiAvatar ToApiAvatar(this AvatarData instance)
 		{
-			return new AvatarObject()
+			return new ApiAvatar()
 			{
 				assetUrl = instance.AssetURL,
 				authorId = instance.AuthorID,
@@ -36,7 +37,7 @@
 				name = instance.Name,
 				releaseStatus = instance.ReleaseStatus,
 				version = instance.Version,
-				supportedPlatforms = instance.SupportedPlatforms
+				supportedPlatforms = instance.SupportedPlatforms == "All " ? ApiModel.SupportedPlatforms.All : ApiModel.SupportedPlatforms.StandaloneWindows,
 			};
 		}
 	}
