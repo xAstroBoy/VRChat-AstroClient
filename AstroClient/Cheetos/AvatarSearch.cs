@@ -52,14 +52,7 @@
 			list.UiVRCList.expandedHeight *= 2f;
 			list.UiVRCList.extendRows = 4;
 			list.UiVRCList.startExpanded = true;
-			//try
-			//{
-			//	list.RenderElement(foundAvatars);
-			//}
-			//catch (Exception e)
-			//{
-			//	ModConsole.Error(e.Message);
-			//}
+			//list.RenderElement(foundAvatars); this crashes it for some reason
 			list.Text.text = $"<color=cyan>Astro Search</color> Found: <color=yellow>{foundAvatars.Count}</color> in {stopwatch.ElapsedMilliseconds}ms";
 			ModConsole.Log($"Avatar Search Completed: found {foundAvatars.Count} avatars in {stopwatch.ElapsedMilliseconds}ms");
 		}
