@@ -10,6 +10,8 @@
 	using VRC;
 	using Delegate = System.Delegate;
 	using Time = UnityEngine.Time;
+	using DayClientML2.Utility;
+	using AstroClient.Extensions;
 
 	public class PlayerWatcher : GameEventsBehaviour
 	{
@@ -88,7 +90,6 @@
 			{ }
 
 			PlayerWatcherManager.Register(this);
-			OnlineEditor.TakeObjectOwnership(obj);
 		}
 
 		// Update is called once per frame
@@ -104,6 +105,11 @@
 						return;
 					}
 
+					if (ApplyOnce)
+					{
+						SetRequiredSettings();
+					}
+
 					if (pickup.IsHeld)
 					{
 						if (HasRequiredSettings)
@@ -116,40 +122,45 @@
 
 					if (Time.time - LastTimeCheck2 > 16.33f)
 					{
-						if (!HasRequiredSettings)
-						{
-							if (!control.EditMode)
-							{
-								control.EditMode = true;
-							}
-							if (!OnlineEditor.IsLocalPlayerOwner(obj))
-							{
-								control.Constraints = RigidbodyConstraints.None;
-								obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-								OnlineEditor.TakeObjectOwnership(obj);
-							}
-							else
-							{
-								control.Constraints = RigidbodyConstraints.FreezeRotation;
-								obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-								if (control != null)
-								{
-									control.Constraints = RigidbodyConstraints.None;
-								}
-							}
-							LastTimeCheck2 = Time.time;
-							HasRequiredSettings = true;
-						}
+						SetRequiredSettings();
+						LastTimeCheck2 = Time.time;
+					}
 
-						OnlineEditor.TakeObjectOwnership(obj);
-						obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+					if (!pickup.IsHeld)
+					{
+						if (obj.TakeOwnershipIfNeccesary())
+						{
+							obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+						}
 					}
 				}
+
 			}
 			catch
 			{
 			}
 		}
+
+
+		private void SetRequiredSettings()
+		{
+			if (!HasRequiredSettings)
+			{
+				if (!control.EditMode)
+				{
+					control.EditMode = true;
+				}
+				if (obj.TakeOwnershipIfNeccesary())
+				{
+					control.Constraints = RigidbodyConstraints.FreezeRotation;
+					obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+					control.Constraints = RigidbodyConstraints.None;
+					HasRequiredSettings = true;
+				}
+			}
+		}
+
+
 
 		private void OnDestroy()
 		{
@@ -180,6 +191,7 @@
 		public float TimerOffset = 0f;
 		private float LastTimeCheck2 = 0;
 		private bool HasRequiredSettings = false;
+		private bool ApplyOnce = true;
 
 		internal Player player;
 		internal bool IsLockDeactivated = false;

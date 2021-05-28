@@ -5,6 +5,7 @@
 	using UnhollowerRuntimeLib;
 	using UnityEngine;
 	using static AstroClient.Forces;
+	using AstroClient.Extensions;
 
 	public class ObjectSpinner : GameEventsBehaviour
 	{
@@ -94,17 +95,7 @@
 						{
 							control.EditMode = true;
 						}
-						if (!OnlineEditor.IsLocalPlayerOwner(obj))
-						{
-							OnlineEditor.TakeObjectOwnership(obj);
-							if (control != null)
-							{
-								control.isKinematic = false;
-								control.UpdateAngularDrag(0);
-								control.UpdateDrag(0);
-							}
-						}
-						else
+						if (!pickup.IsHeld)
 						{
 							if (control != null)
 							{
@@ -112,17 +103,17 @@
 								control.UpdateAngularDrag(0);
 								control.UpdateDrag(0);
 							}
+							HasRequiredSettings = true;
 						}
-						HasRequiredSettings = true;
 					}
 
-					if (TakeOwnership)
+					if (obj.TakeOwnershipIfNeccesary())
 					{
-						OnlineEditor.TakeObjectOwnership(obj);
+						SpinObject(obj, ForceX, 0, 0);
+						SpinObject(obj, 0, ForceY, 0);
+						SpinObject(obj, 0, 0, ForceZ);
 					}
-					SpinObject(obj, ForceX, 0, 0);
-					SpinObject(obj, 0, ForceY, 0);
-					SpinObject(obj, 0, 0, ForceZ);
+
 
 					LastTimeCheck = Time.time;
 				}

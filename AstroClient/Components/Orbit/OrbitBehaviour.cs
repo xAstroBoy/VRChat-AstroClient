@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Components
 {
+	using AstroClient.Extensions;
 	using AstroClient.GameObjectDebug;
 	using DayClientML2.Utility.Extensions;
 	using System;
@@ -90,7 +91,7 @@
 				pickup = obj.AddComponent<PickupController>();
 			}
 			OrbitManager.Register(this);
-			OnlineEditor.TakeObjectOwnership(obj);
+			//OnlineEditor.TakeObjectOwnership(obj);
 		}
 
 		public void Update()
@@ -135,22 +136,41 @@
 					InterpolationTempY = 0f;
 				}
 
-				VRCPlayerApi playerApi = Player.prop_Player_0.prop_VRCPlayerApi_0;
-				if (playerApi != null && !Networking.IsOwner(playerApi, obj))
+
+
+				if (!pickup.IsHeld)
 				{
-					OnlineEditor.TakeObjectOwnership(obj);
-					//VrcPickup.DisallowTheft = true;
+					if (obj.TakeOwnershipIfNeccesary())
+					{
+						Timer += (Time.deltaTime * RotationSpeed) + TimerOffset;
+						Rotate();
+						UpdateTimer -= Time.deltaTime;
+						if (UpdateTimer <= 0f)
+						{
+							transform.position = Position;
+							transform.LookAt(CenterPoint);
+							UpdateTimer = Time.deltaTime * 2f;
+						}
+					}
 				}
 
-				Timer += (Time.deltaTime * RotationSpeed) + TimerOffset;
-				Rotate();
-				UpdateTimer -= Time.deltaTime;
-				if (UpdateTimer <= 0f)
-				{
-					transform.position = Position;
-					transform.LookAt(CenterPoint);
-					UpdateTimer = Time.deltaTime * 2f;
-				}
+
+				//VRCPlayerApi playerApi = Player.prop_Player_0.prop_VRCPlayerApi_0;
+				//if (playerApi != null && !Networking.IsOwner(playerApi, obj))
+				//{
+				//	OnlineEditor.TakeObjectOwnership(obj);
+				//	//VrcPickup.DisallowTheft = true;
+				//}
+
+				//Timer += (Time.deltaTime * RotationSpeed) + TimerOffset;
+				//Rotate();
+				//UpdateTimer -= Time.deltaTime;
+				//if (UpdateTimer <= 0f)
+				//{
+				//	transform.position = Position;
+				//	transform.LookAt(CenterPoint);
+				//	UpdateTimer = Time.deltaTime * 2f;
+				//}
 			}
 		}
 

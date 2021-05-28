@@ -10,6 +10,7 @@
 	using VRC;
 	using Delegate = System.Delegate;
 	using Time = UnityEngine.Time;
+	using AstroClient.Extensions;
 
 	public class PlayerAttacker : GameEventsBehaviour
 	{
@@ -89,7 +90,6 @@
 			{ }
 
 			PlayerAttackerManager.Register(this);
-			OnlineEditor.TakeObjectOwnership(obj);
 		}
 
 		// Update is called once per frame
@@ -115,49 +115,10 @@
 						return;
 					}
 
+
 					if (Time.time - LastTimeCheck2 > 16.33f)
 					{
-						if (!HasRequiredSettings)
-						{
-							if (!control.EditMode)
-							{
-								control.EditMode = true;
-							}
-							if (!OnlineEditor.IsLocalPlayerOwner(obj))
-							{
-								control.Constraints = RigidbodyConstraints.FreezeRotation;
-								control.useGravity = false;
-								control.UpdateDrag(Drag);
-								obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-								HasUpdatedDrag = false;
-								HasUpdatedKinematic = false;
-								OnlineEditor.TakeObjectOwnership(obj);
-								LastTimeCheck2 = Time.time;
-								if (control != null)
-								{
-									control.Constraints = RigidbodyConstraints.FreezeRotation;
-									control.isKinematic = false;
-									control.useGravity = false;
-								}
-							}
-							else
-							{
-								control.Constraints = RigidbodyConstraints.FreezeRotation;
-								control.useGravity = false;
-								control.UpdateDrag(Drag);
-								obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-								HasUpdatedDrag = false;
-								HasUpdatedKinematic = false;
-								if (control != null)
-								{
-									control.Constraints = RigidbodyConstraints.FreezeRotation;
-									control.isKinematic = false;
-									control.useGravity = false;
-								}
-							}
-
-							HasRequiredSettings = true;
-						}
+						ApplyRequiredSettings();
 
 						if (!HasUpdatedDrag)
 						{
@@ -169,20 +130,58 @@
 							HasUpdatedKinematic = control.UpdateKinematic(false);
 						}
 
-						OnlineEditor.TakeObjectOwnership(obj);
-						obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-						ApplyForceX();
-						obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-						ApplyForceY();
-						obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-						ApplyForceZ();
-						obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+						if (!pickup.IsHeld)
+						{
+							if (obj.TakeOwnershipIfNeccesary())
+							{
+								obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+								ApplyForceX();
+								obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+								ApplyForceY();
+								obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+								ApplyForceZ();
+								obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+							}
+						}
 						LastTimeCheck = Time.time;
 					}
 				}
 			}
 			catch
 			{
+			}
+		}
+
+		private void ApplyRequiredSettings()
+		{
+			if (!HasRequiredSettings)
+			{
+				if (!control.EditMode)
+				{
+					control.EditMode = true;
+				}
+				if (!pickup.IsHeld)
+				{
+					if (obj.TakeOwnershipIfNeccesary())
+					{
+						control.Constraints = RigidbodyConstraints.FreezeRotation;
+						control.useGravity = false;
+						control.UpdateDrag(Drag);
+						obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+						HasUpdatedDrag = false;
+						HasUpdatedKinematic = false;
+						LastTimeCheck2 = Time.time;
+						if (control != null)
+						{
+							control.Constraints = RigidbodyConstraints.FreezeRotation;
+							control.isKinematic = false;
+							control.useGravity = false;
+						}
+					}
+					HasRequiredSettings = true;
+
+				}
+
 			}
 		}
 
@@ -284,5 +283,7 @@
 		private PickupController pickup;
 		private bool HasUpdatedKinematic;
 		private bool HasRequiredSettings = false;
+
+		private bool ApplyOnce = true;
 	}
 }

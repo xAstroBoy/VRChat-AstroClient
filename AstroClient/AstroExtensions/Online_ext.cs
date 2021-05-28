@@ -13,5 +13,10 @@
 		{
 			OnlineEditor.RemoveOwnerShip(obj);
 		}
+
+		public static bool TakeOwnershipIfNeccesary(this GameObject obj)
+		{
+			return OnlineEditor.TakeOwnershipIfNeccessary(obj);
+		}
 	}
 }

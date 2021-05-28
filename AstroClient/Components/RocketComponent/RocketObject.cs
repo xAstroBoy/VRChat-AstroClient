@@ -6,6 +6,8 @@
 	using UnityEngine;
 	using static AstroClient.Forces;
 	using Random = UnityEngine.Random;
+	using AstroClient.Extensions;
+
 
 	public class RocketObject : GameEventsBehaviour
 	{
@@ -86,21 +88,7 @@
 						{
 							control.EditMode = true;
 						}
-						if (!OnlineEditor.IsLocalPlayerOwner(obj))
-						{
-							if (TakeOwnership)
-							{
-								OnlineEditor.TakeObjectOwnership(obj);
-							}
-							if (control != null)
-							{
-								control.isKinematic = false;
-								control.useGravity = UseGravity;
-								control.UpdateAngularDrag(0);
-								control.UpdateDrag(0);
-							}
-						}
-						else
+						if (obj.TakeOwnershipIfNeccesary())
 						{
 							if (control != null)
 							{
@@ -112,18 +100,20 @@
 						}
 						HasRequiredSettings = true;
 					}
+					if (!pickup.IsHeld)
+					{
 
-					if (TakeOwnership)
-					{
-						OnlineEditor.TakeObjectOwnership(obj);
-					}
-					if (!ShouldBeAlwaysUp)
-					{
-						ApplyRelativeForce(obj, 0, Random.Range(1f, 10f), 0);
-					}
-					else
-					{
-						ApplyForce(obj, 0, Random.Range(1f, 10f), 0);
+						if (obj.TakeOwnershipIfNeccesary())
+						{
+							if (!ShouldBeAlwaysUp)
+							{
+								ApplyRelativeForce(obj, 0, Random.Range(1f, 10f), 0);
+							}
+							else
+							{
+								ApplyForce(obj, 0, Random.Range(1f, 10f), 0);
+							}
+						}
 					}
 					LastTimeCheck = Time.time;
 				}
