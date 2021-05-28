@@ -2,15 +2,15 @@
 {
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.Components;
-	using AstroLibrary.Console;
 	using AstroClient.Extensions;
 	using AstroClient.GameObjectDebug;
+	using AstroLibrary.Console;
 	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using System;
+	using System.Collections.Generic;
 	using UnityEngine;
 	using VRC;
-	using System.Collections.Generic;
 
 	public class ObjectMiscOptions : GameEvents
 	{
@@ -331,6 +331,83 @@
 				}
 			}
 			catch (Exception) { }
+		}
+
+		public static void DisablePickupKinematic(bool useGravity)
+		{
+			foreach (var item in WorldUtils.Get_Pickups())
+			{
+				if (item != null)
+				{
+					var control = item.GetComponent<RigidBodyController>();
+					if (control == null)
+					{
+						control = item.AddComponent<RigidBodyController>();
+					}
+
+					if (control != null)
+					{
+						if (control.GetRigidbody() != null)
+						{
+							ModConsole.DebugLog($"Analyzing Rigidbody Property of {item.name}");
+
+							bool hasWorkingCollider = false;
+							if (control.GetRigidbody().isKinematic)
+							{
+								ModConsole.DebugLog($"Checking If a Non-trigger collider is present in {item.name}");
+
+								var meshcolliders = control.gameObject.GetComponentsInChildren<MeshCollider>(true);
+								var Colliders = control.gameObject.GetComponentsInChildren<Collider>(true);
+								if (meshcolliders.Count != 0)
+								{
+									foreach (var c in meshcolliders)
+									{
+										if (c.enabled && c.convex)
+										{
+											ModConsole.DebugLog($"Found Working MeshCollider for {item.name}");
+
+											if (!hasWorkingCollider)
+											{
+												hasWorkingCollider = true;
+											}
+										}
+									}
+								}
+								else
+								{
+									if (Colliders.Count != 0)
+									{
+										foreach (var collider in Colliders)
+										{
+											if (collider != null)
+											{
+												if (!collider.isTrigger && collider.enabled)
+												{
+													ModConsole.DebugLog($"Found Working Collider for {item.name}");
+													if (!hasWorkingCollider)
+													{
+														hasWorkingCollider = true;
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+							else
+							{
+								hasWorkingCollider = false;
+							}
+							if (hasWorkingCollider)
+							{
+								control.EditMode = true;
+								control.isKinematic = false;
+								control.useGravity = useGravity;
+							}
+						}
+					}
+				}
+			}
 		}
 
 		public static void RemoveAllOrbitPlayer()
