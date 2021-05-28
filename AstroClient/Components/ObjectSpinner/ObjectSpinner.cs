@@ -106,13 +106,18 @@
 							HasRequiredSettings = true;
 						}
 					}
-
-					if (obj.TakeOwnershipIfNeccesary())
+					if (obj.isOwner())
 					{
 						SpinObject(obj, ForceX, 0, 0);
 						SpinObject(obj, 0, ForceY, 0);
 						SpinObject(obj, 0, 0, ForceZ);
 					}
+					else
+					{
+						obj.TakeOwnership();
+					}
+
+
 
 
 					LastTimeCheck = Time.time;

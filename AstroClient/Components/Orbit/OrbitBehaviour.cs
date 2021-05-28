@@ -140,7 +140,7 @@
 
 				if (!pickup.IsHeld)
 				{
-					if (obj.TakeOwnershipIfNeccesary())
+					if (obj.isOwner())
 					{
 						Timer += (Time.deltaTime * RotationSpeed) + TimerOffset;
 						Rotate();
@@ -151,6 +151,10 @@
 							transform.LookAt(CenterPoint);
 							UpdateTimer = Time.deltaTime * 2f;
 						}
+					}
+					else
+					{
+						obj.TakeOwnership();
 					}
 				}
 

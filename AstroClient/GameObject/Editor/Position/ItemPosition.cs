@@ -12,9 +12,7 @@
 			if (obj != null)
 			{
 				OnlineEditor.TakeObjectOwnership(obj);
-				var physic = obj.GetComponent<Rigidbody>();
 				obj.transform.position = GetPlayerBoneTransform(HumanBodyBones.RightHand).position;
-
 				obj.KillCustomComponents(true);
 				obj.KillForces(true);
 			}

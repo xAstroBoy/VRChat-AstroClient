@@ -79,17 +79,21 @@
 							control.RestoreOriginalBody();
 							HasRequiredSettings = false;
 						}
-						return;
 					}
-
-					if (!HasRequiredSettings)
+					else
 					{
-						if (!control.EditMode)
+
+						if (!HasRequiredSettings)
 						{
-							control.EditMode = true;
-						}
-						if (obj.TakeOwnershipIfNeccesary())
-						{
+							if (!control.EditMode)
+							{
+								control.EditMode = true;
+							}
+							if (!obj.isOwner())
+							{
+								obj.TakeOwnership();
+							}
+
 							if (control != null)
 							{
 								control.isKinematic = false;
@@ -97,21 +101,25 @@
 								control.UpdateAngularDrag(0);
 								control.UpdateDrag(0);
 							}
+							HasRequiredSettings = true;
 						}
-						HasRequiredSettings = true;
-					}
-					if (!pickup.IsHeld)
-					{
-
-						if (obj.TakeOwnershipIfNeccesary())
+						if (!pickup.IsHeld)
 						{
-							if (!ShouldBeAlwaysUp)
+
+							if (obj.isOwner())
 							{
-								ApplyRelativeForce(obj, 0, Random.Range(1f, 10f), 0);
+								if (!ShouldBeAlwaysUp)
+								{
+									ApplyRelativeForce(obj, 0, Random.Range(1f, 10f), 0);
+								}
+								else
+								{
+									ApplyForce(obj, 0, Random.Range(1f, 10f), 0);
+								}
 							}
 							else
 							{
-								ApplyForce(obj, 0, Random.Range(1f, 10f), 0);
+								obj.TakeOwnership();
 							}
 						}
 					}

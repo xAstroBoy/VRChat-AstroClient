@@ -111,45 +111,52 @@
 							control.RestoreOriginalBody();
 							HasRequiredSettings = false;
 						}
-						return;
 					}
-
-
-					if (Time.time - LastTimeCheck2 > 16.33f)
+					else
 					{
-						ApplyRequiredSettings();
-
-						if (!HasUpdatedDrag)
+						if (Time.time - LastTimeCheck > 0.9f)
 						{
-							HasUpdatedDrag = control.UpdateDrag(Drag);
-						}
+							ApplyRequiredSettings();
 
-						if (!HasUpdatedKinematic)
-						{
-							HasUpdatedKinematic = control.UpdateKinematic(false);
-						}
-
-						LastTimeCheck2 = Time.time;
-					}
-
-					if (Time.time - LastTimeCheck > 0.9f)
-					{
-						if (!pickup.IsHeld)
-						{
-							if (gameObject.TakeOwnershipIfNeccesary())
+							if (!HasUpdatedDrag)
 							{
-								gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-								ApplyForceX();
-								gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-								ApplyForceY();
-								gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-								ApplyForceZ();
-								gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+								HasUpdatedDrag = control.UpdateDrag(Drag);
+							}
+
+							if (!HasUpdatedKinematic)
+							{
+								HasUpdatedKinematic = control.UpdateKinematic(false);
+							}
+							LastTimeCheck = Time.time;
+						}
+						else
+						{
+							if (!pickup.IsHeld)
+							{
+								if (Time.time - LastTimeCheck2 > 0.4f)
+								{
+									if (gameObject.isOwner())
+									{
+										gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+										ApplyForceX();
+										gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+										ApplyForceY();
+										gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+										ApplyForceZ();
+										gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+									}
+									else
+									{
+										gameObject.TakeOwnership();
+									}
+								}
 							}
 						}
 
-						LastTimeCheck = Time.time;
 					}
+
+
+
 				}
 			}
 			catch
@@ -167,22 +174,23 @@
 				}
 				if (!pickup.IsHeld)
 				{
-					if (gameObject.TakeOwnershipIfNeccesary())
+					if (!gameObject.isOwner())
+					{
+						gameObject.TakeOwnership();
+					}
+
+					control.Constraints = RigidbodyConstraints.FreezeRotation;
+					control.useGravity = false;
+					control.UpdateDrag(Drag);
+					HasUpdatedDrag = false;
+					HasUpdatedKinematic = false;
+					if (control != null)
 					{
 						control.Constraints = RigidbodyConstraints.FreezeRotation;
+						control.isKinematic = false;
 						control.useGravity = false;
-						control.UpdateDrag(Drag);
-						gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-						HasUpdatedDrag = false;
-						HasUpdatedKinematic = false;
-						LastTimeCheck2 = Time.time;
-						if (control != null)
-						{
-							control.Constraints = RigidbodyConstraints.FreezeRotation;
-							control.isKinematic = false;
-							control.useGravity = false;
-						}
 					}
+
 					HasRequiredSettings = true;
 
 				}

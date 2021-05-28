@@ -108,15 +108,19 @@
 						CurrentTarget = targetuser;
 						foreach (var item in WorldUtils.Get_Pickups())
 						{
-							if (item != null)
+							try
 							{
-								ItemPosition.TeleportObject(item, targetuser, HumanBodyBones.RightHand, false);
+								if (item != null)
+								{
+									ItemPosition.TeleportObject(item, targetuser, HumanBodyBones.Head, false);
+								}
 							}
+							catch { }
 						}
 					}
 					else
 					{
-						ModConsole.Log("[Attacker] Cant find user : " + apiuser.displayName);
+						ModConsole.Log("[Teleport] Cant find user : " + apiuser.displayName);
 					}
 				}
 				else

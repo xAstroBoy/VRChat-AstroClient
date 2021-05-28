@@ -129,9 +129,13 @@
 						{
 							if (!pickup.IsHeld)
 							{
-								if (gameObject.TakeOwnershipIfNeccesary())
+								if (gameObject.isOwner())
 								{
 									gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+								}
+								else
+								{
+									gameObject.TakeOwnership();
 								}
 							}
 
@@ -157,13 +161,13 @@
 				{
 					control.EditMode = true;
 				}
-				if (gameObject.TakeOwnershipIfNeccesary())
+				if (!gameObject.isOwner())
 				{
-					control.Constraints = RigidbodyConstraints.FreezeRotation;
-					gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-					control.Constraints = RigidbodyConstraints.None;
-					HasRequiredSettings = true;
+					gameObject.TakeOwnership();
 				}
+				control.Constraints = RigidbodyConstraints.FreezeRotation;
+				control.Constraints = RigidbodyConstraints.None;
+				HasRequiredSettings = true;
 			}
 		}
 

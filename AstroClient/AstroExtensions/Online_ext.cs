@@ -4,7 +4,7 @@
 
 	public static class Online_ext
 	{
-		public static void ClaimOwnership(this GameObject obj)
+		public static void TakeOwnership(this GameObject obj)
 		{
 			OnlineEditor.TakeObjectOwnership(obj);
 		}
@@ -14,9 +14,9 @@
 			OnlineEditor.RemoveOwnerShip(obj);
 		}
 
-		public static bool TakeOwnershipIfNeccesary(this GameObject obj)
+		public static bool isOwner(this GameObject obj)
 		{
-			return OnlineEditor.TakeOwnershipIfNeccessary(obj);
+			return OnlineEditor.IsLocalPlayerOwner(obj);
 		}
 	}
 }
