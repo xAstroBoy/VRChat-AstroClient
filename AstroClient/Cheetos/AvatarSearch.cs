@@ -6,11 +6,11 @@
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using DayClientML2.Utility.MenuApi;
-	using System;
 	using System.Diagnostics;
-	using System.Windows.Forms;
 	using UnityEngine;
+	using UnityEngine.UI;
 	using VRC.Core;
+	using VRC.UI;
 
 	class AvatarSearch : GameEvents
 	{
@@ -20,6 +20,8 @@
 		private static VRCList list;
 
 		private static Stopwatch stopwatch;
+
+		private static PageAvatar currPageAvatar;
 
 		public override void VRChat_OnUiManagerInit()
 		{
@@ -33,6 +35,7 @@
 			}, 1.45f, 1f);
 
 			publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
+
 			list = new VRCList(publicAvatarList.transform.parent, "Astro Avatar Search Results", 0);
 			list.Text.supportRichText = true;
 		}
@@ -52,7 +55,11 @@
 			list.UiVRCList.expandedHeight *= 2f;
 			list.UiVRCList.extendRows = 4;
 			list.UiVRCList.startExpanded = true;
-			//list.RenderElement(foundAvatars); this crashes it for some reason
+			Utils.VRCUiManager.ShowScreen(currPageAvatar);
+			//MiscUtility.DelayFunction(1f, () =>
+			//{
+			//	list.RenderElement(foundAvatars);
+			//});
 			list.Text.text = $"<color=cyan>Astro Search</color> Found: <color=yellow>{foundAvatars.Count}</color> in {stopwatch.ElapsedMilliseconds}ms";
 			ModConsole.Log($"Avatar Search Completed: found {foundAvatars.Count} avatars in {stopwatch.ElapsedMilliseconds}ms");
 		}
