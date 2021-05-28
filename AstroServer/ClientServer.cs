@@ -164,10 +164,13 @@
 
 			if (packetData.NetworkEventID == PacketClientType.AVATAR_SEARCH)
 			{
-				foreach (var avatar in DB.Find<AvatarDataEntity>().ManyAsync(a => a.Name.ToLower().Contains(packetData.TextData.ToLower())).GetAwaiter().GetResult())
+				var found = DB.Find<AvatarDataEntity>().ManyAsync(a => a.Name.ToLower().Contains(packetData.TextData.ToLower())).GetAwaiter().GetResult();
+				foreach (var avatar in found)
 				{
 					client.Send(new PacketData(PacketServerType.AVATAR_RESULT, Newtonsoft.Json.JsonConvert.SerializeObject(avatar.GetAvatarData())));
 				}
+
+				client.Send(new PacketData(PacketServerType.AVATAR_RESULT_DONE, found.Count.ToString()));
 			}
 		}
 

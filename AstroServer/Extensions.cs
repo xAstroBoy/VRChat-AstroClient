@@ -18,7 +18,8 @@
 				Name = instance.Name,
 				ReleaseStatus = instance.ReleaseStatus,
 				ThumbnailURL = instance.ThumbnailURL,
-				Version = instance.Version
+				Version = instance.Version,
+				SupportedPlatforms = instance.SupportedPlatforms
 			};
 		}
 
@@ -35,7 +36,8 @@
 				Name = instance.Name,
 				ReleaseStatus = instance.ReleaseStatus,
 				ThumbnailURL = instance.ThumbnailURL,
-				Version = instance.Version
+				Version = instance.Version,
+				SupportedPlatforms = instance.SupportedPlatforms
 			};
 		}
 	}

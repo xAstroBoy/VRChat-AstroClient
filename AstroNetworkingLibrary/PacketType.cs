@@ -38,5 +38,6 @@
 
 		// Avatar Stuff
 		public const byte AVATAR_RESULT = 230;
+		public const byte AVATAR_RESULT_DONE = 231;
 	}
 }

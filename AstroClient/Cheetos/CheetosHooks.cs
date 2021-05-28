@@ -144,14 +144,14 @@
 						ThumbnailURL = __0.thumbnailImageUrl,
 						Name = __0.name,
 						ReleaseStatus = __0.releaseStatus,
-						Version = __0.version
+						Version = __0.version,
+						SupportedPlatforms = __0.supportedPlatforms.ToString()
 					};
 
 					if (avatarData != null)
 					{
 						var json = JsonConvert.SerializeObject(avatarData);
 						AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
-
 					}
 				}
 			}

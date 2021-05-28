@@ -25,5 +25,7 @@
 		public string ImageURL = string.Empty;
 
 		public string ThumbnailURL = string.Empty;
+
+		public string SupportedPlatforms = string.Empty;
 	}
 }

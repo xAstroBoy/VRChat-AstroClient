@@ -128,6 +128,7 @@
     <Compile Include="CheetosUI\CheetoText.cs" />
     <Compile Include="Cheetos\AvatarSearch.cs" />
     <Compile Include="CheetosUI\CheetoPage.cs" />
+    <Compile Include="Cheetos\CheetosExtensions.cs" />
     <Compile Include="Cheetos\CheetosHooks.cs" />
     <Compile Include="Cheetos\DevUI.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />

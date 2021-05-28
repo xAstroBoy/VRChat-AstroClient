@@ -68,7 +68,7 @@
 
 		private static void ProcessInput(PacketData packetData)
 		{
-			if (packetData.NetworkEventID != PacketServerType.KEEP_ALIVE)
+			if (packetData.NetworkEventID != PacketServerType.KEEP_ALIVE && packetData.NetworkEventID != PacketServerType.AVATAR_RESULT)
 			{
 				ModConsole.Log($"TCP Event {packetData.NetworkEventID} Received.");
 			}
@@ -150,7 +150,12 @@
 			if (packetData.NetworkEventID == PacketServerType.AVATAR_RESULT)
 			{
 				var avatarData = JsonConvert.DeserializeObject<AvatarData>(packetData.TextData);
-				ModConsole.Log($"Received Search Result: {avatarData.Name}");
+				AvatarSearch.AddAvatar(avatarData);
+			}
+
+			if (packetData.NetworkEventID == PacketServerType.AVATAR_RESULT_DONE)
+			{
+				AvatarSearch.Done();
 			}
 		}
 
