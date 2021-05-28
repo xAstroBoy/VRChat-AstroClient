@@ -47,22 +47,21 @@
 		{
 			try
 			{
-				obj = gameObject;
 
 				body = GetComponent<Rigidbody>();
 				if (body == null)
 				{
-					body = obj.AddComponent<Rigidbody>();
+					body = gameObject.AddComponent<Rigidbody>();
 				}
 				control = GetComponent<RigidBodyController>();
 				if (control == null)
 				{
-					control = obj.AddComponent<RigidBodyController>();
+					control = gameObject.AddComponent<RigidBodyController>();
 				}
 				pickup = GetComponent<PickupController>();
 				if (pickup == null)
 				{
-					pickup = obj.AddComponent<PickupController>();
+					pickup = gameObject.AddComponent<PickupController>();
 				}
 				HasRequiredSettings = false;
 
@@ -110,6 +109,11 @@
 						SetRequiredSettings();
 					}
 
+					if (Time.time - LastTimeCheck2 > 16.33f)
+					{
+						SetRequiredSettings();
+						LastTimeCheck2 = Time.time;
+					}
 					if (pickup.IsHeld)
 					{
 						if (HasRequiredSettings)
@@ -117,22 +121,25 @@
 							control.RestoreOriginalBody();
 							HasRequiredSettings = false;
 						}
-						return;
 					}
-
-					if (Time.time - LastTimeCheck2 > 16.33f)
+					else
 					{
-						SetRequiredSettings();
-						LastTimeCheck2 = Time.time;
-					}
 
-					if (!pickup.IsHeld)
-					{
-						if (obj.TakeOwnershipIfNeccesary())
+						if (Time.time - LastTimeCheck > 0.9f)
 						{
-							obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+							if (!pickup.IsHeld)
+							{
+								if (gameObject.TakeOwnershipIfNeccesary())
+								{
+									gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+								}
+							}
+
+							LastTimeCheck = Time.time;
 						}
+
 					}
+
 				}
 
 			}
@@ -150,10 +157,10 @@
 				{
 					control.EditMode = true;
 				}
-				if (obj.TakeOwnershipIfNeccesary())
+				if (gameObject.TakeOwnershipIfNeccesary())
 				{
 					control.Constraints = RigidbodyConstraints.FreezeRotation;
-					obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+					gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
 					control.Constraints = RigidbodyConstraints.None;
 					HasRequiredSettings = true;
 				}
@@ -165,9 +172,9 @@
 		private void OnDestroy()
 		{
 			control.RestoreOriginalBody();
-			GameObjectUtils.RestoreOriginalLocation(obj, false);
-			PlayerWatcherManager.RemoveSelf(obj);
-			OnlineEditor.RemoveOwnerShip(obj);
+			GameObjectUtils.RestoreOriginalLocation(gameObject, false);
+			PlayerWatcherManager.RemoveSelf(gameObject);
+			OnlineEditor.RemoveOwnerShip(gameObject);
 			PlayerWatcherManager.Deregister(this);
 		}
 
@@ -190,12 +197,12 @@
 		public PlayerWatcherManager Manager = null;
 		public float TimerOffset = 0f;
 		private float LastTimeCheck2 = 0;
+		private float LastTimeCheck = 0;
 		private bool HasRequiredSettings = false;
 		private bool ApplyOnce = true;
 
 		internal Player player;
 		internal bool IsLockDeactivated = false;
-		private GameObject obj = null;
 		private Rigidbody body = null;
 		private RigidBodyController control;
 		private PickupController pickup;

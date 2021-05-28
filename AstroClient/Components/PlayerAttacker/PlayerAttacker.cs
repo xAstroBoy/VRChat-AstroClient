@@ -46,24 +46,23 @@
 		{
 			try
 			{
-				obj = gameObject;
 
 				body = GetComponent<Rigidbody>();
 				if (body == null)
 				{
-					body = obj.AddComponent<Rigidbody>();
+					body = gameObject.AddComponent<Rigidbody>();
 				}
 				control = GetComponent<RigidBodyController>();
 				if (control == null)
 				{
-					control = obj.AddComponent<RigidBodyController>();
+					control = gameObject.AddComponent<RigidBodyController>();
 				}
 				HasRequiredSettings = false;
 
 				pickup = GetComponent<PickupController>();
 				if (pickup == null)
 				{
-					pickup = obj.AddComponent<PickupController>();
+					pickup = gameObject.AddComponent<PickupController>();
 				}
 
 				if (GetComponent<RigidBodyController>() == null)
@@ -130,19 +129,25 @@
 							HasUpdatedKinematic = control.UpdateKinematic(false);
 						}
 
+						LastTimeCheck2 = Time.time;
+					}
+
+					if (Time.time - LastTimeCheck > 0.9f)
+					{
 						if (!pickup.IsHeld)
 						{
-							if (obj.TakeOwnershipIfNeccesary())
+							if (gameObject.TakeOwnershipIfNeccesary())
 							{
-								obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+								gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
 								ApplyForceX();
-								obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+								gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
 								ApplyForceY();
-								obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+								gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
 								ApplyForceZ();
-								obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+								gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
 							}
 						}
+
 						LastTimeCheck = Time.time;
 					}
 				}
@@ -162,12 +167,12 @@
 				}
 				if (!pickup.IsHeld)
 				{
-					if (obj.TakeOwnershipIfNeccesary())
+					if (gameObject.TakeOwnershipIfNeccesary())
 					{
 						control.Constraints = RigidbodyConstraints.FreezeRotation;
 						control.useGravity = false;
 						control.UpdateDrag(Drag);
-						obj.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+						gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
 						HasUpdatedDrag = false;
 						HasUpdatedKinematic = false;
 						LastTimeCheck2 = Time.time;
@@ -188,9 +193,9 @@
 		private void OnDestroy()
 		{
 			control.RestoreOriginalBody();
-			GameObjectUtils.RestoreOriginalLocation(obj, false);
-			PlayerAttackerManager.RemoveSelf(obj);
-			OnlineEditor.RemoveOwnerShip(obj);
+			GameObjectUtils.RestoreOriginalLocation(gameObject, false);
+			PlayerAttackerManager.RemoveSelf(gameObject);
+			OnlineEditor.RemoveOwnerShip(gameObject);
 			PlayerAttackerManager.Deregister(this);
 		}
 
@@ -202,11 +207,11 @@
 				{
 					body.AddForce(Movementforce, 0, 0, ForceMode.Impulse);
 				}
-				else if (obj.transform.position.x >= PositionOfBone(player, HumanBodyBones.Head).position.x)
+				else if (gameObject.transform.position.x >= PositionOfBone(player, HumanBodyBones.Head).position.x)
 				{
 					body.AddForce(-Movementforce, 0, 0, ForceMode.Impulse);
 				}
-				else if (obj.transform.position.x == PositionOfBone(player, HumanBodyBones.Head).position.x)
+				else if (gameObject.transform.position.x == PositionOfBone(player, HumanBodyBones.Head).position.x)
 				{
 					return;
 				}
@@ -217,15 +222,15 @@
 		{
 			if (body != null && player.transform != null)
 			{
-				if (obj.transform.position.y <= PositionOfBone(player, HumanBodyBones.Head).position.y)
+				if (gameObject.transform.position.y <= PositionOfBone(player, HumanBodyBones.Head).position.y)
 				{
 					body.AddForce(0, Movementforce, 0, ForceMode.Impulse);
 				}
-				else if (obj.transform.position.y >= PositionOfBone(player, HumanBodyBones.Head).position.y)
+				else if (gameObject.transform.position.y >= PositionOfBone(player, HumanBodyBones.Head).position.y)
 				{
 					body.AddForce(0, -Movementforce, 0, ForceMode.Impulse);
 				}
-				else if (obj.transform.position.y == PositionOfBone(player, HumanBodyBones.Head).position.y)
+				else if (gameObject.transform.position.y == PositionOfBone(player, HumanBodyBones.Head).position.y)
 				{
 					return;
 				}
@@ -236,15 +241,15 @@
 		{
 			if (body != null && player.transform != null)
 			{
-				if (obj.transform.position.z <= PositionOfBone(player, HumanBodyBones.Head).position.z)
+				if (gameObject.transform.position.z <= PositionOfBone(player, HumanBodyBones.Head).position.z)
 				{
 					body.AddForce(0, 0, Movementforce, ForceMode.Impulse);
 				}
-				else if (obj.transform.position.z >= PositionOfBone(player, HumanBodyBones.Head).position.z)
+				else if (gameObject.transform.position.z >= PositionOfBone(player, HumanBodyBones.Head).position.z)
 				{
 					body.AddForce(0, 0, -Movementforce, ForceMode.Impulse);
 				}
-				else if (obj.transform.position.z == PositionOfBone(player, HumanBodyBones.Head).position.z)
+				else if (gameObject.transform.position.z == PositionOfBone(player, HumanBodyBones.Head).position.z)
 				{
 					return;
 				}
@@ -277,7 +282,6 @@
 
 		internal Player player;
 		internal bool IsLockDeactivated = false;
-		private GameObject obj = null;
 		private Rigidbody body = null;
 		private RigidBodyController control;
 		private PickupController pickup;

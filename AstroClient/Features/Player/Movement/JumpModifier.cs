@@ -94,9 +94,12 @@
 
 		public static void EmulatedJump()
 		{
-			Vector3 velocity = Networking.LocalPlayer.GetVelocity();
-			velocity.y = Networking.LocalPlayer.GetJumpImpulse();
-			Networking.LocalPlayer.SetVelocity(velocity);
+			if (Networking.LocalPlayer != null)
+			{
+				Vector3 velocity = Networking.LocalPlayer.GetVelocity();
+				velocity.y = Networking.LocalPlayer.GetJumpImpulse();
+				Networking.LocalPlayer.SetVelocity(velocity);
+			}
 		}
 
 
