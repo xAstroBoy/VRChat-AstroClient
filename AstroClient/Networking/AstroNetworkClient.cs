@@ -68,98 +68,88 @@
 
 		private static void ProcessInput(PacketData packetData)
 		{
-			if (packetData.NetworkEventID != PacketServerType.KEEP_ALIVE && packetData.NetworkEventID != PacketServerType.AVATAR_RESULT)
+			var networkEventID = packetData.NetworkEventID;
+
+			if (networkEventID != PacketServerType.KEEP_ALIVE && networkEventID != PacketServerType.AVATAR_RESULT)
 			{
 				ModConsole.Log($"TCP Event {packetData.NetworkEventID} Received.");
 			}
 
-			if (packetData.NetworkEventID == PacketServerType.EXIT)
+			switch (networkEventID)
 			{
+				case PacketServerType.EXIT:
+					Process.GetCurrentProcess().Close();
+					break;
+				case PacketServerType.CONNECTED:
+					Client.Send(new PacketData(PacketClientType.AUTH, KeyManager.AuthKey));
+					break;
+				case PacketServerType.DISCONNECT:
+					Client.Disconnect();
+					break;
+				case PacketServerType.AUTH_FAIlED:
+					ModConsole.Error("Failed to authenticate!");
+					Console.Beep();
+					Console.ReadLine();
+					Process.GetCurrentProcess().Close();
+					break;
+				case PacketServerType.AUTH_SUCCESS:
+					KeyManager.IsAuthed = true;
+					break;
+				case PacketServerType.ENABLE_DEVELOPER:
+					Bools.IsDeveloper = true;
+					ModConsole.Log("Developer Mode!");
+					break;
+				case PacketServerType.EXPLOIT_DATA:
+					break;
+				case PacketServerType.ADD_TAG:
+					{
+						var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
+						Player player;
+						if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(tagData.UserID))
+						{
+							ModConsole.Log("Wants to add tag to self");
+							player = LocalPlayerUtils.GetSelfPlayer();
+						}
+						else
+						{
+							ModConsole.Log("Wants to add tag to someone else");
+							player = WorldUtils.Get_Player_By_ID(tagData.UserID);
+						}
+						if (player != null)
+						{
+							SpawnTag(player, tagData.Text, Color.white, Color.cyan);
+						}
+						else
+						{
+							ModConsole.Log($"Player ({tagData.UserID}) returned null");
+						}
 
-				Process.GetCurrentProcess().Close();
-			}
-
-			if (packetData.NetworkEventID == PacketServerType.CONNECTED)
-			{
-				Client.Send(new PacketData(PacketClientType.AUTH, KeyManager.AuthKey));
-			}
-
-			if (packetData.NetworkEventID == PacketServerType.DISCONNECT)
-			{
-				Client.Disconnect();
-			}
-
-			if (packetData.NetworkEventID == PacketServerType.AUTH_FAIlED)
-			{
-				ModConsole.Error("Failed to authenticate!");
-				Console.Beep();
-				Console.ReadLine();
-				Process.GetCurrentProcess().Close();
-			}
-
-			if (packetData.NetworkEventID == PacketServerType.AUTH_SUCCESS)
-			{
-				KeyManager.IsAuthed = true;
-			}
-
-			if (packetData.NetworkEventID == PacketServerType.ENABLE_DEVELOPER)
-			{
-				Bools.IsDeveloper = true;
-				ModConsole.Log("Developer Mode!");
-			}
-
-			if (packetData.NetworkEventID == PacketServerType.EXPLOIT_DATA)
-			{
-			}
-
-			if (packetData.NetworkEventID == PacketServerType.ADD_TAG)
-			{
-				var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
-				Player player;
-				if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(tagData.UserID))
-				{
-					ModConsole.Log("Wants to add tag to self");
-					player = LocalPlayerUtils.GetSelfPlayer();
-				}
-				else
-				{
-					ModConsole.Log("Wants to add tag to someone else");
-					player = WorldUtils.Get_Player_By_ID(tagData.UserID);
-				}
-				if (player != null)
-				{
-					SpawnTag(player, tagData.Text, Color.white, Color.cyan);
-				}
-				else
-				{
-					ModConsole.Log($"Player ({tagData.UserID}) returned null");
-				}
-			}
-
-			if (packetData.NetworkEventID == PacketServerType.NOTIFY)
-			{
-				CheetosHelpers.SendHudNotification(packetData.TextData);
-			}
-
-			if (packetData.NetworkEventID == PacketServerType.DEBUG)
-			{
-				ModConsole.DebugLog(packetData.TextData);
-			}
-
-			if (packetData.NetworkEventID == PacketServerType.LOG)
-			{
-				ModConsole.Log(packetData.TextData);
-			}
-
-			if (packetData.NetworkEventID == PacketServerType.AVATAR_RESULT)
-			{
-				var avatarData = JsonConvert.DeserializeObject<AvatarData>(packetData.TextData);
-				AvatarSearch.AddAvatar(avatarData);
-			}
-
-			if (packetData.NetworkEventID == PacketServerType.AVATAR_RESULT_DONE)
-			{
-				AvatarSearch.IsSearching = false;
+						break;
+					}
+				case PacketServerType.NOTIFY:
+					CheetosHelpers.SendHudNotification(packetData.TextData);
+					break;
+				case PacketServerType.DEBUG:
+					ModConsole.DebugLog(packetData.TextData);
+					break;
+				case PacketServerType.LOG:
+					ModConsole.Log(packetData.TextData);
+					break;
+				case PacketServerType.AVATAR_RESULT:
+					{
+						var avatarData = JsonConvert.DeserializeObject<AvatarData>(packetData.TextData);
+						AvatarSearch.AddAvatar(avatarData);
+						break;
+					}
+				case PacketServerType.AVATAR_RESULT_DONE:
+					AvatarSearch.IsSearching = false;
+					break;
+				case PacketServerType.KEEP_ALIVE:
+					// No need to do anything here, we only catch this because it's a valid packet type.
+					break;
+				default:
+					ModConsole.Error($"Received an unknown packet type {networkEventID} from the server, perhaps you need to update?");
+					break;
 			}
 		}
 
