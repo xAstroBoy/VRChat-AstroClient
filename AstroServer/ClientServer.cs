@@ -106,12 +106,6 @@
 								client.Send(new PacketData(PacketServerType.ENABLE_DEVELOPER));
 							}
 
-							//ExploitData exploitData = new ExploitData()
-							//{
-							//	HasUdon = client.Data.HasUdon
-							//};
-
-							//client.Send(new PacketData(PacketServerType.EXPLOIT_DATA, Newtonsoft.Json.JsonConvert.SerializeObject(exploitData)));
 							AstroBot.SendLoggedInLog(client);
 						}
 						else
