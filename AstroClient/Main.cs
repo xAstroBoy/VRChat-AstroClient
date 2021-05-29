@@ -72,24 +72,38 @@
 
 			stopwatch.Stop();
 			ModConsole.Log($"Client Connected: Took {stopwatch.ElapsedMilliseconds}ms");
-			//try
-			//{
-			//	Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);
-			//}
-			//catch (Exception e)
-			//{
-			//	ModConsole.Error("Failed To generate Gradient, the Embeded file doesn't exist!");
-			//	ModConsole.ErrorExc(e);
-			//}
 
-			InitializeOverridables();
-			//Event_OnApplicationStart?.Invoke(this, new EventArgs());
+			if (!KeyManager.IsAuthed)
+			{
+				ModConsole.Error("Authentication Failed!");
+				// Eventually open the latest log for convenience.
+				UnityEngine.Application.Quit();
+				Environment.Exit(0);
+			}
+			else
+			{
+				//try
+				//{
+				//	Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);
+				//}
+				//catch (Exception e)
+				//{
+				//	ModConsole.Error("Failed To generate Gradient, the Embeded file doesn't exist!");
+				//	ModConsole.ErrorExc(e);
+				//}
+
+				InitializeOverridables();
+				//Event_OnApplicationStart?.Invoke(this, new EventArgs());
+			}
 		}
 
 
 		public override void OnApplicationQuit()
 		{
-			Event_OnApplicationQuit?.Invoke(this, new EventArgs());
+			if (KeyManager.IsAuthed == true)
+			{
+				Event_OnApplicationQuit?.Invoke(this, new EventArgs());
+			}
 		}
 
 
@@ -103,37 +117,43 @@
 
 		public static void InitializeOverridables()
 		{
-			foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+			if (KeyManager.IsAuthed == true)
 			{
-				var btype = type.BaseType;
-
-				if (btype != null && btype.Equals(typeof(GameEvents)))
+				foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
 				{
-					GameEvents component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as GameEvents;
-					component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
+					var btype = type.BaseType;
 
-					component.OnApplicationStart();
-					Overridable_List.Add(component);
+					if (btype != null && btype.Equals(typeof(GameEvents)))
+					{
+						GameEvents component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as GameEvents;
+						component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
+
+						component.OnApplicationStart();
+						Overridable_List.Add(component);
+					}
 				}
 			}
 		}
 
 		public override void OnSceneWasInitialized(int buildIndex, string sceneName)
 		{
-			switch (buildIndex)
+			if (KeyManager.IsAuthed == true)
 			{
-				case 0: // app
-				case 1: // ui
-					break;
+				switch (buildIndex)
+				{
+					case 0: // app
+					case 1: // ui
+						break;
 
-				default:
-					//Task.Run(() => {  });
-					Event_OnLevelLoaded?.Invoke(this, new EventArgs());
-					if (ToggleDebugInfo != null)
-					{
-						ToggleDebugInfo.SetToggleState(Bools.IsDebugMode);
-					}
-					break;
+					default:
+						//Task.Run(() => {  });
+						Event_OnLevelLoaded?.Invoke(this, new EventArgs());
+						if (ToggleDebugInfo != null)
+						{
+							ToggleDebugInfo.SetToggleState(Bools.IsDebugMode);
+						}
+						break;
+				}
 			}
 		}
 
@@ -143,12 +163,18 @@
 			//{
 			//Application.targetFrameRate = int.MaxValue;
 			//}
-			Event_OnUpdate?.Invoke(this, new EventArgs());
+			if (KeyManager.IsAuthed == true)
+			{
+				Event_OnUpdate?.Invoke(this, new EventArgs());
+			}
 		}
 
 		public override void OnLateUpdate()
 		{
-			Event_LateUpdate?.Invoke(this, new EventArgs());
+			if (KeyManager.IsAuthed == true)
+			{
+				Event_LateUpdate?.Invoke(this, new EventArgs());
+			}
 		}
 
 		public override void VRChat_OnUiManagerInit()
