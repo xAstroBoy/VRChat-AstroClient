@@ -101,7 +101,7 @@
 
 		public override void OnApplicationQuit()
 		{
-			if (KeyManager.IsAuthed == true)
+			if (KeyManager.IsAuthed)
 			{
 				Event_OnApplicationQuit?.Invoke(this, new EventArgs());
 			}
@@ -118,7 +118,7 @@
 
 		public static void InitializeOverridables()
 		{
-			if (KeyManager.IsAuthed == true)
+			if (KeyManager.IsAuthed)
 			{
 				foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
 				{
@@ -138,7 +138,7 @@
 
 		public override void OnSceneWasInitialized(int buildIndex, string sceneName)
 		{
-			if (KeyManager.IsAuthed == true)
+			if (KeyManager.IsAuthed)
 			{
 				switch (buildIndex)
 				{
@@ -164,7 +164,7 @@
 			//{
 			//Application.targetFrameRate = int.MaxValue;
 			//}
-			if (KeyManager.IsAuthed == true)
+			if (KeyManager.IsAuthed)
 			{
 				Event_OnUpdate?.Invoke(this, new EventArgs());
 			}
@@ -172,7 +172,7 @@
 
 		public override void OnLateUpdate()
 		{
-			if (KeyManager.IsAuthed == true)
+			if (KeyManager.IsAuthed)
 			{
 				Event_LateUpdate?.Invoke(this, new EventArgs());
 			}
@@ -180,7 +180,7 @@
 
 		public override void VRChat_OnUiManagerInit()
 		{
-			if (KeyManager.IsAuthed == true)
+			if (KeyManager.IsAuthed)
 			{
 				QuickMenuUtils.SetQuickMenuCollider(5, 5);
 				UserInteractMenuBtns.InitButtons(1, 3, true); //UserMenu Main Button
@@ -198,7 +198,7 @@
 
 		public static void InitMainsButtons(float x, float y, bool btnHalf)
 		{
-			if (KeyManager.IsAuthed == true)
+			if (KeyManager.IsAuthed)
 			{
 				//QMNestedButton AstroClient = new QMNestedButton("ShortcutMenu", x, y, "AstroClient Menu", "AstroClient Menu", null, null, null, null, btnHalf);  // Menu Main Button
 				QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, "AstroClient.Resources.planet.png");
