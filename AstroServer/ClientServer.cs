@@ -112,10 +112,12 @@
 							};
 							
 							client.Send(new PacketData(PacketServerType.EXPLOIT_DATA, Newtonsoft.Json.JsonConvert.SerializeObject(exploitData)));
+							client.Send(new PacketData(PacketServerType.CONNECTION_FINISHED));
 							AstroBot.SendLoggedInLog(client);
 						}
 						else
 						{
+							client.Send(new PacketData(PacketServerType.LOG, "Authentication Failed"));
 							client.Send(new PacketData(PacketServerType.AUTH_FAIlED));
 							client.Send(new PacketData(PacketServerType.EXIT));
 							client.Disconnect();
