@@ -63,7 +63,6 @@
 			Stopwatch stopwatch = new Stopwatch();
 			stopwatch.Start();
 
-			KeyManager.ReadKey();
 			AstroNetworkClient.Initialize();
 
 			while (!NetworkingManager.IsReady)
@@ -72,7 +71,7 @@
 #endif
 
 			stopwatch.Stop();
-			ModConsole.Log($"Client Authenticated: Took {stopwatch.ElapsedMilliseconds}ms");
+			ModConsole.Log($"Client Connected: Took {stopwatch.ElapsedMilliseconds}ms");
 			//try
 			//{
 			//	Console.WriteFigletWithGradient(FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);

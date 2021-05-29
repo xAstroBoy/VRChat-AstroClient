@@ -31,6 +31,7 @@
 
 		public static void Initialize()
 		{
+			KeyManager.ReadKey();
 			ModConsole.Log("Client Connecting..");
 			Connect();
 			SetPingTimer();

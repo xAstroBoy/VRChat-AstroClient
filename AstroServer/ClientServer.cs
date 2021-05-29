@@ -106,23 +106,22 @@
 								client.Send(new PacketData(PacketServerType.ENABLE_DEVELOPER));
 							}
 
-							ExploitData exploitData = new ExploitData()
-							{
-								HasUdon = client.Data.HasUdon
-							};
-							
-							client.Send(new PacketData(PacketServerType.EXPLOIT_DATA, Newtonsoft.Json.JsonConvert.SerializeObject(exploitData)));
-							client.Send(new PacketData(PacketServerType.CONNECTION_FINISHED));
+							//ExploitData exploitData = new ExploitData()
+							//{
+							//	HasUdon = client.Data.HasUdon
+							//};
+
+							//client.Send(new PacketData(PacketServerType.EXPLOIT_DATA, Newtonsoft.Json.JsonConvert.SerializeObject(exploitData)));
 							AstroBot.SendLoggedInLog(client);
 						}
 						else
 						{
 							client.Send(new PacketData(PacketServerType.LOG, "Authentication Failed"));
 							client.Send(new PacketData(PacketServerType.AUTH_FAIlED));
-							client.Send(new PacketData(PacketServerType.EXIT));
 							client.Disconnect();
 						}
 
+						client.Send(new PacketData(PacketServerType.CONNECTION_FINISHED));
 						break;
 					}
 
