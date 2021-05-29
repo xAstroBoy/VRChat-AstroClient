@@ -23,6 +23,7 @@
 		public const byte AUTH_FAIlED = 4;
 		public const byte ENABLE_DEVELOPER = 10;
 		public const byte EXPLOIT_DATA = 11;
+		public const byte CONNECTION_FINISHED = 20;
 		public const byte ADD_TAG = 30;
 		public const byte KEEP_ALIVE = 100;
 

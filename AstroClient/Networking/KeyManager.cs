@@ -9,6 +9,8 @@
 
 		public static bool IsAuthed = false;
 
+		public static bool IsReady = false;
+
 		public static void ReadKey()
 		{
 			string keyPath = $@"{Environment.CurrentDirectory}\AstroClient\key.txt";

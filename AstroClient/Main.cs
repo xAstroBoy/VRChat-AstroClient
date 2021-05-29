@@ -66,7 +66,7 @@
 			KeyManager.ReadKey();
 			AstroNetworkClient.Initialize();
 
-			while (!KeyManager.IsAuthed)
+			while (!NetworkingManager.IsReady)
 			{
 			}
 #endif

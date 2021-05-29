@@ -19,9 +19,16 @@
 		/// </summary>
 		public static bool Initialized { get; private set; }
 
+		/// <summary>
+		/// Returns true when everything is received from the server, IE (auth, account, exploit) data.
+		/// </summary>
+		public static bool IsReady;
+
 		public static string Name = string.Empty;
 
 		public static string UserID = string.Empty;
+
+		public static ExploitData Exploits;
 
 		public static void AvatarSearch(string query)
 		{

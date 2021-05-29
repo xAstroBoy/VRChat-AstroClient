@@ -100,6 +100,10 @@
 					ModConsole.Log("Developer Mode!");
 					break;
 				case PacketServerType.EXPLOIT_DATA:
+					NetworkingManager.Exploits = JsonConvert.DeserializeObject<ExploitData>(packetData.TextData);
+					break;
+				case PacketServerType.CONNECTION_FINISHED:
+					NetworkingManager.IsReady = true;
 					break;
 				case PacketServerType.ADD_TAG:
 					{
