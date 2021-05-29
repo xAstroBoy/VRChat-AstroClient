@@ -59,15 +59,15 @@
 		{
 			var players = WorldUtils.Get_Players();
 
-			if (!players.Contains(player))
+			foreach (var o in players)
 			{
-				CheetosHelpers.SendHudNotification($"Player: {player.DisplayName()} is invisible!");
-				return true;
+				if (o.UserID().Equals(player.UserID()))
+				{
+					return false;
+				}
 			}
-			else
-			{
-				return false;
-			}
+
+			return true;
 		}
 
 		private void RefreshButtons()
