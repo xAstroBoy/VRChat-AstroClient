@@ -76,101 +76,110 @@
 
 		private static void ProcessInputAsync(object sender, PacketData packetData)
 		{
-			if (packetData.NetworkEventID != PacketClientType.KEEP_ALIVE)
+			var networkEventID = packetData.NetworkEventID;
+
+			if (networkEventID != PacketClientType.KEEP_ALIVE)
 			{
 				Console.WriteLine($"TCP Event {packetData.NetworkEventID} Received.");
 			}
 
 			Client client = sender as Client;
 
-			if (packetData.NetworkEventID == PacketClientType.AUTH)
+			switch (networkEventID)
 			{
-				string key = packetData.TextData;
-				CheckExistingClientsWithKey(client);
-
-				if (KeyManager.IsKeyValid(key))
-				{
-					client.IsAuthed = true;
-					client.Key = key;
-					client.DiscordID = KeyManager.GetKeysDiscordOwner(key);
-
-					client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
-
-					if (KeyManager.IsDevKey(key))
+				case PacketClientType.AUTH:
 					{
-						client.IsDeveloper = true;
-						client.Send(new PacketData(PacketServerType.ENABLE_DEVELOPER));
+						string key = packetData.TextData;
+						CheckExistingClientsWithKey(client);
+
+						if (KeyManager.IsKeyValid(key))
+						{
+							client.IsAuthed = true;
+							client.Key = key;
+							client.DiscordID = KeyManager.GetKeysDiscordOwner(key);
+
+							client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
+
+							if (KeyManager.IsDevKey(key))
+							{
+								client.IsDeveloper = true;
+								client.Send(new PacketData(PacketServerType.ENABLE_DEVELOPER));
+							}
+
+							AstroBot.SendLoggedInLog(client);
+
+						}
+						else
+						{
+							client.Send(new PacketData(PacketServerType.AUTH_FAIlED));
+							client.Send(new PacketData(PacketServerType.EXIT));
+							client.Disconnect();
+						}
+
+						break;
 					}
 
-					AstroBot.SendLoggedInLog(client);
-
-				}
-				else
-				{
-					client.Send(new PacketData(PacketServerType.AUTH_FAIlED));
-					client.Send(new PacketData(PacketServerType.EXIT));
+				case PacketClientType.DISCONNECT:
 					client.Disconnect();
-				}
-			}
-
-			if (packetData.NetworkEventID == PacketClientType.DISCONNECT)
-			{
-				client.Disconnect();
-			}
-
-			if (packetData.NetworkEventID == PacketClientType.SEND_PLAYER_NAME)
-			{
-				client.Name = packetData.TextData;
-			}
-
-			if (packetData.NetworkEventID == PacketClientType.SEND_PLAYER_USERID)
-			{
-				client.UserID = packetData.TextData;
-			}
-
-			if (packetData.NetworkEventID == PacketClientType.WORLD_JOIN)
-			{
-				client.InstanceID = packetData.TextData;
-				InstanceManager.InstanceJoined(client);
-			}
-
-			if (packetData.NetworkEventID == PacketClientType.AVATAR_DATA)
-			{
-				var avatarData = Newtonsoft.Json.JsonConvert.DeserializeObject<AvatarData>(packetData.TextData);
-				bool save = false;
-
-				AvatarDataEntity avatarDataEntity = avatarData.GetAvatarDataEntity();
-				var found = DB.Find<AvatarDataEntity>().OneAsync(avatarData.AvatarID).GetAwaiter().GetResult();
-
-				if (found != null)
-				{
-					if (found.Version > avatarData.Version)
+					break;
+				case PacketClientType.SEND_PLAYER_NAME:
+					client.Name = packetData.TextData;
+					break;
+				case PacketClientType.SEND_PLAYER_USERID:
+					client.UserID = packetData.TextData;
+					break;
+				case PacketClientType.WORLD_JOIN:
+					client.InstanceID = packetData.TextData;
+					InstanceManager.InstanceJoined(client);
+					break;
+				case PacketClientType.AVATAR_DATA:
 					{
-						save = true;
+						var avatarData = Newtonsoft.Json.JsonConvert.DeserializeObject<AvatarData>(packetData.TextData);
+						bool save = false;
+
+						AvatarDataEntity avatarDataEntity = avatarData.GetAvatarDataEntity();
+						var found = DB.Find<AvatarDataEntity>().OneAsync(avatarData.AvatarID).GetAwaiter().GetResult();
+
+						if (found != null)
+						{
+							if (found.Version > avatarData.Version)
+							{
+								save = true;
+							}
+						}
+						else
+						{
+							save = true;
+						}
+
+						if (save)
+						{
+							avatarDataEntity.ID = avatarData.AvatarID;
+							avatarDataEntity.SaveAsync().GetAwaiter().GetResult();
+							Console.WriteLine($"Received New/Updated AvatarData: {avatarData.Name}, {avatarData.AvatarID}");
+						}
+
+						break;
 					}
-				}
-				else
-				{
-					save = true;
-				}
 
-				if (save)
-				{
-					avatarDataEntity.ID = avatarData.AvatarID;
-					avatarDataEntity.SaveAsync().GetAwaiter().GetResult();
-					Console.WriteLine($"Received New/Updated AvatarData: {avatarData.Name}, {avatarData.AvatarID}");
-				}
-			}
+				case PacketClientType.AVATAR_SEARCH:
+					{
+						var found = DB.Find<AvatarDataEntity>().ManyAsync(a => a.Name.ToLower().Contains(packetData.TextData.ToLower())).GetAwaiter().GetResult();
+						foreach (var avatar in found)
+						{
+							client.Send(new PacketData(PacketServerType.AVATAR_RESULT, Newtonsoft.Json.JsonConvert.SerializeObject(avatar.GetAvatarData())));
+						}
 
-			if (packetData.NetworkEventID == PacketClientType.AVATAR_SEARCH)
-			{
-				var found = DB.Find<AvatarDataEntity>().ManyAsync(a => a.Name.ToLower().Contains(packetData.TextData.ToLower())).GetAwaiter().GetResult();
-				foreach (var avatar in found)
-				{
-					client.Send(new PacketData(PacketServerType.AVATAR_RESULT, Newtonsoft.Json.JsonConvert.SerializeObject(avatar.GetAvatarData())));
-				}
+						client.Send(new PacketData(PacketServerType.AVATAR_RESULT_DONE, found.Count.ToString()));
+						break;
+					}
 
-				client.Send(new PacketData(PacketServerType.AVATAR_RESULT_DONE, found.Count.ToString()));
+				case PacketClientType.KEEP_ALIVE:
+					// No need to do anything here, we only catch this because it's a valid packet type.
+					break;
+				default:
+					Console.WriteLine($"Received unknown packet type {networkEventID}");
+					break;
 			}
 		}
 

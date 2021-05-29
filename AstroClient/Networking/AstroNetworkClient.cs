@@ -126,6 +126,7 @@
 
 						break;
 					}
+
 				case PacketServerType.NOTIFY:
 					CheetosHelpers.SendHudNotification(packetData.TextData);
 					break;
@@ -141,6 +142,7 @@
 						AvatarSearch.AddAvatar(avatarData);
 						break;
 					}
+
 				case PacketServerType.AVATAR_RESULT_DONE:
 					AvatarSearch.IsSearching = false;
 					break;
