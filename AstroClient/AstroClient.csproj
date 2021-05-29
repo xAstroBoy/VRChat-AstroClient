@@ -75,6 +75,9 @@
     <Compile Include="..\AstroNetworkingLibrary\Serializable\AvatarData.cs">
       <Link>Networking\Serializable\AvatarData.cs</Link>
     </Compile>
+    <Compile Include="..\AstroNetworkingLibrary\Serializable\ExploitData.cs">
+      <Link>Networking\Serializable\ExploitData.cs</Link>
+    </Compile>
     <Compile Include="..\AstroNetworkingLibrary\Serializable\PacketData.cs">
       <Link>Networking\Serializable\PacketData.cs</Link>
     </Compile>

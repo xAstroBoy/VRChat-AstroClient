@@ -40,17 +40,14 @@
 
 		public static void SendClientInfo()
 		{
-			if (Initialized)
+			if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
 			{
-				if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
+				if (Bools.IsDeveloper)
 				{
-					if (Bools.IsDeveloper)
-					{
-						ModConsole.DebugLog($"Sending Client Information: {Name}, {UserID}");
-					}
-					AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_USERID, LocalPlayerUtils.GetSelfPlayer().UserID()));
-					AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_NAME, LocalPlayerUtils.GetSelfPlayer().DisplayName()));
+					ModConsole.DebugLog($"Sending Client Information: {Name}, {UserID}");
 				}
+				AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_USERID, LocalPlayerUtils.GetSelfPlayer().UserID()));
+				AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_NAME, LocalPlayerUtils.GetSelfPlayer().DisplayName()));
 			}
 		}
 

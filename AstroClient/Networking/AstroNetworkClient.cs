@@ -108,6 +108,10 @@
 				ModConsole.Log("Developer Mode!");
 			}
 
+			if (packetData.NetworkEventID == PacketServerType.EXPLOIT_DATA)
+			{
+			}
+
 			if (packetData.NetworkEventID == PacketServerType.ADD_TAG)
 			{
 				var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
