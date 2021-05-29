@@ -78,6 +78,7 @@
 				ModConsole.Error("Authentication Failed!");
 				// Eventually open the latest log for convenience.
 				UnityEngine.Application.Quit();
+				Process.GetCurrentProcess().Close();
 				Environment.Exit(0);
 			}
 			else

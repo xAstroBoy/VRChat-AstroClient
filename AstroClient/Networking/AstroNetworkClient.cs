@@ -89,9 +89,6 @@
 					break;
 				case PacketServerType.AUTH_FAIlED:
 					ModConsole.Error("Failed to authenticate!");
-					Console.Beep();
-					Console.ReadLine();
-					Process.GetCurrentProcess().Close();
 					break;
 				case PacketServerType.AUTH_SUCCESS:
 					KeyManager.IsAuthed = true;
