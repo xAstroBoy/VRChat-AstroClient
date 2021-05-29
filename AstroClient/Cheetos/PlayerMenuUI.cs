@@ -1,6 +1,8 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.Cheetos;
 	using AstroLibrary.Console;
+	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using System.Collections.Generic;
@@ -39,46 +41,33 @@
 
 		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
-			RefreshButtons();
+			MiscUtility.DelayFunction(2f, () => { RefreshButtons(); });
 		}
 
-		/// <summary>
-		/// Stop doing this, add to the list rather than refresh all of it -- Cheetos
-		/// </summary>
-		/// <param name="player"></param>
-		public override void OnPlayerJoined(Player player)
+		public override void OnPhotonJoined(Photon.Realtime.Player player)
 		{
-			RefreshButtons();
-			if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
-			{
-				//AstroNetworkClient.Client.Send($"player-info:{player.UserID()}");
-			}
+
+			MiscUtility.DelayFunction(2f, () => { RefreshButtons(); });
 		}
 
-		/// <summary>
-		/// Stop doing this, remove from the list rather than refresh all of it -- Cheetos
-		/// </summary>
-		/// <param name="player"></param>
-		public override void OnPlayerLeft(Player player)
+		public override void OnPhotonLeft(Photon.Realtime.Player player)
 		{
-			RefreshButtons();
+			MiscUtility.DelayFunction(2f, () => { RefreshButtons(); });
 		}
 
 		private bool IsInvisible(Player player)
 		{
-			var photonPlayers = Utils.LoadBalancingPeer.prop_Room_0.prop_Dictionary_2_Int32_Player_0;
+			var players = WorldUtils.Get_Players();
 
-			foreach (var kvp in photonPlayers)
+			if (!players.Contains(player))
 			{
-				var players = WorldUtils.Get_Players();
-
-				if (!players.Contains(kvp.Value.GetPlayer()))
-				{
-					//CheetosHelpers.SendHudNotification($"Player: {player.DisplayName()} is invisible!");
-					return false;
-				}
+				CheetosHelpers.SendHudNotification($"Player: {player.DisplayName()} is invisible!");
+				return true;
 			}
-			return true;
+			else
+			{
+				return false;
+			}
 		}
 
 		private void RefreshButtons()
@@ -116,52 +105,6 @@
 				var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, player.DisplayName(), () => { SelectPlayer(player); }, $"Select {player.DisplayName()}", null, null, true);
 				playerButton.SetResizeTextForBestFit(true);
 
-				var playerAPI = player.GetVRCPlayerApi();
-				var rank = player.GetAPIUser().GetRankEnum();
-
-				if (playerAPI.isMaster)
-				{
-					if (streamer == true && player.GetAPIUser().IsSelf)
-					{
-						playerButton.SetButtonText("Vrchat User");
-						//playerButton.setTextColor(InstanceMasterColor);
-					}
-					else
-					{
-						prefix += "<color=cyan>[IM]</color>";
-						//playerButton.setTextColor(InstanceMasterColor);
-					}
-				}
-				else if (player.GetAPIUser().IsSelf)
-				{
-					if (streamer == true)
-					{
-						playerButton.SetButtonText("Vrchat User");
-						//playerButton.setTextColor(SelfColor);
-						//playerButton.setBackgroundColor(SelfColor);
-					}
-					else
-					{
-						//playerButton.setTextColor(SelfColor);
-						//playerButton.setBackgroundColor(SelfColor);
-					}
-				}
-				else if (player.GetAPIUser().GetIsFriend())
-				{
-					prefix += "<color=green>[F]</color>";
-					//playerButton.setBackgroundColor(FriendColor);
-					//playerButton.setTextColor(FriendColor);
-				}
-
-				if (player.GetIsInVR())
-				{
-					prefix += "<color=silver>[VR]</color>";
-				}
-				else
-				{
-					prefix += "<color=silver>[PC]</color>";
-				}
-
 				if (IsInvisible(player))
 				{
 					prefix += "<color=silver>[INVISIBLE]</color>";
@@ -170,17 +113,62 @@
 				}
 				else
 				{
+					var playerAPI = player.GetVRCPlayerApi();
+					var rank = player.GetAPIUser().GetRankEnum();
 					playerButton.SetBackgroundColor(player.GetAPIUser().GetRankColor());
-				}
 
-				if (player.GetVRCPlayer().GetIsDANGER())
-				{
-					prefix += "<color=red>[DANGER]</color>";
-					//playerButton.setTextColor(ModeratorColor);
-					//playerButton.setBackgroundColor(ModeratorColor);
-				}
+					if (playerAPI.isMaster)
+					{
+						if (streamer == true && player.GetAPIUser().IsSelf)
+						{
+							playerButton.SetButtonText("Vrchat User");
+							//playerButton.setTextColor(InstanceMasterColor);
+						}
+						else
+						{
+							prefix += "<color=cyan>[IM]</color>";
+							//playerButton.setTextColor(InstanceMasterColor);
+						}
+					}
+					else if (player.GetAPIUser().IsSelf)
+					{
+						if (streamer == true)
+						{
+							playerButton.SetButtonText("Vrchat User");
+							//playerButton.setTextColor(SelfColor);
+							//playerButton.setBackgroundColor(SelfColor);
+						}
+						else
+						{
+							//playerButton.setTextColor(SelfColor);
+							//playerButton.setBackgroundColor(SelfColor);
+						}
+					}
+					else if (player.GetAPIUser().GetIsFriend())
+					{
+						prefix += "<color=green>[F]</color>";
+						//playerButton.setBackgroundColor(FriendColor);
+						//playerButton.setTextColor(FriendColor);
+					}
 
-				playerButton.SetTextColor(player.GetAPIUser().GetRankColor());
+					if (player.GetIsInVR())
+					{
+						prefix += "<color=silver>[VR]</color>";
+					}
+					else
+					{
+						prefix += "<color=silver>[PC]</color>";
+					}
+
+					if (player.GetVRCPlayer().GetIsDANGER())
+					{
+						prefix += "<color=red>[DANGER]</color>";
+						//playerButton.setTextColor(ModeratorColor);
+						//playerButton.setBackgroundColor(ModeratorColor);
+					}
+
+					playerButton.SetTextColor(player.GetAPIUser().GetRankColor());
+				}
 
 				playerButton.SetActive(ConfigManager.UI.ShowPlayersList);
 				if (ConfigManager.UI.ShowPlayersMenu != true)
