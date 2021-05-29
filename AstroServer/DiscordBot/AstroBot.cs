@@ -13,6 +13,8 @@
 
 		internal static ulong LoginChannelID = 832405505774190682;
 
+		internal static ulong LoginFailedChannelID = 848304027677753344;
+
 		internal static ulong KeyshareChannelID = 834125559578624050;
 
 		internal static ulong CommandChannelID = 832405559378051112;
@@ -60,6 +62,11 @@
 		{
 			var channel = Client.GetChannel(LoginChannelID) as ISocketMessageChannel;
 			await channel.SendMessageAsync(null, false, CustomEmbed.GetLoggedInEmbed(client));
+		}
+		public static async Task SendLoggedInFailedLog(Client client, string reason)
+		{
+			var channel = Client.GetChannel(LoginFailedChannelID) as ISocketMessageChannel;
+			await channel.SendMessageAsync(null, false, CustomEmbed.GetLoggedInFailedEmbed(client, reason));
 		}
 
 		public static async Task SendLogMessageAsync(string msg)

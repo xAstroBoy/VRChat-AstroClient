@@ -89,6 +89,8 @@
 					break;
 				case PacketServerType.AUTH_FAIlED:
 					ModConsole.Error("Failed to authenticate!");
+					Client.ShouldReconnect = false;
+					KeyManager.IsAuthed = false;
 					break;
 				case PacketServerType.AUTH_SUCCESS:
 					KeyManager.IsAuthed = true;

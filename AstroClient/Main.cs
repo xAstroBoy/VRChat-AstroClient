@@ -76,7 +76,7 @@
 			if (!KeyManager.IsAuthed)
 			{
 				ModConsole.Error("Authentication Failed!");
-				// Eventually open the latest log for convenience.
+				ModConsole.OpenLatestLogFile();
 				UnityEngine.Application.Quit();
 				Process.GetCurrentProcess().Close();
 				Environment.Exit(0);
@@ -147,7 +147,6 @@
 						break;
 
 					default:
-						//Task.Run(() => {  });
 						Event_OnLevelLoaded?.Invoke(this, new EventArgs());
 						if (ToggleDebugInfo != null)
 						{

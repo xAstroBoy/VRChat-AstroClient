@@ -1,6 +1,7 @@
 ﻿namespace AstroLibrary.Console
 {
 	using System;
+	using System.Diagnostics;
 	using System.Drawing;
 	using System.IO;
 	using System.Runtime.CompilerServices;
@@ -16,6 +17,21 @@
 		private static bool HasRenamedOldLogFile = false;
 
 		private static bool HasInitiated = false;
+
+		/// <summary>
+		/// Opens the latest log file in Notepad
+		/// </summary>
+		public static void OpenLatestLogFile()
+		{
+			string path = Path.Combine(LogsPath, $"{ModName}_Latest.log");
+			try
+			{
+				Process.Start(path);
+			} catch (Exception e)
+			{
+				Error($"Failed to open Log: {e.Message} - {path}");
+			}
+		}
 
 		private static string LogsPath
 		{

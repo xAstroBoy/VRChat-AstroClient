@@ -259,6 +259,28 @@
 			return embedBuilder.Build();
 		}
 
+		internal static Embed GetLoggedInFailedEmbed(Client client, string reason)
+		{
+			var color = Color.Orange;
+
+			EmbedBuilder embedBuilder = new EmbedBuilder()
+			{
+				Title = "Failed Login",
+				Color = color,
+			};
+
+			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
+
+			embedBuilder.AddField("Reason", reason);
+			embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
+			embedBuilder.AddField("Time", $"{DateTime.Now.ToLongDateString()}, {DateTime.Now:HH:mm:ss tt}");
+			embedBuilder.AddField("Key", client.Key);
+
+			embedBuilder.Footer = embedFooterBuilder;
+
+			return embedBuilder.Build();
+		}
+
 		public static Embed GetKeyEmbed(string authKey)
 		{
 			var color = Color.Blue;

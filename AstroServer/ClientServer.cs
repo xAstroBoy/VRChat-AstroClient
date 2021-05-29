@@ -89,30 +89,29 @@
 			{
 				case PacketClientType.AUTH:
 					{
-						string key = packetData.TextData;
-						CheckExistingClientsWithKey(client);
+						client.Key = packetData.TextData;
 
-						if (KeyManager.IsKeyValid(key))
+						if (KeyManager.IsKeyValid(client.Key))
 						{
+							CheckExistingClientsWithKey(client);
 							client.IsAuthed = true;
-							client.Key = key;
-							client.DiscordID = KeyManager.GetKeysDiscordOwner(key);
+							client.DiscordID = KeyManager.GetKeysDiscordOwner(client.Key);
 
 							client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
 
-							if (KeyManager.IsDevKey(key))
+							if (KeyManager.IsDevKey(client.Key))
 							{
 								client.IsDeveloper = true;
 								client.Send(new PacketData(PacketServerType.ENABLE_DEVELOPER));
 							}
 
+							client.Send(new PacketData(PacketServerType.CONNECTION_FINISHED));
 							AstroBot.SendLoggedInLog(client);
 						}
 						else
 						{
-							client.Send(new PacketData(PacketServerType.LOG, "Authentication Failed"));
 							client.Send(new PacketData(PacketServerType.AUTH_FAIlED));
-							client.Disconnect();
+							AstroBot.SendLoggedInFailedLog(client, "Invalid Key");
 						}
 
 						client.Send(new PacketData(PacketServerType.CONNECTION_FINISHED));
