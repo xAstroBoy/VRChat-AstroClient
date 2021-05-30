@@ -9,15 +9,15 @@
 	{
 		public static DiscordSocketClient Client { get; set; }
 
-		internal static ulong LogChannelID = 834125750365192210;
+		internal const ulong LogChannelID = 834125750365192210;
 
-		internal static ulong LoginChannelID = 832405505774190682;
+		internal const ulong LoginChannelID = 832405505774190682;
 
-		internal static ulong LoginFailedChannelID = 848304027677753344;
+		internal const ulong LoginFailedChannelID = 848304027677753344;
 
-		internal static ulong KeyshareChannelID = 834125559578624050;
+		internal const ulong KeyshareChannelID = 834125559578624050;
 
-		internal static ulong CommandChannelID = 832405559378051112;
+		internal const ulong CommandChannelID = 832405559378051112;
 
 		internal static ulong[] DeveloperIDs = new ulong[] { 717788323262890045, 257862389687386113, 587423650718679068 };
 

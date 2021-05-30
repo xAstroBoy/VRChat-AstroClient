@@ -43,21 +43,22 @@
 		{
 			try
 			{
-				if (mutex.WaitOne())
+				mutex.WaitOne();
+				if (queue.Count > 0)
 				{
-					if (queue.Any())
-					{
-						queue[0]();
-						queue.RemoveAt(0);
-						ModConsole.Log($"MainThreadRunner: Action Ran");
-					}
-
-					mutex.ReleaseMutex();
+					queue[0]();
+					queue.RemoveAt(0);
+					ModConsole.Log($"MainThreadRunner: Action Ran");
 				}
 			}
 			catch (Exception e)
 			{
 				ModConsole.Error(e.Message);
+				ModConsole.Exception(e);
+			}
+			finally
+			{
+				mutex.ReleaseMutex();
 			}
 		}
 
