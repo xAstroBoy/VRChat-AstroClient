@@ -146,7 +146,7 @@
 
 						if (found != null)
 						{
-							if (found.Version > avatarData.Version || found.SupportedPlatforms != avatarData.SupportedPlatforms)
+							if (found.Version > avatarData.Version || !found.SupportedPlatforms.Equals(avatarData.SupportedPlatforms))
 							{
 								save = true;
 							}
