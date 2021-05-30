@@ -4,8 +4,6 @@
 	using MongoDB.Driver;
 	using MongoDB.Entities;
 	using System;
-	using System.Drawing;
-	using System.IO;
 	using System.Linq;
 	using System.Net;
 	using System.Timers;
@@ -24,14 +22,17 @@
 
 		private static void OnTimerElapsed(object sender, ElapsedEventArgs e)
 		{
-			var toCheck = DB.Find<AvatarDataEntity>().ManyAsync(f => !f.CheckedRecently).Result.Take(10);
+			var rand = new Random();
+			CheckTimer.Interval = rand.Next(30000, 240000);
+
+			var toCheck = DB.Find<AvatarDataEntity>().Limit(10).ManyAsync(f => !f.CheckedRecently).Result;
 
 			if (toCheck.Any())
 			{
 				Console.WriteLine($"Avatar check in progress! Checking {toCheck.Count()} avatars..");
 				foreach (var found in toCheck)
 				{
-					//CheckAvatar(found);
+					CheckAvatar(found);
 				}
 				Console.WriteLine("Avatar check done!");
 			}
@@ -58,7 +59,7 @@
 			else
 			{
 				avatarDataEntity.CheckedRecently = true;
-				avatarDataEntity.SaveAsync().GetAwaiter().GetResult();
+				_ = avatarDataEntity.SaveAsync();
 			}
 		}
 
