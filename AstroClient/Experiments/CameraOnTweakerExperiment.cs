@@ -54,7 +54,20 @@
 					ModConsole.DebugLog("Reset Camera parent to avoid Borkage.");
 					UserCamera.parent = userCameraParent;
 				}
-				
+				if (ViewFinder != null)
+				{
+					RigidBodyController controller = ViewFinder.gameObject.GetComponent<RigidBodyController>();
+					if (controller != null)
+					{
+						if (controller.EditMode)
+						{
+							if (controller.isKinematic)
+							{
+								controller.isKinematic = false;
+							}
+						}
+					}
+				}
 			}
 		}
 
