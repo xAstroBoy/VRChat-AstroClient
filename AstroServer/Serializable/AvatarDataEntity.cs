@@ -28,5 +28,7 @@
 		public string ThumbnailURL = string.Empty;
 
 		public string SupportedPlatforms = string.Empty;
+
+		public bool CheckedRecently;
 	}
 }
