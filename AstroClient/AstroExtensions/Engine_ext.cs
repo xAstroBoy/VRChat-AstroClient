@@ -30,6 +30,24 @@
 		}
 
 
+		public static bool Is_DontDestroyOnLoad(this GameObject obj)
+		{
+			return obj.scene.name.Equals("DontDestroyOnLoad");
+
+		}
+
+		public static bool Is_DontDestroyOnLoad(this Transform obj)
+		{
+			return obj.gameObject.Is_DontDestroyOnLoad();
+		}
+
+
+		public static void Set_DontDestroyOnLoad(this Object obj)
+		{
+			UnityEngine.Object.DontDestroyOnLoad(obj);
+
+		}
+
 
 		public static void CopyPath(this GameObject obj)
 		{

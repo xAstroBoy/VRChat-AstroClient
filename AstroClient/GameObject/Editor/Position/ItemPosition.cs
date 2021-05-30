@@ -18,6 +18,19 @@
 			}
 		}
 
+
+		public static void TeleportObject(GameObject obj, HumanBodyBones SelfBones)
+		{
+			if (obj != null)
+			{
+				OnlineEditor.TakeObjectOwnership(obj);
+				obj.transform.position = GetPlayerBoneTransform(SelfBones).position;
+				obj.KillCustomComponents(true);
+				obj.KillForces(true);
+			}
+		}
+
+
 		public static void TeleportObject(GameObject obj, Vector3 NewPos, bool SkipKillScripts = false)
 		{
 			if (obj != null)

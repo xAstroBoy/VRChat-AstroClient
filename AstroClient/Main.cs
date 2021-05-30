@@ -26,6 +26,7 @@
 	using VRC.UI;
 	using VRC.Core;
 	using Il2CppSystem.Diagnostics;
+	using AstroClient.Experiments;
 	using AstroClient.Cheetos;
 
 	#endregion Imports
@@ -224,7 +225,7 @@
 				ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
 
 				Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
-				//CameraOnTweakerExperiment.InitQMMenu(AstroClient, 3, 0.5f, true);
+				CameraOnTweakerExperiment.InitQMMenu(AstroClient, 3, 0.5f, true);
 				SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
 			}
 		}
