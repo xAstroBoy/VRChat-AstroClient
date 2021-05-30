@@ -10,7 +10,6 @@
 	using System.Diagnostics;
 	using UnityEngine;
 	using VRC.Core;
-	using VRC.UI;
 
 	class AvatarSearch : GameEvents
 	{
@@ -20,8 +19,6 @@
 		private static VRCList list;
 
 		private static Stopwatch stopwatch;
-
-		private static PageAvatar currPageAvatar;
 
 		public static bool IsSearching = false;
 
@@ -64,7 +61,6 @@
 
 			for (; ; )
 			{
-				//yield return new WaitForSeconds(0.01f);
 				yield return new WaitForEndOfFrame();
 				if (!IsSearching)
 				{
@@ -91,7 +87,6 @@
 		{
 			var apiAvatar = avatarData.ToApiAvatar();
 			foundAvatars.Add(apiAvatar);
-
 		}
 	}
 }

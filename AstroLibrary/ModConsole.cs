@@ -27,38 +27,24 @@
 			try
 			{
 				Process.Start(path);
-			} catch (Exception e)
+			}
+			catch (Exception e)
 			{
 				Error($"Failed to open Log: {e.Message} - {path}");
 			}
 		}
 
-		private static string LogsPath
-		{
-			get
-			{
-				return Path.Combine(Environment.CurrentDirectory, $"External Logs\\{ModName}");
-			}
-		}
+		private static string LogsPath => Path.Combine(Environment.CurrentDirectory, $"External Logs\\{ModName}");
 
-		private static string LatestLogFile
-		{
-			get
-			{
-				return Path.Combine(LogsPath, $"{ModName}_Latest.log");
-			}
-		}
+		private static string LatestLogFile => Path.Combine(LogsPath, $"{ModName}_Latest.log");
 
 		private static int LogInt = 0;
 
-		private static int GetCurrentInt()
-		{
-			return LogInt++;
-		}
+		private static int CurrentInt => LogInt++;
 
 		public static string GetNewFileName()
 		{
-			var result = GetCurrentInt();
+			var result = CurrentInt;
 			var newfilename = $"{ModName}-Log-{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year} ({result}).log";
 			return !File.Exists(Path.Combine(LogsPath, newfilename)) ? Path.Combine(LogsPath, newfilename) : GetNewFileName();
 		}
@@ -419,6 +405,6 @@
 			Task.Run(() => { Write($"[{time}] "); });
 		}
 
-		private static System.Threading.Mutex ConsoleMutex = new System.Threading.Mutex();
+		private static readonly System.Threading.Mutex ConsoleMutex = new System.Threading.Mutex();
 	}
 }

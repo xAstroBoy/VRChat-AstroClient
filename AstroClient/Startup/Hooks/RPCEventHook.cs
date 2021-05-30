@@ -95,7 +95,7 @@
 			{
 				sender = "null";
 			}
-			if(parameter.Equals("TeleportRPC"))
+			if (parameter.Equals("TeleportRPC"))
 			{
 				//TODO: FIGURE AND FIX THE LOGGING ON TELEPORTRPC
 				return true;

@@ -127,7 +127,6 @@
 						{
 							ModConsole.Log($"Player ({tagData.UserID}) returned null");
 						}
-
 						break;
 					}
 

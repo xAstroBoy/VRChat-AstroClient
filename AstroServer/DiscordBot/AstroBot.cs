@@ -27,7 +27,6 @@
 
 			Client.Connected += OnConntected;
 			Client.Ready += OnReady;
-			//Client.MessageReceived += OnMessage;
 		}
 
 		public async Task Start()

@@ -32,6 +32,11 @@ csharp_style_implicit_object_creation_when_type_is_apparent = false
 dotnet_diagnostic.IDE0052.severity = none
 csharp_indent_braces=false
 csharp_using_directive_placement=inside_namespace:suggestion
+csharp_space_after_cast=false
+csharp_style_unused_value_expression_statement_preference=discard_variable:silent
+dotnet_diagnostic.CA1309.severity=silent
+dotnet_diagnostic.CA1805.severity=suggestion
 
 [*.{cs,vb}]
 indent_style=tab
+dotnet_diagnostic.CA2215.severity=suggestion

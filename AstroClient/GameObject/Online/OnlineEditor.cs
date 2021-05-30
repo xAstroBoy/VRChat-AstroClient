@@ -62,7 +62,7 @@
 				if (_LocalPlayerAPI == null)
 				{
 					var api = Player.prop_Player_0.field_Private_VRCPlayerApi_0;
-					if(api != null)
+					if (api != null)
 					{
 						return _LocalPlayerAPI = api;
 					}

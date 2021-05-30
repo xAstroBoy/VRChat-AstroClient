@@ -54,7 +54,7 @@
 
 
 
-			public static CachedUdonEvent FindUdonEvent(GameObject obj, string subaction)
+		public static CachedUdonEvent FindUdonEvent(GameObject obj, string subaction)
 		{
 			var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
 

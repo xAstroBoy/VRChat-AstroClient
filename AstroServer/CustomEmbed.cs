@@ -76,16 +76,10 @@
 				ThumbnailUrl = discordUser.GetAvatarUrl()
 			};
 
-			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
-
-			if (KeyManager.IsDevKey(origin.Key))
+			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
 			{
-				embedFooterBuilder.Text = "Developer";
-			}
-			else
-			{
-				embedFooterBuilder.Text = "Client";
-			}
+				Text = KeyManager.IsDevKey(origin.Key) ? "Developer" : "Client"
+			};
 
 			embedBuilder.AddField("Kicked Name", origin.Name);
 			embedBuilder.AddField("Kicked UserID", origin.Name);
@@ -119,16 +113,10 @@
 				ThumbnailUrl = discordUser.GetAvatarUrl()
 			};
 
-			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
-
-			if (KeyManager.IsDevKey(account.Key))
+			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
 			{
-				embedFooterBuilder.Text = "Developer";
-			}
-			else
-			{
-				embedFooterBuilder.Text = "Client";
-			}
+				Text = KeyManager.IsDevKey(account.Key) ? "Developer" : "Client"
+			};
 
 			embedBuilder.AddField("Name", account.Name);
 			embedBuilder.AddField("Discord", account.DiscordID);
@@ -192,16 +180,10 @@
 				ThumbnailUrl = discordUser.GetAvatarUrl()
 			};
 
-			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
-
-			if (KeyManager.IsDevKey(client.Key))
+			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
 			{
-				embedFooterBuilder.Text = "Developer";
-			}
-			else
-			{
-				embedFooterBuilder.Text = "Client";
-			}
+				Text = KeyManager.IsDevKey(client.Key) ? "Developer" : "Client"
+			};
 
 			embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
 
@@ -239,16 +221,10 @@
 				ThumbnailUrl = discordUser.GetAvatarUrl()
 			};
 
-			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
-
-			if (KeyManager.IsDevKey(client.Key))
+			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
 			{
-				embedFooterBuilder.Text = "Developer";
-			}
-			else
-			{
-				embedFooterBuilder.Text = "Client";
-			}
+				Text = KeyManager.IsDevKey(client.Key) ? "Developer" : "Client"
+			};
 
 			embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
 			embedBuilder.AddField("Time", $"{DateTime.Now.ToLongDateString()}, {DateTime.Now:HH:mm:ss tt}");
@@ -300,16 +276,10 @@
 				ThumbnailUrl = discordUser.GetAvatarUrl()
 			};
 
-			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
-
-			if (KeyManager.IsDevKey(authKey))
+			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
 			{
-				embedFooterBuilder.Text = "Developer";
-			}
-			else
-			{
-				embedFooterBuilder.Text = "Client";
-			}
+				Text = KeyManager.IsDevKey(authKey) ? "Developer" : "Client"
+			};
 
 			embedBuilder.AddField("Key", authKey);
 
