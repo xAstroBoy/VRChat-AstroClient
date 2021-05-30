@@ -166,23 +166,20 @@
 		// You gotta delay it, let's delay it to some seconds
 		private static void SpawnTag(Player player, string text, Color TextColor, Color Tagcolor)
 		{
-			MiscUtility.DelayFunction(1f, () =>
+			if (player != null)
 			{
-				if (player != null)
+				SingleTag tag = SingleTagsUtils.AddSingleTag(player);
+				if (tag != null)
 				{
-					SingleTag tag = SingleTagsUtils.AddSingleTag(player);
-					if (tag != null)
-					{
-						tag.Label_Text = text;
-						tag.Label_TextColor = TextColor;
-						tag.Tag_Color = Tagcolor;
-					}
+					tag.Label_Text = text;
+					tag.Label_TextColor = TextColor;
+					tag.Tag_Color = Tagcolor;
 				}
-				else
-				{
-					ModConsole.Error("Player for setting tag from server was null!");
-				}
-			});
+			}
+			else
+			{
+				ModConsole.Error("Player for setting tag from server was null!");
+			}
 		}
 
 		private static void OnConnected(object sender, EventArgs e)

@@ -4,18 +4,23 @@
 	using Harmony;
 	using System;
 	using System.Collections.Generic;
-	using System.Drawing;
+	using System.Threading;
 	using static AstroClient.variables.InstanceBuilder;
 
 	public class MainThreadRunner : GameEventsBehaviour
 	{
 		public static MainThreadRunner Instance;
 
-		private object queueLock = new object();
+		private static Mutex mutex = new Mutex();
 		private List<Action> queue = new List<Action>();
 
 		public MainThreadRunner(IntPtr ptr) : base(ptr)
 		{
+		}
+
+		~MainThreadRunner()
+		{
+			mutex.Dispose();
 		}
 
 		public static void MakeInstance()
@@ -35,28 +40,23 @@
 
 		public void Update()
 		{
-			lock (queueLock)
+			if (queue.Count > 0)
 			{
-				queue.Do(a => a.Invoke());
-			}
-
-			lock (queueLock)
-			{
-				queue.Clear();
+				mutex.WaitOne();
+				queue[0]();
+				mutex.ReleaseMutex();
+				mutex.WaitOne();
+				queue.RemoveAt(0);
+				mutex.ReleaseMutex();
+				ModConsole.Log($"MainThreadRunner: Action Ran");
 			}
 		}
 
 		public static void Run(Action action)
 		{
-			Instance.AddAction(action);
-		}
-
-		private void AddAction(Action action)
-		{
-			lock (queueLock)
-			{
-				queue.Add(action);
-			}
+			mutex.WaitOne();
+			Instance.queue.Add(action);
+			mutex.ReleaseMutex();
 		}
 	}
 }

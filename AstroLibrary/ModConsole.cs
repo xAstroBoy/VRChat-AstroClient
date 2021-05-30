@@ -276,9 +276,12 @@
 
 		public static void PrintLine(string msg = "", Color? color = null)
 		{
+			ConsoleMutex.WaitOne();
 			Console.Write(msg + Environment.NewLine, color.Value);
-			Task.Run(() => { Write(msg + Environment.NewLine); });
-			//Task.Run(() => { Write(msg + Environment.NewLine); });
+			ConsoleMutex.ReleaseMutex();
+			ConsoleMutex.WaitOne();
+			Write(msg + Environment.NewLine);
+			ConsoleMutex.ReleaseMutex();
 		}
 
 		private static void PrintTags(LogTypes logType = LogTypes.LOG)
