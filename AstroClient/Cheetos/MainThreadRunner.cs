@@ -4,6 +4,7 @@
 	using Harmony;
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
 	using System.Threading;
 	using static AstroClient.variables.InstanceBuilder;
 
@@ -40,23 +41,33 @@
 
 		public void Update()
 		{
-			if (queue.Count > 0)
+			try
 			{
 				mutex.WaitOne();
-				queue[0]();
+				if (queue.Any())
+				{
+					queue[0]();
+					queue.RemoveAt(0);
+					ModConsole.Log($"MainThreadRunner: Action Ran");
+				}
+			}
+			finally
+			{
 				mutex.ReleaseMutex();
-				mutex.WaitOne();
-				queue.RemoveAt(0);
-				mutex.ReleaseMutex();
-				ModConsole.Log($"MainThreadRunner: Action Ran");
 			}
 		}
 
 		public static void Run(Action action)
 		{
-			mutex.WaitOne();
-			Instance.queue.Add(action);
-			mutex.ReleaseMutex();
+			try
+			{
+				mutex.WaitOne();
+				Instance.queue.Add(action);
+			}
+			finally
+			{
+				mutex.ReleaseMutex();
+			}
 		}
 	}
 }
