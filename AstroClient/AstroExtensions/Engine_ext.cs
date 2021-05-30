@@ -44,7 +44,7 @@
 
 		public static void Set_DontDestroyOnLoad(this Object obj)
 		{
-			return UnityEngine.Object.DontDestroyOnLoad(obj);
+			UnityEngine.Object.DontDestroyOnLoad(obj);
 
 		}
 
