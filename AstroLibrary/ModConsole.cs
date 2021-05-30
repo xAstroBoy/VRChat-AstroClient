@@ -51,11 +51,13 @@
 
 		public static void ReplaceOldLatestFile()
 		{
+			ConsoleMutex.WaitOne();
 			var tmp = GetNewFileName();
 			if (File.Exists(LatestLogFile))
 			{
 				File.Move(LatestLogFile, tmp);
 			}
+			ConsoleMutex.ReleaseMutex();
 		}
 
 		public static void InitLogsSetup()

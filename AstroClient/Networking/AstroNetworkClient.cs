@@ -134,10 +134,7 @@
 				//	}
 
 				case PacketServerType.NOTIFY:
-					MainThreadRunner.Run(() =>
-					{
-						CheetosHelpers.SendHudNotification(packetData.TextData);
-					});
+					CheetosHelpers.SendHudNotification(packetData.TextData);
 					break;
 				case PacketServerType.DEBUG:
 					ModConsole.DebugLog(packetData.TextData);
