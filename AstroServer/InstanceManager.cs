@@ -6,8 +6,6 @@
 
 	public static class InstanceManager
 	{
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>")]
-		[System.Diagnostics.CodeAnalysis.SuppressMessage("Style", "IDE0060:Remove unused parameter", Justification = "<Pending>")]
 		internal static void InstanceJoined(Client client)
 		{
 			foreach (Client other in ClientServer.Clients)
