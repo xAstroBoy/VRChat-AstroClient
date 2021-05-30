@@ -28,7 +28,7 @@
 
 		public static string UserID = string.Empty;
 
-		public static ExploitData Exploits;
+		public static bool HasUdon;
 
 		public static void AvatarSearch(string query)
 		{

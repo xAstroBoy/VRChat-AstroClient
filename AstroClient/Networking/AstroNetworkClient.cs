@@ -99,8 +99,8 @@
 					Bools.IsDeveloper = true;
 					ModConsole.Log("Developer Mode!");
 					break;
-				case PacketServerType.EXPLOIT_DATA:
-					NetworkingManager.Exploits = JsonConvert.DeserializeObject<ExploitData>(packetData.TextData);
+				case PacketServerType.ENABLE_UDON:
+					NetworkingManager.HasUdon = true;
 					break;
 				case PacketServerType.CONNECTION_FINISHED:
 					NetworkingManager.IsReady = true;
