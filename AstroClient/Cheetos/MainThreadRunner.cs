@@ -1,10 +1,8 @@
 ﻿namespace AstroClient.Cheetos
 {
 	using AstroLibrary.Console;
-	using Harmony;
 	using System;
 	using System.Collections.Generic;
-	using System.Linq;
 	using System.Threading;
 	using static AstroClient.variables.InstanceBuilder;
 
@@ -62,6 +60,11 @@
 			}
 		}
 
+		/// <summary>
+		/// Queue up and run an action on the main thread.
+		/// Warning: Do not run anything async on this command!
+		/// </summary>
+		/// <param name="action"></param>
 		public static void Run(Action action)
 		{
 			try
