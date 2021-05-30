@@ -268,10 +268,26 @@
 
 			PrintCallerTag(callerName, callerLine);
 			PrintLine(); // Basically an easy way to newline
-			PrintLine($"Exception Message: {message}", color.Value);
-			PrintLine($"Exception StackTrace: {stackTrace}", color.Value);
-			PrintLine($"Exception TargetSite: {targetSite}");
-			PrintLine($"Exception Source: {source}");
+
+			if (message != null)
+			{
+				PrintLine($"Exception Message: {message}", color.Value);
+			}
+
+			if (stackTrace != null)
+			{
+				PrintLine($"Exception StackTrace: {stackTrace}", color.Value);
+			}
+
+			if (targetSite != null)
+			{
+				PrintLine($"Exception TargetSite: {targetSite}");
+			}
+
+			if (source != null)
+			{
+				PrintLine($"Exception Source: {source}");
+			}
 		}
 
 		public static void PrintLine(string msg = "", Color? color = null)
