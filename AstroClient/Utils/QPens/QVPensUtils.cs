@@ -30,7 +30,7 @@
 			{
 				TriggerSDK2.Clear();
 			}
-			if(ClearPensUdonEvents != null)
+			if (ClearPensUdonEvents != null)
 			{
 				ClearPensUdonEvents.Clear();
 			}
@@ -96,12 +96,12 @@
 		{
 			foreach (var item in WorldUtils.Get_UdonBehaviours())
 			{
-				if(item != null)
+				if (item != null)
 				{
-					if(item.name.ToLower().Contains("penmanager"))
+					if (item.name.ToLower().Contains("penmanager"))
 					{
 						var action = item.FindUdonEvent("ClearAll");
-						if(action != null)
+						if (action != null)
 						{
 							if (!ClearPensUdonEvents.Contains(action))
 							{
@@ -109,7 +109,7 @@
 							}
 						}
 					}
-					if(item.name.ToLower().Equals("pen"))
+					if (item.name.ToLower().Equals("pen"))
 					{
 						var action = item.FindUdonEvent("Clear");
 						if (action != null)
@@ -119,7 +119,7 @@
 								ClearPensUdonEvents.Add(action);
 							}
 						}
-					}	
+					}
 				}
 			}
 			ModConsole.Log("Found " + ClearPensUdonEvents.Count() + " Clear Pens Udon Events.");
@@ -148,7 +148,7 @@
 					}
 				}
 			}
-			if(ClearPensUdonEvents.Count() != 0)
+			if (ClearPensUdonEvents.Count() != 0)
 			{
 				ClearPensUdonEvents.ExecuteUdonEvent();
 			}

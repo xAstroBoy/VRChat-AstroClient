@@ -51,7 +51,7 @@
 					if (fadeType.Equals("BlackFade") && duration.Equals(0f) &&
 						RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
 					{
-						Event_OnWorldReveal?.Invoke(null, new OnWorldRevealArgs(WorldUtils.Get_World_ID(), WorldUtils.Get_World_Name(), WorldUtils.Get_World_tags() , WorldUtils.Get_World_AssetUrl()));
+						Event_OnWorldReveal?.Invoke(null, new OnWorldRevealArgs(WorldUtils.Get_World_ID(), WorldUtils.Get_World_Name(), WorldUtils.Get_World_tags(), WorldUtils.Get_World_AssetUrl()));
 						//Task.Run(() => {  });
 					}
 				}

@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Extensions
+﻿using System.Linq;
+
+namespace AstroClient.Extensions
 {
 	using AstroClient.Components;
 	using AstroClient.variables;
@@ -273,48 +275,36 @@
 
 		}
 
-
-
 		public static void Add_Bounce_Component(this List<GameObject> list, bool BounceTowardPlayer)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null))
 			{
-				if (obj != null)
+				Bouncer bouncer = obj.GetComponent<Bouncer>();
+				if (bouncer == null)
 				{
+					bouncer = obj.AddComponent<Bouncer>();
+				}
 
-					Bouncer bouncer = obj.GetComponent<Bouncer>();
-					if (bouncer == null)
-					{
-						bouncer = obj.AddComponent<Bouncer>();
-					}
-					if (bouncer != null)
-					{
-						bouncer.BounceTowardPlayer = BounceTowardPlayer;
-					}
+				if (bouncer != null)
+				{
+					bouncer.BounceTowardPlayer = BounceTowardPlayer;
 				}
 			}
 		}
 
-
 		public static void Add_Rocket_Component(this List<GameObject> list, bool ShouldFloat, bool HasRelativeForce = true)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null))
 			{
-				if (obj != null)
-				{
-					RocketManager.AddObject(obj, ShouldFloat, HasRelativeForce);
-				}
+				RocketManager.AddObject(obj, ShouldFloat, HasRelativeForce);
 			}
 		}
 
 		public static void Add_Crazy_Component(this List<GameObject> list, bool ShouldFloat)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null))
 			{
-				if (obj != null)
-				{
-					CrazyObjectManager.AddObject(obj, ShouldFloat);
-				}
+				CrazyObjectManager.AddObject(obj, ShouldFloat);
 			}
 		}
 
@@ -396,97 +386,72 @@
 
 		public static void AttackSelf(this List<GameObject> list)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null))
 			{
-				if (obj != null)
+				var Self = LocalPlayerUtils.GetSelfPlayer();
+				if (obj != null && Self != null)
 				{
-					var Self = LocalPlayerUtils.GetSelfPlayer();
-					if (obj != null && Self != null)
-					{
-						PlayerAttackerManager.AddObject(obj, Self);
-					}
+					PlayerAttackerManager.AddObject(obj, Self);
 				}
 			}
 		}
 
 		public static void AttackTarget(this List<GameObject> list)
 		{
-			foreach (var item in list)
+			foreach (var item in list.Where(item => item != null))
 			{
-				if (item != null)
-				{
-					ObjectMiscOptions.MakeObjectAttackTarget(item);
-				}
+				ObjectMiscOptions.MakeObjectAttackTarget(item);
 			}
 		}
 
 		public static void WatchTarget(this List<GameObject> list)
 		{
-			foreach (var item in list)
+			foreach (var item in list.Where(item => item != null))
 			{
-				if (item != null)
-				{
-					ObjectMiscOptions.MakeObjectWatchTarget(item);
-				}
+				ObjectMiscOptions.MakeObjectWatchTarget(item);
 			}
 		}
 
 		public static void WatchSelf(this List<GameObject> list)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null))
 			{
-				if (obj != null)
+				var Self = LocalPlayerUtils.GetSelfPlayer();
+				if (obj != null && Self != null)
 				{
-					var Self = LocalPlayerUtils.GetSelfPlayer();
-					if (obj != null && Self != null)
-					{
-						PlayerWatcherManager.AddObject(obj, Self);
-					}
+					PlayerWatcherManager.AddObject(obj, Self);
 				}
 			}
 		}
 
 		public static void OrbitSelf(this List<GameObject> list)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null))
 			{
-				if (obj != null)
+				var Self = LocalPlayerUtils.GetSelfPlayer();
+				if (obj != null && Self != null)
 				{
-					var Self = LocalPlayerUtils.GetSelfPlayer();
-					if (obj != null && Self != null)
-					{
-						OrbitManager.AddOrbitObject(obj, Self);
-					}
+					OrbitManager.AddOrbitObject(obj, Self);
 				}
 			}
 		}
 
 		public static void OrbitTarget(this List<GameObject> list)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null).Where(obj => obj != null))
 			{
-				if (obj != null)
-				{
-					if (obj != null)
-					{
-						OrbitManager.AddOrbitObject(obj, ObjectMiscOptions.CurrentTarget);
-					}
-				}
+				OrbitManager.AddOrbitObject(obj, ObjectMiscOptions.CurrentTarget);
 			}
 		}
 
 		public static void Remove_RocketObject_Component(this List<GameObject> list)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null))
 			{
-				if (obj != null)
+				RocketObject RocketObject = obj.GetComponent<RocketObject>();
+				if (RocketObject != null)
 				{
-
-					RocketObject RocketObject = obj.GetComponent<RocketObject>();
-					if (RocketObject != null)
-					{
-						RocketObject.DestroyMeLocal();
-					}
+					RocketObject.DestroyMeLocal();
 				}
 			}
 		}
@@ -495,7 +460,6 @@
 		{
 			if (obj != null)
 			{
-
 				RocketObject RocketObject = obj.GetComponent<RocketObject>();
 				if (RocketObject != null)
 				{
@@ -506,16 +470,12 @@
 
 		public static void Remove_CrazyObject_Component(this List<GameObject> list)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null))
 			{
-				if (obj != null)
+				CrazyObject CrazyObject = obj.GetComponent<CrazyObject>();
+				if (CrazyObject != null)
 				{
-
-					CrazyObject CrazyObject = obj.GetComponent<CrazyObject>();
-					if (CrazyObject != null)
-					{
-						CrazyObject.DestroyMeLocal();
-					}
+					CrazyObject.DestroyMeLocal();
 				}
 			}
 		}
@@ -524,7 +484,6 @@
 		{
 			if (obj != null)
 			{
-
 				CrazyObject CrazyObject = obj.GetComponent<CrazyObject>();
 				if (CrazyObject != null)
 				{
@@ -535,16 +494,12 @@
 
 		public static void Remove_ObjectSpinner_Component(this List<GameObject> list)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null))
 			{
-				if (obj != null)
+				ObjectSpinner ObjectSpinner = obj.GetComponent<ObjectSpinner>();
+				if (ObjectSpinner != null)
 				{
-
-					ObjectSpinner ObjectSpinner = obj.GetComponent<ObjectSpinner>();
-					if (ObjectSpinner != null)
-					{
-						ObjectSpinner.DestroyMeLocal();
-					}
+					ObjectSpinner.DestroyMeLocal();
 				}
 			}
 		}
@@ -553,7 +508,6 @@
 		{
 			if (obj != null)
 			{
-
 				ObjectSpinner ObjectSpinner = obj.GetComponent<ObjectSpinner>();
 				if (ObjectSpinner != null)
 				{
@@ -564,16 +518,12 @@
 
 		public static void Remove_Bouncer_Component(this List<GameObject> list)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null))
 			{
-				if (obj != null)
+				Bouncer Bouncer = obj.GetComponent<Bouncer>();
+				if (Bouncer != null)
 				{
-
-					Bouncer Bouncer = obj.GetComponent<Bouncer>();
-					if (Bouncer != null)
-					{
-						Bouncer.DestroyMeLocal();
-					}
+					Bouncer.DestroyMeLocal();
 				}
 			}
 		}
@@ -582,7 +532,6 @@
 		{
 			if (obj != null)
 			{
-
 				Bouncer Bouncer = obj.GetComponent<Bouncer>();
 				if (Bouncer != null)
 				{
@@ -593,16 +542,12 @@
 
 		public static void Remove_PlayerWatcher_Component(this List<GameObject> list)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null))
 			{
-				if (obj != null)
+				PlayerWatcher PlayerWatcher = obj.GetComponent<PlayerWatcher>();
+				if (PlayerWatcher != null)
 				{
-
-					PlayerWatcher PlayerWatcher = obj.GetComponent<PlayerWatcher>();
-					if (PlayerWatcher != null)
-					{
-						PlayerWatcher.DestroyMeLocal();
-					}
+					PlayerWatcher.DestroyMeLocal();
 				}
 			}
 		}
@@ -611,7 +556,6 @@
 		{
 			if (obj != null)
 			{
-
 				PlayerWatcher PlayerWatcher = obj.GetComponent<PlayerWatcher>();
 				if (PlayerWatcher != null)
 				{
@@ -622,16 +566,12 @@
 
 		public static void Remove_PlayerAttacker_Component(this List<GameObject> list)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null))
 			{
-				if (obj != null)
+				PlayerAttacker PlayerAttacker = obj.GetComponent<PlayerAttacker>();
+				if (PlayerAttacker != null)
 				{
-
-					PlayerAttacker PlayerAttacker = obj.GetComponent<PlayerAttacker>();
-					if (PlayerAttacker != null)
-					{
-						PlayerAttacker.DestroyMeLocal();
-					}
+					PlayerAttacker.DestroyMeLocal();
 				}
 			}
 		}
@@ -640,7 +580,6 @@
 		{
 			if (obj != null)
 			{
-
 				PlayerAttacker PlayerAttacker = obj.GetComponent<PlayerAttacker>();
 				if (PlayerAttacker != null)
 				{
@@ -651,16 +590,12 @@
 
 		public static void Remove_Orbit_Component(this List<GameObject> list)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null))
 			{
-				if (obj != null)
+				Orbit Orbit = obj.GetComponent<Orbit>();
+				if (Orbit != null)
 				{
-
-					Orbit Orbit = obj.GetComponent<Orbit>();
-					if (Orbit != null)
-					{
-						Orbit.DestroyMeLocal();
-					}
+					Orbit.DestroyMeLocal();
 				}
 			}
 		}
@@ -669,7 +604,6 @@
 		{
 			if (obj != null)
 			{
-
 				Orbit Orbit = obj.GetComponent<Orbit>();
 				if (Orbit != null)
 				{
@@ -680,16 +614,11 @@
 
 		public static void KillCustomComponents(this List<GameObject> list, bool ResetRigidBody)
 		{
-			foreach (var obj in list)
+			foreach (var obj in list.Where(obj => obj != null))
 			{
-				if (obj != null)
-				{
-					obj.KillCustomComponents(ResetRigidBody);
-				}
+				obj.KillCustomComponents(ResetRigidBody);
 			}
 		}
-
-
 
 		// KILL ( ROCKET | CRAZY | SPINNER | Attacker | Watcher | Orbit | Bouncer) COMPONENT IF PRESENT
 		public static void KillCustomComponents(this GameObject obj, bool ResetRigidBody = false, bool ResetPickupProperties = false)

@@ -62,7 +62,7 @@
 				ModConsole.DebugErrorExc(e);
 			}
 		}
-			
+
 
 		public override void OnUpdate()
 		{

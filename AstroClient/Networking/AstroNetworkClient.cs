@@ -105,34 +105,39 @@
 				case PacketServerType.CONNECTION_FINISHED:
 					NetworkingManager.IsReady = true;
 					break;
-				case PacketServerType.ADD_TAG:
-					{
-						var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
-						Player player;
-						if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(tagData.UserID))
-						{
-							ModConsole.Log("Wants to add tag to self");
-							player = LocalPlayerUtils.GetSelfPlayer();
-						}
-						else
-						{
-							ModConsole.Log("Wants to add tag to someone else");
-							player = WorldUtils.Get_Player_By_ID(tagData.UserID);
-						}
-						if (player != null)
-						{
-							SpawnTag(player, tagData.Text, Color.white, Color.cyan);
-						}
-						else
-						{
-							ModConsole.Log($"Player ({tagData.UserID}) returned null");
-						}
-
-						break;
-					}
+				//case PacketServerType.ADD_TAG:
+				//	{
+				//		MainThreadRunner.Run(() =>
+				//		{
+				//			var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
+				//			Player player;
+				//			if (LocalPlayerUtils.GetSelfPlayer().UserID().Equals(tagData.UserID))
+				//			{
+				//				ModConsole.Log("Wants to add tag to self");
+				//				player = LocalPlayerUtils.GetSelfPlayer();
+				//			}
+				//			else
+				//			{
+				//				ModConsole.Log("Wants to add tag to someone else");
+				//				player = WorldUtils.Get_Player_By_ID(tagData.UserID);
+				//			}
+				//			if (player != null)
+				//			{
+				//				SpawnTag(player, tagData.Text, Color.white, Color.cyan);
+				//			}
+				//			else
+				//			{
+				//				ModConsole.Log($"Player ({tagData.UserID}) returned null");
+				//			}
+				//		});
+				//		break;
+				//	}
 
 				case PacketServerType.NOTIFY:
-					CheetosHelpers.SendHudNotification(packetData.TextData);
+					MainThreadRunner.Run(() =>
+					{
+						CheetosHelpers.SendHudNotification(packetData.TextData);
+					});
 					break;
 				case PacketServerType.DEBUG:
 					ModConsole.DebugLog(packetData.TextData);
@@ -142,8 +147,7 @@
 					break;
 				case PacketServerType.AVATAR_RESULT:
 					{
-						var avatarData = JsonConvert.DeserializeObject<AvatarData>(packetData.TextData);
-						AvatarSearch.AddAvatar(avatarData);
+						AvatarSearch.AddAvatar(JsonConvert.DeserializeObject<AvatarData>(packetData.TextData));
 						break;
 					}
 
@@ -162,23 +166,20 @@
 		// You gotta delay it, let's delay it to some seconds
 		private static void SpawnTag(Player player, string text, Color TextColor, Color Tagcolor)
 		{
-			MiscUtility.DelayFunction(1f, () =>
+			if (player != null)
 			{
-				if (player != null)
+				SingleTag tag = SingleTagsUtils.AddSingleTag(player);
+				if (tag != null)
 				{
-					SingleTag tag = SingleTagsUtils.AddSingleTag(player);
-					if (tag != null)
-					{
-						tag.Label_Text = text;
-						tag.Label_TextColor = TextColor;
-						tag.Tag_Color = Tagcolor;
-					}
+					tag.Label_Text = text;
+					tag.Label_TextColor = TextColor;
+					tag.Tag_Color = Tagcolor;
 				}
-				else
-				{
-					ModConsole.Error("Player for setting tag from server was null!");
-				}
-			});
+			}
+			else
+			{
+				ModConsole.Error("Player for setting tag from server was null!");
+			}
 		}
 
 		private static void OnConnected(object sender, EventArgs e)

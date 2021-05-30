@@ -67,6 +67,8 @@
 
 		private static void ProcessInput(object sender, PacketData packetData)
 		{
+			var networkEventID = packetData.NetworkEventID;
+
 			if (packetData.NetworkEventID != PacketServerType.KEEP_ALIVE)
 			{
 				Console.WriteLine($"TCP Event {packetData.NetworkEventID} Received.");
@@ -74,126 +76,90 @@
 
 			Client client = sender as Client;
 
-			if (packetData.NetworkEventID == PacketClientType.AUTH)
+			switch (networkEventID)
 			{
-				string key = packetData.TextData;
-
-				if (KeyManager.IsKeyValid(key))
-				{
-					client.IsAuthed = true;
-					client.Key = key;
-					client.DiscordID = KeyManager.GetKeysDiscordOwner(key);
-
-					client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
-
-					if (KeyManager.IsDevKey(key))
+				case PacketClientType.AUTH:
 					{
-						client.IsDeveloper = true;
-					}
-				}
-				else
-				{
-					client.Send(new PacketData(PacketServerType.AUTH_FAIlED));
-					client.Send(new PacketData(PacketServerType.EXIT));
-					client.Disconnect();
-				}
-			}
+						string key = packetData.TextData;
 
-			if (packetData.NetworkEventID == PacketClientType.GET_RESOURCES)
-			{
-				foreach (var libPath in Libraries)
-				{
-					try
+						if (KeyManager.IsKeyValid(key))
+						{
+							client.IsAuthed = true;
+							client.Key = key;
+							client.DiscordID = KeyManager.GetKeysDiscordOwner(key);
+
+							client.Data = KeyManager.GetAccountData(key);
+							client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
+
+							if (KeyManager.IsDevKey(key))
+							{
+								client.Data.IsDeveloper = true;
+							}
+						}
+						else
+						{
+							client.Send(new PacketData(PacketServerType.AUTH_FAIlED));
+							client.Send(new PacketData(PacketServerType.EXIT));
+							client.Disconnect();
+						}
+
+						break;
+					}
+
+				case PacketClientType.GET_RESOURCES:
 					{
-						var path = Environment.CurrentDirectory + libPath;
-						byte[] data = File.ReadAllBytes(path);
-						var converted = Convert.ToBase64String(data);
-						client.Send(new PacketData(PacketServerType.LOADER_LIBRARY, converted));
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine($"Failed to send: {e.Message}");
-					}
-				}
+						foreach (var libPath in Libraries)
+						{
+							try
+							{
+								var path = Environment.CurrentDirectory + libPath;
+								byte[] data = File.ReadAllBytes(path);
+								var converted = Convert.ToBase64String(data);
+								client.Send(new PacketData(PacketServerType.LOADER_LIBRARY, converted));
+							}
+							catch (Exception e)
+							{
+								Console.WriteLine($"Failed to send: {e.Message}");
+							}
+						}
 
-				foreach (var libPath in Melons)
-				{
-					try
-					{
-						var path = Environment.CurrentDirectory + libPath;
-						byte[] data = File.ReadAllBytes(path);
-						var converted = Convert.ToBase64String(data);
-						client.Send(new PacketData(PacketServerType.LOADER_MELON, converted));
+						foreach (var libPath in Melons)
+						{
+							try
+							{
+								var path = Environment.CurrentDirectory + libPath;
+								byte[] data = File.ReadAllBytes(path);
+								var converted = Convert.ToBase64String(data);
+								client.Send(new PacketData(PacketServerType.LOADER_MELON, converted));
+							}
+							catch (Exception e)
+							{
+								Console.WriteLine($"Failed to send: {e.Message}");
+							}
+						}
+
+						foreach (var libPath in Modules)
+						{
+							try
+							{
+								var path = Environment.CurrentDirectory + libPath;
+								byte[] data = File.ReadAllBytes(path);
+								var converted = Convert.ToBase64String(data);
+								client.Send(new PacketData(PacketServerType.LOADER_MODULE, converted));
+							}
+							catch (Exception e)
+							{
+								Console.WriteLine($"Failed to send: {e.Message}");
+							}
+						}
+
+						client.Send(new PacketData(PacketServerType.LOADER_DONE));
+						break;
 					}
-					catch (Exception e)
-					{
-						Console.WriteLine($"Failed to send: {e.Message}");
-					}
-				}
 
-				foreach (var libPath in Modules)
-				{
-					try
-					{
-						var path = Environment.CurrentDirectory + libPath;
-						byte[] data = File.ReadAllBytes(path);
-						var converted = Convert.ToBase64String(data);
-						client.Send(new PacketData(PacketServerType.LOADER_MODULE, converted));
-					}
-					catch (Exception e)
-					{
-						Console.WriteLine($"Failed to send: {e.Message}");
-					}
-				}
-
-				client.Send(new PacketData(PacketServerType.LOADER_DONE));
-			}
-
-			//Client client = sender as Client;
-			//string[] cmds = input.Split(":");
-
-			//if (cmds[0].Equals("gimmiedll") && client.IsAuthed)
-			//{
-			//	var path = Environment.CurrentDirectory + "/AstroClient/AstroClient.dll";
-			//	byte[] data = File.ReadAllBytes(path);
-			//	client.Send(data, 1001);
-			//}
-			//else if (cmds[0].Equals("gotdll"))
-			//{
-			//	client.Disconnect();
-			//	Console.WriteLine($"DLL Sent");
-			//	client.IsReady = true;
-			//}
-			//else if (cmds[0].Equals("key"))
-			//{
-			//	string key = cmds[1];
-			//	Console.WriteLine("Trying to auth with: " + key);
-			//	if (KeyManager.IsValidKey(key))
-			//	{
-			//		client.Send("authed:true");
-			//		client.IsAuthed = true;
-			//		client.Key = key;
-			//		Console.WriteLine("Successfully Authed");
-			//	}
-			//	else
-			//	{
-			//		client.Send("authed:false");
-			//		client.Send("exit:invalid auth key");
-			//		client.Disconnect();
-			//		Console.WriteLine("Invalid Auth Key");
-			//	}
-			//}
-			//else
-			//{
-			//	Console.WriteLine($"Unknown packet: {input}");
-			//}
-		}
-
-		public static void SendAll(string msg)
-		{
-			foreach (Client client in Clients)
-			{
-				//client.Send(msg);
+				default:
+					Console.WriteLine($"Unknown packet type received: {networkEventID}");
+					break;
 			}
 		}
 

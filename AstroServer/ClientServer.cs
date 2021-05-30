@@ -97,15 +97,21 @@
 							client.IsAuthed = true;
 							client.DiscordID = KeyManager.GetKeysDiscordOwner(client.Key);
 
+							client.Data = KeyManager.GetAccountData(client.Key);
 							client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
 
 							if (KeyManager.IsDevKey(client.Key))
 							{
-								client.IsDeveloper = true;
+								client.Data.IsDeveloper = true;
 								client.Send(new PacketData(PacketServerType.ENABLE_DEVELOPER));
 							}
 
-							client.Send(new PacketData(PacketServerType.CONNECTION_FINISHED));
+							var ed = new ExploitData()
+							{
+								HasUdon = client.Data.HasUdon
+							};
+
+							client.Send(new PacketData(PacketServerType.EXPLOIT_DATA, Newtonsoft.Json.JsonConvert.SerializeObject(ed)));
 							AstroBot.SendLoggedInLog(client);
 						}
 						else
@@ -194,7 +200,7 @@
 		{
 			foreach (Client client in Clients)
 			{
-				if (client.IsDeveloper)
+				if (client.Data.IsDeveloper)
 				{
 					client.Send(packetData);
 				}

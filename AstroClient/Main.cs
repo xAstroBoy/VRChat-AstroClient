@@ -27,6 +27,7 @@
 	using VRC.Core;
 	using Il2CppSystem.Diagnostics;
 	using AstroClient.Experiments;
+	using AstroClient.Cheetos;
 
 	#endregion Imports
 
@@ -185,7 +186,7 @@
 				QuickMenuUtils.SetQuickMenuCollider(5, 5);
 				UserInteractMenuBtns.InitButtons(1, 3, true); //UserMenu Main Button
 
-				InitMainsButtons(5, 0, true);
+				InitMainsButtons();
 				ItemTweakerMain.InitButtons(5, 0.5f, true); //ItemTweaker Main Button
 				new QMSingleButton("ShortcutMenu", 5, 2, "GameObject Toggler", new Action(() =>
 				{ GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }
@@ -196,11 +197,10 @@
 			}
 		}
 
-		public static void InitMainsButtons(float x, float y, bool btnHalf)
+		public static void InitMainsButtons()
 		{
 			if (KeyManager.IsAuthed)
 			{
-				//QMNestedButton AstroClient = new QMNestedButton("ShortcutMenu", x, y, "AstroClient Menu", "AstroClient Menu", null, null, null, null, btnHalf);  // Menu Main Button
 				QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, "AstroClient.Resources.planet.png");
 				ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", new Action(() => { Bools.IsDebugMode = true; }), "Debug Console OFF", new Action(() => { Bools.IsDebugMode = false; }), "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 
@@ -234,8 +234,8 @@
 
 		public static QMSingleButton CopyIDButton;
 		public static QMSingleButton JoinIns;
-	    public static QMSingleButton avatar;
-        public static QMSingleButton VRam;
-        public static QMSingleButton JoinInstanceButton;
+		public static QMSingleButton avatar;
+		public static QMSingleButton VRam;
+		public static QMSingleButton JoinInstanceButton;
 	}
 }
