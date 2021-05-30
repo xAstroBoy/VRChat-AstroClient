@@ -29,6 +29,7 @@
 			Client.Ready += OnReady;
 		}
 
+		[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Nah")]
 		public async Task Start()
 		{
 			await Client.LoginAsync(TokenType.Bot, KeyManager.GetBotToken());

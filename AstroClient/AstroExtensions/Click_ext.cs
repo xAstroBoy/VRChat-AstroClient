@@ -17,22 +17,16 @@
 
 				if (one.Count() != 0)
 				{
-					foreach (var child in one)
+					foreach (var child in one.Where(child => child.interactText != NewText))
 					{
-						if (child.interactText != NewText)
-						{
-							child.interactText = NewText;
-						}
+						child.interactText = NewText;
 					}
 				}
 				if (two.Count() != 0)
 				{
-					foreach (var child in one)
+					foreach (var child in one.Where(child => child.interactText != NewText))
 					{
-						if (child.interactText != NewText)
-						{
-							child.interactText = NewText;
-						}
+						child.interactText = NewText;
 					}
 				}
 			}
@@ -40,12 +34,9 @@
 
 		public static void VRC_Interactable_Click(this List<GameObject> list)
 		{
-			foreach (var item in list)
+			foreach (var item in list.Where(item => item != null))
 			{
-				if (item != null)
-				{
-					item.VRC_Interactable_Click();
-				}
+				item.VRC_Interactable_Click();
 			}
 		}
 
