@@ -42,5 +42,14 @@
 				ItemPosition.TeleportObject(obj);
 			}
 		}
+
+		public static void TeleportToMe(this GameObject obj, HumanBodyBones bone)
+		{
+			if (obj != null)
+			{
+				ItemPosition.TeleportObject(obj, bone);
+			}
+		}
+
 	}
 }
