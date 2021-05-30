@@ -42,6 +42,19 @@
 			}
 		}
 
+
+		public override void OnLevelLoaded()
+		{
+			if (UserCamera != null)
+			{
+				if (UserCamera.parent != userCameraParent)
+				{
+					UserCamera.parent = userCameraParent;
+				}
+			}
+		}
+
+
 		public static void Set_Camera_OnTweaker()
 		{
 			if (UserCamera != null)
