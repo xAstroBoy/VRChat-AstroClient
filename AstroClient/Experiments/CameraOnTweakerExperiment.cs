@@ -17,66 +17,69 @@
 
 
 
-		public override void OnLateUpdate()
+		public static void CheckCamera()
 		{
-			if (PhotoCamera != null)
+			if (userCameraParent != null)
 			{
-				if (PhotoCameraPickup != null)
+				if (!UserCamera.Is_DontDestroyOnLoad())
 				{
-					if (HasBackuppedLayer)
+					userCameraParent.Set_DontDestroyOnLoad();
+				}
+			}
+			if (UserCamera != null)
+			{
+				if(UserCamera.Is_DontDestroyOnLoad())
+				{
+					UserCamera.Set_DontDestroyOnLoad();
+				}
+				foreach (var child in UserCamera.Get_All_Childs())
+				{
+					if (!child.Is_DontDestroyOnLoad())
 					{
-						if (PhotoCameraPickup.pickupable)
-						{
-							PhotoCamera.layer = 13;
-						}
-						else
-						{
-							PhotoCamera.layer = OriginalLayer;
-						}
+						child.Set_DontDestroyOnLoad();
 					}
-					else
-					{
-						OriginalLayer = PhotoCamera.layer;
-					}
-
 				}
 			}
 		}
 
 		public static void Set_Camera_OnTweaker()
 		{
-			if (PhotoCamera != null)
+			if (UserCamera != null)
 			{
-				Tweaker_Object.SetObjectToEdit(PhotoCamera);
+				Tweaker_Object.SetObjectToEdit(UserCamera.gameObject);
 			}
-
 		}
 
 
 
 		public static void InitQMMenu(QMTabMenu tab, float x, float y, bool btnHalf)
 		{
-			var tmp = new QMNestedButton(tab, x, y, "Tweaker Experiments", "Set UI Items on the tweaker (Dangerous)", null, null, null, null, btnHalf);
-			new QMSingleButton(tmp, 1, 0, "Set Camera (Tweaker)", () => { Set_Camera_OnTweaker(); }, "Sets Camera on the tweaker", null, null, true);
+			var tmp = new QMNestedButton(tab, x, y, "Camera Experiments", "Edit Camera Behaviours", null, null, null, null, btnHalf);
+			new QMSingleButton(tmp, 1, 0, "Set Camera (Tweaker)", () => { Set_Camera_OnTweaker(); CheckCamera(); }, "Sets Camera on the tweaker", null, null, true);
+			new QMSingleButton(tmp, 1, 0.5f, "Reset Camera Parent", () => { UserCamera.parent = userCameraParent; CheckCamera(); }, "Restore Original parent", null, null, true);
+			new QMSingleButton(tmp, 1, 1, "Free Camera", () => { UserCamera.parent = null; CheckCamera(); }, "Free The Camera", null, null, true);
+
 		}
 
-		public static GameObject PhotoCamera
+
+
+		public static Transform UserCamera
 		{
 			get
 			{
-				if(_PhotoCamera == null)
+				if(_UserCamera == null)
 				{
-					var camerapath1 = GameObjectFinder.Find("_Application/TrackingVolume/PlayerObjects/UserCamera/PhotoCamera");
+					var camerapath1 = GameObjectFinder.Find("_Application/TrackingVolume/PlayerObjects/UserCamera").transform;
 					if(camerapath1 != null)
 					{
-						return _PhotoCamera = camerapath1;
+						return _UserCamera = camerapath1;
 					}
 					else
 					{
-						var camerapath2 = GameObjectFinder.Find("PhotoCamera/PhotoCamera");
+						var camerapath2 = GameObjectFinder.Find("UserCamera/PhotoCamera").transform;
 						if (camerapath2 != null)
 						{
-							return _PhotoCamera = camerapath2; 
+							return _UserCamera = camerapath2; 
 
 						}
 					}
@@ -84,36 +87,21 @@
 				}
 				else
 				{
-					return _PhotoCamera;
+					return _UserCamera;
 				}
 			}
 		}
 
-		public static PickupController PhotoCameraPickup
+
+		private static Transform userCameraParent
 		{
 			get
 			{
-				if (_PhotoCameraPickup == null)
-				{
-					var control = _PhotoCamera.GetComponent<PickupController>();
-					if(control == null)
-					{
-						control = _PhotoCamera.AddComponent<PickupController>();
-					}
-					return _PhotoCameraPickup = control;
-				}
-				else
-				{
-					return _PhotoCameraPickup;
-				}
+				return GameObjectFinder.Find("_Application/TrackingVolume/PlayerObjects").transform;
 			}
 		}
 
 
-
-		private static PickupController _PhotoCameraPickup;
-		private static GameObject _PhotoCamera;
-		private static int OriginalLayer;
-		private bool HasBackuppedLayer;
+		private static Transform _UserCamera;
 	}
 }
