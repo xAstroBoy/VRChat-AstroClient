@@ -23,9 +23,9 @@
 		private static void OnTimerElapsed(object sender, ElapsedEventArgs e)
 		{
 			var rand = new Random();
-			CheckTimer.Interval = rand.Next(30000, 240000);
+			CheckTimer.Interval = rand.Next(30000, 60000);
 
-			var toCheck = DB.Find<AvatarDataEntity>().Limit(10).ManyAsync(f => !f.CheckedRecently).Result;
+			var toCheck = DB.Find<AvatarDataEntity>().Limit(100).ManyAsync(f => !f.CheckedRecently).Result;
 
 			if (toCheck.Any())
 			{
@@ -87,6 +87,10 @@
 				{
 					return false;
 				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
 			}
 
 			return true;
