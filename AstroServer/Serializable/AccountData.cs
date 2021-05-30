@@ -10,18 +10,20 @@
 
 		public string Name = string.Empty;
 
-		public ulong DiscordID = 0;
+		public ulong DiscordID;
 
-		public bool IsDeveloper = false;
+		public bool IsDeveloper;
 
-		public bool HasUdon = false;
+		public bool IsBeta;
 
-		public bool HasExploits = false;
+		public bool HasUdon;
 
-		public bool HasMurder4 = false;
+		public bool HasExploits;
 
-		public bool HasAmongUs = false;
+		public bool HasMurder4;
 
-		public bool HasFreezeTag = false;
+		public bool HasAmongUs;
+
+		public bool HasFreezeTag;
 	}
 }

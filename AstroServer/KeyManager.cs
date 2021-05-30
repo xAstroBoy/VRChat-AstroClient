@@ -45,6 +45,11 @@
 			return DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(key)).Result.Any();
 		}
 
+		public static AccountData GetAccountData(string key)
+		{
+			return DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(key)).Result.FirstOrDefault();
+		}
+
 		public static ulong GetKeysDiscordOwner(string authKey)
 		{
 			var account = DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(authKey)).Result.First();

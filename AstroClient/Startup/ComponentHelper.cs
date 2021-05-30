@@ -6,6 +6,7 @@
 	using System;
 	using System.Collections.Generic;
 	using UnhollowerRuntimeLib;
+	using AstroClient.Cheetos;
 
 	public class ComponentHelper : GameEvents
 	{
@@ -30,6 +31,7 @@
 		public override void OnApplicationStart()
 		{
 			RegisterComponent<GameEventsBehaviour>();
+			RegisterComponent<MainThreadRunner>();
 
 			RegisterComponent<RocketManager>();
 			RegisterComponent<RocketObject>();
@@ -84,6 +86,7 @@
 
 		public override void OnUpdate()
 		{
+			MainThreadRunner.MakeInstance();
 			RocketManager.MakeInstance();
 			CrazyObjectManager.MakeInstance();
 			ObjectSpinnerManager.MakeInstance();

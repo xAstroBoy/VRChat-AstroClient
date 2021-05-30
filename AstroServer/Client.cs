@@ -13,11 +13,9 @@
 
 		public string InstanceID = string.Empty;
 
-		public ulong DiscordID = 0;
+		public ulong DiscordID;
 
 		public bool IsAuthed;
-
-		public bool IsDeveloper;
 
 		public bool IsReady;
 
@@ -31,7 +29,6 @@
 			InstanceID = "N/A";
 			DiscordID = 0;
 			IsAuthed = false;
-			IsDeveloper = false;
 			IsReady = false;
 		}
 	}

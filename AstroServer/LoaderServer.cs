@@ -84,11 +84,12 @@
 					client.Key = key;
 					client.DiscordID = KeyManager.GetKeysDiscordOwner(key);
 
+					client.Data = KeyManager.GetAccountData(key);
 					client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
 
 					if (KeyManager.IsDevKey(key))
 					{
-						client.IsDeveloper = true;
+						client.Data.IsDeveloper = true;
 					}
 				}
 				else

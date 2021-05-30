@@ -26,6 +26,7 @@
 	using VRC.UI;
 	using VRC.Core;
 	using Il2CppSystem.Diagnostics;
+	using AstroClient.Cheetos;
 
 	#endregion Imports
 

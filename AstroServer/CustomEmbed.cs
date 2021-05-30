@@ -165,7 +165,7 @@
 		{
 			var color = Color.Blue;
 
-			if (client.IsDeveloper)
+			if (client.Data.IsDeveloper)
 			{
 				color = Color.Red;
 			}
@@ -206,7 +206,7 @@
 		{
 			var color = Color.Blue;
 
-			if (client.IsDeveloper)
+			if (client.Data.IsDeveloper)
 			{
 				color = Color.Red;
 			}
