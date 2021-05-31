@@ -93,8 +93,6 @@
 
 		public static void Refresh_termsToToggleOn()
 		{
-			ModConsole.DebugLog($"Path is set to : {TermsToEnableOnPath}");
-
 			if (File.Exists(TermsToEnableOnPath))
 			{
 				List<string> list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(TermsToEnableOnPath));
@@ -122,8 +120,6 @@
 
 		public static void Refresh_termsToToggleOff()
 		{
-			ModConsole.DebugLog($"Path is set to : {TermsToEnableOffPath}");
-
 			if (File.Exists(TermsToEnableOffPath))
 			{
 				List<string> list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(TermsToEnableOffPath));
@@ -151,8 +147,6 @@
 
 		public static void Refresh_AvatarsToSkip()
 		{
-			ModConsole.DebugLog($"Path is set to : {AvatarsToSkipPath}");
-
 			if (File.Exists(AvatarsToSkipPath))
 			{
 				List<string> list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(AvatarsToSkipPath));

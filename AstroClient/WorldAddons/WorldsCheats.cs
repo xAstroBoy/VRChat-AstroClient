@@ -18,7 +18,7 @@
 			Murder2Cheats.Murder2CheatsButtons(WorldCheats, 1, 0, true);
 			Murder4Cheats.Murder4CheatsButtons(WorldCheats, 1, 0.5f, true);
 			AmongUSCheats.AmongUSCheatsButtons(WorldCheats, 1, 1f, true);
-			HubButtonsControl.InitButtons(WorldCheats, 1, 1.5f, true);
+			VRChatHub.InitButtons(WorldCheats, 1, 1.5f, true);
 			FreezeTag.InitButtons(WorldCheats, 1, 2, true);
 			AimFactory.InitButtons(WorldCheats, 1, 2.5f, true);
 		}
@@ -27,19 +27,19 @@
 		{
 			if (id == WorldIds.VRChatDefaultHub)
 			{
-				if (HubButtonsControl.VRChat_Hub_Addons != null)
+				if (VRChatHub.VRChat_Hub_Addons != null)
 				{
 					ModConsole.Log($"Recognized {Name} World, revealing Hub Addons Submenu Button!", System.Drawing.Color.Green);
-					HubButtonsControl.VRChat_Hub_Addons.GetMainButton().SetIntractable(true);
-					HubButtonsControl.VRChat_Hub_Addons.GetMainButton().SetTextColor(Color.green);
+					VRChatHub.VRChat_Hub_Addons.GetMainButton().SetIntractable(true);
+					VRChatHub.VRChat_Hub_Addons.GetMainButton().SetTextColor(Color.green);
 				}
 			}
 			else
 			{
-				if (HubButtonsControl.VRChat_Hub_Addons != null)
+				if (VRChatHub.VRChat_Hub_Addons != null)
 				{
-					HubButtonsControl.VRChat_Hub_Addons.GetMainButton().SetIntractable(false);
-					HubButtonsControl.VRChat_Hub_Addons.GetMainButton().SetTextColor(Color.red);
+					VRChatHub.VRChat_Hub_Addons.GetMainButton().SetIntractable(false);
+					VRChatHub.VRChat_Hub_Addons.GetMainButton().SetTextColor(Color.red);
 				}
 			}
 

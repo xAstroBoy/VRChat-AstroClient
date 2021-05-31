@@ -22,7 +22,7 @@
 			if (id == WorldIds.VRChatDefaultHub)
 			{
 				SetButtonText("Hub Mods", "Control HUB World.");
-				SetButtonShortcut(HubButtonsControl.VRChat_Hub_Addons);
+				SetButtonShortcut(VRChatHub.VRChat_Hub_Addons);
 				SetButtonColor(Color.green);
 				ToggleButtonVisibilityAndInteractivity(true);
 			}

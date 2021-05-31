@@ -337,6 +337,7 @@
     <Compile Include="WorldAddons\Supported_Worlds\Meroom.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\SmashContest.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\SnoozeScaryMaze5.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\ClubMisfitAfterParty.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\TheGreatPug.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\VRChatHub.cs" />
     <Compile Include="WorldAddons\WorldsCheats.cs" />
