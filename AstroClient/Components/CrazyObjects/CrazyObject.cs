@@ -171,7 +171,7 @@
 					LastTimeCheck = Time.time;
 				}
 			}
-			catch (Exception)
+			catch
 			{
 			}
 		}

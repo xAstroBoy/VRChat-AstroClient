@@ -63,7 +63,11 @@
 						vrcevent = "null";
 					}
 
-					ModConsole.DebugLog($"Event : VRC_EventHandler : {eventhandler}, VrcEvent : {vrcevent}, VrcBroadcastType : {__2}, UnknownInt : {__3}, UnknownFloat : {__4}");
+					if (!vrcevent.ToLower().Equals("uspeak")) // Ignore USPEAK.
+					{
+						ModConsole.DebugLog($"Event : VRC_EventHandler : {eventhandler}, VrcEvent : {vrcevent}, VrcBroadcastType : {__2}, UnknownInt : {__3}, UnknownFloat : {__4}");
+					}
+
 				}
 
 				Event_VRC_EventDispatcherRFC_triggerEvent?.Invoke(null, new VRC_EventDispatcherRFC_TriggerEventArgs(__0, __1, __2, __3, __4));

@@ -199,10 +199,10 @@
 			return false;
 		}
 
-		public static T Cast<T>(this object o)
-		{
-			return (T)o;
-		}
+		//public static T Cast<T>(this object o)
+		//{
+		//	return (T)o;
+		//}
 
 		internal static bool IsRunningNotorious()
 		{

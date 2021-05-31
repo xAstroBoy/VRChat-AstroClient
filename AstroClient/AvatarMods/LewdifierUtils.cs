@@ -32,9 +32,9 @@
 		public static List<string> AvatarsToSkip { get; set; } = new List<string>();
 
 
-		private static string TermsToEnableOnPath { get; } = Environment.CurrentDirectory + @"\AstroClient\Lewdify\TermsToEnable.json";
-		private static string TermsToEnableOffPath { get; } = Environment.CurrentDirectory + @"\AstroClient\Lewdify\TermsToDisable.json";
-		private static string AvatarsToSkipPath { get; } = Environment.CurrentDirectory + @"\AstroClient\Lewdify\IgnoredAvatars.json";
+		private static string TermsToEnableOnPath { get; } = Path.Combine(Environment.CurrentDirectory, @"\AstroClient\Lewdify\TermsToEnable.json");
+		private static string TermsToEnableOffPath { get; } = Path.Combine(Environment.CurrentDirectory, @"\AstroClient\Lewdify\TermsToDisable.json");
+		private static string AvatarsToSkipPath { get; } = Path.Combine(Environment.CurrentDirectory, @"\AstroClient\Lewdify\IgnoredAvatars.json");
 
 
 		public static void SaveAll()
@@ -61,9 +61,17 @@
 
 		public static void RefreshAll()
 		{
-			Refresh_termsToToggleOn();
-			Refresh_termsToToggleOff();
-			Refresh_AvatarsToSkip();
+			try
+			{
+				Refresh_termsToToggleOn();
+				Refresh_termsToToggleOff();
+				Refresh_AvatarsToSkip();
+
+			}
+			catch(Exception e)
+			{
+				ModConsole.DebugErrorExc(e);
+			}
 			if (LewdifyLists != null)
 			{
 				LewdifyLists.SetButtonText(ListButtonText);
@@ -85,6 +93,8 @@
 
 		public static void Refresh_termsToToggleOn()
 		{
+			ModConsole.DebugLog($"Path is set to : {TermsToEnableOnPath}");
+
 			if (File.Exists(TermsToEnableOnPath))
 			{
 				List<string> list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(TermsToEnableOnPath));
@@ -112,6 +122,8 @@
 
 		public static void Refresh_termsToToggleOff()
 		{
+			ModConsole.DebugLog($"Path is set to : {TermsToEnableOffPath}");
+
 			if (File.Exists(TermsToEnableOffPath))
 			{
 				List<string> list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(TermsToEnableOffPath));
@@ -139,6 +151,7 @@
 
 		public static void Refresh_AvatarsToSkip()
 		{
+			ModConsole.DebugLog($"Path is set to : {AvatarsToSkipPath}");
 
 			if (File.Exists(AvatarsToSkipPath))
 			{

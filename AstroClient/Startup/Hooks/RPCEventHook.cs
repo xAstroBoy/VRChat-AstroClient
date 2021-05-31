@@ -3,11 +3,13 @@
 	#region Imports
 
 	using AstroLibrary.Console;
-	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using Harmony;
 	using System;
+	using System.Linq;
 	using System.Reflection;
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
 	using VRC;
 	using VRC.SDKBase;
 
@@ -24,7 +26,7 @@
 
 		public override void ExecutePriorityPatches()
 		{
-			MiscUtility.DelayFunction(1f, new Action(() =>
+			DayClientML2.Utility.MiscUtility.DelayFunction(1f, new Action(() =>
 			{
 				HookRPCEvent1();
 			}));
@@ -97,8 +99,50 @@
 			}
 			if (parameter.Equals("TeleportRPC"))
 			{
-				//TODO: FIGURE AND FIX THE LOGGING ON TELEPORTRPC
-				return true;
+				OnTeleportRPCArgs message = null;
+				var Parameters = Networking.DecodeParameters(__1.ParameterBytes);
+				Vector3? Pos = Parameters[0].Unbox<Vector3>();
+				Quaternion? rot = Parameters[1].Unbox<Quaternion>();
+				VRC_SceneDescriptor.SpawnOrientation? spawnpos = Parameters[2].Unbox<VRC_SceneDescriptor.SpawnOrientation>();
+				bool? UnknownBool = Parameters[3].Unbox<Boolean>();
+				Int32? UnknownInt = Parameters[4].Unbox<System.Int32>();
+
+				message = new OnTeleportRPCArgs(Pos.Value, rot.Value, spawnpos.Value, UnknownBool.Value, UnknownInt.Value);
+
+				//foreach (var item in )
+				//{
+				//	Convert items
+				//	if (item.Equals(Il2CppType.Of<Vector3>()))
+				//	{
+				//		Pos = item.Unbox<Vector3>();
+				//	}
+				//	else if (item.Equals(Il2CppType.Of<Quaternion>()))
+				//	{
+				//		rot = item.Unbox<Quaternion>();
+				//	}
+				//	else if (item.Equals(Il2CppType.Of<VRC_SceneDescriptor.SpawnOrientation>()))
+				//	{
+				//		spawnpos = item.Unbox<VRC_SceneDescriptor.SpawnOrientation>();
+				//	}
+				//}
+
+
+				if (log)
+				{
+					try
+					{
+						if (message != null)
+						{
+							ModConsole.Log($"RPC: {sender}, {name}, {parameter}, [Position : {message.Position.ToString()}, Rotation : {message.Rotation.ToString()}, SpawnOrientation : {message.SpawnOrientation}], {eventtype}, {broadcasttype}");
+						}
+						else
+						{
+							ModConsole.Log("Couldn't Cast TeleportRPC as message is null!");
+						}
+					}
+					catch { }
+					return true;
+				}
 			}
 
 
