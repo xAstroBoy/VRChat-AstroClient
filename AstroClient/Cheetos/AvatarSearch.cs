@@ -9,6 +9,7 @@
 	using System;
 	using System.Collections;
 	using System.Diagnostics;
+	using System.Linq;
 	using UnityEngine;
 	using VRC.Core;
 
@@ -116,12 +117,9 @@
 			list.UiVRCList.startExpanded = false;
 			//Utils.VRCUiManager.ShowScreen(currPageAvatar);
 
-			foreach (var avatar in foundAvatars)
+			foreach (var avatar in foundAvatars.ToArray().Where(a => a.releaseStatus.ToLower().Equals("private")))
 			{
-				if (avatar.releaseStatus.ToLower().Equals("private"))
-				{
-					avatar.name = $"<color=red>[P]</color> {avatar.name}";
-				}
+				avatar.name = $"<color=red>[P]</color> {avatar.name}";
 			}
 
 			list.RenderElement(foundAvatars);
