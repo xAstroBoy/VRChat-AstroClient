@@ -6,39 +6,63 @@
 	using System;
 	using System.Linq;
 	using System.Net;
+	using System.Threading;
 	using System.Timers;
 
 	public static class AvatarChecker
 	{
-		private static Timer CheckTimer;
+		private static System.Timers.Timer CheckTimer;
+
+		private static bool IsChecking;
 
 		public static void Initialize()
 		{
-			CheckTimer = new Timer(60000);
+			CheckTimer = new System.Timers.Timer(60000);
 			CheckTimer.Enabled = true;
 			CheckTimer.Elapsed += OnTimerElapsed;
 			Console.WriteLine("AvatarChecker: Initialized.");
 		}
 
+		private static int GetChecked()
+		{
+			return DB.Find<AvatarDataEntity>().ManyAsync(a => a.CheckedRecently).Result.Count();
+		}
+
+		private static int GetNotChecked()
+		{
+			return DB.Find<AvatarDataEntity>().ManyAsync(a => !a.CheckedRecently).Result.Count();
+		}
+
 		private static void OnTimerElapsed(object sender, ElapsedEventArgs e)
 		{
-			var rand = new Random();
-			CheckTimer.Interval = rand.Next(30000, 60000);
-
-			var toCheck = DB.Find<AvatarDataEntity>().Limit(100).ManyAsync(f => !f.CheckedRecently).Result;
-
-			if (toCheck.Any())
+			if (!IsChecking)
 			{
-				Console.WriteLine($"Avatar check in progress! Checking {toCheck.Count()} avatars..");
-				foreach (var found in toCheck)
+				IsChecking = true;
+				var rand = new Random();
+				CheckTimer.Interval = rand.Next(30000, 60000);
+
+				var toCheck = DB.Find<AvatarDataEntity>().Limit(100).ManyAsync(f => !f.CheckedRecently).Result;
+
+				if (toCheck.Any())
 				{
-					CheckAvatar(found);
+					Console.WriteLine($"Avatar check in progress! Checking {toCheck.Count()} avatars..");
+					foreach (var found in toCheck)
+					{
+						CheckAvatar(found);
+					}
+					Console.WriteLine("Avatar check done!");
+					Console.WriteLine($"There are {GetNotChecked()} avatars left to check.");
+					Console.WriteLine($"There are {GetChecked()} avatars already checked.");
 				}
-				Console.WriteLine("Avatar check done!");
+				else
+				{
+					Console.WriteLine("Avatar checking is caught up!");
+				}
+				IsChecking = false;
 			}
 			else
 			{
-				Console.WriteLine("Avatar checking is caught up!");
+				Console.WriteLine("Avatar Check Already In Progress...");
 			}
 		}
 
@@ -70,7 +94,7 @@
 			{
 				HttpWebRequest webRequest = (HttpWebRequest)System.Net.HttpWebRequest.Create(url);
 				webRequest.AllowWriteStreamBuffering = true;
-				webRequest.Timeout = 30000;
+				webRequest.Timeout = 1000;
 
 				webRequest.Headers.Add("User-Agent", "VRCX 2021.04.04");
 				webRequest.Headers.Add("X-Platform", "standalonewindows");
@@ -90,7 +114,7 @@
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Console.WriteLine($"{e.Message}: {url}");
 			}
 
 			return true;

@@ -9,13 +9,13 @@
 	using System.Linq;
 	using System.Threading.Tasks;
 
-	[Group("Admin")]
+	[Group("Avatar")]
 	[RequireContext(ContextType.Guild, ErrorMessage = "Sorry, this command must be ran from within a server, not a DM!")]
 	[RequireTeam]
 	public class AvatarModule : ModuleBase<SocketCommandContext>
 	{
-		[Command("Avatar")]
-		[Summary("Avatar command")]
+		[Command("Search")]
+		[Summary("Search command")]
 		public async Task Avatar([Required] string query, int count = 1)
 		{
 			if (count > 10)
@@ -35,6 +35,27 @@
 				{
 					await ReplyAsync(null, false, CustomEmbed.GetAvatarEmbed(avatar));
 				}
+			}
+			else
+			{
+				await ReplyAsync("No avatars found!");
+			}
+		}
+
+		[Command("Clean")]
+		[Summary("Clean command")]
+		public async Task Clean()
+		{
+			var avatars = await DB.Find<AvatarDataEntity>().ManyAsync(a => !a.CheckedRecently);
+
+			if (avatars.Any())
+			{
+				foreach (var avatar in avatars)
+				{
+					avatar.CheckedRecently = false;
+					await avatar.SaveAsync();
+				}
+				await ReplyAsync($"Flagged {avatars.Count} avatars for cleaning..");
 			}
 			else
 			{
