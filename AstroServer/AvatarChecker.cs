@@ -28,7 +28,7 @@
 		{
 			mutex = new Mutex(false);
 			LoadProxies();
-			CheckTimer = new System.Timers.Timer(60000);
+			CheckTimer = new System.Timers.Timer(10000);
 			CheckTimer.Enabled = true;
 			CheckTimer.Elapsed += OnTimerElapsed;
 			Console.WriteLine($"AvatarChecker: Initialized. {proxies.Count()} proxies..");
@@ -175,6 +175,10 @@
 			}
 			catch (WebException we)
 			{
+				if (we.Status == WebExceptionStatus.Timeout)
+				{
+					RemoveProxyFromFile(proxy, "huge timeout");
+				}
 				//Console.WriteLine($"{we.Message}: {proxy}, {url}");
 				RemoveProxy(proxy);
 				return 2;
