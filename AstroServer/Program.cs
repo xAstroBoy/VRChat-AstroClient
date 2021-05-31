@@ -25,7 +25,7 @@
 		{
 			Console.WriteLine("Welcome to AstroServer!");
 			await Database.Initialize();
-			AvatarChecker.Initialize();
+			//AvatarChecker.Initialize();
 			Console.WriteLine("Starting Discord bot..");
 			Services = new ServiceCollection()
 				.AddSingleton<DiscordSocketClient>()
