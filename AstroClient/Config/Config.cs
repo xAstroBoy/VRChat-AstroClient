@@ -44,6 +44,8 @@
 		public bool LogTriggerEvents = false;
 
 		public float FOV = 61f;
+
+		public float FarClipPlane = 60f;
 	}
 
 	[Serializable, Obfuscation]

@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
 	using AstroClient.Cheetos;
+	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using System.Diagnostics;
 	using UnityEngine;
@@ -31,7 +32,11 @@
 			QMSingleToggleButton TriggerEventToggle = new QMSingleToggleButton(sub, 1, 0.5f, "Trigger Log ON", () => { ConfigManager.General.LogTriggerEvents = true; }, "Trigger Log OFF", () => { ConfigManager.General.LogTriggerEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogTriggerEvents, true);
 			TriggerEventToggle.SetToggleState(ConfigManager.General.LogTriggerEvents, false);
 
-			QMSlider fovSlider = new QMSlider(sub, "FOV", 1, 2, delegate (float value) { FOV.Set_Camera_FOV(value); }, ConfigManager.General.FOV, 140, 20, true);
+			QMNestedButton cameraSettings = new QMNestedButton(sub, 2, 2, "Camera", "Camera", null, null, null, null, false);
+			QMSlider fovSlider = new QMSlider(Utils.QuickMenu.transform.Find(cameraSettings.GetMenuName()), "FOV", 400, -620, delegate (float value) { FOV.Set_Camera_FOV(value); }, ConfigManager.General.FOV, 140, 20, true);
+			fovSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
+			QMSlider farClipPlaneSlider = new QMSlider(Utils.QuickMenu.transform.Find(cameraSettings.GetMenuName()), "FarClipPlane", 400, -820, delegate (float value) { CLIPPING.Set_Camera_FarClipPlane(value); }, ConfigManager.General.FarClipPlane, 300, 1, true);
+			farClipPlaneSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
 
 			// Hide Elements Menu
 			QMNestedButton subHideElements = new QMNestedButton(sub, 1, 2f, "Hide Elements", "Hide Elements", null, null, null, null, false);

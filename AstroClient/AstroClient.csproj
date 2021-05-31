@@ -143,6 +143,7 @@
     <Compile Include="Cheetos\CheetosHelpers.cs" />
     <Compile Include="Cheetos\AdminUI.cs" />
     <Compile Include="Cheetos\ForceClone.cs" />
+    <Compile Include="Cheetos\CameraStuff\CLIPPING.cs" />
     <Compile Include="Cheetos\MainThreadRunner.cs" />
     <Compile Include="Cheetos\VRCPlusHider.cs" />
     <Compile Include="Cheetos\CheetosTestStuff.cs" />
@@ -166,7 +167,7 @@
     <Compile Include="Features\Player\Movement\QuickMenu\QMFreeze.cs" />
     <Compile Include="GameEvents.cs" />
     <Compile Include="GameEventsBehaviour.cs" />
-    <Compile Include="Cheetos\GPLStuff\FOV.cs" />
+    <Compile Include="Cheetos\CameraStuff\FOV.cs" />
     <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
     <Compile Include="Cheetos\PlayerMenuUI.cs" />
     <Compile Include="Cheetos\StreamerProtector.cs" />
