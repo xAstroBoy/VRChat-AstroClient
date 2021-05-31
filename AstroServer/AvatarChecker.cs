@@ -4,34 +4,42 @@
 	using MongoDB.Driver;
 	using MongoDB.Entities;
 	using System;
+	using System.Collections.Generic;
+	using System.IO;
 	using System.Linq;
 	using System.Net;
+	using System.Threading;
+	using System.Threading.Tasks;
 	using System.Timers;
 
 	public static class AvatarChecker
 	{
+		private static string proxyFilePath = "/root/proxies.txt";
+
+		private static Mutex mutex;
+
 		private static System.Timers.Timer CheckTimer;
 
 		private static bool IsChecking;
 
-		private static string[] proxies = {
-			"104.214.38.138:8080",
-			"213.232.127.223:8085",
-			"157.230.103.189:46539",
-			"88.82.95.146:3128",
-			"2.50.154.149:53281",
-			"146.185.234.144:3128",
-			"167.172.180.46:43135",
-			"165.22.64.68:37793",
-		};
+		private static List<string> proxies = new List<string>();
 
 		public static void Initialize()
 		{
-			//CheckTimer = new System.Timers.Timer(60000);
-			CheckTimer = new System.Timers.Timer(60000);
+			mutex = new Mutex(false);
+			LoadProxies();
+			CheckTimer = new System.Timers.Timer(10000);
 			CheckTimer.Enabled = true;
 			CheckTimer.Elapsed += OnTimerElapsed;
-			Console.WriteLine("AvatarChecker: Initialized.");
+			Console.WriteLine($"AvatarChecker: Initialized. {proxies.Count()} proxies..");
+		}
+
+		private static void LoadProxies()
+		{
+			mutex.WaitOne();
+			proxies = File.ReadAllLines(proxyFilePath).ToList();
+			Console.WriteLine($"{proxies.Count()} proxies loaded..");
+			mutex.ReleaseMutex();
 		}
 
 		private static int GetChecked()
@@ -48,24 +56,37 @@
 		{
 			if (!IsChecking)
 			{
+				if (proxies.Count() < 10)
+				{
+					Console.WriteLine("Reloading proxy list, don't have enough!");
+					LoadProxies();
+				}
+
 				IsChecking = true;
 				//var rand = new Random();
 				//CheckTimer.Interval = 2000;
 
 				try
 				{
-					var toCheck = DB.Find<AvatarDataEntity>().Limit(10).ManyAsync(f => !f.CheckedRecently).Result;
+					var toCheck = DB.Find<AvatarDataEntity>().Limit(100).ManyAsync(f => !f.CheckedRecently).Result;
 
 					if (toCheck.Any())
 					{
+						List<Task> tasks = new List<Task>();
 						Console.WriteLine($"Avatar check in progress! Checking {toCheck.Count()} avatars..");
 						foreach (var found in toCheck)
 						{
-							CheckAvatar(found);
+							Task task = new Task(() =>
+							{
+								CheckAvatar(found);
+							});
+							tasks.Add(task);
 						}
-						Console.WriteLine("Avatar check done!");
-						Console.WriteLine($"There are {GetNotChecked()} avatars left to check.");
-						Console.WriteLine($"There are {GetChecked()} avatars already checked.");
+
+						tasks.ForEach(t => t.Start());
+						Task.WaitAll(tasks.ToArray());
+						Console.WriteLine($"Avatar check done! {GetChecked()}/{GetNotChecked()}");
+						Console.WriteLine($"{proxies.Count()} proxies left..");
 					}
 					else
 					{
@@ -81,7 +102,7 @@
 			}
 			else
 			{
-				Console.WriteLine("Avatar Check Already In Progress...");
+				//Console.WriteLine("Avatar Check Already In Progress...");
 			}
 		}
 
@@ -91,15 +112,20 @@
 		/// <param name="avatarDataEntity"></param>
 		public static void CheckAvatar(AvatarDataEntity avatarDataEntity)
 		{
-			var image1 = CheckImage(avatarDataEntity.ThumbnailURL);
-			var image2 = CheckImage(avatarDataEntity.ImageURL);
+			var rand = new Random();
+			var proxy = proxies[rand.Next(0, proxies.Count())];
 
-			if (image1 == 0 || image2 == 0)
+			//var image1 = CheckImage(proxy, avatarDataEntity.ThumbnailURL);
+			var image2 = CheckImage(proxy, avatarDataEntity.ImageURL);
+
+			//if (image1 == 0 || image2 == 0)
+			if (image2 == 0)
 			{
-				Console.WriteLine($"Invalid avatar found: {avatarDataEntity.Name}, {avatarDataEntity.ThumbnailURL}, {avatarDataEntity.ImageURL}");
+				Console.WriteLine($"Invalid avatar found: {avatarDataEntity.Name}, {avatarDataEntity.ImageURL}");
 				avatarDataEntity.DeleteAsync().GetAwaiter().GetResult();
 			}
-			else if (image1 == 2 || image2 == 2)
+			//else if (image1 == 2 || image2 == 2)
+			else if (image2 == 2)
 			{
 				avatarDataEntity.CheckedRecently = false;
 				_ = avatarDataEntity.SaveAsync();
@@ -111,20 +137,20 @@
 			}
 		}
 
-		public static int CheckImage(string url)
+		public static int CheckImage(string proxy, string url)
 		{
-			var rand = new Random();
-			var proxyObject = new WebProxy($"http://{proxies[rand.Next(0, proxies.Count())]}/");
+			var proxyObject = new WebProxy($"http://{proxy}/");
 			//string HeaderFake = $"{VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_0}-{VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_Int32_0}--Release";
 			try
 			{
 				proxyObject.UseDefaultCredentials = true;
 				HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
 				webRequest.AllowWriteStreamBuffering = true;
-				webRequest.Timeout = 30000;
+				webRequest.Timeout = 10000;
 				webRequest.Proxy = proxyObject;
 
-				webRequest.Headers.Add("User-Agent", "VRCX 2021.04.04");
+				webRequest.Headers.Add("User-Agent", "VRCX 2021.05.26.1");
+				//webRequest.Headers.Add("User-Agent", "VRCX 2021.04.04");
 				webRequest.Headers.Add("X-Platform", "standalonewindows");
 				//webRequest.Headers.Add("X-Client-Version", HeaderFake);
 				//webRequest.Headers.Add("User-Agent", "VRC.Core.BestHTTP");
@@ -140,18 +166,45 @@
 			{
 				return 0;
 			}
+			catch (WebException ex) when ((ex.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.Forbidden)
+			{
+				//Console.WriteLine($"{ex.Message}: {proxy}, {url}");
+				RemoveProxy(proxy);
+				RemoveProxyFromFile(proxy, "banned");
+				return 2;
+			}
 			catch (WebException we)
 			{
-				Console.WriteLine($"{we.Message}: {proxyObject.Address}, {url}");
+				//Console.WriteLine($"{we.Message}: {proxy}, {url}");
+				RemoveProxy(proxy);
 				return 2;
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine($"{e.Message}: {proxyObject.Address}, {url}");
+				//Console.WriteLine($"{e.Message}: {proxy}, {url}");
+				RemoveProxy(proxy);
 				return 2;
 			}
 
 			return 1;
+		}
+
+		private static void RemoveProxy(string proxy)
+		{
+			mutex.WaitOne();
+			proxies.Remove(proxy);
+			mutex.ReleaseMutex();
+		}
+
+		private static void RemoveProxyFromFile(string proxy, string reason)
+		{
+			mutex.WaitOne();
+			var lines = File.ReadLines(proxyFilePath).ToList();
+			lines.Remove(proxy);
+			File.WriteAllLines(proxyFilePath, lines.ToArray());
+			Console.WriteLine($"Proxy {proxy} removed from file. {reason}");
+			mutex.ReleaseMutex();
+
 		}
 	}
 }
