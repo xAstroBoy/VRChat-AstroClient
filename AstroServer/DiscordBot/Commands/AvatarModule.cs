@@ -46,7 +46,7 @@
 		[Summary("Clean command")]
 		public async Task Clean()
 		{
-			var avatars = await DB.Find<AvatarDataEntity>().ManyAsync(a => !a.CheckedRecently);
+			var avatars = await DB.Find<AvatarDataEntity>().ManyAsync(a => a.CheckedRecently);
 
 			if (avatars.Any())
 			{
