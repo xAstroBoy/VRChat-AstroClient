@@ -6,7 +6,6 @@
 	using System;
 	using System.Linq;
 	using System.Net;
-	using System.Threading;
 	using System.Timers;
 
 	public static class AvatarChecker
@@ -17,8 +16,9 @@
 
 		public static void Initialize()
 		{
-			CheckTimer = new System.Timers.Timer(60000);
-			CheckTimer.Enabled = true;
+			//CheckTimer = new System.Timers.Timer(60000);
+			CheckTimer = new System.Timers.Timer(2000);
+			//CheckTimer.Enabled = true;
 			CheckTimer.Elapsed += OnTimerElapsed;
 			Console.WriteLine("AvatarChecker: Initialized.");
 		}
@@ -38,10 +38,10 @@
 			if (!IsChecking)
 			{
 				IsChecking = true;
-				var rand = new Random();
-				CheckTimer.Interval = rand.Next(30000, 60000);
+				//var rand = new Random();
+				//CheckTimer.Interval = 2000;
 
-				var toCheck = DB.Find<AvatarDataEntity>().Limit(100).ManyAsync(f => !f.CheckedRecently).Result;
+				var toCheck = DB.Find<AvatarDataEntity>().Limit(1).ManyAsync(f => !f.CheckedRecently).Result;
 
 				if (toCheck.Any())
 				{
@@ -92,7 +92,7 @@
 			//string HeaderFake = $"{VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_0}-{VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_Int32_0}--Release";
 			try
 			{
-				HttpWebRequest webRequest = (HttpWebRequest)System.Net.HttpWebRequest.Create(url);
+				HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
 				webRequest.AllowWriteStreamBuffering = true;
 				webRequest.Timeout = 1000;
 
@@ -101,16 +101,20 @@
 				//webRequest.Headers.Add("X-Client-Version", HeaderFake);
 				//webRequest.Headers.Add("User-Agent", "VRC.Core.BestHTTP");
 
-				WebResponse webResponse = webRequest.GetResponse();
-				webResponse.Close();
+				using (var response = webRequest.GetResponse())
+				{
+					using (var responseStream = response.GetResponseStream())
+					{
+					}
+				}
+			}
+			catch (WebException ex) when ((ex.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
+			{
+				return false;
 			}
 			catch (WebException we)
 			{
-				HttpWebResponse errorResponse = we.Response as HttpWebResponse;
-				if (errorResponse.StatusCode == HttpStatusCode.NotFound)
-				{
-					return false;
-				}
+				Console.WriteLine($"{we.Message}: {url}");
 			}
 			catch (Exception e)
 			{
