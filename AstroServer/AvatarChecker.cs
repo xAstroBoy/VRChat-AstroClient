@@ -14,11 +14,22 @@
 
 		private static bool IsChecking;
 
+		private static string[] proxies = {
+			"104.214.38.138:8080",
+			"213.232.127.223:8085",
+			"157.230.103.189:46539",
+			"88.82.95.146:3128",
+			"2.50.154.149:53281",
+			"146.185.234.144:3128",
+			"167.172.180.46:43135",
+			"165.22.64.68:37793",
+		};
+
 		public static void Initialize()
 		{
 			//CheckTimer = new System.Timers.Timer(60000);
-			CheckTimer = new System.Timers.Timer(2000);
-			//CheckTimer.Enabled = true;
+			CheckTimer = new System.Timers.Timer(10000);
+			CheckTimer.Enabled = true;
 			CheckTimer.Elapsed += OnTimerElapsed;
 			Console.WriteLine("AvatarChecker: Initialized.");
 		}
@@ -41,23 +52,31 @@
 				//var rand = new Random();
 				//CheckTimer.Interval = 2000;
 
-				var toCheck = DB.Find<AvatarDataEntity>().Limit(1).ManyAsync(f => !f.CheckedRecently).Result;
+				try
+				{
+					var toCheck = DB.Find<AvatarDataEntity>().Limit(60).ManyAsync(f => !f.CheckedRecently).Result;
 
-				if (toCheck.Any())
-				{
-					Console.WriteLine($"Avatar check in progress! Checking {toCheck.Count()} avatars..");
-					foreach (var found in toCheck)
+					if (toCheck.Any())
 					{
-						CheckAvatar(found);
+						Console.WriteLine($"Avatar check in progress! Checking {toCheck.Count()} avatars..");
+						foreach (var found in toCheck)
+						{
+							CheckAvatar(found);
+						}
+						Console.WriteLine("Avatar check done!");
+						Console.WriteLine($"There are {GetNotChecked()} avatars left to check.");
+						Console.WriteLine($"There are {GetChecked()} avatars already checked.");
 					}
-					Console.WriteLine("Avatar check done!");
-					Console.WriteLine($"There are {GetNotChecked()} avatars left to check.");
-					Console.WriteLine($"There are {GetChecked()} avatars already checked.");
+					else
+					{
+						Console.WriteLine("Avatar checking is caught up!");
+					}
 				}
-				else
+				catch (Exception ex)
 				{
-					Console.WriteLine("Avatar checking is caught up!");
+					Console.WriteLine(ex.Message);
 				}
+
 				IsChecking = false;
 			}
 			else
@@ -75,10 +94,15 @@
 			var image1 = CheckImage(avatarDataEntity.ThumbnailURL);
 			var image2 = CheckImage(avatarDataEntity.ImageURL);
 
-			if (!image1 || !image2)
+			if (image1 == 0 || image2 == 0)
 			{
 				Console.WriteLine($"Invalid avatar found: {avatarDataEntity.Name}, {avatarDataEntity.ThumbnailURL}, {avatarDataEntity.ImageURL}");
 				avatarDataEntity.DeleteAsync().GetAwaiter().GetResult();
+			}
+			else if (image1 == 2 || image2 == 2)
+			{
+				avatarDataEntity.CheckedRecently = false;
+				_ = avatarDataEntity.SaveAsync();
 			}
 			else
 			{
@@ -87,14 +111,18 @@
 			}
 		}
 
-		public static bool CheckImage(string url)
+		public static int CheckImage(string url)
 		{
+			var rand = new Random();
+			var proxyObject = new WebProxy($"http://{proxies[rand.Next(0, proxies.Count())]}/");
 			//string HeaderFake = $"{VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_0}-{VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_Int32_0}--Release";
 			try
 			{
+				proxyObject.UseDefaultCredentials = true;
 				HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
 				webRequest.AllowWriteStreamBuffering = true;
-				webRequest.Timeout = 1000;
+				webRequest.Timeout = 30000;
+				webRequest.Proxy = proxyObject;
 
 				webRequest.Headers.Add("User-Agent", "VRCX 2021.04.04");
 				webRequest.Headers.Add("X-Platform", "standalonewindows");
@@ -110,18 +138,20 @@
 			}
 			catch (WebException ex) when ((ex.Response as HttpWebResponse)?.StatusCode == HttpStatusCode.NotFound)
 			{
-				return false;
+				return 0;
 			}
 			catch (WebException we)
 			{
-				Console.WriteLine($"{we.Message}: {url}");
+				Console.WriteLine($"{we.Message}: {proxyObject.Address}, {url}");
+				return 2;
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine($"{e.Message}: {url}");
+				Console.WriteLine($"{e.Message}: {proxyObject.Address}, {url}");
+				return 2;
 			}
 
-			return true;
+			return 1;
 		}
 	}
 }
