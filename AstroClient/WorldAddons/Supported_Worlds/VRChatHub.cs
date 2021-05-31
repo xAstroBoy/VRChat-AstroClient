@@ -12,7 +12,7 @@
 	using static VRC.SDKBase.VRC_EventHandler;
 	using System.Collections.Generic;
 
-	public class HubButtonsControl : GameEvents
+	public class VRChatHub : GameEvents
 	{
 		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
 		{

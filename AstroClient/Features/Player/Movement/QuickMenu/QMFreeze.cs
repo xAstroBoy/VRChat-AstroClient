@@ -18,57 +18,7 @@
 			Frozen = false;
 		}
 
-
-		// TODO: Make a Field Patcher to hook into the getter.
-
-		//private HarmonyInstance harmony;
-
-		//private void HookQuickMenu()
-		//{
-		//	if (harmony == null)
-		//	{
-		//		harmony = HarmonyInstance.Create(BuildInfo.Name + " QMFreezeHook");
-		//	}
-
-		//	foreach (var method in typeof(QuickMenu).GetMethods())
-		//	{
-		//		if (method != null)
-		//		{
-		//			ModConsole.Log($"QMFreeze Patch Found Method : [ {method.Name} ]");
-		//			if (method.Name.ToLower().StartsWith("get_"))
-		//			{
-		//				if (method.Name.ToLower() == "get_prop_Boolean_0")
-		//				{
-		//					ModConsole.DebugLog("Registering Patch QMFreezeHook");
-		//					harmony.Patch(typeof(QuickMenu).GetMethod(method.Name, BindingFlags.Instance | BindingFlags.Public), null, new HarmonyMethod(typeof(QMFreeze).GetMethod(nameof(QuickMenuIsOpen), BindingFlags.Static | BindingFlags.NonPublic)));
-		//				}
-		//			}
-		//		}
-		//	}
-
-
-
-		//	ModConsole.DebugLog("Hooked QuickMenu");
-		//}
-
-
-
-		//private static void QuickMenuIsOpen(ref bool value)
-		//{
-		//	if (FreezePlayerOnQMOpen)
-		//	{
-		//		if (value)
-		//		{
-		//			Freeze();
-		//		}
-		//		else
-		//		{
-		//			Unfreeze();
-		//		}
-		//	}
-		//}
-
-		public override void OnLateUpdate()
+		public override void OnUpdate()
 		{
 			if (FreezePlayerOnQMOpen)
 			{
@@ -90,10 +40,10 @@
 		{
 			if (Frozen)
 			{
-				Physics.gravity = _originalGravity;
+				Physics.gravity = originalGravity;
 				if (RestoreVelocity)
 				{
-					Networking.LocalPlayer.SetVelocity(_originalVelocity);
+					Networking.LocalPlayer.SetVelocity(originalVelocity);
 				}
 				Frozen = false;
 			}
@@ -103,9 +53,9 @@
 		{
 			if (!Frozen)
 			{
-				_originalGravity = Physics.gravity;
-				_originalVelocity = Networking.LocalPlayer.GetVelocity();
-				if (_originalVelocity == Vector3.zero)
+				originalGravity = Physics.gravity;	
+				originalVelocity = Networking.LocalPlayer.GetVelocity();
+				if (originalVelocity == Vector3.zero)
 				{
 					return;
 				}
@@ -148,8 +98,24 @@
 		public static QMToggleButton FreezePlayerOnQMOpenToggle;
 		public static bool Frozen;
 
+		private static Vector3 originalGravity
+		{
+			get
+			{
+				return _originalGravity;
+			}
+			set
+			{
+				if (value.x == 0f && value.y == 0f && value.z == 0f)
+				{
+					return; // Discard this value as is No Gravity.
+				}
+				_originalGravity = value;
+			}
+		}
 		private static Vector3 _originalGravity;
-		private static Vector3 _originalVelocity;
+
+		private static Vector3 originalVelocity;
 
 
 		internal static bool Opened;

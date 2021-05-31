@@ -37,5 +37,7 @@
 		public static readonly string Club808 = "wrld_6fdd0648-a0de-47a5-bf14-fc42b8b2f859";
 
 		public static readonly string ChuckECheeseEsperience = "wrld_d24c4cc9-a6ba-43a0-a3e8-185b6481a43a";
+
+		public static readonly string ClubMisfitAfterParty = "wrld_4524f1b5-e380-4330-afc9-d36705ced271";
 	}
 }
