@@ -175,39 +175,29 @@
 				case PacketClientType.AVATAR_SEARCH:
 					{
 						List<AvatarDataEntity> found = DB.Find<AvatarDataEntity>().ManyAsync(a => a.Name.ToLower().Contains(packetData.TextData.ToLower())).GetAwaiter().GetResult();
+						List<AvatarDataEntity> toSend = new List<AvatarDataEntity>();
+
 						Console.WriteLine($"Avatar Search: {client.Temp.SearchType}, {packetData.TextData.ToLower()}");
 
 						if (found.Any())
 						{
-							foreach (var avatar in found)
+							toSend.AddRange(found.Where(avatar => (client.Temp.SearchType == 0) || (client.Temp.SearchType == 1 && avatar.ReleaseStatus.ToLower().Equals("public")) || (client.Temp.SearchType == 2 && avatar.ReleaseStatus.ToLower().Equals("private"))));
+							int i = 0;
+							foreach (var avatar in toSend)
 							{
-								bool send;
-
-								if (client.Temp.SearchType == 0) // All
-								{
-									send = true;
-								}
-								else if (client.Temp.SearchType == 1 && avatar.ReleaseStatus.ToLower().Equals("public"))
-								{
-									send = true;
-								}
-								else if (client.Temp.SearchType == 2 && avatar.ReleaseStatus.ToLower().Equals("private"))
-								{
-									send = true;
-								}
-								else
-								{
-									send = false;
-								}
-
-								if (send)
+								if (i < 1000)
 								{
 									client.Send(new PacketData(PacketServerType.AVATAR_RESULT, Newtonsoft.Json.JsonConvert.SerializeObject(avatar.GetAvatarData())));
 								}
+								else
+								{
+									break;
+								}
+								i++;
 							}
 						}
 
-						client.Send(new PacketData(PacketServerType.AVATAR_RESULT_DONE, found.Count.ToString()));
+						client.Send(new PacketData(PacketServerType.AVATAR_RESULT_DONE, toSend.Count.ToString()));
 						break;
 					}
 
