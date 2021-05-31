@@ -9,6 +9,7 @@
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using System.Collections.Generic;
+	using static AstroClient.Cheetos.AvatarSearch;
 
 	#endregion
 
@@ -30,7 +31,7 @@
 
 		public static bool HasUdon;
 
-		public static void AvatarSearch(string query)
+		public static void AvatarSearch(SearchTypes searchType, string query)
 		{
 			if (Initialized)
 			{
@@ -38,8 +39,9 @@
 				{
 					if (Bools.IsDeveloper)
 					{
-						ModConsole.DebugLog($"Sending Avatar Search: {query}");
+						ModConsole.Log($"Sending Avatar Search: {(int) searchType}, {query}");
 					}
+					AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_SEARCH_TYPE, ((int) searchType).ToString()));
 					AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_SEARCH, query));
 				}
 			}

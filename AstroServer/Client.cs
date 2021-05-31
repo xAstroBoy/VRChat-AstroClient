@@ -21,6 +21,8 @@
 
 		public AccountData Data;
 
+		public TempData Temp;
+
 		internal Client()
 		{
 			Name = "N/A";
@@ -30,6 +32,7 @@
 			DiscordID = 0;
 			IsAuthed = false;
 			IsReady = false;
+			Temp = new TempData();
 		}
 	}
 }

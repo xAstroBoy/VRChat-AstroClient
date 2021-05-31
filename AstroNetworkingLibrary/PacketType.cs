@@ -11,6 +11,7 @@
 		public const byte AVATAR_DATA = 21;
 		public const byte KEEP_ALIVE = 100;
 		public const byte GET_RESOURCES = 200;
+		public const byte AVATAR_SEARCH_TYPE = 224;
 		public const byte AVATAR_SEARCH = 225;
 	}
 

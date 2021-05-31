@@ -6,21 +6,34 @@
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using DayClientML2.Utility.MenuApi;
+	using System;
 	using System.Collections;
 	using System.Diagnostics;
 	using UnityEngine;
 	using VRC.Core;
 
-	class AvatarSearch : GameEvents
+	public class AvatarSearch : GameEvents
 	{
+		public static SearchTypes SearchType = SearchTypes.ALL;
+
+		public static bool IsSearching = false;
+
 		private static GameObject publicAvatarList;
+
 		private static Il2CppSystem.Collections.Generic.List<ApiAvatar> foundAvatars = new Il2CppSystem.Collections.Generic.List<ApiAvatar>();
 
 		private static VRCList list;
 
 		private static Stopwatch stopwatch;
 
-		public static bool IsSearching = false;
+		private static MenuButton SearchTypeButton;
+
+		public enum SearchTypes
+		{
+			ALL,
+			PUBLIC,
+			PRIVATE
+		}
 
 		public override void VRChat_OnUiManagerInit()
 		{
@@ -29,8 +42,26 @@
 			{
 				Utils.VRCUiPopupManager.AskInGameInput("Astro Avatar Search", "Search", delegate (string text)
 				{
-					Search(text);
+					Search(SearchType, text);
 				}, "Enter Avatar name. . .");
+			}, 1.45f, 1f);
+
+			SearchTypeButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "All", -850f, 50f, delegate ()
+			{
+				if (SearchType == SearchTypes.ALL)
+				{
+					SearchType = SearchTypes.PRIVATE;
+				}
+				else if (SearchType == SearchTypes.PRIVATE)
+				{
+					SearchType = SearchTypes.PUBLIC;
+				}
+				else if (SearchType == SearchTypes.PUBLIC)
+				{
+					SearchType = SearchTypes.ALL;
+				}
+				UpdateButtons();
+
 			}, 1.45f, 1f);
 
 			publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
@@ -39,7 +70,12 @@
 			list.Text.supportRichText = true;
 		}
 
-		public static void Search(string query)
+		private static void UpdateButtons()
+		{
+			SearchTypeButton.SetText(Enum.GetName(typeof(SearchTypes), SearchType).ToLower().ToUppercaseFirstCharacterOnly());
+		}
+
+		public static void Search(SearchTypes searchType, string query)
 		{
 			if (!IsSearching)
 			{
@@ -48,7 +84,7 @@
 
 				// Refresh UI
 				foundAvatars.Clear();
-				NetworkingManager.AvatarSearch(query);
+				NetworkingManager.AvatarSearch(searchType, query);
 
 				IsSearching = true;
 				MelonLoader.MelonCoroutines.Start(LoopCheck());
@@ -74,11 +110,26 @@
 		{
 			IsSearching = false;
 			stopwatch.Stop();
+			list.Text.supportRichText = true;
 			list.UiVRCList.expandedHeight *= 2f;
 			list.UiVRCList.extendRows = 4;
 			list.UiVRCList.startExpanded = false;
 			//Utils.VRCUiManager.ShowScreen(currPageAvatar);
+
+			foreach (var avatar in foundAvatars)
+			{
+				if (avatar.releaseStatus.ToLower().Equals("private"))
+				{
+					avatar.name = $"<color=red>[P]</color> {avatar.name}";
+				}
+			}
+
 			list.RenderElement(foundAvatars);
+
+			foreach (var item in list.UiVRCList.pickers)
+			{
+				item.field_Public_Text_0.supportRichText = true;
+			}
 			list.Text.text = $"<color=cyan>Astro Search</color> Found: <color=yellow>{foundAvatars.Count}</color> in {stopwatch.ElapsedMilliseconds}ms";
 			ModConsole.Log($"Avatar Search Completed: found {foundAvatars.Count} avatars in {stopwatch.ElapsedMilliseconds}ms");
 		}
