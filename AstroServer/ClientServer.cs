@@ -185,7 +185,7 @@
 							int i = 0;
 							foreach (var avatar in toSend)
 							{
-								if (i <= 1000)
+								if (i < 1000)
 								{
 									client.Send(new PacketData(PacketServerType.AVATAR_RESULT, Newtonsoft.Json.JsonConvert.SerializeObject(avatar.GetAvatarData())));
 								}
