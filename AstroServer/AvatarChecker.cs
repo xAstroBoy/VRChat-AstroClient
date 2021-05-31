@@ -28,7 +28,7 @@
 		{
 			mutex = new Mutex(false);
 			LoadProxies();
-			CheckTimer = new System.Timers.Timer(10000);
+			CheckTimer = new System.Timers.Timer(60000);
 			CheckTimer.Enabled = true;
 			CheckTimer.Elapsed += OnTimerElapsed;
 			Console.WriteLine($"AvatarChecker: Initialized. {proxies.Count()} proxies..");
@@ -146,7 +146,7 @@
 				proxyObject.UseDefaultCredentials = true;
 				HttpWebRequest webRequest = (HttpWebRequest)WebRequest.Create(url);
 				webRequest.AllowWriteStreamBuffering = true;
-				webRequest.Timeout = 10000;
+				webRequest.Timeout = 30000;
 				webRequest.Proxy = proxyObject;
 
 				webRequest.Headers.Add("User-Agent", "VRCX 2021.05.26.1");
