@@ -32,9 +32,9 @@
 		public static List<string> AvatarsToSkip { get; set; } = new List<string>();
 
 
-		private static string TermsToEnableOnPath { get; } = Path.Combine(Environment.CurrentDirectory, @"\AstroClient\Lewdify\TermsToEnable.json");
-		private static string TermsToEnableOffPath { get; } = Path.Combine(Environment.CurrentDirectory, @"\AstroClient\Lewdify\TermsToDisable.json");
-		private static string AvatarsToSkipPath { get; } = Path.Combine(Environment.CurrentDirectory, @"\AstroClient\Lewdify\IgnoredAvatars.json");
+		private static string TermsToEnableOnPath { get; } = Path.Combine(Environment.CurrentDirectory, @"AstroClient\Lewdify\TermsToEnable.json");
+		private static string TermsToEnableOffPath { get; } = Path.Combine(Environment.CurrentDirectory, @"AstroClient\Lewdify\TermsToDisable.json");
+		private static string AvatarsToSkipPath { get; } = Path.Combine(Environment.CurrentDirectory, @"AstroClient\Lewdify\IgnoredAvatars.json");
 
 
 		public static void SaveAll()
