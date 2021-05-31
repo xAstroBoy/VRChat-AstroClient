@@ -27,7 +27,7 @@
 		{
 			try
 			{
-				var camera = GameObjectFinder.Find("_Application/TrackingVolume/TrackingSteam(Clone)/SteamCamera/[CameraRig]/Neck/Camera (head)/Camera (eye)").GetComponent<Camera>();
+				var camera = GameObject.Find("Camera (eye)").GetComponent<Camera>();
 				standaloneInputModule = GameObjectFinder.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
 				cursorManager = GameObjectFinder.Find("_Application/CursorManager").GetComponent<VRCUiCursorManager>();
 				UI = new GameObject() { name = "CheetoUI" };
