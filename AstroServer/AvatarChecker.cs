@@ -28,7 +28,7 @@
 		public static void Initialize()
 		{
 			//CheckTimer = new System.Timers.Timer(60000);
-			CheckTimer = new System.Timers.Timer(10000);
+			CheckTimer = new System.Timers.Timer(60000);
 			CheckTimer.Enabled = true;
 			CheckTimer.Elapsed += OnTimerElapsed;
 			Console.WriteLine("AvatarChecker: Initialized.");
@@ -54,7 +54,7 @@
 
 				try
 				{
-					var toCheck = DB.Find<AvatarDataEntity>().Limit(60).ManyAsync(f => !f.CheckedRecently).Result;
+					var toCheck = DB.Find<AvatarDataEntity>().Limit(10).ManyAsync(f => !f.CheckedRecently).Result;
 
 					if (toCheck.Any())
 					{
