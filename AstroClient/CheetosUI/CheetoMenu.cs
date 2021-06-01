@@ -4,6 +4,7 @@
 	#region Imports
 
 	using AstroLibrary.Finder;
+	using DayClientML2.Utility.Extensions;
 	using System.ServiceModel.Channels;
 	using UnityEngine;
 	using UnityEngine.EventSystems;
@@ -25,6 +26,7 @@
 
 		public override void VRChat_OnUiManagerInit()
 		{
+			return;
 			try
 			{
 				var camera = GameObject.Find("Camera (eye)").GetComponent<Camera>();
@@ -84,6 +86,7 @@
 
 		private void ToggleMenu()
 		{
+			return;
 			IsOpen = !IsOpen;
 			Menu.SetActive(IsOpen);
 
