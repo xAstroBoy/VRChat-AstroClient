@@ -184,7 +184,7 @@
 			if (KeyManager.IsAuthed)
 			{
 				QuickMenuUtils.SetQuickMenuCollider(5, 5);
-				UserInteractMenuBtns.InitButtons(1, 3, true); //UserMenu Main Button
+				UserInteractMenuBtns.InitButtons(0, 3, true); //UserMenu Main Button
 
 				InitMainsButtons();
 				ItemTweakerMain.InitButtons(5, 0.5f, true); //ItemTweaker Main Button

@@ -12,7 +12,7 @@
 		{
 			if (!booleanhere)
 			{
-				CheetosHelpers.SendHudNotification($"Welcome Back <Color=#c242f5>{ LocalPlayerUtils.GetSelfPlayer().DisplayName()}</color> \n 	<color=#42f5f2>AstroClient</color> Made By\n <color=#2A3EBF>AstroBoy</color>, <color=#F79239>Cheetos</color>, <color=#b619ff>Mora</color>");
+				CheetosHelpers.SendHudNotification($"Welcome Back <Color=#c242f5>{ LocalPlayerUtils.GetSelfPlayer().DisplayName()}</color> \n 	<color=#42f5f2>AstroClient</color> Made By\n <color=#2A3EBF>AstroBoy</color> and <color=#F79239>Cheetos</color>");
 				booleanhere = true;
 			}
 		}
