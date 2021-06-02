@@ -125,7 +125,7 @@
 					else
 					{
 
-						if (Time.time - LastTimeCheck > 0.9f)
+						if (Time.time - LastTimeCheck > 0.05f)
 						{
 							if (!pickup.IsHeld)
 							{

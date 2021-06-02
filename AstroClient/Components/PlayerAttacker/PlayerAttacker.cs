@@ -133,7 +133,7 @@
 						{
 							if (!pickup.IsHeld)
 							{
-								if (Time.time - LastTimeCheck2 > 0.4f)
+								if (Time.time - LastTimeCheck2 > 0.06f)
 								{
 									if (gameObject.isOwner())
 									{
