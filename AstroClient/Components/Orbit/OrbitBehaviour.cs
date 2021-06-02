@@ -140,8 +140,12 @@
 
 				if (!pickup.IsHeld)
 				{
-					if (obj.isOwner())
+					if (!pickup.IsHeld)
 					{
+						if (!gameObject.isOwner())
+						{
+							gameObject.TakeOwnership();
+						}
 						Timer += (Time.deltaTime * RotationSpeed) + TimerOffset;
 						Rotate();
 						UpdateTimer -= Time.deltaTime;
@@ -151,10 +155,6 @@
 							transform.LookAt(CenterPoint);
 							UpdateTimer = Time.deltaTime * 2f;
 						}
-					}
-					else
-					{
-						obj.TakeOwnership();
 					}
 				}
 

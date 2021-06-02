@@ -114,6 +114,14 @@
 					}
 					else
 					{
+						if (!pickup.IsHeld)
+						{
+							if (!gameObject.isOwner())
+							{
+								gameObject.TakeOwnership();
+							}
+						}
+
 						if (Time.time - LastTimeCheck > 0.9f)
 						{
 							ApplyRequiredSettings();
@@ -135,20 +143,15 @@
 							{
 								if (Time.time - LastTimeCheck2 > 0.06f)
 								{
-									if (gameObject.isOwner())
-									{
-										gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-										ApplyForceX();
-										gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-										ApplyForceY();
-										gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-										ApplyForceZ();
-										gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-									}
-									else
-									{
-										gameObject.TakeOwnership();
-									}
+
+									gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+									ApplyForceX();
+									gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+									ApplyForceY();
+									gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+									ApplyForceZ();
+									gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+
 								}
 							}
 						}

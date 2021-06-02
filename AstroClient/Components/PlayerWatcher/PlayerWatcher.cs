@@ -129,14 +129,13 @@
 						{
 							if (!pickup.IsHeld)
 							{
-								if (gameObject.isOwner())
-								{
-									gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
-								}
-								else
-								{
-									gameObject.TakeOwnership();
-								}
+
+									if (!gameObject.isOwner())
+									{
+										gameObject.TakeOwnership();
+									}
+								
+								gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
 							}
 
 							LastTimeCheck = Time.time;
