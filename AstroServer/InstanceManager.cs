@@ -17,7 +17,7 @@
 						TagData tagData = new TagData() { UserID = other.UserID, Text = "AstroClient Developer" };
 						var json = JsonConvert.SerializeObject(tagData);
 						client.Send(new PacketData(PacketServerType.ADD_TAG, json));
-						client.Send(new PacketData(PacketServerType.NOTIFY, $"<color=cyan>AstroClient Developer</color> {client.Name} Is Here!"));
+						client.Send(new PacketData(PacketServerType.NOTIFY, $"<color=cyan>AstroClient Developer</color> {other.Name} Is Here!"));
 					}
 					else
 					{

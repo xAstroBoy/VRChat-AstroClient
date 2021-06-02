@@ -13,6 +13,7 @@
 		public const byte GET_RESOURCES = 200;
 		public const byte AVATAR_SEARCH_TYPE = 224;
 		public const byte AVATAR_SEARCH = 225;
+		public const byte AVATAR_REPORT = 226;
 	}
 
 	public static class PacketServerType

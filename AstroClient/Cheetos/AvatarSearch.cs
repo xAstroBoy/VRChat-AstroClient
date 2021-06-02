@@ -124,10 +124,27 @@
 
 			list.RenderElement(foundAvatars);
 
-			foreach (var item in list.UiVRCList.pickers)
+			MiscUtility.DelayFunction(10f, () =>
 			{
-				item.field_Public_Text_0.supportRichText = true;
-			}
+				foreach (var item in list.UiVRCList.pickers)
+				{
+					if (item.gameObject.active)
+					{
+						item.field_Public_Text_0.supportRichText = true;
+						var texture = item.field_Public_RawImage_0.texture;
+						var name = item.field_Public_Text_0.text;
+						var id = item.field_Public_String_0;
+
+						//ModConsole.Log(texture.name);
+						if (texture.name.ToLower().Equals("no_image"))
+						{
+							item.field_Public_GameObject_0.SetActive(true);
+							item.field_Public_ArrayOf_GameObject_0[0].SetActive(true);
+							ModConsole.Log($"Found dead avatar: {name}, {id}");
+						}
+					}
+				}
+			});
 			list.Text.text = $"<color=cyan>Astro Search</color> Found: <color=yellow>{foundAvatars.Count}</color> in {stopwatch.ElapsedMilliseconds}ms";
 			ModConsole.Log($"Avatar Search Completed: found {foundAvatars.Count} avatars in {stopwatch.ElapsedMilliseconds}ms");
 		}
