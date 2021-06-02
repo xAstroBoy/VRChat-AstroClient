@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Components
 {
+	using AstroClient.Extensions;
 	using System;
 	using System.Runtime.InteropServices;
 	using UnhollowerRuntimeLib;
@@ -95,38 +96,31 @@
 					{
 						control.EditMode = true;
 					}
-					if (!OnlineEditor.IsLocalPlayerOwner(obj))
+					if (!obj.isOwner())
 					{
-						if (TakeOwnership)
+						if (!pickup.IsHeld)
 						{
-							OnlineEditor.TakeObjectOwnership(obj);
-						}
-						if (control != null)
-						{
-							control.isKinematic = false;
-							control.useGravity = UseGravity;
-							control.UpdateAngularDrag(0);
-							control.UpdateDrag(0);
+							obj.TakeOwnership();
+							if (control != null)
+							{
+								control.isKinematic = false;
+								control.useGravity = UseGravity;
+								control.UpdateAngularDrag(0);
+								control.UpdateDrag(0);
+								HasRequiredSettings = true;
+							}
 						}
 					}
-					else
-					{
-						if (control != null)
-						{
-							control.isKinematic = false;
-							control.useGravity = UseGravity;
-							control.UpdateAngularDrag(0);
-							control.UpdateDrag(0);
-						}
-					}
-					HasRequiredSettings = true;
 				}
 
 				if (Time.time - LastTimeCheck2 > ImpulseTimer)
 				{
-					if (TakeOwnership)
+					if (!pickup.IsHeld)
 					{
-						OnlineEditor.TakeObjectOwnership(obj);
+						if (!obj.isOwner())
+						{
+							obj.TakeOwnership();
+						}
 					}
 					if (ShouldDoImpulseMode)
 					{
@@ -150,9 +144,12 @@
 
 				if (Time.time - LastTimeCheck > CrazyTimer)
 				{
-					if (TakeOwnership)
+					if (!pickup.IsHeld)
 					{
-						OnlineEditor.TakeObjectOwnership(obj);
+						if (!obj.isOwner())
+						{
+							obj.TakeOwnership();
+						}
 					}
 					if (!IsDoingImpulseMode)
 					{

@@ -43,14 +43,12 @@
 			obj = RigidBody.gameObject;
 			NewSize = obj.transform.localScale;
 			ItemInflaterManager.Register(this);
-			OnlineEditor.TakeObjectOwnership(obj);
 		}
 
 		void OnDestroy()
 		{
 			try
 			{
-				OnlineEditor.RemoveOwnerShip(obj);
 				ItemInflaterManager.RemoveObject(obj);
 			}
 			catch
@@ -87,7 +85,7 @@
 			}
 			catch (Exception)
 			{
-				DestroyImmediate(obj.GetComponent<ItemInflater>());
+				DestroyImmediate(this);
 			}
 		}
 

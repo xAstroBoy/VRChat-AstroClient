@@ -106,17 +106,16 @@
 							HasRequiredSettings = true;
 						}
 					}
-					if (obj.isOwner())
+					if (!pickup.IsHeld)
 					{
+						if (!obj.isOwner())
+						{
+							obj.TakeOwnership();
+						}
 						SpinObject(obj, ForceX, 0, 0);
 						SpinObject(obj, 0, ForceY, 0);
 						SpinObject(obj, 0, 0, ForceZ);
 					}
-					else
-					{
-						obj.TakeOwnership();
-					}
-
 
 
 
