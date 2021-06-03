@@ -18,43 +18,28 @@
 
 			try
 			{
-				var result = new List<GameObject>();
-				List<GameObject> list1 = new List<GameObject>();
-				List<GameObject> list2 = new List<GameObject>();
 
-				list1 = VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
-				list2 = VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
-
-				//// Unite The lists In one.
-
-
-				foreach (var item in list2)
+				var list1 = VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
+				if (list1 != null && list1.Count() != 0)
 				{
-					if (item != null)
+					return list1;
+				}
+				else
+				{
+					var list2 = VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
+					if(list2 != null && list2.Count() != 0)
 					{
-						if (!list1.Contains(item))
-						{
-							list1.Add(item);
-						}
+						return list2;
 					}
 				}
-
-				// Linq Still broken, does grab some duplicated gameobjects on the way (Might add a check as well in future)
-				//result = list1
-				//	.Union(list2)
-				//	.Distinct()
-				//	.ToList()
-				//	.Where(x => x.gameObject != null)
-				//	.ToList(); // Never null.
-				return result;
-
 			}
 			catch (Exception e)
 			{
 				ModConsole.Error("Error parsing World Prefabs");
 				ModConsole.ErrorExc(e);
-				return null;
+				return new List<GameObject>();
 			}
+			return new List<GameObject>();
 		}
 
 		public static IEnumerable<Player> Get_Players()
@@ -106,131 +91,84 @@
 		{
 			try
 			{
-				List<GameObject> list1 = new List<GameObject>();
-				List<GameObject> list2 = new List<GameObject>();
-				List<GameObject> list3 = new List<GameObject>();
-
-				list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
-				list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Pickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
-				list3 = Resources.FindObjectsOfTypeAll<VRCPickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
-
-
-				// Unite The lists In one (avoiding duplicates).
-
-				foreach (var item in list2)
+				List<GameObject> result = new List<GameObject>();
+				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
+				if (list1 != null && list1.Count() != 0)
 				{
-					if (item != null)
+					result =  list1;
+				}
+				else
+				{
+					var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Pickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
+					if (list2 != null && list2.Count() != 0)
 					{
-						if (!list1.Contains(item))
+						result =  list2;
+					}
+					else
+					{
+						var list3 = Resources.FindObjectsOfTypeAll<VRCPickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
+						if (list3 != null && list3.Count() != 0)
 						{
-							list1.Add(item);
+							result = list3;
 						}
 					}
 				}
 
-				foreach (var item in list3)
-				{
-					if (item != null)
-					{
-						if (!list1.Contains(item))
-						{
-							list1.Add(item);
-						}
-					}
-				}
 
-				// Linq Still broken, does grab some duplicated gameobjects on the way (Might add a check as well in future)
-
-				//result = list1
-				//	.Union(list2)
-				//	.Union(list3)
-				//	.ToList()
-				//	.Where(x => x.gameObject != null)
-				//	.ToList(); // Never null.
-
-
-
-				if (list1.Count() != 0) // Then Filter the ViewFinder (Player Camera)
+				if (result.Count() != 0) // Then Filter the ViewFinder (Player Camera)
 				{
 					if (CameraOnTweakerExperiment.ViewFinder.gameObject != null)
 					{
-						if (list1.Contains(CameraOnTweakerExperiment.ViewFinder.gameObject))
+						if (result.Contains(CameraOnTweakerExperiment.ViewFinder.gameObject))
 						{
-							list1.Remove(CameraOnTweakerExperiment.ViewFinder.gameObject);
+							result.Remove(CameraOnTweakerExperiment.ViewFinder.gameObject);
 						}
 					}
 				}
-				return list1;
-
+				return result;
 			}
 			catch (Exception e)
 			{
 				ModConsole.Error("Error parsing World Pickups");
 				ModConsole.ErrorExc(e);
-				return null;
+				return new List<GameObject>();
 			}
+			return new List<GameObject>();
 		}
 
 		public static List<GameObject> Get_VRCInteractables()
 		{
-
-
 			try
 			{
-
-
-				List<GameObject> list1 = new List<GameObject>();
-				List<GameObject> list2 = new List<GameObject>();
-				List<GameObject> list3 = new List<GameObject>();
-
-				list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
-				list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
-				list3 = Resources.FindObjectsOfTypeAll<VRCInteractable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
-
-				// Unite The lists In one (avoiding duplicates).
-
-
-				foreach (var item in list2)
+				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
+				if (list1 != null && list1.Count() != 0)
 				{
-					if (item != null)
+					return list1;
+				}
+				else
+				{
+					var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
+					if (list2 != null && list2.Count() != 0)
 					{
-						if (!list1.Contains(item))
+						return list2;
+					}
+					else
+					{
+						var list3 = Resources.FindObjectsOfTypeAll<VRCInteractable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
+						if (list3 != null && list3.Count() != 0)
 						{
-							list1.Add(item);
+							return list3;
 						}
 					}
 				}
-
-				foreach (var item in list3)
-				{
-					if (item != null)
-					{
-						if (!list1.Contains(item))
-						{
-							list1.Add(item);
-						}
-					}
-				}
-
-				// Linq Still broken, does grab some duplicated gameobjects on the way (Might add a check as well in future)
-
-				//result =  list1
-				//	.Union(list2)
-				//	.Union(list3)
-				//	.Distinct()
-				//	.ToList()
-				//	.Where(x => x.gameObject != null)
-				//	.ToList(); // Never null.
-
-				return list1;
-
 			}
 			catch (Exception e)
 			{
 				ModConsole.Error("Error parsing World VRC Interactables");
 				ModConsole.ErrorExc(e);
-				return null;
+				return new List<GameObject>();
 			}
+			return new List<GameObject>();
 		}
 
 		public static List<GameObject> Get_Triggers()
@@ -238,61 +176,53 @@
 
 			try
 			{
-				List<GameObject>  list1 = new List<GameObject>(); 
-				List<GameObject>  list2 = new List<GameObject>();
-
-				list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
-				list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
 
 
-				foreach (var item in list2)
+				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
+				if (list1 != null && list1.Count() != 0)
 				{
-					if (item != null)
+					return list1;
+				}
+				else
+				{
+					var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
+					if (list2 != null && list2.Count() != 0)
 					{
-						if (!list1.Contains(item))
-						{
-							list1.Add(item);
-						}
+						return list2;
 					}
 				}
-				// Linq Still broken, does grab some duplicated gameobjects on the way (Might add a check as well in future)
-
-				//// Unite The lists In one (avoiding duplicates).
-				//result = list1
-				//	.Union(list2)
-				//	.Distinct()
-				//	.ToList()
-				//	.Where(x => x.gameObject != null)
-				//	.ToList();
-
-				return list1;
 			}
 			catch(Exception e)
 			{
 				ModConsole.Error("Error parsing World Triggers");
 				ModConsole.ErrorExc(e);
-				return null;
+				return new List<GameObject>();
 			}
+			return new List<GameObject>();
 		}
 
 		public static List<UdonBehaviour> Get_UdonBehaviours()
 		{
-			List<UdonBehaviour> events = new List<UdonBehaviour>();
-			foreach(var item in Resources.FindObjectsOfTypeAll<UdonBehaviour>())
+			var UdonBehaviourObjects = new List<UdonBehaviour>();
+			var list = Resources.FindObjectsOfTypeAll<UdonBehaviour>();
+			if (list.Count() != 0)
 			{
-				if(item != null)
+				foreach (var item in list)
 				{
-					if (item._eventTable.keys.Count != 0)
+					if (item._eventTable.Keys.Count != 0)
 					{
-						if (!events.Contains(item))
+						if (!UdonBehaviourObjects.Contains(item))
 						{
-							events.Add(item);
+							UdonBehaviourObjects.Add(item);
 						}
 					}
 				}
+				return UdonBehaviourObjects;
 			}
-			return events;
+			return UdonBehaviourObjects;
 		}
+
+
 
 		public static string Get_World_Name()
 		{

@@ -29,7 +29,7 @@
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <OutputPath>D:\Steam Library\steamapps\common\VRChat\debug\</OutputPath>
+    <OutputPath>D:\Steam Library\steamapps\common\VRChat\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
@@ -40,7 +40,7 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_Offline|AnyCPU'">
-    <OutputPath>D:\Steam Library\steamapps\common\VRChat\debug\</OutputPath>
+    <OutputPath>D:\Steam Library\steamapps\common\VRChat\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;OFFLINE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>

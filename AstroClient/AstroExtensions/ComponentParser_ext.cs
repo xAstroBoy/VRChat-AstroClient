@@ -22,59 +22,36 @@
 			{
 				try
 				{
-
-					List<GameObject> list1 = new List<GameObject>();
-					List<GameObject> list2 = new List<GameObject>();
-					List<GameObject> list3 = new List<GameObject>();
-
-
-					list1 = obj.GetComponentsInChildren<VRC_Interactable>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
-					list2 = obj.GetComponentsInChildren<VRCSDK2.VRC_Interactable>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
-					list3 = obj.GetComponentsInChildren<VRCInteractable>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
-
-
-					// Linq Still broken, does grab some duplicated gameobjects on the way (Might add a check as well in future)
-					// Unite The lists In one (avoiding duplicates).
-					//result = list1
-					//	.Union(list2)
-					//	.Union(list3)
-					//	.Distinct()
-					//	.ToList()
-					//	.Where(x => x.gameObject != null)
-					//	.ToList(); // Never null.
-					foreach (var item in list2)
+					var list1 = obj.GetComponentsInChildren<VRC_Interactable>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
+					if (list1.Count() != 0 && list1 != null)
 					{
-						if (item != null)
+						return list1;
+					}
+					else
+					{
+						var list2 = obj.GetComponentsInChildren<VRCSDK2.VRC_Interactable>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
+						if (list2.Count() != 0 && list2 != null)
 						{
-							if (!list1.Contains(item))
+							return list2;
+						}
+						else
+						{
+							var list3 = obj.GetComponentsInChildren<VRCInteractable>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
+							if (list3.Count() != 0 && list3 != null)
 							{
-								list1.Add(item);
+								return list3;
 							}
 						}
 					}
-
-					foreach (var item in list3)
-					{
-						if (item != null)
-						{
-							if (!list1.Contains(item))
-							{
-								list1.Add(item);
-							}
-						}
-					}
-
-					return list1;
-
 				}
 				catch (Exception e)
 				{
 					ModConsole.Error("Error parsing Pickup VRC Interactables");
 					ModConsole.ErrorExc(e);
-					return null;
+					return new List<GameObject>();
 				}
 			}
-			return null;
+			return new List<GameObject>();
 		}
 
 		public static List<GameObject> Get_Triggers(this GameObject obj)
@@ -83,63 +60,52 @@
 			{
 				try
 				{
-					List<GameObject> list1 = new List<GameObject>();
-					List<GameObject> list2 = new List<GameObject>();
-
-					list1 = obj.GetComponentsInChildren<VRC.SDKBase.VRC_Trigger>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
-					list2 = obj.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
-					foreach(var item in list2)
+					var list1 = obj.GetComponentsInChildren<VRC.SDKBase.VRC_Trigger>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
+					if (list1.Count() != 0 && list1 != null)
 					{
-						if (item != null)
+						return list1;
+					}
+					else
+					{
+						var list2 = obj.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
+						if (list2.Count() != 0 && list2 != null)
 						{
-							if (!list1.Contains(item))
-							{
-								list1.Add(item);
-							}
+							return list2;
 						}
 					}
-
-					// Linq Still broken, does grab some duplicated gameobjects on the way (Might add a check as well in future)
-					//// Unite The lists In one (avoiding duplicates).
-					//result = 
-					//	 list1
-					//	.Union(list2)
-					//  .Distinct()
-					//	.ToList()
-					//	.Where(x => x.gameObject != null)
-					//	.ToList(); // Never null.
-
-					return list1;
 				}
 				catch (Exception e)
 				{
 					ModConsole.Error("Error parsing World Triggers");
 					ModConsole.ErrorExc(e);
-					return null;
+					return new List<GameObject>();
 				}
 			}
-			return null;
+			return new List<GameObject>();
 		}
 
 		public static List<UdonBehaviour> Get_UdonBehaviours(this GameObject obj)
 		{
-			List<UdonBehaviour> events = new List<UdonBehaviour>();
-
-			foreach (var item in obj.GetComponentsInChildren<UdonBehaviour>(true))
+			var UdonBehaviourObjects = new List<UdonBehaviour>();
+			var list = obj.GetComponentsInChildren<UdonBehaviour>(true);
+			if (list.Count() != 0)
 			{
-				if (item != null)
+				foreach (var item in list)
 				{
-					if (item._eventTable.keys.Count != 0)
+					if (item._eventTable.Keys.Count != 0)
 					{
-						if (events.Contains(item))
+						if (!UdonBehaviourObjects.Contains(item))
 						{
-							events.Add(item);
+							UdonBehaviourObjects.Add(item);
 						}
 					}
 				}
+				return UdonBehaviourObjects;
 			}
-			return events;
+			return UdonBehaviourObjects;
 		}
+
+
 
 
 		public static List<UdonBehaviour> Get_UdonBehaviours(this Transform obj)
