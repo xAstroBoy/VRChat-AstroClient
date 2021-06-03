@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.Experiments;
 	using AstroLibrary.Console;
 	using System;
 	using System.Collections.Generic;
@@ -14,44 +15,22 @@
 	{
 		public static List<GameObject> Get_Prefabs()
 		{
-			var PrefabList = new List<GameObject>();
-			if (VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs != null)
+
+			try
 			{
-				if (VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.Count != 0)
-				{
-					foreach (var obj in VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs)
-					{
-						if (obj != null)
-						{
-							if (!PrefabList.Contains(obj))
-							{
-								PrefabList.Add(obj);
-							}
-						}
-					}
-					ModConsole.DebugLog("Returned SDKBase Dynamic Prefabs");
-					return PrefabList;
-				}
+				var result = new List<GameObject>();
+				var list1 = VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().ToList();
+				var list2 = VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().ToList();
+
+				// Unite The lists In one.
+				result.Union(list1).Union(list2);
+				return result;
+
 			}
-			if (VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs != null)
+			catch
 			{
-				if (VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.Count == 0 && VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.Count != 0)
-				{
-					foreach (var obj in VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs)
-					{
-						if (obj != null)
-						{
-							if (!PrefabList.Contains(obj))
-							{
-								PrefabList.Add(obj);
-							}
-						}
-					}
-					ModConsole.DebugLog("Returned VRCSDK2 Dynamic Prefabs");
-					return PrefabList;
-				}
+				return null;
 			}
-			return PrefabList;
 		}
 
 		public static IEnumerable<Player> Get_Players()
@@ -103,75 +82,33 @@
 		{
 			try
 			{
-				var Pickups = new List<GameObject>();
-				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>();
-				var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Pickup>();
-				var list3 = Resources.FindObjectsOfTypeAll<VRCPickup>();
-				if (list1.Count() != 0)
-				{
-					foreach (var item in list1)
-					{
-						if (item.gameObject.name == "ViewFinder")
-						{
-							continue;
-						}
-						if (item.gameObject.name == "AvatarDebugConsole")
-						{
-							continue;
-						}
-						if (!Pickups.Contains(item.gameObject))
-						{
-							Pickups.Add(item.gameObject);
-						}
-					}
-					ModConsole.DebugLog("Returned only SDKBase Pickups");
-					return Pickups;
-				}
-				if (list2.Count() != 0 && list1.Count() == 0)
-				{
-					foreach (var item in list2)
-					{
-						if (item.gameObject.name == "ViewFinder")
-						{
-							continue;
-						}
-						if (item.gameObject.name == "AvatarDebugConsole")
-						{
-							continue;
-						}
-						if (!Pickups.Contains(item.gameObject))
-						{
-							Pickups.Add(item.gameObject);
-						}
-					}
-					ModConsole.DebugLog("Returned only VRCSDK2 Pickups");
+				var result = new List<GameObject>();
+				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>().Select(i => i.gameObject).ToList();
+				var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Pickup>().Select(i => i.gameObject).ToList();
+				var list3 = Resources.FindObjectsOfTypeAll<VRCPickup>().Select(i => i.gameObject).ToList();
 
-					return Pickups;
-				}
-				if (list3.Count() != 0 && list1.Count() == 0 && list2.Count() == 0)
-				{
-					foreach (var item in list3)
-					{
-						if (item.gameObject.name == "ViewFinder")
-						{
-							continue;
-						}
-						if (item.gameObject.name == "AvatarDebugConsole")
-						{
-							continue;
-						}
-						if (!Pickups.Contains(item.gameObject))
-						{
-							Pickups.Add(item.gameObject);
-						}
-					}
-					ModConsole.DebugLog("Returned only VRCSDK3 Pickups");
+				// Unite The lists In one (avoiding duplicates).
+				result.Union(list1).Union(list2).Union(list3);
 
-					return Pickups;
+				// Then Filter the ViewFinder and AvatarDebugConsole
+
+				if (CameraOnTweakerExperiment.ViewFinder.gameObject != null)
+				{
+					ModConsole.DebugLog("Filtering ViewFinder From Pickup List...");
+					result.Remove(CameraOnTweakerExperiment.ViewFinder.gameObject);
 				}
-				return Pickups;
+
+				GameObject AvatarDebugConsole = result.Where(x => x.name == "AvatarDebugConsole").FirstOrDefault(null);
+				if (AvatarDebugConsole != null)
+				{
+					ModConsole.DebugLog("Filtering AvatarDebugConsole From Pickup List...");
+					result.Remove(AvatarDebugConsole);
+				}
+
+				return result;
+
 			}
-			catch (Exception)
+			catch
 			{
 				return null;
 			}
@@ -179,53 +116,21 @@
 
 		public static List<GameObject> Get_VRCInteractables()
 		{
+
+
 			try
 			{
-				var VRC_Interactables = new List<GameObject>();
-				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Interactable>();
-				var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Interactable>();
-				var list3 = Resources.FindObjectsOfTypeAll<VRCInteractable>();
-				if (list1.Count() != 0)
-				{
-					foreach (var item in list1)
-					{
-						if (!VRC_Interactables.Contains(item.gameObject))
-						{
-							VRC_Interactables.Add(item.gameObject);
-						}
-					}
-					ModConsole.DebugLog("Returned only SDKBase VRC_Interactable");
-					return VRC_Interactables;
-				}
-				if (list2.Count() != 0 && list1.Count() == 0)
-				{
-					foreach (var item in list2)
-					{
-						if (!VRC_Interactables.Contains(item.gameObject))
-						{
-							VRC_Interactables.Add(item.gameObject);
-						}
-					}
-					ModConsole.DebugLog("Returned only VRCSDK2 VRC_Interactable");
+				var result = new List<GameObject>();
+				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Interactable>().Select(i => i.gameObject).ToList();
+				var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Interactable>().Select(i => i.gameObject).ToList();
+				var list3 = Resources.FindObjectsOfTypeAll<VRCInteractable>().Select(i => i.gameObject).ToList();
 
-					return VRC_Interactables;
-				}
-				if (list3.Count() != 0 && list1.Count() == 0 && list2.Count() == 0)
-				{
-					foreach (var item in list3)
-					{
-						if (!VRC_Interactables.Contains(item.gameObject))
-						{
-							VRC_Interactables.Add(item.gameObject);
-						}
-					}
-					ModConsole.DebugLog("Returned only VRCSDK3 VRC_Interactable");
+				// Unite The lists In one (avoiding duplicates).
+				result.Union(list1).Union(list2).Union(list3);
+				return result;
 
-					return VRC_Interactables;
-				}
-				return VRC_Interactables;
 			}
-			catch (Exception)
+			catch
 			{
 				return null;
 			}
@@ -233,55 +138,27 @@
 
 		public static List<GameObject> Get_Triggers()
 		{
-			var Triggers = new List<GameObject>();
-			var list = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Trigger>();
-			var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Trigger>();
-			if (list.Count() != 0)
+
+			try
 			{
-				foreach (var item in list)
-				{
-					if (!Triggers.Contains(item.gameObject))
-					{
-						Triggers.Add(item.gameObject);
-					}
-				}
-				ModConsole.DebugLog("Returned only SDKBase VRC_Trigger");
-				return Triggers;
+				var result = new List<GameObject>();
+				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Trigger>().Select(i => i.gameObject).ToList();
+				var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Trigger>().Select(i => i.gameObject).ToList();
+
+				// Unite The lists In one (avoiding duplicates).
+				result.Union(list1).Union(list2);
+				return result;
+
 			}
-			if (list2.Count() != 0 && list.Count() == 0)
+			catch
 			{
-				foreach (var item in list2)
-				{
-					if (!Triggers.Contains(item.gameObject))
-					{
-						Triggers.Add(item.gameObject);
-					}
-				}
-				ModConsole.DebugLog("Returned only VRCSDK2 VRC_Trigger");
-				return Triggers;
+				return null;
 			}
-			return Triggers;
 		}
 
 		public static List<UdonBehaviour> Get_UdonBehaviours()
 		{
-			var UdonBehaviourObjects = new List<UdonBehaviour>();
-			var list = Resources.FindObjectsOfTypeAll<UdonBehaviour>();
-			if (list.Count() != 0)
-			{
-				foreach (var item in list)
-				{
-					if (item._eventTable.Keys.Count != 0)
-					{
-						if (!UdonBehaviourObjects.Contains(item))
-						{
-							UdonBehaviourObjects.Add(item);
-						}
-					}
-				}
-				return UdonBehaviourObjects;
-			}
-			return UdonBehaviourObjects;
+			return Resources.FindObjectsOfTypeAll<UdonBehaviour>().Where(i => i._eventTable.keys.Count != 0).ToList();
 		}
 
 		public static string Get_World_Name()
