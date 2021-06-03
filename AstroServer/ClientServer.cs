@@ -172,7 +172,7 @@
 
 				case PacketClientType.AVATAR_SEARCH:
 					{
-						List<AvatarDataEntity> found = DB.Find<AvatarDataEntity>().ManyAsync(a => a.Name.ToLower().Contains(packetData.TextData.ToLower())).GetAwaiter().GetResult();
+						List<AvatarDataEntity> found = DB.Find<AvatarDataEntity>().Limit(2000).ManyAsync(a => a.Name.ToLower().Contains(packetData.TextData.ToLower())).GetAwaiter().GetResult();
 						List<AvatarDataEntity> toSend = new List<AvatarDataEntity>();
 
 						Console.WriteLine($"Avatar Search: {client.Temp.SearchType}, {packetData.TextData.ToLower()}");
