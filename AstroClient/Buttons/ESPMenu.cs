@@ -382,14 +382,17 @@
 		private static void AddESPToUdonBehaviours()
 		{
 			var items = WorldUtils.Get_UdonBehaviours();
-			foreach (var item in items)
+			if (items != null)
 			{
-				if (item != null)
+				foreach (var item in items)
 				{
-					var ESP = item.gameObject.GetComponent<ESP_UdonBehaviour>();
-					if (ESP == null)
+					if (item != null)
 					{
-						item.gameObject.AddComponent<ESP_UdonBehaviour>();
+						var ESP = item.gameObject.GetComponent<ESP_UdonBehaviour>();
+						if (ESP == null)
+						{
+							item.gameObject.AddComponent<ESP_UdonBehaviour>();
+						}
 					}
 				}
 			}
@@ -398,12 +401,15 @@
 		private static void RemoveESPToUdonBehaviours()
 		{
 			var items = WorldUtils.Get_UdonBehaviours();
-			foreach (var item in items)
+			if (items != null)
 			{
-				var ESP = item.GetComponent<ESP_UdonBehaviour>();
-				if (ESP != null)
+				foreach (var item in items)
 				{
-					ESP.DestroyMeLocal();
+					var ESP = item.GetComponent<ESP_UdonBehaviour>();
+					if (ESP != null)
+					{
+						ESP.DestroyMeLocal();
+					}
 				}
 			}
 		}

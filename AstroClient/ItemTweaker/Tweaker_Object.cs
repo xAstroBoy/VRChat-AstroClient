@@ -178,26 +178,31 @@
 						}
 					}
 				}
-
-				RigidBodyController RigidBodyController = value.GetComponent<RigidBodyController>();
-				if (RigidBodyController == null)
+				if (value != null)
 				{
-					RigidBodyController = value.AddComponent<RigidBodyController>();
-					if (RigidBodyController != null)
+
+					RigidBodyController RigidBodyController = value.GetComponent<RigidBodyController>();
+					if (RigidBodyController == null)
 					{
-						RigidBodyController.EditMode = false;
+						RigidBodyController = value.AddComponent<RigidBodyController>();
+						if (RigidBodyController != null)
+						{
+							RigidBodyController.EditMode = false;
+						}
 					}
+
+					PickupController PickupController = value.GetComponent<PickupController>();
+					if (PickupController == null)
+					{
+						PickupController = value.AddComponent<PickupController>();
+						if (PickupController != null)
+						{
+							PickupController.EditMode = false;
+						}
+					}
+
 				}
 
-				PickupController PickupController = value.GetComponent<PickupController>();
-				if (PickupController == null)
-				{
-					PickupController = value.AddComponent<PickupController>();
-					if (PickupController != null)
-					{
-						PickupController.EditMode = false;
-					}
-				}
 
 				CrazyObjectManager.UpdateTimeButton(value);
 				ObjectSpinnerManager.UpdateSpinnerButton(value);

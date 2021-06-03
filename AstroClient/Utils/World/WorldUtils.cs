@@ -202,7 +202,7 @@
 		{
 			List<UdonBehaviour> worldbehaviours = new List<UdonBehaviour>();
 			worldbehaviours = Resources.FindObjectsOfTypeAll<UdonBehaviour>()
-				.Where(x => x.gameObject != null)
+				.Where(x => x != null)
 				.Where(i => i._eventTable.keys.Count != 0) // Discard Objects having zero keys as is just empty udon behaviour.
 				.ToList();
 			return worldbehaviours;
