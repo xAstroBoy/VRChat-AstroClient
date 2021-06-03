@@ -61,21 +61,13 @@
 
 		private void RefreshButtons()
 		{
-			Stopwatch stopwatch = new Stopwatch();
-			stopwatch.Start();
-
 			var photonPlayers = Utils.LoadBalancingPeer.prop_Room_0.prop_Dictionary_2_Int32_Player_0;
 			var players = new List<PlayerListData>();
-
-			Stopwatch stopwatch3 = new Stopwatch();
-			stopwatch3.Start();
 
 			foreach (var player in photonPlayers)
 			{
 				players.Add(new PlayerListData(player.value));
 			}
-
-			stopwatch3.Stop();
 
 			float yPos_start = -0.5f;
 			float yPos_max = 5f;
@@ -83,17 +75,7 @@
 			float xPos = -1f + ConfigManager.UI.PlayerListOffset;
 
 			ResetButtons();
-
-			Stopwatch stopwatch4 = new Stopwatch();
-			stopwatch4.Start();
-
 			var temp_list = players.OrderBy(p => p.IsMaster).ThenBy(p => p.IsSelf).ThenBy(p => p.IsFriend).ThenBy(p => p.RankType).Reverse().ToArray();
-
-			stopwatch4.Stop();
-
-			Stopwatch stopwatch2 = new Stopwatch();
-			stopwatch2.Start();
-
 			for (int i = 0; i < temp_list.Length; i++)
 			{
 				var player = temp_list[i];
@@ -114,14 +96,6 @@
 					xPos -= 1f;
 				}
 			}
-
-			stopwatch2.Stop();
-			stopwatch.Stop();
-
-			ModConsole.Log($"PlayerList Temp List Created: {stopwatch3.ElapsedMilliseconds}ms");
-			ModConsole.Log($"PlayerList Temp List Ordered: {stopwatch4.ElapsedMilliseconds}ms");
-			ModConsole.Log($"PlayerList Buttons Created: {stopwatch2.ElapsedMilliseconds}ms");
-			ModConsole.Log($"PlayerList Refreshed: {stopwatch.ElapsedMilliseconds}ms");
 		}
 
 		private void ResetButtons()
