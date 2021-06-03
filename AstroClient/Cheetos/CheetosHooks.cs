@@ -63,7 +63,7 @@
 						ModConsole.ErrorExc(e);
 					}
 				}
-				ModConsole.Log($"[Patches] Done! Patched {Patches.Count} Methods!");
+				ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods!");
 			}
 
 			public static async void UnDoPatches()
@@ -80,7 +80,7 @@
 						ModConsole.ErrorExc(e);
 					}
 				}
-				ModConsole.Log($"[Patches] Done! UnPatched {Patches.Count} Methods!");
+				ModConsole.DebugLog($"[Patches] Done! UnPatched {Patches.Count} Methods!");
 			}
 		}
 
@@ -104,7 +104,7 @@
 		{
 			try
 			{
-				ModConsole.Log("[AstroClient Cheetos Patches] Start. . .");
+				ModConsole.DebugLog("[AstroClient Cheetos Patches] Start. . .");
 
 				new Patch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_1)), GetPatch(nameof(OnAvatarDownload)));
 				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
@@ -113,7 +113,7 @@
 				//new Patch(AccessTools.Property(typeof(Time), "smoothDeltaTime").GetMethod, GetPatch("FakeFrames"));
 				//new Patch(typeof(VRCStandaloneInputModule).GetMethod(XrefTesting.OnTest.Name), GetPatch(nameof(OnTestPatch)));
 
-				ModConsole.Log("[AstroClient Cheetos Patches] DONE!");
+				ModConsole.DebugLog("[AstroClient Cheetos Patches] DONE!");
 				Patch.DoPatches();
 			}
 			catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }

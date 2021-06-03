@@ -73,7 +73,7 @@
 
 			if (networkEventID != PacketServerType.KEEP_ALIVE && networkEventID != PacketServerType.AVATAR_RESULT)
 			{
-				ModConsole.Log($"TCP Event {packetData.NetworkEventID} Received.");
+				ModConsole.DebugLog($"TCP Event {packetData.NetworkEventID} Received.");
 			}
 
 			switch (networkEventID)
