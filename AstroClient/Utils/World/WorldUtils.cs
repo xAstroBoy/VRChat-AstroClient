@@ -277,21 +277,21 @@
 
 		public static List<UdonBehaviour> Get_UdonBehaviours()
 		{
-			List<UdonBehaviour> worldbehaviours = new List<UdonBehaviour>();
+			List<UdonBehaviour> events = new List<UdonBehaviour>();
 			foreach(var item in Resources.FindObjectsOfTypeAll<UdonBehaviour>())
 			{
 				if(item != null)
 				{
 					if (item._eventTable.keys.Count != 0)
 					{
-						if (worldbehaviours.Contains(item))
+						if (!events.Contains(item))
 						{
-							worldbehaviours.Add(item);
+							events.Add(item);
 						}
 					}
 				}
 			}
-			return worldbehaviours;
+			return events;
 		}
 
 		public static string Get_World_Name()

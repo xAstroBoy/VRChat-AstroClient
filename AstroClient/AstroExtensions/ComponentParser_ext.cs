@@ -144,17 +144,17 @@
 
 		public static List<UdonBehaviour> Get_UdonBehaviours(this Transform obj)
 		{
-			return obj.Get_UdonBehaviours();
+			return obj.gameObject.Get_UdonBehaviours();
 		}
 
-		public static List<UdonBehaviour> Get_Triggers(this Transform obj)
+		public static List<GameObject> Get_Triggers(this Transform obj)
 		{
-			return obj.Get_Triggers();
+			return obj.gameObject.Get_Triggers();
 		}
 
-		public static List<UdonBehaviour> Get_VRCInteractables(this Transform obj)
+		public static List<GameObject> Get_VRCInteractables(this Transform obj)
 		{
-			return obj.Get_VRCInteractables();
+			return obj.gameObject.Get_VRCInteractables();
 		}
 	}
 }
