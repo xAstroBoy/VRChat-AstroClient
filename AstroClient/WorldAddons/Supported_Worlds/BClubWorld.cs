@@ -56,8 +56,8 @@
 			GameObject Bedrooms = GameObjectFinder.FindRootSceneObject("Bedrooms");
 			if (Bedrooms != null)
 			{
-				var cover = Bedrooms.transform.FindObject($"Bedrooms/Bedroom {roomid}/Black Covers");
-				var privacy = Bedrooms.transform.FindObject($"Bedrooms/Bedroom {roomid}/Privacy)");
+				var cover = Bedrooms.transform.FindObject($"Bedroom {roomid}/Black Covers");
+				var privacy = Bedrooms.transform.FindObject($"Bedroom {roomid}/Privacy)");
 				if(privacy != null)
 				{
 					privacy.DestroyMeLocal();
