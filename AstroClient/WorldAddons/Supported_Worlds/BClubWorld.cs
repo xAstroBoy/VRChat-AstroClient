@@ -57,7 +57,7 @@
 			if (Bedrooms != null)
 			{
 				var cover = Bedrooms.transform.FindObject($"Bedroom {roomid}/Black Covers");
-				var privacy = Bedrooms.transform.FindObject($"Bedroom {roomid}/Privacy)");
+				var privacy = Bedrooms.transform.FindObject($"Bedroom {roomid}/Privacy");
 				if(privacy != null)
 				{
 					privacy.DestroyMeLocal();
