@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.Cheetos
 {
 	using AstroLibrary.Console;
+	using Il2CppSystem.Diagnostics;
 	using System;
 	using System.Collections.Generic;
 	using System.Threading;
@@ -46,11 +47,22 @@
 				{
 					List<Action> toRemove = new List<Action>();
 
+					long totalTime = 0;
+
 					foreach (Action action in queue)
 					{
+						if (totalTime >= 10)
+						{
+							ModConsole.Log("Waiting to run actions, took over 10ms");
+							break;
+						}
 						try
 						{
+							Stopwatch stopwatch = new Stopwatch();
+							stopwatch.Start();
 							action();
+							stopwatch.Stop();
+							totalTime += stopwatch.ElapsedMilliseconds;
 						}
 						catch (Exception ex)
 						{
