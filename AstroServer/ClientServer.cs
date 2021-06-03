@@ -159,6 +159,7 @@
 							avatarDataEntity.ID = avatarData.AvatarID;
 							avatarDataEntity.SaveAsync().GetAwaiter().GetResult();
 							Console.WriteLine($"Received New/Updated AvatarData: {avatarData.Name}, {avatarData.AvatarID}");
+							AstroBot.SendNewAvatarLogAsync(avatarDataEntity);
 						}
 
 						break;
