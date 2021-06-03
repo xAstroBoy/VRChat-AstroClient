@@ -1,4 +1,5 @@
-﻿using DontTouchMyClient.Patches;
+﻿using AstroLibrary.Console;
+using DontTouchMyClient.Patches;
 using Harmony;
 using MelonLoader;
 using System;
@@ -10,7 +11,8 @@ namespace DontTouchMyClient
     {
         public override void OnPreInitialization() // Runs before Game Initialization.
         {
-            Patching.StartDefenses();
+			ModConsole.ModName = "DontTouchMyClient";
+			Patching.StartDefenses();
         }
         public override void OnGUI()
         {

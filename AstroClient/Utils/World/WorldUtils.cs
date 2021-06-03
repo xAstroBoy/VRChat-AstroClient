@@ -23,11 +23,18 @@
 				var list2 = VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().ToList();
 
 				// Unite The lists In one.
-				return list1.Union(list2).ToList();;
+				result = (list1 ?? Enumerable.Empty<GameObject>())
+					.Union(list2 ?? Enumerable.Empty<GameObject>())
+					.ToList()
+					.Where(x => x.gameObject != null)
+					.ToList(); // Never null.
+				return result;
 
 			}
-			catch
+			catch (Exception e)
 			{
+				ModConsole.Error("Error parsing World Prefabs");
+				ModConsole.ErrorExc(e);
 				return null;
 			}
 		}
@@ -87,28 +94,40 @@
 				var list3 = Resources.FindObjectsOfTypeAll<VRCPickup>().Select(i => i.gameObject).ToList();
 
 				// Unite The lists In one (avoiding duplicates).
-				result.Union(list1).Union(list2).Union(list3);
+				result = (list1 ?? Enumerable.Empty<GameObject>())
+					.Union(list2 ?? Enumerable.Empty<GameObject>())
+					.Union(list3 ?? Enumerable.Empty<GameObject>())
+					.ToList()
+					.Where(x => x.gameObject != null)
+					.ToList(); // Never null.
 
-				// Then Filter the ViewFinder and AvatarDebugConsole
 
-				if (CameraOnTweakerExperiment.ViewFinder.gameObject != null)
+							   // Then Filter the ViewFinder and AvatarDebugConsole
+				if (result.Count() != 0)
 				{
-					ModConsole.DebugLog("Filtering ViewFinder From Pickup List...");
-					result.Remove(CameraOnTweakerExperiment.ViewFinder.gameObject);
-				}
+					if (CameraOnTweakerExperiment.ViewFinder.gameObject != null)
+					{
+						if (result.Contains(CameraOnTweakerExperiment.ViewFinder.gameObject))
+						{
+							ModConsole.DebugLog("Filtering ViewFinder From Pickup List...");
+							result.Remove(CameraOnTweakerExperiment.ViewFinder.gameObject);
+						}
+					}
 
-				GameObject AvatarDebugConsole = result.Where(x => x.name == "AvatarDebugConsole").FirstOrDefault(null);
-				if (AvatarDebugConsole != null)
-				{
-					ModConsole.DebugLog("Filtering AvatarDebugConsole From Pickup List...");
-					result.Remove(AvatarDebugConsole);
+					GameObject AvatarDebugConsole = result.Where(x => x.name == "AvatarDebugConsole").FirstOrDefault(null);
+					if (AvatarDebugConsole != null)
+					{
+						ModConsole.DebugLog("Filtering AvatarDebugConsole From Pickup List...");
+						result.Remove(AvatarDebugConsole);
+					}
 				}
-
 				return result;
 
 			}
-			catch
+			catch (Exception e)
 			{
+				ModConsole.Error("Error parsing World Pickups");
+				ModConsole.ErrorExc(e);
 				return null;
 			}
 		}
@@ -119,18 +138,26 @@
 
 			try
 			{
-				var result = new List<GameObject>();
+				List<GameObject> result = new List<GameObject>();
 				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Interactable>().Select(i => i.gameObject).ToList();
 				var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Interactable>().Select(i => i.gameObject).ToList();
 				var list3 = Resources.FindObjectsOfTypeAll<VRCInteractable>().Select(i => i.gameObject).ToList();
 
-				// Unite The lists In one (avoiding duplicates).\
-
-				return list1.Union(list2).Union(list3).ToList();
+				// Unite The lists In one (avoiding duplicates).
+				result =  (list1 ?? Enumerable.Empty<GameObject>())
+					.Union(list2 ?? Enumerable.Empty<GameObject>())
+					.Union(list3 ?? Enumerable.Empty<GameObject>())
+					.ToList()
+					.Where(x => x.gameObject != null)
+					.ToList(); // Never null.
+				
+				return result;
 
 			}
-			catch
+			catch (Exception e)
 			{
+				ModConsole.Error("Error parsing World VRC Interactables");
+				ModConsole.ErrorExc(e);
 				return null;
 			}
 		}
@@ -140,22 +167,32 @@
 
 			try
 			{
+				List<GameObject> result = new List<GameObject>();
 				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Trigger>().Select(i => i.gameObject).ToList();
 				var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Trigger>().Select(i => i.gameObject).ToList();
 
 				// Unite The lists In one (avoiding duplicates).
-				return list1.Union(list2).ToList();
-
+				result = (list1 ?? Enumerable.Empty<GameObject>())
+					.Union(list2 ?? Enumerable.Empty<GameObject>())
+					.ToList()
+					.Where(x => x.gameObject != null)
+					.ToList(); // Never null.				return result;
+				
+				return result;
 			}
-			catch
+			catch(Exception e)
 			{
+				ModConsole.Error("Error parsing World Triggers");
+				ModConsole.ErrorExc(e);
 				return null;
 			}
 		}
 
 		public static List<UdonBehaviour> Get_UdonBehaviours()
 		{
-			return Resources.FindObjectsOfTypeAll<UdonBehaviour>().Where(i => i._eventTable.keys.Count != 0).ToList();
+			List<UdonBehaviour> worldbehaviours = new List<UdonBehaviour>();
+			worldbehaviours = Resources.FindObjectsOfTypeAll<UdonBehaviour>().Where(i => i._eventTable.keys.Count != 0).ToList();
+			return worldbehaviours;
 		}
 
 		public static string Get_World_Name()
