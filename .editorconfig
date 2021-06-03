@@ -37,6 +37,9 @@ csharp_style_unused_value_expression_statement_preference=discard_variable:silen
 dotnet_diagnostic.CA1309.severity=silent
 dotnet_diagnostic.CA1805.severity=suggestion
 
+# IDE0002: Simplify Member Access
+dotnet_diagnostic.IDE0002.severity = none
+
 [*.{cs,vb}]
 indent_style=tab
 dotnet_diagnostic.CA2215.severity=suggestion

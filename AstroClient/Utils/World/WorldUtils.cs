@@ -97,15 +97,11 @@
 				List<GameObject> list2 = new List<GameObject>();
 				List<GameObject> list3 = new List<GameObject>();
 
-				ModConsole.Log("Parsing SDKbase..");
 				list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
-				ModConsole.Log("Parsing SDK2..");
 				list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Pickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
-				ModConsole.Log("Parsing SDK3..");
 				list3 = Resources.FindObjectsOfTypeAll<VRCPickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
 
 
-				ModConsole.Log("Joining Results and Filtering...");
 				// Unite The lists In one (avoiding duplicates).
 				result = list1
 					.Union(list2)
@@ -115,17 +111,13 @@
 					.ToList(); // Never null.
 
 
-							   // Then Filter the ViewFinder and AvatarDebugConsole
-				if (result.Count() != 0)
+							   
+				if (result.Count() != 0) // Then Filter the ViewFinder (Player Camera)
 				{
-					ModConsole.Log("Filtering ViewFinder...");
-
-
 					if (CameraOnTweakerExperiment.ViewFinder.gameObject != null)
 					{
 						if (result.Contains(CameraOnTweakerExperiment.ViewFinder.gameObject))
 						{
-							ModConsole.DebugLog("Filtering ViewFinder From Pickup List...");
 							result.Remove(CameraOnTweakerExperiment.ViewFinder.gameObject);
 						}
 					}
@@ -211,7 +203,7 @@
 			List<UdonBehaviour> worldbehaviours = new List<UdonBehaviour>();
 			worldbehaviours = Resources.FindObjectsOfTypeAll<UdonBehaviour>()
 				.Where(x => x.gameObject != null)
-				.Where(i => i._eventTable.keys.Count != 0)
+				.Where(i => i._eventTable.keys.Count != 0) // Discard Objects having zero keys as is just empty udon behaviour.
 				.ToList();
 			return worldbehaviours;
 		}

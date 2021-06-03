@@ -337,7 +337,7 @@
 			var scroll = new QMScrollMenu(menu);
 			scroll.SetAction(delegate
 			{
-				foreach (var trigger in GetObjectTriggers(Tweaker_Object.GetGameObjectToEdit()))
+				foreach (var trigger in Tweaker_Object.GetGameObjectToEdit().Get_Triggers())
 				{
 					scroll.Add(
 					new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {trigger.name}", delegate
@@ -348,124 +348,9 @@
 			});
 		}
 
-		public static List<VRC_Trigger> GetObjectTriggers(GameObject obj)
-		{
-			var ContainedTriggers = new List<VRC_Trigger>();
+		
 
-			if (obj != null)
-			{
-				var list = obj.GetComponentsInChildren<VRC_Trigger>(true);
-				var list2 = obj.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true);
-				if (list.Count() != 0)
-				{
-					foreach (var item in list)
-					{
-						if (!ContainedTriggers.Contains(item))
-						{
-							ContainedTriggers.Add(item);
-						}
-					}
-					return ContainedTriggers;
-				}
-				else if (list2.Count() != 0)
-				{
-					foreach (var item in list2)
-					{
-						if (!ContainedTriggers.Contains(item))
-						{
-							ContainedTriggers.Add(item);
-						}
-					}
-					return ContainedTriggers;
-				}
-				return ContainedTriggers;
-			}
-			return ContainedTriggers;
-		}
 
-		public static List<UdonBehaviour> GetObjectUdonVRC(GameObject obj)
-		{
-			if (obj != null)
-			{
-				try
-				{
-					var Internal_UdonBehaviour = new List<UdonBehaviour>();
-					var list1 = obj.GetComponentsInChildren<UdonBehaviour>(true);
-					if (list1.Count() != 0)
-					{
-						foreach (var item in list1)
-						{
-							if (item._eventTable.keys.Count != 0)
-							{
-								if (!Internal_UdonBehaviour.Contains(item))
-								{
-									Internal_UdonBehaviour.Add(item);
-								}
-							}
-						}
-						return Internal_UdonBehaviour;
-					}
-				}
-				catch (Exception)
-				{
-					return null;
-				}
-			}
-			return null;
-		}
-
-		public static List<GameObject> GeObjectVRC_Interactables(GameObject obj)
-		{
-			if (obj != null)
-			{
-				try
-				{
-					var VRC_Interactables = new List<GameObject>();
-					var list1 = obj.GetComponentsInChildren<VRC_Interactable>(true);
-					var list2 = obj.GetComponentsInChildren<VRCSDK2.VRC_Interactable>(true);
-					var list3 = obj.GetComponentsInChildren<VRCInteractable>(true);
-					if (list1.Count() != 0)
-					{
-						foreach (var item in list1)
-						{
-							if (!VRC_Interactables.Contains(item.gameObject))
-							{
-								VRC_Interactables.Add(item.gameObject);
-							}
-						}
-						return VRC_Interactables;
-					}
-					if (list2.Count() != 0 && list1.Count() == 0)
-					{
-						foreach (var item in list2)
-						{
-							if (!VRC_Interactables.Contains(item.gameObject))
-							{
-								VRC_Interactables.Add(item.gameObject);
-							}
-						}
-						return VRC_Interactables;
-					}
-					if (list3.Count() != 0 && list1.Count() == 0 && list2.Count() == 0)
-					{
-						foreach (var item in list3)
-						{
-							if (!VRC_Interactables.Contains(item.gameObject))
-							{
-								VRC_Interactables.Add(item.gameObject);
-							}
-						}
-						return VRC_Interactables;
-					}
-					return VRC_Interactables;
-				}
-				catch (Exception)
-				{
-					return null;
-				}
-			}
-			return null;
-		}
 
 		public static void Internal_UdonEvents(QMTabMenu main, float x, float y, bool btnHalf)
 		{
@@ -481,7 +366,7 @@
 			}, "", null, null, true);
 			subscroll.SetAction(delegate
 			{
-				foreach (var action in GetObjectUdonVRC(Tweaker_Object.GetGameObjectToEdit()))
+				foreach (var action in Tweaker_Object.GetGameObjectToEdit().Get_UdonBehaviours())
 				{
 					subscroll.Add(new QMSingleButton(Menu, 0f, 0f, action.gameObject.name, delegate
 					{
@@ -520,7 +405,7 @@
 			}, "", null, null, true);
 			scroll.SetAction(delegate
 			{
-				foreach (var obj in GeObjectVRC_Interactables(Tweaker_Object.GetGameObjectToEdit()))
+				foreach (var obj in Tweaker_Object.GetGameObjectToEdit().Get_VRCInteractables())
 				{
 					scroll.Add(
 					new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {obj.name}", delegate
