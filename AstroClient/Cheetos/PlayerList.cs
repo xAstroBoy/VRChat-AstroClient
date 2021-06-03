@@ -1,17 +1,16 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
 	#region Imports
 
+	using AstroClient.Cheetos;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using MelonLoader;
 	using RubyButtonAPI;
-	using System;
 	using System.Collections;
 	using System.Collections.Generic;
-	using System.Diagnostics;
 	using System.Linq;
+	using System.Threading;
 	using UnityEngine;
 	using VRC;
 
@@ -33,8 +32,11 @@
 
 		private static float RefreshTime;
 
+		private static Mutex mutex;
+
 		public override void VRChat_OnUiManagerInit()
 		{
+			mutex = new Mutex();
 			playersButton = new QMSingleButton("ShortcutMenu", -1 + ConfigManager.UI.PlayerListOffset, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
 			playersButton.SetActive(ConfigManager.UI.ShowPlayersMenu);
 
@@ -80,18 +82,12 @@
 
 		private void RefreshButtons()
 		{
-			var photonPlayers = Utils.LoadBalancingPeer.prop_Room_0.prop_Dictionary_2_Int32_Player_0;
 			var players = new List<PlayerListData>();
 
-			foreach (var player in photonPlayers)
+			foreach (var keyValuePair in Utils.LoadBalancingPeer.prop_Room_0.prop_Dictionary_2_Int32_Player_0)
 			{
-				players.Add(new PlayerListData(player.value));
+				players.Add(new PlayerListData(keyValuePair.value));
 			}
-
-			float yPos_start = -0.5f;
-			float yPos_max = 5f;
-			float yPos = yPos_start;
-			float xPos = -1f + ConfigManager.UI.PlayerListOffset;
 
 			ResetButtons();
 			var temp_list = players.OrderBy(p => p.IsMaster).ThenBy(p => p.IsSelf).ThenBy(p => p.IsFriend).ThenBy(p => p.GetIsInvisible()).ThenByDescending(p => p.RankType).Reverse().ToArray();
@@ -109,15 +105,7 @@
 			for (int i = 0; i < players.Length; i++)
 			{
 				var player = players[i];
-				var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, $"{player.Prefix}{player.Name}", () => { if (player.Player != null) { SelectPlayer(player.Player); } }, "", player.Color, player.Color, true);
-				playerButton.SetResizeTextForBestFit(true);
-
-				playerButton.SetActive(ConfigManager.UI.ShowPlayersList);
-				if (ConfigManager.UI.ShowPlayersMenu != true)
-				{
-					playerButton.SetActive(false);
-				}
-				PlayerButtons.Add(playerButton);
+				CreateButton(player, xPos, yPos);
 
 				yPos += 0.5f;
 				if (yPos >= yPos_max)
@@ -131,6 +119,19 @@
 			yield break;
 		}
 
+		public static void CreateButton(PlayerListData player, float xPos, float yPos)
+		{
+			var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, $"{player.Prefix}{player.Name}", () => { if (player.Player != null) { SelectPlayer(player.Player); } }, "", player.Color, player.Color, true);
+			playerButton.SetResizeTextForBestFit(true);
+
+			playerButton.SetActive(ConfigManager.UI.ShowPlayersList);
+			if (ConfigManager.UI.ShowPlayersMenu != true)
+			{
+				playerButton.SetActive(false);
+			}
+			PlayerButtons.Add(playerButton);
+		}
+
 		private void ResetButtons()
 		{
 			foreach (var button in PlayerButtons)
@@ -140,7 +141,7 @@
 			PlayerButtons.Clear();
 		}
 
-		private void SelectPlayer(Player player)
+		private static void SelectPlayer(Player player)
 		{
 			QuickMenuStuff.GetQuickMenuInstance().SelectPlayer(player.GetVRCPlayer());
 		}

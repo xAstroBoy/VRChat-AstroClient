@@ -9,7 +9,7 @@
 			if (player.GetRawHashtable().ContainsKey("user"))
 				if (player.GetHashtable()["user"] is Dictionary<string, object> dict)
 					return (string)dict["username"];
-			return "No username";
+			return string.Empty;
 		}
 		public static string GetUserID(this Photon.Realtime.Player player)
 		{
@@ -24,7 +24,7 @@
 			if (player.GetRawHashtable().ContainsKey("user"))
 				if (player.GetHashtable()["user"] is Dictionary<string, object> dict)
 					return (string)dict["displayName"];
-			return "No DisplayName";
+			return string.Empty;
 		}
 
 		public static int GetPhotonID(this Photon.Realtime.Player player)
