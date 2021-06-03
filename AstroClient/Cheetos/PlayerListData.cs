@@ -1,6 +1,9 @@
 ﻿namespace AstroClient
 {
 	using DayClientML2.Utility.Extensions;
+	using Il2CppSystem.Text;
+	using System.Linq;
+	using System.Web.WebPages;
 	using UnityEngine;
 	using VRC;
 	using VRC.Core;
@@ -45,17 +48,18 @@
 		{
 			get
 			{
-				if (IsInvisible)
+				if (GetIsInvisible())
 				{
 					return Color.white;
 				}
-
-				if (IsDanger)
+				else if (IsDanger)
 				{
 					return Color.red;
 				}
-
-				return RankColor;
+				else
+				{
+					return RankColor;
+				}
 			}
 		}
 
@@ -63,62 +67,44 @@
 		{
 			get
 			{
-				var value = string.Empty;
+				StringBuilder stringBuilder = new StringBuilder();
 
-				if (IsInvisible)
+				if (GetIsInvisible())
 				{
 					return "<color=silver>[INVISIBLE]\n</color>";
 				}
 
 				if (IsInVR)
 				{
-					value += "<color=silver>[VR]</color>";
+					stringBuilder.Append("<color=silver>[VR]</color>");
 				}
 				else
 				{
-					value += "<color=silver>[PC]</color>";
+					stringBuilder.Append("<color=silver>[PC]</color>");
 				}
 
 				if (IsDanger)
 				{
-					value += "<color=pink>[DANGER]</color>";
+					stringBuilder.Append("<color=pink>[DANGER]</color>");
 				}
 
 				if (IsMaster)
 				{
-					value += "<color=cyan>[IM]</color>";
+					stringBuilder.Append("<color=cyan>[IM]</color>");
 				}
 
 				if (IsFriend)
 				{
-					value += "<color=green>[F]</color>";
+					stringBuilder.Append("<color=green>[F]</color>");
 				}
 
-				if (value != string.Empty)
-				{
-					value += "\n";
-				}
-
-				return value;
+				return $"{stringBuilder.ToString()}\n";
 			}
 		}
 
-		public bool IsInvisible
+		public bool GetIsInvisible()
 		{
-			get
-			{
-				var players = WorldUtils.Get_Players();
-
-				foreach (var o in players)
-				{
-					if (o.UserID().Equals(PhotonPlayer.GetUserID()))
-					{
-						return false;
-					}
-				}
-
-				return true;
-			}
+			return Player == null;
 		}
 
 		public PlayerListData(Photon.Realtime.Player photonPlayer)
