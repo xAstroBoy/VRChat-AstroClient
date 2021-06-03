@@ -17,11 +17,11 @@ namespace DontTouchMyClient.Patcher
             return random.Next(15, 20);
         }
 
-        private static string StringGen(int length)
+        private static string StringGen()
         {
             System.Random random = new System.Random();
             string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_";
-            return new string(chars.Select((char c) => chars[random.Next(chars.Length)]).Take(length).ToArray());
+            return new string(chars.Select((char c) => chars[random.Next(chars.Length)]).Take(GetRandomInt()).ToArray());
         }
 
 
@@ -39,7 +39,7 @@ namespace DontTouchMyClient.Patcher
                 ModConsole.Error("[Patches] TargetMethod is NULL or Pre And PostFix are Null");
                 return;
             }
-            Instance = HarmonyInstance.Create(StringGen(GetRandomInt()));
+            Instance = HarmonyInstance.Create(StringGen());
             TargetMethod = targetMethod;
             PrefixMethod = Before;
             PostfixMethod = After;

@@ -23,8 +23,7 @@
 				var list2 = VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().ToList();
 
 				// Unite The lists In one.
-				result.Union(list1).Union(list2);
-				return result;
+				return list1.Union(list2).ToList();;
 
 			}
 			catch
@@ -125,9 +124,9 @@
 				var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Interactable>().Select(i => i.gameObject).ToList();
 				var list3 = Resources.FindObjectsOfTypeAll<VRCInteractable>().Select(i => i.gameObject).ToList();
 
-				// Unite The lists In one (avoiding duplicates).
-				result.Union(list1).Union(list2).Union(list3);
-				return result;
+				// Unite The lists In one (avoiding duplicates).\
+
+				return list1.Union(list2).Union(list3).ToList();
 
 			}
 			catch
@@ -141,13 +140,11 @@
 
 			try
 			{
-				var result = new List<GameObject>();
 				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Trigger>().Select(i => i.gameObject).ToList();
 				var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Trigger>().Select(i => i.gameObject).ToList();
 
 				// Unite The lists In one (avoiding duplicates).
-				result.Union(list1).Union(list2);
-				return result;
+				return list1.Union(list2).ToList();
 
 			}
 			catch
