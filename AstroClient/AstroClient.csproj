@@ -1024,6 +1024,7 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+    <EmbeddedResource Include="Figlet\Larry3D.flf" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

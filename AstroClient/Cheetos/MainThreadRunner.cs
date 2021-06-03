@@ -33,7 +33,7 @@
 				DontDestroyOnLoad(gameobj);
 				if (Instance != null)
 				{
-					ModConsole.Log("MainThreadRunner: Ready!");
+					ModConsole.DebugLog("MainThreadRunner: Ready!");
 				}
 			}
 		}
@@ -53,7 +53,7 @@
 					{
 						if (totalTime >= 10)
 						{
-							ModConsole.Log("Waiting to run actions, took over 10ms");
+							ModConsole.DebugLog("Waiting to run actions, took over 10ms");
 							break;
 						}
 						try
@@ -74,7 +74,6 @@
 						finally
 						{
 							toRemove.Add(action);
-							//ModConsole.Log($"MainThreadRunner: Action Ran");
 						}
 					}
 
