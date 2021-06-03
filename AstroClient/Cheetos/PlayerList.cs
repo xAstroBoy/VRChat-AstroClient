@@ -21,7 +21,7 @@
 	{
 		private static QMSingleButton playersButton;
 
-		public static Dictionary<string, QMSingleButton> PlayerButtons { get; } = new Dictionary<string, QMSingleButton>();
+		public static List<QMSingleButton> PlayerButtons { get; } = new List<QMSingleButton>();
 
 		private static readonly Color InstanceMasterColor = Color.cyan;
 
@@ -117,7 +117,7 @@
 				{
 					playerButton.SetActive(false);
 				}
-				PlayerButtons.Add(player.UserID, playerButton);
+				PlayerButtons.Add(playerButton);
 
 				yPos += 0.5f;
 				if (yPos >= yPos_max)
@@ -133,9 +133,9 @@
 
 		private void ResetButtons()
 		{
-			foreach (var keyValuePair in PlayerButtons)
+			foreach (var button in PlayerButtons)
 			{
-				keyValuePair.Value.DestroyMe();
+				button.DestroyMe();
 			}
 			PlayerButtons.Clear();
 		}
@@ -157,9 +157,9 @@
 				playersButton.SetTextColor(Color.red);
 			}
 
-			foreach (var keyValuePair in PlayerButtons)
+			foreach (var button in PlayerButtons)
 			{
-				keyValuePair.Value.SetActive(ConfigManager.UI.ShowPlayersList);
+				button.SetActive(ConfigManager.UI.ShowPlayersList);
 			}
 		}
 
@@ -170,9 +170,9 @@
 
 			playersButton.SetActive(true);
 
-			foreach (var keyValuePair in PlayerButtons)
+			foreach (var button in PlayerButtons)
 			{
-				keyValuePair.Value.SetActive(true);
+				button.SetActive(true);
 			}
 		}
 
@@ -183,9 +183,9 @@
 
 			playersButton.SetActive(false);
 
-			foreach (var keyValuePair in PlayerButtons)
+			foreach (var button in PlayerButtons)
 			{
-				keyValuePair.Value.SetActive(false);
+				button.SetActive(false);
 			}
 		}
 	}
