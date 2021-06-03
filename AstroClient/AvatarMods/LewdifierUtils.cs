@@ -99,15 +99,15 @@
 				foreach (var item in list)
 				{
 					// Duplicate Check.
-					ModConsole.DebugLog($"Found Term : {item}");
+					//ModConsole.DebugLog($"Found Term : {item}");
 					if (!TermsToToggleOn.Contains(item.ToLower()))
 					{
-						ModConsole.DebugLog($"Registered Term in TermsToToggleOn : {item}");
+						//ModConsole.DebugLog($"Registered Term in TermsToToggleOn : {item}");
 						TermsToToggleOn.Add(item.ToLower());
 					}
 					else
 					{
-						ModConsole.DebugLog($"Found Duplicated Term in TermsToToggleOn : {item}");
+						//ModConsole.DebugLog($"Found Duplicated Term in TermsToToggleOn : {item}");
 					}
 				}
 				Save_TermsToToggleOn();
@@ -125,15 +125,15 @@
 				List<string> list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(TermsToEnableOffPath));
 				foreach (var item in list)
 				{
-					ModConsole.DebugLog($"Found Term : {item}");
+					//ModConsole.DebugLog($"Found Term : {item}");
 					if (!TermsToToggleOff.Contains(item.ToLower()))
 					{
-						ModConsole.DebugLog($"Registered Term in TermsToToggleOff : {item}");
+						//ModConsole.DebugLog($"Registered Term in TermsToToggleOff : {item}");
 						TermsToToggleOff.Add(item.ToLower());
 					}
 					else
 					{
-						ModConsole.DebugLog($"Found Duplicated Term in TermsToToggleOff : {item}");
+						//ModConsole.DebugLog($"Found Duplicated Term in TermsToToggleOff : {item}");
 					}
 				}
 				Save_TermsToToggleOff();
@@ -152,15 +152,15 @@
 				List<string> list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(AvatarsToSkipPath));
 				foreach (var item in list)
 				{
-					ModConsole.DebugLog($"Found Term : {item}");
+					//ModConsole.DebugLog($"Found Term : {item}");
 					if (!AvatarsToSkip.Contains(item))
 					{
-						ModConsole.DebugLog($"Registered Term in AvatarsToSkip : {item}");
+						//ModConsole.DebugLog($"Registered Term in AvatarsToSkip : {item}");
 						AvatarsToSkip.Add(item);
 					}
 					else
 					{
-						ModConsole.DebugLog($"Found Duplicated Term in AvatarsToSkip : {item}");
+						//ModConsole.DebugLog($"Found Duplicated Term in AvatarsToSkip : {item}");
 					}
 				}
 				Save_AvatarToSkip();
