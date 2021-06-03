@@ -2,6 +2,7 @@
 {
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility.Api.Object;
+	using UnityEngine;
 	using VRC.Core;
 
 	public static class CheetosExtensions
@@ -55,6 +56,13 @@
 			{
 				return text;
 			}
+		}
+
+		internal static T GetOrAddComponent<T>(this Component c) where T : Component
+		{
+			var existing = c.GetComponent<T>();
+			if (existing) return existing;
+			return c.gameObject.AddComponent<T>();
 		}
 	}
 }

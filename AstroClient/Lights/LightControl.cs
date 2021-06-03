@@ -28,24 +28,27 @@
 
 		public override void OnLevelLoaded()
 		{
-			FogEnabled = RenderSettings.fog;
-			UpdateFogSwitch();
-			HasOriginalRenderEditSettings = true;
-			HasBackuppedRenderSettings = false;
-			isHeadLightActive = false;
-			HasLightmapsStored = false;
-			AreLightMapsEnabled = true;
-			if (ToggleLightmaps != null)
+			if (KeyManager.IsAuthed)
 			{
-				ToggleLightmaps.SetToggleState(AreLightMapsEnabled);
-			}
-			if (ToggleFullbright != null)
-			{
-				ToggleFullbright.SetToggleState(false);
-			}
-			if (ModifyRenderOptions != null)
-			{
-				ModifyRenderOptions.SetToggleState(false);
+				FogEnabled = RenderSettings.fog;
+				UpdateFogSwitch();
+				HasOriginalRenderEditSettings = true;
+				HasBackuppedRenderSettings = false;
+				isHeadLightActive = false;
+				HasLightmapsStored = false;
+				AreLightMapsEnabled = true;
+				if (ToggleLightmaps != null)
+				{
+					ToggleLightmaps.SetToggleState(AreLightMapsEnabled);
+				}
+				if (ToggleFullbright != null)
+				{
+					ToggleFullbright.SetToggleState(false);
+				}
+				if (ModifyRenderOptions != null)
+				{
+					ModifyRenderOptions.SetToggleState(false);
+				}
 			}
 		}
 

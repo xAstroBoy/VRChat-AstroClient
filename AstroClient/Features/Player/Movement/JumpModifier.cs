@@ -1,18 +1,13 @@
 ﻿namespace AstroClient.Features.Player.Movement
 {
 	using RubyButtonAPI;
-	using System;
 	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using UnityEngine;
 	using VRC.SDKBase;
 	using static AstroClient.LocalPlayerUtils;
 
 	public class JumpModifier : GameEvents
 	{
-
 
 		public override void OnUpdate()
 		{
@@ -29,9 +24,6 @@
 		{
 			IsJumpOverriden = false;
 		}
-
-
-
 
 		private static void FixJumpMissing()
 		{
@@ -59,34 +51,33 @@
 			}
 		}
 
-
-
-
-
 		public static void CheckForJumpUpdates()
 		{
-			if (GetLocalVRCPlayer() != null)
+			if (KeyManager.IsAuthed)
 			{
-				if (GetLocalPlayerAPI() != null)
+				if (GetLocalVRCPlayer() != null)
 				{
-					if (InputUtils.IsImputJumpCalled())
+					if (GetLocalPlayerAPI() != null)
 					{
-						if (IsPlayerGrounded() && IsJumpOverriden)
+						if (InputUtils.IsImputJumpCalled())
 						{
-							EmulatedJump();
-						}
-						else
-						{
-							if (!IsPlayerGrounded() && IsUnlimitedJumpActive)
+							if (IsPlayerGrounded() && IsJumpOverriden)
 							{
 								EmulatedJump();
 							}
+							else
+							{
+								if (!IsPlayerGrounded() && IsUnlimitedJumpActive)
+								{
+									EmulatedJump();
+								}
+							}
 						}
-					}
 
-					if (InputUtils.IsInputJumpPressed() && IsRocketJumpActive)
-					{
-						EmulatedJump();
+						if (InputUtils.IsInputJumpPressed() && IsRocketJumpActive)
+						{
+							EmulatedJump();
+						}
 					}
 				}
 			}

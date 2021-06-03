@@ -11,32 +11,6 @@
 
 	internal static class XrefTesting
 	{
-		internal static MethodInfo OnTest
-		{
-			get
-			{
-				if (_OnTest != null)
-				{
-					return _OnTest;
-				}
-
-				var methods = typeof(VRCStandaloneInputModule).GetMethods().Where(m => m.ReturnType == typeof(Il2CppStructArray<bool>));
-				foreach (var method in methods)
-				{
-					if (method.Name.Contains("1"))
-					{
-						ModConsole.Log($"Found array to patch: {method.Name}");
-						_OnTest = method;
-						return _OnTest;
-					}
-				}
-
-				return null;
-			}
-		}
-
-		private static MethodInfo _OnTest;
-
 		internal static MethodInfo OnPhotonPlayerJoinMethod
 		{
 			get

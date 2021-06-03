@@ -130,6 +130,8 @@
     <Compile Include="CheetosUI\CheetoBackground.cs" />
     <Compile Include="CheetosUI\CheetoButton.cs" />
     <Compile Include="CheetosUI\CheetoText.cs" />
+    <Compile Include="Cheetos\Astro_Interactable.cs" />
+    <Compile Include="Cheetos\Astro_Interactable_Extensions.cs" />
     <Compile Include="Cheetos\AvatarSearch.cs" />
     <Compile Include="CheetosUI\CheetoPage.cs" />
     <Compile Include="Cheetos\CheetosExtensions.cs" />
@@ -146,6 +148,7 @@
     <Compile Include="Cheetos\ForceClone.cs" />
     <Compile Include="Cheetos\CameraStuff\CLIPPING.cs" />
     <Compile Include="Cheetos\MainThreadRunner.cs" />
+    <Compile Include="Cheetos\PlayerListData.cs" />
     <Compile Include="Cheetos\VRCPlusHider.cs" />
     <Compile Include="Cheetos\CheetosTestStuff.cs" />
     <Compile Include="Cheetos\CheetosUI.cs" />
@@ -170,7 +173,7 @@
     <Compile Include="GameEventsBehaviour.cs" />
     <Compile Include="Cheetos\CameraStuff\FOV.cs" />
     <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
-    <Compile Include="Cheetos\PlayerMenuUI.cs" />
+    <Compile Include="Cheetos\PlayerList.cs" />
     <Compile Include="Cheetos\StreamerProtector.cs" />
     <Compile Include="Components\Murder4PatronUnlocker\Murder4PatronUnlocker.cs" />
     <Compile Include="DayOfThePlay\Extensions\CameraExtension.cs" />
@@ -263,7 +266,7 @@
     <Compile Include="ItemTweaker\Submenus\Physic\Physic_Tweaker.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Lights\LightControl.cs" />
-    <Compile Include="Menu\Movement\Movement_Menu.cs" />
+    <Compile Include="Buttons\MovementMenu.cs" />
     <Compile Include="Mora\AntiCrashPolys.cs" />
     <Compile Include="Mora\anticrashwrappers.cs" />
     <Compile Include="Mora\AvatarLogger.cs" />

@@ -16,7 +16,7 @@
 			if (player.GetRawHashtable().ContainsKey("user"))
 				if (player.GetHashtable()["user"] is Dictionary<string, object> dict)
 					return (string)dict["id"];
-			return "No ID";
+			return string.Empty;
 		}
 
 		public static string GetDisplayName(this Photon.Realtime.Player player)

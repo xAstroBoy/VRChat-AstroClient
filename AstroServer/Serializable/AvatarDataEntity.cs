@@ -17,7 +17,7 @@
 
 		public string AuthorName = string.Empty;
 
-		public int Version = 0;
+		public int Version;
 
 		public string ReleaseStatus = string.Empty;
 
@@ -30,5 +30,7 @@
 		public string SupportedPlatforms = string.Empty;
 
 		public bool CheckedRecently;
+
+		public bool Reported;
 	}
 }

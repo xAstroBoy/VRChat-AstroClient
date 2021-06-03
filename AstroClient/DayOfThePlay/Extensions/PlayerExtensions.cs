@@ -6,7 +6,7 @@
 	using VRC.Core;
 	using VRC.SDKBase;
 
-	internal static class PlayerExtensions
+	public static class PlayerExtensions
 	{
 		#region ApiUser
 

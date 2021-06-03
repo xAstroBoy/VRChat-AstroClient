@@ -1,12 +1,6 @@
 ﻿namespace AstroClient.Features.Player.Movement.QuickMenu_QMFreeze
 {
-	using AstroLibrary.Console;
-	using DayClientML2.Utility;
-	using Harmony;
 	using RubyButtonAPI;
-	using System;
-	using System.Collections.Generic;
-	using System.Reflection;
 	using UnityEngine;
 	using VRC.SDKBase;
 
@@ -20,21 +14,21 @@
 
 		public override void OnUpdate()
 		{
-			if (FreezePlayerOnQMOpen)
+			if (KeyManager.IsAuthed)
 			{
-				if (QuickMenuUtils.IsQuickMenuOpen)
+				if (FreezePlayerOnQMOpen)
 				{
-					Freeze();
-				}
-				else
-				{
-					Unfreeze();
+					if (QuickMenuUtils.IsQuickMenuOpen)
+					{
+						Freeze();
+					}
+					else
+					{
+						Unfreeze();
+					}
 				}
 			}
 		}
-
-
-
 
 		public static void Unfreeze()
 		{

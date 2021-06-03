@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.Cheetos;
 	using AstroLibrary.Console;
 	using DayClientML2.Utility.Extensions;
 	using System.Collections.Generic;
@@ -36,20 +37,20 @@
 		{
 			ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Joined!");
 
-			//if (ConfigManager.General.JoinLeave && isReady)
-			//{
-			//	CheetosHelpers.SendHudNotification($"<color=cyan>Photon Join</color>: {player?.GetUsername()}");
-			//}
+			if (ConfigManager.General.JoinLeave && isReady)
+			{
+				CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {player.GetDisplayName()} <color=red>Joined</color>!");
+			}
 		}
 
 		public override void OnPhotonLeft(Photon.Realtime.Player player)
 		{
 			ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Left!");
 
-			//if (ConfigManager.General.JoinLeave && isReady)
-			//{
-			//	CheetosHelpers.SendHudNotification($"<color=cyan>Photon Leave</color>: {player?.GetUsername()}");
-			//}
+			if (ConfigManager.General.JoinLeave && isReady)
+			{
+				CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {player.GetDisplayName()} <color=red>Left</color>!");
+			}
 		}
 	}
 }

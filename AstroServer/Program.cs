@@ -1,12 +1,10 @@
 ﻿namespace AstroServer
 {
 	using AstroServer.DiscordBot;
-	using AstroServer.Serializable;
 	using Discord;
 	using Discord.Commands;
 	using Discord.WebSocket;
 	using Microsoft.Extensions.DependencyInjection;
-	using MongoDB.Entities;
 	using System;
 	using System.Net.Http;
 	using System.Threading.Tasks;

@@ -30,6 +30,10 @@
 
 		public static byte[] ExtractResource(string filename)
 		{
+			if (!KeyManager.IsAuthed)
+			{
+				throw new System.Exception("Not Authorized!");
+			}
 			System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
 			using (Stream resFilestream = a.GetManifestResourceStream(filename))
 			{

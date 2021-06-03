@@ -1,11 +1,7 @@
 ﻿namespace AstroClient.Experiments
 {
 	using AstroLibrary.Finder;
-	using System;
 	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using AstroClient.Extensions;
 	using AstroClient.ItemTweaker;
 	using RubyButtonAPI;
@@ -15,8 +11,6 @@
 
 	public class CameraOnTweakerExperiment : GameEvents
 	{
-
-
 
 		public static void CheckCamera()
 		{
@@ -42,7 +36,6 @@
 				}
 			}
 		}
-
 
 		public override void OnLevelLoaded()
 		{
@@ -70,7 +63,6 @@
 				}
 			}
 		}
-
 
 		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
@@ -102,8 +94,6 @@
 			}
 		}
 
-
-
 		public static void InitQMMenu(QMTabMenu tab, float x, float y, bool btnHalf)
 		{
 			var tmp = new QMNestedButton(tab, x, y, "Camera Experiments", "Edit Camera Behaviours", null, null, null, null, btnHalf);
@@ -115,8 +105,6 @@
 
 
 		}
-
-
 
 		public static Transform UserCamera
 		{
@@ -234,8 +222,5 @@
                 CheckCamera();
 			}
 		}
-
-
-
 	}
 }

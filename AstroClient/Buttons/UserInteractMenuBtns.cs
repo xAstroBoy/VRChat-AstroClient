@@ -17,8 +17,8 @@
 			OldCloneButton = Finder.GameObjectFinder.Find("UserInterface/QuickMenu/UserInteractMenu/CloneAvatarButton");
 			OldCloneButton?.SetActive(false);
 			Init_UserMenu_Exploits(x, y, true);
-			new QMSingleButton("UserInteractMenu", x, y + 0.5f, "AstroClient : Set Target.", new Action(ObjectMiscOptions.MarkPlayerAsTarget), "Mark this player as target.", null, null, btnHalf).SetResizeTextForBestFit(true);
-			AvatarModifier.InitUserMenu(x - 1, y, true);
+			//new QMSingleButton("UserInteractMenu", x, y + 0.5f, "AstroClient : Set Target.", new Action(ObjectMiscOptions.MarkPlayerAsTarget), "Mark this player as target.", null, null, btnHalf).SetResizeTextForBestFit(true);
+			AvatarModifier.InitUserMenu(x, y + 0.5f, true);
 			var forceClone = new QMSingleButton("UserInteractMenu", 5, 0, "Force Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar", null, null, false);
 
 

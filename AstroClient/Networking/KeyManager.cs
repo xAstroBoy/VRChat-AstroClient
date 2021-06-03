@@ -5,13 +5,13 @@
 
 	internal static class KeyManager
 	{
-		public static string AuthKey = string.Empty;
+		internal static string AuthKey = string.Empty;
 
-		public static bool IsAuthed = false;
+		internal static bool IsAuthed = false;
 
-		public static bool IsReady = false;
+		internal static bool IsReady = false;
 
-		public static void ReadKey()
+		internal static void ReadKey()
 		{
 			string keyPath = $@"{Environment.CurrentDirectory}\AstroClient\key.txt";
 

@@ -15,6 +15,8 @@
 	/// </summary>
 	public class DevUI : GameEvents
 	{
+		#region UIElements
+
 		public QMNestedButton MainButton { get; private set; }
 
 		public QMScrollMenu MainScroller { get; private set; }
@@ -26,6 +28,8 @@
 		public QMSingleButton DisconectButton { get; private set; }
 
 		public QMSingleButton ReconnectButton { get; private set; }
+
+		#endregion
 
 		public override void VRChat_OnUiManagerInit()
 		{

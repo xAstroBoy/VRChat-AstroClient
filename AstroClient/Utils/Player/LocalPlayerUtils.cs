@@ -2,6 +2,7 @@
 {
 	#region Imports
 	using DayClientML2.Utility.Extensions;
+	using Mono.CSharp;
 	using RubyButtonAPI;
 	using UnityEngine;
 	using VRC;
@@ -12,9 +13,6 @@
 
 	public static class LocalPlayerUtils
 	{
-
-
-
 		public static Vector3 PlayerPositionBones(Player player, HumanBodyBones bone)
 		{
 			Vector3 bonePosition = player.transform.position;
@@ -81,7 +79,7 @@
 
 		public static Player GetSelfPlayer()
 		{
-			return Player.prop_Player_0;
+			return KeyManager.IsAuthed ? Player.prop_Player_0 : null;
 		}
 
 		public static bool IsPlayerGrounded()
@@ -91,7 +89,7 @@
 
 		public static VRCPlayer GetLocalVRCPlayer()
 		{
-			return VRCPlayer.field_Internal_Static_VRCPlayer_0;
+			return KeyManager.IsAuthed ? VRCPlayer.field_Internal_Static_VRCPlayer_0 : null;
 		}
 
 		public static VRCPlayerApi GetLocalPlayerAPI()

@@ -15,7 +15,10 @@
 
 		public static void SpawnClone()
 		{
-			ClonesCapsules.Add(PlayerCloner.CloneLocalPlayerAvatar());
+			if (KeyManager.IsAuthed)
+			{
+				ClonesCapsules.Add(PlayerCloner.CloneLocalPlayerAvatar());
+			}
 		}
 
 		public static void RemoveClones()

@@ -1,5 +1,7 @@
 ﻿namespace AstroClient.Extensions
 {
+	#region Imports
+
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.Cloner;
 	using AstroClient.ItemTweaker;
@@ -13,9 +15,10 @@
 	using VRC.SDKBase;
 	using Color = System.Drawing.Color;
 
+	#endregion
+
 	public static class Engine_ext
 	{
-
 
 		public static void PrintPath(this GameObject obj)
 		{
@@ -28,7 +31,6 @@
 				}
 			}
 		}
-
 
 		public static bool Is_DontDestroyOnLoad(this GameObject obj)
 		{
@@ -47,7 +49,6 @@
 			UnityEngine.Object.DontDestroyOnLoad(obj);
 
 		}
-
 
 		public static void CopyPath(this GameObject obj)
 		{
@@ -82,7 +83,6 @@
 				Clipboard.SetText($"new Vector3({obj.transform.position.x}f, {obj.transform.position.y}f, {obj.transform.position.z}f)");
 			}
 		}
-
 		public static void CopyLocalPosition(this GameObject obj)
 		{
 			if (obj != null)
@@ -92,7 +92,6 @@
 				Clipboard.SetText($"new Vector3({obj.transform.localPosition.x}f, {obj.transform.localPosition.y}f, {obj.transform.localPosition.z}f)");
 			}
 		}
-
 		public static void DestroyObject(this GameObject obj)
 		{
 			if (!obj.DestroyMeOnline())
@@ -118,7 +117,6 @@
 				ObjectCloner.CloneGameObject(obj);
 			}
 		}
-
 		public static bool DestroyMeOnline(this GameObject obj)
 		{
 			bool refreshhandutils = false;
@@ -150,7 +148,7 @@
 
 		public static void DestroyMeLocal(this Object obj)
 		{
-			if (obj != null)
+			if (obj != null && KeyManager.IsAuthed)
 			{
 				string objname = obj.name;
 				string typename = obj.GetType().ToString();
@@ -238,7 +236,7 @@
 
 		public static void RenameObject(this GameObject obj, string newname)
 		{
-			if (obj != null)
+			if (obj != null && KeyManager.IsAuthed)
 			{
 				var oldname = obj.name;
 				ModConsole.DebugLog("Renamed object : " + oldname + " to " + newname);
@@ -248,7 +246,7 @@
 
 		public static void SetActiveStatus(this GameObject obj, bool SetActive)
 		{
-			if (obj != null)
+			if (obj != null && KeyManager.IsAuthed)
 			{
 				obj.SetActive(SetActive);
 				Tweaker_Object.UpdateCapturedButtonColor(obj.active);
@@ -266,7 +264,7 @@
 			for (var i = 0; i < obj.childCount; i++)
 			{
 				var item = obj.GetChild(i);
-				if (item != null)
+				if (item != null && KeyManager.IsAuthed)
 				{
 					childs.Add(item);
 				}
