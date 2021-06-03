@@ -22,7 +22,6 @@
 			{
 				try
 				{
-					List<GameObject> result = new List<GameObject>();
 
 					List<GameObject> list1 = new List<GameObject>();
 					List<GameObject> list2 = new List<GameObject>();
@@ -33,15 +32,39 @@
 					list2 = obj.GetComponentsInChildren<VRCSDK2.VRC_Interactable>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
 					list3 = obj.GetComponentsInChildren<VRCInteractable>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
 
-					// Unite The lists In one (avoiding duplicates).
-					result = list1
-						.Union(list2)
-						.Union(list3)
-						.ToList()
-						.Where(x => x.gameObject != null)
-						.ToList(); // Never null.
 
-					return result;
+					// Linq Still broken, does grab some duplicated gameobjects on the way (Might add a check as well in future)
+					// Unite The lists In one (avoiding duplicates).
+					//result = list1
+					//	.Union(list2)
+					//	.Union(list3)
+					//	.Distinct()
+					//	.ToList()
+					//	.Where(x => x.gameObject != null)
+					//	.ToList(); // Never null.
+					foreach (var item in list2)
+					{
+						if (item != null)
+						{
+							if (!list1.Contains(item))
+							{
+								list1.Add(item);
+							}
+						}
+					}
+
+					foreach (var item in list3)
+					{
+						if (item != null)
+						{
+							if (!list1.Contains(item))
+							{
+								list1.Add(item);
+							}
+						}
+					}
+
+					return list1;
 
 				}
 				catch (Exception e)
@@ -60,23 +83,33 @@
 			{
 				try
 				{
-					List<GameObject> result = new List<GameObject>();
-
 					List<GameObject> list1 = new List<GameObject>();
 					List<GameObject> list2 = new List<GameObject>();
 
 					list1 = obj.GetComponentsInChildren<VRC.SDKBase.VRC_Trigger>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
 					list2 = obj.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
+					foreach(var item in list2)
+					{
+						if (item != null)
+						{
+							if (!list1.Contains(item))
+							{
+								list1.Add(item);
+							}
+						}
+					}
 
-					// Unite The lists In one (avoiding duplicates).
-					result = 
-						list1
-						.Union(list2)
-						.ToList()
-						.Where(x => x.gameObject != null)
-						.ToList(); // Never null.
+					// Linq Still broken, does grab some duplicated gameobjects on the way (Might add a check as well in future)
+					//// Unite The lists In one (avoiding duplicates).
+					//result = 
+					//	 list1
+					//	.Union(list2)
+					//  .Distinct()
+					//	.ToList()
+					//	.Where(x => x.gameObject != null)
+					//	.ToList(); // Never null.
 
-					return result;
+					return list1;
 				}
 				catch (Exception e)
 				{
@@ -91,9 +124,20 @@
 		public static List<UdonBehaviour> Get_UdonBehaviours(this GameObject obj)
 		{
 			List<UdonBehaviour> events = new List<UdonBehaviour>();
-			events = obj.GetComponentsInChildren<UdonBehaviour>(true)
-				.Where(i => i._eventTable.keys.Count != 0) // Discard Objects having zero keys as is just empty udon behaviour.
-				.ToList();
+
+			foreach (var item in obj.GetComponentsInChildren<UdonBehaviour>(true))
+			{
+				if (item != null)
+				{
+					if (item._eventTable.keys.Count != 0)
+					{
+						if (events.Contains(item))
+						{
+							events.Add(item);
+						}
+					}
+				}
+			}
 			return events;
 		}
 

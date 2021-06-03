@@ -25,12 +25,27 @@
 				list1 = VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
 				list2 = VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
 
-				// Unite The lists In one.
-				result = (list1)
-					.Union(list2)
-					.ToList()
-					.Where(x => x.gameObject != null)
-					.ToList(); // Never null.
+				//// Unite The lists In one.
+
+
+				foreach (var item in list2)
+				{
+					if (item != null)
+					{
+						if (!list1.Contains(item))
+						{
+							list1.Add(item);
+						}
+					}
+				}
+
+				// Linq Still broken, does grab some duplicated gameobjects on the way (Might add a check as well in future)
+				//result = list1
+				//	.Union(list2)
+				//	.Distinct()
+				//	.ToList()
+				//	.Where(x => x.gameObject != null)
+				//	.ToList(); // Never null.
 				return result;
 
 			}
@@ -91,8 +106,6 @@
 		{
 			try
 			{
-				List<GameObject> result = new List<GameObject>();
-
 				List<GameObject> list1 = new List<GameObject>();
 				List<GameObject> list2 = new List<GameObject>();
 				List<GameObject> list3 = new List<GameObject>();
@@ -103,26 +116,51 @@
 
 
 				// Unite The lists In one (avoiding duplicates).
-				result = list1
-					.Union(list2)
-					.Union(list3)
-					.ToList()
-					.Where(x => x.gameObject != null)
-					.ToList(); // Never null.
 
-
-							   
-				if (result.Count() != 0) // Then Filter the ViewFinder (Player Camera)
+				foreach (var item in list2)
 				{
-					if (CameraOnTweakerExperiment.ViewFinder.gameObject != null)
+					if (item != null)
 					{
-						if (result.Contains(CameraOnTweakerExperiment.ViewFinder.gameObject))
+						if (!list1.Contains(item))
 						{
-							result.Remove(CameraOnTweakerExperiment.ViewFinder.gameObject);
+							list1.Add(item);
 						}
 					}
 				}
-				return result;
+
+				foreach (var item in list3)
+				{
+					if (item != null)
+					{
+						if (!list1.Contains(item))
+						{
+							list1.Add(item);
+						}
+					}
+				}
+
+				// Linq Still broken, does grab some duplicated gameobjects on the way (Might add a check as well in future)
+
+				//result = list1
+				//	.Union(list2)
+				//	.Union(list3)
+				//	.ToList()
+				//	.Where(x => x.gameObject != null)
+				//	.ToList(); // Never null.
+
+
+
+				if (list1.Count() != 0) // Then Filter the ViewFinder (Player Camera)
+				{
+					if (CameraOnTweakerExperiment.ViewFinder.gameObject != null)
+					{
+						if (list1.Contains(CameraOnTweakerExperiment.ViewFinder.gameObject))
+						{
+							list1.Remove(CameraOnTweakerExperiment.ViewFinder.gameObject);
+						}
+					}
+				}
+				return list1;
 
 			}
 			catch (Exception e)
@@ -139,7 +177,7 @@
 
 			try
 			{
-				List<GameObject> result = new List<GameObject>();
+
 
 				List<GameObject> list1 = new List<GameObject>();
 				List<GameObject> list2 = new List<GameObject>();
@@ -150,14 +188,41 @@
 				list3 = Resources.FindObjectsOfTypeAll<VRCInteractable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
 
 				// Unite The lists In one (avoiding duplicates).
-				result =  list1
-					.Union(list2)
-					.Union(list3)
-					.ToList()
-					.Where(x => x.gameObject != null)
-					.ToList(); // Never null.
-				
-				return result;
+
+
+				foreach (var item in list2)
+				{
+					if (item != null)
+					{
+						if (!list1.Contains(item))
+						{
+							list1.Add(item);
+						}
+					}
+				}
+
+				foreach (var item in list3)
+				{
+					if (item != null)
+					{
+						if (!list1.Contains(item))
+						{
+							list1.Add(item);
+						}
+					}
+				}
+
+				// Linq Still broken, does grab some duplicated gameobjects on the way (Might add a check as well in future)
+
+				//result =  list1
+				//	.Union(list2)
+				//	.Union(list3)
+				//	.Distinct()
+				//	.ToList()
+				//	.Where(x => x.gameObject != null)
+				//	.ToList(); // Never null.
+
+				return list1;
 
 			}
 			catch (Exception e)
@@ -173,22 +238,34 @@
 
 			try
 			{
-				List<GameObject> result = new List<GameObject>();
-
 				List<GameObject>  list1 = new List<GameObject>(); 
 				List<GameObject>  list2 = new List<GameObject>();
 
 				list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
 				list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
 
-				// Unite The lists In one (avoiding duplicates).
-				result = (list1)
-					.Union(list2)
-					.ToList()
-					.Where(x => x.gameObject != null)
-					.ToList(); // Never null.				return result;
-				
-				return result;
+
+				foreach (var item in list2)
+				{
+					if (item != null)
+					{
+						if (!list1.Contains(item))
+						{
+							list1.Add(item);
+						}
+					}
+				}
+				// Linq Still broken, does grab some duplicated gameobjects on the way (Might add a check as well in future)
+
+				//// Unite The lists In one (avoiding duplicates).
+				//result = list1
+				//	.Union(list2)
+				//	.Distinct()
+				//	.ToList()
+				//	.Where(x => x.gameObject != null)
+				//	.ToList();
+
+				return list1;
 			}
 			catch(Exception e)
 			{
@@ -201,10 +278,19 @@
 		public static List<UdonBehaviour> Get_UdonBehaviours()
 		{
 			List<UdonBehaviour> worldbehaviours = new List<UdonBehaviour>();
-			worldbehaviours = Resources.FindObjectsOfTypeAll<UdonBehaviour>()
-				.Where(x => x != null)
-				.Where(i => i._eventTable.keys.Count != 0) // Discard Objects having zero keys as is just empty udon behaviour.
-				.ToList();
+			foreach(var item in Resources.FindObjectsOfTypeAll<UdonBehaviour>())
+			{
+				if(item != null)
+				{
+					if (item._eventTable.keys.Count != 0)
+					{
+						if (worldbehaviours.Contains(item))
+						{
+							worldbehaviours.Add(item);
+						}
+					}
+				}
+			}
 			return worldbehaviours;
 		}
 
