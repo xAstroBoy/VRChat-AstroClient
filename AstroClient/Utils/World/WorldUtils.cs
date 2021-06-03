@@ -19,12 +19,15 @@
 			try
 			{
 				var result = new List<GameObject>();
-				var list1 = VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().ToList();
-				var list2 = VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().ToList();
+				List<GameObject> list1 = new List<GameObject>();
+				List<GameObject> list2 = new List<GameObject>();
+
+				list1 = VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
+				list2 = VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
 
 				// Unite The lists In one.
-				result = (list1 ?? Enumerable.Empty<GameObject>())
-					.Union(list2 ?? Enumerable.Empty<GameObject>())
+				result = (list1)
+					.Union(list2)
 					.ToList()
 					.Where(x => x.gameObject != null)
 					.ToList(); // Never null.
@@ -88,15 +91,25 @@
 		{
 			try
 			{
-				var result = new List<GameObject>();
-				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>().Select(i => i.gameObject).ToList();
-				var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Pickup>().Select(i => i.gameObject).ToList();
-				var list3 = Resources.FindObjectsOfTypeAll<VRCPickup>().Select(i => i.gameObject).ToList();
+				List<GameObject> result = new List<GameObject>();
 
+				List<GameObject> list1 = new List<GameObject>();
+				List<GameObject> list2 = new List<GameObject>();
+				List<GameObject> list3 = new List<GameObject>();
+
+				ModConsole.Log("Parsing SDKbase..");
+				list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
+				ModConsole.Log("Parsing SDK2..");
+				list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Pickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
+				ModConsole.Log("Parsing SDK3..");
+				list3 = Resources.FindObjectsOfTypeAll<VRCPickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
+
+
+				ModConsole.Log("Joining Results and Filtering...");
 				// Unite The lists In one (avoiding duplicates).
-				result = (list1 ?? Enumerable.Empty<GameObject>())
-					.Union(list2 ?? Enumerable.Empty<GameObject>())
-					.Union(list3 ?? Enumerable.Empty<GameObject>())
+				result = list1
+					.Union(list2)
+					.Union(list3)
 					.ToList()
 					.Where(x => x.gameObject != null)
 					.ToList(); // Never null.
@@ -105,6 +118,9 @@
 							   // Then Filter the ViewFinder and AvatarDebugConsole
 				if (result.Count() != 0)
 				{
+					ModConsole.Log("Filtering ViewFinder...");
+
+
 					if (CameraOnTweakerExperiment.ViewFinder.gameObject != null)
 					{
 						if (result.Contains(CameraOnTweakerExperiment.ViewFinder.gameObject))
@@ -112,13 +128,6 @@
 							ModConsole.DebugLog("Filtering ViewFinder From Pickup List...");
 							result.Remove(CameraOnTweakerExperiment.ViewFinder.gameObject);
 						}
-					}
-
-					GameObject AvatarDebugConsole = result.Where(x => x.name == "AvatarDebugConsole").FirstOrDefault(null);
-					if (AvatarDebugConsole != null)
-					{
-						ModConsole.DebugLog("Filtering AvatarDebugConsole From Pickup List...");
-						result.Remove(AvatarDebugConsole);
 					}
 				}
 				return result;
@@ -139,14 +148,19 @@
 			try
 			{
 				List<GameObject> result = new List<GameObject>();
-				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Interactable>().Select(i => i.gameObject).ToList();
-				var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Interactable>().Select(i => i.gameObject).ToList();
-				var list3 = Resources.FindObjectsOfTypeAll<VRCInteractable>().Select(i => i.gameObject).ToList();
+
+				List<GameObject> list1 = new List<GameObject>();
+				List<GameObject> list2 = new List<GameObject>();
+				List<GameObject> list3 = new List<GameObject>();
+
+				list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
+				list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
+				list3 = Resources.FindObjectsOfTypeAll<VRCInteractable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
 
 				// Unite The lists In one (avoiding duplicates).
-				result =  (list1 ?? Enumerable.Empty<GameObject>())
-					.Union(list2 ?? Enumerable.Empty<GameObject>())
-					.Union(list3 ?? Enumerable.Empty<GameObject>())
+				result =  list1
+					.Union(list2)
+					.Union(list3)
 					.ToList()
 					.Where(x => x.gameObject != null)
 					.ToList(); // Never null.
@@ -168,12 +182,16 @@
 			try
 			{
 				List<GameObject> result = new List<GameObject>();
-				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Trigger>().Select(i => i.gameObject).ToList();
-				var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Trigger>().Select(i => i.gameObject).ToList();
+
+				List<GameObject>  list1 = new List<GameObject>(); 
+				List<GameObject>  list2 = new List<GameObject>();
+
+				list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
+				list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
 
 				// Unite The lists In one (avoiding duplicates).
-				result = (list1 ?? Enumerable.Empty<GameObject>())
-					.Union(list2 ?? Enumerable.Empty<GameObject>())
+				result = (list1)
+					.Union(list2)
 					.ToList()
 					.Where(x => x.gameObject != null)
 					.ToList(); // Never null.				return result;
@@ -191,7 +209,10 @@
 		public static List<UdonBehaviour> Get_UdonBehaviours()
 		{
 			List<UdonBehaviour> worldbehaviours = new List<UdonBehaviour>();
-			worldbehaviours = Resources.FindObjectsOfTypeAll<UdonBehaviour>().Where(i => i._eventTable.keys.Count != 0).ToList();
+			worldbehaviours = Resources.FindObjectsOfTypeAll<UdonBehaviour>()
+				.Where(x => x.gameObject != null)
+				.Where(i => i._eventTable.keys.Count != 0)
+				.ToList();
 			return worldbehaviours;
 		}
 
