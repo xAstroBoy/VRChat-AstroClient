@@ -15,6 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DontTouchMyClient.Patcher;
 using Patch = DontTouchMyClient.Patcher.Patch;
+using AstroLibrary.Console;
 
 namespace DontTouchMyClient.Patches
 {

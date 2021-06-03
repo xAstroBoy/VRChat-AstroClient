@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DontTouchMyClient</RootNamespace>
     <AssemblyName>DontTouchMyClient</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -277,6 +277,12 @@
     <None Include="..\.editorconfig">
       <Link>.editorconfig</Link>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AstroLibrary\AstroLibrary.csproj">
+      <Project>{4613C712-5463-44C6-AB48-081A2B3AE61D}</Project>
+      <Name>AstroLibrary</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
