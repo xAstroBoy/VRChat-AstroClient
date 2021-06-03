@@ -27,12 +27,21 @@
 					CreateButtonGroup(5, new Vector3(-68.77336f, 15.78151f, -0.3279915f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
 					CreateButtonGroup(6, new Vector3(-67.04791f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
 
+
+
+
 					// Remove stupid warning in elevator.
 					var warning = GameObjectFinder.Find("Lobby/Warning");
 					if (warning != null)
 					{
 						warning.SetActive(false);
 					}
+					RemovePrivacyBlocksOnRooms(1);
+                    RemovePrivacyBlocksOnRooms(2);
+                    RemovePrivacyBlocksOnRooms(3);
+                    RemovePrivacyBlocksOnRooms(4);
+                    RemovePrivacyBlocksOnRooms(5);
+                    RemovePrivacyBlocksOnRooms(6);
 				}
 				catch (Exception e)
 				{
@@ -41,6 +50,24 @@
 			}
 		}
 
+
+		private void RemovePrivacyBlocksOnRooms(int roomid)
+		{
+			GameObject Bedrooms = GameObjectFinder.FindRootSceneObject("Bedrooms");
+			if (Bedrooms != null)
+			{
+				var cover = Bedrooms.transform.FindObject($"Bedrooms/Bedroom {roomid}/Black Covers");
+				var privacy = Bedrooms.transform.FindObject($"Bedrooms/Bedroom {roomid}/Privacy)");
+				if(privacy != null)
+				{
+					privacy.DestroyMeLocal();
+				}
+				if(cover != null)
+				{
+					cover.DestroyMeLocal();
+				}
+			}
+		}
 		// TODO : FIX THE UDON EVENT OR MAKE A LOCAL TELEPORT AND ENABLE THE ROOM WITH ONE BUTTON.
 		private GameObject CreateButtonGroup(int doorID, Vector3 position, Quaternion rotation, bool flip = false)
 		{
