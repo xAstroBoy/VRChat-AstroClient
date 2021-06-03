@@ -100,17 +100,11 @@
 
 		private void ResetButtons()
 		{
-			Stopwatch stopwatch = new Stopwatch();
-			stopwatch.Start();
-
 			foreach (var keyValuePair in PlayerButtons)
 			{
 				keyValuePair.Value.DestroyMe();
 			}
 			PlayerButtons.Clear();
-
-			stopwatch.Stop();
-			ModConsole.Log($"PlayerList ResetButtons: {stopwatch.ElapsedMilliseconds}ms");
 		}
 
 		private void SelectPlayer(Player player)
