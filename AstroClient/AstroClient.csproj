@@ -265,7 +265,7 @@
     <Compile Include="ItemTweaker\Submenus\Physic\Physic_Tweaker.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Lights\LightControl.cs" />
-    <Compile Include="Menu\Movement\Movement_Menu.cs" />
+    <Compile Include="Buttons\MovementMenu.cs" />
     <Compile Include="Mora\AntiCrashPolys.cs" />
     <Compile Include="Mora\anticrashwrappers.cs" />
     <Compile Include="Mora\AvatarLogger.cs" />

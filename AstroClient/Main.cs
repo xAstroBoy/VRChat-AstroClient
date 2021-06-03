@@ -33,6 +33,9 @@
 
 	public class Main : MelonMod
 	{
+
+		#region EventHandlers
+
 		//public static event EventHandler Event_OnApplicationStart;
 
 		public static event EventHandler Event_OnUpdate;
@@ -45,6 +48,18 @@
 
 		public static event EventHandler Event_OnApplicationQuit;
 
+		#endregion
+
+		#region Buttons
+
+		public static QMSingleToggleButton ToggleDebugInfo;
+		public static QMSingleButton CopyIDButton;
+		public static QMSingleButton JoinIns;
+		public static QMSingleButton avatar;
+		public static QMSingleButton VRam;
+		public static QMSingleButton JoinInstanceButton;
+
+		#endregion
 
 		public static List<GameEvents> Overridable_List = new List<GameEvents>();
 
@@ -229,13 +244,5 @@
 				SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
 			}
 		}
-
-		public static QMSingleToggleButton ToggleDebugInfo;
-
-		public static QMSingleButton CopyIDButton;
-		public static QMSingleButton JoinIns;
-		public static QMSingleButton avatar;
-		public static QMSingleButton VRam;
-		public static QMSingleButton JoinInstanceButton;
 	}
 }

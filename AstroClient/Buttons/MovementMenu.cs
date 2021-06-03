@@ -1,10 +1,8 @@
-﻿namespace AstroClient.Menu.Movement
+﻿namespace AstroClient.Startup.Buttons
 {
+	#region Imports
+
 	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using AstroClient.Features.Player.Clones;
 	using AstroClient.Features.Player.Movement;
 	using AstroClient.Features.Player.Movement.Exploit;
@@ -12,9 +10,10 @@
 	using UnityEngine;
 	using AstroClient.Features.Player.Movement.QuickMenu_QMFreeze;
 
-	public static class Movement_Menu
-	{
+	#endregion
 
+	public static class MovementMenu
+	{
 		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
 			var temp = new QMNestedButton(menu, x, y, "Movement Options", "Control Your Movements", null, null, null, null, btnHalf);
@@ -31,10 +30,5 @@
 			new QMSingleButton(temp, 1, 1, "Spawn Avatar Clone", new Action(() => { Clones.SpawnClone(); }), "Spawns current avi clone", null, null, true);
 			new QMSingleButton(temp, 1, 1.5f, "Remove Avatar Clones", new Action(() => { Clones.RemoveClones(); }), "Removed Spawned avatars clones", null, null, true);
 		}
-
-
-
-
-
 	}
 }

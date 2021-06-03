@@ -21,7 +21,7 @@
 		public static void Set_Pickup_ESP_Color(this GameObject obj, string Color)
 		{
 			Color hextocolor = ColorUtils.HexToColor(Color);
-			if (obj != null)
+			if (obj != null && KeyManager.IsAuthed)
 			{
 				var ESP = obj.GetComponent<ESP_Pickup>();
 				if (ESP != null)
@@ -35,7 +35,7 @@
 		{
 			foreach (var obj in list)
 			{
-				if (obj != null)
+				if (obj != null && KeyManager.IsAuthed)
 				{
 					var ESP = obj.GetComponent<ESP_Pickup>();
 					if (ESP != null)
@@ -52,7 +52,7 @@
 			foreach (var obj in list)
 			{
 				var ESP = obj.GetComponent<ESP_Pickup>();
-				if (ESP != null)
+				if (ESP != null && KeyManager.IsAuthed)
 				{
 					ESP.ChangeColor(hextocolor);
 				}
@@ -63,7 +63,7 @@
 			if (obj != null)
 			{
 				var ESP = obj.GetComponent<ESP_Trigger>();
-				if (ESP != null)
+				if (ESP != null && KeyManager.IsAuthed)
 				{
 					ESP.ChangeColor(Color);
 				}
@@ -75,7 +75,7 @@
 			if (obj != null)
 			{
 				var ESP = obj.GetComponent<ESP_Trigger>();
-				if (ESP != null)
+				if (ESP != null && KeyManager.IsAuthed)
 				{
 					ESP.ChangeColor(Color);
 				}
@@ -86,7 +86,7 @@
 		{
 			foreach (var obj in list)
 			{
-				if (obj != null)
+				if (obj != null && KeyManager.IsAuthed)
 				{
 					var ESP = obj.GetComponent<ESP_Trigger>();
 					if (ESP != null)
@@ -101,7 +101,7 @@
 		{
 			foreach (var obj in list)
 			{
-				if (obj != null)
+				if (obj != null && KeyManager.IsAuthed)
 				{
 					var ESP = obj.GetComponent<ESP_Trigger>();
 					if (ESP != null)
@@ -117,7 +117,7 @@
 			if (obj != null)
 			{
 				var ESP = obj.GetComponent<ESP_ItemTweaker>();
-				if (ESP != null)
+				if (ESP != null && KeyManager.IsAuthed)
 				{
 					ESP.ChangeColor(Color);
 				}
@@ -129,7 +129,7 @@
 			if (obj != null)
 			{
 				var ESP = obj.GetComponent<ESP_ItemTweaker>();
-				if (ESP != null)
+				if (ESP != null && KeyManager.IsAuthed)
 				{
 					ESP.ChangeColor(Color);
 				}
@@ -140,7 +140,7 @@
 		{
 			foreach (var obj in list)
 			{
-				if (obj != null)
+				if (obj != null && KeyManager.IsAuthed)
 				{
 					var ESP = obj.GetComponent<ESP_ItemTweaker>();
 					if (ESP != null)
@@ -155,7 +155,7 @@
 		{
 			foreach (var obj in list)
 			{
-				if (obj != null)
+				if (obj != null && KeyManager.IsAuthed)
 				{
 					var ESP = obj.GetComponent<ESP_ItemTweaker>();
 					if (ESP != null)
@@ -168,7 +168,7 @@
 
 		public static void Set_UdonBehaviour_ESP_Color(this GameObject obj, Color Color)
 		{
-			if (obj != null)
+			if (obj != null && KeyManager.IsAuthed)
 			{
 				var ESP = obj.GetComponent<ESP_UdonBehaviour>();
 				if (ESP != null)
@@ -180,7 +180,7 @@
 
 		public static void Set_UdonBehaviour_ESP_Color(this GameObject obj, string Color)
 		{
-			if (obj != null)
+			if (obj != null && KeyManager.IsAuthed)
 			{
 				var ESP = obj.GetComponent<ESP_UdonBehaviour>();
 				if (ESP != null)
@@ -194,7 +194,7 @@
 		{
 			foreach (var obj in list)
 			{
-				if (obj != null)
+				if (obj != null && KeyManager.IsAuthed)
 				{
 					var ESP = obj.GetComponent<ESP_UdonBehaviour>();
 					if (ESP != null)
@@ -209,7 +209,7 @@
 		{
 			foreach (var obj in list)
 			{
-				if (obj != null)
+				if (obj != null && KeyManager.IsAuthed)
 				{
 					var ESP = obj.GetComponent<ESP_UdonBehaviour>();
 					if (ESP != null)
@@ -225,7 +225,7 @@
 			if (obj != null)
 			{
 				var ESP = obj.GetComponent<ESP_VRCInteractable>();
-				if (ESP != null)
+				if (ESP != null && KeyManager.IsAuthed)
 				{
 					ESP.ChangeColor(Color);
 				}
@@ -234,7 +234,7 @@
 
 		public static void Set_VRCInteractable_ESP_Color(this GameObject obj, string Color)
 		{
-			if (obj != null)
+			if (obj != null && KeyManager.IsAuthed)
 			{
 				var ESP = obj.GetComponent<ESP_VRCInteractable>();
 				if (ESP != null)
@@ -248,7 +248,7 @@
 		{
 			foreach (var obj in list)
 			{
-				if (obj != null)
+				if (obj != null && KeyManager.IsAuthed)
 				{
 					var ESP = obj.GetComponent<ESP_VRCInteractable>();
 					if (ESP != null)
@@ -263,7 +263,7 @@
 		{
 			foreach (var obj in list)
 			{
-				if (obj != null)
+				if (obj != null && KeyManager.IsAuthed)
 				{
 					var ESP = obj.GetComponent<ESP_VRCInteractable>();
 					if (ESP != null)
