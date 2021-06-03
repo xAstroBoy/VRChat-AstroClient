@@ -75,7 +75,7 @@
 			float xPos = -1f + ConfigManager.UI.PlayerListOffset;
 
 			ResetButtons();
-			var temp_list = players.OrderBy(p => p.IsMaster).ThenBy(p => p.IsSelf).ThenBy(p => p.IsFriend).ThenByDescending(p => p.RankType).Reverse().ToArray();
+			var temp_list = players.OrderBy(p => p.IsMaster).ThenBy(p => p.IsSelf).ThenBy(p => p.IsFriend).ThenBy(p => p.GetIsInvisible()).ThenByDescending(p => p.RankType).Reverse().ToArray();
 			for (int i = 0; i < temp_list.Length; i++)
 			{
 				var player = temp_list[i];
