@@ -12,9 +12,9 @@
 
 	public class WorldsCheats : GameEvents
 	{
-		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+		public static void InitButtons(float pos)
 		{
-			QMTabMenu WorldCheats = new QMTabMenu(5f, "WorldCheats Menu", null, null, null, "AstroClient.Resources.thief.png");
+			QMTabMenu WorldCheats = new QMTabMenu(pos, "WorldCheats Menu", null, null, null, "AstroClient.Resources.thief.png");
 			Murder2Cheats.Murder2CheatsButtons(WorldCheats, 1, 0, true);
 			Murder4Cheats.Murder4CheatsButtons(WorldCheats, 1, 0.5f, true);
 			AmongUSCheats.AmongUSCheatsButtons(WorldCheats, 1, 1f, true);
