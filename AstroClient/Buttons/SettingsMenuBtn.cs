@@ -35,7 +35,7 @@
 			QMNestedButton cameraSettings = new QMNestedButton(sub, 2, 2, "Camera", "Camera", null, null, null, null, false);
 			QMSlider fovSlider = new QMSlider(Utils.QuickMenu.transform.Find(cameraSettings.GetMenuName()), "FOV", 400, -620, delegate (float value) { FOV.Set_Camera_FOV(value); }, ConfigManager.General.FOV, 140, 20, true);
 			fovSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
-			QMSlider farClipPlaneSlider = new QMSlider(Utils.QuickMenu.transform.Find(cameraSettings.GetMenuName()), "FarClipPlane", 400, -820, delegate (float value) { CLIPPING.Set_Camera_FarClipPlane(value); }, ConfigManager.General.FarClipPlane, 300, 1, true);
+			QMSlider farClipPlaneSlider = new QMSlider(Utils.QuickMenu.transform.Find(cameraSettings.GetMenuName()), "FarClipPlane", 400, -820, delegate (float value) { CLIPPING.Set_Camera_FarClipPlane(value); }, ConfigManager.General.FarClipPlane, 9000, 1, true);
 			farClipPlaneSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
 
 			// Hide Elements Menu
