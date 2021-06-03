@@ -5,7 +5,10 @@
 
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
+	using MelonLoader;
 	using RubyButtonAPI;
+	using System;
+	using System.Collections;
 	using System.Collections.Generic;
 	using System.Diagnostics;
 	using System.Linq;
@@ -28,6 +31,8 @@
 
 		private static readonly Color SelfColor = Color.magenta;
 
+		private static float RefreshTime;
+
 		public override void VRChat_OnUiManagerInit()
 		{
 			playersButton = new QMSingleButton("ShortcutMenu", -1 + ConfigManager.UI.PlayerListOffset, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
@@ -43,20 +48,34 @@
 			}
 		}
 
+		public override void OnLateUpdate()
+		{
+			if (RefreshTime >= 30f)
+			{
+				RefreshButtons();
+				RefreshTime = 0;
+			}
+			else
+			{
+				RefreshTime += 1f * Time.deltaTime;
+			}
+		}
+
 		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
-			MiscUtility.DelayFunction(2f, () => { RefreshButtons(); });
+			MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
 		}
 
 		public override void OnPhotonJoined(Photon.Realtime.Player player)
 		{
 
-			MiscUtility.DelayFunction(2f, () => { RefreshButtons(); });
+			MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
 		}
 
 		public override void OnPhotonLeft(Photon.Realtime.Player player)
 		{
 			RefreshButtons();
+			RefreshTime = 0f;
 		}
 
 		private void RefreshButtons()
@@ -76,9 +95,20 @@
 
 			ResetButtons();
 			var temp_list = players.OrderBy(p => p.IsMaster).ThenBy(p => p.IsSelf).ThenBy(p => p.IsFriend).ThenBy(p => p.GetIsInvisible()).ThenByDescending(p => p.RankType).Reverse().ToArray();
-			for (int i = 0; i < temp_list.Length; i++)
+
+			MelonCoroutines.Start(CreateButtons(temp_list));
+		}
+
+		private IEnumerator CreateButtons(PlayerListData[] players)
+		{
+			float yPos_start = -0.5f;
+			float yPos_max = 5f;
+			float yPos = yPos_start;
+			float xPos = -1f + ConfigManager.UI.PlayerListOffset;
+
+			for (int i = 0; i < players.Length; i++)
 			{
-				var player = temp_list[i];
+				var player = players[i];
 				var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, $"{player.Prefix}{player.Name}", () => { if (player.Player != null) { SelectPlayer(player.Player); } }, "", player.Color, player.Color, true);
 				playerButton.SetResizeTextForBestFit(true);
 
@@ -95,7 +125,10 @@
 					yPos = yPos_start;
 					xPos -= 1f;
 				}
+
+				yield return null;
 			}
+			yield break;
 		}
 
 		private void ResetButtons()
