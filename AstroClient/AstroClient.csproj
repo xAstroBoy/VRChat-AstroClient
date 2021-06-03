@@ -288,6 +288,7 @@
     <Compile Include="Startup\EventArgs\SpawnEmojiArgs.cs" />
     <Compile Include="Startup\EventArgs\UdonSyncRPCEventArgs.cs" />
     <Compile Include="Startup\EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
+    <Compile Include="Startup\Hooks\AntiVoteKick.cs" />
     <Compile Include="Startup\Hooks\AvatarManagerHook.cs" />
     <Compile Include="Startup\Hooks\NetworkManagerHooks.cs" />
     <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
