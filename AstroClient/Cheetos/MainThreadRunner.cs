@@ -42,17 +42,37 @@
 			try
 			{
 				mutex.WaitOne();
-				if (queue.Count > 0)
+				if (queue.Count >= 1)
 				{
-					queue[0]();
-					queue.RemoveAt(0);
-					ModConsole.Log($"MainThreadRunner: Action Ran");
+					List<Action> toRemove = new List<Action>();
+
+					foreach (Action action in queue)
+					{
+						try
+						{
+							action();
+						}
+						catch (Exception ex)
+						{
+							toRemove.Add(action);
+							ModConsole.Error($"MainThreadRunner: Action Error: {ex.Message}");
+							ModConsole.ErrorExc(ex);
+							break;
+						}
+						finally
+						{
+							toRemove.Add(action);
+							ModConsole.Log($"MainThreadRunner: Action Ran");
+						}
+					}
+
+					toRemove.ForEach(r => queue.Remove(r));
 				}
 			}
 			catch (Exception e)
 			{
 				ModConsole.Error(e.Message);
-				ModConsole.Exception(e);
+				ModConsole.ErrorExc(e);
 			}
 			finally
 			{

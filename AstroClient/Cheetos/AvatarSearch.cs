@@ -1,17 +1,29 @@
 ﻿namespace AstroClient.Cheetos
 {
+	#region Imports
+
+	using AstroClient.variables;
 	using AstroLibrary.Console;
 	using AstroLibrary.Finder;
+	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using DayClientML2.Utility.MenuApi;
-	using System;
+	using Mono.CompilerServices.SymbolWriter;
 	using System.Collections;
 	using System.Diagnostics;
 	using System.Linq;
 	using UnityEngine;
+	using UnityEngine.UI;
 	using VRC.Core;
+
+	#endregion
+
+	public class AvatarResult : VRCUiContentButton
+	{
+		public string AvatarID = string.Empty;
+	}
 
 	public class AvatarSearch : GameEvents
 	{
@@ -27,7 +39,13 @@
 
 		private static Stopwatch stopwatch;
 
-		private static MenuButton SearchTypeButton;
+		private static MenuButton searchTypeButton;
+
+		private static MenuButton deleteButton;
+
+		private static VRCStandaloneInputModule inputModule;
+
+		private static string selectedID;
 
 		public enum SearchTypes
 		{
@@ -38,8 +56,10 @@
 
 		public override void VRChat_OnUiManagerInit()
 		{
+			inputModule = GameObject.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
+
 			// Avatar Search
-			new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Search", -850f, 125f, delegate ()
+			new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Search", -825f, 125f, delegate ()
 			{
 				Utils.VRCUiPopupManager.AskInGameInput("Astro Avatar Search", "Search", delegate (string text)
 				{
@@ -47,7 +67,7 @@
 				}, "Enter Avatar name. . .");
 			}, 1.45f, 1f);
 
-			SearchTypeButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "All", -850f, 50f, delegate ()
+			searchTypeButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "All", -825f, 50f, delegate ()
 			{
 				if (SearchType == SearchTypes.ALL)
 				{
@@ -65,15 +85,38 @@
 
 			}, 1.45f, 1f);
 
+			if (Bools.IsDeveloper)
+			{
+				deleteButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Delete From Database", -825f, -25f, delegate ()
+				{
+					ModConsole.Log($"Sent Avatar Deletion For: {selectedID}");
+					AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DELETE, selectedID));
+				}, 1.45f, 1f);
+			}
+
 			publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
 
 			list = new VRCList(publicAvatarList.transform.parent, "Astro Avatar Search Results", 0);
 			list.Text.supportRichText = true;
 		}
 
-		private static void UpdateButtons()
+		public static void OnSelect()
 		{
-			SearchTypeButton.SetText(Enum.GetName(typeof(SearchTypes), SearchType).ToLower().ToUppercaseFirstCharacterOnly());
+			// Add a check here later
+			var selected = inputModule.field_Public_Selectable_0;
+			if (selected != null)
+			{
+				var comp = selected.gameObject.GetComponent<VRCUiContentButton>();
+				if (comp != null)
+				{
+					var id = comp.field_Public_String_0;
+					if (id != string.Empty)
+					{
+						selectedID = inputModule.field_Public_Selectable_0.gameObject.GetComponent<VRCUiContentButton>().field_Public_String_0;
+
+					}
+				}
+			}
 		}
 
 		public static void Search(SearchTypes searchType, string query)
@@ -124,7 +167,7 @@
 
 			list.RenderElement(foundAvatars);
 
-			MiscUtility.DelayFunction(10f, () =>
+			MiscUtility.DelayFunction(4f, () =>
 			{
 				foreach (var item in list.UiVRCList.pickers)
 				{
@@ -151,8 +194,12 @@
 
 		public static void AddAvatar(AvatarData avatarData)
 		{
-			var apiAvatar = avatarData.ToApiAvatar();
-			foundAvatars.Add(apiAvatar);
+			foundAvatars.Add(avatarData.ToApiAvatar());
+		}
+
+		private static void UpdateButtons()
+		{
+			searchTypeButton.SetText(System.Enum.GetName(typeof(SearchTypes), SearchType).ToLower().ToUppercaseFirstCharacterOnly());
 		}
 	}
 }

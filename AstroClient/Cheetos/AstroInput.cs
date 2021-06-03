@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.Cheetos;
 	#region Imports
 
 	using AstroLibrary.Finder;
@@ -86,6 +87,8 @@
 						var gameObject = hit.collider.transform.gameObject;
 						CheckHitObject(gameObject);
 					}
+
+					AvatarSearch.OnSelect();
 				}
 			}
 			else
@@ -98,6 +101,8 @@
 						var gameObject = hit.collider.transform.gameObject;
 						CheckHitObject(gameObject);
 					}
+
+					AvatarSearch.OnSelect();
 				}
 			}
 		}

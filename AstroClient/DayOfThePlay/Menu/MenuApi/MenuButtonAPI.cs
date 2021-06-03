@@ -10,6 +10,14 @@
 
 	internal class MenuButton
 	{
+		private Color SavedColor;
+		public GameObject Button;
+		public GameObject UserInfoPage;
+		public GameObject AvatarPage;
+		public GameObject SettingsPage;
+		public GameObject SocialPage;
+		public GameObject WorldsPage;
+
 		public MenuButton(MenuType type, MenuButtonType buttontype, string text, float x_pos, float y_pos, Action listener)
 		{
 			try
@@ -375,6 +383,16 @@
 			Button.GetComponentInChildren<Text>().color = color;
 		}
 
+		public void SetSupportRichText(bool value)
+		{
+			Button.GetComponentInChildren<Text>().supportRichText = value;
+		}
+
+		public void SetResizeForBestFit (bool value)
+		{
+			Button.GetComponentInChildren<Text>().resizeTextForBestFit = value;
+		}
+
 		public void SetInteractable(bool result)
 		{
 			//if (Button.GetComponentInChildren<Image>().color != Color.gray)
@@ -390,13 +408,5 @@
 			//}
 			Button.GetComponentInChildren<Button>().interactable = result;
 		}
-
-		private Color SavedColor;
-		public GameObject Button;
-		public GameObject UserInfoPage;
-		public GameObject AvatarPage;
-		public GameObject SettingsPage;
-		public GameObject SocialPage;
-		public GameObject WorldsPage;
 	}
 }

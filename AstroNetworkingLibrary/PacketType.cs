@@ -14,6 +14,7 @@
 		public const byte AVATAR_SEARCH_TYPE = 224;
 		public const byte AVATAR_SEARCH = 225;
 		public const byte AVATAR_REPORT = 226;
+		public const byte AVATAR_DELETE = 227;
 	}
 
 	public static class PacketServerType

@@ -6,9 +6,7 @@
 	using AstroNetworkingLibrary.Serializable;
 	using AstroServer.DiscordBot;
 	using AstroServer.Serializable;
-	using MongoDB.Bson.IO;
 	using MongoDB.Entities;
-	using Newtonsoft.Json;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -198,6 +196,27 @@
 						}
 
 						client.Send(new PacketData(PacketServerType.AVATAR_RESULT_DONE, toSend.Count.ToString()));
+						break;
+					}
+
+				case PacketClientType.AVATAR_REPORT:
+					{
+						break;
+					}
+
+				case PacketClientType.AVATAR_DELETE:
+					{
+						var id = packetData.TextData;
+
+						if (client.Data.IsDeveloper)
+						{
+							DB.Find<AvatarDataEntity>().OneAsync(id).GetAwaiter().GetResult().DeleteAsync().GetAwaiter().GetResult();
+							Console.WriteLine($"DEVELOPER COMMAND: {client.Data.Name} deleted avatar: {id}");
+						}
+						else
+						{
+							Console.WriteLine($"WARNING: {client.Data.Name} tried to delete: {id}");
+						}
 						break;
 					}
 
