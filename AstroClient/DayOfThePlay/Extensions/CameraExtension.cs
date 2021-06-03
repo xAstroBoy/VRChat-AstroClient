@@ -20,13 +20,13 @@
 
 		public static void RotateAround(Vector3 center, Vector3 axis, float angle)
 		{
-			Vector3 worldCameraVector = CameraExtension.WorldCameraVector;
+			Vector3 worldCameraVector = WorldCameraVector;
 			Quaternion quaternion = Quaternion.AngleAxis(angle, axis);
 			Vector3 vector = worldCameraVector - center;
 			vector = quaternion * vector;
-			CameraExtension.WorldCameraVector = center + vector;
-			Quaternion worldCameraQuaternion = CameraExtension.WorldCameraQuaternion;
-			CameraExtension.WorldCameraQuaternion *= Quaternion.Inverse(worldCameraQuaternion) * quaternion * worldCameraQuaternion;
+			WorldCameraVector = center + vector;
+			Quaternion worldCameraQuaternion = WorldCameraQuaternion;
+			WorldCameraQuaternion *= Quaternion.Inverse(worldCameraQuaternion) * quaternion * worldCameraQuaternion;
 		}
 
 		public static void TakePicture(int timer)

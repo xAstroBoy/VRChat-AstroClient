@@ -14,7 +14,7 @@
 			QMNestedButton sub = new QMNestedButton(menu, x, y, "Settings", "Settings", null, null, null, null, btnHalf);
 			sub.GetMainButton().SetTextColor(Color.cyan);
 
-			QMSingleToggleButton playerListToggle = new QMSingleToggleButton(sub, 1, 0, "PlayerList ON", () => { PlayerMenuUI.ShowPlayerMenu(); }, "PlayerList OFF", () => { PlayerMenuUI.HidePlayerMenu(); }, "Show/Hide PlayerList", Color.green, Color.red, null, ConfigManager.UI.ShowPlayersMenu, true);
+			QMSingleToggleButton playerListToggle = new QMSingleToggleButton(sub, 1, 0, "PlayerList ON", () => { PlayerList.ShowPlayerMenu(); }, "PlayerList OFF", () => { PlayerList.HidePlayerMenu(); }, "Show/Hide PlayerList", Color.green, Color.red, null, ConfigManager.UI.ShowPlayersMenu, true);
 			playerListToggle.SetToggleState(ConfigManager.UI.ShowPlayersMenu, false);
 
 			QMSingleToggleButton joinLeaveToggle = new QMSingleToggleButton(sub, 2, 0, "Join/Leave ON", () => { ConfigManager.General.JoinLeave = true; }, "Join/Leave OFF", () => { ConfigManager.General.JoinLeave = false; }, "Notification when someone joins/leaves", Color.green, Color.red, null, ConfigManager.General.JoinLeave, true);

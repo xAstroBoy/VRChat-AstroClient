@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.BetterPatch
 {
 	#region Imports
+
 	using AstroClient.Features.Player.Movement.Exploit;
 	using AstroLibrary.Console;
 	using DayClientML2.Utility.Extensions;
@@ -14,6 +15,7 @@
 	using UnityEngine;
 	using VRC;
 	using VRC.SDKBase;
+
 	#endregion
 
 	internal class Patching : GameEvents

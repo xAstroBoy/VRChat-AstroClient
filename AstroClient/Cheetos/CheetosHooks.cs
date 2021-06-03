@@ -8,7 +8,6 @@
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using Harmony;
-	using I18N.MidEast;
 	using MelonLoader;
 	using Newtonsoft.Json;
 	using System;
@@ -164,7 +163,7 @@
 		{
 			if (__0 != null)
 			{
-				CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {__0.GetDisplayName()} <color=green>Joined</color>!");
+				Event_OnPhotonJoin.Invoke(__0, new PhotonPlayerEventArgs(__0));
 			}
 			else
 			{
@@ -176,7 +175,10 @@
 		{
 			if (__0 != null)
 			{
-				CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {__0.GetDisplayName()} <color=red>Left</color>!");
+				if (Event_OnPhotonLeft != null)
+				{
+					Event_OnPhotonLeft.Invoke(__0, new PhotonPlayerEventArgs(__0));
+				}
 			}
 			else
 			{

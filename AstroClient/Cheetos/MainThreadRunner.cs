@@ -62,7 +62,7 @@
 						finally
 						{
 							toRemove.Add(action);
-							ModConsole.Log($"MainThreadRunner: Action Ran");
+							//ModConsole.Log($"MainThreadRunner: Action Ran");
 						}
 					}
 
