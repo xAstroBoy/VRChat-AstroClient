@@ -1,32 +1,13 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Cheetos;
 	#region Imports
 
+	using AstroClient.Cheetos;
 	using AstroLibrary.Finder;
 	using DayClientML2.Utility.Extensions;
-	using System;
 	using UnityEngine;
 
 	#endregion Imports
-
-	public static class Astro_Interactable_Extensions
-	{
-		public static void AddAstroInteractable(this GameObject gameObject, Action action)
-		{
-			gameObject.AddComponent<Astro_Interactable>();
-			gameObject.GetComponent<Astro_Interactable>().Action = action;
-		}
-	}
-
-	public class Astro_Interactable : GameEventsBehaviour
-	{
-		public Astro_Interactable(IntPtr ptr) : base(ptr)
-		{
-		}
-
-		public Action Action;
-	}
 
 	public class AstroInput : GameEvents
 	{

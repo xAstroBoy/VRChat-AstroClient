@@ -1,18 +1,20 @@
 ﻿namespace AstroServer.DiscordBot
 {
+	#region Imports
+
 	using AstroServer.Serializable;
 	using Discord;
-	using Discord.Rest;
 	using Discord.WebSocket;
 	using MongoDB.Entities;
 	using System;
-	using System.Linq;
 	using System.Threading.Tasks;
 	using System.Timers;
 
+	#endregion
+
 	public class AstroBot
 	{
-		public static DiscordSocketClient Client { get; set; }
+		#region ChannelIDs
 
 		internal const ulong AvatarCountChannelID = 849865669393776660;
 
@@ -27,6 +29,10 @@
 		internal const ulong KeyshareChannelID = 834125559578624050;
 
 		internal const ulong CommandChannelID = 832405559378051112;
+
+		#endregion
+
+		public static DiscordSocketClient Client { get; set; }
 
 		internal static ulong[] DeveloperIDs = new ulong[] { 717788323262890045, 257862389687386113, 587423650718679068 };
 
@@ -81,6 +87,8 @@
 			return Task.CompletedTask;
 		}
 
+		#region LogSenders
+
 		public static async Task SendKeyshareLog(Client origin, Client other)
 		{
 			var channel = Client.GetChannel(KeyshareChannelID) as ISocketMessageChannel;
@@ -109,5 +117,7 @@
 			var channel = Client.GetChannel(AvatarLogChannelID) as ISocketMessageChannel;
 			await channel.SendMessageAsync(null, false, CustomEmbed.GetAvatarEmbed(ade));
 		}
+
+		#endregion
 	}
 }

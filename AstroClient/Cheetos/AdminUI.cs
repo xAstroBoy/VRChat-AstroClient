@@ -7,9 +7,6 @@
 
 	#endregion Imports
 
-	/// <summary>
-	/// Cheeto's temporary UI for new/wip features
-	/// </summary>
 	public class AdminUI : GameEvents
 	{
 		public QMNestedButton MainButton { get; private set; }
