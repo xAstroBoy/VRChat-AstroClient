@@ -33,7 +33,7 @@
 
 		private static float RefreshTime;
 
-		private static Mutex refreshMutex;
+		private static Mutex refreshMutex = new Mutex();
 
 		public static bool IsReady
 		{
@@ -45,7 +45,6 @@
 
 		public override void VRChat_OnUiManagerInit()
 		{
-			refreshMutex = new Mutex();
 			playersButton = new QMSingleButton("ShortcutMenu", -1 + ConfigManager.UI.PlayerListOffset, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
 			playersButton.SetActive(ConfigManager.UI.ShowPlayersMenu);
 
@@ -61,7 +60,7 @@
 
 		public override void OnLateUpdate()
 		{
-			if (RefreshTime >= 30f)
+			if (RefreshTime >= 16f)
 			{
 				RefreshButtons();
 				RefreshTime = 0;

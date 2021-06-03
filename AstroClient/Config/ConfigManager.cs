@@ -1,13 +1,22 @@
 ﻿namespace AstroClient
 {
+	#region Imports
+
 	using AstroLibrary.Console;
 	using AstroNetworkingLibrary;
 	using System;
 	using System.IO;
+	using System.Threading;
 	using UnityEngine;
+
+	#endregion
 
 	public static class ConfigManager
 	{
+		private static Mutex SaveMutex = new Mutex();
+
+		#region Paths
+
 		private static string ConfigFolder = Environment.CurrentDirectory + @"\AstroClient";
 
 		private static string ConfigLewdifyPath = ConfigFolder + @"\Lewdify";
@@ -22,6 +31,9 @@
 
 		private static string ConfigMovementPath = ConfigFolder + @"\ConfigMovement.json";
 
+		#endregion
+
+		#region Config Classes
 
 		public static ConfigGeneral General = new ConfigGeneral();
 
@@ -33,6 +45,7 @@
 
 		public static ConfigMovement Movement = new ConfigMovement();
 
+		#endregion
 
 		public static Color PublicESPColor
 		{
@@ -67,6 +80,8 @@
 
 		public static void Validate()
 		{
+			SaveMutex.WaitOne();
+
 			if (!Directory.Exists(ConfigFolder))
 			{
 				Directory.CreateDirectory(ConfigFolder);
@@ -116,6 +131,8 @@
 				Directory.CreateDirectory(ConfigLewdifyPath);
 				ModConsole.DebugWarning($"ConfigLewdify File Created: {ConfigLewdifyPath}");
 			}
+
+			SaveMutex.ReleaseMutex();
 		}
 
 
@@ -155,12 +172,14 @@
 
 		public static void Save_All()
 		{
+			SaveMutex.WaitOne();
 			Save_General();
 			Save_UI();
 			Save_ESP();
 			Save_Flight();
 			Save_Movement();
-			ModConsole.DebugLog("Config Saved.");
+			ModConsole.Log("Config Saved.");
+			SaveMutex.ReleaseMutex();
 		}
 
 		public static void Load()

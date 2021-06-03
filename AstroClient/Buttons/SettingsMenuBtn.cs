@@ -14,6 +14,8 @@
 			QMNestedButton sub = new QMNestedButton(menu, x, y, "Settings", "Settings", null, null, null, null, btnHalf);
 			sub.GetMainButton().SetTextColor(Color.cyan);
 
+			QMSingleButton saveButton = new QMSingleButton(sub, 0, 0, "Force Save", () => { ConfigManager.Save_All(); }, "Save Config", Color.magenta, null, true);
+
 			QMSingleToggleButton playerListToggle = new QMSingleToggleButton(sub, 1, 0, "PlayerList ON", () => { PlayerList.ShowPlayerMenu(); }, "PlayerList OFF", () => { PlayerList.HidePlayerMenu(); }, "Show/Hide PlayerList", Color.green, Color.red, null, ConfigManager.UI.ShowPlayersMenu, true);
 			playerListToggle.SetToggleState(ConfigManager.UI.ShowPlayersMenu, false);
 
