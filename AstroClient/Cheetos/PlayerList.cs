@@ -3,6 +3,7 @@
 	#region Imports
 
 	using AstroClient.Cheetos;
+	using Cinemachine;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.Extensions;
 	using MelonLoader;
@@ -32,11 +33,19 @@
 
 		private static float RefreshTime;
 
-		private static Mutex mutex;
+		private static Mutex refreshMutex;
+
+		public static bool IsReady
+		{
+			get
+			{
+				return Utils.LoadBalancingPeer != null && Utils.LoadBalancingPeer.prop_Room_0 != null && Utils.LoadBalancingPeer.prop_Room_0.prop_Dictionary_2_Int32_Player_0 != null;
+			}
+		}
 
 		public override void VRChat_OnUiManagerInit()
 		{
-			mutex = new Mutex();
+			refreshMutex = new Mutex();
 			playersButton = new QMSingleButton("ShortcutMenu", -1 + ConfigManager.UI.PlayerListOffset, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
 			playersButton.SetActive(ConfigManager.UI.ShowPlayersMenu);
 
@@ -82,17 +91,21 @@
 
 		private void RefreshButtons()
 		{
-			var players = new List<PlayerListData>();
-
-			foreach (var keyValuePair in Utils.LoadBalancingPeer.prop_Room_0.prop_Dictionary_2_Int32_Player_0)
+			if (IsReady)
 			{
-				players.Add(new PlayerListData(keyValuePair.value));
+				refreshMutex.WaitOne();
+				var players = new List<PlayerListData>();
+
+				foreach (var keyValuePair in Utils.LoadBalancingPeer.prop_Room_0.prop_Dictionary_2_Int32_Player_0)
+				{
+					players.Add(new PlayerListData(keyValuePair.value));
+				}
+
+				ResetButtons();
+				var temp_list = players.OrderBy(p => p.IsMaster).ThenBy(p => p.IsSelf).ThenBy(p => p.IsFriend).ThenBy(p => p.GetIsInvisible()).ThenByDescending(p => p.RankType).Reverse().ToArray();
+
+				MelonCoroutines.Start(CreateButtons(temp_list));
 			}
-
-			ResetButtons();
-			var temp_list = players.OrderBy(p => p.IsMaster).ThenBy(p => p.IsSelf).ThenBy(p => p.IsFriend).ThenBy(p => p.GetIsInvisible()).ThenByDescending(p => p.RankType).Reverse().ToArray();
-
-			MelonCoroutines.Start(CreateButtons(temp_list));
 		}
 
 		private IEnumerator CreateButtons(PlayerListData[] players)
@@ -116,6 +129,7 @@
 
 				yield return null;
 			}
+			refreshMutex.ReleaseMutex();
 			yield break;
 		}
 
