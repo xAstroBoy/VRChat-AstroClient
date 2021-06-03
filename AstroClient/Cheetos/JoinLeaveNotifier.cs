@@ -39,7 +39,7 @@
 
 			if (ConfigManager.General.JoinLeave && isReady)
 			{
-				CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {player.GetDisplayName()} <color=red>Joined</color>!");
+				CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {player.GetDisplayName()} <color=green>Joined</color>!");
 			}
 		}
 
