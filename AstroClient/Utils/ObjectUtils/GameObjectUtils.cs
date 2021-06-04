@@ -157,23 +157,24 @@
 
         public static void RestoreOriginalLocation(GameObject obj, bool RestoreBodySettings)
         {
-            if (obj != null)
-            {
-                obj.TakeOwnership();
-                var control = obj.GetComponent<RigidBodyController>();
-                if (control == null)
-                {
-                    control = obj.AddComponent<RigidBodyController>();
-                }
-                if (control != null)
-                {
-                    if (RestoreBodySettings)
-                    {
-                        control.RestoreOriginalBody();
-                    }
-                    control.Respawn_Item();
-                }
-            }
+			if (obj != null)
+			{
+				obj.TakeOwnership();
+				var control = obj.GetComponent<RigidBodyController>();
+				var SyncPhysic = obj.GetComponent<SyncPhysics>();
+
+				if (control != null)
+				{
+					if (RestoreBodySettings)
+					{
+						control.RestoreOriginalBody();
+					}
+				}
+				if (SyncPhysic != null)
+				{
+					SyncPhysic.RespawnItem();
+				}
+			}
         }
 
         public static bool IsLocalPlayerHoldingObject(GameObject obj)

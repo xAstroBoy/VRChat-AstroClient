@@ -40,6 +40,9 @@ dotnet_diagnostic.CA1805.severity=suggestion
 # IDE0002: Simplify Member Access
 dotnet_diagnostic.IDE0002.severity = none
 
+# CS0618: Type or member is obsolete
+dotnet_diagnostic.CS0618.severity = none
+
 [*.{cs,vb}]
 indent_style=tab
 dotnet_diagnostic.CA2215.severity=suggestion
