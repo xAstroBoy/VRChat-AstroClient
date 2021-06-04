@@ -5,38 +5,38 @@
 	using System.Drawing;
 	using System.IO;
 	using System.Runtime.CompilerServices;
+	using System.Threading;
 	using System.Threading.Tasks;
 	using Console = CheetosConsole.Console;
 
 	public class ModConsole
 	{
-		public static string ModName = string.Empty;
+		public static string ModName { get; private set; } = string.Empty;
 
 		public static bool DebugMode = false;
 
 		private static bool HasRenamedOldLogFile = false;
 
-		private static bool HasInitiated = false;
+		private static Mutex ConsoleMutex = new Mutex();
 
 		/// <summary>
 		/// Opens the latest log file in Notepad
 		/// </summary>
 		public static void OpenLatestLogFile()
 		{
-			string path = Path.Combine(LogsPath, $"{ModName}_Latest.log");
 			try
 			{
-				Process.Start(path);
+				Process.Start(LatestLogFile);
 			}
 			catch (Exception e)
 			{
-				Error($"Failed to open Log: {e.Message} - {path}");
+				Error($"Failed to open Log: {e.Message} - {LatestLogFile}");
 			}
 		}
 
-		private static string LogsPath => Path.Combine(Environment.CurrentDirectory, $"External Logs\\{ModName}");
+		private static string LogsPath => $@"{Environment.CurrentDirectory}\External Logs\{ModName}";
 
-		private static string LatestLogFile => Path.Combine(LogsPath, $"{ModName}_Latest.log");
+		private static string LatestLogFile => $@"{LogsPath}\{ModName}_Latest.log";
 
 		private static int LogInt = 0;
 
@@ -51,39 +51,32 @@
 
 		public static void ReplaceOldLatestFile()
 		{
-			ConsoleMutex.WaitOne();
 			var tmp = GetNewFileName();
-			if (File.Exists(LatestLogFile))
+			if (Directory.Exists(LogsPath))
 			{
-				File.Move(LatestLogFile, tmp);
+				if (File.Exists(LatestLogFile))
+				{
+					File.Move(LatestLogFile, tmp);
+				}
 			}
-			ConsoleMutex.ReleaseMutex();
 		}
 
-		public static void InitLogsSetup()
+		public static void Initialize(string modName)
 		{
-			if (!HasInitiated)
+			ModName = modName;
+			if (!Directory.Exists(LogsPath))
 			{
-				if (!Directory.Exists(LogsPath))
-				{
-					Directory.CreateDirectory(LogsPath);
-				}
-				if (!HasRenamedOldLogFile)
-				{
-					ReplaceOldLatestFile();
-					HasRenamedOldLogFile = true;
-				}
-				HasInitiated = true;
+				Directory.CreateDirectory(LogsPath);
+			}
+			if (!HasRenamedOldLogFile)
+			{
+				ReplaceOldLatestFile();
+				HasRenamedOldLogFile = true;
 			}
 		}
 
 		public static void Write(string msg)
 		{
-			if (!HasInitiated)
-			{
-				InitLogsSetup();
-			}
-
 			ConsoleMutex.WaitOne();
 			File.AppendAllText(LatestLogFile, msg);
 			ConsoleMutex.ReleaseMutex();
@@ -263,43 +256,53 @@
 
 			PrintLine(); // Basically an easy way to newline
 
-			var message = (e as Exception).Message;
-			var stackTrace = (e as Exception).StackTrace;
-			var targetSite = (e as Exception).TargetSite;
-			var source = (e as Exception).Source;
-
-			PrintCallerTag(callerName, callerLine);
-			PrintLine(); // Basically an easy way to newline
-
-			if (message != null)
+			if ((e as Exception) != null)
 			{
-				PrintLine($"Exception Message: {message}", color.Value);
+				var message = (e as Exception).Message;
+				var stackTrace = (e as Exception).StackTrace;
+				var targetSite = (e as Exception).TargetSite;
+				var source = (e as Exception).Source;
+
+				PrintCallerTag(callerName, callerLine);
+				PrintLine(); // Basically an easy way to newline
+
+				if (message != null)
+				{
+					PrintLine($"Exception Message: {message}", color.Value);
+				}
+
+				if (stackTrace != null)
+				{
+					PrintLine($"Exception StackTrace: {stackTrace}", color.Value);
+				}
+
+				if (targetSite != null)
+				{
+					PrintLine($"Exception TargetSite: {targetSite}");
+				}
+
+				if (source != null)
+				{
+					PrintLine($"Exception Source: {source}");
+				}
 			}
-
-			if (stackTrace != null)
+			else
 			{
-				PrintLine($"Exception StackTrace: {stackTrace}", color.Value);
-			}
-
-			if (targetSite != null)
-			{
-				PrintLine($"Exception TargetSite: {targetSite}");
-			}
-
-			if (source != null)
-			{
-				PrintLine($"Exception Source: {source}");
+				PrintLine($"Exception Was Null!");
 			}
 		}
 
 		public static void PrintLine(string msg = "", Color? color = null)
 		{
+			if (color is null)
+			{
+				color = Color.White;
+			}
+
 			ConsoleMutex.WaitOne();
 			Console.Write(msg + Environment.NewLine, color.Value);
 			ConsoleMutex.ReleaseMutex();
-			ConsoleMutex.WaitOne();
 			Write(msg + Environment.NewLine);
-			ConsoleMutex.ReleaseMutex();
 		}
 
 		private static void PrintTags(LogTypes logType = LogTypes.LOG)
@@ -425,7 +428,5 @@
 			Console.Write("] ", Color.White);
 			Task.Run(() => { Write($"[{time}] "); });
 		}
-
-		private static readonly System.Threading.Mutex ConsoleMutex = new System.Threading.Mutex();
 	}
 }
