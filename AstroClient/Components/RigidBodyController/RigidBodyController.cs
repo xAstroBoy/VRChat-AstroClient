@@ -508,7 +508,11 @@
 
 		internal void Respawn_Item()
 		{
-			Internal_Sync.RespawnItem();
+			if (!obj.isOwner())
+			{
+				obj.TakeOwnership();
+			}
+				Internal_Sync.RespawnItem();
 		}
 
 		[HideFromIl2Cpp]

@@ -106,7 +106,7 @@
 			{
 				ModConsole.DebugLog("[AstroClient Cheetos Patches] Start. . .");
 
-				new Patch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_1)), GetPatch(nameof(OnAvatarDownload)));
+				new Patch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_0)), GetPatch(nameof(OnAvatarDownload)));
 				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
 				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
 				//new Patch(AccessTools.Property(typeof(PhotonPeer), "RoundTripTime").GetMethod, GetPatch("FakePing"));

@@ -370,3 +370,4 @@ FodyWeavers.xsd
 /AstroClient/mongocrypt.dll
 /AstroClient/libmongocrypt.so
 /AstroClient/libmongocrypt.dylib
+AstroClient/AstroClient.csproj.user
