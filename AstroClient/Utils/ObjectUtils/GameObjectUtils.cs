@@ -160,6 +160,7 @@
 		{
 			if (obj != null)
 			{
+				obj.TakeOwnership();
 				var PhysicSync = obj.GetComponentInChildren<SyncPhysics>();
 				var control = obj.GetComponent<RigidBodyController>();
 				if (RestoreBodySettings)
@@ -172,7 +173,6 @@
 
 				if (PhysicSync != null)
 				{
-					OnlineEditor.TakeObjectOwnership(obj);
 					PhysicSync.RespawnItem();
 					return;
 				}
