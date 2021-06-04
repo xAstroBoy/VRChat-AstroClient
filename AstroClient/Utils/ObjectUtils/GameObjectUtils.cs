@@ -160,21 +160,19 @@
 		{
 			if (obj != null)
 			{
-				var PhysicSync = obj.GetComponentInChildren<SyncPhysics>();
+				obj.TakeOwnership();
 				var control = obj.GetComponent<RigidBodyController>();
-				if (RestoreBodySettings)
+				if (control == null)
 				{
-					if (control != null)
+					control = obj.AddComponent<RigidBodyController>();
+				}
+				if (control != null)
+				{
+					if (RestoreBodySettings)
 					{
 						control.RestoreOriginalBody();
 					}
-				}
-
-				if (PhysicSync != null)
-				{
-					OnlineEditor.TakeObjectOwnership(obj);
-					PhysicSync.RespawnItem();
-					return;
+					control.Respawn_Item();
 				}
 			}
 		}
@@ -190,14 +188,6 @@
 			{
 				if (Pickup != null)
 				{
-					if (Pickup.gameObject.name == "ViewFinder")
-					{
-						continue;
-					}
-					if (Pickup.gameObject.name == "AvatarDebugConsole")
-					{
-						continue;
-					}
 					RestoreOriginalLocation(Pickup.gameObject, RestoreBodySettings);
 				}
 			}

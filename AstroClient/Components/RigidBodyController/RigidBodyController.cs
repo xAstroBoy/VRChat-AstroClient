@@ -499,6 +499,18 @@
 			return body;
 		}
 
+
+
+		internal SyncPhysics Get_SyncPhysics()
+		{
+			return Internal_Sync;
+		}
+
+		internal void Respawn_Item()
+		{
+			Internal_Sync.RespawnItem();
+		}
+
 		[HideFromIl2Cpp]
 		internal SyncPhysics Internal_Sync { get; private set; } = null;
 
