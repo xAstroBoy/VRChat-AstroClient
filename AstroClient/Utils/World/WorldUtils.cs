@@ -42,7 +42,7 @@
 
         public static IEnumerable<Player> Get_Players()
         {
-            return PlayerManager.Method_Public_Static_ArrayOf_Player_0();
+            return PlayerManager.prop_PlayerManager_0.prop_ArrayOf_Player_0;
         }
 
         public static Player Get_Player_By_ID(string id)
