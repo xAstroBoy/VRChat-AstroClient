@@ -15,299 +15,297 @@
 	using VRC.SDKBase;
 	using Color = System.Drawing.Color;
 
-	#endregion
+	#endregion Imports
 
 	public static class Engine_ext
-	{
+    {
+        public static void PrintPath(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                string path = GameObjectFinder.GetGameObjectPath(obj);
+                if (!string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path))
+                {
+                    ModConsole.Log($"{obj.name} Path is : {path}");
+                }
+            }
+        }
 
-		public static void PrintPath(this GameObject obj)
-		{
-			if (obj != null)
-			{
-				string path = GameObjectFinder.GetGameObjectPath(obj);
-				if (!string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path))
-				{
-					ModConsole.Log($"{obj.name} Path is : {path}");
-				}
-			}
-		}
+        public static bool Is_DontDestroyOnLoad(this GameObject obj)
+        {
+            return obj.scene.name.Equals("DontDestroyOnLoad");
+        }
 
-		public static bool Is_DontDestroyOnLoad(this GameObject obj)
-		{
-			return obj.scene.name.Equals("DontDestroyOnLoad");
+        public static bool Is_DontDestroyOnLoad(this Transform obj)
+        {
+            return obj.gameObject.Is_DontDestroyOnLoad();
+        }
 
-		}
+        public static void Set_DontDestroyOnLoad(this Object obj)
+        {
+            UnityEngine.Object.DontDestroyOnLoad(obj);
+        }
 
-		public static bool Is_DontDestroyOnLoad(this Transform obj)
-		{
-			return obj.gameObject.Is_DontDestroyOnLoad();
-		}
+        public static void CopyPath(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                string path = GameObjectFinder.GetGameObjectPath(obj);
+                if (!string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path))
+                {
+                    ModConsole.Log($"{obj.name} Path is : {path}");
+                    ModConsole.Log($"The Path has been copied on the clipboard.");
+                    Clipboard.SetText(path);
+                }
+            }
+        }
 
+        public static void CopyRotation(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                ModConsole.Log($"{obj.name} rotation is : new Quaternion({obj.transform.rotation.x}f, {obj.transform.rotation.y}f, {obj.transform.rotation.z}f, {obj.transform.rotation.w}f)");
+                ModConsole.Log($"The rotation has been copied on the clipboard.");
+                Clipboard.SetText($"new Quaternion({obj.transform.rotation.x}f, {obj.transform.rotation.y}f, {obj.transform.rotation.z}f, {obj.transform.rotation.w}f)");
+            }
+        }
 
-		public static void Set_DontDestroyOnLoad(this Object obj)
-		{
-			UnityEngine.Object.DontDestroyOnLoad(obj);
+        public static void CopyPosition(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                ModConsole.Log($"{obj.name} position is : new Vector3({obj.transform.position.x}f, {obj.transform.position.y}f, {obj.transform.position.z}f)");
+                ModConsole.Log($"The Position has been copied on the clipboard.");
+                Clipboard.SetText($"new Vector3({obj.transform.position.x}f, {obj.transform.position.y}f, {obj.transform.position.z}f)");
+            }
+        }
 
-		}
+        public static void CopyLocalPosition(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                ModConsole.Log($"{obj.name} Local position is : new Vector3({obj.transform.localPosition.x}f, {obj.transform.localPosition.y}f, {obj.transform.localPosition.z}f)");
+                ModConsole.Log($"The Local Position has been copied on the clipboard.");
+                Clipboard.SetText($"new Vector3({obj.transform.localPosition.x}f, {obj.transform.localPosition.y}f, {obj.transform.localPosition.z}f)");
+            }
+        }
 
-		public static void CopyPath(this GameObject obj)
-		{
-			if (obj != null)
-			{
-				string path = GameObjectFinder.GetGameObjectPath(obj);
-				if (!string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path))
-				{
-					ModConsole.Log($"{obj.name} Path is : {path}");
-					ModConsole.Log($"The Path has been copied on the clipboard.");
-					Clipboard.SetText(path);
-				}
-			}
-		}
+        public static void DestroyObject(this GameObject obj)
+        {
+            if (!obj.DestroyMeOnline())
+            {
+                obj.DestroyMeLocal();
+            }
+        }
 
-		public static void CopyRotation(this GameObject obj)
-		{
-			if (obj != null)
-			{
-				ModConsole.Log($"{obj.name} rotation is : new Quaternion({obj.transform.rotation.x}f, {obj.transform.rotation.y}f, {obj.transform.rotation.z}f, {obj.transform.rotation.w}f)");
-				ModConsole.Log($"The rotation has been copied on the clipboard.");
-				Clipboard.SetText($"new Quaternion({obj.transform.rotation.x}f, {obj.transform.rotation.y}f, {obj.transform.rotation.z}f, {obj.transform.rotation.w}f)");
-			}
-		}
+        public static GameObject InstantiateObject(this GameObject obj)
+        {
+            return obj != null ? Object.Instantiate(obj) : null;
+        }
 
-		public static void CopyPosition(this GameObject obj)
-		{
-			if (obj != null)
-			{
-				ModConsole.Log($"{obj.name} position is : new Vector3({obj.transform.position.x}f, {obj.transform.position.y}f, {obj.transform.position.z}f)");
-				ModConsole.Log($"The Position has been copied on the clipboard.");
-				Clipboard.SetText($"new Vector3({obj.transform.position.x}f, {obj.transform.position.y}f, {obj.transform.position.z}f)");
-			}
-		}
-		public static void CopyLocalPosition(this GameObject obj)
-		{
-			if (obj != null)
-			{
-				ModConsole.Log($"{obj.name} Local position is : new Vector3({obj.transform.localPosition.x}f, {obj.transform.localPosition.y}f, {obj.transform.localPosition.z}f)");
-				ModConsole.Log($"The Local Position has been copied on the clipboard.");
-				Clipboard.SetText($"new Vector3({obj.transform.localPosition.x}f, {obj.transform.localPosition.y}f, {obj.transform.localPosition.z}f)");
-			}
-		}
-		public static void DestroyObject(this GameObject obj)
-		{
-			if (!obj.DestroyMeOnline())
-			{
-				obj.DestroyMeLocal();
-			}
-		}
+        public static GameObject InstantiateObject(this Transform obj)
+        {
+            return obj != null ? Object.Instantiate(obj.gameObject) : null;
+        }
 
-		public static GameObject InstantiateObject(this GameObject obj)
-		{
-			return obj != null ? Object.Instantiate(obj) : null;
-		}
+        public static void CloneObject(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                ObjectCloner.CloneGameObject(obj);
+            }
+        }
 
-		public static GameObject InstantiateObject(this Transform obj)
-		{
-			return obj != null ? Object.Instantiate(obj.gameObject) : null;
-		}
+        public static bool DestroyMeOnline(this GameObject obj)
+        {
+            bool refreshhandutils = false;
+            if (Tweaker_Object.CurrentSelectedObject == obj)
+            {
+                refreshhandutils = true;
+            }
+            var name = obj.name;
+            if (obj != null)
+            {
+                OnlineEditor.TakeObjectOwnership(obj);
+                Networking.Destroy(obj);
+            }
+            if (obj != null)
+            {
+                ModConsole.Log("Failed To Destroy Server-side  Object :  " + obj.name, Color.Red);
+                return false;
+            }
+            else
+            {
+                ModConsole.Log("Destroyed Server-side Object : " + name, Color.Green);
+                if (refreshhandutils)
+                {
+                    Tweaker_Object.CurrentSelectedObject = null;
+                }
+                return true;
+            }
+        }
 
-		public static void CloneObject(this GameObject obj)
-		{
-			if (obj != null)
-			{
-				ObjectCloner.CloneGameObject(obj);
-			}
-		}
-		public static bool DestroyMeOnline(this GameObject obj)
-		{
-			bool refreshhandutils = false;
-			if (Tweaker_Object.CurrentSelectedObject == obj)
-			{
-				refreshhandutils = true;
-			}
-			var name = obj.name;
-			if (obj != null)
-			{
-				OnlineEditor.TakeObjectOwnership(obj);
-				Networking.Destroy(obj);
-			}
-			if (obj != null)
-			{
-				ModConsole.Log("Failed To Destroy Server-side  Object :  " + obj.name, Color.Red);
-				return false;
-			}
-			else
-			{
-				ModConsole.Log("Destroyed Server-side Object : " + name, Color.Green);
-				if (refreshhandutils)
-				{
-					Tweaker_Object.CurrentSelectedObject = null;
-				}
-				return true;
-			}
-		}
+        public static void DestroyMeLocal(this Object obj)
+        {
+            if (obj != null && KeyManager.IsAuthed)
+            {
+                string objname = obj.name;
+                string typename = obj.GetType().ToString();
 
-		public static void DestroyMeLocal(this Object obj)
-		{
-			if (obj != null && KeyManager.IsAuthed)
-			{
-				string objname = obj.name;
-				string typename = obj.GetType().ToString();
+                if (ComponentHelper.RegisteredComponentsTypes.Contains(obj.GetType()))
+                {
+                    var item = obj as Component;
+                    if (item != null)
+                    {
+                        Object.Destroy(item);
+                    }
+                    MiscUtility.DelayFunction(0.5f, () =>
+                    {
+                        if (item != null)
+                        {
+                            ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
+                        }
+                        else
+                        {
+                            ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                        }
+                    });
 
-				if (ComponentHelper.RegisteredComponentsTypes.Contains(obj.GetType()))
-				{
-					var item = obj as Component;
-					if (item != null)
-					{
-						Object.Destroy(item);
-					}
-					MiscUtility.DelayFunction(0.5f, () =>
-					{
-						if (item != null)
-						{
-							ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
-						}
-						else
-						{
-							ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
-						}
-					});
+                    return;
+                }
+                else if (obj is GameObject)
+                {
+                    var item = obj as GameObject;
+                    if (item != null)
+                    {
+                        Object.Destroy(item);
+                    }
+                    MiscUtility.DelayFunction(0.5f, () =>
+                    {
+                        if (item != null)
+                        {
+                            ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
+                        }
+                        else
+                        {
+                            ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                        }
+                    });
+                }
+                else if (obj is Transform)
+                {
+                    var item = obj as Transform;
+                    if (item != null)
+                    {
+                        Object.Destroy(item.gameObject);
+                    }
+                    MiscUtility.DelayFunction(0.5f, () =>
+                    {
+                        if (item != null)
+                        {
+                            ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
+                        }
+                        else
+                        {
+                            ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                        }
+                    });
+                }
+                else
+                {
+                    if (obj != null)
+                    {
+                        Object.Destroy(obj);
+                    }
+                    MiscUtility.DelayFunction(0.5f, () =>
+                    {
+                        if (obj != null)
+                        {
+                            ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
+                            ModConsole.DebugLog("Try To Destroy His GameObject in case you are trying to destroy the transform.", Color.Yellow);
+                        }
+                        else
+                        {
+                            ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
+                        }
+                    });
+                }
+            }
+        }
 
-					return;
-				}
-				else if (obj is GameObject)
-				{
-					var item = obj as GameObject;
-					if (item != null)
-					{
-						Object.Destroy(item);
-					}
-					MiscUtility.DelayFunction(0.5f, () =>
-					{
-						if (item != null)
-						{
-							ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
-						}
-						else
-						{
-							ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
-						}
-					});
-				}
-				else if (obj is Transform)
-				{
-					var item = obj as Transform;
-					if (item != null)
-					{
-						Object.Destroy(item.gameObject);
-					}
-					MiscUtility.DelayFunction(0.5f, () =>
-					{
-						if (item != null)
-						{
-							ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
-						}
-						else
-						{
-							ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
-						}
-					});
-				}
-				else
-				{
-					if (obj != null)
-					{
-						Object.Destroy(obj);
-					}
-					MiscUtility.DelayFunction(0.5f, () =>
-					{
-						if (obj != null)
-						{
-							ModConsole.DebugLog($"Failed To Destroy Object {typename} Contained in {objname}", Color.Red);
-							ModConsole.DebugLog("Try To Destroy His GameObject in case you are trying to destroy the transform.", Color.Yellow);
-						}
-						else
-						{
-							ModConsole.DebugLog($"Destroyed Client-side Object {typename} Contained in {objname}", Color.Green);
-						}
-					});
-				}
-			}
-		}
+        public static void RenameObject(this GameObject obj, string newname)
+        {
+            if (obj != null && KeyManager.IsAuthed)
+            {
+                var oldname = obj.name;
+                ModConsole.DebugLog("Renamed object : " + oldname + " to " + newname);
+                obj.name = newname;
+            }
+        }
 
-		public static void RenameObject(this GameObject obj, string newname)
-		{
-			if (obj != null && KeyManager.IsAuthed)
-			{
-				var oldname = obj.name;
-				ModConsole.DebugLog("Renamed object : " + oldname + " to " + newname);
-				obj.name = newname;
-			}
-		}
+        public static void SetActiveStatus(this GameObject obj, bool SetActive)
+        {
+            if (obj != null && KeyManager.IsAuthed)
+            {
+                obj.SetActive(SetActive);
+                Tweaker_Object.UpdateCapturedButtonColor(obj.active);
+            }
+            if (ItemTweakerMain.ObjectActiveToggle != null)
+            {
+                ItemTweakerMain.ObjectActiveToggle.SetToggleState(obj.active);
+            }
+        }
 
-		public static void SetActiveStatus(this GameObject obj, bool SetActive)
-		{
-			if (obj != null && KeyManager.IsAuthed)
-			{
-				obj.SetActive(SetActive);
-				Tweaker_Object.UpdateCapturedButtonColor(obj.active);
-			}
-			if (ItemTweakerMain.ObjectActiveToggle != null)
-			{
-				ItemTweakerMain.ObjectActiveToggle.SetToggleState(obj.active);
-			}
-		}
+        public static List<Transform> Get_Childs(this Transform obj)
+        {
+            List<Transform> childs = new List<Transform>();
+            for (var i = 0; i < obj.childCount; i++)
+            {
+                var item = obj.GetChild(i);
+                if (item != null && KeyManager.IsAuthed)
+                {
+                    childs.Add(item);
+                }
+            }
+            return childs;
+        }
 
+        public static List<Transform> Get_All_Childs(this Transform item)
+        {
+            CheckTransform(item);
+            return _Transforms;
+        }
 
-		public static List<Transform> Get_Childs(this Transform obj)
-		{
-			List<Transform> childs = new List<Transform>();
-			for (var i = 0; i < obj.childCount; i++)
-			{
-				var item = obj.GetChild(i);
-				if (item != null && KeyManager.IsAuthed)
-				{
-					childs.Add(item);
-				}
-			}
-			return childs;
-		}
+        private static List<Transform> _Transforms;
 
-		public static List<Transform> Get_All_Childs(this Transform item)
-		{
-			CheckTransform(item);
-			return _Transforms;
-		}
+        //Recursive
+        private static void CheckTransform(Transform transform)
+        {
+            _Transforms = new List<Transform>();
 
-		private static List<Transform> _Transforms;
+            //MelonLoader.MelonLogger.ModConsole.Log("Debug: Start CheckTransform Recursive Checker");
+            if (transform == null)
+            {
+                ModConsole.Log("Debug: CheckTransform transform is null");
+                return;
+            }
 
-		//Recursive
-		private static void CheckTransform(Transform transform)
-		{
-			_Transforms = new List<Transform>();
+            GetChildren(transform);
+        }
 
-			//MelonLoader.MelonLogger.ModConsole.Log("Debug: Start CheckTransform Recursive Checker");
-			if (transform == null)
-			{
-				ModConsole.Log("Debug: CheckTransform transform is null");
-				return;
-			}
+        private static void GetChildren(Transform transform)
+        {
+            //MelonLogger.ModConsole.Log("Debug: GetChildren current transform: " + transform.gameObject.name);
 
-			GetChildren(transform);
-		}
+            if (!_Transforms.Contains(transform))
+            {
+                _Transforms.Add(transform);
+            }
 
-		private static void GetChildren(Transform transform)
-		{
-			//MelonLogger.ModConsole.Log("Debug: GetChildren current transform: " + transform.gameObject.name);
-
-			if (!_Transforms.Contains(transform))
-			{
-				_Transforms.Add(transform);
-			}
-
-			for (var i = 0; i < transform.childCount; i++)
-			{
-				GetChildren(transform.GetChild(i));
-			}
-		}
-	}
+            for (var i = 0; i < transform.childCount; i++)
+            {
+                GetChildren(transform.GetChild(i));
+            }
+        }
+    }
 }

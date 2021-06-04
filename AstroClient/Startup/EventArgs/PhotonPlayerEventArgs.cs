@@ -4,12 +4,12 @@
 	using System;
 
 	public class PhotonPlayerEventArgs : EventArgs
-	{
-		public Player player;
+    {
+        public Player player;
 
-		public PhotonPlayerEventArgs(Player player)
-		{
-			this.player = player;
-		}
-	}
+        public PhotonPlayerEventArgs(Player player)
+        {
+            this.player = player;
+        }
+    }
 }

@@ -7,50 +7,50 @@
 	using System.Timers;
 
 	internal class JoinLeaveNotifier : GameEvents
-	{
-		private static Timer aTimer;
+    {
+        private static Timer aTimer;
 
-		private static bool isReady = false;
+        private static bool isReady = false;
 
-		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
-		{
-			SetTimer();
-			isReady = false;
-		}
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        {
+            SetTimer();
+            isReady = false;
+        }
 
-		private static void SetTimer()
-		{
-			// Create a timer with a two second interval.
-			aTimer = new Timer(5000);
-			// Hook up the Elapsed event for the timer.
-			aTimer.Elapsed += OnTimedEvent;
-			aTimer.AutoReset = false;
-			aTimer.Enabled = true;
-		}
+        private static void SetTimer()
+        {
+            // Create a timer with a two second interval.
+            aTimer = new Timer(5000);
+            // Hook up the Elapsed event for the timer.
+            aTimer.Elapsed += OnTimedEvent;
+            aTimer.AutoReset = false;
+            aTimer.Enabled = true;
+        }
 
-		private static void OnTimedEvent(object sender, ElapsedEventArgs e)
-		{
-			isReady = true;
-		}
+        private static void OnTimedEvent(object sender, ElapsedEventArgs e)
+        {
+            isReady = true;
+        }
 
-		public override void OnPhotonJoined(Photon.Realtime.Player player)
-		{
-			ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Joined!");
+        public override void OnPhotonJoined(Photon.Realtime.Player player)
+        {
+            ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Joined!");
 
-			if (ConfigManager.General.JoinLeave && isReady)
-			{
-				CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {player.GetDisplayName()} <color=green>Joined</color>!");
-			}
-		}
+            if (ConfigManager.General.JoinLeave && isReady)
+            {
+                CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {player.GetDisplayName()} <color=green>Joined</color>!");
+            }
+        }
 
-		public override void OnPhotonLeft(Photon.Realtime.Player player)
-		{
-			ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Left!");
+        public override void OnPhotonLeft(Photon.Realtime.Player player)
+        {
+            ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Left!");
 
-			if (ConfigManager.General.JoinLeave && isReady)
-			{
-				CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {player.GetDisplayName()} <color=red>Left</color>!");
-			}
-		}
-	}
+            if (ConfigManager.General.JoinLeave && isReady)
+            {
+                CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {player.GetDisplayName()} <color=red>Left</color>!");
+            }
+        }
+    }
 }

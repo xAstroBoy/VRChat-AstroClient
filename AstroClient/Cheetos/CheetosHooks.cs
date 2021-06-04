@@ -6,7 +6,6 @@
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
-	using DayClientML2.Utility.Extensions;
 	using Harmony;
 	using MelonLoader;
 	using Newtonsoft.Json;
@@ -17,7 +16,7 @@
 	using UnhollowerBaseLib;
 	using VRC.Core;
 
-	#endregion
+	#endregion Imports
 
 	internal class CheetosHooks : GameEvents
 	{

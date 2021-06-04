@@ -9,7 +9,7 @@
 	using System.Text;
 	using VRC.Core;
 
-	class WorldLogger : GameEvents
+	internal class WorldLogger : GameEvents
 	{
 		private const string PublicWorldFile = "AstroClient\\WorldLog\\Worlds.html";
 		private static string _WorldsIDs = "";
@@ -30,7 +30,6 @@
 			foreach (var line in File.ReadAllLines(PublicWorldFile))
 				if (line.Contains("World ID"))
 					_WorldsIDs += line.Replace("World ID:", "");
-
 		}
 
 		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)  //ApiWorldDownloadPatch(ApiWorld __0) //__0

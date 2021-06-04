@@ -5,32 +5,32 @@
 	using UnityEngine;
 
 	public static class ItemTweaker_ext
-	{
-		public static void AddToWorldUtilsMenu(this GameObject obj)
-		{
-			if (obj != null)
-			{
-				ItemTweakerMain.AddToWorldUtilsMenu(obj);
-			}
-		}
+    {
+        public static void AddToWorldUtilsMenu(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                ItemTweakerMain.AddToWorldUtilsMenu(obj);
+            }
+        }
 
-		public static void AddToWorldUtilsMenu(this List<GameObject> list)
-		{
-			foreach (var obj in list)
-			{
-				if (obj != null)
-				{
-					ItemTweakerMain.AddToWorldUtilsMenu(obj);
-				}
-			}
-		}
+        public static void AddToWorldUtilsMenu(this List<GameObject> list)
+        {
+            foreach (var obj in list)
+            {
+                if (obj != null)
+                {
+                    ItemTweakerMain.AddToWorldUtilsMenu(obj);
+                }
+            }
+        }
 
-		public static void SetObjectToEdit(this GameObject obj)
-		{
-			if (obj != null)
-			{
-				ItemTweaker.Tweaker_Object.SetObjectToEdit(obj);
-			}
-		}
-	}
+        public static void SetObjectToEdit(this GameObject obj)
+        {
+            if (obj != null)
+            {
+                ItemTweaker.Tweaker_Object.SetObjectToEdit(obj);
+            }
+        }
+    }
 }

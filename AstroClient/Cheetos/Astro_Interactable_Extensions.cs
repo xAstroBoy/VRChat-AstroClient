@@ -4,14 +4,15 @@
 
 	using System;
 	using UnityEngine;
+
 	#endregion Imports
 
 	public static class Astro_Interactable_Extensions
-	{
-		public static void AddAstroInteractable(this GameObject gameObject, Action action)
-		{
-			gameObject.AddComponent<Astro_Interactable>();
-			gameObject.GetComponent<Astro_Interactable>().Action = action;
-		}
-	}
+    {
+        public static void AddAstroInteractable(this GameObject gameObject, Action action)
+        {
+            gameObject.AddComponent<Astro_Interactable>();
+            gameObject.GetComponent<Astro_Interactable>().Action = action;
+        }
+    }
 }

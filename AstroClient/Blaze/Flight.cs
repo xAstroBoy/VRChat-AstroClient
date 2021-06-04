@@ -9,7 +9,7 @@
 	/// Thanks to Blaze <3
 	/// Slight modifications by Cheetos.
 	/// </summary>
-	class Flight : GameEvents
+	internal class Flight : GameEvents
 	{
 		private static Vector3 Gravity;
 		private static VRCPlayer currentPlayer;
@@ -104,7 +104,6 @@
                     else
                         Buttons.NoClip.setToggleState(false, true);
                 }*/
-
 
 				if (FlyEnabled)
 				{

@@ -4,10 +4,10 @@
 	using System.Reflection;
 
 	[Serializable, Obfuscation]
-	public class TagData
-	{
-		public string UserID;
+    public class TagData
+    {
+        public string UserID;
 
-		public string Text;
-	}
+        public string Text;
+    }
 }

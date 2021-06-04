@@ -5,35 +5,35 @@
 	using UnityEngine;
 
 	public class GameObjHelper
-	{
-		public static List<GameObject> _GameObjects;
+    {
+        public static List<GameObject> _GameObjects;
 
-		//Recursive
-		public static void CheckTransform(Transform transform)
-		{
-			_GameObjects = new List<GameObject>();
+        //Recursive
+        public static void CheckTransform(Transform transform)
+        {
+            _GameObjects = new List<GameObject>();
 
-			//MelonLoader.MelonLogger.ModConsole.Log("Debug: Start CheckTransform Recursive Checker");
+            //MelonLoader.MelonLogger.ModConsole.Log("Debug: Start CheckTransform Recursive Checker");
 
-			if (transform == null)
-			{
-				ModConsole.Log("Debug: CheckTransform transform is null");
-				return;
-			}
+            if (transform == null)
+            {
+                ModConsole.Log("Debug: CheckTransform transform is null");
+                return;
+            }
 
-			GetChildren(transform);
-		}
+            GetChildren(transform);
+        }
 
-		public static void GetChildren(Transform transform)
-		{
-			//MelonLogger.ModConsole.Log("Debug: GetChildren current transform: " + transform.gameObject.name);
+        public static void GetChildren(Transform transform)
+        {
+            //MelonLogger.ModConsole.Log("Debug: GetChildren current transform: " + transform.gameObject.name);
 
-			_GameObjects.Add(transform.gameObject);
+            _GameObjects.Add(transform.gameObject);
 
-			for (var i = 0; i < transform.childCount; i++)
-			{
-				GetChildren(transform.GetChild(i));
-			}
-		}
-	}
+            for (var i = 0; i < transform.childCount; i++)
+            {
+                GetChildren(transform.GetChild(i));
+            }
+        }
+    }
 }

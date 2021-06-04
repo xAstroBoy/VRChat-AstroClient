@@ -1,17 +1,10 @@
 ﻿namespace AstroClient
 {
 	using AstroClient.Extensions;
-	using AstroClient.Features.Player;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections.Generic;
 	using UnityEngine;
-	using VRC.SDKBase;
 
-
-	class PlayerCloner
+	internal class PlayerCloner
 	{
-
 		// CREDITS : Unreal (Day's one is broken and refused to stay in place)
 		public static GameObject CloneLocalPlayerAvatar()
 		{

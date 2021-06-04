@@ -11,12 +11,13 @@
 	using UnityEngine;
 	using VRC;
 
-	class anticrashwrappers
+	internal class anticrashwrappers
 	{
 		public static class anticrashWrapper
 		{
 			public static string[] shader_list;
 			public static List<string> shader_list_local = new List<string>();
+
 			public static GameObject GetPlayerCamera()
 			{
 				return GameObject.Find("Camera (eye)");
@@ -26,6 +27,7 @@
 			{
 				return PlayerManager.prop_PlayerManager_0;
 			}
+
 			public static string[] to_array(WebResponse res)
 			{
 				return convert(res).Split(Environment.NewLine.ToCharArray());
@@ -49,6 +51,7 @@
 				res.Dispose();
 				return result;
 			}
+
 			public static string[] get_shader_blacklist()
 			{
 				WebRequest webRequest = WebRequest.Create("https://raw.githubusercontent.com/morag12/vrchat_useful_mod/master/blacklist-shaders.txt");

@@ -7,236 +7,231 @@
 	using VRC.SDKBase;
 
 	public static class Click_ext
-	{
-		public static void VRC_Trigger_UpdateInteractionText(this GameObject obj, string NewText)
-		{
-			if (obj != null)
-			{
-				var one = obj.GetComponentsInChildren<VRC_Trigger>(true);
-				var two = obj.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true);
+    {
+        public static void VRC_Trigger_UpdateInteractionText(this GameObject obj, string NewText)
+        {
+            if (obj != null)
+            {
+                var one = obj.GetComponentsInChildren<VRC_Trigger>(true);
+                var two = obj.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true);
 
-				if (one.Count() != 0)
-				{
-					foreach (var child in one.Where(child => child.interactText != NewText))
-					{
-						child.interactText = NewText;
-					}
-				}
-				if (two.Count() != 0)
-				{
-					foreach (var child in one.Where(child => child.interactText != NewText))
-					{
-						child.interactText = NewText;
-					}
-				}
-			}
-		}
+                if (one.Count() != 0)
+                {
+                    foreach (var child in one.Where(child => child.interactText != NewText))
+                    {
+                        child.interactText = NewText;
+                    }
+                }
+                if (two.Count() != 0)
+                {
+                    foreach (var child in one.Where(child => child.interactText != NewText))
+                    {
+                        child.interactText = NewText;
+                    }
+                }
+            }
+        }
 
-		public static void VRC_Interactable_Click(this List<GameObject> list)
-		{
-			foreach (var item in list.Where(item => item != null))
-			{
-				item.VRC_Interactable_Click();
-			}
-		}
+        public static void VRC_Interactable_Click(this List<GameObject> list)
+        {
+            foreach (var item in list.Where(item => item != null))
+            {
+                item.VRC_Interactable_Click();
+            }
+        }
 
-		public static void VRC_Interactable_Click(this GameObject obj)
-		{
-			bool ObjHasBeenActivated = false;
-			bool TriggerHasBeenEnabled = false;
-			if (obj != null)
-			{
-				var SDKbase = obj.GetComponent<VRC_Interactable>();
-				var SDK2 = obj.GetComponent<VRCSDK2.VRC_Interactable>();
-				var SDK3 = obj.GetComponent<VRCInteractable>();
+        public static void VRC_Interactable_Click(this GameObject obj)
+        {
+            bool ObjHasBeenActivated = false;
+            bool TriggerHasBeenEnabled = false;
+            if (obj != null)
+            {
+                var SDKbase = obj.GetComponent<VRC_Interactable>();
+                var SDK2 = obj.GetComponent<VRCSDK2.VRC_Interactable>();
+                var SDK3 = obj.GetComponent<VRCInteractable>();
 
-				if (!obj.active)
-				{
-					ObjHasBeenActivated = true;
-					obj.SetActive(true);
-				}
+                if (!obj.active)
+                {
+                    ObjHasBeenActivated = true;
+                    obj.SetActive(true);
+                }
 
-				if (SDKbase != null)
-				{
-					if (!SDKbase.enabled)
-					{
-						TriggerHasBeenEnabled = true;
-						SDKbase.enabled = true;
-					}
+                if (SDKbase != null)
+                {
+                    if (!SDKbase.enabled)
+                    {
+                        TriggerHasBeenEnabled = true;
+                        SDKbase.enabled = true;
+                    }
 
-					SDKbase.Interact();
-					if (TriggerHasBeenEnabled)
-					{
-						SDKbase.enabled = false;
-					}
+                    SDKbase.Interact();
+                    if (TriggerHasBeenEnabled)
+                    {
+                        SDKbase.enabled = false;
+                    }
 
-					if (ObjHasBeenActivated)
-					{
-						obj.SetActive(false);
-					}
-				}
-				else if (SDK2 != null)
-				{
-					if (!SDK2.enabled)
-					{
-						TriggerHasBeenEnabled = true;
-						SDK2.enabled = true;
-					}
+                    if (ObjHasBeenActivated)
+                    {
+                        obj.SetActive(false);
+                    }
+                }
+                else if (SDK2 != null)
+                {
+                    if (!SDK2.enabled)
+                    {
+                        TriggerHasBeenEnabled = true;
+                        SDK2.enabled = true;
+                    }
 
-					SDK2.Interact();
-					if (TriggerHasBeenEnabled)
-					{
-						SDK2.enabled = false;
-					}
+                    SDK2.Interact();
+                    if (TriggerHasBeenEnabled)
+                    {
+                        SDK2.enabled = false;
+                    }
 
-					if (ObjHasBeenActivated)
-					{
-						obj.SetActive(false);
-					}
-				}
-				else if (SDK3 != null)
-				{
-					if (!SDK3.enabled)
-					{
-						TriggerHasBeenEnabled = true;
-						SDK3.enabled = true;
-					}
+                    if (ObjHasBeenActivated)
+                    {
+                        obj.SetActive(false);
+                    }
+                }
+                else if (SDK3 != null)
+                {
+                    if (!SDK3.enabled)
+                    {
+                        TriggerHasBeenEnabled = true;
+                        SDK3.enabled = true;
+                    }
 
-					SDK3.Interact();
-					if (TriggerHasBeenEnabled)
-					{
-						SDK3.enabled = false;
-					}
+                    SDK3.Interact();
+                    if (TriggerHasBeenEnabled)
+                    {
+                        SDK3.enabled = false;
+                    }
 
-					if (ObjHasBeenActivated)
-					{
-						obj.SetActive(false);
-					}
-				}
-			}
-		}
+                    if (ObjHasBeenActivated)
+                    {
+                        obj.SetActive(false);
+                    }
+                }
+            }
+        }
 
+        public static void TriggerClick(this VRC_Trigger obj)
+        {
+            bool ObjHasBeenActivated = false;
+            bool TriggerHasBeenEnabled = false;
 
-		public static void TriggerClick(this VRC_Trigger obj)
-		{
-			bool ObjHasBeenActivated = false;
-			bool TriggerHasBeenEnabled = false;
+            if (obj != null)
+            {
+                OnlineEditor.TakeObjectOwnership(obj.gameObject);
 
-			if (obj != null)
-			{
-				OnlineEditor.TakeObjectOwnership(obj.gameObject);
+                var SDKbase = obj.GetComponent<VRC_Trigger>();
+                var SDK2 = obj.GetComponent<VRCSDK2.VRC_Trigger>();
+                if (!obj.gameObject.active)
+                {
+                    ObjHasBeenActivated = true;
+                    obj.gameObject.SetActive(true);
+                }
 
-				var SDKbase = obj.GetComponent<VRC_Trigger>();
-				var SDK2 = obj.GetComponent<VRCSDK2.VRC_Trigger>();
-				if (!obj.gameObject.active)
-				{
-					ObjHasBeenActivated = true;
-					obj.gameObject.SetActive(true);
-				}
+                if (SDKbase != null)
+                {
+                    if (!SDKbase.enabled)
+                    {
+                        TriggerHasBeenEnabled = true;
+                        SDKbase.enabled = true;
+                    }
 
-				if (SDKbase != null)
-				{
-					if (!SDKbase.enabled)
-					{
-						TriggerHasBeenEnabled = true;
-						SDKbase.enabled = true;
-					}
+                    SDKbase.Interact();
+                    if (TriggerHasBeenEnabled)
+                    {
+                        SDKbase.enabled = false;
+                    }
 
-					SDKbase.Interact();
-					if (TriggerHasBeenEnabled)
-					{
-						SDKbase.enabled = false;
-					}
+                    if (ObjHasBeenActivated)
+                    {
+                        obj.gameObject.SetActive(false);
+                    }
+                }
+                else if (SDK2 != null)
+                {
+                    if (!SDK2.enabled)
+                    {
+                        TriggerHasBeenEnabled = true;
+                        SDK2.enabled = true;
+                    }
 
-					if (ObjHasBeenActivated)
-					{
-						obj.gameObject.SetActive(false);
-					}
-				}
-				else if (SDK2 != null)
-				{
-					if (!SDK2.enabled)
-					{
-						TriggerHasBeenEnabled = true;
-						SDK2.enabled = true;
-					}
+                    SDK2.Interact();
+                    if (TriggerHasBeenEnabled)
+                    {
+                        SDK2.enabled = false;
+                    }
 
-					SDK2.Interact();
-					if (TriggerHasBeenEnabled)
-					{
-						SDK2.enabled = false;
-					}
+                    if (ObjHasBeenActivated)
+                    {
+                        obj.gameObject.SetActive(false);
+                    }
+                }
+                OnlineEditor.RemoveOwnerShip(obj.gameObject);
+            }
+        }
 
-					if (ObjHasBeenActivated)
-					{
-						obj.gameObject.SetActive(false);
-					}
+        public static void TriggerClick(this GameObject obj)
+        {
+            bool ObjHasBeenActivated = false;
+            bool TriggerHasBeenEnabled = false;
 
-				}
-				OnlineEditor.RemoveOwnerShip(obj.gameObject);
+            if (obj != null)
+            {
+                OnlineEditor.TakeObjectOwnership(obj);
 
-			}
-		}
+                var SDKbase = obj.GetComponent<VRC_Trigger>();
+                var SDK2 = obj.GetComponent<VRCSDK2.VRC_Trigger>();
+                if (!obj.active)
+                {
+                    ObjHasBeenActivated = true;
+                    obj.SetActive(true);
+                }
 
+                if (SDKbase != null)
+                {
+                    if (!SDKbase.enabled)
+                    {
+                        TriggerHasBeenEnabled = true;
+                        SDKbase.enabled = true;
+                    }
 
-		public static void TriggerClick(this GameObject obj)
-		{
-			bool ObjHasBeenActivated = false;
-			bool TriggerHasBeenEnabled = false;
+                    SDKbase.Interact();
+                    if (TriggerHasBeenEnabled)
+                    {
+                        SDKbase.enabled = false;
+                    }
 
-			if (obj != null)
-			{
-				OnlineEditor.TakeObjectOwnership(obj);
+                    if (ObjHasBeenActivated)
+                    {
+                        obj.SetActive(false);
+                    }
+                }
+                else if (SDK2 != null)
+                {
+                    if (!SDK2.enabled)
+                    {
+                        TriggerHasBeenEnabled = true;
+                        SDK2.enabled = true;
+                    }
 
-				var SDKbase = obj.GetComponent<VRC_Trigger>();
-				var SDK2 = obj.GetComponent<VRCSDK2.VRC_Trigger>();
-				if (!obj.active)
-				{
-					ObjHasBeenActivated = true;
-					obj.SetActive(true);
-				}
+                    SDK2.Interact();
+                    if (TriggerHasBeenEnabled)
+                    {
+                        SDK2.enabled = false;
+                    }
 
-				if (SDKbase != null)
-				{
-					if (!SDKbase.enabled)
-					{
-						TriggerHasBeenEnabled = true;
-						SDKbase.enabled = true;
-					}
-
-					SDKbase.Interact();
-					if (TriggerHasBeenEnabled)
-					{
-						SDKbase.enabled = false;
-					}
-
-					if (ObjHasBeenActivated)
-					{
-						obj.SetActive(false);
-					}
-				}
-				else if (SDK2 != null)
-				{
-					if (!SDK2.enabled)
-					{
-						TriggerHasBeenEnabled = true;
-						SDK2.enabled = true;
-					}
-
-					SDK2.Interact();
-					if (TriggerHasBeenEnabled)
-					{
-						SDK2.enabled = false;
-					}
-
-					if (ObjHasBeenActivated)
-					{
-						obj.SetActive(false);
-					}
-				}
-				OnlineEditor.RemoveOwnerShip(obj);
-
-			}
-		}
-	}
+                    if (ObjHasBeenActivated)
+                    {
+                        obj.SetActive(false);
+                    }
+                }
+                OnlineEditor.RemoveOwnerShip(obj);
+            }
+        }
+    }
 }

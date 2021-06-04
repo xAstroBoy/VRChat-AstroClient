@@ -4,24 +4,24 @@
 	using System.Collections.Generic;
 
 	public class StreamerProtector : GameEvents
-	{
-		public static bool IsExploitsAllowed => ExploitCheck();
+    {
+        public static bool IsExploitsAllowed => ExploitCheck();
 
-		public static List<string> StreamerIDs = new List<string>();
+        public static List<string> StreamerIDs = new List<string>();
 
-		private static bool ExploitCheck()
-		{
-			var players = WorldUtils.Get_Players();
+        private static bool ExploitCheck()
+        {
+            var players = WorldUtils.Get_Players();
 
-			foreach (var player in players)
-			{
-				if (StreamerIDs.Contains(player.UserID()))
-				{
-					return false;
-				}
-			}
+            foreach (var player in players)
+            {
+                if (StreamerIDs.Contains(player.UserID()))
+                {
+                    return false;
+                }
+            }
 
-			return true;
-		}
-	}
+            return true;
+        }
+    }
 }

@@ -1,110 +1,109 @@
 ﻿namespace AstroClient.Startup
 {
+	using AstroClient.Cheetos;
 	using AstroClient.Components;
-	using AstroLibrary.Console;
 	using AstroClient.variables;
+	using AstroLibrary.Console;
 	using System;
 	using System.Collections.Generic;
 	using UnhollowerRuntimeLib;
-	using AstroClient.Cheetos;
 
 	public class ComponentHelper : GameEvents
-	{
-		public static void RegisterComponent<T>() where T : class
-		{
-			if (KeyManager.IsAuthed)
-			{
-				try
-				{
-					ClassInjector.RegisterTypeInIl2Cpp<T>();
-					ModConsole.DebugLog($"Registered: {typeof(T).FullName}");
-					if (!RegisteredComponentsTypes.Contains(typeof(T)))
-					{
-						RegisteredComponentsTypes.Add(typeof(T));
-					}
-				}
-				catch (Exception e)
-				{
-					ModConsole.Error($"Failed to Register: {typeof(T).FullName}");
-					ModConsole.ErrorExc(e);
-				}
-			}
-		}
+    {
+        public static void RegisterComponent<T>() where T : class
+        {
+            if (KeyManager.IsAuthed)
+            {
+                try
+                {
+                    ClassInjector.RegisterTypeInIl2Cpp<T>();
+                    ModConsole.DebugLog($"Registered: {typeof(T).FullName}");
+                    if (!RegisteredComponentsTypes.Contains(typeof(T)))
+                    {
+                        RegisteredComponentsTypes.Add(typeof(T));
+                    }
+                }
+                catch (Exception e)
+                {
+                    ModConsole.Error($"Failed to Register: {typeof(T).FullName}");
+                    ModConsole.ErrorExc(e);
+                }
+            }
+        }
 
-		public override void OnApplicationStart()
-		{
-			RegisterComponent<GameEventsBehaviour>();
-			RegisterComponent<MainThreadRunner>();
+        public override void OnApplicationStart()
+        {
+            RegisterComponent<GameEventsBehaviour>();
+            RegisterComponent<MainThreadRunner>();
 
-			RegisterComponent<RocketManager>();
-			RegisterComponent<RocketObject>();
+            RegisterComponent<RocketManager>();
+            RegisterComponent<RocketObject>();
 
-			RegisterComponent<ObjectSpinnerManager>();
-			RegisterComponent<ObjectSpinner>();
+            RegisterComponent<ObjectSpinnerManager>();
+            RegisterComponent<ObjectSpinner>();
 
-			RegisterComponent<CrazyObjectManager>();
-			RegisterComponent<CrazyObject>();
+            RegisterComponent<CrazyObjectManager>();
+            RegisterComponent<CrazyObject>();
 
-			RegisterComponent<RigidBodyController>();
+            RegisterComponent<RigidBodyController>();
 
-			RegisterComponent<ItemInflaterManager>();
-			RegisterComponent<ItemInflater>();
+            RegisterComponent<ItemInflaterManager>();
+            RegisterComponent<ItemInflater>();
 
-			RegisterComponent<PickupController>();
+            RegisterComponent<PickupController>();
 
-			RegisterComponent<SingleTag>();
+            RegisterComponent<SingleTag>();
 
-			RegisterComponent<JarRoleESP>();
+            RegisterComponent<JarRoleESP>();
 
-			RegisterComponent<ESP_Pickup>();
-			RegisterComponent<ESP_Trigger>();
-			RegisterComponent<ESP_ItemTweaker>();
-			RegisterComponent<ESP_UdonBehaviour>();
-			RegisterComponent<ESP_VRCInteractable>();
+            RegisterComponent<ESP_Pickup>();
+            RegisterComponent<ESP_Trigger>();
+            RegisterComponent<ESP_ItemTweaker>();
+            RegisterComponent<ESP_UdonBehaviour>();
+            RegisterComponent<ESP_VRCInteractable>();
 
+            RegisterComponent<PlayerESP>();
 
-			RegisterComponent<PlayerESP>();
+            RegisterComponent<Murder4PatronUnlocker>();
 
-			RegisterComponent<Murder4PatronUnlocker>();
+            if (Bools.AllowAttackerComponent)
+            {
+                RegisterComponent<PlayerAttackerManager>();
+                RegisterComponent<PlayerAttacker>();
+            }
 
-			if (Bools.AllowAttackerComponent)
-			{
-				RegisterComponent<PlayerAttackerManager>();
-				RegisterComponent<PlayerAttacker>();
-			}
+            if (Bools.AllowOrbitComponent)
+            {
+                RegisterComponent<OrbitManager>();
+                RegisterComponent<Orbit>();
+            }
+            RegisterComponent<PlayerWatcherManager>();
+            RegisterComponent<PlayerWatcher>();
+            RegisterComponent<Astro_Interactable>();
 
-			if (Bools.AllowOrbitComponent)
-			{
-				RegisterComponent<OrbitManager>();
-				RegisterComponent<Orbit>();
-			}
-			RegisterComponent<PlayerWatcherManager>();
-			RegisterComponent<PlayerWatcher>();
-			RegisterComponent<Astro_Interactable>();
+            RegisterComponent<Bouncer>();
+            RegisterComponent<Lewdifier>();
+            RegisterComponent<MaskRemover>();
+        }
 
-			RegisterComponent<Bouncer>();
-			RegisterComponent<Lewdifier>();
-			RegisterComponent<MaskRemover>();
-		}
+        public override void OnUpdate()
+        {
+            MainThreadRunner.MakeInstance();
+            RocketManager.MakeInstance();
+            CrazyObjectManager.MakeInstance();
+            ObjectSpinnerManager.MakeInstance();
+            ItemInflaterManager.MakeInstance();
+            if (Bools.AllowAttackerComponent)
+            {
+                PlayerAttackerManager.MakeInstance();
+            }
+            if (Bools.AllowOrbitComponent)
+            {
+                OrbitManager.MakeInstance();
+            }
+            PlayerWatcherManager.MakeInstance();
+        }
 
-		public override void OnUpdate()
-		{
-			MainThreadRunner.MakeInstance();
-			RocketManager.MakeInstance();
-			CrazyObjectManager.MakeInstance();
-			ObjectSpinnerManager.MakeInstance();
-			ItemInflaterManager.MakeInstance();
-			if (Bools.AllowAttackerComponent)
-			{
-				PlayerAttackerManager.MakeInstance();
-			}
-			if (Bools.AllowOrbitComponent)
-			{
-				OrbitManager.MakeInstance();
-			}
-			PlayerWatcherManager.MakeInstance();
-		}
-
-		public static List<Type> RegisteredComponentsTypes { get; } = new List<Type>();
-	}
+        public static List<Type> RegisteredComponentsTypes { get; } = new List<Type>();
+    }
 }
