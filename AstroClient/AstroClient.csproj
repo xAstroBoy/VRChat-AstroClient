@@ -137,7 +137,7 @@
     <Compile Include="CheetosUI\CheetoPage.cs" />
     <Compile Include="Cheetos\CheetosExtensions.cs" />
     <Compile Include="Cheetos\CheetosHooks.cs" />
-    <Compile Include="Cheetos\DevUI.cs" />
+    <Compile Include="Buttons\DevMenu.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />
     <Compile Include="Cheetos\AssemblySpy\AssemlySpy_Extensions.cs" />
     <Compile Include="Cheetos\AstroInput.cs" />
@@ -145,7 +145,7 @@
     <Compile Include="Cheetos\ButtonCreator.cs" />
     <Compile Include="CheetosUI\CheetoMenu.cs" />
     <Compile Include="Cheetos\CheetosHelpers.cs" />
-    <Compile Include="Buttons\AdminUI.cs" />
+    <Compile Include="Buttons\AdminMenu.cs" />
     <Compile Include="Cheetos\ForceClone.cs" />
     <Compile Include="Cheetos\CameraStuff\CLIPPING.cs" />
     <Compile Include="Cheetos\MainThreadRunner.cs" />
@@ -1049,6 +1049,7 @@
     <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
     <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
+    <EmbeddedResource Include="Resources\repair.png" />
     <EmbeddedResource Include="Resources\badge.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

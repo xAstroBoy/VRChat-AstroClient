@@ -220,6 +220,7 @@
 				ExploitsMenu.InitButtons(2f);
 				WorldsCheats.InitButtons(4f);
 				AdminMenu.InitButtons(8f);
+				DevMenu.InitButtons(10f);
 
 				ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", new Action(() => { Bools.IsDebugMode = true; }), "Debug Console OFF", new Action(() => { Bools.IsDebugMode = false; }), "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 				CopyIDButton = new QMSingleButton(AstroClient, 5, -1, "Copy\nInstance ID", delegate () { Clipboard.SetText($"{RoomManager.field_Internal_Static_ApiWorld_0.id}:{RoomManager.field_Internal_Static_ApiWorldInstance_0.idWithTags}"); }, "Copy the ID of the current instance.", null, null, true);
