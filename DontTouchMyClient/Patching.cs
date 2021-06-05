@@ -166,17 +166,22 @@
 				{
 					if (method != null)
 					{
-						if (method.Name == "ReadLine")
+						if (method.Name.Equals("ReadLine"))
 						{
 							ModConsole.DebugLog("Registering Patch ConsoleReadLine");
 							new Patch(method, GetPatch(nameof(ConsoleReadLine)));
 						}
-						if (method.Name == "ReadKey")
+						if (method.Name.Equals("ReadKey"))
 						{
 							ModConsole.DebugLog("Registering Patch ConsoleReadKey");
 							new Patch(method, GetPatch(nameof(ConsoleReadKey)));
 						}
-						if (method.Name == "Clear")
+						if (method.Name.Equals("Read"))
+						{
+							ModConsole.DebugLog("Registering Patch ConsoleRead");
+							new Patch(method, GetPatch(nameof(ConsoleRead)));
+						}
+						if (method.Name.Equals("Clear"))
 						{
 							ModConsole.DebugLog("Registering Patch BlockFirstClear");
 							new Patch(method, GetPatch(nameof(BlockFirstConsoleClear)));
@@ -945,6 +950,13 @@
 		{
 			ModConsole.DebugLog($"Skipped Console.ReadKey, asked by {GetModName()}");
 			__result = new ConsoleKeyInfo('\b', ConsoleKey.Enter, false, false, false);
+			return false;
+		}
+
+		private static bool ConsoleRead(ref int __result)
+		{
+			ModConsole.DebugLog($"Skipped Console.Read, asked by {GetModName()}");
+			__result = 0;
 			return false;
 		}
 
