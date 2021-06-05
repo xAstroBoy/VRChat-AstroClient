@@ -1,17 +1,15 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.ItemTweakerV2.TweakerEventArgs
 {
 	using System;
+	using UnityEngine;
 
-	public class SpawnEmojiArgs : EventArgs
+	public class SelectedObjectArgs : EventArgs
     {
-        public VRCPlayer player;
+        public GameObject GameObject;
 
-        public int Emoji;
-
-        public SpawnEmojiArgs(VRCPlayer player, int emoji)
+        public SelectedObjectArgs(GameObject obj)
         {
-            this.player = player;
-            this.Emoji = emoji;
+            this.GameObject = obj;
         }
     }
 }

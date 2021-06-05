@@ -5,7 +5,7 @@
 	using AstroClient.Components;
 	using AstroClient.Extensions;
 	using AstroClient.GameObjectDebug;
-	using AstroClient.ItemTweaker;
+	using AstroClient.ItemTweakerV2;
 	using AstroClient.variables;
 	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
@@ -225,14 +225,6 @@
             {
                 foreach (var pickup in WorldUtils.Get_Pickups())
                 {
-                    if (pickup.name == "ViewFinder")
-                    {
-                        continue;
-                    }
-                    if (pickup.name == "AvatarDebugConsole")
-                    {
-                        continue;
-                    }
                     PickupQMScroll.Add(
                     new QMSingleButton(PickupQMScroll.BaseMenu, 0, 0, $"Select {pickup.name}", delegate
                     {
