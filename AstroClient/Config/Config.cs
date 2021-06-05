@@ -22,6 +22,8 @@
 
         public bool RemoveVRCPlusMenu = false;
 
+        public bool RemoveGalleryButton = false;
+
         // Player List UI
         public bool ShowPlayersMenu = true;
 

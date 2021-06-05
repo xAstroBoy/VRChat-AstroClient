@@ -69,7 +69,7 @@
                 }
             }
 
-            if (ConfigManager.UI.RemoveVRCPlusThankYou)
+			if (ConfigManager.UI.RemoveVRCPlusThankYou)
             {
                 var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/VRCPlusThankYou");
                 if (found != null)
@@ -77,6 +77,15 @@
                     found.SetActive(false);
                 }
             }
-        }
+
+			if (ConfigManager.UI.RemoveGalleryButton)
+			{
+				var found = GameObjectFinder.Find("UserInterface/QuickMenu/ShortcutMenu/GalleryButton");
+				if (found != null)
+				{
+					found.SetActive(false);
+				}
+			}
+		}
     }
 }

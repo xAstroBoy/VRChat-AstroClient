@@ -380,7 +380,7 @@
             {
                 Player x = allPlayers[i];
                 string id = x.GetAPIUser().id;
-                if (x.field_Private_APIUser_0.isFriend)
+                if (x.prop_APIUser_0.isFriend)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("[DAY] Not Adding Friend ---> [" + x.GetAPIUser().displayName +

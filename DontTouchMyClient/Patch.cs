@@ -1,15 +1,12 @@
-﻿using AstroLibrary.Console;
-using Harmony;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DontTouchMyClient.Patcher
+﻿namespace DontTouchMyClient.Patcher
 {
-    public class Patch
+	using AstroLibrary.Console;
+	using Harmony;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Reflection;
+
+	public class Patch
     {
         private static int GetRandomInt()
         {

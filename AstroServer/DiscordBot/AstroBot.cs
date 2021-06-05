@@ -114,8 +114,8 @@
 
 		public static async Task SendNewAvatarLogAsync(AvatarDataEntity ade)
 		{
-			var channel = Client.GetChannel(AvatarLogChannelID) as ISocketMessageChannel;
-			await channel.SendMessageAsync(null, false, CustomEmbed.GetAvatarEmbed(ade));
+			//var channel = Client.GetChannel(AvatarLogChannelID) as ISocketMessageChannel;
+			//await channel.SendMessageAsync(null, false, CustomEmbed.GetAvatarEmbed(ade));
 		}
 
 		#endregion
