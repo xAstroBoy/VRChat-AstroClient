@@ -84,7 +84,7 @@
                     flag5 = shader_check(user);
                     if (flag5)
                     {
-                        CheetosHelpers.SendHudNotification($"[!!!] nuked shaders for \"" + user.field_Private_APIUser_0.displayName.ToString() + "\"");
+                        CheetosHelpers.SendHudNotification($"[!!!] nuked shaders for \"" + user.prop_APIUser_0.displayName.ToString() + "\"");
                     }
                     result = flag5;
                 }

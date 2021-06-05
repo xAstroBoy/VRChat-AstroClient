@@ -486,7 +486,7 @@
             get
             {
                 return ObjectMiscOptions.CurrentTarget != null
-                    ? $"Teleport\n{Tweaker_Object.GetObjectToEditName}\nto:\n{ObjectMiscOptions.CurrentTarget.field_Private_APIUser_0.displayName}"
+                    ? $"Teleport\n{Tweaker_Object.GetObjectToEditName}\nto:\n{ObjectMiscOptions.CurrentTarget.prop_APIUser_0.displayName}"
                     : "Teleport\nto:\n null";
             }
         }
