@@ -75,13 +75,12 @@
 		private static void ProcessInputAsync(object sender, PacketData packetData)
 		{
 			var networkEventID = packetData.NetworkEventID;
+			Client client = sender as Client;
 
-			if (networkEventID != PacketClientType.KEEP_ALIVE)
+			if (networkEventID != PacketClientType.KEEP_ALIVE && networkEventID != PacketClientType.AVATAR_DATA)
 			{
 				Console.WriteLine($"TCP Event {packetData.NetworkEventID} Received.");
 			}
-
-			Client client = sender as Client;
 
 			switch (networkEventID)
 			{
