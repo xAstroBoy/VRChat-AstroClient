@@ -57,7 +57,7 @@
 			inputModule = GameObject.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
 
 			// Avatar Search
-			new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Search", -825f, 125f, delegate ()
+			new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Search", 921f, 470f, delegate ()
 			{
 				CheetosHelpers.PopupCall("Astro Avatar Search", "Search", "Enter Avatar name. . .", false, delegate (string text)
 				{
@@ -69,7 +69,7 @@
 				//}, "Enter Avatar name. . .");
 			}, 1.45f, 1f);
 
-			searchTypeButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "All", -825f, 50f, delegate ()
+			searchTypeButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "All", 921f, 410f, delegate ()
 			{
 				if (SearchType == SearchTypes.ALL)
 				{
@@ -88,7 +88,7 @@
 
 			if (Bools.IsDeveloper)
 			{
-				deleteButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Delete From Database", -825f, -25f, delegate ()
+				deleteButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Delete From Database", 921f, 350f, delegate ()
 				{
 					ModConsole.Log($"Sent Avatar Deletion For: {selectedID}");
 					AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DELETE, selectedID));
