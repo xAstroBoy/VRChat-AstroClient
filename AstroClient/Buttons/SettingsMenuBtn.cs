@@ -67,6 +67,9 @@
 
             QMToggleButton removeVRCPlusMenu = new QMToggleButton(subHideElements, 4, 1, "Remove VRCPlusMenu", () => { ConfigManager.UI.RemoveVRCPlusMenu = true; }, "Keep VRCPlusMenu", () => { ConfigManager.UI.RemoveVRCPlusMenu = false; }, "Requires Restart");
             removeVRCPlusMenu.SetToggleState(ConfigManager.UI.RemoveVRCPlusMenu, false);
-        }
+
+			QMToggleButton removeGalleryButton = new QMToggleButton(subHideElements, 1, 2, "Remove GalleryButton", () => { ConfigManager.UI.RemoveGalleryButton = true; }, "Keep GalleryButton", () => { ConfigManager.UI.RemoveGalleryButton = false; }, "Requires Restart");
+			removeGalleryButton.SetToggleState(ConfigManager.UI.RemoveGalleryButton, false);
+		}
     }
 }
