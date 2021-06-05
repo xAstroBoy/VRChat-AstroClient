@@ -63,19 +63,6 @@
 				GetSteamIdSLocations();
 				ModConsole.Log("[Defenses] Start. . .");
 
-				foreach (var method in typeof(Assembly).GetMethods())
-				{
-					if (method != null)
-					{
-						if (method.Name == "Load" && method.GetParameters().Length == 1)
-						{
-							ModConsole.DebugLog("Registering Patch AssemblyLoad");
-							new Patch(method, GetPatch(nameof(AssemblyLoad)));
-							break;
-						}
-					}
-				}
-
 				foreach (var method in typeof(HttpClient).GetMethods())
 				{
 					if (method != null)
@@ -1190,17 +1177,6 @@
 			catch
 			{
 			}
-			return true;
-		}
-
-		private static bool AssemblyLoad(ref string __path)
-		{
-			if (__path.Contains("dummy"))
-			{
-				ModConsole.Warning($"{GetModName()} Tried to load a dummy assembly!");
-				return false;
-			};
-
 			return true;
 		}
 
