@@ -113,11 +113,11 @@
 
                 if (result.Count() != 0) // Then Filter the ViewFinder (Player Camera)
                 {
-                    if (CameraOnTweakerExperiment.ViewFinder.gameObject != null)
+                    if (CameraTweaker.ViewFinder.gameObject != null)
                     {
-                        if (result.Contains(CameraOnTweakerExperiment.ViewFinder.gameObject))
+                        if (result.Contains(CameraTweaker.ViewFinder.gameObject))
                         {
-                            result.Remove(CameraOnTweakerExperiment.ViewFinder.gameObject);
+                            result.Remove(CameraTweaker.ViewFinder.gameObject);
                         }
                     }
                 }

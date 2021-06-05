@@ -165,7 +165,7 @@
     <Compile Include="Components\Bounce\Bouncer.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigManager.cs" />
-    <Compile Include="Experiments\CameraOnTweakerExperiment.cs" />
+    <Compile Include="Experiments\CameraTweaker.cs" />
     <Compile Include="Features\Player\Clones\Clones.cs" />
     <Compile Include="Features\Player\Movement\Exploit\MovementSerializer.cs" />
     <Compile Include="Features\Player\Movement\JumpModifier.cs" />
