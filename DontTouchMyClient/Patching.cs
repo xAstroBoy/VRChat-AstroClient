@@ -15,19 +15,15 @@
 	using System.Reflection;
 	using System.Threading;
 	using System.Threading.Tasks;
-	using global::DontTouchMyClient.Patcher;
-	using Patch = global::DontTouchMyClient.Patcher.Patch;
+	using Patch = Patcher.Patch;
 	using AstroLibrary.Console;
 
 	internal class Patching
 	{
-
-
 		private static HarmonyMethod GetPatch(string name)
 		{
 			return new HarmonyMethod(typeof(Patching).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
 		}
-
 
 		private static string SteamIdsPath;
 		private static string SteamPath;
@@ -67,6 +63,19 @@
 				GetSteamIdSLocations();
 				ModConsole.Log("[Defenses] Start. . .");
 
+				foreach (var method in typeof(Assembly).GetMethods())
+				{
+					if (method != null)
+					{
+						if (method.Name == "Load" && method.GetParameters().Length == 1)
+						{
+							ModConsole.DebugLog("Registering Patch AssemblyLoad");
+							new Patch(method, GetPatch(nameof(AssemblyLoad)));
+							break;
+						}
+					}
+				}
+
 				foreach (var method in typeof(HttpClient).GetMethods())
 				{
 					if (method != null)
@@ -84,7 +93,7 @@
 				{
 					if (method != null)
 					{
-						if (method.Name == "OpenSubKey")
+						if (method.Name.Equals("OpenSubKey"))
 						{
 							ModConsole.DebugLog("Registering Patch BlockOpenSubKey");
 							new Patch(method, GetPatch(nameof(BlockOpenSubKey)));
@@ -96,7 +105,7 @@
 				{
 					if (method != null)
 					{
-						if (method.Name == "GetProcesses")
+						if (method.Name.Equals("GetProcesses"))
 						{
 							ModConsole.DebugLog("Registering Patch HideProcesses");
 							new Patch(method, GetPatch(nameof(HideProcesses)));
@@ -142,19 +151,19 @@
 					if (method != null)
 					{
 
-						if (method.Name == "ReadAllLines")
+						if (method.Name.Equals("ReadAllLines"))
 						{
 							ModConsole.DebugLog("Registering Patch ControlledReadAllLines");
 							new Patch(method, GetPatch(nameof(ControlledReadAllLines)));
 						}
 
-						if (method.Name == "ReadAllText")
+						if (method.Name.Equals("ReadAllText"))
 						{
 							ModConsole.DebugLog("Registering Patch ControlledReadAllText");
 							new Patch(method, GetPatch(nameof(ControlledReadAllText)));
 						}
 
-						if (method.Name == "ReadAllBytes")
+						if (method.Name.Equals("ReadAllBytes"))
 						{
 							ModConsole.DebugLog("Registering Patch ControlledReadAllBytes");
 							new Patch(method, GetPatch(nameof(ControlledReadAllBytes)));
@@ -216,7 +225,7 @@
 				{
 					if (method != null)
 					{
-						if (method.Name == "GetFiles")
+						if (method.Name.Equals("GetFiles"))
 						{
 							if (method.GetParameters().Length == 1)
 							{
@@ -235,7 +244,7 @@
 							}
 						}
 
-						if (method.Name == "GetDirectories")
+						if (method.Name.Equals("GetDirectories"))
 						{
 							if (method.GetParameters().Length == 1)
 							{
@@ -261,13 +270,13 @@
 				{
 					if (method != null)
 					{
-						if (method.Name == "UnpatchAllInstances")
+						if (method.Name.Equals("UnpatchAllInstances"))
 						{
 							ModConsole.DebugLog("Registering Patch UnpatchAllInstancesControlled");
 							new Patch(method, GetPatch(nameof(UnpatchAllInstancesControlled)));
 						}
 
-						if (method.Name == "GetPatchedMethods")
+						if (method.Name.Equals("GetPatchedMethods"))
 						{
 							ModConsole.DebugLog("Registering Patch EmptyGetPatchedMethods");
 
@@ -281,18 +290,18 @@
 				{
 					if (method != null)
 					{
-						if (method.Name == "DownloadData")
+						if (method.Name.Equals("DownloadData"))
 						{
 							ModConsole.DebugLog("Registering Patch MonitoredDownloadData");
 							new Patch(method, GetPatch(nameof(MonitoredDownloadData)));
 						}
-						if (method.Name == "DownloadFile")
+						if (method.Name.Equals("DownloadFile"))
 						{
 							ModConsole.DebugLog("Registering Patch MonitoredDownloadFile");
 							new Patch(method, GetPatch(nameof(MonitoredDownloadFile)));
 						}
 
-						if (method.Name == "OpenRead")
+						if (method.Name.Equals("OpenRead"))
 						{
 							ModConsole.DebugLog("Registering Patch MonitoredOpenRead");
 							new Patch(method, GetPatch(nameof(MonitoredOpenRead)));
@@ -324,7 +333,7 @@
 							ModConsole.DebugLog("Registering Patch MonitoredUploadString");
 							new Patch(method, GetPatch(nameof(MonitoredUploadString)));
 						}
-						if (method.Name == "DownloadString")
+						if (method.Name.Equals("DownloadString"))
 						{
 							ModConsole.DebugLog("Registering Patch MonitoredDownloadString");
 							new Patch(method, GetPatch(nameof(MonitoredDownloadString)), GetPatch(nameof(PostDownloadString)));
@@ -418,6 +427,7 @@
 			}
 			return true;
 		}
+
 		private static void PostDownloadString(Uri __0, string __result)
 		{
 			if (__0 != null)
@@ -1183,6 +1193,16 @@
 			return true;
 		}
 
+		private static bool AssemblyLoad(ref string __path)
+		{
+			if (__path.Contains("dummy"))
+			{
+				ModConsole.Warning($"{GetModName()} Tried to load a dummy assembly!");
+				return false;
+			};
+
+			return true;
+		}
 
 		private static bool AntiGetProcessesByName(System.Diagnostics.Process __instance)
 		{
