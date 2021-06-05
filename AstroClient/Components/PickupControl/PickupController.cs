@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroClient.ItemTweakerV2;
+	using AstroClient.ItemTweaker;
 	using AstroLibrary.Console;
 	using System;
 	using UnhollowerBaseLib.Attributes;

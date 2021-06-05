@@ -2,7 +2,7 @@
 {
 	using AstroClient.Components;
 	using AstroClient.Extensions;
-	using AstroClient.ItemTweakerV2;
+	using AstroClient.ItemTweaker;
 	using AstroLibrary.Console;
 	using Boo.Lang;
 	using DayClientML2.Utility.Extensions;

@@ -9,12 +9,19 @@
 
 	public class ComponentHandler : ObjectSelectorHelper
 	{
-		public override void OnNewObjectSelected(GameObject obj)
+
+		public override void On_New_GameObject_Selected(GameObject obj)
 		{
-			// Parse Or remove 
+			// Handle and Send OnPickupControllerComponent Event and OnRigidBodyController Event as well.
+
+			// Add As well ESP if toggled .
 
 		}
 
+		public override void On_Old_GameObject_Removed(GameObject obj)
+		{
+			// Handle Component Removal (ESP) 
+		}
 
 	}
 }

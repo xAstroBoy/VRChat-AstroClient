@@ -29,7 +29,7 @@
         {
             if (obj != null)
             {
-                ItemTweakerV2.Tweaker_Object.SetObjectToEdit(obj);
+                ItemTweaker.Tweaker_Object.SetObjectToEdit(obj);
             }
         }
     }

@@ -1,7 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroClient.Extensions;
-	using AstroClient.ItemTweakerV2;
+	using AstroClient.ItemTweaker;
 	using AstroLibrary.Console;
 	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
