@@ -1,7 +1,6 @@
-﻿using System.Linq;
-
-namespace AstroClient.Extensions
+﻿namespace AstroClient.Extensions
 {
+	using System.Linq;
 	using AstroClient.Components;
 	using AstroClient.variables;
 	using System;

@@ -17,7 +17,7 @@
 
 		private static bool HasRenamedOldLogFile = false;
 
-		private static Mutex ConsoleMutex = new Mutex();
+		private static readonly Mutex ConsoleMutex = new Mutex();
 
 		/// <summary>
 		/// Opens the latest log file in Notepad
