@@ -37,10 +37,11 @@
 			}
 		}
 
-		private static void OnSelectedPlayerPatch(VRC.Player player)
+		private static bool OnSelectedPlayerPatch(VRC.Player player)
 		{
 			ModConsole.Log($"Test OnSelected {player.DisplayName()}");
 			Event_OnPlayerSelected?.Invoke(null, new VRCPlayerEventArgs(player));
+			return true;
 		}
 	}
 }
