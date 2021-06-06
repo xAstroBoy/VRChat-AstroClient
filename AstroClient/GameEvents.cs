@@ -189,7 +189,7 @@
         {
         }
 
-		public virtual void OnPlayerSelected(VRCPlayer player)
+		public virtual void OnPlayerSelected(Player player)
 		{
 		}
 	}

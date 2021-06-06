@@ -1,19 +1,17 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
 	using AstroLibrary.Console;
+	using DayClientML2.Utility.Extensions;
+	using Harmony;
 	using MelonLoader;
 	using System;
-	using System.Collections.Generic;
-	using System.Linq;
 	using System.Reflection;
-	using System.Runtime.InteropServices;
-	using System.Text;
-	using System.Threading.Tasks;
-	using UnhollowerBaseLib;
 
 	public class QuickMenuHooks : GameEvents
 	{
 		public static event EventHandler<VRCPlayerEventArgs> Event_OnPlayerSelected;
+
+		private HarmonyInstance harmony1;
 
 		public override void ExecutePriorityPatches()
 		{
@@ -22,65 +20,27 @@
 
 		private void HookSelectedPlayer()
 		{
-			unsafe
-			{
-				try
-				{
-					ModConsole.DebugLog("Hooking SelectedPlayer");
-					var originalMethod = *(IntPtr*)(IntPtr)UnhollowerUtils
-						.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(
-							typeof(QuickMenu).GetMethod(
-								nameof(QuickMenu
-									.Method_Public_Void_Player_PDM_0))).GetValue(null);
-					MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), typeof(QuickMenuHooks).GetMethod(nameof(HookSelectedPlayer), BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer());
-					_SelectedPlayerHookDelegate = Marshal.GetDelegateForFunctionPointer<SelectedPlayerHookDelegate>(originalMethod);
-					if (_SelectedPlayerHookDelegate != null)
-					{
-						ModConsole.DebugLog("Hooked SpawnEmojiRPC");
-					}
-					else
-					{
-						ModConsole.Error("Failed to hook SpawnEmojiRPC!");
-					}
-				}
-				catch (Exception e)
-				{
-					ModConsole.Error("Failed to hook SpawnEmojiRPC!, ERROR : " + e);
-				}
-			}
-		}
-
-		public delegate void SelectedPlayerHookDelegate(IntPtr thisPtr, int emoji, IntPtr PlayerPtr);
-
-		private static SelectedPlayerHookDelegate _SelectedPlayerHookDelegate;
-
-		private void Test()
-		{
-			//Event_OnPlayerSelected?.Invoke(null, new VRCPlayerEventArgs(Instance2));
-		}
-
-		private static void QuickMenuSelectedPlayerPatch(IntPtr thisPtr, int emoji, IntPtr PlayerPtr)
-		{
 			try
 			{
-				if (thisPtr != IntPtr.Zero && PlayerPtr != IntPtr.Zero)
+				if (harmony1 == null)
 				{
-					var player = new VRCPlayer(thisPtr);
-
-					if (player != null)
-					{
-						Event_OnPlayerSelected?.Invoke(null, new VRCPlayerEventArgs(player));
-					}
+					harmony1 = HarmonyInstance.Create(BuildInfo.Name + " SelectedPlayerHook");
 				}
+
+				harmony1.Patch(AccessTools.Method(typeof(QuickMenu), nameof(QuickMenu.Method_Public_Void_Player_PDM_0)), new HarmonyMethod(typeof(QuickMenuHooks).GetMethod(nameof(OnSelectedPlayerPatch), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
+				ModConsole.DebugLog("Hooked VRC_EventDispatcherRFC 1");
 			}
-			catch (Exception e)
+			catch
 			{
-				ModConsole.Error(e.Message);
+				harmony1.UnpatchAll();
+				HookSelectedPlayer();
 			}
-			finally
-			{
-				_SelectedPlayerHookDelegate(thisPtr, emoji, PlayerPtr);
-			}
+		}
+
+		private static void OnSelectedPlayerPatch(VRC.Player player)
+		{
+			ModConsole.Log($"Test OnSelected {player.DisplayName()}");
+			Event_OnPlayerSelected?.Invoke(null, new VRCPlayerEventArgs(player));
 		}
 	}
 }
