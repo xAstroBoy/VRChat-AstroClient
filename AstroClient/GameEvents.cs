@@ -37,6 +37,8 @@
 
             CheetosHooks.Event_OnPhotonJoin += Internal_OnPhotonPlayerJoined;
             CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
+
+			QuickMenuHooks.Event_OnPlayerSelected += Internal_OnPlayerSelected;
         }
 
         private void Internal_OnApplicationStart(object sender, EventArgs e)
@@ -99,7 +101,12 @@
             OnWorldReveal(e.ID, e.Name, e.WorldTags, e.AssetUrl);
         }
 
-        private void Internal_VRC_EventDispatcherRFC_triggerEvent(object sender, VRC_EventDispatcherRFC_TriggerEventArgs e)
+		private void Internal_OnPlayerSelected(object sender, VRCPlayerEventArgs e)
+		{
+			OnPlayerSelected(e.player);
+		}
+
+		private void Internal_VRC_EventDispatcherRFC_triggerEvent(object sender, VRC_EventDispatcherRFC_TriggerEventArgs e)
         {
             VRC_EventDispatcherRFC_triggerEvent(e.VRC_EventHandler, e.VrcEvent, e.VrcBroadcastType, e.UnknownInt, e.UnknownFloat);
         }
@@ -181,5 +188,9 @@
         public virtual void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
         }
-    }
+
+		public virtual void OnPlayerSelected(VRCPlayer player)
+		{
+		}
+	}
 }

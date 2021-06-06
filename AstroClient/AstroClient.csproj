@@ -296,11 +296,13 @@
     <Compile Include="Startup\EventArgs\RayCastEventArgs.cs" />
     <Compile Include="Startup\EventArgs\SpawnEmojiArgs.cs" />
     <Compile Include="Startup\EventArgs\UdonSyncRPCEventArgs.cs" />
+    <Compile Include="Startup\EventArgs\VRCPlayerEventArgs.cs" />
     <Compile Include="Startup\EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
     <Compile Include="Startup\Hooks\AntiVoteKick.cs" />
     <Compile Include="Startup\Hooks\AvatarManagerHook.cs" />
     <Compile Include="Startup\Hooks\NetworkManagerHooks.cs" />
     <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
+    <Compile Include="Startup\Hooks\QuickMenuHooks.cs" />
     <Compile Include="Startup\Hooks\RPCEventHook.cs" />
     <Compile Include="Startup\Hooks\SpawnEmojiRPCHook.cs" />
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />

@@ -1,5 +1,7 @@
 ﻿namespace DayClientML2.Utility.Extensions
 {
+	using AstroClient;
+	using System;
 	using Transmtn.DTO.Notifications;
 	using UnityEngine;
 
@@ -7,7 +9,7 @@
     {
         public static void SelectPlayer(this QuickMenu Instance, VRCPlayer Instance2)
         {
-            Instance.Method_Public_Void_Player_PDM_0(Instance2.GetPlayer());
+			Instance.Method_Public_Void_Player_PDM_0(Instance2.GetPlayer());
         }
 
         public static void ToggleQuickMenu(this QuickMenu Instance, bool state)
