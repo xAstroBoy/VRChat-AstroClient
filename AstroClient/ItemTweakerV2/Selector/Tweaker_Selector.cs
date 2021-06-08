@@ -41,8 +41,8 @@ namespace AstroClient.ItemTweakerV2.Selector
 				if (value != _SelectedObject)
 				{
 					Event_On_Old_GameObject_Removed?.Invoke(null, new SelectedObjectArgs(_SelectedObject));
-					Event_On_New_GameObject_Selected?.Invoke(null, new SelectedObjectArgs(value));
 				}
+				Event_On_New_GameObject_Selected?.Invoke(null, new SelectedObjectArgs(value));
 				_SelectedObject = value;
 			}
 		}

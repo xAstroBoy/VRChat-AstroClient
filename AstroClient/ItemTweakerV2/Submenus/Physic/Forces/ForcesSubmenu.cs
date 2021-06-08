@@ -10,7 +10,7 @@ namespace AstroClient.ItemTweakerV2.Submenus
 {
 	public class ForcesSubmenu : Tweaker_Events
 	{
-		public static void Init_ForceSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
+		public static void Init_ForceSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
 		{
 			var ForceSubMenu = new QMNestedButton(menu, x, y, "Forces", "You have the Force! Dont abuse it! <3!", null, null, null, null, btnHalf);
 

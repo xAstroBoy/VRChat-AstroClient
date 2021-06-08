@@ -19,8 +19,8 @@
 			PrefabSpawnerScrollMenu.Init_PrefabSpawnerQMScroll(main, 0, 1f, true);
 			new QMSingleButton(main, 0, 1.5f, "Kill Spawned Prefabs", () => { SpawnerSubmenu.KillSpawnedPrefabs(); }, "Removes All Prefabs Objects.", null, null, true);
 
-			SpawnedPickupsCounter = new QMSingleButton(menu, 4, 0, GetClonesPickupText, null, GetClonesPickupText, null, Color.cyan, true);
-			SpawnedPrefabsCounter = new QMSingleButton(menu, 4, 0.5f, GetSpawnedPrefabText, null, GetSpawnedPrefabText, null, Color.cyan, true);
+			SpawnedPickupsCounter = new QMSingleButton(main, 4, 0, GetClonesPickupText, null, GetClonesPickupText, null, Color.cyan, true);
+			SpawnedPrefabsCounter = new QMSingleButton(main, 4, 0.5f, GetSpawnedPrefabText, null, GetSpawnedPrefabText, null, Color.cyan, true);
 
 		}
 
