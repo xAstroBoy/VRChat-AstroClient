@@ -11,7 +11,7 @@
 	{
 		public static event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerSelected;
 
-		public static event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerUpdate;
+		public static event EventHandler<OnRigidBodyControllerArgs> Event_OnPickupControllerPropertyChanged;
 
 		public override void On_New_GameObject_Selected(GameObject obj)
 		{
@@ -24,5 +24,19 @@
 				}
 			}
 		}
+
+		public override void On_Old_GameObject_Removed(GameObject obj)
+		{
+			if (obj != null)
+			{
+				PickupController PickupController = obj.GetOrAddComponent<PickupController>();
+				if (PickupController != null)
+				{
+					PickupController.RemoveActionEvents(); // No more Focused on tweaker, so no need for The property Event changed.
+				}
+			}
+		}
+
+
 	}
 }

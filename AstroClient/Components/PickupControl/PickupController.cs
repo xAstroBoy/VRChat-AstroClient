@@ -164,7 +164,8 @@
         {
             try
             {
-                if (Tweaker_Object.CurrentSelectedObject == obj)
+				// TODO: Remove this and use OnPickupPropertyChanged
+				if (Tweaker_Object.CurrentSelectedObject == obj)
                 {
                     UpdateHeldOwnerBtn();
                     UpdateEditMode();
@@ -297,7 +298,6 @@
                         }
                     }
                 }
-
                 if (EditMode)
                 {
                     if (Pickup1 != null)
@@ -305,81 +305,99 @@
                         if (Pickup1.allowManipulationWhenEquipped != allowManipulationWhenEquipped)
                         {
                             Pickup1.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
+							Run_OnOnPickupPropertyChanged();
                         }
                         if (Pickup1.pickupable != pickupable)
                         {
-                            Pickup1.pickupable = pickupable;
-                        }
+							Pickup1.pickupable = pickupable;
+							Run_OnOnPickupPropertyChanged();
+						}
                         if (Pickup1.DisallowTheft != DisallowTheft)
                         {
-                            Pickup1.DisallowTheft = DisallowTheft;
-                        }
+							Pickup1.DisallowTheft = DisallowTheft;
+							Run_OnOnPickupPropertyChanged();
+						}
                         if (Pickup1.AutoHold != AutoHold)
                         {
-                            Pickup1.AutoHold = AutoHold;
-                        }
+							Pickup1.AutoHold = AutoHold;
+							Run_OnOnPickupPropertyChanged();
+						}
                         if (Pickup1.orientation != orientation)
                         {
-                            Pickup1.orientation = orientation;
-                        }
+							Pickup1.orientation = orientation;
+							Run_OnOnPickupPropertyChanged();
+						}
                         if (Pickup1.proximity != proximity)
                         {
-                            Pickup1.proximity = proximity;
-                        }
+							Pickup1.proximity = proximity;
+							Run_OnOnPickupPropertyChanged();
+						}
                     }
                     if (Pickup2 != null)
                     {
                         if (Pickup2.allowManipulationWhenEquipped != allowManipulationWhenEquipped)
                         {
-                            Pickup2.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
-                        }
+							Pickup2.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
+							Run_OnOnPickupPropertyChanged();
+						}
                         if (Pickup2.pickupable != pickupable)
                         {
-                            Pickup2.pickupable = pickupable;
-                        }
+							Pickup2.pickupable = pickupable;
+							Run_OnOnPickupPropertyChanged();
+						}
                         if (Pickup2.DisallowTheft != DisallowTheft)
                         {
-                            Pickup2.DisallowTheft = DisallowTheft;
-                        }
+							Pickup2.DisallowTheft = DisallowTheft;
+							Run_OnOnPickupPropertyChanged();
+						}
                         if (Pickup2.AutoHold != AutoHold)
                         {
-                            Pickup2.AutoHold = AutoHold;
-                        }
+							Pickup2.AutoHold = AutoHold;
+							Run_OnOnPickupPropertyChanged();
+						}
                         if (Pickup2.orientation != orientation)
                         {
-                            Pickup2.orientation = orientation;
-                        }
+							Pickup2.orientation = orientation;
+							Run_OnOnPickupPropertyChanged();
+						}
                         if (Pickup2.proximity != proximity)
                         {
-                            Pickup2.proximity = proximity;
-                        }
+							Pickup2.proximity = proximity;
+							Run_OnOnPickupPropertyChanged();
+						}
                     }
                     if (Pickup3 != null)
                     {
                         if (Pickup3.allowManipulationWhenEquipped != allowManipulationWhenEquipped)
                         {
-                            Pickup3.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
-                        }
+							Pickup3.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
+							Run_OnOnPickupPropertyChanged();
+						}
                         if (Pickup3.pickupable != pickupable)
                         {
-                            Pickup3.pickupable = pickupable;
-                        }
+							Pickup3.pickupable = pickupable;
+							Run_OnOnPickupPropertyChanged();
+						}
                         if (Pickup3.DisallowTheft != DisallowTheft)
                         {
-                            Pickup3.DisallowTheft = DisallowTheft;
-                        }
+							Pickup3.DisallowTheft = DisallowTheft;
+							Run_OnOnPickupPropertyChanged();
+						}
                         if (Pickup3.AutoHold != AutoHold)
                         {
-                            Pickup3.AutoHold = AutoHold;
-                        }
+							Pickup3.AutoHold = AutoHold;
+							Run_OnOnPickupPropertyChanged();
+						}
                         if (Pickup3.orientation != orientation)
                         {
-                            Pickup3.orientation = orientation;
-                        }
+							Pickup3.orientation = orientation;
+							Run_OnOnPickupPropertyChanged();
+						}
                         if (Pickup3.proximity != proximity)
                         {
-                            Pickup3.proximity = proximity;
-                        }
+							Pickup3.proximity = proximity;
+							Run_OnOnPickupPropertyChanged();
+						}
                     }
                 }
                 else
@@ -390,85 +408,97 @@
                         {
                             if (!EditMode)
                             {
-                                allowManipulationWhenEquipped = Pickup1.allowManipulationWhenEquipped;
-                            }
+								allowManipulationWhenEquipped = Pickup1.allowManipulationWhenEquipped;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (pickupable != Pickup1.pickupable)
                         {
                             if (!EditMode)
                             {
-                                pickupable = Pickup1.pickupable;
-                            }
+								pickupable = Pickup1.pickupable;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (DisallowTheft != Pickup1.DisallowTheft)
                         {
                             if (!EditMode)
                             {
-                                DisallowTheft = Pickup1.DisallowTheft;
-                            }
+								DisallowTheft = Pickup1.DisallowTheft;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (AutoHold != Pickup1.AutoHold)
                         {
                             if (!EditMode)
                             {
-                                AutoHold = Pickup1.AutoHold;
-                            }
+								AutoHold = Pickup1.AutoHold;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (orientation != Pickup1.orientation)
                         {
                             if (!EditMode)
                             {
-                                orientation = Pickup1.orientation;
-                            }
+								orientation = Pickup1.orientation;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (proximity != Pickup1.proximity)
                         {
                             if (!EditMode)
                             {
-                                proximity = Pickup1.proximity;
-                            }
+								proximity = Pickup1.proximity;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_allowManipulationWhenEquipped != Pickup1.allowManipulationWhenEquipped)
                         {
                             if (!EditMode)
                             {
-                                Original_allowManipulationWhenEquipped = Pickup1.allowManipulationWhenEquipped;
-                            }
+								Original_allowManipulationWhenEquipped = Pickup1.allowManipulationWhenEquipped;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_pickupable != Pickup1.pickupable)
                         {
                             if (!EditMode)
                             {
-                                Original_pickupable = Pickup1.pickupable;
-                            }
+								Original_pickupable = Pickup1.pickupable;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_DisallowTheft != Pickup1.DisallowTheft)
                         {
                             if (!EditMode)
                             {
-                                Original_DisallowTheft = Pickup1.DisallowTheft;
-                            }
+								Original_DisallowTheft = Pickup1.DisallowTheft;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_AutoHold != Pickup1.AutoHold)
                         {
                             if (!EditMode)
                             {
-                                Original_AutoHold = Pickup1.AutoHold;
-                            }
+								Original_AutoHold = Pickup1.AutoHold;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_orientation != Pickup1.orientation)
                         {
                             if (!EditMode)
                             {
-                                Original_orientation = Pickup1.orientation;
-                            }
+								Original_orientation = Pickup1.orientation;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_Proximity != Pickup1.proximity)
                         {
                             if (!EditMode)
                             {
-                                Original_Proximity = Pickup1.proximity;
-                            }
+								Original_Proximity = Pickup1.proximity;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                     }
                     if (Pickup2 != null)
@@ -477,85 +507,97 @@
                         {
                             if (!EditMode)
                             {
-                                allowManipulationWhenEquipped = Pickup2.allowManipulationWhenEquipped;
-                            }
+								allowManipulationWhenEquipped = Pickup2.allowManipulationWhenEquipped;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (pickupable != Pickup2.pickupable)
                         {
                             if (!EditMode)
                             {
-                                pickupable = Pickup2.pickupable;
-                            }
+								pickupable = Pickup2.pickupable;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (DisallowTheft != Pickup2.DisallowTheft)
                         {
                             if (!EditMode)
                             {
-                                DisallowTheft = Pickup2.DisallowTheft;
-                            }
+								DisallowTheft = Pickup2.DisallowTheft;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (AutoHold != Pickup2.AutoHold)
                         {
                             if (!EditMode)
                             {
-                                AutoHold = Pickup2.AutoHold;
-                            }
+								AutoHold = Pickup2.AutoHold;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (orientation != Pickup2.orientation)
                         {
                             if (!EditMode)
                             {
-                                orientation = Pickup2.orientation;
-                            }
+								orientation = Pickup2.orientation;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (proximity != Pickup2.proximity)
                         {
                             if (!EditMode)
                             {
-                                proximity = Pickup2.proximity;
-                            }
+								proximity = Pickup2.proximity;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_allowManipulationWhenEquipped != Pickup2.allowManipulationWhenEquipped)
                         {
                             if (!EditMode)
                             {
-                                Original_allowManipulationWhenEquipped = Pickup2.allowManipulationWhenEquipped;
-                            }
+								Original_allowManipulationWhenEquipped = Pickup2.allowManipulationWhenEquipped;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_pickupable != Pickup2.pickupable)
                         {
                             if (!EditMode)
                             {
-                                Original_pickupable = Pickup2.pickupable;
-                            }
+								Original_pickupable = Pickup2.pickupable;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_DisallowTheft != Pickup2.DisallowTheft)
                         {
                             if (!EditMode)
                             {
-                                Original_DisallowTheft = Pickup2.DisallowTheft;
-                            }
+								Original_DisallowTheft = Pickup2.DisallowTheft;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_AutoHold != Pickup2.AutoHold)
                         {
                             if (!EditMode)
                             {
-                                Original_AutoHold = Pickup2.AutoHold;
-                            }
+								Original_AutoHold = Pickup2.AutoHold;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_orientation != Pickup2.orientation)
                         {
                             if (!EditMode)
                             {
-                                Original_orientation = Pickup2.orientation;
-                            }
+								Original_orientation = Pickup2.orientation;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_Proximity != Pickup2.proximity)
                         {
                             if (!EditMode)
                             {
-                                Original_Proximity = Pickup2.proximity;
-                            }
+								Original_Proximity = Pickup2.proximity;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                     }
                     if (Pickup3 != null)
@@ -564,85 +606,97 @@
                         {
                             if (!EditMode)
                             {
-                                allowManipulationWhenEquipped = Pickup3.allowManipulationWhenEquipped;
-                            }
+								allowManipulationWhenEquipped = Pickup3.allowManipulationWhenEquipped;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (pickupable != Pickup3.pickupable)
                         {
                             if (!EditMode)
                             {
-                                pickupable = Pickup3.pickupable;
-                            }
+								pickupable = Pickup3.pickupable;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (DisallowTheft != Pickup3.DisallowTheft)
                         {
                             if (!EditMode)
                             {
-                                DisallowTheft = Pickup3.DisallowTheft;
-                            }
+								DisallowTheft = Pickup3.DisallowTheft;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (AutoHold != Pickup3.AutoHold)
                         {
                             if (!EditMode)
                             {
-                                AutoHold = Pickup3.AutoHold;
-                            }
+								AutoHold = Pickup3.AutoHold;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (orientation != Pickup3.orientation)
                         {
                             if (!EditMode)
                             {
-                                orientation = Pickup3.orientation;
-                            }
+								orientation = Pickup3.orientation;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (proximity != Pickup3.proximity)
                         {
                             if (!EditMode)
                             {
-                                proximity = Pickup3.proximity;
-                            }
+								proximity = Pickup3.proximity;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_allowManipulationWhenEquipped != Pickup3.allowManipulationWhenEquipped)
                         {
                             if (!EditMode)
                             {
-                                Original_allowManipulationWhenEquipped = Pickup3.allowManipulationWhenEquipped;
-                            }
+								Original_allowManipulationWhenEquipped = Pickup3.allowManipulationWhenEquipped;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_pickupable != Pickup3.pickupable)
                         {
                             if (!EditMode)
                             {
-                                Original_pickupable = Pickup3.pickupable;
-                            }
+								Original_pickupable = Pickup3.pickupable;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_DisallowTheft != Pickup3.DisallowTheft)
                         {
                             if (!EditMode)
                             {
-                                Original_DisallowTheft = Pickup3.DisallowTheft;
-                            }
+								Original_DisallowTheft = Pickup3.DisallowTheft;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_AutoHold != Pickup3.AutoHold)
                         {
                             if (!EditMode)
                             {
-                                Original_AutoHold = Pickup3.AutoHold;
-                            }
+								Original_AutoHold = Pickup3.AutoHold;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_orientation != Pickup3.orientation)
                         {
                             if (!EditMode)
                             {
-                                Original_orientation = Pickup3.orientation;
-                            }
+								Original_orientation = Pickup3.orientation;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                         if (Original_Proximity != Pickup3.proximity)
                         {
                             if (!EditMode)
                             {
-                                Original_Proximity = Pickup3.proximity;
-                            }
+								Original_Proximity = Pickup3.proximity;
+								Run_OnOnPickupPropertyChanged();
+							}
                         }
                     }
                 }
@@ -658,8 +712,9 @@
         {
             ModConsole.DebugLog("PickupController Got Destroyed from " + obj.name);
         }
+		// TODO: Remove this and use OnPickupPropertyChanged
 
-        [HideFromIl2Cpp]
+		[HideFromIl2Cpp]
         private void UpdatePickupOwnerBtns()
         {
             if (Tweaker_Object.CurrentSelectedObject == obj)
@@ -697,8 +752,9 @@
                 return Networking.GetOwner(obj).displayName;
             }
         }
+		// TODO: Remove this and use OnPickupPropertyChanged
 
-        [HideFromIl2Cpp]
+		[HideFromIl2Cpp]
         public string CurrentOwnerBtnText
         {
             [HideFromIl2Cpp]
@@ -707,8 +763,9 @@
                 return "Current owner : \n" + CurrentOwner;
             }
         }
+		// TODO: Remove this and use OnPickupPropertyChanged
 
-        [HideFromIl2Cpp]
+		[HideFromIl2Cpp]
         private void UpdatePickupOrientationBtn()
         {
             if (obj != null)
@@ -751,8 +808,9 @@
                 }
             }
         }
+		// TODO: Remove this and use OnPickupPropertyChanged
 
-        [HideFromIl2Cpp]
+		[HideFromIl2Cpp]
         private void UpdateAutoHold()
         {
             if (obj != null)
@@ -795,8 +853,9 @@
                 }
             }
         }
+		// TODO: Remove this and use OnPickupPropertyChanged
 
-        [HideFromIl2Cpp]
+		[HideFromIl2Cpp]
         private void UpdateAutoHoldMode()
         {
             if (obj != null)
@@ -810,8 +869,9 @@
                 }
             }
         }
+		// TODO: Remove this and use OnPickupPropertyChanged
 
-        [HideFromIl2Cpp]
+		[HideFromIl2Cpp]
         private void Updatepickupable()
         {
             if (obj != null)
@@ -825,8 +885,9 @@
                 }
             }
         }
+		// TODO: Remove this and use OnPickupPropertyChanged
 
-        [HideFromIl2Cpp]
+		[HideFromIl2Cpp]
         private void UpdateDisallowTheft()
         {
             if (obj != null)
@@ -840,8 +901,9 @@
                 }
             }
         }
+		// TODO: Remove this and use OnPickupPropertyChanged
 
-        [HideFromIl2Cpp]
+		[HideFromIl2Cpp]
         private void UpdateProximitySlider()
         {
             if (obj != null)
@@ -855,8 +917,9 @@
                 }
             }
         }
+		// TODO: Remove this and use OnPickupPropertyChanged
 
-        [HideFromIl2Cpp]
+		[HideFromIl2Cpp]
         private void UpdateIsHeld()
         {
             if (Tweaker_Object.CurrentSelectedObject == obj)
@@ -883,8 +946,9 @@
                 }
             }
         }
+		// TODO: Remove this and use OnPickupPropertyChanged
 
-        [HideFromIl2Cpp]
+		[HideFromIl2Cpp]
         private void UpdateHeldOwnerBtn()
         {
             if (Tweaker_Object.CurrentSelectedObject == obj)
@@ -911,6 +975,8 @@
                 }
             }
         }
+
+		// NEEDS a listener here in all properties!
 
         [HideFromIl2Cpp]
         internal bool IsHeld
@@ -1015,8 +1081,9 @@
                 return null;
             }
         }
+		// TODO: Remove this and use OnPickupPropertyChanged
 
-        [HideFromIl2Cpp]
+		[HideFromIl2Cpp]
         private string PickupHeldButtonText
         {
             [HideFromIl2Cpp]
@@ -1025,8 +1092,9 @@
                 return IsHeld ? "Held : Yes" : "Held : No";
             }
         }
+		// TODO: Remove this and use OnPickupPropertyChanged
 
-        [HideFromIl2Cpp]
+		[HideFromIl2Cpp]
         private string PickupHolderBtnText
         {
             [HideFromIl2Cpp]
@@ -1035,8 +1103,9 @@
                 return $"Current holder: \n {CurrentObjectHolder}";
             }
         }
+		// TODO: Remove this and use OnPickupPropertyChanged
 
-        [HideFromIl2Cpp]
+		[HideFromIl2Cpp]
         private Color PickupHeldButtonColor
         {
             [HideFromIl2Cpp]
@@ -1046,7 +1115,10 @@
             }
         }
 
-        [HideFromIl2Cpp]
+
+		// TODO: Remove this and use OnPickupPropertyChanged
+
+		[HideFromIl2Cpp]
         private void UpdateEditMode()
         {
             if (Tweaker_Object.CurrentSelectedObject == obj)
@@ -1064,6 +1136,8 @@
             }
         }
 
+
+		// TODO: Remove this and use OnPickupPropertyChanged
         [HideFromIl2Cpp]
         private void UpdateHasPickupComponent()
         {
@@ -1091,7 +1165,26 @@
             }
         }
 
-        private VRC_Pickup Pickup1;
+
+		private void Run_OnOnPickupPropertyChanged()
+		{
+			OnPickupPropertyChanged?.Invoke();
+		}
+		internal void SetOnPickupPropertyChanged(Action action)
+		{
+			OnPickupPropertyChanged += action;
+		}
+		internal void RemoveActionEvents()
+		{
+			OnPickupPropertyChanged = null;
+		}
+
+
+		private event Action? OnPickupPropertyChanged;
+
+
+
+		private VRC_Pickup Pickup1;
         private VRCSDK2.VRC_Pickup Pickup2;
         private VRC.SDK3.Components.VRCPickup Pickup3;
         private GameObject obj = null;
