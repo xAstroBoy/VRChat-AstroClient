@@ -70,6 +70,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Patching\Patch.cs" />
+    <Compile Include="Managers\PatchManager.cs" />
     <Compile Include="Modules\BaseModule_Virtuals.cs" />
     <Compile Include="Modules\BaseModule.cs" />
     <Compile Include="BuildInfo.cs" />
@@ -91,5 +93,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\planet.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

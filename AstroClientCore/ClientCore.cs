@@ -18,6 +18,7 @@
 			ModConsole.Initialize("AstroClient");
 			ModConsole.Log($"Welcome to AstroClient, {GlobalVariables.Version}");
 
+			PatchManager.Initialize();
 			ModuleManager.LoadModules();
 			InitializeOverridables();
 		}
