@@ -262,6 +262,10 @@
                     }
                 }
 
+
+				// Unload and use the Event
+				Run_OnRigidbodyControllerOnUpdate();
+
 				// TODO: Better Updating mechanism . (OnPropertyChanged)
                 if (Tweaker_Object.CurrentSelectedObject == obj)
                 {
@@ -562,14 +566,32 @@
 		{
 			OnRigidBodyPropertyChanged?.Invoke();
 		}
+
+		private void Run_OnRigidbodyControllerOnUpdate()
+		{
+			OnRigidbodyControllerOnUpdate?.Invoke();
+		}
+
+
 		internal void SetRigidBodyPropertyChanged(Action action)
 		{
 			OnRigidBodyPropertyChanged += action;
 		}
+
+		internal void SetOnRigidbodyControllerOnUpdate(Action action)
+		{
+			OnRigidbodyControllerOnUpdate += action;
+		}
+
+
 		internal void RemoveActionEvents()
 		{
 			OnRigidBodyPropertyChanged = null;
+			OnRigidbodyControllerOnUpdate = null;
 		}
+
+
+		private event Action? OnRigidbodyControllerOnUpdate;
 
 
 		private event Action? OnRigidBodyPropertyChanged;

@@ -164,6 +164,8 @@
         {
             try
             {
+
+
 				// TODO: Remove this and use OnPickupPropertyChanged
 				if (Tweaker_Object.CurrentSelectedObject == obj)
                 {
@@ -180,7 +182,10 @@
                     UpdateHasPickupComponent();
                 }
 
-                if (Locked)
+
+				Run_onPickupUpdate();
+
+				if (Locked)
                 {
                     return;
                 }
@@ -1174,13 +1179,27 @@
 		{
 			OnPickupPropertyChanged += action;
 		}
+
+
+		private void Run_onPickupUpdate()
+		{
+			OnPickup_OnUpdate?.Invoke();
+		}
+		internal void SetOnPickup_OnUpdate(Action action)
+		{
+			OnPickup_OnUpdate += action;
+		}
+
+
 		internal void RemoveActionEvents()
 		{
 			OnPickupPropertyChanged = null;
+			OnPickup_OnUpdate = null;
 		}
 
 
 		private event Action? OnPickupPropertyChanged;
+		private event Action? OnPickup_OnUpdate;
 
 
 

@@ -9,19 +9,19 @@ namespace AstroClient.ItemTweakerV2.Submenus
 {
 	public class ConstraintsSubmenu : ObjectSelectorHelper
     {
-		public static void Init_ConstraintsSubmenu(QMTabMenu menu, float x, float y, bool btnHalf)
+		public static void Init_ConstraintsSubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
 		{
 			var ConstraintMenu = new QMNestedButton(menu, x, y, "Constraints", "Item Constraint Editor Menu!", null, null, null, null, btnHalf);
-			Constraint_X_Toggle = new QMToggleButton(ConstraintMenu, 1, 0, "Block X Movement", new Action(() => { CurrentController.AddConstraint(RigidbodyConstraints.FreezePositionX); }), "Unlock X Movement", new Action(() => { CurrentController.RemoveConstraint(RigidbodyConstraints.FreezePositionX); }), "Control Current Object Constraints!", null, null, null, false);
-			Constraint_Y_Toggle = new QMToggleButton(ConstraintMenu, 2, 0, "Block Y Movement", new Action(() => { CurrentController.AddConstraint(RigidbodyConstraints.FreezePositionY); }), "Unlock Y Movement", new Action(() => { CurrentController.RemoveConstraint(RigidbodyConstraints.FreezePositionY); }), "Control Current Object Constraints!", null, null, null, false);
-			Constraint_Z_Toggle = new QMToggleButton(ConstraintMenu, 3, 0, "Block Z Movement", new Action(() => { CurrentController.AddConstraint(RigidbodyConstraints.FreezePositionZ); }), "Unlock Z Movement", new Action(() => { CurrentController.RemoveConstraint(RigidbodyConstraints.FreezePositionZ); }), "Control Current Object Constraints!", null, null, null, false);
-			new QMSingleButton(ConstraintMenu, 4, 0, "Freeze Position", new Action(() => { CurrentController.AddConstraint(RigidbodyConstraints.FreezePosition); }), null, null, null, false);
+			Constraint_X_Toggle = new QMToggleButton(ConstraintMenu, 1, 0, "Block X Movement", new Action(() => { Selector_Utils.GetGameObjectToEdit().AddConstraint(RigidbodyConstraints.FreezePositionX); }), "Unlock X Movement", new Action(() => { Selector_Utils.GetGameObjectToEdit().RemoveConstraint(RigidbodyConstraints.FreezePositionX); }), "Control Current Object Constraints!", null, null, null, false);
+			Constraint_Y_Toggle = new QMToggleButton(ConstraintMenu, 2, 0, "Block Y Movement", new Action(() => { Selector_Utils.GetGameObjectToEdit().AddConstraint(RigidbodyConstraints.FreezePositionY); }), "Unlock Y Movement", new Action(() => { Selector_Utils.GetGameObjectToEdit().RemoveConstraint(RigidbodyConstraints.FreezePositionY); }), "Control Current Object Constraints!", null, null, null, false);
+			Constraint_Z_Toggle = new QMToggleButton(ConstraintMenu, 3, 0, "Block Z Movement", new Action(() => { Selector_Utils.GetGameObjectToEdit().AddConstraint(RigidbodyConstraints.FreezePositionZ); }), "Unlock Z Movement", new Action(() => { Selector_Utils.GetGameObjectToEdit().RemoveConstraint(RigidbodyConstraints.FreezePositionZ); }), "Control Current Object Constraints!", null, null, null, false);
+			new QMSingleButton(ConstraintMenu, 4, 0, "Freeze Position", new Action(() => { Selector_Utils.GetGameObjectToEdit().AddConstraint(RigidbodyConstraints.FreezePosition); }), null, null, null, false);
 
-			Constraint_Rot_X_Toggle = new QMToggleButton(ConstraintMenu, 1, 1, "Block X Rotation", new Action(() => { CurrentController.AddConstraint(RigidbodyConstraints.FreezeRotationX); }), "Unlock X Rotation", new Action(() => { CurrentController.RemoveConstraint(RigidbodyConstraints.FreezeRotationX); }), "Control Current Object Constraints!", null, null, null, false);
-			Constraint_Rot_Y_Toggle = new QMToggleButton(ConstraintMenu, 2, 1, "Block Y Rotation", new Action(() => { CurrentController.AddConstraint(RigidbodyConstraints.FreezeRotationY); }), "Unlock Y Rotation", new Action(() => { CurrentController.RemoveConstraint(RigidbodyConstraints.FreezeRotationY); }), "Control Current Object Constraints!", null, null, null, false);
-			Constraint_Rot_Z_Toggle = new QMToggleButton(ConstraintMenu, 3, 1, "Block Z Rotation", new Action(() => { CurrentController.AddConstraint(RigidbodyConstraints.FreezeRotationZ); }), "Unlock Z Rotation", new Action(() => { CurrentController.RemoveConstraint(RigidbodyConstraints.FreezeRotationZ); }), "Control Current Object Constraints!", null, null, null, false);
-			new QMSingleButton(ConstraintMenu, 4, 1, "Freeze Rotation", new Action(() => { CurrentController.AddConstraint(RigidbodyConstraints.FreezeRotation); }), null, null, null, false);
-			new QMSingleButton(ConstraintMenu, 1, 2, "Remove all Object Constraints", new Action(() => { CurrentController.Remove_All_Constraints(); }), "Delete all object Constraints", null, null);
+			Constraint_Rot_X_Toggle = new QMToggleButton(ConstraintMenu, 1, 1, "Block X Rotation", new Action(() => { Selector_Utils.GetGameObjectToEdit().AddConstraint(RigidbodyConstraints.FreezeRotationX); }), "Unlock X Rotation", new Action(() => { Selector_Utils.GetGameObjectToEdit().RemoveConstraint(RigidbodyConstraints.FreezeRotationX); }), "Control Current Object Constraints!", null, null, null, false);
+			Constraint_Rot_Y_Toggle = new QMToggleButton(ConstraintMenu, 2, 1, "Block Y Rotation", new Action(() => { Selector_Utils.GetGameObjectToEdit().AddConstraint(RigidbodyConstraints.FreezeRotationY); }), "Unlock Y Rotation", new Action(() => { Selector_Utils.GetGameObjectToEdit().RemoveConstraint(RigidbodyConstraints.FreezeRotationY); }), "Control Current Object Constraints!", null, null, null, false);
+			Constraint_Rot_Z_Toggle = new QMToggleButton(ConstraintMenu, 3, 1, "Block Z Rotation", new Action(() => { Selector_Utils.GetGameObjectToEdit().AddConstraint(RigidbodyConstraints.FreezeRotationZ); }), "Unlock Z Rotation", new Action(() => { Selector_Utils.GetGameObjectToEdit().RemoveConstraint(RigidbodyConstraints.FreezeRotationZ); }), "Control Current Object Constraints!", null, null, null, false);
+			new QMSingleButton(ConstraintMenu, 4, 1, "Freeze Rotation", new Action(() => { Selector_Utils.GetGameObjectToEdit().AddConstraint(RigidbodyConstraints.FreezeRotation); }), null, null, null, false);
+			new QMSingleButton(ConstraintMenu, 1, 2, "Remove all Object Constraints", new Action(() => { Selector_Utils.GetGameObjectToEdit().Remove_All_Constraints(); }), "Delete all object Constraints", null, null);
 		}
 
 
@@ -156,8 +156,6 @@ namespace AstroClient.ItemTweakerV2.Submenus
 			if (Constraint_Z_Toggle != null) { Constraint_Z_Toggle.SetToggleState(status); }
 		}
 
-
-		private static RigidBodyController? CurrentController;
 
 		private static QMToggleButton Constraint_Rot_X_Toggle;
 		private static QMToggleButton Constraint_Rot_Y_Toggle;

@@ -327,12 +327,12 @@
             }
             set
             {
-                DetectiveGuns.SetGravity(value);
-                SilencedGuns.SetGravity(value);
-                ShotGuns.SetGravity(value);
-                BearTraps.SetGravity(value);
-                Grenades.SetGravity(value);
-                Knifes.SetGravity(value);
+                DetectiveGuns.Set_Gravity(value);
+                SilencedGuns.Set_Gravity(value);
+                ShotGuns.Set_Gravity(value);
+                BearTraps.Set_Gravity(value);
+                Grenades.Set_Gravity(value);
+                Knifes.Set_Gravity(value);
                 if (ToggleGravityMode != null)
                 {
                     ToggleGravityMode.SetToggleState(value);

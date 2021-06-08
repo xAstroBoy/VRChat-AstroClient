@@ -12,12 +12,18 @@ namespace AstroClient.ItemTweakerV2.Selector
 		{
 			Object_Selector.Event_On_New_GameObject_Selected += Internal_On_New_GameObject_Selected;
 			Object_Selector.Event_On_Old_GameObject_Removed += Internal_On_Old_GameObject_Removed;
+			
 			ListenerHandler.Event_OnSelectedObject_Enabled += Internal_OnSelectedObject_Enabled;
 			ListenerHandler.Event_OnSelectedObject_Disabled += Internal_OnSelectedObject_Disabled;
 			ListenerHandler.Event_OnSelectedObject_Destroyed += Internal_OnSelectedObject_Destroyed;
+
 			PickupControllerHandler.Event_OnPickupControllerSelected += Internal_OnPickupControllerSelected;
+			PickupControllerHandler.Event_OnPickupControllerPropertyChanged += Internal_OnPickupController_PropertyChanged;
+			PickupControllerHandler.Event_OnPickupController_OnUpdate += Internal_OnPickupController_OnUpdate;
+
 			RigidBodyControllerHandler.Event_OnRigidBodyControllerSelected += Internal_OnRigidBodyControllerSelected;
 			RigidBodyControllerHandler.Event_OnRigidBodyControllerPropertyChanged += Internal_OnRigidBodyControllerSelected;
+			RigidBodyControllerHandler.Event_OnRigidBodyController_OnUpdate += Internal_OnRigidBodyController_OnUpdate;
 
 			// TODO : Figure a way to add Event and Getter Listeners as well for certain Components.
 		}
@@ -56,7 +62,10 @@ namespace AstroClient.ItemTweakerV2.Selector
 		{
 			OnPickupController_PropertyChanged(e.control);
 		}
-
+		private void Internal_OnPickupController_OnUpdate(object sender, OnPickupControllerArgs e)
+		{
+			OnPickupController_OnUpdate(e.control);
+		}
 
 		private void Internal_OnRigidBodyControllerSelected(object sender, OnRigidBodyControllerArgs e)
 		{
@@ -69,6 +78,10 @@ namespace AstroClient.ItemTweakerV2.Selector
 		}
 
 
+		private void Internal_OnRigidBodyController_OnUpdate(object sender, OnRigidBodyControllerArgs e)
+		{
+			OnRigidBodyController_OnUpdate(e.control);
+		}
 
 
 		public virtual void On_Old_GameObject_Removed(GameObject obj)
@@ -98,13 +111,19 @@ namespace AstroClient.ItemTweakerV2.Selector
 		public virtual void OnRigidBodyController_PropertyChanged(RigidBodyController control)
 		{
 		}
-
+		public virtual void OnRigidBodyController_OnUpdate(RigidBodyController control)
+		{
+		}
 
 		public virtual void OnPickupControllerSelected(PickupController control)
 		{
 		}
 
 		public virtual void OnPickupController_PropertyChanged(PickupController control)
+		{
+		}
+
+		public virtual void OnPickupController_OnUpdate(PickupController control)
 		{
 		}
 	}

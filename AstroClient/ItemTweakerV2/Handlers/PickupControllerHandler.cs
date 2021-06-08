@@ -11,7 +11,9 @@
 	{
 		public static event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerSelected;
 
-		public static event EventHandler<OnRigidBodyControllerArgs> Event_OnPickupControllerPropertyChanged;
+		public static event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerPropertyChanged;
+
+		public static event EventHandler<OnPickupControllerArgs> Event_OnPickupController_OnUpdate;
 
 		public override void On_New_GameObject_Selected(GameObject obj)
 		{
@@ -22,6 +24,15 @@
 				{
 					Event_OnPickupControllerSelected?.Invoke(null, new OnPickupControllerArgs(PickupController));
 				}
+				PickupController.SetOnPickupPropertyChanged(() =>
+				{
+				Event_OnPickupControllerPropertyChanged?.Invoke(null, new OnPickupControllerArgs(PickupController)); // Dunno if it works.
+				});
+
+				PickupController.SetOnPickup_OnUpdate(() =>
+				{
+					Event_OnPickupController_OnUpdate?.Invoke(null, new OnPickupControllerArgs(PickupController)); // Dunno if it works.
+				});
 			}
 		}
 

@@ -87,12 +87,12 @@
             }
         }
 
-        public static void SetMurderItemsGravity(bool ShouldFloat)
+        public static void SetMurderItemsGravity(bool useGravity)
         {
-            Clues.SetGravity(ShouldFloat);
-            DetectiveGuns.SetGravity(ShouldFloat);
-            SilencedGuns.SetGravity(ShouldFloat);
-            Knifes.SetGravity(ShouldFloat);
+            Clues.Set_Gravity(useGravity);
+            DetectiveGuns.Set_Gravity(useGravity);
+            SilencedGuns.Set_Gravity(useGravity);
+            Knifes.Set_Gravity(useGravity);
         }
 
         public static void AllowTheft()

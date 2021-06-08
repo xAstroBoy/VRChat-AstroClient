@@ -53,7 +53,7 @@
             SubMenuTeleportToTarget = new QMSingleButton(menu, -1, 2.5f, GetTeleportToTargetText, new Action(() => { Tweaker_Object.GetGameObjectToEdit().TeleportToTarget(); }), GetTeleportToTargetText, null, null);
             SubMenuTeleportToTarget.SetResizeTextForBestFit(true);
 
-            new QMSingleButton(menu, 2, 1.5f, "Restore Rigidbody", new Action(() => { Tweaker_Object.GetGameObjectToEdit().RestoreOriginalSettings(); }), "Restore Default RigidBody Config.", null, null, true);
+            new QMSingleButton(menu, 2, 1.5f, "Restore Rigidbody", new Action(() => { Tweaker_Object.GetGameObjectToEdit().RestoreOriginalBody(); }), "Restore Default RigidBody Config.", null, null, true);
             new QMSingleButton(menu, 1, 1.5f, "Remove Add-ons", new Action(KillCustomComponents), "Kill All Custom Add-ons.", null, null, true);
             new QMSingleButton(menu, 2, 2f, "Teleport to Object", new Action(() => { GameObjectUtils.TeleportPlayerToPickup(Tweaker_Object.GetGameObjectToEdit()); }), "Teleport to object.", null, null, true);
             new QMSingleButton(menu, 2, 2.5f, "Respawn Object", new Action(() => { GameObjectUtils.RestoreOriginalLocation(Tweaker_Object.GetGameObjectToEdit(), false); }), "Reset Object Position.", null, null, true);
@@ -64,8 +64,8 @@
             new QMSingleButton(menu, 3, 0, "Spawn Clone", new Action(() => { Cloner.ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }), "Instantiates a copy of The selected object.", null, null, true);
             new QMSingleButton(menu, 3, 0.5f, "Kill Clones", new Action(() => { Cloner.ObjectCloner.ClonedObjectsDeleter(); }), "Removes All Cloned Objects.", null, null, true);
 
-            Object_no_Gravity = new QMSingleButton(menu, 1, 0, "No Gravity", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetGravity(false); }), "Make the object lose gravity!", null, null, true);
-            Object_Gravity = new QMSingleButton(menu, 1, 0.5f, "World Gravity", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetGravity(true); }), "Make the object affected by gravity!", null, null, true);
+            Object_no_Gravity = new QMSingleButton(menu, 1, 0, "No Gravity", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Set_Gravity(false); }), "Make the object lose gravity!", null, null, true);
+            Object_Gravity = new QMSingleButton(menu, 1, 0.5f, "World Gravity", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Set_Gravity(true); }), "Make the object affected by gravity!", null, null, true);
             ScaleSubMenuButtons(menu, 1, 1, true);
 
             var tmp = new QMSingleToggleButton(menu, 1, 2, "Selected Item ESP : ON", () =>
@@ -530,10 +530,10 @@
         public static void PhysicSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var PhysicEditor = new QMNestedButton(menu, x, y, "Physics", "Item Physics Editor Menu!", null, null, null, null, btnHalf);
-            new QMSingleButton(PhysicEditor, 1, 0, "Enable Collisions", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetDetectCollision(true); }), "Make the object affected by colliders!", null, null, true);
-            new QMSingleButton(PhysicEditor, 1, 0.5f, "Disable Collisions", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetDetectCollision(false); }), "Make the object unaffected by colliders!", null, null, true);
-            new QMSingleButton(PhysicEditor, 2, 0, "Enable Kinematic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetKinematic(true); }), "Make the object Kinematic!", null, null, true);
-            new QMSingleButton(PhysicEditor, 2, 0.5f, "Disable Kinematic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SetKinematic(false); }), "Disables Kinematic!", null, null, true);
+            new QMSingleButton(PhysicEditor, 1, 0, "Enable Collisions", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Set_DetectCollisions(true); }), "Make the object affected by colliders!", null, null, true);
+            new QMSingleButton(PhysicEditor, 1, 0.5f, "Disable Collisions", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Set_DetectCollisions(false); }), "Make the object unaffected by colliders!", null, null, true);
+            new QMSingleButton(PhysicEditor, 2, 0, "Enable Kinematic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Set_isKinematic(true); }), "Make the object Kinematic!", null, null, true);
+            new QMSingleButton(PhysicEditor, 2, 0.5f, "Disable Kinematic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Set_isKinematic(false); }), "Disables Kinematic!", null, null, true);
             new QMSingleButton(PhysicEditor, 3, 0f, "Make It bouncy", new Action(() =>
             {
                 var item = Tweaker_Object.GetGameObjectToEdit();
@@ -594,7 +594,7 @@
             Forces.Constraint_Rot_Z_Toggle = new QMToggleButton(ConstraintMenu, 3, 1, "Block Z Rotation", new Action(() => { Tweaker_Object.GetGameObjectToEdit().AddConstraint(RigidbodyConstraints.FreezeRotationZ); }), "Unlock Z Rotation", new Action(() => { Tweaker_Object.GetGameObjectToEdit().RemoveConstraint(RigidbodyConstraints.FreezeRotationZ); }), "Control Current Object Constraints!", null, null, null, false);
             new QMSingleButton(ConstraintMenu, 4, 1, "Freeze Rotation", new Action(() => { Tweaker_Object.GetGameObjectToEdit().AddConstraint(RigidbodyConstraints.FreezeRotation); }), null, null, null, false);
 
-            new QMSingleButton(ConstraintMenu, 1, 2, "Remove all Object Constraints", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Remove_all_constraints(); }), "Delete all object Constraints", null, null);
+            new QMSingleButton(ConstraintMenu, 1, 2, "Remove all Object Constraints", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Remove_All_Constraints(); }), "Delete all object Constraints", null, null);
         }
 
         public static void ForceSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
