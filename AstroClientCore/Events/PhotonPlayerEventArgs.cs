@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroClientCore
 {
 	using Photon.Realtime;
 	using System;

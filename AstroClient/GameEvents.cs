@@ -2,6 +2,7 @@
 {
 	using AstroClient.Cheetos;
 	using AstroClient.Startup.Hooks;
+	using AstroClientCore;
 	using System;
 	using System.Collections.Generic;
 	using UnityEngine;

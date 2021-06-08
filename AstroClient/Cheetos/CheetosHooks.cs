@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Cheetos
 {
+	using AstroClientCore;
 	#region Imports
 
 	using AstroLibrary.Console;
