@@ -21,9 +21,6 @@
 		public static void Init_TweakerV2Main()
 		{
 			QMTabMenu menu = new QMTabMenu(3f, "Item Tweaker", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.box.png"));
-
-
-
 			PhysicsSubmenu.Init_PhysicSubMenu(menu, 2, 0, true);
 			PickupSubmenu.Init_PickupSubMenu(menu, 2, 0.5f, true);
 			ScaleSubmenu.Init_ScaleSubMenu(menu, 2, 1, true);
@@ -58,12 +55,7 @@
 			TeleportToTarget = new QMSingleButton(menu, -1, 2.5f, Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.Component_Get_SelectedObject, TargetSelector.CurrentTarget), new Action(() => { Tweaker_Object.GetGameObjectToEdit().TeleportToTarget(); }), Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.Component_Get_SelectedObject, TargetSelector.CurrentTarget), null, null);
 			TeleportToTarget.SetResizeTextForBestFit(true);
 
-
-
-
-
 			new QMSingleButton(menu, 6, 2f, "DANGER : Destroy item.", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DestroyObject(); }), "Destroys Object , You need to reload the world to restore it back.", null, Color.red, true);
-
 
 			ProtectionInteractor = new QMSingleToggleButton(menu, 6, 1, "Interaction block ON", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_PreventOthersFromGrabbing(true); }, "Interaction block OFF", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_PreventOthersFromGrabbing(false); }, "Prevents Others from interacting with the object", Color.green, Color.red, null, false, true);
 			new QMSingleButton(menu, 6, 1.5f, "Drop Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().TakeOwnership(); }), "Make Whatever Player, drop the object.", null, Color.cyan, true);

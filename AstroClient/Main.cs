@@ -8,6 +8,7 @@
 	using AstroClient.Components;
 	using AstroClient.Experiments;
 	using AstroClient.GameObjectDebug;
+	using AstroClient.ItemTweakerV2;
 	using AstroClient.Startup.Buttons;
 	using AstroClient.variables;
 	using AstroClient.WorldLights;
@@ -194,13 +195,20 @@
 
         public override void VRChat_OnUiManagerInit()
         {
-            if (KeyManager.IsAuthed)
-            {
-                QuickMenuUtils.SetQuickMenuCollider(5, 5);
-                UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
+			if (KeyManager.IsAuthed)
+			{
+				QuickMenuUtils.SetQuickMenuCollider(5, 5);
+				UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
 
-                InitMainsButtons();
-				ItemTweakerV2.TweakerV2Main.Init_TweakerV2Main();
+				InitMainsButtons();
+				try
+				{
+				TweakerV2Main.Init_TweakerV2Main();
+				}
+				catch(Exception e)
+				{
+					ModConsole.ErrorExc(e);
+				}
                 new QMSingleButton("ShortcutMenu", 5, 3, "GameObject Toggler", new Action(() => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }                 ), "Advanced GameObject Toggler", null, null, true);
                 CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 1.5f, true);
 

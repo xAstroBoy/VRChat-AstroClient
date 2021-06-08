@@ -41,7 +41,7 @@
 
 			QuickMenuHooks.Event_OnPlayerSelected += Internal_OnPlayerSelected;
 
-			TargetSelector.TargetSelector.Event_OnTargetSet += Internal_OnTargetSet;
+			TargetSelector.Event_OnTargetSet += Internal_OnTargetSet;
         }
 
         private void Internal_OnApplicationStart(object sender, EventArgs e)
