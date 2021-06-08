@@ -15,7 +15,7 @@
 
 		public override void ExecutePriorityPatches()
 		{
-			HookSelectedPlayer();
+			//HookSelectedPlayer();
 		}
 
 		private void HookSelectedPlayer()

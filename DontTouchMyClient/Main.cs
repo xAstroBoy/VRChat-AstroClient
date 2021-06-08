@@ -9,6 +9,7 @@
         public override void OnPreInitialization() // Runs before Game Initialization.
         {
 			ModConsole.Initialize("DontTouchMyClient");
+			ModConsole.DebugMode = true;
 			Patching.StartDefenses();
         }
         public override void OnGUI()

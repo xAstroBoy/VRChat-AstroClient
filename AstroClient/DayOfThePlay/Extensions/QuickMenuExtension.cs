@@ -1,7 +1,5 @@
 ﻿namespace DayClientML2.Utility.Extensions
 {
-	using AstroClient;
-	using System;
 	using Transmtn.DTO.Notifications;
 	using UnityEngine;
 

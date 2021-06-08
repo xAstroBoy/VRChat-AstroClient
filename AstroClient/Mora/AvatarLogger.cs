@@ -25,19 +25,19 @@
 
         public override void OnApplicationStart()
         {
-            Directory.CreateDirectory("AstroClient\\AvatarLog");
-            if (!File.Exists(PublicAvatarFile))
-                File.AppendAllText(PublicAvatarFile, $"{Environment.NewLine}{Environment.NewLine}");
+            //Directory.CreateDirectory("AstroClient\\AvatarLog");
+            //if (!File.Exists(PublicAvatarFile))
+            //    File.AppendAllText(PublicAvatarFile, $"{Environment.NewLine}{Environment.NewLine}");
 
-            foreach (var line in File.ReadAllLines(PublicAvatarFile))
-                if (line.Contains("Avatar ID"))
-                    _avatarIDs += line.Replace("Avatar ID:", "");
+            //foreach (var line in File.ReadAllLines(PublicAvatarFile))
+            //    if (line.Contains("Avatar ID"))
+            //        _avatarIDs += line.Replace("Avatar ID:", "");
 
-            var patchMan = HarmonyInstance.Create("nya");
-            patchMan.Patch(
-                typeof(AssetBundleDownloadManager).GetMethods().FirstOrDefault(mi =>
-                    mi.GetParameters().Length == 1 && mi.GetParameters().First().ParameterType == typeof(ApiAvatar) &&
-                    mi.ReturnType == typeof(void)), GetPatch("ApiAvatarDownloadPatch"));
+            //var patchMan = HarmonyInstance.Create("nya");
+            //patchMan.Patch(
+            //    typeof(AssetBundleDownloadManager).GetMethods().FirstOrDefault(mi =>
+            //        mi.GetParameters().Length == 1 && mi.GetParameters().First().ParameterType == typeof(ApiAvatar) &&
+            //        mi.ReturnType == typeof(void)), GetPatch("ApiAvatarDownloadPatch"));
         }
 
         private static bool ApiAvatarDownloadPatch(ApiAvatar __0)

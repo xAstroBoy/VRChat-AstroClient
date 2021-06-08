@@ -70,7 +70,7 @@
             if (ModConsole.DebugMode != ConfigManager.General.DebugLog)
             {
                 ModConsole.DebugMode = ConfigManager.General.DebugLog;
-            }
+			}
 #if OFFLINE
 			KeyManager.IsAuthed = true;
 			Bools.IsDeveloper = true;
@@ -78,6 +78,7 @@
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
+			ModConsole.Log("About to connect..");
             AstroNetworkClient.Initialize();
 
             while (!NetworkingManager.IsReady)
@@ -98,6 +99,8 @@
             }
             else
             {
+				InitializeOverridables();
+
                 try
                 {
                     CheetosConsole.Console.WriteFigletWithGradient(CheetosConsole.FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);
@@ -107,8 +110,6 @@
                     ModConsole.Error("Failed To generate Gradient, the Embeded file doesn't exist!");
                     ModConsole.ErrorExc(e);
                 }
-
-                InitializeOverridables();
                 //Event_OnApplicationStart?.Invoke(this, new EventArgs());
             }
         }

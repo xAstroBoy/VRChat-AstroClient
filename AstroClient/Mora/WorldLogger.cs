@@ -23,13 +23,13 @@
 
 		public override void OnApplicationStart()
 		{
-			Directory.CreateDirectory("AstroClient\\WorldLog");
-			if (!File.Exists(PublicWorldFile))
-				File.AppendAllText(PublicWorldFile, $"{Environment.NewLine}{Environment.NewLine}");
+			//Directory.CreateDirectory("AstroClient\\WorldLog");
+			//if (!File.Exists(PublicWorldFile))
+			//	File.AppendAllText(PublicWorldFile, $"{Environment.NewLine}{Environment.NewLine}");
 
-			foreach (var line in File.ReadAllLines(PublicWorldFile))
-				if (line.Contains("World ID"))
-					_WorldsIDs += line.Replace("World ID:", "");
+			//foreach (var line in File.ReadAllLines(PublicWorldFile))
+			//	if (line.Contains("World ID"))
+			//		_WorldsIDs += line.Replace("World ID:", "");
 		}
 
 		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)  //ApiWorldDownloadPatch(ApiWorld __0) //__0
