@@ -244,7 +244,6 @@
     <Compile Include="Startup\EventArgs\OnTeleportRPCArgs.cs" />
     <Compile Include="Startup\EventArgs\OnAvatarSpawnArgs.cs" />
     <Compile Include="Startup\EventArgs\OnWorldRevealArgs.cs" />
-    <Compile Include="Startup\EventArgs\PhotonPlayerEventArgs.cs" />
     <Compile Include="Startup\EventArgs\PlayerEventArgs.cs" />
     <Compile Include="Startup\EventArgs\RayCastEventArgs.cs" />
     <Compile Include="Startup\EventArgs\SpawnEmojiArgs.cs" />

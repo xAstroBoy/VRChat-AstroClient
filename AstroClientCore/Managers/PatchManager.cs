@@ -3,18 +3,12 @@
 	using AstroLibrary.Console;
 	using Harmony;
 	using System.Collections.Generic;
-	using System.Reflection;
 
 	public static class PatchManager
 	{
 		private static HarmonyInstance harmony;
 
 		private static List<Patching.Patch> patches = new List<Patching.Patch>();
-
-		public static HarmonyMethod GetPatch<T>(string name)
-		{
-			return new HarmonyMethod(typeof(T).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
-		}
 
 		public static void Initialize()
 		{
@@ -32,6 +26,7 @@
 
 		public static void DoPatches()
 		{
+			ModConsole.Log($"[PatchManager] Applying {patches.Count} Patches..");
 			foreach (var patch in patches)
 			{
 				patch.DoPatch();
