@@ -11,7 +11,9 @@
 
 	public class QMToggleButton : QMButtonBase
     {
-        public GameObject btnOn;
+
+		private bool State { get; set; }
+		public GameObject btnOn;
         public GameObject btnOff;
         public List<QMButtonBase> showWhenOn = new List<QMButtonBase>();
         public List<QMButtonBase> hideWhenOn = new List<QMButtonBase>();
@@ -38,7 +40,7 @@
             InitButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, shouldSaveInConfig, defaultPosition);
         }
 
-        private void InitButton(float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConf = true, bool defaultPosition = false)
+        private void InitButton(float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConf = true, bool defaultState = false)
         {
             btnType = "ToggleButton";
             button = UnityEngine.Object.Instantiate(QuickMenuStuff.ToggleButtonTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform.Find(btnQMLoc), true);
@@ -91,10 +93,8 @@
 
             SetActive(true);
             shouldSaveInConfig = shouldSaveInConf;
-            if (defaultPosition == true)// && !ButtonSettings.Contains(this))
-            {
-                SetToggleState(true, false);
-            }
+			State = defaultState;
+            SetToggleState(defaultState, false);
 
             QMButtonAPI.allToggleButtons.Add(this);
             //ButtonSettings.InitToggle(this);
@@ -124,29 +124,34 @@
                 OrigText = buttonTextColorOff;
         }
 
-        public void SetAction(Action buttonOnAction, Action buttonOffAction)
-        {
-            btnOnAction = buttonOnAction;
-            btnOffAction = buttonOffAction;
+		public void SetAction(Action buttonONAction, Action buttonOFFAction)
+		{
+			button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
+			if (buttonONAction != null && buttonOFFAction != null)
+				button.GetComponent<Button>().onClick.AddListener(new Action(() =>
+				{
+					State = !State;
+					if (State)
+					{
+						SetToggleState(true, true);
+					}
+					else
+					{
+						SetToggleState(false, true);
+					}
+				}));
+		}
 
-            button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
-            button.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>((Action)(() =>
-          {
-              if (btnOn.activeSelf)
-              {
-                  SetToggleState(false, true);
-              }
-              else
-              {
-                  SetToggleState(true, true);
-              }
-          })));
-        }
 
-        public void SetToggleState(bool toggleOn, bool shouldInvoke = false)
+		public bool GetToggleState()
+		{
+			return State;
+		}
+		public void SetToggleState(bool toggleOn, bool shouldInvoke = false)
         {
             btnOn.SetActive(toggleOn);
             btnOff.SetActive(!toggleOn);
+			State = toggleOn;
             try
             {
                 if (toggleOn && shouldInvoke)
@@ -163,9 +168,6 @@
                 }
             }
             catch { }
-            if (shouldSaveInConfig)
-            {
-            }
         }
 
         public string GetOnText()

@@ -17,6 +17,7 @@ namespace AstroClient.ItemTweakerV2.Selector
 			ListenerHandler.Event_OnSelectedObject_Destroyed += Internal_OnSelectedObject_Destroyed;
 			PickupControllerHandler.Event_OnPickupControllerSelected += Internal_OnPickupControllerSelected;
 			RigidBodyControllerHandler.Event_OnRigidBodyControllerSelected += Internal_OnRigidBodyControllerSelected;
+			RigidBodyControllerHandler.Event_OnRigidBodyControllerPropertyChanged += Internal_OnRigidBodyControllerSelected;
 
 			// TODO : Figure a way to add Event and Getter Listeners as well for certain Components.
 		}
@@ -51,10 +52,24 @@ namespace AstroClient.ItemTweakerV2.Selector
 			OnPickupControllerSelected(e.control);
 		}
 
+		private void Internal_OnPickupController_PropertyChanged(object sender, OnPickupControllerArgs e)
+		{
+			OnPickupController_PropertyChanged(e.control);
+		}
+
+
 		private void Internal_OnRigidBodyControllerSelected(object sender, OnRigidBodyControllerArgs e)
 		{
 			OnRigidBodyControllerSelected(e.control);
 		}
+
+		private void Internal_OnRigidBodyController_PropertyChanged(object sender, OnRigidBodyControllerArgs e)
+		{
+			OnRigidBodyController_PropertyChanged(e.control);
+		}
+
+
+
 
 		public virtual void On_Old_GameObject_Removed(GameObject obj)
 		{
@@ -80,7 +95,16 @@ namespace AstroClient.ItemTweakerV2.Selector
 		{
 		}
 
+		public virtual void OnRigidBodyController_PropertyChanged(RigidBodyController control)
+		{
+		}
+
+
 		public virtual void OnPickupControllerSelected(PickupController control)
+		{
+		}
+
+		public virtual void OnPickupController_PropertyChanged(PickupController control)
 		{
 		}
 	}

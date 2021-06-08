@@ -45,7 +45,7 @@
             InitButton(btnXLocation, btnYLocation, btnONText, btnONAction, btnOffText, btnOFFction, btnToolTip, btnOnColor, btnOFFColor, btnBackgroundColor, position, btnHalf);
         }
 
-        private void InitButton(float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFAction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool position = false, bool btnHalf = false)
+        private void InitButton(float btnXLocation, float btnYLocation, string btnONText, Action btnONAction, string btnOffText, Action btnOFFAction, string btnToolTip, Color? btnOnColor = null, Color? btnOFFColor = null, Color? btnBackgroundColor = null, bool defaultstate = false, bool btnHalf = false)
         {
             btnType = "SingleToggleButton";
             button = UnityEngine.Object.Instantiate(QuickMenuStuff.SingleButtonTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform.Find(btnQMLoc), true);
@@ -53,21 +53,21 @@
             initShift[0] = -1;
             initShift[1] = 0;
             SetLocation(btnXLocation, btnYLocation);
-            SetButtonText(position ? btnONText : btnOffText);
+            SetButtonText(defaultstate ? btnONText : btnOffText);
             OnText = btnONText;
             OffText = btnOffText;
             SetToolTip(btnToolTip);
             SetAction(btnONAction, btnOFFAction);
             OnAction = btnONAction;
             OffAction = btnOFFAction;
-            State = position;
+            State = defaultstate;
 
             if (btnBackgroundColor != null)
                 SetBackgroundColor((Color)btnBackgroundColor);
             else
                 OrigBackground = button.GetComponentInChildren<Image>().color;
 
-            SetTextColor(position ? (Color)btnOnColor : (Color)btnOFFColor);
+            SetTextColor(defaultstate ? (Color)btnOnColor : (Color)btnOFFColor);
             //OrigText = button.GetComponentInChildren<Text>().color;
             OnColor = btnOnColor == null ? Color.magenta : (Color)btnOnColor;
             OffColor = btnOFFColor == null ? Color.white : (Color)btnOFFColor;
@@ -131,12 +131,17 @@
             SetTextColor(buttonTextColorOn, save);
         }
 
-        public override void SetTextColor(Color buttonTextColor, bool save = true)
-        {
-            button.GetComponentInChildren<Text>().color = buttonTextColor;
-            //if (save)
-            //OrigText = (Color)buttonTextColor;
-        }
+		public override void SetTextColor(Color buttonTextColor, bool save = true)
+		{
+			button.GetComponentInChildren<Text>().color = buttonTextColor;
+			//if (save)
+			//OrigText = (Color)buttonTextColor;
+		}
+
+		public bool GetToggleState()
+		{
+			return State;
+		}
 
         public void SetToggleState(bool toggleOn, bool shouldInvoke = false)
         {

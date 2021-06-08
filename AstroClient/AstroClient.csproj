@@ -226,7 +226,7 @@
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnPickupControllerArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\SelectedObjectArgs.cs" />
     <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
-    <Compile Include="ItemTweakerV2\Submenus\Physic\Physic.cs" />
+    <Compile Include="ItemTweakerV2\Submenus\Physic\PhysicsSubmenu.cs" />
     <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Lights\LightControl.cs" />
     <Compile Include="Buttons\MovementMenu.cs" />
@@ -1041,6 +1041,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ItemTweakerV2\Selector\SelectorExtensions\" />
+    <Folder Include="ItemTweakerV2\Submenus\Components\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\repair.png" />
