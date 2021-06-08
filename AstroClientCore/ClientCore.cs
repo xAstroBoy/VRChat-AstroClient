@@ -26,15 +26,11 @@
 		{
 			foreach (var assembly in ModuleManager.Assemblies)
 			{
-				foreach (var type in assembly.GetTypes())
+				foreach (var type in assembly.GetTypes().Where(t => t.BaseType.Equals(typeof(GameEvents))))
 				{
-					var btype = type.BaseType;
-					if (btype != null && btype.Equals(typeof(GameEvents)))
-					{
-						GameEvents component = assembly.CreateInstance(type.ToString(), true) as GameEvents;
-						component.OnApplicationStart();
-						ModConsole.Log($"GameEvent Component Loaded: {type}");
-					}
+					GameEvents component = assembly.CreateInstance(type.ToString(), true) as GameEvents;
+					component.OnApplicationStart();
+					ModConsole.Log($"GameEvent Component Loaded: {type}");
 				}
 			}
 		}
