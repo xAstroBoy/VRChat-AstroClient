@@ -92,6 +92,7 @@
     <Compile Include="AntiCrash\AntiCrashUtils.cs" />
     <Compile Include="AntiCrash\AntiCrash_Lists.cs" />
     <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />
+    <Compile Include="AstroExtensions\Button_strings_ext.cs" />
     <Compile Include="AstroExtensions\Buttons_ext.cs" />
     <Compile Include="AstroExtensions\Click_ext.cs" />
     <Compile Include="AstroExtensions\Coding_ext.cs" />
@@ -223,8 +224,9 @@
     <Compile Include="ItemTweakerV2\Selector\Tweaker_Selector.cs" />
     <Compile Include="ItemTweakerV2\Selector\Tweaker_Events.cs" />
     <Compile Include="ItemTweakerV2\Selector\Tweaker_Object.cs" />
+    <Compile Include="ItemTweakerV2\Submenus\Spawner\SpawnerSubmenu.cs" />
     <Compile Include="ItemTweakerV2\TweakerV2Main.cs" />
-    <Compile Include="ItemTweakerV2\Submenus\ColliderEditor\ColliderEditor.cs" />
+    <Compile Include="ItemTweakerV2\Submenus\Physic\ColliderEditor\ColliderEditor.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Components\Rocket\RocketComponentSubMenu.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Components\Crazy\CrazyComponentSubMenu.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Components\Spinner\SpinnerSubMenu.cs" />
@@ -240,7 +242,7 @@
     <Compile Include="ItemTweakerV2\ScrollMenus\VRC_Triggers\VRC_TriggersScrollMenu.cs" />
     <Compile Include="ItemTweakerV2\ScrollMenus\Prefabs\PrefabSpawnerScrollMenu.cs" />
     <Compile Include="ItemTweakerV2\ScrollMenus\WorldObjects\WorldObjectsScrollMenu.cs" />
-    <Compile Include="ItemTweakerV2\Submenus\Spawner\SpawnerSubmenu.cs" />
+    <Compile Include="ItemTweakerV2\Submenus\ObjectInfoSubMenu\ObjectInfoSubMenu.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnRigidBodyControllerArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnPickupControllerArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\SelectedObjectArgs.cs" />

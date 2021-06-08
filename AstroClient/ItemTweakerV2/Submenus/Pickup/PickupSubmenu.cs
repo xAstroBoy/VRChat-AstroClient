@@ -168,18 +168,18 @@
 					{
 						PickupProximitySlider.SetValue(controller.proximity);
 					}
-					if(Pickup_IsHeld != null)
+					if (Pickup_IsHeld != null)
 					{
-						Pickup_IsHeld.SetButtonText(isHeldBtnText(controller));
-						Pickup_IsHeld.SetTextColor(IsHeldBtnColor(controller));
+						Pickup_IsHeld.SetButtonText(controller.Get_IsHeld_ButtonText());
+						Pickup_IsHeld.SetTextColor(controller.Get_IsHeld_ButtonColor());
 					}
 					if (Pickup_CurrentObjOwner != null)
 					{
-						Pickup_CurrentObjOwner.SetButtonText("Current owner : \n" + controller.CurrentOwner);
+						Pickup_CurrentObjOwner.SetButtonText(controller.Get_PickupOwner_ButtonText());
 					}
 					if (Pickup_CurrentObjHolder != null)
 					{
-						Pickup_CurrentObjHolder.SetButtonText("Held By " + controller.CurrentHolderDisplayName);
+						Pickup_CurrentObjHolder.SetButtonText(controller.Get_IsHeldBy_ButtonText());
 					}
 					return;
 				}
@@ -205,27 +205,27 @@
 			}
 			if (Pickup_PickupOrientation_prop_any != null)
 			{
-					Pickup_PickupOrientation_prop_any.SetTextColor(Color.red);
+				Pickup_PickupOrientation_prop_any.SetTextColor(Color.red);
 			}
 			if (Pickup_PickupOrientation_prop_Grip != null)
 			{
-					Pickup_PickupOrientation_prop_Grip.SetTextColor(Color.red);
+				Pickup_PickupOrientation_prop_Grip.SetTextColor(Color.red);
 			}
 			if (Pickup_PickupOrientation_prop_Gun != null)
 			{
-					Pickup_PickupOrientation_prop_Gun.SetTextColor(Color.red);
+				Pickup_PickupOrientation_prop_Gun.SetTextColor(Color.red);
 			}
 			if (Pickup_AutoHoldMode_prop_AutoDetect != null)
 			{
-					Pickup_AutoHoldMode_prop_AutoDetect.SetTextColor(Color.red);
+				Pickup_AutoHoldMode_prop_AutoDetect.SetTextColor(Color.red);
 			}
 			if (Pickup_AutoHoldMode_prop_Yes != null)
 			{
-					Pickup_AutoHoldMode_prop_Yes.SetTextColor(Color.red);
+				Pickup_AutoHoldMode_prop_Yes.SetTextColor(Color.red);
 			}
 			if (Pickup_AutoHoldMode_prop_No != null)
 			{
-					Pickup_AutoHoldMode_prop_No.SetTextColor(Color.red);
+				Pickup_AutoHoldMode_prop_No.SetTextColor(Color.red);
 			}
 			if (PickupProximitySlider != null)
 			{
@@ -246,22 +246,7 @@
 			}
 		}
 
-		public static string isHeldBtnText(PickupController controller)
-		{
-			if (controller != null)
-			{
-				return controller.IsHeld ? "Held : Yes" : "Held : No";
-			}
-			return "No Pickup Property Found";
-		}
-		public static Color IsHeldBtnColor(PickupController controller)
-		{
-			if (controller != null)
-			{
-				return controller.IsHeld ? Color.green : Color.red;
-			}
-			return Color.red;
-		}
+
 
 		public static QMSingleButton HasPickupComponent { get; private set; }
 
@@ -280,7 +265,7 @@
 		public static QMSingleButton Pickup_IsEditMode { get; private set; }
 		public static QMSingleButton Pickup_IsHeld { get; private set; }
 		public static QMSingleButton Pickup_CurrentObjOwner { get; private set; }
-		public static QMSingleButton Pickup_CurrentObjHolder  { get; private set; }
+		public static QMSingleButton Pickup_CurrentObjHolder { get; private set; }
 		public static QMSlider PickupProximitySlider { get; private set; }
 	}
 }

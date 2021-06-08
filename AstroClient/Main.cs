@@ -200,10 +200,8 @@
                 UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
 
                 InitMainsButtons();
-                //ItemTweakerMain.InitButtons(5, 0.5f, true); //ItemTweaker Main Button
-                new QMSingleButton("ShortcutMenu", 5, 3, "GameObject Toggler", new Action(() =>
-                { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }
-                ), "Advanced GameObject Toggler", null, null, true);
+				ItemTweakerV2.TweakerV2Main.Init_TweakerV2Main();
+                new QMSingleButton("ShortcutMenu", 5, 3, "GameObject Toggler", new Action(() => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }                 ), "Advanced GameObject Toggler", null, null, true);
                 CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 1.5f, true);
 
                 Event_VRChat_OnUiManagerInit?.Invoke(this, new EventArgs());

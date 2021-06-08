@@ -12,7 +12,7 @@ namespace AstroClient.ItemTweakerV2.Selector
 		{
 			Tweaker_Selector.Event_On_New_GameObject_Selected += Internal_On_New_GameObject_Selected;
 			Tweaker_Selector.Event_On_Old_GameObject_Removed += Internal_On_Old_GameObject_Removed;
-			
+
 			ListenerHandler.Event_OnSelectedObject_Enabled += Internal_OnSelectedObject_Enabled;
 			ListenerHandler.Event_OnSelectedObject_Disabled += Internal_OnSelectedObject_Disabled;
 			ListenerHandler.Event_OnSelectedObject_Destroyed += Internal_OnSelectedObject_Destroyed;
@@ -62,6 +62,7 @@ namespace AstroClient.ItemTweakerV2.Selector
 		{
 			OnPickupController_PropertyChanged(e.control);
 		}
+
 		private void Internal_OnPickupController_OnUpdate(object sender, OnPickupControllerArgs e)
 		{
 			OnPickupController_OnUpdate(e.control);
@@ -77,12 +78,10 @@ namespace AstroClient.ItemTweakerV2.Selector
 			OnRigidBodyController_PropertyChanged(e.control);
 		}
 
-
 		private void Internal_OnRigidBodyController_OnUpdate(object sender, OnRigidBodyControllerArgs e)
 		{
 			OnRigidBodyController_OnUpdate(e.control);
 		}
-
 
 		public virtual void On_Old_GameObject_Removed(GameObject obj)
 		{
@@ -111,6 +110,7 @@ namespace AstroClient.ItemTweakerV2.Selector
 		public virtual void OnRigidBodyController_PropertyChanged(RigidBodyController control)
 		{
 		}
+
 		public virtual void OnRigidBodyController_OnUpdate(RigidBodyController control)
 		{
 		}

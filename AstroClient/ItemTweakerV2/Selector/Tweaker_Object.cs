@@ -2,15 +2,10 @@
 {
 	using AstroLibrary.Console;
 	using AstroLibrary.Finder;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using UnityEngine;
+
 	public class Tweaker_Object
 	{
-
 		public static GameObject SetObjectToEditWithPath(string objpath)
 		{
 			var obj = GameObjectFinder.Find(objpath);
@@ -60,6 +55,7 @@
 		}
 
 		private static bool _DoNotPickOtherItems;
+
 		public static bool LockItem
 		{
 			get
@@ -80,6 +76,13 @@
 			}
 		}
 
+		public static string GetObjectToEditName 
+		{
+			get
+			{
+				return Tweaker_Selector.SelectedObject.name;
+			}
 
+		}
 	}
 }

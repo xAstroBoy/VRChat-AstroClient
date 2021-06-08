@@ -1,25 +1,12 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
-	using AstroClient.Components;
 	using AstroClient.Extensions;
-	using AstroClient.GameObjectDebug;
 	using AstroClient.ItemTweakerV2.Selector;
-	using AstroClient.variables;
-	using AstroLibrary;
-	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Reflection;
-	using UnityEngine;
-	using VRC.SDK3.Components;
-	using VRC.SDKBase;
-	using VRC.Udon.Common.Interfaces;
-	using Color = UnityEngine.Color;
+
 	public class PickupSelectionScrollMenu
 	{
-
 		public static void Init_PickupSelectionQMScroll(QMTabMenu main, float x, float y, bool btnHalf)
 		{
 			var menu = new QMNestedButton(main, x, y, "Select Pickup", "Select World Pickup to edit", null, null, null, null, btnHalf);

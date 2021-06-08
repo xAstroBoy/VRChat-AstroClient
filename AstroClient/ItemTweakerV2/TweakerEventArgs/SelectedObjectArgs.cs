@@ -4,12 +4,12 @@
 	using UnityEngine;
 
 	public class SelectedObjectArgs : EventArgs
-    {
-        public GameObject GameObject;
+	{
+		public GameObject GameObject;
 
-        public SelectedObjectArgs(GameObject obj)
-        {
-            this.GameObject = obj;
-        }
-    }
+		public SelectedObjectArgs(GameObject obj)
+		{
+			this.GameObject = obj;
+		}
+	}
 }

@@ -26,7 +26,7 @@
 				}
 				PickupController.SetOnPickupPropertyChanged(() =>
 				{
-				Event_OnPickupControllerPropertyChanged?.Invoke(null, new OnPickupControllerArgs(PickupController)); // Dunno if it works.
+					Event_OnPickupControllerPropertyChanged?.Invoke(null, new OnPickupControllerArgs(PickupController)); // Dunno if it works.
 				});
 
 				PickupController.SetOnPickup_OnUpdate(() =>
@@ -47,7 +47,5 @@
 				}
 			}
 		}
-
-
 	}
 }

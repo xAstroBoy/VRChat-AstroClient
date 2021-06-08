@@ -26,7 +26,7 @@
                     var targetuser = apiuser.GetPlayer();
                     if (targetuser != null)
                     {
-                        TargetSelector.TargetSelector.CurrentTarget = targetuser;
+                        TargetSelector.CurrentTarget = targetuser;
                         foreach (var item in WorldUtils.Get_Pickups())
                         {
                             if (item != null)
@@ -54,7 +54,7 @@
                     var targetuser = apiuser.GetPlayer();
                     if (targetuser != null)
                     {
-                        TargetSelector.TargetSelector.CurrentTarget = targetuser;
+                        TargetSelector.CurrentTarget = targetuser;
                         foreach (var item in WorldUtils.Get_Pickups())
                         {
                             try
@@ -90,7 +90,7 @@
                     var targetuser = apiuser.GetPlayer();
                     if (targetuser != null)
                     {
-                        TargetSelector.TargetSelector.CurrentTarget = targetuser;
+                        TargetSelector.CurrentTarget = targetuser;
                         foreach (var item in WorldUtils.Get_Pickups())
                         {
                             if (item != null)
@@ -122,7 +122,7 @@
                     var targetuser = apiuser.GetPlayer();
                     if (targetuser != null)
                     {
-                        TargetSelector.TargetSelector.CurrentTarget = targetuser;
+                        TargetSelector.CurrentTarget = targetuser;
                         foreach (var item in WorldUtils.Get_Pickups())
                         {
                             if (item != null)
@@ -184,7 +184,7 @@
         {
             try
             {
-                var targetuser = TargetSelector.TargetSelector.CurrentTarget;
+                var targetuser = TargetSelector.CurrentTarget;
                 if (targetuser != null)
                 {
                     if (obj != null)
@@ -204,7 +204,7 @@
         {
             try
             {
-				var targetuser = TargetSelector.TargetSelector.CurrentTarget;
+				var targetuser = TargetSelector.CurrentTarget;
 				if (targetuser != null)
 				{
                     if (obj != null)
@@ -224,7 +224,7 @@
         {
             try
             {
-				var targetuser = TargetSelector.TargetSelector.CurrentTarget;
+				var targetuser = TargetSelector.CurrentTarget;
 				if (targetuser != null)
 				{
                     if (obj != null)
@@ -244,7 +244,7 @@
         {
             try
             {
-				var targetuser = TargetSelector.TargetSelector.CurrentTarget;
+				var targetuser = TargetSelector.CurrentTarget;
 				if (targetuser != null)
 				{
                     if (obj != null)

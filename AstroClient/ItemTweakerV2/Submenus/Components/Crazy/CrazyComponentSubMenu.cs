@@ -1,17 +1,14 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
 	using AstroClient.Components;
+	using AstroClient.Extensions;
 	using AstroClient.ItemTweakerV2.Selector;
 	using RubyButtonAPI;
 	using System;
-	using UnityEngine;
-	using AstroClient.Extensions;
-
 
 	public class CrazyComponentSubMenu : Tweaker_Events
 	{
-
-		public static void Init_CrazyComponentSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
+		public static void Init_CrazyComponentSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
 		{
 			var submenu = new QMNestedButton(menu, x, y, "Crazy Object", "Make Items fly in random directions lol!", null, null, null, null, btnHalf);
 			new QMSingleButton(submenu, 1, 0, "Crazy Object (With Gravity)", new Action(() => { Tweaker_Object.GetGameObjectToEdit().GoNutsWithGravity(); }), "Make Held Object Go Nuts!", null, null);
@@ -21,7 +18,5 @@
 			new QMSingleButton(submenu, 1, 1, "+1 Timer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().IncCrazySpeed(); }), "Edits the CrazyObj Speed", null, null);
 			new QMSingleButton(submenu, 2, 1, "-1 Timer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DecCrazySpeed(); }), "Edits the CrazyObj Speed", null, null);
 		}
-
-
 	}
 }

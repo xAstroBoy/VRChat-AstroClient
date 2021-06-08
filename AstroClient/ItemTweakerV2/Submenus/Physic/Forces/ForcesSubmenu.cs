@@ -1,16 +1,15 @@
 ﻿using AstroClient.Components;
+using AstroClient.Extensions;
 using AstroClient.ItemTweakerV2.Selector;
+using AstroLibrary.Extensions;
 using RubyButtonAPI;
 using System;
 using UnityEngine;
-using AstroClient.Extensions;
-using AstroLibrary.Extensions;
 
 namespace AstroClient.ItemTweakerV2.Submenus
 {
 	public class ForcesSubmenu : Tweaker_Events
-    {
-
+	{
 		public static void Init_ForceSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
 			var ForceSubMenu = new QMNestedButton(menu, x, y, "Forces", "You have the Force! Dont abuse it! <3!", null, null, null, null, btnHalf);
@@ -23,13 +22,13 @@ namespace AstroClient.ItemTweakerV2.Submenus
 			Forces_SelPickup_CurrentObjOwner = new QMSingleButton(ForceSubMenu, 5, -1, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
 			Forces_SelPickup_CurrentObjOwner.SetResizeTextForBestFit(true);
 
-			ForceAmnt1 = new QMSingleButton(ForceSubMenu, 0, 0, "Force : " + Force, () =>{Force = DefaultForce;}, string.Empty, null, null);
-			SpinForceAmnt1 = new QMSingleButton(ForceSubMenu, 0, 1, "Spin Force : " + SpinForce, () =>{SpinForce = DefaultSpinForce;}, string.Empty, null, null);
+			ForceAmnt1 = new QMSingleButton(ForceSubMenu, 0, 0, "Force : " + Force, () => { Force = DefaultForce; }, string.Empty, null, null);
+			SpinForceAmnt1 = new QMSingleButton(ForceSubMenu, 0, 1, "Spin Force : " + SpinForce, () => { SpinForce = DefaultSpinForce; }, string.Empty, null, null);
 
 			QMNestedButton ForceAddControl = new QMNestedButton(ForceSubMenu, 5, 0, "Tweak Force Amounts", "Force Tweaker Menu!", null, null, null, null);
 
-			ForceAmnt2 = new QMSingleButton(ForceAddControl, 0, 0, "Force : " + Force, () =>{Force = DefaultForce;}, string.Empty, null, null);
-			SpinForceAmnt2 = new QMSingleButton(ForceAddControl, 0, 1, "Spin Force : " + SpinForce, () =>{SpinForce = DefaultSpinForce;}, string.Empty, null, null);
+			ForceAmnt2 = new QMSingleButton(ForceAddControl, 0, 0, "Force : " + Force, () => { Force = DefaultForce; }, string.Empty, null, null);
+			SpinForceAmnt2 = new QMSingleButton(ForceAddControl, 0, 1, "Spin Force : " + SpinForce, () => { SpinForce = DefaultSpinForce; }, string.Empty, null, null);
 
 			ForceSlider = new QMSlider(Utils.QuickMenu.transform.Find(ForceAddControl.GetMenuName()), "Force Power :", 150, -720, delegate (float value)
 			{
@@ -60,32 +59,26 @@ namespace AstroClient.ItemTweakerV2.Submenus
 			new QMSingleButton(ForceSubMenu, 1, 2, "Rotate Z", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SpinZ(); }), string.Empty, null, null);
 		}
 
-
-		public override void OnRigidBodyController_PropertyChanged(RigidBodyController control)
+		public override void OnPickupController_OnUpdate(PickupController control)
 		{
+			if(control != null)
+			{
+
+				if (Forces_Pickup_IsHeld != null)
+				{
+					Forces_Pickup_IsHeld.SetButtonText(control.Get_IsHeld_ButtonText());
+					Forces_Pickup_IsHeld.SetTextColor(control.Get_IsHeld_ButtonColor());
+				}
+				if (Forces_SelPickup_CurrentObjOwner != null)
+				{
+					Forces_SelPickup_CurrentObjOwner.SetButtonText(control.Get_PickupOwner_ButtonText());
+				}
+				if (Forces_CurrentObjHolder != null)
+				{
+					Forces_CurrentObjHolder.SetButtonText(control.Get_IsHeldBy_ButtonText());
+				}
+			}
 		}
-
-
-
-
-
-
-		public override void OnRigidBodyControllerSelected(RigidBodyController control)
-		{
-		}
-
-
-
-		public override void OnSelectedObject_Destroyed()
-		{
-		}
-
-		public override void OnLevelLoaded()
-		{
-		}
-
-
-
 		public static QMSingleButton Forces_Pickup_IsHeld { get; private set; }
 		public static QMSingleButton Forces_CurrentObjHolder { get; private set; }
 		public static QMSingleButton Forces_SelPickup_CurrentObjOwner { get; private set; }
@@ -98,8 +91,8 @@ namespace AstroClient.ItemTweakerV2.Submenus
 		public static QMSingleButton SpinForceAmnt1;
 		public static QMSingleButton SpinForceAmnt2;
 
-
 		private static float _Force;
+
 		public static float Force
 		{
 			get
@@ -123,7 +116,9 @@ namespace AstroClient.ItemTweakerV2.Submenus
 				}
 			}
 		}
+
 		private static float _SpinForce;
+
 		public static float SpinForce
 		{
 			get
@@ -151,8 +146,5 @@ namespace AstroClient.ItemTweakerV2.Submenus
 
 		public static readonly float DefaultForce = 1f;
 		public static readonly float DefaultSpinForce = 100f;
-
-
-
 	}
 }

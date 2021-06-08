@@ -15,5 +15,10 @@
         {
             button.GetGameObject().transform.Rotate(new Vector3(0f, 0f, rotation));
         }
-    }
+
+		public static void ToggleBtnImage(this QMSingleButton btn, bool enabled)
+		{
+			btn.GetGameObject().GetComponent<UnityEngine.UI.Image>().enabled = enabled;
+		}
+	}
 }

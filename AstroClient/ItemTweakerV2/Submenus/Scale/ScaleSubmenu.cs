@@ -6,15 +6,10 @@
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using UnityEngine;
 
 	public class ScaleSubmenu : Tweaker_Events
 	{
-
 		public static void Init_ScaleSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
 			var ScaleEditor = new QMNestedButton(menu, x, y, "Scale", "Scale Editor Menu!", null, null, null, null, btnHalf);
@@ -40,9 +35,6 @@
 			ScaleEditY = new QMSingleToggleButton(ScaleEditor, 2, 1.5f, "Edit Y", new Action(() => { EditVectorY = true; }), "Ignore Y", new Action(() => { EditVectorY = false; }), "Make Inflater Edit Y", Color.green, Color.red, null, false, true);
 			ScaleEditZ = new QMSingleToggleButton(ScaleEditor, 2, 2, "Edit Z", new Action(() => { EditVectorZ = true; }), "Ignore Z", new Action(() => { EditVectorZ = false; }), "Make Inflater Edit Z", Color.green, Color.red, null, false, true);
 		}
-
-
-
 
 		public override void OnLevelLoaded()
 		{
@@ -73,7 +65,6 @@
 			ScaleEditor.EditScaleSize(obj, false);
 			UpdateScaleButton(obj);
 		}
-
 
 		public static void UpdateScaleButton(GameObject obj)
 		{
@@ -128,9 +119,6 @@
 		{
 			InflaterScaleMode = !InflaterScaleMode;
 		}
-
-
-
 
 		public static QMSlider ScaleSlider;
 
@@ -214,7 +202,5 @@
 				_EditVectorZ = value;
 			}
 		}
-
-
 	}
 }

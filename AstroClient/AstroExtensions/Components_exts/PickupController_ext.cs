@@ -254,5 +254,32 @@
 				}
 			}
 		}
+		public static string Get_IsHeld_ButtonText(this PickupController controller)
+		{
+			if (controller != null)
+			{
+				return controller.IsHeld ? "Held : Yes" : "Held : No";
+			}
+			return "No Pickup Property Found";
+		}
+
+		public static Color Get_IsHeld_ButtonColor(this PickupController controller)
+		{
+			if (controller != null)
+			{
+				return controller.IsHeld ? Color.green : Color.red;
+			}
+			return Color.red;
+		}
+
+		public static string Get_IsHeldBy_ButtonText(this PickupController controller)
+		{
+            return "Held By " + controller.CurrentHolderDisplayName;
+		}
+
+		public static string Get_PickupOwner_ButtonText(this PickupController controller)
+		{
+			return "Current owner : \n" + controller.CurrentOwner;
+		}
 	}
 }

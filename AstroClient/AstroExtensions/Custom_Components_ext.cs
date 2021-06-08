@@ -336,7 +336,7 @@
         {
             if (obj != null)
             {
-                OrbitManager.AddOrbitObject(obj, TargetSelector.TargetSelector.CurrentTarget);
+                OrbitManager.AddOrbitObject(obj, TargetSelector.CurrentTarget);
             }
         }
 
@@ -396,7 +396,7 @@
         {
             foreach (var obj in list.Where(obj => obj != null).Where(obj => obj != null))
             {
-                OrbitManager.AddOrbitObject(obj, TargetSelector.TargetSelector.CurrentTarget);
+                OrbitManager.AddOrbitObject(obj, TargetSelector.CurrentTarget);
             }
         }
 

@@ -1,4 +1,4 @@
-﻿namespace AstroClient.TargetSelector
+﻿namespace AstroClient
 {
 	using AstroClient.Extensions;
 	using AstroLibrary.Console;
@@ -12,6 +12,7 @@
 
 	public class TargetSelector : GameEvents
 	{
+		public static event EventHandler<VRCPlayerEventArgs> Event_OnTargetSet;
 
 		public override void OnPlayerLeft(Player player)
 		{

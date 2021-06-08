@@ -1,14 +1,14 @@
 ﻿using AstroClient.Components;
+using AstroClient.Extensions;
 using AstroClient.ItemTweakerV2.Selector;
 using RubyButtonAPI;
 using System;
 using UnityEngine;
-using AstroClient.Extensions;
 
 namespace AstroClient.ItemTweakerV2.Submenus
 {
 	public class ConstraintsSubmenu : Tweaker_Events
-    {
+	{
 		public static void Init_ConstraintsSubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
 		{
 			var ConstraintMenu = new QMNestedButton(menu, x, y, "Constraints", "Item Constraint Editor Menu!", null, null, null, null, btnHalf);
@@ -24,7 +24,6 @@ namespace AstroClient.ItemTweakerV2.Submenus
 			new QMSingleButton(ConstraintMenu, 1, 2, "Remove all Object Constraints", new Action(() => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Remove_All_Constraints(); }), "Delete all object Constraints", null, null);
 		}
 
-
 		public override void OnRigidBodyController_PropertyChanged(RigidBodyController control)
 		{
 			UpdateButtonsFromController(control);
@@ -32,14 +31,13 @@ namespace AstroClient.ItemTweakerV2.Submenus
 
 		public static void UpdateButtonsFromController(RigidBodyController control)
 		{
-			if(control != null)
+			if (control != null)
 			{
 				if (!UpdateFreezeAllConstraints(control.Constraints))
 				{
 					UpdatePositionConstraints(control.Constraints);
 					UpdateRotationSection(control.Constraints);
 				}
-
 			}
 		}
 
@@ -58,7 +56,6 @@ namespace AstroClient.ItemTweakerV2.Submenus
 			Reset();
 		}
 
-
 		public override void OnLevelLoaded()
 		{
 			Reset();
@@ -68,7 +65,6 @@ namespace AstroClient.ItemTweakerV2.Submenus
 		{
 			UpdateButtonsFromController(control);
 		}
-
 
 		public static bool UpdateFreezeAllConstraints(RigidbodyConstraints constraints)
 		{
@@ -156,7 +152,6 @@ namespace AstroClient.ItemTweakerV2.Submenus
 			if (Constraint_Z_Toggle != null) { Constraint_Z_Toggle.SetToggleState(status); }
 		}
 
-
 		private static QMToggleButton Constraint_Rot_X_Toggle;
 		private static QMToggleButton Constraint_Rot_Y_Toggle;
 		private static QMToggleButton Constraint_Rot_Z_Toggle;
@@ -164,7 +159,5 @@ namespace AstroClient.ItemTweakerV2.Submenus
 		private static QMToggleButton Constraint_X_Toggle;
 		private static QMToggleButton Constraint_Y_Toggle;
 		private static QMToggleButton Constraint_Z_Toggle;
-
-
 	}
 }

@@ -40,6 +40,8 @@
             CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
 
 			QuickMenuHooks.Event_OnPlayerSelected += Internal_OnPlayerSelected;
+
+			TargetSelector.TargetSelector.Event_OnTargetSet += Internal_OnTargetSet;
         }
 
         private void Internal_OnApplicationStart(object sender, EventArgs e)
@@ -106,6 +108,13 @@
 		{
 			OnPlayerSelected(e.player);
 		}
+
+
+		private void Internal_OnTargetSet(object sender, VRCPlayerEventArgs e)
+		{
+			OnTargetSet(e.player);
+		}
+
 
 		private void Internal_VRC_EventDispatcherRFC_triggerEvent(object sender, VRC_EventDispatcherRFC_TriggerEventArgs e)
         {
@@ -191,6 +200,10 @@
         }
 
 		public virtual void OnPlayerSelected(Player player)
+		{
+		}
+
+		public virtual void OnTargetSet(Player player)
 		{
 		}
 	}

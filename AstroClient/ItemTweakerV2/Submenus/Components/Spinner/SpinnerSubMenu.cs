@@ -1,17 +1,14 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
 	using AstroClient.Components;
+	using AstroClient.Extensions;
 	using AstroClient.ItemTweakerV2.Selector;
 	using RubyButtonAPI;
 	using System;
-	using UnityEngine;
-	using AstroClient.Extensions;
-
 
 	public class SpinnerSubMenu : Tweaker_Events
 	{
-
-		public static void Init_SpinnerSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
+		public static void Init_SpinnerSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
 		{
 			var submenu = new QMNestedButton(menu, x, y, "Spin Control", "Make them spiiiiin!", null, null, null, null, btnHalf);
 			new QMSingleButton(submenu, 1, 0, "+ 1 x", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_SpinForceX(); }), "Add Spin Force to spinner!", null, null);
@@ -27,7 +24,5 @@
 			new QMSingleButton(submenu, 3, 2, "+1 Timer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().IncSpinnerSpeed(); }), "Edits the Spinner Speed", null, null);
 			new QMSingleButton(submenu, 4, 2, "-1 Timer", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DecSpinnerSpeed(); }), "Edits the Spinner Speed", null, null);
 		}
-
-
 	}
 }

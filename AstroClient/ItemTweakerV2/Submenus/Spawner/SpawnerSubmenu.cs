@@ -1,30 +1,35 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-	using AstroClient.Components;
 	using AstroClient.Extensions;
 	using AstroClient.ItemTweakerV2.Selector;
-	using AstroClient.variables;
-	using AstroLibrary.Extensions;
+	using AstroClient.ItemTweakerV2.Submenus.ScrollMenus;
 	using RubyButtonAPI;
-	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
-	using VRC.SDKBase;
-	using Color = UnityEngine.Color;
 
 	public class SpawnerSubmenu : Tweaker_Events
 	{
+		public static void Init_SpawnerSubmenu(QMTabMenu menu, float x, float y, bool btnHalf)
+		{
+			var main = new QMNestedButton(menu, x, y, "Spawner", "Spawner Menu!", null, null, null, null, btnHalf);
+			new QMSingleButton(main, 0, 0, "Spawn Clone", () => { Cloner.ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }, "Instantiates a copy of The selected object.", null, null, true);
+			new QMSingleButton(main, 0, 0.5f, "Kill Clones", () => { Cloner.ObjectCloner.ClonedObjectsDeleter(); }, "Removes All Cloned Objects.", null, null, true);
+			
+			PrefabSpawnerScrollMenu.Init_PrefabSpawnerQMScroll(main, 0, 1f, true);
+			new QMSingleButton(main, 0, 1.5f, "Kill Spawned Prefabs", () => { SpawnerSubmenu.KillSpawnedPrefabs(); }, "Removes All Prefabs Objects.", null, null, true);
+
+			SpawnedPickupsCounter = new QMSingleButton(menu, 4, 0, GetClonesPickupText, null, GetClonesPickupText, null, Color.cyan, true);
+			SpawnedPrefabsCounter = new QMSingleButton(menu, 4, 0.5f, GetSpawnedPrefabText, null, GetSpawnedPrefabText, null, Color.cyan, true);
+
+		}
 
 		public override void OnLevelLoaded()
 		{
 			SpawnedPrefabs.Clear();
 			ClonedObjects.Clear();
 			UpdateSpawnedPrefabsBtn();
-
 		}
-
-
 
 		public static string GetSpawnedPrefabText
 		{
@@ -60,7 +65,6 @@
 			}
 		}
 
-
 		public static void RegisterPrefab(GameObject obj)
 		{
 			if (obj != null)
@@ -72,7 +76,6 @@
 				UpdateSpawnedPrefabsBtn();
 			}
 		}
-
 
 		public static void KillSpawnedPrefabs()
 		{
@@ -90,16 +93,10 @@
 			UpdateSpawnedPrefabsBtn();
 		}
 
-
-
-
 		public static List<GameObject> SpawnedPrefabs = new List<GameObject>();
 		public static List<GameObject> ClonedObjects = new List<GameObject>();
 
-
 		public static QMSingleButton SpawnedPickupsCounter;
 		public static QMSingleButton SpawnedPrefabsCounter;
-
-
 	}
 }

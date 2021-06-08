@@ -4,12 +4,12 @@
 	using System;
 
 	public class OnRigidBodyControllerArgs : EventArgs
-	{
-		public RigidBodyController control;
+    {
+        public RigidBodyController control;
 
-		public OnRigidBodyControllerArgs(RigidBodyController controller)
-		{
-			this.control = controller;
-		}
-	}
+        public OnRigidBodyControllerArgs(RigidBodyController controller)
+        {
+            this.control = controller;
+        }
+    }
 }
