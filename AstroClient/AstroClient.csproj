@@ -218,6 +218,8 @@
     <Compile Include="ItemTweakerV2\Selector\Object_Selector.cs" />
     <Compile Include="ItemTweakerV2\Selector\ObjectSelectorHelper.cs" />
     <Compile Include="ItemTweakerV2\Submenus\ColliderEditor\ColliderEditor.cs" />
+    <Compile Include="ItemTweakerV2\TweakerEventArgs\OnRigidBodyControllerArgs.cs" />
+    <Compile Include="ItemTweakerV2\TweakerEventArgs\OnPickupControllerArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\SelectedObjectArgs.cs" />
     <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Physic\Physic.cs" />
