@@ -17,6 +17,8 @@
 			EventManager.LateUpdate += Internal_OnLateUpdate;
 			EventManager.UiManagerInit += Internal_VRChat_OnUiManagerInit;
 			EventManager.LevelLoaded += Internal_OnLevelLoaded;
+			EventManager.PhotonPlayerJoined += Internal_OnPhotonPlayerJoined;
+			EventManager.PhotonPlayerLeft += Internal_OnPhotonPlayerLeft;
 
 			//// PATCHES
 
@@ -76,15 +78,15 @@
 		//	OnPlayerJoined(e.player);
 		//}
 
-		//private void Internal_OnPhotonPlayerLeft(object sender, PhotonPlayerEventArgs e)
-		//{
-		//	OnPhotonLeft(e.player);
-		//}
+		private void Internal_OnPhotonPlayerLeft(object sender, PhotonPlayerEventArgs e)
+		{
+			OnPhotonLeft(e.player);
+		}
 
-		//private void Internal_OnPhotonPlayerJoined(object sender, PhotonPlayerEventArgs e)
-		//{
-		//	OnPhotonJoined(e.player);
-		//}
+		private void Internal_OnPhotonPlayerJoined(object sender, PhotonPlayerEventArgs e)
+		{
+			OnPhotonJoined(e.player);
+		}
 
 		//private void Internal_SpawnEmojiRPC(object sender, SpawnEmojiArgs e)
 		//{

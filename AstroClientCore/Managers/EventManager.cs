@@ -15,8 +15,8 @@
 		public static EventHandler<EventArgs> GUI;
 		public static EventHandler<EventArgs> UiManagerInit;
 		public static EventHandler<EventArgs> LevelLoaded;
-		public static EventHandler<EventArgs> PhotonPlayerJoined;
-		public static EventHandler<EventArgs> PhotonPlayerLeft;
+		public static EventHandler<PhotonPlayerEventArgs> PhotonPlayerJoined;
+		public static EventHandler<PhotonPlayerEventArgs> PhotonPlayerLeft;
 
 		public static void ApplyPatches()
 		{
