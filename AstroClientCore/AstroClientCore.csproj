@@ -70,7 +70,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainThreadRunner.cs" />
     <Compile Include="Modules\BaseModule_Virtuals.cs" />
     <Compile Include="Modules\BaseModule.cs" />
     <Compile Include="BuildInfo.cs" />
