@@ -26,6 +26,7 @@
 
 		public static void DoPatches()
 		{
+			ModConsole.Log($"[PatchManager] Applying {patches.Count} Patches..");
 			foreach (var patch in patches)
 			{
 				patch.DoPatch();
