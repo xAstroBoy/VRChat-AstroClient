@@ -164,6 +164,7 @@
     <Compile Include="Components\ESP\UdonBehaviour\ESP_UdonBehaviour.cs" />
     <Compile Include="Components\ESP\VRCInteractable\ESP_VRCInteractable.cs" />
     <Compile Include="Components\Bounce\Bouncer.cs" />
+    <Compile Include="Components\TweakerListener\TweakerListener.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Experiments\CameraTweaker.cs" />
@@ -214,7 +215,10 @@
     <Compile Include="GameObjMenu.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="InstantiateUtils\MapEditorMenu.cs" />
-    <Compile Include="ItemTweakerV2\Selector\ComponentHandler\ComponentHandler.cs" />
+    <Compile Include="ItemTweakerV2\Handlers\EspHandler.cs" />
+    <Compile Include="ItemTweakerV2\Handlers\ListenerHandler.cs" />
+    <Compile Include="ItemTweakerV2\Handlers\PickupControllerHandler.cs" />
+    <Compile Include="ItemTweakerV2\Handlers\RigidBodyControllerHandler.cs" />
     <Compile Include="ItemTweakerV2\Selector\Object_Selector.cs" />
     <Compile Include="ItemTweakerV2\Selector\ObjectSelectorHelper.cs" />
     <Compile Include="ItemTweakerV2\Submenus\ColliderEditor\ColliderEditor.cs" />
