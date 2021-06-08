@@ -3,7 +3,9 @@
 	using AstroClientCore.Events;
 	using AstroLibrary.Console;
 	using DayClientML2.Utility;
+	using ExitGames.Client.Photon;
 	using Harmony;
+	using Photon.Realtime;
 	using System;
 	using System.Reflection;
 	using VRC.Core;
@@ -18,6 +20,7 @@
 		public static EventHandler<EventArgs> UiManagerInit;
 		public static EventHandler<EventArgs> LevelLoaded;
 		public static EventHandler<EventArgs> AvatarDownload;
+		public static EventHandler<EventArgs> RaiseEvent;
 		public static EventHandler<PhotonPlayerEventArgs> PhotonPlayerJoined;
 		public static EventHandler<PhotonPlayerEventArgs> PhotonPlayerLeft;
 
@@ -26,11 +29,17 @@
 			PatchManager.AddPatch(new Patching.Patch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_0)), GetPatch(nameof(OnAvatarDownload))));
 			PatchManager.AddPatch(new Patching.Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin))));
 			PatchManager.AddPatch(new Patching.Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft))));
+			PatchManager.AddPatch(new Patching.Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OnRaiseEvent))));
 		}
 
 		public static HarmonyMethod GetPatch(string name)
 		{
 			return new HarmonyMethod(typeof(EventManager).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+		}
+
+		private static bool OnRaiseEvent(ref byte __0, ref Il2CppSystem.Object __1, ref RaiseEventOptions __2, ref SendOptions __3)
+		{
+			return true;
 		}
 
 		private static void OnAvatarDownload(ref ApiAvatar __0)
