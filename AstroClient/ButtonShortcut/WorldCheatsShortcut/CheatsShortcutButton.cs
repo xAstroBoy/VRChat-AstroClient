@@ -15,8 +15,8 @@
         public static void Init_Cheats_ShortcutBtn(float x, float y, bool btnHalf)
         {
             WorldCheatsShortcut = new QMSingleButton("ShortcutMenu", x, y, "Cheats Shortcut", null, "Cheats Shortcut", null, null, btnHalf);
-			WorldCheatsShortcut.SetActive(false);
-        }
+            ToggleButtonVisibilityAndInteractivity(false);
+		}
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {

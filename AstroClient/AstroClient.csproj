@@ -96,10 +96,12 @@
     <Compile Include="AstroExtensions\Click_ext.cs" />
     <Compile Include="AstroExtensions\Coding_ext.cs" />
     <Compile Include="AstroExtensions\Collider_ext.cs" />
+    <Compile Include="AstroExtensions\Component_utils_ext.cs" />
     <Compile Include="AstroExtensions\ComponentParser_ext.cs" />
     <Compile Include="AstroExtensions\CustomList_ext.cs" />
     <Compile Include="AstroExtensions\Custom_Components_ext.cs" />
     <Compile Include="AstroExtensions\DeepClone_ext.cs" />
+    <Compile Include="AstroExtensions\VRC_UiShape_ext.cs" />
     <Compile Include="AstroExtensions\Il2Cpp_ext.cs" />
     <Compile Include="AstroExtensions\Engine_ext.cs" />
     <Compile Include="AstroExtensions\Esp_ext.cs" />
