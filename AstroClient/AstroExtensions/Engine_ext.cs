@@ -20,7 +20,22 @@
 
 	public static class Engine_ext
     {
-        public static void PrintPath(this GameObject obj)
+
+
+		public static void DestroyChildren(this Transform parent)
+		{
+			for (var i = parent.childCount; i > 0; i--)
+				UnityEngine.Object.DestroyImmediate(parent.GetChild(i - 1).gameObject);
+		}
+
+		public static GameObject NoUnload(this GameObject obj)
+		{
+			obj.hideFlags |= HideFlags.DontUnloadUnusedAsset;
+			return obj;
+		}
+
+
+		public static void PrintPath(this GameObject obj)
         {
             if (obj != null)
             {
