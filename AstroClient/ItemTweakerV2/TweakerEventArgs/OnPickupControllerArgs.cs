@@ -2,15 +2,14 @@
 {
 	using AstroClient.Components;
 	using System;
-	using UnityEngine;
 
 	public class OnPickupControllerArgs : EventArgs
-	{
-		public PickupController control;
+    {
+        public PickupController control;
 
-		public OnPickupControllerArgs(PickupController controller)
-		{
-			this.control = controller;
-		}
-	}
+        public OnPickupControllerArgs(PickupController controller)
+        {
+            this.control = controller;
+        }
+    }
 }

@@ -2,7 +2,6 @@
 {
 	using AstroClient.Components;
 	using System;
-	using UnityEngine;
 
 	public class OnRigidBodyControllerArgs : EventArgs
 	{

@@ -84,9 +84,13 @@
             RegisterComponent<Bouncer>();
             RegisterComponent<Lewdifier>();
             RegisterComponent<MaskRemover>();
-        }
 
-        public override void OnUpdate()
+			RegisterComponent<TweakerListener>();
+
+
+		}
+
+		public override void OnUpdate()
         {
             MainThreadRunner.MakeInstance();
             RocketManager.MakeInstance();
