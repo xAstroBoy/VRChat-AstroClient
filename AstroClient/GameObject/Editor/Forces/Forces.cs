@@ -43,9 +43,7 @@
 
         public static QMSingleToggleButton TakeOwnerShipToggle;
 
-        public static void AddConstraint(GameObject obj, RigidbodyConstraints constraint)
-        {
-        }
+
 
         public static void ApplyBackwardsForce(GameObject obj, bool TakeOwnership = true)
         {

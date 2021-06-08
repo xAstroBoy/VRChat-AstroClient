@@ -236,6 +236,8 @@
             });
         }
 
+
+		// TODO : Rewrite
         internal static void CheckIfContainsPickupProperties(GameObject obj)
         {
             if (obj != null)
