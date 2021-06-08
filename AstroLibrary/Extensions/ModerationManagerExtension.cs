@@ -4,10 +4,8 @@
 	using System;
 	using VRC.Core;
 
-	// #ToFix Everything in this class...
 	public static class ModerationManagerExtension
     {
-        [Obsolete("Possibly Borked, needs checked")]
         public static bool GetIsBlocked(this VRC.Management.ModerationManager instance, string UserID)
         {
             foreach (var kvp in PlayerModerations)
@@ -25,7 +23,6 @@
             return false;
         }
 
-        [Obsolete("Possibly Borked, needs checked")]
         public static bool GetIsBlockedByUser(this VRC.Management.ModerationManager instance, string UserID)
         {
             foreach (var kvp in PlayerModerations)
@@ -43,7 +40,6 @@
             return false;
         }
 
-        [Obsolete("Possibly Borked, needs checked")]
         public static bool IsBannedFromPublicOnly(this VRC.Management.ModerationManager instance, string userId)
         {
             foreach (var kvp in GlobalModerations)
@@ -61,7 +57,6 @@
             return false;
         }
 
-        [Obsolete("Possibly Borked, needs checked")]
         public static bool GetIsKickedFromWorld(this VRC.Management.ModerationManager instance, string userId, string worldId, string instanceId)
         {
             foreach (var kvp in GlobalModerations)
@@ -79,7 +74,6 @@
             return false;
         }
 
-        [Obsolete("Currently Borked, needs fixed")]
         public static bool GetIsBlockedEitherWay(this VRC.Management.ModerationManager instance, string UserID)
         {
             return instance.GetIsBlocked(UserID) || instance.GetIsBlockedByUser(UserID);
