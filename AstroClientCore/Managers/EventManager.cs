@@ -1,7 +1,6 @@
 ﻿namespace AstroClientCore.Managers
 {
 	using System;
-	using System.Collections.Generic;
 
 	public static class EventManager
 	{

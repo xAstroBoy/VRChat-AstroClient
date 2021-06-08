@@ -1,9 +1,15 @@
-﻿namespace AstroClientCore
+﻿namespace AstroClientCore.Modules
 {
-	public class BaseModule
+	public partial class BaseModule
 	{
-		public BaseModule()
+		public string Name { get; private set; }
+
+		public byte[] ImageData { get; private set; }
+
+		public BaseModule(string name, byte[] imageData)
 		{
+			Name = name;
+			ImageData = imageData;
 		}
 
 		public virtual void Start()

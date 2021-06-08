@@ -2,7 +2,7 @@
 {
 	#region Imports
 
-	using AstroLibrary;
+	using AstroClientCore.Modules;
 	using AstroLibrary.Console;
 	using System.Collections.Generic;
 	using System.Reflection;

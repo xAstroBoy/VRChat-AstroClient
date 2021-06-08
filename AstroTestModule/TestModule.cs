@@ -1,10 +1,10 @@
 ﻿namespace AstroTestModule
 {
-	using AstroClientCore;
+	using AstroClientCore.Modules;
 
 	public class TestModule : BaseModule
 	{
-		public TestModule() : base()
+		public TestModule() : base("TestModule", null)
 		{
 		}
 
