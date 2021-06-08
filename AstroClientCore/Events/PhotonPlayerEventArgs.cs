@@ -1,4 +1,4 @@
-﻿namespace AstroClientCore
+﻿namespace AstroClientCore.Events
 {
 	using Photon.Realtime;
 	using System;

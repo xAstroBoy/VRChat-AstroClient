@@ -1,5 +1,6 @@
 ﻿namespace AstroClientCore.Managers
 {
+	using AstroClientCore.Events;
 	using AstroLibrary.Console;
 	using DayClientML2.Utility;
 	using Harmony;
@@ -21,6 +22,7 @@
 		public static void ApplyPatches()
 		{
 			PatchManager.AddPatch(new Patching.Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin))));
+			PatchManager.AddPatch(new Patching.Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft))));
 			PatchManager.AddPatch(new Patching.Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft))));
 		}
 

@@ -1,8 +1,10 @@
 ﻿namespace AstroClient.Cheetos
 {
-	using AstroClientCore;
+
 	#region Imports
 
+	using AstroClientCore;
+	using AstroClientCore.Events;
 	using AstroLibrary.Console;
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;

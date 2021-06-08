@@ -1,5 +1,6 @@
 ﻿namespace AstroClientCore
 {
+	using AstroClientCore.Events;
 	using AstroClientCore.Managers;
 	using System;
 	using UnityEngine;

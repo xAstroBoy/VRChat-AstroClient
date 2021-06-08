@@ -3,6 +3,7 @@
 	using AstroClient.Cheetos;
 	using AstroClient.Startup.Hooks;
 	using AstroClientCore;
+	using AstroClientCore.Events;
 	using System;
 	using System.Collections.Generic;
 	using UnityEngine;
