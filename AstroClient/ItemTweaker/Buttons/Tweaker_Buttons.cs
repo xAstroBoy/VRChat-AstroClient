@@ -7,11 +7,13 @@
 	using AstroClient.GameObjectDebug;
 	using AstroClient.ItemTweaker;
 	using AstroClient.variables;
+	using AstroLibrary;
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
+	using System.Reflection;
 	using UnityEngine;
 	using VRC.SDK3.Components;
 	using VRC.SDKBase;
@@ -25,7 +27,7 @@
         public static void InitButtons(float x, float y, bool btnHalf)
         {
             //var menu = new QMNestedButton("ShortcutMenu", x, y, "Item Tweaker", "Item Tweaker!", null, null, null, null, btnHalf);
-            QMTabMenu menu = new QMTabMenu(3f, "Item Tweaker", null, null, null, "AstroClient.Resources.box.png");
+            QMTabMenu menu = new QMTabMenu(3f, "Item Tweaker", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.box.png"));
 
             // DONT USE SYNCPHYSIC UNLESS OBJECT IS SYNCED , (On progress to make unsynced objects synced as well)
             //new QMSingleButton(menu, -1, -2f, "Force Sync Physic", new Action(() => { Tweaker_Object.GetGameObjectToEdit().ForceSyncPhysic(); }), "Force Sync Physic", null, null, true);

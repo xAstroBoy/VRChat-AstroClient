@@ -463,8 +463,6 @@
         {
             if (Instance.prop_GameObject_0 != null)
                 return Instance.prop_GameObject_0;
-            //if (Instance.prop_GameObject_0 != null)
-            //	return Instance.field_Private_GameObject_1;
             return null;
         }
 

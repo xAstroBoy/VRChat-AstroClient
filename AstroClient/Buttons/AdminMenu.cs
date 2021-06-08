@@ -3,7 +3,9 @@
 	#region Imports
 
 	using AstroClient.variables;
+	using AstroLibrary;
 	using RubyButtonAPI;
+	using System.Reflection;
 
 	#endregion Imports
 
@@ -15,7 +17,7 @@
         {
             if (Bools.IsDeveloper)
             {
-                SubMenu = new QMTabMenu(pos, "Admin Menu", null, null, null, "AstroClient.Resources.badge.png");
+                SubMenu = new QMTabMenu(pos, "Admin Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.badge.png"));
             }
         }
     }

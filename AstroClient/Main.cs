@@ -12,6 +12,7 @@
 	using AstroClient.variables;
 	using AstroClient.WorldLights;
 	using AstroClient.Worlds;
+	using AstroLibrary;
 	using AstroLibrary.Console;
 	using Il2CppSystem.Diagnostics;
 	using MelonLoader;
@@ -213,7 +214,7 @@
         {
             if (KeyManager.IsAuthed)
             {
-                QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, "AstroClient.Resources.planet.png");
+                QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
                 ExploitsMenu.InitButtons(2f);
                 WorldsCheats.InitButtons(4f);
                 AdminMenu.InitButtons(8f);

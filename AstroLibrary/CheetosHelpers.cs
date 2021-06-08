@@ -5,6 +5,7 @@
 	using AstroLibrary.Extensions;
 	using System;
 	using System.IO;
+	using System.Reflection;
 	using UnityEngine;
 	using UnityEngine.UI;
 
@@ -14,26 +15,32 @@
     {
         public static Texture2D LoadPNG(string filePath)
         {
-            byte[] fileData = ExtractResource(filePath);
+            byte[] fileData = ExtractResource(Assembly.GetExecutingAssembly(), filePath);
             Texture2D tex = new Texture2D(2, 2);
             ImageConversion.LoadImage(tex, fileData); //..this will auto-resize the texture dimensions.
             return tex;
         }
 
-        /// <summary>
-        /// Send a notification message to the player's HUD
-        /// </summary>
-        /// <param name="msg"></param>
-        public static void SendHudNotification(string msg)
+		public static Texture2D LoadPNG(byte[] fileData)
+		{
+			Texture2D tex = new Texture2D(2, 2);
+			ImageConversion.LoadImage(tex, fileData); //..this will auto-resize the texture dimensions.
+			return tex;
+		}
+
+		/// <summary>
+		/// Send a notification message to the player's HUD
+		/// </summary>
+		/// <param name="msg"></param>
+		public static void SendHudNotification(string msg)
         {
             var uiManager = VRCUiManager.prop_VRCUiManager_0;
             PopupManager.QueHudMessage(uiManager, msg);
         }
 
-        public static byte[] ExtractResource(string filename)
+        public static byte[] ExtractResource(Assembly assembly, string filename)
         {
-            System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
-            using (Stream resFilestream = a.GetManifestResourceStream(filename))
+            using (Stream resFilestream = assembly.GetManifestResourceStream(filename))
             {
                 if (resFilestream == null) return null;
                 byte[] ba = new byte[resFilestream.Length];

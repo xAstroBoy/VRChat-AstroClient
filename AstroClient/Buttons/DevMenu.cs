@@ -3,9 +3,11 @@
 	#region Imports
 
 	using AstroClient.variables;
+	using AstroLibrary;
 	using RubyButtonAPI;
 	using System.Diagnostics;
 	using System.IO;
+	using System.Reflection;
 	using UnityEngine;
 
 	#endregion Imports
@@ -35,7 +37,7 @@
         {
             if (Bools.IsDeveloper)
             {
-                SubMenu = new QMTabMenu(pos, "Developer Menu", null, null, null, "AstroClient.Resources.repair.png");
+                SubMenu = new QMTabMenu(pos, "Developer Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.repair.png"));
 
                 CloseButton = new QMSingleButton(SubMenu, 0, 0, "Close Game", () => { Process.GetCurrentProcess().Kill(); }, "Close the game");
                 RestartButton = new QMSingleButton(SubMenu, 0, 1, "Restart Game", () =>
