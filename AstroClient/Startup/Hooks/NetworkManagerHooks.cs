@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClientCore.Events;
 	using MelonLoader;
 	using System;
 	using System.Collections;

@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroClient.Startup.Hooks;
+	using AstroClientCore.Events;
 	using System;
 	using UnhollowerBaseLib.Attributes;
 	using UnityEngine;

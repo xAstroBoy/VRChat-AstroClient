@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
+	using AstroClientCore.Events;
 	using AstroLibrary.Console;
 	using Harmony;
 	using System;

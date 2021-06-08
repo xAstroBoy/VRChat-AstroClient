@@ -242,7 +242,6 @@
     <Compile Include="Skyboxes\SkyboxEditor.cs" />
     <Compile Include="Startup\ComponentHelper.cs" />
     <Compile Include="Startup\EventArgs\OnTeleportRPCArgs.cs" />
-    <Compile Include="Startup\EventArgs\OnAvatarSpawnArgs.cs" />
     <Compile Include="Startup\EventArgs\OnWorldRevealArgs.cs" />
     <Compile Include="Startup\EventArgs\RayCastEventArgs.cs" />
     <Compile Include="Startup\EventArgs\SpawnEmojiArgs.cs" />
