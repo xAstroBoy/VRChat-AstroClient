@@ -21,6 +21,7 @@
 			PatchManager.Initialize();
 			ModuleManager.LoadModules();
 
+			EventManager.ApplyPatches();
 			PatchManager.DoPatches();
 
 			InitializeOverridables();
