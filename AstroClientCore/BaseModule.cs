@@ -1,4 +1,4 @@
-﻿namespace AstroLibrary
+﻿namespace AstroClientCore
 {
 	public class BaseModule
 	{
