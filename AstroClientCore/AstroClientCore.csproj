@@ -79,6 +79,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\OnAvatarDownloadArgs.cs" />
     <Compile Include="Events\OnAvatarSpawnArgs.cs" />
     <Compile Include="Events\PhotonPlayerEventArgs.cs" />
     <Compile Include="Events\PlayerEventArgs.cs" />
