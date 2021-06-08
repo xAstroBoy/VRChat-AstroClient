@@ -7,7 +7,7 @@
 	using AstroClient.GameObjectDebug;
 	using AstroClient.ItemTweaker;
 	using AstroClient.variables;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;

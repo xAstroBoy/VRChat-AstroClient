@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Cheetos
 {
+	using AstroLibrary.Misc.Api.Object;
 	using AstroNetworkingLibrary.Serializable;
-	using DayClientML2.Utility.Api.Object;
 	using UnityEngine;
 	using VRC.Core;
 

@@ -2,7 +2,7 @@
 {
 	using AstroClient.Extensions;
 	using AstroLibrary.Console;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;

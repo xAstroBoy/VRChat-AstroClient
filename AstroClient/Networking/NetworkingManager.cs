@@ -6,8 +6,8 @@
 	using AstroLibrary.Console;
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
-	using DayClientML2.Utility;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Utility;
+	using AstroLibrary.Extensions;
 	using System.Collections.Generic;
 	using static AstroClient.Cheetos.AvatarSearch;
 

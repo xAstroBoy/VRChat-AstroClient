@@ -3,7 +3,7 @@
 	using AstroClient.Extensions;
 	using AstroClient.ItemTweaker;
 	using AstroLibrary.Console;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections;

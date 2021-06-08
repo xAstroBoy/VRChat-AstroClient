@@ -3,7 +3,8 @@
 	#region Imports
 
 	using AstroLibrary.Console;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using Harmony;
 	using System;
 	using System.Reflection;
@@ -24,7 +25,7 @@
 
         public override void ExecutePriorityPatches()
         {
-            DayClientML2.Utility.MiscUtility.DelayFunction(1f, new Action(() =>
+            MiscUtility.DelayFunction(1f, new Action(() =>
             {
                 HookRPCEvent1();
             }));

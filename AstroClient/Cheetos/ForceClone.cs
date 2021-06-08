@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Cheetos
 {
-	using DayClientML2.Utility;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 
 	public static class ForceClone
     {

@@ -2,11 +2,11 @@
 {
 	#region Imports
 
-	using AstroClient.Cheetos;
 	using AstroClient.variables;
+	using AstroLibrary;
 	using AstroLibrary.Console;
-	using DayClientML2.Utility;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using MelonLoader;
 	using RubyButtonAPI;
 	using System;

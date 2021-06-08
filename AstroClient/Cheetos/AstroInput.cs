@@ -3,8 +3,8 @@
 	#region Imports
 
 	using AstroClient.Cheetos;
+	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
-	using DayClientML2.Utility.Extensions;
 	using UnityEngine;
 
 	#endregion Imports

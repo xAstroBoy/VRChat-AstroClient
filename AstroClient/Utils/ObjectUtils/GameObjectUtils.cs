@@ -5,7 +5,7 @@
 	using AstroClient.ItemTweaker;
 	using AstroLibrary.Console;
 	using Boo.Lang;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
 	using Il2CppSystem.Text;
 	using Photon.Pun;
 	using RubyButtonAPI;

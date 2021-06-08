@@ -1,13 +1,13 @@
 ﻿namespace AstroClient
 {
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
 	using Il2CppSystem.Text;
 	using System.Linq;
 	using UnityEngine;
 	using VRC;
 	using VRC.Core;
 	using VRC.SDKBase;
-	using static DayClientML2.Utility.Extensions.PlayerExtensions;
+	using static AstroLibrary.Extensions.PlayerExtensions;
 
 	public class PlayerListData
     {

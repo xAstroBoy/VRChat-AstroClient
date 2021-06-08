@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
 	using AstroLibrary.Console;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
 	using Harmony;
 	using MelonLoader;
 	using System;

@@ -1,7 +1,7 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Cheetos;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary;
+	using AstroLibrary.Extensions;
 	using System.Collections.Generic;
 
 	internal class Welcome : GameEvents

@@ -1,7 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroLibrary.Console;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
 	using System.Linq;
 	using UnityEngine;
 	using VRC;

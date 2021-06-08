@@ -2,8 +2,8 @@
 {
 	using AstroClient.Components;
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
-	using DayClientML2.Utility.Extensions;
 	using Extensions;
 	using System.Collections.Generic;
 	using System.Linq;

@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.AntiCrash
 {
 	using AstroClient.Cheetos;
+	using AstroLibrary;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;

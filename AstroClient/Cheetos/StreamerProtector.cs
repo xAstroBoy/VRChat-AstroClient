@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Cheetos
 {
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
 	using System.Collections.Generic;
 
 	public class StreamerProtector : GameEvents

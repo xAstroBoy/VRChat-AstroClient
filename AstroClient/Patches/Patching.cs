@@ -4,7 +4,7 @@
 
 	using AstroClient.Features.Player.Movement.Exploit;
 	using AstroLibrary.Console;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
 	using ExitGames.Client.Photon;
 	using Harmony;
 	using MelonLoader;

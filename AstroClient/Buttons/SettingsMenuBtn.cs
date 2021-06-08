@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
 	using AstroClient.Cheetos;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using System.Diagnostics;
 	using UnityEngine;

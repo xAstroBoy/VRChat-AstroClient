@@ -8,6 +8,7 @@
 	using AstroClient.Startup;
 	using AstroLibrary.Console;
 	using AstroLibrary.Finder;
+	using AstroLibrary.Utility;
 	using DayClientML2.Utility;
 	using System.Collections.Generic;
 	using System.Windows.Forms;

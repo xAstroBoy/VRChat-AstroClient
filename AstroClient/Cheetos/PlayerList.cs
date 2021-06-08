@@ -2,8 +2,8 @@
 {
 	#region Imports
 
-	using DayClientML2.Utility;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using MelonLoader;
 	using RubyButtonAPI;
 	using System.Collections;

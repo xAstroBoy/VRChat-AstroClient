@@ -2,7 +2,7 @@
 {
 	using AstroClient.Extensions;
 	using AstroClient.GameObjectDebug;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
 	using System;
 	using System.Runtime.CompilerServices;
 	using System.Runtime.InteropServices;
@@ -113,7 +113,7 @@
 
             if (CenterPoint != null)
             {
-                this.x = Lerp(InterpolationMinX, InterpolationMaxX, InterpolationTempX);
+                x = Lerp(InterpolationMinX, InterpolationMaxX, InterpolationTempX);
                 Offset = new Vector3(0f, Lerp(InterpolationMinY, InterpolationMaxY, InterpolationTempY), 0f);
 
                 InterpolationTempX += 0.25f * Time.deltaTime;
@@ -214,13 +214,13 @@
             {
                 float x = ((float)-Math.Cos(Timer) * this.x) + Offset.x;
                 float z = ((float)Math.Sin(Timer) * this.x) + Offset.x;
-                Position = new Vector3(x, this.y + Offset.y, z) + CenterPoint.position;
+                Position = new Vector3(x, y + Offset.y, z) + CenterPoint.position;
             }
             else
             {
                 float x = ((float)Math.Cos(Timer) * this.x) + Offset.x;
                 float z = ((float)Math.Sin(Timer) * this.x) + Offset.x;
-                Position = new Vector3(x, this.y + Offset.y, z) + CenterPoint.position;
+                Position = new Vector3(x, y + Offset.y, z) + CenterPoint.position;
             }
         }
 
@@ -231,13 +231,13 @@
             {
                 float x = ((float)-Math.Cos(Timer) * this.x) + Offset.x;
                 float z = ((float)Math.Sin(Timer) * this.z) + Offset.z;
-                Position = new Vector3(x, this.y + Offset.y, z) + CenterPoint.position;
+                Position = new Vector3(x, y + Offset.y, z) + CenterPoint.position;
             }
             else
             {
                 float x = ((float)Math.Cos(Timer) * this.x) + Offset.x;
                 float z = ((float)Math.Sin(Timer) * this.z) + Offset.z;
-                Position = new Vector3(x, this.y + Offset.y, z) + CenterPoint.position;
+                Position = new Vector3(x, y + Offset.y, z) + CenterPoint.position;
             }
         }
 
@@ -266,13 +266,13 @@
             {
                 float x = ((float)-Math.Cos(Timer) * this.x) + Offset.x;
                 float z = ((float)Math.Tan(Timer) * this.z) + Offset.z;
-                Position = new Vector3(x, this.y + Offset.y, z) + CenterPoint.position;
+                Position = new Vector3(x, y + Offset.y, z) + CenterPoint.position;
             }
             else
             {
                 float x = ((float)Math.Cos(Timer) * this.x) + Offset.x;
                 float z = ((float)Math.Tan(Timer) * this.z) + Offset.z;
-                Position = new Vector3(x, this.y + Offset.y, z) + CenterPoint.position;
+                Position = new Vector3(x, y + Offset.y, z) + CenterPoint.position;
             }
         }
 

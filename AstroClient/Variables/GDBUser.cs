@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.variables
 {
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
 	using UnityEngine;
 	using VRC;
 

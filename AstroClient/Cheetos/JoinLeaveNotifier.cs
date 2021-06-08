@@ -1,8 +1,8 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Cheetos;
+	using AstroLibrary;
 	using AstroLibrary.Console;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Extensions;
 	using System.Collections.Generic;
 	using System.Timers;
 

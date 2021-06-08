@@ -1,6 +1,5 @@
-﻿namespace AstroClient.Extensions
+﻿namespace AstroLibrary.Extensions
 {
-	using DayClientML2.Utility.Extensions;
 	using RubyButtonAPI;
 	using UnityEngine;
 	using UnityEngine.UI;

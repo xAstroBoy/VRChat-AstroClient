@@ -6,9 +6,9 @@
 	using AstroClient.UdonExploits;
 	using AstroClient.Variables;
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
-	using DayClientML2.Utility;
-	using DayClientML2.Utility.Extensions;
+	using AstroLibrary.Utility;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;
