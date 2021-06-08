@@ -12,6 +12,7 @@
 	public class AstroInput : GameEvents
     {
         public GameObject LeftHandPointer { get; private set; }
+
         public GameObject RightHandPointer { get; private set; }
 
         public bool CanClick { get; private set; }

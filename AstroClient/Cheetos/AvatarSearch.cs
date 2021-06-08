@@ -63,10 +63,6 @@
 				{
 					Search(SearchType, text);
 				});
-				//Utils.VRCUiPopupManager.AskInGameInput("Astro Avatar Search", "Search", delegate (string text)
-				//{
-				//	Search(SearchType, text);
-				//}, "Enter Avatar name. . .");
 			}, 1.45f, 1f);
 
 			searchTypeButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "All", 921f, 410f, delegate ()
