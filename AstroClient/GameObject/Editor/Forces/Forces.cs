@@ -17,8 +17,9 @@
 
         public static readonly float DefaultForce = 1f;
         public static readonly float DefaultSpinForce = 100f;
-        private static bool _TakeOwnership;
 
+        public static QMSingleToggleButton TakeOwnerShipToggle;
+        private static bool _TakeOwnership;
         public static bool TakeOwnership
         {
             get
@@ -41,7 +42,6 @@
         public static QMSingleButton SpinForceAmnt1;
         public static QMSingleButton SpinForceAmnt2;
 
-        public static QMSingleToggleButton TakeOwnerShipToggle;
 
 
 

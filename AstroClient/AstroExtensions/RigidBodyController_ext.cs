@@ -72,7 +72,7 @@
 		}
 
 
-		public static void RemoveAllObjConstraints(this RigidBodyController control)
+		public static void Remove_All_Constraints(this RigidBodyController control)
 		{
 			if (control != null)
 			{
