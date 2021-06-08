@@ -9,6 +9,8 @@
 
 	public static class Custom_Components_ext
     {
+
+		// TODO: Categorize and reorder!
         public static void MakeRocketItemWithG(this GameObject obj)
         {
             RocketManager.AddObject(obj, false);
@@ -39,17 +41,6 @@
             CrazyObjectManager.AddObject(obj, true);
         }
 
-        //public static void ForceSyncPhysic(this GameObject obj)
-        //{
-        //	var control = obj.GetComponent<RigidBodyController>();
-        //	if (control == null)
-        //	{
-        //		control = obj.AddComponent<RigidBodyController>();
-        //	}
-        //	control.Forced_SyncPhysic = true;
-        //	control.EditMode = true;
-        //	control.isKinematic = true;
-        //}
 
         public static void Add_SpinForceX(this GameObject obj)
         {
@@ -256,38 +247,6 @@
             RocketManager.DecreaseObjTimer(obj);
         }
 
-        public static void Add_Bounce_Component(this GameObject obj, bool BounceTowardPlayer)
-        {
-            if (obj != null)
-            {
-                Bouncer bouncer = obj.GetComponent<Bouncer>();
-                if (bouncer == null)
-                {
-                    bouncer = obj.AddComponent<Bouncer>();
-                }
-                if (bouncer != null)
-                {
-                    bouncer.BounceTowardPlayer = BounceTowardPlayer;
-                }
-            }
-        }
-
-        public static void Add_Bounce_Component(this List<GameObject> list, bool BounceTowardPlayer)
-        {
-            foreach (var obj in list.Where(obj => obj != null))
-            {
-                Bouncer bouncer = obj.GetComponent<Bouncer>();
-                if (bouncer == null)
-                {
-                    bouncer = obj.AddComponent<Bouncer>();
-                }
-
-                if (bouncer != null)
-                {
-                    bouncer.BounceTowardPlayer = BounceTowardPlayer;
-                }
-            }
-        }
 
         public static void Add_Rocket_Component(this List<GameObject> list, bool ShouldFloat, bool HasRelativeForce = true)
         {
@@ -377,7 +336,7 @@
         {
             if (obj != null)
             {
-                OrbitManager.AddOrbitObject(obj, ObjectMiscOptions.CurrentTarget);
+                OrbitManager.AddOrbitObject(obj, TargetSelector.TargetSelector.CurrentTarget);
             }
         }
 
@@ -437,7 +396,7 @@
         {
             foreach (var obj in list.Where(obj => obj != null).Where(obj => obj != null))
             {
-                OrbitManager.AddOrbitObject(obj, ObjectMiscOptions.CurrentTarget);
+                OrbitManager.AddOrbitObject(obj, TargetSelector.TargetSelector.CurrentTarget);
             }
         }
 
@@ -509,30 +468,6 @@
                 if (ObjectSpinner != null)
                 {
                     ObjectSpinner.DestroyMeLocal();
-                }
-            }
-        }
-
-        public static void Remove_Bouncer_Component(this List<GameObject> list)
-        {
-            foreach (var obj in list.Where(obj => obj != null))
-            {
-                Bouncer Bouncer = obj.GetComponent<Bouncer>();
-                if (Bouncer != null)
-                {
-                    Bouncer.DestroyMeLocal();
-                }
-            }
-        }
-
-        public static void Remove_Bouncer_Component(this GameObject obj)
-        {
-            if (obj != null)
-            {
-                Bouncer Bouncer = obj.GetComponent<Bouncer>();
-                if (Bouncer != null)
-                {
-                    Bouncer.DestroyMeLocal();
                 }
             }
         }

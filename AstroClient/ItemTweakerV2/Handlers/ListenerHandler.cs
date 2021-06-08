@@ -6,7 +6,7 @@
 	using System;
 	using UnityEngine;
 
-	public class ListenerHandler : ObjectSelectorHelper
+	public class ListenerHandler : Tweaker_Events
 	{
 		public static event EventHandler Event_OnSelectedObject_Enabled;
 

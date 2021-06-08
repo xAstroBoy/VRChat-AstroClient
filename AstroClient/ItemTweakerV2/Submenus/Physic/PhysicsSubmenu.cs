@@ -7,15 +7,15 @@ using AstroClient.Extensions;
 
 namespace AstroClient.ItemTweakerV2.Submenus
 {
-	public class PhysicsSubmenu : ObjectSelectorHelper
+	public class PhysicsSubmenu : Tweaker_Events
     {
 
-		public static void Init_PhysicSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+		public static void Init_PhysicSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
 			var main = new QMNestedButton(menu, x, y, "Physics", "Item Physics Editor Menu!", null, null, null, null, btnHalf);
-			GravityToggler = new QMSingleToggleButton(main, 1, 0, "Use Gravity", () => { Selector_Utils.GetGameObjectToEdit().Set_Gravity(true); }, "No Gravity", () => { Selector_Utils.GetGameObjectToEdit().Set_Gravity(false); }, "Toggle Object Gravity", Color.green, Color.red, null, false, true);
-			KinematicToggler = new QMSingleToggleButton(main, 1, 0.5f, "Kinematic", () => {Selector_Utils.GetGameObjectToEdit().Set_isKinematic(true);  }, "Not Kinematic", () => { Selector_Utils.GetGameObjectToEdit().Set_isKinematic(false); }, "Toggle Object Kinematic", Color.green, Color.red, null, false, true);
-			CollisionsToggler = new QMSingleToggleButton(main, 1, 1, "Use Collisions", () => {Selector_Utils.GetGameObjectToEdit().Set_DetectCollisions(true);  }, "No Collisions", () => { Selector_Utils.GetGameObjectToEdit().Set_DetectCollisions(false); }, "Toggle Object Collisions", Color.green, Color.red, null, false, true);
+			GravityToggler = new QMSingleToggleButton(main, 1, 0, "Use Gravity", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_Gravity(true); }, "No Gravity", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_Gravity(false); }, "Toggle Object Gravity", Color.green, Color.red, null, false, true);
+			KinematicToggler = new QMSingleToggleButton(main, 1, 0.5f, "Kinematic", () => {Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(true);  }, "Not Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(false); }, "Toggle Object Kinematic", Color.green, Color.red, null, false, true);
+			CollisionsToggler = new QMSingleToggleButton(main, 1, 1, "Use Collisions", () => {Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_DetectCollisions(true);  }, "No Collisions", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_DetectCollisions(false); }, "Toggle Object Collisions", Color.green, Color.red, null, false, true);
 			ConstraintsSubmenu.Init_ConstraintsSubmenu(main, 1, 1.5f, true);
 
 

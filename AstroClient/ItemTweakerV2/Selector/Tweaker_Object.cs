@@ -8,7 +8,7 @@
 	using System.Text;
 	using System.Threading.Tasks;
 	using UnityEngine;
-	public class Selector_Utils
+	public class Tweaker_Object
 	{
 
 		public static GameObject SetObjectToEditWithPath(string objpath)
@@ -17,7 +17,7 @@
 			if (obj != null)
 			{
 				ModConsole.Log("Path is valid, Found Gameobject obj : " + obj.name + "Using path " + objpath);
-				Object_Selector.SelectedObject = obj;
+				Tweaker_Selector.SelectedObject = obj;
 				return obj;
 			}
 			else
@@ -32,7 +32,7 @@
 			{
 				return;
 			}
-			Object_Selector.SelectedObject = obj;
+			Tweaker_Selector.SelectedObject = obj;
 		}
 
 		public static GameObject GetGameObjectToEdit()
@@ -44,18 +44,18 @@
 					var item = PlayerHands.GetHoldTransform();
 					if (item != null)
 					{
-						Object_Selector.SelectedObject = item;
+						Tweaker_Selector.SelectedObject = item;
 					}
-					return Object_Selector.SelectedObject;
+					return Tweaker_Selector.SelectedObject;
 				}
 				else
 				{
-					return Object_Selector.SelectedObject;
+					return Tweaker_Selector.SelectedObject;
 				}
 			}
 			catch
 			{
-				return Object_Selector.SelectedObject;
+				return Tweaker_Selector.SelectedObject;
 			}
 		}
 
@@ -68,7 +68,7 @@
 			}
 			set
 			{
-				if (Object_Selector.SelectedObject == null)
+				if (Tweaker_Selector.SelectedObject == null)
 				{
 					value = false;
 				}

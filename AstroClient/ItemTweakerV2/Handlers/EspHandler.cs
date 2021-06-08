@@ -5,7 +5,7 @@
 	using AstroClient.ItemTweakerV2.Selector;
 	using UnityEngine;
 
-	public class EspHandler : ObjectSelectorHelper
+	public class EspHandler : Tweaker_Events
 	{
 		public override void On_New_GameObject_Selected(GameObject obj)
 		{
@@ -43,16 +43,16 @@
 				_TweakerESPEnabled = value;
 				if (value)
 				{
-					if (Object_Selector.SelectedObject != null)
+					if (Tweaker_Selector.SelectedObject != null)
 					{
-						Object_Selector.SelectedObject.GetOrAddComponent<ESP_ItemTweaker>();
+						Tweaker_Selector.SelectedObject.GetOrAddComponent<ESP_ItemTweaker>();
 					}
 				}
 				else
 				{
-					if (Object_Selector.SelectedObject != null)
+					if (Tweaker_Selector.SelectedObject != null)
 					{
-						var ESP = Object_Selector.SelectedObject.GetComponent<ESP_ItemTweaker>();
+						var ESP = Tweaker_Selector.SelectedObject.GetComponent<ESP_ItemTweaker>();
 						if (ESP != null)
 						{
 							ESP.DestroyMeLocal();

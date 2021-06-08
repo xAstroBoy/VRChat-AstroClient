@@ -200,7 +200,7 @@
                 UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
 
                 InitMainsButtons();
-                ItemTweakerMain.InitButtons(5, 0.5f, true); //ItemTweaker Main Button
+                //ItemTweakerMain.InitButtons(5, 0.5f, true); //ItemTweaker Main Button
                 new QMSingleButton("ShortcutMenu", 5, 3, "GameObject Toggler", new Action(() =>
                 { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }
                 ), "Advanced GameObject Toggler", null, null, true);

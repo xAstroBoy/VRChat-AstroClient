@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Extensions
 {
+	using AstroClient.ItemTweakerV2.Submenus;
 	using UnityEngine;
 
 	public static class Scale_ext
@@ -8,7 +9,7 @@
         {
             if (obj != null)
             {
-                ObjectMiscOptions.IncreaseHoldItemScale(obj);
+                ScaleSubmenu.IncreaseHoldItemScale(obj);
             }
         }
 
@@ -16,7 +17,7 @@
         {
             if (obj != null)
             {
-                ObjectMiscOptions.RestoreOriginalScaleItem(obj);
+                ScaleSubmenu.RestoreOriginalScaleItem(obj);
             }
         }
 
@@ -24,7 +25,7 @@
         {
             if (obj != null)
             {
-                ObjectMiscOptions.DecreaseHoldItemScale(obj);
+                ScaleSubmenu.DecreaseHoldItemScale(obj);
             }
         }
     }

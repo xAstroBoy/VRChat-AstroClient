@@ -2,87 +2,285 @@
 {
 	using AstroClient.Components;
 	using AstroClient.Extensions;
-	using AstroClient.GameObjectDebug;
 	using AstroClient.ItemTweakerV2.Selector;
-	using AstroClient.variables;
-	using AstroLibrary;
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Reflection;
 	using UnityEngine;
-	using VRC.SDK3.Components;
 	using VRC.SDKBase;
-	using VRC.Udon.Common.Interfaces;
 	using Color = UnityEngine.Color;
 
-
-	public class PickupSubmenu : ObjectSelectorHelper
+	public class PickupSubmenu : Tweaker_Events
 	{
-
-		public static void Init_PickupSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+		public static void Init_PickupSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
 			var PickupEditor = new QMNestedButton(menu, x, y, "Pickup Property", "Pickup Property Editor Menu!", null, null, null, null, btnHalf);
-            HasPickupComponent = new QMSingleButton(PickupEditor, 0, -1f, "Force Pickup Component", new Action(() => { Pickup.ForcePickupComponentPresence(Selector_Utils.GetGameObjectToEdit()); }), "Forces Pickup component in case there's none.", null, null, true);
-            Pickup_IsEditMode = new QMSingleButton(PickupEditor, 0, -0.5f, "Edit Mode : OFF", null, "Shows if Pickup properties are currently being overriden.", null, null, true);
+			HasPickupComponent = new QMSingleButton(PickupEditor, 0, -1f, "Force Pickup Component", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_ForceComponent(); }), "Forces Pickup component in case there's none.", null, null, true);
+			Pickup_IsEditMode = new QMSingleButton(PickupEditor, 0, -0.5f, "Edit Mode : OFF", null, "Shows if Pickup properties are currently being overriden.", null, null, true);
 
-            new QMSingleButton(PickupEditor, 0, 0, "Reset Properties", new Action(() => { Pickup.RestoreOriginalProperty(Selector_Utils.GetGameObjectToEdit()); }), "Revert Pickup Properties Edits. (disabling editmode)", null, null, true);
-            Pickup_IsHeld = new QMSingleButton(PickupEditor, 0, 0.5f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
-            Pickup_CurrentObjOwner = new QMSingleButton(PickupEditor, 0, 1f, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
-            Pickup_CurrentObjOwner.SetResizeTextForBestFit(true);
-            Pickup_CurrentObjHolder = new QMSingleButton(PickupEditor, -1, 1f, "Current Holder : null", null, "Who is Holding the object.", null, null, false);
-            Pickup_CurrentObjHolder.SetResizeTextForBestFit(true);
+			new QMSingleButton(PickupEditor, 0, 0, "Reset Properties", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_RestoreOriginalProperties(); }), "Revert Pickup Properties Edits. (disabling editmode)", null, null, true);
+			Pickup_IsHeld = new QMSingleButton(PickupEditor, 0, 0.5f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
+			Pickup_CurrentObjOwner = new QMSingleButton(PickupEditor, 0, 1f, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
+			Pickup_CurrentObjOwner.SetResizeTextForBestFit(true);
+			Pickup_CurrentObjHolder = new QMSingleButton(PickupEditor, -1, 1f, "Current Holder : null", null, "Who is Holding the object.", null, null, false);
+			Pickup_CurrentObjHolder.SetResizeTextForBestFit(true);
 
-            new QMSingleButton(PickupEditor, 1, 0, "Pickup Orientation", null, "Pickup Orientation", null, null, true);
-            Pickup_PickupOrientation_prop_any = new QMSingleButton(PickupEditor, 1, 0.5f, "Any", new Action(() => { Pickup.SetPickupOrientation(Selector_Utils.GetGameObjectToEdit(), VRC_Pickup.PickupOrientation.Any); }), "", null, null, true);
-            Pickup_PickupOrientation_prop_Grip = new QMSingleButton(PickupEditor, 1, 1f, "Grip", new Action(() => { Pickup.SetPickupOrientation(Selector_Utils.GetGameObjectToEdit(), VRC_Pickup.PickupOrientation.Grip); }), "", null, null, true);
-            Pickup_PickupOrientation_prop_Gun = new QMSingleButton(PickupEditor, 1, 1.5f, "Gun", new Action(() => { Pickup.SetPickupOrientation(Selector_Utils.GetGameObjectToEdit(), VRC_Pickup.PickupOrientation.Gun); }), "", null, null, true);
+			new QMSingleButton(PickupEditor, 1, 0, "Pickup Orientation", null, "Pickup Orientation", null, null, true);
+			Pickup_PickupOrientation_prop_any = new QMSingleButton(PickupEditor, 1, 0.5f, "Any", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_PickupOrientation(VRC_Pickup.PickupOrientation.Any); }), "", null, null, true);
+			Pickup_PickupOrientation_prop_Grip = new QMSingleButton(PickupEditor, 1, 1f, "Grip", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_PickupOrientation(VRC_Pickup.PickupOrientation.Grip); }), "", null, null, true);
+			Pickup_PickupOrientation_prop_Gun = new QMSingleButton(PickupEditor, 1, 1.5f, "Gun", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_PickupOrientation(VRC_Pickup.PickupOrientation.Gun); }), "", null, null, true);
 
-            var autohold = new QMSingleButton(PickupEditor, 2, 0, "Pickup AutoHoldMode", null, "Pickup AutoHoldMode", null, null, true);
-            autohold.SetResizeTextForBestFit(true);
+			var autohold = new QMSingleButton(PickupEditor, 2, 0, "Pickup AutoHoldMode", null, "Pickup AutoHoldMode", null, null, true);
+			autohold.SetResizeTextForBestFit(true);
 
-            Pickup_AutoHoldMode_prop_AutoDetect = new QMSingleButton(PickupEditor, 2, 0.5f, "AutoDetect", new Action(() => { Pickup.SetAutoHoldMode(Selector_Utils.GetGameObjectToEdit(), VRC_Pickup.AutoHoldMode.AutoDetect); }), "", null, null, true);
-            Pickup_AutoHoldMode_prop_Yes = new QMSingleButton(PickupEditor, 2, 1f, "Yes", new Action(() => { Pickup.SetAutoHoldMode(Selector_Utils.GetGameObjectToEdit(), VRC_Pickup.AutoHoldMode.Yes); }), "", null, null, true);
-            Pickup_AutoHoldMode_prop_No = new QMSingleButton(PickupEditor, 2, 1.5f, "No", new Action(() => { Pickup.SetAutoHoldMode(Selector_Utils.GetGameObjectToEdit(), VRC_Pickup.AutoHoldMode.No); }), "", null, null, true);
-            InitProximitySliderSubmenu(PickupEditor, 3, 0, true);
-            Pickup_allowManipulationWhenEquipped = new QMToggleButton(PickupEditor, 4, 0, "Allow Manipulation Equip", new Action(() => { Pickup.SetallowManipulationWhenEquipped(Selector_Utils.GetGameObjectToEdit(), true); }), "Disallow Manipulation Equip", new Action(() => { Pickup.SetallowManipulationWhenEquipped(Selector_Utils.GetGameObjectToEdit(), false); }), "Control Manipulation Equip property", null, null, null);
-            Pickup_pickupable = new QMToggleButton(PickupEditor, 4, 1, "Pickupable", new Action(() => { Pickup.SetPickupable(Selector_Utils.GetGameObjectToEdit(), true); }), "Not Pickupable", new Action(() => { Pickup.SetPickupable(Selector_Utils.GetGameObjectToEdit(), false); }), "Control Pickupable Property", null, null, null);
-            Pickup_DisallowTheft = new QMToggleButton(PickupEditor, 4, 2, "Allow Theft", new Action(() => { Pickup.SetDisallowTheft(Selector_Utils.GetGameObjectToEdit(), true); }), "Block Theft", new Action(() => { Pickup.SetDisallowTheft(Selector_Utils.GetGameObjectToEdit(), false); }), "Control DisallowTheft property", null, null, null);
-        }
+			Pickup_AutoHoldMode_prop_AutoDetect = new QMSingleButton(PickupEditor, 2, 0.5f, "AutoDetect", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AutoHoldMode(VRC_Pickup.AutoHoldMode.AutoDetect); }), "", null, null, true);
+			Pickup_AutoHoldMode_prop_Yes = new QMSingleButton(PickupEditor, 2, 1f, "Yes", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AutoHoldMode(VRC_Pickup.AutoHoldMode.Yes); }), "", null, null, true);
+			Pickup_AutoHoldMode_prop_No = new QMSingleButton(PickupEditor, 2, 1.5f, "No", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_AutoHoldMode(VRC_Pickup.AutoHoldMode.No); }), "", null, null, true);
+			InitProximitySliderSubmenu(PickupEditor, 3, 0, true);
+			Pickup_allowManipulationWhenEquipped = new QMToggleButton(PickupEditor, 4, 0, "Allow Manipulation Equip", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_allowManipulationWhenEquipped(true); }), "Disallow Manipulation Equip", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_allowManipulationWhenEquipped(false); }), "Control Manipulation Equip property", null, null, null);
+			Pickup_pickupable = new QMToggleButton(PickupEditor, 4, 1, "Pickupable", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_Pickupable(true); }), "Not Pickupable", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_Pickupable(false); }), "Control Pickupable Property", null, null, null);
+			Pickup_DisallowTheft = new QMToggleButton(PickupEditor, 4, 2, "Allow Theft", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_DisallowTheft(false); }), "Block Theft", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_DisallowTheft(true); }), "Control DisallowTheft property", null, null, null);
+		}
 
-        public static void InitProximitySliderSubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
-        {
-            var slider = new QMNestedButton(menu, x, y, "Proximity", "Value Slider Editor!", null, null, null, null, btnHalf);
-            PickupProximitySlider = new QMSlider(Utils.QuickMenu.transform.Find(slider.GetMenuName()), "Proximity : ", 250, -720, delegate (float value)
-{
-    Pickup.SetProximity(Selector_Utils.GetGameObjectToEdit(), (int)value);
-}, 5, 1000, 0, true);
-            PickupProximitySlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
-        }
+		public static void InitProximitySliderSubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
+		{
+			var slider = new QMNestedButton(menu, x, y, "Proximity", "Pickup Proximity Slider Editor!", null, null, null, null, btnHalf);
+			PickupProximitySlider = new QMSlider(Utils.QuickMenu.transform.Find(slider.GetMenuName()), "Proximity : ", 250, -720, delegate (float value)
+			{
+				Tweaker_Object.GetGameObjectToEdit().Pickup_Set_proximity((int)value);
+			}, 5, 1000, 0, true);
+			PickupProximitySlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
+		}
 
+		public override void OnPickupControllerSelected(PickupController control)
+		{
+			UpdatePickupButtons(control);
+		}
 
-		public static QMSingleButton HasPickupComponent;
+		public override void OnPickupController_OnUpdate(PickupController control)
+		{
+			UpdatePickupButtons(control);
+		}
 
-		public static QMSingleButton Pickup_PickupOrientation_prop_any;
-		public static QMSingleButton Pickup_PickupOrientation_prop_Grip;
-		public static QMSingleButton Pickup_PickupOrientation_prop_Gun;
+		// TODO : Support Nulls (Reset mechanism)
+		private static void UpdatePickupButtons(PickupController controller)
+		{
+			if (controller != null)
+			{
+				if (controller.HasPickupComponent())
+				{
+					if (HasPickupComponent != null)
+					{
+						HasPickupComponent.SetTextColor(Color.green);
+					}
+					if (Pickup_IsEditMode != null)
+					{
+						if (controller.EditMode)
+						{
+							Pickup_IsEditMode.SetButtonText("Edit Mode : ON");
+							Pickup_IsEditMode.SetTextColor(Color.green);
+						}
+						else
+						{
+							Pickup_IsEditMode.SetButtonText("Edit Mode : OFF");
+							Pickup_IsEditMode.SetTextColor(Color.red);
+						}
+					}
+					if (Pickup_allowManipulationWhenEquipped != null)
+					{
+						Pickup_allowManipulationWhenEquipped.SetToggleState(controller.allowManipulationWhenEquipped);
+					}
+					if (Pickup_DisallowTheft != null)
+					{
+						Pickup_DisallowTheft.SetToggleState(controller.DisallowTheft);
+					}
+					if (Pickup_pickupable != null)
+					{
+						Pickup_pickupable.SetToggleState(controller.pickupable);
+					}
+					if (Pickup_PickupOrientation_prop_any != null)
+					{
+						if (controller.PickupOrientation == VRC_Pickup.PickupOrientation.Any)
+						{
+							Pickup_PickupOrientation_prop_any.SetTextColor(Color.green);
+						}
+						else
+						{
+							Pickup_PickupOrientation_prop_any.SetTextColor(Color.red);
+						}
+					}
+					if (Pickup_PickupOrientation_prop_Grip != null)
+					{
+						if (controller.PickupOrientation == VRC_Pickup.PickupOrientation.Grip)
+						{
+							Pickup_PickupOrientation_prop_Grip.SetTextColor(Color.green);
+						}
+						else
+						{
+							Pickup_PickupOrientation_prop_Grip.SetTextColor(Color.red);
+						}
+					}
+					if (Pickup_PickupOrientation_prop_Gun != null)
+					{
+						if (controller.PickupOrientation == VRC_Pickup.PickupOrientation.Gun)
+						{
+							Pickup_PickupOrientation_prop_Gun.SetTextColor(Color.green);
+						}
+						else
+						{
+							Pickup_PickupOrientation_prop_Gun.SetTextColor(Color.red);
+						}
+					}
+					if (Pickup_AutoHoldMode_prop_AutoDetect != null)
+					{
+						if (controller.AutoHoldMode == VRC_Pickup.AutoHoldMode.AutoDetect)
+						{
+							Pickup_AutoHoldMode_prop_AutoDetect.SetTextColor(Color.green);
+						}
+						else
+						{
+							Pickup_AutoHoldMode_prop_AutoDetect.SetTextColor(Color.red);
+						}
+					}
+					if (Pickup_AutoHoldMode_prop_Yes != null)
+					{
+						if (controller.AutoHoldMode == VRC_Pickup.AutoHoldMode.Yes)
+						{
+							Pickup_AutoHoldMode_prop_Yes.SetTextColor(Color.green);
+						}
+						else
+						{
+							Pickup_AutoHoldMode_prop_Yes.SetTextColor(Color.red);
+						}
+					}
+					if (Pickup_AutoHoldMode_prop_No != null)
+					{
+						if (controller.AutoHoldMode == VRC_Pickup.AutoHoldMode.No)
+						{
+							Pickup_AutoHoldMode_prop_No.SetTextColor(Color.green);
+						}
+						else
+						{
+							Pickup_AutoHoldMode_prop_No.SetTextColor(Color.red);
+						}
+					}
+					if (PickupProximitySlider != null)
+					{
+						PickupProximitySlider.SetValue(controller.proximity);
+					}
+					if(Pickup_IsHeld != null)
+					{
+						Pickup_IsHeld.SetButtonText(isHeldBtnText(controller));
+						Pickup_IsHeld.SetTextColor(IsHeldBtnColor(controller));
+					}
+					if (Pickup_CurrentObjOwner != null)
+					{
+						Pickup_CurrentObjOwner.SetButtonText("Current owner : \n" + controller.CurrentOwner);
+					}
+					if (Pickup_CurrentObjHolder != null)
+					{
+						Pickup_CurrentObjHolder.SetButtonText("Held By " + controller.CurrentHolderDisplayName);
+					}
+					return;
+				}
+			}
 
-		public static QMSingleButton Pickup_AutoHoldMode_prop_AutoDetect;
-		public static QMSingleButton Pickup_AutoHoldMode_prop_Yes;
-		public static QMSingleButton Pickup_AutoHoldMode_prop_No;
+			HasPickupComponent.SetTextColor(Color.red);
+			if (Pickup_IsEditMode != null)
+			{
+				Pickup_IsEditMode.SetButtonText("Edit Mode : OFF");
+				Pickup_IsEditMode.SetTextColor(Color.red);
+			}
+			if (Pickup_allowManipulationWhenEquipped != null)
+			{
+				Pickup_allowManipulationWhenEquipped.SetToggleState(false);
+			}
+			if (Pickup_DisallowTheft != null)
+			{
+				Pickup_DisallowTheft.SetToggleState(false);
+			}
+			if (Pickup_pickupable != null)
+			{
+				Pickup_pickupable.SetToggleState(false);
+			}
+			if (Pickup_PickupOrientation_prop_any != null)
+			{
+					Pickup_PickupOrientation_prop_any.SetTextColor(Color.red);
+			}
+			if (Pickup_PickupOrientation_prop_Grip != null)
+			{
+					Pickup_PickupOrientation_prop_Grip.SetTextColor(Color.red);
+			}
+			if (Pickup_PickupOrientation_prop_Gun != null)
+			{
+					Pickup_PickupOrientation_prop_Gun.SetTextColor(Color.red);
+			}
+			if (Pickup_AutoHoldMode_prop_AutoDetect != null)
+			{
+					Pickup_AutoHoldMode_prop_AutoDetect.SetTextColor(Color.red);
+			}
+			if (Pickup_AutoHoldMode_prop_Yes != null)
+			{
+					Pickup_AutoHoldMode_prop_Yes.SetTextColor(Color.red);
+			}
+			if (Pickup_AutoHoldMode_prop_No != null)
+			{
+					Pickup_AutoHoldMode_prop_No.SetTextColor(Color.red);
+			}
+			if (PickupProximitySlider != null)
+			{
+				PickupProximitySlider.SetValue(0);
+			}
+			if (Pickup_IsHeld != null)
+			{
+				Pickup_IsHeld.SetButtonText("Not Found");
+				Pickup_IsHeld.SetTextColor(Color.red);
+			}
+			if (Pickup_CurrentObjOwner != null)
+			{
+				Pickup_CurrentObjOwner.SetButtonText("Not Found");
+			}
+			if (Pickup_CurrentObjHolder != null)
+			{
+				Pickup_CurrentObjHolder.SetButtonText("Not Found");
+			}
+		}
 
-		public static QMToggleButton Pickup_allowManipulationWhenEquipped;
-		public static QMToggleButton Pickup_pickupable;
-		public static QMToggleButton Pickup_DisallowTheft;
+		public static string isHeldBtnText(PickupController controller)
+		{
+			if (controller != null)
+			{
+				return controller.IsHeld ? "Held : Yes" : "Held : No";
+			}
+			return "No Pickup Property Found";
+		}
+		public static Color IsHeldBtnColor(PickupController controller)
+		{
+			if (controller != null)
+			{
+				return controller.IsHeld ? Color.green : Color.red;
+			}
+			return Color.red;
+		}
 
-		public static QMSingleButton Pickup_IsEditMode;
-		public static QMSingleButton Pickup_IsHeld;
-		public static QMSingleButton Pickup_CurrentObjOwner;
-		public static QMSingleButton Pickup_CurrentObjHolder;
-		public static QMSlider PickupProximitySlider;
+		public static QMSingleButton HasPickupComponent { get; private set; }
 
+		public static QMSingleButton Pickup_PickupOrientation_prop_any { get; private set; }
+		public static QMSingleButton Pickup_PickupOrientation_prop_Grip { get; private set; }
+		public static QMSingleButton Pickup_PickupOrientation_prop_Gun { get; private set; }
 
+		public static QMSingleButton Pickup_AutoHoldMode_prop_AutoDetect { get; private set; }
+		public static QMSingleButton Pickup_AutoHoldMode_prop_Yes { get; private set; }
+		public static QMSingleButton Pickup_AutoHoldMode_prop_No { get; private set; }
+
+		public static QMToggleButton Pickup_allowManipulationWhenEquipped { get; private set; }
+		public static QMToggleButton Pickup_pickupable { get; private set; }
+		public static QMToggleButton Pickup_DisallowTheft { get; private set; }
+
+		public static QMSingleButton Pickup_IsEditMode { get; private set; }
+		public static QMSingleButton Pickup_IsHeld { get; private set; }
+		public static QMSingleButton Pickup_CurrentObjOwner { get; private set; }
+		public static QMSingleButton Pickup_CurrentObjHolder  { get; private set; }
+		public static QMSlider PickupProximitySlider { get; private set; }
 	}
 }

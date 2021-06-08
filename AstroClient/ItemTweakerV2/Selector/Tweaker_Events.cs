@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace AstroClient.ItemTweakerV2.Selector
 {
-	public class ObjectSelectorHelper : GameEvents
+	public class Tweaker_Events : GameEvents
 	{
-		public ObjectSelectorHelper()
+		public Tweaker_Events()
 		{
-			Object_Selector.Event_On_New_GameObject_Selected += Internal_On_New_GameObject_Selected;
-			Object_Selector.Event_On_Old_GameObject_Removed += Internal_On_Old_GameObject_Removed;
+			Tweaker_Selector.Event_On_New_GameObject_Selected += Internal_On_New_GameObject_Selected;
+			Tweaker_Selector.Event_On_Old_GameObject_Removed += Internal_On_Old_GameObject_Removed;
 			
 			ListenerHandler.Event_OnSelectedObject_Enabled += Internal_OnSelectedObject_Enabled;
 			ListenerHandler.Event_OnSelectedObject_Disabled += Internal_OnSelectedObject_Disabled;

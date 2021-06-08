@@ -86,8 +86,8 @@
         public static void InitQMMenu(QMTabMenu tab, float x, float y, bool btnHalf)
         {
             var tmp = new QMNestedButton(tab, x, y, "Camera Experiments", "Edit Camera Behaviours", null, null, null, null, btnHalf);
-            new QMSingleButton(tmp, 1, 0, "Set Camera (Tweaker)", () => { UserCamera.gameObject.SetObjectToEdit(); CheckCamera(); }, "Sets Camera on the tweaker", null, null, true);
-            new QMSingleButton(tmp, 1, 0.5f, "Set ViewFinder (Tweaker)", () => { ViewFinder.gameObject.SetObjectToEdit(); CheckCamera(); }, "Sets Camera on the tweaker", null, null, true);
+            new QMSingleButton(tmp, 1, 0, "Set Camera (Tweaker)", () => { UserCamera.gameObject.Set_As_Object_To_Edit(); CheckCamera(); }, "Sets Camera on the tweaker", null, null, true);
+            new QMSingleButton(tmp, 1, 0.5f, "Set ViewFinder (Tweaker)", () => { ViewFinder.gameObject.Set_As_Object_To_Edit(); CheckCamera(); }, "Sets Camera on the tweaker", null, null, true);
             new QMSingleButton(tmp, 1, 1f, "Reset Camera Parent", () => { UserCamera.parent = userCameraParent; CheckCamera(); }, "Restore Original parent", null, null, true);
             IsCameraFreeToggle = new QMSingleToggleButton(tmp, 1, 1.5f, "Free Camera", () => { IsCameraFree = true; }, "Parented Camera", () => { IsCameraFree = false; }, "Set if Camera needs to be bound or freed from you.", Color.green, Color.red, null, false, true);
             RespawnOnLevelChangeToggle = new QMSingleToggleButton(tmp, 1, 2f, "Reset Camera on Level Change", () => { RespawnCameraOnLevelLoad = true; }, "Reset Camera on Level Change", () => { RespawnCameraOnLevelLoad = false; }, "Resets Camera Position to be in front of you on level changes.", Color.green, Color.red, null, false, true);

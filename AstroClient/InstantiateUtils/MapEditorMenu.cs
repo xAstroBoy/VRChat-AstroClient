@@ -15,9 +15,9 @@
                 var buttonRotation = LocalPlayerUtils.GetSelfPlayer().gameObject.transform.rotation;
                 var btn = ButtonCreator.Create("Template", buttonPosition, buttonRotation, null);
                 btn.TeleportToMe();
-                btn.ForcePickupComponent();
-                btn.SetPickupable(true);
-                btn.SetObjectToEdit();
+                btn.Pickup_Set_ForceComponent();
+                btn.Pickup_Set_Pickupable(true);
+                btn.Set_As_Object_To_Edit();
                 btn.AddToWorldUtilsMenu();
             }), "Spawn Preset Button", null, null, true);
         }

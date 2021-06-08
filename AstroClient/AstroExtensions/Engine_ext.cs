@@ -4,7 +4,6 @@
 
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.Cloner;
-	using AstroClient.ItemTweaker;
 	using AstroClient.Startup;
 	using AstroLibrary.Console;
 	using AstroLibrary.Finder;
@@ -47,7 +46,26 @@
             }
         }
 
-        public static bool Is_DontDestroyOnLoad(this GameObject obj)
+
+
+		public static UnityEngine.Color Get_Transform_Active_ToColor(this Transform obj)
+		{
+			return obj.gameObject.Get_GameObject_Active_ToColor();
+		}
+
+
+		public static UnityEngine.Color Get_GameObject_Active_ToColor(this GameObject obj)
+		{
+			return obj != null ? obj.active ? UnityEngine.Color.green : UnityEngine.Color.red : UnityEngine.Color.red;
+		}
+
+		public static UnityEngine.Color Get_MonoBehaviour_Enabled_ToColor(this MonoBehaviour obj)
+		{
+			return obj != null ? obj.enabled ? UnityEngine.Color.green : UnityEngine.Color.red : UnityEngine.Color.red;
+		}
+
+
+		public static bool Is_DontDestroyOnLoad(this GameObject obj)
         {
             return obj.scene.name.Equals("DontDestroyOnLoad");
         }
@@ -135,10 +153,6 @@
         public static bool DestroyMeOnline(this GameObject obj)
         {
             bool refreshhandutils = false;
-            if (Tweaker_Object.CurrentSelectedObject == obj)
-            {
-                refreshhandutils = true;
-            }
             var name = obj.name;
             if (obj != null)
             {
@@ -153,10 +167,6 @@
             else
             {
                 ModConsole.Log("Destroyed Server-side Object : " + name, Color.Green);
-                if (refreshhandutils)
-                {
-                    Tweaker_Object.CurrentSelectedObject = null;
-                }
                 return true;
             }
         }
@@ -259,18 +269,6 @@
             }
         }
 
-        public static void SetActiveStatus(this GameObject obj, bool SetActive)
-        {
-            if (obj != null && KeyManager.IsAuthed)
-            {
-                obj.SetActive(SetActive);
-                Tweaker_Object.UpdateCapturedButtonColor(obj.active);
-            }
-            if (ItemTweakerMain.ObjectActiveToggle != null)
-            {
-                ItemTweakerMain.ObjectActiveToggle.SetToggleState(obj.active);
-            }
-        }
 
         public static List<Transform> Get_Childs(this Transform obj)
         {

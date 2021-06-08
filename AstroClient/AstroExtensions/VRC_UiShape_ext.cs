@@ -4,7 +4,6 @@
 
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.Cloner;
-	using AstroClient.ItemTweaker;
 	using AstroClient.Startup;
 	using AstroLibrary.Console;
 	using AstroLibrary.Finder;

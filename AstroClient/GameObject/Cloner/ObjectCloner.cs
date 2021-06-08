@@ -2,7 +2,8 @@
 {
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.Extensions;
-	using AstroClient.ItemTweaker;
+	using AstroClient.ItemTweakerV2.Selector;
+	using AstroClient.ItemTweakerV2.Submenus;
 	using AstroLibrary.Console;
 	using UnityEngine;
 	using static AstroClient.variables.GlobalLists;
@@ -12,20 +13,20 @@
         public override void OnLevelLoaded()
         {
             _Holder = null;
-            ClonedObjects.Clear();
-            ItemTweakerMain.UpdateSpawnedPickupsBtn();
+            SpawnerSubmenu.ClonedObjects.Clear();
+            SpawnerSubmenu.UpdateSpawnedPickupsBtn();
         }
 
         public static void ClonedObjectsDeleter()
         {
-            foreach (var obj in ClonedObjects)
+            foreach (var obj in SpawnerSubmenu.ClonedObjects)
             {
                 obj.RemoveObjFromCustomLists();
                 Object.DestroyImmediate(obj);
             }
-            ClonedObjects.Clear();
+            SpawnerSubmenu.ClonedObjects.Clear();
 
-            ItemTweakerMain.UpdateSpawnedPickupsBtn();
+            SpawnerSubmenu.UpdateSpawnedPickupsBtn();
         }
 
         private static GameObject _Holder;
@@ -38,8 +39,8 @@
             }
             else
             {
-                ClonedObjects.Clear();
-                ItemTweakerMain.UpdateSpawnedPickupsBtn();
+                SpawnerSubmenu.ClonedObjects.Clear();
+                SpawnerSubmenu.UpdateSpawnedPickupsBtn();
                 var parent = new GameObject();
                 parent.name = "Cloned GameObject Holder (AstroClient)";
                 parent.active = true;
@@ -58,10 +59,10 @@
                 {
                     obj.SetActive(true);
                 }
-                if (!ClonedObjects.Contains(obj))
+                if (!SpawnerSubmenu.ClonedObjects.Contains(obj))
                 {
-                    ClonedObjects.Add(obj);
-                    ItemTweakerMain.UpdateSpawnedPickupsBtn();
+                    SpawnerSubmenu.ClonedObjects.Add(obj);
+                    SpawnerSubmenu.UpdateSpawnedPickupsBtn();
                 }
                 ModConsole.Log("Spawned A Copy Successfully!, cloned " + obj.name);
                 Tweaker_Object.SetObjectToEdit(obj);

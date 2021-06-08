@@ -178,12 +178,12 @@
 
         public static void AllowTheft()
         {
-            DetectiveGuns.SetPickupTheft(false);
-            SilencedGuns.SetPickupTheft(false);
-            ShotGuns.SetPickupTheft(false);
-            BearTraps.SetPickupTheft(false);
-            Grenades.SetPickupTheft(false);
-            Knifes.SetPickupTheft(false);
+            DetectiveGuns.Pickup_Set_DisallowTheft(false);
+            SilencedGuns.Pickup_Set_DisallowTheft(false);
+            ShotGuns.Pickup_Set_DisallowTheft(false);
+            BearTraps.Pickup_Set_DisallowTheft(false);
+            Grenades.Pickup_Set_DisallowTheft(false);
+            Knifes.Pickup_Set_DisallowTheft(false);
         }
 
         public static void MurderGunsRockets()
@@ -195,9 +195,9 @@
 
         public static void MurderGunsBounce()
         {
-            DetectiveGuns.Add_Bounce_Component(false);
-            SilencedGuns.Add_Bounce_Component(false);
-            ShotGuns.Add_Bounce_Component(false);
+            DetectiveGuns.Add_Bouncer(false);
+            SilencedGuns.Add_Bouncer(false);
+            ShotGuns.Add_Bouncer(false);
         }
 
         public static void RemoveRockets()
@@ -222,12 +222,12 @@
 
         public static void RemoveBouncers()
         {
-            DetectiveGuns.Remove_Bouncer_Component();
-            SilencedGuns.Remove_Bouncer_Component();
-            ShotGuns.Remove_Bouncer_Component();
-            BearTraps.Remove_Bouncer_Component();
-            Grenades.Remove_Bouncer_Component();
-            Knifes.Remove_Bouncer_Component();
+            DetectiveGuns.Remove_Bouncer();
+            SilencedGuns.Remove_Bouncer();
+            ShotGuns.Remove_Bouncer();
+            BearTraps.Remove_Bouncer();
+            Grenades.Remove_Bouncer();
+            Knifes.Remove_Bouncer();
         }
 
         public static void MurderGunsCrazy()
@@ -327,12 +327,12 @@
             }
             set
             {
-                DetectiveGuns.Set_Gravity(value);
-                SilencedGuns.Set_Gravity(value);
-                ShotGuns.Set_Gravity(value);
-                BearTraps.Set_Gravity(value);
-                Grenades.Set_Gravity(value);
-                Knifes.Set_Gravity(value);
+                DetectiveGuns.RigidBody_Set_Gravity(value);
+                SilencedGuns.RigidBody_Set_Gravity(value);
+                ShotGuns.RigidBody_Set_Gravity(value);
+                BearTraps.RigidBody_Set_Gravity(value);
+                Grenades.RigidBody_Set_Gravity(value);
+                Knifes.RigidBody_Set_Gravity(value);
                 if (ToggleGravityMode != null)
                 {
                     ToggleGravityMode.SetToggleState(value);
@@ -410,11 +410,11 @@
 
             #region Item Tweaker
 
-            new QMSingleButton(MurderItemTweaker, 2, 0, "Knifes (Bouncer)!", new Action(() => { Knifes.Add_Bounce_Component(false); }), "Bouncer!", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemTweaker, 2, 0, "Knifes (Bouncer)!", new Action(() => { Knifes.Add_Bouncer(false); }), "Bouncer!", null, null, true).SetResizeTextForBestFit(true);
             new QMSingleButton(MurderItemTweaker, 2, 0.5f, "Guns (Bouncer)!", new Action(() => { MurderGunsBounce(); }), "Bouncer!", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemTweaker, 2, 1, "Grenades (Bouncer)!", new Action(() => { Grenades.Add_Bounce_Component(false); }), "Bouncer!", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemTweaker, 2, 1.5f, "Bear Trap (Bouncer)!", new Action(() => { BearTraps.Add_Bounce_Component(false); }), "Bouncer!", null, null, true).SetResizeTextForBestFit(true);
-            new QMSingleButton(MurderItemTweaker, 2, 2, "Clues (Bouncer)!", new Action(() => { Clues.Add_Bounce_Component(false); }), "Bouncer", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemTweaker, 2, 1, "Grenades (Bouncer)!", new Action(() => { Grenades.Add_Bouncer(false); }), "Bouncer!", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemTweaker, 2, 1.5f, "Bear Trap (Bouncer)!", new Action(() => { BearTraps.Add_Bouncer(false); }), "Bouncer!", null, null, true).SetResizeTextForBestFit(true);
+            new QMSingleButton(MurderItemTweaker, 2, 2, "Clues (Bouncer)!", new Action(() => { Clues.Add_Bouncer(false); }), "Bouncer", null, null, true).SetResizeTextForBestFit(true);
             new QMSingleButton(MurderItemTweaker, 2, 2.5f, "Kill Bouncer Effects!", new Action(() => { RemoveBouncers(); }), "Remove Bouncing effect to all items", null, null, true).SetResizeTextForBestFit(true);
 
             new QMSingleButton(MurderItemTweaker, 3, 0, "Knifes (Rockets)!", new Action(() => { Knifes.Add_Rocket_Component(false); }), "Rockets!", null, null, true).SetResizeTextForBestFit(true);
@@ -570,7 +570,7 @@
         {
             foreach (var knife in Knifes)
             {
-                Pickup.SetPickupable(knife, Pickupable);
+				knife.Pickup_Set_Pickupable(Pickupable);
             }
         }
 
@@ -578,8 +578,8 @@
         {
             foreach (var knife in Knifes)
             {
-                Pickup.SetPickupOrientation(knife, VRC.SDKBase.VRC_Pickup.PickupOrientation.Grip);
-                Pickup.SetProximity(knife, 500f);
+                knife.Pickup_Set_PickupOrientation(VRC.SDKBase.VRC_Pickup.PickupOrientation.Grip);
+                knife.Pickup_Set_proximity(500f);
             }
         }
 
@@ -587,7 +587,7 @@
         {
             foreach (var knife in Knifes)
             {
-                Pickup.RestoreOriginalProperty(knife);
+                knife.Pickup_RestoreOriginalProperties();
             }
         }
 

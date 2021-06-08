@@ -96,12 +96,14 @@
     <Compile Include="AstroExtensions\Click_ext.cs" />
     <Compile Include="AstroExtensions\Coding_ext.cs" />
     <Compile Include="AstroExtensions\Collider_ext.cs" />
+    <Compile Include="AstroExtensions\Components_exts\Bouncer_ext.cs" />
     <Compile Include="AstroExtensions\Component_utils_ext.cs" />
     <Compile Include="AstroExtensions\ComponentParser_ext.cs" />
     <Compile Include="AstroExtensions\CustomList_ext.cs" />
     <Compile Include="AstroExtensions\Custom_Components_ext.cs" />
     <Compile Include="AstroExtensions\DeepClone_ext.cs" />
-    <Compile Include="AstroExtensions\RigidBodyController_ext.cs" />
+    <Compile Include="AstroExtensions\Components_exts\PickupController_ext.cs" />
+    <Compile Include="AstroExtensions\Components_exts\RigidBodyController_ext.cs" />
     <Compile Include="AstroExtensions\VRC_UiShape_ext.cs" />
     <Compile Include="AstroExtensions\Il2Cpp_ext.cs" />
     <Compile Include="AstroExtensions\Engine_ext.cs" />
@@ -207,10 +209,8 @@
     <Compile Include="GameObject\Editor\Colliders\ColliderEditors.cs" />
     <Compile Include="GameObject\Editor\Color\ColorEditor.cs" />
     <Compile Include="GameObject\Editor\Forces\Forces.cs" />
-    <Compile Include="GameObject\Editor\Interaction\Pickup.cs" />
     <Compile Include="GameObject\Editor\Position\ItemPosition.cs" />
     <Compile Include="GameObject\Editor\Scale\ScaleEditor.cs" />
-    <Compile Include="GameObject\Helpers\Helper.cs" />
     <Compile Include="GameObject\Object Tweaker\ObjectMiscOptions.cs" />
     <Compile Include="GameObject\Online\OnlineEditor.cs" />
     <Compile Include="GameObjMenu.cs" />
@@ -220,20 +220,31 @@
     <Compile Include="ItemTweakerV2\Handlers\ListenerHandler.cs" />
     <Compile Include="ItemTweakerV2\Handlers\PickupControllerHandler.cs" />
     <Compile Include="ItemTweakerV2\Handlers\RigidBodyControllerHandler.cs" />
-    <Compile Include="ItemTweakerV2\Selector\Object_Selector.cs" />
-    <Compile Include="ItemTweakerV2\Selector\ObjectSelectorHelper.cs" />
-    <Compile Include="ItemTweakerV2\Selector\Selector_Utils.cs" />
-    <Compile Include="ItemTweakerV2\Selector\TweakerV2Main.cs" />
+    <Compile Include="ItemTweakerV2\Selector\Tweaker_Selector.cs" />
+    <Compile Include="ItemTweakerV2\Selector\Tweaker_Events.cs" />
+    <Compile Include="ItemTweakerV2\Selector\Tweaker_Object.cs" />
+    <Compile Include="ItemTweakerV2\TweakerV2Main.cs" />
     <Compile Include="ItemTweakerV2\Submenus\ColliderEditor\ColliderEditor.cs" />
+    <Compile Include="ItemTweakerV2\Submenus\Components\Rocket\RocketComponentSubMenu.cs" />
+    <Compile Include="ItemTweakerV2\Submenus\Components\Crazy\CrazyComponentSubMenu.cs" />
+    <Compile Include="ItemTweakerV2\Submenus\Components\Spinner\SpinnerSubMenu.cs" />
+    <Compile Include="ItemTweakerV2\Submenus\Components\Bouncer\BouncerSubMenu.cs" />
+    <Compile Include="ItemTweakerV2\Submenus\Components\ComponentSubMenu.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Physic\Forces\ForcesSubmenu.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Physic\Constraints\ConstraintsSubmenu.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Pickup\PickupSubmenu.cs" />
+    <Compile Include="ItemTweakerV2\Submenus\Scale\ScaleSubmenu.cs" />
+    <Compile Include="ItemTweakerV2\ScrollMenus\Udon\UdonScrollMenu.cs" />
+    <Compile Include="ItemTweakerV2\ScrollMenus\Pickup\PickupSelectionScrollMenu.cs" />
+    <Compile Include="ItemTweakerV2\ScrollMenus\VRC_Interactable\VRC_InteractableScrollMenu.cs" />
+    <Compile Include="ItemTweakerV2\ScrollMenus\VRC_Triggers\VRC_TriggersScrollMenu.cs" />
+    <Compile Include="ItemTweakerV2\ScrollMenus\Prefabs\PrefabSpawnerScrollMenu.cs" />
+    <Compile Include="ItemTweakerV2\ScrollMenus\WorldObjects\WorldObjectsScrollMenu.cs" />
+    <Compile Include="ItemTweakerV2\Submenus\Spawner\SpawnerSubmenu.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnRigidBodyControllerArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnPickupControllerArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\SelectedObjectArgs.cs" />
-    <Compile Include="ItemTweaker\Buttons\Tweaker_Buttons.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Physic\PhysicsSubmenu.cs" />
-    <Compile Include="ItemTweaker\Tweaker_Object.cs" />
     <Compile Include="Lights\LightControl.cs" />
     <Compile Include="Buttons\MovementMenu.cs" />
     <Compile Include="Mora\AntiCrashPolys.cs" />
@@ -267,6 +278,7 @@
     <Compile Include="Startup\Hooks\SpawnEmojiRPCHook.cs" />
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
     <Compile Include="Startup\WorldJoinMsg.cs" />
+    <Compile Include="Target\TargetSelector.cs" />
     <Compile Include="Udon\Exploits\AmongUS\AmongUSUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Global\GlobalUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Murder4\Murder4UdonExploits.cs" />
@@ -1045,11 +1057,7 @@
     <EmbeddedResource Include="Resources\planet.png" />
     <EmbeddedResource Include="Resources\thief.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ItemTweakerV2\Selector\SelectorExtensions\" />
-    <Folder Include="ItemTweakerV2\Submenus\Components\" />
-    <Folder Include="ItemTweakerV2\Submenus\Scale\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resources\repair.png" />
     <EmbeddedResource Include="Resources\badge.png" />

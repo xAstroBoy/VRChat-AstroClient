@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AstroClient.ItemTweakerV2.Selector
 {
-	public class Object_Selector : ObjectSelectorHelper
+	public class Tweaker_Selector : Tweaker_Events
 	{
 		public static event EventHandler<SelectedObjectArgs> Event_On_New_GameObject_Selected;
 

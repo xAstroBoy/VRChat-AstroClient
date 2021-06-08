@@ -10,7 +10,7 @@
         {
             if (obj != null)
             {
-                ItemTweakerMain.AddToWorldUtilsMenu(obj);
+                ItemTweakerV2.Submenus.ScrollMenus.WorldObjectsScrollMenu.AddToWorldUtilsMenu(obj);
             }
         }
 
@@ -20,16 +20,16 @@
             {
                 if (obj != null)
                 {
-                    ItemTweakerMain.AddToWorldUtilsMenu(obj);
+                    ItemTweakerV2.Submenus.ScrollMenus.WorldObjectsScrollMenu.AddToWorldUtilsMenu(obj);
                 }
             }
         }
 
-        public static void SetObjectToEdit(this GameObject obj)
+        public static void Set_As_Object_To_Edit(this GameObject obj)
         {
             if (obj != null)
             {
-                ItemTweaker.Tweaker_Object.SetObjectToEdit(obj);
+                ItemTweakerV2.Selector.Tweaker_Object.SetObjectToEdit(obj);
             }
         }
     }

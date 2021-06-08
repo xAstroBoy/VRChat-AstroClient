@@ -89,18 +89,18 @@
 
         public static void SetMurderItemsGravity(bool useGravity)
         {
-            Clues.Set_Gravity(useGravity);
-            DetectiveGuns.Set_Gravity(useGravity);
-            SilencedGuns.Set_Gravity(useGravity);
-            Knifes.Set_Gravity(useGravity);
+            Clues.RigidBody_Set_Gravity(useGravity);
+            DetectiveGuns.RigidBody_Set_Gravity(useGravity);
+            SilencedGuns.RigidBody_Set_Gravity(useGravity);
+            Knifes.RigidBody_Set_Gravity(useGravity);
         }
 
         public static void AllowTheft()
         {
-            Clues.SetPickupTheft(false);
-            DetectiveGuns.SetPickupTheft(false);
-            SilencedGuns.SetPickupTheft(false);
-            Knifes.SetPickupTheft(false);
+            Clues.Pickup_Set_DisallowTheft(false);
+            DetectiveGuns.Pickup_Set_DisallowTheft(false);
+            SilencedGuns.Pickup_Set_DisallowTheft(false);
+            Knifes.Pickup_Set_DisallowTheft(false);
         }
 
         public static void MurderGunsRockets()

@@ -5,7 +5,7 @@
 	using System.Linq;
 	using UnityEngine;
 	using VRC.Udon;
-	using static AstroClient.ObjectMiscOptions;
+	using static AstroClient.ItemTweakerV2.Submenus.ScaleSubmenu;
 	using static AstroClient.variables.CustomLists;
 
 	internal class ScaleEditor : GameEvents

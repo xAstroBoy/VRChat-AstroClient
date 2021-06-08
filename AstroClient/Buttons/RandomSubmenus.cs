@@ -22,7 +22,7 @@
                     new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {obj.name}", delegate
                     {
                         obj.VRC_Interactable_Click();
-                    }, $"Click {obj.name}", null, ItemTweakerMain.GetObjectStatus(obj)));
+                    }, $"Click {obj.name}", null, obj.Get_GameObject_Active_ToColor()));
                 }
             });
         }
@@ -43,7 +43,7 @@
                     new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {trigger.name}", delegate
                     {
                         trigger.TriggerClick();
-                    }, $"Click {trigger.name}", null, ItemTweakerMain.GetObjectStatus(trigger)));
+                    }, $"Click {trigger.name}", null, trigger.Get_GameObject_Active_ToColor()));
                 }
             });
         }

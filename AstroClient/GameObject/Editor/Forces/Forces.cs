@@ -2,50 +2,34 @@
 {
 	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.Components;
+	using AstroClient.ItemTweakerV2.Submenus;
 	using RubyButtonAPI;
 	using UnityEngine;
 
 	public class Forces
     {
-        public static QMToggleButton Constraint_Rot_X_Toggle;
-        public static QMToggleButton Constraint_Rot_Y_Toggle;
-        public static QMToggleButton Constraint_Rot_Z_Toggle;
 
-        public static QMToggleButton Constraint_X_Toggle;
-        public static QMToggleButton Constraint_Y_Toggle;
-        public static QMToggleButton Constraint_Z_Toggle;
 
-        public static readonly float DefaultForce = 1f;
-        public static readonly float DefaultSpinForce = 100f;
-
-        public static QMSingleToggleButton TakeOwnerShipToggle;
-        private static bool _TakeOwnership;
-        public static bool TakeOwnership
-        {
+		// TODO: Get rid of these two , lazy rn.
+		public static float Force
+		{
             get
-            {
-                return _TakeOwnership;
-            }
-            set
-            {
-                _TakeOwnership = value;
-                if (TakeOwnerShipToggle != null)
-                {
-                    TakeOwnerShipToggle.SetToggleState(value);
-                }
-            }
-        }
+			{
+				return ForcesSubmenu.Force;
+			}
+		}
 
-        public static QMSingleButton ForceAmnt1;
-
-        public static QMSingleButton ForceAmnt2;
-        public static QMSingleButton SpinForceAmnt1;
-        public static QMSingleButton SpinForceAmnt2;
+		public static float SpinForce
+		{
+			get
+			{
+				return ForcesSubmenu.SpinForce;
+			}
+		}
 
 
 
-
-        public static void ApplyBackwardsForce(GameObject obj, bool TakeOwnership = true)
+		public static void ApplyBackwardsForce(GameObject obj, bool TakeOwnership = true)
         {
             if (obj != null)
             {
@@ -141,17 +125,6 @@
             }
         }
 
-        public static void OnLevelLoad()
-        {
-            Update_Constraint_X_Toggle(false);
-            Update_Constraint_Y_Toggle(false);
-            Update_Constraint_Z_Toggle(false);
-            Update_Constraint_Rot_X_Toggle(false);
-            Update_Constraint_Rot_Y_Toggle(false);
-            Update_Constraint_Rot_Z_Toggle(false);
-            TakeOwnership = false;
-        }
-
         public static void PullObject(GameObject obj, bool TakeOwnership = true)
         {
             if (obj != null)
@@ -234,29 +207,6 @@
             }
         }
 
-        public static void ResetForcesVar()
-        {
-            Force = DefaultForce;
-            UpdateForceAmountBtns();
-        }
-
-        public static void ResetSpinForcesVar()
-        {
-            SpinForce = DefaultSpinForce;
-            UpdateForceAmountBtns();
-        }
-
-        public static void SetForceAmount(int val)
-        {
-            Force = val;
-            UpdateForceAmountBtns();
-        }
-
-        public static void SetSpinForceAmount(int val)
-        {
-            SpinForce = val;
-            UpdateForceAmountBtns();
-        }
 
         public static void SpinObject(GameObject obj, float x, float y, float z, bool TakeOwnership = true)
         {
@@ -318,123 +268,7 @@
             }
         }
 
-        public static void Update_Constraint_Rot_X_Toggle(bool status)
-        {
-            if (Constraint_Rot_X_Toggle != null) { Constraint_Rot_X_Toggle.SetToggleState(status); }
-        }
 
-        public static void Update_Constraint_Rot_Y_Toggle(bool status)
-        {
-            if (Constraint_Rot_Y_Toggle != null) { Constraint_Rot_Y_Toggle.SetToggleState(status); }
-        }
 
-        public static void Update_Constraint_Rot_Z_Toggle(bool status)
-        {
-            if (Constraint_Rot_Z_Toggle != null) { Constraint_Rot_Z_Toggle.SetToggleState(status); }
-        }
-
-        public static void Update_Constraint_X_Toggle(bool status)
-        {
-            if (Constraint_X_Toggle != null) { Constraint_X_Toggle.SetToggleState(status); }
-        }
-
-        public static void Update_Constraint_Y_Toggle(bool status)
-        {
-            if (Constraint_Y_Toggle != null) { Constraint_Y_Toggle.SetToggleState(status); }
-        }
-
-        public static void Update_Constraint_Z_Toggle(bool status)
-        {
-            if (Constraint_Z_Toggle != null) { Constraint_Z_Toggle.SetToggleState(status); }
-        }
-
-        public static void UpdateForceAmountBtns()
-        {
-            if (ForceAmnt1 != null)
-            {
-                ForceAmnt1.SetButtonText("Force : " + Force.ToString());
-            }
-            if (ForceAmnt2 != null)
-            {
-                ForceAmnt2.SetButtonText("Force : " + Force.ToString());
-            }
-            if (SpinForceAmnt1 != null)
-            {
-                SpinForceAmnt1.SetButtonText("Spin Force : " + SpinForce.ToString());
-            }
-            if (SpinForceAmnt2 != null)
-            {
-                SpinForceAmnt2.SetButtonText("Spin Force : " + SpinForce.ToString());
-            }
-
-            if (ItemTweakerMain.SpinForceSlider != null)
-            {
-                ItemTweakerMain.SpinForceSlider.SetValue(SpinForce);
-            }
-
-            if (ItemTweakerMain.ForceSlider != null)
-            {
-                ItemTweakerMain.ForceSlider.SetValue(Force);
-            }
-        }
-
-        public static bool UpdateFreezeAllConstraints(RigidbodyConstraints constraints)
-        {
-            if (constraints.HasFlag(RigidbodyConstraints.FreezeAll))
-            {
-                Update_Constraint_X_Toggle(true);
-                Update_Constraint_Y_Toggle(true);
-                Update_Constraint_Z_Toggle(true);
-                Update_Constraint_Rot_X_Toggle(true);
-                Update_Constraint_Rot_Y_Toggle(true);
-                Update_Constraint_Rot_Z_Toggle(true);
-                return true;
-            }
-            return false;
-        }
-
-        public static void UpdatePositionConstraints(RigidbodyConstraints constraints)
-        {
-            if (constraints.HasFlag(RigidbodyConstraints.FreezeAll))
-            {
-                return;
-            }
-
-            if (constraints.HasFlag(RigidbodyConstraints.FreezePosition))
-            {
-                Update_Constraint_X_Toggle(true);
-                Update_Constraint_Y_Toggle(true);
-                Update_Constraint_Z_Toggle(true);
-            }
-            else
-            {
-                Update_Constraint_X_Toggle(constraints.HasFlag(RigidbodyConstraints.FreezePositionX));
-                Update_Constraint_Y_Toggle(constraints.HasFlag(RigidbodyConstraints.FreezePositionY));
-                Update_Constraint_Z_Toggle(constraints.HasFlag(RigidbodyConstraints.FreezePositionZ));
-            }
-        }
-
-        public static void UpdateRotationSection(RigidbodyConstraints constraints)
-        {
-            if (constraints.HasFlag(RigidbodyConstraints.FreezeAll))
-            {
-                return;
-            }
-            if (constraints.HasFlag(RigidbodyConstraints.FreezeRotation))
-            {
-                Update_Constraint_Rot_X_Toggle(true);
-                Update_Constraint_Rot_Y_Toggle(true);
-                Update_Constraint_Rot_Z_Toggle(true);
-            }
-            else
-            {
-                Update_Constraint_Rot_X_Toggle(constraints.HasFlag(RigidbodyConstraints.FreezeRotationX));
-                Update_Constraint_Rot_Y_Toggle(constraints.HasFlag(RigidbodyConstraints.FreezeRotationY));
-                Update_Constraint_Rot_Z_Toggle(constraints.HasFlag(RigidbodyConstraints.FreezeRotationZ));
-            }
-        }
-
-        public static float Force = DefaultForce;
-        public static float SpinForce = DefaultSpinForce;
     }
 }

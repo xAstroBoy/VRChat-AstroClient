@@ -28,9 +28,9 @@
                         ModConsole.Log("Found Hammer! Modifying ...");
                         hammer.RenameObject("Hammer");
                         hammer.EnableColliders();
-                        hammer.SetPickupable(true);
-                        hammer.SetPickupOrientation(VRC_Pickup.PickupOrientation.Gun);
-                        hammer.SetPickupTheft(false);
+                        hammer.Pickup_Set_Pickupable(true);
+                        hammer.Pickup_Set_PickupOrientation(VRC_Pickup.PickupOrientation.Gun);
+                        hammer.Pickup_Set_DisallowTheft(true);
                         foreach (var item in hammer.GetComponentsInChildren<VRC_Trigger>(true))
                         {
                             ModConsole.DebugLog("Disabling SDK 1 Internal Trigger on Hammer..");

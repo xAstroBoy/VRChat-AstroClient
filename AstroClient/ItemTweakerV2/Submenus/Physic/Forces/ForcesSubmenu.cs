@@ -8,10 +8,10 @@ using AstroLibrary.Extensions;
 
 namespace AstroClient.ItemTweakerV2.Submenus
 {
-	public class ForcesSubmenu : ObjectSelectorHelper
+	public class ForcesSubmenu : Tweaker_Events
     {
 
-		public static void ForceSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
+		public static void Init_ForceSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
 			var ForceSubMenu = new QMNestedButton(menu, x, y, "Forces", "You have the Force! Dont abuse it! <3!", null, null, null, null, btnHalf);
 
@@ -37,7 +37,7 @@ namespace AstroClient.ItemTweakerV2.Submenus
 			}, DefaultForce, 1000, 1, true);
 			ForceSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
 			ForceSlider.SetTextLabel("");
-			Forces.ResetForcesVar();
+			Force = DefaultForce;
 
 			SpinForceSlider = new QMSlider(Utils.QuickMenu.transform.Find(ForceAddControl.GetMenuName()), "Spin Power : ", 150, -1120, delegate (float value)
 			{
@@ -45,18 +45,19 @@ namespace AstroClient.ItemTweakerV2.Submenus
 			}, DefaultSpinForce, 1000, 1, true);
 			SpinForceSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
 			SpinForceSlider.SetTextLabel("");
+			SpinForce = DefaultSpinForce;
 
-			new QMSingleButton(ForceSubMenu, 5, 1, "Kill Any Object Forces", new Action(() => { Selector_Utils.GetGameObjectToEdit().KillForces(); }), "Kill Obj Forces", null, null);
-			var right = new QMSingleButton(ForceSubMenu, 4, 2, "→", new Action(() => { Selector_Utils.GetGameObjectToEdit().Right(); }), string.Empty, null, null);
-			var left = new QMSingleButton(ForceSubMenu, 2, 2, "←", new Action(() => { Selector_Utils.GetGameObjectToEdit().Left(); }), string.Empty, null, null);
-			var foward = new QMSingleButton(ForceSubMenu, 3, 1, "↑", new Action(() => { Selector_Utils.GetGameObjectToEdit().Foward(); }), string.Empty, null, null);
-			var backward = new QMSingleButton(ForceSubMenu, 3, 2, "↓", new Action(() => { Selector_Utils.GetGameObjectToEdit().Backward(); }), string.Empty, null, null);
+			new QMSingleButton(ForceSubMenu, 5, 1, "Kill Any Object Forces", new Action(() => { Tweaker_Object.GetGameObjectToEdit().KillForces(); }), "Kill Obj Forces", null, null);
+			var right = new QMSingleButton(ForceSubMenu, 4, 2, "→", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Right(); }), string.Empty, null, null);
+			var left = new QMSingleButton(ForceSubMenu, 2, 2, "←", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Left(); }), string.Empty, null, null);
+			var foward = new QMSingleButton(ForceSubMenu, 3, 1, "↑", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Foward(); }), string.Empty, null, null);
+			var backward = new QMSingleButton(ForceSubMenu, 3, 2, "↓", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Backward(); }), string.Empty, null, null);
 
-			new QMSingleButton(ForceSubMenu, 1, 0, "Push", new Action(() => { Selector_Utils.GetGameObjectToEdit().Push(); }), string.Empty, null, null);
-			new QMSingleButton(ForceSubMenu, 2, 0, "Pull", new Action(() => { Selector_Utils.GetGameObjectToEdit().Pull(); }), string.Empty, null, null);
-			new QMSingleButton(ForceSubMenu, 1, 1, "Rotate X", new Action(() => { Selector_Utils.GetGameObjectToEdit().SpinX(); }), string.Empty, null, null);
-			new QMSingleButton(ForceSubMenu, 2, 1, "Rotate Y", new Action(() => { Selector_Utils.GetGameObjectToEdit().SpinY(); }), string.Empty, null, null);
-			new QMSingleButton(ForceSubMenu, 1, 2, "Rotate Z", new Action(() => { Selector_Utils.GetGameObjectToEdit().SpinZ(); }), string.Empty, null, null);
+			new QMSingleButton(ForceSubMenu, 1, 0, "Push", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Push(); }), string.Empty, null, null);
+			new QMSingleButton(ForceSubMenu, 2, 0, "Pull", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pull(); }), string.Empty, null, null);
+			new QMSingleButton(ForceSubMenu, 1, 1, "Rotate X", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SpinX(); }), string.Empty, null, null);
+			new QMSingleButton(ForceSubMenu, 2, 1, "Rotate Y", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SpinY(); }), string.Empty, null, null);
+			new QMSingleButton(ForceSubMenu, 1, 2, "Rotate Z", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SpinZ(); }), string.Empty, null, null);
 		}
 
 
@@ -99,7 +100,7 @@ namespace AstroClient.ItemTweakerV2.Submenus
 
 
 		private static float _Force;
-		private static float Force
+		public static float Force
 		{
 			get
 			{
@@ -123,7 +124,7 @@ namespace AstroClient.ItemTweakerV2.Submenus
 			}
 		}
 		private static float _SpinForce;
-		private static float SpinForce
+		public static float SpinForce
 		{
 			get
 			{

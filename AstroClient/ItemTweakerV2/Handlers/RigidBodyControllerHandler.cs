@@ -7,7 +7,7 @@
 	using System;
 	using UnityEngine;
 
-	public class RigidBodyControllerHandler : ObjectSelectorHelper
+	public class RigidBodyControllerHandler : Tweaker_Events
 	{
 		public static event EventHandler<OnRigidBodyControllerArgs> Event_OnRigidBodyControllerSelected;
 

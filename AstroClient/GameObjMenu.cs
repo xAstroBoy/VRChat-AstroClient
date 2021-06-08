@@ -1,7 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroClient.Extensions;
-	using AstroClient.ItemTweaker;
+	using AstroClient.ItemTweakerV2.Selector;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
@@ -339,14 +339,14 @@
                                 }
                             }
                         }
-                        QMSingleButton newbtn = new QMSingleButton(gameobjtogglermenu, 0f, 0f, objname, null, objname, null, GetObjectStatus(item), true);
+                        QMSingleButton newbtn = new QMSingleButton(gameobjtogglermenu, 0f, 0f, objname, null, objname, null, item.Get_Transform_Active_ToColor(), true);
 
                         newbtn.SetAction(new Action(() =>
                        {
                            if (IsToggleMode)
                            {
                                item.gameObject.active = !item.gameObject.active;
-                               newbtn.SetTextColor(GetObjectStatus(item));
+                               newbtn.SetTextColor(item.Get_Transform_Active_ToColor());
                            }
                            if (IsDestroyMode)
                            {
@@ -360,7 +360,7 @@
                            }
                            if (PassToTweakerMode)
                            {
-                               Tweaker_Object.CurrentSelectedObject = item.gameObject;
+                               item.gameObject.Set_As_Object_To_Edit();
                            }
                        }));
                         newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.x - 100f, newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
@@ -371,10 +371,6 @@
             });
         }
 
-        public static Color GetObjectStatus(Transform obj)
-        {
-            return obj != null ? obj.gameObject.active ? Color.green : Color.red : Color.red;
-        }
 
         public static void AddEnterChildObj(QMNestedButton page, QMSingleButton parentbtn, Transform item)
         {

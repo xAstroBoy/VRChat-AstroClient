@@ -1,11 +1,9 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroClient.ItemTweaker;
 	using System;
 	using System.Runtime.InteropServices;
 	using UnhollowerRuntimeLib;
 	using UnityEngine;
-	using static AstroClient.ObjectMiscOptions;
 
 	public class ItemInflater : GameEventsBehaviour
     {
@@ -74,10 +72,11 @@
                             // Z
                             FixZ();
                             // Update Button
-                            if (Tweaker_Object.CurrentSelectedObject == obj)
-                            {
-                                GameObjectActualScale.SetButtonText("Object 's Current scale : " + obj.transform.localScale.ToString());
-                            }
+							
+
+							// TODO: Figure a way to update the button remotely. (event)
+                                //GameObjectActualScale.SetButtonText("Object 's Current scale : " + obj.transform.localScale.ToString());
+                            
                         }
                         LastTimeCheck = Time.time;
                     }

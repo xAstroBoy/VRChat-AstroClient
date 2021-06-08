@@ -7,7 +7,7 @@
 	using System;
 	using UnityEngine;
 
-	public class PickupControllerHandler : ObjectSelectorHelper
+	public class PickupControllerHandler : Tweaker_Events
 	{
 		public static event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerSelected;
 
