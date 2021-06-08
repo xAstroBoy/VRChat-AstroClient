@@ -21,6 +21,7 @@
 		public static EventHandler<EventArgs> LevelLoaded;
 		public static EventHandler<EventArgs> AvatarDownload;
 		public static EventHandler<EventArgs> RaiseEvent;
+		public static EventHandler<EventArgs> RPCEvent;
 		public static EventHandler<PhotonPlayerEventArgs> PhotonPlayerJoined;
 		public static EventHandler<PhotonPlayerEventArgs> PhotonPlayerLeft;
 
@@ -30,11 +31,17 @@
 			PatchManager.AddPatch(new Patching.Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin))));
 			PatchManager.AddPatch(new Patching.Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft))));
 			PatchManager.AddPatch(new Patching.Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OnRaiseEvent))));
+			PatchManager.AddPatch(new Patching.Patch(typeof(VRC_EventDispatcherRFC).GetMethod(nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), GetPatch(nameof(OnRPCEvent))));
 		}
 
 		public static HarmonyMethod GetPatch(string name)
 		{
 			return new HarmonyMethod(typeof(EventManager).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+		}
+
+		private static bool OnRPCEvent(Player __0, VRC.SDKBase.VRC_EventHandler.VrcEvent __1, VRC.SDKBase.VRC_EventHandler.VrcBroadcastType __2, int __3, float __4)
+		{
+			return true;
 		}
 
 		private static bool OnRaiseEvent(ref byte __0, ref Il2CppSystem.Object __1, ref RaiseEventOptions __2, ref SendOptions __3)
