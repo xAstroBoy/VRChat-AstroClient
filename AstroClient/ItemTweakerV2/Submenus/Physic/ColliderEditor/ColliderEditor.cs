@@ -19,20 +19,20 @@
 			var menu = new QMNestedButton(main, x, y, "Collider Editor", "Edit Collider Properties", null, null, null, null, btnhalf);
 
 
-			Pickup_IsHeldStatus = new QMSingleButton(main, -1, -1f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
+			Pickup_IsHeldStatus = new QMSingleButton(menu, -1, -1f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
 
-			Pickup_CurrentObjectHolder = new QMSingleButton(main, -1, -0.5f, "Current holder : null", null, "Who is the current object Holder.", null, null, false);
+			Pickup_CurrentObjectHolder = new QMSingleButton(menu, -1, -0.5f, "Current holder : null", null, "Who is the current object Holder.", null, null, false);
 			Pickup_CurrentObjectHolder.SetResizeTextForBestFit(true);
 
-			Pickup_CurrentObjectOwner = new QMSingleButton(main, -1, 0.5f, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
+			Pickup_CurrentObjectOwner = new QMSingleButton(menu, -1, 0.5f, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
 			Pickup_CurrentObjectOwner.SetResizeTextForBestFit(true);
 
 
 
-			TeleportToMe = new QMSingleButton(main, -1, 1.5f, Button_strings_ext.Generate_TeleportToMe_ButtonText(null), new Action(() => { Tweaker_Object.GetGameObjectToEdit().TeleportToMe(); }), Button_strings_ext.Generate_TeleportToMe_ButtonText(null), null, null);
+			TeleportToMe = new QMSingleButton(menu, -1, 1.5f, Button_strings_ext.Generate_TeleportToMe_ButtonText(null), new Action(() => { Tweaker_Object.GetGameObjectToEdit().TeleportToMe(); }), Button_strings_ext.Generate_TeleportToMe_ButtonText(null), null, null);
 			TeleportToMe.SetResizeTextForBestFit(true);
 
-			TeleportToTarget = new QMSingleButton(main, -1, 2.5f, Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.Component_Get_SelectedObject, TargetSelector.CurrentTarget), new Action(() => { Tweaker_Object.GetGameObjectToEdit().TeleportToTarget(); }), Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.Component_Get_SelectedObject, TargetSelector.CurrentTarget), null, null);
+			TeleportToTarget = new QMSingleButton(menu, -1, 2.5f, Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.Component_Get_SelectedObject, TargetSelector.CurrentTarget), new Action(() => { Tweaker_Object.GetGameObjectToEdit().TeleportToTarget(); }), Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.Component_Get_SelectedObject, TargetSelector.CurrentTarget), null, null);
 			TeleportToTarget.SetResizeTextForBestFit(true);
 
 
