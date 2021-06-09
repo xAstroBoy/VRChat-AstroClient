@@ -57,6 +57,7 @@
 		public static List<string> Melons = new List<string>()
 		{
 			"/AstroClient/DontTouchMyClient.dll",
+			"/AstroClient/AstroClientCore.dll",
 			"/AstroClient/AstroClient.dll"
 		};
 
