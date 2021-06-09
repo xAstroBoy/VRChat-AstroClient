@@ -83,11 +83,27 @@
 		public override void OnSelectedObject_Enabled()
 		{
 			ObjectActiveToggle.SetToggleState(true);
+			if (ObjectToEditBtn != null)
+			{
+				ObjectToEditBtn.SetTextColor(Color.green);
+			}
+			if (GameObjMenu.GameObjMenuObjectToEdit != null)
+			{
+				GameObjMenu.GameObjMenuObjectToEdit.SetTextColor(Color.green);
+			}
 		}
 
 		public override void OnSelectedObject_Disabled()
 		{
 			ObjectActiveToggle.SetToggleState(false);
+			if (ObjectToEditBtn != null)
+			{
+				ObjectToEditBtn.SetTextColor(Color.red);
+			}
+			if (GameObjMenu.GameObjMenuObjectToEdit != null)
+			{
+				GameObjMenu.GameObjMenuObjectToEdit.SetTextColor(Color.red);
+			}
 		}
 
 		public override void OnTargetSet(Player player)
@@ -123,13 +139,12 @@
 				{
 					ObjectToEditBtn.SetButtonText("Editing: " + obj.name);
 					ObjectToEditBtn.SetToolTip("Editing: " + obj.name);
-					ObjectToEditBtn.SetTextColor(obj.Get_GameObject_Active_ToColor());
+
 				}
 				if (GameObjMenu.GameObjMenuObjectToEdit != null)
 				{
 					GameObjMenu.GameObjMenuObjectToEdit.SetButtonText("Editing: " + obj.name);
 					GameObjMenu.GameObjMenuObjectToEdit.SetToolTip("Editing: " + obj.name);
-					GameObjMenu.GameObjMenuObjectToEdit.SetTextColor(obj.Get_GameObject_Active_ToColor());
 				}
 			}
 			else

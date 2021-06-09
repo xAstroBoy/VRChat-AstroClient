@@ -34,7 +34,7 @@ namespace AstroClient.ItemTweakerV2.Submenus
 				item.RigidBody_Set_Gravity(useGravity);
 				if (SmartKinematicEnabled)
 				{
-					item.RigidBody_Set_isKinematic(SmartKinematicResult);
+					item.RigidBody_Set_isKinematic(!SmartKinematicResult);
 				}
 			}
 		}
