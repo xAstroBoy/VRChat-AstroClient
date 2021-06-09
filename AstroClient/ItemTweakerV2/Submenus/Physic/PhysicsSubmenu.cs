@@ -11,16 +11,16 @@ namespace AstroClient.ItemTweakerV2.Submenus
 		public static void Init_PhysicSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
 			var main = new QMNestedButton(menu, x, y, "Physics", "Item Physics Editor Menu!", null, null, null, null, btnHalf);
-			GravityToggler = new QMSingleToggleButton(main, 1, 0, "Use Gravity", () => { var item = Tweaker_Object.GetGameObjectToEdit();  item.RigidBody_Set_Gravity(false); if (SmartKinematicEnabled) { if (!item.Will_It_fall_throught()) { item.RigidBody_Set_isKinematic(false); } }  }, "No Gravity", () => {  var item = Tweaker_Object.GetGameObjectToEdit();  item.RigidBody_Set_Gravity(false); if(SmartKinematicEnabled) { if(!item.Will_It_fall_throught()) { item.RigidBody_Set_isKinematic(false); } }  }, "Toggle Object Gravity", Color.green, Color.red, null, false, true); 
+			GravityToggler = new QMSingleToggleButton(main, 1, 0, "Use Gravity", () => { var item = Tweaker_Object.GetGameObjectToEdit(); item.RigidBody_Set_Gravity(false); if (SmartKinematicEnabled) { if (!item.Will_It_fall_throught()) { item.RigidBody_Set_isKinematic(false); } } }, "No Gravity", () => { var item = Tweaker_Object.GetGameObjectToEdit(); item.RigidBody_Set_Gravity(false); if (SmartKinematicEnabled) { if (!item.Will_It_fall_throught()) { item.RigidBody_Set_isKinematic(false); } } }, "Toggle Object Gravity", Color.green, Color.red, null, false, true);
 			KinematicToggler = new QMSingleToggleButton(main, 1, 0.5f, "Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(true); }, "Not Kinematic", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_isKinematic(false); }, "Toggle Object Kinematic", Color.green, Color.red, null, false, true);
-			SmartKinematicToggler = new QMSingleToggleButton(main, 2, 0.5f, "Smart Kinematic Toggler", () => { SmartKinematicEnabled = true; }, "Smart Kinematic Toggler", () => {SmartKinematicEnabled = false }, "Toggle Smart Kinematic Toggler (Check if Object won't fall throught before toggling kinematic with gravity !)", Color.green, Color.red, null, false, true);
+			SmartKinematicToggler = new QMSingleToggleButton(main, 2, 0.5f, "Smart Kinematic Toggler", () => { SmartKinematicEnabled = true; }, "Smart Kinematic Toggler", () => { SmartKinematicEnabled = false; }, "Toggle Smart Kinematic Toggler (Check if Object won't fall throught before toggling kinematic with gravity !)", Color.green, Color.red, null, false, true);
 
 			CollisionsToggler = new QMSingleToggleButton(main, 1, 1, "Use Collisions", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_DetectCollisions(true); }, "No Collisions", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_Set_DetectCollisions(false); }, "Toggle Object Collisions", Color.green, Color.red, null, false, true);
 			ConstraintsSubmenu.Init_ConstraintsSubmenu(main, 1, 1.5f, true);
 			new QMSingleButton(main, 1, 2f, "Restore Rigidbody", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_RestoreOriginalBody(); }, "Restore Default RigidBody Config.", null, null, true);
 			ForcesSubmenu.Init_ForceSubMenu(main, 4, 0, true);
 
-		
+
 		}
 
 
@@ -94,11 +94,12 @@ namespace AstroClient.ItemTweakerV2.Submenus
 			}
 			set
 			{
-				if(SmartKinematicToggler != null)
+				if (SmartKinematicToggler != null)
 				{
 					SmartKinematicToggler.SetToggleState(value);
 				}
 				_SmartKinematicEnabled = value;
 			}
+		}
 	}
 }
