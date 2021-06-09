@@ -105,6 +105,15 @@
 						$"Z:{control.transform.localPosition.z} ");
 				}
 
+				if (CurrentObjectLocalRotation != null)
+				{
+					CurrentObjectLocalRotation.SetButtonText(
+						$"X:{control.transform.localRotation.x} " +
+						$"Y:{control.transform.localRotation.y} " +
+						$"Z:{control.transform.localRotation.z} " +
+						$"W:{control.transform.localRotation.w} ");
+				}
+
 				if (CurrentObjectRotation != null)
 				{
 					CurrentObjectRotation.SetButtonText(
