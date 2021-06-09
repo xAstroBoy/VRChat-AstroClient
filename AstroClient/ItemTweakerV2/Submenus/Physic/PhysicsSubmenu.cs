@@ -45,7 +45,10 @@ namespace AstroClient.ItemTweakerV2.Submenus
 
 		}
 
-
+		public override void On_Old_GameObject_Removed(GameObject obj)
+		{
+			
+		}
 		public override void OnPickupController_OnUpdate(PickupController control)
 		{
 			if (control != null)
@@ -79,7 +82,11 @@ namespace AstroClient.ItemTweakerV2.Submenus
 				TeleportToMe.SetButtonText(obj.Generate_TeleportToMe_ButtonText());
 				TeleportToMe.SetToolTip(obj.Generate_TeleportToMe_ButtonText());
 			}
-
+			var controller = obj.GetOrAddComponent<RigidBodyController>();
+			if(controller != null)
+			{
+				CheckForKinematicPreset(controller);
+			}
 		}
 
 		public override void OnTargetSet(Player player)
@@ -118,7 +125,6 @@ namespace AstroClient.ItemTweakerV2.Submenus
 		public override void OnRigidBodyControllerSelected(RigidBodyController control)
 		{
 			UpdateProperties(control);
-			CheckForKinematicPreset(control);
 		}
 
 
