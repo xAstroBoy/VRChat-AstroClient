@@ -19,12 +19,13 @@
 			new QMSingleButton(main, 1, 0f, "Copy Position.", () => { Tweaker_Object.GetGameObjectToEdit().CopyPosition(); }, "Copies Object Current Position in clipboard.", null, Color.yellow, true);
 			new QMSingleButton(main, 1, 0.5f, "Copy Rotation.", () => { Tweaker_Object.GetGameObjectToEdit().CopyRotation(); }, "Copies Object Current Rotation in clipboard.", null, Color.yellow, true);
 			new QMSingleButton(main, 1, 1f, "Copy Local Position.", () => { Tweaker_Object.GetGameObjectToEdit().CopyLocalPosition(); }, "Copies Object Current Local Position in clipboard.", null, Color.yellow, true);
-			new QMSingleButton(main, 1, 1.5f, "Copy Object Path.", () => { Tweaker_Object.GetGameObjectToEdit().CopyPath(); }, "Copies Object Current Path in clipboard.", null, Color.yellow, true);
+			new QMSingleButton(main, 1, 1.5f, "Copy Local Rotation.", () => { Tweaker_Object.GetGameObjectToEdit().CopyPath(); }, "Copies Object Current Local Rotation in clipboard.", null, Color.yellow, true);
+			new QMSingleButton(main, 1, 2, "Copy Object Path.", () => { Tweaker_Object.GetGameObjectToEdit().CopyPath(); }, "Copies Object Current Path in clipboard.", null, Color.yellow, true);
 
 
 
 			float Position = 3f;
-			float stretch = 1000f;
+			float stretch = 1250f;
 			CurrentObjectCoordsBtn = new QMSingleButton(main, Position, 0, "", null, "Shows Object Position", null, null, true);
 			CurrentObjectCoordsBtn.ToggleBtnImage(false);
 			CurrentObjectCoordsBtn.SetResizeTextForBestFit(true);
@@ -42,8 +43,14 @@
 			CurrentObjectLocalPosition.SetResizeTextForBestFit(true);
 			CurrentObjectLocalPosition.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(CurrentObjectLocalPosition.GetGameObject().GetComponent<RectTransform>().sizeDelta.x + stretch, CurrentObjectLocalPosition.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
 
+			CurrentObjectLocalRotation = new QMSingleButton(main, Position, 1.5f, "", null, "Shows Object Local Rotation", null, null, true);
+			CurrentObjectLocalRotation.ToggleBtnImage(false);
+			CurrentObjectLocalRotation.SetResizeTextForBestFit(true);
+			CurrentObjectLocalRotation.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(CurrentObjectLocalRotation.GetGameObject().GetComponent<RectTransform>().sizeDelta.x + stretch, CurrentObjectLocalRotation.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
 
-			CurrentObjectPath = new QMSingleButton(main, Position, 1.5f, "", null, "Shows Object Path", null, null, true);
+
+
+			CurrentObjectPath = new QMSingleButton(main, Position, 2f, "", null, "Shows Object Path", null, null, true);
 			CurrentObjectPath.ToggleBtnImage(false);
 			CurrentObjectPath.SetResizeTextForBestFit(true);
 			CurrentObjectPath.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(CurrentObjectPath.GetGameObject().GetComponent<RectTransform>().sizeDelta.x + stretch, CurrentObjectPath.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
@@ -55,6 +62,7 @@
 		public static QMSingleButton CurrentObjectCoordsBtn;
 		public static QMSingleButton CurrentObjectRotation;
 		public static QMSingleButton CurrentObjectLocalPosition;
+		public static QMSingleButton CurrentObjectLocalRotation;
 		public static QMSingleButton CurrentObjectPath;
 
 
@@ -96,6 +104,25 @@
 						$"Y:{control.transform.localPosition.y} " +
 						$"Z:{control.transform.localPosition.z} ");
 				}
+
+				if (CurrentObjectLocalRotation != null)
+				{
+					CurrentObjectLocalRotation.SetButtonText(
+						$"X:{control.transform.localRotation.x} " +
+						$"Y:{control.transform.localRotation.y} " +
+						$"Z:{control.transform.localRotation.z} " +
+						$"W:{control.transform.localRotation.w} ");
+				}
+
+				if (CurrentObjectRotation != null)
+				{
+					CurrentObjectRotation.SetButtonText(
+						$"X:{control.transform.rotation.x} " +
+						$"Y:{control.transform.rotation.y} " +
+						$"Z:{control.transform.rotation.z} " +
+						$"W:{control.transform.rotation.w} ");
+				}
+
 			}
 		}
 

@@ -139,7 +139,17 @@
             }
         }
 
-        public static void DestroyObject(this GameObject obj)
+		public static void CopyLocalRotation(this GameObject obj)
+		{
+			if (obj != null)
+			{
+				ModConsole.Log($"{obj.name} localRotation is : new Quaternion({obj.transform.localRotation.x}f, {obj.transform.localRotation.y}f, {obj.transform.localRotation.z}f, {obj.transform.localRotation.w}f)");
+				ModConsole.Log($"The localRotation has been copied on the clipboard.");
+				Clipboard.SetText($"new Quaternion({obj.transform.localRotation.x}f, {obj.transform.localRotation.y}f, {obj.transform.localRotation.z}f, {obj.transform.localRotation.w}f)");
+			}
+		}
+
+		public static void DestroyObject(this GameObject obj)
         {
             if (!obj.DestroyMeOnline())
             {
