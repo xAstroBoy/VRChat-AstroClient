@@ -1,6 +1,8 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
 	using AstroClient.Cheetos;
+	using AstroLibrary;
+	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using System.Diagnostics;
@@ -70,6 +72,56 @@
 
 			QMToggleButton removeGalleryButton = new QMToggleButton(subHideElements, 1, 2, "Remove GalleryButton", () => { ConfigManager.UI.RemoveGalleryButton = true; }, "Keep GalleryButton", () => { ConfigManager.UI.RemoveGalleryButton = false; }, "Requires Restart");
 			removeGalleryButton.SetToggleState(ConfigManager.UI.RemoveGalleryButton, false);
+
+			QMNestedButton subSpoofButton = new QMNestedButton(sub, 3, 2f, "Spoofs", "Spoof Menu", null, null, null, null, false);
+
+			QMToggleButton toggleSpoofFPS = new QMToggleButton(subSpoofButton, 1, 0, "FPS\nSpoof\nOn", () => { ConfigManager.General.SpoofFPS = true; }, "FPS\nSpoof\nOff", () => { ConfigManager.General.SpoofFPS = false; }, "Toggle FPS Spoofing");
+			toggleSpoofFPS.SetToggleState(ConfigManager.General.SpoofFPS, false);
+
+			QMToggleButton toggleSpoofPing = new QMToggleButton(subSpoofButton, 2, 0, "Ping\nSpoof\nOn", () => { ConfigManager.General.SpoofPing = true; }, "Ping\nSpoof\nOff", () => { ConfigManager.General.SpoofPing = false; }, "Toggle Ping Spoofing");
+			toggleSpoofPing.SetToggleState(ConfigManager.General.SpoofPing, false);
+
+			new QMSingleButton(subSpoofButton, 1, 1, "Set\nFPS\nValue", delegate ()
+			{
+				CheetosHelpers.PopupCall("Set FPS Value", "Done", "Enter FPS. . .", true, delegate (string text)
+				{
+					float value = 0f;
+
+					try
+					{
+						value = float.Parse(text);
+					}
+					catch
+					{
+						ModConsole.Error("Input value must be a float value!");
+					}
+					finally
+					{
+						ConfigManager.General.SpoofedFPS = value;
+					}
+				});
+			}, "Input an FPS value");
+
+			new QMSingleButton(subSpoofButton, 2, 1, "Set\nPing\nValue", delegate ()
+			{
+				CheetosHelpers.PopupCall("Set Ping Value", "Done", "Enter Ping. . .", true, delegate (string text)
+				{
+					short value = 0;
+
+					try
+					{
+						value = short.Parse(text);
+					}
+					catch
+					{
+						ModConsole.Error("Input value must be a short value!");
+					}
+					finally
+					{
+						ConfigManager.General.SpoofedPing = value;
+					}
+				});
+			}, "Input a Ping value");
 		}
-    }
+	}
 }

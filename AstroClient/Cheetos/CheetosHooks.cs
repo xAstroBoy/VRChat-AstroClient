@@ -9,6 +9,7 @@
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
+	using ExitGames.Client.Photon;
 	using Harmony;
 	using MelonLoader;
 	using Newtonsoft.Json;
@@ -17,6 +18,7 @@
 	using System.Collections.Generic;
 	using System.Reflection;
 	using UnhollowerBaseLib;
+	using UnityEngine;
 	using VRC.Core;
 
 	#endregion Imports
@@ -106,16 +108,17 @@
 		{
 			try
 			{
-				ModConsole.DebugLog("[AstroClient Cheetos Patches] Start. . .");
+				ModConsole.Log("[AstroClient Cheetos Patches] Start. . .");
 
 				new Patch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_0)), GetPatch(nameof(OnAvatarDownload)));
 				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
 				new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
-				//new Patch(AccessTools.Property(typeof(PhotonPeer), "RoundTripTime").GetMethod, GetPatch("FakePing"));
-				//new Patch(AccessTools.Property(typeof(Time), "smoothDeltaTime").GetMethod, GetPatch("FakeFrames"));
+				new Patch(AccessTools.Property(typeof(Time), nameof(Time.smoothDeltaTime)).GetMethod, null, GetPatch(nameof(SpoofFPS)));
+				new Patch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
+
 				//new Patch(typeof(VRCStandaloneInputModule).GetMethod(XrefTesting.OnTest.Name), GetPatch(nameof(OnTestPatch)));
 
-				ModConsole.DebugLog("[AstroClient Cheetos Patches] DONE!");
+				ModConsole.DebugLog("[Client Cheetos Patches] DONE!");
 				Patch.DoPatches();
 			}
 			catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
@@ -126,6 +129,33 @@
 		{
 			ModConsole.Log("Test!");
 			return true;
+		}
+		private static void SpoofPing(ref int __result)
+		{
+			ModConsole.Log($"Spoof! {__result}");
+			try
+			{
+				if (AstroClient.ConfigManager.General.SpoofPing)
+				{
+					__result = AstroClient.ConfigManager.General.SpoofedPing;
+					return;
+				}
+			}
+			catch { }
+		}
+
+		private static void SpoofFPS(ref float __result)
+		{
+			ModConsole.Log($"Spoof! {__result}");
+			try
+			{
+				if (AstroClient.ConfigManager.General.SpoofFPS)
+				{
+					__result = (float) 1f / AstroClient.ConfigManager.General.SpoofedFPS;
+					return;
+				}
+			}
+			catch { }
 		}
 
 		private static bool OnAvatarDownload(ref ApiAvatar __0)

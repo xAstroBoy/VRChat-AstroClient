@@ -48,6 +48,14 @@
         public float FOV = 61f;
 
         public float FarClipPlane = 60f;
+
+		public bool SpoofPing = false;
+
+		public bool SpoofFPS = false;
+
+		public int SpoofedPing = 30;
+
+		public float SpoofedFPS = 60f;
     }
 
     [Serializable, Obfuscation]

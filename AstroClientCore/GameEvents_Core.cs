@@ -8,9 +8,9 @@
 	using VRC.SDKBase;
 
 	// thanks TO Cheeto aka Craig on discord, he's been really helpful!
-	public class GameEvents
+	public class GameEvents_Core
 	{
-		public GameEvents()
+		public GameEvents_Core()
 		{
 			// ML Events
 			EventManager.ApplicationQuit += Internal_OnApplicationQuit;

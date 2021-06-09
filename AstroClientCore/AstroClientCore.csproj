@@ -92,7 +92,7 @@
     <Compile Include="Modules\BaseModule.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="ClientCore.cs" />
-    <Compile Include="GameEvents.cs" />
+    <Compile Include="GameEvents_Core.cs" />
     <Compile Include="Managers\EventManager.cs" />
     <Compile Include="Managers\ModuleManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
