@@ -13,75 +13,80 @@
 
 	public class ClientCore : MelonMod
 	{
-		public override void OnApplicationStart()
-		{
-			ModConsole.Initialize("AstroClient");
-			ModConsole.Log($"Welcome to AstroClient, {GlobalVariables.Version}");
 
-			PatchManager.Initialize();
-			ModuleManager.LoadModules();
 
-			EventManager.ApplyPatches();
-			PatchManager.DoPatches();
+		// CORE breaks the Game on startup
 
-			InitializeOverridables();
-		}
 
-		public static void InitializeOverridables()
-		{
-			foreach (var assembly in ModuleManager.Assemblies)
-			{
-				foreach (var type in assembly.GetTypes().Where(t => t.BaseType.Equals(typeof(GameEvents_Core))))
-				{
-					GameEvents_Core component = assembly.CreateInstance(type.ToString(), true) as GameEvents_Core;
-					component.OnApplicationStart();
-					ModConsole.Log($"GameEvent Component Loaded: {type}");
-				}
-			}
-		}
+		//public override void OnApplicationStart()
+		//{
+		//	ModConsole.Initialize("AstroClient");
+		//	ModConsole.Log($"Welcome to AstroClient, {GlobalVariables.Version}");
 
-		public override void OnSceneWasInitialized(int buildIndex, string sceneName)
-		{
-			switch (buildIndex)
-			{
-				case 0: // app
-				case 1: // ui
-					break;
+		//	PatchManager.Initialize();
+		//	ModuleManager.LoadModules();
 
-				default:
-					EventManager.LevelLoaded?.Invoke(this, new EventArgs());
-					break;
-			}
-		}
+		//	EventManager.ApplyPatches();
+		//	PatchManager.DoPatches();
 
-		public override void OnUpdate()
-		{
-			ModuleManager.Update();
-			EventManager.Update?.Invoke(null, new EventArgs());
-		}
+		//	InitializeOverridables();
+		//}
 
-		public override void OnLateUpdate()
-		{
-			ModuleManager.LateUpdate();
-			EventManager.LateUpdate?.Invoke(null, new EventArgs());
-		}
+		//public static void InitializeOverridables()
+		//{
+		//	foreach (var assembly in ModuleManager.Assemblies)
+		//	{
+		//		foreach (var type in assembly.GetTypes().Where(t => t.BaseType.Equals(typeof(GameEvents_Core))))
+		//		{
+		//			GameEvents_Core component = assembly.CreateInstance(type.ToString(), true) as GameEvents_Core;
+		//			component.OnApplicationStart();
+		//			ModConsole.Log($"GameEvent Component Loaded: {type}");
+		//		}
+		//	}
+		//}
 
-		public override void VRChat_OnUiManagerInit()
-		{
-			ModuleManager.VRChat_OnUiManagerInit();
-			EventManager.UiManagerInit?.Invoke(null, new EventArgs());
-		}
+		//public override void OnSceneWasInitialized(int buildIndex, string sceneName)
+		//{
+		//	switch (buildIndex)
+		//	{
+		//		case 0: // app
+		//		case 1: // ui
+		//			break;
 
-		public override void OnApplicationQuit()
-		{
-			ModuleManager.OnApplicationQuit();
-			EventManager.ApplicationQuit?.Invoke(null, new EventArgs());
-		}
+		//		default:
+		//			EventManager.LevelLoaded?.Invoke(this, new EventArgs());
+		//			break;
+		//	}
+		//}
 
-		public override void OnGUI()
-		{
-			ModuleManager.OnGUI();
-			EventManager.GUI?.Invoke(null, new EventArgs());
-		}
+		//public override void OnUpdate()
+		//{
+		//	ModuleManager.Update();
+		//	EventManager.Update?.Invoke(null, new EventArgs());
+		//}
+
+		//public override void OnLateUpdate()
+		//{
+		//	ModuleManager.LateUpdate();
+		//	EventManager.LateUpdate?.Invoke(null, new EventArgs());
+		//}
+
+		//public override void VRChat_OnUiManagerInit()
+		//{
+		//	ModuleManager.VRChat_OnUiManagerInit();
+		//	EventManager.UiManagerInit?.Invoke(null, new EventArgs());
+		//}
+
+		//public override void OnApplicationQuit()
+		//{
+		//	ModuleManager.OnApplicationQuit();
+		//	EventManager.ApplicationQuit?.Invoke(null, new EventArgs());
+		//}
+
+		//public override void OnGUI()
+		//{
+		//	ModuleManager.OnGUI();
+		//	EventManager.GUI?.Invoke(null, new EventArgs());
+		//}
 	}
 }

@@ -266,14 +266,17 @@
     <Compile Include="Main.cs" />
     <Compile Include="Skyboxes\SkyboxEditor.cs" />
     <Compile Include="Startup\ComponentHelper.cs" />
+    <Compile Include="Startup\EventArgs\OnAvatarDownloadArgs.cs" />
+    <Compile Include="Startup\EventArgs\OnAvatarSpawnArgs.cs" />
     <Compile Include="Startup\EventArgs\OnTeleportRPCArgs.cs" />
     <Compile Include="Startup\EventArgs\OnWorldRevealArgs.cs" />
+    <Compile Include="Startup\EventArgs\PhotonPlayerEventArgs.cs" />
+    <Compile Include="Startup\EventArgs\PlayerEventArgs.cs" />
     <Compile Include="Startup\EventArgs\RayCastEventArgs.cs" />
     <Compile Include="Startup\EventArgs\SpawnEmojiArgs.cs" />
     <Compile Include="Startup\EventArgs\UdonSyncRPCEventArgs.cs" />
     <Compile Include="Startup\EventArgs\VRCPlayerEventArgs.cs" />
     <Compile Include="Startup\EventArgs\VRC_EventDispatcherRFC_TriggerEventArgs.cs" />
-    <Compile Include="Startup\Hooks\AntiVoteKick.cs" />
     <Compile Include="Startup\Hooks\AvatarManagerHook.cs" />
     <Compile Include="Startup\Hooks\NetworkManagerHooks.cs" />
     <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
@@ -1043,10 +1046,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AstroClientCore\AstroClientCore.csproj">
-      <Project>{02aadcad-17df-4909-b898-bce001d9cac8}</Project>
-      <Name>AstroClientCore</Name>
-    </ProjectReference>
     <ProjectReference Include="..\AstroLibrary\AstroLibrary.csproj">
       <Project>{4613c712-5463-44c6-ab48-081a2b3ae61d}</Project>
       <Name>AstroLibrary</Name>

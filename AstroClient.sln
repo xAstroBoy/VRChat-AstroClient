@@ -20,13 +20,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroNetworkingLibrary", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroInstaller", "AstroInstaller\AstroInstaller.csproj", "{4998A709-F158-4CEF-968D-554ED9874B17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroTestModule", "AstroTestModule\AstroTestModule.csproj", "{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroLibrary", "AstroLibrary\AstroLibrary.csproj", "{4613C712-5463-44C6-AB48-081A2B3AE61D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDumper", "MonoDumper\MonoDumper.csproj", "{B29C09FF-1FCC-4302-8AB4-8FE673693845}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroClientCore", "AstroClientCore\AstroClientCore.csproj", "{02AADCAD-17DF-4909-B898-BCE001D9CAC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,12 +67,6 @@ Global
 		{4998A709-F158-4CEF-968D-554ED9874B17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4998A709-F158-4CEF-968D-554ED9874B17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4998A709-F158-4CEF-968D-554ED9874B17}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Debug_Offline|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Debug_Offline|Any CPU.Build.0 = Debug|Any CPU
-		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA3B81FC-2E0D-49CC-B3A7-5EFEBEC7DEFE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4613C712-5463-44C6-AB48-081A2B3AE61D}.Debug_Offline|Any CPU.ActiveCfg = Debug|Any CPU
 		{4613C712-5463-44C6-AB48-081A2B3AE61D}.Debug_Offline|Any CPU.Build.0 = Debug|Any CPU
 		{4613C712-5463-44C6-AB48-081A2B3AE61D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -89,12 +79,6 @@ Global
 		{B29C09FF-1FCC-4302-8AB4-8FE673693845}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B29C09FF-1FCC-4302-8AB4-8FE673693845}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B29C09FF-1FCC-4302-8AB4-8FE673693845}.Release|Any CPU.Build.0 = Release|Any CPU
-		{02AADCAD-17DF-4909-B898-BCE001D9CAC8}.Debug_Offline|Any CPU.ActiveCfg = Debug|Any CPU
-		{02AADCAD-17DF-4909-B898-BCE001D9CAC8}.Debug_Offline|Any CPU.Build.0 = Debug|Any CPU
-		{02AADCAD-17DF-4909-B898-BCE001D9CAC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{02AADCAD-17DF-4909-B898-BCE001D9CAC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{02AADCAD-17DF-4909-B898-BCE001D9CAC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{02AADCAD-17DF-4909-B898-BCE001D9CAC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
