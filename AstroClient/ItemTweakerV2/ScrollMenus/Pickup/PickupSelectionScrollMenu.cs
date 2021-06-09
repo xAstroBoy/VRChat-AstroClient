@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
+	using AstroClient.Components;
 	using AstroClient.Extensions;
 	using AstroClient.ItemTweakerV2.Selector;
 	using AstroLibrary.Extensions;
@@ -18,6 +19,15 @@
 			{
 				PickupQMScroll.Refresh();
 			}, "", null, null, true);
+
+			Pickup_IsHeldStatus = new QMSingleButton(main, -1, -1f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
+
+			Pickup_CurrentObjectHolder = new QMSingleButton(main, -1, -0.5f, "Current holder : null", null, "Who is the current object Holder.", null, null, false);
+			Pickup_CurrentObjectHolder.SetResizeTextForBestFit(true);
+
+			Pickup_CurrentObjectOwner = new QMSingleButton(main, -1, 0.5f, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
+			Pickup_CurrentObjectOwner.SetResizeTextForBestFit(true);
+
 
 			TeleportToMe = new QMSingleButton(menu, 0, -0.5f, Tweaker_Selector.Component_Get_SelectedObject.Generate_TeleportToMe_ButtonText(), delegate
 		   {
@@ -46,6 +56,34 @@
 				}
 			});
 		}
+
+
+
+		public override void OnPickupController_OnUpdate(PickupController control)
+		{
+			if (control != null)
+			{
+
+				if (Pickup_IsHeldStatus != null)
+				{
+					Pickup_IsHeldStatus.SetButtonText(control.Get_IsHeld_ButtonText());
+					Pickup_IsHeldStatus.SetTextColor(control.Get_IsHeld_ButtonColor());
+				}
+				if (Pickup_CurrentObjectOwner != null)
+				{
+					Pickup_CurrentObjectOwner.SetButtonText(control.Get_PickupOwner_ButtonText());
+				}
+				if (Pickup_CurrentObjectHolder != null)
+				{
+					Pickup_CurrentObjectHolder.SetButtonText(control.Get_IsHeldBy_ButtonText());
+				}
+			}
+		}
+
+		private static QMSingleButton Pickup_IsHeldStatus { get; set; }
+		private static QMSingleButton Pickup_CurrentObjectHolder { get; set; }
+		private static QMSingleButton Pickup_CurrentObjectOwner { get; set; }
+
 
 
 		public override void On_New_GameObject_Selected(GameObject obj)

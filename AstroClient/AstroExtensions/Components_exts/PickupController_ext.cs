@@ -274,7 +274,11 @@
 
 		public static string Get_IsHeldBy_ButtonText(this PickupController controller)
 		{
-            return "Held By " + controller.CurrentHolderDisplayName;
+			if (controller.CurrentObjectHolderPlayer != null)
+			{
+				return "Held By " + controller.CurrentHolderDisplayName;
+			}
+			return "Not Held";
 		}
 
 		public static string Get_PickupOwner_ButtonText(this PickupController controller)

@@ -14,13 +14,13 @@ namespace AstroClient.ItemTweakerV2.Submenus
 		{
 			var ForceSubMenu = new QMNestedButton(menu, x, y, "Forces", "You have the Force! Dont abuse it! <3!", null, null, null, null, btnHalf);
 
-			Forces_Pickup_IsHeld = new QMSingleButton(ForceSubMenu, 0, -1.5f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
+			Pickup_IsHeldStatus = new QMSingleButton(ForceSubMenu, 0, -1.5f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
 
-			Forces_CurrentObjHolder = new QMSingleButton(ForceSubMenu, 0, -1, "Current holder : null", null, "Who is the current object Holder.", null, null, false);
-			Forces_CurrentObjHolder.SetResizeTextForBestFit(true);
+			Pickup_CurrentObjectHolder = new QMSingleButton(ForceSubMenu, 0, -1, "Current holder : null", null, "Who is the current object Holder.", null, null, false);
+			Pickup_CurrentObjectHolder.SetResizeTextForBestFit(true);
 
-			Forces_SelPickup_CurrentObjOwner = new QMSingleButton(ForceSubMenu, 5, -1, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
-			Forces_SelPickup_CurrentObjOwner.SetResizeTextForBestFit(true);
+			Pickup_CurrentObjectOwner = new QMSingleButton(ForceSubMenu, 5, -1, "Current Owner : null", null, "Who is the current object owner.", null, null, false);
+			Pickup_CurrentObjectOwner.SetResizeTextForBestFit(true);
 
 			ForceAmnt1 = new QMSingleButton(ForceSubMenu, 0, 0, "Force : " + Force, () => { Force = DefaultForce; }, string.Empty, null, null);
 			SpinForceAmnt1 = new QMSingleButton(ForceSubMenu, 0, 1, "Spin Force : " + SpinForce, () => { SpinForce = DefaultSpinForce; }, string.Empty, null, null);
@@ -64,24 +64,24 @@ namespace AstroClient.ItemTweakerV2.Submenus
 			if(control != null)
 			{
 
-				if (Forces_Pickup_IsHeld != null)
+				if (Pickup_IsHeldStatus != null)
 				{
-					Forces_Pickup_IsHeld.SetButtonText(control.Get_IsHeld_ButtonText());
-					Forces_Pickup_IsHeld.SetTextColor(control.Get_IsHeld_ButtonColor());
+					Pickup_IsHeldStatus.SetButtonText(control.Get_IsHeld_ButtonText());
+					Pickup_IsHeldStatus.SetTextColor(control.Get_IsHeld_ButtonColor());
 				}
-				if (Forces_SelPickup_CurrentObjOwner != null)
+				if (Pickup_CurrentObjectOwner != null)
 				{
-					Forces_SelPickup_CurrentObjOwner.SetButtonText(control.Get_PickupOwner_ButtonText());
+					Pickup_CurrentObjectOwner.SetButtonText(control.Get_PickupOwner_ButtonText());
 				}
-				if (Forces_CurrentObjHolder != null)
+				if (Pickup_CurrentObjectHolder != null)
 				{
-					Forces_CurrentObjHolder.SetButtonText(control.Get_IsHeldBy_ButtonText());
+					Pickup_CurrentObjectHolder.SetButtonText(control.Get_IsHeldBy_ButtonText());
 				}
 			}
 		}
-		public static QMSingleButton Forces_Pickup_IsHeld { get; private set; }
-		public static QMSingleButton Forces_CurrentObjHolder { get; private set; }
-		public static QMSingleButton Forces_SelPickup_CurrentObjOwner { get; private set; }
+		private static QMSingleButton Pickup_IsHeldStatus { get; set; }
+		private static QMSingleButton Pickup_CurrentObjectHolder { get; set; }
+		private static QMSingleButton Pickup_CurrentObjectOwner { get; set; }
 		public static QMSlider ForceSlider { get; private set; }
 		public static QMSlider SpinForceSlider { get; private set; }
 
