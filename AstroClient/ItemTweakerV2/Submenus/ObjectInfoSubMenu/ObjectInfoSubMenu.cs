@@ -27,19 +27,19 @@
 			CurrentObjectCoordsBtn = new QMSingleButton(main, 2.5f, 0, "", null, "Shows Object Position", null, null, true);
 			CurrentObjectCoordsBtn.ToggleBtnImage(false);
 			CurrentObjectCoordsBtn.SetResizeTextForBestFit(true);
-			CurrentObjectCoordsBtn.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(CurrentObjectCoordsBtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.x + 200f, CurrentObjectPath.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
+			CurrentObjectCoordsBtn.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(CurrentObjectCoordsBtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.x + 200f, CurrentObjectCoordsBtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
 
 
 			CurrentObjectRotation = new QMSingleButton(main, 2.5f, 0.5f, "", null, "Shows Object Rotation", null, null, true);
 			CurrentObjectRotation.ToggleBtnImage(false);
 			CurrentObjectRotation.SetResizeTextForBestFit(true);
-			CurrentObjectRotation.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(CurrentObjectRotation.GetGameObject().GetComponent<RectTransform>().sizeDelta.x + 200f, CurrentObjectPath.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
+			CurrentObjectRotation.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(CurrentObjectRotation.GetGameObject().GetComponent<RectTransform>().sizeDelta.x + 200f, CurrentObjectRotation.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
 
 
 			CurrentObjectLocalPosition = new QMSingleButton(main, 2.5f, 1, "", null, "Shows Object Local Position", null, null, true);
 			CurrentObjectLocalPosition.ToggleBtnImage(false);
 			CurrentObjectLocalPosition.SetResizeTextForBestFit(true);
-			CurrentObjectLocalPosition.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(CurrentObjectLocalPosition.GetGameObject().GetComponent<RectTransform>().sizeDelta.x + 200f, CurrentObjectPath.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
+			CurrentObjectLocalPosition.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(CurrentObjectLocalPosition.GetGameObject().GetComponent<RectTransform>().sizeDelta.x + 200f, CurrentObjectLocalPosition.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
 
 
 			CurrentObjectPath = new QMSingleButton(main, 2.5f, 1.5f, "", null, "Shows Object Path", null, null, true);
