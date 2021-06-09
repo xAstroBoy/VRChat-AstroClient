@@ -68,11 +68,7 @@
             {
                 if (item != null)
                 {
-                    var ESP = item.GetComponent<ESP_VRCInteractable>();
-                    if (ESP == null)
-                    {
-                        item.AddComponent<ESP_VRCInteractable>();
-                    }
+                   item.GetOrAddComponent<ESP_VRCInteractable>();
                 }
             }
         }
@@ -127,11 +123,7 @@
             {
                 if (item != null)
                 {
-                    var ESP = item.GetComponent<ESP_Pickup>();
-                    if (ESP == null)
-                    {
-                        item.AddComponent<ESP_Pickup>();
-                    }
+                   item.GetOrAddComponent<ESP_Pickup>();
                 }
             }
         }
@@ -185,11 +177,8 @@
             {
                 if (item != null)
                 {
-                    var ESP = item.GetComponent<ESP_Trigger>();
-                    if (ESP == null)
-                    {
-                        item.AddComponent<ESP_Trigger>();
-                    }
+                    item.GetOrAddComponent<ESP_Trigger>();
+
 				}
             }
         }
@@ -246,11 +235,7 @@
                 {
                     if (item != null)
                     {
-                        var ESP = item.gameObject.GetComponent<ESP_UdonBehaviour>();
-                        if (ESP == null)
-                        {
-                            item.gameObject.AddComponent<ESP_UdonBehaviour>();
-                        }
+                       item.gameObject.GetOrAddComponent<ESP_UdonBehaviour>();
                     }
                 }
             }
