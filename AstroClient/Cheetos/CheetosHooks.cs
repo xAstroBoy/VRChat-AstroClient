@@ -132,7 +132,6 @@
 		}
 		private static void SpoofPing(ref int __result)
 		{
-			ModConsole.Log($"Spoof! {__result}");
 			try
 			{
 				if (AstroClient.ConfigManager.General.SpoofPing)
@@ -146,7 +145,6 @@
 
 		private static void SpoofFPS(ref float __result)
 		{
-			ModConsole.Log($"Spoof! {__result}");
 			try
 			{
 				if (AstroClient.ConfigManager.General.SpoofFPS)
