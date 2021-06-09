@@ -9,6 +9,7 @@
 	using AstroClient.Experiments;
 	using AstroClient.GameObjectDebug;
 	using AstroClient.ItemTweakerV2;
+	using AstroClient.ItemTweakerV2.Selector;
 	using AstroClient.Startup.Buttons;
 	using AstroClient.variables;
 	using AstroClient.WorldLights;
@@ -63,8 +64,9 @@
 
         public static List<GameEvents> Overridable_List = new List<GameEvents>();
 
-        public override void OnApplicationStart()
-        {
+		public static List<Tweaker_Events> Tweaker_Overridables = new List<Tweaker_Events>();
+		public override void OnApplicationStart()
+		{
 			ModConsole.Initialize("AstroClient");
             LogSupport.RemoveAllHandlers();
             ConfigManager.Validate();
@@ -148,7 +150,14 @@
                         component.OnApplicationStart();
                         Overridable_List.Add(component);
                     }
-                }
+
+					if (btype != null && btype.Equals(typeof(Tweaker_Events)))
+					{
+						Tweaker_Events component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as Tweaker_Events;
+						Tweaker_Overridables.Add(component);
+					}
+
+				}
             }
         }
 

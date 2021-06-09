@@ -1,4 +1,5 @@
 ﻿using AstroClient.ItemTweakerV2.TweakerEventArgs;
+using AstroLibrary.Console;
 using System;
 using UnityEngine;
 
@@ -36,11 +37,13 @@ namespace AstroClient.ItemTweakerV2.Selector
 				{
 					Event_On_Old_GameObject_Removed?.Invoke(null, new SelectedObjectArgs(null));
 					Event_On_New_GameObject_Selected?.Invoke(null, new SelectedObjectArgs(null));
-					return;
 				}
-				if (value != _SelectedObject)
+				else if (_SelectedObject != null)
 				{
-					Event_On_Old_GameObject_Removed?.Invoke(null, new SelectedObjectArgs(_SelectedObject));
+					if (_SelectedObject != value)
+					{
+						Event_On_Old_GameObject_Removed?.Invoke(null, new SelectedObjectArgs(_SelectedObject));
+					}
 				}
 				Event_On_New_GameObject_Selected?.Invoke(null, new SelectedObjectArgs(value));
 				_SelectedObject = value;
