@@ -97,6 +97,7 @@
     <Compile Include="AstroExtensions\Click_ext.cs" />
     <Compile Include="AstroExtensions\Coding_ext.cs" />
     <Compile Include="AstroExtensions\Collider_ext.cs" />
+    <Compile Include="AstroExtensions\Components_exts\Rocket_ext.cs" />
     <Compile Include="AstroExtensions\Components_exts\Bouncer_ext.cs" />
     <Compile Include="AstroExtensions\Component_utils_ext.cs" />
     <Compile Include="AstroExtensions\ComponentParser_ext.cs" />
