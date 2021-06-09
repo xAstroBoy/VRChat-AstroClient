@@ -43,10 +43,10 @@
 			ComponentSubMenu.Init_ComponentSubMenu(menu, 4, 1.5f, true);
 			SpawnerSubmenu.Init_SpawnerSubmenu(menu, 4, 2f, true);
 
-			new QMSingleToggleButton(menu, 1, 2, "Selected Item ESP : ON", () => { EspHandler.TweakerESPEnabled = true; }, "Selected Item ESP : OFF", () => { EspHandler.TweakerESPEnabled = false; }, "Toggles Selected item ESP", Color.green, Color.red, null, false, true).SetResizeTextForBestFit(true);
-			ObjectActiveToggle = new QMSingleToggleButton(menu, 2, 2f, "Enabled", () => { Tweaker_Object.GetGameObjectToEdit().SetActive(true); }, "Disabled", () => { Tweaker_Object.GetGameObjectToEdit().SetActive(false); }, "Toggles SetActive", Color.green, Color.red, null, false, true);
+			ObjectActiveToggle = new QMSingleToggleButton(menu, 1, 1.5f, "Enabled", () => { Tweaker_Object.GetGameObjectToEdit().SetActive(true); }, "Disabled", () => { Tweaker_Object.GetGameObjectToEdit().SetActive(false); }, "Toggles SetActive", Color.green, Color.red, null, false, true);
+			new QMSingleToggleButton(menu, 2, 1.5f, "Selected Item ESP : ON", () => { EspHandler.TweakerESPEnabled = true; }, "Selected Item ESP : OFF", () => { EspHandler.TweakerESPEnabled = false; }, "Toggles Selected item ESP", Color.green, Color.red, null, false, true).SetResizeTextForBestFit(true);
 			LockHoldItem = new QMSingleToggleButton(menu, 2, 2.5f, "Lock ON", () => { Tweaker_Object.LockItem = true; }, "Lock OFF", () => { Tweaker_Object.LockItem = false; }, "Lock the Held object (prevents the mod from grabbing a new holding object)", Color.green, Color.red, null, false, true);
-			ObjectToEditBtn = new QMSingleButton(menu, 1, 3f, "None", new Action(() => { Tweaker_Object.GetGameObjectToEdit(); }), "GameObject To Edit", null, null);
+			ObjectToEditBtn = new QMSingleButton(menu, 1, 2f, "None", new Action(() => { Tweaker_Object.GetGameObjectToEdit(); }), "GameObject To Edit", null, null);
 
 			// TODO: remake teleport buttons <3
 			TeleportToMe = new QMSingleButton(menu, -1, 1.5f, Button_strings_ext.Generate_TeleportToMe_ButtonText(null), new Action(() => { Tweaker_Object.GetGameObjectToEdit().TeleportToMe(); }), Button_strings_ext.Generate_TeleportToMe_ButtonText(null), null, null);
@@ -76,9 +76,9 @@
 				TeleportToMe.SetButtonText(obj.Generate_TeleportToMe_ButtonText());
 				TeleportToMe.SetToolTip(obj.Generate_TeleportToMe_ButtonText());
 			}
-
-
 		}
+
+
 
 		public override void OnSelectedObject_Enabled()
 		{

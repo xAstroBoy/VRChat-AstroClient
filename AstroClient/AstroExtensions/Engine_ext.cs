@@ -45,6 +45,21 @@
                 }
             }
         }
+		public static string GetPath(this GameObject obj)
+		{
+			if (obj != null)
+			{
+				string path = GameObjectFinder.GetGameObjectPath(obj);
+				if (!string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path))
+				{
+					return $"{obj.name} Path is : {path}";
+				}
+				return "No Path Found";
+			}
+			return "Object is Null";
+		}
+
+
 
 
 

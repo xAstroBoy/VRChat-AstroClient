@@ -54,13 +54,13 @@
 			}
 		}
 
-		private static bool _DoNotPickOtherItems;
+		private static bool _LockItem;
 
 		public static bool LockItem
 		{
 			get
 			{
-				return _DoNotPickOtherItems;
+				return _LockItem;
 			}
 			set
 			{
@@ -68,7 +68,7 @@
 				{
 					value = false;
 				}
-				_DoNotPickOtherItems = value;
+				_LockItem = value;
 				if (TweakerV2Main.LockHoldItem != null)
 				{
 					TweakerV2Main.LockHoldItem.SetToggleState(value);

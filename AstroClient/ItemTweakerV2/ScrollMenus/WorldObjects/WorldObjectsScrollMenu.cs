@@ -2,12 +2,14 @@
 {
 	using AstroClient.Extensions;
 	using AstroClient.ItemTweakerV2.Selector;
+	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;
 	using UnityEngine;
+	using VRC;
 
-	public class WorldObjectsScrollMenu : GameEvents
+	public class WorldObjectsScrollMenu : Tweaker_Events
 	{
 		public static void Init_WorldObjectScrollMenu(QMTabMenu main, float x, float y, bool btnHalf)
 		{
@@ -18,17 +20,18 @@
 				scroll.Refresh();
 			}, "", null, null, true);
 
-			// SelWorld_TeleportToMePickup = new QMSingleButton(menu, 0, -0.5f, GetTeleportToMeBtnText, delegate
-			//{
-			//    Tweaker_Object.GetGameObjectToEdit().TeleportToMe();
-			//}, GetTeleportToMeBtnText);
-			// SelWorld_TeleportToMePickup.SetResizeTextForBestFit(true);
+			TeleportToMe = new QMSingleButton(menu, 0, -0.5f, Tweaker_Selector.Component_Get_SelectedObject.Generate_TeleportToMe_ButtonText(), delegate
+		   {
+			   Tweaker_Object.GetGameObjectToEdit().TeleportToMe();
+		   }, Tweaker_Selector.Component_Get_SelectedObject.Generate_TeleportToMe_ButtonText());
+			TeleportToMe.SetResizeTextForBestFit(true);
 
-			// SelWorld_TeleportToTargetPickup = new QMSingleButton(menu, 0, 0.5f, GetTeleportToTargetText, delegate
-			// {
-			//     Tweaker_Object.GetGameObjectToEdit().TeleportToTarget();
-			// }, GetTeleportToTargetText);
-			// SelWorld_TeleportToTargetPickup.SetResizeTextForBestFit(true);
+			TeleportToTarget = new QMSingleButton(menu, 0, 0.5f, Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.Component_Get_SelectedObject, TargetSelector.CurrentTarget), delegate
+			{
+				Tweaker_Object.GetGameObjectToEdit().TeleportToTarget();
+			}, Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.Component_Get_SelectedObject, TargetSelector.CurrentTarget));
+			TeleportToTarget.SetResizeTextForBestFit(true);
+
 			new QMSingleButton(menu, 0, 1.5f, "Spawn Clone", new Action(() => { Cloner.ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }), "Instantiates a copy of The selected object.", null, null, true);
 
 			scroll.SetAction(delegate
@@ -59,6 +62,35 @@
 		{
 			WorldObjects.Clear();
 		}
+
+
+		public override void On_New_GameObject_Selected(GameObject obj)
+		{
+			if (TeleportToTarget != null)
+			{
+				TeleportToTarget.SetButtonText(Button_strings_ext.Generate_TeleportToTarget_ButtonText(obj, TargetSelector.CurrentTarget));
+				TeleportToTarget.SetToolTip(Button_strings_ext.Generate_TeleportToTarget_ButtonText(obj, TargetSelector.CurrentTarget));
+			}
+			if (TeleportToMe != null)
+			{
+				TeleportToMe.SetButtonText(obj.Generate_TeleportToMe_ButtonText());
+				TeleportToMe.SetToolTip(obj.Generate_TeleportToMe_ButtonText());
+			}
+		}
+
+		public override void OnTargetSet(Player player)
+		{
+			if (TeleportToTarget != null)
+			{
+				TeleportToTarget.SetButtonText(Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.Component_Get_SelectedObject, player));
+				TeleportToTarget.SetToolTip(Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.Component_Get_SelectedObject, player));
+			}
+
+		}
+
+		public static QMSingleButton TeleportToMe;
+		public static QMSingleButton TeleportToTarget;
+
 
 		public static List<GameObject> WorldObjects = new List<GameObject>();
 	}
