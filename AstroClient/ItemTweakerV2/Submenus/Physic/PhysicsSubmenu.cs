@@ -101,7 +101,10 @@ namespace AstroClient.ItemTweakerV2.Submenus
 				item.RigidBody_Set_Gravity(useGravity);
 				if (SmartKinematicEnabled)
 				{
-					item.RigidBody_Set_isKinematic(!SmartKinematicResult);
+					if (!will_it_fall_throught)
+					{
+						item.RigidBody_Set_isKinematic(false);
+					}
 				}
 			}
 		}
@@ -124,7 +127,7 @@ namespace AstroClient.ItemTweakerV2.Submenus
 		{
 			if (control != null)
 			{
-				SmartKinematicResult = control.RigidBody_Will_It_fall_throught();
+				will_it_fall_throught = control.RigidBody_Will_It_fall_throught();
 			}
 		}
 
@@ -155,7 +158,7 @@ namespace AstroClient.ItemTweakerV2.Submenus
 			GravityToggler.SetToggleState(false);
 			KinematicToggler.SetToggleState(false);
 			CollisionsToggler.SetToggleState(false);
-			SmartKinematicResult = true;
+			will_it_fall_throught = true;
 		}
 
 		public override void OnSelectedObject_Destroyed()
@@ -182,7 +185,7 @@ namespace AstroClient.ItemTweakerV2.Submenus
 		private static QMSingleButton Pickup_CurrentObjectOwner { get; set; }
 
 
-		private static bool SmartKinematicResult = false;
+		private static bool will_it_fall_throught = false;
 
 
 		private static bool _SmartKinematicEnabled;

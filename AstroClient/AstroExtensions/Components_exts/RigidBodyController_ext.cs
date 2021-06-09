@@ -146,6 +146,7 @@
 						}
 					}
 				}
+				return true;
 			}
 			return true;
 
