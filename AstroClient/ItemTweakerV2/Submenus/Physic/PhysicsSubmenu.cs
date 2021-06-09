@@ -45,10 +45,6 @@ namespace AstroClient.ItemTweakerV2.Submenus
 
 		}
 
-		public override void On_Old_GameObject_Removed(GameObject obj)
-		{
-			
-		}
 		public override void OnPickupController_OnUpdate(PickupController control)
 		{
 			if (control != null)
@@ -82,11 +78,6 @@ namespace AstroClient.ItemTweakerV2.Submenus
 				TeleportToMe.SetButtonText(obj.Generate_TeleportToMe_ButtonText());
 				TeleportToMe.SetToolTip(obj.Generate_TeleportToMe_ButtonText());
 			}
-			var controller = obj.GetOrAddComponent<RigidBodyController>();
-			if(controller != null)
-			{
-				CheckForKinematicPreset(controller);
-			}
 		}
 
 		public override void OnTargetSet(Player player)
@@ -108,10 +99,16 @@ namespace AstroClient.ItemTweakerV2.Submenus
 				item.RigidBody_Set_Gravity(useGravity);
 				if (SmartKinematicEnabled)
 				{
-					if (!will_it_fall_throught)
+					var control = item.GetComponent<RigidBodyController>();
+					if (control != null)
 					{
-						item.RigidBody_Set_isKinematic(false);
+						var will_it_fall_throught = control.RigidBody_Will_It_fall_throught();
+						if (!will_it_fall_throught)
+						{
+							item.RigidBody_Set_isKinematic(false);
+						}
 					}
+					SmartKinematicEnabled = false;
 				}
 			}
 		}
@@ -129,13 +126,7 @@ namespace AstroClient.ItemTweakerV2.Submenus
 
 
 
-		private static void CheckForKinematicPreset(RigidBodyController control)
-		{
-			if (control != null)
-			{
-				will_it_fall_throught = control.RigidBody_Will_It_fall_throught();
-			}
-		}
+
 
 		private void UpdateProperties(RigidBodyController control)
 		{
@@ -164,7 +155,6 @@ namespace AstroClient.ItemTweakerV2.Submenus
 			GravityToggler.SetToggleState(false);
 			KinematicToggler.SetToggleState(false);
 			CollisionsToggler.SetToggleState(false);
-			will_it_fall_throught = true;
 		}
 
 		public override void OnSelectedObject_Destroyed()
@@ -189,9 +179,6 @@ namespace AstroClient.ItemTweakerV2.Submenus
 		private static QMSingleButton Pickup_IsHeldStatus { get; set; }
 		private static QMSingleButton Pickup_CurrentObjectHolder { get; set; }
 		private static QMSingleButton Pickup_CurrentObjectOwner { get; set; }
-
-
-		private static bool will_it_fall_throught = false;
 
 
 		private static bool _SmartKinematicEnabled;
