@@ -7,46 +7,19 @@
 	using UnityEngine;
 	using VRC;
 
-	internal class ESPMenu : GameEvents
+	internal class VRChat_Map_ESP_Menu : GameEvents
     {
-        public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
+        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "ESP Menu", "ESP Options", null, null, null, null, btnHalf);
 
-            PlayerESPToggleBtn = new QMSingleToggleButton(main, 1, 0f, "Player ESP ON", new Action(() => { Toggle_Player_ESP = true; }), "Player ESP OFF", new Action(() => { Toggle_Player_ESP = false; }), "Toggles Player ESP", Color.green, Color.red, null, false, true);
-            PlayerESPToggleBtn.SetToggleState(ConfigManager.ESP.PlayerESP);
-
             PickupESPToggleBtn = new QMSingleToggleButton(main, 2, 0f, "Pickup ESP ON", new Action(() => { Toggle_Pickup_ESP = true; }), "Pickup ESP OFF", new Action(() => { Toggle_Pickup_ESP = false; }), "Toggle Pickup ESP", Color.green, Color.red, null, false, true);
-            PickupESPToggleBtn.SetToggleState(ConfigManager.ESP.PickupESP);
-
             VRCInteractableESPToggleBtn = new QMSingleToggleButton(main, 2, 0.5f, "VRC Interactable ESP ON", new Action(() => { Toggle_VRCInteractable_ESP = true; }), "VRC Interactable ESP OFF", new Action(() => { Toggle_VRCInteractable_ESP = false; }), "Toggle VRC Interactable ESP", Color.green, Color.red, null, false, true);
-            VRCInteractableESPToggleBtn.SetToggleState(ConfigManager.ESP.VRCInteractableESP);
-
             TriggerESPToggleBtn = new QMSingleToggleButton(main, 2, 1f, "Trigger ESP ON", new Action(() => { Toggle_Trigger_ESP = true; }), "Trigger ESP OFF", new Action(() => { Toggle_Trigger_ESP = false; }), "Toggle Trigger ESP", Color.green, Color.red, null, false, true);
-            TriggerESPToggleBtn.SetToggleState(ConfigManager.ESP.TriggerESP);
-
             UdonBehaviourESPToggleBtn = new QMSingleToggleButton(main, 2, 1.5f, "Udon Behaviour ESP ON", new Action(() => { Toggle_UdonBehaviour_ESP = true; }), "Udon Behaviour ESP OFF", new Action(() => { Toggle_UdonBehaviour_ESP = false; }), "Toggle Udon Behaviour ESP", Color.green, Color.red, null, false, true);
-            UdonBehaviourESPToggleBtn.SetToggleState(ConfigManager.ESP.UdonESP);
 
-            // TOOD : ADD A STRING Parser and allow people  to set HEX colors as well.
-            var PublicESP = new QMNestedButton(main, 3, 0, "Global ESP Colors", "Set Player ESP Default Color", null, null, null, null, true);
-            new QMSingleButton(PublicESP, 1, 0, "Blue", () => { ConfigManager.PublicESPColor = Color.blue; }, null, null, null, true);
-            new QMSingleButton(PublicESP, 1, 0.5f, "Red", () => { ConfigManager.PublicESPColor = Color.red; }, null, null, null, true);
-            new QMSingleButton(PublicESP, 1, 1, "Green", () => { ConfigManager.PublicESPColor = Color.green; }, null, null, null, true);
-            new QMSingleButton(PublicESP, 1, 1.5f, "Yellow", () => { ConfigManager.PublicESPColor = Color.yellow; }, null, null, null, true);
-            new QMSingleButton(PublicESP, 1, 2, "Cyan", () => { ConfigManager.PublicESPColor = Color.cyan; }, null, null, null, true);
-            new QMSingleButton(PublicESP, 1, 2.5f, "White", () => { ConfigManager.PublicESPColor = Color.white; }, null, null, null, true);
-
-            var FriendESP = new QMNestedButton(main, 3, 0.5f, "Friend ESP Colors", "Set Player ESP Friend Color", null, null, null, null, true);
-            new QMSingleButton(FriendESP, 1, 0, "Blue", () => { ConfigManager.ESPFriendColor = Color.blue; }, null, null, null, true);
-            new QMSingleButton(FriendESP, 1, 0.5f, "Red", () => { ConfigManager.ESPFriendColor = Color.red; }, null, null, null, true);
-            new QMSingleButton(FriendESP, 1, 1, "Green", () => { ConfigManager.ESPFriendColor = Color.green; }, null, null, null, true);
-            new QMSingleButton(FriendESP, 1, 1.5f, "Yellow", () => { ConfigManager.ESPFriendColor = Color.yellow; }, null, null, null, true);
-            new QMSingleButton(FriendESP, 1, 2, "Cyan", () => { ConfigManager.ESPFriendColor = Color.cyan; }, null, null, null, true);
-            new QMSingleButton(FriendESP, 1, 2.5f, "White", () => { ConfigManager.ESPFriendColor = Color.white; }, null, null, null, true);
         }
 
-        private static QMSingleToggleButton PlayerESPToggleBtn;
         private static QMSingleToggleButton VRCInteractableESPToggleBtn;
         private static QMSingleToggleButton PickupESPToggleBtn;
         private static QMSingleToggleButton TriggerESPToggleBtn;
@@ -60,13 +33,14 @@
             Toggle_Pickup_ESP = false;
         }
 
-        #region VRCInteractableESP
+		#region VRCInteractableESP
 
+		private static bool _Toggle_VRCInteractable_ESP;
         public static bool Toggle_VRCInteractable_ESP
         {
             get
             {
-                return ConfigManager.ESP.UdonESP;
+                return Toggle_VRCInteractable_ESP;
             }
             set
             {
@@ -79,7 +53,7 @@
                     RemoveESPToVRCInteractables();
                 }
 
-                ConfigManager.ESP.UdonESP = value;
+                Toggle_VRCInteractable_ESP = value;
                 if (VRCInteractableESPToggleBtn != null)
                 {
                     VRCInteractableESPToggleBtn.SetToggleState(value);
@@ -116,15 +90,16 @@
             }
         }
 
-        #endregion VRCInteractableESP
+		#endregion VRCInteractableESP
 
-        #region PickupESP
+		#region PickupESP
 
+		private static bool _Toggle_Pickup_ESP;
         public static bool Toggle_Pickup_ESP
         {
             get
             {
-                return ConfigManager.ESP.PickupESP;
+                return _Toggle_Pickup_ESP;
             }
             set
             {
@@ -137,7 +112,7 @@
                     RemoveESPToPickups();
                 }
 
-                ConfigManager.ESP.PickupESP = value;
+                _Toggle_Pickup_ESP = value;
                 if (PickupESPToggleBtn != null)
                 {
                     PickupESPToggleBtn.SetToggleState(value);
@@ -174,15 +149,15 @@
             }
         }
 
-        #endregion PickupESP
+		#endregion PickupESP
 
-        #region TriggerESP
-
+		#region TriggerESP
+		private static bool _Toggle_Trigger_ESP;
         public static bool Toggle_Trigger_ESP
         {
             get
             {
-                return ConfigManager.ESP.TriggerESP;
+                return _Toggle_Trigger_ESP;
             }
             set
             {
@@ -195,7 +170,7 @@
                     RemoveESPToTriggers();
                 }
 
-                ConfigManager.ESP.TriggerESP = value;
+                _Toggle_Trigger_ESP = value;
                 if (TriggerESPToggleBtn != null)
                 {
                     TriggerESPToggleBtn.SetToggleState(value);
@@ -215,47 +190,7 @@
                     {
                         item.AddComponent<ESP_Trigger>();
                     }
-                    //if (WorldUtils.GetWorldID() == WorldIds.SnoozeScaryMaze5)
-                    //{
-                    //    if (item.name == "The Doctor Watcher Activate")
-                    //    {
-                    //        ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
-                    //        continue;
-                    //    }
-                    //    if (item.name == "Teddy Watcher Activate")
-                    //    {
-                    //        ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
-                    //        continue;
-                    //    }
-                    //    if (item.name == "Kill Trigger For Maze Part 2")
-                    //    {
-                    //        ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
-                    //        continue;
-                    //    }
-                    //    if (item.name == "Kill Trigger For Maze")
-                    //    {
-                    //        ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name);
-                    //        continue;
-                    //    }
-                    //    if (item.transform.parent != null && item.transform.parent.gameObject != null)
-                    //    {
-                    //        if (item.transform.parent.gameObject.name == "Do Something Easter Egg")
-                    //        {
-                    //            if (item.name == "Area Trigger")
-                    //            {
-                    //                ModConsole.DebugWarning("Skipped ESP Trigger : " + item.name + " With parent : " + item.transform.parent.gameObject.name);
-                    //                continue;
-                    //            }
-                    //        }
-                    //    }
-
-                    //    item.AddComponent<ObjectESP>();
-                    //}
-                    //else
-                    //{
-                    //    item.AddComponent<ObjectESP>();
-                    //}
-                }
+				}
             }
         }
 
@@ -274,83 +209,14 @@
 
         #endregion TriggerESP
 
-        #region playerESP
 
-        // TODO: MAKE ESP FRIEND COLOR BE SETTABLE
-        public static bool Toggle_Player_ESP
-        {
-            get
-            {
-                return ConfigManager.ESP.PlayerESP;
-            }
-            set
-            {
-                if (value)
-                {
-                    AddESPToAllPlayers();
-                }
-                else
-                {
-                    RemoveAllActivePlayerESPs();
-                }
-
-                ConfigManager.ESP.PlayerESP = value;
-                if (PlayerESPToggleBtn != null)
-                {
-                    PlayerESPToggleBtn.SetToggleState(value);
-                }
-            }
-        }
-
-        public override void OnPlayerJoined(Player player)
-        {
-            if (Toggle_Player_ESP)
-            {
-                if (player != null && player != LocalPlayerUtils.GetSelfPlayer())
-                {
-                    if (!player.gameObject.GetComponent<PlayerESP>())
-                    {
-                        player.gameObject.AddComponent<PlayerESP>();
-                    }
-                }
-            }
-        }
-
-        private static void AddESPToAllPlayers()
-        {
-            foreach (var item in WorldUtils.Get_Players())
-            {
-                if (item != LocalPlayerUtils.GetSelfPlayer())
-                {
-                    if (!item.gameObject.GetComponent<PlayerESP>())
-                    {
-                        item.gameObject.AddComponent<PlayerESP>();
-                    }
-                }
-            }
-        }
-
-        private static void RemoveAllActivePlayerESPs()
-        {
-            foreach (var player in WorldUtils.Get_Players())
-            {
-                var esp = player.gameObject.GetComponent<PlayerESP>();
-                if (esp != null)
-                {
-                    UnityEngine.Object.Destroy(esp);
-                }
-            }
-        }
-
-        #endregion playerESP
-
-        #region UdonBehaviourESP
-
+		#region UdonBehaviourESP
+		private static bool _Toggle_UdonBehaviour_ESP;
         private static bool Toggle_UdonBehaviour_ESP
         {
             get
             {
-                return ConfigManager.ESP.UdonESP;
+                return _Toggle_UdonBehaviour_ESP;
             }
             set
             {
@@ -363,7 +229,7 @@
                     RemoveESPToUdonBehaviours();
                 }
 
-                ConfigManager.ESP.UdonESP = value;
+                _Toggle_UdonBehaviour_ESP = value;
                 if (UdonBehaviourESPToggleBtn != null)
                 {
                     UdonBehaviourESPToggleBtn.SetToggleState(value);

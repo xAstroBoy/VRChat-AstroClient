@@ -63,14 +63,6 @@
     {
         public bool PlayerESP = false;
 
-        public bool PickupESP = false;
-
-        public bool TriggerESP = false;
-
-        public bool UdonESP = false;
-
-        public bool VRCInteractableESP = false;
-
         public float[] PublicESPColor = new float[] { 0f, 1f, 1f, 1f };
 
         public float[] ESPFriendColor = new float[] { 0f, 1f, 0f, 1f };

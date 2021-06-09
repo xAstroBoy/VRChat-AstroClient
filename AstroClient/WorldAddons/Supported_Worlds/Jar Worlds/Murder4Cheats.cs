@@ -343,7 +343,7 @@
 
         public static void ToggleItemESP(bool value)
         {
-            ESPMenu.Toggle_Pickup_ESP = value; // ESSENTIAL
+            VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = value; // ESSENTIAL
 
             if (value)
             {

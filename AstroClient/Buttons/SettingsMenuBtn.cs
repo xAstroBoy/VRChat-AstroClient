@@ -76,7 +76,7 @@
 
 			// Fly and ESP
 			FlightMenu.InitButtons(sub, 1f, 1.5f, true);
-			ESPMenu.InitButtons(sub, 2f, 1.5f, true);
+			PlayerESPMenu.InitButtons(sub, 2f, 1.5f, true);
 
 			// Spoofs
 			QMNestedButton subSpoofButton = new QMNestedButton(sub, 3, 2f, "Spoofs", "Spoof Menu", null, null, null, null, false);

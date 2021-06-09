@@ -128,12 +128,13 @@
     <Compile Include="Blaze\Flight.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
+    <Compile Include="Buttons\ESP\PlayerESPMenu.cs" />
     <Compile Include="Buttons\FlightMenu.cs" />
     <Compile Include="Buttons\RandomSubmenus.cs" />
     <Compile Include="Buttons\SettingsMenuBtn.cs" />
     <Compile Include="Buttons\ExploitsMenu.cs" />
     <Compile Include="Buttons\UserInteractMenuBtns.cs" />
-    <Compile Include="Buttons\ESPMenu.cs" />
+    <Compile Include="Buttons\ESP\VRChat_Map_ESP_Menu.cs" />
     <Compile Include="Buttons\WorldPickupsBtn.cs" />
     <Compile Include="CheetosUI\CheetoBackground.cs" />
     <Compile Include="CheetosUI\CheetoButton.cs" />

@@ -531,7 +531,7 @@
         {
             if (Internal_player != null)
             {
-                if (ESPMenu.Toggle_Player_ESP)
+                if (PlayerESPMenu.Toggle_Player_ESP)
                 {
                     if (ESP != null)
                     {
@@ -548,7 +548,7 @@
         {
             if (Internal_player != null)
             {
-                if (ESPMenu.Toggle_Player_ESP)
+                if (PlayerESPMenu.Toggle_Player_ESP)
                 {
                     var esp = Internal_player.gameObject.GetComponent<PlayerESP>();
                     if (esp != null)
@@ -605,7 +605,7 @@
 						GameRoleTag.ShowTag = ViewRoles;
 					}
 				}
-				if (ESPMenu.Toggle_Player_ESP)
+				if (PlayerESPMenu.Toggle_Player_ESP)
 				{
 					if (ESP == null)
 					{
