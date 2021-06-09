@@ -110,6 +110,50 @@
 
 		}
 
+		public static bool RigidBody_Will_It_fall_throught(this RigidBodyController control)
+		{
+			if (control != null)
+			{
+				if (control.GetRigidbody() != null)
+				{
+
+					var meshcolliders = control.gameObject.GetComponentsInChildren<MeshCollider>(true);
+					if (meshcolliders.Count != 0)
+					{
+						foreach (var c in meshcolliders)
+						{
+							if (c.enabled && c.convex)
+							{
+								return false;
+							}
+						}
+					}
+					else
+					{
+						var Colliders = control.gameObject.GetComponentsInChildren<Collider>(true);
+						if (Colliders.Count != 0)
+						{
+							foreach (var collider in Colliders)
+							{
+								if (collider != null)
+								{
+									if (!collider.isTrigger && collider.enabled)
+									{
+										return false;
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			return true;
+
+		}
+
+
+
+
 
 
 		public static void RigidBody_RestoreOriginalBody(this GameObject obj)
@@ -160,7 +204,10 @@
 			obj.GetOrAddComponent<RigidBodyController>().RigidBody_PreventOthersFromGrabbing(PreventOthersFromGrabbing);
 		}
 
-
+		public static bool RigidBody_Will_It_fall_throught(this GameObject obj)
+		{
+			return obj.GetOrAddComponent<RigidBodyController>().RigidBody_Will_It_fall_throught();
+		}
 
 		public static void RigidBody_RestoreOriginalBody(this List<GameObject> items)
 		{

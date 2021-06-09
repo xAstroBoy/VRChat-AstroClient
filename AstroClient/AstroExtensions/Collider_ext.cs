@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Extensions
 {
+	using AstroClient.Components;
 	using System.Collections.Generic;
 	using UnityEngine;
 
@@ -101,41 +102,6 @@
 		}
 
 
-		public static bool Will_It_fall_throught(this GameObject body)
-		{
-			if (body != null)
-			{
-				var meshcolliders = body.GetComponentsInChildren<MeshCollider>(true);
-				if (meshcolliders.Count != 0)
-				{
-					foreach (var c in meshcolliders)
-					{
-						if (c.enabled && c.convex)
-						{
-							return false;
-						}
-					}
-				}
-				else
-				{
-					var Colliders = body.GetComponentsInChildren<Collider>(true);
-					if (Colliders.Count != 0)
-					{
-						foreach (var collider in Colliders)
-						{
-							if (collider != null)
-							{
-								if (!collider.isTrigger && collider.enabled)
-								{
-									return false;
-								}
-							}
-						}
-					}
-				}
-			}
-			return true;
-		}
 
 	}
 }

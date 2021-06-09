@@ -22,7 +22,7 @@ namespace AstroClient.ItemTweakerV2.Selector
 			PickupControllerHandler.Event_OnPickupController_OnUpdate += Internal_OnPickupController_OnUpdate;
 
 			RigidBodyControllerHandler.Event_OnRigidBodyControllerSelected += Internal_OnRigidBodyControllerSelected;
-			RigidBodyControllerHandler.Event_OnRigidBodyControllerPropertyChanged += Internal_OnRigidBodyControllerSelected;
+			RigidBodyControllerHandler.Event_OnRigidBodyControllerPropertyChanged += Internal_OnRigidBodyController_PropertyChanged;
 			RigidBodyControllerHandler.Event_OnRigidBodyController_OnUpdate += Internal_OnRigidBodyController_OnUpdate;
 
 			// TODO : Figure a way to add Event and Getter Listeners as well for certain Components.
