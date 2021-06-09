@@ -75,13 +75,13 @@
 
 			QMNestedButton subSpoofButton = new QMNestedButton(sub, 3, 2f, "Spoofs", "Spoof Menu", null, null, null, null, false);
 
-			QMToggleButton toggleSpoofFPS = new QMToggleButton(subSpoofButton, 1, 0, "FPS\nSpoof\nOn", () => { ConfigManager.General.SpoofFPS = true; }, "FPS\nSpoof\nOff", () => { ConfigManager.General.SpoofFPS = false; }, "Toggle FPS Spoofing");
+			QMSingleToggleButton toggleSpoofFPS = new QMSingleToggleButton(subSpoofButton, 1, 0, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = true; }, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = false; }, "Toggle FPS Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofFPS, false);
 			toggleSpoofFPS.SetToggleState(ConfigManager.General.SpoofFPS, false);
 
-			QMToggleButton toggleSpoofPing = new QMToggleButton(subSpoofButton, 2, 0, "Ping\nSpoof\nOn", () => { ConfigManager.General.SpoofPing = true; }, "Ping\nSpoof\nOff", () => { ConfigManager.General.SpoofPing = false; }, "Toggle Ping Spoofing");
+			QMSingleToggleButton toggleSpoofPing = new QMSingleToggleButton(subSpoofButton, 2, 0, "Ping Spoof", () => { ConfigManager.General.SpoofPing = true; }, "Ping Spoof", () => { ConfigManager.General.SpoofPing = false; }, "Toggle Ping Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofPing, false);
 			toggleSpoofPing.SetToggleState(ConfigManager.General.SpoofPing, false);
 
-			new QMSingleButton(subSpoofButton, 1, 1, "Set\nFPS\nValue", delegate ()
+			new QMSingleButton(subSpoofButton, 1, 1, "Set\nFPS\nValue", () =>
 			{
 				CheetosHelpers.PopupCall("Set FPS Value", "Done", "Enter FPS. . .", true, delegate (string text)
 				{
@@ -102,7 +102,7 @@
 				});
 			}, "Input an FPS value");
 
-			new QMSingleButton(subSpoofButton, 2, 1, "Set\nPing\nValue", delegate ()
+			new QMSingleButton(subSpoofButton, 2, 1, "Set\nPing\nValue", () =>
 			{
 				CheetosHelpers.PopupCall("Set Ping Value", "Done", "Enter Ping. . .", true, delegate (string text)
 				{
