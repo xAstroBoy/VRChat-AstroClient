@@ -16,9 +16,10 @@
             QMNestedButton sub = new QMNestedButton(menu, x, y, "Settings", "Settings", null, null, null, null, btnHalf);
             sub.GetMainButton().SetTextColor(Color.cyan);
 
-            QMSingleButton saveButton = new QMSingleButton(sub, 0, 0, "Force Save", () => { ConfigManager.Save_All(); }, "Save Config", Color.magenta, null, true);
+			QMSingleButton saveButton = new QMSingleButton(sub, 0, 0, "Save Config", () => { ConfigManager.Save_All(); }, "Save Config", Color.magenta, null, true);
 
-            QMSingleToggleButton playerListToggle = new QMSingleToggleButton(sub, 1, 0, "PlayerList ON", () => { PlayerList.ShowPlayerMenu(); }, "PlayerList OFF", () => { PlayerList.HidePlayerMenu(); }, "Show/Hide PlayerList", Color.green, Color.red, null, ConfigManager.UI.ShowPlayersMenu, true);
+
+			QMSingleToggleButton playerListToggle = new QMSingleToggleButton(sub, 1, 0, "PlayerList ON", () => { PlayerList.ShowPlayerMenu(); }, "PlayerList OFF", () => { PlayerList.HidePlayerMenu(); }, "Show/Hide PlayerList", Color.green, Color.red, null, ConfigManager.UI.ShowPlayersMenu, true);
             playerListToggle.SetToggleState(ConfigManager.UI.ShowPlayersMenu, false);
 
             QMSingleToggleButton joinLeaveToggle = new QMSingleToggleButton(sub, 2, 0, "Join/Leave ON", () => { ConfigManager.General.JoinLeave = true; }, "Join/Leave OFF", () => { ConfigManager.General.JoinLeave = false; }, "Notification when someone joins/leaves", Color.green, Color.red, null, ConfigManager.General.JoinLeave, true);
@@ -73,6 +74,11 @@
 			QMToggleButton removeGalleryButton = new QMToggleButton(subHideElements, 1, 2, "Remove GalleryButton", () => { ConfigManager.UI.RemoveGalleryButton = true; }, "Keep GalleryButton", () => { ConfigManager.UI.RemoveGalleryButton = false; }, "Requires Restart");
 			removeGalleryButton.SetToggleState(ConfigManager.UI.RemoveGalleryButton, false);
 
+			// Fly and ESP
+			FlightMenu.InitButtons(sub, 1f, 1.5f, true);
+			ESPMenu.InitButtons(sub, 2f, 1.5f, true);
+
+			// Spoofs
 			QMNestedButton subSpoofButton = new QMNestedButton(sub, 3, 2f, "Spoofs", "Spoof Menu", null, null, null, null, false);
 
 			QMSingleToggleButton toggleSpoofFPS = new QMSingleToggleButton(subSpoofButton, 1, 0, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = true; }, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = false; }, "Toggle FPS Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofFPS, false);

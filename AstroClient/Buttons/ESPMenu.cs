@@ -9,7 +9,7 @@
 
 	internal class ESPMenu : GameEvents
     {
-        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "ESP Menu", "ESP Options", null, null, null, null, btnHalf);
 

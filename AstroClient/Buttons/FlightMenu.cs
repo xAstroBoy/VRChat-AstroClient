@@ -18,7 +18,7 @@
 
 		private static QMSingleButton setVRSpeedButton;
 
-		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+		public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
 		{
 			mainButton = new QMNestedButton(menu, x, y, "Fly Menu", "Fly Options", null, null, null, null, btnHalf);
 
