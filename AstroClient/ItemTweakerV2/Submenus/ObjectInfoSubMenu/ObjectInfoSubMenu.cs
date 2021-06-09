@@ -25,7 +25,7 @@
 
 
 			float Position = 3f;
-			float stretch = 1500f;
+			float stretch = 1250f;
 			CurrentObjectCoordsBtn = new QMSingleButton(main, Position, 0, "", null, "Shows Object Position", null, null, true);
 			CurrentObjectCoordsBtn.ToggleBtnImage(false);
 			CurrentObjectCoordsBtn.SetResizeTextForBestFit(true);
