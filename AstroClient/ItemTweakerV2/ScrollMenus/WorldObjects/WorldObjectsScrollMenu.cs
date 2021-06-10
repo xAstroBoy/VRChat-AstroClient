@@ -43,9 +43,13 @@
 				{
 					item.Set_As_Object_To_Edit();
 				}, $"Select {item.name}", null, item.Get_GameObject_Active_ToColor());
-					item.gameObject.GetOrAddComponent<ScrollMenuListener>().assignedbtn = btn;
+					var listener = item.GetOrAddComponent<ScrollMenuListener>();
+					if (listener != null)
+					{
+						listener.assignedbtn = btn;
+					}
 					scroll.Add(btn);
-				}
+                }
             });
         }
 

@@ -1,36 +1,52 @@
 namespace AstroClient.Components
 {
-	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using System;
+	using UnhollowerBaseLib.Attributes;
+	using AstroLibrary.Extensions;
 
 	public class ScrollMenuListener : GameEventsBehaviour
 	{
 		internal QMSingleButton assignedbtn;
-
 		public ScrollMenuListener(IntPtr obj0) : base(obj0)
 		{
 		}
 
+
 		private void OnEnable()
 		{
-			if (assignedbtn != null)
+			try
 			{
-				assignedbtn.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
+				if (assignedbtn != null)
+				{
+					assignedbtn.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
+				}
+				else
+				{
+					DestroyImmediate(this);
+				}
 			}
-			else
+			catch
 			{
 				DestroyImmediate(this);
 			}
 		}
 
+
 		private void OnDisable()
 		{
-			if (assignedbtn != null)
+			try
 			{
-				assignedbtn.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
+				if (assignedbtn != null)
+				{
+					assignedbtn.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
+				}
+				else
+				{
+					DestroyImmediate(this);
+				}
 			}
-			else
+			catch
 			{
 				DestroyImmediate(this);
 			}
@@ -38,9 +54,20 @@ namespace AstroClient.Components
 
 		private void OnDestroy()
 		{
-			if (assignedbtn != null)
+			try
 			{
-				assignedbtn.DestroyMe();
+				if (assignedbtn != null)
+				{
+					assignedbtn.DestroyMe();
+				}
+				else
+				{
+					assignedbtn = null;
+				}
+			}
+			catch
+			{
+				assignedbtn = null;
 			}
 			DestroyImmediate(this);
 		}

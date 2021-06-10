@@ -53,9 +53,13 @@
 							.onClick.Invoke();
 					}, action.interactText);
 
-					action.gameObject.GetOrAddComponent<ScrollMenuListener>().assignedbtn = btn;
+					var listener = action.gameObject.GetOrAddComponent<ScrollMenuListener>();
+					if(listener != null)
+					{
+						listener.assignedbtn = btn;
+					}
 					subscroll.Add(btn);
-				}
+                }
             });
         }
     }
