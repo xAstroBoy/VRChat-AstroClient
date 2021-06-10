@@ -52,8 +52,7 @@
 
         public static void CheckForJumpUpdates()
         {
-            if (KeyManager.IsAuthed)
-            {
+
                 if (GetLocalVRCPlayer() != null)
                 {
                     if (GetLocalPlayerAPI() != null)
@@ -79,7 +78,7 @@
                         }
                     }
                 }
-            }
+            
         }
 
         public static void EmulatedJump()

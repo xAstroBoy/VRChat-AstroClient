@@ -15,7 +15,7 @@
         public static Vector3 PlayerPositionBones(Player player, HumanBodyBones bone)
         {
             Vector3 bonePosition = player.transform.position;
-            VRCAvatarManager avatarManager = player.GetVRCPlayer().prop_VRCAvatarManager_0;
+            VRCAvatarManager avatarManager = player.GetVRCPlayer().GetAvatarManager();
             if (!avatarManager)
                 return bonePosition;
             Animator animator = avatarManager.field_Private_Animator_0;
@@ -31,7 +31,7 @@
         {
             var player = Player.prop_Player_0;
             Vector3 bonePosition = player.transform.position;
-            VRCAvatarManager avatarManager = player.GetVRCPlayer().prop_VRCAvatarManager_0;
+            VRCAvatarManager avatarManager = player.GetVRCPlayer().GetAvatarManager();
             if (!avatarManager)
                 return bonePosition;
             Animator animator = avatarManager.field_Private_Animator_0;
@@ -46,9 +46,9 @@
 
         public static Transform GetPlayerBoneTransform(HumanBodyBones bone)
         {
-            var player = Player.prop_Player_0;
+            var player = GetSelfPlayer();
             Transform bonetransform = player.transform;
-            VRCAvatarManager avatarManager = player.GetVRCPlayer().prop_VRCAvatarManager_0;
+            VRCAvatarManager avatarManager = player.GetVRCPlayer().GetAvatarManager();
             if (!avatarManager)
                 return bonetransform;
             Animator animator = avatarManager.field_Private_Animator_0;
@@ -78,7 +78,7 @@
 
         public static Player GetSelfPlayer()
         {
-            return KeyManager.IsAuthed ? Player.prop_Player_0 : null;
+            return Player.prop_Player_0;
         }
 
         public static bool IsPlayerGrounded()
@@ -88,7 +88,7 @@
 
         public static VRCPlayer GetLocalVRCPlayer()
         {
-            return KeyManager.IsAuthed ? VRCPlayer.field_Internal_Static_VRCPlayer_0 : null;
+            return VRCPlayer.field_Internal_Static_VRCPlayer_0;
         }
 
         public static VRCPlayerApi GetLocalPlayerAPI()

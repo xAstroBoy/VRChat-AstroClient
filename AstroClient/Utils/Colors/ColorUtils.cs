@@ -20,10 +20,6 @@ public class ColorUtils : GameEvents
 
     public static Color GenerateHSVColor()
     {
-        if (!KeyManager.IsAuthed)
-        {
-            return Color.black;
-        }
         var color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
         if (GeneratedColors != null)
         {

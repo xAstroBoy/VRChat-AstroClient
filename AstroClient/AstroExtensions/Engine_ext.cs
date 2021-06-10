@@ -198,7 +198,7 @@
 
         public static void DestroyMeLocal(this Object obj)
         {
-            if (obj != null && KeyManager.IsAuthed)
+            if (obj != null )
             {
                 string objname = obj.name;
                 string typename = obj.GetType().ToString();
@@ -286,7 +286,7 @@
 
         public static void RenameObject(this GameObject obj, string newname)
         {
-            if (obj != null && KeyManager.IsAuthed)
+            if (obj != null )
             {
                 var oldname = obj.name;
                 ModConsole.DebugLog("Renamed object : " + oldname + " to " + newname);
@@ -301,7 +301,7 @@
             for (var i = 0; i < obj.childCount; i++)
             {
                 var item = obj.GetChild(i);
-                if (item != null && KeyManager.IsAuthed)
+                if (item != null )
                 {
                     childs.Add(item);
                 }

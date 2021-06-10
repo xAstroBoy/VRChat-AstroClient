@@ -21,7 +21,7 @@
         {
             get
             {
-                return _DesktopHeadlight && KeyManager.IsAuthed;
+                return _DesktopHeadlight;
             }
             set
             {

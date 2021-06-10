@@ -29,7 +29,7 @@
 		[HideFromIl2Cpp]
 		private void BackupOriginalProperties()
 		{
-			if (Pickup1 != null && KeyManager.IsAuthed)
+			if (Pickup1 != null )
 			{
 				Original_allowManipulationWhenEquipped = Pickup1.allowManipulationWhenEquipped;
 				Original_pickupable = Pickup1.pickupable;
@@ -44,7 +44,7 @@
 				AutoHoldMode = Pickup1.AutoHold;
 				PickupOrientation = Pickup1.orientation;
 			}
-			else if (Pickup2 != null && KeyManager.IsAuthed)
+			else if (Pickup2 != null )
 			{
 				Original_allowManipulationWhenEquipped = Pickup2.allowManipulationWhenEquipped;
 				Original_pickupable = Pickup2.pickupable;
@@ -59,7 +59,7 @@
 				AutoHoldMode = Pickup2.AutoHold;
 				PickupOrientation = Pickup2.orientation;
 			}
-			else if (Pickup3 != null && KeyManager.IsAuthed)
+			else if (Pickup3 != null )
 			{
 				Original_allowManipulationWhenEquipped = Pickup3.allowManipulationWhenEquipped;
 				Original_pickupable = Pickup3.pickupable;
@@ -87,7 +87,7 @@
 			PickupOrientation = Original_orientation;
 			proximity = Original_Proximity;
 
-			if (Pickup1 != null && KeyManager.IsAuthed)
+			if (Pickup1 != null )
 			{
 				Pickup1.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
 				Pickup1.pickupable = pickupable;
@@ -96,7 +96,7 @@
 				Pickup1.orientation = PickupOrientation;
 				Pickup1.proximity = proximity;
 			}
-			else if (Pickup2 != null && KeyManager.IsAuthed)
+			else if (Pickup2 != null )
 			{
 				Pickup2.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
 				Pickup2.pickupable = pickupable;
@@ -105,7 +105,7 @@
 				Pickup2.orientation = PickupOrientation;
 				Pickup2.proximity = proximity;
 			}
-			else if (Pickup3 != null && KeyManager.IsAuthed)
+			else if (Pickup3 != null )
 			{
 				Pickup3.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
 				Pickup3.pickupable = pickupable;

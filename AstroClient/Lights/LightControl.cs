@@ -14,6 +14,10 @@
 
 	public class LightControl : GameEvents
     {
+		// TODO : Rewrite this Light Control Class (Borked ATM).
+
+
+
         public static QMToggleButton FogSwitch;
 
         public static bool FogEnabled;
@@ -26,31 +30,29 @@
             }
         }
 
-        public override void OnLevelLoaded()
-        {
-            if (KeyManager.IsAuthed)
-            {
-                FogEnabled = RenderSettings.fog;
-                UpdateFogSwitch();
-                HasOriginalRenderEditSettings = true;
-                HasBackuppedRenderSettings = false;
-                isHeadLightActive = false;
-                HasLightmapsStored = false;
-                AreLightMapsEnabled = true;
-                if (ToggleLightmaps != null)
-                {
-                    ToggleLightmaps.SetToggleState(AreLightMapsEnabled);
-                }
-                if (ToggleFullbright != null)
-                {
-                    ToggleFullbright.SetToggleState(false);
-                }
-                if (ModifyRenderOptions != null)
-                {
-                    ModifyRenderOptions.SetToggleState(false);
-                }
-            }
-        }
+		public override void OnLevelLoaded()
+		{
+			FogEnabled = RenderSettings.fog;
+			UpdateFogSwitch();
+			HasOriginalRenderEditSettings = true;
+			HasBackuppedRenderSettings = false;
+			isHeadLightActive = false;
+			HasLightmapsStored = false;
+			AreLightMapsEnabled = true;
+			if (ToggleLightmaps != null)
+			{
+				ToggleLightmaps.SetToggleState(AreLightMapsEnabled);
+			}
+			if (ToggleFullbright != null)
+			{
+				ToggleFullbright.SetToggleState(false);
+			}
+			if (ModifyRenderOptions != null)
+			{
+				ModifyRenderOptions.SetToggleState(false);
+			}
+
+		}
 
         public static void ToggleFog()
         {
@@ -106,10 +108,6 @@
                     newSun.transform.SetParent(RenderSettings.sun.transform);
                     newSun.transform.rotation = RenderSettings.sun.transform.rotation;
                 }
-                if (Camera.main != null)
-                {
-                    Camera.main.farClipPlane = 600f;
-                }
                 UpdateFogSwitch();
             }
             catch (Exception e)
@@ -131,7 +129,6 @@
                 OrigambientLight = RenderSettings.ambientLight;
                 OrigsubtractiveShadowColor = RenderSettings.subtractiveShadowColor;
                 OrigfogDensity = RenderSettings.fogDensity;
-                Origskybox = RenderSettings.skybox;
                 OrigambientProbe = RenderSettings.ambientProbe;
                 OrigcustomReflection = RenderSettings.customReflection;
                 OrigreflectionIntensity = RenderSettings.reflectionIntensity;
@@ -156,7 +153,6 @@
                 OrigfogStartDistance = RenderSettings.fogStartDistance;
                 Origfog = RenderSettings.fog;
                 OrigflareFadeSpeed = RenderSettings.flareFadeSpeed;
-                OrigFarClipPlane = Camera.main.farClipPlane;
                 HasBackuppedRenderSettings = true;
             }
         }
@@ -174,7 +170,6 @@
                 RenderSettings.ambientLight = OrigambientLight;
                 RenderSettings.subtractiveShadowColor = OrigsubtractiveShadowColor;
                 RenderSettings.fogDensity = OrigfogDensity;
-                RenderSettings.skybox = Origskybox;
                 RenderSettings.ambientProbe = OrigambientProbe;
                 RenderSettings.customReflection = OrigcustomReflection;
                 RenderSettings.reflectionIntensity = OrigreflectionIntensity;
@@ -201,7 +196,6 @@
                 RenderSettings.fogStartDistance = OrigfogStartDistance;
                 RenderSettings.fog = Origfog;
                 RenderSettings.flareFadeSpeed = OrigflareFadeSpeed;
-                Camera.main.farClipPlane = OrigFarClipPlane;
                 if (isUsingASpawnedSun)
                 {
                     UnityEngine.Object.DestroyImmediate(newSun);
@@ -280,7 +274,7 @@
             }
         }
 
-        public static void FullbrightByHead()
+        public static void FullbrightByHead(bool value)
         {
             if (Player.prop_Player_0 != null)
             {
@@ -291,44 +285,56 @@
                     light.name = "Fullbright";
                 }
 
-                if (PlayerHeadTransform != null)
-                {
-                    if (isHeadLightActive)
-                    {
-                        light.enabled = true;
-                        light.shadows = LightShadows.None;
-                        light.type = LightType.Spot;
-                        light.intensity = 1f;
-                        light.range = 999f;
-                        light.spotAngle = float.MaxValue;
-                        light.color = Color.white;
-                        ModConsole.DebugLog("Fullbright Enabled!");
-                    }
-                    else
-                    {
-                        light.enabled = false;
-                        ModConsole.DebugLog("Fullbright Deactivated!");
-                    }
-                }
+				if (PlayerHeadTransform != null)
+				{
+					if (value)
+					{
+						light.enabled = true;
+						light.shadows = LightShadows.None;
+						light.type = LightType.Spot;
+						light.intensity = 1f;
+						light.range = 999f;
+						light.spotAngle = float.MaxValue;
+						light.color = Color.white;
+						ModConsole.DebugLog("Fullbright Enabled!");
+					}
+					else
+					{
+						light.enabled = false;
+						ModConsole.DebugLog("Fullbright Deactivated!");
+					}
+				}
+				else
+				{
+                    ModConsole.Error("[Player Fullbright] : I Can't find Player's GameObject!");
+				}
             }
-            else { ModConsole.DebugLog("I Can't find Player's GameObject, try again!"); }
+            else { ModConsole.DebugLog("[Player Fullbright] : Player is null!!"); }
         }
 
-        public static void ToggleFullbrightHeadLight()
-        {
-            if (VRCPlayer.field_Internal_Static_VRCPlayer_0 != null)
-            {
-                isHeadLightActive = !isHeadLightActive;
-                FullbrightByHead();
-            }
-        }
 
-        private static AssetBundle MesaNebula;
+		private static bool _isHeadLightActive;
+		public static bool isHeadLightActive
+		{
+			get
+			{
+				return _isHeadLightActive;
+			}
+			set
+			{
+				_isHeadLightActive = value;
+				FullbrightByHead(value);
+			}
+		}
 
-        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+
+
+
+
+		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var temp = new QMNestedButton(menu, x, y, "Light Menu", "Control Avatar & World Lights!", null, null, null, null, btnHalf);
-            ToggleFullbright = new QMToggleButton(temp, 1, 0, "Player Fullbright ON", new Action(ToggleFullbrightHeadLight), "Player Fullbright OFF", new Action(ToggleFullbrightHeadLight), "Toggles Player Fullbright", null, null, null, false);
+            ToggleFullbright = new QMToggleButton(temp, 1, 0, "Player Fullbright ON", () => { isHeadLightActive = true; }, "Player Fullbright OFF", () => { isHeadLightActive = false; }, "Toggles Player Fullbright", null, null, null, false);
             ModifyRenderOptions = new QMToggleButton(temp, 2, 0, "Render Fullbright ON", new Action(SetRenderSettings), "Render Fullbright OFF", new Action(RestoreRenderSettings), "Tweaks Level RenderSettings", null, null, null, false);
             ToggleLightmaps = new QMToggleButton(temp, 3, 0, "Baked Lightings ON", new Action(ToggleLightMaps), "Baked Lightings OFF", new Action(ToggleLightMaps), "Toggles Lightmaps (baked lightings)", null, null, null, false);
             FogSwitch = new QMToggleButton(temp, 4, 0, "Fog ON", new Action(ToggleFog), "Fog OFF", new Action(ToggleFog), "Toggles Fog", null, null, null, false);
@@ -348,7 +354,6 @@
         public static Color OrigambientLight;
         public static Color OrigsubtractiveShadowColor;
         public static float OrigfogDensity;
-        public static Material Origskybox;
         public static SphericalHarmonicsL2 OrigambientProbe;
         public static Cubemap OrigcustomReflection;
         public static float OrigreflectionIntensity;
@@ -364,7 +369,6 @@
         public static float OrigfogStartDistance;
         public static bool Origfog;
         public static float OrigflareFadeSpeed;
-        public static float OrigFarClipPlane;
 
         public static bool OriginalSunStatus;
         public static float OriginalSunrange = float.MaxValue;
@@ -377,7 +381,7 @@
         public static bool AreLightMapsEnabled = true;
         public static float FullbrightRange = float.MaxValue; // default : 180f
         public static float FullbrightSpotAngle = 180f;
-        public static bool isHeadLightActive = false;
+
 
         public static Light light;
         public static QMToggleButton ToggleFullbright;
