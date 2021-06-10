@@ -63,9 +63,9 @@
 
 		#endregion Buttons
 
-		public static List<GameEvents> Overridable_List = new List<GameEvents>();
+		private static List<GameEvents> Overridable_List = new List<GameEvents>();
 
-		public static List<Tweaker_Events> Tweaker_Overridables = new List<Tweaker_Events>();
+		private static List<Tweaker_Events> Tweaker_Overridables = new List<Tweaker_Events>();
 
 		public override void OnApplicationStart()
 		{

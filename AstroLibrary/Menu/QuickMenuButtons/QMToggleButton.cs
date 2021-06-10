@@ -17,30 +17,29 @@
         public GameObject btnOff;
         public List<QMButtonBase> showWhenOn = new List<QMButtonBase>();
         public List<QMButtonBase> hideWhenOn = new List<QMButtonBase>();
-        public bool shouldSaveInConfig = false;
 
         private Action btnOnAction = null;
         private Action btnOffAction = null;
 
-        public QMToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConfig = true, bool defaultPosition = false)
+        public QMToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null,  bool defaultPosition = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
-            InitButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, shouldSaveInConfig, defaultPosition);
+            InitButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, defaultPosition);
         }
 
-        public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConfig = true, bool defaultPosition = false)
+        public QMToggleButton(QMTabMenu btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null,  bool defaultPosition = false)
         {
             btnQMLoc = btnMenu.GetMenuName();
-            InitButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, shouldSaveInConfig, defaultPosition);
+            InitButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, defaultPosition);
         }
 
-        public QMToggleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConfig = true, bool defaultPosition = false)
+        public QMToggleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null,  bool defaultPosition = false)
         {
             btnQMLoc = btnMenu;
-            InitButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, shouldSaveInConfig, defaultPosition);
+            InitButton(btnXLocation, btnYLocation, btnTextOn, btnActionOn, btnTextOff, btnActionOff, btnToolTip, btnBackgroundColor, btnTextColorOn, btnTextColorOff, defaultPosition);
         }
 
-        private void InitButton(float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool shouldSaveInConf = true, bool defaultState = false)
+        private void InitButton(float btnXLocation, float btnYLocation, string btnTextOn, Action btnActionOn, string btnTextOff, Action btnActionOff, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColorOn = null, Color? btnTextColorOff = null, bool defaultState = false)
         {
             btnType = "ToggleButton";
             button = UnityEngine.Object.Instantiate(QuickMenuStuff.ToggleButtonTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform.Find(btnQMLoc), true);
@@ -92,7 +91,6 @@
                 OrigText = btnOn.GetComponentsInChildren<Image>().First().color;
 
             SetActive(true);
-            shouldSaveInConfig = shouldSaveInConf;
 			State = defaultState;
             SetToggleState(defaultState, false);
 
@@ -124,24 +122,24 @@
                 OrigText = buttonTextColorOff;
         }
 
-		public void SetAction(Action buttonONAction, Action buttonOFFAction)
+		public void SetAction(Action buttonOnAction, Action buttonOffAction)
 		{
-			button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
-			if (buttonONAction != null && buttonOFFAction != null)
-				button.GetComponent<Button>().onClick.AddListener(new Action(() =>
-				{
-					State = !State;
-					if (State)
-					{
-						SetToggleState(true, true);
-					}
-					else
-					{
-						SetToggleState(false, true);
-					}
-				}));
-		}
+			btnOnAction = buttonOnAction;
+			btnOffAction = buttonOffAction;
 
+			button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
+			button.GetComponent<Button>().onClick.AddListener(DelegateSupport.ConvertDelegate<UnityAction>((Action)(() =>
+		  {
+			  if (btnOn.activeSelf)
+			  {
+				  SetToggleState(false, true);
+			  }
+			  else
+			  {
+				  SetToggleState(true, true);
+			  }
+		  })));
+		}
 
 		public bool GetToggleState()
 		{

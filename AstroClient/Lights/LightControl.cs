@@ -14,9 +14,6 @@
 	{
 		// TODO : Rewrite this Light Control Class (Borked ATM).
 
-		public static QMToggleButton FogSwitch;
-
-		public static bool FogEnabled;
 
 		public static void UpdateFogSwitch()
 		{
@@ -273,38 +270,45 @@
 		{
 			if (Utils.LocalPlayer != null)
 			{
+				ModConsole.DebugLog($"Step : {1}");
 				var PlayerHeadTransform = Utils.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(HumanBodyBones.Head);
 				if (PlayerHeadTransform != null)
 				{
-					if (light == null)
+					ModConsole.DebugLog($"Nullcheck Passed (Bone Transform) : {2}");
+
+					if (FullBrightLight == null)
 					{
-						light = PlayerHeadTransform.gameObject.AddComponent<Light>();
-						light.name = "Fullbright";
+						ModConsole.DebugLog($"Added Light! : {2}");
+						FullBrightLight = PlayerHeadTransform.gameObject.AddComponent<Light>();
 					}
 					if (value)
 					{
-						light.enabled = true;
-						light.shadows = LightShadows.None;
-						light.type = LightType.Spot;
-						light.intensity = 1f;
-						light.range = 999f;
-						light.spotAngle = float.MaxValue;
-						light.color = Color.white;
+						ModConsole.DebugLog($"Set Light! : {3}");
+						FullBrightLight.enabled = true;
+						FullBrightLight.shadows = LightShadows.None;
+						FullBrightLight.type = LightType.Spot;
+						FullBrightLight.intensity = 1f;
+						FullBrightLight.range = 999f;
+						FullBrightLight.spotAngle = float.MaxValue;
+						FullBrightLight.color = Color.white;
 						ModConsole.DebugLog("Fullbright Enabled!");
 					}
 					else
 					{
-						light.enabled = false;
+						ModConsole.DebugLog($"Destroyed Light! : {4}");
+						FullBrightLight.DestroyMeLocal();
 						ModConsole.DebugLog("Fullbright Deactivated!");
 					}
 				}
 				else
 				{
+					ModConsole.DebugLog($"Error!  No GameObject Found: {5}");
 					ModConsole.DebugError("[Player Fullbright] : I Can't find Player's GameObject!");
 				}
 			}
 			else
 			{
+				ModConsole.DebugLog($"Error!  Local Player Missing!: {5}");
 				ModConsole.DebugError("[Player Fullbright] : I Can't find LocalPlayer!");
 
 			}
@@ -342,50 +346,51 @@
 			FogSwitch = new QMToggleButton(temp, 4, 0, "Fog ON", new Action(ToggleFog), "Fog OFF", new Action(ToggleFog), "Toggles Fog", null, null, null, false);
 		}
 
-		public static Light newSun { get; set; }
-		public static bool isUsingASpawnedSun { get; set; }
-		public static bool HasOriginalRenderEditSettings { get; set; } = true;
-		public static bool HasBackuppedRenderSettings { get; set; } = false;
-		public static FogMode OrigfogMode { get; set; }
-		public static AmbientMode OrigambientMode { get; set; }
-		public static Color OrigambientSkyColor { get; set; }
-		public static Color OrigambientEquatorColor { get; set; }
-		public static Color OrigambientGroundColor { get; set; }
-		public static float OrigambientIntensity { get; set; }
-		public static Color OrigambientLight { get; set; }
-		public static Color OrigsubtractiveShadowColor { get; set; }
-		public static float OrigfogDensity { get; set; }
-		public static SphericalHarmonicsL2 OrigambientProbe { get; set; }
-		public static Cubemap OrigcustomReflection { get; set; }
-		public static float OrigreflectionIntensity { get; set; }
-		public static int OrigreflectionBounces { get; set; }
-		public static DefaultReflectionMode OrigdefaultReflectionMode { get; set; }
-		public static int OrigdefaultReflectionResolution { get; set; }
-		public static float OrighaloStrength { get; set; }
-		public static float OrigflareStrength { get; set; }
-		public static Light Origsun { get; set; }
-		public static Color OrigfogColor { get; set; }
-		public static float OrigambientSkyboxAmount { get; set; }
-		public static float OrigfogEndDistance { get; set; }
-		public static float OrigfogStartDistance { get; set; }
-		public static bool Origfog { get; set; }
-		public static float OrigflareFadeSpeed { get; set; }
+		private static Light newSun { get; set; }
+		private static bool isUsingASpawnedSun { get; set; }
+		private static bool HasOriginalRenderEditSettings { get; set; } = true;
+		private static bool HasBackuppedRenderSettings { get; set; } = false;
+		private static FogMode OrigfogMode { get; set; }
+		private static AmbientMode OrigambientMode { get; set; }
+		private static Color OrigambientSkyColor { get; set; }
+		private static Color OrigambientEquatorColor { get; set; }
+		private static Color OrigambientGroundColor { get; set; }
+		private static float OrigambientIntensity { get; set; }
+		private static Color OrigambientLight { get; set; }
+		private static Color OrigsubtractiveShadowColor { get; set; }
+		private static float OrigfogDensity { get; set; }
+		private static SphericalHarmonicsL2 OrigambientProbe { get; set; }
+		private static Cubemap OrigcustomReflection { get; set; }
+		private static float OrigreflectionIntensity { get; set; }
+		private static int OrigreflectionBounces { get; set; }
+		private static DefaultReflectionMode OrigdefaultReflectionMode { get; set; }
+		private static int OrigdefaultReflectionResolution { get; set; }
+		private static float OrighaloStrength { get; set; }
+		private static float OrigflareStrength { get; set; }
+		private static Light Origsun { get; set; }
+		private static Color OrigfogColor { get; set; }
+		private static float OrigambientSkyboxAmount { get; set; }
+		private static float OrigfogEndDistance { get; set; }
+		private static float OrigfogStartDistance { get; set; }
+		private static bool Origfog { get; set; }
+		private static float OrigflareFadeSpeed { get; set; }
 
-		public static bool OriginalSunStatus { get; set; }
-		public static float OriginalSunrange { get; set; }
-		public static LightShadows Originalsunshadows { get; set; }
-		public static LightType Originalsuntype { get; set; }
-		public static Color Originalsuncolor { get; set; }
-		public static float Originalsunintensity { get; set; }
+		private static bool OriginalSunStatus { get; set; }
+		private static float OriginalSunrange { get; set; }
+		private static LightShadows Originalsunshadows { get; set; }
+		private static LightType Originalsuntype { get; set; }
+		private static Color Originalsuncolor { get; set; }
+		private static float Originalsunintensity { get; set; }
+		private static bool FogEnabled { get; set; }
 
-		public static bool HasLightmapsStored { get; set; } = false;
-		public static bool AreLightMapsEnabled { get; set; } = true;
-		public static float FullbrightRange { get; set; } = float.MaxValue; // default : 180f
-		public static float FullbrightSpotAngle { get; set; } = 180f;
+		private static bool HasLightmapsStored { get; set; } = false;
+		private static bool AreLightMapsEnabled { get; set; } = true;
+		public static QMToggleButton FogSwitch { get; set; }
 
-		public static Light light;
-		public static QMToggleButton ToggleFullbright;
-		public static QMToggleButton ModifyRenderOptions;
-		public static QMToggleButton ToggleLightmaps;
+
+		private static Light FullBrightLight{ get; set; }
+		private static QMToggleButton ToggleFullbright{ get; set; }
+		private static QMToggleButton ModifyRenderOptions{ get; set; }
+		private static QMToggleButton ToggleLightmaps{ get; set; }
 	}
 }
