@@ -15,8 +15,6 @@ namespace AstroClient.Components
 
 		private void OnEnable()
 		{
-			try
-			{
 				if (assignedbtn != null)
 				{
 					assignedbtn.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
@@ -25,18 +23,11 @@ namespace AstroClient.Components
 				{
 					DestroyImmediate(this);
 				}
-			}
-			catch
-			{
-				DestroyImmediate(this);
-			}
 		}
 
 
 		private void OnDisable()
 		{
-			try
-			{
 				if (assignedbtn != null)
 				{
 					assignedbtn.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
@@ -45,30 +36,14 @@ namespace AstroClient.Components
 				{
 					DestroyImmediate(this);
 				}
-			}
-			catch
-			{
-				DestroyImmediate(this);
-			}
 		}
 
 		private void OnDestroy()
 		{
-			try
-			{
 				if (assignedbtn != null)
 				{
 					assignedbtn.DestroyMe();
 				}
-				else
-				{
-					assignedbtn = null;
-				}
-			}
-			catch
-			{
-				assignedbtn = null;
-			}
 			DestroyImmediate(this);
 		}
 	}
