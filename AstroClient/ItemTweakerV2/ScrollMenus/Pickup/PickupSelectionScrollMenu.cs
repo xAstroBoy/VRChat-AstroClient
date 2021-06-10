@@ -50,11 +50,7 @@
 					{
 						Tweaker_Object.SetObjectToEdit(pickup);
 					}, $"Select {pickup.name}", null, pickup.Get_GameObject_Active_ToColor());
-					var listener = pickup.GetOrAddComponent<ScrollMenuListener>();
-					if (listener != null)
-					{
-						listener.assignedbtn = btn;
-					}
+					pickup.gameObject.GetOrAddComponent<ScrollMenuListener>().assignedbtn = btn;
 
 					PickupQMScroll.Add(btn);
                 }

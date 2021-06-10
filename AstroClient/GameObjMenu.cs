@@ -363,12 +363,8 @@
                            }
                        }));
                         newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.x - 100f, newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
-						var listener = item.gameObject.GetOrAddComponent<ScrollMenuListener>();
-						if(listener != null)
-						{
-							listener.assignedbtn = newbtn;
-						}
-						
+						item.gameObject.GetOrAddComponent<ScrollMenuListener>().assignedbtn = newbtn;
+
 						subscroll.Add(newbtn);
                         AddEnterChildObj(gameobjtogglermenu, newbtn, item);
                     }

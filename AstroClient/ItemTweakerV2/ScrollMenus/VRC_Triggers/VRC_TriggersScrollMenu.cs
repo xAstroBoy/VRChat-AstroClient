@@ -20,13 +20,9 @@
 					{
 						trigger.TriggerClick();
 					}, $"Click {trigger.name}", null, trigger.Get_GameObject_Active_ToColor());
-					var listener = trigger.GetOrAddComponent<ScrollMenuListener>();
-					if (listener != null)
-					{
-						listener.assignedbtn = btn;
-					}
+					trigger.gameObject.GetOrAddComponent<ScrollMenuListener>().assignedbtn = btn;
 					scroll.Add(btn);
-                }
+				}
             });
         }
     }

@@ -25,11 +25,8 @@
 					{
 						obj.VRC_Interactable_Click();
 					}, $"Click {obj.name}", null, obj.Get_GameObject_Active_ToColor());
-					var listener = obj.GetOrAddComponent<ScrollMenuListener>();
-					if (listener != null)
-					{
-						listener.assignedbtn = btn;
-					}
+					obj.gameObject.GetOrAddComponent<ScrollMenuListener>().assignedbtn = btn;
+
 
 
 
