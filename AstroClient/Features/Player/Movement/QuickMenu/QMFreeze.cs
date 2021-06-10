@@ -11,20 +11,20 @@
             Frozen = false;
         }
 
-		public override void OnUpdate()
-		{
-			if (FreezePlayerOnQMOpen)
-			{
-				if (QuickMenuUtils.IsQuickMenuOpen)
-				{
-					Freeze();
-				}
-				else
-				{
-					Unfreeze();
-				}
-			}
-		}
+        public override void OnUpdate()
+        {
+            if (FreezePlayerOnQMOpen)
+            {
+                if (QuickMenuUtils.IsQuickMenuOpen)
+                {
+                    Freeze();
+                }
+                else
+                {
+                    Unfreeze();
+                }
+            }
+        }
 
         public static void Unfreeze()
         {

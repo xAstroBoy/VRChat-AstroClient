@@ -43,19 +43,19 @@
             ItemInflaterManager.Register(this);
         }
 
-		private void OnDestroy()
-		{
-			try
-			{
-				ItemInflaterManager.RemoveObject(obj);
-			}
-			catch
-			{
-			}
-		}
+        private void OnDestroy()
+        {
+            try
+            {
+                ItemInflaterManager.RemoveObject(obj);
+            }
+            catch
+            {
+            }
+        }
 
-		// Update is called once per frame
-		private void Update()
+        // Update is called once per frame
+        private void Update()
         {
             try
             {
@@ -72,11 +72,9 @@
                             // Z
                             FixZ();
                             // Update Button
-							
 
-							// TODO: Figure a way to update the button remotely. (event)
-                                //GameObjectActualScale.SetButtonText("Object 's Current scale : " + obj.transform.localScale.ToString());
-                            
+                            // TODO: Figure a way to update the button remotely. (event)
+                            //GameObjectActualScale.SetButtonText("Object 's Current scale : " + obj.transform.localScale.ToString());
                         }
                         LastTimeCheck = Time.time;
                     }

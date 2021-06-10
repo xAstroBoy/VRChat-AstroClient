@@ -4,10 +4,10 @@
 
 	using AstroClient.variables;
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
-	using AstroLibrary.Utility;
-	using AstroLibrary.Extensions;
 	using System.Collections.Generic;
 	using static AstroClient.Cheetos.AvatarSearch;
 
@@ -55,8 +55,8 @@
                 {
                     ModConsole.DebugLog($"Sending Client Information: {Name}, {UserID}");
                 }
-                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_USERID, LocalPlayerUtils.GetSelfPlayer().UserID()));
-                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_NAME, LocalPlayerUtils.GetSelfPlayer().DisplayName()));
+                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_USERID, Utils.LocalPlayer.GetPlayer().UserID()));
+                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_NAME, Utils.LocalPlayer.GetPlayer().DisplayName()));
             }
         }
 
@@ -71,7 +71,7 @@
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
-            var self = LocalPlayerUtils.GetSelfPlayer();
+            var self = Utils.LocalPlayer.GetPlayer();
             Name = self.DisplayName();
             UserID = self.UserID();
 

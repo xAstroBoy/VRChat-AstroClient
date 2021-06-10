@@ -3,12 +3,12 @@
 	using System;
 
 	public class VRCPlayerEventArgs : EventArgs
-	{
-		public VRC.Player player;
+    {
+        public VRC.Player player;
 
-		public VRCPlayerEventArgs(VRC.Player player)
-		{
-			this.player = player;
-		}
-	}
+        public VRCPlayerEventArgs(VRC.Player player)
+        {
+            this.player = player;
+        }
+    }
 }

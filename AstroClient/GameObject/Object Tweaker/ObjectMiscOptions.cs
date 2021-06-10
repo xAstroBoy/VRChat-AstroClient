@@ -1,21 +1,13 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.Components;
-	using AstroClient.Extensions;
-	using AstroClient.GameObjectDebug;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
 	using System;
-	using System.Collections.Generic;
 	using UnityEngine;
-	using VRC;
 
 	public class ObjectMiscOptions : GameEvents
     {
-
-
         public static void AllWorldPickupsOrbitsOnTarget()
         {
             try
@@ -204,9 +196,9 @@
         {
             try
             {
-				var targetuser = TargetSelector.CurrentTarget;
-				if (targetuser != null)
-				{
+                var targetuser = TargetSelector.CurrentTarget;
+                if (targetuser != null)
+                {
                     if (obj != null)
                     {
                         PlayerAttackerManager.AddObject(obj, targetuser);
@@ -224,9 +216,9 @@
         {
             try
             {
-				var targetuser = TargetSelector.CurrentTarget;
-				if (targetuser != null)
-				{
+                var targetuser = TargetSelector.CurrentTarget;
+                if (targetuser != null)
+                {
                     if (obj != null)
                     {
                         PlayerWatcherManager.AddObject(obj, targetuser);
@@ -244,9 +236,9 @@
         {
             try
             {
-				var targetuser = TargetSelector.CurrentTarget;
-				if (targetuser != null)
-				{
+                var targetuser = TargetSelector.CurrentTarget;
+                if (targetuser != null)
+                {
                     if (obj != null)
                     {
                         OrbitManager.AddOrbitObject(obj, targetuser);
@@ -322,7 +314,7 @@
                                 }
                                 else
                                 {
-									var Colliders = control.gameObject.GetComponentsInChildren<Collider>(true);
+                                    var Colliders = control.gameObject.GetComponentsInChildren<Collider>(true);
                                     if (Colliders.Count != 0)
                                     {
                                         foreach (var collider in Colliders)
@@ -370,7 +362,5 @@
             }
             catch (Exception) { }
         }
-
-		
     }
 }

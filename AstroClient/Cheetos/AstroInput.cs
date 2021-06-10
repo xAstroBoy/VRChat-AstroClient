@@ -19,7 +19,7 @@
 
         public override void OnLateUpdate()
         {
-            var localPlayer = LocalPlayerUtils.GetSelfPlayer();
+            var localPlayer = Utils.LocalPlayer.GetPlayer();
             if (WorldUtils.Get_World_ID() == null || localPlayer == null || !localPlayer.isActiveAndEnabled || QuickMenuUtils.IsQuickMenuOpen)
             {
                 return;

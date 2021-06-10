@@ -169,7 +169,7 @@
         public static JarRoleESP GetLocalPlayerNode()
         {
             return RoleEspComponents.Count() != 0 && RoleEspComponents != null
-                ? RoleEspComponents.Where(x => x.Apiuser.displayName == LocalPlayerUtils.GetSelfPlayer().DisplayName()).First()
+                ? RoleEspComponents.Where(x => x.Apiuser.displayName == Utils.LocalPlayer.GetPlayer().DisplayName()).First()
                 : null;
         }
 

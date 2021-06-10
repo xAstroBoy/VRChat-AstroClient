@@ -1,11 +1,10 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
 	using AstroClient.Components;
-	using AstroClient.Extensions;
+	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using System;
 	using UnityEngine;
-	using VRC;
 
 	internal class VRChat_Map_ESP_Menu : GameEvents
     {
@@ -17,7 +16,6 @@
             VRCInteractableESPToggleBtn = new QMSingleToggleButton(main, 1, 0.5f, "VRC Interactable ESP ON", new Action(() => { Toggle_VRCInteractable_ESP = true; }), "VRC Interactable ESP OFF", new Action(() => { Toggle_VRCInteractable_ESP = false; }), "Toggle VRC Interactable ESP", Color.green, Color.red, null, false, true);
             TriggerESPToggleBtn = new QMSingleToggleButton(main, 1, 1f, "Trigger ESP ON", new Action(() => { Toggle_Trigger_ESP = true; }), "Trigger ESP OFF", new Action(() => { Toggle_Trigger_ESP = false; }), "Toggle Trigger ESP", Color.green, Color.red, null, false, true);
             UdonBehaviourESPToggleBtn = new QMSingleToggleButton(main, 1, 1.5f, "Udon Behaviour ESP ON", new Action(() => { Toggle_UdonBehaviour_ESP = true; }), "Udon Behaviour ESP OFF", new Action(() => { Toggle_UdonBehaviour_ESP = false; }), "Toggle Udon Behaviour ESP", Color.green, Color.red, null, false, true);
-
         }
 
         private static QMSingleToggleButton VRCInteractableESPToggleBtn;
@@ -27,15 +25,16 @@
 
         public override void OnLevelLoaded()
         {
-			Toggle_VRCInteractable_ESP = false;
-			Toggle_Trigger_ESP = false;
-			Toggle_UdonBehaviour_ESP = false;
-			Toggle_Pickup_ESP = false;
-		}
+            Toggle_VRCInteractable_ESP = false;
+            Toggle_Trigger_ESP = false;
+            Toggle_UdonBehaviour_ESP = false;
+            Toggle_Pickup_ESP = false;
+        }
 
-		#region VRCInteractableESP
+        #region VRCInteractableESP
 
-		private static bool _Toggle_VRCInteractable_ESP;
+        private static bool _Toggle_VRCInteractable_ESP;
+
         public static bool Toggle_VRCInteractable_ESP
         {
             get
@@ -68,7 +67,7 @@
             {
                 if (item != null)
                 {
-                   item.GetOrAddComponent<ESP_VRCInteractable>();
+                    item.GetOrAddComponent<ESP_VRCInteractable>();
                 }
             }
         }
@@ -86,11 +85,12 @@
             }
         }
 
-		#endregion VRCInteractableESP
+        #endregion VRCInteractableESP
 
-		#region PickupESP
+        #region PickupESP
 
-		private static bool _Toggle_Pickup_ESP;
+        private static bool _Toggle_Pickup_ESP;
+
         public static bool Toggle_Pickup_ESP
         {
             get
@@ -123,7 +123,7 @@
             {
                 if (item != null)
                 {
-                   item.GetOrAddComponent<ESP_Pickup>();
+                    item.GetOrAddComponent<ESP_Pickup>();
                 }
             }
         }
@@ -141,10 +141,12 @@
             }
         }
 
-		#endregion PickupESP
+        #endregion PickupESP
 
-		#region TriggerESP
-		private static bool _Toggle_Trigger_ESP;
+        #region TriggerESP
+
+        private static bool _Toggle_Trigger_ESP;
+
         public static bool Toggle_Trigger_ESP
         {
             get
@@ -178,8 +180,7 @@
                 if (item != null)
                 {
                     item.GetOrAddComponent<ESP_Trigger>();
-
-				}
+                }
             }
         }
 
@@ -198,9 +199,10 @@
 
         #endregion TriggerESP
 
+        #region UdonBehaviourESP
 
-		#region UdonBehaviourESP
-		private static bool _Toggle_UdonBehaviour_ESP;
+        private static bool _Toggle_UdonBehaviour_ESP;
+
         private static bool Toggle_UdonBehaviour_ESP
         {
             get
@@ -235,7 +237,7 @@
                 {
                     if (item != null)
                     {
-                       item.gameObject.GetOrAddComponent<ESP_UdonBehaviour>();
+                        item.gameObject.GetOrAddComponent<ESP_UdonBehaviour>();
                     }
                 }
             }

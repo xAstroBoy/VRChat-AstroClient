@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.Worlds
 {
-	using AstroClient.Extensions;
 	using AstroClient.Variables;
 	using AstroClient.World.Hub;
 	using AstroLibrary;
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
 	using RubyButtonAPI;
 	using System.Collections.Generic;

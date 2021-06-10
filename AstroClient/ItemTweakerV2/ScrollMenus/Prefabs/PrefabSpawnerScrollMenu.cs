@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
 	using AstroClient.ItemTweakerV2.Selector;
+	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using UnityEngine;
 	using VRC.SDKBase;
@@ -20,7 +21,7 @@
 					{
 						var broadcast = VRC_EventHandler.VrcBroadcastType.Always;
 						var prefabinfo = prefab.name;
-						var position = LocalPlayerUtils.GetPlayerBoneTransform(HumanBodyBones.RightHand).position;
+						var position = Utils.LocalPlayer.GetPlayer().Get_Player_Bone_Position(HumanBodyBones.RightHand);
 						var Rotation = prefab.transform.rotation;
 
 						//ModConsole.DebugLog($"Attempting to broadcast  {broadcast} a Spawn Prefab {prefabinfo}, in Vector3 {position.ToString()}, Rotation : {Rotation.ToString()}");

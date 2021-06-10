@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroClient.Extensions;
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using System;
 	using System.Linq;
 	using UnhollowerBaseLib.Attributes;

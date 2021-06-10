@@ -16,7 +16,7 @@
         {
             WorldCheatsShortcut = new QMSingleButton("ShortcutMenu", x, y, "Cheats Shortcut", null, "Cheats Shortcut", null, null, btnHalf);
             ToggleButtonVisibilityAndInteractivity(false);
-		}
+        }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {

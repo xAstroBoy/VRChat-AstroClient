@@ -39,9 +39,9 @@
             }
         }
 
-		public override void OnPlayerSelected(VRC.Player player)
-		{
-			ModConsole.Log($"Player Selected: {player.name}");
-		}
-	}
+        public override void OnPlayerSelected(VRC.Player player)
+        {
+            ModConsole.Log($"Player Selected: {player.name}");
+        }
+    }
 }

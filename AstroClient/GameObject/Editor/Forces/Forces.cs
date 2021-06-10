@@ -1,35 +1,29 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.Components;
 	using AstroClient.ItemTweakerV2.Submenus;
-	using RubyButtonAPI;
 	using UnityEngine;
 
 	public class Forces
     {
-
-
-		// TODO: Get rid of these two , lazy rn.
-		public static float Force
-		{
+        // TODO: Get rid of these two , lazy rn.
+        public static float Force
+        {
             get
-			{
-				return ForcesSubmenu.Force;
-			}
-		}
+            {
+                return ForcesSubmenu.Force;
+            }
+        }
 
-		public static float SpinForce
-		{
-			get
-			{
-				return ForcesSubmenu.SpinForce;
-			}
-		}
+        public static float SpinForce
+        {
+            get
+            {
+                return ForcesSubmenu.SpinForce;
+            }
+        }
 
-
-
-		public static void ApplyBackwardsForce(GameObject obj, bool TakeOwnership = true)
+        public static void ApplyBackwardsForce(GameObject obj, bool TakeOwnership = true)
         {
             if (obj != null)
             {
@@ -207,7 +201,6 @@
             }
         }
 
-
         public static void SpinObject(GameObject obj, float x, float y, float z, bool TakeOwnership = true)
         {
             if (obj != null)
@@ -267,8 +260,5 @@
                 }
             }
         }
-
-
-
     }
 }

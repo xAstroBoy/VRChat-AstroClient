@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroClient.Extensions;
+	using AstroLibrary.Extensions;
 	using System;
 	using System.Runtime.InteropServices;
 	using UnhollowerRuntimeLib;
@@ -60,21 +60,21 @@
             }
         }
 
-		private void OnDestroy()
-		{
-			try
-			{
-				control.RestoreOriginalBody();
-				OnlineEditor.RemoveOwnerShip(obj);
-				ObjectSpinnerManager.RemoveObject(obj);
-			}
-			catch
-			{
-			}
-		}
+        private void OnDestroy()
+        {
+            try
+            {
+                control.RestoreOriginalBody();
+                OnlineEditor.RemoveOwnerShip(obj);
+                ObjectSpinnerManager.RemoveObject(obj);
+            }
+            catch
+            {
+            }
+        }
 
-		// Update is called once per frame
-		private void Update()
+        // Update is called once per frame
+        private void Update()
         {
             try
             {

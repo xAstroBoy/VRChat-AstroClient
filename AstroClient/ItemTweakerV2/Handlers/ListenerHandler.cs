@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.ItemTweakerV2.Handlers
 {
 	using AstroClient.Components;
-	using AstroClient.Extensions;
 	using AstroClient.ItemTweakerV2.Selector;
+	using AstroLibrary.Extensions;
 	using System;
 	using UnityEngine;
 
@@ -34,17 +34,16 @@
                     {
                         Event_OnSelectedObject_Destroyed?.Invoke(null, null);
                     };
-					// Then call and update the SetActive
-					if(obj.active)
-					{
-						Event_OnSelectedObject_Enabled?.Invoke(null, null);
-					}
-					else
-					{
-						Event_OnSelectedObject_Disabled?.Invoke(null, null);
-					}
-
-				}
+                    // Then call and update the SetActive
+                    if (obj.active)
+                    {
+                        Event_OnSelectedObject_Enabled?.Invoke(null, null);
+                    }
+                    else
+                    {
+                        Event_OnSelectedObject_Disabled?.Invoke(null, null);
+                    }
+                }
             }
         }
 

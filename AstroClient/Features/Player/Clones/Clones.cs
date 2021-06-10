@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Features.Player.Clones
 {
-	using AstroClient.Extensions;
+	using AstroLibrary.Extensions;
 	using System.Collections.Generic;
 	using UnityEngine;
 
@@ -13,9 +13,7 @@
 
         public static void SpawnClone()
         {
-
-                ClonesCapsules.Add(PlayerCloner.CloneLocalPlayerAvatar());
-            
+            ClonesCapsules.Add(PlayerCloner.CloneLocalPlayerAvatar());
         }
 
         public static void RemoveClones()

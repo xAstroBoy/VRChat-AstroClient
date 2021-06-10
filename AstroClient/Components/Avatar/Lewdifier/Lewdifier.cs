@@ -1,7 +1,6 @@
 ﻿namespace AstroClient.Components
 {
 	using AstroClient.AvatarMods;
-	using AstroClient.Extensions;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using System;

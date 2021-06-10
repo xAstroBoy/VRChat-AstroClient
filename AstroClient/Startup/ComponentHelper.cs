@@ -12,22 +12,20 @@
     {
         public static void RegisterComponent<T>() where T : class
         {
-
-                try
+            try
+            {
+                ClassInjector.RegisterTypeInIl2Cpp<T>();
+                ModConsole.DebugLog($"Registered: {typeof(T).FullName}");
+                if (!RegisteredComponentsTypes.Contains(typeof(T)))
                 {
-                    ClassInjector.RegisterTypeInIl2Cpp<T>();
-                    ModConsole.DebugLog($"Registered: {typeof(T).FullName}");
-                    if (!RegisteredComponentsTypes.Contains(typeof(T)))
-                    {
-                        RegisteredComponentsTypes.Add(typeof(T));
-                    }
+                    RegisteredComponentsTypes.Add(typeof(T));
                 }
-                catch (Exception e)
-                {
-                    ModConsole.Error($"Failed to Register: {typeof(T).FullName}");
-                    ModConsole.ErrorExc(e);
-                }
-            
+            }
+            catch (Exception e)
+            {
+                ModConsole.Error($"Failed to Register: {typeof(T).FullName}");
+                ModConsole.ErrorExc(e);
+            }
         }
 
         public override void OnApplicationStart()
@@ -84,12 +82,10 @@
             RegisterComponent<Lewdifier>();
             RegisterComponent<MaskRemover>();
 
-			RegisterComponent<TweakerListener>();
+            RegisterComponent<TweakerListener>();
+        }
 
-
-		}
-
-		public override void OnUpdate()
+        public override void OnUpdate()
         {
             MainThreadRunner.MakeInstance();
             RocketManager.MakeInstance();

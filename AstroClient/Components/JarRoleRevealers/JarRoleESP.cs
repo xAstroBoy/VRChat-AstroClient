@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroClient.Extensions;
 	using AstroClient.Startup.Buttons;
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using System;
 	using System.Linq;
 	using UnityEngine;
@@ -559,72 +559,72 @@
             }
         }
 
-		private void Update()
-		{
-			try
-			{
-				if (Internal_AssignedEntry == null)
-				{
-					FindEntryWithUser();
-				}
-				else
-				{
-					if (!VerifyEntry(Internal_AssignedEntry))
-					{
-						FindEntryWithUser();
-					}
-				}
-				//if ((Time.time - LastTimeCheck > 0.5f))
-				//{
-				//	if (IsMurder4World)
-				//	{
-				//		if (AssignedMurder4Role == Murder4Roles.None || AssignedMurder4Role == Murder4Roles.Unassigned)
-				//		{
-				//			isRPCActive = false;
-				//			UpdateMurder4ESPMechanism();
-				//		}
+        private void Update()
+        {
+            try
+            {
+                if (Internal_AssignedEntry == null)
+                {
+                    FindEntryWithUser();
+                }
+                else
+                {
+                    if (!VerifyEntry(Internal_AssignedEntry))
+                    {
+                        FindEntryWithUser();
+                    }
+                }
+                //if ((Time.time - LastTimeCheck > 0.5f))
+                //{
+                //	if (IsMurder4World)
+                //	{
+                //		if (AssignedMurder4Role == Murder4Roles.None || AssignedMurder4Role == Murder4Roles.Unassigned)
+                //		{
+                //			isRPCActive = false;
+                //			UpdateMurder4ESPMechanism();
+                //		}
 
-				//	}
-				//	else if (isAmongUsWorld)
-				//	{
-				//		if (AmongUsCurrentRole == AmongUsRoles.None || AmongUsCurrentRole == AmongUsRoles.Unassigned)
-				//		{
-				//			isRPCActive = false;
-				//			UpdateMurder4ESPMechanism();
-				//		}
+                //	}
+                //	else if (isAmongUsWorld)
+                //	{
+                //		if (AmongUsCurrentRole == AmongUsRoles.None || AmongUsCurrentRole == AmongUsRoles.Unassigned)
+                //		{
+                //			isRPCActive = false;
+                //			UpdateMurder4ESPMechanism();
+                //		}
 
-				//	}
+                //	}
 
-				//	LastTimeCheck = Time.time;
-				//}
+                //	LastTimeCheck = Time.time;
+                //}
 
-				if (GameRoleTag != null)
-				{
-					if (GameRoleTag.ShowTag != ViewRoles)
-					{
-						GameRoleTag.ShowTag = ViewRoles;
-					}
-				}
-				if (PlayerESPMenu.Toggle_Player_ESP)
-				{
-					if (ESP == null)
-					{
-						ESP = Internal_player.gameObject.GetComponent<PlayerESP>();
-					}
-				}
-				if (IsMurder4World)
-				{
-					UpdateMurder4ESPMechanism();
-				}
-				else if (IsAmongUsWorld)
-				{
-					UpdateAmongUSESpMechanism();
-				}
-			}
-			catch (Exception e) { ModConsole.DebugError("JarRoleRevealer OnUpdate Exception : " + e); }
-		}
+                if (GameRoleTag != null)
+                {
+                    if (GameRoleTag.ShowTag != ViewRoles)
+                    {
+                        GameRoleTag.ShowTag = ViewRoles;
+                    }
+                }
+                if (PlayerESPMenu.Toggle_Player_ESP)
+                {
+                    if (ESP == null)
+                    {
+                        ESP = Internal_player.gameObject.GetComponent<PlayerESP>();
+                    }
+                }
+                if (IsMurder4World)
+                {
+                    UpdateMurder4ESPMechanism();
+                }
+                else if (IsAmongUsWorld)
+                {
+                    UpdateAmongUSESpMechanism();
+                }
+            }
+            catch (Exception e) { ModConsole.DebugError("JarRoleRevealer OnUpdate Exception : " + e); }
+        }
 
-		private void UpdateMurder4ESPMechanism()
+        private void UpdateMurder4ESPMechanism()
         {
             var ReturnedRole = GetPlayerRoleMurder4();
             if (ReturnedRole != Murder4CurrentRole)

@@ -51,7 +51,7 @@
 					Physics.gravity = Gravity;
 					if (noClipEnabled)
 					{
-						LocalPlayerUtils.GetLocalVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = true;
+						Utils.LocalPlayer.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = true;
 					}
 				}
 				flyEnabled = value;
@@ -64,7 +64,7 @@
 			set
 			{
 				noClipEnabled = value;
-				LocalPlayerUtils.GetLocalVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = !value;
+				Utils.LocalPlayer.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = !value;
 
 				if (!value && flyEnabled)
 				{
@@ -84,7 +84,7 @@
 			{
 				if (currentPlayer == null || transform == null)
 				{
-					currentPlayer = LocalPlayerUtils.GetLocalVRCPlayer();
+					currentPlayer = Utils.LocalPlayer.GetVRCPlayer();
 					isInVR = MiscExtension.IsInVR();
 					transform = Camera.main.transform;
 				}

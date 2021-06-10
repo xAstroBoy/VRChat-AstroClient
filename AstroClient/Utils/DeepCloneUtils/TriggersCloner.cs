@@ -1,7 +1,7 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Extensions;
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using UnityEngine;
 	using VRCSDK2;
 

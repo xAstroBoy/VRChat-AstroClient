@@ -16,10 +16,9 @@
             QMNestedButton sub = new QMNestedButton(menu, x, y, "Settings", "Settings", null, null, null, null, btnHalf);
             sub.GetMainButton().SetTextColor(Color.cyan);
 
-			QMSingleButton saveButton = new QMSingleButton(sub, 0, 0, "Save Config", () => { ConfigManager.Save_All(); }, "Save Config", Color.magenta, null, true);
+            QMSingleButton saveButton = new QMSingleButton(sub, 0, 0, "Save Config", () => { ConfigManager.Save_All(); }, "Save Config", Color.magenta, null, true);
 
-
-			QMSingleToggleButton playerListToggle = new QMSingleToggleButton(sub, 1, 0, "PlayerList ON", () => { PlayerList.ShowPlayerMenu(); }, "PlayerList OFF", () => { PlayerList.HidePlayerMenu(); }, "Show/Hide PlayerList", Color.green, Color.red, null, ConfigManager.UI.ShowPlayersMenu, true);
+            QMSingleToggleButton playerListToggle = new QMSingleToggleButton(sub, 1, 0, "PlayerList ON", () => { PlayerList.ShowPlayerMenu(); }, "PlayerList OFF", () => { PlayerList.HidePlayerMenu(); }, "Show/Hide PlayerList", Color.green, Color.red, null, ConfigManager.UI.ShowPlayersMenu, true);
             playerListToggle.SetToggleState(ConfigManager.UI.ShowPlayersMenu, false);
 
             QMSingleToggleButton joinLeaveToggle = new QMSingleToggleButton(sub, 2, 0, "Join/Leave ON", () => { ConfigManager.General.JoinLeave = true; }, "Join/Leave OFF", () => { ConfigManager.General.JoinLeave = false; }, "Notification when someone joins/leaves", Color.green, Color.red, null, ConfigManager.General.JoinLeave, true);
@@ -71,63 +70,63 @@
             QMToggleButton removeVRCPlusMenu = new QMToggleButton(subHideElements, 4, 1, "Remove VRCPlusMenu", () => { ConfigManager.UI.RemoveVRCPlusMenu = true; }, "Keep VRCPlusMenu", () => { ConfigManager.UI.RemoveVRCPlusMenu = false; }, "Requires Restart");
             removeVRCPlusMenu.SetToggleState(ConfigManager.UI.RemoveVRCPlusMenu, false);
 
-			QMToggleButton removeGalleryButton = new QMToggleButton(subHideElements, 1, 2, "Remove GalleryButton", () => { ConfigManager.UI.RemoveGalleryButton = true; }, "Keep GalleryButton", () => { ConfigManager.UI.RemoveGalleryButton = false; }, "Requires Restart");
-			removeGalleryButton.SetToggleState(ConfigManager.UI.RemoveGalleryButton, false);
+            QMToggleButton removeGalleryButton = new QMToggleButton(subHideElements, 1, 2, "Remove GalleryButton", () => { ConfigManager.UI.RemoveGalleryButton = true; }, "Keep GalleryButton", () => { ConfigManager.UI.RemoveGalleryButton = false; }, "Requires Restart");
+            removeGalleryButton.SetToggleState(ConfigManager.UI.RemoveGalleryButton, false);
 
-			// Fly and ESP
-			FlightMenu.InitButtons(sub, 1f, 1.5f, true);
-			PlayerESPMenu.InitButtons(sub, 2f, 1.5f, true);
+            // Fly and ESP
+            FlightMenu.InitButtons(sub, 1f, 1.5f, true);
+            PlayerESPMenu.InitButtons(sub, 2f, 1.5f, true);
 
-			// Spoofs
-			QMNestedButton subSpoofButton = new QMNestedButton(sub, 3, 2f, "Spoofs", "Spoof Menu", null, null, null, null, false);
+            // Spoofs
+            QMNestedButton subSpoofButton = new QMNestedButton(sub, 3, 2f, "Spoofs", "Spoof Menu", null, null, null, null, false);
 
-			QMSingleToggleButton toggleSpoofFPS = new QMSingleToggleButton(subSpoofButton, 1, 0, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = true; }, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = false; }, "Toggle FPS Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofFPS, false);
-			toggleSpoofFPS.SetToggleState(ConfigManager.General.SpoofFPS, false);
+            QMSingleToggleButton toggleSpoofFPS = new QMSingleToggleButton(subSpoofButton, 1, 0, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = true; }, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = false; }, "Toggle FPS Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofFPS, false);
+            toggleSpoofFPS.SetToggleState(ConfigManager.General.SpoofFPS, false);
 
-			QMSingleToggleButton toggleSpoofPing = new QMSingleToggleButton(subSpoofButton, 2, 0, "Ping Spoof", () => { ConfigManager.General.SpoofPing = true; }, "Ping Spoof", () => { ConfigManager.General.SpoofPing = false; }, "Toggle Ping Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofPing, false);
-			toggleSpoofPing.SetToggleState(ConfigManager.General.SpoofPing, false);
+            QMSingleToggleButton toggleSpoofPing = new QMSingleToggleButton(subSpoofButton, 2, 0, "Ping Spoof", () => { ConfigManager.General.SpoofPing = true; }, "Ping Spoof", () => { ConfigManager.General.SpoofPing = false; }, "Toggle Ping Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofPing, false);
+            toggleSpoofPing.SetToggleState(ConfigManager.General.SpoofPing, false);
 
-			new QMSingleButton(subSpoofButton, 1, 1, "Set\nFPS\nValue", () =>
-			{
-				CheetosHelpers.PopupCall("Set FPS Value", "Done", "Enter FPS. . .", true, delegate (string text)
-				{
-					float value = 0f;
+            new QMSingleButton(subSpoofButton, 1, 1, "Set\nFPS\nValue", () =>
+            {
+                CheetosHelpers.PopupCall("Set FPS Value", "Done", "Enter FPS. . .", true, delegate (string text)
+                {
+                    float value = 0f;
 
-					try
-					{
-						value = float.Parse(text);
-					}
-					catch
-					{
-						ModConsole.Error("Input value must be a float value!");
-					}
-					finally
-					{
-						ConfigManager.General.SpoofedFPS = value;
-					}
-				});
-			}, "Input an FPS value");
+                    try
+                    {
+                        value = float.Parse(text);
+                    }
+                    catch
+                    {
+                        ModConsole.Error("Input value must be a float value!");
+                    }
+                    finally
+                    {
+                        ConfigManager.General.SpoofedFPS = value;
+                    }
+                });
+            }, "Input an FPS value");
 
-			new QMSingleButton(subSpoofButton, 2, 1, "Set\nPing\nValue", () =>
-			{
-				CheetosHelpers.PopupCall("Set Ping Value", "Done", "Enter Ping. . .", true, delegate (string text)
-				{
-					short value = 0;
+            new QMSingleButton(subSpoofButton, 2, 1, "Set\nPing\nValue", () =>
+            {
+                CheetosHelpers.PopupCall("Set Ping Value", "Done", "Enter Ping. . .", true, delegate (string text)
+                {
+                    short value = 0;
 
-					try
-					{
-						value = short.Parse(text);
-					}
-					catch
-					{
-						ModConsole.Error("Input value must be a short value!");
-					}
-					finally
-					{
-						ConfigManager.General.SpoofedPing = value;
-					}
-				});
-			}, "Input a Ping value");
-		}
-	}
+                    try
+                    {
+                        value = short.Parse(text);
+                    }
+                    catch
+                    {
+                        ModConsole.Error("Input value must be a short value!");
+                    }
+                    finally
+                    {
+                        ConfigManager.General.SpoofedPing = value;
+                    }
+                });
+            }, "Input a Ping value");
+        }
+    }
 }

@@ -1,7 +1,6 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.AstroUtils.ItemTweaker;
-	using AstroClient.Extensions;
+	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 
 	internal class RandomSubmenus

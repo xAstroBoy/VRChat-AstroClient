@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroClient.Extensions;
+	using AstroLibrary.Extensions;
 	using System;
 	using System.Runtime.InteropServices;
 	using UnhollowerRuntimeLib;
@@ -128,20 +128,20 @@
             }
         }
 
-		private void OnDestroy()
-		{
-			try
-			{
-				control.RestoreOriginalBody();
-				OnlineEditor.RemoveOwnerShip(obj);
-				RocketManager.RemoveObject(obj);
-			}
-			catch
-			{
-			}
-		}
+        private void OnDestroy()
+        {
+            try
+            {
+                control.RestoreOriginalBody();
+                OnlineEditor.RemoveOwnerShip(obj);
+                RocketManager.RemoveObject(obj);
+            }
+            catch
+            {
+            }
+        }
 
-		public RocketManager Manager = null;
+        public RocketManager Manager = null;
 
         public float UpdateTimer = 2f;
         public float TimerOffset = 0f;

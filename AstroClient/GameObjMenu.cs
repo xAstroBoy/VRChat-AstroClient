@@ -1,7 +1,5 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Extensions;
-	using AstroClient.ItemTweakerV2.Selector;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
@@ -370,7 +368,6 @@
                 }
             });
         }
-
 
         public static void AddEnterChildObj(QMNestedButton page, QMSingleButton parentbtn, Transform item)
         {

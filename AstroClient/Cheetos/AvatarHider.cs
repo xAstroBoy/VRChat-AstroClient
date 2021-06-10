@@ -2,8 +2,8 @@
 {
 	#region Imports
 
-	using AstroClient.Extensions;
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using UnityEngine;
 	using VRC;
 	using VRC.SDKBase;
@@ -23,7 +23,7 @@
         {
             if (HideAvatar)
             {
-                var self = LocalPlayerUtils.GetSelfPlayer();
+                var self = Utils.LocalPlayer.GetPlayer();
                 var owner = avatar.transform.root.GetComponent<Player>();
 
                 if (self == owner)

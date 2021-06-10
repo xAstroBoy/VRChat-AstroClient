@@ -3,7 +3,6 @@
 	#region Imports
 
 	using AstroClient.Components;
-	using AstroClient.Extensions;
 	using AstroClient.Startup.Buttons;
 	using AstroClient.UdonExploits;
 	using AstroClient.variables;
@@ -12,7 +11,6 @@
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
 	using AstroLibrary.Utility;
-	using DayClientML2.Utility;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;
@@ -570,7 +568,7 @@
         {
             foreach (var knife in Knifes)
             {
-				knife.Pickup_Set_Pickupable(Pickupable);
+                knife.Pickup_Set_Pickupable(Pickupable);
             }
         }
 

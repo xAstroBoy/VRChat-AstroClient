@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.Experiments
 {
 	using AstroClient.Components;
-	using AstroClient.Extensions;
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
 	using RubyButtonAPI;
 	using System.Collections.Generic;

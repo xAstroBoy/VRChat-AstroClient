@@ -1,7 +1,6 @@
 ﻿namespace AstroClient
 {
 	using AstroClient.Components;
-	using AstroClient.Extensions;
 	using AstroClient.Features.Player.Movement.Exploit;
 	using AstroClient.UdonExploits;
 	using AstroClient.Variables;

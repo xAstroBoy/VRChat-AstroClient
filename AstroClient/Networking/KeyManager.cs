@@ -1,6 +1,5 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.variables;
 	using System;
 	using System.IO;
 
@@ -8,9 +7,9 @@
     {
         internal static string AuthKey = string.Empty;
 
-		internal static bool IsAuthed {get; set;} = false;
+        internal static bool IsAuthed { get; set; } = false;
 
-		internal static bool IsReady = false;
+        internal static bool IsReady = false;
 
         internal static void ReadKey()
         {

@@ -1,8 +1,8 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Extensions;
 	using AstroClient.Variables;
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
 	using RubyButtonAPI;
 	using System;
@@ -172,7 +172,7 @@
                     {
                         if (sender != null)
                         {
-                            if (sender == LocalPlayerUtils.GetSelfPlayer())
+                            if (sender == Utils.LocalPlayer.GetPlayer())
                             {
                                 if (obj.name.Equals("Handgun_M1911A (Model)"))
                                 {

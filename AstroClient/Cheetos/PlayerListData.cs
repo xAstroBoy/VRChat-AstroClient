@@ -29,7 +29,7 @@
 
         public bool IsMaster => Player != null && Player.GetIsMaster();
 
-        public bool IsSelf => Player != null && Player.UserID().Equals(LocalPlayerUtils.GetSelfPlayer().UserID());
+        public bool IsSelf => Player != null && Player.UserID().Equals(Utils.LocalPlayer.GetPlayer().UserID());
 
         public bool IsFriend => APIUser != null && APIUser.GetIsFriend();
 

@@ -2,7 +2,6 @@
 {
 	#region Imports
 
-	using AstroClient.Extensions;
 	using AstroClient.Startup.Buttons;
 	using AstroClient.variables;
 	using AstroClient.Variables;
@@ -10,7 +9,6 @@
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
 	using AstroLibrary.Utility;
-	using DayClientML2.Utility;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;

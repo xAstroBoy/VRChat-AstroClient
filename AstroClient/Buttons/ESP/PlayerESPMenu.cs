@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
 	using AstroClient.Components;
-	using AstroClient.Extensions;
+	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using System;
 	using UnityEngine;
@@ -34,14 +34,12 @@
             new QMSingleButton(FriendESP, 1, 2.5f, "White", () => { ConfigManager.ESPFriendColor = Color.white; }, null, null, null, true);
         }
 
+        private static QMSingleToggleButton PlayerESPToggleBtn;
 
+        #region playerESP
 
-		private static QMSingleToggleButton PlayerESPToggleBtn;
-
-		#region playerESP
-
-		// TODO: MAKE ESP FRIEND COLOR BE SETTABLE
-		public static bool Toggle_Player_ESP
+        // TODO: MAKE ESP FRIEND COLOR BE SETTABLE
+        public static bool Toggle_Player_ESP
         {
             get
             {
@@ -70,7 +68,7 @@
         {
             if (Toggle_Player_ESP)
             {
-                if (player != null && player != LocalPlayerUtils.GetSelfPlayer())
+                if (player != null && player != Utils.LocalPlayer.GetPlayer())
                 {
                     if (!player.gameObject.GetComponent<PlayerESP>())
                     {
@@ -84,7 +82,7 @@
         {
             foreach (var item in WorldUtils.Get_Players())
             {
-                if (item != LocalPlayerUtils.GetSelfPlayer())
+                if (item != Utils.LocalPlayer.GetPlayer())
                 {
                     if (!item.gameObject.GetComponent<PlayerESP>())
                     {
@@ -106,8 +104,6 @@
             }
         }
 
-		#endregion playerESP
-
-		
+        #endregion playerESP
     }
 }
