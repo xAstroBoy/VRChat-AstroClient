@@ -45,11 +45,18 @@
             {
                 foreach (var pickup in WorldUtils.Get_Pickups())
                 {
-                    PickupQMScroll.Add(
-                    new QMSingleButton(PickupQMScroll.BaseMenu, 0, 0, $"Select {pickup.name}", delegate
-                    {
-                        Tweaker_Object.SetObjectToEdit(pickup);
-                    }, $"Select {pickup.name}", null, pickup.Get_GameObject_Active_ToColor()));
+
+					var btn = new QMSingleButton(PickupQMScroll.BaseMenu, 0, 0, $"Select {pickup.name}", delegate
+					{
+						Tweaker_Object.SetObjectToEdit(pickup);
+					}, $"Select {pickup.name}", null, pickup.Get_GameObject_Active_ToColor());
+					var listener = pickup.GetOrAddComponent<ScrollMenuListener>();
+					if (listener != null)
+					{
+						listener.assignedbtn = btn;
+					}
+
+					PickupQMScroll.Add(btn);
                 }
             });
         }

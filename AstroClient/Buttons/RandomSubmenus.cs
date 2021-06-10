@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.Components;
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 
@@ -17,11 +18,18 @@
             {
                 foreach (var obj in WorldUtils.Get_VRCInteractables())
                 {
-                    scroll.Add(
-                    new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {obj.name}", delegate
-                    {
-                        obj.VRC_Interactable_Click();
-                    }, $"Click {obj.name}", null, obj.Get_GameObject_Active_ToColor()));
+					var btn = new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {obj.name}", delegate
+					{
+						obj.VRC_Interactable_Click();
+					}, $"Click {obj.name}", null, obj.Get_GameObject_Active_ToColor());
+
+					var listener = obj.GetOrAddComponent<ScrollMenuListener>();
+					if (listener != null)
+					{
+						listener.assignedbtn = btn;
+					}
+
+					scroll.Add(btn);
                 }
             });
         }
@@ -38,11 +46,18 @@
             {
                 foreach (var trigger in WorldUtils.Get_Triggers())
                 {
-                    scroll.Add(
-                    new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {trigger.name}", delegate
-                    {
-                        trigger.TriggerClick();
-                    }, $"Click {trigger.name}", null, trigger.Get_GameObject_Active_ToColor()));
+				
+					
+				var btn = new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {trigger.name}", ()  => { trigger.TriggerClick(); }, $"Click {trigger.name}", null, trigger.Get_GameObject_Active_ToColor());
+					var listener = trigger.GetOrAddComponent<ScrollMenuListener>();
+					if(listener != null)
+					{
+						listener.assignedbtn = btn;
+					}
+					scroll.Add(btn);
+                    
+
+
                 }
             });
         }

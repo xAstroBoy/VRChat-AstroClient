@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
+	using AstroClient.Components;
 	using AstroClient.ItemTweakerV2.Selector;
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
@@ -19,11 +20,20 @@
             {
                 foreach (var obj in Tweaker_Object.GetGameObjectToEdit().Get_VRCInteractables())
                 {
-                    scroll.Add(
-                    new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {obj.name}", delegate
-                    {
-                        obj.VRC_Interactable_Click();
-                    }, $"Click {obj.name}", null, obj.Get_GameObject_Active_ToColor()));
+
+					var btn = new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {obj.name}", delegate
+					{
+						obj.VRC_Interactable_Click();
+					}, $"Click {obj.name}", null, obj.Get_GameObject_Active_ToColor());
+					var listener = obj.GetOrAddComponent<ScrollMenuListener>();
+					if (listener != null)
+					{
+						listener.assignedbtn = btn;
+					}
+
+
+
+					scroll.Add(btn);
                 }
             });
         }

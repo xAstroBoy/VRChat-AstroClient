@@ -83,9 +83,11 @@
             RegisterComponent<MaskRemover>();
 
             RegisterComponent<TweakerListener>();
-        }
+			RegisterComponent<ScrollMenuListener>();
 
-        public override void OnUpdate()
+		}
+
+		public override void OnUpdate()
         {
             MainThreadRunner.MakeInstance();
             RocketManager.MakeInstance();

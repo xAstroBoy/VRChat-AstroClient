@@ -92,6 +92,7 @@
     <Compile Include="AntiCrash\AntiCrashUtils.cs" />
     <Compile Include="AntiCrash\AntiCrash_Lists.cs" />
     <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />
+    <Compile Include="Components\Listeners\ScrollMenuListener.cs" />
     <Compile Include="Extensions\Bones_ext.cs" />
     <Compile Include="Extensions\Button_strings_ext.cs" />
     <Compile Include="Extensions\Buttons_ext.cs" />
@@ -171,7 +172,7 @@
     <Compile Include="Components\ESP\UdonBehaviour\ESP_UdonBehaviour.cs" />
     <Compile Include="Components\ESP\VRCInteractable\ESP_VRCInteractable.cs" />
     <Compile Include="Components\Bounce\Bouncer.cs" />
-    <Compile Include="Components\TweakerListener\TweakerListener.cs" />
+    <Compile Include="Components\Listeners\TweakerListener.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Experiments\CameraTweaker.cs" />
@@ -266,7 +267,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Skyboxes\SkyboxEditor.cs" />
-    <Compile Include="Startup\ComponentHelper.cs" />
+    <Compile Include="Components\ComponentHelper.cs" />
     <Compile Include="Startup\EventArgs\OnAvatarDownloadArgs.cs" />
     <Compile Include="Startup\EventArgs\OnAvatarSpawnArgs.cs" />
     <Compile Include="Startup\EventArgs\OnTeleportRPCArgs.cs" />
