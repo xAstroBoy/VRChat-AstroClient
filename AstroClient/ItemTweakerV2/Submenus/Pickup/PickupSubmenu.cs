@@ -57,7 +57,7 @@
 			UpdatePickupButtons(control);
 		}
 
-		public override void OnPickupController_OnUpdate(PickupController control)
+		public override void OnPickupController_PropertyChanged(PickupController control)
 		{
 			UpdatePickupButtons(control);
 		}
