@@ -270,20 +270,15 @@
 		{
 			if (Utils.LocalPlayer != null)
 			{
-				ModConsole.DebugLog($"Step : {1}");
 				var PlayerHeadTransform = Utils.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(HumanBodyBones.Head);
 				if (PlayerHeadTransform != null)
 				{
-					ModConsole.DebugLog($"Nullcheck Passed (Bone Transform) : {2}");
-
 					if (FullBrightLight == null)
 					{
-						ModConsole.DebugLog($"Added Light! : {2}");
 						FullBrightLight = PlayerHeadTransform.gameObject.AddComponent<Light>();
 					}
 					if (value)
 					{
-						ModConsole.DebugLog($"Set Light! : {3}");
 						FullBrightLight.enabled = true;
 						FullBrightLight.shadows = LightShadows.None;
 						FullBrightLight.type = LightType.Spot;
@@ -295,20 +290,17 @@
 					}
 					else
 					{
-						ModConsole.DebugLog($"Destroyed Light! : {4}");
 						FullBrightLight.DestroyMeLocal();
 						ModConsole.DebugLog("Fullbright Deactivated!");
 					}
 				}
 				else
 				{
-					ModConsole.DebugLog($"Error!  No GameObject Found: {5}");
 					ModConsole.DebugError("[Player Fullbright] : I Can't find Player's GameObject!");
 				}
 			}
 			else
 			{
-				ModConsole.DebugLog($"Error!  Local Player Missing!: {5}");
 				ModConsole.DebugError("[Player Fullbright] : I Can't find LocalPlayer!");
 
 			}
