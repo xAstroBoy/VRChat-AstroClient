@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroClient.Extensions;
+	using AstroClientCore.Events;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using System;
@@ -84,6 +85,7 @@
 			set
 			{
 				_CurrentTarget = value;
+				Event_OnTargetSet.Invoke(null, new VRCPlayerEventArgs(value));
 			}
 		}
 	}
