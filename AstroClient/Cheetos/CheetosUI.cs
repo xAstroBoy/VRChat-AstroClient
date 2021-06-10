@@ -98,9 +98,12 @@
 
 		private void CreateButton()
 		{
-			Vector3 buttonPosition = Utils.LocalPlayer.GetPlayer().Get_Center_Of_Player();
-			var buttonRotation = Utils.LocalPlayer.GetPlayer().gameObject.transform.rotation;
-			ButtonCreator.Create("Test", buttonPosition, buttonRotation, () => { ModConsole.Log("TestButton Clicked"); });
+			var buttonPosition = Utils.LocalPlayer.GetPlayer().Get_Center_Of_Player();
+			if (buttonPosition != null)
+			{
+				var buttonRotation = Utils.LocalPlayer.GetPlayer().gameObject.transform.rotation;
+				ButtonCreator.Create("Test", buttonPosition.Value, buttonRotation, () => { ModConsole.Log("TestButton Clicked"); });
+			}
 		}
 
 		public VRC_EventHandler handler;

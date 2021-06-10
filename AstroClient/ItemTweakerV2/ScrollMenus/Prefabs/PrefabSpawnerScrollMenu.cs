@@ -24,13 +24,16 @@
 						var position = Utils.LocalPlayer.GetPlayer().Get_Player_Bone_Position(HumanBodyBones.RightHand);
 						var Rotation = prefab.transform.rotation;
 
-						//ModConsole.DebugLog($"Attempting to broadcast  {broadcast} a Spawn Prefab {prefabinfo}, in Vector3 {position.ToString()}, Rotation : {Rotation.ToString()}");
-						//RPC_Experiments.SendSpawnobject(prefab);
-						var newprefab = Networking.Instantiate(broadcast, prefabinfo, position, Rotation);
-						if (newprefab != null)
+						if (position != null)
 						{
-							SpawnerSubmenu.RegisterPrefab(newprefab);
-							Tweaker_Object.SetObjectToEdit(newprefab);
+							//ModConsole.DebugLog($"Attempting to broadcast  {broadcast} a Spawn Prefab {prefabinfo}, in Vector3 {position.ToString()}, Rotation : {Rotation.ToString()}");
+							//RPC_Experiments.SendSpawnobject(prefab);
+							var newprefab = Networking.Instantiate(broadcast, prefabinfo, position.Value, Rotation);
+							if (newprefab != null)
+							{
+								SpawnerSubmenu.RegisterPrefab(newprefab);
+								Tweaker_Object.SetObjectToEdit(newprefab);
+							}
 						}
 					}, $"Spawn {prefab.name}"));
 				}
