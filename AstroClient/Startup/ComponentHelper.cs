@@ -12,8 +12,7 @@
     {
         public static void RegisterComponent<T>() where T : class
         {
-            if (KeyManager.IsAuthed)
-            {
+
                 try
                 {
                     ClassInjector.RegisterTypeInIl2Cpp<T>();
@@ -28,7 +27,7 @@
                     ModConsole.Error($"Failed to Register: {typeof(T).FullName}");
                     ModConsole.ErrorExc(e);
                 }
-            }
+            
         }
 
         public override void OnApplicationStart()
