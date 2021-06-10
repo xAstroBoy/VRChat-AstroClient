@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
@@ -362,7 +363,13 @@
                            }
                        }));
                         newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.x - 100f, newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
-                        subscroll.Add(newbtn);
+						var listener = item.gameObject.GetOrAddComponent<ScrollMenuListener>();
+						if(listener != null)
+						{
+							listener.assignedbtn = newbtn;
+						}
+						
+						subscroll.Add(newbtn);
                         AddEnterChildObj(gameobjtogglermenu, newbtn, item);
                     }
                 }

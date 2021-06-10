@@ -5,6 +5,7 @@
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using VRC.Udon.Common.Interfaces;
+	using AstroClient.Components;
 
 	public class UdonScrollMenu
     {
@@ -28,28 +29,36 @@
             {
                 foreach (var action in Tweaker_Object.GetGameObjectToEdit().Get_UdonBehaviours())
                 {
-                    subscroll.Add(new QMSingleButton(Menu, 0f, 0f, action.gameObject.name, delegate
-                    {
-                        MainScroll.SetAction(delegate
-                        {
-                            foreach (var subaction in action._eventTable)
-                            {
-                                MainScroll.Add(new QMSingleButton(MainScroll.BaseMenu, 0f, 0f, subaction.Key, delegate
-                                {
-                                    if (subaction.key.StartsWith("_"))
-                                    {
-                                        action.SendCustomEvent(subaction.Key);
-                                    }
-                                    else
-                                    {
-                                        action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
-                                    }
-                                }, action.gameObject?.ToString() + " Run " + subaction.Key));
-                            }
-                        });
-                        MainScroll.BaseMenu.GetMainButton().GetGameObject().GetComponent<UnityEngine.UI.Button>()
-                            .onClick.Invoke();
-                    }, action.interactText));
+
+					var btn = new QMSingleButton(Menu, 0f, 0f, action.gameObject.name, delegate
+					{
+						MainScroll.SetAction(delegate
+						{
+							foreach (var subaction in action._eventTable)
+							{
+								MainScroll.Add(new QMSingleButton(MainScroll.BaseMenu, 0f, 0f, subaction.Key, delegate
+								{
+									if (subaction.key.StartsWith("_"))
+									{
+										action.SendCustomEvent(subaction.Key);
+									}
+									else
+									{
+										action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
+									}
+								}, action.gameObject?.ToString() + " Run " + subaction.Key));
+							}
+						});
+						MainScroll.BaseMenu.GetMainButton().GetGameObject().GetComponent<UnityEngine.UI.Button>()
+							.onClick.Invoke();
+					}, action.interactText);
+
+					var listener = action.gameObject.GetOrAddComponent<ScrollMenuListener>();
+					if(listener != null)
+					{
+						listener.assignedbtn = btn;
+					}
+					subscroll.Add(btn);
                 }
             });
         }
