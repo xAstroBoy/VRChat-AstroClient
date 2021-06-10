@@ -6,17 +6,18 @@ namespace AstroClient.Components
 	using AstroLibrary.Extensions;
 
 	public class ScrollMenuListener : GameEventsBehaviour
-    {
+	{
 		internal QMSingleButton assignedbtn;
-        public ScrollMenuListener(IntPtr obj0) : base(obj0)
-        {
-        }
+		public ScrollMenuListener(IntPtr obj0) : base(obj0)
+		{
+		}
 
 
 		private void OnEnable()
 		{
-			try {
-				if(assignedbtn != null)
+			try
+			{
+				if (assignedbtn != null)
 				{
 					assignedbtn.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
 				}
@@ -32,8 +33,8 @@ namespace AstroClient.Components
 		}
 
 
-        private void OnDisable()
-        {
+		private void OnDisable()
+		{
 			try
 			{
 				if (assignedbtn != null)
@@ -52,7 +53,7 @@ namespace AstroClient.Components
 		}
 
 		private void OnDestroy()
-        {
+		{
 			try
 			{
 				if (assignedbtn != null)
@@ -71,3 +72,4 @@ namespace AstroClient.Components
 			DestroyImmediate(this);
 		}
 	}
+}
