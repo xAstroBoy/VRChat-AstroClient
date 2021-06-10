@@ -21,6 +21,7 @@
 	using MelonLoader;
 	using RubyButtonAPI;
 	using System;
+	using System.Collections;
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Reflection;
@@ -107,6 +108,7 @@
 			{
 				InitializeOverridables();
 
+				DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
 				try
 				{
 					CheetosConsole.Console.WriteFigletWithGradient(CheetosConsole.FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);
@@ -203,7 +205,21 @@
 			}
 		}
 
-		public override void VRChat_OnUiManagerInit()
+		protected void DoAfterUiManagerInit(Action code)
+		{
+			MelonCoroutines.Start(OnUiManagerInitCoro(code));
+		}
+
+		private IEnumerator OnUiManagerInitCoro(Action code)
+		{
+			while (VRCUiManager.prop_VRCUiManager_0 == null)
+				yield return null;
+
+			code();
+		}
+
+
+		private void Start_VRChat_OnUiManagerInit()
 		{
 			if (KeyManager.IsAuthed)
 			{
