@@ -263,13 +263,13 @@
 							new Patch(method, GetPatch(nameof(UnpatchAllInstancesControlled)));
 						}
 
-						if (method.Name.Equals("GetPatchedMethods"))
-						{
-							ModConsole.DebugLog("Registering Patch EmptyGetPatchedMethods");
+						//if (method.Name.Equals("GetPatchedMethods"))
+						//{
+						//	ModConsole.DebugLog("Registering Patch EmptyGetPatchedMethods");
 
-							new Patch(method, GetPatch(nameof(EmptyGetPatchedMethods)));
+						//	new Patch(method, GetPatch(nameof(EmptyGetPatchedMethods)));
 
-						}
+						//}
 					}
 				}
 

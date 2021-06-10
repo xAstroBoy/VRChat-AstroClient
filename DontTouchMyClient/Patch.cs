@@ -1,7 +1,8 @@
 ﻿namespace DontTouchMyClient.Patcher
 {
 	using AstroLibrary.Console;
-	using Harmony;
+	using HarmonyLib;
+	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Reflection;
@@ -27,7 +28,7 @@
         public MethodInfo TargetMethod { get; set; }
         public HarmonyMethod PrefixMethod { get; set; }
         public HarmonyMethod PostfixMethod { get; set; }
-        public HarmonyInstance Instance { get; set; }
+        public Harmony Instance { get; set; }
 
         public Patch(MethodInfo targetMethod, HarmonyMethod Before = null, HarmonyMethod After = null)
         {
@@ -36,34 +37,29 @@
                 ModConsole.Error("[Patches] TargetMethod is NULL or Pre And PostFix are Null");
                 return;
             }
-            Instance = HarmonyInstance.Create(StringGen());
+            Instance = new Harmony(StringGen());
             TargetMethod = targetMethod;
             PrefixMethod = Before;
             PostfixMethod = After;
             Patches.Add(this);
         }
 
-        public static void DoPatches()
-        {
-            foreach (var patch in Patches)
-            {
-                try
-                {
-                    if (patch != null)
-                    {
-                        new PatchProcessor(patch.Instance, new List<MethodBase>
-                        {
-                            patch.TargetMethod
-                        }, patch.PrefixMethod, patch.PostfixMethod, null).Patch();
-                    }
-                }
-                catch
-                {
-                    ModConsole.Error($"[Patches] Failed At {patch.TargetMethod?.Name} | {patch.PrefixMethod?.method.Name} | with {patch.PostfixMethod?.method.Name} , Full Method : {patch.TargetMethod.FullDescription()}");
-                }
-            }
-
-            ModConsole.Log($"[Patches] Done! Patched {Patches.Count} Methods!");
-        }
-    }
+		public static async void DoPatches()
+		{
+			foreach (var patch in Patches)
+			{
+				try
+				{
+					ModConsole.DebugLog($"[Patches] Patching {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {patch.PrefixMethod?.method.Name}{patch.PostfixMethod?.method.Name}");
+					patch.Instance.Patch(patch.TargetMethod, patch.PrefixMethod, patch.PostfixMethod);
+				}
+				catch (Exception e)
+				{
+					ModConsole.Error($"[Patches] Failed At {patch.TargetMethod?.Name} | {patch.PrefixMethod?.method.Name} | with AstroClient {patch.PostfixMethod?.method.Name}");
+					ModConsole.ErrorExc(e);
+				}
+			}
+			ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods!");
+		}
+	}
 }

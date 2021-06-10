@@ -6,7 +6,7 @@
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using ExitGames.Client.Photon;
-	using Harmony;
+	using HarmonyLib;
 	using MelonLoader;
 	using System;
 	using System.Collections;
@@ -31,7 +31,7 @@
             public MethodInfo TargetMethod { get; set; }
             public HarmonyMethod PrefixMethod { get; set; }
             public HarmonyMethod PostfixMethod { get; set; }
-            public HarmonyInstance Instance { get; set; }
+            public Harmony Instance { get; set; }
 
             public Patch(MethodInfo targetMethod, HarmonyMethod Before = null, HarmonyMethod After = null)
             {
@@ -40,7 +40,7 @@
                     ModConsole.Error("[Patches] TargetMethod is NULL or Pre And PostFix are Null");
                     return;
                 }
-                Instance = HarmonyInstance.Create($"Patch:{targetMethod.DeclaringType.FullName}.{targetMethod.Name}");
+                Instance = new Harmony($"Patch:{targetMethod.DeclaringType.FullName}.{targetMethod.Name}");
                 TargetMethod = targetMethod;
                 PrefixMethod = Before;
                 PostfixMethod = After;
