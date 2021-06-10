@@ -21,10 +21,7 @@
 			Pickup3 = gameObject.GetComponent<VRC.SDK3.Components.VRCPickup>();
 
 			control = gameObject.GetOrAddComponent<RigidBodyController>();
-
-
 			BackupOriginalProperties();
-			EditMode = false;
 			Locked = false;
 			ModConsole.DebugLog("Attacked Successfully PickupController to object " + gameObject.name);
 		}
@@ -117,7 +114,6 @@
 				Pickup3.orientation = PickupOrientation;
 				Pickup3.proximity = proximity;
 			}
-			EditMode = false;
 			Locked = false;
 		}
 
@@ -158,16 +154,11 @@
 		{
 			try
 			{
-
-
-
-				Run_onPickupUpdate();
-
 				if (Locked)
 				{
 					return;
 				}
-
+				Run_onPickupUpdate();
 				if (ForceComponent)
 				{
 					SetRigidbody();
@@ -895,7 +886,7 @@
 		private VRC_Pickup.PickupOrientation Original_orientation{ get; set; }
 
 
-		private bool _EditMode;
+		private bool _EditMode = false;
 		internal bool EditMode
 		{
 			get
