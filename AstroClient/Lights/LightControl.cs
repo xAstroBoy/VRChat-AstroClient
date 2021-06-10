@@ -32,7 +32,7 @@
 			UpdateFogSwitch();
 			HasOriginalRenderEditSettings = true;
 			HasBackuppedRenderSettings = false;
-			isHeadLightActive = false;
+			IsHeadLightActive = false;
 			HasLightmapsStored = false;
 			AreLightMapsEnabled = true;
 			if (ToggleLightmaps != null)
@@ -271,40 +271,48 @@
 
 		public static void FullbrightByHead(bool value)
 		{
-			var PlayerHeadTransform = Utils.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(HumanBodyBones.Head);
-			if (PlayerHeadTransform != null)
+			if (Utils.LocalPlayer != null)
 			{
-				if (light == null)
+				var PlayerHeadTransform = Utils.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(HumanBodyBones.Head);
+				if (PlayerHeadTransform != null)
 				{
-					light = PlayerHeadTransform.gameObject.AddComponent<Light>();
-					light.name = "Fullbright";
-				}
-				if (value)
-				{
-					light.enabled = true;
-					light.shadows = LightShadows.None;
-					light.type = LightType.Spot;
-					light.intensity = 1f;
-					light.range = 999f;
-					light.spotAngle = float.MaxValue;
-					light.color = Color.white;
-					ModConsole.DebugLog("Fullbright Enabled!");
+					if (light == null)
+					{
+						light = PlayerHeadTransform.gameObject.AddComponent<Light>();
+						light.name = "Fullbright";
+					}
+					if (value)
+					{
+						light.enabled = true;
+						light.shadows = LightShadows.None;
+						light.type = LightType.Spot;
+						light.intensity = 1f;
+						light.range = 999f;
+						light.spotAngle = float.MaxValue;
+						light.color = Color.white;
+						ModConsole.DebugLog("Fullbright Enabled!");
+					}
+					else
+					{
+						light.enabled = false;
+						ModConsole.DebugLog("Fullbright Deactivated!");
+					}
 				}
 				else
 				{
-					light.enabled = false;
-					ModConsole.DebugLog("Fullbright Deactivated!");
+					ModConsole.DebugError("[Player Fullbright] : I Can't find Player's GameObject!");
 				}
 			}
 			else
 			{
-				ModConsole.Error("[Player Fullbright] : I Can't find Player's GameObject!");
+				ModConsole.DebugError("[Player Fullbright] : I Can't find LocalPlayer!");
+
 			}
 		}
 
 		private static bool _isHeadLightActive;
 
-		public static bool isHeadLightActive
+		public static bool IsHeadLightActive
 		{
 			get
 			{
@@ -312,15 +320,23 @@
 			}
 			set
 			{
+				if(value == _isHeadLightActive)
+				{
+					return;
+				}
 				_isHeadLightActive = value;
 				FullbrightByHead(value);
+				if(ToggleFullbright != null)
+				{
+					ToggleFullbright.SetToggleState(value);
+				}
 			}
 		}
 
 		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
 			var temp = new QMNestedButton(menu, x, y, "Light Menu", "Control Avatar & World Lights!", null, null, null, null, btnHalf);
-			ToggleFullbright = new QMToggleButton(temp, 1, 0, "Player Fullbright ON", () => { isHeadLightActive = true; }, "Player Fullbright OFF", () => { isHeadLightActive = false; }, "Toggles Player Fullbright", null, null, null, false);
+			ToggleFullbright = new QMToggleButton(temp, 1, 0, "Player Fullbright ON", () => { IsHeadLightActive = true; }, "Player Fullbright OFF", () => { IsHeadLightActive = false; }, "Toggles Player Fullbright", null, null, null, false);
 			ModifyRenderOptions = new QMToggleButton(temp, 2, 0, "Render Fullbright ON", new Action(SetRenderSettings), "Render Fullbright OFF", new Action(RestoreRenderSettings), "Tweaks Level RenderSettings", null, null, null, false);
 			ToggleLightmaps = new QMToggleButton(temp, 3, 0, "Baked Lightings ON", new Action(ToggleLightMaps), "Baked Lightings OFF", new Action(ToggleLightMaps), "Toggles Lightmaps (baked lightings)", null, null, null, false);
 			FogSwitch = new QMToggleButton(temp, 4, 0, "Fog ON", new Action(ToggleFog), "Fog OFF", new Action(ToggleFog), "Toggles Fog", null, null, null, false);
