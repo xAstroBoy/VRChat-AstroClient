@@ -40,8 +40,7 @@
         private static bool OnSelectedPlayerPatch(VRC.Player player)
         {
             ModConsole.Log($"Test OnSelected {player.DisplayName()}");
-            //Event_OnPlayerSelected.SafetyRaise(null, new VRCPlayerEventArgs(player));
-            Event_OnPlayerSelected?.Invoke(null, new VRCPlayerEventArgs(player));
+            Event_OnPlayerSelected.SafetyRaise(null, new VRCPlayerEventArgs(player));
             return true;
         }
     }
