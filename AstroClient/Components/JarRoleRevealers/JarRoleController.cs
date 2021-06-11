@@ -65,7 +65,7 @@
             return RoleEspComponents.Where(x => x.LinkedEntry.Nodevalue == value).DefaultIfEmpty(null).First();
         }
 
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             JarRoleLinks.Clear();
             RoleEspComponents.Clear();

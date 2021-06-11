@@ -8,7 +8,7 @@
 
 	internal class SingleTagsUtils : GameEvents
     {
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Counter.Clear();
         }

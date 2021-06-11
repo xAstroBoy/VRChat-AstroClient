@@ -35,7 +35,7 @@
             }
         }
 
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             CheckCamera();
             if (UserCamera != null)

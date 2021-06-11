@@ -19,7 +19,7 @@
             Main.Event_OnUpdate += Internal_OnUpdate;
             Main.Event_LateUpdate += Internal_OnLateUpdate;
             Main.Event_VRChat_OnUiManagerInit += Internal_VRChat_OnUiManagerInit;
-            Main.Event_OnLevelLoaded += Internal_OnLevelLoaded;
+            Main.Event_OnSceneLoaded += Internal_OnSceneLoaded;
             Main.Event_OnApplicationQuit += Internal_OnApplicationQuit;
 
             // PATCHES
@@ -69,9 +69,9 @@
             OnLateUpdate();
         }
 
-        private void Internal_OnLevelLoaded(object sender, EventArgs e)
+        private void Internal_OnSceneLoaded(object sender, OnSceneLoadedEventArgs e)
         {
-            OnLevelLoaded();
+            OnSceneLoaded(e.BuildIndex, e.SceneName);
         }
 
         private void Internal_OnPlayerLeft(object sender, PlayerEventArgs e)
@@ -157,7 +157,7 @@
         {
         }
 
-        public virtual void OnLevelLoaded()
+        public virtual void OnSceneLoaded(int buildIndex, string sceneName)
         {
         }
 

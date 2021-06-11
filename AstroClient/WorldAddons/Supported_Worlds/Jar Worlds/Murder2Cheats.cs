@@ -147,7 +147,7 @@
             }
         }
 
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Death = null;
             item_detectiveGun = null;

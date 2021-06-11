@@ -12,7 +12,7 @@
     {
         public GameEventsBehaviour(IntPtr obj0) : base(obj0)
         {
-            Main.Event_OnLevelLoaded += Internal_OnLevelLoaded;
+            Main.Event_OnSceneLoaded += Internal_OnLevelLoaded;
             NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
             NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
             SpawnEmojiRPCHook.Event_SpawnEmojiRPC += Internal_SpawnEmojiRPC;

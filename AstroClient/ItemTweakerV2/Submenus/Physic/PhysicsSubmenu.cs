@@ -148,7 +148,7 @@ namespace AstroClient.ItemTweakerV2.Submenus
             Reset();
         }
 
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Reset();
         }

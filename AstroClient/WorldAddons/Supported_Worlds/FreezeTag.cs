@@ -51,7 +51,7 @@
 			NodeControlSubmenu(FreezeTagCheatsPage, 2, 0, false);
 		}
 
-		public override void OnLevelLoaded()
+		public override void OnSceneLoaded(int buildIndex, string sceneName)
 		{
 			IsFreezeTag = false;
 			SelfNode = null;

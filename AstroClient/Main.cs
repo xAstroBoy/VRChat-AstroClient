@@ -47,7 +47,7 @@
 
 		public static event EventHandler Event_VRChat_OnUiManagerInit;
 
-		public static event EventHandler Event_OnLevelLoaded;
+		public static event EventHandler<OnSceneLoadedEventArgs> Event_OnSceneLoaded;
 
 		public static event EventHandler Event_OnApplicationQuit;
 
@@ -69,7 +69,7 @@
 		private static List<Tweaker_Events> Tweaker_Overridables = new List<Tweaker_Events>();
 
 		public override void OnApplicationStart()
-		{ 
+		{
 			ModConsole.Initialize("AstroClient");
 			LogSupport.RemoveAllHandlers();
 			ConfigManager.Validate();
@@ -175,7 +175,7 @@
 						break;
 
 					default:
-						Event_OnLevelLoaded?.Invoke(this, new EventArgs());
+						Event_OnSceneLoaded?.Invoke(this, new OnSceneLoadedEventArgs(buildIndex, sceneName));
 						if (ToggleDebugInfo != null)
 						{
 							ToggleDebugInfo.SetToggleState(Bools.IsDebugMode);
@@ -236,7 +236,7 @@
 					ModConsole.ErrorExc(e);
 				}
 				new QMSingleButton("ShortcutMenu", 5, 3, "GameObject Toggler", new Action(() => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }), "Advanced GameObject Toggler", null, null, true);
-				CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 1.5f, true);
+				CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 2.5f, true);
 
 				Event_VRChat_OnUiManagerInit?.Invoke(this, new EventArgs());
 			}

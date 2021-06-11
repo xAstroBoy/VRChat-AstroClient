@@ -266,5 +266,38 @@
             }
             return null;
         }
-    }
+
+		public static VRCSDK2.VRC_SceneDescriptor GetSDK2Descriptor()
+		{
+			return UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
+		}
+
+		public static VRC.SDK3.Components.VRCSceneDescriptor GetSDK3Descriptor()
+		{
+			return UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
+		}
+
+		public static bool IsInWorld()
+		{
+			if (RoomManager.field_Internal_Static_ApiWorld_0 != null && RoomManager.field_Internal_Static_ApiWorldInstance_0 != null) return true;
+			else return false;
+		}
+
+		public static bool IsDefaultScene(string name)
+		{
+			var lower = name.ToLower();
+			string[] scenes = { "application2", "ui", "empty", "dontdestroyonload", "hideanddontsave", "samplescene" };
+			return scenes.Contains(lower);
+		}
+
+		public static string GetSDKType()
+		{
+			if (GetSDK2Descriptor() != null)
+				return "SDK2";
+			else if (GetSDK3Descriptor() != null)
+				return "SDK3";
+			else
+				return "not found";
+		}
+	}
 }

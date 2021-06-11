@@ -5,7 +5,7 @@
 
 	internal class EspHelper : GameEvents
     {
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             foreach (var item in SpawnedESPsHolders)
             {

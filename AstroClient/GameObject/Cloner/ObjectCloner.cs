@@ -8,7 +8,7 @@
 
 	public class ObjectCloner : GameEvents
     {
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             _Holder = null;
             SpawnerSubmenu.ClonedObjects.Clear();

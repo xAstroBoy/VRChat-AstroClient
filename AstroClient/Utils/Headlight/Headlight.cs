@@ -56,7 +56,7 @@
 		public static QMSingleToggleButton DesktopHeadlightBtn;
 		public static QMSingleToggleButton VRHeadlightBtn;
 
-		public override void OnLevelLoaded()
+		public override void OnSceneLoaded(int buildIndex, string sceneName)
 		{
 			DesktopHeadlightBool = false;
 			VRHeadLightBool = false;

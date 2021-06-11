@@ -39,7 +39,7 @@
             UpdateEmojiButton();
         }
 
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Cooldown = 0f;
             IsVRChatCooldownActive = false;

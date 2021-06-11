@@ -6,7 +6,7 @@
 
 	public class QMFreeze : GameEvents
     {
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Frozen = false;
         }

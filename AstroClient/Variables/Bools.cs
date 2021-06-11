@@ -6,6 +6,14 @@
     {
         internal static bool DisableNSFWMenu = true;
 
+		internal static bool IsDeveloperAndDebug
+		{
+			get
+			{
+				return IsDeveloper && IsDebugMode;
+			}
+		}
+
         internal static bool IsDeveloper;
 
         internal static bool IsDebugMode

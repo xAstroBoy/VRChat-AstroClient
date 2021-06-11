@@ -392,7 +392,7 @@
 			}
 		}
 
-		public override void OnLevelLoaded()
+		public override void OnSceneLoaded(int buildIndex, string sceneName)
 		{
 			Mirrors.Clear();
 			if (GameObjDumper != null)

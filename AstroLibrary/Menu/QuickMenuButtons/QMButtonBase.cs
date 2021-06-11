@@ -25,7 +25,7 @@
             button.gameObject.SetActive(isActive);
         }
 
-        public void SetIntractable(bool isIntractable)
+		public void SetIntractable(bool isIntractable)
         {
             if (isIntractable)
             {

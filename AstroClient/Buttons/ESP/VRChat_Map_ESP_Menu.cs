@@ -23,7 +23,7 @@
         private static QMSingleToggleButton TriggerESPToggleBtn;
         private static QMSingleToggleButton UdonBehaviourESPToggleBtn;
 
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Toggle_VRCInteractable_ESP = false;
             Toggle_Trigger_ESP = false;

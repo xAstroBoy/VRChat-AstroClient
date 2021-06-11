@@ -7,7 +7,7 @@
     {
         public static List<Renderer> RenderObjects = new List<Renderer>();
 
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             RenderObjects.Clear();
         }

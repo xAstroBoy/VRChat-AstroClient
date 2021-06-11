@@ -6,7 +6,7 @@
 
 	public class CustomLists : GameEvents
     {
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             RendererSaverIndex.Clear();
             ColliderCheck.Clear();

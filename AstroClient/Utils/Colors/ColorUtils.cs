@@ -35,7 +35,7 @@ public class ColorUtils : GameEvents
         return color;
     }
 
-    public override void OnLevelLoaded()
+    public override void OnSceneLoaded(int buildIndex, string sceneName)
     {
         GeneratedColors.Clear();
     }
