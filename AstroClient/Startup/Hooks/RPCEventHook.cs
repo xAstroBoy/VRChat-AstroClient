@@ -142,7 +142,7 @@
 
             if (parameter.Equals("UdonSyncRunProgramAsRPC"))
             {
-                Event_OnUdonSyncRPC.SafetyRaise(null, new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
+                Event_OnUdonSyncRPC.SafetyRaise(new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
                 if (ConfigManager.General.LogUdonEvents)
                 {
                     ModConsole.Log($"Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");

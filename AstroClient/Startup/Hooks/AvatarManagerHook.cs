@@ -42,7 +42,7 @@
 
         private static void OnAvatarSpawnEvent(GameObject avatar, VRC.SDKBase.VRC_AvatarDescriptor DescriptorObj, bool state)
         {
-            Event_OnAvatarSpawn.SafetyRaise(null, new OnAvatarSpawnArgs(avatar, DescriptorObj, state));
+            Event_OnAvatarSpawn.SafetyRaise(new OnAvatarSpawnArgs(avatar, DescriptorObj, state));
         }
     }
 }

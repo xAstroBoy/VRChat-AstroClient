@@ -24,24 +24,24 @@
                     // Set actions to fire events.
                     listener.OnEnabled += () =>
                     {
-                        Event_OnSelectedObject_Enabled.SafetyRaise(null, null);
+                        Event_OnSelectedObject_Enabled.SafetyRaise();
                     };
                     listener.OnDisabled += () =>
                     {
-                        Event_OnSelectedObject_Disabled.SafetyRaise(null, null);
+                        Event_OnSelectedObject_Disabled.SafetyRaise();
                     };
                     listener.OnDestroyed += () =>
                     {
-                        Event_OnSelectedObject_Destroyed.SafetyRaise(null, null);
+                        Event_OnSelectedObject_Destroyed.SafetyRaise();
                     };
                     // Then call and update the SetActive
                     if (obj.active)
                     {
-                        Event_OnSelectedObject_Enabled.SafetyRaise(null, null);
+                        Event_OnSelectedObject_Enabled.SafetyRaise();
                     }
                     else
                     {
-                        Event_OnSelectedObject_Disabled.SafetyRaise(null, null);
+                        Event_OnSelectedObject_Disabled.SafetyRaise();
                     }
                 }
             }

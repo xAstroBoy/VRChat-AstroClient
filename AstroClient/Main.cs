@@ -127,7 +127,7 @@
 		{
 			if (KeyManager.IsAuthed)
 			{
-				Event_OnApplicationQuit.SafetyRaise(this, new EventArgs());
+				Event_OnApplicationQuit.SafetyRaise();
 			}
 		}
 
@@ -176,11 +176,7 @@
 						break;
 
 					default:
-						Event_OnSceneLoaded.SafetyRaise(this, new OnSceneLoadedEventArgs(buildIndex, sceneName));
-						if (ToggleDebugInfo != null)
-						{
-							ToggleDebugInfo.SetToggleState(Bools.IsDebugMode);
-						}
+						Event_OnSceneLoaded.SafetyRaise(new OnSceneLoadedEventArgs(buildIndex, sceneName));
 						break;
 				}
 			}
@@ -194,7 +190,7 @@
 			//}
 			if (KeyManager.IsAuthed)
 			{
-				Event_OnUpdate.SafetyRaise(null, null);
+				Event_OnUpdate.SafetyRaise();
 			}
 		}
 
@@ -202,7 +198,7 @@
 		{
 			if (KeyManager.IsAuthed)
 			{
-				Event_LateUpdate.SafetyRaise(null, null);
+				Event_LateUpdate.SafetyRaise();
 			}
 		}
 
@@ -239,7 +235,7 @@
 				new QMSingleButton("ShortcutMenu", 5, 3, "GameObject Toggler", new Action(() => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }), "Advanced GameObject Toggler", null, null, true);
 				CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 2.5f, true);
 
-				Event_VRChat_OnUiManagerInit.SafetyRaise(this, new EventArgs());
+				Event_VRChat_OnUiManagerInit.SafetyRaise();
 			}
 		}
 

@@ -1,6 +1,8 @@
 ﻿namespace AstroLibrary.Extensions
 {
 	using AstroClient;
+	using AstroClient.ItemTweakerV2.TweakerEventArgs;
+	using AstroClientCore.Events;
 	using AstroLibrary.Console;
 	using System;
 	using System.Linq;
@@ -14,17 +16,17 @@
 	public static class Eventhandler_ext
     {
 
-		public static void SafetyRaise(this EventHandler eh, object sender, EventArgs e)
+		public static void SafetyRaise(this EventHandler eh)
 		{
 			if (eh == null)
 				return;
 
 
-			foreach (EventHandler handler in eh.GetInvocationList())
+			foreach (var handler in eh.GetInvocationList())
 			{
 				try
 				{
-					handler(sender, e);
+					handler.DynamicInvoke(null, null);
 				}
 				catch (Exception exc)
 				{
@@ -34,17 +36,17 @@
 			}
 		}
 
-		public static void SafetyRaise<T>(this EventHandler<T> eh, object sender, T e) where T : EventArgs
+		public static void SafetyRaise<T>(this EventHandler<T> eh, T e) where T : EventArgs
 		{
 			if (eh == null)
 				return;
 
 
-			foreach (EventHandler handler in eh.GetInvocationList())
+			foreach (var handler in eh.GetInvocationList())
 			{
 				try
 				{
-					handler(sender, e);
+					handler.DynamicInvoke(null, e);
 				}
 				catch (Exception exc)
 				{
@@ -53,5 +55,10 @@
 				}
 			}
 		}
+
+
+
+	
+
 	}
 }
