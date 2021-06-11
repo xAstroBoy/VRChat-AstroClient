@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using MelonLoader;
 	using System;
 	using System.Reflection;
@@ -61,7 +62,7 @@
 
                     if (player != null)
                     {
-                        Event_SpawnEmojiRPC?.Invoke(null, new SpawnEmojiArgs(player, emoji));
+                        Event_SpawnEmojiRPC.SafetyRaise(null, new SpawnEmojiArgs(player, emoji));
                     }
                 }
             }

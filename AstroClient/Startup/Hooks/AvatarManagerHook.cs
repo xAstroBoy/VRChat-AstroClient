@@ -2,6 +2,7 @@
 {
 	using AstroClientCore.Events;
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using Harmony;
 	using System;
 	using System.Reflection;
@@ -41,7 +42,7 @@
 
         private static void OnAvatarSpawnEvent(GameObject avatar, VRC.SDKBase.VRC_AvatarDescriptor DescriptorObj, bool state)
         {
-            Event_OnAvatarSpawn?.Invoke(null, new OnAvatarSpawnArgs(avatar, DescriptorObj, state));
+            Event_OnAvatarSpawn.SafetyRaise(null, new OnAvatarSpawnArgs(avatar, DescriptorObj, state));
         }
     }
 }

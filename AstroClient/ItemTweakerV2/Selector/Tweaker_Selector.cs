@@ -1,6 +1,7 @@
 ﻿using AstroClient.ItemTweakerV2.TweakerEventArgs;
 using System;
 using UnityEngine;
+using AstroLibrary.Extensions;
 
 namespace AstroClient.ItemTweakerV2.Selector
 {
@@ -34,17 +35,17 @@ namespace AstroClient.ItemTweakerV2.Selector
                 }
                 if (value == null)
                 {
-                    Event_On_Old_GameObject_Removed?.Invoke(null, new SelectedObjectArgs(null));
-                    Event_On_New_GameObject_Selected?.Invoke(null, new SelectedObjectArgs(null));
+                    Event_On_Old_GameObject_Removed.SafetyRaise(null, new SelectedObjectArgs(null));
+                    Event_On_New_GameObject_Selected.SafetyRaise(null, new SelectedObjectArgs(null));
                 }
                 else if (_SelectedObject != null)
                 {
                     if (_SelectedObject != value)
                     {
-                        Event_On_Old_GameObject_Removed?.Invoke(null, new SelectedObjectArgs(_SelectedObject));
+                        Event_On_Old_GameObject_Removed.SafetyRaise(null, new SelectedObjectArgs(_SelectedObject));
                     }
                 }
-                Event_On_New_GameObject_Selected?.Invoke(null, new SelectedObjectArgs(value));
+                Event_On_New_GameObject_Selected.SafetyRaise(null, new SelectedObjectArgs(value));
                 _SelectedObject = value;
             }
         }

@@ -9,6 +9,7 @@
 	using System.Runtime.InteropServices;
 	using UnhollowerBaseLib;
 	using UnityEngine;
+	using AstroLibrary.Extensions;
 
 	public class OnWorldRevealHook : GameEvents
 	{
@@ -17,7 +18,7 @@
 		public override void OnSceneLoaded(int buildIndex, string sceneName)
 		{
 			if (Bools.IsDeveloper)
-				ModConsole.Log($"Scene Name: {sceneName}");
+				ModConsole.DebugLog($"Scene Name: {sceneName}");
 
 			//if (!WorldUtils.IsDefaultScene(sceneName)) MelonCoroutines.Start(WaitForLoad());
 		}
@@ -26,7 +27,7 @@
 		//{
 		//	while ((!WorldUtils.IsInWorld() && WorldUtils.GetSDK3Descriptor() == null) || WorldUtils.GetSDK2Descriptor() == null)
 		//		yield return new WaitForSeconds(5f);
-		//	Event_OnWorldReveal?.Invoke(null, new OnWorldRevealArgs(WorldUtils.Get_World_ID(), WorldUtils.Get_World_Name(), WorldUtils.Get_World_tags(), WorldUtils.Get_World_AssetUrl()));
+		//	Event_OnWorldReveal.SafetyRaise(null, new OnWorldRevealArgs(WorldUtils.Get_World_ID(), WorldUtils.Get_World_Name(), WorldUtils.Get_World_tags(), WorldUtils.Get_World_AssetUrl()));
 		//}
 
 
@@ -70,7 +71,7 @@
 					if (fadeType.Equals("BlackFade") && duration.Equals(0f) &&
 						RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
 					{
-						Event_OnWorldReveal?.Invoke(null, new OnWorldRevealArgs(WorldUtils.Get_World_ID(), WorldUtils.Get_World_Name(), WorldUtils.Get_World_tags(), WorldUtils.Get_World_AssetUrl()));
+						Event_OnWorldReveal.SafetyRaise(null, new OnWorldRevealArgs(WorldUtils.Get_World_ID(), WorldUtils.Get_World_Name(), WorldUtils.Get_World_tags(), WorldUtils.Get_World_AssetUrl()));
 						//Task.Run(() => {  });
 					}
 				}

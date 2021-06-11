@@ -22,15 +22,15 @@
                 RigidBodyController RigidBodyController = obj.GetOrAddComponent<RigidBodyController>();
                 if (RigidBodyController != null)
                 {
-                    Event_OnRigidBodyControllerSelected?.Invoke(null, new OnRigidBodyControllerArgs(RigidBodyController));
+                    Event_OnRigidBodyControllerSelected.SafetyRaise(null, new OnRigidBodyControllerArgs(RigidBodyController));
                     RigidBodyController.SetRigidBodyPropertyChanged(() =>
                     {
-                        Event_OnRigidBodyControllerPropertyChanged?.Invoke(null, new OnRigidBodyControllerArgs(RigidBodyController)); // Dunno if it works.
+                        Event_OnRigidBodyControllerPropertyChanged.SafetyRaise(null, new OnRigidBodyControllerArgs(RigidBodyController)); // Dunno if it works.
                     });
 
                     RigidBodyController.SetOnRigidbodyControllerOnUpdate(() =>
                     {
-                        Event_OnRigidBodyController_OnUpdate?.Invoke(null, new OnRigidBodyControllerArgs(RigidBodyController)); // Dunno if it works.
+                        Event_OnRigidBodyController_OnUpdate.SafetyRaise(null, new OnRigidBodyControllerArgs(RigidBodyController)); // Dunno if it works.
                     });
                 }
             }
