@@ -62,7 +62,8 @@
 
                     if (player != null)
                     {
-                        Event_SpawnEmojiRPC.SafetyRaise(null, new SpawnEmojiArgs(player, emoji));
+                        //Event_SpawnEmojiRPC.SafetyRaise(null, new SpawnEmojiArgs(player, emoji));
+                        Event_SpawnEmojiRPC?.Invoke(null, new SpawnEmojiArgs(player, emoji));
                     }
                 }
             }
