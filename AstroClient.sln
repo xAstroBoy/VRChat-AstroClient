@@ -24,6 +24,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroLibrary", "AstroLibrar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDumper", "MonoDumper\MonoDumper.csproj", "{B29C09FF-1FCC-4302-8AB4-8FE673693845}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheetoClient", "CheetoClient\CheetoClient.csproj", "{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Offline|Any CPU = Debug_Offline|Any CPU
@@ -79,6 +81,12 @@ Global
 		{B29C09FF-1FCC-4302-8AB4-8FE673693845}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B29C09FF-1FCC-4302-8AB4-8FE673693845}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B29C09FF-1FCC-4302-8AB4-8FE673693845}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}.Debug_Offline|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}.Debug_Offline|Any CPU.Build.0 = Debug|Any CPU
+		{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
