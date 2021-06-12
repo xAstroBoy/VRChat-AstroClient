@@ -263,7 +263,7 @@
     <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
     <Compile Include="Networking\NetworkingManager.cs" />
-    <Compile Include="Obfuscation.cs" />
+    <Compile Include="TestBullshit.cs" />
     <Compile Include="OnSceneLoadedEventArgs.cs" />
     <Compile Include="Patches\Patching.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
