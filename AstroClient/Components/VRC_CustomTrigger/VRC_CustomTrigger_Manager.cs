@@ -1,10 +1,14 @@
-﻿using Harmony;
-using System;
+﻿using System;
 using System.Reflection;
 using System.Linq;
 using UnityEngine;
 using VRC.SDKBase;
-using Il2CppSystem.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using System.Linq;
+using UnityEngine;
+
 using HarmonyLib;
 #pragma warning disable CS0618
 
@@ -21,8 +25,15 @@ namespace AstroClient.Components
 
        public override void OnApplicationStart()
         {
-            HarmonyInstance harmonyInstance = HarmonyInstance.Create("vrc_customtrigger");
-            harmonyInstance.Patch(typeof(VRCUiCursor).GetMethod("SetTargetInfo"), null, new HarmonyMethod(typeof(VRC_CustomTriggerMod).GetMethod("SetTargetInfo", BindingFlags.Static | BindingFlags.NonPublic)), new HarmonyMethod(typeof(VRC_CustomTriggerMod).GetMethod("SetTargetInfo_Transpiler", BindingFlags.Static | BindingFlags.NonPublic)));
+
+			var instance = HarmonyLib.Harmony.CreateAndPatchAll(typeof(VRC_CustomTriggerMod));
+
+
+
+			instance.Patch(typeof(VRCUiCursor).GetMethod(nameof(VRCUiCursor.Method_Public_Void_ObjectNPublicRaBoObVRRaBoLi1VRObUnique_Boolean_0)),
+				null, 
+				new HarmonyMethod(typeof(VRC_CustomTriggerMod).GetMethod(nameof(SetTargetInfo), BindingFlags.Static | BindingFlags.NonPublic)),
+				new HarmonyMethod(typeof(VRC_CustomTriggerMod).GetMethod(nameof(SetTargetInfo_Transpiler), BindingFlags.Static | BindingFlags.NonPublic)));
         }
 
         private static bool LongCheck(long input, long type) { return (input & type) == type; }
@@ -54,7 +65,7 @@ namespace AstroClient.Components
             return tutorialManagerInstance;
         }
 
-        private static List<VRC_Interactable> VRCUiCursor_InteractablesList(object __0)
+        private static Il2CppSystem.Collections.Generic.List<VRC_Interactable> VRCUiCursor_InteractablesList(object __0)
         {
             if (interactablesfield == null)
             {
@@ -67,7 +78,7 @@ namespace AstroClient.Components
                 }
             }
             if (interactablesfield != null)
-                return interactablesfield.GetValue(__0) as List<VRC_Interactable>;
+                return interactablesfield.GetValue(__0) as Il2CppSystem.Collections.Generic.List<VRC_Interactable>;
             return null;
         }
 
@@ -121,7 +132,7 @@ namespace AstroClient.Components
             // VRCUiCursor Left = 2
             bool left_handed = ((int)__instance.field_Public_EnumNPublicSealedvaNoRiLe4vUnique_0 == 2);
             VRC_Pickup outputpickup = null;
-            List<VRC_Interactable> outputinteractiblelist = null;
+            Il2CppSystem.Collections.Generic.List<VRC_Interactable> outputinteractiblelist = null;
 
             // VRCInputManager LegacyGrasp = 5
             if (!VRCInputManager_GetSetting(5))
@@ -186,15 +197,22 @@ namespace AstroClient.Components
                 vrchandGrasper.Method_Public_Void_VRC_Pickup_List_1_VRC_Interactable_0(outputpickup, outputinteractiblelist);
         }
 
-        private static IEnumerable<CodeInstruction> SetTargetInfo_Transpiler(IEnumerable<CodeInstruction> instructions)
-        {
-            List<CodeInstruction> codelist = new List<CodeInstruction>();
-            for (int i = 0; i < instructions.Count<CodeInstruction>(); i++)
-            {
-                CodeInstruction codeInstruction = instructions.ElementAt(i);
-            }
-            return codelist.AsEnumerable<CodeInstruction>();
-        }
-    }
+
+		private static IEnumerable<CodeInstruction> SetTargetInfo_Transpiler(IEnumerable<CodeInstruction> instructions)
+		{
+			List<CodeInstruction> codelist = new List<CodeInstruction>();
+			for (int i = 0; i < instructions.Count<CodeInstruction>(); i++)
+			{
+				CodeInstruction codeInstruction = instructions.ElementAt(i);
+				if ("call Boolean get_legacyGrasp()".Equals(codeInstruction.ToString()))
+					break;
+				else
+					codelist.Add(codeInstruction);
+			}
+			return codelist.AsEnumerable<CodeInstruction>();
+		}
+
+
+	}
 }
 
