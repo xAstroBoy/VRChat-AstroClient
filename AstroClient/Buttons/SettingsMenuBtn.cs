@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
 	using AstroClient.Cheetos;
+	using AstroClient.variables;
 	using AstroLibrary;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
@@ -77,13 +78,13 @@
             FlightMenu.InitButtons(sub, 1f, 1.5f, true);
             PlayerESPMenu.InitButtons(sub, 2f, 1.5f, true);
 
-            // Spoofs
-            QMNestedButton subSpoofButton = new QMNestedButton(sub, 3, 2f, "Spoofs", "Spoof Menu", null, null, null, null, false);
+			// Spoofs
+			QMNestedButton subSpoofButton = new QMNestedButton(sub, 3, 2f, "Spoofs", "Spoof Menu", null, null, null, null, false);
 
-            QMSingleToggleButton toggleSpoofFPS = new QMSingleToggleButton(subSpoofButton, 1, 0, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = true; }, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = false; }, "Toggle FPS Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofFPS, false);
+            QMSingleToggleButton toggleSpoofFPS = new QMSingleToggleButton(subSpoofButton, 2, 0, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = true; }, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = false; }, "Toggle FPS Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofFPS, false);
             toggleSpoofFPS.SetToggleState(ConfigManager.General.SpoofFPS, false);
 
-            QMSingleToggleButton toggleSpoofPing = new QMSingleToggleButton(subSpoofButton, 2, 0, "Ping Spoof", () => { ConfigManager.General.SpoofPing = true; }, "Ping Spoof", () => { ConfigManager.General.SpoofPing = false; }, "Toggle Ping Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofPing, false);
+            QMSingleToggleButton toggleSpoofPing = new QMSingleToggleButton(subSpoofButton, 3, 0, "Ping Spoof", () => { ConfigManager.General.SpoofPing = true; }, "Ping Spoof", () => { ConfigManager.General.SpoofPing = false; }, "Toggle Ping Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofPing, false);
             toggleSpoofPing.SetToggleState(ConfigManager.General.SpoofPing, false);
 
             new QMSingleButton(subSpoofButton, 1, 1, "Set\nFPS\nValue", () =>

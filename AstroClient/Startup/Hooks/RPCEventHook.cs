@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.variables;
 	#region Imports
 
 	using AstroLibrary.Console;
@@ -77,10 +78,12 @@
             string broadcasttype = __2 != null ? __2.ToString() : "Null";
 
             bool log = ConfigManager.General.LogRPCEvents;
+			bool blocked = Bools.BlockRPC;
 
             if (name.Equals("USpeak"))
             {
                 log = false;
+				blocked = false;
             }
 
             string GameObjName = __1.ParameterObject != null ? __1.ParameterObject.name : "null";
@@ -145,7 +148,15 @@
                 Event_OnUdonSyncRPC.SafetyRaise(new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
                 if (ConfigManager.General.LogUdonEvents)
                 {
-                    ModConsole.Log($"Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
+					if (Bools.BlockUdon)
+					{
+						ModConsole.Log($"BLOCKED Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
+						return false;
+					}
+					else
+					{
+						ModConsole.Log($"Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
+					}
                 }
                 return true;
             }
@@ -154,11 +165,19 @@
             {
                 if (parameter != "UdonSyncRunProgramAsRPC")
                 {
-                    ModConsole.Log($"RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
+					if (blocked)
+					{
+						ModConsole.Log($"BLOCKED RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
+						return false;
+					}
+					else
+					{
+						ModConsole.Log($"RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
+					}
                 }
             }
 
-            return true;
-        }
+			return true;
+		}
     }
 }

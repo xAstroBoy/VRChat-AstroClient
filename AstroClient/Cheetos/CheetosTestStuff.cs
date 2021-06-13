@@ -15,8 +15,6 @@
 
         public override void VRChat_OnUiManagerInit()
         {
-			VRC_CustomTrigger.PlaceHolder(); // Only here to remind Cheetos
-
             string VRChatVersion = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_1;
             string VRChatBuild = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_0;
 

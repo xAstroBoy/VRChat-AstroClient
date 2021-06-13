@@ -31,6 +31,8 @@
 
         private static string ConfigMovementPath = ConfigFolder + @"\ConfigMovement.json";
 
+        private static string ConfigProtectionsPath = ConfigFolder + @"\ConfigProtections.json";
+
         #endregion Paths
 
         #region Config Classes
@@ -125,7 +127,7 @@
                 ModConsole.DebugWarning($"ConfigMovement File Created: {ConfigMovementPath}");
             }
 
-            if (!Directory.Exists(ConfigLewdifyPath))
+			if (!Directory.Exists(ConfigLewdifyPath))
             {
                 Directory.CreateDirectory(ConfigLewdifyPath);
                 ModConsole.DebugWarning($"ConfigLewdify File Created: {ConfigLewdifyPath}");
@@ -164,7 +166,7 @@
             ModConsole.DebugLog("Movement Config Saved.");
         }
 
-        public static void Save_All()
+		public static void Save_All()
         {
             SaveMutex.WaitOne();
             Save_General();
