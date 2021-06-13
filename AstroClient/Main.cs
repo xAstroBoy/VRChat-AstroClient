@@ -256,7 +256,7 @@
 				avatar = new QMSingleButton(AstroClient, 5, 0.5f, "Avatar\nBy ID", delegate () { string text = Clipboard.GetText(); if (text.StartsWith("avtr_")) new PageAvatar { field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal { field_Internal_ApiAvatar_0 = new ApiAvatar { id = text } } }.ChangeToSelectedAvatar(); else MelonLogger.Error("Clipboard does not contains Avatar ID!"); }, "Alows you to change into a public avatar with its id.", null, null, true); ;
 
 				// Protections
-				QMNestedButton protectionsButton = new QMNestedButton(AstroClient, 4, 2.5f, "Protections", "Protections Menu", null, Color.yellow, null, null, true);
+				QMNestedButton protectionsButton = new QMNestedButton(AstroClient, 4, 2f, "Protections", "Protections Menu", null, Color.yellow, null, null, true);
 
 				QMSingleToggleButton toggleBlockRPC = new QMSingleToggleButton(protectionsButton, 2, 0, "RPC Block", () => { Bools.BlockRPC = true; }, "RPC Block", () => { Bools.BlockRPC = false; }, "Toggle RPC Blocking", Color.green, Color.red, null, Bools.BlockRPC, false);
 				toggleBlockRPC.SetToggleState(Bools.BlockRPC, false);

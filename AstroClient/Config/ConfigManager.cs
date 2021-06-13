@@ -79,7 +79,22 @@
             }
         }
 
-        public static void Validate()
+		public static Color ESPBlockedColor
+		{
+			get
+			{
+				return new Color(ESP.ESPBlockedColor[0], ESP.ESPBlockedColor[1], ESP.ESPBlockedColor[2], ESP.ESPBlockedColor[3]);
+			}
+			set
+			{
+				ESP.ESPBlockedColor[0] = value.r;
+				ESP.ESPBlockedColor[1] = value.g;
+				ESP.ESPBlockedColor[2] = value.b;
+				ESP.ESPBlockedColor[3] = value.a;
+			}
+		}
+
+		public static void Validate()
         {
             SaveMutex.WaitOne();
 

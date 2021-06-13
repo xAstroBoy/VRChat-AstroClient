@@ -7,6 +7,7 @@
 	using UnhollowerBaseLib.Attributes;
 	using UnityEngine;
 	using VRC;
+	using VRC.Management;
 
 	public class PlayerESP : GameEventsBehaviour
     {
@@ -101,7 +102,14 @@
                     {
                         if (AssignedPlayer.GetAPIUser() != null)
                         {
-                            if (AssignedPlayer.GetAPIUser().GetIsFriend())
+							if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(AssignedPlayer.UserID()))
+							{
+								if (HighLightOptions.highlightColor != BlockedColor)
+								{
+									HighLightOptions.highlightColor = BlockedColor;
+								}
+							}
+							else if (AssignedPlayer.GetAPIUser().GetIsFriend())
                             {
                                 if (HighLightOptions.highlightColor != FriendColor)
                                 {
@@ -121,7 +129,15 @@
             }
         }
 
-        private Color FriendColor
+		private Color BlockedColor
+		{
+			get
+			{
+				return ConfigManager.ESPBlockedColor;
+			}
+		}
+
+		private Color FriendColor
         {
             get
             {
@@ -176,7 +192,14 @@
                 {
                     if (AssignedPlayer.GetAPIUser() != null)
                     {
-                        if (AssignedPlayer.GetAPIUser().GetIsFriend())
+						if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(AssignedPlayer.UserID()))
+						{
+							if (HighLightOptions.highlightColor != BlockedColor)
+							{
+								HighLightOptions.highlightColor = BlockedColor;
+							}
+						}
+						else if (AssignedPlayer.GetAPIUser().GetIsFriend())
                         {
                             if (HighLightOptions.highlightColor != FriendColor)
                             {

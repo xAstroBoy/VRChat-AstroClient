@@ -1,9 +1,8 @@
-﻿using System;
-using UnityEngine;
-using VRC.SDKBase;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.Components
 {
+	using System;
+	using VRC.SDKBase;
+
 	public class VRC_CustomTrigger : VRC_Interactable
 	{
 		public Action onInteract;
