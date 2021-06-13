@@ -93,8 +93,6 @@
     <Compile Include="AntiCrash\AntiCrash_Lists.cs" />
     <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener.cs" />
-    <Compile Include="Components\VRC_CustomTrigger\VRC_CustomTrigger.cs" />
-    <Compile Include="Components\VRC_CustomTrigger\VRC_CustomTrigger_Manager.cs" />
     <Compile Include="Extensions\Bones_ext.cs" />
     <Compile Include="Extensions\Button_strings_ext.cs" />
     <Compile Include="Extensions\Buttons_ext.cs" />
@@ -1065,7 +1063,9 @@
     <EmbeddedResource Include="Resources\planet.png" />
     <EmbeddedResource Include="Resources\thief.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Components\VRC_CustomTrigger\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\repair.png" />
     <EmbeddedResource Include="Resources\badge.png" />
