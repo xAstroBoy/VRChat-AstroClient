@@ -8,13 +8,18 @@ namespace AstroClient.Components
 	{
 		public Action onInteract;
 
-		public override void Awake()
+		//public override void Awake()
+		//{
+		//	interactTextPlacement = transform;
+		//	base.Awake();
+		//}
+
+		//public override void Interact() { onInteract?.Invoke(); }
+
+		[Obsolete("This is only here to remind Cheetos")]
+		public static void PlaceHolder()
 		{
-			interactTextPlacement = transform;
-			base.Awake();
+
 		}
-
-		public override void Interact() { onInteract?.Invoke(); }
-
 	}
 }
