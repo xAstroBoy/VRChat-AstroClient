@@ -1,11 +1,13 @@
 ﻿namespace AstroClient
 {
 	using AstroLibrary.Extensions;
+	using AstroNetworkingLibrary;
 	using Il2CppSystem.Text;
 	using System.Linq;
 	using UnityEngine;
 	using VRC;
 	using VRC.Core;
+	using VRC.Management;
 	using VRC.SDKBase;
 	using static AstroLibrary.Extensions.PlayerExtensions;
 
@@ -97,7 +99,12 @@
                     stringBuilder.Append("<color=green>[F]</color>");
                 }
 
-                return $"{stringBuilder.ToString()}\n";
+				if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(UserID))
+				{
+					stringBuilder.Append("<color=red>[B]</color>");
+				}
+
+				return $"{stringBuilder.ToString()}\n";
             }
         }
 
