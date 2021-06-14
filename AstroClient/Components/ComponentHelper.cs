@@ -61,7 +61,7 @@
 
             RegisterComponent<PlayerESP>();
 
-            RegisterComponent<Murder4PatronUnlocker>();
+            //RegisterComponent<Murder4PatronUnlocker>();
 
             if (Bools.AllowAttackerComponent)
             {

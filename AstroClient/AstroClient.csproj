@@ -189,7 +189,6 @@
     <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
     <Compile Include="Cheetos\PlayerList.cs" />
     <Compile Include="Cheetos\StreamerProtector.cs" />
-    <Compile Include="Components\Murder4PatronUnlocker\Murder4PatronUnlocker.cs" />
     <Compile Include="GameObject\Cloner\ObjectCloner.cs" />
     <Compile Include="Components\ComponentsBtn.cs" />
     <Compile Include="Components\CrazyObjects\CrazyObject.cs" />
