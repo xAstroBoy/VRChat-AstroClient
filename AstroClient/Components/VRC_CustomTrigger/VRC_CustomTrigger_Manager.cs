@@ -1,21 +1,16 @@
-﻿using System;
-using System.Reflection;
-using System.Linq;
-using UnityEngine;
-using VRC.SDKBase;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Linq;
-using UnityEngine;
-
-using HarmonyLib;
-#pragma warning disable CS0618
+﻿#pragma warning disable CS0618
 
 namespace AstroClient.Components
 {
+	using System;
+	using System.Reflection;
+	using System.Linq;
+	using UnityEngine;
+	using VRC.SDKBase;
+	using System.Collections.Generic;
+	using HarmonyLib;
 
-    public class VRC_CustomTriggerMod : GameEvents
+	public class VRC_CustomTriggerMod : GameEvents
     {
         private static TutorialManager tutorialManagerInstance;
         private static MethodInfo trackingmanagerGetTrackedTransform;
@@ -129,6 +124,7 @@ namespace AstroClient.Components
 
 		private static void SetTargetInfo(VRCUiCursor __instance, object __0)
         {
+			if (__instance == null) return;
             // VRCUiCursor Left = 2
             bool left_handed = ((int)__instance.field_Public_EnumNPublicSealedvaNoRiLe4vUnique_0 == 2);
             VRC_Pickup outputpickup = null;

@@ -32,7 +32,15 @@
             new QMSingleButton(FriendESP, 1, 1.5f, "Yellow", () => { ConfigManager.ESPFriendColor = Color.yellow; }, null, null, null, true);
             new QMSingleButton(FriendESP, 1, 2, "Cyan", () => { ConfigManager.ESPFriendColor = Color.cyan; }, null, null, null, true);
             new QMSingleButton(FriendESP, 1, 2.5f, "White", () => { ConfigManager.ESPFriendColor = Color.white; }, null, null, null, true);
-        }
+
+			var BlockedESP = new QMNestedButton(main, 2, 1f, "Blocked ESP Colors", "Set Player ESP Blocked Color", null, null, null, null, true);
+			new QMSingleButton(BlockedESP, 1, 0, "Blue", () => { ConfigManager.ESPBlockedColor = Color.blue; }, null, null, null, true);
+			new QMSingleButton(BlockedESP, 1, 0.5f, "Red", () => { ConfigManager.ESPBlockedColor = Color.red; }, null, null, null, true);
+			new QMSingleButton(BlockedESP, 1, 1, "Green", () => { ConfigManager.ESPBlockedColor = Color.green; }, null, null, null, true);
+			new QMSingleButton(BlockedESP, 1, 1.5f, "Yellow", () => { ConfigManager.ESPBlockedColor = Color.yellow; }, null, null, null, true);
+			new QMSingleButton(BlockedESP, 1, 2, "Cyan", () => { ConfigManager.ESPBlockedColor = Color.cyan; }, null, null, null, true);
+			new QMSingleButton(BlockedESP, 1, 2.5f, "White", () => { ConfigManager.ESPBlockedColor = Color.white; }, null, null, null, true);
+		}
 
         private static QMSingleToggleButton PlayerESPToggleBtn;
 

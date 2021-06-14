@@ -66,6 +66,8 @@
         public float[] PublicESPColor = new float[] { 0f, 1f, 1f, 1f };
 
         public float[] ESPFriendColor = new float[] { 0f, 1f, 0f, 1f };
+
+        public float[] ESPBlockedColor = new float[] { 1f, 0f, 0f, 1f };
     }
 
     [Serializable, Obfuscation]

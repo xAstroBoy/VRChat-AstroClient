@@ -3,8 +3,12 @@
 	using AstroLibrary.Console;
 
 	public class Bools
-    {
-        internal static bool DisableNSFWMenu = true;
+	{
+		internal static bool BlockRPC;
+
+		internal static bool BlockUdon;
+
+		internal static bool DisableNSFWMenu = true;
 
 		internal static bool IsDeveloperAndDebug
 		{

@@ -31,7 +31,7 @@
 
                 foreach (var moderation in moderations)
                 {
-                    if (moderation.moderationType == ApiPlayerModeration.ModerationType.Block && moderation.sourceUserId == UserID)
+                    if (moderation.moderationType == ApiPlayerModeration.ModerationType.Block && moderation.sourceUserId == UserID && moderation.targetUserId == Utils.CurrentUser.UserID())
                     {
                         return true;
                     }
@@ -40,7 +40,12 @@
             return false;
         }
 
-        public static bool IsBannedFromPublicOnly(this VRC.Management.ModerationManager instance, string userId)
+		public static bool GetIsBlockedEitherWay(this VRC.Management.ModerationManager instance, string UserID)
+		{
+			return instance.GetIsBlocked(UserID) || instance.GetIsBlockedByUser(UserID);
+		}
+
+		public static bool IsBannedFromPublicOnly(this VRC.Management.ModerationManager instance, string userId)
         {
             foreach (var kvp in GlobalModerations)
             {
@@ -72,11 +77,6 @@
                 }
             }
             return false;
-        }
-
-        public static bool GetIsBlockedEitherWay(this VRC.Management.ModerationManager instance, string UserID)
-        {
-            return instance.GetIsBlocked(UserID) || instance.GetIsBlockedByUser(UserID);
         }
 
         [Obsolete("Currently Borked, needs fixed")]
