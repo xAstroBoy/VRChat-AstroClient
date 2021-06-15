@@ -21,14 +21,14 @@ namespace AstroClient.Components
        public override void OnApplicationStart()
         {
 
-			var instance = HarmonyLib.Harmony.CreateAndPatchAll(typeof(VRC_CustomTriggerMod));
+			//var instance = HarmonyLib.Harmony.CreateAndPatchAll(typeof(VRC_CustomTriggerMod));
 
 
 
-			instance.Patch(typeof(VRCUiCursor).GetMethod(nameof(VRCUiCursor.Method_Public_Void_ObjectNPublicRaBoObVRRaBoLi1VRObUnique_Boolean_0)),
-				null, 
-				new HarmonyMethod(typeof(VRC_CustomTriggerMod).GetMethod(nameof(SetTargetInfo), BindingFlags.Static | BindingFlags.NonPublic)),
-				new HarmonyMethod(typeof(VRC_CustomTriggerMod).GetMethod(nameof(SetTargetInfo_Transpiler), BindingFlags.Static | BindingFlags.NonPublic)));
+			//instance.Patch(typeof(VRCUiCursor).GetMethod(nameof(VRCUiCursor.Method_Public_Void_ObjectNPublicRaBoObVRRaBoLi1VRObUnique_Boolean_0)),
+			//	null, 
+			//	new HarmonyMethod(typeof(VRC_CustomTriggerMod).GetMethod(nameof(SetTargetInfo), BindingFlags.Static | BindingFlags.NonPublic)),
+			//	new HarmonyMethod(typeof(VRC_CustomTriggerMod).GetMethod(nameof(SetTargetInfo_Transpiler), BindingFlags.Static | BindingFlags.NonPublic)));
         }
 
         private static bool LongCheck(long input, long type) { return (input & type) == type; }

@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using MelonLoader;
@@ -32,11 +33,8 @@
 
         public static void IncreaseEmojiInt()
         {
-            if (EmojiInt != EmojiPrefabsClone.Count() - 1)
-            {
-                EmojiInt++;
-            }
-            UpdateEmojiButton();
+			EmojiInt++;
+			UpdateEmojiButton();
         }
 
         public override void OnSceneLoaded(int buildIndex, string sceneName)
@@ -49,32 +47,41 @@
             UpdateEmojiSpawning(true);
         }
 
-        public override void SpawnEmojiRPC(VRCPlayer player, int Emoji)
-        {
-            if (player == VRCPlayer.field_Internal_Static_VRCPlayer_0)
-            {
-                SetEmoji(Emoji);
-                UpdateLastSpawnedEmoji(Emoji);
-                if (IsVRChatCooldownActive)
-                {
-                    if (!IsBeingSpawnedFromMenu)
-                    {
-                        if (SkipVRChatOnlineCooldown)
-                        {
-                            SpawnOfflineEmoji(Emoji, false);
-                        }
-                    }
-                }
-                else
-                {
-                    IsVRChatCooldownActive = true;
-                }
-                return;
-            }
-            SpawnLocalEmoji(player, Emoji);
-        }
+		public override void SpawnEmojiRPC(VRCPlayer player, int Emoji)
+		{
+			if (player == VRCPlayer.field_Internal_Static_VRCPlayer_0)
+			{
+				SetEmoji(Emoji);
+				UpdateLastSpawnedEmoji(Emoji);
+				if (IsVRChatCooldownActive)
+				{
+					if (!IsBeingSpawnedFromMenu)
+					{
+						if (SkipVRChatOnlineCooldown)
+						{
+						}
+					}
+				}
+				else
+				{
+					IsVRChatCooldownActive = true;
+				}
+				return;
+			}
+		}
 
-        public override void OnUpdate()
+
+		public override void OnPlayerJoined(Player player)
+		{
+			if(player != null)
+			{
+				player.gameObject.GetOrAddComponent<EmojiBypasser>();
+			}
+		}
+
+
+
+		public override void OnUpdate()
         {
             if (IsVRChatCooldownActive)
             {
@@ -550,7 +557,7 @@
         public static bool SlowSpawningAllowed = true;
         public static int EmojiSpammerInt = 0;
 
-        public static readonly float VRChatEmojiCooldown = 3f;
+        public static readonly float VRChatEmojiCooldown = 2f;
 
         public static float Cooldown = 0f;
 

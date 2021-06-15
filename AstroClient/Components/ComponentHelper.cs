@@ -85,6 +85,8 @@
             RegisterComponent<TweakerListener>();
 			RegisterComponent<ScrollMenuListener>();
 
+			RegisterComponent<EmojiBypasser>();
+
 		}
 
 		public override void OnUpdate()
