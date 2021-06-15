@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.AntiCrash
 {
-	using AstroClient.variables;
+	using AstroClient.Variables;
 	using UnityEngine;
 	using VRC.SDKBase;
 

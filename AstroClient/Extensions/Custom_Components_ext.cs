@@ -2,7 +2,7 @@
 {
 	using AstroClient;
 	using AstroClient.Components;
-	using AstroClient.variables;
+	using AstroClient.Variables;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;

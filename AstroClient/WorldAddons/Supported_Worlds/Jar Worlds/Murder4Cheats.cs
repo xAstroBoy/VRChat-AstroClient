@@ -5,7 +5,7 @@
 	using AstroClient.Components;
 	using AstroClient.Startup.Buttons;
 	using AstroClient.UdonExploits;
-	using AstroClient.variables;
+	using AstroClient.Variables;
 	using AstroClient.Variables;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
@@ -17,7 +17,7 @@
 	using System.Linq;
 	using UnityEngine;
 	using VRC;
-	using static AstroClient.variables.CustomLists;
+	using static AstroClient.Variables.CustomLists;
 
 	#endregion Imports
 

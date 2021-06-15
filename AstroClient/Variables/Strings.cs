@@ -1,4 +1,4 @@
-﻿namespace AstroClient.variables
+﻿namespace AstroClient.Variables
 {
 	internal class Strings
     {

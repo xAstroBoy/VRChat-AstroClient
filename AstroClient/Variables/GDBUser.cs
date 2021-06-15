@@ -1,4 +1,4 @@
-﻿namespace AstroClient.variables
+﻿namespace AstroClient.Variables
 {
 	using AstroLibrary.Extensions;
 	using UnityEngine;

@@ -3,7 +3,7 @@
 	#region Imports
 
 	using AstroClient.Startup.Buttons;
-	using AstroClient.variables;
+	using AstroClient.Variables;
 	using AstroClient.Variables;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;

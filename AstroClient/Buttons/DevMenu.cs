@@ -2,7 +2,7 @@
 {
 	#region Imports
 
-	using AstroClient.variables;
+	using AstroClient.Variables;
 	using AstroLibrary;
 	using RubyButtonAPI;
 	using System.Diagnostics;

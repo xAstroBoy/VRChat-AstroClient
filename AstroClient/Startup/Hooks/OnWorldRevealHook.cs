@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
-	using AstroClient.variables;
+	using AstroClient.Variables;
 	using AstroLibrary.Console;
 	using MelonLoader;
 	using System;

@@ -301,7 +301,7 @@
 		{
 			if (EventHandler != null && VrcEvent != null)
 			{
-				if ((EventHandler.ToString() != Utils.LocalPlayer.GetPlayer().DisplayName() && EventHandler.ToString() != variables.Strings.AstroClientAuthor) || IgnoreSelf)
+				if ((EventHandler.ToString() != Utils.LocalPlayer.GetPlayer().DisplayName() && EventHandler.ToString() != Variables.Strings.AstroClientAuthor) || IgnoreSelf)
 				{
 					if (IsHubButtonLocked)
 					{

@@ -2,7 +2,7 @@
 {
 	using AstroClient.AvatarMods;
 	using AstroClient.Cheetos;
-	using AstroClient.variables;
+	using AstroClient.Variables;
 	using RubyButtonAPI;
 	using System;
 	using UnityEngine;

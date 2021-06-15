@@ -12,7 +12,7 @@
 	using VRC;
 	using VRC.Udon;
 	using VRC.Udon.Common.Interfaces;
-	using static AstroClient.variables.CustomLists;
+	using static AstroClient.Variables.CustomLists;
 
 	public class FreezeTag : GameEvents
 	{

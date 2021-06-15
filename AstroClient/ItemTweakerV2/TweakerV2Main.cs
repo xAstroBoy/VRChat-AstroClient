@@ -6,7 +6,7 @@
 	using AstroClient.ItemTweakerV2.Selector;
 	using AstroClient.ItemTweakerV2.Submenus;
 	using AstroClient.ItemTweakerV2.Submenus.ScrollMenus;
-	using AstroClient.variables;
+	using AstroClient.Variables;
 	using AstroLibrary;
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;

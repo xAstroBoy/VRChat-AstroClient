@@ -17,7 +17,7 @@
 
 	#endregion AstroClient Imports
 
-	using static AstroClient.variables.InstanceBuilder;
+	using static AstroClient.Variables.InstanceBuilder;
 
 	public class PlayerAttackerManager : GameEventsBehaviour
     {

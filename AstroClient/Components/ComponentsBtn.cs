@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Components
 {
 	using AstroClient.ItemTweakerV2.Selector;
-	using AstroClient.variables;
+	using AstroClient.Variables;
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using System;

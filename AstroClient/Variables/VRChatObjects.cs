@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Variables
 {
-	using AstroClient.variables;
+	using AstroClient.Variables;
 	using AstroLibrary.Finder;
 	using UnityEngine;
 

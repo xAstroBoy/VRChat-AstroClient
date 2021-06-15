@@ -7,8 +7,8 @@
 	using System.Linq;
 	using UnityEngine;
 	using UnityEngine.Rendering;
-	using static AstroClient.variables.CustomLists;
-	using static AstroClient.variables.GlobalLists;
+	using static AstroClient.Variables.CustomLists;
+	using static AstroClient.Variables.GlobalLists;
 
 	public class LightControl : GameEvents
 	{

@@ -6,7 +6,7 @@
 	using System.Runtime.InteropServices;
 	using UnhollowerRuntimeLib;
 	using UnityEngine;
-	using static AstroClient.variables.InstanceBuilder;
+	using static AstroClient.Variables.InstanceBuilder;
 	using Color = System.Drawing.Color;
 
 	public class ItemInflaterManager : GameEventsBehaviour

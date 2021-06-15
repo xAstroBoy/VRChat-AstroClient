@@ -2,7 +2,7 @@
 {
 	using AstroClient.Cheetos;
 	using AstroClient.Components;
-	using AstroClient.variables;
+	using AstroClient.Variables;
 	using AstroLibrary.Console;
 	using System;
 	using System.Collections.Generic;

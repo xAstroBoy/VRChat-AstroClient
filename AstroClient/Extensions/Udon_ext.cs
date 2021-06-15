@@ -5,7 +5,7 @@
 	using System.Linq;
 	using UnityEngine;
 	using VRC.Udon;
-	using static AstroClient.variables.CustomLists;
+	using static AstroClient.Variables.CustomLists;
 
 	public static class Udon_ext
 	{

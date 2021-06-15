@@ -12,7 +12,7 @@
 	using AstroClient.ItemTweakerV2.Selector;
 	using AstroClient.Skyboxes;
 	using AstroClient.Startup.Buttons;
-	using AstroClient.variables;
+	using AstroClient.Variables;
 	using AstroClient.WorldLights;
 	using AstroClient.Worlds;
 	using AstroLibrary;

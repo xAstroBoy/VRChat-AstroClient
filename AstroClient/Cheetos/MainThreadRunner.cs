@@ -5,7 +5,7 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Threading;
-	using static AstroClient.variables.InstanceBuilder;
+	using static AstroClient.Variables.InstanceBuilder;
 
 	public class MainThreadRunner : GameEventsBehaviour
     {

@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
 	using AstroClient.ItemTweakerV2.Selector;
-	using AstroClient.variables;
+	using AstroClient.Variables;
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using VRC.Udon.Common.Interfaces;

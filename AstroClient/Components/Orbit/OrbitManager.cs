@@ -10,7 +10,7 @@
 	using UnityEngine;
 	using VRC;
 	using VRC.Core;
-	using static AstroClient.variables.InstanceBuilder;
+	using static AstroClient.Variables.InstanceBuilder;
 	using Color = System.Drawing.Color;
 
 	public class OrbitManager : GameEventsBehaviour
