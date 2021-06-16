@@ -27,7 +27,28 @@
             return new Vector2(X * x, Y * y);
         }
 
-        public static bool IsNaN(Vector3 v3)
+
+		public static VRC_EventHandler FindNearestEventHandler(GameObject target)
+		{
+			VRC_EventHandler vrc_EventHandler = null;
+			if (target != null)
+			{
+				vrc_EventHandler = target.GetComponent<VRC_EventHandler>();
+				if (vrc_EventHandler == null)
+				{
+					vrc_EventHandler = target.GetComponentInParent<VRC_EventHandler>();
+				}
+			}
+			if (vrc_EventHandler == null)
+			{
+				vrc_EventHandler = Networking.SceneEventHandler;
+			}
+			return vrc_EventHandler;
+		}
+
+
+
+		public static bool IsNaN(Vector3 v3)
         {
             return float.IsNaN(v3.x) || float.IsNaN(v3.y) || float.IsNaN(v3.z);
         }

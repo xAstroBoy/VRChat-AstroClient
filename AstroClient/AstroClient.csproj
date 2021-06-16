@@ -98,6 +98,8 @@
     <Compile Include="Components\VRC_CustomTrigger\VRC_CustomTrigger_Manager.cs" />
     <Compile Include="EmojiMenu\EmojiMenu.cs" />
     <Compile Include="EmojiMenu\EmojiScrollMenu\EmojiScrollMenu.cs" />
+    <Compile Include="Exploits\Exploit_Exts\Teleport_Ext.cs" />
+    <Compile Include="Exploits\TeleportExploit.cs" />
     <Compile Include="Extensions\Bones_ext.cs" />
     <Compile Include="Extensions\Button_strings_ext.cs" />
     <Compile Include="Extensions\Buttons_ext.cs" />

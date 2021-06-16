@@ -108,22 +108,6 @@
 
                 message = new OnTeleportRPCArgs(Pos.Value, rot.Value, spawnpos.Value, UnknownBool.Value, UnknownInt.Value);
 
-                //foreach (var item in )
-                //{
-                //	Convert items
-                //	if (item.Equals(Il2CppType.Of<Vector3>()))
-                //	{
-                //		Pos = item.Unbox<Vector3>();
-                //	}
-                //	else if (item.Equals(Il2CppType.Of<Quaternion>()))
-                //	{
-                //		rot = item.Unbox<Quaternion>();
-                //	}
-                //	else if (item.Equals(Il2CppType.Of<VRC_SceneDescriptor.SpawnOrientation>()))
-                //	{
-                //		spawnpos = item.Unbox<VRC_SceneDescriptor.SpawnOrientation>();
-                //	}
-                //}
 
                 if (log)
                 {

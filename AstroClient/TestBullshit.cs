@@ -2,10 +2,13 @@
 {
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using HarmonyLib;
 	using Il2CppSystem.Collections.Generic;
+	using Photon.Realtime;
 	using System.Reflection;
 	using UnhollowerBaseLib;
+	using UnityEngine;
 	using VRC.Core;
 	using VRC.SDKBase;
 	using static VRC.Core.ApiWorld;
@@ -37,6 +40,10 @@
 
 
 		}
+
+
+
+
 
 		private static bool Force_PublicInstanceType(ref AccessType __result)
 		{
