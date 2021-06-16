@@ -42,60 +42,63 @@
 		{
 			if (ActivateUdonRPCSniff)
 			{
-				if (sender == Utils.LocalPlayer.GetPlayer())
+				if (sender.DisplayName() == Utils.LocalPlayer.GetPlayer().DisplayName())
 				{
 					if (obj.name.ToLower() == "shooterbody")
 					{
 						if (AssignedNode == null)
 						{
-							// Find Everything .
-							FindEverything(obj);
-						}
-						if (AssignedNode != null)
-						{
 							if (action.ToLower().Contains("shootbomb"))
 							{
-								if (Override_ShootBomb_0_Toggle)
+								// Find Everything .
+								FindEverything(obj);
+							}
+						}
+					}
+					if (AssignedNode != null)
+					{
+						if (action.ToLower().Contains("shootbomb"))
+						{
+							if (Override_ShootBomb_0_Toggle)
+							{
+								if (ShootBomb0 != null)
 								{
-									if (ShootBomb0 != null)
-									{
-										ShootBomb0.ExecuteUdonEvent();
-									}
+									ShootBomb0.ExecuteUdonEvent();
 								}
-								else if (Override_ShootBomb_1_Toggle)
+							}
+							else if (Override_ShootBomb_1_Toggle)
+							{
+								if (ShootBomb1 != null)
 								{
-									if (ShootBomb1 != null)
-									{
-										ShootBomb1.ExecuteUdonEvent();
-									}
+									ShootBomb1.ExecuteUdonEvent();
 								}
-								else if (Override_ShootBomb_2_Toggle)
+							}
+							else if (Override_ShootBomb_2_Toggle)
+							{
+								if (ShootBomb2 != null)
 								{
-									if (ShootBomb2 != null)
-									{
-										ShootBomb2.ExecuteUdonEvent();
-									}
+									ShootBomb2.ExecuteUdonEvent();
 								}
-								else if (Override_ShootBomb_3_Toggle)
+							}
+							else if (Override_ShootBomb_3_Toggle)
+							{
+								if (ShootBomb3 != null)
 								{
-									if (ShootBomb3 != null)
-									{
-										ShootBomb3.ExecuteUdonEvent();
-									}
+									ShootBomb3.ExecuteUdonEvent();
 								}
-								else if (Override_ShootBomb_4_Toggle)
+							}
+							else if (Override_ShootBomb_4_Toggle)
+							{
+								if (ShootBomb4 != null)
 								{
-									if (ShootBomb4 != null)
-									{
-										ShootBomb4.ExecuteUdonEvent();
-									}
+									ShootBomb4.ExecuteUdonEvent();
 								}
-								else if (Override_ShootBomb_5_Toggle)
+							}
+							else if (Override_ShootBomb_5_Toggle)
+							{
+								if (ShootBombEx != null)
 								{
-									if (ShootBombEx != null)
-									{
-										ShootBombEx.ExecuteUdonEvent();
-									}
+									ShootBombEx.ExecuteUdonEvent();
 								}
 							}
 						}
