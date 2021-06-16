@@ -49,7 +49,7 @@
 			{
 				if (sender == Utils.LocalPlayer.GetPlayer())
 				{
-					if (obj.name.ToLower() == "ShooterBody")
+					if (obj.name.ToLower() == "shooterbody")
 					{
 
 						if (AssignedNode == null)
