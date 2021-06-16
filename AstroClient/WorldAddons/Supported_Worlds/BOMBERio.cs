@@ -67,15 +67,15 @@
 			{
 				if (control != null)
 				{
-
 					if (control.IsHeld)
 					{
 						if (control.CurrentHand == VRC.SDKBase.VRC_Pickup.PickupHand.Left)
 						{
-							if (InputUtils.IsInputUseLeftPressed())
+							if (InputUtils.IsImputUseLeftCalled() || InputUtils.IsInputUseLeftPressed())
 							{
 								if (!HasShot)
 								{
+									ModConsole.DebugLog("Detected Use Left, executing...");
 									ShootModifiedBullet();
 									HasShot = true;
 								}
@@ -87,10 +87,11 @@
 						}
 						else if(control.CurrentHand == VRC.SDKBase.VRC_Pickup.PickupHand.Right)
 						{
-							if (InputUtils.IsInputUseLeftPressed())
+							if (InputUtils.IsImputUseRightCalled() || InputUtils.IsInputUseRightPressed())
 							{
 								if (!HasShot)
 								{
+									ModConsole.DebugLog("Detected Use Right, executing...");
 									ShootModifiedBullet();
 									HasShot = true;
 								}
@@ -199,6 +200,8 @@
 			Override_ShootBomb_3_Toggle = false;
 			Override_ShootBomb_4_Toggle = false;
 			Override_ShootBomb_5_Toggle = false;
+			control = null;
+			HasShot = false;
 		}
 
 		public static PickupController control;
