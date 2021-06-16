@@ -717,6 +717,27 @@
             }
         }
 
+
+		internal VRC_Pickup.PickupHand CurrentHand
+		{
+			get
+			{
+				if (Pickup1 != null)
+				{
+					return Pickup1.currentHand;
+				}
+				else if (Pickup2 != null)
+				{
+					return Pickup2.currentHand;
+				}
+				else if (Pickup3 != null)
+				{
+					return Pickup3.currentHand;
+				}
+				return VRC_Pickup.PickupHand.None;
+			}
+		}
+	
         internal VRCPlayerApi CurrentObjectHolderPlayer
         {
             [HideFromIl2Cpp]

@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.Components;
 	using AstroClient.Variables;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
@@ -28,78 +29,31 @@
 			if (id == WorldIds.BOMBERio)
 			{
 				ModConsole.Log($"Recognized {Name} World, Enabling Gun Projectile Hijacker..");
-				ActivateUdonRPCSniff = true;
+				isBomberIO = true;
 			}
 			else
 			{
-				ActivateUdonRPCSniff = false;
+				isBomberIO = false;
 			}
 		}
 
-		private bool ActivateUdonRPCSniff = false;
+		private bool isBomberIO = false;
 
 		public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
 		{
-			if (ActivateUdonRPCSniff)
+			if (isBomberIO)
 			{
 				if (sender.DisplayName() == Utils.LocalPlayer.GetPlayer().DisplayName())
 				{
-					if (obj.name.ToLower() == "shooterbody")
+					if (obj.name.ToLower().StartsWith("followobj"))
 					{
+						
 						if (AssignedNode == null)
 						{
-							if (action.ToLower().Contains("shootbomb"))
+							if (action.ToLower().Contains("join"))
 							{
 								// Find Everything .
 								FindEverything(obj);
-							}
-						}
-					}
-					if (AssignedNode != null)
-					{
-						if (action.ToLower().Contains("shootbomb"))
-						{
-							if (Override_ShootBomb_0_Toggle)
-							{
-								if (ShootBomb0 != null)
-								{
-									ShootBomb0.ExecuteUdonEvent();
-								}
-							}
-							else if (Override_ShootBomb_1_Toggle)
-							{
-								if (ShootBomb1 != null)
-								{
-									ShootBomb1.ExecuteUdonEvent();
-								}
-							}
-							else if (Override_ShootBomb_2_Toggle)
-							{
-								if (ShootBomb2 != null)
-								{
-									ShootBomb2.ExecuteUdonEvent();
-								}
-							}
-							else if (Override_ShootBomb_3_Toggle)
-							{
-								if (ShootBomb3 != null)
-								{
-									ShootBomb3.ExecuteUdonEvent();
-								}
-							}
-							else if (Override_ShootBomb_4_Toggle)
-							{
-								if (ShootBomb4 != null)
-								{
-									ShootBomb4.ExecuteUdonEvent();
-								}
-							}
-							else if (Override_ShootBomb_5_Toggle)
-							{
-								if (ShootBombEx != null)
-								{
-									ShootBombEx.ExecuteUdonEvent();
-								}
 							}
 						}
 					}
@@ -107,35 +61,124 @@
 			}
 		}
 
+		public override void OnUpdate()
+		{
+			if (isBomberIO)
+			{
+				if (control != null)
+				{
+
+					if (control.IsHeld)
+					{
+						if (control.CurrentHand == VRC.SDKBase.VRC_Pickup.PickupHand.Left)
+						{
+							if (InputUtils.IsInputUseLeftPressed())
+							{
+								if (!HasShot)
+								{
+									ShootModifiedBullet();
+									HasShot = true;
+								}
+							}
+							else
+							{
+								HasShot = false;
+							}
+						}
+						else if(control.CurrentHand == VRC.SDKBase.VRC_Pickup.PickupHand.Right)
+						{
+							if (InputUtils.IsInputUseLeftPressed())
+							{
+								if (!HasShot)
+								{
+									ShootModifiedBullet();
+									HasShot = true;
+								}
+							}
+							else
+							{
+								HasShot = false;
+							}
+
+						}
+					}
+				}
+
+			}
+		}
+
+
+		private static bool HasShot = false;
+		private void ShootModifiedBullet()
+		{
+			if (AssignedNode != null)
+			{
+
+				if (Override_ShootBomb_0_Toggle)
+				{
+					if (ShootBomb0 != null)
+					{
+						ShootBomb0.ExecuteUdonEvent();
+					}
+				}
+				else if (Override_ShootBomb_1_Toggle)
+				{
+					if (ShootBomb1 != null)
+					{
+						ShootBomb1.ExecuteUdonEvent();
+					}
+				}
+				else if (Override_ShootBomb_2_Toggle)
+				{
+					if (ShootBomb2 != null)
+					{
+						ShootBomb2.ExecuteUdonEvent();
+					}
+				}
+				else if (Override_ShootBomb_3_Toggle)
+				{
+					if (ShootBomb3 != null)
+					{
+						ShootBomb3.ExecuteUdonEvent();
+					}
+				}
+				else if (Override_ShootBomb_4_Toggle)
+				{
+					if (ShootBomb4 != null)
+					{
+						ShootBomb4.ExecuteUdonEvent();
+					}
+				}
+				else if (Override_ShootBomb_5_Toggle)
+				{
+					if (ShootBombEx != null)
+					{
+						ShootBombEx.ExecuteUdonEvent();
+					}
+				}
+			}
+		}
 		public static void FindEverything(GameObject obj)
 		{
 			if (obj != null)
 			{
-				if (obj.transform.parent != null)
+				AssignedNode = obj;
+				if (AssignedNode != null)
 				{
-					if (obj.transform.parent.name == "Shooter")
+					var Item = AssignedNode.transform.FindObject("Shooter");
+					if(Item != null)
 					{
-						if (obj.transform.parent.parent != null)
-						{
-							if (obj.transform.parent.parent.name.StartsWith("FollowObj"))
-							{
-								AssignedNode = obj.transform.parent.parent.gameObject;
-
-								if (AssignedNode != null)
-								{
-									var body = AssignedNode.transform.FindObject("Shooter/ShooterBody");
-									if (body != null)
-									{
-										ShootBomb0 = body.gameObject.FindUdonEvent("ShootBomb0");
-										ShootBomb1 = body.gameObject.FindUdonEvent("ShootBomb1");
-										ShootBomb2 = body.gameObject.FindUdonEvent("ShootBomb2");
-										ShootBomb3 = body.gameObject.FindUdonEvent("ShootBomb3");
-										ShootBomb4 = body.gameObject.FindUdonEvent("ShootBomb4");
-										ShootBombEx = body.gameObject.FindUdonEvent("ShootBombEx");
-									}
-								}
-							}
-						}
+						control = Item.GetOrAddComponent<PickupController>();
+					}
+					var shooterbody = AssignedNode.transform.FindObject("Shooter/ShooterBody");
+					if (shooterbody != null)
+					{
+						ShootBomb0 = shooterbody.gameObject.FindUdonEvent("ShootBomb0");
+						ShootBomb1 = shooterbody.gameObject.FindUdonEvent("ShootBomb1");
+						ShootBomb2 = shooterbody.gameObject.FindUdonEvent("ShootBomb2");
+						ShootBomb3 = shooterbody.gameObject.FindUdonEvent("ShootBomb3");
+						ShootBomb4 = shooterbody.gameObject.FindUdonEvent("ShootBomb4");
+						ShootBombEx = shooterbody.gameObject.FindUdonEvent("ShootBombEx");
 					}
 				}
 			}
@@ -157,6 +200,8 @@
 			Override_ShootBomb_4_Toggle = false;
 			Override_ShootBomb_5_Toggle = false;
 		}
+
+		public static PickupController control;
 
 		public static CachedUdonEvent ShootBomb0;
 		public static CachedUdonEvent ShootBomb1;
