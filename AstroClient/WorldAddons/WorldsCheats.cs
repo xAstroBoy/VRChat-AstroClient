@@ -23,6 +23,7 @@
             VRChatHub.InitButtons(WorldCheats, 1, 1.5f, true);
             FreezeTag.InitButtons(WorldCheats, 1, 2, true);
             AimFactory.InitButtons(WorldCheats, 1, 2.5f, true);
+			BOMBERio.InitButtons(WorldCheats, 2, 0);
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)

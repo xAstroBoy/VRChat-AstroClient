@@ -77,7 +77,17 @@
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-            else
+			else if (id == WorldIds.BOMBERio)
+			{
+				if (BOMBERio.BOMBERioCheatsPage != null)
+				{
+					SetButtonText("BOMBERio Cheats", "Manage BOMBERio Cheats");
+					SetButtonShortcut(BOMBERio.BOMBERioCheatsPage);
+					SetButtonColor(Color.green);
+					ToggleButtonVisibilityAndInteractivity(true);
+				}
+			}
+			else
             {
                 SetButtonColor(Color.red);
                 ClearButtonAction();
