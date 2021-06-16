@@ -14,6 +14,7 @@
 	using System.Collections.Generic;
 	using System.Threading;
 	using Transmtn.DTO.Notifications;
+	using UnhollowerBaseLib;
 	using UnityEngine;
 	using VRC.SDKBase;
 	using static VRC.SDKBase.VRC_EventHandler;
@@ -38,6 +39,7 @@
 				new QMSingleButton(MainButton, 1, 0, "Friend Everyone", () => { DoFriendEveryone(); }, "Friend Everyone!");
 				new QMSingleButton(MainButton, 1, 1, "Test #2", () => { Test2(); }, "Don't Do It!");
 				new QMSingleButton(MainButton, 1, 2, "Test #3", () => { Test3(); }, "Don't Do It!");
+				new QMSingleButton(MainButton, 2, 0, "Teleport\nFriends\nHere", () => { Test4(); }, "Muahaha");
 				new QMSingleButton(MainButton, 3, 0, "Portal", () => { PortalDrop(); }, "Portal");
 				new QMSingleButton(MainButton, 3, 1, "Create Button", () => { CreateButton(); }, ":3");
 				new QMSingleButton(MainButton, 3, 2, "Photon", () => { PrintPhotonPlayers(); }, "Photon");
@@ -51,6 +53,53 @@
 		{
 			var Portal = Networking.Instantiate(VrcBroadcastType.Always, "Portals/PortalInternalDynamic", new Vector3(777, 777, 777), new Quaternion(float.MaxValue, float.MaxValue, 0, 0));
 			Portal.SetActive(false);
+		}
+
+		private void Test4()
+		{
+			//if (handler == null)
+			//{
+			//	DoHandlerThing();
+			//}
+
+			//var players = WorldUtils.Get_Players();
+			//var self = Utils.LocalPlayer;
+			//var position = Utils.LocalPlayer.gameObject.transform.position;
+
+			//foreach (var player in players)
+			//{
+			//	//player.GetVRCPlayer().TeleportRPC(position, new Quaternion(0, 0, 0, 1.0f), VRC_SceneDescriptor.SpawnOrientation.Default, true, true, player);
+			//	//player.GetVRCPlayer().Method_Public_Void_Vector3_Quaternion_SpawnOrientation_Boolean_Boolean_0(position, new Quaternion(0, 0, 0, 1.0f), VRC_SceneDescriptor.SpawnOrientation.Default, false, false);
+			//	//player.GetVRCPlayer().TeleportRPC(position, new Quaternion(0, 0, 0, 1.0f), VRC_SceneDescriptor.SpawnOrientation.Default, false, false, self.GetPlayer());
+			//}
+			////var position = Utils.LocalPlayer.gameObject.transform.position;
+
+			//unsafe
+			//{
+			//	var test = VRC_SceneDescriptor.SpawnOrientation.Default;
+			//	IL2CPP.il2cpp_value_box(IL2CPP.)
+
+			//	var parameters = new Il2CppSystem.Object[]
+			//	{
+			//	position.BoxIl2CppObject(),
+			//	new Quaternion(0, 0, 0, 1.0f).BoxIl2CppObject(),
+			//	test2,
+			//	//new Il2CppSystem.Int32  { m_value = 0 }.BoxIl2CppObject(),
+			//	new Il2CppSystem.Boolean { m_value = false }.BoxIl2CppObject()
+			//	};
+
+			//	foreach (var player in players)
+			//	{
+			//		Networking.RPC(player.GetVRCPlayerApi(), player.gameObject, "TeleportRPC", parameters);
+
+			//		//	//handler.TriggerEvent(new VrcEvent
+			//		//	//{
+			//		//	//	EventType = VrcEventType.SendRPC,
+			//		//	//	Name = "TeleportRPC",
+			//		//	//	ParameterObjects = parameters
+			//		//	//}, VrcBroadcastType.AlwaysUnbuffered, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, 0f);
+			//	}
+			//}
 		}
 
 		private void Test3()

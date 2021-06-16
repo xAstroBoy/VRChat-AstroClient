@@ -22,7 +22,7 @@
         {
             mainButton = new QMNestedButton(menu, x, y, "Fly Menu", "Fly Options", null, null, null, null, btnHalf);
 
-            desktopSpeedSlider = new QMSlider(Utils.QuickMenu.transform.Find(mainButton.GetMenuName()), "PC Speed", 400, -620, delegate (float value) { Flight.SetDesktopFlySpeed(value); }, ConfigManager.Flight.VRFlySpeed, 20, 1, true);
+            desktopSpeedSlider = new QMSlider(Utils.QuickMenu.transform.Find(mainButton.GetMenuName()), "PC Speed", 400, -620, delegate (float value) { Flight.SetDesktopFlySpeed(value); }, ConfigManager.Flight.VRFlySpeed, 40, 1, true);
             desktopSpeedSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
 
             setPCSpeedButton = new QMSingleButton(mainButton, 1, 2, "Set\nPC\nSpeed", delegate ()
@@ -47,7 +47,7 @@
                 });
             }, "Manually input a PC speed");
 
-            vrSpeedSlider = new QMSlider(Utils.QuickMenu.transform.Find(mainButton.GetMenuName()), "VR Speed", 400, -820, delegate (float value) { Flight.SetVRFlySpeed(value); }, ConfigManager.Flight.VRFlySpeed, 20, 1, true);
+            vrSpeedSlider = new QMSlider(Utils.QuickMenu.transform.Find(mainButton.GetMenuName()), "VR Speed", 400, -820, delegate (float value) { Flight.SetVRFlySpeed(value); }, ConfigManager.Flight.VRFlySpeed, 40, 1, true);
             vrSpeedSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
 
             setVRSpeedButton = new QMSingleButton(mainButton, 2, 2, "Set\nVR\nSpeed", delegate ()
