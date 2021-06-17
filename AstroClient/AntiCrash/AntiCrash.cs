@@ -20,12 +20,12 @@
             }
         }
 
-        public override void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
+        public override void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
         {
             if (Enabled)
             {
                 // Check and scan :)
-                AntiCrashScanner.ScanAvatar(avatar, DescriptorObj);
+                AntiCrashScanner.ScanAvatar(Avatar, VRCAvatarManager.field_Private_VRC_AvatarDescriptor_0);
             }
         }
     }

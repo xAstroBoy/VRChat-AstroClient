@@ -53,7 +53,7 @@
         [HideFromIl2Cpp]
         private void Internal_OnAvatarSpawn(object sender, OnAvatarSpawnArgs e)
         {
-            OnAvatarSpawn(e.Avatar, e.VRC_AvatarDescriptor, e.state);
+            OnAvatarSpawn(e.VRCAvatarManager, e.Avatar);
         }
 
         [HideFromIl2Cpp]
@@ -88,7 +88,7 @@
         }
 
         [HideFromIl2Cpp]
-        public virtual void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
+        public virtual void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
         {
         }
 

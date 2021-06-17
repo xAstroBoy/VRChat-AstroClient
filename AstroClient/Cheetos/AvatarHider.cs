@@ -19,16 +19,16 @@
             avatar.transform.root.Find("ForwardDirection/Avatar").gameObject.DestroyMeLocal();
         }
 
-        public override void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
+        public override void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
         {
             if (HideAvatar)
             {
                 var self = Utils.LocalPlayer.GetPlayer();
-                var owner = avatar.transform.root.GetComponent<Player>();
+                var owner = Avatar.transform.root.GetComponent<Player>();
 
                 if (self == owner)
                 {
-                    DestroyAvatar(avatar);
+                    DestroyAvatar(Avatar);
                     ModConsole.DebugLog("Your avatar was hidden.");
                 }
             }

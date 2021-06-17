@@ -60,18 +60,18 @@
             }
         }
 
-        public override void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
+        public override void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
         {
-            if (avatar != null && DescriptorObj != null)
+            if (Avatar != null && VRCAvatarManager.prop_VRC_AvatarDescriptor_0 != null)
             {
-                var AvatarPlayer = avatar.transform.root.GetComponentInChildren<Player>();
+                var AvatarPlayer = Avatar.transform.root.GetComponentInChildren<Player>();
                 if (AvatarPlayer != null)
                 {
                     if (AvatarPlayer == player) // Checks if this assigned player is the same.
                     {
                         if (AvatarRoot == null)
                         {
-                            AvatarRoot = avatar.transform.root;
+                            AvatarRoot = Avatar.transform.root;
                         }
                         Avatar = null;
                         AvatarAnimator = null;

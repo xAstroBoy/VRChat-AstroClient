@@ -126,7 +126,7 @@
 
         private void Internal_OnAvatarSpawn(object sender, OnAvatarSpawnArgs e)
         {
-            OnAvatarSpawn(e.Avatar, e.VRC_AvatarDescriptor, e.state);
+            OnAvatarSpawn(e.VRCAvatarManager, e.Avatar);
         }
 
         public virtual void VRChat_OnUiManagerInit()
@@ -185,7 +185,7 @@
         {
         }
 
-        public virtual void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
+        public virtual void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
         {
         }
 

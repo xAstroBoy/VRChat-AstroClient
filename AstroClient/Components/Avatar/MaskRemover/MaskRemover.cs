@@ -44,20 +44,20 @@
             }
         }
 
-        public override void OnAvatarSpawn(GameObject avatar, VRC_AvatarDescriptor DescriptorObj, bool state)
+        public override void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
         {
-            if (avatar != null && DescriptorObj != null)
+            if (Avatar != null && VRCAvatarManager.prop_VRC_AvatarDescriptor_0 != null)
             {
-                var AvatarPlayer = avatar.transform.root.GetComponentInChildren<Player>();
+                var AvatarPlayer = Avatar.transform.root.GetComponentInChildren<Player>();
                 if (AvatarPlayer != null)
                 {
                     if (AvatarPlayer == player) // Checks if this assigned player is the same.
                     {
                         if (AvatarRoot == null)
                         {
-                            AvatarRoot = avatar.transform.root;
+                            AvatarRoot = Avatar.transform.root;
                         }
-                        Avatar = null;
+                        avatar = null;
                         AvatarAnimator = null;
                         Armature = null;
                         Body = null;
@@ -71,14 +71,14 @@
                                 {
                                     if (!string.IsNullOrEmpty(apiavatar.assetUrl) && !string.IsNullOrEmpty(apiavatar.id))
                                     {
-                                        AvatarRoot = avatar.transform.root;
+                                        AvatarRoot = Avatar.transform.root;
                                         if (AvatarRoot != null)
                                         {
-                                            Avatar = AvatarRoot.Get_Avatar();
+                                            avatar = AvatarRoot.Get_Avatar();
                                             Armature = AvatarRoot.Get_Armature();
                                             Body = AvatarRoot.Get_Body();
-                                            AvatarAnimator = Avatar.GetComponentInChildren<Animator>();
-                                            var childs = Avatar.Get_All_Childs();
+                                            AvatarAnimator = avatar.GetComponentInChildren<Animator>();
+                                            var childs = avatar.Get_All_Childs();
                                             if (childs.Count() != 0)
                                             {
                                                 foreach (var item in childs)
@@ -121,7 +121,7 @@
         }
 
         private Transform AvatarRoot = null;
-        private Transform Avatar = null;
+        private Transform avatar = null;
         private Transform Armature = null;
         private Transform Body = null;
         private Player player = null;
