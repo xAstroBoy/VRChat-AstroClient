@@ -84,7 +84,6 @@
 
 		private void ToggleMenu()
 		{
-			return;
 			IsOpen = !IsOpen;
 			Menu.SetActive(IsOpen);
 
