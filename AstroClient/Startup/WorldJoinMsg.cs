@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.Startup
 {
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using System.Collections.Generic;
 	using System.Linq;
 
@@ -33,6 +34,7 @@
             }
             ModConsole.Log("World ID : " + id, System.Drawing.Color.Goldenrod);
             ModConsole.Log("World Asset URL : " + AssetURL, System.Drawing.Color.Goldenrod);
+            ModConsole.Log("Instance ID : " + RoomManagerExtension.GetInstanceID(), System.Drawing.Color.Goldenrod);
         }
     }
 }
