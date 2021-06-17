@@ -57,7 +57,8 @@
                 {
                     string senderUserId = Utils.QuickMenu.Notification().senderUserId;
                     NotificationDetails notificationDetails = new NotificationDetails();
-                    notificationDetails["worldId"] = RoomManagerExtension.GetWorld().id + ":" + RoomManagerExtension.GetWorldInstance().idWithTags;
+                    //notificationDetails["worldId"] = RoomManagerExtension.GetWorld().id + ":" + RoomManagerExtension.GetWorldInstance().idWithTags;
+                    notificationDetails["worldId"] = RoomManagerExtension.GetInstanceID(); // This may or may not be wrong //Cheetos
                     notificationDetails["worldName"] = RoomManagerExtension.GetWorld().name;
                     Utils.NotificationManager.SendNotification(senderUserId, "invite", string.Empty, notificationDetails);
                 }

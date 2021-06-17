@@ -2,7 +2,9 @@
 {
 	using System;
 	using System.Linq;
+	using UnityEngine;
 	using VRC.Core;
+	using VRC.UI;
 
 	public static class RoomManagerExtension
     {
@@ -32,10 +34,35 @@
             return RoomManager.field_Internal_Static_ApiWorldInstance_0;
         }
 
-        public static string GetInstanceID()
-        {
-            return GetWorld().id + ":" + GetWorldInstance().idWithTags;
-        }
+		/// <summary>
+		/// Unreal gave me this code // Cheetos
+		/// </summary>
+		/// <returns></returns>
+		public static string GetInstanceID()
+		{
+			string result = "";
+			PageUserInfo component = GameObject.Find("Screens").transform.Find("UserInfo").GetComponent<PageUserInfo>();
+			component.field_Public_APIUser_0 = new APIUser
+			{
+				id = Utils.LocalPlayer.GetPlayer().UserID()
+			};
+			if (component.field_Public_APIUser_0.id != APIUser.CurrentUser.id)
+			{
+				string[] array = component.field_Public_APIUser_0.location.Split(new char[]
+				{
+								':'
+				});
+
+				result = array[0];
+			}
+
+			return result;
+		}
+
+		//public static string GetInstanceID()
+		//{
+		//return GetWorld().id + ":" + GetWorldInstance().idWithTags;
+		//}
 
         public static int GetWorldOccupants()
         {

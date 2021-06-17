@@ -41,17 +41,12 @@
 
 		}
 
-
-
-
-
-		private static bool Force_PublicInstanceType(ref AccessType __result)
+		private static bool Force_PublicInstanceType(ref InstanceAccessType __result)
 		{
 			ModConsole.Log($"Marked a World Instance as Public Instance!");
-			__result = AccessType.Public;
+			__result = InstanceAccessType.Public;
 			return false;
 		}
-
 
 		private static void ModifiedFetchList(
 			ref Il2CppSystem.Action<IEnumerable<ApiWorld>> __0,

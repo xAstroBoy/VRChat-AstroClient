@@ -486,10 +486,10 @@
             return Instance.GetSDK3Descriptor() == null || Instance.GetSDK2Descriptor() != null;
         }
 
-        public static VRCSDK2.VRC_AvatarVariations GetAvatarVariations(this VRCAvatarManager Instance)
-        {
-            return Instance.prop_VRC_AvatarVariations_0;
-        }
+        //public static VRCSDK2.VRC_AvatarVariations GetAvatarVariations(this VRCAvatarManager Instance)
+        //{
+        //    return Instance.prop_VRC_AvatarVariations_0;
+        //}
 
         #endregion avatar
 
