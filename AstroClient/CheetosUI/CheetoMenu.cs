@@ -19,18 +19,11 @@
 
 		public static bool IsOpen = false;
 
-		private VRCStandaloneInputModule standaloneInputModule;
-
-		private VRCUiCursorManager cursorManager;
-
 		public override void VRChat_OnUiManagerInit()
 		{
-			return;
 			try
 			{
 				var camera = GameObject.Find("Camera (eye)").GetComponent<Camera>();
-				standaloneInputModule = GameObjectFinder.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
-				cursorManager = GameObjectFinder.Find("_Application/CursorManager").GetComponent<VRCUiCursorManager>();
 				UI = new GameObject() { name = "CheetoUI" };
 				UI.name = "CheetoUI";
 				UI.layer = LayerMask.NameToLayer("UI");
@@ -68,6 +61,7 @@
 		{
 			if (Input.GetKeyDown(KeyCode.BackQuote))
 			{
+				ModConsole.Log("Toggling CheetoMenu");
 				ToggleMenu();
 			}
 		}
@@ -89,7 +83,6 @@
 
 			if (IsOpen)
 			{
-				//Transform? ptransform = Utils.LocalPlayer.GetPlayer().transform;
 				Transform ptransform = Utils.LocalPlayer.GetPlayer().transform;
 				Vector3? center = Utils.LocalPlayer.GetPlayer().Get_Center_Of_Player();
 				if (center != null && ptransform != null)
