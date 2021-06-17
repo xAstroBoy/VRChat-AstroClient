@@ -315,6 +315,7 @@
     <Compile Include="Utils\UdonSearcher\UdonSearch.cs" />
     <Compile Include="Utils\World\WorldUtils.cs" />
     <Compile Include="Utils\XrefScannerUtils.cs" />
+    <Compile Include="Variables\Bools - Copy.cs" />
     <Compile Include="Variables\Bools.cs" />
     <Compile Include="Variables\CustomLists.cs" />
     <Compile Include="Variables\GDBUser.cs" />

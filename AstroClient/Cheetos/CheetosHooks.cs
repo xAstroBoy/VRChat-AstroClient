@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Cheetos
 {
+	using AstroClient.Variables;
 	#region Imports
 
 	using AstroClientCore.Events;
@@ -135,6 +136,7 @@
             {
                 if (AstroClient.ConfigManager.General.SpoofPing)
                 {
+					Temporary.RealPing = __result;
                     __result = AstroClient.ConfigManager.General.SpoofedPing;
                     return;
                 }
@@ -148,6 +150,7 @@
             {
                 if (AstroClient.ConfigManager.General.SpoofFPS)
                 {
+					Temporary.RealFPS = __result;
                     __result = (float)1f / AstroClient.ConfigManager.General.SpoofedFPS;
                     return;
                 }
