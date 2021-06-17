@@ -111,8 +111,8 @@
 				case PacketServerType.CONNECTION_FINISHED:
 					NetworkingManager.IsReady = true;
 					break;
-				//case PacketServerType.ADD_TAG:
-				//	{
+				case PacketServerType.ADD_TAG:
+					break;
 				//		MainThreadRunner.Run(() =>
 				//		{
 				//			var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
@@ -137,7 +137,6 @@
 				//			}
 				//		});
 				//		break;
-				//	}
 
 				case PacketServerType.NOTIFY:
 					CheetosHelpers.SendHudNotification(packetData.TextData);
