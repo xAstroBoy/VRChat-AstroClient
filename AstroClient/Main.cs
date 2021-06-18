@@ -82,10 +82,9 @@
 #if OFFLINE
 			KeyManager.IsAuthed = true;
 			Bools.IsDeveloper = true;
-#else
 			Stopwatch stopwatch = new Stopwatch();
 			stopwatch.Start();
-
+			#else
 			ModConsole.Log("About to connect..");
 			AstroNetworkClient.Initialize();
 
