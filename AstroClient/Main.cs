@@ -253,7 +253,21 @@
 				//CopyIDButton = new QMSingleButton(AstroClient, 5, -1, "Copy\nInstance ID", delegate () { Clipboard.SetText($"{RoomManager.field_Internal_Static_ApiWorld_0.id}:{RoomManager.field_Internal_Static_ApiWorldInstance_0.idWithTags}"); }, "Copy the ID of the current instance.", null, null, true);
 				CopyIDButton = new QMSingleButton(AstroClient, 5, -1, "Copy\nInstance ID", delegate () { Clipboard.SetText($"{RoomManagerExtension.GetInstanceID()}"); }, "Copy the ID of the current instance.", null, null, true);
 				JoinInstanceButton = new QMSingleButton(AstroClient, 5, -0.5f, "Join\nInstance", delegate () { new PortalInternal().Method_Private_Void_String_String_PDM_0(Clipboard.GetText().Split(':')[0], Clipboard.GetText().Split(':')[1]); }, "Join an instance via your clipboard.", null, null, true);
-				//VRam = new QMSingleButton(AstroClient, 5, 0, "Clear\nVRAM", delegate () { var currentAvatars = (from player in PlayerManager.prop_PlayerManager_0.prop_ArrayOf_Player_0 where player != null select player.prop_ApiAvatar_0 into apiAvatar where apiAvatar != null select apiAvatar.assetUrl).ToList(); var dict = new Dictionary<string, Il2CppSystem.Object>(); var abdm = AssetBundleDownloadManager.prop_AssetBundleDownloadManager_0; foreach (var key in abdm.field_Private_Dictionary_2_String_Object_0.Keys) { dict.Add(key, abdm.field_Private_Dictionary_2_String_Object_0[key]); } foreach (var key in dict.Keys.Where(key => !abdm.field_Private_Dictionary_2_String_Object_0[key].name.Contains("vrcw") && !currentAvatars.Contains(key))) { abdm.field_Private_Dictionary_2_String_AssetBundleDownload_0.Remove(key); abdm.field_Private_Dictionary_2_String_Object_0.Remove(key); } dict.Clear(); System.GC.Collect(System.GC.MaxGeneration, GCCollectionMode.Forced, true, true); Il2CppSystem.GC.Collect(Il2CppSystem.GC.MaxGeneration, Il2CppSystem.GCCollectionMode.Forced, true, true); Resources.UnloadUnusedAssets(); ; }, "Clear VRAM.", null, null, true);
+				VRam = new QMSingleButton(AstroClient, 5, 0, "Clear\nVRAM", delegate () { 
+					var currentAvatars = (from player 
+										  in PlayerManager.prop_PlayerManager_0.prop_ArrayOf_Player_0 
+										  where player != null
+										  select player.prop_ApiAvatar_0 
+										  into apiAvatar 
+										  where apiAvatar != null 
+										  select apiAvatar.assetUrl
+										  ).ToList(); 
+					var dict = 
+					new Dictionary<string, Il2CppSystem.Object>();
+					var abdm = AssetBundleDownloadManager.prop_AssetBundleDownloadManager_0; 
+					foreach (var key in abdm.field_Private_Dictionary_2_String_AssetBundleDownload_0.Keys) 
+					{ dict.Add(key, abdm.field_Private_Dictionary_2_String_AssetBundleDownload_0[key]); 
+					} foreach (var key in dict.Keys.Where(key => !abdm.field_Private_Dictionary_2_String_AssetBundleDownload_0[key].prop_String_0.Contains("vrcw") && !currentAvatars.Contains(key))) { abdm.field_Private_Dictionary_2_String_AssetBundleDownload_0.Remove(key); abdm.field_Private_Dictionary_2_String_AssetBundleDownload_0.Remove(key); } dict.Clear(); System.GC.Collect(System.GC.MaxGeneration, GCCollectionMode.Forced, true, true); Il2CppSystem.GC.Collect(Il2CppSystem.GC.MaxGeneration, Il2CppSystem.GCCollectionMode.Forced, true, true); Resources.UnloadUnusedAssets(); ; }, "Clear VRAM.", null, null, true);
 				avatar = new QMSingleButton(AstroClient, 5, 0.5f, "Avatar\nBy ID", delegate () { string text = Clipboard.GetText(); if (text.StartsWith("avtr_")) new PageAvatar { field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal { field_Internal_ApiAvatar_0 = new ApiAvatar { id = text } } }.ChangeToSelectedAvatar(); else MelonLogger.Error("Clipboard does not contains Avatar ID!"); }, "Alows you to change into a public avatar with its id.", null, null, true); ;
 
 				// Protections
