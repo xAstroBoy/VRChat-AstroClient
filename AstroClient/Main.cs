@@ -79,11 +79,12 @@
 			{
 				ModConsole.DebugMode = ConfigManager.General.DebugLog;
 			}
+			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Start();
+
 #if OFFLINE
 			KeyManager.IsAuthed = true;
 			Bools.IsDeveloper = true;
-			Stopwatch stopwatch = new Stopwatch();
-			stopwatch.Start();
 			#else
 			ModConsole.Log("About to connect..");
 			AstroNetworkClient.Initialize();

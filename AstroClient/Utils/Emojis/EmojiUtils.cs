@@ -21,9 +21,8 @@
             {
                 if (SkipVRChatOnlineCooldown)
                 {
-					ModConsole.Log("This doesn't work right now!");
-                    //SpawnOfflineEmoji(LastUsedEmoji, false);
-                }
+					SpawnOfflineEmoji(LastUsedEmoji, false);
+				}
             }
             else
             {
@@ -166,8 +165,7 @@
         {
             if (!OnlineSpawn)
             {
-				ModConsole.Log("This doesn't work right now!");
-                //SpawnOfflineEmoji(EmojiInt, false);
+                SpawnOfflineEmoji(EmojiInt, false);
                 IsBeingSpawnedFromMenu = true;
             }
             else
@@ -181,8 +179,7 @@
                 {
                     if (SkipVRChatOnlineCooldown)
                     {
-						ModConsole.Log("This doesn't work right now!");
-                        //SpawnOfflineEmoji(EmojiInt, false);
+                        SpawnOfflineEmoji(EmojiInt, false);
                         IsBeingSpawnedFromMenu = true;
                     }
                 }
@@ -198,8 +195,7 @@
                     yield return new WaitForSeconds(0.5f);
                 }
 
-				ModConsole.Log("This doesn't work right now!");
-                //SpawnOfflineEmoji(EmojiInt, false);
+                SpawnOfflineEmoji(EmojiInt, false);
             }
             yield return null;
         }
@@ -247,45 +243,45 @@
             }
         }
 
-        //public static void SpawnLocalEmoji(VRCPlayer player, int emoji)
-        //{
-        //    if (player != null)
-        //    {
-        //        var EmojiGen = player.field_Private_EmojiGenerator_0;
-        //        if (EmojiGen != null)
-        //        {
-        //            EmojiGen.Method_Public_Void_Int32_0(emoji);
-        //        }
-        //        if (IsBeingSpawnedFromMenu)
-        //        {
-        //            IsBeingSpawnedFromMenu = false;
-        //        }
-        //    }
-        //}
+		public static void SpawnLocalEmoji(VRCPlayer player, int emoji)
+		{
+			if (player != null)
+			{
+				var EmojiGen = player.field_Private_MonoBehaviourPublicGaVoInStVoInStInVoStUnique_0;
+				if (EmojiGen != null)
+				{
+					EmojiGen.Method_Public_Void_Int32_0(emoji);
+				}
+				if (IsBeingSpawnedFromMenu)
+				{
+					IsBeingSpawnedFromMenu = false;
+				}
+			}
+		}
 
-        //public static void SpawnOfflineEmoji(int emoji, bool MakeOthersSeeit)
-        //{
-        //    var EmojiGen = Player.prop_Player_0.GetVRCPlayer().field_Private_EmojiGenerator_0;
-        //    if (EmojiGen != null)
-        //    {
-        //        EmojiGen.Method_Public_Void_Int32_0(emoji);
+		public static void SpawnOfflineEmoji(int emoji, bool MakeOthersSeeit)
+		{
+			var EmojiGen = Player.prop_Player_0.GetVRCPlayer().field_Private_MonoBehaviourPublicGaVoInStVoInStInVoStUnique_0;
+			if (EmojiGen != null)
+			{
+				EmojiGen.Method_Public_Void_Int32_0(emoji);
 
-        //        if (IsBeingSpawnedFromMenu)
-        //        {
-        //            IsBeingSpawnedFromMenu = false;
-        //        }
+				if (IsBeingSpawnedFromMenu)
+				{
+					IsBeingSpawnedFromMenu = false;
+				}
 
-        //        if (MakeOthersSeeit)
-        //        {
-        //            if (IsVRChatCooldownActive)
-        //            {
-        //                Networking.RPC(0, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, "SpawnEmojiRPC", new Il2CppSystem.Object[] { new Il2CppSystem.Int32 { m_value = emoji }.BoxIl2CppObject() });
-        //            }
-        //        }
-        //    }
-        //}
+				if (MakeOthersSeeit)
+				{
+					if (IsVRChatCooldownActive)
+					{
+						Networking.RPC(0, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, "SpawnEmojiRPC", new Il2CppSystem.Object[] { new Il2CppSystem.Int32 { m_value = emoji }.BoxIl2CppObject() });
+					}
+				}
+			}
+		}
 
-        public static void Add_x1()
+		public static void Add_x1()
         {
             EmojiSpammerInt++;
             UpdateEmojiSpamCounter();
