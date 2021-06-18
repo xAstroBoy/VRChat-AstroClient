@@ -88,7 +88,7 @@
 				if (center != null && ptransform != null)
 				{
 					UI.transform.position = center.Value + (ptransform.forward * 0.30f);
-					UI.transform.position += new Vector3(0, 0.05f, 0);
+					UI.transform.position += new Vector3(0, 0.1f, 0);
 					UI.transform.localScale = new Vector3(0.00025f, 0.00025f, 0.00025f);
 					UI.transform.LookAt(ptransform);
 					UI.transform.Rotate(new Vector3(45, 180, 0));
