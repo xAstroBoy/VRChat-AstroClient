@@ -29,7 +29,7 @@
             }
             else
             {
-                ModConsole.Error($"Failed to put action on CheetoButton: {GetGameObject.name}");
+                ModConsole.Error($"Failed to put action on CMButton: {GetGameObject.name}");
             }
 
             _ = new CMLabel(GetGameObject.transform, new Vector2(0, 0), text);
