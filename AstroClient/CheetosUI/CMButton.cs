@@ -9,20 +9,12 @@
 
 	#endregion Imports
 
-	public class CMButton
+	public class CMButton : CMBase
     {
-        public GameObject GetGameObject { get; private set; }
-
-        public CMButton(Transform parent, Vector2 position, string text, Action action)
+        public CMButton(Transform parent, Vector2 position, string text, Action action) : base(parent, position)
         {
-            GetGameObject = new GameObject($"CMButton-{text}");
-            GetGameObject.AddComponent<RectTransform>();
-            GetGameObject.transform.SetParent(parent, false);
-            GetGameObject.GetComponent<RectTransform>().position = position;
-            GetGameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 0f);
-            GetGameObject.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
-            GetGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 200);
-            GetGameObject.AddComponent<CanvasRenderer>();
+			GetGameObject.name = $"CMButton-{text}";
+
             GetGameObject.AddComponent<Image>();
             GetGameObject.GetComponent<Image>().sprite = null;
             GetGameObject.GetComponent<Image>().color = Color.cyan;
@@ -40,7 +32,7 @@
                 ModConsole.Error($"Failed to put action on CheetoButton: {GetGameObject.name}");
             }
 
-            _ = new CMLabel(GetGameObject.transform, text);
+            _ = new CMLabel(GetGameObject.transform, new Vector2(0, 0), text);
         }
     }
 }

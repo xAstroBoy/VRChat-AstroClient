@@ -92,6 +92,7 @@
     <Compile Include="AntiCrash\AntiCrashUtils.cs" />
     <Compile Include="AntiCrash\AntiCrash_Lists.cs" />
     <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />
+    <Compile Include="CheetosUI\CMBase.cs" />
     <Compile Include="Components\EmojiBypasser\EmojiBypasser.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener.cs" />
     <Compile Include="Components\VRC_CustomTrigger\VRC_CustomTrigger.cs" />

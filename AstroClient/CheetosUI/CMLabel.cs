@@ -7,20 +7,11 @@
 
 	#endregion Imports
 
-	public class CMLabel
-    {
-        public GameObject GetGameObject { get; private set; }
-
-        public CMLabel(Transform parent, string text)
+	public class CMLabel : CMBase
+	{
+        public CMLabel(Transform parent, Vector2 position, string text) : base(parent, position)
         {
-            GetGameObject = new GameObject("Label");
-            GetGameObject.AddComponent<RectTransform>();
-            GetGameObject.transform.SetParent(parent, false);
-            GetGameObject.GetComponent<RectTransform>().position = new Vector3(0, 0, 0);
-            GetGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 30);
-            GetGameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0.5f, 0.5f);
-            GetGameObject.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
-            GetGameObject.AddComponent<CanvasRenderer>();
+            GetGameObject.name = "CMLabel";
             GetGameObject.AddComponent<Text>();
             GetGameObject.GetComponent<Text>().text = text;
             GetGameObject.GetComponent<Text>().font = Font.GetDefault();
