@@ -43,7 +43,7 @@
 				Menu.GetComponent<GraphicRaycaster>().enabled = true;
 				Menu.GetComponent<GraphicRaycaster>().m_BlockingMask = 0;
 
-				_ = new CheetoBackground(Menu.transform);
+				_ = new CMBackground(Menu.transform, Color.gray);
 				_ = new CMPage(Menu.transform);
 
 				Menu.SetActive(false);
@@ -63,16 +63,6 @@
 				ModConsole.Log("Toggling CheetoMenu");
 				ToggleMenu();
 			}
-		}
-
-		public override void OnLateUpdate()
-		{
-			//cursorManager.field_Private_Boolean_0 = true;
-			//cursorManager.field_Private_Boolean_1 = true;
-			//cursorManager.field_Private_Boolean_0 = true;
-			//cursorManager.field_Private_Boolean_3 = true;
-			//cursorManager.field_Private_Boolean_4 = true;
-			//cursorManager.field_Private_EnumNPublicSealedvaNoRiLe4vUnique_0 = VRCUiCursor.EnumNPublicSealedvaNoRiLe4vUnique.Right;
 		}
 
 		private void ToggleMenu()

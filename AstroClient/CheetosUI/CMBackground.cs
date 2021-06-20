@@ -7,11 +7,11 @@
 
 	#endregion Imports
 
-	public class CheetoBackground
+	public class CMBackground
     {
         public GameObject GetGameObject { get; private set; }
 
-        public CheetoBackground(Transform parent)
+        public CMBackground(Transform parent, Color color)
         {
             GetGameObject = new GameObject("Background");
             GetGameObject.AddComponent<RectTransform>();
@@ -24,7 +24,7 @@
             GetGameObject.AddComponent<Image>();
             GetGameObject.GetComponent<Image>().sprite = null;
             GetGameObject.GetComponent<Image>().fillAmount = 1f;
-            GetGameObject.GetComponent<Image>().color = Color.gray;
+            GetGameObject.GetComponent<Image>().color = color;
         }
     }
 }

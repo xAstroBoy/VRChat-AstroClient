@@ -147,7 +147,7 @@
     <Compile Include="Buttons\UserInteractMenuBtns.cs" />
     <Compile Include="Buttons\ESP\VRChat_Map_ESP_Menu.cs" />
     <Compile Include="Buttons\WorldPickupsBtn.cs" />
-    <Compile Include="CheetosUI\CheetoBackground.cs" />
+    <Compile Include="CheetosUI\CMBackground.cs" />
     <Compile Include="CheetosUI\CMButton.cs" />
     <Compile Include="CheetosUI\CMLabel.cs" />
     <Compile Include="Cheetos\Astro_Interactable.cs" />
