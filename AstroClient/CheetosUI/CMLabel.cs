@@ -16,6 +16,7 @@
             GetGameObject.GetComponent<Text>().text = text;
             GetGameObject.GetComponent<Text>().font = Font.GetDefault();
             GetGameObject.GetComponent<Text>().resizeTextForBestFit = true;
+            GetGameObject.GetComponent<Text>().supportRichText = true;
             GetGameObject.GetComponent<Text>().resizeTextMaxSize = 70;
             GetGameObject.GetComponent<Text>().color = Color.blue;
             GetGameObject.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
