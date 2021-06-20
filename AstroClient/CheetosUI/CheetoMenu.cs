@@ -1,11 +1,10 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
 
 	#region Imports
 
-	using AstroLibrary.Finder;
+	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using UnityEngine;
 	using UnityEngine.UI;
 
@@ -45,7 +44,7 @@
 				Menu.GetComponent<GraphicRaycaster>().m_BlockingMask = 0;
 
 				_ = new CheetoBackground(Menu.transform);
-				_ = new CheetoPage(Menu.transform);
+				_ = new CMPage(Menu.transform);
 
 				Menu.SetActive(false);
 				Object.DontDestroyOnLoad(UI);

@@ -147,12 +147,12 @@
     <Compile Include="Buttons\ESP\VRChat_Map_ESP_Menu.cs" />
     <Compile Include="Buttons\WorldPickupsBtn.cs" />
     <Compile Include="CheetosUI\CheetoBackground.cs" />
-    <Compile Include="CheetosUI\CheetoButton.cs" />
+    <Compile Include="CheetosUI\CMButton.cs" />
     <Compile Include="CheetosUI\CheetoText.cs" />
     <Compile Include="Cheetos\Astro_Interactable.cs" />
     <Compile Include="Cheetos\Astro_Interactable_Extensions.cs" />
     <Compile Include="Cheetos\AvatarSearch.cs" />
-    <Compile Include="CheetosUI\CheetoPage.cs" />
+    <Compile Include="CheetosUI\CMPage.cs" />
     <Compile Include="Cheetos\CheetosExtensions.cs" />
     <Compile Include="Cheetos\CheetosHooks.cs" />
     <Compile Include="Buttons\DevMenu.cs" />

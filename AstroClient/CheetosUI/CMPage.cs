@@ -7,18 +7,18 @@
 
 	#endregion Imports
 
-	public class CheetoPage
+	public class CMPage
     {
         public GameObject GetGameObject { get; private set; }
 
-        public CheetoPage(Transform parent)
+        public CMPage(Transform parent)
         {
-            GetGameObject = new GameObject("CheetoPage");
+            GetGameObject = new GameObject("CMPage");
             GetGameObject.transform.SetParent(parent, false);
             GetGameObject.AddComponent<RectTransform>();
-            _ = new CheetoText(GetGameObject.transform, "Page Content");
+            _ = new CMLabel(GetGameObject.transform, "Page Content");
 
-            var button = new CheetoButton(GetGameObject.transform, "Test Button", () => ModConsole.Log("Test Button Clicked!"));
+            var button = new CMButton(GetGameObject.transform, new Vector2(0, 0), "Test Button", () => ModConsole.Log("Test Button Clicked!"));
             button.GetGameObject.transform.position = new Vector3(32, 32, 0);
         }
     }

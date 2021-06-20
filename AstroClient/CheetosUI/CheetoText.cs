@@ -7,13 +7,13 @@
 
 	#endregion Imports
 
-	public class CheetoText
+	public class CMLabel
     {
         public GameObject GetGameObject { get; private set; }
 
-        public CheetoText(Transform parent, string text)
+        public CMLabel(Transform parent, string text)
         {
-            GetGameObject = new GameObject("Text");
+            GetGameObject = new GameObject("Label");
             GetGameObject.AddComponent<RectTransform>();
             GetGameObject.transform.SetParent(parent, false);
             GetGameObject.GetComponent<RectTransform>().position = new Vector3(0, 0, 0);

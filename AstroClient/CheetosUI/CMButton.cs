@@ -1,25 +1,24 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
-
 	#region Imports
 
+	using AstroLibrary.Console;
 	using System;
 	using UnityEngine;
 	using UnityEngine.UI;
 
 	#endregion Imports
 
-	public class CheetoButton
+	public class CMButton
     {
         public GameObject GetGameObject { get; private set; }
 
-        public CheetoButton(Transform parent, string text, Action action)
+        public CMButton(Transform parent, Vector2 position, string text, Action action)
         {
-            GetGameObject = new GameObject($"Button-{text}");
+            GetGameObject = new GameObject($"CMButton-{text}");
             GetGameObject.AddComponent<RectTransform>();
             GetGameObject.transform.SetParent(parent, false);
-            GetGameObject.GetComponent<RectTransform>().position = new Vector3(0, 0, 0);
+            GetGameObject.GetComponent<RectTransform>().position = position;
             GetGameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 0f);
             GetGameObject.GetComponent<RectTransform>().pivot = new Vector2(0.5f, 0.5f);
             GetGameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(200, 200);
@@ -41,7 +40,7 @@
                 ModConsole.Error($"Failed to put action on CheetoButton: {GetGameObject.name}");
             }
 
-            _ = new CheetoText(GetGameObject.transform, text);
+            _ = new CMLabel(GetGameObject.transform, text);
         }
     }
 }
