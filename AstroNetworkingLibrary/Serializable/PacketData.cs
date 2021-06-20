@@ -6,9 +6,9 @@
 	[Serializable, Obfuscation]
     public class PacketData
     {
-        public byte NetworkEventID = 0;
+        public byte NetworkEventID;
 
-        public string TextData = string.Empty;
+		public string TextData = string.Empty;
 
         public PacketData(byte networkEventID, string textData = "")
         {

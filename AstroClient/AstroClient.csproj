@@ -148,7 +148,7 @@
     <Compile Include="Buttons\WorldPickupsBtn.cs" />
     <Compile Include="CheetosUI\CheetoBackground.cs" />
     <Compile Include="CheetosUI\CMButton.cs" />
-    <Compile Include="CheetosUI\CheetoText.cs" />
+    <Compile Include="CheetosUI\CMLabel.cs" />
     <Compile Include="Cheetos\Astro_Interactable.cs" />
     <Compile Include="Cheetos\Astro_Interactable_Extensions.cs" />
     <Compile Include="Cheetos\AvatarSearch.cs" />
