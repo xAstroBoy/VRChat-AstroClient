@@ -4,6 +4,7 @@
 
 	using UnityEngine;
 	using UnityEngine.UI;
+	using VRC.Udon.Serialization.OdinSerializer;
 
 	#endregion Imports
 
@@ -33,5 +34,17 @@
             GetGameObject.GetComponent<Text>().color = _color;
             GetGameObject.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
         }
-    }
+
+		public CMLabel SetText(string text)
+		{
+			GetGameObject.GetComponent<Text>().text = text;
+			return this;
+		}
+
+		public CMLabel SetColor(Color color)
+		{
+			GetGameObject.GetComponent<Text>().color = color;
+			return this;
+		}
+	}
 }
