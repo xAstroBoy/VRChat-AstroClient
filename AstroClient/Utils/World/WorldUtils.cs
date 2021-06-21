@@ -89,35 +89,40 @@
             try
             {
                 List<GameObject> result = new List<GameObject>();
-                var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
-                if (list1 != null && list1.Count() != 0)
-                {
+                var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>()
+						.Select(i => i.gameObject)
+						.Where(x => x.gameObject != null)
+						.Where(x2 => x2.name != "AvatarDebugConsole")
+						.Where(x3 => x3.transform != CameraTweaker.ViewFinder)
+						.ToList();
+				if (list1 != null && list1.Count() != 0)
+				{
                     result = list1;
                 }
                 else
                 {
-                    var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Pickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
-                    if (list2 != null && list2.Count() != 0)
-                    {
+                    var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Pickup>()
+						.Select(i => i.gameObject)
+						.Where(x => x.gameObject != null)
+						.Where(x2 => x2.name != "AvatarDebugConsole")
+						.Where(x3 => x3.transform != CameraTweaker.ViewFinder)
+						.ToList();
+
+					if (list2 != null && list2.Count() != 0)
+					{
                         result = list2;
                     }
                     else
                     {
-                        var list3 = Resources.FindObjectsOfTypeAll<VRCPickup>().Select(i => i.gameObject).Where(x => x.gameObject != null && x.name != "AvatarDebugConsole").ToList();
-                        if (list3 != null && list3.Count() != 0)
-                        {
+                        var list3 = Resources.FindObjectsOfTypeAll<VRCPickup>()
+						.Select(i => i.gameObject)
+						.Where(x => x.gameObject != null)
+						.Where(x2 => x2.name != "AvatarDebugConsole")
+						.Where(x3 => x3.transform != CameraTweaker.ViewFinder)
+						.ToList();
+						if (list3 != null && list3.Count() != 0)
+						{
                             result = list3;
-                        }
-                    }
-                }
-
-                if (result.Count() != 0) // Then Filter the ViewFinder (Player Camera)
-                {
-                    if (CameraTweaker.ViewFinder.gameObject != null)
-                    {
-                        if (result.Contains(CameraTweaker.ViewFinder.gameObject))
-                        {
-                            result.Remove(CameraTweaker.ViewFinder.gameObject);
                         }
                     }
                 }

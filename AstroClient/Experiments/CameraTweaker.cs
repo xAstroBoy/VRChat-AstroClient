@@ -47,7 +47,7 @@
                 }
                 if (ViewFinder != null)
                 {
-                    RigidBodyController controller = ViewFinder.gameObject.GetComponent<RigidBodyController>();
+                    RigidBodyController controller = ViewFinder.gameObject.GetOrAddComponent<RigidBodyController>();
                     if (controller != null)
                     {
                         if (controller.EditMode)
