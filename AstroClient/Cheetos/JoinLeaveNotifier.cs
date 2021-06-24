@@ -39,6 +39,14 @@
             {
                 CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {player.GetDisplayName()} <color=green>Joined</color>!");
             }
+
+			// George's Dumbass
+			if (player.GetUserID().Equals("usr_eba27360-379b-402b-975a-53ee7726f499"))
+			{
+				CheetosHelpers.SendHudNotification($"{player.GetDisplayName()} <color=red>KOS</color>");
+				CheetosHelpers.SendHudNotification($"{player.GetDisplayName()} <color=red>KOS</color>");
+				CheetosHelpers.SendHudNotification($"{player.GetDisplayName()} <color=red>KOS</color>");
+			}
         }
 
         public override void OnPhotonLeft(Photon.Realtime.Player player)
