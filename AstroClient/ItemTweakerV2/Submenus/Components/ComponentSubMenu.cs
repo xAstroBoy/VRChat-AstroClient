@@ -2,6 +2,7 @@
 {
 	using AstroClient.Components;
 	using AstroClient.ItemTweakerV2.Selector;
+	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 
 	public class ComponentSubMenu : Tweaker_Events
@@ -22,6 +23,8 @@
             CrazyObjectManager.KillCrazyObjects();
             RocketManager.KillRockets();
             ObjectSpinnerManager.KillObjectSpinners();
-        }
-    }
+			ItemTweakerV2.Selector.Tweaker_Object.GetGameObjectToEdit().KillCustomComponents(false, false);
+
+		}
+	}
 }
