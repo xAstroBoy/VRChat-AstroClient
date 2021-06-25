@@ -40,17 +40,7 @@
                 return;
             }
             SetupHighlighter();
-            foreach (var obj in ObjMeshRenderers)
-            {
-                if (obj != null && obj.gameObject.active)
-                {
-                    HighLightOptions.AddRenderer(obj);
-                }
-                else
-                {
-                    HighLightOptions.RemoveRenderer(obj);
-                }
-            }
+
         }
 
         private void SetupHighlighter()
@@ -62,31 +52,19 @@
             if (HighLightOptions != null)
             {
                 HighLightOptions.SetHighLighterColor(ESPColor);
-            }
-        }
-
-        public void Update()
-        {
-            if (HighLightOptions == null)
-            {
-                SetupHighlighter();
-            }
-            if (HighLightOptions != null)
-            {
-                // CHECK FOR INTERNAL MESH RENDERERS IF ACTIVE OR DEACTIVE AND ACT ACCORDINGLY BY ADDING/REMOVING IT.
-                foreach (var obj in ObjMeshRenderers)
-                {
-                    if (obj != null && obj.gameObject.active)
-                    {
-                        HighLightOptions.AddRenderer(obj);
-                    }
-                    else
-                    {
-                        HighLightOptions.RemoveRenderer(obj);
-                    }
-                }
-            }
-        }
+				foreach (var obj in ObjMeshRenderers)
+				{
+					if (obj != null && obj.gameObject.active)
+					{
+						HighLightOptions.AddRenderer(obj);
+					}
+					else
+					{
+						HighLightOptions.RemoveRenderer(obj);
+					}
+				}
+			}
+		}
 
         private Color GetDefaultColor()
         {

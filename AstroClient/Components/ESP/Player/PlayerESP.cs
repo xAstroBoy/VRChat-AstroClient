@@ -89,45 +89,11 @@
                         }
                     }
                 }
+				SetPlayerDefaultESP();
             }
         }
 
-        public void LateUpdate()
-        {
-            if (!UseCustomColor)
-            {
-                if (HighLightOptions != null)
-                {
-                    if (AssignedPlayer != null)
-                    {
-                        if (AssignedPlayer.GetAPIUser() != null)
-                        {
-							if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(AssignedPlayer.UserID()))
-							{
-								if (HighLightOptions.highlightColor != BlockedColor)
-								{
-									HighLightOptions.highlightColor = BlockedColor;
-								}
-							}
-							else if (AssignedPlayer.GetAPIUser().GetIsFriend())
-                            {
-                                if (HighLightOptions.highlightColor != FriendColor)
-                                {
-                                    HighLightOptions.highlightColor = FriendColor;
-                                }
-                            }
-                            else
-                            {
-                                if (HighLightOptions.highlightColor != ESPColor)
-                                {
-                                    HighLightOptions.highlightColor = ESPColor;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+
 
 		private Color BlockedColor
 		{
@@ -230,11 +196,65 @@
             }
         }
 
+
+		private void SetPlayerDefaultESP()
+		{
+			if (HighLightOptions != null)
+			{
+				if (AssignedPlayer != null)
+				{
+					if (AssignedPlayer.GetAPIUser() != null)
+					{
+						if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(AssignedPlayer.UserID()))
+						{
+							if (HighLightOptions.highlightColor != BlockedColor)
+							{
+								HighLightOptions.highlightColor = BlockedColor;
+							}
+						}
+						else if (AssignedPlayer.GetAPIUser().GetIsFriend())
+						{
+							if (HighLightOptions.highlightColor != FriendColor)
+							{
+								HighLightOptions.highlightColor = FriendColor;
+							}
+						}
+						else
+						{
+							if (HighLightOptions.highlightColor != ESPColor)
+							{
+								HighLightOptions.highlightColor = ESPColor;
+							}
+						}
+					}
+				}
+			}
+		}
+
         private Transform SelectRegion;
         private UnhollowerBaseLib.Il2CppArrayBase<Renderer> ObjRenderers;
         private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
         private HighlightsFXStandalone HighLightOptions;
-        internal bool UseCustomColor { get; set; } = false;
+		internal bool _UseCustomColor;
+		internal bool UseCustomColor
+		{
+			get
+			{
+				return _UseCustomColor;
+			}
+			set
+			{
+				if (value == _UseCustomColor)
+				{
+					return;
+				}
+				if (!value)
+				{
+					SetPlayerDefaultESP();
+				}
+				_UseCustomColor = value;
+			}
+		}
 
         internal Player AssignedPlayer { get; private set; }
     }

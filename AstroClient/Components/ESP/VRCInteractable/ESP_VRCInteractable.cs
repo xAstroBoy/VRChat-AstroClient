@@ -31,7 +31,7 @@
         // Use this for initialization
         public void Start()
         {
-            SetColor = GetDefaultColor();
+            ESPColor = GetDefaultColor();
             ObjMeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true);
             if (ObjMeshRenderers == null && ObjMeshRenderers.Count() == 0)
             {
@@ -58,44 +58,32 @@
             return ColorUtils.HexToColor("E47D39");
         }
 
-        private void SetupHighlighter()
-        {
-            if (HighLightOptions == null)
-            {
-                HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
-            }
-            if (HighLightOptions != null)
-            {
-                HighLightOptions.SetHighLighterColor(SetColor);
-            }
-        }
+		private void SetupHighlighter()
+		{
+			if (HighLightOptions == null)
+			{
+				HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
+			}
+			if (HighLightOptions != null)
+			{
+				HighLightOptions.SetHighLighterColor(ESPColor);
+				foreach (var obj in ObjMeshRenderers)
+				{
+					if (obj != null && obj.gameObject.active)
+					{
+						HighLightOptions.AddRenderer(obj);
+					}
+					else
+					{
+						HighLightOptions.RemoveRenderer(obj);
+					}
+				}
+			}
+		}
 
-        public void Update()
+		internal void ResetColor()
         {
-            if (HighLightOptions == null)
-            {
-                SetupHighlighter();
-            }
-            if (HighLightOptions != null)
-            {
-                // CHECK FOR INTERNAL MESH RENDERERS IF ACTIVE OR DEACTIVE AND ACT ACCORDINGLY BY ADDING/REMOVING IT.
-                foreach (var obj in ObjMeshRenderers)
-                {
-                    if (obj != null && obj.gameObject.active)
-                    {
-                        HighLightOptions.AddRenderer(obj);
-                    }
-                    else
-                    {
-                        HighLightOptions.RemoveRenderer(obj);
-                    }
-                }
-            }
-        }
-
-        internal void ResetColor()
-        {
-            SetColor = GetDefaultColor();
+            ESPColor = GetDefaultColor();
             if (HighLightOptions != null)
             {
                 HighLightOptions.SetHighLighterColor(GetDefaultColor());
@@ -119,7 +107,7 @@
 
         internal void ChangeColor(Color newcolor)
         {
-            SetColor = newcolor;
+            ESPColor = newcolor;
             if (HighLightOptions != null)
             {
                 HighLightOptions.SetHighLighterColor(newcolor);
@@ -129,7 +117,7 @@
         internal void ChangeColor(string HexColor)
         {
             Color hextocolor = ColorUtils.HexToColor(HexColor);
-            SetColor = hextocolor;
+            ESPColor = hextocolor;
             if (HighLightOptions != null)
             {
                 HighLightOptions.SetHighLighterColor(hextocolor);
@@ -148,7 +136,7 @@
             }
         }
 
-        internal Color SetColor { get; private set; }
+        internal Color ESPColor { get; private set; }
         internal HighlightsFXStandalone HighLightOptions { get; private set; }
         private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
     }

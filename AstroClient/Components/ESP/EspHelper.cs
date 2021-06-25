@@ -1,4 +1,5 @@
-﻿namespace AstroClient.Components
+﻿
+namespace AstroClient.Components
 {
 	using System.Collections.Generic;
 	using UnityEngine;

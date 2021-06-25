@@ -86,7 +86,6 @@
 			RegisterComponent<ScrollMenuListener>();
 
 			RegisterComponent<EmojiBypasser>();
-
 		}
 
 		public override void OnUpdate()
