@@ -12,6 +12,8 @@
 
 	public class BClubWorld : GameEvents
     {
+		public static GameObject VIPRoom;
+
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
             if (id == WorldIds.BClub)
@@ -27,12 +29,23 @@
                     CreateButtonGroup(5, new Vector3(-68.77336f, 15.78151f, -0.3279915f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
                     CreateButtonGroup(6, new Vector3(-67.04791f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
 
-                    // Remove stupid warning in elevator.
-                    var warning = GameObjectFinder.Find("Lobby/Warning");
-                    if (warning != null)
-                    {
-                        warning.SetActive(false);
-                    }
+					// nLobby/Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/VIP Out Walls
+
+					// VIP Room
+					VIPRoom = GameObjectFinder.Find("Bedroom VIP");
+					CreateVIPEntryButton(new Vector3(-54.159f, 16.0598f, -1.6625f), new Quaternion(0.1432f, 5.3329f, -0.4984204f, 92.1757f));
+
+					// Click stupid warning button in elevator.
+					var elevatorButton = GameObjectFinder.Find("Lobby/Entrance Corridor/Udon/Warning/Enter - BlueButtonWide/Button Interactable");
+					if (elevatorButton != null)
+					{
+						var udonComp = elevatorButton.GetComponent<UdonBehaviour>();
+						if (udonComp != null)
+						{
+							udonComp.Interact();
+						}
+					}
+
                     RemovePrivacyBlocksOnRooms(1);
                     RemovePrivacyBlocksOnRooms(2);
                     RemovePrivacyBlocksOnRooms(3);
@@ -46,6 +59,31 @@
                 }
             }
         }
+
+		private void CreateVIPEntryButton(Vector3 position, Quaternion rotation)
+		{
+			var entryPosition = new Vector3(140.9367f, -0.5667f, 0.0696f);
+			var entryRotation = Quaternion.Euler(0f, 90f, 0f);
+
+			// Later we'll make the button nicer ofc
+			var entryButton = GameObject.CreatePrimitive(PrimitiveType.Cube);
+			entryButton.name = "EntryButton";
+			entryButton.transform.position = position;
+			entryButton.transform.rotation = rotation;
+			entryButton.transform.localScale = new Vector3(0.1f, 0.1f, 0.25f);
+			entryButton.AddComponent<Astro_Interactable>();
+			entryButton.GetComponent<Astro_Interactable>().Action = new Action(() =>
+			{
+				if (VIPRoom != null && !VIPRoom.active)
+				{
+					VIPRoom.SetActive(true);
+				}
+
+				Utils.LocalPlayer.gameObject.transform.position = entryPosition;
+				Utils.LocalPlayer.gameObject.transform.rotation = entryRotation;
+			});
+
+		}
 
         private void RemovePrivacyBlocksOnRooms(int roomid)
         {
