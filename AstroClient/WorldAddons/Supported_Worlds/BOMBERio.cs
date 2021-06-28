@@ -6,7 +6,9 @@
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
 	using RubyButtonAPI;
+	using System.Collections;
 	using System.Collections.Generic;
+	using System.Linq;
 	using UnityEngine;
 	using VRC;
 	using static AstroClient.Variables.CustomLists;
@@ -22,6 +24,14 @@
 			Always_ShootBomb_3_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 1.5f, "Shoot Bomb 3", () => { Override_ShootBomb_3_Toggle = true; }, "Shoot Bomb 3", () => { Override_ShootBomb_3_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
 			Always_ShootBomb_4_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 2, "Shoot First Player Bomb", () => { Override_ShootBomb_4_Toggle = true; }, "Shoot First Player Bomb", () => { Override_ShootBomb_4_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
 			Always_ShootBomb_5_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 2.5f, "Shoot Rocket", () => { Override_ShootBomb_5_Toggle = true; }, "Shoot Rocket", () => { Override_ShootBomb_5_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
+
+			new QMSingleButton(BOMBERioCheatsPage, 2, 0f, "Harvest 10 Crystals", () => { HarvestQuads(10); }, "Harvest some Quads!", null, null, true);
+			new QMSingleButton(BOMBERioCheatsPage, 2, 0.5f, "Harvest 20 Crystals", () => { HarvestQuads(20); }, "Harvest some Quads!", null, null, true);
+			new QMSingleButton(BOMBERioCheatsPage, 2, 1, "Harvest 50 Crystals", () => { HarvestQuads(50); }, "Harvest some Quads!", null, null, true);
+			new QMSingleButton(BOMBERioCheatsPage, 2, 1.5f, "Harvest 100 Crystals", () => { HarvestQuads(100); }, "Harvest some Quads!", null, null, true);
+			new QMSingleButton(BOMBERioCheatsPage, 2, 2f, "Harvest 500 Crystals", () => { HarvestQuads(500); }, "Harvest some Quads!", null, null, true);
+			new QMSingleButton(BOMBERioCheatsPage, 2, 2.5f, "Harvest 1000 Crystals", () => { HarvestQuads(1000); }, "Harvest some Quads!", null, null, true);
+
 		}
 
 		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
@@ -30,6 +40,7 @@
 			{
 				ModConsole.Log($"Recognized {Name} World, Enabling Gun Projectile Hijacker..");
 				isBomberIO = true;
+
 			}
 			else
 			{
@@ -39,10 +50,78 @@
 
 		private bool isBomberIO = false;
 
+
+
+		public static GameObject GetRandomQuad()
+		{
+			foreach(var item in GameObjectFinder.FindRootSceneObject("ItemManager").transform.Get_Childs())
+			{
+				ModConsole.DebugLog($"Grabbed Quad : {item.name}");
+				return item.gameObject;
+			}
+			return null;
+		}
+		private static GameObject _Quad;
+		private static GameObject Quad
+		{
+			get
+			{
+				if(_Quad == null)
+				{
+					return 	_Quad = GetRandomQuad();
+				}
+				return _Quad;
+			}
+		}
+
+		private static bool isHarvesting = false;
+		private static bool isInGame = false;
+		public static void HarvestQuads(int amount)
+		{
+			if (!isHarvesting)
+			{
+				MelonLoader.MelonCoroutines.Start(HarvestQuadsRoutine(amount));
+				isHarvesting = true;
+			}
+		}
+
+		public static IEnumerator HarvestQuadsRoutine(int amount)
+		{
+			while (Quad == null) yield return null;
+			int i = 0;
+			while (i <= amount && isInGame)
+			{
+				Quad?.SetActive(true);
+				Quad?.TeleportToMe(HumanBodyBones.RightFoot);
+				i++;
+				yield return null;
+			}
+			isHarvesting = false;
+			yield return null;
+		}
+
+
+
+
+
+		private static void OnGameJoinEvent()
+		{
+			isInGame = true;
+		}
+
+		private static void OnGameExitStageEvent()
+		{
+			isInGame = false;
+
+		}
+
+
+
 		public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
 		{
 			if (isBomberIO)
 			{
+				
 				if (sender.DisplayName() == Utils.LocalPlayer.GetPlayer().DisplayName())
 				{
 					if (obj.name.ToLower().StartsWith("followobj"))
@@ -52,8 +131,27 @@
 						{
 							if (action.ToLower().Contains("join"))
 							{
-								// Find Everything .
 								FindEverything(obj);
+								OnGameJoinEvent();
+							}
+							else if (action.ToLower().Contains("ExitStage"))
+							{
+								FindEverything(obj);
+								OnGameExitStageEvent();
+							}
+						}
+						else
+						{
+							if (obj == AssignedNode)
+							{
+								if (action.ToLower().Contains("join"))
+								{
+									OnGameJoinEvent();
+								}
+								else if (action.ToLower().Contains("ExitStage"))
+								{
+									OnGameExitStageEvent();
+								}
 							}
 						}
 					}
@@ -63,7 +161,7 @@
 
 		public override void OnUpdate()
 		{
-			if (isBomberIO)
+			if (isBomberIO && isInGame)
 			{
 				if (control != null)
 				{
@@ -202,6 +300,9 @@
 			Override_ShootBomb_5_Toggle = false;
 			control = null;
 			HasShot = false;
+			_Quad = null;
+			isInGame = false;
+			isHarvesting = false;
 		}
 
 		public static PickupController control;
@@ -420,5 +521,10 @@
 				}
 			}
 		}
+
+
+
+
+
 	}
 }

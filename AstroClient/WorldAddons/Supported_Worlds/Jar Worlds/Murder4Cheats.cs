@@ -6,7 +6,6 @@
 	using AstroClient.Startup.Buttons;
 	using AstroClient.UdonExploits;
 	using AstroClient.Variables;
-	using AstroClient.Variables;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;

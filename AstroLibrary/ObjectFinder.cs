@@ -24,6 +24,13 @@
 			}
 		}
 
+
+		public static List<GameObject> GetRootSceneObjects()
+		{
+			return SceneManager.GetActiveScene().GetRootGameObjects().ToList();
+		}
+
+
 		public static GameObject FindRootSceneObject(string name)
 		{
 			GameObject obj = SceneManager.GetActiveScene().GetRootGameObjects().Where(x => x.gameObject.name == name).First();
