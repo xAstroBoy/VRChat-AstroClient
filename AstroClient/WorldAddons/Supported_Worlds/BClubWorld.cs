@@ -4,6 +4,7 @@
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
+	using Boo.Lang.Compiler.TypeSystem;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -32,7 +33,13 @@
 					// nLobby/Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/VIP Out Walls
 
 					// VIP Room
-					VIPRoom = GameObjectFinder.InactiveFind("Bedroom VIP"); // Had issues when using normal finder
+					VIPRoom = GameObjectFinder.FindRootSceneObject("Bedroom VIP");
+
+					if (VIPRoom == null)
+					{
+						ModConsole.Error("VIP Bedroom was not found!");
+					}
+
 					CreateVIPEntryButton(new Vector3(-54.159f, 16.0598f, -1.6625f), new Quaternion(0.1432f, 5.3329f, -0.4984204f, 92.1757f));
 
 					// Click stupid warning button in elevator.
@@ -74,7 +81,7 @@
 			entryButton.AddComponent<Astro_Interactable>();
 			entryButton.GetComponent<Astro_Interactable>().Action = new Action(() =>
 			{
-				if (VIPRoom != null && !VIPRoom.active)
+				if (VIPRoom != null)
 				{
 					VIPRoom.SetActive(true);
 				}

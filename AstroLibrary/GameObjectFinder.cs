@@ -75,14 +75,20 @@
 			}
 		}
 
-		[Obsolete("Avoid Using This, use Another approach Unless Really required.")]
+		/// <summary>
+		/// This is obsolete.
+		/// Use root object finder, then find the object from there
+		/// </summary>
+		/// <param name="path"></param>
+		/// <returns></returns>
+		[Obsolete ("Use root object finder, then find the object from there")]
 		public static GameObject InactiveFind(string path)
 		{
 			foreach (GameObject gameObj in Resources.FindObjectsOfTypeAll<GameObject>())
 			{
-				//ModConsole.DebugLog($"SPAM: {GetGameObjectPath(gameObj)}");
 				if (GetGameObjectPath(gameObj).Equals(path))
 				{
+					ModConsole.Log($"FOUND: {GetGameObjectPath(gameObj)}");
 					return gameObj;
 				}
 			}
