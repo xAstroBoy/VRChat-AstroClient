@@ -72,14 +72,7 @@
 			var entryPosition = new Vector3(140.9367f, -0.5667f, 0.0696f);
 			var entryRotation = Quaternion.Euler(0f, 90f, 0f);
 
-			// Later we'll make the button nicer ofc
-			var entryButton = GameObject.CreatePrimitive(PrimitiveType.Cube);
-			entryButton.name = "EntryButton";
-			entryButton.transform.position = position;
-			entryButton.transform.rotation = rotation;
-			entryButton.transform.localScale = new Vector3(0.1f, 0.1f, 0.25f);
-			entryButton.AddComponent<Astro_Interactable>();
-			entryButton.GetComponent<Astro_Interactable>().Action = new Action(() =>
+			_ = new WorldButton(position, rotation, "Enter VIP Room", () =>
 			{
 				if (VIPRoom != null)
 				{
@@ -89,7 +82,6 @@
 				Utils.LocalPlayer.gameObject.transform.position = entryPosition;
 				Utils.LocalPlayer.gameObject.transform.rotation = entryRotation;
 			});
-
 		}
 
         private void RemovePrivacyBlocksOnRooms(int roomid)
