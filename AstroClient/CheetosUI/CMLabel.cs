@@ -12,18 +12,9 @@
 	{
         public CMLabel(Transform parent, Vector2 position, string text, Color? color = null, int minTextSize = 12, int maxTextSize = 70) : base(parent, position)
         {
-			Color _color;
+			Color _color = color == null ? Color.black : (Color)color;
 
-			if (color == null)
-			{
-				_color = Color.black;
-			}
-			else
-			{
-				_color = (Color)color;
-			}
-
-            GetGameObject.name = "CMLabel";
+			GetGameObject.name = "CMLabel";
             GetGameObject.AddComponent<Text>();
             GetGameObject.GetComponent<Text>().text = text;
             GetGameObject.GetComponent<Text>().font = Font.GetDefault();

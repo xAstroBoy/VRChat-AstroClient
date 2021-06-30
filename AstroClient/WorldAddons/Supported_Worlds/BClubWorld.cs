@@ -32,7 +32,7 @@
 					// nLobby/Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/VIP Out Walls
 
 					// VIP Room
-					VIPRoom = GameObjectFinder.Find("Bedroom VIP");
+					VIPRoom = GameObjectFinder.InactiveFind("Bedroom VIP"); // Had issues when using normal finder
 					CreateVIPEntryButton(new Vector3(-54.159f, 16.0598f, -1.6625f), new Quaternion(0.1432f, 5.3329f, -0.4984204f, 92.1757f));
 
 					// Click stupid warning button in elevator.
