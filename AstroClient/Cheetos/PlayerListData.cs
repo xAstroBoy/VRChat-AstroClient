@@ -104,12 +104,6 @@
 					stringBuilder.Append("<color=red>[B]</color>");
 				}
 
-				// George's Dumbass
-				if (Player.UserID().Equals("usr_eba27360-379b-402b-975a-53ee7726f499"))
-				{
-					stringBuilder.Append("<color=brown>[GEORGE]</color>");
-				}
-
 				return $"{stringBuilder.ToString()}\n";
             }
         }
