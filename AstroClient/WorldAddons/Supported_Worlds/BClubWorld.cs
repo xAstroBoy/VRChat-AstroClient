@@ -40,7 +40,7 @@
 						ModConsole.Error("VIP Bedroom was not found!");
 					}
 
-					CreateVIPEntryButton(new Vector3(-54.159f, 16.0598f, -1.6625f), new Quaternion(0.1432f, 5.3329f, -0.4984204f, 92.1757f));
+					CreateVIPEntryButton(new Vector3(-54.159f, 16.0598f, -1.695f), Quaternion.Euler(0f, 90f, 0f));
 
 					// Click stupid warning button in elevator.
 					var elevatorButton = GameObjectFinder.Find("Lobby/Entrance Corridor/Udon/Warning/Enter - BlueButtonWide/Button Interactable");
@@ -50,6 +50,10 @@
 						if (udonComp != null)
 						{
 							udonComp.Interact();
+						}
+						else
+						{
+							ModConsole.Error("Elevator Button Not Found!");
 						}
 					}
 
@@ -72,7 +76,7 @@
 			var entryPosition = new Vector3(140.9367f, -0.5667f, 0.0696f);
 			var entryRotation = Quaternion.Euler(0f, 90f, 0f);
 
-			_ = new WorldButton(position, rotation, "Enter VIP Room", () =>
+			_ = new WorldButton(position, rotation, "Enter\nVIP Room", () =>
 			{
 				if (VIPRoom != null)
 				{

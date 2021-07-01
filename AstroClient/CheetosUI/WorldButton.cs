@@ -1,7 +1,11 @@
 ﻿namespace AstroClient
 {
+	using AstroLibrary;
 	using System;
+	using System.Reflection;
+	using TMPro;
 	using UnityEngine;
+	using UnityEngine.UI;
 
 	public class WorldButton
 	{
@@ -16,10 +20,55 @@
 
 			gameObject.transform.position = position;
 			gameObject.transform.rotation = rotation;
-			gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.25f);
+			gameObject.transform.localScale = new Vector3(0.25f, 0.1f, 0.1f);
 
-			interactable = gameObject.AddComponent<Astro_Interactable>();
+			var front = GameObject.CreatePrimitive(PrimitiveType.Quad);
+			front.name = "Front";
+
+			front.transform.parent = gameObject.transform;
+			front.transform.position = gameObject.transform.position;
+			front.transform.localPosition -= new Vector3(0f, 0f, 0.51f);
+			front.transform.rotation = gameObject.transform.rotation;
+			front.transform.localScale = new Vector3(1f, 1f, 1f);
+
+			interactable = front.AddComponent<Astro_Interactable>();
 			interactable.Action = action;
+
+			var front_renderer = front.GetComponent<Renderer>();
+			front_renderer.material = new Material(Shader.Find("Standard"))
+			{
+				color = Color.cyan,
+				mainTexture = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.button.png")),
+				globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack
+			};
+
+			var front_canvas = new GameObject("Canvas");
+
+			front_canvas.transform.parent = front.transform;
+			front_canvas.transform.position = front.transform.position;
+			front_canvas.transform.localPosition -= new Vector3(0f, 0f, 0.001f);
+			front_canvas.transform.rotation = front.transform.rotation;
+			front_canvas.layer = LayerMask.NameToLayer("UI");
+			front_canvas.AddComponent<Canvas>();
+			front_canvas.AddComponent<CanvasScaler>();
+
+
+			var textObject = new GameObject("Text");
+
+			textObject.transform.parent = front_canvas.transform;
+			textObject.transform.position = front_canvas.transform.position;
+			textObject.transform.rotation = front_canvas.transform.rotation;
+			textObject.transform.localScale = new Vector3(0.01f, 0.01f, 0.004f);
+			textObject.layer = LayerMask.NameToLayer("UI");
+			textObject.AddComponent<CanvasRenderer>();
+
+			var front_text = textObject.AddComponent<TextMeshPro>();
+			front_text.text = label;
+			front_text.richText = true;
+			front_text.alignment = TextAlignmentOptions.Center;
+			front_text.enableAutoSizing = true;
+			front_text.fontSizeMin = 0f;
+			front_text.fontSizeMax = 72f;
 		}
 	}
 }
