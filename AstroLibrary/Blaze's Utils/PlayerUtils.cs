@@ -645,17 +645,17 @@
 
         #region Mod Methods
 
-        internal static string GetTrueRank(this APIUser instance)
-        {
-            var apiUser = Modules.TrueRanks.CachedApiUsers.Find(x => x.id == instance.id) ?? instance;
-            return GetRank(apiUser);
-        }
+        //internal static string GetTrueRank(this APIUser instance)
+        //{
+        //    var apiUser = Modules.TrueRanks.CachedApiUsers.Find(x => x.id == instance.id) ?? instance;
+        //    return GetRank(apiUser);
+        //}
 
-        internal static string GetTrueRankColor(this APIUser instance)
-        {
-            var apiUser = Modules.TrueRanks.CachedApiUsers.Find(x => x.id == instance.id) ?? instance;
-            return GetRankColor(apiUser);
-        }
+        //internal static string GetTrueRankColor(this APIUser instance)
+        //{
+        //    var apiUser = Modules.TrueRanks.CachedApiUsers.Find(x => x.id == instance.id) ?? instance;
+        //    return GetRankColor(apiUser);
+        //}
         #endregion
     }
 }

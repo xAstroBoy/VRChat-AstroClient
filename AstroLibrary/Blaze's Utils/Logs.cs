@@ -48,16 +48,16 @@
             {
                 DebugLogs.RemoveAt(0);
             }
-            QM.DM.SetText(string.Join("\n", DebugLogs.Take(25)));
+            //QM.DM.SetText(string.Join("\n", DebugLogs.Take(25)));
         }
 
         // Hud Logs
-        private static string lastHud = string.Empty;
-        public static void Hud(string message)
-        {
-            if (message == lastHud) return;
-            lastHud = message;
-            Modules.Hud.Display(message, 5f);
-        }
+        //private static string lastHud = string.Empty;
+        //public static void Hud(string message)
+        //{
+        //    if (message == lastHud) return;
+        //    lastHud = message;
+        //    Modules.Hud.Display(message, 5f);
+        //}
     }
 }

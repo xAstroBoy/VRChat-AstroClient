@@ -10,24 +10,24 @@
 	using VRC.SDKBase;
 	using VRC.Udon;
 
-	internal static class WorldUtils
+	public static class WorldUtils
     {
-        internal static IEnumerable<Player> GetPlayers()
+        public static IEnumerable<Player> GetPlayers()
         {
             return PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
         }
 
-        internal static List<Player> GetPlayers(this PlayerManager Instance)
+        public static List<Player> GetPlayers(this PlayerManager Instance)
         {
             return Instance.field_Private_List_1_Player_0.ToArray().ToList();
         }
 
-        internal static int GetPlayerCount()
+        public static int GetPlayerCount()
         {
             return PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.Count;
         }
 
-        internal static VRCPlayer GetInstanceMaster()
+        public static VRCPlayer GetInstanceMaster()
         {
             foreach (Player p in GetPlayers())
             {
@@ -39,33 +39,33 @@
             return null;
         }
 
-        internal static ApiWorld GetCurrentWorld()
+        public static ApiWorld GetCurrentWorld()
         {
             return RoomManager.field_Internal_Static_ApiWorld_0;
         }
 
-        internal static ApiWorldInstance GetCurrentInstance()
+        public static ApiWorldInstance GetCurrentInstance()
         {
             return RoomManager.field_Internal_Static_ApiWorldInstance_0;
         }
 
-        internal static bool IsInWorld()
+        public static bool IsInWorld()
         {
             if (RoomManager.field_Internal_Static_ApiWorld_0 != null && RoomManager.field_Internal_Static_ApiWorldInstance_0 != null) return true;
             else return false;
         }
 
-        internal static string GetWorldID()
+        public static string GetWorldID()
         {
             return RoomManager.field_Internal_Static_ApiWorld_0.id;
         }
 
-        internal static string GetFullID()
+        public static string GetFullID()
         {
             return $"{RoomManager.field_Internal_Static_ApiWorld_0.id}#{RoomManager.field_Internal_Static_ApiWorldInstance_0.id}";
         }
 
-        internal static string GetSDKType()
+        public static string GetSDKType()
         {
             if (GetSDK2Descriptor() != null)
                 return "SDK2";
@@ -75,7 +75,7 @@
                 return "not found";
         }
 
-        internal static void JoinWorld(string fullID)
+        public static void JoinWorld(string fullID)
         {
             if (!fullID.ToLower().StartsWith("wrld_") || !fullID.ToLower().Contains('#'))
             {
@@ -89,7 +89,7 @@
             }
         }
 
-        internal static void JoinWorld(string worldID, string instanceID)
+        public static void JoinWorld(string worldID, string instanceID)
         {
             if (!worldID.ToLower().StartsWith("wrld_"))
             {
@@ -103,7 +103,7 @@
             }
         }
 
-        internal static bool IsDefaultScene(string name)
+        public static bool IsDefaultScene(string name)
         {
             var lower = name.ToLower();
             string[] scenes = { "application2", "ui", "empty", "dontdestroyonload", "hideanddontsave", "samplescene" };
@@ -112,62 +112,62 @@
             else return false;
         }
 
-        internal static VRCSDK2.VRC_SceneDescriptor GetSDK2Descriptor()
+        public static VRCSDK2.VRC_SceneDescriptor GetSDK2Descriptor()
         {
             return UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
         }
 
-        internal static VRC.SDK3.Components.VRCSceneDescriptor GetSDK3Descriptor()
+        public static VRC.SDK3.Components.VRCSceneDescriptor GetSDK3Descriptor()
         {
             return UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
         }
 
-        internal static VRC_Pickup[] GetPickups()
+        public static VRC_Pickup[] GetPickups()
         {
             return Resources.FindObjectsOfTypeAll<VRC_Pickup>();
         }
 
-        internal static VRC_Pickup[] GetActivePickups()
+        public static VRC_Pickup[] GetActivePickups()
         {
             return UnityEngine.Object.FindObjectsOfType<VRC_Pickup>();
         }
 
-        internal static VRC_Interactable[] GetInteractables()
+        public static VRC_Interactable[] GetInteractables()
         {
             return Resources.FindObjectsOfTypeAll<VRC_Interactable>();
         }
 
-        internal static VRC_Interactable[] GetActiveInteractables()
+        public static VRC_Interactable[] GetActiveInteractables()
         {
             return UnityEngine.Object.FindObjectsOfType<VRC_Interactable>();
         }
 
-        internal static PostProcessVolume[] GetBloom()
+        public static PostProcessVolume[] GetBloom()
         {
             return Resources.FindObjectsOfTypeAll<PostProcessVolume>();
         }
 
-        internal static PostProcessVolume[] GetActiveBloom()
+        public static PostProcessVolume[] GetActiveBloom()
         {
             return UnityEngine.Object.FindObjectsOfType<PostProcessVolume>();
         }
 
-        internal static UdonBehaviour[] GetUdonScripts()
+        public static UdonBehaviour[] GetUdonScripts()
         {
             return Resources.FindObjectsOfTypeAll<UdonBehaviour>();
         }
 
-        internal static UdonBehaviour[] GetActiveUdonScripts()
+        public static UdonBehaviour[] GetActiveUdonScripts()
         {
             return UnityEngine.Object.FindObjectsOfType<UdonBehaviour>();
         }
 
-        internal static VRC_MirrorReflection[] GetMirrors()
+        public static VRC_MirrorReflection[] GetMirrors()
         {
             return Resources.FindObjectsOfTypeAll<VRC_MirrorReflection>();
         }
 
-        internal static VRC_MirrorReflection[] GetActiveMirrors()
+        public static VRC_MirrorReflection[] GetActiveMirrors()
         {
             return UnityEngine.Object.FindObjectsOfType<VRC_MirrorReflection>();
         }
