@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Blaze.Utils
+﻿namespace Blaze.Utils
 {
-    internal class DiscordUtils
+	using System;
+	using System.Runtime.InteropServices;
+
+	internal class DiscordUtils
     {
         [DllImport("Blaze's Mod\\Dependencies\\Discord-RPC.dll", CallingConvention = CallingConvention.Cdecl, EntryPoint = "Discord_Initialize")]
         public static extern void Initialize(string applicationId, ref EventHandlers handlers, bool autoRegister, string optionalSteamId);

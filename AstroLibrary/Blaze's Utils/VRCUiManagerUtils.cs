@@ -1,18 +1,15 @@
-﻿using MelonLoader;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using UnhollowerRuntimeLib.XrefScans;
-using UnityEngine;
-using VRC.Core;
-using VRC.UI;
-
-namespace Blaze.Utils
+﻿namespace Blaze.Utils
 {
-    internal static class VRCUiManagerUtils
+	using MelonLoader;
+	using System;
+	using System.Linq;
+	using System.Reflection;
+	using UnhollowerRuntimeLib.XrefScans;
+	using UnityEngine;
+	using VRC.Core;
+	using VRC.UI;
+
+	internal static class VRCUiManagerUtils
     {
         internal static VRCUiPage ShowScreen(this VRCUiManager Instance, VRCUiPage page)
         {

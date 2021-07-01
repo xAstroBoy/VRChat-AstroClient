@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-
-namespace Blaze.Utils
+﻿namespace Blaze.Utils
 {
-    public static class FileManager
+	using System;
+	using System.IO;
+	using UnityEngine;
+
+	public static class FileManager
     {
         public static string ModPath = Directory.GetParent(Application.dataPath) + "\\Blaze's Mod";
         public static string ConfigsPath = ModPath + "\\Configs";

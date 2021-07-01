@@ -1,20 +1,12 @@
-﻿using Photon.Realtime;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.VR;
-using UnityEngine.XR;
-using VRC;
-using VRC.Core;
-using VRC.SDKBase;
-using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
-
-namespace Blaze.Utils
+﻿namespace Blaze.Utils
 {
-    internal static class PlayerUtils
+	using UnityEngine;
+	using UnityEngine.XR;
+	using VRC.Core;
+	using VRC.SDKBase;
+	using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
+
+	internal static class PlayerUtils
     {
         #region CurrentUser
         internal static VRCPlayer GetCurrentUser()

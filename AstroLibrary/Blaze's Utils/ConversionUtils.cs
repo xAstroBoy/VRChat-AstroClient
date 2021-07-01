@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-
-namespace Blaze.Utils
+﻿namespace Blaze.Utils
 {
-    internal class ConversionUtils
+	using UnityEngine;
+
+	internal class ConversionUtils
     {
         internal static Vector3 StringToVector3(string sVector)
         {

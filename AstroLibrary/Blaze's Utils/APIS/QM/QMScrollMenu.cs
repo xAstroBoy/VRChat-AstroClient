@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
-using Button = UnityEngine.UI.Button;
-
-namespace Blaze.API
+﻿namespace Blaze.API
 {
-    public class QMScrollMenu
+	using System;
+	using System.Collections.Generic;
+	using UnityEngine;
+	using UnityEngine.UI;
+	using Button = UnityEngine.UI.Button;
+
+	public class QMScrollMenu
     {
         public class ScrollObject
         {

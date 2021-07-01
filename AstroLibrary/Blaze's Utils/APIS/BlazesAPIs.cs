@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using VRC;
-
-namespace Blaze.API
+﻿namespace Blaze.API
 {
-    internal static class BlazesAPIs
+	using System.Collections.Generic;
+	using UnityEngine;
+	using VRC;
+
+	internal static class BlazesAPIs
     {
         internal static string Identifier = "BlazesMod";
 

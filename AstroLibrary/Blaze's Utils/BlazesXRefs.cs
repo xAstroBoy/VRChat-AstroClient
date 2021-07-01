@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using UnhollowerRuntimeLib.XrefScans;
-
-namespace Blaze.Utils
+﻿namespace Blaze.Utils
 {
-    //[Obfuscation(Exclude = true, ApplyToMembers = true, StripAfterObfuscation = true)]
-    internal static class BlazesXRefs
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Reflection;
+	using UnhollowerRuntimeLib.XrefScans;
+
+	//[Obfuscation(Exclude = true, ApplyToMembers = true, StripAfterObfuscation = true)]
+	internal static class BlazesXRefs
     {
         private static MethodInfo _OpenedQMMethod;
         private static MethodInfo _ClosedQMMethod;

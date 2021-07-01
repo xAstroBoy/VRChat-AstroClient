@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Blaze.Utils
+﻿namespace Blaze.Utils
 {
-    public static class AudioUtils
+	using System;
+	using System.Runtime.InteropServices;
+
+	public static class AudioUtils
     {
         [DllImport("user32.dll")]
         static extern void keybd_event(byte bVk, byte bScan, UInt32 dwFlags, UInt32 dwExtraInfo);

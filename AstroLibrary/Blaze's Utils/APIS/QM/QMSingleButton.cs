@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
-
-namespace Blaze.API
+﻿namespace Blaze.API
 {
-    public class QMSingleButton : QMButtonBase
+	using System;
+	using UnityEngine;
+	using UnityEngine.Events;
+	using UnityEngine.UI;
+
+	public class QMSingleButton : QMButtonBase
     {
         public QMSingleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool HalfButton = false)
         {

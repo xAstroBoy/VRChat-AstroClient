@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.UI;
-using VRC.Core;
-
-namespace Blaze.API
+﻿namespace Blaze.API
 {
-    public class SMList
+	using UnityEngine;
+	using UnityEngine.UI;
+	using VRC.Core;
+
+	public class SMList
     {
         public GameObject GameObject;
         public UiVRCList UiVRCList;

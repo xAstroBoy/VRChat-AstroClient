@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace Blaze.API
+﻿namespace Blaze.API
 {
-    class SMText
+	using UnityEngine;
+	using UnityEngine.UI;
+
+	class SMText
     {
         protected GameObject textObject;
         protected Text text;

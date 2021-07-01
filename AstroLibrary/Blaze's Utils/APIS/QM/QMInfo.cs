@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.UI;
-
-namespace Blaze.API
+﻿namespace Blaze.API
 {
-    public class QMInfo
+	using System.Threading.Tasks;
+	using UnityEngine;
+	using UnityEngine.Networking;
+	using UnityEngine.UI;
+
+	public class QMInfo
     {
         public GameObject InfoObject;
         public Text InfoText;

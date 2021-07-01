@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Blaze.Utils
+﻿namespace Blaze.Utils
 {
-    internal static class PhotonUtils
+	using System.Collections.Generic;
+
+	internal static class PhotonUtils
     {
         public static string GetUserID(this Photon.Realtime.Player player)
         {

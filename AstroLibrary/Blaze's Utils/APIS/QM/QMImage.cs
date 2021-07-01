@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.Networking;
-using UnityEngine.UI;
-
-namespace Blaze.API
+﻿namespace Blaze.API
 {
-    public class QMImage
+	using System.Threading.Tasks;
+	using UnityEngine;
+	using UnityEngine.Networking;
+	using UnityEngine.UI;
+
+	public class QMImage
     {
         protected GameObject ImageObject;
         protected RawImage Image;

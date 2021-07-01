@@ -1,13 +1,13 @@
-﻿using Blaze.Utils;
-using System;
-using System.Collections.Generic;
-using System.IO;
-
-// Credit to Dayoftheplay for this.
+﻿// Credit to Dayoftheplay for this.
 
 namespace DayClientML2.Modules.Misc
 {
-    internal class ModerationHelper
+	using Blaze.Utils;
+	using System;
+	using System.Collections.Generic;
+	using System.IO;
+
+	internal class ModerationHelper
     {
         public class ModerationEntry
         {

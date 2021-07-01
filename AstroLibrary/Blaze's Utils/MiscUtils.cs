@@ -1,24 +1,22 @@
-﻿using MelonLoader;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-using VRC;
-using VRC.Core;
-using VRC.SDK3.Components;
-using VRC.SDKBase;
-using VRC.UI;
-
-namespace Blaze.Utils
+﻿namespace Blaze.Utils
 {
-    internal static class MiscUtils
+	using MelonLoader;
+	using System;
+	using System.Collections;
+	using System.Collections.Generic;
+	using System.Diagnostics;
+	using System.IO;
+	using System.Linq;
+	using System.Reflection;
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
+	using VRC;
+	using VRC.Core;
+	using VRC.SDK3.Components;
+	using VRC.SDKBase;
+	using VRC.UI;
+
+	internal static class MiscUtils
     {
         internal static void ForceQuit()
         {

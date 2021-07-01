@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.UI;
-
-namespace Blaze.API
+﻿namespace Blaze.API
 {
-    class SMButton
+	using System;
+	using UnityEngine;
+	using UnityEngine.UI;
+
+	class SMButton
     {
         public GameObject button;
         public Text text;

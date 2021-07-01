@@ -1,17 +1,11 @@
-﻿using Blaze.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
-using VRC;
-
-namespace Blaze.API
+﻿namespace Blaze.API
 {
-    public class BlazeTag
+	using System.Linq;
+	using TMPro;
+	using UnityEngine;
+	using VRC;
+
+	public class BlazeTag
     {
         protected GameObject Tag;
         protected TextMeshProUGUI Text;

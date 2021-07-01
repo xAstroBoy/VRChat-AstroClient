@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-
-namespace Blaze.API
+﻿namespace Blaze.API
 {
-    public class QMNestedButton
+	using System;
+	using UnityEngine;
+
+	public class QMNestedButton
     {
         protected QMSingleButton mainButton;
         protected QMSingleButton backButton;

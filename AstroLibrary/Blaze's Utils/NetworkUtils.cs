@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VRC.Core;
-
-namespace Blaze.Utils
+﻿namespace Blaze.Utils
 {
-    internal static class NetworkUtils
+	internal static class NetworkUtils
     {
         /*internal static ApiAvatar ToApiAvatar(this AvatarData instance)
         {

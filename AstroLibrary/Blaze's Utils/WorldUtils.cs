@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
-using VRC;
-using VRC.Core;
-using VRC.SDKBase;
-using VRC.Udon;
-
-namespace Blaze.Utils
+﻿namespace Blaze.Utils
 {
-    internal static class WorldUtils
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using UnityEngine;
+	using UnityEngine.Rendering.PostProcessing;
+	using VRC;
+	using VRC.Core;
+	using VRC.SDKBase;
+	using VRC.Udon;
+
+	internal static class WorldUtils
     {
         internal static IEnumerable<Player> GetPlayers()
         {
