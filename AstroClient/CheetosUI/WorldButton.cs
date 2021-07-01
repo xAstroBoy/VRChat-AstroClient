@@ -39,7 +39,7 @@
 			{
 				color = Color.cyan,
 				mainTexture = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.button.png")),
-				globalIlluminationFlags = MaterialGlobalIlluminationFlags.EmissiveIsBlack
+				globalIlluminationFlags = MaterialGlobalIlluminationFlags.AnyEmissive
 			};
 
 			var front_canvas = new GameObject("Canvas");
