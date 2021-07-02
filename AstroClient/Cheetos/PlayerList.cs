@@ -58,15 +58,18 @@
 
         public override void OnLateUpdate()
         {
-            if (RefreshTime >= 16f)
-            {
-                RefreshButtons();
-                RefreshTime = 0;
-            }
-            else
-            {
-                RefreshTime += 1f * Time.deltaTime;
-            }
+			if (ConfigManager.UI.ShowPlayersList)
+			{
+				if (RefreshTime >= 16f)
+				{
+					RefreshButtons();
+					RefreshTime = 0;
+				}
+				else
+				{
+					RefreshTime += 1f * Time.deltaTime;
+				}
+			}
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
