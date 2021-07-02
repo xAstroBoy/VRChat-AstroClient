@@ -1,8 +1,8 @@
 ﻿namespace Blaze.Utils
 {
 	public static class NetworkUtils
-	{
-		/*internal static ApiAvatar ToApiAvatar(this AvatarData instance)
+    {
+        /*internal static ApiAvatar ToApiAvatar(this AvatarData instance)
         {
             return new ApiAvatar()
             {
@@ -17,5 +17,5 @@
                 version = int.Parse(instance.Version),
             };
         }*/
-	}
+    }
 }
