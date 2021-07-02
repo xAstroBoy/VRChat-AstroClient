@@ -7,9 +7,9 @@
 	using VRC.UI;
 
 	class SocialMenuUtils
-    {
-        public static void RefreshSocial()
-        {
+	{
+		public static void RefreshSocial()
+		{
 			using (IEnumerator<UiUserList> enumerator = Resources.FindObjectsOfTypeAll<UiUserList>().GetEnumerator())
 			{
 				while (enumerator.MoveNext())
@@ -31,13 +31,13 @@
 		}
 
 		public static APIUser GetAPIUserFromSM()
-        {
+		{
 			return UnityEngine.Object.FindObjectOfType<PageUserInfo>().field_Public_APIUser_0;
-        }
+		}
 
 		public static ApiWorld GetApiWorldFromSM()
-        {
+		{
 			return UnityEngine.Object.FindObjectOfType<PageWorldInfo>().field_Private_ApiWorld_0;
-        }
-    }
+		}
+	}
 }

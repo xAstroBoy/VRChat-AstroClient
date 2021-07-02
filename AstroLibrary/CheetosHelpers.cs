@@ -12,14 +12,14 @@
 	#endregion Imports
 
 	public static class CheetosHelpers
-    {
-        public static Texture2D LoadPNG(string filePath)
-        {
-            byte[] fileData = ExtractResource(Assembly.GetExecutingAssembly(), filePath);
-            Texture2D tex = new Texture2D(2, 2);
-            ImageConversion.LoadImage(tex, fileData); //..this will auto-resize the texture dimensions.
-            return tex;
-        }
+	{
+		public static Texture2D LoadPNG(string filePath)
+		{
+			byte[] fileData = ExtractResource(Assembly.GetExecutingAssembly(), filePath);
+			Texture2D tex = new Texture2D(2, 2);
+			ImageConversion.LoadImage(tex, fileData); //..this will auto-resize the texture dimensions.
+			return tex;
+		}
 
 		public static Texture2D LoadPNG(byte[] fileData)
 		{
@@ -33,21 +33,21 @@
 		/// </summary>
 		/// <param name="msg"></param>
 		public static void SendHudNotification(string msg)
-        {
-            var uiManager = VRCUiManager.prop_VRCUiManager_0;
-            PopupManager.QueHudMessage(uiManager, msg);
-        }
+		{
+			var uiManager = VRCUiManager.prop_VRCUiManager_0;
+			PopupManager.QueHudMessage(uiManager, msg);
+		}
 
-        public static byte[] ExtractResource(Assembly assembly, string filename)
-        {
-            using (Stream resFilestream = assembly.GetManifestResourceStream(filename))
-            {
-                if (resFilestream == null) return null;
-                byte[] ba = new byte[resFilestream.Length];
-                resFilestream.Read(ba, 0, ba.Length);
-                return ba;
-            }
-        }
+		public static byte[] ExtractResource(Assembly assembly, string filename)
+		{
+			using (Stream resFilestream = assembly.GetManifestResourceStream(filename))
+			{
+				if (resFilestream == null) return null;
+				byte[] ba = new byte[resFilestream.Length];
+				resFilestream.Read(ba, 0, ba.Length);
+				return ba;
+			}
+		}
 
 		public static void PopupCall(string title, string confirm, string placeholder, bool IsNumpad, Action<string> OnAccept, Action OnCancel = null)
 		{

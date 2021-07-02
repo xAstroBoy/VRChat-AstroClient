@@ -81,7 +81,7 @@
 		/// </summary>
 		/// <param name="path"></param>
 		/// <returns></returns>
-		[Obsolete ("Use root object finder, then find the object from there")]
+		[Obsolete("Use root object finder, then find the object from there")]
 		public static GameObject InactiveFind(string path)
 		{
 			foreach (GameObject gameObj in Resources.FindObjectsOfTypeAll<GameObject>())

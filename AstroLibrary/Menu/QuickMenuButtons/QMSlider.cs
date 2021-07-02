@@ -99,24 +99,24 @@
 			return Slider.GetComponentInChildren<Slider>().value;
 		}
 		public void SetValue(float Value)
-        {
-            Slider.GetComponentInChildren<Slider>().value = Value;
-            SetSliderLabelText(Value.ToString());
-        }
+		{
+			Slider.GetComponentInChildren<Slider>().value = Value;
+			SetSliderLabelText(Value.ToString());
+		}
 
-        public void SetTextLabel(string text)
-        {
-            label.text = text;
-        }
+		public void SetTextLabel(string text)
+		{
+			label.text = text;
+		}
 
-        public void SetSliderLabelText(string Text)
-        {
-            SliderLabel.text = Text;
-        }
+		public void SetSliderLabelText(string Text)
+		{
+			SliderLabel.text = Text;
+		}
 
-        public void SetLocalLabelPosition(float x, float y)
-        {
-            labelObj.transform.position = new Vector3(x, y);
-        }
-    }
+		public void SetLocalLabelPosition(float x, float y)
+		{
+			labelObj.transform.position = new Vector3(x, y);
+		}
+	}
 }
