@@ -6,7 +6,7 @@
 	using UnhollowerRuntimeLib.XrefScans;
 
 	//[Obfuscation(Exclude = true, ApplyToMembers = true, StripAfterObfuscation = true)]
-	internal static class BlazesXRefs
+	public static class BlazesXRefs
     {
         private static MethodInfo _OpenedQMMethod;
         private static MethodInfo _ClosedQMMethod;
@@ -15,7 +15,7 @@
         private static MethodInfo _TrustRankMethod;
         private static List<MethodInfo> _TrustRankColorMethods;
 
-        internal static MethodInfo OpenedQMMethod
+        public static MethodInfo OpenedQMMethod
         {
             get
             {
@@ -33,7 +33,7 @@
             }
         }
 
-        internal static MethodInfo ClosedQMMethod
+        public static MethodInfo ClosedQMMethod
         {
             get
             {
@@ -47,7 +47,7 @@
             }
         }
 
-        internal static MethodInfo TrustRankMethod
+        public static MethodInfo TrustRankMethod
         {
             get
             {
@@ -59,7 +59,7 @@
             }
         }
 
-        internal static List<MethodInfo> TrustRankColorMethods
+        public static List<MethodInfo> TrustRankColorMethods
         {
             get
             {
@@ -70,7 +70,7 @@
             }
         }
 
-        internal static MethodInfo OnPhotonPlayerJoinMethod
+        public static MethodInfo OnPhotonPlayerJoinMethod
         {
             get
             {
@@ -104,7 +104,7 @@
                 });
             }
         }
-        internal static MethodInfo OnPhotonPlayerLeftMethod
+        public static MethodInfo OnPhotonPlayerLeftMethod
         {
             get
             {

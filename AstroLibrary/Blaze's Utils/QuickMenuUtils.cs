@@ -6,44 +6,44 @@
 	using UnityEngine.UI;
 	using VRC;
 
-	internal static class QuickMenuUtils
+	public static class QuickMenuUtils
     {
-        internal static QuickMenu GetQuickMenu()
+        public static QuickMenu GetQuickMenu()
         {
             return QuickMenu.prop_QuickMenu_0;
         }
 
-        internal static void SelectPlayer(Player instance)
+        public static void SelectPlayer(Player instance)
         {
             QuickMenu.prop_QuickMenu_0.Method_Public_Void_Player_0(instance);
         }
 
-        internal static Player GetUIMPlayer()
+        public static Player GetUIMPlayer()
         {
             return QuickMenu.prop_QuickMenu_0.field_Private_Player_0;
         }
 
-        internal static void OpenQM()
+        public static void OpenQM()
         {
             QuickMenu.prop_QuickMenu_0.Method_Private_Void_Boolean_0(true);
         }
 
-        internal static void CloseQM()
+        public static void CloseQM()
         {
             QuickMenu.prop_QuickMenu_0.Method_Private_Void_Boolean_0(false);
         }
 
-        internal static void ResizeCollider(Vector3 size)
+        public static void ResizeCollider(Vector3 size)
         {
             QuickMenu.prop_QuickMenu_0.GetComponent<BoxCollider>().size = size;
         }
 
-        internal static void ResetCollider()
+        public static void ResetCollider()
         {
             QuickMenu.prop_QuickMenu_0.GetComponent<BoxCollider>().size = new Vector3(2517.34f, 1671.213f, 1f);
         }
 
-        internal async static void LoadSprite(Image Instance, string url)
+        public async static void LoadSprite(Image Instance, string url)
         {
             await GetRemoteTexture(Instance, url);
         }
@@ -69,7 +69,7 @@
             }
         }
 
-        internal async static void LoadSprite(Sprite Instance, string url)
+        public async static void LoadSprite(Sprite Instance, string url)
         {
             await GetRemoteTexture(Instance, url);
         }

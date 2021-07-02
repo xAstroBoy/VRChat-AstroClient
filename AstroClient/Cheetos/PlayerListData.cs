@@ -1,7 +1,6 @@
 ﻿namespace AstroClient
 {
 	using AstroLibrary.Extensions;
-	using AstroNetworkingLibrary;
 	using Il2CppSystem.Text;
 	using System.Linq;
 	using UnityEngine;

@@ -4,7 +4,7 @@
 	using UnityEngine;
 	using UnityEngine.UI;
 
-	internal static class PopupUtils
+	public static class PopupUtils
     {
         public static void HideCurrentPopUp()
         {

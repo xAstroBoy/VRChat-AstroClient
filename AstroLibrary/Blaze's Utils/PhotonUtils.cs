@@ -2,7 +2,7 @@
 {
 	using System.Collections.Generic;
 
-	internal static class PhotonUtils
+	public static class PhotonUtils
     {
         public static string GetUserID(this Photon.Realtime.Player player)
         {

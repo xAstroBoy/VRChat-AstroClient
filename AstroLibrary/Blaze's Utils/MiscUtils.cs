@@ -16,9 +16,9 @@
 	using VRC.SDKBase;
 	using VRC.UI;
 
-	internal static class MiscUtils
+	public static class MiscUtils
     {
-        internal static void ForceQuit()
+        public static void ForceQuit()
         {
             try
             {
@@ -39,7 +39,7 @@
             catch { }
         }
 
-        internal static void Restart()
+        public static void Restart()
         {
             ProcessStartInfo psi = new ProcessStartInfo();
             if (PlayerUtils.SelfIsInVR())
@@ -55,14 +55,14 @@
             ForceQuit();
         }
 
-        internal static void LoginFailed()
+        public static void LoginFailed()
         {
             Logs.Msg("Authorization to Blaze's Servers has failed. Please restart and check again!", ConsoleColor.Red);
             Console.ReadKey();
             ForceQuit();
         }
 
-        internal static void ClearVRAM()
+        public static void ClearVRAM()
         {
             var currentAvatars = (from player in PlayerManager.prop_PlayerManager_0.prop_ArrayOf_Player_0 where player != null select player.prop_ApiAvatar_0 into apiAvatar where apiAvatar != null select apiAvatar.assetUrl).ToList();
 
@@ -89,7 +89,7 @@
             Logs.Debug($"<color=green>[OPTIMIZATION]</color> Cleared VRAM!");
         }
 
-        internal static void ChangePedestals()
+        public static void ChangePedestals()
         {
 
             PopupUtils.InputPopup("Enter Avatar ID for pedestals", "Change Pedestals", "avtr_XXXXXXXX", delegate (string s) 
@@ -132,7 +132,7 @@
             });
         }
 
-        internal static readonly List<string> EmojiType = new List<string>
+        public static readonly List<string> EmojiType = new List<string>
         {
             ":D",
             "Like",
@@ -194,7 +194,7 @@
             "Sun Lotion"
         };
 
-        internal static readonly List<string> EmoteType = new List<string>
+        public static readonly List<string> EmoteType = new List<string>
         {
             "",
             "wave",
@@ -207,7 +207,7 @@
             "sadness",
         };
 
-        internal static void DelayFunction(float del, Action action)
+        public static void DelayFunction(float del, Action action)
         {
             MelonCoroutines.Start(Delay(del, action));
         }
@@ -219,12 +219,12 @@
             yield break;
         }
 
-        internal static void WaitForWorld(Action action)
+        public static void WaitForWorld(Action action)
         {
             MelonCoroutines.Start(WFW(action));
         }
 
-        internal static IEnumerator WFW(Action action)
+        public static IEnumerator WFW(Action action)
         {
             while (!WorldUtils.IsInWorld() && PlayerUtils.GetCurrentUser() == null) yield return null;
             action.Invoke();
@@ -242,7 +242,7 @@
             return text;
         }
 
-        internal static void ChangeAvatar(this ApiAvatar instance)
+        public static void ChangeAvatar(this ApiAvatar instance)
         {
             try
             {
@@ -260,7 +260,7 @@
             catch { Logs.Msg("Error turning into avatar! Maybe it's non existing?", ConsoleColor.Red); }
         }
 
-        internal static void ChangeAvatar(this Player instance)
+        public static void ChangeAvatar(this Player instance)
         {
             try
             {
@@ -278,7 +278,7 @@
             catch { Logs.Msg("Error turning into avatar! Maybe it's non existing?", ConsoleColor.Red); }
         }
 
-        internal static void ChangeAvatar(this VRCPlayer instance)
+        public static void ChangeAvatar(this VRCPlayer instance)
         {
             try
             {
@@ -296,7 +296,7 @@
             catch { Logs.Msg("Error turning into avatar! Maybe it's non existing?", ConsoleColor.Red); }
         }
 
-        internal static void ChangeAvatar(string id)
+        public static void ChangeAvatar(string id)
         {
             try
             {
@@ -314,7 +314,7 @@
             catch { Logs.Msg("Error turning into avatar! Maybe it's non existing?", ConsoleColor.Red); }
         }
 
-        internal static Player GetPlayerByUserId(string userId)
+        public static Player GetPlayerByUserId(string userId)
         {
             foreach (var player in PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0)
                 if (player.prop_APIUser_0 != null && player.prop_APIUser_0.id == userId)
@@ -331,7 +331,7 @@
         public static Sprite MediaNext;
         public static Sprite MediaMute;
 
-        internal static void LoadBundle()
+        public static void LoadBundle()
         {
             using (var stream = Assembly.GetExecutingAssembly().GetManifestResourceStream("Blaze.Resources.blaze")) //String is MainNamespace.assetbundlename
             using (var tempStream = new MemoryStream((int)stream.Length))

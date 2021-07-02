@@ -8,7 +8,7 @@
 
 	class SocialMenuUtils
     {
-        internal static void RefreshSocial()
+        public static void RefreshSocial()
         {
 			using (IEnumerator<UiUserList> enumerator = Resources.FindObjectsOfTypeAll<UiUserList>().GetEnumerator())
 			{
@@ -30,12 +30,12 @@
 			}
 		}
 
-		internal static APIUser GetAPIUserFromSM()
+		public static APIUser GetAPIUserFromSM()
         {
 			return UnityEngine.Object.FindObjectOfType<PageUserInfo>().field_Public_APIUser_0;
         }
 
-		internal static ApiWorld GetApiWorldFromSM()
+		public static ApiWorld GetApiWorldFromSM()
         {
 			return UnityEngine.Object.FindObjectOfType<PageWorldInfo>().field_Private_ApiWorld_0;
         }

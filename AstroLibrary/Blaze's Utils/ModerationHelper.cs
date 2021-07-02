@@ -7,7 +7,7 @@ namespace DayClientML2.Modules.Misc
 	using System.Collections.Generic;
 	using System.IO;
 
-	internal class ModerationHelper
+	public class ModerationHelper
     {
         public class ModerationEntry
         {

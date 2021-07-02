@@ -9,14 +9,14 @@
 	using VRC.Core;
 	using VRC.UI;
 
-	internal static class VRCUiManagerUtils
+	public static class VRCUiManagerUtils
     {
-        internal static VRCUiPage ShowScreen(this VRCUiManager Instance, VRCUiPage page)
+        public static VRCUiPage ShowScreen(this VRCUiManager Instance, VRCUiPage page)
         {
             return ShowScreenActionAction(page);
         }
 
-        internal static void ShowScreen(this VRCUiManager Instance, string pageName)
+        public static void ShowScreen(this VRCUiManager Instance, string pageName)
         {
             VRCUiPage vrcuiPage = Instance.GetPage(pageName);
             if (vrcuiPage != null)
@@ -25,7 +25,7 @@
             }
         }
 
-        internal static VRCUiPage GetPage(this VRCUiManager Instance, string screenPath)
+        public static VRCUiPage GetPage(this VRCUiManager Instance, string screenPath)
         {
             GameObject gameObject = GameObject.Find(screenPath);
             VRCUiPage vrcuiPage = null;
@@ -44,7 +44,7 @@
             return vrcuiPage;
         }
 
-        internal static ShowScreenAction ShowScreenActionAction
+        public static ShowScreenAction ShowScreenActionAction
         {
             get
             {
@@ -77,7 +77,7 @@
 
         public delegate VRCUiPage ShowScreenAction(VRCUiPage page);
 
-        internal static void RefreshUser()
+        public static void RefreshUser()
         {
             APIUser user = VRCUiManager.prop_VRCUiManager_0.field_Public_GameObject_0.GetComponentInChildren<PageUserInfo>().GetUser();
 
@@ -105,18 +105,18 @@
                 }));
         }
 
-        internal static APIUser GetUser(this PageUserInfo Instance)
+        public static APIUser GetUser(this PageUserInfo Instance)
         {
             return Instance.field_Public_APIUser_0;
         }
 
-        internal static void SelectAPIUser(this VRCUiManager instance, APIUser user)
+        public static void SelectAPIUser(this VRCUiManager instance, APIUser user)
         {
             QuickMenu.prop_QuickMenu_0.field_Private_APIUser_0 = user;
             QuickMenu.prop_QuickMenu_0.Method_Public_Void_EnumNPublicSealedvaUnWoAvSoSeUsDeSaCuUnique_Boolean_0((QuickMenu.EnumNPublicSealedvaUnWoAvSoSeUsDeSaCuUnique)4, false);
         }
 
-        internal static void SelectAPIUser(this VRCUiManager instance, string userid)
+        public static void SelectAPIUser(this VRCUiManager instance, string userid)
         {
             APIUser.FetchUser(userid,
                 new Action<APIUser>((User) =>

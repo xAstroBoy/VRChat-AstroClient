@@ -2,9 +2,9 @@
 {
 	using UnityEngine;
 
-	internal class ConversionUtils
+	public class ConversionUtils
     {
-        internal static Vector3 StringToVector3(string sVector)
+        public static Vector3 StringToVector3(string sVector)
         {
             // Remove the parentheses
             if (sVector.StartsWith("(") && sVector.EndsWith(")"))
@@ -24,7 +24,7 @@
             return result;
         }
 
-        internal static Color HexToColor(string Hex)
+        public static Color HexToColor(string Hex)
         {
             ColorUtility.TryParseHtmlString(Hex, out Color output);
             return output;

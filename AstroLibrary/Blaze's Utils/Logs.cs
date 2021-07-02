@@ -4,16 +4,16 @@
 	using System.Collections.Generic;
 	using System.Linq;
 
-	internal static class Logs
+	public static class Logs
     {
         // Console Logs
         private static string lastConsole = string.Empty;
-        internal static void Msg(string message, ConsoleColor color)
+        public static void Msg(string message, ConsoleColor color)
         {
             if (message == lastConsole) return;
             else PushLog(message, color);
         }
-        internal static void SetTitle(string message) { Console.Title = message; }
+        public static void SetTitle(string message) { Console.Title = message; }
 
         private static void PushLog(string message, ConsoleColor color)
         {

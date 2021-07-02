@@ -2,9 +2,9 @@
 {
 	using VRC.Udon;
 
-	internal static class UdonUtils
+	public static class UdonUtils
     {
-        internal static int GetScriptEventsCount(this UdonBehaviour instance)
+        public static int GetScriptEventsCount(this UdonBehaviour instance)
         {
             return instance._eventTable.count;
         }

@@ -6,10 +6,10 @@
 	using VRC.SDKBase;
 	using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
 
-	internal static class PlayerUtils
+	public static class PlayerUtils
     {
         #region CurrentUser
-        internal static VRCPlayer GetCurrentUser()
+        public static VRCPlayer GetCurrentUser()
         {
             if (VRCPlayer.field_Internal_Static_VRCPlayer_0 != null)
             {
@@ -18,26 +18,26 @@
             else return null;
         }
 
-        internal static bool SelfIsInVR()
+        public static bool SelfIsInVR()
         {
             return XRDevice.isPresent;
         }
         #endregion
 
         #region Player
-        internal static VRC.Player GetPlayer(this VRCPlayer instance)
+        public static VRC.Player GetPlayer(this VRCPlayer instance)
         {
             return instance._player;
         }
         #endregion
 
         #region API User
-        internal static APIUser GetAPIUser(this VRCPlayer instance)
+        public static APIUser GetAPIUser(this VRCPlayer instance)
         {
             return instance._player.prop_APIUser_0;
         }
 
-        internal static APIUser GetAPIUser(this VRC.Player instance)
+        public static APIUser GetAPIUser(this VRC.Player instance)
         {
             return instance.prop_APIUser_0;
         }
@@ -45,41 +45,41 @@
 
         #region Api Avatar
         // Get PC Api Avatar
-        internal static ApiAvatar GetApiAvatar(this VRCPlayer instance)
+        public static ApiAvatar GetApiAvatar(this VRCPlayer instance)
         {
             return instance.prop_ApiAvatar_0;
         }
 
-        internal static ApiAvatar GetApiAvatar(this VRC.Player instance)
+        public static ApiAvatar GetApiAvatar(this VRC.Player instance)
         {
             return instance.prop_ApiAvatar_0;
         }
 
         // Get Quest Api Avatar (fallback avatar)
-        internal static ApiAvatar GetApiAvatarQuest(this VRCPlayer instance)
+        public static ApiAvatar GetApiAvatarQuest(this VRCPlayer instance)
         {
             return instance.prop_ApiAvatar_1;
         }
 
-        internal static ApiAvatar GetApiAvatarQuest(this VRC.Player instance)
+        public static ApiAvatar GetApiAvatarQuest(this VRC.Player instance)
         {
             return instance._vrcplayer.prop_ApiAvatar_1;
         }
 
         // Api Avatar Details
-        internal static bool IsAllPlatform(this ApiAvatar instance)
+        public static bool IsAllPlatform(this ApiAvatar instance)
         {
             if (instance.supportedPlatforms == ApiModel.SupportedPlatforms.All) return true;
             else return false;
         }
 
-        internal static bool IsPCPlatform(this ApiAvatar instance)
+        public static bool IsPCPlatform(this ApiAvatar instance)
         {
             if (instance.supportedPlatforms == ApiModel.SupportedPlatforms.StandaloneWindows) return true;
             else return false;
         }
 
-        internal static bool IsQuestPlatform(this ApiAvatar instance)
+        public static bool IsQuestPlatform(this ApiAvatar instance)
         {
             if (instance.supportedPlatforms == ApiModel.SupportedPlatforms.Android) return true;
             else return false;
@@ -88,55 +88,55 @@
         #endregion
 
         #region VRCPlayer
-        internal static VRCPlayer GetVRCPlayer(this VRC.Player instance)
+        public static VRCPlayer GetVRCPlayer(this VRC.Player instance)
         {
             return instance._vrcplayer;
         }
         #endregion
 
         #region USpeaker
-        internal static USpeaker GetUSpeaker(this VRC.Player instance)
+        public static USpeaker GetUSpeaker(this VRC.Player instance)
         {
             return instance.prop_USpeaker_0;
         }
 
-        internal static USpeaker GetUSpeaker(this VRCPlayer instance)
+        public static USpeaker GetUSpeaker(this VRCPlayer instance)
         {
             return instance.prop_USpeaker_0;
         }
 
-        internal static bool Is_Talking(this USpeaker speaker)
+        public static bool Is_Talking(this USpeaker speaker)
         {
             return speaker.prop_Boolean_0;
         }
         #endregion
 
         #region VRCPlayerApi
-        internal static VRCPlayerApi GetVRCPlayerApi(this VRCPlayer instance)
+        public static VRCPlayerApi GetVRCPlayerApi(this VRCPlayer instance)
         {
             return instance.prop_VRCPlayerApi_0;
         }
         
-        internal static VRCPlayerApi GetVRCPlayerApi(this VRC.Player instance)
+        public static VRCPlayerApi GetVRCPlayerApi(this VRC.Player instance)
         {
             return instance.prop_VRCPlayerApi_0;
         }
         #endregion
 
         #region PlayerNet
-        internal static PlayerNet GetPlayerNet(this VRC.Player instance)
+        public static PlayerNet GetPlayerNet(this VRC.Player instance)
         {
             return instance._playerNet;
         }
 
-        internal static PlayerNet GetPlayerNet(this VRCPlayer instance)
+        public static PlayerNet GetPlayerNet(this VRCPlayer instance)
         {
             return instance._playerNet;
         }
         #endregion
 
         #region Photon
-        internal static Photon.Realtime.LoadBalancingClient LoadBalancingPeer
+        public static Photon.Realtime.LoadBalancingClient LoadBalancingPeer
         {
             get
             {
@@ -144,7 +144,7 @@
             }
         }
 
-        internal static PhotonHandler PhotonHandler
+        public static PhotonHandler PhotonHandler
         {
             get
             {
@@ -154,12 +154,12 @@
         #endregion
 
         #region Avatar
-        internal static void ReloadAvatar(this VRCPlayer Instance)
+        public static void ReloadAvatar(this VRCPlayer Instance)
         {
             VRCPlayer.Method_Public_Static_Void_APIUser_0(Instance.GetAPIUser());
         }
 
-        internal static void ReloadAvatar(this VRC.Player Instance)
+        public static void ReloadAvatar(this VRC.Player Instance)
         {
             ReloadAvatar(Instance.GetVRCPlayer());
         }
@@ -167,93 +167,93 @@
 
         #region User Info
         // Is In VR
-        internal static bool IsInVR(this VRCPlayer instance)
+        public static bool IsInVR(this VRCPlayer instance)
         {
             return instance.prop_VRCPlayerApi_0.IsUserInVR();
         }
 
-        internal static bool IsInVR(this VRCPlayerApi instance)
+        public static bool IsInVR(this VRCPlayerApi instance)
         {
             return instance.IsUserInVR();
         }
 
-        internal static bool IsInVR(this VRC.Player instance)
+        public static bool IsInVR(this VRC.Player instance)
         {
             return instance.prop_VRCPlayerApi_0.IsUserInVR();
         }
 
         // Is Instance Master
-        internal static bool IsInstanceMaster(this VRCPlayer instance)
+        public static bool IsInstanceMaster(this VRCPlayer instance)
         {
             return instance.prop_VRCPlayerApi_0.isMaster;
         }
 
-        internal static bool IsInstanceMaster(this VRCPlayerApi instance)
+        public static bool IsInstanceMaster(this VRCPlayerApi instance)
         {
             return instance.isMaster;
         }
 
-        internal static bool IsInstanceMaster(this VRC.Player instance)
+        public static bool IsInstanceMaster(this VRC.Player instance)
         {
             return instance.prop_VRCPlayerApi_0.isMaster;
         }
 
         // Is Instance Creator
-        internal static bool IsInstanceCreator(this VRCPlayer instance)
+        public static bool IsInstanceCreator(this VRCPlayer instance)
         {
             return instance.prop_VRCPlayerApi_0.isInstanceOwner;
         }
 
-        internal static bool IsInstanceCreator(this VRCPlayerApi instance)
+        public static bool IsInstanceCreator(this VRCPlayerApi instance)
         {
             return instance.isInstanceOwner;
         }
 
-        internal static bool IsInstanceCreator(this VRC.Player instance)
+        public static bool IsInstanceCreator(this VRC.Player instance)
         {
             return instance.prop_VRCPlayerApi_0.isInstanceOwner;
         }
 
         // Is World Creator
-        internal static bool IsWorldCreator(this VRC.Player instance)
+        public static bool IsWorldCreator(this VRC.Player instance)
         {
             if (WorldUtils.GetCurrentWorld().authorId == instance.prop_APIUser_0.id) return true;
             else return false;
         }
 
-        internal static bool IsWorldCreator(this VRCPlayer instance)
+        public static bool IsWorldCreator(this VRCPlayer instance)
         {
             if (WorldUtils.GetCurrentWorld().authorId == instance._player.prop_APIUser_0.id) return true;
             else return false;
         }
 
-        internal static bool IsWorldCreator(this APIUser instance)
+        public static bool IsWorldCreator(this APIUser instance)
         {
             if (WorldUtils.GetCurrentWorld().authorId == instance.id) return true;
             else return false;
         }
 
         // Is Friend
-        internal static bool IsFriend(this VRCPlayer instance)
+        public static bool IsFriend(this VRCPlayer instance)
         {
             if (APIUser.IsFriendsWith(instance._player.field_Private_APIUser_0.id)) return true;
             else return false;
         }
 
-        internal static bool IsFriend(this VRC.Player instance)
+        public static bool IsFriend(this VRC.Player instance)
         {
             if (APIUser.IsFriendsWith(instance.field_Private_APIUser_0.id)) return true;
             else return false;
         }
 
-        internal static bool IsFriend(this APIUser instance)
+        public static bool IsFriend(this APIUser instance)
         {
             if (APIUser.IsFriendsWith(instance.id)) return true;
             else return false;
         }
 
         // Is Staff Member
-        internal static bool IsStaffMember(this APIUser instance)
+        public static bool IsStaffMember(this APIUser instance)
         {
             if (instance.tags.Contains("admin_moderator") 
                 || instance.hasModerationPowers 
@@ -264,7 +264,7 @@
             else return false;
         }
 
-        internal static bool IsStaffMember(this VRCPlayer instance)
+        public static bool IsStaffMember(this VRCPlayer instance)
         {
             if (instance.GetAPIUser().tags.Contains("admin_moderator")
                 || instance.GetAPIUser().hasModerationPowers
@@ -275,7 +275,7 @@
             else return false;
         }
 
-        internal static bool IsStaffMember(this VRC.Player instance)
+        public static bool IsStaffMember(this VRC.Player instance)
         {
             if (instance.GetAPIUser().tags.Contains("admin_moderator")
                 || instance.GetAPIUser().hasModerationPowers
@@ -287,54 +287,54 @@
         }
 
         // Display Name
-        internal static string GetDisplayName (this VRCPlayerApi instance)
+        public static string GetDisplayName (this VRCPlayerApi instance)
         {
             return instance.displayName;
         }
 
-        internal static string GetDisplayName(this VRCPlayer instance)
+        public static string GetDisplayName(this VRCPlayer instance)
         {
             return instance._player.prop_APIUser_0.displayName;
         }
 
-        internal static string GetDisplayName(this VRC.Player instance)
+        public static string GetDisplayName(this VRC.Player instance)
         {
             return instance.prop_APIUser_0.displayName;
         }
 
-        internal static string GetDisplayName(this APIUser instance)
+        public static string GetDisplayName(this APIUser instance)
         {
             return instance.displayName;
         }
 
         // User ID
-        internal static string GetUserID(this VRCPlayer instance)
+        public static string GetUserID(this VRCPlayer instance)
         {
             return instance._player.prop_APIUser_0.id;
         }
 
-        internal static string GetUserID(this VRC.Player instance)
+        public static string GetUserID(this VRC.Player instance)
         {
             return instance.prop_APIUser_0.id;
         }
 
-        internal static string GetUserID(this APIUser instance)
+        public static string GetUserID(this APIUser instance)
         {
             return instance.id;
         }
 
         // Frames
-        internal static int GetFrames(this VRC.Player instance)
+        public static int GetFrames(this VRC.Player instance)
         {
             return instance.GetPlayerNet().prop_Byte_0 != 0 ? (int)(1000f / instance.GetPlayerNet().prop_Byte_0) : 0;
         }
 
-        internal static int GetFrames(this VRCPlayer instance)
+        public static int GetFrames(this VRCPlayer instance)
         {
             return instance.GetPlayerNet().prop_Byte_0 != 0 ? (int)(1000f / instance.GetPlayerNet().prop_Byte_0) : 0;
         }
 
-        internal static string GetFramesColored(this VRC.Player instance)
+        public static string GetFramesColored(this VRC.Player instance)
         {
             var frames = GetFrames(instance);
             if (frames >= 80)
@@ -354,7 +354,7 @@
             }
         }
 
-        internal static string GetFramesColored(this VRCPlayer instance)
+        public static string GetFramesColored(this VRCPlayer instance)
         {
             var frames = GetFrames(instance);
             if (frames >= 80)
@@ -375,17 +375,17 @@
         }
 
         // Ping
-        internal static short GetPing(this VRCPlayer instance)
+        public static short GetPing(this VRCPlayer instance)
         {
             return instance.GetPlayerNet().field_Private_Int16_0;
         }
 
-        internal static short GetPing(this VRC.Player instance)
+        public static short GetPing(this VRC.Player instance)
         {
             return instance.GetPlayerNet().field_Private_Int16_0;
         }
 
-        internal static string GetPingColored(this VRCPlayer instance)
+        public static string GetPingColored(this VRCPlayer instance)
         {
             var ping = GetPing(instance);
             if (ping >= 80)
@@ -405,7 +405,7 @@
             }
         }
 
-        internal static string GetPingColored(this VRC.Player instance)
+        public static string GetPingColored(this VRC.Player instance)
         {
             var ping = GetPing(instance);
             if (ping >= 80)
@@ -523,7 +523,7 @@
         #endregion
 
         #region Module Based Methods
-        internal static string GetTags(VRC.Player instance)
+        public static string GetTags(VRC.Player instance)
         {
             string results = string.Empty;
 
@@ -544,7 +544,7 @@
             }
         }
 
-        internal static string GetPlatform(this VRC.Player instance)
+        public static string GetPlatform(this VRC.Player instance)
         {
             if (instance.prop_VRCPlayerApi_0.IsUserInVR())
             {
@@ -563,7 +563,7 @@
             }
         }
 
-        internal static string GetPlatformColored(this VRC.Player instance)
+        public static string GetPlatformColored(this VRC.Player instance)
         {
             if (instance.prop_VRCPlayerApi_0.IsUserInVR())
             {
@@ -582,7 +582,7 @@
             }
         }
 
-        internal static string GetState(this VRC.Player instance)
+        public static string GetState(this VRC.Player instance)
         {
             if (instance.prop_APIUser_0.statusIsSetToAskMe)
             {
@@ -602,7 +602,7 @@
             }
         }
 
-        internal static string GetState(this APIUser instance)
+        public static string GetState(this APIUser instance)
         {
             if (instance.statusIsSetToAskMe)
             {
@@ -622,7 +622,7 @@
             }
         }
 
-        internal static string GetState(this VRCPlayer instance)
+        public static string GetState(this VRCPlayer instance)
         {
             if (instance._player.prop_APIUser_0.statusIsSetToAskMe)
             {

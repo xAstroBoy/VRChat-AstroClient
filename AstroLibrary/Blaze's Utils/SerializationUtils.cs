@@ -1,8 +1,8 @@
 ﻿namespace Blaze.Utils
 {
-	internal static class SerializationUtils
+	public static class SerializationUtils
     {
-        internal static byte[] ToByteArray(Il2CppSystem.Object obj)
+        public static byte[] ToByteArray(Il2CppSystem.Object obj)
         {
             if (obj == null) return null;
             var bf = new Il2CppSystem.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
@@ -11,7 +11,7 @@
             return ms.ToArray();
         }
 
-        internal static byte[] ToByteArray(object obj)
+        public static byte[] ToByteArray(object obj)
         {
             if (obj == null) return null;
             var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
@@ -20,7 +20,7 @@
             return ms.ToArray();
         }
 
-        internal static T FromByteArray<T>(byte[] data)
+        public static T FromByteArray<T>(byte[] data)
         {
             if (data == null) return default(T);
             var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
@@ -31,7 +31,7 @@
             }
         }
 
-        internal static T IL2CPPFromByteArray<T>(byte[] data)
+        public static T IL2CPPFromByteArray<T>(byte[] data)
         {
             if (data == null) return default(T);
             var bf = new Il2CppSystem.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
@@ -40,19 +40,19 @@
             return (T)obj;
         }
 
-        internal static T FromIL2CPPToManaged<T>(Il2CppSystem.Object obj)
+        public static T FromIL2CPPToManaged<T>(Il2CppSystem.Object obj)
         {
             //if (obj.GetIl2CppType().Attributes == Il2CppSystem.Reflection.TypeAttributes.Serializable)
             //    return obj.Cast<T>();
             return FromByteArray<T>(ToByteArray(obj));
         }
 
-        internal static T FromManagedToIL2CPP<T>(object obj)
+        public static T FromManagedToIL2CPP<T>(object obj)
         {
             return IL2CPPFromByteArray<T>(ToByteArray(obj));
         }
 
-        internal static object[] FromIL2CPPArrayToManagedArray(Il2CppSystem.Object[] obj)
+        public static object[] FromIL2CPPArrayToManagedArray(Il2CppSystem.Object[] obj)
         {
             object[] Parameters = new object[obj.Length];
             for (int i = 0; i < obj.Length; i++)
@@ -63,7 +63,7 @@
             return Parameters;
         }
 
-        internal static Il2CppSystem.Object[] FromManagedArrayToIL2CPPArray(object[] obj)
+        public static Il2CppSystem.Object[] FromManagedArrayToIL2CPPArray(object[] obj)
         {
             Il2CppSystem.Object[] Parameters = new Il2CppSystem.Object[obj.Length];
             for (int i = 0; i < obj.Length; i++)
