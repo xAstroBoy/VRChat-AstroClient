@@ -15,6 +15,8 @@
     {
 		public static GameObject VIPRoom;
 
+		public static List<Renderer> VIPHallRenderers = new List<Renderer>();
+
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
             if (id == WorldIds.BClub)

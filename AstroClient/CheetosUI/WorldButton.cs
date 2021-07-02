@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroLibrary;
+	using HarmonyLib;
 	using System;
 	using System.Reflection;
 	using TMPro;
@@ -37,10 +38,13 @@
 			var front_renderer = front.GetComponent<Renderer>();
 			front_renderer.material = new Material(Shader.Find("Standard"))
 			{
-				color = Color.cyan,
-				mainTexture = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.button.png")),
-				globalIlluminationFlags = MaterialGlobalIlluminationFlags.AnyEmissive
+				mainTexture = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.button.png"))
 			};
+			front_renderer.material.EnableKeyword("_EMISSION");
+			front_renderer.material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+			front_renderer.material.SetTexture("_EmissionMap", CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.button.png")));
+			front_renderer.material.SetFloat("_EmissionScaleUI", 1f);
+			front_renderer.material.SetColor("_EmissionColor", Color.white);
 
 			var front_canvas = new GameObject("Canvas");
 
@@ -63,6 +67,7 @@
 			textObject.AddComponent<CanvasRenderer>();
 
 			var front_text = textObject.AddComponent<TextMeshPro>();
+			front_text.color = Color.black;
 			front_text.text = label;
 			front_text.richText = true;
 			front_text.alignment = TextAlignmentOptions.Center;
