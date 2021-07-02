@@ -43,7 +43,7 @@
 			front_renderer.material.EnableKeyword("_EMISSION");
 			front_renderer.material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
 			front_renderer.material.SetTexture("_EmissionMap", CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.button.png")));
-			front_renderer.material.SetFloat("_EmissionScaleUI", 5f);
+			front_renderer.material.SetFloat("_EmissionScaleUI", 1f);
 			front_renderer.material.SetColor("_EmissionColor", Color.white);
 
 			var front_canvas = new GameObject("Canvas");
