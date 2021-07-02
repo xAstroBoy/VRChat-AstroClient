@@ -9,6 +9,8 @@
 	using AstroLibrary.Console;
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
+	using Blaze.API;
+	using Blaze.Utils;
 	using Newtonsoft.Json;
 	using System;
 	using System.Diagnostics;
@@ -112,31 +114,30 @@
 					NetworkingManager.IsReady = true;
 					break;
 				case PacketServerType.ADD_TAG:
+					MainThreadRunner.Run(() =>
+					{
+						var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
+						Player player;
+						if (PlayerUtils.GetCurrentUser().GetUserID().Equals(tagData.UserID))
+						{
+							ModConsole.Log("Wants to add tag to self");
+							player = PlayerUtils.GetCurrentUser().GetPlayer();
+						}
+						else
+						{
+							ModConsole.Log("Wants to add tag to someone else");
+							player = WorldUtils.Get_Player_By_ID(tagData.UserID);
+						}
+						if (player != null)
+						{
+							new BlazeTag(player, tagData.Text, Color.yellow);
+						}
+						else
+						{
+							ModConsole.Log($"Player ({tagData.UserID}) returned null");
+						}
+					});
 					break;
-				//		MainThreadRunner.Run(() =>
-				//		{
-				//			var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
-				//			Player player;
-				//			if (Utils.LocalPlayer.GetPlayer().UserID().Equals(tagData.UserID))
-				//			{
-				//				ModConsole.Log("Wants to add tag to self");
-				//				player = Utils.LocalPlayer.GetPlayer();
-				//			}
-				//			else
-				//			{
-				//				ModConsole.Log("Wants to add tag to someone else");
-				//				player = WorldUtils.Get_Player_By_ID(tagData.UserID);
-				//			}
-				//			if (player != null)
-				//			{
-				//				SpawnTag(player, tagData.Text, Color.white, Color.cyan);
-				//			}
-				//			else
-				//			{
-				//				ModConsole.Log($"Player ({tagData.UserID}) returned null");
-				//			}
-				//		});
-				//		break;
 
 				case PacketServerType.NOTIFY:
 					CheetosHelpers.SendHudNotification(packetData.TextData);

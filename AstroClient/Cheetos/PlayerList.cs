@@ -72,12 +72,12 @@
 			}
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
             MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
         }
 
-        public override void OnPhotonJoined(Photon.Realtime.Player player)
+		public override void OnPhotonJoined(Photon.Realtime.Player player)
         {
             MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
         }
