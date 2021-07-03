@@ -89,6 +89,9 @@
 		{
 			while (Quad == null) yield return null;
 			int i = 0;
+			var quadpos = Quad.transform.position;
+			var quadrot = Quad.transform.rotation;
+
 			while (i <= amount && isInGame)
 			{
 				Quad?.SetActive(true);
@@ -96,6 +99,9 @@
 				i++;
 				yield return null;
 			}
+			Quad.transform.rotation = quadrot;
+			Quad.transform.position = quadpos;
+
 			isHarvesting = false;
 			yield return null;
 		}
