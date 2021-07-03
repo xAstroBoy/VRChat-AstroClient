@@ -3,7 +3,6 @@
 	using AstroLibrary.Console;
 	using Blaze.API;
 	using Blaze.Utils;
-	using UnityEngine;
 	using VRC;
 
 	public class NamePlates : GameEvents
@@ -11,11 +10,8 @@
 		public override void OnPlayerJoined(Player player)
 		{
 			var color = player.GetAPIUser().GetRankColor();
-
-			MainThreadRunner.Run(() =>
-			{
-				new BlazeTag(player, player.GetAPIUser().GetRank(), color);
-			});
+			
+			new BlazeTag(player, player.GetAPIUser().GetRank(), color);
 
 			var nameplate = player.transform.Find("Player Nameplate/Canvas/Nameplate/");
 			if (nameplate == null)

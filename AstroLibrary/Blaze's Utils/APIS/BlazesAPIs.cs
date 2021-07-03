@@ -9,7 +9,8 @@
         internal static string Identifier = "BlazesMod";
 
         //Tags Settings
-        internal static Dictionary<Player, int> PlayersTagsCount = new Dictionary<Player, int>();
+        internal static Dictionary<Player, int> PlayersTopTagsCount = new Dictionary<Player, int>();
+        internal static Dictionary<Player, int> PlayersBottomTagsCount = new Dictionary<Player, int>();
         internal static bool GlowingTags = true;
 
         //QuickMenu Settings

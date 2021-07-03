@@ -10,23 +10,38 @@
         protected GameObject Tag;
         protected TextMeshProUGUI Text;
 
-        public BlazeTag(Player player, string TagText, Color TagColor)
+        public BlazeTag(Player player, string TagText, Color TagColor, bool top = true)
         {
-            Initialize(player, TagText, TagColor);
+            Initialize(player, TagText, TagColor, top);
         }
 
-        private void Initialize(Player player, string TagText, Color TagColor)
+        private void Initialize(Player player, string TagText, Color TagColor, bool top)
         {
             int Count;
-            if (BlazesAPIs.PlayersTagsCount.ContainsKey(player))
-            {
-                BlazesAPIs.PlayersTagsCount.TryGetValue(player, out int kekidfk);
-                Count = kekidfk;
-            }
-            else
-            {
-                Count = 0;
-            }
+			if (top)
+			{
+				if (BlazesAPIs.PlayersTopTagsCount.ContainsKey(player))
+				{
+					BlazesAPIs.PlayersTopTagsCount.TryGetValue(player, out int kekidfk);
+					Count = kekidfk;
+				}
+				else
+				{
+					Count = 0;
+				}
+			}
+			else
+			{
+				if (BlazesAPIs.PlayersBottomTagsCount.ContainsKey(player))
+				{
+					BlazesAPIs.PlayersBottomTagsCount.TryGetValue(player, out int kekidfk);
+					Count = kekidfk;
+				}
+				else
+				{
+					Count = 0;
+				}
+			}
             if (player.transform.Find("Player Nameplate/Canvas/Nameplate/Contents/").FindChild($"{BlazesAPIs.Identifier}-Tag-{Count}") != null) return; // Prevent duplicates spawning on a player
             var baseTag = player.transform.Find("Player Nameplate/Canvas/Nameplate/Contents/Quick Stats").gameObject;
             Tag = UnityEngine.Object.Instantiate(baseTag, player.transform.Find("Player Nameplate/Canvas/Nameplate/Contents/"));
@@ -38,13 +53,13 @@
             baseTag.transform.localPosition = new Vector3(0f, (Count + 2) * 30, 0f);
             Tag.SetActive(true);
             //if (BlazesAPIs.GlowingTags) Tag.AddComponent<>
-            if (BlazesAPIs.PlayersTagsCount.ContainsKey(player))
+            if (BlazesAPIs.PlayersTopTagsCount.ContainsKey(player))
             {
-                BlazesAPIs.PlayersTagsCount[player] = Count;
+                BlazesAPIs.PlayersTopTagsCount[player] = Count;
             }
             else
             {
-                BlazesAPIs.PlayersTagsCount.Add(player, 1);
+                BlazesAPIs.PlayersTopTagsCount.Add(player, 1);
             }
         }
 
@@ -87,7 +102,7 @@
                         UnityEngine.Object.Destroy(child.gameObject);
                     }
                 }
-                BlazesAPIs.PlayersTagsCount.Remove(instance);
+                BlazesAPIs.PlayersTopTagsCount.Remove(instance);
             }
             catch {}
         }
@@ -104,7 +119,7 @@
                         UnityEngine.Object.Destroy(o);
                     }
                 }
-                BlazesAPIs.PlayersTagsCount.Clear();
+                BlazesAPIs.PlayersTopTagsCount.Clear();
             }
             catch {}
         }

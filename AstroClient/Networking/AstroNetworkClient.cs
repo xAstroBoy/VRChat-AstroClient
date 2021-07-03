@@ -114,29 +114,26 @@
 					NetworkingManager.IsReady = true;
 					break;
 				case PacketServerType.ADD_TAG:
-					MainThreadRunner.Run(() =>
-					{
-						var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
-						Player player;
-						if (PlayerUtils.GetCurrentUser().GetUserID().Equals(tagData.UserID))
-						{
-							ModConsole.Log("Wants to add tag to self");
-							player = PlayerUtils.GetCurrentUser().GetPlayer();
-						}
-						else
-						{
-							ModConsole.Log("Wants to add tag to someone else");
-							player = WorldUtils.Get_Player_By_ID(tagData.UserID);
-						}
-						if (player != null)
-						{
-							new BlazeTag(player, tagData.Text, Color.yellow);
-						}
-						else
-						{
-							ModConsole.Log($"Player ({tagData.UserID}) returned null");
-						}
-					});
+					//var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
+					//Player player;
+					//if (PlayerUtils.GetCurrentUser().GetUserID().Equals(tagData.UserID))
+					//{
+					//	ModConsole.Log("Wants to add tag to self");
+					//	player = PlayerUtils.GetCurrentUser().GetPlayer();
+					//}
+					//else
+					//{
+					//	ModConsole.Log("Wants to add tag to someone else");
+					//	player = WorldUtils.Get_Player_By_ID(tagData.UserID);
+					//}
+					//if (player != null)
+					//{
+					//	new BlazeTag(player, tagData.Text, Color.yellow);
+					//}
+					//else
+					//{
+					//	ModConsole.Log($"Player ({tagData.UserID}) returned null");
+					//}
 					break;
 
 				case PacketServerType.NOTIFY:
