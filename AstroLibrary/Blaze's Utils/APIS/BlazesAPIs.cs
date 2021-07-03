@@ -6,7 +6,7 @@
 
 	internal static class BlazesAPIs
     {
-        internal static string Identifier = "BlazesMod";
+        internal static string Identifier = "AstroClient";
 
         //Tags Settings
         internal static Dictionary<Player, int> PlayersTopTagsCount = new Dictionary<Player, int>();
