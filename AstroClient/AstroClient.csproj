@@ -95,7 +95,6 @@
     <Compile Include="CheetosUI\CMBase.cs" />
     <Compile Include="CheetosUI\WorldButton.cs" />
     <Compile Include="Cheetos\NamePlates.cs" />
-    <Compile Include="Components\EmojiBypasser\EmojiBypasser.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener.cs" />
     <Compile Include="Components\VRC_CustomTrigger\VRC_CustomTrigger.cs" />
     <Compile Include="Components\VRC_CustomTrigger\VRC_CustomTrigger_Manager.cs" />
@@ -119,6 +118,7 @@
     <Compile Include="Extensions\Components_exts\PickupController_ext.cs" />
     <Compile Include="Extensions\Components_exts\RigidBodyController_ext.cs" />
     <Compile Include="Extensions\EventHandler_ext.cs" />
+    <Compile Include="Extensions\VRCPlayer_Emoji_Ext.cs" />
     <Compile Include="Extensions\VRC_UiShape_ext.cs" />
     <Compile Include="Extensions\Il2Cpp_ext.cs" />
     <Compile Include="Extensions\Engine_ext.cs" />
@@ -272,7 +272,6 @@
     <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
     <Compile Include="Networking\NetworkingManager.cs" />
-    <Compile Include="TestBullshit.cs" />
     <Compile Include="OnSceneLoadedEventArgs.cs" />
     <Compile Include="Patches\Patching.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
