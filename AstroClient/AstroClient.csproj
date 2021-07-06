@@ -95,7 +95,9 @@
     <Compile Include="CheetosUI\CMBase.cs" />
     <Compile Include="CheetosUI\WorldButton.cs" />
     <Compile Include="Cheetos\NamePlates.cs" />
+    <Compile Include="Components\Astro_CustomTrigger\Custom_Trigger_Initializator.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener.cs" />
+    <Compile Include="Components\Astro_CustomTrigger\Astro_CustomTrigger.cs" />
     <Compile Include="Components\VRC_CustomTrigger\VRC_CustomTrigger.cs" />
     <Compile Include="Components\VRC_CustomTrigger\VRC_CustomTrigger_Manager.cs" />
     <Compile Include="EmojiMenu\EmojiMenu.cs" />

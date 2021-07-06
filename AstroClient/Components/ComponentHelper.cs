@@ -84,6 +84,10 @@
 
             RegisterComponent<TweakerListener>();
 			RegisterComponent<ScrollMenuListener>();
+			RegisterComponent<Astro_CustomTrigger>();
+
+			
+
 		}
 
 		public override void OnUpdate()
