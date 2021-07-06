@@ -8,12 +8,13 @@
 	using UnityEngine;
 	using UnityEngine.UI;
 	using AstroClient.Components;
+	using AstroLibrary.Utility;
 
 	public class WorldButton
 	{
 		private GameObject gameObject;
 
-		private Astro_CustomTrigger interactable;
+		private VRC_UdonTrigger interactable;
 
 		public WorldButton(Vector3 position, Quaternion rotation, string label, Action action)
 		{
@@ -33,10 +34,14 @@
 			front.transform.rotation = gameObject.transform.rotation;
 			front.transform.localScale = new Vector3(1f, 1f, 1f);
 
-			interactable = front.AddComponent<Astro_CustomTrigger>();
-			interactable.OnInteract = action;
-			interactable.InteractText = label;
-
+			MiscUtility.DelayFunction(0.2f, () => {
+				var AstroTrigger = front.AddComponent<VRC_UdonTrigger>();
+				if (AstroTrigger != null)
+				{
+					AstroTrigger.InteractText = label;
+					AstroTrigger.OnInteract = action;
+				}
+			});
 			var front_renderer = front.GetComponent<Renderer>();
 			front_renderer.material = new Material(Shader.Find("Standard"))
 			{

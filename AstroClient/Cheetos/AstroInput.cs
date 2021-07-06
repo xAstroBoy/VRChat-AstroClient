@@ -91,11 +91,11 @@
 
         public void CheckHitObject(GameObject gameObject)
         {
-            var interactable = gameObject.GetComponent<Astro_Interactable>();
-            if (interactable != null)
-            {
-                interactable.Action.Invoke();
-            }
+            //var interactable = gameObject.GetComponent<Astro_Interactable>();
+            //if (interactable != null)
+            //{
+            //    interactable.Action.Invoke();
+            //}
         }
     }
 }
