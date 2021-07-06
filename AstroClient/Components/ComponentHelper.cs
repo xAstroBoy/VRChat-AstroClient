@@ -76,7 +76,7 @@
             }
             RegisterComponent<PlayerWatcherManager>();
             RegisterComponent<PlayerWatcher>();
-            RegisterComponent<Astro_Interactable>();
+			RegisterComponent<Astro_CustomTrigger>();
 
             RegisterComponent<Bouncer>();
             RegisterComponent<Lewdifier>();
@@ -84,7 +84,6 @@
 
             RegisterComponent<TweakerListener>();
 			RegisterComponent<ScrollMenuListener>();
-			RegisterComponent<Astro_CustomTrigger>();
 
 			
 

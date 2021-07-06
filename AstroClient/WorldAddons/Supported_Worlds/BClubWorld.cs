@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.Components;
 	using AstroClient.Variables;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
@@ -153,8 +154,6 @@
 
                             var udonEvent = UdonSearch.FindUdonEvent("PhotozoneMaster", $"EnableIntercomIn{doorID}");
                             void action() { udonEvent.ExecuteUdonEvent(); }
-
-                            clone.gameObject.AddAstroInteractable(action);
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent != null && behaviourevent.Count() != 0)
                             {
@@ -168,10 +167,17 @@
                             {
                                 string path = "Button Interactable";
                                 var TriggerComponent = clone.transform.Find(path);
-                                if (TriggerComponent != null)
+								string ObjectName = $"Toggle Intercom {doorID} - Trigger";
+								string InteractionText = $"Toggle Intercom {doorID} - AstroClient";
+								if (TriggerComponent != null)
                                 {
-                                    TriggerComponent.gameObject.AddAstroInteractable(action);
-                                    TriggerComponent.gameObject.RenameObject($"Intercom {doorID} - Trigger");
+                                    TriggerComponent.gameObject.RenameObject(ObjectName);
+									var AstroTrigger = TriggerComponent.gameObject.GetOrAddComponent<Astro_CustomTrigger>();
+									if(AstroTrigger != null)
+									{
+										AstroTrigger.InteractText = InteractionText;
+										AstroTrigger.OnInteract = action;
+									}
                                 }
                             }
                             catch (Exception e)
@@ -197,7 +203,6 @@
                             clone.AddCollider();
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}");
                             void action() { udonEvent.ExecuteUdonEvent(); }
-                            clone.gameObject.AddAstroInteractable(action);
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent != null && behaviourevent.Count() != 0)
                             {
@@ -210,13 +215,20 @@
                             try
                             {
                                 string path = "Button Interactable - Toggle Lock";
+								string ObjectName = $"Toggle Lock {doorID} - Trigger";
+								string InteractionText = $"Toggle Lock {doorID} - AstroClient";
                                 var TriggerComponent = clone.transform.Find(path);
-                                if (TriggerComponent != null)
-                                {
-                                    TriggerComponent.gameObject.AddAstroInteractable(action);
-                                    TriggerComponent.gameObject.RenameObject($"Lock {doorID} - Trigger");
-                                }
-                            }
+								if (TriggerComponent != null)
+								{
+									TriggerComponent.gameObject.RenameObject(ObjectName);
+									var AstroTrigger = TriggerComponent.gameObject.GetOrAddComponent<Astro_CustomTrigger>();
+									if (AstroTrigger != null)
+									{
+										AstroTrigger.InteractText = InteractionText;
+										AstroTrigger.OnInteract = action;
+									}
+								}
+							}
                             catch (Exception e)
                             {
                                 ModConsole.DebugWarningExc(e);
@@ -240,7 +252,6 @@
                             clone.AddCollider();
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLooking{doorID}");
                             void action() { udonEvent.ExecuteUdonEvent(); }
-                            clone.gameObject.AddAstroInteractable(action);
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent != null && behaviourevent.Count() != 0)
                             {
@@ -254,13 +265,20 @@
                             try
                             {
                                 string path = "Button Interactable - Looking";
-                                var TriggerComponent = clone.transform.Find(path);
-                                if (TriggerComponent != null)
-                                {
-                                    TriggerComponent.gameObject.AddAstroInteractable(action);
-                                    TriggerComponent.gameObject.RenameObject($"Looking {doorID} - Trigger");
-                                }
-                            }
+								string ObjectName = $"Toggle Looking For Company {doorID} - Trigger";
+								string InteractionText = $"Toggle Looking For Company {doorID} - AstroClient";
+								var TriggerComponent = clone.transform.Find(path);
+								if (TriggerComponent != null)
+								{
+									TriggerComponent.gameObject.RenameObject(ObjectName);
+									var AstroTrigger = TriggerComponent.gameObject.GetOrAddComponent<Astro_CustomTrigger>();
+									if (AstroTrigger != null)
+									{
+										AstroTrigger.InteractText = InteractionText;
+										AstroTrigger.OnInteract = action;
+									}
+								}
+							}
                             catch (Exception e)
                             {
                                 ModConsole.DebugWarningExc(e);
@@ -285,7 +303,6 @@
 
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleAnon{doorID}");
                             void action() { udonEvent.ExecuteUdonEvent(); }
-                            clone.gameObject.AddAstroInteractable(action);
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent != null && behaviourevent.Count() != 0)
                             {
@@ -299,13 +316,20 @@
                             try
                             {
                                 string path = "Button Interactable - Anon";
-                                var TriggerComponent = clone.transform.Find(path);
-                                if (TriggerComponent != null)
-                                {
-                                    TriggerComponent.gameObject.AddAstroInteractable(action);
-                                    TriggerComponent.gameObject.RenameObject($"Incognito {doorID} - Trigger");
-                                }
-                            }
+								string ObjectName = $"Toggle Incognito {doorID} - Trigger";
+								string InteractionText = $"Toggle Incognito {doorID} - AstroClient";
+								var TriggerComponent = clone.transform.Find(path);
+								if (TriggerComponent != null)
+								{
+									TriggerComponent.gameObject.RenameObject(ObjectName);
+									var AstroTrigger = TriggerComponent.gameObject.GetOrAddComponent<Astro_CustomTrigger>();
+									if (AstroTrigger != null)
+									{
+										AstroTrigger.InteractText = InteractionText;
+										AstroTrigger.OnInteract = action;
+									}
+								}
+							}
                             catch (Exception e)
                             {
                                 ModConsole.DebugWarningExc(e);
@@ -329,7 +353,6 @@
                             clone.AddCollider();
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleDoorbell{doorID}");
                             void action() { udonEvent.ExecuteUdonEvent(); }
-                            clone.gameObject.AddAstroInteractable(action);
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
                             if (behaviourevent != null && behaviourevent.Count() != 0)
                             {
@@ -342,13 +365,20 @@
                             try
                             {
                                 string path = "Button Interactable DND";
-                                var TriggerComponent = clone.transform.Find(path);
-                                if (TriggerComponent != null)
-                                {
-                                    TriggerComponent.gameObject.AddAstroInteractable(action);
-                                    TriggerComponent.gameObject.RenameObject($"Do Not Disturb {doorID} - Trigger");
-                                }
-                            }
+								string ObjectName = $"Toggle Do Not Disturb {doorID} - Trigger";
+								string InteractionText = $"Toggle Do Not Disturb {doorID} - AstroClient";
+								var TriggerComponent = clone.transform.Find(path);
+								if (TriggerComponent != null)
+								{
+									TriggerComponent.gameObject.RenameObject(ObjectName);
+									var AstroTrigger = TriggerComponent.gameObject.GetOrAddComponent<Astro_CustomTrigger>();
+									if (AstroTrigger != null)
+									{
+										AstroTrigger.InteractText = InteractionText;
+										AstroTrigger.OnInteract = action;
+									}
+								}
+							}
                             catch (Exception e)
                             {
                                 ModConsole.DebugWarningExc(e);

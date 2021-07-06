@@ -7,12 +7,13 @@
 	using TMPro;
 	using UnityEngine;
 	using UnityEngine.UI;
+	using AstroClient.Components;
 
 	public class WorldButton
 	{
 		private GameObject gameObject;
 
-		private Astro_Interactable interactable;
+		private Astro_CustomTrigger interactable;
 
 		public WorldButton(Vector3 position, Quaternion rotation, string label, Action action)
 		{
@@ -32,8 +33,9 @@
 			front.transform.rotation = gameObject.transform.rotation;
 			front.transform.localScale = new Vector3(1f, 1f, 1f);
 
-			interactable = front.AddComponent<Astro_Interactable>();
-			interactable.Action = action;
+			interactable = front.AddComponent<Astro_CustomTrigger>();
+			interactable.OnInteract = action;
+			interactable.InteractText = label;
 
 			var front_renderer = front.GetComponent<Renderer>();
 			front_renderer.material = new Material(Shader.Find("Standard"))
