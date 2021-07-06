@@ -97,7 +97,7 @@
     <Compile Include="Cheetos\NamePlates.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener.cs" />
     <Compile Include="Components\VRC_UdonTrigger\UdonTrigger_Helper.cs" />
-    <Compile Include="Components\VRC_UdonTrigger\VRC_UdonTrigger.cs" />
+    <Compile Include="Components\VRC_UdonTrigger\VRC_AstroUdonTrigger.cs" />
     <Compile Include="EmojiMenu\EmojiMenu.cs" />
     <Compile Include="EmojiMenu\EmojiScrollMenu\EmojiScrollMenu.cs" />
     <Compile Include="Exploits\Exploit_Exts\Teleport_Ext.cs" />

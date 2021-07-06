@@ -28,14 +28,14 @@ namespace AstroClient.Components
 			}
 
 
-			if (UdonTrigger_Helper.UdonProgramAsset == null)
+			if (UdonTrigger_Helper.OnInteractUdonProgramEvent == null)
 			{
 				ModConsole.DebugError("Custom Trigger Can't Load as Program Asset is null!");
 			}
 			Behaviour = gameObject.AddComponent<UdonBehaviour>();
 			if (Behaviour != null)
 			{
-				Behaviour.serializedProgramAsset = UdonTrigger_Helper.UdonProgramAsset;
+				Behaviour.serializedProgramAsset = UdonTrigger_Helper.OnInteractUdonProgramEvent;
 				Behaviour.InitializeUdonContent();
 				Behaviour.Start();
 				Behaviour.interactText = InteractText;
@@ -47,7 +47,7 @@ namespace AstroClient.Components
 			if (Behaviour == null)
 			{
 				Behaviour = base.gameObject.AddComponent<UdonBehaviour>();
-				Behaviour.serializedProgramAsset = UdonTrigger_Helper.UdonProgramAsset;
+				Behaviour.serializedProgramAsset = UdonTrigger_Helper.OnInteractUdonProgramEvent;
 				Behaviour.InitializeUdonContent();
 				Behaviour.Start();
 				Behaviour.interactText = InteractText;
@@ -56,7 +56,7 @@ namespace AstroClient.Components
 			{
 				if(Behaviour.serializedProgramAsset == null)
 				{
-					Behaviour.serializedProgramAsset = UdonTrigger_Helper.UdonProgramAsset;
+					Behaviour.serializedProgramAsset = UdonTrigger_Helper.OnInteractUdonProgramEvent;
 					Behaviour.InitializeUdonContent();
 					Behaviour.Start();
 				}
