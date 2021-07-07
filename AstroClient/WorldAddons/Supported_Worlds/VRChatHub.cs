@@ -293,8 +293,11 @@
 
 		public override void VRC_EventDispatcherRFC_triggerEvent(VRC_EventHandler EventHandler, VrcEvent VrcEvent, VrcBroadcastType VrcBroadcastType, int value, float floatvalue)
 		{
-			HubObjectPatcher(EventHandler, VrcEvent);
-			UpdateVariablesHub(EventHandler, VrcEvent);
+			if (isHubWorldLoaded)
+			{
+				HubObjectPatcher(EventHandler, VrcEvent);
+				UpdateVariablesHub(EventHandler, VrcEvent);
+			}
 		}
 
 		public static void HubObjectPatcher(VRC_EventHandler EventHandler, VrcEvent VrcEvent)
