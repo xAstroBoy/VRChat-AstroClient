@@ -6,6 +6,7 @@
 	using AstroLibrary.Console;
 	using System;
 	using System.Linq;
+	using System.Reflection;
 	#region Imports
 
 	using UnityEngine;
@@ -28,9 +29,14 @@
 				{
 					handler.DynamicInvoke(null, null);
 				}
+				catch (TargetInvocationException invokeexc)
+				{
+					ModConsole.DebugError($"Error in the Handler : {handler.Method.Name.ToString()}");
+					ModConsole.ErrorExc(invokeexc.InnerException);
+				}
 				catch (Exception exc)
 				{
-					ModConsole.DebugError($"Error in the Handler : {handler.Method.Name}");
+					ModConsole.DebugError($"Error in the Handler : {handler.Method.Name.ToString()}");
 					ModConsole.ErrorExc(exc);
 				}
 			}
@@ -47,6 +53,12 @@
 				try
 				{
 					handler.DynamicInvoke(null, e);
+				}
+
+				catch(TargetInvocationException invokeexc)
+				{
+					ModConsole.DebugError($"Error in the Handler : {handler.Method.Name.ToString()}");
+					ModConsole.ErrorExc(invokeexc.InnerException);
 				}
 				catch (Exception exc)
 				{
