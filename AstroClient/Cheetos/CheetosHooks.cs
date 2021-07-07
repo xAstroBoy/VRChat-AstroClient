@@ -5,6 +5,7 @@
 
 	using AstroClientCore.Events;
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
@@ -18,6 +19,7 @@
 	using System.Reflection;
 	using UnhollowerBaseLib;
 	using UnityEngine;
+	using VRC;
 	using VRC.Core;
 
 	#endregion Imports
@@ -114,6 +116,7 @@
                 new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
                 new Patch(AccessTools.Property(typeof(Time), nameof(Time.smoothDeltaTime)).GetMethod, null, GetPatch(nameof(SpoofFPS)));
                 new Patch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
+                new Patch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
 
                 //new Patch(typeof(VRCStandaloneInputModule).GetMethod(XrefTesting.OnTest.Name), GetPatch(nameof(OnTestPatch)));
 
@@ -130,7 +133,24 @@
             return true;
         }
 
-        private static void SpoofPing(ref int __result)
+		private static void SpoofQuest(ref string __result)
+		{
+			try
+			{
+				if (AstroClient.ConfigManager.General.SpoofQuest)
+				{
+					if (!RoomManagerExtension.IsInWorld())
+					{
+						__result = "android";
+					}
+				}
+			}
+			catch
+			{
+			}
+		}
+
+		private static void SpoofPing(ref int __result)
         {
             try
             {

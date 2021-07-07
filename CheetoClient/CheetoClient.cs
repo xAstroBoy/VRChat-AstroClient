@@ -5,8 +5,6 @@
 	using MelonLoader;
 	using System;
 	using System.Reflection;
-	using UnityEngine;
-	using VRC.SDKBase;
 
 	public class CheetoClient : MelonMod
 	{

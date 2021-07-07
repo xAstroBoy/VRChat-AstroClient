@@ -94,6 +94,8 @@
     <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />
     <Compile Include="CheetosUI\CMBase.cs" />
     <Compile Include="CheetosUI\WorldButton.cs" />
+    <Compile Include="Cheetos\Astro_Interactable.cs" />
+    <Compile Include="Cheetos\Astro_Interactable_Extensions.cs" />
     <Compile Include="Cheetos\NamePlates.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener.cs" />
     <Compile Include="Components\VRC_UdonTrigger\UdonTrigger_Helper.cs" />

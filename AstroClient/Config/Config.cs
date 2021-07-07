@@ -53,6 +53,8 @@
 
         public bool SpoofFPS = false;
 
+		public bool SpoofQuest = false;
+
         public int SpoofedPing = 30;
 
         public float SpoofedFPS = 60f;
