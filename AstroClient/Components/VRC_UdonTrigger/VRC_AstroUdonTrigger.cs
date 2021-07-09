@@ -9,10 +9,10 @@ using VRC.Udon.ProgramSources;
 
 namespace AstroClient.Components
 {
-	public class VRC_UdonTrigger : MonoBehaviour
+	public class VRC_AstroUdonTrigger : MonoBehaviour
 	{
 
-		public VRC_UdonTrigger(IntPtr ptr)
+		public VRC_AstroUdonTrigger(IntPtr ptr)
 			: base(ptr)
 		{
 		}

@@ -14,7 +14,7 @@
 	{
 		private GameObject gameObject;
 
-		private VRC_UdonTrigger interactable;
+		private VRC_AstroUdonTrigger interactable;
 
 		public WorldButton(Vector3 position, Quaternion rotation, string label, Action action)
 		{
@@ -35,7 +35,7 @@
 			front.transform.localScale = new Vector3(1f, 1f, 1f);
 
 			MiscUtility.DelayFunction(0.2f, () => {
-				var AstroTrigger = front.AddComponent<VRC_UdonTrigger>();
+				var AstroTrigger = front.AddComponent<VRC_AstroUdonTrigger>();
 				if (AstroTrigger != null)
 				{
 					AstroTrigger.InteractText = label;
