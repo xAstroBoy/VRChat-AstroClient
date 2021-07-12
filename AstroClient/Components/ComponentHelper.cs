@@ -76,7 +76,7 @@
             }
             RegisterComponent<PlayerWatcherManager>();
             RegisterComponent<PlayerWatcher>();
-			RegisterComponent<VRC_UdonTrigger>();
+			RegisterComponent<VRC_AstroUdonTrigger>();
 
             RegisterComponent<Bouncer>();
             RegisterComponent<Lewdifier>();

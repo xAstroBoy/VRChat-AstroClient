@@ -1,6 +1,7 @@
 ﻿namespace AstroLibrary.Extensions
 {
 	using AstroClient;
+	using AstroClient.Udon;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
@@ -9,6 +10,15 @@
 
 	public static class Udon_ext
 	{
+
+
+		public static void UnboxUdonEventToConsole(this UdonBehaviour obj)
+		{
+			if(obj != null)
+			{
+				UdonUnboxer.UnboxUdon(obj);
+			}
+		}
 		public static CachedUdonEvent FindUdonEvent(this GameObject obj, string subaction)
 		{
 			return UdonSearch.FindUdonEvent(obj, subaction);

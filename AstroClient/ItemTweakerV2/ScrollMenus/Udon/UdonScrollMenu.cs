@@ -6,6 +6,7 @@
 	using RubyButtonAPI;
 	using VRC.Udon.Common.Interfaces;
 	using AstroClient.Components;
+	using UnityEngine;
 
 	public class UdonScrollMenu
     {
@@ -48,6 +49,7 @@
 									}
 								}, action.gameObject?.ToString() + " Run " + subaction.Key));
 							}
+							new QMSingleButton(MainScroll.BaseMenu, 0, -0.5f, $"Unbox {action.name}", () => { action.UnboxUdonEventToConsole(); }, $"Attempts to unbox {action.name} in console..", null, Color.yellow, true);
 						});
 						MainScroll.BaseMenu.GetMainButton().GetGameObject().GetComponent<UnityEngine.UI.Button>()
 							.onClick.Invoke();

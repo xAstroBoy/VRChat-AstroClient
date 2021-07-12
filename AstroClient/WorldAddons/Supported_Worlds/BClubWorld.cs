@@ -174,7 +174,7 @@
 									RenameTrigger.gameObject.RenameObject(ObjectName);
 								}
 
-								var AstroTrigger = clone.gameObject.AddComponent<VRC_UdonTrigger>();
+								var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroUdonTrigger>();
 								if (AstroTrigger != null)
 								{
 									AstroTrigger.InteractText = InteractionText;
@@ -225,7 +225,7 @@
 									RenameTrigger.gameObject.RenameObject(ObjectName);
 								}
 
-								var AstroTrigger = clone.gameObject.AddComponent<VRC_UdonTrigger>();
+								var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroUdonTrigger>();
 								if (AstroTrigger != null)
 								{
 									AstroTrigger.InteractText = InteractionText;
@@ -277,7 +277,7 @@
 									RenameTrigger.gameObject.RenameObject(ObjectName);
 								}
 
-								var AstroTrigger = clone.gameObject.AddComponent<VRC_UdonTrigger>();
+								var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroUdonTrigger>();
 								if (AstroTrigger != null)
 								{
 									AstroTrigger.InteractText = InteractionText;
@@ -330,7 +330,7 @@
 									RenameTrigger.gameObject.RenameObject(ObjectName);
 								}
 
-								var AstroTrigger = clone.gameObject.AddComponent<VRC_UdonTrigger>();
+								var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroUdonTrigger>();
 								if (AstroTrigger != null)
 								{
 									AstroTrigger.InteractText = InteractionText;
@@ -381,7 +381,7 @@
 									RenameTrigger.gameObject.RenameObject(ObjectName);
 								}
 
-								var AstroTrigger = clone.gameObject.AddComponent<VRC_UdonTrigger>();
+								var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroUdonTrigger>();
 								if (AstroTrigger != null)
 								{
 									AstroTrigger.InteractText = InteractionText;

@@ -301,6 +301,7 @@
     <Compile Include="Udon\Exploits\AmongUS\AmongUSUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Global\GlobalUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Murder4\Murder4UdonExploits.cs" />
+    <Compile Include="Udon\UdonUnboxer.cs" />
     <Compile Include="Utils\ColliderViewer\ColliderDisplay.cs" />
     <Compile Include="Utils\ColliderViewer\ColliderToggler.cs" />
     <Compile Include="Utils\ColliderViewer\XRay.cs" />
