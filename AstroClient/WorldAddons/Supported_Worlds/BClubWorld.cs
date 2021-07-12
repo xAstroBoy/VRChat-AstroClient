@@ -15,6 +15,8 @@
 	{
 		public static GameObject VIPRoom;
 
+		public static GameObject VIPInsideDoor;
+
 		public static List<Renderer> VIPHallRenderers = new List<Renderer>();
 
 		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
@@ -40,6 +42,19 @@
 					if (VIPRoom == null)
 					{
 						ModConsole.Error("VIP Bedroom was not found!");
+					}
+					else
+					{
+						VIPInsideDoor = VIPRoom.transform.FindObject("BedroomUdon/Door Inside/Door").gameObject;
+
+						if (VIPInsideDoor == null)
+						{
+							ModConsole.Log("VIP Inside Door not found!");
+						}
+						else
+						{
+							ModConsole.Log("VIP Inside Door found..");
+						}
 					}
 
 					CreateVIPEntryButton(new Vector3(-80.4f, 16.0598f, -1.695f), Quaternion.Euler(0f, 90f, 0f));
@@ -75,7 +90,10 @@
 
 		private void CreateVIPEntryButton(Vector3 position, Quaternion rotation)
 		{
-			var entryPosition = new Vector3(140.9367f, -0.5667f, 0.0696f);
+			//var entryPosition = new Vector3(140.9367f, -0.5667f, 0.0696f);
+			//var entryRotation = Quaternion.Euler(0f, 90f, 0f);
+
+			var entryPosition = VIPInsideDoor.transform.position + new Vector3(0.5f, 0, 0);
 			var entryRotation = Quaternion.Euler(0f, 90f, 0f);
 
 			_ = new WorldButton(position, rotation, "Enter\nVIP Room", () =>
