@@ -58,7 +58,7 @@
 
         public override void OnLateUpdate()
         {
-			if (ConfigManager.UI.ShowPlayersList)
+			if (ConfigManager.UI.ShowPlayersList && ConfigManager.UI.ShowPlayersMenu)
 			{
 				if (RefreshTime >= 16f)
 				{
@@ -90,7 +90,7 @@
 
         private void RefreshButtons()
         {
-            if (IsReady)
+            if (IsReady && ConfigManager.UI.ShowPlayersList && ConfigManager.UI.ShowPlayersMenu)
             {
                 refreshMutex.WaitOne();
                 var players = new List<PlayerListData>();
