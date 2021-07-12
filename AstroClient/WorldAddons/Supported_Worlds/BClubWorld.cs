@@ -90,22 +90,21 @@
 
 		private void CreateVIPEntryButton(Vector3 position, Quaternion rotation)
 		{
-			//var entryPosition = new Vector3(140.9367f, -0.5667f, 0.0696f);
-			//var entryRotation = Quaternion.Euler(0f, 90f, 0f);
+			VIPInsideDoor = VIPRoom.transform.FindObject("BedroomUdon/Door Inside/Door").gameObject;
 
-			var entryPosition = VIPInsideDoor.transform.position + new Vector3(0.5f, 0, 0);
-			var entryRotation = Quaternion.Euler(0f, 90f, 0f);
-
-			_ = new WorldButton(position, rotation, "Enter\nVIP Room", () =>
+			if (VIPInsideDoor != null)
 			{
-				if (VIPRoom != null)
-				{
-					VIPRoom.SetActive(true);
-				}
+				_ = new WorldButton(position, rotation, "Enter\nVIP Room", () =>
+{
+	if (VIPRoom != null)
+	{
+		VIPRoom.SetActive(true);
+	}
 
-				Utils.LocalPlayer.gameObject.transform.position = entryPosition;
-				Utils.LocalPlayer.gameObject.transform.rotation = entryRotation;
-			});
+	Utils.LocalPlayer.gameObject.transform.position = VIPInsideDoor.transform.position + new Vector3(0.5f, 0, 0);
+	Utils.LocalPlayer.gameObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+});
+			}
 		}
 
 		private void RemovePrivacyBlocksOnRooms(int roomid)
