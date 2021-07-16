@@ -65,7 +65,7 @@
 				{
 					ModConsole.DebugLog("Unpacking it as : System.String");
 
-					return unboxobj.ToString();
+					return IL2CPP.Il2CppStringToManaged(unboxobj.Pointer);
 				}
 				else if (il2cpptype.FullName == "System.UInt32")
 				{
@@ -113,6 +113,46 @@
 				{
 					ModConsole.DebugLog("Unpacking it as : UnityEngine.Color");
 					return unboxobj.Unbox<UnityEngine.Color>().ToString();
+				}
+				else if (il2cpptype.FullName == "UnityEngine.Transform")
+				{
+					return unboxobj.Cast<UnityEngine.Transform>().name;
+				}
+				else if(il2cpptype.FullName == "UnityEngine.GameObject")
+				{
+					return unboxobj.Cast<UnityEngine.GameObject>().name.ToString();
+				}
+				else if (il2cpptype.FullName == "VRC.SDKBase.VRCPlayerApi")
+				{
+					return unboxobj.Cast<VRC.SDKBase.VRCPlayerApi>().displayName.ToString();
+				}
+				else if (il2cpptype.FullName == "VRC.Udon.UdonBehaviour")
+				{
+					return unboxobj.Cast<VRC.Udon.UdonBehaviour>().name.ToString();
+				}
+				else if (il2cpptype.FullName == "UnityEngine.Material")
+				{
+					return unboxobj.Cast<UnityEngine.Material>().name.ToString();
+				}
+				else if (il2cpptype.FullName == "VRC.Udon.Common.Interfaces.NetworkEventTarget")
+				{
+					return unboxobj.Unbox<VRC.Udon.Common.Interfaces.NetworkEventTarget>().ToString();
+				}
+				else if (il2cpptype.FullName == "UnityEngine.HumanBodyBones")
+				{
+					return unboxobj.Unbox<UnityEngine.HumanBodyBones>().ToString();
+				}
+				else if (il2cpptype.FullName == "System.Object")
+				{
+					return "Not Supported Yet (i Have to figure this out)";
+				}
+				else if (il2cpptype.FullName == "UnityEngine.Vector3")
+				{
+					return unboxobj.Unbox<UnityEngine.Vector3>().ToString();
+				}
+				else if (il2cpptype.FullName == "UnityEngine.Quaternion")
+				{
+					return unboxobj.Unbox<UnityEngine.Quaternion>().ToString();
 				}
 			}
 			return "Not Supported Yet";
