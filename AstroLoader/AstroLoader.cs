@@ -18,7 +18,7 @@
 		};
 
 		public static string[] DebugLibraryPaths =
-{
+		{
 			@"Debug\Libs\AstroLibrary.dll",
 		};
 
@@ -37,10 +37,12 @@
 
 		public AstroLoader()
 		{
+			MelonUtils.JSonSerialize();
 			LoadEmbeddedLibraries();
 
 #if DEBUG
 			LoadDebug();
+			MelonUtils.JSonDeserialize();
 			return;
 #endif
 
@@ -51,6 +53,8 @@
 			while (!AstroNetworkLoader.IsReady)
 			{
 			}
+
+			MelonUtils.JSonSerialize();
 
 			if (AstroNetworkLoader.LibraryFiles.Count > 0)
 			{
@@ -76,6 +80,8 @@
 					Assembly.Load(bytes);
 				}
 			}
+
+			MelonUtils.JSonDeserialize();
 		}
 
 		public void LoadEmbeddedLibraries()
