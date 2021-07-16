@@ -36,7 +36,7 @@
             public MethodInfo TargetMethod { get; set; }
             public HarmonyMethod PrefixMethod { get; set; }
             public HarmonyMethod PostfixMethod { get; set; }
-            public HarmonyInstance Instance { get; set; }
+            public HarmonyLib.Harmony Instance { get; set; }
 
             public Patch(MethodInfo targetMethod, HarmonyMethod Before = null, HarmonyMethod After = null)
             {
@@ -45,7 +45,7 @@
                     ModConsole.Error("[Patches] TargetMethod is NULL or Pre And PostFix are Null");
                     return;
                 }
-                Instance = HarmonyInstance.Create($"Patch:{targetMethod.DeclaringType.FullName}.{targetMethod.Name}");
+                Instance = new HarmonyLib.Harmony($"Patch:{targetMethod.DeclaringType.FullName}.{targetMethod.Name}");
                 TargetMethod = targetMethod;
                 PrefixMethod = Before;
                 PostfixMethod = After;

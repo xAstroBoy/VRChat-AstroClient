@@ -11,7 +11,7 @@
     {
         public static event EventHandler<VRCPlayerEventArgs> Event_OnPlayerSelected;
 
-        private HarmonyInstance harmony1;
+        private HarmonyLib.Harmony harmony1;
 
         public override void ExecutePriorityPatches()
         {
@@ -24,7 +24,7 @@
             {
                 if (harmony1 == null)
                 {
-                    harmony1 = HarmonyInstance.Create(BuildInfo.Name + " SelectedPlayerHook");
+                    harmony1 = new HarmonyLib.Harmony(BuildInfo.Name + " SelectedPlayerHook");
                 }
 
                 harmony1.Patch(AccessTools.Method(typeof(QuickMenu), nameof(QuickMenu.Method_Public_Void_Player_PDM_0)), new HarmonyMethod(typeof(QuickMenuHooks).GetMethod(nameof(OnSelectedPlayerPatch), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
