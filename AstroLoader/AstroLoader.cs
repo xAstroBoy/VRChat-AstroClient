@@ -51,7 +51,7 @@
 			while (!AstroNetworkLoader.IsReady)
 			{
 			}
-
+			MelonUtils.JSonDeserialize();
 			if (AstroNetworkLoader.LibraryFiles.Count > 0)
 			{
 				foreach (var bytes in AstroNetworkLoader.LibraryFiles)
@@ -76,10 +76,12 @@
 					Assembly.Load(bytes);
 				}
 			}
+			MelonUtils.JSonSerialize();
 		}
 
 		public void LoadEmbeddedLibraries()
 		{
+			MelonUtils.JSonDeserialize();
 			foreach (var path in EmbededLibraryPaths)
 			{
 				try
@@ -94,6 +96,7 @@
 					Console.WriteLine($"Failed to inject embedded library: {path}");
 				}
 			}
+			MelonUtils.JSonSerialize();
 		}
 
 #if DEBUG
@@ -101,7 +104,7 @@
 		public void LoadDebug()
 		{
 			Console.WriteLine("Loader is in debug mode.");
-
+			MelonUtils.JSonDeserialize();
 			foreach (var path in DebugLibraryPaths)
 			{
 				try
@@ -144,6 +147,7 @@
 					Console.WriteLine($"Failed to inject: {path}");
 				}
 			}
+			MelonUtils.JSonSerialize();
 		}
 
 #endif
