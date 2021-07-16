@@ -20,9 +20,9 @@
         public static event EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
 
         //public static
-        private HarmonyInstance harmony1;
+        private HarmonyLib.Harmony harmony1;
 
-        private HarmonyInstance harmony2;
+        private HarmonyLib.Harmony harmony2;
 
         public override void ExecutePriorityPatches()
         {
@@ -38,7 +38,7 @@
             {
                 if (harmony1 == null)
                 {
-                    harmony1 = HarmonyInstance.Create(BuildInfo.Name + " RPCEventHook1");
+                    harmony1 = new HarmonyLib.Harmony(BuildInfo.Name + " RPCEventHook1");
                 }
 
                 harmony1.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent1), BindingFlags.Static | BindingFlags.NonPublic)), null, null);

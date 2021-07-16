@@ -61,6 +61,7 @@
 			try
 			{
 				GetSteamIdSLocations();
+
 				ModConsole.Log("[Defenses] Start. . .");
 
 				foreach (var method in typeof(HttpClient).GetMethods())
@@ -133,7 +134,7 @@
 				new Patch(typeof(File).GetMethod(nameof(File.Exists)), GetPatch(nameof(HideFiles)));
 
 
-				foreach (var method in typeof(RegistryKey).GetMethods())
+				foreach (var method in typeof(File).GetMethods())
 				{
 					if (method != null)
 					{
@@ -144,11 +145,11 @@
 							new Patch(method, GetPatch(nameof(ControlledReadAllLines)));
 						}
 
-						if (method.Name.Equals("ReadAllText"))
-						{
-							ModConsole.DebugLog("Registering Patch ControlledReadAllText");
-							new Patch(method, GetPatch(nameof(ControlledReadAllText)));
-						}
+						//if (method.Name.Equals("ReadAllText") && method.GetParameters().Count() == 1)
+						//{
+						//	ModConsole.DebugLog("Registering Patch ControlledReadAllText");
+						//	new Patch(method, GetPatch(nameof(ControlledReadAllText)));
+						//}
 
 						if (method.Name.Equals("ReadAllBytes"))
 						{
@@ -158,55 +159,39 @@
 					}
 				}
 
-				foreach (var method in typeof(Console).GetMethods())
-				{
-					if (method != null)
-					{
-						if (method.Name.Equals("ReadLine"))
-						{
-							ModConsole.DebugLog("Registering Patch ConsoleReadLine");
-							new Patch(method, GetPatch(nameof(ConsoleReadLine)));
-						}
-						if (method.Name.Equals("ReadKey"))
-						{
-							ModConsole.DebugLog("Registering Patch ConsoleReadKey");
-							new Patch(method, GetPatch(nameof(ConsoleReadKey)));
-						}
-						if (method.Name.Equals("Read"))
-						{
-							ModConsole.DebugLog("Registering Patch ConsoleRead");
-							new Patch(method, GetPatch(nameof(ConsoleRead)));
-						}
-						if (method.Name.Equals("Clear"))
-						{
-							ModConsole.DebugLog("Registering Patch BlockFirstClear");
-							new Patch(method, GetPatch(nameof(BlockFirstConsoleClear)));
-						}
-					}
-
-					ModConsole.DebugLog("Registering Patch HideNetworkInterfaces");
-					new Patch(typeof(NetworkInterface).GetMethod(nameof(NetworkInterface.GetAllNetworkInterfaces)), GetPatch(nameof(HideNetworkInterfaces)));
-				}
-
-				//foreach (var method in typeof(MelonHandler).GetFields())
+				//foreach (var method in typeof(Console).GetMethods())
 				//{
-				//    if (method != null)
-				//    {
-				//        if (method.Name.ToLower().StartsWith("get_"))
-				//        {
-				//            if(method.Name.ToLower() == "get_mods")
-				//            {
-				//                ModConsole.DebugLog("Registering Patch HideMelonMods");
-				//                new Patch(method, GetPatch(nameof(HideMelonMods)));
-				//            }
-				//            if (method.Name.ToLower() == "get_plugins")
-				//            {
-				//                ModConsole.DebugLog("Registering Patch HideMelonPlugins");
-				//                new Patch(method, GetPatch(nameof(HideMelonPlugins)));
-				//            }
-				//        }
-				//    }
+				//	if (method != null)
+				//	{
+				//		if (method.Name.Equals("ReadLine"))
+				//		{
+				//			ModConsole.DebugLog("Registering Patch ConsoleReadLine");
+				//			new Patch(method, GetPatch(nameof(ConsoleReadLine)));
+				//		}
+				//		if (method.Name.Equals("ReadKey"))
+				//		{
+				//			ModConsole.DebugLog("Registering Patch ConsoleReadKey");
+				//			new Patch(method, GetPatch(nameof(ConsoleReadKey)));
+				//		}
+				//		if (method.Name.Equals("Read"))
+				//		{
+				//			ModConsole.DebugLog("Registering Patch ConsoleRead");
+				//			new Patch(method, GetPatch(nameof(ConsoleRead)));
+				//		}
+
+				// TODO : THIS PATCH HERE BREAKS NOTORIOUS AND SUCH.
+				//		//if (method.Name.Equals("Clear"))
+				//		//{
+				//		//	ModConsole.DebugLog("Registering Patch BlockFirstClear");
+				//		//	new Patch(method, GetPatch(nameof(BlockFirstConsoleClear)));
+				//		//}
+				//	}
+
 				//}
+
+				ModConsole.DebugLog("Registering Patch HideNetworkInterfaces");
+				new Patch(typeof(NetworkInterface).GetMethod(nameof(NetworkInterface.GetAllNetworkInterfaces)), GetPatch(nameof(HideNetworkInterfaces)));
+
 
 				foreach (var method in typeof(Directory).GetMethods())
 				{
@@ -250,26 +235,6 @@
 							}
 						}
 
-					}
-				}
-
-				foreach (var method in typeof(HarmonyInstance).GetMethods())
-				{
-					if (method != null)
-					{
-						if (method.Name.Equals("UnpatchAllInstances"))
-						{
-							ModConsole.DebugLog("Registering Patch UnpatchAllInstancesControlled");
-							new Patch(method, GetPatch(nameof(UnpatchAllInstancesControlled)));
-						}
-
-						//if (method.Name.Equals("GetPatchedMethods"))
-						//{
-						//	ModConsole.DebugLog("Registering Patch EmptyGetPatchedMethods");
-
-						//	new Patch(method, GetPatch(nameof(EmptyGetPatchedMethods)));
-
-						//}
 					}
 				}
 
@@ -333,16 +298,6 @@
 						}
 					}
 				}
-				//foreach (var method in typeof(Assembly).GetMethods())
-				//{
-				//    if (method != null)
-				//    {
-				//        if (method.Name == "Load")
-				//        {
-				//            new Patch(method, null, GetPatch(nameof(PostMonitoredAssemblyLoad)));
-				//        }
-				//    }
-				//}
 
 				Patch.DoPatches();
 			}
@@ -618,19 +573,6 @@
 			return true;
 		}
 
-		private static bool UnpatchAllInstancesControlled(ref Exception __exception)
-		{
-			ModConsole.DebugLog($"Blocked HarmonyInstance.UnpatchAllInstances Called by {GetModName()}");
-			__exception = new NullReferenceException("You tried fam, but this is protected"); ;
-			return false;
-		}
-
-		private static bool EmptyGetPatchedMethods(ref Exception __Exception)
-		{
-			ModConsole.DebugLog($"Blocked HarmonyInstance.GetPatchedMethods Called by {GetModName()}");
-			__Exception = new NullReferenceException("You tried fam, but this is protected"); ;
-			return false;
-		}
 
 		private static bool ControlledDirectoryGetDirectoriesThreeParam(string __0, string __1, SearchOption __2, ref string[] __result)
 		{
@@ -1165,7 +1107,6 @@
 					if (__instance.StartInfo.Arguments.ToLower().Contains("shutdown"))
 					{
 						Console.Beep();
-
 						Console.Beep();
 						Console.Beep();
 						ModConsole.Warning($"{assemblyname} tried to Shut Down Your PC! {__instance.StartInfo.Arguments}");
@@ -1232,17 +1173,6 @@
 			"Microsoft",
 			"Il2Cpp"
 		};
-
-		private static void PostMonitoredAssemblyLoad(Assembly __result)
-		{
-			if (__result != null)
-			{
-				if (!SafeAssemblys.Contains(__result.FullName))
-				{
-					ModConsole.Warning($"{GetModName()} Loaded {__result?.FullName}");
-				}
-			}
-		}
 
 	}
 }

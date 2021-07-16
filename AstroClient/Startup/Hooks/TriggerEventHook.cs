@@ -10,7 +10,7 @@
 
 	public class TriggerEventHook : GameEvents
     {
-        private HarmonyInstance harmony;
+        private HarmonyLib.Harmony harmony;
 
         public static event EventHandler<VRC_EventDispatcherRFC_TriggerEventArgs> Event_VRC_EventDispatcherRFC_triggerEvent;
 
@@ -23,7 +23,7 @@
         {
             if (harmony == null)
             {
-                harmony = HarmonyInstance.Create(BuildInfo.Name + " TriggerEventHook");
+                harmony = new HarmonyLib.Harmony(BuildInfo.Name + " TriggerEventHook");
             }
             ModConsole.DebugLog("Hooking TriggerEvent");
             var xrefs = XrefScanner.XrefScan(typeof(VRC_EventDispatcherRFC).GetMethod(nameof(VRC_EventDispatcherRFC.TriggerEvent)));
