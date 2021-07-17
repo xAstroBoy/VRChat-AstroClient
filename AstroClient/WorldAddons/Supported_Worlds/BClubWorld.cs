@@ -497,27 +497,13 @@
 					var vipOnlyPatch = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("vipOnly"));
 					if (vipOnlyPatch != null)
 					{
-						var extract = vipOnlyPatch.Unpack_Boolean();
-						if (extract.HasValue)
-						{
-							if (!extract.Value)
-							{
-								UdonHeapEditor.PatchHeap(symbol_table, heap, "vipOnly", false, true);
-							}
-						}
+						UdonHeapEditor.PatchHeap(symbol_table, heap, "vipOnly", false, true);
 					}
 
 					var vipOnlyLocalPatch = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("vipOnlyLocal"));
 					if (vipOnlyLocalPatch != null)
 					{
-						var extract = vipOnlyLocalPatch.Unpack_Boolean();
-						if (extract.HasValue)
-						{
-							if (!extract.Value)
-							{
-								UdonHeapEditor.PatchHeap(symbol_table, heap, "vipOnlyLocal", false, true);
-							}
-						}
+						UdonHeapEditor.PatchHeap(symbol_table, heap, "vipOnlyLocal", false, true);
 					}
 				}
 				catch(Exception e)
