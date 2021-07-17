@@ -1,8 +1,11 @@
 ﻿namespace AstroClient
 {
+	using Il2CppSystem.Collections.Generic;
 	using System;
+	using System.Linq;
 	using System.Runtime.InteropServices;
 	using UnhollowerBaseLib;
+	using UnhollowerRuntimeLib;
 	using UnityEngine;
 
 	public static class UdonConverter
@@ -31,49 +34,106 @@
 
 
 
-		public static Il2CppSystem.Object Generate_Il2CPPObject_Array_VRCPlayerApi(VRC.SDKBase.VRCPlayerApi[] item)
+		public static Il2CppSystem.Object Generate_Il2CPPObject_Array_VRCPlayerApi(VRC.SDKBase.VRCPlayerApi[] array)
 		{
-			IntPtr ArrayPointer = Marshal.AllocHGlobal(Marshal.SizeOf(item));
-			Il2CppArrayBase<VRC.SDKBase.VRCPlayerApi> array = Il2CppArrayBase<VRC.SDKBase.VRCPlayerApi>.WrapNativeGenericArrayPointer(ArrayPointer);
-			Il2CppSystem.Object obj = new Il2CppSystem.Object(array.Pointer);
-			Marshal.FreeHGlobal(ArrayPointer);
-			return obj;
+			var list = new Il2CppSystem.Collections.Generic.List<VRC.SDKBase.VRCPlayerApi>();
+			foreach(var item in array)
+			{
+				if(item != null)
+				{
+					if(!list.Contains(item))
+					{
+						list.Add(item);
+					}
+				}
+			}
+
+			// Convert to Array.
+
+			var arrayresult = list.ToArray();
+			return new Il2CppSystem.Object(arrayresult.Pointer);
 		}
 
-		public static Il2CppSystem.Object Generate_Il2CPPObject_Array_UnityEngine_GameObjects(UnityEngine.GameObject[] item)
+		public static Il2CppSystem.Object Generate_Il2CPPObject_Array_UnityEngine_GameObjects(UnityEngine.GameObject[] array)
 		{
-			IntPtr ArrayPointer = Marshal.AllocHGlobal(Marshal.SizeOf(item));
-			Il2CppArrayBase<GameObject> array = Il2CppArrayBase<GameObject>.WrapNativeGenericArrayPointer(ArrayPointer);
-			Il2CppSystem.Object obj = new Il2CppSystem.Object(array.Pointer);
-			Marshal.FreeHGlobal(ArrayPointer);
-			return obj;
+			var list = new Il2CppSystem.Collections.Generic.List<UnityEngine.GameObject>();
+			foreach (var item in array)
+			{
+				if (item != null)
+				{
+					if (!list.Contains(item))
+					{
+						list.Add(item);
+					}
+				}
+			}
+
+			// Convert to Array.
+
+			var arrayresult = list.ToArray();
+			return new Il2CppSystem.Object(arrayresult.Pointer);
+		}
+	
+
+		public static Il2CppSystem.Object Generate_Il2CPPObject_Array_UnityEngine_AudioClips(UnityEngine.AudioClip[] array)
+		{
+			var list = new Il2CppSystem.Collections.Generic.List<UnityEngine.AudioClip>();
+			foreach (var item in array)
+			{
+				if (item != null)
+				{
+					if (!list.Contains(item))
+					{
+						list.Add(item);
+					}
+				}
+			}
+
+			// Convert to Array.
+
+			var arrayresult = list.ToArray();
+			return new Il2CppSystem.Object(arrayresult.Pointer);
 		}
 
-		public static Il2CppSystem.Object Generate_Il2CPPObject_Array_UnityEngine_AudioClips(UnityEngine.AudioClip[] item)
+		public static Il2CppSystem.Object Generate_Il2CPPObject_Array_char(char[] array)
 		{
-			IntPtr ArrayPointer = Marshal.AllocHGlobal(Marshal.SizeOf(item));
-			Il2CppArrayBase<GameObject> array = Il2CppArrayBase<GameObject>.WrapNativeGenericArrayPointer(ArrayPointer);
-			Il2CppSystem.Object obj = new Il2CppSystem.Object(array.Pointer);
-			Marshal.FreeHGlobal(ArrayPointer);
-			return obj;
+
+			var list = new Il2CppSystem.Collections.Generic.List<char>();
+			foreach (var item in array)
+			{
+				if (item != null)
+				{
+					if (!list.Contains(item))
+					{
+						list.Add(item);
+					}
+				}
+			}
+
+			// Convert to Array.
+
+			var arrayresult = list.ToArray();
+			return new Il2CppSystem.Object(arrayresult.Pointer);
 		}
 
-		public static Il2CppSystem.Object Generate_Il2CPPObject_Array_char(char[] item)
+		public static Il2CppSystem.Object Generate_Il2CPPObject_Array_HumanBodyBones(UnityEngine.HumanBodyBones[] array)
 		{
-			IntPtr ArrayPointer = Marshal.AllocHGlobal(Marshal.SizeOf(item));
-			Il2CppStructArray<char> array = new Il2CppStructArray<char>(ArrayPointer);
-			Il2CppSystem.Object obj = new Il2CppSystem.Object(array.Pointer);
-			Marshal.FreeHGlobal(ArrayPointer);
-			return obj;
-		}
+			var list = new Il2CppSystem.Collections.Generic.List<HumanBodyBones>();
+			foreach (var item in array)
+			{
+				if (item != null)
+				{
+					if (!list.Contains(item))
+					{
+						list.Add(item);
+					}
+				}
+			}
 
-		public static Il2CppSystem.Object Generate_Il2CPPObject_Array_HumanBodyBones(UnityEngine.HumanBodyBones[] item)
-		{
-			IntPtr ArrayPointer = Marshal.AllocHGlobal(Marshal.SizeOf(item));
-			Il2CppStructArray<UnityEngine.HumanBodyBones> array2 = new Il2CppStructArray<UnityEngine.HumanBodyBones>(ArrayPointer);
-			Il2CppSystem.Object obj = new Il2CppSystem.Object(array2.Pointer);
-			Marshal.FreeHGlobal(ArrayPointer);
-			return obj;
+			// Convert to Array.
+
+			var arrayresult = list.ToArray();
+			return new Il2CppSystem.Object(arrayresult.Pointer);
 		}
 
 		public static Il2CppSystem.Object Generate_Il2CPPObject_UInt32(System.UInt32 item)
@@ -272,20 +332,28 @@
 			return null;
 		}
 
-		public static Il2CppSystem.Object Generate_Il2CPPObject_UnityEngine_HumanBodyBones(UnityEngine.HumanBodyBones item)
+		public static Il2CppSystem.Object Generate_Il2CPPObject_UnityEngine_HumanBodyBones(UnityEngine.HumanBodyBones value)
 		{
-			IntPtr ArrayPointer = Marshal.AllocHGlobal(Marshal.SizeOf(item));
-			var boxed = new Il2CppSystem.Object(IL2CPP.il2cpp_value_box(Il2CppClassPointerStore<UnityEngine.HumanBodyBones>.NativeClassPtr, ArrayPointer));
-			Marshal.FreeHGlobal(ArrayPointer);
-			return boxed;
+			foreach (var item in Il2CppType.Of<UnityEngine.HumanBodyBones>().GetEnumValues())
+			{
+				if (item.Unbox<UnityEngine.HumanBodyBones>() == value)
+				{
+					return item;
+				}
+			}
+			return null;
 		}
 
-		public static Il2CppSystem.Object Generate_Il2CPPObject_UnityEngine_NetworkEventTarget(VRC.Udon.Common.Interfaces.NetworkEventTarget item)
+		public static Il2CppSystem.Object Generate_Il2CPPObject_UnityEngine_NetworkEventTarget(VRC.Udon.Common.Interfaces.NetworkEventTarget value)
 		{
-			IntPtr ArrayPointer = Marshal.AllocHGlobal(Marshal.SizeOf(item));
-			var boxed = new Il2CppSystem.Object(IL2CPP.il2cpp_value_box(Il2CppClassPointerStore<VRC.Udon.Common.Interfaces.NetworkEventTarget>.NativeClassPtr, ArrayPointer));
-			Marshal.FreeHGlobal(ArrayPointer);
-			return boxed;
+			foreach (var item in Il2CppType.Of<VRC.Udon.Common.Interfaces.NetworkEventTarget>().GetEnumValues())
+			{
+				if (item.Unbox<VRC.Udon.Common.Interfaces.NetworkEventTarget>() == value)
+				{
+					return item;
+				}
+			}
+			return null;
 		}
 	}
 }

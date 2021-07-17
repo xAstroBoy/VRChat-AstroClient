@@ -5,6 +5,7 @@
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
+	using AstroLibrary.Utility;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -448,20 +449,18 @@
 					var symbol_table = program.SymbolTable;
 					var heap = program.Heap;
 
-					var obj_List = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("elitesRaw"));
+					var obj_List = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("localPatrons"));
 					if (obj_List != null)
 					{
-						var list = obj_List.Unpack_List_String();
-						if (list != null && list.Count() != 0)
+						var patreonstr = obj_List.Unpack_String();
+						if (!patreonstr.Contains(Utils.LocalPlayer.displayName))
 						{
-							if (!list.Contains(Utils.LocalPlayer.displayName))
-							{
-								list.Add(Utils.LocalPlayer.displayName);
-							}
-						}
+							var modifiedpatreonstr = Utils.LocalPlayer.displayName + Environment.NewLine + patreonstr;
 
-						UdonHeapEditor.PatchHeap(symbol_table, heap, "elitesRaw", list.ToArray(), true);
+							UdonHeapEditor.PatchHeap(symbol_table, heap, "localPatrons", modifiedpatreonstr, true);
+						}
 					}
+					node.InitializeUdonContent();
 				}
 			}
 			catch (Exception e)
@@ -472,8 +471,6 @@
 
 		private static void PatchPatreonNode()
 		{
-			try
-			{
 				var patreonlist = GameObjectFinder.Find("Udon/Patreon");
 				if (patreonlist != null)
 				{
@@ -482,26 +479,8 @@
 					var symbol_table = program.SymbolTable;
 					var heap = program.Heap;
 
-					var Elite_List = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("elitesInInstance"));
-					if (Elite_List != null)
-					{
-						var list = Elite_List.Unpack_Array_VRCPlayerApi().ToList();
-						if (list != null && list.Count() != 0)
-						{
-							if (!list.Contains(Utils.LocalPlayer))
-							{
-								list.Add(Utils.LocalPlayer);
-							}
-						}
-						else
-						{
-							list = new List<VRC.SDKBase.VRCPlayerApi>();
-							list.Add(Utils.LocalPlayer);
-						}
-
-						UdonHeapEditor.PatchHeap(symbol_table, heap, "elitesInInstance", list.ToArray(), true);
-					}
-
+				try
+				{
 					var isEliteBoolPatch = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("__0_isElite_Boolean"));
 					if (isEliteBoolPatch != null)
 					{
@@ -515,12 +494,43 @@
 						}
 					}
 				}
+				catch(Exception e)
+				{
+					ModConsole.ErrorExc(e);
 
-			}
-			catch (Exception e)
-			{
-				ModConsole.ErrorExc(e);
-			}
+				}
+
+				try
+					{
+						var Elite_List = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("elitesInInstance"));
+						if (Elite_List != null)
+						{
+							var list = Elite_List.Unpack_Array_VRCPlayerApi().ToList();
+							if (list != null && list.Count() != 0)
+							{
+								if (!list.Contains(Utils.LocalPlayer))
+								{
+									list.Add(Utils.LocalPlayer);
+								}
+							}
+							else
+							{
+								list = new List<VRC.SDKBase.VRCPlayerApi>();
+								list.Add(Utils.LocalPlayer);
+							}
+
+							UdonHeapEditor.PatchHeap(symbol_table, heap, "elitesInInstance", list.ToArray(), true);
+						}
+					}
+					catch (Exception e)
+					{
+						ModConsole.ErrorExc(e);
+					}
+
+				node.InitializeUdonContent();
+
+				}
+
 		}
 	}
 }
