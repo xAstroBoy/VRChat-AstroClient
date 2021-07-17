@@ -502,7 +502,7 @@
 						{
 							if (!extract.Value)
 							{
-								UdonHeapEditor.PatchHeap(symbol_table, heap, "vipOnly", true, true);
+								UdonHeapEditor.PatchHeap(symbol_table, heap, "vipOnly", false, true);
 							}
 						}
 					}
@@ -515,7 +515,7 @@
 						{
 							if (!extract.Value)
 							{
-								UdonHeapEditor.PatchHeap(symbol_table, heap, "vipOnlyLocal", true, true);
+								UdonHeapEditor.PatchHeap(symbol_table, heap, "vipOnlyLocal", false, true);
 							}
 						}
 					}
