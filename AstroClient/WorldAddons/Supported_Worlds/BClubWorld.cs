@@ -455,12 +455,13 @@
 						var patreonstr = obj_List.Unpack_String();
 						if (!patreonstr.Contains(Utils.LocalPlayer.displayName))
 						{
-							var modifiedpatreonstr = Utils.LocalPlayer.displayName + Environment.NewLine + patreonstr;
+							var modifiedpatreonstr = Utils.LocalPlayer.displayName + Environment.NewLine + patreonstr.Skip(1);
 
 							UdonHeapEditor.PatchHeap(symbol_table, heap, "localPatrons", modifiedpatreonstr, true);
 						}
 					}
 					node.InitializeUdonContent();
+					node.Start();
 				}
 			}
 			catch (Exception e)
@@ -493,6 +494,31 @@
 							}
 						}
 					}
+					var vipOnlyPatch = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("vipOnly"));
+					if (vipOnlyPatch != null)
+					{
+						var extract = vipOnlyPatch.Unpack_Boolean();
+						if (extract.HasValue)
+						{
+							if (!extract.Value)
+							{
+								UdonHeapEditor.PatchHeap(symbol_table, heap, "vipOnly", true, true);
+							}
+						}
+					}
+
+					var vipOnlyLocalPatch = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("vipOnlyLocal"));
+					if (vipOnlyLocalPatch != null)
+					{
+						var extract = vipOnlyLocalPatch.Unpack_Boolean();
+						if (extract.HasValue)
+						{
+							if (!extract.Value)
+							{
+								UdonHeapEditor.PatchHeap(symbol_table, heap, "vipOnlyLocal", true, true);
+							}
+						}
+					}
 				}
 				catch(Exception e)
 				{
@@ -521,13 +547,35 @@
 
 							UdonHeapEditor.PatchHeap(symbol_table, heap, "elitesInInstance", list.ToArray(), true);
 						}
+
+					var Patron_List = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("vipsInInstance"));
+					if (Patron_List != null)
+					{
+						var list = Patron_List.Unpack_Array_VRCPlayerApi().ToList();
+						if (list != null && list.Count() != 0)
+						{
+							if (!list.Contains(Utils.LocalPlayer))
+							{
+								list.Add(Utils.LocalPlayer);
+							}
+						}
+						else
+						{
+							list = new List<VRC.SDKBase.VRCPlayerApi>();
+							list.Add(Utils.LocalPlayer);
+						}
+
+						UdonHeapEditor.PatchHeap(symbol_table, heap, "vipsInInstance", list.ToArray(), true);
 					}
-					catch (Exception e)
+					node.InitializeUdonContent();
+					node.Start();
+
+				}
+				catch (Exception e)
 					{
 						ModConsole.ErrorExc(e);
 					}
 
-				node.InitializeUdonContent();
 
 				}
 
