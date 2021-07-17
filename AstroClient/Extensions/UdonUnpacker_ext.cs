@@ -3,6 +3,7 @@
 	using AstroLibrary.Console;
 	using System.Collections.Generic;
 	using System.Linq;
+	using UnhollowerBaseLib;
 	using UnityEngine;
 
 	public static class UdonUnpacker_ext
@@ -426,7 +427,7 @@
 			{
 				if (obj.GetIl2CppType().FullName == "UnityEngine.GameObject[]")
 				{
-					var array = Serialization.FromIL2CPPToManaged<GameObject[]>(obj);
+					var array = Il2CppArrayBase<GameObject>.WrapNativeGenericArrayPointer(obj.Pointer);
 					if (array != null && array.Count() != 0)
 					{
 						return array;
@@ -462,7 +463,7 @@
 			{
 				if (obj.GetIl2CppType().FullName == "VRC.SDKBase.VRCPlayerApi[]")
 				{
-					var array = Serialization.FromIL2CPPToManaged<VRC.SDKBase.VRCPlayerApi[]>(obj);
+					var array = Il2CppArrayBase<VRC.SDKBase.VRCPlayerApi>.WrapNativeGenericArrayPointer(obj.Pointer);
 					if (array != null && array.Count() != 0)
 					{
 						return array;
@@ -498,7 +499,7 @@
 			{
 				if (obj.GetIl2CppType().FullName == "UnityEngine.AudioClip[]")
 				{
-					var array = Serialization.FromIL2CPPToManaged<UnityEngine.AudioClip[]>(obj);
+					var array = Il2CppArrayBase<UnityEngine.AudioClip>.WrapNativeGenericArrayPointer(obj.Pointer);
 					if (array != null && array.Count() != 0)
 					{
 						return array;
@@ -534,7 +535,7 @@
 			{
 				if (obj.GetIl2CppType().FullName == "System.Char[]")
 				{
-					var array = Serialization.FromIL2CPPToManaged<System.Char[]>(obj);
+					var array = Il2CppArrayBase<System.Char>.WrapNativeGenericArrayPointer(obj.Pointer);
 					if (array != null && array.Count() != 0)
 					{
 						return array;
