@@ -1,20 +1,6 @@
 ﻿namespace AstroClient.Components
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
-	using System;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
-	using VRC.SDK3.Components;
-	using VRC.Udon;
-	using VRC.Udon.Common.Interfaces;
 	using VRC.Udon.ProgramSources;
-	using AstroLibrary.Console;
-	using System.Collections;
-	using MelonLoader;
 
 	class UdonTrigger_Helper 
 	{

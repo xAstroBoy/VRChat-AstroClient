@@ -1,10 +1,8 @@
 ﻿namespace AstroClient.Udon
 {
-	using AstroClient.Extensions;
 	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
 	using System;
-	using System.Linq;
-	using UnhollowerBaseLib;
 	using VRC.Udon;
 	using VRC.Udon.Common.Interfaces;
 

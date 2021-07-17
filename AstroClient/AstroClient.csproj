@@ -120,6 +120,8 @@
     <Compile Include="Extensions\Components_exts\PickupController_ext.cs" />
     <Compile Include="Extensions\Components_exts\RigidBodyController_ext.cs" />
     <Compile Include="Extensions\EventHandler_ext.cs" />
+    <Compile Include="Udon\UdonEditor\UdonConverter.cs" />
+    <Compile Include="Udon\UdonEditor\UdonHeapEditor.cs" />
     <Compile Include="Utils\Serialization.cs" />
     <Compile Include="Extensions\UdonUnpacker_ext.cs" />
     <Compile Include="Extensions\VRCPlayer_Emoji_Ext.cs" />
@@ -303,7 +305,7 @@
     <Compile Include="Udon\Exploits\AmongUS\AmongUSUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Global\GlobalUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Murder4\Murder4UdonExploits.cs" />
-    <Compile Include="Udon\UdonUnboxer.cs" />
+    <Compile Include="Udon\UdonEditor\UdonUnboxer.cs" />
     <Compile Include="Utils\ColliderViewer\ColliderDisplay.cs" />
     <Compile Include="Utils\ColliderViewer\ColliderToggler.cs" />
     <Compile Include="Utils\ColliderViewer\XRay.cs" />
