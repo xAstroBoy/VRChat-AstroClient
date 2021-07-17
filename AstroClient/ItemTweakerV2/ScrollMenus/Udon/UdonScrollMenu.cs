@@ -49,7 +49,9 @@
 									}
 								}, action.gameObject?.ToString() + " Run " + subaction.Key));
 							}
-							new QMSingleButton(MainScroll.BaseMenu, 0, -0.5f, $"Unbox {action.name}", () => { action.UnboxUdonEventToConsole(); }, $"Attempts to unbox {action.name} in console..", null, Color.yellow, true);
+							var unboxer = new QMSingleButton(MainScroll.BaseMenu, 0, -0.5f, $"Unbox {action.name}", () => { action.UnboxUdonEventToConsole(); }, $"Attempts to unbox {action.name} in console..", null, Color.yellow, true);
+							MainScroll.Add(unboxer);
+							unboxer.SetLocation(0, -0.5f);
 						});
 						MainScroll.BaseMenu.GetMainButton().GetGameObject().GetComponent<UnityEngine.UI.Button>()
 							.onClick.Invoke();

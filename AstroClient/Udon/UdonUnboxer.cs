@@ -1,7 +1,9 @@
 ﻿namespace AstroClient.Udon
 {
+	using AstroClient.Extensions;
 	using AstroLibrary.Console;
 	using System;
+	using System.Linq;
 	using UnhollowerBaseLib;
 	using VRC.Udon;
 	using VRC.Udon.Common.Interfaces;
@@ -22,9 +24,14 @@
 				if (program != null)
 				{
 					symbol_table = program.SymbolTable;
-					if(program.Heap != null)
+					if (program.Heap != null)
 					{
 						heap = program.Heap;
+					}
+					else
+					{
+						ModConsole.Log($"[Udon Unboxer] : {udonnode.name} Heap is Empty! Can't unbox!", System.Drawing.Color.Red);
+						return;
 					}
 				}
 				else
@@ -33,129 +40,349 @@
 					return;
 				}
 
+				System.Console.Clear();
 				ModConsole.Log($"[Udon Unboxer] : Dumping {udonnode.name} Symbols and types..", System.Drawing.Color.Orange);
 				foreach (var symbol in symbol_table.GetSymbols())
 				{
 					if (symbol != null)
 					{
-						var symboltype = symbol_table.GetSymbolType(symbol);
 						var address = symbol_table.GetAddressFromSymbol(symbol);
-
-						try
+						var UnboxVariable = heap.GetHeapVariable(address);
+						if (UnboxVariable != null)
 						{
-							string unpackedsymbol = UnboxUdonHeap(heap.GetHeapVariable(address), symboltype);
+							var Il2CppType = UnboxVariable.GetIl2CppType();
+							var unpackedsymbol = UnboxUdonHeap(UnboxVariable);
+							ModConsole.Log($"[Udon Unboxer] : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}", System.Drawing.Color.Gold);
 
-							ModConsole.Log($"[Udon Unboxer] : Found Symbol : {symbol}, Type : {symboltype.FullName} with value : {unpackedsymbol}", System.Drawing.Color.Gold);
-						}
-						catch (Exception e)
-						{
-							ModConsole.DebugErrorExc(e);
-							ModConsole.Log($"[Udon Unboxer] : Found Symbol : {symbol}, Type : {symboltype.FullName} (Error unpacking it.)", System.Drawing.Color.Gold);
 						}
 					}
 				}
 			}
+
 		}
 
-		private static string UnboxUdonHeap(Il2CppSystem.Object unboxobj, Il2CppSystem.Type il2cpptype)
+		private static string UnboxUdonHeap(Il2CppSystem.Object obj)
 		{
-			if (il2cpptype != null)
+			try
 			{
-				if (il2cpptype.FullName == "System.String")
+				string FullName = obj.GetIl2CppType().FullName;
+				if (obj != null)
 				{
-					ModConsole.DebugLog("Unpacking it as : System.String");
-
-					return IL2CPP.Il2CppStringToManaged(unboxobj.Pointer);
-				}
-				else if (il2cpptype.FullName == "System.UInt32")
-				{
-					ModConsole.DebugLog("Unpacking it as : System.Int32");
-
-					return unboxobj.Unbox<System.UInt32>().ToString();
-				}
-				else if (il2cpptype.FullName == "System.Int32")
-				{
-					ModConsole.DebugLog("Unpacking it as : System.Int32");
-
-					return unboxobj.Unbox<System.Int32>().ToString();
-				}
-				else if (il2cpptype.FullName == "System.Int64")
-				{
-					ModConsole.DebugLog("Unpacking it as : System.Int64");
-
-					return unboxobj.Unbox<System.Int64>().ToString();
-				}
-				else if (il2cpptype.FullName == "System.Char")
-				{
-					ModConsole.DebugLog("Unpacking it as : System.Char");
-
-					return unboxobj.Unbox<System.Char>().ToString();
-				}
-				else if (il2cpptype.FullName == "System.Boolean")
-				{
-					ModConsole.DebugLog("Unpacking it as : System.Boolean");
-
-					return unboxobj.Unbox<System.Boolean>().ToString();
-				}
-				else if (il2cpptype.FullName == "System.String[]")
-				{
-					ModConsole.DebugLog("Unpacking it as : System.String[]");
-
-					string translated = "";
-					var il2cpplist = new Il2CppStringArray(unboxobj.Pointer);
-					foreach (var item in il2cpplist)
+					if (FullName == "System.String")
 					{
-						translated += item + " ";
+						var result = obj.Unpack_String();
+						if (result != null)
+						{
+							return result;
+						}
+						return $"empty {FullName}";
 					}
-					return translated;
+					else if (FullName == "System.String[]")
+					{
+						var list = obj.Unpack_List_String();
+						if (list != null && list.Count != 0)
+						{
+							string translated = "";
+							foreach (var item in list)
+							{
+								translated += item + Environment.NewLine;
+							}
+							return translated;
+						}
+						else
+						{
+							return $"empty {FullName}";
+						}
+					}
+					else if (FullName == "System.UInt32")
+					{
+						var result = obj.Unpack_UInt32();
+						if (result.HasValue && result != null)
+						{
+							return result.Value.ToString();
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "System.Int32")
+					{
+						var result = obj.Unpack_Int32();
+						if (result.HasValue && result != null)
+						{
+							return result.Value.ToString();
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "System.Int64")
+					{
+						var result = obj.Unpack_Int64();
+						if (result.HasValue && result != null)
+						{
+							return result.Value.ToString();
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "System.Char")
+					{
+						var result = obj.Unpack_Char();
+						if (result.HasValue && result != null)
+						{
+							return result.Value.ToString();
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "System.Char[]")
+					{
+						var list = obj.Unpack_List_Char();
+						if (list != null && list.Count != 0)
+						{
+							string translated = "";
+							foreach (var item in list)
+							{
+								if (item != null)
+								{
+									translated += item + Environment.NewLine;
+								}
+							}
+							return translated;
+						}
+						else
+						{
+							return $"empty {FullName}";
+						}
+					}
+					else if (FullName == "System.Single")
+					{
+						var result = obj.Unpack_Single();
+						if (result.HasValue && result != null)
+						{
+							return result.Value.ToString();
+						}
+						return $"empty {FullName} (float)";
+					}
+					else if (FullName == "System.Boolean")
+					{
+						var result = obj.Unpack_Boolean();
+						if (result.HasValue && result != null)
+						{
+							return result.Value.ToString();
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "System.Object")
+					{
+						var result = obj.Unpack_System_Object();
+						if (result != null)
+						{
+							return result.GetType().FullName;
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "UnityEngine.Color")
+					{
+						var result = obj.Unpack_Color();
+						if (result.HasValue && result != null)
+						{
+							return result.Value.ToString();
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "UnityEngine.Material")
+					{
+						var result = obj.Unpack_Material();
+						if (result != null)
+						{
+							return result.name;
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "UnityEngine.MeshRenderer")
+					{
+						var result = obj.Unpack_MeshRenderer();
+						if (result != null)
+						{
+							return result.name;
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "UnityEngine.ParticleSystem")
+					{
+						var result = obj.Unpack_ParticleSystem();
+						if (result != null)
+						{
+							return result.name;
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "UnityEngine.Transform")
+					{
+						var result = obj.Unpack_Transform();
+						if (result != null)
+						{
+							return result.ToString();
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "UnityEngine.GameObject")
+					{
+						var result = obj.Unpack_GameObject();
+						if (result != null)
+						{
+							return result.ToString();
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "UnityEngine.GameObject[]")
+					{
+						var list = obj.Unpack_List_GameObject();
+						if (list != null && list.Count != 0)
+						{
+							string translated = "";
+							foreach (var item in list)
+							{
+								if (item != null)
+								{
+									translated += item.name + Environment.NewLine;
+								}
+							}
+							return translated;
+						}
+						else
+						{
+							return $"empty {FullName}";
+						}
+					}
+					else if (FullName == "UnityEngine.AudioClip[]")
+					{
+						var list = obj.Unpack_List_AudioClip();
+						if (list != null && list.Count != 0)
+						{
+							string translated = "";
+							foreach (var item in list)
+							{
+								if (item != null)
+								{
+									translated += item.name + Environment.NewLine;
+								}
+							}
+							return translated;
+						}
+						else
+						{
+							return $"empty {FullName}";
+						}
+					}
+					else if (FullName == "UnityEngine.Vector3")
+					{
+						var result = obj.Unpack_Vector3();
+						if (result.HasValue && result != null)
+						{
+							return result.Value.ToString();
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "UnityEngine.Quaternion")
+					{
+						var result = obj.Unpack_Quaternion();
+						if (result.HasValue && result != null)
+						{
+							return result.Value.ToString();
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "UnityEngine.AudioSource")
+					{
+						var result = obj.Unpack_AudioSource();
+						if (result != null)
+						{
+							return result.name;
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "UnityEngine.UI.Text")
+					{
+						var result = obj.Unpack_AudioSource();
+						if (result != null)
+						{
+							return result.name;
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "UnityEngine.HumanBodyBones")
+					{
+						var result = obj.Unpack_HumanBodyBones();
+						if (result.HasValue && result != null)
+						{
+							return result.Value.ToString();
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "VRC.SDKBase.VRCPlayerApi")
+					{
+						var result = obj.Unpack_VRCPlayerApi();
+						if (result != null)
+						{
+							return result.displayName;
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "VRC.SDKBase.VRCPlayerApi[]")
+					{
+						var list = obj.Unpack_List_VRCPlayerApi();
+						if (list != null && list.Count != 0)
+						{
+							string translated = "";
+							foreach (var item in list)
+							{
+								if (item != null)
+								{
+									translated += item.displayName + Environment.NewLine;
+								}
+							}
+							return translated;
+						}
+						else
+						{
+							return $"empty {FullName}";
+						}
+					}
+					else if (FullName == "VRC.Udon.UdonBehaviour")
+					{
+						var result = obj.Unpack_UdonBehaviour();
+						if (result != null)
+						{
+							return result.name;
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "VRC.Udon.Common.Interfaces.NetworkEventTarget")
+					{
+						var result = obj.Unpack_NetworkEventTarget();
+						if (result.HasValue && result != null)
+						{
+							return result.Value.ToString();
+						}
+						return "empty NetworkEventTarget";
+					}
+					else if (FullName == "TMPro.TextMeshPro")
+					{
+						var result = obj.Unpack_TextMeshPro();
+						if (result != null)
+						{
+							return result.text;
+						}
+						return $"empty {FullName}";
+					}
+
+					return $"Not Supported Yet {FullName}";
 				}
-				else if (il2cpptype.FullName == "UnityEngine.Color")
-				{
-					ModConsole.DebugLog("Unpacking it as : UnityEngine.Color");
-					return unboxobj.Unbox<UnityEngine.Color>().ToString();
-				}
-				else if (il2cpptype.FullName == "UnityEngine.Transform")
-				{
-					return unboxobj.Cast<UnityEngine.Transform>().name;
-				}
-				else if(il2cpptype.FullName == "UnityEngine.GameObject")
-				{
-					return unboxobj.Cast<UnityEngine.GameObject>().name.ToString();
-				}
-				else if (il2cpptype.FullName == "VRC.SDKBase.VRCPlayerApi")
-				{
-					return unboxobj.Cast<VRC.SDKBase.VRCPlayerApi>().displayName.ToString();
-				}
-				else if (il2cpptype.FullName == "VRC.Udon.UdonBehaviour")
-				{
-					return unboxobj.Cast<VRC.Udon.UdonBehaviour>().name.ToString();
-				}
-				else if (il2cpptype.FullName == "UnityEngine.Material")
-				{
-					return unboxobj.Cast<UnityEngine.Material>().name.ToString();
-				}
-				else if (il2cpptype.FullName == "VRC.Udon.Common.Interfaces.NetworkEventTarget")
-				{
-					return unboxobj.Unbox<VRC.Udon.Common.Interfaces.NetworkEventTarget>().ToString();
-				}
-				else if (il2cpptype.FullName == "UnityEngine.HumanBodyBones")
-				{
-					return unboxobj.Unbox<UnityEngine.HumanBodyBones>().ToString();
-				}
-				else if (il2cpptype.FullName == "System.Object")
-				{
-					return "Not Supported Yet (i Have to figure this out)";
-				}
-				else if (il2cpptype.FullName == "UnityEngine.Vector3")
-				{
-					return unboxobj.Unbox<UnityEngine.Vector3>().ToString();
-				}
-				else if (il2cpptype.FullName == "UnityEngine.Quaternion")
-				{
-					return unboxobj.Unbox<UnityEngine.Quaternion>().ToString();
-				}
+				return "Null";
 			}
-			return "Not Supported Yet";
+			catch (Exception e)
+			{
+				ModConsole.DebugErrorExc(e);
+				return $"Error Unboxing {obj.GetIl2CppType().FullName}";
+			}
+
 		}
 	}
 }
