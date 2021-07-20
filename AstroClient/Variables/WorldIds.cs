@@ -42,5 +42,7 @@
 
 		public static readonly string BOMBERio = "wrld_98422193-2ddd-4af4-bd97-ab5609a46785";
 
+		public static readonly string PoolParlor = "wrld_747e7258-f804-4414-83f5-b618ebca7471";
+
 	}
 }

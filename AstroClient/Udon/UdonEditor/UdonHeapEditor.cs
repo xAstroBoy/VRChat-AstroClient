@@ -331,6 +331,45 @@
 			}
 		}
 
+		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, TMPro.TextMeshProUGUI value, bool verify = false)
+		{
+			if (heap != null)
+			{
+				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+			}
+			else
+			{
+				ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+			}
+		}
+
+		public static void PatchHeap(IUdonHeap heap, uint address, TMPro.TextMeshProUGUI value, bool verify = false)
+		{
+			if (heap != null && address != null)
+			{
+				var converted = UdonConverter.Generate_Il2CPPObject_TextMeshProUGUI(value);
+				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
+				if (verify)
+				{
+					var result = heap.GetHeapVariable(address).Unpack_Boolean();
+					if (result == value)
+					{
+						ModConsole.DebugLog($"Heap Patch Applied.");
+					}
+					else
+					{
+						ModConsole.DebugLog($"Heap Patch Failed.");
+					}
+				}
+			}
+			else
+			{
+				ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+			}
+		}
+
+
+
 		public static void PatchHeap(IUdonHeap heap, uint address, bool value, bool verify = false)
 		{
 			if (heap != null && address != null)

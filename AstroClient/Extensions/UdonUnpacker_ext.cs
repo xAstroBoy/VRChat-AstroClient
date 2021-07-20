@@ -390,6 +390,61 @@
 			return null;
 		}
 
+		public static TMPro.TextMeshProUGUI Unpack_TextMeshProUGUI(this Il2CppSystem.Object obj)
+		{
+			if (obj != null)
+			{
+				if (obj.GetIl2CppType().FullName == "TMPro.TextMeshProUGUI")
+				{
+					return obj.Cast<TMPro.TextMeshProUGUI>();
+				}
+				else
+				{
+					ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+				}
+			}
+			return null;
+		}
+
+
+
+		public static TMPro.TextMeshProUGUI[] Unpack_Array_TextMeshProUGUI(this Il2CppSystem.Object obj)
+		{
+			if (obj != null)
+			{
+				if (obj.GetIl2CppType().FullName == "TMPro.TextMeshProUGUI[]")
+				{
+					var array = Il2CppArrayBase<TMPro.TextMeshProUGUI>.WrapNativeGenericArrayPointer(obj.Pointer);
+					if (array != null && array.Count() != 0)
+					{
+						return array;
+					}
+				}
+				else
+				{
+					ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+				}
+			}
+			return null;
+		}
+
+		public static List<TMPro.TextMeshProUGUI> Unpack_List_TextMeshProUGUI(this Il2CppSystem.Object obj)
+		{
+			if (obj != null)
+			{
+				if (obj.GetIl2CppType().FullName == "TMPro.TextMeshProUGUI[]")
+				{
+					return obj.Unpack_Array_TextMeshProUGUI()?.ToList();
+				}
+				else
+				{
+					ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+				}
+			}
+			return null;
+		}
+
+
 		public static UnityEngine.MeshRenderer Unpack_MeshRenderer(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
