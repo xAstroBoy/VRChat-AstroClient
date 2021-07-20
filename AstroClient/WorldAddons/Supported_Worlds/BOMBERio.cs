@@ -11,6 +11,7 @@
 	using System.Linq;
 	using UnityEngine;
 	using VRC;
+	using VRC.Udon;
 	using static AstroClient.Variables.CustomLists;
 
 	public class BOMBERio : GameEvents
@@ -31,6 +32,9 @@
 			new QMSingleButton(BOMBERioCheatsPage, 2, 1.5f, "Harvest 100 Crystals", () => { HarvestQuads(100); }, "Harvest some Quads!", null, null, true);
 			new QMSingleButton(BOMBERioCheatsPage, 2, 2f, "Harvest 500 Crystals", () => { HarvestQuads(500); }, "Harvest some Quads!", null, null, true);
 			new QMSingleButton(BOMBERioCheatsPage, 2, 2.5f, "Harvest 1000 Crystals", () => { HarvestQuads(1000); }, "Harvest some Quads!", null, null, true);
+
+
+			Bypass_Outside_Circle_speed_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 4, 0, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = true; }, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
 
 		}
 
@@ -270,6 +274,52 @@
 				AssignedNode = obj;
 				if (AssignedNode != null)
 				{
+					try
+					{
+						FollowObjBehaviour = AssignedNode.FindUdonEvent("GetThisCrystal").Action;
+
+						if (!HasUnboxedDefaultSpeeds)
+						{
+							if (FollowObjBehaviour != null)
+							{
+								var program = FollowObjBehaviour._program;
+								var symbol_table = program.SymbolTable;
+								var heap = program.Heap;
+
+								if(heap != null && symbol_table != null)
+								{
+									var Outside_RunSpeedAddress = symbol_table.GetAddressFromSymbol(Outside_RunSpeedSymbol);
+									var Outside_WalkAndStrafeAddress = symbol_table.GetAddressFromSymbol(Outside_WalkAndStrafeSpeedSymbol);
+
+									var Inner_RunSpeedAddress = symbol_table.GetAddressFromSymbol(Inner_RunSpeedSymbol);
+									var Inner_WalkAndStrafeAddress = symbol_table.GetAddressFromSymbol(Inner_WalkAndStrafeSpeedSymbol);
+
+									var Unpacked_Outside_RunSpeed = heap.GetHeapVariable(Outside_RunSpeedAddress).Unpack_Single();
+									if(Unpacked_Outside_RunSpeed.HasValue)
+									{
+										Outside_Default_RunSpeed = Unpacked_Outside_RunSpeed.Value;
+									}
+									var Unpacked_Outside_WalkAndStrafe = heap.GetHeapVariable(Outside_WalkAndStrafeAddress).Unpack_Single();
+									if (Unpacked_Outside_WalkAndStrafe.HasValue)
+									{
+										Outside_Default_StrafeAndWalkSpeed = Unpacked_Outside_WalkAndStrafe.Value;
+									}
+									var Unpacked_Inner_RunSpeed = heap.GetHeapVariable(Inner_RunSpeedAddress).Unpack_Single();
+									if (Unpacked_Inner_RunSpeed.HasValue)
+									{
+										Inner_Default_RunSpeed = Unpacked_Inner_RunSpeed.Value;
+									}
+									var Unpacked_Inner_WalkAndStrafe = heap.GetHeapVariable(Inner_WalkAndStrafeAddress).Unpack_Single();
+									if (Unpacked_Inner_WalkAndStrafe.HasValue)
+									{
+										Inner_Default_StrafeAndWalkSpeed = Unpacked_Inner_WalkAndStrafe.Value;
+									}
+									HasUnboxedDefaultSpeeds = true;
+								}
+							}
+						}
+					}
+					catch { }
 					var Item = AssignedNode.transform.FindObject("Shooter");
 					if(Item != null)
 					{
@@ -284,6 +334,30 @@
 						ShootBomb3 = shooterbody.gameObject.FindUdonEvent("ShootBomb3");
 						ShootBomb4 = shooterbody.gameObject.FindUdonEvent("ShootBomb4");
 						ShootBombEx = shooterbody.gameObject.FindUdonEvent("ShootBombEx");
+					}
+				}
+			}
+		}
+
+
+
+
+
+		public static void Change_Behaviour_Outside_Speed(float Run_Speed, float Walk_And_Strafe_Speed)
+		{
+			if (FollowObjBehaviour != null)
+			{
+				var program = FollowObjBehaviour._program;
+				var symbol_table = program.SymbolTable;
+				var heap = program.Heap;
+
+				if (HasUnboxedDefaultSpeeds)
+				{
+
+					if (heap != null && symbol_table != null)
+					{
+						UdonHeapEditor.PatchHeap(symbol_table, heap, Outside_RunSpeedSymbol, Run_Speed, true);
+						UdonHeapEditor.PatchHeap(symbol_table, heap, Outside_WalkAndStrafeSpeedSymbol, Walk_And_Strafe_Speed, true);
 					}
 				}
 			}
@@ -309,6 +383,13 @@
 			_Quad = null;
 			isInGame = false;
 			isHarvesting = false;
+			BypassOutsideCircleSpeed = false;
+			FollowObjBehaviour = null;
+			HasUnboxedDefaultSpeeds = false;
+			Outside_Default_StrafeAndWalkSpeed = 0f;
+			Outside_Default_RunSpeed= 0f;
+			Inner_Default_StrafeAndWalkSpeed= 0f;
+			Inner_Default_RunSpeed= 0f;
 		}
 
 		public static PickupController control;
@@ -329,6 +410,51 @@
 		public static QMSingleToggleButton Always_ShootBomb_3_Toggle;
 		public static QMSingleToggleButton Always_ShootBomb_4_Toggle;
 		public static QMSingleToggleButton Always_ShootBomb_5_Toggle;
+
+
+		public static QMSingleToggleButton Bypass_Outside_Circle_speed_Toggle;
+
+		private static bool _BypassOutsideCircleSpeed;
+
+		private static bool BypassOutsideCircleSpeed
+		{
+			get
+			{
+				return _BypassOutsideCircleSpeed;
+			}
+			set
+			{
+				if (HasUnboxedDefaultSpeeds)
+				{
+					if (value == _BypassOutsideCircleSpeed)
+					{
+						return;
+					}
+					_BypassOutsideCircleSpeed = value;
+					if (Bypass_Outside_Circle_speed_Toggle != null)
+					{
+						Bypass_Outside_Circle_speed_Toggle.SetToggleState(value);
+					}
+					if (value)
+					{
+						Change_Behaviour_Outside_Speed(Inner_Default_RunSpeed, Inner_Default_StrafeAndWalkSpeed);
+					}
+					else
+					{
+						Change_Behaviour_Outside_Speed(Outside_Default_RunSpeed, Outside_Default_StrafeAndWalkSpeed);
+					}
+				}
+				else
+				{
+					if (Bypass_Outside_Circle_speed_Toggle != null)
+					{
+						Bypass_Outside_Circle_speed_Toggle.SetToggleState(false);
+					}
+				}
+			}
+			
+		}
+
 
 		private static bool _Override_ShootBomb_0_Toggle;
 
@@ -528,6 +654,51 @@
 			}
 		}
 
+		private static string Outside_RunSpeedSymbol
+		{
+			get
+			{
+				return "__8_const_intnl_SystemSingle";
+			}
+		}
+
+
+		private static string Outside_WalkAndStrafeSpeedSymbol
+		{
+			get
+			{
+				return "__5_const_intnl_SystemSingle";
+			}
+		}
+
+		private static string Inner_RunSpeedSymbol
+		{
+			get
+			{
+				return "__9_const_intnl_SystemSingle";
+			}
+		}
+
+
+		private static string Inner_WalkAndStrafeSpeedSymbol
+		{
+			get
+			{
+				return "__1_const_intnl_SystemSingle";
+			}
+		}
+
+
+		private static bool HasUnboxedDefaultSpeeds = false;
+		
+		
+		private static float Outside_Default_StrafeAndWalkSpeed;
+		private static float Outside_Default_RunSpeed;
+
+		private static float Inner_Default_StrafeAndWalkSpeed;
+		private static float Inner_Default_RunSpeed;
+
+		private static UdonBehaviour FollowObjBehaviour;
 
 
 
