@@ -37,12 +37,10 @@
 
 		public AstroLoader()
 		{
-			MelonUtils.JSonSerialize();
 			LoadEmbeddedLibraries();
 
 #if DEBUG
 			LoadDebug();
-			MelonUtils.JSonDeserialize();
 			return;
 #endif
 
@@ -60,7 +58,9 @@
 			{
 				foreach (var bytes in AstroNetworkLoader.LibraryFiles)
 				{
+					MelonUtils.JSonSerialize();
 					Assembly.Load(bytes);
+					MelonUtils.JSonDeserialize();
 				}
 			}
 
@@ -69,7 +69,9 @@
 				foreach (var bytes in AstroNetworkLoader.MelonFiles)
 				{
 					var dll = Assembly.Load(bytes);
+					MelonUtils.JSonSerialize();
 					MelonHandler.LoadFromAssembly(dll, Environment.CurrentDirectory + @"\Plugins\AstroLoader.dll");
+					MelonUtils.JSonDeserialize();
 				}
 			}
 
@@ -77,11 +79,11 @@
 			{
 				foreach (var bytes in AstroNetworkLoader.ModuleFiles)
 				{
+					MelonUtils.JSonSerialize();
 					Assembly.Load(bytes);
+					MelonUtils.JSonDeserialize();
 				}
 			}
-
-			MelonUtils.JSonDeserialize();
 		}
 
 		public void LoadEmbeddedLibraries()
@@ -91,13 +93,15 @@
 				try
 				{
 					var bytes = CheetosHelpers.ExtractResource(path);
+					MelonUtils.JSonSerialize();
 					var dll = Assembly.Load(bytes);
-					Console.WriteLine($"Injected Embedded Library: {path}");
+					MelonUtils.JSonDeserialize();
+					MelonLogger.Msg($"Injected Embedded Library: {path}");
 				}
 				catch (Exception e)
 				{
-					Console.WriteLine(e.Message);
-					Console.WriteLine($"Failed to inject embedded library: {path}");
+					MelonLogger.Msg(e.Message);
+					MelonLogger.Msg($"Failed to inject embedded library: {path}");
 				}
 			}
 		}
@@ -106,19 +110,21 @@
 
 		public void LoadDebug()
 		{
-			Console.WriteLine("Loader is in debug mode.");
+			MelonLogger.Msg("Loader is in debug mode.");
 
 			foreach (var path in DebugLibraryPaths)
 			{
 				try
 				{
+					MelonUtils.JSonSerialize();
 					var dll = Assembly.LoadFrom(path);
-					Console.WriteLine($"Injected Library: {path}");
+					MelonUtils.JSonDeserialize();
+					MelonLogger.Msg($"Injected Library: {path}");
 				}
 				catch (Exception e)
 				{
-					Console.WriteLine(e.Message);
-					Console.WriteLine($"Failed to inject: {path}");
+					MelonLogger.Msg(e.Message);
+					MelonLogger.Msg($"Failed to inject: {path}");
 				}
 			}
 
@@ -126,14 +132,16 @@
 			{
 				try
 				{
+					MelonUtils.JSonSerialize();
 					var dll = Assembly.LoadFile(path);
 					MelonHandler.LoadFromAssembly(dll, path);
-					Console.WriteLine($"Injected MelonMod/MelonPlugin: {path}");
+					MelonUtils.JSonDeserialize();
+					MelonLogger.Msg($"Injected MelonMod/MelonPlugin: {path}");
 				}
 				catch (Exception e)
 				{
-					Console.WriteLine(e.Message);
-					Console.WriteLine($"Failed to inject: {path}");
+					MelonLogger.Msg(e.Message);
+					MelonLogger.Msg($"Failed to inject: {path}");
 				}
 			}
 
@@ -141,13 +149,15 @@
 			{
 				try
 				{
+					MelonUtils.JSonSerialize();
 					_ = Assembly.LoadFile(path);
-					Console.WriteLine($"Injected: {path}");
+					MelonUtils.JSonDeserialize();
+					MelonLogger.Msg($"Injected: {path}");
 				}
 				catch (Exception e)
 				{
-					Console.WriteLine(e.Message);
-					Console.WriteLine($"Failed to inject: {path}");
+					MelonLogger.Msg(e.Message);
+					MelonLogger.Msg($"Failed to inject: {path}");
 				}
 			}
 		}
