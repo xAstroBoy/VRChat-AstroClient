@@ -3,6 +3,7 @@
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using System;
+	using System.Text;
 	using VRC.Udon;
 	using VRC.Udon.Common.Interfaces;
 
@@ -58,6 +59,59 @@
 			}
 
 		}
+
+		public static string UnboxUdonToString(UdonBehaviour udonnode)
+		{
+			if (udonnode != null)
+			{
+				StringBuilder builder = new StringBuilder();
+				IUdonProgram program = null;
+				IUdonSymbolTable symbol_table = null;
+				IUdonHeap heap = null;
+				if (udonnode._program != null)
+				{
+					program = udonnode._program;
+				}
+				if (program != null)
+				{
+					symbol_table = program.SymbolTable;
+					if (program.Heap != null)
+					{
+						heap = program.Heap;
+					}
+					else
+					{
+						builder.AppendLine($"[Udon Unboxer] : {udonnode.name} Heap is Empty! Can't unbox!");
+						return null;
+					}
+				}
+				else
+				{
+					builder.AppendLine($"[Udon Unboxer] : {udonnode.name} Program is Empty! Can't unbox!");
+					return null;
+				}
+
+				builder.AppendLine($"[Udon Unboxer] : Dumping {udonnode.name} Symbols and types..");
+				foreach (var symbol in symbol_table.GetSymbols())
+				{
+					if (symbol != null)
+					{
+						var address = symbol_table.GetAddressFromSymbol(symbol);
+						var UnboxVariable = heap.GetHeapVariable(address);
+						if (UnboxVariable != null)
+						{
+							var Il2CppType = UnboxVariable.GetIl2CppType();
+							var unpackedsymbol = UnboxUdonHeap(UnboxVariable);
+							builder.AppendLine($"[Udon Unboxer] : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}");
+
+						}
+					}
+				}
+				return builder.ToString();
+			}
+			return null;
+		}
+
 
 		private static string UnboxUdonHeap(Il2CppSystem.Object obj)
 		{
@@ -367,6 +421,15 @@
 						if (result != null)
 						{
 							return result.text;
+						}
+						return $"empty {FullName}";
+					}
+					else if (FullName == "TMPro.TextMeshProUGUI")
+					{
+						var result = obj.Unpack_TextMeshProUGUI();
+						if (result != null)
+						{
+							return result.ToString();
 						}
 						return $"empty {FullName}";
 					}

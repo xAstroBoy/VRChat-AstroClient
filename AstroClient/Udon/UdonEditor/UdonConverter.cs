@@ -95,6 +95,29 @@
 			return new Il2CppSystem.Object(arrayresult.Pointer);
 		}
 
+
+
+		public static Il2CppSystem.Object Generate_Il2CPPObject_Array_UnityEngine_TextMeshProUGUIs(TMPro.TextMeshProUGUI[] array)
+		{
+			var list = new Il2CppSystem.Collections.Generic.List<TMPro.TextMeshProUGUI>();
+			foreach (var item in array)
+			{
+				if (item != null)
+				{
+					if (!list.Contains(item))
+					{
+						list.Add(item);
+					}
+				}
+			}
+
+			// Convert to Array.
+
+			var arrayresult = list.ToArray();
+			return new Il2CppSystem.Object(arrayresult.Pointer);
+		}
+
+
 		public static Il2CppSystem.Object Generate_Il2CPPObject_Array_char(char[] array)
 		{
 
@@ -331,6 +354,18 @@
 			}
 			return null;
 		}
+
+		public static Il2CppSystem.Object Generate_Il2CPPObject_TextMeshProUGUI(TMPro.TextMeshProUGUI item)
+		{
+			var boxed = new Il2CppSystem.Object(IL2CPP.il2cpp_value_box(Il2CppClassPointerStore<TMPro.TextMeshProUGUI>.NativeClassPtr, item.Pointer));
+			if (boxed != null)
+			{
+				return boxed;
+			}
+			return null;
+		}
+
+
 
 		public static Il2CppSystem.Object Generate_Il2CPPObject_UnityEngine_HumanBodyBones(UnityEngine.HumanBodyBones value)
 		{

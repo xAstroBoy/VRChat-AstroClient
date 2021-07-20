@@ -144,7 +144,7 @@
 								FindEverything(obj);
 								OnGameJoinEvent();
 							}
-							else if (action.ToLower().Contains("ExitStage"))
+							else if (action.ToLower().Contains("exitstage"))
 							{
 								FindEverything(obj);
 								OnGameExitStageEvent();
@@ -158,7 +158,7 @@
 								{
 									OnGameJoinEvent();
 								}
-								else if (action.ToLower().Contains("ExitStage"))
+								else if (action.ToLower().Contains("exitstage"))
 								{
 									OnGameExitStageEvent();
 								}
