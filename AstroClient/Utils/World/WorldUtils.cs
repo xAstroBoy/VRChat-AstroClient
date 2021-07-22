@@ -263,7 +263,24 @@
 					}
 				}
 			}
+			if (Utils.CurrentUser != null)
+			{
+				// Remove Current Set Quest and PC avatars ids if present
+				if (Utils.CurrentUser.GetAvatarManager() != null)
+				{
+					if (Utils.CurrentUser.GetAvatarManager().field_Private_ApiAvatar_0 != null)
+					{
+						ids.Remove(Utils.CurrentUser.GetAvatarManager().field_Private_ApiAvatar_0.id);
 
+					}
+					if (Utils.CurrentUser.GetAvatarManager().field_Private_ApiAvatar_1 != null)
+					{
+						ids.Remove(Utils.CurrentUser.GetAvatarManager().field_Private_ApiAvatar_1.id);
+
+					}
+				}
+
+			}
 			return ids.Distinct().ToList();
 		}
 

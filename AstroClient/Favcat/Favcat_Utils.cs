@@ -19,15 +19,6 @@
 
 
 
-		public override void OnSceneLoaded(int buildIndex, string sceneName)
-		{
-			if (FindMods.Favcat_Unchained_Present)
-			{
-				AvatarModule.SetSearchHeader("Empty Search.");
-				AvatarModule.AvatarSearchResults(null, null);
-			}
-		}
-
 
 
 

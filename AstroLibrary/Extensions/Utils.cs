@@ -96,10 +96,6 @@
             {
                 return VRCPlayer.field_Internal_Static_VRCPlayer_0;
             }
-            set
-            {
-                CurrentUser = CurrentUser;
-            }
         }
 
         public static VRCPlayerApi LocalPlayer
