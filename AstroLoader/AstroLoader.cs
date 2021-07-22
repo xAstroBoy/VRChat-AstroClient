@@ -68,10 +68,10 @@
 			{
 				foreach (var bytes in AstroNetworkLoader.MelonFiles)
 				{
+					MelonUtils.JSonSerialize(); // Enables bypass (turns off assembly verification)
 					var dll = Assembly.Load(bytes);
-					MelonUtils.JSonSerialize();
 					MelonHandler.LoadFromAssembly(dll, Environment.CurrentDirectory + @"\Plugins\AstroLoader.dll");
-					MelonUtils.JSonDeserialize();
+					MelonUtils.JSonDeserialize(); // Disables bypass (turns it back on so it fools VRCMG mods)
 				}
 			}
 
