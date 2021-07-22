@@ -10,12 +10,21 @@
 
 		public override void VRChat_OnUiManagerInit()
 		{
-			if(ScreenFade != null)
-			{
-				ScreenFade.GetOrAddComponent<TweakerListener>().OnEnabled += new System.Action(() => { ScreenFade.SetActive(false); });
-			}
+			_ = AvatarPreviewBase_FallbackAvatar;
+			_ = _AvatarPreviewBase_MainAvatar;
 		}
 
+		public override void OnLateUpdate()
+		{
+			if (ScreenFade != null)
+			{
+				if (ScreenFade.active)
+				{
+					ScreenFade.SetActive(false);
+				}
+			}
+		}
+	
 
 
 

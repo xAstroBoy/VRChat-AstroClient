@@ -99,7 +99,7 @@
 				{
 					WorldAvatarDumper = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Show Avatars Pedestrals from World", 921f, 290f, delegate ()
 					{
-						MelonCoroutines.Start(Favcat_Utils.RevealWorldPedestrals());
+						Favcat_Utils.Run_RevealWorldPedestrials();
 					}, 1.45f, 1f);
 
 				}
@@ -110,7 +110,7 @@
 				{
 					WorldAvatarDumper = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Show Avatars Pedestrals from World", 921f, 350f, delegate ()
 					{
-						MelonCoroutines.Start(Favcat_Utils.RevealWorldPedestrals());
+						Favcat_Utils.Run_RevealWorldPedestrials();
 					}, 1.45f, 1f);
 
 				}

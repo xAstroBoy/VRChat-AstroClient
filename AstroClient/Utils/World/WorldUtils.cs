@@ -314,7 +314,7 @@
 			}
 			catch (Exception e)
 			{
-				ModConsole.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
+				ModConsole.Error("Error parsing World SimpleAvatarPedestal");
 				ModConsole.ErrorExc(e);
 				return new List<SimpleAvatarPedestal>();
 			}
