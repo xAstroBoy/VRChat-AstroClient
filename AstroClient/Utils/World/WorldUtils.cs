@@ -293,7 +293,7 @@
 		{
 			try
 			{
-				var list1 = Resources.FindObjectsOfTypeAll<VRCAvatarPedestal>()
+				var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRCAvatarPedestal>()
 					.Where(
 					i => i.blueprintId.isNotNullOrEmptyOrWhiteSpace()
 					&& i.blueprintId.isAvatarID()
@@ -317,7 +317,7 @@
 		{
 			try
 			{
-				var list1 = Resources.FindObjectsOfTypeAll<SimpleAvatarPedestal>()
+				var list1 = GameObjectFinder.GetRootGameObjectsComponents<SimpleAvatarPedestal>()
 					.Where(
 					i => i.field_Internal_ApiAvatar_0 != null &&
 					i.field_Internal_ApiAvatar_0.id.isNotNullOrEmptyOrWhiteSpace() &&
@@ -345,7 +345,7 @@
 		{
 			try
 			{
-				var list1 = Resources.FindObjectsOfTypeAll<AvatarPedestal>()
+				var list1 = GameObjectFinder.GetRootGameObjectsComponents<AvatarPedestal>()
 					.Where(
 					i => i.field_Private_ApiAvatar_0 != null && 
 					i.field_Private_ApiAvatar_0.id.isNotNullOrEmptyOrWhiteSpace() && 
@@ -368,7 +368,7 @@
 		{
 			try
 			{
-				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_AvatarPedestal>()
+				var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_AvatarPedestal>()
 					.Where(
 					i => i.blueprintId.isNotNullOrEmptyOrWhiteSpace()
 					&& i.blueprintId.isAvatarID()
@@ -392,7 +392,7 @@
 		{
 			try
 			{
-				var list1 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_AvatarPedestal>()
+				var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_AvatarPedestal>()
 					.Where(
 					i => i.blueprintId.isNotNullOrEmptyOrWhiteSpace() 
 					&& i.blueprintId.isAvatarID()

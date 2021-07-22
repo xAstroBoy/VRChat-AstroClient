@@ -31,7 +31,7 @@
 		}
 
 
-		public static List<T> GetRootGameObjectsComponents<T>(bool IncludeInactive, bool IncludeAvatarComponents) where T : Component
+		public static List<T> GetRootGameObjectsComponents<T>(bool IncludeInactive = true, bool IncludeAvatarComponents = false) where T : Component
 		{
 			try
 			{
