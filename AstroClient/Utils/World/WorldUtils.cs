@@ -14,6 +14,7 @@
 	using AstroLibrary.Extensions;
 	using VRC.Core;
 	using AstroClient.Extensions;
+	using AstroClient.Variables;
 
 	public class WorldUtils : GameEvents
     {
@@ -263,24 +264,6 @@
 					}
 				}
 			}
-			if (Utils.CurrentUser != null)
-			{
-				// Remove Current Set Quest and PC avatars ids if present
-				if (Utils.CurrentUser.GetAvatarManager() != null)
-				{
-					if (Utils.CurrentUser.GetAvatarManager().field_Private_ApiAvatar_0 != null)
-					{
-						ids.Remove(Utils.CurrentUser.GetAvatarManager().field_Private_ApiAvatar_0.id);
-
-					}
-					if (Utils.CurrentUser.GetAvatarManager().field_Private_ApiAvatar_1 != null)
-					{
-						ids.Remove(Utils.CurrentUser.GetAvatarManager().field_Private_ApiAvatar_1.id);
-
-					}
-				}
-
-			}
 			return ids.Distinct().ToList();
 		}
 
@@ -321,6 +304,8 @@
 					i => i.field_Internal_ApiAvatar_0 != null &&
 					i.field_Internal_ApiAvatar_0.id.isNotNullOrEmptyOrWhiteSpace() &&
 					i.field_Internal_ApiAvatar_0.id.isAvatarID()
+					&& !i.transform.IsChildOf(VRChatObjects.AvatarPreviewBase_MainAvatar)
+					&& !i.transform.IsChildOf(VRChatObjects.AvatarPreviewBase_FallbackAvatar)
 					).ToList();
 				if (list1 != null && list1.Count() != 0)
 				{
