@@ -66,6 +66,12 @@
 			return obj != null ? obj.active ? UnityEngine.Color.green : UnityEngine.Color.red : UnityEngine.Color.red;
 		}
 
+		public static UnityEngine.Color Get_AudioSource_Active_ToColor(this AudioSource obj)
+		{
+			return obj != null ? obj.enabled ? UnityEngine.Color.green : UnityEngine.Color.red : UnityEngine.Color.red;
+		}
+
+
 		public static UnityEngine.Color Get_MonoBehaviour_Enabled_ToColor(this MonoBehaviour obj)
 		{
 			return obj != null ? obj.enabled ? UnityEngine.Color.green : UnityEngine.Color.red : UnityEngine.Color.red;

@@ -204,6 +204,26 @@
             return new List<GameObject>();
         }
 
+		public static List<UnityEngine.AudioSource> Get_AudioSources()
+		{
+			try
+			{
+				var list1 = Resources.FindObjectsOfTypeAll<UnityEngine.AudioSource>().Where(x => x != null).ToList();
+				if (list1 != null && list1.Count() != 0)
+				{
+					return list1;
+				}
+			}
+			catch (Exception e)
+			{
+				ModConsole.Error("Error parsing World Triggers");
+				ModConsole.ErrorExc(e);
+				return new List<UnityEngine.AudioSource>();
+			}
+			return new List<UnityEngine.AudioSource>();
+		}
+
+
 
 		public static List<string> Get_World_Pedestrals_Avatar_ids()
 		{
