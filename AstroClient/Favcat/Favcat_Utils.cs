@@ -14,30 +14,29 @@
 	using System.Threading.Tasks;
 	using UnityEngine;
 
-	public static class Favcat_Utils
+	public class Favcat_Utils : GameEvents
 	{
 
-		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+
+
+		public override void OnSceneLoaded(int buildIndex, string sceneName)
 		{
-			// This won't init unless favcat present.
-			if (!FindMods.Favcat_Unchained_Present)
+			if (FindMods.Favcat_Unchained_Present)
 			{
-				return;
+				AvatarModule.SetSearchHeader("Empty Search.");
+				AvatarModule.AvatarSearchResults(null, null);
 			}
-			var sub = new QMNestedButton(menu, x, y, "FavCat World Utils", "FavCat Extras", null, null, null, null, btnHalf);
-
-			new QMSingleButton(sub, 0, 0, "Show All World Avatars to Favcat", () => { MelonCoroutines.Start(RevealWorldPedestrals()); }, "Finds all World Pedestrals and Makes them Visible with Favcat!", null, null);
-
-			//new QMToggleButton(sub, 0, 1, "Automatic Favcat Avatar Dump : ON ", () => { }, "Automatic Favcat Avatar Dump : OFF", () => { }, "Finds all World Pedestrals and Makes them Visible with Favcat (Automated)", null, null, null, false);
 		}
-
-
 
 
 
 
 		internal static System.Collections.IEnumerator RevealWorldPedestrals()
 		{
+			if(!FindMods.Favcat_Unchained_Present)
+			{
+				yield return null;
+			}
 			var ids = WorldUtils.Get_World_Pedestrals_Avatar_ids();
 			if (ids.Count() != 0)
 			{

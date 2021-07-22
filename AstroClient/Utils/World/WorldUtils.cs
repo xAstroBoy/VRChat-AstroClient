@@ -207,9 +207,11 @@
 		public static List<string> Get_World_Pedestrals_Avatar_ids()
 		{
 			List<string> ids = new List<string>();
+			var SDK_VRC_AvatarPedestrals = Get_SDKBase_VRC_AvatarPedestal();
 			var SimpleAvatarPedestrals = Get_SimpleAvatarPedestal();
 			var AvatarPedestals = Get_AvatarPedestal();
 			var VRC_AvatarPedestal = Get_VRC_AvatarPedestal();
+			var VRCAvatarPedestal = Get_VRCAvatarPedestal();
 			if(SimpleAvatarPedestrals.Count() != 0)
 			{
 				foreach(var item in SimpleAvatarPedestrals)
@@ -241,10 +243,56 @@
 					}
 				}
 			}
-			return ids;
+			if (SDK_VRC_AvatarPedestrals.Count() != 0)
+			{
+				foreach (var item in SDK_VRC_AvatarPedestrals)
+				{
+					if (!ids.Contains(item.blueprintId))
+					{
+						ids.Add(item.blueprintId);
+					}
+				}
+			}
+			if (VRCAvatarPedestal.Count() != 0)
+			{
+				foreach (var item in VRCAvatarPedestal)
+				{
+					if (!ids.Contains(item.blueprintId))
+					{
+						ids.Add(item.blueprintId);
+					}
+				}
+			}
+
+			return ids.Distinct().ToList();
 		}
 
 
+
+
+
+		public static List<VRCAvatarPedestal> Get_VRCAvatarPedestal()
+		{
+			try
+			{
+				var list1 = Resources.FindObjectsOfTypeAll<VRCAvatarPedestal>()
+					.Where(
+					i => i.blueprintId.isNotNullOrEmptyOrWhiteSpace()
+					&& i.blueprintId.isAvatarID()
+					).ToList();
+				if (list1 != null && list1.Count() != 0)
+				{
+					return list1;
+				}
+			}
+			catch (Exception e)
+			{
+				ModConsole.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
+				ModConsole.ErrorExc(e);
+				return new List<VRCAvatarPedestal>();
+			}
+			return new List<VRCAvatarPedestal>();
+		}
 
 
 		public static List<SimpleAvatarPedestal> Get_SimpleAvatarPedestal()
@@ -296,6 +344,29 @@
 			}
 			return new List<AvatarPedestal>();
 		}
+		public static List<VRC.SDKBase.VRC_AvatarPedestal> Get_SDKBase_VRC_AvatarPedestal()
+		{
+			try
+			{
+				var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_AvatarPedestal>()
+					.Where(
+					i => i.blueprintId.isNotNullOrEmptyOrWhiteSpace()
+					&& i.blueprintId.isAvatarID()
+					).ToList();
+				if (list1 != null && list1.Count() != 0)
+				{
+					return list1;
+				}
+			}
+			catch (Exception e)
+			{
+				ModConsole.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
+				ModConsole.ErrorExc(e);
+				return new List<VRC.SDKBase.VRC_AvatarPedestal>();
+			}
+			return new List<VRC.SDKBase.VRC_AvatarPedestal>();
+		}
+
 
 		public static List<VRCSDK2.VRC_AvatarPedestal> Get_VRC_AvatarPedestal()
 		{

@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Cheetos
 {
+	using AstroClient.ModDetector;
 	#region Imports
 
 	using AstroClient.Variables;
@@ -12,6 +13,7 @@
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.MenuApi;
+	using MelonLoader;
 	using System.Collections;
 	using System.Diagnostics;
 	using System.Linq;
@@ -43,7 +45,9 @@
 
         private static MenuButton deleteButton;
 
-        private static VRCStandaloneInputModule inputModule;
+		private static MenuButton WorldAvatarDumper;
+
+		private static VRCStandaloneInputModule inputModule;
 
         private static string selectedID;
 
@@ -91,9 +95,30 @@
                     ModConsole.Log($"Sent Avatar Deletion For: {selectedID}");
                     AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DELETE, selectedID));
                 }, 1.45f, 1f);
-            }
+				if (FindMods.Favcat_Unchained_Present)
+				{
+					WorldAvatarDumper = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Show Avatars Pedestrals from World", 921f, 290f, delegate ()
+					{
+						MelonCoroutines.Start(Favcat_Utils.RevealWorldPedestrals());
+					}, 1.45f, 1f);
 
-            publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
+				}
+			}
+			else
+			{
+				if (FindMods.Favcat_Unchained_Present)
+				{
+					WorldAvatarDumper = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Show Avatars Pedestrals from World", 921f, 350f, delegate ()
+					{
+						MelonCoroutines.Start(Favcat_Utils.RevealWorldPedestrals());
+					}, 1.45f, 1f);
+
+				}
+			}
+			
+
+
+			publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
 
             list = new VRCList(publicAvatarList.transform.parent, "Astro Avatar Search Results", 0);
             list.Text.supportRichText = true;

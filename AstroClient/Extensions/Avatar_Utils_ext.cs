@@ -12,7 +12,7 @@
 
 		public static bool isAvatarID(this string id)
 		{
-			return id.isNotNullOrEmptyOrWhiteSpace() && id.Length == 41 && id.StartsWith("avtr_");
+			return id.isNotNullOrEmptyOrWhiteSpace() && id.StartsWith("avtr_");
 		}
 
 
