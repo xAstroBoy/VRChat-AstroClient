@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.AntiCrash
 {
 	using AstroLibrary.Extensions;
+	using System.Collections.Generic;
 	using UnityEngine;
 	using VRC;
 	using VRC.SDKBase;
@@ -20,53 +21,69 @@
             {
                 avatar.SetActive(false);
                 var player = avatar.transform.root.GetComponentInChildren<Player>();
-                //AntiCrashUtils.TempLog($"Scanning {player.DisplayName()}'s avatar..");
-                InitiateScan(avatar);
-                avatar.SetActive(true);
+                AntiCrashUtils.TempLog($"Scanning {player.DisplayName()}'s avatar..");
+                InitiateScan(avatar, out bool isClean, out List<string> crashTypes);
+
+				if (isClean)
+				{
+					avatar.SetActive(true);
+					AntiCrashUtils.TempLog($"{player.DisplayName()}'s avatar has nothing detected..");
+				}
+				else
+				{
+					AntiCrashUtils.TempLog($"Blocked {player.DisplayName()}'s Avatar!");
+					crashTypes.ForEach(ct => AntiCrashUtils.TempLog($"Crash Type: {ct}"));
+				}
+
             }
         }
 
-        private static void InitiateScan(GameObject avatar)
+        private static void InitiateScan(GameObject avatar, out bool isClean, out List<string> crashTypes)
         {
-            var renderers = avatar.GetComponentsInChildren<Renderer>();
-            var particleSystems = avatar.GetComponentsInChildren<ParticleSystem>();
-            var skinnedMeshRenderers = avatar.GetComponentsInChildren<SkinnedMeshRenderer>();
+			isClean = true;
+			crashTypes = new List<string>();
+
+            //var renderers = avatar.GetComponentsInChildren<Renderer>();
+            //var particleSystems = avatar.GetComponentsInChildren<ParticleSystem>();
+            //var skinnedMeshRenderers = avatar.GetComponentsInChildren<SkinnedMeshRenderer>();
             var audioSources = avatar.GetComponentsInChildren<AudioSource>();
 
             int audioSourcesCount = audioSources.Count;
             foreach (var audioSource in audioSources)
             {
                 //AntiCrashUtils.TempLog($"AudioSources: {audioSourcesCount}");
-                if (audioSourcesCount >= 25)
+                if (audioSourcesCount >= 150)
                 {
-                    audioSource.DestroyMeLocal();
-                    AntiCrashUtils.TempLog($"AudioSources: destroyed, max reached.");
+                    //audioSource.DestroyMeLocal();
+					//AntiCrashUtils.TempLog($"AudioSources: destroyed, max reached.");
+					crashTypes.Add($"Audio: {audioSourcesCount}");
+					isClean = false;
                 }
                 //AntiCrashUtils.TempLog($"SkinnedMeshRenderer found: {skinnedMeshRenderer.name}");
                 // ScanAudioSources(audioSources);
             }
 
-            foreach (var renderer in renderers)
-            {
-                //AntiCrashUtils.TempLog($"Renderer found: {renderer.name}");
+            //foreach (var renderer in renderers)
+            //{
+            //    //AntiCrashUtils.TempLog($"Renderer found: {renderer.name}");
 
-                foreach (var material in renderer.materials)
-                {
-                    ScanMaterial(material);
-                }
-            }
+            //    foreach (var material in renderer.materials)
+            //    {
+            //        ScanMaterial(material);
+            //    }
+            //}
 
-            foreach (var particleSystem in particleSystems)
-            {
-                //AntiCrashUtils.TempLog($"ParticleSystem found: {particleSystem.name}");
-                ScanParticleSystem(particleSystem);
-            }
+            //foreach (var particleSystem in particleSystems)
+            //{
+            //    //AntiCrashUtils.TempLog($"ParticleSystem found: {particleSystem.name}");
+            //    ScanParticleSystem(particleSystem);
+            //}
 
-            foreach (var skinnedMeshRenderer in skinnedMeshRenderers)
-            {
-                //AntiCrashUtils.TempLog($"SkinnedMeshRenderer found: {skinnedMeshRenderer.name}");
-                ScanSkinnedMeshRenderer(skinnedMeshRenderer);
-            }
+            //foreach (var skinnedMeshRenderer in skinnedMeshRenderers)
+            //{
+            //    //AntiCrashUtils.TempLog($"SkinnedMeshRenderer found: {skinnedMeshRenderer.name}");
+            //    ScanSkinnedMeshRenderer(skinnedMeshRenderer);
+            //}
         }
 
         private static void ScanMaterial(Material material)
