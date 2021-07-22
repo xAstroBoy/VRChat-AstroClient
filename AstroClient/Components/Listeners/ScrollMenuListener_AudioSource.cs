@@ -22,6 +22,10 @@ namespace AstroClient.Components
 				{
 					assignedbtn.SetTextColor(source.Get_AudioSource_Active_ToColor());
 				}
+				else
+				{
+					DestroyImmediate(this);
+				}
 			}
 		}
 
