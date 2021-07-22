@@ -1,5 +1,7 @@
-﻿namespace AstroClient
-{
+﻿
+
+
+
 	#region Imports
 
 	using AstroClient.AstroUtils.ItemTweaker;
@@ -33,9 +35,13 @@
 	using VRC.UI;
 	using AstroLibrary.Extensions;
 	using Button = UnityEngine.UI.Button;
+    [assembly: MelonOptionalDependencies("FavCat Unlocked")]
 
-	#endregion Imports
+#endregion Imports
 
+
+namespace AstroClient
+{
 	public class Main : MelonMod
 	{
 		#region EventHandlers

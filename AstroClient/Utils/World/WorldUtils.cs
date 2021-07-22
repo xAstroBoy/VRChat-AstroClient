@@ -8,8 +8,12 @@
 	using UnityEngine;
 	using VRC;
 	using VRC.SDK3.Components;
+	using VRC.SDKBase;
 	using VRC.Udon;
 	using Color = System.Drawing.Color;
+	using AstroLibrary.Extensions;
+	using VRC.Core;
+	using AstroClient.Extensions;
 
 	public class WorldUtils : GameEvents
     {
@@ -199,7 +203,125 @@
             return new List<GameObject>();
         }
 
-        public static List<UdonBehaviour> Get_UdonBehaviours()
+
+		public static List<string> Get_World_Pedestrals_Avatar_ids()
+		{
+			List<string> ids = new List<string>();
+			var SimpleAvatarPedestrals = Get_SimpleAvatarPedestal();
+			var AvatarPedestals = Get_AvatarPedestal();
+			var VRC_AvatarPedestal = Get_VRC_AvatarPedestal();
+			if(SimpleAvatarPedestrals.Count() != 0)
+			{
+				foreach(var item in SimpleAvatarPedestrals)
+				{
+					if(!ids.Contains(item.field_Internal_ApiAvatar_0.id))
+					{
+						ids.Add(item.field_Internal_ApiAvatar_0.id);
+					}
+				}
+			}
+			if (AvatarPedestals.Count() != 0)
+			{
+				foreach (var item in AvatarPedestals)
+				{
+					if (!ids.Contains(item.field_Private_ApiAvatar_0.id))
+					{
+						ids.Add(item.field_Private_ApiAvatar_0.id);
+					}
+				}
+			}
+
+			if (VRC_AvatarPedestal.Count() != 0)
+			{
+				foreach (var item in VRC_AvatarPedestal)
+				{
+					if (!ids.Contains(item.blueprintId))
+					{
+						ids.Add(item.blueprintId);
+					}
+				}
+			}
+			return ids;
+		}
+
+
+
+
+		public static List<SimpleAvatarPedestal> Get_SimpleAvatarPedestal()
+		{
+			try
+			{
+				var list1 = Resources.FindObjectsOfTypeAll<SimpleAvatarPedestal>()
+					.Where(
+					i => i.field_Internal_ApiAvatar_0 != null &&
+					i.field_Internal_ApiAvatar_0.id.isNotNullOrEmptyOrWhiteSpace() &&
+					i.field_Internal_ApiAvatar_0.id.isAvatarID()
+					).ToList();
+				if (list1 != null && list1.Count() != 0)
+				{
+					return list1;
+				}
+			}
+			catch (Exception e)
+			{
+				ModConsole.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
+				ModConsole.ErrorExc(e);
+				return new List<SimpleAvatarPedestal>();
+			}
+			return new List<SimpleAvatarPedestal>();
+		}
+
+
+
+		public static List<AvatarPedestal> Get_AvatarPedestal()
+		{
+			try
+			{
+				var list1 = Resources.FindObjectsOfTypeAll<AvatarPedestal>()
+					.Where(
+					i => i.field_Private_ApiAvatar_0 != null && 
+					i.field_Private_ApiAvatar_0.id.isNotNullOrEmptyOrWhiteSpace() && 
+					i.field_Private_ApiAvatar_0.id.isAvatarID()
+					).ToList();
+				if (list1 != null && list1.Count() != 0)
+				{
+					return list1;
+				}
+			}
+			catch (Exception e)
+			{
+				ModConsole.Error("Error parsing World SDKBase VRC_AvatarPedestal");
+				ModConsole.ErrorExc(e);
+				return new List<AvatarPedestal>();
+			}
+			return new List<AvatarPedestal>();
+		}
+
+		public static List<VRCSDK2.VRC_AvatarPedestal> Get_VRC_AvatarPedestal()
+		{
+			try
+			{
+				var list1 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_AvatarPedestal>()
+					.Where(
+					i => i.blueprintId.isNotNullOrEmptyOrWhiteSpace() 
+					&& i.blueprintId.isAvatarID()
+					).ToList();
+				if (list1 != null && list1.Count() != 0)
+				{
+					return list1;
+				}
+			}
+			catch (Exception e)
+			{
+				ModConsole.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
+				ModConsole.ErrorExc(e);
+				return new List<VRCSDK2.VRC_AvatarPedestal>();
+			}
+			return new List<VRCSDK2.VRC_AvatarPedestal>();
+		}
+
+
+		public static List<UdonBehaviour> Get_UdonBehaviours()
         {
             var UdonBehaviourObjects = new List<UdonBehaviour>();
             var list = Resources.FindObjectsOfTypeAll<UdonBehaviour>();
