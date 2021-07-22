@@ -84,8 +84,9 @@
 
             RegisterComponent<TweakerListener>();
 			RegisterComponent<ScrollMenuListener>();
+			RegisterComponent<ScrollMenuListener_AudioSource>();
 
-			
+
 
 		}
 

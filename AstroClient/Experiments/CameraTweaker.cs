@@ -14,20 +14,20 @@
         {
             if (userCameraParent != null)
             {
-                if (!UserCamera.Is_DontDestroyOnLoad())
+                if (!UserCamera.Is_DontDestroyOnLoad().Value)
                 {
                     userCameraParent.Set_DontDestroyOnLoad();
                 }
             }
             if (UserCamera != null)
             {
-                if (UserCamera.Is_DontDestroyOnLoad())
+                if (UserCamera.Is_DontDestroyOnLoad().Value)
                 {
                     UserCamera.Set_DontDestroyOnLoad();
                 }
                 foreach (var child in UserCamera.Get_All_Childs())
                 {
-                    if (!child.Is_DontDestroyOnLoad())
+                    if (!child.Is_DontDestroyOnLoad().Value)
                     {
                         child.Set_DontDestroyOnLoad();
                     }

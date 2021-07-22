@@ -97,6 +97,7 @@
     <Compile Include="Cheetos\Astro_Interactable.cs" />
     <Compile Include="Cheetos\Astro_Interactable_Extensions.cs" />
     <Compile Include="Cheetos\NamePlates.cs" />
+    <Compile Include="Components\Listeners\ScrollMenuListener_AudioSource.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener.cs" />
     <Compile Include="Components\VRC_UdonTrigger\UdonTrigger_Helper.cs" />
     <Compile Include="Components\VRC_UdonTrigger\VRC_AstroUdonTrigger.cs" />
@@ -325,7 +326,7 @@
     <Compile Include="Utils\UdonSearcher\UdonSearch.cs" />
     <Compile Include="Utils\World\WorldUtils.cs" />
     <Compile Include="Utils\XrefScannerUtils.cs" />
-    <Compile Include="Variables\Bools - Copy.cs" />
+    <Compile Include="Variables\Temporary.cs" />
     <Compile Include="Variables\Bools.cs" />
     <Compile Include="Variables\CustomLists.cs" />
     <Compile Include="Variables\GDBUser.cs" />

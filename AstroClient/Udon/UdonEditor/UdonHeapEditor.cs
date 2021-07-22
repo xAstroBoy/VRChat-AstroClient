@@ -351,7 +351,7 @@
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
-					var result = heap.GetHeapVariable(address).Unpack_Boolean();
+					var result = heap.GetHeapVariable(address).Unpack_TextMeshProUGUI();
 					if (result == value)
 					{
 						ModConsole.DebugLog($"Heap Patch Applied.");

@@ -17,26 +17,61 @@
 	public class Favcat_Utils : GameEvents
 	{
 
-
-
 		public override void OnSceneLoaded(int buildIndex, string sceneName)
 		{
-			if (FindMods.Favcat_Unchained_Present)
+			if (IsRunning)
 			{
-				AvatarModule.SetSearchHeader("Empty Search.");
-				AvatarModule.AvatarSearchResults(null, null);
+				if (coroutinetoken != null)
+				{
+					MelonCoroutines.Stop(coroutinetoken);
+				}
+				IsRunning = false;
+			}
+		}
+		private static bool _IsRunning;
+
+		private static bool IsRunning
+		{
+			get
+			{
+				return _IsRunning;
+			}
+			set
+			{
+				_IsRunning = value;
+				if(!value)
+				{
+					coroutinetoken = null;
+				}
+			}
+		}
+		private static object coroutinetoken;
+
+		public static void Run_RevealWorldPedestrials()
+		{
+			if (!IsRunning)
+			{
+				coroutinetoken = MelonCoroutines.Start(RevealWorldPedestrals());
+			}
+			else
+			{
+				ModConsole.DebugLog("The Coroutine is already Running!");
 			}
 		}
 
-
-
-
-		internal static System.Collections.IEnumerator RevealWorldPedestrals()
+		private static System.Collections.IEnumerator RevealWorldPedestrals()
 		{
+			
 			if(!FindMods.Favcat_Unchained_Present)
+			{
+				IsRunning = false;
+				yield return null;
+			}
+			if(IsRunning)
 			{
 				yield return null;
 			}
+			IsRunning = true;
 			var ids = WorldUtils.Get_World_Pedestrals_Avatar_ids();
 			if (ids.Count() != 0)
 			{
@@ -55,11 +90,34 @@
 							}
 						});
 					}
+					ModConsole.DebugLog("Found AvatarID : " + id);
 					AvatarModule.GetStoredFromID(id, result);
 				}
+				int Attemptcount = 0;
+				int previousidcount = 0;
+				int limit = 10;
 				while (StoredAvatars.Count < ids.Count)
 				{
-					ModConsole.DebugLog("Waiting On Pedestal Dump To Load Pedestals Into Avatar Menu.. - Current Count: " + StoredAvatars.Count + "/" + ids.Count);
+					var avatarcount = StoredAvatars.Count;
+					if (previousidcount == avatarcount)
+					{
+						Attemptcount++;
+					}
+					else
+					{
+						previousidcount = avatarcount;
+						Attemptcount = 0;
+					}
+					if (Attemptcount == limit)
+					{
+						ModConsole.DebugLog("Attempt Count Limit reached, Skipping...");
+						break;
+					}
+					else
+					{
+						ModConsole.DebugLog("Waiting On Pedestal Dump To Load Pedestals Into Avatar Menu.. - Current Count: " + StoredAvatars.Count + "/" + ids.Count);
+						ModConsole.DebugLog($"Attempt of {Attemptcount} / {limit}...");
+					}
 					yield return new WaitForSeconds(0.8f);
 				}
 				ModConsole.DebugLog("Done!");
@@ -67,13 +125,16 @@
 				AvatarModule.AvatarSearchResults("Avatar Pedestals From: " + WorldUtils.Get_World_Name(), StoredAvatars);
 				yield return new WaitForSeconds(1f);
 				AvatarModule.SetSearchHeader("Avatar Pedestals From: " + WorldUtils.Get_World_Name() , false);
+				IsRunning = false;
 				yield return null;
 			}
 			else
 			{
 				ModConsole.Warning("This world Doesn't have Pedestrals!");
+				IsRunning = false;
 				yield return null;
 			}
+			IsRunning = false;
 			yield return null;
 		}
 
