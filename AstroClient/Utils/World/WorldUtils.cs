@@ -208,7 +208,7 @@
 		{
 			try
 			{
-				var list1 = Resources.FindObjectsOfTypeAll<UnityEngine.AudioSource>().Where(x => x != null).ToList();
+				var list1 = Resources.FindObjectsOfTypeAll<UnityEngine.AudioSource>().Where(x => x != null && x.gameObject.is_CurrentWorld()).ToList();
 				if (list1 != null && list1.Count() != 0)
 				{
 					return list1;

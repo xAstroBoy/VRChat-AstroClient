@@ -92,6 +92,26 @@
 			UnityEngine.Object.DontDestroyOnLoad(obj);
 		}
 
+		public static bool Is_HideAndDontSave(this GameObject obj)
+		{
+			return obj.scene.name.Equals("HideAndDontSave");
+		}
+
+		public static bool Is_HideAndDontSave(this Transform obj)
+		{
+			return obj.gameObject.Is_HideAndDontSave();
+		}
+
+
+		public static bool is_CurrentWorld(this GameObject obj)
+		{
+			return !obj.Is_HideAndDontSave() && !obj.Is_DontDestroyOnLoad();
+		}
+
+		public static bool is_CurrentWorld(this Transform obj)
+		{
+			return obj.gameObject.is_CurrentWorld();
+		}
 		public static void CopyPath(this GameObject obj)
 		{
 			if (obj != null)
