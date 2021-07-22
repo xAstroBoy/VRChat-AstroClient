@@ -31,6 +31,59 @@
 		}
 
 
+		public static List<T> GetRootGameObjectsComponents<T>(bool IncludeInactive, bool IncludeAvatarComponents) where T : Component
+		{
+			try
+			{
+				var results = new List<T>();
+				foreach (var obj in GameObjectFinder.GetRootSceneObjects())
+				{
+					if (!IncludeAvatarComponents)
+					{
+						if (!obj.name.Contains("VRCPlayer"))
+						{
+							var objects = obj.GetComponentsInChildren<T>(IncludeInactive).ToList();
+							if (objects.Count != 0)
+							{
+								foreach (var audio in objects)
+								{
+
+									if (!results.Contains(audio))
+									{
+										results.Add(audio);
+									}
+								}
+							}
+						}
+					}
+					else
+					{
+						var objects = obj.GetComponentsInChildren<T>(IncludeInactive).ToList();
+						if (objects.Count != 0)
+						{
+							foreach (var audio in objects)
+							{
+
+								if (!results.Contains(audio))
+								{
+									results.Add(audio);
+								}
+							}
+						}
+					}
+				}
+				return results;
+
+			}
+			catch (Exception e)
+			{
+				ModConsole.Error("Error parsing Components from Root Objects");
+				ModConsole.ErrorExc(e);
+				return null;
+			}
+			return null;
+		}
+
 		public static GameObject FindRootSceneObject(string name)
 		{
 			GameObject obj = SceneManager.GetActiveScene().GetRootGameObjects().Where(x => x.gameObject.name == name).First();

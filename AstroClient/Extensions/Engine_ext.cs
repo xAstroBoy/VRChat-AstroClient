@@ -77,40 +77,75 @@
 			return obj != null ? obj.enabled ? UnityEngine.Color.green : UnityEngine.Color.red : UnityEngine.Color.red;
 		}
 
-		public static bool Is_DontDestroyOnLoad(this GameObject obj)
+		public static bool? Is_DontDestroyOnLoad(this GameObject obj)
 		{
-			return obj.scene.name.Equals("DontDestroyOnLoad");
+			if (obj != null)
+			{
+
+				return obj.scene.name.Equals("DontDestroyOnLoad");
+
+		}
+			return null;
 		}
 
-		public static bool Is_DontDestroyOnLoad(this Transform obj)
+	public static bool? Is_DontDestroyOnLoad(this Transform obj)
+	{
+		if (obj != null)
 		{
+
 			return obj.gameObject.Is_DontDestroyOnLoad();
+
+		}
+			return null;
 		}
 
-		public static void Set_DontDestroyOnLoad(this Object obj)
+	public static void Set_DontDestroyOnLoad(this Object obj)
 		{
 			UnityEngine.Object.DontDestroyOnLoad(obj);
 		}
 
-		public static bool Is_HideAndDontSave(this GameObject obj)
+		public static bool? Is_HideAndDontSave(this GameObject obj)
 		{
-			return obj.scene.name.Equals("HideAndDontSave");
+			try {
+				if (obj != null)
+				{
+
+					return obj.scene.name.Equals("HideAndDontSave");
+				}
+				return null;
+
+			}
+			catch { return false; }
+			}
+		
+
+
+	public static bool? Is_HideAndDontSave(this Transform obj)
+		{
+			if (obj != null)
+			{
+				return obj.gameObject.Is_HideAndDontSave();
+			}
+			return null;
 		}
 
-		public static bool Is_HideAndDontSave(this Transform obj)
+
+		public static bool? is_CurrentWorld(this GameObject obj)
 		{
-			return obj.gameObject.Is_HideAndDontSave();
+			if (obj != null)
+			{
+				return !obj.Is_HideAndDontSave().Value && !obj.Is_DontDestroyOnLoad().Value;
+			}
+			return null;
 		}
 
-
-		public static bool is_CurrentWorld(this GameObject obj)
+		public static bool? is_CurrentWorld(this Transform obj)
 		{
-			return !obj.Is_HideAndDontSave() && !obj.Is_DontDestroyOnLoad();
-		}
-
-		public static bool is_CurrentWorld(this Transform obj)
-		{
-			return obj.gameObject.is_CurrentWorld();
+			if (obj != null)
+			{
+				return obj.gameObject.is_CurrentWorld();
+			}
+			return null;
 		}
 		public static void CopyPath(this GameObject obj)
 		{

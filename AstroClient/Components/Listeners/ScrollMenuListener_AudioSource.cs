@@ -7,7 +7,6 @@ namespace AstroClient.Components
 
 	public class ScrollMenuListener_AudioSource : GameEventsBehaviour
 	{
-		internal QMSingleButton assignedbtn;
 		public ScrollMenuListener_AudioSource(IntPtr obj0) : base(obj0)
 		{
 		}
@@ -24,7 +23,10 @@ namespace AstroClient.Components
 				}
 				else
 				{
-					DestroyImmediate(this);
+					if (KillSwitchEnabled)
+					{
+						DestroyImmediate(this);
+					}
 				}
 			}
 		}
@@ -34,13 +36,33 @@ namespace AstroClient.Components
 
 		private void OnDestroy()
 		{
-				if (assignedbtn != null)
-				{
-					assignedbtn.DestroyMe();
-				}
+			if (assignedbtn != null)
+			{
+				assignedbtn.DestroyMe();
+			}
 			DestroyImmediate(this);
 		}
 
+		private static bool KillSwitchEnabled = false;
+
 		internal UnityEngine.AudioSource source;
+		internal QMSingleButton assignedbtn
+		{
+			get
+			{
+				return _assignedbtn;
+			}
+			set
+			{
+				_assignedbtn = value;
+				if(value != null)
+				{
+					KillSwitchEnabled = true;
+				}
+			}
+		}
+		
+		private QMSingleButton _assignedbtn;
+		
 	}
 }
