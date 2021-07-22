@@ -55,8 +55,9 @@
 					var listener = obj.gameObject.GetOrAddComponent<ScrollMenuListener_AudioSource>();
 					if (listener != null)
 					{
-						listener.assignedbtn = btn;
+						listener.Assignedbtn = btn;
 						listener.source = obj;
+						listener.Lock = false;
 					}
 
 					scroll.Add(btn);

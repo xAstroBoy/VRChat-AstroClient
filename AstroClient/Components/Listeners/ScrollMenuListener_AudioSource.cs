@@ -15,17 +15,18 @@ namespace AstroClient.Components
 
 		private void FixedUpdate()
 		{
-			if (source != null)
+			if (!Lock)
 			{
-				if (assignedbtn != null)
+				if (source != null)
 				{
-					assignedbtn.SetTextColor(source.Get_AudioSource_Active_ToColor());
-				}
-				else
-				{
-					if (KillSwitchEnabled)
+					if (Assignedbtn != null)
 					{
-						DestroyImmediate(this);
+						Assignedbtn.SetTextColor(source.Get_AudioSource_Active_ToColor());
+					}
+					else
+					{
+						Destroy(this);
+
 					}
 				}
 			}
@@ -36,17 +37,15 @@ namespace AstroClient.Components
 
 		private void OnDestroy()
 		{
-			if (assignedbtn != null)
+			if (Assignedbtn != null)
 			{
-				assignedbtn.DestroyMe();
+				Assignedbtn.DestroyMe();
 			}
-			DestroyImmediate(this);
 		}
 
-		private static bool KillSwitchEnabled = false;
 
 		internal UnityEngine.AudioSource source;
-		internal QMSingleButton assignedbtn
+		internal QMSingleButton Assignedbtn
 		{
 			get
 			{
@@ -55,14 +54,11 @@ namespace AstroClient.Components
 			set
 			{
 				_assignedbtn = value;
-				if(value != null)
-				{
-					KillSwitchEnabled = true;
-				}
 			}
 		}
 		
 		private QMSingleButton _assignedbtn;
-		
+		internal bool Lock = true;
+
 	}
 }
