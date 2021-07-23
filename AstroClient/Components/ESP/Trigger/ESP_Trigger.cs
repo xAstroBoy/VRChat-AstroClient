@@ -56,26 +56,62 @@
 
 		private void SetupHighlighter()
 		{
-			if (HighLightOptions == null)
+			if (!HasSetupESP)
 			{
-				HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
-			}
-			if (HighLightOptions != null)
-			{
-				HighLightOptions.SetHighLighterColor(ESPColor);
-				foreach (var obj in ObjMeshRenderers)
+				if (HighLightOptions == null)
 				{
-					if (obj != null && obj.gameObject.active)
+					HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
+				}
+				if (HighLightOptions != null)
+				{
+					HighLightOptions.SetHighLighterColor(ESPColor);
+					foreach (var obj in ObjMeshRenderers)
 					{
-						HighLightOptions.AddRenderer(obj);
+						if (obj != null && obj.gameObject.active)
+						{
+							HighLightOptions.AddRenderer(obj);
+						}
+						else
+						{
+							HighLightOptions.RemoveRenderer(obj);
+						}
+					}
+				}
+				HasSetupESP = true;
+			}
+		}
+
+		public void FixedUpdate()
+		{
+			if (!Lock)
+			{
+				if (trigger != null)
+				{
+					if (trigger.enabled)
+					{
+						SetupHighlighter();
 					}
 					else
 					{
-						HighLightOptions.RemoveRenderer(obj);
+						HighLightOptions.DestroyHighlighter();
+						HasSetupESP = false;
+					}
+				}
+				else if (trigger2 != null)
+				{
+					if (trigger2.enabled)
+					{
+						SetupHighlighter();
+					}
+					else
+					{
+						HighLightOptions.DestroyHighlighter();
+						HasSetupESP = false;
 					}
 				}
 			}
 		}
+
 
 		private Color GetDefaultColor()
         {
@@ -94,6 +130,7 @@
         public void OnDestroy()
         {
             HighLightOptions.DestroyHighlighter();
+			HasSetupESP = false;
         }
 
         public void OnEnable()
@@ -104,6 +141,7 @@
         public void OnDisable()
         {
             HighLightOptions.DestroyHighlighter();
+			HasSetupESP = false;
         }
 
         internal void ChangeColor(Color newcolor)
@@ -133,6 +171,12 @@
             }
         }
 
+
+
+		internal VRC.SDKBase.VRC_Trigger trigger;
+		internal VRCSDK2.VRC_Trigger trigger2;
+		internal bool Lock = true;
+		internal bool HasSetupESP = false;
         internal Color ESPColor { get; private set; }
         internal HighlightsFXStandalone HighLightOptions { get; private set; }
         private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;

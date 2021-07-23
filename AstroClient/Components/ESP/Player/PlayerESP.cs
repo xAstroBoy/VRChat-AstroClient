@@ -2,7 +2,9 @@
 {
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
+	using MelonLoader;
 	using System;
+	using System.Collections;
 	using System.Linq;
 	using UnhollowerBaseLib.Attributes;
 	using UnityEngine;
@@ -90,8 +92,25 @@
                     }
                 }
 				SetPlayerDefaultESP();
+				RoutineCancellationToken = MelonCoroutines.Start(StartUpdater());
+
             }
         }
+
+
+		private IEnumerator StartUpdater()
+		{
+			while (true)
+			{
+				if(!UseCustomColor)
+				{
+				SetPlayerDefaultESP();
+				}
+				yield return new WaitForSeconds(5000);
+			}
+		}
+
+
 
 
 
@@ -119,12 +138,16 @@
             }
         }
 
-        public void OnDestroy()
-        {
-            HighLightOptions.DestroyHighlighter();
-        }
+		public void OnDestroy()
+		{
+			HighLightOptions.DestroyHighlighter();
+			if (RoutineCancellationToken != null)
+			{
+				MelonCoroutines.Stop(RoutineCancellationToken);
+			}
+		}
 
-        public void OnEnable()
+		public void OnEnable()
         {
             if (HighLightOptions != null)
             {
@@ -257,5 +280,6 @@
 		}
 
         internal Player AssignedPlayer { get; private set; }
+		private object RoutineCancellationToken;
     }
 }

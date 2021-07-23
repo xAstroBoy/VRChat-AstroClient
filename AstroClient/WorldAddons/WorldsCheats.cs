@@ -21,7 +21,7 @@
             Murder4Cheats.Murder4CheatsButtons(WorldCheats, 1, 0.5f, true);
             AmongUSCheats.AmongUSCheatsButtons(WorldCheats, 1, 1f, true);
             VRChatHub.InitButtons(WorldCheats, 1, 1.5f, true);
-            FreezeTag.InitButtons(WorldCheats, 1, 2, true);
+            //FreezeTag.InitButtons(WorldCheats, 1, 2, true);
             AimFactory.InitButtons(WorldCheats, 1, 2.5f, true);
 			BOMBERio.InitButtons(WorldCheats, 2, 0);
         }

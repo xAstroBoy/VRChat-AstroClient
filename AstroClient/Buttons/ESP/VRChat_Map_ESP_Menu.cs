@@ -179,7 +179,25 @@
             {
                 if (item != null)
                 {
-                    item.GetOrAddComponent<ESP_Trigger>();
+                    var triggeresp = item.GetOrAddComponent<ESP_Trigger>();
+					if(triggeresp != null)
+					{
+						var trigger1 = item.GetComponent<VRC.SDKBase.VRC_Trigger>();
+						if (trigger1 != null)
+						{
+							triggeresp.trigger = trigger1;
+							triggeresp.Lock = false;
+						}
+						else
+						{
+							var trigger2 = item.GetComponent<VRCSDK2.VRC_Trigger>();
+							if (trigger2 != null)
+							{
+								triggeresp.trigger2 = trigger2;
+								triggeresp.Lock = false;
+							}
+						}
+					}
                 }
             }
         }
