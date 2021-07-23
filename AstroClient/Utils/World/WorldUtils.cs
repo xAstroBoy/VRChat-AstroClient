@@ -95,7 +95,7 @@
             try
             {
                 List<GameObject> result = new List<GameObject>();
-                var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Pickup>()
+                var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Pickup>()
 						.Select(i => i.gameObject)
 						.Where(x => x.gameObject != null)
 						.Where(x2 => x2.name != "AvatarDebugConsole")
@@ -107,7 +107,7 @@
                 }
                 else
                 {
-                    var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Pickup>()
+                    var list2 = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_Pickup>()
 						.Select(i => i.gameObject)
 						.Where(x => x.gameObject != null)
 						.Where(x2 => x2.name != "AvatarDebugConsole")
@@ -120,7 +120,7 @@
                     }
                     else
                     {
-                        var list3 = Resources.FindObjectsOfTypeAll<VRCPickup>()
+                        var list3 = GameObjectFinder.GetRootGameObjectsComponents<VRCPickup>()
 						.Select(i => i.gameObject)
 						.Where(x => x.gameObject != null)
 						.Where(x2 => x2.name != "AvatarDebugConsole")
@@ -147,21 +147,21 @@
         {
             try
             {
-                var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
+                var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
                 if (list1 != null && list1.Count() != 0)
                 {
                     return list1;
                 }
                 else
                 {
-                    var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
+                    var list2 = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_Interactable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
                     if (list2 != null && list2.Count() != 0)
                     {
                         return list2;
                     }
                     else
                     {
-                        var list3 = Resources.FindObjectsOfTypeAll<VRCInteractable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
+                        var list3 = GameObjectFinder.GetRootGameObjectsComponents<VRCInteractable>().Select(i => i.gameObject).Where(x => x.gameObject != null).ToList();
                         if (list3 != null && list3.Count() != 0)
                         {
                             return list3;
@@ -182,14 +182,14 @@
         {
             try
             {
-                var list1 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
+                var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
                 if (list1 != null && list1.Count() != 0)
                 {
                     return list1;
                 }
                 else
                 {
-                    var list2 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
+                    var list2 = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_Trigger>().Select(i => i.gameObject).Where(x => x != null).ToList();
                     if (list2 != null && list2.Count() != 0)
                     {
                         return list2;
@@ -324,6 +324,7 @@
 					i.field_Internal_ApiAvatar_0.id.isAvatarID()
 					&& !i.transform.IsChildOf(VRChatObjects.AvatarPreviewBase_MainAvatar)
 					&& !i.transform.IsChildOf(VRChatObjects.AvatarPreviewBase_FallbackAvatar)
+					&& i.field_Internal_ApiAvatar_0.assetUrl.isNotNullOrEmptyOrWhiteSpace()
 					).ToList();
 				if (list1 != null && list1.Count() != 0)
 				{
@@ -347,9 +348,10 @@
 			{
 				var list1 = GameObjectFinder.GetRootGameObjectsComponents<AvatarPedestal>()
 					.Where(
-					i => i.field_Private_ApiAvatar_0 != null && 
-					i.field_Private_ApiAvatar_0.id.isNotNullOrEmptyOrWhiteSpace() && 
+					i => i.field_Private_ApiAvatar_0 != null &&
+					i.field_Private_ApiAvatar_0.id.isNotNullOrEmptyOrWhiteSpace() &&
 					i.field_Private_ApiAvatar_0.id.isAvatarID()
+					&& i.field_Private_ApiAvatar_0.assetUrl.isNotNullOrEmptyOrWhiteSpace()
 					).ToList();
 				if (list1 != null && list1.Count() != 0)
 				{
@@ -415,7 +417,7 @@
 		public static List<UdonBehaviour> Get_UdonBehaviours()
         {
             var UdonBehaviourObjects = new List<UdonBehaviour>();
-            var list = Resources.FindObjectsOfTypeAll<UdonBehaviour>();
+            var list = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
             if (list.Count() != 0)
             {
                 foreach (var item in list)

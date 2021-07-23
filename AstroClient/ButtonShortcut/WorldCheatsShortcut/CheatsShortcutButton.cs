@@ -57,16 +57,16 @@
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-            else if (id == WorldIds.FreezeTag)
-            {
-                if (FreezeTag.FreezeTagCheatsPage != null)
-                {
-                    SetButtonText("Freeze Tag Cheats", "Manage Freeze Tag Cheats");
-                    SetButtonShortcut(FreezeTag.FreezeTagCheatsPage);
-                    SetButtonColor(Color.green);
-                    ToggleButtonVisibilityAndInteractivity(true);
-                }
-            }
+            //else if (id == WorldIds.FreezeTag)
+            //{
+            //    if (FreezeTag.FreezeTagCheatsPage != null)
+            //    {
+            //        SetButtonText("Freeze Tag Cheats", "Manage Freeze Tag Cheats");
+            //        SetButtonShortcut(FreezeTag.FreezeTagCheatsPage);
+            //        SetButtonColor(Color.green);
+            //        ToggleButtonVisibilityAndInteractivity(true);
+            //    }
+            //}
             else if (id == WorldIds.AimFactory)
             {
                 if (AimFactory.AimFactoryCheatPage != null)
