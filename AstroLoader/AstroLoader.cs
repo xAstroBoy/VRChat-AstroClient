@@ -52,15 +52,11 @@
 			{
 			}
 
-			MelonUtils.JSonSerialize();
-
 			if (AstroNetworkLoader.LibraryFiles.Count > 0)
 			{
 				foreach (var bytes in AstroNetworkLoader.LibraryFiles)
 				{
-					MelonUtils.JSonSerialize();
 					Assembly.Load(bytes);
-					MelonUtils.JSonDeserialize();
 				}
 			}
 
@@ -68,10 +64,8 @@
 			{
 				foreach (var bytes in AstroNetworkLoader.MelonFiles)
 				{
-					MelonUtils.JSonSerialize(); // Enables bypass (turns off assembly verification)
 					var dll = Assembly.Load(bytes);
 					MelonHandler.LoadFromAssembly(dll, Environment.CurrentDirectory + @"\Plugins\AstroLoader.dll");
-					MelonUtils.JSonDeserialize(); // Disables bypass (turns it back on so it fools VRCMG mods)
 				}
 			}
 
@@ -79,9 +73,7 @@
 			{
 				foreach (var bytes in AstroNetworkLoader.ModuleFiles)
 				{
-					MelonUtils.JSonSerialize();
 					Assembly.Load(bytes);
-					MelonUtils.JSonDeserialize();
 				}
 			}
 		}
@@ -93,9 +85,7 @@
 				try
 				{
 					var bytes = CheetosHelpers.ExtractResource(path);
-					MelonUtils.JSonSerialize();
 					var dll = Assembly.Load(bytes);
-					MelonUtils.JSonDeserialize();
 					MelonLogger.Msg($"Injected Embedded Library: {path}");
 				}
 				catch (Exception e)
@@ -116,9 +106,7 @@
 			{
 				try
 				{
-					MelonUtils.JSonSerialize();
 					var dll = Assembly.LoadFrom(path);
-					MelonUtils.JSonDeserialize();
 					MelonLogger.Msg($"Injected Library: {path}");
 				}
 				catch (Exception e)
@@ -132,10 +120,8 @@
 			{
 				try
 				{
-					MelonUtils.JSonSerialize();
 					var dll = Assembly.LoadFile(path);
 					MelonHandler.LoadFromAssembly(dll, path);
-					MelonUtils.JSonDeserialize();
 					MelonLogger.Msg($"Injected MelonMod/MelonPlugin: {path}");
 				}
 				catch (Exception e)
@@ -149,9 +135,7 @@
 			{
 				try
 				{
-					MelonUtils.JSonSerialize();
 					_ = Assembly.LoadFile(path);
-					MelonUtils.JSonDeserialize();
 					MelonLogger.Msg($"Injected: {path}");
 				}
 				catch (Exception e)
