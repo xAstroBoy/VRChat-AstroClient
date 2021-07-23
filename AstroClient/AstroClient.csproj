@@ -347,6 +347,7 @@
     <Compile Include="WorldAddons\Supported_Worlds\ChuckECheeseExperience.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\lpd.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\Meroom.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\SnoozeScaryMaze5.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\Valkyrie_Defense.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\SmashContest.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\ClubMisfitAfterParty.cs" />

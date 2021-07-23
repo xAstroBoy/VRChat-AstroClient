@@ -31,6 +31,13 @@
 		}
 
 
+		public static List<GameObject> GetRootSceneObjects_Without_Avatars()
+		{
+			return SceneManager.GetActiveScene().GetRootGameObjects().Where(x => !x.gameObject.name.Contains("VRCPlayer")).ToList();
+		}
+
+
+
 		public static List<T> GetRootGameObjectsComponents<T>(bool IncludeInactive = true, bool IncludeAvatarComponents = false) where T : Component
 		{
 			try
