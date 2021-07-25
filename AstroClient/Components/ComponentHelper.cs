@@ -83,6 +83,7 @@
             RegisterComponent<MaskRemover>();
 
             RegisterComponent<TweakerListener>();
+			RegisterComponent<GameObjectListener>();
 			RegisterComponent<ScrollMenuListener>();
 			RegisterComponent<ScrollMenuListener_AudioSource>();
 
