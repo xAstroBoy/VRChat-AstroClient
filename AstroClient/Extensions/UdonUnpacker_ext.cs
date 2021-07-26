@@ -20,10 +20,6 @@
 					{
 						return result;
 					}
-					//var ptr = IL2CPP.Il2CppObjectBaseToPtrNotNull(obj);
-					//if (ptr != null)
-					//{
-					//}
 				}
 				else
 				{

@@ -10,7 +10,7 @@
 
 	public static class UdonConverter
 	{
-		public static Il2CppSystem.Object Generate_Il2CPPObject_string(string[] item)
+		public static Il2CppSystem.Object Generate_Il2CPPObject(string[] item)
 		{
 			Il2CppStringArray array2 = new Il2CppStringArray(item);
 			Il2CppSystem.Object boxed = new Il2CppSystem.Object(array2.Pointer);
@@ -21,7 +21,7 @@
 			return null;
 		}
 
-		public static Il2CppSystem.Object Generate_Il2CPPObject_string(string item)
+		public static Il2CppSystem.Object Generate_Il2CPPObject(string item)
 		{
 			var ptr = IL2CPP.ManagedStringToIl2Cpp(item);
 			Il2CppSystem.Object boxed = new Il2CppSystem.Object(ptr);

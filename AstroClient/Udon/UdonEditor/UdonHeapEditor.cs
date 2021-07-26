@@ -422,7 +422,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_string(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -572,7 +572,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject(value);
+				var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
