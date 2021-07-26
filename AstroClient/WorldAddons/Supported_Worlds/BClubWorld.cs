@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroClient.Components;
+	using AstroClient.Udon;
 	using AstroClient.Variables;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
@@ -445,19 +446,19 @@
 				if (patreonlist != null)
 				{
 					var node = patreonlist.GetComponent<VRC.Udon.UdonBehaviour>();
-					var program = node._program;
-					var symbol_table = program.SymbolTable;
-					var heap = program.Heap;
-
-					var obj_List = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("localPatrons"));
-					if (obj_List != null)
+					var disassembled = node.DisassembleUdonBehaviour();
+					if (disassembled != null)
 					{
-						var patreonstr = obj_List.Unpack_String();
-						if (!patreonstr.Contains(Utils.LocalPlayer.displayName))
+						var obj_List = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("localPatrons"));
+						if (obj_List != null)
 						{
-							var modifiedpatreonstr = Utils.LocalPlayer.displayName + Environment.NewLine + patreonstr.Skip(1);
+							var patreonstr = obj_List.Unpack_String();
+							if (!patreonstr.Contains(Utils.LocalPlayer.displayName))
+							{
+								var modifiedpatreonstr = Utils.LocalPlayer.displayName + Environment.NewLine + patreonstr.Skip(1);
 
-							UdonHeapEditor.PatchHeap(symbol_table, heap, "localPatrons", modifiedpatreonstr, true);
+								UdonHeapEditor.PatchHeap(disassembled, "localPatrons", modifiedpatreonstr, true);
+							}
 						}
 					}
 					node.InitializeUdonContent();
@@ -476,45 +477,45 @@
 				if (patreonlist != null)
 				{
 					var node = patreonlist.GetComponent<VRC.Udon.UdonBehaviour>();
-					var program = node._program;
-					var symbol_table = program.SymbolTable;
-					var heap = program.Heap;
-
-				try
+				var disassembled = node.DisassembleUdonBehaviour();
+				if (disassembled != null)
 				{
-					var isEliteBoolPatch = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("__0_isElite_Boolean"));
-					if (isEliteBoolPatch != null)
+					try
 					{
-						var extract = isEliteBoolPatch.Unpack_Boolean();
-						if (extract.HasValue)
+						var isEliteBoolPatch = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("__0_isElite_Boolean"));
+						if (isEliteBoolPatch != null)
 						{
-							if (!extract.Value)
+							var extract = isEliteBoolPatch.Unpack_Boolean();
+							if (extract.HasValue)
 							{
-								UdonHeapEditor.PatchHeap(symbol_table, heap, "__0_isElite_Boolean", true, true);
+								if (!extract.Value)
+								{
+									UdonHeapEditor.PatchHeap(disassembled, "__0_isElite_Boolean", true, true);
+								}
 							}
 						}
-					}
-					var vipOnlyPatch = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("vipOnly"));
-					if (vipOnlyPatch != null)
-					{
-						UdonHeapEditor.PatchHeap(symbol_table, heap, "vipOnly", false, true);
+						var vipOnlyPatch = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("vipOnly"));
+						if (vipOnlyPatch != null)
+						{
+							UdonHeapEditor.PatchHeap(disassembled, "vipOnly", false, true);
+						}
+
+						var vipOnlyLocalPatch = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("vipOnlyLocal"));
+						if (vipOnlyLocalPatch != null)
+						{
+							UdonHeapEditor.PatchHeap(disassembled, "vipOnlyLocal", false, true);
+						}
 					}
 
-					var vipOnlyLocalPatch = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("vipOnlyLocal"));
-					if (vipOnlyLocalPatch != null)
+					catch (Exception e)
 					{
-						UdonHeapEditor.PatchHeap(symbol_table, heap, "vipOnlyLocal", false, true);
+						ModConsole.ErrorExc(e);
+
 					}
 				}
-				catch(Exception e)
-				{
-					ModConsole.ErrorExc(e);
-
-				}
-
 				try
 					{
-						var Elite_List = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("elitesInInstance"));
+						var Elite_List = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("elitesInInstance"));
 						if (Elite_List != null)
 						{
 							var list = Elite_List.Unpack_Array_VRCPlayerApi().ToList();
@@ -531,10 +532,10 @@
 								list.Add(Utils.LocalPlayer);
 							}
 
-							UdonHeapEditor.PatchHeap(symbol_table, heap, "elitesInInstance", list.ToArray(), true);
+							UdonHeapEditor.PatchHeap(disassembled, "elitesInInstance", list.ToArray(), true);
 						}
 
-					var Patron_List = heap.GetHeapVariable(symbol_table.GetAddressFromSymbol("vipsInInstance"));
+					var Patron_List = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("vipsInInstance"));
 					if (Patron_List != null)
 					{
 						var list = Patron_List.Unpack_Array_VRCPlayerApi().ToList();
@@ -551,7 +552,7 @@
 							list.Add(Utils.LocalPlayer);
 						}
 
-						UdonHeapEditor.PatchHeap(symbol_table, heap, "vipsInInstance", list.ToArray(), true);
+						UdonHeapEditor.PatchHeap(disassembled, "vipsInInstance", list.ToArray(), true);
 					}
 					node.InitializeUdonContent();
 					node.Start();

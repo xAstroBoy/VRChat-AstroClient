@@ -7,11 +7,11 @@
 
 	public static class UdonHeapEditor
 	{
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, bool value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, bool value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -19,11 +19,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, Single value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, Single value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -31,11 +31,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, string value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, string value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -43,11 +43,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, string[] value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, string[] value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -55,11 +55,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, UInt32 value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UInt32 value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -67,11 +67,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, Int32 value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, Int32 value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -79,11 +79,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, Int64 value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, Int64 value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -91,11 +91,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, char value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, char value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -103,11 +103,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, char[] value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, char[] value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -115,11 +115,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, UnityEngine.Color value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Color value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -127,11 +127,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, UnityEngine.Material value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Material value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -139,11 +139,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, UnityEngine.MeshRenderer value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.MeshRenderer value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -151,11 +151,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, UnityEngine.ParticleSystem value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.ParticleSystem value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -163,11 +163,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, UnityEngine.Transform value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Transform value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -175,11 +175,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, UnityEngine.GameObject value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.GameObject value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -187,11 +187,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, UnityEngine.GameObject[] value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.GameObject[] value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -199,11 +199,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, UnityEngine.Vector3 value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Vector3 value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -211,11 +211,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, UnityEngine.Quaternion value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Quaternion value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -223,11 +223,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, UnityEngine.AudioSource value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.AudioSource value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -235,11 +235,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, UnityEngine.AudioClip[] value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.AudioClip[] value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -247,11 +247,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, UnityEngine.UI.Text value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Text value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -259,11 +259,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, UnityEngine.HumanBodyBones value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.HumanBodyBones value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -271,11 +271,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, VRC.SDKBase.VRCPlayerApi value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDKBase.VRCPlayerApi value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -283,11 +283,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, VRC.SDKBase.VRCPlayerApi[] value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDKBase.VRCPlayerApi[] value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -295,11 +295,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, VRC.Udon.UdonBehaviour value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.Udon.UdonBehaviour value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -307,11 +307,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, VRC.Udon.Common.Interfaces.NetworkEventTarget value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.Udon.Common.Interfaces.NetworkEventTarget value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -319,11 +319,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, TMPro.TextMeshPro value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, TMPro.TextMeshPro value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -331,11 +331,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonSymbolTable symbols, IUdonHeap heap, string symbol, TMPro.TextMeshProUGUI value, bool verify = false)
+		public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, TMPro.TextMeshProUGUI value, bool verify = false)
 		{
-			if (heap != null)
+			if (UnpackedUdonBehaviour != null)
 			{
-				PatchHeap(heap, symbols.GetAddressFromSymbol(symbol), value, verify);
+				PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
 			}
 			else
 			{
@@ -367,8 +367,6 @@
 				ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
 			}
 		}
-
-
 
 		public static void PatchHeap(IUdonHeap heap, uint address, bool value, bool verify = false)
 		{

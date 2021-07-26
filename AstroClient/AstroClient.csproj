@@ -127,6 +127,9 @@
     <Compile Include="ModDetector\FindMods.cs" />
     <Compile Include="Udon\UdonEditor\UdonConverter.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapEditor.cs" />
+    <Compile Include="Udon\UdonEditor\UdonUnpacker_Utils_ext.cs" />
+    <Compile Include="Udon\UdonEditor\UdonUnpacker_Utils.cs" />
+    <Compile Include="Udon\UdonEditor\DisassembledUdonBehaviour.cs" />
     <Compile Include="Utils\Serialization.cs" />
     <Compile Include="Extensions\UdonUnpacker_ext.cs" />
     <Compile Include="Extensions\VRCPlayer_Emoji_Ext.cs" />
