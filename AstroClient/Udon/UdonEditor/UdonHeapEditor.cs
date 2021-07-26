@@ -347,7 +347,7 @@
 		{
 			if (heap != null && address != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_TextMeshProUGUI(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -372,7 +372,7 @@
 		{
 			if (heap != null && address != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_Boolean(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -397,7 +397,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_Single(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -447,7 +447,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_Array_string(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -472,7 +472,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_UInt32(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -497,7 +497,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_Int32(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -522,7 +522,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_Int64(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -547,7 +547,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_Char(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -572,7 +572,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_Array_char(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -597,7 +597,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_UnityEngine_color(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -622,7 +622,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_UnityEngine_Material(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -647,7 +647,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_UnityEngine_MeshRenderer(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -672,7 +672,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_UnityEngine_ParticleSystem(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -697,7 +697,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_UnityEngine_Transform(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -722,7 +722,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_UnityEngine_GameObject(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -747,7 +747,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_Array_UnityEngine_GameObjects(value);
+				var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -772,7 +772,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_UnityEngine_Vector3(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -797,7 +797,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_UnityEngine_Quaternion(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -822,7 +822,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_UnityEngine_AudioSource(value);
+				var converted = UdonConverter.Generate_Il2CPPObject(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -847,7 +847,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_Array_UnityEngine_AudioClips(value);
+				var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -872,7 +872,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_UnityEngine_Text(value);
+				var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -897,7 +897,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_UnityEngine_HumanBodyBones(value);
+				var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -922,7 +922,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_VRCPlayerApi(value);
+				var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -947,7 +947,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_Array_VRCPlayerApi(value);
+				var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -972,7 +972,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_UdonBehaviour(value);
+				var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -993,11 +993,11 @@
 			}
 		}
 
-		public static void PatchHeap(IUdonHeap heap, uint address, VRC.Udon.Common.Interfaces.NetworkEventTarget value, bool verify = false)
+		public static void PatchHeap(IUdonHeap heap, uint address, VRC.Udon.Common.Interfaces.NetworkEventTarget value, bool verify = false) 
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_UnityEngine_NetworkEventTarget(value);
+				var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
@@ -1022,7 +1022,7 @@
 		{
 			if (heap != null)
 			{
-				var converted = UdonConverter.Generate_Il2CPPObject_TextMeshPro(value);
+				var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
 				heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
 				if (verify)
 				{
