@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.Udon;
 	using AstroClient.Variables;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
@@ -16,14 +17,11 @@
 				var result = UdonSearch.FindUdonEvent("PlayerManager", "AddMoney").Action;
 				if (result != null)
 				{
-					var program = result._program;
-					var symbol_table = program.SymbolTable;
-					var heap = program.Heap;
-					if(symbol_table != null && heap != null)
+					var disassembled = result.DisassembleUdonBehaviour();
+					if(disassembled != null)
 					{
-						UdonHeapEditor.PatchHeap(symbol_table, heap, "money_now", 999999999, true);
-						
-
+						UdonHeapEditor.PatchHeap(disassembled, "money_now", 999999999, true);
+					
 					}
 				}
 			}

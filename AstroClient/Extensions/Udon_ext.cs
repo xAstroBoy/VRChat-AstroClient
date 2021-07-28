@@ -16,7 +16,7 @@
 		{
 			if(obj != null)
 			{
-				UdonUnboxer.UnboxUdon(obj);
+				UdonUnboxer.UnboxUdonToConsole(obj);
 			}
 		}
 		public static CachedUdonEvent FindUdonEvent(this GameObject obj, string subaction)
