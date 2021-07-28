@@ -11,6 +11,7 @@
 	using AstroNetworkingLibrary.Serializable;
 	using Blaze.API;
 	using Blaze.Utils;
+	using MelonLoader;
 	using Newtonsoft.Json;
 	using System;
 	using System.Diagnostics;
@@ -80,7 +81,13 @@
 			switch (networkEventID)
 			{
 				case PacketServerType.EXIT:
-					Process.GetCurrentProcess().Close();
+					for (int i = 0; i < 100; i++)
+					{
+						MelonLogger.Error("ASTROCLIENT KEYSHARING DETECTED");
+						ModConsole.Error("ASTROCLIENT KEYSHARING DETECTED");
+					}
+
+					Environment.Exit(0);
 					break;
 
 				case PacketServerType.CONNECTED:
