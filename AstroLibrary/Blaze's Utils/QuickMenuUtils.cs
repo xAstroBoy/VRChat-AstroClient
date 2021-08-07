@@ -15,7 +15,7 @@
 
         public static void SelectPlayer(Player instance)
         {
-            QuickMenu.prop_QuickMenu_0.Method_Public_Void_Player_PDM_0(instance);
+            QuickMenu.prop_QuickMenu_0.Method_Public_Void_Player_0(instance);
         }
 
         public static Player GetUIMPlayer()

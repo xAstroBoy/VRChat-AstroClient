@@ -94,11 +94,11 @@
             }
         }
 
-        public static Sprite LoadSprite2(string url)
-        {
-            WWW www = new WWW(url, null, new Il2CppSystem.Collections.Generic.Dictionary<string, string>());
-            Sprite sprite = Sprite.CreateSprite(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
-            return sprite;
-        }
+        //public static Sprite LoadSprite2(string url)
+        //{
+        //    WWW www = new WWW(url, null, new Il2CppSystem.Collections.Generic.Dictionary<string, string>());
+        //    Sprite sprite = Sprite.CreateSprite(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+        //    return sprite;
+        //}
     }
 }

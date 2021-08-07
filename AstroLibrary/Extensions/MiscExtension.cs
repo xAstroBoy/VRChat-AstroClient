@@ -86,24 +86,24 @@ namespace AstroLibrary.Extensions
             MelonCoroutines.Start(e);
         }
 
-        public static void LoadSprite(this Image Instance, string url)
-        {
-            MelonCoroutines.Start(LoadSpriteEnum(Instance, url));
-        }
+        //public static void LoadSprite(this Image Instance, string url)
+        //{
+        //    MelonCoroutines.Start(LoadSpriteEnum(Instance, url));
+        //}
 
-        private static IEnumerator LoadSpriteEnum(this Image Instance, string url)
-        {
-            while (VRCPlayer.field_Internal_Static_VRCPlayer_0 != true) yield return null;
-            var Sprite = new Sprite();
-            WWW www = new WWW(url, null, new Il2CppSystem.Collections.Generic.Dictionary<string, string>());
-            yield return www;
-            {
-                Sprite = Sprite.CreateSprite(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
-            }
-            Instance.sprite = Sprite;
-            Instance.color = Color.white;
-            yield break;
-        }
+        //private static IEnumerator LoadSpriteEnum(this Image Instance, string url)
+        //{
+        //    while (VRCPlayer.field_Internal_Static_VRCPlayer_0 != true) yield return null;
+        //    var Sprite = new Sprite();
+        //    WWW www = new WWW(url, null, new Il2CppSystem.Collections.Generic.Dictionary<string, string>());
+        //    yield return www;
+        //    {
+        //        Sprite = Sprite.CreateSprite(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+        //    }
+        //    Instance.sprite = Sprite;
+        //    Instance.color = Color.white;
+        //    yield break;
+        //}
 
         public static bool XRefScanForGlobal(this MethodBase methodBase, string searchTerm, bool ignoreCase = true)
         {

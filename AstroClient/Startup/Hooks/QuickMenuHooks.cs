@@ -27,7 +27,7 @@
                     harmony1 = new HarmonyLib.Harmony(BuildInfo.Name + " SelectedPlayerHook");
                 }
 
-                harmony1.Patch(AccessTools.Method(typeof(QuickMenu), nameof(QuickMenu.Method_Public_Void_Player_PDM_0)), new HarmonyMethod(typeof(QuickMenuHooks).GetMethod(nameof(OnSelectedPlayerPatch), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
+                harmony1.Patch(AccessTools.Method(typeof(QuickMenu), nameof(QuickMenu.Method_Public_Void_Player_0)), new HarmonyMethod(typeof(QuickMenuHooks).GetMethod(nameof(OnSelectedPlayerPatch), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
                 ModConsole.DebugLog("Hooked VRC_EventDispatcherRFC 1");
             }
             catch

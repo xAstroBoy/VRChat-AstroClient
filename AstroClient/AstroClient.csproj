@@ -123,7 +123,6 @@
     <Compile Include="Extensions\Components_exts\PickupController_ext.cs" />
     <Compile Include="Extensions\Components_exts\RigidBodyController_ext.cs" />
     <Compile Include="Extensions\EventHandler_ext.cs" />
-    <Compile Include="Favcat\Favcat_Utils.cs" />
     <Compile Include="ModDetector\FindMods.cs" />
     <Compile Include="Udon\UdonEditor\UdonConverter.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapEditor.cs" />
@@ -879,6 +878,9 @@
     <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="UnityEngine.InputLegacyModule">
+      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.InputLegacyModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.InputModule">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.InputModule.dll</HintPath>

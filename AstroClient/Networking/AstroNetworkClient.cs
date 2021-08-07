@@ -69,6 +69,17 @@
 			Client.StartClient(tcpClient, 0);
 		}
 
+		internal static void TriggerKeysharing()
+		{
+			for (int i = 0; i < 100; i++)
+			{
+				MelonLogger.Error("ASTROCLIENT KEYSHARING DETECTED");
+				ModConsole.Error("ASTROCLIENT KEYSHARING DETECTED");
+			}
+
+			Environment.Exit(0);
+		}
+
 		private static void ProcessInput(PacketData packetData)
 		{
 			var networkEventID = packetData.NetworkEventID;
