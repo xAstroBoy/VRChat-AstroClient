@@ -1,14 +1,14 @@
-using AstroLibrary.Console;
-using System;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-using VRC.SDK3.Components;
-using VRC.Udon;
-using VRC.Udon.Common.Interfaces;
-using VRC.Udon.ProgramSources;
-
 namespace AstroClient.Components
 {
+	using AstroLibrary.Console;
+	using System;
+	using UnhollowerRuntimeLib;
+	using UnityEngine;
+	using VRC.SDK3.Components;
+	using VRC.Udon;
+	using VRC.Udon.Common.Interfaces;
+	using VRC.Udon.ProgramSources;
+
 	public class VRC_AstroUdonTrigger : MonoBehaviour
 	{
 

@@ -1,10 +1,10 @@
-﻿using AstroClient.ItemTweakerV2.TweakerEventArgs;
-using System;
-using UnityEngine;
-using AstroLibrary.Extensions;
-
-namespace AstroClient.ItemTweakerV2.Selector
+﻿namespace AstroClient.ItemTweakerV2.Selector
 {
+	using AstroClient.ItemTweakerV2.TweakerEventArgs;
+	using System;
+	using UnityEngine;
+	using AstroLibrary.Extensions;
+
 	public class Tweaker_Selector : Tweaker_Events
     {
         public static event EventHandler<SelectedObjectArgs> Event_On_New_GameObject_Selected;

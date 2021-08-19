@@ -1,11 +1,11 @@
-﻿using AstroClient.Components;
-using AstroClient.ItemTweakerV2.Handlers;
-using AstroClient.ItemTweakerV2.TweakerEventArgs;
-using System;
-using UnityEngine;
-
-namespace AstroClient.ItemTweakerV2.Selector
+﻿namespace AstroClient.ItemTweakerV2.Selector
 {
+	using AstroClient.Components;
+	using AstroClient.ItemTweakerV2.Handlers;
+	using AstroClient.ItemTweakerV2.TweakerEventArgs;
+	using System;
+	using UnityEngine;
+
 	public class Tweaker_Events : GameEvents
     {
         public Tweaker_Events()

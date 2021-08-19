@@ -46,25 +46,11 @@
                 {
                     string eventhandler = string.Empty;
                     string vrcevent = string.Empty;
-                    if (__0 != null)
-                    {
-                        eventhandler = __0.ToString();
-                    }
-                    else
-                    {
-                        eventhandler = "null";
-                    }
 
-                    if (__1.ParameterObject != null)
-                    {
-                        vrcevent = __1.ParameterObject.name;
-                    }
-                    else
-                    {
-                        vrcevent = "null";
-                    }
+                    eventhandler = __0 != null ? __0.ToString() : "null";
+					vrcevent = __1.ParameterObject != null ? __1.ParameterObject.name : "null";
 
-                    if (!vrcevent.ToLower().Equals("uspeak")) // Ignore USPEAK.
+					if (!vrcevent.ToLower().Equals("uspeak")) // Ignore USPEAK.
                     {
                         ModConsole.DebugLog($"Event : VRC_EventHandler : {eventhandler}, VrcEvent : {vrcevent}, VrcBroadcastType : {__2}, UnknownInt : {__3}, UnknownFloat : {__4}");
                     }

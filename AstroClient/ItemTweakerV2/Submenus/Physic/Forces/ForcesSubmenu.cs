@@ -1,12 +1,12 @@
-﻿using AstroClient.Components;
-using AstroClient.ItemTweakerV2.Selector;
-using AstroLibrary.Extensions;
-using RubyButtonAPI;
-using System;
-using UnityEngine;
-
-namespace AstroClient.ItemTweakerV2.Submenus
+﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
+	using AstroClient.Components;
+	using AstroClient.ItemTweakerV2.Selector;
+	using AstroLibrary.Extensions;
+	using RubyButtonAPI;
+	using System;
+	using UnityEngine;
+
 	public class ForcesSubmenu : Tweaker_Events
     {
         public static void Init_ForceSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
