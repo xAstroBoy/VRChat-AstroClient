@@ -95,6 +95,25 @@
                     ModConsole.Log($"Sent Avatar Deletion For: {selectedID}");
                     AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DELETE, selectedID));
                 }, 1.45f, 1f);
+				if (FindMods.Favcat_Unchained_Present)
+				{
+					WorldAvatarDumper = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Show Avatars Pedestrals from World", 921f, 290f, delegate ()
+					{
+						Favcat_Utils.Run_RevealWorldPedestrials();
+					}, 1.45f, 1f);
+
+				}
+			}
+			else
+			{
+				if (FindMods.Favcat_Unchained_Present)
+				{
+					WorldAvatarDumper = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Show Avatars Pedestrals from World", 921f, 350f, delegate ()
+					{
+						Favcat_Utils.Run_RevealWorldPedestrials();
+					}, 1.45f, 1f);
+
+				}
 			}
 
 			publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
