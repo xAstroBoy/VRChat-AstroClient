@@ -4,9 +4,9 @@
 
 	public static class RandomOrg
 	{
-		public static string Source = "https://www.random.org/strings/?num=10&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=html&rnd=new";
+		const string Source = "https://www.random.org/strings/?num=10&len=20&digits=on&upperalpha=on&loweralpha=on&unique=on&format=html&rnd=new";
 
-		public static string ClassToGet = "data";
+		const string ClassToGet = "data";
 
 		public static string GetRandomKey()
 		{

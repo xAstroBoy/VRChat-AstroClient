@@ -11,9 +11,11 @@
         public static void BuildInstanceContainer()
         {
             ModConsole.Log("Generating Instance Holder", Color.LimeGreen);
-            InstanceHolder = new GameObject();
-            InstanceHolder.name = "Instance Holder " + BuildInfo.Name;
-            Object.DontDestroyOnLoad(InstanceHolder);
+			InstanceHolder = new GameObject
+			{
+				name = "Instance Holder " + BuildInfo.Name
+			};
+			Object.DontDestroyOnLoad(InstanceHolder);
         }
 
         public static GameObject GetInstanceHolder(string instancename = "INSTANCE_OBJECT_ADDED")

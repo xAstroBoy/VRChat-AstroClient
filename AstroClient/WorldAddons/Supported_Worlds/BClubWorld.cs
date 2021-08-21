@@ -528,9 +528,11 @@
 							}
 							else
 							{
-								list = new List<VRC.SDKBase.VRCPlayerApi>();
-								list.Add(Utils.LocalPlayer);
-							}
+							list = new List<VRC.SDKBase.VRCPlayerApi>
+							{
+								Utils.LocalPlayer
+							};
+						}
 
 							UdonHeapEditor.PatchHeap(disassembled, "elitesInInstance", list.ToArray(), true);
 						}
@@ -548,8 +550,10 @@
 						}
 						else
 						{
-							list = new List<VRC.SDKBase.VRCPlayerApi>();
-							list.Add(Utils.LocalPlayer);
+							list = new List<VRC.SDKBase.VRCPlayerApi>
+							{
+								Utils.LocalPlayer
+							};
 						}
 
 						UdonHeapEditor.PatchHeap(disassembled, "vipsInInstance", list.ToArray(), true);

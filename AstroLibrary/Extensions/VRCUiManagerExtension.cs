@@ -169,7 +169,8 @@ namespace AstroLibrary.Extensions
             }
 
             avatarLink = new Uri(adjustedLink.Trim("/".ToCharArray()));
-            void OnSuccess(APIUser user)
+
+			static void OnSuccess(APIUser user)
             {
                 ModConsole.Log($"Found Author: {user.id}");
                 Utils.VRCUiManager.SelectAPIUser(user);
