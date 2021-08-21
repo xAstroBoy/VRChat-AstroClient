@@ -536,15 +536,7 @@
         private GameObject obj = null;
         private Rigidbody body = null;
         private bool _EditMode = false;
-
-        private bool _OrigKinematic = false;
-        private bool _OrigUseGravity = false;
-        private bool _OrigDetectCollisions = true;
-        private float _OrigDrag = 0f;
-        private float _OrigAngularDrag = 0f;
-        private RigidbodyConstraints _OrigConstraints;
-
-        private bool _Forced_RigidBody;
+		private bool _Forced_RigidBody;
         private bool _useGravity = false;
         private bool _isKinematic = false;
         private bool _PreventOthersFromGrabbing = false;
@@ -554,79 +546,19 @@
 
         private RigidbodyConstraints _Constraints;
 
-        private bool OrigKinematic
-        {
-            get
-            {
-                return _OrigKinematic;
-            }
-            set
-            {
-                _OrigKinematic = value;
-            }
-        }
+		private bool OrigKinematic { get; set; } = false;
 
-        private bool OrigUseGravity
-        {
-            get
-            {
-                return _OrigUseGravity;
-            }
-            set
-            {
-                _OrigUseGravity = value;
-            }
-        }
+		private bool OrigUseGravity { get; set; } = false;
 
-        private bool OrigDetectCollisions
-        {
-            get
-            {
-                return _OrigDetectCollisions;
-            }
-            set
-            {
-                _OrigDetectCollisions = value;
-            }
-        }
+		private bool OrigDetectCollisions { get; set; } = true;
 
-        private float OrigDrag
-        {
-            get
-            {
-                return _OrigDrag;
-            }
-            set
-            {
-                _OrigDrag = value;
-            }
-        }
+		private float OrigDrag { get; set; } = 0f;
 
-        private float OrigAngularDrag
-        {
-            get
-            {
-                return _OrigAngularDrag;
-            }
-            set
-            {
-                _OrigAngularDrag = value;
-            }
-        }
+		private float OrigAngularDrag { get; set; } = 0f;
 
-        private RigidbodyConstraints OrigConstraints
-        {
-            get
-            {
-                return _OrigConstraints;
-            }
-            set
-            {
-                _OrigConstraints = value;
-            }
-        }
+		private RigidbodyConstraints OrigConstraints { get; set; }
 
-        internal bool EditMode
+		internal bool EditMode
         {
             get
             {

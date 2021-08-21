@@ -42,23 +42,23 @@
 
             initShift[0] = -1;
             initShift[1] = 0;
-            setLocation(btnXLocation, btnYLocation);
+            SetLocation(btnXLocation, btnYLocation);
             setButtonText(btnText);
-            setToolTip(btnToolTip);
+            SetToolTip(btnToolTip);
             setAction(btnAction);
 
 
             if (btnBackgroundColor != null)
-                setBackgroundColor((Color)btnBackgroundColor);
+                SetBackgroundColor((Color)btnBackgroundColor);
             else
                 OrigBackground = button.GetComponentInChildren<UnityEngine.UI.Image>().color;
 
             if (btnTextColor != null)
-                setTextColor((Color)btnTextColor);
+                SetTextColor((Color)btnTextColor);
             else
                 OrigText = button.GetComponentInChildren<Text>().color;
 
-            setActive(true);
+            SetActive(true);
             BlazesAPIs.allSingleButtons.Add(this);
         }
 
@@ -75,7 +75,7 @@
                 button.GetComponent<Button>().onClick.AddListener(UnhollowerRuntimeLib.DelegateSupport.ConvertDelegate<UnityAction>(buttonAction));
         }
 
-        public override void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
+        public override void SetBackgroundColor(Color buttonBackgroundColor, bool save = true)
         {
             //button.GetComponentInChildren<UnityEngine.UI.Image>().color = buttonBackgroundColor;
             if (save)
@@ -92,7 +92,7 @@
             };
         }
 
-        public override void setTextColor(Color buttonTextColor, bool save = true)
+        public override void SetTextColor(Color buttonTextColor, bool save = true)
         {
             button.GetComponentInChildren<Text>().color = buttonTextColor;
             if (save)

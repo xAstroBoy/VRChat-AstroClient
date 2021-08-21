@@ -41,7 +41,7 @@
 
             initShift[0] = -3;
             initShift[1] = -1;
-            setLocation(btnXLocation, btnYLocation);
+            SetLocation(btnXLocation, btnYLocation);
 
             ToggleState = false;
             setOnText(btnTextOn);
@@ -57,7 +57,7 @@
             btnTextsOff[1].name = "Text_OFF";
             btnTextsOff[1].resizeTextForBestFit = true;
 
-            setToolTip(btnToolTip);
+            SetToolTip(btnToolTip);
             //button.transform.GetComponentInChildren<UiTooltip>().SetToolTipBasedOnToggle();
 
             setAction(btnActionOn, btnActionOff);
@@ -65,16 +65,16 @@
             btnOff.SetActive(true);
 
             if (btnBackgroundColor != null)
-                setBackgroundColor((Color)btnBackgroundColor);
+                SetBackgroundColor((Color)btnBackgroundColor);
             else
                 OrigBackground = btnOn.GetComponentsInChildren<Text>().First().color;
 
             if (btnTextColor != null)
-                setTextColor((Color)btnTextColor);
+                SetTextColor((Color)btnTextColor);
             else
                 OrigText = btnOn.GetComponentsInChildren<UnityEngine.UI.Image>().First().color;
 
-            setActive(true);
+            SetActive(true);
             shouldSaveInConfig = shouldSaveInConf;
             if (defaultPosition == true)// && !ButtonSettings.Contains(this))
             {
@@ -85,7 +85,7 @@
             //ButtonSettings.InitToggle(this);
         }
 
-        public override void setBackgroundColor(Color buttonBackgroundColor, bool save = true)
+        public override void SetBackgroundColor(Color buttonBackgroundColor, bool save = true)
         {
             UnityEngine.UI.Image[] btnBgColorList = ((btnOn.GetComponentsInChildren<UnityEngine.UI.Image>()).Concat(btnOff.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray()).Concat(button.GetComponentsInChildren<UnityEngine.UI.Image>()).ToArray();
             foreach (UnityEngine.UI.Image btnBackground in btnBgColorList) btnBackground.color = buttonBackgroundColor;
@@ -93,7 +93,7 @@
                 OrigBackground = (Color)buttonBackgroundColor;
         }
 
-        public override void setTextColor(Color buttonTextColor, bool save = true)
+        public override void SetTextColor(Color buttonTextColor, bool save = true)
         {
             Text[] btnTxtColorList = (btnOn.GetComponentsInChildren<Text>()).Concat(btnOff.GetComponentsInChildren<Text>()).ToArray();
             foreach (Text btnText in btnTxtColorList) btnText.color = buttonTextColor;
@@ -132,14 +132,14 @@
                 if (toggleOn && shouldInvoke)
                 {
                     btnOnAction.Invoke();
-                    showWhenOn.ForEach(x => x.setActive(true));
-                    hideWhenOn.ForEach(x => x.setActive(false));
+                    showWhenOn.ForEach(x => x.SetActive(true));
+                    hideWhenOn.ForEach(x => x.SetActive(false));
                 }
                 else if (!toggleOn && shouldInvoke)
                 {
                     btnOffAction.Invoke();
-                    showWhenOn.ForEach(x => x.setActive(false));
-                    hideWhenOn.ForEach(x => x.setActive(true));
+                    showWhenOn.ForEach(x => x.SetActive(false));
+                    hideWhenOn.ForEach(x => x.SetActive(true));
                 }
             }
             catch { }

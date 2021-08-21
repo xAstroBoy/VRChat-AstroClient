@@ -13,14 +13,6 @@
 
         private static GameObject _SelectedObject;
 
-        public static GameObject Component_Get_SelectedObject // This is for components to avoid Parsing constantly the same Object and calling events as well
-        {
-            get
-            {
-                return _SelectedObject;
-            }
-        }
-
         public static GameObject SelectedObject
         {
             get

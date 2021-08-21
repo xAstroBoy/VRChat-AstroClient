@@ -17,13 +17,13 @@
 			return File.ReadAllText("/root/discordtoken.txt");
 		}
 
-		public static void AddKey(string key, ulong discordID)
-		{
-			//using (StreamWriter sw = File.AppendText("/root/keys.txt"))
-			//{
-			//	sw.WriteLine($"{Environment.NewLine}{key}:{discordID}");
-			//}
-		}
+		//public static void AddKey(string key, ulong discordID)
+		//{
+		//	using (StreamWriter sw = File.AppendText("/root/keys.txt"))
+		//	{
+		//		sw.WriteLine($"{Environment.NewLine}{key}:{discordID}");
+		//	}
+		//}
 
 		public static int GetDevKeyCount()
 		{

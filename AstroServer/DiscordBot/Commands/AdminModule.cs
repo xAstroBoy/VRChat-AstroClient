@@ -27,7 +27,7 @@
 				if (!KeyManager.IsKeyValid(key))
 				{
 					_ = await ReplyAsync(null, false, CustomEmbed.GetNewKeyEmbed(key, discordID, true));
-					KeyManager.AddKey(key, discordID);
+					//KeyManager.AddKey(key, discordID);
 				}
 				else
 				{

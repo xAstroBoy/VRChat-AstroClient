@@ -35,8 +35,8 @@
             BaseMenu = new QMNestedButton(btnMenu, btnXLocation, btnYLocation, btnText, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor);
             SetAction(MenuOpenAction);
             IndexButton = new QMSingleButton(BaseMenu, 5, 0.5f, "Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString(), delegate { }, "");
-            IndexButton.getGameObject().GetComponentInChildren<Button>().enabled = false;
-            IndexButton.getGameObject().GetComponentInChildren<Image>().enabled = false;
+            IndexButton.GetGameObject().GetComponentInChildren<Button>().enabled = false;
+            IndexButton.GetGameObject().GetComponentInChildren<Image>().enabled = false;
             BackButton = new QMSingleButton(BaseMenu, 5, 0f, "Back", delegate
             {
                 ShowMenu(currentMenuIndex - 1);
@@ -51,8 +51,8 @@
         {
             BaseMenu = basemenu;
             IndexButton = new QMSingleButton(BaseMenu, 5, 0.5f, "Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString(), delegate { }, "");
-            IndexButton.getGameObject().GetComponentInChildren<Button>().enabled = false;
-            IndexButton.getGameObject().GetComponentInChildren<Image>().enabled = false;
+            IndexButton.GetGameObject().GetComponentInChildren<Button>().enabled = false;
+            IndexButton.GetGameObject().GetComponentInChildren<Image>().enabled = false;
             BackButton = new QMSingleButton(BaseMenu, 5, 0f, "Back", delegate
             {
                 ShowMenu(currentMenuIndex - 1);
@@ -71,9 +71,9 @@
             foreach (var item in QMButtons)
             {
                 if (item.Index == MenuIndex)
-                    item.ButtonBase?.setActive(true);
+                    item.ButtonBase?.SetActive(true);
                 else
-                    item.ButtonBase?.setActive(false);
+                    item.ButtonBase?.SetActive(false);
             }
             currentMenuIndex = MenuIndex;
             IndexButton.setButtonText("Page:\n" + (currentMenuIndex + 1).ToString() + " of " + (Index + 1).ToString());
@@ -110,7 +110,7 @@
         {
             foreach (var item in QMButtons)
             {
-                UnityEngine.Object.Destroy(item.ButtonBase.getGameObject());
+                UnityEngine.Object.Destroy(item.ButtonBase.GetGameObject());
             }
             QMButtons.Clear();
             if (BaseMenu.getBackButton() != null)
@@ -129,7 +129,7 @@
             {
                 foreach (var item in QMButtons)
                 {
-                    UnityEngine.Object.Destroy(item.ButtonBase.getGameObject());
+                    UnityEngine.Object.Destroy(item.ButtonBase.GetGameObject());
                 }
                 QMButtons.Clear();
                 Posx = 1;
@@ -166,8 +166,8 @@
                 Pos++;
 
             if (ShouldChangePos)
-                Button.setLocation(Posx, Posy);
-            Button.setActive(false);
+                Button.SetLocation(Posx, Posy);
+            Button.SetActive(false);
             QMButtons.Add(new ScrollObject()
             {
                 ButtonBase = Button,
@@ -178,8 +178,8 @@
         public void Add(QMButtonBase Button, int Page, float POSX = 0, float POSY = 0)
         {
             if (ShouldChangePos)
-                Button.setLocation(Posx, Posy);
-            Button.setActive(false);
+                Button.SetLocation(Posx, Posy);
+            Button.SetActive(false);
             QMButtons.Add(new ScrollObject()
             {
                 ButtonBase = Button,

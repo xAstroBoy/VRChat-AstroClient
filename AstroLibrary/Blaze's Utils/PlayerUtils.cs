@@ -12,12 +12,8 @@
         #region CurrentUser
         public static VRCPlayer GetCurrentUser()
         {
-            if (VRCPlayer.field_Internal_Static_VRCPlayer_0 != null)
-            {
-                return VRCPlayer.field_Internal_Static_VRCPlayer_0;
-            }
-            else return null;
-        }
+			return VRCPlayer.field_Internal_Static_VRCPlayer_0 ?? null;
+		}
 
         public static bool SelfIsInVR()
         {
@@ -70,21 +66,18 @@
         // Api Avatar Details
         public static bool IsAllPlatform(this ApiAvatar instance)
         {
-            if (instance.supportedPlatforms == ApiModel.SupportedPlatforms.All) return true;
-            else return false;
-        }
+			return instance.supportedPlatforms == ApiModel.SupportedPlatforms.All;
+		}
 
         public static bool IsPCPlatform(this ApiAvatar instance)
         {
-            if (instance.supportedPlatforms == ApiModel.SupportedPlatforms.StandaloneWindows) return true;
-            else return false;
-        }
+			return instance.supportedPlatforms == ApiModel.SupportedPlatforms.StandaloneWindows;
+		}
 
         public static bool IsQuestPlatform(this ApiAvatar instance)
         {
-            if (instance.supportedPlatforms == ApiModel.SupportedPlatforms.Android) return true;
-            else return false;
-        }
+			return instance.supportedPlatforms == ApiModel.SupportedPlatforms.Android;
+		}
 
         #endregion
 
@@ -218,74 +211,62 @@
         // Is World Creator
         public static bool IsWorldCreator(this VRC.Player instance)
         {
-            if (WorldUtils.GetCurrentWorld().authorId == instance.prop_APIUser_0.id) return true;
-            else return false;
-        }
+			return WorldUtils.GetCurrentWorld().authorId == instance.prop_APIUser_0.id;
+		}
 
         public static bool IsWorldCreator(this VRCPlayer instance)
         {
-            if (WorldUtils.GetCurrentWorld().authorId == instance._player.prop_APIUser_0.id) return true;
-            else return false;
-        }
+			return WorldUtils.GetCurrentWorld().authorId == instance._player.prop_APIUser_0.id;
+		}
 
         public static bool IsWorldCreator(this APIUser instance)
         {
-            if (WorldUtils.GetCurrentWorld().authorId == instance.id) return true;
-            else return false;
-        }
+			return WorldUtils.GetCurrentWorld().authorId == instance.id;
+		}
 
         // Is Friend
         public static bool IsFriend(this VRCPlayer instance)
         {
-            if (APIUser.IsFriendsWith(instance._player.field_Private_APIUser_0.id)) return true;
-            else return false;
-        }
+			return APIUser.IsFriendsWith(instance._player.field_Private_APIUser_0.id);
+		}
 
         public static bool IsFriend(this VRC.Player instance)
         {
-            if (APIUser.IsFriendsWith(instance.field_Private_APIUser_0.id)) return true;
-            else return false;
-        }
+			return APIUser.IsFriendsWith(instance.field_Private_APIUser_0.id);
+		}
 
         public static bool IsFriend(this APIUser instance)
         {
-            if (APIUser.IsFriendsWith(instance.id)) return true;
-            else return false;
-        }
+			return APIUser.IsFriendsWith(instance.id);
+		}
 
         // Is Staff Member
         public static bool IsStaffMember(this APIUser instance)
         {
-            if (instance.tags.Contains("admin_moderator") 
+			return instance.tags.Contains("admin_moderator") 
                 || instance.hasModerationPowers 
                 || instance.tags.Contains("admin_") 
                 || instance.hasSuperPowers
-                || instance.id == "usr_81ac81f6-cdd1-4eaa-961f-22a80dc772c9")
-                return true;
-            else return false;
-        }
+                || instance.id == "usr_81ac81f6-cdd1-4eaa-961f-22a80dc772c9";
+		}
 
         public static bool IsStaffMember(this VRCPlayer instance)
         {
-            if (instance.GetAPIUser().tags.Contains("admin_moderator")
+			return instance.GetAPIUser().tags.Contains("admin_moderator")
                 || instance.GetAPIUser().hasModerationPowers
                 || instance.GetAPIUser().tags.Contains("admin_")
                 || instance.GetAPIUser().hasSuperPowers
-                || instance.GetAPIUser().id == "usr_81ac81f6-cdd1-4eaa-961f-22a80dc772c9")
-                return true;
-            else return false;
-        }
+                || instance.GetAPIUser().id == "usr_81ac81f6-cdd1-4eaa-961f-22a80dc772c9";
+		}
 
         public static bool IsStaffMember(this VRC.Player instance)
         {
-            if (instance.GetAPIUser().tags.Contains("admin_moderator")
+			return instance.GetAPIUser().tags.Contains("admin_moderator")
                 || instance.GetAPIUser().hasModerationPowers
                 || instance.GetAPIUser().tags.Contains("admin_")
                 || instance.GetAPIUser().hasSuperPowers
-                || instance.GetAPIUser().id == "usr_81ac81f6-cdd1-4eaa-961f-22a80dc772c9")
-                return true;
-            else return false;
-        }
+                || instance.GetAPIUser().id == "usr_81ac81f6-cdd1-4eaa-961f-22a80dc772c9";
+		}
 
         // Display Name
         public static string GetDisplayName (this VRCPlayerApi instance)
@@ -338,42 +319,18 @@
         public static string GetFramesColored(this VRC.Player instance)
         {
             var frames = GetFrames(instance);
-            if (frames >= 80)
-            {
-                return $"<color=green>{frames}</color>";
-            }
-            else
-            {
-                if (frames <= 25)
-                {
-                    return $"<color=red>{frames}</color>";
-                }
-                else
-                {
-                    return $"<color=orange>{frames}</color>";
-                }
-            }
-        }
+			return frames >= 80
+				? $"<color=green>{frames}</color>"
+				: frames <= 25 ? $"<color=red>{frames}</color>" : $"<color=orange>{frames}</color>";
+		}
 
         public static string GetFramesColored(this VRCPlayer instance)
         {
             var frames = GetFrames(instance);
-            if (frames >= 80)
-            {
-                return $"<color=green>{frames}</color>";
-            }
-            else
-            {
-                if (frames <= 25)
-                {
-                    return $"<color=red>{frames}</color>";
-                }
-                else
-                {
-                    return $"<color=orange>{frames}</color>";
-                }
-            }
-        }
+			return frames >= 80
+				? $"<color=green>{frames}</color>"
+				: frames <= 25 ? $"<color=red>{frames}</color>" : $"<color=orange>{frames}</color>";
+		}
 
         // Ping
         public static short GetPing(this VRCPlayer instance)
@@ -389,42 +346,14 @@
         public static string GetPingColored(this VRCPlayer instance)
         {
             var ping = GetPing(instance);
-            if (ping >= 80)
-            {
-                return $"<color=red>{ping}</color>";
-            }
-            else
-            {
-                if (ping <= 35)
-                {
-                    return $"<color=green>{ping}</color>";
-                }
-                else
-                {
-                    return $"<color=orange>{ping}</color>";
-                }
-            }
-        }
+			return ping >= 80 ? $"<color=red>{ping}</color>" : ping <= 35 ? $"<color=green>{ping}</color>" : $"<color=orange>{ping}</color>";
+		}
 
         public static string GetPingColored(this VRC.Player instance)
         {
             var ping = GetPing(instance);
-            if (ping >= 80)
-            {
-                return $"<color=red>{ping}</color>";
-            }
-            else
-            {
-                if (ping <= 35)
-                {
-                    return $"<color=green>{ping}</color>";
-                }
-                else
-                {
-                    return $"<color=orange>{ping}</color>";
-                }
-            }
-        }
+			return ping >= 80 ? $"<color=red>{ping}</color>" : ping <= 35 ? $"<color=green>{ping}</color>" : $"<color=orange>{ping}</color>";
+		}
         #endregion
 
         #region Ranks
@@ -442,37 +371,20 @@
 
         private static string GetRankColor(string rank)
         {
-            switch (rank.ToLower())
-            {
-                case "moderation user":
-                    return "#5e0000";
-
-                case "admin user":
-                    return "#5e0000";
-
-                case "legend":
-                    return "#ff5e5e";
-
-                case "veteran":
-                    return "#fff821";
-
-                case "trusted":
-                    return "#a621ff";
-
-                case "known":
-                    return "#ffa200";
-
-                case "user":
-                    return "#00e62a";
-
-                case "new user":
-                    return "#00aeff";
-
-                case "visitor":
-                    return "#bababa";
-            }
-            return "#303030";
-        }
+			return rank.ToLower() switch
+			{
+				"moderation user" => "#5e0000",
+				"admin user" => "#5e0000",
+				"legend" => "#ff5e5e",
+				"veteran" => "#fff821",
+				"trusted" => "#a621ff",
+				"known" => "#ffa200",
+				"user" => "#00e62a",
+				"new user" => "#00aeff",
+				"visitor" => "#bababa",
+				_ => "#303030",
+			};
+		}
 
         public static string GetRank(this APIUser Instance)
         {
@@ -545,15 +457,8 @@
         {
             if (instance.prop_VRCPlayerApi_0.IsUserInVR())
             {
-                if (instance.GetPlatform() != "VR")
-                {
-                    return "<color=#1aff00>(Q)</color>";
-                }
-                else
-                {
-                    return "<color=grey>(V)</color>";
-                }
-            }
+				return instance.GetPlatform() != "VR" ? "<color=#1aff00>(Q)</color>" : "<color=grey>(V)</color>";
+			}
             else
             {
                 return "<color=grey>(D)</color>";

@@ -16,9 +16,9 @@
 
         public string AuthorName = string.Empty;
 
-        public int Version = 0;
+        public int Version;
 
-        public string ReleaseStatus = string.Empty;
+		public string ReleaseStatus = string.Empty;
 
         public string AssetURL = string.Empty;
 

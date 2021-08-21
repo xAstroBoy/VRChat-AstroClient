@@ -20,16 +20,16 @@
                 scroll.Refresh();
             }, "", null, null, true);
 
-            TeleportToMe = new QMSingleButton(menu, 0, -0.5f, Tweaker_Selector.Component_Get_SelectedObject.Generate_TeleportToMe_ButtonText(), delegate
+            TeleportToMe = new QMSingleButton(menu, 0, -0.5f, Tweaker_Selector.SelectedObject.Generate_TeleportToMe_ButtonText(), delegate
            {
                Tweaker_Object.GetGameObjectToEdit().TeleportToMe();
-           }, Tweaker_Selector.Component_Get_SelectedObject.Generate_TeleportToMe_ButtonText());
+           }, Tweaker_Selector.SelectedObject.Generate_TeleportToMe_ButtonText());
             TeleportToMe.SetResizeTextForBestFit(true);
 
-            TeleportToTarget = new QMSingleButton(menu, 0, 0.5f, Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.Component_Get_SelectedObject, TargetSelector.CurrentTarget), delegate
+            TeleportToTarget = new QMSingleButton(menu, 0, 0.5f, Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget), delegate
             {
                 Tweaker_Object.GetGameObjectToEdit().TeleportToTarget();
-            }, Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.Component_Get_SelectedObject, TargetSelector.CurrentTarget));
+            }, Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget));
             TeleportToTarget.SetResizeTextForBestFit(true);
 
             new QMSingleButton(menu, 0, 1.5f, "Spawn Clone", new Action(() => { Cloner.ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }), "Instantiates a copy of The selected object.", null, null, true);
@@ -87,8 +87,8 @@
         {
             if (TeleportToTarget != null)
             {
-                TeleportToTarget.SetButtonText(Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.Component_Get_SelectedObject, player));
-                TeleportToTarget.SetToolTip(Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.Component_Get_SelectedObject, player));
+                TeleportToTarget.SetButtonText(Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, player));
+                TeleportToTarget.SetToolTip(Button_strings_ext.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, player));
             }
         }
 

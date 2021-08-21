@@ -15,32 +15,32 @@
         protected Color OrigBackground;
         protected Color OrigText;
 
-        public GameObject getGameObject()
+        public GameObject GetGameObject()
         {
             return button;
         }
 
-        public void setActive(bool isActive)
+        public void SetActive(bool isActive)
         {
             button.gameObject.SetActive(isActive);
         }
 
-        public void setIntractable(bool isIntractable)
+        public void SetIntractable(bool isIntractable)
         {
             if (isIntractable)
             {
-                setBackgroundColor(OrigBackground, false);
-                setTextColor(OrigText, false);
+                SetBackgroundColor(OrigBackground, false);
+                SetTextColor(OrigText, false);
             }
             else
             {
-                setBackgroundColor(new Color(0.5f, 0.5f, 0.5f, 1), false);
-                setTextColor(new Color(0.7f, 0.7f, 0.7f, 1), false); ;
+                SetBackgroundColor(new Color(0.5f, 0.5f, 0.5f, 1), false);
+                SetTextColor(new Color(0.7f, 0.7f, 0.7f, 1), false); ;
             }
             button.gameObject.GetComponent<Button>().interactable = isIntractable;
         }
 
-        public void setLocation(float buttonXLoc, float buttonYLoc)
+        public void SetLocation(float buttonXLoc, float buttonYLoc)
         {
             button.GetComponent<RectTransform>().anchoredPosition += Vector2.right * (420 * (buttonXLoc + initShift[0]));
             button.GetComponent<RectTransform>().anchoredPosition += Vector2.down * (420 * (buttonYLoc + initShift[1]));
@@ -50,7 +50,7 @@
             button.GetComponent<Button>().name = btnType + btnTag;
         }
 
-        public void setToolTip(string buttonToolTip)
+        public void SetToolTip(string buttonToolTip)
         {
             button.GetComponent<UiTooltip>().field_Public_String_0 = buttonToolTip;
             button.GetComponent<UiTooltip>().field_Public_String_1 = buttonToolTip;
@@ -103,12 +103,14 @@
 
         public void SetShader(string shaderName)
         {
-            var Material = new Material(button.GetComponent<Image>().material);
-            Material.shader = Shader.Find(shaderName);
-            button.gameObject.GetComponent<Image>().material = Material;
+			var Material = new Material(button.GetComponent<Image>().material)
+			{
+				shader = Shader.Find(shaderName)
+			};
+			button.gameObject.GetComponent<Image>().material = Material;
         }
 
-        public virtual void setBackgroundColor(Color buttonBackgroundColor, bool save = true) { }
-        public virtual void setTextColor(Color buttonTextColor, bool save = true) { }
+        public virtual void SetBackgroundColor(Color buttonBackgroundColor, bool save = true) { }
+        public virtual void SetTextColor(Color buttonTextColor, bool save = true) { }
     }
 }

@@ -101,29 +101,6 @@
             catch { }
         }
 
-        private static Vector3 SavePosition;
-
-        //public static void SecrectSerialize(bool State)
-        //{
-        //    if (State)
-        //    {
-        //        SavePosition = Utils.CurrentUser.transform.position;
-        //        Utils.CurrentUser.transform.position = Vector3.positiveInfinity;
-        //        MiscUtility.DelayFunction(0.1f, delegate
-        //         {
-        //             GlobalSettings.Serialize = true;
-        //         });
-        //        MiscUtility.DelayFunction(0.2f, delegate
-        //        {
-        //            Utils.CurrentUser.transform.position = SavePosition;
-        //        });
-        //    }
-        //    else
-        //    {
-        //        GlobalSettings.Serialize = false;
-        //    };
-        //}
-
         public static void Respawn()
         {
             Utils.QuickMenu.transform.Find("ShortcutMenu/RespawnButton").GetComponent<Button>().onClick.Invoke();
@@ -151,9 +128,11 @@
 
         public static void CopyToClipboard(string copytext)
         {
-            TextEditor textEditor = new TextEditor();
-            textEditor.text = copytext;
-            textEditor.SelectAll();
+			TextEditor textEditor = new TextEditor
+			{
+				text = copytext
+			};
+			textEditor.SelectAll();
             textEditor.Copy();
             Utils.VRCUiManager.QueHudMessage("Copied to Clipboard");
         }
@@ -369,38 +348,6 @@
             });
         }
 
-        public static void AddEveryone()
-        {
-            NotificationManager xxx = Utils.NotificationManager;
-            Console.Clear();
-            Console.WriteLine(
-                "[DAY]-----------------------------------Add players-----------------------------------");
-            Player[] allPlayers = Utils.PlayerManager.AllPlayers().ToArray();
-            for (int i = 0; i < allPlayers.Length; i++)
-            {
-                Player x = allPlayers[i];
-                string id = x.GetAPIUser().id;
-                if (x.prop_APIUser_0.isFriend)
-                {
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("[DAY] Not Adding Friend ---> [" + x.GetAPIUser().displayName +
-                                             " [User ID] = " + id + "]");
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-                else
-                {
-                    Notification xx = FriendRequest.Create(id);
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("[DAY] Adding ---> " + x.GetAPIUser().displayName + " [User ID] = " + id);
-                    VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
-                    Console.ForegroundColor = ConsoleColor.White;
-                }
-            }
-
-            Console.WriteLine(
-                "[DAY]----------------------------Done Adding players--------------------------------");
-        }
-
         public static void SendInvite(string Message, string WorldID, string worldname, string playerID)
         {
             try
@@ -469,9 +416,11 @@
         {
             try
             {
-                var x = new Il2CppSystem.Int32();
-                x.m_value = i;
-                var obj = x.BoxIl2CppObject();
+				var x = new Il2CppSystem.Int32
+				{
+					m_value = i
+				};
+				var obj = x.BoxIl2CppObject();
                 Networking.RPC(0, Utils.CurrentUser.gameObject, "SpawnEmojiRPC", new Il2CppSystem.Object[]
                 {
                     obj,
@@ -486,9 +435,11 @@
         {
             try
             {
-                var x = new Il2CppSystem.Int32();
-                x.m_value = i;
-                var obj = x.BoxIl2CppObject();
+				var x = new Il2CppSystem.Int32
+				{
+					m_value = i
+				};
+				var obj = x.BoxIl2CppObject();
                 Networking.RPC(0, Utils.CurrentUser.gameObject, "PlayEmoteRPC", new Il2CppSystem.Object[]
                 {
                     obj,
@@ -656,18 +607,18 @@
             }
         }
 
-        public static void SetVideoLink(string url)
-        {
-            var videoPlayers = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_SyncVideoPlayer>();
-            if (videoPlayers.Count() > 0)
-                foreach (VRCSDK2.VRC_SyncVideoPlayer videoPlayer in videoPlayers)
-                {
-                    Networking.RPC(RPC.Destination.Owner, videoPlayers[0].gameObject, "AddURL", new Il2CppSystem.Object[]
-                {
-                        (Il2CppSystem.String)url
-                });
-                }
-        }
+        //public static void SetVideoLink(string url)
+        //{
+        //    var videoPlayers = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_SyncVideoPlayer>();
+        //    if (videoPlayers.Count() > 0)
+        //        foreach (VRCSDK2.VRC_SyncVideoPlayer videoPlayer in videoPlayers)
+        //        {
+        //            Networking.RPC(RPC.Destination.Owner, videoPlayers[0].gameObject, "AddURL", new Il2CppSystem.Object[]
+        //        {
+        //                (Il2CppSystem.String)url
+        //        });
+        //        }
+        //}
 
         public static void CopyVideoLink()
         {

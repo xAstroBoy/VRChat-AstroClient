@@ -98,18 +98,16 @@
             }
             if (parameter.Equals("TeleportRPC"))
             {
-                OnTeleportRPCArgs message = null;
-                var Parameters = Networking.DecodeParameters(__1.ParameterBytes);
+				var Parameters = Networking.DecodeParameters(__1.ParameterBytes);
                 Vector3? Pos = Parameters[0].Unbox<Vector3>();
                 Quaternion? rot = Parameters[1].Unbox<Quaternion>();
                 VRC_SceneDescriptor.SpawnOrientation? spawnpos = Parameters[2].Unbox<VRC_SceneDescriptor.SpawnOrientation>();
                 bool? UnknownBool = Parameters[3].Unbox<Boolean>();
                 Int32? UnknownInt = Parameters[4].Unbox<System.Int32>();
 
-                message = new OnTeleportRPCArgs(Pos.Value, rot.Value, spawnpos.Value, UnknownBool.Value, UnknownInt.Value);
+				OnTeleportRPCArgs message = new OnTeleportRPCArgs(Pos.Value, rot.Value, spawnpos.Value, UnknownBool.Value, UnknownInt.Value);
 
-
-                if (log)
+				if (log)
                 {
                     try
                     {

@@ -127,9 +127,9 @@
             }
         }
 
-        private static void ScanAudioSources(AudioSource audioSource)
-        {
-        }
+        //private static void ScanAudioSources(AudioSource audioSource)
+        //{
+        //}
 
         private static int GetPolyCount(Mesh sourceMesh)
         {

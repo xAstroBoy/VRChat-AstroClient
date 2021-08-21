@@ -368,7 +368,7 @@
         {
             string[] Location = RoomId.Split(':');
             DropPortal(Location[0], Location[1], 0,
-                PlayerUtils.GetCurrentUser().transform.position + PlayerUtils.GetCurrentUser().transform.forward * 2f,
+                PlayerUtils.GetCurrentUser().transform.position + (PlayerUtils.GetCurrentUser().transform.forward * 2f),
                 PlayerUtils.GetCurrentUser().transform.rotation);
         }
 

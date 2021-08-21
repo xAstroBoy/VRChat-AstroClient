@@ -2,16 +2,19 @@ namespace AstroClient.Components
 {
 	using RubyButtonAPI;
 	using System;
-	using UnhollowerBaseLib.Attributes;
 	using AstroLibrary.Extensions;
 
 	public class ScrollMenuListener_AudioSource : GameEventsBehaviour
 	{
+		internal QMSingleButton Assignedbtn { get; set; }
+
+		internal UnityEngine.AudioSource source;
+
+		internal bool Lock = true;
+
 		public ScrollMenuListener_AudioSource(IntPtr obj0) : base(obj0)
 		{
 		}
-
-
 
 		private void FixedUpdate()
 		{
@@ -32,9 +35,6 @@ namespace AstroClient.Components
 			}
 		}
 
-
-
-
 		private void OnDestroy()
 		{
 			if (Assignedbtn != null)
@@ -42,23 +42,5 @@ namespace AstroClient.Components
 				Assignedbtn.DestroyMe();
 			}
 		}
-
-
-		internal UnityEngine.AudioSource source;
-		internal QMSingleButton Assignedbtn
-		{
-			get
-			{
-				return _assignedbtn;
-			}
-			set
-			{
-				_assignedbtn = value;
-			}
-		}
-		
-		private QMSingleButton _assignedbtn;
-		internal bool Lock = true;
-
 	}
 }

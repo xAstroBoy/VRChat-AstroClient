@@ -39,10 +39,12 @@
             {
                 SpawnerSubmenu.ClonedObjects.Clear();
                 SpawnerSubmenu.UpdateSpawnedPickupsBtn();
-                var parent = new GameObject();
-                parent.name = "Cloned GameObject Holder (AstroClient)";
-                parent.active = true;
-                return _Holder = parent;
+				var parent = new GameObject
+				{
+					name = "Cloned GameObject Holder (AstroClient)",
+					active = true
+				};
+				return _Holder = parent;
             }
         }
 

@@ -1,12 +1,8 @@
 ﻿namespace AstroClient
 {
 	using Il2CppSystem.Collections.Generic;
-	using System;
-	using System.Linq;
-	using System.Runtime.InteropServices;
 	using UnhollowerBaseLib;
 	using UnhollowerRuntimeLib;
-	using UnityEngine;
 
 	public static class UdonConverter
 	{
@@ -14,120 +10,74 @@
 		{
 			Il2CppStringArray array2 = new Il2CppStringArray(item);
 			Il2CppSystem.Object boxed = new Il2CppSystem.Object(array2.Pointer);
-			if (boxed != null)
-			{
-				return boxed;
-			}
-			return null;
+			return boxed ?? null;
 		}
 
 		public static Il2CppSystem.Object Generate_Il2CPPObject(string item)
 		{
 			var ptr = IL2CPP.ManagedStringToIl2Cpp(item);
 			Il2CppSystem.Object boxed = new Il2CppSystem.Object(ptr);
-			if (boxed != null)
-			{
-				return boxed;
-			}
-			return null;
+			return boxed ?? null;
 		}
-
-
 
 		public static Il2CppSystem.Object Generate_Il2CPPObject(System.UInt32 item)
 		{
 			var converted = new Il2CppSystem.UInt32() { m_value = item };
 			var boxed = converted.BoxIl2CppObject();
-			if (boxed != null)
-			{
-				return boxed;
-			}
-			return null;
+			return boxed ?? null;
 		}
 
 		public static Il2CppSystem.Object Generate_Il2CPPObject(System.Int32 item)
 		{
 			var converted = new Il2CppSystem.Int32() { m_value = item };
 			var boxed = converted.BoxIl2CppObject();
-			if (boxed != null)
-			{
-				return boxed;
-			}
-			return null;
+			return boxed ?? null;
 		}
 
 		public static Il2CppSystem.Object Generate_Il2CPPObject(System.Int64 item)
 		{
 			var converted = new Il2CppSystem.Int64() { m_value = item };
 			var boxed = converted.BoxIl2CppObject();
-			if (boxed != null)
-			{
-				return boxed;
-			}
-			return null;
+			return boxed ?? null;
 		}
 
 		public static Il2CppSystem.Object Generate_Il2CPPObject(System.Char item)
 		{
 			var converted = new Il2CppSystem.Char() { m_value = item };
 			var boxed = converted.BoxIl2CppObject();
-			if (boxed != null)
-			{
-				return boxed;
-			}
-			return null;
+			return boxed ?? null;
 		}
 
 		public static Il2CppSystem.Object Generate_Il2CPPObject(System.Single item)
 		{
 			var converted = new Il2CppSystem.Single() { m_value = item };
 			var boxed = converted.BoxIl2CppObject();
-			if (boxed != null)
-			{
-				return boxed;
-			}
-			return null;
+			return boxed ?? null;
 		}
 
 		public static Il2CppSystem.Object Generate_Il2CPPObject(System.Boolean item)
 		{
 			var converted = new Il2CppSystem.Boolean() { m_value = item };
 			var boxed = converted.BoxIl2CppObject();
-			if (boxed != null)
-			{
-				return boxed;
-			}
-			return null;
+			return boxed ?? null;
 		}
 
 		public static Il2CppSystem.Object Generate_Il2CPPObject(UnityEngine.Color item)
 		{
 			var boxed = item.BoxIl2CppObject();
-			if (boxed != null)
-			{
-				return boxed;
-			}
-			return null;
+			return boxed ?? null;
 		}
 
 		public static Il2CppSystem.Object Generate_Il2CPPObject(UnityEngine.Vector3 item)
 		{
 			var boxed = item.BoxIl2CppObject();
-			if (boxed != null)
-			{
-				return boxed;
-			}
-			return null;
+			return boxed ?? null;
 		}
 
 		public static Il2CppSystem.Object Generate_Il2CPPObject(UnityEngine.Quaternion item)
 		{
 			var boxed = item.BoxIl2CppObject();
-			if (boxed != null)
-			{
-				return boxed;
-			}
-			return null;
+			return boxed ?? null;
 		}
 
 
@@ -182,11 +132,7 @@
 		public static Il2CppSystem.Object Generate_Il2CPPObject_Il2cppObjectBase<T>(T item) where T : Il2CppObjectBase
 		{
 			var boxed = new Il2CppSystem.Object(IL2CPP.il2cpp_value_box(Il2CppClassPointerStore<T>.NativeClassPtr, item.Pointer));
-			if (boxed != null)
-			{
-				return boxed;
-			}
-			return null;
+			return boxed ?? null;
 		}
 
 

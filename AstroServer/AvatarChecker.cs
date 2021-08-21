@@ -28,35 +28,37 @@
 		{
 			mutex = new Mutex(false);
 			LoadProxies();
-			CheckTimer = new System.Timers.Timer(10000);
-			CheckTimer.Enabled = true;
+			CheckTimer = new System.Timers.Timer(10000)
+			{
+				Enabled = true
+			};
 			CheckTimer.Elapsed += OnTimerElapsed;
-			Console.WriteLine($"AvatarChecker: Initialized. {proxies.Count()} proxies..");
+			Console.WriteLine($"AvatarChecker: Initialized. {proxies.Count} proxies..");
 		}
 
 		private static void LoadProxies()
 		{
 			mutex.WaitOne();
 			proxies = File.ReadAllLines(proxyFilePath).ToList();
-			Console.WriteLine($"{proxies.Count()} proxies loaded..");
+			Console.WriteLine($"{proxies.Count} proxies loaded..");
 			mutex.ReleaseMutex();
 		}
 
 		private static int GetChecked()
 		{
-			return DB.Find<AvatarDataEntity>().ManyAsync(a => a.CheckedRecently).Result.Count();
+			return DB.Find<AvatarDataEntity>().ManyAsync(a => a.CheckedRecently).Result.Count;
 		}
 
 		private static int GetNotChecked()
 		{
-			return DB.Find<AvatarDataEntity>().ManyAsync(a => !a.CheckedRecently).Result.Count();
+			return DB.Find<AvatarDataEntity>().ManyAsync(a => !a.CheckedRecently).Result.Count;
 		}
 
 		private static void OnTimerElapsed(object sender, ElapsedEventArgs e)
 		{
 			if (!IsChecking)
 			{
-				if (proxies.Count() < 10)
+				if (proxies.Count < 10)
 				{
 					Console.WriteLine("Reloading proxy list, don't have enough!");
 					LoadProxies();
@@ -73,7 +75,7 @@
 					if (toCheck.Any())
 					{
 						List<Task> tasks = new List<Task>();
-						Console.WriteLine($"Avatar check in progress! Checking {toCheck.Count()} avatars..");
+						Console.WriteLine($"Avatar check in progress! Checking {toCheck.Count} avatars..");
 						foreach (var found in toCheck)
 						{
 							Task task = new Task(() =>
@@ -86,7 +88,7 @@
 						tasks.ForEach(t => t.Start());
 						Task.WaitAll(tasks.ToArray());
 						Console.WriteLine($"Avatar check done! {GetChecked()}/{GetNotChecked()}");
-						Console.WriteLine($"{proxies.Count()} proxies left..");
+						Console.WriteLine($"{proxies.Count} proxies left..");
 					}
 					else
 					{
@@ -113,7 +115,7 @@
 		public static void CheckAvatar(AvatarDataEntity avatarDataEntity)
 		{
 			var rand = new Random();
-			var proxy = proxies[rand.Next(0, proxies.Count())];
+			var proxy = proxies[rand.Next(0, proxies.Count)];
 
 			//var image1 = CheckImage(proxy, avatarDataEntity.ThumbnailURL);
 			var image2 = CheckImage(proxy, avatarDataEntity.ImageURL);
@@ -179,13 +181,13 @@
 				{
 					RemoveProxyFromFile(proxy, "huge timeout");
 				}
-				//Console.WriteLine($"{we.Message}: {proxy}, {url}");
+				Console.WriteLine($"{we.Message}: {proxy}, {url}");
 				RemoveProxy(proxy);
 				return 2;
 			}
 			catch (Exception e)
 			{
-				//Console.WriteLine($"{e.Message}: {proxy}, {url}");
+				Console.WriteLine($"{e.Message}: {proxy}, {url}");
 				RemoveProxy(proxy);
 				return 2;
 			}

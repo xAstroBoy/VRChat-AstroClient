@@ -1,16 +1,10 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroClient;
-	using AstroClient.ItemTweakerV2.TweakerEventArgs;
-	using AstroClientCore.Events;
-	using AstroLibrary.Console;
-	using System;
-	using System.Linq;
-	using System.Reflection;
 	#region Imports
 
-	using UnityEngine;
-	using VRC.SDKBase;
+	using AstroLibrary.Console;
+	using System;
+	using System.Reflection;
 
 	#endregion Imports
 
@@ -31,12 +25,12 @@
 				}
 				catch (TargetInvocationException invokeexc)
 				{
-					ModConsole.DebugError($"Error in the Handler : {handler.Method.Name.ToString()}");
+					ModConsole.DebugError($"Error in the Handler : {handler.Method.Name}");
 					ModConsole.ErrorExc(invokeexc.InnerException);
 				}
 				catch (Exception exc)
 				{
-					ModConsole.DebugError($"Error in the Handler : {handler.Method.Name.ToString()}");
+					ModConsole.DebugError($"Error in the Handler : {handler.Method.Name}");
 					ModConsole.ErrorExc(exc);
 				}
 			}
@@ -57,7 +51,7 @@
 
 				catch(TargetInvocationException invokeexc)
 				{
-					ModConsole.DebugError($"Error in the Handler : {handler.Method.Name.ToString()}");
+					ModConsole.DebugError($"Error in the Handler : {handler.Method.Name}");
 					ModConsole.ErrorExc(invokeexc.InnerException);
 				}
 				catch (Exception exc)
@@ -67,10 +61,5 @@
 				}
 			}
 		}
-
-
-
-	
-
 	}
 }
