@@ -47,12 +47,14 @@ namespace AstroClient
 			{
 				renderer.material.color = Ender;
 			}
-			var body = gameObject.GetOrAddComponent<Rigidbody>();
+			var body = gameObject.GetOrAddComponent<RigidBodyController>();
 			if (body != null)
 			{
-				body.useGravity = false;
-				body.drag = 0f;
-				body.angularDrag = 0.01f;
+				body.Forced_RigidBody = true;
+				body.IsKinematic = false;
+				body.UseGravity = false;
+				body.Drag = 0f;
+				body.AngularDrag = 0.01f;
 			}
 			var pickup = gameObject.GetOrAddComponent<PickupController>();
 			if(pickup != null)
@@ -61,7 +63,6 @@ namespace AstroClient
 				pickup.pickupable = true;
 				pickup.ThrowVelocityBoostScale = 5.5f;
 			}
-
 			gameObject.AddComponent<EnderPearlBehaviour>();
 			ENDER = gameObject;
 		}
