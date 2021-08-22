@@ -123,7 +123,6 @@
     <Compile Include="Extensions\Components_exts\PickupController_ext.cs" />
     <Compile Include="Extensions\Components_exts\RigidBodyController_ext.cs" />
     <Compile Include="Extensions\EventHandler_ext.cs" />
-    <Compile Include="Favcat\Favcat_Utils.cs" />
     <Compile Include="ModDetector\FindMods.cs" />
     <Compile Include="Udon\UdonEditor\UdonConverter.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapEditor.cs" />
@@ -1090,7 +1089,9 @@
     <EmbeddedResource Include="Resources\planet.png" />
     <EmbeddedResource Include="Resources\thief.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Favcat\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\repair.png" />
     <EmbeddedResource Include="Resources\badge.png" />
