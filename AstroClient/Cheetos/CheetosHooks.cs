@@ -8,6 +8,7 @@
 	using AstroLibrary.Extensions;
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
+	using Blaze.Utils;
 	using DayClientML2.Utility;
 	using ExitGames.Client.Photon;
 	using Harmony;
@@ -116,6 +117,16 @@
                 new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.ConfigurePortal)), GetPatch(nameof(OnConfigurePortal)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.Method_Public_Void_0)), GetPatch(nameof(OnEnterPortal)));
+                //new Patch(typeof(APIUser).GetMethod(nameof(APIUser.developerType)), null, GetPatch(nameof(APIUserBypass3)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canSeeAllUsersStatus)).GetMethod, GetPatch(nameof(APIUserBypass)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasModerationPowers)).GetMethod, GetPatch(nameof(APIUserBypass)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasScriptingAccess)).GetMethod, GetPatch(nameof(APIUserBypass)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasSuperPowers)).GetMethod, GetPatch(nameof(APIUserBypass)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasVIPAccess)).GetMethod, GetPatch(nameof(APIUserBypass)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.isEarlyAdopter)).GetMethod, GetPatch(nameof(APIUserBypass)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.isSupporter)).GetMethod, GetPatch(nameof(APIUserBypass)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canSetStatusOffline)).GetMethod, GetPatch(nameof(APIUserBypass)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasNoPowers)).GetMethod, GetPatch(nameof(APIUserBypass2)));
                 new Patch(AccessTools.Property(typeof(Time), nameof(Time.smoothDeltaTime)).GetMethod, null, GetPatch(nameof(SpoofFPS)));
                 new Patch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
                 new Patch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
@@ -126,6 +137,22 @@
             catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
             finally { }
         }
+
+		private static void APIUserBypass(APIUser __instance, ref bool __result)
+		{
+			if (PlayerUtils.GetCurrentUser().UserID().Equals(__instance.id))
+			{
+				__result = true;
+			}
+		}
+
+		private static void APIUserBypass2(APIUser __instance, ref bool __result)
+		{
+			if (PlayerUtils.GetCurrentUser().UserID().Equals(__instance.id))
+			{
+				__result = false;
+			}
+		}
 
 		private static bool OnConfigurePortal(PortalInternal __instance, ref string __0, ref string __1, ref int __2, ref Player __3)
 		{
