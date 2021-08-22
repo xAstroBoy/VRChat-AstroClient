@@ -58,6 +58,10 @@ namespace AstroClient
 				{
 					Held = true;
 				}
+				if(body.IsKinematic)
+				{
+					body.RigidBody_Set_isKinematic(false);
+				}
 				if (Held)
 				{
 					body.RigidBody_Set_Gravity(true);
