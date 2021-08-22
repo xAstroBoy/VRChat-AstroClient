@@ -1,7 +1,5 @@
 ﻿namespace AstroClient
 {
-	using MelonLoader;
-
 	public static class BuildInfo
     {
         public const string Name = "AstroClient"; // Name of the Mod.  (MUST BE SET)
