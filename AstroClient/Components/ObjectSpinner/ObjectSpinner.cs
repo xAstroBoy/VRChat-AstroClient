@@ -109,7 +109,7 @@
                     }
                     if (!pickup.IsHeld)
                     {
-                        if (!obj.isOwner())
+                        if (!obj.IsOwner())
                         {
                             obj.TakeOwnership();
                         }

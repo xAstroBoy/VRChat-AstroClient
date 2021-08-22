@@ -71,7 +71,7 @@
 			{
 				if (obj.GetIl2CppType().FullName == "System.Boolean")
 				{
-					return obj.Unbox<System.Boolean>();
+					return obj.Unbox<bool>();
 				}
 				else
 				{
@@ -81,13 +81,13 @@
 			return null;
 		}
 
-		public static System.Char? Unpack_Char(this Il2CppSystem.Object obj)
+		public static char? Unpack_Char(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "System.Char")
 				{
-					return obj.Unbox<System.Char>();
+					return obj.Unbox<char>();
 				}
 				else
 				{
@@ -97,13 +97,13 @@
 			return null;
 		}
 
-		public static System.Int64? Unpack_Int64(this Il2CppSystem.Object obj)
+		public static long? Unpack_Int64(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "System.Int64")
 				{
-					return obj.Unbox<System.Int64>();
+					return obj.Unbox<long>();
 				}
 				else
 				{
@@ -113,13 +113,13 @@
 			return null;
 		}
 
-		public static System.UInt32? Unpack_UInt32(this Il2CppSystem.Object obj)
+		public static uint? Unpack_UInt32(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "System.UInt32")
 				{
-					return obj.Unbox<System.UInt32>();
+					return obj.Unbox<uint>();
 				}
 				else
 				{
@@ -129,13 +129,13 @@
 			return null;
 		}
 
-		public static System.Int32? Unpack_Int32(this Il2CppSystem.Object obj)
+		public static int? Unpack_Int32(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "System.Int32")
 				{
-					return obj.Unbox<System.Int32>();
+					return obj.Unbox<int>();
 				}
 				else
 				{
@@ -145,13 +145,13 @@
 			return null;
 		}
 
-		public static UnityEngine.Color? Unpack_Color(this Il2CppSystem.Object obj)
+		public static Color? Unpack_Color(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "UnityEngine.Color")
 				{
-					return obj.Unbox<UnityEngine.Color>();
+					return obj.Unbox<Color>();
 				}
 				else
 				{
@@ -161,13 +161,13 @@
 			return null;
 		}
 
-		public static System.Single? Unpack_Single(this Il2CppSystem.Object obj)
+		public static float? Unpack_Single(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "System.Single")
 				{
-					return obj.Unbox<System.Single>();
+					return obj.Unbox<float>();
 				}
 				else
 				{
@@ -177,13 +177,13 @@
 			return null;
 		}
 
-		public static UnityEngine.Transform Unpack_Transform(this Il2CppSystem.Object obj)
+		public static Transform Unpack_Transform(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "UnityEngine.Transform")
 				{
-					return obj.Cast<UnityEngine.Transform>();
+					return obj.Cast<Transform>();
 				}
 				else
 				{
@@ -193,13 +193,13 @@
 			return null;
 		}
 
-		public static UnityEngine.GameObject Unpack_GameObject(this Il2CppSystem.Object obj)
+		public static GameObject Unpack_GameObject(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "UnityEngine.GameObject")
 				{
-					return obj.Cast<UnityEngine.GameObject>();
+					return obj.Cast<GameObject>();
 				}
 				else
 				{
@@ -241,13 +241,13 @@
 			return null;
 		}
 
-		public static UnityEngine.Material Unpack_Material(this Il2CppSystem.Object obj)
+		public static Material Unpack_Material(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "UnityEngine.Material")
 				{
-					return obj.Cast<UnityEngine.Material>();
+					return obj.Cast<Material>();
 				}
 				else
 				{
@@ -257,13 +257,13 @@
 			return null;
 		}
 
-		public static UnityEngine.Vector3? Unpack_Vector3(this Il2CppSystem.Object obj)
+		public static Vector3? Unpack_Vector3(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "UnityEngine.Vector3")
 				{
-					return obj.Unbox<UnityEngine.Vector3>();
+					return obj.Unbox<Vector3>();
 				}
 				else
 				{
@@ -273,13 +273,13 @@
 			return null;
 		}
 
-		public static UnityEngine.Quaternion? Unpack_Quaternion(this Il2CppSystem.Object obj)
+		public static Quaternion? Unpack_Quaternion(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "UnityEngine.Quaternion")
 				{
-					return obj.Unbox<UnityEngine.Quaternion>();
+					return obj.Unbox<Quaternion>();
 				}
 				else
 				{
@@ -289,13 +289,13 @@
 			return null;
 		}
 
-		public static UnityEngine.HumanBodyBones? Unpack_HumanBodyBones(this Il2CppSystem.Object obj)
+		public static HumanBodyBones? Unpack_HumanBodyBones(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "UnityEngine.HumanBodyBones")
 				{
-					return obj.Unbox<UnityEngine.HumanBodyBones>();
+					return obj.Unbox<HumanBodyBones>();
 				}
 				else
 				{
@@ -322,13 +322,13 @@
 			return null;
 		}
 
-		public static System.Object Unpack_System_Object(this Il2CppSystem.Object obj)
+		public static object Unpack_System_Object(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "System.Object")
 				{
-					return Serialization.FromIL2CPPToManaged<System.Object>(obj);
+					return Serialization.FromIL2CPPToManaged<object>(obj);
 				}
 				else
 				{
@@ -354,13 +354,13 @@
 			return null;
 		}
 
-		public static UnityEngine.AudioSource Unpack_AudioSource(this Il2CppSystem.Object obj)
+		public static AudioSource Unpack_AudioSource(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "UnityEngine.AudioSource")
 				{
-					return obj.Cast<UnityEngine.AudioSource>();
+					return obj.Cast<AudioSource>();
 				}
 				else
 				{
@@ -441,13 +441,13 @@
 		}
 
 
-		public static UnityEngine.MeshRenderer Unpack_MeshRenderer(this Il2CppSystem.Object obj)
+		public static MeshRenderer Unpack_MeshRenderer(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "UnityEngine.MeshRenderer")
 				{
-					return obj.Cast<UnityEngine.MeshRenderer>();
+					return obj.Cast<MeshRenderer>();
 				}
 				else
 				{
@@ -457,13 +457,13 @@
 			return null;
 		}
 
-		public static UnityEngine.ParticleSystem Unpack_ParticleSystem(this Il2CppSystem.Object obj)
+		public static ParticleSystem Unpack_ParticleSystem(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "UnityEngine.ParticleSystem")
 				{
-					return obj.Cast<UnityEngine.ParticleSystem>();
+					return obj.Cast<ParticleSystem>();
 				}
 				else
 				{
@@ -545,13 +545,13 @@
 			return null;
 		}
 
-		public static UnityEngine.AudioClip[] Unpack_Array_AudioClip(this Il2CppSystem.Object obj)
+		public static AudioClip[] Unpack_Array_AudioClip(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "UnityEngine.AudioClip[]")
 				{
-					var array = Il2CppArrayBase<UnityEngine.AudioClip>.WrapNativeGenericArrayPointer(obj.Pointer);
+					var array = Il2CppArrayBase<AudioClip>.WrapNativeGenericArrayPointer(obj.Pointer);
 					if (array != null && array.Count() != 0)
 					{
 						return array;
@@ -565,7 +565,7 @@
 			return null;
 		}
 
-		public static List<UnityEngine.AudioClip> Unpack_List_AudioClip(this Il2CppSystem.Object obj)
+		public static List<AudioClip> Unpack_List_AudioClip(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
@@ -581,13 +581,13 @@
 			return null;
 		}
 
-		public static System.Char[] Unpack_Array_Char(this Il2CppSystem.Object obj)
+		public static char[] Unpack_Array_Char(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{
 				if (obj.GetIl2CppType().FullName == "System.Char[]")
 				{
-					var array = Il2CppArrayBase<System.Char>.WrapNativeGenericArrayPointer(obj.Pointer);
+					var array = Il2CppArrayBase<char>.WrapNativeGenericArrayPointer(obj.Pointer);
 					if (array != null && array.Count() != 0)
 					{
 						return array;
@@ -601,7 +601,7 @@
 			return null;
 		}
 
-		public static List<System.Char> Unpack_List_Char(this Il2CppSystem.Object obj)
+		public static List<char> Unpack_List_Char(this Il2CppSystem.Object obj)
 		{
 			if (obj != null)
 			{

@@ -493,7 +493,7 @@
 
         internal void Respawn_Item()
         {
-            if (!obj.isOwner())
+            if (!obj.IsOwner())
             {
                 obj.TakeOwnership();
             }

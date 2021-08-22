@@ -47,11 +47,7 @@
 			if (obj != null)
 			{
 				string path = GameObjectFinder.GetGameObjectPath(obj);
-				if (!string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path))
-				{
-					return $"{obj.name} Path is : {path}";
-				}
-				return "No Path Found";
+				return !string.IsNullOrEmpty(path) && !string.IsNullOrWhiteSpace(path) ? $"{obj.name} Path is : {path}" : "No Path Found";
 			}
 			return "Object is Null";
 		}
@@ -79,73 +75,41 @@
 
 		public static bool? Is_DontDestroyOnLoad(this GameObject obj)
 		{
-			if (obj != null)
-			{
-
-				return obj.scene.name.Equals("DontDestroyOnLoad");
-
-		}
-			return null;
+			return obj != null ? obj.scene.name.Equals("DontDestroyOnLoad") : (bool?)null;
 		}
 
-	public static bool? Is_DontDestroyOnLoad(this Transform obj)
-	{
-		if (obj != null)
+		public static bool? Is_DontDestroyOnLoad(this Transform obj)
 		{
-
-			return obj.gameObject.Is_DontDestroyOnLoad();
-
-		}
-			return null;
+			return obj?.gameObject.Is_DontDestroyOnLoad();
 		}
 
-	public static void Set_DontDestroyOnLoad(this Object obj)
+		public static void Set_DontDestroyOnLoad(this Object obj)
 		{
 			UnityEngine.Object.DontDestroyOnLoad(obj);
 		}
 
 		public static bool? Is_HideAndDontSave(this GameObject obj)
 		{
-			try {
-				if (obj != null)
-				{
-
-					return obj.scene.name.Equals("HideAndDontSave");
-				}
-				return null;
-
+			try
+			{
+				return obj != null ? obj.scene.name.Equals("HideAndDontSave") : (bool?)null;
 			}
 			catch { return false; }
-			}
-		
-
-
-	public static bool? Is_HideAndDontSave(this Transform obj)
-		{
-			if (obj != null)
-			{
-				return obj.gameObject.Is_HideAndDontSave();
-			}
-			return null;
 		}
 
-
-		public static bool? is_CurrentWorld(this GameObject obj)
+		public static bool? Is_HideAndDontSave(this Transform obj)
 		{
-			if (obj != null)
-			{
-				return !obj.Is_HideAndDontSave().Value && !obj.Is_DontDestroyOnLoad().Value;
-			}
-			return null;
+			return obj?.gameObject.Is_HideAndDontSave();
 		}
 
-		public static bool? is_CurrentWorld(this Transform obj)
+		public static bool? Is_CurrentWorld(this GameObject obj)
 		{
-			if (obj != null)
-			{
-				return obj.gameObject.is_CurrentWorld();
-			}
-			return null;
+			return obj != null ? !obj.Is_HideAndDontSave().Value && !obj.Is_DontDestroyOnLoad().Value : (bool?)null;
+		}
+
+		public static bool? Is_CurrentWorld(this Transform obj)
+		{
+			return obj?.gameObject.Is_CurrentWorld();
 		}
 		public static void CopyPath(this GameObject obj)
 		{
@@ -229,7 +193,6 @@
 
 		public static bool DestroyMeOnline(this GameObject obj)
 		{
-			bool refreshhandutils = false;
 			var name = obj.name;
 			if (obj != null)
 			{

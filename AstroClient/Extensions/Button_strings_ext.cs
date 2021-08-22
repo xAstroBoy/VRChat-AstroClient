@@ -7,15 +7,7 @@
 	{
 		public static string Generate_TeleportToMe_ButtonText(this GameObject obj)
 		{
-			string ObjectName;
-			if (obj != null)
-			{
-				ObjectName = obj.name;
-			}
-			else
-			{
-				ObjectName = "null";
-			}
+			string ObjectName = obj != null ? obj.name : "null";
 			return $"Teleport to you:\n{ObjectName}";
 		}
 
@@ -23,23 +15,8 @@
 		{
 			string TargetName;
 
-			string ObjectName;
-			if (obj != null)
-			{
-				ObjectName = obj.name;
-			}
-			else
-			{
-				ObjectName = "null";
-			}
-			if (Target != null)
-			{
-				TargetName = Target.GetAPIUser().displayName;
-			}
-			else
-			{
-				TargetName = "null";
-			}
+			string ObjectName = obj != null ? obj.name : "null";
+			TargetName = Target != null ? Target.GetAPIUser().displayName : "null";
 
 			return $"Teleport\n {ObjectName} to:\n {TargetName}";
 		}

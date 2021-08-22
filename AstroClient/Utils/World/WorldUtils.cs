@@ -295,7 +295,7 @@
 			{
 				var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRCAvatarPedestal>()
 					.Where(
-					i => i.blueprintId.isNotNullOrEmptyOrWhiteSpace()
+					i => i.blueprintId.IsNotNullOrEmptyOrWhiteSpace()
 					&& i.blueprintId.isAvatarID()
 					).ToList();
 				if (list1 != null && list1.Count() != 0)
@@ -320,11 +320,11 @@
 				var list1 = GameObjectFinder.GetRootGameObjectsComponents<SimpleAvatarPedestal>()
 					.Where(
 					i => i.field_Internal_ApiAvatar_0 != null &&
-					i.field_Internal_ApiAvatar_0.id.isNotNullOrEmptyOrWhiteSpace() &&
+					i.field_Internal_ApiAvatar_0.id.IsNotNullOrEmptyOrWhiteSpace() &&
 					i.field_Internal_ApiAvatar_0.id.isAvatarID()
 					&& !i.transform.IsChildOf(VRChatObjects.AvatarPreviewBase_MainAvatar)
 					&& !i.transform.IsChildOf(VRChatObjects.AvatarPreviewBase_FallbackAvatar)
-					&& i.field_Internal_ApiAvatar_0.assetUrl.isNotNullOrEmptyOrWhiteSpace()
+					&& i.field_Internal_ApiAvatar_0.assetUrl.IsNotNullOrEmptyOrWhiteSpace()
 					).ToList();
 				if (list1 != null && list1.Count() != 0)
 				{
@@ -349,9 +349,9 @@
 				var list1 = GameObjectFinder.GetRootGameObjectsComponents<AvatarPedestal>()
 					.Where(
 					i => i.field_Private_ApiAvatar_0 != null &&
-					i.field_Private_ApiAvatar_0.id.isNotNullOrEmptyOrWhiteSpace() &&
+					i.field_Private_ApiAvatar_0.id.IsNotNullOrEmptyOrWhiteSpace() &&
 					i.field_Private_ApiAvatar_0.id.isAvatarID()
-					&& i.field_Private_ApiAvatar_0.assetUrl.isNotNullOrEmptyOrWhiteSpace()
+					&& i.field_Private_ApiAvatar_0.assetUrl.IsNotNullOrEmptyOrWhiteSpace()
 					).ToList();
 				if (list1 != null && list1.Count() != 0)
 				{
@@ -372,7 +372,7 @@
 			{
 				var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_AvatarPedestal>()
 					.Where(
-					i => i.blueprintId.isNotNullOrEmptyOrWhiteSpace()
+					i => i.blueprintId.IsNotNullOrEmptyOrWhiteSpace()
 					&& i.blueprintId.isAvatarID()
 					).ToList();
 				if (list1 != null && list1.Count() != 0)
@@ -396,7 +396,7 @@
 			{
 				var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_AvatarPedestal>()
 					.Where(
-					i => i.blueprintId.isNotNullOrEmptyOrWhiteSpace() 
+					i => i.blueprintId.IsNotNullOrEmptyOrWhiteSpace() 
 					&& i.blueprintId.isAvatarID()
 					).ToList();
 				if (list1 != null && list1.Count() != 0)

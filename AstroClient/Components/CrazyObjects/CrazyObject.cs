@@ -96,7 +96,7 @@
                     {
                         control.EditMode = true;
                     }
-                    if (!obj.isOwner())
+                    if (!obj.IsOwner())
                     {
                         if (!pickup.IsHeld)
                         {
@@ -117,7 +117,7 @@
                 {
                     if (!pickup.IsHeld)
                     {
-                        if (!obj.isOwner())
+                        if (!obj.IsOwner())
                         {
                             obj.TakeOwnership();
                         }
@@ -146,7 +146,7 @@
                 {
                     if (!pickup.IsHeld)
                     {
-                        if (!obj.isOwner())
+                        if (!obj.IsOwner())
                         {
                             obj.TakeOwnership();
                         }

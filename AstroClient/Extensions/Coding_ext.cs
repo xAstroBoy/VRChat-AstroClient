@@ -17,7 +17,7 @@
         public static bool IsNotNull<T>(this T? obj) where T : struct => obj.HasValue;
 
 
-		public static bool isNotNullOrEmptyOrWhiteSpace(this string obj) 
+		public static bool IsNotNullOrEmptyOrWhiteSpace(this string obj) 
 		{
 			return !string.IsNullOrEmpty(obj) && !string.IsNullOrWhiteSpace(obj);
 		}

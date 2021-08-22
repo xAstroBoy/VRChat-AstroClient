@@ -10,8 +10,6 @@
 
 	public static class Udon_ext
 	{
-
-
 		public static void UnboxUdonEventToConsole(this UdonBehaviour obj)
 		{
 			if(obj != null)
@@ -49,11 +47,7 @@
 
 		public static void ExecuteUdonEvent(this List<CachedUdonEvent> udonlist)
 		{
-			if (udonlist == null)
-			{
-				return;
-			}
-			if (udonlist.Count() == 0)
+			if (udonlist == null || udonlist.Count() == 0)
 			{
 				return;
 			}

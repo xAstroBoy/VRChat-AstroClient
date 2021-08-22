@@ -138,7 +138,7 @@
                 {
                     if (!pickup.IsHeld)
                     {
-                        if (!gameObject.isOwner())
+                        if (!gameObject.IsOwner())
                         {
                             gameObject.TakeOwnership();
                         }

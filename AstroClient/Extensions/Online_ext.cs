@@ -15,7 +15,7 @@
 			OnlineEditor.RemoveOwnerShip(obj);
 		}
 
-		public static bool isOwner(this GameObject obj)
+		public static bool IsOwner(this GameObject obj)
 		{
 			return OnlineEditor.IsLocalPlayerOwner(obj);
 		}
