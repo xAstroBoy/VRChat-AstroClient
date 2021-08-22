@@ -272,6 +272,47 @@
 					obj.GetOrAddComponent<RigidBodyController>().RigidBody_PreventOthersFromGrabbing(PreventOthersFromGrabbing);
 				}
 			}
+
 		}
+
+		public static void RigidBody_Set_Drag(this RigidBodyController control, float Drag)
+		{
+			if (control != null)
+			{
+				if (!control.EditMode)
+				{
+					control.EditMode = true;
+				}
+				control.Drag = Drag;
+			}
+		}
+
+		public static void RigidBody_Set_AngularDrag(this RigidBodyController control, float AngularDrag)
+		{
+			if (control != null)
+			{
+				if (!control.EditMode)
+				{
+					control.EditMode = true;
+				}
+				control.AngularDrag = AngularDrag;
+			}
+		}
+
+
+		public static void RigidBody_Forced(this RigidBodyController control, bool Forced_RigidBody)
+		{
+			if (control != null)
+			{
+				if (!control.EditMode)
+				{
+					control.EditMode = true;
+				}
+				control.Forced_RigidBody = Forced_RigidBody;
+			}
+		}
+
+
+
 	}
 }

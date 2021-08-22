@@ -286,5 +286,17 @@
 		{
 			return "Current owner : \n" + controller.CurrentOwner;
 		}
+
+		public static void Pickup_Set_ThrowVelocityBoostScale(this PickupController instance, float ThrowVelocityBoostScale)
+		{
+			if (instance != null)
+			{
+				if (!instance.EditMode)
+				{
+					instance.EditMode = true;
+				}
+				instance.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
+			}
+		}
 	}
 }

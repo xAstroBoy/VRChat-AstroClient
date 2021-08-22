@@ -13,11 +13,8 @@ namespace AstroClient
 {
 	public class AstroEnderPearl 
 	{
-		private static Color Ender { get; } = new Color(0f, 2f, 0f, 0.4f);
 
 		private static GameObject ENDER;
-
-
 
 		public static void SpawnEnderPearl()
 		{
@@ -33,36 +30,8 @@ namespace AstroClient
 			gameObject.transform.position = bonePosition;
 			gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 			gameObject.name = "AstroEnderPearl";
-
 			UnityEngine.Object.Destroy(gameObject.GetComponent<Collider>());
-
-			var collider = gameObject.GetOrAddComponent<BoxCollider>();
-			if(collider != null)
-			{
-				collider.size = new Vector3(1f, 1f, 1f);
-				collider.isTrigger = true;
-			}
-			var renderer = gameObject.GetOrAddComponent<MeshRenderer>();
-			if (renderer != null)
-			{
-				renderer.material.color = Ender;
-			}
-			var body = gameObject.GetOrAddComponent<RigidBodyController>();
-			if (body != null)
-			{
-				body.Forced_RigidBody = true;
-				body.IsKinematic = false;
-				body.UseGravity = false;
-				body.Drag = 0f;
-				body.AngularDrag = 0.01f;
-			}
-			var pickup = gameObject.GetOrAddComponent<PickupController>();
-			if(pickup != null)
-			{
-				pickup.ForceComponent = true;
-				pickup.pickupable = true;
-				pickup.ThrowVelocityBoostScale = 5.5f;
-			}
+			gameObject.RigidBody_Set_Gravity(false);
 			gameObject.AddComponent<EnderPearlBehaviour>();
 			ENDER = gameObject;
 		}
