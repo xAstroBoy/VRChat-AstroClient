@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+	using AstroNetworkingLibrary.Serializable;
 	using System;
 	using System.Collections.Generic;
 	using System.Reflection;
@@ -96,6 +97,6 @@
 	[Serializable, Obfuscation]
 	public class ConfigFavorites
 	{
-		public List<string> Avatars = new List<string>();
+		public List<AvatarData> Avatars = new List<AvatarData>();
 	}
 }

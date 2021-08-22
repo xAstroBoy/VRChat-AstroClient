@@ -8,7 +8,6 @@
 	using AstroLibrary.Extensions;
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
-	using Blaze.Utils;
 	using DayClientML2.Utility;
 	using ExitGames.Client.Photon;
 	using Harmony;
@@ -140,7 +139,7 @@
 
 		private static void APIUserBypass(APIUser __instance, ref bool __result)
 		{
-			if (PlayerUtils.GetCurrentUser().UserID().Equals(__instance.id))
+			if (__instance.IsSelf)
 			{
 				__result = true;
 			}
@@ -148,7 +147,7 @@
 
 		private static void APIUserBypass2(APIUser __instance, ref bool __result)
 		{
-			if (PlayerUtils.GetCurrentUser().UserID().Equals(__instance.id))
+			if (__instance.IsSelf)
 			{
 				__result = false;
 			}

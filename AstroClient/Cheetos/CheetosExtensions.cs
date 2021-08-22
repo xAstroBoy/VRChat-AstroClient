@@ -7,7 +7,25 @@
 
 	public static class CheetosExtensions
     {
-        public static AvatarData GetAvatarData(this AvatarObject instance)
+		public static AvatarData GetAvatarData(this ApiAvatar instance)
+		{
+			return new AvatarData()
+			{
+				AssetURL = instance.assetUrl,
+				AuthorID = instance.authorId,
+				AuthorName = instance.authorName,
+				AvatarID = instance.id,
+				Description = instance.description,
+				ImageURL = instance.thumbnailImageUrl,
+				Name = instance.name,
+				ReleaseStatus = instance.releaseStatus,
+				ThumbnailURL = instance.thumbnailImageUrl,
+				Version = instance.version,
+				SupportedPlatforms = instance.platform
+			};
+		}
+
+		public static AvatarData GetAvatarData(this AvatarObject instance)
         {
             return new AvatarData()
             {

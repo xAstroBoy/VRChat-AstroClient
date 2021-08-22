@@ -31,6 +31,8 @@
 
         private static string ConfigMovementPath = ConfigFolder + @"\ConfigMovement.json";
 
+        private static string ConfigFavoritesPath = ConfigFolder + @"\ConfigFavorites.json";
+
         private static string ConfigProtectionsPath = ConfigFolder + @"\ConfigProtections.json";
 
         #endregion Paths
@@ -46,6 +48,8 @@
         public static ConfigFlight Flight = new ConfigFlight();
 
         public static ConfigMovement Movement = new ConfigMovement();
+
+        public static ConfigFavorites Favorites = new ConfigFavorites();
 
         #endregion Config Classes
 
@@ -141,6 +145,13 @@
                 Save_Movement();
                 ModConsole.DebugWarning($"ConfigMovement File Created: {ConfigMovementPath}");
             }
+			if (!File.Exists(ConfigFavoritesPath))
+			{
+				FileStream fs = new FileStream(ConfigFavoritesPath, FileMode.Create);
+				fs.Dispose();
+				Save_Favorites();
+				ModConsole.DebugWarning($"ConfigFavorites File Created: {ConfigFavoritesPath}");
+			}
 
 			if (!Directory.Exists(ConfigLewdifyPath))
             {
@@ -181,6 +192,12 @@
             ModConsole.DebugLog("Movement Config Saved.");
         }
 
+		public static void Save_Favorites()
+		{
+			JSonWriter.WriteToJsonFile(ConfigFavoritesPath, Favorites);
+			ModConsole.DebugLog("Favorites Config Saved.");
+		}
+
 		public static void Save_All()
         {
             SaveMutex.WaitOne();
@@ -189,19 +206,69 @@
             Save_ESP();
             Save_Flight();
             Save_Movement();
+            Save_Favorites();
             ModConsole.Log("Config Saved.");
             SaveMutex.ReleaseMutex();
         }
 
         public static void Load()
         {
-            General = JSonWriter.ReadFromJsonFile<ConfigGeneral>(ConfigPath);
-            UI = JSonWriter.ReadFromJsonFile<ConfigUI>(ConfigUIPath);
-            ESP = JSonWriter.ReadFromJsonFile<ConfigESP>(ConfigESPPath);
-            Flight = JSonWriter.ReadFromJsonFile<ConfigFlight>(ConfigFlightPath);
-            Movement = JSonWriter.ReadFromJsonFile<ConfigMovement>(ConfigMovementPath);
+			try
+			{
+				General = JSonWriter.ReadFromJsonFile<ConfigGeneral>(ConfigPath);
+			}
+			catch
+			{
+				ModConsole.Error("Failed to load General config, creating a new one..");
+			}
+
+			try
+			{
+				UI = JSonWriter.ReadFromJsonFile<ConfigUI>(ConfigUIPath);
+			}
+			catch
+			{
+				ModConsole.Error("Failed to load UI config, creating a new one..");
+			}
+
+			try
+			{
+				ESP = JSonWriter.ReadFromJsonFile<ConfigESP>(ConfigESPPath);
+			}
+			catch
+			{
+				ModConsole.Error("Failed to load ESP config, creating a new one..");
+			}
+
+			try
+			{
+				Flight = JSonWriter.ReadFromJsonFile<ConfigFlight>(ConfigFlightPath);
+			}
+			catch
+			{
+				ModConsole.Error("Failed to load Flight config, creating a new one..");
+			}
+
+			try
+			{
+				Movement = JSonWriter.ReadFromJsonFile<ConfigMovement>(ConfigMovementPath);
+			}
+			catch
+			{
+				ModConsole.Error("Failed to load Movement config, creating a new one..");
+			}
+
+			try
+			{
+				Favorites = JSonWriter.ReadFromJsonFile<ConfigFavorites>(ConfigFavoritesPath);
+			}
+			catch
+			{
+				ModConsole.Error("Failed to load Favorites config, creating a new one..");
+			}
 
             ModConsole.DebugLog("Config Loaded.");
+			Save_All();
         }
     }
 }

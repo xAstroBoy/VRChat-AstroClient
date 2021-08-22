@@ -87,35 +87,31 @@
                 UpdateButtons();
             }, 1.45f, 1f);
 
-            if (Bools.IsDeveloper)
-            {
-                deleteButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Delete From Database", 921f, 350f, delegate ()
-                {
-                    ModConsole.Log($"Sent Avatar Deletion For: {selectedID}");
-                    AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DELETE, selectedID));
-                }, 1.45f, 1f);
-				if (FindMods.Favcat_Unchained_Present)
-				{
-					WorldAvatarDumper = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Show Avatars Pedestrals from World", 921f, 290f, delegate ()
-					{
-						Favcat_Utils.Run_RevealWorldPedestrials();
-					}, 1.45f, 1f);
-				}
-			}
-			else
+			if (Bools.IsDeveloper)
 			{
-				if (FindMods.Favcat_Unchained_Present)
+				deleteButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Delete From Database", 921f, 350f, delegate ()
 				{
-					WorldAvatarDumper = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Show Avatars Pedestrals from World", 921f, 350f, delegate ()
-					{
-						Favcat_Utils.Run_RevealWorldPedestrials();
-					}, 1.45f, 1f);
-				}
+					ModConsole.Log($"Sent Avatar Deletion For: {selectedID}");
+					AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DELETE, selectedID));
+				}, 1.45f, 1f);
 			}
+
+				//	WorldAvatarDumper = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Show Avatars Pedestrals from World", 921f, 200f, delegate ()
+				//	{
+				//		//Favcat_Utils.Run_RevealWorldPedestrials();
+				//	}, 1.45f, 1f);
+				//}
+				//else
+				//{
+				//	WorldAvatarDumper = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Show Avatars Pedestrals from World", 921f, 170f, delegate ()
+				//	{
+				//		//Favcat_Utils.Run_RevealWorldPedestrials();
+				//	}, 1.45f, 1f);
+				//}
 
 			publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
 
-            list = new VRCList(publicAvatarList.transform.parent, "Astro Avatar Search Results", 0);
+            list = new VRCList(publicAvatarList.transform.parent, "Astro Search Results", 0);
             list.Text.supportRichText = true;
         }
 

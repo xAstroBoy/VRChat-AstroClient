@@ -71,6 +71,7 @@
                     }
 
                     AvatarSearch.OnSelect();
+					AvatarFavorites.OnSelect();
                 }
             }
             else
@@ -85,6 +86,7 @@
                     }
 
                     AvatarSearch.OnSelect();
+					AvatarFavorites.OnSelect();
                 }
             }
         }
