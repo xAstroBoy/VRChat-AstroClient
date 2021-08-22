@@ -139,9 +139,9 @@
                         {
                             control.EditMode = true;
                         }
-                        if (!control.isKinematic)
+                        if (!control.IsKinematic)
                         {
-                            control.isKinematic = true;
+                            control.IsKinematic = true;
                         }
                     }
                 }

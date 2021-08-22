@@ -100,7 +100,7 @@
                         {
                             if (control != null)
                             {
-                                control.isKinematic = false;
+                                control.IsKinematic = false;
                                 control.UpdateAngularDrag(0);
                                 control.UpdateDrag(0);
                             }

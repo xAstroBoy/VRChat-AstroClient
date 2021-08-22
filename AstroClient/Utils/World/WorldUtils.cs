@@ -1,5 +1,7 @@
 ﻿namespace AstroClient
 {
+	#region Imports
+
 	using AstroClient.Experiments;
 	using AstroLibrary.Console;
 	using System;
@@ -8,14 +10,14 @@
 	using UnityEngine;
 	using VRC;
 	using VRC.SDK3.Components;
-	using VRC.SDKBase;
 	using VRC.Udon;
 	using Color = System.Drawing.Color;
 	using AstroLibrary.Extensions;
-	using VRC.Core;
 	using AstroClient.Extensions;
 	using AstroClient.Variables;
 	using AstroLibrary.Finder;
+
+	#endregion
 
 	public class WorldUtils : GameEvents
     {

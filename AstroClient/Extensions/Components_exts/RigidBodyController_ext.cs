@@ -22,7 +22,7 @@
 				{
 					control.EditMode = true;
 				}
-				control.useGravity = useGravity;
+				control.UseGravity = useGravity;
 			}
 		}
 
@@ -46,7 +46,7 @@
 				{
 					control.EditMode = true;
 				}
-				control.isKinematic = isKinematic;
+				control.IsKinematic = isKinematic;
 			}
 		}
 

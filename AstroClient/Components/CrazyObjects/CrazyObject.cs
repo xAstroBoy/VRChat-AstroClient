@@ -103,8 +103,8 @@
                             obj.TakeOwnership();
                             if (control != null)
                             {
-                                control.isKinematic = false;
-                                control.useGravity = UseGravity;
+                                control.IsKinematic = false;
+                                control.UseGravity = UseGravity;
                                 control.UpdateAngularDrag(0);
                                 control.UpdateDrag(0);
                                 HasRequiredSettings = true;

@@ -121,13 +121,13 @@
         {
             if (control != null)
             {
-                if (GravityToggler.GetToggleState() != control.useGravity)
+                if (GravityToggler.GetToggleState() != control.UseGravity)
                 {
-                    GravityToggler.SetToggleState(control.useGravity);
+                    GravityToggler.SetToggleState(control.UseGravity);
                 }
-                if (KinematicToggler.GetToggleState() != control.isKinematic)
+                if (KinematicToggler.GetToggleState() != control.IsKinematic)
                 {
-                    KinematicToggler.SetToggleState(control.isKinematic);
+                    KinematicToggler.SetToggleState(control.IsKinematic);
                 }
                 if (CollisionsToggler.GetToggleState() != control.DetectCollisions)
                 {

@@ -341,8 +341,8 @@
                             if (hasWorkingCollider)
                             {
                                 control.EditMode = true;
-                                control.isKinematic = false;
-                                control.useGravity = useGravity;
+                                control.IsKinematic = false;
+                                control.UseGravity = useGravity;
                             }
                         }
                     }

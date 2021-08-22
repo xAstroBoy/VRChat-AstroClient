@@ -1,6 +1,5 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using MelonLoader;
@@ -8,7 +7,6 @@
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
-	using System.Linq;
 	using UnityEngine;
 	using VRC;
 	using VRC.SDKBase;

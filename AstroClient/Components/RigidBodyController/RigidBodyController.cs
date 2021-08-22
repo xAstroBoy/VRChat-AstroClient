@@ -44,18 +44,18 @@
                     {
                         OrigUseGravity = Internal_Sync.GetRigidBody().useGravity;
                     }
-                    if (Internal_Sync.GetRigidBody().useGravity != useGravity)
+                    if (Internal_Sync.GetRigidBody().useGravity != UseGravity)
                     {
-                        useGravity = Internal_Sync.GetRigidBody().useGravity;
+                        UseGravity = Internal_Sync.GetRigidBody().useGravity;
                     }
 
                     if (Internal_Sync.GetRigidBody().isKinematic != OrigKinematic)
                     {
                         OrigKinematic = Internal_Sync.GetRigidBody().isKinematic;
                     }
-                    if (Internal_Sync.GetRigidBody().isKinematic != isKinematic)
+                    if (Internal_Sync.GetRigidBody().isKinematic != IsKinematic)
                     {
-                        isKinematic = Internal_Sync.GetRigidBody().isKinematic;
+                        IsKinematic = Internal_Sync.GetRigidBody().isKinematic;
                     }
 
                     if (Internal_Sync.GetRigidBody().constraints != OrigConstraints)
@@ -107,8 +107,8 @@
                 OrigConstraints = body.constraints;
                 OrigDrag = body.drag;
                 OrigAngularDrag = body.angularDrag;
-                isKinematic = body.isKinematic;
-                useGravity = body.useGravity;
+                IsKinematic = body.isKinematic;
+                UseGravity = body.useGravity;
                 DetectCollisions = body.detectCollisions;
                 AngularDrag = body.angularDrag;
                 Drag = body.drag;
@@ -119,8 +119,8 @@
 
         internal void RestoreOriginalBody()
         {
-            isKinematic = OrigKinematic;
-            useGravity = OrigUseGravity;
+            IsKinematic = OrigKinematic;
+            UseGravity = OrigUseGravity;
             DetectCollisions = OrigDetectCollisions;
             UpdateAngularDrag(OrigAngularDrag);
             UpdateDrag(OrigDrag);
@@ -267,14 +267,14 @@
                     {
                         if (Internal_Sync.GetRigidBody() != null)
                         {
-                            if (Internal_Sync.GetRigidBody().useGravity != useGravity)
+                            if (Internal_Sync.GetRigidBody().useGravity != UseGravity)
                             {
-                                Internal_Sync.GetRigidBody().useGravity = useGravity;
+                                Internal_Sync.GetRigidBody().useGravity = UseGravity;
                                 Internal_Sync.RefreshProperties();
                             }
-                            if (Internal_Sync.GetRigidBody().isKinematic != isKinematic)
+                            if (Internal_Sync.GetRigidBody().isKinematic != IsKinematic)
                             {
-                                Internal_Sync.GetRigidBody().isKinematic = isKinematic;
+                                Internal_Sync.GetRigidBody().isKinematic = IsKinematic;
                                 Internal_Sync.RefreshProperties();
                             }
                             if (Internal_Sync.GetRigidBody().constraints != Constraints)
@@ -302,13 +302,13 @@
 
                     if (body != null)
                     {
-                        if (body.useGravity != useGravity)
+                        if (body.useGravity != UseGravity)
                         {
-                            body.useGravity = useGravity;
+                            body.useGravity = UseGravity;
                         }
-                        if (body.isKinematic != isKinematic)
+                        if (body.isKinematic != IsKinematic)
                         {
-                            body.isKinematic = isKinematic;
+                            body.isKinematic = IsKinematic;
                         }
                         if (body.constraints != Constraints)
                         {
@@ -338,18 +338,18 @@
                             {
                                 OrigUseGravity = Internal_Sync.GetRigidBody().useGravity;
                             }
-                            if (Internal_Sync.GetRigidBody().useGravity != useGravity)
+                            if (Internal_Sync.GetRigidBody().useGravity != UseGravity)
                             {
-                                useGravity = Internal_Sync.GetRigidBody().useGravity;
+                                UseGravity = Internal_Sync.GetRigidBody().useGravity;
                             }
 
                             if (Internal_Sync.GetRigidBody().isKinematic != OrigKinematic)
                             {
                                 OrigKinematic = Internal_Sync.GetRigidBody().isKinematic;
                             }
-                            if (Internal_Sync.GetRigidBody().isKinematic != isKinematic)
+                            if (Internal_Sync.GetRigidBody().isKinematic != IsKinematic)
                             {
-                                isKinematic = Internal_Sync.GetRigidBody().isKinematic;
+                                IsKinematic = Internal_Sync.GetRigidBody().isKinematic;
                             }
 
                             if (Internal_Sync.GetRigidBody().constraints != OrigConstraints)
@@ -396,18 +396,18 @@
                         {
                             OrigUseGravity = body.useGravity;
                         }
-                        if (body.useGravity != useGravity)
+                        if (body.useGravity != UseGravity)
                         {
-                            useGravity = body.useGravity;
+                            UseGravity = body.useGravity;
                         }
 
                         if (body.isKinematic != OrigKinematic)
                         {
                             OrigKinematic = body.isKinematic;
                         }
-                        if (body.isKinematic != isKinematic)
+                        if (body.isKinematic != IsKinematic)
                         {
-                            isKinematic = body.isKinematic;
+                            IsKinematic = body.isKinematic;
                         }
 
                         if (body.constraints != OrigConstraints)
@@ -471,8 +471,8 @@
         [HideFromIl2Cpp]
         internal bool UpdateKinematic(bool Kinematic)
         {
-            isKinematic = Kinematic;
-            return isKinematic == Kinematic;
+            IsKinematic = Kinematic;
+            return IsKinematic == Kinematic;
         }
 
         [HideFromIl2Cpp]
@@ -584,7 +584,7 @@
             }
         }
 
-        internal bool useGravity
+        internal bool UseGravity
         {
             get
             {
@@ -597,7 +597,7 @@
             }
         }
 
-        internal bool isKinematic
+        internal bool IsKinematic
         {
             get
             {

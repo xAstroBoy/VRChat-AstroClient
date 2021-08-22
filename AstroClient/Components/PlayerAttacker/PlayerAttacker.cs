@@ -175,15 +175,15 @@
                     }
 
                     control.Constraints = RigidbodyConstraints.FreezeRotation;
-                    control.useGravity = false;
+                    control.UseGravity = false;
                     control.UpdateDrag(Drag);
                     HasUpdatedDrag = false;
                     HasUpdatedKinematic = false;
                     if (control != null)
                     {
                         control.Constraints = RigidbodyConstraints.FreezeRotation;
-                        control.isKinematic = false;
-                        control.useGravity = false;
+                        control.IsKinematic = false;
+                        control.UseGravity = false;
                     }
 
                     HasRequiredSettings = true;
