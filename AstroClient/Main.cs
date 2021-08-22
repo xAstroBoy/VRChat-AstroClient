@@ -1,7 +1,5 @@
-﻿
-
-
-
+﻿namespace AstroClient
+{
 	#region Imports
 
 	using AstroClient.AstroUtils.ItemTweaker;
@@ -39,9 +37,6 @@
 
 #endregion Imports
 
-
-namespace AstroClient
-{
 	public class Main : MelonMod
 	{
 		#region EventHandlers

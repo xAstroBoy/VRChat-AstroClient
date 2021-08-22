@@ -33,7 +33,6 @@
                 }
             });
         }
-
 		
 		public static void ToggleAudioSourceSubMebu(QMTabMenu main, float x, float y, bool btnHalf)
 		{
@@ -65,8 +64,6 @@
 			});
 		}
 
-
-
 		public static void TriggerSubMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Interact Triggers", "Interact with Level Triggers", null, null, null, null, btnHalf);
@@ -88,9 +85,6 @@
 						listener.assignedbtn = btn;
 					}
 					scroll.Add(btn);
-                    
-
-
                 }
             });
         }

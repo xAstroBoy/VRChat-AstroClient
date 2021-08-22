@@ -1,17 +1,20 @@
 ﻿namespace AstroClient
 {
+	#region Imports
+
 	using AstroClient.Components;
 	using AstroClient.Udon;
 	using AstroClient.Variables;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
-	using AstroLibrary.Utility;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
 	using VRC.Udon;
+
+	#endregion
 
 	public class BClubWorld : GameEvents
 	{

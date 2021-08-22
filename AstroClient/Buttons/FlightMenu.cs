@@ -1,10 +1,14 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
+	#region Imports
+
 	using AstroLibrary;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using UnityEngine;
+
+	#endregion
 
 	internal class FlightMenu : GameEvents
     {

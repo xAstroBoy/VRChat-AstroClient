@@ -1,5 +1,7 @@
 ﻿namespace AstroClient
 {
+	#region Imports
+
 	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
@@ -12,6 +14,8 @@
 	using UnityEngine.SceneManagement;
 	using UnityEngine.UI;
 	using VRC;
+
+	#endregion
 
 	public class GameObjMenu : GameEvents
     {

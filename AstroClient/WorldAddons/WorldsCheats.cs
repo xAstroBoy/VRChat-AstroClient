@@ -1,5 +1,7 @@
 ﻿namespace AstroClient.Worlds
 {
+	#region Imports
+
 	using AstroClient.Variables;
 	using AstroClient.World.Hub;
 	using AstroLibrary;
@@ -11,6 +13,8 @@
 	using System.Linq;
 	using System.Reflection;
 	using UnityEngine;
+
+	#endregion
 
 	public class WorldsCheats : GameEvents
     {
