@@ -114,6 +114,8 @@
                 new Patch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_0)), GetPatch(nameof(OnAvatarDownload)));
                 new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
                 new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
+                new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.ConfigurePortal)), GetPatch(nameof(OnConfigurePortal)));
+                new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.Method_Public_Void_0)), GetPatch(nameof(OnEnterPortal)));
                 new Patch(AccessTools.Property(typeof(Time), nameof(Time.smoothDeltaTime)).GetMethod, null, GetPatch(nameof(SpoofFPS)));
                 new Patch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
                 new Patch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
@@ -125,7 +127,27 @@
             finally { }
         }
 
-        private static bool OnTestPatch(ref Il2CppStructArray<bool> __0)
+		private static bool OnConfigurePortal(PortalInternal __instance, ref string __0, ref string __1, ref int __2, ref Player __3)
+		{
+			ModConsole.Log($"Portal Spawned: {__0}, {__1}, {__2}, {__3.DisplayName()}");
+			return true;
+		}
+
+		private static bool OnEnterPortal(PortalInternal __instance)
+		{
+			if (Bools.AntiPortal)
+			{
+				ModConsole.Log("Portal Entry Blocked!");
+				return false;
+			}
+			else
+			{
+				ModConsole.Log($"Portal Entered");
+				return true;
+			}
+		}
+
+		private static bool OnTestPatch(ref Il2CppStructArray<bool> __0)
         {
             ModConsole.Log("Test!");
             return true;

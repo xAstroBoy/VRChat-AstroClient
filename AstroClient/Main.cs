@@ -256,12 +256,16 @@
 				// Protections
 				QMNestedButton protectionsButton = new QMNestedButton(AstroClient, 4, 2f, "Protections", "Protections Menu", null, Color.yellow, null, null, true);
 
-				QMSingleToggleButton toggleBlockRPC = new QMSingleToggleButton(protectionsButton, 2, 0, "RPC Block", () => { Bools.BlockRPC = true; }, "RPC Block", () => { Bools.BlockRPC = false; }, "Toggle RPC Blocking", Color.green, Color.red, null, Bools.BlockRPC, false);
+				QMSingleToggleButton toggleBlockRPC = new QMSingleToggleButton(protectionsButton, 2, 0, "RPC Block", () => { Bools.BlockRPC = true; }, "RPC Block", () => { Bools.BlockRPC = false; }, "Toggle RPC Blocking", Color.green, Color.red, null, Bools.BlockRPC, true);
 				toggleBlockRPC.SetToggleState(Bools.BlockRPC, false);
 
-				QMSingleToggleButton toggleBlockUdon = new QMSingleToggleButton(protectionsButton, 3, 0, "Udon Block", () => { Bools.BlockUdon = true; }, "Udon Block", () => { Bools.BlockUdon = false; }, "Toggle Udon Blocking", Color.green, Color.red, null, Bools.BlockRPC, false);
+				QMSingleToggleButton toggleBlockUdon = new QMSingleToggleButton(protectionsButton, 3, 0, "Udon Block", () => { Bools.BlockUdon = true; }, "Udon Block", () => { Bools.BlockUdon = false; }, "Toggle Udon Blocking", Color.green, Color.red, null, Bools.BlockRPC, true);
 				toggleBlockUdon.SetToggleState(Bools.BlockUdon, false);
 
+				QMSingleToggleButton toggleAntiPortal = new QMSingleToggleButton(protectionsButton, 4, 2.5f, "Anti Portal", () => { Bools.AntiPortal = true; }, "Anti Portal", () => { Bools.AntiPortal = false; }, "Stops you from entering portals.", Color.green, Color.red, null, Bools.AntiPortal, true);
+				toggleAntiPortal.SetToggleState(Bools.AntiPortal, false);
+
+				// Misc
 				SkyboxEditor.CustomSkyboxesMenu(AstroClient, 1, 0, true);
 				LightControl.InitButtons(AstroClient, 1, 0.5f, true);
 				AvatarModifier.InitQMMenu(AstroClient, 1, 1, true);

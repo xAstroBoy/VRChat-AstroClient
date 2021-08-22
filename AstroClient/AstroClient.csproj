@@ -96,6 +96,7 @@
     <Compile Include="CheetosUI\WorldButton.cs" />
     <Compile Include="Cheetos\Astro_Interactable.cs" />
     <Compile Include="Cheetos\Astro_Interactable_Extensions.cs" />
+    <Compile Include="Cheetos\AvatarFavorites.cs" />
     <Compile Include="Cheetos\NamePlates.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener_AudioSource.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener.cs" />

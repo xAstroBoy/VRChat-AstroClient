@@ -4,10 +4,12 @@
 
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Utility;
+	using CheetosConsole;
 	using MelonLoader;
 	using RubyButtonAPI;
 	using System.Collections;
 	using System.Collections.Generic;
+	using System.Diagnostics;
 	using System.Linq;
 	using System.Threading;
 	using UnityEngine;
@@ -43,6 +45,9 @@
 
         public override void VRChat_OnUiManagerInit()
         {
+			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Start();
+
             playersButton = new QMSingleButton("ShortcutMenu", -1 + ConfigManager.UI.PlayerListOffset, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
             playersButton.SetActive(ConfigManager.UI.ShowPlayersMenu);
 
@@ -54,6 +59,9 @@
             {
                 playersButton.SetTextColor(Color.red);
             }
+
+			stopwatch.Stop();
+			//Console.WriteLine($"Playerlist Created: {stopwatch.ElapsedMilliseconds}ms");
         }
 
         public override void OnLateUpdate()
@@ -134,7 +142,10 @@
 
         public static void CreateButton(PlayerListData player, float xPos, float yPos)
         {
-            var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, $"{player.Prefix}{player.Name}", () => { if (player.Player != null) { SelectPlayer(player.Player); } }, "", player.Color, player.Color, true);
+			Stopwatch stopwatch = new Stopwatch();
+			stopwatch.Start();
+
+			var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, $"{player.Prefix}{player.Name}", () => { if (player.Player != null) { SelectPlayer(player.Player); } }, "", player.Color, player.Color, true);
             playerButton.SetResizeTextForBestFit(true);
 
             playerButton.SetActive(ConfigManager.UI.ShowPlayersList);
@@ -143,7 +154,10 @@
                 playerButton.SetActive(false);
             }
             PlayerButtons.Add(playerButton);
-        }
+
+			stopwatch.Stop();
+			//Console.WriteLine($"Button Created: {player.Name} - {stopwatch.ElapsedMilliseconds}ms");
+		}
 
         private void ResetButtons()
         {

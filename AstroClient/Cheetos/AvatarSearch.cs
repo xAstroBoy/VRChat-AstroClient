@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.Cheetos
 {
-	using AstroClient.ModDetector;
 	#region Imports
 
+	using AstroClient.ModDetector;
 	using AstroClient.Variables;
 	using AstroLibrary;
 	using AstroLibrary.Console;
@@ -13,7 +13,6 @@
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
 	using DayClientML2.Utility.MenuApi;
-	using MelonLoader;
 	using System.Collections;
 	using System.Diagnostics;
 	using System.Linq;
@@ -101,7 +100,6 @@
 					{
 						Favcat_Utils.Run_RevealWorldPedestrials();
 					}, 1.45f, 1f);
-
 				}
 			}
 			else
@@ -112,7 +110,6 @@
 					{
 						Favcat_Utils.Run_RevealWorldPedestrials();
 					}, 1.45f, 1f);
-
 				}
 			}
 

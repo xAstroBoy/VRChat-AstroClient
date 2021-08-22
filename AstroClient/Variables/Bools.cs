@@ -4,6 +4,8 @@
 
 	public class Bools
 	{
+		internal static bool AntiPortal;
+
 		internal static bool BlockRPC;
 
 		internal static bool BlockUdon;
