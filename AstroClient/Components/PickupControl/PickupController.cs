@@ -161,10 +161,21 @@
                         {
                             control.EditMode = true;
                         }
-                        if (!control.IsKinematic)
-                        {
-                            control.IsKinematic = true;
-                        }
+						// Let's use smart kinematic (Checks for Colliders present that can block and prevent the fall of the object).
+
+						if (control != null)
+						{
+							var will_it_fall_throught = control.RigidBody_Will_It_fall_throught();
+							if (!will_it_fall_throught)
+							{
+								control.RigidBody_Set_isKinematic(false);
+							}
+							else
+							{
+								control.RigidBody_Set_isKinematic(true);
+
+							}
+						}
                     }
                 }
                 HasSetRigidbodyController = true;
