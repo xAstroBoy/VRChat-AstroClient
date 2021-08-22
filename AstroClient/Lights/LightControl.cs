@@ -14,7 +14,6 @@
 	{
 		// TODO : Rewrite this Light Control Class (Borked ATM).
 
-
 		public static void UpdateFogSwitch()
 		{
 			if (FogSwitch != null)
@@ -85,20 +84,20 @@
 				else
 				{
 					ModConsole.DebugLog("Spawning a new sun!");
-					newSun = new Light();
-					isUsingASpawnedSun = true;
-					if (newSun != null)
+					NewSun = new Light();
+					IsUsingASpawnedSun = true;
+					if (NewSun != null)
 					{
-						newSun.enabled = true;
-						newSun.range = float.MaxValue;
-						newSun.type = LightType.Directional;
-						newSun.shadows = LightShadows.None;
-						newSun.color = Color.white;
-						newSun.intensity = 1f;
+						NewSun.enabled = true;
+						NewSun.range = float.MaxValue;
+						NewSun.type = LightType.Directional;
+						NewSun.shadows = LightShadows.None;
+						NewSun.color = Color.white;
+						NewSun.intensity = 1f;
 					}
 					ModConsole.DebugLog("Attempting to Set Sun to RenderSettings.Sun");
-					newSun.transform.SetParent(RenderSettings.sun.transform);
-					newSun.transform.rotation = RenderSettings.sun.transform.rotation;
+					NewSun.transform.SetParent(RenderSettings.sun.transform);
+					NewSun.transform.rotation = RenderSettings.sun.transform.rotation;
 				}
 				UpdateFogSwitch();
 			}
@@ -173,7 +172,7 @@
 				RenderSettings.sun = Origsun;
 				if (RenderSettings.sun != null)
 				{
-					if (!isUsingASpawnedSun)
+					if (!IsUsingASpawnedSun)
 					{
 						RenderSettings.sun.enabled = OriginalSunStatus;
 						RenderSettings.sun.range = OriginalSunrange;
@@ -188,18 +187,18 @@
 				RenderSettings.fogStartDistance = OrigfogStartDistance;
 				RenderSettings.fog = Origfog;
 				RenderSettings.flareFadeSpeed = OrigflareFadeSpeed;
-				if (isUsingASpawnedSun)
+				if (IsUsingASpawnedSun)
 				{
-					UnityEngine.Object.DestroyImmediate(newSun);
-					if (newSun == null)
+					UnityEngine.Object.DestroyImmediate(NewSun);
+					if (NewSun == null)
 					{
-						ModConsole.DebugLog("The Generated Sun has been destroyed  : " + newSun.ToString());
+						ModConsole.DebugLog("The Generated Sun has been destroyed  : " + NewSun.ToString());
 					}
 					else
 					{
 						ModConsole.DebugLog("Something went wrong while destroying the Generated Sun!");
 					}
-					isUsingASpawnedSun = false;
+					IsUsingASpawnedSun = false;
 				}
 				UpdateFogSwitch();
 				HasOriginalRenderEditSettings = true;
@@ -338,8 +337,8 @@
 			FogSwitch = new QMToggleButton(temp, 4, 0, "Fog ON", new Action(ToggleFog), "Fog OFF", new Action(ToggleFog), "Toggles Fog", null, null, null, false);
 		}
 
-		private static Light newSun { get; set; }
-		private static bool isUsingASpawnedSun { get; set; }
+		private static Light NewSun { get; set; }
+		private static bool IsUsingASpawnedSun { get; set; }
 		private static bool HasOriginalRenderEditSettings { get; set; } = true;
 		private static bool HasBackuppedRenderSettings { get; set; } = false;
 		private static FogMode OrigfogMode { get; set; }

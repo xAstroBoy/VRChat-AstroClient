@@ -25,7 +25,7 @@
 
         public static void ReturnObjectOwner(GameObject obj)
         {
-            ModConsole.Warning("Current Owner : " + Networking.GetOwner(obj).displayName);
+            ModConsole.Warning($"Current Owner : {Networking.GetOwner(obj).displayName}");
         }
 
         private static VRCPlayerApi Get_instance_master()

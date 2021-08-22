@@ -28,8 +28,6 @@
 			new QMSingleButton(menu, 2, 0, "Toggles all Map Items Active", () => { EnableAllObjects(); }, "Sets Map objects active, will Break Instance Locally..", null, Color.red, true);
 		}
 
-
-
 		public static void EnableAllObjects()
 		{
 			foreach(var item in GameObjectFinder.GetRootSceneObjects_Without_Avatars())

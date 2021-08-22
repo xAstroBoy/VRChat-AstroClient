@@ -1,5 +1,7 @@
 ﻿namespace AstroLoader
 {
+	#region Imports
+
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
 	using System;
@@ -7,7 +9,9 @@
 	using System.Diagnostics;
 	using System.Net.Sockets;
 
-	// #TODO  Make this retreive multiple assemblies and resources
+	#endregion
+
+	// #TODO  Make this retreive multiple resources
 	internal class AstroNetworkLoader
 	{
 		internal static HandleClient Client;
@@ -104,6 +108,7 @@
 
 		private static void OnDisconnect(object sender, EventArgs e)
 		{
+
 		}
 
 		private static void OnPacketReceived(object sender, ReceivedPacketEventArgs e)

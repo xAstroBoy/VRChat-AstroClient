@@ -30,7 +30,7 @@
             //new QMSingleButton("ShortcutMenu", 5, -0.5f, "check\nblacklist", delegate () { ModConsole.Log($"{shader_list_local}"); }, "checks the shader list.", null, null, true);
         }
 
-        public static void set_pickups(bool state)
+        public static void Set_Pickups(bool state)
         {
             foreach (VRC_Pickup vrc_Pickup in Resources.FindObjectsOfTypeAll<VRC_Pickup>())
             {
@@ -41,7 +41,7 @@
             }
         }
 
-        public static bool shader_check(Player user)
+        public static bool Shader_Check(Player user)
         {
             Il2CppArrayBase<Renderer> componentsInChildren = user.prop_VRCPlayer_0.prop_VRCAvatarManager_0.GetComponentsInChildren<Renderer>(true);
             Shader shader = Shader.Find("Standard");
@@ -81,7 +81,7 @@
                 else
                 {
                     bool flag5 = false;
-                    flag5 = shader_check(user);
+                    flag5 = Shader_Check(user);
                     if (flag5)
                     {
                         CheetosHelpers.SendHudNotification($"[!!!] nuked shaders for \"" + user.prop_APIUser_0.displayName.ToString() + "\"");

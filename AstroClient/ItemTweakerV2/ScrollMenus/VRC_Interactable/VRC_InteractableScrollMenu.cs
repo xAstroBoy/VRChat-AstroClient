@@ -31,8 +31,6 @@
 						listener.assignedbtn = btn;
 					}
 
-
-
 					scroll.Add(btn);
                 }
             });
