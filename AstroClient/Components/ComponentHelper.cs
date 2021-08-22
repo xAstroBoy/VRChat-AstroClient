@@ -82,6 +82,8 @@
             RegisterComponent<Lewdifier>();
             RegisterComponent<MaskRemover>();
 
+			RegisterComponent<EnderPearlBehaviour>();
+
             RegisterComponent<TweakerListener>();
 			RegisterComponent<GameObjectListener>();
 			RegisterComponent<ScrollMenuListener>();

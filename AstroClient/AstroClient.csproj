@@ -104,6 +104,8 @@
     <Compile Include="Components\VRC_UdonTrigger\VRC_AstroUdonTrigger.cs" />
     <Compile Include="EmojiMenu\EmojiMenu.cs" />
     <Compile Include="EmojiMenu\EmojiScrollMenu\EmojiScrollMenu.cs" />
+    <Compile Include="Enderpearl\AstroEnderPearl.cs" />
+    <Compile Include="Components\Enderpearl\EnderPearlBehaviour.cs" />
     <Compile Include="Exploits\Exploit_Exts\Teleport_Ext.cs" />
     <Compile Include="Exploits\TeleportExploit.cs" />
     <Compile Include="Extensions\Avatar_Utils_ext.cs" />
