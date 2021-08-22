@@ -11,9 +11,11 @@
             {
                 if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Mouse0))
                 {
-                    Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
-                    if (Physics.Raycast(ray, out RaycastHit raycastHit)) VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position = raycastHit.point;
-                }
+					if (Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out RaycastHit raycastHit))
+					{
+						VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position = raycastHit.point;
+					}
+				}
             }
 #endif
         }

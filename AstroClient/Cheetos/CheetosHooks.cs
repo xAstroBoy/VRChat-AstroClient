@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.Cheetos
 {
-	using AstroClient.Variables;
 	#region Imports
 
+	using AstroClient.Variables;
 	using AstroClientCore.Events;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
@@ -117,8 +117,6 @@
                 new Patch(AccessTools.Property(typeof(Time), nameof(Time.smoothDeltaTime)).GetMethod, null, GetPatch(nameof(SpoofFPS)));
                 new Patch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
                 new Patch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
-
-                //new Patch(typeof(VRCStandaloneInputModule).GetMethod(XrefTesting.OnTest.Name), GetPatch(nameof(OnTestPatch)));
 
                 ModConsole.DebugLog("[Client Cheetos Patches] DONE!");
                 Patch.DoPatches();

@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.Cheetos
 {
-	using AstroClient.Components;
+	#region Imports
+
 	using AstroClient.Variables;
 	using AstroLibrary;
 	using AstroLibrary.Console;
@@ -8,6 +9,8 @@
 	using System.Collections.Generic;
 	using UnityEngine;
 	using UnityEngine.UI;
+
+	#endregion
 
 	internal class CheetosTestStuff : GameEvents
     {
@@ -25,7 +28,7 @@
             infoBar.transform.localPosition -= new Vector3(0, 110, 0);
             infobartext.GetComponent<Text>().text = "AstroClient";
 
-            //ModConsole.CheetoLog($"VRChat Version: {VRChatVersion}, {VRChatBuild}");
+            //ModConsole.Log($"VRChat Version: {VRChatVersion}, {VRChatBuild}");
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
