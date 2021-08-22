@@ -38,7 +38,7 @@
                 name = instance.Name,
                 releaseStatus = instance.ReleaseStatus,
                 version = instance.Version,
-                supportedPlatforms = instance.SupportedPlatforms == "All " ? ApiModel.SupportedPlatforms.All : ApiModel.SupportedPlatforms.StandaloneWindows,
+                supportedPlatforms = instance.SupportedPlatforms == "All" ? ApiModel.SupportedPlatforms.All : ApiModel.SupportedPlatforms.StandaloneWindows,
             };
         }
 

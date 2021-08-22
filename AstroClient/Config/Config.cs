@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
 	using System;
+	using System.Collections.Generic;
 	using System.Reflection;
 
 	[Serializable, Obfuscation]
@@ -91,4 +92,10 @@
 
         public bool QMFreeze = false;
     }
+
+	[Serializable, Obfuscation]
+	public class ConfigFavorites
+	{
+		public List<string> Avatars = new List<string>();
+	}
 }
