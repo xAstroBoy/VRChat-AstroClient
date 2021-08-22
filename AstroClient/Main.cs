@@ -23,7 +23,6 @@
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
-	using System.Linq;
 	using System.Reflection;
 	using System.Windows.Forms;
 	using UnhollowerBaseLib;
@@ -33,7 +32,6 @@
 	using VRC.UI;
 	using AstroLibrary.Extensions;
 	using Button = UnityEngine.UI.Button;
-    [assembly: MelonOptionalDependencies("FavCat Unlocked")]
 
 #endregion Imports
 
