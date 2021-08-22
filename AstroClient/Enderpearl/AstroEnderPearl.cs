@@ -33,16 +33,36 @@ namespace AstroClient
 			gameObject.transform.position = bonePosition;
 			gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
 			gameObject.name = "AstroEnderPearl";
+
 			UnityEngine.Object.Destroy(gameObject.GetComponent<Collider>());
-			gameObject.GetOrAddComponent<BoxCollider>().size = new Vector3(1f, 1f, 1f);
-			gameObject.GetOrAddComponent<BoxCollider>().isTrigger = true;
-			gameObject.GetOrAddComponent<MeshRenderer>().material.color = Ender;
-			gameObject.GetOrAddComponent<Rigidbody>().useGravity = false;
-			gameObject.GetOrAddComponent<Rigidbody>().drag = 0f;
-			gameObject.GetOrAddComponent<Rigidbody>().angularDrag = 0.01f;
-			gameObject.GetOrAddComponent<PickupController>().pickupable = true;
-			gameObject.GetOrAddComponent<PickupController>().ThrowVelocityBoostScale = 5.5f;
-			gameObject.GetOrAddComponent<EnderPearlBehaviour>();
+
+			var collider = gameObject.GetOrAddComponent<BoxCollider>();
+			if(collider != null)
+			{
+				collider.size = new Vector3(1f, 1f, 1f);
+				collider.isTrigger = true;
+			}
+			var renderer = gameObject.GetOrAddComponent<MeshRenderer>();
+			if (renderer != null)
+			{
+				renderer.material.color = Ender;
+			}
+			var body = gameObject.GetOrAddComponent<Rigidbody>();
+			if (body != null)
+			{
+				body.useGravity = false;
+				body.drag = 0f;
+				body.angularDrag = 0.01f;
+			}
+			var pickup = gameObject.GetOrAddComponent<PickupController>();
+			if(pickup != null)
+			{
+				pickup.ForceComponent = true;
+				pickup.pickupable = true;
+				pickup.ThrowVelocityBoostScale = 5.5f;
+			}
+
+			gameObject.AddComponent<EnderPearlBehaviour>();
 			ENDER = gameObject;
 		}
 
