@@ -12,9 +12,9 @@
 		public static string[] DebugMelonPaths =
 		{
 			@"Debug\AstroClient.dll",
-			@"Debug\AstroClientCore.dll",
-			@"Debug\DontTouchMyClient.dll",
-			@"Debug\MonoDumper.dll",
+			//@"Debug\AstroClientCore.dll",
+			//Debug\DontTouchMyClient.dll",
+			//@"Debug\MonoDumper.dll",
 		};
 
 		public static string[] DebugLibraryPaths =
@@ -24,7 +24,7 @@
 
 		public static string[] DebugModulePaths =
 {
-			@"Debug\Module\AstroTestModule.dll"
+			//@"Debug\Module\AstroTestModule.dll"
 		};
 
 #endif
@@ -86,7 +86,7 @@
 				{
 					var bytes = CheetosHelpers.ExtractResource(path);
 					var dll = Assembly.Load(bytes);
-					MelonLogger.Msg($"Injected Embedded Library: {path}");
+					//MelonLogger.Msg($"Injected Embedded Library: {path}");
 				}
 				catch (Exception e)
 				{
@@ -107,7 +107,7 @@
 				try
 				{
 					var dll = Assembly.LoadFrom(path);
-					MelonLogger.Msg($"Injected Library: {path}");
+					//MelonLogger.Msg($"Injected Library: {path}");
 				}
 				catch (Exception e)
 				{
@@ -122,7 +122,7 @@
 				{
 					var dll = Assembly.LoadFile(path);
 					MelonHandler.LoadFromAssembly(dll, path);
-					MelonLogger.Msg($"Injected MelonMod/MelonPlugin: {path}");
+					//MelonLogger.Msg($"Injected MelonMod/MelonPlugin: {path}");
 				}
 				catch (Exception e)
 				{
@@ -136,7 +136,7 @@
 				try
 				{
 					_ = Assembly.LoadFile(path);
-					MelonLogger.Msg($"Injected: {path}");
+					//MelonLogger.Msg($"Injected: {path}");
 				}
 				catch (Exception e)
 				{
