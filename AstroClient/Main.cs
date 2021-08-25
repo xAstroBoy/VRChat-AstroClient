@@ -230,8 +230,8 @@
 				{
 					ModConsole.ErrorExc(e);
 				}
-				new QMSingleButton("ShortcutMenu", 5, 3, "GameObject Toggler", new Action(() => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }), "Advanced GameObject Toggler", null, null, true);
-				CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 2.5f, true);
+				new QMSingleButton("ShortcutMenu", 5, 3.5f, "GameObject Toggler", new Action(() => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }), "Advanced GameObject Toggler", null, null, true);
+				CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 3f, true);
 
 				Event_VRChat_OnUiManagerInit.SafetyRaise();
 			}

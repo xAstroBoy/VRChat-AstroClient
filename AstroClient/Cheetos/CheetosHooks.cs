@@ -13,6 +13,7 @@
 	using Harmony;
 	using MelonLoader;
 	using Newtonsoft.Json;
+	using Photon.Realtime;
 	using System;
 	using System.Collections;
 	using System.Collections.Generic;
@@ -130,12 +131,31 @@
                 new Patch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
                 new Patch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
 
+				// Experiments
+				new Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.Method_Public_Boolean_String_Object_Boolean_PDM_0)), GetPatch(nameof(LoadBalancingClient_OpWebRpc)));
+
                 ModConsole.DebugLog("[Client Cheetos Patches] DONE!");
                 Patch.DoPatches();
             }
             catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
             finally { }
         }
+
+		private static bool LoadBalancingClient_OpWebRpc(LoadBalancingClient __instance, ref string __0, ref object __1, ref bool __2)
+		{
+			string text = "LoadBalancingClient_OpWebRpc: " + __0 + ", ";
+			if (__1 != null)
+			{
+				string str = text;
+				object obj = __1;
+				ModConsole.Log(str + ((obj != null) ? obj.ToString() : null) + ", " + __2.ToString());
+			}
+			else
+			{
+				ModConsole.Log(text + "null, " + __2.ToString());
+			}
+			return true;
+		}
 
 		private static void APIUserBypass(APIUser __instance, ref bool __result)
 		{
@@ -153,7 +173,7 @@
 			}
 		}
 
-		private static bool OnConfigurePortal(PortalInternal __instance, ref string __0, ref string __1, ref int __2, ref Player __3)
+		private static bool OnConfigurePortal(PortalInternal __instance, ref string __0, ref string __1, ref int __2, ref VRC.Player __3)
 		{
 			ModConsole.Log($"Portal Spawned: {__0}, {__1}, {__2}, {__3.DisplayName()}");
 			return true;
