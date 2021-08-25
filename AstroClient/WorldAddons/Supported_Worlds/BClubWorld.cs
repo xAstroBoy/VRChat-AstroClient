@@ -13,6 +13,7 @@
 	using MelonLoader;
 	using RubyButtonAPI;
 	using System;
+	using System.Collections;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
@@ -30,6 +31,8 @@
 
 		public static RubyButtonAPI.QMNestedButton BClubExploitsPage;
 
+		public static int SpamCount = 0;
+
 		public static void InitButtons(QMTabMenu main, float x, float y)
 		{
 			BClubExploitsPage = new RubyButtonAPI.QMNestedButton(main, x, y, "BClub Exploits", "BClub Exploits", null, null, null, null, true);
@@ -40,7 +43,24 @@
 			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 4, 0, "Toggle\nLock\n4", () => { ToggleDoor(4); }, "Toggle Door Lock");
 			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 1, 1, "Toggle\nLock\n5", () => { ToggleDoor(5); }, "Toggle Door Lock");
 			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 2, 1, "Toggle\nLock\n6", () => { ToggleDoor(6); }, "Toggle Door Lock");
+
+			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 4, 3, "Spam Doorbells", () => { SpamDoorbells(); }, "Spam Doorbells");
 		}
+
+		private static void SpamDoorbells()
+		{
+			//MelonCoroutines.Start(DoSpam());
+		}
+
+		//private static IEnumerator DoSpam()
+		//{
+		//	for (int i = 0; i < 100; i++)
+		//	{
+		//		UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}").ExecuteUdonEvent();
+		//		yield return null;
+		//	}
+		//	yield break;
+		//}
 
 		private static void ToggleDoor(int doorID)
 		{
@@ -55,36 +75,36 @@
 
 				try
 				{
-					//ModConsole.DebugLog("Searching for Private Rooms Exteriors...");
-					//CreateButtonGroup(1, new Vector3(-111.00629f, 15.75226f, -0.3361053f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
-					//CreateButtonGroup(2, new Vector3(-109.28977f, 15.81609f, -4.297329f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
-					//CreateButtonGroup(3, new Vector3(-103.00354f, 15.85877f, -0.3256264f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
-					//CreateButtonGroup(4, new Vector3(-101.28438f, 15.79742f, -4.307182f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
-					//CreateButtonGroup(5, new Vector3(-95.01436f, 15.78151f, -0.3279915f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
-					//CreateButtonGroup(6, new Vector3(-93.28891f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+					ModConsole.DebugLog("Searching for Private Rooms Exteriors...");
+					CreateButtonGroup(1, new Vector3(-111.00629f, 15.75226f, -0.3361053f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+					CreateButtonGroup(2, new Vector3(-109.28977f, 15.81609f, -4.297329f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+					CreateButtonGroup(3, new Vector3(-103.00354f, 15.85877f, -0.3256264f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+					CreateButtonGroup(4, new Vector3(-101.28438f, 15.79742f, -4.307182f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+					CreateButtonGroup(5, new Vector3(-95.01436f, 15.78151f, -0.3279915f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+					CreateButtonGroup(6, new Vector3(-93.28891f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
 
-					//// nLobby/Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/VIP Out Walls
+					// Penthouse/Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/VIP Out Walls
 
-					//// VIP Room
-					//VIPRoom = GameObjectFinder.FindRootSceneObject("Bedroom VIP");
+					// VIP Room
+					VIPRoom = GameObjectFinder.FindRootSceneObject("Bedroom VIP");
 
-					//if (VIPRoom == null)
-					//{
-					//	ModConsole.Error("VIP Bedroom was not found!");
-					//}
-					//else
-					//{
-					//	VIPInsideDoor = VIPRoom.transform.FindObject("BedroomUdon/Door Inside/Door").gameObject;
+					if (VIPRoom == null)
+					{
+						ModConsole.Error("VIP Bedroom was not found!");
+					}
+					else
+					{
+						VIPInsideDoor = VIPRoom.transform.FindObject("BedroomUdon/Door Inside/Door").gameObject;
 
-					//	if (VIPInsideDoor == null)
-					//	{
-					//		ModConsole.Log("VIP Inside Door not found!");
-					//	}
-					//	else
-					//	{
-					//		ModConsole.Log("VIP Inside Door found..");
-					//	}
-					//}
+						if (VIPInsideDoor == null)
+						{
+							ModConsole.Log("VIP Inside Door not found!");
+						}
+						else
+						{
+							ModConsole.Log("VIP Inside Door found..");
+						}
+					}
 
 					//CreateVIPEntryButton(new Vector3(-80.4f, 16.0598f, -1.695f), Quaternion.Euler(0f, 90f, 0f));
 
@@ -166,7 +186,7 @@
 		// TODO : FIX THE UDON EVENT OR MAKE A LOCAL TELEPORT AND ENABLE THE ROOM WITH ONE BUTTON.
 		private GameObject CreateButtonGroup(int doorID, Vector3 position, Quaternion rotation, bool flip = false)
 		{
-			GameObject nlobby = GameObjectFinder.FindRootSceneObject("nLobby");
+			GameObject nlobby = GameObjectFinder.FindRootSceneObject("Penthouse");
 			GameObject Bedrooms = GameObjectFinder.FindRootSceneObject("Bedrooms");
 
 			if (nlobby != null && Bedrooms != null)
@@ -462,7 +482,7 @@
 			{
 				if (nlobby == null)
 				{
-					ModConsole.Error("Failed to Find NLobby!");
+					ModConsole.Error("Failed to Find Penthouse!");
 				}
 				if (Bedrooms == null)
 				{
