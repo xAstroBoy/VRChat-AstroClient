@@ -1,14 +1,17 @@
 ﻿namespace AstroClient.Cheetos
 {
+	using AstroClient.Components.SitOnPlayer;
 	#region Imports
 
 	using AstroClient.Variables;
 	using AstroLibrary;
 	using AstroLibrary.Console;
 	using AstroLibrary.Finder;
+	using Blaze.Utils;
 	using System.Collections.Generic;
 	using UnityEngine;
 	using UnityEngine.UI;
+	using VRC;
 
 	#endregion
 
@@ -31,9 +34,20 @@
             //ModConsole.Log($"VRChat Version: {VRChatVersion}, {VRChatBuild}");
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+		public override void OnPlayerJoined(Player player)
+		{
+			player.gameObject.AddComponent<NamePlates>();
+		}
+
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
-            if (Bools.IsDeveloper)
+			Player player = PlayerUtils.GetCurrentUser().GetPlayer();
+			if (player.gameObject.GetComponent<SitOnPlayer>() == null)
+			{
+				player.gameObject.AddComponent<SitOnPlayer>();
+			}
+
+			if (Bools.IsDeveloper)
             {
                 if (!DoOnce)
                 {

@@ -13,7 +13,7 @@
 		{
 			@"Debug\AstroClient.dll",
 			//@"Debug\AstroClientCore.dll",
-			//Debug\DontTouchMyClient.dll",
+			@"Debug\DontTouchMyClient.dll",
 			//@"Debug\MonoDumper.dll",
 		};
 

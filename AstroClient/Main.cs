@@ -2,7 +2,6 @@
 {
 	#region Imports
 
-	using AstroClient.AstroUtils.ItemTweaker;
 	using AstroClient.AvatarMods;
 	using AstroClient.ButtonShortcut;
 	using AstroClient.Components;

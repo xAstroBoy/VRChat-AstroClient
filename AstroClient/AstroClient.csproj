@@ -97,10 +97,11 @@
     <Compile Include="Cheetos\Astro_Interactable.cs" />
     <Compile Include="Cheetos\Astro_Interactable_Extensions.cs" />
     <Compile Include="Cheetos\AvatarFavorites.cs" />
-    <Compile Include="Cheetos\NamePlates.cs" />
+    <Compile Include="Components\NamePlates\NamePlates.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener_AudioSource.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener.cs" />
     <Compile Include="Components\Listeners\GameObjectListener.cs" />
+    <Compile Include="Components\SitOnPlayer\SitOnPlayer.cs" />
     <Compile Include="Components\VRC_UdonTrigger\UdonTrigger_Helper.cs" />
     <Compile Include="Components\VRC_UdonTrigger\VRC_AstroUdonTrigger.cs" />
     <Compile Include="EmojiMenu\EmojiMenu.cs" />

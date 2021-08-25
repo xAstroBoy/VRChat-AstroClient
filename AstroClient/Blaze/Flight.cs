@@ -1,7 +1,9 @@
 ﻿namespace AstroClient
 {
+	using AstroClient.Startup.Buttons;
 	using AstroLibrary.Extensions;
 	using System;
+	using System.Collections.Generic;
 	using UnityEngine;
 	using VRC.Animation;
 
@@ -19,12 +21,12 @@
 		private static bool flyEnabled;
 		private static bool noClipEnabled;
 
-		// Broken for some reason, gotta investigate
-		//public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
-		//{
-		//	FlyEnabled = false;
-		//	NoClipEnabled = false;
-		//}
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+		{
+			motionState = currentPlayer.GetComponent<VRCMotionState>();
+			DisableNoClip();
+			DisableFly();
+		}
 
 		public static void SetDesktopFlySpeed(float v)
 		{
@@ -43,19 +45,30 @@
 			{
 				if (value)
 				{
-					Gravity = Physics.gravity;
-					Physics.gravity = Vector3.zero;
+					EnableFly();
 				}
 				else
 				{
-					Physics.gravity = Gravity;
-					if (noClipEnabled)
-					{
-						Utils.LocalPlayer.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = true;
-					}
+					DisableNoClip();
+					DisableFly();
 				}
-				flyEnabled = value;
+
+				ExploitsMenu.RefreshFlightButtons();
 			}
+		}
+
+
+		private static void EnableFly()
+		{
+			flyEnabled = true;
+			Gravity = Physics.gravity;
+			Physics.gravity = Vector3.zero;
+		}
+
+		private static void DisableFly()
+		{
+			flyEnabled = false;
+			Physics.gravity = Gravity;
 		}
 
 		public static bool NoClipEnabled
@@ -63,14 +76,31 @@
 			get => noClipEnabled;
 			set
 			{
-				noClipEnabled = value;
-				Utils.LocalPlayer.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = !value;
-
-				if (!value && flyEnabled)
+				if (value)
 				{
-					FlyEnabled = false;
+					EnableFly();
+					EnableNoClip();
 				}
+				else
+				{
+					DisableNoClip();
+					DisableFly();
+				}
+
+				ExploitsMenu.RefreshFlightButtons();
 			}
+		}
+
+		private static void EnableNoClip()
+		{
+			noClipEnabled = true;
+			Utils.LocalPlayer.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = false;
+		}
+
+		private static void DisableNoClip()
+		{
+			noClipEnabled = false;
+			Utils.LocalPlayer.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = true;
 		}
 
 		public override void OnUpdate()
@@ -219,11 +249,10 @@
 						}
 					}
 				}
+
 				if (motionState != null)
 				{
 					motionState.Reset();
-					if (motionState.field_Private_CharacterController_0 != null)
-						motionState.field_Private_CharacterController_0.enabled = !NoClipEnabled;
 				}
 			}
 			catch { }

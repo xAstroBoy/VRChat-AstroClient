@@ -2,6 +2,7 @@
 {
 	using AstroClient.Cheetos;
 	using AstroClient.Components;
+	using AstroClient.Components.SitOnPlayer;
 	using AstroClient.Variables;
 	using AstroLibrary.Console;
 	using System;
@@ -89,8 +90,8 @@
 			RegisterComponent<ScrollMenuListener>();
 			RegisterComponent<ScrollMenuListener_AudioSource>();
 
-
-
+			RegisterComponent<SitOnPlayer>();
+			RegisterComponent<NamePlates>();
 		}
 
 		public override void OnUpdate()

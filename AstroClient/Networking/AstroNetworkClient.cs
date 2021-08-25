@@ -35,6 +35,9 @@
 		{
 			KeyManager.ReadKey();
 			ModConsole.Log("Client Connecting..");
+#if DEBUG
+			ModConsole.Log($"Key: {KeyManager.AuthKey}");
+#endif
 			Connect();
 			SetPingTimer();
 		}
