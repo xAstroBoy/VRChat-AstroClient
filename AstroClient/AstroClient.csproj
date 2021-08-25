@@ -190,7 +190,7 @@
     <Compile Include="Cheetos\CheetosTestStuff.cs" />
     <Compile Include="Cheetos\CheetosUI.cs" />
     <Compile Include="Cheetos\MediaController\MediaController.cs" />
-    <Compile Include="Cheetos\Priority.cs" />
+    <Compile Include="Cheetos\HighPriority.cs" />
     <Compile Include="Components\Avatar\MaskRemover\MaskRemover.cs" />
     <Compile Include="Components\Avatar\Lewdifier\Lewdifier.cs" />
     <Compile Include="Components\ESP\Pickup\ESP_Pickup.cs" />

@@ -99,4 +99,10 @@
 	{
 		public List<AvatarData> Avatars = new List<AvatarData>();
 	}
+
+	[Serializable, Obfuscation]
+	public class ConfigPerformance
+	{
+		public bool HighPriority = false;
+	}
 }

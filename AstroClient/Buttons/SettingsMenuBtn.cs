@@ -5,7 +5,6 @@
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
-	using System.Diagnostics;
 	using UnityEngine;
 
 	internal class SettingsMenuBtn
@@ -30,10 +29,16 @@
             QMSingleToggleButton udonRPCToggle = new QMSingleToggleButton(sub, 4, 0, "Udon Log ON", () => { ConfigManager.General.LogUdonEvents = true; }, "Udon Log OFF", () => { ConfigManager.General.LogUdonEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogUdonEvents, true);
             udonRPCToggle.SetToggleState(ConfigManager.General.LogUdonEvents, false);
 
-            QMSingleToggleButton processPriorityToggle = new QMSingleToggleButton(sub, 4, 2.5f, "Priority High", () => { Priority.CurrentPriority = ProcessPriorityClass.High; }, "Priority Normal", () => { Priority.CurrentPriority = ProcessPriorityClass.Normal; }, "Sets the process priority", Color.green, Color.red, null, Priority.CurrentPriority == ProcessPriorityClass.High, true);
-            processPriorityToggle.SetToggleState(Priority.CurrentPriority == ProcessPriorityClass.High, false);
+			// Performance Menu
 
-            QMSingleToggleButton TriggerEventToggle = new QMSingleToggleButton(sub, 1, 0.5f, "Trigger Log ON", () => { ConfigManager.General.LogTriggerEvents = true; }, "Trigger Log OFF", () => { ConfigManager.General.LogTriggerEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogTriggerEvents, true);
+			QMNestedButton performanceMenu = new QMNestedButton(sub, 4, 2f, "Performance", "Performance Menu");
+
+            QMSingleToggleButton highPriorityToggle = new QMSingleToggleButton(performanceMenu, 1, 0f, "Priority High", () => { HighPriority.IsEnabled = true; }, "Priority Normal", () => { HighPriority.IsEnabled = false; }, "Sets the process priority", Color.green, Color.red, null, HighPriority.IsEnabled, false);
+            highPriorityToggle.SetToggleState(HighPriority.IsEnabled, false);
+
+			// Other
+
+			QMSingleToggleButton TriggerEventToggle = new QMSingleToggleButton(sub, 1, 0.5f, "Trigger Log ON", () => { ConfigManager.General.LogTriggerEvents = true; }, "Trigger Log OFF", () => { ConfigManager.General.LogTriggerEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogTriggerEvents, true);
             TriggerEventToggle.SetToggleState(ConfigManager.General.LogTriggerEvents, false);
 
             QMNestedButton cameraSettings = new QMNestedButton(sub, 2, 2, "Camera", "Camera", null, null, null, null, false);

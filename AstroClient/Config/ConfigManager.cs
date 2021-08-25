@@ -33,7 +33,7 @@
 
         private static string ConfigFavoritesPath = ConfigFolder + @"\ConfigFavorites.json";
 
-        private static string ConfigProtectionsPath = ConfigFolder + @"\ConfigProtections.json";
+        private static string ConfigPerformancePath = ConfigFolder + @"\ConfigPerformance.json";
 
         #endregion Paths
 
@@ -50,6 +50,8 @@
         public static ConfigMovement Movement = new ConfigMovement();
 
         public static ConfigFavorites Favorites = new ConfigFavorites();
+
+        public static ConfigPerformance Performance = new ConfigPerformance();
 
         #endregion Config Classes
 
@@ -152,6 +154,13 @@
 				Save_Favorites();
 				ModConsole.DebugWarning($"ConfigFavorites File Created: {ConfigFavoritesPath}");
 			}
+			if (!File.Exists(ConfigFavoritesPath))
+			{
+				FileStream fs = new FileStream(ConfigPerformancePath, FileMode.Create);
+				fs.Dispose();
+				Save_Performance();
+				ModConsole.DebugWarning($"ConfigPerformance File Created: {ConfigPerformancePath}");
+			}
 
 			if (!Directory.Exists(ConfigLewdifyPath))
             {
@@ -197,6 +206,11 @@
 			JSonWriter.WriteToJsonFile(ConfigFavoritesPath, Favorites);
 			ModConsole.DebugLog("Favorites Config Saved.");
 		}
+		public static void Save_Performance()
+		{
+			JSonWriter.WriteToJsonFile(ConfigFavoritesPath, Favorites);
+			ModConsole.DebugLog("Performance Config Saved.");
+		}
 
 		public static void Save_All()
         {
@@ -207,7 +221,8 @@
             Save_Flight();
             Save_Movement();
             Save_Favorites();
-            ModConsole.Log("Config Saved.");
+            Save_Performance();
+            ModConsole.Log("Finished Saving Configuration Files.");
             SaveMutex.ReleaseMutex();
         }
 
@@ -267,7 +282,16 @@
 				ModConsole.Error("Failed to load Favorites config, creating a new one..");
 			}
 
-            ModConsole.DebugLog("Config Loaded.");
+			try
+			{
+				Performance = JSonWriter.ReadFromJsonFile<ConfigPerformance>(ConfigPerformancePath);
+			}
+			catch
+			{
+				ModConsole.Error("Failed to load Performance config, creating a new one..");
+			}
+
+			ModConsole.DebugLog("Finishes Loading Configuration Files.");
 			Save_All();
         }
     }
