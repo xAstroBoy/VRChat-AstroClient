@@ -28,6 +28,7 @@
             //FreezeTag.InitButtons(WorldCheats, 1, 2, true);
             AimFactory.InitButtons(WorldCheats, 1, 2.5f, true);
 			BOMBERio.InitButtons(WorldCheats, 2, 0);
+			BClubWorld.InitButtons(WorldCheats, 4, 2);
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)

@@ -57,17 +57,27 @@
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-            //else if (id == WorldIds.FreezeTag)
-            //{
-            //    if (FreezeTag.FreezeTagCheatsPage != null)
-            //    {
-            //        SetButtonText("Freeze Tag Cheats", "Manage Freeze Tag Cheats");
-            //        SetButtonShortcut(FreezeTag.FreezeTagCheatsPage);
-            //        SetButtonColor(Color.green);
-            //        ToggleButtonVisibilityAndInteractivity(true);
-            //    }
-            //}
-            else if (id == WorldIds.AimFactory)
+			//else if (id == WorldIds.FreezeTag)
+			//{
+			//    if (FreezeTag.FreezeTagCheatsPage != null)
+			//    {
+			//        SetButtonText("Freeze Tag Cheats", "Manage Freeze Tag Cheats");
+			//        SetButtonShortcut(FreezeTag.FreezeTagCheatsPage);
+			//        SetButtonColor(Color.green);
+			//        ToggleButtonVisibilityAndInteractivity(true);
+			//    }
+			//}
+			else if (id == WorldIds.BClub)
+			{
+				if (BClubWorld.BClubExploitsPage != null)
+				{
+					SetButtonText("BClub Exploits", "Manage BClub Exploits");
+					SetButtonShortcut(BClubWorld.BClubExploitsPage);
+					SetButtonColor(Color.green);
+					ToggleButtonVisibilityAndInteractivity(true);
+				}
+			}
+			else if (id == WorldIds.AimFactory)
             {
                 if (AimFactory.AimFactoryCheatPage != null)
                 {
