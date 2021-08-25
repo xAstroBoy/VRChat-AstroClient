@@ -11,7 +11,35 @@
 
 	public class AstroInput : GameEvents
     {
-        public GameObject LeftHandPointer { get; private set; }
+		public static string Oculus_PrimaryIndexTrigger { get; private set; } = "Oculus_CrossPlatform_PrimaryIndexTrigger";
+
+		public static string Oculus_SecondaryIndexTrigger { get; private set; } = "Oculus_CrossPlatform_SecondaryIndexTrigger";
+
+		public static string Oculus_PrimaryHandTrigger { get; private set; } = "Oculus_CrossPlatform_PrimaryHandTrigger";
+
+		public static string Oculus_SecondaryHandTrigger { get; private set; } = "Oculus_CrossPlatform_SecondaryHandTrigger";
+
+		public static string Oculus_Button_1 { get; private set; } = "Oculus_CrossPlatform_Button_1";
+
+		public static string Oculus_Button_2 { get; private set; } = "Oculus_CrossPlatform_Button_2";
+
+		public static string Oculus_Button_3 { get; private set; } = "Oculus_CrossPlatform_Button_3";
+
+		public static string Oculus_Button_4 { get; private set; } = "Oculus_CrossPlatform_Button_4";
+
+		public static string Oculus_Button_PrimaryThumbstick { get; private set; } =  "Oculus_CrossPlatform_Button_PrimaryThumbstick";
+
+		public static string Oculus_Button_SecondaryThumbstick { get; private set; } = "Oculus_CrossPlatform_Button_SecondaryThumbstick";
+
+		public static string Oculus_PrimaryThumbstickHorizontal { get; private set; } = "Oculus_CrossPlatform_PrimaryThumbstickHorizontal";
+
+		public static string Oculus_PrimaryThumbstickVertical { get; private set; } = "Oculus_CrossPlatform_PrimaryThumbstickVertical";
+
+		public static string Oculus_SecondaryThumbstickHorizontal { get; private set; } = "Oculus_CrossPlatform_SecondaryThumbstickHorizontal";
+
+		public static string Oculus_SecondaryThumbstickVertical { get; private set; } = "Oculus_CrossPlatform_SecondaryThumbstickVertical";
+
+		public GameObject LeftHandPointer { get; private set; }
 
         public GameObject RightHandPointer { get; private set; }
 
