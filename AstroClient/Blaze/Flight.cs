@@ -1,11 +1,14 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Startup.Buttons;
+	#region Imports
+
 	using AstroLibrary.Extensions;
 	using System;
 	using System.Collections.Generic;
 	using UnityEngine;
 	using VRC.Animation;
+
+	#endregion
 
 	/// <summary>
 	/// Thanks to Blaze <3
@@ -119,21 +122,18 @@
 					transform = Camera.main.transform;
 				}
 
-				/*if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
+				if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
                 {
-                    if (!GlobalSettings.Fly)
-                        Buttons.Fly.setToggleState(true, true);
-                    else
-                        Buttons.Fly.setToggleState(false, true);
+					FlyEnabled = !FlyEnabled;
+					NoClipEnabled = FlyEnabled;
+					ExploitsMenu.RefreshFlightButtons();
                 }
 
                 if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
                 {
-                    if (!GlobalSettings.NoClip)
-                        Buttons.NoClip.setToggleState(true, true);
-                    else
-                        Buttons.NoClip.setToggleState(false, true);
-                }*/
+					NoClipEnabled = !NoClipEnabled;
+					ExploitsMenu.RefreshFlightButtons();
+                }
 
 				if (FlyEnabled)
 				{
