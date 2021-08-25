@@ -182,10 +182,6 @@
 
 		public override void OnUpdate()
 		{
-			//if (Application.targetFrameRate != int.MaxValue)
-			//{
-			//Application.targetFrameRate = int.MaxValue;
-			//}
 			if (KeyManager.IsAuthed)
 			{
 				Event_OnUpdate.SafetyRaise();

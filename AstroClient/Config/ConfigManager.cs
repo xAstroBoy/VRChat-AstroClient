@@ -208,7 +208,7 @@
 		}
 		public static void Save_Performance()
 		{
-			JSonWriter.WriteToJsonFile(ConfigFavoritesPath, Favorites);
+			JSonWriter.WriteToJsonFile(ConfigPerformancePath, Performance);
 			ModConsole.DebugLog("Performance Config Saved.");
 		}
 

@@ -104,5 +104,7 @@
 	public class ConfigPerformance
 	{
 		public bool HighPriority = false;
+
+		public bool UnlimitedFrames = false;
 	}
 }

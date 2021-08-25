@@ -23,6 +23,7 @@
 
 		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
+			Gravity = Physics.gravity;
 			motionState = currentPlayer.GetComponent<VRCMotionState>();
 			DisableNoClip();
 			DisableFly();
@@ -61,7 +62,6 @@
 		private static void EnableFly()
 		{
 			flyEnabled = true;
-			Gravity = Physics.gravity;
 			Physics.gravity = Vector3.zero;
 		}
 
@@ -250,10 +250,10 @@
 					}
 				}
 
-				if (motionState != null)
-				{
-					motionState.Reset();
-				}
+				//if (motionState != null)
+				//{
+				//	motionState.Reset();
+				//}
 			}
 			catch { }
 		}

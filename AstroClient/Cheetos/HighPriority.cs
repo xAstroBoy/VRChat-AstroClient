@@ -6,7 +6,7 @@
 
 	internal class HighPriority : GameEvents
     {
-		public override void OnApplicationStart()
+		public override void VRChat_OnUiManagerInit()
 		{
 			if (ConfigManager.Performance.HighPriority)
 			{
@@ -47,7 +47,6 @@
 			finally
 			{
 				ConfigManager.Performance.HighPriority = priority == ProcessPriorityClass.High;
-				ConfigManager.Save_Performance();
 			}
         }
     }

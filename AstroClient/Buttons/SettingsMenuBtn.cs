@@ -36,6 +36,9 @@
             QMSingleToggleButton highPriorityToggle = new QMSingleToggleButton(performanceMenu, 1, 0f, "Priority High", () => { HighPriority.IsEnabled = true; }, "Priority Normal", () => { HighPriority.IsEnabled = false; }, "Sets the process priority", Color.green, Color.red, null, HighPriority.IsEnabled, false);
             highPriorityToggle.SetToggleState(HighPriority.IsEnabled, false);
 
+			QMSingleToggleButton frameUnlimiterToggle = new QMSingleToggleButton(performanceMenu, 2, 0f, "FrameUnlimiter\nOn", () => { FrameUnlimiter.IsEnabled = true; }, "FrameUnlimiter\nOff", () => { FrameUnlimiter.IsEnabled = false; }, "Unlimit the games framerate", Color.green, Color.red, null, FrameUnlimiter.IsEnabled, false);
+			frameUnlimiterToggle.SetToggleState(FrameUnlimiter.IsEnabled, false);
+
 			// Other
 
 			QMSingleToggleButton TriggerEventToggle = new QMSingleToggleButton(sub, 1, 0.5f, "Trigger Log ON", () => { ConfigManager.General.LogTriggerEvents = true; }, "Trigger Log OFF", () => { ConfigManager.General.LogTriggerEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogTriggerEvents, true);
