@@ -3,12 +3,14 @@
 	#region Imports
 
 	using AstroClient.Variables;
+	using AstroLibrary;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Utility;
 	using Harmony;
 	using System;
 	using System.Reflection;
+	using UnhollowerBaseLib;
 	using UnityEngine;
 	using VRC;
 	using VRC.SDKBase;
@@ -20,39 +22,48 @@
         public static event EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
 
         //public static
-        private HarmonyLib.Harmony harmony1;
-
-        private HarmonyLib.Harmony harmony2;
+        private HarmonyLib.Harmony harmony;
 
         public override void ExecutePriorityPatches()
         {
             MiscUtility.DelayFunction(1f, new Action(() =>
             {
-                HookRPCEvent1();
+                InitPatches();
             }));
         }
 
-        public void HookRPCEvent1()
+        public void InitPatches()
         {
             try
             {
-                if (harmony1 == null)
+                if (harmony == null)
                 {
-                    harmony1 = new HarmonyLib.Harmony(BuildInfo.Name + " RPCEventHook1");
+                    harmony = new HarmonyLib.Harmony(BuildInfo.Name + " RPCEventHook");
                 }
 
-                harmony1.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent1), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
-                ModConsole.DebugLog("Hooked VRC_EventDispatcherRFC 1");
+                harmony.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
+                ModConsole.DebugLog("RPC Hooks Done");
             }
             catch
             {
-                harmony1.UnpatchAll();
-                HookRPCEvent1();
+                harmony.UnpatchAll();
+                InitPatches();
             }
         }
 
-        private static bool OnRPCEvent1(Player __0, VRC_EventHandler.VrcEvent __1, VRC_EventHandler.VrcBroadcastType __2, int __3, float __4)
-        {
+		private static bool OnRPCEvent(ref Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
+		{
+			if (__1 == null) return false;
+
+			bool log = ConfigManager.General.LogRPCEvents;
+			bool blocked = Bools.BlockRPC;
+
+			if (__1.Name.Length >= 100 || __1.ParameterString.Length >= 100)
+			{
+				ModConsole.Log($"{__0.DisplayName()}: Sent Malicious RPC!");
+				return false;
+			}
+
             string actionstring = string.Empty;
             string actiontext;
             try
@@ -76,9 +87,6 @@
             string parameter = __1.ParameterString ?? "null";
             string eventtype = __1.EventType != null ? __1.EventType.ToString() : "null";
             string broadcasttype = __2 != null ? __2.ToString() : "Null";
-
-            bool log = ConfigManager.General.LogRPCEvents;
-			bool blocked = Bools.BlockRPC;
 
             if (name.Equals("USpeak"))
             {

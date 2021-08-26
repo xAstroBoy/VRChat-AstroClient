@@ -21,6 +21,8 @@
     {
         private static QMSingleButton playersButton;
 
+        private static QMSingleButton refreshButton;
+
         public static List<QMSingleButton> PlayerButtons { get; } = new List<QMSingleButton>();
 
         private static readonly Color InstanceMasterColor = Color.cyan;
@@ -48,7 +50,10 @@
 			Stopwatch stopwatch = new Stopwatch();
 			stopwatch.Start();
 
-            playersButton = new QMSingleButton("ShortcutMenu", -1 + ConfigManager.UI.PlayerListOffset, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
+            refreshButton = new QMSingleButton("ShortcutMenu", -1 + ConfigManager.UI.PlayerListOffset, -1.5f, "Refresh", () => { RefreshButtons(); }, "Refresh player list", null, null, true);
+			refreshButton.SetActive(ConfigManager.UI.ShowPlayersMenu);
+
+			playersButton = new QMSingleButton("ShortcutMenu", -1 + ConfigManager.UI.PlayerListOffset, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
             playersButton.SetActive(ConfigManager.UI.ShowPlayersMenu);
 
             if (ConfigManager.UI.ShowPlayersList)
@@ -66,34 +71,34 @@
 
         public override void OnLateUpdate()
         {
-			if (ConfigManager.UI.ShowPlayersList && ConfigManager.UI.ShowPlayersMenu)
-			{
-				if (RefreshTime >= 16f)
-				{
-					RefreshButtons();
-					RefreshTime = 0;
-				}
-				else
-				{
-					RefreshTime += 1f * Time.deltaTime;
-				}
-			}
+			//if (ConfigManager.UI.ShowPlayersList && ConfigManager.UI.ShowPlayersMenu)
+			//{
+			//	if (RefreshTime >= 16f)
+			//	{
+			//		RefreshButtons();
+			//		RefreshTime = 0;
+			//	}
+			//	else
+			//	{
+			//		RefreshTime += 1f * Time.deltaTime;
+			//	}
+			//}
         }
 
 		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
-            MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
+            //MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
         }
 
 		public override void OnPhotonJoined(Photon.Realtime.Player player)
         {
-            MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
+            //MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
         }
 
         public override void OnPhotonLeft(Photon.Realtime.Player player)
         {
-            RefreshButtons();
-            RefreshTime = 0f;
+            //RefreshButtons();
+            //RefreshTime = 0f;
         }
 
         private void RefreshButtons()
@@ -196,6 +201,7 @@
             ConfigManager.UI.ShowPlayersMenu = true;
             playersButton.SetTextColor(Color.green);
 
+            refreshButton.SetActive(true);
             playersButton.SetActive(true);
 
             foreach (var button in PlayerButtons)
@@ -209,6 +215,7 @@
             ConfigManager.UI.ShowPlayersMenu = false;
             playersButton.SetTextColor(Color.red);
 
+            refreshButton.SetActive(false);
             playersButton.SetActive(false);
 
             foreach (var button in PlayerButtons)
