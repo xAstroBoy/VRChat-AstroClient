@@ -44,6 +44,15 @@
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugCheetos|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>D:\Steam Library\steamapps\common\VRChat\plugins\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>8.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="MelonLoader">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "AstroServer": {
+      "commandName": "Project"
+    },
+    "AstroClient": {
+      "commandName": "Executable"
+    }
+  }
+}

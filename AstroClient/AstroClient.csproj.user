@@ -3,4 +3,15 @@
   <PropertyGroup>
     <ProjectView>ShowAllFiles</ProjectView>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugCheetos|AnyCPU'">
+    <StartAction>Program</StartAction>
+    <StartProgram>D:\Steam Library\steamapps\common\VRChat\VRChat.exe</StartProgram>
+    <StartArguments>--no-vr</StartArguments>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartAction>Program</StartAction>
+    <StartProgram>D:\Steam Library\steamapps\common\VRChat\VRChat.exe</StartProgram>
+    <StartArguments>--no-vr</StartArguments>
+    <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>
+  </PropertyGroup>
 </Project>

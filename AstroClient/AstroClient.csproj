@@ -34,14 +34,26 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
     <NoWarn>CS0169;CS0472</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>8.0</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_Offline|AnyCPU'">
+    <OutputPath>D:\Steam Library\steamapps\common\VRChat\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;OFFLINE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <NoWarn>CS0169;CS0472</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_Offline|AnyCPU'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugCheetos|AnyCPU'">
     <OutputPath>D:\Steam Library\steamapps\common\VRChat\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;OFFLINE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;CHEETOS</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Optimize>true</Optimize>
     <NoWarn>CS0169;CS0472</NoWarn>
@@ -373,10 +385,6 @@
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Assembly-CSharp-firstpass.dll</HintPath>
-    </Reference>
-    <Reference Include="AWSSDK.Core">
-      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\AWSSDK.Core.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Boo.Lang">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Boo.Lang.dll</HintPath>
@@ -934,10 +942,6 @@
     </Reference>
     <Reference Include="UnityEngine.TilemapModule">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.TilemapModule.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.Timeline">
-      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.Timeline.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.UI">
