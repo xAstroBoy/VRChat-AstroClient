@@ -1,7 +1,10 @@
 ﻿namespace AstroClient.WorldAddons
 {
+	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
 	using RubyButtonAPI;
+	using System.Collections.Generic;
+	using System.Linq;
 	using UnityEngine;
 	using VRC.SDKBase;
 
@@ -20,12 +23,17 @@
 			_ = new QMSingleButton(JustHPartyMenu, 1, 1, "Toggle\nLock\n5", () => { ToggleDoor(5); }, "Toggle Door Lock");
 			_ = new QMSingleButton(JustHPartyMenu, 2, 1, "Toggle\nLock\n6", () => { ToggleDoor(6); }, "Toggle Door Lock");
 
-			_ = new QMSingleButton(JustHPartyMenu, 1, 3, "Go\nTo\nRooms", () => { GoToRooms(); }, "Go To Rooms");
+			_ = new QMSingleButton(JustHPartyMenu, 1, 2.5f, "Go To Rooms", () => { GoToRooms(); }, "Go To Rooms", null, Color.cyan, true);
+		}
+
+		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+		{
+			GameObjectFinder.Find("기믹/3f delete (1)")?.gameObject.DestroyMeLocal();
 		}
 
 		private static void GoToRooms()
 		{
-			GameObjectFinder.Find("기믹/LOBBY/엘베/엘베 3층").GetComponent<VRC_Trigger>().Interact();
+			GameObjectFinder.Find("기믹/LOBBY/엘베/엘베 3층").GetComponents<VRC_Trigger>().ToList()[1].Interact();
 		}
 
 		private static void ToggleDoor(int doorID)
