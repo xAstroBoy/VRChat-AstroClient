@@ -33,6 +33,8 @@
 
 		public static int SpamCount = 0;
 
+		public static float DoorbellTime = 0f;
+
 		public static void InitButtons(QMTabMenu main, float x, float y)
 		{
 			BClubExploitsPage = new RubyButtonAPI.QMNestedButton(main, x, y, "BClub Exploits", "BClub Exploits", null, null, null, null, true);
@@ -44,23 +46,75 @@
 			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 1, 1, "Toggle\nLock\n5", () => { ToggleDoor(5); }, "Toggle Door Lock");
 			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 2, 1, "Toggle\nLock\n6", () => { ToggleDoor(6); }, "Toggle Door Lock");
 
-			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 4, 3, "Spam Doorbells", () => { SpamDoorbells(); }, "Spam Doorbells");
+			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 3, 2, "Enter VIP", () => { EnterVIPRoom(); }, "Enter VIP Room");
+			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 4, 2, "Spam Doorbells", () => { SpamDoorbells(); }, "Spam Doorbells");
+			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 5, 0, "BlueChair\nEveryone", () => { BlueChairSpam(); }, "BlueChair Spam");
 		}
 
 		private static void SpamDoorbells()
 		{
-			//MelonCoroutines.Start(DoSpam());
+			MelonCoroutines.Start(DoDoorbellSpam());
 		}
 
-		//private static IEnumerator DoSpam()
-		//{
-		//	for (int i = 0; i < 100; i++)
-		//	{
-		//		UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}").ExecuteUdonEvent();
-		//		yield return null;
-		//	}
-		//	yield break;
-		//}
+		private static IEnumerator DoDoorbellSpam()
+		{
+			DoorbellTime += 1 * Time.deltaTime;
+
+			if (DoorbellTime < 1f)
+			{
+				yield return null;
+			}
+			else
+			{
+				DoorbellTime = 0;
+			}
+
+			for (int i = 0; i < 100; i++)
+			{
+				var bells = WorldUtils.Get_UdonBehaviours().Where(b => b.name == "Doorbell");
+
+				foreach (var bell in bells)
+				{
+					bell.FindUdonEvent("DingDong")?.ExecuteUdonEvent();
+				}
+				yield return null;
+			}
+
+			yield break;
+		}
+
+		private static void BlueChairSpam()
+		{
+			MelonCoroutines.Start(DoBlueChairSpam());
+		}
+
+		private static IEnumerator DoBlueChairSpam()
+		{
+			DoorbellTime += 1 * Time.deltaTime;
+
+			if (DoorbellTime < 1f)
+			{
+				yield return null;
+			}
+			else
+			{
+				DoorbellTime = 0f;
+			}
+
+
+			for (int i = 0; i < 100; i++)
+			{
+				var chairs = WorldUtils.Get_UdonBehaviours().Where(b => b.name.Contains("Blue Chair"));
+
+				foreach (var chair in chairs)
+				{
+					chair.FindUdonEvent("Sit")?.ExecuteUdonEvent();
+				}
+				yield return null;
+			}
+
+			yield break;
+		}
 
 		private static void ToggleDoor(int doorID)
 		{
@@ -106,7 +160,7 @@
 						}
 					}
 
-					//CreateVIPEntryButton(new Vector3(-80.4f, 16.0598f, -1.695f), Quaternion.Euler(0f, 90f, 0f));
+					CreateVIPEntryButton(new Vector3(-80.4f, 16.0598f, -1.695f), Quaternion.Euler(0f, 90f, 0f));
 
 					// Click stupid warning button in elevator.
 					MiscUtils.DelayFunction(5f, () =>
@@ -130,12 +184,12 @@
 						}
 					});
 
-					//RemovePrivacyBlocksOnRooms(1);
-					//RemovePrivacyBlocksOnRooms(2);
-					//RemovePrivacyBlocksOnRooms(3);
-					//RemovePrivacyBlocksOnRooms(4);
-					//RemovePrivacyBlocksOnRooms(5);
-					//RemovePrivacyBlocksOnRooms(6);
+					RemovePrivacyBlocksOnRooms(1);
+					RemovePrivacyBlocksOnRooms(2);
+					RemovePrivacyBlocksOnRooms(3);
+					RemovePrivacyBlocksOnRooms(4);
+					RemovePrivacyBlocksOnRooms(5);
+					RemovePrivacyBlocksOnRooms(6);
 					//PatchPatreonList();
 					//PatchPatreonNode();
 				}
@@ -146,6 +200,17 @@
 			}
 		}
 
+		private static void EnterVIPRoom()
+		{
+			if (VIPRoom != null)
+			{
+				VIPRoom.SetActive(true);
+			}
+
+			Utils.LocalPlayer.gameObject.transform.position = VIPInsideDoor.transform.position + new Vector3(0.5f, 0, 0);
+			Utils.LocalPlayer.gameObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+		}
+
 		private void CreateVIPEntryButton(Vector3 position, Quaternion rotation)
 		{
 			VIPInsideDoor = VIPRoom.transform.FindObject("BedroomUdon/Door Inside/Door").gameObject;
@@ -153,15 +218,9 @@
 			if (VIPInsideDoor != null)
 			{
 				_ = new WorldButton(position, rotation, "Enter\nVIP Room", () =>
-{
-	if (VIPRoom != null)
-	{
-		VIPRoom.SetActive(true);
-	}
-
-	Utils.LocalPlayer.gameObject.transform.position = VIPInsideDoor.transform.position + new Vector3(0.5f, 0, 0);
-	Utils.LocalPlayer.gameObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-});
+				{
+					EnterVIPRoom();
+				});
 			}
 		}
 

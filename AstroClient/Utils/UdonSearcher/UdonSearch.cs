@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroLibrary.Console;
+	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
 	using VRC.Udon;
@@ -8,7 +9,36 @@
 
 	public static class UdonSearch
     {
-        public static CachedUdonEvent FindUdonEvent(string action, string subaction)
+		public static List<CachedUdonEvent> FindAllUdonEvents(string action, string subaction)
+		{
+			var gameobjects = WorldUtils.Get_UdonBehaviours();
+
+			List<CachedUdonEvent> foundEvents = new List<CachedUdonEvent>();
+			var behaviours = gameobjects.Where(x => x.gameObject.name == action);
+			if (behaviours.Any())
+			{
+				foreach (var behaviour in behaviours)
+				{
+					if (behaviour._eventTable.count != 0)
+					{
+						ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+						foreach (var actionkeys in behaviour._eventTable)
+						{
+							if (actionkeys.key == subaction)
+							{
+								ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
+								foundEvents.Add(new CachedUdonEvent(behaviour, actionkeys.key));
+							}
+						}
+					}
+					return foundEvents;
+				}
+			}
+
+			return null;
+		}
+
+		public static CachedUdonEvent FindUdonEvent(string action, string subaction)
         {
             var gameobjects = WorldUtils.Get_UdonBehaviours();
 

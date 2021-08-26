@@ -58,11 +58,11 @@
 
 		public override void OnUpdate()
 		{
-			if (Input.GetKeyDown(KeyCode.BackQuote))
-			{
-				ModConsole.Log("Toggling CheetoMenu");
-				ToggleMenu();
-			}
+			//if (Input.GetKeyDown(KeyCode.BackQuote))
+			//{
+			//	ModConsole.Log("Toggling CheetoMenu");
+			//	ToggleMenu();
+			//}
 		}
 
 		private void ToggleMenu()
