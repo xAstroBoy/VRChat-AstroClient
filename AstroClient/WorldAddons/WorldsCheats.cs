@@ -4,6 +4,7 @@
 
 	using AstroClient.Variables;
 	using AstroClient.World.Hub;
+	using AstroClient.WorldAddons;
 	using AstroLibrary;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
@@ -29,6 +30,7 @@
             AimFactory.InitButtons(WorldCheats, 1, 2.5f, true);
 			BOMBERio.InitButtons(WorldCheats, 2, 0);
 			BClubWorld.InitButtons(WorldCheats, 4, 2);
+			JustHParty.InitButtons(WorldCheats, 4, 3);
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)

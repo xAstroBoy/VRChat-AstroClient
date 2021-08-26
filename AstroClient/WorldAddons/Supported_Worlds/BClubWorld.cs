@@ -76,6 +76,7 @@
 				foreach (var bell in bells)
 				{
 					bell.FindUdonEvent("DingDong")?.ExecuteUdonEvent();
+					yield return null;
 				}
 				yield return null;
 			}
@@ -92,7 +93,7 @@
 		{
 			DoorbellTime += 1 * Time.deltaTime;
 
-			if (DoorbellTime < 1f)
+			if (DoorbellTime < 2f)
 			{
 				yield return null;
 			}
@@ -101,10 +102,9 @@
 				DoorbellTime = 0f;
 			}
 
-
 			for (int i = 0; i < 100; i++)
 			{
-				var chairs = WorldUtils.Get_UdonBehaviours().Where(b => b.name.Contains("Blue Chair"));
+				var chairs = WorldUtils.Get_UdonBehaviours().Where(b => b.name.Contains("Chair") || b.name.Contains("Seat"));
 
 				foreach (var chair in chairs)
 				{

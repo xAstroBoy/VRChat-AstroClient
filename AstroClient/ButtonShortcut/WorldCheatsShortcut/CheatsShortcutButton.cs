@@ -2,6 +2,7 @@
 {
 	using AstroClient.Variables;
 	using AstroClient.World.Hub;
+	using AstroClient.WorldAddons;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;
@@ -73,6 +74,16 @@
 				{
 					SetButtonText("BClub Exploits", "Manage BClub Exploits");
 					SetButtonShortcut(BClubWorld.BClubExploitsPage);
+					SetButtonColor(Color.green);
+					ToggleButtonVisibilityAndInteractivity(true);
+				}
+			}
+			else if (id == WorldIds.JustHParty)
+			{
+				if (JustHParty.JustHPartyMenu != null)
+				{
+					SetButtonText("JustHParty Exploits", "Manage JustHParty Exploits");
+					SetButtonShortcut(JustHParty.JustHPartyMenu);
 					SetButtonColor(Color.green);
 					ToggleButtonVisibilityAndInteractivity(true);
 				}
