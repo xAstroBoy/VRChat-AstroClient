@@ -88,6 +88,16 @@
 					ToggleButtonVisibilityAndInteractivity(true);
 				}
 			}
+			else if (id == WorldIds.VoidClub)
+			{
+				if (VoidClub.VoidClubMenu != null)
+				{
+					SetButtonText("VoidClub Exploits", "Manage VoidClub Exploits");
+					SetButtonShortcut(VoidClub.VoidClubMenu);
+					SetButtonColor(Color.green);
+					ToggleButtonVisibilityAndInteractivity(true);
+				}
+			}
 			else if (id == WorldIds.AimFactory)
             {
                 if (AimFactory.AimFactoryCheatPage != null)

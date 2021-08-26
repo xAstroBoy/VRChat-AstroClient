@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.WorldAddons
 {
+	using AstroClient.Variables;
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
 	using RubyButtonAPI;
@@ -28,7 +29,10 @@
 
 		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
-			GameObjectFinder.Find("기믹/3f delete (1)")?.gameObject.DestroyMeLocal();
+			if (WorldUtils.Get_World_ID() == WorldIds.JustHParty)
+			{
+				GameObjectFinder.Find("기믹/3f delete (1)")?.gameObject.DestroyMeLocal();
+			}
 		}
 
 		private static void GoToRooms()

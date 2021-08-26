@@ -343,7 +343,8 @@
     <Compile Include="Variables\Vectors.cs" />
     <Compile Include="Variables\VRChatObjects.cs" />
     <Compile Include="Variables\WorldIds.cs" />
-    <Compile Include="WorldAddons\JustHParty.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\VoidClub.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\JustHParty.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\AimFactory.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\BClubWorld.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\BOMBERio.cs" />

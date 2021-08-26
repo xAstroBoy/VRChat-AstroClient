@@ -31,6 +31,7 @@
 			BOMBERio.InitButtons(WorldCheats, 2, 0);
 			BClubWorld.InitButtons(WorldCheats, 4, 2);
 			JustHParty.InitButtons(WorldCheats, 4, 3);
+			VoidClub.InitButtons(WorldCheats, 4, 4);
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
