@@ -19,6 +19,13 @@
 			_ = new QMSingleButton(JustHPartyMenu, 4, 0, "Toggle\nLock\n4", () => { ToggleDoor(4); }, "Toggle Door Lock");
 			_ = new QMSingleButton(JustHPartyMenu, 1, 1, "Toggle\nLock\n5", () => { ToggleDoor(5); }, "Toggle Door Lock");
 			_ = new QMSingleButton(JustHPartyMenu, 2, 1, "Toggle\nLock\n6", () => { ToggleDoor(6); }, "Toggle Door Lock");
+
+			_ = new QMSingleButton(JustHPartyMenu, 1, 3, "Go\nTo\nRooms", () => { GoToRooms(); }, "Go To Rooms");
+		}
+
+		private static void GoToRooms()
+		{
+			GameObjectFinder.Find("기믹/LOBBY/엘베/엘베 3층").GetComponent<VRC_Trigger>().Interact();
 		}
 
 		private static void ToggleDoor(int doorID)

@@ -98,6 +98,7 @@
     <Compile Include="Cheetos\Astro_Interactable_Extensions.cs" />
     <Compile Include="Cheetos\AvatarFavorites.cs" />
     <Compile Include="Cheetos\FrameUnlimiter.cs" />
+    <Compile Include="Cheetos\PlayerList.cs" />
     <Compile Include="Components\NamePlates\NamePlates.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener_AudioSource.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener.cs" />
@@ -212,7 +213,6 @@
     <Compile Include="GameEventsBehaviour.cs" />
     <Compile Include="Cheetos\CameraStuff\FOV.cs" />
     <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
-    <Compile Include="Cheetos\PlayerList.cs" />
     <Compile Include="Cheetos\StreamerProtector.cs" />
     <Compile Include="GameObject\Cloner\ObjectCloner.cs" />
     <Compile Include="Components\ComponentsBtn.cs" />
