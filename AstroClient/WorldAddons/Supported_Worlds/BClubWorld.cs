@@ -27,18 +27,48 @@
 
 		public static GameObject VIPInsideDoor;
 
-		public static List<Renderer> VIPHallRenderers = new List<Renderer>();
-
 		public static RubyButtonAPI.QMNestedButton BClubExploitsPage;
 
 		public static int SpamCount = 0;
 
 		public static float DoorbellTime = 0f;
 
+		private static RubyButtonAPI.QMToggleButton SpamDoorbellsToggle;
+
+		private static bool _isDoorBellSpamEnabled;
+
+		public static bool IsDoorbellSpamEnabled
+		{
+			get => _isDoorBellSpamEnabled;
+			set
+			{
+				if (value)
+				{
+					if (_isDoorBellSpamEnabled)
+					{
+						ModConsole.Log("Doorbell Spam Already Running!");
+						return;
+					}
+					else
+					{
+						ModConsole.Log("Doorbell Spam Enabled!");
+						_isDoorBellSpamEnabled = true;
+						SpamDoorbells();
+					}
+				}
+				else
+				{
+					ModConsole.Log("Doorbell Spam Disabled!");
+					_isDoorBellSpamEnabled = false;
+				}
+			}
+		}
+
 		public static void InitButtons(QMTabMenu main, float x, float y)
 		{
 			BClubExploitsPage = new RubyButtonAPI.QMNestedButton(main, x, y, "BClub Exploits", "BClub Exploits", null, null, null, null, true);
 
+			// Locks
 			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 1, 0, "Toggle\nLock\n1", () => { ToggleDoor(1); }, "Toggle Door Lock");
 			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 2, 0, "Toggle\nLock\n2", () => { ToggleDoor(2); }, "Toggle Door Lock");
 			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 3, 0, "Toggle\nLock\n3", () => { ToggleDoor(3); }, "Toggle Door Lock");
@@ -46,10 +76,16 @@
 			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 1, 1, "Toggle\nLock\n5", () => { ToggleDoor(5); }, "Toggle Door Lock");
 			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 2, 1, "Toggle\nLock\n6", () => { ToggleDoor(6); }, "Toggle Door Lock");
 
+			// VIP
 			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 3, 2, "Enter VIP", () => { EnterVIPRoom(); }, "Enter VIP Room");
-			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 4, 2, "Spam Doorbells", () => { SpamDoorbells(); }, "Spam Doorbells");
-			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 5, 0, "BlueChair\nEveryone", () => { BlueChairSpam(); }, "BlueChair Spam");
+
+			// Spamming
+			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 5, -1, "BlueChair\nEveryone", () => { BlueChairSpam(); }, "BlueChair Spam");
+			SpamDoorbellsToggle = new RubyButtonAPI.QMToggleButton(BClubExploitsPage, 5, 0, "Spam Doorbells", () => { IsDoorbellSpamEnabled = true; }, "Spam Doorbells", () => { IsDoorbellSpamEnabled = false; }, "Toggle Doorbell Spam");
+			SpamDoorbellsToggle.SetToggleState(IsDoorbellSpamEnabled, false);
 		}
+
+		private static List<UdonBehaviour> _bells = new List<UdonBehaviour>();
 
 		private static void SpamDoorbells()
 		{
@@ -58,30 +94,34 @@
 
 		private static IEnumerator DoDoorbellSpam()
 		{
-			DoorbellTime += 1 * Time.deltaTime;
-
-			if (DoorbellTime < 1f)
+			for (; ; )
 			{
-				yield return null;
-			}
-			else
-			{
-				DoorbellTime = 0;
-			}
+				DoorbellTime += 1 * Time.deltaTime;
 
-			for (int i = 0; i < 100; i++)
-			{
-				var bells = WorldUtils.Get_UdonBehaviours().Where(b => b.name == "Doorbell");
+				if (DoorbellTime < 1000f)
+				{
+					yield return null;
+				}
+				else
+				{
+					DoorbellTime = 0;
+				}
 
-				foreach (var bell in bells)
+				foreach (var bell in _bells)
 				{
 					bell.FindUdonEvent("DingDong")?.ExecuteUdonEvent();
 					yield return null;
 				}
-				yield return null;
-			}
 
-			yield break;
+				if (IsDoorbellSpamEnabled)
+				{
+					yield return null;
+				}
+				else
+				{
+					yield break;
+				}
+			}
 		}
 
 		private static void BlueChairSpam()
@@ -125,6 +165,7 @@
 		{
 			if (id == WorldIds.BClub)
 			{
+				_bells = WorldUtils.Get_UdonBehaviours().Where(b => b.name == "Doorbell").ToList();
 				ModConsole.Log($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
 				try
