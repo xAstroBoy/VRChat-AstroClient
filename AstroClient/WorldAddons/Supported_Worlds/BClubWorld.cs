@@ -124,6 +124,8 @@
 			}
 		}
 
+		private static float BlueChairTime;
+
 		private static void BlueChairSpam()
 		{
 			MelonCoroutines.Start(DoBlueChairSpam());
@@ -131,15 +133,15 @@
 
 		private static IEnumerator DoBlueChairSpam()
 		{
-			DoorbellTime += 1 * Time.deltaTime;
+			BlueChairTime += 1 * Time.deltaTime;
 
-			if (DoorbellTime < 2f)
+			if (BlueChairTime < 0.5f)
 			{
 				yield return null;
 			}
 			else
 			{
-				DoorbellTime = 0f;
+				BlueChairTime = 0f;
 			}
 
 			for (int i = 0; i < 100; i++)
@@ -149,6 +151,7 @@
 				foreach (var chair in chairs)
 				{
 					chair.FindUdonEvent("Sit")?.ExecuteUdonEvent();
+					yield return null;
 				}
 				yield return null;
 			}
