@@ -3,6 +3,7 @@
 	using AstroClient.Cheetos;
 	using AstroClient.Startup.Hooks;
 	using AstroClientCore.Events;
+	using AstroLibrary.Console;
 	using System;
 	using System.Collections.Generic;
 	using UnityEngine;
@@ -125,7 +126,8 @@
         }
 
         private void Internal_OnAvatarSpawn(object sender, OnAvatarSpawnArgs e)
-        {
+		{
+			ModConsole.Log("Avatar Spawned..");
             OnAvatarSpawn(e.VRCAvatarManager, e.Avatar);
         }
 

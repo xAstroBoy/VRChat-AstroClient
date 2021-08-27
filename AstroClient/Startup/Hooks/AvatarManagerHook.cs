@@ -18,10 +18,7 @@
 	{
 		public static event EventHandler<OnAvatarSpawnArgs> Event_OnAvatarSpawn;
 
-		public override void ExecutePriorityPatches()
-		{
-			HookAvatarManager();
-		}
+		public override void OnApplicationStart() => HookAvatarManager();
 
 		private void HookAvatarManager()
 		{
@@ -61,13 +58,15 @@
 
 				unsafe
 				{
-					var originalMethodPointer = *(IntPtr*)(IntPtr)UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(moveNext).GetValue(null);
+                    var originalMethodPointer = *(IntPtr*)(IntPtr)UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(moveNext).GetValue(null);
+
+					//originalMethodPointer = XrefScannerLowLevel.JumpTargets(originalMethodPointer).First();
 
 					VoidDelegate originalDelegate = null;
 
 					void TaskMoveNextPatch(IntPtr taskPtr, IntPtr nativeMethodInfo)
 					{
-						var avatarManager = *(IntPtr*)(taskPtr + fieldOffset);
+						var avatarManager = *(IntPtr*)(taskPtr + fieldOffset - 16);
 						using (new AvatarManagerCookie(new VRCAvatarManager(avatarManager)))
 							originalDelegate(taskPtr, nativeMethodInfo);
 					}
@@ -80,21 +79,24 @@
 				}
 			}
 
-			ModConsole.DebugLog("Hooked VRCAvatarManager");
+			ModConsole.Log("Hooked VRCAvatarManager");
 		}
 
 		private static IntPtr ObjectInstantiatePatch(IntPtr assetPtr, Vector3 pos, Quaternion rot,
 	byte allowCustomShaders, byte isUI, byte validate, IntPtr nativeMethodPointer, ObjectInstantiateDelegate originalInstantiateDelegate)
 		{
 			if (AvatarManagerCookie.CurrentManager == null || assetPtr == IntPtr.Zero)
+			{
+				ModConsole.Log($"AvatarCookieManager: {AvatarManagerCookie.CurrentManager?.name.ToString()}, {assetPtr}");
 				return originalInstantiateDelegate(assetPtr, pos, rot, allowCustomShaders, isUI, validate, nativeMethodPointer);
+			}
 
 			var avatarManager = AvatarManagerCookie.CurrentManager;
 			var vrcPlayer = avatarManager.field_Private_VRCPlayer_0;
 			if (vrcPlayer == null) return originalInstantiateDelegate(assetPtr, pos, rot, allowCustomShaders, isUI, validate, nativeMethodPointer);
 
-			if (vrcPlayer == VRCPlayer.field_Internal_Static_VRCPlayer_0) // never apply to self
-				return originalInstantiateDelegate(assetPtr, pos, rot, allowCustomShaders, isUI, validate, nativeMethodPointer);
+			//if (vrcPlayer == VRCPlayer.field_Internal_Static_VRCPlayer_0) // never apply to self
+			//	return originalInstantiateDelegate(assetPtr, pos, rot, allowCustomShaders, isUI, validate, nativeMethodPointer);
 
 			var go = new Object(assetPtr).TryCast<GameObject>();
 			if (go == null)
@@ -108,6 +110,7 @@
 			var instantiated = new GameObject(result);
 			try
 			{
+				ModConsole.Log("Attempting to invoke avatar spawning..");
 				OnAvatarSpawnEvent(AvatarManagerCookie.CurrentManager, instantiated);
 			}
 			catch (Exception ex)

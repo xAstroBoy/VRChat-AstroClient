@@ -134,7 +134,7 @@
 				// Experiments
 				new Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.Method_Public_Boolean_String_Object_Boolean_PDM_0)), GetPatch(nameof(LoadBalancingClient_OpWebRpc)));
 
-                ModConsole.DebugLog("[Client Cheetos Patches] DONE!");
+                ModConsole.Log("[Client Cheetos Patches] DONE!");
                 Patch.DoPatches();
             }
             catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
