@@ -6,6 +6,7 @@
 	using AstroClientCore.Events;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using AstroNetworkingLibrary;
 	using AstroNetworkingLibrary.Serializable;
 	using DayClientML2.Utility;
@@ -205,7 +206,7 @@
 			{
 				if (AstroClient.ConfigManager.General.SpoofQuest)
 				{
-					if (!RoomManagerExtension.IsInWorld())
+					if (!WorldUtils.IsInWorld())
 					{
 						__result = "android";
 					}
@@ -220,7 +221,7 @@
         {
             try
             {
-                if (AstroClient.ConfigManager.General.SpoofPing)
+                if (AstroClient.ConfigManager.General.SpoofPing && WorldUtils.IsInWorld())
                 {
 					Temporary.RealPing = __result;
                     __result = AstroClient.ConfigManager.General.SpoofedPing;
@@ -234,7 +235,7 @@
         {
             try
             {
-                if (AstroClient.ConfigManager.General.SpoofFPS)
+                if (AstroClient.ConfigManager.General.SpoofFPS && WorldUtils.IsInWorld())
                 {
 					Temporary.RealFPS = __result;
                     __result = (float)1f / AstroClient.ConfigManager.General.SpoofedFPS;

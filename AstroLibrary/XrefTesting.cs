@@ -2,6 +2,7 @@
 {
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using System;
 	using System.Linq;
 	using System.Reflection;
@@ -379,7 +380,7 @@
                         && m.XRefScanForMethod(null, "VRCTrackingManager")
                         && m.XRefScanForMethod(null, "InputStateController"));
                 }
-                return (AlignTrackingToPlayerDelegate)Delegate.CreateDelegate(typeof(AlignTrackingToPlayerDelegate), Utils.CurrentUser, alignTrackingToPlayerMethod);
+                return (AlignTrackingToPlayerDelegate)Delegate.CreateDelegate(typeof(AlignTrackingToPlayerDelegate), PlayerUtils.GetVRCPlayer(), alignTrackingToPlayerMethod);
             }
         }
 

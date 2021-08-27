@@ -122,10 +122,10 @@
     <Compile Include="EmojiMenu\EmojiScrollMenu\EmojiScrollMenu.cs" />
     <Compile Include="Enderpearl\AstroEnderPearl.cs" />
     <Compile Include="Components\Enderpearl\EnderPearlBehaviour.cs" />
+    <Compile Include="Experiments\CameraTweaker.cs" />
     <Compile Include="Exploits\Exploit_Exts\Teleport_Ext.cs" />
     <Compile Include="Exploits\TeleportExploit.cs" />
     <Compile Include="Extensions\Avatar_Utils_ext.cs" />
-    <Compile Include="Extensions\Bones_ext.cs" />
     <Compile Include="Extensions\Button_strings_ext.cs" />
     <Compile Include="Extensions\Buttons_ext.cs" />
     <Compile Include="Extensions\Click_ext.cs" />
@@ -160,7 +160,6 @@
     <Compile Include="Extensions\ItemTweaker_ext.cs" />
     <Compile Include="Extensions\Online_ext.cs" />
     <Compile Include="Extensions\Pickup_ext.cs" />
-    <Compile Include="Extensions\Player_ext.cs" />
     <Compile Include="Extensions\Position_ext.cs" />
     <Compile Include="Extensions\Rigidbody_ext.cs" />
     <Compile Include="Extensions\Scale_ext.cs" />
@@ -170,7 +169,7 @@
     <Compile Include="AvatarMods\AvatarModifier.cs" />
     <Compile Include="AvatarMods\AvatarUtils.cs" />
     <Compile Include="AvatarMods\LewdifierUtils.cs" />
-    <Compile Include="Blaze\Flight.cs" />
+    <Compile Include="Cheetos\Flight.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
     <Compile Include="Buttons\ESP\PlayerESPMenu.cs" />
@@ -216,7 +215,6 @@
     <Compile Include="Components\Listeners\TweakerListener.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigManager.cs" />
-    <Compile Include="Experiments\CameraTweaker.cs" />
     <Compile Include="Features\Player\Clones\Clones.cs" />
     <Compile Include="Features\Player\Movement\Exploit\MovementSerializer.cs" />
     <Compile Include="Features\Player\Movement\JumpModifier.cs" />
@@ -343,7 +341,7 @@
     <Compile Include="Utils\QPens\QVPensUtils.cs" />
     <Compile Include="Utils\QuickMenuUtils.cs" />
     <Compile Include="Utils\UdonSearcher\UdonSearch.cs" />
-    <Compile Include="Utils\World\WorldUtils.cs" />
+    <Compile Include="Utils\World\WorldUtils_Old.cs" />
     <Compile Include="Utils\XrefScannerUtils.cs" />
     <Compile Include="Variables\Temporary.cs" />
     <Compile Include="Variables\Bools.cs" />

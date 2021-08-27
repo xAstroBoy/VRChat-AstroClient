@@ -2,7 +2,7 @@
 {
 	#region Imports
 
-	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using System;
 	using System.Collections.Generic;
 	using UnityEngine;
@@ -12,7 +12,7 @@
 
 	/// <summary>
 	/// Thanks to Blaze <3
-	/// Slight modifications by Cheetos.
+	/// Fixed by Cheetos.
 	/// </summary>
 	internal class Flight : GameEvents
 	{
@@ -97,18 +97,18 @@
 		private static void EnableNoClip()
 		{
 			noClipEnabled = true;
-			Utils.LocalPlayer.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = false;
+			PlayerUtils.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = false;
 		}
 
 		private static void DisableNoClip()
 		{
 			noClipEnabled = false;
-			Utils.LocalPlayer.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = true;
+			PlayerUtils.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = true;
 		}
 
 		public override void OnUpdate()
 		{
-			if (RoomManagerExtension.GetWorldInstance() == null || PopupManager.IsTyping)
+			if (WorldUtils.GetWorldInstance() == null || PopupUtils.IsTyping)
 			{
 				return;
 			}
@@ -117,8 +117,8 @@
 			{
 				if (currentPlayer == null || transform == null)
 				{
-					currentPlayer = Utils.LocalPlayer.GetVRCPlayer();
-					isInVR = MiscExtension.IsInVR();
+					currentPlayer = PlayerUtils.GetVRCPlayer();
+					isInVR = currentPlayer.IsInVR();
 					transform = Camera.main.transform;
 				}
 

@@ -1,10 +1,10 @@
-﻿namespace AstroLibrary.Extensions
+﻿namespace AstroLibrary.Utility
 {
 	using UnityEngine;
 	using VRC;
 	using Vector3 = UnityEngine.Vector3;
 
-	public static class Bones_ext
+	public static class BonesUtils
 	{
 		public static Transform Get_Player_Bone_Transform(this Player player, HumanBodyBones bone)
 		{
@@ -21,7 +21,7 @@
 
 		public static Vector3? Get_Player_Bone_Position(this Player player, HumanBodyBones bone)
 		{
-			return player != null ? (Vector3?)player.Get_Player_Bone_Transform(bone).position : null;
+			return player != null ? player.Get_Player_Bone_Transform(bone).position : null;
 		}
 
 		public static Vector3? Get_Center_Of_Player(this Player player)
@@ -30,7 +30,7 @@
 			var headPos = player.Get_Player_Bone_Position(HumanBodyBones.Head);
 			var lFootPos = player.Get_Player_Bone_Position(HumanBodyBones.LeftFoot);
 			return headPos != null && lFootPos != null
-				? (Vector3?)new Vector3(center.x, headPos.Value.y - (Vector3.Distance(headPos.Value, lFootPos.Value) / 2f), center.z)
+				? new Vector3(center.x, headPos.Value.y - Vector3.Distance(headPos.Value, lFootPos.Value) / 2f, center.z)
 				: null;
 		}
 	}

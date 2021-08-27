@@ -2,6 +2,7 @@
 {
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using RubyButtonAPI;
 	using System;
 	using System.Windows.Forms;

@@ -15,7 +15,7 @@
         {
             if (FreezePlayerOnQMOpen)
             {
-                if (QuickMenuUtils.IsQuickMenuOpen)
+                if (QuickMenuUtils_Old.IsQuickMenuOpen)
                 {
                     Freeze();
                 }

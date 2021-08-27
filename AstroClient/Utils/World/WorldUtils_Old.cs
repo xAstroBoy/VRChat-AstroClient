@@ -19,7 +19,7 @@
 
 	#endregion
 
-	public class WorldUtils : GameEvents
+	public class WorldUtils_Old : GameEvents
     {
         public static List<GameObject> Get_Prefabs()
         {
@@ -450,19 +450,6 @@
             return null;
         }
 
-        public static List<string> Get_World_tags()
-        {
-            var instance = RoomManager.field_Internal_Static_ApiWorld_0;
-            if (instance != null)
-            {
-                if (instance.tags != null)
-                {
-                    return instance.tags.ToArray().ToList();
-                }
-            }
-            return null;
-        }
-
         public static string Get_World_ID()
         {
             var instance = RoomManager.field_Internal_Static_ApiWorld_0;
@@ -471,19 +458,6 @@
                 if (instance.id != null)
                 {
                     return instance.id;
-                }
-            }
-            return null;
-        }
-
-        public static string Get_World_AssetUrl()
-        {
-            var instance = RoomManager.field_Internal_Static_ApiWorld_0;
-            if (instance != null)
-            {
-                if (instance.assetUrl != null)
-                {
-                    return instance.assetUrl;
                 }
             }
             return null;

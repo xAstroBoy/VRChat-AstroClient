@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Startup
 {
 	using AstroLibrary.Console;
-	using Blaze.Utils;
+	using AstroLibrary.Utility;
 	using System.Collections.Generic;
 	using System.Linq;
 

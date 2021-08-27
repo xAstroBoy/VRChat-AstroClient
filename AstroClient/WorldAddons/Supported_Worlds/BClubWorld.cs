@@ -8,8 +8,7 @@
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
-	using Blaze.API;
-	using Blaze.Utils;
+	using AstroLibrary.Utility;
 	using MelonLoader;
 	using RubyButtonAPI;
 	using System;
@@ -27,13 +26,13 @@
 
 		public static GameObject VIPInsideDoor;
 
-		public static RubyButtonAPI.QMNestedButton BClubExploitsPage;
+		public static QMNestedButton BClubExploitsPage;
 
 		public static int SpamCount = 0;
 
 		public static float DoorbellTime = 0f;
 
-		private static RubyButtonAPI.QMToggleButton SpamDoorbellsToggle;
+		private static QMToggleButton SpamDoorbellsToggle;
 
 		private static bool _isDoorBellSpamEnabled;
 
@@ -66,22 +65,22 @@
 
 		public static void InitButtons(QMTabMenu main, float x, float y)
 		{
-			BClubExploitsPage = new RubyButtonAPI.QMNestedButton(main, x, y, "BClub Exploits", "BClub Exploits", null, null, null, null, true);
+			BClubExploitsPage = new QMNestedButton(main, x, y, "BClub Exploits", "BClub Exploits", null, null, null, null, true);
 
 			// Locks
-			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 1, 0, "Toggle\nLock\n1", () => { ToggleDoor(1); }, "Toggle Door Lock");
-			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 2, 0, "Toggle\nLock\n2", () => { ToggleDoor(2); }, "Toggle Door Lock");
-			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 3, 0, "Toggle\nLock\n3", () => { ToggleDoor(3); }, "Toggle Door Lock");
-			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 4, 0, "Toggle\nLock\n4", () => { ToggleDoor(4); }, "Toggle Door Lock");
-			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 1, 1, "Toggle\nLock\n5", () => { ToggleDoor(5); }, "Toggle Door Lock");
-			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 2, 1, "Toggle\nLock\n6", () => { ToggleDoor(6); }, "Toggle Door Lock");
+			_ = new QMSingleButton(BClubExploitsPage, 1, 0, "Toggle\nLock\n1", () => { ToggleDoor(1); }, "Toggle Door Lock");
+			_ = new QMSingleButton(BClubExploitsPage, 2, 0, "Toggle\nLock\n2", () => { ToggleDoor(2); }, "Toggle Door Lock");
+			_ = new QMSingleButton(BClubExploitsPage, 3, 0, "Toggle\nLock\n3", () => { ToggleDoor(3); }, "Toggle Door Lock");
+			_ = new QMSingleButton(BClubExploitsPage, 4, 0, "Toggle\nLock\n4", () => { ToggleDoor(4); }, "Toggle Door Lock");
+			_ = new QMSingleButton(BClubExploitsPage, 1, 1, "Toggle\nLock\n5", () => { ToggleDoor(5); }, "Toggle Door Lock");
+			_ = new QMSingleButton(BClubExploitsPage, 2, 1, "Toggle\nLock\n6", () => { ToggleDoor(6); }, "Toggle Door Lock");
 
 			// VIP
-			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 3, 2, "Enter VIP", () => { EnterVIPRoom(); }, "Enter VIP Room");
+			_ = new QMSingleButton(BClubExploitsPage, 3, 2, "Enter VIP", () => { EnterVIPRoom(); }, "Enter VIP Room");
 
 			// Spamming
-			_ = new RubyButtonAPI.QMSingleButton(BClubExploitsPage, 5, -1, "BlueChair\nEveryone", () => { BlueChairSpam(); }, "BlueChair Spam");
-			SpamDoorbellsToggle = new RubyButtonAPI.QMToggleButton(BClubExploitsPage, 5, 0, "Spam Doorbells", () => { IsDoorbellSpamEnabled = true; }, "Spam Doorbells", () => { IsDoorbellSpamEnabled = false; }, "Toggle Doorbell Spam");
+			_ = new QMSingleButton(BClubExploitsPage, 5, -1, "BlueChair\nEveryone", () => { BlueChairSpam(); }, "BlueChair Spam");
+			SpamDoorbellsToggle = new QMToggleButton(BClubExploitsPage, 5, 0, "Spam Doorbells", () => { IsDoorbellSpamEnabled = true; }, "Spam Doorbells", () => { IsDoorbellSpamEnabled = false; }, "Toggle Doorbell Spam");
 			SpamDoorbellsToggle.SetToggleState(IsDoorbellSpamEnabled, false);
 		}
 
@@ -146,7 +145,7 @@
 
 			for (int i = 0; i < 100; i++)
 			{
-				var chairs = WorldUtils.Get_UdonBehaviours().Where(b => b.name.Contains("Chair") || b.name.Contains("Seat"));
+				var chairs = WorldUtils.GetUdonScripts().Where(b => b.name.Contains("Chair") || b.name.Contains("Seat"));
 
 				foreach (var chair in chairs)
 				{
@@ -168,7 +167,7 @@
 		{
 			if (id == WorldIds.BClub)
 			{
-				_bells = WorldUtils.Get_UdonBehaviours().Where(b => b.name == "Doorbell").ToList();
+				_bells = WorldUtils.GetUdonScripts().Where(b => b.name == "Doorbell").ToList();
 				ModConsole.Log($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
 				try
@@ -602,7 +601,7 @@
 				var patreonlist = GameObjectFinder.Find("/Udon/Patreon Lists");
 				if (patreonlist != null)
 				{
-					var node = patreonlist.GetComponent<VRC.Udon.UdonBehaviour>();
+					var node = patreonlist.GetComponent<UdonBehaviour>();
 					var disassembled = node.DisassembleUdonBehaviour();
 					if (disassembled != null)
 					{
@@ -633,7 +632,7 @@
 				var patreonlist = GameObjectFinder.Find("Udon/Patreon");
 				if (patreonlist != null)
 				{
-					var node = patreonlist.GetComponent<VRC.Udon.UdonBehaviour>();
+					var node = patreonlist.GetComponent<UdonBehaviour>();
 				var disassembled = node.DisassembleUdonBehaviour();
 				if (disassembled != null)
 				{

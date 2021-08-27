@@ -10,6 +10,7 @@
 	using UnhollowerBaseLib;
 	using UnityEngine;
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 
 	public class OnWorldRevealHook : GameEvents
 	{
@@ -71,7 +72,7 @@
 					if (fadeType.Equals("BlackFade") && duration.Equals(0f) &&
 						RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
 					{
-						Event_OnWorldReveal.SafetyRaise(new OnWorldRevealArgs(WorldUtils.Get_World_ID(), WorldUtils.Get_World_Name(), WorldUtils.Get_World_tags(), WorldUtils.Get_World_AssetUrl()));
+						Event_OnWorldReveal.SafetyRaise(new OnWorldRevealArgs(WorldUtils.GetWorldID(), WorldUtils.GetWorldName(), WorldUtils.GetWorldTags(), WorldUtils.GetWorldAssetURL()));
 						//Task.Run(() => {  });
 					}
 				}

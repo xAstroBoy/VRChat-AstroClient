@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
 	using AstroClient.Components;
-	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using RubyButtonAPI;
 	using System;
 	using UnityEngine;
@@ -88,7 +88,7 @@
 
         private static void AddESPToAllPlayers()
         {
-            foreach (var item in WorldUtils.Get_Players())
+            foreach (var item in WorldUtils.GetPlayers())
             {
                 if (item != Utils.LocalPlayer.GetPlayer())
                 {
@@ -102,7 +102,7 @@
 
         private static void RemoveAllActivePlayerESPs()
         {
-            foreach (var player in WorldUtils.Get_Players())
+            foreach (var player in WorldUtils.GetPlayers())
             {
                 var esp = player.gameObject.GetComponent<PlayerESP>();
                 if (esp != null)

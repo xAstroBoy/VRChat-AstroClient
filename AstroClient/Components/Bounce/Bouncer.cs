@@ -42,7 +42,7 @@
 
 		private void OnCollisionEnter(Collision collision)
 		{
-			MiscUtility.TakeOwnershipIfNecessary(gameObject);
+			GameObjectUtils.TakeOwnershipIfNecessary(gameObject);
 			if (!BounceTowardPlayer)
 			{
 				Bounce(collision.contacts[0].normal);
@@ -66,7 +66,7 @@
 		{
 			var speed = lastFrameVelocity.magnitude;
 			var bounceDirection = Vector3.Reflect(lastFrameVelocity.normalized, collisionNormal);
-			var directionToPlayer = Utils.LocalPlayer.GetVRCPlayer().transform.position - transform.position;
+			var directionToPlayer = PlayerUtils.GetPlayer().GetVRCPlayer().transform.position - transform.position;
 
 			var direction = Vector3.Lerp(bounceDirection, directionToPlayer, bias);
 

@@ -2,16 +2,12 @@
 {
 	using AstroClient.ModDetector;
 	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using FavCat.Database.Stored;
 	using FavCat.Modules;
 	using MelonLoader;
-	using RubyButtonAPI;
 	using System;
-	using System.Collections.Generic;
 	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
 	using UnityEngine;
 
 	public class Favcat_Utils : GameEvents
@@ -72,7 +68,7 @@
 				yield return null;
 			}
 			IsRunning = true;
-			var ids = WorldUtils.Get_World_Pedestrals_Avatar_ids();
+			var ids = WorldUtils_Old.Get_World_Pedestrals_Avatar_ids();
 			if (ids.Count() != 0)
 			{
 				System.Collections.Generic.List<StoredAvatar> StoredAvatars = new System.Collections.Generic.List<StoredAvatar>();
@@ -115,16 +111,16 @@
 					}
 					else
 					{
-						ModConsole.DebugLog("Waiting On Pedestal Dump To Load Pedestals Into Avatar Menu.. - Current Count: " + StoredAvatars.Count + "/" + ids.Count);
+						ModConsole.DebugLog($"Waiting On Pedestal Dump To Load Pedestals Into Avatar Menu.. - Current Count: {StoredAvatars.Count}/{ids.Count()}");
 						ModConsole.DebugLog($"Attempt of {Attemptcount} / {limit}...");
 					}
 					yield return new WaitForSeconds(0.8f);
 				}
 				ModConsole.DebugLog("Done!");
 				AvatarModule.SetSearchHeader("Search running...", Scroll: false);
-				AvatarModule.AvatarSearchResults("Avatar Pedestals From: " + WorldUtils.Get_World_Name(), StoredAvatars);
+				AvatarModule.AvatarSearchResults("Avatar Pedestals From: " + WorldUtils.GetWorldName(), StoredAvatars);
 				yield return new WaitForSeconds(1f);
-				AvatarModule.SetSearchHeader("Avatar Pedestals From: " + WorldUtils.Get_World_Name(), false);
+				AvatarModule.SetSearchHeader("Avatar Pedestals From: " + WorldUtils.GetWorldName(), false);
 				IsRunning = false;
 				yield return null;
 			}

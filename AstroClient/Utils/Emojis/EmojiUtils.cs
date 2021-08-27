@@ -2,6 +2,7 @@
 {
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using MelonLoader;
 	using RubyButtonAPI;
 	using System;

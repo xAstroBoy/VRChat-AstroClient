@@ -2,7 +2,6 @@
 {
 	using AstroLibrary.Console;
 	using AstroLibrary.Utility;
-	using Blaze.Utils;
 	using Transmtn.DTO;
 	using Transmtn.DTO.Notifications;
 	using UnityEngine;
@@ -59,7 +58,7 @@
                     string senderUserId = Utils.QuickMenu.Notification().senderUserId;
                     NotificationDetails notificationDetails = new NotificationDetails();
                     notificationDetails["worldId"] = WorldUtils.GetFullID();
-                    notificationDetails["worldName"] = RoomManagerExtension.GetWorld().name;
+                    notificationDetails["worldName"] = WorldUtils.GetWorld().name;
                     Utils.NotificationManager.SendNotification(senderUserId, "invite", string.Empty, notificationDetails);
                 }
             }

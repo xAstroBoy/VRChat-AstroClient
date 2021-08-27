@@ -3,6 +3,7 @@
 	using AstroClient.Components;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using System;
 	using UnityEngine;
 
@@ -19,7 +20,7 @@
                     if (targetuser != null)
                     {
                         TargetSelector.CurrentTarget = targetuser;
-                        foreach (var item in WorldUtils.Get_Pickups())
+                        foreach (var item in WorldUtils_Old.Get_Pickups())
                         {
                             if (item != null)
                             {
@@ -47,7 +48,7 @@
                     if (targetuser != null)
                     {
                         TargetSelector.CurrentTarget = targetuser;
-                        foreach (var item in WorldUtils.Get_Pickups())
+                        foreach (var item in WorldUtils_Old.Get_Pickups())
                         {
                             try
                             {
@@ -83,7 +84,7 @@
                     if (targetuser != null)
                     {
                         TargetSelector.CurrentTarget = targetuser;
-                        foreach (var item in WorldUtils.Get_Pickups())
+                        foreach (var item in WorldUtils_Old.Get_Pickups())
                         {
                             if (item != null)
                             {
@@ -115,7 +116,7 @@
                     if (targetuser != null)
                     {
                         TargetSelector.CurrentTarget = targetuser;
-                        foreach (var item in WorldUtils.Get_Pickups())
+                        foreach (var item in WorldUtils_Old.Get_Pickups())
                         {
                             if (item != null)
                             {
@@ -280,7 +281,7 @@
 
         public static void DisablePickupKinematic(bool useGravity)
         {
-            foreach (var item in WorldUtils.Get_Pickups())
+            foreach (var item in WorldUtils_Old.Get_Pickups())
             {
                 if (item != null)
                 {

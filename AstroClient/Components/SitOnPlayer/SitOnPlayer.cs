@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Components.SitOnPlayer
 {
+	using AstroLibrary.Utility;
 	using Blaze.Utils;
 	using System;
 	using UnityEngine;
@@ -81,7 +82,7 @@
 		private static Transform PositionOfBone(Player player, HumanBodyBones bone)
 		{
 			Transform bonePosition = player.transform;
-			VRCAvatarManager avatarManager = player.GetVRCPlayer().prop_VRCAvatarManager_0;
+			VRCAvatarManager avatarManager = player.GetVRCPlayer().GetAvatarManager();
 			if (!avatarManager)
 				return bonePosition;
 			Animator animator = avatarManager.field_Private_Animator_0;

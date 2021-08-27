@@ -5,6 +5,7 @@
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
+	using AstroLibrary.Utility;
 	using RubyButtonAPI;
 	using System;
 	using System.Collections.Generic;

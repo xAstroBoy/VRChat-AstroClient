@@ -4,7 +4,7 @@
 
 	using AstroLibrary;
 	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using RubyButtonAPI;
 	using UnityEngine;
 

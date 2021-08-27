@@ -10,7 +10,7 @@
     <RootNamespace>AstroLibrary</RootNamespace>
     <AssemblyName>AstroLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-	<LangVersion>9.0</LangVersion>
+    <LangVersion>9.0</LangVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -752,18 +752,19 @@
     <Compile Include="Blaze%27s Utils\FileManager.cs" />
     <Compile Include="Blaze%27s Utils\JsonWriter.cs" />
     <Compile Include="Blaze%27s Utils\Logs.cs" />
-    <Compile Include="Blaze%27s Utils\MiscUtils.cs" />
+    <Compile Include="Utility\BonesUtils.cs" />
+    <Compile Include="Utility\GameObjectUtils.cs" />
+    <Compile Include="Utility\MiscUtils.cs" />
     <Compile Include="Blaze%27s Utils\ModerationHelper.cs" />
     <Compile Include="Blaze%27s Utils\NetworkUtils.cs" />
     <Compile Include="Blaze%27s Utils\PhotonUtils.cs" />
-    <Compile Include="Blaze%27s Utils\PlayerUtils.cs" />
+    <Compile Include="Utility\PlayerUtils.cs" />
     <Compile Include="Blaze%27s Utils\PopupUtils.cs" />
-    <Compile Include="Blaze%27s Utils\QuickMenuUtils.cs" />
     <Compile Include="Blaze%27s Utils\SerializationUtils.cs" />
     <Compile Include="Blaze%27s Utils\SocialMenuUtils.cs" />
     <Compile Include="Blaze%27s Utils\UdonUtils.cs" />
     <Compile Include="Blaze%27s Utils\VRCUiManagerUtils.cs" />
-    <Compile Include="Blaze%27s Utils\WorldUtils.cs" />
+    <Compile Include="Utility\WorldUtils.cs" />
     <Compile Include="CheetosConsole\Console.cs" />
     <Compile Include="CheetosConsole\DefaultFonts.cs" />
     <Compile Include="CheetosConsole\Extensions.cs" />
@@ -773,7 +774,7 @@
     <Compile Include="CheetosConsole\StyledString.cs" />
     <Compile Include="CheetosConsole\VirtualTerminalSequences.cs" />
     <Compile Include="CheetosHelpers.cs" />
-    <Compile Include="Extensions\CameraExtension.cs" />
+    <Compile Include="Utility\CameraUtils.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\MiscExtension.cs" />
     <Compile Include="Extensions\ModerationManagerExtension.cs" />
@@ -782,9 +783,8 @@
     <Compile Include="Extensions\PhotonExtensions.cs" />
     <Compile Include="Extensions\PlayerExtensions.cs" />
     <Compile Include="Extensions\PlayerManagerExtension.cs" />
-    <Compile Include="Extensions\PopupManagerExtension.cs" />
-    <Compile Include="Extensions\QuickMenuExtension.cs" />
-    <Compile Include="Extensions\RoomManagerExtension.cs" />
+    <Compile Include="Utility\PopupManagerExtension.cs" />
+    <Compile Include="Utility\QuickMenuUtils.cs" />
     <Compile Include="Extensions\VRCUiManagerExtension.cs" />
     <Compile Include="Extensions\VRInput.cs" />
     <Compile Include="Managers\AchievmentsManager.cs" />
@@ -837,7 +837,7 @@
     <Compile Include="ModConsole.cs" />
     <Compile Include="GameObjectFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Extensions\Utils.cs" />
+    <Compile Include="Utility\Utils.cs" />
     <Compile Include="VRChatObjects.cs" />
     <Compile Include="XrefTesting.cs" />
   </ItemGroup>

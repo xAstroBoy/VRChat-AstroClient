@@ -3,10 +3,8 @@
 
 	#region Imports
 
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using UnityEngine;
-	using UnityEngine.UI;
 
 	#endregion Imports
 
@@ -73,7 +71,7 @@
 			if (IsOpen)
 			{
 				Transform ptransform = Utils.LocalPlayer.GetPlayer().transform;
-				Vector3? center = Utils.LocalPlayer.GetPlayer().Get_Center_Of_Player();
+				Vector3? center = PlayerUtils.GetPlayer().Get_Center_Of_Player();
 				if (center != null && ptransform != null)
 				{
 					UI.transform.position = center.Value + (ptransform.forward * 0.30f);

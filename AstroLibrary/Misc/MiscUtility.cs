@@ -1,6 +1,7 @@
 ﻿namespace AstroLibrary.Utility
 {
-	using AstroLibrary.Console;
+	#region Imports
+
 	using AstroLibrary.Extensions;
 	using RubyButtonAPI;
 	using System;
@@ -11,6 +12,8 @@
 	using UnityEngine.UI;
 	using VRC;
 	using VRC.SDKBase;
+
+	#endregion
 
 	public static class MiscUtility
     {
@@ -158,23 +161,6 @@
             Vector3 positionbase = Base.transform.position;
             Vector3 positiontarget = target.transform.position;
             return Vector3.Distance(positionbase, positiontarget);
-        }
-
-        public static bool TakeOwnershipIfNecessary(GameObject gameObject)
-        {
-            if (GetOwnerOfGameObject(gameObject) != Utils.CurrentUser._player)
-                Networking.SetOwner(Utils.CurrentUser.field_Private_VRCPlayerApi_0, gameObject);
-            return GetOwnerOfGameObject(gameObject) != Utils.CurrentUser._player;
-        }
-
-        public static Player GetOwnerOfGameObject(GameObject gameObject)
-        {
-            foreach (Player player in Utils.PlayerManager.AllPlayers())
-            {
-                if (player.field_Private_VRCPlayerApi_0.IsOwner(gameObject))
-                    return player;
-            }
-            return null;
         }
 
         public static Player GetOwnerOfGameObjectButBetter(GameObject gameObject) => Utils.PlayerManager.AllPlayers().Where(plr => plr.GetVRCPlayerApi().IsOwner(gameObject)).FirstOrDefault();

@@ -1,5 +1,6 @@
 ﻿namespace AstroLibrary.Extensions
 {
+	using AstroLibrary.Utility;
 	using Il2CppSystem.Collections.Generic;
 	using System;
 	using VRC.Core;

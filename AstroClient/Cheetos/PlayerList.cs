@@ -4,7 +4,6 @@
 
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Utility;
-	using CheetosConsole;
 	using MelonLoader;
 	using RubyButtonAPI;
 	using System.Collections;
@@ -36,14 +35,6 @@
         private static float RefreshTime;
 
         private static Mutex refreshMutex = new Mutex();
-
-        public static bool IsReady
-        {
-            get
-            {
-                return Utils.LoadBalancingPeer != null && Utils.LoadBalancingPeer.prop_Room_0 != null && Utils.LoadBalancingPeer.prop_Room_0.prop_Dictionary_2_Int32_Player_0 != null;
-            }
-        }
 
         public override void VRChat_OnUiManagerInit()
         {
@@ -103,7 +94,7 @@
 
         private void RefreshButtons()
         {
-            if (IsReady && ConfigManager.UI.ShowPlayersList && ConfigManager.UI.ShowPlayersMenu)
+            if (WorldUtils.IsInWorld() && ConfigManager.UI.ShowPlayersList && ConfigManager.UI.ShowPlayersMenu)
             {
                 refreshMutex.WaitOne();
                 var players = new List<PlayerListData>();

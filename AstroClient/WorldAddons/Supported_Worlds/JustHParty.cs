@@ -3,6 +3,7 @@
 	using AstroClient.Variables;
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
+	using AstroLibrary.Utility;
 	using RubyButtonAPI;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -29,7 +30,7 @@
 
 		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
-			if (WorldUtils.Get_World_ID() == WorldIds.JustHParty)
+			if (WorldUtils.GetWorldID() == WorldIds.JustHParty)
 			{
 				GameObjectFinder.Find("기믹/3f delete (1)")?.gameObject.DestroyMeLocal();
 			}

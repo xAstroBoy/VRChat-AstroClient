@@ -1,5 +1,6 @@
 ﻿namespace AstroLibrary.Extensions
 {
+	using AstroLibrary.Utility;
 	using RubyButtonAPI;
 	using UnityEngine;
 	using UnityEngine.UI;

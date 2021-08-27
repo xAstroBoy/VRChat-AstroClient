@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.Cheetos
 {
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using System.Collections.Generic;
 
 	public class StreamerProtector : GameEvents
@@ -26,7 +27,7 @@
 
 		private static bool ExploitCheck()
 		{
-			var players = WorldUtils.Get_Players();
+			var players = WorldUtils.GetPlayers();
 
 			foreach (var player in players)
 			{

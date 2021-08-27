@@ -2,6 +2,7 @@
 {
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using System.Linq;
 	using UnityEngine;
 	using VRC.SDKBase;
@@ -15,7 +16,7 @@
 
         public static void RemoveOwnerShip(GameObject obj)
         {
-            Networking.SetOwner(Get_instance_master(), obj);
+            Networking.SetOwner(GetInstanceMaster(), obj);
         }
 
         public static bool IsLocalPlayerOwner(GameObject obj)
@@ -28,9 +29,9 @@
             ModConsole.Warning($"Current Owner : {Networking.GetOwner(obj).displayName}");
         }
 
-        private static VRCPlayerApi Get_instance_master()
+        private static VRCPlayerApi GetInstanceMaster()
         {
-            return WorldUtils.Get_Players()
+            return WorldUtils.GetPlayers()
                 .ToArray()
                 .ToList()
                 .Where(x => x.GetIsMaster())

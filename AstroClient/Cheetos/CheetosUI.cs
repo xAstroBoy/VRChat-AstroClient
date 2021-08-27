@@ -1,8 +1,8 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Exploits;
 	#region Imports
 
+	using AstroClient.Exploits;
 	using AstroClient.Variables;
 	using AstroLibrary;
 	using AstroLibrary.Console;
@@ -15,7 +15,6 @@
 	using System.Collections.Generic;
 	using System.Threading;
 	using Transmtn.DTO.Notifications;
-	using UnhollowerBaseLib;
 	using UnityEngine;
 	using VRC.SDKBase;
 	using static VRC.SDKBase.VRC_EventHandler;
@@ -61,14 +60,11 @@
 			var position = Utils.LocalPlayer.gameObject.transform.position;
 			var rotation = Utils.LocalPlayer.gameObject.transform.rotation;
 
-			foreach (var player in WorldUtils.Get_Players())
+			foreach (var player in WorldUtils.GetPlayers())
 			{
 				player.TeleportRPCExploit(position, rotation);
 			}
 		}
-
-
-
 
 		private void Test3()
 		{
@@ -86,7 +82,7 @@
 
 		private IEnumerator FriendEveryone()
 		{
-			var players = WorldUtils.Get_Players();
+			var players = WorldUtils.GetPlayers();
 
 			int count = 0;
 			foreach (var player in players)
@@ -143,7 +139,7 @@
 			int i = 0;
 			while (i <= 100)
 			{
-				foreach (var player in WorldUtils.Get_Players())
+				foreach (var player in WorldUtils.GetPlayers())
 				{
 					handler.TriggerEvent(new VrcEvent
 					{
@@ -173,7 +169,7 @@
 
 			while (i <= 100)
 			{
-				foreach (var player in WorldUtils.Get_Players())
+				foreach (var player in WorldUtils.GetPlayers())
 				{
 					handler.TriggerEvent(new VrcEvent
 					{

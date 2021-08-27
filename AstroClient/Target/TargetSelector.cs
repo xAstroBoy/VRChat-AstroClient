@@ -1,7 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using System;
 	using System.Collections.Generic;
 	using VRC;
@@ -30,7 +30,7 @@
         {
             if (CurrentTarget == null)
             {
-                CurrentTarget = VRC.Core.APIUser.CurrentUser.GetPlayer();
+                CurrentTarget = PlayerUtils.GetPlayer();
             }
         }
 

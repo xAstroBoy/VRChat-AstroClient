@@ -2,6 +2,7 @@
 namespace AstroLibrary.Extensions
 {
 	using AstroLibrary.Console;
+	using AstroLibrary.Utility;
 	using MelonLoader;
 	using Newtonsoft.Json;
 	using Newtonsoft.Json.Linq;

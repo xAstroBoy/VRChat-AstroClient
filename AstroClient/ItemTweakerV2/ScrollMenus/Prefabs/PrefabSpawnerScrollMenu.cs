@@ -2,6 +2,7 @@
 {
 	using AstroClient.ItemTweakerV2.Selector;
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using RubyButtonAPI;
 	using UnityEngine;
 	using VRC.SDKBase;
@@ -14,7 +15,7 @@
 			var prefabQMScroll = new QMScrollMenu(menu);
 			prefabQMScroll.SetAction(delegate
 			{
-				foreach (var prefab in WorldUtils.Get_Prefabs())
+				foreach (var prefab in WorldUtils.GetPrefabs())
 				{
 					prefabQMScroll.Add(
 					new QMSingleButton(prefabQMScroll.BaseMenu, 0, 0, $"Spawn {prefab.name}", delegate

@@ -3,6 +3,7 @@
 	using AstroClient.GameObjectDebug;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using System;
 	using System.Runtime.InteropServices;
 	using UnhollowerRuntimeLib;
@@ -194,7 +195,7 @@
         private void OnDestroy()
         {
             control.RestoreOriginalBody();
-            GameObjectUtils.RestoreOriginalLocation(gameObject, false);
+            GameObjectMenu.RestoreOriginalLocation(gameObject, false);
             PlayerAttackerManager.RemoveSelf(gameObject);
             OnlineEditor.RemoveOwnerShip(gameObject);
             PlayerAttackerManager.Deregister(this);
@@ -260,7 +261,7 @@
         public static Transform PositionOfBone(Player player, HumanBodyBones bone)
         {
             Transform bonePosition = player.transform;
-            VRCAvatarManager avatarManager = player.GetVRCPlayer().prop_VRCAvatarManager_0;
+            VRCAvatarManager avatarManager = player.GetVRCPlayer().GetAvatarManager();
             if (!avatarManager)
                 return bonePosition;
             Animator animator = avatarManager.field_Private_Animator_0;

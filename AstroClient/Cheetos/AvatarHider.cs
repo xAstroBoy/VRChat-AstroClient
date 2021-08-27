@@ -4,9 +4,9 @@
 
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using UnityEngine;
 	using VRC;
-	using VRC.SDKBase;
 
 	#endregion Imports
 

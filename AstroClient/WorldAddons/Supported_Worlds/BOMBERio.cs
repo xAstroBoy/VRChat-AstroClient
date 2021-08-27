@@ -6,10 +6,10 @@
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
+	using AstroLibrary.Utility;
 	using RubyButtonAPI;
 	using System.Collections;
 	using System.Collections.Generic;
-	using System.Linq;
 	using UnityEngine;
 	using VRC;
 	using VRC.Udon;
@@ -34,9 +34,7 @@
 			new QMSingleButton(BOMBERioCheatsPage, 2, 2f, "Harvest 500 Crystals", () => { HarvestQuads(500); }, "Harvest some Quads!", null, null, true);
 			new QMSingleButton(BOMBERioCheatsPage, 2, 2.5f, "Harvest 1000 Crystals", () => { HarvestQuads(1000); }, "Harvest some Quads!", null, null, true);
 
-
 			Bypass_Outside_Circle_speed_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 4, 0, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = true; }, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
-
 		}
 
 		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
@@ -55,8 +53,6 @@
 
 		private bool isBomberIO = false;
 
-
-
 		public static GameObject GetRandomQuad()
 		{
 			foreach(var item in GameObjectFinder.FindRootSceneObject("ItemManager").transform.Get_Childs())
@@ -66,16 +62,13 @@
 			}
 			return null;
 		}
+
 		private static GameObject _Quad;
 		private static GameObject Quad
 		{
 			get
 			{
-				if(_Quad == null)
-				{
-					return 	_Quad = GetRandomQuad();
-				}
-				return _Quad;
+				return _Quad ??= GetRandomQuad();
 			}
 		}
 
@@ -111,10 +104,6 @@
 			yield return null;
 		}
 
-
-
-
-
 		private static void OnGameJoinEvent()
 		{
 			isInGame = true;
@@ -125,8 +114,6 @@
 			isInGame = false;
 
 		}
-
-
 
 		public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
 		{
@@ -320,7 +307,7 @@
 					}
 					catch { }
 					var Item = AssignedNode.transform.FindObject("Shooter");
-					if(Item != null)
+					if (Item != null)
 					{
 						control = Item.GetOrAddComponent<PickupController>();
 					}
@@ -337,10 +324,6 @@
 				}
 			}
 		}
-
-
-
-
 
 		public static void Change_Behaviour_Outside_Speed(float Run_Speed, float Walk_And_Strafe_Speed)
 		{

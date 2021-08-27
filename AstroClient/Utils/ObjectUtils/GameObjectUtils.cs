@@ -1,9 +1,12 @@
 ﻿namespace AstroClient.GameObjectDebug
 {
+	#region Imports
+
 	using AstroClient.Components;
 	using AstroClient.ItemTweakerV2.Selector;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using Il2CppSystem.Text;
 	using Photon.Pun;
 	using RubyButtonAPI;
@@ -21,7 +24,9 @@
 	using Color = System.Drawing.Color;
 	using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 
-	public class GameObjectUtils : GameEvents
+	#endregion
+
+	public class GameObjectMenu : GameEvents
 	{
 		public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
 		{
@@ -137,7 +142,7 @@
 
 		public static void EnableAllWorldPickups()
 		{
-			foreach (var item in WorldUtils.Get_Pickups())
+			foreach (var item in WorldUtils_Old.Get_Pickups())
 			{
 				if (!item.active)
 				{
@@ -183,7 +188,7 @@
 
 		public static void TeleportPickupsToTheirDefaultPosition(bool RestoreBodySettings)
 		{
-			foreach (var Pickup in WorldUtils.Get_Pickups())
+			foreach (var Pickup in WorldUtils_Old.Get_Pickups())
 			{
 				if (Pickup != null)
 				{
@@ -194,7 +199,7 @@
 
 		public static void DisableAllWorldPickups()
 		{
-			foreach (var item in WorldUtils.Get_Pickups())
+			foreach (var item in WorldUtils_Old.Get_Pickups())
 			{
 				if (!item.active)
 				{
@@ -265,7 +270,7 @@
 
 		public static void GetAllPickupsOwners()
 		{
-			foreach (var item in WorldUtils.Get_Pickups())
+			foreach (var item in WorldUtils_Old.Get_Pickups())
 			{
 				if (item != null)
 				{

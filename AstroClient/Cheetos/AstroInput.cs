@@ -5,6 +5,7 @@
 	using AstroClient.Cheetos;
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
+	using AstroLibrary.Utility;
 	using UnityEngine;
 
 	#endregion Imports
@@ -48,7 +49,7 @@
         public override void OnLateUpdate()
         {
             var localPlayer = Utils.LocalPlayer.GetPlayer();
-            if (WorldUtils.Get_World_ID() == null || localPlayer == null || !localPlayer.isActiveAndEnabled || QuickMenuUtils.IsQuickMenuOpen)
+            if (WorldUtils.GetWorldID() == null || localPlayer == null || !localPlayer.isActiveAndEnabled || QuickMenuUtils_Old.IsQuickMenuOpen)
             {
                 return;
             }

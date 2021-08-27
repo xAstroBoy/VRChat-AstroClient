@@ -43,9 +43,8 @@
 
             PickupQMScroll.SetAction(delegate
             {
-                foreach (var pickup in WorldUtils.Get_Pickups())
+                foreach (var pickup in WorldUtils_Old.Get_Pickups())
                 {
-
 					var btn = new QMSingleButton(PickupQMScroll.BaseMenu, 0, 0, $"Select {pickup.name}", delegate
 					{
 						Tweaker_Object.SetObjectToEdit(pickup);

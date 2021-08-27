@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroLibrary.Console;
+	using AstroLibrary.Utility;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
@@ -11,7 +12,7 @@
     {
 		public static List<CachedUdonEvent> FindAllUdonEvents(string action, string subaction)
 		{
-			var gameobjects = WorldUtils.Get_UdonBehaviours();
+			var gameobjects = WorldUtils.GetUdonScripts();
 
 			List<CachedUdonEvent> foundEvents = new List<CachedUdonEvent>();
 			var behaviours = gameobjects.Where(x => x.gameObject.name == action);
@@ -40,7 +41,7 @@
 
 		public static CachedUdonEvent FindUdonEvent(string action, string subaction)
         {
-            var gameobjects = WorldUtils.Get_UdonBehaviours();
+            var gameobjects = WorldUtils.GetUdonScripts();
 
             var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
             if (behaviour != null)

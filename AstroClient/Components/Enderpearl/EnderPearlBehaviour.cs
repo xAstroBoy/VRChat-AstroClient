@@ -1,14 +1,13 @@
-using System;
-using AstroClient.Components;
-using AstroLibrary.Console;
-using AstroLibrary.Extensions;
-using MelonLoader;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using VRCSDK2;
-
 namespace AstroClient
 {
+	using System;
+	using AstroClient.Components;
+	using AstroLibrary.Console;
+	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
+	using MelonLoader;
+	using UnityEngine;
+
 	internal class EnderPearlBehaviour : MonoBehaviour
 	{
 

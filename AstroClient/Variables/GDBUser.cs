@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.Variables
 {
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using UnityEngine;
 	using VRC;
 

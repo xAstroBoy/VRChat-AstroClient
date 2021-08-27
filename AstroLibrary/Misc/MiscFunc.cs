@@ -457,19 +457,8 @@
 
         public static void TakeOwnershipIfNecessary(GameObject gameObject)
         {
-            if (GetOwnerOfGameObject(gameObject) != Utils.CurrentUser._player)
+            if (GameObjectUtils.GetOwnerOfGameObject(gameObject) != PlayerUtils.GetVRCPlayer())
                 Networking.SetOwner(Utils.CurrentUser.field_Private_VRCPlayerApi_0, gameObject);
-        }
-
-        public static Player GetOwnerOfGameObject(GameObject gameObject)
-        {
-            foreach (Player player in Utils.PlayerManager.AllPlayers())
-            {
-                if (player.field_Private_VRCPlayerApi_0.IsOwner(gameObject))
-                    return player;
-            }
-
-            return null;
         }
 
         public static void DownloadAvatar(ApiAvatar avatar)

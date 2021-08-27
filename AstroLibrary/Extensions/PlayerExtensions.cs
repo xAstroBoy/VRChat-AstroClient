@@ -1,6 +1,7 @@
 ﻿namespace AstroLibrary.Extensions
 {
 	using AstroLibrary.Managers;
+	using AstroLibrary.Utility;
 	using UnityEngine;
 	using VRC;
 	using VRC.Core;
@@ -8,103 +9,6 @@
 
 	public static class PlayerExtensions
     {
-        #region ApiUser
-
-        public static APIUser GetAPIUser(this Player Instance)
-        {
-            return Instance?.prop_APIUser_0;
-        }
-
-        public static APIUser GetAPIUser(this VRCPlayer Instance)
-        {
-            return Instance?.GetPlayer().GetAPIUser();
-        }
-
-        public static APIUser GetAPIUser(this PlayerNet Instance)
-        {
-            return Instance?.GetPlayer().GetAPIUser();
-        }
-
-        #endregion ApiUser
-
-        #region Player
-
-        public static Player GetPlayer(this VRCPlayer Instance)
-        {
-            return Instance?._player;
-        }
-
-        public static Player GetPlayer(this PlayerNet Instance)
-        {
-            return Instance?.prop_Player_0;
-        }
-
-        public static Player GetPlayer(this VRCPlayerApi Instance)
-        {
-            return Instance == null ? null : Utils.PlayerManager.GetPlayerID(Instance.playerId);
-        }
-
-        public static Player GetTryPlayer(this APIUser Instance)
-        {
-            return Instance == null ? null : Utils.PlayerManager.GetPlayer(Instance.id);
-        }
-
-        #endregion Player
-
-        #region VRCPlayer
-
-        public static VRCPlayer GetVRCPlayer(this Player Instance)
-        {
-            return Instance?._vrcplayer;
-        }
-
-        public static VRCPlayer GetVRCPlayer(this PlayerNet Instance)
-        {
-            return Instance?._vrcPlayer;
-        }
-
-        public static VRCPlayer GetVRCPlayer(this VRCPlayerApi Instance)
-        {
-            return Instance == null ? null : Utils.PlayerManager.GetPlayerID(Instance.playerId).GetVRCPlayer();
-        }
-
-        #endregion VRCPlayer
-
-        #region VRCPlayerAPI
-
-        public static VRCPlayerApi GetVRCPlayerApi(this Player Instance)
-        {
-            return Instance?.prop_VRCPlayerApi_0;
-        }
-
-        public static VRCPlayerApi GetVRCPlayerApi(this VRCPlayer Instance)
-        {
-            return Instance?.prop_VRCPlayerApi_0;
-        }
-
-        public static VRCPlayerApi GetVRCPlayerApi(this PlayerNet Instance)
-        {
-            return Instance?.GetVRCPlayer().GetVRCPlayerApi();
-        }
-
-        #endregion VRCPlayerAPI
-
-        #region PlayerNet
-
-        public static PlayerNet GetPlayerNet(this Player Instance)
-        {
-            return Instance?.prop_PlayerNet_0;
-        }
-
-        public static PlayerNet GetPlayerNet(this VRCPlayer Instance)
-        {
-            return Instance?.prop_PlayerNet_0;
-        }
-
-        #endregion PlayerNet
-
-        #region Misc
-
         public static string UserID(this Player Instance)
         {
             return Instance.GetAPIUser().id;
@@ -199,11 +103,6 @@
             return 0.20f * num3;
         }
 
-        public static ulong GetSteamID(this VRCPlayer player)
-        {
-            return player.field_Private_UInt64_0;
-        }
-
         public static string GetPingColored(this VRCPlayer Instance)
         {
             string color;
@@ -243,44 +142,7 @@
             return $"{color}{Instance.GetQuality()}</color>";
         }
 
-        public static void ReloadAvatar(this VRCPlayer Instance)
-        {
-            VRCPlayer.Method_Public_Static_Void_APIUser_0(Instance.GetAPIUser());
-        }
-
-        public static void ReloadAvatar(this Player Instance)
-        {
-            ReloadAvatar(Instance.GetVRCPlayer());
-        }
-
-        #endregion Misc
-
         #region Ranks
-
-        public static string GetRank(this APIUser Instance)
-        {
-            if (Instance.hasModerationPowers || Instance.tags.Contains("admin_moderator"))
-                return "Moderation User";
-            if (Instance.hasSuperPowers || Instance.tags.Contains("admin_"))
-                return "Admin User";
-            if (Instance.tags.Contains("system_legend") && Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
-                return "Legend";
-            if (Instance.hasLegendTrustLevel || (Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted")))
-                return "Veteran";
-            if (Instance.hasVeteranTrustLevel)
-                return "Trusted";
-            if (Instance.hasTrustedTrustLevel)
-                return "Known";
-            if (Instance.hasKnownTrustLevel)
-                return "User";
-            if (Instance.hasBasicTrustLevel || Instance.isNewUser)
-                return "New User";
-            if (Instance.hasNegativeTrustLevel)
-                return "NegativeTrust";
-            if (Instance.hasVeryNegativeTrustLevel)
-                return "VeryNegativeTrust";
-            return "Visitor";
-        }
 
         public static RankType GetRankEnum(this APIUser Instance)
         {
@@ -413,63 +275,9 @@
             return Instance.GetPing() == 0 && Instance.GetFrames() == 0 && Instance.UserID() != APIUser.CurrentUser.id;
         }
 
-        public static Color GetRankColor(this APIUser Instance)
-        {
-            string playerRank = Instance.GetRank();
-            return playerRank.ToLower() switch
-            {
-                "legend" => ConversionManager.LegendColor,
-                "veteran" => ConversionManager.VeteranColor,
-                "trusted" => ConversionManager.TrustedColor,
-                "known" => ConversionManager.KnownColor,
-                "user" => ConversionManager.UserColor,
-                "new user" => ConversionManager.NewUserColor,
-                "visitor" => ConversionManager.VisitorsColor,
-                _ => Color.white,
-            };
-            return Color.red;
-        }
-
         #endregion Ranks
 
         #region avatar
-
-        public static ApiAvatar GetApiAvatar(this Player Instance)
-        {
-            return Instance.prop_ApiAvatar_0 ?? Instance.GetVRCPlayer().GetApiAvatar();
-        }
-
-        public static ApiAvatar GetApiAvatar(this VRCPlayer Instance)
-        {
-            return Instance.prop_ApiAvatar_0 ?? Instance.GetPlayer().GetApiAvatar();
-        }
-
-        public static GameObject GetAvatar(this Player Instance)
-        {
-            return Instance.GetVRCPlayer().GetAvatarManager().GetAvatar();
-        }
-
-        public static GameObject GetAvatar(this VRCPlayer Instance)
-        {
-            return Instance.GetAvatarManager().GetAvatar();
-        }
-
-        public static VRCAvatarManager GetAvatarManager(this VRCPlayer Instance)
-        {
-            return Instance.prop_VRCAvatarManager_0;
-        }
-
-        public static GameObject GetAvatar(this VRCAvatarManager Instance)
-        {
-            if (Instance.prop_GameObject_0 != null)
-                return Instance.prop_GameObject_0;
-            return null;
-        }
-
-        public static ApiAvatar GetAPIAvatar(this VRCAvatarManager Instance)
-        {
-            return Instance.field_Private_ApiAvatar_0;
-        }
 
         public static VRC_AvatarDescriptor GetSDK3Descriptor(this VRCAvatarManager Instance)
         {
@@ -492,24 +300,5 @@
         //}
 
         #endregion avatar
-
-        #region SelectedPlayers
-
-        public static APIUser SelectedAPIUser(this QuickMenu instance)
-        {
-            return instance.field_Private_APIUser_0;
-        }
-
-        public static VRCPlayer SelectedVRCPlayer(this QuickMenu instance)
-        {
-            return instance.SelectedPlayer().GetVRCPlayer();
-        }
-
-        public static Player SelectedPlayer(this QuickMenu instance)
-        {
-            return instance.field_Private_Player_0;
-        }
-
-        #endregion SelectedPlayers
     }
 }

@@ -1,12 +1,13 @@
 ﻿namespace AstroClient.Cheetos
 {
-	using AstroClient.Components.SitOnPlayer;
 	#region Imports
 
+	using AstroClient.Components.SitOnPlayer;
 	using AstroClient.Variables;
 	using AstroLibrary;
 	using AstroLibrary.Console;
 	using AstroLibrary.Finder;
+	using AstroLibrary.Utility;
 	using Blaze.Utils;
 	using System.Collections.Generic;
 	using UnityEngine;
@@ -41,7 +42,7 @@
 
 		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
-			Player player = PlayerUtils.GetCurrentUser().GetPlayer();
+			Player player = PlayerUtils.GetPlayer();
 			if (player.gameObject.GetComponent<SitOnPlayer>() == null)
 			{
 				player.gameObject.AddComponent<SitOnPlayer>();

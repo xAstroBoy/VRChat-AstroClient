@@ -31,8 +31,9 @@
 	using VRC.UI;
 	using AstroLibrary.Extensions;
 	using Button = UnityEngine.UI.Button;
+	using AstroLibrary.Utility;
 
-#endregion Imports
+	#endregion Imports
 
 	public class Main : MelonMod
 	{
@@ -214,7 +215,7 @@
 		{
 			if (KeyManager.IsAuthed)
 			{
-				QuickMenuUtils.SetQuickMenuCollider(5, 5);
+				QuickMenuUtils_Old.SetQuickMenuCollider(5, 5);
 				UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
 
 				InitMainsButtons();
@@ -244,7 +245,7 @@
 				DevMenu.InitButtons(10f);
 
 				ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", new Action(() => { Bools.IsDebugMode = true; }), "Debug Console OFF", new Action(() => { Bools.IsDebugMode = false; }), "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-				CopyIDButton = new QMSingleButton(AstroClient, 5, -1, "Copy\nInstance ID", delegate () { Clipboard.SetText($"{Blaze.Utils.WorldUtils.GetFullID()}"); }, "Copy the ID of the current instance.", null, null, true);
+				CopyIDButton = new QMSingleButton(AstroClient, 5, -1, "Copy\nInstance ID", delegate () { Clipboard.SetText($"{WorldUtils.GetFullID()}"); }, "Copy the ID of the current instance.", null, null, true);
 				JoinInstanceButton = new QMSingleButton(AstroClient, 5, -0.5f, "Join\nInstance", delegate () { new PortalInternal().Method_Private_Void_String_String_PDM_0(Clipboard.GetText().Split(':')[0], Clipboard.GetText().Split(':')[1]); }, "Join an instance via your clipboard.", null, null, true);
 				avatar = new QMSingleButton(AstroClient, 5, 0.5f, "Avatar\nBy ID", delegate () { string text = Clipboard.GetText(); if (text.StartsWith("avtr_")) new PageAvatar { field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal { field_Internal_ApiAvatar_0 = new ApiAvatar { id = text } } }.ChangeToSelectedAvatar(); else MelonLogger.Error("Clipboard does not contains Avatar ID!"); }, "Alows you to change into a public avatar with its id.", null, null, true);
 
@@ -264,7 +265,7 @@
 				SkyboxEditor.CustomSkyboxesMenu(AstroClient, 1, 0, true);
 				LightControl.InitButtons(AstroClient, 1, 0.5f, true);
 				AvatarModifier.InitQMMenu(AstroClient, 1, 1, true);
-				GameObjectUtils.InitButtons(AstroClient, 1, 1.5f, true);
+				GameObjectMenu.InitButtons(AstroClient, 1, 1.5f, true);
 				EmojiUtils.InitButton(AstroClient, 1, 2, true); // TODO : Rewrite
 				if (Bools.IsDeveloper)
 				{

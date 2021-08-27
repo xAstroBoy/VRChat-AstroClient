@@ -4,9 +4,7 @@
 	using AstroClient.Cheetos;
 	using AstroClient.Components.SitOnPlayer;
 	using AstroClient.Variables;
-	using AstroLibrary;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using RubyButtonAPI;
 	using System;
 	using UnityEngine;
@@ -46,11 +44,11 @@
 			_ = new QMSingleButton(menu, 4, 0, "All Pickups Watch player.", new Action(ObjectMiscOptions.AllWorldPickupsWatchTarget), "Make the victim feel observed.", null, null);
 
 			var sitMenu = new QMNestedButton(menu, 1, 2, "Sit", "Sit on selected player");
-			_ = new QMSingleButton(sitMenu, 1, 0, "Sit On Head", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedUser().GetPlayer(), HumanBodyBones.Head); }, "Sit On Head", null, null);
-			_ = new QMSingleButton(sitMenu, 2, 1, "Sit On LeftHand", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedUser().GetPlayer(), HumanBodyBones.LeftHand); }, "Sit On LeftHand", null, null);
-			_ = new QMSingleButton(sitMenu, 2, 2, "Sit On RightHand", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedUser().GetPlayer(), HumanBodyBones.RightHand); }, "Sit On RightHand", null, null);
-			_ = new QMSingleButton(sitMenu, 3, 1, "Sit On LeftFoot", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedUser().GetPlayer(), HumanBodyBones.LeftFoot); }, "Sit On LeftFoot", null, null);
-			_ = new QMSingleButton(sitMenu, 3, 2, "Sit On RightFoot", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedUser().GetPlayer(), HumanBodyBones.RightFoot); }, "Sit On RightFoot", null, null);
+			_ = new QMSingleButton(sitMenu, 1, 0, "Sit On Head", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.Head); }, "Sit On Head", null, null);
+			_ = new QMSingleButton(sitMenu, 2, 1, "Sit On LeftHand", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.LeftHand); }, "Sit On LeftHand", null, null);
+			_ = new QMSingleButton(sitMenu, 2, 2, "Sit On RightHand", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.RightHand); }, "Sit On RightHand", null, null);
+			_ = new QMSingleButton(sitMenu, 3, 1, "Sit On LeftFoot", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.LeftFoot); }, "Sit On LeftFoot", null, null);
+			_ = new QMSingleButton(sitMenu, 3, 2, "Sit On RightFoot", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.RightFoot); }, "Sit On RightFoot", null, null);
 
 			//var setHeightButton = new QMSingleButton(sitMenu, 3, 0, $"Set\nHeight\n{SitOnPlayer.Height}", () =>
 			//{

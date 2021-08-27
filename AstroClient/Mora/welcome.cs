@@ -1,7 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroLibrary;
-	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using System.Collections.Generic;
 
 	internal class Welcome : GameEvents
@@ -12,7 +12,7 @@
         {
             if (!HasDisplayed)
             {
-                CheetosHelpers.SendHudNotification($"Welcome Back <Color=#c242f5>{ Utils.LocalPlayer.GetPlayer().DisplayName()}</color> \n 	<color=#42f5f2>AstroClient</color> Made By\n <color=#2A3EBF>AstroBoy</color> and <color=#F79239>Cheetos</color>");
+                CheetosHelpers.SendHudNotification($"Welcome Back <Color=#c242f5>{ PlayerUtils.DisplayName()}</color> \n 	<color=#42f5f2>AstroClient</color> Made By\n <color=#2A3EBF>AstroBoy</color> and <color=#F79239>Cheetos</color>");
                 HasDisplayed = true;
             }
         }

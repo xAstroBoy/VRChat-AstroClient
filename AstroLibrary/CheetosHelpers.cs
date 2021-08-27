@@ -2,7 +2,7 @@
 {
 	#region Imports
 
-	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using System;
 	using System.IO;
 	using System.Reflection;
@@ -35,7 +35,7 @@
 		public static void SendHudNotification(string msg)
         {
             var uiManager = VRCUiManager.prop_VRCUiManager_0;
-            PopupManager.QueHudMessage(uiManager, msg);
+            PopupUtils.QueHudMessage(uiManager, msg);
         }
 
         public static byte[] ExtractResource(Assembly assembly, string filename)

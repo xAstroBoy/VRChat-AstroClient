@@ -61,7 +61,7 @@
                 invisiblewall_1.DestroyMeLocal();
             }
 
-            foreach (var action in WorldUtils.Get_UdonBehaviours())
+            foreach (var action in WorldUtils.GetUdonScripts())
             {
                 if (action.gameObject.name == "Game Logic")
                 {

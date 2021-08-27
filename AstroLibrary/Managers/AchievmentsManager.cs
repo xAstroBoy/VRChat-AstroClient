@@ -2,6 +2,7 @@
 {
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using Newtonsoft.Json;
 	using System.IO;
 	using VRC.Core;

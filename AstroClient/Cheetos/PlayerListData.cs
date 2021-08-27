@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using Il2CppSystem.Text;
 	using System.Linq;
 	using UnityEngine;
@@ -109,7 +110,7 @@
 
         public bool GetIsInvisible()
         {
-			return Player == null || !WorldUtils.Get_Players().Any(p => p.UserID().Equals(Player.UserID()));
+			return Player == null || !WorldUtils.GetPlayers().Any(p => p.UserID().Equals(Player.UserID()));
 		}
 
         public PlayerListData(Photon.Realtime.Player photonPlayer)

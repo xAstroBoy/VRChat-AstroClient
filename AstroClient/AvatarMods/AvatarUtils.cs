@@ -4,6 +4,7 @@
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
 	using AstroLibrary.Finder;
+	using AstroLibrary.Utility;
 	using System.Collections.Generic;
 	using System.Linq;
 	using UnityEngine;
@@ -292,7 +293,7 @@
 
 		public static void Reload_All_Avatars()
 		{
-			foreach (var player in WorldUtils.Get_Players())
+			foreach (var player in WorldUtils.GetPlayers())
 			{
 				if (player != null)
 				{

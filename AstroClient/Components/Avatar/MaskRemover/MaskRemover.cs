@@ -3,6 +3,7 @@
 	using AstroClient.AvatarMods;
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
+	using AstroLibrary.Utility;
 	using System;
 	using System.Linq;
 	using UnhollowerBaseLib.Attributes;
