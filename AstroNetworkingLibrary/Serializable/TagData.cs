@@ -1,9 +1,9 @@
 ﻿namespace AstroNetworkingLibrary.Serializable
 {
-	using System;
-	using System.Reflection;
+    using System;
+    using System.Reflection;
 
-	[Serializable, Obfuscation]
+    [Serializable, Obfuscation]
     public class TagData
     {
         public string UserID;

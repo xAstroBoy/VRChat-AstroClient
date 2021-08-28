@@ -1,14 +1,13 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Utility;
-	using Blaze.Utils;
-	using Transmtn.DTO;
-	using Transmtn.DTO.Notifications;
-	using UnityEngine;
-	using UnityEngine.UI;
+    using AstroLibrary.Console;
+    using AstroLibrary.Utility;
+    using Transmtn.DTO;
+    using Transmtn.DTO.Notifications;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-	public static class NotificationManagerExtension
+    public static class NotificationManagerExtension
     {
         public static void SendNotification(this NotificationManager Instance, string UserID, string Type, string IDKISEMPTY, NotificationDetails notificationDetails)
         {
@@ -43,7 +42,7 @@
                 if (Utils.QuickMenu.Notification().details.ContainsKey("worldId"))
                 {
                     string World = Utils.QuickMenu.Notification().details["worldId"].ToString();
-                    MiscFunc.ForceJoin(World);
+                    WorldUtils.JoinWorld(World);
                 }
             }
             if (text.Equals("friendRequest"))
@@ -59,7 +58,7 @@
                     string senderUserId = Utils.QuickMenu.Notification().senderUserId;
                     NotificationDetails notificationDetails = new NotificationDetails();
                     notificationDetails["worldId"] = WorldUtils.GetFullID();
-                    notificationDetails["worldName"] = RoomManagerExtension.GetWorld().name;
+                    notificationDetails["worldName"] = WorldUtils.GetWorld().name;
                     Utils.NotificationManager.SendNotification(senderUserId, "invite", string.Empty, notificationDetails);
                 }
             }

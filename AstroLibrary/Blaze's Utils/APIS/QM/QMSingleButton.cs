@@ -1,11 +1,11 @@
 ﻿namespace Blaze.API
 {
-	using System;
-	using UnityEngine;
-	using UnityEngine.Events;
-	using UnityEngine.UI;
+    using System;
+    using UnityEngine;
+    using UnityEngine.Events;
+    using UnityEngine.UI;
 
-	public class QMSingleButton : QMButtonBase
+    public class QMSingleButton : QMButtonBase
     {
         public QMSingleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool HalfButton = false)
         {

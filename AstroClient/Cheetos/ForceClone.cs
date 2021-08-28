@@ -1,17 +1,16 @@
 ﻿namespace AstroClient.Cheetos
 {
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Utility;
+    using AstroLibrary.Utility;
 
-	public static class ForceClone
+    public static class ForceClone
     {
         internal static void ClonePlayer()
         {
-            var player = QuickMenu.prop_QuickMenu_0.SelectedPlayer();
+            var player = QuickMenuUtils.GetSelectedPlayer();
 
             if (player != null)
             {
-                MiscFunc.ChangeAvatar(player.GetApiAvatar().id);
+                MiscUtils.ChangeAvatar(player.GetApiAvatar().id);
             }
         }
     }

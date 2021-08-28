@@ -1,17 +1,17 @@
 ﻿namespace AstroClient
 {
-	using System;
+    using System;
 
-	public class OnSceneLoadedEventArgs : EventArgs
-	{
-		public int BuildIndex;
+    public class OnSceneLoadedEventArgs : EventArgs
+    {
+        public int BuildIndex;
 
-		public string SceneName;
+        public string SceneName;
 
-		public OnSceneLoadedEventArgs(int buildIndex, string sceneName)
-		{
-			BuildIndex = buildIndex;
-			SceneName = sceneName;
-		}
-	}
+        public OnSceneLoadedEventArgs(int buildIndex, string sceneName)
+        {
+            BuildIndex = buildIndex;
+            SceneName = sceneName;
+        }
+    }
 }

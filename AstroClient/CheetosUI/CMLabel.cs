@@ -1,20 +1,20 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using UnityEngine;
-	using UnityEngine.UI;
-	using VRC.Udon.Serialization.OdinSerializer;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using VRC.Udon.Serialization.OdinSerializer;
 
-	#endregion Imports
+    #endregion Imports
 
-	public class CMLabel : CMBase
-	{
+    public class CMLabel : CMBase
+    {
         public CMLabel(Transform parent, Vector2 position, string text, Color? color = null, int minTextSize = 12, int maxTextSize = 70) : base(parent, position)
         {
-			Color _color = color == null ? Color.black : (Color)color;
+            Color _color = color == null ? Color.black : (Color)color;
 
-			GetGameObject.name = "CMLabel";
+            GetGameObject.name = "CMLabel";
             GetGameObject.AddComponent<Text>();
             GetGameObject.GetComponent<Text>().text = text;
             GetGameObject.GetComponent<Text>().font = Font.GetDefault();
@@ -26,16 +26,16 @@
             GetGameObject.GetComponent<Text>().alignment = TextAnchor.MiddleCenter;
         }
 
-		public CMLabel SetText(string text)
-		{
-			GetGameObject.GetComponent<Text>().text = text;
-			return this;
-		}
+        public CMLabel SetText(string text)
+        {
+            GetGameObject.GetComponent<Text>().text = text;
+            return this;
+        }
 
-		public CMLabel SetColor(Color color)
-		{
-			GetGameObject.GetComponent<Text>().color = color;
-			return this;
-		}
-	}
+        public CMLabel SetColor(Color color)
+        {
+            GetGameObject.GetComponent<Text>().color = color;
+            return this;
+        }
+    }
 }

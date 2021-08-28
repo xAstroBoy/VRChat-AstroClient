@@ -1,17 +1,17 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using AstroLibrary.Console;
-	using AstroNetworkingLibrary;
-	using System;
-	using System.IO;
-	using System.Threading;
-	using UnityEngine;
+    using AstroLibrary.Console;
+    using AstroNetworkingLibrary;
+    using System;
+    using System.IO;
+    using System.Threading;
+    using UnityEngine;
 
-	#endregion Imports
+    #endregion Imports
 
-	public static class ConfigManager
+    public static class ConfigManager
     {
         private static Mutex SaveMutex = new Mutex();
 
@@ -85,22 +85,22 @@
             }
         }
 
-		public static Color ESPBlockedColor
-		{
-			get
-			{
-				return new Color(ESP.ESPBlockedColor[0], ESP.ESPBlockedColor[1], ESP.ESPBlockedColor[2], ESP.ESPBlockedColor[3]);
-			}
-			set
-			{
-				ESP.ESPBlockedColor[0] = value.r;
-				ESP.ESPBlockedColor[1] = value.g;
-				ESP.ESPBlockedColor[2] = value.b;
-				ESP.ESPBlockedColor[3] = value.a;
-			}
-		}
+        public static Color ESPBlockedColor
+        {
+            get
+            {
+                return new Color(ESP.ESPBlockedColor[0], ESP.ESPBlockedColor[1], ESP.ESPBlockedColor[2], ESP.ESPBlockedColor[3]);
+            }
+            set
+            {
+                ESP.ESPBlockedColor[0] = value.r;
+                ESP.ESPBlockedColor[1] = value.g;
+                ESP.ESPBlockedColor[2] = value.b;
+                ESP.ESPBlockedColor[3] = value.a;
+            }
+        }
 
-		public static void Validate()
+        public static void Validate()
         {
             SaveMutex.WaitOne();
 
@@ -147,22 +147,22 @@
                 Save_Movement();
                 ModConsole.DebugWarning($"ConfigMovement File Created: {ConfigMovementPath}");
             }
-			if (!File.Exists(ConfigFavoritesPath))
-			{
-				FileStream fs = new FileStream(ConfigFavoritesPath, FileMode.Create);
-				fs.Dispose();
-				Save_Favorites();
-				ModConsole.DebugWarning($"ConfigFavorites File Created: {ConfigFavoritesPath}");
-			}
-			if (!File.Exists(ConfigFavoritesPath))
-			{
-				FileStream fs = new FileStream(ConfigPerformancePath, FileMode.Create);
-				fs.Dispose();
-				Save_Performance();
-				ModConsole.DebugWarning($"ConfigPerformance File Created: {ConfigPerformancePath}");
-			}
+            if (!File.Exists(ConfigFavoritesPath))
+            {
+                FileStream fs = new FileStream(ConfigFavoritesPath, FileMode.Create);
+                fs.Dispose();
+                Save_Favorites();
+                ModConsole.DebugWarning($"ConfigFavorites File Created: {ConfigFavoritesPath}");
+            }
+            if (!File.Exists(ConfigFavoritesPath))
+            {
+                FileStream fs = new FileStream(ConfigPerformancePath, FileMode.Create);
+                fs.Dispose();
+                Save_Performance();
+                ModConsole.DebugWarning($"ConfigPerformance File Created: {ConfigPerformancePath}");
+            }
 
-			if (!Directory.Exists(ConfigLewdifyPath))
+            if (!Directory.Exists(ConfigLewdifyPath))
             {
                 Directory.CreateDirectory(ConfigLewdifyPath);
                 ModConsole.DebugWarning($"ConfigLewdify File Created: {ConfigLewdifyPath}");
@@ -201,18 +201,18 @@
             ModConsole.DebugLog("Movement Config Saved.");
         }
 
-		public static void Save_Favorites()
-		{
-			JSonWriter.WriteToJsonFile(ConfigFavoritesPath, Favorites);
-			ModConsole.DebugLog("Favorites Config Saved.");
-		}
-		public static void Save_Performance()
-		{
-			JSonWriter.WriteToJsonFile(ConfigPerformancePath, Performance);
-			ModConsole.DebugLog("Performance Config Saved.");
-		}
+        public static void Save_Favorites()
+        {
+            JSonWriter.WriteToJsonFile(ConfigFavoritesPath, Favorites);
+            ModConsole.DebugLog("Favorites Config Saved.");
+        }
+        public static void Save_Performance()
+        {
+            JSonWriter.WriteToJsonFile(ConfigPerformancePath, Performance);
+            ModConsole.DebugLog("Performance Config Saved.");
+        }
 
-		public static void Save_All()
+        public static void Save_All()
         {
             SaveMutex.WaitOne();
             Save_General();
@@ -228,71 +228,71 @@
 
         public static void Load()
         {
-			try
-			{
-				General = JSonWriter.ReadFromJsonFile<ConfigGeneral>(ConfigPath);
-			}
-			catch
-			{
-				ModConsole.Error("Failed to load General config, creating a new one..");
-			}
+            try
+            {
+                General = JSonWriter.ReadFromJsonFile<ConfigGeneral>(ConfigPath);
+            }
+            catch
+            {
+                ModConsole.Error("Failed to load General config, creating a new one..");
+            }
 
-			try
-			{
-				UI = JSonWriter.ReadFromJsonFile<ConfigUI>(ConfigUIPath);
-			}
-			catch
-			{
-				ModConsole.Error("Failed to load UI config, creating a new one..");
-			}
+            try
+            {
+                UI = JSonWriter.ReadFromJsonFile<ConfigUI>(ConfigUIPath);
+            }
+            catch
+            {
+                ModConsole.Error("Failed to load UI config, creating a new one..");
+            }
 
-			try
-			{
-				ESP = JSonWriter.ReadFromJsonFile<ConfigESP>(ConfigESPPath);
-			}
-			catch
-			{
-				ModConsole.Error("Failed to load ESP config, creating a new one..");
-			}
+            try
+            {
+                ESP = JSonWriter.ReadFromJsonFile<ConfigESP>(ConfigESPPath);
+            }
+            catch
+            {
+                ModConsole.Error("Failed to load ESP config, creating a new one..");
+            }
 
-			try
-			{
-				Flight = JSonWriter.ReadFromJsonFile<ConfigFlight>(ConfigFlightPath);
-			}
-			catch
-			{
-				ModConsole.Error("Failed to load Flight config, creating a new one..");
-			}
+            try
+            {
+                Flight = JSonWriter.ReadFromJsonFile<ConfigFlight>(ConfigFlightPath);
+            }
+            catch
+            {
+                ModConsole.Error("Failed to load Flight config, creating a new one..");
+            }
 
-			try
-			{
-				Movement = JSonWriter.ReadFromJsonFile<ConfigMovement>(ConfigMovementPath);
-			}
-			catch
-			{
-				ModConsole.Error("Failed to load Movement config, creating a new one..");
-			}
+            try
+            {
+                Movement = JSonWriter.ReadFromJsonFile<ConfigMovement>(ConfigMovementPath);
+            }
+            catch
+            {
+                ModConsole.Error("Failed to load Movement config, creating a new one..");
+            }
 
-			try
-			{
-				Favorites = JSonWriter.ReadFromJsonFile<ConfigFavorites>(ConfigFavoritesPath);
-			}
-			catch
-			{
-				ModConsole.Error("Failed to load Favorites config, creating a new one..");
-			}
+            try
+            {
+                Favorites = JSonWriter.ReadFromJsonFile<ConfigFavorites>(ConfigFavoritesPath);
+            }
+            catch
+            {
+                ModConsole.Error("Failed to load Favorites config, creating a new one..");
+            }
 
-			try
-			{
-				Performance = JSonWriter.ReadFromJsonFile<ConfigPerformance>(ConfigPerformancePath);
-			}
-			catch
-			{
-				ModConsole.Error("Failed to load Performance config, creating a new one..");
-			}
+            try
+            {
+                Performance = JSonWriter.ReadFromJsonFile<ConfigPerformance>(ConfigPerformancePath);
+            }
+            catch
+            {
+                ModConsole.Error("Failed to load Performance config, creating a new one..");
+            }
 
-			ModConsole.DebugLog("Finishes Loading Configuration Files.");
-			Save_All();
+            ModConsole.DebugLog("Finishes Loading Configuration Files.");
+            Save_All();
         }
     }
 }

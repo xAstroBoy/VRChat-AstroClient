@@ -1,13 +1,13 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using System;
-	using UnityEngine;
+    using System;
+    using UnityEngine;
 
-	#endregion Imports
+    #endregion Imports
 
-	public static class Astro_Interactable_Extensions
+    public static class Astro_Interactable_Extensions
     {
         public static void AddAstroInteractable(this GameObject gameObject, Action action)
         {

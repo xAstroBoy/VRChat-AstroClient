@@ -1,15 +1,15 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
-	#region Imports
+    #region Imports
 
-	using AstroClient.Variables;
-	using AstroLibrary;
-	using RubyButtonAPI;
-	using System.Reflection;
+    using AstroClient.Variables;
+    using AstroLibrary;
+    using RubyButtonAPI;
+    using System.Reflection;
 
-	#endregion Imports
+    #endregion Imports
 
-	public class AdminMenu : GameEvents
+    public class AdminMenu : GameEvents
     {
         public static QMTabMenu SubMenu { get; private set; }
 

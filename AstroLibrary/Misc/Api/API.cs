@@ -1,18 +1,18 @@
 ﻿namespace AstroClient.Misc.Api
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Managers;
-	using AstroLibrary.Misc.Api.Object;
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Diagnostics;
-	using System.IO;
-	using System.Net;
-	using UnityEngine;
-	using VRC.Core;
+    using AstroLibrary.Console;
+    using AstroLibrary.Managers;
+    using AstroLibrary.Misc.Api.Object;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Net;
+    using UnityEngine;
+    using VRC.Core;
 
-	internal class API
+    internal class API
     {
         private const string APIKEYLONG = "?apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26";
         private const string APIKEY = "JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26";
@@ -57,7 +57,7 @@
         {
             if (WorldArray == null)
             {
-                WorldArray = File.ReadAllLines(FileManager.ClientPath + "\\Worlds.txt");
+                //WorldArray = File.ReadAllLines(FileManager.ClientPath + "\\Worlds.txt");
             }
             ModConsole.Log($"[World Travel] Start!");
             for (; ; )

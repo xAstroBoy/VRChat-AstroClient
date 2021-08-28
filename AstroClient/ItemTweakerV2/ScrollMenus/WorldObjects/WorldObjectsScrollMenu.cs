@@ -1,15 +1,15 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
-	using AstroClient.Components;
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using VRC;
+    using AstroClient.Components;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using VRC;
 
-	public class WorldObjectsScrollMenu : Tweaker_Events
+    public class WorldObjectsScrollMenu : Tweaker_Events
     {
         public static void Init_WorldObjectScrollMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
@@ -39,16 +39,16 @@
                 foreach (var item in WorldObjects)
                 {
 
-				var btn = new QMSingleButton(scroll.BaseMenu, 0, 0, $"Select {item.name}", delegate
-				{
-					item.Set_As_Object_To_Edit();
-				}, $"Select {item.name}", null, item.Get_GameObject_Active_ToColor());
-					var listener = item.GetOrAddComponent<ScrollMenuListener>();
-					if (listener != null)
-					{
-						listener.assignedbtn = btn;
-					}
-					scroll.Add(btn);
+                    var btn = new QMSingleButton(scroll.BaseMenu, 0, 0, $"Select {item.name}", delegate
+                    {
+                        item.Set_As_Object_To_Edit();
+                    }, $"Select {item.name}", null, item.Get_GameObject_Active_ToColor());
+                    var listener = item.GetOrAddComponent<ScrollMenuListener>();
+                    if (listener != null)
+                    {
+                        listener.assignedbtn = btn;
+                    }
+                    scroll.Add(btn);
                 }
             });
         }

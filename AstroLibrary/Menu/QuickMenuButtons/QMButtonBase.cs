@@ -1,11 +1,11 @@
 ﻿namespace RubyButtonAPI
 {
-	using System.Collections;
-	using UnityEngine;
-	using UnityEngine.UI;
-	using Button = UnityEngine.UI.Button;
+    using System.Collections;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using Button = UnityEngine.UI.Button;
 
-	public class QMButtonBase
+    public class QMButtonBase
     {
         protected GameObject button;
         protected string btnQMLoc;
@@ -25,7 +25,7 @@
             button.gameObject.SetActive(isActive);
         }
 
-		public void SetIntractable(bool isIntractable)
+        public void SetIntractable(bool isIntractable)
         {
             if (isIntractable)
             {

@@ -1,23 +1,34 @@
-﻿namespace Blaze.Utils
-{
-	using MelonLoader;
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Diagnostics;
-	using System.IO;
-	using System.Linq;
-	using System.Reflection;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
-	using VRC;
-	using VRC.Core;
-	using VRC.SDK3.Components;
-	using VRC.SDKBase;
-	using VRC.UI;
+﻿// Credits to Blaze and DayOfThePlay
 
-	public static class MiscUtils
+namespace AstroLibrary.Utility
+{
+    using Blaze;
+    using MelonLoader;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using UnhollowerRuntimeLib;
+    using UnityEngine;
+    using VRC;
+    using VRC.Core;
+    using VRC.SDK3.Components;
+    using VRC.SDKBase;
+    using VRC.UI;
+
+    public static class MiscUtils
     {
+        public static void CleanRoom()
+        {
+            GameObject gameObject = (from x in UnityEngine.Object.FindObjectsOfType<GameObject>()
+                                     where x.name == "DrawingManager"
+                                     select x).First();
+            Networking.RPC(0, gameObject, "CleanRoomRPC", null);
+        }
+
         public static void ForceQuit()
         {
             try
@@ -42,7 +53,7 @@
         public static void Restart()
         {
             ProcessStartInfo psi = new ProcessStartInfo();
-            if (PlayerUtils.SelfIsInVR())
+            if (PlayerUtils.IsInVR())
             {
                 psi.FileName = Environment.CurrentDirectory + "\\VRChat.exe";
             }
@@ -92,7 +103,7 @@
         public static void ChangePedestals()
         {
 
-            PopupUtils.InputPopup("Enter Avatar ID for pedestals", "Change Pedestals", "avtr_XXXXXXXX", delegate (string s) 
+            Blaze.Utils.PopupUtils.InputPopup("Enter Avatar ID for pedestals", "Change Pedestals", "avtr_XXXXXXXX", delegate (string s)
             {
                 if (WorldUtils.GetSDKType() == "SDK2")
                 {
@@ -107,8 +118,8 @@
                     }
                     else
                     {
-                        PopupUtils.HideCurrentPopUp();
-                        PopupUtils.InformationAlert("No Pedestals!", "There are currently no avatar pedestals to be found in this world!");
+                        Blaze.Utils.PopupUtils.HideCurrentPopUp();
+                        Blaze.Utils.PopupUtils.InformationAlert("No Pedestals!", "There are currently no avatar pedestals to be found in this world!");
                     }
                 }
                 else
@@ -124,11 +135,11 @@
                     }
                     else
                     {
-                        PopupUtils.HideCurrentPopUp();
-                        PopupUtils.InformationAlert("No Pedestals!", "There are currently no avatar pedestals to be found in this world!");
+                        Blaze.Utils.PopupUtils.HideCurrentPopUp();
+                        Blaze.Utils.PopupUtils.InformationAlert("No Pedestals!", "There are currently no avatar pedestals to be found in this world!");
                     }
                 }
-                
+
             });
         }
 
@@ -226,7 +237,7 @@
 
         public static IEnumerator WFW(Action action)
         {
-            while (!WorldUtils.IsInWorld() && PlayerUtils.GetCurrentUser() == null) yield return null;
+            while (!WorldUtils.IsInWorld() && PlayerUtils.GetVRCPlayer() == null) yield return null;
             action.Invoke();
             yield break;
         }
@@ -368,8 +379,8 @@
         {
             string[] Location = RoomId.Split(':');
             DropPortal(Location[0], Location[1], 0,
-                PlayerUtils.GetCurrentUser().transform.position + (PlayerUtils.GetCurrentUser().transform.forward * 2f),
-                PlayerUtils.GetCurrentUser().transform.rotation);
+                Utils.CurrentUser.transform.position + (Utils.CurrentUser.transform.forward * 2f),
+                Utils.CurrentUser.transform.rotation);
         }
 
         public static void DropPortal(string WorldID, string InstanceID, int players, Vector3 vector3,
@@ -390,6 +401,17 @@
                 }.BoxIl2CppObject()
             });
             // MelonCoroutines.Start(MiscUtility.DestroyDelayed(1f, gameObject.GetComponent<PortalInternal>()));
+        }
+
+        public static void CopyToClipboard(string copytext)
+        {
+            TextEditor textEditor = new TextEditor
+            {
+                text = copytext
+            };
+            textEditor.SelectAll();
+            textEditor.Copy();
+            Utils.VRCUiManager.QueHudMessage("Copied to Clipboard");
         }
     }
 }

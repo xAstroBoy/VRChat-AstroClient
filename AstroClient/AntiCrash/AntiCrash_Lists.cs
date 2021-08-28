@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.AntiCrash
 {
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 
-	public static class AntiCrash_Lists
+    public static class AntiCrash_Lists
     {
         public static List<string> GenitalNames = new List<string>();
 

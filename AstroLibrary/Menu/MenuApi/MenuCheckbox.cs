@@ -1,13 +1,13 @@
 ﻿namespace DayClientML2.Utility
 {
-	using AstroLibrary.Console;
-	using MelonLoader;
-	using System;
-	using UnityEngine;
-	using UnityEngine.UI;
-	using Object = UnityEngine.GameObject;
+    using AstroLibrary.Console;
+    using MelonLoader;
+    using System;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using Object = UnityEngine.GameObject;
 
-	internal class MenuCheckbox
+    internal class MenuCheckbox
     {
         // public MenuCheckbox();
         // Find("Screens/Settings/ComfortSafetyPanel/PersonalSpaceToggle")

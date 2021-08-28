@@ -1,9 +1,9 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
-	using System.Threading;
+    using AstroLibrary.Console;
+    using System.Threading;
 
-	public class AssemblySpy : GameEvents
+    public class AssemblySpy : GameEvents
     {
         public static void Scan(string query)
         {

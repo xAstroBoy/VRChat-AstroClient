@@ -1,22 +1,22 @@
 ﻿namespace AstroClient.ItemTweakerV2
 {
-	using AstroClient.Components;
-	using AstroClient.GameObjectDebug;
-	using AstroClient.ItemTweakerV2.Handlers;
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroClient.ItemTweakerV2.Submenus;
-	using AstroClient.ItemTweakerV2.Submenus.ScrollMenus;
-	using AstroClient.Variables;
-	using AstroLibrary;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
-	using System.Reflection;
-	using UnityEngine;
-	using VRC;
-	using Color = UnityEngine.Color;
+    using AstroClient.Components;
+    using AstroClient.GameObjectDebug;
+    using AstroClient.ItemTweakerV2.Handlers;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroClient.ItemTweakerV2.Submenus;
+    using AstroClient.ItemTweakerV2.Submenus.ScrollMenus;
+    using AstroClient.Variables;
+    using AstroLibrary;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using System;
+    using System.Reflection;
+    using UnityEngine;
+    using VRC;
+    using Color = UnityEngine.Color;
 
-	public class TweakerV2Main : Tweaker_Events
+    public class TweakerV2Main : Tweaker_Events
     {
         public static void Init_TweakerV2Main()
         {
@@ -44,8 +44,8 @@
 
             GameObjMenu.InitTogglerMenu(menu, 3, 0f, true);
             ObjectInfoSubMenu.Init_ObjectInfoSubMenu(menu, 3, 0.5f, true);
-            new QMSingleButton(menu, 3, 1f, "Teleport to Object", new Action(() => { GameObjectUtils.TeleportPlayerToPickup(Tweaker_Object.GetGameObjectToEdit()); }), "Teleport to object.", null, null, true);
-            new QMSingleButton(menu, 3, 1.5f, "Respawn Object", new Action(() => { GameObjectUtils.RestoreOriginalLocation(Tweaker_Object.GetGameObjectToEdit(), false); }), "Reset Object Position.", null, null, true);
+            new QMSingleButton(menu, 3, 1f, "Teleport to Object", new Action(() => { GameObjectMenu.TeleportPlayerToPickup(Tweaker_Object.GetGameObjectToEdit()); }), "Teleport to object.", null, null, true);
+            new QMSingleButton(menu, 3, 1.5f, "Respawn Object", new Action(() => { GameObjectMenu.RestoreOriginalLocation(Tweaker_Object.GetGameObjectToEdit(), false); }), "Reset Object Position.", null, null, true);
             PickupSelectionScrollMenu.Init_PickupSelectionQMScroll(menu, 3, 2, true);
             WorldObjectsScrollMenu.Init_WorldObjectScrollMenu(menu, 3, 2.5f, true);
             VRC_TriggersScrollMenu.Init_VRC_TriggersScrollMenu(menu, 4, 0, true);

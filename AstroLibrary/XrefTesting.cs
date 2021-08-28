@@ -1,14 +1,15 @@
 ﻿namespace DayClientML2.Utility
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using System;
-	using System.Linq;
-	using System.Reflection;
-	using UnhollowerRuntimeLib.XrefScans;
-	using UnityEngine;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using System;
+    using System.Linq;
+    using System.Reflection;
+    using UnhollowerRuntimeLib.XrefScans;
+    using UnityEngine;
 
-	public static class XrefTesting
+    public static class XrefTesting
     {
         public static MethodInfo OnPhotonPlayerJoinMethod
         {
@@ -379,7 +380,7 @@
                         && m.XRefScanForMethod(null, "VRCTrackingManager")
                         && m.XRefScanForMethod(null, "InputStateController"));
                 }
-                return (AlignTrackingToPlayerDelegate)Delegate.CreateDelegate(typeof(AlignTrackingToPlayerDelegate), Utils.CurrentUser, alignTrackingToPlayerMethod);
+                return (AlignTrackingToPlayerDelegate)Delegate.CreateDelegate(typeof(AlignTrackingToPlayerDelegate), PlayerUtils.GetVRCPlayer(), alignTrackingToPlayerMethod);
             }
         }
 

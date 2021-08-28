@@ -1,12 +1,12 @@
 ﻿namespace DayBots.VRCAPI
 {
-	using System.Collections.Generic;
-	using System.IO;
-	using System.Net;
-	using System.Net.Security;
-	using System.Security.Cryptography.X509Certificates;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Net;
+    using System.Net.Security;
+    using System.Security.Cryptography.X509Certificates;
 
-	internal class Utils
+    internal class Utils
     {
         internal static string GetRespondsStream(WebResponse webResponse_0)
         {

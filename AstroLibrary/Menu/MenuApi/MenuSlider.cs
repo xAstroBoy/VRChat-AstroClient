@@ -1,12 +1,12 @@
 ﻿namespace AstroLibrary.Utility
 {
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using UnityEngine;
-	using UnityEngine.Events;
-	using UnityEngine.UI;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using UnityEngine;
+    using UnityEngine.Events;
+    using UnityEngine.UI;
 
-	internal class MenuSlider
+    internal class MenuSlider
     {
         public MenuSlider(string parentPath, float x, float y, UnityAction<float> evt, float defaultValue = 0f, float MaxValue = 1f, float MinValue = 0f)
         {

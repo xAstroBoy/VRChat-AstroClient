@@ -1,25 +1,25 @@
 ﻿namespace AstroClient.Components
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Runtime.InteropServices;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
-	using VRC.Core;
-	using VRC;
-	using System.Linq;
-	using AstroLibrary.Extensions;
-	using Color = System.Drawing.Color;
+    using System;
+    using System.Collections.Generic;
+    using System.Runtime.InteropServices;
+    using UnhollowerRuntimeLib;
+    using UnityEngine;
+    using VRC.Core;
+    using VRC;
+    using System.Linq;
+    using AstroLibrary.Extensions;
+    using Color = System.Drawing.Color;
 
-	#region AstroClient Imports
+    #region AstroClient Imports
 
-	using AstroLibrary.Console;
+    using AstroLibrary.Console;
 
-	#endregion AstroClient Imports
+    #endregion AstroClient Imports
 
-	using static AstroClient.Variables.InstanceBuilder;
+    using static AstroClient.Variables.InstanceBuilder;
 
-	public class PlayerWatcherManager : GameEventsBehaviour
+    public class PlayerWatcherManager : GameEventsBehaviour
     {
         #region Internal
 

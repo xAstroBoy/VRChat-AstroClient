@@ -1,8 +1,8 @@
 ﻿namespace Blaze.Utils
 {
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 
-	public static class PhotonUtils
+    public static class PhotonUtils
     {
         public static string GetUserID(this Photon.Realtime.Player player)
         {

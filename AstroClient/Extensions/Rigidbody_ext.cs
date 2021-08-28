@@ -1,9 +1,9 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroLibrary.Console;
-	using UnityEngine;
+    using AstroLibrary.Console;
+    using UnityEngine;
 
-	public static class Rigidbody_ext
+    public static class Rigidbody_ext
     {
         public static void PrintAllRigidBodySettings(this GameObject obj)
         {

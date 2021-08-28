@@ -1,9 +1,9 @@
 ﻿namespace AstroClient
 {
-	using System.Collections.Generic;
-	using UnityEngine;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-	internal class FOV : GameEvents
+    internal class FOV : GameEvents
     {
         public static void Set_Camera_FOV(float v)
         {

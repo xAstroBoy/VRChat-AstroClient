@@ -1,19 +1,20 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Runtime.InteropServices;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
-	using VRC;
-	using VRC.Core;
-	using static AstroClient.Variables.InstanceBuilder;
-	using Color = System.Drawing.Color;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.InteropServices;
+    using UnhollowerRuntimeLib;
+    using UnityEngine;
+    using VRC;
+    using VRC.Core;
+    using static AstroClient.Variables.InstanceBuilder;
+    using Color = System.Drawing.Color;
 
-	public class OrbitManager : GameEventsBehaviour
+    public class OrbitManager : GameEventsBehaviour
     {
         #region Internal
 
@@ -186,7 +187,7 @@
         public static Transform PositionOfBone(Player player, HumanBodyBones bone)
         {
             Transform bonePosition = player.transform;
-            VRCAvatarManager avatarManager = player.GetVRCPlayer().prop_VRCAvatarManager_0;
+            VRCAvatarManager avatarManager = player.GetVRCPlayer().GetAvatarManager();
             if (!avatarManager)
                 return bonePosition;
             Animator animator = avatarManager.field_Private_Animator_0;

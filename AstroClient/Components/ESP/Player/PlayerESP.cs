@@ -1,17 +1,18 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using MelonLoader;
-	using System;
-	using System.Collections;
-	using System.Linq;
-	using UnhollowerBaseLib.Attributes;
-	using UnityEngine;
-	using VRC;
-	using VRC.Management;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using MelonLoader;
+    using System;
+    using System.Collections;
+    using System.Linq;
+    using UnhollowerBaseLib.Attributes;
+    using UnityEngine;
+    using VRC;
+    using VRC.Management;
 
-	public class PlayerESP : GameEventsBehaviour
+    public class PlayerESP : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
@@ -91,38 +92,38 @@
                         }
                     }
                 }
-				SetPlayerDefaultESP();
-				RoutineCancellationToken = MelonCoroutines.Start(StartUpdater());
+                SetPlayerDefaultESP();
+                RoutineCancellationToken = MelonCoroutines.Start(StartUpdater());
 
             }
         }
 
 
-		private IEnumerator StartUpdater()
-		{
-			while (true)
-			{
-				if(!UseCustomColor)
-				{
-				SetPlayerDefaultESP();
-				}
-				yield return new WaitForSeconds(5000);
-			}
-		}
+        private IEnumerator StartUpdater()
+        {
+            while (true)
+            {
+                if (!UseCustomColor)
+                {
+                    SetPlayerDefaultESP();
+                }
+                yield return new WaitForSeconds(5000);
+            }
+        }
 
 
 
 
 
-		private Color BlockedColor
-		{
-			get
-			{
-				return ConfigManager.ESPBlockedColor;
-			}
-		}
+        private Color BlockedColor
+        {
+            get
+            {
+                return ConfigManager.ESPBlockedColor;
+            }
+        }
 
-		private Color FriendColor
+        private Color FriendColor
         {
             get
             {
@@ -138,16 +139,16 @@
             }
         }
 
-		public void OnDestroy()
-		{
-			HighLightOptions.DestroyHighlighter();
-			if (RoutineCancellationToken != null)
-			{
-				MelonCoroutines.Stop(RoutineCancellationToken);
-			}
-		}
+        public void OnDestroy()
+        {
+            HighLightOptions.DestroyHighlighter();
+            if (RoutineCancellationToken != null)
+            {
+                MelonCoroutines.Stop(RoutineCancellationToken);
+            }
+        }
 
-		public void OnEnable()
+        public void OnEnable()
         {
             if (HighLightOptions != null)
             {
@@ -181,14 +182,14 @@
                 {
                     if (AssignedPlayer.GetAPIUser() != null)
                     {
-						if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(AssignedPlayer.UserID()))
-						{
-							if (HighLightOptions.highlightColor != BlockedColor)
-							{
-								HighLightOptions.highlightColor = BlockedColor;
-							}
-						}
-						else if (AssignedPlayer.GetAPIUser().GetIsFriend())
+                        if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(AssignedPlayer.UserID()))
+                        {
+                            if (HighLightOptions.highlightColor != BlockedColor)
+                            {
+                                HighLightOptions.highlightColor = BlockedColor;
+                            }
+                        }
+                        else if (AssignedPlayer.GetAPIUser().GetIsFriend())
                         {
                             if (HighLightOptions.highlightColor != FriendColor)
                             {
@@ -220,66 +221,66 @@
         }
 
 
-		private void SetPlayerDefaultESP()
-		{
-			if (HighLightOptions != null)
-			{
-				if (AssignedPlayer != null)
-				{
-					if (AssignedPlayer.GetAPIUser() != null)
-					{
-						if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(AssignedPlayer.UserID()))
-						{
-							if (HighLightOptions.highlightColor != BlockedColor)
-							{
-								HighLightOptions.highlightColor = BlockedColor;
-							}
-						}
-						else if (AssignedPlayer.GetAPIUser().GetIsFriend())
-						{
-							if (HighLightOptions.highlightColor != FriendColor)
-							{
-								HighLightOptions.highlightColor = FriendColor;
-							}
-						}
-						else
-						{
-							if (HighLightOptions.highlightColor != ESPColor)
-							{
-								HighLightOptions.highlightColor = ESPColor;
-							}
-						}
-					}
-				}
-			}
-		}
+        private void SetPlayerDefaultESP()
+        {
+            if (HighLightOptions != null)
+            {
+                if (AssignedPlayer != null)
+                {
+                    if (AssignedPlayer.GetAPIUser() != null)
+                    {
+                        if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(AssignedPlayer.UserID()))
+                        {
+                            if (HighLightOptions.highlightColor != BlockedColor)
+                            {
+                                HighLightOptions.highlightColor = BlockedColor;
+                            }
+                        }
+                        else if (AssignedPlayer.GetAPIUser().GetIsFriend())
+                        {
+                            if (HighLightOptions.highlightColor != FriendColor)
+                            {
+                                HighLightOptions.highlightColor = FriendColor;
+                            }
+                        }
+                        else
+                        {
+                            if (HighLightOptions.highlightColor != ESPColor)
+                            {
+                                HighLightOptions.highlightColor = ESPColor;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         private Transform SelectRegion;
         private UnhollowerBaseLib.Il2CppArrayBase<Renderer> ObjRenderers;
         private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
         private HighlightsFXStandalone HighLightOptions;
-		internal bool _UseCustomColor;
-		internal bool UseCustomColor
-		{
-			get
-			{
-				return _UseCustomColor;
-			}
-			set
-			{
-				if (value == _UseCustomColor)
-				{
-					return;
-				}
-				if (!value)
-				{
-					SetPlayerDefaultESP();
-				}
-				_UseCustomColor = value;
-			}
-		}
+        internal bool _UseCustomColor;
+        internal bool UseCustomColor
+        {
+            get
+            {
+                return _UseCustomColor;
+            }
+            set
+            {
+                if (value == _UseCustomColor)
+                {
+                    return;
+                }
+                if (!value)
+                {
+                    SetPlayerDefaultESP();
+                }
+                _UseCustomColor = value;
+            }
+        }
 
         internal Player AssignedPlayer { get; private set; }
-		private object RoutineCancellationToken;
+        private object RoutineCancellationToken;
     }
 }

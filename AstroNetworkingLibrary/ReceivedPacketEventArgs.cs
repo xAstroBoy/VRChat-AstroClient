@@ -1,8 +1,8 @@
 ﻿namespace AstroNetworkingLibrary
 {
-	using AstroNetworkingLibrary.Serializable;
+    using AstroNetworkingLibrary.Serializable;
 
-	public class ReceivedPacketEventArgs
+    public class ReceivedPacketEventArgs
     {
         public PacketData Data { get; private set; }
 

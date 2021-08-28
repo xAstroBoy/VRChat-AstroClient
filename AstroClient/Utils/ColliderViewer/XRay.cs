@@ -1,12 +1,12 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
-	using System.Collections.Generic;
-	using UnhollowerBaseLib;
-	using UnityEngine;
-	using UnityEngine.SceneManagement;
+    using AstroLibrary.Console;
+    using System.Collections.Generic;
+    using UnhollowerBaseLib;
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
 
-	public static class XRay
+    public static class XRay
     {
         private static Dictionary<int, Renderer> OriginallyEnabled { get; } = new Dictionary<int, Renderer>();
 

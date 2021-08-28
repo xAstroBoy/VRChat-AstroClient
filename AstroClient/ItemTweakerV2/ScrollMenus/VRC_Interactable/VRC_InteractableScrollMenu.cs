@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
-	using AstroClient.Components;
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
+    using AstroClient.Components;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
 
-	internal class VRC_InteractableScrollMenu
+    internal class VRC_InteractableScrollMenu
     {
         public static void Init_VRC_InteractableScrollMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
@@ -21,17 +21,17 @@
                 foreach (var obj in Tweaker_Object.GetGameObjectToEdit().Get_VRCInteractables())
                 {
 
-					var btn = new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {obj.name}", delegate
-					{
-						obj.VRC_Interactable_Click();
-					}, $"Click {obj.name}", null, obj.Get_GameObject_Active_ToColor());
-					var listener = obj.GetOrAddComponent<ScrollMenuListener>();
-					if (listener != null)
-					{
-						listener.assignedbtn = btn;
-					}
+                    var btn = new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {obj.name}", delegate
+                    {
+                        obj.VRC_Interactable_Click();
+                    }, $"Click {obj.name}", null, obj.Get_GameObject_Active_ToColor());
+                    var listener = obj.GetOrAddComponent<ScrollMenuListener>();
+                    if (listener != null)
+                    {
+                        listener.assignedbtn = btn;
+                    }
 
-					scroll.Add(btn);
+                    scroll.Add(btn);
                 }
             });
         }

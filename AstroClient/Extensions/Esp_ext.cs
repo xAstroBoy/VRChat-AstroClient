@@ -1,11 +1,11 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroClient;
-	using AstroClient.Components;
-	using System.Collections.Generic;
-	using UnityEngine;
+    using AstroClient;
+    using AstroClient.Components;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-	public static class Esp_ext
+    public static class Esp_ext
     {
         public static void Set_Pickup_ESP_Color(this GameObject obj, Color Color)
         {

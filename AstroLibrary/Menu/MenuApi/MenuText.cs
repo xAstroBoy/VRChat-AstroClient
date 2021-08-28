@@ -1,11 +1,10 @@
 ﻿namespace AstroLibrary.Utility
 {
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using UnityEngine;
-	using UnityEngine.UI;
+    using RubyButtonAPI;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-	public class MenuText
+    public class MenuText
     {
         public MenuText(QMNestedButton menuBase, float posx, float poxy, string text)
         {

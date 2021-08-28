@@ -2,12 +2,12 @@
 
 namespace DayClientML2.Modules.Misc
 {
-	using Blaze.Utils;
-	using System;
-	using System.Collections.Generic;
-	using System.IO;
+    using Blaze.Utils;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
 
-	public class ModerationHelper
+    public class ModerationHelper
     {
         public class ModerationEntry
         {

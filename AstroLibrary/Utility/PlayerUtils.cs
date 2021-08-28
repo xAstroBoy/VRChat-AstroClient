@@ -1,42 +1,113 @@
-﻿namespace Blaze.Utils
-{
-	using System.Web;
-	using UnityEngine;
-	using UnityEngine.XR;
-	using VRC.Core;
-	using VRC.SDKBase;
-	using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
+﻿// Credits to Blaze and DayOfThePlay
 
-	public static class PlayerUtils
+namespace AstroLibrary.Utility
+{
+    using AstroLibrary.Extensions;
+    using UnityEngine;
+    using UnityEngine.XR;
+    using VRC.Core;
+    using VRC.SDKBase;
+    using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
+
+    public static class PlayerUtils
     {
         #region CurrentUser
-        public static VRCPlayer GetCurrentUser()
+        /// <summary>
+        /// Gets the current VRCPlayer
+        /// </summary>
+        /// <param name="instance"></param>
+        /// <returns></returns>
+        public static VRCPlayer GetVRCPlayer()
         {
-			return VRCPlayer.field_Internal_Static_VRCPlayer_0 ?? null;
-		}
+            return VRCPlayer.field_Internal_Static_VRCPlayer_0;
+        }
 
-        public static bool SelfIsInVR()
+        public static VRC.Player GetPlayer()
+        {
+            return GetVRCPlayer().GetPlayer();
+        }
+
+        /// <summary>
+        /// Gets the current APIUser
+        /// </summary>
+        /// <returns></returns>
+        public static APIUser GetAPIUser()
+        {
+            return GetVRCPlayer().GetAPIUser();
+        }
+
+        /// <summary>
+        /// Gets the current players userid
+        /// </summary>
+        /// <returns></returns>
+        public static string UserID()
+        {
+            return GetVRCPlayer().GetUserID();
+        }
+
+        /// <summary>
+        /// Gets the current players dispay name
+        /// </summary>
+        /// <returns></returns>
+        public static string DisplayName()
+        {
+            return GetVRCPlayer().GetDisplayName();
+        }
+
+        public static bool IsInVR()
         {
             return XRDevice.isPresent;
         }
         #endregion
 
-        #region Player
+        #region VRC.Player
         public static VRC.Player GetPlayer(this VRCPlayer instance)
         {
-            return instance._player;
+            return instance?._player;
+        }
+
+        public static VRC.Player GetPlayer(this PlayerNet instance)
+        {
+            return instance?.prop_Player_0;
+        }
+
+        public static VRC.Player GetPlayer(this VRCPlayerApi instance)
+        {
+            return Utils.PlayerManager.GetPlayerID(instance.playerId);
+        }
+
+        public static VRC.Player GetPlayer(this APIUser instance)
+        {
+            return Utils.PlayerManager.GetPlayer(instance.id);
+        }
+        #endregion
+
+        #region VRCPlayer
+        public static VRCPlayer GetVRCPlayer(this VRC.Player instance)
+        {
+            return instance?._vrcplayer;
+        }
+
+        public static VRCPlayer GetVRCPlayer(this PlayerNet instance)
+        {
+            return instance?._vrcPlayer;
         }
         #endregion
 
         #region API User
         public static APIUser GetAPIUser(this VRCPlayer instance)
         {
-            return instance._player.prop_APIUser_0;
+            return instance?._player.prop_APIUser_0;
         }
 
         public static APIUser GetAPIUser(this VRC.Player instance)
         {
-            return instance.prop_APIUser_0;
+            return instance?.prop_APIUser_0;
+        }
+
+        public static APIUser GetAPIUser(this PlayerNet instance)
+        {
+            return instance?.GetPlayer().GetAPIUser();
         }
         #endregion
 
@@ -66,26 +137,19 @@
         // Api Avatar Details
         public static bool IsAllPlatform(this ApiAvatar instance)
         {
-			return instance.supportedPlatforms == ApiModel.SupportedPlatforms.All;
-		}
+            return instance.supportedPlatforms == ApiModel.SupportedPlatforms.All;
+        }
 
         public static bool IsPCPlatform(this ApiAvatar instance)
         {
-			return instance.supportedPlatforms == ApiModel.SupportedPlatforms.StandaloneWindows;
-		}
+            return instance.supportedPlatforms == ApiModel.SupportedPlatforms.StandaloneWindows;
+        }
 
         public static bool IsQuestPlatform(this ApiAvatar instance)
         {
-			return instance.supportedPlatforms == ApiModel.SupportedPlatforms.Android;
-		}
-
-        #endregion
-
-        #region VRCPlayer
-        public static VRCPlayer GetVRCPlayer(this VRC.Player instance)
-        {
-            return instance._vrcplayer;
+            return instance.supportedPlatforms == ApiModel.SupportedPlatforms.Android;
         }
+
         #endregion
 
         #region USpeaker
@@ -108,12 +172,17 @@
         #region VRCPlayerApi
         public static VRCPlayerApi GetVRCPlayerApi(this VRCPlayer instance)
         {
-            return instance.prop_VRCPlayerApi_0;
+            return instance?.prop_VRCPlayerApi_0;
         }
-        
+
         public static VRCPlayerApi GetVRCPlayerApi(this VRC.Player instance)
         {
-            return instance.prop_VRCPlayerApi_0;
+            return instance?.prop_VRCPlayerApi_0;
+        }
+
+        public static VRCPlayerApi GetVRCPlayerApi(this PlayerNet instance)
+        {
+            return instance?.GetVRCPlayer().GetVRCPlayerApi();
         }
         #endregion
 
@@ -148,14 +217,46 @@
         #endregion
 
         #region Avatar
-        public static void ReloadAvatar(this VRCPlayer Instance)
+        public static void ReloadAvatar()
         {
-            VRCPlayer.Method_Public_Static_Void_APIUser_0(Instance.GetAPIUser());
+            VRCPlayer.Method_Public_Static_Void_APIUser_0(GetAPIUser());
         }
 
-        public static void ReloadAvatar(this VRC.Player Instance)
+        public static void ReloadAvatar(this VRCPlayer instance)
         {
-            ReloadAvatar(Instance.GetVRCPlayer());
+            VRCPlayer.Method_Public_Static_Void_APIUser_0(instance.GetAPIUser());
+        }
+
+        public static void ReloadAvatar(this VRC.Player instance)
+        {
+            ReloadAvatar(instance.GetVRCPlayer());
+        }
+
+        public static GameObject GetAvatar(this VRC.Player Instance)
+        {
+            return Instance.GetVRCPlayer().GetAvatarManager().GetAvatar();
+        }
+
+        public static GameObject GetAvatar(this VRCPlayer Instance)
+        {
+            return Instance.GetAvatarManager().GetAvatar();
+        }
+
+        public static VRCAvatarManager GetAvatarManager(this VRCPlayer Instance)
+        {
+            return Instance.prop_VRCAvatarManager_0;
+        }
+
+        public static GameObject GetAvatar(this VRCAvatarManager Instance)
+        {
+            if (Instance.prop_GameObject_0 != null)
+                return Instance.prop_GameObject_0;
+            return null;
+        }
+
+        public static ApiAvatar GetAPIAvatar(this VRCAvatarManager Instance)
+        {
+            return Instance.field_Private_ApiAvatar_0;
         }
         #endregion
 
@@ -211,65 +312,65 @@
         // Is World Creator
         public static bool IsWorldCreator(this VRC.Player instance)
         {
-			return WorldUtils.GetCurrentWorld().authorId == instance.prop_APIUser_0.id;
-		}
+            return WorldUtils.GetWorld().authorId == instance.prop_APIUser_0.id;
+        }
 
         public static bool IsWorldCreator(this VRCPlayer instance)
         {
-			return WorldUtils.GetCurrentWorld().authorId == instance._player.prop_APIUser_0.id;
-		}
+            return WorldUtils.GetWorld().authorId == instance._player.prop_APIUser_0.id;
+        }
 
         public static bool IsWorldCreator(this APIUser instance)
         {
-			return WorldUtils.GetCurrentWorld().authorId == instance.id;
-		}
+            return WorldUtils.GetWorld().authorId == instance.id;
+        }
 
         // Is Friend
         public static bool IsFriend(this VRCPlayer instance)
         {
-			return APIUser.IsFriendsWith(instance._player.field_Private_APIUser_0.id);
-		}
+            return APIUser.IsFriendsWith(instance._player.field_Private_APIUser_0.id);
+        }
 
         public static bool IsFriend(this VRC.Player instance)
         {
-			return APIUser.IsFriendsWith(instance.field_Private_APIUser_0.id);
-		}
+            return APIUser.IsFriendsWith(instance.field_Private_APIUser_0.id);
+        }
 
         public static bool IsFriend(this APIUser instance)
         {
-			return APIUser.IsFriendsWith(instance.id);
-		}
+            return APIUser.IsFriendsWith(instance.id);
+        }
 
         // Is Staff Member
         public static bool IsStaffMember(this APIUser instance)
         {
-			return instance.tags.Contains("admin_moderator") 
-                || instance.hasModerationPowers 
-                || instance.tags.Contains("admin_") 
+            return instance.tags.Contains("admin_moderator")
+                || instance.hasModerationPowers
+                || instance.tags.Contains("admin_")
                 || instance.hasSuperPowers
                 || instance.id == "usr_81ac81f6-cdd1-4eaa-961f-22a80dc772c9";
-		}
+        }
 
         public static bool IsStaffMember(this VRCPlayer instance)
         {
-			return instance.GetAPIUser().tags.Contains("admin_moderator")
+            return instance.GetAPIUser().tags.Contains("admin_moderator")
                 || instance.GetAPIUser().hasModerationPowers
                 || instance.GetAPIUser().tags.Contains("admin_")
                 || instance.GetAPIUser().hasSuperPowers
                 || instance.GetAPIUser().id == "usr_81ac81f6-cdd1-4eaa-961f-22a80dc772c9";
-		}
+        }
 
         public static bool IsStaffMember(this VRC.Player instance)
         {
-			return instance.GetAPIUser().tags.Contains("admin_moderator")
+            return instance.GetAPIUser().tags.Contains("admin_moderator")
                 || instance.GetAPIUser().hasModerationPowers
                 || instance.GetAPIUser().tags.Contains("admin_")
                 || instance.GetAPIUser().hasSuperPowers
                 || instance.GetAPIUser().id == "usr_81ac81f6-cdd1-4eaa-961f-22a80dc772c9";
-		}
+        }
 
         // Display Name
-        public static string GetDisplayName (this VRCPlayerApi instance)
+        public static string GetDisplayName(this VRCPlayerApi instance)
         {
             return instance.displayName;
         }
@@ -318,19 +419,19 @@
 
         public static string GetFramesColored(this VRC.Player instance)
         {
-            var frames = GetFrames(instance);
-			return frames >= 80
-				? $"<color=green>{frames}</color>"
-				: frames <= 25 ? $"<color=red>{frames}</color>" : $"<color=orange>{frames}</color>";
-		}
+            var frames = instance.GetFrames();
+            return frames >= 80
+                ? $"<color=green>{frames}</color>"
+                : frames <= 25 ? $"<color=red>{frames}</color>" : $"<color=orange>{frames}</color>";
+        }
 
         public static string GetFramesColored(this VRCPlayer instance)
         {
-            var frames = GetFrames(instance);
-			return frames >= 80
-				? $"<color=green>{frames}</color>"
-				: frames <= 25 ? $"<color=red>{frames}</color>" : $"<color=orange>{frames}</color>";
-		}
+            var frames = instance.GetFrames();
+            return frames >= 80
+                ? $"<color=green>{frames}</color>"
+                : frames <= 25 ? $"<color=red>{frames}</color>" : $"<color=orange>{frames}</color>";
+        }
 
         // Ping
         public static short GetPing(this VRCPlayer instance)
@@ -345,68 +446,68 @@
 
         public static string GetPingColored(this VRCPlayer instance)
         {
-            var ping = GetPing(instance);
-			return ping >= 80 ? $"<color=red>{ping}</color>" : ping <= 35 ? $"<color=green>{ping}</color>" : $"<color=orange>{ping}</color>";
-		}
+            var ping = instance.GetPing();
+            return ping >= 80 ? $"<color=red>{ping}</color>" : ping <= 35 ? $"<color=green>{ping}</color>" : $"<color=orange>{ping}</color>";
+        }
 
         public static string GetPingColored(this VRC.Player instance)
         {
-            var ping = GetPing(instance);
-			return ping >= 80 ? $"<color=red>{ping}</color>" : ping <= 35 ? $"<color=green>{ping}</color>" : $"<color=orange>{ping}</color>";
-		}
+            var ping = instance.GetPing();
+            return ping >= 80 ? $"<color=red>{ping}</color>" : ping <= 35 ? $"<color=green>{ping}</color>" : $"<color=orange>{ping}</color>";
+        }
         #endregion
 
         #region Ranks
-		public static Color GetRankColor(this APIUser Instance)
-		{
-			ColorUtility.DoTryParseHtmlColor(GetRankColor(Instance.GetRank()), out Color32 color);
-			return color;
-		}
-
-        public static string GetRankColorHex(this APIUser Instance)
+        public static Color GetRankColor(this APIUser instance)
         {
-            string playerRank = Instance.GetRank();
-			return GetRankColor(playerRank);
+            ColorUtility.DoTryParseHtmlColor(GetRankColor(instance.GetRank()), out Color32 color);
+            return color;
+        }
+
+        public static string GetRankColorHex(this APIUser instance)
+        {
+            string playerRank = instance.GetRank();
+            return GetRankColor(playerRank);
         }
 
         private static string GetRankColor(string rank)
         {
-			return rank.ToLower() switch
-			{
-				"moderation user" => "#5e0000",
-				"admin user" => "#5e0000",
-				"legend" => "#ff5e5e",
-				"veteran" => "#fff821",
-				"trusted" => "#a621ff",
-				"known" => "#ffa200",
-				"user" => "#00e62a",
-				"new user" => "#00aeff",
-				"visitor" => "#bababa",
-				_ => "#303030",
-			};
-		}
+            return rank.ToLower() switch
+            {
+                "moderation user" => "#5e0000",
+                "admin user" => "#5e0000",
+                "legend" => "#ff5e5e",
+                "veteran" => "#fff821",
+                "trusted" => "#a621ff",
+                "known" => "#ffa200",
+                "user" => "#00e62a",
+                "new user" => "#00aeff",
+                "visitor" => "#bababa",
+                _ => "#303030",
+            };
+        }
 
-        public static string GetRank(this APIUser Instance)
+        public static string GetRank(this APIUser instance)
         {
-            if (Instance.hasModerationPowers || Instance.tags.Contains("admin_moderator"))
+            if (instance.hasModerationPowers || instance.tags.Contains("admin_moderator"))
                 return "Moderation User";
-            if (Instance.hasSuperPowers || Instance.tags.Contains("admin_"))
+            if (instance.hasSuperPowers || instance.tags.Contains("admin_"))
                 return "Admin User";
-            if (Instance.tags.Contains("system_legend") && Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
+            if (instance.tags.Contains("system_legend") && instance.tags.Contains("system_trust_legend") && instance.tags.Contains("system_trust_trusted"))
                 return "Legend";
-            if (Instance.tags.Contains("system_trust_legend") && Instance.tags.Contains("system_trust_trusted"))
+            if (instance.tags.Contains("system_trust_legend") && instance.tags.Contains("system_trust_trusted"))
                 return "Veteran";
-            if (Instance.hasVeteranTrustLevel)
+            if (instance.hasVeteranTrustLevel)
                 return "Trusted";
-            if (Instance.hasTrustedTrustLevel)
+            if (instance.hasTrustedTrustLevel)
                 return "Known";
-            if (Instance.hasKnownTrustLevel)
+            if (instance.hasKnownTrustLevel)
                 return "User";
-            if (Instance.hasBasicTrustLevel || Instance.isNewUser)
+            if (instance.hasBasicTrustLevel || instance.isNewUser)
                 return "New User";
-            if (Instance.hasNegativeTrustLevel || Instance.tags.Contains("system_probable_troll"))
+            if (instance.hasNegativeTrustLevel || instance.tags.Contains("system_probable_troll"))
                 return "NegativeTrust";
-            if (Instance.hasVeryNegativeTrustLevel)
+            if (instance.hasVeryNegativeTrustLevel)
                 return "VeryNegativeTrust";
             return "Visitor";
         }
@@ -417,11 +518,11 @@
         {
             string results = string.Empty;
 
-            if (instance.IsStaffMember()) 
+            if (instance.IsStaffMember())
                 return "[<color=red>MOD</color>]";
             else
             {
-                if (instance.IsWorldCreator()) 
+                if (instance.IsWorldCreator())
                     results += $"[<color=#{ColorUtility.ToHtmlStringRGB(new Color32(255, 0, 220, 255))}>WC</color>]";
 
                 if (instance.IsInstanceCreator() && !instance.IsWorldCreator())
@@ -457,8 +558,8 @@
         {
             if (instance.prop_VRCPlayerApi_0.IsUserInVR())
             {
-				return instance.GetPlatform() != "VR" ? "<color=#1aff00>(Q)</color>" : "<color=grey>(V)</color>";
-			}
+                return instance.GetPlatform() != "VR" ? "<color=#1aff00>(Q)</color>" : "<color=grey>(V)</color>";
+            }
             else
             {
                 return "<color=grey>(D)</color>";

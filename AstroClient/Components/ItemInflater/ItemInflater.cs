@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.Components
 {
-	using System;
-	using System.Runtime.InteropServices;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
+    using System;
+    using System.Runtime.InteropServices;
+    using UnhollowerRuntimeLib;
+    using UnityEngine;
 
-	public class ItemInflater : GameEventsBehaviour
+    public class ItemInflater : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;

@@ -1,12 +1,12 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using System;
+    using System;
 
-	#endregion Imports
+    #endregion Imports
 
-	public class Astro_Interactable : GameEventsBehaviour
+    public class Astro_Interactable : GameEventsBehaviour
     {
         public Astro_Interactable(IntPtr ptr) : base(ptr)
         {

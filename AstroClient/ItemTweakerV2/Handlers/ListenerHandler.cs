@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.ItemTweakerV2.Handlers
 {
-	using AstroClient.Components;
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroLibrary.Extensions;
-	using System;
-	using UnityEngine;
+    using AstroClient.Components;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroLibrary.Extensions;
+    using System;
+    using UnityEngine;
 
-	public class ListenerHandler : Tweaker_Events
+    public class ListenerHandler : Tweaker_Events
     {
         public static event EventHandler Event_OnSelectedObject_Enabled;
 

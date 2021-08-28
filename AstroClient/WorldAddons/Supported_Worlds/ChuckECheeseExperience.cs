@@ -1,13 +1,13 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Variables;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Finder;
-	using System.Collections.Generic;
-	using UnityEngine;
+    using AstroClient.Variables;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Finder;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-	public class ChuckECheeseExperience : GameEvents
+    public class ChuckECheeseExperience : GameEvents
     {
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {

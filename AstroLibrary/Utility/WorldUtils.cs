@@ -1,17 +1,35 @@
-﻿namespace Blaze.Utils
-{
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnityEngine;
-	using UnityEngine.Rendering.PostProcessing;
-	using VRC;
-	using VRC.Core;
-	using VRC.SDKBase;
-	using VRC.Udon;
+﻿// Credits to Blaze and DayOfThePlay
 
-	public static class WorldUtils
+namespace AstroLibrary.Utility
+{
+    using AstroLibrary.Console;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
+    using UnityEngine.Rendering.PostProcessing;
+    using VRC;
+    using VRC.Core;
+    using VRC.SDKBase;
+    using VRC.Udon;
+
+    public static class WorldUtils
     {
+        public static ApiWorld GetWorld()
+        {
+            return RoomManager.field_Internal_Static_ApiWorld_0;
+        }
+
+        public static ApiWorldInstance GetWorldInstance()
+        {
+            return RoomManager.field_Internal_Static_ApiWorldInstance_0;
+        }
+
+        public static bool IsInWorld()
+        {
+            return GetWorld() != null && GetWorldInstance() != null;
+        }
+
         public static IEnumerable<Player> GetPlayers()
         {
             return PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
@@ -29,40 +47,63 @@
 
         public static VRCPlayer GetInstanceMaster()
         {
-            foreach (Player p in GetPlayers())
+            foreach (var p in GetPlayers().Where(p => p._vrcplayer.IsInstanceMaster()))
             {
-                if (p._vrcplayer.IsInstanceMaster())
+                return p._vrcplayer;
+            }
+
+            return null;
+        }
+
+        public static string GetWorldID()
+        {
+            return GetWorld().id;
+        }
+
+        public static string GetWorldName()
+        {
+            return GetWorld().name;
+        }
+
+        public static List<string> GetWorldTags()
+        {
+            var instance = GetWorld();
+            if (instance != null)
+            {
+                if (instance.tags != null)
                 {
-                    return p._vrcplayer;
+                    return instance.tags.ToArray().ToList();
                 }
             }
             return null;
         }
 
-        public static ApiWorld GetCurrentWorld()
+        public static string GetWorldAssetURL()
         {
-            return RoomManager.field_Internal_Static_ApiWorld_0;
-        }
-
-        public static ApiWorldInstance GetCurrentInstance()
-        {
-            return RoomManager.field_Internal_Static_ApiWorldInstance_0;
-        }
-
-        public static bool IsInWorld()
-        {
-            if (RoomManager.field_Internal_Static_ApiWorld_0 != null && RoomManager.field_Internal_Static_ApiWorldInstance_0 != null) return true;
-            else return false;
-        }
-
-        public static string GetWorldID()
-        {
-            return RoomManager.field_Internal_Static_ApiWorld_0.id;
+            var instance = RoomManager.field_Internal_Static_ApiWorld_0;
+            if (instance != null)
+            {
+                if (instance.assetUrl != null)
+                {
+                    return instance.assetUrl;
+                }
+            }
+            return null;
         }
 
         public static string GetFullID()
         {
             return $"{RoomManager.field_Internal_Static_ApiWorld_0.id}#{RoomManager.field_Internal_Static_ApiWorldInstance_0.id}";
+        }
+
+        public static int GetWorldOccupants()
+        {
+            return GetWorld().occupants;
+        }
+
+        public static int GetWorldCapacity()
+        {
+            return GetWorld().capacity;
         }
 
         public static string GetSDKType()
@@ -79,8 +120,7 @@
         {
             if (!fullID.ToLower().StartsWith("wrld_") || !fullID.ToLower().Contains('#'))
             {
-                Logs.Debug("<color=red>INVALID JOIN ID!</color>");
-                Logs.Msg("INVALID JOIN ID!", ConsoleColor.Red);
+                ModConsole.Error("INVALID JOIN ID!");
                 return;
             }
             else
@@ -93,8 +133,7 @@
         {
             if (!worldID.ToLower().StartsWith("wrld_"))
             {
-                //Logs.Debug("<color=red>INVALID WORLD ID!</color>");
-                Logs.Msg("INVALID WORLD ID!", ConsoleColor.Red);
+                ModConsole.Error("INVALID WORLD ID!");
                 return;
             }
             else
@@ -107,9 +146,34 @@
         {
             var lower = name.ToLower();
             string[] scenes = { "application2", "ui", "empty", "dontdestroyonload", "hideanddontsave", "samplescene" };
-            if (scenes.Contains(lower))
-                return true;
-            else return false;
+            return scenes.Contains(lower);
+        }
+
+        public static List<GameObject> GetPrefabs()
+        {
+            try
+            {
+                var list1 = VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
+                if (list1 != null && list1.Count() != 0)
+                {
+                    return list1;
+                }
+                else
+                {
+                    var list2 = VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
+                    if (list2 != null && list2.Count() != 0)
+                    {
+                        return list2;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                ModConsole.Error("Error parsing World Prefabs");
+                ModConsole.ErrorExc(e);
+                return new List<GameObject>();
+            }
+            return new List<GameObject>();
         }
 
         public static VRCSDK2.VRC_SceneDescriptor GetSDK2Descriptor()
@@ -122,9 +186,9 @@
             return UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
         }
 
-        public static VRC_Pickup[] GetPickups()
+        public static List<VRC_Pickup> GetPickups()
         {
-            return Resources.FindObjectsOfTypeAll<VRC_Pickup>();
+            return Resources.FindObjectsOfTypeAll<VRC_Pickup>().ToList();
         }
 
         public static VRC_Pickup[] GetActivePickups()

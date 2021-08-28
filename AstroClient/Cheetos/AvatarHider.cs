@@ -1,16 +1,16 @@
 ﻿namespace AstroClient.Cheetos
 {
-	#region Imports
+    #region Imports
 
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using UnityEngine;
-	using VRC;
-	using VRC.SDKBase;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using UnityEngine;
+    using VRC;
 
-	#endregion Imports
+    #endregion Imports
 
-	public class AvatarHider : GameEvents
+    public class AvatarHider : GameEvents
     {
         public static bool HideAvatar = false;
 
@@ -26,7 +26,7 @@
                 var self = Utils.LocalPlayer.GetPlayer();
                 var owner = Avatar.transform.root.GetComponent<Player>();
 
-                if (self == owner)
+                if (self.UserID().Equals(owner.UserID()))
                 {
                     DestroyAvatar(Avatar);
                     ModConsole.DebugLog("Your avatar was hidden.");

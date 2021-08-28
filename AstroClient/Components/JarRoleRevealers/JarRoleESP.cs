@@ -1,17 +1,17 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroClient.Startup.Buttons;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using System;
-	using System.Linq;
-	using UnityEngine;
-	using UnityEngine.UI;
-	using VRC;
-	using VRC.Core;
-	using static AstroClient.JarRoleController;
+    using AstroClient.Startup.Buttons;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using System;
+    using System.Linq;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using VRC;
+    using VRC.Core;
+    using static AstroClient.JarRoleController;
 
-	public class JarRoleESP : GameEventsBehaviour
+    public class JarRoleESP : GameEventsBehaviour
     {
         public JarRoleESP(IntPtr ptr) : base(ptr)
         {

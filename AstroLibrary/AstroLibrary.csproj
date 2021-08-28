@@ -10,6 +10,7 @@
     <RootNamespace>AstroLibrary</RootNamespace>
     <AssemblyName>AstroLibrary</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <LangVersion>9.0</LangVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -21,7 +22,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,16 +30,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugCheetos|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>D:\Steam Library\steamapps\common\VRChat\Debug\Libs\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>8.0</LangVersion>
-    <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Accessibility" />
@@ -49,10 +39,6 @@
     </Reference>
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Assembly-CSharp-firstpass.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="AWSSDK.Core">
-      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\AWSSDK.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Boo.Lang">
@@ -610,10 +596,6 @@
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.TilemapModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.Timeline">
-      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.Timeline.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
@@ -770,18 +752,21 @@
     <Compile Include="Blaze%27s Utils\FileManager.cs" />
     <Compile Include="Blaze%27s Utils\JsonWriter.cs" />
     <Compile Include="Blaze%27s Utils\Logs.cs" />
-    <Compile Include="Blaze%27s Utils\MiscUtils.cs" />
+    <Compile Include="Extensions\Coding_ext.cs" />
+    <Compile Include="Utility\AvatarUtils.cs" />
+    <Compile Include="Utility\BonesUtils.cs" />
+    <Compile Include="Utility\GameObjectUtils.cs" />
+    <Compile Include="Utility\MiscUtils.cs" />
     <Compile Include="Blaze%27s Utils\ModerationHelper.cs" />
     <Compile Include="Blaze%27s Utils\NetworkUtils.cs" />
     <Compile Include="Blaze%27s Utils\PhotonUtils.cs" />
-    <Compile Include="Blaze%27s Utils\PlayerUtils.cs" />
+    <Compile Include="Utility\PlayerUtils.cs" />
     <Compile Include="Blaze%27s Utils\PopupUtils.cs" />
-    <Compile Include="Blaze%27s Utils\QuickMenuUtils.cs" />
     <Compile Include="Blaze%27s Utils\SerializationUtils.cs" />
     <Compile Include="Blaze%27s Utils\SocialMenuUtils.cs" />
     <Compile Include="Blaze%27s Utils\UdonUtils.cs" />
     <Compile Include="Blaze%27s Utils\VRCUiManagerUtils.cs" />
-    <Compile Include="Blaze%27s Utils\WorldUtils.cs" />
+    <Compile Include="Utility\WorldUtils.cs" />
     <Compile Include="CheetosConsole\Console.cs" />
     <Compile Include="CheetosConsole\DefaultFonts.cs" />
     <Compile Include="CheetosConsole\Extensions.cs" />
@@ -791,7 +776,7 @@
     <Compile Include="CheetosConsole\StyledString.cs" />
     <Compile Include="CheetosConsole\VirtualTerminalSequences.cs" />
     <Compile Include="CheetosHelpers.cs" />
-    <Compile Include="Extensions\CameraExtension.cs" />
+    <Compile Include="Utility\CameraUtils.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\MiscExtension.cs" />
     <Compile Include="Extensions\ModerationManagerExtension.cs" />
@@ -800,18 +785,15 @@
     <Compile Include="Extensions\PhotonExtensions.cs" />
     <Compile Include="Extensions\PlayerExtensions.cs" />
     <Compile Include="Extensions\PlayerManagerExtension.cs" />
-    <Compile Include="Extensions\PopupManagerExtension.cs" />
-    <Compile Include="Extensions\QuickMenuExtension.cs" />
-    <Compile Include="Extensions\RoomManagerExtension.cs" />
+    <Compile Include="Utility\PopupManagerExtension.cs" />
+    <Compile Include="Utility\QuickMenuUtils.cs" />
     <Compile Include="Extensions\VRCUiManagerExtension.cs" />
     <Compile Include="Extensions\VRInput.cs" />
-    <Compile Include="Managers\AchievmentsManager.cs" />
     <Compile Include="Managers\Assets.cs" />
     <Compile Include="Managers\AssetsManager.cs" />
     <Compile Include="Managers\ConversionManager.cs" />
     <Compile Include="Managers\CustomJsonTypes.cs" />
     <Compile Include="Managers\ExploitManager.cs" />
-    <Compile Include="Managers\FileManager.cs" />
     <Compile Include="Menu\MenuApi\MenuArrow.cs" />
     <Compile Include="Menu\MenuApi\MenuButtonAPI.cs" />
     <Compile Include="Menu\MenuApi\MenuButtonType.cs" />
@@ -855,7 +837,7 @@
     <Compile Include="ModConsole.cs" />
     <Compile Include="GameObjectFinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Extensions\Utils.cs" />
+    <Compile Include="Utility\Utils.cs" />
     <Compile Include="VRChatObjects.cs" />
     <Compile Include="XrefTesting.cs" />
   </ItemGroup>

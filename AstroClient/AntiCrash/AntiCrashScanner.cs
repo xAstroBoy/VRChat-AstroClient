@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.AntiCrash
 {
-	using AstroLibrary.Extensions;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using VRC;
-	using VRC.SDKBase;
+    using AstroLibrary.Extensions;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using VRC;
+    using VRC.SDKBase;
 
-	public static class AntiCrashScanner
+    public static class AntiCrashScanner
     {
         public static Material DefaultMaterial = new Material(Shader.Find("Standard"));
 
@@ -24,24 +24,24 @@
                 AntiCrashUtils.TempLog($"Scanning {player.DisplayName()}'s avatar..");
                 InitiateScan(avatar, out bool isClean, out List<string> crashTypes);
 
-				if (isClean)
-				{
-					avatar.SetActive(true);
-					AntiCrashUtils.TempLog($"{player.DisplayName()}'s avatar has nothing detected..");
-				}
-				else
-				{
-					AntiCrashUtils.TempLog($"Blocked {player.DisplayName()}'s Avatar!");
-					crashTypes.ForEach(ct => AntiCrashUtils.TempLog($"Crash Type: {ct}"));
-				}
+                if (isClean)
+                {
+                    avatar.SetActive(true);
+                    AntiCrashUtils.TempLog($"{player.DisplayName()}'s avatar has nothing detected..");
+                }
+                else
+                {
+                    AntiCrashUtils.TempLog($"Blocked {player.DisplayName()}'s Avatar!");
+                    crashTypes.ForEach(ct => AntiCrashUtils.TempLog($"Crash Type: {ct}"));
+                }
 
             }
         }
 
         private static void InitiateScan(GameObject avatar, out bool isClean, out List<string> crashTypes)
         {
-			isClean = true;
-			crashTypes = new List<string>();
+            isClean = true;
+            crashTypes = new List<string>();
 
             //var renderers = avatar.GetComponentsInChildren<Renderer>();
             //var particleSystems = avatar.GetComponentsInChildren<ParticleSystem>();
@@ -55,9 +55,9 @@
                 if (audioSourcesCount >= 150)
                 {
                     //audioSource.DestroyMeLocal();
-					//AntiCrashUtils.TempLog($"AudioSources: destroyed, max reached.");
-					crashTypes.Add($"Audio: {audioSourcesCount}");
-					isClean = false;
+                    //AntiCrashUtils.TempLog($"AudioSources: destroyed, max reached.");
+                    crashTypes.Add($"Audio: {audioSourcesCount}");
+                    isClean = false;
                 }
                 //AntiCrashUtils.TempLog($"SkinnedMeshRenderer found: {skinnedMeshRenderer.name}");
                 // ScanAudioSources(audioSources);

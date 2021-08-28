@@ -1,8 +1,8 @@
 ﻿namespace RubyButtonAPI
 {
-	using UnityEngine;
+    using UnityEngine;
 
-	public class QMNestedButton
+    public class QMNestedButton
     {
         protected QMSingleButton mainButton;
         protected QMSingleButton backButton;

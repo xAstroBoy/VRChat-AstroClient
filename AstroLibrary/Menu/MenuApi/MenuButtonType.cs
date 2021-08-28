@@ -1,6 +1,6 @@
 ﻿namespace AstroLibrary.Enums
 {
-	public enum MenuButtonType
+    public enum MenuButtonType
     {
         PlaylistButton,
         AvatarFavButton,

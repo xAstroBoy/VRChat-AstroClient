@@ -1,22 +1,22 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Components;
-	using AstroClient.Features.Player.Movement.Exploit;
-	using AstroClient.UdonExploits;
-	using AstroClient.Variables;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Finder;
-	using AstroLibrary.Utility;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnityEngine;
-	using VRC;
-	using static AstroClient.Variables.CustomLists;
+    using AstroClient.Components;
+    using AstroClient.Features.Player.Movement.Exploit;
+    using AstroClient.UdonExploits;
+    using AstroClient.Variables;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Finder;
+    using AstroLibrary.Utility;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
+    using VRC;
+    using static AstroClient.Variables.CustomLists;
 
-	public class AmongUSCheats : GameEvents
+    public class AmongUSCheats : GameEvents
     {
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
@@ -61,7 +61,7 @@
                 invisiblewall_1.DestroyMeLocal();
             }
 
-            foreach (var action in WorldUtils.Get_UdonBehaviours())
+            foreach (var action in WorldUtils.GetUdonScripts())
             {
                 if (action.gameObject.name == "Game Logic")
                 {
@@ -248,7 +248,7 @@
                 return false;
             }
 
-            MiscUtility.DelayFunction(0.01f, new Action(() =>
+            MiscUtils.DelayFunction(0.01f, new Action(() =>
             {
                 ModConsole.DebugLog($"Executing Role Swapping!, Target Has Role : {AssignedTargetRole}, You have {AssignedSelfRole}.");
                 var TargetEvent = UdonSearch.FindUdonEvent(TargetNode, AssignedSelfRole);
@@ -355,7 +355,7 @@
                         }
                         if (ESP != null)
                         {
-                            MiscUtility.DelayFunction(0.4f, new Action(() => { ESP.ChangeColor(Color.yellow); }));
+                            MiscUtils.DelayFunction(0.4f, new Action(() => { ESP.ChangeColor(Color.yellow); }));
                         }
                     }
                 }

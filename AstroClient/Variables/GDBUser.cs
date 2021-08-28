@@ -1,10 +1,11 @@
 ﻿namespace AstroClient.Variables
 {
-	using AstroLibrary.Extensions;
-	using UnityEngine;
-	using VRC;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using UnityEngine;
+    using VRC;
 
-	public class GDBUser
+    public class GDBUser
     {
         public Player vrcPlayer;
         public GameObject avatarObject;

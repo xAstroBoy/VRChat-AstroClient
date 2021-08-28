@@ -1,10 +1,10 @@
 ﻿
 namespace AstroClient.Components
 {
-	using System.Collections.Generic;
-	using UnityEngine;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-	internal class EspHelper : GameEvents
+    internal class EspHelper : GameEvents
     {
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {

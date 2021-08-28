@@ -1,21 +1,22 @@
 ﻿namespace AstroClient.Cheetos
 {
-	using AstroClient.Components.SitOnPlayer;
-	#region Imports
+    #region Imports
 
-	using AstroClient.Variables;
-	using AstroLibrary;
-	using AstroLibrary.Console;
-	using AstroLibrary.Finder;
-	using Blaze.Utils;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using UnityEngine.UI;
-	using VRC;
+    using AstroClient.Components.SitOnPlayer;
+    using AstroClient.Variables;
+    using AstroLibrary;
+    using AstroLibrary.Console;
+    using AstroLibrary.Finder;
+    using AstroLibrary.Utility;
+    using Blaze.Utils;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using VRC;
 
-	#endregion
+    #endregion
 
-	internal class CheetosTestStuff : GameEvents
+    internal class CheetosTestStuff : GameEvents
     {
         private static bool DoOnce;
 
@@ -34,20 +35,20 @@
             //ModConsole.Log($"VRChat Version: {VRChatVersion}, {VRChatBuild}");
         }
 
-		public override void OnPlayerJoined(Player player)
-		{
-			player.gameObject.AddComponent<NamePlates>();
-		}
-
-		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnPlayerJoined(Player player)
         {
-			Player player = PlayerUtils.GetCurrentUser().GetPlayer();
-			if (player.gameObject.GetComponent<SitOnPlayer>() == null)
-			{
-				player.gameObject.AddComponent<SitOnPlayer>();
-			}
+            player.gameObject.AddComponent<NamePlates>();
+        }
 
-			if (Bools.IsDeveloper)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        {
+            Player player = PlayerUtils.GetPlayer();
+            if (player.gameObject.GetComponent<SitOnPlayer>() == null)
+            {
+                player.gameObject.AddComponent<SitOnPlayer>();
+            }
+
+            if (Bools.IsDeveloper)
             {
                 if (!DoOnce)
                 {

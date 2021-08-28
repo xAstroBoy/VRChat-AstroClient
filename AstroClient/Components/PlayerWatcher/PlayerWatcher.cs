@@ -1,17 +1,18 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroClient.GameObjectDebug;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using System;
-	using System.Runtime.InteropServices;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
-	using VRC;
-	using Delegate = System.Delegate;
-	using Time = UnityEngine.Time;
+    using AstroClient.GameObjectDebug;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using System;
+    using System.Runtime.InteropServices;
+    using UnhollowerRuntimeLib;
+    using UnityEngine;
+    using VRC;
+    using Delegate = System.Delegate;
+    using Time = UnityEngine.Time;
 
-	public class PlayerWatcher : GameEventsBehaviour
+    public class PlayerWatcher : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;
@@ -164,7 +165,7 @@
         private void OnDestroy()
         {
             control.RestoreOriginalBody();
-            GameObjectUtils.RestoreOriginalLocation(gameObject, false);
+            GameObjectMenu.RestoreOriginalLocation(gameObject, false);
             PlayerWatcherManager.RemoveSelf(gameObject);
             OnlineEditor.RemoveOwnerShip(gameObject);
             PlayerWatcherManager.Deregister(this);
@@ -173,7 +174,7 @@
         public static Transform PositionOfBone(Player player, HumanBodyBones bone)
         {
             Transform bonePosition = player.transform;
-            VRCAvatarManager avatarManager = player.GetVRCPlayer().prop_VRCAvatarManager_0;
+            VRCAvatarManager avatarManager = player.GetVRCPlayer().GetAvatarManager();
             if (!avatarManager)
                 return bonePosition;
             Animator animator = avatarManager.field_Private_Animator_0;

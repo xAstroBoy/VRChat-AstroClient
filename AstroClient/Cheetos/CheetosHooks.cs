@@ -1,31 +1,32 @@
 ﻿namespace AstroClient.Cheetos
 {
-	#region Imports
+    #region Imports
 
-	using AstroClient.Variables;
-	using AstroClientCore.Events;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroNetworkingLibrary;
-	using AstroNetworkingLibrary.Serializable;
-	using DayClientML2.Utility;
-	using ExitGames.Client.Photon;
-	using Harmony;
-	using MelonLoader;
-	using Newtonsoft.Json;
-	using Photon.Realtime;
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Reflection;
-	using UnhollowerBaseLib;
-	using UnityEngine;
-	using VRC;
-	using VRC.Core;
+    using AstroClient.Variables;
+    using AstroClientCore.Events;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using AstroNetworkingLibrary;
+    using AstroNetworkingLibrary.Serializable;
+    using DayClientML2.Utility;
+    using ExitGames.Client.Photon;
+    using Harmony;
+    using MelonLoader;
+    using Newtonsoft.Json;
+    using Photon.Realtime;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using UnhollowerBaseLib;
+    using UnityEngine;
+    using VRC;
+    using VRC.Core;
 
-	#endregion Imports
+    #endregion Imports
 
-	internal class CheetosHooks : GameEvents
+    internal class CheetosHooks : GameEvents
     {
         public static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonJoin;
 
@@ -131,98 +132,98 @@
                 new Patch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
                 new Patch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
 
-				// Experiments
-				new Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.Method_Public_Boolean_String_Object_Boolean_PDM_0)), GetPatch(nameof(LoadBalancingClient_OpWebRpc)));
+                // Experiments
+                new Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.Method_Public_Boolean_String_Object_Boolean_PDM_0)), GetPatch(nameof(LoadBalancingClient_OpWebRpc)));
 
-                ModConsole.DebugLog("[Client Cheetos Patches] DONE!");
+                ModConsole.Log("[Client Cheetos Patches] DONE!");
                 Patch.DoPatches();
             }
             catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
             finally { }
         }
 
-		private static bool LoadBalancingClient_OpWebRpc(LoadBalancingClient __instance, ref string __0, ref object __1, ref bool __2)
-		{
-			string text = "LoadBalancingClient_OpWebRpc: " + __0 + ", ";
-			if (__1 != null)
-			{
-				string str = text;
-				object obj = __1;
-				ModConsole.Log(str + ((obj != null) ? obj.ToString() : null) + ", " + __2.ToString());
-			}
-			else
-			{
-				ModConsole.Log(text + "null, " + __2.ToString());
-			}
-			return true;
-		}
+        private static bool LoadBalancingClient_OpWebRpc(LoadBalancingClient __instance, ref string __0, ref object __1, ref bool __2)
+        {
+            string text = "LoadBalancingClient_OpWebRpc: " + __0 + ", ";
+            if (__1 != null)
+            {
+                string str = text;
+                object obj = __1;
+                ModConsole.Log(str + ((obj != null) ? obj.ToString() : null) + ", " + __2.ToString());
+            }
+            else
+            {
+                ModConsole.Log(text + "null, " + __2.ToString());
+            }
+            return true;
+        }
 
-		private static void APIUserBypass(APIUser __instance, ref bool __result)
-		{
-			if (__instance.IsSelf)
-			{
-				__result = true;
-			}
-		}
+        private static void APIUserBypass(APIUser __instance, ref bool __result)
+        {
+            if (__instance.IsSelf)
+            {
+                __result = true;
+            }
+        }
 
-		private static void APIUserBypass2(APIUser __instance, ref bool __result)
-		{
-			if (__instance.IsSelf)
-			{
-				__result = false;
-			}
-		}
+        private static void APIUserBypass2(APIUser __instance, ref bool __result)
+        {
+            if (__instance.IsSelf)
+            {
+                __result = false;
+            }
+        }
 
-		private static bool OnConfigurePortal(PortalInternal __instance, ref string __0, ref string __1, ref int __2, ref VRC.Player __3)
-		{
-			ModConsole.Log($"Portal Spawned: {__0}, {__1}, {__2}, {__3.DisplayName()}");
-			return true;
-		}
+        private static bool OnConfigurePortal(PortalInternal __instance, ref string __0, ref string __1, ref int __2, ref VRC.Player __3)
+        {
+            ModConsole.Log($"Portal Spawned: {__0}, {__1}, {__2}, {__3.DisplayName()}");
+            return true;
+        }
 
-		private static bool OnEnterPortal(PortalInternal __instance)
-		{
-			if (Bools.AntiPortal)
-			{
-				ModConsole.Log("Portal Entry Blocked!");
-				return false;
-			}
-			else
-			{
-				ModConsole.Log($"Portal Entered");
-				return true;
-			}
-		}
+        private static bool OnEnterPortal(PortalInternal __instance)
+        {
+            if (Bools.AntiPortal)
+            {
+                ModConsole.Log("Portal Entry Blocked!");
+                return false;
+            }
+            else
+            {
+                ModConsole.Log($"Portal Entered");
+                return true;
+            }
+        }
 
-		private static bool OnTestPatch(ref Il2CppStructArray<bool> __0)
+        private static bool OnTestPatch(ref Il2CppStructArray<bool> __0)
         {
             ModConsole.Log("Test!");
             return true;
         }
 
-		private static void SpoofQuest(ref string __result)
-		{
-			try
-			{
-				if (AstroClient.ConfigManager.General.SpoofQuest)
-				{
-					if (!RoomManagerExtension.IsInWorld())
-					{
-						__result = "android";
-					}
-				}
-			}
-			catch
-			{
-			}
-		}
-
-		private static void SpoofPing(ref int __result)
+        private static void SpoofQuest(ref string __result)
         {
             try
             {
-                if (AstroClient.ConfigManager.General.SpoofPing)
+                if (AstroClient.ConfigManager.General.SpoofQuest)
                 {
-					Temporary.RealPing = __result;
+                    if (!WorldUtils.IsInWorld())
+                    {
+                        __result = "android";
+                    }
+                }
+            }
+            catch
+            {
+            }
+        }
+
+        private static void SpoofPing(ref int __result)
+        {
+            try
+            {
+                if (AstroClient.ConfigManager.General.SpoofPing && WorldUtils.IsInWorld())
+                {
+                    Temporary.RealPing = __result;
                     __result = AstroClient.ConfigManager.General.SpoofedPing;
                     return;
                 }
@@ -234,9 +235,9 @@
         {
             try
             {
-                if (AstroClient.ConfigManager.General.SpoofFPS)
+                if (AstroClient.ConfigManager.General.SpoofFPS && WorldUtils.IsInWorld())
                 {
-					Temporary.RealFPS = __result;
+                    Temporary.RealFPS = __result;
                     __result = (float)1f / AstroClient.ConfigManager.General.SpoofedFPS;
                     return;
                 }

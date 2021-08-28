@@ -1,15 +1,9 @@
 ﻿namespace AstroClient
 {
-	using UnityEngine;
-	using VRC.Core;
+    using UnityEngine;
 
-	public class QuickMenuUtils : GameEvents
+    public class QuickMenuUtils_Old : GameEvents
     {
-        public static APIUser GetSelectedUser()
-        {
-            return QuickMenu.prop_QuickMenu_0.prop_APIUser_0;
-        }
-
         public static void SetQuickMenuBackGround(float x, float y)
         {
             Transform transform = QuickMenu.prop_QuickMenu_0.transform.Find("QuickMenu_NewElements/_Background");

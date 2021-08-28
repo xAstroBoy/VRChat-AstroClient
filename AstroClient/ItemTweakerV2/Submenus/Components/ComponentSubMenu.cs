@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-	using AstroClient.Components;
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
+    using AstroClient.Components;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
 
-	public class ComponentSubMenu : Tweaker_Events
+    public class ComponentSubMenu : Tweaker_Events
     {
         public static void Init_ComponentSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
@@ -23,8 +23,8 @@
             CrazyObjectManager.KillCrazyObjects();
             RocketManager.KillRockets();
             ObjectSpinnerManager.KillObjectSpinners();
-			ItemTweakerV2.Selector.Tweaker_Object.GetGameObjectToEdit().KillCustomComponents(false, false);
+            ItemTweakerV2.Selector.Tweaker_Object.GetGameObjectToEdit().KillCustomComponents(false, false);
 
-		}
-	}
+        }
+    }
 }

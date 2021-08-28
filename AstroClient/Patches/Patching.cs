@@ -1,24 +1,24 @@
 ﻿namespace AstroClient.BetterPatch
 {
-	#region Imports
+    #region Imports
 
-	using AstroClient.Features.Player.Movement.Exploit;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using ExitGames.Client.Photon;
-	using HarmonyLib;
-	using MelonLoader;
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Reflection;
-	using UnityEngine;
-	using VRC;
-	using VRC.SDKBase;
+    using AstroClient.Features.Player.Movement.Exploit;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using ExitGames.Client.Photon;
+    using HarmonyLib;
+    using MelonLoader;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using UnityEngine;
+    using VRC;
+    using VRC.SDKBase;
 
-	#endregion Imports
+    #endregion Imports
 
-	internal class Patching : GameEvents
+    internal class Patching : GameEvents
     {
         private static HarmonyMethod GetPatch(string name)
         {

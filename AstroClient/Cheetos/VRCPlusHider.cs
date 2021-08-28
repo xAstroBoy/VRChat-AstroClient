@@ -1,12 +1,12 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using AstroLibrary.Finder;
+    using AstroLibrary.Finder;
 
-	#endregion Imports
+    #endregion Imports
 
-	public class VRCPlusHider : GameEvents
+    public class VRCPlusHider : GameEvents
     {
         public override void VRChat_OnUiManagerInit()
         {

@@ -1,8 +1,8 @@
 ﻿namespace AstroClient
 {
-	using UnityEngine;
+    using UnityEngine;
 
-	public class RayCastEventArgs
+    public class RayCastEventArgs
     {
         public RaycastHit hit;
 

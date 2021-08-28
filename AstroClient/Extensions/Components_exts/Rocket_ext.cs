@@ -1,6 +1,6 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	public static class Rocket_ext
+    public static class Rocket_ext
     {
     }
 }

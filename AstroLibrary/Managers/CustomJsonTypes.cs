@@ -1,8 +1,8 @@
 ﻿namespace AstroLibrary.Managers
 {
-	using UnityEngine;
+    using UnityEngine;
 
-	public class JsonColor
+    public class JsonColor
     {
         public float R { get; set; }
         public float G { get; set; }

@@ -1,8 +1,8 @@
 ﻿namespace Blaze.Utils
 {
-	using UnityEngine;
+    using UnityEngine;
 
-	public class ConversionUtils
+    public class ConversionUtils
     {
         public static Vector3 StringToVector3(string sVector)
         {

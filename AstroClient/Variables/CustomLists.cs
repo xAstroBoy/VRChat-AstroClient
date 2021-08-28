@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.Variables
 {
-	using System.Collections.Generic;
-	using UnityEngine;
-	using VRC.Udon;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using VRC.Udon;
 
-	public class CustomLists : GameEvents
+    public class CustomLists : GameEvents
     {
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {

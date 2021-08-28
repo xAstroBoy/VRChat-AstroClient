@@ -1,9 +1,9 @@
 ﻿namespace AstroClient
 {
-	using System;
-	using System.Collections.Generic;
+    using System;
+    using System.Collections.Generic;
 
-	public class OnWorldRevealArgs : EventArgs
+    public class OnWorldRevealArgs : EventArgs
     {
         public string ID;
         public string Name;

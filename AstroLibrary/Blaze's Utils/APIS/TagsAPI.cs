@@ -1,11 +1,11 @@
 ﻿namespace Blaze.API
 {
-	using System.Linq;
-	using TMPro;
-	using UnityEngine;
-	using VRC;
+    using System.Linq;
+    using TMPro;
+    using UnityEngine;
+    using VRC;
 
-	public class BlazeTag
+    public class BlazeTag
     {
         protected GameObject Tag;
         protected TextMeshProUGUI Text;
@@ -18,30 +18,30 @@
         private void Initialize(Player player, string TagText, Color TagColor, bool top)
         {
             int Count;
-			if (top)
-			{
-				if (BlazesAPIs.PlayersTopTagsCount.ContainsKey(player))
-				{
-					BlazesAPIs.PlayersTopTagsCount.TryGetValue(player, out int kekidfk);
-					Count = kekidfk;
-				}
-				else
-				{
-					Count = 0;
-				}
-			}
-			else
-			{
-				if (BlazesAPIs.PlayersBottomTagsCount.ContainsKey(player))
-				{
-					BlazesAPIs.PlayersBottomTagsCount.TryGetValue(player, out int kekidfk);
-					Count = kekidfk;
-				}
-				else
-				{
-					Count = 0;
-				}
-			}
+            if (top)
+            {
+                if (BlazesAPIs.PlayersTopTagsCount.ContainsKey(player))
+                {
+                    BlazesAPIs.PlayersTopTagsCount.TryGetValue(player, out int kekidfk);
+                    Count = kekidfk;
+                }
+                else
+                {
+                    Count = 0;
+                }
+            }
+            else
+            {
+                if (BlazesAPIs.PlayersBottomTagsCount.ContainsKey(player))
+                {
+                    BlazesAPIs.PlayersBottomTagsCount.TryGetValue(player, out int kekidfk);
+                    Count = kekidfk;
+                }
+                else
+                {
+                    Count = 0;
+                }
+            }
             if (player.transform.Find("Player Nameplate/Canvas/Nameplate/Contents/").FindChild($"{BlazesAPIs.Identifier}-Tag-{Count}") != null) return; // Prevent duplicates spawning on a player
             var baseTag = player.transform.Find("Player Nameplate/Canvas/Nameplate/Contents/Quick Stats").gameObject;
             Tag = UnityEngine.Object.Instantiate(baseTag, player.transform.Find("Player Nameplate/Canvas/Nameplate/Contents/"));
@@ -68,7 +68,7 @@
             /*if (BlazesAPIs.AddTagGap)
                 Tag.transform.localPosition = new Vector3(0f, (30 * (count + 2)), 0f);
             else*/
-                Tag.transform.localPosition = new Vector3(0f, (30 * (count + 1)), 0f);
+            Tag.transform.localPosition = new Vector3(0f, (30 * (count + 1)), 0f);
         }
 
         private void DeleteChildren()
@@ -87,7 +87,7 @@
             }
         }
     }
-    
+
     public class TagsUtils
     {
         public static void ClearPlayersTags(VRC.Player instance)
@@ -104,7 +104,7 @@
                 }
                 BlazesAPIs.PlayersTopTagsCount.Remove(instance);
             }
-            catch {}
+            catch { }
         }
 
         public static void ClearAllTags()
@@ -121,7 +121,7 @@
                 }
                 BlazesAPIs.PlayersTopTagsCount.Clear();
             }
-            catch {}
+            catch { }
         }
     }
 }

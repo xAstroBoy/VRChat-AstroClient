@@ -1,11 +1,11 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Components;
-	using AstroLibrary.Extensions;
-	using TMPro;
-	using UnityEngine;
+    using AstroClient.Components;
+    using AstroLibrary.Extensions;
+    using TMPro;
+    using UnityEngine;
 
-	public static class ButtonCreator
+    public static class ButtonCreator
     {
         public static GameObject Create(string text, Vector3 position, Quaternion rotation, System.Action action)
         {
@@ -14,14 +14,14 @@
             go.transform.position = position;
             go.transform.rotation = rotation;
             go.transform.localScale = new Vector3(0.2f, 0.1f, 0.1f);
-			var AstroTrigger = go.AddComponent<VRC_AstroUdonTrigger>();
-			if (AstroTrigger != null)
-			{
-				AstroTrigger.InteractText = text;
-				AstroTrigger.OnInteract = action;
-			}
-			var textObject = new GameObject("Text");
-			textObject.transform.parent = go.transform;
+            var AstroTrigger = go.AddComponent<VRC_AstroUdonTrigger>();
+            if (AstroTrigger != null)
+            {
+                AstroTrigger.InteractText = text;
+                AstroTrigger.OnInteract = action;
+            }
+            var textObject = new GameObject("Text");
+            textObject.transform.parent = go.transform;
             var rect = textObject.AddComponent<RectTransform>();
             rect.sizeDelta = new Vector2(1f, 1f);
             textObject.transform.parent = textObject.transform;

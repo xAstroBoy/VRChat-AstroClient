@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using System;
 
-	public class BouncerSubMenu : Tweaker_Events
+    public class BouncerSubMenu : Tweaker_Events
     {
         public static void Init_BouncerMenu(QMNestedButton main, float x, float y, bool btnhalf)
         {

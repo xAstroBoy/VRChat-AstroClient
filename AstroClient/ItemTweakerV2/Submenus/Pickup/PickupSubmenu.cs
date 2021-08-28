@@ -1,15 +1,16 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-	using AstroClient.Components;
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
-	using UnityEngine;
-	using VRC.SDKBase;
-	using Color = UnityEngine.Color;
+    using AstroClient.Components;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using RubyButtonAPI;
+    using System;
+    using UnityEngine;
+    using VRC.SDKBase;
+    using Color = UnityEngine.Color;
 
-	public class PickupSubmenu : Tweaker_Events
+    public class PickupSubmenu : Tweaker_Events
     {
         public static void Init_PickupSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {

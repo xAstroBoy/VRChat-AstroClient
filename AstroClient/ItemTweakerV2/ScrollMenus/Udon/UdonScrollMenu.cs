@@ -1,14 +1,14 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroClient.Variables;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using VRC.Udon.Common.Interfaces;
-	using AstroClient.Components;
-	using UnityEngine;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroClient.Variables;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using VRC.Udon.Common.Interfaces;
+    using AstroClient.Components;
+    using UnityEngine;
 
-	public class UdonScrollMenu
+    public class UdonScrollMenu
     {
         public static void Init_Internal_UdonEvents(QMTabMenu main, float x, float y, bool btnHalf)
         {
@@ -31,38 +31,38 @@
                 foreach (var action in Tweaker_Object.GetGameObjectToEdit().Get_UdonBehaviours())
                 {
 
-					var btn = new QMSingleButton(Menu, 0f, 0f, action.gameObject.name, delegate
-					{
-						MainScroll.SetAction(delegate
-						{
-							foreach (var subaction in action._eventTable)
-							{
-								MainScroll.Add(new QMSingleButton(MainScroll.BaseMenu, 0f, 0f, subaction.Key, delegate
-								{
-									if (subaction.key.StartsWith("_"))
-									{
-										action.SendCustomEvent(subaction.Key);
-									}
-									else
-									{
-										action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
-									}
-								}, action.gameObject?.ToString() + " Run " + subaction.Key));
-							}
-							var unboxer = new QMSingleButton(MainScroll.BaseMenu, 0, -0.5f, $"Unbox {action.name}", () => { action.UnboxUdonEventToConsole(); }, $"Attempts to unbox {action.name} in console..", null, Color.yellow, true);
-							MainScroll.Add(unboxer);
-							unboxer.SetLocation(0, -0.5f);
-						});
-						MainScroll.BaseMenu.GetMainButton().GetGameObject().GetComponent<UnityEngine.UI.Button>()
-							.onClick.Invoke();
-					}, action.interactText);
+                    var btn = new QMSingleButton(Menu, 0f, 0f, action.gameObject.name, delegate
+                    {
+                        MainScroll.SetAction(delegate
+                        {
+                            foreach (var subaction in action._eventTable)
+                            {
+                                MainScroll.Add(new QMSingleButton(MainScroll.BaseMenu, 0f, 0f, subaction.Key, delegate
+                                {
+                                    if (subaction.key.StartsWith("_"))
+                                    {
+                                        action.SendCustomEvent(subaction.Key);
+                                    }
+                                    else
+                                    {
+                                        action.SendCustomNetworkEvent(NetworkEventTarget.All, subaction.Key);
+                                    }
+                                }, action.gameObject?.ToString() + " Run " + subaction.Key));
+                            }
+                            var unboxer = new QMSingleButton(MainScroll.BaseMenu, 0, -0.5f, $"Unbox {action.name}", () => { action.UnboxUdonEventToConsole(); }, $"Attempts to unbox {action.name} in console..", null, Color.yellow, true);
+                            MainScroll.Add(unboxer);
+                            unboxer.SetLocation(0, -0.5f);
+                        });
+                        MainScroll.BaseMenu.GetMainButton().GetGameObject().GetComponent<UnityEngine.UI.Button>()
+                            .onClick.Invoke();
+                    }, action.interactText);
 
-					var listener = action.gameObject.GetOrAddComponent<ScrollMenuListener>();
-					if(listener != null)
-					{
-						listener.assignedbtn = btn;
-					}
-					subscroll.Add(btn);
+                    var listener = action.gameObject.GetOrAddComponent<ScrollMenuListener>();
+                    if (listener != null)
+                    {
+                        listener.assignedbtn = btn;
+                    }
+                    subscroll.Add(btn);
                 }
             });
         }

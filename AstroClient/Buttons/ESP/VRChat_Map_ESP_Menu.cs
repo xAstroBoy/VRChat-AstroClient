@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
-	using AstroClient.Components;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
-	using UnityEngine;
+    using AstroClient.Components;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using System;
+    using UnityEngine;
 
-	internal class VRChat_Map_ESP_Menu : GameEvents
+    internal class VRChat_Map_ESP_Menu : GameEvents
     {
         public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
@@ -62,7 +62,7 @@
 
         public static void AddESPToVRCInteractables()
         {
-            var items = WorldUtils.Get_VRCInteractables();
+            var items = WorldUtils_Old.Get_VRCInteractables();
             foreach (var item in items)
             {
                 if (item != null)
@@ -74,7 +74,7 @@
 
         public static void RemoveESPToVRCInteractables()
         {
-            var items = WorldUtils.Get_VRCInteractables();
+            var items = WorldUtils_Old.Get_VRCInteractables();
             foreach (var item in items)
             {
                 var ESP = item.GetComponent<ESP_VRCInteractable>();
@@ -118,7 +118,7 @@
 
         private static void AddESPToPickups()
         {
-            var items = WorldUtils.Get_Pickups();
+            var items = WorldUtils_Old.Get_Pickups();
             foreach (var item in items)
             {
                 if (item != null)
@@ -130,7 +130,7 @@
 
         private static void RemoveESPToPickups()
         {
-            var items = WorldUtils.Get_Pickups();
+            var items = WorldUtils_Old.Get_Pickups();
             foreach (var item in items)
             {
                 var ESP = item.GetComponent<ESP_Pickup>();
@@ -174,37 +174,37 @@
 
         private static void AddESPToTriggers()
         {
-            var items = WorldUtils.Get_Triggers();
+            var items = WorldUtils_Old.Get_Triggers();
             foreach (var item in items)
             {
                 if (item != null)
                 {
                     var triggeresp = item.GetOrAddComponent<ESP_Trigger>();
-					if(triggeresp != null)
-					{
-						var trigger1 = item.GetComponent<VRC.SDKBase.VRC_Trigger>();
-						if (trigger1 != null)
-						{
-							triggeresp.trigger = trigger1;
-							triggeresp.Lock = false;
-						}
-						else
-						{
-							var trigger2 = item.GetComponent<VRCSDK2.VRC_Trigger>();
-							if (trigger2 != null)
-							{
-								triggeresp.trigger2 = trigger2;
-								triggeresp.Lock = false;
-							}
-						}
-					}
+                    if (triggeresp != null)
+                    {
+                        var trigger1 = item.GetComponent<VRC.SDKBase.VRC_Trigger>();
+                        if (trigger1 != null)
+                        {
+                            triggeresp.trigger = trigger1;
+                            triggeresp.Lock = false;
+                        }
+                        else
+                        {
+                            var trigger2 = item.GetComponent<VRCSDK2.VRC_Trigger>();
+                            if (trigger2 != null)
+                            {
+                                triggeresp.trigger2 = trigger2;
+                                triggeresp.Lock = false;
+                            }
+                        }
+                    }
                 }
             }
         }
 
         private static void RemoveESPToTriggers()
         {
-            var items = WorldUtils.Get_Triggers();
+            var items = WorldUtils_Old.Get_Triggers();
             foreach (var item in items)
             {
                 var ESP = item.GetComponent<ESP_Trigger>();
@@ -248,7 +248,7 @@
 
         private static void AddESPToUdonBehaviours()
         {
-            var items = WorldUtils.Get_UdonBehaviours();
+            var items = WorldUtils_Old.Get_UdonBehaviours();
             if (items != null)
             {
                 foreach (var item in items)
@@ -263,7 +263,7 @@
 
         private static void RemoveESPToUdonBehaviours()
         {
-            var items = WorldUtils.Get_UdonBehaviours();
+            var items = WorldUtils_Old.Get_UdonBehaviours();
             if (items != null)
             {
                 foreach (var item in items)

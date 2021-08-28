@@ -1,9 +1,9 @@
 ﻿namespace AstroClient.ItemTweakerV2.TweakerEventArgs
 {
-	using AstroClient.Components;
-	using System;
+    using AstroClient.Components;
+    using System;
 
-	public class OnRigidBodyControllerArgs : EventArgs
+    public class OnRigidBodyControllerArgs : EventArgs
     {
         public RigidBodyController control;
 

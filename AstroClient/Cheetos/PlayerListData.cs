@@ -1,16 +1,17 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Extensions;
-	using Il2CppSystem.Text;
-	using System.Linq;
-	using UnityEngine;
-	using VRC;
-	using VRC.Core;
-	using VRC.Management;
-	using VRC.SDKBase;
-	using static AstroLibrary.Extensions.PlayerExtensions;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using Il2CppSystem.Text;
+    using System.Linq;
+    using UnityEngine;
+    using VRC;
+    using VRC.Core;
+    using VRC.Management;
+    using VRC.SDKBase;
+    using static AstroLibrary.Extensions.PlayerExtensions;
 
-	public class PlayerListData
+    public class PlayerListData
     {
         public Photon.Realtime.Player PhotonPlayer { get; private set; }
 
@@ -98,28 +99,28 @@
                     stringBuilder.Append("<color=green>[F]</color>");
                 }
 
-				if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(UserID))
-				{
-					stringBuilder.Append("<color=red>[B]</color>");
-				}
+                if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(UserID))
+                {
+                    stringBuilder.Append("<color=red>[B]</color>");
+                }
 
-				return $"{stringBuilder.ToString()}\n";
+                return $"{stringBuilder.ToString()}\n";
             }
         }
 
         public bool GetIsInvisible()
         {
-			return Player == null || !WorldUtils.Get_Players().Any(p => p.UserID().Equals(Player.UserID()));
-		}
+            return Player == null || !WorldUtils.GetPlayers().Any(p => p.UserID().Equals(Player.UserID()));
+        }
 
         public PlayerListData(Photon.Realtime.Player photonPlayer)
         {
             PhotonPlayer = photonPlayer;
-            Player = photonPlayer.GetPlayer();
-            APIUser = Player.GetAPIUser();
-            PlayerAPI = Player.GetVRCPlayerApi();
-            PlayerNet = Player.GetPlayerNet();
-            VRCPlayer = Player.GetVRCPlayer();
+            Player = photonPlayer?.GetPlayer();
+            APIUser = Player?.GetAPIUser();
+            PlayerAPI = Player?.GetVRCPlayerApi();
+            PlayerNet = Player?.GetPlayerNet();
+            VRCPlayer = Player?.GetVRCPlayer();
         }
     }
 }

@@ -1,291 +1,291 @@
 ﻿namespace AstroServer
 {
-	using AstroServer.DiscordBot;
-	using AstroServer.Serializable;
-	using Discord;
-	using System;
-	using System.Text;
+    using AstroServer.DiscordBot;
+    using AstroServer.Serializable;
+    using Discord;
+    using System;
+    using System.Text;
 
-	public static class CustomEmbed
-	{
-		public static Embed GetKeyCountEmbed()
-		{
-			EmbedBuilder embedBuilder = new EmbedBuilder()
-			{
-				Title = "Key Count",
-				Color = Color.Blue,
-			};
+    public static class CustomEmbed
+    {
+        public static Embed GetKeyCountEmbed()
+        {
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+            {
+                Title = "Key Count",
+                Color = Color.Blue,
+            };
 
-			embedBuilder.AddField("Developers", KeyManager.GetDevKeyCount());
-			embedBuilder.AddField("Clients", KeyManager.GetDevKeyCount());
-			return embedBuilder.Build();
-		}
+            embedBuilder.AddField("Developers", KeyManager.GetDevKeyCount());
+            embedBuilder.AddField("Clients", KeyManager.GetDevKeyCount());
+            return embedBuilder.Build();
+        }
 
-		public static Embed GetNewKeyEmbed(string authkey, ulong discordID, bool successful)
-		{
-			if (successful)
-			{
-				EmbedBuilder embedBuilder = new EmbedBuilder()
-				{
-					Title = "New Key Generated",
-					Color = Color.Green,
-				};
+        public static Embed GetNewKeyEmbed(string authkey, ulong discordID, bool successful)
+        {
+            if (successful)
+            {
+                EmbedBuilder embedBuilder = new EmbedBuilder()
+                {
+                    Title = "New Key Generated",
+                    Color = Color.Green,
+                };
 
-				embedBuilder.AddField("Discord", DiscordUtils.GetDiscordName(discordID));
-				embedBuilder.AddField("Key", authkey);
-				return embedBuilder.Build();
-			}
-			else
-			{
-				EmbedBuilder embedBuilder = new EmbedBuilder()
-				{
-					Title = "New Key Failed",
-					Color = Color.Red,
-				};
+                embedBuilder.AddField("Discord", DiscordUtils.GetDiscordName(discordID));
+                embedBuilder.AddField("Key", authkey);
+                return embedBuilder.Build();
+            }
+            else
+            {
+                EmbedBuilder embedBuilder = new EmbedBuilder()
+                {
+                    Title = "New Key Failed",
+                    Color = Color.Red,
+                };
 
-				return embedBuilder.Build();
-			}
-		}
+                return embedBuilder.Build();
+            }
+        }
 
-		public static Embed GetAvatarEmbed(AvatarDataEntity avatarDataEntity)
-		{
-			EmbedBuilder embedBuilder = new EmbedBuilder()
-			{
-				Title = avatarDataEntity.Name,
-				Color = Color.Blue,
-				ThumbnailUrl = avatarDataEntity.ThumbnailURL,
-			};
+        public static Embed GetAvatarEmbed(AvatarDataEntity avatarDataEntity)
+        {
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+            {
+                Title = avatarDataEntity.Name,
+                Color = Color.Blue,
+                ThumbnailUrl = avatarDataEntity.ThumbnailURL,
+            };
 
-			embedBuilder.AddField("ID", avatarDataEntity.AvatarID);
-			embedBuilder.AddField("Author", avatarDataEntity.AuthorName);
-			embedBuilder.AddField("Release", avatarDataEntity.ReleaseStatus);
-			embedBuilder.AddField("Version", avatarDataEntity.Version);
+            embedBuilder.AddField("ID", avatarDataEntity.AvatarID);
+            embedBuilder.AddField("Author", avatarDataEntity.AuthorName);
+            embedBuilder.AddField("Release", avatarDataEntity.ReleaseStatus);
+            embedBuilder.AddField("Version", avatarDataEntity.Version);
 
-			return embedBuilder.Build();
-		}
+            return embedBuilder.Build();
+        }
 
-		public static Embed GetKeyshareEmbed(Client origin, Client other)
-		{
-			var discordId = KeyManager.GetKeysDiscordOwner(origin.Key);
-			var discordUser = AstroBot.Client.GetUser(discordId);
+        public static Embed GetKeyshareEmbed(Client origin, Client other)
+        {
+            var discordId = KeyManager.GetKeysDiscordOwner(origin.Key);
+            var discordUser = AstroBot.Client.GetUser(discordId);
 
-			EmbedBuilder embedBuilder = new EmbedBuilder()
-			{
-				Title = DiscordUtils.GetDiscordName(discordId),
-				Color = Color.DarkPurple,
-				ThumbnailUrl = discordUser.GetAvatarUrl()
-			};
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+            {
+                Title = DiscordUtils.GetDiscordName(discordId),
+                Color = Color.DarkPurple,
+                ThumbnailUrl = discordUser.GetAvatarUrl()
+            };
 
-			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
-			{
-				Text = KeyManager.IsDevKey(origin.Key) ? "Developer" : "Client"
-			};
+            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
+            {
+                Text = KeyManager.IsDevKey(origin.Key) ? "Developer" : "Client"
+            };
 
-			embedBuilder.AddField("Kicked Name", origin.Name);
-			embedBuilder.AddField("Kicked UserID", origin.Name);
+            embedBuilder.AddField("Kicked Name", origin.Name);
+            embedBuilder.AddField("Kicked UserID", origin.Name);
 
-			embedBuilder.AddField("Origin IP", origin.ClientSocket.Client.RemoteEndPoint);
-			embedBuilder.AddField("Other IP", other.ClientSocket.Client.RemoteEndPoint);
-			embedBuilder.AddField("Time", $"{DateTime.Now.ToLongDateString()}, {DateTime.Now:HH:mm:ss tt}");
-			embedBuilder.AddField("Key", origin.Key);
+            embedBuilder.AddField("Origin IP", origin.ClientSocket.Client.RemoteEndPoint);
+            embedBuilder.AddField("Other IP", other.ClientSocket.Client.RemoteEndPoint);
+            embedBuilder.AddField("Time", $"{DateTime.Now.ToLongDateString()}, {DateTime.Now:HH:mm:ss tt}");
+            embedBuilder.AddField("Key", origin.Key);
 
-			embedBuilder.Footer = embedFooterBuilder;
+            embedBuilder.Footer = embedFooterBuilder;
 
-			return embedBuilder.Build();
-		}
+            return embedBuilder.Build();
+        }
 
-		public static Embed GetAccountEmbed(AccountData account)
-		{
-			var color = Color.Blue;
+        public static Embed GetAccountEmbed(AccountData account)
+        {
+            var color = Color.Blue;
 
-			if (account.IsDeveloper)
-			{
-				color = Color.Red;
-			}
+            if (account.IsDeveloper)
+            {
+                color = Color.Red;
+            }
 
-			var discordId = KeyManager.GetKeysDiscordOwner(account.Key);
-			var discordUser = AstroBot.Client.GetUser(discordId);
+            var discordId = KeyManager.GetKeysDiscordOwner(account.Key);
+            var discordUser = AstroBot.Client.GetUser(discordId);
 
-			EmbedBuilder embedBuilder = new EmbedBuilder()
-			{
-				Title = DiscordUtils.GetDiscordName(discordId),
-				Color = color,
-				ThumbnailUrl = discordUser.GetAvatarUrl()
-			};
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+            {
+                Title = DiscordUtils.GetDiscordName(discordId),
+                Color = color,
+                ThumbnailUrl = discordUser.GetAvatarUrl()
+            };
 
-			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
-			{
-				Text = KeyManager.IsDevKey(account.Key) ? "Developer" : "Client"
-			};
+            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
+            {
+                Text = KeyManager.IsDevKey(account.Key) ? "Developer" : "Client"
+            };
 
-			embedBuilder.AddField("Name", account.Name);
-			embedBuilder.AddField("Discord", account.DiscordID);
+            embedBuilder.AddField("Name", account.Name);
+            embedBuilder.AddField("Discord", account.DiscordID);
 
-			StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
-			if (account.HasExploits)
-			{
-				sb.Append("HasExploits ");
-			}
+            if (account.HasExploits)
+            {
+                sb.Append("HasExploits ");
+            }
 
-			if (account.HasUdon)
-			{
-				sb.Append("HasUdon ");
-			}
+            if (account.HasUdon)
+            {
+                sb.Append("HasUdon ");
+            }
 
-			if (account.HasAmongUs)
-			{
-				sb.Append("HasAmongUs ");
-			}
+            if (account.HasAmongUs)
+            {
+                sb.Append("HasAmongUs ");
+            }
 
-			if (account.HasFreezeTag)
-			{
-				sb.Append("HasFreezeTag ");
-			}
+            if (account.HasFreezeTag)
+            {
+                sb.Append("HasFreezeTag ");
+            }
 
-			if (account.HasMurder4)
-			{
-				sb.Append("HasMurder4 ");
-			}
+            if (account.HasMurder4)
+            {
+                sb.Append("HasMurder4 ");
+            }
 
-			var perms = sb.ToString();
+            var perms = sb.ToString();
 
-			if (perms != null && perms != string.Empty)
-			{
-				embedBuilder.AddField("Permissions", sb.ToString());
-			}
-			embedBuilder.AddField("Key", account.Key);
+            if (perms != null && perms != string.Empty)
+            {
+                embedBuilder.AddField("Permissions", sb.ToString());
+            }
+            embedBuilder.AddField("Key", account.Key);
 
-			embedBuilder.Footer = embedFooterBuilder;
+            embedBuilder.Footer = embedFooterBuilder;
 
-			return embedBuilder.Build();
-		}
+            return embedBuilder.Build();
+        }
 
-		public static Embed GetClientEmbed(Client client)
-		{
-			var color = Color.Blue;
+        public static Embed GetClientEmbed(Client client)
+        {
+            var color = Color.Blue;
 
-			if (client.Data.IsDeveloper)
-			{
-				color = Color.Red;
-			}
+            if (client.Data.IsDeveloper)
+            {
+                color = Color.Red;
+            }
 
-			var discordId = KeyManager.GetKeysDiscordOwner(client.Key);
-			var discordUser = AstroBot.Client.GetUser(discordId);
+            var discordId = KeyManager.GetKeysDiscordOwner(client.Key);
+            var discordUser = AstroBot.Client.GetUser(discordId);
 
-			EmbedBuilder embedBuilder = new EmbedBuilder()
-			{
-				Title = DiscordUtils.GetDiscordName(discordId),
-				Color = color,
-				ThumbnailUrl = discordUser.GetAvatarUrl()
-			};
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+            {
+                Title = DiscordUtils.GetDiscordName(discordId),
+                Color = color,
+                ThumbnailUrl = discordUser.GetAvatarUrl()
+            };
 
-			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
-			{
-				Text = KeyManager.IsDevKey(client.Key) ? "Developer" : "Client"
-			};
+            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
+            {
+                Text = KeyManager.IsDevKey(client.Key) ? "Developer" : "Client"
+            };
 
-			embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
+            embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
 
-			if (client.Name != null && client.Name != string.Empty)
-			{
-				embedBuilder.AddField("Name", client.Name);
-			}
+            if (client.Name != null && client.Name != string.Empty)
+            {
+                embedBuilder.AddField("Name", client.Name);
+            }
 
-			if (client.UserID != null && client.UserID != string.Empty)
-			{
-				embedBuilder.AddField("UserID", client.UserID);
-			}
+            if (client.UserID != null && client.UserID != string.Empty)
+            {
+                embedBuilder.AddField("UserID", client.UserID);
+            }
 
-			embedBuilder.Footer = embedFooterBuilder;
+            embedBuilder.Footer = embedFooterBuilder;
 
-			return embedBuilder.Build();
-		}
+            return embedBuilder.Build();
+        }
 
-		public static Embed GetLoggedInEmbed(Client client)
-		{
-			var color = Color.Blue;
+        public static Embed GetLoggedInEmbed(Client client)
+        {
+            var color = Color.Blue;
 
-			if (client.Data.IsDeveloper)
-			{
-				color = Color.Red;
-			}
+            if (client.Data.IsDeveloper)
+            {
+                color = Color.Red;
+            }
 
-			var discordId = KeyManager.GetKeysDiscordOwner(client.Key);
-			var discordUser = AstroBot.Client.GetUser(discordId);
+            var discordId = KeyManager.GetKeysDiscordOwner(client.Key);
+            var discordUser = AstroBot.Client.GetUser(discordId);
 
-			EmbedBuilder embedBuilder = new EmbedBuilder()
-			{
-				Title = DiscordUtils.GetDiscordName(discordId),
-				Color = color,
-				ThumbnailUrl = discordUser.GetAvatarUrl()
-			};
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+            {
+                Title = DiscordUtils.GetDiscordName(discordId),
+                Color = color,
+                ThumbnailUrl = discordUser.GetAvatarUrl()
+            };
 
-			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
-			{
-				Text = KeyManager.IsDevKey(client.Key) ? "Developer" : "Client"
-			};
+            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
+            {
+                Text = KeyManager.IsDevKey(client.Key) ? "Developer" : "Client"
+            };
 
-			embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
-			embedBuilder.AddField("Time", $"{DateTime.Now.ToLongDateString()}, {DateTime.Now:HH:mm:ss tt}");
-			embedBuilder.AddField("Key", client.Key);
+            embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
+            embedBuilder.AddField("Time", $"{DateTime.Now.ToLongDateString()}, {DateTime.Now:HH:mm:ss tt}");
+            embedBuilder.AddField("Key", client.Key);
 
-			embedBuilder.Footer = embedFooterBuilder;
+            embedBuilder.Footer = embedFooterBuilder;
 
-			return embedBuilder.Build();
-		}
+            return embedBuilder.Build();
+        }
 
-		internal static Embed GetLoggedInFailedEmbed(Client client, string reason)
-		{
-			var color = Color.Orange;
+        internal static Embed GetLoggedInFailedEmbed(Client client, string reason)
+        {
+            var color = Color.Orange;
 
-			EmbedBuilder embedBuilder = new EmbedBuilder()
-			{
-				Title = "Failed Login",
-				Color = color,
-			};
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+            {
+                Title = "Failed Login",
+                Color = color,
+            };
 
-			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
+            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
 
-			embedBuilder.AddField("Reason", reason);
-			embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
-			embedBuilder.AddField("Time", $"{DateTime.Now.ToLongDateString()}, {DateTime.Now:HH:mm:ss tt}");
-			embedBuilder.AddField("Key", client.Key);
+            embedBuilder.AddField("Reason", reason);
+            embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
+            embedBuilder.AddField("Time", $"{DateTime.Now.ToLongDateString()}, {DateTime.Now:HH:mm:ss tt}");
+            embedBuilder.AddField("Key", client.Key);
 
-			embedBuilder.Footer = embedFooterBuilder;
+            embedBuilder.Footer = embedFooterBuilder;
 
-			return embedBuilder.Build();
-		}
+            return embedBuilder.Build();
+        }
 
-		public static Embed GetKeyEmbed(string authKey)
-		{
-			var color = Color.Blue;
+        public static Embed GetKeyEmbed(string authKey)
+        {
+            var color = Color.Blue;
 
-			if (KeyManager.IsDevKey(authKey))
-			{
-				color = Color.Red;
-			}
+            if (KeyManager.IsDevKey(authKey))
+            {
+                color = Color.Red;
+            }
 
-			var discordId = KeyManager.GetKeysDiscordOwner(authKey);
-			var discordUser = AstroBot.Client.GetUser(discordId);
+            var discordId = KeyManager.GetKeysDiscordOwner(authKey);
+            var discordUser = AstroBot.Client.GetUser(discordId);
 
-			EmbedBuilder embedBuilder = new EmbedBuilder()
-			{
-				Title = DiscordUtils.GetDiscordName(discordId),
-				Color = color,
-				ThumbnailUrl = discordUser.GetAvatarUrl()
-			};
+            EmbedBuilder embedBuilder = new EmbedBuilder()
+            {
+                Title = DiscordUtils.GetDiscordName(discordId),
+                Color = color,
+                ThumbnailUrl = discordUser.GetAvatarUrl()
+            };
 
-			EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
-			{
-				Text = KeyManager.IsDevKey(authKey) ? "Developer" : "Client"
-			};
+            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
+            {
+                Text = KeyManager.IsDevKey(authKey) ? "Developer" : "Client"
+            };
 
-			embedBuilder.AddField("Key", authKey);
+            embedBuilder.AddField("Key", authKey);
 
-			embedBuilder.Footer = embedFooterBuilder;
+            embedBuilder.Footer = embedFooterBuilder;
 
-			return embedBuilder.Build();
-		}
-	}
+            return embedBuilder.Build();
+        }
+    }
 }

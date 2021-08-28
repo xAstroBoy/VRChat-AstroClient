@@ -1,9 +1,9 @@
 ﻿namespace AstroNetworkingLibrary.Serializable
 {
-	using System;
-	using System.Reflection;
+    using System;
+    using System.Reflection;
 
-	[Serializable, Obfuscation]
+    [Serializable, Obfuscation]
     public class AvatarData
     {
         public string AvatarID = string.Empty;
@@ -18,7 +18,7 @@
 
         public int Version;
 
-		public string ReleaseStatus = string.Empty;
+        public string ReleaseStatus = string.Empty;
 
         public string AssetURL = string.Empty;
 

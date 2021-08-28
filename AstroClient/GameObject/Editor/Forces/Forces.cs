@@ -1,10 +1,10 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Components;
-	using AstroClient.ItemTweakerV2.Submenus;
-	using UnityEngine;
+    using AstroClient.Components;
+    using AstroClient.ItemTweakerV2.Submenus;
+    using UnityEngine;
 
-	public class Forces
+    public class Forces
     {
         // TODO: Get rid of these two , lazy rn.
         public static float Force

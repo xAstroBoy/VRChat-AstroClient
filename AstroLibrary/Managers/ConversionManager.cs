@@ -1,9 +1,9 @@
 ﻿namespace AstroLibrary.Managers
 {
-	using System.Globalization;
-	using UnityEngine;
+    using System.Globalization;
+    using UnityEngine;
 
-	public static class ConversionManager
+    public static class ConversionManager
     {   // Converting ColorManager.cs colors R G B values out of 1 to hex for PlayerList.cs
         public static string ConvertRGBtoHEX(float r, float g, float b)
         {

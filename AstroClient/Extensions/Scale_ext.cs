@@ -1,9 +1,9 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroClient.ItemTweakerV2.Submenus;
-	using UnityEngine;
+    using AstroClient.ItemTweakerV2.Submenus;
+    using UnityEngine;
 
-	public static class Scale_ext
+    public static class Scale_ext
     {
         public static void IncreaseHoldItemScale(this GameObject obj)
         {

@@ -1,11 +1,11 @@
 ﻿namespace Blaze.API
 {
-	using Blaze.Utils;
-	using System;
-	using UnityEngine;
-	using UnityEngine.UI;
+    using Blaze.Utils;
+    using System;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-	class QMSlider
+    class QMSlider
     {
         protected GameObject slider;
         protected GameObject label;
@@ -51,7 +51,7 @@
                 sliderComp = slider.GetComponent<Slider>();
                 sliderComp.wholeNumbers = true;
                 sliderComp.onValueChanged.AddListener(sliderAction);
-                sliderComp.onValueChanged.AddListener(new Action<float>(delegate (float f) 
+                sliderComp.onValueChanged.AddListener(new Action<float>(delegate (float f)
                 {
                     slider.transform.Find("Fill Area/Label").GetComponent<Text>().text = $"{sliderComp.value / maxValue * 100}%";
                 }));

@@ -1,13 +1,13 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Variables;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Finder;
-	using System.Collections.Generic;
-	using VRC.SDKBase;
+    using AstroClient.Variables;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Finder;
+    using System.Collections.Generic;
+    using VRC.SDKBase;
 
-	public class SnoozeScaryMaze5 : GameEvents
+    public class SnoozeScaryMaze5 : GameEvents
     {
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
@@ -15,18 +15,18 @@
             {
                 ModConsole.Log($"Recognized {Name} World, Removing Anti-cheat protections..");
                 var world = GameObjectFinder.Find("World");
-				if (world != null)
-				{
-					var roofAndPreventionsanticheat1 = world.transform.FindObject("Etc../Roof & Preventions");
-					var cheatingroom = world.transform.FindObject("Cheating Room");
-					var anticheat2 = world.transform.FindObject("The Wilderness/Cheat Prevention");
+                if (world != null)
+                {
+                    var roofAndPreventionsanticheat1 = world.transform.FindObject("Etc../Roof & Preventions");
+                    var cheatingroom = world.transform.FindObject("Cheating Room");
+                    var anticheat2 = world.transform.FindObject("The Wilderness/Cheat Prevention");
 
-					cheatingroom.DestroyMeLocal();
-					roofAndPreventionsanticheat1.DestroyMeLocal();
-					anticheat2.DestroyMeLocal();
-				}
+                    cheatingroom.DestroyMeLocal();
+                    roofAndPreventionsanticheat1.DestroyMeLocal();
+                    anticheat2.DestroyMeLocal();
+                }
 
-				// Rest In peace hammer.
+                // Rest In peace hammer.
 
 
                 //var snoozetools = GameObjectFinder.FindRootSceneObject("Snooze Tools");

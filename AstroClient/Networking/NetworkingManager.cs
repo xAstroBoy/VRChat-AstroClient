@@ -1,19 +1,18 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using AstroClient.Variables;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Utility;
-	using AstroNetworkingLibrary;
-	using AstroNetworkingLibrary.Serializable;
-	using System.Collections.Generic;
-	using static AstroClient.Cheetos.AvatarSearch;
+    using AstroClient.Variables;
+    using AstroLibrary.Console;
+    using AstroLibrary.Utility;
+    using AstroNetworkingLibrary;
+    using AstroNetworkingLibrary.Serializable;
+    using System.Collections.Generic;
+    using static AstroClient.Cheetos.AvatarSearch;
 
-	#endregion Imports
+    #endregion Imports
 
-	public class NetworkingManager : GameEvents
+    public class NetworkingManager : GameEvents
     {
         /// <summary>
         /// Gets whether the NetworkingManager has initialized and contains the player's information.
@@ -55,8 +54,8 @@
                 {
                     ModConsole.DebugLog($"Sending Client Information: {Name}, {UserID}");
                 }
-                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_USERID, Utils.LocalPlayer.GetPlayer().UserID()));
-                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_NAME, Utils.LocalPlayer.GetPlayer().DisplayName()));
+                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_USERID, PlayerUtils.UserID()));
+                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_NAME, PlayerUtils.DisplayName()));
             }
         }
 
@@ -64,18 +63,18 @@
         {
             if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
             {
-                var instanceID = Blaze.Utils.WorldUtils.GetFullID();
+                var instanceID = WorldUtils.GetWorldID();
                 AstroNetworkClient.Client.Send(new PacketData(PacketClientType.WORLD_JOIN, instanceID));
             }
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
-            var self = Utils.LocalPlayer.GetPlayer();
-            Name = self.DisplayName();
-            UserID = self.UserID();
+            var self = PlayerUtils.GetVRCPlayer();
+            Name = self.GetDisplayName();
+            UserID = self.GetUserID();
 
-            MiscUtility.DelayFunction(2f, () =>
+            MiscUtils.DelayFunction(2f, () =>
             {
                 Initialized = true;
                 SendClientInfo();

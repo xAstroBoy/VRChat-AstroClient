@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using System;
-	using UnhollowerBaseLib.Attributes;
-	using UnityEngine;
-	using SyncPhysics = SyncPhysics;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using System;
+    using UnhollowerBaseLib.Attributes;
+    using UnityEngine;
+    using SyncPhysics = SyncPhysics;
 
-	public class RigidBodyController : GameEventsBehaviour
+    public class RigidBodyController : GameEventsBehaviour
     {
         public RigidBodyController(IntPtr ptr) : base(ptr)
         {
@@ -536,7 +536,7 @@
         private GameObject obj = null;
         private Rigidbody body = null;
         private bool _EditMode = false;
-		private bool _Forced_RigidBody;
+        private bool _Forced_RigidBody;
         private bool _useGravity = false;
         private bool _isKinematic = false;
         private bool _PreventOthersFromGrabbing = false;
@@ -546,19 +546,19 @@
 
         private RigidbodyConstraints _Constraints;
 
-		private bool OrigKinematic { get; set; } = false;
+        private bool OrigKinematic { get; set; } = false;
 
-		private bool OrigUseGravity { get; set; } = false;
+        private bool OrigUseGravity { get; set; } = false;
 
-		private bool OrigDetectCollisions { get; set; } = true;
+        private bool OrigDetectCollisions { get; set; } = true;
 
-		private float OrigDrag { get; set; } = 0f;
+        private float OrigDrag { get; set; } = 0f;
 
-		private float OrigAngularDrag { get; set; } = 0f;
+        private float OrigAngularDrag { get; set; } = 0f;
 
-		private RigidbodyConstraints OrigConstraints { get; set; }
+        private RigidbodyConstraints OrigConstraints { get; set; }
 
-		internal bool EditMode
+        internal bool EditMode
         {
             get
             {

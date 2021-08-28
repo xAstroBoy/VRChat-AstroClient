@@ -1,18 +1,21 @@
 ﻿namespace AstroLibrary.Utility
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnityEngine;
-	using UnityEngine.UI;
-	using VRC;
-	using VRC.SDKBase;
+    #region Imports
 
-	public static class MiscUtility
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using VRC;
+    using VRC.SDKBase;
+
+    #endregion
+
+    public static class MiscUtils_Old
     {
         public static Vector2 GetButtonPosition(float x, float y)
         {
@@ -28,27 +31,27 @@
         }
 
 
-		public static VRC_EventHandler FindNearestEventHandler(GameObject target)
-		{
-			VRC_EventHandler vrc_EventHandler = null;
-			if (target != null)
-			{
-				vrc_EventHandler = target.GetComponent<VRC_EventHandler>();
-				if (vrc_EventHandler == null)
-				{
-					vrc_EventHandler = target.GetComponentInParent<VRC_EventHandler>();
-				}
-			}
-			if (vrc_EventHandler == null)
-			{
-				vrc_EventHandler = Networking.SceneEventHandler;
-			}
-			return vrc_EventHandler;
-		}
+        public static VRC_EventHandler FindNearestEventHandler(GameObject target)
+        {
+            VRC_EventHandler vrc_EventHandler = null;
+            if (target != null)
+            {
+                vrc_EventHandler = target.GetComponent<VRC_EventHandler>();
+                if (vrc_EventHandler == null)
+                {
+                    vrc_EventHandler = target.GetComponentInParent<VRC_EventHandler>();
+                }
+            }
+            if (vrc_EventHandler == null)
+            {
+                vrc_EventHandler = Networking.SceneEventHandler;
+            }
+            return vrc_EventHandler;
+        }
 
 
 
-		public static bool IsNaN(Vector3 v3)
+        public static bool IsNaN(Vector3 v3)
         {
             return float.IsNaN(v3.x) || float.IsNaN(v3.y) || float.IsNaN(v3.z);
         }
@@ -158,23 +161,6 @@
             Vector3 positionbase = Base.transform.position;
             Vector3 positiontarget = target.transform.position;
             return Vector3.Distance(positionbase, positiontarget);
-        }
-
-        public static bool TakeOwnershipIfNecessary(GameObject gameObject)
-        {
-            if (GetOwnerOfGameObject(gameObject) != Utils.CurrentUser._player)
-                Networking.SetOwner(Utils.CurrentUser.field_Private_VRCPlayerApi_0, gameObject);
-            return GetOwnerOfGameObject(gameObject) != Utils.CurrentUser._player;
-        }
-
-        public static Player GetOwnerOfGameObject(GameObject gameObject)
-        {
-            foreach (Player player in Utils.PlayerManager.AllPlayers())
-            {
-                if (player.field_Private_VRCPlayerApi_0.IsOwner(gameObject))
-                    return player;
-            }
-            return null;
         }
 
         public static Player GetOwnerOfGameObjectButBetter(GameObject gameObject) => Utils.PlayerManager.AllPlayers().Where(plr => plr.GetVRCPlayerApi().IsOwner(gameObject)).FirstOrDefault();
@@ -369,18 +355,6 @@
             audioSource.playOnAwake = false;
             audioSource.outputAudioMixerGroup = VRCAudioManager.field_Private_Static_VRCAudioManager_0.field_Public_AudioMixerGroup_0;
             return audioSource;
-        }
-
-        public static void DelayFunction(float del, Action action)
-        {
-            MelonLoader.MelonCoroutines.Start(Delay(del, action));
-        }
-
-        private static IEnumerator Delay(float del, Action action)
-        {
-            yield return new WaitForSeconds(del);
-            action.Invoke();
-            yield break;
         }
 
         public class Serialization

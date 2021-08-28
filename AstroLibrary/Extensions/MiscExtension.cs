@@ -1,24 +1,24 @@
 ﻿/// Original Credit to DayOfThePlay
 namespace AstroLibrary.Extensions
 {
-	#region Imports
+    #region Imports
 
-	using AstroLibrary.Console;
-	using MelonLoader;
-	using System;
-	using System.Collections;
-	using System.IO;
-	using System.Linq;
-	using System.Reflection;
-	using UnhollowerRuntimeLib.XrefScans;
-	using UnityEngine;
-	using UnityEngine.SceneManagement;
-	using UnityEngine.UI;
-	using VRC.SDKBase;
+    using AstroLibrary.Console;
+    using MelonLoader;
+    using System;
+    using System.Collections;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using UnhollowerRuntimeLib.XrefScans;
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
+    using UnityEngine.UI;
+    using VRC.SDKBase;
 
-	#endregion Imports
+    #endregion Imports
 
-	public static class MiscExtension
+    public static class MiscExtension
     {
         public static GameObject GetUniqueGameObject(string name)
         {

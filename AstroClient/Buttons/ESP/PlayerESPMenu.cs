@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
-	using AstroClient.Components;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
-	using UnityEngine;
-	using VRC;
+    using AstroClient.Components;
+    using AstroLibrary.Utility;
+    using RubyButtonAPI;
+    using System;
+    using UnityEngine;
+    using VRC;
 
-	internal class PlayerESPMenu : GameEvents
+    internal class PlayerESPMenu : GameEvents
     {
         public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
@@ -33,14 +33,14 @@
             new QMSingleButton(FriendESP, 1, 2, "Cyan", () => { ConfigManager.ESPFriendColor = Color.cyan; }, null, null, null, true);
             new QMSingleButton(FriendESP, 1, 2.5f, "White", () => { ConfigManager.ESPFriendColor = Color.white; }, null, null, null, true);
 
-			var BlockedESP = new QMNestedButton(main, 2, 1f, "Blocked ESP Colors", "Set Player ESP Blocked Color", null, null, null, null, true);
-			new QMSingleButton(BlockedESP, 1, 0, "Blue", () => { ConfigManager.ESPBlockedColor = Color.blue; }, null, null, null, true);
-			new QMSingleButton(BlockedESP, 1, 0.5f, "Red", () => { ConfigManager.ESPBlockedColor = Color.red; }, null, null, null, true);
-			new QMSingleButton(BlockedESP, 1, 1, "Green", () => { ConfigManager.ESPBlockedColor = Color.green; }, null, null, null, true);
-			new QMSingleButton(BlockedESP, 1, 1.5f, "Yellow", () => { ConfigManager.ESPBlockedColor = Color.yellow; }, null, null, null, true);
-			new QMSingleButton(BlockedESP, 1, 2, "Cyan", () => { ConfigManager.ESPBlockedColor = Color.cyan; }, null, null, null, true);
-			new QMSingleButton(BlockedESP, 1, 2.5f, "White", () => { ConfigManager.ESPBlockedColor = Color.white; }, null, null, null, true);
-		}
+            var BlockedESP = new QMNestedButton(main, 2, 1f, "Blocked ESP Colors", "Set Player ESP Blocked Color", null, null, null, null, true);
+            new QMSingleButton(BlockedESP, 1, 0, "Blue", () => { ConfigManager.ESPBlockedColor = Color.blue; }, null, null, null, true);
+            new QMSingleButton(BlockedESP, 1, 0.5f, "Red", () => { ConfigManager.ESPBlockedColor = Color.red; }, null, null, null, true);
+            new QMSingleButton(BlockedESP, 1, 1, "Green", () => { ConfigManager.ESPBlockedColor = Color.green; }, null, null, null, true);
+            new QMSingleButton(BlockedESP, 1, 1.5f, "Yellow", () => { ConfigManager.ESPBlockedColor = Color.yellow; }, null, null, null, true);
+            new QMSingleButton(BlockedESP, 1, 2, "Cyan", () => { ConfigManager.ESPBlockedColor = Color.cyan; }, null, null, null, true);
+            new QMSingleButton(BlockedESP, 1, 2.5f, "White", () => { ConfigManager.ESPBlockedColor = Color.white; }, null, null, null, true);
+        }
 
         private static QMSingleToggleButton PlayerESPToggleBtn;
 
@@ -88,7 +88,7 @@
 
         private static void AddESPToAllPlayers()
         {
-            foreach (var item in WorldUtils.Get_Players())
+            foreach (var item in WorldUtils.GetPlayers())
             {
                 if (item != Utils.LocalPlayer.GetPlayer())
                 {
@@ -102,7 +102,7 @@
 
         private static void RemoveAllActivePlayerESPs()
         {
-            foreach (var player in WorldUtils.Get_Players())
+            foreach (var player in WorldUtils.GetPlayers())
             {
                 var esp = player.gameObject.GetComponent<PlayerESP>();
                 if (esp != null)

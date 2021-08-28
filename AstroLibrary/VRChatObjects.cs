@@ -1,9 +1,10 @@
-﻿namespace DayClientML2.Utility
+﻿namespace AstroLibrary
 {
-	using AstroLibrary.Extensions;
-	using UnityEngine;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using UnityEngine;
 
-	internal class VRChatObjects
+    internal class VRChatObjects
     {
         #region Pages
 

@@ -1,15 +1,15 @@
 ﻿namespace DayClientML2.Utility
 {
-	using AstroLibrary.Enums;
-	using MelonLoader;
-	using System;
-	using UnhollowerBaseLib;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
-	using UnityEngine.Events;
-	using UnityEngine.UI;
+    using AstroLibrary.Enums;
+    using MelonLoader;
+    using System;
+    using UnhollowerBaseLib;
+    using UnhollowerRuntimeLib;
+    using UnityEngine;
+    using UnityEngine.Events;
+    using UnityEngine.UI;
 
-	public class MenuButton
+    public class MenuButton
     {
         private Color SavedColor;
         public GameObject Button;

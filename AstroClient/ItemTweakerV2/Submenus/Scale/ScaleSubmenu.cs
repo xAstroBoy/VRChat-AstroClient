@@ -1,13 +1,14 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-	using AstroClient.Components;
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
-	using UnityEngine;
+    using AstroClient.Components;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using RubyButtonAPI;
+    using System;
+    using UnityEngine;
 
-	public class ScaleSubmenu : Tweaker_Events
+    public class ScaleSubmenu : Tweaker_Events
     {
         public static void Init_ScaleSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {

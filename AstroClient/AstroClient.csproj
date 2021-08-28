@@ -32,7 +32,7 @@
     <OutputPath>D:\Steam Library\steamapps\common\VRChat\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <NoWarn>CS0169;CS0472</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -99,6 +99,7 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="Managers\AchievmentsManager.cs" />
     <Compile Include="AntiCrash\AntiCrash.cs" />
     <Compile Include="AntiCrash\AntiCrashScanner.cs" />
     <Compile Include="AntiCrash\AntiCrashUtils.cs" />
@@ -122,14 +123,12 @@
     <Compile Include="EmojiMenu\EmojiScrollMenu\EmojiScrollMenu.cs" />
     <Compile Include="Enderpearl\AstroEnderPearl.cs" />
     <Compile Include="Components\Enderpearl\EnderPearlBehaviour.cs" />
+    <Compile Include="Experiments\CameraTweaker.cs" />
     <Compile Include="Exploits\Exploit_Exts\Teleport_Ext.cs" />
     <Compile Include="Exploits\TeleportExploit.cs" />
-    <Compile Include="Extensions\Avatar_Utils_ext.cs" />
-    <Compile Include="Extensions\Bones_ext.cs" />
     <Compile Include="Extensions\Button_strings_ext.cs" />
     <Compile Include="Extensions\Buttons_ext.cs" />
     <Compile Include="Extensions\Click_ext.cs" />
-    <Compile Include="Extensions\Coding_ext.cs" />
     <Compile Include="Extensions\Collider_ext.cs" />
     <Compile Include="Extensions\Components_exts\Rocket_ext.cs" />
     <Compile Include="Extensions\Components_exts\Bouncer_ext.cs" />
@@ -141,7 +140,6 @@
     <Compile Include="Extensions\Components_exts\PickupController_ext.cs" />
     <Compile Include="Extensions\Components_exts\RigidBodyController_ext.cs" />
     <Compile Include="Extensions\EventHandler_ext.cs" />
-    <Compile Include="Favcat\Favcat_Utils.cs" />
     <Compile Include="ModDetector\FindMods.cs" />
     <Compile Include="Udon\UdonEditor\UdonConverter.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapEditor.cs" />
@@ -160,7 +158,6 @@
     <Compile Include="Extensions\ItemTweaker_ext.cs" />
     <Compile Include="Extensions\Online_ext.cs" />
     <Compile Include="Extensions\Pickup_ext.cs" />
-    <Compile Include="Extensions\Player_ext.cs" />
     <Compile Include="Extensions\Position_ext.cs" />
     <Compile Include="Extensions\Rigidbody_ext.cs" />
     <Compile Include="Extensions\Scale_ext.cs" />
@@ -170,7 +167,7 @@
     <Compile Include="AvatarMods\AvatarModifier.cs" />
     <Compile Include="AvatarMods\AvatarUtils.cs" />
     <Compile Include="AvatarMods\LewdifierUtils.cs" />
-    <Compile Include="Blaze\Flight.cs" />
+    <Compile Include="Cheetos\Flight.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="ButtonShortcut\WorldCheatsShortcut\CheatsShortcutButton.cs" />
     <Compile Include="Buttons\ESP\PlayerESPMenu.cs" />
@@ -216,7 +213,6 @@
     <Compile Include="Components\Listeners\TweakerListener.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigManager.cs" />
-    <Compile Include="Experiments\CameraTweaker.cs" />
     <Compile Include="Features\Player\Clones\Clones.cs" />
     <Compile Include="Features\Player\Movement\Exploit\MovementSerializer.cs" />
     <Compile Include="Features\Player\Movement\JumpModifier.cs" />
@@ -343,7 +339,7 @@
     <Compile Include="Utils\QPens\QVPensUtils.cs" />
     <Compile Include="Utils\QuickMenuUtils.cs" />
     <Compile Include="Utils\UdonSearcher\UdonSearch.cs" />
-    <Compile Include="Utils\World\WorldUtils.cs" />
+    <Compile Include="Utils\World\WorldUtils_Old.cs" />
     <Compile Include="Utils\XrefScannerUtils.cs" />
     <Compile Include="Variables\Temporary.cs" />
     <Compile Include="Variables\Bools.cs" />
@@ -443,9 +439,6 @@
     <Reference Include="Facepunch.Steamworks.Win64">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="FavCat-merged">
-      <HintPath>D:\Steam Library\steamapps\common\VRChat\Mods\FavCat-merged.dll</HintPath>
     </Reference>
     <Reference Include="I18N">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\I18N.dll</HintPath>

@@ -1,11 +1,11 @@
 ﻿namespace AstroClient
 {
-	using AstroNetworkingLibrary.Serializable;
-	using System;
-	using System.Collections.Generic;
-	using System.Reflection;
+    using AstroNetworkingLibrary.Serializable;
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
 
-	[Serializable, Obfuscation]
+    [Serializable, Obfuscation]
     public class ConfigUI
     {
         public bool RemoveVRCPlus = false;
@@ -55,7 +55,7 @@
 
         public bool SpoofFPS = false;
 
-		public bool SpoofQuest = false;
+        public bool SpoofQuest = false;
 
         public int SpoofedPing = 30;
 
@@ -94,17 +94,17 @@
         public bool QMFreeze = false;
     }
 
-	[Serializable, Obfuscation]
-	public class ConfigFavorites
-	{
-		public List<AvatarData> Avatars = new List<AvatarData>();
-	}
+    [Serializable, Obfuscation]
+    public class ConfigFavorites
+    {
+        public List<AvatarData> Avatars = new List<AvatarData>();
+    }
 
-	[Serializable, Obfuscation]
-	public class ConfigPerformance
-	{
-		public bool HighPriority = false;
+    [Serializable, Obfuscation]
+    public class ConfigPerformance
+    {
+        public bool HighPriority = false;
 
-		public bool UnlimitedFrames = false;
-	}
+        public bool UnlimitedFrames = false;
+    }
 }

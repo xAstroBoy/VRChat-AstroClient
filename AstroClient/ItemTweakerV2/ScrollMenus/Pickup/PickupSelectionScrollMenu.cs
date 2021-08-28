@@ -1,14 +1,14 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
-	using AstroClient.Components;
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
-	using UnityEngine;
-	using VRC;
+    using AstroClient.Components;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using System;
+    using UnityEngine;
+    using VRC;
 
-	public class PickupSelectionScrollMenu : Tweaker_Events
+    public class PickupSelectionScrollMenu : Tweaker_Events
     {
         public static void Init_PickupSelectionQMScroll(QMTabMenu main, float x, float y, bool btnHalf)
         {
@@ -43,20 +43,19 @@
 
             PickupQMScroll.SetAction(delegate
             {
-                foreach (var pickup in WorldUtils.Get_Pickups())
+                foreach (var pickup in WorldUtils_Old.Get_Pickups())
                 {
+                    var btn = new QMSingleButton(PickupQMScroll.BaseMenu, 0, 0, $"Select {pickup.name}", delegate
+                    {
+                        Tweaker_Object.SetObjectToEdit(pickup);
+                    }, $"Select {pickup.name}", null, pickup.Get_GameObject_Active_ToColor());
+                    var listener = pickup.GetOrAddComponent<ScrollMenuListener>();
+                    if (listener != null)
+                    {
+                        listener.assignedbtn = btn;
+                    }
 
-					var btn = new QMSingleButton(PickupQMScroll.BaseMenu, 0, 0, $"Select {pickup.name}", delegate
-					{
-						Tweaker_Object.SetObjectToEdit(pickup);
-					}, $"Select {pickup.name}", null, pickup.Get_GameObject_Active_ToColor());
-					var listener = pickup.GetOrAddComponent<ScrollMenuListener>();
-					if (listener != null)
-					{
-						listener.assignedbtn = btn;
-					}
-
-					PickupQMScroll.Add(btn);
+                    PickupQMScroll.Add(btn);
                 }
             });
         }

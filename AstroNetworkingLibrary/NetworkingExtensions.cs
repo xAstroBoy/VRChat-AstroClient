@@ -1,8 +1,8 @@
 ﻿namespace AstroNetworkingLibrary
 {
-	using System;
+    using System;
 
-	public static class NetworkingExtensions
+    public static class NetworkingExtensions
     {
         public static string ConvertToString(this byte[] bytes)
         {

@@ -1,6 +1,6 @@
 ﻿namespace Blaze.Utils
 {
-	public static class NetworkUtils
+    public static class NetworkUtils
     {
         /*internal static ApiAvatar ToApiAvatar(this AvatarData instance)
         {

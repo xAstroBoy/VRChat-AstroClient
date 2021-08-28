@@ -1,16 +1,16 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
-	#region Imports
+    #region Imports
 
-	using AstroLibrary;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using UnityEngine;
+    using AstroLibrary;
+    using AstroLibrary.Console;
+    using AstroLibrary.Utility;
+    using RubyButtonAPI;
+    using UnityEngine;
 
-	#endregion
+    #endregion
 
-	internal class FlightMenu : GameEvents
+    internal class FlightMenu : GameEvents
     {
         private static QMNestedButton mainButton;
 

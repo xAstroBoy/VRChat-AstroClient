@@ -1,268 +1,264 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Exploits;
-	#region Imports
+    #region Imports
 
-	using AstroClient.Variables;
-	using AstroLibrary;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Utility;
-	using MelonLoader;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Threading;
-	using Transmtn.DTO.Notifications;
-	using UnhollowerBaseLib;
-	using UnityEngine;
-	using VRC.SDKBase;
-	using static VRC.SDKBase.VRC_EventHandler;
+    using AstroClient.Exploits;
+    using AstroClient.Variables;
+    using AstroLibrary;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using MelonLoader;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Threading;
+    using Transmtn.DTO.Notifications;
+    using UnityEngine;
+    using VRC.SDKBase;
+    using static VRC.SDKBase.VRC_EventHandler;
 
-	#endregion Imports
+    #endregion Imports
 
-	/// <summary>
-	/// Cheeto's temporary UI for new/wip features
-	/// </summary>
-	public class CheetosUI : GameEvents
-	{
-		public QMNestedButton MainButton { get; private set; }
+    /// <summary>
+    /// Cheeto's temporary UI for new/wip features
+    /// </summary>
+    public class CheetosUI : GameEvents
+    {
+        public QMNestedButton MainButton { get; private set; }
 
-		public QMScrollMenu MainScroller { get; private set; }
+        public QMScrollMenu MainScroller { get; private set; }
 
-		public override void VRChat_OnUiManagerInit()
-		{
-			if (Bools.IsDeveloper)
-			{
-				MainButton = new QMNestedButton("ShortcutMenu", 5, 4, "<color=orange>Cheetos Menu</color>", "<color=orange>Cheeto's</color> Personal Menu", null, null, null, null, true);
-				MainScroller = new QMScrollMenu(MainButton);
-				new QMSingleButton(MainButton, 1, 0, "Friend Everyone", () => { DoFriendEveryone(); }, "Friend Everyone!");
-				new QMSingleButton(MainButton, 1, 1, "Test #2", () => { Test2(); }, "Don't Do It!");
-				new QMSingleButton(MainButton, 1, 2, "Test #3", () => { Test3(); }, "Don't Do It!");
-				new QMSingleButton(MainButton, 2, 0, "Teleport\nEveryone\nHere", () => { Test4(); }, "Muahaha");
-				new QMSingleButton(MainButton, 3, 0, "Portal", () => { PortalDrop(); }, "Portal");
-				new QMSingleButton(MainButton, 3, 1, "Create Button", () => { CreateButton(); }, ":3");
-				new QMSingleButton(MainButton, 3, 2, "Photon", () => { PrintPhotonPlayers(); }, "Photon");
-				new QMSingleButton(MainButton, 4, 0, "RPC Test #1", () => { RPCClapTest1(); }, "RPC");
-				new QMSingleButton(MainButton, 4, 1, "RPC Test #2", () => { RPCClapTest2(); }, "RPC");
-				new QMSingleButton(MainButton, 4, 2, "RPC Test #3", () => { RPCClapTest3(); }, "RPC");
-			}
-		}
+        public override void VRChat_OnUiManagerInit()
+        {
+            if (Bools.IsDeveloper)
+            {
+                MainButton = new QMNestedButton("ShortcutMenu", 5, 4, "<color=orange>Cheetos Menu</color>", "<color=orange>Cheeto's</color> Personal Menu", null, null, null, null, true);
+                MainScroller = new QMScrollMenu(MainButton);
+                new QMSingleButton(MainButton, 1, 0, "Friend Everyone", () => { DoFriendEveryone(); }, "Friend Everyone!");
+                new QMSingleButton(MainButton, 1, 1, "Test #2", () => { Test2(); }, "Don't Do It!");
+                new QMSingleButton(MainButton, 1, 2, "Test #3", () => { Test3(); }, "Don't Do It!");
+                new QMSingleButton(MainButton, 2, 0, "Teleport\nEveryone\nHere", () => { Test4(); }, "Muahaha");
+                new QMSingleButton(MainButton, 3, 0, "Portal", () => { PortalDrop(); }, "Portal");
+                new QMSingleButton(MainButton, 3, 1, "Create Button", () => { CreateButton(); }, ":3");
+                new QMSingleButton(MainButton, 3, 2, "Photon", () => { PrintPhotonPlayers(); }, "Photon");
+                new QMSingleButton(MainButton, 4, 0, "RPC Test #1", () => { RPCClapTest1(); }, "RPC");
+                new QMSingleButton(MainButton, 4, 1, "RPC Test #2", () => { RPCClapTest2(); }, "RPC");
+                new QMSingleButton(MainButton, 4, 2, "RPC Test #3", () => { RPCClapTest3(); }, "RPC");
+            }
+        }
 
-		private void PortalDrop()
-		{
-			var Portal = Networking.Instantiate(VrcBroadcastType.Always, "Portals/PortalInternalDynamic", new Vector3(777, 777, 777), new Quaternion(float.MaxValue, float.MaxValue, 0, 0));
-			Portal.SetActive(false);
-		}
+        private void PortalDrop()
+        {
+            var Portal = Networking.Instantiate(VrcBroadcastType.Always, "Portals/PortalInternalDynamic", new Vector3(777, 777, 777), new Quaternion(float.MaxValue, float.MaxValue, 0, 0));
+            Portal.SetActive(false);
+        }
 
-		private void Test4()
-		{
-			var position = Utils.LocalPlayer.gameObject.transform.position;
-			var rotation = Utils.LocalPlayer.gameObject.transform.rotation;
+        private void Test4()
+        {
+            var position = Utils.LocalPlayer.gameObject.transform.position;
+            var rotation = Utils.LocalPlayer.gameObject.transform.rotation;
 
-			foreach (var player in WorldUtils.Get_Players())
-			{
-				player.TeleportRPCExploit(position, rotation);
-			}
-		}
+            foreach (var player in WorldUtils.GetPlayers())
+            {
+                player.TeleportRPCExploit(position, rotation);
+            }
+        }
 
+        private void Test3()
+        {
+        }
 
+        private void Test2()
+        {
+            MiscFunc.InviteALLFriends();
+        }
 
+        private void DoFriendEveryone()
+        {
+            MelonCoroutines.Start(FriendEveryone());
+        }
 
-		private void Test3()
-		{
-		}
+        private IEnumerator FriendEveryone()
+        {
+            var players = WorldUtils.GetPlayers();
 
-		private void Test2()
-		{
-			MiscFunc.InviteALLFriends();
-		}
+            int count = 0;
+            foreach (var player in players)
+            {
+                if (!player.GetAPIUser().GetIsFriend() && !player.UserID().Equals(Utils.LocalPlayer.GetPlayer().UserID()))
+                {
+                    try
+                    {
+                        MiscUtils.DelayFunction(0.1f * count, () =>
+                        {
+                            Notification xx = FriendRequest.Create(player.UserID());
+                            VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
+                            CheetosHelpers.SendHudNotification($"Friend Request Sent: {player.DisplayName()}");
+                        });
+                        count++;
+                    }
+                    catch (Exception e)
+                    {
+                        ModConsole.Error(e.Message);
+                    }
+                }
+                yield return null;
+            }
+            yield break;
+        }
 
-		private void DoFriendEveryone()
-		{
-			MelonCoroutines.Start(FriendEveryone());
-		}
+        private void CreateButton()
+        {
+            var buttonPosition = Utils.LocalPlayer.GetPlayer().Get_Center_Of_Player();
+            if (buttonPosition != null)
+            {
+                var buttonRotation = Utils.LocalPlayer.GetPlayer().gameObject.transform.rotation;
+                ButtonCreator.Create("Test", buttonPosition.Value, buttonRotation, () => { ModConsole.Log("TestButton Clicked"); });
+            }
+        }
 
-		private IEnumerator FriendEveryone()
-		{
-			var players = WorldUtils.Get_Players();
+        public VRC_EventHandler handler;
 
-			int count = 0;
-			foreach (var player in players)
-			{
-				if (!player.GetAPIUser().GetIsFriend() && !player.UserID().Equals(Utils.LocalPlayer.GetPlayer().UserID()))
-				{
-					try
-					{
-						MiscUtility.DelayFunction(0.1f * count, () =>
-						{
-							Notification xx = FriendRequest.Create(player.UserID());
-							VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
-							CheetosHelpers.SendHudNotification($"Friend Request Sent: {player.DisplayName()}");
-						});
-						count++;
-					}
-					catch (Exception e)
-					{
-						ModConsole.Error(e.Message);
-					}
-				}
-				yield return null;
-			}
-			yield break;
-		}
+        private byte[] GetByteArray(int sizeInKb)
+        {
+            System.Random rnd = new System.Random();
+            byte[] b = new byte[sizeInKb * 1024]; // convert kb to byte
+            rnd.NextBytes(b);
+            return b;
+        }
 
-		private void CreateButton()
-		{
-			var buttonPosition = Utils.LocalPlayer.GetPlayer().Get_Center_Of_Player();
-			if (buttonPosition != null)
-			{
-				var buttonRotation = Utils.LocalPlayer.GetPlayer().gameObject.transform.rotation;
-				ButtonCreator.Create("Test", buttonPosition.Value, buttonRotation, () => { ModConsole.Log("TestButton Clicked"); });
-			}
-		}
+        public void RPCClapTest3()
+        {
+            if (handler == null)
+            {
+                DoHandlerThing();
+            }
 
-		public VRC_EventHandler handler;
+            int i = 0;
+            while (i <= 100)
+            {
+                foreach (var player in WorldUtils.GetPlayers())
+                {
+                    handler.TriggerEvent(new VrcEvent
+                    {
+                        EventType = VrcEventType.SendRPC,
+                        Name = "USpeak",
+                        ParameterObject = player.gameObject,
+                        ParameterInt = Utils.LocalPlayer.playerId,
+                        ParameterFloat = float.MaxValue,
+                        ParameterString = "Health",
+                        ParameterBoolOp = VrcBooleanOp.Unused,
+                        ParameterBytes = GetByteArray(100)
+                    }, VrcBroadcastType.AlwaysUnbuffered, player.gameObject, 0f);
+                }
+                Thread.Sleep(1);
+                i++;
+            }
+        }
 
-		private byte[] GetByteArray(int sizeInKb)
-		{
-			System.Random rnd = new System.Random();
-			byte[] b = new byte[sizeInKb * 1024]; // convert kb to byte
-			rnd.NextBytes(b);
-			return b;
-		}
+        public void RPCClapTest2()
+        {
+            if (handler == null)
+            {
+                DoHandlerThing();
+            }
 
-		public void RPCClapTest3()
-		{
-			if (handler == null)
-			{
-				DoHandlerThing();
-			}
+            int i = 0;
 
-			int i = 0;
-			while (i <= 100)
-			{
-				foreach (var player in WorldUtils.Get_Players())
-				{
-					handler.TriggerEvent(new VrcEvent
-					{
-						EventType = VrcEventType.SendRPC,
-						Name = "USpeak",
-						ParameterObject = player.gameObject,
-						ParameterInt = Utils.LocalPlayer.playerId,
-						ParameterFloat = float.MaxValue,
-						ParameterString = "Health",
-						ParameterBoolOp = VrcBooleanOp.Unused,
-						ParameterBytes = GetByteArray(100)
-					}, VrcBroadcastType.AlwaysUnbuffered, player.gameObject, 0f);
-				}
-				Thread.Sleep(1);
-				i++;
-			}
-		}
+            while (i <= 100)
+            {
+                foreach (var player in WorldUtils.GetPlayers())
+                {
+                    handler.TriggerEvent(new VrcEvent
+                    {
+                        EventType = VrcEventType.SendRPC,
+                        Name = "AddHealth",
+                        ParameterObject = player.gameObject,
+                        ParameterInt = Utils.LocalPlayer.playerId,
+                        ParameterFloat = float.MaxValue,
+                        ParameterString = "Health",
+                        ParameterBoolOp = VrcBooleanOp.Unused,
+                        ParameterBytes = new byte[] { byte.MaxValue }
+                    }, VrcBroadcastType.AlwaysUnbuffered, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, 0f);
+                }
+                Thread.Sleep(1);
+                i++;
+            }
+        }
 
-		public void RPCClapTest2()
-		{
-			if (handler == null)
-			{
-				DoHandlerThing();
-			}
+        public void RPCSendMessage(string msg)
+        {
+            handler.TriggerEvent(new VrcEvent
+            {
+                EventType = VrcEventType.SendRPC,
+                Name = "SendRPC",
+                ParameterObject = handler.gameObject,
+                ParameterInt = Utils.LocalPlayer.playerId,
+                ParameterFloat = 0f,
+                ParameterString = "UdonSyncRunProgramAsRPC",
+                ParameterBoolOp = VrcBooleanOp.Unused,
+                ParameterBytes = Networking.EncodeParameters(new Il2CppSystem.Object[] { msg })
+            }, VrcBroadcastType.AlwaysUnbuffered, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, 0f);
+        }
 
-			int i = 0;
+        public IEnumerator Clap1()
+        {
+            for (int i = 0; i < int.MaxValue; i++)
+            {
+                RPCSendMessage("Test");
+                yield return null;
+            }
+            yield break;
+        }
 
-			while (i <= 100)
-			{
-				foreach (var player in WorldUtils.Get_Players())
-				{
-					handler.TriggerEvent(new VrcEvent
-					{
-						EventType = VrcEventType.SendRPC,
-						Name = "AddHealth",
-						ParameterObject = player.gameObject,
-						ParameterInt = Utils.LocalPlayer.playerId,
-						ParameterFloat = float.MaxValue,
-						ParameterString = "Health",
-						ParameterBoolOp = VrcBooleanOp.Unused,
-						ParameterBytes = new byte[] { byte.MaxValue }
-					}, VrcBroadcastType.AlwaysUnbuffered, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, 0f);
-				}
-				Thread.Sleep(1);
-				i++;
-			}
-		}
+        public void RPCClapTest1()
+        {
+            if (handler == null)
+            {
+                DoHandlerThing();
+            }
 
-		public void RPCSendMessage(string msg)
-		{
-			handler.TriggerEvent(new VrcEvent
-			{
-				EventType = VrcEventType.SendRPC,
-				Name = "SendRPC",
-				ParameterObject = handler.gameObject,
-				ParameterInt = Utils.LocalPlayer.playerId,
-				ParameterFloat = 0f,
-				ParameterString = "UdonSyncRunProgramAsRPC",
-				ParameterBoolOp = VrcBooleanOp.Unused,
-				ParameterBytes = Networking.EncodeParameters(new Il2CppSystem.Object[] { msg })
-			}, VrcBroadcastType.AlwaysUnbuffered, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, 0f);
-		}
+            MelonCoroutines.Start(Clap1());
+        }
 
-		public IEnumerator Clap1()
-		{
-			for (int i = 0; i < int.MaxValue; i++)
-			{
-				RPCSendMessage("Test");
-				yield return null;
-			}
-			yield break;
-		}
+        public void DoHandlerThing()
+        {
+            handler = UnityEngine.Object.FindObjectOfType<VRC_EventHandler>();
+            if (handler != null)
+            {
+                ModConsole.Log("VRC_EventHandler found!");
+            }
+        }
 
-		public void RPCClapTest1()
-		{
-			if (handler == null)
-			{
-				DoHandlerThing();
-			}
+        public void PrintPhotonPlayers()
+        {
+            var room = Utils.LoadBalancingPeer.prop_Room_0;
 
-			MelonCoroutines.Start(Clap1());
-		}
+            if (room == null)
+            {
+                ModConsole.Log("Room was null");
+                return;
+            }
 
-		public void DoHandlerThing()
-		{
-			handler = UnityEngine.Object.FindObjectOfType<VRC_EventHandler>();
-			if (handler != null)
-			{
-				ModConsole.Log("VRC_EventHandler found!");
-			}
-		}
+            var players = room.prop_Dictionary_2_Int32_Player_0;
 
-		public void PrintPhotonPlayers()
-		{
-			var room = Utils.LoadBalancingPeer.prop_Room_0;
+            if (players == null)
+            {
+                ModConsole.Log("Players was null");
+                return;
+            }
 
-			if (room == null)
-			{
-				ModConsole.Log("Room was null");
-				return;
-			}
+            foreach (var player in players)
+            {
+                ModConsole.Log($"Key: {player.Key}");
+                ModConsole.Log($"Value: {player.Value.GetDisplayName()}");
+            }
+        }
 
-			var players = room.prop_Dictionary_2_Int32_Player_0;
-
-			if (players == null)
-			{
-				ModConsole.Log("Players was null");
-				return;
-			}
-
-			foreach (var player in players)
-			{
-				ModConsole.Log($"Key: {player.Key}");
-				ModConsole.Log($"Value: {player.Value.GetDisplayName()}");
-			}
-		}
-
-		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
-		{
-		}
-	}
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        {
+        }
+    }
 }

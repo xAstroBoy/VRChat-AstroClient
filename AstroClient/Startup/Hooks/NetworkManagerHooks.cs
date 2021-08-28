@@ -1,12 +1,12 @@
 ﻿namespace AstroClient
 {
-	using AstroClientCore.Events;
-	using MelonLoader;
-	using System;
-	using System.Collections;
-	using VRC;
+    using AstroClientCore.Events;
+    using MelonLoader;
+    using System;
+    using System.Collections;
+    using VRC;
 
-	public class NetworkManagerHooks : GameEvents
+    public class NetworkManagerHooks : GameEvents
     {
         private static bool IsInitialized;
         private static bool SeenFire;

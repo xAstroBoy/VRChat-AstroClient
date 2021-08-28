@@ -1,12 +1,12 @@
 ﻿namespace Blaze.Utils
 {
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Reflection;
-	using UnhollowerRuntimeLib.XrefScans;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using UnhollowerRuntimeLib.XrefScans;
 
-	//[Obfuscation(Exclude = true, ApplyToMembers = true, StripAfterObfuscation = true)]
-	public static class BlazesXRefs
+    //[Obfuscation(Exclude = true, ApplyToMembers = true, StripAfterObfuscation = true)]
+    public static class BlazesXRefs
     {
         private static MethodInfo _OpenedQMMethod;
         private static MethodInfo _ClosedQMMethod;
@@ -52,9 +52,9 @@
             get
             {
                 if (_TrustRankMethod != null) return _TrustRankMethod;
-                return _TrustRankMethod = typeof(VRCPlayer).GetMethods().FirstOrDefault(it => !it.Name.Contains("PDM") 
-                && it.ReturnType.ToString().Equals("System.String") 
-                && it.GetParameters().Length == 1 
+                return _TrustRankMethod = typeof(VRCPlayer).GetMethods().FirstOrDefault(it => !it.Name.Contains("PDM")
+                && it.ReturnType.ToString().Equals("System.String")
+                && it.GetParameters().Length == 1
                 && it.GetParameters()[0].ParameterType.ToString().Equals("VRC.Core.APIUser"));
             }
         }
@@ -65,7 +65,7 @@
             {
                 if (_TrustRankColorMethods != null) return _TrustRankColorMethods;
                 return _TrustRankColorMethods = typeof(VRCPlayer).GetMethods().Where(it => it.ReturnType.ToString().Equals("UnityEngine.Color")
-                && it.GetParameters().Length == 1 
+                && it.GetParameters().Length == 1
                 && it.GetParameters()[0].ParameterType.ToString().Equals("VRC.Core.APIUser")).ToList();
             }
         }

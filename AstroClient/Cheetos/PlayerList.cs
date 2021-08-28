@@ -1,23 +1,22 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Utility;
-	using CheetosConsole;
-	using MelonLoader;
-	using RubyButtonAPI;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Diagnostics;
-	using System.Linq;
-	using System.Threading;
-	using UnityEngine;
-	using VRC;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using MelonLoader;
+    using RubyButtonAPI;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Threading;
+    using UnityEngine;
+    using VRC;
 
-	#endregion Imports
+    #endregion Imports
 
-	public partial class PlayerList : GameEvents
+    public partial class PlayerList : GameEvents
     {
         private static QMSingleButton playersButton;
 
@@ -37,23 +36,15 @@
 
         private static Mutex refreshMutex = new Mutex();
 
-        public static bool IsReady
-        {
-            get
-            {
-                return Utils.LoadBalancingPeer != null && Utils.LoadBalancingPeer.prop_Room_0 != null && Utils.LoadBalancingPeer.prop_Room_0.prop_Dictionary_2_Int32_Player_0 != null;
-            }
-        }
-
         public override void VRChat_OnUiManagerInit()
         {
-			Stopwatch stopwatch = new Stopwatch();
-			stopwatch.Start();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
             refreshButton = new QMSingleButton("ShortcutMenu", -1 + ConfigManager.UI.PlayerListOffset, -1.5f, "Refresh", () => { RefreshButtons(); }, "Refresh player list", null, null, true);
-			refreshButton.SetActive(ConfigManager.UI.ShowPlayersMenu);
+            refreshButton.SetActive(ConfigManager.UI.ShowPlayersMenu);
 
-			playersButton = new QMSingleButton("ShortcutMenu", -1 + ConfigManager.UI.PlayerListOffset, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
+            playersButton = new QMSingleButton("ShortcutMenu", -1 + ConfigManager.UI.PlayerListOffset, -1f, "Players", () => { PlayerListToggle(); }, "Show/Hide player list", null, null, true);
             playersButton.SetActive(ConfigManager.UI.ShowPlayersMenu);
 
             if (ConfigManager.UI.ShowPlayersList)
@@ -65,32 +56,32 @@
                 playersButton.SetTextColor(Color.red);
             }
 
-			stopwatch.Stop();
-			//Console.WriteLine($"Playerlist Created: {stopwatch.ElapsedMilliseconds}ms");
+            stopwatch.Stop();
+            //Console.WriteLine($"Playerlist Created: {stopwatch.ElapsedMilliseconds}ms");
         }
 
         public override void OnLateUpdate()
         {
-			//if (ConfigManager.UI.ShowPlayersList && ConfigManager.UI.ShowPlayersMenu)
-			//{
-			//	if (RefreshTime >= 16f)
-			//	{
-			//		RefreshButtons();
-			//		RefreshTime = 0;
-			//	}
-			//	else
-			//	{
-			//		RefreshTime += 1f * Time.deltaTime;
-			//	}
-			//}
+            //if (ConfigManager.UI.ShowPlayersList && ConfigManager.UI.ShowPlayersMenu)
+            //{
+            //	if (RefreshTime >= 16f)
+            //	{
+            //		RefreshButtons();
+            //		RefreshTime = 0;
+            //	}
+            //	else
+            //	{
+            //		RefreshTime += 1f * Time.deltaTime;
+            //	}
+            //}
         }
 
-		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
             //MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
         }
 
-		public override void OnPhotonJoined(Photon.Realtime.Player player)
+        public override void OnPhotonJoined(Photon.Realtime.Player player)
         {
             //MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
         }
@@ -103,7 +94,7 @@
 
         private void RefreshButtons()
         {
-            if (IsReady && ConfigManager.UI.ShowPlayersList && ConfigManager.UI.ShowPlayersMenu)
+            if (WorldUtils.IsInWorld() && ConfigManager.UI.ShowPlayersList && ConfigManager.UI.ShowPlayersMenu)
             {
                 refreshMutex.WaitOne();
                 var players = new List<PlayerListData>();
@@ -147,10 +138,10 @@
 
         public static void CreateButton(PlayerListData player, float xPos, float yPos)
         {
-			Stopwatch stopwatch = new Stopwatch();
-			stopwatch.Start();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
-			var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, $"{player.Prefix}{player.Name}", () => { if (player.Player != null) { SelectPlayer(player.Player); } }, "", player.Color, player.Color, true);
+            var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, $"{player.Prefix}{player.Name}", () => { if (player.Player != null) { SelectPlayer(player.Player); } }, "", player.Color, player.Color, true);
             playerButton.SetResizeTextForBestFit(true);
 
             playerButton.SetActive(ConfigManager.UI.ShowPlayersList);
@@ -160,9 +151,9 @@
             }
             PlayerButtons.Add(playerButton);
 
-			stopwatch.Stop();
-			//Console.WriteLine($"Button Created: {player.Name} - {stopwatch.ElapsedMilliseconds}ms");
-		}
+            stopwatch.Stop();
+            //Console.WriteLine($"Button Created: {player.Name} - {stopwatch.ElapsedMilliseconds}ms");
+        }
 
         private void ResetButtons()
         {

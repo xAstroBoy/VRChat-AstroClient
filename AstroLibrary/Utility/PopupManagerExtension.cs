@@ -1,17 +1,17 @@
-﻿/// Original Credit to DayOfThePlay
-namespace AstroLibrary.Extensions
-{
-	using AstroLibrary.Utility;
-	using MelonLoader;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Reflection;
-	using UnhollowerRuntimeLib.XrefScans;
-	using UnityEngine;
-	using UnityEngine.UI;
+﻿// Credits to Blaze and DayOfThePlay
 
-	public static class PopupManager
+namespace AstroLibrary.Utility
+{
+    using MelonLoader;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using UnhollowerRuntimeLib.XrefScans;
+    using UnityEngine;
+    using UnityEngine.UI;
+
+    public static class PopupUtils
     {
         public static void Alert(this VRCUiPopupManager instance, string title, string Content, string buttonname, Action onSucces, Action<VRCUiPopup> onPopupShown = null)
         {
@@ -40,7 +40,7 @@ namespace AstroLibrary.Extensions
 
         public static void QueHudMessage(this VRCUiManager instance, string Message)
         {
-            if (!RoomManagerExtension.IsInWorld()) return;
+            if (!WorldUtils.IsInWorld()) return;
             if (true)
             {
                 if (HudMessage1 == null)
@@ -68,7 +68,7 @@ namespace AstroLibrary.Extensions
         public static void AskInGameInput(this VRCUiPopupManager instance, string title, string okButtonName, Action<string> onSuccess, string def = null)
         {
             IsTyping = true;
-            MiscUtility.DelayFunction(15, delegate { IsTyping = false; });
+            MiscUtils.DelayFunction(15, delegate { IsTyping = false; });
             instance.InputPopUp(title, okButtonName, new Action<string>((g) =>
             {
                 onSuccess(g);
@@ -305,7 +305,7 @@ namespace AstroLibrary.Extensions
             gameObject.AddComponent<Text>();
             gameObject.transform.SetParent(image.transform, false);
             gameObject.transform.localScale = Vector3.one;
-            gameObject.transform.localPosition = (Vector3.up * offset) + (Vector3.right * 300f);
+            gameObject.transform.localPosition = Vector3.up * offset + Vector3.right * 300f;
             var text = gameObject.GetComponent<Text>();
             text.color = Color.white;
             text.fontStyle = FontStyle.Bold;

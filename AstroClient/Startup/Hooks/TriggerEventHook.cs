@@ -1,14 +1,14 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
-	using AstroLibrary.Console;
-	using Harmony;
-	using System;
-	using System.Reflection;
-	using UnhollowerRuntimeLib.XrefScans;
-	using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
-	using AstroLibrary.Extensions;
+    using AstroLibrary.Console;
+    using Harmony;
+    using System;
+    using System.Reflection;
+    using UnhollowerRuntimeLib.XrefScans;
+    using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
+    using AstroLibrary.Extensions;
 
-	public class TriggerEventHook : GameEvents
+    public class TriggerEventHook : GameEvents
     {
         private HarmonyLib.Harmony harmony;
 
@@ -48,9 +48,9 @@
                     string vrcevent = string.Empty;
 
                     eventhandler = __0 != null ? __0.ToString() : "null";
-					vrcevent = __1.ParameterObject != null ? __1.ParameterObject.name : "null";
+                    vrcevent = __1.ParameterObject != null ? __1.ParameterObject.name : "null";
 
-					if (!vrcevent.ToLower().Equals("uspeak")) // Ignore USPEAK.
+                    if (!vrcevent.ToLower().Equals("uspeak")) // Ignore USPEAK.
                     {
                         ModConsole.DebugLog($"Event : VRC_EventHandler : {eventhandler}, VrcEvent : {vrcevent}, VrcBroadcastType : {__2}, UnknownInt : {__3}, UnknownFloat : {__4}");
                     }

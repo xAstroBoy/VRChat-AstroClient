@@ -1,24 +1,24 @@
 ﻿namespace AstroClient.Variables
 {
-	using AstroLibrary.Console;
+    using AstroLibrary.Console;
 
-	public class Bools
-	{
-		internal static bool AntiPortal;
+    public class Bools
+    {
+        internal static bool AntiPortal;
 
-		internal static bool BlockRPC;
+        internal static bool BlockRPC;
 
-		internal static bool BlockUdon;
+        internal static bool BlockUdon;
 
-		internal static bool DisableNSFWMenu = true;
+        internal static bool DisableNSFWMenu = true;
 
-		internal static bool IsDeveloperAndDebug
-		{
-			get
-			{
-				return IsDeveloper && IsDebugMode;
-			}
-		}
+        internal static bool IsDeveloperAndDebug
+        {
+            get
+            {
+                return IsDeveloper && IsDebugMode;
+            }
+        }
 
         internal static bool IsDeveloper;
 

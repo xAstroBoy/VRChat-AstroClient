@@ -1,11 +1,11 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroClient.Components;
-	using AstroLibrary.Console;
-	using System.Collections.Generic;
-	using VRC;
+    using AstroClient.Components;
+    using AstroLibrary.Console;
+    using System.Collections.Generic;
+    using VRC;
 
-	public static class SingleTag_ext
+    public static class SingleTag_ext
     {
         public static bool HasTagWithText(this Player player, string searchtext)
         {

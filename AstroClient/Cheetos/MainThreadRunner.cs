@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.Cheetos
 {
-	using AstroLibrary.Console;
-	using Il2CppSystem.Diagnostics;
-	using System;
-	using System.Collections.Generic;
-	using System.Threading;
-	using static AstroClient.Variables.InstanceBuilder;
+    using AstroLibrary.Console;
+    using Il2CppSystem.Diagnostics;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
+    using static AstroClient.Variables.InstanceBuilder;
 
-	public class MainThreadRunner : GameEventsBehaviour
+    public class MainThreadRunner : GameEventsBehaviour
     {
         public static MainThreadRunner Instance;
 

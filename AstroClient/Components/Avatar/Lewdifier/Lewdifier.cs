@@ -1,17 +1,18 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroClient.AvatarMods;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnhollowerBaseLib.Attributes;
-	using UnityEngine;
-	using VRC;
-	using VRC.SDKBase;
+    using AstroClient.AvatarMods;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnhollowerBaseLib.Attributes;
+    using UnityEngine;
+    using VRC;
+    using VRC.SDKBase;
 
-	public class Lewdifier : GameEventsBehaviour
+    public class Lewdifier : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
