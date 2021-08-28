@@ -108,7 +108,7 @@
 
 		public override void OnUpdate()
 		{
-			if (WorldUtils.GetWorldInstance() == null || PopupUtils.IsTyping)
+			if (!WorldUtils.IsInWorld() || PopupUtils.IsTyping)
 			{
 				return;
 			}
@@ -125,7 +125,6 @@
 				if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
                 {
 					FlyEnabled = !FlyEnabled;
-					NoClipEnabled = FlyEnabled;
 					ExploitsMenu.RefreshFlightButtons();
                 }
 

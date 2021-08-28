@@ -95,6 +95,8 @@
 		{
 			for (; ; )
 			{
+				if (!WorldUtils.IsInWorld()) yield break;
+
 				DoorbellTime += 1 * Time.deltaTime;
 
 				if (DoorbellTime < 1000f)
@@ -132,6 +134,7 @@
 
 		private static IEnumerator DoBlueChairSpam()
 		{
+			if (!WorldUtils.IsInWorld()) yield break;
 			BlueChairTime += 1 * Time.deltaTime;
 
 			if (BlueChairTime < 0.5f)
