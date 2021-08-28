@@ -1,13 +1,13 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using AstroLibrary.Console;
-	using UnityEngine;
+    using AstroLibrary.Console;
+    using UnityEngine;
 
-	#endregion Imports
+    #endregion Imports
 
-	public class CMPage
+    public class CMPage
     {
         public GameObject GetGameObject { get; private set; }
 

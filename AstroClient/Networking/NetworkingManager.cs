@@ -1,18 +1,18 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using AstroClient.Variables;
-	using AstroLibrary.Console;
-	using AstroLibrary.Utility;
-	using AstroNetworkingLibrary;
-	using AstroNetworkingLibrary.Serializable;
-	using System.Collections.Generic;
-	using static AstroClient.Cheetos.AvatarSearch;
+    using AstroClient.Variables;
+    using AstroLibrary.Console;
+    using AstroLibrary.Utility;
+    using AstroNetworkingLibrary;
+    using AstroNetworkingLibrary.Serializable;
+    using System.Collections.Generic;
+    using static AstroClient.Cheetos.AvatarSearch;
 
-	#endregion Imports
+    #endregion Imports
 
-	public class NetworkingManager : GameEvents
+    public class NetworkingManager : GameEvents
     {
         /// <summary>
         /// Gets whether the NetworkingManager has initialized and contains the player's information.
@@ -74,7 +74,7 @@
             Name = self.GetDisplayName();
             UserID = self.GetUserID();
 
-			MiscUtils.DelayFunction(2f, () =>
+            MiscUtils.DelayFunction(2f, () =>
             {
                 Initialized = true;
                 SendClientInfo();

@@ -1,16 +1,16 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroClient.GameObjectDebug;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Utility;
-	using System;
-	using System.Runtime.CompilerServices;
-	using System.Runtime.InteropServices;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
-	using VRC;
+    using AstroClient.GameObjectDebug;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.InteropServices;
+    using UnhollowerRuntimeLib;
+    using UnityEngine;
+    using VRC;
 
-	public class Orbit : GameEventsBehaviour
+    public class Orbit : GameEventsBehaviour
     {
         #region Internal
 

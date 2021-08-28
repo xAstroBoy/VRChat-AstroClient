@@ -1,10 +1,10 @@
 ﻿namespace AstroClient
 {
-	using System.Linq;
-	using UnityEngine;
-	using static AstroClient.Variables.CustomLists;
+    using System.Linq;
+    using UnityEngine;
+    using static AstroClient.Variables.CustomLists;
 
-	public class ColliderEditors
+    public class ColliderEditors
     {
         public static bool HasAlreadyAColliderAdded(GameObject obj)
         {

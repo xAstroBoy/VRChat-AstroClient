@@ -1,14 +1,14 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroLibrary.Extensions;
-	using System;
-	using System.Runtime.InteropServices;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
-	using static AstroClient.Forces;
-	using Random = UnityEngine.Random;
+    using AstroLibrary.Extensions;
+    using System;
+    using System.Runtime.InteropServices;
+    using UnhollowerRuntimeLib;
+    using UnityEngine;
+    using static AstroClient.Forces;
+    using Random = UnityEngine.Random;
 
-	public class CrazyObject : GameEventsBehaviour
+    public class CrazyObject : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;

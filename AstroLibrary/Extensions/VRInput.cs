@@ -1,8 +1,8 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using UnityEngine;
+    using UnityEngine;
 
-	internal class VRInput
+    internal class VRInput
     {
         public class Vive
         {

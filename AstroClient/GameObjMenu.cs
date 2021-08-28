@@ -1,24 +1,24 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using AstroClient.Components;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Utility;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnityEngine;
-	using UnityEngine.SceneManagement;
-	using UnityEngine.UI;
-	using VRC;
+    using AstroClient.Components;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
+    using UnityEngine.UI;
+    using VRC;
 
-	#endregion
+    #endregion
 
-	public class GameObjMenu : GameEvents
+    public class GameObjMenu : GameEvents
     {
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
@@ -368,13 +368,13 @@
                            }
                        }));
                         newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.x - 100f, newbtn.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
-						var listener = item.gameObject.GetOrAddComponent<ScrollMenuListener>();
-						if(listener != null)
-						{
-							listener.assignedbtn = newbtn;
-						}
-						
-						subscroll.Add(newbtn);
+                        var listener = item.gameObject.GetOrAddComponent<ScrollMenuListener>();
+                        if (listener != null)
+                        {
+                            listener.assignedbtn = newbtn;
+                        }
+
+                        subscroll.Add(newbtn);
                         AddEnterChildObj(gameobjtogglermenu, newbtn, item);
                     }
                 }

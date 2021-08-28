@@ -1,11 +1,11 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Variables;
-	using AstroLibrary.Console;
-	using AstroLibrary.Finder;
-	using System.Collections.Generic;
+    using AstroClient.Variables;
+    using AstroLibrary.Console;
+    using AstroLibrary.Finder;
+    using System.Collections.Generic;
 
-	public class LPD : GameEvents
+    public class LPD : GameEvents
     {
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {

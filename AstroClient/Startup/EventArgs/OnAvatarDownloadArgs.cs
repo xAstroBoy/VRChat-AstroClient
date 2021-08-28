@@ -1,9 +1,9 @@
 ﻿namespace AstroClientCore.Events
 {
-	using System;
-	using VRC.Core;
+    using System;
+    using VRC.Core;
 
-	public class OnAvatarDownloadArgs : EventArgs
+    public class OnAvatarDownloadArgs : EventArgs
     {
         public ApiAvatar Avatar;
 

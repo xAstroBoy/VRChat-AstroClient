@@ -1,15 +1,15 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroLibrary.Console;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnityEngine;
-	using VRC.SDK3.Components;
-	using VRC.SDKBase;
-	using VRC.Udon;
+    using AstroLibrary.Console;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
+    using VRC.SDK3.Components;
+    using VRC.SDKBase;
+    using VRC.Udon;
 
-	public static class ComponentParser_ext
+    public static class ComponentParser_ext
     {
         public static List<GameObject> Get_VRCInteractables(this GameObject obj)
         {

@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroClient.Variables;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroClient.Variables;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using System;
 
-	public static class ComponentsBtn
+    public static class ComponentsBtn
     {
         public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {

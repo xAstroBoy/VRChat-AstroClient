@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using Harmony;
-	using MelonLoader;
-	using System;
-	using System.Reflection;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using Harmony;
+    using MelonLoader;
+    using System;
+    using System.Reflection;
 
-	public class QuickMenuHooks : GameEvents
+    public class QuickMenuHooks : GameEvents
     {
         public static event EventHandler<VRCPlayerEventArgs> Event_OnPlayerSelected;
 

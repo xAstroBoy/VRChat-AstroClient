@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.Cheetos
 {
-	using AstroLibrary.Utility;
+    using AstroLibrary.Utility;
 
-	public static class ForceClone
+    public static class ForceClone
     {
         internal static void ClonePlayer()
         {

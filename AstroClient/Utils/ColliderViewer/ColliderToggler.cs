@@ -1,10 +1,10 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
-	using System.Collections.Generic;
-	using UnityEngine;
+    using AstroLibrary.Console;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-	internal static class ColliderToggler
+    internal static class ColliderToggler
     {
         public static void ReenableAll()
         {

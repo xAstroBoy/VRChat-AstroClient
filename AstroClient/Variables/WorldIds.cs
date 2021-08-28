@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Variables
 {
-	public static class WorldIds
+    public static class WorldIds
     {
         // Yes, the mod supports these worlds : = )
 
@@ -30,11 +30,11 @@
 
         public static readonly string BClub = "wrld_1b3b3259-0a1f-4311-984e-826abab6f481";
 
-		public static readonly string JustHParty = "wrld_e5c30b56-efa8-42d5-a8d4-a2cca2bf3403";
+        public static readonly string JustHParty = "wrld_e5c30b56-efa8-42d5-a8d4-a2cca2bf3403";
 
-		public static readonly string VoidClub = "wrld_7e10376a-29b6-43af-ac5d-6eb72732e90c";
+        public static readonly string VoidClub = "wrld_7e10376a-29b6-43af-ac5d-6eb72732e90c";
 
-		public static readonly string AimFactory = "wrld_97a21a21-9e5e-4152-b1c6-bc899a041d3f";
+        public static readonly string AimFactory = "wrld_97a21a21-9e5e-4152-b1c6-bc899a041d3f";
 
         public static readonly string LPD = "wrld_0d3bc22f-eb0c-48f6-9d22-1b7ef764a60a";
 
@@ -44,11 +44,11 @@
 
         public static readonly string ClubMisfitAfterParty = "wrld_4524f1b5-e380-4330-afc9-d36705ced271";
 
-		public static readonly string BOMBERio = "wrld_98422193-2ddd-4af4-bd97-ab5609a46785";
+        public static readonly string BOMBERio = "wrld_98422193-2ddd-4af4-bd97-ab5609a46785";
 
-		public static readonly string PoolParlor = "wrld_747e7258-f804-4414-83f5-b618ebca7471";
+        public static readonly string PoolParlor = "wrld_747e7258-f804-4414-83f5-b618ebca7471";
 
-		public static readonly string Valkyrie_Defense = "wrld_26c38507-8915-40d5-9338-667f01fe3b4c";
+        public static readonly string Valkyrie_Defense = "wrld_26c38507-8915-40d5-9338-667f01fe3b4c";
 
-	}
+    }
 }

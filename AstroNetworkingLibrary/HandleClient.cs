@@ -1,11 +1,11 @@
 ﻿namespace AstroNetworkingLibrary
 {
-	using AstroNetworkingLibrary.Serializable;
-	using System;
-	using System.Net.Sockets;
-	using System.Threading.Tasks;
+    using AstroNetworkingLibrary.Serializable;
+    using System;
+    using System.Net.Sockets;
+    using System.Threading.Tasks;
 
-	public class HandleClient
+    public class HandleClient
     {
         public TcpClient ClientSocket { get; private set; }
 

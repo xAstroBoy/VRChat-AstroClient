@@ -1,12 +1,12 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using System.Collections.Generic;
-	using System.Timers;
+    using AstroLibrary;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using System.Collections.Generic;
+    using System.Timers;
 
-	internal class JoinLeaveNotifier : GameEvents
+    internal class JoinLeaveNotifier : GameEvents
     {
         private static Timer aTimer;
 

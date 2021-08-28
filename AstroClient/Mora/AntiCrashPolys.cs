@@ -1,16 +1,16 @@
 ﻿namespace AstroClient.AntiCrash
 {
-	using AstroLibrary;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections.Generic;
-	using UnhollowerBaseLib;
-	using UnityEngine;
-	using VRC;
-	using VRCSDK2;
-	using static AstroClient.Mora.anticrashwrappers;
+    using AstroLibrary;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections.Generic;
+    using UnhollowerBaseLib;
+    using UnityEngine;
+    using VRC;
+    using VRCSDK2;
+    using static AstroClient.Mora.anticrashwrappers;
 
-	internal class AntiCrashPolys : GameEvents
+    internal class AntiCrashPolys : GameEvents
     {
         public static Dictionary<string, avatar_data> anti_crash_list = new Dictionary<string, avatar_data>();
 

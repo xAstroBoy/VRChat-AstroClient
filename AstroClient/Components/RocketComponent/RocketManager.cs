@@ -1,17 +1,17 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections.Generic;
-	using System.Runtime.InteropServices;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
-	using static AstroClient.Variables.InstanceBuilder;
-	using Color = System.Drawing.Color;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections.Generic;
+    using System.Runtime.InteropServices;
+    using UnhollowerRuntimeLib;
+    using UnityEngine;
+    using static AstroClient.Variables.InstanceBuilder;
+    using Color = System.Drawing.Color;
 
-	public class RocketManager : GameEventsBehaviour
+    public class RocketManager : GameEventsBehaviour
     {
         #region Internal
 

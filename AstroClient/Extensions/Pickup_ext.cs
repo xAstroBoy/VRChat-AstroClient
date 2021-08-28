@@ -1,6 +1,6 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	public static class Pickup_ext
+    public static class Pickup_ext
     {
     }
 }

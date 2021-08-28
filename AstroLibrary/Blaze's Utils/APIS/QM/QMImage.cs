@@ -1,11 +1,11 @@
 ﻿namespace Blaze.API
 {
-	using System.Threading.Tasks;
-	using UnityEngine;
-	using UnityEngine.Networking;
-	using UnityEngine.UI;
+    using System.Threading.Tasks;
+    using UnityEngine;
+    using UnityEngine.Networking;
+    using UnityEngine.UI;
 
-	public class QMImage
+    public class QMImage
     {
         protected GameObject ImageObject;
         protected RawImage Image;

@@ -1,9 +1,9 @@
 ﻿namespace AstroClient.ItemTweakerV2.TweakerEventArgs
 {
-	using System;
-	using UnityEngine;
+    using System;
+    using UnityEngine;
 
-	public class SelectedObjectArgs : EventArgs
+    public class SelectedObjectArgs : EventArgs
     {
         public GameObject GameObject;
 

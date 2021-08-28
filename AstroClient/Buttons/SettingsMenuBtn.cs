@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
-	using AstroClient.Cheetos;
-	using AstroLibrary;
-	using AstroLibrary.Console;
-	using AstroLibrary.Utility;
-	using RubyButtonAPI;
-	using UnityEngine;
+    using AstroClient.Cheetos;
+    using AstroLibrary;
+    using AstroLibrary.Console;
+    using AstroLibrary.Utility;
+    using RubyButtonAPI;
+    using UnityEngine;
 
-	internal class SettingsMenuBtn
+    internal class SettingsMenuBtn
     {
         public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
@@ -29,19 +29,19 @@
             QMSingleToggleButton udonRPCToggle = new QMSingleToggleButton(sub, 4, 0, "Udon Log ON", () => { ConfigManager.General.LogUdonEvents = true; }, "Udon Log OFF", () => { ConfigManager.General.LogUdonEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogUdonEvents, true);
             udonRPCToggle.SetToggleState(ConfigManager.General.LogUdonEvents, false);
 
-			// Performance Menu
+            // Performance Menu
 
-			QMNestedButton performanceMenu = new QMNestedButton(sub, 4, 2f, "Performance", "Performance Menu");
+            QMNestedButton performanceMenu = new QMNestedButton(sub, 4, 2f, "Performance", "Performance Menu");
 
             QMSingleToggleButton highPriorityToggle = new QMSingleToggleButton(performanceMenu, 1, 0f, "Priority High", () => { HighPriority.IsEnabled = true; }, "Priority Normal", () => { HighPriority.IsEnabled = false; }, "Sets the process priority", Color.green, Color.red, null, HighPriority.IsEnabled, false);
             highPriorityToggle.SetToggleState(HighPriority.IsEnabled, false);
 
-			QMSingleToggleButton frameUnlimiterToggle = new QMSingleToggleButton(performanceMenu, 2, 0f, "FrameUnlimiter\nOn", () => { FrameUnlimiter.IsEnabled = true; }, "FrameUnlimiter\nOff", () => { FrameUnlimiter.IsEnabled = false; }, "Unlimit the games framerate", Color.green, Color.red, null, FrameUnlimiter.IsEnabled, false);
-			frameUnlimiterToggle.SetToggleState(FrameUnlimiter.IsEnabled, false);
+            QMSingleToggleButton frameUnlimiterToggle = new QMSingleToggleButton(performanceMenu, 2, 0f, "FrameUnlimiter\nOn", () => { FrameUnlimiter.IsEnabled = true; }, "FrameUnlimiter\nOff", () => { FrameUnlimiter.IsEnabled = false; }, "Unlimit the games framerate", Color.green, Color.red, null, FrameUnlimiter.IsEnabled, false);
+            frameUnlimiterToggle.SetToggleState(FrameUnlimiter.IsEnabled, false);
 
-			// Other
+            // Other
 
-			QMSingleToggleButton TriggerEventToggle = new QMSingleToggleButton(sub, 1, 0.5f, "Trigger Log ON", () => { ConfigManager.General.LogTriggerEvents = true; }, "Trigger Log OFF", () => { ConfigManager.General.LogTriggerEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogTriggerEvents, true);
+            QMSingleToggleButton TriggerEventToggle = new QMSingleToggleButton(sub, 1, 0.5f, "Trigger Log ON", () => { ConfigManager.General.LogTriggerEvents = true; }, "Trigger Log OFF", () => { ConfigManager.General.LogTriggerEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogTriggerEvents, true);
             TriggerEventToggle.SetToggleState(ConfigManager.General.LogTriggerEvents, false);
 
             QMNestedButton cameraSettings = new QMNestedButton(sub, 2, 2, "Camera", "Camera", null, null, null, null, false);
@@ -85,8 +85,8 @@
             FlightMenu.InitButtons(sub, 1f, 1.5f, true);
             PlayerESPMenu.InitButtons(sub, 2f, 1.5f, true);
 
-			// Spoofs
-			QMNestedButton subSpoofButton = new QMNestedButton(sub, 3, 2f, "Spoofs", "Spoof Menu", null, null, null, null, false);
+            // Spoofs
+            QMNestedButton subSpoofButton = new QMNestedButton(sub, 3, 2f, "Spoofs", "Spoof Menu", null, null, null, null, false);
 
             QMSingleToggleButton toggleSpoofFPS = new QMSingleToggleButton(subSpoofButton, 2, 0, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = true; }, "FPS Spoof", () => { ConfigManager.General.SpoofFPS = false; }, "Toggle FPS Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofFPS, false);
             toggleSpoofFPS.SetToggleState(ConfigManager.General.SpoofFPS, false);
@@ -94,10 +94,10 @@
             QMSingleToggleButton toggleSpoofPing = new QMSingleToggleButton(subSpoofButton, 3, 0, "Ping Spoof", () => { ConfigManager.General.SpoofPing = true; }, "Ping Spoof", () => { ConfigManager.General.SpoofPing = false; }, "Toggle Ping Spoofing", Color.green, Color.red, null, ConfigManager.General.SpoofPing, false);
             toggleSpoofPing.SetToggleState(ConfigManager.General.SpoofPing, false);
 
-			QMSingleToggleButton toggleSpoofQuest = new QMSingleToggleButton(subSpoofButton, 4, 0, "Quest Spoof", () => { ConfigManager.General.SpoofQuest = true; }, "Quest Spoof", () => { ConfigManager.General.SpoofQuest = false; }, "Toggle Quest Spoofing\n(Requires Restart)", Color.green, Color.red, null, ConfigManager.General.SpoofQuest, false);
-			toggleSpoofQuest.SetToggleState(ConfigManager.General.SpoofQuest, false);
+            QMSingleToggleButton toggleSpoofQuest = new QMSingleToggleButton(subSpoofButton, 4, 0, "Quest Spoof", () => { ConfigManager.General.SpoofQuest = true; }, "Quest Spoof", () => { ConfigManager.General.SpoofQuest = false; }, "Toggle Quest Spoofing\n(Requires Restart)", Color.green, Color.red, null, ConfigManager.General.SpoofQuest, false);
+            toggleSpoofQuest.SetToggleState(ConfigManager.General.SpoofQuest, false);
 
-			new QMSingleButton(subSpoofButton, 2, 1, "Set\nFPS\nValue", () =>
+            new QMSingleButton(subSpoofButton, 2, 1, "Set\nFPS\nValue", () =>
             {
                 CheetosHelpers.PopupCall("Set FPS Value", "Done", "Enter FPS. . .", true, delegate (string text)
                 {

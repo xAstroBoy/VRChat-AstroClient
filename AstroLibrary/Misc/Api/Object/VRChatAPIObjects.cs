@@ -1,11 +1,11 @@
 ﻿namespace AstroLibrary.Misc.Api.Object
 {
-	using Newtonsoft.Json;
-	using System;
-	using System.Collections.Generic;
-	using VRC.Core;
+    using Newtonsoft.Json;
+    using System;
+    using System.Collections.Generic;
+    using VRC.Core;
 
-	public class Platforms
+    public class Platforms
     {
         public int standalonewindows { get; set; }
         public int android { get; set; }

@@ -1,12 +1,12 @@
 ﻿namespace Blaze.API
 {
-	using Il2CppSystem.Reflection;
-	using System;
-	using System.Linq;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
+    using Il2CppSystem.Reflection;
+    using System;
+    using System.Linq;
+    using UnhollowerRuntimeLib;
+    using UnityEngine;
 
-	public class QMStuff
+    public class QMStuff
     {
         // Internal cache of the BoxCollider Background for the Quick Menu
         private static BoxCollider QuickMenuBackgroundReference;

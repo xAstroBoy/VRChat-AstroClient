@@ -1,15 +1,15 @@
 ﻿namespace AstroClient.Startup
 {
-	using AstroClient.Cheetos;
-	using AstroClient.Components;
-	using AstroClient.Components.SitOnPlayer;
-	using AstroClient.Variables;
-	using AstroLibrary.Console;
-	using System;
-	using System.Collections.Generic;
-	using UnhollowerRuntimeLib;
+    using AstroClient.Cheetos;
+    using AstroClient.Components;
+    using AstroClient.Components.SitOnPlayer;
+    using AstroClient.Variables;
+    using AstroLibrary.Console;
+    using System;
+    using System.Collections.Generic;
+    using UnhollowerRuntimeLib;
 
-	public class ComponentHelper : GameEvents
+    public class ComponentHelper : GameEvents
     {
         public static void RegisterComponent<T>() where T : class
         {
@@ -77,24 +77,24 @@
             }
             RegisterComponent<PlayerWatcherManager>();
             RegisterComponent<PlayerWatcher>();
-			RegisterComponent<VRC_AstroUdonTrigger>();
+            RegisterComponent<VRC_AstroUdonTrigger>();
 
             RegisterComponent<Bouncer>();
             RegisterComponent<Lewdifier>();
             RegisterComponent<MaskRemover>();
 
-			RegisterComponent<EnderPearlBehaviour>();
+            RegisterComponent<EnderPearlBehaviour>();
 
             RegisterComponent<TweakerListener>();
-			RegisterComponent<GameObjectListener>();
-			RegisterComponent<ScrollMenuListener>();
-			RegisterComponent<ScrollMenuListener_AudioSource>();
+            RegisterComponent<GameObjectListener>();
+            RegisterComponent<ScrollMenuListener>();
+            RegisterComponent<ScrollMenuListener_AudioSource>();
 
-			RegisterComponent<SitOnPlayer>();
-			RegisterComponent<NamePlates>();
-		}
+            RegisterComponent<SitOnPlayer>();
+            RegisterComponent<NamePlates>();
+        }
 
-		public override void OnUpdate()
+        public override void OnUpdate()
         {
             MainThreadRunner.MakeInstance();
             RocketManager.MakeInstance();

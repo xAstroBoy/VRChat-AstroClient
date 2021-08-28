@@ -1,10 +1,10 @@
 ﻿namespace Blaze.API
 {
-	using UnityEngine;
-	using UnityEngine.UI;
-	using VRC.Core;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using VRC.Core;
 
-	public class SMList
+    public class SMList
     {
         public GameObject GameObject;
         public UiVRCList UiVRCList;

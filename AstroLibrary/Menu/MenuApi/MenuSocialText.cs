@@ -1,10 +1,10 @@
 ﻿namespace DayClientML2.Utility.MenuApi
 {
-	using System;
-	using UnityEngine;
-	using UnityEngine.UI;
+    using System;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-	internal class VRCMenuText
+    internal class VRCMenuText
     {
         public VRCMenuText(MenuType type, float x_pos, float y_pos, string text, int TextSize = 20)
         {

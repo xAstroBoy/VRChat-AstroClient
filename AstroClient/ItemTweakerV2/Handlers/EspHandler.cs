@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.ItemTweakerV2.Handlers
 {
-	using AstroClient.Components;
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroLibrary.Extensions;
-	using UnityEngine;
+    using AstroClient.Components;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroLibrary.Extensions;
+    using UnityEngine;
 
-	public class EspHandler : Tweaker_Events
+    public class EspHandler : Tweaker_Events
     {
         public override void On_New_GameObject_Selected(GameObject obj)
         {

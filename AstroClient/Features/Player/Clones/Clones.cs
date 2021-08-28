@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.Features.Player.Clones
 {
-	using AstroLibrary.Extensions;
-	using System.Collections.Generic;
-	using UnityEngine;
+    using AstroLibrary.Extensions;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-	public class Clones : GameEvents
+    public class Clones : GameEvents
     {
         public static void OnLevelLoad()
         {

@@ -1,12 +1,12 @@
 ﻿namespace AstroLibrary.Bots.VRCAPI.Endpoints
 {
-	using AstroLibrary.Console;
-	using DayBots.VRCAPI;
-	using Newtonsoft.Json;
-	using System.Collections.Generic;
-	using System.Threading.Tasks;
+    using AstroLibrary.Console;
+    using DayBots.VRCAPI;
+    using Newtonsoft.Json;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
-	internal class AvatarEndpoint
+    internal class AvatarEndpoint
     {
         public Variables Variables { get; set; }
 

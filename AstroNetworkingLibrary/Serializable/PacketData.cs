@@ -1,14 +1,14 @@
 ﻿namespace AstroNetworkingLibrary.Serializable
 {
-	using System;
-	using System.Reflection;
+    using System;
+    using System.Reflection;
 
-	[Serializable, Obfuscation]
+    [Serializable, Obfuscation]
     public class PacketData
     {
         public byte NetworkEventID;
 
-		public string TextData = string.Empty;
+        public string TextData = string.Empty;
 
         public PacketData(byte networkEventID, string textData = "")
         {

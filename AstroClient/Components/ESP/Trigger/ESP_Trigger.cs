@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using System;
-	using System.Linq;
-	using UnhollowerBaseLib.Attributes;
-	using UnityEngine;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using System;
+    using System.Linq;
+    using UnhollowerBaseLib.Attributes;
+    using UnityEngine;
 
-	public class ESP_Trigger : GameEventsBehaviour
+    public class ESP_Trigger : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
@@ -54,66 +54,66 @@
             }
         }
 
-		private void SetupHighlighter()
-		{
-			if (!HasSetupESP)
-			{
-				if (HighLightOptions == null)
-				{
-					HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
-				}
-				if (HighLightOptions != null)
-				{
-					HighLightOptions.SetHighLighterColor(ESPColor);
-					foreach (var obj in ObjMeshRenderers)
-					{
-						if (obj != null && obj.gameObject.active)
-						{
-							HighLightOptions.AddRenderer(obj);
-						}
-						else
-						{
-							HighLightOptions.RemoveRenderer(obj);
-						}
-					}
-				}
-				HasSetupESP = true;
-			}
-		}
+        private void SetupHighlighter()
+        {
+            if (!HasSetupESP)
+            {
+                if (HighLightOptions == null)
+                {
+                    HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
+                }
+                if (HighLightOptions != null)
+                {
+                    HighLightOptions.SetHighLighterColor(ESPColor);
+                    foreach (var obj in ObjMeshRenderers)
+                    {
+                        if (obj != null && obj.gameObject.active)
+                        {
+                            HighLightOptions.AddRenderer(obj);
+                        }
+                        else
+                        {
+                            HighLightOptions.RemoveRenderer(obj);
+                        }
+                    }
+                }
+                HasSetupESP = true;
+            }
+        }
 
-		public void FixedUpdate()
-		{
-			if (!Lock)
-			{
-				if (trigger != null)
-				{
-					if (trigger.enabled)
-					{
-						SetupHighlighter();
-					}
-					else
-					{
-						HighLightOptions.DestroyHighlighter();
-						HasSetupESP = false;
-					}
-				}
-				else if (trigger2 != null)
-				{
-					if (trigger2.enabled)
-					{
-						SetupHighlighter();
-					}
-					else
-					{
-						HighLightOptions.DestroyHighlighter();
-						HasSetupESP = false;
-					}
-				}
-			}
-		}
+        public void FixedUpdate()
+        {
+            if (!Lock)
+            {
+                if (trigger != null)
+                {
+                    if (trigger.enabled)
+                    {
+                        SetupHighlighter();
+                    }
+                    else
+                    {
+                        HighLightOptions.DestroyHighlighter();
+                        HasSetupESP = false;
+                    }
+                }
+                else if (trigger2 != null)
+                {
+                    if (trigger2.enabled)
+                    {
+                        SetupHighlighter();
+                    }
+                    else
+                    {
+                        HighLightOptions.DestroyHighlighter();
+                        HasSetupESP = false;
+                    }
+                }
+            }
+        }
 
 
-		private Color GetDefaultColor()
+        private Color GetDefaultColor()
         {
             return ColorUtils.HexToColor("EF2C3F");
         }
@@ -130,7 +130,7 @@
         public void OnDestroy()
         {
             HighLightOptions.DestroyHighlighter();
-			HasSetupESP = false;
+            HasSetupESP = false;
         }
 
         public void OnEnable()
@@ -141,7 +141,7 @@
         public void OnDisable()
         {
             HighLightOptions.DestroyHighlighter();
-			HasSetupESP = false;
+            HasSetupESP = false;
         }
 
         internal void ChangeColor(Color newcolor)
@@ -173,10 +173,10 @@
 
 
 
-		internal VRC.SDKBase.VRC_Trigger trigger;
-		internal VRCSDK2.VRC_Trigger trigger2;
-		internal bool Lock = true;
-		internal bool HasSetupESP = false;
+        internal VRC.SDKBase.VRC_Trigger trigger;
+        internal VRCSDK2.VRC_Trigger trigger2;
+        internal bool Lock = true;
+        internal bool HasSetupESP = false;
         internal Color ESPColor { get; private set; }
         internal HighlightsFXStandalone HighLightOptions { get; private set; }
         private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;

@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.ItemTweakerV2.Handlers
 {
-	using AstroClient.Components;
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroClient.ItemTweakerV2.TweakerEventArgs;
-	using AstroLibrary.Extensions;
-	using System;
-	using UnityEngine;
+    using AstroClient.Components;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroClient.ItemTweakerV2.TweakerEventArgs;
+    using AstroLibrary.Extensions;
+    using System;
+    using UnityEngine;
 
-	public class PickupControllerHandler : Tweaker_Events
+    public class PickupControllerHandler : Tweaker_Events
     {
         public static event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerSelected;
 

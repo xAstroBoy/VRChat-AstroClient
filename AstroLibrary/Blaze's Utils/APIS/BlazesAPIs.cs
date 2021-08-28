@@ -1,10 +1,10 @@
 ﻿namespace Blaze.API
 {
-	using System.Collections.Generic;
-	using UnityEngine;
-	using VRC;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using VRC;
 
-	internal static class BlazesAPIs
+    internal static class BlazesAPIs
     {
         internal static string Identifier = "AstroClient";
 

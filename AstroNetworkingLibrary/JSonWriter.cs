@@ -1,9 +1,9 @@
 ﻿namespace AstroNetworkingLibrary
 {
-	using Newtonsoft.Json;
-	using System.IO;
+    using Newtonsoft.Json;
+    using System.IO;
 
-	public static class JSonWriter
+    public static class JSonWriter
     {
         /// <summary>
         /// Writes the given object instance to a Json file.

@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-	using AstroClient.Components;
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
+    using AstroClient.Components;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using System;
 
-	public class SpinnerSubMenu : Tweaker_Events
+    public class SpinnerSubMenu : Tweaker_Events
     {
         public static void Init_SpinnerSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {

@@ -1,14 +1,14 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using MelonLoader;
-	using System;
-	using System.Reflection;
-	using System.Runtime.InteropServices;
-	using UnhollowerBaseLib;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using MelonLoader;
+    using System;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using UnhollowerBaseLib;
 
-	public class SpawnEmojiRPCHook : GameEvents
+    public class SpawnEmojiRPCHook : GameEvents
     {
         public static event EventHandler<SpawnEmojiArgs> Event_SpawnEmojiRPC;
 

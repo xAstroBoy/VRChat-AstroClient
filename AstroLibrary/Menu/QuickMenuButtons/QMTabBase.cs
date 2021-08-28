@@ -1,11 +1,11 @@
 ﻿namespace RubyButtonAPI
 {
-	using AstroLibrary;
-	using UnityEngine;
-	using UnityEngine.UI;
-	using Button = UnityEngine.UI.Button;
+    using AstroLibrary;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using Button = UnityEngine.UI.Button;
 
-	public class QMTabBase
+    public class QMTabBase
     {
         protected GameObject button;
         protected GameObject Icon;
@@ -78,15 +78,15 @@
             image.color = Color.white;
         }
 
-		public void LoadSprite(byte[] data)
-		{
-			var image = GetIcon().GetComponent<Image>();
-			var texture = CheetosHelpers.LoadPNG(data);
-			image.sprite = Sprite.CreateSprite(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
-			image.color = Color.white;
-		}
+        public void LoadSprite(byte[] data)
+        {
+            var image = GetIcon().GetComponent<Image>();
+            var texture = CheetosHelpers.LoadPNG(data);
+            image.sprite = Sprite.CreateSprite(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+            image.color = Color.white;
+        }
 
-		public void SetParent(QMNestedButton Parent)
+        public void SetParent(QMNestedButton Parent)
         {
             button.transform.SetParent(QuickMenuStuff.GetQuickMenuInstance().transform.Find(Parent.GetMenuName()));
         }

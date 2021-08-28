@@ -1,6 +1,6 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	public static class Il2Cpp_ext
+    public static class Il2Cpp_ext
     {
         //public static List<UnityEngine.Object> ConvertToUnityObject(this Il2CppReferenceArray<Il2CppSystem.Object> list)
         //{

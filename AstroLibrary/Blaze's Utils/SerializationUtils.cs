@@ -1,6 +1,6 @@
 ﻿namespace Blaze.Utils
 {
-	public static class SerializationUtils
+    public static class SerializationUtils
     {
         public static byte[] ToByteArray(Il2CppSystem.Object obj)
         {

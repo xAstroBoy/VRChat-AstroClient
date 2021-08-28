@@ -1,9 +1,9 @@
 ﻿namespace AstroClient
 {
-	using System.Collections.Generic;
-	using UnityEngine;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-	internal class CLIPPING : GameEvents
+    internal class CLIPPING : GameEvents
     {
         public static void Set_Camera_FarClipPlane(float v)
         {

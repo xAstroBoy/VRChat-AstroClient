@@ -1,16 +1,16 @@
 ﻿namespace AstroLibrary.ButtonApi
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Enums;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Utility;
-	using DayClientML2.Utility;
-	using MelonLoader;
-	using System;
-	using UnityEngine;
-	using UnityEngine.UI;
+    using AstroLibrary.Console;
+    using AstroLibrary.Enums;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using DayClientML2.Utility;
+    using MelonLoader;
+    using System;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-	internal class VRCMenu
+    internal class VRCMenu
     {
         public VRCMenu(Transform Parent, MenuButtonType buttonType, string name, float x, float y, Action OnPageShown = null, Action OnPageClose = null)
         {
@@ -182,7 +182,6 @@
         }
 
         public static MenuCheckbox DefaultActiveToggle;
-        public bool DefaultActive;
         public GameObject Panel;
         public GameObject TitleText;
     }

@@ -1,11 +1,11 @@
 ﻿namespace AstroNetworkingLibrary
 {
-	using Newtonsoft.Json;
-	using Newtonsoft.Json.Bson;
-	using System;
-	using System.IO;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Bson;
+    using System;
+    using System.IO;
 
-	public static class BSonWriter
+    public static class BSonWriter
     {
         public static string ToBson<T>(T value)
         {

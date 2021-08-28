@@ -1,10 +1,10 @@
 ﻿namespace Blaze
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
-	public static class Logs
+    public static class Logs
     {
         // Console Logs
         private static string lastConsole = string.Empty;

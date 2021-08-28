@@ -1,9 +1,9 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using UnityEngine;
-	using static AstroClient.Forces;
+    using UnityEngine;
+    using static AstroClient.Forces;
 
-	public static class Forces_ext
+    public static class Forces_ext
     {
         public static void KillForces(this GameObject obj, bool TakeOwnership = true)
         {

@@ -1,9 +1,9 @@
 ﻿namespace AstroClientCore.Events
 {
-	using System;
-	using UnityEngine;
+    using System;
+    using UnityEngine;
 
-	public class OnAvatarSpawnArgs : EventArgs
+    public class OnAvatarSpawnArgs : EventArgs
     {
         public VRCAvatarManager VRCAvatarManager;
         public GameObject Avatar;

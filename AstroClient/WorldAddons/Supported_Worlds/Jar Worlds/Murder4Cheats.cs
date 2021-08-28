@@ -1,26 +1,26 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using AstroClient.Components;
-	using AstroClient.Startup.Buttons;
-	using AstroClient.UdonExploits;
-	using AstroClient.Variables;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Finder;
-	using AstroLibrary.Utility;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnityEngine;
-	using VRC;
-	using static AstroClient.Variables.CustomLists;
+    using AstroClient.Components;
+    using AstroClient.Startup.Buttons;
+    using AstroClient.UdonExploits;
+    using AstroClient.Variables;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Finder;
+    using AstroLibrary.Utility;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
+    using VRC;
+    using static AstroClient.Variables.CustomLists;
 
-	#endregion Imports
+    #endregion Imports
 
-	public class Murder4Cheats : GameEvents
+    public class Murder4Cheats : GameEvents
     {
         public static void FindGameMurderObjects()
         {
@@ -353,7 +353,7 @@
                     }
                 }
 
-				MiscUtils.DelayFunction(1, new Action(() =>
+                MiscUtils.DelayFunction(1, new Action(() =>
                 {
                     Clues.Set_Pickup_ESP_Color("87F368");
                     DetectiveGuns.Set_Pickup_ESP_Color("688CF3");
@@ -682,7 +682,7 @@
                 return false;
             }
 
-			MiscUtils.DelayFunction(0.01f, new Action(() =>
+            MiscUtils.DelayFunction(0.01f, new Action(() =>
             {
                 var TargetEvent = UdonSearch.FindUdonEvent(TargetNode, AssignedSelfRole);
                 if (TargetEvent != null)
@@ -881,9 +881,9 @@
         public static QMSingleToggleButton GetDetectiveRoleBtn;
         public static QMSingleToggleButton GetMurdererRoleBtn;
 
-		//public static QMSingleToggleButton GetSelfPatreonGunBtn;
-		//public static QMSingleToggleButton GetEveryonePatreonGunBtn;
-		public static QMSingleToggleButton ToggleGravityMode;
+        //public static QMSingleToggleButton GetSelfPatreonGunBtn;
+        //public static QMSingleToggleButton GetEveryonePatreonGunBtn;
+        public static QMSingleToggleButton ToggleGravityMode;
 
         public static bool _RoleSwapper_GetDetectiveRole;
 

@@ -44,5 +44,5 @@ dotnet_diagnostic.IDE0002.severity = none
 dotnet_diagnostic.CS0618.severity = none
 
 [*.{cs,vb}]
-indent_style=tab
+indent_style=space
 dotnet_diagnostic.CA2215.severity=suggestion

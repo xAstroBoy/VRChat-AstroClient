@@ -1,14 +1,14 @@
 ﻿namespace AstroLibrary.Managers
 {
-	using AstroLibrary.Console;
-	using System;
-	using System.Collections;
-	using System.Linq;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
-	using UnityEngine.Networking;
+    using AstroLibrary.Console;
+    using System;
+    using System.Collections;
+    using System.Linq;
+    using UnhollowerRuntimeLib;
+    using UnityEngine;
+    using UnityEngine.Networking;
 
-	internal class AssetsManager
+    internal class AssetsManager
     {
         private static AssetBundle assetBundle;
 

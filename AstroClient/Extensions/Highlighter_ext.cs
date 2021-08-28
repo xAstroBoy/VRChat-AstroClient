@@ -1,10 +1,10 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroClient;
-	using AstroClient.Components;
-	using UnityEngine;
+    using AstroClient;
+    using AstroClient.Components;
+    using UnityEngine;
 
-	public static class Highlighter_ext
+    public static class Highlighter_ext
     {
         private static void RemoveRendFromUnlistedHighLighter(Renderer rend)
         {

@@ -1,8 +1,8 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using UnityEngine;
+    using UnityEngine;
 
-	public static class Component_utils_ext
+    public static class Component_utils_ext
     {
         public static T GetOrAddComponent<T>(this GameObject obj) where T : Component
         {

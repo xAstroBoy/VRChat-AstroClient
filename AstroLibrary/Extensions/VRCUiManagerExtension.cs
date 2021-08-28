@@ -1,22 +1,22 @@
 ﻿/// Original Credit to DayOfThePlay
 namespace AstroLibrary.Extensions
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Utility;
-	using MelonLoader;
-	using Newtonsoft.Json;
-	using Newtonsoft.Json.Linq;
-	using System;
-	using System.IO;
-	using System.Linq;
-	using System.Net;
-	using System.Reflection;
-	using UnhollowerRuntimeLib.XrefScans;
-	using UnityEngine;
-	using VRC.Core;
-	using VRC.UI;
+    using AstroLibrary.Console;
+    using AstroLibrary.Utility;
+    using MelonLoader;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Reflection;
+    using UnhollowerRuntimeLib.XrefScans;
+    using UnityEngine;
+    using VRC.Core;
+    using VRC.UI;
 
-	public static class VRCUiManagerExtension
+    public static class VRCUiManagerExtension
     {
         public static APIUser SelectedAPIUser(this VRCUiManager Instance)
         {
@@ -171,7 +171,7 @@ namespace AstroLibrary.Extensions
 
             avatarLink = new Uri(adjustedLink.Trim("/".ToCharArray()));
 
-			static void OnSuccess(APIUser user)
+            static void OnSuccess(APIUser user)
             {
                 ModConsole.Log($"Found Author: {user.id}");
                 Utils.VRCUiManager.SelectAPIUser(user);

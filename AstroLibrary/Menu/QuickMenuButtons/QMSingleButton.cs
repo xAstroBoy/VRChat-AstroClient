@@ -1,13 +1,13 @@
 ﻿namespace RubyButtonAPI
 {
-	using System;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
-	using UnityEngine.Events;
-	using UnityEngine.UI;
-	using Button = UnityEngine.UI.Button;
+    using System;
+    using UnhollowerRuntimeLib;
+    using UnityEngine;
+    using UnityEngine.Events;
+    using UnityEngine.UI;
+    using Button = UnityEngine.UI.Button;
 
-	public class QMSingleButton : QMButtonBase
+    public class QMSingleButton : QMButtonBase
     {
         public QMSingleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool btnHalf = false)
         {

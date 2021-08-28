@@ -1,6 +1,6 @@
 ﻿namespace DayClientML2.Utility.ColorUtility
 {
-	internal class NamePlates
+    internal class NamePlates
     {
         //public static void Update()
         //{

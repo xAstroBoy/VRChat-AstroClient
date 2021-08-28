@@ -1,11 +1,11 @@
 ﻿namespace DayBots.VRCAPI.Classes
 {
-	using Newtonsoft.Json;
-	using Newtonsoft.Json.Linq;
-	using System;
-	using System.Collections.Generic;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
+    using System;
+    using System.Collections.Generic;
 
-	public class Platforms
+    public class Platforms
     {
         public int standalonewindows { get; set; }
         public int android { get; set; }

@@ -1,23 +1,23 @@
 ﻿namespace AstroClient.Worlds
 {
-	#region Imports
+    #region Imports
 
-	using AstroClient.Variables;
-	using AstroClient.World.Hub;
-	using AstroClient.WorldAddons;
-	using AstroLibrary;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Finder;
-	using RubyButtonAPI;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Reflection;
-	using UnityEngine;
+    using AstroClient.Variables;
+    using AstroClient.World.Hub;
+    using AstroClient.WorldAddons;
+    using AstroLibrary;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Finder;
+    using RubyButtonAPI;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using UnityEngine;
 
-	#endregion
+    #endregion
 
-	public class WorldsCheats : GameEvents
+    public class WorldsCheats : GameEvents
     {
         public static void InitButtons(float pos)
         {
@@ -28,10 +28,10 @@
             VRChatHub.InitButtons(WorldCheats, 1, 1.5f, true);
             //FreezeTag.InitButtons(WorldCheats, 1, 2, true);
             AimFactory.InitButtons(WorldCheats, 1, 2.5f, true);
-			BOMBERio.InitButtons(WorldCheats, 2, 0);
-			BClubWorld.InitButtons(WorldCheats, 4, 2);
-			JustHParty.InitButtons(WorldCheats, 4, 3);
-			VoidClub.InitButtons(WorldCheats, 4, 4);
+            BOMBERio.InitButtons(WorldCheats, 2, 0);
+            BClubWorld.InitButtons(WorldCheats, 4, 2);
+            JustHParty.InitButtons(WorldCheats, 4, 3);
+            VoidClub.InitButtons(WorldCheats, 4, 4);
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)

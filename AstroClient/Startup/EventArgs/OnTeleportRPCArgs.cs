@@ -1,11 +1,11 @@
 ﻿namespace AstroClient
 {
-	using System;
-	using UnityEngine;
-	using VRC.SDKBase;
-	using static VRC.SDKBase.VRC_SceneDescriptor;
+    using System;
+    using UnityEngine;
+    using VRC.SDKBase;
+    using static VRC.SDKBase.VRC_SceneDescriptor;
 
-	public class OnTeleportRPCArgs : EventArgs
+    public class OnTeleportRPCArgs : EventArgs
     {
         public Vector3 Position;
         public Quaternion Rotation;

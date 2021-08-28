@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Utility;
-	using System.Collections.Generic;
-	using System.Linq;
-	using VRC;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using System.Collections.Generic;
+    using System.Linq;
+    using VRC;
 
-	internal class SingleTagsUtils : GameEvents
+    internal class SingleTagsUtils : GameEvents
     {
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {

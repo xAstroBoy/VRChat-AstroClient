@@ -1,15 +1,15 @@
 ﻿namespace AstroClient.ButtonShortcut
 {
-	using AstroClient.Variables;
-	using AstroClient.World.Hub;
-	using AstroClient.WorldAddons;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using UnityEngine.UI;
+    using AstroClient.Variables;
+    using AstroClient.World.Hub;
+    using AstroClient.WorldAddons;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-	public class CheatsShortcutButton : GameEvents
+    public class CheatsShortcutButton : GameEvents
     {
         private static QMSingleButton WorldCheatsShortcut;
 
@@ -58,47 +58,47 @@
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-			//else if (id == WorldIds.FreezeTag)
-			//{
-			//    if (FreezeTag.FreezeTagCheatsPage != null)
-			//    {
-			//        SetButtonText("Freeze Tag Cheats", "Manage Freeze Tag Cheats");
-			//        SetButtonShortcut(FreezeTag.FreezeTagCheatsPage);
-			//        SetButtonColor(Color.green);
-			//        ToggleButtonVisibilityAndInteractivity(true);
-			//    }
-			//}
-			else if (id == WorldIds.BClub)
-			{
-				if (BClubWorld.BClubExploitsPage != null)
-				{
-					SetButtonText("BClub Exploits", "Manage BClub Exploits");
-					SetButtonShortcut(BClubWorld.BClubExploitsPage);
-					SetButtonColor(Color.green);
-					ToggleButtonVisibilityAndInteractivity(true);
-				}
-			}
-			else if (id == WorldIds.JustHParty)
-			{
-				if (JustHParty.JustHPartyMenu != null)
-				{
-					SetButtonText("JustHParty Exploits", "Manage JustHParty Exploits");
-					SetButtonShortcut(JustHParty.JustHPartyMenu);
-					SetButtonColor(Color.green);
-					ToggleButtonVisibilityAndInteractivity(true);
-				}
-			}
-			else if (id == WorldIds.VoidClub)
-			{
-				if (VoidClub.VoidClubMenu != null)
-				{
-					SetButtonText("VoidClub Exploits", "Manage VoidClub Exploits");
-					SetButtonShortcut(VoidClub.VoidClubMenu);
-					SetButtonColor(Color.green);
-					ToggleButtonVisibilityAndInteractivity(true);
-				}
-			}
-			else if (id == WorldIds.AimFactory)
+            //else if (id == WorldIds.FreezeTag)
+            //{
+            //    if (FreezeTag.FreezeTagCheatsPage != null)
+            //    {
+            //        SetButtonText("Freeze Tag Cheats", "Manage Freeze Tag Cheats");
+            //        SetButtonShortcut(FreezeTag.FreezeTagCheatsPage);
+            //        SetButtonColor(Color.green);
+            //        ToggleButtonVisibilityAndInteractivity(true);
+            //    }
+            //}
+            else if (id == WorldIds.BClub)
+            {
+                if (BClubWorld.BClubExploitsPage != null)
+                {
+                    SetButtonText("BClub Exploits", "Manage BClub Exploits");
+                    SetButtonShortcut(BClubWorld.BClubExploitsPage);
+                    SetButtonColor(Color.green);
+                    ToggleButtonVisibilityAndInteractivity(true);
+                }
+            }
+            else if (id == WorldIds.JustHParty)
+            {
+                if (JustHParty.JustHPartyMenu != null)
+                {
+                    SetButtonText("JustHParty Exploits", "Manage JustHParty Exploits");
+                    SetButtonShortcut(JustHParty.JustHPartyMenu);
+                    SetButtonColor(Color.green);
+                    ToggleButtonVisibilityAndInteractivity(true);
+                }
+            }
+            else if (id == WorldIds.VoidClub)
+            {
+                if (VoidClub.VoidClubMenu != null)
+                {
+                    SetButtonText("VoidClub Exploits", "Manage VoidClub Exploits");
+                    SetButtonShortcut(VoidClub.VoidClubMenu);
+                    SetButtonColor(Color.green);
+                    ToggleButtonVisibilityAndInteractivity(true);
+                }
+            }
+            else if (id == WorldIds.AimFactory)
             {
                 if (AimFactory.AimFactoryCheatPage != null)
                 {
@@ -108,17 +108,17 @@
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
-			else if (id == WorldIds.BOMBERio)
-			{
-				if (BOMBERio.BOMBERioCheatsPage != null)
-				{
-					SetButtonText("BOMBERio Cheats", "Manage BOMBERio Cheats");
-					SetButtonShortcut(BOMBERio.BOMBERioCheatsPage);
-					SetButtonColor(Color.green);
-					ToggleButtonVisibilityAndInteractivity(true);
-				}
-			}
-			else
+            else if (id == WorldIds.BOMBERio)
+            {
+                if (BOMBERio.BOMBERioCheatsPage != null)
+                {
+                    SetButtonText("BOMBERio Cheats", "Manage BOMBERio Cheats");
+                    SetButtonShortcut(BOMBERio.BOMBERioCheatsPage);
+                    SetButtonColor(Color.green);
+                    ToggleButtonVisibilityAndInteractivity(true);
+                }
+            }
+            else
             {
                 SetButtonColor(Color.red);
                 ClearButtonAction();

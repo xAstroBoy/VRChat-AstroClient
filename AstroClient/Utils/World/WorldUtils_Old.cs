@@ -1,25 +1,25 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using AstroClient.Experiments;
-	using AstroLibrary.Console;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnityEngine;
-	using VRC;
-	using VRC.SDK3.Components;
-	using VRC.Udon;
-	using Color = System.Drawing.Color;
-	using AstroLibrary.Extensions;
-	using AstroClient.Extensions;
-	using AstroClient.Variables;
-	using AstroLibrary.Finder;
+    using AstroClient.Experiments;
+    using AstroLibrary.Console;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
+    using VRC;
+    using VRC.SDK3.Components;
+    using VRC.Udon;
+    using Color = System.Drawing.Color;
+    using AstroLibrary.Extensions;
+    using AstroClient.Extensions;
+    using AstroClient.Variables;
+    using AstroLibrary.Finder;
 
-	#endregion
+    #endregion
 
-	public class WorldUtils_Old : GameEvents
+    public class WorldUtils_Old : GameEvents
     {
         public static List<GameObject> Get_Prefabs()
         {
@@ -98,38 +98,38 @@
             {
                 List<GameObject> result = new List<GameObject>();
                 var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_Pickup>()
-						.Select(i => i.gameObject)
-						.Where(x => x.gameObject != null)
-						.Where(x2 => x2.name != "AvatarDebugConsole")
-						.Where(x3 => x3.transform != CameraTweaker.ViewFinder)
-						.ToList();
-				if (list1 != null && list1.Count() != 0)
-				{
+                        .Select(i => i.gameObject)
+                        .Where(x => x.gameObject != null)
+                        .Where(x2 => x2.name != "AvatarDebugConsole")
+                        .Where(x3 => x3.transform != CameraTweaker.ViewFinder)
+                        .ToList();
+                if (list1 != null && list1.Count() != 0)
+                {
                     result = list1;
                 }
                 else
                 {
                     var list2 = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_Pickup>()
-						.Select(i => i.gameObject)
-						.Where(x => x.gameObject != null)
-						.Where(x2 => x2.name != "AvatarDebugConsole")
-						.Where(x3 => x3.transform != CameraTweaker.ViewFinder)
-						.ToList();
+                        .Select(i => i.gameObject)
+                        .Where(x => x.gameObject != null)
+                        .Where(x2 => x2.name != "AvatarDebugConsole")
+                        .Where(x3 => x3.transform != CameraTweaker.ViewFinder)
+                        .ToList();
 
-					if (list2 != null && list2.Count() != 0)
-					{
+                    if (list2 != null && list2.Count() != 0)
+                    {
                         result = list2;
                     }
                     else
                     {
                         var list3 = GameObjectFinder.GetRootGameObjectsComponents<VRCPickup>()
-						.Select(i => i.gameObject)
-						.Where(x => x.gameObject != null)
-						.Where(x2 => x2.name != "AvatarDebugConsole")
-						.Where(x3 => x3.transform != CameraTweaker.ViewFinder)
-						.ToList();
-						if (list3 != null && list3.Count() != 0)
-						{
+                        .Select(i => i.gameObject)
+                        .Where(x => x.gameObject != null)
+                        .Where(x2 => x2.name != "AvatarDebugConsole")
+                        .Where(x3 => x3.transform != CameraTweaker.ViewFinder)
+                        .ToList();
+                        if (list3 != null && list3.Count() != 0)
+                        {
                             result = list3;
                         }
                     }
@@ -207,216 +207,216 @@
             return new List<GameObject>();
         }
 
-		public static List<UnityEngine.AudioSource> Get_AudioSources()
-		{
-			try
-			{
-				return GameObjectFinder.GetRootGameObjectsComponents<UnityEngine.AudioSource>(true, false);
+        public static List<UnityEngine.AudioSource> Get_AudioSources()
+        {
+            try
+            {
+                return GameObjectFinder.GetRootGameObjectsComponents<UnityEngine.AudioSource>(true, false);
 
-			}
-			catch (Exception e)
-			{
-				ModConsole.Error("Error parsing World Triggers");
-				ModConsole.ErrorExc(e);
-				return new List<UnityEngine.AudioSource>();
-			}
-			return new List<UnityEngine.AudioSource>();
-		}
-
-
-
-		public static List<string> Get_World_Pedestrals_Avatar_ids()
-		{
-			List<string> ids = new List<string>();
-			var SDK_VRC_AvatarPedestrals = Get_SDKBase_VRC_AvatarPedestal();
-			var SimpleAvatarPedestrals = Get_SimpleAvatarPedestal();
-			var AvatarPedestals = Get_AvatarPedestal();
-			var VRC_AvatarPedestal = Get_VRC_AvatarPedestal();
-			var VRCAvatarPedestal = Get_VRCAvatarPedestal();
-			if(SimpleAvatarPedestrals.Count() != 0)
-			{
-				foreach(var item in SimpleAvatarPedestrals)
-				{
-					if(!ids.Contains(item.field_Internal_ApiAvatar_0.id))
-					{
-						ids.Add(item.field_Internal_ApiAvatar_0.id);
-					}
-				}
-			}
-			if (AvatarPedestals.Count() != 0)
-			{
-				foreach (var item in AvatarPedestals)
-				{
-					if (!ids.Contains(item.field_Private_ApiAvatar_0.id))
-					{
-						ids.Add(item.field_Private_ApiAvatar_0.id);
-					}
-				}
-			}
-
-			if (VRC_AvatarPedestal.Count() != 0)
-			{
-				foreach (var item in VRC_AvatarPedestal)
-				{
-					if (!ids.Contains(item.blueprintId))
-					{
-						ids.Add(item.blueprintId);
-					}
-				}
-			}
-			if (SDK_VRC_AvatarPedestrals.Count() != 0)
-			{
-				foreach (var item in SDK_VRC_AvatarPedestrals)
-				{
-					if (!ids.Contains(item.blueprintId))
-					{
-						ids.Add(item.blueprintId);
-					}
-				}
-			}
-			if (VRCAvatarPedestal.Count() != 0)
-			{
-				foreach (var item in VRCAvatarPedestal)
-				{
-					if (!ids.Contains(item.blueprintId))
-					{
-						ids.Add(item.blueprintId);
-					}
-				}
-			}
-			return ids.Distinct().ToList();
-		}
+            }
+            catch (Exception e)
+            {
+                ModConsole.Error("Error parsing World Triggers");
+                ModConsole.ErrorExc(e);
+                return new List<UnityEngine.AudioSource>();
+            }
+            return new List<UnityEngine.AudioSource>();
+        }
 
 
 
+        public static List<string> Get_World_Pedestrals_Avatar_ids()
+        {
+            List<string> ids = new List<string>();
+            var SDK_VRC_AvatarPedestrals = Get_SDKBase_VRC_AvatarPedestal();
+            var SimpleAvatarPedestrals = Get_SimpleAvatarPedestal();
+            var AvatarPedestals = Get_AvatarPedestal();
+            var VRC_AvatarPedestal = Get_VRC_AvatarPedestal();
+            var VRCAvatarPedestal = Get_VRCAvatarPedestal();
+            if (SimpleAvatarPedestrals.Count() != 0)
+            {
+                foreach (var item in SimpleAvatarPedestrals)
+                {
+                    if (!ids.Contains(item.field_Internal_ApiAvatar_0.id))
+                    {
+                        ids.Add(item.field_Internal_ApiAvatar_0.id);
+                    }
+                }
+            }
+            if (AvatarPedestals.Count() != 0)
+            {
+                foreach (var item in AvatarPedestals)
+                {
+                    if (!ids.Contains(item.field_Private_ApiAvatar_0.id))
+                    {
+                        ids.Add(item.field_Private_ApiAvatar_0.id);
+                    }
+                }
+            }
+
+            if (VRC_AvatarPedestal.Count() != 0)
+            {
+                foreach (var item in VRC_AvatarPedestal)
+                {
+                    if (!ids.Contains(item.blueprintId))
+                    {
+                        ids.Add(item.blueprintId);
+                    }
+                }
+            }
+            if (SDK_VRC_AvatarPedestrals.Count() != 0)
+            {
+                foreach (var item in SDK_VRC_AvatarPedestrals)
+                {
+                    if (!ids.Contains(item.blueprintId))
+                    {
+                        ids.Add(item.blueprintId);
+                    }
+                }
+            }
+            if (VRCAvatarPedestal.Count() != 0)
+            {
+                foreach (var item in VRCAvatarPedestal)
+                {
+                    if (!ids.Contains(item.blueprintId))
+                    {
+                        ids.Add(item.blueprintId);
+                    }
+                }
+            }
+            return ids.Distinct().ToList();
+        }
 
 
-		public static List<VRCAvatarPedestal> Get_VRCAvatarPedestal()
-		{
-			try
-			{
-				var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRCAvatarPedestal>()
-					.Where(
-					i => i.blueprintId.IsNotNullOrEmptyOrWhiteSpace()
-					&& i.blueprintId.isAvatarID()
-					).ToList();
-				if (list1 != null && list1.Count() != 0)
-				{
-					return list1;
-				}
-			}
-			catch (Exception e)
-			{
-				ModConsole.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
-				ModConsole.ErrorExc(e);
-				return new List<VRCAvatarPedestal>();
-			}
-			return new List<VRCAvatarPedestal>();
-		}
-
-
-		public static List<SimpleAvatarPedestal> Get_SimpleAvatarPedestal()
-		{
-			try
-			{
-				var list1 = GameObjectFinder.GetRootGameObjectsComponents<SimpleAvatarPedestal>()
-					.Where(
-					i => i.field_Internal_ApiAvatar_0 != null &&
-					i.field_Internal_ApiAvatar_0.id.IsNotNullOrEmptyOrWhiteSpace() &&
-					i.field_Internal_ApiAvatar_0.id.isAvatarID()
-					&& !i.transform.IsChildOf(VRChatObjects.AvatarPreviewBase_MainAvatar)
-					&& !i.transform.IsChildOf(VRChatObjects.AvatarPreviewBase_FallbackAvatar)
-					&& i.field_Internal_ApiAvatar_0.assetUrl.IsNotNullOrEmptyOrWhiteSpace()
-					).ToList();
-				if (list1 != null && list1.Count() != 0)
-				{
-					return list1;
-				}
-			}
-			catch (Exception e)
-			{
-				ModConsole.Error("Error parsing World SimpleAvatarPedestal");
-				ModConsole.ErrorExc(e);
-				return new List<SimpleAvatarPedestal>();
-			}
-			return new List<SimpleAvatarPedestal>();
-		}
 
 
 
-		public static List<AvatarPedestal> Get_AvatarPedestal()
-		{
-			try
-			{
-				var list1 = GameObjectFinder.GetRootGameObjectsComponents<AvatarPedestal>()
-					.Where(
-					i => i.field_Private_ApiAvatar_0 != null &&
-					i.field_Private_ApiAvatar_0.id.IsNotNullOrEmptyOrWhiteSpace() &&
-					i.field_Private_ApiAvatar_0.id.isAvatarID()
-					&& i.field_Private_ApiAvatar_0.assetUrl.IsNotNullOrEmptyOrWhiteSpace()
-					).ToList();
-				if (list1 != null && list1.Count() != 0)
-				{
-					return list1;
-				}
-			}
-			catch (Exception e)
-			{
-				ModConsole.Error("Error parsing World SDKBase VRC_AvatarPedestal");
-				ModConsole.ErrorExc(e);
-				return new List<AvatarPedestal>();
-			}
-			return new List<AvatarPedestal>();
-		}
-		public static List<VRC.SDKBase.VRC_AvatarPedestal> Get_SDKBase_VRC_AvatarPedestal()
-		{
-			try
-			{
-				var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_AvatarPedestal>()
-					.Where(
-					i => i.blueprintId.IsNotNullOrEmptyOrWhiteSpace()
-					&& i.blueprintId.isAvatarID()
-					).ToList();
-				if (list1 != null && list1.Count() != 0)
-				{
-					return list1;
-				}
-			}
-			catch (Exception e)
-			{
-				ModConsole.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
-				ModConsole.ErrorExc(e);
-				return new List<VRC.SDKBase.VRC_AvatarPedestal>();
-			}
-			return new List<VRC.SDKBase.VRC_AvatarPedestal>();
-		}
+        public static List<VRCAvatarPedestal> Get_VRCAvatarPedestal()
+        {
+            try
+            {
+                var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRCAvatarPedestal>()
+                    .Where(
+                    i => i.blueprintId.IsNotNullOrEmptyOrWhiteSpace()
+                    && i.blueprintId.isAvatarID()
+                    ).ToList();
+                if (list1 != null && list1.Count() != 0)
+                {
+                    return list1;
+                }
+            }
+            catch (Exception e)
+            {
+                ModConsole.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
+                ModConsole.ErrorExc(e);
+                return new List<VRCAvatarPedestal>();
+            }
+            return new List<VRCAvatarPedestal>();
+        }
 
 
-		public static List<VRCSDK2.VRC_AvatarPedestal> Get_VRC_AvatarPedestal()
-		{
-			try
-			{
-				var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_AvatarPedestal>()
-					.Where(
-					i => i.blueprintId.IsNotNullOrEmptyOrWhiteSpace() 
-					&& i.blueprintId.isAvatarID()
-					).ToList();
-				if (list1 != null && list1.Count() != 0)
-				{
-					return list1;
-				}
-			}
-			catch (Exception e)
-			{
-				ModConsole.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
-				ModConsole.ErrorExc(e);
-				return new List<VRCSDK2.VRC_AvatarPedestal>();
-			}
-			return new List<VRCSDK2.VRC_AvatarPedestal>();
-		}
+        public static List<SimpleAvatarPedestal> Get_SimpleAvatarPedestal()
+        {
+            try
+            {
+                var list1 = GameObjectFinder.GetRootGameObjectsComponents<SimpleAvatarPedestal>()
+                    .Where(
+                    i => i.field_Internal_ApiAvatar_0 != null &&
+                    i.field_Internal_ApiAvatar_0.id.IsNotNullOrEmptyOrWhiteSpace() &&
+                    i.field_Internal_ApiAvatar_0.id.isAvatarID()
+                    && !i.transform.IsChildOf(VRChatObjects.AvatarPreviewBase_MainAvatar)
+                    && !i.transform.IsChildOf(VRChatObjects.AvatarPreviewBase_FallbackAvatar)
+                    && i.field_Internal_ApiAvatar_0.assetUrl.IsNotNullOrEmptyOrWhiteSpace()
+                    ).ToList();
+                if (list1 != null && list1.Count() != 0)
+                {
+                    return list1;
+                }
+            }
+            catch (Exception e)
+            {
+                ModConsole.Error("Error parsing World SimpleAvatarPedestal");
+                ModConsole.ErrorExc(e);
+                return new List<SimpleAvatarPedestal>();
+            }
+            return new List<SimpleAvatarPedestal>();
+        }
 
 
-		public static List<UdonBehaviour> Get_UdonBehaviours()
+
+        public static List<AvatarPedestal> Get_AvatarPedestal()
+        {
+            try
+            {
+                var list1 = GameObjectFinder.GetRootGameObjectsComponents<AvatarPedestal>()
+                    .Where(
+                    i => i.field_Private_ApiAvatar_0 != null &&
+                    i.field_Private_ApiAvatar_0.id.IsNotNullOrEmptyOrWhiteSpace() &&
+                    i.field_Private_ApiAvatar_0.id.isAvatarID()
+                    && i.field_Private_ApiAvatar_0.assetUrl.IsNotNullOrEmptyOrWhiteSpace()
+                    ).ToList();
+                if (list1 != null && list1.Count() != 0)
+                {
+                    return list1;
+                }
+            }
+            catch (Exception e)
+            {
+                ModConsole.Error("Error parsing World SDKBase VRC_AvatarPedestal");
+                ModConsole.ErrorExc(e);
+                return new List<AvatarPedestal>();
+            }
+            return new List<AvatarPedestal>();
+        }
+        public static List<VRC.SDKBase.VRC_AvatarPedestal> Get_SDKBase_VRC_AvatarPedestal()
+        {
+            try
+            {
+                var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_AvatarPedestal>()
+                    .Where(
+                    i => i.blueprintId.IsNotNullOrEmptyOrWhiteSpace()
+                    && i.blueprintId.isAvatarID()
+                    ).ToList();
+                if (list1 != null && list1.Count() != 0)
+                {
+                    return list1;
+                }
+            }
+            catch (Exception e)
+            {
+                ModConsole.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
+                ModConsole.ErrorExc(e);
+                return new List<VRC.SDKBase.VRC_AvatarPedestal>();
+            }
+            return new List<VRC.SDKBase.VRC_AvatarPedestal>();
+        }
+
+
+        public static List<VRCSDK2.VRC_AvatarPedestal> Get_VRC_AvatarPedestal()
+        {
+            try
+            {
+                var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_AvatarPedestal>()
+                    .Where(
+                    i => i.blueprintId.IsNotNullOrEmptyOrWhiteSpace()
+                    && i.blueprintId.isAvatarID()
+                    ).ToList();
+                if (list1 != null && list1.Count() != 0)
+                {
+                    return list1;
+                }
+            }
+            catch (Exception e)
+            {
+                ModConsole.Error("Error parsing World VRCSDK2 VRC_AvatarPedestal");
+                ModConsole.ErrorExc(e);
+                return new List<VRCSDK2.VRC_AvatarPedestal>();
+            }
+            return new List<VRCSDK2.VRC_AvatarPedestal>();
+        }
+
+
+        public static List<UdonBehaviour> Get_UdonBehaviours()
         {
             var UdonBehaviourObjects = new List<UdonBehaviour>();
             var list = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
@@ -463,37 +463,37 @@
             return null;
         }
 
-		public static VRCSDK2.VRC_SceneDescriptor GetSDK2Descriptor()
-		{
-			return UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
-		}
+        public static VRCSDK2.VRC_SceneDescriptor GetSDK2Descriptor()
+        {
+            return UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
+        }
 
-		public static VRC.SDK3.Components.VRCSceneDescriptor GetSDK3Descriptor()
-		{
-			return UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
-		}
+        public static VRC.SDK3.Components.VRCSceneDescriptor GetSDK3Descriptor()
+        {
+            return UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
+        }
 
-		public static bool IsInWorld()
-		{
-			if (RoomManager.field_Internal_Static_ApiWorld_0 != null && RoomManager.field_Internal_Static_ApiWorldInstance_0 != null) return true;
-			else return false;
-		}
+        public static bool IsInWorld()
+        {
+            if (RoomManager.field_Internal_Static_ApiWorld_0 != null && RoomManager.field_Internal_Static_ApiWorldInstance_0 != null) return true;
+            else return false;
+        }
 
-		public static bool IsDefaultScene(string name)
-		{
-			var lower = name.ToLower();
-			string[] scenes = { "application2", "ui", "empty", "dontdestroyonload", "hideanddontsave", "samplescene" };
-			return scenes.Contains(lower);
-		}
+        public static bool IsDefaultScene(string name)
+        {
+            var lower = name.ToLower();
+            string[] scenes = { "application2", "ui", "empty", "dontdestroyonload", "hideanddontsave", "samplescene" };
+            return scenes.Contains(lower);
+        }
 
-		public static string GetSDKType()
-		{
-			if (GetSDK2Descriptor() != null)
-				return "SDK2";
-			else if (GetSDK3Descriptor() != null)
-				return "SDK3";
-			else
-				return "not found";
-		}
-	}
+        public static string GetSDKType()
+        {
+            if (GetSDK2Descriptor() != null)
+                return "SDK2";
+            else if (GetSDK3Descriptor() != null)
+                return "SDK3";
+            else
+                return "not found";
+        }
+    }
 }

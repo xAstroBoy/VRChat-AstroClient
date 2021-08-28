@@ -1,21 +1,21 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
-	#region Imports
+    #region Imports
 
-	using AstroClient.Variables;
-	using AstroLibrary;
-	using RubyButtonAPI;
-	using System.Diagnostics;
-	using System.IO;
-	using System.Reflection;
-	using UnityEngine;
+    using AstroClient.Variables;
+    using AstroLibrary;
+    using RubyButtonAPI;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Reflection;
+    using UnityEngine;
 
-	#endregion Imports
+    #endregion Imports
 
-	/// <summary>
-	/// Cheeto's temporary UI for new/wip features
-	/// </summary>
-	public class DevMenu : GameEvents
+    /// <summary>
+    /// Cheeto's temporary UI for new/wip features
+    /// </summary>
+    public class DevMenu : GameEvents
     {
         #region UIElements
 

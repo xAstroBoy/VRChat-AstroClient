@@ -1,14 +1,14 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroClient.ItemTweakerV2.Submenus.ScrollMenus;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnityEngine;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroClient.ItemTweakerV2.Submenus.ScrollMenus;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
 
-	public class SpawnerSubmenu : Tweaker_Events
+    public class SpawnerSubmenu : Tweaker_Events
     {
         public static void Init_SpawnerSubmenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {

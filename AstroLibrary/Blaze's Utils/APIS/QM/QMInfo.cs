@@ -1,11 +1,11 @@
 ﻿namespace Blaze.API
 {
-	using System.Threading.Tasks;
-	using UnityEngine;
-	using UnityEngine.Networking;
-	using UnityEngine.UI;
+    using System.Threading.Tasks;
+    using UnityEngine;
+    using UnityEngine.Networking;
+    using UnityEngine.UI;
 
-	public class QMInfo
+    public class QMInfo
     {
         public GameObject InfoObject;
         public Text InfoText;

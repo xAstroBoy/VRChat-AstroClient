@@ -1,13 +1,13 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Utility;
-	using System.Linq;
-	using UnityEngine;
-	using VRC.SDKBase;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using System.Linq;
+    using UnityEngine;
+    using VRC.SDKBase;
 
-	public class OnlineEditor
+    public class OnlineEditor
     {
         public static void TakeObjectOwnership(GameObject obj)
         {

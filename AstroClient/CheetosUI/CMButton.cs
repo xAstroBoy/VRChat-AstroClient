@@ -1,19 +1,19 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using AstroLibrary.Console;
-	using System;
-	using UnityEngine;
-	using UnityEngine.UI;
+    using AstroLibrary.Console;
+    using System;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-	#endregion Imports
+    #endregion Imports
 
-	public class CMButton : CMBase
+    public class CMButton : CMBase
     {
         public CMButton(Transform parent, Vector2 position, string text, Action action) : base(parent, position)
         {
-			GetGameObject.name = $"CMButton-{text}";
+            GetGameObject.name = $"CMButton-{text}";
 
             GetGameObject.AddComponent<Image>();
             GetGameObject.GetComponent<Image>().sprite = null;

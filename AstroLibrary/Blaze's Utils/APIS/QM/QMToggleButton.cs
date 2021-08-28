@@ -1,13 +1,13 @@
 ﻿namespace Blaze.API
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnityEngine;
-	using UnityEngine.Events;
-	using UnityEngine.UI;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
+    using UnityEngine.Events;
+    using UnityEngine.UI;
 
-	public class QMToggleButton : QMButtonBase
+    public class QMToggleButton : QMButtonBase
     {
         public GameObject btnOn;
         public GameObject btnOff;

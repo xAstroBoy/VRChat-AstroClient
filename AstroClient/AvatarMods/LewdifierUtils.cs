@@ -1,14 +1,14 @@
 ﻿namespace AstroClient.AvatarMods
 {
-	using AstroLibrary.Console;
-	using AstroNetworkingLibrary;
-	using Newtonsoft.Json;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections.Generic;
-	using System.IO;
+    using AstroLibrary.Console;
+    using AstroNetworkingLibrary;
+    using Newtonsoft.Json;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
 
-	public class LewdifierUtils : GameEvents
+    public class LewdifierUtils : GameEvents
     {
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {

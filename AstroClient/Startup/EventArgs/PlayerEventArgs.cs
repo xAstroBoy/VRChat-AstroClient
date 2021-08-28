@@ -1,9 +1,9 @@
 ﻿namespace AstroClientCore.Events
 {
-	using System;
-	using VRC;
+    using System;
+    using VRC;
 
-	public class PlayerEventArgs : EventArgs
+    public class PlayerEventArgs : EventArgs
     {
         public Player player;
 

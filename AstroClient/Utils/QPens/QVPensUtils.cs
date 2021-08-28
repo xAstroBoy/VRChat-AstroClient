@@ -1,14 +1,14 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Utility;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnityEngine;
-	using static AstroClient.Variables.CustomLists;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
+    using static AstroClient.Variables.CustomLists;
 
-	public class QVPensUtils : GameEvents
+    public class QVPensUtils : GameEvents
     {
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {

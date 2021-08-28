@@ -1,12 +1,12 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroLibrary.Utility;
-	using UnityEngine;
-	using VRC;
-	using VRC.Core;
-	using VRC.SDKBase;
+    using AstroLibrary.Utility;
+    using UnityEngine;
+    using VRC;
+    using VRC.Core;
+    using VRC.SDKBase;
 
-	public static class PlayerExtensions
+    public static class PlayerExtensions
     {
         public static string UserID(this Player Instance)
         {

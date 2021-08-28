@@ -1,9 +1,9 @@
 ﻿namespace AstroClient.Variables
 {
-	using System.Collections.Generic;
-	using UnityEngine;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-	public class GlobalLists : GameEvents
+    public class GlobalLists : GameEvents
     {
         public static List<Renderer> RenderObjects = new List<Renderer>();
 

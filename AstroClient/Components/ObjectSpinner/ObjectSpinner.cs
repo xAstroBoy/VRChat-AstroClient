@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroLibrary.Extensions;
-	using System;
-	using System.Runtime.InteropServices;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
-	using static AstroClient.Forces;
+    using AstroLibrary.Extensions;
+    using System;
+    using System.Runtime.InteropServices;
+    using UnhollowerRuntimeLib;
+    using UnityEngine;
+    using static AstroClient.Forces;
 
-	public class ObjectSpinner : GameEventsBehaviour
+    public class ObjectSpinner : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;

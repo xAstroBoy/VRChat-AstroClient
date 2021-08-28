@@ -1,13 +1,13 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	#region Imports
+    #region Imports
 
-	using UnityEngine;
-	using VRC.SDKBase;
+    using UnityEngine;
+    using VRC.SDKBase;
 
-	#endregion Imports
+    #endregion Imports
 
-	public static class VRC_UiShape_ext
+    public static class VRC_UiShape_ext
     {
         internal static void AddUiShapeWithTriggerCollider(this GameObject obj)
         {

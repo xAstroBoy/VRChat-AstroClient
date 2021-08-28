@@ -1,28 +1,28 @@
 ﻿namespace AstroLibrary.Utility
 {
-	#region Imports
+    #region Imports
 
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using MelonLoader;
-	using System;
-	using System.Diagnostics;
-	using System.IO;
-	using System.Linq;
-	using System.Net;
-	using System.Runtime.InteropServices;
-	using Transmtn.DTO.Notifications;
-	using UnityEngine;
-	using UnityEngine.UI;
-	using VRC;
-	using VRC.Core;
-	using VRC.SDKBase;
-	using VRC.UI;
-	using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using MelonLoader;
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Runtime.InteropServices;
+    using Transmtn.DTO.Notifications;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using VRC;
+    using VRC.Core;
+    using VRC.SDKBase;
+    using VRC.UI;
+    using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
 
-	#endregion Imports
+    #endregion Imports
 
-	public class MiscFunc
+    public class MiscFunc
     {
         public static void DropPortal(string WorldID, string InstanceID, int players, Vector3 vector3,
             Quaternion quaternion)
@@ -131,7 +131,7 @@
         //    {
         //        throw;
         //    }
-		//}
+        //}
 
         //public static IEnumerator UNEXECUTEORDER66()
         //{
@@ -386,11 +386,11 @@
         {
             try
             {
-				var x = new Il2CppSystem.Int32
-				{
-					m_value = i
-				};
-				var obj = x.BoxIl2CppObject();
+                var x = new Il2CppSystem.Int32
+                {
+                    m_value = i
+                };
+                var obj = x.BoxIl2CppObject();
                 Networking.RPC(0, Utils.CurrentUser.gameObject, "SpawnEmojiRPC", new Il2CppSystem.Object[]
                 {
                     obj,
@@ -405,11 +405,11 @@
         {
             try
             {
-				var x = new Il2CppSystem.Int32
-				{
-					m_value = i
-				};
-				var obj = x.BoxIl2CppObject();
+                var x = new Il2CppSystem.Int32
+                {
+                    m_value = i
+                };
+                var obj = x.BoxIl2CppObject();
                 Networking.RPC(0, Utils.CurrentUser.gameObject, "PlayEmoteRPC", new Il2CppSystem.Object[]
                 {
                     obj,

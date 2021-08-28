@@ -1,9 +1,9 @@
 ﻿namespace DayClientML2.Utility.ColorUtility
 {
-	using System;
-	using UnityEngine;
+    using System;
+    using UnityEngine;
 
-	[Serializable]
+    [Serializable]
     public struct HSBColor
     {
         public HSBColor(float float_0, float float_1, float float_2, float float_3)

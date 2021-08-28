@@ -1,13 +1,13 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Components;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Utility;
-	using System;
-	using UnityEngine;
+    using AstroClient.Components;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using System;
+    using UnityEngine;
 
-	public class ObjectMiscOptions : GameEvents
+    public class ObjectMiscOptions : GameEvents
     {
         public static void AllWorldPickupsOrbitsOnTarget()
         {

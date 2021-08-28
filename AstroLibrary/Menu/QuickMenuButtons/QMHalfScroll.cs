@@ -1,13 +1,13 @@
 ﻿namespace RubyButtonAPI
 {
-	using System;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using UnityEngine.UI;
-	using Button = UnityEngine.UI.Button;
+    using System;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using Button = UnityEngine.UI.Button;
 
-	// TODO : ADD TWO ACTIONS THAT CAN RUN WHEN THE SCROLL IS OPEN OR CLOSED.
-	public class QMHalfScroll
+    // TODO : ADD TWO ACTIONS THAT CAN RUN WHEN THE SCROLL IS OPEN OR CLOSED.
+    public class QMHalfScroll
     {
         public class ScrollObject
         {

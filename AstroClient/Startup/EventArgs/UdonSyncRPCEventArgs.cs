@@ -1,10 +1,10 @@
 ﻿namespace AstroClient
 {
-	using System;
-	using UnityEngine;
-	using VRC;
+    using System;
+    using UnityEngine;
+    using VRC;
 
-	public class UdonSyncRPCEventArgs : EventArgs
+    public class UdonSyncRPCEventArgs : EventArgs
     {
         public Player sender;
         public GameObject obj;

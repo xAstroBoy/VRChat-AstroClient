@@ -1,15 +1,15 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-	using AstroClient.Components;
-	using AstroClient.ItemTweakerV2.Selector;
-	using AstroClient.ItemTweakerV2.Submenus.Collider;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
-	using UnityEngine;
-	using VRC;
+    using AstroClient.Components;
+    using AstroClient.ItemTweakerV2.Selector;
+    using AstroClient.ItemTweakerV2.Submenus.Collider;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using System;
+    using UnityEngine;
+    using VRC;
 
-	public class PhysicsSubmenu : Tweaker_Events
+    public class PhysicsSubmenu : Tweaker_Events
     {
         public static void Init_PhysicSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {

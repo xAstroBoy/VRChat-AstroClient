@@ -1,11 +1,11 @@
 ﻿namespace RubyButtonAPI
 {
-	using System;
-	using UnityEngine;
-	using UnityEngine.UI;
-	using Button = UnityEngine.UI.Button;
+    using System;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using Button = UnityEngine.UI.Button;
 
-	public class QMSingleToggleButton : QMButtonBase
+    public class QMSingleToggleButton : QMButtonBase
     {
         private bool State { get; set; }
         private string OnText { get; set; }
@@ -131,17 +131,17 @@
             SetTextColor(buttonTextColorOn, save);
         }
 
-		public override void SetTextColor(Color buttonTextColor, bool save = true)
-		{
-			button.GetComponentInChildren<Text>().color = buttonTextColor;
-			//if (save)
-			//OrigText = (Color)buttonTextColor;
-		}
+        public override void SetTextColor(Color buttonTextColor, bool save = true)
+        {
+            button.GetComponentInChildren<Text>().color = buttonTextColor;
+            //if (save)
+            //OrigText = (Color)buttonTextColor;
+        }
 
-		public bool GetToggleState()
-		{
-			return State;
-		}
+        public bool GetToggleState()
+        {
+            return State;
+        }
 
         public void SetToggleState(bool toggleOn, bool shouldInvoke = false)
         {

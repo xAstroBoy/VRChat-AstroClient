@@ -1,18 +1,18 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroClient.GameObjectDebug;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Utility;
-	using System;
-	using System.Runtime.InteropServices;
-	using UnhollowerRuntimeLib;
-	using UnityEngine;
-	using VRC;
-	using Delegate = System.Delegate;
-	using Time = UnityEngine.Time;
+    using AstroClient.GameObjectDebug;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using System;
+    using System.Runtime.InteropServices;
+    using UnhollowerRuntimeLib;
+    using UnityEngine;
+    using VRC;
+    using Delegate = System.Delegate;
+    using Time = UnityEngine.Time;
 
-	public class PlayerWatcher : GameEventsBehaviour
+    public class PlayerWatcher : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;

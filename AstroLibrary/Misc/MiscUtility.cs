@@ -1,21 +1,21 @@
 ﻿namespace AstroLibrary.Utility
 {
-	#region Imports
+    #region Imports
 
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnityEngine;
-	using UnityEngine.UI;
-	using VRC;
-	using VRC.SDKBase;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
+    using UnityEngine.UI;
+    using VRC;
+    using VRC.SDKBase;
 
-	#endregion
+    #endregion
 
-	public static class MiscUtils_Old
+    public static class MiscUtils_Old
     {
         public static Vector2 GetButtonPosition(float x, float y)
         {
@@ -31,27 +31,27 @@
         }
 
 
-		public static VRC_EventHandler FindNearestEventHandler(GameObject target)
-		{
-			VRC_EventHandler vrc_EventHandler = null;
-			if (target != null)
-			{
-				vrc_EventHandler = target.GetComponent<VRC_EventHandler>();
-				if (vrc_EventHandler == null)
-				{
-					vrc_EventHandler = target.GetComponentInParent<VRC_EventHandler>();
-				}
-			}
-			if (vrc_EventHandler == null)
-			{
-				vrc_EventHandler = Networking.SceneEventHandler;
-			}
-			return vrc_EventHandler;
-		}
+        public static VRC_EventHandler FindNearestEventHandler(GameObject target)
+        {
+            VRC_EventHandler vrc_EventHandler = null;
+            if (target != null)
+            {
+                vrc_EventHandler = target.GetComponent<VRC_EventHandler>();
+                if (vrc_EventHandler == null)
+                {
+                    vrc_EventHandler = target.GetComponentInParent<VRC_EventHandler>();
+                }
+            }
+            if (vrc_EventHandler == null)
+            {
+                vrc_EventHandler = Networking.SceneEventHandler;
+            }
+            return vrc_EventHandler;
+        }
 
 
 
-		public static bool IsNaN(Vector3 v3)
+        public static bool IsNaN(Vector3 v3)
         {
             return float.IsNaN(v3.x) || float.IsNaN(v3.y) || float.IsNaN(v3.z);
         }

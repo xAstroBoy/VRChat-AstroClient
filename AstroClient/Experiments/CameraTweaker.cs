@@ -1,14 +1,14 @@
 ﻿namespace AstroClient.Experiments
 {
-	using AstroClient.Components;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Finder;
-	using RubyButtonAPI;
-	using System.Collections.Generic;
-	using UnityEngine;
+    using AstroClient.Components;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Finder;
+    using RubyButtonAPI;
+    using System.Collections.Generic;
+    using UnityEngine;
 
-	public class CameraTweaker : GameEvents
+    public class CameraTweaker : GameEvents
     {
         public static void CheckCamera()
         {

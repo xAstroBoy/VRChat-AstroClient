@@ -1,10 +1,10 @@
 ﻿namespace Blaze.Utils
 {
-	using System;
-	using UnityEngine;
-	using UnityEngine.UI;
+    using System;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-	public static class PopupUtils
+    public static class PopupUtils
     {
         public static void HideCurrentPopUp()
         {

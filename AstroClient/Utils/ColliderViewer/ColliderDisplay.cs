@@ -1,15 +1,15 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnhollowerBaseLib;
-	using UnityEngine;
-	using UnityEngine.SceneManagement;
+    using AstroLibrary.Console;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnhollowerBaseLib;
+    using UnityEngine;
+    using UnityEngine.SceneManagement;
 
-	public class ColliderDisplay : GameEvents
+    public class ColliderDisplay : GameEvents
     {
         private static string ShaderName
         {

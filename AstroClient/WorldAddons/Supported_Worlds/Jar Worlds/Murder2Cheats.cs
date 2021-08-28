@@ -1,22 +1,22 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using AstroClient.Startup.Buttons;
-	using AstroClient.Variables;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Finder;
-	using AstroLibrary.Utility;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnityEngine;
+    using AstroClient.Startup.Buttons;
+    using AstroClient.Variables;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Finder;
+    using AstroLibrary.Utility;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
 
-	#endregion Imports
+    #endregion Imports
 
-	public class Murder2Cheats : GameEvents
+    public class Murder2Cheats : GameEvents
     {
         public static void FindGameMurderObjects()
         {
@@ -179,7 +179,7 @@
             VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = value;
             if (value)
             {
-				MiscUtils.DelayFunction(1, new Action(() =>
+                MiscUtils.DelayFunction(1, new Action(() =>
                 {
                     Clues.Set_Pickup_ESP_Color("84F962");
                     DetectiveGuns.Set_Pickup_ESP_Color("62DBF9");

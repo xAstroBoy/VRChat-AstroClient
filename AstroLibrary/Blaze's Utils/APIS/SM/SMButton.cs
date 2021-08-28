@@ -1,10 +1,10 @@
 ﻿namespace Blaze.API
 {
-	using System;
-	using UnityEngine;
-	using UnityEngine.UI;
+    using System;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-	class SMButton
+    class SMButton
     {
         public GameObject button;
         public Text text;

@@ -1,14 +1,14 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using System;
-	using System.Linq;
-	using UnhollowerBaseLib.Attributes;
-	using UnityEngine;
-	using VRC;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using System;
+    using System.Linq;
+    using UnhollowerBaseLib.Attributes;
+    using UnityEngine;
+    using VRC;
 
-	public class SingleTag : GameEventsBehaviour
+    public class SingleTag : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 

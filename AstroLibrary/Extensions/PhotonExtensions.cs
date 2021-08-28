@@ -1,9 +1,9 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroLibrary.Utility;
-	using System.Collections.Generic;
+    using AstroLibrary.Utility;
+    using System.Collections.Generic;
 
-	public static class PhotonExtensions
+    public static class PhotonExtensions
     {
         public static string GetUsername(this Photon.Realtime.Player player)
         {

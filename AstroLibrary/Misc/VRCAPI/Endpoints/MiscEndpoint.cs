@@ -1,14 +1,14 @@
 ﻿namespace DayBots.VRCAPI.Endpoints
 {
-	using DayBots.VRCAPI.Classes;
-	using Newtonsoft.Json;
-	using System;
-	using System.Collections.Generic;
-	using System.Diagnostics;
-	using System.Threading;
-	using System.Threading.Tasks;
+    using DayBots.VRCAPI.Classes;
+    using Newtonsoft.Json;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Threading;
+    using System.Threading.Tasks;
 
-	internal class MiscEndpoint
+    internal class MiscEndpoint
     {
         public Variables Variables { get; set; }
 

@@ -1,13 +1,13 @@
 ﻿namespace DayBots.VRCAPI
 {
-	using AstroLibrary.Bots.VRCAPI.Endpoints;
-	using DayBots.VRCAPI.Endpoints;
-	using System;
-	using System.Collections.Generic;
-	using System.Net;
-	using System.Net.Http;
+    using AstroLibrary.Bots.VRCAPI.Endpoints;
+    using DayBots.VRCAPI.Endpoints;
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Net.Http;
 
-	internal class API
+    internal class API
     {
         internal const string APIKEYLONG = "?apiKey=JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26";
         internal const string APIKEY = "JlE5Jldo5Jibnk5O5hTx6XVqsJu4WJ26";

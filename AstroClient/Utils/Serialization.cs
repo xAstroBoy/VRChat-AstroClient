@@ -1,12 +1,12 @@
 ﻿namespace AstroClient
 {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Threading.Tasks;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
-	public class Serialization
+    public class Serialization
     {
         public static byte[] ToByteArray(Il2CppSystem.Object obj)
         {

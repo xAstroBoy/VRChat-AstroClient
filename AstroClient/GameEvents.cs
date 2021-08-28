@@ -1,17 +1,17 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Cheetos;
-	using AstroClient.Startup.Hooks;
-	using AstroClientCore.Events;
-	using AstroLibrary.Console;
-	using System;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using VRC;
-	using VRC.SDKBase;
+    using AstroClient.Cheetos;
+    using AstroClient.Startup.Hooks;
+    using AstroClientCore.Events;
+    using AstroLibrary.Console;
+    using System;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using VRC;
+    using VRC.SDKBase;
 
-	// thanks TO Cheeto aka Craig on discord, he's been really helpful!
-	public class GameEvents
+    // thanks TO Cheeto aka Craig on discord, he's been really helpful!
+    public class GameEvents
     {
         public GameEvents()
         {
@@ -102,7 +102,7 @@
 
         private void Internal_OnWorldReveal(object sender, OnWorldRevealArgs e)
         {
-           OnWorldReveal(e.ID, e.Name, e.WorldTags, e.AssetUrl);
+            OnWorldReveal(e.ID, e.Name, e.WorldTags, e.AssetUrl);
         }
 
         private void Internal_OnPlayerSelected(object sender, VRCPlayerEventArgs e)
@@ -126,8 +126,8 @@
         }
 
         private void Internal_OnAvatarSpawn(object sender, OnAvatarSpawnArgs e)
-		{
-			ModConsole.Log("Avatar Spawned..");
+        {
+            ModConsole.Log("Avatar Spawned..");
             OnAvatarSpawn(e.VRCAvatarManager, e.Avatar);
         }
 

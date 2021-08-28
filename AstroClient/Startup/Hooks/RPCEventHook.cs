@@ -1,23 +1,23 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using AstroClient.Variables;
-	using AstroLibrary;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Utility;
-	using Harmony;
-	using System;
-	using System.Reflection;
-	using UnhollowerBaseLib;
-	using UnityEngine;
-	using VRC;
-	using VRC.SDKBase;
+    using AstroClient.Variables;
+    using AstroLibrary;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using Harmony;
+    using System;
+    using System.Reflection;
+    using UnhollowerBaseLib;
+    using UnityEngine;
+    using VRC;
+    using VRC.SDKBase;
 
-	#endregion Imports
+    #endregion Imports
 
-	public class RPCEventHook : GameEvents
+    public class RPCEventHook : GameEvents
     {
         public static event EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
 
@@ -51,18 +51,18 @@
             }
         }
 
-		private static bool OnRPCEvent(ref Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
-		{
-			if (__1 == null) return false;
+        private static bool OnRPCEvent(ref Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
+        {
+            if (__1 == null) return false;
 
-			bool log = ConfigManager.General.LogRPCEvents;
-			bool blocked = Bools.BlockRPC;
+            bool log = ConfigManager.General.LogRPCEvents;
+            bool blocked = Bools.BlockRPC;
 
-			if (__1.Name.Length >= 100 || __1.ParameterString.Length >= 100)
-			{
-				ModConsole.Log($"{__0.DisplayName()}: Sent Malicious RPC!");
-				return false;
-			}
+            if (__1.Name.Length >= 100 || __1.ParameterString.Length >= 100)
+            {
+                ModConsole.Log($"{__0.DisplayName()}: Sent Malicious RPC!");
+                return false;
+            }
 
             string actionstring = string.Empty;
             string actiontext;
@@ -91,7 +91,7 @@
             if (name.Equals("USpeak"))
             {
                 log = false;
-				blocked = false;
+                blocked = false;
             }
 
             string GameObjName = __1.ParameterObject != null ? __1.ParameterObject.name : "null";
@@ -106,16 +106,16 @@
             }
             if (parameter.Equals("TeleportRPC"))
             {
-				var Parameters = Networking.DecodeParameters(__1.ParameterBytes);
+                var Parameters = Networking.DecodeParameters(__1.ParameterBytes);
                 Vector3? Pos = Parameters[0].Unbox<Vector3>();
                 Quaternion? rot = Parameters[1].Unbox<Quaternion>();
                 VRC_SceneDescriptor.SpawnOrientation? spawnpos = Parameters[2].Unbox<VRC_SceneDescriptor.SpawnOrientation>();
                 bool? UnknownBool = Parameters[3].Unbox<Boolean>();
                 Int32? UnknownInt = Parameters[4].Unbox<System.Int32>();
 
-				OnTeleportRPCArgs message = new OnTeleportRPCArgs(Pos.Value, rot.Value, spawnpos.Value, UnknownBool.Value, UnknownInt.Value);
+                OnTeleportRPCArgs message = new OnTeleportRPCArgs(Pos.Value, rot.Value, spawnpos.Value, UnknownBool.Value, UnknownInt.Value);
 
-				if (log)
+                if (log)
                 {
                     try
                     {
@@ -138,15 +138,15 @@
                 Event_OnUdonSyncRPC.SafetyRaise(new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
                 if (ConfigManager.General.LogUdonEvents)
                 {
-					if (Bools.BlockUdon)
-					{
-						ModConsole.Log($"BLOCKED Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
-						return false;
-					}
-					else
-					{
-						ModConsole.Log($"Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
-					}
+                    if (Bools.BlockUdon)
+                    {
+                        ModConsole.Log($"BLOCKED Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
+                        return false;
+                    }
+                    else
+                    {
+                        ModConsole.Log($"Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
+                    }
                 }
                 return true;
             }
@@ -155,19 +155,19 @@
             {
                 if (parameter != "UdonSyncRunProgramAsRPC")
                 {
-					if (blocked)
-					{
-						ModConsole.Log($"BLOCKED RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
-						return false;
-					}
-					else
-					{
-						ModConsole.Log($"RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
-					}
+                    if (blocked)
+                    {
+                        ModConsole.Log($"BLOCKED RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
+                        return false;
+                    }
+                    else
+                    {
+                        ModConsole.Log($"RPC: {sender}, {name}, {parameter}, [{actiontext}], {eventtype}, {broadcasttype}");
+                    }
                 }
             }
 
-			return true;
-		}
+            return true;
+        }
     }
 }

@@ -1,10 +1,10 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
-	using System.Threading.Tasks;
-	using UnityEngine;
+    using AstroLibrary.Console;
+    using System.Threading.Tasks;
+    using UnityEngine;
 
-	public class ColorEditor
+    public class ColorEditor
     {
         public static void ChangeObjColor(GameObject obj, Color color)
         {

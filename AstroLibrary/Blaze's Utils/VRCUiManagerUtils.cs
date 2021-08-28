@@ -1,15 +1,15 @@
 ﻿namespace Blaze.Utils
 {
-	using MelonLoader;
-	using System;
-	using System.Linq;
-	using System.Reflection;
-	using UnhollowerRuntimeLib.XrefScans;
-	using UnityEngine;
-	using VRC.Core;
-	using VRC.UI;
+    using MelonLoader;
+    using System;
+    using System.Linq;
+    using System.Reflection;
+    using UnhollowerRuntimeLib.XrefScans;
+    using UnityEngine;
+    using VRC.Core;
+    using VRC.UI;
 
-	public static class VRCUiManagerUtils
+    public static class VRCUiManagerUtils
     {
         public static VRCUiPage ShowScreen(this VRCUiManager Instance, VRCUiPage page)
         {

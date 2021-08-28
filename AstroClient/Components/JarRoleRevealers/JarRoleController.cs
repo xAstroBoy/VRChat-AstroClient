@@ -1,20 +1,20 @@
 ﻿namespace AstroClient
 {
-	using AstroClient.Components;
-	using AstroClient.Variables;
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Finder;
-	using AstroLibrary.Utility;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnhollowerBaseLib;
-	using UnityEngine;
-	using VRC;
+    using AstroClient.Components;
+    using AstroClient.Variables;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Finder;
+    using AstroLibrary.Utility;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnhollowerBaseLib;
+    using UnityEngine;
+    using VRC;
 
-	public class JarRoleController : GameEvents
+    public class JarRoleController : GameEvents
     {
         private static bool _ViewRoles;
 
@@ -78,7 +78,7 @@
 
         public override void OnPlayerJoined(Player player)
         {
-			MiscUtils.DelayFunction(0.5f, new Action(() =>
+            MiscUtils.DelayFunction(0.5f, new Action(() =>
             {
                 if (JarRoleLinks.Count() != 0)
                 {

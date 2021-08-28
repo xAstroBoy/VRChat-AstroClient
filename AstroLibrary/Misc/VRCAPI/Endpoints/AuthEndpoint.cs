@@ -1,11 +1,11 @@
 ﻿namespace DayBots.VRCAPI.Endpoints
 {
-	using System;
-	using System.Linq;
-	using System.Net;
-	using System.Threading.Tasks;
+    using System;
+    using System.Linq;
+    using System.Net;
+    using System.Threading.Tasks;
 
-	public class AuthEndpoint
+    public class AuthEndpoint
     {
         public string Username { get; set; }
         public string Password { get; set; }

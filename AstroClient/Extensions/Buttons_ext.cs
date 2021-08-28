@@ -1,11 +1,11 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroLibrary.Utility;
-	using RubyButtonAPI;
-	using UnityEngine;
-	using UnityEngine.UI;
+    using AstroLibrary.Utility;
+    using RubyButtonAPI;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-	public static class Buttons_ext
+    public static class Buttons_ext
     {
         public static void SetButtonToArrow(this QMSingleButton button)
         {

@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using System;
-	using System.Linq;
-	using UnhollowerBaseLib.Attributes;
-	using UnityEngine;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using System;
+    using System.Linq;
+    using UnhollowerBaseLib.Attributes;
+    using UnityEngine;
 
-	public class ESP_Pickup : GameEventsBehaviour
+    public class ESP_Pickup : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
@@ -53,28 +53,28 @@
             }
         }
 
-		private void SetupHighlighter()
-		{
-			if (HighLightOptions == null)
-			{
-				HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
-			}
-			if (HighLightOptions != null)
-			{
-				HighLightOptions.SetHighLighterColor(ESPColor);
-				foreach (var obj in ObjMeshRenderers)
-				{
-					if (obj != null && obj.gameObject.active)
-					{
-						HighLightOptions.AddRenderer(obj);
-					}
-					else
-					{
-						HighLightOptions.RemoveRenderer(obj);
-					}
-				}
-			}
-		}
+        private void SetupHighlighter()
+        {
+            if (HighLightOptions == null)
+            {
+                HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
+            }
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighLighterColor(ESPColor);
+                foreach (var obj in ObjMeshRenderers)
+                {
+                    if (obj != null && obj.gameObject.active)
+                    {
+                        HighLightOptions.AddRenderer(obj);
+                    }
+                    else
+                    {
+                        HighLightOptions.RemoveRenderer(obj);
+                    }
+                }
+            }
+        }
 
 
         public void OnDestroy()

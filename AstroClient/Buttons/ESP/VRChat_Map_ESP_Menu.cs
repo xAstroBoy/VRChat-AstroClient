@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
-	using AstroClient.Components;
-	using AstroLibrary.Extensions;
-	using RubyButtonAPI;
-	using System;
-	using UnityEngine;
+    using AstroClient.Components;
+    using AstroLibrary.Extensions;
+    using RubyButtonAPI;
+    using System;
+    using UnityEngine;
 
-	internal class VRChat_Map_ESP_Menu : GameEvents
+    internal class VRChat_Map_ESP_Menu : GameEvents
     {
         public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
@@ -180,24 +180,24 @@
                 if (item != null)
                 {
                     var triggeresp = item.GetOrAddComponent<ESP_Trigger>();
-					if(triggeresp != null)
-					{
-						var trigger1 = item.GetComponent<VRC.SDKBase.VRC_Trigger>();
-						if (trigger1 != null)
-						{
-							triggeresp.trigger = trigger1;
-							triggeresp.Lock = false;
-						}
-						else
-						{
-							var trigger2 = item.GetComponent<VRCSDK2.VRC_Trigger>();
-							if (trigger2 != null)
-							{
-								triggeresp.trigger2 = trigger2;
-								triggeresp.Lock = false;
-							}
-						}
-					}
+                    if (triggeresp != null)
+                    {
+                        var trigger1 = item.GetComponent<VRC.SDKBase.VRC_Trigger>();
+                        if (trigger1 != null)
+                        {
+                            triggeresp.trigger = trigger1;
+                            triggeresp.Lock = false;
+                        }
+                        else
+                        {
+                            var trigger2 = item.GetComponent<VRCSDK2.VRC_Trigger>();
+                            if (trigger2 != null)
+                            {
+                                triggeresp.trigger2 = trigger2;
+                                triggeresp.Lock = false;
+                            }
+                        }
+                    }
                 }
             }
         }

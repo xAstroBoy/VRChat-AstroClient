@@ -1,13 +1,13 @@
 ﻿namespace AstroClient
 {
-	#region Imports
+    #region Imports
 
-	using UnityEngine;
-	using UnityEngine.UI;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-	#endregion Imports
+    #endregion Imports
 
-	public class CMBackground
+    public class CMBackground
     {
         public GameObject GetGameObject { get; private set; }
 

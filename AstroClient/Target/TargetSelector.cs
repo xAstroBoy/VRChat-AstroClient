@@ -1,12 +1,12 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Utility;
-	using System;
-	using System.Collections.Generic;
-	using VRC;
+    using AstroLibrary.Console;
+    using AstroLibrary.Utility;
+    using System;
+    using System.Collections.Generic;
+    using VRC;
 
-	public class TargetSelector : GameEvents
+    public class TargetSelector : GameEvents
     {
         public static event EventHandler<VRCPlayerEventArgs> Event_OnTargetSet;
 

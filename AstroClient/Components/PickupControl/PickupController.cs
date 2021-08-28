@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using System;
-	using UnhollowerBaseLib.Attributes;
-	using VRC.SDKBase;
-	using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using System;
+    using UnhollowerBaseLib.Attributes;
+    using VRC.SDKBase;
+    using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 
-	public class PickupController : GameEventsBehaviour
+    public class PickupController : GameEventsBehaviour
     {
         public PickupController(IntPtr ptr) : base(ptr)
         {
@@ -37,17 +37,17 @@
                 Original_AutoHold = Pickup1.AutoHold;
                 Original_orientation = Pickup1.orientation;
                 Original_Proximity = Pickup1.proximity;
-				Original_ThrowVelocityBoostMinSpeed = Pickup1.ThrowVelocityBoostMinSpeed;
-				Original_ThrowVelocityBoostScale = Pickup1.ThrowVelocityBoostScale;
-				proximity = Pickup1.proximity;
+                Original_ThrowVelocityBoostMinSpeed = Pickup1.ThrowVelocityBoostMinSpeed;
+                Original_ThrowVelocityBoostScale = Pickup1.ThrowVelocityBoostScale;
+                proximity = Pickup1.proximity;
                 allowManipulationWhenEquipped = Pickup1.allowManipulationWhenEquipped;
                 pickupable = Pickup1.pickupable;
                 DisallowTheft = Pickup1.DisallowTheft;
                 AutoHoldMode = Pickup1.AutoHold;
                 PickupOrientation = Pickup1.orientation;
-				ThrowVelocityBoostMinSpeed = Pickup1.ThrowVelocityBoostMinSpeed;
-				ThrowVelocityBoostScale = Pickup1.ThrowVelocityBoostScale;
-			}
+                ThrowVelocityBoostMinSpeed = Pickup1.ThrowVelocityBoostMinSpeed;
+                ThrowVelocityBoostScale = Pickup1.ThrowVelocityBoostScale;
+            }
             else if (Pickup2 != null)
             {
                 Original_allowManipulationWhenEquipped = Pickup2.allowManipulationWhenEquipped;
@@ -56,17 +56,17 @@
                 Original_AutoHold = Pickup2.AutoHold;
                 Original_orientation = Pickup2.orientation;
                 Original_Proximity = Pickup2.proximity;
-				Original_ThrowVelocityBoostMinSpeed = Pickup2.ThrowVelocityBoostMinSpeed;
-				Original_ThrowVelocityBoostScale = Pickup2.ThrowVelocityBoostScale;
-				proximity = Pickup2.proximity;
+                Original_ThrowVelocityBoostMinSpeed = Pickup2.ThrowVelocityBoostMinSpeed;
+                Original_ThrowVelocityBoostScale = Pickup2.ThrowVelocityBoostScale;
+                proximity = Pickup2.proximity;
                 allowManipulationWhenEquipped = Pickup2.allowManipulationWhenEquipped;
                 pickupable = Pickup2.pickupable;
                 DisallowTheft = Pickup2.DisallowTheft;
                 AutoHoldMode = Pickup2.AutoHold;
                 PickupOrientation = Pickup2.orientation;
-				ThrowVelocityBoostMinSpeed = Pickup2.ThrowVelocityBoostMinSpeed;
-				ThrowVelocityBoostScale = Pickup2.ThrowVelocityBoostScale;
-			}
+                ThrowVelocityBoostMinSpeed = Pickup2.ThrowVelocityBoostMinSpeed;
+                ThrowVelocityBoostScale = Pickup2.ThrowVelocityBoostScale;
+            }
             else if (Pickup3 != null)
             {
                 Original_allowManipulationWhenEquipped = Pickup3.allowManipulationWhenEquipped;
@@ -75,17 +75,17 @@
                 Original_AutoHold = Pickup3.AutoHold;
                 Original_orientation = Pickup3.orientation;
                 Original_Proximity = Pickup3.proximity;
-				Original_ThrowVelocityBoostMinSpeed = Pickup3.ThrowVelocityBoostMinSpeed;
-				Original_ThrowVelocityBoostScale = Pickup3.ThrowVelocityBoostScale;
-				proximity = Pickup3.proximity;
+                Original_ThrowVelocityBoostMinSpeed = Pickup3.ThrowVelocityBoostMinSpeed;
+                Original_ThrowVelocityBoostScale = Pickup3.ThrowVelocityBoostScale;
+                proximity = Pickup3.proximity;
                 allowManipulationWhenEquipped = Pickup3.allowManipulationWhenEquipped;
                 pickupable = Pickup3.pickupable;
                 DisallowTheft = Pickup3.DisallowTheft;
                 AutoHoldMode = Pickup3.AutoHold;
                 PickupOrientation = Pickup3.orientation;
-				ThrowVelocityBoostMinSpeed = Pickup3.ThrowVelocityBoostMinSpeed;
-				ThrowVelocityBoostScale = Pickup3.ThrowVelocityBoostScale;
-			}
+                ThrowVelocityBoostMinSpeed = Pickup3.ThrowVelocityBoostMinSpeed;
+                ThrowVelocityBoostScale = Pickup3.ThrowVelocityBoostScale;
+            }
         }
 
         [HideFromIl2Cpp]
@@ -98,9 +98,9 @@
             AutoHoldMode = Original_AutoHold;
             PickupOrientation = Original_orientation;
             proximity = Original_Proximity;
-			ThrowVelocityBoostMinSpeed = Original_ThrowVelocityBoostMinSpeed;
-			ThrowVelocityBoostScale = Original_ThrowVelocityBoostScale;
-			if (Pickup1 != null)
+            ThrowVelocityBoostMinSpeed = Original_ThrowVelocityBoostMinSpeed;
+            ThrowVelocityBoostScale = Original_ThrowVelocityBoostScale;
+            if (Pickup1 != null)
             {
                 Pickup1.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
                 Pickup1.pickupable = pickupable;
@@ -108,11 +108,11 @@
                 Pickup1.AutoHold = AutoHoldMode;
                 Pickup1.orientation = PickupOrientation;
                 Pickup1.proximity = proximity;
-				Pickup1.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
-				Pickup1.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
+                Pickup1.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
+                Pickup1.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
 
-			}
-			else if (Pickup2 != null)
+            }
+            else if (Pickup2 != null)
             {
                 Pickup2.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
                 Pickup2.pickupable = pickupable;
@@ -120,11 +120,11 @@
                 Pickup2.AutoHold = AutoHoldMode;
                 Pickup2.orientation = PickupOrientation;
                 Pickup2.proximity = proximity;
-				Pickup2.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
-				Pickup2.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
+                Pickup2.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
+                Pickup2.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
 
-			}
-			else if (Pickup3 != null)
+            }
+            else if (Pickup3 != null)
             {
                 Pickup3.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
                 Pickup3.pickupable = pickupable;
@@ -132,11 +132,11 @@
                 Pickup3.AutoHold = AutoHoldMode;
                 Pickup3.orientation = PickupOrientation;
                 Pickup3.proximity = proximity;
-				Pickup3.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
-				Pickup3.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
+                Pickup3.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
+                Pickup3.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
 
-			}
-			Locked = false;
+            }
+            Locked = false;
         }
 
         [HideFromIl2Cpp]
@@ -161,21 +161,21 @@
                         {
                             control.EditMode = true;
                         }
-						// Let's use smart kinematic (Checks for Colliders present that can block and prevent the fall of the object).
+                        // Let's use smart kinematic (Checks for Colliders present that can block and prevent the fall of the object).
 
-						if (control != null)
-						{
-							var will_it_fall_throught = control.RigidBody_Will_It_fall_throught();
-							if (!will_it_fall_throught)
-							{
-								control.RigidBody_Set_isKinematic(false);
-							}
-							else
-							{
-								control.RigidBody_Set_isKinematic(true);
+                        if (control != null)
+                        {
+                            var will_it_fall_throught = control.RigidBody_Will_It_fall_throught();
+                            if (!will_it_fall_throught)
+                            {
+                                control.RigidBody_Set_isKinematic(false);
+                            }
+                            else
+                            {
+                                control.RigidBody_Set_isKinematic(true);
 
-							}
-						}
+                            }
+                        }
                     }
                 }
                 HasSetRigidbodyController = true;
@@ -333,15 +333,15 @@
                         {
                             Pickup1.proximity = proximity;
                         }
-						if (Pickup1.ThrowVelocityBoostMinSpeed != ThrowVelocityBoostMinSpeed)
-						{
-							Pickup1.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
-						}
-						if (Pickup1.ThrowVelocityBoostScale != ThrowVelocityBoostScale)
-						{
-							Pickup1.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
-						}
-					}
+                        if (Pickup1.ThrowVelocityBoostMinSpeed != ThrowVelocityBoostMinSpeed)
+                        {
+                            Pickup1.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
+                        }
+                        if (Pickup1.ThrowVelocityBoostScale != ThrowVelocityBoostScale)
+                        {
+                            Pickup1.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
+                        }
+                    }
                     if (Pickup2 != null)
                     {
                         if (Pickup2.allowManipulationWhenEquipped != allowManipulationWhenEquipped)
@@ -368,15 +368,15 @@
                         {
                             Pickup2.proximity = proximity;
                         }
-						if (Pickup2.ThrowVelocityBoostMinSpeed != ThrowVelocityBoostMinSpeed)
-						{
-							Pickup2.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
-						}
-						if (Pickup2.ThrowVelocityBoostScale != ThrowVelocityBoostScale)
-						{
-							Pickup2.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
-						}
-					}
+                        if (Pickup2.ThrowVelocityBoostMinSpeed != ThrowVelocityBoostMinSpeed)
+                        {
+                            Pickup2.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
+                        }
+                        if (Pickup2.ThrowVelocityBoostScale != ThrowVelocityBoostScale)
+                        {
+                            Pickup2.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
+                        }
+                    }
                     if (Pickup3 != null)
                     {
                         if (Pickup3.allowManipulationWhenEquipped != allowManipulationWhenEquipped)
@@ -403,15 +403,15 @@
                         {
                             Pickup3.proximity = proximity;
                         }
-						if (Pickup3.ThrowVelocityBoostMinSpeed != ThrowVelocityBoostMinSpeed)
-						{
-							Pickup3.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
-						}
-						if (Pickup3.ThrowVelocityBoostScale != ThrowVelocityBoostScale)
-						{
-							Pickup3.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
-						}
-					}
+                        if (Pickup3.ThrowVelocityBoostMinSpeed != ThrowVelocityBoostMinSpeed)
+                        {
+                            Pickup3.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
+                        }
+                        if (Pickup3.ThrowVelocityBoostScale != ThrowVelocityBoostScale)
+                        {
+                            Pickup3.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
+                        }
+                    }
                 }
                 else
                 {
@@ -501,21 +501,21 @@
                                 Original_Proximity = Pickup1.proximity;
                             }
                         }
-						if (Original_ThrowVelocityBoostMinSpeed != Pickup1.ThrowVelocityBoostMinSpeed)
-						{
-							if (!EditMode)
-							{
-								Original_ThrowVelocityBoostMinSpeed = Pickup1.ThrowVelocityBoostMinSpeed;
-							}
-						}
-						if (Original_ThrowVelocityBoostScale != Pickup1.ThrowVelocityBoostScale)
-						{
-							if (!EditMode)
-							{
-								Original_ThrowVelocityBoostScale = Pickup1.ThrowVelocityBoostScale;
-							}
-						}
-					}
+                        if (Original_ThrowVelocityBoostMinSpeed != Pickup1.ThrowVelocityBoostMinSpeed)
+                        {
+                            if (!EditMode)
+                            {
+                                Original_ThrowVelocityBoostMinSpeed = Pickup1.ThrowVelocityBoostMinSpeed;
+                            }
+                        }
+                        if (Original_ThrowVelocityBoostScale != Pickup1.ThrowVelocityBoostScale)
+                        {
+                            if (!EditMode)
+                            {
+                                Original_ThrowVelocityBoostScale = Pickup1.ThrowVelocityBoostScale;
+                            }
+                        }
+                    }
                     if (Pickup2 != null)
                     {
                         if (allowManipulationWhenEquipped != Pickup2.allowManipulationWhenEquipped)
@@ -602,21 +602,21 @@
                                 Original_Proximity = Pickup2.proximity;
                             }
                         }
-						if (Original_ThrowVelocityBoostMinSpeed != Pickup2.ThrowVelocityBoostMinSpeed)
-						{
-							if (!EditMode)
-							{
-								Original_ThrowVelocityBoostMinSpeed = Pickup2.ThrowVelocityBoostMinSpeed;
-							}
-						}
-						if (Original_ThrowVelocityBoostScale != Pickup2.ThrowVelocityBoostScale)
-						{
-							if (!EditMode)
-							{
-								Original_ThrowVelocityBoostScale = Pickup2.ThrowVelocityBoostScale;
-							}
-						}
-					}
+                        if (Original_ThrowVelocityBoostMinSpeed != Pickup2.ThrowVelocityBoostMinSpeed)
+                        {
+                            if (!EditMode)
+                            {
+                                Original_ThrowVelocityBoostMinSpeed = Pickup2.ThrowVelocityBoostMinSpeed;
+                            }
+                        }
+                        if (Original_ThrowVelocityBoostScale != Pickup2.ThrowVelocityBoostScale)
+                        {
+                            if (!EditMode)
+                            {
+                                Original_ThrowVelocityBoostScale = Pickup2.ThrowVelocityBoostScale;
+                            }
+                        }
+                    }
                     if (Pickup3 != null)
                     {
                         if (allowManipulationWhenEquipped != Pickup3.allowManipulationWhenEquipped)
@@ -703,21 +703,21 @@
                                 Original_Proximity = Pickup3.proximity;
                             }
                         }
-						if (Original_ThrowVelocityBoostMinSpeed != Pickup3.ThrowVelocityBoostMinSpeed)
-						{
-							if (!EditMode)
-							{
-								Original_ThrowVelocityBoostMinSpeed = Pickup3.ThrowVelocityBoostMinSpeed;
-							}
-						}
-						if (Original_ThrowVelocityBoostScale != Pickup3.ThrowVelocityBoostScale)
-						{
-							if (!EditMode)
-							{
-								Original_ThrowVelocityBoostScale = Pickup3.ThrowVelocityBoostScale;
-							}
-						}
-					}
+                        if (Original_ThrowVelocityBoostMinSpeed != Pickup3.ThrowVelocityBoostMinSpeed)
+                        {
+                            if (!EditMode)
+                            {
+                                Original_ThrowVelocityBoostMinSpeed = Pickup3.ThrowVelocityBoostMinSpeed;
+                            }
+                        }
+                        if (Original_ThrowVelocityBoostScale != Pickup3.ThrowVelocityBoostScale)
+                        {
+                            if (!EditMode)
+                            {
+                                Original_ThrowVelocityBoostScale = Pickup3.ThrowVelocityBoostScale;
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception e)
@@ -817,26 +817,26 @@
         }
 
 
-		internal VRC_Pickup.PickupHand CurrentHand
-		{
-			get
-			{
-				if (Pickup1 != null)
-				{
-					return Pickup1.currentHand;
-				}
-				else if (Pickup2 != null)
-				{
-					return Pickup2.currentHand;
-				}
-				else if (Pickup3 != null)
-				{
-					return Pickup3.currentHand;
-				}
-				return VRC_Pickup.PickupHand.None;
-			}
-		}
-	
+        internal VRC_Pickup.PickupHand CurrentHand
+        {
+            get
+            {
+                if (Pickup1 != null)
+                {
+                    return Pickup1.currentHand;
+                }
+                else if (Pickup2 != null)
+                {
+                    return Pickup2.currentHand;
+                }
+                else if (Pickup3 != null)
+                {
+                    return Pickup3.currentHand;
+                }
+                return VRC_Pickup.PickupHand.None;
+            }
+        }
+
         internal VRCPlayerApi CurrentObjectHolderPlayer
         {
             [HideFromIl2Cpp]
@@ -942,12 +942,12 @@
         private bool Original_DisallowTheft { get; set; }
         private float Original_Proximity { get; set; }
 
-		private float Original_ThrowVelocityBoostMinSpeed { get; set; }
+        private float Original_ThrowVelocityBoostMinSpeed { get; set; }
 
 
-		private float Original_ThrowVelocityBoostScale { get; set; }
+        private float Original_ThrowVelocityBoostScale { get; set; }
 
-		private VRC_Pickup.AutoHoldMode Original_AutoHold { get; set; }
+        private VRC_Pickup.AutoHoldMode Original_AutoHold { get; set; }
         private VRC_Pickup.PickupOrientation Original_orientation { get; set; }
 
         private bool _EditMode = false;
@@ -1064,37 +1064,37 @@
             }
         }
 
-		private float _ThrowVelocityBoostScale = 0f;
-		internal float ThrowVelocityBoostScale
-		{
-			get
-			{
-				return _ThrowVelocityBoostScale;
-			}
-			set
-			{
-				_ThrowVelocityBoostScale = value;
-				Run_OnOnPickupPropertyChanged();
-			}
-		}
+        private float _ThrowVelocityBoostScale = 0f;
+        internal float ThrowVelocityBoostScale
+        {
+            get
+            {
+                return _ThrowVelocityBoostScale;
+            }
+            set
+            {
+                _ThrowVelocityBoostScale = value;
+                Run_OnOnPickupPropertyChanged();
+            }
+        }
 
-		private float _ThrowVelocityBoostMinSpeed = 0f;
-		internal float ThrowVelocityBoostMinSpeed
-		{
-			get
-			{
-				return _ThrowVelocityBoostMinSpeed;
-			}
-			set
-			{
-				_ThrowVelocityBoostMinSpeed = value;
-				Run_OnOnPickupPropertyChanged();
-			}
-		}
-
-
+        private float _ThrowVelocityBoostMinSpeed = 0f;
+        internal float ThrowVelocityBoostMinSpeed
+        {
+            get
+            {
+                return _ThrowVelocityBoostMinSpeed;
+            }
+            set
+            {
+                _ThrowVelocityBoostMinSpeed = value;
+                Run_OnOnPickupPropertyChanged();
+            }
+        }
 
 
 
-	}
+
+
+    }
 }

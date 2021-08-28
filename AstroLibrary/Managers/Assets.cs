@@ -1,8 +1,8 @@
 ﻿namespace AstroLibrary.Managers
 {
-	using System.Collections.Generic;
+    using System.Collections.Generic;
 
-	internal class Assets
+    internal class Assets
     {
         public static List<string> KissGifs = new List<string>()
         {

@@ -1,9 +1,9 @@
 ﻿namespace AstroClient.ItemTweakerV2.TweakerEventArgs
 {
-	using AstroClient.Components;
-	using System;
+    using AstroClient.Components;
+    using System;
 
-	public class OnPickupControllerArgs : EventArgs
+    public class OnPickupControllerArgs : EventArgs
     {
         public PickupController control;
 

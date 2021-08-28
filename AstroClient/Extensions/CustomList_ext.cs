@@ -1,10 +1,10 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using System.Linq;
-	using UnityEngine;
-	using static AstroClient.Variables.CustomLists;
+    using System.Linq;
+    using UnityEngine;
+    using static AstroClient.Variables.CustomLists;
 
-	public static class CustomList_ext
+    public static class CustomList_ext
     {
         public static void RemoveObjFromCustomLists(this GameObject obj)
         {

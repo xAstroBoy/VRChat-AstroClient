@@ -1,9 +1,9 @@
 ﻿namespace Blaze.API
 {
-	using System;
-	using UnityEngine;
+    using System;
+    using UnityEngine;
 
-	public class QMNestedButton
+    public class QMNestedButton
     {
         protected QMSingleButton mainButton;
         protected QMSingleButton backButton;

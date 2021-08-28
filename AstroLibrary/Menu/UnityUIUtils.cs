@@ -1,9 +1,9 @@
 ﻿namespace AstroLibrary.Menu
 {
-	using UnityEngine;
-	using UnityEngine.UI;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-	internal class UnityUIUtils
+    internal class UnityUIUtils
     {
         public static Transform CreateScrollView(RectTransform parentTransform, float viewWidth, float viewHeight, float maxWidth, float maxHeight, bool scrollHorizontally, bool scrollVertically)
         {

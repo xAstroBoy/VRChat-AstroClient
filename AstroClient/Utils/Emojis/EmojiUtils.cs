@@ -1,18 +1,18 @@
 ﻿namespace AstroClient
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using AstroLibrary.Utility;
-	using MelonLoader;
-	using RubyButtonAPI;
-	using System;
-	using System.Collections;
-	using System.Collections.Generic;
-	using UnityEngine;
-	using VRC;
-	using VRC.SDKBase;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using MelonLoader;
+    using RubyButtonAPI;
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using UnityEngine;
+    using VRC;
+    using VRC.SDKBase;
 
-	public class EmojiUtils : GameEvents
+    public class EmojiUtils : GameEvents
     {
         public static void SpawnlastEmoji()
         {
@@ -20,8 +20,8 @@
             {
                 if (SkipVRChatOnlineCooldown)
                 {
-					SpawnOfflineEmoji(LastUsedEmoji, false);
-				}
+                    SpawnOfflineEmoji(LastUsedEmoji, false);
+                }
             }
             else
             {
@@ -32,8 +32,8 @@
 
         public static void IncreaseEmojiInt()
         {
-			EmojiInt++;
-			UpdateEmojiButton();
+            EmojiInt++;
+            UpdateEmojiButton();
         }
 
         public override void OnSceneLoaded(int buildIndex, string sceneName)
@@ -46,49 +46,49 @@
             UpdateEmojiSpawning(true);
         }
 
-		public override void SpawnEmojiRPC(VRCPlayer player, int Emoji)
-		{
-			if (player == VRCPlayer.field_Internal_Static_VRCPlayer_0)
-			{
-				SetEmoji(Emoji);
-				UpdateLastSpawnedEmoji(Emoji);
-				if (IsVRChatCooldownActive)
-				{
-					if (!IsBeingSpawnedFromMenu)
-					{
-						if (SkipVRChatOnlineCooldown)
-						{
-						}
-					}
-				}
-				else
-				{
-					IsVRChatCooldownActive = true;
-				}
-				return;
-			}
-		}
+        public override void SpawnEmojiRPC(VRCPlayer player, int Emoji)
+        {
+            if (player == VRCPlayer.field_Internal_Static_VRCPlayer_0)
+            {
+                SetEmoji(Emoji);
+                UpdateLastSpawnedEmoji(Emoji);
+                if (IsVRChatCooldownActive)
+                {
+                    if (!IsBeingSpawnedFromMenu)
+                    {
+                        if (SkipVRChatOnlineCooldown)
+                        {
+                        }
+                    }
+                }
+                else
+                {
+                    IsVRChatCooldownActive = true;
+                }
+                return;
+            }
+        }
 
 
-		public override void OnPlayerJoined(Player player)
-		{
-			if(player != null)
-			{
-				var vrcplayer = player.GetVRCPlayer();
-				if (vrcplayer != null)
-				{
-					if (vrcplayer.Get_Emoji_Cooldown() != 0)
-					{
-						vrcplayer.Set_Emoji_Cooldown(0);
-						ModConsole.DebugLog($"[EmojiBypasser] : Removed Player {player.DisplayName()} 's Emoji Cooldown.");
-					}
-				}
-			}
-		}
+        public override void OnPlayerJoined(Player player)
+        {
+            if (player != null)
+            {
+                var vrcplayer = player.GetVRCPlayer();
+                if (vrcplayer != null)
+                {
+                    if (vrcplayer.Get_Emoji_Cooldown() != 0)
+                    {
+                        vrcplayer.Set_Emoji_Cooldown(0);
+                        ModConsole.DebugLog($"[EmojiBypasser] : Removed Player {player.DisplayName()} 's Emoji Cooldown.");
+                    }
+                }
+            }
+        }
 
 
 
-		public override void OnUpdate()
+        public override void OnUpdate()
         {
             if (IsVRChatCooldownActive)
             {
@@ -250,45 +250,45 @@
             }
         }
 
-		public static void SpawnLocalEmoji(VRCPlayer player, int emoji)
-		{
-			if (player != null)
-			{
-				var EmojiGen = player.field_Private_EmojiGenerator_0;
-				if (EmojiGen != null)
-				{
-					EmojiGen.Method_Public_Void_Int32_0(emoji);
-				}
-				if (IsBeingSpawnedFromMenu)
-				{
-					IsBeingSpawnedFromMenu = false;
-				}
-			}
-		}
+        public static void SpawnLocalEmoji(VRCPlayer player, int emoji)
+        {
+            if (player != null)
+            {
+                var EmojiGen = player.field_Private_EmojiGenerator_0;
+                if (EmojiGen != null)
+                {
+                    EmojiGen.Method_Public_Void_Int32_0(emoji);
+                }
+                if (IsBeingSpawnedFromMenu)
+                {
+                    IsBeingSpawnedFromMenu = false;
+                }
+            }
+        }
 
-		public static void SpawnOfflineEmoji(int emoji, bool MakeOthersSeeit)
-		{
-			var EmojiGen = Player.prop_Player_0.GetVRCPlayer().field_Private_EmojiGenerator_0;
-			if (EmojiGen != null)
-			{
-				EmojiGen.Method_Public_Void_Int32_0(emoji);
+        public static void SpawnOfflineEmoji(int emoji, bool MakeOthersSeeit)
+        {
+            var EmojiGen = Player.prop_Player_0.GetVRCPlayer().field_Private_EmojiGenerator_0;
+            if (EmojiGen != null)
+            {
+                EmojiGen.Method_Public_Void_Int32_0(emoji);
 
-				if (IsBeingSpawnedFromMenu)
-				{
-					IsBeingSpawnedFromMenu = false;
-				}
+                if (IsBeingSpawnedFromMenu)
+                {
+                    IsBeingSpawnedFromMenu = false;
+                }
 
-				if (MakeOthersSeeit)
-				{
-					if (IsVRChatCooldownActive)
-					{
-						Networking.RPC(0, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, "SpawnEmojiRPC", new Il2CppSystem.Object[] { new Il2CppSystem.Int32 { m_value = emoji }.BoxIl2CppObject() });
-					}
-				}
-			}
-		}
+                if (MakeOthersSeeit)
+                {
+                    if (IsVRChatCooldownActive)
+                    {
+                        Networking.RPC(0, VRCPlayer.field_Internal_Static_VRCPlayer_0.gameObject, "SpawnEmojiRPC", new Il2CppSystem.Object[] { new Il2CppSystem.Int32 { m_value = emoji }.BoxIl2CppObject() });
+                    }
+                }
+            }
+        }
 
-		public static void Add_x1()
+        public static void Add_x1()
         {
             EmojiSpammerInt++;
             UpdateEmojiSpamCounter();

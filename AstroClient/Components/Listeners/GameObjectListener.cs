@@ -1,9 +1,9 @@
 namespace AstroClient.Components
 {
-	using System;
-	using UnhollowerBaseLib.Attributes;
+    using System;
+    using UnhollowerBaseLib.Attributes;
 
-	public class GameObjectListener : GameEventsBehaviour
+    public class GameObjectListener : GameEventsBehaviour
     {
         [method: HideFromIl2Cpp]
         public event Action? OnEnabled;

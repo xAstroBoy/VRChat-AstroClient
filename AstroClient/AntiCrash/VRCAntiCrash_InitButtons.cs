@@ -1,15 +1,15 @@
 ﻿namespace AstroClient.AntiCrash
 {
-	using RubyButtonAPI;
-	using UnityEngine;
+    using RubyButtonAPI;
+    using UnityEngine;
 
-	/// <summary>
-	/// I don't recommend calling it VRCAC.
-	/// As I'm not going to be straight up ripping the code.
-	/// I'm rewriting and using VRCAC as a reference.
-	/// This is going to be our own AntiCrash :)
-	/// </summary>
-	public class VRCAntiCrash_InitButtons : GameEvents
+    /// <summary>
+    /// I don't recommend calling it VRCAC.
+    /// As I'm not going to be straight up ripping the code.
+    /// I'm rewriting and using VRCAC as a reference.
+    /// This is going to be our own AntiCrash :)
+    /// </summary>
+    public class VRCAntiCrash_InitButtons : GameEvents
     {
         // MOST ACTIONS REQUIRE A CONFIG!
         // FOR FULL PORT WE NEED A CONFIG .

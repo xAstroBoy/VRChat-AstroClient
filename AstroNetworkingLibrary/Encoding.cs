@@ -1,6 +1,6 @@
 ﻿namespace AstroNetworkingLibrary
 {
-	public static class Encoding
+    public static class Encoding
     {
         public static string Base64Encode(string plainText)
         {

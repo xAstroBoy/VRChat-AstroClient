@@ -1,18 +1,18 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
-	#region Imports
+    #region Imports
 
-	using AstroClient.Features.Player.Clones;
-	using AstroClient.Features.Player.Movement;
-	using AstroClient.Features.Player.Movement.Exploit;
-	using AstroClient.Features.Player.Movement.QuickMenu_QMFreeze;
-	using RubyButtonAPI;
-	using System;
-	using UnityEngine;
+    using AstroClient.Features.Player.Clones;
+    using AstroClient.Features.Player.Movement;
+    using AstroClient.Features.Player.Movement.Exploit;
+    using AstroClient.Features.Player.Movement.QuickMenu_QMFreeze;
+    using RubyButtonAPI;
+    using System;
+    using UnityEngine;
 
-	#endregion Imports
+    #endregion Imports
 
-	public static class MovementMenu
+    public static class MovementMenu
     {
         public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {

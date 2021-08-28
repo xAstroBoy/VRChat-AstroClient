@@ -1,11 +1,11 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroLibrary.Utility;
-	using Il2CppSystem.Collections.Generic;
-	using System;
-	using VRC.Core;
+    using AstroLibrary.Utility;
+    using Il2CppSystem.Collections.Generic;
+    using System;
+    using VRC.Core;
 
-	public static class ModerationManagerExtension
+    public static class ModerationManagerExtension
     {
         public static bool GetIsBlocked(this VRC.Management.ModerationManager instance, string UserID)
         {
@@ -41,12 +41,12 @@
             return false;
         }
 
-		public static bool GetIsBlockedEitherWay(this VRC.Management.ModerationManager instance, string UserID)
-		{
-			return instance.GetIsBlocked(UserID) || instance.GetIsBlockedByUser(UserID);
-		}
+        public static bool GetIsBlockedEitherWay(this VRC.Management.ModerationManager instance, string UserID)
+        {
+            return instance.GetIsBlocked(UserID) || instance.GetIsBlockedByUser(UserID);
+        }
 
-		public static bool IsBannedFromPublicOnly(this VRC.Management.ModerationManager instance, string userId)
+        public static bool IsBannedFromPublicOnly(this VRC.Management.ModerationManager instance, string userId)
         {
             foreach (var kvp in GlobalModerations)
             {

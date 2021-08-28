@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.ItemTweakerV2.Selector
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Finder;
-	using UnityEngine;
+    using AstroLibrary.Console;
+    using AstroLibrary.Finder;
+    using UnityEngine;
 
-	public class Tweaker_Object
+    public class Tweaker_Object
     {
         public static GameObject SetObjectToEditWithPath(string objpath)
         {

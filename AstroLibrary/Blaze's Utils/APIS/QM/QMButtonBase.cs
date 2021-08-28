@@ -1,11 +1,11 @@
 ﻿namespace Blaze.API
 {
-	using System.Threading.Tasks;
-	using UnityEngine;
-	using UnityEngine.Networking;
-	using UnityEngine.UI;
+    using System.Threading.Tasks;
+    using UnityEngine;
+    using UnityEngine.Networking;
+    using UnityEngine.UI;
 
-	public class QMButtonBase
+    public class QMButtonBase
     {
         protected GameObject button;
         protected string btnQMLoc;
@@ -103,11 +103,11 @@
 
         public void SetShader(string shaderName)
         {
-			var Material = new Material(button.GetComponent<Image>().material)
-			{
-				shader = Shader.Find(shaderName)
-			};
-			button.gameObject.GetComponent<Image>().material = Material;
+            var Material = new Material(button.GetComponent<Image>().material)
+            {
+                shader = Shader.Find(shaderName)
+            };
+            button.gameObject.GetComponent<Image>().material = Material;
         }
 
         public virtual void SetBackgroundColor(Color buttonBackgroundColor, bool save = true) { }

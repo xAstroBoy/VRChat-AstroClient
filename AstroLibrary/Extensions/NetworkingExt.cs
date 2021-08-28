@@ -1,12 +1,12 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroLibrary.Utility;
-	using ExitGames.Client.Photon;
-	using UnityEngine;
-	using VRC.SDKBase;
-	using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
+    using AstroLibrary.Utility;
+    using ExitGames.Client.Photon;
+    using UnityEngine;
+    using VRC.SDKBase;
+    using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
 
-	public class NetworkingExt
+    public class NetworkingExt
     {
         public static void RPC(RPC.Destination targetClients, GameObject targetObject, string methodname, object[] parameters)
         {

@@ -1,8 +1,8 @@
 ﻿namespace AstroClient
 {
-	using System;
+    using System;
 
-	public class VRCPlayerEventArgs : EventArgs
+    public class VRCPlayerEventArgs : EventArgs
     {
         public VRC.Player player;
 

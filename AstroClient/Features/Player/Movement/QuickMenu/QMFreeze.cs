@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.Features.Player.Movement.QuickMenu_QMFreeze
 {
-	using RubyButtonAPI;
-	using UnityEngine;
-	using VRC.SDKBase;
+    using RubyButtonAPI;
+    using UnityEngine;
+    using VRC.SDKBase;
 
-	public class QMFreeze : GameEvents
+    public class QMFreeze : GameEvents
     {
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {

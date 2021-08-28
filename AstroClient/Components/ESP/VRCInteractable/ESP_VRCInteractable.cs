@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.Components
 {
-	using AstroLibrary.Console;
-	using AstroLibrary.Extensions;
-	using System;
-	using System.Linq;
-	using UnhollowerBaseLib.Attributes;
-	using UnityEngine;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using System;
+    using System.Linq;
+    using UnhollowerBaseLib.Attributes;
+    using UnityEngine;
 
-	public class ESP_VRCInteractable : GameEventsBehaviour
+    public class ESP_VRCInteractable : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
@@ -58,30 +58,30 @@
             return ColorUtils.HexToColor("E47D39");
         }
 
-		private void SetupHighlighter()
-		{
-			if (HighLightOptions == null)
-			{
-				HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
-			}
-			if (HighLightOptions != null)
-			{
-				HighLightOptions.SetHighLighterColor(ESPColor);
-				foreach (var obj in ObjMeshRenderers)
-				{
-					if (obj != null && obj.gameObject.active)
-					{
-						HighLightOptions.AddRenderer(obj);
-					}
-					else
-					{
-						HighLightOptions.RemoveRenderer(obj);
-					}
-				}
-			}
-		}
+        private void SetupHighlighter()
+        {
+            if (HighLightOptions == null)
+            {
+                HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
+            }
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighLighterColor(ESPColor);
+                foreach (var obj in ObjMeshRenderers)
+                {
+                    if (obj != null && obj.gameObject.active)
+                    {
+                        HighLightOptions.AddRenderer(obj);
+                    }
+                    else
+                    {
+                        HighLightOptions.RemoveRenderer(obj);
+                    }
+                }
+            }
+        }
 
-		internal void ResetColor()
+        internal void ResetColor()
         {
             ESPColor = GetDefaultColor();
             if (HighLightOptions != null)

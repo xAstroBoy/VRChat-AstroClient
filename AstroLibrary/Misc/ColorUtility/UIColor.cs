@@ -1,12 +1,12 @@
 ﻿namespace DayClientML2.Utility.ColorUtility
 {
-	using AstroLibrary.Utility;
-	using System.Collections.Generic;
-	using System.Linq;
-	using UnityEngine;
-	using UnityEngine.UI;
+    using AstroLibrary.Utility;
+    using System.Collections.Generic;
+    using System.Linq;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-	internal class UIColor
+    internal class UIColor
     {
         public static Transform UIRoot { get; private set; }
         public static Transform ActionMenu { get; private set; }

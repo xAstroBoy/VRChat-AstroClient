@@ -1,6 +1,6 @@
 ﻿namespace DayClientML2.Utility
 {
-	public enum MenuType
+    public enum MenuType
     {
         UserInfo,
         AvatarMenu,

@@ -1,13 +1,13 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroLibrary.Console;
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Reflection;
-	using UnityEngine;
+    using AstroLibrary.Console;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using UnityEngine;
 
-	public static class DeepClone_ext
+    public static class DeepClone_ext
     {
         private static bool GetCopyOfDebugMode = false;
 

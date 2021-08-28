@@ -1,9 +1,9 @@
 ﻿namespace AstroClientCore.Events
 {
-	using Photon.Realtime;
-	using System;
+    using Photon.Realtime;
+    using System;
 
-	public class PhotonPlayerEventArgs : EventArgs
+    public class PhotonPlayerEventArgs : EventArgs
     {
         public Player player;
 

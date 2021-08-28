@@ -1,9 +1,9 @@
 ﻿namespace Blaze.API
 {
-	using UnityEngine;
-	using UnityEngine.UI;
+    using UnityEngine;
+    using UnityEngine.UI;
 
-	class SMText
+    class SMText
     {
         protected GameObject textObject;
         protected Text text;

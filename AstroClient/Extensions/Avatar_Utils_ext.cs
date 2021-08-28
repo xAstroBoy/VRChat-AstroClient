@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.Extensions
 {
-	using AstroLibrary.Extensions;
+    using AstroLibrary.Extensions;
 
-	public static class Avatar_Utils_ext
-	{
-		public static bool isAvatarID(this string id)
-		{
-			return id.IsNotNullOrEmptyOrWhiteSpace() && id.StartsWith("avtr_");
-		}
-	}
+    public static class Avatar_Utils_ext
+    {
+        public static bool isAvatarID(this string id)
+        {
+            return id.IsNotNullOrEmptyOrWhiteSpace() && id.StartsWith("avtr_");
+        }
+    }
 }
