@@ -99,6 +99,9 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="Components\Expoits\OrbitManager.cs" />
+    <Compile Include="Components\Orbit\OrbitBehaviour.cs" />
+    <Compile Include="Components\Orbit\OrbitManager.cs" />
     <Compile Include="Managers\AchievmentsManager.cs" />
     <Compile Include="AntiCrash\AntiCrash.cs" />
     <Compile Include="AntiCrash\AntiCrashScanner.cs" />
@@ -233,8 +236,6 @@
     <Compile Include="Components\JarRoleRevealers\JarRoleESP.cs" />
     <Compile Include="Components\ObjectSpinner\ObjectSpinner.cs" />
     <Compile Include="Components\ObjectSpinner\ObjectSpinnerManager.cs" />
-    <Compile Include="Components\Orbit\OrbitBehaviour.cs" />
-    <Compile Include="Components\Orbit\OrbitManager.cs" />
     <Compile Include="Components\PickupControl\PickupController.cs" />
     <Compile Include="Components\PlayerAttacker\PlayerAttacker.cs" />
     <Compile Include="Components\PlayerAttacker\PlayerAttackerManager.cs" />

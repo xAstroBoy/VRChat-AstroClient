@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Cheetos
 {
+    using AstroClient.Components;
     #region Imports
 
     using AstroClient.Components.SitOnPlayer;
@@ -46,6 +47,10 @@
             if (player.gameObject.GetComponent<SitOnPlayer>() == null)
             {
                 player.gameObject.AddComponent<SitOnPlayer>();
+            }
+            if (player.gameObject.GetComponent<NewOrbitManager>() == null)
+            {
+                player.gameObject.AddComponent<NewOrbitManager>();
             }
 
             if (Bools.IsDeveloper)

@@ -72,6 +72,7 @@
 
             if (Bools.AllowOrbitComponent)
             {
+                RegisterComponent<NewOrbitManager>();
                 RegisterComponent<OrbitManager>();
                 RegisterComponent<Orbit>();
             }
@@ -104,10 +105,6 @@
             if (Bools.AllowAttackerComponent)
             {
                 PlayerAttackerManager.MakeInstance();
-            }
-            if (Bools.AllowOrbitComponent)
-            {
-                OrbitManager.MakeInstance();
             }
             PlayerWatcherManager.MakeInstance();
         }
