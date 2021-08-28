@@ -50,6 +50,8 @@
             // Avatar Unfavorite
             new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Refresh", 921f, 170f, delegate ()
             {
+
+                AvatarSearch.DumpDone(); // Refresh Avatar Pedestal Dump
                 RefreshList();
             }, 1.45f, 1f);
 

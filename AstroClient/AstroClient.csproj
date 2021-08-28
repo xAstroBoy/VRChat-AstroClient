@@ -142,7 +142,6 @@
     <Compile Include="Extensions\Components_exts\PickupController_ext.cs" />
     <Compile Include="Extensions\Components_exts\RigidBodyController_ext.cs" />
     <Compile Include="Extensions\EventHandler_ext.cs" />
-    <Compile Include="Favcat\Favcat_Utils.cs" />
     <Compile Include="ModDetector\FindMods.cs" />
     <Compile Include="Udon\UdonEditor\UdonConverter.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapEditor.cs" />
@@ -442,9 +441,6 @@
     <Reference Include="Facepunch.Steamworks.Win64">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Facepunch.Steamworks.Win64.dll</HintPath>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="FavCat-merged">
-      <HintPath>D:\Steam Library\steamapps\common\VRChat\Mods\FavCat-merged.dll</HintPath>
     </Reference>
     <Reference Include="I18N">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\I18N.dll</HintPath>
