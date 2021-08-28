@@ -60,7 +60,14 @@
 
             if (__1.Name.Length >= 100 || __1.ParameterString.Length >= 100)
             {
-                ModConsole.Log($"{__0.DisplayName()}: Sent Malicious RPC!");
+                if (__0 != null)
+                {
+                    ModConsole.Log($"Blocked Malicious RPC: {__0.DisplayName()}");
+                }
+                else
+                {
+                    ModConsole.Log($"Blocked Malicious RPC: NULL");
+                }
                 return false;
             }
 
