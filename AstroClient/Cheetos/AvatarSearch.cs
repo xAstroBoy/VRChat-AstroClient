@@ -111,10 +111,10 @@
 
             publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
 
-            searchList = new VRCList(publicAvatarList.transform.parent, "Astro Search Results", 0);
+            searchList = new VRCList(publicAvatarList.transform.parent, "Astro Search Results", 1);
             searchList.Text.supportRichText = true;
 
-            worldList = new VRCList(publicAvatarList.transform.parent, "Astro Pedestal Results", 0);
+            worldList = new VRCList(publicAvatarList.transform.parent, "Astro Pedestal Results", 2);
             worldList.Text.supportRichText = true;
         }
 
