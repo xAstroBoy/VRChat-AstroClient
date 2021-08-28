@@ -36,7 +36,7 @@
                 .ToList()
                 .Where(x => x.GetIsMaster())
                 .Select(x2 => x2.GetVRCPlayerApi())
-                .FirstOrDefault(null);
+                .First();
         }
     }
 }

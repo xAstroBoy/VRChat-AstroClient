@@ -116,11 +116,11 @@
         public PlayerListData(Photon.Realtime.Player photonPlayer)
         {
             PhotonPlayer = photonPlayer;
-            Player = photonPlayer.GetPlayer();
-            APIUser = Player.GetAPIUser();
-            PlayerAPI = Player.GetVRCPlayerApi();
-            PlayerNet = Player.GetPlayerNet();
-            VRCPlayer = Player.GetVRCPlayer();
+            Player = photonPlayer?.GetPlayer();
+            APIUser = Player?.GetAPIUser();
+            PlayerAPI = Player?.GetVRCPlayerApi();
+            PlayerNet = Player?.GetPlayerNet();
+            VRCPlayer = Player?.GetVRCPlayer();
         }
     }
 }

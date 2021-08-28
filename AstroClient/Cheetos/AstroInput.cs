@@ -48,11 +48,10 @@
 
         public override void OnLateUpdate()
         {
-            var localPlayer = Utils.LocalPlayer.GetPlayer();
-            if (WorldUtils.GetWorldID() == null || localPlayer == null || !localPlayer.isActiveAndEnabled || QuickMenuUtils_Old.IsQuickMenuOpen)
-            {
-                return;
-            }
+            if (!WorldUtils.IsInWorld()) return;
+
+            var localPlayer = PlayerUtils.GetPlayer();
+            if (localPlayer == null || !localPlayer.isActiveAndEnabled || QuickMenuUtils_Old.IsQuickMenuOpen) return;
 
             if (localPlayer.GetIsInVR())
             {
