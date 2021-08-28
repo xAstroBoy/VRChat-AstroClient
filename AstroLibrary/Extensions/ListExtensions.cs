@@ -8,6 +8,11 @@
 
     public static class ListExtensions
     {
+        public static bool AnyAndNotNull<T>(this List<T> list)
+        {
+            return list != null && list.Any();
+        }
+
         public static void RegisterChildsInPath(this List<GameObject> Original, string path)
         {
             var list = GameObjectFinder.ListFind(path);

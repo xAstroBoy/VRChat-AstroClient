@@ -7,6 +7,7 @@
     using AstroLibrary;
     using AstroLibrary.Console;
     using AstroLibrary.Enums;
+    using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
     using AstroNetworkingLibrary;
@@ -46,6 +47,8 @@
         private static VRCList worldList;
 
         private static Stopwatch stopwatch;
+
+        private static Stopwatch stopwatch2;
 
         private static MenuButton searchTypeButton;
 
@@ -157,21 +160,6 @@
             }
         }
 
-        public static void PedestalDump()
-        {
-            if (!IsDumping)
-            {
-                stopwatch = new Stopwatch();
-                stopwatch.Start();
-
-                // Refresh UI
-                worldAvatars.Clear();
-
-                IsDumping = true;
-                MelonLoader.MelonCoroutines.Start(DumpLoop());
-            }
-        }
-
         public static IEnumerator SearchLoop()
         {
             if (!IsSearching) yield break;
@@ -187,26 +175,29 @@
             }
         }
 
-        public static IEnumerator DumpLoop()
+        public static void PedestalDump()
         {
-            if (!IsDumping) yield break;
-            var pedestals = WorldUtils_Old.Get_AvatarPedestal().ToList();
-            if (!pedestals.Any()) yield break;
+            stopwatch2 = new Stopwatch();
+            stopwatch2.Start();
 
-            foreach (var pedestal in pedestals)
+            // Refresh UI
+            worldAvatars.Clear();
+
+            var avatars = WorldUtils_Old.GetAvatarsFromPedestals();
+
+            if (avatars.AnyAndNotNull())
             {
-                worldAvatars.Add(pedestal.field_Private_ApiAvatar_0);
-                yield return null;
+                foreach (var avatar in avatars)
+                {
+                    worldAvatars.Add(avatar);
+                }
             }
 
             DumpDone();
-            yield break;
         }
 
         public static void DumpDone()
         {
-            IsDumping = false;
-
             worldList.Text.supportRichText = true;
             worldList.UiVRCList.expandedHeight *= 2f;
             worldList.UiVRCList.extendRows = 4;
@@ -214,8 +205,9 @@
 
             worldList.RenderElement(worldAvatars);
 
+            stopwatch2.Stop();
+            ModConsole.Log($"Avatar Pedestals Completed: found {worldAvatars.Count} avatars, took {stopwatch2.ElapsedMilliseconds}ms");
             worldList.Text.text = $"<color=cyan>Astro Pedestal</color> Found: <color=yellow>{worldAvatars.Count}</color>";
-            ModConsole.Log($"Avatar Pedestals Completed: found {worldAvatars.Count} avatars");
         }
 
         public static void SearchDone()

@@ -752,6 +752,8 @@
     <Compile Include="Blaze%27s Utils\FileManager.cs" />
     <Compile Include="Blaze%27s Utils\JsonWriter.cs" />
     <Compile Include="Blaze%27s Utils\Logs.cs" />
+    <Compile Include="Extensions\Coding_ext.cs" />
+    <Compile Include="Utility\AvatarUtils.cs" />
     <Compile Include="Utility\BonesUtils.cs" />
     <Compile Include="Utility\GameObjectUtils.cs" />
     <Compile Include="Utility\MiscUtils.cs" />

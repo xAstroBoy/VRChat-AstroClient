@@ -124,77 +124,65 @@
 
         public override void OnApplicationQuit()
         {
-            if (KeyManager.IsAuthed)
-            {
-                Event_OnApplicationQuit.SafetyRaise();
-            }
+            if (!KeyManager.IsAuthed) return;
+            Event_OnApplicationQuit.SafetyRaise();
         }
 
         public override void OnPreferencesSaved()
         {
-            if (KeyManager.IsAuthed)
-            {
-                ConfigManager.Save_All();
-            }
+            if (!KeyManager.IsAuthed) return;
+            ConfigManager.Save_All();
         }
 
         public static void InitializeOverridables()
         {
-            if (KeyManager.IsAuthed)
+            if (!KeyManager.IsAuthed) return;
+            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
             {
-                foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+                var btype = type.BaseType;
+
+                if (btype != null && btype.Equals(typeof(GameEvents)))
                 {
-                    var btype = type.BaseType;
+                    GameEvents component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as GameEvents;
+                    component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
 
-                    if (btype != null && btype.Equals(typeof(GameEvents)))
-                    {
-                        GameEvents component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as GameEvents;
-                        component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
+                    component.OnApplicationStart();
+                    Overridable_List.Add(component);
+                }
 
-                        component.OnApplicationStart();
-                        Overridable_List.Add(component);
-                    }
-
-                    if (btype != null && btype.Equals(typeof(Tweaker_Events)))
-                    {
-                        Tweaker_Events component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as Tweaker_Events;
-                        Tweaker_Overridables.Add(component);
-                    }
+                if (btype != null && btype.Equals(typeof(Tweaker_Events)))
+                {
+                    Tweaker_Events component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as Tweaker_Events;
+                    Tweaker_Overridables.Add(component);
                 }
             }
         }
 
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
         {
-            if (KeyManager.IsAuthed)
+            if (!KeyManager.IsAuthed) return;
+            switch (buildIndex)
             {
-                switch (buildIndex)
-                {
-                    case 0: // app
-                    case 1: // ui
-                        break;
+                case 0: // app
+                case 1: // ui
+                    break;
 
-                    default:
-                        Event_OnSceneLoaded.SafetyRaise(new OnSceneLoadedEventArgs(buildIndex, sceneName));
-                        break;
-                }
+                default:
+                    Event_OnSceneLoaded.SafetyRaise(new OnSceneLoadedEventArgs(buildIndex, sceneName));
+                    break;
             }
         }
 
         public override void OnUpdate()
         {
-            if (KeyManager.IsAuthed)
-            {
-                Event_OnUpdate.SafetyRaise();
-            }
+            if (!KeyManager.IsAuthed) return;
+            Event_OnUpdate.SafetyRaise();
         }
 
         public override void OnLateUpdate()
         {
-            if (KeyManager.IsAuthed)
-            {
-                Event_LateUpdate.SafetyRaise();
-            }
+            if (!KeyManager.IsAuthed) return;
+            Event_LateUpdate.SafetyRaise();
         }
 
         protected void DoAfterUiManagerInit(Action code)
@@ -210,78 +198,73 @@
             code();
         }
 
-
         private void Start_VRChat_OnUiManagerInit()
         {
-            if (KeyManager.IsAuthed)
+            if (!KeyManager.IsAuthed) return;
+            QuickMenuUtils_Old.SetQuickMenuCollider(5, 5);
+            UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
+
+            InitMainsButtons();
+            try
             {
-                QuickMenuUtils_Old.SetQuickMenuCollider(5, 5);
-                UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
-
-                InitMainsButtons();
-                try
-                {
-                    TweakerV2Main.Init_TweakerV2Main();
-                }
-                catch (Exception e)
-                {
-                    ModConsole.ErrorExc(e);
-                }
-                new QMSingleButton("ShortcutMenu", 5, 3.5f, "GameObject Toggler", new Action(() => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }), "Advanced GameObject Toggler", null, null, true);
-                CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 3f, true);
-
-                Event_VRChat_OnUiManagerInit.SafetyRaise();
+                TweakerV2Main.Init_TweakerV2Main();
             }
+            catch (Exception e)
+            {
+                ModConsole.ErrorExc(e);
+            }
+            new QMSingleButton("ShortcutMenu", 5, 3.5f, "GameObject Toggler", new Action(() => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }), "Advanced GameObject Toggler", null, null, true);
+            CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 3f, true);
+
+            Event_VRChat_OnUiManagerInit.SafetyRaise();
         }
 
         public static void InitMainsButtons()
         {
-            if (KeyManager.IsAuthed)
+            if (!KeyManager.IsAuthed) return;
+            QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
+            ExploitsMenu.InitButtons(2f);
+            WorldsCheats.InitButtons(4f);
+            AdminMenu.InitButtons(8f);
+            DevMenu.InitButtons(10f);
+
+            ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", new Action(() => { Bools.IsDebugMode = true; }), "Debug Console OFF", new Action(() => { Bools.IsDebugMode = false; }), "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+
+            // Top Right Buttons
+            CopyIDButton = new QMSingleButton(AstroClient, 5, -1, "Copy\nInstance ID", delegate () { Clipboard.SetText($"{WorldUtils.GetFullID()}"); }, "Copy the ID of the current instance.", null, null, true);
+            JoinInstanceButton = new QMSingleButton(AstroClient, 5, -0.5f, "Join\nInstance", delegate () { new PortalInternal().Method_Private_Void_String_String_PDM_0(Clipboard.GetText().Split(':')[0], Clipboard.GetText().Split(':')[1]); }, "Join an instance via your clipboard.", null, null, true);
+            AvatarByIDButton = new QMSingleButton(AstroClient, 5, 0.5f, "Avatar\nBy ID", delegate () { string text = Clipboard.GetText(); if (text.StartsWith("avtr_")) new PageAvatar { field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal { field_Internal_ApiAvatar_0 = new ApiAvatar { id = text } } }.ChangeToSelectedAvatar(); else MelonLogger.Error("Clipboard does not contains Avatar ID!"); }, "Alows you to change into a public avatar with its id.", null, null, true);
+            ReloadAvatarsButton = new QMSingleButton(AstroClient, 5, 1f, "Reload\nAvatars", () => { AvatarMods.AvatarUtils.Reload_All_Avatars(); }, "Reloads All Avatars", null, null, true);
+
+            // Protections
+            QMNestedButton protectionsButton = new QMNestedButton(AstroClient, 4, 2f, "Protections", "Protections Menu", null, Color.yellow, null, null, true);
+
+            QMSingleToggleButton toggleBlockRPC = new QMSingleToggleButton(protectionsButton, 2, 0, "RPC Block", () => { Bools.BlockRPC = true; }, "RPC Block", () => { Bools.BlockRPC = false; }, "Toggle RPC Blocking", Color.green, Color.red, null, Bools.BlockRPC, true);
+            toggleBlockRPC.SetToggleState(Bools.BlockRPC, false);
+
+            QMSingleToggleButton toggleBlockUdon = new QMSingleToggleButton(protectionsButton, 3, 0, "Udon Block", () => { Bools.BlockUdon = true; }, "Udon Block", () => { Bools.BlockUdon = false; }, "Toggle Udon Blocking", Color.green, Color.red, null, Bools.BlockRPC, true);
+            toggleBlockUdon.SetToggleState(Bools.BlockUdon, false);
+
+            QMSingleToggleButton toggleAntiPortal = new QMSingleToggleButton(protectionsButton, 4, 2.5f, "Anti Portal", () => { Bools.AntiPortal = true; }, "Anti Portal", () => { Bools.AntiPortal = false; }, "Stops you from entering portals.", Color.green, Color.red, null, Bools.AntiPortal, true);
+            toggleAntiPortal.SetToggleState(Bools.AntiPortal, false);
+
+            // Misc
+            SkyboxEditor.CustomSkyboxesMenu(AstroClient, 1, 0, true);
+            LightControl.InitButtons(AstroClient, 1, 0.5f, true);
+            AvatarModifier.InitQMMenu(AstroClient, 1, 1, true);
+            GameObjectMenu.InitButtons(AstroClient, 1, 1.5f, true);
+            EmojiUtils.InitButton(AstroClient, 1, 2, true); // TODO : Rewrite
+            if (Bools.IsDeveloper)
             {
-                QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
-                ExploitsMenu.InitButtons(2f);
-                WorldsCheats.InitButtons(4f);
-                AdminMenu.InitButtons(8f);
-                DevMenu.InitButtons(10f);
-
-                ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", new Action(() => { Bools.IsDebugMode = true; }), "Debug Console OFF", new Action(() => { Bools.IsDebugMode = false; }), "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-                
-                // Top Right Buttons
-                CopyIDButton = new QMSingleButton(AstroClient, 5, -1, "Copy\nInstance ID", delegate () { Clipboard.SetText($"{WorldUtils.GetFullID()}"); }, "Copy the ID of the current instance.", null, null, true);
-                JoinInstanceButton = new QMSingleButton(AstroClient, 5, -0.5f, "Join\nInstance", delegate () { new PortalInternal().Method_Private_Void_String_String_PDM_0(Clipboard.GetText().Split(':')[0], Clipboard.GetText().Split(':')[1]); }, "Join an instance via your clipboard.", null, null, true);
-                AvatarByIDButton = new QMSingleButton(AstroClient, 5, 0.5f, "Avatar\nBy ID", delegate () { string text = Clipboard.GetText(); if (text.StartsWith("avtr_")) new PageAvatar { field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal { field_Internal_ApiAvatar_0 = new ApiAvatar { id = text } } }.ChangeToSelectedAvatar(); else MelonLogger.Error("Clipboard does not contains Avatar ID!"); }, "Alows you to change into a public avatar with its id.", null, null, true);
-                ReloadAvatarsButton = new QMSingleButton(AstroClient, 5, 1f, "Reload\nAvatars", () => { AvatarUtils.Reload_All_Avatars(); }, "Reloads All Avatars", null, null, true);
-
-                // Protections
-                QMNestedButton protectionsButton = new QMNestedButton(AstroClient, 4, 2f, "Protections", "Protections Menu", null, Color.yellow, null, null, true);
-
-                QMSingleToggleButton toggleBlockRPC = new QMSingleToggleButton(protectionsButton, 2, 0, "RPC Block", () => { Bools.BlockRPC = true; }, "RPC Block", () => { Bools.BlockRPC = false; }, "Toggle RPC Blocking", Color.green, Color.red, null, Bools.BlockRPC, true);
-                toggleBlockRPC.SetToggleState(Bools.BlockRPC, false);
-
-                QMSingleToggleButton toggleBlockUdon = new QMSingleToggleButton(protectionsButton, 3, 0, "Udon Block", () => { Bools.BlockUdon = true; }, "Udon Block", () => { Bools.BlockUdon = false; }, "Toggle Udon Blocking", Color.green, Color.red, null, Bools.BlockRPC, true);
-                toggleBlockUdon.SetToggleState(Bools.BlockUdon, false);
-
-                QMSingleToggleButton toggleAntiPortal = new QMSingleToggleButton(protectionsButton, 4, 2.5f, "Anti Portal", () => { Bools.AntiPortal = true; }, "Anti Portal", () => { Bools.AntiPortal = false; }, "Stops you from entering portals.", Color.green, Color.red, null, Bools.AntiPortal, true);
-                toggleAntiPortal.SetToggleState(Bools.AntiPortal, false);
-
-                // Misc
-                SkyboxEditor.CustomSkyboxesMenu(AstroClient, 1, 0, true);
-                LightControl.InitButtons(AstroClient, 1, 0.5f, true);
-                AvatarModifier.InitQMMenu(AstroClient, 1, 1, true);
-                GameObjectMenu.InitButtons(AstroClient, 1, 1.5f, true);
-                EmojiUtils.InitButton(AstroClient, 1, 2, true); // TODO : Rewrite
-                if (Bools.IsDeveloper)
-                {
-                    MapEditorMenu.InitButtons(AstroClient, 1, 2.5f, true);
-                }
-                WorldPickupsBtn.InitButtons(AstroClient, 2, 0, true);
-                ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
-
-                Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
-                CameraTweaker.InitQMMenu(AstroClient, 3, 0.5f, true);
-
-                SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
+                MapEditorMenu.InitButtons(AstroClient, 1, 2.5f, true);
             }
+            WorldPickupsBtn.InitButtons(AstroClient, 2, 0, true);
+            ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
+
+            Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
+            CameraTweaker.InitQMMenu(AstroClient, 3, 0.5f, true);
+
+            SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
         }
     }
 }

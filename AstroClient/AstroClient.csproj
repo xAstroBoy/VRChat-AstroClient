@@ -126,11 +126,9 @@
     <Compile Include="Experiments\CameraTweaker.cs" />
     <Compile Include="Exploits\Exploit_Exts\Teleport_Ext.cs" />
     <Compile Include="Exploits\TeleportExploit.cs" />
-    <Compile Include="Extensions\Avatar_Utils_ext.cs" />
     <Compile Include="Extensions\Button_strings_ext.cs" />
     <Compile Include="Extensions\Buttons_ext.cs" />
     <Compile Include="Extensions\Click_ext.cs" />
-    <Compile Include="Extensions\Coding_ext.cs" />
     <Compile Include="Extensions\Collider_ext.cs" />
     <Compile Include="Extensions\Components_exts\Rocket_ext.cs" />
     <Compile Include="Extensions\Components_exts\Bouncer_ext.cs" />
