@@ -87,7 +87,6 @@
         {
             if (AvatarManagerCookie.CurrentManager == null || assetPtr == IntPtr.Zero)
             {
-                ModConsole.Log($"AvatarCookieManager: {AvatarManagerCookie.CurrentManager?.name.ToString()}, {assetPtr}");
                 return originalInstantiateDelegate(assetPtr, pos, rot, allowCustomShaders, isUI, validate, nativeMethodPointer);
             }
 
