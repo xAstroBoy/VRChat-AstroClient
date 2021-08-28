@@ -74,7 +74,7 @@
             Name = self.GetDisplayName();
             UserID = self.GetUserID();
 
-            MiscUtility.DelayFunction(2f, () =>
+			MiscUtils.DelayFunction(2f, () =>
             {
                 Initialized = true;
                 SendClientInfo();

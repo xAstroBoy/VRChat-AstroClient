@@ -181,7 +181,7 @@
 
             list.RenderElement(foundAvatars);
 
-            MiscUtility.DelayFunction(4f, () =>
+			MiscUtils.DelayFunction(4f, () =>
             {
                 foreach (var item in list.UiVRCList.pickers)
                 {

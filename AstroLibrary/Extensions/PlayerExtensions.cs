@@ -1,6 +1,5 @@
 ﻿namespace AstroLibrary.Extensions
 {
-	using AstroLibrary.Managers;
 	using AstroLibrary.Utility;
 	using UnityEngine;
 	using VRC;

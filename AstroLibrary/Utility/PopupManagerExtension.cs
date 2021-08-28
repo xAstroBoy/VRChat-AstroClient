@@ -68,7 +68,7 @@ namespace AstroLibrary.Utility
 		public static void AskInGameInput(this VRCUiPopupManager instance, string title, string okButtonName, Action<string> onSuccess, string def = null)
 		{
 			IsTyping = true;
-			MiscUtility.DelayFunction(15, delegate { IsTyping = false; });
+			MiscUtils.DelayFunction(15, delegate { IsTyping = false; });
 			instance.InputPopUp(title, okButtonName, new Action<string>((g) =>
 			{
 				onSuccess(g);

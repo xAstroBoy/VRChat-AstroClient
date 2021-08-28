@@ -353,7 +353,7 @@
                     }
                 }
 
-                MiscUtility.DelayFunction(1, new Action(() =>
+				MiscUtils.DelayFunction(1, new Action(() =>
                 {
                     Clues.Set_Pickup_ESP_Color("87F368");
                     DetectiveGuns.Set_Pickup_ESP_Color("688CF3");
@@ -682,7 +682,7 @@
                 return false;
             }
 
-            MiscUtility.DelayFunction(0.01f, new Action(() =>
+			MiscUtils.DelayFunction(0.01f, new Action(() =>
             {
                 var TargetEvent = UdonSearch.FindUdonEvent(TargetNode, AssignedSelfRole);
                 if (TargetEvent != null)

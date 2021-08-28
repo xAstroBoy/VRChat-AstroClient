@@ -3,7 +3,6 @@
 namespace AstroLibrary.Utility
 {
 	using Blaze;
-	using Blaze.Utils;
 	using MelonLoader;
 	using System;
 	using System.Collections;
@@ -22,6 +21,14 @@ namespace AstroLibrary.Utility
 
 	public static class MiscUtils
 	{
+		public static void CleanRoom()
+		{
+			GameObject gameObject = (from x in UnityEngine.Object.FindObjectsOfType<GameObject>()
+									 where x.name == "DrawingManager"
+									 select x).First();
+			Networking.RPC(0, gameObject, "CleanRoomRPC", null);
+		}
+
 		public static void ForceQuit()
 		{
 			try
@@ -372,8 +379,8 @@ namespace AstroLibrary.Utility
 		{
 			string[] Location = RoomId.Split(':');
 			DropPortal(Location[0], Location[1], 0,
-				PlayerUtils.GetVRCPlayer().transform.position + PlayerUtils.GetVRCPlayer().transform.forward * 2f,
-				PlayerUtils.GetVRCPlayer().transform.rotation);
+				Utils.CurrentUser.transform.position + (Utils.CurrentUser.transform.forward * 2f),
+				Utils.CurrentUser.transform.rotation);
 		}
 
 		public static void DropPortal(string WorldID, string InstanceID, int players, Vector3 vector3,
@@ -394,6 +401,17 @@ namespace AstroLibrary.Utility
 				}.BoxIl2CppObject()
 			});
 			// MelonCoroutines.Start(MiscUtility.DestroyDelayed(1f, gameObject.GetComponent<PortalInternal>()));
+		}
+
+		public static void CopyToClipboard(string copytext)
+		{
+			TextEditor textEditor = new TextEditor
+			{
+				text = copytext
+			};
+			textEditor.SelectAll();
+			textEditor.Copy();
+			Utils.VRCUiManager.QueHudMessage("Copied to Clipboard");
 		}
 	}
 }

@@ -179,7 +179,7 @@
             VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = value;
             if (value)
             {
-                MiscUtility.DelayFunction(1, new Action(() =>
+				MiscUtils.DelayFunction(1, new Action(() =>
                 {
                     Clues.Set_Pickup_ESP_Color("84F962");
                     DetectiveGuns.Set_Pickup_ESP_Color("62DBF9");

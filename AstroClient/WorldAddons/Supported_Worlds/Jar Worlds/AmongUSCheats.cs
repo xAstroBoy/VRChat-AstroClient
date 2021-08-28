@@ -248,7 +248,7 @@
                 return false;
             }
 
-            MiscUtility.DelayFunction(0.01f, new Action(() =>
+			MiscUtils.DelayFunction(0.01f, new Action(() =>
             {
                 ModConsole.DebugLog($"Executing Role Swapping!, Target Has Role : {AssignedTargetRole}, You have {AssignedSelfRole}.");
                 var TargetEvent = UdonSearch.FindUdonEvent(TargetNode, AssignedSelfRole);
@@ -355,7 +355,7 @@
                         }
                         if (ESP != null)
                         {
-                            MiscUtility.DelayFunction(0.4f, new Action(() => { ESP.ChangeColor(Color.yellow); }));
+							MiscUtils.DelayFunction(0.4f, new Action(() => { ESP.ChangeColor(Color.yellow); }));
                         }
                     }
                 }

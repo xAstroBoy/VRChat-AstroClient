@@ -787,13 +787,11 @@
     <Compile Include="Utility\QuickMenuUtils.cs" />
     <Compile Include="Extensions\VRCUiManagerExtension.cs" />
     <Compile Include="Extensions\VRInput.cs" />
-    <Compile Include="Managers\AchievmentsManager.cs" />
     <Compile Include="Managers\Assets.cs" />
     <Compile Include="Managers\AssetsManager.cs" />
     <Compile Include="Managers\ConversionManager.cs" />
     <Compile Include="Managers\CustomJsonTypes.cs" />
     <Compile Include="Managers\ExploitManager.cs" />
-    <Compile Include="Managers\FileManager.cs" />
     <Compile Include="Menu\MenuApi\MenuArrow.cs" />
     <Compile Include="Menu\MenuApi\MenuButtonAPI.cs" />
     <Compile Include="Menu\MenuApi\MenuButtonType.cs" />

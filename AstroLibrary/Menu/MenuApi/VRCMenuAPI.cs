@@ -133,7 +133,7 @@
                 {
                     Il2CppSystem.Object obj = enumerator.Current;
                     Transform btnEnum = obj.Cast<Transform>();
-                    if (btnEnum != null && !MiscUtility.GetPath(btnEnum.gameObject).Contains("TitleText") && !MiscUtility.GetPath(btnEnum.gameObject).Contains("Panel_Header"))
+                    if (btnEnum != null && !MiscUtils_Old.GetPath(btnEnum.gameObject).Contains("TitleText") && !MiscUtils_Old.GetPath(btnEnum.gameObject).Contains("Panel_Header"))
                     {
                         UnityEngine.Object.Destroy(btnEnum.gameObject);
                     }
@@ -160,7 +160,7 @@
                     for (int i = 0; i < Panel.transform.childCount; i++)
                     {
                         var child = Panel.transform.GetChild(i);
-                        if (child != null && !MiscUtility.GetPath(child.gameObject).Contains("TitleText") && !MiscUtility.GetPath(child.gameObject).Contains("Panel_Header"))
+                        if (child != null && !MiscUtils_Old.GetPath(child.gameObject).Contains("TitleText") && !MiscUtils_Old.GetPath(child.gameObject).Contains("Panel_Header"))
                         {
                             child.gameObject.SetActive(value);
                         }
@@ -171,7 +171,7 @@
                 {
                     Il2CppSystem.Object obj = enumerator.Current;
                     Transform btnEnum = obj.Cast<Transform>();
-                    if (btnEnum != null && !MiscUtility.GetPath(btnEnum.gameObject).Contains("TitleText") && !MiscUtility.GetPath(btnEnum.gameObject).Contains("Panel_Header"))
+                    if (btnEnum != null && !MiscUtils_Old.GetPath(btnEnum.gameObject).Contains("TitleText") && !MiscUtils_Old.GetPath(btnEnum.gameObject).Contains("Panel_Header"))
                     {
                         UnityEngine.Object.Destroy(btnEnum.gameObject);
                     }

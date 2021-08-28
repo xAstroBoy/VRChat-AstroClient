@@ -36,7 +36,7 @@
 
         private static Mutex refreshMutex = new Mutex();
 
-        public override void VRChat_OnUiManagerInit()
+		public override void VRChat_OnUiManagerInit()
         {
 			Stopwatch stopwatch = new Stopwatch();
 			stopwatch.Start();

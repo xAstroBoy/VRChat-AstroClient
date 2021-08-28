@@ -225,7 +225,7 @@
 					{
 						Object.Destroy(item);
 					}
-					MiscUtility.DelayFunction(0.5f, () =>
+					MiscUtils.DelayFunction(0.5f, () =>
 					{
 						if (item != null)
 						{
@@ -246,7 +246,7 @@
 					{
 						Object.Destroy(item);
 					}
-					MiscUtility.DelayFunction(0.5f, () =>
+					MiscUtils.DelayFunction(0.5f, () =>
 					{
 						if (item != null)
 						{
@@ -265,7 +265,7 @@
 					{
 						Object.Destroy(item.gameObject);
 					}
-					MiscUtility.DelayFunction(0.5f, () =>
+					MiscUtils.DelayFunction(0.5f, () =>
 					{
 						if (item != null)
 						{
@@ -283,7 +283,7 @@
 					{
 						Object.Destroy(obj);
 					}
-					MiscUtility.DelayFunction(0.5f, () =>
+					MiscUtils.DelayFunction(0.5f, () =>
 					{
 						if (obj != null)
 						{

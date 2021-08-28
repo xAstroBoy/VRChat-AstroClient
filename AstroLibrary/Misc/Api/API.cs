@@ -57,7 +57,7 @@
         {
             if (WorldArray == null)
             {
-                WorldArray = File.ReadAllLines(FileManager.ClientPath + "\\Worlds.txt");
+                //WorldArray = File.ReadAllLines(FileManager.ClientPath + "\\Worlds.txt");
             }
             ModConsole.Log($"[World Travel] Start!");
             for (; ; )

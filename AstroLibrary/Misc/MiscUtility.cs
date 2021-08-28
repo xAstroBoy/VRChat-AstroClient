@@ -15,7 +15,7 @@
 
 	#endregion
 
-	public static class MiscUtility
+	public static class MiscUtils_Old
     {
         public static Vector2 GetButtonPosition(float x, float y)
         {
@@ -355,18 +355,6 @@
             audioSource.playOnAwake = false;
             audioSource.outputAudioMixerGroup = VRCAudioManager.field_Private_Static_VRCAudioManager_0.field_Public_AudioMixerGroup_0;
             return audioSource;
-        }
-
-        public static void DelayFunction(float del, Action action)
-        {
-            MelonLoader.MelonCoroutines.Start(Delay(del, action));
-        }
-
-        private static IEnumerator Delay(float del, Action action)
-        {
-            yield return new WaitForSeconds(del);
-            action.Invoke();
-            yield break;
         }
 
         public class Serialization

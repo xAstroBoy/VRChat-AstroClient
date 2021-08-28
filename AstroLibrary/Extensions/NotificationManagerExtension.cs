@@ -42,7 +42,7 @@
                 if (Utils.QuickMenu.Notification().details.ContainsKey("worldId"))
                 {
                     string World = Utils.QuickMenu.Notification().details["worldId"].ToString();
-                    MiscFunc.ForceJoin(World);
+                    WorldUtils.JoinWorld(World);
                 }
             }
             if (text.Equals("friendRequest"))

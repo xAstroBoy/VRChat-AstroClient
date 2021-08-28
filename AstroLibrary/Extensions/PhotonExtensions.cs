@@ -36,7 +36,7 @@
             => player.field_Public_Player_0;
 
         public static System.Collections.Hashtable GetHashtable(this Photon.Realtime.Player player)
-            => MiscUtility.Serialization.FromIL2CPPToManaged<System.Collections.Hashtable>(player.GetRawHashtable());
+            => MiscUtils_Old.Serialization.FromIL2CPPToManaged<System.Collections.Hashtable>(player.GetRawHashtable());
 
         public static Il2CppSystem.Collections.Hashtable GetRawHashtable(this Photon.Realtime.Player player)
             => player.prop_Hashtable_0;

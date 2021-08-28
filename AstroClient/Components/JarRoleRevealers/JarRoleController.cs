@@ -78,7 +78,7 @@
 
         public override void OnPlayerJoined(Player player)
         {
-            MiscUtility.DelayFunction(0.5f, new Action(() =>
+			MiscUtils.DelayFunction(0.5f, new Action(() =>
             {
                 if (JarRoleLinks.Count() != 0)
                 {

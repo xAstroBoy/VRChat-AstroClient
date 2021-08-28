@@ -4,11 +4,8 @@
 
 	using AstroLibrary.Console;
 	using AstroLibrary.Extensions;
-	using AstroLibrary.Managers;
 	using MelonLoader;
 	using System;
-	using System.Collections;
-	using System.Collections.Generic;
 	using System.Diagnostics;
 	using System.IO;
 	using System.Linq;
@@ -27,22 +24,6 @@
 
 	public class MiscFunc
     {
-        public static void CleanRoom()
-        {
-            GameObject gameObject = (from x in UnityEngine.Object.FindObjectsOfType<GameObject>()
-                                     where x.name == "DrawingManager"
-                                     select x).First();
-            Networking.RPC(0, gameObject, "CleanRoomRPC", null);
-        }
-
-        public static void DropPortal(string RoomId)
-        {
-            string[] Location = RoomId.Split(':');
-            DropPortal(Location[0], Location[1], 0,
-                Utils.CurrentUser.transform.position + (Utils.CurrentUser.transform.forward * 2f),
-                Utils.CurrentUser.transform.rotation);
-        }
-
         public static void DropPortal(string WorldID, string InstanceID, int players, Vector3 vector3,
             Quaternion quaternion)
         {
@@ -126,88 +107,77 @@
             cached.gameObject.SetActive(!state);
         }
 
-        public static void CopyToClipboard(string copytext)
-        {
-			TextEditor textEditor = new TextEditor
-			{
-				text = copytext
-			};
-			textEditor.SelectAll();
-            textEditor.Copy();
-            Utils.VRCUiManager.QueHudMessage("Copied to Clipboard");
-        }
+        //public static void EXECUTEORDER66()
+        //{
+        //    string[] Friends = File.ReadAllLines(FileManager.PathFriends);
+        //    foreach (string line in APIUser.CurrentUser.friendIDs)
+        //        if (!Friends.Contains(line))
+        //        {
+        //            ModConsole.Log("[Friends] Added: " + line);
+        //            File.AppendAllText(FileManager.PathFriends, $"{line},{null},{null}" + Environment.NewLine);
+        //        }
+        //}
 
-        public static void EXECUTEORDER66()
-        {
-            string[] Friends = File.ReadAllLines(FileManager.PathFriends);
-            foreach (string line in APIUser.CurrentUser.friendIDs)
-                if (!Friends.Contains(line))
-                {
-                    ModConsole.Log("[Friends] Added: " + line);
-                    File.AppendAllText(FileManager.PathFriends, $"{line},{null},{null}" + Environment.NewLine);
-                }
-        }
+        //public static void RemoveOrder66(string id)
+        //{
+        //    try
+        //    {
+        //        List<string> Friends = File.ReadAllLines(FileManager.PathFriends).ToList();
+        //        Friends.Remove(id);
+        //        File.Delete(FileManager.PathFriends);
+        //        File.WriteAllLines(FileManager.PathFriends, Friends);
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+		//}
 
-        public static void RemoveOrder66(string id)
-        {
-            try
-            {
-                List<string> Friends = File.ReadAllLines(FileManager.PathFriends).ToList();
-                Friends.Remove(id);
-                File.Delete(FileManager.PathFriends);
-                File.WriteAllLines(FileManager.PathFriends, Friends);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
+        //public static IEnumerator UNEXECUTEORDER66()
+        //{
+        //    string[] Friends = File.ReadAllLines(FileManager.PathFriends);
+        //    Console.WriteLine(
+        //        $"[Friends] About to Send {Friends.Length} Friend Requests. ETC {(Friends.Length * 5) + (Friends.Length / 20 * 75)} Seconds");
+        //    Stopwatch stopwatch = Stopwatch.StartNew();
+        //    int i = 0;
+        //    int requests = 0;
+        //    foreach (string line in Friends)
+        //    {
+        //        if (!line.Contains("usr_")) continue;
+        //        var id = line;
+        //        if (line.Contains(","))
+        //        {
+        //            var split = line.Split(',');
+        //            id = split[0];
+        //        }
+        //        if (!APIUser.IsFriendsWith(id))
+        //        {
+        //            yield return new WaitForSeconds(5);
+        //            ModConsole.Log("[Friends] send a Request to " + id);
+        //            Notification xx = FriendRequest.Create(id);
+        //            Utils.VRCWebSocketsManager.SendNotification(xx);
+        //            i++;
+        //            requests++;
+        //            if (i >= 20)
+        //            {
+        //                i = 0;
+        //                ModConsole.Log("[Friends] Waiting to not get rate limited!");
+        //                yield return new WaitForSeconds(75);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            ModConsole.Error("[Friends] Skipping " + id);
+        //        }
+        //        ModConsole.Log($"[Friends] {(float)requests * 100 / Friends.Length:0.00}%");
+        //    }
 
-        public static IEnumerator UNEXECUTEORDER66()
-        {
-            string[] Friends = File.ReadAllLines(FileManager.PathFriends);
-            Console.WriteLine(
-                $"[Friends] About to Send {Friends.Length} Friend Requests. ETC {(Friends.Length * 5) + (Friends.Length / 20 * 75)} Seconds");
-            Stopwatch stopwatch = Stopwatch.StartNew();
-            int i = 0;
-            int requests = 0;
-            foreach (string line in Friends)
-            {
-                if (!line.Contains("usr_")) continue;
-                var id = line;
-                if (line.Contains(","))
-                {
-                    var split = line.Split(',');
-                    id = split[0];
-                }
-                if (!APIUser.IsFriendsWith(id))
-                {
-                    yield return new WaitForSeconds(5);
-                    ModConsole.Log("[Friends] send a Request to " + id);
-                    Notification xx = FriendRequest.Create(id);
-                    Utils.VRCWebSocketsManager.SendNotification(xx);
-                    i++;
-                    requests++;
-                    if (i >= 20)
-                    {
-                        i = 0;
-                        ModConsole.Log("[Friends] Waiting to not get rate limited!");
-                        yield return new WaitForSeconds(75);
-                    }
-                }
-                else
-                {
-                    ModConsole.Error("[Friends] Skipping " + id);
-                }
-                ModConsole.Log($"[Friends] {(float)requests * 100 / Friends.Length:0.00}%");
-            }
-
-            stopwatch.Stop();
-            Console.WriteLine("=============================");
-            Console.WriteLine(
-                $"Summary:\n with {File.ReadAllLines(FileManager.PathFriends).Length} friends\n Took {stopwatch.Elapsed}");
-            yield break;
-        }
+        //    stopwatch.Stop();
+        //    Console.WriteLine("=============================");
+        //    Console.WriteLine(
+        //        $"Summary:\n with {File.ReadAllLines(FileManager.PathFriends).Length} friends\n Took {stopwatch.Elapsed}");
+        //    yield break;
+        //}
 
         public static void ForceJoin(string roomID)
         {
@@ -327,7 +297,7 @@
                 return;
             }
 
-            DropPortal(user.location);
+            MiscUtils.DropPortal(user.location);
         }
 
         public static void ChangePedestals(string ID)
@@ -461,33 +431,33 @@
                 Networking.SetOwner(Utils.CurrentUser.field_Private_VRCPlayerApi_0, gameObject);
         }
 
-        public static void DownloadAvatar(ApiAvatar avatar)
-        {
-            try
-            {
-                string assetUrl = avatar.assetUrl;
-                string pictureUrl = avatar.imageUrl;
-                using (WebClient webClient = new WebClient())
-                {
-                    webClient.DownloadFileAsync(new Uri(assetUrl), FileManager.VRCAPath + '\\' + avatar.name + ".vrca");
-                }
+        //public static void DownloadAvatar(ApiAvatar avatar)
+        //{
+        //    try
+        //    {
+        //        string assetUrl = avatar.assetUrl;
+        //        string pictureUrl = avatar.imageUrl;
+        //        using (WebClient webClient = new WebClient())
+        //        {
+        //            webClient.DownloadFileAsync(new Uri(assetUrl), FileManager.VRCAPath + '\\' + avatar.name + ".vrca");
+        //        }
 
-                using (WebClient webClient = new WebClient())
-                {
-                    webClient.DownloadFileAsync(new Uri(pictureUrl),
-                        FileManager.VRCAPath + '\\' + avatar.name + ".png");
-                }
+        //        using (WebClient webClient = new WebClient())
+        //        {
+        //            webClient.DownloadFileAsync(new Uri(pictureUrl),
+        //                FileManager.VRCAPath + '\\' + avatar.name + ".png");
+        //        }
 
-                ModConsole.Log("[VRCA] Downloaded " + avatar.name);
-                ModConsole.DebugLog(
-                    "<color=#59D365>VRCA Downloaded</color> <color=yellow>(" + avatar.name + ")</color>");
-            }
-            catch (Exception e)
-            {
-                ModConsole.Error("[VRCA]Download Error");
-                ModConsole.ErrorExc(e);
-            }
-        }
+        //        ModConsole.Log("[VRCA] Downloaded " + avatar.name);
+        //        ModConsole.DebugLog(
+        //            "<color=#59D365>VRCA Downloaded</color> <color=yellow>(" + avatar.name + ")</color>");
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        ModConsole.Error("[VRCA]Download Error");
+        //        ModConsole.ErrorExc(e);
+        //    }
+        //}
 
         public static void InviteALLFriends()
         {

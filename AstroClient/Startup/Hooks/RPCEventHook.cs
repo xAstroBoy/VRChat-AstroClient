@@ -26,7 +26,7 @@
 
         public override void ExecutePriorityPatches()
         {
-            MiscUtility.DelayFunction(1f, new Action(() =>
+            MiscUtils.DelayFunction(1f, new Action(() =>
             {
                 InitPatches();
             }));

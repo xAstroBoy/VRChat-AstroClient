@@ -34,7 +34,7 @@
 			front.transform.rotation = gameObject.transform.rotation;
 			front.transform.localScale = new Vector3(1f, 1f, 1f);
 
-			MiscUtility.DelayFunction(0.2f, () => {
+			MiscUtils.DelayFunction(0.2f, () => {
 				var AstroTrigger = front.AddComponent<VRC_AstroUdonTrigger>();
 				if (AstroTrigger != null)
 				{
