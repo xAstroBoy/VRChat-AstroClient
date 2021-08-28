@@ -44,6 +44,8 @@
             _ = new QMSingleButton(menu, 4, 0, "All Pickups Watch player.", new Action(ObjectMiscOptions.AllWorldPickupsWatchTarget), "Make the victim feel observed.", null, null);
 
             var sitMenu = new QMNestedButton(menu, 1, 2, "Sit", "Sit on selected player");
+            _ = new QMSingleButton(menu, 2, 2, "Teleport\nTo\nPlayer", () => { PlayerUtils.GetPlayer().gameObject.transform.position = QuickMenuUtils.GetSelectedPlayer().transform.position; },"Teleport To Player");
+
             _ = new QMSingleButton(sitMenu, 1, 0, "Sit On Head", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.Head); }, "Sit On Head", null, null);
             _ = new QMSingleButton(sitMenu, 2, 1, "Sit On LeftHand", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.LeftHand); }, "Sit On LeftHand", null, null);
             _ = new QMSingleButton(sitMenu, 2, 2, "Sit On RightHand", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.RightHand); }, "Sit On RightHand", null, null);
