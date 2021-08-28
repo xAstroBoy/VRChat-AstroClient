@@ -55,6 +55,10 @@
 
         private static string selectedID;
 
+        private static string lastSearchQuery;
+
+        private static SearchTypes lastSearchType;
+
         public enum SearchTypes
         {
             ALL,
@@ -98,6 +102,7 @@
                 {
                     ModConsole.Log($"Sent Avatar Deletion For: {selectedID}");
                     AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DELETE, selectedID));
+                    Search(lastSearchType, lastSearchQuery);
                 }, 1.45f, 1f);
             }
 
@@ -139,6 +144,9 @@
             {
                 stopwatch = new Stopwatch();
                 stopwatch.Start();
+
+                lastSearchQuery = query;
+                lastSearchType = searchType;
 
                 // Refresh UI
                 foundAvatars.Clear();
