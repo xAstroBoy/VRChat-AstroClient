@@ -152,6 +152,8 @@
 
                 foreach (var chair in chairs)
                 {
+                    if (!chair.enabled) chair.enabled = true;
+                    if (!chair.gameObject.active) chair.gameObject.SetActive(true);
                     chair.FindUdonEvent("Sit")?.ExecuteUdonEvent();
                     yield return null;
                 }
