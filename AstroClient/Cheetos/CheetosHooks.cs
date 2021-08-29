@@ -25,7 +25,7 @@
     using VRC.Core;
 
     #endregion Imports
-
+    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer", Exclude = false)]
     internal class CheetosHooks : GameEvents
     {
         public static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonJoin;
@@ -107,6 +107,7 @@
             yield break;
         }
 
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
         public static async void InitPatch()
         {
             try
