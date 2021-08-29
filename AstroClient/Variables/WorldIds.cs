@@ -32,6 +32,8 @@
 
         public static readonly string JustHParty = "wrld_e5c30b56-efa8-42d5-a8d4-a2cca2bf3403";
 
+        public static readonly string Kmart = "wrld_5ed2b273-8fe9-45a9-b2a9-dd872ef68489";
+
         public static readonly string VoidClub = "wrld_7e10376a-29b6-43af-ac5d-6eb72732e90c";
 
         public static readonly string AimFactory = "wrld_97a21a21-9e5e-4152-b1c6-bc899a041d3f";
