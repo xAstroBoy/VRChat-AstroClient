@@ -18,6 +18,7 @@
             //HookSelectedPlayer();
         }
 
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
         private void HookSelectedPlayer()
         {
             try
