@@ -1,8 +1,11 @@
 ﻿namespace AstroClient.Cheetos
 {
+    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using System;
+    using System.Diagnostics;
+    using System.Text;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
@@ -14,7 +17,11 @@
 
         private Player player;
 
+        private Player self;
+
         private bool initialized;
+
+        public float maxUpdateDistance = 10f;
 
         public NamePlates(IntPtr obj0) : base(obj0)
         {
@@ -22,45 +29,12 @@
 
         private static float RefreshTime;
 
-        private void LowRefresh()
+        public void Start()
         {
-            if (nameplate == null) return;
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
-            var text = $"";
-            if (player.IsInstanceMaster())
-            {
-                text += $"(Owner) ";
-            }
-            text += $"{player.GetPlatformColored()} ";
-            if (player.IsFriend())
-            {
-                text += $"[F] ";
-            }
-            text += $"F:{player.GetFramesColored()}|P:{player.GetPingColored()}";
-            nameplate.SetBackgroundColor(player.GetAPIUser().GetRankColor());
-            nameplate.GetTrustText().text = text;
-            nameplate.GetTrustText().color = Color.white;
-
-            if (player.GetPlatform().Equals("Quest"))
-            {
-                nameplate.GetQuest().gameObject.SetActive(true);
-            }
-        }
-
-        private void HighRefresh()
-        {
-            if (nameplate == null) return;
-
-            nameplate.GetQuickStats().SetActive(true);
-            nameplate.GetSubTextObject().SetActive(true);
-            nameplate.GetFriendIcon().SetActive(player.IsFriend());
-            nameplate.GetPerformanceText().gameObject.SetActive(false);
-            nameplate.GetPerformanceIcon().gameObject.SetActive(false);
-            nameplate.GetTrustIcon().gameObject.SetActive(false);
-        }
-
-        public void LateUpdate()
-        {
+            self = PlayerUtils.GetPlayer();
             player = GetComponent<Player>();
             if (!initialized && player != null && player.GetVRCPlayer() != null)
             {
@@ -71,8 +45,116 @@
                 initialized = true;
             }
 
-            if (RefreshTime >= 0.5f)
+            stopwatch.Stop();
+            if (stopwatch.ElapsedMilliseconds > 0)
             {
+                ModConsole.Log($"Warning: Namplate creation took {stopwatch.ElapsedMilliseconds}ms!");
+            }
+        }
+
+        private void LowRefresh()
+        {
+            if (nameplate == null) return;
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            var stringBuilder = new StringBuilder();
+            if (player.IsInstanceMaster())
+            {
+                stringBuilder.Append($"(Owner) ");
+            }
+            stringBuilder.Append($"{player.GetPlatformColored()} ");
+            if (player.IsFriend())
+            {
+                stringBuilder.Append($"[F] ");
+            }
+            stringBuilder.Append($"F:{player.GetFramesColored()}|P:{player.GetPingColored()}");
+            nameplate.SetBackgroundColor(player.GetAPIUser().GetRankColor());
+            nameplate.GetTrustText().text = stringBuilder.ToString();
+            nameplate.GetTrustText().color = Color.white;
+
+            if (player.GetPlatform().Equals("Quest"))
+            {
+                nameplate.GetQuest().gameObject.SetActive(true);
+            }
+
+            stopwatch.Stop();
+            if (stopwatch.ElapsedMilliseconds > 3)
+            {
+                ModConsole.Log($"Warning: Namplate LowRefresh took {stopwatch.ElapsedMilliseconds}ms!");
+            }
+        }
+
+        private GameObject quickStats;
+        private GameObject subTextObject;
+        private GameObject performanceTextObject;
+        private GameObject performanceIconObject;
+        private GameObject trustIconObject;
+        private void HighRefresh()
+        {
+            if (nameplate == null) return;
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            if (quickStats != null)
+            {
+                if (!quickStats.active) quickStats.SetActive(true);
+            }
+            else
+            {
+                quickStats = nameplate.GetQuickStats();
+            }
+
+            if (subTextObject != null)
+            {
+                if (!subTextObject.active) subTextObject.SetActive(true);
+            }
+            else
+            {
+                subTextObject = nameplate.GetSubTextObject();
+            }
+
+            if (performanceTextObject != null)
+            {
+                if (!performanceTextObject.active) performanceTextObject.SetActive(false);
+            }
+            else
+            {
+                performanceTextObject = nameplate.GetPerformanceText().gameObject;
+            }
+
+            if (performanceIconObject != null)
+            {
+                if (!performanceIconObject.active) performanceIconObject.SetActive(false);
+            }
+            else
+            {
+                performanceIconObject = nameplate.GetPerformanceIcon().gameObject;
+            }
+
+            if (trustIconObject != null)
+            {
+                if (!trustIconObject.active) trustIconObject.SetActive(false);
+            }
+            else
+            {
+                trustIconObject = nameplate.GetTrustIcon().gameObject;
+            }
+
+            stopwatch.Stop();
+            if (stopwatch.ElapsedMilliseconds > 3)
+            {
+                ModConsole.Log($"Warning: Namplate HighRefresh took {stopwatch.ElapsedMilliseconds}ms!");
+            }
+        }
+
+        public void Update()
+        {
+            if (RefreshTime >= 1f)
+            {
+                if (CalculateDistance() > maxUpdateDistance) return;
+
+                HighRefresh();
                 LowRefresh();
                 RefreshTime = 0;
             }
@@ -82,16 +164,22 @@
             }
         }
 
-        public override void OnQuickMenuOpen()
+        public float CalculateDistance()
         {
-            HighRefresh();
-            LowRefresh();
-        }
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
-        public override void OnQuickMenuClose()
-        {
-            HighRefresh();
-            LowRefresh();
+            var pos1 = self.gameObject.transform.position;
+            var pos2 = player.gameObject.transform.position;
+
+            var distance = Vector3.Distance(pos1, pos2);
+
+            stopwatch.Stop();
+            if (stopwatch.ElapsedMilliseconds > 25)
+            {
+                ModConsole.Log($"Warning: Namplate CalculateDistance took {stopwatch.ElapsedMilliseconds}ms!");
+            }
+            return distance;
         }
     }
 

@@ -145,15 +145,16 @@
 
         public void FixedUpdate()
         {
-            if (!WorldUtils.IsInWorld())
-            {
-                IsEnabled = false;
-                return;
-            }
             if (IsEnabled && target == null) DisableOrbit();
 
             if (isEnabled && !isLooping)
             {
+                if (!WorldUtils.IsInWorld())
+                {
+                    DisableOrbit();
+                    return;
+                }
+
                 if (centerPoint == null)
                 {
                     centerPoint = PositionOfBone(target, HumanBodyBones.Head);
@@ -183,6 +184,12 @@
                     rb.isKinematic = true;
                     rb.useGravity = false;
                     rb.detectCollisions = false;
+                }
+                else
+                {
+                    ModConsole.Error("OrbitManager was not able to find pickup's RigidBody!");
+                    DisableOrbit();
+                    yield break;
                 }
 
                 pickup.transform.position = centerPoint.position;

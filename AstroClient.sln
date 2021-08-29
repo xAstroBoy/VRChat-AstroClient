@@ -14,7 +14,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroServer", "AstroServer\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DontTouchMyClient", "DontTouchMyClient\DontTouchMyClient.csproj", "{F41EC84C-6465-4449-B2F6-79535171265B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroInjector", "AstroLoader\AstroInjector.csproj", "{2BAFFC37-7A0E-4589-BAA0-8F4E2C318747}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroInjector", "AstroInjector\AstroInjector.csproj", "{2BAFFC37-7A0E-4589-BAA0-8F4E2C318747}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroNetworkingLibrary", "AstroNetworkingLibrary\AstroNetworkingLibrary.csproj", "{A98C1060-6804-4551-9CEC-8FD8FFC7D98C}"
 EndProject

@@ -565,11 +565,11 @@ namespace AstroLibrary.Utility
         {
             if (instance.prop_VRCPlayerApi_0.IsUserInVR())
             {
-                return instance.GetPlatform() != "VR" ? "<color=#1aff00>(Q)</color>" : "<color=grey>(V)</color>";
+                return instance.GetPlatform() != "VR" ? "<color=#1aff00>[Q]</color>" : "<color=grey>[V]</color>";
             }
             else
             {
-                return "<color=grey>(D)</color>";
+                return "<color=grey>[D]</color>";
             }
         }
 

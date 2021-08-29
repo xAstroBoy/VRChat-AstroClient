@@ -32,7 +32,7 @@
     <OutputPath>D:\Steam Library\steamapps\common\VRChat\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <NoWarn>CS0169;CS0472</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>

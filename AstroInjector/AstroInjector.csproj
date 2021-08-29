@@ -27,12 +27,13 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>true</Optimize>
     <OutputPath>D:\Steam Library\steamapps\common\VRChat\plugins\</OutputPath>
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>8.0</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_Offline|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -108,7 +109,7 @@
     <Compile Include="..\AstroNetworkingLibrary\Serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
-    <Compile Include="AstroLoader.cs" />
+    <Compile Include="AstroInjector.cs" />
     <Compile Include="CheetosHelpers.cs" />
     <Compile Include="Networking\AstroNetworkLoader.cs" />
     <Compile Include="BuildInfo.cs" />
