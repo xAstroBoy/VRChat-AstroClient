@@ -11,25 +11,8 @@
 		public override void OnApplicationStart()
 		{
 			ModConsole.Initialize("CheetoClient");
-			var harmony = new Harmony("CheetoClient");
-			harmony.PatchAll(Assembly.GetExecutingAssembly());
-
-			foreach (var method in harmony.GetPatchedMethods())
-			{
-				ModConsole.Log($"Patched: {method.Name}");
-			}
-
-			ModConsole.Log("CheetoClient Initialized");
-
-			PrintNestedTypes(typeof(VRCUiCursor));
+			ModConsole.Log("Congratulations, you now have the most useless client!");
 		}
 
-		public static void PrintNestedTypes<T>(T type) where T : Type
-		{
-			foreach (var t in type.GetNestedTypes())
-			{
-				ModConsole.Log($"{type.Name} has nested Type {t.Name}");
-			}
-		}
 	}
 }
