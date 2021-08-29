@@ -11,7 +11,6 @@
 
     public class MenuButton
     {
-        private Color SavedColor;
         public GameObject Button;
         public GameObject UserInfoPage;
         public GameObject AvatarPage;

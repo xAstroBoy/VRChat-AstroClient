@@ -23,6 +23,7 @@
     using UnityEngine;
     using VRC;
     using VRC.Core;
+    using VRC.SDKBase;
 
     #endregion Imports
 
@@ -32,9 +33,15 @@
 
         public static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonLeft;
 
+        public static EventHandler<EventArgs> Event_OnAvatarPageOpen;
+
+        public static EventHandler<EventArgs> Event_OnQuickMenuOpen;
+
+        public static EventHandler<EventArgs> Event_OnQuickMenuClose;
+
         public class Patch
         {
-            private static List<Patch> Patches = new List<Patch>();
+            public static List<Patch> Patches = new List<Patch>();
             public MethodInfo TargetMethod { get; set; }
             public HarmonyMethod PrefixMethod { get; set; }
             public HarmonyMethod PostfixMethod { get; set; }
@@ -111,14 +118,18 @@
         {
             try
             {
-                ModConsole.Log("[AstroClient Cheetos Patches] Start. . .");
-
+                ModConsole.Log("[Cheetos Patches] Appying Patches.");
                 new Patch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_0)), GetPatch(nameof(OnAvatarDownload)));
                 new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
                 new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.ConfigurePortal)), GetPatch(nameof(OnConfigurePortal)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.Method_Public_Void_0)), GetPatch(nameof(OnEnterPortal)));
-                //new Patch(typeof(APIUser).GetMethod(nameof(APIUser.developerType)), null, GetPatch(nameof(APIUserBypass3)));
+                new Patch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Private_Void_Boolean_0)), GetPatch(nameof(QuickMenuPatch)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasVeteranTrustLevel)).GetMethod, GetPatch(nameof(APIUserBypass)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasLegendTrustLevel)).GetMethod, GetPatch(nameof(APIUserBypass)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canPublishAvatars)).GetMethod, GetPatch(nameof(APIUserBypass)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canPublishWorlds)).GetMethod, GetPatch(nameof(APIUserBypass)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canPublishAllContent)).GetMethod, GetPatch(nameof(APIUserBypass)));
                 new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canSeeAllUsersStatus)).GetMethod, GetPatch(nameof(APIUserBypass)));
                 new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasModerationPowers)).GetMethod, GetPatch(nameof(APIUserBypass)));
                 new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasScriptingAccess)).GetMethod, GetPatch(nameof(APIUserBypass)));
@@ -128,6 +139,11 @@
                 new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.isSupporter)).GetMethod, GetPatch(nameof(APIUserBypass)));
                 new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canSetStatusOffline)).GetMethod, GetPatch(nameof(APIUserBypass)));
                 new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasNoPowers)).GetMethod, GetPatch(nameof(APIUserBypass2)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.developerType)).GetMethod, GetPatch(nameof(APIUserBypass3)));
+                new Patch(AccessTools.Property(typeof(VRCPlayerApi), nameof(VRCPlayerApi.isInstanceOwner)).GetMethod, GetPatch(nameof(VRCPlayerApiBypass)));
+                new Patch(AccessTools.Property(typeof(VRCPlayerApi), nameof(VRCPlayerApi.isMaster)).GetMethod, GetPatch(nameof(VRCPlayerApiBypass)));
+                new Patch(AccessTools.Property(typeof(VRCPlayerApi), nameof(VRCPlayerApi.isModerator)).GetMethod, GetPatch(nameof(VRCPlayerApiBypass)));
+                new Patch(AccessTools.Property(typeof(VRCPlayerApi), nameof(VRCPlayerApi.isSuper)).GetMethod, GetPatch(nameof(VRCPlayerApiBypass)));
                 new Patch(AccessTools.Property(typeof(Time), nameof(Time.smoothDeltaTime)).GetMethod, null, GetPatch(nameof(SpoofFPS)));
                 new Patch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
                 new Patch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
@@ -135,10 +151,10 @@
                 // Experiments
                 new Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.Method_Public_Boolean_String_Object_Boolean_PDM_0)), GetPatch(nameof(LoadBalancingClient_OpWebRpc)));
 
-                ModConsole.Log("[Client Cheetos Patches] DONE!");
+                ModConsole.Log($"[Cheetos Patches] Done patching {Patch.Patches.Count} methods!");
                 Patch.DoPatches();
             }
-            catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
+            catch (Exception e) { ModConsole.Error("[Cheetos Patches] Error in applying patches : " + e); }
             finally { }
         }
 
@@ -158,6 +174,14 @@
             return true;
         }
 
+        private static void VRCPlayerApiBypass(VRCPlayerApi __instance, ref bool __result)
+        {
+            if (__instance.playerId.Equals(PlayerUtils.GetPlayer().UserID()))
+            {
+                __result = true;
+            }
+        }
+
         private static void APIUserBypass(APIUser __instance, ref bool __result)
         {
             if (__instance.IsSelf)
@@ -174,9 +198,31 @@
             }
         }
 
+        private static void APIUserBypass3(APIUser __instance, ref APIUser.DeveloperType __result)
+        {
+            if (__instance.IsSelf)
+            {
+                __result = APIUser.DeveloperType.Moderator;
+            }
+        }
+
+        private static bool QuickMenuPatch(ref QuickMenu __instance, ref bool __0)
+        {
+            if (!__0)
+            {
+                Event_OnQuickMenuOpen.Invoke(__instance, new EventArgs());
+            }
+            else
+            {
+                Event_OnQuickMenuClose.Invoke(__instance, new EventArgs());
+            }
+
+            return true;
+        }
+
         private static bool OnConfigurePortal(PortalInternal __instance, ref string __0, ref string __1, ref int __2, ref VRC.Player __3)
         {
-            ModConsole.Log($"Portal Spawned: {__0}, {__1}, {__2}, {__3.DisplayName()}");
+            ModConsole.Log($"Portal Spawned: {__instance.name}: {__0}, {__1}, {__2}, {__3.DisplayName()}");
             return true;
         }
 
@@ -184,12 +230,12 @@
         {
             if (Bools.AntiPortal)
             {
-                ModConsole.Log("Portal Entry Blocked!");
+                ModConsole.Log($"{__instance.name}: Portal Entry Blocked!");
                 return false;
             }
             else
             {
-                ModConsole.Log($"Portal Entered");
+                ModConsole.Log($"{__instance.name}: Portal Entered");
                 return true;
             }
         }
@@ -303,6 +349,11 @@
             {
                 ModConsole.Error($"[Photon] OnPhotonPlayerLeft Failed! __0 was null.");
             }
+        }
+
+        private static void OnGameObjectSetActive(GameObject __instance, ref bool __0)
+        {
+            ModConsole.Log($"GameObject.SetActive: {__instance.name}, {__0}");
         }
     }
 }

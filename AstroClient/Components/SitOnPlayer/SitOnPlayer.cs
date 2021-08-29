@@ -1,4 +1,4 @@
-﻿namespace AstroClient.Components.SitOnPlayer
+﻿namespace AstroClient.Components
 {
     using AstroLibrary.Utility;
     using Blaze.Utils;

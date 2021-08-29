@@ -45,7 +45,7 @@
 
         #region Behaviour
 
-        public OrbitManager Instance = null;
+        public OrbitManager_Old Instance = null;
 
         public Quaternion FirstRotation = Quaternion.identity;
         public Vector3 FirstPosition = Vector3.zero;
@@ -89,7 +89,7 @@
             {
                 pickup = obj.AddComponent<PickupController>();
             }
-            OrbitManager.Register(this);
+            OrbitManager_Old.Register(this);
             //OnlineEditor.TakeObjectOwnership(obj);
         }
 
@@ -178,7 +178,7 @@
         {
             GameObjectMenu.RestoreOriginalLocation(obj, false);
             OnlineEditor.RemoveOwnerShip(obj);
-            OrbitManager.RemoveFromList(obj);
+            OrbitManager_Old.RemoveFromList(obj);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

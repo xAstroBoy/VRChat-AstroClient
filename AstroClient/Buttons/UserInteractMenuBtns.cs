@@ -2,13 +2,13 @@
 {
     using AstroClient.AvatarMods;
     using AstroClient.Cheetos;
-    using AstroClient.Components.SitOnPlayer;
+    using AstroClient.Components;
     using AstroClient.Variables;
     using AstroLibrary.Utility;
+    using Finder = AstroLibrary.Finder;
     using RubyButtonAPI;
     using System;
     using UnityEngine;
-    using Finder = AstroLibrary.Finder;
 
     internal class UserInteractMenuBtns : GameEvents
     {
@@ -45,6 +45,9 @@
 
             var sitMenu = new QMNestedButton(menu, 1, 2, "Sit", "Sit on selected player");
             _ = new QMSingleButton(menu, 2, 2, "Teleport\nTo\nPlayer", () => { PlayerUtils.GetPlayer().gameObject.transform.position = QuickMenuUtils.GetSelectedPlayer().transform.position; },"Teleport To Player");
+
+            var newOrbitToggle = new QMToggleButton(menu, 3, 2, "Cheetos\nOrbit", () => { OrbitManager.OrbitPlayer(QuickMenuUtils.GetSelectedPlayer()); }, "Cheetos\nOrbit", () => { OrbitManager.DisableOrbit(); }, "Cheetos' WIP Orbit", null, Color.green, Color.red, OrbitManager.IsEnabled);
+            newOrbitToggle.SetToggleState(OrbitManager.IsEnabled);
 
             _ = new QMSingleButton(sitMenu, 1, 0, "Sit On Head", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.Head); }, "Sit On Head", null, null);
             _ = new QMSingleButton(sitMenu, 2, 1, "Sit On LeftHand", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.LeftHand); }, "Sit On LeftHand", null, null);

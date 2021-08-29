@@ -11,7 +11,6 @@
 
     public static class Custom_Components_ext
     {
-        // TODO: Categorize and reorder!
         public static void MakeRocketItemWithG(this GameObject obj)
         {
             RocketManager.AddObject(obj, false);
@@ -326,7 +325,7 @@
                 var Self = Utils.LocalPlayer.GetPlayer();
                 if (obj != null && Self != null)
                 {
-                    OrbitManager.AddOrbitObject(obj, Self);
+                    OrbitManager_Old.AddOrbitObject(obj, Self);
                 }
             }
         }
@@ -335,7 +334,7 @@
         {
             if (obj != null)
             {
-                OrbitManager.AddOrbitObject(obj, TargetSelector.CurrentTarget);
+                OrbitManager_Old.AddOrbitObject(obj, TargetSelector.CurrentTarget);
             }
         }
 
@@ -386,7 +385,7 @@
                 var Self = Utils.LocalPlayer.GetPlayer();
                 if (obj != null && Self != null)
                 {
-                    OrbitManager.AddOrbitObject(obj, Self);
+                    OrbitManager_Old.AddOrbitObject(obj, Self);
                 }
             }
         }
@@ -395,7 +394,7 @@
         {
             foreach (var obj in list.Where(obj => obj != null).Where(obj => obj != null))
             {
-                OrbitManager.AddOrbitObject(obj, TargetSelector.CurrentTarget);
+                OrbitManager_Old.AddOrbitObject(obj, TargetSelector.CurrentTarget);
             }
         }
 

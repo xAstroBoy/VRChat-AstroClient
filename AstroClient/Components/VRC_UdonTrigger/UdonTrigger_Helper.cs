@@ -4,9 +4,7 @@
 
     class UdonTrigger_Helper
     {
-
         private static SerializedUdonProgramAsset _OnInteractUdonProgramEvent;
-
 
         public static SerializedUdonProgramAsset OnInteractUdonProgramEvent
         {

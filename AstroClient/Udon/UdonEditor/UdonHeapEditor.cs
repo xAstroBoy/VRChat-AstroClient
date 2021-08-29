@@ -19,7 +19,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, Single value, bool verify = false)
+        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, float value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -55,7 +55,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UInt32 value, bool verify = false)
+        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, uint value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -67,7 +67,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, Int32 value, bool verify = false)
+        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, int value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -79,7 +79,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, Int64 value, bool verify = false)
+        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, long value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -393,7 +393,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, Single value, bool verify = false)
+        public static void PatchHeap(IUdonHeap heap, uint address, float value, bool verify = false)
         {
             if (heap != null)
             {
@@ -468,7 +468,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UInt32 value, bool verify = false)
+        public static void PatchHeap(IUdonHeap heap, uint address, uint value, bool verify = false)
         {
             if (heap != null)
             {
@@ -493,7 +493,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, Int32 value, bool verify = false)
+        public static void PatchHeap(IUdonHeap heap, uint address, int value, bool verify = false)
         {
             if (heap != null)
             {
@@ -518,7 +518,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, Int64 value, bool verify = false)
+        public static void PatchHeap(IUdonHeap heap, uint address, long value, bool verify = false)
         {
             if (heap != null)
             {

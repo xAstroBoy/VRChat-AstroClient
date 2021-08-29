@@ -30,7 +30,7 @@
         public bool AllowOverStepping = false;
         public bool IgnoreEverything = false;
 
-        public QMScrollMenu(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action<QMScrollMenu> MenuOpenAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
+        public QMScrollMenu(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, System.Action<QMScrollMenu> MenuOpenAction, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, Color? backbtnBackgroundColor = null, Color? backbtnTextColor = null, bool btnHalf = false)
         {
             BaseMenu = new QMNestedButton(btnMenu, btnXLocation, btnYLocation, btnText, btnToolTip, btnBackgroundColor, btnTextColor, backbtnBackgroundColor, backbtnTextColor);
             SetAction(MenuOpenAction);

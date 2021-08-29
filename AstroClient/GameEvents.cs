@@ -39,6 +39,8 @@
 
             CheetosHooks.Event_OnPhotonJoin += Internal_OnPhotonPlayerJoined;
             CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
+            CheetosHooks.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
+            CheetosHooks.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
 
             QuickMenuHooks.Event_OnPlayerSelected += Internal_OnPlayerSelected;
 
@@ -83,6 +85,16 @@
         private void Internal_OnPlayerJoined(object sender, PlayerEventArgs e)
         {
             OnPlayerJoined(e.player);
+        }
+
+        private void Internal_OnQuickMenuOpen(object sender, EventArgs e)
+        {
+            OnQuickMenuOpen();
+        }
+
+        private void Internal_OnQuickMenuClose(object sender, EventArgs e)
+        {
+            OnQuickMenuClose();
         }
 
         private void Internal_OnPhotonPlayerLeft(object sender, PhotonPlayerEventArgs e)
@@ -176,6 +188,14 @@
         }
 
         public virtual void OnPhotonJoined(Photon.Realtime.Player player)
+        {
+        }
+
+        public virtual void OnQuickMenuOpen()
+        {
+        }
+
+        public virtual void OnQuickMenuClose()
         {
         }
 

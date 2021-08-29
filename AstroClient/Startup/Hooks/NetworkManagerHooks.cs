@@ -76,7 +76,7 @@
                 SeenFire = true;
             }
 
-            (AFiredFirst ? OnLeave : OnJoin)?.Invoke(player);
+    (AFiredFirst ? OnLeave : OnJoin)?.Invoke(player);
         }
 
         public static void Initialize()

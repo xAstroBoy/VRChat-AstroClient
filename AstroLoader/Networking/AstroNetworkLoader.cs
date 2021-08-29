@@ -1,4 +1,4 @@
-﻿namespace AstroLoader
+﻿namespace AstroInjector
 {
     #region Imports
 

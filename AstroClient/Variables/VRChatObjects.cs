@@ -1,11 +1,9 @@
 ﻿namespace AstroClient.Variables
 {
-    using AstroClient.Variables;
     using AstroLibrary.Finder;
     using UnityEngine;
-    using AstroLibrary.Extensions;
-    using AstroClient.Components;
-    public class VRChatObjects : GameEvents
+
+    public class VRChatObjects_Old : GameEvents
     {
 
         public override void VRChat_OnUiManagerInit()
@@ -24,9 +22,6 @@
                 }
             }
         }
-
-
-
 
         private static GameObject _ScreenFade;
 

@@ -1,11 +1,11 @@
-﻿namespace AstroLoader
+﻿namespace AstroInjector
 {
-    using AstroClient.Cheetos;
+    using global::AstroInjector.Cheetos;
     using MelonLoader;
     using System;
     using System.Reflection;
 
-    public class AstroLoader : MelonPlugin
+    public class AstroInjector : MelonPlugin
     {
 #if DEBUG
 
@@ -31,11 +31,11 @@
 
         public static string[] EmbededLibraryPaths =
         {
-            @"AstroLoader.Resources.Newtonsoft.Json.dll",
-            @"AstroLoader.Resources.Newtonsoft.Json.Bson.dll",
+            @"AstroInjector.Resources.Newtonsoft.Json.dll",
+            @"AstroInjector.Resources.Newtonsoft.Json.Bson.dll",
         };
 
-        public AstroLoader()
+        public AstroInjector()
         {
             LoadEmbeddedLibraries();
 

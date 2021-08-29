@@ -1,8 +1,10 @@
 ﻿namespace AstroClient
 {
+    using AstroClient.Cheetos;
     using AstroClient.Startup.Hooks;
     using AstroClientCore.Events;
     using System;
+    using System.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
@@ -19,6 +21,12 @@
             TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += Internal_VRC_EventDispatcherRFC_triggerEvent;
             AvatarManagerHook.Event_OnAvatarSpawn += Internal_OnAvatarSpawn;
             RPCEventHook.Event_OnUdonSyncRPC += Internal_OnUdonSyncRPCEvent;
+            OnWorldRevealHook.Event_OnWorldReveal += Internal_OnWorldReveal;
+
+            CheetosHooks.Event_OnPhotonJoin += Internal_OnPhotonPlayerJoined;
+            CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
+            CheetosHooks.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
+            CheetosHooks.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
         }
 
         private void Internal_OnLevelLoaded(object sender, EventArgs e)
@@ -63,6 +71,36 @@
         }
 
         [HideFromIl2Cpp]
+        private void Internal_OnQuickMenuOpen(object sender, EventArgs e)
+        {
+            OnQuickMenuOpen();
+        }
+
+        [HideFromIl2Cpp]
+        private void Internal_OnQuickMenuClose(object sender, EventArgs e)
+        {
+            OnQuickMenuClose();
+        }
+
+        [HideFromIl2Cpp]
+        private void Internal_OnPhotonPlayerLeft(object sender, PhotonPlayerEventArgs e)
+        {
+            OnPhotonLeft(e.player);
+        }
+
+        [HideFromIl2Cpp]
+        private void Internal_OnPhotonPlayerJoined(object sender, PhotonPlayerEventArgs e)
+        {
+            OnPhotonJoined(e.player);
+        }
+
+        [HideFromIl2Cpp]
+        private void Internal_OnWorldReveal(object sender, OnWorldRevealArgs e)
+        {
+            OnWorldReveal(e.ID, e.Name, e.WorldTags, e.AssetUrl);
+        }
+
+        [HideFromIl2Cpp]
         public virtual void OnPlayerLeft(Player player)
         {
         }
@@ -94,6 +132,31 @@
 
         [HideFromIl2Cpp]
         public virtual void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        {
+        }
+
+        [HideFromIl2Cpp]
+        public virtual void OnPhotonLeft(Photon.Realtime.Player player)
+        {
+        }
+
+        [HideFromIl2Cpp]
+        public virtual void OnPhotonJoined(Photon.Realtime.Player player)
+        {
+        }
+
+        [HideFromIl2Cpp]
+        public virtual void OnQuickMenuOpen()
+        {
+        }
+
+        [HideFromIl2Cpp]
+        public virtual void OnQuickMenuClose()
+        {
+        }
+
+        [HideFromIl2Cpp]
+        public virtual void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
         }
     }

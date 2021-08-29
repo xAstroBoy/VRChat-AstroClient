@@ -1,4 +1,4 @@
-﻿namespace AstroClient.Cheetos
+﻿namespace AstroInjector.Cheetos
 {
     #region Imports
 

@@ -1,13 +1,16 @@
 ﻿namespace AstroClient.Startup
 {
+    #region Imports
+
     using AstroClient.Cheetos;
     using AstroClient.Components;
-    using AstroClient.Components.SitOnPlayer;
     using AstroClient.Variables;
     using AstroLibrary.Console;
-    using System;
     using System.Collections.Generic;
+    using System;
     using UnhollowerRuntimeLib;
+
+    #endregion
 
     public class ComponentHelper : GameEvents
     {
@@ -72,8 +75,8 @@
 
             if (Bools.AllowOrbitComponent)
             {
-                RegisterComponent<NewOrbitManager>();
                 RegisterComponent<OrbitManager>();
+                RegisterComponent<OrbitManager_Old>();
                 RegisterComponent<Orbit>();
             }
             RegisterComponent<PlayerWatcherManager>();
@@ -105,6 +108,10 @@
             if (Bools.AllowAttackerComponent)
             {
                 PlayerAttackerManager.MakeInstance();
+            }
+            if (Bools.AllowOrbitComponent)
+            {
+                OrbitManager.MakeInstance();
             }
             PlayerWatcherManager.MakeInstance();
         }

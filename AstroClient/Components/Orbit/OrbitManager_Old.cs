@@ -14,7 +14,7 @@
     using static AstroClient.Variables.InstanceBuilder;
     using Color = System.Drawing.Color;
 
-    public class OrbitManager : GameEventsBehaviour
+    public class OrbitManager_Old : GameEventsBehaviour
     {
         #region Internal
 
@@ -22,13 +22,13 @@
         public IntPtr MethodInfo;
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public OrbitManager(IntPtr obj0) : base(obj0)
+        public OrbitManager_Old(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        public OrbitManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<OrbitManager>())
+        public OrbitManager_Old(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<OrbitManager_Old>())
         {
             ClassInjector.DerivedConstructorBody(this);
 
@@ -36,7 +36,7 @@
             MethodInfo = methodInfo;
         }
 
-        ~OrbitManager()
+        ~OrbitManager_Old()
         {
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
@@ -64,7 +64,7 @@
             {
                 string name = "OrbitManager";
                 var gameobj = GetInstanceHolder(name);
-                Instance = gameobj.AddComponent<OrbitManager>();
+                Instance = gameobj.AddComponent<OrbitManager_Old>();
                 DontDestroyOnLoad(gameobj);
                 if (Instance != null)
                 {
@@ -209,7 +209,7 @@
 
         private static List<GameObject> _OrbitObjects = new List<GameObject>();
         private static List<GameObject> OrbitObjects;
-        public static OrbitManager Instance { get; set; }
+        public static OrbitManager_Old Instance { get; set; }
 
         #endregion Module
     }

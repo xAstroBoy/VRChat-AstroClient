@@ -6,10 +6,10 @@
     public static class AudioUtils
     {
         [DllImport("user32.dll")]
-        static extern void keybd_event(byte bVk, byte bScan, UInt32 dwFlags, UInt32 dwExtraInfo);
+        static extern void keybd_event(byte bVk, byte bScan, uint dwFlags, uint dwExtraInfo);
 
         [DllImport("user32.dll")]
-        static extern Byte MapVirtualKey(UInt32 uCode, UInt32 uMapType);
+        static extern byte MapVirtualKey(uint uCode, uint uMapType);
 
         public static void VolumeUp()
         {

@@ -21,7 +21,7 @@
             {
                 new QMSingleButton(temp, 1, 1, "Make Held object Orbit around Target", new Action(() => { Tweaker_Object.GetGameObjectToEdit().OrbitTarget(); }), "Make Held object Orbit around Target!", null, null);
                 new QMSingleButton(temp, 2, 1, "Remove Orbiting component", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Remove_Orbit_Component(); }), "Remove Orbiting component!", null, null);
-                new QMSingleButton(temp, 3, 1, "Kill all Orbiting Objects", new Action(() => { OrbitManager.RemoveAllOrbitObjects(); }), "Kill all Orbiting Objects!", null, null);
+                new QMSingleButton(temp, 3, 1, "Kill all Orbiting Objects", new Action(() => { OrbitManager_Old.RemoveAllOrbitObjects(); }), "Kill all Orbiting Objects!", null, null);
             }
             new QMSingleButton(temp, 1, 2, "Make Held object Watch Target", new Action(() => { Tweaker_Object.GetGameObjectToEdit().WatchTarget(); }), "Make Held object Stare at Target!", null, null);
             new QMSingleButton(temp, 2, 2, "Remove Watcher\ncomponent from\nobject", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Remove_PlayerWatcher_Component(); }), "Remove Watcher\ncomponent from\nobject", null, null);

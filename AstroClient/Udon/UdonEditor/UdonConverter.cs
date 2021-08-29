@@ -20,42 +20,42 @@
             return boxed ?? null;
         }
 
-        public static Il2CppSystem.Object Generate_Il2CPPObject(System.UInt32 item)
+        public static Il2CppSystem.Object Generate_Il2CPPObject(uint item)
         {
             var converted = new Il2CppSystem.UInt32() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
             return boxed ?? null;
         }
 
-        public static Il2CppSystem.Object Generate_Il2CPPObject(System.Int32 item)
+        public static Il2CppSystem.Object Generate_Il2CPPObject(int item)
         {
             var converted = new Il2CppSystem.Int32() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
             return boxed ?? null;
         }
 
-        public static Il2CppSystem.Object Generate_Il2CPPObject(System.Int64 item)
+        public static Il2CppSystem.Object Generate_Il2CPPObject(long item)
         {
             var converted = new Il2CppSystem.Int64() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
             return boxed ?? null;
         }
 
-        public static Il2CppSystem.Object Generate_Il2CPPObject(System.Char item)
+        public static Il2CppSystem.Object Generate_Il2CPPObject(char item)
         {
             var converted = new Il2CppSystem.Char() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
             return boxed ?? null;
         }
 
-        public static Il2CppSystem.Object Generate_Il2CPPObject(System.Single item)
+        public static Il2CppSystem.Object Generate_Il2CPPObject(float item)
         {
             var converted = new Il2CppSystem.Single() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
             return boxed ?? null;
         }
 
-        public static Il2CppSystem.Object Generate_Il2CPPObject(System.Boolean item)
+        public static Il2CppSystem.Object Generate_Il2CPPObject(bool item)
         {
             var converted = new Il2CppSystem.Boolean() { m_value = item };
             var boxed = converted.BoxIl2CppObject();

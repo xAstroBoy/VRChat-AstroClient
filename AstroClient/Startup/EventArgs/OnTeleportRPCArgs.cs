@@ -11,9 +11,9 @@
         public Quaternion Rotation;
         public VRC_SceneDescriptor.SpawnOrientation SpawnOrientation;
         public bool UnknownBool;
-        public Int32 UnknownInt;
+        public int UnknownInt;
 
-        public OnTeleportRPCArgs(Vector3 position, Quaternion Rotation, SpawnOrientation SpawnOrientation, bool UnknownBool, Int32 UnknownInt)
+        public OnTeleportRPCArgs(Vector3 position, Quaternion Rotation, SpawnOrientation SpawnOrientation, bool UnknownBool, int UnknownInt)
         {
             this.Position = position;
             this.Rotation = Rotation;

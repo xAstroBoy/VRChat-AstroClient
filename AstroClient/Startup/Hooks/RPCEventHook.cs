@@ -117,8 +117,8 @@
                 Vector3? Pos = Parameters[0].Unbox<Vector3>();
                 Quaternion? rot = Parameters[1].Unbox<Quaternion>();
                 VRC_SceneDescriptor.SpawnOrientation? spawnpos = Parameters[2].Unbox<VRC_SceneDescriptor.SpawnOrientation>();
-                bool? UnknownBool = Parameters[3].Unbox<Boolean>();
-                Int32? UnknownInt = Parameters[4].Unbox<System.Int32>();
+                bool? UnknownBool = Parameters[3].Unbox<bool>();
+                int? UnknownInt = Parameters[4].Unbox<int>();
 
                 OnTeleportRPCArgs message = new OnTeleportRPCArgs(Pos.Value, rot.Value, spawnpos.Value, UnknownBool.Value, UnknownInt.Value);
 

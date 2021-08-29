@@ -2,23 +2,17 @@ namespace AstroClient.Components
 {
     using AstroLibrary.Console;
     using System;
-    using UnhollowerRuntimeLib;
     using UnityEngine;
     using VRC.SDK3.Components;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
-    using VRC.Udon.ProgramSources;
 
     public class VRC_AstroUdonTrigger : MonoBehaviour
     {
-
         public VRC_AstroUdonTrigger(IntPtr ptr)
             : base(ptr)
         {
         }
-
-
-
 
         public void Start()
         {
@@ -27,11 +21,11 @@ namespace AstroClient.Components
                 UnityEngine.Object.Destroy(gameObject.GetComponent<VRCInteractable>());
             }
 
-
             if (UdonTrigger_Helper.OnInteractUdonProgramEvent == null)
             {
                 ModConsole.DebugError("Custom Trigger Can't Load as Program Asset is null!");
             }
+
             Behaviour = gameObject.AddComponent<UdonBehaviour>();
             if (Behaviour != null)
             {
@@ -76,15 +70,11 @@ namespace AstroClient.Components
             }
         }
 
-
         private string _InteractText = "Use";
 
         internal string InteractText
         {
-            get
-            {
-                return _InteractText;
-            }
+            get => _InteractText;
             set
             {
                 _InteractText = value;

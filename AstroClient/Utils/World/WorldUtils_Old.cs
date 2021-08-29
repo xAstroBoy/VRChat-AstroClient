@@ -204,20 +204,20 @@
             return new List<GameObject>();
         }
 
-        public static List<UnityEngine.AudioSource> Get_AudioSources()
+        public static List<AudioSource> Get_AudioSources()
         {
             try
             {
-                return GameObjectFinder.GetRootGameObjectsComponents<UnityEngine.AudioSource>(true, false);
+                return GameObjectFinder.GetRootGameObjectsComponents<AudioSource>(true, false);
 
             }
             catch (Exception e)
             {
                 ModConsole.Error("Error parsing World Triggers");
                 ModConsole.ErrorExc(e);
-                return new List<UnityEngine.AudioSource>();
+                return new List<AudioSource>();
             }
-            return new List<UnityEngine.AudioSource>();
+            return new List<AudioSource>();
         }
 
         public static List<string> Get_World_Pedestrals_Avatar_ids()
@@ -385,8 +385,8 @@
                     i => i.field_Internal_ApiAvatar_0 != null &&
                     i.field_Internal_ApiAvatar_0.id.IsNotNullOrEmptyOrWhiteSpace() &&
                     i.field_Internal_ApiAvatar_0.id.IsAvatarID()
-                    && !i.transform.IsChildOf(VRChatObjects.AvatarPreviewBase_MainAvatar)
-                    && !i.transform.IsChildOf(VRChatObjects.AvatarPreviewBase_FallbackAvatar)
+                    && !i.transform.IsChildOf(VRChatObjects_Old.AvatarPreviewBase_MainAvatar)
+                    && !i.transform.IsChildOf(VRChatObjects_Old.AvatarPreviewBase_FallbackAvatar)
                     && i.field_Internal_ApiAvatar_0.assetUrl.IsNotNullOrEmptyOrWhiteSpace()
                     ).ToList();
                 if (list1.AnyAndNotNull())
@@ -528,9 +528,9 @@
             return UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
         }
 
-        public static VRC.SDK3.Components.VRCSceneDescriptor GetSDK3Descriptor()
+        public static VRCSceneDescriptor GetSDK3Descriptor()
         {
-            return UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
+            return UnityEngine.Object.FindObjectOfType<VRCSceneDescriptor>();
         }
 
         public static bool IsInWorld()

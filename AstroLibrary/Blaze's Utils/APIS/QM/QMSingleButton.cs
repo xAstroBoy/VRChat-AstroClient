@@ -7,7 +7,7 @@
 
     public class QMSingleButton : QMButtonBase
     {
-        public QMSingleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool HalfButton = false)
+        public QMSingleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool HalfButton = false)
         {
             btnQMLoc = btnMenu.getMenuName();
             if (HalfButton)
@@ -21,7 +21,7 @@
             }
         }
 
-        public QMSingleButton(string btnMenu, float btnXLocation, float btnYLocation, String btnText, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool HalfButton = false)
+        public QMSingleButton(string btnMenu, float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null, bool HalfButton = false)
         {
             btnQMLoc = btnMenu;
             if (HalfButton)
@@ -35,7 +35,7 @@
             }
         }
 
-        private void initButton(float btnXLocation, float btnYLocation, String btnText, System.Action btnAction, String btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null)
+        private void initButton(float btnXLocation, float btnYLocation, string btnText, System.Action btnAction, string btnToolTip, Color? btnBackgroundColor = null, Color? btnTextColor = null)
         {
             btnType = "SingleButton";
             button = UnityEngine.Object.Instantiate(QMStuff.SingleButtonTemplate(), QMStuff.GetQuickMenuInstance().transform.Find(btnQMLoc), true);

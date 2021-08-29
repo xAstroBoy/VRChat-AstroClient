@@ -108,11 +108,5 @@
         {
             menuTitle.GetComponent<Text>().fontSize = size;
         }
-
-        private GameObject UserInfoPage;
-        private GameObject AvatarPage;
-        private GameObject SettingsPage;
-        private GameObject SocialPage;
-        private GameObject WorldsPage;
     }
 }

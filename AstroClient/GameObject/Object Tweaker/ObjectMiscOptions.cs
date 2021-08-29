@@ -24,7 +24,7 @@
                         {
                             if (item != null)
                             {
-                                OrbitManager.AddOrbitObject(item, targetuser);
+                                OrbitManager_Old.AddOrbitObject(item, targetuser);
                             }
                         }
                     }
@@ -182,7 +182,7 @@
                 {
                     if (obj != null)
                     {
-                        OrbitManager.AddOrbitObject(obj, targetuser);
+                        OrbitManager_Old.AddOrbitObject(obj, targetuser);
                     }
                 }
                 else
@@ -242,7 +242,7 @@
                 {
                     if (obj != null)
                     {
-                        OrbitManager.AddOrbitObject(obj, targetuser);
+                        OrbitManager_Old.AddOrbitObject(obj, targetuser);
                     }
                 }
                 else
@@ -358,7 +358,7 @@
                 var apiuser = QuickMenuUtils.GetSelectedUser();
                 if (apiuser != null)
                 {
-                    OrbitManager.RemoveOrbitObjectsBoundToPlayer(apiuser);
+                    OrbitManager_Old.RemoveOrbitObjectsBoundToPlayer(apiuser);
                 }
             }
             catch (Exception) { }

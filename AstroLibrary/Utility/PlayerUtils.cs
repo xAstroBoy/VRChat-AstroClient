@@ -460,8 +460,15 @@ namespace AstroLibrary.Utility
         #region Ranks
         public static Color GetRankColor(this APIUser instance)
         {
-            ColorUtility.DoTryParseHtmlColor(GetRankColor(instance.GetRank()), out Color32 color);
-            return color;
+            if (instance != null)
+            {
+                ColorUtility.DoTryParseHtmlColor(GetRankColor(instance.GetRank()), out Color32 color);
+                return color;
+            }
+            else
+            {
+                return Color.white;
+            }
         }
 
         public static string GetRankColorHex(this APIUser instance)

@@ -1,18 +1,16 @@
 ﻿namespace AstroClient.Cheetos
 {
-    using AstroClient.Components;
     #region Imports
 
-    using AstroClient.Components.SitOnPlayer;
+    using AstroClient.Components;
     using AstroClient.Variables;
-    using AstroLibrary;
     using AstroLibrary.Console;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using Blaze.Utils;
+    using AstroLibrary;
     using System.Collections.Generic;
-    using UnityEngine;
     using UnityEngine.UI;
+    using UnityEngine;
     using VRC;
 
     #endregion
@@ -23,17 +21,14 @@
 
         public override void VRChat_OnUiManagerInit()
         {
-            //string VRChatVersion = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_1;
-            //string VRChatBuild = VRCApplicationSetup.field_Private_Static_VRCApplicationSetup_0.field_Public_String_0;
 
             var infoBar = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar");
             var infobartext = GameObject.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar/EarlyAccessText").GetComponent<Text>();
+
             infobartext.color = new Color(1, 0, 1, 1);
 
             infoBar.transform.localPosition -= new Vector3(0, 110, 0);
-            infobartext.GetComponent<Text>().text = "AstroClient";
-
-            //ModConsole.Log($"VRChat Version: {VRChatVersion}, {VRChatBuild}");
+            infobartext.text = "AstroClient";
         }
 
         public override void OnPlayerJoined(Player player)
@@ -48,10 +43,6 @@
             {
                 player.gameObject.AddComponent<SitOnPlayer>();
             }
-            if (player.gameObject.GetComponent<NewOrbitManager>() == null)
-            {
-                player.gameObject.AddComponent<NewOrbitManager>();
-            }
 
             if (Bools.IsDeveloper)
             {
@@ -63,7 +54,7 @@
             }
         }
 
-        public override void OnPlayerSelected(VRC.Player player)
+        public override void OnPlayerSelected(Player player)
         {
             ModConsole.Log($"Player Selected: {player.name}");
         }
