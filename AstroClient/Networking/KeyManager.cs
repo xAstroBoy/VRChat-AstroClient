@@ -14,6 +14,18 @@
         internal static void ReadKey()
         {
             string keyPath = $@"{Environment.CurrentDirectory}\AstroClient\key.txt";
+            string keyPathBad = $@"{Environment.CurrentDirectory}\AstroClient\key.txt.txt";
+            string keyPathBad2 = $@"{Environment.CurrentDirectory}\AstroClient\key";
+
+            if (File.Exists(keyPathBad))
+            {
+                File.Move(keyPathBad, keyPath);
+            }
+
+            if (File.Exists(keyPathBad2))
+            {
+                File.Move(keyPathBad2, keyPath);
+            }
 
             if (File.Exists(keyPath))
             {
