@@ -163,7 +163,10 @@
             FreezeUnlockedToggle.SetToggleState(IsFreezeUnlockEnabed, false);
 
             // Spamming
-            _ = new QMSingleButton(BClubExploitsPage, 5, -1, "BlueChair\nEveryone", () => { BlueChairSpam(); }, "BlueChair Spam");
+            if (Bools.IsDeveloper)
+            {
+                _ = new QMSingleButton(BClubExploitsPage, 5, -1, "BlueChair\nEveryone", () => { BlueChairSpam(); }, "BlueChair Spam");
+            }
             SpamDoorbellsToggle = new QMToggleButton(BClubExploitsPage, 5, 0, "Spam Doorbells", () => { IsDoorbellSpamEnabled = true; }, "Spam Doorbells", () => { IsDoorbellSpamEnabled = false; }, "Toggle Doorbell Spam");
             SpamDoorbellsToggle.SetToggleState(IsDoorbellSpamEnabled, false);
         }
