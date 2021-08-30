@@ -148,7 +148,12 @@
                     }
                     if (player != null)
                     {
-                        player.GetComponent<NamePlates>().AddTag(player, tagData.Text, Color.yellow);
+                        player.GetComponent<NamePlates>().AddTag(tagData.Text, Color.yellow);
+                        // Temporary solution for applying developer status
+                        if (tagData.Text.Equals("AstroClient Developer"))
+                        {
+                            player.GetComponent<NamePlates>().SetDeveloper(true);
+                        }
                         //new BlazeTag(player, tagData.Text, Color.yellow);
                     }
                     else

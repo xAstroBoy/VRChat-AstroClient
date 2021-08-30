@@ -4,6 +4,7 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Text;
     using TMPro;
@@ -15,6 +16,10 @@
     {
         private PlayerNameplate nameplate;
 
+        private bool isDeveloper;
+
+        private bool isBetaTester;
+
         private Player player;
 
         private Player self;
@@ -22,6 +27,13 @@
         private bool initialized;
 
         public float maxUpdateDistance = 10f;
+
+        private GameObject statsTag;
+        private TextMeshProUGUI statsText;
+
+        private GameObject questTag;
+
+        private List<GameObject> tags = new List<GameObject>();
 
         public NamePlates(IntPtr obj0) : base(obj0)
         {
@@ -39,8 +51,18 @@
             if (!initialized && player != null && player.GetVRCPlayer() != null)
             {
                 nameplate = player.GetVRCPlayer().field_Public_PlayerNameplate_0;
-                HighRefresh();
-                LowRefresh();
+                statsTag = GameObject.Instantiate(nameplate.GetQuickStats(), nameplate.GetQuickStats().transform.parent);
+                statsTag.SetActive(true);
+                statsTag.transform.Find("Performance Icon").DestroyMeLocal();
+                statsTag.transform.Find("Performance Text").DestroyMeLocal();
+                statsTag.transform.Find("Trust Icon").DestroyMeLocal();
+                statsText = statsTag.transform.Find("Trust Text").GetComponent<TextMeshProUGUI>();
+
+                questTag = GameObject.Instantiate(nameplate.GetQuest(), nameplate.GetQuest().transform.parent);
+                questTag.SetActive(player.GetPlatform().Equals("Quest"));
+
+                InitNamepateStuff();
+                SetBackgroundColor(player.GetAPIUser().GetRankColor());
 
                 initialized = true;
             }
@@ -52,7 +74,13 @@
             }
         }
 
-        private void LowRefresh()
+        private void SetBackgroundColor(Color color)
+        {
+            nameplate.SetBackgroundColor(color);
+            statsTag.GetComponent<ImageThreeSlice>().color = color;
+        }
+
+        private void Refresh()
         {
             if (nameplate == null) return;
             Stopwatch stopwatch = new Stopwatch();
@@ -69,14 +97,8 @@
                 stringBuilder.Append($"[F] ");
             }
             stringBuilder.Append($"F:{player.GetFramesColored()}|P:{player.GetPingColored()}");
-            nameplate.SetBackgroundColor(player.GetAPIUser().GetRankColor());
-            nameplate.GetTrustText().text = stringBuilder.ToString();
-            nameplate.GetTrustText().color = Color.white;
-
-            if (player.GetPlatform().Equals("Quest"))
-            {
-                nameplate.GetQuest().gameObject.SetActive(true);
-            }
+            statsText.text = stringBuilder.ToString();
+            statsText.color = Color.white;
 
             stopwatch.Stop();
             if (stopwatch.ElapsedMilliseconds > 3)
@@ -85,77 +107,28 @@
             }
         }
 
-        private GameObject quickStats;
-        private GameObject subTextObject;
-        private GameObject performanceTextObject;
-        private GameObject performanceIconObject;
-        private GameObject trustIconObject;
-        private void HighRefresh()
+        private void InitNamepateStuff()
         {
             if (nameplate == null) return;
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
 
+            var quickStats = nameplate.GetQuickStats();
             if (quickStats != null)
             {
-                if (!quickStats.active) quickStats.SetActive(true);
-            }
-            else
-            {
-                quickStats = nameplate.GetQuickStats();
+                quickStats.SetActiveRecursively(false);
             }
 
-            if (subTextObject != null)
+            var questTag = nameplate.GetQuest();
+            if (questTag != null)
             {
-                if (!subTextObject.active) subTextObject.SetActive(true);
-            }
-            else
-            {
-                subTextObject = nameplate.GetSubTextObject();
-            }
-
-            if (performanceTextObject != null)
-            {
-                if (!performanceTextObject.active) performanceTextObject.SetActive(false);
-            }
-            else
-            {
-                performanceTextObject = nameplate.GetPerformanceText().gameObject;
-            }
-
-            if (performanceIconObject != null)
-            {
-                if (!performanceIconObject.active) performanceIconObject.SetActive(false);
-            }
-            else
-            {
-                performanceIconObject = nameplate.GetPerformanceIcon().gameObject;
-            }
-
-            if (trustIconObject != null)
-            {
-                if (!trustIconObject.active) trustIconObject.SetActive(false);
-            }
-            else
-            {
-                trustIconObject = nameplate.GetTrustIcon().gameObject;
-            }
-
-            stopwatch.Stop();
-            if (stopwatch.ElapsedMilliseconds > 3)
-            {
-                ModConsole.Log($"Warning: Namplate HighRefresh took {stopwatch.ElapsedMilliseconds}ms!");
+                questTag.SetActiveRecursively(false);
             }
         }
 
         public void Update()
         {
-            if (RefreshTime >= 1f)
+            if (RefreshTime >= 2f)
             {
-                if (CalculateDistance() > maxUpdateDistance) return;
-
-                HighRefresh();
-                LowRefresh();
+                Refresh();
                 RefreshTime = 0;
             }
             else
@@ -164,27 +137,58 @@
             }
         }
 
-        internal void AddTag(Player player, string text, Color yellow)
+        internal void AddTag(string text, Color bgColor)
         {
-            ModConsole.Log($"Server wanted to add a tag for '{player.DisplayName()}' which was '{text}' however this isn't implemented yet");
+            var newTag = GameObject.Instantiate(nameplate.GetQuickStats(), nameplate.GetQuickStats().transform.parent);
+            var tagText = newTag.transform.Find("Trust Text").GetComponent<TextMeshProUGUI>();
+            DeleteChildren(newTag);
+            if (text.Equals("AstroClient Developer"))
+            {
+                newTag.GetComponent<ImageThreeSlice>().color = Color.black;
+                tagText.color = Color.yellow;
+            }
+            else
+            {
+                newTag.GetComponent<ImageThreeSlice>().color = bgColor;
+            }
+            tagText.text = text;
+            newTag.SetActiveRecursively(true);
+            SetLocation(newTag, tags.Count);
+            tags.Add(newTag);
         }
 
-        public float CalculateDistance()
+        internal void SetDeveloper(bool value)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            var pos1 = self.gameObject.transform.position;
-            var pos2 = player.gameObject.transform.position;
-
-            var distance = Vector3.Distance(pos1, pos2);
-
-            stopwatch.Stop();
-            if (stopwatch.ElapsedMilliseconds > 25)
+            isDeveloper = value;
+            if (value)
             {
-                ModConsole.Log($"Warning: Namplate CalculateDistance took {stopwatch.ElapsedMilliseconds}ms!");
+                SetBackgroundColor(Color.black);
             }
-            return distance;
+        }
+
+        internal void SetBetaTester(bool value)
+        {
+            isBetaTester = value;
+        }
+
+        private void SetLocation(GameObject tag, int count)
+        {
+            /*if (BlazesAPIs.AddTagGap)
+                Tag.transform.localPosition = new Vector3(0f, (30 * (count + 2)), 0f);
+            else*/
+            tag.transform.localPosition = new Vector3(0f, (30 * (count + 2)), 0f);
+        }
+
+        private void DeleteChildren(GameObject tag)
+        {
+            for (int i = tag.transform.childCount; i > 0; i--)
+            {
+                Transform child = tag.transform.GetChild(i - 1);
+                if (!child.name.Equals("Trust Text"))
+                {
+                    UnityEngine.Object.Destroy(child.gameObject);
+                }
+            }
         }
     }
 
@@ -222,16 +226,6 @@
             nameplate.field_Public_Graphic_3.color = Color.black;
         }
 
-        public static Image GetTrustIcon(this PlayerNameplate nameplate)
-        {
-            return nameplate.field_Public_Image_0;
-        }
-
-        public static Image GetPerformanceIcon(this PlayerNameplate nameplate)
-        {
-            return nameplate.field_Public_Image_1;
-        }
-
         public static TextMeshProUGUI GetSubText(this PlayerNameplate nameplate)
         {
             return nameplate.field_Public_TextMeshProUGUI_1;
@@ -240,11 +234,6 @@
         public static TextMeshProUGUI GetPerformanceText(this PlayerNameplate nameplate)
         {
             return nameplate.field_Public_TextMeshProUGUI_4;
-        }
-
-        public static TextMeshProUGUI GetTrustText(this PlayerNameplate nameplate)
-        {
-            return nameplate.field_Public_TextMeshProUGUI_3;
         }
     }
 }
