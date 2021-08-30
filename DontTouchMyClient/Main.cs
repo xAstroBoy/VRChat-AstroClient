@@ -1,16 +1,18 @@
 ﻿namespace DontTouchMyClient
 {
-	using AstroLibrary.Console;
-	using global::DontTouchMyClient.Patches;
-	using MelonLoader;
+    using AstroLibrary.Console;
+    using global::DontTouchMyClient.Patches;
+    using MelonLoader;
 
 	public class DontTouchMyClient : MelonPlugin
     {
-        public override void OnPreInitialization() // Runs before Game Initialization.
+        public DontTouchMyClient()
         {
-			ModConsole.Initialize("DontTouchMyClient");
-			Patching.StartDefenses();
+            ModConsole.Initialize("DontTouchMyClient");
+            ModConsole.Log("DontTouchMyClient is starting..");
+            Patching.StartDefenses();
         }
+
         public override void OnGUI()
         {
             PreventFileSearches = true;

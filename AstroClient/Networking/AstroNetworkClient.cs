@@ -7,6 +7,7 @@
     using AstroClient.Variables;
     using AstroLibrary;
     using AstroLibrary.Console;
+    using AstroLibrary.Utility;
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
     using Blaze.API;
@@ -35,9 +36,7 @@
         {
             KeyManager.ReadKey();
             ModConsole.Log("Client Connecting..");
-#if DEBUG
-            ModConsole.Log($"Key: {KeyManager.AuthKey}");
-#endif
+
             Connect();
             SetPingTimer();
         }
@@ -135,26 +134,27 @@
                     NetworkingManager.IsReady = true;
                     break;
                 case PacketServerType.ADD_TAG:
-                    //var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
-                    //Player player;
-                    //if (PlayerUtils.GetCurrentUser().GetUserID().Equals(tagData.UserID))
-                    //{
-                    //	ModConsole.Log("Wants to add tag to self");
-                    //	player = PlayerUtils.GetCurrentUser().GetPlayer();
-                    //}
-                    //else
-                    //{
-                    //	ModConsole.Log("Wants to add tag to someone else");
-                    //	player = WorldUtils.Get_Player_By_ID(tagData.UserID);
-                    //}
-                    //if (player != null)
-                    //{
-                    //	new BlazeTag(player, tagData.Text, Color.yellow);
-                    //}
-                    //else
-                    //{
-                    //	ModConsole.Log($"Player ({tagData.UserID}) returned null");
-                    //}
+                    var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
+                    Player player;
+                    if (PlayerUtils.GetPlayer().GetUserID().Equals(tagData.UserID))
+                    {
+                        ModConsole.Log("Wants to add tag to self");
+                        player = PlayerUtils.GetPlayer();
+                    }
+                    else
+                    {
+                        ModConsole.Log("Wants to add tag to someone else");
+                        player = WorldUtils_Old.Get_Player_By_ID(tagData.UserID);
+                    }
+                    if (player != null)
+                    {
+                        player.GetComponent<NamePlates>().AddTag(player, tagData.Text, Color.yellow);
+                        //new BlazeTag(player, tagData.Text, Color.yellow);
+                    }
+                    else
+                    {
+                        ModConsole.Log($"Player ({tagData.UserID}) returned null");
+                    }
                     break;
 
                 case PacketServerType.NOTIFY:

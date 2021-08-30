@@ -17,7 +17,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>D:\Steam Library\steamapps\common\VRChat\debug\</OutputPath>
+    <OutputPath>..\AstroInjector\Resources\</OutputPath>
     <DefineConstants>
     </DefineConstants>
     <ErrorReport>prompt</ErrorReport>
@@ -264,7 +264,34 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="..\AstroLibrary\CheetosConsole\Console.cs">
+      <Link>CheetosConsole\Console.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroLibrary\CheetosConsole\DefaultFonts.cs">
+      <Link>CheetosConsole\DefaultFonts.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroLibrary\CheetosConsole\Extensions.cs">
+      <Link>CheetosConsole\Extensions.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroLibrary\CheetosConsole\Figlet.cs">
+      <Link>CheetosConsole\Figlet.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroLibrary\CheetosConsole\FigletFont.cs">
+      <Link>CheetosConsole\FigletFont.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroLibrary\CheetosConsole\NativeMethods.cs">
+      <Link>CheetosConsole\NativeMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroLibrary\CheetosConsole\StyledString.cs">
+      <Link>CheetosConsole\StyledString.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroLibrary\CheetosConsole\VirtualTerminalSequences.cs">
+      <Link>CheetosConsole\VirtualTerminalSequences.cs</Link>
+    </Compile>
+    <Compile Include="..\AstroLibrary\ModConsole.cs">
+      <Link>ModConsole.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Patch.cs" />
@@ -278,11 +305,6 @@
       <Link>.editorconfig</Link>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AstroLibrary\AstroLibrary.csproj">
-      <Project>{4613C712-5463-44C6-AB48-081A2B3AE61D}</Project>
-      <Name>AstroLibrary</Name>
-    </ProjectReference>
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

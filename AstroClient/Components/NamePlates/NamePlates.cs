@@ -164,6 +164,11 @@
             }
         }
 
+        internal void AddTag(Player player, string text, Color yellow)
+        {
+            ModConsole.Log($"Server wanted to add a tag for '{player.DisplayName()}' which was '{text}' however this isn't implemented yet");
+        }
+
         public float CalculateDistance()
         {
             Stopwatch stopwatch = new Stopwatch();

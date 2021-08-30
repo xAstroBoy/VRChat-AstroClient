@@ -13,7 +13,7 @@
         {
             @"Debug\AstroClient.dll",
 			//@"Debug\AstroClientCore.dll",
-			@"Debug\DontTouchMyClient.dll",
+			//@"Debug\DontTouchMyClient.dll",
 			//@"Debug\MonoDumper.dll",
 		};
 
@@ -35,9 +35,15 @@
             @"AstroInjector.Resources.Newtonsoft.Json.Bson.dll",
         };
 
+        public static string[] EmbededMelonsPaths =
+        {
+            //@"AstroInjector.Resources.DontTouchMyClient.dll",
+        };
+
         public AstroInjector()
         {
             LoadEmbeddedLibraries();
+            LoadEmbeddedMelons();
 
 #if DEBUG
             LoadDebug();
@@ -65,7 +71,7 @@
                 foreach (var bytes in AstroNetworkLoader.MelonFiles)
                 {
                     var dll = Assembly.Load(bytes);
-                    MelonHandler.LoadFromAssembly(dll, Environment.CurrentDirectory + @"\Plugins\AstroLoader.dll");
+                    MelonHandler.LoadFromAssembly(dll, Environment.CurrentDirectory + @"\Plugins\AstroInjector.dll");
                 }
             }
 
@@ -86,6 +92,25 @@
                 {
                     var bytes = CheetosHelpers.ExtractResource(path);
                     var dll = Assembly.Load(bytes);
+                    //MelonLogger.Msg($"Injected Embedded Library: {path}");
+                }
+                catch (Exception e)
+                {
+                    MelonLogger.Msg(e.Message);
+                    MelonLogger.Msg($"Failed to inject embedded library: {path}");
+                }
+            }
+        }
+
+        public void LoadEmbeddedMelons()
+        {
+            foreach (var path in EmbededMelonsPaths)
+            {
+                try
+                {
+                    var bytes = CheetosHelpers.ExtractResource(path);
+                    var dll = Assembly.Load(bytes);
+                    MelonHandler.LoadFromAssembly(dll, Environment.CurrentDirectory + @"\Plugins\AstroInjector.dll");
                     //MelonLogger.Msg($"Injected Embedded Library: {path}");
                 }
                 catch (Exception e)

@@ -126,5 +126,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Newtonsoft.Json.dll" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\DontTouchMyClient.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
