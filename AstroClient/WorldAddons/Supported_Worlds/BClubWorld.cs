@@ -32,9 +32,20 @@
 
         public static float DoorbellTime = 0f;
 
+        public static float DoorFreezeTime = 0f;
+
+        public static float ButtonUpdateTime = 0f;
+
         private static QMToggleButton SpamDoorbellsToggle;
 
+        private static QMToggleButton FreezeLockedToggle;
+        private static QMToggleButton FreezeUnlockedToggle;
+
         private static bool _isDoorBellSpamEnabled;
+
+        private static bool _isFreezeLockEnabed;
+        private static bool _isFreezeUnlockEnabed;
+
 
         public static bool IsDoorbellSpamEnabled
         {
@@ -63,20 +74,93 @@
             }
         }
 
+        public static bool IsFreezeLockEnabed
+        {
+            get => _isFreezeLockEnabed;
+            set
+            {
+                if (value)
+                {
+                    if (_isFreezeLockEnabed)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        ModConsole.Log("Door Locks Frozen: Locked");
+                        _isFreezeLockEnabed = true;
+                        IsFreezeUnlockEnabed = false;
+                        DoorLockFreeze();
+                    }
+                }
+                else
+                {
+                    ModConsole.Log("Door Locks Unfrozen");
+                    _isFreezeLockEnabed = false;
+                }
+            }
+        }
+
+        public static bool IsFreezeUnlockEnabed
+        {
+            get => _isFreezeUnlockEnabed;
+            set
+            {
+                if (value)
+                {
+                    if (_isFreezeUnlockEnabed)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        ModConsole.Log("Door Locks Frozen: Unlocked");
+                        _isFreezeUnlockEnabed = true;
+                        IsFreezeLockEnabed = false;
+                        DoorUnlockFreeze();
+                    }
+                }
+                else
+                {
+                    ModConsole.Log("Door Locks Unfrozen");
+                    _isFreezeUnlockEnabed = false;
+                }
+            }
+        }
+
+        private static QMToggleButton LockButton1;
+        private static GameObject LockIndicator1;
+        private static QMToggleButton LockButton2;
+        private static GameObject LockIndicator2;
+        private static QMToggleButton LockButton3;
+        private static GameObject LockIndicator3;
+        private static QMToggleButton LockButton4;
+        private static GameObject LockIndicator4;
+        private static QMToggleButton LockButton5;
+        private static GameObject LockIndicator5;
+        private static QMToggleButton LockButton6;
+        private static GameObject LockIndicator6;
+
         public static void InitButtons(QMTabMenu main, float x, float y)
         {
             BClubExploitsPage = new QMNestedButton(main, x, y, "BClub Exploits", "BClub Exploits", null, null, null, null, true);
 
             // Locks
-            _ = new QMSingleButton(BClubExploitsPage, 1, 0, "Toggle\nLock\n1", () => { ToggleDoor(1); }, "Toggle Door Lock");
-            _ = new QMSingleButton(BClubExploitsPage, 2, 0, "Toggle\nLock\n2", () => { ToggleDoor(2); }, "Toggle Door Lock");
-            _ = new QMSingleButton(BClubExploitsPage, 3, 0, "Toggle\nLock\n3", () => { ToggleDoor(3); }, "Toggle Door Lock");
-            _ = new QMSingleButton(BClubExploitsPage, 4, 0, "Toggle\nLock\n4", () => { ToggleDoor(4); }, "Toggle Door Lock");
-            _ = new QMSingleButton(BClubExploitsPage, 1, 1, "Toggle\nLock\n5", () => { ToggleDoor(5); }, "Toggle Door Lock");
-            _ = new QMSingleButton(BClubExploitsPage, 2, 1, "Toggle\nLock\n6", () => { ToggleDoor(6); }, "Toggle Door Lock");
+            LockButton1 = new QMToggleButton(BClubExploitsPage, 1, 0, "Unlock 1", () => { ToggleDoor(1); }, "Lock 1", () => { ToggleDoor(1); }, "Toggle Door Lock", null, Color.green, Color.red, false);
+            LockButton2 = new QMToggleButton(BClubExploitsPage, 2, 0, "Unlock 2", () => { ToggleDoor(2); }, "Lock 2", () => { ToggleDoor(2); }, "Toggle Door Lock", null, Color.green, Color.red, false);
+            LockButton3 = new QMToggleButton(BClubExploitsPage, 3, 0, "Unlock 3", () => { ToggleDoor(3); }, "Lock 3", () => { ToggleDoor(3); }, "Toggle Door Lock", null, Color.green, Color.red, false);
+            LockButton4 = new QMToggleButton(BClubExploitsPage, 1, 1, "Unlock 4", () => { ToggleDoor(4); }, "Lock 4", () => { ToggleDoor(4); }, "Toggle Door Lock", null, Color.green, Color.red, false);
+            LockButton5 = new QMToggleButton(BClubExploitsPage, 2, 1, "Unlock 5", () => { ToggleDoor(5); }, "Lock 5", () => { ToggleDoor(5); }, "Toggle Door Lock", null, Color.green, Color.red, false);
+            LockButton6 = new QMToggleButton(BClubExploitsPage, 3, 1, "Unlock 6", () => { ToggleDoor(6); }, "Lock 6", () => { ToggleDoor(6); }, "Toggle Door Lock", null, Color.green, Color.red, false);
 
             // VIP
-            _ = new QMSingleButton(BClubExploitsPage, 3, 2, "Enter VIP", () => { EnterVIPRoom(); }, "Enter VIP Room");
+            _ = new QMSingleButton(BClubExploitsPage, 4, 2, "Enter VIP", () => { EnterVIPRoom(); }, "Enter VIP Room");
+
+            // Freeze Locks
+            FreezeLockedToggle = new QMToggleButton(BClubExploitsPage, -1, 1, "Freeze\nLocked", () => { IsFreezeLockEnabed = true; }, "Freeze\nLocked", () => { IsFreezeLockEnabed = false; }, "Door Freezer");
+            FreezeUnlockedToggle = new QMToggleButton(BClubExploitsPage, -1, 2, "Freeze\nUnlocked", () => { IsFreezeUnlockEnabed = true; }, "Freeze\nUnlocked", () => { IsFreezeUnlockEnabed = false; }, "Door Freezer");
+            FreezeLockedToggle.SetToggleState(IsFreezeLockEnabed, false);
+            FreezeUnlockedToggle.SetToggleState(IsFreezeUnlockEnabed, false);
 
             // Spamming
             _ = new QMSingleButton(BClubExploitsPage, 5, -1, "BlueChair\nEveryone", () => { BlueChairSpam(); }, "BlueChair Spam");
@@ -84,7 +168,152 @@
             SpamDoorbellsToggle.SetToggleState(IsDoorbellSpamEnabled, false);
         }
 
+        private static void RefreshButtons()
+        {
+            if (LockIndicator1.active)
+            {
+                LockButton1.SetToggleState(true);
+            }
+            else
+            {
+                LockButton1.SetToggleState(false);
+            }
+
+            if (!LockIndicator2.active)
+            {
+                LockButton2.SetToggleState(true);
+            }
+            else
+            {
+                LockButton2.SetToggleState(false);
+            }
+
+            if (!LockIndicator3.active)
+            {
+                LockButton3.SetToggleState(true);
+            }
+			else
+			{
+				LockButton3.SetToggleState(false);
+			}
+
+            if (!LockIndicator4.active)
+            {
+                LockButton4.SetToggleState(true);
+            }
+			else
+			{
+				LockButton4.SetToggleState(false);
+			}
+
+            if (!LockIndicator5.active)
+            {
+                LockButton5.SetToggleState(true);
+            }
+			else
+			{
+				LockButton5.SetToggleState(false);
+			}
+
+            if (!LockIndicator6.active)
+            {
+                LockButton6.SetToggleState(true);
+            }
+			else
+			{
+				LockButton6.SetToggleState(false);
+			}
+        }
+
         private static List<UdonBehaviour> _bells = new List<UdonBehaviour>();
+
+        private static void DoorLockFreeze()
+        {
+            MelonCoroutines.Start(DoorLockFreezeLoop());
+        }
+
+        private static void DoorUnlockFreeze()
+        {
+            MelonCoroutines.Start(DoorUnlockFreezeLoop());
+        }
+
+        private static IEnumerator DoorLockFreezeLoop()
+        {
+            for (; ; )
+            {
+                if (!WorldUtils.IsInWorld())
+                {
+                    IsFreezeLockEnabed = false;
+                    yield break;
+                }
+
+                DoorFreezeTime += 1 * Time.deltaTime;
+
+                if (DoorFreezeTime < 10f)
+                {
+                    yield return null;
+                }
+                else
+                {
+                    DoorFreezeTime = 0;
+                }
+
+                if (LockIndicator1.active != true) ToggleDoor(1);
+                if (LockIndicator2.active != true) ToggleDoor(2);
+                if (LockIndicator3.active != true) ToggleDoor(3);
+                if (LockIndicator4.active != true) ToggleDoor(4);
+                if (LockIndicator5.active != true) ToggleDoor(5);
+                if (LockIndicator6.active != true) ToggleDoor(6);
+
+                if (IsFreezeLockEnabed)
+                {
+                    yield return null;
+                }
+                else
+                {
+                    yield break;
+                }
+            }
+        }
+
+        private static IEnumerator DoorUnlockFreezeLoop()
+        {
+            for (; ; )
+            {
+                if (!WorldUtils.IsInWorld())
+                {
+                    IsFreezeUnlockEnabed = false;
+                    yield break;
+                }
+
+                DoorFreezeTime += 1 * Time.deltaTime;
+
+                if (DoorFreezeTime < 10f)
+                {
+                    yield return null;
+                }
+                else
+                {
+                    DoorFreezeTime = 0;
+                }
+
+                if (LockIndicator1.active != false) ToggleDoor(1);
+                if (LockIndicator2.active != false) ToggleDoor(2);
+                if (LockIndicator3.active != false) ToggleDoor(3);
+                if (LockIndicator4.active != false) ToggleDoor(4);
+                if (LockIndicator5.active != false) ToggleDoor(5);
+                if (LockIndicator6.active != false) ToggleDoor(6);
+
+                if (IsFreezeUnlockEnabed)
+                {
+                    yield return null;
+                }
+                else
+                {
+                    yield break;
+                }
+            }
+        }
 
         private static void SpamDoorbells()
         {
@@ -95,7 +324,11 @@
         {
             for (; ; )
             {
-                if (!WorldUtils.IsInWorld()) yield break;
+                if (!WorldUtils.IsInWorld())
+                {
+                    IsDoorbellSpamEnabled = false;
+                    yield break;
+                }
 
                 DoorbellTime += 1 * Time.deltaTime;
 
@@ -135,6 +368,7 @@
         private static IEnumerator DoBlueChairSpam()
         {
             if (!WorldUtils.IsInWorld()) yield break;
+
             BlueChairTime += 1 * Time.deltaTime;
 
             if (BlueChairTime < 0.5f)
@@ -166,6 +400,7 @@
         private static void ToggleDoor(int doorID)
         {
             UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}").ExecuteUdonEvent();
+            RefreshButtons();
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
@@ -174,6 +409,21 @@
             {
                 _bells = WorldUtils.GetUdonScripts().Where(b => b.name == "Doorbell").ToList();
                 ModConsole.Log($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
+
+                var penthouseRoot = GameObjectFinder.FindRootSceneObject("Penthouse");
+                if (penthouseRoot != null)
+                {
+                    LockIndicator1 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 1/Screen/Canvas/Indicators/Locked").gameObject;
+                    LockIndicator2 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 2/Screen/Canvas/Indicators/Locked").gameObject;
+                    LockIndicator3 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 3/Screen/Canvas/Indicators/Locked").gameObject;
+                    LockIndicator4 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 4/Screen/Canvas/Indicators/Locked").gameObject;
+                    LockIndicator5 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 5/Screen/Canvas/Indicators/Locked").gameObject;
+                    LockIndicator6 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 6/Screen/Canvas/Indicators/Locked").gameObject;
+                }
+                else
+                {
+                    ModConsole.Error("Failed to find Penthouse!");
+                }
 
                 try
                 {
@@ -240,11 +490,33 @@
                     RemovePrivacyBlocksOnRooms(6);
                     //PatchPatreonList();
                     //PatchPatreonNode();
+
+                    MelonCoroutines.Start(UpdateButtonsLoop());
                 }
                 catch (Exception e)
                 {
                     ModConsole.DebugErrorExc(e);
                 }
+            }
+        }
+
+        private static IEnumerator UpdateButtonsLoop()
+        {
+            for (; ; )
+            {
+                if (!WorldUtils.IsInWorld()) yield break;
+                ButtonUpdateTime += 1 * Time.deltaTime;
+
+                if (ButtonUpdateTime < 10f)
+                {
+                    yield return null;
+                }
+                else
+                {
+                    ButtonUpdateTime = 0f;
+                }
+
+                RefreshButtons();
             }
         }
 
@@ -296,7 +568,7 @@
             GameObject nlobby = GameObjectFinder.FindRootSceneObject("Penthouse");
             GameObject Bedrooms = GameObjectFinder.FindRootSceneObject("Bedrooms");
 
-            if (nlobby != null && Bedrooms != null)
+            if (Bedrooms != null)
             {
                 var room = nlobby.transform.FindObject($"Private Rooms Exterior/Room Entrances/Private Room Entrance {doorID}");
                 var room_BedroomPreview = Bedrooms.transform.FindObject($"Bedroom {doorID}/BedroomUdon/Door Tablet/BlueButtonSquare - Bedroom Preview");
@@ -336,7 +608,7 @@
                             var udonEvent = UdonSearch.FindUdonEvent("PhotozoneMaster", $"EnableIntercomIn{doorID}");
                             void action() { udonEvent.ExecuteUdonEvent(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
-                            if (behaviourevent != null && behaviourevent.Count() != 0)
+                            if (behaviourevent.Count() != 0)
                             {
                                 foreach (var e in behaviourevent)
                                 {
@@ -387,7 +659,7 @@
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}");
                             void action() { udonEvent.ExecuteUdonEvent(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
-                            if (behaviourevent != null && behaviourevent.Count() != 0)
+                            if (behaviourevent.Count() != 0)
                             {
                                 foreach (var e in behaviourevent)
                                 {
@@ -437,7 +709,7 @@
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLooking{doorID}");
                             void action() { udonEvent.ExecuteUdonEvent(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
-                            if (behaviourevent != null && behaviourevent.Count() != 0)
+                            if (behaviourevent.Count() != 0)
                             {
                                 foreach (var e in behaviourevent)
                                 {
@@ -489,7 +761,7 @@
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleAnon{doorID}");
                             void action() { udonEvent.ExecuteUdonEvent(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
-                            if (behaviourevent != null && behaviourevent.Count() != 0)
+                            if (behaviourevent.Count() != 0)
                             {
                                 foreach (var e in behaviourevent)
                                 {
@@ -540,7 +812,7 @@
                             var udonEvent = UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleDoorbell{doorID}");
                             void action() { udonEvent.ExecuteUdonEvent(); }
                             var behaviourevent = clone.gameObject.GetComponentsInChildren<UdonBehaviour>();
-                            if (behaviourevent != null && behaviourevent.Count() != 0)
+                            if (behaviourevent.Count() != 0)
                             {
                                 foreach (var e in behaviourevent)
                                 {
@@ -680,7 +952,7 @@
                     if (Elite_List != null)
                     {
                         var list = Elite_List.Unpack_Array_VRCPlayerApi().ToList();
-                        if (list != null && list.Count() != 0)
+                        if (list.Count() != 0)
                         {
                             if (!list.Contains(Utils.LocalPlayer))
                             {
@@ -702,7 +974,7 @@
                     if (Patron_List != null)
                     {
                         var list = Patron_List.Unpack_Array_VRCPlayerApi().ToList();
-                        if (list != null && list.Count() != 0)
+                        if (list.Count() != 0)
                         {
                             if (!list.Contains(Utils.LocalPlayer))
                             {

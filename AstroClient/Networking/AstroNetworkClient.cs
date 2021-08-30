@@ -134,32 +134,32 @@
                     NetworkingManager.IsReady = true;
                     break;
                 case PacketServerType.ADD_TAG:
-                    var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
-                    Player player;
-                    if (PlayerUtils.GetPlayer().GetUserID().Equals(tagData.UserID))
-                    {
-                        ModConsole.Log("Wants to add tag to self");
-                        player = PlayerUtils.GetPlayer();
-                    }
-                    else
-                    {
-                        ModConsole.Log("Wants to add tag to someone else");
-                        player = WorldUtils_Old.Get_Player_By_ID(tagData.UserID);
-                    }
-                    if (player != null)
-                    {
-                        player.GetComponent<NamePlates>().AddTag(tagData.Text, Color.yellow);
-                        // Temporary solution for applying developer status
-                        if (tagData.Text.Equals("AstroClient Developer"))
-                        {
-                            player.GetComponent<NamePlates>().SetDeveloper(true);
-                        }
-                        //new BlazeTag(player, tagData.Text, Color.yellow);
-                    }
-                    else
-                    {
-                        ModConsole.Log($"Player ({tagData.UserID}) returned null");
-                    }
+                    //var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
+                    //Player player;
+                    //if (PlayerUtils.GetPlayer().GetUserID().Equals(tagData.UserID))
+                    //{
+                    //    ModConsole.Log("Wants to add tag to self");
+                    //    player = PlayerUtils.GetPlayer();
+                    //}
+                    //else
+                    //{
+                    //    ModConsole.Log("Wants to add tag to someone else");
+                    //    player = WorldUtils_Old.Get_Player_By_ID(tagData.UserID);
+                    //}
+                    //if (player != null)
+                    //{
+                    //    player.GetComponent<NamePlates>().AddTag(tagData.Text, Color.yellow);
+                    //    // Temporary solution for applying developer status
+                    //    if (tagData.Text.Equals("AstroClient Developer"))
+                    //    {
+                    //        player.GetComponent<NamePlates>().SetDeveloper(true);
+                    //    }
+                    //    //new BlazeTag(player, tagData.Text, Color.yellow);
+                    //}
+                    //else
+                    //{
+                    //    ModConsole.Log($"Player ({tagData.UserID}) returned null");
+                    //}
                     break;
 
                 case PacketServerType.NOTIFY:
