@@ -33,7 +33,10 @@
 
         public override void OnPlayerJoined(Player player)
         {
-            player.gameObject.AddComponent<NamePlates>();
+            if (!ModDetector.FindMods.IsNotoriousPresent)
+            {
+                player.gameObject.AddComponent<NamePlates>();
+            }
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
