@@ -23,7 +23,6 @@
     public class BClubWorld : GameEvents
     {
         public static GameObject VIPRoom;
-
         public static GameObject VIPInsideDoor;
 
         public static QMNestedButton BClubExploitsPage;
@@ -31,18 +30,14 @@
         public static int SpamCount = 0;
 
         public static float DoorbellTime = 0f;
-
         public static float DoorFreezeTime = 0f;
-
         public static float ButtonUpdateTime = 0f;
 
         private static QMToggleButton SpamDoorbellsToggle;
-
         private static QMToggleButton FreezeLockedToggle;
         private static QMToggleButton FreezeUnlockedToggle;
 
         private static bool _isDoorBellSpamEnabled;
-
         private static bool _isFreezeLockEnabed;
         private static bool _isFreezeUnlockEnabed;
 
@@ -54,17 +49,9 @@
             {
                 if (value)
                 {
-                    if (_isDoorBellSpamEnabled)
-                    {
-                        ModConsole.Log("Doorbell Spam Already Running!");
-                        return;
-                    }
-                    else
-                    {
-                        ModConsole.Log("Doorbell Spam Enabled!");
-                        _isDoorBellSpamEnabled = true;
-                        SpamDoorbells();
-                    }
+                    ModConsole.Log("Doorbell Spam Enabled!");
+                    _isDoorBellSpamEnabled = true;
+                    SpamDoorbells();
                 }
                 else
                 {
@@ -89,7 +76,7 @@
                     {
                         ModConsole.Log("Door Locks Frozen: Locked");
                         _isFreezeLockEnabed = true;
-                        IsFreezeUnlockEnabed = false;
+                        if (IsFreezeUnlockEnabed) IsFreezeUnlockEnabed = false;
                         DoorLockFreeze();
                     }
                 }
@@ -116,7 +103,7 @@
                     {
                         ModConsole.Log("Door Locks Frozen: Unlocked");
                         _isFreezeUnlockEnabed = true;
-                        IsFreezeLockEnabed = false;
+                        if (IsFreezeLockEnabed) IsFreezeLockEnabed = false;
                         DoorUnlockFreeze();
                     }
                 }
@@ -173,7 +160,7 @@
 
         private static void RefreshButtons()
         {
-            if (LockIndicator1.active)
+            if (!LockIndicator1.active)
             {
                 LockButton1.SetToggleState(true);
             }
@@ -244,20 +231,19 @@
         {
             for (; ; )
             {
-                if (!WorldUtils.IsInWorld())
-                {
-                    IsFreezeLockEnabed = false;
-                    yield break;
-                }
-
                 DoorFreezeTime += 1 * Time.deltaTime;
 
-                if (DoorFreezeTime < 10f)
+                if (DoorFreezeTime < 1000f)
                 {
                     yield return null;
                 }
                 else
                 {
+                    if (!WorldUtils.IsInWorld())
+                    {
+                        IsFreezeLockEnabed = false;
+                        yield break;
+                    }
                     DoorFreezeTime = 0;
                 }
 
@@ -283,20 +269,19 @@
         {
             for (; ; )
             {
-                if (!WorldUtils.IsInWorld())
-                {
-                    IsFreezeUnlockEnabed = false;
-                    yield break;
-                }
-
                 DoorFreezeTime += 1 * Time.deltaTime;
 
-                if (DoorFreezeTime < 10f)
+                if (DoorFreezeTime < 1000f)
                 {
                     yield return null;
                 }
                 else
                 {
+                    if (!WorldUtils.IsInWorld())
+                    {
+                        IsFreezeUnlockEnabed = false;
+                        yield break;
+                    }
                     DoorFreezeTime = 0;
                 }
 
@@ -327,12 +312,6 @@
         {
             for (; ; )
             {
-                if (!WorldUtils.IsInWorld())
-                {
-                    IsDoorbellSpamEnabled = false;
-                    yield break;
-                }
-
                 DoorbellTime += 1 * Time.deltaTime;
 
                 if (DoorbellTime < 1000f)
@@ -341,6 +320,11 @@
                 }
                 else
                 {
+                    if (!WorldUtils.IsInWorld())
+                    {
+                        IsDoorbellSpamEnabled = false;
+                        yield break;
+                    }
                     DoorbellTime = 0;
                 }
 
@@ -370,16 +354,15 @@
 
         private static IEnumerator DoBlueChairSpam()
         {
-            if (!WorldUtils.IsInWorld()) yield break;
-
             BlueChairTime += 1 * Time.deltaTime;
 
-            if (BlueChairTime < 0.5f)
+            if (BlueChairTime < 100f)
             {
                 yield return null;
             }
             else
             {
+                if (!WorldUtils.IsInWorld()) yield break;
                 BlueChairTime = 0f;
             }
 
@@ -507,7 +490,6 @@
         {
             for (; ; )
             {
-                if (!WorldUtils.IsInWorld()) yield break;
                 ButtonUpdateTime += 1 * Time.deltaTime;
 
                 if (ButtonUpdateTime < 10f)
@@ -516,6 +498,7 @@
                 }
                 else
                 {
+                    if (!WorldUtils.IsInWorld()) yield break;
                     ButtonUpdateTime = 0f;
                 }
 
