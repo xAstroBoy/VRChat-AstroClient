@@ -185,12 +185,6 @@
                     rb.useGravity = false;
                     rb.detectCollisions = false;
                 }
-                else
-                {
-                    ModConsole.Error("OrbitManager was not able to find pickup's RigidBody!");
-                    DisableOrbit();
-                    yield break;
-                }
 
                 pickup.transform.position = centerPoint.position;
                 yield return null;

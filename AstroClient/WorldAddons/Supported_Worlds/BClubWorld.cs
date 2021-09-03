@@ -140,12 +140,14 @@
             LockButton5 = new QMToggleButton(BClubExploitsPage, 2, 1, "Unlock 5", () => { ToggleDoor(5); }, "Lock 5", () => { ToggleDoor(5); }, "Toggle Door Lock", null, Color.green, Color.red, false);
             LockButton6 = new QMToggleButton(BClubExploitsPage, 3, 1, "Unlock 6", () => { ToggleDoor(6); }, "Lock 6", () => { ToggleDoor(6); }, "Toggle Door Lock", null, Color.green, Color.red, false);
 
+            _ = new QMToggleButton(BClubExploitsPage, 4, 1, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = true; }, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = false; }, "VIP Spoof", null, Color.green, Color.red, false);
+
             // VIP
             _ = new QMSingleButton(BClubExploitsPage, 4, 2, "Enter VIP", () => { EnterVIPRoom(); }, "Enter VIP Room");
 
             // Freeze Locks
-            FreezeLockedToggle = new QMToggleButton(BClubExploitsPage, -1, 1, "Freeze\nLocked", () => { IsFreezeLockEnabed = true; }, "Freeze\nLocked", () => { IsFreezeLockEnabed = false; }, "Door Freezer");
-            FreezeUnlockedToggle = new QMToggleButton(BClubExploitsPage, -1, 2, "Freeze\nUnlocked", () => { IsFreezeUnlockEnabed = true; }, "Freeze\nUnlocked", () => { IsFreezeUnlockEnabed = false; }, "Door Freezer");
+            FreezeLockedToggle = new QMToggleButton(BClubExploitsPage, -1, 1, "Freeze\nLocked", () => { IsFreezeLockEnabed = true; }, "", () => { IsFreezeLockEnabed = false; }, "Door Freezer", null, Color.green, Color.red, false);
+            FreezeUnlockedToggle = new QMToggleButton(BClubExploitsPage, -1, 2, "Freeze\nUnlocked", () => { IsFreezeUnlockEnabed = true; }, "", () => { IsFreezeUnlockEnabed = false; }, "Door Freezer", null, Color.green, Color.red, false);
             FreezeLockedToggle.SetToggleState(IsFreezeLockEnabed, false);
             FreezeUnlockedToggle.SetToggleState(IsFreezeUnlockEnabed, false);
 
@@ -483,6 +485,10 @@
                 {
                     ModConsole.DebugErrorExc(e);
                 }
+            }
+            else
+            {
+                Bools.IsBClubVIPSpoofing = false;
             }
         }
 
