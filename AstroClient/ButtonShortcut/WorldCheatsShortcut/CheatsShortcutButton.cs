@@ -78,6 +78,16 @@
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
+            else if (id == WorldIds.FBTHeaven)
+            {
+                if (FBTHeaven.FBTExploitsPage != null)
+                {
+                    SetButtonText("FBTHeaven Exploits", "Manage FBTHeaven Exploits");
+                    SetButtonShortcut(FBTHeaven.FBTExploitsPage);
+                    SetButtonColor(Color.green);
+                    ToggleButtonVisibilityAndInteractivity(true);
+                }
+            }
             else if (id == WorldIds.JustHParty)
             {
                 if (JustHParty.JustHPartyMenu != null)

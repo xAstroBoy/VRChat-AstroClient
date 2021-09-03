@@ -14,9 +14,9 @@
     {
         public static QMNestedButton JustHPartyMenu;
 
-        public static void InitButtons(QMTabMenu main, float x, float y)
+        public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
-            JustHPartyMenu = new QMNestedButton(main, x, y, "JustHParty Exploits", "JustHParty Exploits", null, null, null, null, true);
+            JustHPartyMenu = new QMNestedButton(main, x, y, "JustHParty Exploits", "JustHParty Exploits", null, null, null, null, btnHalf);
 
             _ = new QMSingleButton(JustHPartyMenu, 1, 0, "Toggle\nLock\n1", () => { ToggleDoor(1); }, "Toggle Door Lock");
             _ = new QMSingleButton(JustHPartyMenu, 2, 0, "Toggle\nLock\n2", () => { ToggleDoor(2); }, "Toggle Door Lock");

@@ -128,9 +128,9 @@
         private static QMToggleButton LockButton6;
         private static GameObject LockIndicator6;
 
-        public static void InitButtons(QMTabMenu main, float x, float y)
+        public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
-            BClubExploitsPage = new QMNestedButton(main, x, y, "BClub Exploits", "BClub Exploits", null, null, null, null, true);
+            BClubExploitsPage = new QMNestedButton(main, x, y, "BClub Exploits", "BClub Exploits", null, null, null, null, btnHalf);
 
             // Locks
             LockButton1 = new QMToggleButton(BClubExploitsPage, 1, 0, "Unlock 1", () => { ToggleDoor(1); }, "Lock 1", () => { ToggleDoor(1); }, "Toggle Door Lock", null, Color.green, Color.red, false);
@@ -492,7 +492,7 @@
             {
                 ButtonUpdateTime += 1 * Time.deltaTime;
 
-                if (ButtonUpdateTime < 10f)
+                if (ButtonUpdateTime < 100f)
                 {
                     yield return null;
                 }

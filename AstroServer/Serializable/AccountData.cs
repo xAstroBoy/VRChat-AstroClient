@@ -14,6 +14,8 @@
 
         public bool IsDeveloper;
 
+        public bool HasDeveloperVanity;
+
         public bool IsBeta;
 
         public bool HasUdon;

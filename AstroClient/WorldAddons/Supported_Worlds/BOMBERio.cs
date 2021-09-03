@@ -17,9 +17,9 @@
 
     public class BOMBERio : GameEvents
     {
-        public static void InitButtons(QMTabMenu main, float x, float y)
+        public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
-            BOMBERioCheatsPage = new QMNestedButton(main, x, y, "BOMBERio", "BOMBERio Cheats", null, null, null, null, true);
+            BOMBERioCheatsPage = new QMNestedButton(main, x, y, "BOMBERio", "BOMBERio Cheats", null, null, null, null, btnHalf);
             Always_ShootBomb_0_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 0, "Shoot Bomb 0", () => { Override_ShootBomb_0_Toggle = true; }, "Shoot Bomb 0", () => { Override_ShootBomb_0_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
             Always_ShootBomb_1_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 0.5f, "Shoot Bomb 1", () => { Override_ShootBomb_1_Toggle = true; }, "Shoot Bomb 1", () => { Override_ShootBomb_1_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
             Always_ShootBomb_2_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 1, "Shoot Bomb 2", () => { Override_ShootBomb_2_Toggle = true; }, "Shoot Bomb 2", () => { Override_ShootBomb_2_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);

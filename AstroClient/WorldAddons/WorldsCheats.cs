@@ -28,10 +28,11 @@
             VRChatHub.InitButtons(WorldCheats, 1, 1.5f, true);
             //FreezeTag.InitButtons(WorldCheats, 1, 2, true);
             AimFactory.InitButtons(WorldCheats, 1, 2.5f, true);
-            BOMBERio.InitButtons(WorldCheats, 2, 0);
-            BClubWorld.InitButtons(WorldCheats, 4, 2);
-            JustHParty.InitButtons(WorldCheats, 4, 3);
-            VoidClub.InitButtons(WorldCheats, 4, 4);
+            BOMBERio.InitButtons(WorldCheats, 2, 0, true);
+            BClubWorld.InitButtons(WorldCheats, 4, 0.5f, true);
+            JustHParty.InitButtons(WorldCheats, 4, 1, true);
+            VoidClub.InitButtons(WorldCheats, 4, 1.5f, true);
+            FBTHeaven.InitButtons(WorldCheats, 4, 2, true);
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)

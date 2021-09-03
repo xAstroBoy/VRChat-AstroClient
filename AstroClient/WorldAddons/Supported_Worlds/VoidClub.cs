@@ -9,9 +9,9 @@
     {
         public static QMNestedButton VoidClubMenu;
 
-        public static void InitButtons(QMTabMenu main, float x, float y)
+        public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
-            VoidClubMenu = new QMNestedButton(main, x, y, "VoidClubMenu Exploits", "VoidClubMenu Exploits", null, null, null, null, true);
+            VoidClubMenu = new QMNestedButton(main, x, y, "VoidClubMenu Exploits", "VoidClubMenu Exploits", null, null, null, null, btnHalf);
 
             _ = new QMSingleButton(VoidClubMenu, 1, 0, "Unlock\nHotel\n1", () => { UnlockHotel(); }, "Unlock Hotel 1");
             _ = new QMSingleButton(VoidClubMenu, 1, 1, "Unlock\nJapanese\n2", () => { UnlockJapanese(); }, "Unlock Japanese 2");
