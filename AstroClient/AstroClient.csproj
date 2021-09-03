@@ -102,6 +102,7 @@
     <Compile Include="Components\Expoits\OrbitManager.cs" />
     <Compile Include="Components\Orbit\OrbitBehaviour.cs" />
     <Compile Include="Components\Orbit\OrbitManager_Old.cs" />
+    <Compile Include="Components\PickupControl\PickupController_Old.cs" />
     <Compile Include="Managers\AchievmentsManager.cs" />
     <Compile Include="AntiCrash\AntiCrash.cs" />
     <Compile Include="AntiCrash\AntiCrashScanner.cs" />

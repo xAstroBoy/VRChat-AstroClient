@@ -135,7 +135,7 @@
             for (int i = 0; i < Instance.pickups.Count; i++)
             {
                 PickupController pickup = Instance.pickups[i];
-                pickup.RestoreOriginalProperties();
+                pickup.RestoreProperties();
                 GameObjectMenu.RestoreOriginalLocation(pickup.gameObject, true);
                 OnlineEditor.RemoveOwnerShip(pickup.gameObject);
             }
