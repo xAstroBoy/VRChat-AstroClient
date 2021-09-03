@@ -5,7 +5,6 @@
     using System;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
-    using SyncPhysics = SyncPhysics;
 
     public class RigidBodyController : GameEventsBehaviour
 	{

@@ -2,6 +2,7 @@
 {
     using AstroClient.Components;
     using AstroClient.ItemTweakerV2.Submenus;
+    using AstroLibrary.Extensions;
     using UnityEngine;
 
     public class Forces
@@ -27,14 +28,14 @@
         {
             if (obj != null)
             {
-                var body = obj.GetComponent<Rigidbody>();
-                if (body != null)
+                var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
+                 if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
-                    body.AddForce(0, -Force, 0, ForceMode.Impulse);
+                    bodycontroller.Rigidbody.AddForce(0, -Force, 0, ForceMode.Impulse);
                 }
             }
         }
@@ -43,14 +44,14 @@
         {
             if (obj != null)
             {
-                var body = obj.GetComponent<Rigidbody>();
-                if (body != null)
+                var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
+                if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
-                    body.AddForce(x, y, z, ForceMode.Impulse);
+                    bodycontroller.Rigidbody.AddForce(x, y, z, ForceMode.Impulse);
                 }
             }
         }
@@ -59,14 +60,14 @@
         {
             if (obj != null)
             {
-                var body = obj.GetComponent<Rigidbody>();
-                if (body != null)
+                var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
+                 if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
-                    body.AddForce(0, Force, 0, ForceMode.Impulse);
+                    bodycontroller.Rigidbody.AddForce(0, Force, 0, ForceMode.Impulse);
                 }
             }
         }
@@ -75,14 +76,14 @@
         {
             if (obj != null)
             {
-                var body = obj.GetComponent<Rigidbody>();
-                if (body != null)
+                var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
+                 if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
-                    body.AddForce(-Force, 0, 0, ForceMode.Impulse);
+                    bodycontroller.Rigidbody.AddForce(-Force, 0, 0, ForceMode.Impulse);
                 }
             }
         }
@@ -91,14 +92,14 @@
         {
             if (obj != null)
             {
-                var body = obj.GetComponent<Rigidbody>();
-                if (body != null)
+                var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
+                 if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
-                    body.AddRelativeForce(x, y, z, ForceMode.Impulse);
+                    bodycontroller.Rigidbody.AddRelativeForce(x, y, z, ForceMode.Impulse);
                 }
             }
         }
@@ -107,14 +108,14 @@
         {
             if (obj != null)
             {
-                var body = obj.GetComponent<Rigidbody>();
-                if (body != null)
+                var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
+                 if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
-                    body.AddForce(Force, 0, 0, ForceMode.Impulse);
+                    bodycontroller.Rigidbody.AddForce(Force, 0, 0, ForceMode.Impulse);
                 }
             }
         }
@@ -123,14 +124,14 @@
         {
             if (obj != null)
             {
-                var body = obj.GetComponent<Rigidbody>();
-                if (body != null)
+                var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
+                 if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
-                    body.AddForce(0, 0, -Force, ForceMode.Impulse);
+                    bodycontroller.Rigidbody.AddForce(0, 0, -Force, ForceMode.Impulse);
                 }
             }
         }
@@ -139,25 +140,21 @@
         {
             if (obj != null)
             {
-                var body = obj.GetComponent<Rigidbody>();
-                if (body != null)
+                var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
+                 if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
-                    body.AddForce(0, 0, Force, ForceMode.Impulse);
+                    bodycontroller.Rigidbody.AddForce(0, 0, Force, ForceMode.Impulse);
                 }
             }
         }
 
         public static void RemoveAllObjConstraints(GameObject obj)
         {
-            var itemedit = obj.GetComponent<RigidBodyController>();
-            if (itemedit == null)
-            {
-                itemedit = obj.AddComponent<RigidBodyController>();
-            }
+            var itemedit = obj.GetOrAddComponent<RigidBodyController>();
             if (itemedit != null)
             {
                 if (!itemedit.EditMode)
@@ -170,13 +167,14 @@
 
         public static void RemoveConstraint(GameObject obj, RigidbodyConstraints constraint)
         {
-            var itemedit = obj.GetComponent<RigidBodyController>();
-            if (itemedit == null)
-            {
-                itemedit = obj.AddComponent<RigidBodyController>();
-            }
+            var itemedit = obj.GetOrAddComponent<RigidBodyController>();
+
             if (itemedit != null)
             {
+                if (!itemedit.EditMode)
+                {
+                    itemedit.EditMode = true;
+                }
                 if (itemedit.constraints.HasFlag(constraint))
                 {
                     itemedit.constraints &= ~constraint;
@@ -188,15 +186,19 @@
         {
             if (obj != null)
             {
-                var body = obj.GetComponent<Rigidbody>();
-                if (body != null)
+                var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
+                 if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
-                    body.velocity = Vector3.zero;
-                    body.angularVelocity = Vector3.zero;
+                    if (!bodycontroller.EditMode)
+                    {
+                        bodycontroller.EditMode = true;
+                    }
+                    bodycontroller.Rigidbody.velocity = Vector3.zero;
+                    bodycontroller.Rigidbody.angularVelocity = Vector3.zero;
                 }
             }
         }
@@ -205,14 +207,14 @@
         {
             if (obj != null)
             {
-                var body = obj.GetComponent<Rigidbody>();
-                if (body != null)
+                var bodycontroller = obj.GetComponent<RigidBodyController>();
+                 if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
-                    body.AddRelativeTorque(x, y, z, ForceMode.Force);
+                    bodycontroller.Rigidbody.AddRelativeTorque(x, y, z, ForceMode.Force);
                 }
             }
         }
@@ -221,10 +223,10 @@
         {
             if (obj != null)
             {
-                var body = obj.GetComponent<Rigidbody>();
-                if (body != null)
+                var bodycontroller = obj.GetComponent<RigidBodyController>();
+                 if (bodycontroller.Rigidbody != null)
                 {
-                    body.AddRelativeTorque(SpinForce, 0, 0, ForceMode.Force);
+                    bodycontroller.Rigidbody.AddRelativeTorque(SpinForce, 0, 0, ForceMode.Force);
                 }
             }
         }
@@ -233,14 +235,14 @@
         {
             if (obj != null)
             {
-                var body = obj.GetComponent<Rigidbody>();
-                if (body != null)
+                var bodycontroller = obj.GetComponent<RigidBodyController>();
+                 if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
-                    body.AddRelativeTorque(0, SpinForce, 0, ForceMode.Force);
+                    bodycontroller.Rigidbody.AddRelativeTorque(0, SpinForce, 0, ForceMode.Force);
                 }
             }
         }
@@ -249,14 +251,14 @@
         {
             if (obj != null)
             {
-                var body = obj.GetComponent<Rigidbody>();
-                if (body != null)
+                var bodycontroller = obj.GetComponent<RigidBodyController>();
+                 if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
                         OnlineEditor.TakeObjectOwnership(obj);
                     }
-                    body.AddRelativeTorque(0, 0, SpinForce, ForceMode.Force);
+                    bodycontroller.Rigidbody.AddRelativeTorque(0, 0, SpinForce, ForceMode.Force);
                 }
             }
         }
