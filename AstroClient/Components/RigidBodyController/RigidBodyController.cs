@@ -59,8 +59,6 @@
 				angularVelocity = Rigidbody.angularVelocity;
 				velocity = Rigidbody.velocity;
 				isKinematic = Rigidbody.isKinematic;
-				position = Rigidbody.position;
-				rotation = Rigidbody.rotation;
 				sleepVelocity = Rigidbody.sleepVelocity;
 				sleepThreshold = Rigidbody.sleepThreshold;
 				maxAngularVelocity = Rigidbody.maxAngularVelocity;
@@ -87,8 +85,6 @@
 				Original_angularVelocity = Rigidbody.angularVelocity;
 				Original_velocity = Rigidbody.velocity;
 				Original_isKinematic = Rigidbody.isKinematic;
-				Original_position = Rigidbody.position;
-				Original_rotation = Rigidbody.rotation;
 				Original_sleepVelocity = Rigidbody.sleepVelocity;
 				Original_sleepThreshold = Rigidbody.sleepThreshold;
 				Original_maxAngularVelocity = Rigidbody.maxAngularVelocity;
@@ -164,8 +160,6 @@
 					angularVelocity = Rigidbody.angularVelocity;
 					velocity = Rigidbody.velocity;
 					isKinematic = Rigidbody.isKinematic;
-					position = Rigidbody.position;
-					rotation = Rigidbody.rotation;
 					sleepVelocity = Rigidbody.sleepVelocity;
 					sleepThreshold = Rigidbody.sleepThreshold;
 					maxAngularVelocity = Rigidbody.maxAngularVelocity;
@@ -192,8 +186,6 @@
 					Original_angularVelocity = Rigidbody.angularVelocity;
 					Original_velocity = Rigidbody.velocity;
 					Original_isKinematic = Rigidbody.isKinematic;
-					Original_position = Rigidbody.position;
-					Original_rotation = Rigidbody.rotation;
 					Original_sleepVelocity = Rigidbody.sleepVelocity;
 					Original_sleepThreshold = Rigidbody.sleepThreshold;
 					Original_maxAngularVelocity = Rigidbody.maxAngularVelocity;
@@ -227,8 +219,6 @@
 		private Vector3 _angularVelocity;
 		private Vector3 _velocity;
 		private bool _isKinematic;
-		private Vector3 _position;
-		private Quaternion _rotation;
 		private float _sleepVelocity;
 		private float _sleepThreshold;
 		private float _maxAngularVelocity;
@@ -597,47 +587,7 @@
 			}
 		}
 
-		internal Vector3 position
-		{
-			get
-			{
-				return _position;
-			}
-			set
-			{
-				_position = value;
-				if (EditMode)
-				{
-					if (Rigidbody != null)
-					{
-						Rigidbody.position = value;
-						SyncPhysics.RefreshProperties();
-					}
-				}
-				Run_OnRigidBodyPropertyChanged();
-			}
-		}
-
-		internal Quaternion rotation
-		{
-			get
-			{
-				return _rotation;
-			}
-			set
-			{
-				_rotation = value;
-				if (EditMode)
-				{
-					if (Rigidbody != null)
-					{
-						Rigidbody.rotation = value;
-						SyncPhysics.RefreshProperties();
-					}
-				}
-				Run_OnRigidBodyPropertyChanged();
-			}
-		}
+	
 
 		internal float sleepVelocity
 		{
@@ -841,8 +791,6 @@
 		private Vector3 Original_angularVelocity;
 		private Vector3 Original_velocity;
 		private bool Original_isKinematic;
-		private Vector3 Original_position;
-		private Quaternion Original_rotation;
 		private float Original_sleepVelocity;
 		private float Original_sleepThreshold;
 		private float Original_maxAngularVelocity;
