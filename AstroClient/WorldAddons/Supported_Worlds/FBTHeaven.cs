@@ -29,15 +29,15 @@
         {
             FBTExploitsPage = new QMNestedButton(main, x, y, "FBTHeaven Exploits", "FBTHeaven Exploits", null, null, null, null, btnHalf);
 
-            for (int i = 1; i < 4; i++)
-            {
-                _ = new QMSingleButton(FBTExploitsPage, i, 0, $"Unlock Door\n{i}", () => { UnlockDoor(i); }, $"Unlock Door {i}");
-            }
+            _ = new QMSingleButton(FBTExploitsPage, 1, 0, $"Unlock Door\n1", () => { UnlockDoor(1); }, $"Unlock Door 1");
+            _ = new QMSingleButton(FBTExploitsPage, 2, 0, $"Unlock Door\n2", () => { UnlockDoor(2); }, $"Unlock Door 2");
+            _ = new QMSingleButton(FBTExploitsPage, 3, 0, $"Unlock Door\n3", () => { UnlockDoor(3); }, $"Unlock Door 3");
+            _ = new QMSingleButton(FBTExploitsPage, 4, 0, $"Unlock Door\n4", () => { UnlockDoor(4); }, $"Unlock Door 4");
 
-            for (int i = 1; i < 4; i++)
-            {
-                _ = new QMSingleButton(FBTExploitsPage, i, 1, $"Lock Door\n{i}", () => { LockDoor(i); }, $"Lock Door {i}");
-            }
+            _ = new QMSingleButton(FBTExploitsPage, 1, 1, $"Lock Door\n1", () => { LockDoor(1); }, $"Lock Door 1");
+            _ = new QMSingleButton(FBTExploitsPage, 2, 1, $"Lock Door\n2", () => { LockDoor(2); }, $"Lock Door 2");
+            _ = new QMSingleButton(FBTExploitsPage, 3, 1, $"Lock Door\n3", () => { LockDoor(3); }, $"Lock Door 3");
+            _ = new QMSingleButton(FBTExploitsPage, 4, 1, $"Lock Door\n4", () => { LockDoor(4); }, $"Lock Door 4");
 
             //LockButton1 = new QMToggleButton(FBTExploitsPage, 1, 0, "Unlock 1", () => { UnlockDoor(1); }, "Lock 1", () => { LockDoor(1); }, "Toggle Door Lock", null, Color.green, Color.red, false);
             //LockButton2 = new QMToggleButton(FBTExploitsPage, 2, 0, "Unlock 2", () => { UnlockDoor(2); }, "Lock 2", () => { LockDoor(2); }, "Toggle Door Lock", null, Color.green, Color.red, false);
