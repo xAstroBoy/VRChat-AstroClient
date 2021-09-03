@@ -29,6 +29,7 @@
 
         public void Update()
         {
+            Run_onPickupUpdate();
             if (!EditMode)
             { 
                 SyncProperties(true);
