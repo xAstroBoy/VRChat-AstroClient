@@ -61,7 +61,7 @@
             Reset();
         }
 
-        public override void OnRigidBodyControllerSelected(RigidBodyController control)
+        public override void OnRigidBodyController_Selected(RigidBodyController control)
         {
             UpdateButtonsFromController(control);
         }

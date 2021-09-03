@@ -2,6 +2,7 @@
 {
     using AstroClient.Components;
     using AstroClient.ItemTweakerV2.Selector;
+    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using RubyButtonAPI;
@@ -52,12 +53,17 @@
             PickupProximitySlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
         }
 
-        public override void OnPickupControllerSelected(PickupController control)
+        public override void OnPickupController_Selected(PickupController control)
         {
             UpdatePickupButtons(control);
         }
 
         public override void OnPickupController_PropertyChanged(PickupController control)
+        {
+            UpdatePickupButtons(control);
+        }
+
+        public override void OnPickupController_OnUpdate(PickupController control)
         {
             UpdatePickupButtons(control);
         }
@@ -195,6 +201,10 @@
                     }
                     return;
                 }
+                //else
+                //{
+                //    ModConsole.DebugLog($"Unable to Find PickupController on Object : {controller.gameObject.name}");
+                //}
             }
 
             HasPickupComponent.SetTextColor(Color.red);
