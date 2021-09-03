@@ -175,16 +175,16 @@
                         gameObject.TakeOwnership();
                     }
 
-                    control.Constraints = RigidbodyConstraints.FreezeRotation;
-                    control.UseGravity = false;
-                    control.UpdateDrag(Drag);
+                    control.constraints = RigidbodyConstraints.FreezeRotation;
+                    control.useGravity = false;
+                    control.drag = Drag;
                     HasUpdatedDrag = false;
                     HasUpdatedKinematic = false;
                     if (control != null)
                     {
-                        control.Constraints = RigidbodyConstraints.FreezeRotation;
-                        control.IsKinematic = false;
-                        control.UseGravity = false;
+                        control.constraints = RigidbodyConstraints.FreezeRotation;
+                        control.isKinematic = false;
+                        control.useGravity = false;
                     }
 
                     HasRequiredSettings = true;

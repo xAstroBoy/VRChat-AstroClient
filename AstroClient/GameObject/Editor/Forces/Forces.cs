@@ -164,7 +164,7 @@
                 {
                     itemedit.EditMode = true;
                 }
-                itemedit.Constraints = RigidbodyConstraints.None;
+                itemedit.constraints = RigidbodyConstraints.None;
             }
         }
 
@@ -177,9 +177,9 @@
             }
             if (itemedit != null)
             {
-                if (itemedit.Constraints.HasFlag(constraint))
+                if (itemedit.constraints.HasFlag(constraint))
                 {
-                    itemedit.Constraints &= ~constraint;
+                    itemedit.constraints &= ~constraint;
                 }
             }
         }

@@ -52,9 +52,9 @@
                     {
                         if (controller.EditMode)
                         {
-                            if (controller.IsKinematic)
+                            if (controller.isKinematic)
                             {
-                                controller.IsKinematic = false;
+                                controller.isKinematic = false;
                             }
                         }
                     }

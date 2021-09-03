@@ -33,10 +33,10 @@
         {
             if (control != null)
             {
-                if (!UpdateFreezeAllConstraints(control.Constraints))
+                if (!UpdateFreezeAllConstraints(control.constraints))
                 {
-                    UpdatePositionConstraints(control.Constraints);
-                    UpdateRotationSection(control.Constraints);
+                    UpdatePositionConstraints(control.constraints);
+                    UpdateRotationSection(control.constraints);
                 }
             }
         }

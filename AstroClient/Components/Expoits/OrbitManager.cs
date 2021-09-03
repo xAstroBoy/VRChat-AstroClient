@@ -65,7 +65,7 @@
         public void Start()
         {
             Instance = this;
-            RefreshPickups();
+            //RefreshPickups();
             ModConsole.Log($"[OrbitManager] Initialized");
         }
 
@@ -111,7 +111,7 @@
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
-            RefreshPickups();
+            //RefreshPickups();
         }
 
         public static void OrbitPlayer(Player target)

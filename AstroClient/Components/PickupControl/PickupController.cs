@@ -151,11 +151,11 @@
                 if (control != null)
                 {
                     // IF INTERNAL SYNC IS NULL, Force The rigidbody to take over , Then Set it as Kinematic in case no collider is present.
-                    if (control.Internal_Sync == null)
+                    if (control.SyncPhysics == null)
                     {
-                        if (!control.Forced_RigidBody)
+                        if (!control.Forced_Rigidbody)
                         {
-                            control.Forced_RigidBody = true;
+                            control.Forced_Rigidbody = true;
                         }
                         if (!control.EditMode)
                         {

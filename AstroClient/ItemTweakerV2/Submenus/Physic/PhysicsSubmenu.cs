@@ -121,17 +121,17 @@
         {
             if (control != null)
             {
-                if (GravityToggler.GetToggleState() != control.UseGravity)
+                if (GravityToggler.GetToggleState() != control.useGravity)
                 {
-                    GravityToggler.SetToggleState(control.UseGravity);
+                    GravityToggler.SetToggleState(control.useGravity);
                 }
-                if (KinematicToggler.GetToggleState() != control.IsKinematic)
+                if (KinematicToggler.GetToggleState() != control.isKinematic)
                 {
-                    KinematicToggler.SetToggleState(control.IsKinematic);
+                    KinematicToggler.SetToggleState(control.isKinematic);
                 }
-                if (CollisionsToggler.GetToggleState() != control.DetectCollisions)
+                if (CollisionsToggler.GetToggleState() != control.detectCollisions)
                 {
-                    CollisionsToggler.SetToggleState(control.DetectCollisions);
+                    CollisionsToggler.SetToggleState(control.detectCollisions);
                 }
             }
         }
