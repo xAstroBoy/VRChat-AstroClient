@@ -23,6 +23,7 @@
                 if (RigidBodyController != null)
                 {
                     Event_OnRigidBodyControllerSelected.SafetyRaise(new OnRigidBodyControllerArgs(RigidBodyController));
+                    
                     RigidBodyController.SetRigidBodyPropertyChanged(() =>
                     {
                         Event_OnRigidBodyControllerPropertyChanged.SafetyRaise(new OnRigidBodyControllerArgs(RigidBodyController)); // Dunno if it works.

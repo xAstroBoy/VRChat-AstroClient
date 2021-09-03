@@ -33,10 +33,10 @@
         {
             if (control != null)
             {
-                if (!UpdateFreezeAllConstraints(control.Constraints))
+                if (!UpdateFreezeAllConstraints(control.constraints))
                 {
-                    UpdatePositionConstraints(control.Constraints);
-                    UpdateRotationSection(control.Constraints);
+                    UpdatePositionConstraints(control.constraints);
+                    UpdateRotationSection(control.constraints);
                 }
             }
         }
@@ -61,7 +61,7 @@
             Reset();
         }
 
-        public override void OnRigidBodyControllerSelected(RigidBodyController control)
+        public override void OnRigidBodyController_Selected(RigidBodyController control)
         {
             UpdateButtonsFromController(control);
         }

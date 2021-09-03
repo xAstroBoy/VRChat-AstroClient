@@ -100,9 +100,9 @@
                         {
                             if (control != null)
                             {
-                                control.IsKinematic = false;
-                                control.UpdateAngularDrag(0);
-                                control.UpdateDrag(0);
+                                control.isKinematic = false;
+                                control.angularDrag = 0;
+                                control.drag = 0;
                             }
                             HasRequiredSettings = true;
                         }

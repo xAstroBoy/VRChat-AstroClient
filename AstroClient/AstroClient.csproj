@@ -241,7 +241,6 @@
     <Compile Include="Components\PlayerAttacker\PlayerAttackerManager.cs" />
     <Compile Include="Components\PlayerWatcher\PlayerWatcher.cs" />
     <Compile Include="Components\PlayerWatcher\PlayerWatcherManager.cs" />
-    <Compile Include="Components\RigidBodyController\RigidBodyController.cs" />
     <Compile Include="Components\RocketComponent\RocketManager.cs" />
     <Compile Include="Components\RocketComponent\RocketObject.cs" />
     <Compile Include="Components\ESP\Player\PlayerESP.cs" />
@@ -1080,6 +1079,7 @@
     </None>
     <EmbeddedResource Include="Figlet\Larry3D.flf" />
     <None Include="app.config" />
+    <Compile Include="Components\RigidBodyController\RigidBodyController.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

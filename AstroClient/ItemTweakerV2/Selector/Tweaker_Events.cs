@@ -17,7 +17,7 @@
             ListenerHandler.Event_OnSelectedObject_Disabled += Internal_OnSelectedObject_Disabled;
             ListenerHandler.Event_OnSelectedObject_Destroyed += Internal_OnSelectedObject_Destroyed;
 
-            PickupControllerHandler.Event_OnPickupControllerSelected += Internal_OnPickupControllerSelected;
+            PickupControllerHandler.Event_OnPickupControllerSelected += Internal_OnPickupController_Selected;
             PickupControllerHandler.Event_OnPickupControllerPropertyChanged += Internal_OnPickupController_PropertyChanged;
             PickupControllerHandler.Event_OnPickupController_OnUpdate += Internal_OnPickupController_OnUpdate;
 
@@ -53,9 +53,9 @@
             OnSelectedObject_Destroyed();
         }
 
-        private void Internal_OnPickupControllerSelected(object sender, OnPickupControllerArgs e)
+        private void Internal_OnPickupController_Selected(object sender, OnPickupControllerArgs e)
         {
-            OnPickupControllerSelected(e.control);
+            OnPickupController_Selected(e.control);
         }
 
         private void Internal_OnPickupController_PropertyChanged(object sender, OnPickupControllerArgs e)
@@ -70,7 +70,7 @@
 
         private void Internal_OnRigidBodyControllerSelected(object sender, OnRigidBodyControllerArgs e)
         {
-            OnRigidBodyControllerSelected(e.control);
+            OnRigidBodyController_Selected(e.control);
         }
 
         private void Internal_OnRigidBodyController_PropertyChanged(object sender, OnRigidBodyControllerArgs e)
@@ -103,7 +103,7 @@
         {
         }
 
-        public virtual void OnRigidBodyControllerSelected(RigidBodyController control)
+        public virtual void OnRigidBodyController_Selected(RigidBodyController control)
         {
         }
 
@@ -115,7 +115,7 @@
         {
         }
 
-        public virtual void OnPickupControllerSelected(PickupController control)
+        public virtual void OnPickupController_Selected(PickupController control)
         {
         }
 

@@ -288,12 +288,12 @@
                     var control = item.GetOrAddComponent<RigidBodyController>();
                     if (control != null)
                     {
-                        if (control.GetRigidbody() != null)
+                        if (control.Rigidbody != null)
                         {
                             ModConsole.DebugLog($"Analyzing Rigidbody Property of {item.name}");
 
                             bool hasWorkingCollider = false;
-                            if (control.GetRigidbody().isKinematic)
+                            if (control.Rigidbody.isKinematic)
                             {
                                 ModConsole.DebugLog($"Checking If a Non-trigger collider is present in {item.name}");
 
@@ -342,8 +342,8 @@
                             if (hasWorkingCollider)
                             {
                                 control.EditMode = true;
-                                control.IsKinematic = false;
-                                control.UseGravity = useGravity;
+                                control.isKinematic = false;
+                                control.useGravity = useGravity;
                             }
                         }
                     }

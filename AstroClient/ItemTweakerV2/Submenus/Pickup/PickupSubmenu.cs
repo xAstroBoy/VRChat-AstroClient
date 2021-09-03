@@ -2,6 +2,7 @@
 {
     using AstroClient.Components;
     using AstroClient.ItemTweakerV2.Selector;
+    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using RubyButtonAPI;
@@ -52,12 +53,17 @@
             PickupProximitySlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
         }
 
-        public override void OnPickupControllerSelected(PickupController control)
+        public override void OnPickupController_Selected(PickupController control)
         {
             UpdatePickupButtons(control);
         }
 
         public override void OnPickupController_PropertyChanged(PickupController control)
+        {
+            UpdatePickupButtons(control);
+        }
+
+        public override void OnPickupController_OnUpdate(PickupController control)
         {
             UpdatePickupButtons(control);
         }
@@ -109,7 +115,7 @@
                     }
                     if (Pickup_PickupOrientation_prop_any != null)
                     {
-                        if (controller.PickupOrientation == VRC_Pickup.PickupOrientation.Any)
+                        if (controller.orientation == VRC_Pickup.PickupOrientation.Any)
                         {
                             Pickup_PickupOrientation_prop_any.SetTextColor(Color.green);
                         }
@@ -120,7 +126,7 @@
                     }
                     if (Pickup_PickupOrientation_prop_Grip != null)
                     {
-                        if (controller.PickupOrientation == VRC_Pickup.PickupOrientation.Grip)
+                        if (controller.orientation == VRC_Pickup.PickupOrientation.Grip)
                         {
                             Pickup_PickupOrientation_prop_Grip.SetTextColor(Color.green);
                         }
@@ -131,7 +137,7 @@
                     }
                     if (Pickup_PickupOrientation_prop_Gun != null)
                     {
-                        if (controller.PickupOrientation == VRC_Pickup.PickupOrientation.Gun)
+                        if (controller.orientation == VRC_Pickup.PickupOrientation.Gun)
                         {
                             Pickup_PickupOrientation_prop_Gun.SetTextColor(Color.green);
                         }
@@ -142,7 +148,7 @@
                     }
                     if (Pickup_AutoHoldMode_prop_AutoDetect != null)
                     {
-                        if (controller.AutoHoldMode == VRC_Pickup.AutoHoldMode.AutoDetect)
+                        if (controller.AutoHold == VRC_Pickup.AutoHoldMode.AutoDetect)
                         {
                             Pickup_AutoHoldMode_prop_AutoDetect.SetTextColor(Color.green);
                         }
@@ -153,7 +159,7 @@
                     }
                     if (Pickup_AutoHoldMode_prop_Yes != null)
                     {
-                        if (controller.AutoHoldMode == VRC_Pickup.AutoHoldMode.Yes)
+                        if (controller.AutoHold == VRC_Pickup.AutoHoldMode.Yes)
                         {
                             Pickup_AutoHoldMode_prop_Yes.SetTextColor(Color.green);
                         }
@@ -164,7 +170,7 @@
                     }
                     if (Pickup_AutoHoldMode_prop_No != null)
                     {
-                        if (controller.AutoHoldMode == VRC_Pickup.AutoHoldMode.No)
+                        if (controller.AutoHold == VRC_Pickup.AutoHoldMode.No)
                         {
                             Pickup_AutoHoldMode_prop_No.SetTextColor(Color.green);
                         }
@@ -195,6 +201,10 @@
                     }
                     return;
                 }
+                //else
+                //{
+                //    ModConsole.DebugLog($"Unable to Find PickupController on Object : {controller.gameObject.name}");
+                //}
             }
 
             HasPickupComponent.SetTextColor(Color.red);

@@ -22,7 +22,7 @@
                 {
                     control.EditMode = true;
                 }
-                control.UseGravity = useGravity;
+                control.useGravity = useGravity;
             }
         }
 
@@ -34,7 +34,7 @@
                 {
                     control.EditMode = true;
                 }
-                control.DetectCollisions = DetectCollisions;
+                control.detectCollisions = DetectCollisions;
             }
         }
 
@@ -46,7 +46,7 @@
                 {
                     control.EditMode = true;
                 }
-                control.IsKinematic = isKinematic;
+                control.isKinematic = isKinematic;
             }
         }
 
@@ -58,9 +58,9 @@
                 {
                     control.EditMode = true;
                 }
-                if (control.Constraints.HasFlag(constraint))
+                if (control.constraints.HasFlag(constraint))
                 {
-                    control.Constraints &= ~constraint;
+                    control.constraints &= ~constraint;
                 }
             }
         }
@@ -73,7 +73,7 @@
                 {
                     control.EditMode = true;
                 }
-                control.Constraints = RigidbodyConstraints.None;
+                control.constraints = RigidbodyConstraints.None;
             }
         }
 
@@ -85,7 +85,7 @@
                 {
                     control.EditMode = true;
                 }
-                control.Constraints |= constraint;
+                control.constraints |= constraint;
             }
         }
 
@@ -105,38 +105,34 @@
         {
             if (control != null)
             {
-                if (control.GetRigidbody() != null)
+                var meshcolliders = control.gameObject.GetComponentsInChildren<MeshCollider>(true);
+                if (meshcolliders.Count != 0)
                 {
-                    var meshcolliders = control.gameObject.GetComponentsInChildren<MeshCollider>(true);
-                    if (meshcolliders.Count != 0)
+                    foreach (var c in meshcolliders)
                     {
-                        foreach (var c in meshcolliders)
+                        if (c.enabled && c.convex)
                         {
-                            if (c.enabled && c.convex)
-                            {
-                                return false;
-                            }
+                            return false;
                         }
                     }
-                    else
+                }
+                else
+                {
+                    var Colliders = control.gameObject.GetComponentsInChildren<Collider>(true);
+                    if (Colliders.Count != 0)
                     {
-                        var Colliders = control.gameObject.GetComponentsInChildren<Collider>(true);
-                        if (Colliders.Count != 0)
+                        foreach (var collider in Colliders)
                         {
-                            foreach (var collider in Colliders)
+                            if (collider != null)
                             {
-                                if (collider != null)
+                                if (!collider.isTrigger && collider.enabled)
                                 {
-                                    if (!collider.isTrigger && collider.enabled)
-                                    {
-                                        return false;
-                                    }
+                                    return false;
                                 }
                             }
                         }
                     }
                 }
-                return true;
             }
             return true;
         }
@@ -283,7 +279,7 @@
                 {
                     control.EditMode = true;
                 }
-                control.Drag = Drag;
+                control.drag = Drag;
             }
         }
 
@@ -295,7 +291,7 @@
                 {
                     control.EditMode = true;
                 }
-                control.AngularDrag = AngularDrag;
+                control.angularDrag = AngularDrag;
             }
         }
 
@@ -308,7 +304,7 @@
                 {
                     control.EditMode = true;
                 }
-                control.Forced_RigidBody = Forced_RigidBody;
+                control.Forced_Rigidbody = Forced_RigidBody;
             }
         }
 

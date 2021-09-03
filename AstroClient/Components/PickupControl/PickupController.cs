@@ -4,8 +4,8 @@
     using AstroLibrary.Extensions;
     using System;
     using UnhollowerBaseLib.Attributes;
+    using UnityEngine;
     using VRC.SDKBase;
-    using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 
     public class PickupController : GameEventsBehaviour
     {
@@ -16,725 +16,946 @@
         // Use this for initialization
         public void Start()
         {
-            Pickup1 = gameObject.GetComponent<VRC_Pickup>();
-            Pickup2 = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
-            Pickup3 = gameObject.GetComponent<VRC.SDK3.Components.VRCPickup>();
+            SDKBase_Pickup = gameObject.GetComponent<VRC.SDKBase.VRC_Pickup>();
+            SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
+            SDK3_Pickup = gameObject.GetComponent<VRC.SDK3.Components.VRCPickup>();
 
-            control = gameObject.GetOrAddComponent<RigidBodyController>();
-            BackupOriginalProperties();
-            Locked = false;
+            RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
+            SyncProperties(true);
             ModConsole.DebugLog("Attacked Successfully PickupController to object " + gameObject.name);
         }
 
-        [HideFromIl2Cpp]
-        private void BackupOriginalProperties()
-        {
-            if (Pickup1 != null)
-            {
-                Original_allowManipulationWhenEquipped = Pickup1.allowManipulationWhenEquipped;
-                Original_pickupable = Pickup1.pickupable;
-                Original_DisallowTheft = Pickup1.DisallowTheft;
-                Original_AutoHold = Pickup1.AutoHold;
-                Original_orientation = Pickup1.orientation;
-                Original_Proximity = Pickup1.proximity;
-                Original_ThrowVelocityBoostMinSpeed = Pickup1.ThrowVelocityBoostMinSpeed;
-                Original_ThrowVelocityBoostScale = Pickup1.ThrowVelocityBoostScale;
-                proximity = Pickup1.proximity;
-                allowManipulationWhenEquipped = Pickup1.allowManipulationWhenEquipped;
-                pickupable = Pickup1.pickupable;
-                DisallowTheft = Pickup1.DisallowTheft;
-                AutoHoldMode = Pickup1.AutoHold;
-                PickupOrientation = Pickup1.orientation;
-                ThrowVelocityBoostMinSpeed = Pickup1.ThrowVelocityBoostMinSpeed;
-                ThrowVelocityBoostScale = Pickup1.ThrowVelocityBoostScale;
-            }
-            else if (Pickup2 != null)
-            {
-                Original_allowManipulationWhenEquipped = Pickup2.allowManipulationWhenEquipped;
-                Original_pickupable = Pickup2.pickupable;
-                Original_DisallowTheft = Pickup2.DisallowTheft;
-                Original_AutoHold = Pickup2.AutoHold;
-                Original_orientation = Pickup2.orientation;
-                Original_Proximity = Pickup2.proximity;
-                Original_ThrowVelocityBoostMinSpeed = Pickup2.ThrowVelocityBoostMinSpeed;
-                Original_ThrowVelocityBoostScale = Pickup2.ThrowVelocityBoostScale;
-                proximity = Pickup2.proximity;
-                allowManipulationWhenEquipped = Pickup2.allowManipulationWhenEquipped;
-                pickupable = Pickup2.pickupable;
-                DisallowTheft = Pickup2.DisallowTheft;
-                AutoHoldMode = Pickup2.AutoHold;
-                PickupOrientation = Pickup2.orientation;
-                ThrowVelocityBoostMinSpeed = Pickup2.ThrowVelocityBoostMinSpeed;
-                ThrowVelocityBoostScale = Pickup2.ThrowVelocityBoostScale;
-            }
-            else if (Pickup3 != null)
-            {
-                Original_allowManipulationWhenEquipped = Pickup3.allowManipulationWhenEquipped;
-                Original_pickupable = Pickup3.pickupable;
-                Original_DisallowTheft = Pickup3.DisallowTheft;
-                Original_AutoHold = Pickup3.AutoHold;
-                Original_orientation = Pickup3.orientation;
-                Original_Proximity = Pickup3.proximity;
-                Original_ThrowVelocityBoostMinSpeed = Pickup3.ThrowVelocityBoostMinSpeed;
-                Original_ThrowVelocityBoostScale = Pickup3.ThrowVelocityBoostScale;
-                proximity = Pickup3.proximity;
-                allowManipulationWhenEquipped = Pickup3.allowManipulationWhenEquipped;
-                pickupable = Pickup3.pickupable;
-                DisallowTheft = Pickup3.DisallowTheft;
-                AutoHoldMode = Pickup3.AutoHold;
-                PickupOrientation = Pickup3.orientation;
-                ThrowVelocityBoostMinSpeed = Pickup3.ThrowVelocityBoostMinSpeed;
-                ThrowVelocityBoostScale = Pickup3.ThrowVelocityBoostScale;
-            }
-        }
-
-        [HideFromIl2Cpp]
-        internal void RestoreOriginalProperties()
-        {
-            Locked = true;
-            allowManipulationWhenEquipped = Original_allowManipulationWhenEquipped;
-            pickupable = Original_pickupable;
-            DisallowTheft = Original_DisallowTheft;
-            AutoHoldMode = Original_AutoHold;
-            PickupOrientation = Original_orientation;
-            proximity = Original_Proximity;
-            ThrowVelocityBoostMinSpeed = Original_ThrowVelocityBoostMinSpeed;
-            ThrowVelocityBoostScale = Original_ThrowVelocityBoostScale;
-            if (Pickup1 != null)
-            {
-                Pickup1.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
-                Pickup1.pickupable = pickupable;
-                Pickup1.DisallowTheft = DisallowTheft;
-                Pickup1.AutoHold = AutoHoldMode;
-                Pickup1.orientation = PickupOrientation;
-                Pickup1.proximity = proximity;
-                Pickup1.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
-                Pickup1.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
-
-            }
-            else if (Pickup2 != null)
-            {
-                Pickup2.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
-                Pickup2.pickupable = pickupable;
-                Pickup2.DisallowTheft = DisallowTheft;
-                Pickup2.AutoHold = AutoHoldMode;
-                Pickup2.orientation = PickupOrientation;
-                Pickup2.proximity = proximity;
-                Pickup2.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
-                Pickup2.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
-
-            }
-            else if (Pickup3 != null)
-            {
-                Pickup3.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
-                Pickup3.pickupable = pickupable;
-                Pickup3.DisallowTheft = DisallowTheft;
-                Pickup3.AutoHold = AutoHoldMode;
-                Pickup3.orientation = PickupOrientation;
-                Pickup3.proximity = proximity;
-                Pickup3.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
-                Pickup3.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
-
-            }
-            Locked = false;
-        }
-
-        [HideFromIl2Cpp]
-        internal void SetRigidbody()
-        {
-            if (HasSetRigidbodyController)
-            {
-                return;
-            }
-            if (!HasSetRigidbodyController)
-            {
-                if (control != null)
-                {
-                    // IF INTERNAL SYNC IS NULL, Force The rigidbody to take over , Then Set it as Kinematic in case no collider is present.
-                    if (control.Internal_Sync == null)
-                    {
-                        if (!control.Forced_RigidBody)
-                        {
-                            control.Forced_RigidBody = true;
-                        }
-                        if (!control.EditMode)
-                        {
-                            control.EditMode = true;
-                        }
-                        // Let's use smart kinematic (Checks for Colliders present that can block and prevent the fall of the object).
-
-                        if (control != null)
-                        {
-                            var will_it_fall_throught = control.RigidBody_Will_It_fall_throught();
-                            if (!will_it_fall_throught)
-                            {
-                                control.RigidBody_Set_isKinematic(false);
-                            }
-                            else
-                            {
-                                control.RigidBody_Set_isKinematic(true);
-
-                            }
-                        }
-                    }
-                }
-                HasSetRigidbodyController = true;
-            }
-        }
-
-        // Update is called once per frame
         public void Update()
         {
-            try
+            Run_onPickupUpdate();
+            if (!EditMode)
             {
-                if (Locked)
+                SyncProperties(true);
+            }
+        }
+
+        #region Backup and Restore Methods
+
+        private void SyncProperties(bool isFromUpdate)
+        {
+            if (isFromUpdate)
+            {
+                if (_EditMode)
                 {
-                    return;
+                    _EditMode = false; // Disable this so it goes on Sync Mode.
                 }
-                Run_onPickupUpdate();
-                if (ForceComponent)
-                {
-                    SetRigidbody();
+            }
+            if (SDKBase_Pickup != null)
+            {
+                Original_currentlyHeldBy = SDKBase_Pickup.currentlyHeldBy;
+                Original_UseDownEventName = SDKBase_Pickup.UseDownEventName;
+                Original_currentLocalPlayer = SDKBase_Pickup.currentLocalPlayer;
+                Original_ThrowVelocityBoostScale = SDKBase_Pickup.ThrowVelocityBoostScale;
+                Original_ThrowVelocityBoostMinSpeed = SDKBase_Pickup.ThrowVelocityBoostMinSpeed;
+                Original_DropEventName = SDKBase_Pickup.DropEventName;
+                Original_PickupEventName = SDKBase_Pickup.PickupEventName;
+                Original_pickupable = SDKBase_Pickup.pickupable;
+                Original_UseUpEventName = SDKBase_Pickup.UseUpEventName;
+                Original_useEventBroadcastType = SDKBase_Pickup.useEventBroadcastType;
+                Original_orientation = SDKBase_Pickup.orientation;
+                Original_InteractionText = SDKBase_Pickup.InteractionText;
+                Original_AutoHold = SDKBase_Pickup.AutoHold;
+                Original_proximity = SDKBase_Pickup.proximity;
+                Original_allowManipulationWhenEquipped = SDKBase_Pickup.allowManipulationWhenEquipped;
+                Original_ExactGrip = SDKBase_Pickup.ExactGrip;
+                Original_ExactGun = SDKBase_Pickup.ExactGun;
+                Original_DisallowTheft = SDKBase_Pickup.DisallowTheft;
+                Original_MomentumTransferMethod = SDKBase_Pickup.MomentumTransferMethod;
+                Original_UseText = SDKBase_Pickup.UseText;
+                Original_pickupDropEventBroadcastType = SDKBase_Pickup.pickupDropEventBroadcastType;
 
-                    if (!hasRequiredComponentBeenAdded)
-                    {
-                        Pickup1 = gameObject.GetComponent<VRC_Pickup>();
-                        Pickup2 = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
-                        Pickup3 = gameObject.GetComponent<VRC.SDK3.Components.VRCPickup>();
-                        if (!HasTriedWithPickup1)
-                        {
-                            if (Pickup1 == null)
-                            {
-                                ModConsole.DebugLog("PickupController : Attempting to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
-                                Pickup1 = gameObject.AddComponent<VRC_Pickup>();
-                                if (Pickup1 == null)
-                                {
-                                    ModConsole.DebugLog("PickupController : Failed to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
-                                    HasTriedWithPickup1 = true;
-                                }
-                                else
-                                {
-                                    ModConsole.DebugLog("PickupController : Added VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
-                                    if (Pickup1.ExactGrip == null)
-                                    {
-                                        Pickup1.ExactGrip = gameObject.transform;
-                                        ModConsole.DebugLog("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGrip to object transform " + gameObject.name);
-                                    }
-                                    if (Pickup1.ExactGun == null)
-                                    {
-                                        Pickup1.ExactGun = gameObject.transform;
-                                        ModConsole.DebugLog("PickupController : Linked VRC.SDKBase.VRC_Pickup ExactGun to object transform " + gameObject.name);
-                                    }
+                // Sync Properties as well
 
-                                    hasRequiredComponentBeenAdded = true;
-                                    HasTriedWithPickup1 = true;
-                                }
-                            }
-                            return;
-                        }
-                        if (!HasTriedWithPickup2)
-                        {
-                            if (Pickup2 == null)
-                            {
-                                ModConsole.DebugLog("PickupController : Attempting to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
-                                Pickup2 = gameObject.AddComponent<VRCSDK2.VRC_Pickup>();
-                                if (Pickup2 == null)
-                                {
-                                    ModConsole.DebugLog("PickupController : Failed to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
-                                    HasTriedWithPickup2 = true;
-                                }
-                                else
-                                {
-                                    ModConsole.DebugLog("PickupController : Added VRCSDK2.VRC_Pickup to object " + gameObject.name);
-                                    if (Pickup2.ExactGrip == null)
-                                    {
-                                        Pickup2.ExactGrip = gameObject.transform;
-                                        ModConsole.DebugLog("PickupController : Linked VRCSDK2.VRC_Pickup ExactGrip to object transform " + gameObject.name);
-                                    }
-                                    if (Pickup2.ExactGun == null)
-                                    {
-                                        Pickup2.ExactGun = gameObject.transform;
-                                        ModConsole.DebugLog("PickupController : Linked VRCSDK2.VRC_Pickup ExactGun to object transform " + gameObject.name);
-                                    }
-                                    hasRequiredComponentBeenAdded = true;
-                                    HasTriedWithPickup2 = true;
-                                }
-                            }
-                            return;
-                        }
-                        if (!HasTriedWithPickup3)
-                        {
-                            if (Pickup3 == null)
-                            {
-                                ModConsole.DebugLog("PickupController : Attempting to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
-                                Pickup3 = gameObject.AddComponent<VRC.SDK3.Components.VRCPickup>();
-                                if (Pickup3 == null)
-                                {
-                                    ModConsole.DebugLog("PickupController : Failed to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
-                                    HasTriedWithPickup3 = true;
-                                }
-                                else
-                                {
-                                    ModConsole.DebugLog("PickupController : Added VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
-                                    if (Pickup3.ExactGrip == null)
-                                    {
-                                        Pickup3.ExactGrip = gameObject.transform;
-                                        ModConsole.DebugLog("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGrip to object transform " + gameObject.name);
-                                    }
-                                    if (Pickup3.ExactGun == null)
-                                    {
-                                        Pickup3.ExactGun = gameObject.transform;
-                                        ModConsole.DebugLog("PickupController : Linked VRC.SDK3.Components.VRCPickup ExactGun to object transform " + gameObject.name);
-                                    }
+                currentlyHeldBy = SDKBase_Pickup.currentlyHeldBy;
+                UseDownEventName = SDKBase_Pickup.UseDownEventName;
+                currentLocalPlayer = SDKBase_Pickup.currentLocalPlayer;
+                ThrowVelocityBoostScale = SDKBase_Pickup.ThrowVelocityBoostScale;
+                ThrowVelocityBoostMinSpeed = SDKBase_Pickup.ThrowVelocityBoostMinSpeed;
+                DropEventName = SDKBase_Pickup.DropEventName;
+                PickupEventName = SDKBase_Pickup.PickupEventName;
+                pickupable = SDKBase_Pickup.pickupable;
+                UseUpEventName = SDKBase_Pickup.UseUpEventName;
+                useEventBroadcastType = SDKBase_Pickup.useEventBroadcastType;
+                orientation = SDKBase_Pickup.orientation;
+                InteractionText = SDKBase_Pickup.InteractionText;
+                AutoHold = SDKBase_Pickup.AutoHold;
+                proximity = SDKBase_Pickup.proximity;
+                allowManipulationWhenEquipped = SDKBase_Pickup.allowManipulationWhenEquipped;
+                ExactGrip = SDKBase_Pickup.ExactGrip;
+                ExactGun = SDKBase_Pickup.ExactGun;
+                DisallowTheft = SDKBase_Pickup.DisallowTheft;
+                MomentumTransferMethod = SDKBase_Pickup.MomentumTransferMethod;
+                UseText = SDKBase_Pickup.UseText;
+                pickupDropEventBroadcastType = SDKBase_Pickup.pickupDropEventBroadcastType;
+            }
+            else if (SDK2_Pickup != null)
+            {
+                Original_currentlyHeldBy = SDK2_Pickup.currentlyHeldBy;
+                Original_UseDownEventName = SDK2_Pickup.UseDownEventName;
+                Original_currentLocalPlayer = SDK2_Pickup.currentLocalPlayer;
+                Original_ThrowVelocityBoostScale = SDK2_Pickup.ThrowVelocityBoostScale;
+                Original_ThrowVelocityBoostMinSpeed = SDK2_Pickup.ThrowVelocityBoostMinSpeed;
+                Original_DropEventName = SDK2_Pickup.DropEventName;
+                Original_PickupEventName = SDK2_Pickup.PickupEventName;
+                Original_pickupable = SDK2_Pickup.pickupable;
+                Original_UseUpEventName = SDK2_Pickup.UseUpEventName;
+                Original_useEventBroadcastType = SDK2_Pickup.useEventBroadcastType;
+                Original_orientation = SDK2_Pickup.orientation;
+                Original_InteractionText = SDK2_Pickup.InteractionText;
+                Original_AutoHold = SDK2_Pickup.AutoHold;
+                Original_proximity = SDK2_Pickup.proximity;
+                Original_allowManipulationWhenEquipped = SDK2_Pickup.allowManipulationWhenEquipped;
+                Original_ExactGrip = SDK2_Pickup.ExactGrip;
+                Original_ExactGun = SDK2_Pickup.ExactGun;
+                Original_DisallowTheft = SDK2_Pickup.DisallowTheft;
+                Original_MomentumTransferMethod = SDK2_Pickup.MomentumTransferMethod;
+                Original_UseText = SDK2_Pickup.UseText;
+                Original_pickupDropEventBroadcastType = SDK2_Pickup.pickupDropEventBroadcastType;
 
-                                    hasRequiredComponentBeenAdded = true;
-                                    HasTriedWithPickup3 = true;
-                                }
-                            }
-                            return;
-                        }
-                        if (!hasRequiredComponentBeenAdded && HasTriedWithPickup1 && HasTriedWithPickup2 && HasTriedWithPickup3)
-                        {
-                            ModConsole.DebugWarning("Failed to add A Pickup Component to the object : " + gameObject.name);
-                            ForceComponent = false;
-                            HasTriedWithPickup1 = false;
-                            HasTriedWithPickup2 = false;
-                            HasTriedWithPickup3 = false;
-                            hasRequiredComponentBeenAdded = false;
-                            return;
-                        }
-                    }
-                }
+                // Sync Properties as well
+
+                currentlyHeldBy = SDK2_Pickup.currentlyHeldBy;
+                UseDownEventName = SDK2_Pickup.UseDownEventName;
+                currentLocalPlayer = SDK2_Pickup.currentLocalPlayer;
+                ThrowVelocityBoostScale = SDK2_Pickup.ThrowVelocityBoostScale;
+                ThrowVelocityBoostMinSpeed = SDK2_Pickup.ThrowVelocityBoostMinSpeed;
+                DropEventName = SDK2_Pickup.DropEventName;
+                PickupEventName = SDK2_Pickup.PickupEventName;
+                pickupable = SDK2_Pickup.pickupable;
+                UseUpEventName = SDK2_Pickup.UseUpEventName;
+                useEventBroadcastType = SDK2_Pickup.useEventBroadcastType;
+                orientation = SDK2_Pickup.orientation;
+                InteractionText = SDK2_Pickup.InteractionText;
+                AutoHold = SDK2_Pickup.AutoHold;
+                proximity = SDK2_Pickup.proximity;
+                allowManipulationWhenEquipped = SDK2_Pickup.allowManipulationWhenEquipped;
+                ExactGrip = SDK2_Pickup.ExactGrip;
+                ExactGun = SDK2_Pickup.ExactGun;
+                DisallowTheft = SDK2_Pickup.DisallowTheft;
+                MomentumTransferMethod = SDK2_Pickup.MomentumTransferMethod;
+                UseText = SDK2_Pickup.UseText;
+                pickupDropEventBroadcastType = SDK2_Pickup.pickupDropEventBroadcastType;
+            }
+            else if (SDK3_Pickup != null)
+            {
+                Original_currentlyHeldBy = SDK3_Pickup.currentlyHeldBy;
+                Original_UseDownEventName = SDK3_Pickup.UseDownEventName;
+                Original_currentLocalPlayer = SDK3_Pickup.currentLocalPlayer;
+                Original_ThrowVelocityBoostScale = SDK3_Pickup.ThrowVelocityBoostScale;
+                Original_ThrowVelocityBoostMinSpeed = SDK3_Pickup.ThrowVelocityBoostMinSpeed;
+                Original_DropEventName = SDK3_Pickup.DropEventName;
+                Original_PickupEventName = SDK3_Pickup.PickupEventName;
+                Original_pickupable = SDK3_Pickup.pickupable;
+                Original_UseUpEventName = SDK3_Pickup.UseUpEventName;
+                Original_useEventBroadcastType = SDK3_Pickup.useEventBroadcastType;
+                Original_orientation = SDK3_Pickup.orientation;
+                Original_InteractionText = SDK3_Pickup.InteractionText;
+                Original_AutoHold = SDK3_Pickup.AutoHold;
+                Original_proximity = SDK3_Pickup.proximity;
+                Original_allowManipulationWhenEquipped = SDK3_Pickup.allowManipulationWhenEquipped;
+                Original_ExactGrip = SDK3_Pickup.ExactGrip;
+                Original_ExactGun = SDK3_Pickup.ExactGun;
+                Original_DisallowTheft = SDK3_Pickup.DisallowTheft;
+                Original_MomentumTransferMethod = SDK3_Pickup.MomentumTransferMethod;
+                Original_UseText = SDK3_Pickup.UseText;
+                Original_pickupDropEventBroadcastType = SDK3_Pickup.pickupDropEventBroadcastType;
+
+                // Sync Properties as well
+
+                currentlyHeldBy = SDK3_Pickup.currentlyHeldBy;
+                UseDownEventName = SDK3_Pickup.UseDownEventName;
+                currentLocalPlayer = SDK3_Pickup.currentLocalPlayer;
+                ThrowVelocityBoostScale = SDK3_Pickup.ThrowVelocityBoostScale;
+                ThrowVelocityBoostMinSpeed = SDK3_Pickup.ThrowVelocityBoostMinSpeed;
+                DropEventName = SDK3_Pickup.DropEventName;
+                PickupEventName = SDK3_Pickup.PickupEventName;
+                pickupable = SDK3_Pickup.pickupable;
+                UseUpEventName = SDK3_Pickup.UseUpEventName;
+                useEventBroadcastType = SDK3_Pickup.useEventBroadcastType;
+                orientation = SDK3_Pickup.orientation;
+                InteractionText = SDK3_Pickup.InteractionText;
+                AutoHold = SDK3_Pickup.AutoHold;
+                proximity = SDK3_Pickup.proximity;
+                allowManipulationWhenEquipped = SDK3_Pickup.allowManipulationWhenEquipped;
+                ExactGrip = SDK3_Pickup.ExactGrip;
+                ExactGun = SDK3_Pickup.ExactGun;
+                DisallowTheft = SDK3_Pickup.DisallowTheft;
+                MomentumTransferMethod = SDK3_Pickup.MomentumTransferMethod;
+                UseText = SDK3_Pickup.UseText;
+                pickupDropEventBroadcastType = SDK3_Pickup.pickupDropEventBroadcastType;
+            }
+        }
+
+        internal void RestoreProperties()
+        {
+            if (_EditMode)
+            {
+                currentlyHeldBy = Original_currentlyHeldBy;
+                UseDownEventName = Original_UseDownEventName;
+                currentLocalPlayer = Original_currentLocalPlayer;
+                ThrowVelocityBoostScale = Original_ThrowVelocityBoostScale;
+                ThrowVelocityBoostMinSpeed = Original_ThrowVelocityBoostMinSpeed;
+                DropEventName = Original_DropEventName;
+                PickupEventName = Original_PickupEventName;
+                pickupable = Original_pickupable;
+                UseUpEventName = Original_UseUpEventName;
+                useEventBroadcastType = Original_useEventBroadcastType;
+                orientation = Original_orientation;
+                InteractionText = Original_InteractionText;
+                AutoHold = Original_AutoHold;
+                proximity = Original_proximity;
+                allowManipulationWhenEquipped = Original_allowManipulationWhenEquipped;
+                ExactGrip = Original_ExactGrip;
+                ExactGun = Original_ExactGun;
+                DisallowTheft = Original_DisallowTheft;
+                MomentumTransferMethod = Original_MomentumTransferMethod;
+                UseText = Original_UseText;
+                pickupDropEventBroadcastType = Original_pickupDropEventBroadcastType;
+                _EditMode = false;
+            }
+        }
+
+        #endregion Backup and Restore Methods
+
+        #region Internal Reflection (Do Not edit these values)
+
+        private Component _currentlyHeldBy;
+        private string _UseDownEventName;
+        private VRCPlayerApi _currentLocalPlayer;
+        private float _ThrowVelocityBoostScale;
+        private float _ThrowVelocityBoostMinSpeed;
+        private string _DropEventName;
+        private string _PickupEventName;
+        private bool _pickupable;
+        private string _UseUpEventName;
+        private VRC_EventHandler.VrcBroadcastType _useEventBroadcastType;
+        private VRC_Pickup.PickupOrientation _orientation;
+        private string _InteractionText;
+        private VRC_Pickup.AutoHoldMode _AutoHold;
+        private float _proximity;
+        private bool _allowManipulationWhenEquipped;
+        private Transform _ExactGrip;
+        private Transform _ExactGun;
+        private bool _DisallowTheft;
+        private ForceMode _MomentumTransferMethod;
+        private string _UseText;
+        private VRC_EventHandler.VrcBroadcastType _pickupDropEventBroadcastType;
+
+        #endregion Internal Reflection (Do Not edit these values)
+
+        #region Original Backup Values
+
+        private Component Original_currentlyHeldBy;
+        private string Original_UseDownEventName;
+        private VRCPlayerApi Original_currentLocalPlayer;
+        private float Original_ThrowVelocityBoostScale;
+        private float Original_ThrowVelocityBoostMinSpeed;
+        private string Original_DropEventName;
+        private string Original_PickupEventName;
+        private bool Original_pickupable;
+        private string Original_UseUpEventName;
+        private VRC_EventHandler.VrcBroadcastType Original_useEventBroadcastType;
+        private VRC_Pickup.PickupOrientation Original_orientation;
+        private string Original_InteractionText;
+        private VRC_Pickup.AutoHoldMode Original_AutoHold;
+        private float Original_proximity;
+        private bool Original_allowManipulationWhenEquipped;
+        private Transform Original_ExactGrip;
+        private Transform Original_ExactGun;
+        private bool Original_DisallowTheft;
+        private ForceMode Original_MomentumTransferMethod;
+        private string Original_UseText;
+        private VRC_EventHandler.VrcBroadcastType Original_pickupDropEventBroadcastType;
+
+        #endregion Original Backup Values
+
+        #region Reflected Values
+
+        internal Component currentlyHeldBy
+        {
+            get
+            {
+                return _currentlyHeldBy;
+            }
+            set
+            {
+                _currentlyHeldBy = value;
                 if (EditMode)
                 {
-                    if (Pickup1 != null)
+                    if (SDKBase_Pickup != null)
                     {
-                        if (Pickup1.allowManipulationWhenEquipped != allowManipulationWhenEquipped)
-                        {
-                            Pickup1.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
-                        }
-                        if (Pickup1.pickupable != pickupable)
-                        {
-                            Pickup1.pickupable = pickupable;
-                        }
-                        if (Pickup1.DisallowTheft != DisallowTheft)
-                        {
-                            Pickup1.DisallowTheft = DisallowTheft;
-                        }
-                        if (Pickup1.AutoHold != AutoHoldMode)
-                        {
-                            Pickup1.AutoHold = AutoHoldMode;
-                        }
-                        if (Pickup1.orientation != PickupOrientation)
-                        {
-                            Pickup1.orientation = PickupOrientation;
-                        }
-                        if (Pickup1.proximity != proximity)
-                        {
-                            Pickup1.proximity = proximity;
-                        }
-                        if (Pickup1.ThrowVelocityBoostMinSpeed != ThrowVelocityBoostMinSpeed)
-                        {
-                            Pickup1.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
-                        }
-                        if (Pickup1.ThrowVelocityBoostScale != ThrowVelocityBoostScale)
-                        {
-                            Pickup1.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
-                        }
+                        SDKBase_Pickup.currentlyHeldBy = value;
                     }
-                    if (Pickup2 != null)
+                    if (SDK2_Pickup != null)
                     {
-                        if (Pickup2.allowManipulationWhenEquipped != allowManipulationWhenEquipped)
-                        {
-                            Pickup2.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
-                        }
-                        if (Pickup2.pickupable != pickupable)
-                        {
-                            Pickup2.pickupable = pickupable;
-                        }
-                        if (Pickup2.DisallowTheft != DisallowTheft)
-                        {
-                            Pickup2.DisallowTheft = DisallowTheft;
-                        }
-                        if (Pickup2.AutoHold != AutoHoldMode)
-                        {
-                            Pickup2.AutoHold = AutoHoldMode;
-                        }
-                        if (Pickup2.orientation != PickupOrientation)
-                        {
-                            Pickup2.orientation = PickupOrientation;
-                        }
-                        if (Pickup2.proximity != proximity)
-                        {
-                            Pickup2.proximity = proximity;
-                        }
-                        if (Pickup2.ThrowVelocityBoostMinSpeed != ThrowVelocityBoostMinSpeed)
-                        {
-                            Pickup2.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
-                        }
-                        if (Pickup2.ThrowVelocityBoostScale != ThrowVelocityBoostScale)
-                        {
-                            Pickup2.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
-                        }
+                        SDK2_Pickup.currentlyHeldBy = value;
                     }
-                    if (Pickup3 != null)
+                    if (SDK3_Pickup != null)
                     {
-                        if (Pickup3.allowManipulationWhenEquipped != allowManipulationWhenEquipped)
-                        {
-                            Pickup3.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
-                        }
-                        if (Pickup3.pickupable != pickupable)
-                        {
-                            Pickup3.pickupable = pickupable;
-                        }
-                        if (Pickup3.DisallowTheft != DisallowTheft)
-                        {
-                            Pickup3.DisallowTheft = DisallowTheft;
-                        }
-                        if (Pickup3.AutoHold != AutoHoldMode)
-                        {
-                            Pickup3.AutoHold = AutoHoldMode;
-                        }
-                        if (Pickup3.orientation != PickupOrientation)
-                        {
-                            Pickup3.orientation = PickupOrientation;
-                        }
-                        if (Pickup3.proximity != proximity)
-                        {
-                            Pickup3.proximity = proximity;
-                        }
-                        if (Pickup3.ThrowVelocityBoostMinSpeed != ThrowVelocityBoostMinSpeed)
-                        {
-                            Pickup3.ThrowVelocityBoostMinSpeed = ThrowVelocityBoostMinSpeed;
-                        }
-                        if (Pickup3.ThrowVelocityBoostScale != ThrowVelocityBoostScale)
-                        {
-                            Pickup3.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
-                        }
+                        SDK3_Pickup.currentlyHeldBy = value;
                     }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal string UseDownEventName
+        {
+            get
+            {
+                return _UseDownEventName;
+            }
+            set
+            {
+                _UseDownEventName = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.UseDownEventName = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.UseDownEventName = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.UseDownEventName = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal VRCPlayerApi currentLocalPlayer
+        {
+            get
+            {
+                return _currentLocalPlayer;
+            }
+            set
+            {
+                _currentLocalPlayer = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.currentLocalPlayer = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.currentLocalPlayer = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.currentLocalPlayer = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal float ThrowVelocityBoostScale
+        {
+            get
+            {
+                return _ThrowVelocityBoostScale;
+            }
+            set
+            {
+                _ThrowVelocityBoostScale = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.ThrowVelocityBoostScale = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.ThrowVelocityBoostScale = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.ThrowVelocityBoostScale = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal float ThrowVelocityBoostMinSpeed
+        {
+            get
+            {
+                return _ThrowVelocityBoostMinSpeed;
+            }
+            set
+            {
+                _ThrowVelocityBoostMinSpeed = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.ThrowVelocityBoostMinSpeed = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.ThrowVelocityBoostMinSpeed = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.ThrowVelocityBoostMinSpeed = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal string DropEventName
+        {
+            get
+            {
+                return _DropEventName;
+            }
+            set
+            {
+                _DropEventName = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.DropEventName = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.DropEventName = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.DropEventName = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal string PickupEventName
+        {
+            get
+            {
+                return _PickupEventName;
+            }
+            set
+            {
+                _PickupEventName = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.PickupEventName = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.PickupEventName = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.PickupEventName = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal bool pickupable
+        {
+            get
+            {
+                return _pickupable;
+            }
+            set
+            {
+                _pickupable = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.pickupable = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.pickupable = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.pickupable = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal string UseUpEventName
+        {
+            get
+            {
+                return _UseUpEventName;
+            }
+            set
+            {
+                _UseUpEventName = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.UseUpEventName = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.UseUpEventName = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.UseUpEventName = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal VRC_EventHandler.VrcBroadcastType useEventBroadcastType
+        {
+            get
+            {
+                return _useEventBroadcastType;
+            }
+            set
+            {
+                _useEventBroadcastType = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.useEventBroadcastType = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.useEventBroadcastType = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.useEventBroadcastType = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal VRC_Pickup.PickupOrientation orientation
+        {
+            get
+            {
+                return _orientation;
+            }
+            set
+            {
+                _orientation = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.orientation = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.orientation = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.orientation = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal string InteractionText
+        {
+            get
+            {
+                return _InteractionText;
+            }
+            set
+            {
+                _InteractionText = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.InteractionText = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.InteractionText = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.InteractionText = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal VRC_Pickup.AutoHoldMode AutoHold
+        {
+            get
+            {
+                return _AutoHold;
+            }
+            set
+            {
+                _AutoHold = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.AutoHold = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.AutoHold = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.AutoHold = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal float proximity
+        {
+            get
+            {
+                return _proximity;
+            }
+            set
+            {
+                _proximity = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.proximity = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.proximity = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.proximity = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal bool allowManipulationWhenEquipped
+        {
+            get
+            {
+                return _allowManipulationWhenEquipped;
+            }
+            set
+            {
+                _allowManipulationWhenEquipped = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.allowManipulationWhenEquipped = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.allowManipulationWhenEquipped = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.allowManipulationWhenEquipped = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal Transform ExactGrip
+        {
+            get
+            {
+                return _ExactGrip;
+            }
+            set
+            {
+                _ExactGrip = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.ExactGrip = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.ExactGrip = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.ExactGrip = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal Transform ExactGun
+        {
+            get
+            {
+                return _ExactGun;
+            }
+            set
+            {
+                _ExactGun = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.ExactGun = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.ExactGun = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.ExactGun = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal bool DisallowTheft
+        {
+            get
+            {
+                return _DisallowTheft;
+            }
+            set
+            {
+                _DisallowTheft = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.DisallowTheft = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.DisallowTheft = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.DisallowTheft = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal ForceMode MomentumTransferMethod
+        {
+            get
+            {
+                return _MomentumTransferMethod;
+            }
+            set
+            {
+                _MomentumTransferMethod = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.MomentumTransferMethod = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.MomentumTransferMethod = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.MomentumTransferMethod = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal string UseText
+        {
+            get
+            {
+                return _UseText;
+            }
+            set
+            {
+                _UseText = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.UseText = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.UseText = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.UseText = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        internal VRC_EventHandler.VrcBroadcastType pickupDropEventBroadcastType
+        {
+            get
+            {
+                return _pickupDropEventBroadcastType;
+            }
+            set
+            {
+                _pickupDropEventBroadcastType = value;
+                if (EditMode)
+                {
+                    if (SDKBase_Pickup != null)
+                    {
+                        SDKBase_Pickup.pickupDropEventBroadcastType = value;
+                    }
+                    if (SDK2_Pickup != null)
+                    {
+                        SDK2_Pickup.pickupDropEventBroadcastType = value;
+                    }
+                    if (SDK3_Pickup != null)
+                    {
+                        SDK3_Pickup.pickupDropEventBroadcastType = value;
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+            }
+        }
+
+        #endregion Reflected Values
+
+        #region Pickup Getters Only
+
+        [HideFromIl2Cpp]
+        internal bool IsHeld
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                if (SDKBase_Pickup != null)
+                {
+                    return SDKBase_Pickup.IsHeld;
+                }
+                else if (SDK2_Pickup != null)
+                {
+                    return SDK2_Pickup.IsHeld;
+                }
+                else if (SDK3_Pickup != null)
+                {
+                    return SDK3_Pickup.IsHeld;
                 }
                 else
                 {
-                    if (Pickup1 != null)
+                    return false;
+                }
+            }
+        }
+
+        internal VRC_Pickup.PickupHand CurrentHand
+        {
+            get
+            {
+                if (SDKBase_Pickup != null)
+                {
+                    return SDKBase_Pickup.currentHand;
+                }
+                else if (SDK2_Pickup != null)
+                {
+                    return SDK2_Pickup.currentHand;
+                }
+                else if (SDK3_Pickup != null)
+                {
+                    return SDK3_Pickup.currentHand;
+                }
+                return VRC_Pickup.PickupHand.None;
+            }
+        }
+
+        internal VRCPlayerApi currentPlayer
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                try
+                {
+                    if (SDKBase_Pickup != null)
                     {
-                        if (allowManipulationWhenEquipped != Pickup1.allowManipulationWhenEquipped)
+                        var user = SDKBase_Pickup.currentPlayer;
+                        if (user != null)
                         {
-                            if (!EditMode)
-                            {
-                                allowManipulationWhenEquipped = Pickup1.allowManipulationWhenEquipped;
-                            }
-                        }
-                        if (pickupable != Pickup1.pickupable)
-                        {
-                            if (!EditMode)
-                            {
-                                pickupable = Pickup1.pickupable;
-                            }
-                        }
-                        if (DisallowTheft != Pickup1.DisallowTheft)
-                        {
-                            if (!EditMode)
-                            {
-                                DisallowTheft = Pickup1.DisallowTheft;
-                            }
-                        }
-                        if (AutoHoldMode != Pickup1.AutoHold)
-                        {
-                            if (!EditMode)
-                            {
-                                AutoHoldMode = Pickup1.AutoHold;
-                            }
-                        }
-                        if (PickupOrientation != Pickup1.orientation)
-                        {
-                            if (!EditMode)
-                            {
-                                PickupOrientation = Pickup1.orientation;
-                            }
-                        }
-                        if (proximity != Pickup1.proximity)
-                        {
-                            if (!EditMode)
-                            {
-                                proximity = Pickup1.proximity;
-                            }
-                        }
-                        if (Original_allowManipulationWhenEquipped != Pickup1.allowManipulationWhenEquipped)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_allowManipulationWhenEquipped = Pickup1.allowManipulationWhenEquipped;
-                            }
-                        }
-                        if (Original_pickupable != Pickup1.pickupable)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_pickupable = Pickup1.pickupable;
-                            }
-                        }
-                        if (Original_DisallowTheft != Pickup1.DisallowTheft)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_DisallowTheft = Pickup1.DisallowTheft;
-                            }
-                        }
-                        if (Original_AutoHold != Pickup1.AutoHold)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_AutoHold = Pickup1.AutoHold;
-                            }
-                        }
-                        if (Original_orientation != Pickup1.orientation)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_orientation = Pickup1.orientation;
-                            }
-                        }
-                        if (Original_Proximity != Pickup1.proximity)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_Proximity = Pickup1.proximity;
-                            }
-                        }
-                        if (Original_ThrowVelocityBoostMinSpeed != Pickup1.ThrowVelocityBoostMinSpeed)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_ThrowVelocityBoostMinSpeed = Pickup1.ThrowVelocityBoostMinSpeed;
-                            }
-                        }
-                        if (Original_ThrowVelocityBoostScale != Pickup1.ThrowVelocityBoostScale)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_ThrowVelocityBoostScale = Pickup1.ThrowVelocityBoostScale;
-                            }
+                            return user;
                         }
                     }
-                    if (Pickup2 != null)
+                    else if (SDK2_Pickup != null)
                     {
-                        if (allowManipulationWhenEquipped != Pickup2.allowManipulationWhenEquipped)
+                        var user = SDK2_Pickup.currentPlayer;
+                        if (user != null)
                         {
-                            if (!EditMode)
-                            {
-                                allowManipulationWhenEquipped = Pickup2.allowManipulationWhenEquipped;
-                            }
-                        }
-                        if (pickupable != Pickup2.pickupable)
-                        {
-                            if (!EditMode)
-                            {
-                                pickupable = Pickup2.pickupable;
-                            }
-                        }
-                        if (DisallowTheft != Pickup2.DisallowTheft)
-                        {
-                            if (!EditMode)
-                            {
-                                DisallowTheft = Pickup2.DisallowTheft;
-                            }
-                        }
-                        if (AutoHoldMode != Pickup2.AutoHold)
-                        {
-                            if (!EditMode)
-                            {
-                                AutoHoldMode = Pickup2.AutoHold;
-                            }
-                        }
-                        if (PickupOrientation != Pickup2.orientation)
-                        {
-                            if (!EditMode)
-                            {
-                                PickupOrientation = Pickup2.orientation;
-                            }
-                        }
-                        if (proximity != Pickup2.proximity)
-                        {
-                            if (!EditMode)
-                            {
-                                proximity = Pickup2.proximity;
-                            }
-                        }
-                        if (Original_allowManipulationWhenEquipped != Pickup2.allowManipulationWhenEquipped)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_allowManipulationWhenEquipped = Pickup2.allowManipulationWhenEquipped;
-                            }
-                        }
-                        if (Original_pickupable != Pickup2.pickupable)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_pickupable = Pickup2.pickupable;
-                            }
-                        }
-                        if (Original_DisallowTheft != Pickup2.DisallowTheft)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_DisallowTheft = Pickup2.DisallowTheft;
-                            }
-                        }
-                        if (Original_AutoHold != Pickup2.AutoHold)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_AutoHold = Pickup2.AutoHold;
-                            }
-                        }
-                        if (Original_orientation != Pickup2.orientation)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_orientation = Pickup2.orientation;
-                            }
-                        }
-                        if (Original_Proximity != Pickup2.proximity)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_Proximity = Pickup2.proximity;
-                            }
-                        }
-                        if (Original_ThrowVelocityBoostMinSpeed != Pickup2.ThrowVelocityBoostMinSpeed)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_ThrowVelocityBoostMinSpeed = Pickup2.ThrowVelocityBoostMinSpeed;
-                            }
-                        }
-                        if (Original_ThrowVelocityBoostScale != Pickup2.ThrowVelocityBoostScale)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_ThrowVelocityBoostScale = Pickup2.ThrowVelocityBoostScale;
-                            }
+                            return user;
                         }
                     }
-                    if (Pickup3 != null)
+                    else if (SDK3_Pickup != null)
                     {
-                        if (allowManipulationWhenEquipped != Pickup3.allowManipulationWhenEquipped)
+                        var user = SDK3_Pickup.currentPlayer;
+                        if (user != null)
                         {
-                            if (!EditMode)
-                            {
-                                allowManipulationWhenEquipped = Pickup3.allowManipulationWhenEquipped;
-                            }
-                        }
-                        if (pickupable != Pickup3.pickupable)
-                        {
-                            if (!EditMode)
-                            {
-                                pickupable = Pickup3.pickupable;
-                            }
-                        }
-                        if (DisallowTheft != Pickup3.DisallowTheft)
-                        {
-                            if (!EditMode)
-                            {
-                                DisallowTheft = Pickup3.DisallowTheft;
-                            }
-                        }
-                        if (AutoHoldMode != Pickup3.AutoHold)
-                        {
-                            if (!EditMode)
-                            {
-                                AutoHoldMode = Pickup3.AutoHold;
-                            }
-                        }
-                        if (PickupOrientation != Pickup3.orientation)
-                        {
-                            if (!EditMode)
-                            {
-                                PickupOrientation = Pickup3.orientation;
-                            }
-                        }
-                        if (proximity != Pickup3.proximity)
-                        {
-                            if (!EditMode)
-                            {
-                                proximity = Pickup3.proximity;
-                            }
-                        }
-                        if (Original_allowManipulationWhenEquipped != Pickup3.allowManipulationWhenEquipped)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_allowManipulationWhenEquipped = Pickup3.allowManipulationWhenEquipped;
-                            }
-                        }
-                        if (Original_pickupable != Pickup3.pickupable)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_pickupable = Pickup3.pickupable;
-                            }
-                        }
-                        if (Original_DisallowTheft != Pickup3.DisallowTheft)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_DisallowTheft = Pickup3.DisallowTheft;
-                            }
-                        }
-                        if (Original_AutoHold != Pickup3.AutoHold)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_AutoHold = Pickup3.AutoHold;
-                            }
-                        }
-                        if (Original_orientation != Pickup3.orientation)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_orientation = Pickup3.orientation;
-                            }
-                        }
-                        if (Original_Proximity != Pickup3.proximity)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_Proximity = Pickup3.proximity;
-                            }
-                        }
-                        if (Original_ThrowVelocityBoostMinSpeed != Pickup3.ThrowVelocityBoostMinSpeed)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_ThrowVelocityBoostMinSpeed = Pickup3.ThrowVelocityBoostMinSpeed;
-                            }
-                        }
-                        if (Original_ThrowVelocityBoostScale != Pickup3.ThrowVelocityBoostScale)
-                        {
-                            if (!EditMode)
-                            {
-                                Original_ThrowVelocityBoostScale = Pickup3.ThrowVelocityBoostScale;
-                            }
+                            return user;
                         }
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                ModConsole.DebugError("Error in PickupController Bound to : " + gameObject.name);
-                ModConsole.DebugErrorExc(e);
+                catch
+                {
+                }
+                return null;
             }
         }
 
-        private void OnDestroy()
-        {
-            ModConsole.DebugLog("PickupController Got Destroyed from " + gameObject.name);
-        }
+        #endregion Pickup Getters Only
 
-        // TODO: Remove this and use OnPickupPropertyChanged
+        #region extras
 
-        [HideFromIl2Cpp]
         internal string CurrentOwner
         {
             [HideFromIl2Cpp]
@@ -749,34 +970,6 @@
             }
         }
 
-        // NEEDS a listener here in all properties!
-
-        [HideFromIl2Cpp]
-        internal bool IsHeld
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                if (Pickup1 != null)
-                {
-                    return Pickup1.IsHeld;
-                }
-                else if (Pickup2 != null)
-                {
-                    return Pickup2.IsHeld;
-                }
-                else if (Pickup3 != null)
-                {
-                    return Pickup3.IsHeld;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-        }
-
-        [HideFromIl2Cpp]
         internal string CurrentHolderDisplayName
         {
             [HideFromIl2Cpp]
@@ -784,25 +977,25 @@
             {
                 try
                 {
-                    if (Pickup1 != null)
+                    if (SDKBase_Pickup != null)
                     {
-                        var user = Pickup1.currentPlayer;
+                        var user = SDKBase_Pickup.currentPlayer;
                         if (user != null)
                         {
                             return user.displayName;
                         }
                     }
-                    else if (Pickup2 != null)
+                    else if (SDK2_Pickup != null)
                     {
-                        var user = Pickup2.currentPlayer;
+                        var user = SDK2_Pickup.currentPlayer;
                         if (user != null)
                         {
                             return user.displayName;
                         }
                     }
-                    else if (Pickup3 != null)
+                    else if (SDK3_Pickup != null)
                     {
-                        var user = Pickup3.currentPlayer;
+                        var user = SDK3_Pickup.currentPlayer;
                         if (user != null)
                         {
                             return user.displayName;
@@ -816,83 +1009,59 @@
             }
         }
 
-
-        internal VRC_Pickup.PickupHand CurrentHand
-        {
-            get
-            {
-                if (Pickup1 != null)
-                {
-                    return Pickup1.currentHand;
-                }
-                else if (Pickup2 != null)
-                {
-                    return Pickup2.currentHand;
-                }
-                else if (Pickup3 != null)
-                {
-                    return Pickup3.currentHand;
-                }
-                return VRC_Pickup.PickupHand.None;
-            }
-        }
-
-        internal VRCPlayerApi CurrentObjectHolderPlayer
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                try
-                {
-                    if (Pickup1 != null)
-                    {
-                        var user = Pickup1.currentPlayer;
-                        if (user != null)
-                        {
-                            return user;
-                        }
-                    }
-                    else if (Pickup2 != null)
-                    {
-                        var user = Pickup2.currentPlayer;
-                        if (user != null)
-                        {
-                            return user;
-                        }
-                    }
-                    else if (Pickup3 != null)
-                    {
-                        var user = Pickup3.currentPlayer;
-                        if (user != null)
-                        {
-                            return user;
-                        }
-                    }
-                }
-                catch
-                {
-                }
-                return null;
-            }
-        }
-
-        [HideFromIl2Cpp]
         internal bool HasPickupComponent()
         {
-            if (Pickup1 != null)
-            {
-                return true;
-            }
-            else if (Pickup2 != null)
-            {
-                return true;
-            }
-            else if (Pickup3 != null)
+            if (SDKBase_Pickup != null || SDK2_Pickup != null || SDK3_Pickup != null)
             {
                 return true;
             }
             return false;
         }
+
+        internal void SetRigidbody()
+        {
+            if (HasSetRigidbodyController)
+            {
+                return;
+            }
+            if (!HasSetRigidbodyController)
+            {
+                if (RigidBodyController != null)
+                {
+                    // IF INTERNAL SYNC IS NULL, Force The rigidbody to take over , Then Set it as Kinematic in case no collider is present.
+                    if (RigidBodyController.SyncPhysics == null)
+                    {
+                        if (!RigidBodyController.Forced_Rigidbody)
+                        {
+                            RigidBodyController.Forced_Rigidbody = true;
+                        }
+                        if (!RigidBodyController.EditMode)
+                        {
+                            RigidBodyController.EditMode = true;
+                        }
+                        // Let's use smart kinematic (Checks for Colliders present that can block and prevent the fall of the object).
+
+                        if (RigidBodyController != null)
+                        {
+                            var will_it_fall_throught = RigidBodyController.RigidBody_Will_It_fall_throught();
+                            if (!will_it_fall_throught)
+                            {
+                                RigidBodyController.RigidBody_Set_isKinematic(false);
+                            }
+                            else
+                            {
+                                RigidBodyController.RigidBody_Set_isKinematic(true);
+                            }
+                        }
+                    }
+                }
+                HasSetRigidbodyController = true;
+            }
+        }
+
+        #endregion extras
+
+        #region actions
 
         private void Run_OnOnPickupPropertyChanged()
         {
@@ -924,31 +1093,234 @@
 
         private event Action? OnPickup_OnUpdate;
 
-        private VRC_Pickup Pickup1 { get; set; }
-        private VRCSDK2.VRC_Pickup Pickup2 { get; set; }
-        private VRC.SDK3.Components.VRCPickup Pickup3 { get; set; }
-        private RigidBodyController control { get; set; } = null;
-        private protected bool Locked = false;
+        #endregion actions
 
-        private bool HasTriedWithPickup1 { get; set; } = false;
-        private bool HasTriedWithPickup2 { get; set; } = false;
-        private bool HasTriedWithPickup3 { get; set; } = false;
+        #region Force Pickup Functions
+
+        private bool _Force_Pickup_Component = false;
+
+        internal bool Force_Pickup_Component
+        {
+            get
+            {
+                return _Force_Pickup_Component;
+            }
+            set
+            {
+                _Force_Pickup_Component = value;
+                if(value)
+                {
+                    ForcePickupComponent();
+                }
+                Run_OnOnPickupPropertyChanged();
+            }
+        }
+
+        private void ForcePickupComponent()
+        {
+            SetRigidbody();
+
+            if (!hasRequiredComponentBeenAdded)
+            {
+                SDKBase_Pickup = gameObject.GetComponent<VRC_Pickup>();
+                SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
+                SDK3_Pickup = gameObject.GetComponent<VRC.SDK3.Components.VRCPickup>();
+                if (!HasTriedWithSDKBase_Pickup)
+                {
+                    if (SDKBase_Pickup == null)
+                    {
+                        ModConsole.DebugLog("PickupController_Old : Attempting to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
+                        SDKBase_Pickup = gameObject.AddComponent<VRC_Pickup>();
+                        if (SDKBase_Pickup == null)
+                        {
+                            ModConsole.DebugLog("PickupController_Old : Failed to add  VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
+                            HasTriedWithSDKBase_Pickup = true;
+                        }
+                        else
+                        {
+                            ModConsole.DebugLog("PickupController_Old : Added VRC.SDKBase.VRC_Pickup to object " + gameObject.name);
+                            if (SDKBase_Pickup.ExactGrip == null)
+                            {
+                                SDKBase_Pickup.ExactGrip = gameObject.transform;
+                                ModConsole.DebugLog("PickupController_Old : Linked VRC.SDKBase.VRC_Pickup ExactGrip to object transform " + gameObject.name);
+                            }
+                            if (SDKBase_Pickup.ExactGun == null)
+                            {
+                                SDKBase_Pickup.ExactGun = gameObject.transform;
+                                ModConsole.DebugLog("PickupController_Old : Linked VRC.SDKBase.VRC_Pickup ExactGun to object transform " + gameObject.name);
+                            }
+
+                            hasRequiredComponentBeenAdded = true;
+                            HasTriedWithSDKBase_Pickup = true;
+                        }
+                    }
+                    return;
+                }
+                if (!HasTriedWithSDK2_Pickup)
+                {
+                    if (SDK2_Pickup == null)
+                    {
+                        ModConsole.DebugLog("PickupController_Old : Attempting to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
+                        SDK2_Pickup = gameObject.AddComponent<VRCSDK2.VRC_Pickup>();
+                        if (SDK2_Pickup == null)
+                        {
+                            ModConsole.DebugLog("PickupController_Old : Failed to add  VRCSDK2.VRC_Pickup to object " + gameObject.name);
+                            HasTriedWithSDK2_Pickup = true;
+                        }
+                        else
+                        {
+                            ModConsole.DebugLog("PickupController_Old : Added VRCSDK2.VRC_Pickup to object " + gameObject.name);
+                            if (SDK2_Pickup.ExactGrip == null)
+                            {
+                                SDK2_Pickup.ExactGrip = gameObject.transform;
+                                ModConsole.DebugLog("PickupController_Old : Linked VRCSDK2.VRC_Pickup ExactGrip to object transform " + gameObject.name);
+                            }
+                            if (SDK2_Pickup.ExactGun == null)
+                            {
+                                SDK2_Pickup.ExactGun = gameObject.transform;
+                                ModConsole.DebugLog("PickupController_Old : Linked VRCSDK2.VRC_Pickup ExactGun to object transform " + gameObject.name);
+                            }
+                            hasRequiredComponentBeenAdded = true;
+                            HasTriedWithSDK2_Pickup = true;
+                        }
+                    }
+                    return;
+                }
+                if (!HasTriedWithSDK3_Pickup)
+                {
+                    if (SDK3_Pickup == null)
+                    {
+                        ModConsole.DebugLog("PickupController_Old : Attempting to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
+                        SDK3_Pickup = gameObject.AddComponent<VRC.SDK3.Components.VRCPickup>();
+                        if (SDK3_Pickup == null)
+                        {
+                            ModConsole.DebugLog("PickupController_Old : Failed to add  VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
+                            HasTriedWithSDK3_Pickup = true;
+                        }
+                        else
+                        {
+                            ModConsole.DebugLog("PickupController_Old : Added VRC.SDK3.Components.VRCPickup to object " + gameObject.name);
+                            if (SDK3_Pickup.ExactGrip == null)
+                            {
+                                SDK3_Pickup.ExactGrip = gameObject.transform;
+                                ModConsole.DebugLog("PickupController_Old : Linked VRC.SDK3.Components.VRCPickup ExactGrip to object transform " + gameObject.name);
+                            }
+                            if (SDK3_Pickup.ExactGun == null)
+                            {
+                                SDK3_Pickup.ExactGun = gameObject.transform;
+                                ModConsole.DebugLog("PickupController_Old : Linked VRC.SDK3.Components.VRCPickup ExactGun to object transform " + gameObject.name);
+                            }
+
+                            hasRequiredComponentBeenAdded = true;
+                            HasTriedWithSDK3_Pickup = true;
+                        }
+                    }
+                    return;
+                }
+                if (!hasRequiredComponentBeenAdded && HasTriedWithSDKBase_Pickup && HasTriedWithSDK2_Pickup && HasTriedWithSDK3_Pickup)
+                {
+                    ModConsole.DebugWarning("Failed to add A Pickup Component to the object : " + gameObject.name);
+                    ForceComponent = false;
+                    HasTriedWithSDKBase_Pickup = false;
+                    HasTriedWithSDK2_Pickup = false;
+                    HasTriedWithSDK3_Pickup = false;
+                    hasRequiredComponentBeenAdded = false;
+                    return;
+                }
+            }
+        }
+
+        private bool HasTriedWithSDKBase_Pickup { get; set; } = false;
+        private bool HasTriedWithSDK2_Pickup { get; set; } = false;
+        private bool HasTriedWithSDK3_Pickup { get; set; } = false;
         private bool HasSetRigidbodyController { get; set; } = false;
-
         private bool hasRequiredComponentBeenAdded { get; set; } = false;
 
-        private bool Original_allowManipulationWhenEquipped { get; set; }
-        private bool Original_pickupable { get; set; }
-        private bool Original_DisallowTheft { get; set; }
-        private float Original_Proximity { get; set; }
+        private bool _ForceComponent = false;
 
-        private float Original_ThrowVelocityBoostMinSpeed { get; set; }
+        internal bool ForceComponent
+        {
+            get
+            {
+                return _ForceComponent;
+            }
+            set
+            {
+                if (value)
+                {
+                    _ForceComponent = value;
+                    if (!hasRequiredComponentBeenAdded)
+                    {
+                        ForcePickupComponent();
+                    }
+                    Run_OnOnPickupPropertyChanged();
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }
+
+        #endregion Force Pickup Functions
+
+        #region essentials
+
+        private VRC_Pickup _SDKBase_Pickup;
+        internal VRC_Pickup SDKBase_Pickup
+        {
+            get
+            {
+                if (_SDKBase_Pickup == null)
+                {
+                    return _SDKBase_Pickup = gameObject.GetComponent<VRC_Pickup>();
+                }
+                return _SDKBase_Pickup;
+            }
+            private set
+            {
+                _SDKBase_Pickup = value;
+            }
+        }
+
+        private VRCSDK2.VRC_Pickup _SDK2_Pickup;
 
 
-        private float Original_ThrowVelocityBoostScale { get; set; }
+        internal VRCSDK2.VRC_Pickup SDK2_Pickup
+        {
+            get
+            {
+                if (_SDK2_Pickup == null)
+                {
+                    return _SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
+                }
+                return _SDK2_Pickup;
+            }
+            private set
+            {
+                _SDK2_Pickup = value;
+            }
+        }
 
-        private VRC_Pickup.AutoHoldMode Original_AutoHold { get; set; }
-        private VRC_Pickup.PickupOrientation Original_orientation { get; set; }
+        private VRC.SDK3.Components.VRCPickup _SDK3_Pickup;
+
+        internal VRC.SDK3.Components.VRCPickup SDK3_Pickup
+        {
+            get
+            {
+                if (_SDK3_Pickup == null)
+                {
+                    return _SDK3_Pickup = gameObject.GetComponent<VRC.SDK3.Components.VRCPickup>();
+                }
+                return _SDK3_Pickup;
+            }
+           private set
+            {
+                _SDK3_Pickup = value;
+            }
+        }
+
+        internal RigidBodyController RigidBodyController { get; private set; }
 
         private bool _EditMode = false;
 
@@ -960,141 +1332,19 @@
             }
             set
             {
+                if (value)
+                {
+                    SyncProperties(false);
+                }
+                else
+                {
+                    RestoreProperties();
+                }
                 _EditMode = value;
                 Run_OnOnPickupPropertyChanged();
             }
         }
 
-        private bool _ForceComponent = false;
-        private bool _allowManipulationWhenEquipped;
-        private bool _pickupable;
-        private bool _DisallowTheft;
-        private float _proximity;
-        private VRC_Pickup.AutoHoldMode _AutoHoldMode;
-        private VRC_Pickup.PickupOrientation _PickupOrientation;
-
-        internal bool ForceComponent
-        {
-            get
-            {
-                return _ForceComponent;
-            }
-            set
-            {
-                _ForceComponent = value;
-                Run_OnOnPickupPropertyChanged();
-            }
-        }
-
-        internal bool allowManipulationWhenEquipped
-        {
-            get
-            {
-                return _allowManipulationWhenEquipped;
-            }
-            set
-            {
-                _allowManipulationWhenEquipped = value;
-                Run_OnOnPickupPropertyChanged();
-            }
-        }
-
-        internal bool pickupable
-        {
-            get
-            {
-                return _pickupable;
-            }
-            set
-            {
-                _pickupable = value;
-                Run_OnOnPickupPropertyChanged();
-            }
-        }
-
-        internal bool DisallowTheft
-        {
-            get
-            {
-                return _DisallowTheft;
-            }
-            set
-            {
-                _DisallowTheft = value;
-                Run_OnOnPickupPropertyChanged();
-            }
-        }
-
-        internal float proximity
-        {
-            get
-            {
-                return _proximity;
-            }
-            set
-            {
-                _proximity = value;
-                Run_OnOnPickupPropertyChanged();
-            }
-        }
-
-        internal VRC_Pickup.AutoHoldMode AutoHoldMode
-        {
-            get
-            {
-                return _AutoHoldMode;
-            }
-            set
-            {
-                _AutoHoldMode = value;
-                Run_OnOnPickupPropertyChanged();
-            }
-        }
-
-        internal VRC_Pickup.PickupOrientation PickupOrientation
-        {
-            get
-            {
-                return _PickupOrientation;
-            }
-            set
-            {
-                _PickupOrientation = value;
-                Run_OnOnPickupPropertyChanged();
-            }
-        }
-
-        private float _ThrowVelocityBoostScale = 0f;
-        internal float ThrowVelocityBoostScale
-        {
-            get
-            {
-                return _ThrowVelocityBoostScale;
-            }
-            set
-            {
-                _ThrowVelocityBoostScale = value;
-                Run_OnOnPickupPropertyChanged();
-            }
-        }
-
-        private float _ThrowVelocityBoostMinSpeed = 0f;
-        internal float ThrowVelocityBoostMinSpeed
-        {
-            get
-            {
-                return _ThrowVelocityBoostMinSpeed;
-            }
-            set
-            {
-                _ThrowVelocityBoostMinSpeed = value;
-                Run_OnOnPickupPropertyChanged();
-            }
-        }
-
-
-
-
-
+        #endregion essentials
     }
 }

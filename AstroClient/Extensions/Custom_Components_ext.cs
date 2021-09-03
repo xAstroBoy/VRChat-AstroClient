@@ -609,7 +609,7 @@
                 {
                     if (PickupController != null)
                     {
-                        PickupController.RestoreOriginalProperties();
+                        PickupController.RestoreProperties();
                     }
                 }
             }

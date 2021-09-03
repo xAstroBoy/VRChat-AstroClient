@@ -94,10 +94,10 @@
 
                             if (control != null)
                             {
-                                control.IsKinematic = false;
-                                control.UseGravity = UseGravity;
-                                control.UpdateAngularDrag(0);
-                                control.UpdateDrag(0);
+                                control.isKinematic = false;
+                                control.useGravity = UseGravity;
+                                control.angularDrag = 0;
+                                control.drag = 0;
                             }
                             HasRequiredSettings = true;
                         }

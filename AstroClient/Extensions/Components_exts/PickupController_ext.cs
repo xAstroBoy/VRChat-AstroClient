@@ -39,7 +39,7 @@
                 {
                     instance.EditMode = true;
                 }
-                instance.ForceComponent = ForceComponent;
+                instance.Force_Pickup_Component = ForceComponent;
             }
         }
 
@@ -51,7 +51,7 @@
                 {
                     instance.EditMode = true;
                 }
-                instance.AutoHoldMode = AutoHoldMode;
+                instance.AutoHold = AutoHoldMode;
             }
         }
 
@@ -63,7 +63,7 @@
                 {
                     instance.EditMode = true;
                 }
-                instance.PickupOrientation = PickupOrientation;
+                instance.orientation = PickupOrientation;
             }
         }
 
@@ -91,11 +91,11 @@
             }
         }
 
-        public static void Pickup_RestoreOriginalProperties(this PickupController instance)
+        public static void Pickup_RestoreProperties(this PickupController instance)
         {
             if (instance != null)
             {
-                instance.RestoreOriginalProperties();
+                instance.RestoreProperties();
             }
         }
 
@@ -112,7 +112,7 @@
         {
             if (instance != null)
             {
-                return instance.CurrentObjectHolderPlayer;
+                return instance.currentPlayer;
             }
             return null;
         }
@@ -154,7 +154,7 @@
 
         public static void Pickup_RestoreOriginalProperties(this GameObject obj)
         {
-            obj.GetOrAddComponent<PickupController>().Pickup_RestoreOriginalProperties();
+            obj.GetOrAddComponent<PickupController>().Pickup_RestoreProperties();
         }
 
         public static bool Pickup_Get_isHeld(this GameObject obj)
@@ -164,7 +164,7 @@
 
         public static VRCPlayerApi Pickup_Get_HeldByUser(this GameObject obj)
         {
-            return obj.GetOrAddComponent<PickupController>().CurrentObjectHolderPlayer;
+            return obj.GetOrAddComponent<PickupController>().currentPlayer;
         }
 
         public static void Pickup_Set_DisallowTheft(this List<GameObject> items, bool DisallowTheft)
@@ -250,7 +250,7 @@
             {
                 if (obj != null)
                 {
-                    obj.GetOrAddComponent<PickupController>().Pickup_RestoreOriginalProperties();
+                    obj.GetOrAddComponent<PickupController>().Pickup_RestoreProperties();
                 }
             }
         }
@@ -275,7 +275,7 @@
 
         public static string Get_IsHeldBy_ButtonText(this PickupController controller)
         {
-            if (controller.CurrentObjectHolderPlayer != null)
+            if (controller.currentPlayer != null)
             {
                 return "Held By " + controller.CurrentHolderDisplayName;
             }

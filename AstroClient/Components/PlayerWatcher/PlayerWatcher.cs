@@ -156,8 +156,8 @@
                 {
                     gameObject.TakeOwnership();
                 }
-                control.Constraints = RigidbodyConstraints.FreezeRotation;
-                control.Constraints = RigidbodyConstraints.None;
+                control.constraints = RigidbodyConstraints.FreezeRotation;
+                control.constraints = RigidbodyConstraints.None;
                 HasRequiredSettings = true;
             }
         }

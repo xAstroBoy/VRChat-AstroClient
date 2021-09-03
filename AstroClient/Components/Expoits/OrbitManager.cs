@@ -65,7 +65,7 @@
         public void Start()
         {
             Instance = this;
-            RefreshPickups();
+            //RefreshPickups();
             ModConsole.Log($"[OrbitManager] Initialized");
         }
 
@@ -111,7 +111,7 @@
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
-            RefreshPickups();
+            //RefreshPickups();
         }
 
         public static void OrbitPlayer(Player target)
@@ -135,7 +135,7 @@
             for (int i = 0; i < Instance.pickups.Count; i++)
             {
                 PickupController pickup = Instance.pickups[i];
-                pickup.RestoreOriginalProperties();
+                pickup.RestoreProperties();
                 GameObjectMenu.RestoreOriginalLocation(pickup.gameObject, true);
                 OnlineEditor.RemoveOwnerShip(pickup.gameObject);
             }
