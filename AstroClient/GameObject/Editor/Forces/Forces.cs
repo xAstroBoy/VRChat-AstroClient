@@ -29,7 +29,7 @@
             if (obj != null)
             {
                 var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
-                 if (bodycontroller.Rigidbody != null)
+                if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
@@ -61,7 +61,7 @@
             if (obj != null)
             {
                 var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
-                 if (bodycontroller.Rigidbody != null)
+                if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
@@ -77,7 +77,7 @@
             if (obj != null)
             {
                 var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
-                 if (bodycontroller.Rigidbody != null)
+                if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
@@ -93,7 +93,7 @@
             if (obj != null)
             {
                 var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
-                 if (bodycontroller.Rigidbody != null)
+                if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
@@ -109,7 +109,7 @@
             if (obj != null)
             {
                 var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
-                 if (bodycontroller.Rigidbody != null)
+                if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
@@ -125,7 +125,7 @@
             if (obj != null)
             {
                 var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
-                 if (bodycontroller.Rigidbody != null)
+                if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
@@ -141,7 +141,7 @@
             if (obj != null)
             {
                 var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
-                 if (bodycontroller.Rigidbody != null)
+                if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
@@ -187,7 +187,7 @@
             if (obj != null)
             {
                 var bodycontroller = obj.GetOrAddComponent<RigidBodyController>();
-                 if (bodycontroller.Rigidbody != null)
+                if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
@@ -208,7 +208,7 @@
             if (obj != null)
             {
                 var bodycontroller = obj.GetComponent<RigidBodyController>();
-                 if (bodycontroller.Rigidbody != null)
+                if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
@@ -224,7 +224,7 @@
             if (obj != null)
             {
                 var bodycontroller = obj.GetComponent<RigidBodyController>();
-                 if (bodycontroller.Rigidbody != null)
+                if (bodycontroller.Rigidbody != null)
                 {
                     bodycontroller.Rigidbody.AddRelativeTorque(SpinForce, 0, 0, ForceMode.Force);
                 }
@@ -236,7 +236,7 @@
             if (obj != null)
             {
                 var bodycontroller = obj.GetComponent<RigidBodyController>();
-                 if (bodycontroller.Rigidbody != null)
+                if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {
@@ -252,7 +252,7 @@
             if (obj != null)
             {
                 var bodycontroller = obj.GetComponent<RigidBodyController>();
-                 if (bodycontroller.Rigidbody != null)
+                if (bodycontroller.Rigidbody != null)
                 {
                     if (TakeOwnership)
                     {

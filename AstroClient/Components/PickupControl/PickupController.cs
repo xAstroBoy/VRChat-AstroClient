@@ -1108,7 +1108,7 @@
             set
             {
                 _Force_Pickup_Component = value;
-                if(value)
+                if (value)
                 {
                     ForcePickupComponent();
                 }
@@ -1314,7 +1314,7 @@
                 }
                 return _SDK3_Pickup;
             }
-           private set
+            private set
             {
                 _SDK3_Pickup = value;
             }

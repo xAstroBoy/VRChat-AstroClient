@@ -32,15 +32,36 @@
         public static float DoorbellTime = 0f;
         public static float DoorFreezeTime = 0f;
         public static float ButtonUpdateTime = 0f;
+        public static float BlueChairTime = 0f;
 
         private static QMToggleButton SpamDoorbellsToggle;
         private static QMToggleButton FreezeLockedToggle;
         private static QMToggleButton FreezeUnlockedToggle;
+        private static QMToggleButton BlueChairToggle;
 
         private static bool _isDoorBellSpamEnabled;
         private static bool _isFreezeLockEnabed;
         private static bool _isFreezeUnlockEnabed;
+        private static bool _isBlueChairEnabed;
 
+        public static bool IsBlueChairEnabled
+        {
+            get => _isBlueChairEnabed;
+            set
+            {
+                if (value)
+                {
+                    ModConsole.Log("BlueChair Enabled!");
+                    BlueChairSpam();
+                }
+                else
+                {
+                    ModConsole.Log("BlueChair Disabled!");
+                }
+
+                _isBlueChairEnabed = value;
+            }
+        }
 
         public static bool IsDoorbellSpamEnabled
         {
@@ -50,14 +71,14 @@
                 if (value)
                 {
                     ModConsole.Log("Doorbell Spam Enabled!");
-                    _isDoorBellSpamEnabled = true;
                     SpamDoorbells();
                 }
                 else
                 {
                     ModConsole.Log("Doorbell Spam Disabled!");
-                    _isDoorBellSpamEnabled = false;
                 }
+
+                _isDoorBellSpamEnabled = value;
             }
         }
 
@@ -68,23 +89,16 @@
             {
                 if (value)
                 {
-                    if (_isFreezeLockEnabed)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        ModConsole.Log("Door Locks Frozen: Locked");
-                        _isFreezeLockEnabed = true;
-                        if (IsFreezeUnlockEnabed) IsFreezeUnlockEnabed = false;
-                        DoorLockFreeze();
-                    }
+                    ModConsole.Log("Door Locks Frozen: Locked");
+                    if (IsFreezeUnlockEnabed) IsFreezeUnlockEnabed = false;
+                    DoorLockFreeze();
                 }
                 else
                 {
                     ModConsole.Log("Door Locks Unfrozen");
-                    _isFreezeLockEnabed = false;
                 }
+
+                _isFreezeLockEnabed = value;
             }
         }
 
@@ -102,7 +116,6 @@
                     else
                     {
                         ModConsole.Log("Door Locks Frozen: Unlocked");
-                        _isFreezeUnlockEnabed = true;
                         if (IsFreezeLockEnabed) IsFreezeLockEnabed = false;
                         DoorUnlockFreeze();
                     }
@@ -110,8 +123,9 @@
                 else
                 {
                     ModConsole.Log("Door Locks Unfrozen");
-                    _isFreezeUnlockEnabed = false;
                 }
+
+                _isFreezeUnlockEnabed = value;
             }
         }
 
@@ -154,9 +168,9 @@
             // Spamming
             if (Bools.IsDeveloper)
             {
-                _ = new QMSingleButton(BClubExploitsPage, 5, -1, "BlueChair\nEveryone", () => { BlueChairSpam(); }, "BlueChair Spam");
+                BlueChairToggle = new QMToggleButton(BClubExploitsPage, 5, -1, "BlueChair\nEveryone", () => IsBlueChairEnabled = true, "", () => IsBlueChairEnabled = false, "BlueChair Everyone", null, Color.green, Color.red, false);
             }
-            SpamDoorbellsToggle = new QMToggleButton(BClubExploitsPage, 5, 0, "Spam Doorbells", () => { IsDoorbellSpamEnabled = true; }, "Spam Doorbells", () => { IsDoorbellSpamEnabled = false; }, "Toggle Doorbell Spam");
+            SpamDoorbellsToggle = new QMToggleButton(BClubExploitsPage, 5, 0, "Spam Doorbells", () => IsDoorbellSpamEnabled = true, "", () => IsDoorbellSpamEnabled = false, "Toggle Doorbell Spam");
             SpamDoorbellsToggle.SetToggleState(IsDoorbellSpamEnabled, false);
         }
 
@@ -184,37 +198,37 @@
             {
                 LockButton3.SetToggleState(true);
             }
-			else
-			{
-				LockButton3.SetToggleState(false);
-			}
+            else
+            {
+                LockButton3.SetToggleState(false);
+            }
 
             if (!LockIndicator4.active)
             {
                 LockButton4.SetToggleState(true);
             }
-			else
-			{
-				LockButton4.SetToggleState(false);
-			}
+            else
+            {
+                LockButton4.SetToggleState(false);
+            }
 
             if (!LockIndicator5.active)
             {
                 LockButton5.SetToggleState(true);
             }
-			else
-			{
-				LockButton5.SetToggleState(false);
-			}
+            else
+            {
+                LockButton5.SetToggleState(false);
+            }
 
             if (!LockIndicator6.active)
             {
                 LockButton6.SetToggleState(true);
             }
-			else
-			{
-				LockButton6.SetToggleState(false);
-			}
+            else
+            {
+                LockButton6.SetToggleState(false);
+            }
         }
 
         private static List<UdonBehaviour> _bells = new List<UdonBehaviour>();
@@ -235,7 +249,7 @@
             {
                 DoorFreezeTime += 1 * Time.deltaTime;
 
-                if (DoorFreezeTime < 1000f)
+                if (DoorFreezeTime < 100f)
                 {
                     yield return null;
                 }
@@ -273,7 +287,7 @@
             {
                 DoorFreezeTime += 1 * Time.deltaTime;
 
-                if (DoorFreezeTime < 1000f)
+                if (DoorFreezeTime < 100f)
                 {
                     yield return null;
                 }
@@ -316,7 +330,7 @@
             {
                 DoorbellTime += 1 * Time.deltaTime;
 
-                if (DoorbellTime < 1000f)
+                if (DoorbellTime < 500f)
                 {
                     yield return null;
                 }
@@ -347,8 +361,6 @@
             }
         }
 
-        private static float BlueChairTime;
-
         private static void BlueChairSpam()
         {
             MelonCoroutines.Start(DoBlueChairSpam());
@@ -358,31 +370,36 @@
         {
             BlueChairTime += 1 * Time.deltaTime;
 
-            if (BlueChairTime < 100f)
+            if (BlueChairTime < 10f)
             {
                 yield return null;
             }
             else
             {
-                if (!WorldUtils.IsInWorld()) yield break;
+                if (!WorldUtils.IsInWorld())
+                {
+                    IsBlueChairEnabled = false;
+                    yield break;
+                }
                 BlueChairTime = 0f;
             }
 
-            for (int i = 0; i < 100; i++)
-            {
-                var chairs = WorldUtils.GetUdonScripts().Where(b => b.name.Contains("Chair") || b.name.Contains("Seat"));
+            var chairs = WorldUtils.GetUdonScripts().Where(b => b.name.Contains("Chair") || b.name.Contains("Seat")).ToArray();
 
-                foreach (var chair in chairs)
-                {
-                    if (!chair.enabled) chair.enabled = true;
-                    if (!chair.gameObject.active) chair.gameObject.SetActive(true);
-                    chair.FindUdonEvent("Sit")?.ExecuteUdonEvent();
-                    yield return null;
-                }
-                yield return null;
+            foreach (var chair in chairs)
+            {
+                if (chair.enabled) chair.enabled = true;
+                chair.FindUdonEvent("Sit")?.ExecuteUdonEvent();
             }
 
-            yield break;
+            if (IsBlueChairEnabled)
+            {
+                yield return null;
+            }
+            else
+            {
+                yield break;
+            }
         }
 
         private static void ToggleDoor(int doorID)
@@ -476,8 +493,7 @@
                     RemovePrivacyBlocksOnRooms(4);
                     RemovePrivacyBlocksOnRooms(5);
                     RemovePrivacyBlocksOnRooms(6);
-                    //PatchPatreonList();
-                    //PatchPatreonNode();
+                    PatreonPatch();
 
                     MelonCoroutines.Start(UpdateButtonsLoop());
                 }
@@ -863,6 +879,15 @@
             return null;
         }
 
+        private static void PatreonPatch()
+        {
+            PatchPatreonList();
+            PatchPatreonNode();
+            UdonSearch.FindUdonEvent("Patreon", $"IsPatron")?.ExecuteUdonEvent();
+            UdonSearch.FindUdonEvent("Patreon", $"IsElite")?.ExecuteUdonEvent();
+            UdonSearch.FindUdonEvent("Patreon", $"_ProcessPatrons")?.ExecuteUdonEvent();
+        }
+
         private static void PatchPatreonList()
         {
             try
@@ -877,17 +902,33 @@
                         var obj_List = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("localPatrons"));
                         if (obj_List != null)
                         {
-                            var patreonstr = obj_List.Unpack_String();
-                            if (!patreonstr.Contains(Utils.LocalPlayer.displayName))
-                            {
-                                var modifiedpatreonstr = Utils.LocalPlayer.displayName + Environment.NewLine + patreonstr.Skip(1);
+                            UdonHeapEditor.PatchHeap(disassembled, "localPatrons", Utils.LocalPlayer.displayName, true);
+                        }
 
-                                UdonHeapEditor.PatchHeap(disassembled, "localPatrons", modifiedpatreonstr, true);
-                            }
+                        var localVipsPatch = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("localVips"));
+                        if (localVipsPatch != null)
+                        {
+                            UdonHeapEditor.PatchHeap(disassembled, "localVips", Utils.LocalPlayer.displayName, true);
+                        }
+
+                        var obj_List2 = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("__0_intnl_interpolatedStr_String"));
+                        if (obj_List2 != null)
+                        {
+                            UdonHeapEditor.PatchHeap(disassembled, "__0_intnl_interpolatedStr_String", Utils.LocalPlayer.displayName, true);
+                        }
+
+                        var obj_List3 = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("syncedVips"));
+                        if (obj_List3 != null)
+                        {
+                            UdonHeapEditor.PatchHeap(disassembled, "syncedVips", Utils.LocalPlayer.displayName, true);
+                        }
+
+                        var obj_List4 = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("__0_mp_liveVips_String"));
+                        if (obj_List4 != null)
+                        {
+                            UdonHeapEditor.PatchHeap(disassembled, "__0_mp_liveVips_String", Utils.LocalPlayer.displayName, true);
                         }
                     }
-                    node.InitializeUdonContent();
-                    node.Start();
                 }
             }
             catch (Exception e)
@@ -919,6 +960,7 @@
                                 }
                             }
                         }
+
                         var vipOnlyPatch = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("vipOnly"));
                         if (vipOnlyPatch != null)
                         {
@@ -930,12 +972,23 @@
                         {
                             UdonHeapEditor.PatchHeap(disassembled, "vipOnlyLocal", false, true);
                         }
+
+                        var patronPatch = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("__0_isPatron_Boolean"));
+                        if (patronPatch != null)
+                        {
+                            UdonHeapEditor.PatchHeap(disassembled, "__0_isPatron_Boolean", true, true);
+                        }
+
+                        var obj_List = disassembled.IUdonHeap.GetHeapVariable(disassembled.IUdonSymbolTable.GetAddressFromSymbol("__0_mp_patronsToProcess_String"));
+                        if (obj_List != null)
+                        {
+                            UdonHeapEditor.PatchHeap(disassembled, "__0_mp_patronsToProcess_String", Utils.LocalPlayer.displayName, true);
+                        }
                     }
 
                     catch (Exception e)
                     {
                         ModConsole.ErrorExc(e);
-
                     }
                 }
                 try

@@ -141,12 +141,8 @@
                 new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canSetStatusOffline)).GetMethod, GetPatch(nameof(APIUserBypass)));
                 new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasNoPowers)).GetMethod, GetPatch(nameof(APIUserBypass2)));
                 new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.developerType)).GetMethod, GetPatch(nameof(APIUserBypass3)));
-                //new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.displayName)).GetMethod, GetPatch(nameof(SpoofName)));
-                //new Patch(AccessTools.Property(typeof(VRCPlayerApi), nameof(VRCPlayerApi.displayName)).GetMethod, GetPatch(nameof(SpoofName)));
                 new Patch(AccessTools.Property(typeof(Networking), nameof(Networking.IsInstanceOwner)).GetMethod, GetPatch(nameof(TestSpoof)));
                 new Patch(AccessTools.Property(typeof(Networking), nameof(Networking.IsMaster)).GetMethod, GetPatch(nameof(TestSpoof)));
-                //new Patch(AccessTools.Property(typeof(VRCPlayerApi), nameof(VRCPlayerApi.isInstanceOwner)).GetMethod, GetPatch(nameof(VRCPlayerApiBypass)));
-                //new Patch(AccessTools.Property(typeof(VRCPlayerApi), nameof(VRCPlayerApi.isMaster)).GetMethod, GetPatch(nameof(VRCPlayerApiBypass)));
                 new Patch(AccessTools.Property(typeof(VRCPlayerApi), nameof(VRCPlayerApi.isModerator)).GetMethod, GetPatch(nameof(VRCPlayerApiBypass)));
                 new Patch(AccessTools.Property(typeof(VRCPlayerApi), nameof(VRCPlayerApi.isSuper)).GetMethod, GetPatch(nameof(VRCPlayerApiBypass)));
                 new Patch(AccessTools.Property(typeof(Time), nameof(Time.smoothDeltaTime)).GetMethod, null, GetPatch(nameof(SpoofFPS)));
@@ -185,16 +181,6 @@
             return false;
         }
 
-        private static bool SpoofName(APIUser __instance, ref string __result)
-        {
-            //if (Bools.IsBClubVIPSpoofing && __instance != null && __instance.IsSelf)
-            //{
-            //    __result = "Tupper";
-            //    return false;
-            //}
-
-            return true;
-        }
 
         private static void VRCPlayerApiBypass(VRCPlayerApi __instance, ref bool __result)
         {

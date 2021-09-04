@@ -44,7 +44,7 @@
             _ = new QMSingleButton(menu, 4, 0, "All Pickups Watch player.", new Action(ObjectMiscOptions.AllWorldPickupsWatchTarget), "Make the victim feel observed.", null, null);
 
             var sitMenu = new QMNestedButton(menu, 1, 2, "Sit", "Sit on selected player");
-            _ = new QMSingleButton(menu, 2, 2, "Teleport\nTo\nPlayer", () => { PlayerUtils.GetPlayer().gameObject.transform.position = QuickMenuUtils.GetSelectedPlayer().transform.position; },"Teleport To Player");
+            _ = new QMSingleButton(menu, 2, 2, "Teleport\nTo\nPlayer", () => { PlayerUtils.GetPlayer().gameObject.transform.position = QuickMenuUtils.GetSelectedPlayer().transform.position; }, "Teleport To Player");
 
             var newOrbitToggle = new QMToggleButton(menu, 3, 2, "Cheetos\nOrbit", () => { OrbitManager.OrbitPlayer(QuickMenuUtils.GetSelectedPlayer()); }, "Cheetos\nOrbit", () => { OrbitManager.DisableOrbit(); }, "Cheetos' WIP Orbit", null, Color.green, Color.red, OrbitManager.IsEnabled);
             newOrbitToggle.SetToggleState(OrbitManager.IsEnabled);

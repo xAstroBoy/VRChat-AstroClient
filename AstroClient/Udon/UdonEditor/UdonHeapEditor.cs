@@ -39,7 +39,7 @@
             }
             else
             {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+                ModConsole.Error("Unable To Patch Udon Heap as is null!");
             }
         }
 
@@ -433,13 +433,13 @@
                     }
                     else
                     {
-                        ModConsole.DebugLog($"Heap Patch Failed.");
+                        ModConsole.Error($"Heap Patch Failed.");
                     }
                 }
             }
             else
             {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+                ModConsole.Error("Unable To Patch Udon Heap as is null!");
             }
         }
 
