@@ -126,25 +126,7 @@
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.ConfigurePortal)), GetPatch(nameof(OnConfigurePortal)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.Method_Public_Void_0)), GetPatch(nameof(OnEnterPortal)));
                 new Patch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Private_Void_Boolean_0)), GetPatch(nameof(QuickMenuPatch)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasVeteranTrustLevel)).GetMethod, GetPatch(nameof(APIUserBypass)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasLegendTrustLevel)).GetMethod, GetPatch(nameof(APIUserBypass)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canPublishAvatars)).GetMethod, GetPatch(nameof(APIUserBypass)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canPublishWorlds)).GetMethod, GetPatch(nameof(APIUserBypass)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canPublishAllContent)).GetMethod, GetPatch(nameof(APIUserBypass)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canSeeAllUsersStatus)).GetMethod, GetPatch(nameof(APIUserBypass)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasModerationPowers)).GetMethod, GetPatch(nameof(APIUserBypass)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasScriptingAccess)).GetMethod, GetPatch(nameof(APIUserBypass)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasSuperPowers)).GetMethod, GetPatch(nameof(APIUserBypass)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasVIPAccess)).GetMethod, GetPatch(nameof(APIUserBypass)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.isEarlyAdopter)).GetMethod, GetPatch(nameof(APIUserBypass)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.isSupporter)).GetMethod, GetPatch(nameof(APIUserBypass)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canSetStatusOffline)).GetMethod, GetPatch(nameof(APIUserBypass)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.hasNoPowers)).GetMethod, GetPatch(nameof(APIUserBypass2)));
-                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.developerType)).GetMethod, GetPatch(nameof(APIUserBypass3)));
-                new Patch(AccessTools.Property(typeof(Networking), nameof(Networking.IsInstanceOwner)).GetMethod, GetPatch(nameof(TestSpoof)));
-                new Patch(AccessTools.Property(typeof(Networking), nameof(Networking.IsMaster)).GetMethod, GetPatch(nameof(TestSpoof)));
-                new Patch(AccessTools.Property(typeof(VRCPlayerApi), nameof(VRCPlayerApi.isModerator)).GetMethod, GetPatch(nameof(VRCPlayerApiBypass)));
-                new Patch(AccessTools.Property(typeof(VRCPlayerApi), nameof(VRCPlayerApi.isSuper)).GetMethod, GetPatch(nameof(VRCPlayerApiBypass)));
+                new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canSeeAllUsersStatus)).GetMethod, null, GetPatch(nameof(APIUserBypass)));
                 new Patch(AccessTools.Property(typeof(Time), nameof(Time.smoothDeltaTime)).GetMethod, null, GetPatch(nameof(SpoofFPS)));
                 new Patch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
                 new Patch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
@@ -166,7 +148,7 @@
             {
                 string str = text;
                 object obj = __1;
-                ModConsole.Log(str + ((obj != null) ? obj.ToString() : null) + ", " + __2.ToString());
+                ModConsole.Log(str + (obj?.ToString()) + ", " + __2.ToString());
             }
             else
             {
@@ -175,42 +157,11 @@
             return true;
         }
 
-        private static bool TestSpoof(ref bool __result)
-        {
-            __result = true;
-            return false;
-        }
-
-
-        private static void VRCPlayerApiBypass(VRCPlayerApi __instance, ref bool __result)
-        {
-            if (__instance.playerId.Equals(PlayerUtils.GetPlayer().UserID()))
-            {
-                __result = true;
-            }
-        }
-
         private static void APIUserBypass(APIUser __instance, ref bool __result)
         {
             if (__instance.IsSelf)
             {
                 __result = true;
-            }
-        }
-
-        private static void APIUserBypass2(APIUser __instance, ref bool __result)
-        {
-            if (__instance.IsSelf)
-            {
-                __result = false;
-            }
-        }
-
-        private static void APIUserBypass3(APIUser __instance, ref APIUser.DeveloperType __result)
-        {
-            if (__instance.IsSelf)
-            {
-                __result = APIUser.DeveloperType.Moderator;
             }
         }
 
@@ -246,12 +197,6 @@
                 ModConsole.Log($"{__instance.name}: Portal Entered");
                 return true;
             }
-        }
-
-        private static bool OnTestPatch(ref Il2CppStructArray<bool> __0)
-        {
-            ModConsole.Log("Test!");
-            return true;
         }
 
         private static void SpoofQuest(ref string __result)
@@ -357,11 +302,6 @@
             {
                 ModConsole.Error($"[Photon] OnPhotonPlayerLeft Failed! __0 was null.");
             }
-        }
-
-        private static void OnGameObjectSetActive(GameObject __instance, ref bool __0)
-        {
-            ModConsole.Log($"GameObject.SetActive: {__instance.name}, {__0}");
         }
     }
 }
