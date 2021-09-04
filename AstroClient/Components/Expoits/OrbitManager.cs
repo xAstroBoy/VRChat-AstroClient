@@ -178,11 +178,6 @@
                     pickup.gameObject.RigidBody_Set_isKinematic(false);
                 }
 
-                if (!pickup.gameObject.active)
-                {
-                    pickup.gameObject.SetActive(true);
-                }
-
                 pickup.transform.position = centerPoint.position + (centerPoint.forward * 0.3f);
             }
 
