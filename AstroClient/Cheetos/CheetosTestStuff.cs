@@ -31,6 +31,16 @@
             infobartext.text = "AstroClient";
         }
 
+        public override void OnRoomJoined()
+        {
+            ModConsole.Log("You joined a room.");
+        }
+
+        public override void OnRoomLeft()
+        {
+            ModConsole.Log("You left a room.");
+        }
+
         public override void OnPlayerJoined(Player player)
         {
             if (!ModDetector.FindMods.IsNotoriousPresent)

@@ -41,6 +41,8 @@
             CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
             CheetosHooks.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
             CheetosHooks.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
+            CheetosHooks.Event_OnRoomLeft += Internal_OnRoomLeft;
+            CheetosHooks.Event_OnRoomJoined += Internal_OnRoomJoined;
 
             QuickMenuHooks.Event_OnPlayerSelected += Internal_OnPlayerSelected;
 
@@ -75,6 +77,16 @@
         private void Internal_OnSceneLoaded(object sender, OnSceneLoadedEventArgs e)
         {
             OnSceneLoaded(e.BuildIndex, e.SceneName);
+        }
+
+        private void Internal_OnRoomLeft(object sender, EventArgs e)
+        {
+            OnRoomLeft();
+        }
+
+        private void Internal_OnRoomJoined(object sender, EventArgs e)
+        {
+            OnRoomJoined();
         }
 
         private void Internal_OnPlayerLeft(object sender, PlayerEventArgs e)
@@ -172,6 +184,14 @@
         }
 
         public virtual void OnSceneLoaded(int buildIndex, string sceneName)
+        {
+        }
+
+        public virtual void OnRoomLeft()
+        {
+        }
+
+        public virtual void OnRoomJoined()
         {
         }
 

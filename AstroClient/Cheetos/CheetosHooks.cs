@@ -35,6 +35,9 @@
         public static EventHandler<EventArgs> Event_OnRoomLeft;
         public static EventHandler<EventArgs> Event_OnRoomJoined;
 
+        public static EventHandler<EventArgs> Event_OnFriended;
+        public static EventHandler<EventArgs> Event_OnUnfriended;
+
         public static EventHandler<EventArgs> Event_OnAvatarPageOpen;
         public static EventHandler<EventArgs> Event_OnQuickMenuOpen;
         public static EventHandler<EventArgs> Event_OnQuickMenuClose;
@@ -123,11 +126,13 @@
                 new Patch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_0)), GetPatch(nameof(OnAvatarDownload)));
                 new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
                 new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
-                new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftRoom)), GetPatch(nameof(OnRoomLeft)));
-                new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedRoom)), GetPatch(nameof(OnRoomJoined)));
+                new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftRoom)), GetPatch(nameof(OnRoomLeftPatch)));
+                new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedRoom)), GetPatch(nameof(OnRoomJoinedPatch)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.ConfigurePortal)), GetPatch(nameof(OnConfigurePortal)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.Method_Public_Void_0)), GetPatch(nameof(OnEnterPortal)));
                 new Patch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Private_Void_Boolean_0)), GetPatch(nameof(QuickMenuPatch)));
+                new Patch(typeof(APIUser).GetMethod(nameof(APIUser.LocalAddFriend)), GetPatch(nameof(OnFriended)));
+                new Patch(typeof(APIUser).GetMethod(nameof(APIUser.UnfriendUser)), GetPatch(nameof(OnUnfriended)));
                 new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canSeeAllUsersStatus)).GetMethod, null, GetPatch(nameof(APIUserBypass)));
                 new Patch(AccessTools.Property(typeof(Time), nameof(Time.smoothDeltaTime)).GetMethod, null, GetPatch(nameof(SpoofFPS)));
                 new Patch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
@@ -143,12 +148,22 @@
             finally { }
         }
 
-        private static void OnRoomLeft()
+        private static void OnFriended(ref APIUser __0)
+        {
+            Event_OnFriended?.SafetyRaise(new EventArgs());
+        }
+
+        private static void OnUnfriended(ref string __0, ref Il2CppSystem.Action __1, ref Il2CppSystem.Action __2)
+        {
+            Event_OnUnfriended?.SafetyRaise(new EventArgs());
+        }
+
+        private static void OnRoomLeftPatch()
         {
             Event_OnRoomLeft?.SafetyRaise(new EventArgs());
         }
 
-        private static void OnRoomJoined()
+        private static void OnRoomJoinedPatch()
         {
             Event_OnRoomJoined?.SafetyRaise(new EventArgs());
         }
