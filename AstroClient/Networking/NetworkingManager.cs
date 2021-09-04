@@ -63,7 +63,7 @@
         {
             if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
             {
-                var instanceID = WorldUtils.GetWorldID();
+                var instanceID = WorldUtils.GetFullID();
                 AstroNetworkClient.Client.Send(new PacketData(PacketClientType.WORLD_JOIN, instanceID));
             }
         }

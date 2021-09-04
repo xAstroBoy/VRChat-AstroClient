@@ -216,7 +216,7 @@
         private static void OnConnected(object sender, EventArgs e)
         {
             NetworkingManager.SendClientInfo();
-            ModConsole.DebugLog("Client Connected.");
+            ModConsole.Log("Client Connected.");
             return;
         }
 
@@ -226,7 +226,7 @@
             {
                 for (; ; )
                 {
-                    ModConsole.DebugError("Lost connection to server, retrying in 5 seconds...");
+                    ModConsole.Error("Lost connection to server, retrying in 5 seconds...");
                     Thread.Sleep(5000);
                     try { Connect(); break; } catch { }
                 }
