@@ -4,7 +4,7 @@
     using UnityEngine;
     using VRC;
 
-    public static class Button_strings_ext
+    public static class ButtonStringExtensions
     {
         public static string Generate_TeleportToMe_ButtonText(this GameObject obj)
         {

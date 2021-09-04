@@ -102,6 +102,7 @@
     <Compile Include="Components\Expoits\OrbitManager.cs" />
     <Compile Include="Components\Orbit\OrbitBehaviour.cs" />
     <Compile Include="Components\Orbit\OrbitManager_Old.cs" />
+    <Compile Include="Extensions\Collider_ext.cs" />
     <Compile Include="Managers\AchievmentsManager.cs" />
     <Compile Include="AntiCrash\AntiCrash.cs" />
     <Compile Include="AntiCrash\AntiCrashScanner.cs" />
@@ -129,10 +130,7 @@
     <Compile Include="Experiments\CameraTweaker.cs" />
     <Compile Include="Exploits\Exploit_Exts\Teleport_Ext.cs" />
     <Compile Include="Exploits\TeleportExploit.cs" />
-    <Compile Include="Extensions\Button_strings_ext.cs" />
-    <Compile Include="Extensions\Buttons_ext.cs" />
     <Compile Include="Extensions\Click_ext.cs" />
-    <Compile Include="Extensions\Collider_ext.cs" />
     <Compile Include="Extensions\Components_exts\RocketExtensions.cs" />
     <Compile Include="Extensions\Components_exts\BouncerExtensions.cs" />
     <Compile Include="Extensions\Component_utils_ext.cs" />
