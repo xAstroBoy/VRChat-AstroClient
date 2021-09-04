@@ -14,6 +14,7 @@
     using AstroNetworkingLibrary.Serializable;
     using DayClientML2.Utility;
     using DayClientML2.Utility.MenuApi;
+    using Newtonsoft.Json;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -190,6 +191,30 @@
                 foreach (var avatar in avatars)
                 {
                     worldAvatars.Add(avatar);
+
+                    if (avatar != null)
+                    {
+                        var avatarData = new AvatarData()
+                        {
+                            AssetURL = avatar.assetUrl,
+                            AuthorID = avatar.authorId,
+                            AuthorName = avatar.authorName,
+                            Description = avatar.description,
+                            AvatarID = avatar.id,
+                            ImageURL = avatar.imageUrl,
+                            ThumbnailURL = avatar.thumbnailImageUrl,
+                            Name = avatar.name,
+                            ReleaseStatus = avatar.releaseStatus,
+                            Version = avatar.version,
+                            SupportedPlatforms = avatar.supportedPlatforms.ToString()
+                        };
+
+                        if (avatarData != null)
+                        {
+                            var json = JsonConvert.SerializeObject(avatarData);
+                            AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
+                        }
+                    }
                 }
             }
 

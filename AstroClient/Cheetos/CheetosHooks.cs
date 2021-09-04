@@ -19,11 +19,9 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Reflection;
-    using UnhollowerBaseLib;
     using UnityEngine;
     using VRC;
     using VRC.Core;
-    using VRC.SDKBase;
 
     #endregion Imports
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer", Exclude = false)]
