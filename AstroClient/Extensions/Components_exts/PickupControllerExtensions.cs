@@ -5,7 +5,7 @@
     using UnityEngine;
     using VRC.SDKBase;
 
-    public static class PickupController_ext
+    public static class PickupControllerExtensions
     {
         public static void Pickup_Set_DisallowTheft(this PickupController instance, bool DisallowTheft)
         {

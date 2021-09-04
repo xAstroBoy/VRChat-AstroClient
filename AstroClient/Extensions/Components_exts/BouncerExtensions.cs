@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public static class Bouncer_ext
+    public static class BouncerExtensions
     {
         public static void Set_Bouncer(this Bouncer instance, bool BounceTowardPlayer = false)
         {

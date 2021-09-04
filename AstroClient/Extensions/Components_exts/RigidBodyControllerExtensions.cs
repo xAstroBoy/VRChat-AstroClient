@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public static class RigidBodyController_ext
+    public static class RigidBodyControllerExtensions
     {
         public static void RigidBody_RestoreOriginalBody(this RigidBodyController control)
         {
