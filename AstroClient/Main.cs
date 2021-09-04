@@ -16,10 +16,10 @@
     using AstroClient.Worlds;
     using AstroLibrary;
     using AstroLibrary.Console;
-    using Il2CppSystem.Diagnostics;
     using MelonLoader;
     using RubyButtonAPI;
     using System;
+    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
     using System.Reflection;
@@ -32,6 +32,8 @@
     using AstroLibrary.Extensions;
     using Button = UnityEngine.UI.Button;
     using AstroLibrary.Utility;
+    using System.IO;
+    using Application = UnityEngine.Application;
 
     #endregion Imports
 
@@ -61,6 +63,8 @@
         public static QMSingleButton ClearVRamButton;
         public static QMSingleButton JoinInstanceButton;
         public static QMSingleButton ReloadAvatarsButton;
+        public static QMSingleButton CloseButton;
+        public static QMSingleButton RestartButton;
 
         #endregion Buttons
 
@@ -235,6 +239,13 @@
             JoinInstanceButton = new QMSingleButton(AstroClient, 5, -0.5f, "Join\nInstance", delegate () { new PortalInternal().Method_Private_Void_String_String_PDM_0(Clipboard.GetText().Split(':')[0], Clipboard.GetText().Split(':')[1]); }, "Join an instance via your clipboard.", null, null, true);
             AvatarByIDButton = new QMSingleButton(AstroClient, 5, 0.5f, "Avatar\nBy ID", delegate () { string text = Clipboard.GetText(); if (text.StartsWith("avtr_")) new PageAvatar { field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal { field_Internal_ApiAvatar_0 = new ApiAvatar { id = text } } }.ChangeToSelectedAvatar(); else MelonLogger.Error("Clipboard does not contains Avatar ID!"); }, "Alows you to change into a public avatar with its id.", null, null, true);
             ReloadAvatarsButton = new QMSingleButton(AstroClient, 5, 1f, "Reload\nAvatars", () => { AvatarMods.AvatarUtils.Reload_All_Avatars(); }, "Reloads All Avatars", null, null, true);
+
+            CloseButton = new QMSingleButton(AstroClient, 0, 0, "Close Game", () => { Process.GetCurrentProcess().Kill(); }, "Close the game");
+            RestartButton = new QMSingleButton(AstroClient, 0, 1, "Restart Game", () =>
+            {
+                Process.Start(Directory.GetParent(Application.dataPath) + "\\VRChat.exe");
+                Process.GetCurrentProcess().Kill();
+            }, "Restart the game");
 
             // Protections
             QMNestedButton protectionsButton = new QMNestedButton(AstroClient, 4, 2f, "Protections", "Protections Menu", null, Color.yellow, null, null, true);
