@@ -29,6 +29,8 @@
             CheetosHooks.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
             CheetosHooks.Event_OnRoomLeft += Internal_OnRoomLeft;
             CheetosHooks.Event_OnRoomJoined += Internal_OnRoomJoined;
+            CheetosHooks.Event_OnFriended += Internal_OnFriended;
+            CheetosHooks.Event_OnUnfriended += Internal_OnUnfriended;
         }
 
         [HideFromIl2Cpp]
