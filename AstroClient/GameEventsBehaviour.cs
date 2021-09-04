@@ -23,6 +23,7 @@
             RPCEventHook.Event_OnUdonSyncRPC += Internal_OnUdonSyncRPCEvent;
             OnWorldRevealHook.Event_OnWorldReveal += Internal_OnWorldReveal;
 
+            CheetosHooks.Event_OnMasterClientSwitched += Internal_OnMasterClientSwitched;
             CheetosHooks.Event_OnPhotonJoin += Internal_OnPhotonPlayerJoined;
             CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
             CheetosHooks.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
@@ -31,6 +32,12 @@
             CheetosHooks.Event_OnRoomJoined += Internal_OnRoomJoined;
             CheetosHooks.Event_OnFriended += Internal_OnFriended;
             CheetosHooks.Event_OnUnfriended += Internal_OnUnfriended;
+        }
+
+        [HideFromIl2Cpp]
+        private void Internal_OnMasterClientSwitched(object sender, PhotonPlayerEventArgs e)
+        {
+            OnMasterClientSwitched(e.player);
         }
 
         [HideFromIl2Cpp]
@@ -127,6 +134,11 @@
         private void Internal_OnWorldReveal(object sender, OnWorldRevealArgs e)
         {
             OnWorldReveal(e.ID, e.Name, e.WorldTags, e.AssetUrl);
+        }
+
+        [HideFromIl2Cpp]
+        public virtual void OnMasterClientSwitched(Photon.Realtime.Player player)
+        {
         }
 
         [HideFromIl2Cpp]

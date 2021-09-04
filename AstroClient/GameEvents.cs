@@ -37,6 +37,7 @@
             NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
             NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
 
+            CheetosHooks.Event_OnMasterClientSwitched += Internal_OnMasterClientSwitched;
             CheetosHooks.Event_OnPhotonJoin += Internal_OnPhotonPlayerJoined;
             CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
             CheetosHooks.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
@@ -49,6 +50,11 @@
             QuickMenuHooks.Event_OnPlayerSelected += Internal_OnPlayerSelected;
 
             TargetSelector.Event_OnTargetSet += Internal_OnTargetSet;
+        }
+
+        private void Internal_OnMasterClientSwitched(object sender, PhotonPlayerEventArgs e)
+        {
+            OnMasterClientSwitched(e.player);
         }
 
         private void Internal_OnApplicationStart(object sender, EventArgs e)
@@ -196,6 +202,10 @@
         }
 
         public virtual void OnSceneLoaded(int buildIndex, string sceneName)
+        {
+        }
+
+        public virtual void OnMasterClientSwitched(Photon.Realtime.Player player)
         {
         }
 

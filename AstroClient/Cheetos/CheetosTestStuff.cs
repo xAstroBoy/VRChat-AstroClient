@@ -31,6 +31,13 @@
             infobartext.text = "AstroClient";
         }
 
+        public override void OnMasterClientSwitched(Photon.Realtime.Player player)
+        {
+            if (!WorldUtils.IsInWorld()) return;
+
+            CheetosHelpers.SendHudNotification($"'{player.field_Public_Player_0.GetDisplayName()}' is now the room master.");
+        }
+
         public override void OnRoomJoined()
         {
             ModConsole.Log("You joined a room.");
