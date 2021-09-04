@@ -30,13 +30,13 @@
     internal class CheetosHooks : GameEvents
     {
         public static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonJoin;
-
         public static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonLeft;
 
+        public static EventHandler<EventArgs> Event_OnRoomLeft;
+        public static EventHandler<EventArgs> Event_OnRoomJoined;
+
         public static EventHandler<EventArgs> Event_OnAvatarPageOpen;
-
         public static EventHandler<EventArgs> Event_OnQuickMenuOpen;
-
         public static EventHandler<EventArgs> Event_OnQuickMenuClose;
 
         public class Patch
@@ -123,6 +123,8 @@
                 new Patch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_0)), GetPatch(nameof(OnAvatarDownload)));
                 new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
                 new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
+                new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftRoom)), GetPatch(nameof(OnRoomLeft)));
+                new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedRoom)), GetPatch(nameof(OnRoomJoined)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.ConfigurePortal)), GetPatch(nameof(OnConfigurePortal)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.Method_Public_Void_0)), GetPatch(nameof(OnEnterPortal)));
                 new Patch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Private_Void_Boolean_0)), GetPatch(nameof(QuickMenuPatch)));
@@ -139,6 +141,16 @@
             }
             catch (Exception e) { ModConsole.Error("[Cheetos Patches] Error in applying patches : " + e); }
             finally { }
+        }
+
+        private static void OnRoomLeft()
+        {
+            Event_OnRoomLeft?.SafetyRaise(new EventArgs());
+        }
+
+        private static void OnRoomJoined()
+        {
+            Event_OnRoomJoined?.SafetyRaise(new EventArgs());
         }
 
         private static bool LoadBalancingClient_OpWebRpc(LoadBalancingClient __instance, ref string __0, ref object __1, ref bool __2)
@@ -169,11 +181,11 @@
         {
             if (!__0)
             {
-                Event_OnQuickMenuOpen.Invoke(__instance, new EventArgs());
+                Event_OnQuickMenuOpen?.SafetyRaise(new EventArgs());
             }
             else
             {
-                Event_OnQuickMenuClose.Invoke(__instance, new EventArgs());
+                Event_OnQuickMenuClose?.SafetyRaise(new EventArgs());
             }
 
             return true;

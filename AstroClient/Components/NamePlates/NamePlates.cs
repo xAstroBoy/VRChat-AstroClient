@@ -9,7 +9,6 @@
     using System.Text;
     using TMPro;
     using UnityEngine;
-    using UnityEngine.UI;
     using VRC;
 
     public class NamePlates : GameEventsBehaviour
@@ -173,9 +172,6 @@
 
         private void SetLocation(GameObject tag, int count)
         {
-            /*if (BlazesAPIs.AddTagGap)
-                Tag.transform.localPosition = new Vector3(0f, (30 * (count + 2)), 0f);
-            else*/
             tag.transform.localPosition = new Vector3(0f, (30 * (count + 2)), 0f);
         }
 
