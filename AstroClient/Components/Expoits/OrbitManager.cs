@@ -54,7 +54,6 @@
         private bool isLooping;
         private Transform centerPoint = null;
         private List<PickupController> pickups = new List<PickupController>();
-        private float updateTimer;
 
         public static bool IsEnabled
         {
@@ -65,7 +64,7 @@
         public void Start()
         {
             Instance = this;
-            //RefreshPickups();
+            RefreshPickups();
             ModConsole.Log($"[OrbitManager] Initialized");
         }
 
@@ -111,12 +110,12 @@
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
-            //RefreshPickups();
+            RefreshPickups();
         }
 
         public static void OrbitPlayer(Player target)
         {
-            if (Instance != null && target != null)
+            if (Instance != null && target != null && Instance.target == null)
             {
                 Instance.target = target;
                 Instance.isEnabled = true;
@@ -139,22 +138,21 @@
                 GameObjectMenu.RestoreOriginalLocation(pickup.gameObject, true);
                 OnlineEditor.RemoveOwnerShip(pickup.gameObject);
             }
+            Instance.target = null;
             Instance.isEnabled = false;
             ModConsole.Log($"[OrbitManager] Orbit Disabled");
         }
 
         public void FixedUpdate()
         {
-            if (IsEnabled && target == null) DisableOrbit();
+            if ((IsEnabled && target == null) || (IsEnabled && !WorldUtils.IsInWorld()))
+            {
+                DisableOrbit();
+                return;
+            }
 
             if (isEnabled && !isLooping)
             {
-                if (!WorldUtils.IsInWorld())
-                {
-                    DisableOrbit();
-                    return;
-                }
-
                 if (centerPoint == null)
                 {
                     centerPoint = PositionOfBone(target, HumanBodyBones.Head);
@@ -170,24 +168,22 @@
         {
             if (!IsEnabled || target == null) yield break;
 
-            for (int i = 0; i < pickups.Count; i++)
+            foreach (PickupController pickup in pickups)
             {
-                PickupController pickup = pickups[i];
                 if (!pickup.gameObject.IsOwner())
                 {
                     pickup.gameObject.TakeOwnership();
+                    pickup.gameObject.RigidBody_Set_Gravity(false);
+                    pickup.gameObject.RigidBody_Set_DetectCollisions(true);
+                    pickup.gameObject.RigidBody_Set_isKinematic(false);
                 }
 
-                var rb = pickup.gameObject.GetComponent<Rigidbody>();
-                if (rb != null)
+                if (!pickup.gameObject.active)
                 {
-                    rb.isKinematic = true;
-                    rb.useGravity = false;
-                    rb.detectCollisions = false;
+                    pickup.gameObject.SetActive(true);
                 }
 
-                pickup.transform.position = centerPoint.position;
-                yield return null;
+                pickup.transform.position = centerPoint.position + (centerPoint.forward * 0.3f);
             }
 
             isLooping = false;
