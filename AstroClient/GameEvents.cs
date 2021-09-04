@@ -43,6 +43,8 @@
             CheetosHooks.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
             CheetosHooks.Event_OnRoomLeft += Internal_OnRoomLeft;
             CheetosHooks.Event_OnRoomJoined += Internal_OnRoomJoined;
+            CheetosHooks.Event_OnFriended += Internal_OnFriended;
+            CheetosHooks.Event_OnUnfriended += Internal_OnUnfriended;
 
             QuickMenuHooks.Event_OnPlayerSelected += Internal_OnPlayerSelected;
 
@@ -87,6 +89,16 @@
         private void Internal_OnRoomJoined(object sender, EventArgs e)
         {
             OnRoomJoined();
+        }
+
+        private void Internal_OnFriended(object sender, EventArgs e)
+        {
+            OnFriended();
+        }
+
+        private void Internal_OnUnfriended(object sender, EventArgs e)
+        {
+            OnUnfriended();
         }
 
         private void Internal_OnPlayerLeft(object sender, PlayerEventArgs e)
@@ -192,6 +204,14 @@
         }
 
         public virtual void OnRoomJoined()
+        {
+        }
+
+        public virtual void OnFriended()
+        {
+        }
+
+        public virtual void OnUnfriended()
         {
         }
 

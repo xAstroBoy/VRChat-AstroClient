@@ -27,11 +27,38 @@
             CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
             CheetosHooks.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
             CheetosHooks.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
+            CheetosHooks.Event_OnRoomLeft += Internal_OnRoomLeft;
+            CheetosHooks.Event_OnRoomJoined += Internal_OnRoomJoined;
         }
 
+        [HideFromIl2Cpp]
         private void Internal_OnLevelLoaded(object sender, EventArgs e)
         {
             OnLevelLoaded();
+        }
+
+        [HideFromIl2Cpp]
+        private void Internal_OnRoomLeft(object sender, EventArgs e)
+        {
+            OnRoomLeft();
+        }
+
+        [HideFromIl2Cpp]
+        private void Internal_OnRoomJoined(object sender, EventArgs e)
+        {
+            OnRoomJoined();
+        }
+
+        [HideFromIl2Cpp]
+        private void Internal_OnFriended(object sender, EventArgs e)
+        {
+            OnFriended();
+        }
+
+        [HideFromIl2Cpp]
+        private void Internal_OnUnfriended(object sender, EventArgs e)
+        {
+            OnUnfriended();
         }
 
         [HideFromIl2Cpp]
@@ -102,6 +129,26 @@
 
         [HideFromIl2Cpp]
         public virtual void OnPlayerLeft(Player player)
+        {
+        }
+
+        [HideFromIl2Cpp]
+        public virtual void OnRoomLeft()
+        {
+        }
+
+        [HideFromIl2Cpp]
+        public virtual void OnRoomJoined()
+        {
+        }
+
+        [HideFromIl2Cpp]
+        public virtual void OnFriended()
+        {
+        }
+
+        [HideFromIl2Cpp]
+        public virtual void OnUnfriended()
         {
         }
 
