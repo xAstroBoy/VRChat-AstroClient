@@ -106,7 +106,6 @@
                 {
                     ModConsole.Log($"Sent Avatar Deletion For: {selectedID}");
                     AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DELETE, selectedID));
-                    Search(lastSearchType, lastSearchQuery);
                 }, 1.45f, 1f);
             }
 

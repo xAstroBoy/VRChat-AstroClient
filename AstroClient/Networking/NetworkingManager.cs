@@ -36,12 +36,13 @@
             {
                 if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
                 {
-                    if (Bools.IsDeveloper)
-                    {
-                        ModConsole.Log($"Sending Avatar Search: {(int)searchType}, {query}");
-                    }
+                    ModConsole.Log($"Sending Avatar Search: {(int)searchType}, {query}");
                     AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_SEARCH_TYPE, ((int)searchType).ToString()));
                     AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_SEARCH, query));
+                }
+                else
+                {
+                    ModConsole.Error("Could not send Search Request.");
                 }
             }
         }
@@ -50,12 +51,15 @@
         {
             if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
             {
-                if (Bools.IsDeveloper)
-                {
-                    ModConsole.DebugLog($"Sending Client Information: {Name}, {UserID}");
-                }
-                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_USERID, PlayerUtils.UserID()));
-                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_NAME, PlayerUtils.DisplayName()));
+                Name = PlayerUtils.DisplayName();
+                UserID = PlayerUtils.UserID();
+                ModConsole.Log($"Sending Client Information: {UserID}, {Name}");
+                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_USERID, UserID));
+                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_NAME, Name));
+            }
+            else
+            {
+                ModConsole.Error("Could not send Client Information.");
             }
         }
 
@@ -64,7 +68,12 @@
             if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
             {
                 var instanceID = WorldUtils.GetFullID();
+                ModConsole.Log($"Sending Instance Information: {instanceID}");
                 AstroNetworkClient.Client.Send(new PacketData(PacketClientType.WORLD_JOIN, instanceID));
+            }
+            else
+            {
+                ModConsole.Error("Could not send Instance Information.");
             }
         }
 
