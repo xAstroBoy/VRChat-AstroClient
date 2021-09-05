@@ -28,6 +28,7 @@
                     Rigidbody = gameObject.GetComponent<Rigidbody>();
                 }
             }
+            ModConsole.DebugLog("Attacked Successfully RigidBodyController to object " + gameObject.name);
 
             EditMode = false;
         }
@@ -133,7 +134,7 @@
             }
         }
 
-        public void Update()
+        public void LateUpdate()
         {
             // Add a Sync Mechanism if Edit Mode is off and is not Applying edits anymore.
             Run_OnRigidbodyControllerOnUpdate();

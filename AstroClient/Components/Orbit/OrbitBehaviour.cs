@@ -108,7 +108,7 @@
 
             if (CenterPoint == null)
             {
-                CenterPoint = PositionOfBone(player, HumanBodyBones.Head);
+                CenterPoint = BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head);
             }
 
             if (CenterPoint != null)
@@ -276,21 +276,8 @@
             }
         }
 
-        public static Transform PositionOfBone(Player player, HumanBodyBones bone)
-        {
-            Transform bonePosition = player.transform;
-            VRCAvatarManager avatarManager = player.GetVRCPlayer().GetAvatarManager();
-            if (!avatarManager)
-                return bonePosition;
-            Animator animator = avatarManager.field_Private_Animator_0;
-            if (!animator)
-                return bonePosition;
-            Transform boneTransform = animator.GetBoneTransform(bone);
-            if (!boneTransform)
-                return bonePosition;
 
-            return boneTransform;
-        }
+        
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Clamp(float val)

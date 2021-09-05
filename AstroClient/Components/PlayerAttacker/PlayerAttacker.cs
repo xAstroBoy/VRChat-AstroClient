@@ -142,13 +142,13 @@
                             {
                                 if (Time.time - LastTimeCheck2 > 0.06f)
                                 {
-                                    gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+                                    gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position);
                                     ApplyForceX();
-                                    gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+                                    gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position);
                                     ApplyForceY();
-                                    gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+                                    gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position);
                                     ApplyForceZ();
-                                    gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+                                    gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position);
                                 }
                             }
                         }
@@ -205,15 +205,15 @@
         {
             if (body != null && player.transform != null)
             {
-                if (body.transform.position.x <= PositionOfBone(player, HumanBodyBones.Head).position.x)
+                if (body.transform.position.x <= BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.x)
                 {
                     body.AddForce(Movementforce, 0, 0, ForceMode.Impulse);
                 }
-                else if (gameObject.transform.position.x >= PositionOfBone(player, HumanBodyBones.Head).position.x)
+                else if (gameObject.transform.position.x >= BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.x)
                 {
                     body.AddForce(-Movementforce, 0, 0, ForceMode.Impulse);
                 }
-                else if (gameObject.transform.position.x == PositionOfBone(player, HumanBodyBones.Head).position.x)
+                else if (gameObject.transform.position.x == BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.x)
                 {
                     return;
                 }
@@ -224,15 +224,15 @@
         {
             if (body != null && player.transform != null)
             {
-                if (gameObject.transform.position.y <= PositionOfBone(player, HumanBodyBones.Head).position.y)
+                if (gameObject.transform.position.y <= BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.y)
                 {
                     body.AddForce(0, Movementforce, 0, ForceMode.Impulse);
                 }
-                else if (gameObject.transform.position.y >= PositionOfBone(player, HumanBodyBones.Head).position.y)
+                else if (gameObject.transform.position.y >= BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.y)
                 {
                     body.AddForce(0, -Movementforce, 0, ForceMode.Impulse);
                 }
-                else if (gameObject.transform.position.y == PositionOfBone(player, HumanBodyBones.Head).position.y)
+                else if (gameObject.transform.position.y == BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.y)
                 {
                     return;
                 }
@@ -243,36 +243,21 @@
         {
             if (body != null && player.transform != null)
             {
-                if (gameObject.transform.position.z <= PositionOfBone(player, HumanBodyBones.Head).position.z)
+                if (gameObject.transform.position.z <= BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.z)
                 {
                     body.AddForce(0, 0, Movementforce, ForceMode.Impulse);
                 }
-                else if (gameObject.transform.position.z >= PositionOfBone(player, HumanBodyBones.Head).position.z)
+                else if (gameObject.transform.position.z >= BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.z)
                 {
                     body.AddForce(0, 0, -Movementforce, ForceMode.Impulse);
                 }
-                else if (gameObject.transform.position.z == PositionOfBone(player, HumanBodyBones.Head).position.z)
+                else if (gameObject.transform.position.z == BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.z)
                 {
                     return;
                 }
             }
         }
 
-        public static Transform PositionOfBone(Player player, HumanBodyBones bone)
-        {
-            Transform bonePosition = player.transform;
-            VRCAvatarManager avatarManager = player.GetVRCPlayer().GetAvatarManager();
-            if (!avatarManager)
-                return bonePosition;
-            Animator animator = avatarManager.field_Private_Animator_0;
-            if (!animator)
-                return bonePosition;
-            Transform boneTransform = animator.GetBoneTransform(bone);
-            if (!boneTransform)
-                return bonePosition;
-
-            return boneTransform;
-        }
 
         public PlayerAttackerManager Manager = null;
         private float Movementforce = 0.04f; // DEFAULT 0.04f

@@ -131,7 +131,7 @@
                                     gameObject.TakeOwnership();
                                 }
 
-                                gameObject.transform.LookAt(PositionOfBone(player, HumanBodyBones.Head).position);
+                                gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position);
                             }
 
                             LastTimeCheck = Time.time;
@@ -171,21 +171,7 @@
             PlayerWatcherManager.Deregister(this);
         }
 
-        public static Transform PositionOfBone(Player player, HumanBodyBones bone)
-        {
-            Transform bonePosition = player.transform;
-            VRCAvatarManager avatarManager = player.GetVRCPlayer().GetAvatarManager();
-            if (!avatarManager)
-                return bonePosition;
-            Animator animator = avatarManager.field_Private_Animator_0;
-            if (!animator)
-                return bonePosition;
-            Transform boneTransform = animator.GetBoneTransform(bone);
-            if (!boneTransform)
-                return bonePosition;
 
-            return boneTransform;
-        }
 
         public PlayerWatcherManager Manager = null;
         public float TimerOffset = 0f;

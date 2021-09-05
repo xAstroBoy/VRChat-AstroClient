@@ -25,7 +25,7 @@
             ModConsole.DebugLog("Attacked Successfully PickupController to object " + gameObject.name);
         }
 
-        public void Update()
+        public void LateUpdate()
         {
             Run_onPickupUpdate();
             if (!EditMode)

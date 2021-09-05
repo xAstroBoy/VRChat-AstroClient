@@ -45,7 +45,7 @@
         {
             if (Target == null)
             {
-                Target = PositionOfBone(TargetPlayer, TargetBone).gameObject;
+                Target = BonesUtils.Get_Player_Bone_Transform(TargetPlayer, TargetBone).gameObject;
             }
 
             if (TargetPlayer == null)
@@ -79,20 +79,6 @@
             }
         }
 
-        private static Transform PositionOfBone(Player player, HumanBodyBones bone)
-        {
-            Transform bonePosition = player.transform;
-            VRCAvatarManager avatarManager = player.GetVRCPlayer().GetAvatarManager();
-            if (!avatarManager)
-                return bonePosition;
-            Animator animator = avatarManager.field_Private_Animator_0;
-            if (!animator)
-                return bonePosition;
-            Transform boneTransform = animator.GetBoneTransform(bone);
-            if (!boneTransform)
-                return bonePosition;
 
-            return boneTransform;
-        }
     }
 }

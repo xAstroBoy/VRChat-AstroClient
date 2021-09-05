@@ -2,6 +2,7 @@
 {
     using UnityEngine;
     using VRC;
+    using VRC.SDKBase;
     using Vector3 = UnityEngine.Vector3;
 
     public static class BonesUtils
@@ -9,13 +10,10 @@
         public static Transform Get_Player_Bone_Transform(this Player player, HumanBodyBones bone)
         {
             Transform bonetransform = player.transform;
-            VRCAvatarManager avatarManager = player.GetVRCPlayer().GetAvatarManager();
-            if (!avatarManager)
+            VRCPlayerApi VRCPlayer = player.GetVRCPlayerApi();
+            if (VRCPlayer != null)
                 return bonetransform;
-            Animator animator = avatarManager.field_Private_Animator_0;
-            if (!animator)
-                return bonetransform;
-            Transform boneTransform = animator.GetBoneTransform(bone);
+            Transform boneTransform = VRCPlayer.GetBoneTransform(bone);
             return !boneTransform ? bonetransform : boneTransform.transform;
         }
 
