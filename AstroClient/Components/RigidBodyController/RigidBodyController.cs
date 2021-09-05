@@ -136,66 +136,69 @@
 
         public void Updater()
         {
-            if (gameObject.active)
+            if (gameObject != null)
             {
-                // Add a Sync Mechanism if Edit Mode is off and is not Applying edits anymore.
-                Run_OnRigidbodyControllerOnUpdate();
-                if (!EditMode)
+                if (gameObject.active && this.isActiveAndEnabled)
                 {
-                    // Makes sure if EditMode is OFF. As long is off it keeps updating the properties.
-                    if (Rigidbody != null)
+                    // Add a Sync Mechanism if Edit Mode is off and is not Applying edits anymore.
+                    Run_OnRigidbodyControllerOnUpdate();
+                    if (!EditMode)
                     {
-                        solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
-                        inertiaTensor = Rigidbody.inertiaTensor;
-                        inertiaTensorRotation = Rigidbody.inertiaTensorRotation;
-                        centerOfMass = Rigidbody.centerOfMass;
-                        collisionDetectionMode = Rigidbody.collisionDetectionMode;
-                        constraints = Rigidbody.constraints;
-                        freezeRotation = Rigidbody.freezeRotation;
-                        maxDepenetrationVelocity = Rigidbody.maxDepenetrationVelocity;
-                        detectCollisions = Rigidbody.detectCollisions;
-                        useGravity = Rigidbody.useGravity;
-                        mass = Rigidbody.mass;
-                        solverIterationCount = Rigidbody.solverIterationCount;
-                        angularDrag = Rigidbody.angularDrag;
-                        drag = Rigidbody.drag;
-                        angularVelocity = Rigidbody.angularVelocity;
-                        velocity = Rigidbody.velocity;
-                        isKinematic = Rigidbody.isKinematic;
-                        sleepVelocity = Rigidbody.sleepVelocity;
-                        sleepThreshold = Rigidbody.sleepThreshold;
-                        maxAngularVelocity = Rigidbody.maxAngularVelocity;
-                        solverVelocityIterations = Rigidbody.solverVelocityIterations;
-                        interpolation = Rigidbody.interpolation;
-                        sleepAngularVelocity = Rigidbody.sleepAngularVelocity;
-                        useConeFriction = Rigidbody.useConeFriction;
-                        solverIterations = Rigidbody.solverIterations;
+                        // Makes sure if EditMode is OFF. As long is off it keeps updating the properties.
+                        if (Rigidbody != null)
+                        {
+                            solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
+                            inertiaTensor = Rigidbody.inertiaTensor;
+                            inertiaTensorRotation = Rigidbody.inertiaTensorRotation;
+                            centerOfMass = Rigidbody.centerOfMass;
+                            collisionDetectionMode = Rigidbody.collisionDetectionMode;
+                            constraints = Rigidbody.constraints;
+                            freezeRotation = Rigidbody.freezeRotation;
+                            maxDepenetrationVelocity = Rigidbody.maxDepenetrationVelocity;
+                            detectCollisions = Rigidbody.detectCollisions;
+                            useGravity = Rigidbody.useGravity;
+                            mass = Rigidbody.mass;
+                            solverIterationCount = Rigidbody.solverIterationCount;
+                            angularDrag = Rigidbody.angularDrag;
+                            drag = Rigidbody.drag;
+                            angularVelocity = Rigidbody.angularVelocity;
+                            velocity = Rigidbody.velocity;
+                            isKinematic = Rigidbody.isKinematic;
+                            sleepVelocity = Rigidbody.sleepVelocity;
+                            sleepThreshold = Rigidbody.sleepThreshold;
+                            maxAngularVelocity = Rigidbody.maxAngularVelocity;
+                            solverVelocityIterations = Rigidbody.solverVelocityIterations;
+                            interpolation = Rigidbody.interpolation;
+                            sleepAngularVelocity = Rigidbody.sleepAngularVelocity;
+                            useConeFriction = Rigidbody.useConeFriction;
+                            solverIterations = Rigidbody.solverIterations;
 
-                        Original_solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
-                        Original_inertiaTensor = Rigidbody.inertiaTensor;
-                        Original_inertiaTensorRotation = Rigidbody.inertiaTensorRotation;
-                        Original_centerOfMass = Rigidbody.centerOfMass;
-                        Original_collisionDetectionMode = Rigidbody.collisionDetectionMode;
-                        Original_constraints = Rigidbody.constraints;
-                        Original_freezeRotation = Rigidbody.freezeRotation;
-                        Original_maxDepenetrationVelocity = Rigidbody.maxDepenetrationVelocity;
-                        Original_detectCollisions = Rigidbody.detectCollisions;
-                        Original_useGravity = Rigidbody.useGravity;
-                        Original_mass = Rigidbody.mass;
-                        Original_solverIterationCount = Rigidbody.solverIterationCount;
-                        Original_angularDrag = Rigidbody.angularDrag;
-                        Original_drag = Rigidbody.drag;
-                        Original_angularVelocity = Rigidbody.angularVelocity;
-                        Original_velocity = Rigidbody.velocity;
-                        Original_isKinematic = Rigidbody.isKinematic;
-                        Original_sleepVelocity = Rigidbody.sleepVelocity;
-                        Original_sleepThreshold = Rigidbody.sleepThreshold;
-                        Original_maxAngularVelocity = Rigidbody.maxAngularVelocity;
-                        Original_solverVelocityIterations = Rigidbody.solverVelocityIterations;
-                        Original_interpolation = Rigidbody.interpolation;
-                        Original_sleepAngularVelocity = Rigidbody.sleepAngularVelocity;
-                        Original_useConeFriction = Rigidbody.useConeFriction;
-                        Original_solverIterations = Rigidbody.solverIterations;
+                            Original_solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
+                            Original_inertiaTensor = Rigidbody.inertiaTensor;
+                            Original_inertiaTensorRotation = Rigidbody.inertiaTensorRotation;
+                            Original_centerOfMass = Rigidbody.centerOfMass;
+                            Original_collisionDetectionMode = Rigidbody.collisionDetectionMode;
+                            Original_constraints = Rigidbody.constraints;
+                            Original_freezeRotation = Rigidbody.freezeRotation;
+                            Original_maxDepenetrationVelocity = Rigidbody.maxDepenetrationVelocity;
+                            Original_detectCollisions = Rigidbody.detectCollisions;
+                            Original_useGravity = Rigidbody.useGravity;
+                            Original_mass = Rigidbody.mass;
+                            Original_solverIterationCount = Rigidbody.solverIterationCount;
+                            Original_angularDrag = Rigidbody.angularDrag;
+                            Original_drag = Rigidbody.drag;
+                            Original_angularVelocity = Rigidbody.angularVelocity;
+                            Original_velocity = Rigidbody.velocity;
+                            Original_isKinematic = Rigidbody.isKinematic;
+                            Original_sleepVelocity = Rigidbody.sleepVelocity;
+                            Original_sleepThreshold = Rigidbody.sleepThreshold;
+                            Original_maxAngularVelocity = Rigidbody.maxAngularVelocity;
+                            Original_solverVelocityIterations = Rigidbody.solverVelocityIterations;
+                            Original_interpolation = Rigidbody.interpolation;
+                            Original_sleepAngularVelocity = Rigidbody.sleepAngularVelocity;
+                            Original_useConeFriction = Rigidbody.useConeFriction;
+                            Original_solverIterations = Rigidbody.solverIterations;
+                        }
                     }
                 }
             }

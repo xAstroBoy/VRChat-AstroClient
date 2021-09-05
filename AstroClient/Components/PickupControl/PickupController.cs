@@ -29,12 +29,15 @@
 
         void Updater()
         {
-            if (gameObject.active)
+            if (gameObject != null)
             {
-                Run_onPickupUpdate();
-                if (!EditMode)
+                if (gameObject.active && this.isActiveAndEnabled)
                 {
-                    SyncProperties(true);
+                    Run_onPickupUpdate();
+                    if (!EditMode)
+                    {
+                        SyncProperties(true);
+                    }
                 }
             }
         }
