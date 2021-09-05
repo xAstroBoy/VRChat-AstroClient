@@ -34,17 +34,18 @@ namespace AstroClient
             if (body != null)
             {
                 body.EditMode = true;
-                body.RigidBody_Forced(true);
-                body.RigidBody_Set_isKinematic(false);
-                body.RigidBody_Set_Gravity(false);
-                body.RigidBody_Set_Drag(0f);
-                body.RigidBody_Set_AngularDrag(0.01f);
+                body.Forced_Rigidbody = true;
+                body.isKinematic = false;
+                body.useGravity = false;
+                body.drag = 0f;
+                body.angularDrag = 0.01f;
             }
             if (pickup != null)
             {
-                pickup.Pickup_Set_ForceComponent(true);
-                pickup.Pickup_Set_Pickupable(true);
-                pickup.Pickup_Set_ThrowVelocityBoostScale(5.5f);
+                pickup.EditMode = true;
+                pickup.ForceComponent = true;
+                pickup.pickupable = true;
+                pickup.ThrowVelocityBoostScale = 5.5f;
             }
         }
 
@@ -59,11 +60,11 @@ namespace AstroClient
                 }
                 if (body.isKinematic)
                 {
-                    body.RigidBody_Set_isKinematic(false);
+                    body.isKinematic = false;
                 }
                 if (Held)
                 {
-                    body.RigidBody_Set_Gravity(true);
+                    body.useGravity = true;
                     collider.isTrigger = false;
                 }
                 Time = 0f;
