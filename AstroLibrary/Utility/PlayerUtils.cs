@@ -244,7 +244,7 @@ namespace AstroLibrary.Utility
 
         public static VRCAvatarManager GetAvatarManager(this VRCPlayer Instance)
         {
-            return Instance.field_Private_VRCAvatarManager_0;
+            return Instance.prop_VRCAvatarManager_0;
         }
 
         public static GameObject GetAvatar(this VRCAvatarManager Instance)
