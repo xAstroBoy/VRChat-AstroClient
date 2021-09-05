@@ -117,22 +117,18 @@
             UpdateProperties(control);
         }
 
+        public override void OnRigidBodyController_OnUpdate(RigidBodyController control)
+        {
+            UpdateProperties(control);
+        }
+
         private void UpdateProperties(RigidBodyController control)
         {
             if (control != null)
             {
-                if (GravityToggler.GetToggleState() != control.useGravity)
-                {
-                    GravityToggler.SetToggleState(control.useGravity);
-                }
-                if (KinematicToggler.GetToggleState() != control.isKinematic)
-                {
-                    KinematicToggler.SetToggleState(control.isKinematic);
-                }
-                if (CollisionsToggler.GetToggleState() != control.detectCollisions)
-                {
-                    CollisionsToggler.SetToggleState(control.detectCollisions);
-                }
+             GravityToggler.SetToggleState(control.useGravity);
+             KinematicToggler.SetToggleState(control.isKinematic);
+             CollisionsToggler.SetToggleState(control.detectCollisions);
             }
         }
 

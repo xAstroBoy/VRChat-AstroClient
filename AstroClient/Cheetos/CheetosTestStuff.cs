@@ -52,7 +52,8 @@
         {
             if (!ModDetector.FindMods.IsNotoriousPresent)
             {
-                player.gameObject.AddComponent<NamePlates>();
+                // TODO: MAKE IT A OPTION, I DONT WANT NAMEPLATES!
+                //player.gameObject.AddComponent<NamePlates>();
             }
         }
 

@@ -93,23 +93,23 @@
                     }
                 }
                 SetPlayerDefaultESP();
-                RoutineCancellationToken = MelonCoroutines.Start(StartUpdater());
+                //RoutineCancellationToken = MelonCoroutines.Start(StartUpdater());
 
             }
         }
 
 
-        private IEnumerator StartUpdater()
-        {
-            while (true)
-            {
-                if (!UseCustomColor)
-                {
-                    SetPlayerDefaultESP();
-                }
-                yield return new WaitForSeconds(5000);
-            }
-        }
+        //private IEnumerator StartUpdater()
+        //{
+        //    while (true)
+        //    {
+        //        if (!UseCustomColor)
+        //        {
+        //            SetPlayerDefaultESP();
+        //        }
+        //        yield return new WaitForSeconds(5000);
+        //    }
+        //}
 
 
 
@@ -139,6 +139,22 @@
             }
         }
 
+        public override void OnFriended()
+        {
+            if (!UseCustomColor)
+            {
+                SetPlayerDefaultESP();
+            }
+        }
+
+
+        public override void OnUnfriended()
+        {
+            if (!UseCustomColor)
+            {
+                SetPlayerDefaultESP();
+            }
+        }
         public void OnDestroy()
         {
             HighLightOptions.DestroyHighlighter();
@@ -176,36 +192,7 @@
 
         internal void ResetColor()
         {
-            if (HighLightOptions != null)
-            {
-                if (AssignedPlayer != null)
-                {
-                    if (AssignedPlayer.GetAPIUser() != null)
-                    {
-                        if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(AssignedPlayer.UserID()))
-                        {
-                            if (HighLightOptions.highlightColor != BlockedColor)
-                            {
-                                HighLightOptions.highlightColor = BlockedColor;
-                            }
-                        }
-                        else if (AssignedPlayer.GetAPIUser().GetIsFriend())
-                        {
-                            if (HighLightOptions.highlightColor != FriendColor)
-                            {
-                                HighLightOptions.highlightColor = FriendColor;
-                            }
-                        }
-                        else
-                        {
-                            if (HighLightOptions.highlightColor != ESPColor)
-                            {
-                                HighLightOptions.highlightColor = ESPColor;
-                            }
-                        }
-                    }
-                }
-            }
+            SetPlayerDefaultESP();
         }
 
         internal Color GetCurrentESPColor
@@ -281,6 +268,6 @@
         }
 
         internal Player AssignedPlayer { get; private set; }
-        private object RoutineCancellationToken;
+        internal object RoutineCancellationToken { get; private set; }
     }
 }
