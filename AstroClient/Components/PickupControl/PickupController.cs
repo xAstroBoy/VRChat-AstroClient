@@ -23,17 +23,21 @@
             RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
             SyncProperties(true);
             ModConsole.DebugLog("Attacked Successfully PickupController to object " + gameObject.name);
+            InvokeRepeating(nameof(Updater), 0.1f, 0.3f);
         }
 
-        public void LateUpdate()
+
+        void Updater()
         {
-            Run_onPickupUpdate();
-            if (!EditMode)
+            if (gameObject.active)
             {
-                SyncProperties(true);
+                Run_onPickupUpdate();
+                if (!EditMode)
+                {
+                    SyncProperties(true);
+                }
             }
         }
-
         #region Backup and Restore Methods
 
         private void SyncProperties(bool isFromUpdate)

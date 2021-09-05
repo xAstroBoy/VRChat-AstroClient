@@ -9,12 +9,16 @@
     {
         public static Transform Get_Player_Bone_Transform(this Player player, HumanBodyBones bone)
         {
-            Transform bonetransform = player.transform;
-            VRCPlayerApi VRCPlayer = player.GetVRCPlayerApi();
-            if (VRCPlayer != null)
-                return bonetransform;
-            Transform boneTransform = VRCPlayer.GetBoneTransform(bone);
-            return !boneTransform ? bonetransform : boneTransform.transform;
+            if (player != null)
+            {
+                var vrcplayerapi = player.GetVRCPlayerApi();
+                if (vrcplayerapi != null)
+                {
+                    return vrcplayerapi.GetBoneTransform(bone);
+                }
+            }
+            return null;
+
         }
 
         public static Vector3? Get_Player_Bone_Position(this Player player, HumanBodyBones bone)
