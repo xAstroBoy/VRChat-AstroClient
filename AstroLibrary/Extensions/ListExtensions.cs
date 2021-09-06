@@ -2,6 +2,7 @@
 {
     using AstroLibrary.Console;
     using AstroLibrary.Finder;
+    using AstroLibrary.Utility;
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
@@ -118,5 +119,32 @@
                 }
             }
         }
+
+
+        public static void DestroyAndClearList(this List<GameObject> list)
+        {
+            if (list != null)
+            {
+                foreach (var item in list)
+                {
+                    if (item != null)
+                    {
+                        Object.Destroy(item);
+                    }
+                }
+                list.Clear();
+            }
+
+
+            else
+            {
+                if (list == null)
+                {
+                    ModConsole.Log("Error, failed to Destroy gameobjects  in " + nameof(list).ToString() + " is null.");
+                    return;
+                }
+            }
+        }
+
     }
 }

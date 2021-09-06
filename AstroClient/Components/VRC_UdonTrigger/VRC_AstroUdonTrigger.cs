@@ -80,10 +80,7 @@ namespace AstroClient.Components
                 _InteractText = value;
                 if (Behaviour != null)
                 {
-                    if (Behaviour.interactText != value)
-                    {
-                        Behaviour.interactText = value;
-                    }
+                    Behaviour.interactText = value;
                 }
             }
         }
