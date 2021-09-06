@@ -10,7 +10,7 @@
         public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, bool value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
-            {
+            { 
                 PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
             }
             else

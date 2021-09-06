@@ -9,32 +9,67 @@
     using AstroLibrary.Utility;
     using System.Collections.Generic;
     using UnityEngine;
+    using VRC.Udon;
 
     public class PoolParlor : GameEvents
     {
+
+
+        private void TempUdonPatcherList(UdonBehaviour behaviour, string Symbol)
+        {
+            var disassembled = behaviour.DisassembleUdonBehaviour();
+            if (disassembled != null)
+            {
+                var address = disassembled.IUdonSymbolTable.GetAddressFromSymbol(Symbol);
+                var UnboxVariable = disassembled.IUdonHeap.GetHeapVariable(address);
+                if (UnboxVariable != null)
+                {
+                    var unpackedlist = UnboxVariable.Unpack_List_String();
+                    if (unpackedlist != null)
+                    {
+                        if (!unpackedlist.Contains(Utils.CurrentUser.DisplayName()))
+                        {
+                            unpackedlist.Add(Utils.CurrentUser.DisplayName());
+                            UdonHeapEditor.PatchHeap(disassembled, Symbol, unpackedlist.ToArray(), true);
+                        }
+                    }
+
+
+
+                }
+            }
+        }
+
+
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
             if (id == WorldIds.PoolParlor)
             {
                 ModConsole.Log($"Recognized {Name} World, Patching Skins....");
-                var result = UdonSearch.FindUdonEvent("CueSkinHook", "_CanUseCueSkin").Action;
-                if (result != null)
-                {
-                    var disassembled = result.DisassembleUdonBehaviour();
-                    if (disassembled != null)
-                    {
-                        UdonHeapEditor.PatchHeap(disassembled, "__1_const_intnl_SystemString", Utils.CurrentUser.DisplayName(), true);
-                        UdonHeapEditor.PatchHeap(disassembled, "__16_intnl_SystemBoolean", true, true);
-                        UdonHeapEditor.PatchHeap(disassembled, "__7_intnl_SystemBoolean", true, true);
-                        UdonHeapEditor.PatchHeap(disassembled, "__22_intnl_SystemBoolean", true, true);
-                        UdonHeapEditor.PatchHeap(disassembled, "__8_const_intnl_SystemString", Utils.CurrentUser.DisplayName(), true);
-                        UdonHeapEditor.PatchHeap(disassembled, "__9_intnl_SystemBoolean", true, true);
-                        UdonHeapEditor.PatchHeap(disassembled, "__6_intnl_SystemBoolean", true, true);
-                        UdonHeapEditor.PatchHeap(disassembled, "__14_intnl_SystemBoolean", true, true);
-                        UdonHeapEditor.PatchHeap(disassembled, "__8_intnl_SystemBoolean", true, true);
-                        UdonHeapEditor.PatchHeap(disassembled, "__20_intnl_SystemBoolean", true, true);
-                    }
-                }
+
+                // DEAD Until Lists gets exposed...
+                //var Cue_0 = UdonSearch.FindUdonEvent("intl.cue-0", "_GetCuetip").Action;
+                //if (Cue_0 != null)
+                //{
+                //    TempUdonPatcherList(Cue_0, "__0_mp_FAEC5B32FB70E90FACBC029727ACAFEC_StringArray");
+                //}
+
+                //var Cue_1 = UdonSearch.FindUdonEvent("intl.cue-1", "_GetCuetip").Action;
+                //if (Cue_1 != null)
+                //{
+                //    TempUdonPatcherList(Cue_1, "__0_mp_FAEC5B32FB70E90FACBC029727ACAFEC_StringArray");
+                //}
+
+
+                //var graphicsmanager = UdonSearch.FindUdonEvent("graphicsmanager", "_IsUSColors").Action;
+                //if (graphicsmanager != null)
+                //{
+                //    TempUdonPatcherList(graphicsmanager, "__0_mp_A2E471DA9675E8F3C0BCD6DD0EBFF058_StringArray");
+                //}
+
+
+
+
                 if (world == null)
                 {
                     world = GameObjectFinder.FindRootSceneObject("world").transform;
