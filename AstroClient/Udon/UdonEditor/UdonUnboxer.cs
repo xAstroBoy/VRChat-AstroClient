@@ -308,10 +308,10 @@
                     }
                     else if (FullName == "UnityEngine.UI.Text")
                     {
-                        var result = obj.Unpack_AudioSource();
+                        var result = obj.Unpack_Text();
                         if (result != null)
                         {
-                            return result.name;
+                            return result.text;
                         }
                         return $"empty {FullName}";
                     }
