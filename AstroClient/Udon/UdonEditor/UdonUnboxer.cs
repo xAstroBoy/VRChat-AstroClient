@@ -90,7 +90,7 @@
                         var list = obj.Unpack_List_String();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item + Environment.NewLine;
@@ -116,7 +116,7 @@
                         var list = obj.Unpack_List_UInt32();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item + Environment.NewLine;
@@ -142,7 +142,7 @@
                         var list = obj.Unpack_List_Int32();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item + Environment.NewLine;
@@ -168,7 +168,7 @@
                         var list = obj.Unpack_List_Int64();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item + Environment.NewLine;
@@ -194,7 +194,7 @@
                         var list = obj.Unpack_List_Char();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item + Environment.NewLine;
@@ -220,7 +220,7 @@
                         var list = obj.Unpack_List_Single();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item + Environment.NewLine;
@@ -246,7 +246,7 @@
                         var list = obj.Unpack_List_Boolean();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item + Environment.NewLine;
@@ -272,7 +272,7 @@
                         var list = obj.Unpack_List_System_Object();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.GetType().FullName + Environment.NewLine;
@@ -298,7 +298,7 @@
                         var list = obj.Unpack_List_Color();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.ToString() + Environment.NewLine;
@@ -324,7 +324,7 @@
                         var list = obj.Unpack_List_Material();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item + Environment.NewLine;
@@ -350,7 +350,7 @@
                         var list = obj.Unpack_List_MeshRenderer();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.ToString() + Environment.NewLine;
@@ -376,7 +376,7 @@
                         var list = obj.Unpack_List_ParticleSystem();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.ToString() + Environment.NewLine;
@@ -402,7 +402,7 @@
                         var list = obj.Unpack_List_Transform();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.ToString() + Environment.NewLine;
@@ -428,7 +428,7 @@
                         var list = obj.Unpack_List_GameObject();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.ToString() + Environment.NewLine;
@@ -454,7 +454,7 @@
                         var list = obj.Unpack_List_AudioClip();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.ToString() + Environment.NewLine;
@@ -480,7 +480,7 @@
                         var list = obj.Unpack_List_Vector3();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.ToString() + Environment.NewLine;
@@ -506,7 +506,7 @@
                         var list = obj.Unpack_List_Quaternion();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.ToString() + Environment.NewLine;
@@ -532,7 +532,7 @@
                         var list = obj.Unpack_List_AudioSource();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.ToString() + Environment.NewLine;
@@ -558,7 +558,7 @@
                         var list = obj.Unpack_List_UnityEngine_UI_Text();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.text.ToString() + Environment.NewLine;
@@ -584,7 +584,7 @@
                         var list = obj.Unpack_List_HumanBodyBones();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.ToString() + Environment.NewLine;
@@ -610,7 +610,7 @@
                         var list = obj.Unpack_List_VRCPlayerApi();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 if (item != null)
@@ -639,7 +639,7 @@
                         var list = obj.Unpack_List_UdonBehaviour();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.ToString() + Environment.NewLine;
@@ -665,7 +665,7 @@
                         var list = obj.Unpack_List_NetworkEventTarget();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.ToString() + Environment.NewLine;
@@ -691,7 +691,7 @@
                         var list = obj.Unpack_List_TextMeshPro();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.text + Environment.NewLine;
@@ -717,7 +717,7 @@
                         var list = obj.Unpack_List_TextMeshProUGUI();
                         if (list != null && list.Count != 0)
                         {
-                            string translated = "";
+                            string translated = String.Empty;
                             foreach (var item in list)
                             {
                                 translated += item.text + Environment.NewLine;
