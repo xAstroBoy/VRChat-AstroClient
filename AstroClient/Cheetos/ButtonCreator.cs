@@ -17,7 +17,7 @@
             var AstroTrigger = go.AddComponent<VRC_AstroUdonTrigger>();
             if (AstroTrigger != null)
             {
-                AstroTrigger.InteractText = text;
+                AstroTrigger.interactText = text;
                 AstroTrigger.OnInteract = action;
             }
             var textObject = new GameObject("Text");

@@ -876,7 +876,7 @@
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
-                    var result = heap.GetHeapVariable(address).Unpack_Text();
+                    var result = heap.GetHeapVariable(address).Unpack_UnityEngine_UI_Text();
                     if (result == value)
                     {
                         ModConsole.DebugLog($"Heap Patch Applied.");

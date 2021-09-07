@@ -33,7 +33,7 @@ namespace AstroClient
                     }
                 }
 
-                ToggleLightTrigger.InteractText = "Turn On Flashlight";
+                ToggleLightTrigger.interactText = OnText;
                 FlashLight_Light.enabled = false;
                 _IsFlashlightActive = false;
             }
@@ -53,34 +53,29 @@ namespace AstroClient
             set
             {
                 _IsFlashlightActive = value;
-                if(value)
-                {
-                    if(ToggleLightTrigger != null)
-                    {
-                        ToggleLightTrigger.InteractText = OnText;
-                    }
-
-                }
-                else
-                {
-                    if (ToggleLightTrigger != null)
-                    {
-                        ToggleLightTrigger.InteractText = OffText;
-                    }
-                }
-                if (FlashLight_Light != null)
+                if (FlashLight_Light != null && ToggleLightTrigger != null)
                 {
                     FlashLight_Light.enabled = value;
+                    if (FlashLight_Light.enabled)
+                    {
+                        ToggleLightTrigger.interactText = OffText;
+                    }
+                    else
+                    {
+                        ToggleLightTrigger.interactText = OnText;
+                    }
                 }
             }
         }
+            
+        
 
 
 
 
 
-        private readonly string OnText = "Turn On Flashlight";
-        private readonly string OffText = "Turn On Flashlight";
+        internal string OnText { get; } = "Turn On Flashlight";
+        internal string OffText { get; } = "Turn Off Flashlight";
 
 
         internal GameObject FlashLight_Base { get; set; }

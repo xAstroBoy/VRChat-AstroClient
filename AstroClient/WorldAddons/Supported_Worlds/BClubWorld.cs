@@ -639,7 +639,7 @@
                                 var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroUdonTrigger>();
                                 if (AstroTrigger != null)
                                 {
-                                    AstroTrigger.InteractText = InteractionText;
+                                    AstroTrigger.interactText = InteractionText;
                                     AstroTrigger.OnInteract = action;
                                 }
                             }
@@ -689,7 +689,7 @@
                                 var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroUdonTrigger>();
                                 if (AstroTrigger != null)
                                 {
-                                    AstroTrigger.InteractText = InteractionText;
+                                    AstroTrigger.interactText = InteractionText;
                                     AstroTrigger.OnInteract = action;
                                 }
                             }
@@ -740,7 +740,7 @@
                                 var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroUdonTrigger>();
                                 if (AstroTrigger != null)
                                 {
-                                    AstroTrigger.InteractText = InteractionText;
+                                    AstroTrigger.interactText = InteractionText;
                                     AstroTrigger.OnInteract = action;
                                 }
                             }
@@ -792,7 +792,7 @@
                                 var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroUdonTrigger>();
                                 if (AstroTrigger != null)
                                 {
-                                    AstroTrigger.InteractText = InteractionText;
+                                    AstroTrigger.interactText = InteractionText;
                                     AstroTrigger.OnInteract = action;
                                 }
                             }
@@ -842,7 +842,7 @@
                                 var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroUdonTrigger>();
                                 if (AstroTrigger != null)
                                 {
-                                    AstroTrigger.InteractText = InteractionText;
+                                    AstroTrigger.interactText = InteractionText;
                                     AstroTrigger.OnInteract = action;
                                 }
                             }

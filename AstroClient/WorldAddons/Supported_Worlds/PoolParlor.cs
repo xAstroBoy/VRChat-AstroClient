@@ -123,20 +123,20 @@
                     udon.OnInteract += () => { ball.Table_Ball_Pickup.SetActive(!ball.Table_Ball_Pickup.active); };
                     if (ball.Table_Ball_Pickup.active)
                     {
-                        udon.InteractText = $"Deactivate {ball.Table_Ball.name} Pickup";
+                        udon.interactText = $"Deactivate {ball.Table_Ball.name} Pickup";
                     }
                     else
                     {
-                        udon.InteractText = $"Activate {ball.Table_Ball.name} Pickup";
+                        udon.interactText = $"Activate {ball.Table_Ball.name} Pickup";
                     }
                 }
                 ball.Ball_table_pickup_listener.OnDisabled += () =>
                 {
-                    udon.InteractText = $"Activate {ball.Table_Ball.name} Pickup";
+                    udon.interactText = $"Activate {ball.Table_Ball.name} Pickup";
                 };
                 ball.Ball_table_pickup_listener.OnEnabled += () =>
                 {
-                    udon.InteractText = $"Deactivate {ball.Table_Ball.name} Pickup";
+                    udon.interactText = $"Deactivate {ball.Table_Ball.name} Pickup";
                 };
             }
 
@@ -154,20 +154,20 @@
                     udon.OnInteract += () => { clue.Table_Ball_Pickup.SetActive(!clue.Table_Ball_Pickup.active); };
                     if (clue.Table_Ball_Pickup.active)
                     {
-                        udon.InteractText = "Deactivate Clue Ball Pickup";
+                        udon.interactText = "Deactivate Clue Ball Pickup";
                     }
                     else
                     {
-                        udon.InteractText = "Activate Clue Ball Pickup";
+                        udon.interactText = "Activate Clue Ball Pickup";
                     }
                 }
                 clue.Ball_table_pickup_listener.OnDisabled += () =>
                 {
-                    udon.InteractText = "Activate Clue Ball Pickup";
+                    udon.interactText = "Activate Clue Ball Pickup";
                 };
                 clue.Ball_table_pickup_listener.OnEnabled += () =>
                 {
-                    udon.InteractText = "Deactivate Clue Ball Pickup";
+                    udon.interactText = "Deactivate Clue Ball Pickup";
                 };
             }
         }

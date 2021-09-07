@@ -146,6 +146,7 @@
     <Compile Include="ModDetector\FindMods.cs" />
     <Compile Include="Spawnables\Flashlight\Flashlight.cs" />
     <Compile Include="Udon\UdonEditor\UdonConverter.cs" />
+    <Compile Include="Udon\UdonEditor\UdonHeapParser.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapEditor.cs" />
     <Compile Include="Udon\UdonEditor\UdonUnpacker_Utils_ext.cs" />
     <Compile Include="Udon\UdonEditor\UdonUnpacker_Utils.cs" />

@@ -39,7 +39,7 @@
                 var AstroTrigger = front.AddComponent<VRC_AstroUdonTrigger>();
                 if (AstroTrigger != null)
                 {
-                    AstroTrigger.InteractText = label;
+                    AstroTrigger.interactText = label;
                     AstroTrigger.OnInteract = action;
                 }
             });

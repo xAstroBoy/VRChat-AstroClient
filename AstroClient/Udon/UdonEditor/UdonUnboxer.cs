@@ -111,6 +111,23 @@
                         }
                         return $"empty {FullName}";
                     }
+                    else if (FullName == "System.UInt32[]")
+                    {
+                        var list = obj.Unpack_List_UInt32();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
+                    }
                     else if (FullName == "System.Int32")
                     {
                         var result = obj.Unpack_Int32();
@@ -120,6 +137,23 @@
                         }
                         return $"empty {FullName}";
                     }
+                    else if (FullName == "System.Int32[]")
+                    {
+                        var list = obj.Unpack_List_Int32();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
+                    }
                     else if (FullName == "System.Int64")
                     {
                         var result = obj.Unpack_Int64();
@@ -128,6 +162,23 @@
                             return result.Value.ToString();
                         }
                         return $"empty {FullName}";
+                    }
+                    else if (FullName == "System.Int64[]")
+                    {
+                        var list = obj.Unpack_List_Int64();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
                     }
                     else if (FullName == "System.Char")
                     {
@@ -146,10 +197,7 @@
                             string translated = "";
                             foreach (var item in list)
                             {
-                                if (item != null)
-                                {
-                                    translated += item + Environment.NewLine;
-                                }
+                                translated += item + Environment.NewLine;
                             }
                             return translated;
                         }
@@ -165,7 +213,24 @@
                         {
                             return result.Value.ToString();
                         }
-                        return $"empty {FullName} (float)";
+                        return $"empty {FullName}";
+                    }
+                    else if (FullName == "System.Single[]")
+                    {
+                        var list = obj.Unpack_List_Single();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
                     }
                     else if (FullName == "System.Boolean")
                     {
@@ -176,6 +241,23 @@
                         }
                         return $"empty {FullName}";
                     }
+                    else if (FullName == "System.Boolean[]")
+                    {
+                        var list = obj.Unpack_List_Boolean();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
+                    }
                     else if (FullName == "System.Object")
                     {
                         var result = obj.Unpack_System_Object();
@@ -184,6 +266,23 @@
                             return result.GetType().FullName;
                         }
                         return $"empty {FullName}";
+                    }
+                    else if (FullName == "System.Object[]")
+                    {
+                        var list = obj.Unpack_List_System_Object();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item.GetType().FullName + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
                     }
                     else if (FullName == "UnityEngine.Color")
                     {
@@ -194,32 +293,100 @@
                         }
                         return $"empty {FullName}";
                     }
+                    else if (FullName == "UnityEngine.Color[]")
+                    {
+                        var list = obj.Unpack_List_Color();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item.ToString() + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
+                    }
                     else if (FullName == "UnityEngine.Material")
                     {
                         var result = obj.Unpack_Material();
                         if (result != null)
                         {
-                            return result.name;
+                            return result.ToString();
                         }
                         return $"empty {FullName}";
+                    }
+                    else if (FullName == "UnityEngine.Material[]")
+                    {
+                        var list = obj.Unpack_List_Material();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
                     }
                     else if (FullName == "UnityEngine.MeshRenderer")
                     {
                         var result = obj.Unpack_MeshRenderer();
                         if (result != null)
                         {
-                            return result.name;
+                            return result.ToString();
                         }
                         return $"empty {FullName}";
+                    }
+                    else if (FullName == "UnityEngine.MeshRenderer[]")
+                    {
+                        var list = obj.Unpack_List_MeshRenderer();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item.ToString() + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
                     }
                     else if (FullName == "UnityEngine.ParticleSystem")
                     {
                         var result = obj.Unpack_ParticleSystem();
                         if (result != null)
                         {
-                            return result.name;
+                            return result.ToString();
                         }
                         return $"empty {FullName}";
+                    }
+                    else if (FullName == "UnityEngine.ParticleSystem[]")
+                    {
+                        var list = obj.Unpack_List_ParticleSystem();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item.ToString() + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
                     }
                     else if (FullName == "UnityEngine.Transform")
                     {
@@ -229,6 +396,23 @@
                             return result.ToString();
                         }
                         return $"empty {FullName}";
+                    }
+                    else if (FullName == "UnityEngine.Transform[]")
+                    {
+                        var list = obj.Unpack_List_Transform();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item.ToString() + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
                     }
                     else if (FullName == "UnityEngine.GameObject")
                     {
@@ -247,10 +431,7 @@
                             string translated = "";
                             foreach (var item in list)
                             {
-                                if (item != null)
-                                {
-                                    translated += item.name + Environment.NewLine;
-                                }
+                                translated += item.ToString() + Environment.NewLine;
                             }
                             return translated;
                         }
@@ -258,6 +439,15 @@
                         {
                             return $"empty {FullName}";
                         }
+                    }
+                    else if (FullName == "UnityEngine.AudioClip")
+                    {
+                        var result = obj.Unpack_AudioClip();
+                        if (result != null)
+                        {
+                            return result.ToString();
+                        }
+                        return $"empty {FullName}";
                     }
                     else if (FullName == "UnityEngine.AudioClip[]")
                     {
@@ -267,10 +457,7 @@
                             string translated = "";
                             foreach (var item in list)
                             {
-                                if (item != null)
-                                {
-                                    translated += item.name + Environment.NewLine;
-                                }
+                                translated += item.ToString() + Environment.NewLine;
                             }
                             return translated;
                         }
@@ -288,6 +475,23 @@
                         }
                         return $"empty {FullName}";
                     }
+                    else if (FullName == "UnityEngine.Vector3[]")
+                    {
+                        var list = obj.Unpack_List_Vector3();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item.ToString() + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
+                    }
                     else if (FullName == "UnityEngine.Quaternion")
                     {
                         var result = obj.Unpack_Quaternion();
@@ -297,23 +501,74 @@
                         }
                         return $"empty {FullName}";
                     }
+                    else if (FullName == "UnityEngine.Quaternion[]")
+                    {
+                        var list = obj.Unpack_List_Quaternion();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item.ToString() + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
+                    }
                     else if (FullName == "UnityEngine.AudioSource")
                     {
                         var result = obj.Unpack_AudioSource();
                         if (result != null)
                         {
-                            return result.name;
+                            return result.ToString();
                         }
                         return $"empty {FullName}";
                     }
+                    else if (FullName == "UnityEngine.AudioSource[]")
+                    {
+                        var list = obj.Unpack_List_AudioSource();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item.ToString() + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
+                    }
                     else if (FullName == "UnityEngine.UI.Text")
                     {
-                        var result = obj.Unpack_Text();
+                        var result = obj.Unpack_UnityEngine_UI_Text();
                         if (result != null)
                         {
-                            return result.text;
+                            return result.text.ToString();
                         }
                         return $"empty {FullName}";
+                    }
+                    else if (FullName == "UnityEngine.UI.Text[]")
+                    {
+                        var list = obj.Unpack_List_UnityEngine_UI_Text();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item.text.ToString() + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
                     }
                     else if (FullName == "UnityEngine.HumanBodyBones")
                     {
@@ -323,6 +578,23 @@
                             return result.Value.ToString();
                         }
                         return $"empty {FullName}";
+                    }
+                    else if (FullName == "UnityEngine.HumanBodyBones[]")
+                    {
+                        var list = obj.Unpack_List_HumanBodyBones();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item.ToString() + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
                     }
                     else if (FullName == "VRC.SDKBase.VRCPlayerApi")
                     {
@@ -362,6 +634,23 @@
                         }
                         return $"empty {FullName}";
                     }
+                    else if (FullName == "VRC.Udon.UdonBehaviour[]")
+                    {
+                        var list = obj.Unpack_List_UdonBehaviour();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item.ToString() + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
+                    }
                     else if (FullName == "VRC.Udon.Common.Interfaces.NetworkEventTarget")
                     {
                         var result = obj.Unpack_NetworkEventTarget();
@@ -369,7 +658,24 @@
                         {
                             return result.Value.ToString();
                         }
-                        return "empty NetworkEventTarget";
+                        return $"empty {FullName}";
+                    }
+                    else if (FullName == "VRC.Udon.Common.Interfaces.NetworkEventTarget[]")
+                    {
+                        var list = obj.Unpack_List_NetworkEventTarget();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item.ToString() + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
                     }
                     else if (FullName == "TMPro.TextMeshPro")
                     {
@@ -380,16 +686,49 @@
                         }
                         return $"empty {FullName}";
                     }
+                    else if (FullName == "TMPro.TextMeshPro[]")
+                    {
+                        var list = obj.Unpack_List_TextMeshPro();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item.text + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
+                    }
                     else if (FullName == "TMPro.TextMeshProUGUI")
                     {
                         var result = obj.Unpack_TextMeshProUGUI();
                         if (result != null)
                         {
-                            return result.ToString();
+                            return result.text.ToString();
                         }
                         return $"empty {FullName}";
                     }
-
+                    else if (FullName == "TMPro.TextMeshProUGUI[]")
+                    {
+                        var list = obj.Unpack_List_TextMeshProUGUI();
+                        if (list != null && list.Count != 0)
+                        {
+                            string translated = "";
+                            foreach (var item in list)
+                            {
+                                translated += item.text + Environment.NewLine;
+                            }
+                            return translated;
+                        }
+                        else
+                        {
+                            return $"empty {FullName}";
+                        }
+                    }
                     return $"Not Supported Yet {FullName}";
                 }
                 return "Null";
