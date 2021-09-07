@@ -18,13 +18,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroInjector", "AstroInjec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroNetworkingLibrary", "AstroNetworkingLibrary\AstroNetworkingLibrary.csproj", "{A98C1060-6804-4551-9CEC-8FD8FFC7D98C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroInstaller", "AstroInstaller\AstroInstaller.csproj", "{4998A709-F158-4CEF-968D-554ED9874B17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroInstaller2", "AstroInstaller\AstroInstaller2.csproj", "{4998A709-F158-4CEF-968D-554ED9874B17}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroLibrary", "AstroLibrary\AstroLibrary.csproj", "{4613C712-5463-44C6-AB48-081A2B3AE61D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonoDumper", "MonoDumper\MonoDumper.csproj", "{B29C09FF-1FCC-4302-8AB4-8FE673693845}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheetoClient", "CheetoClient\CheetoClient.csproj", "{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroInstaller", "AstroInstaller\AstroInstaller.csproj", "{0BDBC17C-6D44-45BB-BE5D-44582B9B9622}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,12 @@ Global
 		{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEA7CF66-F040-42AC-8641-3D7427FFBC7B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BDBC17C-6D44-45BB-BE5D-44582B9B9622}.Debug_Offline|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BDBC17C-6D44-45BB-BE5D-44582B9B9622}.Debug_Offline|Any CPU.Build.0 = Debug|Any CPU
+		{0BDBC17C-6D44-45BB-BE5D-44582B9B9622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BDBC17C-6D44-45BB-BE5D-44582B9B9622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BDBC17C-6D44-45BB-BE5D-44582B9B9622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BDBC17C-6D44-45BB-BE5D-44582B9B9622}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
