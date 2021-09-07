@@ -85,16 +85,12 @@
 
         public override void ExecutePriorityPatches()
         {
-            MelonCoroutines.Start(Init());
-        }
-
-        private IEnumerator Init()
-        {
             InitPatch();
-            yield break;
         }
 
-        public static async void InitPatch()
+
+
+        private void InitPatch()
         {
             try
             {
