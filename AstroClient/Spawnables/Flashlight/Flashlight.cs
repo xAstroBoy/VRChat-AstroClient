@@ -75,7 +75,7 @@ namespace AstroClient
 
             GameObject FlashLight_Head = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
             FlashLight_Head.name = "Head";
-            FlashLight_Head.GetComponent<Renderer>().material.color = Color.cyan;
+            FlashLight_Head.GetComponent<Renderer>().material.color = Color.blue;
             FlashLight_Head.transform.SetParent(FlashLight_Body.transform);
             FlashLight_Head.transform.localPosition = new Vector3(0f, -0.75f, 0f);
             FlashLight_Head.transform.localScale = new Vector3(1.5f, 0.25f, 1.5f);
