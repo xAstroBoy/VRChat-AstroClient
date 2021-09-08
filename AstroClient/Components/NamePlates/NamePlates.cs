@@ -17,22 +17,18 @@
         private PlayerNameplate nameplate;
 
         private bool isDeveloper;
-
         private bool isBetaTester;
 
         private Player player;
-
         private Player self;
 
         private bool initialized;
-
         public float maxUpdateDistance = 10f;
 
         private GameObject statsTag;
         private TextMeshProUGUI statsText;
 
         private GameObject questTag;
-
         private List<GameObject> tags = new List<GameObject>();
 
         public NamePlates(IntPtr obj0) : base(obj0)
