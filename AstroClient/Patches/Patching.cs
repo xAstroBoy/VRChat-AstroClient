@@ -8,6 +8,7 @@
     using ExitGames.Client.Photon;
     using HarmonyLib;
     using MelonLoader;
+    using Photon.Pun;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -96,7 +97,7 @@
             {
                 ModConsole.DebugLog("[Patches] Start. . .");
 
-                new Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
+                new Patch(typeof(Photon.Pun.PhotonNetwork).GetMethod(nameof(Photon.Pun.PhotonNetwork.Method_Public_Static_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
                 new Patch(typeof(ObjectInstantiator).GetMethod(nameof(ObjectInstantiator._InstantiateObject)), GetPatch(nameof(Debug_ObjectInstantiator)));
                 new Patch(typeof(Networking).GetMethod(nameof(Networking.Instantiate)), GetPatch(nameof(Debug_NetworkingInstantiate)));
 
@@ -107,7 +108,7 @@
             finally { }
         }
 
-        private static bool OpRaiseEvent(ref byte __0, ref Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object> __1, ref SendOptions __2)
+        private static bool OpRaiseEvent(ref byte __0, ref Il2CppSystem.Object __1, ref Photon.Realtime.RaiseEventOptions __2, ref SendOptions __3)
         {
             try
             {

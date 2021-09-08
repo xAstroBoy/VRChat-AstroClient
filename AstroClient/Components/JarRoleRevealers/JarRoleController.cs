@@ -107,12 +107,14 @@
         {
             public Transform Entry { get; set; }
             public Transform Node { get; set; }
+            public JarNodeReader Node_Reader { get; set; }
             public int Nodevalue { get; set; }
 
-            public LinkedNodes(Transform EntryObj, Transform Nodeobj, int linknumber)
+            public LinkedNodes(Transform EntryObj, Transform Nodeobj, JarNodeReader Node_Reader, int linknumber)
             {
                 Entry = EntryObj;
                 Node = Nodeobj;
+                this.Node_Reader = Node_Reader;
                 Nodevalue = linknumber;
             }
         }
@@ -239,7 +241,7 @@
                                                 if (NodeNumber == EntryNumber)
                                                 {
                                                     //Debug($"Linked Player Entry : {Entry.name}, With node : {node.name}, with link : {NodeNumber}");
-                                                    var addme = new LinkedNodes(Entry, node, NodeNumber.Value);
+                                                    var addme = new LinkedNodes(Entry, node, node.GetOrAddComponent<JarNodeReader>(), NodeNumber.Value);
                                                     if (GetLinkedNode(addme.Nodevalue) != null)
                                                     {
                                                         continue;

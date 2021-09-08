@@ -89,7 +89,7 @@
 
             RegisterComponent<EnderPearlBehaviour>();
             RegisterComponent<FlashlightBehaviour>();
-
+            RegisterComponent<JarNodeReader>();
 
             RegisterComponent<TweakerListener>();
             RegisterComponent<GameObjectListener>();

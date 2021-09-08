@@ -101,6 +101,7 @@
     </Compile>
     <Compile Include="Components\Flashlight\FlashlightBehaviour.cs" />
     <Compile Include="Components\Expoits\OrbitManager.cs" />
+    <Compile Include="Components\JarRoleRevealers\JarNodeReader.cs" />
     <Compile Include="Components\Orbit\OrbitBehaviour.cs" />
     <Compile Include="Components\Orbit\OrbitManager_Old.cs" />
     <Compile Include="Extensions\Collider_ext.cs" />

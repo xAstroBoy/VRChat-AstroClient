@@ -10,6 +10,8 @@
     using VRC;
     using VRC.Core;
     using static AstroClient.JarRoleController;
+    using AstroLibrary.Utility;
+
 
     public class JarRoleESP : GameEventsBehaviour
     {
@@ -286,9 +288,9 @@
             {
                 return AmongUsCurrentRole;
             }
-            if (Internal_AssignedEntry != null)
+            if (Internal_JarNodeReader != null)
             {
-                if (VerifyEntry(Internal_AssignedEntry))
+                if (VerifyEntry(Internal_JarNodeReader))
                 {
                     return CheckEntryAmongUS(Internal_AssignedEntry);
                 }
@@ -313,7 +315,7 @@
             }
             if (Internal_AssignedEntry != null)
             {
-                if (VerifyEntry(Internal_AssignedEntry))
+                if (VerifyEntry(Internal_JarNodeReader))
                 {
                     return CheckEntryMurder4(Internal_AssignedEntry);
                 }
@@ -330,21 +332,21 @@
             }
         }
 
-        private bool VerifyEntry(GameObject Entry)
+        private bool VerifyEntry(JarNodeReader NodeReader)
         {
-            if (Entry != null)
+            if (NodeReader != null)
             {
-                var EntryText = Entry.GetComponentInChildren<Text>();
-                if (EntryText != null)
+                var Internal_User_VRCPlayerAPI = Internal_user.GetPlayer().GetVRCPlayerApi();
+                var InternalNodeAssignedPlayer = NodeReader.Current_Assigned_VRCPlayer;
+
+                if (InternalNodeAssignedPlayer != null && Internal_User_VRCPlayerAPI != null)
                 {
-                    if (!string.IsNullOrEmpty(EntryText.text) && !string.IsNullOrWhiteSpace(EntryText.text))
+                    if (Internal_User_VRCPlayerAPI == InternalNodeAssignedPlayer)
                     {
-                        if (EntryText.text == Internal_user.displayName)
-                        {
-                            return true;
-                        }
+                        return true;
                     }
                 }
+
             }
             return false;
         }
@@ -355,18 +357,17 @@
             {
                 if (item != null)
                 {
-                    if (item.Entry != null)
+                    if (item.Node_Reader != null)
                     {
-                        var EntryText = item.Entry.GetComponentInChildren<Text>();
-                        if (EntryText != null)
+                        var Internal_User_VRCPlayerAPI = Internal_user.GetPlayer().GetVRCPlayerApi();
+                        var InternalNodeAssignedPlayer = item.Node_Reader.Current_Assigned_VRCPlayer;
+
+                        if (InternalNodeAssignedPlayer != null && Internal_User_VRCPlayerAPI != null) 
                         {
-                            if (!string.IsNullOrEmpty(EntryText.text) && !string.IsNullOrWhiteSpace(EntryText.text))
+                            if(Internal_User_VRCPlayerAPI == InternalNodeAssignedPlayer)
                             {
-                                if (EntryText.text == Internal_user.displayName)
-                                {
-                                    Internal_SavedEntry = item;
-                                    break;
-                                }
+                                Internal_SavedEntry = item;
+                                break;
                             }
                         }
                     }
@@ -514,11 +515,6 @@
             //{
             //    _AssignedPlayerEntry.RenameObject("Unassigned Entry");
             //}
-            if (_AssignedPlayerNode != null)
-            {
-                _AssignedPlayerNode.RenameObject("Unassigned Node");
-            }
-
             RoleEspComponents.Remove(this);
         }
 
@@ -559,7 +555,7 @@
             }
         }
 
-        private void Update()
+        private void Updater()
         {
             try
             {
@@ -569,7 +565,7 @@
                 }
                 else
                 {
-                    if (!VerifyEntry(Internal_AssignedEntry))
+                    if (!VerifyEntry(Internal_JarNodeReader))
                     {
                         FindEntryWithUser();
                     }
@@ -792,8 +788,21 @@
                 SavedEntry = value;
                 Internal_AssignedEntry = value.Entry.gameObject;
                 Internal_AssignedNode = value.Node.gameObject;
+                Internal_JarNodeReader = value.Node_Reader;
             }
         }
+
+
+        private JarNodeReader Internal_JarNodeReader;
+
+        internal JarNodeReader NodeReader
+        {
+            get
+            {
+                return Internal_JarNodeReader;
+            }
+        }
+
 
         internal LinkedNodes LinkedEntry
         {
@@ -843,14 +852,6 @@
 
             set
             {
-                if (_AssignedPlayerNode != null)
-                {
-                    if (value != _AssignedPlayerNode)
-                    {
-                        _AssignedPlayerNode.RenameObject("Unassigned Node");
-                    }
-                }
-                value.RenameObject(Internal_user.displayName);
                 _AssignedPlayerNode = value;
             }
         }
