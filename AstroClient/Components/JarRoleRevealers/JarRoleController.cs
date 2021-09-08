@@ -51,9 +51,9 @@
         public static QMSingleToggleButton Murder4RolesRevealerToggle;
         public static QMSingleToggleButton AmongUSRolesRevealerToggle;
 
-        public static List<LinkedNodes> JarRoleLinks = new List<LinkedNodes>();
+        public static List<LinkedNodes> JarRoleLinks { get; private set; } = new List<LinkedNodes>();
 
-        public static List<JarRoleESP> RoleEspComponents = new List<JarRoleESP>();
+        public static List<JarRoleESP> RoleEspComponents { get; private set; } = new List<JarRoleESP>();
 
         public static LinkedNodes GetLinkedNode(int value)
         {
@@ -62,7 +62,7 @@
 
         public static JarRoleESP GetLinkedComponent(int value)
         {
-            return RoleEspComponents.Where(x => x.LinkedEntry.Nodevalue == value).DefaultIfEmpty(null).First();
+            return RoleEspComponents.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
         }
 
         public override void OnSceneLoaded(int buildIndex, string sceneName)
@@ -171,7 +171,7 @@
         public static JarRoleESP GetLocalPlayerNode()
         {
             return RoleEspComponents.Count() != 0 && RoleEspComponents != null
-                ? RoleEspComponents.Where(x => x.Apiuser.displayName == Utils.LocalPlayer.GetPlayer().DisplayName()).First()
+                ? RoleEspComponents.Where(x => x.Player.DisplayName() == Utils.LocalPlayer.GetPlayer().DisplayName()).First()
                 : null;
         }
 

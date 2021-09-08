@@ -608,13 +608,13 @@
                         }
                     }
 
-                    if (obj != null && action.StartsWith("SyncAssign") && JarRoleController.GetLocalPlayerNode().Node != null)
+                    if (obj != null && action.StartsWith("SyncAssign") && JarRoleController.GetLocalPlayerNode().LinkedNode.Node != null)
                     {
                         if (RoleSwapper_GetDetectiveRole)
                         {
                             if (!SafetySwap)
                             {
-                                if (obj == JarRoleController.GetLocalPlayerNode().Node)
+                                if (obj == JarRoleController.GetLocalPlayerNode().LinkedNode.Node)
                                 {
                                     AssignedSelfRole = action;
                                 }
@@ -625,14 +625,14 @@
                                     AssignedTargetRole = action;
                                 }
 
-                                RoleSwapper_GetDetectiveRole = SwapRoles(JarRoleController.GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                                RoleSwapper_GetDetectiveRole = SwapRoles(JarRoleController.GetLocalPlayerNode().LinkedNode.Node.gameObject, TargetNode, AssignedSelfRole, AssignedTargetRole);
                             }
                         }
                         else if (RoleSwapper_GetMurdererRole)
                         {
                             if (!SafetySwap) // In case it grabs and update the current ones already!
                             {
-                                if (obj == JarRoleController.GetLocalPlayerNode().Node)
+                                if (obj == JarRoleController.GetLocalPlayerNode().LinkedNode.Node)
                                 {
                                     AssignedSelfRole = action;
                                 }
@@ -643,7 +643,7 @@
                                     AssignedTargetRole = action;
                                 }
 
-                                RoleSwapper_GetMurdererRole = SwapRoles(JarRoleController.GetLocalPlayerNode().Node, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                                RoleSwapper_GetMurdererRole = SwapRoles(JarRoleController.GetLocalPlayerNode().LinkedNode.Node.gameObject, TargetNode, AssignedSelfRole, AssignedTargetRole);
                             }
                         }
                     }
