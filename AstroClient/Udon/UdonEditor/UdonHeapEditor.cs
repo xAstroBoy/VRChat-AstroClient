@@ -10,7 +10,7 @@
         public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, bool value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
-            {
+            { 
                 PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
             }
             else
@@ -876,7 +876,7 @@
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
-                    var result = heap.GetHeapVariable(address).Unpack_Text();
+                    var result = heap.GetHeapVariable(address).Unpack_UnityEngine_UI_Text();
                     if (result == value)
                     {
                         ModConsole.DebugLog($"Heap Patch Applied.");

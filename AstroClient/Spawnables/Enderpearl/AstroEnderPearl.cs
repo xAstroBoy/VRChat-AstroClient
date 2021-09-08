@@ -25,15 +25,16 @@ namespace AstroClient
                 return;
             }
             Vector3 bonePosition = Networking.LocalPlayer.GetBonePosition(HumanBodyBones.RightHand);
-            GameObject gameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            gameObject.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
-            gameObject.transform.position = bonePosition;
-            gameObject.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-            gameObject.name = "AstroEnderPearl";
-            UnityEngine.Object.Destroy(gameObject.GetComponent<Collider>());
-            gameObject.RigidBody_Set_Gravity(false);
-            gameObject.AddComponent<EnderPearlBehaviour>();
-            ENDER = gameObject;
+            GameObject pearl = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            pearl.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
+            pearl.transform.rotation = new Quaternion(0f, 0f, 0f, 0f);
+            pearl.transform.position = bonePosition;
+            pearl.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+            pearl.name = "EnderPearl (AstroClient)";
+            UnityEngine.Object.Destroy(pearl.GetComponent<Collider>());
+            pearl.RigidBody_Set_Gravity(false);
+            pearl.AddComponent<EnderPearlBehaviour>();
+            ENDER = pearl;
         }
 
     }

@@ -88,6 +88,8 @@
             RegisterComponent<MaskRemover>();
 
             RegisterComponent<EnderPearlBehaviour>();
+            RegisterComponent<FlashlightBehaviour>();
+
 
             RegisterComponent<TweakerListener>();
             RegisterComponent<GameObjectListener>();

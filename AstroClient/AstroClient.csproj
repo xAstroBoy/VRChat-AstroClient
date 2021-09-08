@@ -99,10 +99,12 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="Components\Flashlight\FlashlightBehaviour.cs" />
     <Compile Include="Components\Expoits\OrbitManager.cs" />
     <Compile Include="Components\Orbit\OrbitBehaviour.cs" />
     <Compile Include="Components\Orbit\OrbitManager_Old.cs" />
     <Compile Include="Extensions\Collider_ext.cs" />
+    <Compile Include="Extensions\Engine_ext.cs" />
     <Compile Include="Managers\AchievmentsManager.cs" />
     <Compile Include="AntiCrash\AntiCrash.cs" />
     <Compile Include="AntiCrash\AntiCrashScanner.cs" />
@@ -125,7 +127,7 @@
     <Compile Include="Components\VRC_UdonTrigger\VRC_AstroUdonTrigger.cs" />
     <Compile Include="EmojiMenu\EmojiMenu.cs" />
     <Compile Include="EmojiMenu\EmojiScrollMenu\EmojiScrollMenu.cs" />
-    <Compile Include="Enderpearl\AstroEnderPearl.cs" />
+    <Compile Include="Spawnables\Enderpearl\AstroEnderPearl.cs" />
     <Compile Include="Components\Enderpearl\EnderPearlBehaviour.cs" />
     <Compile Include="Experiments\CameraTweaker.cs" />
     <Compile Include="Exploits\Exploit_Exts\Teleport_Ext.cs" />
@@ -142,17 +144,19 @@
     <Compile Include="Extensions\Components_exts\RigidBodyControllerExtensions.cs" />
     <Compile Include="Extensions\EventHandler_ext.cs" />
     <Compile Include="ModDetector\FindMods.cs" />
+    <Compile Include="Spawnables\Flashlight\Flashlight.cs" />
     <Compile Include="Udon\UdonEditor\UdonConverter.cs" />
+    <Compile Include="Udon\UdonEditor\UdonHeapParser.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapEditor.cs" />
     <Compile Include="Udon\UdonEditor\UdonUnpacker_Utils_ext.cs" />
     <Compile Include="Udon\UdonEditor\UdonUnpacker_Utils.cs" />
     <Compile Include="Udon\UdonEditor\DisassembledUdonBehaviour.cs" />
+    <Compile Include="Utils\Holders\SpawnedItemsHolder.cs" />
     <Compile Include="Utils\Serialization.cs" />
     <Compile Include="Extensions\UdonUnpacker_ext.cs" />
     <Compile Include="Extensions\VRCPlayer_Emoji_Ext.cs" />
     <Compile Include="Extensions\VRC_UiShape_ext.cs" />
     <Compile Include="Extensions\Il2Cpp_ext.cs" />
-    <Compile Include="Extensions\Engine_ext.cs" />
     <Compile Include="Extensions\Esp_ext.cs" />
     <Compile Include="Extensions\Forces_ext.cs" />
     <Compile Include="Extensions\Highlighter_ext.cs" />

@@ -26,72 +26,69 @@ namespace AstroClient.Components
                 ModConsole.DebugError("Custom Trigger Can't Load as Program Asset is null!");
             }
 
-            Behaviour = gameObject.AddComponent<UdonBehaviour>();
-            if (Behaviour != null)
+            UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
+            if (UdonBehaviour != null)
             {
-                Behaviour.serializedProgramAsset = UdonTrigger_Helper.OnInteractUdonProgramEvent;
-                Behaviour.InitializeUdonContent();
-                Behaviour.Start();
-                Behaviour.interactText = InteractText;
+                UdonBehaviour.serializedProgramAsset = UdonTrigger_Helper.OnInteractUdonProgramEvent;
+                UdonBehaviour.InitializeUdonContent();
+                UdonBehaviour.Start();
+                UdonBehaviour.interactText = interactText;
             }
         }
 
         public void FixedUpdate()
         {
-            if (Behaviour == null)
+            if (UdonBehaviour == null)
             {
-                Behaviour = base.gameObject.AddComponent<UdonBehaviour>();
-                Behaviour.serializedProgramAsset = UdonTrigger_Helper.OnInteractUdonProgramEvent;
-                Behaviour.InitializeUdonContent();
-                Behaviour.Start();
-                Behaviour.interactText = InteractText;
+                UdonBehaviour = base.gameObject.AddComponent<UdonBehaviour>();
+                UdonBehaviour.serializedProgramAsset = UdonTrigger_Helper.OnInteractUdonProgramEvent;
+                UdonBehaviour.InitializeUdonContent();
+                UdonBehaviour.Start();
+                UdonBehaviour.interactText = interactText;
             }
             else
             {
-                if (Behaviour.serializedProgramAsset == null)
+                if (UdonBehaviour.serializedProgramAsset == null)
                 {
-                    Behaviour.serializedProgramAsset = UdonTrigger_Helper.OnInteractUdonProgramEvent;
-                    Behaviour.InitializeUdonContent();
-                    Behaviour.Start();
+                    UdonBehaviour.serializedProgramAsset = UdonTrigger_Helper.OnInteractUdonProgramEvent;
+                    UdonBehaviour.InitializeUdonContent();
+                    UdonBehaviour.Start();
                 }
 
-                if (Behaviour != null && Behaviour._udonVM != null && !Behaviour._udonManager != null)
+                if (UdonBehaviour != null && UdonBehaviour._udonVM != null && !UdonBehaviour._udonManager != null)
                 {
-                    if (UdonHeap == null)
+                    if (IUdonHeap == null)
                     {
-                        UdonHeap = Behaviour._udonVM.InspectHeap();
+                        IUdonHeap = UdonBehaviour._udonVM.InspectHeap();
                     }
-                    if (UdonHeap != null && UdonHeap.GetHeapVariable(2u).Unbox<bool>())
+                    if (IUdonHeap != null && IUdonHeap.GetHeapVariable(2u).Unbox<bool>())
                     {
                         OnInteract();
-                        UdonHeap.CopyHeapVariable(3u, 2u);
+                        IUdonHeap.CopyHeapVariable(3u, 2u);
                     }
                 }
             }
         }
 
-        private string _InteractText = "Use";
+        private string _interactText = "Use";
 
-        internal string InteractText
+        internal string interactText
         {
-            get => _InteractText;
+            get => _interactText;
             set
             {
-                _InteractText = value;
-                if (Behaviour != null)
+                _interactText = value;
+                if (UdonBehaviour != null)
                 {
-                    if (Behaviour.interactText != value)
-                    {
-                        Behaviour.interactText = value;
-                    }
+                    UdonBehaviour.interactText = value;
                 }
             }
         }
 
         internal Action OnInteract { get; set; }
 
-        private UdonBehaviour Behaviour;
-        private IUdonHeap UdonHeap;
+        internal UdonBehaviour UdonBehaviour { get; private set; }
+        internal IUdonHeap IUdonHeap { get; private set; }
 
     }
 }
