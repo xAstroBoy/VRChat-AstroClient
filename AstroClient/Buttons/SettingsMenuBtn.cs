@@ -85,6 +85,10 @@
             FlightMenu.InitButtons(sub, 1f, 1.5f, true);
             PlayerESPMenu.InitButtons(sub, 2f, 1.5f, true);
 
+            // Nameplate Toggle
+            var toggleNameplates = new QMSingleToggleButton(sub, 3f, 1.5f, "Nameplates", () => { ConfigManager.UI.NamePlates = true; }, "Nameplates", () => { ConfigManager.UI.NamePlates = false; }, "Nameplates", Color.green, Color.red, null, true);
+            toggleNameplates.SetToggleState(ConfigManager.UI.NamePlates, false);
+
             // Spoofs
             QMNestedButton subSpoofButton = new QMNestedButton(sub, 3, 2f, "Spoofs", "Spoof Menu", null, null, null, null, false);
 
