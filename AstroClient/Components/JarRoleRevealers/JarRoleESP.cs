@@ -3,15 +3,13 @@
     using AstroClient.Startup.Buttons;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
     using System;
     using System.Linq;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC;
-    using VRC.Core;
     using static AstroClient.JarRoleController;
-    using AstroLibrary.Utility;
-
 
     public class JarRoleESP : GameEventsBehaviour
     {
@@ -38,10 +36,6 @@
             if (ESP == null)
             {
                 ESP = Player.gameObject.GetComponent<PlayerESP>();
-            }
-            if (LinkedNode.Entry.gameObject == null)
-            {
-                FindEntryWithUser();
             }
             GameRoleTag = SingleTagsUtils.AddSingleTag(Player);
             if (IsAmongUsWorld)
@@ -263,7 +257,7 @@
                     else
                     {
                         ModConsole.Warning("Unknown Color Detected!");
-                        ModConsole.Warning(Player.DisplayName() + " Current Color : new Color(" + Color.r + "f, " + Color.g + "f, " + Color.b + "f, " + Color.a + "f)") ;
+                        ModConsole.Warning(Player.DisplayName() + " Current Color : new Color(" + Color.r + "f, " + Color.g + "f, " + Color.b + "f, " + Color.a + "f)");
                         return AmongUsRoles.None;
                     }
                 }
@@ -283,21 +277,9 @@
             }
             if (LinkedNode.NodeReader != null)
             {
-                if (VerifyEntry(LinkedNode.NodeReader))
-                {
-                    return CheckEntryAmongUS(LinkedNode.Entry.gameObject);
-                }
-                else
-                {
-                    FindEntryWithUser();
-                    return CheckEntryAmongUS(LinkedNode.Entry.gameObject);
-                }
-            }
-            else
-            {
-                FindEntryWithUser();
                 return CheckEntryAmongUS(LinkedNode.Entry.gameObject);
             }
+            return AmongUsRoles.Null;
         }
 
         private Murder4Roles GetPlayerRoleMurder4()
@@ -308,63 +290,41 @@
             }
             if (LinkedNode.NodeReader != null)
             {
-                if (VerifyEntry(LinkedNode.NodeReader))
-                {
-                    return CheckEntryMurder4(LinkedNode.Entry.gameObject);
-                }
-                else
-                {
-                    FindEntryWithUser();
-                    return CheckEntryMurder4(LinkedNode.Entry.gameObject);
-                }
-            }
-            else
-            {
-                FindEntryWithUser();
                 return CheckEntryMurder4(LinkedNode.Entry.gameObject);
             }
+            return Murder4Roles.Null;
         }
 
-        private bool VerifyEntry(JarNodeReader NodeReader)
+        private LinkedNodes GetEntryWithUser()
         {
-            if (NodeReader != null)
-            {
-                var Internal_User_VRCPlayerAPI = Player.GetVRCPlayerApi();
-                var InternalNodeAssignedPlayer = NodeReader.VRCPlayeAPI;
-
-                if (InternalNodeAssignedPlayer != null && Internal_User_VRCPlayerAPI != null)
-                {
-                    if (Internal_User_VRCPlayerAPI == InternalNodeAssignedPlayer)
-                    {
-                        return true;
-                    }
-                }
-
-            }
-            return false;
-        }
-
-        private void FindEntryWithUser()
-        {
-            foreach (var item in JarRoleLinks)
+            foreach (var item in JarRoleController.JarRoleLinks)
             {
                 if (item != null)
                 {
-                    if (item.NodeReader != null && item.NodeReader.VRCPlayeAPI != null)
+                    var Internal_User_VRCPlayerAPI = Player.GetVRCPlayerApi();
+                    var InternalNodeAssignedPlayer = item.NodeReader.VRCPlayeAPI;
+                    if (Internal_User_VRCPlayerAPI != null && InternalNodeAssignedPlayer != null)
                     {
-                        var Internal_User_VRCPlayerAPI = Player.GetVRCPlayerApi();
-                        var InternalNodeAssignedPlayer = item.NodeReader.VRCPlayeAPI;
-
-
-                        if (Internal_User_VRCPlayerAPI == InternalNodeAssignedPlayer)
+                        if (Internal_User_VRCPlayerAPI.Equals(InternalNodeAssignedPlayer))
                         {
-                            LinkedNode = item;
-                            break;
+                            ModConsole.DebugLog($"Found Assigned Linked Node in Player {InternalNodeAssignedPlayer.displayName}");
+                            return item;
                         }
-
+                    }
+                    else
+                    {
+                        if (Internal_User_VRCPlayerAPI == null)
+                        {
+                            ModConsole.DebugLog("Internal_User_VRCPlayerAPI is Null!");
+                        }
+                        if (InternalNodeAssignedPlayer == null)
+                        {
+                            ModConsole.DebugLog("InternalNodeAssignedPlayer is Null!");
+                        }
                     }
                 }
             }
+            return null;
         }
 
         public Color? Murder4GetNamePlateColor()
@@ -549,14 +509,7 @@
             {
                 if (LinkedNode == null)
                 {
-                    FindEntryWithUser();
-                }
-                else
-                {
-                    if (!VerifyEntry(LinkedNode.NodeReader))
-                    {
-                        FindEntryWithUser();
-                    }
+                    LinkedNode = GetEntryWithUser();
                 }
 
                 if (GameRoleTag != null)
@@ -588,6 +541,10 @@
         private void UpdateMurder4ESPMechanism()
         {
             var ReturnedRole = GetPlayerRoleMurder4();
+            if (ReturnedRole == Murder4Roles.Null)
+            {
+                return;
+            }
             if (ReturnedRole != Murder4CurrentRole)
             {
                 Murder4CurrentRole = ReturnedRole;
@@ -635,6 +592,10 @@
         private void UpdateAmongUSESpMechanism()
         {
             var ReturnedRole = GetPlayerRoleAmongUS();
+            if (ReturnedRole == AmongUsRoles.Null)
+            {
+                return;
+            }
             if (ReturnedRole != AmongUsCurrentRole)
             {
                 AmongUsCurrentRole = ReturnedRole;
@@ -701,7 +662,6 @@
             }
         }
 
-
         internal enum Murder4Roles
         {
             None = 0,
@@ -709,6 +669,7 @@
             Murderer = 2,
             Bystander = 3,
             Unassigned = 4,
+            Null = 5,
         }
 
         internal enum AmongUsRoles
@@ -717,12 +678,11 @@
             Crewmate = 1,
             Impostor = 2,
             Unassigned = 3,
+            Null = 4,
         }
 
-
-
-
         internal bool _AmongUSHasVoted { get; private set; }
+
         internal bool AmongUSHasVoted
         {
             get
@@ -777,6 +737,7 @@
                 }
             }
         }
+
         internal bool IsRPCActive { get; private set; }
         internal Murder4Roles Murder4CurrentRole { get; private set; } = Murder4Roles.Unassigned;
         internal AmongUsRoles AmongUsCurrentRole { get; private set; } = AmongUsRoles.Unassigned;
@@ -784,20 +745,19 @@
 
         internal PlayerESP ESP { get; private set; }
         internal GameObject AssignedPlayerEntry { get; private set; }
-        
+
         internal SingleTag GameRoleTag { get; private set; }
 
         internal SingleTag AmongUSVoteRevealTag { get; private set; }
 
         internal LinkedNodes LinkedNode { get; private set; }
 
-        internal string HiddenRole { get; }  = "Role Hidden";
+        internal string HiddenRole { get; } = "Role Hidden";
         internal string NoRoles { get; } = "No Role";
 
         internal Color NoRolesColor { get; } = Color.yellow;
         internal Color HiddenRolesColor { get; } = Color.green;
         internal Color DefaultTextColor { get; } = Color.white;
-
 
         // MURDER 4 MAP
         internal Color MurderColor { get; } = new Color(0.5377358f, 0.1648718f, 0.1728278f, 1f);
@@ -814,8 +774,5 @@
         internal Color Unassigned { get; } = new Color(0.5f, 0.5f, 0.5f, 1f);
 
         internal Color NoRolesAssigned { get; } = new Color(0f, 0f, 0f, 0f);
-
-
-
     }
 }
