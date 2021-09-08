@@ -336,8 +336,8 @@
         {
             if (NodeReader != null)
             {
-                var Internal_User_VRCPlayerAPI = Internal_user.GetPlayer().GetVRCPlayerApi();
-                var InternalNodeAssignedPlayer = NodeReader.Current_Assigned_VRCPlayer;
+                var Internal_User_VRCPlayerAPI = Internal_player.GetVRCPlayerApi();
+                var InternalNodeAssignedPlayer = NodeReader.VRCPlayeAPI;
 
                 if (InternalNodeAssignedPlayer != null && Internal_User_VRCPlayerAPI != null)
                 {
@@ -357,13 +357,13 @@
             {
                 if (item != null)
                 {
-                    if (item.NodeReader != null && item.NodeReader.Current_Assigned_VRCPlayer != null)
+                    if (item.NodeReader != null && item.NodeReader.VRCPlayeAPI != null)
                     {
-                        var Internal_User_VRCPlayerAPI = Internal_user.GetPlayer().GetVRCPlayerApi();
-                        var InternalNodeAssignedPlayer = item.NodeReader.Current_Assigned_VRCPlayer;
+                        var Internal_User_VRCPlayerAPI = Internal_player.GetVRCPlayerApi();
+                        var InternalNodeAssignedPlayer = item.NodeReader.VRCPlayeAPI;
 
 
-                        if (Internal_User_VRCPlayerAPI.displayName == InternalNodeAssignedPlayer.displayName)
+                        if (Internal_User_VRCPlayerAPI == InternalNodeAssignedPlayer)
                         {
                             Internal_SavedEntry = item;
                             break;

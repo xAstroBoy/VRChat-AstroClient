@@ -34,7 +34,7 @@
         
 
 
-        internal VRC.SDKBase.VRCPlayerApi Current_Assigned_VRCPlayer
+        internal VRC.SDKBase.VRCPlayerApi VRCPlayeAPI
         {
             get
             {
