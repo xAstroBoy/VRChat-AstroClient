@@ -11,6 +11,7 @@
     using VRC.Core;
     using static AstroClient.JarRoleController;
 
+    [RegisterComponent]
     public class JarRoleESP : GameEventsBehaviour
     {
         public JarRoleESP(IntPtr ptr) : base(ptr)

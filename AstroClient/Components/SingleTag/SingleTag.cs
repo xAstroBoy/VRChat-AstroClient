@@ -8,6 +8,7 @@
     using UnityEngine;
     using VRC;
 
+    [RegisterComponent]
     public class SingleTag : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;

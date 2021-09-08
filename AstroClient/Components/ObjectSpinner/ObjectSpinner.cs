@@ -7,6 +7,7 @@
     using UnityEngine;
     using static AstroClient.Forces;
 
+    [RegisterComponent]
     public class ObjectSpinner : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;

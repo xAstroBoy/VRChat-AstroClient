@@ -9,6 +9,7 @@
     using System.Collections.Generic;
     using System;
     using UnhollowerRuntimeLib;
+    using System.Reflection;
 
     #endregion
 
@@ -16,18 +17,23 @@
     {
         public static void RegisterComponent<T>() where T : class
         {
+            RegisterComponent(typeof(T));
+        }
+
+        public static void RegisterComponent(Type type)
+        {
             try
             {
-                ClassInjector.RegisterTypeInIl2Cpp<T>();
-                ModConsole.DebugLog($"Registered: {typeof(T).FullName}");
-                if (!RegisteredComponentsTypes.Contains(typeof(T)))
+                ClassInjector.RegisterTypeInIl2Cpp(type);
+                ModConsole.DebugLog($"Registered: {type}");
+                if (!RegisteredComponentsTypes.Contains(type))
                 {
-                    RegisteredComponentsTypes.Add(typeof(T));
+                    RegisteredComponentsTypes.Add(type);
                 }
             }
             catch (Exception e)
             {
-                ModConsole.Error($"Failed to Register: {typeof(T).FullName}");
+                ModConsole.Error($"Failed to Register: {type.FullName}");
                 ModConsole.ErrorExc(e);
             }
         }
@@ -37,33 +43,20 @@
             RegisterComponent<GameEventsBehaviour>();
             RegisterComponent<MainThreadRunner>();
 
-            RegisterComponent<RocketManager>();
-            RegisterComponent<RocketObject>();
+            var classes = Assembly.GetExecutingAssembly().GetTypes();
 
-            RegisterComponent<ObjectSpinnerManager>();
-            RegisterComponent<ObjectSpinner>();
+            foreach (var c in classes)
+            {
+                var attributes = c.GetCustomAttributes();
 
-            RegisterComponent<CrazyObjectManager>();
-            RegisterComponent<CrazyObject>();
-
-            RegisterComponent<RigidBodyController>();
-
-            RegisterComponent<ItemInflaterManager>();
-            RegisterComponent<ItemInflater>();
-
-            RegisterComponent<PickupController>();
-
-            RegisterComponent<SingleTag>();
-
-            RegisterComponent<JarRoleESP>();
-
-            RegisterComponent<ESP_Pickup>();
-            RegisterComponent<ESP_Trigger>();
-            RegisterComponent<ESP_ItemTweaker>();
-            RegisterComponent<ESP_UdonBehaviour>();
-            RegisterComponent<ESP_VRCInteractable>();
-
-            RegisterComponent<PlayerESP>();
+                foreach (var attribute in attributes)
+                {
+                    if (attribute.GetType().Equals(typeof(RegisterComponent)))
+                    {
+                        RegisterComponent(c);
+                    }
+                }
+            }
 
             //RegisterComponent<Murder4PatronUnlocker>();
 
@@ -79,25 +72,6 @@
                 RegisterComponent<OrbitManager_Old>();
                 RegisterComponent<Orbit>();
             }
-            RegisterComponent<PlayerWatcherManager>();
-            RegisterComponent<PlayerWatcher>();
-            RegisterComponent<VRC_AstroUdonTrigger>();
-
-            RegisterComponent<Bouncer>();
-            RegisterComponent<Lewdifier>();
-            RegisterComponent<MaskRemover>();
-
-            RegisterComponent<EnderPearlBehaviour>();
-            RegisterComponent<FlashlightBehaviour>();
-
-
-            RegisterComponent<TweakerListener>();
-            RegisterComponent<GameObjectListener>();
-            RegisterComponent<ScrollMenuListener>();
-            RegisterComponent<ScrollMenuListener_AudioSource>();
-
-            RegisterComponent<SitOnPlayer>();
-            RegisterComponent<NamePlates>();
         }
 
         public override void OnUpdate()

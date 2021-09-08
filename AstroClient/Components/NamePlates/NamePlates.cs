@@ -11,6 +11,7 @@
     using UnityEngine;
     using VRC;
 
+    [RegisterComponent]
     public class NamePlates : GameEventsBehaviour
     {
         private PlayerNameplate nameplate;

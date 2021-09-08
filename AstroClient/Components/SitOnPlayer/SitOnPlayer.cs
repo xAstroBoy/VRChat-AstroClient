@@ -6,6 +6,7 @@
     using UnityEngine;
     using VRC;
 
+    [RegisterComponent]
     public class SitOnPlayer : GameEventsBehaviour
     {
         private static Player TargetPlayer;

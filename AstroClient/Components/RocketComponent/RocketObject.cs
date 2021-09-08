@@ -8,6 +8,7 @@
     using static AstroClient.Forces;
     using Random = UnityEngine.Random;
 
+    [RegisterComponent]
     public class RocketObject : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;

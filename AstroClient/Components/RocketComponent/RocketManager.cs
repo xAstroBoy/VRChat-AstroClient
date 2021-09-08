@@ -11,6 +11,7 @@
     using static AstroClient.Variables.InstanceBuilder;
     using Color = System.Drawing.Color;
 
+    [RegisterComponent]
     public class RocketManager : GameEventsBehaviour
     {
         #region Internal

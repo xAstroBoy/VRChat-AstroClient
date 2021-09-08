@@ -19,6 +19,7 @@
 
     using static AstroClient.Variables.InstanceBuilder;
 
+    [RegisterComponent]
     public class PlayerWatcherManager : GameEventsBehaviour
     {
         #region Internal

@@ -12,6 +12,7 @@
     using Delegate = System.Delegate;
     using Time = UnityEngine.Time;
 
+    [RegisterComponent]
     public class PlayerWatcher : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;

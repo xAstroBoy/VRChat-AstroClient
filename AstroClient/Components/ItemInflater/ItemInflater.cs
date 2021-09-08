@@ -5,6 +5,7 @@
     using UnhollowerRuntimeLib;
     using UnityEngine;
 
+    [RegisterComponent]
     public class ItemInflater : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
