@@ -25,11 +25,11 @@
             GameObjectActualScale = new QMSingleButton(ScaleEditor, 5, 0, string.Empty, null, "Current Inflater Object Scale", null, null);
             CurrentScaleButton = new QMSingleButton(ScaleEditor, 5, 1, string.Empty, null, "Current Item Scale", null, null);
 
-            new QMSingleButton(ScaleEditor, 1, 1, "+ Scale", new Action(() => { Tweaker_Object.GetGameObjectToEdit().IncreaseHoldItemScale(); }), "Increase item scale!", null, null, true);
-            new QMSingleButton(ScaleEditor, 1, 1.5f, "- Scale", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DecreaseHoldItemScale(); }), "Decrease item scale!", null, null, true);
+            _ = new QMSingleButton(ScaleEditor, 1, 1, "+ Scale", new Action(() => { Tweaker_Object.GetGameObjectToEdit().IncreaseHoldItemScale(); }), "Increase item scale!", null, null, true);
+            _ = new QMSingleButton(ScaleEditor, 1, 1.5f, "- Scale", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DecreaseHoldItemScale(); }), "Decrease item scale!", null, null, true);
 
             InflaterModeButton = new QMSingleToggleButton(ScaleEditor, 1, 2, "SCale Inflater ON", new Action(() => { InflaterScaleMode = true; }), "Scale Inflater OFF", new Action(() => { InflaterScaleMode = false; }), "Change between instant or inflater", Color.green, Color.red, null, false, true);
-            new QMSingleButton(ScaleEditor, 1, 2.5f, "Restore Original", new Action(() => { Tweaker_Object.GetGameObjectToEdit().RestoreOriginalScaleItem(); }), "Restores Original Item Scale!", null, null, true);
+            _ = new QMSingleButton(ScaleEditor, 1, 2.5f, "Restore Original", new Action(() => { Tweaker_Object.GetGameObjectToEdit().RestoreOriginalScaleItem(); }), "Restores Original Item Scale!", null, null, true);
 
             ScaleEditX = new QMSingleToggleButton(ScaleEditor, 2, 1, "Edit X", new Action(() => { EditVectorX = true; }), "Ignore X", new Action(() => { EditVectorX = false; }), "Make Inflater Edit X", Color.green, Color.red, null, false, true);
             ScaleEditY = new QMSingleToggleButton(ScaleEditor, 2, 1.5f, "Edit Y", new Action(() => { EditVectorY = true; }), "Ignore Y", new Action(() => { EditVectorY = false; }), "Make Inflater Edit Y", Color.green, Color.red, null, false, true);

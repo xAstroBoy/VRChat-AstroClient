@@ -15,7 +15,7 @@
         {
             GetGameObject = new GameObject("CMPage");
             GetGameObject.transform.SetParent(parent, false);
-            GetGameObject.AddComponent<RectTransform>();
+            _ = GetGameObject.AddComponent<RectTransform>();
             _ = new CMLabel(GetGameObject.transform, new Vector2(-200, 0), "Page Content");
 
             var button = new CMButton(GetGameObject.transform, new Vector2(0, 0), "Test Button", () => ModConsole.Log("Test Button Clicked!"));

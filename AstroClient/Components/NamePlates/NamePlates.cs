@@ -88,14 +88,14 @@
             var stringBuilder = new StringBuilder();
             if (player.IsInstanceMaster())
             {
-                stringBuilder.Append($"(Owner) ");
+                _ = stringBuilder.Append($"(Owner) ");
             }
-            stringBuilder.Append($"{player.GetPlatformColored()} ");
+            _ = stringBuilder.Append($"{player.GetPlatformColored()} ");
             if (player.IsFriend())
             {
-                stringBuilder.Append($"[F] ");
+                _ = stringBuilder.Append($"[F] ");
             }
-            stringBuilder.Append($"F:{player.GetFramesColored()}|P:{player.GetPingColored()}");
+            _ = stringBuilder.Append($"F:{player.GetFramesColored()}|P:{player.GetPingColored()}");
             statsText.text = stringBuilder.ToString();
             statsText.color = Color.white;
 

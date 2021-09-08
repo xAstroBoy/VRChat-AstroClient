@@ -12,10 +12,10 @@
             var menu = new QMNestedButton(main, x, y, "Internal VRC_Interactable ", "Interact with Internal VRC_Interactable Triggers", null, null, null, null, btnHalf);
             menu.GetMainButton().SetResizeTextForBestFit(true);
             var scroll = new QMScrollMenu(menu);
-            new QMSingleButton(menu, 0, -1, "Refresh", delegate
-            {
-                scroll.Refresh();
-            }, "", null, null, true);
+            _ = new QMSingleButton(menu, 0, -1, "Refresh", delegate
+              {
+                  scroll.Refresh();
+              }, "", null, null, true);
             scroll.SetAction(delegate
             {
                 foreach (var obj in Tweaker_Object.GetGameObjectToEdit().Get_VRCInteractables())

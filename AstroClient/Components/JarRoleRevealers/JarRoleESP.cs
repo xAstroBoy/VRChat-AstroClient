@@ -57,13 +57,13 @@
             }
             if (ViewRoles)
             {
-                SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
+                _ = SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
                 ResetESPColor();
                 GameRoleTag.ShowTag = false;
             }
             else
             {
-                SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
+                _ = SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
                 ResetESPColor();
                 GameRoleTag.ShowTag = false;
             }
@@ -87,7 +87,7 @@
         private static int RemoveSyncVotedForText(string key)
         {
             var removedtext = key.ToLower().Replace("syncvotedfor", string.Empty).Replace(" ", string.Empty);
-            int.TryParse(removedtext, out var value);
+            _ = int.TryParse(removedtext, out var value);
             return value;
         }
 
@@ -144,11 +144,11 @@
                                     {
                                         if (against != GetLocalPlayerNode())
                                         {
-                                            SetTag(AmongUSVoteRevealTag, $"Voted: {against.Apiuser.displayName}", Color.white, ColorUtils.HexToColor("#44DBAC"));
+                                            _ = SetTag(AmongUSVoteRevealTag, $"Voted: {against.Apiuser.displayName}", Color.white, ColorUtils.HexToColor("#44DBAC"));
                                         }
                                         else
                                         {
-                                            SetTag(AmongUSVoteRevealTag, $"Voted: {against.Apiuser.displayName}", Color.white, ColorUtils.HexToColor("#C22B26"));
+                                            _ = SetTag(AmongUSVoteRevealTag, $"Voted: {against.Apiuser.displayName}", Color.white, ColorUtils.HexToColor("#C22B26"));
                                         }
                                     }
                                     AmongUSHasVoted = true;
@@ -160,7 +160,7 @@
                                 else if (action.Equals("SyncAbstainedVoting"))
                                 {
                                     AmongUSHasVoted = true;
-                                    SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
+                                    _ = SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
                                     if (!IsRPCActive)
                                     {
                                         IsRPCActive = true;
@@ -174,7 +174,7 @@
                             AmongUSHasVoted = false;
                             if (AmongUSVoteRevealTag != null)
                             {
-                                SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
+                                _ = SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
                             }
                             if (action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
                             {
@@ -519,7 +519,7 @@
                 _AssignedPlayerNode.RenameObject("Unassigned Node");
             }
 
-            RoleEspComponents.Remove(this);
+            _ = RoleEspComponents.Remove(this);
         }
 
         private string GetCurrentSingleTagText()
@@ -647,7 +647,7 @@
                         var color = Murder4GetNamePlateColor();
                         if (color != null)
                         {
-                            SetTag(GameRoleTag, ReturnedRole.ToString(), DefaultTextColor, color.Value);
+                            _ = SetTag(GameRoleTag, ReturnedRole.ToString(), DefaultTextColor, color.Value);
                             SetEspColorIfExists(color.Value);
                         }
                     }
@@ -656,7 +656,7 @@
                 {
                     if (GetCurrentSingleTagText() != NoRoles)
                     {
-                        SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
+                        _ = SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
                         ResetESPColor();
                     }
                 }
@@ -665,7 +665,7 @@
             {
                 if (GetCurrentSingleTagText() != HiddenRole)
                 {
-                    SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
+                    _ = SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
                     ResetESPColor();
                 }
             }
@@ -707,7 +707,7 @@
                         var color = AmongUsGetNamePlateColor();
                         if (color != null)
                         {
-                            SetTag(GameRoleTag, ReturnedRole.ToString(), DefaultTextColor, color.Value);
+                            _ = SetTag(GameRoleTag, ReturnedRole.ToString(), DefaultTextColor, color.Value);
                             SetEspColorIfExists(color.Value);
                         }
                     }
@@ -716,7 +716,7 @@
                 {
                     if (GetCurrentSingleTagText() != NoRoles)
                     {
-                        SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
+                        _ = SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
                         ResetESPColor();
                         AmongUSHasVoted = false;
                     }
@@ -734,7 +734,7 @@
 
                 if (GetCurrentSingleTagText() != HiddenRole)
                 {
-                    SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
+                    _ = SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
                     ResetESPColor();
                 }
             }

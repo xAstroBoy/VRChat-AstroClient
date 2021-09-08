@@ -27,8 +27,8 @@
             QMFreeze.FreezePlayerOnQMOpenToggle = new QMToggleButton(temp, 4, 0, "Freeze On QM open \n ON", () => { QMFreeze.FreezePlayerOnQMOpen = true; }, "Freeze On QM Open \n OFF", () => { QMFreeze.FreezePlayerOnQMOpen = false; }, "Freeze Player On QuickMenu Open event.", null, null, null, false);
             QMFreeze.FreezePlayerOnQMOpenToggle.SetToggleState(ConfigManager.Movement.QMFreeze);
 
-            new QMSingleButton(temp, 1, 1, "Spawn Avatar Clone", new Action(() => { Clones.SpawnClone(); }), "Spawns current avi clone", null, null, true);
-            new QMSingleButton(temp, 1, 1.5f, "Remove Avatar Clones", new Action(() => { Clones.RemoveClones(); }), "Removed Spawned avatars clones", null, null, true);
+            _ = new QMSingleButton(temp, 1, 1, "Spawn Avatar Clone", new Action(() => { Clones.SpawnClone(); }), "Spawns current avi clone", null, null, true);
+            _ = new QMSingleButton(temp, 1, 1.5f, "Remove Avatar Clones", new Action(() => { Clones.RemoveClones(); }), "Removed Spawned avatars clones", null, null, true);
         }
     }
 }

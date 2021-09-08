@@ -25,9 +25,12 @@ namespace AstroLibrary.Utility
             return RoomManager.field_Internal_Static_ApiWorldInstance_0;
         }
 
-        public static bool IsInWorld()
+        public static bool IsInWorld
         {
-            return GetWorld() != null && GetWorldInstance() != null;
+            get
+            {
+                return GetWorld() != null && GetWorldInstance() != null;
+            }
         }
 
         public static IEnumerable<Player> GetPlayers()

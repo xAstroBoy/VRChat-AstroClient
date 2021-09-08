@@ -97,47 +97,47 @@
             QMSingleToggleButton toggleSpoofQuest = new QMSingleToggleButton(subSpoofButton, 4, 0, "Quest Spoof", () => { ConfigManager.General.SpoofQuest = true; }, "Quest Spoof", () => { ConfigManager.General.SpoofQuest = false; }, "Toggle Quest Spoofing\n(Requires Restart)", Color.green, Color.red, null, ConfigManager.General.SpoofQuest, false);
             toggleSpoofQuest.SetToggleState(ConfigManager.General.SpoofQuest, false);
 
-            new QMSingleButton(subSpoofButton, 2, 1, "Set\nFPS\nValue", () =>
-            {
-                CheetosHelpers.PopupCall("Set FPS Value", "Done", "Enter FPS. . .", true, delegate (string text)
-                {
-                    float value = 0f;
+            _ = new QMSingleButton(subSpoofButton, 2, 1, "Set\nFPS\nValue", () =>
+              {
+                  CheetosHelpers.PopupCall("Set FPS Value", "Done", "Enter FPS. . .", true, delegate (string text)
+                  {
+                      float value = 0f;
 
-                    try
-                    {
-                        value = float.Parse(text);
-                    }
-                    catch
-                    {
-                        ModConsole.Error("Input value must be a float value!");
-                    }
-                    finally
-                    {
-                        ConfigManager.General.SpoofedFPS = value;
-                    }
-                });
-            }, "Input an FPS value");
+                      try
+                      {
+                          value = float.Parse(text);
+                      }
+                      catch
+                      {
+                          ModConsole.Error("Input value must be a float value!");
+                      }
+                      finally
+                      {
+                          ConfigManager.General.SpoofedFPS = value;
+                      }
+                  });
+              }, "Input an FPS value");
 
-            new QMSingleButton(subSpoofButton, 3, 1, "Set\nPing\nValue", () =>
-            {
-                CheetosHelpers.PopupCall("Set Ping Value", "Done", "Enter Ping. . .", true, delegate (string text)
-                {
-                    short value = 0;
+            _ = new QMSingleButton(subSpoofButton, 3, 1, "Set\nPing\nValue", () =>
+              {
+                  CheetosHelpers.PopupCall("Set Ping Value", "Done", "Enter Ping. . .", true, delegate (string text)
+                  {
+                      short value = 0;
 
-                    try
-                    {
-                        value = short.Parse(text);
-                    }
-                    catch
-                    {
-                        ModConsole.Error("Input value must be a short value!");
-                    }
-                    finally
-                    {
-                        ConfigManager.General.SpoofedPing = value;
-                    }
-                });
-            }, "Input a Ping value");
+                      try
+                      {
+                          value = short.Parse(text);
+                      }
+                      catch
+                      {
+                          ModConsole.Error("Input value must be a short value!");
+                      }
+                      finally
+                      {
+                          ConfigManager.General.SpoofedPing = value;
+                      }
+                  });
+              }, "Input a Ping value");
         }
     }
 }

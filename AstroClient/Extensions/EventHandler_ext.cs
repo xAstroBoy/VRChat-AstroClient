@@ -21,7 +21,7 @@
             {
                 try
                 {
-                    handler.DynamicInvoke(null, null);
+                    _ = handler.DynamicInvoke(null, null);
                 }
                 catch (TargetInvocationException invokeexc)
                 {
@@ -46,7 +46,7 @@
             {
                 try
                 {
-                    handler.DynamicInvoke(null, e);
+                    _ = handler.DynamicInvoke(null, e);
                 }
 
                 catch (TargetInvocationException invokeexc)

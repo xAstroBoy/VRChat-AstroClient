@@ -33,7 +33,7 @@
 
         public override void OnMasterClientSwitched(Photon.Realtime.Player player)
         {
-            if (!WorldUtils.IsInWorld()) return;
+            if (!WorldUtils.IsInWorld) return;
 
             CheetosHelpers.SendHudNotification($"'{player.field_Public_Player_0.GetDisplayName()}' is now the room master.");
         }
@@ -62,7 +62,7 @@
             Player player = PlayerUtils.GetPlayer();
             if (player.gameObject.GetComponent<SitOnPlayer>() == null)
             {
-                player.gameObject.AddComponent<SitOnPlayer>();
+                _ = player.gameObject.AddComponent<SitOnPlayer>();
             }
 
             if (Bools.IsDeveloper)

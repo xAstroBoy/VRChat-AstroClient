@@ -38,7 +38,7 @@
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
             ReferencedDelegate = null;
-            AntiGcList.Remove(this);
+            _ = AntiGcList.Remove(this);
             AntiGcList = null;
         }
 
@@ -110,7 +110,7 @@
         {
             if (Rockets.Contains(obj))
             {
-                Rockets.Remove(obj);
+                _ = Rockets.Remove(obj);
             }
         }
 
@@ -175,7 +175,7 @@
 
         public static void Deregister(RocketObject RocketBehaviour)
         {
-            RocketBehaviours.Remove(RocketBehaviour);
+            _ = RocketBehaviours.Remove(RocketBehaviour);
         }
 
         public static void ClearList()

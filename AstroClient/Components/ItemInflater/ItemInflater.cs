@@ -30,7 +30,7 @@
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
             ReferencedDelegate = null;
-            AntiGcList.Remove(this);
+            _ = AntiGcList.Remove(this);
             AntiGcList = null;
         }
 

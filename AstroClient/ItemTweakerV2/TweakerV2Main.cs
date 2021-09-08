@@ -44,8 +44,8 @@
 
             GameObjMenu.InitTogglerMenu(menu, 3, 0f, true);
             ObjectInfoSubMenu.Init_ObjectInfoSubMenu(menu, 3, 0.5f, true);
-            new QMSingleButton(menu, 3, 1f, "Teleport to Object", new Action(() => { GameObjectMenu.TeleportPlayerToPickup(Tweaker_Object.GetGameObjectToEdit()); }), "Teleport to object.", null, null, true);
-            new QMSingleButton(menu, 3, 1.5f, "Respawn Object", new Action(() => { GameObjectMenu.RestoreOriginalLocation(Tweaker_Object.GetGameObjectToEdit(), false); }), "Reset Object Position.", null, null, true);
+            _ = new QMSingleButton(menu, 3, 1f, "Teleport to Object", new Action(() => { GameObjectMenu.TeleportPlayerToPickup(Tweaker_Object.GetGameObjectToEdit()); }), "Teleport to object.", null, null, true);
+            _ = new QMSingleButton(menu, 3, 1.5f, "Respawn Object", new Action(() => { GameObjectMenu.RestoreOriginalLocation(Tweaker_Object.GetGameObjectToEdit(), false); }), "Reset Object Position.", null, null, true);
             PickupSelectionScrollMenu.Init_PickupSelectionQMScroll(menu, 3, 2, true);
             WorldObjectsScrollMenu.Init_WorldObjectScrollMenu(menu, 3, 2.5f, true);
             VRC_TriggersScrollMenu.Init_VRC_TriggersScrollMenu(menu, 4, 0, true);
@@ -58,16 +58,16 @@
             ComponentSubMenu.Init_ComponentSubMenu(menu, 4, 1.5f, true);
             SpawnerSubmenu.Init_SpawnerSubmenu(menu, 4, 2f, true);
 
-            new QMSingleButton(menu, 1, 0.5f, "Drop Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().TakeOwnership(); }), "Make Whatever Player, drop the object.", null, Color.cyan, true);
+            _ = new QMSingleButton(menu, 1, 0.5f, "Drop Object", new Action(() => { Tweaker_Object.GetGameObjectToEdit().TakeOwnership(); }), "Make Whatever Player, drop the object.", null, Color.cyan, true);
             ProtectionInteractor = new QMSingleToggleButton(menu, 1, 1, "Interaction block ON", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_PreventOthersFromGrabbing(true); }, "Interaction block OFF", () => { Tweaker_Object.GetGameObjectToEdit().RigidBody_PreventOthersFromGrabbing(false); }, "Prevents Others from interacting with the object", Color.green, Color.red, null, false, true);
             ObjectActiveToggle = new QMSingleToggleButton(menu, 1, 1.5f, "Enabled", () => { Tweaker_Object.GetGameObjectToEdit().SetActive(true); }, "Disabled", () => { Tweaker_Object.GetGameObjectToEdit().SetActive(false); }, "Toggles SetActive", Color.green, Color.red, null, false, true);
             new QMSingleToggleButton(menu, 2, 1.5f, "Selected Item ESP : ON", () => { EspHandler.TweakerESPEnabled = true; }, "Selected Item ESP : OFF", () => { EspHandler.TweakerESPEnabled = false; }, "Toggles Selected item ESP", Color.green, Color.red, null, false, true).SetResizeTextForBestFit(true);
             LockHoldItem = new QMSingleToggleButton(menu, 2, 2.5f, "Lock ON", () => { Tweaker_Object.LockItem = true; }, "Lock OFF", () => { Tweaker_Object.LockItem = false; }, "Lock the Held object (prevents the mod from grabbing a new holding object)", Color.green, Color.red, null, false, true);
-            ObjectToEditBtn = new QMSingleButton(menu, 1, 2f, "None", new Action(() => { Tweaker_Object.GetGameObjectToEdit(); }), "GameObject To Edit", null, null);
+            ObjectToEditBtn = new QMSingleButton(menu, 1, 2f, "None", new Action(() => { _ = Tweaker_Object.GetGameObjectToEdit(); }), "GameObject To Edit", null, null);
 
             // TODO: remake teleport buttons <3
 
-            new QMSingleButton(menu, 5, -0.5f, "DANGER : Destroy item.", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DestroyObject(); }), "Destroys Object , You need to reload the world to restore it back.", null, Color.red, true);
+            _ = new QMSingleButton(menu, 5, -0.5f, "DANGER : Destroy item.", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DestroyObject(); }), "Destroys Object , You need to reload the world to restore it back.", null, Color.red, true);
         }
 
         public override void OnPickupController_OnUpdate(PickupController control)

@@ -36,16 +36,16 @@
             {
                 MainButton = new QMNestedButton("ShortcutMenu", 5, 4, "<color=orange>Cheetos Menu</color>", "<color=orange>Cheeto's</color> Personal Menu", null, null, null, null, true);
                 MainScroller = new QMScrollMenu(MainButton);
-                new QMSingleButton(MainButton, 1, 0, "Friend Everyone", () => { DoFriendEveryone(); }, "Friend Everyone!");
-                new QMSingleButton(MainButton, 1, 1, "Test #2", () => { Test2(); }, "Don't Do It!");
-                new QMSingleButton(MainButton, 1, 2, "Test #3", () => { Test3(); }, "Don't Do It!");
-                new QMSingleButton(MainButton, 2, 0, "Teleport\nEveryone\nHere", () => { Test4(); }, "Muahaha");
-                new QMSingleButton(MainButton, 3, 0, "Portal", () => { PortalDrop(); }, "Portal");
-                new QMSingleButton(MainButton, 3, 1, "Create Button", () => { CreateButton(); }, ":3");
-                new QMSingleButton(MainButton, 3, 2, "Photon", () => { PrintPhotonPlayers(); }, "Photon");
-                new QMSingleButton(MainButton, 4, 0, "RPC Test #1", () => { RPCClapTest1(); }, "RPC");
-                new QMSingleButton(MainButton, 4, 1, "RPC Test #2", () => { RPCClapTest2(); }, "RPC");
-                new QMSingleButton(MainButton, 4, 2, "RPC Test #3", () => { RPCClapTest3(); }, "RPC");
+                _ = new QMSingleButton(MainButton, 1, 0, "Friend Everyone", () => { DoFriendEveryone(); }, "Friend Everyone!");
+                _ = new QMSingleButton(MainButton, 1, 1, "Test #2", () => { Test2(); }, "Don't Do It!");
+                _ = new QMSingleButton(MainButton, 1, 2, "Test #3", () => { Test3(); }, "Don't Do It!");
+                _ = new QMSingleButton(MainButton, 2, 0, "Teleport\nEveryone\nHere", () => { Test4(); }, "Muahaha");
+                _ = new QMSingleButton(MainButton, 3, 0, "Portal", () => { PortalDrop(); }, "Portal");
+                _ = new QMSingleButton(MainButton, 3, 1, "Create Button", () => { CreateButton(); }, ":3");
+                _ = new QMSingleButton(MainButton, 3, 2, "Photon", () => { PrintPhotonPlayers(); }, "Photon");
+                _ = new QMSingleButton(MainButton, 4, 0, "RPC Test #1", () => { RPCClapTest1(); }, "RPC");
+                _ = new QMSingleButton(MainButton, 4, 1, "RPC Test #2", () => { RPCClapTest2(); }, "RPC");
+                _ = new QMSingleButton(MainButton, 4, 2, "RPC Test #3", () => { RPCClapTest3(); }, "RPC");
             }
         }
 
@@ -77,7 +77,7 @@
 
         private void DoFriendEveryone()
         {
-            MelonCoroutines.Start(FriendEveryone());
+            _ = MelonCoroutines.Start(FriendEveryone());
         }
 
         private IEnumerator FriendEveryone()
@@ -115,7 +115,7 @@
             if (buttonPosition != null)
             {
                 var buttonRotation = Utils.LocalPlayer.GetPlayer().gameObject.transform.rotation;
-                ButtonCreator.Create("Test", buttonPosition.Value, buttonRotation, () => { ModConsole.Log("TestButton Clicked"); });
+                _ = ButtonCreator.Create("Test", buttonPosition.Value, buttonRotation, () => { ModConsole.Log("TestButton Clicked"); });
             }
         }
 
@@ -220,7 +220,7 @@
                 DoHandlerThing();
             }
 
-            MelonCoroutines.Start(Clap1());
+            _ = MelonCoroutines.Start(Clap1());
         }
 
         public void DoHandlerThing()

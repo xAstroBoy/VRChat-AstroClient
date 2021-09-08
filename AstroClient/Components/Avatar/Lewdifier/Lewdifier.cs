@@ -305,7 +305,7 @@
                             {
                                 if (child.gameObject.active)
                                 {
-                                    ChildsToKeepOff.Remove(child);
+                                    _ = ChildsToKeepOff.Remove(child);
                                     child.DestroyMeLocal();
                                 }
                             }

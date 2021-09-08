@@ -34,8 +34,11 @@
         /// <param name="msg"></param>
         public static void SendHudNotification(string msg)
         {
-            var uiManager = VRCUiManager.prop_VRCUiManager_0;
-            PopupUtils.QueHudMessage(uiManager, msg);
+            if (WorldUtils.IsInWorld)
+            {
+                var uiManager = VRCUiManager.prop_VRCUiManager_0;
+                PopupUtils.QueHudMessage(uiManager, msg);
+            }
         }
 
         public static byte[] ExtractResource(Assembly assembly, string filename)

@@ -14,14 +14,14 @@
             {
                 if (ColliderCheck.Contains(objectcollider))
                 {
-                    ColliderCheck.Remove(objectcollider);
+                    _ = ColliderCheck.Remove(objectcollider);
                 }
             }
             if (objectRigidBody != null)
             {
                 if (RigidBodyCheck.Contains(objectRigidBody))
                 {
-                    RigidBodyCheck.Remove(objectRigidBody);
+                    _ = RigidBodyCheck.Remove(objectRigidBody);
                 }
             }
         }

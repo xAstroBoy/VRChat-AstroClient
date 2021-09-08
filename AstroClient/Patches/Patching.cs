@@ -54,7 +54,7 @@
                     try
                     {
                         ModConsole.DebugLog($"[Patches] Patching {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {patch.PrefixMethod?.method.Name}{patch.PostfixMethod?.method.Name}");
-                        patch.Instance.Patch(patch.TargetMethod, patch.PrefixMethod, patch.PostfixMethod);
+                        _ = patch.Instance.Patch(patch.TargetMethod, patch.PrefixMethod, patch.PostfixMethod);
                     }
                     catch (Exception e)
                     {
@@ -96,9 +96,9 @@
             {
                 ModConsole.DebugLog("[Patches] Start. . .");
 
-                new Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
-                new Patch(typeof(ObjectInstantiator).GetMethod(nameof(ObjectInstantiator._InstantiateObject)), GetPatch(nameof(Debug_ObjectInstantiator)));
-                new Patch(typeof(Networking).GetMethod(nameof(Networking.Instantiate)), GetPatch(nameof(Debug_NetworkingInstantiate)));
+                _ = new Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
+                _ = new Patch(typeof(ObjectInstantiator).GetMethod(nameof(ObjectInstantiator._InstantiateObject)), GetPatch(nameof(Debug_ObjectInstantiator)));
+                _ = new Patch(typeof(Networking).GetMethod(nameof(Networking.Instantiate)), GetPatch(nameof(Debug_NetworkingInstantiate)));
 
                 ModConsole.DebugLog("[AstroClient Patches] DONE!");
                 Patch.DoPatches();

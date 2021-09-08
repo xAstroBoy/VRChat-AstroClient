@@ -193,7 +193,7 @@
 
         protected void DoAfterUiManagerInit(Action code)
         {
-            MelonCoroutines.Start(OnUiManagerInitCoro(code));
+            _ = MelonCoroutines.Start(OnUiManagerInitCoro(code));
         }
 
         private IEnumerator OnUiManagerInitCoro(Action code)
@@ -219,7 +219,7 @@
             {
                 ModConsole.ErrorExc(e);
             }
-            new QMSingleButton("ShortcutMenu", 5, 3.5f, "GameObject Toggler", new Action(() => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }), "Advanced GameObject Toggler", null, null, true);
+            _ = new QMSingleButton("ShortcutMenu", 5, 3.5f, "GameObject Toggler", new Action(() => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }), "Advanced GameObject Toggler", null, null, true);
             CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 3f, true);
 
             Event_VRChat_OnUiManagerInit.SafetyRaise();
@@ -245,7 +245,7 @@
             CloseButton = new QMSingleButton(AstroClient, 0, 0, "Close Game", () => { Process.GetCurrentProcess().Kill(); }, "Close the game");
             RestartButton = new QMSingleButton(AstroClient, 0, 1, "Restart Game", () =>
             {
-                Process.Start(Directory.GetParent(Application.dataPath) + "\\VRChat.exe");
+                _ = Process.Start(Directory.GetParent(Application.dataPath) + "\\VRChat.exe");
                 Process.GetCurrentProcess().Kill();
             }, "Restart the game");
 

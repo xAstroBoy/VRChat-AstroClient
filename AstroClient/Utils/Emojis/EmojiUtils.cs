@@ -209,7 +209,7 @@
 
         public static void OfflineEmojiSpammer()
         {
-            MelonCoroutines.Start(OfflineSpammer());
+            _ = MelonCoroutines.Start(OfflineSpammer());
         }
 
         public static void OnlineEmojiSpammer()
@@ -221,7 +221,7 @@
             if (!isOnlineSpammerActive)
             {
                 isOnlineSpammerActive = true;
-                MelonCoroutines.Start(OnlineSpammer());
+                _ = MelonCoroutines.Start(OnlineSpammer());
             }
         }
 
@@ -463,8 +463,8 @@
         {
             var EmojiSpawnerButtons = new QMNestedButton(main, x, y, "Emoji Spawner", "Manual Emoji Spawner.", null, null, null, null, btnHalf);
             EmojiIntReveal = new QMSingleButton(EmojiSpawnerButtons, 3, 0, EmojiNames.Smile.ToString(), new Action(SpawnEmoji), "Spawn Emoji.", null, null);
-            new QMSingleButton(EmojiSpawnerButtons, 2, 0, "+", new Action(IncreaseEmojiInt), string.Empty, null, null);
-            new QMSingleButton(EmojiSpawnerButtons, 4, 0, "-", new Action(DecreaseEmojiInt), string.Empty, null, null);
+            _ = new QMSingleButton(EmojiSpawnerButtons, 2, 0, "+", new Action(IncreaseEmojiInt), string.Empty, null, null);
+            _ = new QMSingleButton(EmojiSpawnerButtons, 4, 0, "-", new Action(DecreaseEmojiInt), string.Empty, null, null);
             EmojiSpawnerChoices = new QMToggleButton(EmojiSpawnerButtons, 1, 0, "Visible", new Action(ToggleOnlineSpawner), "Local", new Action(ToggleOnlineSpawner), "Decide if the emojis should be spawned online or local.", null, null, null, false);
             EmojiStatusEmojiSpawner = new QMSingleButton(EmojiSpawnerButtons, 5, 0, "Visible", null, "Emoji Visibility", null, Color.green);
             EmojiStatusEmojiMenu = new QMSingleButton("EmojiMenu", 5, 0, "Public", null, "Emoji Visibility", null, Color.green);
@@ -472,15 +472,15 @@
             SpawnOfflineEmojisToggle = new QMToggleButton("EmojiMenu", 5, 1, "Skip Cooldown (Local spawn allowed)", new Action(ToggleEmojiSkipCooldown), "Dont Skip Cooldown (Visible spawn only)", new Action(ToggleEmojiSkipCooldown), "Skip Cooldown (Local & Visible)", null, null, null, false);
             SpawnOfflineEmojisToggle2 = new QMToggleButton(EmojiSpawnerButtons, 0, 0, "Skip Cooldown (Local spawn allowed)", new Action(ToggleEmojiSkipCooldown), "Dont Skip Cooldown (Visible spawn only)", new Action(ToggleEmojiSkipCooldown), "Skip Cooldown (Local & Visible)", null, null, null, false);
             EmojiSpawnerAllAtOnce = new QMToggleButton(EmojiSpawnerButtons, 0, 1, "Use Emoji Cooldown", new Action(ToggleEmojiSpamMode), "Dont use Emoji cooldown", new Action(ToggleEmojiSpamMode), "decide if emojis needs to be spawned all at once or use a cooldown.", null, null, null, false);
-            new QMSingleButton(EmojiSpawnerButtons, 1, 1, "+1", new Action(Add_x1), string.Empty, null, null);
-            new QMSingleButton(EmojiSpawnerButtons, 2, 1, "+10", new Action(Add_x10), string.Empty, null, null);
-            new QMSingleButton(EmojiSpawnerButtons, 3, 1, "+100", new Action(Add_x100), string.Empty, null, null);
+            _ = new QMSingleButton(EmojiSpawnerButtons, 1, 1, "+1", new Action(Add_x1), string.Empty, null, null);
+            _ = new QMSingleButton(EmojiSpawnerButtons, 2, 1, "+10", new Action(Add_x10), string.Empty, null, null);
+            _ = new QMSingleButton(EmojiSpawnerButtons, 3, 1, "+100", new Action(Add_x100), string.Empty, null, null);
             EmojiSpamCounter = new QMSingleButton(EmojiSpawnerButtons, 4, 1, "Spawn 0 Emojis (Local) ", new Action(OfflineEmojiSpammer), "How many emojis to Spawn (LOCAL)", null, null);
-            new QMSingleButton(EmojiSpawnerButtons, 5, 1, "Reset Flooder", new Action(RestoreSpammer), string.Empty, null, null);
-            new QMSingleButton(EmojiSpawnerButtons, 1, 2, "-1", new Action(Sub_x1), string.Empty, null, null);
-            new QMSingleButton(EmojiSpawnerButtons, 2, 2, "-10", new Action(Sub_x10), string.Empty, null, null);
-            new QMSingleButton(EmojiSpawnerButtons, 3, 2, "-100", new Action(Sub_x100), string.Empty, null, null);
-            new QMSingleButton(EmojiSpawnerButtons, 4, 2, "Spawn 15 Emojis (Online) ", new Action(OnlineEmojiSpammer), "How many emojis to Spawn (Only if the other has The Emoji Unlocker mod.)", null, null);
+            _ = new QMSingleButton(EmojiSpawnerButtons, 5, 1, "Reset Flooder", new Action(RestoreSpammer), string.Empty, null, null);
+            _ = new QMSingleButton(EmojiSpawnerButtons, 1, 2, "-1", new Action(Sub_x1), string.Empty, null, null);
+            _ = new QMSingleButton(EmojiSpawnerButtons, 2, 2, "-10", new Action(Sub_x10), string.Empty, null, null);
+            _ = new QMSingleButton(EmojiSpawnerButtons, 3, 2, "-100", new Action(Sub_x100), string.Empty, null, null);
+            _ = new QMSingleButton(EmojiSpawnerButtons, 4, 2, "Spawn 15 Emojis (Online) ", new Action(OnlineEmojiSpammer), "How many emojis to Spawn (Only if the other has The Emoji Unlocker mod.)", null, null);
         }
 
         public enum EmojiNames

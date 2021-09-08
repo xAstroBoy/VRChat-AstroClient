@@ -12,8 +12,8 @@
         public CMBase(Transform parent, Vector2 position)
         {
             GetGameObject = new GameObject($"CMBase");
-            GetGameObject.AddComponent<CanvasRenderer>();
-            GetGameObject.AddComponent<RectTransform>();
+            _ = GetGameObject.AddComponent<CanvasRenderer>();
+            _ = GetGameObject.AddComponent<RectTransform>();
             GetGameObject.transform.SetParent(parent, false);
             GetGameObject.GetComponent<RectTransform>().position = position;
             GetGameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(0f, 0f);

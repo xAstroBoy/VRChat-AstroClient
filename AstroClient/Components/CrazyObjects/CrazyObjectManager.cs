@@ -38,7 +38,7 @@
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
             ReferencedDelegate = null;
-            AntiGcList.Remove(this);
+            _ = AntiGcList.Remove(this);
             AntiGcList = null;
         }
 
@@ -143,7 +143,7 @@
         {
             if (CrazyObjects.Contains(obj))
             {
-                CrazyObjects.Remove(obj);
+                _ = CrazyObjects.Remove(obj);
             }
         }
 
@@ -177,7 +177,7 @@
 
         public static void Deregister(CrazyObject CrazyObjectBehaviour)
         {
-            CrazyObjectBehaviors.Remove(CrazyObjectBehaviour);
+            _ = CrazyObjectBehaviors.Remove(CrazyObjectBehaviour);
         }
 
         public static void ClearList()

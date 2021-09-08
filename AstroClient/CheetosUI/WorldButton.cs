@@ -61,8 +61,8 @@
             front_canvas.transform.localPosition -= new Vector3(0f, 0f, 0.001f);
             front_canvas.transform.rotation = front.transform.rotation;
             front_canvas.layer = LayerMask.NameToLayer("UI");
-            front_canvas.AddComponent<Canvas>();
-            front_canvas.AddComponent<CanvasScaler>();
+            _ = front_canvas.AddComponent<Canvas>();
+            _ = front_canvas.AddComponent<CanvasScaler>();
 
 
             var textObject = new GameObject("Text");
@@ -72,7 +72,7 @@
             textObject.transform.rotation = front_canvas.transform.rotation;
             textObject.transform.localScale = new Vector3(0.01f, 0.01f, 0.004f);
             textObject.layer = LayerMask.NameToLayer("UI");
-            textObject.AddComponent<CanvasRenderer>();
+            _ = textObject.AddComponent<CanvasRenderer>();
 
             var front_text = textObject.AddComponent<TextMeshPro>();
             front_text.color = Color.black;

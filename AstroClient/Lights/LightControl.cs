@@ -339,8 +339,8 @@
             FogSwitch = new QMSingleToggleButton(temp, 1, 1f, "FOG: ON", () => { ToggleFog(true); }, "FOG: OFF", () => { ToggleFog(false); }, "Tweaks Level RenderSettings Fog.", Color.green, Color.red, null, false, true);
 
 
-            new QMSingleButton(temp, 2, 0, "Spawn Flashlight", () => { Astro_Flashlight.SpawnFlashlight(); }, "Spawn a Flashlight", null, null, true);
-            new QMSingleButton(temp, 2, 0.5f, "Destroy Spawned Flashlights", () => { Astro_Flashlight.DestroyAllFlashLights(); }, "Kill Spawned Flashlights", null, null, true);
+            _ = new QMSingleButton(temp, 2, 0, "Spawn Flashlight", () => { Astro_Flashlight.SpawnFlashlight(); }, "Spawn a Flashlight", null, null, true);
+            _ = new QMSingleButton(temp, 2, 0.5f, "Destroy Spawned Flashlights", () => { Astro_Flashlight.DestroyAllFlashLights(); }, "Kill Spawned Flashlights", null, null, true);
 
             // TODO : make it less laggy and able to toggle em on/off without breaking itself.
             //ToggleLightmaps = new QMSingleToggleButton(temp, 1, 1f, "Baked Lightings: ON", () => { ToggleLightMaps(true); }, "Baked Lightings: OFF", () => { ToggleLightMaps(false); }, "Tries to toggle on/off LightMaps but is broken and buggy.", Color.green, Color.red, null, false, true);

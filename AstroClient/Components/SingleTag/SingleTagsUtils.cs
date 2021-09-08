@@ -109,7 +109,7 @@
             {
                 if (Counter.Contains(entry))
                 {
-                    Counter.Remove(entry);
+                    _ = Counter.Remove(entry);
                 }
             }
         }

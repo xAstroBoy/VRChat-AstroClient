@@ -387,18 +387,18 @@
             #region Item Teleporter
 
             DoUnlockedSoundbtn = new QMSingleToggleButton(MurderItemTeleporter, 0, 0, "Do Sound", new Action(() => { DoUnlockedSound = true; }), "Quiet Mode", new Action(() => { DoUnlockedSound = false; }), "Should i run the Sound action on pickups teleport.", Color.green, Color.red, null, false, true);
-            new QMSingleButton(MurderItemTeleporter, 1, 0, "Clues!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 2, 0, "Photograph!", new Action(() => { Clue_photograph.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 3, 0, "Notebook!", new Action(() => { Clue_notebook.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 4, 0, "Locket!", new Action(() => { Clue_Locket.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 1, 0.5f, "PocketWatch!", new Action(() => { Clue_PocketWatch.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 2, 0.5f, "Postcard!", new Action(() => { Clue_Postcard.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 3, 0.5f, "Shotgun!", new Action(() => { item_Shotgun.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Shotgun Gun Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 4, 0.5f, "Detective Gun!", new Action(() => { item_DetectiveRevolver.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Detective Gun Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 1, 1f, "Silenced Gun 1!", new Action(() => { item_Silenced_Revolver_0.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Silenced Gun Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 2, 1f, "Silenced Gun 2!", new Action(() => { item_Silenced_Revolver_1.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Silenced Gun Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 3, 1, "Grenade!", new Action(() => { item_Grenade.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Grenade Teleporter!", null, null, true);
-            new QMSingleButton(MurderItemTeleporter, 4, 1f, "Traps!", new Action(() => { BearTraps.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Silenced Gun Teleporter!", null, null, true);
+            _ = new QMSingleButton(MurderItemTeleporter, 1, 0, "Clues!", new Action(() => { Clues.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            _ = new QMSingleButton(MurderItemTeleporter, 2, 0, "Photograph!", new Action(() => { Clue_photograph.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            _ = new QMSingleButton(MurderItemTeleporter, 3, 0, "Notebook!", new Action(() => { Clue_notebook.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            _ = new QMSingleButton(MurderItemTeleporter, 4, 0, "Locket!", new Action(() => { Clue_Locket.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            _ = new QMSingleButton(MurderItemTeleporter, 1, 0.5f, "PocketWatch!", new Action(() => { Clue_PocketWatch.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            _ = new QMSingleButton(MurderItemTeleporter, 2, 0.5f, "Postcard!", new Action(() => { Clue_Postcard.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
+            _ = new QMSingleButton(MurderItemTeleporter, 3, 0.5f, "Shotgun!", new Action(() => { item_Shotgun.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Shotgun Gun Teleporter!", null, null, true);
+            _ = new QMSingleButton(MurderItemTeleporter, 4, 0.5f, "Detective Gun!", new Action(() => { item_DetectiveRevolver.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Detective Gun Teleporter!", null, null, true);
+            _ = new QMSingleButton(MurderItemTeleporter, 1, 1f, "Silenced Gun 1!", new Action(() => { item_Silenced_Revolver_0.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Silenced Gun Teleporter!", null, null, true);
+            _ = new QMSingleButton(MurderItemTeleporter, 2, 1f, "Silenced Gun 2!", new Action(() => { item_Silenced_Revolver_1.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Silenced Gun Teleporter!", null, null, true);
+            _ = new QMSingleButton(MurderItemTeleporter, 3, 1, "Grenade!", new Action(() => { item_Grenade.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Grenade Teleporter!", null, null, true);
+            _ = new QMSingleButton(MurderItemTeleporter, 4, 1f, "Traps!", new Action(() => { BearTraps.TeleportToMe(); if (DoUnlockedSound) { OnPlayerUnlockedClues.ExecuteUdonEvent(); } }), "Silenced Gun Teleporter!", null, null, true);
             PresentTeleporter = new QMSingleButton(MurderItemTeleporter, 1, 2, "Present!", new Action(() => { Clue_Present.TeleportToMe(); }), "Clue Teleporter!", null, null, true);
 
             #endregion Item Teleporter
@@ -428,7 +428,7 @@
             new QMSingleButton(MurderItemTweaker, 4, 2, "Bear Trap (Crazy)!", new Action(() => { BearTraps.Add_Crazy_Component(false); }), "Make Grenade in Instance go nuts!", null, null, true).SetResizeTextForBestFit(true);
             new QMSingleButton(MurderItemTweaker, 4, 2.5f, "Kill Crazy Effects!", new Action(() => { RemoveCrazy(); }), "Remove Crazy effect to all items", null, null, true).SetResizeTextForBestFit(true);
 
-            new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!", null, null, true);
+            _ = new QMSingleButton(MurderItemTweaker, 1, 0, "Allow Gun Theft in Murder!", new Action(AllowTheft), "Allows you to steal items from other people!", null, null, true);
             ToggleGravityMode = new QMSingleToggleButton(MurderItemTweaker, 1, 0.5f, "Fall (World Gravity)", new Action(() => { UseGravity = true; }), "Float (Space Mode)", new Action(() => { UseGravity = false; }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
 
             KnifesGrabbableToggle = new QMSingleToggleButton(MurderItemTweaker, 1, 1, "Can Grab Knifes", new Action(() => { ToggleKnifesGrab(true); }), "Cannot Grab Knifes", new Action(() => { ToggleKnifesGrab(false); }), "Tweaks all Murder! items gravity!", Color.green, Color.red, null, false, true);
@@ -441,17 +441,17 @@
 
             #region Item Spawner
 
-            new QMSingleButton(MurderItemSpawner, 1, 0, "Spawn Detective Gun", new Action(() => { item_DetectiveRevolver.CloneObject(); }), "Detective Gun Cloner!", null, null, true);
-            new QMSingleButton(MurderItemSpawner, 1, 0.5f, "Spawn Silenced Gun", new Action(() => { item_Silenced_Revolver_0.CloneObject(); }), "Silenced Gun Cloner!", null, null, true);
-            new QMSingleButton(MurderItemSpawner, 1, 1, "Spawn Shotgun", new Action(() => { item_Shotgun.CloneObject(); }), "Shotgun Cloner!", null, null, true);
-            new QMSingleButton(MurderItemSpawner, 1, 1.5f, "Spawn Knife", new Action(() => { item_Knife_0.CloneObject(); }), "Knife Cloner!", null, null, true);
-            new QMSingleButton(MurderItemSpawner, 1, 2, "Spawn Grenade", new Action(() => { item_Grenade.CloneObject(); }), "Grenade Cloner!", null, null, true);
-            new QMSingleButton(MurderItemSpawner, 1, 2.5f, "Spawn Bear Trap", new Action(() => { item_Bear_trap_1.CloneObject(); }), "Bear Trap Cloner!", null, null, true);
-            new QMSingleButton(MurderItemSpawner, 2, 0, "Spawn photograph!", new Action(() => { Clue_photograph.CloneObject(); }), "Clue Cloner!", null, null, true);
-            new QMSingleButton(MurderItemSpawner, 2, 0.5f, "Spawn notebook!", new Action(() => { Clue_notebook.CloneObject(); }), "Clue Cloner!", null, null, true);
-            new QMSingleButton(MurderItemSpawner, 2, 1, "Spawn Locket!", new Action(() => { Clue_Locket.CloneObject(); }), "Clue Cloner!", null, null, true);
-            new QMSingleButton(MurderItemSpawner, 2, 1.5f, "Spawn PocketWatch!", new Action(() => { Clue_PocketWatch.CloneObject(); }), "Clue Cloner!", null, null, true);
-            new QMSingleButton(MurderItemSpawner, 2, 2, "Spawn Postcard!", new Action(() => { Clue_Postcard.CloneObject(); }), "Clue Cloner!", null, null, true);
+            _ = new QMSingleButton(MurderItemSpawner, 1, 0, "Spawn Detective Gun", new Action(() => { item_DetectiveRevolver.CloneObject(); }), "Detective Gun Cloner!", null, null, true);
+            _ = new QMSingleButton(MurderItemSpawner, 1, 0.5f, "Spawn Silenced Gun", new Action(() => { item_Silenced_Revolver_0.CloneObject(); }), "Silenced Gun Cloner!", null, null, true);
+            _ = new QMSingleButton(MurderItemSpawner, 1, 1, "Spawn Shotgun", new Action(() => { item_Shotgun.CloneObject(); }), "Shotgun Cloner!", null, null, true);
+            _ = new QMSingleButton(MurderItemSpawner, 1, 1.5f, "Spawn Knife", new Action(() => { item_Knife_0.CloneObject(); }), "Knife Cloner!", null, null, true);
+            _ = new QMSingleButton(MurderItemSpawner, 1, 2, "Spawn Grenade", new Action(() => { item_Grenade.CloneObject(); }), "Grenade Cloner!", null, null, true);
+            _ = new QMSingleButton(MurderItemSpawner, 1, 2.5f, "Spawn Bear Trap", new Action(() => { item_Bear_trap_1.CloneObject(); }), "Bear Trap Cloner!", null, null, true);
+            _ = new QMSingleButton(MurderItemSpawner, 2, 0, "Spawn photograph!", new Action(() => { Clue_photograph.CloneObject(); }), "Clue Cloner!", null, null, true);
+            _ = new QMSingleButton(MurderItemSpawner, 2, 0.5f, "Spawn notebook!", new Action(() => { Clue_notebook.CloneObject(); }), "Clue Cloner!", null, null, true);
+            _ = new QMSingleButton(MurderItemSpawner, 2, 1, "Spawn Locket!", new Action(() => { Clue_Locket.CloneObject(); }), "Clue Cloner!", null, null, true);
+            _ = new QMSingleButton(MurderItemSpawner, 2, 1.5f, "Spawn PocketWatch!", new Action(() => { Clue_PocketWatch.CloneObject(); }), "Clue Cloner!", null, null, true);
+            _ = new QMSingleButton(MurderItemSpawner, 2, 2, "Spawn Postcard!", new Action(() => { Clue_Postcard.CloneObject(); }), "Clue Cloner!", null, null, true);
             PresentSpawner = new QMSingleButton(MurderItemSpawner, 2, 2.5f, "Spawn Present!", new Action(() => { Clue_Present.CloneObject(); }), "Clue Teleporter!", null, null, true);
 
             #endregion Item Spawner
@@ -509,14 +509,14 @@
 
             #region Items Clicker
 
-            new QMSingleButton(MurderItemClicker, 1, 0, "Click photograph!", new Action(() => { Clue_photograph.VRC_Interactable_Click(); }), "Click!", null, null, true);
-            new QMSingleButton(MurderItemClicker, 1, 0.5f, "Click notebook!", new Action(() => { Clue_notebook.VRC_Interactable_Click(); }), "Click!", null, null, true);
-            new QMSingleButton(MurderItemClicker, 1, 1, "Click Locket!", new Action(() => { Clue_Locket.VRC_Interactable_Click(); }), "Click!", null, null, true);
-            new QMSingleButton(MurderItemClicker, 1, 1.5f, "Click PocketWatch!", new Action(() => { Clue_PocketWatch.VRC_Interactable_Click(); }), "Click!", null, null, true);
-            new QMSingleButton(MurderItemClicker, 1, 2, "Click Postcard!", new Action(() => { Clue_Postcard.VRC_Interactable_Click(); }), "Click!", null, null, true);
+            _ = new QMSingleButton(MurderItemClicker, 1, 0, "Click photograph!", new Action(() => { Clue_photograph.VRC_Interactable_Click(); }), "Click!", null, null, true);
+            _ = new QMSingleButton(MurderItemClicker, 1, 0.5f, "Click notebook!", new Action(() => { Clue_notebook.VRC_Interactable_Click(); }), "Click!", null, null, true);
+            _ = new QMSingleButton(MurderItemClicker, 1, 1, "Click Locket!", new Action(() => { Clue_Locket.VRC_Interactable_Click(); }), "Click!", null, null, true);
+            _ = new QMSingleButton(MurderItemClicker, 1, 1.5f, "Click PocketWatch!", new Action(() => { Clue_PocketWatch.VRC_Interactable_Click(); }), "Click!", null, null, true);
+            _ = new QMSingleButton(MurderItemClicker, 1, 2, "Click Postcard!", new Action(() => { Clue_Postcard.VRC_Interactable_Click(); }), "Click!", null, null, true);
             PresentClicker = new QMSingleButton(MurderItemSpawner, 2, 0, "Click Present!", new Action(() => { Clue_Present.VRC_Interactable_Click(); }), "Click!", null, null, true);
 
-            new QMSingleButton(MurderItemClicker, 2, 0.5f, "Unlock Random Weapon!", new Action(() => { Clues.VRC_Interactable_Click(); }), "Unlock Random Weapon!", null, null, true);
+            _ = new QMSingleButton(MurderItemClicker, 2, 0.5f, "Unlock Random Weapon!", new Action(() => { Clues.VRC_Interactable_Click(); }), "Unlock Random Weapon!", null, null, true);
 
             #endregion Items Clicker
 

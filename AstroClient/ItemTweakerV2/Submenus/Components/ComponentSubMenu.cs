@@ -15,7 +15,7 @@
             SpinnerSubMenu.Init_SpinnerSubMenu(main, 1, 1, true);
             BouncerSubMenu.Init_BouncerMenu(main, 1, 1.5f, true);
 
-            new QMSingleButton(main, 4, 0f, "Remove All Components", () => { ComponentSubMenu.KillCustomComponents(); }, "Kill All Custom Add-ons.", null, null, true);
+            _ = new QMSingleButton(main, 4, 0f, "Remove All Components", () => { ComponentSubMenu.KillCustomComponents(); }, "Kill All Custom Add-ons.", null, null, true);
         }
 
         public static void KillCustomComponents()

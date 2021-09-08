@@ -15,11 +15,11 @@
         {
             GetGameObject.name = $"CMButton-{text}";
 
-            GetGameObject.AddComponent<Image>();
+            _ = GetGameObject.AddComponent<Image>();
             GetGameObject.GetComponent<Image>().sprite = null;
             GetGameObject.GetComponent<Image>().color = Color.cyan;
             GetGameObject.GetComponent<Image>().fillAmount = 1f;
-            GetGameObject.AddComponent<Button>();
+            _ = GetGameObject.AddComponent<Button>();
             GetGameObject.GetComponent<Button>().interactable = true;
             GetGameObject.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
 

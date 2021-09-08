@@ -46,7 +46,7 @@
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
             ReferencedDelegate = null;
-            AntiGcList.Remove(this);
+            _ = AntiGcList.Remove(this);
             AntiGcList = null;
         }
 
@@ -166,7 +166,7 @@
         {
             if (OriginalPlayerAttackers.Contains(obj))
             {
-                OriginalPlayerAttackers.Remove(obj);
+                _ = OriginalPlayerAttackers.Remove(obj);
             }
         }
 
@@ -209,7 +209,7 @@
 
         public static void Deregister(PlayerAttacker PlayerAttackerBehaviour)
         {
-            PlayerAttackerBehaviors.Remove(PlayerAttackerBehaviour);
+            _ = PlayerAttackerBehaviors.Remove(PlayerAttackerBehaviour);
         }
 
         public static void ClearList()
