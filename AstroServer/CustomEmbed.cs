@@ -21,7 +21,7 @@
             return embedBuilder.Build();
         }
 
-        public static Embed GetNewKeyEmbed(string authkey, ulong discordID, bool successful)
+        public static Embed GetNewKeyEmbed(string authkey, bool successful)
         {
             if (successful)
             {
@@ -31,7 +31,6 @@
                     Color = Color.Green,
                 };
 
-                embedBuilder.AddField("Discord", DiscordUtils.GetDiscordName(discordID));
                 embedBuilder.AddField("Key", authkey);
                 return embedBuilder.Build();
             }

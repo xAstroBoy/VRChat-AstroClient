@@ -18,7 +18,7 @@
     {
         [Command("GenKey")]
         [Summary("GenKey command")]
-        public async Task GenKey([Required] ulong discordID)
+        public async Task GenKey()
         {
             string key = RandomOrg.GetRandomKey();
 
@@ -26,12 +26,12 @@
             {
                 if (!KeyManager.IsKeyValid(key))
                 {
-                    _ = await ReplyAsync(null, false, CustomEmbed.GetNewKeyEmbed(key, discordID, true));
+                    _ = await ReplyAsync(null, false, CustomEmbed.GetNewKeyEmbed(key, true));
                     //KeyManager.AddKey(key, discordID);
                 }
                 else
                 {
-                    _ = await ReplyAsync(null, false, CustomEmbed.GetNewKeyEmbed(key, discordID, false));
+                    _ = await ReplyAsync(null, false, CustomEmbed.GetNewKeyEmbed(key, false));
                 }
             }
             else
