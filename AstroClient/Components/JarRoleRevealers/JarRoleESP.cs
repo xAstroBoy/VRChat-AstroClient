@@ -297,7 +297,7 @@
 
         private LinkedNodes GetEntryWithUser()
         {
-            foreach (var item in JarRoleController.JarRoleLinks)
+            foreach (var item in JarRoleController.JarRoleLinks.Where(x => x.NodeReader.VRCPlayeAPI != null))
             {
                 if (item != null)
                 {
@@ -309,17 +309,6 @@
                         {
                             ModConsole.DebugLog($"Found Assigned Linked Node in Player {InternalNodeAssignedPlayer.displayName}");
                             return item;
-                        }
-                    }
-                    else
-                    {
-                        if (Internal_User_VRCPlayerAPI == null)
-                        {
-                            ModConsole.DebugLog("Internal_User_VRCPlayerAPI is Null!");
-                        }
-                        if (InternalNodeAssignedPlayer == null)
-                        {
-                            ModConsole.DebugLog("InternalNodeAssignedPlayer is Null!");
                         }
                     }
                 }
@@ -512,27 +501,30 @@
                     LinkedNode = GetEntryWithUser();
                 }
 
-                if (GameRoleTag != null)
+                if (LinkedNode != null)
                 {
-                    if (GameRoleTag.ShowTag != ViewRoles)
+                    if (GameRoleTag != null)
                     {
-                        GameRoleTag.ShowTag = ViewRoles;
+                        if (GameRoleTag.ShowTag != ViewRoles)
+                        {
+                            GameRoleTag.ShowTag = ViewRoles;
+                        }
                     }
-                }
-                if (PlayerESPMenu.Toggle_Player_ESP)
-                {
-                    if (ESP == null)
+                    if (PlayerESPMenu.Toggle_Player_ESP)
                     {
-                        ESP = Player.gameObject.GetComponent<PlayerESP>();
+                        if (ESP == null)
+                        {
+                            ESP = Player.gameObject.GetComponent<PlayerESP>();
+                        }
                     }
-                }
-                if (IsMurder4World)
-                {
-                    UpdateMurder4ESPMechanism();
-                }
-                else if (IsAmongUsWorld)
-                {
-                    UpdateAmongUSESpMechanism();
+                    if (IsMurder4World)
+                    {
+                        UpdateMurder4ESPMechanism();
+                    }
+                    else if (IsAmongUsWorld)
+                    {
+                        UpdateAmongUSESpMechanism();
+                    }
                 }
             }
             catch (Exception e) { ModConsole.DebugError("JarRoleRevealer OnUpdate Exception : " + e); }
@@ -744,8 +736,6 @@
         internal Player Player { get; private set; }
 
         internal PlayerESP ESP { get; private set; }
-        internal GameObject AssignedPlayerEntry { get; private set; }
-
         internal SingleTag GameRoleTag { get; private set; }
 
         internal SingleTag AmongUSVoteRevealTag { get; private set; }
