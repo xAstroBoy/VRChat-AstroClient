@@ -137,7 +137,6 @@
     <Compile Include="Extensions\Click_ext.cs" />
     <Compile Include="Extensions\Components_exts\RocketExtensions.cs" />
     <Compile Include="Extensions\Components_exts\BouncerExtensions.cs" />
-    <Compile Include="Extensions\Component_utils_ext.cs" />
     <Compile Include="Extensions\ComponentParser_ext.cs" />
     <Compile Include="Extensions\CustomList_ext.cs" />
     <Compile Include="Extensions\Custom_Components_ext.cs" />

@@ -759,6 +759,7 @@
     <Compile Include="Extensions\CodingExtensions.cs" />
     <Compile Include="Utility\AvatarUtils.cs" />
     <Compile Include="Utility\BonesUtils.cs" />
+    <Compile Include="Utility\ComponentUtils.cs" />
     <Compile Include="Utility\GameObjectUtils.cs" />
     <Compile Include="Utility\MiscUtils.cs" />
     <Compile Include="Blaze%27s Utils\ModerationHelper.cs" />

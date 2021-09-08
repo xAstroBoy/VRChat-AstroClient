@@ -7,6 +7,7 @@
     using VRC.Udon.Common.Interfaces;
     using AstroClient.Components;
     using UnityEngine;
+    using AstroLibrary.Utility;
 
     public class UdonScrollMenu
     {

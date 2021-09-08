@@ -2,7 +2,7 @@
 {
     using AstroClient.Components;
     using AstroClient.ItemTweakerV2.Submenus;
-    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
     using UnityEngine;
 
     public class Forces
