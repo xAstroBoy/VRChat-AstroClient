@@ -41,7 +41,7 @@
             }
             if (StartRoutineOfRefreshAction)
             {
-                MelonLoader.MelonCoroutines.Start(RoutineStart());
+                _ = MelonLoader.MelonCoroutines.Start(RoutineStart());
                 StartRoutineOfRefreshAction = false;
             }
         }
@@ -77,7 +77,7 @@
                             if (CurrentSelection.Contains(item))
                             {
                                 ModConsole.DebugWarning("A Null item was found and removed from CurrentSelection!");
-                                CurrentSelection.Remove(item);
+                                _ = CurrentSelection.Remove(item);
                                 MainScroll.Refresh();
                                 subscroll.Refresh();
                             }
@@ -300,7 +300,7 @@
             MainScroll = new QMHalfScroll(registersub);
             subscroll = new QMHalfScroll(gameobjtogglermenu);
 
-            new QMSingleButton(gameobjtogglermenu, -1, -1, "Root Transforms", new Action(() => { CurrentSelection = GetAllCurrentSceneObjects(); MainScroll.Refresh(); subscroll.Refresh(); }), "Return To Root Objects", null, null, true);
+            _ = new QMSingleButton(gameobjtogglermenu, -1, -1, "Root Transforms", new Action(() => { CurrentSelection = GetAllCurrentSceneObjects(); MainScroll.Refresh(); subscroll.Refresh(); }), "Return To Root Objects", null, null, true);
             GoToParentBtn = new QMSingleButton(gameobjtogglermenu, -1, 0f, "previous parent", new Action(() => { ReturnToParent(); }), "Go Back to previous parent", null, null, true);
             ToggleModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 0.5f, "Toggle Object", new Action(() => { IsToggleMode = true; }), "Toggle Object", new Action(() => { IsToggleMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
             DestroyModeSwitch = new QMSingleToggleButton(gameobjtogglermenu, -1, 1f, "Destroy Object", new Action(() => { IsDestroyMode = true; }), "Destroy Object", new Action(() => { IsDestroyMode = false; }), "Changes between Supported options", Color.green, Color.red, null, false, true);
@@ -357,7 +357,7 @@
                                item.gameObject.DestroyMeLocal();
                                if (CurrentSelection.Contains(item))
                                {
-                                   CurrentSelection.Remove(item);
+                                   _ = CurrentSelection.Remove(item);
                                }
                                MainScroll.Refresh();
                                subscroll.Refresh();
@@ -551,7 +551,7 @@
                 {
                     if (IsOnRootScene)
                     {
-                        SetCurrentParent(item);
+                        _ = SetCurrentParent(item);
                     }
                     else
                     {
@@ -571,7 +571,7 @@
                                             if (!SetCurrentParent(ChildToUseForParent.parent.parent.parent))
                                             {
                                                 ModConsole.DebugLog($"GetAllChildObjects Giving up... Using a null parent.");
-                                                SetCurrentParent(null);
+                                                _ = SetCurrentParent(null);
                                             }
                                         }
                                     }

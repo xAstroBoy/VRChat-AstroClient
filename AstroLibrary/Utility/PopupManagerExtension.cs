@@ -40,7 +40,7 @@ namespace AstroLibrary.Utility
 
         public static void QueHudMessage(this VRCUiManager instance, string Message)
         {
-            if (!WorldUtils.IsInWorld()) return;
+            if (!WorldUtils.IsInWorld) return;
             if (true)
             {
                 if (HudMessage1 == null)

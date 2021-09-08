@@ -8,6 +8,7 @@
     using static AstroClient.Forces;
     using Random = UnityEngine.Random;
 
+    [RegisterComponent]
     public class CrazyObject : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
@@ -33,7 +34,7 @@
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
             ReferencedDelegate = null;
-            AntiGcList.Remove(this);
+            _ = AntiGcList.Remove(this);
             AntiGcList = null;
         }
 

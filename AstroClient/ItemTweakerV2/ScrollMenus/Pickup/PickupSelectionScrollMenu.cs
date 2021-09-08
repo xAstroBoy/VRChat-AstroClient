@@ -14,10 +14,10 @@
         {
             var menu = new QMNestedButton(main, x, y, "Select Pickup", "Select World Pickup to edit", null, null, null, null, btnHalf);
             var PickupQMScroll = new QMScrollMenu(menu);
-            new QMSingleButton(menu, 0, -1, "Refresh", delegate
-            {
-                PickupQMScroll.Refresh();
-            }, "", null, null, true);
+            _ = new QMSingleButton(menu, 0, -1, "Refresh", delegate
+              {
+                  PickupQMScroll.Refresh();
+              }, "", null, null, true);
 
             Pickup_IsHeldStatus = new QMSingleButton(menu, -1, -1f, "Held : No", null, "See if Pickup is held or not.", null, null, true);
 
@@ -39,7 +39,7 @@
             }, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget));
             TeleportToTarget.SetResizeTextForBestFit(true);
 
-            new QMSingleButton(menu, 0, 1.5f, "Spawn Clone", new Action(() => { Cloner.ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }), "Instantiates a copy of The selected object.", null, null, true);
+            _ = new QMSingleButton(menu, 0, 1.5f, "Spawn Clone", new Action(() => { Cloner.ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }), "Instantiates a copy of The selected object.", null, null, true);
 
             PickupQMScroll.SetAction(delegate
             {

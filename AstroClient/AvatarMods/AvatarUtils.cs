@@ -325,7 +325,7 @@
                 var item = player.transform.root.gameObject.GetComponent<MaskRemover>();
                 if (item == null)
                 {
-                    player.transform.root.gameObject.AddComponent<MaskRemover>();
+                    _ = player.transform.root.gameObject.AddComponent<MaskRemover>();
                 }
             }
         }

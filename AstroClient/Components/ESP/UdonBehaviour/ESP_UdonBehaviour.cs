@@ -7,6 +7,7 @@
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
+    [RegisterComponent]
     public class ESP_UdonBehaviour : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;

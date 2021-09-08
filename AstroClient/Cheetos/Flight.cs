@@ -108,7 +108,7 @@
 
         public override void OnUpdate()
         {
-            if (!WorldUtils.IsInWorld() || PopupUtils.IsTyping)
+            if (!WorldUtils.IsInWorld || PopupUtils.IsTyping)
             {
                 return;
             }

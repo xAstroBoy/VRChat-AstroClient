@@ -12,6 +12,7 @@
     using Delegate = System.Delegate;
     using Time = UnityEngine.Time;
 
+    [RegisterComponent]
     public class PlayerWatcher : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
@@ -37,7 +38,7 @@
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
             ReferencedDelegate = null;
-            AntiGcList.Remove(this);
+            _ = AntiGcList.Remove(this);
             AntiGcList = null;
         }
 

@@ -13,7 +13,7 @@
             {
                 if (TweakerESPEnabled)
                 {
-                    obj.GetOrAddComponent<ESP_ItemTweaker>();
+                    _ = obj.GetOrAddComponent<ESP_ItemTweaker>();
                 }
             }
         }
@@ -45,7 +45,7 @@
                 {
                     if (Tweaker_Selector.SelectedObject != null)
                     {
-                        Tweaker_Selector.SelectedObject.GetOrAddComponent<ESP_ItemTweaker>();
+                        _ = Tweaker_Selector.SelectedObject.GetOrAddComponent<ESP_ItemTweaker>();
                     }
                 }
                 else

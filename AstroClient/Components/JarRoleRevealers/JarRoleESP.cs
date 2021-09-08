@@ -11,6 +11,7 @@
     using VRC;
     using static AstroClient.JarRoleController;
 
+    [RegisterComponent]
     public class JarRoleESP : GameEventsBehaviour
     {
         public JarRoleESP(IntPtr ptr) : base(ptr)
@@ -46,13 +47,13 @@
             }
             if (ViewRoles)
             {
-                SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
+                _ = SetTag(GameRoleTag, NoRoles, DefaultTextColor, NoRolesColor);
                 ResetESPColor();
                 GameRoleTag.ShowTag = false;
             }
             else
             {
-                SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
+                _ = SetTag(GameRoleTag, HiddenRole, DefaultTextColor, HiddenRolesColor);
                 ResetESPColor();
                 GameRoleTag.ShowTag = false;
             }
@@ -76,7 +77,7 @@
         private static int RemoveSyncVotedForText(string key)
         {
             var removedtext = key.ToLower().Replace("syncvotedfor", string.Empty).Replace(" ", string.Empty);
-            int.TryParse(removedtext, out var value);
+            _ = int.TryParse(removedtext, out var value);
             return value;
         }
 
@@ -149,7 +150,7 @@
                                 else if (action.Equals("SyncAbstainedVoting"))
                                 {
                                     AmongUSHasVoted = true;
-                                    SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
+                                    _ = SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
                                     if (!IsRPCActive)
                                     {
                                         IsRPCActive = true;
@@ -163,7 +164,7 @@
                             AmongUSHasVoted = false;
                             if (AmongUSVoteRevealTag != null)
                             {
-                                SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
+                                _ = SetTag(AmongUSVoteRevealTag, $"Has not voted Yet", Color.white, ColorUtils.HexToColor("#034989"));
                             }
                             if (action.Equals("SyncAbort") || action.Equals("SyncVictoryB") || action.Equals("SyncVictoryM") || action.Equals("SyncStart"))
                             {

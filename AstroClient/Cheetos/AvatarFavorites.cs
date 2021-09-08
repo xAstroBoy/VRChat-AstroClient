@@ -36,24 +36,24 @@
             inputModule = GameObject.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
 
             // Avatar Favorite
-            new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Favorite", 921f, 290f, delegate ()
-            {
-                AddToFavorites(selectedID);
-            }, 1.45f, 1f);
+            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Favorite", 921f, 290f, delegate ()
+              {
+                  AddToFavorites(selectedID);
+              }, 1.45f, 1f);
 
             // Avatar Unfavorite
-            new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Unfavorite", 921f, 230f, delegate ()
-            {
-                DeleteFromFavorites(selectedID);
-            }, 1.45f, 1f);
+            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Unfavorite", 921f, 230f, delegate ()
+              {
+                  DeleteFromFavorites(selectedID);
+              }, 1.45f, 1f);
 
             // Avatar Unfavorite
-            new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Refresh", 921f, 170f, delegate ()
-            {
+            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Refresh", 921f, 170f, delegate ()
+              {
 
-                AvatarSearch.DumpDone(); // Refresh Avatar Pedestal Dump
+                  AvatarSearch.DumpDone(); // Refresh Avatar Pedestal Dump
                 RefreshList();
-            }, 1.45f, 1f);
+              }, 1.45f, 1f);
 
             publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
 

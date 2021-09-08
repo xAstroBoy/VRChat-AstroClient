@@ -15,7 +15,7 @@
             Color _color = color == null ? Color.black : (Color)color;
 
             GetGameObject.name = "CMLabel";
-            GetGameObject.AddComponent<Text>();
+            _ = GetGameObject.AddComponent<Text>();
             GetGameObject.GetComponent<Text>().text = text;
             GetGameObject.GetComponent<Text>().font = Font.GetDefault();
             GetGameObject.GetComponent<Text>().resizeTextForBestFit = true;

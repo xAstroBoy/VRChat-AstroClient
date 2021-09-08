@@ -235,12 +235,12 @@
 
         private static void DoorLockFreeze()
         {
-            MelonCoroutines.Start(DoorLockFreezeLoop());
+            _ = MelonCoroutines.Start(DoorLockFreezeLoop());
         }
 
         private static void DoorUnlockFreeze()
         {
-            MelonCoroutines.Start(DoorUnlockFreezeLoop());
+            _ = MelonCoroutines.Start(DoorUnlockFreezeLoop());
         }
 
         private static IEnumerator DoorLockFreezeLoop()
@@ -255,7 +255,7 @@
                 }
                 else
                 {
-                    if (!WorldUtils.IsInWorld())
+                    if (!WorldUtils.IsInWorld)
                     {
                         IsFreezeLockEnabed = false;
                         yield break;
@@ -293,7 +293,7 @@
                 }
                 else
                 {
-                    if (!WorldUtils.IsInWorld())
+                    if (!WorldUtils.IsInWorld)
                     {
                         IsFreezeUnlockEnabed = false;
                         yield break;
@@ -321,7 +321,7 @@
 
         private static void SpamDoorbells()
         {
-            MelonCoroutines.Start(DoDoorbellSpam());
+            _ = MelonCoroutines.Start(DoDoorbellSpam());
         }
 
         private static IEnumerator DoDoorbellSpam()
@@ -336,7 +336,7 @@
                 }
                 else
                 {
-                    if (!WorldUtils.IsInWorld())
+                    if (!WorldUtils.IsInWorld)
                     {
                         IsDoorbellSpamEnabled = false;
                         yield break;
@@ -363,7 +363,7 @@
 
         private static void BlueChairSpam()
         {
-            MelonCoroutines.Start(DoBlueChairSpam());
+            _ = MelonCoroutines.Start(DoBlueChairSpam());
         }
 
         private static IEnumerator DoBlueChairSpam()
@@ -376,7 +376,7 @@
             }
             else
             {
-                if (!WorldUtils.IsInWorld())
+                if (!WorldUtils.IsInWorld)
                 {
                     IsBlueChairEnabled = false;
                     yield break;
@@ -433,12 +433,12 @@
                 try
                 {
                     ModConsole.DebugLog("Searching for Private Rooms Exteriors...");
-                    CreateButtonGroup(1, new Vector3(-111.00629f, 15.75226f, -0.3361053f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
-                    CreateButtonGroup(2, new Vector3(-109.28977f, 15.81609f, -4.297329f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
-                    CreateButtonGroup(3, new Vector3(-103.00354f, 15.85877f, -0.3256264f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
-                    CreateButtonGroup(4, new Vector3(-101.28438f, 15.79742f, -4.307182f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
-                    CreateButtonGroup(5, new Vector3(-95.01436f, 15.78151f, -0.3279915f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
-                    CreateButtonGroup(6, new Vector3(-93.28891f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+                    _ = CreateButtonGroup(1, new Vector3(-111.00629f, 15.75226f, -0.3361053f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+                    _ = CreateButtonGroup(2, new Vector3(-109.28977f, 15.81609f, -4.297329f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+                    _ = CreateButtonGroup(3, new Vector3(-103.00354f, 15.85877f, -0.3256264f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+                    _ = CreateButtonGroup(4, new Vector3(-101.28438f, 15.79742f, -4.307182f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
+                    _ = CreateButtonGroup(5, new Vector3(-95.01436f, 15.78151f, -0.3279915f), new Quaternion(-0.4959923f, -0.4991081f, -0.5004623f, -0.5044011f), true); // NEEDS TO BE FLIPPED
+                    _ = CreateButtonGroup(6, new Vector3(-93.28891f, 15.78925f, -4.3116f), new Quaternion(-0.501132f, -0.5050993f, -0.4984204f, -0.4952965f));
 
                     // Penthouse/Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/VIP Out Walls
 
@@ -495,7 +495,7 @@
                     RemovePrivacyBlocksOnRooms(6);
                     PatreonPatch();
 
-                    MelonCoroutines.Start(UpdateButtonsLoop());
+                    _ = MelonCoroutines.Start(UpdateButtonsLoop());
                 }
                 catch (Exception e)
                 {
@@ -520,7 +520,7 @@
                 }
                 else
                 {
-                    if (!WorldUtils.IsInWorld()) yield break;
+                    if (!WorldUtils.IsInWorld) yield break;
                     ButtonUpdateTime = 0f;
                 }
 

@@ -45,7 +45,7 @@
             _solidMaterial = new Material(shader2);
             _triggerMaterial.color = new Color(1f, 0f, 0f, 0.25f);
             _solidMaterial.color = new Color(0f, 1f, 0f, 0.25f);
-            Resources.UnloadUnusedAssets();
+            _ = Resources.UnloadUnusedAssets();
         }
 
         public static void ToggleDisplays()
@@ -254,7 +254,7 @@
                 UnityEngine.Object.Destroy(gameObject.GetComponent<Collider>());
                 _transform = gameObject.transform;
                 _renderer = gameObject.GetComponent<Renderer>();
-                MyRenderers.Add((int)_renderer.GetCachedPtr());
+                _ = MyRenderers.Add((int)_renderer.GetCachedPtr());
             }
 
             private static float Max(float a, float b, float c)
@@ -299,7 +299,7 @@
                 UnityEngine.Object.Destroy(gameObject.GetComponent<Collider>());
                 _transform = gameObject.transform;
                 _renderer = gameObject.GetComponent<Renderer>();
-                MyRenderers.Add((int)_renderer.GetCachedPtr());
+                _ = MyRenderers.Add((int)_renderer.GetCachedPtr());
             }
 
             public void Update(BoxCollider collider)
@@ -347,9 +347,9 @@
                 _topRenderer = _topSphere.GetComponent<Renderer>();
                 _bottomRenderer = _bottomSphere.GetComponent<Renderer>();
                 _middleRenderer = _middleCylinder.GetComponent<Renderer>();
-                MyRenderers.Add((int)_topRenderer.GetCachedPtr());
-                MyRenderers.Add((int)_bottomRenderer.GetCachedPtr());
-                MyRenderers.Add((int)_middleRenderer.GetCachedPtr());
+                _ = MyRenderers.Add((int)_topRenderer.GetCachedPtr());
+                _ = MyRenderers.Add((int)_bottomRenderer.GetCachedPtr());
+                _ = MyRenderers.Add((int)_middleRenderer.GetCachedPtr());
             }
 
             private static float Max(float a, float b)

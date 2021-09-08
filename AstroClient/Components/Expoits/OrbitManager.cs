@@ -42,7 +42,7 @@
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
             ReferencedDelegate = null;
-            AntiGcList.Remove(this);
+            _ = AntiGcList.Remove(this);
             AntiGcList = null;
         }
 
@@ -145,7 +145,7 @@
 
         public void FixedUpdate()
         {
-            if ((IsEnabled && target == null) || (IsEnabled && !WorldUtils.IsInWorld()))
+            if ((IsEnabled && target == null) || (IsEnabled && !WorldUtils.IsInWorld))
             {
                 DisableOrbit();
                 return;
@@ -160,7 +160,7 @@
 
                 isLooping = true;
 
-                MelonCoroutines.Start(LoopPickups());
+                _ = MelonCoroutines.Start(LoopPickups());
             }
         }
 

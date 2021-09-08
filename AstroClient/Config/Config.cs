@@ -26,6 +26,9 @@
 
         public bool RemoveGalleryButton = false;
 
+        // Nameplates
+        public bool NamePlates = false;
+
         // Player List UI
         public bool ShowPlayersMenu = true;
 

@@ -151,7 +151,7 @@
             var replacedstring = node.name.Replace("Player Node ", string.Empty).Replace("(", string.Empty).Replace(")", string.Empty).Replace(" ", string.Empty);
             if (!string.IsNullOrEmpty(replacedstring) && !string.IsNullOrWhiteSpace(replacedstring))
             {
-                int.TryParse(replacedstring, out int value);
+                _ = int.TryParse(replacedstring, out int value);
                 return value;
             }
             return null;
@@ -162,7 +162,7 @@
             var replacedstring = Entry.name.Replace("Player Entry ", string.Empty).Replace("(", string.Empty).Replace(")", string.Empty).Replace(" ", string.Empty); ;
             if (!string.IsNullOrEmpty(replacedstring) && !string.IsNullOrWhiteSpace(replacedstring))
             {
-                int.TryParse(replacedstring, out int value);
+                _ = int.TryParse(replacedstring, out int value);
                 return value;
             }
             return null;

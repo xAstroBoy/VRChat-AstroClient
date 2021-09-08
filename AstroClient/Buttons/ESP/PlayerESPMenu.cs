@@ -18,28 +18,28 @@
 
             // TOOD : ADD A STRING Parser and allow people  to set HEX colors as well.
             var PublicESP = new QMNestedButton(main, 2, 0, "Global ESP Colors", "Set Player ESP Default Color", null, null, null, null, true);
-            new QMSingleButton(PublicESP, 1, 0, "Blue", () => { ConfigManager.PublicESPColor = Color.blue; }, null, null, null, true);
-            new QMSingleButton(PublicESP, 1, 0.5f, "Red", () => { ConfigManager.PublicESPColor = Color.red; }, null, null, null, true);
-            new QMSingleButton(PublicESP, 1, 1, "Green", () => { ConfigManager.PublicESPColor = Color.green; }, null, null, null, true);
-            new QMSingleButton(PublicESP, 1, 1.5f, "Yellow", () => { ConfigManager.PublicESPColor = Color.yellow; }, null, null, null, true);
-            new QMSingleButton(PublicESP, 1, 2, "Cyan", () => { ConfigManager.PublicESPColor = Color.cyan; }, null, null, null, true);
-            new QMSingleButton(PublicESP, 1, 2.5f, "White", () => { ConfigManager.PublicESPColor = Color.white; }, null, null, null, true);
+            _ = new QMSingleButton(PublicESP, 1, 0, "Blue", () => { ConfigManager.PublicESPColor = Color.blue; }, null, null, null, true);
+            _ = new QMSingleButton(PublicESP, 1, 0.5f, "Red", () => { ConfigManager.PublicESPColor = Color.red; }, null, null, null, true);
+            _ = new QMSingleButton(PublicESP, 1, 1, "Green", () => { ConfigManager.PublicESPColor = Color.green; }, null, null, null, true);
+            _ = new QMSingleButton(PublicESP, 1, 1.5f, "Yellow", () => { ConfigManager.PublicESPColor = Color.yellow; }, null, null, null, true);
+            _ = new QMSingleButton(PublicESP, 1, 2, "Cyan", () => { ConfigManager.PublicESPColor = Color.cyan; }, null, null, null, true);
+            _ = new QMSingleButton(PublicESP, 1, 2.5f, "White", () => { ConfigManager.PublicESPColor = Color.white; }, null, null, null, true);
 
             var FriendESP = new QMNestedButton(main, 2, 0.5f, "Friend ESP Colors", "Set Player ESP Friend Color", null, null, null, null, true);
-            new QMSingleButton(FriendESP, 1, 0, "Blue", () => { ConfigManager.ESPFriendColor = Color.blue; }, null, null, null, true);
-            new QMSingleButton(FriendESP, 1, 0.5f, "Red", () => { ConfigManager.ESPFriendColor = Color.red; }, null, null, null, true);
-            new QMSingleButton(FriendESP, 1, 1, "Green", () => { ConfigManager.ESPFriendColor = Color.green; }, null, null, null, true);
-            new QMSingleButton(FriendESP, 1, 1.5f, "Yellow", () => { ConfigManager.ESPFriendColor = Color.yellow; }, null, null, null, true);
-            new QMSingleButton(FriendESP, 1, 2, "Cyan", () => { ConfigManager.ESPFriendColor = Color.cyan; }, null, null, null, true);
-            new QMSingleButton(FriendESP, 1, 2.5f, "White", () => { ConfigManager.ESPFriendColor = Color.white; }, null, null, null, true);
+            _ = new QMSingleButton(FriendESP, 1, 0, "Blue", () => { ConfigManager.ESPFriendColor = Color.blue; }, null, null, null, true);
+            _ = new QMSingleButton(FriendESP, 1, 0.5f, "Red", () => { ConfigManager.ESPFriendColor = Color.red; }, null, null, null, true);
+            _ = new QMSingleButton(FriendESP, 1, 1, "Green", () => { ConfigManager.ESPFriendColor = Color.green; }, null, null, null, true);
+            _ = new QMSingleButton(FriendESP, 1, 1.5f, "Yellow", () => { ConfigManager.ESPFriendColor = Color.yellow; }, null, null, null, true);
+            _ = new QMSingleButton(FriendESP, 1, 2, "Cyan", () => { ConfigManager.ESPFriendColor = Color.cyan; }, null, null, null, true);
+            _ = new QMSingleButton(FriendESP, 1, 2.5f, "White", () => { ConfigManager.ESPFriendColor = Color.white; }, null, null, null, true);
 
             var BlockedESP = new QMNestedButton(main, 2, 1f, "Blocked ESP Colors", "Set Player ESP Blocked Color", null, null, null, null, true);
-            new QMSingleButton(BlockedESP, 1, 0, "Blue", () => { ConfigManager.ESPBlockedColor = Color.blue; }, null, null, null, true);
-            new QMSingleButton(BlockedESP, 1, 0.5f, "Red", () => { ConfigManager.ESPBlockedColor = Color.red; }, null, null, null, true);
-            new QMSingleButton(BlockedESP, 1, 1, "Green", () => { ConfigManager.ESPBlockedColor = Color.green; }, null, null, null, true);
-            new QMSingleButton(BlockedESP, 1, 1.5f, "Yellow", () => { ConfigManager.ESPBlockedColor = Color.yellow; }, null, null, null, true);
-            new QMSingleButton(BlockedESP, 1, 2, "Cyan", () => { ConfigManager.ESPBlockedColor = Color.cyan; }, null, null, null, true);
-            new QMSingleButton(BlockedESP, 1, 2.5f, "White", () => { ConfigManager.ESPBlockedColor = Color.white; }, null, null, null, true);
+            _ = new QMSingleButton(BlockedESP, 1, 0, "Blue", () => { ConfigManager.ESPBlockedColor = Color.blue; }, null, null, null, true);
+            _ = new QMSingleButton(BlockedESP, 1, 0.5f, "Red", () => { ConfigManager.ESPBlockedColor = Color.red; }, null, null, null, true);
+            _ = new QMSingleButton(BlockedESP, 1, 1, "Green", () => { ConfigManager.ESPBlockedColor = Color.green; }, null, null, null, true);
+            _ = new QMSingleButton(BlockedESP, 1, 1.5f, "Yellow", () => { ConfigManager.ESPBlockedColor = Color.yellow; }, null, null, null, true);
+            _ = new QMSingleButton(BlockedESP, 1, 2, "Cyan", () => { ConfigManager.ESPBlockedColor = Color.cyan; }, null, null, null, true);
+            _ = new QMSingleButton(BlockedESP, 1, 2.5f, "White", () => { ConfigManager.ESPBlockedColor = Color.white; }, null, null, null, true);
         }
 
         private static QMSingleToggleButton PlayerESPToggleBtn;
@@ -80,7 +80,7 @@
                 {
                     if (!player.gameObject.GetComponent<PlayerESP>())
                     {
-                        player.gameObject.AddComponent<PlayerESP>();
+                        _ = player.gameObject.AddComponent<PlayerESP>();
                     }
                 }
             }
@@ -94,7 +94,7 @@
                 {
                     if (!item.gameObject.GetComponent<PlayerESP>())
                     {
-                        item.gameObject.AddComponent<PlayerESP>();
+                        _ = item.gameObject.AddComponent<PlayerESP>();
                     }
                 }
             }

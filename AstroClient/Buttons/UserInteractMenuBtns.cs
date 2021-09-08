@@ -76,12 +76,12 @@
             //	});
             //}, $"{SitOnPlayer.Height}");
 
-            new QMSingleButton(menu, 4, 2, "Remove\n Everything", () =>
-            {
-                ObjectMiscOptions.RemoveAllAttackPlayer();
-                ObjectMiscOptions.RemoveAllOrbitPlayer();
-                ObjectMiscOptions.RemoveAllWatchersPlayer();
-            }
+            _ = new QMSingleButton(menu, 4, 2, "Remove\n Everything", () =>
+              {
+                  ObjectMiscOptions.RemoveAllAttackPlayer();
+                  ObjectMiscOptions.RemoveAllOrbitPlayer();
+                  ObjectMiscOptions.RemoveAllWatchersPlayer();
+              }
             , "Removes everything bound to this player.", null, null);
         }
 

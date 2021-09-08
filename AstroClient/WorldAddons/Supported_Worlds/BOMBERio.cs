@@ -27,12 +27,12 @@
             Always_ShootBomb_4_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 2, "Shoot First Player Bomb", () => { Override_ShootBomb_4_Toggle = true; }, "Shoot First Player Bomb", () => { Override_ShootBomb_4_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
             Always_ShootBomb_5_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 2.5f, "Shoot Rocket", () => { Override_ShootBomb_5_Toggle = true; }, "Shoot Rocket", () => { Override_ShootBomb_5_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
 
-            new QMSingleButton(BOMBERioCheatsPage, 2, 0f, "Harvest 10 Crystals", () => { HarvestQuads(10); }, "Harvest some Quads!", null, null, true);
-            new QMSingleButton(BOMBERioCheatsPage, 2, 0.5f, "Harvest 20 Crystals", () => { HarvestQuads(20); }, "Harvest some Quads!", null, null, true);
-            new QMSingleButton(BOMBERioCheatsPage, 2, 1, "Harvest 50 Crystals", () => { HarvestQuads(50); }, "Harvest some Quads!", null, null, true);
-            new QMSingleButton(BOMBERioCheatsPage, 2, 1.5f, "Harvest 100 Crystals", () => { HarvestQuads(100); }, "Harvest some Quads!", null, null, true);
-            new QMSingleButton(BOMBERioCheatsPage, 2, 2f, "Harvest 500 Crystals", () => { HarvestQuads(500); }, "Harvest some Quads!", null, null, true);
-            new QMSingleButton(BOMBERioCheatsPage, 2, 2.5f, "Harvest 1000 Crystals", () => { HarvestQuads(1000); }, "Harvest some Quads!", null, null, true);
+            _ = new QMSingleButton(BOMBERioCheatsPage, 2, 0f, "Harvest 10 Crystals", () => { HarvestQuads(10); }, "Harvest some Quads!", null, null, true);
+            _ = new QMSingleButton(BOMBERioCheatsPage, 2, 0.5f, "Harvest 20 Crystals", () => { HarvestQuads(20); }, "Harvest some Quads!", null, null, true);
+            _ = new QMSingleButton(BOMBERioCheatsPage, 2, 1, "Harvest 50 Crystals", () => { HarvestQuads(50); }, "Harvest some Quads!", null, null, true);
+            _ = new QMSingleButton(BOMBERioCheatsPage, 2, 1.5f, "Harvest 100 Crystals", () => { HarvestQuads(100); }, "Harvest some Quads!", null, null, true);
+            _ = new QMSingleButton(BOMBERioCheatsPage, 2, 2f, "Harvest 500 Crystals", () => { HarvestQuads(500); }, "Harvest some Quads!", null, null, true);
+            _ = new QMSingleButton(BOMBERioCheatsPage, 2, 2.5f, "Harvest 1000 Crystals", () => { HarvestQuads(1000); }, "Harvest some Quads!", null, null, true);
 
             Bypass_Outside_Circle_speed_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 4, 0, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = true; }, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
         }
@@ -78,7 +78,7 @@
         {
             if (!isHarvesting)
             {
-                MelonLoader.MelonCoroutines.Start(HarvestQuadsRoutine(amount));
+                _ = MelonLoader.MelonCoroutines.Start(HarvestQuadsRoutine(amount));
                 isHarvesting = true;
             }
         }

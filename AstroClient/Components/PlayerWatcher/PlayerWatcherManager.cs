@@ -19,6 +19,7 @@
 
     using static AstroClient.Variables.InstanceBuilder;
 
+    [RegisterComponent]
     public class PlayerWatcherManager : GameEventsBehaviour
     {
         #region Internal
@@ -46,7 +47,7 @@
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
             ReferencedDelegate = null;
-            AntiGcList.Remove(this);
+            _ = AntiGcList.Remove(this);
             AntiGcList = null;
         }
 
@@ -166,7 +167,7 @@
         {
             if (OriginalPlayerWatchers.Contains(obj))
             {
-                OriginalPlayerWatchers.Remove(obj);
+                _ = OriginalPlayerWatchers.Remove(obj);
             }
         }
 
@@ -209,7 +210,7 @@
 
         public static void Deregister(PlayerWatcher PlayerWatcherBehaviour)
         {
-            PlayerWatcherBehaviors.Remove(PlayerWatcherBehaviour);
+            _ = PlayerWatcherBehaviors.Remove(PlayerWatcherBehaviour);
         }
 
         public static void ClearList()

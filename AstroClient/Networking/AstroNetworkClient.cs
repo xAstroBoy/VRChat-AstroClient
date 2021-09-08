@@ -222,15 +222,15 @@
 
         private static void OnDisconnect(object sender, EventArgs e)
         {
-            Task.Run(() =>
-            {
-                for (; ; )
-                {
-                    ModConsole.Error("Lost connection to server, retrying in 5 seconds...");
-                    Thread.Sleep(5000);
-                    try { Connect(); break; } catch { }
-                }
-            });
+            _ = Task.Run(() =>
+              {
+                  for (; ; )
+                  {
+                      ModConsole.Error("Lost connection to server, retrying in 5 seconds...");
+                      Thread.Sleep(5000);
+                      try { Connect(); break; } catch { }
+                  }
+              });
         }
 
         private static void OnPacketReceived(object sender, ReceivedPacketEventArgs e)

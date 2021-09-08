@@ -21,11 +21,11 @@
             whytfisthishere.GetMainButton().SetActive(false);
             var MainScroll = new QMScrollMenu(whytfisthishere);
             var subscroll = new QMScrollMenu(Menu);
-            new QMSingleButton(Menu, 0, -1.5f, "Refresh", delegate
-            {
-                MainScroll.Refresh();
-                subscroll.Refresh();
-            }, "", null, null, true);
+            _ = new QMSingleButton(Menu, 0, -1.5f, "Refresh", delegate
+              {
+                  MainScroll.Refresh();
+                  subscroll.Refresh();
+              }, "", null, null, true);
             subscroll.SetAction(delegate
             {
                 foreach (var action in Tweaker_Object.GetGameObjectToEdit().Get_UdonBehaviours())

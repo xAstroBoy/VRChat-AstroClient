@@ -103,7 +103,7 @@
             }
             else
             {
-                File.Create(TermsToEnableOnPath);
+                _ = File.Create(TermsToEnableOnPath);
             }
         }
 
@@ -129,7 +129,7 @@
             }
             else
             {
-                File.Create(TermsToEnableOffPath);
+                _ = File.Create(TermsToEnableOffPath);
             }
         }
 
@@ -155,7 +155,7 @@
             }
             else
             {
-                File.Create(AvatarsToSkipPath);
+                _ = File.Create(AvatarsToSkipPath);
             }
         }
     }

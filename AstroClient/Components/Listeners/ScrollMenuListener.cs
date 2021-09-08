@@ -5,6 +5,7 @@ namespace AstroClient.Components
     using UnhollowerBaseLib.Attributes;
     using AstroLibrary.Extensions;
 
+    [RegisterComponent]
     public class ScrollMenuListener : GameEventsBehaviour
     {
         internal QMSingleButton assignedbtn;

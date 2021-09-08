@@ -11,7 +11,7 @@
     {
         public static void AddAstroInteractable(this GameObject gameObject, Action action)
         {
-            gameObject.AddComponent<Astro_Interactable>();
+            _ = gameObject.AddComponent<Astro_Interactable>();
             gameObject.GetComponent<Astro_Interactable>().Action = action;
         }
     }

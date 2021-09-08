@@ -8,6 +8,7 @@ namespace AstroClient
     using MelonLoader;
     using UnityEngine;
 
+    [RegisterComponent]
     internal class FlashlightBehaviour : MonoBehaviour
     {
 
@@ -67,8 +68,8 @@ namespace AstroClient
                 }
             }
         }
-            
-        
+
+
 
 
 

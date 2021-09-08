@@ -3,6 +3,7 @@ namespace AstroClient.Components
     using System;
     using UnhollowerBaseLib.Attributes;
 
+    [RegisterComponent]
     public class GameObjectListener : GameEventsBehaviour
     {
         [method: HideFromIl2Cpp]
