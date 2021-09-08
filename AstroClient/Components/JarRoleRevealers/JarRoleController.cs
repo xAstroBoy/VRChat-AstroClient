@@ -107,14 +107,14 @@
         {
             public Transform Entry { get; set; }
             public Transform Node { get; set; }
-            public JarNodeReader Node_Reader { get; set; }
+            public JarNodeReader NodeReader { get; set; }
             public int Nodevalue { get; set; }
 
-            public LinkedNodes(Transform EntryObj, Transform Nodeobj, JarNodeReader Node_Reader, int linknumber)
+            public LinkedNodes(Transform EntryObj, Transform Nodeobj, JarNodeReader JarNodeReader, int linknumber)
             {
                 Entry = EntryObj;
                 Node = Nodeobj;
-                this.Node_Reader = Node_Reader;
+                NodeReader = JarNodeReader;
                 Nodevalue = linknumber;
             }
         }
@@ -241,21 +241,30 @@
                                                 if (NodeNumber == EntryNumber)
                                                 {
                                                     //Debug($"Linked Player Entry : {Entry.name}, With node : {node.name}, with link : {NodeNumber}");
-                                                    var addme = new LinkedNodes(Entry, node, node.GetOrAddComponent<JarNodeReader>(), NodeNumber.Value);
-                                                    if (GetLinkedNode(addme.Nodevalue) != null)
+                                                    if (node != null)
                                                     {
-                                                        continue;
-                                                    }
-                                                    else
-                                                    {
-                                                        if (!JarRoleLinks.Contains(addme))
+                                                        var NodeReader = node.gameObject.AddComponent<JarNodeReader>();
+                                                        if (NodeReader != null)
                                                         {
-                                                            JarRoleLinks.Add(addme);
-                                                            //Debug($"Registered Player Entry : {addme.Entry.name}, With node : {addme.Node.name} with Link nr. {addme.nodevalue}");
-                                                            break;
+                                                            var addme = new LinkedNodes(Entry, node, NodeReader, NodeNumber.Value);
+
+                                                            if (GetLinkedNode(addme.Nodevalue) != null)
+                                                            {
+                                                                continue;
+                                                            }
+                                                            else
+                                                            {
+                                                                if (!JarRoleLinks.Contains(addme))
+                                                                {
+                                                                    JarRoleLinks.Add(addme);
+                                                                    //Debug($"Registered Player Entry : {addme.Entry.name}, With node : {addme.Node.name} with Link nr. {addme.nodevalue}");
+                                                                    break;
+                                                                }
+                                                            }
                                                         }
                                                     }
                                                 }
+
                                             }
                                         }
                                     }

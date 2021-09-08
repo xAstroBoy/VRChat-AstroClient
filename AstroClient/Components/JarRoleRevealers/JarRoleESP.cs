@@ -357,19 +357,18 @@
             {
                 if (item != null)
                 {
-                    if (item.Node_Reader != null)
+                    if (item.NodeReader != null && item.NodeReader.Current_Assigned_VRCPlayer != null)
                     {
                         var Internal_User_VRCPlayerAPI = Internal_user.GetPlayer().GetVRCPlayerApi();
-                        var InternalNodeAssignedPlayer = item.Node_Reader.Current_Assigned_VRCPlayer;
+                        var InternalNodeAssignedPlayer = item.NodeReader.Current_Assigned_VRCPlayer;
 
-                        if (InternalNodeAssignedPlayer != null && Internal_User_VRCPlayerAPI != null) 
+
+                        if (Internal_User_VRCPlayerAPI.displayName == InternalNodeAssignedPlayer.displayName)
                         {
-                            if(Internal_User_VRCPlayerAPI == InternalNodeAssignedPlayer)
-                            {
-                                Internal_SavedEntry = item;
-                                break;
-                            }
+                            Internal_SavedEntry = item;
+                            break;
                         }
+
                     }
                 }
             }
@@ -555,7 +554,7 @@
             }
         }
 
-        private void Updater()
+        private void Update()
         {
             try
             {
@@ -788,7 +787,7 @@
                 SavedEntry = value;
                 Internal_AssignedEntry = value.Entry.gameObject;
                 Internal_AssignedNode = value.Node.gameObject;
-                Internal_JarNodeReader = value.Node_Reader;
+                Internal_JarNodeReader = value.NodeReader;
             }
         }
 
