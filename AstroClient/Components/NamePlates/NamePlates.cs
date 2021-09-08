@@ -39,6 +39,7 @@
 
         public void Start()
         {
+            if (!ConfigManager.UI.NamePlates) return;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
@@ -78,7 +79,7 @@
 
         private void Refresh()
         {
-            if (nameplate == null) return;
+            if (nameplate == null || !ConfigManager.UI.NamePlates) return;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
