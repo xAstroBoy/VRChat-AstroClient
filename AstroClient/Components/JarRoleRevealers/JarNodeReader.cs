@@ -11,6 +11,8 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
 
+
+    [RegisterComponent]
     public class JarNodeReader : GameEventsBehaviour
     {
 
