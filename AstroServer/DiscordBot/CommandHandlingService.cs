@@ -42,7 +42,7 @@
             int argPos = 0;
 
             //if (message.HasMentionPrefix(me, ref argPos) || message.HasCharPrefix(guild.GetPrefix(), ref argPos))
-            if (message.HasMentionPrefix(me, ref argPos))
+            if (message.HasMentionPrefix(me, ref argPos) || message.HasCharPrefix('~', ref argPos))
             {
                 SocketCommandContext context = new(discord, message);
                 await commands.ExecuteAsync(context, argPos, services);
