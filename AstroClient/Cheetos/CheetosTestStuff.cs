@@ -50,9 +50,10 @@
 
         public override void OnPlayerJoined(Player player)
         {
-            if (!ModDetector.FindMods.IsNotoriousPresent && ConfigManager.UI.NamePlates)
+            if (!ModDetector.FindMods.IsNotoriousPresent)
             {
-                player.gameObject.AddComponent<NamePlates>();
+                // TODO: MAKE IT A OPTION, I DONT WANT NAMEPLATES!
+                //player.gameObject.AddComponent<NamePlates>();
             }
         }
 
@@ -61,7 +62,7 @@
             Player player = PlayerUtils.GetPlayer();
             if (player.gameObject.GetComponent<SitOnPlayer>() == null)
             {
-                _ = player.gameObject.AddComponent<SitOnPlayer>();
+                player.gameObject.AddComponent<SitOnPlayer>();
             }
 
             if (Bools.IsDeveloper)
