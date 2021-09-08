@@ -163,7 +163,7 @@
             AmongUSUdonExploits.Init_GameController_Menu(AmongUsCheatsPage, 2, 0, true);
 
             AmongUSUdonExploits.Init_FilteredNodes_Menu(AmongUsCheatsPage, 2f, 0.5f, true);
-            AmongUSUdonExploits.InitUnfilteredNodesMenu(AmongUsCheatsPage, 2f, 1f, true);
+            AmongUSUdonExploits.Init_Unfiltered_Nodes_Menu(AmongUsCheatsPage, 2f, 1f, true);
 
             AmongUSUdonExploits.Init_SabotageAndRepair_Menu(AmongUsCheatsPage, 3f, 0f, true);
             AmongUSUdonExploits.Init_KillPlayers_Menu(AmongUsCheatsPage, 3f, 0.5f, true);
