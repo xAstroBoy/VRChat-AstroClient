@@ -254,7 +254,7 @@
         {
             if (player != null)
             {
-                var EmojiGen = player.field_Private_EmojiGenerator_0;
+                var EmojiGen = player.field_Private_EmotePlayer_0;
                 if (EmojiGen != null)
                 {
                     EmojiGen.Method_Public_Void_Int32_0(emoji);
@@ -268,7 +268,7 @@
 
         public static void SpawnOfflineEmoji(int emoji, bool MakeOthersSeeit)
         {
-            var EmojiGen = Player.prop_Player_0.GetVRCPlayer().field_Private_EmojiGenerator_0;
+            var EmojiGen = Player.prop_Player_0.GetVRCPlayer().field_Private_EmotePlayer_0;
             if (EmojiGen != null)
             {
                 EmojiGen.Method_Public_Void_Int32_0(emoji);
