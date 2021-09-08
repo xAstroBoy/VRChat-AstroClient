@@ -8,6 +8,7 @@ namespace AstroClient
     using MelonLoader;
     using UnityEngine;
 
+    [RegisterComponent]
     internal class EnderPearlBehaviour : MonoBehaviour
     {
 

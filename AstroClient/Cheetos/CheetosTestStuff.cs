@@ -33,7 +33,7 @@
 
         public override void OnMasterClientSwitched(Photon.Realtime.Player player)
         {
-            if (!WorldUtils.IsInWorld()) return;
+            if (!WorldUtils.IsInWorld) return;
 
             CheetosHelpers.SendHudNotification($"'{player.field_Public_Player_0.GetDisplayName()}' is now the room master.");
         }
@@ -50,10 +50,9 @@
 
         public override void OnPlayerJoined(Player player)
         {
-            if (!ModDetector.FindMods.IsNotoriousPresent)
+            if (!ModDetector.FindMods.IsNotoriousPresent && ConfigManager.UI.NamePlates)
             {
-                // TODO: MAKE IT A OPTION, I DONT WANT NAMEPLATES!
-                //player.gameObject.AddComponent<NamePlates>();
+                player.gameObject.AddComponent<NamePlates>();
             }
         }
 
@@ -62,7 +61,7 @@
             Player player = PlayerUtils.GetPlayer();
             if (player.gameObject.GetComponent<SitOnPlayer>() == null)
             {
-                player.gameObject.AddComponent<SitOnPlayer>();
+                _ = player.gameObject.AddComponent<SitOnPlayer>();
             }
 
             if (Bools.IsDeveloper)

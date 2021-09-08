@@ -124,7 +124,7 @@
             try
             {
                 byte[] received = new byte[4];
-                clientStream.Read(received, 0, received.Length);
+                _ = clientStream.Read(received, 0, received.Length);
                 return BitConverter.ToInt32(received, 0);
             }
             catch
@@ -139,7 +139,7 @@
             try
             {
                 byte[] received = new byte[4];
-                clientStream.Read(received, 0, received.Length);
+                _ = clientStream.Read(received, 0, received.Length);
                 return BitConverter.ToInt32(received, 0); ;
             }
             catch

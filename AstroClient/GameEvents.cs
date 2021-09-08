@@ -1,5 +1,7 @@
 ﻿namespace AstroClient
 {
+    #region Imports
+
     using AstroClient.Cheetos;
     using AstroClient.Startup.Hooks;
     using AstroClientCore.Events;
@@ -9,6 +11,8 @@
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;
+
+    #endregion
 
     // thanks TO Cheeto aka Craig on discord, he's been really helpful!
     public class GameEvents

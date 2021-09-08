@@ -47,7 +47,7 @@
                 var unpackedudon = udonnode.DisassembleUdonBehaviour();
                 if (unpackedudon != null)
                 {
-                    builder.AppendLine($"[Udon Unboxer] : Dumping {udonnode.name} Symbols and types..");
+                    _ = builder.AppendLine($"[Udon Unboxer] : Dumping {udonnode.name} Symbols and types..");
                     foreach (var symbol in unpackedudon.IUdonSymbolTable.GetSymbols())
                     {
                         if (symbol != null)
@@ -58,7 +58,7 @@
                             {
                                 var Il2CppType = UnboxVariable.GetIl2CppType();
                                 var unpackedsymbol = UnboxUdonHeap(UnboxVariable);
-                                builder.AppendLine($"[Udon Unboxer] : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}");
+                                _ = builder.AppendLine($"[Udon Unboxer] : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}");
 
                             }
                         }

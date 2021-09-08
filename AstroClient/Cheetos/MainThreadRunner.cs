@@ -42,7 +42,7 @@
         {
             try
             {
-                mutex.WaitOne();
+                _ = mutex.WaitOne();
                 if (queue.Count >= 1)
                 {
                     List<Action> toRemove = new List<Action>();
@@ -100,7 +100,7 @@
         {
             try
             {
-                mutex.WaitOne();
+                _ = mutex.WaitOne();
                 Instance.queue.Add(action);
             }
             finally

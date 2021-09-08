@@ -15,10 +15,10 @@
         {
             var menu = new QMNestedButton(main, x, y, "Select W.Objects", "Select World Objects to edit", null, null, null, null, btnHalf);
             var scroll = new QMScrollMenu(menu);
-            new QMSingleButton(menu, 0, -1, "Refresh", delegate
-            {
-                scroll.Refresh();
-            }, "", null, null, true);
+            _ = new QMSingleButton(menu, 0, -1, "Refresh", delegate
+              {
+                  scroll.Refresh();
+              }, "", null, null, true);
 
             TeleportToMe = new QMSingleButton(menu, 0, -0.5f, Tweaker_Selector.SelectedObject.Generate_TeleportToMe_ButtonText(), delegate
            {
@@ -32,7 +32,7 @@
             }, ButtonStringExtensions.Generate_TeleportToTarget_ButtonText(Tweaker_Selector.SelectedObject, TargetSelector.CurrentTarget));
             TeleportToTarget.SetResizeTextForBestFit(true);
 
-            new QMSingleButton(menu, 0, 1.5f, "Spawn Clone", new Action(() => { Cloner.ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }), "Instantiates a copy of The selected object.", null, null, true);
+            _ = new QMSingleButton(menu, 0, 1.5f, "Spawn Clone", new Action(() => { Cloner.ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }), "Instantiates a copy of The selected object.", null, null, true);
 
             scroll.SetAction(delegate
             {

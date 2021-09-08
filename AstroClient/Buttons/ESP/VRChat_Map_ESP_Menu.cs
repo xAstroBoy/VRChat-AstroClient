@@ -67,7 +67,7 @@
             {
                 if (item != null)
                 {
-                    item.GetOrAddComponent<ESP_VRCInteractable>();
+                    _ = item.GetOrAddComponent<ESP_VRCInteractable>();
                 }
             }
         }
@@ -123,7 +123,7 @@
             {
                 if (item != null)
                 {
-                    item.GetOrAddComponent<ESP_Pickup>();
+                    _ = item.GetOrAddComponent<ESP_Pickup>();
                 }
             }
         }
@@ -255,7 +255,7 @@
                 {
                     if (item != null)
                     {
-                        item.gameObject.GetOrAddComponent<ESP_UdonBehaviour>();
+                        _ = item.gameObject.GetOrAddComponent<ESP_UdonBehaviour>();
                     }
                 }
             }

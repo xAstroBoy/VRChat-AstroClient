@@ -11,6 +11,7 @@
     using static AstroClient.Variables.InstanceBuilder;
     using Color = System.Drawing.Color;
 
+    [RegisterComponent]
     public class ObjectSpinnerManager : GameEventsBehaviour
     {
         #region Internal
@@ -38,7 +39,7 @@
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
             ReferencedDelegate = null;
-            AntiGcList.Remove(this);
+            _ = AntiGcList.Remove(this);
             AntiGcList = null;
         }
 
@@ -94,7 +95,7 @@
         {
             if (ObjectSpinners.Contains(obj))
             {
-                ObjectSpinners.Remove(obj);
+                _ = ObjectSpinners.Remove(obj);
             }
         }
 
@@ -166,7 +167,7 @@
 
         public static void Deregister(ObjectSpinner ObjectSpinnerBehaviour)
         {
-            ObjectSpinnerBehaviors.Remove(ObjectSpinnerBehaviour);
+            _ = ObjectSpinnerBehaviors.Remove(ObjectSpinnerBehaviour);
         }
 
         public static void ClearList()

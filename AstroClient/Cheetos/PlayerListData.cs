@@ -77,31 +77,31 @@
 
                 if (IsInVR)
                 {
-                    stringBuilder.Append("<color=silver>[VR]</color>");
+                    _ = stringBuilder.Append("<color=silver>[VR]</color>");
                 }
                 else
                 {
-                    stringBuilder.Append("<color=silver>[PC]</color>");
+                    _ = stringBuilder.Append("<color=silver>[PC]</color>");
                 }
 
                 if (IsDanger)
                 {
-                    stringBuilder.Append("<color=pink>[DANGER]</color>");
+                    _ = stringBuilder.Append("<color=pink>[DANGER]</color>");
                 }
 
                 if (IsMaster)
                 {
-                    stringBuilder.Append("<color=cyan>[IM]</color>");
+                    _ = stringBuilder.Append("<color=cyan>[IM]</color>");
                 }
 
                 if (IsFriend)
                 {
-                    stringBuilder.Append("<color=green>[F]</color>");
+                    _ = stringBuilder.Append("<color=green>[F]</color>");
                 }
 
                 if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(UserID))
                 {
-                    stringBuilder.Append("<color=red>[B]</color>");
+                    _ = stringBuilder.Append("<color=red>[B]</color>");
                 }
 
                 return $"{stringBuilder.ToString()}\n";

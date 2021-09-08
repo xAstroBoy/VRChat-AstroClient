@@ -16,14 +16,14 @@
         public static QMNestedButton FBTExploitsPage;
         public static float ButtonUpdateTime = 0f;
 
-        private static QMToggleButton LockButton1;
-        private static GameObject LockIndicator1;
-        private static QMToggleButton LockButton2;
-        private static GameObject LockIndicator2;
-        private static QMToggleButton LockButton3;
-        private static GameObject LockIndicator3;
-        private static QMToggleButton LockButton4;
-        private static GameObject LockIndicator4;
+        //private static QMToggleButton LockButton1;
+        //private static GameObject LockIndicator1;
+        //private static QMToggleButton LockButton2;
+        //private static GameObject LockIndicator2;
+        //private static QMToggleButton LockButton3;
+        //private static GameObject LockIndicator3;
+        //private static QMToggleButton LockButton4;
+        //private static GameObject LockIndicator4;
 
         public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
@@ -95,7 +95,7 @@
                 }
                 else
                 {
-                    if (!WorldUtils.IsInWorld()) yield break;
+                    if (!WorldUtils.IsInWorld) yield break;
                     ButtonUpdateTime = 0f;
                 }
 
@@ -117,41 +117,41 @@
 
         private static void RefreshButtons()
         {
-            if (LockIndicator1.active)
-            {
-                LockButton1.SetToggleState(true);
-            }
-            else
-            {
-                LockButton1.SetToggleState(false);
-            }
+            //if (LockIndicator1.active)
+            //{
+            //    LockButton1.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton1.SetToggleState(false);
+            //}
 
-            if (LockIndicator2.active)
-            {
-                LockButton2.SetToggleState(true);
-            }
-            else
-            {
-                LockButton2.SetToggleState(false);
-            }
+            //if (LockIndicator2.active)
+            //{
+            //    LockButton2.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton2.SetToggleState(false);
+            //}
 
-            if (LockIndicator3.active)
-            {
-                LockButton3.SetToggleState(true);
-            }
-            else
-            {
-                LockButton3.SetToggleState(false);
-            }
+            //if (LockIndicator3.active)
+            //{
+            //    LockButton3.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton3.SetToggleState(false);
+            //}
 
-            if (LockIndicator4.active)
-            {
-                LockButton4.SetToggleState(true);
-            }
-            else
-            {
-                LockButton4.SetToggleState(false);
-            }
+            //if (LockIndicator4.active)
+            //{
+            //    LockButton4.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton4.SetToggleState(false);
+            //}
         }
     }
 }

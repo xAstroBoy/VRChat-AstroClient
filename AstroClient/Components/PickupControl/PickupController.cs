@@ -7,6 +7,7 @@
     using UnityEngine;
     using VRC.SDKBase;
 
+    [RegisterComponent]
     public class PickupController : GameEventsBehaviour
     {
         public PickupController(IntPtr ptr) : base(ptr)

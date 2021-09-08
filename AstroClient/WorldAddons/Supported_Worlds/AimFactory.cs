@@ -182,7 +182,7 @@
                                         if (!IsPoppingTarget)
                                         {
                                             IsPoppingTarget = true;
-                                            MelonLoader.MelonCoroutines.Start(PopTarget());
+                                            _ = MelonLoader.MelonCoroutines.Start(PopTarget());
                                         }
                                     }
                                 }

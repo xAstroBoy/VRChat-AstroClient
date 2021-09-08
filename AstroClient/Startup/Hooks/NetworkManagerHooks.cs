@@ -22,7 +22,7 @@
 
         public override void ExecutePriorityPatches()
         {
-            MelonCoroutines.Start(HookNetworkManager());
+            _ = MelonCoroutines.Start(HookNetworkManager());
         }
 
         public static IEnumerator HookNetworkManager()
@@ -95,7 +95,7 @@
 
         private static void AddDelegate(VRC.Core.VRCEventDelegate<Player> field, Action<Player> eventHandlerA)
         {
-            field.field_Private_HashSet_1_UnityAction_1_T_0.Add(eventHandlerA);
+            _ = field.field_Private_HashSet_1_UnityAction_1_T_0.Add(eventHandlerA);
         }
     }
 }

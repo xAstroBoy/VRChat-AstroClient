@@ -11,6 +11,7 @@
     using static AstroClient.Variables.InstanceBuilder;
     using Color = System.Drawing.Color;
 
+    [RegisterComponent]
     public class RocketManager : GameEventsBehaviour
     {
         #region Internal
@@ -38,7 +39,7 @@
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
             ReferencedDelegate = null;
-            AntiGcList.Remove(this);
+            _ = AntiGcList.Remove(this);
             AntiGcList = null;
         }
 
@@ -110,7 +111,7 @@
         {
             if (Rockets.Contains(obj))
             {
-                Rockets.Remove(obj);
+                _ = Rockets.Remove(obj);
             }
         }
 
@@ -175,7 +176,7 @@
 
         public static void Deregister(RocketObject RocketBehaviour)
         {
-            RocketBehaviours.Remove(RocketBehaviour);
+            _ = RocketBehaviours.Remove(RocketBehaviour);
         }
 
         public static void ClearList()

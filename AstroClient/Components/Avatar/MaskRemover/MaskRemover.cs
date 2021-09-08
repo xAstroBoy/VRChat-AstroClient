@@ -11,6 +11,7 @@
     using VRC;
     using VRC.SDKBase;
 
+    [RegisterComponent]
     public class MaskRemover : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;

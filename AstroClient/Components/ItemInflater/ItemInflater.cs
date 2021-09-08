@@ -5,6 +5,7 @@
     using UnhollowerRuntimeLib;
     using UnityEngine;
 
+    [RegisterComponent]
     public class ItemInflater : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
@@ -30,7 +31,7 @@
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
             ReferencedDelegate = null;
-            AntiGcList.Remove(this);
+            _ = AntiGcList.Remove(this);
             AntiGcList = null;
         }
 

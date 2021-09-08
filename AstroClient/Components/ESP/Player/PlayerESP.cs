@@ -12,6 +12,7 @@
     using VRC;
     using VRC.Management;
 
+    [RegisterComponent]
     public class PlayerESP : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;

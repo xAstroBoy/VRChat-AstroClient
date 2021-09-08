@@ -94,9 +94,9 @@
 
         private void RefreshButtons()
         {
-            if (WorldUtils.IsInWorld() && ConfigManager.UI.ShowPlayersList && ConfigManager.UI.ShowPlayersMenu)
+            if (WorldUtils.IsInWorld && ConfigManager.UI.ShowPlayersList && ConfigManager.UI.ShowPlayersMenu)
             {
-                refreshMutex.WaitOne();
+                _ = refreshMutex.WaitOne();
                 var players = new List<PlayerListData>();
 
                 foreach (var keyValuePair in Utils.LoadBalancingPeer.prop_Room_0.prop_Dictionary_2_Int32_Player_0)
@@ -107,7 +107,7 @@
                 ResetButtons();
                 var temp_list = players.OrderBy(p => p.IsMaster).ThenBy(p => p.IsSelf).ThenBy(p => p.IsFriend).ThenBy(p => p.GetIsInvisible()).ThenByDescending(p => p.RankType).Reverse().ToArray();
 
-                MelonCoroutines.Start(CreateButtons(temp_list));
+                _ = MelonCoroutines.Start(CreateButtons(temp_list));
             }
         }
 

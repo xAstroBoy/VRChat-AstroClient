@@ -46,3 +46,6 @@ dotnet_diagnostic.CS0618.severity = none
 [*.{cs,vb}]
 indent_style=space
 dotnet_diagnostic.CA2215.severity=suggestion
+
+# Default severity for all analyzer diagnostics
+dotnet_analyzer_diagnostic.severity = none

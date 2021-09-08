@@ -10,10 +10,10 @@
         {
             var menu = new QMNestedButton(main, x, y, "Interact VRC_Interactable", "Interact with VRC_Interactable Triggers", null, null, null, null, btnHalf);
             var scroll = new QMScrollMenu(menu);
-            new QMSingleButton(menu, 0, -1, "Refresh", delegate
-            {
-                scroll.Refresh();
-            }, "", null, null, true);
+            _ = new QMSingleButton(menu, 0, -1, "Refresh", delegate
+              {
+                  scroll.Refresh();
+              }, "", null, null, true);
             scroll.SetAction(delegate
             {
                 foreach (var obj in WorldUtils_Old.Get_VRCInteractables())
@@ -38,10 +38,10 @@
         {
             var menu = new QMNestedButton(main, x, y, "Toggle AudioSources", "Toggle AudioSources Triggers", null, null, null, null, btnHalf);
             var scroll = new QMScrollMenu(menu);
-            new QMSingleButton(menu, 0, -1, "Refresh", delegate
-            {
-                scroll.Refresh();
-            }, "", null, null, true);
+            _ = new QMSingleButton(menu, 0, -1, "Refresh", delegate
+              {
+                  scroll.Refresh();
+              }, "", null, null, true);
             scroll.SetAction(delegate
             {
                 foreach (var obj in WorldUtils_Old.Get_AudioSources())
@@ -68,10 +68,10 @@
         {
             var menu = new QMNestedButton(main, x, y, "Interact Triggers", "Interact with Level Triggers", null, null, null, null, btnHalf);
             var scroll = new QMScrollMenu(menu);
-            new QMSingleButton(menu, 0, -1, "Refresh", delegate
-            {
-                scroll.Refresh();
-            }, "", null, null, true);
+            _ = new QMSingleButton(menu, 0, -1, "Refresh", delegate
+              {
+                  scroll.Refresh();
+              }, "", null, null, true);
             scroll.SetAction(delegate
             {
                 foreach (var trigger in WorldUtils_Old.Get_Triggers())

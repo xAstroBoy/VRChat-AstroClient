@@ -7,6 +7,7 @@
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
+    [RegisterComponent]
     public class Bouncer : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
@@ -42,7 +43,7 @@
 
         private void OnCollisionEnter(Collision collision)
         {
-            GameObjectUtils.TakeOwnershipIfNecessary(gameObject);
+            _ = GameObjectUtils.TakeOwnershipIfNecessary(gameObject);
             if (!BounceTowardPlayer)
             {
                 Bounce(collision.contacts[0].normal);

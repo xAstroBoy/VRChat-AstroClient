@@ -61,7 +61,7 @@
             if (!HasLoadedCachedSkyboxes)
             {
                 ModConsole.DebugLog("[Skybox Loader] : This will Probably take awhile...");
-                MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
+                _ = MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
                 HasLoadedCachedSkyboxes = true;
             }
             OriginalSkybox = RenderSettings.skybox;
@@ -166,7 +166,7 @@
             }
             else
             {
-                Directory.CreateDirectory(SkyboxesPath);
+                _ = Directory.CreateDirectory(SkyboxesPath);
                 ModConsole.Warning("To Add custom Skyboxes , import the skyboxes assetbundles here : " + SkyboxesPath);
             }
             yield return null;
@@ -181,16 +181,16 @@
         {
             var menu = new QMNestedButton(main, x, y, "Skyboxes", "Change Map Skybox with a custom one", null, null, null, null, btnHalf);
             var scroll = new QMHalfScroll(menu);
-            new QMSingleButton(menu, 0, -1, "Refresh", delegate
-            {
-                ModConsole.DebugLog("[Skybox Loader (VR MODE) ] : This will Probably take awhile...");
-                MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
-                scroll.Refresh();
-            }, "", null, null, true);
-            new QMSingleButton(menu, 0, 0.5f, "Reset Skybox", delegate
-            {
-                SetNewSkybox(OriginalSkybox);
-            }, "", null, null, true);
+            _ = new QMSingleButton(menu, 0, -1, "Refresh", delegate
+              {
+                  ModConsole.DebugLog("[Skybox Loader (VR MODE) ] : This will Probably take awhile...");
+                  _ = MelonLoader.MelonCoroutines.Start(FindAndLoadBundle());
+                  scroll.Refresh();
+              }, "", null, null, true);
+            _ = new QMSingleButton(menu, 0, 0.5f, "Reset Skybox", delegate
+              {
+                  SetNewSkybox(OriginalSkybox);
+              }, "", null, null, true);
             scroll.SetAction(delegate
             {
                 if (LoadedSkyboxesBundles.Count() != 0)

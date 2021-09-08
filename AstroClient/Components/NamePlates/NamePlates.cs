@@ -11,27 +11,24 @@
     using UnityEngine;
     using VRC;
 
+    [RegisterComponent]
     public class NamePlates : GameEventsBehaviour
     {
         private PlayerNameplate nameplate;
 
         private bool isDeveloper;
-
         private bool isBetaTester;
 
         private Player player;
-
         private Player self;
 
         private bool initialized;
-
         public float maxUpdateDistance = 10f;
 
         private GameObject statsTag;
         private TextMeshProUGUI statsText;
 
         private GameObject questTag;
-
         private List<GameObject> tags = new List<GameObject>();
 
         public NamePlates(IntPtr obj0) : base(obj0)
@@ -42,6 +39,7 @@
 
         public void Start()
         {
+            if (!ConfigManager.UI.NamePlates) return;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
@@ -81,21 +79,21 @@
 
         private void Refresh()
         {
-            if (nameplate == null) return;
+            if (nameplate == null || !ConfigManager.UI.NamePlates) return;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
             var stringBuilder = new StringBuilder();
             if (player.IsInstanceMaster())
             {
-                stringBuilder.Append($"(Owner) ");
+                _ = stringBuilder.Append($"(Owner) ");
             }
-            stringBuilder.Append($"{player.GetPlatformColored()} ");
+            _ = stringBuilder.Append($"{player.GetPlatformColored()} ");
             if (player.IsFriend())
             {
-                stringBuilder.Append($"[F] ");
+                _ = stringBuilder.Append($"[F] ");
             }
-            stringBuilder.Append($"F:{player.GetFramesColored()}|P:{player.GetPingColored()}");
+            _ = stringBuilder.Append($"F:{player.GetFramesColored()}|P:{player.GetPingColored()}");
             statsText.text = stringBuilder.ToString();
             statsText.color = Color.white;
 

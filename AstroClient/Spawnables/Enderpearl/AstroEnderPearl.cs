@@ -33,7 +33,7 @@ namespace AstroClient
             pearl.name = "EnderPearl (AstroClient)";
             UnityEngine.Object.Destroy(pearl.GetComponent<Collider>());
             pearl.RigidBody_Set_Gravity(false);
-            pearl.AddComponent<EnderPearlBehaviour>();
+            _ = pearl.AddComponent<EnderPearlBehaviour>();
             ENDER = pearl;
         }
 

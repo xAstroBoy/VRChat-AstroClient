@@ -7,6 +7,7 @@
     using UnityEngine;
     using static AstroClient.Forces;
 
+    [RegisterComponent]
     public class ObjectSpinner : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
@@ -32,7 +33,7 @@
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
             ReferencedDelegate = null;
-            AntiGcList.Remove(this);
+            _ = AntiGcList.Remove(this);
             AntiGcList = null;
         }
 

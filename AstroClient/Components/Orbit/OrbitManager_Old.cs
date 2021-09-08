@@ -41,7 +41,7 @@
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
             ReferencedDelegate = null;
-            AntiGcList.Remove(this);
+            _ = AntiGcList.Remove(this);
             AntiGcList = null;
         }
 
@@ -108,7 +108,7 @@
             {
                 if (_OrbitObjects.Contains(obj))
                 {
-                    _OrbitObjects.Remove(obj);
+                    _ = _OrbitObjects.Remove(obj);
                 }
             }
         }
@@ -176,7 +176,7 @@
 
         public static void Deregister(Orbit orbitBehaviour)
         {
-            OrbitBehaviours.Remove(orbitBehaviour);
+            _ = OrbitBehaviours.Remove(orbitBehaviour);
         }
 
         public static void ClearList()

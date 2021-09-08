@@ -9,6 +9,7 @@
     using static AstroClient.Variables.InstanceBuilder;
     using Color = System.Drawing.Color;
 
+    [RegisterComponent]
     public class ItemInflaterManager : GameEventsBehaviour
     {
         #region Internal
@@ -36,7 +37,7 @@
             Marshal.FreeHGlobal(MethodInfo);
             MethodInfo = IntPtr.Zero;
             ReferencedDelegate = null;
-            AntiGcList.Remove(this);
+            _ = AntiGcList.Remove(this);
             AntiGcList = null;
         }
 
@@ -100,7 +101,7 @@
             if (ObjectEditors.Contains(obj))
             {
                 DestroyImmediate(obj.GetComponent<ItemInflater>());
-                ObjectEditors.Remove(obj);
+                _ = ObjectEditors.Remove(obj);
             }
         }
 
@@ -126,7 +127,7 @@
 
         public static void Deregister(ItemInflater ObjectEditorBehaviour)
         {
-            ObjectEditorBehaviors.Remove(ObjectEditorBehaviour);
+            _ = ObjectEditorBehaviors.Remove(ObjectEditorBehaviour);
         }
 
         public static void ClearList()

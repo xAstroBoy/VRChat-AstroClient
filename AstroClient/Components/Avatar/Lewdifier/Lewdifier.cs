@@ -12,6 +12,7 @@
     using VRC;
     using VRC.SDKBase;
 
+    [RegisterComponent]
     public class Lewdifier : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
@@ -305,7 +306,7 @@
                             {
                                 if (child.gameObject.active)
                                 {
-                                    ChildsToKeepOff.Remove(child);
+                                    _ = ChildsToKeepOff.Remove(child);
                                     child.DestroyMeLocal();
                                 }
                             }

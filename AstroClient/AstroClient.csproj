@@ -128,6 +128,7 @@
     <Compile Include="Components\VRC_UdonTrigger\VRC_AstroUdonTrigger.cs" />
     <Compile Include="EmojiMenu\EmojiMenu.cs" />
     <Compile Include="EmojiMenu\EmojiScrollMenu\EmojiScrollMenu.cs" />
+    <Compile Include="RegisterComponent.cs" />
     <Compile Include="Spawnables\Enderpearl\AstroEnderPearl.cs" />
     <Compile Include="Components\Enderpearl\EnderPearlBehaviour.cs" />
     <Compile Include="Experiments\CameraTweaker.cs" />

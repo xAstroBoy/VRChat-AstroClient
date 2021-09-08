@@ -8,12 +8,12 @@
     {
         private static void RemoveRendFromUnlistedHighLighter(Renderer rend)
         {
-            HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+            _ = HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Remove(rend);
         }
 
         private static void RemoveRendFromUnlistedHighLighter(MeshRenderer rend)
         {
-            HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+            _ = HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Remove(rend);
         }
 
         public static void SetHighLighter(this HighlightsFXStandalone item, Renderer rend, bool status)
@@ -23,11 +23,11 @@
                 if (status)
                 {
                     RemoveRendFromUnlistedHighLighter(rend);
-                    item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                    _ = item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
                 }
                 else
                 {
-                    item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+                    _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
                 }
                 item.Method_Public_Void_Renderer_Boolean_0(rend, status);
             }
@@ -40,11 +40,11 @@
                 if (status)
                 {
                     RemoveRendFromUnlistedHighLighter(rend);
-                    item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                    _ = item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
                 }
                 else
                 {
-                    item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+                    _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
                 }
                 item.Method_Public_Void_Renderer_Boolean_0(rend, status);
             }
@@ -57,11 +57,11 @@
                 if (status)
                 {
                     RemoveRendFromUnlistedHighLighter(rend);
-                    item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                    _ = item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
                 }
                 else
                 {
-                    item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+                    _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
                 }
                 item.SetHighLighterColor(color);
                 item.Method_Public_Void_Renderer_Boolean_0(rend, status);
@@ -88,7 +88,7 @@
             {
                 if (EspHelper.SpawnedESPsHolders.Contains(item))
                 {
-                    EspHelper.SpawnedESPsHolders.Remove(item);
+                    _ = EspHelper.SpawnedESPsHolders.Remove(item);
                 }
                 Object.Destroy(item);
             }
@@ -102,11 +102,11 @@
                 if (status)
                 {
                     RemoveRendFromUnlistedHighLighter(rend);
-                    item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                    _ = item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
                 }
                 else
                 {
-                    item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+                    _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
                 }
                 item.SetHighLighterColor(color);
                 item.Method_Public_Void_Renderer_Boolean_0(rend, status);
@@ -117,7 +117,7 @@
         {
             if (item != null)
             {
-                item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                _ = item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
             }
         }
 
@@ -125,7 +125,7 @@
         {
             if (item != null)
             {
-                item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
+                _ = item.field_Protected_HashSet_1_Renderer_0.AddIfNotPresent(rend);
             }
         }
 
@@ -133,7 +133,7 @@
         {
             if (item != null)
             {
-                item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+                _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
             }
         }
 
@@ -141,7 +141,7 @@
         {
             if (item != null)
             {
-                item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
+                _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
             }
         }
 

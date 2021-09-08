@@ -102,11 +102,11 @@
 
         public static void Validate()
         {
-            SaveMutex.WaitOne();
+            _ = SaveMutex.WaitOne();
 
             if (!Directory.Exists(ConfigFolder))
             {
-                Directory.CreateDirectory(ConfigFolder);
+                _ = Directory.CreateDirectory(ConfigFolder);
                 ModConsole.DebugWarning($"Config Folder Created: {ConfigFolder}");
             }
 
@@ -164,7 +164,7 @@
 
             if (!Directory.Exists(ConfigLewdifyPath))
             {
-                Directory.CreateDirectory(ConfigLewdifyPath);
+                _ = Directory.CreateDirectory(ConfigLewdifyPath);
                 ModConsole.DebugWarning($"ConfigLewdify File Created: {ConfigLewdifyPath}");
             }
 
@@ -214,7 +214,7 @@
 
         public static void Save_All()
         {
-            SaveMutex.WaitOne();
+            _ = SaveMutex.WaitOne();
             Save_General();
             Save_UI();
             Save_ESP();

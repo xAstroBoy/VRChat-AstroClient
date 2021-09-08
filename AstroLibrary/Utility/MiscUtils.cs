@@ -237,7 +237,7 @@ namespace AstroLibrary.Utility
 
         public static IEnumerator WFW(Action action)
         {
-            while (!WorldUtils.IsInWorld() && PlayerUtils.GetVRCPlayer() == null) yield return null;
+            while (!WorldUtils.IsInWorld && PlayerUtils.GetVRCPlayer() == null) yield return null;
             action.Invoke();
             yield break;
         }
