@@ -3,6 +3,7 @@
 namespace AstroLibrary.Utility
 {
     using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -124,6 +125,7 @@ namespace AstroLibrary.Utility
             if (!fullID.ToLower().StartsWith("wrld_") || !fullID.ToLower().Contains('#'))
             {
                 ModConsole.Error("INVALID JOIN ID!");
+                Utils.VRCUiPopupManager.Alert("INVALID JOIN ID!", "The world ID you entered was invalid", "Ok", () => { });
                 return;
             }
             else
@@ -177,6 +179,28 @@ namespace AstroLibrary.Utility
                 return new List<GameObject>();
             }
             return new List<GameObject>();
+        }
+
+        public static Player GetPlayerByDisplayName(string name)
+        {
+            var players = WorldUtils.GetPlayers().ToList();
+            if (players.AnyAndNotNull())
+            {
+                foreach (var player in players)
+                {
+                    if (player != null)
+                    {
+                        if (player.prop_APIUser_0 != null)
+                        {
+                            if (player.prop_APIUser_0.displayName == name)
+                            {
+                                return player;
+                            }
+                        }
+                    }
+                }
+            }
+            return null;
         }
 
         public static VRCSDK2.VRC_SceneDescriptor GetSDK2Descriptor()

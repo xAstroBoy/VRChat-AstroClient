@@ -22,7 +22,23 @@
         /// <summary>
         /// Returns true when everything is received from the server, IE (auth, account, exploit) data.
         /// </summary>
-        public static bool IsReady;
+        public static bool IsReady
+        {
+            get
+            {
+                if (!initialized)
+                {
+                    initialized = true;
+                    AstroNetworkClient.Initialize();
+                }
+
+                return isReady;
+            }
+            set => isReady = value;
+        }
+
+        private static bool isReady;
+        private static bool initialized;
 
         public static string Name = string.Empty;
 

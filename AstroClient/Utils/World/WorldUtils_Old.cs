@@ -62,28 +62,6 @@
             return null;
         }
 
-        public static Player Get_Player_With_DisplayName(string name)
-        {
-            var players = WorldUtils.GetPlayers().ToList();
-            if (players.AnyAndNotNull())
-            {
-                foreach (var player in players)
-                {
-                    if (player != null)
-                    {
-                        if (player.prop_APIUser_0 != null)
-                        {
-                            if (player.prop_APIUser_0.displayName == name)
-                            {
-                                return player;
-                            }
-                        }
-                    }
-                }
-            }
-            return null;
-        }
-
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
             ModConsole.Log("This instance has " + WorldUtils.GetPlayers().Count() + " Players.", Color.Gold);

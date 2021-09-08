@@ -73,7 +73,7 @@
         private static List<Tweaker_Events> Tweaker_Overridables = new List<Tweaker_Events>();
 
 
-        
+
         public override void OnApplicationStart()
         {
             ModConsole.Initialize("AstroClient");
@@ -91,9 +91,6 @@
 			KeyManager.IsAuthed = true;
 			Bools.IsDeveloper = true;
 #else
-            ModConsole.Log("About to connect..");
-            AstroNetworkClient.Initialize();
-
             while (!NetworkingManager.IsReady)
             {
             }
