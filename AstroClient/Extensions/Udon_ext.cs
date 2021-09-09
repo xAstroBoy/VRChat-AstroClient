@@ -3,6 +3,7 @@
     using AstroClient;
     using AstroClient.Udon;
     using AstroLibrary.Console;
+    using AstroLibrary.Utility;
     using MelonLoader;
     using System;
     using System.Collections;
@@ -36,7 +37,7 @@
         {
             if (udonvar != null)
             {
-                Task.Run(() => { InvokeEvent(udonvar.UdonBehaviour, udonvar.EventKey); });
+                MiscUtils.DelayFunction(0.06f, () => InvokeEvent(udonvar.UdonBehaviour, udonvar.EventKey));
             }
         }
 
@@ -69,7 +70,7 @@
             }
             foreach (var udonvar in udonlist)
             {
-                Task.Run(() => { InvokeEvent(udonvar.UdonBehaviour, udonvar.EventKey); });
+                udonvar.ExecuteUdonEvent();
             }
         }
     }
