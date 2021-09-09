@@ -69,22 +69,22 @@
                     {
                         if (subaction.key == "SyncStart")
                         {
-                            StartGameEvent = new CachedUdonEvent(action, subaction.key);
+                            StartGameEvent = new UdonBehaviour_Cached(action, subaction.key);
                             ModConsole.Log("Found Start Game Event.");
                         }
                         if (subaction.key == "SyncAbort")
                         {
-                            AbortGameEvent = new CachedUdonEvent(action, subaction.key);
+                            AbortGameEvent = new UdonBehaviour_Cached(action, subaction.key);
                             ModConsole.Log("Found Abort Game Event.");
                         }
                         if (subaction.key == "SyncVictoryB")
                         {
-                            VictoryCrewmateEvent = new CachedUdonEvent(action, subaction.key);
+                            VictoryCrewmateEvent = new UdonBehaviour_Cached(action, subaction.key);
                             ModConsole.Log("Found Victory Crewmate Event.");
                         }
                         if (subaction.key == "SyncVictoryM")
                         {
-                            VictoryImpostorEvent = new CachedUdonEvent(action, subaction.key);
+                            VictoryImpostorEvent = new UdonBehaviour_Cached(action, subaction.key);
                             ModConsole.Log("Found Victory Impostor Event.");
                         }
                         if (StartGameEvent != null && AbortGameEvent != null && VictoryCrewmateEvent != null && VictoryImpostorEvent != null)
@@ -391,10 +391,10 @@
 
         public static bool HasAmongUsWorldLoaded = false;
 
-        public static CachedUdonEvent StartGameEvent;
-        public static CachedUdonEvent AbortGameEvent;
+        public static UdonBehaviour_Cached StartGameEvent;
+        public static UdonBehaviour_Cached AbortGameEvent;
 
-        public static CachedUdonEvent VictoryCrewmateEvent;
-        public static CachedUdonEvent VictoryImpostorEvent;
+        public static UdonBehaviour_Cached VictoryCrewmateEvent;
+        public static UdonBehaviour_Cached VictoryImpostorEvent;
     }
 }

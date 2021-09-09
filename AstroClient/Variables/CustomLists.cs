@@ -14,15 +14,15 @@
             ScaleCheck.Clear();
         }
 
-        public class CachedUdonEvent
+        public class UdonBehaviour_Cached
         {
-            public UdonBehaviour Action { get; set; }
+            public UdonBehaviour UdonBehaviour { get; set; }
             public string EventKey { get; set; }
 
-            public CachedUdonEvent(UdonBehaviour Action, string Key)
+            public UdonBehaviour_Cached(UdonBehaviour UdonBehaviour, string EventKey)
             {
-                this.Action = Action;
-                this.EventKey = Key;
+                this.UdonBehaviour = UdonBehaviour;
+                this.EventKey = EventKey;
             }
         }
 

@@ -76,27 +76,27 @@
                     {
                         if (subaction.key == "SyncStart")
                         {
-                            StartGameEvent = new CachedUdonEvent(action, subaction.key);
+                            StartGameEvent = new UdonBehaviour_Cached(action, subaction.key);
                             ModConsole.Log("Found Start Game Event.");
                         }
                         if (subaction.key == "SyncAbort")
                         {
-                            AbortGameEvent = new CachedUdonEvent(action, subaction.key);
+                            AbortGameEvent = new UdonBehaviour_Cached(action, subaction.key);
                             ModConsole.Log("Found Abort Game Event.");
                         }
                         if (subaction.key == "SyncVictoryB")
                         {
-                            VictoryBystanderEvent = new CachedUdonEvent(action, subaction.key);
+                            VictoryBystanderEvent = new UdonBehaviour_Cached(action, subaction.key);
                             ModConsole.Log("Found Victory Bystander Event.");
                         }
                         if (subaction.key == "SyncVictoryM")
                         {
-                            VictoryMurdererEvent = new CachedUdonEvent(action, subaction.key);
+                            VictoryMurdererEvent = new UdonBehaviour_Cached(action, subaction.key);
                             ModConsole.Log("Found Victory Murderer Event.");
                         }
                         if (subaction.key == "OnPlayerUnlockedClues")
                         {
-                            OnPlayerUnlockedClues = new CachedUdonEvent(action, subaction.key);
+                            OnPlayerUnlockedClues = new UdonBehaviour_Cached(action, subaction.key);
                             ModConsole.Log("Found Unlocked Clues Sound.");
                         }
                         if (StartGameEvent != null && AbortGameEvent != null && VictoryBystanderEvent != null && VictoryMurdererEvent != null && OnPlayerUnlockedClues != null)
@@ -880,13 +880,13 @@
 
         public static QMNestedButton Murder4CheatPage;
 
-        public static CachedUdonEvent OnPlayerUnlockedClues;
+        public static UdonBehaviour_Cached OnPlayerUnlockedClues;
 
-        public static CachedUdonEvent StartGameEvent;
-        public static CachedUdonEvent AbortGameEvent;
+        public static UdonBehaviour_Cached StartGameEvent;
+        public static UdonBehaviour_Cached AbortGameEvent;
 
-        public static CachedUdonEvent VictoryBystanderEvent;
-        public static CachedUdonEvent VictoryMurdererEvent;
+        public static UdonBehaviour_Cached VictoryBystanderEvent;
+        public static UdonBehaviour_Cached VictoryMurdererEvent;
 
         public static QMSingleToggleButton GetDetectiveRoleBtn;
         public static QMSingleToggleButton GetMurdererRoleBtn;

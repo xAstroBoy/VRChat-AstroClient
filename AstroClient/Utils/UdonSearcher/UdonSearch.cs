@@ -10,11 +10,11 @@
 
     public static class UdonSearch
     {
-        public static List<CachedUdonEvent> FindAllUdonEvents(string action, string subaction)
+        public static List<UdonBehaviour_Cached> FindAllUdonEvents(string action, string subaction)
         {
             var gameobjects = WorldUtils.GetUdonScripts();
 
-            List<CachedUdonEvent> foundEvents = new List<CachedUdonEvent>();
+            List<UdonBehaviour_Cached> foundEvents = new List<UdonBehaviour_Cached>();
             var behaviours = gameobjects.Where(x => x.gameObject.name == action);
             if (behaviours.Any())
             {
@@ -28,7 +28,7 @@
                             if (actionkeys.key == subaction)
                             {
                                 ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
-                                foundEvents.Add(new CachedUdonEvent(behaviour, actionkeys.key));
+                                foundEvents.Add(new UdonBehaviour_Cached(behaviour, actionkeys.key));
                             }
                         }
                     }
@@ -39,7 +39,7 @@
             return null;
         }
 
-        public static CachedUdonEvent FindUdonEvent(string action, string subaction)
+        public static UdonBehaviour_Cached FindUdonEvent(string action, string subaction)
         {
             var gameobjects = WorldUtils.GetUdonScripts();
 
@@ -54,7 +54,7 @@
                         if (actionkeys.key == subaction)
                         {
                             ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
-                            return new CachedUdonEvent(behaviour, actionkeys.key);
+                            return new UdonBehaviour_Cached(behaviour, actionkeys.key);
                         }
                     }
                 }
@@ -63,7 +63,7 @@
             return null;
         }
 
-        public static CachedUdonEvent FindUdonEvent(UdonBehaviour obj, string subaction)
+        public static UdonBehaviour_Cached FindUdonEvent(UdonBehaviour obj, string subaction)
         {
             if (obj != null)
             {
@@ -74,7 +74,7 @@
                         if (actionkeys.key == subaction)
                         {
                             ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {obj.gameObject.name}");
-                            return new CachedUdonEvent(obj, actionkeys.key);
+                            return new UdonBehaviour_Cached(obj, actionkeys.key);
                         }
                     }
                 }
@@ -82,7 +82,7 @@
             return null;
         }
 
-        public static CachedUdonEvent FindUdonEvent(GameObject obj, string subaction)
+        public static UdonBehaviour_Cached FindUdonEvent(GameObject obj, string subaction)
         {
             var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
 
@@ -95,7 +95,7 @@
                         if (actionkeys.key == subaction)
                         {
                             ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
-                            return new CachedUdonEvent(actionobject, actionkeys.key);
+                            return new UdonBehaviour_Cached(actionobject, actionkeys.key);
                         }
                     }
                 }

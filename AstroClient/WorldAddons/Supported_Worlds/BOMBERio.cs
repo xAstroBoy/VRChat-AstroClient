@@ -264,7 +264,7 @@
                 {
                     try
                     {
-                        FollowObjBehaviour = AssignedNode.FindUdonEvent("GetThisCrystal").Action;
+                        FollowObjBehaviour = AssignedNode.FindUdonEvent("GetThisCrystal").UdonBehaviour;
 
                         if (!HasUnboxedDefaultSpeeds)
                         {
@@ -373,12 +373,12 @@
 
         public static PickupController control;
 
-        public static CachedUdonEvent ShootBomb0;
-        public static CachedUdonEvent ShootBomb1;
-        public static CachedUdonEvent ShootBomb2;
-        public static CachedUdonEvent ShootBomb3;
-        public static CachedUdonEvent ShootBomb4;
-        public static CachedUdonEvent ShootBombEx;
+        public static UdonBehaviour_Cached ShootBomb0;
+        public static UdonBehaviour_Cached ShootBomb1;
+        public static UdonBehaviour_Cached ShootBomb2;
+        public static UdonBehaviour_Cached ShootBomb3;
+        public static UdonBehaviour_Cached ShootBomb4;
+        public static UdonBehaviour_Cached ShootBombEx;
 
         public static GameObject AssignedNode;
         public static QMNestedButton BOMBERioCheatsPage;
