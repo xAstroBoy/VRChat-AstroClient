@@ -52,7 +52,7 @@
         {
             if (!ModDetector.FindMods.IsNotoriousPresent && ConfigManager.UI.NamePlates)
             {
-                //player.gameObject.AddComponent<NamePlates>();
+                player.gameObject.AddComponent<NamePlates>();
             }
         }
 
