@@ -2,8 +2,13 @@
 {
     using AstroClient;
     using AstroClient.Udon;
+    using AstroLibrary.Console;
+    using MelonLoader;
+    using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using UnityEngine;
     using VRC.Udon;
     using static AstroClient.Variables.CustomLists;
@@ -17,35 +22,46 @@
                 UdonUnboxer.UnboxUdonToConsole(obj);
             }
         }
-        public static CachedUdonEvent FindUdonEvent(this GameObject obj, string subaction)
+        public static UdonBehaviour_Cached FindUdonEvent(this GameObject obj, string subaction)
         {
             return UdonSearch.FindUdonEvent(obj, subaction);
         }
 
-        public static CachedUdonEvent FindUdonEvent(this UdonBehaviour obj, string subaction)
+        public static UdonBehaviour_Cached FindUdonEvent(this UdonBehaviour obj, string subaction)
         {
             return UdonSearch.FindUdonEvent(obj, subaction);
         }
 
-        public static void ExecuteUdonEvent(this CachedUdonEvent udonvar)
+        public static void ExecuteUdonEvent(this UdonBehaviour_Cached udonvar)
         {
-            if (udonvar.Action != null && udonvar.EventKey != null && udonvar != null)
+            if (udonvar != null)
             {
-                if (!string.IsNullOrEmpty(udonvar.EventKey) && !string.IsNullOrWhiteSpace(udonvar.EventKey))
+                Task.Run(() => { InvokeEvent(udonvar.UdonBehaviour, udonvar.EventKey); });
+            }
+        }
+
+
+
+
+        private static void InvokeEvent(UdonBehaviour behaviour, string EventKey)
+        {
+            if (behaviour != null)
+            {
+                if (EventKey.IsNotNullOrEmptyOrWhiteSpace())
                 {
-                    if (udonvar.EventKey.StartsWith("_"))
+                    if (EventKey.StartsWith("_"))
                     {
-                        udonvar.Action.SendCustomEvent(udonvar.EventKey);
+                        behaviour.SendCustomEvent(EventKey);
                     }
                     else
                     {
-                        udonvar.Action.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, udonvar.EventKey);
+                        behaviour.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, EventKey);
                     }
                 }
             }
         }
 
-        public static void ExecuteUdonEvent(this List<CachedUdonEvent> udonlist)
+        public static void ExecuteUdonEvent(this List<UdonBehaviour_Cached> udonlist)
         {
             if (udonlist == null || udonlist.Count() == 0)
             {
@@ -53,20 +69,7 @@
             }
             foreach (var udonvar in udonlist)
             {
-                if (udonvar.Action != null && udonvar.EventKey != null && udonvar != null)
-                {
-                    if (!string.IsNullOrEmpty(udonvar.EventKey) && !string.IsNullOrWhiteSpace(udonvar.EventKey))
-                    {
-                        if (udonvar.EventKey.StartsWith("_"))
-                        {
-                            udonvar.Action.SendCustomEvent(udonvar.EventKey);
-                        }
-                        else
-                        {
-                            udonvar.Action.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, udonvar.EventKey);
-                        }
-                    }
-                }
+                Task.Run(() => { InvokeEvent(udonvar.UdonBehaviour, udonvar.EventKey); });
             }
         }
     }

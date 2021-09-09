@@ -132,7 +132,7 @@
                                     var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
                                     if (against != null)
                                     {
-                                        if (against != GetLocalPlayerNode())
+                                        if (against != CurrentPlayerRoleESP)
                                         {
                                             SetTag(AmongUSVoteRevealTag, $"Voted: {against.Player.DisplayName()}", Color.white, ColorUtils.HexToColor("#44DBAC"));
                                         }
@@ -632,10 +632,8 @@
 
 
         internal Player Player { get; private set; }
-
         internal PlayerESP ESP { get; private set; }
         internal SingleTag GameRoleTag { get; private set; }
-
         internal SingleTag AmongUSVoteRevealTag { get; private set; }
 
         internal LinkedNodes LinkedNode { get; private set; }

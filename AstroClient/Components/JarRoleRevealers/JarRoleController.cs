@@ -48,6 +48,21 @@
             }
         }
 
+        public static JarRoleESP _CurrentPlayerRoleESP = null;
+
+        public static JarRoleESP CurrentPlayerRoleESP
+        {
+            get
+            {
+                if(_CurrentPlayerRoleESP == null)
+                {
+                    return _CurrentPlayerRoleESP = Utils.CurrentUser.GetPlayer().GetComponent<JarRoleESP>();
+                }
+                return _CurrentPlayerRoleESP;
+            }
+        }
+
+
         public static QMSingleToggleButton Murder4RolesRevealerToggle;
         public static QMSingleToggleButton AmongUSRolesRevealerToggle;
 
@@ -71,6 +86,7 @@
             RoleEspComponents.Clear();
             Murder4RolesRevealerToggle.SetToggleState(false);
             AmongUSRolesRevealerToggle.SetToggleState(false);
+            _CurrentPlayerRoleESP = null;
             ViewRoles = false;
             IsAmongUsWorld = false;
             IsMurder4World = false;
@@ -166,13 +182,6 @@
                 return value;
             }
             return null;
-        }
-
-        public static JarRoleESP GetLocalPlayerNode()
-        {
-            return RoleEspComponents.Count() != 0 && RoleEspComponents != null
-                ? RoleEspComponents.Where(x => x.Player.DisplayName() == Utils.LocalPlayer.GetPlayer().DisplayName()).First()
-                : null;
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)

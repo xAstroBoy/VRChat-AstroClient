@@ -67,7 +67,7 @@
             item_Silenced_Revolver_0 = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Luger (0)");
             item_Silenced_Revolver_1 = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Luger (1)");
             item_Grenade = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Frag (0)");
-
+            Snake_Crate = GameObjectFinder.Find("/Game Logic/Snakes/SnakeDispenser");
             foreach (var action in WorldUtils.GetUdonScripts())
             {
                 if (action.gameObject.name == "Game Logic")
@@ -76,27 +76,27 @@
                     {
                         if (subaction.key == "SyncStart")
                         {
-                            StartGameEvent = new CachedUdonEvent(action, subaction.key);
+                            StartGameEvent = new UdonBehaviour_Cached(action, subaction.key);
                             ModConsole.Log("Found Start Game Event.");
                         }
                         if (subaction.key == "SyncAbort")
                         {
-                            AbortGameEvent = new CachedUdonEvent(action, subaction.key);
+                            AbortGameEvent = new UdonBehaviour_Cached(action, subaction.key);
                             ModConsole.Log("Found Abort Game Event.");
                         }
                         if (subaction.key == "SyncVictoryB")
                         {
-                            VictoryBystanderEvent = new CachedUdonEvent(action, subaction.key);
+                            VictoryBystanderEvent = new UdonBehaviour_Cached(action, subaction.key);
                             ModConsole.Log("Found Victory Bystander Event.");
                         }
                         if (subaction.key == "SyncVictoryM")
                         {
-                            VictoryMurdererEvent = new CachedUdonEvent(action, subaction.key);
+                            VictoryMurdererEvent = new UdonBehaviour_Cached(action, subaction.key);
                             ModConsole.Log("Found Victory Murderer Event.");
                         }
                         if (subaction.key == "OnPlayerUnlockedClues")
                         {
-                            OnPlayerUnlockedClues = new CachedUdonEvent(action, subaction.key);
+                            OnPlayerUnlockedClues = new UdonBehaviour_Cached(action, subaction.key);
                             ModConsole.Log("Found Unlocked Clues Sound.");
                         }
                         if (StartGameEvent != null && AbortGameEvent != null && VictoryBystanderEvent != null && VictoryMurdererEvent != null && OnPlayerUnlockedClues != null)
@@ -106,6 +106,7 @@
                         }
                     }
                 }
+                
             }
 
             if (GameStartbtn != null)
@@ -307,6 +308,7 @@
             RoleSwapper_GetMurdererRole = false;
             //EveryoneHasPatreonPerk = false;
             //OnlySelfHasPatreonPerk = false;
+            Snake_Crate = null;
             if (Murder4ESPtoggler != null)
             {
                 Murder4ESPtoggler.SetToggleState(false);
@@ -346,12 +348,10 @@
             {
                 foreach (var item in Clues)
                 {
-                    var esp = item.GetComponent<ESP_Pickup>();
-                    if (esp == null)
-                    {
-                        esp = item.AddComponent<ESP_Pickup>();
-                    }
+                    var esp = item.GetOrAddComponent<ESP_Pickup>();
                 }
+
+                Snake_Crate.GetOrAddComponent<ESP_Pickup>();
 
                 MiscUtils.DelayFunction(1, new Action(() =>
                 {
@@ -362,6 +362,7 @@
                     Knifes.Set_Pickup_ESP_Color("F96262");
                     BearTraps.Set_Pickup_ESP_Color("F96262");
                     Grenades.Set_Pickup_ESP_Color("F96262");
+                    Snake_Crate.Set_Pickup_ESP_Color("F96262");
                 }));
             }
             else
@@ -373,6 +374,11 @@
                     {
                         esp.DestroyMeLocal();
                     }
+                }
+                var Snake_Crate_ESP = Snake_Crate.GetComponent<ESP_Pickup>();
+                if(Snake_Crate_ESP != null)
+                {
+                    Snake_Crate_ESP.DestroyMeLocal();
                 }
             }
         }
@@ -543,6 +549,8 @@
             #endregion Watchers
 
             Murder4UdonExploits.Init_RoleSwap_Menu(Murder4CheatPage, 2, 0.5f, true);
+
+
             //GetSelfPatreonGunBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1, "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = true; EveryoneHasPatreonPerk = false; }), "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For You!", Color.green, Color.red, null, false, true);
             //GetEveryonePatreonGunBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1.5f, "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = true; OnlySelfHasPatreonPerk = false; }), "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For Everyone!", Color.green, Color.red, null, false, true);
 
@@ -608,13 +616,13 @@
                         }
                     }
 
-                    if (obj != null && action.StartsWith("SyncAssign") && JarRoleController.GetLocalPlayerNode().LinkedNode.Node != null)
+                    if (obj != null && action.StartsWith("SyncAssign") && JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject != null)
                     {
                         if (RoleSwapper_GetDetectiveRole)
                         {
                             if (!SafetySwap)
                             {
-                                if (obj == JarRoleController.GetLocalPlayerNode().LinkedNode.Node)
+                                if (obj == JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject)
                                 {
                                     AssignedSelfRole = action;
                                 }
@@ -625,14 +633,14 @@
                                     AssignedTargetRole = action;
                                 }
 
-                                RoleSwapper_GetDetectiveRole = SwapRoles(JarRoleController.GetLocalPlayerNode().LinkedNode.Node.gameObject, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                                RoleSwapper_GetDetectiveRole = SwapRoles(JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject, TargetNode, AssignedSelfRole, AssignedTargetRole);
                             }
                         }
                         else if (RoleSwapper_GetMurdererRole)
                         {
                             if (!SafetySwap) // In case it grabs and update the current ones already!
                             {
-                                if (obj == JarRoleController.GetLocalPlayerNode().LinkedNode.Node)
+                                if (obj == JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject)
                                 {
                                     AssignedSelfRole = action;
                                 }
@@ -643,7 +651,7 @@
                                     AssignedTargetRole = action;
                                 }
 
-                                RoleSwapper_GetMurdererRole = SwapRoles(JarRoleController.GetLocalPlayerNode().LinkedNode.Node.gameObject, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                                RoleSwapper_GetMurdererRole = SwapRoles(JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject, TargetNode, AssignedSelfRole, AssignedTargetRole);
                             }
                         }
                     }
@@ -859,6 +867,8 @@
         public static GameObject Clue_Present = null;
         public static GameObject PatreonFlairtoggle = null;
 
+        public static GameObject Snake_Crate = null;
+
         public static List<GameObject> Clues = new List<GameObject>();
         public static List<GameObject> DetectiveGuns = new List<GameObject>();
         public static List<GameObject> SilencedGuns = new List<GameObject>();
@@ -870,13 +880,13 @@
 
         public static QMNestedButton Murder4CheatPage;
 
-        public static CachedUdonEvent OnPlayerUnlockedClues;
+        public static UdonBehaviour_Cached OnPlayerUnlockedClues;
 
-        public static CachedUdonEvent StartGameEvent;
-        public static CachedUdonEvent AbortGameEvent;
+        public static UdonBehaviour_Cached StartGameEvent;
+        public static UdonBehaviour_Cached AbortGameEvent;
 
-        public static CachedUdonEvent VictoryBystanderEvent;
-        public static CachedUdonEvent VictoryMurdererEvent;
+        public static UdonBehaviour_Cached VictoryBystanderEvent;
+        public static UdonBehaviour_Cached VictoryMurdererEvent;
 
         public static QMSingleToggleButton GetDetectiveRoleBtn;
         public static QMSingleToggleButton GetMurdererRoleBtn;

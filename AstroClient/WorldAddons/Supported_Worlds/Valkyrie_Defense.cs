@@ -14,7 +14,7 @@
             if (id == WorldIds.Valkyrie_Defense)
             {
                 ModConsole.Log($"Recognized {Name} World, Patching Balance....");
-                var result = UdonSearch.FindUdonEvent("PlayerManager", "AddMoney").Action;
+                var result = UdonSearch.FindUdonEvent("PlayerManager", "AddMoney").UdonBehaviour;
                 if (result != null)
                 {
                     var disassembled = result.DisassembleUdonBehaviour();

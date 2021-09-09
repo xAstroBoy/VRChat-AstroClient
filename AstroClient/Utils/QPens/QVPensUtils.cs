@@ -156,6 +156,6 @@
         public static List<GameObject> PenManagers = new List<GameObject>();
         public static List<VRC.SDKBase.VRC_Trigger> TriggerSDKBase = new List<VRC.SDKBase.VRC_Trigger>();
         public static List<VRCSDK2.VRC_Trigger> TriggerSDK2 = new List<VRCSDK2.VRC_Trigger>();
-        public static List<CachedUdonEvent> ClearPensUdonEvents = new List<CachedUdonEvent>();
+        public static List<UdonBehaviour_Cached> ClearPensUdonEvents = new List<UdonBehaviour_Cached>();
     }
 }
