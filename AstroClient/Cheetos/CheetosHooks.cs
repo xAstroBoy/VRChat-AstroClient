@@ -70,7 +70,6 @@
                 {
                     try
                     {
-                        ModConsole.DebugLog($"[Patches] Patching {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {patch.PrefixMethod?.method.Name}{patch.PostfixMethod?.method.Name}");
                         patch.Instance.Patch(patch.TargetMethod, patch.PrefixMethod, patch.PostfixMethod);
                     }
                     catch (Exception e)
@@ -78,6 +77,10 @@
                         ModConsole.Error($"[Patches] Failed At {patch.TargetMethod?.Name} | {patch.PrefixMethod?.method.Name} | with AstroClient {patch.PostfixMethod?.method.Name}");
                         ModConsole.Error(e.Message);
                         ModConsole.ErrorExc(e);
+                    }
+                    finally
+                    {
+                        ModConsole.DebugLog($"[Patches] Patched {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {patch.PrefixMethod?.method.Name}{patch.PostfixMethod?.method.Name}");
                     }
                 }
                 ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods!");
@@ -244,8 +247,9 @@
                     }
                 }
             }
-            catch
+            catch (Exception e)
             {
+                ModConsole.LogExc(e);
             }
         }
 

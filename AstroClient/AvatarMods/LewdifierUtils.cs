@@ -64,9 +64,12 @@
             {
                 ModConsole.DebugErrorExc(e);
             }
-            if (LewdifyLists != null)
+            finally
             {
-                LewdifyLists.SetButtonText(ListButtonText);
+                if (LewdifyLists != null)
+                {
+                    LewdifyLists.SetButtonText(ListButtonText);
+                }
             }
         }
 

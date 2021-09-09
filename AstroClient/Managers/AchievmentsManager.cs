@@ -10,12 +10,12 @@
 
     public class Achievments_Managers : GameEvents
     {
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
-        {
-            Achievmentss = Achievments.Load();
-            CheckFriends();
-            CheckTrustRank();
-        }
+        //public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        //{
+        //    Achievmentss = Achievments.Load();
+        //    CheckFriends();
+        //    CheckTrustRank();
+        //}
 
         private static void CheckTrustRank()
         {

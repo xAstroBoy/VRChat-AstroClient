@@ -98,13 +98,9 @@
             var self = PlayerUtils.GetVRCPlayer();
             Name = self.GetDisplayName();
             UserID = self.GetUserID();
-
-            MiscUtils.DelayFunction(2f, () =>
-            {
-                Initialized = true;
-                SendClientInfo();
-                SendInstanceInfo();
-            });
+            Initialized = true;
+            SendClientInfo();
+            SendInstanceInfo();
         }
     }
 }

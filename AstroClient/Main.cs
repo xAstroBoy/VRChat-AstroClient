@@ -121,6 +121,7 @@
                     ModConsole.Error("Failed To generate Gradient, the Embeded file doesn't exist!");
                     ModConsole.ErrorExc(e);
                 }
+
                 //Event_OnApplicationStart.SafetyRaise(this, new EventArgs());
             }
         }

@@ -5,6 +5,7 @@
     using RubyButtonAPI;
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
     using UnhollowerRuntimeLib;
     using UnityEngine;
@@ -59,17 +60,19 @@
         {
             if (Instance == null)
             {
+                var stopwatch = Stopwatch.StartNew();
                 string name = "RocketManager";
                 var gameobj = GetInstanceHolder(name);
                 Instance = gameobj.AddComponent<RocketManager>();
                 DontDestroyOnLoad(gameobj);
+                stopwatch.Stop();
                 if (Instance != null)
                 {
-                    ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
+                    ModConsole.DebugLog($"[ {name.ToUpper()} STATUS ] : READY : {stopwatch.ElapsedMilliseconds}ms", Color.LawnGreen);
                 }
                 else
                 {
-                    ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
+                    ModConsole.DebugLog($"[ {name.ToUpper()} STATUS ] : ERROR : {stopwatch.ElapsedMilliseconds}ms", Color.OrangeRed);
                 }
             }
         }

@@ -4,6 +4,7 @@
     using Il2CppSystem.Diagnostics;
     using System;
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Threading;
     using static AstroClient.Variables.InstanceBuilder;
 
@@ -27,13 +28,19 @@
         {
             if (Instance == null)
             {
+                var stopwatch = Stopwatch.StartNew();
                 string name = "MainThreadRunner";
                 var gameobj = GetInstanceHolder(name);
                 Instance = gameobj.AddComponent<MainThreadRunner>();
                 DontDestroyOnLoad(gameobj);
+                stopwatch.Stop();
                 if (Instance != null)
                 {
-                    ModConsole.DebugLog("MainThreadRunner: Ready!");
+                    ModConsole.DebugLog($"[ {name.ToUpper()} STATUS ] : READY : {stopwatch.ElapsedMilliseconds}ms", Color.LawnGreen);
+                }
+                else
+                {
+                    ModConsole.DebugLog($"[ {name.ToUpper()} STATUS ] : ERROR : {stopwatch.ElapsedMilliseconds}ms", Color.OrangeRed);
                 }
             }
         }

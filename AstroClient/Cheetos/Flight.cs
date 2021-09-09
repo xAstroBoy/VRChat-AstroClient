@@ -23,6 +23,7 @@
         private static VRCMotionState motionState;
         private static bool flyEnabled;
         private static bool noClipEnabled;
+        private static bool isInRoom;
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
@@ -106,9 +107,21 @@
             PlayerUtils.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = true;
         }
 
+        public override void OnRoomJoined()
+        {
+            isInRoom = true;
+        }
+
+        public override void OnRoomLeft()
+        {
+            isInRoom = false;
+            FlyEnabled = false;
+            NoClipEnabled = false;
+        }
+
         public override void OnUpdate()
         {
-            if (!WorldUtils.IsInWorld || PopupUtils.IsTyping)
+            if (!isInRoom || PopupUtils.IsTyping)
             {
                 return;
             }

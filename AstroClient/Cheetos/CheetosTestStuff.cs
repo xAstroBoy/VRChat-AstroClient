@@ -52,12 +52,13 @@
         {
             if (!ModDetector.FindMods.IsNotoriousPresent && ConfigManager.UI.NamePlates)
             {
-                player.gameObject.AddComponent<NamePlates>();
+                //player.gameObject.AddComponent<NamePlates>();
             }
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
+            return;
             Player player = PlayerUtils.GetPlayer();
             if (player.gameObject.GetComponent<SitOnPlayer>() == null)
             {
