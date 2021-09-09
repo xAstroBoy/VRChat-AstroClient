@@ -50,10 +50,9 @@
 
         public override void OnPlayerJoined(Player player)
         {
-            if (!ModDetector.FindMods.IsNotoriousPresent)
+            if (!ModDetector.FindMods.IsNotoriousPresent && ConfigManager.UI.NamePlates)
             {
-                // TODO: MAKE IT A OPTION, I DONT WANT NAMEPLATES!
-                //player.gameObject.AddComponent<NamePlates>();
+                player.gameObject.AddComponent<NamePlates>();
             }
         }
 

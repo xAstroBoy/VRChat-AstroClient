@@ -41,7 +41,6 @@
             SocketUser me = AstroBot.Client.CurrentUser;
             int argPos = 0;
 
-            //if (message.HasMentionPrefix(me, ref argPos) || message.HasCharPrefix(guild.GetPrefix(), ref argPos))
             if (message.HasMentionPrefix(me, ref argPos) || message.HasCharPrefix('~', ref argPos))
             {
                 SocketCommandContext context = new(discord, message);
