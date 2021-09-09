@@ -191,13 +191,13 @@
                 {
                     if (obj != null)
                     {
-                        if (action.StartsWith("SyncAssign") && JarRoleController.GetLocalPlayerNode().LinkedNode.Node != null)
+                        if (action.StartsWith("SyncAssign") && JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node != null)
                         {
                             if (RoleSwapper_GetImpostorRole)
                             {
                                 if (!SafetySwap) // In case it grabs and update the current ones already!
                                 {
-                                    if (obj == JarRoleController.GetLocalPlayerNode().LinkedNode.Node)
+                                    if (obj == JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node)
                                     {
                                         AssignedSelfRole = action;
                                     }
@@ -208,7 +208,7 @@
                                         AssignedTargetRole = action;
                                     }
 
-                                    RoleSwapper_GetImpostorRole = SwapRoles(JarRoleController.GetLocalPlayerNode().LinkedNode.Node.gameObject, TargetNode, AssignedSelfRole, AssignedTargetRole);
+                                    RoleSwapper_GetImpostorRole = SwapRoles(JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject, TargetNode, AssignedSelfRole, AssignedTargetRole);
                                 }
                             }
                         }
