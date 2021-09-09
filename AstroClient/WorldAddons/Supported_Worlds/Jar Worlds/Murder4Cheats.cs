@@ -616,13 +616,13 @@
                         }
                     }
 
-                    if (obj != null && action.StartsWith("SyncAssign") && JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node != null)
+                    if (obj != null && action.StartsWith("SyncAssign") && JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject != null)
                     {
                         if (RoleSwapper_GetDetectiveRole)
                         {
                             if (!SafetySwap)
                             {
-                                if (obj == JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node)
+                                if (obj == JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject)
                                 {
                                     AssignedSelfRole = action;
                                 }
@@ -640,7 +640,7 @@
                         {
                             if (!SafetySwap) // In case it grabs and update the current ones already!
                             {
-                                if (obj == JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node)
+                                if (obj == JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject)
                                 {
                                     AssignedSelfRole = action;
                                 }

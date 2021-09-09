@@ -191,13 +191,13 @@
                 {
                     if (obj != null)
                     {
-                        if (action.StartsWith("SyncAssign") && JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node != null)
+                        if (action.StartsWith("SyncAssign") && JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject != null)
                         {
                             if (RoleSwapper_GetImpostorRole)
                             {
                                 if (!SafetySwap) // In case it grabs and update the current ones already!
                                 {
-                                    if (obj == JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node)
+                                    if (obj == JarRoleController.CurrentPlayerRoleESP.LinkedNode.Node.gameObject)
                                     {
                                         AssignedSelfRole = action;
                                     }
