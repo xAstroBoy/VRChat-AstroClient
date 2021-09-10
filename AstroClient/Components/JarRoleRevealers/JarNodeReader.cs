@@ -36,7 +36,7 @@
         
 
 
-        internal VRC.SDKBase.VRCPlayerApi VRCPlayeAPI
+        internal VRC.SDKBase.VRCPlayerApi VRCPlayerAPI
         {
             get
             {

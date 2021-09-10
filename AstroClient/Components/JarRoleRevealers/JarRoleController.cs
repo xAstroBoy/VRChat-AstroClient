@@ -2,6 +2,7 @@
 {
     using AstroClient.Components;
     using AstroClient.Variables;
+    using AstroClientCore.Events;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
@@ -22,6 +23,13 @@
 
         public static bool IsAmongUsWorld { get; private set; }
 
+
+        public static EventHandler<BoolEventsArgs> Event_OnViewRolesPropertyChanged;
+
+
+
+        // TODO: Make A Action event  to bind on JarRoleESP Component.
+
         public static bool ViewRoles
         {
             get
@@ -36,6 +44,7 @@
                     if (IsMurder4World)
                     {
                         Murder4RolesRevealerToggle.SetToggleState(value);
+                        Event_OnViewRolesPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
                     }
                 }
                 if (AmongUSRolesRevealerToggle != null)
@@ -43,6 +52,7 @@
                     if (IsAmongUsWorld)
                     {
                         AmongUSRolesRevealerToggle.SetToggleState(value);
+                        Event_OnViewRolesPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
                     }
                 }
             }

@@ -41,6 +41,7 @@
         public override void OnApplicationStart()
         {
             RegisterComponent<GameEventsBehaviour>();
+            RegisterComponent<JarControllerEvents>();
             RegisterComponent<MainThreadRunner>();
 
             var classes = Assembly.GetExecutingAssembly().GetTypes();

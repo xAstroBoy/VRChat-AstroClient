@@ -32,7 +32,7 @@
     <OutputPath>D:\Steam Library\steamapps\common\VRChat\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <NoWarn>CS0169;CS0472</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -101,6 +101,7 @@
     </Compile>
     <Compile Include="Components\Flashlight\FlashlightBehaviour.cs" />
     <Compile Include="Components\Expoits\OrbitManager.cs" />
+    <Compile Include="Components\JarRoleRevealers\JarControllerEvents.cs" />
     <Compile Include="Components\JarRoleRevealers\JarNodeReader.cs" />
     <Compile Include="Components\Orbit\OrbitBehaviour.cs" />
     <Compile Include="Components\Orbit\OrbitManager_Old.cs" />
@@ -146,6 +147,7 @@
     <Compile Include="Extensions\EventHandler_ext.cs" />
     <Compile Include="ModDetector\FindMods.cs" />
     <Compile Include="Spawnables\Flashlight\Flashlight.cs" />
+    <Compile Include="Startup\EventArgs\BoolEventsArgs.cs" />
     <Compile Include="Udon\UdonEditor\UdonConverter.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapParser.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapEditor.cs" />

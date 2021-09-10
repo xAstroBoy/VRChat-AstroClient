@@ -12,7 +12,7 @@
     using static AstroClient.JarRoleController;
 
     [RegisterComponent]
-    public class JarRoleESP : GameEventsBehaviour
+    public class JarRoleESP : JarControllerEvents
     {
         public JarRoleESP(IntPtr ptr) : base(ptr)
         {
@@ -234,15 +234,15 @@
 
 
 
-        
+
         private LinkedNodes GetEntryWithUser()
         {
-            foreach (var item in JarRoleController.JarRoleLinks.Where(x => x.NodeReader.VRCPlayeAPI != null))
+            foreach (var item in JarRoleController.JarRoleLinks.Where(x => x.NodeReader.VRCPlayerAPI != null))
             {
                 if (item != null)
                 {
                     var Internal_User_VRCPlayerAPI = Player.GetVRCPlayerApi();
-                    var InternalNodeAssignedPlayer = item.NodeReader.VRCPlayeAPI;
+                    var InternalNodeAssignedPlayer = item.NodeReader.VRCPlayerAPI;
                     if (Internal_User_VRCPlayerAPI != null && InternalNodeAssignedPlayer != null)
                     {
                         if (Internal_User_VRCPlayerAPI.Equals(InternalNodeAssignedPlayer))
@@ -351,16 +351,14 @@
         {
             if (Player != null)
             {
-                if (PlayerESPMenu.Toggle_Player_ESP)
+                if (ESP != null)
                 {
-                    if (ESP != null)
+                    if (ESP.UseCustomColor)
                     {
-                        if (ESP.UseCustomColor)
-                        {
-                            ESP.ChangeColor(color);
-                        }
+                        ESP.ChangeColor(color);
                     }
                 }
+
             }
         }
 
@@ -387,27 +385,60 @@
                 {
                     LinkedNode = GetEntryWithUser();
                 }
+            }
+            catch (Exception e) { ModConsole.DebugError("JarRoleRevealer OnUpdate Exception : " + e); }
+        }
 
-                if (LinkedNode != null)
+
+
+        public override void OnViewRolesPropertyChanged(bool value)
+        {
+            if (LinkedNode != null)
+            {
+                if (GameRoleTag != null)
                 {
-                    if (GameRoleTag != null)
+                    if (GameRoleTag.ShowTag != value)
                     {
-                        if (GameRoleTag.ShowTag != ViewRoles)
-                        {
-                            GameRoleTag.ShowTag = ViewRoles;
-                        }
+                        GameRoleTag.ShowTag = value;
                     }
-                    if (PlayerESPMenu.Toggle_Player_ESP)
+                    if(value)
                     {
-                        if (ESP == null)
+                        if(ESP != null)
                         {
-                            ESP = Player.gameObject.GetComponent<PlayerESP>();
+                            if(IsAmongUsWorld)
+                            {
+                                var color = AmongUsGetNamePlateColor();
+                                if (color != null)
+                                {
+                                    SetEspColorIfExists(color.Value);
+                                }
+                            }
+                            else if(IsMurder4World)
+                            {
+                                var color = Murder4GetNamePlateColor();
+                                if (color != null)
+                                {
+                                    SetEspColorIfExists(color.Value);
+                                }
+                            }
                         }
                     }
                 }
             }
-            catch (Exception e) { ModConsole.DebugError("JarRoleRevealer OnUpdate Exception : " + e); }
         }
+
+
+        public override void OnPlayerESPPropertyChanged(bool value)
+        {
+            if (value)
+            {
+                if (ESP == null)
+                {
+                    ESP = Player.gameObject.GetComponent<PlayerESP>();
+                }
+            }
+        }
+
 
         private void UpdateMurder4Role(Murder4Roles role)
         {
@@ -632,7 +663,26 @@
 
 
         internal Player Player { get; private set; }
-        internal PlayerESP ESP { get; private set; }
+
+        private PlayerESP _ESP;
+        internal PlayerESP ESP
+        {
+            get
+            {
+                return _ESP;
+            }
+            private set
+            {
+                _ESP = value;
+            }
+        }
+
+
+        internal bool ViewRoles { get; private set; }
+
+        internal bool TogglePlayerESP { get; private set; }
+
+
         internal SingleTag GameRoleTag { get; private set; }
         internal SingleTag AmongUSVoteRevealTag { get; private set; }
 

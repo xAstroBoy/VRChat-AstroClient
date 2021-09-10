@@ -1,6 +1,8 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
     using AstroClient.Components;
+    using AstroClientCore.Events;
+    using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using RubyButtonAPI;
     using System;
@@ -9,6 +11,10 @@
 
     internal class PlayerESPMenu : GameEvents
     {
+        public static EventHandler<BoolEventsArgs> Event_OnPlayerESPPropertyChanged;
+
+
+
         public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "ESP Menu", "ESP Options", null, null, null, null, btnHalf);
@@ -69,6 +75,7 @@
                 {
                     PlayerESPToggleBtn.SetToggleState(value);
                 }
+                Event_OnPlayerESPPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
             }
         }
 

@@ -12,6 +12,7 @@
     using System.Threading.Tasks;
     using UnityEngine;
     using VRC.Udon;
+    using VRC.Udon.Common.Interfaces;
     using static AstroClient.Variables.CustomLists;
 
     public static class Udon_ext
@@ -37,7 +38,7 @@
         {
             if (udonvar != null)
             {
-                MiscUtils.DelayFunction(0.06f, () => InvokeEvent(udonvar.UdonBehaviour, udonvar.EventKey));
+                InvokeEvent(udonvar.UdonBehaviour, udonvar.EventKey);
             }
         }
 
@@ -56,7 +57,7 @@
                     }
                     else
                     {
-                        behaviour.SendCustomNetworkEvent(VRC.Udon.Common.Interfaces.NetworkEventTarget.All, EventKey);
+                        behaviour.SendCustomNetworkEvent(NetworkEventTarget.All, EventKey);
                     }
                 }
             }
