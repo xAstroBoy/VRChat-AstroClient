@@ -156,6 +156,8 @@
                     ModConsole.Error("Could not find rootObject!");
                 }
 
+                // USE UDON RPC OR USE THE LISTENERS For Enable or Ondisable in the outside buttons, easy!
+
                 // I'll fix this later..
                 //MelonCoroutines.Start(UpdateButtonsLoop());
             }
