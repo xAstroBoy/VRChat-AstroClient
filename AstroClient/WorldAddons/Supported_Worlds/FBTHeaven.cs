@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+    using AstroClient.Components;
     using AstroClient.Variables;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
@@ -49,6 +50,7 @@
         {
             if (id == WorldIds.FBTHeaven)
             {
+                //
                 ModConsole.DebugLog($"Recognized {Name} World,  Removing Blinders and Dividers...");
                 var blinders = GameObjectFinder.Find("[AREA_DEVIDERS]");
                 if (blinders != null)
@@ -60,28 +62,90 @@
                     ModConsole.Error("World Blinders and Divivers not found...");
                 }
 
-                //var rootObject = GameObjectFinder.FindRootSceneObject("Drag me");
-                //if (rootObject != null)
-                //{
-                //    LockIndicator1 = rootObject.transform.Find("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_1/Door_Handle_Sign_1").gameObject;
-                //    LockIndicator2 = rootObject.transform.Find("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_2/Door_Handle_Sign_2").gameObject;
-                //    LockIndicator3 = rootObject.transform.Find("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_3/Door_Handle_Sign_3").gameObject;
-                //    LockIndicator4 = rootObject.transform.Find("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_4/Door_Handle_Sign_4").gameObject;
+                var rootObject = GameObjectFinder.FindRootSceneObject("Drag me");
+                if (rootObject != null)
+                {
 
-                //    if (LockIndicator1 == null || LockIndicator2 == null || LockIndicator3 == null || LockIndicator4 == null)
-                //    {
-                //        ModConsole.Error("Could not find a lock indicator!");
-                //    }
-                //}
-                //else
-                //{
-                //    ModConsole.Error("Could not find rootObject!");
-                //}
+                    // Fuck the useless blinders.
+                    var trashblinder_0 = rootObject.transform.FindObject("Main_area-Private_rooms");
+                    var trashblinder_1 = rootObject.transform.FindObject("Main_area-Private_rooms (1)");
+                    var trashblinder_2 = rootObject.transform.FindObject("Main_area-Private_rooms_1 (1)");
+                    var trashblinder_3 = rootObject.transform.FindObject("Main_area-Private_rooms (2)");
+                    var trashblinder_4 = rootObject.transform.FindObject("Main_area-Private_rooms_1 (2)");
+                    var trashblinder_5 = rootObject.transform.FindObject("Main_area-Private_rooms (3)");
+                    var trashblinder_6 = rootObject.transform.FindObject("Main_area-Private_rooms_1 (3)");
+
+                    var trashblinder_7 = rootObject.transform.FindObject("Blindbox");
+                    var trashblinder_8 = rootObject.transform.FindObject("Blindbox (1)");
+                    var trashblinder_9 = rootObject.transform.FindObject("Blindbox (2)");
+                    var trashblinder_10 = rootObject.transform.FindObject("Blindbox (3)");
+                    var trashblinder_11 = rootObject.transform.FindObject("FBT_Heaven_Occluder"); 
+
+
+                    trashblinder_0.DestroyMeLocal();
+                    trashblinder_1.DestroyMeLocal();
+                    trashblinder_2.DestroyMeLocal();
+                    trashblinder_3.DestroyMeLocal();
+                    trashblinder_4.DestroyMeLocal();
+                    trashblinder_5.DestroyMeLocal();
+                    trashblinder_6.DestroyMeLocal();
+
+                    trashblinder_7.DestroyMeLocal();
+                    trashblinder_8.DestroyMeLocal();
+                    trashblinder_9.DestroyMeLocal();
+                    trashblinder_10.DestroyMeLocal();
+                    trashblinder_11.DestroyMeLocal();
+
+
+
+                    var outsidebutton1 = rootObject.transform.FindObject("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_1/Door_Handle_Sign_1").gameObject;
+                    var outsidebutton2 = rootObject.transform.FindObject("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_2/Door_Handle_Sign_2").gameObject;
+                    var outsidebutton3 = rootObject.transform.FindObject("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_3/Door_Handle_Sign_3").gameObject;
+                    var outsidebutton4 = rootObject.transform.FindObject("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_4/Door_Handle_Sign_4").gameObject;
+
+                    AddLockPickButton(outsidebutton1, 1);
+                    AddLockPickButton(outsidebutton2, 2);
+                    AddLockPickButton(outsidebutton3, 3);
+                    AddLockPickButton(outsidebutton4, 4);
+
+
+
+
+                    //if (LockIndicator1 == null || LockIndicator2 == null || LockIndicator3 == null || LockIndicator4 == null)
+                    //{
+                    //    ModConsole.Error("Could not find a lock indicator!");
+                    //}
+                }
+                else
+                {
+                    ModConsole.Error("Could not find rootObject!");
+                }
 
                 // I'll fix this later..
                 //MelonCoroutines.Start(UpdateButtonsLoop());
             }
         }
+
+
+        private static void AddLockPickButton(GameObject HandleSign, int doorID)
+        {
+            if(HandleSign != null)
+            {
+                var collider = HandleSign.GetOrAddComponent<MeshCollider>();
+                if(collider != null)
+                {
+                    collider.smoothSphereCollisions = true;
+                }
+
+                var AstroTrigger = HandleSign.GetOrAddComponent<VRC_AstroUdonTrigger>();
+                if(AstroTrigger != null)
+                {
+                    AstroTrigger.interactText = "Lockpick Door " + doorID + " (AstroClient)";
+                    AstroTrigger.OnInteract += () => { UnlockDoor(doorID); };
+                }
+            }
+        }
+        
 
         private static IEnumerator UpdateButtonsLoop()
         {
