@@ -10,13 +10,14 @@
     using RubyButtonAPI;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Linq;
     using UnityEngine;
 
     public class FBTHeaven : GameEvents
     {
         public static QMNestedButton FBTExploitsPage;
         public static float ButtonUpdateTime = 0f;
-
+        private static List<GameObject> Blinders = new List<GameObject>();
         //private static QMToggleButton LockButton1;
         //private static GameObject LockIndicator1;
         //private static QMToggleButton LockButton2;
@@ -25,6 +26,12 @@
         //private static GameObject LockIndicator3;
         //private static QMToggleButton LockButton4;
         //private static GameObject LockIndicator4;
+
+
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        {
+            Blinders.Clear();
+        }
 
         public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
@@ -68,34 +75,52 @@
 
                     // Fuck the useless blinders.
                     var trashblinder_0 = rootObject.transform.FindObject("Main_area-Private_rooms");
-                    var trashblinder_1 = rootObject.transform.FindObject("Main_area-Private_rooms (1)");
-                    var trashblinder_2 = rootObject.transform.FindObject("Main_area-Private_rooms_1 (1)");
-                    var trashblinder_3 = rootObject.transform.FindObject("Main_area-Private_rooms (2)");
-                    var trashblinder_4 = rootObject.transform.FindObject("Main_area-Private_rooms_1 (2)");
-                    var trashblinder_5 = rootObject.transform.FindObject("Main_area-Private_rooms (3)");
-                    var trashblinder_6 = rootObject.transform.FindObject("Main_area-Private_rooms_1 (3)");
+                    var trashblinder_1 = rootObject.transform.FindObject("Main_area-Private_rooms_1");
+                    var trashblinder_2 = rootObject.transform.FindObject("Main_area-Private_rooms (1)");
+                    var trashblinder_3 = rootObject.transform.FindObject("Main_area-Private_rooms_1 (1)");
+                    var trashblinder_4 = rootObject.transform.FindObject("Main_area-Private_rooms (2)");
+                    var trashblinder_5 = rootObject.transform.FindObject("Main_area-Private_rooms_1 (2)");
+                    var trashblinder_6 = rootObject.transform.FindObject("Main_area-Private_rooms (3)");
+                    var trashblinder_7 = rootObject.transform.FindObject("Main_area-Private_rooms_1 (3)");
 
-                    var trashblinder_7 = rootObject.transform.FindObject("Blindbox");
-                    var trashblinder_8 = rootObject.transform.FindObject("Blindbox (1)");
-                    var trashblinder_9 = rootObject.transform.FindObject("Blindbox (2)");
-                    var trashblinder_10 = rootObject.transform.FindObject("Blindbox (3)");
-                    var trashblinder_11 = rootObject.transform.FindObject("FBT_Heaven_Occluder"); 
+                    var trashblinder_8 = rootObject.transform.FindObject("Blindbox");
+                    var trashblinder_9 = rootObject.transform.FindObject("Blindbox (1)");
+                    var trashblinder_10 = rootObject.transform.FindObject("Blindbox (2)");
+                    var trashblinder_11 = rootObject.transform.FindObject("Blindbox (3)");
+                    var trashblinder_12 = rootObject.transform.FindObject("FBT_Heaven_Occluder");
 
+                    Blinders.AddGameObject(trashblinder_0.gameObject);
+                    Blinders.AddGameObject(trashblinder_1.gameObject);
+                    Blinders.AddGameObject(trashblinder_2.gameObject);
+                    Blinders.AddGameObject(trashblinder_3.gameObject);
+                    Blinders.AddGameObject(trashblinder_4.gameObject);
+                    Blinders.AddGameObject(trashblinder_5.gameObject);
+                    Blinders.AddGameObject(trashblinder_6.gameObject);
+                    Blinders.AddGameObject(trashblinder_7.gameObject);
+                    Blinders.AddGameObject(trashblinder_8.gameObject);
+                    Blinders.AddGameObject(trashblinder_9.gameObject);
+                    Blinders.AddGameObject(trashblinder_10.gameObject);
+                    Blinders.AddGameObject(trashblinder_11.gameObject);
+                    Blinders.AddGameObject(trashblinder_12.gameObject);
 
-                    trashblinder_0.DestroyMeLocal();
-                    trashblinder_1.DestroyMeLocal();
-                    trashblinder_2.DestroyMeLocal();
-                    trashblinder_3.DestroyMeLocal();
-                    trashblinder_4.DestroyMeLocal();
-                    trashblinder_5.DestroyMeLocal();
-                    trashblinder_6.DestroyMeLocal();
+                    if (Blinders.Count() != 0)
+                    {
+                        foreach (var trash in Blinders)
+                        {
+                            trash.DestroyMeLocal();
+                        }
+                    }
+                    var doorinvisibleplane = rootObject.transform.FindObject("plane");
+                    if(doorinvisibleplane != null)
+                    {
+                        // make invisible this shit.
+                        var rend = doorinvisibleplane.GetComponent<MeshRenderer>();
+                        if(rend != null)
+                        {
+                            rend.enabled = false;
+                        }
 
-                    trashblinder_7.DestroyMeLocal();
-                    trashblinder_8.DestroyMeLocal();
-                    trashblinder_9.DestroyMeLocal();
-                    trashblinder_10.DestroyMeLocal();
-                    trashblinder_11.DestroyMeLocal();
-
+                    }
 
 
                     var outsidebutton1 = rootObject.transform.FindObject("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_1/Door_Handle_Sign_1").gameObject;
