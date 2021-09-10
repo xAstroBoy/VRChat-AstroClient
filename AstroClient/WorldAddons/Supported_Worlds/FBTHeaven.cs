@@ -114,10 +114,13 @@
                     if(doorinvisibleplane != null)
                     {
                         // make invisible this shit.
-                        var rend = doorinvisibleplane.GetComponent<MeshRenderer>();
-                        if(rend != null)
+                        var renderers = doorinvisibleplane.GetComponentsInChildren<Renderer>(true);
+                        foreach (var rend in renderers)
                         {
-                            rend.enabled = false;
+                            if (rend != null)
+                            {
+                                rend.enabled = false;
+                            }
                         }
 
                     }
