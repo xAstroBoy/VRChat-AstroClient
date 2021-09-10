@@ -62,6 +62,8 @@
         public int SpoofedPing = 30;
 
         public float SpoofedFPS = 60f;
+
+        public bool KeyBinds = false;
     }
 
     [Serializable, Obfuscation]

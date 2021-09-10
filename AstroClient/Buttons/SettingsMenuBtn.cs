@@ -86,8 +86,12 @@
             PlayerESPMenu.InitButtons(sub, 2f, 1.5f, true);
 
             // Nameplate Toggle
-            var toggleNameplates = new QMSingleToggleButton(sub, 3f, 1.5f, "Nameplates", () => { ConfigManager.UI.NamePlates = true; }, "Nameplates", () => { ConfigManager.UI.NamePlates = false; }, "Nameplates", Color.green, Color.red, null, true);
+            var toggleNameplates = new QMSingleToggleButton(sub, 3f, 1.5f, "Nameplates", () => { ConfigManager.UI.NamePlates = true; }, "Nameplates", () => { ConfigManager.UI.NamePlates = false; }, "Nameplates", Color.green, Color.red, null, false, true);
             toggleNameplates.SetToggleState(ConfigManager.UI.NamePlates, false);
+
+            // KeyBind Toggle
+            var toggleKeyBinds = new QMSingleToggleButton(sub, 4f, 1.5f, "KeyBinds", () => { ConfigManager.General.KeyBinds = true; }, "KeyBinds", () => { ConfigManager.General.KeyBinds = false; }, "KeyBinds", Color.green, Color.red, null, false, true);
+            toggleKeyBinds.SetToggleState(ConfigManager.General.KeyBinds, false);
 
             // Spoofs
             QMNestedButton subSpoofButton = new QMNestedButton(sub, 3, 2f, "Spoofs", "Spoof Menu", null, null, null, null, false);

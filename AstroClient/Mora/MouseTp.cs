@@ -8,7 +8,7 @@
         {
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.T))
             {
-                if (!ModDetector.FindMods.IsNotoriousPresent)
+                if (!ModDetector.FindMods.IsNotoriousPresent && ConfigManager.General.KeyBinds)
                 {
                     if (RoomManager.field_Internal_Static_ApiWorld_0 != null && RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
                     {

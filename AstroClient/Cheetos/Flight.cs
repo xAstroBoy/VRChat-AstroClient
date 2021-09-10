@@ -135,7 +135,7 @@
                     transform = Camera.main.transform;
                 }
 
-                if (!ModDetector.FindMods.IsNotoriousPresent)
+                if (!ModDetector.FindMods.IsNotoriousPresent && ConfigManager.General.KeyBinds)
                 {
                     if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
                     {
