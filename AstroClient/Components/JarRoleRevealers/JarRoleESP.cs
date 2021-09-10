@@ -366,14 +366,11 @@
         {
             if (Player != null)
             {
-                if (PlayerESPMenu.Toggle_Player_ESP)
-                {
-                    var esp = Player.gameObject.GetComponent<PlayerESP>();
-                    if (esp != null)
+                
+                    if (ESP != null)
                     {
-                        esp.ResetColor();
+                        ESP.ResetColor();
                     }
-                }
             }
         }
 
@@ -393,15 +390,13 @@
 
         public override void OnViewRolesPropertyChanged(bool value)
         {
+            ViewRoles = value;
             if (LinkedNode != null)
             {
                 if (GameRoleTag != null)
                 {
-                    if (GameRoleTag.ShowTag != value)
-                    {
-                        GameRoleTag.ShowTag = value;
-                    }
-                    if(value)
+                    GameRoleTag.ShowTag = value;
+                    if (value)
                     {
                         if(ESP != null)
                         {
@@ -598,26 +593,11 @@
         {
             get
             {
-                if (AmongUsCurrentRole == AmongUsRoles.Crewmate)
+                if (AmongUsCurrentRole == AmongUsRoles.Crewmate || AmongUsCurrentRole == AmongUsRoles.Impostor)
                 {
                     return !AmongUSHasVoted;
                 }
-                else if (AmongUsCurrentRole == AmongUsRoles.Impostor)
-                {
-                    return !AmongUSHasVoted;
-                }
-                else if (AmongUsCurrentRole == AmongUsRoles.Unassigned)
-                {
-                    return false;
-                }
-                else if (AmongUsCurrentRole == AmongUsRoles.None)
-                {
-                    return false;
-                }
-                else
-                {
-                    return false;
-                }
+                return false;
             }
         }
 
