@@ -17,7 +17,7 @@
     {
         public static QMNestedButton FBTExploitsPage;
         public static float ButtonUpdateTime = 0f;
-        private static List<GameObject> Blinders = new List<GameObject>();
+        private static List<GameObject> TrashToDelete = new List<GameObject>();
         //private static QMToggleButton LockButton1;
         //private static GameObject LockIndicator1;
         //private static QMToggleButton LockButton2;
@@ -30,7 +30,7 @@
 
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
-            Blinders.Clear();
+            TrashToDelete.Clear();
         }
 
         public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
@@ -89,23 +89,30 @@
                     var trashblinder_11 = rootObject.transform.FindObject("Blindbox (3)");
                     var trashblinder_12 = rootObject.transform.FindObject("FBT_Heaven_Occluder");
 
-                    Blinders.AddGameObject(trashblinder_0.gameObject);
-                    Blinders.AddGameObject(trashblinder_1.gameObject);
-                    Blinders.AddGameObject(trashblinder_2.gameObject);
-                    Blinders.AddGameObject(trashblinder_3.gameObject);
-                    Blinders.AddGameObject(trashblinder_4.gameObject);
-                    Blinders.AddGameObject(trashblinder_5.gameObject);
-                    Blinders.AddGameObject(trashblinder_6.gameObject);
-                    Blinders.AddGameObject(trashblinder_7.gameObject);
-                    Blinders.AddGameObject(trashblinder_8.gameObject);
-                    Blinders.AddGameObject(trashblinder_9.gameObject);
-                    Blinders.AddGameObject(trashblinder_10.gameObject);
-                    Blinders.AddGameObject(trashblinder_11.gameObject);
-                    Blinders.AddGameObject(trashblinder_12.gameObject);
-
-                    if (Blinders.Count() != 0)
+                    var logger = GameObjectFinder.Find("Logger");
+                    if(logger != null)
                     {
-                        foreach (var trash in Blinders)
+                        ModConsole.Log("Logger found, this is sus...");
+                        TrashToDelete.AddGameObject(logger);
+                    }
+
+                    TrashToDelete.AddGameObject(trashblinder_0.gameObject);
+                    TrashToDelete.AddGameObject(trashblinder_1.gameObject);
+                    TrashToDelete.AddGameObject(trashblinder_2.gameObject);
+                    TrashToDelete.AddGameObject(trashblinder_3.gameObject);
+                    TrashToDelete.AddGameObject(trashblinder_4.gameObject);
+                    TrashToDelete.AddGameObject(trashblinder_5.gameObject);
+                    TrashToDelete.AddGameObject(trashblinder_6.gameObject);
+                    TrashToDelete.AddGameObject(trashblinder_7.gameObject);
+                    TrashToDelete.AddGameObject(trashblinder_8.gameObject);
+                    TrashToDelete.AddGameObject(trashblinder_9.gameObject);
+                    TrashToDelete.AddGameObject(trashblinder_10.gameObject);
+                    TrashToDelete.AddGameObject(trashblinder_11.gameObject);
+                    TrashToDelete.AddGameObject(trashblinder_12.gameObject);
+
+                    if (TrashToDelete.Count() != 0)
+                    {
+                        foreach (var trash in TrashToDelete)
                         {
                             trash.DestroyMeLocal();
                         }
