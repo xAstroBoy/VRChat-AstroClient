@@ -407,19 +407,11 @@
                         {
                             if(IsAmongUsWorld)
                             {
-                                var color = AmongUsGetNamePlateColor();
-                                if (color != null)
-                                {
-                                    SetEspColorIfExists(color.Value);
-                                }
+                                UpdateAmongUSRole(AmongUsCurrentRole);
                             }
                             else if(IsMurder4World)
                             {
-                                var color = Murder4GetNamePlateColor();
-                                if (color != null)
-                                {
-                                    SetEspColorIfExists(color.Value);
-                                }
+                                UpdateMurder4Role(Murder4CurrentRole);
                             }
                         }
                     }
@@ -679,9 +671,6 @@
 
 
         internal bool ViewRoles { get; private set; }
-
-        internal bool TogglePlayerESP { get; private set; }
-
 
         internal SingleTag GameRoleTag { get; private set; }
         internal SingleTag AmongUSVoteRevealTag { get; private set; }
