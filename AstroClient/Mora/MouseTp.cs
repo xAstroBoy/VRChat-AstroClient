@@ -8,11 +8,14 @@
         {
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.T))
             {
-                if (RoomManager.field_Internal_Static_ApiWorld_0 != null && RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
+                if (!ModDetector.FindMods.IsNotoriousPresent)
                 {
-                    if (Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out RaycastHit raycastHit))
+                    if (RoomManager.field_Internal_Static_ApiWorld_0 != null && RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
                     {
-                        VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position = raycastHit.point;
+                        if (Physics.Raycast(new Ray(Camera.main.transform.position, Camera.main.transform.forward), out RaycastHit raycastHit))
+                        {
+                            VRCPlayer.field_Internal_Static_VRCPlayer_0.transform.position = raycastHit.point;
+                        }
                     }
                 }
             }

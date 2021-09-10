@@ -135,16 +135,19 @@
                     transform = Camera.main.transform;
                 }
 
-                if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
+                if (!ModDetector.FindMods.IsNotoriousPresent)
                 {
-                    FlyEnabled = !FlyEnabled;
-                    ExploitsMenu.RefreshFlightButtons();
-                }
+                    if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
+                    {
+                        FlyEnabled = !FlyEnabled;
+                        ExploitsMenu.RefreshFlightButtons();
+                    }
 
-                if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
-                {
-                    NoClipEnabled = !NoClipEnabled;
-                    ExploitsMenu.RefreshFlightButtons();
+                    if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.G))
+                    {
+                        NoClipEnabled = !NoClipEnabled;
+                        ExploitsMenu.RefreshFlightButtons();
+                    }
                 }
 
                 if (FlyEnabled)
