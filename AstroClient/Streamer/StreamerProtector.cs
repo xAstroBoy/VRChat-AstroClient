@@ -35,15 +35,16 @@
         "usr_3ff766cf-ddee-4fed-b321-aa3bdd2f9aa7",
         "usr_f3c3cb44-9f1d-4bcd-8c1d-d361dfa160fa",
         "usr_adf03ad7-5810-4d20-bf95-6320dcbb74ea",
-        "usr_81fe2da1-e841-4a1e-a46d-cea447c1b413"
-
+        "usr_81fe2da1-e841-4a1e-a46d-cea447c1b413",
+        "usr_22b75801-bf0f-4464-b002-4b9b86252196",
+        "usr_7c9eb849-4f62-446f-980b-9e000a1b238e",
+        "usr_d4d6ea8a-8ad7-4d67-af81-d58a26449cca",
         };
 
 
         public static bool IsAStreamerPresent()
         {
             return StreamersInInstance.Count() != 0;
-
         }
 
 
