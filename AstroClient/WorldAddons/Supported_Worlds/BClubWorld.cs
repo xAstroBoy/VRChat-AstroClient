@@ -44,6 +44,9 @@
         private static bool _isFreezeUnlockEnabed;
         private static bool _isBlueChairEnabed;
 
+        private static bool isCurrentWorld;
+        private static string realName;
+
         public static bool IsBlueChairEnabled
         {
             get => _isBlueChairEnabed;
@@ -154,7 +157,7 @@
             LockButton5 = new QMToggleButton(BClubExploitsPage, 2, 1, "Unlock 5", () => { ToggleDoor(5); }, "Lock 5", () => { ToggleDoor(5); }, "Toggle Door Lock", null, Color.green, Color.red, false);
             LockButton6 = new QMToggleButton(BClubExploitsPage, 3, 1, "Unlock 6", () => { ToggleDoor(6); }, "Lock 6", () => { ToggleDoor(6); }, "Toggle Door Lock", null, Color.green, Color.red, false);
 
-            _ = new QMToggleButton(BClubExploitsPage, 4, 1, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = true; }, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = false; }, "VIP Spoof", null, Color.green, Color.red, false);
+            _ = new QMToggleButton(BClubExploitsPage, 4, 1, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = true; PlayerUtils.GetAPIUser()._displayName_k__BackingField = "Blue-kun"; }, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = false; PlayerUtils.GetAPIUser()._displayName_k__BackingField = realName; }, "VIP Spoof", null, Color.green, Color.red, false);
 
             // VIP
             _ = new QMSingleButton(BClubExploitsPage, 4, 2, "Enter VIP", () => { EnterVIPRoom(); }, "Enter VIP Room");
@@ -255,7 +258,7 @@
                 }
                 else
                 {
-                    if (!WorldUtils.IsInWorld)
+                    if (!isCurrentWorld)
                     {
                         IsFreezeLockEnabed = false;
                         yield break;
@@ -293,7 +296,7 @@
                 }
                 else
                 {
-                    if (!WorldUtils.IsInWorld)
+                    if (!isCurrentWorld)
                     {
                         IsFreezeUnlockEnabed = false;
                         yield break;
@@ -336,7 +339,7 @@
                 }
                 else
                 {
-                    if (!WorldUtils.IsInWorld)
+                    if (!isCurrentWorld)
                     {
                         IsDoorbellSpamEnabled = false;
                         yield break;
@@ -376,7 +379,7 @@
             }
             else
             {
-                if (!WorldUtils.IsInWorld)
+                if (!isCurrentWorld)
                 {
                     IsBlueChairEnabled = false;
                     yield break;
@@ -408,10 +411,23 @@
             RefreshButtons();
         }
 
+        public override void OnRoomLeft()
+        {
+            if (isCurrentWorld)
+            {
+                isCurrentWorld = false;
+                ModConsole.Log("Leaving B Club");
+                Bools.IsBClubVIPSpoofing = false;
+                PlayerUtils.GetAPIUser()._displayName_k__BackingField = PlayerUtils.GetPlayer().GetDisplayName();
+            }
+        }
+
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
             if (id == WorldIds.BClub)
             {
+                isCurrentWorld = true;
+                realName = PlayerUtils.GetPlayer().GetDisplayName();
                 _bells = WorldUtils.GetUdonScripts().Where(b => b.name == "Doorbell").ToList();
                 ModConsole.Log($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
@@ -493,7 +509,6 @@
                     RemovePrivacyBlocksOnRooms(4);
                     RemovePrivacyBlocksOnRooms(5);
                     RemovePrivacyBlocksOnRooms(6);
-                    PatreonPatch();
 
                     _ = MelonCoroutines.Start(UpdateButtonsLoop());
                 }
@@ -516,6 +531,10 @@
 
                 if (ButtonUpdateTime < 100f)
                 {
+                    if (Bools.IsBClubVIPSpoofing)
+                    {
+                        PlayerUtils.GetAPIUser()._displayName_k__BackingField = "Blue-kun";
+                    }
                     yield return null;
                 }
                 else
