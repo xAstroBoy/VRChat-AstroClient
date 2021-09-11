@@ -39,7 +39,6 @@
                     {
                         child.gameObject.SetActiveRecursively(true);
                     }
-
                 }
             }
         }

@@ -12,7 +12,7 @@
     using VRC;
     using VRC.SDKBase;
 
-    #endregion
+    #endregion Imports
 
     // thanks TO Cheeto aka Craig on discord, he's been really helpful!
     public class GameEvents
@@ -55,6 +55,20 @@
             QuickMenuHooks.Event_OnPlayerSelected += Internal_OnPlayerSelected;
 
             TargetSelector.Event_OnTargetSet += Internal_OnTargetSet;
+
+            StreamerProtector.Event_OnStreamerJoined += Internal_OnStreamerJoined;
+        }
+
+
+
+        private void Internal_OnStreamerJoined(object sender, PlayerEventArgs e)
+        {
+            OnStreamerJoined(e.player);
+        }
+
+        private void Internal_OnStreamerLeft(object sender, PlayerEventArgs e)
+        {
+            OnStreamerLeft(e.player);
         }
 
         private void Internal_OnMasterClientSwitched(object sender, PhotonPlayerEventArgs e)
@@ -237,6 +251,16 @@
         public virtual void OnPlayerJoined(Player player)
         {
         }
+
+        public virtual void OnStreamerLeft(Player player)
+        {
+        }
+
+        public virtual void OnStreamerJoined(Player player)
+        {
+        }
+
+
 
         public virtual void OnPhotonLeft(Photon.Realtime.Player player)
         {

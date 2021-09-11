@@ -2,7 +2,7 @@
 {
     using VRC.Udon.ProgramSources;
 
-    class UdonTrigger_Helper
+    internal class UdonTrigger_Helper
     {
         private static SerializedUdonProgramAsset _OnInteractUdonProgramEvent;
 
@@ -29,6 +29,5 @@
                 return null;
             }
         }
-
     }
 }

@@ -1,14 +1,13 @@
 ﻿namespace AstroClient
 {
+    using AstroClient.Components;
     using AstroLibrary;
-    using HarmonyLib;
+    using AstroLibrary.Utility;
     using System;
     using System.Reflection;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
-    using AstroClient.Components;
-    using AstroLibrary.Utility;
 
     public class WorldButton
     {
@@ -63,7 +62,6 @@
             front_canvas.layer = LayerMask.NameToLayer("UI");
             _ = front_canvas.AddComponent<Canvas>();
             _ = front_canvas.AddComponent<CanvasScaler>();
-
 
             var textObject = new GameObject("Text");
 

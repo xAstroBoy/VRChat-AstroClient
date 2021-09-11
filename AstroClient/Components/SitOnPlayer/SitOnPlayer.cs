@@ -1,7 +1,6 @@
 ﻿namespace AstroClient.Components
 {
     using AstroLibrary.Utility;
-    using Blaze.Utils;
     using System;
     using UnityEngine;
     using VRC;
@@ -79,7 +78,5 @@
                 Self.transform.position = Target.transform.position + new Vector3(0, Height, 0);
             }
         }
-
-
     }
 }

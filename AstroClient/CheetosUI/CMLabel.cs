@@ -4,7 +4,6 @@
 
     using UnityEngine;
     using UnityEngine.UI;
-    using VRC.Udon.Serialization.OdinSerializer;
 
     #endregion Imports
 

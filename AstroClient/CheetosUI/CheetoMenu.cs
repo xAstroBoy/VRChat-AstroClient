@@ -1,6 +1,5 @@
 ﻿namespace AstroClient
 {
-
     #region Imports
 
     using AstroLibrary.Utility;

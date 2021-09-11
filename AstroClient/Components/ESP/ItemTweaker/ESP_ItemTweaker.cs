@@ -41,7 +41,6 @@
                 return;
             }
             SetupHighlighter();
-
         }
 
         private void SetupHighlighter()

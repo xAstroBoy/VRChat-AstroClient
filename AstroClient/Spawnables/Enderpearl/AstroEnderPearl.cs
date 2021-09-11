@@ -1,19 +1,11 @@
-using System;
-using System.Collections;
-using System.Linq;
-using AstroClient.Components;
 using AstroLibrary.Extensions;
-using MelonLoader;
-using UnhollowerRuntimeLib;
 using UnityEngine;
 using VRC.SDKBase;
-using VRCSDK2;
 
 namespace AstroClient
 {
     public class AstroEnderPearl
     {
-
         private static GameObject ENDER;
 
         public static void SpawnEnderPearl()
@@ -36,6 +28,5 @@ namespace AstroClient
             _ = pearl.AddComponent<EnderPearlBehaviour>();
             ENDER = pearl;
         }
-
     }
 }

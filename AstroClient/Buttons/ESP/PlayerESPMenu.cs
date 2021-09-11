@@ -13,8 +13,6 @@
     {
         public static EventHandler<BoolEventsArgs> Event_OnPlayerESPPropertyChanged;
 
-
-
         public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "ESP Menu", "ESP Options", null, null, null, null, btnHalf);

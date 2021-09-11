@@ -7,10 +7,7 @@
     using AstroLibrary.Extensions;
     using ExitGames.Client.Photon;
     using HarmonyLib;
-    using MelonLoader;
-    using Photon.Pun;
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Reflection;
     using UnityEngine;
@@ -88,8 +85,6 @@
         {
             InitPatch();
         }
-
-
 
         private void InitPatch()
         {

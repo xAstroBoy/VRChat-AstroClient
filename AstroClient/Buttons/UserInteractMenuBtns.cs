@@ -5,10 +5,10 @@
     using AstroClient.Components;
     using AstroClient.Variables;
     using AstroLibrary.Utility;
-    using Finder = AstroLibrary.Finder;
     using RubyButtonAPI;
     using System;
     using UnityEngine;
+    using Finder = AstroLibrary.Finder;
 
     internal class UserInteractMenuBtns : GameEvents
     {

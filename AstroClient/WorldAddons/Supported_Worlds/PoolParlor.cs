@@ -13,8 +13,6 @@
 
     public class PoolParlor : GameEvents
     {
-
-
         private void TempUdonPatcherList(UdonBehaviour behaviour, string Symbol)
         {
             var disassembled = behaviour.DisassembleUdonBehaviour();
@@ -33,13 +31,9 @@
                             UdonHeapEditor.PatchHeap(disassembled, Symbol, unpackedlist.ToArray(), true);
                         }
                     }
-
-
-
                 }
             }
         }
-
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
@@ -60,15 +54,11 @@
                 //    TempUdonPatcherList(Cue_1, "__0_mp_FAEC5B32FB70E90FACBC029727ACAFEC_StringArray");
                 //}
 
-
                 //var graphicsmanager = UdonSearch.FindUdonEvent("graphicsmanager", "_IsUSColors").Action;
                 //if (graphicsmanager != null)
                 //{
                 //    TempUdonPatcherList(graphicsmanager, "__0_mp_A2E471DA9675E8F3C0BCD6DD0EBFF058_StringArray");
                 //}
-
-
-
 
                 if (world == null)
                 {
@@ -77,7 +67,6 @@
                     {
                         Meta_Cue_Rack = world.transform.FindObject("Meta's Cue Rack");
                     }
-
                 }
                 if (table_primary == null)
                 {
@@ -107,11 +96,9 @@
                     Add_Modifier_ToBall(Find_Balls("1", "3"));
                     Add_Modifier_ToBall(Find_Balls("1", "4"));
                     Add_Modifier_ToBall(Find_Balls("1", "5"));
-
                 }
             }
         }
-
 
         private static void Add_Modifier_ToBall(Parlor_Balls ball)
         {
@@ -139,10 +126,7 @@
                     udon.interactText = $"Deactivate {ball.Table_Ball.name} Pickup";
                 };
             }
-
         }
-
-
 
         private static void Add_Modifier_ToCueBall(Parlor_Balls clue)
         {
@@ -172,8 +156,6 @@
             }
         }
 
-
-
         public static Parlor_Balls Find_Balls(string first_number, string second_number)
         {
             if (world != null && table_primary != null && Meta_Cue_Rack != null && table_Balls != null)
@@ -192,7 +174,6 @@
                 }
                 else
                 {
-
                     Transform rack_ball;
                     Transform table_ball = table_Balls.FindObject($"ball{first_number + second_number}");
                     Transform table_ball_pickup = table_ball.FindObject("pickup");
@@ -235,24 +216,18 @@
             }
         }
 
-
-
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             table_primary = null;
             table_Balls = null;
             world = null;
             Meta_Cue_Rack = null;
-
         }
-
 
         public static Transform table_primary;
         public static Transform table_Balls;
 
         public static Transform world;
         public static Transform Meta_Cue_Rack;
-
-
     }
 }

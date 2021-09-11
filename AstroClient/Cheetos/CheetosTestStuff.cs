@@ -4,16 +4,16 @@
 
     using AstroClient.Components;
     using AstroClient.Variables;
+    using AstroLibrary;
     using AstroLibrary.Console;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using AstroLibrary;
     using System.Collections.Generic;
-    using UnityEngine.UI;
     using UnityEngine;
+    using UnityEngine.UI;
     using VRC;
 
-    #endregion
+    #endregion Imports
 
     internal class CheetosTestStuff : GameEvents
     {
@@ -21,7 +21,6 @@
 
         public override void VRChat_OnUiManagerInit()
         {
-
             var infoBar = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar");
             var infobartext = GameObject.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar/EarlyAccessText").GetComponent<Text>();
 

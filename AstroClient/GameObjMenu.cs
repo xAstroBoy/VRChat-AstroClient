@@ -16,7 +16,7 @@
     using UnityEngine.UI;
     using VRC;
 
-    #endregion
+    #endregion Imports
 
     public class GameObjMenu : GameEvents
     {

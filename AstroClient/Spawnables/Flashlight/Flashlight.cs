@@ -1,35 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using AstroClient.Components;
 using AstroLibrary.Extensions;
 using AstroLibrary.Utility;
-using MelonLoader;
-using UnhollowerRuntimeLib;
+using System.Collections.Generic;
 using UnityEngine;
-using VRC.SDKBase;
-using VRCSDK2;
 
 namespace AstroClient
 {
     public class Astro_Flashlight : GameEvents
     {
-
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             DestroyAllFlashLights();
         }
-
 
         public static void DestroyAllFlashLights()
         {
             flashlights.DestroyAndClearList();
         }
 
-
         public static void SpawnFlashlight()
         {
-
             GameObject FlashLight_Body = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
 
             FlashLight_Body.transform.SetParent(SpawnedItemsHolder.GetSpawnedItemsHolder().transform);
@@ -49,12 +38,11 @@ namespace AstroClient
                 body.isKinematic = true;
             }
             var pickup = FlashLight_Body.AddComponent<VRCSDK2.VRC_Pickup>();
-            if(pickup != null)
+            if (pickup != null)
             {
                 pickup.AutoHold = VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes;
                 pickup.pickupable = true;
             }
-
 
             GameObject FlashLight_Base = new GameObject("Base");
             if (FlashLight_Base != null)
@@ -83,7 +71,7 @@ namespace AstroClient
             FlashLight_Body.transform.Rotate(90f, 0f, 0f);
 
             var behaviour = FlashLight_Body.AddComponent<FlashlightBehaviour>();
-            if(behaviour != null)
+            if (behaviour != null)
             {
                 behaviour.FlashLight_Base = FlashLight_Base;
                 behaviour.FlashLight_Head = FlashLight_Head;
@@ -92,13 +80,9 @@ namespace AstroClient
                 behaviour.InitiateLight();
             }
 
-
             flashlights.AddGameObject(FlashLight_Body);
         }
 
-
         private static List<GameObject> flashlights = new List<GameObject>();
-
-
     }
 }

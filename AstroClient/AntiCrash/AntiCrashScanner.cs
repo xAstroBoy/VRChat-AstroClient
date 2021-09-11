@@ -34,7 +34,6 @@
                     AntiCrashUtils.TempLog($"Blocked {player.DisplayName()}'s Avatar!");
                     crashTypes.ForEach(ct => AntiCrashUtils.TempLog($"Crash Type: {ct}"));
                 }
-
             }
         }
 

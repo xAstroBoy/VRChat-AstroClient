@@ -5,10 +5,7 @@
     using AstroClient.Variables;
     using AstroLibrary;
     using RubyButtonAPI;
-    using System.Diagnostics;
-    using System.IO;
     using System.Reflection;
-    using UnityEngine;
 
     #endregion Imports
 

@@ -5,7 +5,6 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using System.Collections.Generic;
-    using VRC.SDKBase;
 
     public class SnoozeScaryMaze5 : GameEvents
     {
@@ -27,7 +26,6 @@
                 }
 
                 // Rest In peace hammer.
-
 
                 //var snoozetools = GameObjectFinder.FindRootSceneObject("Snooze Tools");
                 //if (snoozetools != null)

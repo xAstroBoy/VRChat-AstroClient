@@ -10,7 +10,7 @@
     using UnityEngine;
     using VRC.SDKBase;
 
-    class JustHParty : GameEvents
+    internal class JustHParty : GameEvents
     {
         public static QMNestedButton JustHPartyMenu;
 

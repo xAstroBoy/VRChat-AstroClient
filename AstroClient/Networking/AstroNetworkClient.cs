@@ -10,12 +10,10 @@
     using AstroLibrary.Utility;
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
-    using Blaze.API;
     using Blaze.Utils;
     using MelonLoader;
     using Newtonsoft.Json;
     using System;
-    using System.Diagnostics;
     using System.Net.Sockets;
     using System.Threading;
     using System.Threading.Tasks;
@@ -133,6 +131,7 @@
                 case PacketServerType.CONNECTION_FINISHED:
                     NetworkingManager.IsReady = true;
                     break;
+
                 case PacketServerType.ADD_TAG:
                     if (ConfigManager.UI.NamePlates)
                     {

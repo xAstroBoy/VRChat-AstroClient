@@ -8,7 +8,7 @@
     using RubyButtonAPI;
     using UnityEngine;
 
-    #endregion
+    #endregion Imports
 
     internal class FlightMenu : GameEvents
     {

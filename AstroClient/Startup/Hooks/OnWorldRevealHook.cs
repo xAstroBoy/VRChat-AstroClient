@@ -2,15 +2,13 @@
 {
     using AstroClient.Variables;
     using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
     using MelonLoader;
     using System;
-    using System.Collections;
     using System.Reflection;
     using System.Runtime.InteropServices;
     using UnhollowerBaseLib;
-    using UnityEngine;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
 
     public class OnWorldRevealHook : GameEvents
     {
@@ -30,7 +28,6 @@
         //		yield return new WaitForSeconds(5f);
         //	Event_OnWorldReveal.SafetyRaise(new OnWorldRevealArgs(WorldUtils.Get_World_ID(), WorldUtils.Get_World_Name(), WorldUtils.Get_World_tags(), WorldUtils.Get_World_AssetUrl()));
         //}
-
 
         public override void ExecutePriorityPatches()
         {

@@ -3,8 +3,6 @@
     using AstroClient.Udon;
     using AstroClient.Variables;
     using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
     using System.Collections.Generic;
 
     public class Valkyrie_Defense : GameEvents
@@ -21,7 +19,6 @@
                     if (disassembled != null)
                     {
                         UdonHeapEditor.PatchHeap(disassembled, "money_now", 999999999, true);
-
                     }
                 }
             }

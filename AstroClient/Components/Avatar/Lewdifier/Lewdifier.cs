@@ -10,7 +10,6 @@
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
-    using VRC.SDKBase;
 
     [RegisterComponent]
     public class Lewdifier : GameEventsBehaviour

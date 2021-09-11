@@ -2,14 +2,8 @@
 {
     using AstroClient;
     using AstroClient.Udon;
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
-    using MelonLoader;
-    using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using UnityEngine;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
@@ -24,6 +18,7 @@
                 UdonUnboxer.UnboxUdonToConsole(obj);
             }
         }
+
         public static UdonBehaviour_Cached FindUdonEvent(this GameObject obj, string subaction)
         {
             return UdonSearch.FindUdonEvent(obj, subaction);
@@ -41,9 +36,6 @@
                 InvokeEvent(udonvar.UdonBehaviour, udonvar.EventKey);
             }
         }
-
-
-
 
         private static void InvokeEvent(UdonBehaviour behaviour, string EventKey)
         {

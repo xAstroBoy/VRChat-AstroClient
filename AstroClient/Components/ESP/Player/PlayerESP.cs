@@ -5,7 +5,6 @@
     using AstroLibrary.Utility;
     using MelonLoader;
     using System;
-    using System.Collections;
     using System.Linq;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -95,10 +94,8 @@
                 }
                 SetPlayerDefaultESP();
                 //RoutineCancellationToken = MelonCoroutines.Start(StartUpdater());
-
             }
         }
-
 
         //private IEnumerator StartUpdater()
         //{
@@ -111,10 +108,6 @@
         //        yield return new WaitForSeconds(5000);
         //    }
         //}
-
-
-
-
 
         private Color BlockedColor
         {
@@ -148,7 +141,6 @@
             }
         }
 
-
         public override void OnUnfriended()
         {
             if (!UseCustomColor)
@@ -156,6 +148,7 @@
                 SetPlayerDefaultESP();
             }
         }
+
         public void OnDestroy()
         {
             HighLightOptions.DestroyHighlighter();
@@ -208,7 +201,6 @@
             }
         }
 
-
         private void SetPlayerDefaultESP()
         {
             if (HighLightOptions != null)
@@ -248,6 +240,7 @@
         private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
         private HighlightsFXStandalone HighLightOptions;
         internal bool _UseCustomColor;
+
         internal bool UseCustomColor
         {
             get

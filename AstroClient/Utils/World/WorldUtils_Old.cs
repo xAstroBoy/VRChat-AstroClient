@@ -3,22 +3,22 @@
     #region Imports
 
     using AstroClient.Experiments;
+    using AstroClient.Variables;
     using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Finder;
+    using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
     using VRC;
+    using VRC.Core;
     using VRC.SDK3.Components;
     using VRC.Udon;
     using Color = System.Drawing.Color;
-    using AstroLibrary.Extensions;
-    using AstroClient.Variables;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
-    using VRC.Core;
 
-    #endregion
+    #endregion Imports
 
     public class WorldUtils_Old : GameEvents
     {
@@ -187,7 +187,6 @@
             try
             {
                 return GameObjectFinder.GetRootGameObjectsComponents<AudioSource>(true, false);
-
             }
             catch (Exception e)
             {
@@ -429,7 +428,6 @@
             return new List<VRC.SDKBase.VRC_AvatarPedestal>();
         }
 
-
         public static List<VRCSDK2.VRC_AvatarPedestal> Get_VRC_AvatarPedestal()
         {
             try
@@ -452,7 +450,6 @@
             }
             return new List<VRCSDK2.VRC_AvatarPedestal>();
         }
-
 
         public static List<UdonBehaviour> Get_UdonBehaviours()
         {

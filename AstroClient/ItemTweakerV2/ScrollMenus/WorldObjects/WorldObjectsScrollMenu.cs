@@ -39,7 +39,6 @@
             {
                 foreach (var item in WorldObjects)
                 {
-
                     var btn = new QMSingleButton(scroll.BaseMenu, 0, 0, $"Select {item.name}", delegate
                     {
                         item.Set_As_Object_To_Edit();

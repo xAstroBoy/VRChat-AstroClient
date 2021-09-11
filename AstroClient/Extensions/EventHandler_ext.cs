@@ -10,12 +10,10 @@
 
     public static class Eventhandler_ext
     {
-
         public static void SafetyRaise(this EventHandler eh)
         {
             if (eh == null)
                 return;
-
 
             foreach (var handler in eh.GetInvocationList())
             {
@@ -41,14 +39,12 @@
             if (eh == null)
                 return;
 
-
             foreach (var handler in eh.GetInvocationList())
             {
                 try
                 {
                     _ = handler.DynamicInvoke(null, e);
                 }
-
                 catch (TargetInvocationException invokeexc)
                 {
                     ModConsole.DebugError($"Error in the Handler : {handler.Method.Name}");

@@ -2,7 +2,6 @@
 {
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using System;
     using VRC.Udon.Common.Interfaces;
 
     public static class UdonHeapEditor
@@ -10,7 +9,7 @@
         public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, bool value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
-            { 
+            {
                 PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
             }
             else

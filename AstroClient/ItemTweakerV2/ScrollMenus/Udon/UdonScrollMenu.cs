@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
+    using AstroClient.Components;
     using AstroClient.ItemTweakerV2.Selector;
     using AstroClient.Variables;
     using AstroLibrary.Extensions;
-    using RubyButtonAPI;
-    using VRC.Udon.Common.Interfaces;
-    using AstroClient.Components;
-    using UnityEngine;
     using AstroLibrary.Utility;
+    using RubyButtonAPI;
+    using UnityEngine;
+    using VRC.Udon.Common.Interfaces;
 
     public class UdonScrollMenu
     {
@@ -31,7 +31,6 @@
             {
                 foreach (var action in Tweaker_Object.GetGameObjectToEdit().Get_UdonBehaviours())
                 {
-
                     var btn = new QMSingleButton(Menu, 0f, 0f, action.gameObject.name, delegate
                     {
                         MainScroll.SetAction(delegate

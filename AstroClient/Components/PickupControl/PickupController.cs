@@ -28,8 +28,7 @@
             InvokeRepeating(nameof(Updater), 0.1f, 0.3f);
         }
 
-
-        void Updater()
+        private void Updater()
         {
             if (gameObject != null)
             {
@@ -43,6 +42,7 @@
                 }
             }
         }
+
         #region Backup and Restore Methods
 
         private void SyncProperties(bool isFromUpdate)
@@ -1276,6 +1276,7 @@
         #region essentials
 
         private VRC_Pickup _SDKBase_Pickup;
+
         internal VRC_Pickup SDKBase_Pickup
         {
             get
@@ -1293,7 +1294,6 @@
         }
 
         private VRCSDK2.VRC_Pickup _SDK2_Pickup;
-
 
         internal VRCSDK2.VRC_Pickup SDK2_Pickup
         {

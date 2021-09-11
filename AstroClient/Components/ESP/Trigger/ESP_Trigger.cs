@@ -113,7 +113,6 @@
             }
         }
 
-
         private Color GetDefaultColor()
         {
             return ColorUtils.HexToColor("EF2C3F");
@@ -171,8 +170,6 @@
                 return HighLightOptions.highlightColor;
             }
         }
-
-
 
         internal VRC.SDKBase.VRC_Trigger trigger;
         internal VRCSDK2.VRC_Trigger trigger2;

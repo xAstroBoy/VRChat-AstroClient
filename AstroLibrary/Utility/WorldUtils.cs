@@ -34,10 +34,17 @@ namespace AstroLibrary.Utility
             }
         }
 
-        public static IEnumerable<Player> GetPlayers()
+        public static IEnumerable<Player> GetPlayers_Array()
         {
             return PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
         }
+
+
+        public static List<Player> GetPlayers()
+        {
+            return GetPlayers_Array().ToList();
+        }
+
 
         public static List<Player> GetPlayers(this PlayerManager Instance)
         {

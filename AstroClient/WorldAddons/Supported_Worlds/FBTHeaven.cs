@@ -6,7 +6,6 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using MelonLoader;
     using RubyButtonAPI;
     using System.Collections;
     using System.Collections.Generic;
@@ -26,7 +25,6 @@
         //private static GameObject LockIndicator3;
         //private static QMToggleButton LockButton4;
         //private static GameObject LockIndicator4;
-
 
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
@@ -72,7 +70,6 @@
                 var rootObject = GameObjectFinder.FindRootSceneObject("Drag me");
                 if (rootObject != null)
                 {
-
                     // Fuck the useless blinders.
                     var trashblinder_0 = rootObject.transform.FindObject("Main_area-Private_rooms");
                     var trashblinder_1 = rootObject.transform.FindObject("Main_area-Private_rooms_1");
@@ -90,7 +87,7 @@
                     var trashblinder_12 = rootObject.transform.FindObject("FBT_Heaven_Occluder");
 
                     var logger = GameObjectFinder.Find("Logger");
-                    if(logger != null)
+                    if (logger != null)
                     {
                         ModConsole.Log("Logger found, this is sus...");
                         TrashToDelete.AddGameObject(logger);
@@ -117,8 +114,8 @@
                             trash.DestroyMeLocal();
                         }
                     }
-                    var doorinvisibleplane = rootObject.transform.FindObject("plane");
-                    if(doorinvisibleplane != null)
+                    var doorinvisibleplane = rootObject.transform.FindObject("Plane");
+                    if (doorinvisibleplane != null)
                     {
                         // make invisible this shit.
                         var renderers = doorinvisibleplane.GetComponentsInChildren<Renderer>(true);
@@ -127,11 +124,10 @@
                             if (rend != null)
                             {
                                 rend.enabled = false;
+                                rend.DestroyMeLocal();
                             }
                         }
-
                     }
-
 
                     var outsidebutton1 = rootObject.transform.FindObject("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_1/Door_Handle_Sign_1").gameObject;
                     var outsidebutton2 = rootObject.transform.FindObject("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_2/Door_Handle_Sign_2").gameObject;
@@ -142,9 +138,6 @@
                     AddLockPickButton(outsidebutton2, 2);
                     AddLockPickButton(outsidebutton3, 3);
                     AddLockPickButton(outsidebutton4, 4);
-
-
-
 
                     //if (LockIndicator1 == null || LockIndicator2 == null || LockIndicator3 == null || LockIndicator4 == null)
                     //{
@@ -163,26 +156,24 @@
             }
         }
 
-
         private static void AddLockPickButton(GameObject HandleSign, int doorID)
         {
-            if(HandleSign != null)
+            if (HandleSign != null)
             {
                 var collider = HandleSign.GetOrAddComponent<MeshCollider>();
-                if(collider != null)
+                if (collider != null)
                 {
                     collider.smoothSphereCollisions = true;
                 }
 
                 var AstroTrigger = HandleSign.GetOrAddComponent<VRC_AstroUdonTrigger>();
-                if(AstroTrigger != null)
+                if (AstroTrigger != null)
                 {
                     AstroTrigger.interactText = "Lockpick Door " + doorID + " (AstroClient)";
                     AstroTrigger.OnInteract += () => { UnlockDoor(doorID); };
                 }
             }
         }
-        
 
         private static IEnumerator UpdateButtonsLoop()
         {

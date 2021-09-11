@@ -429,8 +429,6 @@
             return null;
         }
 
-
-
         public static Transform Unpack_Transform(this Il2CppSystem.Object obj)
         {
             if (obj != null)
@@ -934,6 +932,7 @@
             }
             return null;
         }
+
         public static AudioSource Unpack_AudioSource(this Il2CppSystem.Object obj)
         {
             if (obj != null)

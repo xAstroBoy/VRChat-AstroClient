@@ -6,7 +6,6 @@
 
     public class FindMods : GameEvents
     {
-
         public override void OnApplicationStart()
         {
             if (MelonHandler.Mods.Any(m => m.Info.Name == "Notorious"))

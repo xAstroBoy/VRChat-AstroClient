@@ -77,7 +77,6 @@
             }
         }
 
-
         public void OnDestroy()
         {
             HighLightOptions.DestroyHighlighter();

@@ -32,7 +32,6 @@
             return VRCInputManager.field_Private_Static_Dictionary_2_String_VRCInput_0["GrabLeft"].prop_Single_0 == 1;
         }
 
-
         public static bool IsImputDropLeftCalled()
         {
             return VRCInputManager.field_Private_Static_Dictionary_2_String_VRCInput_0["DropLeft"].prop_Boolean_0;
@@ -63,7 +62,6 @@
             return VRCInputManager.field_Private_Static_Dictionary_2_String_VRCInput_0["GrabRight"].prop_Single_0 == 1;
         }
 
-
         public static bool IsImputDropRightCalled()
         {
             return VRCInputManager.field_Private_Static_Dictionary_2_String_VRCInput_0["DropRight"].prop_Boolean_0;
@@ -73,9 +71,5 @@
         {
             return VRCInputManager.field_Private_Static_Dictionary_2_String_VRCInput_0["DropRight"].prop_Single_0 == 1;
         }
-
-
-
-
     }
 }

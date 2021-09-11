@@ -24,7 +24,6 @@
             RocketManager.KillRockets();
             ObjectSpinnerManager.KillObjectSpinners();
             ItemTweakerV2.Selector.Tweaker_Object.GetGameObjectToEdit().KillCustomComponents(false, false);
-
         }
     }
 }

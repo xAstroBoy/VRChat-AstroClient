@@ -276,9 +276,6 @@
             }
         }
 
-
-        
-
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static float Clamp(float val)
         {

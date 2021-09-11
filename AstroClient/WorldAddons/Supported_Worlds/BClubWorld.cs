@@ -18,7 +18,7 @@
     using UnityEngine;
     using VRC.Udon;
 
-    #endregion
+    #endregion Imports
 
     public class BClubWorld : GameEvents
     {
@@ -1004,7 +1004,6 @@
                             UdonHeapEditor.PatchHeap(disassembled, "__0_mp_patronsToProcess_String", Utils.LocalPlayer.displayName, true);
                         }
                     }
-
                     catch (Exception e)
                     {
                         ModConsole.ErrorExc(e);
@@ -1057,16 +1056,12 @@
                     }
                     node.InitializeUdonContent();
                     node.Start();
-
                 }
                 catch (Exception e)
                 {
                     ModConsole.ErrorExc(e);
                 }
-
-
             }
-
         }
     }
 }
