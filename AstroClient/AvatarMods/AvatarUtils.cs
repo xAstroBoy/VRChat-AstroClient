@@ -293,7 +293,7 @@
 
         public static void Reload_All_Avatars()
         {
-            foreach (var player in WorldUtils.GetPlayers_List())
+            foreach (var player in WorldUtils.GetPlayers())
             {
                 if (player != null)
                 {

@@ -40,7 +40,7 @@ namespace AstroLibrary.Utility
         }
 
 
-        public static List<Player> GetPlayers_List()
+        public static List<Player> GetPlayers()
         {
             return GetPlayers_Array().ToList();
         }
@@ -58,7 +58,7 @@ namespace AstroLibrary.Utility
 
         public static VRCPlayer GetInstanceMaster()
         {
-            foreach (var p in GetPlayers_List().Where(p => p._vrcplayer.IsInstanceMaster()))
+            foreach (var p in GetPlayers().Where(p => p._vrcplayer.IsInstanceMaster()))
             {
                 return p._vrcplayer;
             }
@@ -190,7 +190,7 @@ namespace AstroLibrary.Utility
 
         public static Player GetPlayerByDisplayName(string name)
         {
-            var players = WorldUtils.GetPlayers_List().ToList();
+            var players = WorldUtils.GetPlayers().ToList();
             if (players.AnyAndNotNull())
             {
                 foreach (var player in players)

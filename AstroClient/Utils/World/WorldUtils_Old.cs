@@ -64,7 +64,7 @@
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
         {
-            ModConsole.Log("This instance has " + WorldUtils.GetPlayers_List().Count() + " Players.", Color.Gold);
+            ModConsole.Log("This instance has " + WorldUtils.GetPlayers().Count() + " Players.", Color.Gold);
         }
 
         public static List<GameObject> Get_Pickups()

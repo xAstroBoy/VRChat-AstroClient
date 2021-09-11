@@ -93,7 +93,7 @@
 
         private static void AddESPToAllPlayers()
         {
-            foreach (var item in WorldUtils.GetPlayers_List())
+            foreach (var item in WorldUtils.GetPlayers())
             {
                 if (item != Utils.LocalPlayer.GetPlayer())
                 {
@@ -107,7 +107,7 @@
 
         private static void RemoveAllActivePlayerESPs()
         {
-            foreach (var player in WorldUtils.GetPlayers_List())
+            foreach (var player in WorldUtils.GetPlayers())
             {
                 var esp = player.gameObject.GetComponent<PlayerESP>();
                 if (esp != null)
