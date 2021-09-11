@@ -117,7 +117,7 @@
                             trash.DestroyMeLocal();
                         }
                     }
-                    var doorinvisibleplane = rootObject.transform.FindObject("plane");
+                    var doorinvisibleplane = rootObject.transform.FindObject("Plane");
                     if(doorinvisibleplane != null)
                     {
                         // make invisible this shit.
@@ -127,6 +127,7 @@
                             if (rend != null)
                             {
                                 rend.enabled = false;
+                                rend.DestroyMeLocal();
                             }
                         }
 
