@@ -17,7 +17,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <NoWarn>CS0169;CS0472</NoWarn>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -44,7 +44,7 @@
     <OutputPath>D:\Steam Library\steamapps\common\VRChat\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;OFFLINE</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <NoWarn>CS0169;CS0472</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -55,7 +55,7 @@
     <OutputPath>D:\Steam Library\steamapps\common\VRChat\Debug\</OutputPath>
     <DefineConstants>TRACE;DEBUG;CHEETOS</DefineConstants>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <NoWarn>CS0169;CS0472</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
