@@ -418,7 +418,7 @@
                 isCurrentWorld = false;
                 ModConsole.Log("Leaving B Club");
                 Bools.IsBClubVIPSpoofing = false;
-                PlayerUtils.GetAPIUser()._displayName_k__BackingField = PlayerUtils.GetPlayer().GetDisplayName();
+                PlayerUtils.GetAPIUser()._displayName_k__BackingField = realName;
             }
         }
 
