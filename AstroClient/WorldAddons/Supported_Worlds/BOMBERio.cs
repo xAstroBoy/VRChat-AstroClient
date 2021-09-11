@@ -43,7 +43,6 @@
             {
                 ModConsole.Log($"Recognized {Name} World, Enabling Gun Projectile Hijacker..");
                 isBomberIO = true;
-
             }
             else
             {
@@ -64,6 +63,7 @@
         }
 
         private static GameObject _Quad;
+
         private static GameObject Quad
         {
             get
@@ -74,6 +74,7 @@
 
         private static bool isHarvesting = false;
         private static bool isInGame = false;
+
         public static void HarvestQuads(int amount)
         {
             if (!isHarvesting)
@@ -112,19 +113,16 @@
         private static void OnGameExitStageEvent()
         {
             isInGame = false;
-
         }
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             if (isBomberIO)
             {
-
                 if (sender.DisplayName() == Utils.LocalPlayer.GetPlayer().DisplayName())
                 {
                     if (obj.name.ToLower().StartsWith("followobj"))
                     {
-
                         if (AssignedNode == null)
                         {
                             if (action.ToLower().Contains("join"))
@@ -196,21 +194,18 @@
                             {
                                 HasShot = false;
                             }
-
                         }
                     }
                 }
-
             }
         }
 
-
         private static bool HasShot = false;
+
         private void ShootModifiedBullet()
         {
             if (AssignedNode != null)
             {
-
                 if (Override_ShootBomb_0_Toggle)
                 {
                     if (ShootBomb0 != null)
@@ -255,6 +250,7 @@
                 }
             }
         }
+
         public static void FindEverything(GameObject obj)
         {
             if (obj != null)
@@ -332,7 +328,6 @@
                 var disassembled = FollowObjBehaviour.DisassembleUdonBehaviour();
                 if (HasUnboxedDefaultSpeeds)
                 {
-
                     if (disassembled != null)
                     {
                         UdonHeapEditor.PatchHeap(disassembled, Outside_RunSpeedSymbol, Run_Speed, true);
@@ -390,7 +385,6 @@
         public static QMSingleToggleButton Always_ShootBomb_4_Toggle;
         public static QMSingleToggleButton Always_ShootBomb_5_Toggle;
 
-
         public static QMSingleToggleButton Bypass_Outside_Circle_speed_Toggle;
 
         private static bool _BypassOutsideCircleSpeed;
@@ -431,9 +425,7 @@
                     }
                 }
             }
-
         }
-
 
         private static bool _Override_ShootBomb_0_Toggle;
 
@@ -641,7 +633,6 @@
             }
         }
 
-
         private static string Outside_WalkAndStrafeSpeedSymbol
         {
             get
@@ -658,7 +649,6 @@
             }
         }
 
-
         private static string Inner_WalkAndStrafeSpeedSymbol
         {
             get
@@ -667,9 +657,7 @@
             }
         }
 
-
         private static bool HasUnboxedDefaultSpeeds = false;
-
 
         private static float Outside_Default_StrafeAndWalkSpeed;
         private static float Outside_Default_RunSpeed;
@@ -678,9 +666,5 @@
         private static float Inner_Default_RunSpeed;
 
         private static UdonBehaviour FollowObjBehaviour;
-
-
-
-
     }
 }

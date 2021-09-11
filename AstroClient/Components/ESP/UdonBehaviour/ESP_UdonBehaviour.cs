@@ -77,7 +77,6 @@
             }
         }
 
-
         private Color GetDefaultColor()
         {
             return ColorUtils.HexToColor("CD14C7");

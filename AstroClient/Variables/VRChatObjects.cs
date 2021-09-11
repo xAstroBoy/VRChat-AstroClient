@@ -5,7 +5,6 @@
 
     public class VRChatObjects_Old : GameEvents
     {
-
         public override void VRChat_OnUiManagerInit()
         {
             _ = AvatarPreviewBase_FallbackAvatar;
@@ -67,6 +66,5 @@
                 return _AvatarPreviewBase_FallbackAvatar;
             }
         }
-
     }
 }

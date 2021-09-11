@@ -90,6 +90,5 @@ namespace AstroClient.Components
 
         internal UdonBehaviour UdonBehaviour { get; private set; }
         internal IUdonHeap IUdonHeap { get; private set; }
-
     }
 }

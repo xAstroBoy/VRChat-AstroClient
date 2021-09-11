@@ -1,15 +1,10 @@
 ﻿namespace AstroClient.Udon
 {
     using AstroLibrary.Console;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
 
-    class UdonUnpacker_Utils
+    internal class UdonUnpacker_Utils
     {
         public static DisassembledUdonBehaviour DisassembleUdonBehaviour(UdonBehaviour udon)
         {

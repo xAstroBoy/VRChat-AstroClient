@@ -24,7 +24,7 @@
     using Color = System.Drawing.Color;
     using VRC_Pickup = VRC.SDKBase.VRC_Pickup;
 
-    #endregion
+    #endregion Imports
 
     public class GameObjectMenu : GameEvents
     {

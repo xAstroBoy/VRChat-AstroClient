@@ -49,6 +49,5 @@
         public static readonly string PoolParlor = "wrld_747e7258-f804-4414-83f5-b618ebca7471";
 
         public static readonly string Valkyrie_Defense = "wrld_26c38507-8915-40d5-9338-667f01fe3b4c";
-
     }
 }

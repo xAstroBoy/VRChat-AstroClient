@@ -67,7 +67,6 @@
             return obj != null ? obj.enabled ? UnityEngine.Color.green : UnityEngine.Color.red : UnityEngine.Color.red;
         }
 
-
         public static UnityEngine.Color Get_MonoBehaviour_Enabled_ToColor(this MonoBehaviour obj)
         {
             return obj != null ? obj.enabled ? UnityEngine.Color.green : UnityEngine.Color.red : UnityEngine.Color.red;
@@ -111,6 +110,7 @@
         {
             return obj?.gameObject.Is_CurrentWorld();
         }
+
         public static void CopyPath(this GameObject obj)
         {
             if (obj != null)

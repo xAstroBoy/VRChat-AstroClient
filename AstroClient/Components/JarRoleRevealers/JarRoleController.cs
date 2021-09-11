@@ -23,10 +23,7 @@
 
         public static bool IsAmongUsWorld { get; private set; }
 
-
         public static EventHandler<BoolEventsArgs> Event_OnViewRolesPropertyChanged;
-
-
 
         // TODO: Make A Action event  to bind on JarRoleESP Component.
 
@@ -64,14 +61,13 @@
         {
             get
             {
-                if(_CurrentPlayerRoleESP == null)
+                if (_CurrentPlayerRoleESP == null)
                 {
                     return _CurrentPlayerRoleESP = Utils.CurrentUser.GetPlayer().GetComponent<JarRoleESP>();
                 }
                 return _CurrentPlayerRoleESP;
             }
         }
-
 
         public static QMSingleToggleButton Murder4RolesRevealerToggle;
         public static QMSingleToggleButton AmongUSRolesRevealerToggle;
@@ -283,7 +279,6 @@
                                                         }
                                                     }
                                                 }
-
                                             }
                                         }
                                     }

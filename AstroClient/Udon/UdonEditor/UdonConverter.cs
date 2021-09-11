@@ -80,7 +80,6 @@
             return boxed ?? null;
         }
 
-
         public static Il2CppSystem.Object Generate_Il2CppObject_Unmanaged<T>(List<T> list) where T : unmanaged
         {
             var arrayresult = list.ToArray();
@@ -103,7 +102,6 @@
             var arrayresult = list.ToArray();
             return new Il2CppSystem.Object(arrayresult.Pointer);
         }
-
 
         public static Il2CppSystem.Object Generate_Il2CPPObject_Il2cppObjectBase<T>(List<T> list) where T : Il2CppObjectBase
         {
@@ -128,15 +126,11 @@
             return new Il2CppSystem.Object(arrayresult.Pointer);
         }
 
-
         public static Il2CppSystem.Object Generate_Il2CPPObject_Il2cppObjectBase<T>(T item) where T : Il2CppObjectBase
         {
             var boxed = new Il2CppSystem.Object(IL2CPP.il2cpp_value_box(Il2CppClassPointerStore<T>.NativeClassPtr, item.Pointer));
             return boxed ?? null;
         }
-
-
-
 
         public static Il2CppSystem.Object Generate_Il2CppObject_Unmanaged<T>(T value) where T : unmanaged
         {
@@ -154,6 +148,5 @@
             }
             return null;
         }
-
     }
 }

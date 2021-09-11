@@ -16,12 +16,15 @@
     using AstroClient.Worlds;
     using AstroLibrary;
     using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
     using MelonLoader;
     using RubyButtonAPI;
     using System;
-    using System.Diagnostics;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.IO;
     using System.Reflection;
     using System.Windows.Forms;
     using UnhollowerBaseLib;
@@ -29,11 +32,8 @@
     using VRC;
     using VRC.Core;
     using VRC.UI;
-    using AstroLibrary.Extensions;
-    using Button = UnityEngine.UI.Button;
-    using AstroLibrary.Utility;
-    using System.IO;
     using Application = UnityEngine.Application;
+    using Button = UnityEngine.UI.Button;
 
     #endregion Imports
 
@@ -71,8 +71,6 @@
         private static List<GameEvents> Overridable_List = new List<GameEvents>();
 
         private static List<Tweaker_Events> Tweaker_Overridables = new List<Tweaker_Events>();
-
-
 
         public override void OnApplicationStart()
         {

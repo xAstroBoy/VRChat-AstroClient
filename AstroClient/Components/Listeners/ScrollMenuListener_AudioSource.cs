@@ -1,8 +1,8 @@
 namespace AstroClient.Components
 {
+    using AstroLibrary.Extensions;
     using RubyButtonAPI;
     using System;
-    using AstroLibrary.Extensions;
 
     [RegisterComponent]
     public class ScrollMenuListener_AudioSource : GameEventsBehaviour
@@ -30,7 +30,6 @@ namespace AstroClient.Components
                     else
                     {
                         Destroy(this);
-
                     }
                 }
             }

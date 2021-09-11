@@ -5,7 +5,6 @@
     using System;
     using System.Text;
     using VRC.Udon;
-    using VRC.Udon.Common.Interfaces;
 
     public static class UdonUnboxer
     {
@@ -13,7 +12,6 @@
         {
             if (udonnode != null)
             {
-
                 var unpackedudon = udonnode.DisassembleUdonBehaviour();
                 if (unpackedudon != null)
                 {
@@ -30,13 +28,11 @@
                                 var Il2CppType = UnboxVariable.GetIl2CppType();
                                 var unpackedsymbol = UnboxUdonHeap(UnboxVariable);
                                 ModConsole.Log($"[Udon Unboxer] : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}", System.Drawing.Color.Gold);
-
                             }
                         }
                     }
                 }
             }
-
         }
 
         public static string UnboxUdonToString(UdonBehaviour udonnode)
@@ -59,7 +55,6 @@
                                 var Il2CppType = UnboxVariable.GetIl2CppType();
                                 var unpackedsymbol = UnboxUdonHeap(UnboxVariable);
                                 _ = builder.AppendLine($"[Udon Unboxer] : HEAP Address : {address} Found Symbol : {symbol}, Type : {Il2CppType.FullName} with value : {unpackedsymbol}");
-
                             }
                         }
                     }
@@ -738,7 +733,6 @@
                 ModConsole.DebugErrorExc(e);
                 return $"Error Unboxing {obj.GetIl2CppType().FullName}";
             }
-
         }
     }
 }

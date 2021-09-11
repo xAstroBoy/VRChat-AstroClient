@@ -110,7 +110,7 @@
 
         public bool GetIsInvisible()
         {
-            return Player == null || !WorldUtils.GetPlayers().Any(p => p.UserID().Equals(Player.UserID()));
+            return Player == null || !WorldUtils.GetPlayers_List().Any(p => p.UserID().Equals(Player.UserID()));
         }
 
         public PlayerListData(Photon.Realtime.Player photonPlayer)

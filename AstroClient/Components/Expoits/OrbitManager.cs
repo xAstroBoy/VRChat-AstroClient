@@ -12,7 +12,6 @@
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using VRC;
-    using VRC.Udon;
     using static AstroClient.Variables.InstanceBuilder;
 
     public class OrbitManager : GameEventsBehaviour
@@ -184,7 +183,5 @@
             isLooping = false;
             yield break;
         }
-
-
     }
 }

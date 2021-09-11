@@ -2,14 +2,12 @@
 {
     #region Imports
 
-    using AstroClient.ModDetector;
     using AstroClient.Variables;
     using AstroLibrary;
     using AstroLibrary.Console;
     using AstroLibrary.Enums;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
     using DayClientML2.Utility;

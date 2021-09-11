@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using UnityEngine.UI;
 
-    class VoidClub : GameEvents
+    internal class VoidClub : GameEvents
     {
         public static QMNestedButton VoidClubMenu;
 
@@ -26,6 +26,7 @@
         {
             GameObjectFinder.Find("Room_Hotel/Door_system Hotel/Canvas (2)/Button (1)")?.GetComponent<Button>().Press();
         }
+
         private static void UnlockJapanese()
         {
             GameObjectFinder.Find("Japanese_rroom/Door_system Japanese/Canvas (2)/Button (1)")?.GetComponent<Button>().Press();

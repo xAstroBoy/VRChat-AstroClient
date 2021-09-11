@@ -1,18 +1,17 @@
 namespace AstroClient.Components
 {
+    using AstroLibrary.Extensions;
     using RubyButtonAPI;
     using System;
-    using UnhollowerBaseLib.Attributes;
-    using AstroLibrary.Extensions;
 
     [RegisterComponent]
     public class ScrollMenuListener : GameEventsBehaviour
     {
         internal QMSingleButton assignedbtn;
+
         public ScrollMenuListener(IntPtr obj0) : base(obj0)
         {
         }
-
 
         private void OnEnable()
         {
@@ -25,7 +24,6 @@ namespace AstroClient.Components
                 DestroyImmediate(this);
             }
         }
-
 
         private void OnDisable()
         {

@@ -6,12 +6,12 @@
     using AstroClient.Components;
     using AstroClient.Variables;
     using AstroLibrary.Console;
-    using System.Collections.Generic;
     using System;
-    using UnhollowerRuntimeLib;
+    using System.Collections.Generic;
     using System.Reflection;
+    using UnhollowerRuntimeLib;
 
-    #endregion
+    #endregion Imports
 
     public class ComponentHelper : GameEvents
     {

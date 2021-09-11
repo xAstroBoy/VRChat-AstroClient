@@ -16,7 +16,6 @@
             {
                 foreach (var trigger in Tweaker_Object.GetGameObjectToEdit().Get_Triggers())
                 {
-
                     var btn = new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {trigger.name}", delegate
                     {
                         trigger.TriggerClick();

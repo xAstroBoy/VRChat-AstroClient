@@ -2,7 +2,6 @@
 {
     #region Imports
 
-    using AstroClient.Variables;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
     using AstroNetworkingLibrary;

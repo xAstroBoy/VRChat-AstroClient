@@ -269,7 +269,6 @@
                     obj.GetOrAddComponent<RigidBodyController>().RigidBody_PreventOthersFromGrabbing(PreventOthersFromGrabbing);
                 }
             }
-
         }
 
         public static void RigidBody_Set_Drag(this RigidBodyController control, float Drag)
@@ -296,7 +295,6 @@
             }
         }
 
-
         public static void RigidBody_Forced(this RigidBodyController control, bool Forced_RigidBody)
         {
             if (control != null)
@@ -308,8 +306,5 @@
                 control.Forced_Rigidbody = Forced_RigidBody;
             }
         }
-
-
-
     }
 }

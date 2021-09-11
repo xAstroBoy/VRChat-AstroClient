@@ -1,13 +1,11 @@
 ﻿namespace AstroClient.Components
 {
-    using AstroClient.Startup.Buttons;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using System;
     using System.Linq;
     using UnityEngine;
-    using UnityEngine.UI;
     using VRC;
     using static AstroClient.JarRoleController;
 
@@ -232,9 +230,6 @@
             catch { }
         }
 
-
-
-
         private LinkedNodes GetEntryWithUser()
         {
             foreach (var item in JarRoleController.JarRoleLinks.Where(x => x.NodeReader.VRCPlayerAPI != null))
@@ -302,8 +297,6 @@
             return null;
         }
 
-
-
         private SingleTag SetTag(SingleTag tag, string text, Color TextColor, Color TagColor)
         {
             if (tag != null)
@@ -358,7 +351,6 @@
                         ESP.ChangeColor(color);
                     }
                 }
-
             }
         }
 
@@ -366,11 +358,10 @@
         {
             if (Player != null)
             {
-                
-                    if (ESP != null)
-                    {
-                        ESP.ResetColor();
-                    }
+                if (ESP != null)
+                {
+                    ESP.ResetColor();
+                }
             }
         }
 
@@ -386,8 +377,6 @@
             catch (Exception e) { ModConsole.DebugError("JarRoleRevealer OnUpdate Exception : " + e); }
         }
 
-
-
         public override void OnViewRolesPropertyChanged(bool value)
         {
             ViewRoles = value;
@@ -398,13 +387,13 @@
                     GameRoleTag.ShowTag = value;
                     if (value)
                     {
-                        if(ESP != null)
+                        if (ESP != null)
                         {
-                            if(IsAmongUsWorld)
+                            if (IsAmongUsWorld)
                             {
                                 UpdateAmongUSRole(AmongUsCurrentRole);
                             }
-                            else if(IsMurder4World)
+                            else if (IsMurder4World)
                             {
                                 UpdateMurder4Role(Murder4CurrentRole);
                             }
@@ -413,7 +402,6 @@
                 }
             }
         }
-
 
         public override void OnPlayerESPPropertyChanged(bool value)
         {
@@ -426,12 +414,10 @@
             }
         }
 
-
         private void UpdateMurder4Role(Murder4Roles role)
         {
             if (LinkedNode != null)
             {
-
                 if (ESP != null)
                 {
                     if (ESP.UseCustomColor != ViewRoles)
@@ -477,7 +463,6 @@
         {
             if (LinkedNode != null)
             {
-
                 if (AmongUSVoteRevealTag == null)
                 {
                     AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Player);
@@ -603,8 +588,8 @@
 
         internal bool IsRPCActive { get; private set; }
 
-
         private AmongUsRoles _AmongUsCurrentRole = AmongUsRoles.Unassigned;
+
         internal AmongUsRoles AmongUsCurrentRole
         {
             get
@@ -618,8 +603,8 @@
             }
         }
 
-
         private Murder4Roles _Murder4CurrentRole = Murder4Roles.Unassigned;
+
         internal Murder4Roles Murder4CurrentRole
         {
             get
@@ -633,10 +618,10 @@
             }
         }
 
-
         internal Player Player { get; private set; }
 
         private PlayerESP _ESP;
+
         internal PlayerESP ESP
         {
             get
@@ -648,7 +633,6 @@
                 _ESP = value;
             }
         }
-
 
         internal bool ViewRoles { get; private set; }
 

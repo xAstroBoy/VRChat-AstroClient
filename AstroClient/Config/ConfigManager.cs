@@ -206,6 +206,7 @@
             JSonWriter.WriteToJsonFile(ConfigFavoritesPath, Favorites);
             ModConsole.DebugLog("Favorites Config Saved.");
         }
+
         public static void Save_Performance()
         {
             JSonWriter.WriteToJsonFile(ConfigPerformancePath, Performance);

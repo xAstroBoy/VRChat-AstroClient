@@ -5,7 +5,6 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using System.Collections.Generic;
-    using System.Timers;
 
     internal class JoinLeaveNotifier : GameEvents
     {

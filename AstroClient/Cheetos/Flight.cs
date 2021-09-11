@@ -8,7 +8,7 @@
     using UnityEngine;
     using VRC.Animation;
 
-    #endregion
+    #endregion Imports
 
     /// <summary>
     /// Thanks to Blaze <3
@@ -61,7 +61,6 @@
                 ExploitsMenu.RefreshFlightButtons();
             }
         }
-
 
         private static void EnableFly()
         {

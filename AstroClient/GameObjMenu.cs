@@ -16,7 +16,7 @@
     using UnityEngine.UI;
     using VRC;
 
-    #endregion
+    #endregion Imports
 
     public class GameObjMenu : GameEvents
     {
@@ -333,7 +333,7 @@
                         string objname = item.name;
                         if (item.name.Contains("VRCPlayer"))
                         {
-                            List<Player> allPlayers = WorldUtils.GetPlayers().ToArray().ToList();
+                            List<Player> allPlayers = WorldUtils.GetPlayers_List().ToArray().ToList();
                             for (int k = 0; k < allPlayers.Count; k++)
                             {
                                 Player player = allPlayers[k];
@@ -389,7 +389,7 @@
                 string objname = item.name;
                 if (item.name.Contains("VRCPlayer"))
                 {
-                    List<Player> allPlayers = WorldUtils.GetPlayers().ToArray().ToList();
+                    List<Player> allPlayers = WorldUtils.GetPlayers_List().ToArray().ToList();
                     for (int k = 0; k < allPlayers.Count; k++)
                     {
                         Player player = allPlayers[k];

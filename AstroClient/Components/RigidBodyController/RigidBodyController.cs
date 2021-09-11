@@ -594,8 +594,6 @@
             }
         }
 
-
-
         internal float sleepVelocity
         {
             get
@@ -859,6 +857,7 @@
         #endregion Forced Rigidbody Method
 
         #region Random Methods
+
         [HideFromIl2Cpp]
         internal bool UpdateKinematic(bool isKinematic)
         {
@@ -886,7 +885,7 @@
             return this.drag == drag;
         }
 
-        #endregion
+        #endregion Random Methods
 
         // TODO : Move it to PickupController...
 

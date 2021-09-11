@@ -258,7 +258,6 @@
             }
         }
 
-
         public PlayerAttackerManager Manager = null;
         private float Movementforce = 0.04f; // DEFAULT 0.04f
         public float TimerOffset = 0f;

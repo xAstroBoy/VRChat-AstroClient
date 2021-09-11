@@ -69,7 +69,6 @@
             }
         }
 
-
         public override void OnPlayerJoined(Player player)
         {
             if (player != null)
@@ -85,8 +84,6 @@
                 }
             }
         }
-
-
 
         public override void OnUpdate()
         {

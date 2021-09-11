@@ -85,7 +85,7 @@
             {
                 if (value)
                 {
-                    foreach (var player in WorldUtils.GetPlayers())
+                    foreach (var player in WorldUtils.GetPlayers_List())
                     {
                         if (player != Utils.LocalPlayer.GetPlayer())
                         {
@@ -98,7 +98,7 @@
                 }
                 else
                 {
-                    foreach (var player in WorldUtils.GetPlayers())
+                    foreach (var player in WorldUtils.GetPlayers_List())
                     {
                         if (player != Utils.LocalPlayer.GetPlayer())
                         {
@@ -131,7 +131,7 @@
             {
                 if (value)
                 {
-                    foreach (var player in WorldUtils.GetPlayers())
+                    foreach (var player in WorldUtils.GetPlayers_List())
                     {
                         if (player != Utils.LocalPlayer.GetPlayer())
                         {
@@ -144,7 +144,7 @@
                 }
                 else
                 {
-                    foreach (var player in WorldUtils.GetPlayers())
+                    foreach (var player in WorldUtils.GetPlayers_List())
                     {
                         if (player != Utils.LocalPlayer.GetPlayer())
                         {

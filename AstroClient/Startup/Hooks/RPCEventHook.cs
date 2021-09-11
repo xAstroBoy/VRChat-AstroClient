@@ -3,14 +3,12 @@
     #region Imports
 
     using AstroClient.Variables;
-    using AstroLibrary;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using Harmony;
     using System;
     using System.Reflection;
-    using UnhollowerBaseLib;
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;

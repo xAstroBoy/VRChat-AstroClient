@@ -24,6 +24,7 @@
     using VRC.Core;
 
     #endregion Imports
+
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer", Exclude = false)]
     internal class CheetosHooks : GameEvents
     {

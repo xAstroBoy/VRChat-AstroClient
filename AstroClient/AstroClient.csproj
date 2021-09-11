@@ -1102,7 +1102,9 @@
     <EmbeddedResource Include="Resources\planet.png" />
     <EmbeddedResource Include="Resources\thief.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Streamer\" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\repair.png" />
     <EmbeddedResource Include="Resources\badge.png" />

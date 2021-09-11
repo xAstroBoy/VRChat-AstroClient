@@ -21,7 +21,6 @@
             {
                 foreach (var obj in Tweaker_Object.GetGameObjectToEdit().Get_VRCInteractables())
                 {
-
                     var btn = new QMSingleButton(scroll.BaseMenu, 0, 0, $"Click {obj.name}", delegate
                     {
                         obj.VRC_Interactable_Click();

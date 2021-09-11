@@ -1,9 +1,9 @@
 ﻿namespace AstroClient.ItemTweakerV2.Selector
 {
     using AstroClient.ItemTweakerV2.TweakerEventArgs;
+    using AstroLibrary.Extensions;
     using System;
     using UnityEngine;
-    using AstroLibrary.Extensions;
 
     public class Tweaker_Selector : Tweaker_Events
     {

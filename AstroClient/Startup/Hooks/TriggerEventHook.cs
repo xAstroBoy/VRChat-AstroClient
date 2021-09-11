@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
     using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
     using Harmony;
     using System;
     using System.Reflection;
     using UnhollowerRuntimeLib.XrefScans;
     using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
-    using AstroLibrary.Extensions;
 
     public class TriggerEventHook : GameEvents
     {

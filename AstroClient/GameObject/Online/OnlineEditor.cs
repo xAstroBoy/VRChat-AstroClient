@@ -31,7 +31,7 @@
 
         private static VRCPlayerApi GetInstanceMaster()
         {
-            return WorldUtils.GetPlayers()
+            return WorldUtils.GetPlayers_List()
                 .ToArray()
                 .ToList()
                 .Where(x => x.GetIsMaster())

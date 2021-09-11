@@ -34,10 +34,17 @@ namespace AstroLibrary.Utility
             }
         }
 
-        public static IEnumerable<Player> GetPlayers()
+        public static IEnumerable<Player> GetPlayers_Array()
         {
             return PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
         }
+
+
+        public static List<Player> GetPlayers_List()
+        {
+            return GetPlayers_Array().ToList();
+        }
+
 
         public static List<Player> GetPlayers(this PlayerManager Instance)
         {
@@ -51,7 +58,7 @@ namespace AstroLibrary.Utility
 
         public static VRCPlayer GetInstanceMaster()
         {
-            foreach (var p in GetPlayers().Where(p => p._vrcplayer.IsInstanceMaster()))
+            foreach (var p in GetPlayers_List().Where(p => p._vrcplayer.IsInstanceMaster()))
             {
                 return p._vrcplayer;
             }
@@ -183,7 +190,7 @@ namespace AstroLibrary.Utility
 
         public static Player GetPlayerByDisplayName(string name)
         {
-            var players = WorldUtils.GetPlayers().ToList();
+            var players = WorldUtils.GetPlayers_List().ToList();
             if (players.AnyAndNotNull())
             {
                 foreach (var player in players)

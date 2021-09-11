@@ -13,8 +13,6 @@
     {
         public static EventHandler<BoolEventsArgs> Event_OnPlayerESPPropertyChanged;
 
-
-
         public static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "ESP Menu", "ESP Options", null, null, null, null, btnHalf);
@@ -95,7 +93,7 @@
 
         private static void AddESPToAllPlayers()
         {
-            foreach (var item in WorldUtils.GetPlayers())
+            foreach (var item in WorldUtils.GetPlayers_List())
             {
                 if (item != Utils.LocalPlayer.GetPlayer())
                 {
@@ -109,7 +107,7 @@
 
         private static void RemoveAllActivePlayerESPs()
         {
-            foreach (var player in WorldUtils.GetPlayers())
+            foreach (var player in WorldUtils.GetPlayers_List())
             {
                 var esp = player.gameObject.GetComponent<PlayerESP>();
                 if (esp != null)

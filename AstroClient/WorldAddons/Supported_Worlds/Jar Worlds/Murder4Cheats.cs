@@ -106,7 +106,6 @@
                         }
                     }
                 }
-                
             }
 
             if (GameStartbtn != null)
@@ -376,7 +375,7 @@
                     }
                 }
                 var Snake_Crate_ESP = Snake_Crate.GetComponent<ESP_Pickup>();
-                if(Snake_Crate_ESP != null)
+                if (Snake_Crate_ESP != null)
                 {
                     Snake_Crate_ESP.DestroyMeLocal();
                 }
@@ -549,7 +548,6 @@
             #endregion Watchers
 
             Murder4UdonExploits.Init_RoleSwap_Menu(Murder4CheatPage, 2, 0.5f, true);
-
 
             //GetSelfPatreonGunBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1, "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = true; EveryoneHasPatreonPerk = false; }), "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For You!", Color.green, Color.red, null, false, true);
             //GetEveryonePatreonGunBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1.5f, "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = true; OnlySelfHasPatreonPerk = false; }), "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For Everyone!", Color.green, Color.red, null, false, true);

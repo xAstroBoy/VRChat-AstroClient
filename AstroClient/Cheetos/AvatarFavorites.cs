@@ -5,7 +5,6 @@
     using AstroLibrary.Console;
     using AstroLibrary.Enums;
     using AstroLibrary.Finder;
-    using AstroNetworkingLibrary.Serializable;
     using DayClientML2.Utility;
     using DayClientML2.Utility.MenuApi;
     using System;
@@ -13,7 +12,6 @@
     using System.Linq;
     using UnityEngine;
     using VRC.Core;
-    using VRC.UI;
 
     #endregion Imports
 
@@ -50,9 +48,8 @@
             // Avatar Unfavorite
             _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Refresh", 921f, 170f, delegate ()
               {
-
                   AvatarSearch.DumpDone(); // Refresh Avatar Pedestal Dump
-                RefreshList();
+                  RefreshList();
               }, 1.45f, 1f);
 
             publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
@@ -121,6 +118,7 @@
                 ModConsole.Log($"Avatar already favorited!");
             }
         }
+
         public static void DeleteFromFavorites(string avatarID)
         {
             if (AstroClient.ConfigManager.Favorites.Avatars.Remove(AstroClient.ConfigManager.Favorites.Avatars.Where(a => a.AvatarID == avatarID).FirstOrDefault()))

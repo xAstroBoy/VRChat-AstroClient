@@ -1,30 +1,21 @@
 namespace AstroClient
 {
-    using System;
     using AstroClient.Components;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using MelonLoader;
+    using System;
     using UnityEngine;
 
     [RegisterComponent]
     internal class FlashlightBehaviour : MonoBehaviour
     {
-
         public FlashlightBehaviour(IntPtr ptr)
             : base(ptr)
         {
         }
 
-
-
-
         internal void InitiateLight()
         {
             if (FlashLight_Base != null && FlashLight_Body != null && FlashLight_Head != null && FlashLight_Light != null)
             {
-
                 if (ToggleLightTrigger == null)
                 {
                     ToggleLightTrigger = FlashLight_Body.AddComponent<VRC_AstroUdonTrigger>();
@@ -39,14 +30,14 @@ namespace AstroClient
                 _IsFlashlightActive = false;
             }
         }
-        void action() { IsFlashlightActive = !IsFlashlightActive; }
 
-
+        private void action()
+        { IsFlashlightActive = !IsFlashlightActive; }
 
         private bool _IsFlashlightActive;
+
         internal bool IsFlashlightActive
         {
-
             get
             {
                 return _IsFlashlightActive;
@@ -69,15 +60,8 @@ namespace AstroClient
             }
         }
 
-
-
-
-
-
-
         internal string OnText { get; } = "Turn On Flashlight";
         internal string OffText { get; } = "Turn Off Flashlight";
-
 
         internal GameObject FlashLight_Base { get; set; }
 
@@ -86,7 +70,6 @@ namespace AstroClient
         internal GameObject FlashLight_Head { get; set; }
 
         internal Light FlashLight_Light { get; set; }
-
 
         internal VRC_AstroUdonTrigger ToggleLightTrigger { get; private set; }
     }

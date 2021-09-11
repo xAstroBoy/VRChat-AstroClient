@@ -2,7 +2,6 @@
 {
     #region Imports
 
-    using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using MelonLoader;
     using RubyButtonAPI;

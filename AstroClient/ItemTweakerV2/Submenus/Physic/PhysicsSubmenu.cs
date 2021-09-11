@@ -126,9 +126,9 @@
         {
             if (control != null)
             {
-             GravityToggler.SetToggleState(control.useGravity);
-             KinematicToggler.SetToggleState(control.isKinematic);
-             CollisionsToggler.SetToggleState(control.detectCollisions);
+                GravityToggler.SetToggleState(control.useGravity);
+                KinematicToggler.SetToggleState(control.isKinematic);
+                CollisionsToggler.SetToggleState(control.detectCollisions);
             }
         }
 

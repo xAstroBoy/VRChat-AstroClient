@@ -172,8 +172,6 @@
             PlayerWatcherManager.Deregister(this);
         }
 
-
-
         public PlayerWatcherManager Manager = null;
         public float TimerOffset = 0f;
         private float LastTimeCheck2 = 0;

@@ -1,17 +1,16 @@
 namespace AstroClient
 {
-    using System;
     using AstroClient.Components;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using MelonLoader;
+    using System;
     using UnityEngine;
 
     [RegisterComponent]
     internal class EnderPearlBehaviour : MonoBehaviour
     {
-
         public EnderPearlBehaviour(IntPtr ptr)
             : base(ptr)
         {
@@ -110,7 +109,6 @@ namespace AstroClient
             Held = false;
         }
 
-
         internal PickupController pickup { get; private set; }
         internal RigidBodyController body { get; private set; }
         internal BoxCollider collider { get; private set; }
@@ -118,6 +116,5 @@ namespace AstroClient
         internal static bool Held { get; private set; }
         internal static float Time { get; private set; }
         private static Color Ender { get; } = new Color(0f, 2f, 0f, 0.4f);
-
     }
 }

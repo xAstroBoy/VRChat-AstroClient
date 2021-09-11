@@ -3,6 +3,7 @@
     #region Imports
 
     using UnityEngine;
+
     #endregion Imports
 
     public class CMBase
