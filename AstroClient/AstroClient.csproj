@@ -106,6 +106,8 @@
     <Compile Include="Components\JarRoleRevealers\JarNodeReader.cs" />
     <Compile Include="Components\Orbit\OrbitBehaviour.cs" />
     <Compile Include="Components\Orbit\OrbitManager_Old.cs" />
+    <Compile Include="Components\PlayerSpoofer\PlayerSpooferUtils.cs" />
+    <Compile Include="Components\PlayerSpoofer\PlayerSpoofer.cs" />
     <Compile Include="Extensions\Collider_ext.cs" />
     <Compile Include="Extensions\Engine_ext.cs" />
     <Compile Include="Managers\AchievmentsManager.cs" />

@@ -47,7 +47,14 @@
         private static bool _isBlueChairEnabed;
 
         private static bool isCurrentWorld;
-        private static string realName;
+        private static PlayerSpoofer CurrentSpoofer
+        {
+            get
+            {
+                return PlayerSpooferUtils.Spoofer;
+            }
+        }
+
 
         public static bool IsBlueChairEnabled
         {
@@ -161,7 +168,7 @@
 
 
             // VIP
-            _ = new QMToggleButton(BClubExploitsPage, 5, 1, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = true; PlayerUtils.GetAPIUser()._displayName_k__BackingField = "Blue-kun"; }, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = false; PlayerUtils.GetAPIUser()._displayName_k__BackingField = realName; }, "VIP Spoof", null, Color.green, Color.red, false);
+            _ = new QMToggleButton(BClubExploitsPage, 5, 1, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = true; CurrentSpoofer.SpoofAs("Blue-kun"); }, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = false; CurrentSpoofer.DisableSpoofer(); }, "VIP Spoof", null, Color.green, Color.red, false);
             //_ = new QMSingleButton(BClubExploitsPage, 4, 2, "Enter VIP", () => { EnterVIPRoom(); }, "Enter VIP Room");
 
             // Freeze Locks
@@ -422,7 +429,7 @@
                 isCurrentWorld = false;
                 ModConsole.Log("Leaving B Club");
                 Bools.IsBClubVIPSpoofing = false;
-                PlayerUtils.GetAPIUser()._displayName_k__BackingField = realName;
+                CurrentSpoofer.DisableSpoofer();
             }
         }
 
@@ -431,7 +438,6 @@
             if (id == WorldIds.BClub)
             {
                 isCurrentWorld = true;
-                realName = PlayerUtils.GetPlayer().GetDisplayName();
                 WorldUtils.GetUdonScripts().Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
                 ModConsole.Log($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
@@ -558,7 +564,7 @@
                     if (Bools.IsBClubVIPSpoofing)
                     {
                         RestoreVIPButton();
-                        PlayerUtils.GetAPIUser()._displayName_k__BackingField = "Blue-kun";
+                        
                     }
                     yield return null;
                 }
