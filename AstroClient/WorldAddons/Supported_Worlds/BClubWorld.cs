@@ -17,6 +17,7 @@
     using System.Linq;
     using UnityEngine;
     using VRC.Udon;
+    using static AstroClient.Variables.CustomLists;
 
     #endregion Imports
 
@@ -237,8 +238,6 @@
             }
         }
 
-        private static List<UdonBehaviour> _bells = new List<UdonBehaviour>();
-
         private static void DoorLockFreeze()
         {
             _ = MelonCoroutines.Start(DoorLockFreezeLoop());
@@ -325,6 +324,8 @@
             }
         }
 
+        private static List<UdonBehaviour_Cached> _bells = new List<UdonBehaviour_Cached>();
+
         private static void SpamDoorbells()
         {
             _ = MelonCoroutines.Start(DoDoorbellSpam());
@@ -352,7 +353,7 @@
 
                 foreach (var bell in _bells)
                 {
-                    bell.FindUdonEvent("DingDong")?.ExecuteUdonEvent();
+                    bell?.ExecuteUdonEvent();
                     yield return null;
                 }
 
@@ -431,7 +432,7 @@
             {
                 isCurrentWorld = true;
                 realName = PlayerUtils.GetPlayer().GetDisplayName();
-                _bells = WorldUtils.GetUdonScripts().Where(b => b.name == "Doorbell").ToList();
+                WorldUtils.GetUdonScripts().Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
                 ModConsole.Log($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
                 var penthouseRoot = GameObjectFinder.FindRootSceneObject("Penthouse");
