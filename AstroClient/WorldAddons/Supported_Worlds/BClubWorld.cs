@@ -24,6 +24,7 @@
     {
         public static GameObject VIPRoom;
         public static GameObject VIPInsideDoor;
+        public static GameObject VIPButton;
 
         public static QMNestedButton BClubExploitsPage;
 
@@ -179,6 +180,8 @@
 
         private static void RefreshButtons()
         {
+            VIPButton.gameObject.transform.position = new Vector3(60.7236f, 63.1298f, -1.7349f);
+
             if (!LockIndicator1.active)
             {
                 LockButton1.SetToggleState(true);
@@ -503,16 +506,11 @@
                         }
                     });
 
-                    // Restore VIP button
-                    var vipButton = GameObjectFinder.Find("Bedroom VIP/BedroomUdon/Door Tablet/BlueButtonWide - Toggle VIP only");
-                    if (vipButton != null)
+                    // Click stupid warning button in elevator.
+                    MiscUtils.DelayFunction(5f, () =>
                     {
-                        vipButton.gameObject.transform.position = new Vector3(60.7236f, 63.1298f, -1.7349f);
-                    }
-                    else
-                    {
-                        ModConsole.Error("VIP Button not found!");
-                    }
+                        RestoreVIPButton();
+                    });
 
                     RemovePrivacyBlocksOnRooms(1);
                     RemovePrivacyBlocksOnRooms(2);
@@ -534,6 +532,20 @@
             }
         }
 
+        private static void RestoreVIPButton()
+        {
+            // Restore VIP button
+            VIPButton = VIPRoom.transform.Find("BedroomUdon/Door Tablet/BlueButtonWide - Toggle VIP only").gameObject;
+            if (VIPButton != null)
+            {
+                VIPButton.gameObject.transform.position = new Vector3(60.7236f, 63.1298f, -1.7349f);
+            }
+            else
+            {
+                ModConsole.Error("VIP Button not found!");
+            }
+        }
+
         private static IEnumerator UpdateButtonsLoop()
         {
             for (; ; )
@@ -544,13 +556,14 @@
                 {
                     if (Bools.IsBClubVIPSpoofing)
                     {
+                        RestoreVIPButton();
                         PlayerUtils.GetAPIUser()._displayName_k__BackingField = "Blue-kun";
                     }
                     yield return null;
                 }
                 else
                 {
-                    if (!WorldUtils.IsInWorld) yield break;
+                    if (!isCurrentWorld) yield break;
                     ButtonUpdateTime = 0f;
                 }
 
