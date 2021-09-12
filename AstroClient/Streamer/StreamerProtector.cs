@@ -13,11 +13,9 @@
 
     public class StreamerProtector : GameEvents
     {
-
         public static EventHandler<PlayerEventArgs> Event_OnStreamerJoined;
 
         public static EventHandler<PlayerEventArgs> Event_OnStreamerLeft;
-
 
         public static bool IsExploitsAllowed => IsAStreamerPresent();
 
@@ -43,12 +41,10 @@
         "usr_1bd361e0-02c1-4640-907c-458c508417a9", // Domania
         };
 
-
         public static bool IsAStreamerPresent()
         {
             return StreamersInInstance.Count() != 0;
         }
-
 
         public override void OnPlayerJoined(Player player)
         {
@@ -78,7 +74,7 @@
                                 if (userid == "usr_c22cc758-27ce-40e6-94c9-a4e290b55de5")
                                 {
                                     var KittyTag = player.AddSingleTag();
-                                    if(KittyTag != null)
+                                    if (KittyTag != null)
                                     {
                                         KittyTag.Tag_Color = new UnityEngine.Color(255, 192, 203);
                                         KittyTag.Label_TextColor = UnityEngine.Color.white;
@@ -118,13 +114,10 @@
             }
         }
 
-
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             StreamersInInstance.Clear();
         }
-
-
 
         public static List<Player> StreamersInInstance { get; private set; } = new List<Player>();
     }

@@ -1,18 +1,11 @@
 ﻿namespace AstroClient.Components
 {
-    using AstroClient.Udon;
     using AstroClient.Variables;
     using AstroLibrary.Console;
-    using AstroLibrary.Utility;
-    using System;
-    using System.Collections.Generic;
     using System.Drawing;
-    using VRC.Core;
-    using VRC.Udon;
 
     public class PlayerSpooferUtils : GameEvents
     {
-
         public override void OnUpdate()
         {
             MakeInstance();
@@ -38,7 +31,7 @@
         }
 
         private static PlayerSpoofer Instance;
-        
+
         public static PlayerSpoofer Spoofer
         {
             get
@@ -46,6 +39,5 @@
                 return Instance;
             }
         }
-
     }
 }

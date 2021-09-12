@@ -1,11 +1,9 @@
 ﻿namespace AstroClient.Components
 {
-    using AstroClient.Udon;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
     using System;
     using VRC.Core;
-    using VRC.Udon;
 
     [RegisterComponent]
     public class PlayerSpoofer : GameEventsBehaviour
@@ -20,11 +18,7 @@
         // Use this for initialization
         public void Start()
         {
-            
         }
-
-        
-
 
         private string DisplayName
         {
@@ -38,17 +32,16 @@
             }
             set
             {
-                if(user != null)
+                if (user != null)
                 {
                     user._displayName_k__BackingField = value;
                 }
             }
         }
 
-
         public void LateUpdate()
         {
-            if(IsSpooferActive)
+            if (IsSpooferActive)
             {
                 if (user != null)
                 {
@@ -57,8 +50,16 @@
                         DisplayName = SpoofedName;
                     }
                 }
+                else
+                {
+                    ModConsole.DebugError("Spoofer APIUSer is null! can't spoof!");
+                }
             }
+        }
 
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        {
+            _CurrentUser = null;
         }
 
         internal void SpoofAs(string name)
@@ -74,20 +75,21 @@
         }
 
         private APIUser _CurrentUser;
+
         internal APIUser user
         {
             get
             {
-                if(_CurrentUser == null)
+                if (_CurrentUser == null)
                 {
-                   return _CurrentUser = PlayerUtils.GetAPIUser(); 
+                    return _CurrentUser = PlayerUtils.GetAPIUser();
                 }
                 return _CurrentUser;
             }
         }
 
-
         private bool _IsSpooferActive;
+
         internal bool IsSpooferActive
         {
             get
@@ -117,6 +119,6 @@
 
         internal string SpoofedName { get; set; }
 
-        internal string RealName { get;  private set; }
+        internal string RealName { get; private set; }
     }
 }

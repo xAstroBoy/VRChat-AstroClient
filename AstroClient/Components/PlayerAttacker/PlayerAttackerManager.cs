@@ -192,7 +192,7 @@
             ClearList();
         }
 
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             OriginalPlayerAttackers.Clear();
             if (SnapshotPlayerAttackers != null)
