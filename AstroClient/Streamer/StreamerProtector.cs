@@ -39,6 +39,7 @@
         "usr_22b75801-bf0f-4464-b002-4b9b86252196",
         "usr_7c9eb849-4f62-446f-980b-9e000a1b238e",
         "usr_d4d6ea8a-8ad7-4d67-af81-d58a26449cca",
+        "usr_8a3eb8c4-5d4a-41cd-8489-ef23e319f711",
         };
 
 
@@ -66,14 +67,21 @@
                             {
                                 CheetosHelpers.SendHudNotification($"Streamer : {apiuser.displayName} Joined!");
                                 ModConsole.Warning($"Streamer : {apiuser.displayName} Joined!");
-                                if(apiuser.username == "singthestar")
+                                var tag = player.AddSingleTag();
+                                if (tag != null)
                                 {
-                                    var tag = player.AddSingleTag();
-                                    if(tag != null)
+                                    tag.Tag_Color = UnityEngine.Color.yellow;
+                                    tag.Label_TextColor = UnityEngine.Color.white;
+                                    tag.Label_Text = "Streamer";
+                                }
+                                if (apiuser.username == "singthestar")
+                                {
+                                    var KittyTag = player.AddSingleTag();
+                                    if(KittyTag != null)
                                     {
-                                        tag.Tag_Color = new UnityEngine.Color(255, 192, 203);
-                                        tag.Label_TextColor = UnityEngine.Color.white;
-                                        tag.Label_Text = "A Sweet Kitty";
+                                        KittyTag.Tag_Color = new UnityEngine.Color(255, 192, 203);
+                                        KittyTag.Label_TextColor = UnityEngine.Color.white;
+                                        KittyTag.Label_Text = "A Sweet Kitty";
                                     }
                                 }
                             }
