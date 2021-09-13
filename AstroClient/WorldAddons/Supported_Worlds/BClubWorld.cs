@@ -26,6 +26,7 @@
         public static GameObject VIPRoom;
         public static GameObject VIPInsideDoor;
         public static GameObject VIPButton;
+        public static GameObject VIPControls;
 
         public static QMNestedButton BClubExploitsPage;
 
@@ -40,7 +41,14 @@
         private static bool _isBlueChairEnabed;
 
         private static bool isCurrentWorld;
-        private static string realName;
+
+        private static PlayerSpoofer CurrentSpoofer
+        {
+            get
+            {
+                return PlayerSpooferUtils.Spoofer;
+            }
+        }
 
         public static bool IsBlueChairEnabled
         {
@@ -152,9 +160,8 @@
             LockButton5 = new QMToggleButton(BClubExploitsPage, 2, 1, "Unlock 5", () => { ToggleDoor(5); }, "Lock 5", () => { ToggleDoor(5); }, "Toggle Door Lock", null, Color.green, Color.red, false);
             LockButton6 = new QMToggleButton(BClubExploitsPage, 3, 1, "Unlock 6", () => { ToggleDoor(6); }, "Lock 6", () => { ToggleDoor(6); }, "Toggle Door Lock", null, Color.green, Color.red, false);
 
-
             // VIP
-            _ = new QMToggleButton(BClubExploitsPage, 5, 1, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = true; PlayerUtils.GetAPIUser()._displayName_k__BackingField = "Blue-kun"; }, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = false; PlayerUtils.GetAPIUser()._displayName_k__BackingField = realName; }, "VIP Spoof", null, Color.green, Color.red, false);
+            _ = new QMToggleButton(BClubExploitsPage, 5, 1, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = true; CurrentSpoofer.SpoofAs("Blue-kun"); }, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = false; CurrentSpoofer.DisableSpoofer(); }, "VIP Spoof", null, Color.green, Color.red, false);
             //_ = new QMSingleButton(BClubExploitsPage, 4, 2, "Enter VIP", () => { EnterVIPRoom(); }, "Enter VIP Room");
 
             // Freeze Locks
@@ -174,7 +181,10 @@
 
         private static void RefreshButtons()
         {
-            VIPButton.gameObject.transform.position = new Vector3(60.7236f, 63.1298f, -1.7349f);
+            if (VIPButton != null)
+            {
+                VIPButton.gameObject.transform.position = new Vector3(60.7236f, 63.1298f, -1.7349f);
+            }
 
             if (!LockIndicator1.active)
             {
@@ -403,7 +413,6 @@
             if (id == WorldIds.BClub)
             {
                 isCurrentWorld = true;
-                realName = PlayerUtils.GetPlayer().GetDisplayName();
                 WorldUtils.GetUdonScripts().Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
                 ModConsole.Log($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
@@ -422,6 +431,15 @@
                     ModConsole.Error("Failed to find Penthouse!");
                 }
 
+                var Lobby = GameObjectFinder.FindRootSceneObject("Lobby");
+                if (Lobby != null)
+                {
+                    VIPControls = Lobby.transform.FindObject("Udon/MyI Control Panel").gameObject;
+                    if (VIPControls != null)
+                    {
+                        VIPControls.SetActive(true);
+                    }
+                }
                 try
                 {
                     ModConsole.DebugLog("Searching for Private Rooms Exteriors...");

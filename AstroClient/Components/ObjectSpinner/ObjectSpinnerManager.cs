@@ -126,7 +126,7 @@
             ObjectSpinners.Clear();
         }
 
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             ObjectSpinners.Clear();
             ClearList();

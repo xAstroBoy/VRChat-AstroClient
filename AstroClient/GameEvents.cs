@@ -5,7 +5,6 @@
     using AstroClient.Cheetos;
     using AstroClient.Startup.Hooks;
     using AstroClientCore.Events;
-    using AstroLibrary.Console;
     using System;
     using System.Collections.Generic;
     using UnityEngine;
@@ -57,9 +56,8 @@
             TargetSelector.Event_OnTargetSet += Internal_OnTargetSet;
 
             StreamerProtector.Event_OnStreamerJoined += Internal_OnStreamerJoined;
+            StreamerProtector.Event_OnStreamerLeft += Internal_OnStreamerLeft;
         }
-
-
 
         private void Internal_OnStreamerJoined(object sender, PlayerEventArgs e)
         {
@@ -188,7 +186,6 @@
 
         private void Internal_OnAvatarSpawn(object sender, OnAvatarSpawnArgs e)
         {
-            ModConsole.Log("Avatar Spawned..");
             OnAvatarSpawn(e.VRCAvatarManager, e.Avatar);
         }
 
@@ -259,8 +256,6 @@
         public virtual void OnStreamerJoined(Player player)
         {
         }
-
-
 
         public virtual void OnPhotonLeft(Photon.Realtime.Player player)
         {

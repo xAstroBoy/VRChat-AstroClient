@@ -193,7 +193,7 @@
             ClearList();
         }
 
-        public override void OnLevelLoaded()
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             OriginalPlayerWatchers.Clear();
             if (SnapshotPlayerWatchers != null)

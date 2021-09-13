@@ -5,7 +5,6 @@
     using AstroClientCore.Events;
     using System;
     using System.Collections.Generic;
-    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;
@@ -14,14 +13,24 @@
     {
         public GameEventsBehaviour(IntPtr obj0) : base(obj0)
         {
-            Main.Event_OnSceneLoaded += Internal_OnLevelLoaded;
-            NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
-            NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
+            // ML Events
+            //Main.Event_OnApplicationStart += Internal_OnApplicationStart;
+
+            Main.Event_OnSceneLoaded += Internal_OnSceneLoaded;
+
+            // PATCHES
+
+            // HOOKS
+            OnWorldRevealHook.Event_OnWorldReveal += Internal_OnWorldReveal;
             SpawnEmojiRPCHook.Event_SpawnEmojiRPC += Internal_SpawnEmojiRPC;
             TriggerEventHook.Event_VRC_EventDispatcherRFC_triggerEvent += Internal_VRC_EventDispatcherRFC_triggerEvent;
-            AvatarManagerHook.Event_OnAvatarSpawn += Internal_OnAvatarSpawn;
+
             RPCEventHook.Event_OnUdonSyncRPC += Internal_OnUdonSyncRPCEvent;
-            OnWorldRevealHook.Event_OnWorldReveal += Internal_OnWorldReveal;
+
+            AvatarManagerHook.Event_OnAvatarSpawn += Internal_OnAvatarSpawn;
+
+            NetworkManagerHooks.Event_OnPlayerJoin += Internal_OnPlayerJoined;
+            NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
 
             CheetosHooks.Event_OnMasterClientSwitched += Internal_OnMasterClientSwitched;
             CheetosHooks.Event_OnPhotonJoin += Internal_OnPhotonPlayerJoined;
@@ -32,192 +41,210 @@
             CheetosHooks.Event_OnRoomJoined += Internal_OnRoomJoined;
             CheetosHooks.Event_OnFriended += Internal_OnFriended;
             CheetosHooks.Event_OnUnfriended += Internal_OnUnfriended;
+
+            QuickMenuHooks.Event_OnPlayerSelected += Internal_OnPlayerSelected;
+
+            TargetSelector.Event_OnTargetSet += Internal_OnTargetSet;
+
+            StreamerProtector.Event_OnStreamerJoined += Internal_OnStreamerJoined;
+            StreamerProtector.Event_OnStreamerLeft += Internal_OnStreamerLeft;
         }
 
-        [HideFromIl2Cpp]
+        private void Internal_OnStreamerJoined(object sender, PlayerEventArgs e)
+        {
+            OnStreamerJoined(e.player);
+        }
+
+        private void Internal_OnStreamerLeft(object sender, PlayerEventArgs e)
+        {
+            OnStreamerLeft(e.player);
+        }
+
         private void Internal_OnMasterClientSwitched(object sender, PhotonPlayerEventArgs e)
         {
             OnMasterClientSwitched(e.player);
         }
 
-        [HideFromIl2Cpp]
-        private void Internal_OnLevelLoaded(object sender, EventArgs e)
+        private void Internal_VRChat_OnUiManagerInit(object sender, EventArgs e)
         {
-            OnLevelLoaded();
+            VRChat_OnUiManagerInit();
         }
 
-        [HideFromIl2Cpp]
+        private void Internal_OnSceneLoaded(object sender, OnSceneLoadedEventArgs e)
+        {
+            OnSceneLoaded(e.BuildIndex, e.SceneName);
+        }
+
         private void Internal_OnRoomLeft(object sender, EventArgs e)
         {
             OnRoomLeft();
         }
 
-        [HideFromIl2Cpp]
         private void Internal_OnRoomJoined(object sender, EventArgs e)
         {
             OnRoomJoined();
         }
 
-        [HideFromIl2Cpp]
         private void Internal_OnFriended(object sender, EventArgs e)
         {
             OnFriended();
         }
 
-        [HideFromIl2Cpp]
         private void Internal_OnUnfriended(object sender, EventArgs e)
         {
             OnUnfriended();
         }
 
-        [HideFromIl2Cpp]
         private void Internal_OnPlayerLeft(object sender, PlayerEventArgs e)
         {
             OnPlayerLeft(e.player);
         }
 
-        [HideFromIl2Cpp]
         private void Internal_OnPlayerJoined(object sender, PlayerEventArgs e)
         {
             OnPlayerJoined(e.player);
         }
 
-        [HideFromIl2Cpp]
-        private void Internal_SpawnEmojiRPC(object sender, SpawnEmojiArgs e)
-        {
-            SpawnEmojiRPC(e.player, e.Emoji);
-        }
-
-        [HideFromIl2Cpp]
-        private void Internal_VRC_EventDispatcherRFC_triggerEvent(object sender, VRC_EventDispatcherRFC_TriggerEventArgs e)
-        {
-            VRC_EventDispatcherRFC_triggerEvent(e.VRC_EventHandler, e.VrcEvent, e.VrcBroadcastType, e.UnknownInt, e.UnknownFloat);
-        }
-
-        [HideFromIl2Cpp]
-        private void Internal_OnAvatarSpawn(object sender, OnAvatarSpawnArgs e)
-        {
-            OnAvatarSpawn(e.VRCAvatarManager, e.Avatar);
-        }
-
-        [HideFromIl2Cpp]
-        private void Internal_OnUdonSyncRPCEvent(object sender, UdonSyncRPCEventArgs e)
-        {
-            OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
-        }
-
-        [HideFromIl2Cpp]
         private void Internal_OnQuickMenuOpen(object sender, EventArgs e)
         {
             OnQuickMenuOpen();
         }
 
-        [HideFromIl2Cpp]
         private void Internal_OnQuickMenuClose(object sender, EventArgs e)
         {
             OnQuickMenuClose();
         }
 
-        [HideFromIl2Cpp]
         private void Internal_OnPhotonPlayerLeft(object sender, PhotonPlayerEventArgs e)
         {
             OnPhotonLeft(e.player);
         }
 
-        [HideFromIl2Cpp]
         private void Internal_OnPhotonPlayerJoined(object sender, PhotonPlayerEventArgs e)
         {
             OnPhotonJoined(e.player);
         }
 
-        [HideFromIl2Cpp]
+        private void Internal_SpawnEmojiRPC(object sender, SpawnEmojiArgs e)
+        {
+            SpawnEmojiRPC(e.player, e.Emoji);
+        }
+
         private void Internal_OnWorldReveal(object sender, OnWorldRevealArgs e)
         {
             OnWorldReveal(e.ID, e.Name, e.WorldTags, e.AssetUrl);
         }
 
-        [HideFromIl2Cpp]
+        private void Internal_OnPlayerSelected(object sender, VRCPlayerEventArgs e)
+        {
+            OnPlayerSelected(e.player);
+        }
+
+        private void Internal_OnTargetSet(object sender, VRCPlayerEventArgs e)
+        {
+            OnTargetSet(e.player);
+        }
+
+        private void Internal_VRC_EventDispatcherRFC_triggerEvent(object sender, VRC_EventDispatcherRFC_TriggerEventArgs e)
+        {
+            VRC_EventDispatcherRFC_triggerEvent(e.VRC_EventHandler, e.VrcEvent, e.VrcBroadcastType, e.UnknownInt, e.UnknownFloat);
+        }
+
+        private void Internal_OnUdonSyncRPCEvent(object sender, UdonSyncRPCEventArgs e)
+        {
+            OnUdonSyncRPCEvent(e.sender, e.obj, e.action);
+        }
+
+        private void Internal_OnAvatarSpawn(object sender, OnAvatarSpawnArgs e)
+        {
+            OnAvatarSpawn(e.VRCAvatarManager, e.Avatar);
+        }
+
+        public virtual void VRChat_OnUiManagerInit()
+        {
+        }
+
+        public virtual void OnSceneLoaded(int buildIndex, string sceneName)
+        {
+        }
+
         public virtual void OnMasterClientSwitched(Photon.Realtime.Player player)
         {
         }
 
-        [HideFromIl2Cpp]
-        public virtual void OnPlayerLeft(Player player)
-        {
-        }
-
-        [HideFromIl2Cpp]
         public virtual void OnRoomLeft()
         {
         }
 
-        [HideFromIl2Cpp]
         public virtual void OnRoomJoined()
         {
         }
 
-        [HideFromIl2Cpp]
         public virtual void OnFriended()
         {
         }
 
-        [HideFromIl2Cpp]
         public virtual void OnUnfriended()
         {
         }
 
-        [HideFromIl2Cpp]
-        public virtual void OnLevelLoaded()
+        public virtual void OnPlayerLeft(Player player)
         {
         }
 
-        [HideFromIl2Cpp]
         public virtual void OnPlayerJoined(Player player)
         {
         }
 
-        [HideFromIl2Cpp]
-        public virtual void SpawnEmojiRPC(VRCPlayer player, int emoji)
+        public virtual void OnStreamerLeft(Player player)
         {
         }
 
-        [HideFromIl2Cpp]
-        public virtual void VRC_EventDispatcherRFC_triggerEvent(VRC_EventHandler VRC_EventHandler, VRC_EventHandler.VrcEvent VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int UnknownInt, float UnknownFloat)
+        public virtual void OnStreamerJoined(Player player)
         {
         }
 
-        [HideFromIl2Cpp]
-        public virtual void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
-        {
-        }
-
-        [HideFromIl2Cpp]
-        public virtual void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
-        {
-        }
-
-        [HideFromIl2Cpp]
         public virtual void OnPhotonLeft(Photon.Realtime.Player player)
         {
         }
 
-        [HideFromIl2Cpp]
         public virtual void OnPhotonJoined(Photon.Realtime.Player player)
         {
         }
 
-        [HideFromIl2Cpp]
         public virtual void OnQuickMenuOpen()
         {
         }
 
-        [HideFromIl2Cpp]
         public virtual void OnQuickMenuClose()
         {
         }
 
-        [HideFromIl2Cpp]
+        public virtual void SpawnEmojiRPC(VRCPlayer player, int emoji)
+        {
+        }
+
+        public virtual void VRC_EventDispatcherRFC_triggerEvent(VRC_EventHandler VRC_EventHandler, VRC_EventHandler.VrcEvent VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int UnknownInt, float UnknownFloat)
+        {
+        }
+
+        public virtual void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
+        {
+        }
+
+        public virtual void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        {
+        }
+
         public virtual void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        {
+        }
+
+        public virtual void OnPlayerSelected(Player player)
+        {
+        }
+
+        public virtual void OnTargetSet(Player player)
         {
         }
     }
