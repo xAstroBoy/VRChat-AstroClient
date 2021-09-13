@@ -4,6 +4,7 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Text;
@@ -23,7 +24,6 @@
         private Player self;
 
         private bool initialized;
-        public float maxUpdateDistance = 10f;
 
         private GameObject statsTag;
         private TextMeshProUGUI statsText;
@@ -34,8 +34,6 @@
         public NamePlates(IntPtr obj0) : base(obj0)
         {
         }
-
-        private static float RefreshTime;
 
         public void Start()
         {
@@ -68,6 +66,15 @@
             if (stopwatch.ElapsedMilliseconds > 0)
             {
                 ModConsole.Log($"Warning: Namplate creation took {stopwatch.ElapsedMilliseconds}ms!");
+            }
+        }
+
+        private IEnumerator UpdateLoop()
+        {
+            for (; ; )
+            {
+                Refresh();
+                yield return new WaitForSeconds(2);
             }
         }
 
@@ -118,19 +125,6 @@
             if (questTag != null)
             {
                 questTag.SetActiveRecursively(false);
-            }
-        }
-
-        public void Update()
-        {
-            if (RefreshTime >= 2f)
-            {
-                Refresh();
-                RefreshTime = 0;
-            }
-            else
-            {
-                RefreshTime += 1f * Time.deltaTime;
             }
         }
 

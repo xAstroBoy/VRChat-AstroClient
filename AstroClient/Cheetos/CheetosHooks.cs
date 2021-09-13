@@ -142,6 +142,7 @@
                 new Patch(AccessTools.Property(typeof(Time), nameof(Time.smoothDeltaTime)).GetMethod, null, GetPatch(nameof(SpoofFPS)));
                 new Patch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
                 new Patch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
+                new Patch(typeof(Cursor).GetProperty(nameof(Cursor.lockState)).GetSetMethod(), GetPatch(nameof(MousePatch)), null);
 
                 // Experiments
                 new Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.Method_Public_Boolean_String_Object_Boolean_PDM_0)), GetPatch(nameof(LoadBalancingClient_OpWebRpc)));
@@ -151,6 +152,14 @@
             }
             catch (Exception e) { ModConsole.Error("[Cheetos Patches] Error in applying patches : " + e); }
             finally { }
+        }
+
+        private static void MousePatch(ref bool __0)
+        {
+            if (!WorldUtils.IsInWorld)
+            {
+                __0 = false;
+            }
         }
 
         private static void OnMasterClientSwitchedPatch(Photon.Realtime.Player __0)
