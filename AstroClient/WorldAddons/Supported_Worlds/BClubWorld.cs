@@ -392,7 +392,7 @@
                 if (Bools.IsBClubVIPSpoofing)
                 {
                     Bools.IsBClubVIPSpoofing = false;
-                    PlayerUtils.GetAPIUser()._displayName_k__BackingField = realName;
+                    CurrentSpoofer.DisableSpoofer();
                     ModConsole.Log("B Club VIP Spoof Disabled.");
                 }
 
