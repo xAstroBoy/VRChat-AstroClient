@@ -118,7 +118,16 @@
             {
                 Instance.target = target;
                 Instance.isEnabled = true;
+
+                if (Instance.centerPoint == null)
+                {
+                    Instance.centerPoint = BonesUtils.Get_Player_Bone_Transform(target, HumanBodyBones.Head);
+                }
+
+                _ = MelonCoroutines.Start(LoopPickups());
+
                 ModConsole.Log($"[OrbitManager] Orbiting Player: {Instance.target.DisplayName()}");
+
             }
             else
             {
@@ -142,46 +151,30 @@
             ModConsole.Log($"[OrbitManager] Orbit Disabled");
         }
 
-        public void FixedUpdate()
+        public static IEnumerator LoopPickups()
         {
-            if ((IsEnabled && target == null) || (IsEnabled && !WorldUtils.IsInWorld))
+            for (; ; )
             {
-                DisableOrbit();
-                return;
-            }
-
-            if (isEnabled && !isLooping)
-            {
-                if (centerPoint == null)
+                if (!IsEnabled || Instance.target == null)
                 {
-                    centerPoint = BonesUtils.Get_Player_Bone_Transform(target, HumanBodyBones.Head);
+                    DisableOrbit();
+                    yield break;
                 }
 
-                isLooping = true;
-
-                _ = MelonCoroutines.Start(LoopPickups());
-            }
-        }
-
-        public IEnumerator LoopPickups()
-        {
-            if (!IsEnabled || target == null) yield break;
-
-            foreach (PickupController pickup in pickups)
-            {
-                if (!pickup.gameObject.IsOwner())
+                foreach (PickupController pickup in Instance.pickups)
                 {
-                    pickup.gameObject.TakeOwnership();
-                    pickup.gameObject.RigidBody_Set_Gravity(false);
-                    pickup.gameObject.RigidBody_Set_DetectCollisions(true);
-                    pickup.gameObject.RigidBody_Set_isKinematic(false);
+                    if (!pickup.gameObject.IsOwner())
+                    {
+                        pickup.gameObject.TakeOwnership();
+                        pickup.gameObject.RigidBody_Set_Gravity(false);
+                        pickup.gameObject.RigidBody_Set_DetectCollisions(true);
+                        pickup.gameObject.RigidBody_Set_isKinematic(false);
+                    }
+
+                    pickup.transform.position = Instance.centerPoint.position + (Instance.centerPoint.forward * 0.3f);
                 }
-
-                pickup.transform.position = centerPoint.position + (centerPoint.forward * 0.3f);
+                yield return new WaitForSeconds(0.1f);
             }
-
-            isLooping = false;
-            yield break;
         }
     }
 }

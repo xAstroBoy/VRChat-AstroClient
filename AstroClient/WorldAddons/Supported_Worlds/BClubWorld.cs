@@ -31,11 +31,6 @@
 
         public static int SpamCount = 0;
 
-        public static float DoorbellTime = 0f;
-        public static float DoorFreezeTime = 0f;
-        public static float ButtonUpdateTime = 0f;
-        public static float BlueChairTime = 0f;
-
         private static QMToggleButton SpamDoorbellsToggle;
         private static QMToggleButton FreezeLockedToggle;
         private static QMToggleButton FreezeUnlockedToggle;
@@ -48,6 +43,8 @@
 
         private static bool isCurrentWorld;
         private static string realName;
+
+        private static UdonBehaviour_Cached[] lockActions;
 
         public static bool IsBlueChairEnabled
         {
@@ -252,20 +249,10 @@
         {
             for (; ; )
             {
-                DoorFreezeTime += 1 * Time.deltaTime;
-
-                if (DoorFreezeTime < 100f)
+                if (!isCurrentWorld)
                 {
-                    yield return null;
-                }
-                else
-                {
-                    if (!isCurrentWorld)
-                    {
-                        IsFreezeLockEnabed = false;
-                        yield break;
-                    }
-                    DoorFreezeTime = 0;
+                    IsFreezeLockEnabed = false;
+                    yield break;
                 }
 
                 if (LockIndicator1.active != true) ToggleDoor(1);
@@ -277,7 +264,7 @@
 
                 if (IsFreezeLockEnabed)
                 {
-                    yield return null;
+                    yield return new WaitForSeconds(0.1f);
                 }
                 else
                 {
@@ -290,20 +277,10 @@
         {
             for (; ; )
             {
-                DoorFreezeTime += 1 * Time.deltaTime;
-
-                if (DoorFreezeTime < 100f)
+                if (!isCurrentWorld)
                 {
-                    yield return null;
-                }
-                else
-                {
-                    if (!isCurrentWorld)
-                    {
-                        IsFreezeUnlockEnabed = false;
-                        yield break;
-                    }
-                    DoorFreezeTime = 0;
+                    IsFreezeUnlockEnabed = false;
+                    yield break;
                 }
 
                 if (LockIndicator1.active != false) ToggleDoor(1);
@@ -315,7 +292,7 @@
 
                 if (IsFreezeUnlockEnabed)
                 {
-                    yield return null;
+                    yield return new WaitForSeconds(0.1f);
                 }
                 else
                 {
@@ -335,26 +312,16 @@
         {
             for (; ; )
             {
-                DoorbellTime += 1 * Time.deltaTime;
-
-                if (DoorbellTime < 500f)
+                if (!isCurrentWorld)
                 {
-                    yield return null;
-                }
-                else
-                {
-                    if (!isCurrentWorld)
-                    {
-                        IsDoorbellSpamEnabled = false;
+                    IsDoorbellSpamEnabled = false;
                         yield break;
-                    }
-                    DoorbellTime = 0;
                 }
 
                 foreach (var bell in _bells)
                 {
                     bell?.ExecuteUdonEvent();
-                    yield return null;
+                    yield return new WaitForSeconds(0.1f);
                 }
 
                 if (IsDoorbellSpamEnabled)
@@ -368,44 +335,31 @@
             }
         }
 
+        private static List<UdonBehaviour_Cached> chairs;
+
         private static void BlueChairSpam()
         {
+            chairs = new List<UdonBehaviour_Cached>();
+            WorldUtils.GetUdonScripts().Where(b => b.name == "Chair").ToList().ForEach(s => chairs.Add(s.FindUdonEvent("Sit")));
             _ = MelonCoroutines.Start(DoBlueChairSpam());
         }
 
         private static IEnumerator DoBlueChairSpam()
         {
-            BlueChairTime += 1 * Time.deltaTime;
-
-            if (BlueChairTime < 10f)
+            for (; ; )
             {
-                yield return null;
-            }
-            else
-            {
-                if (!isCurrentWorld)
+                if (!isCurrentWorld || !IsBlueChairEnabled)
                 {
-                    IsBlueChairEnabled = false;
                     yield break;
                 }
-                BlueChairTime = 0f;
-            }
 
-            var chairs = WorldUtils.GetUdonScripts().Where(b => b.name.Contains("Chair") || b.name.Contains("Seat")).ToArray();
+                foreach (var chair in chairs)
+                {
 
-            foreach (var chair in chairs)
-            {
-                if (chair.enabled) chair.enabled = true;
-                chair.FindUdonEvent("Sit")?.ExecuteUdonEvent();
-            }
+                    yield return null;
+                }
 
-            if (IsBlueChairEnabled)
-            {
-                yield return null;
-            }
-            else
-            {
-                yield break;
+                yield return new WaitForSeconds(0.1f);
             }
         }
 
@@ -507,7 +461,7 @@
                         }
                     });
 
-                    // Click stupid warning button in elevator.
+                    // Restore the VIP Button
                     MiscUtils.DelayFunction(5f, () =>
                     {
                         RestoreVIPButton();
@@ -519,6 +473,13 @@
                     RemovePrivacyBlocksOnRooms(4);
                     RemovePrivacyBlocksOnRooms(5);
                     RemovePrivacyBlocksOnRooms(6);
+
+                    lockActions = new UdonBehaviour_Cached[6];
+                    for (int i = 1; i <= 6; i++)
+                    {
+                        lockActions.Append(UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{i}"));
+                        ModConsole.Log($"Found: {lockActions[i].UdonBehaviour.name}");
+                    }
 
                     _ = MelonCoroutines.Start(UpdateButtonsLoop());
                 }
@@ -551,24 +512,15 @@
         {
             for (; ; )
             {
-                ButtonUpdateTime += 1 * Time.deltaTime;
+                if (!isCurrentWorld) yield break;
 
-                if (ButtonUpdateTime < 100f)
+                if (Bools.IsBClubVIPSpoofing)
                 {
-                    if (Bools.IsBClubVIPSpoofing)
-                    {
-                        RestoreVIPButton();
-                        PlayerUtils.GetAPIUser()._displayName_k__BackingField = "Blue-kun";
-                    }
-                    yield return null;
+                    RestoreVIPButton();
+                    PlayerUtils.GetAPIUser()._displayName_k__BackingField = "Blue-kun";
                 }
-                else
-                {
-                    if (!isCurrentWorld) yield break;
-                    ButtonUpdateTime = 0f;
-                }
-
                 RefreshButtons();
+                yield return new WaitForSeconds(0.1f);
             }
         }
 

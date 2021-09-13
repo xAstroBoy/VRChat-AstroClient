@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+    using AstroLibrary.Console;
     #region Imports
 
     using AstroLibrary.Utility;
@@ -129,7 +130,7 @@
                     xPos -= 1f;
                 }
 
-                yield return null;
+                yield return new WaitForSeconds(0.05f);
             }
             refreshMutex.ReleaseMutex();
             yield break;
@@ -151,7 +152,7 @@
             PlayerButtons.Add(playerButton);
 
             stopwatch.Stop();
-            //Console.WriteLine($"Button Created: {player.Name} - {stopwatch.ElapsedMilliseconds}ms");
+            ModConsole.Log($"Button Created: {player.Name} - {stopwatch.ElapsedMilliseconds}ms");
         }
 
         private void ResetButtons()
