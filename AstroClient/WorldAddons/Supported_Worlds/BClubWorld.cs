@@ -29,8 +29,6 @@
 
         public static QMNestedButton BClubExploitsPage;
 
-        public static int SpamCount = 0;
-
         private static QMToggleButton SpamDoorbellsToggle;
         private static QMToggleButton FreezeLockedToggle;
         private static QMToggleButton FreezeUnlockedToggle;
@@ -43,8 +41,6 @@
 
         private static bool isCurrentWorld;
         private static string realName;
-
-        private static UdonBehaviour_Cached[] lockActions;
 
         public static bool IsBlueChairEnabled
         {
@@ -315,7 +311,7 @@
                 if (!isCurrentWorld)
                 {
                     IsDoorbellSpamEnabled = false;
-                        yield break;
+                    yield break;
                 }
 
                 foreach (var bell in _bells)
@@ -335,12 +331,23 @@
             }
         }
 
-        private static List<UdonBehaviour_Cached> chairs;
+        private static List<UdonBehaviour_Cached> _chairs = new List<UdonBehaviour_Cached>();
 
         private static void BlueChairSpam()
         {
-            chairs = new List<UdonBehaviour_Cached>();
-            WorldUtils.GetUdonScripts().Where(b => b.name == "Chair").ToList().ForEach(s => chairs.Add(s.FindUdonEvent("Sit")));
+            var temp = WorldUtils.GetUdonScripts().Where(b => b.name.Contains("Chair") || b.name.Contains("Seat")).ToList();
+            foreach (var chair in temp)
+            {
+                if (chair.name.Contains("Chair") || chair.name.Contains("Seat"))
+                {
+                    var action = chair.FindUdonEvent("Sit");
+                    if (action != null && !_chairs.Contains(action))
+                    {
+                        _chairs.Add(action);
+                    }
+                }
+            }
+            ModConsole.Log($"Blue Chairs: {_chairs.Count} found.");
             _ = MelonCoroutines.Start(DoBlueChairSpam());
         }
 
@@ -348,18 +355,15 @@
         {
             for (; ; )
             {
-                if (!isCurrentWorld || !IsBlueChairEnabled)
+                if (!IsBlueChairEnabled) yield break;
+
+                foreach (var chair in _chairs)
                 {
-                    yield break;
+                    chair.ExecuteUdonEvent();
+                    yield return new WaitForSeconds(0.05f);
                 }
 
-                foreach (var chair in chairs)
-                {
-
-                    yield return null;
-                }
-
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForEndOfFrame();
             }
         }
 
@@ -374,9 +378,23 @@
             if (isCurrentWorld)
             {
                 isCurrentWorld = false;
-                ModConsole.Log("Leaving B Club");
-                Bools.IsBClubVIPSpoofing = false;
-                PlayerUtils.GetAPIUser()._displayName_k__BackingField = realName;
+
+                if (Bools.IsBClubVIPSpoofing)
+                {
+                    Bools.IsBClubVIPSpoofing = false;
+                    PlayerUtils.GetAPIUser()._displayName_k__BackingField = realName;
+                    ModConsole.Log("B Club VIP Spoof Disabled.");
+                }
+
+                if (IsBlueChairEnabled) IsBlueChairEnabled = false;
+                if (IsDoorbellSpamEnabled) IsDoorbellSpamEnabled = false;
+                if (IsFreezeLockEnabed) IsFreezeLockEnabed = false;
+                if (IsFreezeUnlockEnabed) IsFreezeUnlockEnabed = false;
+
+                _bells.Clear();
+                _chairs.Clear();
+
+                ModConsole.Log("Done unloading B Club..");
             }
         }
 
@@ -438,55 +456,17 @@
                     }
 
                     CreateVIPEntryButton(new Vector3(-80.4f, 16.0598f, -1.695f), Quaternion.Euler(0f, 90f, 0f));
-
-                    // Click stupid warning button in elevator.
-                    MiscUtils.DelayFunction(5f, () =>
-                    {
-                        var elevatorButton = GameObjectFinder.Find("Lobby/Entrance Corridor/Udon/Warning/Enter - BlueButtonWide/Button Interactable");
-                        if (elevatorButton != null)
-                        {
-                            var udonComp = elevatorButton.GetComponent<UdonBehaviour>();
-                            if (udonComp != null)
-                            {
-                                udonComp.Interact();
-                            }
-                            else
-                            {
-                                ModConsole.Error("Elevator Button's Udon Component Not Found!");
-                            }
-                        }
-                        else
-                        {
-                            ModConsole.Error("Elevator Button Not Found!");
-                        }
-                    });
-
-                    // Restore the VIP Button
-                    MiscUtils.DelayFunction(5f, () =>
-                    {
-                        RestoreVIPButton();
-                    });
-
-                    RemovePrivacyBlocksOnRooms(1);
-                    RemovePrivacyBlocksOnRooms(2);
-                    RemovePrivacyBlocksOnRooms(3);
-                    RemovePrivacyBlocksOnRooms(4);
-                    RemovePrivacyBlocksOnRooms(5);
-                    RemovePrivacyBlocksOnRooms(6);
-
-                    lockActions = new UdonBehaviour_Cached[6];
-                    for (int i = 1; i <= 6; i++)
-                    {
-                        lockActions.Append(UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{i}"));
-                        ModConsole.Log($"Found: {lockActions[i].UdonBehaviour.name}");
-                    }
-
-                    _ = MelonCoroutines.Start(UpdateButtonsLoop());
+                    RestoreVIPButton();
                 }
                 catch (Exception e)
                 {
                     ModConsole.DebugErrorExc(e);
                 }
+
+                ModConsole.Log("Starting Update Loop");
+                _ = MelonCoroutines.Start(RemovePrivacies());
+                _ = MelonCoroutines.Start(BypassElevator());
+                _ = MelonCoroutines.Start(UpdateLoop());
             }
             else
             {
@@ -494,34 +474,65 @@
             }
         }
 
-        private static void RestoreVIPButton()
+        private static IEnumerator RemovePrivacies()
         {
-            // Restore VIP button
-            VIPButton = VIPRoom.transform.Find("BedroomUdon/Door Tablet/BlueButtonWide - Toggle VIP only").gameObject;
-            if (VIPButton != null)
+            for (int i = 1; i <= 6; i++)
             {
-                VIPButton.gameObject.transform.position = new Vector3(60.7236f, 63.1298f, -1.7349f);
+                RemovePrivacyBlocksOnRooms(i);
+                yield return null;
             }
-            else
-            {
-                ModConsole.Error("VIP Button not found!");
-            }
+
+            ModConsole.Log("Room Privacies Removed..");
+            yield break;
         }
 
-        private static IEnumerator UpdateButtonsLoop()
+        private static IEnumerator UpdateLoop()
         {
             for (; ; )
             {
                 if (!isCurrentWorld) yield break;
 
-                if (Bools.IsBClubVIPSpoofing)
+                try
                 {
                     RestoreVIPButton();
-                    PlayerUtils.GetAPIUser()._displayName_k__BackingField = "Blue-kun";
-                }
-                RefreshButtons();
+                    RefreshButtons();
+                } catch { }
+
                 yield return new WaitForSeconds(0.1f);
             }
+        }
+
+        private static IEnumerator BypassElevator()
+        {
+            var elevatorButton = GameObjectFinder.Find("Lobby/Entrance Corridor/Udon/Warning/Enter - BlueButtonWide/Button Interactable");
+            if (elevatorButton != null)
+            {
+                var udonComp = elevatorButton.GetComponent<UdonBehaviour>();
+                if (udonComp != null)
+                {
+                    udonComp.Interact();
+                    yield break;
+                }
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        private static void RestoreVIPButton()
+        {
+            MiscUtils.DelayFunction(5f, () =>
+            {
+                // Restore VIP button
+                VIPButton = VIPRoom.transform.Find("BedroomUdon/Door Tablet/BlueButtonWide - Toggle VIP only").gameObject;
+                if (VIPButton != null)
+                {
+                    VIPButton.gameObject.transform.position = new Vector3(60.7236f, 63.1298f, -1.7349f);
+                }
+                else
+                {
+                    ModConsole.Error("VIP Button not found!");
+                }
+            });
         }
 
         private static void EnterVIPRoom()
@@ -535,7 +546,7 @@
             Utils.LocalPlayer.gameObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
         }
 
-        private void CreateVIPEntryButton(Vector3 position, Quaternion rotation)
+        private static void CreateVIPEntryButton(Vector3 position, Quaternion rotation)
         {
             VIPInsideDoor = VIPRoom.transform.FindObject("BedroomUdon/Door Inside/Door").gameObject;
 
@@ -548,7 +559,7 @@
             }
         }
 
-        private void RemovePrivacyBlocksOnRooms(int roomid)
+        private static void RemovePrivacyBlocksOnRooms(int roomid)
         {
             GameObject Bedrooms = GameObjectFinder.FindRootSceneObject("Bedrooms");
             if (Bedrooms != null)
@@ -873,15 +884,6 @@
                 }
             }
             return null;
-        }
-
-        private static void PatreonPatch()
-        {
-            PatchPatreonList();
-            PatchPatreonNode();
-            UdonSearch.FindUdonEvent("Patreon", $"IsPatron")?.ExecuteUdonEvent();
-            UdonSearch.FindUdonEvent("Patreon", $"IsElite")?.ExecuteUdonEvent();
-            UdonSearch.FindUdonEvent("Patreon", $"_ProcessPatrons")?.ExecuteUdonEvent();
         }
 
         private static void PatchPatreonList()

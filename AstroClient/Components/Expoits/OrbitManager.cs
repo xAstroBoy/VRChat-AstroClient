@@ -63,7 +63,6 @@
         public void Start()
         {
             Instance = this;
-            RefreshPickups();
             ModConsole.Log($"[OrbitManager] Initialized");
         }
 
