@@ -34,7 +34,10 @@
             IsRPCActive = false;
             if (ESP == null)
             {
-                ESP = Player.gameObject.GetComponent<PlayerESP>();
+                if (!IsSelf)
+                {
+                    ESP = Player.gameObject.GetComponent<PlayerESP>();
+                }
             }
             GameRoleTag = SingleTagsUtils.AddSingleTag(Player);
             if (IsAmongUsWorld)
@@ -637,19 +640,11 @@
             }
         }
 
-        private bool HasCheckedPlayer = false;
-        private bool _IsSelf;
-
         internal bool IsSelf
         {
             get
             {
-                if(!HasCheckedPlayer)
-                {
-                    HasCheckedPlayer = true;
-                    return _IsSelf = Player.Equals(Utils.LocalPlayer.GetPlayer());
-                }
-                return _IsSelf;
+                return Player.GetAPIUser().IsSelf;
             }
         }
         internal bool ViewRoles { get; private set; }
