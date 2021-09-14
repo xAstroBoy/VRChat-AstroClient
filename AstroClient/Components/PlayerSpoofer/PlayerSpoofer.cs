@@ -44,17 +44,20 @@
         public void LateUpdate()
         {
             if (IsSpooferActive)
-            {
-                if (user != null)
+            { 
+                if (!IsFirstWorldJoin)
                 {
-                    if (DisplayName != SpoofedName)
+                    if (user != null)
                     {
-                        DisplayName = SpoofedName;
+                        if (DisplayName != SpoofedName)
+                        {
+                            DisplayName = SpoofedName;
+                        }
                     }
-                }
-                else
-                {
-                    ModConsole.DebugError("Spoofer APIUSer is null! can't spoof!");
+                    else
+                    {
+                        ModConsole.DebugError("Spoofer APIUSer is null! can't spoof!");
+                    }
                 }
             }
         }
@@ -146,6 +149,8 @@
                 }
             }
         }
+
+        internal bool IsFirstWorldJoin = true;
 
         internal string SpoofedName { get; set; }
 
