@@ -54,6 +54,14 @@
                 }
             }
         }
+
+        public override void OnRoomLeft()
+        {
+            if (PlayerSpooferUtils.SpoofAsWorldAuthor)
+            {
+                DisableSpoofer();
+            }
+        }
         public override void OnRoomJoined()
         {
             if (PlayerSpooferUtils.SpoofAsWorldAuthor)

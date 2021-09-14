@@ -26,6 +26,22 @@
             }
         }
 
+        public override void OnQuickMenuOpen()
+        {
+            if (FreezePlayerOnQMOpen)
+            {
+                Freeze();
+            }
+        }
+
+        public override void OnQuickMenuClose()
+        {
+            if(FreezePlayerOnQMOpen)
+            {
+                Unfreeze();
+            }
+        }
+
         public static void Unfreeze()
         {
             if (Frozen)
