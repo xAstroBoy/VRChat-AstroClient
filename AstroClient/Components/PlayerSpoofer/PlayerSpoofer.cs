@@ -57,16 +57,30 @@
 
         public override void OnRoomLeft()
         {
-            if (PlayerSpooferUtils.SpoofAsWorldAuthor)
+            if (CanSpoofWithoutBreaking())
             {
-                DisableSpoofer();
+                if (PlayerSpooferUtils.SpoofAsWorldAuthor)
+                {
+                    DisableSpoofer();
+                }
             }
         }
         public override void OnRoomJoined()
         {
-            if (PlayerSpooferUtils.SpoofAsWorldAuthor)
+            if (CanSpoofWithoutBreaking())
             {
-                SpoofAs(WorldAuthor);
+                if (PlayerSpooferUtils.SpoofAsWorldAuthor)
+                {
+                    SpoofAs(WorldAuthor);
+                }
+            }
+        }
+
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        {
+            if (LoadedWorlds != 2)
+            {
+                LoadedWorlds++;
             }
         }
         public override void OnSceneLoaded(int buildIndex, string sceneName)
@@ -128,11 +142,17 @@
                             RealName = user.displayName;
                         }
                     }
-                    _IsSpooferActive = value;
+                    if (CanSpoofWithoutBreaking())
+                    {
+                        _IsSpooferActive = value;
+                    }
                 }
                 else
                 {
-                    _IsSpooferActive = value;
+                    if (CanSpoofWithoutBreaking())
+                    {
+                        _IsSpooferActive = value;
+                    }
                     if (user != null)
                     {
                         DisplayName = RealName;
@@ -142,7 +162,19 @@
         }
 
 
+        private bool CanSpoofWithoutBreaking()
+        {
+            if(LoadedWorlds == 2)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private int LoadedWorlds = 0;
+
         
+
         internal string SpoofedName { get; set; }
 
         internal string RealName { get; private set; }
