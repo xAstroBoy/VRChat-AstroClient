@@ -52,21 +52,18 @@
                         DisplayName = SpoofedName;
                     }
                 }
-                else
-                {
-                    ModConsole.DebugError("Spoofer APIUSer is null! can't spoof!");
-                }
-
             }
         }
-
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        public override void OnRoomJoined()
         {
-            _CurrentUser = null;
             if (PlayerSpooferUtils.SpoofAsWorldAuthor)
             {
                 SpoofAs(WorldAuthor);
             }
+        }
+        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        {
+            _CurrentUser = null;
         }
 
         internal void SpoofAsWorldAuthor()
