@@ -43,7 +43,7 @@
 
         public void LateUpdate()
         {
-            if (IsSpooferActive)
+            if (IsSpooferActive && isSecondJoin)
             {
                 if (user != null)
                 {
@@ -78,9 +78,26 @@
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            if (LoadedWorlds != 2)
+            if(isSecondJoin && isFistJoin)
             {
-                LoadedWorlds++;
+                return;
+            }
+
+            if (!isFistJoin)
+            {
+                isFistJoin = true;
+                return;
+            }
+            else
+
+            {
+                if(isFistJoin)
+                {
+                    if(!isSecondJoin)
+                    {
+                        isSecondJoin = true;
+                    }
+                }
             }
         }
         public override void OnSceneLoaded(int buildIndex, string sceneName)
@@ -164,15 +181,12 @@
 
         private bool CanSpoofWithoutBreaking()
         {
-            if(LoadedWorlds == 2)
-            {
-                return true;
-            }
-            return false;
+            return isSecondJoin;
         }
 
-        private int LoadedWorlds = 0;
+        private bool isFistJoin = false;
 
+        private bool isSecondJoin = false;
         
 
         internal string SpoofedName { get; set; }
