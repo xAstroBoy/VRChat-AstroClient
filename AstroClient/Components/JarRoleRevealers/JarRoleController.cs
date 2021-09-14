@@ -63,7 +63,7 @@
             {
                 if (_CurrentPlayerRoleESP == null)
                 {
-                    return _CurrentPlayerRoleESP = Utils.CurrentUser.GetPlayer().GetComponent<JarRoleESP>();
+                    return _CurrentPlayerRoleESP = Utils.LocalPlayer.GetPlayer().gameObject.GetComponent<JarRoleESP>();
                 }
                 return _CurrentPlayerRoleESP;
             }
