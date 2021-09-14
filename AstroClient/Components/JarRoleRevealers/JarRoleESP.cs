@@ -407,9 +407,12 @@
         {
             if (value)
             {
-                if (ESP == null)
+                if (!IsSelf)
                 {
-                    ESP = Player.gameObject.GetComponent<PlayerESP>();
+                    if (ESP == null)
+                    {
+                        ESP = Player.gameObject.GetComponent<PlayerESP>();
+                    }
                 }
             }
         }
@@ -634,6 +637,21 @@
             }
         }
 
+        private bool HasCheckedPlayer = false;
+        private bool _IsSelf;
+
+        internal bool IsSelf
+        {
+            get
+            {
+                if(!HasCheckedPlayer)
+                {
+                    HasCheckedPlayer = true;
+                    return _IsSelf = Player.Equals(Utils.LocalPlayer.GetPlayer());
+                }
+                return _IsSelf;
+            }
+        }
         internal bool ViewRoles { get; private set; }
 
         internal SingleTag GameRoleTag { get; private set; }
