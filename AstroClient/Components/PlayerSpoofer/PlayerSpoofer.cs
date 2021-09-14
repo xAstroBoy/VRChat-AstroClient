@@ -65,17 +65,15 @@
             _CurrentUser = null;
             if (PlayerSpooferUtils.SpoofAsWorldAuthor)
             {
-                DisableSpoofer();
+                SpoofAs(WorldAuthor);
             }
         }
 
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            WorldAuthor = AuthorName;
             if (PlayerSpooferUtils.SpoofAsWorldAuthor)
             {
-                SpoofAs(AuthorName);
             }
         }
 
@@ -154,6 +152,16 @@
 
         internal string RealName { get; private set; }
         
-        internal string WorldAuthor { get; private set; }
+        internal string WorldAuthor
+        {
+            get
+            {
+                if(WorldUtils.GetWorld() != null)
+                {
+                    return WorldUtils.GetWorldAuthorName();
+                }
+                return RealName;
+            }
+        }
     }
 }
