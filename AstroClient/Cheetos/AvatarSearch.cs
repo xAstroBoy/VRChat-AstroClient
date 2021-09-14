@@ -256,6 +256,7 @@
         public static void AddAvatar(AvatarData avatarData)
         {
             foundAvatars.Add(avatarData.ToApiAvatar());
+            ModConsole.Log($"Avatar Result: {avatarData.Name}: {avatarData.AvatarID}");
         }
 
         private static void UpdateButtons()
