@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.Components
 {
     using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
@@ -128,7 +129,10 @@
                 {
                     if (user != null)
                     {
-                        RealName = user.displayName;
+                        if (!RealName.IsNotNullOrEmptyOrWhiteSpace())
+                        {
+                            RealName = user.displayName;
+                        }
                     }
                     _IsSpooferActive = value;
                 }
