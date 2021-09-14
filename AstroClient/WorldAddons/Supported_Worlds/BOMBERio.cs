@@ -37,7 +37,7 @@
             Bypass_Outside_Circle_speed_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 4, 0, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = true; }, "Bypass Outside Circle Speed", () => { BypassOutsideCircleSpeed = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.BOMBERio)
             {

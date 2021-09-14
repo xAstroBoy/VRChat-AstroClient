@@ -28,7 +28,7 @@
             _ = new QMSingleButton(JustHPartyMenu, 1, 2.5f, "Go To Rooms", () => { GoToRooms(); }, "Go To Rooms", null, Color.cyan, true);
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (WorldUtils.GetWorldID() == WorldIds.JustHParty)
             {

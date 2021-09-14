@@ -7,7 +7,7 @@
 
     public class LPD : GameEvents
     {
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.LPD)
             {

@@ -234,7 +234,7 @@
             ShotGuns.Add_Crazy_Component(false);
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.Murder4)
             {

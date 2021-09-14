@@ -49,14 +49,6 @@
 
         private static bool isCurrentWorld;
 
-        private static PlayerSpoofer CurrentSpoofer
-        {
-            get
-            {
-                return PlayerSpooferUtils.Spoofer;
-            }
-        }
-
         public static bool IsBlueChairEnabled
         {
             get => _isBlueChairEnabed;
@@ -155,6 +147,10 @@
         private static QMToggleButton LockButton6;
         private static GameObject LockIndicator6;
 
+
+        private static QMToggleButton SpoofAsWorldAuthorBtn;
+
+
         public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             BClubExploitsPage = new QMNestedButton(main, x, y, "BClub Exploits", "BClub Exploits", null, null, null, null, btnHalf);
@@ -168,7 +164,7 @@
             LockButton6 = new QMToggleButton(BClubExploitsPage, 3, 1, "Unlock 6", () => { ToggleDoor(6); }, "Lock 6", () => { ToggleDoor(6); }, "Toggle Door Lock", null, Color.green, Color.red, false);
 
             // VIP
-            _ = new QMToggleButton(BClubExploitsPage, 5, 1, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = true; CurrentSpoofer.SpoofAs("Blue-kun"); }, "VIP Spoof", () => { Bools.IsBClubVIPSpoofing = false; CurrentSpoofer.DisableSpoofer(); }, "VIP Spoof", null, Color.green, Color.red, false);
+           SpoofAsWorldAuthorBtn = new QMToggleButton(BClubExploitsPage, 5, 1, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = true; }, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = false; }, "VIP Spoof", null, Color.green, Color.red, false);
             //_ = new QMSingleButton(BClubExploitsPage, 4, 2, "Enter VIP", () => { EnterVIPRoom(); }, "Enter VIP Room");
 
             // Freeze Locks
@@ -431,12 +427,10 @@
             {
                 isCurrentWorld = false;
                 ModConsole.Log("Leaving B Club");
-                Bools.IsBClubVIPSpoofing = false;
-                CurrentSpoofer.DisableSpoofer();
             }
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.BClub)
             {
@@ -547,7 +541,6 @@
             }
             else
             {
-                Bools.IsBClubVIPSpoofing = false;
             }
         }
 
@@ -573,10 +566,8 @@
 
                 if (ButtonUpdateTime < 100f)
                 {
-                    if (Bools.IsBClubVIPSpoofing)
-                    {
-                        RestoreVIPButton();
-                    }
+                    RestoreVIPButton();
+
                     yield return null;
                 }
                 else

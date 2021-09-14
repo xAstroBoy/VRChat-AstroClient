@@ -76,6 +76,12 @@ namespace AstroLibrary.Utility
             return GetWorld().name;
         }
 
+        public static string GetWorldAuthorName()
+        {
+            return GetWorld().authorName;
+        }
+
+
         public static List<string> GetWorldTags()
         {
             var instance = GetWorld();

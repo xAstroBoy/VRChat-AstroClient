@@ -12,8 +12,6 @@
 
         internal static bool DisableNSFWMenu = true;
 
-        internal static bool IsBClubVIPSpoofing;
-
         internal static bool IsDeveloperAndDebug
         {
             get

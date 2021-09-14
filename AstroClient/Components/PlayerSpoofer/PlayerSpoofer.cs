@@ -3,6 +3,7 @@
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
     using System;
+    using System.Collections.Generic;
     using VRC.Core;
 
     [RegisterComponent]
@@ -60,17 +61,42 @@
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             _CurrentUser = null;
+            if (PlayerSpooferUtils.SpoofAsWorldAuthor)
+            {
+                DisableSpoofer();
+            }
         }
+
+
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        {
+            WorldAuthor = AuthorName;
+            if (PlayerSpooferUtils.SpoofAsWorldAuthor)
+            {
+                SpoofAs(AuthorName);
+            }
+        }
+
+
+        internal void SpoofAsWorldAuthor()
+        {
+            ModConsole.Log($"[PlayerSpoofer] : Spoofing As {WorldAuthor}");
+            SpoofedName = WorldAuthor;
+            IsSpooferActive = true;
+        }
+
 
         internal void SpoofAs(string name)
         {
-            ModConsole.Log($"Spoofing As {name}");
-            IsSpooferActive = true;
+            ModConsole.Log($"[PlayerSpoofer] : Spoofing As {name}");
             SpoofedName = name;
+            IsSpooferActive = true;
         }
+
 
         internal void DisableSpoofer()
         {
+            ModConsole.Log($"[PlayerSpoofer] : No Longer Spoofing As {SpoofedName}, Restored : {RealName}");
             IsSpooferActive = false;
         }
 
@@ -90,7 +116,7 @@
 
         private bool _IsSpooferActive;
 
-        internal bool IsSpooferActive
+        internal bool IsSpooferActive // TODO : Make it more customizable, for now there's nothing else.
         {
             get
             {
@@ -120,5 +146,7 @@
         internal string SpoofedName { get; set; }
 
         internal string RealName { get; private set; }
+        
+        internal string WorldAuthor { get; private set; }
     }
 }

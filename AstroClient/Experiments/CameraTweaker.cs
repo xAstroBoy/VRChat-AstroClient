@@ -63,7 +63,7 @@
             }
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             CheckCamera(); // Just in case it Loses the Flags.
             if (IsCameraFree)

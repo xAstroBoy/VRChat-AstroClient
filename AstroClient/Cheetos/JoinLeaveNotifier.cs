@@ -10,7 +10,7 @@
     {
         private static bool isReady = false;
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             isReady = false;
             MiscUtils.DelayFunction(5, () => { isReady = true; });
