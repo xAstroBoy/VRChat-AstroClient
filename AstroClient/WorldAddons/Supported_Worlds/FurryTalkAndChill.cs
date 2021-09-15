@@ -7,7 +7,7 @@
     using AstroLibrary.Extensions;
     using AstroClient.Udon;
     using AstroLibrary.Utility;
-
+    using AstroClient.Components;
     public class FurryTalkAndChill : GameEvents
     {
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -18,8 +18,15 @@
                 {
                     ModConsole.Log($"Recognized {Name} World, Hacking Admin Panel Behaviour..");
 
-
-                    var displayname = PlayerUtils.GetAPIUser().GetDisplayName();
+                    string displayname = string.Empty;
+                    if (PlayerSpooferUtils.SpooferInstance.IsSpooferActive)
+                    {
+                        displayname = PlayerSpooferUtils.SpooferInstance.RealName;
+                    }
+                    else
+                    {
+                        displayname = PlayerUtils.GetAPIUser().displayName;
+                    }
 
                     var PickupSync_SPH_SFB_SACBehaviour = UdonSearch.FindUdonEvent("PickupSync_SPH_SFB_SAC", "_start");
                     if(PickupSync_SPH_SFB_SACBehaviour != null)
