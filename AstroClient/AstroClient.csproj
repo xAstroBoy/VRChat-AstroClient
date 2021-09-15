@@ -10,6 +10,7 @@
     <RootNamespace>AstroClient</RootNamespace>
     <AssemblyName>AstroClient</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <LangVersion>9.0</LangVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
@@ -24,7 +25,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <LangVersion>8.0</LangVersion>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
@@ -36,7 +36,6 @@
     <NoWarn>CS0169;CS0472</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
@@ -48,7 +47,6 @@
     <NoWarn>CS0169;CS0472</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugCheetos|AnyCPU'">
@@ -59,7 +57,6 @@
     <NoWarn>CS0169;CS0472</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
@@ -434,7 +431,7 @@
     </Reference>
     <Reference Include="CustomMarshalers" />
     <Reference Include="DnsClient, Version=1.5.0.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
-      <HintPath>..\packages\DnsClient.1.5.0-beta-20210522.7\lib\net471\DnsClient.dll</HintPath>
+      <HintPath>..\packages\DnsClient.1.5.0\lib\net471\DnsClient.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DOTween">
@@ -561,25 +558,35 @@
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\MelonLoader.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.Win32.Registry, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Win32.Registry.6.0.0-preview.4.21253.7\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Win32.Registry.6.0.0-preview.5.21301.5\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="MongoDB.Bson, Version=2.13.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Bson.2.13.0-beta1\lib\net452\MongoDB.Bson.dll</HintPath>
+    <Reference Include="MongoDB.Bson, Version=2.13.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Bson.2.13.1\lib\net452\MongoDB.Bson.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="MongoDB.Driver, Version=2.13.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Driver.2.13.0-beta1\lib\net452\MongoDB.Driver.dll</HintPath>
+    <Reference Include="MongoDB.Driver, Version=2.13.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.2.13.1\lib\net452\MongoDB.Driver.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="MongoDB.Driver.Core, Version=2.13.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Driver.Core.2.13.0-beta1\lib\net452\MongoDB.Driver.Core.dll</HintPath>
+    <Reference Include="MongoDB.Driver.Core, Version=2.13.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Driver.Core.2.13.1\lib\net452\MongoDB.Driver.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MongoDB.Entities, Version=20.24.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Entities.20.24.0\lib\netstandard2.0\MongoDB.Entities.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="MongoDB.Libmongocrypt, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MongoDB.Libmongocrypt.1.2.3\lib\net472\MongoDB.Libmongocrypt.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Mono.CompilerServices.SymbolWriter">
@@ -616,11 +623,11 @@
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json.Bson, Version=1.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.Bson.1.0.2\lib\net45\Newtonsoft.Json.Bson.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Novell.Directory.Ldap">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Novell.Directory.Ldap.dll</HintPath>
@@ -642,8 +649,8 @@
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Rug.Osc.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="SharpCompress, Version=0.28.3.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
-      <HintPath>..\packages\SharpCompress.0.28.3\lib\netstandard2.0\SharpCompress.dll</HintPath>
+    <Reference Include="SharpCompress, Version=0.29.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpCompress.0.29.0\lib\netstandard2.0\SharpCompress.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SMDiagnostics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -712,7 +719,7 @@
     </Reference>
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0-preview.4.21253.7\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0-rc.1.21451.13\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Runtime.DurableInstancing" />
@@ -726,7 +733,7 @@
     <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
     <Reference Include="System.Security" />
     <Reference Include="System.Security.AccessControl, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.AccessControl.6.0.0-preview.4.21253.7\lib\net461\System.Security.AccessControl.dll</HintPath>
+      <HintPath>..\packages\System.Security.AccessControl.6.0.0-preview.5.21301.5\lib\net461\System.Security.AccessControl.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -750,7 +757,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Security.Principal.Windows, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Security.Principal.Windows.6.0.0-preview.4.21253.7\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+      <HintPath>..\packages\System.Security.Principal.Windows.6.0.0-preview.5.21301.5\lib\net461\System.Security.Principal.Windows.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.ServiceModel" />
@@ -765,10 +772,14 @@
     <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Text.Encoding.CodePages, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encoding.CodePages.6.0.0-preview.4.21253.7\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
+      <HintPath>..\packages\System.Text.Encoding.CodePages.6.0.0-rc.1.21451.13\lib\net461\System.Text.Encoding.CodePages.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Abstractions" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -1077,6 +1088,7 @@
     </Reference>
     <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
       <HintPath>..\packages\WebSocketSharp.1.0.3-rc11\lib\websocket-sharp.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -1087,6 +1099,8 @@
     <EmbeddedResource Include="Figlet\Larry3D.flf" />
     <None Include="app.config" />
     <Compile Include="Components\RigidBodyController\RigidBodyController.cs" />
+    <None Include="libmongocrypt.dylib" />
+    <None Include="libmongocrypt.so" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1104,15 +1118,17 @@
     <EmbeddedResource Include="Resources\planet.png" />
     <EmbeddedResource Include="Resources\thief.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
+    <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
+    <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
+    <Content Include="mongocrypt.dll" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\repair.png" />
     <EmbeddedResource Include="Resources\badge.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
-    <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
-    <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
     <EmbeddedResource Include="Resources\button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
@@ -1120,13 +1136,13 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\MongoDB.Libmongocrypt.1.2.1\build\MongoDB.Libmongocrypt.targets" Condition="Exists('..\packages\MongoDB.Libmongocrypt.1.2.1\build\MongoDB.Libmongocrypt.targets')" />
+  <Import Project="..\packages\MongoDB.Libmongocrypt.1.2.3\build\MongoDB.Libmongocrypt.targets" Condition="Exists('..\packages\MongoDB.Libmongocrypt.1.2.3\build\MongoDB.Libmongocrypt.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\MongoDB.Libmongocrypt.1.2.1\build\MongoDB.Libmongocrypt.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MongoDB.Libmongocrypt.1.2.1\build\MongoDB.Libmongocrypt.targets'))" />
-    <Error Condition="!Exists('..\packages\MongoDB.Driver.Core.2.13.0-beta1\build\MongoDB.Driver.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MongoDB.Driver.Core.2.13.0-beta1\build\MongoDB.Driver.Core.targets'))" />
+    <Error Condition="!Exists('..\packages\MongoDB.Libmongocrypt.1.2.3\build\MongoDB.Libmongocrypt.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MongoDB.Libmongocrypt.1.2.3\build\MongoDB.Libmongocrypt.targets'))" />
+    <Error Condition="!Exists('..\packages\MongoDB.Driver.Core.2.13.1\build\MongoDB.Driver.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MongoDB.Driver.Core.2.13.1\build\MongoDB.Driver.Core.targets'))" />
   </Target>
-  <Import Project="..\packages\MongoDB.Driver.Core.2.13.0-beta1\build\MongoDB.Driver.Core.targets" Condition="Exists('..\packages\MongoDB.Driver.Core.2.13.0-beta1\build\MongoDB.Driver.Core.targets')" />
+  <Import Project="..\packages\MongoDB.Driver.Core.2.13.1\build\MongoDB.Driver.Core.targets" Condition="Exists('..\packages\MongoDB.Driver.Core.2.13.1\build\MongoDB.Driver.Core.targets')" />
 </Project>

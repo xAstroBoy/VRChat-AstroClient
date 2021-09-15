@@ -131,9 +131,9 @@
 
         public override void OnPlayerJoined(Player player)
         {
-            if (!ModDetector.FindMods.IsNotoriousPresent && AstroClient.ConfigManager.UI.NamePlates)
+            if (AstroClient.ConfigManager.UI.NamePlates)
             {
-                if (player.gameObject.GetComponent<CheetoNameplate>() == null) { player.gameObject.AddComponent<CheetoNameplate>(); ModConsole.Log($"[Nameplate] Adding to {player.name}"); }
+                player.gameObject.AddComponent<CheetoNameplate>();
             }
         }
 

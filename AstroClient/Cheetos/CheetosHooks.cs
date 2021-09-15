@@ -138,6 +138,7 @@
                 new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedLobby)), GetPatch(nameof(OnLobbyJoinedPatch)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.ConfigurePortal)), GetPatch(nameof(OnConfigurePortal)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.Method_Public_Void_0)), GetPatch(nameof(OnEnterPortal)));
+                new Patch(typeof(PlayerNameplate).GetMethod(nameof(PlayerNameplate.Method_Private_Void_1)), GetPatch(nameof(NameplatePatch)));
                 new Patch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Private_Void_Boolean_0)), GetPatch(nameof(QuickMenuPatch)));
                 new Patch(typeof(APIUser).GetMethod(nameof(APIUser.LocalAddFriend)), GetPatch(nameof(OnFriended)));
                 new Patch(typeof(APIUser).GetMethod(nameof(APIUser.UnfriendUser)), GetPatch(nameof(OnUnfriended)));
@@ -155,6 +156,11 @@
             }
             catch (Exception e) { ModConsole.Error("[Cheetos Patches] Error in applying patches : " + e); }
             finally { }
+        }
+
+        private static bool NameplatePatch(PlayerNameplate __instance)
+        {
+            return false;
         }
 
         private static void MousePatch(ref bool __0)
