@@ -43,21 +43,21 @@
 
         private static IEnumerator Connect()
         {
-            while (APIUser.CurrentUser == null) yield return new WaitForSeconds(0.1F);
-            while (string.IsNullOrWhiteSpace(ApiCredentials.authToken)) yield return new WaitForSeconds(0.1F);
-            try
-            {
-                Console.WriteLine($"AuthCookie: " + ApiCredentials.authToken);
-                var protocols = new Il2CppStringArray(new string[] { });
-                ws = new WebSocketSharp.WebSocket("wss://pipeline.vrchat.cloud/?authToken=" + ApiCredentials.authToken);
-                ws.OnOpen += OnOpened;
-                ws.OnMessage += HandleMessage;
-                ws.Connect();
-            }
-            catch
-            {
-                Console.WriteLine("[ApiExtensions] VRChat Pipeline WebSocket Error");
-            }
+            //while (APIUser.CurrentUser == null) yield return new WaitForSeconds(0.1F);
+            //while (string.IsNullOrWhiteSpace(ApiCredentials.authToken)) yield return new WaitForSeconds(0.1F);
+            //try
+            //{
+            //    Console.WriteLine($"AuthCookie: " + ApiCredentials.authToken);
+            //    var protocols = new Il2CppStringArray(new string[] { });
+            //    ws = new WebSocketSharp.WebSocket("wss://pipeline.vrchat.cloud/?authToken=" + ApiCredentials.authToken);
+            //    ws.OnOpen += OnOpened;
+            //    ws.OnMessage += HandleMessage;
+            //    ws.Connect();
+            //}
+            //catch
+            //{
+            //    Console.WriteLine("[ApiExtensions] VRChat Pipeline WebSocket Error");
+            //}
 
             yield break;
         }
@@ -121,10 +121,7 @@
 
         public override void OnPlayerJoined(Player player)
         {
-            if (AstroClient.ConfigManager.UI.NamePlates)
-            {
-                player.gameObject.AddComponent<CheetoNameplate>();
-            }
+            if (player.gameObject.GetComponent<CheetoNameplate>() == null) player.gameObject.AddComponent<CheetoNameplate>();
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)

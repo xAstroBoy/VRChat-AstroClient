@@ -39,6 +39,7 @@
         private static bool _isFreezeLockEnabed;
         private static bool _isFreezeUnlockEnabed;
         private static bool _isBlueChairEnabed;
+        private static bool _isRainbowEnabled;
 
         private static bool isCurrentWorld;
 
@@ -127,6 +128,32 @@
             }
         }
 
+        public static bool IsRainbowEnabled
+        {
+            get => _isRainbowEnabled;
+            set
+            {
+                if (value)
+                {
+                    if (_isRainbowEnabled)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        ModConsole.Log("Rainbow Enabled!");
+                        Rainbow();
+                    }
+                }
+                else
+                {
+                    ModConsole.Log("Rainbow Disabled.");
+                }
+
+                _isRainbowEnabled = value;
+            }
+        }
+
         private static QMToggleButton LockButton1;
         private static GameObject LockIndicator1;
         private static QMToggleButton LockButton2;
@@ -142,6 +169,7 @@
 
 
         private static QMToggleButton SpoofAsWorldAuthorBtn;
+        private static QMToggleButton ToggleRainbowBtn;
 
 
         public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
@@ -156,8 +184,12 @@
             LockButton5 = new QMToggleButton(BClubExploitsPage, 2, 1, "Unlock 5", () => { ToggleDoor(5); }, "Lock 5", () => { ToggleDoor(5); }, "Toggle Door Lock", null, Color.green, Color.red, false);
             LockButton6 = new QMToggleButton(BClubExploitsPage, 3, 1, "Unlock 6", () => { ToggleDoor(6); }, "Lock 6", () => { ToggleDoor(6); }, "Toggle Door Lock", null, Color.green, Color.red, false);
 
+            // Rainbow
+            ToggleRainbowBtn = new QMToggleButton(BClubExploitsPage, 5, 1, "Rainbow", () => { IsRainbowEnabled = true; }, "Rainbow", () => { IsRainbowEnabled = false; }, "Rainbow", null, Color.green, Color.red, false);
+            ToggleRainbowBtn.SetToggleState(IsRainbowEnabled, false);
+
             // VIP
-           SpoofAsWorldAuthorBtn = new QMToggleButton(BClubExploitsPage, 5, 1, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = true; }, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = false; }, "VIP Spoof", null, Color.green, Color.red, false);
+            //SpoofAsWorldAuthorBtn = new QMToggleButton(BClubExploitsPage, 5, 1, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = true; }, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = false; }, "VIP Spoof", null, Color.green, Color.red, false);
             //_ = new QMSingleButton(BClubExploitsPage, 4, 2, "Enter VIP", () => { EnterVIPRoom(); }, "Enter VIP Room");
 
             // Freeze Locks
@@ -237,6 +269,11 @@
             }
         }
 
+        private static void Rainbow()
+        {
+            _ = MelonCoroutines.Start(RainbowLoop());
+        }
+
         private static void DoorLockFreeze()
         {
             _ = MelonCoroutines.Start(DoorLockFreezeLoop());
@@ -245,6 +282,33 @@
         private static void DoorUnlockFreeze()
         {
             _ = MelonCoroutines.Start(DoorUnlockFreezeLoop());
+        }
+
+        private static IEnumerator RainbowLoop()
+        {
+            for (; ; )
+            {
+                if (!isCurrentWorld)
+                {
+                    IsRainbowEnabled = false;
+                    yield break;
+                }
+
+                foreach (var udon in ColorActions)
+                {
+                    udon.ExecuteUdonEvent();
+                    yield return new WaitForSeconds(0.5f);
+                }
+
+                if (IsRainbowEnabled)
+                {
+                    yield return new WaitForSeconds(0.1f);
+                }
+                else
+                {
+                    yield break;
+                }
+            }
         }
 
         private static IEnumerator DoorLockFreezeLoop()
@@ -398,6 +462,8 @@
             }
         }
 
+        private static List<UdonBehaviour_Cached> ColorActions = new List<UdonBehaviour_Cached>();
+
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.BClub)
@@ -420,6 +486,30 @@
                 {
                     ModConsole.Error("Failed to find Penthouse!");
                 }
+
+                MiscUtils.DelayFunction(2f, () =>
+                {
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Red"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Red"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Cyan"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Cyan"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Pink"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Pink"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Purple"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Purple"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Green"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Green"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Blue"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Blue"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Yellow"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Yellow"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1Orange"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Orange"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor1White"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2White"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Black"));
+                    ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Black"));
+                });
 
                 var Lobby = GameObjectFinder.FindRootSceneObject("Lobby");
                 if (Lobby != null)
@@ -463,7 +553,7 @@
                         }
                     }
 
-                    CreateVIPEntryButton(new Vector3(-80.4f, 16.0598f, -1.695f), Quaternion.Euler(0f, 90f, 0f));
+                    //CreateVIPEntryButton(new Vector3(-80.4f, 16.0598f, -1.695f), Quaternion.Euler(0f, 90f, 0f));
                     RestoreVIPButton();
                 }
                 catch (Exception e)
@@ -495,7 +585,6 @@
             for (; ; )
             {
                 if (!isCurrentWorld) yield break;
-
                 try
                 {
                     RestoreVIPButton();
@@ -526,8 +615,8 @@
         {
             MiscUtils.DelayFunction(5f, () =>
             {
-                // Restore VIP button
                 VIPButton = VIPRoom.transform.Find("BedroomUdon/Door Tablet/BlueButtonWide - Toggle VIP only").gameObject;
+                // Restore VIP button
                 if (VIPButton != null)
                 {
                     VIPButton.gameObject.transform.position = new Vector3(60.7236f, 63.1298f, -1.7349f);
@@ -539,29 +628,29 @@
             });
         }
 
-        private static void EnterVIPRoom()
-        {
-            if (VIPRoom != null)
-            {
-                VIPRoom.SetActive(true);
-            }
+        //private static void EnterVIPRoom()
+        //{
+        //    if (VIPRoom != null)
+        //    {
+        //        VIPRoom.SetActive(true);
+        //    }
 
-            Utils.LocalPlayer.gameObject.transform.position = VIPInsideDoor.transform.position + new Vector3(0.5f, 0, 0);
-            Utils.LocalPlayer.gameObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-        }
+        //    Utils.LocalPlayer.gameObject.transform.position = VIPInsideDoor.transform.position + new Vector3(0.5f, 0, 0);
+        //    Utils.LocalPlayer.gameObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        //}
 
-        private static void CreateVIPEntryButton(Vector3 position, Quaternion rotation)
-        {
-            VIPInsideDoor = VIPRoom.transform.FindObject("BedroomUdon/Door Inside/Door").gameObject;
+        //private static void CreateVIPEntryButton(Vector3 position, Quaternion rotation)
+        //{
+        //    VIPInsideDoor = VIPRoom.transform.FindObject("BedroomUdon/Door Inside/Door").gameObject;
 
-            if (VIPInsideDoor != null)
-            {
-                _ = new WorldButton(position, rotation, "Enter\nVIP Room", () =>
-                {
-                    EnterVIPRoom();
-                });
-            }
-        }
+        //    if (VIPInsideDoor != null)
+        //    {
+        //        _ = new WorldButton(position, rotation, "Enter\nVIP Room", () =>
+        //        {
+        //            EnterVIPRoom();
+        //        });
+        //    }
+        //}
 
         private static void RemovePrivacyBlocksOnRooms(int roomid)
         {

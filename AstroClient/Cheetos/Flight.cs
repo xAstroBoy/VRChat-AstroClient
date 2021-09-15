@@ -58,6 +58,7 @@
                     DisableFly();
                 }
 
+                PlayerUtils.GetPlayer().gameObject.GetComponent<CharacterController>().enabled = value;
                 ExploitsMenu.RefreshFlightButtons();
             }
         }

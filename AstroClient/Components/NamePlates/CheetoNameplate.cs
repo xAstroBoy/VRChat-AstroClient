@@ -135,13 +135,13 @@
             }
             else
             {
-                ModConsole.Error("Player was null!");
+                ModConsole.Error("[Nameplate] Player was null!");
             }
 
             AddTag(player.GetAPIUser().GetRank(), player.GetAPIUser().GetRankColor());
 
             stopwatch.Stop();
-            if (stopwatch.ElapsedMilliseconds > 0)
+            if (stopwatch.ElapsedMilliseconds > 1)
             {
                 ModConsole.Log($"[Nameplate] creation took {stopwatch.ElapsedMilliseconds}ms!");
             }
@@ -247,8 +247,6 @@
             newTag.SetActiveRecursively(true);
             SetLocation(newTag, tags.Count);
             tags.Add(newTag);
-
-            ModConsole.Log($"Tag Added to '{player.GetDisplayName()}': {text}: {bgColor.ToString()}");
         }
 
         internal void SetDeveloper(bool value)
