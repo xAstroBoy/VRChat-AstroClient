@@ -328,7 +328,7 @@
         {
             if (__0 != null)
             {
-                Event_OnPhotonJoin.Invoke(__0, new PhotonPlayerEventArgs(__0));
+                Event_OnPhotonJoin?.SafetyRaise(new PhotonPlayerEventArgs(__0));
             }
             else
             {
@@ -342,7 +342,7 @@
             {
                 if (Event_OnPhotonLeft != null)
                 {
-                    Event_OnPhotonLeft.Invoke(__0, new PhotonPlayerEventArgs(__0));
+                    Event_OnPhotonLeft?.SafetyRaise(new PhotonPlayerEventArgs(__0));
                 }
             }
             else
