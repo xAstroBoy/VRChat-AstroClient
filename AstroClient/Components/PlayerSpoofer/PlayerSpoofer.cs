@@ -100,11 +100,6 @@
                 }
             }
         }
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
-        {
-            _CurrentUser = null;
-        }
-
         internal void SpoofAsWorldAuthor()
         {
             ModConsole.Log($"[PlayerSpoofer] : Spoofing As {WorldAuthor}");
@@ -126,17 +121,12 @@
             IsSpooferActive = false;
         }
 
-        private APIUser _CurrentUser;
 
         internal APIUser user
         {
             get
             {
-                if (_CurrentUser == null)
-                {
-                    return _CurrentUser = PlayerUtils.GetAPIUser();
-                }
-                return _CurrentUser;
+                return PlayerUtils.GetAPIUser();
             }
         }
 
