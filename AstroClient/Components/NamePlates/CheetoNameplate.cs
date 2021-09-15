@@ -11,6 +11,7 @@
     using System.Text;
     using TMPro;
     using UnityEngine;
+    using UnityEngine.UI;
     using VRC;
 
     [RegisterComponent]
@@ -28,6 +29,7 @@
         private GameObject main;
         private GameObject background;
         private GameObject glow;
+        private Image glow_Image;
         private GameObject textContainer;
         private GameObject subText;
 
@@ -74,6 +76,8 @@
                         if (main != null)
                         {
                             background = main.transform.Find("Background").gameObject;
+                            glow = main.transform.Find("Glow").gameObject;
+                            glow_Image = glow.GetComponent<Image>();
                             textContainer = main.transform.Find("Text Container").gameObject;
 
                             if (textContainer != null)
@@ -115,6 +119,7 @@
                 //    //InitNamepateStuff();
                 //    SetBackgroundColor(player.GetAPIUser().GetRankColor());
 
+                _ = MelonCoroutines.Start(FastUpdateLoop());
                 _ = MelonCoroutines.Start(UpdateLoop());
             }
             else
@@ -135,7 +140,17 @@
             {
                 if (nameplate==null) { yield return null; }
                 Refresh();
-                yield return new WaitForSecondsRealtime(2f);
+                yield return new WaitForSeconds(2f);
+            }
+        }
+
+        private IEnumerator FastUpdateLoop()
+        {
+            for (; ; )
+            {
+                if (nameplate == null) { yield return null; }
+                FastRefresh();
+                yield return new WaitForSeconds(0.1f);
             }
         }
 
@@ -145,7 +160,8 @@
             //quickStats.GetComponent<ImageThreeSlice>().color = color;
         }
 
-        private void Refresh()
+
+        private void FastRefresh()
         {
             if (nameplate == null || !ConfigManager.UI.NamePlates) return;
             Stopwatch stopwatch = new Stopwatch();
@@ -163,6 +179,19 @@
             {
                 quest.SetActiveRecursively(true);
             }
+
+            stopwatch.Stop();
+            if (stopwatch.ElapsedMilliseconds > 1)
+            {
+                ModConsole.Log($"Namplate FastRefresh took {stopwatch.ElapsedMilliseconds}ms!");
+            }
+        }
+
+        private void Refresh()
+        {
+            if (nameplate == null || !ConfigManager.UI.NamePlates) return;
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
             var stringBuilder = new StringBuilder();
             if (player.IsInstanceMaster())
