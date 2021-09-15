@@ -189,6 +189,7 @@
 
         protected void DoAfterUiManagerInit(Action code)
         {
+            if (!KeyManager.IsAuthed) return;
             _ = MelonCoroutines.Start(OnUiManagerInitCoro(code));
         }
 
