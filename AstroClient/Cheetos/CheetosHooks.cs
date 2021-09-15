@@ -4,6 +4,7 @@
 
     using AstroClient.Variables;
     using AstroClientCore.Events;
+    using AstroLibrary;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
@@ -133,6 +134,8 @@
                 new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnMasterClientSwitched)), GetPatch(nameof(OnMasterClientSwitchedPatch)));
                 new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftRoom)), GetPatch(nameof(OnRoomLeftPatch)));
                 new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedRoom)), GetPatch(nameof(OnRoomJoinedPatch)));
+                new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftLobby)), GetPatch(nameof(OnLobbyLeftPatch)));
+                new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedLobby)), GetPatch(nameof(OnLobbyJoinedPatch)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.ConfigurePortal)), GetPatch(nameof(OnConfigurePortal)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.Method_Public_Void_0)), GetPatch(nameof(OnEnterPortal)));
                 new Patch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Private_Void_Boolean_0)), GetPatch(nameof(QuickMenuPatch)));
@@ -175,6 +178,16 @@
         private static void OnUnfriended(ref string __0, ref Il2CppSystem.Action __1, ref Il2CppSystem.Action __2)
         {
             Event_OnUnfriended?.SafetyRaise(new EventArgs());
+        }
+
+        private static void OnLobbyLeftPatch()
+        {
+            ModConsole.Log("Lobby Left.");
+        }
+
+        private static void OnLobbyJoinedPatch()
+        {
+            ModConsole.Log("Lobby Joined.");
         }
 
         private static void OnRoomLeftPatch()
@@ -228,6 +241,14 @@
         private static bool OnConfigurePortal(PortalInternal __instance, ref string __0, ref string __1, ref int __2, ref VRC.Player __3)
         {
             ModConsole.Log($"Portal Spawned: {__instance.name}: {__0}, {__1}, {__2}, {__3.DisplayName()}");
+            var worldId = __0;
+
+            if (!worldId.StartsWith("wrld_"))
+            {
+                ModConsole.Log("Blocking Bad Portal Spawn: Bad World ID");
+                CheetosHelpers.SendHudNotification("Blocking Bad Portal Spawn: Bad World ID");
+                return false;
+            }
             return true;
         }
 
