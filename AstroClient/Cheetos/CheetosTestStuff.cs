@@ -76,12 +76,6 @@
                 case "friend-active":
                     ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Status: {WebSocketData.user.state} - '{WebSocketData.user.status}'");
                     break;
-                case "friend-update":
-                    //ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Status: {WebSocketData.user.state} - '{WebSocketData.user.status}'");
-                    break;
-                case "friend-offline":
-                    //ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Went Offline");
-                    break;
                 case "friend-location":
                     if (WebSocketData.location.Equals("private"))
                     {
@@ -93,10 +87,6 @@
                     }
                     break;
                 case "user-location":
-                    break;
-                case "friend-delete":
-                    ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' deleted you");
-                    CheetosHelpers.SendHudNotification($"[Friends] '{WebSocketData.user.displayName}' deleted you");
                     break;
                 default:
                     ModConsole.Log($"[API] Unhandled Type: {type}");
