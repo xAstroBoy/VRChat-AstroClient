@@ -219,12 +219,12 @@ namespace AstroLibrary.Utility
         #region Avatar
         public static void ReloadAvatar()
         {
-            VRCPlayer.Method_Public_Static_Void_APIUser_0(GetAPIUser());
+            VRCPlayer.Method_Public_Static_Void_APIUser_PDM_0(GetAPIUser());
         }
 
         public static void ReloadAvatar(this VRCPlayer instance)
         {
-            VRCPlayer.Method_Public_Static_Void_APIUser_0(instance.GetAPIUser());
+            VRCPlayer.Method_Public_Static_Void_APIUser_PDM_0(instance.GetAPIUser());
         }
 
         public static void ReloadAvatar(this VRC.Player instance)

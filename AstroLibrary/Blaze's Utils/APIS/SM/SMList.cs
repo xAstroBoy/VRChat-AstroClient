@@ -13,7 +13,7 @@
         public SMList(Transform parent, string name, int Position = 0)
         {
             GameObject = UnityEngine.Object.Instantiate<GameObject>(PublicAvatarList.gameObject, parent);
-            GameObject.GetComponent<UiAvatarList>().field_Public_EnumNPublicSealedvaInPuMiFaSpClPuLiCrUnique_0 = UiAvatarList.EnumNPublicSealedvaInPuMiFaSpClPuLiCrUnique.SpecificList;
+            GameObject.GetComponent<UiAvatarList>().field_Public_EnumNPublicSealedvaInPuMiFaSpClPuLi11Unique_0 = UiAvatarList.EnumNPublicSealedvaInPuMiFaSpClPuLi11Unique.SpecificList;
             UiVRCList = GameObject.GetComponent<UiVRCList>();
             Text = GameObject.transform.Find("Button").GetComponentInChildren<Text>();
             GameObject.transform.SetSiblingIndex(Position);
