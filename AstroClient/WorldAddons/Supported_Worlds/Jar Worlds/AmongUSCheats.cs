@@ -131,11 +131,28 @@
             }
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.AmongUS)
             {
                 HasAmongUsWorldLoaded = true;
+
+                var patronCheckFool = UdonSearch.FindUdonEvent("Patreon Data", "_start");
+                if(patronCheckFool != null)
+                {
+                    ModConsole.Log("Unlocking Patron Perks.");
+                    if(!PlayerSpooferUtils.SpoofAsWorldAuthor)
+                    {
+                        PlayerSpooferUtils.SpoofAsWorldAuthor = true;
+                        patronCheckFool.ExecuteUdonEvent();
+                        PlayerSpooferUtils.SpoofAsWorldAuthor = false;
+                    }
+                    else
+                    {
+                        patronCheckFool.ExecuteUdonEvent();
+                        
+                    }
+                }
                 if (AmongUsCheatsPage != null)
                 {
                     ModConsole.Log($"Recognized {Name} World, Unlocking Among US cheats menu!", System.Drawing.Color.Green);

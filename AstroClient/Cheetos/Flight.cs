@@ -25,7 +25,7 @@
         private static bool noClipEnabled;
         private static bool isInRoom;
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             Gravity = Physics.gravity;
             motionState = currentPlayer.GetComponent<VRCMotionState>();

@@ -32,11 +32,38 @@
 
         private static PlayerSpoofer Instance;
 
-        public static PlayerSpoofer Spoofer
+        public static PlayerSpoofer SpooferInstance
         {
             get
             {
                 return Instance;
+            }
+        }
+
+
+        private static bool _SpoofASWorldAuthor;
+
+        public static bool SpoofAsWorldAuthor
+        {
+            get
+            {
+                return _SpoofASWorldAuthor;
+            }
+            set
+            {
+                _SpoofASWorldAuthor = value;
+
+                if (SpooferInstance != null)
+                {
+                    if (value)
+                    {
+                        SpooferInstance.SpoofAsWorldAuthor();
+                    }
+                    else
+                    {
+                        SpooferInstance.DisableSpoofer();
+                    }
+                }
             }
         }
     }

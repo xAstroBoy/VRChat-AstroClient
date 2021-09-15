@@ -31,12 +31,24 @@
             {
                 occlusion.DestroyMeLocal();
             }
+            var patronCheckFool = UdonSearch.FindUdonEvent("Patreon Data", "_start");
+            if (patronCheckFool != null)
+            {
+                ModConsole.Log("Unlocking Patron Perks.");
+                if (!PlayerSpooferUtils.SpoofAsWorldAuthor)
+                {
+                    PlayerSpooferUtils.SpoofAsWorldAuthor = true;
+                    patronCheckFool.ExecuteUdonEvent();
+                    PlayerSpooferUtils.SpoofAsWorldAuthor = false;
+                }
+                else
+                {
+                    patronCheckFool.ExecuteUdonEvent();
+
+                }
+            }
 
             item_DetectiveRevolver = GameObjectFinder.Find("Game Logic/Weapons/Revolver");
-            //if (item_DetectiveRevolver != null)
-            //{
-            //    DetectiveGunPerkUnlocker = item_DetectiveRevolver.AddComponent<Murder4PatronUnlocker>();
-            //}
             Clue_photograph = GameObjectFinder.Find("Game Logic/Clues/Clue (photograph)");
             Clue_notebook = GameObjectFinder.Find("Game Logic/Clues/Clue (notebook)");
             Clue_Locket = GameObjectFinder.Find("Game Logic/Clues/Clue (locket)");
@@ -234,7 +246,7 @@
             ShotGuns.Add_Crazy_Component(false);
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.Murder4)
             {

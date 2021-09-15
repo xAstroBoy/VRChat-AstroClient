@@ -8,7 +8,7 @@
     {
         internal static bool HasDisplayed { get; private set; }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (!HasDisplayed)
             {

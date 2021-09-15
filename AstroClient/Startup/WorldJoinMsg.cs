@@ -7,7 +7,8 @@
 
     internal class WorldJoinMsg : GameEvents
     {
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             ModConsole.Log("Joined World : " + Name, System.Drawing.Color.Goldenrod);
             if (tags != null)
@@ -33,6 +34,7 @@
                 }
             }
             ModConsole.Log("World ID : " + id, System.Drawing.Color.Goldenrod);
+            ModConsole.Log("World author : " + AuthorName, System.Drawing.Color.Goldenrod);
             ModConsole.Log("World Asset URL : " + AssetURL, System.Drawing.Color.Goldenrod);
             ModConsole.Log("Instance ID : " + WorldUtils.GetFullID(), System.Drawing.Color.Goldenrod);
         }

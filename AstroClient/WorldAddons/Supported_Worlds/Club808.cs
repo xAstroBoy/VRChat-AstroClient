@@ -8,7 +8,7 @@
 
     internal class Club808 : GameEvents
     {
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.Club808)
             {

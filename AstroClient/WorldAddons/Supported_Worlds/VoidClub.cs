@@ -18,7 +18,7 @@
             _ = new QMSingleButton(VoidClubMenu, 1, 2, "Unlock\nForest\n3", () => { UnlockForest(); }, "Unlock Forest 3");
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
         }
 

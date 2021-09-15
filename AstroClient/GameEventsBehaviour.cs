@@ -132,7 +132,7 @@
 
         private void Internal_OnWorldReveal(object sender, OnWorldRevealArgs e)
         {
-            OnWorldReveal(e.ID, e.Name, e.WorldTags, e.AssetUrl);
+            OnWorldReveal(e.ID, e.Name, e.WorldTags, e.AssetUrl, e.AuthorName);
         }
 
         private void Internal_OnPlayerSelected(object sender, VRCPlayerEventArgs e)
@@ -236,7 +236,7 @@
         {
         }
 
-        public virtual void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+        public virtual void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
         }
 

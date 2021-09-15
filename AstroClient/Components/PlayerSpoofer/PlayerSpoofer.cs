@@ -1,8 +1,10 @@
 ﻿namespace AstroClient.Components
 {
     using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using System;
+    using System.Collections.Generic;
     using VRC.Core;
 
     [RegisterComponent]
@@ -41,7 +43,7 @@
 
         public void LateUpdate()
         {
-            if (IsSpooferActive)
+            if (IsSpooferActive && isSecondJoin)
             {
                 if (user != null)
                 {
@@ -50,27 +52,77 @@
                         DisplayName = SpoofedName;
                     }
                 }
-                else
+            }
+        }
+
+        public override void OnRoomLeft()
+        {
+            if (CanSpoofWithoutBreaking())
+            {
+                if (PlayerSpooferUtils.SpoofAsWorldAuthor)
                 {
-                    ModConsole.DebugError("Spoofer APIUSer is null! can't spoof!");
+                    DisableSpoofer();
+                }
+            }
+        }
+        public override void OnRoomJoined()
+        {
+            if (CanSpoofWithoutBreaking())
+            {
+                if (PlayerSpooferUtils.SpoofAsWorldAuthor)
+                {
+                    SpoofAs(WorldAuthor);
                 }
             }
         }
 
+        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        {
+            if(isSecondJoin && isFistJoin)
+            {
+                return;
+            }
+
+            if (!isFistJoin)
+            {
+                isFistJoin = true;
+                return;
+            }
+            else
+
+            {
+                if(isFistJoin)
+                {
+                    if(!isSecondJoin)
+                    {
+                        isSecondJoin = true;
+                    }
+                }
+            }
+        }
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             _CurrentUser = null;
         }
 
+        internal void SpoofAsWorldAuthor()
+        {
+            ModConsole.Log($"[PlayerSpoofer] : Spoofing As {WorldAuthor}");
+            SpoofAs(WorldAuthor);
+        }
+
+
         internal void SpoofAs(string name)
         {
-            ModConsole.Log($"Spoofing As {name}");
-            IsSpooferActive = true;
+            ModConsole.Log($"[PlayerSpoofer] : Spoofing As {name}");
             SpoofedName = name;
+            IsSpooferActive = true;
         }
+
 
         internal void DisableSpoofer()
         {
+            ModConsole.Log($"[PlayerSpoofer] : No Longer Spoofing As {SpoofedName}, Restored : {RealName}");
             IsSpooferActive = false;
         }
 
@@ -90,7 +142,7 @@
 
         private bool _IsSpooferActive;
 
-        internal bool IsSpooferActive
+        internal bool IsSpooferActive // TODO : Make it more customizable, for now there's nothing else.
         {
             get
             {
@@ -102,13 +154,22 @@
                 {
                     if (user != null)
                     {
-                        RealName = user.displayName;
+                        if (!RealName.IsNotNullOrEmptyOrWhiteSpace())
+                        {
+                            RealName = user.displayName;
+                        }
                     }
-                    _IsSpooferActive = value;
+                    if (CanSpoofWithoutBreaking())
+                    {
+                        _IsSpooferActive = value;
+                    }
                 }
                 else
                 {
-                    _IsSpooferActive = value;
+                    if (CanSpoofWithoutBreaking())
+                    {
+                        _IsSpooferActive = value;
+                    }
                     if (user != null)
                     {
                         DisplayName = RealName;
@@ -117,8 +178,31 @@
             }
         }
 
+
+        private bool CanSpoofWithoutBreaking()
+        {
+            return isSecondJoin;
+        }
+
+        private bool isFistJoin = false;
+
+        private bool isSecondJoin = false;
+        
+
         internal string SpoofedName { get; set; }
 
         internal string RealName { get; private set; }
+        
+        internal string WorldAuthor
+        {
+            get
+            {
+                if(WorldUtils.GetWorld() != null)
+                {
+                    return WorldUtils.GetWorldAuthorName();
+                }
+                return RealName;
+            }
+        }
     }
 }

@@ -34,7 +34,10 @@
             IsRPCActive = false;
             if (ESP == null)
             {
-                ESP = Player.gameObject.GetComponent<PlayerESP>();
+                if (!IsSelf)
+                {
+                    ESP = Player.gameObject.GetComponent<PlayerESP>();
+                }
             }
             GameRoleTag = SingleTagsUtils.AddSingleTag(Player);
             if (IsAmongUsWorld)
@@ -407,9 +410,12 @@
         {
             if (value)
             {
-                if (ESP == null)
+                if (!IsSelf)
                 {
-                    ESP = Player.gameObject.GetComponent<PlayerESP>();
+                    if (ESP == null)
+                    {
+                        ESP = Player.gameObject.GetComponent<PlayerESP>();
+                    }
                 }
             }
         }
@@ -634,6 +640,13 @@
             }
         }
 
+        internal bool IsSelf
+        {
+            get
+            {
+                return Player.GetAPIUser().IsSelf;
+            }
+        }
         internal bool ViewRoles { get; private set; }
 
         internal SingleTag GameRoleTag { get; private set; }
