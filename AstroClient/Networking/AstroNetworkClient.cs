@@ -149,11 +149,11 @@
                         }
                         if (player != null)
                         {
-                            player.GetComponent<NamePlates>().AddTag(tagData.Text, Color.yellow);
+                            player.GetComponent<CheetoNameplate>().AddTag(tagData.Text, Color.yellow);
                             // Temporary solution for applying developer status
                             if (tagData.Text.Equals("AstroClient Developer"))
                             {
-                                player.GetComponent<NamePlates>().SetDeveloper(true);
+                                player.GetComponent<CheetoNameplate>().SetDeveloper(true);
                             }
                             //new BlazeTag(player, tagData.Text, Color.yellow);
                         }

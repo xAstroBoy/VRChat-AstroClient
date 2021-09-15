@@ -123,7 +123,7 @@
     <Compile Include="Cheetos\AvatarFavorites.cs" />
     <Compile Include="Cheetos\FrameUnlimiter.cs" />
     <Compile Include="Cheetos\PlayerList.cs" />
-    <Compile Include="Components\NamePlates\NamePlates.cs" />
+    <Compile Include="Components\NamePlates\CheetoNameplate.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener_AudioSource.cs" />
     <Compile Include="Components\Listeners\ScrollMenuListener.cs" />
     <Compile Include="Components\Listeners\GameObjectListener.cs" />

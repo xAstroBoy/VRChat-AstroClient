@@ -133,7 +133,7 @@
         {
             if (!ModDetector.FindMods.IsNotoriousPresent && AstroClient.ConfigManager.UI.NamePlates)
             {
-                if (player.gameObject.GetComponent<NamePlates>() == null) player.gameObject.AddComponent<NamePlates>();
+                if (player.gameObject.GetComponent<CheetoNameplate>() == null) { player.gameObject.AddComponent<CheetoNameplate>(); ModConsole.Log($"[Nameplate] Adding to {player.name}"); }
             }
         }
 

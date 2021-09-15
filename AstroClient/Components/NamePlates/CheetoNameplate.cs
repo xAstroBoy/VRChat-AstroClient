@@ -14,7 +14,7 @@
     using VRC;
 
     [RegisterComponent]
-    public class NamePlates : GameEventsBehaviour
+    public class CheetoNameplate : GameEventsBehaviour
     {
         private PlayerNameplate nameplate;
 
@@ -23,10 +23,6 @@
 
         private Player player;
         private Player self;
-
-        private bool initialized;
-
-        private TMP_Text statsText;
 
         private GameObject contents;
         private GameObject main;
@@ -38,6 +34,7 @@
         private GameObject quickStats;
         private GameObject trustIcon;
         private GameObject trustText;
+        private TextMeshProUGUI trustText_Text;
         private GameObject performanceIcon;
         private GameObject performanceText;
 
@@ -47,7 +44,7 @@
 
         private TextMeshProUGUI trustTextComp;
 
-        public NamePlates(IntPtr obj0) : base(obj0)
+        public CheetoNameplate(IntPtr obj0) : base(obj0)
         {
         }
 
@@ -59,36 +56,76 @@
 
             self = PlayerUtils.GetPlayer();
             player = GetComponent<Player>();
-            if (!initialized && player != null && player.GetVRCPlayer() != null)
+            if (player != null && player.GetVRCPlayer() != null)
             {
                 nameplate = player.GetVRCPlayer().field_Public_PlayerNameplate_0;
+                if (nameplate == null) { ModConsole.Error("[Nameplate] Nameplate was null!"); return; };
 
-                contents = nameplate.transform.Find("Content").gameObject;
-                main = contents.transform.Find("Main").gameObject;
-                background = contents.transform.Find("Glow").gameObject;
-                textContainer = main.transform.Find("Text Container").gameObject;
-                subText = textContainer.transform.Find("Sub Text").gameObject;
+                if (nameplate != null)
+                {
+                    contents = nameplate.transform.Find("Contents").gameObject;
 
-                quickStats = contents.transform.Find("Quick Stats").gameObject;
-                trustIcon = quickStats.transform.Find("Trust Icon").gameObject;
-                trustText = quickStats.transform.Find("Trust Text").gameObject;
-                performanceIcon = quickStats.transform.Find("Performance Icon").gameObject;
-                performanceText = quickStats.transform.Find("Performance Text").gameObject;
+                    if (contents != null)
+                    {
+                        main = contents.transform.Find("Main").gameObject;
+                        quickStats = contents.transform.Find("Quick Stats").gameObject;
+                        quest = contents.transform.Find("Quest").gameObject;
 
-                quest = contents.transform.Find("Quest").gameObject;
+                        if (main != null)
+                        {
+                            background = main.transform.Find("Background").gameObject;
+                            textContainer = main.transform.Find("Text Container").gameObject;
 
-                //InitNamepateStuff();
-                SetBackgroundColor(player.GetAPIUser().GetRankColor());
+                            if (textContainer != null)
+                            {
+                                subText = textContainer.transform.Find("Sub Text").gameObject;
+                            }
+                            else
+                            {
+                                ModConsole.Error("[Nameplate] TextContainer was null");
+                            }
+                        }
+                        else
+                        {
+                            ModConsole.Error("[Nameplate] Main was null");
+                        }
 
-                initialized = true;
+                        if (quickStats != null)
+                        {
+                            trustIcon = quickStats.transform.Find("Trust Icon").gameObject;
+                            trustText = quickStats.transform.Find("Trust Text").gameObject;
+                            trustText_Text = trustText.GetComponent<TextMeshProUGUI>();
+                            performanceIcon = quickStats.transform.Find("Performance Icon").gameObject;
+                            performanceText = quickStats.transform.Find("Performance Text").gameObject;
+                        }
+                        else
+                        {
+                            ModConsole.Error("[Nameplate] QuickStats was null");
+                        }
+                    }
+                    else
+                    {
+                        ModConsole.Error("[Nameplate] Contents was null");
+                    }
+                }
+                else
+                {
+                    ModConsole.Error("[Nameplate] Nameplate was null");
+                }
+                //    //InitNamepateStuff();
+                //    SetBackgroundColor(player.GetAPIUser().GetRankColor());
+
+                _ = MelonCoroutines.Start(UpdateLoop());
             }
-
-            _ = MelonCoroutines.Start(UpdateLoop());
+            else
+            {
+                ModConsole.Error("Player was null!");
+            }
 
             stopwatch.Stop();
             if (stopwatch.ElapsedMilliseconds > 0)
             {
-                ModConsole.Log($"Warning: Namplate creation took {stopwatch.ElapsedMilliseconds}ms!");
+                ModConsole.Log($"[Nameplate] creation took {stopwatch.ElapsedMilliseconds}ms!");
             }
         }
 
@@ -96,8 +133,9 @@
         {
             for (; ; )
             {
+                if (nameplate==null) { yield return null; }
                 Refresh();
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSecondsRealtime(2f);
             }
         }
 
@@ -113,35 +151,38 @@
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
+            quickStats.SetActive(true);
             trustIcon.SetActiveRecursively(false);
             performanceIcon.SetActiveRecursively(false);
             performanceText.SetActiveRecursively(false);
+
+            subText.SetActiveRecursively(true);
+            trustText.SetActiveRecursively(true);
 
             if (player.GetPlatform().Equals("Quest"))
             {
                 quest.SetActiveRecursively(true);
             }
-            //nameplate.GetSubText().SetActiveRecursively(true);
-            //nameplate.GetQuest().SetActiveRecursively(true);
 
-            //var stringBuilder = new StringBuilder();
-            //if (player.IsInstanceMaster())
-            //{
-            //    _ = stringBuilder.Append($"(Owner) ");
-            //}
-            //_ = stringBuilder.Append($"{player.GetPlatformColored()} ");
-            //if (player.IsFriend())
-            //{
-            //    _ = stringBuilder.Append($"[F] ");
-            //}
-            //_ = stringBuilder.Append($"F:{player.GetFramesColored()}|P:{player.GetPingColored()}");
-            //statsText.text = stringBuilder.ToString();
-            //statsText.color = Color.white;
+            var stringBuilder = new StringBuilder();
+            if (player.IsInstanceMaster())
+            {
+                _ = stringBuilder.Append($"(Owner) ");
+            }
+            _ = stringBuilder.Append($"{player.GetPlatformColored()} ");
+            if (player.IsFriend())
+            {
+                _ = stringBuilder.Append($"[F] ");
+            }
+            _ = stringBuilder.Append($"F:{player.GetFramesColored()}|P:{player.GetPingColored()}");
+
+            trustText_Text.text = stringBuilder.ToString();
+            trustText_Text.color = Color.white;
 
             stopwatch.Stop();
-            if (stopwatch.ElapsedMilliseconds > 0)
+            if (stopwatch.ElapsedMilliseconds > 1)
             {
-                ModConsole.Log($"Warning: Namplate LowRefresh took {stopwatch.ElapsedMilliseconds}ms!");
+                ModConsole.Log($"Namplate Refresh took {stopwatch.ElapsedMilliseconds}ms!");
             }
         }
 
