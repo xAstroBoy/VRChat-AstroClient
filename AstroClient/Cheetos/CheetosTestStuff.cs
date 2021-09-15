@@ -80,7 +80,7 @@
                     //ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Status: {WebSocketData.user.state} - '{WebSocketData.user.status}'");
                     break;
                 case "friend-offline":
-                    ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Went Offline");
+                    //ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Went Offline");
                     break;
                 case "friend-location":
                     if (WebSocketData.location.Equals("private"))
@@ -133,18 +133,14 @@
         {
             if (!ModDetector.FindMods.IsNotoriousPresent && AstroClient.ConfigManager.UI.NamePlates)
             {
-                player.gameObject.AddComponent<NamePlates>();
+                if (player.gameObject.GetComponent<NamePlates>() == null) player.gameObject.AddComponent<NamePlates>();
             }
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            return;
             Player player = PlayerUtils.GetPlayer();
-            if (player.gameObject.GetComponent<SitOnPlayer>() == null)
-            {
-                player.gameObject.AddComponent<SitOnPlayer>();
-            }
+            if (player.gameObject.GetComponent<SitOnPlayer>() == null) player.gameObject.AddComponent<SitOnPlayer>();
 
             if (Bools.IsDeveloper)
             {
