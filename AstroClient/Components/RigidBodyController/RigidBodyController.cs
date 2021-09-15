@@ -143,6 +143,7 @@
                 {
                     // Add a Sync Mechanism if Edit Mode is off and is not Applying edits anymore.
                     Run_OnRigidbodyControllerOnUpdate();
+                    PreventOthersFromHolding();
                     if (!EditMode)
                     {
                         // Makes sure if EditMode is OFF. As long is off it keeps updating the properties.
