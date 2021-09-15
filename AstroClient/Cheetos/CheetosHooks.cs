@@ -4,6 +4,7 @@
 
     using AstroClient.Variables;
     using AstroClientCore.Events;
+    using AstroLibrary;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
@@ -133,8 +134,11 @@
                 new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnMasterClientSwitched)), GetPatch(nameof(OnMasterClientSwitchedPatch)));
                 new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftRoom)), GetPatch(nameof(OnRoomLeftPatch)));
                 new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedRoom)), GetPatch(nameof(OnRoomJoinedPatch)));
+                new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftLobby)), GetPatch(nameof(OnLobbyLeftPatch)));
+                new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedLobby)), GetPatch(nameof(OnLobbyJoinedPatch)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.ConfigurePortal)), GetPatch(nameof(OnConfigurePortal)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.Method_Public_Void_0)), GetPatch(nameof(OnEnterPortal)));
+                new Patch(typeof(PlayerNameplate).GetMethod(nameof(PlayerNameplate.Method_Private_Void_1)), GetPatch(nameof(NameplatePatch)));
                 new Patch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Private_Void_Boolean_0)), GetPatch(nameof(QuickMenuPatch)));
                 new Patch(typeof(APIUser).GetMethod(nameof(APIUser.LocalAddFriend)), GetPatch(nameof(OnFriended)));
                 new Patch(typeof(APIUser).GetMethod(nameof(APIUser.UnfriendUser)), GetPatch(nameof(OnUnfriended)));
@@ -142,6 +146,7 @@
                 new Patch(AccessTools.Property(typeof(Time), nameof(Time.smoothDeltaTime)).GetMethod, null, GetPatch(nameof(SpoofFPS)));
                 new Patch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
                 new Patch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
+                new Patch(typeof(Cursor).GetProperty(nameof(Cursor.lockState)).GetSetMethod(), GetPatch(nameof(MousePatch)), null);
 
                 // Experiments
                 new Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.Method_Public_Boolean_String_Object_Boolean_PDM_0)), GetPatch(nameof(LoadBalancingClient_OpWebRpc)));
@@ -151,6 +156,19 @@
             }
             catch (Exception e) { ModConsole.Error("[Cheetos Patches] Error in applying patches : " + e); }
             finally { }
+        }
+
+        private static bool NameplatePatch(PlayerNameplate __instance)
+        {
+            return false;
+        }
+
+        private static void MousePatch(ref bool __0)
+        {
+            if (!WorldUtils.IsInWorld)
+            {
+                __0 = false;
+            }
         }
 
         private static void OnMasterClientSwitchedPatch(Photon.Realtime.Player __0)
@@ -166,6 +184,16 @@
         private static void OnUnfriended(ref string __0, ref Il2CppSystem.Action __1, ref Il2CppSystem.Action __2)
         {
             Event_OnUnfriended?.SafetyRaise(new EventArgs());
+        }
+
+        private static void OnLobbyLeftPatch()
+        {
+            ModConsole.Log("Lobby Left.");
+        }
+
+        private static void OnLobbyJoinedPatch()
+        {
+            ModConsole.Log("Lobby Joined.");
         }
 
         private static void OnRoomLeftPatch()
@@ -219,6 +247,14 @@
         private static bool OnConfigurePortal(PortalInternal __instance, ref string __0, ref string __1, ref int __2, ref VRC.Player __3)
         {
             ModConsole.Log($"Portal Spawned: {__instance.name}: {__0}, {__1}, {__2}, {__3.DisplayName()}");
+            var worldId = __0;
+
+            if (!worldId.StartsWith("wrld_"))
+            {
+                ModConsole.Log("Blocking Bad Portal Spawn: Bad World ID");
+                CheetosHelpers.SendHudNotification("Blocking Bad Portal Spawn: Bad World ID");
+                return false;
+            }
             return true;
         }
 
@@ -319,7 +355,7 @@
         {
             if (__0 != null)
             {
-                Event_OnPhotonJoin.Invoke(__0, new PhotonPlayerEventArgs(__0));
+                Event_OnPhotonJoin?.SafetyRaise(new PhotonPlayerEventArgs(__0));
             }
             else
             {
@@ -333,7 +369,7 @@
             {
                 if (Event_OnPhotonLeft != null)
                 {
-                    Event_OnPhotonLeft.Invoke(__0, new PhotonPlayerEventArgs(__0));
+                    Event_OnPhotonLeft?.SafetyRaise(new PhotonPlayerEventArgs(__0));
                 }
             }
             else

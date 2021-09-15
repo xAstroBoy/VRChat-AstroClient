@@ -727,9 +727,8 @@
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRCSDKBase.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="websocket-sharp">
-      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\websocket-sharp.dll</HintPath>
-      <Private>False</Private>
+    <Reference Include="websocket-sharp, Version=1.0.2.59611, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebSocketSharp.1.0.3-rc11\lib\websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -849,6 +848,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Figlet\Larry3D.flf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

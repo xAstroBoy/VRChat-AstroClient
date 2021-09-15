@@ -10,6 +10,7 @@
     <RootNamespace>AstroInjector</RootNamespace>
     <AssemblyName>AstroInjector</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <LangVersion>9.0</LangVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -21,7 +22,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
     <PlatformTarget>x86</PlatformTarget>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
@@ -33,7 +33,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_Offline|AnyCPU' ">
@@ -44,7 +43,6 @@
     <DefineConstants>DEBUG;TRACE;OFFLINE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <LangVersion>8.0</LangVersion>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'DebugCheetos|AnyCPU'">
@@ -53,7 +51,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <LangVersion>8.0</LangVersion>
     <ErrorReport>prompt</ErrorReport>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
@@ -124,13 +121,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\websocket-sharp.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Resources\Newtonsoft.Json.Bson.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Newtonsoft.Json.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\DontTouchMyClient.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

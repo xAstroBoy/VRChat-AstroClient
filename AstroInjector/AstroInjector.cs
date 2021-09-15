@@ -23,7 +23,7 @@
         };
 
         public static string[] DebugModulePaths =
-{
+        {
 			//@"Debug\Module\AstroTestModule.dll"
 		};
 
@@ -33,6 +33,7 @@
         {
             @"AstroInjector.Resources.Newtonsoft.Json.dll",
             @"AstroInjector.Resources.Newtonsoft.Json.Bson.dll",
+            @"AstroInjector.Resources.websocket-sharp.dll",
         };
 
         public static string[] EmbededMelonsPaths =
@@ -60,16 +61,18 @@
 
             if (AstroNetworkLoader.LibraryFiles.Count > 0)
             {
-                foreach (var bytes in AstroNetworkLoader.LibraryFiles)
+                for (int i = 0; i < AstroNetworkLoader.LibraryFiles.Count; i++)
                 {
+                    byte[] bytes = AstroNetworkLoader.LibraryFiles[i];
                     Assembly.Load(bytes);
                 }
             }
 
             if (AstroNetworkLoader.MelonFiles.Count > 0)
             {
-                foreach (var bytes in AstroNetworkLoader.MelonFiles)
+                for (int i = 0; i < AstroNetworkLoader.MelonFiles.Count; i++)
                 {
+                    byte[] bytes = AstroNetworkLoader.MelonFiles[i];
                     var dll = Assembly.Load(bytes);
                     MelonHandler.LoadFromAssembly(dll, Environment.CurrentDirectory + @"\Plugins\AstroInjector.dll");
                 }
@@ -77,8 +80,9 @@
 
             if (AstroNetworkLoader.ModuleFiles.Count > 0)
             {
-                foreach (var bytes in AstroNetworkLoader.ModuleFiles)
+                for (int i = 0; i < AstroNetworkLoader.ModuleFiles.Count; i++)
                 {
+                    byte[] bytes = AstroNetworkLoader.ModuleFiles[i];
                     Assembly.Load(bytes);
                 }
             }
@@ -86,13 +90,14 @@
 
         public void LoadEmbeddedLibraries()
         {
-            foreach (var path in EmbededLibraryPaths)
+            for (int i = 0; i < EmbededLibraryPaths.Length; i++)
             {
+                string path = EmbededLibraryPaths[i];
                 try
                 {
                     var bytes = CheetosHelpers.ExtractResource(path);
                     var dll = Assembly.Load(bytes);
-                    //MelonLogger.Msg($"Injected Embedded Library: {path}");
+                    MelonLogger.Msg($"Injected Embedded Library: {path}");
                 }
                 catch (Exception e)
                 {
@@ -104,14 +109,15 @@
 
         public void LoadEmbeddedMelons()
         {
-            foreach (var path in EmbededMelonsPaths)
+            for (int i = 0; i < EmbededMelonsPaths.Length; i++)
             {
+                string path = EmbededMelonsPaths[i];
                 try
                 {
                     var bytes = CheetosHelpers.ExtractResource(path);
                     var dll = Assembly.Load(bytes);
                     MelonHandler.LoadFromAssembly(dll, Environment.CurrentDirectory + @"\Plugins\AstroInjector.dll");
-                    //MelonLogger.Msg($"Injected Embedded Library: {path}");
+                    MelonLogger.Msg($"Injected Embedded Library: {path}");
                 }
                 catch (Exception e)
                 {
@@ -127,12 +133,13 @@
         {
             MelonLogger.Msg("Loader is in debug mode.");
 
-            foreach (var path in DebugLibraryPaths)
+            for (int i = 0; i < DebugLibraryPaths.Length; i++)
             {
+                string path = DebugLibraryPaths[i];
                 try
                 {
                     var dll = Assembly.LoadFrom(path);
-                    //MelonLogger.Msg($"Injected Library: {path}");
+                    MelonLogger.Msg($"Injected Library: {path}");
                 }
                 catch (Exception e)
                 {
@@ -141,13 +148,14 @@
                 }
             }
 
-            foreach (var path in DebugMelonPaths)
+            for (int i = 0; i < DebugMelonPaths.Length; i++)
             {
+                string path = DebugMelonPaths[i];
                 try
                 {
                     var dll = Assembly.LoadFile(path);
                     MelonHandler.LoadFromAssembly(dll, path);
-                    //MelonLogger.Msg($"Injected MelonMod/MelonPlugin: {path}");
+                    MelonLogger.Msg($"Injected MelonMod/MelonPlugin: {path}");
                 }
                 catch (Exception e)
                 {
@@ -156,12 +164,13 @@
                 }
             }
 
-            foreach (var path in DebugModulePaths)
+            for (int i = 0; i < DebugModulePaths.Length; i++)
             {
+                string path = DebugModulePaths[i];
                 try
                 {
                     _ = Assembly.LoadFile(path);
-                    //MelonLogger.Msg($"Injected: {path}");
+                    MelonLogger.Msg($"Injected: {path}");
                 }
                 catch (Exception e)
                 {
