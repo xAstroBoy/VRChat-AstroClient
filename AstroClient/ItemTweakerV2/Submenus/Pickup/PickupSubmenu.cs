@@ -93,24 +93,15 @@
                     }
                     if (Pickup_allowManipulationWhenEquipped != null)
                     {
-                        if (controller.allowManipulationWhenEquipped != Pickup_allowManipulationWhenEquipped.GetToggleState())
-                        {
-                            Pickup_allowManipulationWhenEquipped.SetToggleState(controller.allowManipulationWhenEquipped);
-                        }
+                        Pickup_allowManipulationWhenEquipped.SetToggleState(controller.allowManipulationWhenEquipped);
                     }
                     if (Pickup_DisallowTheft != null)
                     {
-                        if (controller.DisallowTheft != Pickup_DisallowTheft.GetToggleState())
-                        {
-                            Pickup_DisallowTheft.SetToggleState(controller.DisallowTheft);
-                        }
+                        Pickup_DisallowTheft.SetToggleState(controller.DisallowTheft);
                     }
                     if (Pickup_pickupable != null)
                     {
-                        if (controller.pickupable != Pickup_pickupable.GetToggleState())
-                        {
-                            Pickup_pickupable.SetToggleState(controller.pickupable);
-                        }
+                        Pickup_pickupable.SetToggleState(controller.pickupable);
                     }
                     if (Pickup_PickupOrientation_prop_any != null)
                     {
@@ -180,10 +171,7 @@
                     }
                     if (PickupProximitySlider != null)
                     {
-                        if (PickupProximitySlider.GetSliderValue() != controller.proximity)
-                        {
-                            PickupProximitySlider.SetValue(controller.proximity);
-                        }
+                        PickupProximitySlider.SetValue(controller.proximity);
                     }
                     if (Pickup_IsHeld != null)
                     {
