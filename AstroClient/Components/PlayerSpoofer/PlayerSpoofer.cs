@@ -57,6 +57,7 @@
 
         public override void OnRoomLeft()
         {
+            SafetyCheck();
             if (CanSpoofWithoutBreaking())
             {
                 if (PlayerSpooferUtils.SpoofAsWorldAuthor)
@@ -67,6 +68,7 @@
         }
         public override void OnRoomJoined()
         {
+            SafetyCheck();
             if (CanSpoofWithoutBreaking())
             {
                 if (PlayerSpooferUtils.SpoofAsWorldAuthor)
@@ -76,9 +78,9 @@
             }
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        private void SafetyCheck()
         {
-            if(isSecondJoin && isFistJoin)
+            if (isSecondJoin && isFistJoin)
             {
                 return;
             }
@@ -91,16 +93,16 @@
             else
 
             {
-                if(isFistJoin)
+                if (isFistJoin)
                 {
-                    if(!isSecondJoin)
+                    if (!isSecondJoin)
                     {
                         isSecondJoin = true;
                     }
                 }
             }
         }
-        internal void SpoofAsWorldAuthor()
+            internal void SpoofAsWorldAuthor()
         {
             ModConsole.Log($"[PlayerSpoofer] : Spoofing As {WorldAuthor}");
             SpoofAs(WorldAuthor);
