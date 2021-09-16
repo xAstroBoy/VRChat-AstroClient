@@ -49,6 +49,7 @@
             get => _isBlueChairEnabed;
             set
             {
+                _isBlueChairEnabed = value;
                 if (value)
                 {
                     ModConsole.Log("BlueChair Enabled!");
@@ -58,8 +59,6 @@
                 {
                     ModConsole.Log("BlueChair Disabled!");
                 }
-
-                _isBlueChairEnabed = value;
             }
         }
 
@@ -68,6 +67,7 @@
             get => _isDoorBellSpamEnabled;
             set
             {
+                _isDoorBellSpamEnabled = value;
                 if (value)
                 {
                     ModConsole.Log("Doorbell Spam Enabled!");
@@ -77,8 +77,6 @@
                 {
                     ModConsole.Log("Doorbell Spam Disabled!");
                 }
-
-                _isDoorBellSpamEnabled = value;
             }
         }
 
@@ -87,6 +85,7 @@
             get => _isFreezeLockEnabed;
             set
             {
+                _isFreezeLockEnabed = value;
                 if (value)
                 {
                     ModConsole.Log("Door Locks Frozen: Locked");
@@ -97,8 +96,6 @@
                 {
                     ModConsole.Log("Door Locks Unfrozen");
                 }
-
-                _isFreezeLockEnabed = value;
             }
         }
 
@@ -107,6 +104,7 @@
             get => _isFreezeUnlockEnabed;
             set
             {
+                _isFreezeUnlockEnabed = value;
                 if (value)
                 {
                     if (_isFreezeUnlockEnabed)
@@ -124,8 +122,6 @@
                 {
                     ModConsole.Log("Door Locks Unfrozen");
                 }
-
-                _isFreezeUnlockEnabed = value;
             }
         }
 
@@ -134,6 +130,7 @@
             get => _isRainbowEnabled;
             set
             {
+                _isRainbowEnabled = value;
                 if (value)
                 {
                     if (_isRainbowEnabled)
@@ -150,8 +147,6 @@
                 {
                     ModConsole.Log("Rainbow Disabled.");
                 }
-
-                _isRainbowEnabled = value;
             }
         }
 
@@ -160,6 +155,7 @@
             get => _isMoanSpamEnabled;
             set
             {
+                _isMoanSpamEnabled = value;
                 if (value)
                 {
                     if (_isMoanSpamEnabled)
@@ -176,8 +172,6 @@
                 {
                     ModConsole.Log("Moan Spam Disabled.");
                 }
-
-                _isMoanSpamEnabled = value;
             }
         }
 
@@ -219,7 +213,7 @@
             ToggleRainbowBtn = new QMToggleButton(BClubExploitsPage, 5, 1, "Rainbow", () => { IsRainbowEnabled = true; }, "Rainbow", () => { IsRainbowEnabled = false; }, "Rainbow", null, Color.green, Color.red, false);
             ToggleRainbowBtn.SetToggleState(IsRainbowEnabled, false);
 
-            ToggleMoanSpamBtn = new QMToggleButton(BClubExploitsPage, 6, 2, "Moan Spam", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = true; }, "Moan Spam", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = false; }, "Moan Spam", null, Color.green, Color.red, false);
+            ToggleMoanSpamBtn = new QMToggleButton(BClubExploitsPage, 6, 2, "Moan Spam", () => { IsMoanSpamEnabled = true; }, "Moan Spam", () => { IsMoanSpamEnabled = false; }, "Moan Spam", null, Color.green, Color.red, false);
 
             // VIP
             SpoofAsWorldAuthorBtn = new QMToggleButton(BClubExploitsPage, 6, 1, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = true; }, "VIP Spoof", () => { PlayerSpooferUtils.SpoofAsWorldAuthor = false; }, "VIP Spoof", null, Color.green, Color.red, false);
@@ -341,15 +335,13 @@
                     yield break;
                 }
 
-                if (IsMoanSpamEnabled)
-                {
-                    VoiceAction.ExecuteUdonEvent();
-                    yield return new WaitForSeconds(0.25f);
-                }
-                else
+                if (!IsMoanSpamEnabled)
                 {
                     yield break;
                 }
+
+                VoiceAction.ExecuteUdonEvent();
+                yield return new WaitForSeconds(0.5f);
             }
         }
 
@@ -463,7 +455,7 @@
 
                 if (IsDoorbellSpamEnabled)
                 {
-                    yield return null;
+                    yield return new WaitForSeconds(0.001f);
                 }
                 else
                 {
@@ -514,7 +506,7 @@
             {
                 UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}").ExecuteUdonEvent();
             }
-            else
+            else if (doorID == 7)
             {
                 UdonSearch.FindUdonEvent("Patreon", $"_ToggleLockVip").ExecuteUdonEvent();
             }
@@ -532,9 +524,12 @@
                 if (IsDoorbellSpamEnabled) IsDoorbellSpamEnabled = false;
                 if (IsFreezeLockEnabed) IsFreezeLockEnabed = false;
                 if (IsFreezeUnlockEnabed) IsFreezeUnlockEnabed = false;
+                if (IsMoanSpamEnabled) IsMoanSpamEnabled = false;
+                if (IsRainbowEnabled) IsRainbowEnabled = false;
 
                 _bells.Clear();
                 _chairs.Clear();
+                ColorActions.Clear();
 
                 ModConsole.Log("Done unloading B Club..");
             }
@@ -591,10 +586,11 @@
                     ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Black"));
                 });
 
-                MiscUtils.DelayFunction(2f, () =>
+                VoiceAction = UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt");
+                if (VoiceAction == null)
                 {
-                    VoiceAction = UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt");
-                });
+                    ModConsole.Error("VoiceAction was null");
+                }
 
                 var Lobby = GameObjectFinder.FindRootSceneObject("Lobby");
                 if (Lobby != null)
