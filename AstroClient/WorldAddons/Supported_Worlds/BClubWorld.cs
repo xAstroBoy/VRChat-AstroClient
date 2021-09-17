@@ -44,6 +44,13 @@
 
         private static bool isCurrentWorld;
 
+
+        private static System.Object Rainbow_CancellationToken {get; set;}
+        private static System.Object MoanSpam_CancellationToken {get; set;}
+        private static System.Object DoorLockFreeze_CancellationToken {get; set;}
+        private static System.Object DoorUnlockFreeze_CancellationToken {get; set;}
+
+
         public static bool IsBlueChairEnabled
         {
             get => _isBlueChairEnabed;
@@ -94,6 +101,7 @@
                 else
                 {
                     ModConsole.Log("Door Locks Unfrozen");
+                    DoorLockFreeze_CancellationToken = null;
                 }
                 _isFreezeLockEnabed = value;
             }
@@ -106,7 +114,7 @@
             {
                 if (value)
                 {
-                    if (_isFreezeUnlockEnabed)
+                    if (DoorUnlockFreeze_CancellationToken != null)
                     {
                         return;
                     }
@@ -120,6 +128,7 @@
                 else
                 {
                     ModConsole.Log("Door Locks Unfrozen");
+                    DoorUnlockFreeze_CancellationToken = null;
                 }
                 _isFreezeUnlockEnabed = value;
             }
@@ -132,7 +141,7 @@
             {
                 if (value)
                 {
-                    if (_isRainbowEnabled)
+                    if (Rainbow_CancellationToken != null)
                     {
                         return;
                     }
@@ -145,6 +154,7 @@
                 else
                 {
                     ModConsole.Log("Rainbow Disabled.");
+                    Rainbow_CancellationToken = null;
                 }
                 _isRainbowEnabled = value;
             }
@@ -305,24 +315,26 @@
             }
         }
 
+
         private static void Rainbow()
         {
-            _ = MelonCoroutines.Start(RainbowLoop());
+            Rainbow_CancellationToken = MelonCoroutines.Start(RainbowLoop());
         }
+
 
         private static void MoanSpam()
         {
-            _ = MelonCoroutines.Start(MoanSpamLoop());
+            MoanSpam_CancellationToken = MelonCoroutines.Start(MoanSpamLoop());
         }
 
         private static void DoorLockFreeze()
         {
-            _ = MelonCoroutines.Start(DoorLockFreezeLoop());
+            DoorLockFreeze_CancellationToken = MelonCoroutines.Start(DoorLockFreezeLoop());
         }
 
         private static void DoorUnlockFreeze()
         {
-            _ = MelonCoroutines.Start(DoorUnlockFreezeLoop());
+            DoorUnlockFreeze_CancellationToken = MelonCoroutines.Start(DoorUnlockFreezeLoop());
         }
 
         private static IEnumerator MoanSpamLoop()
@@ -526,6 +538,12 @@
                 if (IsFreezeUnlockEnabed) IsFreezeUnlockEnabed = false;
                 if (IsMoanSpamEnabled) IsMoanSpamEnabled = false;
                 if (IsRainbowEnabled) IsRainbowEnabled = false;
+
+                Rainbow_CancellationToken = null;
+                MoanSpam_CancellationToken = null;
+                DoorLockFreeze_CancellationToken = null;
+                DoorUnlockFreeze_CancellationToken = null;
+
 
                 _bells.Clear();
                 _chairs.Clear();
