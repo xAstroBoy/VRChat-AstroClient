@@ -280,68 +280,68 @@
                 VIPButton.gameObject.transform.position = new Vector3(60.7236f, 63.1298f, -1.7349f);
             }
 
-            //if (!LockIndicator1.active)
-            //{
-            //    LockButton1.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton1.SetToggleState(false);
-            //}
+            if (!LockIndicator1.active)
+            {
+                LockButton1.SetToggleState(true);
+            }
+            else
+            {
+                LockButton1.SetToggleState(false);
+            }
 
-            //if (!LockIndicator2.active)
-            //{
-            //    LockButton2.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton2.SetToggleState(false);
-            //}
+            if (!LockIndicator2.active)
+            {
+                LockButton2.SetToggleState(true);
+            }
+            else
+            {
+                LockButton2.SetToggleState(false);
+            }
 
-            //if (!LockIndicator3.active)
-            //{
-            //    LockButton3.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton3.SetToggleState(false);
-            //}
+            if (!LockIndicator3.active)
+            {
+                LockButton3.SetToggleState(true);
+            }
+            else
+            {
+                LockButton3.SetToggleState(false);
+            }
 
-            //if (!LockIndicator4.active)
-            //{
-            //    LockButton4.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton4.SetToggleState(false);
-            //}
+            if (!LockIndicator4.active)
+            {
+                LockButton4.SetToggleState(true);
+            }
+            else
+            {
+                LockButton4.SetToggleState(false);
+            }
 
-            //if (!LockIndicator5.active)
-            //{
-            //    LockButton5.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton5.SetToggleState(false);
-            //}
+            if (!LockIndicator5.active)
+            {
+                LockButton5.SetToggleState(true);
+            }
+            else
+            {
+                LockButton5.SetToggleState(false);
+            }
 
-            //if (!LockIndicator6.active)
-            //{
-            //    LockButton6.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton6.SetToggleState(false);
-            //}
+            if (!LockIndicator6.active)
+            {
+                LockButton6.SetToggleState(true);
+            }
+            else
+            {
+                LockButton6.SetToggleState(false);
+            }
 
-            //if (!LockIndicator7.active)
-            //{
-            //    LockButton7.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton7.SetToggleState(false);
-            //}
+            if (!LockIndicator7.active)
+            {
+                LockButton7.SetToggleState(true);
+            }
+            else
+            {
+                LockButton7.SetToggleState(false);
+            }
         }
 
 
@@ -398,7 +398,7 @@
 
                 foreach (var udon in ColorActions)
                 {
-                    udon.ExecuteUdonEvent();
+                    udon?.ExecuteUdonEvent();
                     yield return new WaitForSeconds(0.05f);
                 }
 
@@ -529,15 +529,26 @@
         {
             for (; ; )
             {
-                if (!IsBlueChairEnabled) yield break;
+                if (!isCurrentWorld)
+                {
+                    IsBlueChairEnabled = false;
+                    yield break;
+                }
 
                 foreach (var chair in _chairs)
                 {
-                    chair.ExecuteUdonEvent();
-                    yield return new WaitForSeconds(0.05f);
+                    chair?.ExecuteUdonEvent();
+                    yield return new WaitForSeconds(0.1f);
                 }
 
-                yield return new WaitForSeconds(0.001f);
+                if (IsBlueChairEnabled)
+                {
+                    yield return new WaitForSeconds(0.001f);
+                }
+                else
+                {
+                    yield break;
+                }
             }
         }
 
@@ -545,11 +556,11 @@
         {
             if (doorID <= 6)
             {
-                UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}").ExecuteUdonEvent();
+                UdonSearch.FindUdonEvent("Rooms Info Master", $"_ToggleLock{doorID}")?.ExecuteUdonEvent();
             }
             else if (doorID == 7)
             {
-                UdonSearch.FindUdonEvent("Patreon", $"_ToggleLockVip").ExecuteUdonEvent();
+                UdonSearch.FindUdonEvent("Patreon", $"_ToggleLockVip")?.ExecuteUdonEvent();
             }
             RefreshButtons();
         }
@@ -585,7 +596,7 @@
         private static List<UdonBehaviour_Cached> ColorActions = new List<UdonBehaviour_Cached>();
         private static UdonBehaviour_Cached VoiceAction;
 
-       
+
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
