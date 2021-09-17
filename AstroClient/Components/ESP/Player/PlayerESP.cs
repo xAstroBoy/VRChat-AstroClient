@@ -22,7 +22,7 @@
             AntiGcList.Add(this);
         }
 
-        private bool DebugMode = true;
+        private bool DebugMode = false;
 
         [HideFromIl2Cpp]
         private void Debug(string msg)
@@ -149,6 +149,29 @@
             }
         }
 
+        public override void OnPlayerBlockedYou(Player player)
+        {
+            if (player == AssignedPlayer)
+            {
+                if (!UseCustomColor)
+                {
+                    SetPlayerDefaultESP();
+                }
+            }
+        }
+
+        public override void OnPlayerUnblockedYou(Player player)
+        {
+            if (player == AssignedPlayer)
+            {
+                if (!UseCustomColor)
+                {
+                    SetPlayerDefaultESP();
+                }
+            }
+        }
+
+
         public void OnDestroy()
         {
             HighLightOptions.DestroyHighlighter();
@@ -209,7 +232,7 @@
                 {
                     if (AssignedPlayer.GetAPIUser() != null)
                     {
-                        if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(AssignedPlayer.UserID()))
+                        if (PhotonOnEventHook.BlockedYouPlayers.Contains(AssignedPlayer))
                         {
                             if (HighLightOptions.highlightColor != BlockedColor)
                             {

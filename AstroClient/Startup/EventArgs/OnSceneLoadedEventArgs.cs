@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroClientCore.Events
 {
     using System;
 
