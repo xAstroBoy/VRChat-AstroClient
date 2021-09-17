@@ -185,9 +185,6 @@
             }
         }
 
-
-
-
         private static GameObject LockIndicator1;
         private static GameObject LockIndicator2;
         private static GameObject LockIndicator3;
@@ -376,15 +373,16 @@
                     yield break;
                 }
 
-                //UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt")?.ExecuteUdonEvent();
+                UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt")?.ExecuteUdonEvent();
                 ModConsole.Log("Moan Bitch!");
 
                 if (IsMoanSpamEnabled)
                 {
-                    yield return new WaitForSeconds(1f);
+                    yield return new WaitForSeconds(0.5f);
                 }
                 else
                 {
+                    ModConsole.Error("DAMN IT");
                     yield break;
                 }
             }
