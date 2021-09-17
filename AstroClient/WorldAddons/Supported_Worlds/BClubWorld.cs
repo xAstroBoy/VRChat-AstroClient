@@ -185,26 +185,55 @@
             }
         }
 
-        private static QMToggleButton LockButton1;
+
+
+
         private static GameObject LockIndicator1;
-        private static QMToggleButton LockButton2;
         private static GameObject LockIndicator2;
-        private static QMToggleButton LockButton3;
         private static GameObject LockIndicator3;
-        private static QMToggleButton LockButton4;
         private static GameObject LockIndicator4;
-        private static QMToggleButton LockButton5;
         private static GameObject LockIndicator5;
-        private static QMToggleButton LockButton6;
         private static GameObject LockIndicator6;
-        private static QMToggleButton LockButton7;
         private static GameObject LockIndicator7;
+
+        private static GameObjectListener LockIndicator1_Listener;
+        private static GameObjectListener LockIndicator2_Listener;
+        private static GameObjectListener LockIndicator3_Listener;
+        private static GameObjectListener LockIndicator4_Listener;
+        private static GameObjectListener LockIndicator5_Listener;
+        private static GameObjectListener LockIndicator6_Listener;
+        private static GameObjectListener LockIndicator7_Listener;
+
+
+        private static QMToggleButton LockButton1;
+        private static QMToggleButton LockButton2;
+        private static QMToggleButton LockButton3;
+        private static QMToggleButton LockButton4;
+        private static QMToggleButton LockButton5;
+        private static QMToggleButton LockButton6;
+        private static QMToggleButton LockButton7;
 
 
         private static QMToggleButton SpoofAsWorldAuthorBtn;
         private static QMToggleButton ToggleRainbowBtn;
         private static QMToggleButton ToggleMoanSpamBtn;
 
+
+        public static GameObjectListener RegisterListener(GameObject Object, Action OnEnabled, Action OnDisabled, Action OnDestroy)
+        {
+            if (Object != null)
+            {
+                var listener = Object.GetOrAddComponent<GameObjectListener>();
+                if (listener != null)
+                {
+                    listener.OnEnabled += OnEnabled;
+                    listener.OnDisabled += OnDisabled;
+                    listener.OnDestroyed += OnDestroy;
+                    return listener;
+                }
+            }
+            return null;
+        }
 
         public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
@@ -251,68 +280,68 @@
                 VIPButton.gameObject.transform.position = new Vector3(60.7236f, 63.1298f, -1.7349f);
             }
 
-            if (!LockIndicator1.active)
-            {
-                LockButton1.SetToggleState(true);
-            }
-            else
-            {
-                LockButton1.SetToggleState(false);
-            }
+            //if (!LockIndicator1.active)
+            //{
+            //    LockButton1.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton1.SetToggleState(false);
+            //}
 
-            if (!LockIndicator2.active)
-            {
-                LockButton2.SetToggleState(true);
-            }
-            else
-            {
-                LockButton2.SetToggleState(false);
-            }
+            //if (!LockIndicator2.active)
+            //{
+            //    LockButton2.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton2.SetToggleState(false);
+            //}
 
-            if (!LockIndicator3.active)
-            {
-                LockButton3.SetToggleState(true);
-            }
-            else
-            {
-                LockButton3.SetToggleState(false);
-            }
+            //if (!LockIndicator3.active)
+            //{
+            //    LockButton3.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton3.SetToggleState(false);
+            //}
 
-            if (!LockIndicator4.active)
-            {
-                LockButton4.SetToggleState(true);
-            }
-            else
-            {
-                LockButton4.SetToggleState(false);
-            }
+            //if (!LockIndicator4.active)
+            //{
+            //    LockButton4.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton4.SetToggleState(false);
+            //}
 
-            if (!LockIndicator5.active)
-            {
-                LockButton5.SetToggleState(true);
-            }
-            else
-            {
-                LockButton5.SetToggleState(false);
-            }
+            //if (!LockIndicator5.active)
+            //{
+            //    LockButton5.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton5.SetToggleState(false);
+            //}
 
-            if (!LockIndicator6.active)
-            {
-                LockButton6.SetToggleState(true);
-            }
-            else
-            {
-                LockButton6.SetToggleState(false);
-            }
+            //if (!LockIndicator6.active)
+            //{
+            //    LockButton6.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton6.SetToggleState(false);
+            //}
 
-            if (!LockIndicator7.active)
-            {
-                LockButton7.SetToggleState(true);
-            }
-            else
-            {
-                LockButton7.SetToggleState(false);
-            }
+            //if (!LockIndicator7.active)
+            //{
+            //    LockButton7.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton7.SetToggleState(false);
+            //}
         }
 
 
@@ -556,6 +585,8 @@
         private static List<UdonBehaviour_Cached> ColorActions = new List<UdonBehaviour_Cached>();
         private static UdonBehaviour_Cached VoiceAction;
 
+       
+
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.BClub)
@@ -574,6 +605,16 @@
                     LockIndicator5 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 5/Screen/Canvas/Indicators/Locked").gameObject;
                     LockIndicator6 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 6/Screen/Canvas/Indicators/Locked").gameObject;
                     LockIndicator7 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/Screen (1)/Canvas/Indicators/Locked").gameObject;
+
+
+                    LockIndicator1_Listener = RegisterListener(LockIndicator1, () => { LockButton1.SetToggleState(false); }, () => { LockButton1.SetToggleState(true); }, null);
+                    LockIndicator2_Listener = RegisterListener(LockIndicator2, () => { LockButton2.SetToggleState(false); }, () => { LockButton2.SetToggleState(true); }, null);
+                    LockIndicator3_Listener = RegisterListener(LockIndicator3, () => { LockButton3.SetToggleState(false); }, () => { LockButton3.SetToggleState(true); }, null);
+                    LockIndicator4_Listener = RegisterListener(LockIndicator4, () => { LockButton4.SetToggleState(false); }, () => { LockButton4.SetToggleState(true); }, null);
+                    LockIndicator5_Listener = RegisterListener(LockIndicator5, () => { LockButton5.SetToggleState(false); }, () => { LockButton5.SetToggleState(true); }, null);
+                    LockIndicator6_Listener = RegisterListener(LockIndicator6, () => { LockButton6.SetToggleState(false); }, () => { LockButton6.SetToggleState(true); }, null);
+                    LockIndicator7_Listener = RegisterListener(LockIndicator7, () => { LockButton7.SetToggleState(false); }, () => { LockButton7.SetToggleState(true); }, null);
+
                 }
                 else
                 {
