@@ -376,13 +376,17 @@
                     yield break;
                 }
 
-                if (!IsMoanSpamEnabled)
+                //UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt")?.ExecuteUdonEvent();
+                ModConsole.Log("Moan Bitch!");
+
+                if (IsMoanSpamEnabled)
+                {
+                    yield return new WaitForSeconds(1f);
+                }
+                else
                 {
                     yield break;
                 }
-
-                VoiceAction.ExecuteUdonEvent();
-                yield return new WaitForSeconds(0.75f);
             }
         }
 
@@ -655,12 +659,6 @@
                     ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Black"));
                     ColorActions.Add(UdonSearch.FindUdonEvent("MyInstance", "_SetColor2Black"));
                 });
-
-                VoiceAction = UdonSearch.FindUdonEvent("NPC Audio Udon", "PlayGruntHurt");
-                if (VoiceAction == null)
-                {
-                    ModConsole.Error("VoiceAction was null");
-                }
 
                 var Lobby = GameObjectFinder.FindRootSceneObject("Lobby");
                 if (Lobby != null)

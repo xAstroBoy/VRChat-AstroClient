@@ -46,7 +46,8 @@
                 _ = new QMSingleButton(MainButton, 4, 0, "RPC Test #1", () => { RPCClapTest1(); }, "RPC");
                 _ = new QMSingleButton(MainButton, 4, 1, "RPC Test #2", () => { RPCClapTest2(); }, "RPC");
                 _ = new QMSingleButton(MainButton, 4, 2, "RPC Test #3", () => { RPCClapTest3(); }, "RPC");
-                _ = new QMSingleButton(MainButton, 4, 4, "Notorious\nHome", () => { WorldUtils.JoinWorld("wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938#wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938:42069"); }, "RPC");
+                _ = new QMSingleButton(MainButton, 4, 2, "Notorious\nHome 1", () => { WorldUtils.JoinWorld("wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938#wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938:42069"); }, "");
+                _ = new QMSingleButton(MainButton, 4, 3, "Notorious\nHome 2", () => { WorldUtils.JoinWorld("wrld_1913f8f7-ec88-4ff4-acc9-f54b278d8d6d#wrld_1913f8f7-ec88-4ff4-acc9-f54b278d8d6d:42069"); }, "");
             }
         }
 
