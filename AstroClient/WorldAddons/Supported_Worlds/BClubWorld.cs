@@ -49,7 +49,6 @@
             get => _isBlueChairEnabed;
             set
             {
-                _isBlueChairEnabed = value;
                 if (value)
                 {
                     ModConsole.Log("BlueChair Enabled!");
@@ -59,6 +58,7 @@
                 {
                     ModConsole.Log("BlueChair Disabled!");
                 }
+                _isBlueChairEnabed = value;
             }
         }
 
@@ -67,7 +67,6 @@
             get => _isDoorBellSpamEnabled;
             set
             {
-                _isDoorBellSpamEnabled = value;
                 if (value)
                 {
                     ModConsole.Log("Doorbell Spam Enabled!");
@@ -77,6 +76,7 @@
                 {
                     ModConsole.Log("Doorbell Spam Disabled!");
                 }
+                _isDoorBellSpamEnabled = value;
             }
         }
 
@@ -85,7 +85,6 @@
             get => _isFreezeLockEnabed;
             set
             {
-                _isFreezeLockEnabed = value;
                 if (value)
                 {
                     ModConsole.Log("Door Locks Frozen: Locked");
@@ -96,6 +95,7 @@
                 {
                     ModConsole.Log("Door Locks Unfrozen");
                 }
+                _isFreezeLockEnabed = value;
             }
         }
 
@@ -104,7 +104,6 @@
             get => _isFreezeUnlockEnabed;
             set
             {
-                _isFreezeUnlockEnabed = value;
                 if (value)
                 {
                     if (_isFreezeUnlockEnabed)
@@ -122,6 +121,7 @@
                 {
                     ModConsole.Log("Door Locks Unfrozen");
                 }
+                _isFreezeUnlockEnabed = value;
             }
         }
 
@@ -130,7 +130,6 @@
             get => _isRainbowEnabled;
             set
             {
-                _isRainbowEnabled = value;
                 if (value)
                 {
                     if (_isRainbowEnabled)
@@ -147,6 +146,7 @@
                 {
                     ModConsole.Log("Rainbow Disabled.");
                 }
+                _isRainbowEnabled = value;
             }
         }
 
@@ -155,7 +155,6 @@
             get => _isMoanSpamEnabled;
             set
             {
-                _isMoanSpamEnabled = value;
                 if (value)
                 {
                     if (_isMoanSpamEnabled)
@@ -172,6 +171,7 @@
                 {
                     ModConsole.Log("Moan Spam Disabled.");
                 }
+                _isMoanSpamEnabled = value;
             }
         }
 
@@ -341,7 +341,7 @@
                 }
 
                 VoiceAction.ExecuteUdonEvent();
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(0.75f);
             }
         }
 
