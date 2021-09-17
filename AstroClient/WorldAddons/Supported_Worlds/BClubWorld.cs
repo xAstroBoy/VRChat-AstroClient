@@ -277,68 +277,72 @@
                 VIPButton.gameObject.transform.position = new Vector3(60.7236f, 63.1298f, -1.7349f);
             }
 
-            if (!LockIndicator1.active)
-            {
-                LockButton1.SetToggleState(true);
-            }
-            else
-            {
-                LockButton1.SetToggleState(false);
-            }
 
-            if (!LockIndicator2.active)
-            {
-                LockButton2.SetToggleState(true);
-            }
-            else
-            {
-                LockButton2.SetToggleState(false);
-            }
+            // WE DONT NEED EM, WE HAVE LISTENERS BOI!
 
-            if (!LockIndicator3.active)
-            {
-                LockButton3.SetToggleState(true);
-            }
-            else
-            {
-                LockButton3.SetToggleState(false);
-            }
 
-            if (!LockIndicator4.active)
-            {
-                LockButton4.SetToggleState(true);
-            }
-            else
-            {
-                LockButton4.SetToggleState(false);
-            }
+            //if (!LockIndicator1.active)
+            //{
+            //    LockButton1.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton1.SetToggleState(false);
+            //}
 
-            if (!LockIndicator5.active)
-            {
-                LockButton5.SetToggleState(true);
-            }
-            else
-            {
-                LockButton5.SetToggleState(false);
-            }
+            //if (!LockIndicator2.active)
+            //{
+            //    LockButton2.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton2.SetToggleState(false);
+            //}
 
-            if (!LockIndicator6.active)
-            {
-                LockButton6.SetToggleState(true);
-            }
-            else
-            {
-                LockButton6.SetToggleState(false);
-            }
+            //if (!LockIndicator3.active)
+            //{
+            //    LockButton3.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton3.SetToggleState(false);
+            //}
 
-            if (!LockIndicator7.active)
-            {
-                LockButton7.SetToggleState(true);
-            }
-            else
-            {
-                LockButton7.SetToggleState(false);
-            }
+            //if (!LockIndicator4.active)
+            //{
+            //    LockButton4.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton4.SetToggleState(false);
+            //}
+
+            //if (!LockIndicator5.active)
+            //{
+            //    LockButton5.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton5.SetToggleState(false);
+            //}
+
+            //if (!LockIndicator6.active)
+            //{
+            //    LockButton6.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton6.SetToggleState(false);
+            //}
+
+            //if (!LockIndicator7.active)
+            //{
+            //    LockButton7.SetToggleState(true);
+            //}
+            //else
+            //{
+            //    LockButton7.SetToggleState(false);
+            //}
         }
 
 
