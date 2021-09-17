@@ -57,6 +57,12 @@
 
             StreamerProtector.Event_OnStreamerJoined += Internal_OnStreamerJoined;
             StreamerProtector.Event_OnStreamerLeft += Internal_OnStreamerLeft;
+
+            PhotonOnEventHook.Event_OnPlayerBlockedYou += Internal_OnPlayerBlockedYou;
+            PhotonOnEventHook.Event_OnPlayerUnblockedYou += Internal_OnPlayerUnblockedYou;
+            PhotonOnEventHook.Event_OnPlayerMutedYou += Internal_OnPlayerMutedYou;
+            PhotonOnEventHook.Event_OnPlayerUnmutedYou += Internal_OnPlayerUnmutedYou;
+
         }
 
         private void Internal_OnStreamerJoined(object sender, PlayerEventArgs e)
@@ -167,6 +173,29 @@
         private void Internal_OnPlayerSelected(object sender, VRCPlayerEventArgs e)
         {
             OnPlayerSelected(e.player);
+        }
+
+        private void Internal_OnPlayerBlockedYou(object sender, VRCPlayerEventArgs e)
+        {
+            OnPlayerBlockedYou(e.player);
+        }
+
+
+        private void Internal_OnPlayerUnblockedYou(object sender, VRCPlayerEventArgs e)
+        {
+            OnPlayerUnblockedYou(e.player);
+        }
+
+
+        private void Internal_OnPlayerMutedYou(object sender, VRCPlayerEventArgs e)
+        {
+            OnPlayerMutedYou(e.player);
+        }
+
+
+        private void Internal_OnPlayerUnmutedYou(object sender, VRCPlayerEventArgs e)
+        { 
+            OnPlayerUnmutedYou(e.player);
         }
 
         private void Internal_OnTargetSet(object sender, VRCPlayerEventArgs e)
@@ -292,6 +321,26 @@
         public virtual void OnWorldReveal(string id, string Name,  List<string> tags, string AssetURL, string AuthorName)
         {
         }
+
+        public virtual void OnPlayerBlockedYou(VRC.Player player)
+        {
+        }
+
+
+        public virtual void OnPlayerUnblockedYou(VRC.Player player)
+        {
+        }
+
+
+        public virtual void OnPlayerMutedYou(VRC.Player player)
+        {
+        }
+
+
+        public virtual void OnPlayerUnmutedYou(VRC.Player player)
+        {
+        }
+
 
         public virtual void OnPlayerSelected(Player player)
         {

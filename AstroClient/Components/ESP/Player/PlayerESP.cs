@@ -22,7 +22,7 @@
             AntiGcList.Add(this);
         }
 
-        private bool DebugMode = true;
+        private bool DebugMode = false;
 
         [HideFromIl2Cpp]
         private void Debug(string msg)
@@ -209,7 +209,7 @@
                 {
                     if (AssignedPlayer.GetAPIUser() != null)
                     {
-                        if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(AssignedPlayer.UserID()))
+                        if (PhotonOnEventHook.BlockedYouPlayers.Contains(AssignedPlayer))
                         {
                             if (HighLightOptions.highlightColor != BlockedColor)
                             {

@@ -11,7 +11,7 @@
         {
             if (PlayerUtils.GetVRCPlayer() != null)
             {
-                var original = PlayerUtils.GetVRCPlayer().GetAvatarManager().prop_GameObject_0;
+                var original = PlayerUtils.GetPlayer().GetAvatarObject();
                 if (original != null)
                 {
                     var Capsule = UnityEngine.Object.Instantiate(original, null, true);

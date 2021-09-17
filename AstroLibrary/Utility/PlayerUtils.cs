@@ -3,8 +3,12 @@
 namespace AstroLibrary.Utility
 {
     using AstroLibrary.Extensions;
+    using Photon.Pun;
+    using System.Collections.Generic;
+    using System.Linq;
     using UnityEngine;
     using UnityEngine.XR;
+    using VRC;
     using VRC.Core;
     using VRC.SDKBase;
     using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
@@ -80,6 +84,8 @@ namespace AstroLibrary.Utility
         {
             return Utils.PlayerManager.GetPlayer(instance.id);
         }
+
+
         #endregion
 
         #region VRCPlayer
@@ -92,6 +98,12 @@ namespace AstroLibrary.Utility
         {
             return instance?._vrcPlayer;
         }
+
+        public static int GetPhotonID(this VRCPlayer instance)
+        {
+            return instance.GetPhotonView().GetPhotonID();
+        }
+
         #endregion
 
         #region API User
@@ -214,6 +226,50 @@ namespace AstroLibrary.Utility
                 return PhotonHandler.field_Internal_Static_MonoBehaviour1PrivateObInPrInBoInInInInUnique_0;
             }
         }
+
+
+        public static PhotonView GetPhotonView(this VRCPlayer instance)
+        {
+            return instance?.prop_PhotonView_0;
+        }
+
+        private static int GetPhotonID(this PhotonView instance)
+        {
+            return instance.field_Private_Int32_0;
+        }
+
+        public static Player GetPlayerIDPhoton(this PlayerManager Instance, int playerID)
+        {
+            return Instance.AllPlayers()
+                .Where(x => x.GetVRCPlayer() != null)
+                .Where(x => x.GetVRCPlayer().GetPhotonView() != null)
+                .Where(x => x.GetVRCPlayer().GetPhotonView().GetPhotonID() == playerID)
+                .FirstOrDefault(null);
+            //var Players = Instance.AllPlayers()
+            //foreach (Player player in Players.ToArray())
+            //    if (player.GetVRCPlayerApi().playerId == playerID)
+            //        return player;
+            //return null;
+        }
+        #endregion
+
+
+        #region PlayerManager
+
+        public static List<Player> GetAllPlayers(this PlayerManager instance)
+        {
+            return instance?.AllPlayers();
+        }
+
+        public static PlayerManager PlayerManager
+        {
+            get
+            {
+                return PlayerManager.prop_PlayerManager_0;
+            }
+        }
+
+
         #endregion
 
         #region Avatar
@@ -246,6 +302,13 @@ namespace AstroLibrary.Utility
         {
             return Instance.prop_VRCAvatarManager_0;
         }
+
+
+        public static GameObject GetAvatarObject(this VRC.Player Instance)
+        {
+            return Instance.GetVRCPlayer().field_Internal_GameObject_0;
+        }
+
 
         public static GameObject GetAvatar(this VRCAvatarManager Instance)
         {
