@@ -92,22 +92,23 @@
             InitPatch();
         }
 
+
         private void InitPatch()
         {
             try
             {
                 new Patch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Public_Void_Player_0)), GetPatch(nameof(OnSelectedPlayerPatch)));
+                new Patch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Public_Void_Player_PDM_0)), GetPatch(nameof(OnSelectedPlayerPatch)));
+
                 Patch.DoPatches();
             }
             catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
             finally { }
         }
 
-        private static bool OnSelectedPlayerPatch(VRC.Player player)
+        private static void OnSelectedPlayerPatch(ref VRC.Player __0)
         {
-            ModConsole.DebugLog($"Test OnSelected {player.DisplayName()}");
-            Event_OnPlayerSelected.SafetyRaise(new VRCPlayerEventArgs(player));
-            return true;
+            Event_OnPlayerSelected.SafetyRaise(new VRCPlayerEventArgs(__0));
         }
 
 

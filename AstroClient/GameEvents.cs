@@ -24,6 +24,8 @@
             Main.Event_OnUpdate += Internal_OnUpdate;
             Main.Event_LateUpdate += Internal_OnLateUpdate;
             Main.Event_VRChat_OnUiManagerInit += Internal_VRChat_OnUiManagerInit;
+            Main.Event_VRChat_OnQuickMenuInit += Internal_VRChat_OnQuickMenuInit;
+
             Main.Event_OnSceneLoaded += Internal_OnSceneLoaded;
             Main.Event_OnApplicationQuit += Internal_OnApplicationQuit;
 
@@ -62,7 +64,6 @@
             PhotonOnEventHook.Event_OnPlayerUnblockedYou += Internal_OnPlayerUnblockedYou;
             PhotonOnEventHook.Event_OnPlayerMutedYou += Internal_OnPlayerMutedYou;
             PhotonOnEventHook.Event_OnPlayerUnmutedYou += Internal_OnPlayerUnmutedYou;
-
         }
 
         private void Internal_OnStreamerJoined(object sender, PlayerEventArgs e)
@@ -88,6 +89,11 @@
         private void Internal_VRChat_OnUiManagerInit(object sender, EventArgs e)
         {
             VRChat_OnUiManagerInit();
+        }
+
+        private void Internal_VRChat_OnQuickMenuInit(object sender, EventArgs e)
+        {
+            VRChat_OnQuickMenuInit();
         }
 
         private void Internal_OnUpdate(object sender, EventArgs e)
@@ -180,21 +186,18 @@
             OnPlayerBlockedYou(e.player);
         }
 
-
         private void Internal_OnPlayerUnblockedYou(object sender, VRCPlayerEventArgs e)
         {
             OnPlayerUnblockedYou(e.player);
         }
-
 
         private void Internal_OnPlayerMutedYou(object sender, VRCPlayerEventArgs e)
         {
             OnPlayerMutedYou(e.player);
         }
 
-
         private void Internal_OnPlayerUnmutedYou(object sender, VRCPlayerEventArgs e)
-        { 
+        {
             OnPlayerUnmutedYou(e.player);
         }
 
@@ -219,6 +222,10 @@
         }
 
         public virtual void VRChat_OnUiManagerInit()
+        {
+        }
+
+        public virtual void VRChat_OnQuickMenuInit()
         {
         }
 
@@ -318,7 +325,7 @@
         {
         }
 
-        public virtual void OnWorldReveal(string id, string Name,  List<string> tags, string AssetURL, string AuthorName)
+        public virtual void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
         }
 
@@ -326,21 +333,17 @@
         {
         }
 
-
         public virtual void OnPlayerUnblockedYou(VRC.Player player)
         {
         }
-
 
         public virtual void OnPlayerMutedYou(VRC.Player player)
         {
         }
 
-
         public virtual void OnPlayerUnmutedYou(VRC.Player player)
         {
         }
-
 
         public virtual void OnPlayerSelected(Player player)
         {

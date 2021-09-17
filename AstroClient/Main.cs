@@ -50,6 +50,8 @@
 
         public static event EventHandler Event_VRChat_OnUiManagerInit;
 
+        public static event EventHandler Event_VRChat_OnQuickMenuInit;
+
         public static event EventHandler<OnSceneLoadedEventArgs> Event_OnSceneLoaded;
 
         public static event EventHandler Event_OnApplicationQuit;
@@ -188,6 +190,20 @@
             Event_LateUpdate.SafetyRaise();
         }
 
+        protected void DoAfterQuickMenuInit(Action code)
+        {
+            if (!KeyManager.IsAuthed) return;
+            _ = MelonCoroutines.Start(OnQuickMenuInitCoro(code));
+        }
+
+        private IEnumerator OnQuickMenuInitCoro(Action code)
+        {
+            while (QuickMenu.prop_QuickMenu_0 == null)
+                yield return null;
+
+            code();
+        }
+
         protected void DoAfterUiManagerInit(Action code)
         {
             if (!KeyManager.IsAuthed) return;
@@ -200,6 +216,12 @@
                 yield return null;
 
             code();
+        }
+
+        private void Start_VRChat_OnQuickMenuInit()
+        {
+            if (!KeyManager.IsAuthed) return;
+            Event_VRChat_OnQuickMenuInit.SafetyRaise();
         }
 
         private void Start_VRChat_OnUiManagerInit()
