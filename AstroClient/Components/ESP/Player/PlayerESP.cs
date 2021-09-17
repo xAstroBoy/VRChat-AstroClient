@@ -149,6 +149,29 @@
             }
         }
 
+        public override void OnPlayerBlockedYou(Player player)
+        {
+            if (player == AssignedPlayer)
+            {
+                if (!UseCustomColor)
+                {
+                    SetPlayerDefaultESP();
+                }
+            }
+        }
+
+        public override void OnPlayerUnblockedYou(Player player)
+        {
+            if (player == AssignedPlayer)
+            {
+                if (!UseCustomColor)
+                {
+                    SetPlayerDefaultESP();
+                }
+            }
+        }
+
+
         public void OnDestroy()
         {
             HighLightOptions.DestroyHighlighter();

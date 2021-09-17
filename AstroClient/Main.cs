@@ -14,6 +14,7 @@
     using AstroClient.Variables;
     using AstroClient.WorldLights;
     using AstroClient.Worlds;
+    using AstroClientCore.Events;
     using AstroLibrary;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
