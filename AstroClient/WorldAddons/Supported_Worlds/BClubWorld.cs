@@ -270,82 +270,6 @@
             SpamDoorbellsToggle.SetToggleState(IsDoorbellSpamEnabled, false);
         }
 
-        private static void RefreshButtons()
-        {
-            if (VIPButton != null)
-            {
-                VIPButton.gameObject.transform.position = new Vector3(60.7236f, 63.1298f, -1.7349f);
-            }
-
-
-            // WE DONT NEED EM, WE HAVE LISTENERS BOI!
-
-
-            //if (!LockIndicator1.active)
-            //{
-            //    LockButton1.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton1.SetToggleState(false);
-            //}
-
-            //if (!LockIndicator2.active)
-            //{
-            //    LockButton2.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton2.SetToggleState(false);
-            //}
-
-            //if (!LockIndicator3.active)
-            //{
-            //    LockButton3.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton3.SetToggleState(false);
-            //}
-
-            //if (!LockIndicator4.active)
-            //{
-            //    LockButton4.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton4.SetToggleState(false);
-            //}
-
-            //if (!LockIndicator5.active)
-            //{
-            //    LockButton5.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton5.SetToggleState(false);
-            //}
-
-            //if (!LockIndicator6.active)
-            //{
-            //    LockButton6.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton6.SetToggleState(false);
-            //}
-
-            //if (!LockIndicator7.active)
-            //{
-            //    LockButton7.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton7.SetToggleState(false);
-            //}
-        }
-
-
         private static void Rainbow()
         {
             Rainbow_CancellationToken = MelonCoroutines.Start(RainbowLoop());
@@ -568,7 +492,6 @@
             {
                 UdonSearch.FindUdonEvent("Patreon", $"_ToggleLockVip")?.ExecuteUdonEvent();
             }
-            RefreshButtons();
         }
 
         public override void OnRoomLeft()
@@ -576,7 +499,6 @@
             if (isCurrentWorld)
             {
                 isCurrentWorld = false;
-
 
                 if (IsBlueChairEnabled) IsBlueChairEnabled = false;
                 if (IsDoorbellSpamEnabled) IsDoorbellSpamEnabled = false;
@@ -705,7 +627,6 @@
                     }
 
                     CreateVIPUnlockButton(new Vector3(-80.4f, 16.0598f, -1.695f), Quaternion.Euler(0f, 90f, 0f));
-                    //RestoreVIPButton();
                 }
                 catch (Exception e)
                 {
@@ -739,10 +660,9 @@
                 try
                 {
                     RestoreVIPButton();
-                    RefreshButtons();
                 } catch { }
 
-                yield return new WaitForSeconds(0.025f);
+                yield return new WaitForSeconds(5f);
             }
         }
 
@@ -764,8 +684,6 @@
 
         private static void RestoreVIPButton()
         {
-            MiscUtils.DelayFunction(5f, () =>
-            {
                 // Restore VIP button
                 if (VIPButton==null) VIPButton = VIPRoom.transform.Find("BedroomUdon/Door Tablet/BlueButtonWide - Toggle VIP only").gameObject;
                 if (VIPButton != null)
@@ -776,7 +694,6 @@
                 {
                     ModConsole.Error("VIP Button not found!");
                 }
-            });
         }
 
         //private static void EnterVIPRoom()
