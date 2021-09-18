@@ -105,7 +105,8 @@
                 ModConsole.DebugLog($"[Patches] Done! UnPatched {Patches.Count} Methods!");
             }
         }
-
+        
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch", Exclude = false)]
         private static HarmonyMethod GetPatch(string name)
         {
             return new HarmonyMethod(typeof(CheetosHooks).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
