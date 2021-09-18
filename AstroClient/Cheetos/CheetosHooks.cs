@@ -26,7 +26,7 @@
 
     #endregion Imports
 
-    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer", Exclude = false)]
+    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class CheetosHooks : GameEvents
     {
         public static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonJoin;
@@ -106,7 +106,7 @@
             }
         }
         
-        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch", Exclude = false)]
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
         {
             return new HarmonyMethod(typeof(CheetosHooks).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
@@ -123,7 +123,7 @@
             yield break;
         }
 
-        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit")]
         public static async void InitPatch()
         {
             try
