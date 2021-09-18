@@ -123,7 +123,6 @@
             yield break;
         }
 
-        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit")]
         public static async void InitPatch()
         {
             try
