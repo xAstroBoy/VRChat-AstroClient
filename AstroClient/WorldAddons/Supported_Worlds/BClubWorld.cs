@@ -30,26 +30,23 @@
 
         public static QMNestedButton BClubExploitsPage;
 
-        private static QMToggleButton SpamDoorbellsToggle;
         private static QMToggleButton FreezeLockedToggle;
         private static QMToggleButton FreezeUnlockedToggle;
         private static QMToggleButton BlueChairToggle;
 
-        private static bool _isDoorBellSpamEnabled;
         private static bool _isFreezeLockEnabed;
         private static bool _isFreezeUnlockEnabed;
-        private static bool _isBlueChairEnabed;
         private static bool _isRainbowEnabled;
         private static bool _isMoanSpamEnabled;
 
         private static bool isCurrentWorld;
-
 
         private static System.Object Rainbow_CancellationToken {get; set;}
         private static System.Object MoanSpam_CancellationToken {get; set;}
         private static System.Object DoorLockFreeze_CancellationToken {get; set;}
         private static System.Object DoorUnlockFreeze_CancellationToken {get; set;}
 
+        #region BlueChairSpam
 
         public static bool IsBlueChairEnabled
         {
@@ -69,6 +66,12 @@
             }
         }
 
+        private static bool _isBlueChairEnabed;
+
+        #endregion
+
+        #region DoorbellSpam
+
         public static bool IsDoorbellSpamEnabled
         {
             get => _isDoorBellSpamEnabled;
@@ -76,16 +79,28 @@
             {
                 if (value)
                 {
-                    ModConsole.Log("Doorbell Spam Enabled!");
-                    SpamDoorbells();
+                    if (DoorUnlockFreeze_CancellationToken == null)
+                    {
+                        ModConsole.Log("Doorbell Spam Enabled!");
+                        SpamDoorbells();
+                    }
                 }
                 else
                 {
                     ModConsole.Log("Doorbell Spam Disabled!");
+                    DoorUnlockFreeze_CancellationToken = null;
                 }
                 _isDoorBellSpamEnabled = value;
             }
         }
+
+
+        private static QMToggleButton SpamDoorbellsToggle;
+        private static bool _isDoorBellSpamEnabled;
+        private static System.Object DoorbellSpam_CancellationToken;
+
+
+        #endregion
 
         public static bool IsFreezeLockEnabed
         {
@@ -114,11 +129,7 @@
             {
                 if (value)
                 {
-                    if (DoorUnlockFreeze_CancellationToken != null)
-                    {
-                        return;
-                    }
-                    else
+                    if (DoorUnlockFreeze_CancellationToken == null)
                     {
                         ModConsole.Log("Door Locks Frozen: Unlocked");
                         if (IsFreezeLockEnabed) IsFreezeLockEnabed = false;
@@ -141,11 +152,7 @@
             {
                 if (value)
                 {
-                    if (Rainbow_CancellationToken != null)
-                    {
-                        return;
-                    }
-                    else
+                    if (Rainbow_CancellationToken == null)
                     {
                         ModConsole.Log("Rainbow Enabled!");
                         Rainbow();
@@ -160,6 +167,8 @@
             }
         }
 
+        #region MoanSpam
+
         public static bool IsMoanSpamEnabled
         {
             get => _isMoanSpamEnabled;
@@ -167,11 +176,7 @@
             {
                 if (value)
                 {
-                    if (_isMoanSpamEnabled)
-                    {
-                        return;
-                    }
-                    else
+                    if (Rainbow_CancellationToken == null)
                     {
                         ModConsole.Log("Moan Spam Enabled!");
                         MoanSpam();
@@ -180,10 +185,13 @@
                 else
                 {
                     ModConsole.Log("Moan Spam Disabled.");
+                    MoanSpam_CancellationToken = null;
                 }
                 _isMoanSpamEnabled = value;
             }
         }
+
+        #endregion
 
         private static GameObject LockIndicator1;
         private static GameObject LockIndicator2;
@@ -275,6 +283,32 @@
             Rainbow_CancellationToken = MelonCoroutines.Start(RainbowLoop());
         }
 
+        private static IEnumerator RainbowLoop()
+        {
+            for (; ; )
+            {
+                if (!isCurrentWorld)
+                {
+                    IsRainbowEnabled = false;
+                    yield break;
+                }
+
+                foreach (var udon in ColorActions)
+                {
+                    udon?.ExecuteUdonEvent();
+                    yield return new WaitForSeconds(0.05f);
+                }
+
+                if (IsRainbowEnabled)
+                {
+                    yield return new WaitForSeconds(0.001f);
+                }
+                else
+                {
+                    yield break;
+                }
+            }
+        }
 
         private static void MoanSpam()
         {
@@ -310,34 +344,7 @@
                 }
                 else
                 {
-                    ModConsole.Error("DAMN IT");
-                    yield break;
-                }
-            }
-        }
-
-        private static IEnumerator RainbowLoop()
-        {
-            for (; ; )
-            {
-                if (!isCurrentWorld)
-                {
-                    IsRainbowEnabled = false;
-                    yield break;
-                }
-
-                foreach (var udon in ColorActions)
-                {
-                    udon?.ExecuteUdonEvent();
-                    yield return new WaitForSeconds(0.05f);
-                }
-
-                if (IsRainbowEnabled)
-                {
-                    yield return new WaitForSeconds(0.001f);
-                }
-                else
-                {
+                    ModConsole.Error($"DAMN IT {IsMoanSpamEnabled}");
                     yield break;
                 }
             }
@@ -405,7 +412,7 @@
 
         private static void SpamDoorbells()
         {
-            _ = MelonCoroutines.Start(DoDoorbellSpam());
+            DoorbellSpam_CancellationToken = MelonCoroutines.Start(DoDoorbellSpam());
         }
 
         private static IEnumerator DoDoorbellSpam()
@@ -524,7 +531,24 @@
         private static List<UdonBehaviour_Cached> ColorActions = new List<UdonBehaviour_Cached>();
         private static UdonBehaviour_Cached VoiceAction;
 
+        private static GameObject PenthouseRoot;
 
+        public static GameObject GetIndicator(int id)
+        {
+            if (id <= 6)
+            {
+                return PenthouseRoot.transform.FindObject($"Private Rooms Exterior/Room Entrances/Private Room Entrance {id}/Screen/Canvas/Indicators/Locked").gameObject;
+            }
+            else if (id == 7)
+            {
+                return PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/Screen (1)/Canvas/Indicators/Locked").gameObject;
+
+            }
+            else
+            {
+                throw new IndexOutOfRangeException();
+            }
+        }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
@@ -534,16 +558,16 @@
                 WorldUtils.GetUdonScripts().Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
                 ModConsole.Log($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
-                var penthouseRoot = GameObjectFinder.FindRootSceneObject("Penthouse");
-                if (penthouseRoot != null)
+                PenthouseRoot = GameObjectFinder.FindRootSceneObject("Penthouse");
+                if (PenthouseRoot != null)
                 {
-                    LockIndicator1 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 1/Screen/Canvas/Indicators/Locked").gameObject;
-                    LockIndicator2 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 2/Screen/Canvas/Indicators/Locked").gameObject;
-                    LockIndicator3 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 3/Screen/Canvas/Indicators/Locked").gameObject;
-                    LockIndicator4 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 4/Screen/Canvas/Indicators/Locked").gameObject;
-                    LockIndicator5 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 5/Screen/Canvas/Indicators/Locked").gameObject;
-                    LockIndicator6 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 6/Screen/Canvas/Indicators/Locked").gameObject;
-                    LockIndicator7 = penthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/Screen (1)/Canvas/Indicators/Locked").gameObject;
+                    LockIndicator1 = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 1/Screen/Canvas/Indicators/Locked").gameObject;
+                    LockIndicator2 = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 2/Screen/Canvas/Indicators/Locked").gameObject;
+                    LockIndicator3 = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 3/Screen/Canvas/Indicators/Locked").gameObject;
+                    LockIndicator4 = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 4/Screen/Canvas/Indicators/Locked").gameObject;
+                    LockIndicator5 = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 5/Screen/Canvas/Indicators/Locked").gameObject;
+                    LockIndicator6 = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance 6/Screen/Canvas/Indicators/Locked").gameObject;
+                    LockIndicator7 = PenthouseRoot.transform.FindObject("Private Rooms Exterior/Room Entrances/Private Room Entrance VIP/Screen (1)/Canvas/Indicators/Locked").gameObject;
 
 
                     LockIndicator1_Listener = RegisterListener(LockIndicator1, () => { LockButton1.SetToggleState(false); }, () => { LockButton1.SetToggleState(true); }, null);
@@ -607,23 +631,9 @@
 
                     // VIP Room
                     VIPRoom = GameObjectFinder.FindRootSceneObject("Bedroom VIP");
-
                     if (VIPRoom == null)
                     {
                         ModConsole.Error("VIP Bedroom was not found!");
-                    }
-                    else
-                    {
-                        VIPInsideDoor = VIPRoom.transform.FindObject("BedroomUdon/Door Inside/Door").gameObject;
-
-                        if (VIPInsideDoor == null)
-                        {
-                            ModConsole.Log("VIP Inside Door not found!");
-                        }
-                        else
-                        {
-                            ModConsole.Log("VIP Inside Door found..");
-                        }
                     }
 
                     CreateVIPUnlockButton(new Vector3(-80.4f, 16.0598f, -1.695f), Quaternion.Euler(0f, 90f, 0f));
@@ -636,6 +646,7 @@
                 ModConsole.Log("Starting Update Loop");
                 _ = MelonCoroutines.Start(RemovePrivacies());
                 _ = MelonCoroutines.Start(BypassElevator());
+                _ = MelonCoroutines.Start(RestoreFlairButton());
                 _ = MelonCoroutines.Start(UpdateLoop());
             }
         }
@@ -645,7 +656,7 @@
             for (int i = 1; i <= 6; i++)
             {
                 RemovePrivacyBlocksOnRooms(i);
-                yield return new WaitForSeconds(0.025f);
+                yield return new WaitForSeconds(0.001f);
             }
 
             ModConsole.Log("Room Privacies Removed..");
@@ -659,11 +670,23 @@
                 if (!isCurrentWorld) yield break;
                 try
                 {
-                    RestoreVIPButton();
+                    RestoreVIPButtons();
                 } catch { }
 
                 yield return new WaitForSeconds(5f);
             }
+        }
+
+        private static IEnumerator RestoreFlairButton()
+        {
+            var flairButton = GameObjectFinder.Find("Lobby/Entrance Corridor/Udon/Spawn Settings/Buttons/Own Flair - BlueButtonWide");
+            if (flairButton != null)
+            {
+                flairButton.SetActive(true);
+                yield break;
+            }
+
+            yield return new WaitForSeconds(0.5f);
         }
 
         private static IEnumerator BypassElevator()
@@ -682,7 +705,7 @@
             yield return new WaitForSeconds(0.5f);
         }
 
-        private static void RestoreVIPButton()
+        private static void RestoreVIPButtons()
         {
                 // Restore VIP button
                 if (VIPButton==null) VIPButton = VIPRoom.transform.Find("BedroomUdon/Door Tablet/BlueButtonWide - Toggle VIP only").gameObject;
@@ -694,18 +717,22 @@
                 {
                     ModConsole.Error("VIP Button not found!");
                 }
+
+                // Restore VIP button
+                var flairButton = GameObjectFinder.Find("Lobby/Entrance Corridor/Udon/Spawn Settings/Buttons/Own Flair - BlueButtonWide");            if (VIPButton != null)
+                if (flairButton != null)
+                {
+                    if (!flairButton.active)
+                    {
+                        flairButton.SetActive(true);
+                        ModConsole.Log("Flair Button Found! Activated!");
+                    }
+                }
+                else
+                {
+                    ModConsole.Error("Flair Button not found!");
+                }
         }
-
-        //private static void EnterVIPRoom()
-        //{
-        //    if (VIPRoom != null)
-        //    {
-        //        VIPRoom.SetActive(true);
-        //    }
-
-        //    Utils.LocalPlayer.gameObject.transform.position = VIPInsideDoor.transform.position + new Vector3(0.5f, 0, 0);
-        //    Utils.LocalPlayer.gameObject.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-        //}
 
         private static void CreateVIPUnlockButton(Vector3 position, Quaternion rotation)
         {

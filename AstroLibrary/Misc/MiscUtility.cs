@@ -2,6 +2,7 @@
 {
     #region Imports
 
+    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using RubyButtonAPI;
     using System;
@@ -133,6 +134,11 @@
 
         public static IEnumerator DestroyDelayed(float seconds, UnityEngine.Object obj)
         {
+            if (obj==null)
+            {
+                ModConsole.Error("DestroyDelayed: obj was null!");
+                yield break;
+            }
             yield return new WaitForSeconds(seconds);
             UnityEngine.Object.Destroy(obj);
             yield break;

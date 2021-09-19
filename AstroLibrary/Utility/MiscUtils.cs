@@ -2,6 +2,7 @@
 
 namespace AstroLibrary.Utility
 {
+    using AstroLibrary.Console;
     using Blaze;
     using MelonLoader;
     using System;
@@ -220,6 +221,11 @@ namespace AstroLibrary.Utility
 
         public static void DelayFunction(float del, Action action)
         {
+            if (action == null)
+            {
+                ModConsole.Error("DelayFunction: action was null");
+                return;
+            }
             MelonCoroutines.Start(Delay(del, action));
         }
 

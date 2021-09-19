@@ -4,6 +4,7 @@
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
+    using System;
     using System.Collections.Generic;
 
     internal class JoinLeaveNotifier : GameEvents
@@ -28,6 +29,7 @@
 
         public override void OnPhotonLeft(Photon.Realtime.Player player)
         {
+            if (player == null) { throw new ArgumentNullException(); }
             ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Left!");
 
             if (ConfigManager.General.JoinLeave && isReady)

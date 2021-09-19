@@ -1093,8 +1093,6 @@
     <EmbeddedResource Include="Figlet\Larry3D.flf" />
     <None Include="app.config" />
     <Compile Include="Components\RigidBodyController\RigidBodyController.cs" />
-    <None Include="libmongocrypt.dylib" />
-    <None Include="libmongocrypt.so" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1116,7 +1114,6 @@
     <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
     <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
-    <Content Include="mongocrypt.dll" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\repair.png" />

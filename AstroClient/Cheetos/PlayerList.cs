@@ -6,6 +6,7 @@
     using AstroLibrary.Utility;
     using MelonLoader;
     using RubyButtonAPI;
+    using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -88,6 +89,7 @@
 
         public override void OnPhotonLeft(Photon.Realtime.Player player)
         {
+            if (player == null) { throw new ArgumentNullException(); }
             //RefreshButtons();
             //RefreshTime = 0f;
         }

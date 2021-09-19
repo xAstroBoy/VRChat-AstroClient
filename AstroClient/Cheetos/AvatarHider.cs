@@ -5,6 +5,7 @@
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
+    using System;
     using UnityEngine;
     using VRC;
 
@@ -21,6 +22,7 @@
 
         public override void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
         {
+            if (VRCAvatarManager == null || Avatar == null) throw new ArgumentNullException();
             if (HideAvatar)
             {
                 var self = Utils.LocalPlayer.GetPlayer();
