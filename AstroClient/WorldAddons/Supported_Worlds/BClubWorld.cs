@@ -656,7 +656,7 @@
             for (int i = 1; i <= 6; i++)
             {
                 RemovePrivacyBlocksOnRooms(i);
-                yield return new WaitForSeconds(0.001f);
+                yield return null;
             }
 
             ModConsole.Log("Room Privacies Removed..");

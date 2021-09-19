@@ -58,7 +58,7 @@
             }
 
             stopwatch.Stop();
-            //Console.WriteLine($"Playerlist Created: {stopwatch.ElapsedMilliseconds}ms");
+            Console.WriteLine($"Playerlist Created: {stopwatch.ElapsedMilliseconds}ms");
         }
 
         public override void OnLateUpdate()
@@ -84,6 +84,7 @@
 
         public override void OnPhotonJoined(Photon.Realtime.Player player)
         {
+            if (player == null) throw new ArgumentNullException();
             //MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
         }
 

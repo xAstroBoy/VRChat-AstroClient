@@ -35,18 +35,16 @@
 
         public override void OnPlayerJoined(Player player)
         {
-            if (player != null)
+            if (player == null) throw new ArgumentNullException();
+            if (player != Utils.LocalPlayer.GetPlayer())
             {
-                if (player != Utils.LocalPlayer.GetPlayer())
+                if (Lewdify)
                 {
-                    if (Lewdify)
-                    {
-                        player.Add_Lewdify();
-                    }
-                    if (MaskDeleter)
-                    {
-                        player.Add_MaskRemover();
-                    }
+                    player.Add_Lewdify();
+                }
+                if (MaskDeleter)
+                {
+                    player.Add_MaskRemover();
                 }
             }
         }

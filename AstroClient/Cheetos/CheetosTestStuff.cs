@@ -121,6 +121,8 @@
 
         public override void OnPlayerJoined(Player player)
         {
+            return;
+            if (player == null) throw new ArgumentNullException();
             if (player.gameObject.GetComponent<CheetoNameplate>() == null) player.gameObject.AddComponent<CheetoNameplate>();
         }
 

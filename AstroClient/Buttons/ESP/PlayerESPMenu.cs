@@ -79,6 +79,7 @@
 
         public override void OnPlayerJoined(Player player)
         {
+            if (player == null) throw new ArgumentNullException();
             if (Toggle_Player_ESP)
             {
                 if (player != null && player != Utils.LocalPlayer.GetPlayer())

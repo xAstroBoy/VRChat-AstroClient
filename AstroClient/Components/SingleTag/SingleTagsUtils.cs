@@ -1,11 +1,16 @@
 ﻿namespace AstroClient.Components
 {
+    #region Imports
+
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using VRC;
+
+    #endregion
 
     internal class SingleTagsUtils : GameEvents
     {
@@ -16,13 +21,11 @@
 
         public override void OnPlayerLeft(Player player)
         {
-            if (player != null)
+            if (player == null) throw new ArgumentNullException();
+            var entry = GetEntry(player);
+            if (entry != null)
             {
-                var entry = GetEntry(player);
-                if (entry != null)
-                {
-                    RemoveCounter(entry);
-                }
+                RemoveCounter(entry);
             }
         }
 
