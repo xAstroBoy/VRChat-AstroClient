@@ -82,18 +82,15 @@
                                 else if (userid == Streamers.Ratchet232)
                                 {
                                     player.AddSingleTag(UnityEngine.Color.red, UnityEngine.Color.white, "Official Psycho And cutie!");
-
                                 }
 
                                 else if (userid == Streamers.Thor_ChanVR)
                                 {
                                     player.AddSingleTag(UnityEngine.Color.yellow, UnityEngine.Color.white, "Official VRChat goddess!");
-
                                 }
                                 else if (userid == Streamers.Pud_Pud)
                                 {
                                     player.AddSingleTag(UnityEngine.Color.cyan, UnityEngine.Color.white, "Sensible Squeaky panda and Cute!");
-
                                 }
 
                             }

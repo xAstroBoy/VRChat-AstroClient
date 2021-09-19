@@ -23,5 +23,6 @@
         public const string Cambly = "usr_0cf19c97-3fd0-4976-bb58-9cf5074887cf";
         public const string AbandonedFun = "usr_e472bbb4-9020-4c17-b6bf-157dbcbebbeb";
         public const string CyberChimp = "usr_23da6d77-61e7-4410-bcf6-321e88088a2c";
+        public const string ZodiacSector5 = "usr_a8755929-cd9b-411a-a25a-92255e9de831";
     }
 }
