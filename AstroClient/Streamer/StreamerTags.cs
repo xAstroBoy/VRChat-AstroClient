@@ -9,7 +9,7 @@
     using System.Text;
     using System.Threading.Tasks;
     using VRC;
-
+    using Color = System.Drawing.Color;
     public class StreamerTags : GameEvents
     {
         public override void OnStreamerJoined(Player player)
@@ -28,30 +28,30 @@
                     switch (userid)
                     {
                         case Streamers.StarNovaKitty:
-                            player.AddSingleTag(new UnityEngine.Color(255, 192, 203), UnityEngine.Color.white, "A Sweet Kitty");
+                            player.AddSingleTag(Color.Pink.ToUnityEngineColor(), UnityEngine.Color.white, "A Sweet Kitty"); ;
                             break;
 
                         case Streamers.Cambly:
-                            player.AddSingleTag(UnityEngine.Color.blue, UnityEngine.Color.white, "A Clumsy Birb");
+                            player.AddSingleTag(Color.PaleTurquoise.ToUnityEngineColor(), UnityEngine.Color.white, "A Clumsy Birb");
                             break;
 
                         case Streamers.Lolathon:
-                            player.AddSingleTag(UnityEngine.Color.red, UnityEngine.Color.white, "Clown & Prankster");
+                            player.AddSingleTag(Color.OrangeRed.ToUnityEngineColor(), UnityEngine.Color.white, "Clown & Prankster");
                             break;
                         case Streamers.PATTIIIIIIII:
-                            player.AddSingleTag(UnityEngine.Color.yellow, UnityEngine.Color.white, "Dont Touch mah Toast!");
+                            player.AddSingleTag(Color.Gold.ToUnityEngineColor(), UnityEngine.Color.white, "Golden Toast Protector!");
                             break;
                         case Streamers.Ratchet232:
-                            player.AddSingleTag(UnityEngine.Color.red, UnityEngine.Color.white, "Official Psycho And cutie!");
+                            player.AddSingleTag(Color.Red.ToUnityEngineColor(), UnityEngine.Color.white, "Official Psycho And cutie!");
                             break;
                         case Streamers.Thor_ChanVR:
-                            player.AddSingleTag(UnityEngine.Color.yellow, UnityEngine.Color.white, "Official VRChat goddess!");
+                            player.AddSingleTag(Color.LightGoldenrodYellow.ToUnityEngineColor(), UnityEngine.Color.white, "Official VRChat goddess!");
                             break;
                         case Streamers.Pud_Pud:
-                            player.AddSingleTag(UnityEngine.Color.cyan, UnityEngine.Color.white, "Sensible Squeaky panda and Cute!");
+                            player.AddSingleTag(Color.ForestGreen.ToUnityEngineColor(), UnityEngine.Color.white, "Sensible Squeaky panda and Cute!");
                             break;
                         case Streamers.Nifty:
-                            player.AddSingleTag(UnityEngine.Color.green, UnityEngine.Color.white, "The Legendary FryPan Bonker! (Give Her Hugs tho)");
+                            player.AddSingleTag(Color.Lavender.ToUnityEngineColor(), UnityEngine.Color.white, "The Legendary Pan Bonker! (Give Her Hugs tho)");
                             break;
 
                         default:

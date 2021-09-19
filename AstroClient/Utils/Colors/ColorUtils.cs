@@ -1,12 +1,14 @@
 ﻿namespace AstroClient
 {
     using System.Collections.Generic;
+    using System.Drawing;
     using System.Globalization;
+    using System.Web.Mvc;
     using UnityEngine;
 
     public class ColorUtils : GameEvents
     {
-        public static Color HexToColor(string hexColor)
+        public static UnityEngine.Color HexToColor(string hexColor)
         {
             if (hexColor.IndexOf('#') != -1)
             {
@@ -16,12 +18,24 @@
             float r = int.Parse(hexColor.Substring(0, 2), NumberStyles.AllowHexSpecifier) / 255f;
             float g = int.Parse(hexColor.Substring(2, 2), NumberStyles.AllowHexSpecifier) / 255f;
             float b = int.Parse(hexColor.Substring(4, 2), NumberStyles.AllowHexSpecifier) / 255f;
-            return new Color(r, g, b);
+            return new UnityEngine.Color(r, g, b);
         }
 
-        public static Color GenerateHSVColor()
+
+        public static string ColorToHex(System.Drawing.Color color)
         {
-            var color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+            return ColorTranslator.ToHtml(System.Drawing.Color.FromArgb(color.ToArgb()));
+        }
+
+        public static UnityEngine.Color ToUnityEngineColor(System.Drawing.Color color)
+        {
+            return HexToColor(ColorToHex(color));
+        }
+
+
+        public static UnityEngine.Color GenerateHSVColor()
+        {
+           UnityEngine.Color color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
             if (GeneratedColors != null)
             {
                 if (GeneratedColors.Contains(color))
@@ -41,6 +55,6 @@
             GeneratedColors.Clear();
         }
 
-        private static List<Color> GeneratedColors = new List<Color>();
+        private static List<UnityEngine.Color> GeneratedColors = new List<UnityEngine.Color>();
     }
 }

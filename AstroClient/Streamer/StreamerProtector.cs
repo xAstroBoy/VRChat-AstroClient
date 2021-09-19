@@ -54,14 +54,6 @@
                         if (!StreamersInInstance.Contains(player))
                         {
                             StreamersInInstance.Add(player);
-                            if (Bools.IsDeveloper)
-                            {
-                                CheetosHelpers.SendHudNotification($"Streamer : {apiuser.displayName} Joined!");
-                                ModConsole.Warning($"Streamer : {apiuser.displayName} Joined!");
-
-
-
-                            }
                         }
                     }
                 }
@@ -83,18 +75,13 @@
                         if (StreamersInInstance.Contains(player))
                         {
                             StreamersInInstance.Remove(player);
-                            if (Bools.IsDeveloper)
-                            {
-                                CheetosHelpers.SendHudNotification($"Streamer : {apiuser.displayName} Left!");
-                                ModConsole.Warning($"Streamer : {apiuser.displayName} Left!");
-                            }
                         }
                     }
                 }
             }
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        public override void OnRoomLeft()
         {
             StreamersInInstance.Clear();
         }

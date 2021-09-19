@@ -360,5 +360,10 @@
                 GetChildren(transform.GetChild(i));
             }
         }
+
+        public static UnityEngine.Color ToUnityEngineColor(this System.Drawing.Color Color)
+        {
+            return ColorUtils.ToUnityEngineColor(Color);
+        }
     }
 }
