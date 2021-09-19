@@ -92,6 +92,11 @@
             }
         }
 
+        public override void OnRoomLeft()
+        {
+            initialized = false;
+        }
+
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             var self = PlayerUtils.GetVRCPlayer();
