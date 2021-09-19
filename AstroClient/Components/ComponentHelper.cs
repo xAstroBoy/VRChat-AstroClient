@@ -42,7 +42,6 @@
         {
             RegisterComponent<GameEventsBehaviour>();
             RegisterComponent<JarControllerEvents>();
-            RegisterComponent<MainThreadRunner>();
 
             var classes = Assembly.GetExecutingAssembly().GetTypes();
 
@@ -77,7 +76,6 @@
 
         public override void OnUpdate()
         {
-            MainThreadRunner.MakeInstance();
             RocketManager.MakeInstance();
             CrazyObjectManager.MakeInstance();
             ObjectSpinnerManager.MakeInstance();
