@@ -1,9 +1,9 @@
 ﻿namespace AstroClient.Variables
 {
+    // Yes, the mod supports these worlds : = )
+
     public struct WorldIds
     {
-        // Yes, the mod supports these worlds : = )
-
         public const string Murder2 = "wrld_ccbf8103-c23e-472f-8efb-38a9a9164357";
         public const string Murder4 = "wrld_858dfdfc-1b48-4e1e-8a43-f0edc611e5fe";
         public const string AmongUS = "wrld_dd036610-a246-4f52-bf01-9d7cea3405d7";
