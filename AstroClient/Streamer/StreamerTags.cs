@@ -54,7 +54,7 @@
                             player.AddSingleTag(Color.CornflowerBlue, UnityEngine.Color.white, "Cute Bunny!");
                             break;
                         case Streamers.Nifty:
-                            player.AddSingleTag(Color.Lavender, UnityEngine.Color.white, "The Legendary Pan Bonker! (Give Her Hugs tho)");
+                            player.AddSingleTag(Color.MediumPurple, UnityEngine.Color.white, "The Legendary Pan Bonker! (Give Her Hugs tho)");
                             break;
 
                         default:
