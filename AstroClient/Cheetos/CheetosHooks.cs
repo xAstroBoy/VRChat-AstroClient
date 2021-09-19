@@ -29,24 +29,20 @@
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class CheetosHooks : GameEvents
     {
-        public static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonJoin;
-        public static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonLeft;
-
-        public static EventHandler<PhotonPlayerEventArgs> Event_OnMasterClientSwitched;
-
-        public static EventHandler<EventArgs> Event_OnRoomLeft;
-        public static EventHandler<EventArgs> Event_OnRoomJoined;
-
-        public static EventHandler<EventArgs> Event_OnFriended;
-        public static EventHandler<EventArgs> Event_OnUnfriended;
-
-        public static EventHandler<EventArgs> Event_OnAvatarPageOpen;
-        public static EventHandler<EventArgs> Event_OnQuickMenuOpen;
-        public static EventHandler<EventArgs> Event_OnQuickMenuClose;
+        public static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonJoin { get; set; }
+        public static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonLeft { get; set; }
+        public static EventHandler<PhotonPlayerEventArgs> Event_OnMasterClientSwitched { get; set; }
+        public static EventHandler<EventArgs> Event_OnRoomLeft { get; set; }
+        public static EventHandler<EventArgs> Event_OnRoomJoined { get; set; }
+        public static EventHandler<EventArgs> Event_OnFriended { get; set; }
+        public static EventHandler<EventArgs> Event_OnUnfriended { get; set; }
+        public static EventHandler<EventArgs> Event_OnAvatarPageOpen { get; set; }
+        public static EventHandler<EventArgs> Event_OnQuickMenuOpen { get; set; }
+        public static EventHandler<EventArgs> Event_OnQuickMenuClose { get; set; }
 
         public class Patch
         {
-            public static List<Patch> Patches = new List<Patch>();
+            public static List<Patch> Patches { get; set; } = new List<Patch>();
             public MethodInfo TargetMethod { get; set; }
             public HarmonyMethod PrefixMethod { get; set; }
             public HarmonyMethod PostfixMethod { get; set; }
@@ -105,7 +101,7 @@
                 ModConsole.DebugLog($"[Patches] Done! UnPatched {Patches.Count} Methods!");
             }
         }
-        
+
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
         {
@@ -156,14 +152,11 @@
                 ModConsole.Log($"[Cheetos Patches] Done patching {Patch.Patches.Count} methods!");
                 Patch.DoPatches();
             }
-            catch (Exception e) { ModConsole.Error("[Cheetos Patches] Error in applying patches : " + e); }
+            catch (Exception e) { ModConsole.Error($"[Cheetos Patches] Error in applying patches : {e}"); }
             finally { }
         }
 
-        private static bool NameplatePatch(PlayerNameplate __instance)
-        {
-            return false;
-        }
+        private static bool NameplatePatch(PlayerNameplate __instance) => false;
 
         private static void MousePatch(ref bool __0)
         {
@@ -173,53 +166,32 @@
             }
         }
 
-        private static void OnMasterClientSwitchedPatch(Photon.Realtime.Player __0)
-        {
-            Event_OnMasterClientSwitched?.SafetyRaise(new PhotonPlayerEventArgs(__0));
-        }
+        private static void OnMasterClientSwitchedPatch(Photon.Realtime.Player __0) => Event_OnMasterClientSwitched?.SafetyRaise(new PhotonPlayerEventArgs(__0));
 
-        private static void OnFriended(ref APIUser __0)
-        {
-            Event_OnFriended?.SafetyRaise(new EventArgs());
-        }
+        private static void OnFriended(ref APIUser __0) => Event_OnFriended?.SafetyRaise(new EventArgs());
 
-        private static void OnUnfriended(ref string __0, ref Il2CppSystem.Action __1, ref Il2CppSystem.Action __2)
-        {
-            Event_OnUnfriended?.SafetyRaise(new EventArgs());
-        }
+        private static void OnUnfriended(ref string __0, ref Il2CppSystem.Action __1, ref Il2CppSystem.Action __2) => Event_OnUnfriended?.SafetyRaise(new EventArgs());
 
-        private static void OnLobbyLeftPatch()
-        {
-            ModConsole.Log("Lobby Left.");
-        }
+        private static void OnLobbyLeftPatch() => ModConsole.Log("Lobby Left.");
 
-        private static void OnLobbyJoinedPatch()
-        {
-            ModConsole.Log("Lobby Joined.");
-        }
+        private static void OnLobbyJoinedPatch() => ModConsole.Log("Lobby Joined.");
 
-        private static void OnRoomLeftPatch()
-        {
-            Event_OnRoomLeft?.SafetyRaise(new EventArgs());
-        }
+        private static void OnRoomLeftPatch() => Event_OnRoomLeft?.SafetyRaise(new EventArgs());
 
-        private static void OnRoomJoinedPatch()
-        {
-            Event_OnRoomJoined?.SafetyRaise(new EventArgs());
-        }
+        private static void OnRoomJoinedPatch() => Event_OnRoomJoined?.SafetyRaise(new EventArgs());
 
         private static bool LoadBalancingClient_OpWebRpc(LoadBalancingClient __instance, ref string __0, ref object __1, ref bool __2)
         {
-            string text = "LoadBalancingClient_OpWebRpc: " + __0 + ", ";
+            string text = $"LoadBalancingClient_OpWebRpc: {__0}, ";
             if (__1 != null)
             {
                 string str = text;
                 object obj = __1;
-                ModConsole.Log(str + (obj?.ToString()) + ", " + __2.ToString());
+                ModConsole.Log($"{str}{obj?.ToString()}, {__2.ToString()}");
             }
             else
             {
-                ModConsole.Log(text + "null, " + __2.ToString());
+                ModConsole.Log($"{text}null, {__2.ToString()}");
             }
             return true;
         }
@@ -278,12 +250,9 @@
         {
             try
             {
-                if (AstroClient.ConfigManager.General.SpoofQuest)
+                if (AstroClient.ConfigManager.General.SpoofQuest && !WorldUtils.IsInWorld)
                 {
-                    if (!WorldUtils.IsInWorld)
-                    {
-                        __result = "android";
-                    }
+                    __result = "android";
                 }
             }
             catch (Exception e)
