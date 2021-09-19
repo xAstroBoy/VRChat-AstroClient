@@ -64,22 +64,10 @@
                             {
                                 CheetosHelpers.SendHudNotification($"Streamer : {apiuser.displayName} Joined!");
                                 ModConsole.Warning($"Streamer : {apiuser.displayName} Joined!");
-                                var tag = player.AddSingleTag();
-                                if (tag != null)
-                                {
-                                    tag.Tag_Color = UnityEngine.Color.yellow;
-                                    tag.Label_TextColor = UnityEngine.Color.white;
-                                    tag.Label_Text = "Streamer";
-                                }
+                                player.AddSingleTag(UnityEngine.Color.yellow, UnityEngine.Color.white, "Streamer");
                                 if (userid == "usr_c22cc758-27ce-40e6-94c9-a4e290b55de5")
                                 {
-                                    var KittyTag = player.AddSingleTag();
-                                    if (KittyTag != null)
-                                    {
-                                        KittyTag.Tag_Color = new UnityEngine.Color(255, 192, 203);
-                                        KittyTag.Label_TextColor = UnityEngine.Color.white;
-                                        KittyTag.Label_Text = "A Sweet Kitty";
-                                    }
+                                    player.AddSingleTag(new UnityEngine.Color(255, 192, 203), UnityEngine.Color.white, "A Sweet Kitty");
                                 }
                             }
                         }
