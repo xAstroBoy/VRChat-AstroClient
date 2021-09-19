@@ -76,15 +76,17 @@
                                 Debug("Added HighlightsFXStandalone in SelectRegion For Custom Color Option for ESP!");
                             }
                         }
-                        foreach (var ObjRenderer in ObjRenderers)
+                        for (int i = 0; i < ObjRenderers.Count; i++)
                         {
+                            Renderer ObjRenderer = ObjRenderers[i];
                             if (ObjRenderer != null)
                             {
                                 HighLightOptions.SetHighLighter(ObjRenderer, true);
                             }
                         }
-                        foreach (var ObjMeshRenderer in ObjMeshRenderers)
+                        for (int i = 0; i < ObjMeshRenderers.Count; i++)
                         {
+                            MeshRenderer ObjMeshRenderer = ObjMeshRenderers[i];
                             if (ObjMeshRenderer != null)
                             {
                                 HighLightOptions.SetHighLighter(ObjMeshRenderer, true);
@@ -96,18 +98,6 @@
                 //RoutineCancellationToken = MelonCoroutines.Start(StartUpdater());
             }
         }
-
-        //private IEnumerator StartUpdater()
-        //{
-        //    while (true)
-        //    {
-        //        if (!UseCustomColor)
-        //        {
-        //            SetPlayerDefaultESP();
-        //        }
-        //        yield return new WaitForSeconds(5000);
-        //    }
-        //}
 
         private Color BlockedColor
         {
@@ -185,15 +175,17 @@
         {
             if (HighLightOptions != null)
             {
-                foreach (var ObjRenderer in ObjRenderers)
+                for (int i = 0; i < ObjRenderers.Count; i++)
                 {
+                    Renderer ObjRenderer = ObjRenderers[i];
                     if (ObjRenderer != null)
                     {
                         HighLightOptions.SetHighLighter(ObjRenderer, true);
                     }
                 }
-                foreach (var ObjMeshRenderer in ObjMeshRenderers)
+                for (int i = 0; i < ObjMeshRenderers.Count; i++)
                 {
+                    MeshRenderer ObjMeshRenderer = ObjMeshRenderers[i];
                     if (ObjMeshRenderer != null)
                     {
                         HighLightOptions.SetHighLighter(ObjMeshRenderer, true);
@@ -226,33 +218,27 @@
 
         private void SetPlayerDefaultESP()
         {
-            if (HighLightOptions != null)
+            if (HighLightOptions != null && AssignedPlayer != null && AssignedPlayer.GetAPIUser() != null)
             {
-                if (AssignedPlayer != null)
+                if (PhotonOnEventHook.BlockedYouPlayers.Contains(AssignedPlayer))
                 {
-                    if (AssignedPlayer.GetAPIUser() != null)
+                    if (HighLightOptions.highlightColor != BlockedColor)
                     {
-                        if (PhotonOnEventHook.BlockedYouPlayers.Contains(AssignedPlayer))
-                        {
-                            if (HighLightOptions.highlightColor != BlockedColor)
-                            {
-                                HighLightOptions.highlightColor = BlockedColor;
-                            }
-                        }
-                        else if (AssignedPlayer.GetAPIUser().GetIsFriend())
-                        {
-                            if (HighLightOptions.highlightColor != FriendColor)
-                            {
-                                HighLightOptions.highlightColor = FriendColor;
-                            }
-                        }
-                        else
-                        {
-                            if (HighLightOptions.highlightColor != ESPColor)
-                            {
-                                HighLightOptions.highlightColor = ESPColor;
-                            }
-                        }
+                        HighLightOptions.highlightColor = BlockedColor;
+                    }
+                }
+                else if (AssignedPlayer.GetAPIUser().GetIsFriend())
+                {
+                    if (HighLightOptions.highlightColor != FriendColor)
+                    {
+                        HighLightOptions.highlightColor = FriendColor;
+                    }
+                }
+                else
+                {
+                    if (HighLightOptions.highlightColor != ESPColor)
+                    {
+                        HighLightOptions.highlightColor = ESPColor;
                     }
                 }
             }

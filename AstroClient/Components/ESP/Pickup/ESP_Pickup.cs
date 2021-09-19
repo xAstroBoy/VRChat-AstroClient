@@ -41,8 +41,9 @@
                 return;
             }
             SetupHighlighter();
-            foreach (var obj in ObjMeshRenderers)
+            for (int i = 0; i < ObjMeshRenderers.Count; i++)
             {
+                MeshRenderer obj = ObjMeshRenderers[i];
                 if (obj != null && obj.gameObject.active)
                 {
                     HighLightOptions.AddRenderer(obj);
@@ -63,8 +64,9 @@
             if (HighLightOptions != null)
             {
                 HighLightOptions.SetHighLighterColor(ESPColor);
-                foreach (var obj in ObjMeshRenderers)
+                for (int i = 0; i < ObjMeshRenderers.Count; i++)
                 {
+                    MeshRenderer obj = ObjMeshRenderers[i];
                     if (obj != null && obj.gameObject.active)
                     {
                         HighLightOptions.AddRenderer(obj);

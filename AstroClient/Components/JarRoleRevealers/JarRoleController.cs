@@ -61,11 +61,13 @@
         {
             get
             {
-                if (_CurrentPlayerRoleESP == null)
+                switch (_CurrentPlayerRoleESP)
                 {
-                    return _CurrentPlayerRoleESP = Utils.LocalPlayer.GetPlayer().gameObject.GetComponent<JarRoleESP>();
+                    case null:
+                        return _CurrentPlayerRoleESP = Utils.LocalPlayer.GetPlayer().gameObject.GetComponent<JarRoleESP>();
+                    default:
+                        return _CurrentPlayerRoleESP;
                 }
-                return _CurrentPlayerRoleESP;
             }
         }
 
@@ -76,15 +78,9 @@
 
         public static List<JarRoleESP> RoleEspComponents { get; private set; } = new List<JarRoleESP>();
 
-        public static LinkedNodes GetLinkedNode(int value)
-        {
-            return JarRoleLinks.Where(x => x.Nodevalue == value).DefaultIfEmpty(null).First();
-        }
+        public static LinkedNodes GetLinkedNode(int value) => JarRoleLinks.Where(x => x.Nodevalue == value).DefaultIfEmpty(null).First();
 
-        public static JarRoleESP GetLinkedComponent(int value)
-        {
-            return RoleEspComponents.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
-        }
+        public static JarRoleESP GetLinkedComponent(int value) => RoleEspComponents.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
 
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
@@ -106,18 +102,12 @@
                 {
                     if (IsMurder4World || IsAmongUsWorld)
                     {
-                        if (player != null)
+                        if (player != null && player.gameObject.GetComponent<JarRoleESP>() == null)
                         {
-                            if (player.gameObject.GetComponent<JarRoleESP>() == null)
+                            var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
+                            if (RoleRevealer != null && !RoleEspComponents.Contains(RoleRevealer))
                             {
-                                var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
-                                if (RoleRevealer != null)
-                                {
-                                    if (!RoleEspComponents.Contains(RoleRevealer))
-                                    {
-                                        RoleEspComponents.Add(RoleRevealer);
-                                    }
-                                }
+                                RoleEspComponents.Add(RoleRevealer);
                             }
                         }
                     }
@@ -223,8 +213,9 @@
 
                 if (PlayerEntries != null)
                 {
-                    foreach (var Entry in EntryChilds)
+                    for (int i1 = 0; i1 < EntryChilds.Count; i1++)
                     {
+                        Transform Entry = EntryChilds[i1];
                         if (Entry != null)
                         {
                             if (Entry.gameObject == PlayerEntries) // CRITICAL AS THE GETCOMPONENTSINCHILDREN INCLUDE THE PARENT APPARENTLY AS WELL
@@ -237,8 +228,9 @@
                                 int? EntryNumber = RemoveEntryText(Entry);
                                 if (EntryNumber != null)
                                 {
-                                    foreach (var node in NodeChilds)
+                                    for (int i = 0; i < NodeChilds.Count; i++)
                                     {
+                                        Transform node = NodeChilds[i];
                                         if (node != null)
                                         {
                                             //if(node.name.Equals("Player Nodes"))

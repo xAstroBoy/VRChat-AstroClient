@@ -12,19 +12,9 @@
             PlayerESPMenu.Event_OnPlayerESPPropertyChanged += Internal_OnPlayerESPPropertyChanged;
         }
 
-        private void Internal_OnViewRolesPropertyChanged(object sender, BoolEventsArgs e)
-        {
-            OnViewRolesPropertyChanged(e.value);
-        }
+        private void Internal_OnViewRolesPropertyChanged(object sender, BoolEventsArgs e) => OnViewRolesPropertyChanged(e.value);
 
-        private void Internal_OnPlayerESPPropertyChanged(object sender, BoolEventsArgs e)
-        {
-            OnPlayerESPPropertyChanged(e.value);
-        }
-
-        public virtual void OnViewRolesPropertyChanged(bool value)
-        {
-        }
+        private void Internal_OnPlayerESPPropertyChanged(object sender, BoolEventsArgs e) => OnPlayerESPPropertyChanged(e.value);
 
         public virtual void OnPlayerESPPropertyChanged(bool value)
         {

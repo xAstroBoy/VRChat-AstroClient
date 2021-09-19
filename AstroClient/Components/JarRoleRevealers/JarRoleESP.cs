@@ -32,12 +32,9 @@
                 Destroy(this);
             }
             IsRPCActive = false;
-            if (ESP == null)
+            if (ESP == null && !IsSelf)
             {
-                if (!IsSelf)
-                {
-                    ESP = Player.gameObject.GetComponent<PlayerESP>();
-                }
+                ESP = Player.gameObject.GetComponent<PlayerESP>();
             }
             GameRoleTag = SingleTagsUtils.AddSingleTag(Player);
             if (IsAmongUsWorld)
@@ -90,72 +87,69 @@
                 {
                     if (IsAmongUsWorld)
                     {
-                        if (LinkedNode != null && LinkedNode.Node != null)
+                        if (LinkedNode != null && LinkedNode.Node != null && obj.Equals(LinkedNode.Node.gameObject))
                         {
-                            if (obj.Equals(LinkedNode.Node.gameObject))
+                            if (action == "SyncAssignB")
                             {
-                                if (action == "SyncAssignB")
+                                AmongUsCurrentRole = AmongUsRoles.Crewmate;
+                                if (!IsRPCActive)
                                 {
-                                    AmongUsCurrentRole = AmongUsRoles.Crewmate;
-                                    if (!IsRPCActive)
+                                    IsRPCActive = true;
+                                }
+                            }
+                            else if (action == "SyncAssignM")
+                            {
+                                AmongUsCurrentRole = AmongUsRoles.Impostor;
+                                if (!IsRPCActive)
+                                {
+                                    IsRPCActive = true;
+                                }
+                            }
+                            else if (action == "SyncKill")
+                            {
+                                AmongUsCurrentRole = AmongUsRoles.None;
+                                AmongUSHasVoted = false;
+                                if (!IsRPCActive)
+                                {
+                                    IsRPCActive = true;
+                                }
+                            }
+                            else if (action == "SyncVotedOut")
+                            {
+                                AmongUsCurrentRole = AmongUsRoles.None;
+                                AmongUSHasVoted = false;
+                                if (!IsRPCActive)
+                                {
+                                    IsRPCActive = true;
+                                }
+                            }
+                            else if (action.Contains("SyncVotedFor"))
+                            {
+                                var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
+                                if (against != null)
+                                {
+                                    if (against != CurrentPlayerRoleESP)
                                     {
-                                        IsRPCActive = true;
+                                        SetTag(AmongUSVoteRevealTag, $"Voted: {against.Player.DisplayName()}", Color.white, ColorUtils.HexToColor("#44DBAC"));
+                                    }
+                                    else
+                                    {
+                                        SetTag(AmongUSVoteRevealTag, $"Voted: {against.Player.DisplayName()}", Color.white, ColorUtils.HexToColor("#C22B26"));
                                     }
                                 }
-                                else if (action == "SyncAssignM")
+                                AmongUSHasVoted = true;
+                                if (!IsRPCActive)
                                 {
-                                    AmongUsCurrentRole = AmongUsRoles.Impostor;
-                                    if (!IsRPCActive)
-                                    {
-                                        IsRPCActive = true;
-                                    }
+                                    IsRPCActive = true;
                                 }
-                                else if (action == "SyncKill")
+                            }
+                            else if (action.Equals("SyncAbstainedVoting"))
+                            {
+                                AmongUSHasVoted = true;
+                                _ = SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
+                                if (!IsRPCActive)
                                 {
-                                    AmongUsCurrentRole = AmongUsRoles.None;
-                                    AmongUSHasVoted = false;
-                                    if (!IsRPCActive)
-                                    {
-                                        IsRPCActive = true;
-                                    }
-                                }
-                                else if (action == "SyncVotedOut")
-                                {
-                                    AmongUsCurrentRole = AmongUsRoles.None;
-                                    AmongUSHasVoted = false;
-                                    if (!IsRPCActive)
-                                    {
-                                        IsRPCActive = true;
-                                    }
-                                }
-                                else if (action.Contains("SyncVotedFor"))
-                                {
-                                    var against = TranslateSyncVotedFor(RemoveSyncVotedForText(action));
-                                    if (against != null)
-                                    {
-                                        if (against != CurrentPlayerRoleESP)
-                                        {
-                                            SetTag(AmongUSVoteRevealTag, $"Voted: {against.Player.DisplayName()}", Color.white, ColorUtils.HexToColor("#44DBAC"));
-                                        }
-                                        else
-                                        {
-                                            SetTag(AmongUSVoteRevealTag, $"Voted: {against.Player.DisplayName()}", Color.white, ColorUtils.HexToColor("#C22B26"));
-                                        }
-                                    }
-                                    AmongUSHasVoted = true;
-                                    if (!IsRPCActive)
-                                    {
-                                        IsRPCActive = true;
-                                    }
-                                }
-                                else if (action.Equals("SyncAbstainedVoting"))
-                                {
-                                    AmongUSHasVoted = true;
-                                    _ = SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
-                                    if (!IsRPCActive)
-                                    {
-                                        IsRPCActive = true;
-                                    }
+                                    IsRPCActive = true;
                                 }
                             }
                         }
@@ -241,13 +235,10 @@
                 {
                     var Internal_User_VRCPlayerAPI = Player.GetVRCPlayerApi();
                     var InternalNodeAssignedPlayer = item.NodeReader.VRCPlayerAPI;
-                    if (Internal_User_VRCPlayerAPI != null && InternalNodeAssignedPlayer != null)
+                    if (Internal_User_VRCPlayerAPI != null && InternalNodeAssignedPlayer != null && Internal_User_VRCPlayerAPI.Equals(InternalNodeAssignedPlayer))
                     {
-                        if (Internal_User_VRCPlayerAPI.Equals(InternalNodeAssignedPlayer))
-                        {
-                            ModConsole.DebugLog($"Found Assigned Linked Node in Player {InternalNodeAssignedPlayer.displayName}");
-                            return item;
-                        }
+                        ModConsole.DebugLog($"Found Assigned Linked Node in Player {InternalNodeAssignedPlayer.displayName}");
+                        return item;
                     }
                 }
             }
@@ -256,48 +247,38 @@
 
         public Color? Murder4GetNamePlateColor()
         {
-            if (Murder4CurrentRole == Murder4Roles.Detective)
+            switch (Murder4CurrentRole)
             {
-                return DetectiveColor;
+                case Murder4Roles.Detective:
+                    return DetectiveColor;
+                case Murder4Roles.Murderer:
+                    return MurderColor;
+                case Murder4Roles.Bystander:
+                    return BystanderColor;
+                case Murder4Roles.Unassigned:
+                    return null;
+                case Murder4Roles.None:
+                    return null;
+                default:
+                    return null;
             }
-            if (Murder4CurrentRole == Murder4Roles.Murderer)
-            {
-                return MurderColor;
-            }
-            if (Murder4CurrentRole == Murder4Roles.Bystander)
-            {
-                return BystanderColor;
-            }
-            if (Murder4CurrentRole == Murder4Roles.Unassigned)
-            {
-                return null;
-            }
-            if (Murder4CurrentRole == Murder4Roles.None)
-            {
-                return null;
-            }
-            return null;
         }
 
         public Color? AmongUsGetNamePlateColor()
         {
-            if (AmongUsCurrentRole == AmongUsRoles.Crewmate)
+            switch (AmongUsCurrentRole)
             {
-                return CrewmateColor;
+                case AmongUsRoles.Crewmate:
+                    return CrewmateColor;
+                case AmongUsRoles.Impostor:
+                    return ImpostorColor;
+                case AmongUsRoles.Unassigned:
+                    return null;
+                case AmongUsRoles.None:
+                    return null;
+                default:
+                    return null;
             }
-            if (AmongUsCurrentRole == AmongUsRoles.Impostor)
-            {
-                return ImpostorColor;
-            }
-            if (AmongUsCurrentRole == AmongUsRoles.Unassigned)
-            {
-                return null;
-            }
-            if (AmongUsCurrentRole == AmongUsRoles.None)
-            {
-                return null;
-            }
-            return null;
         }
 
         private SingleTag SetTag(SingleTag tag, string text, Color TextColor, Color TagColor)
@@ -345,15 +326,9 @@
 
         private void SetEspColorIfExists(Color color)
         {
-            if (Player != null)
+            if (Player != null && ESP != null && ESP.UseCustomColor)
             {
-                if (ESP != null)
-                {
-                    if (ESP.UseCustomColor)
-                    {
-                        ESP.ChangeColor(color);
-                    }
-                }
+                ESP.ChangeColor(color);
             }
         }
 

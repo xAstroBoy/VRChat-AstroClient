@@ -133,7 +133,7 @@
                     xPos -= 1f;
                 }
 
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.001f);
             }
             refreshMutex.ReleaseMutex();
             yield break;
@@ -148,7 +148,7 @@
             playerButton.SetResizeTextForBestFit(true);
 
             playerButton.SetActive(ConfigManager.UI.ShowPlayersList);
-            if (ConfigManager.UI.ShowPlayersMenu != true)
+            if (!ConfigManager.UI.ShowPlayersMenu)
             {
                 playerButton.SetActive(false);
             }
@@ -160,8 +160,9 @@
 
         private void ResetButtons()
         {
-            foreach (var button in PlayerButtons)
+            for (int i = 0; i < PlayerButtons.Count; i++)
             {
+                QMSingleButton button = PlayerButtons[i];
                 button.DestroyMe();
             }
             PlayerButtons.Clear();
@@ -184,8 +185,9 @@
                 playersButton.SetTextColor(Color.red);
             }
 
-            foreach (var button in PlayerButtons)
+            for (int i = 0; i < PlayerButtons.Count; i++)
             {
+                QMSingleButton button = PlayerButtons[i];
                 button.SetActive(ConfigManager.UI.ShowPlayersList);
             }
         }
@@ -198,8 +200,9 @@
             refreshButton.SetActive(true);
             playersButton.SetActive(true);
 
-            foreach (var button in PlayerButtons)
+            for (int i = 0; i < PlayerButtons.Count; i++)
             {
+                QMSingleButton button = PlayerButtons[i];
                 button.SetActive(true);
             }
         }
@@ -212,8 +215,9 @@
             refreshButton.SetActive(false);
             playersButton.SetActive(false);
 
-            foreach (var button in PlayerButtons)
+            for (int i = 0; i < PlayerButtons.Count; i++)
             {
+                QMSingleButton button = PlayerButtons[i];
                 button.SetActive(false);
             }
         }

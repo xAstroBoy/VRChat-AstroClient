@@ -41,17 +41,18 @@
                 return;
             }
             SetupHighlighter();
-            foreach (var obj in ObjMeshRenderers)
-            {
-                if (obj != null && obj.gameObject.active)
-                {
-                    HighLightOptions.AddRenderer(obj);
-                }
-                else
-                {
-                    HighLightOptions.RemoveRenderer(obj);
-                }
-            }
+            for (int i = 0; i < ObjMeshRenderers.Count; i++)
+			{
+				MeshRenderer obj = ObjMeshRenderers[i];
+				if (obj != null && obj.gameObject.active)
+				{
+					HighLightOptions.AddRenderer(obj);
+				}
+				else
+				{
+					HighLightOptions.RemoveRenderer(obj);
+				}
+			}
         }
 
         private void SetupHighlighter()
@@ -63,17 +64,18 @@
             if (HighLightOptions != null)
             {
                 HighLightOptions.SetHighLighterColor(ESPColor);
-                foreach (var obj in ObjMeshRenderers)
-                {
-                    if (obj != null && obj.gameObject.active)
-                    {
-                        HighLightOptions.AddRenderer(obj);
-                    }
-                    else
-                    {
-                        HighLightOptions.RemoveRenderer(obj);
-                    }
-                }
+                for (int i = 0; i < ObjMeshRenderers.Count; i++)
+				{
+					MeshRenderer obj = ObjMeshRenderers[i];
+					if (obj != null && obj.gameObject.active)
+					{
+						HighLightOptions.AddRenderer(obj);
+					}
+					else
+					{
+						HighLightOptions.RemoveRenderer(obj);
+					}
+				}
             }
         }
 
@@ -85,10 +87,7 @@
         internal void ResetColor()
         {
             ESPColor = GetDefaultColor();
-            if (HighLightOptions != null)
-            {
-                HighLightOptions.SetHighLighterColor(GetDefaultColor());
-            }
+            HighLightOptions?.SetHighLighterColor(GetDefaultColor());
         }
 
         public void OnDestroy()
@@ -109,20 +108,14 @@
         internal void ChangeColor(Color newcolor)
         {
             ESPColor = newcolor;
-            if (HighLightOptions != null)
-            {
-                HighLightOptions.SetHighLighterColor(newcolor);
-            }
+            HighLightOptions?.SetHighLighterColor(newcolor);
         }
 
         internal void ChangeColor(string HexColor)
         {
             Color hextocolor = ColorUtils.HexToColor(HexColor);
             ESPColor = hextocolor;
-            if (HighLightOptions != null)
-            {
-                HighLightOptions.SetHighLighterColor(hextocolor);
-            }
+            HighLightOptions?.SetHighLighterColor(hextocolor);
         }
 
         internal Color GetCurrentESPColor

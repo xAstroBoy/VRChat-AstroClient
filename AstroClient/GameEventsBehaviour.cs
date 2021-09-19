@@ -298,5 +298,9 @@
         {
         }
 
+        public virtual void OnViewRolesPropertyChanged(bool value)
+        {
+        }
+
     }
 }

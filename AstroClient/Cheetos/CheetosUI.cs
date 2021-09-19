@@ -62,8 +62,9 @@
             var position = Utils.LocalPlayer.gameObject.transform.position;
             var rotation = Utils.LocalPlayer.gameObject.transform.rotation;
 
-            foreach (var player in WorldUtils.Players)
+            for (int i = 0; i < WorldUtils.Players.Count; i++)
             {
+                VRC.Player player = WorldUtils.Players[i];
                 player.TeleportRPCExploit(position, rotation);
             }
         }
@@ -84,30 +85,27 @@
 
         private IEnumerator FriendEveryone()
         {
-            var players = WorldUtils.Players;
-
-            int count = 0;
-            foreach (var player in players)
+            for (int i = 0; i < WorldUtils.Players.Count; i++)
             {
+                VRC.Player player = WorldUtils.Players[i];
                 if (!player.GetAPIUser().GetIsFriend() && !player.UserID().Equals(Utils.LocalPlayer.GetPlayer().UserID()))
                 {
                     try
                     {
-                        MiscUtils.DelayFunction(0.1f * count, () =>
-                        {
-                            Notification xx = FriendRequest.Create(player.UserID());
-                            VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
-                            CheetosHelpers.SendHudNotification($"Friend Request Sent: {player.DisplayName()}");
-                        });
-                        count++;
+                        Notification xx = FriendRequest.Create(player.UserID());
+                        VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
+                        CheetosHelpers.SendHudNotification($"Friend Request Sent: {player.DisplayName()}");
                     }
                     catch (Exception e)
                     {
                         ModConsole.Error(e.Message);
                     }
                 }
-                yield return null;
+                yield return new WaitForSeconds(5f);
             }
+
+            ModConsole.Log("Friend Requests Done!");
+            CheetosHelpers.SendHudNotification("Friend Requests Done!");
             yield break;
         }
 
@@ -141,8 +139,9 @@
             int i = 0;
             while (i <= 100)
             {
-                foreach (var player in WorldUtils.Players)
+                for (int i1 = 0; i1 < WorldUtils.Players.Count; i1++)
                 {
+                    VRC.Player player = WorldUtils.Players[i1];
                     handler.TriggerEvent(new VrcEvent
                     {
                         EventType = VrcEventType.SendRPC,

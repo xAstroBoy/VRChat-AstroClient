@@ -41,17 +41,18 @@
                 return;
             }
             SetupHighlighter();
-            foreach (var obj in ObjMeshRenderers)
-            {
-                if (obj != null && obj.gameObject.active)
-                {
-                    HighLightOptions.AddRenderer(obj);
-                }
-                else
-                {
-                    HighLightOptions.RemoveRenderer(obj);
-                }
-            }
+            for (int i = 0; i < ObjMeshRenderers.Count; i++)
+			{
+				MeshRenderer obj = ObjMeshRenderers[i];
+				if (obj != null && obj.gameObject.active)
+				{
+					HighLightOptions.AddRenderer(obj);
+				}
+				else
+				{
+					HighLightOptions.RemoveRenderer(obj);
+				}
+			}
         }
 
         private Color GetDefaultColor()
@@ -68,17 +69,18 @@
             if (HighLightOptions != null)
             {
                 HighLightOptions.SetHighLighterColor(ESPColor);
-                foreach (var obj in ObjMeshRenderers)
-                {
-                    if (obj != null && obj.gameObject.active)
-                    {
-                        HighLightOptions.AddRenderer(obj);
-                    }
-                    else
-                    {
-                        HighLightOptions.RemoveRenderer(obj);
-                    }
-                }
+                for (int i = 0; i < ObjMeshRenderers.Count; i++)
+				{
+					MeshRenderer obj = ObjMeshRenderers[i];
+					if (obj != null && obj.gameObject.active)
+					{
+						HighLightOptions.AddRenderer(obj);
+					}
+					else
+					{
+						HighLightOptions.RemoveRenderer(obj);
+					}
+				}
             }
         }
 

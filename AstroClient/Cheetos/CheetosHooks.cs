@@ -19,6 +19,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Reflection;
     using UnityEngine;
     using VRC;
@@ -64,8 +65,12 @@
 
             public static async void DoPatches()
             {
-                foreach (var patch in Patches)
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
+                for (int i = 0; i < Patches.Count; i++)
                 {
+                    Patch patch = Patches[i];
                     try
                     {
                         patch.Instance.Patch(patch.TargetMethod, patch.PrefixMethod, patch.PostfixMethod);
@@ -81,13 +86,16 @@
                         ModConsole.DebugLog($"[Patches] Patched {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {patch.PrefixMethod?.method.Name}{patch.PostfixMethod?.method.Name}");
                     }
                 }
-                ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods!");
+
+                stopwatch.Stop();
+                ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods: {stopwatch.ElapsedMilliseconds}ms");
             }
 
             public static async void UnDoPatches()
             {
-                foreach (var patch in Patches)
+                for (int i = 0; i < Patches.Count; i++)
                 {
+                    Patch patch = Patches[i];
                     try
                     {
                         patch.Instance.UnpatchAll();
@@ -336,12 +344,9 @@
 
         private static void OnPhotonPlayerLeft(ref Photon.Realtime.Player __0)
         {
-            if (__0 != null)
+            if (__0 != null && Event_OnPhotonLeft != null)
             {
-                if (Event_OnPhotonLeft != null)
-                {
-                    Event_OnPhotonLeft?.SafetyRaise(new PhotonPlayerEventArgs(__0));
-                }
+                Event_OnPhotonLeft?.SafetyRaise(new PhotonPlayerEventArgs(__0));
             }
             else
             {
