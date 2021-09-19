@@ -536,19 +536,29 @@ namespace AstroLibrary.Utility
 
         private static string GetRankColor(string rank)
         {
-            return rank.ToLower() switch
+            switch (rank.ToLower())
             {
-                "moderation user" => "#5e0000",
-                "admin user" => "#5e0000",
-                "legend" => "#ff5e5e",
-                "veteran" => "#fff821",
-                "trusted" => "#a621ff",
-                "known" => "#ffa200",
-                "user" => "#00e62a",
-                "new user" => "#00aeff",
-                "visitor" => "#bababa",
-                _ => "#303030",
-            };
+                case "moderation user":
+                    return "#5e0000";
+                case "admin user":
+                    return "#5e0000";
+                case "legend":
+                    return "#ff5e5e";
+                case "veteran":
+                    return "#fff821";
+                case "trusted":
+                    return "#a621ff";
+                case "known":
+                    return "#ffa200";
+                case "user":
+                    return "#00e62a";
+                case "new user":
+                    return "#00aeff";
+                case "visitor":
+                    return "#bababa";
+                default:
+                    return "#303030";
+            }
         }
 
         public static string GetRank(this APIUser instance)

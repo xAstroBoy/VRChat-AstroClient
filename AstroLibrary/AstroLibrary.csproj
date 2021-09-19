@@ -737,6 +737,7 @@
     <Compile Include="Blaze%27s Utils\SocialMenuUtils.cs" />
     <Compile Include="Blaze%27s Utils\UdonUtils.cs" />
     <Compile Include="Blaze%27s Utils\VRCUiManagerUtils.cs" />
+    <Compile Include="Utility\NetworkManagerUtils.cs" />
     <Compile Include="Utility\WorldUtils.cs" />
     <Compile Include="CheetosConsole\Console.cs" />
     <Compile Include="CheetosConsole\DefaultFonts.cs" />
