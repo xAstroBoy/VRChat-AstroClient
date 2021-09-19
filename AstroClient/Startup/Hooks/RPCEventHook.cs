@@ -67,7 +67,8 @@
                 {
                     ModConsole.Log($"Blocked Malicious RPC: NULL");
                 }
-                return false;
+                blocked = true;
+                log = true;
             }
 
             string actionstring = string.Empty;

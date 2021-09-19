@@ -179,21 +179,17 @@
         private bool isFistJoin = false;
 
         private bool isSecondJoin = false;
-        
+
 
         internal string SpoofedName { get; set; }
 
         internal string RealName { get; private set; }
-        
+
         internal string WorldAuthor
         {
             get
             {
-                if(WorldUtils.GetWorld() != null)
-                {
-                    return WorldUtils.GetWorldAuthorName();
-                }
-                return RealName;
+                return WorldUtils.AuthorName;
             }
         }
     }

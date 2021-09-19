@@ -30,7 +30,7 @@
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            if (WorldUtils.GetWorldID() == WorldIds.JustHParty)
+            if (WorldUtils.WorldID == WorldIds.JustHParty)
             {
                 GameObjectFinder.Find("기믹/3f delete (1)")?.gameObject.DestroyMeLocal();
             }

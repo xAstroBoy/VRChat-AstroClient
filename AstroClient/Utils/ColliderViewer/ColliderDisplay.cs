@@ -121,11 +121,13 @@
             for (int i = 0; i < sceneCount; i++)
             {
                 Il2CppReferenceArray<GameObject> rootGameObjects = SceneManager.GetSceneAt(i).GetRootGameObjects();
-                foreach (GameObject gameObject in rootGameObjects)
+                for (int i2 = 0; i2 < rootGameObjects.Count; i2++)
                 {
+                    GameObject gameObject = rootGameObjects[i2];
                     Il2CppArrayBase<T> componentsInChildren = gameObject.GetComponentsInChildren<T>();
-                    foreach (T t in componentsInChildren)
+                    for (int i1 = 0; i1 < componentsInChildren.Count; i1++)
                     {
+                        T t = componentsInChildren[i1];
                         if (!colliderList.Contains(t))
                         {
                             colliderList.Add(t);

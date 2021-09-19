@@ -5,6 +5,7 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
@@ -291,15 +292,17 @@
             return dumpednames;
         }
 
-        public static void Reload_All_Avatars()
+        public static IEnumerator ReloadAllAvatars()
         {
-            foreach (var player in WorldUtils.GetPlayers())
+            foreach (var player in WorldUtils.Players)
             {
                 if (player != null)
                 {
                     player.ReloadAvatar();
+                    yield return new WaitForSeconds(0.001f);
                 }
             }
+            yield break;
         }
 
         public static void Add_Lewdify(this Player player)

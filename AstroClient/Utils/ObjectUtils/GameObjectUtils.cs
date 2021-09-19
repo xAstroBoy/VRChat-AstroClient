@@ -45,20 +45,15 @@
             ColliderDisplay.ToggleColliderDisplayBtn = new QMToggleButton(GameObjectsMenus, 3, 2, "Collider Viewer ON", new Action(() => { ColliderDisplay.ToggleDisplays(true); }), "Collider Viewer OFF", new Action(() => { ColliderDisplay.ToggleDisplays(false); }), "Reveals all world triggers available.", null, null, null, false);
         }
 
-        public static Il2CppArrayBase<VRC_SyncVideoPlayer> GetVRC_SyncVideoPlayers()
-        {
-            return Resources.FindObjectsOfTypeAll<VRC_SyncVideoPlayer>();
-        }
+        public static Il2CppArrayBase<VRC_SyncVideoPlayer> VRC_SyncVideoPlayers => Resources.FindObjectsOfTypeAll<VRC_SyncVideoPlayer>();
 
-        public static Il2CppArrayBase<SyncVideoPlayer> GetSyncVideoPlayer()
-        {
-            return Resources.FindObjectsOfTypeAll<SyncVideoPlayer>();
-        }
+        public static Il2CppArrayBase<SyncVideoPlayer> SyncVideoPlayers => Resources.FindObjectsOfTypeAll<SyncVideoPlayer>();
 
         public static void DumpVideoPlayerURLS()
         {
-            foreach (var VideoPlayer in GetVRC_SyncVideoPlayers())
+            for (int i = 0; i < VRC_SyncVideoPlayers.Count; i++)
             {
+                VRC_SyncVideoPlayer VideoPlayer = VRC_SyncVideoPlayers[i];
                 if (VideoPlayer != null)
                 {
                     foreach (var video in VideoPlayer.Videos)
@@ -74,8 +69,9 @@
 
         public static void ClearVideoPlayers()
         {
-            foreach (var VideoPlayer in GetVRC_SyncVideoPlayers())
+            for (int i = 0; i < VRC_SyncVideoPlayers.Count; i++)
             {
+                VRC_SyncVideoPlayer VideoPlayer = VRC_SyncVideoPlayers[i];
                 if (VideoPlayer != null)
                 {
                     VideoPlayer.Stop();
@@ -93,10 +89,11 @@
                 if (Obj != null)
                 {
                     var components = Obj.GetComponentsInChildren<Component>(true);
-                    foreach (Component OriginalComponent in components)
-                    {
-                        ModConsole.Log(Obj.name + " component : " + OriginalComponent.ToString());
-                    }
+                    for (int i = 0; i < components.Count; i++)
+					{
+						Component OriginalComponent = components[i];
+						ModConsole.Log(Obj.name + " component : " + OriginalComponent.ToString());
+					}
                 }
             }
             catch (Exception) { }
@@ -109,8 +106,9 @@
                 if (Obj != null)
                 {
                     var components = Obj.GetComponentsInChildren<Component>(true);
-                    foreach (Component OriginalComponent in components)
+                    for (int i = 0; i < components.Count; i++)
                     {
+                        Component OriginalComponent = components[i];
                         ModConsole.Log(Obj.name + " component : " + OriginalComponent.ToString());
                     }
                 }
@@ -126,8 +124,9 @@
                 if (Obj != null)
                 {
                     var components = Obj.GetComponentsInChildren<Component>(true);
-                    foreach (Component OriginalComponent in components)
+                    for (int i = 0; i < components.Count; i++)
                     {
+                        Component OriginalComponent = components[i];
                         _ = comp.AppendLine("Component : " + OriginalComponent.ToString() + ",");
                     }
                     return comp.ToString();
@@ -142,8 +141,10 @@
 
         public static void EnableAllWorldPickups()
         {
-            foreach (var item in WorldUtils_Old.Get_Pickups())
+            List<GameObject> list = WorldUtils_Old.Get_Pickups();
+            for (int i = 0; i < list.Count; i++)
             {
+                GameObject item = list[i];
                 if (!item.active)
                 {
                     item.SetActive(true);
@@ -181,15 +182,14 @@
             }
         }
 
-        public static bool IsLocalPlayerHoldingObject(GameObject obj)
-        {
-            return obj.GetComponent<VRC_Pickup>() != null && obj.GetComponent<VRC_Pickup>().currentPlayer.displayName == Utils.LocalPlayer.GetPlayer().GetVRCPlayerApi().displayName;
-        }
+        public static bool IsLocalPlayerHoldingObject(GameObject obj) => obj.GetComponent<VRC_Pickup>() != null && obj.GetComponent<VRC_Pickup>().currentPlayer.displayName == Utils.LocalPlayer.GetPlayer().GetVRCPlayerApi().displayName;
 
         public static void TeleportPickupsToTheirDefaultPosition(bool RestoreBodySettings)
         {
-            foreach (var Pickup in WorldUtils_Old.Get_Pickups())
+            List<GameObject> list = WorldUtils_Old.Get_Pickups();
+            for (int i = 0; i < list.Count; i++)
             {
+                GameObject Pickup = list[i];
                 if (Pickup != null)
                 {
                     RestoreOriginalLocation(Pickup.gameObject, RestoreBodySettings);
@@ -199,8 +199,10 @@
 
         public static void DisableAllWorldPickups()
         {
-            foreach (var item in WorldUtils_Old.Get_Pickups())
+            List<GameObject> list = WorldUtils_Old.Get_Pickups();
+            for (int i = 0; i < list.Count; i++)
             {
+                GameObject item = list[i];
                 if (!item.active)
                 {
                     item.SetActive(false);
@@ -218,8 +220,9 @@
                 var listg = Resources.FindObjectsOfTypeAll<VRC_Pickup>();
                 using (var txtFile = File.AppendText(path))
                 {
-                    foreach (var gameobj in listg)
+                    for (int i = 0; i < listg.Count; i++)
                     {
+                        VRC_Pickup gameobj = listg[i];
                         if (File.Exists(path))
                         {
                             txtFile.WriteLine("Found: " + gameobj.name);
@@ -248,8 +251,9 @@
                 var listg = Resources.FindObjectsOfTypeAll<Transform>();
                 using (var txtFile = File.AppendText(path))
                 {
-                    foreach (var gameobj in listg)
+                    for (int i = 0; i < listg.Count; i++)
                     {
+                        Transform gameobj = listg[i];
                         if (File.Exists(path))
                         {
                             txtFile.WriteLine("Found: " + gameobj.name);
@@ -270,8 +274,10 @@
 
         public static void GetAllPickupsOwners()
         {
-            foreach (var item in WorldUtils_Old.Get_Pickups())
+            List<GameObject> list = WorldUtils_Old.Get_Pickups();
+            for (int i = 0; i < list.Count; i++)
             {
+                GameObject item = list[i];
                 if (item != null)
                 {
                     var photon = item.GetComponent<PhotonView>();
@@ -295,8 +301,9 @@
             var listg = Resources.FindObjectsOfTypeAll<GameObject>();
             using (var txtFile = File.AppendText(path))
             {
-                foreach (var gameobj in listg)
+                for (int i = 0; i < listg.Count; i++)
                 {
+                    GameObject gameobj = listg[i];
                     if (File.Exists(path))
                     {
                         txtFile.WriteLine("Found: " + gameobj.name + " With Components: ");
@@ -324,8 +331,9 @@
         {
             List<GameObject> Objects = new List<GameObject>();
             var listg = Resources.FindObjectsOfTypeAll<VRC_Pickup>();
-            foreach (var obj in listg)
+            for (int i = 0; i < listg.Count; i++)
             {
+                VRC_Pickup obj = listg[i];
                 if (!Objects.Contains(obj.gameObject))
                 {
                     Objects.Add(obj.gameObject);
@@ -347,32 +355,36 @@
             var Mir2 = Resources.FindObjectsOfTypeAll<VRCMirrorReflection>();
             var Mir3 = Resources.FindObjectsOfTypeAll<VRC.SDKBase.VRC_MirrorReflection>();
             var Mir4 = Resources.FindObjectsOfTypeAll<VRCSDK2.VRC_MirrorReflection>();
-            foreach (var item in Mir1)
+            for (int i = 0; i < Mir1.Count; i++)
             {
+                MirrorReflection item = Mir1[i];
                 if (!Mirrors.Contains(item.gameObject))
                 {
                     Mirrors.Add(item.gameObject);
                     ModConsole.Log("Added " + item.gameObject.name + " To the Mirrors List!");
                 }
             }
-            foreach (var item in Mir2)
+            for (int i = 0; i < Mir2.Count; i++)
             {
+                VRCMirrorReflection item = Mir2[i];
                 if (!Mirrors.Contains(item.gameObject))
                 {
                     Mirrors.Add(item.gameObject);
                     ModConsole.Log("Added " + item.gameObject.name + " To the Mirrors List!");
                 }
             }
-            foreach (var item in Mir3)
+            for (int i = 0; i < Mir3.Count; i++)
             {
+                VRC.SDKBase.VRC_MirrorReflection item = Mir3[i];
                 if (!Mirrors.Contains(item.gameObject))
                 {
                     Mirrors.Add(item.gameObject);
                     ModConsole.Log("Added " + item.gameObject.name + " To the Mirrors List!");
                 }
             }
-            foreach (var item in Mir4)
+            for (int i = 0; i < Mir4.Count; i++)
             {
+                VRCSDK2.VRC_MirrorReflection item = Mir4[i];
                 if (!Mirrors.Contains(item.gameObject))
                 {
                     Mirrors.Add(item.gameObject);
@@ -385,8 +397,9 @@
 
         public static void DestroyMirrors()
         {
-            foreach (var item in Mirrors)
+            for (int i = 0; i < Mirrors.Count; i++)
             {
+                GameObject item = Mirrors[i];
                 if (item != null)
                 {
                     ModConsole.Log("Killed Mirror : " + item.name);

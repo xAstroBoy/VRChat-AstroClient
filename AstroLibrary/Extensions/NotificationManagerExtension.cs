@@ -57,8 +57,8 @@
                 {
                     string senderUserId = Utils.QuickMenu.Notification().senderUserId;
                     NotificationDetails notificationDetails = new NotificationDetails();
-                    notificationDetails["worldId"] = WorldUtils.GetFullID();
-                    notificationDetails["worldName"] = WorldUtils.GetWorld().name;
+                    notificationDetails["worldId"] = WorldUtils.FullID;
+                    notificationDetails["worldName"] = WorldUtils.WorldName;
                     Utils.NotificationManager.SendNotification(senderUserId, "invite", string.Empty, notificationDetails);
                 }
             }

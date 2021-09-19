@@ -63,7 +63,7 @@
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            self = PlayerUtils.GetPlayer();
+            self = PlayerUtils.Player;
             player = GetComponent<Player>();
             if (player != null && player.GetVRCPlayer() != null)
             {

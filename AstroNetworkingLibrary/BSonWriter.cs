@@ -20,9 +20,7 @@
 
         public static T FromBson<T>(string base64data)
         {
-            byte[] data = Convert.FromBase64String(base64data);
-
-            using (MemoryStream ms = new MemoryStream(data))
+            using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(base64data)))
             using (BsonDataReader reader = new BsonDataReader(ms))
             {
                 JsonSerializer serializer = new JsonSerializer();

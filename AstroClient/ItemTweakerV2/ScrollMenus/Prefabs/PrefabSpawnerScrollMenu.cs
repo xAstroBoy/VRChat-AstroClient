@@ -15,7 +15,7 @@
             var prefabQMScroll = new QMScrollMenu(menu);
             prefabQMScroll.SetAction(delegate
             {
-                foreach (var prefab in WorldUtils.GetPrefabs())
+                foreach (var prefab in WorldUtils.Prefabs)
                 {
                     prefabQMScroll.Add(
                     new QMSingleButton(prefabQMScroll.BaseMenu, 0, 0, $"Spawn {prefab.name}", delegate

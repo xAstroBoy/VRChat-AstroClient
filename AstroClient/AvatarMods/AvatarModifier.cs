@@ -2,6 +2,7 @@
 {
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
+    using MelonLoader;
     using RubyButtonAPI;
     using System;
     using UnityEngine;
@@ -12,7 +13,7 @@
         public static void InitQMMenu(QMTabMenu tab, float x, float y, bool btnHalf)
         {
             var tmp = new QMNestedButton(tab, x, y, "Avatar Modifiers", "Modify Other's avatars", null, null, null, null, btnHalf);
-            _ = new QMSingleButton(tmp, 5, 0, "Reload All Avatars", () => { AvatarUtils.Reload_All_Avatars(); }, "Reloads All avatars", null, null, true);
+            _ = new QMSingleButton(tmp, 5, 0, "Reload All Avatars", () => { MelonCoroutines.Start(AvatarUtils.ReloadAllAvatars()); }, "Reloads All avatars", null, null, true);
             RemoveMasksToggle = new QMSingleToggleButton(tmp, 1, 0, "Auto Remove Masks", () => { MaskDeleter = true; }, "Auto Remove Masks", () => { MaskDeleter = false; }, "Remove Masks From all avatars (Will make all Avatars Reload)", Color.green, Color.red, null, false, true);
             LewdifyToggle = new QMSingleToggleButton(tmp, 1, 0.5f, "Auto Lewdify", () => { Lewdify = true; }, "Auto Lewdify", () => { Lewdify = false; }, "Lewdifies All avatars In Instance (Will make all Avatars Reload)", Color.green, Color.red, null, false, true);
             ForceLewdifyToggle = new QMSingleToggleButton(tmp, 1, 1f, "Forced Lewdify", () => { ForceLewdify = true; }, "Forced Lewdify", () => { ForceLewdify = false; }, "Force Lewdify avatars (Destroys the Transforms, Due to SDK3 Avatars Refusing to toggle them.) (Will make all Avatars Reload)", Color.green, Color.red, null, false, true);
@@ -83,7 +84,7 @@
             {
                 if (value)
                 {
-                    foreach (var player in WorldUtils.GetPlayers())
+                    foreach (var player in WorldUtils.Players)
                     {
                         if (player != Utils.LocalPlayer.GetPlayer())
                         {
@@ -96,7 +97,7 @@
                 }
                 else
                 {
-                    foreach (var player in WorldUtils.GetPlayers())
+                    foreach (var player in WorldUtils.Players)
                     {
                         if (player != Utils.LocalPlayer.GetPlayer())
                         {
@@ -129,7 +130,7 @@
             {
                 if (value)
                 {
-                    foreach (var player in WorldUtils.GetPlayers())
+                    foreach (var player in WorldUtils.Players)
                     {
                         if (player != Utils.LocalPlayer.GetPlayer())
                         {
@@ -142,7 +143,7 @@
                 }
                 else
                 {
-                    foreach (var player in WorldUtils.GetPlayers())
+                    foreach (var player in WorldUtils.Players)
                     {
                         if (player != Utils.LocalPlayer.GetPlayer())
                         {

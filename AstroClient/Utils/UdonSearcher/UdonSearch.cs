@@ -86,8 +86,9 @@
         {
             var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
 
-            foreach (var actionobject in actionObjects)
+            for (int i = 0; i < actionObjects.Count; i++)
             {
+                UdonBehaviour actionobject = actionObjects[i];
                 if (actionobject != null)
                 {
                     foreach (var actionkeys in actionobject._eventTable)

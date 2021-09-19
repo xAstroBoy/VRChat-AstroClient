@@ -4,6 +4,7 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using UnityEngine;
     using static AstroClient.Variables.CustomLists;
@@ -38,8 +39,10 @@
 
         public static void FindQVPenSetTriggers()
         {
-            foreach (var obj in Resources.FindObjectsOfTypeAll<GameObject>())
+            UnhollowerBaseLib.Il2CppArrayBase<GameObject> list = Resources.FindObjectsOfTypeAll<GameObject>();
+            for (int i = 0; i < list.Count; i++)
             {
+                GameObject obj = list[i];
                 if (obj.name.ToLower().Contains("penmanager"))
                 {
                     if (PenManagers != null)
@@ -60,12 +63,18 @@
 
         public static void GetAllResetGlobals()
         {
-            foreach (var pen in PenManagers)
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            for (int i = 0; i < PenManagers.Count; i++)
             {
+                GameObject pen = PenManagers[i];
                 if (pen != null)
                 {
-                    foreach (var obj in pen.GetComponentsInChildren<VRC.SDKBase.VRC_Trigger>(true))
+                    UnhollowerBaseLib.Il2CppArrayBase<VRC.SDKBase.VRC_Trigger> list1 = pen.GetComponentsInChildren<VRC.SDKBase.VRC_Trigger>(true);
+                    for (int i1 = 0; i1 < list1.Count; i1++)
                     {
+                        VRC.SDKBase.VRC_Trigger obj = list1[i1];
                         if (obj.gameObject.name.ToLower().Contains("interact_clear"))
                         {
                             if (!TriggerSDKBase.Contains(obj))
@@ -75,8 +84,10 @@
                         }
                     }
 
-                    foreach (var obj in pen.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true))
+                    UnhollowerBaseLib.Il2CppArrayBase<VRCSDK2.VRC_Trigger> list = pen.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true);
+                    for (int i1 = 0; i1 < list.Count; i1++)
                     {
+                        VRCSDK2.VRC_Trigger obj = list[i1];
                         if (obj.gameObject.name.ToLower().Contains("interact_clear"))
                         {
                             if (!TriggerSDK2.Contains(obj))
@@ -88,14 +99,18 @@
                 }
             }
 
+            stopwatch.Stop();
             ModConsole.Log("Found " + TriggerSDKBase.Count() + " QVPens Clear SDKBase Triggers.");
             ModConsole.Log("Found " + TriggerSDK2.Count() + " QVPens Clear VRCSDK2 Triggers.");
+            ModConsole.Log($"Trigger Search Took: {stopwatch.ElapsedMilliseconds}ms");
         }
 
         public static void FindUdonPensEvents()
         {
-            foreach (var item in WorldUtils.GetUdonScripts())
+            VRC.Udon.UdonBehaviour[] array = WorldUtils.GetUdonScripts();
+            for (int i = 0; i < array.Length; i++)
             {
+                VRC.Udon.UdonBehaviour item = array[i];
                 if (item != null)
                 {
                     if (item.name.ToLower().Contains("penmanager"))
@@ -127,10 +142,14 @@
 
         public static void ResetQPensGlobal()
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             if (TriggerSDKBase.Count() != 0)
             {
-                foreach (var item in TriggerSDKBase)
+                for (int i = 0; i < TriggerSDKBase.Count; i++)
                 {
+                    VRC.SDKBase.VRC_Trigger item = TriggerSDKBase[i];
                     if (item != null)
                     {
                         item.gameObject.TriggerClick();
@@ -139,8 +158,9 @@
             }
             if (TriggerSDK2.Count() != 0)
             {
-                foreach (var item in TriggerSDK2)
+                for (int i = 0; i < TriggerSDK2.Count; i++)
                 {
+                    VRCSDK2.VRC_Trigger item = TriggerSDK2[i];
                     if (item != null)
                     {
                         item.gameObject.TriggerClick();
@@ -151,6 +171,9 @@
             {
                 ClearPensUdonEvents.ExecuteUdonEvent();
             }
+
+            stopwatch.Stop();
+            ModConsole.Log($"ResetQPens took: {stopwatch.ElapsedMilliseconds}ms");
         }
 
         public static List<GameObject> PenManagers = new List<GameObject>();

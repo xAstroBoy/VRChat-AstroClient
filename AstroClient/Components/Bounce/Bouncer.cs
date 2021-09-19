@@ -67,7 +67,7 @@
         {
             var speed = lastFrameVelocity.magnitude;
             var bounceDirection = Vector3.Reflect(lastFrameVelocity.normalized, collisionNormal);
-            var directionToPlayer = PlayerUtils.GetPlayer().GetVRCPlayer().transform.position - transform.position;
+            var directionToPlayer = PlayerUtils.Player.GetVRCPlayer().transform.position - transform.position;
 
             var direction = Vector3.Lerp(bounceDirection, directionToPlayer, bias);
 

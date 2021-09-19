@@ -31,7 +31,7 @@
         public static string Username = "";
         public static string password = "";
         private static string Auth = "";
-        public static string[] WorldArray;
+        //public static string[] WorldArray;
         public static DayBots.VRCAPI.API Client;
 
         public static void InitAPI()
@@ -53,24 +53,24 @@
             }
         }
 
-        public static IEnumerator RankUp()
-        {
-            if (WorldArray == null)
-            {
-                //WorldArray = File.ReadAllLines(FileManager.ClientPath + "\\Worlds.txt");
-            }
-            ModConsole.Log($"[World Travel] Start!");
-            for (; ; )
-            {
-                string World = WorldArray[new System.Random().Next(0, WorldArray.Length - 1)];
-                int RandString = new System.Random().Next(0, 10000);
-                Join(World, $"{RandString}");
+        //public static IEnumerator RankUp()
+        //{
+        //    if (WorldArray == null)
+        //    {
+        //        //WorldArray = File.ReadAllLines(FileManager.ClientPath + "\\Worlds.txt");
+        //    }
+        //    ModConsole.Log($"[World Travel] Start!");
+        //    for (; ; )
+        //    {
+        //        string World = WorldArray[new System.Random().Next(0, WorldArray.Length - 1)];
+        //        int RandString = new System.Random().Next(0, 10000);
+        //        Join(World, $"{RandString}");
 
-                yield return new WaitForSeconds(0.1f);
-            }
-            ModConsole.Log($"[World Travel] Stop!");
-            yield break;
-        }
+        //        yield return new WaitForSeconds(0.1f);
+        //    }
+        //    ModConsole.Log($"[World Travel] Stop!");
+        //    yield break;
+        //}
 
         public static void Join(string WorldID, string InstanceID)
         {
@@ -132,8 +132,12 @@
         {
             var _return = new List<ApiAvatar>();
             var avatars = Client.Avatar.GetPublicAvatars(userid, startingfrom, amount).GetAwaiter().GetResult();
-            foreach (var avi in avatars)
+            for (int i = 0; i < avatars.Count; i++)
+            {
+                AvatarObject avi = avatars[i];
                 _return.Add(avi.ToApiAvatar());
+            }
+
             return _return;
         }
 

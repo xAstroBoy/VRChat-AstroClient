@@ -10,7 +10,7 @@
     <RootNamespace>AstroClient</RootNamespace>
     <AssemblyName>AstroClient</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <LangVersion>9.0</LangVersion>
+    <LangVersion>latest</LangVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
@@ -107,7 +107,6 @@
     <Compile Include="Components\PlayerSpoofer\PlayerSpoofer.cs" />
     <Compile Include="Extensions\Collider_ext.cs" />
     <Compile Include="Extensions\Engine_ext.cs" />
-    <Compile Include="Managers\AchievmentsManager.cs" />
     <Compile Include="AntiCrash\AntiCrash.cs" />
     <Compile Include="AntiCrash\AntiCrashScanner.cs" />
     <Compile Include="AntiCrash\AntiCrashUtils.cs" />
@@ -115,8 +114,6 @@
     <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />
     <Compile Include="CheetosUI\CMBase.cs" />
     <Compile Include="CheetosUI\WorldButton.cs" />
-    <Compile Include="Cheetos\Astro_Interactable.cs" />
-    <Compile Include="Cheetos\Astro_Interactable_Extensions.cs" />
     <Compile Include="Cheetos\AvatarFavorites.cs" />
     <Compile Include="Cheetos\FrameUnlimiter.cs" />
     <Compile Include="Cheetos\PlayerList.cs" />
@@ -196,8 +193,6 @@
     <Compile Include="Cheetos\CheetosExtensions.cs" />
     <Compile Include="Cheetos\CheetosHooks.cs" />
     <Compile Include="Buttons\DevMenu.cs" />
-    <Compile Include="Cheetos\AssemblySpy\AssemblySpy.cs" />
-    <Compile Include="Cheetos\AssemblySpy\AssemlySpy_Extensions.cs" />
     <Compile Include="Cheetos\AstroInput.cs" />
     <Compile Include="Cheetos\AvatarHider.cs" />
     <Compile Include="Cheetos\ButtonCreator.cs" />

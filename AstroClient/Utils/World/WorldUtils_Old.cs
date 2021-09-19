@@ -64,7 +64,7 @@
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            ModConsole.Log("This instance has " + WorldUtils.GetPlayers().Count() + " Players.", Color.Gold);
+            ModConsole.Log("This instance has " + WorldUtils.Players.Count() + " Players.", Color.Gold);
         }
 
         public static List<GameObject> Get_Pickups()
@@ -207,8 +207,9 @@
             var VRCAvatarPedestal = Get_VRCAvatarPedestal();
             if (SimpleAvatarPedestrals.Count() != 0)
             {
-                foreach (var item in SimpleAvatarPedestrals)
+                for (int i = 0; i < SimpleAvatarPedestrals.Count; i++)
                 {
+                    SimpleAvatarPedestal item = SimpleAvatarPedestrals[i];
                     if (!ids.Contains(item.field_Internal_ApiAvatar_0.id))
                     {
                         ids.Add(item.field_Internal_ApiAvatar_0.id);
@@ -217,8 +218,9 @@
             }
             if (AvatarPedestals.Count() != 0)
             {
-                foreach (var item in AvatarPedestals)
+                for (int i = 0; i < AvatarPedestals.Count; i++)
                 {
+                    AvatarPedestal item = AvatarPedestals[i];
                     if (!ids.Contains(item.field_Private_ApiAvatar_0.id))
                     {
                         ids.Add(item.field_Private_ApiAvatar_0.id);
@@ -228,8 +230,9 @@
 
             if (VRC_AvatarPedestal.Count() != 0)
             {
-                foreach (var item in VRC_AvatarPedestal)
+                for (int i = 0; i < VRC_AvatarPedestal.Count; i++)
                 {
+                    VRCSDK2.VRC_AvatarPedestal item = VRC_AvatarPedestal[i];
                     if (!ids.Contains(item.blueprintId))
                     {
                         ids.Add(item.blueprintId);
@@ -238,8 +241,9 @@
             }
             if (SDK_VRC_AvatarPedestrals.Count() != 0)
             {
-                foreach (var item in SDK_VRC_AvatarPedestrals)
+                for (int i = 0; i < SDK_VRC_AvatarPedestrals.Count; i++)
                 {
+                    VRC.SDKBase.VRC_AvatarPedestal item = SDK_VRC_AvatarPedestrals[i];
                     if (!ids.Contains(item.blueprintId))
                     {
                         ids.Add(item.blueprintId);
@@ -248,8 +252,9 @@
             }
             if (VRCAvatarPedestal.Count() != 0)
             {
-                foreach (var item in VRCAvatarPedestal)
+                for (int i = 0; i < VRCAvatarPedestal.Count; i++)
                 {
+                    VRCAvatarPedestal item = VRCAvatarPedestal[i];
                     if (!ids.Contains(item.blueprintId))
                     {
                         ids.Add(item.blueprintId);
@@ -271,8 +276,9 @@
 
             if (SDK_VRC_AvatarPedestrals.AnyAndNotNull())
             {
-                foreach (var pedestal in SDK_VRC_AvatarPedestrals)
+                for (int i = 0; i < SDK_VRC_AvatarPedestrals.Count; i++)
                 {
+                    VRC.SDKBase.VRC_AvatarPedestal pedestal = SDK_VRC_AvatarPedestrals[i];
                     var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
                     if (avatar != null)
                     {
@@ -283,8 +289,9 @@
 
             if (VRC_AvatarPedestal.AnyAndNotNull())
             {
-                foreach (var pedestal in VRC_AvatarPedestal)
+                for (int i = 0; i < VRC_AvatarPedestal.Count; i++)
                 {
+                    VRCSDK2.VRC_AvatarPedestal pedestal = VRC_AvatarPedestal[i];
                     var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
                     if (avatar != null)
                     {
@@ -295,8 +302,9 @@
 
             if (VRCAvatarPedestal.AnyAndNotNull())
             {
-                foreach (var pedestal in VRCAvatarPedestal)
+                for (int i = 0; i < VRCAvatarPedestal.Count; i++)
                 {
+                    VRCAvatarPedestal pedestal = VRCAvatarPedestal[i];
                     var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
                     if (avatar != null)
                     {
@@ -307,16 +315,18 @@
 
             if (SimpleAvatarPedestrals.AnyAndNotNull())
             {
-                foreach (var pedestal in SimpleAvatarPedestrals)
+                for (int i = 0; i < SimpleAvatarPedestrals.Count; i++)
                 {
+                    SimpleAvatarPedestal pedestal = SimpleAvatarPedestrals[i];
                     AddAvatar(pedestal.field_Internal_ApiAvatar_0);
                 }
             }
 
             if (AvatarPedestals.AnyAndNotNull())
             {
-                foreach (var pedestal in AvatarPedestals)
+                for (int i = 0; i < AvatarPedestals.Count; i++)
                 {
+                    AvatarPedestal pedestal = AvatarPedestals[i];
                     AddAvatar(pedestal.field_Private_ApiAvatar_0);
                 }
             }
@@ -457,8 +467,9 @@
             var list = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
             if (list.Count() != 0)
             {
-                foreach (var item in list)
+                for (int i = 0; i < list.Count; i++)
                 {
+                    UdonBehaviour item = list[i];
                     if (item._eventTable.Keys.Count != 0)
                     {
                         if (!UdonBehaviourObjects.Contains(item))

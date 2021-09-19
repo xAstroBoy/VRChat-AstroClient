@@ -8,6 +8,7 @@
     using AstroLibrary.Console;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Reflection;
     using UnhollowerRuntimeLib;
 
@@ -45,12 +46,14 @@
 
             var classes = Assembly.GetExecutingAssembly().GetTypes();
 
-            foreach (var c in classes)
+            for (int i = 0; i < classes.Length; i++)
             {
-                var attributes = c.GetCustomAttributes();
+                Type c = classes[i];
 
-                foreach (var attribute in attributes)
+                Attribute[] array = c.GetCustomAttributes().ToArray();
+                for (int i1 = 0; i1 < array.Length; i1++)
                 {
+                    Attribute attribute = array[i1];
                     if (attribute.GetType().Equals(typeof(RegisterComponent)))
                     {
                         RegisterComponent(c);

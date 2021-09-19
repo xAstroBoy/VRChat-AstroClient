@@ -152,7 +152,7 @@
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            Player player = PlayerUtils.GetPlayer();
+            Player player = PlayerUtils.Player;
             if (player.gameObject.GetComponent<SitOnPlayer>() == null) player.gameObject.AddComponent<SitOnPlayer>();
 
             if (Bools.IsDeveloper)
@@ -163,11 +163,6 @@
                     DoOnce = true;
                 }
             }
-        }
-
-        public override void OnPlayerSelected(Player player)
-        {
-            ModConsole.Log($"Player Selected: {player.name}");
         }
     }
 }

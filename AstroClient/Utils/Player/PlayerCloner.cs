@@ -11,7 +11,7 @@
         {
             if (PlayerUtils.GetVRCPlayer() != null)
             {
-                var original = PlayerUtils.GetPlayer().GetAvatarObject();
+                var original = PlayerUtils.Player.GetAvatarObject();
                 if (original != null)
                 {
                     var Capsule = UnityEngine.Object.Instantiate(original, null, true);
@@ -25,8 +25,10 @@
                         }
                     }
                     Capsule.name = "Serialize Capsule";
-                    foreach (Component comp in Capsule.GetComponents<Component>())
+                    UnhollowerBaseLib.Il2CppArrayBase<Component> list = Capsule.GetComponents<Component>();
+                    for (int i = 0; i < list.Count; i++)
                     {
+                        Component comp = list[i];
                         if (!(comp is Transform) || !(comp is Renderer) || !(comp is MeshRenderer) || !(comp is Rigidbody))
                         {
                             UnityEngine.Object.Destroy(comp);

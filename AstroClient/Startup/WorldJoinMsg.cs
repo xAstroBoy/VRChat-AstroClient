@@ -36,7 +36,7 @@
             ModConsole.Log("World ID : " + id, System.Drawing.Color.Goldenrod);
             ModConsole.Log("World author : " + AuthorName, System.Drawing.Color.Goldenrod);
             ModConsole.Log("World Asset URL : " + AssetURL, System.Drawing.Color.Goldenrod);
-            ModConsole.Log("Instance ID : " + WorldUtils.GetFullID(), System.Drawing.Color.Goldenrod);
+            ModConsole.Log("Instance ID : " + WorldUtils.FullID, System.Drawing.Color.Goldenrod);
         }
     }
 }

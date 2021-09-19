@@ -165,7 +165,7 @@
                     {
                         if (control.CurrentHand == VRC.SDKBase.VRC_Pickup.PickupHand.Left)
                         {
-                            if (InputUtils.IsImputUseLeftCalled() || InputUtils.IsInputUseLeftPressed())
+                            if (InputUtils.IsImputUseLeftCalled || InputUtils.IsInputUseLeftPressed)
                             {
                                 if (!HasShot)
                                 {
@@ -181,7 +181,7 @@
                         }
                         else if (control.CurrentHand == VRC.SDKBase.VRC_Pickup.PickupHand.Right)
                         {
-                            if (InputUtils.IsImputUseRightCalled() || InputUtils.IsInputUseRightPressed())
+                            if (InputUtils.IsImputUseRightCalled || InputUtils.IsInputUseRightPressed)
                             {
                                 if (!HasShot)
                                 {

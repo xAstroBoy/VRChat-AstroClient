@@ -71,7 +71,7 @@
             }
             else
             {
-                if (InputUtils.IsImputJumpCalled() || InputUtils.IsInputJumpPressed())
+                if (InputUtils.IsImputJumpCalled|| InputUtils.IsInputJumpPressed)
                 {
                     if (Networking.LocalPlayer.GetVelocity() != Vector3.zero)
                     {

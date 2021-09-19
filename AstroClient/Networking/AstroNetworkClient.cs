@@ -139,10 +139,10 @@
                         {
                             var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
                             Player player;
-                            if (PlayerUtils.GetPlayer().GetUserID().Equals(tagData.UserID))
+                            if (PlayerUtils.Player.GetUserID().Equals(tagData.UserID))
                             {
                                 ModConsole.Log("Wants to add tag to self");
-                                player = PlayerUtils.GetPlayer();
+                                player = PlayerUtils.Player;
                             }
                             else
                             {
@@ -220,7 +220,6 @@
 
         private static void OnConnected(object sender, EventArgs e)
         {
-            NetworkingManager.SendClientInfo();
             ModConsole.Log("Client Connected.");
             return;
         }

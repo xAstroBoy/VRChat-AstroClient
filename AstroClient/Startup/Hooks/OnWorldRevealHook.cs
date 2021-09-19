@@ -18,16 +18,7 @@
         {
             if (Bools.IsDeveloper)
                 ModConsole.DebugLog($"Scene Name: {sceneName}");
-
-            //if (!WorldUtils.IsDefaultScene(sceneName)) MelonCoroutines.Start(WaitForLoad());
         }
-
-        //private IEnumerator WaitForLoad()
-        //{
-        //	while ((!WorldUtils.IsInWorld() && WorldUtils.GetSDK3Descriptor() == null) || WorldUtils.GetSDK2Descriptor() == null)
-        //		yield return new WaitForSeconds(5f);
-        //	Event_OnWorldReveal.SafetyRaise(new OnWorldRevealArgs(WorldUtils.Get_World_ID(), WorldUtils.Get_World_Name(), WorldUtils.Get_World_tags(), WorldUtils.Get_World_AssetUrl()));
-        //}
 
         public override void ExecutePriorityPatches()
         {
@@ -69,8 +60,7 @@
                     if (fadeType.Equals("BlackFade") && duration.Equals(0f) &&
                         RoomManager.field_Internal_Static_ApiWorldInstance_0 != null)
                     {
-                        Event_OnWorldReveal.SafetyRaise(new OnWorldRevealArgs(WorldUtils.GetWorldID(), WorldUtils.GetWorldName(), WorldUtils.GetWorldTags(), WorldUtils.GetWorldAuthorName(), WorldUtils.GetWorldAssetURL()));
-                        //Task.Run(() => {  });
+                        Event_OnWorldReveal.SafetyRaise(new OnWorldRevealArgs(WorldUtils.WorldID, WorldUtils.WorldName, WorldUtils.WorldTags, WorldUtils.AuthorName, WorldUtils.AssetURL));
                     }
                 }
             }

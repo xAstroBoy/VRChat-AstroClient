@@ -26,9 +26,12 @@ namespace AstroLibrary.Utility
             return VRCPlayer.field_Internal_Static_VRCPlayer_0;
         }
 
-        public static VRC.Player GetPlayer()
+        public static VRC.Player Player
         {
-            return GetVRCPlayer().GetPlayer();
+            get
+            {
+                return GetVRCPlayer().GetPlayer();
+            }
         }
 
         /// <summary>
@@ -375,17 +378,17 @@ namespace AstroLibrary.Utility
         // Is World Creator
         public static bool IsWorldCreator(this VRC.Player instance)
         {
-            return WorldUtils.GetWorld().authorId == instance.prop_APIUser_0.id;
+            return WorldUtils.World.authorId == instance.prop_APIUser_0.id;
         }
 
         public static bool IsWorldCreator(this VRCPlayer instance)
         {
-            return WorldUtils.GetWorld().authorId == instance._player.prop_APIUser_0.id;
+            return WorldUtils.World.authorId == instance._player.prop_APIUser_0.id;
         }
 
         public static bool IsWorldCreator(this APIUser instance)
         {
-            return WorldUtils.GetWorld().authorId == instance.id;
+            return WorldUtils.World.authorId == instance.id;
         }
 
         // Is Friend

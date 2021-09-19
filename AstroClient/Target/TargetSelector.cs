@@ -30,7 +30,7 @@
         {
             if (CurrentTarget == null)
             {
-                CurrentTarget = PlayerUtils.GetPlayer();
+                CurrentTarget = PlayerUtils.Player;
             }
         }
 

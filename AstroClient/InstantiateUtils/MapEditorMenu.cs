@@ -31,10 +31,14 @@
 
         public static void EnableAllObjects()
         {
-            foreach (var item in GameObjectFinder.GetRootSceneObjects_Without_Avatars())
+            System.Collections.Generic.List<GameObject> list1 = GameObjectFinder.GetRootSceneObjects_Without_Avatars();
+            for (int i1 = 0; i1 < list1.Count; i1++)
             {
-                foreach (var child in item.transform.Get_All_Childs())
+                GameObject item = list1[i1];
+                System.Collections.Generic.List<Transform> list = item.transform.Get_All_Childs();
+                for (int i = 0; i < list.Count; i++)
                 {
+                    Transform child = list[i];
                     if (!child.gameObject.active)
                     {
                         child.gameObject.SetActiveRecursively(true);

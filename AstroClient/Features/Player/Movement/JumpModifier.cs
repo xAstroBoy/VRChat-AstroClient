@@ -54,7 +54,7 @@
         {
             if (Utils.LocalPlayer != null)
             {
-                if (InputUtils.IsImputJumpCalled())
+                if (InputUtils.IsImputJumpCalled)
                 {
                     if (Utils.LocalPlayer.IsPlayerGrounded() && IsJumpOverriden)
                     {
@@ -69,7 +69,7 @@
                     }
                 }
 
-                if (InputUtils.IsInputJumpPressed() && IsRocketJumpActive)
+                if (InputUtils.IsInputJumpPressed&& IsRocketJumpActive)
                 {
                     EmulatedJump();
                 }

@@ -16,33 +16,56 @@ namespace AstroLibrary.Utility
 
     public static class WorldUtils
     {
-        public static ApiWorld GetWorld()
+        /// <summary>
+        /// Returns the current ApiWorld
+        /// </summary>
+        public static ApiWorld World
         {
-            return RoomManager.field_Internal_Static_ApiWorld_0;
+            get
+            {
+                return RoomManager.field_Internal_Static_ApiWorld_0;
+            }
         }
 
-        public static ApiWorldInstance GetWorldInstance()
+        /// <summary>
+        /// Returns the current ApiWorldInstance
+        /// </summary>
+        public static ApiWorldInstance Instance
         {
-            return RoomManager.field_Internal_Static_ApiWorldInstance_0;
+            get
+            {
+                return RoomManager.field_Internal_Static_ApiWorldInstance_0;
+            }
         }
 
+        /// <summary>
+        /// Returns true if the current player is currently in a world
+        /// </summary>
         public static bool IsInWorld
         {
             get
             {
-                return GetWorld() != null && GetWorldInstance() != null;
+                return World != null && Instance != null;
             }
         }
 
-        public static IEnumerable<Player> GetPlayers_Array()
+        public static IEnumerable<Player> PlayersArray
         {
-            return PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
+            get
+            {
+                return PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.ToArray();
+            }
         }
 
-
-        public static List<Player> GetPlayers()
+        /// <summary>
+        /// Returns a list of players in the current world
+        /// </summary>
+        public static List<Player> Players
         {
-            return GetPlayers_Array().ToList();
+            get
+            {
+                return PlayersArray.ToList();
+            }
         }
 
 
@@ -51,83 +74,113 @@ namespace AstroLibrary.Utility
             return Instance.field_Private_List_1_Player_0.ToArray().ToList();
         }
 
-        public static int GetPlayerCount()
+        public static int PlayerCount
         {
-            return PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.Count;
-        }
-
-        public static VRCPlayer GetInstanceMaster()
-        {
-            foreach (var p in GetPlayers().Where(p => p._vrcplayer.IsInstanceMaster()))
+            get
             {
-                return p._vrcplayer;
+                return PlayerManager.field_Private_Static_PlayerManager_0.field_Private_List_1_Player_0.Count;
             }
-
-            return null;
         }
 
-        public static string GetWorldID()
+        public static VRCPlayer InstanceMaster
         {
-            return GetWorld().id;
-        }
-
-        public static string GetWorldName()
-        {
-            return GetWorld().name;
-        }
-
-        public static string GetWorldAuthorName()
-        {
-            return GetWorld().authorName;
-        }
-
-
-        public static List<string> GetWorldTags()
-        {
-            var instance = GetWorld();
-            if (instance != null)
+            get
             {
-                if (instance.tags != null)
+                foreach (var p in Players.Where(p => p._vrcplayer.IsInstanceMaster()))
                 {
-                    return instance.tags.ToArray().ToList();
+                    return p._vrcplayer;
                 }
+
+                return null;
             }
-            return null;
         }
 
-        public static string GetWorldAssetURL()
+        public static string WorldID
         {
-            var instance = RoomManager.field_Internal_Static_ApiWorld_0;
-            if (instance != null)
+            get
             {
-                if (instance.assetUrl != null)
-                {
-                    return instance.assetUrl;
-                }
+                return World.id;
             }
-            return null;
         }
 
-        public static string GetFullID()
+        public static string WorldName
         {
-            return $"{RoomManager.field_Internal_Static_ApiWorld_0.id}#{RoomManager.field_Internal_Static_ApiWorldInstance_0.id}";
+            get
+            {
+                return World.name;
+            }
+        }
+
+        public static string AuthorName
+        {
+            get
+            {
+                return World.authorName;
+            }
+        }
+
+        public static List<string> WorldTags
+        {
+            get
+            {
+                var instance = World;
+                if (instance != null)
+                {
+                    if (instance.tags != null)
+                    {
+                        return instance.tags.ToArray().ToList();
+                    }
+                }
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Returns the asset URL for the current world
+        /// </summary>
+        /// <returns></returns>
+        public static string AssetURL
+        {
+            get
+            {
+                var instance = RoomManager.field_Internal_Static_ApiWorld_0;
+                if (instance != null)
+                {
+                    if (instance.assetUrl != null)
+                    {
+                        return instance.assetUrl;
+                    }
+                }
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// Returns the full Instance ID of the current world
+        /// </summary>
+        public static string FullID
+        {
+            get
+            {
+                return $"{RoomManager.field_Internal_Static_ApiWorld_0.id}#{RoomManager.field_Internal_Static_ApiWorldInstance_0.id}";
+            }
         }
 
         public static int GetWorldOccupants()
         {
-            return GetWorld().occupants;
+            return World.occupants;
         }
 
         public static int GetWorldCapacity()
         {
-            return GetWorld().capacity;
+            return World.capacity;
         }
 
         public static string GetSDKType()
         {
-            if (GetSDK2Descriptor() != null)
+            if (SDK2Descriptor != null)
                 return "SDK2";
-            else if (GetSDK3Descriptor() != null)
+            else if (SDK3Descriptor != null)
                 return "SDK3";
             else
                 return "not found";
@@ -167,36 +220,39 @@ namespace AstroLibrary.Utility
             return scenes.Contains(lower);
         }
 
-        public static List<GameObject> GetPrefabs()
+        public static List<GameObject> Prefabs
         {
-            try
+            get
             {
-                var list1 = VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
-                if (list1 != null && list1.Count() != 0)
+                try
                 {
-                    return list1;
-                }
-                else
-                {
-                    var list2 = VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
-                    if (list2 != null && list2.Count() != 0)
+                    var list1 = VRC.SDKBase.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
+                    if (list1 != null && list1.Count() != 0)
                     {
-                        return list2;
+                        return list1;
+                    }
+                    else
+                    {
+                        var list2 = VRCSDK2.VRC_SceneDescriptor._instance.DynamicPrefabs.ToArray().Where(x => x.gameObject != null).ToList();
+                        if (list2 != null && list2.Count() != 0)
+                        {
+                            return list2;
+                        }
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                ModConsole.Error("Error parsing World Prefabs");
-                ModConsole.ErrorExc(e);
+                catch (Exception e)
+                {
+                    ModConsole.Error("Error parsing World Prefabs");
+                    ModConsole.ErrorExc(e);
+                    return new List<GameObject>();
+                }
                 return new List<GameObject>();
             }
-            return new List<GameObject>();
         }
 
         public static Player GetPlayerByDisplayName(string name)
         {
-            var players = WorldUtils.GetPlayers().ToList();
+            var players = WorldUtils.Players.ToList();
             if (players.AnyAndNotNull())
             {
                 foreach (var player in players)
@@ -216,14 +272,20 @@ namespace AstroLibrary.Utility
             return null;
         }
 
-        public static VRCSDK2.VRC_SceneDescriptor GetSDK2Descriptor()
+        public static VRCSDK2.VRC_SceneDescriptor SDK2Descriptor
         {
-            return UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
+            get
+            {
+                return UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
+            }
         }
 
-        public static VRC.SDK3.Components.VRCSceneDescriptor GetSDK3Descriptor()
+        public static VRC.SDK3.Components.VRCSceneDescriptor SDK3Descriptor
         {
-            return UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
+            get
+            {
+                return UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
+            }
         }
 
         public static List<VRC_Pickup> GetPickups()

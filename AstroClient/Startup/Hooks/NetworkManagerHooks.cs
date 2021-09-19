@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
     using AstroClientCore.Events;
+    using AstroLibrary.Extensions;
     using MelonLoader;
     using System;
     using System.Collections;
@@ -49,12 +50,12 @@
 
         public static void OnPlayerJoinedEvent(Player player)
         {
-            Event_OnPlayerJoin?.Invoke(null, new PlayerEventArgs(player));
+            Event_OnPlayerJoin?.SafetyRaise(new PlayerEventArgs(player));
         }
 
         public static void OnPlayerLeftEvent(Player player)
         {
-            Event_OnPlayerLeft?.Invoke(null, new PlayerEventArgs(player));
+            Event_OnPlayerLeft?.SafetyRaise(new PlayerEventArgs(player));
         }
 
         public static void EventHandlerA(Player player)
@@ -76,7 +77,7 @@
                 SeenFire = true;
             }
 
-    (AFiredFirst ? OnLeave : OnJoin)?.Invoke(player);
+            (AFiredFirst ? OnLeave : OnJoin)?.Invoke(player);
         }
 
         public static void Initialize()

@@ -62,7 +62,7 @@
             var position = Utils.LocalPlayer.gameObject.transform.position;
             var rotation = Utils.LocalPlayer.gameObject.transform.rotation;
 
-            foreach (var player in WorldUtils.GetPlayers())
+            foreach (var player in WorldUtils.Players)
             {
                 player.TeleportRPCExploit(position, rotation);
             }
@@ -84,7 +84,7 @@
 
         private IEnumerator FriendEveryone()
         {
-            var players = WorldUtils.GetPlayers();
+            var players = WorldUtils.Players;
 
             int count = 0;
             foreach (var player in players)
@@ -141,7 +141,7 @@
             int i = 0;
             while (i <= 100)
             {
-                foreach (var player in WorldUtils.GetPlayers())
+                foreach (var player in WorldUtils.Players)
                 {
                     handler.TriggerEvent(new VrcEvent
                     {
@@ -171,7 +171,7 @@
 
             while (i <= 100)
             {
-                foreach (var player in WorldUtils.GetPlayers())
+                foreach (var player in WorldUtils.Players)
                 {
                     handler.TriggerEvent(new VrcEvent
                     {

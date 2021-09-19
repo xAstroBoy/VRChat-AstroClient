@@ -70,7 +70,7 @@
             if (IsOpen)
             {
                 Transform ptransform = Utils.LocalPlayer.GetPlayer().transform;
-                Vector3? center = PlayerUtils.GetPlayer().Get_Center_Of_Player();
+                Vector3? center = PlayerUtils.Player.Get_Center_Of_Player();
                 if (center != null && ptransform != null)
                 {
                     UI.transform.position = center.Value + (ptransform.forward * 0.30f);

@@ -40,17 +40,9 @@
             return (T)obj;
         }
 
-        public static T FromIL2CPPToManaged<T>(Il2CppSystem.Object obj)
-        {
-            //if (obj.GetIl2CppType().Attributes == Il2CppSystem.Reflection.TypeAttributes.Serializable)
-            //    return obj.Cast<T>();
-            return FromByteArray<T>(ToByteArray(obj));
-        }
+        public static T FromIL2CPPToManaged<T>(Il2CppSystem.Object obj) => FromByteArray<T>(ToByteArray(obj));
 
-        public static T FromManagedToIL2CPP<T>(object obj)
-        {
-            return IL2CPPFromByteArray<T>(ToByteArray(obj));
-        }
+        public static T FromManagedToIL2CPP<T>(object obj) => IL2CPPFromByteArray<T>(ToByteArray(obj));
 
         public static object[] FromIL2CPPArrayToManagedArray(Il2CppSystem.Object[] obj)
         {

@@ -11,9 +11,6 @@
                 : System.Text.Encoding.UTF8.GetString(bytes, 0, bytes.Length);
         }
 
-        public static byte[] ConvertToBytes(this string msg)
-        {
-            return System.Text.Encoding.UTF8.GetBytes(msg);
-        }
+        public static byte[] ConvertToBytes(this string msg) => System.Text.Encoding.UTF8.GetBytes(msg);
     }
 }
