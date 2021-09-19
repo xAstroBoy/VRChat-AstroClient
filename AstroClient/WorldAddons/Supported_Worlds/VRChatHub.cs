@@ -296,7 +296,7 @@
         {
             if (EventHandler != null && VrcEvent != null)
             {
-                if ((EventHandler.ToString() != Utils.LocalPlayer.GetPlayer().DisplayName() && EventHandler.ToString() != Variables.Strings.AstroClientAuthor) || IgnoreSelf)
+                if ((EventHandler.ToString() != PlayerUtils.DisplayName()) || IgnoreSelf)
                 {
                     if (IsHubButtonLocked)
                     {
@@ -341,7 +341,7 @@
 
         public static void UpdateVariablesHub(VRC_EventHandler EventHandler, VrcEvent VrcEvent)
         {
-            if (EventHandler != null && VrcEvent != null && EventHandler.ToString() == Utils.LocalPlayer.GetPlayer().DisplayName())
+            if (EventHandler != null && VrcEvent != null && EventHandler.ToString() == PlayerUtils.DisplayName())
             {
                 if (VrcEvent.ParameterObject.name == "_RolePlay_Props")
                 {

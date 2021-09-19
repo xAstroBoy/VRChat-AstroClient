@@ -5,11 +5,8 @@
 
     public class GlobalLists : GameEvents
     {
-        public static List<Renderer> RenderObjects = new List<Renderer>();
+        public static List<Renderer> RenderObjects { get; } = new List<Renderer>();
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
-        {
-            RenderObjects.Clear();
-        }
+        public override void OnSceneLoaded(int buildIndex, string sceneName) => RenderObjects.Clear();
     }
 }

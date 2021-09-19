@@ -348,7 +348,6 @@
     <Compile Include="Variables\GlobalLists.cs" />
     <Compile Include="Variables\InstanceBuilder.cs" />
     <Compile Include="Variables\Strings.cs" />
-    <Compile Include="Variables\Vectors.cs" />
     <Compile Include="Variables\VRChatObjects.cs" />
     <Compile Include="Variables\WorldIds.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\FurryTalkAndChill.cs" />

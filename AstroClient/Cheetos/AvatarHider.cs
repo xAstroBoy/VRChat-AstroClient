@@ -28,7 +28,7 @@
                 var self = Utils.LocalPlayer.GetPlayer();
                 var owner = avatar.transform.root.GetComponent<Player>();
 
-                if (self.UserID().Equals(owner.UserID()))
+                if (self.GetUserID().Equals(owner.GetUserID()))
                 {
                     DestroyAvatar(avatar);
                     ModConsole.DebugLog("Your avatar was hidden.");

@@ -2,6 +2,6 @@
 {
     internal class Strings
     {
-        internal static readonly string AstroClientAuthor = "TheAstronautMan";
+        internal static string AstroClientAuthor { get; } = "TheAstronautMan";
     }
 }

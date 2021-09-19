@@ -6,13 +6,13 @@
 
     public class GDBUser
     {
-        public Player vrcPlayer;
+        public Player Player;
         public GameObject avatarObject;
 
-        public GDBUser(Player vrcPlayer)
+        public GDBUser(Player player)
         {
-            this.vrcPlayer = vrcPlayer;
-            this.avatarObject = vrcPlayer.GetVRCPlayer().field_Internal_GameObject_0;
+            Player = player;
+            avatarObject = player.GetVRCPlayer().field_Internal_GameObject_0;
         }
     }
 }

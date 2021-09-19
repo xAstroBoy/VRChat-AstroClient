@@ -1,6 +1,5 @@
 ﻿namespace AstroClient
 {
-    using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using Il2CppSystem.Text;
     using System.Linq;
@@ -31,7 +30,7 @@
 
         public bool IsMaster => Player != null && Player.GetIsMaster();
 
-        public bool IsSelf => Player != null && Player.UserID().Equals(Utils.LocalPlayer.GetPlayer().UserID());
+        public bool IsSelf => Player != null && Player.GetUserID().Equals(Utils.LocalPlayer.GetPlayer().GetUserID());
 
         public bool IsFriend => APIUser != null && APIUser.GetIsFriend();
 
@@ -99,10 +98,10 @@
                     _ = stringBuilder.Append("<color=green>[F]</color>");
                 }
 
-                if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(UserID))
-                {
-                    _ = stringBuilder.Append("<color=red>[B]</color>");
-                }
+                //if (ModerationManager.field_Private_Static_ModerationManager_0.GetIsBlockedEitherWay(UserID))
+                //{
+                //    _ = stringBuilder.Append("<color=red>[B]</color>");
+                //}
 
                 return $"{stringBuilder.ToString()}\n";
             }
@@ -110,7 +109,7 @@
 
         public bool GetIsInvisible()
         {
-            return Player == null || !WorldUtils.Players.Any(p => p.UserID().Equals(Player.UserID()));
+            return Player == null || !WorldUtils.Players.Any(p => p.GetUserID().Equals(Player.GetUserID()));
         }
 
         public PlayerListData(Photon.Realtime.Player photonPlayer)

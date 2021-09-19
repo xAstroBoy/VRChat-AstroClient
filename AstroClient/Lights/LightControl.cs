@@ -236,8 +236,9 @@
 
         public static void DisableLightMaps()
         {
-            foreach (Renderer obj in RenderObjects)
+            for (int i = 0; i < RenderObjects.Count; i++)
             {
+                Renderer obj = RenderObjects[i];
                 obj.lightmapIndex = -1;
             }
         }
@@ -246,8 +247,10 @@
         {
             if (!HasLightmapsStored)
             {
-                foreach (GameObject obj in Resources.FindObjectsOfTypeAll<GameObject>())
+                UnhollowerBaseLib.Il2CppArrayBase<GameObject> list = Resources.FindObjectsOfTypeAll<GameObject>();
+                for (int i = 0; i < list.Count; i++)
                 {
+                    GameObject obj = list[i];
                     var renderer = obj.GetComponentInChildren<Renderer>(true);
                     if (renderer != null)
                     {

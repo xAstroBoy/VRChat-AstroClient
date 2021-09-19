@@ -97,8 +97,9 @@
                 var files = Directory.GetFiles(SkyboxesPath).ToList();
                 if (files.IsNotEmpty())
                 {
-                    foreach (var file in files)
+                    for (int i1 = 0; i1 < files.Count; i1++)
                     {
+                        string file = files[i1];
                         if (!IsBundleAlreadyRegistered(Path.GetFileName(file)))
                         {
                             //ModConsole.Log("Found Custom Skybox : " + Path.GetFileName(file));
@@ -106,8 +107,10 @@
                             var bundle = AssetBundle.LoadFromMemory(stream.ToArray(), 0);
                             bundle.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                             var materialpath = string.Empty;
-                            foreach (var assetname in bundle.GetAllAssetNames())
+                            UnhollowerBaseLib.Il2CppStringArray list = bundle.GetAllAssetNames();
+                            for (int i = 0; i < list.Count; i++)
                             {
+                                string assetname = list[i];
                                 //ModConsole.DebugLog("Searching for Mat File in path : " + assetname);
                                 if (assetname.ToLower().EndsWith(".mat"))
                                 {
@@ -157,6 +160,8 @@
                             ModConsole.Warning("Skipping Registered Skybox :" + Path.GetFileName(file));
                             continue;
                         }
+
+                        yield return new WaitForSeconds(0.001f);
                     }
                 }
                 else
@@ -169,7 +174,9 @@
                 _ = Directory.CreateDirectory(SkyboxesPath);
                 ModConsole.Warning("To Add custom Skyboxes , import the skyboxes assetbundles here : " + SkyboxesPath);
             }
-            yield return null;
+
+            ModConsole.Log("Done checking for skyboxes.");
+            yield break;
         }
 
         private static void SetNewSkybox(Material mat)

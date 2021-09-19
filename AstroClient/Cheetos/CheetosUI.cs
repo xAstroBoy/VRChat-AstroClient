@@ -6,7 +6,6 @@
     using AstroClient.Variables;
     using AstroLibrary;
     using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using MelonLoader;
     using RubyButtonAPI;
@@ -88,13 +87,13 @@
             for (int i = 0; i < WorldUtils.Players.Count; i++)
             {
                 VRC.Player player = WorldUtils.Players[i];
-                if (!player.GetAPIUser().GetIsFriend() && !player.GetUserID().Equals(Utils.LocalPlayer.GetPlayer().GetUserID()))
+                if (!player.GetAPIUser().isFriend && !player.GetUserID().Equals(Utils.LocalPlayer.GetPlayer().GetUserID()))
                 {
                     try
                     {
                         Notification xx = FriendRequest.Create(player.GetUserID());
                         VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
-                        CheetosHelpers.SendHudNotification($"Friend Request Sent: {player.DisplayName()}");
+                        CheetosHelpers.SendHudNotification($"Friend Request Sent: {player.GetDisplayName()}");
                     }
                     catch (Exception e)
                     {

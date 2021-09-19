@@ -19,10 +19,10 @@
             public UdonBehaviour UdonBehaviour { get; set; }
             public string EventKey { get; set; }
 
-            public UdonBehaviour_Cached(UdonBehaviour UdonBehaviour, string EventKey)
+            public UdonBehaviour_Cached(UdonBehaviour udonBehaviour, string eventKey)
             {
-                this.UdonBehaviour = UdonBehaviour;
-                this.EventKey = EventKey;
+                UdonBehaviour = udonBehaviour;
+                EventKey = eventKey;
             }
         }
 
@@ -57,11 +57,11 @@
 
             public bool HasBeenStored { get; set; }
 
-            public GameObjScales(GameObject obj, Vector3 Scale, bool Stored)
+            public GameObjScales(GameObject obj, Vector3 scale, bool stored)
             {
                 TargetObj = obj;
-                OriginalScale = Scale;
-                HasBeenStored = Stored;
+                OriginalScale = scale;
+                HasBeenStored = stored;
             }
         }
 

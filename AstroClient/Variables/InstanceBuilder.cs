@@ -24,7 +24,7 @@
             {
                 if (instancename != "INSTANCE_OBJECT_ADDED")
                 {
-                    ModConsole.Log(instancename + " is now Added!", Color.Orange);
+                    ModConsole.Log($"{instancename} is now Added!", Color.Orange);
                 }
                 Object.DontDestroyOnLoad(InstanceHolder);
                 return InstanceHolder;
