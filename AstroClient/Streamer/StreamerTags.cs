@@ -24,7 +24,7 @@
                 if (apiuser != null)
                 {
                     var userid = apiuser.id;
-                    player.AddSingleTag(Color.Lime, UnityEngine.Color.white, "Streamer");
+                    player.AddSingleTag(Color.LimeGreen, UnityEngine.Color.white, "Streamer");
                     switch (userid)
                     {
                         case Streamers.StarNovaKitty:
