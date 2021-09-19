@@ -141,6 +141,9 @@
 
         public static void InitializeOverridables()
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             if (!KeyManager.IsAuthed) return;
             foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
             {
@@ -161,6 +164,9 @@
                     Tweaker_Overridables.Add(component);
                 }
             }
+
+            stopwatch.Stop();
+            ModConsole.Log($"Initialize Overidables: Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
@@ -226,6 +232,9 @@
 
         private void Start_VRChat_OnUiManagerInit()
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             if (!KeyManager.IsAuthed) return;
             QuickMenuUtils_Old.SetQuickMenuCollider(5, 5);
             UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
@@ -243,6 +252,9 @@
             CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 3f, true);
 
             Event_VRChat_OnUiManagerInit.SafetyRaise();
+
+            stopwatch.Stop();
+            ModConsole.Log($"Start_VRChat_OnUiManagerInit: Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
         public static void InitMainsButtons()
