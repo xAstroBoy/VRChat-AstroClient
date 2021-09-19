@@ -133,10 +133,11 @@ namespace AstroLibrary.Utility
             return Vector3.zero;
         }
 
-        public static Dictionary<string, int> Filters()
+        public static Dictionary<string, int> Filters
         {
-            Dictionary<string, int> dictionary = new Dictionary<string, int>
+            get
             {
+                return new Dictionary<string, int>{
                 { "None", 0 },
                 { "Blueprint", 10 },
                 { "Code", 4 },
@@ -150,7 +151,7 @@ namespace AstroLibrary.Utility
                 { "Old Timey", 1 },
                 { "Trippy", 11 }
             };
-            return dictionary;
+            }
         }
 
         public static void SetCameraMode(CameraMode mode)

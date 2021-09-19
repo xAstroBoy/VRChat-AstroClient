@@ -15,8 +15,9 @@
 
         public static Player GetOwnerOfGameObject(GameObject gameObject)
         {
-            foreach (Player player in WorldUtils.Players)
+            for (int i = 0; i < WorldUtils.Players.Count; i++)
             {
+                Player player = WorldUtils.Players[i];
                 if (player.GetVRCPlayerApi().IsOwner(gameObject))
                 {
                     return player;

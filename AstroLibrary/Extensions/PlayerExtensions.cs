@@ -8,26 +8,6 @@
 
     public static class PlayerExtensions
     {
-        public static string UserID(this Player Instance)
-        {
-            return Instance.GetAPIUser().id;
-        }
-
-        public static string UserID(this VRCPlayer Instance)
-        {
-            return Instance.GetAPIUser().id;
-        }
-
-        public static string UserID(this PlayerNet Instance)
-        {
-            return Instance.GetAPIUser().id;
-        }
-
-        public static string UserID(this APIUser Instance)
-        {
-            return Instance.id;
-        }
-
         public static string DisplayName(this Player Instance)
         {
             return Instance.GetAPIUser().displayName;
@@ -193,13 +173,13 @@
             if (Instance.GetAPIUser().statusValue == APIUser.UserStatus.Offline)
                 returnstring += "<color=gray>[Offline]</color> ";
 
-            if (Instance.UserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlocked(Instance.UserID()) && Utils.ModerationManager.GetIsBlockedByUser(Instance.UserID()))
+            if (Instance.GetUserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlocked(Instance.GetUserID()) && Utils.ModerationManager.GetIsBlockedByUser(Instance.GetUserID()))
                 returnstring += "<color=magenta>[B]</color> ";
 
-            if (Instance.UserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlocked(Instance.UserID()))
+            if (Instance.GetUserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlocked(Instance.GetUserID()))
                 returnstring += "<color=cyan>[B]</color> ";
 
-            if (Instance.UserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlockedByUser(Instance.UserID()))
+            if (Instance.GetUserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlockedByUser(Instance.GetUserID()))
                 returnstring += "<color=red>[B]</color> ";
             if (Instance.GetAPIUser().isFriend)
                 returnstring += "<color=yellow>[F]</color> ";
@@ -233,13 +213,13 @@
         public static string GetSmallThings(this VRCPlayer Instance)
         {
             string returnstring = string.Empty;
-            if (Instance.UserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlocked(Instance.UserID()) && Utils.ModerationManager.GetIsBlockedByUser(Instance.UserID()))
+            if (Instance.GetUserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlocked(Instance.GetUserID()) && Utils.ModerationManager.GetIsBlockedByUser(Instance.GetUserID()))
                 returnstring += "<color=magenta>[B]</color> ";
 
-            if (Instance.UserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlocked(Instance.UserID()))
+            if (Instance.GetUserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlocked(Instance.GetUserID()))
                 returnstring += "<color=cyan>[B]</color> ";
 
-            if (Instance.UserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlockedByUser(Instance.UserID()))
+            if (Instance.GetUserID() != APIUser.CurrentUser.id && Utils.ModerationManager.GetIsBlockedByUser(Instance.GetUserID()))
                 returnstring += "<color=red>[B]</color> ";
             if (Instance.GetAPIUser().isFriend)
                 returnstring += "<color=yellow>[F]</color> ";
@@ -271,7 +251,7 @@
 
         public static bool GetIsBot(this VRCPlayer Instance)
         {
-            return Instance.GetPing() == 0 && Instance.GetFrames() == 0 && Instance.UserID() != APIUser.CurrentUser.id;
+            return Instance.GetPing() == 0 && Instance.GetFrames() == 0 && Instance.GetUserID() != APIUser.CurrentUser.id;
         }
 
         #endregion Ranks

@@ -32,7 +32,7 @@
 
                 foreach (var moderation in moderations)
                 {
-                    if (moderation.moderationType == ApiPlayerModeration.ModerationType.Block && moderation.sourceUserId == UserID && moderation.targetUserId == Utils.CurrentUser.UserID())
+                    if (moderation.moderationType == ApiPlayerModeration.ModerationType.Block && moderation.sourceUserId == UserID && moderation.targetUserId == Utils.CurrentUser.GetUserID())
                     {
                         return true;
                     }

@@ -1,4 +1,6 @@
-﻿namespace Blaze.Utils
+﻿// Credits to Blaze and DayOfThePlay
+
+namespace AstroLibrary.Utility
 {
     using System;
     using System.Runtime.InteropServices;

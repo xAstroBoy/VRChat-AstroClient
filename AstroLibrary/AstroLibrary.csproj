@@ -700,20 +700,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blaze%27s Utils\APIS\BlazesAPIs.cs" />
-    <Compile Include="Blaze%27s Utils\APIS\QM\QMButtonBase.cs" />
-    <Compile Include="Blaze%27s Utils\APIS\QM\QMImage.cs" />
-    <Compile Include="Blaze%27s Utils\APIS\QM\QMInfo.cs" />
-    <Compile Include="Blaze%27s Utils\APIS\QM\QMNestedButton.cs" />
-    <Compile Include="Blaze%27s Utils\APIS\QM\QMScrollMenu.cs" />
-    <Compile Include="Blaze%27s Utils\APIS\QM\QMSingleButton.cs" />
-    <Compile Include="Blaze%27s Utils\APIS\QM\QMSlider.cs" />
-    <Compile Include="Blaze%27s Utils\APIS\QM\QMStuff.cs" />
-    <Compile Include="Blaze%27s Utils\APIS\QM\QMToggleButton.cs" />
+    <Compile Include="Menu\QuickMenuButtons2\QMButtonBase.cs" />
+    <Compile Include="Menu\QuickMenuButtons2\QMImage.cs" />
+    <Compile Include="Menu\QuickMenuButtons2\QMInfo.cs" />
+    <Compile Include="Menu\QuickMenuButtons2\QMNestedButton.cs" />
+    <Compile Include="Menu\QuickMenuButtons2\QMScrollMenu.cs" />
+    <Compile Include="Menu\QuickMenuButtons2\QMSingleButton.cs" />
+    <Compile Include="Menu\QuickMenuButtons2\QMSlider.cs" />
+    <Compile Include="Menu\QuickMenuButtons2\QMStuff.cs" />
+    <Compile Include="Menu\QuickMenuButtons2\QMToggleButton.cs" />
     <Compile Include="Blaze%27s Utils\APIS\SM\SMButton.cs" />
     <Compile Include="Blaze%27s Utils\APIS\SM\SMList.cs" />
     <Compile Include="Blaze%27s Utils\APIS\SM\SMText.cs" />
     <Compile Include="Blaze%27s Utils\APIS\TagsAPI.cs" />
-    <Compile Include="Blaze%27s Utils\AudioUtils.cs" />
+    <Compile Include="Utility\AudioUtils.cs" />
     <Compile Include="Blaze%27s Utils\BlazesXRefs.cs" />
     <Compile Include="Blaze%27s Utils\ConversionUtils.cs" />
     <Compile Include="Blaze%27s Utils\DiscordUtils.cs" />
@@ -729,8 +729,7 @@
     <Compile Include="Utility\GameObjectUtils.cs" />
     <Compile Include="Utility\MiscUtils.cs" />
     <Compile Include="Blaze%27s Utils\ModerationHelper.cs" />
-    <Compile Include="Blaze%27s Utils\NetworkUtils.cs" />
-    <Compile Include="Blaze%27s Utils\PhotonUtils.cs" />
+    <Compile Include="Utility\PhotonUtils.cs" />
     <Compile Include="Utility\PlayerUtils.cs" />
     <Compile Include="Blaze%27s Utils\PopupUtils.cs" />
     <Compile Include="Blaze%27s Utils\SerializationUtils.cs" />
@@ -817,6 +816,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Blaze%27s Utils\APIS\QM\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

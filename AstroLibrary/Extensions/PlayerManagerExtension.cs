@@ -28,10 +28,14 @@
 
         public static Player GetPlayerID(this PlayerManager Instance, int playerID)
         {
-            var Players = Instance.AllPlayers();
-            foreach (Player player in Players.ToArray())
+            Player[] array = Instance.AllPlayers().ToArray();
+            for (int i = 0; i < array.Length; i++)
+            {
+                Player player = array[i];
                 if (player.GetVRCPlayerApi().playerId == playerID)
                     return player;
+            }
+
             return null;
         }
 
@@ -39,7 +43,7 @@
         {
             var Players = Instance.AllPlayers();
             foreach (var player in from player in Players
-                                   where player.GetAPIUser().UserID() == UserID
+                                   where player.GetAPIUser().GetUserID() == UserID
                                    select player)
             {
                 return player;

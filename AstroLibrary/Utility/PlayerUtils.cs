@@ -464,15 +464,9 @@ namespace AstroLibrary.Utility
         }
 
         // Frames
-        public static int GetFrames(this VRC.Player instance)
-        {
-            return instance.GetPlayerNet().prop_Byte_0 != 0 ? (int)(1000f / instance.GetPlayerNet().prop_Byte_0) : 0;
-        }
+        public static int GetFrames(this VRC.Player instance) => instance.GetPlayerNet().prop_Byte_0 != 0 ? (int)(1000f / instance.GetPlayerNet().prop_Byte_0) : 0;
 
-        public static int GetFrames(this VRCPlayer instance)
-        {
-            return instance.GetPlayerNet().prop_Byte_0 != 0 ? (int)(1000f / instance.GetPlayerNet().prop_Byte_0) : 0;
-        }
+        public static int GetFrames(this VRCPlayer instance) => instance.GetPlayerNet().prop_Byte_0 != 0 ? (int)(1000f / instance.GetPlayerNet().prop_Byte_0) : 0;
 
         public static string GetFramesColored(this VRC.Player instance)
         {
@@ -491,15 +485,9 @@ namespace AstroLibrary.Utility
         }
 
         // Ping
-        public static short GetPing(this VRCPlayer instance)
-        {
-            return instance.GetPlayerNet().field_Private_Int16_0;
-        }
+        public static short GetPing(this VRCPlayer instance) => instance.GetPlayerNet().field_Private_Int16_0;
 
-        public static short GetPing(this VRC.Player instance)
-        {
-            return instance.GetPlayerNet().field_Private_Int16_0;
-        }
+        public static short GetPing(this VRC.Player instance) => instance.GetPlayerNet().field_Private_Int16_0;
 
         public static string GetPingColored(this VRCPlayer instance)
         {
@@ -528,11 +516,7 @@ namespace AstroLibrary.Utility
             }
         }
 
-        public static string GetRankColorHex(this APIUser instance)
-        {
-            string playerRank = instance.GetRank();
-            return GetRankColor(playerRank);
-        }
+        public static string GetRankColorHex(this APIUser instance) => GetRankColor(instance.GetRank());
 
         private static string GetRankColor(string rank)
         {

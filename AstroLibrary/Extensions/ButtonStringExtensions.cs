@@ -6,20 +6,8 @@
 
     public static class ButtonStringExtensions
     {
-        public static string Generate_TeleportToMe_ButtonText(this GameObject obj)
-        {
-            string ObjectName = obj != null ? obj.name : "null";
-            return $"Teleport to you:\n{ObjectName}";
-        }
+        public static string Generate_TeleportToMe_ButtonText(this GameObject obj) => $"Teleport to you:\n{(obj != null ? obj.name : "null")}";
 
-        public static string Generate_TeleportToTarget_ButtonText(GameObject obj, Player Target)
-        {
-            string TargetName;
-
-            string ObjectName = obj != null ? obj.name : "null";
-            TargetName = Target != null ? Target.GetAPIUser().displayName : "null";
-
-            return $"Teleport\n {ObjectName} to:\n {TargetName}";
-        }
+        public static string Generate_TeleportToTarget_ButtonText(GameObject obj, Player Target) => $"Teleport\n {(obj != null ? obj.name : "null")} to:\n {(Target != null ? Target.GetAPIUser().displayName : "null")}";
     }
 }

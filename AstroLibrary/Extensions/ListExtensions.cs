@@ -9,10 +9,7 @@
 
     public static class ListExtensions
     {
-        public static bool AnyAndNotNull<T>(this List<T> list)
-        {
-            return list != null && list.Any();
-        }
+        public static bool AnyAndNotNull<T>(this List<T> list) => list != null && list.Any();
 
         public static void RegisterChildsInPath(this List<GameObject> Original, string path)
         {
@@ -42,7 +39,7 @@
             {
                 if (list == null)
                 {
-                    ModConsole.Log("Error, failed to add string " + text + " because " + nameof(list).ToString() + " is null.");
+                    ModConsole.Log($"Error, failed to add string {text} because {nameof(list).ToString()} is null.");
                     return;
                 }
                 if (string.IsNullOrEmpty(text))
@@ -65,7 +62,7 @@
             {
                 if (list == null)
                 {
-                    ModConsole.Log("Error, failed to remove string " + text + " because " + nameof(list).ToString() + " is null.");
+                    ModConsole.Log($"Error, failed to remove string {text} because {nameof(list).ToString()} is null.");
                     return;
                 }
                 if (string.IsNullOrEmpty(text))
@@ -88,7 +85,7 @@
             {
                 if (list == null)
                 {
-                    ModConsole.Log("Error, failed to add gameobject " + obj.name + " because " + nameof(list).ToString() + " is null.");
+                    ModConsole.Log($"Error, failed to add gameobject {obj.name} because {nameof(list).ToString()} is null.");
                     return;
                 }
                 if (obj == null)
@@ -111,7 +108,7 @@
             {
                 if (list == null)
                 {
-                    ModConsole.Log("Error, failed to remove gameobject " + obj.name + " because " + nameof(list).ToString() + " is null.");
+                    ModConsole.Log($"Error, failed to remove gameobject {obj.name} because {nameof(list).ToString()} is null.");
                 }
                 if (obj == null)
                 {
@@ -125,8 +122,9 @@
         {
             if (list != null)
             {
-                foreach (var item in list)
+                for (int i = 0; i < list.Count; i++)
                 {
+                    GameObject item = list[i];
                     if (item != null)
                     {
                         Object.Destroy(item);
@@ -140,7 +138,7 @@
             {
                 if (list == null)
                 {
-                    ModConsole.Log("Error, failed to Destroy gameobjects  in " + nameof(list).ToString() + " is null.");
+                    ModConsole.Log($"Error, failed to Destroy gameobjects  in {nameof(list).ToString()} is null.");
                     return;
                 }
             }

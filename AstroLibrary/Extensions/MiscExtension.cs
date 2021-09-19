@@ -70,17 +70,6 @@ namespace AstroLibrary.Extensions
             Instance.Method_Private_Void_String_String_PDM_0(WorldID, InstanceID);
         }
 
-        public static bool IsInVR()
-        {
-            return UnityEngine.XR.XRDevice.isPresent;
-        }
-
-        [Obsolete("This Doenst always works -Day <3")]
-        public static bool IsCurrentWorldUdon()
-        {
-            return RoomManager.field_Internal_Static_ApiWorld_0.tags.Contains("Udon");
-        }
-
         public static void Start(this IEnumerator e)
         {
             MelonCoroutines.Start(e);

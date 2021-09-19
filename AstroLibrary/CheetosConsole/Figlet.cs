@@ -75,8 +75,9 @@
         private static int GetStringWidth(FigletFont font, string value)
         {
             List<int> charWidths = new List<int>();
-            foreach (var character in value)
+            for (int i = 0; i < value.Length; i++)
             {
+                char character = value[i];
                 int charWidth = 0;
                 for (int line = 1; line <= font.Height; line++)
                 {
