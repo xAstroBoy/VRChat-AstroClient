@@ -133,38 +133,38 @@
                     break;
 
                 case PacketServerType.ADD_TAG:
-                    MiscUtils.DelayFunction(2f, () =>
-                    {
-                        if (ConfigManager.UI.NamePlates)
-                        {
-                            var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
-                            Player player;
-                            if (PlayerUtils.Player.GetUserID().Equals(tagData.UserID))
-                            {
-                                ModConsole.Log("Wants to add tag to self");
-                                player = PlayerUtils.Player;
-                            }
-                            else
-                            {
-                                ModConsole.Log("Wants to add tag to someone else");
-                                player = WorldUtils_Old.Get_Player_By_ID(tagData.UserID);
-                            }
-                            if (player != null)
-                            {
-                                player.GetComponent<CheetoNameplate>().AddTag(tagData.Text, Color.yellow);
-                                // Temporary solution for applying developer status
-                                if (tagData.Text.Equals("AstroClient Developer"))
-                                {
-                                    player.GetComponent<CheetoNameplate>().SetDeveloper(true);
-                                }
-                                //new BlazeTag(player, tagData.Text, Color.yellow);
-                            }
-                            else
-                            {
-                                ModConsole.Log($"Player ({tagData.UserID}) returned null");
-                            }
-                        }
-                    });
+                    //MiscUtils.DelayFunction(2f, () =>
+                    //{
+                    //    if (ConfigManager.UI.NamePlates)
+                    //    {
+                    //        var tagData = JsonConvert.DeserializeObject<TagData>(packetData.TextData);
+                    //        Player player;
+                    //        if (PlayerUtils.Player.GetUserID().Equals(tagData.UserID))
+                    //        {
+                    //            ModConsole.Log("Wants to add tag to self");
+                    //            player = PlayerUtils.Player;
+                    //        }
+                    //        else
+                    //        {
+                    //            ModConsole.Log("Wants to add tag to someone else");
+                    //            player = WorldUtils_Old.Get_Player_By_ID(tagData.UserID);
+                    //        }
+                    //        if (player != null)
+                    //        {
+                    //            //player.GetComponent<CheetoNameplate>().AddTag(tagData.Text, Color.yellow);
+                    //            // Temporary solution for applying developer status
+                    //            if (tagData.Text.Equals("AstroClient Developer"))
+                    //            {
+                    //                player.GetComponent<CheetoNameplate>().SetDeveloper(true);
+                    //            }
+                    //            //new BlazeTag(player, tagData.Text, Color.yellow);
+                    //        }
+                    //        else
+                    //        {
+                    //            ModConsole.Log($"Player ({tagData.UserID}) returned null");
+                    //        }
+                    //    }
+                    //});
                     break;
 
                 case PacketServerType.NOTIFY:

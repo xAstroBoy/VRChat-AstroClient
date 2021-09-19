@@ -5,6 +5,7 @@
     using AstroLibrary.Console;
     using AstroNetworkingLibrary;
     using System;
+    using System.Diagnostics;
     using System.IO;
     using System.Threading;
     using UnityEngine;
@@ -213,9 +214,11 @@
             ModConsole.DebugLog("Performance Config Saved.");
         }
 
-        public static void Save_All()
+        public static void SaveAll()
         {
             _ = SaveMutex.WaitOne();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             Save_General();
             Save_UI();
             Save_ESP();
@@ -223,12 +226,15 @@
             Save_Movement();
             Save_Favorites();
             Save_Performance();
-            ModConsole.Log("Finished Saving Configuration Files.");
+            stopwatch.Stop();
+            ModConsole.Log($"Finished Saving Configuration Files: {stopwatch.ElapsedMilliseconds}ms");
             SaveMutex.ReleaseMutex();
         }
 
         public static void Load()
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             try
             {
                 General = JSonWriter.ReadFromJsonFile<ConfigGeneral>(ConfigPath);
@@ -291,9 +297,9 @@
             {
                 ModConsole.Error("Failed to load Performance config, creating a new one..");
             }
-
-            ModConsole.DebugLog("Finishes Loading Configuration Files.");
-            Save_All();
+            stopwatch.Stop();
+            ModConsole.DebugLog($"Finished Loading Configuration Files: {stopwatch.ElapsedMilliseconds}ms");
+            SaveAll();
         }
     }
 }

@@ -93,14 +93,22 @@
 
         public static GameObject FindRootSceneObject(string name)
         {
-            GameObject obj = SceneManager.GetActiveScene().GetRootGameObjects().Where(x => x.gameObject.name == name).First();
+            var list = SceneManager.GetActiveScene().GetRootGameObjects();
 
-            if (obj == null)
+            for (int i = 0; i < list.Count; i++)
             {
-                ModConsole.DebugWarning("[WARNING (FindRootSceneObject) ]  Root Gameobject name [ " + name + " ]  is Invalid, No Object Found!");
+                var obj = list[i];
+                if (obj != null && obj.name.Equals(name))
+                {
+                    return obj;
+                }
+                else
+                {
+                    ModConsole.DebugWarning("[WARNING (FindRootSceneObject) ]  Root Gameobject name [ " + name + " ]  is Invalid, No Object Found!");
+                }
             }
 
-            return obj;
+            return null;
         }
 
 
@@ -123,15 +131,17 @@
             var obj = GameObject.Find(path);
             if (obj != null)
             {
-                foreach (var item in obj.GetComponentsInChildren<Transform>())
+                UnhollowerBaseLib.Il2CppArrayBase<Transform> list1 = obj.GetComponentsInChildren<Transform>();
+                for (int i = 0; i < list1.Count; i++)
                 {
+                    Transform item = list1[i];
                     list.AddGameObject(item.gameObject);
                 }
                 return list;
             }
             else
             {
-                ModConsole.DebugWarning("[WARNING (ListFind) ] Gameobject on path [ " + path + " ]  is Invalid, No Object Found!");
+                ModConsole.DebugWarning($"[WARNING (ListFind) ] Gameobject on path [ {path} ]  is Invalid, No Object Found!");
                 return list;
             }
         }
@@ -145,25 +155,27 @@
         [Obsolete("Use root object finder, then find the object from there")]
         public static GameObject InactiveFind(string path)
         {
-            foreach (GameObject gameObj in Resources.FindObjectsOfTypeAll<GameObject>())
+            UnhollowerBaseLib.Il2CppArrayBase<GameObject> list = Resources.FindObjectsOfTypeAll<GameObject>();
+            for (int i = 0; i < list.Count; i++)
             {
+                GameObject gameObj = list[i];
                 if (GetGameObjectPath(gameObj).Equals(path))
                 {
                     ModConsole.Log($"FOUND: {GetGameObjectPath(gameObj)}");
                     return gameObj;
                 }
             }
-            ModConsole.DebugWarning("[WARNING (InactiveFind) ]  Gameobject on path [ " + path + " ]  is Invalid, No Object Found!");
+            ModConsole.DebugWarning($"[WARNING (InactiveFind) ]  Gameobject on path [ {path} ]  is Invalid, No Object Found!");
             return null;
         }
 
         public static string GetGameObjectPath(GameObject obj)
         {
-            string path = "/" + obj.name;
+            string path = $"/{obj.name}";
             while (obj.transform.parent != null)
             {
                 obj = obj.transform.parent.gameObject;
-                path = "/" + obj.name + path;
+                path = $"/{obj.name}{path}";
             }
             return path;
         }

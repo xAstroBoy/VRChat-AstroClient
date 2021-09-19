@@ -106,15 +106,14 @@
                 var TargetsRootScene = GameObjectFinder.FindRootSceneObject("Targets");
                 if (TargetsRootScene != null)
                 {
-                    foreach (var target in TargetsRootScene.GetComponentsInChildren<Transform>(true))
+                    UnhollowerBaseLib.Il2CppArrayBase<Transform> list = TargetsRootScene.GetComponentsInChildren<Transform>(true);
+                    for (int i = 0; i < list.Count; i++)
                     {
-                        if (target.name.ToLower().StartsWith("target"))
+                        Transform target = list[i];
+                        if (target.name.ToLower().StartsWith("target") && !MapTargets.Contains(target.gameObject))
                         {
-                            if (!MapTargets.Contains(target.gameObject))
-                            {
-                                ModConsole.DebugLog($"Registered Obj {target.name} in target list.");
-                                MapTargets.Add(target.gameObject);
-                            }
+                            ModConsole.DebugLog($"Registered Obj {target.name} in target list.");
+                            MapTargets.Add(target.gameObject);
                         }
                     }
                 }
@@ -165,31 +164,10 @@
 
         public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
-            if (IsAimFactory)
+            if (IsAimFactory && obj != null && IsAlwaysPerfectHit && sender != null && sender == Utils.LocalPlayer.GetPlayer() && obj.name.Equals("Handgun_M1911A (Model)") && action == "AllwaysTrigger" && !IsPoppingTarget)
             {
-                if (obj != null)
-                {
-                    if (IsAlwaysPerfectHit)
-                    {
-                        if (sender != null)
-                        {
-                            if (sender == Utils.LocalPlayer.GetPlayer())
-                            {
-                                if (obj.name.Equals("Handgun_M1911A (Model)"))
-                                {
-                                    if (action == "AllwaysTrigger")
-                                    {
-                                        if (!IsPoppingTarget)
-                                        {
-                                            IsPoppingTarget = true;
-                                            _ = MelonLoader.MelonCoroutines.Start(PopTarget());
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                IsPoppingTarget = true;
+                _ = MelonLoader.MelonCoroutines.Start(PopTarget());
             }
         }
     }

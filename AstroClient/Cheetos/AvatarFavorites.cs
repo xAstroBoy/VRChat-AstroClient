@@ -69,8 +69,9 @@
         public static void RefreshList()
         {
             favoriteAvatars.Clear();
-            foreach (var avatarData in AstroClient.ConfigManager.Favorites.Avatars)
+            for (int i = 0; i < AstroClient.ConfigManager.Favorites.Avatars.Count; i++)
             {
+                AstroNetworkingLibrary.Serializable.AvatarData avatarData = AstroClient.ConfigManager.Favorites.Avatars[i];
                 favoriteAvatars.Add(avatarData.ToApiAvatar());
             }
 

@@ -78,6 +78,7 @@
         public override void OnApplicationStart()
         {
             ModConsole.Initialize("AstroClient");
+            WriteBanner();
             LogSupport.RemoveAllHandlers();
             ConfigManager.Validate();
             ConfigManager.Load();
@@ -92,7 +93,7 @@
 			KeyManager.IsAuthed = true;
 			Bools.IsDeveloper = true;
 #else
-            while (!NetworkingManager.IsReady)
+            for (; !NetworkingManager.IsReady;)
             {
             }
 #endif
@@ -111,18 +112,7 @@
             else
             {
                 InitializeOverridables();
-
                 DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
-                try
-                {
-                    CheetosConsole.Console.WriteFigletWithGradient(CheetosConsole.FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);
-                }
-                catch (Exception e)
-                {
-                    ModConsole.Error("Failed To generate Gradient, the Embeded file doesn't exist!");
-                    ModConsole.ErrorExc(e);
-                }
-
                 //Event_OnApplicationStart.SafetyRaise(this, new EventArgs());
             }
         }
@@ -130,13 +120,29 @@
         public override void OnApplicationQuit()
         {
             if (!KeyManager.IsAuthed) return;
-            Event_OnApplicationQuit.SafetyRaise();
+            Event_OnApplicationQuit?.SafetyRaise();
         }
 
         public override void OnPreferencesSaved()
         {
             if (!KeyManager.IsAuthed) return;
-            ConfigManager.Save_All();
+            ConfigManager.SaveAll();
+        }
+
+        /// <summary>
+        /// Maybe move this later?
+        /// </summary>
+        public static void WriteBanner()
+        {
+            try
+            {
+                CheetosConsole.Console.WriteFigletWithGradient(CheetosConsole.FigletFont.LoadFromAssembly("Larry3D.flf"), BuildInfo.Name, System.Drawing.Color.LightBlue, System.Drawing.Color.MidnightBlue);
+            }
+            catch (Exception e)
+            {
+                ModConsole.Error("Failed To generate Gradient, the Embeded file doesn't exist!");
+                ModConsole.ErrorExc(e);
+            }
         }
 
         public static void InitializeOverridables()
@@ -145,8 +151,10 @@
             stopwatch.Start();
 
             if (!KeyManager.IsAuthed) return;
-            foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+            Type[] array = Assembly.GetExecutingAssembly().GetTypes();
+            for (int i = 0; i < array.Length; i++)
             {
+                Type type = array[i];
                 var btype = type.BaseType;
 
                 if (btype != null && btype.Equals(typeof(GameEvents)))
@@ -219,7 +227,7 @@
         private IEnumerator OnUiManagerInitCoro(Action code)
         {
             while (VRCUiManager.prop_VRCUiManager_0 == null)
-                yield return null;
+                yield return new WaitForSeconds(0.001f);
 
             code();
         }

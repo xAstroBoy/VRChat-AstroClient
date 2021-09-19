@@ -164,7 +164,7 @@
 
             for (; ; )
             {
-                yield return new WaitForEndOfFrame();
+                yield return new WaitForSeconds(0.001f);
                 if (!IsSearching)
                 {
                     SearchDone();
@@ -185,8 +185,9 @@
 
             if (avatars.AnyAndNotNull())
             {
-                foreach (var avatar in avatars)
+                for (int i = 0; i < avatars.Count; i++)
                 {
+                    ApiAvatar avatar = avatars[i];
                     worldAvatars.Add(avatar);
 
                     if (avatar != null)
@@ -242,9 +243,10 @@
             searchList.UiVRCList.startExpanded = false;
             //Utils.VRCUiManager.ShowScreen(currPageAvatar);
 
-            foreach (var avatar in foundAvatars.ToArray().Where(a => a.releaseStatus.ToLower().Equals("private")))
+            for (int i = 0; i < foundAvatars.Count; i++)
             {
-                avatar.name = $"<color=red>[P]</color> {avatar.name}";
+                var avatar = foundAvatars[i];
+                if (avatar != null && avatar.releaseStatus.ToLower().Equals("private")) avatar.name = $"<color=red>[P]</color> {avatar.name}";
             }
 
             searchList.RenderElement(foundAvatars);

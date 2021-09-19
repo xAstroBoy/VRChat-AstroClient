@@ -140,15 +140,9 @@
             }
         }
 
-        public static void ToggleHubButtonLock()
-        {
-            IsHubButtonLocked = !IsHubButtonLocked;
-        }
+        public static void ToggleHubButtonLock() => IsHubButtonLocked = !IsHubButtonLocked;
 
-        public static void ToggleIgnoreSelf()
-        {
-            IgnoreSelf = !IgnoreSelf;
-        }
+        public static void ToggleIgnoreSelf() => IgnoreSelf = !IgnoreSelf;
 
         // TODO : REWRITE THE EMULATORS OF CLICKS.
 
@@ -165,13 +159,13 @@
                         if ((Status_BeachBalls_Props != BeachBalls_Props && isOnUpdate) || !isOnUpdate)
                         {
                             // BlinkColorObject(item, Color.green, //OriginalColor_Buttontoggle_BeachBall);
-                            ModConsole.Log("Clicked " + item.name);
+                            ModConsole.Log($"Clicked {item.name}");
                             One.Interact();
                         }
                     }
                     else
                     {
-                        ModConsole.Warning(item.name + " event handler is missing!");
+                        ModConsole.Warning($"{item.name} event handler is missing!");
                     }
                     Fighting_Toy_BeachBall = false;
                 }
@@ -190,14 +184,14 @@
                     {
                         if ((Status_Mirror_Props != Mirror_Props && isOnUpdate) || !isOnUpdate)
                         {
-                            ModConsole.Log("Clicked " + item.name);
+                            ModConsole.Log($"Clicked {item.name}");
                             // BlinkColorObject(item, Color.green, //OriginalColor_Buttontoggle_MirrorProps);
                             One.Interact();
                         }
                     }
                     else
                     {
-                        ModConsole.Warning(item.name + " event handler is missing!");
+                        ModConsole.Warning($"{item.name} event handler is missing!");
                     }
                     Fighting_MirrorProps = false;
                 }
@@ -216,14 +210,14 @@
                     {
                         if ((Status_Table_Props != Table_Props && isOnUpdate) || !isOnUpdate)
                         {
-                            ModConsole.Log("Clicked " + item.name);
+                            ModConsole.Log($"Clicked {item.name}");
                             // BlinkColorObject(item, Color.green, //OriginalColor_Buttontoggle_Table_Props);
                             One.Interact();
                         }
                     }
                     else
                     {
-                        ModConsole.Warning(item.name + " event handler is missing!");
+                        ModConsole.Warning($"{item.name} event handler is missing!");
                     }
                     Fighting_RolePlayFighting_Props = false;
                 }
@@ -233,63 +227,60 @@
         public static void Emulate_building_crystals_blocks_click(bool isOnUpdate = false)
         {
             var item = Button_toggle_CrystalBlocks;
-            if (item != null)
+            if (item != null && Fighting_Build_Crystals_blocks)
             {
-                if (Fighting_Build_Crystals_blocks)
+                var One = item.GetComponentInChildren<VRC_Trigger>();
+                if (One != null)
                 {
-                    var One = item.GetComponentInChildren<VRC_Trigger>();
-                    if (One != null)
+                    if ((Status_CrystalBlock_Props != CrystalBlock_Props && isOnUpdate) || !isOnUpdate)
                     {
-                        if ((Status_CrystalBlock_Props != CrystalBlock_Props && isOnUpdate) || !isOnUpdate)
-                        {
-                            ModConsole.Log("Clicked " + item.name);
-                            // BlinkColorObject(item, Color.green, //OriginalColor_Buttontoggle_CrystalBlocks);
-                            One.Interact();
-                        }
+                        ModConsole.Log($"Clicked {item.name}");
+                        // BlinkColorObject(item, Color.green, //OriginalColor_Buttontoggle_CrystalBlocks);
+                        One.Interact();
                     }
-                    else
-                    {
-                        ModConsole.Warning(item.name + " event handler is missing!");
-                    }
-                    Fighting_Build_Crystals_blocks = false;
                 }
+                else
+                {
+                    ModConsole.Warning($"{item.name} event handler is missing!");
+                }
+                Fighting_Build_Crystals_blocks = false;
             }
         }
 
         public static void Emulate_boats_props_click(bool isOnUpdate = false)
         {
             var item = Button_toggle_Boats;
-            if (item != null)
+            if (item != null && Fighting_Boats_Props)
             {
-                if (Fighting_Boats_Props)
+                var One = item.GetComponentInChildren<VRC_Trigger>();
+                if (One != null)
                 {
-                    var One = item.GetComponentInChildren<VRC_Trigger>();
-                    if (One != null)
+                    if ((Status_Boats_Props != Boats_Props && isOnUpdate) || !isOnUpdate)
                     {
-                        if ((Status_Boats_Props != Boats_Props && isOnUpdate) || !isOnUpdate)
-                        {
-                            ModConsole.Log("Clicked " + item.name);
-                            // BlinkColorObject(item, Color.green, //OriginalColor_Buttontoggle_Boats);
-                            One.Interact();
-                        }
+                        ModConsole.Log($"Clicked {item.name}");
+                        // BlinkColorObject(item, Color.green, //OriginalColor_Buttontoggle_Boats);
+                        One.Interact();
                     }
-                    else
-                    {
-                        ModConsole.Warning(item.name + " event handler is missing!");
-                    }
-                    Fighting_Boats_Props = false;
                 }
+                else
+                {
+                    ModConsole.Warning($"{item.name} event handler is missing!");
+                }
+                Fighting_Boats_Props = false;
             }
         }
 
         public static bool ConvertVrcBool(VrcBooleanOp Value)
         {
-            return Value switch
+            switch (Value)
             {
-                VrcBooleanOp.True => true,
-                VrcBooleanOp.False => false,
-                _ => false,
-            };
+                case VrcBooleanOp.True:
+                    return true;
+                case VrcBooleanOp.False:
+                    return false;
+                default:
+                    return false;
+            }
         }
 
         public override void VRC_EventDispatcherRFC_triggerEvent(VRC_EventHandler EventHandler, VrcEvent VrcEvent, VrcBroadcastType VrcBroadcastType, int value, float floatvalue)
@@ -309,57 +300,40 @@
                 {
                     if (IsHubButtonLocked)
                     {
-                        if (VrcEvent.ParameterObject.name == "_RolePlay_Props")
+                        if (VrcEvent.ParameterObject.name == "_RolePlay_Props" && VrcEvent.ParameterBoolOp != Table_Props)
+						{
+							ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the roleplay props!");
+							Status_Table_Props = VrcEvent.ParameterBoolOp;
+							Fighting_RolePlayFighting_Props = true;
+						}
+                        if (VrcEvent.ParameterObject.name == "_MirrorProps" && VrcEvent.ParameterBoolOp != Mirror_Props)
                         {
-                            if (VrcEvent.ParameterBoolOp != Table_Props)
-                            {
-                                ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the roleplay props!");
-                                // BlinkColorObject(Button_toggle_Table_Props, Color.red, //OriginalColor_Buttontoggle_Table_Props);
-                                Status_Table_Props = VrcEvent.ParameterBoolOp;
-                                Fighting_RolePlayFighting_Props = true;
-                            }
+                            ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the mirror props!");
+                            // BlinkColorObject(Button_toggle_MirrorProps, Color.red, //OriginalColor_Buttontoggle_MirrorProps);
+                            Status_Mirror_Props = VrcEvent.ParameterBoolOp;
+                            Fighting_MirrorProps = true;
                         }
-                        if (VrcEvent.ParameterObject.name == "_MirrorProps")
+                        if (VrcEvent.ParameterObject.name == "TOY_BeachBall" && VrcEvent.ParameterBoolOp != BeachBalls_Props)
                         {
-                            if (VrcEvent.ParameterBoolOp != Mirror_Props)
-                            {
-                                ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the mirror props!");
-                                // BlinkColorObject(Button_toggle_MirrorProps, Color.red, //OriginalColor_Buttontoggle_MirrorProps);
-                                Status_Mirror_Props = VrcEvent.ParameterBoolOp;
-                                Fighting_MirrorProps = true;
-                            }
+                            ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the beachballs props!");
+                            // BlinkColorObject(Button_toggle_BeachBall, Color.red, //OriginalColor_Buttontoggle_BeachBall);
+                            Status_BeachBalls_Props = VrcEvent.ParameterBoolOp;
+                            Fighting_Toy_BeachBall = true;
                         }
-                        if (VrcEvent.ParameterObject.name == "TOY_BeachBall")
+                        if (VrcEvent.ParameterObject.name == "_Build_Props" && VrcEvent.ParameterBoolOp != CrystalBlock_Props)
                         {
-                            if (VrcEvent.ParameterBoolOp != BeachBalls_Props)
-                            {
-                                ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the beachballs props!");
-                                // BlinkColorObject(Button_toggle_BeachBall, Color.red, //OriginalColor_Buttontoggle_BeachBall);
-                                Status_BeachBalls_Props = VrcEvent.ParameterBoolOp;
-                                Fighting_Toy_BeachBall = true;
-                            }
-                        }
-                        if (VrcEvent.ParameterObject.name == "_Build_Props")
-                        {
-                            if (VrcEvent.ParameterBoolOp != CrystalBlock_Props)
-                            {
-                                ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the Crystals Block props!");
-                                // BlinkColorObject(Button_toggle_CrystalBlocks, Color.red, //OriginalColor_Buttontoggle_CrystalBlocks);
-                                Status_CrystalBlock_Props = VrcEvent.ParameterBoolOp;
-                                Fighting_Build_Crystals_blocks = true;
-                            }
+                            ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the Crystals Block props!");
+                            // BlinkColorObject(Button_toggle_CrystalBlocks, Color.red, //OriginalColor_Buttontoggle_CrystalBlocks);
+                            Status_CrystalBlock_Props = VrcEvent.ParameterBoolOp;
+                            Fighting_Build_Crystals_blocks = true;
                         }
 
-                        if (VrcEvent.ParameterObject.name == "_BOATS")
-                        {
-                            if (VrcEvent.ParameterBoolOp != Boats_Props)
-                            {
-                                ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the boats props!");
-                                // BlinkColorObject(Button_toggle_Boats, Color.red, //OriginalColor_Buttontoggle_BeachBall);
-                                Status_Boats_Props = VrcEvent.ParameterBoolOp;
-                                Fighting_Boats_Props = true;
-                            }
-                        }
+                        if (VrcEvent.ParameterObject.name == "_BOATS" && VrcEvent.ParameterBoolOp != Boats_Props)
+						{
+							ModConsole.Warning(EventHandler.ToString() + $" has tried to {(ConvertVrcBool(VrcEvent.ParameterBoolOp) ? "show" : "hide")} the boats props!");
+							Status_Boats_Props = VrcEvent.ParameterBoolOp;
+							Fighting_Boats_Props = true;
+						}
                     }
                 }
             }
@@ -367,54 +341,51 @@
 
         public static void UpdateVariablesHub(VRC_EventHandler EventHandler, VrcEvent VrcEvent)
         {
-            if (EventHandler != null && VrcEvent != null)
+            if (EventHandler != null && VrcEvent != null && EventHandler.ToString() == Utils.LocalPlayer.GetPlayer().DisplayName())
             {
-                if (EventHandler.ToString() == Utils.LocalPlayer.GetPlayer().DisplayName())
+                if (VrcEvent.ParameterObject.name == "_RolePlay_Props")
                 {
-                    if (VrcEvent.ParameterObject.name == "_RolePlay_Props")
+                    if (!Fighting_RolePlayFighting_Props)
                     {
-                        if (!Fighting_RolePlayFighting_Props)
-                        {
-                            Table_Props = VrcEvent.ParameterBoolOp;
-                            Status_Table_Props = VrcEvent.ParameterBoolOp;
-                            // BlinkColorObject(Button_toggle_Table_Props, Color.green, //OriginalColor_Buttontoggle_Table_Props);
-                        }
+                        Table_Props = VrcEvent.ParameterBoolOp;
+                        Status_Table_Props = VrcEvent.ParameterBoolOp;
+                        // BlinkColorObject(Button_toggle_Table_Props, Color.green, //OriginalColor_Buttontoggle_Table_Props);
                     }
-                    if (VrcEvent.ParameterObject.name == "_MirrorProps")
+                }
+                if (VrcEvent.ParameterObject.name == "_MirrorProps")
+                {
+                    if (!Fighting_MirrorProps)
                     {
-                        if (!Fighting_MirrorProps)
-                        {
-                            Mirror_Props = VrcEvent.ParameterBoolOp;
-                            Status_Mirror_Props = VrcEvent.ParameterBoolOp;
-                            // BlinkColorObject(Button_toggle_MirrorProps, Color.green, //OriginalColor_Buttontoggle_MirrorProps);
-                        }
+                        Mirror_Props = VrcEvent.ParameterBoolOp;
+                        Status_Mirror_Props = VrcEvent.ParameterBoolOp;
+                        // BlinkColorObject(Button_toggle_MirrorProps, Color.green, //OriginalColor_Buttontoggle_MirrorProps);
                     }
-                    if (VrcEvent.ParameterObject.name == "TOY_BeachBall")
+                }
+                if (VrcEvent.ParameterObject.name == "TOY_BeachBall")
+                {
+                    if (!Fighting_Toy_BeachBall)
                     {
-                        if (!Fighting_Toy_BeachBall)
-                        {
-                            BeachBalls_Props = VrcEvent.ParameterBoolOp;
-                            Status_BeachBalls_Props = VrcEvent.ParameterBoolOp;
-                            // BlinkColorObject(Button_toggle_BeachBall, Color.green, //OriginalColor_Buttontoggle_BeachBall);
-                        }
+                        BeachBalls_Props = VrcEvent.ParameterBoolOp;
+                        Status_BeachBalls_Props = VrcEvent.ParameterBoolOp;
+                        // BlinkColorObject(Button_toggle_BeachBall, Color.green, //OriginalColor_Buttontoggle_BeachBall);
                     }
-                    if (VrcEvent.ParameterObject.name == "_Build_Props")
+                }
+                if (VrcEvent.ParameterObject.name == "_Build_Props")
+                {
+                    if (!Fighting_Build_Crystals_blocks)
                     {
-                        if (!Fighting_Build_Crystals_blocks)
-                        {
-                            CrystalBlock_Props = VrcEvent.ParameterBoolOp;
-                            Status_CrystalBlock_Props = VrcEvent.ParameterBoolOp;
-                            // BlinkColorObject(Button_toggle_CrystalBlocks, Color.green, //OriginalColor_Buttontoggle_CrystalBlocks);
-                        }
+                        CrystalBlock_Props = VrcEvent.ParameterBoolOp;
+                        Status_CrystalBlock_Props = VrcEvent.ParameterBoolOp;
+                        // BlinkColorObject(Button_toggle_CrystalBlocks, Color.green, //OriginalColor_Buttontoggle_CrystalBlocks);
                     }
-                    if (VrcEvent.ParameterObject.name == "_BOATS")
+                }
+                if (VrcEvent.ParameterObject.name == "_BOATS")
+                {
+                    if (!Fighting_Boats_Props)
                     {
-                        if (!Fighting_Boats_Props)
-                        {
-                            Boats_Props = VrcEvent.ParameterBoolOp;
-                            Status_Boats_Props = VrcEvent.ParameterBoolOp;
-                            // BlinkColorObject(Button_toggle_Boats, Color.green, //OriginalColor_Buttontoggle_Boats);
-                        }
+                        Boats_Props = VrcEvent.ParameterBoolOp;
+                        Status_Boats_Props = VrcEvent.ParameterBoolOp;
+                        // BlinkColorObject(Button_toggle_Boats, Color.green, //OriginalColor_Buttontoggle_Boats);
                     }
                 }
             }

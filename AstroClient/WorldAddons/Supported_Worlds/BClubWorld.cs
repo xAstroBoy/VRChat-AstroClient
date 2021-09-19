@@ -670,7 +670,7 @@
                 if (!isCurrentWorld) yield break;
                 try
                 {
-                    RestoreVIPButtons();
+                    RestoreVIPButton();
                 } catch { }
 
                 yield return new WaitForSeconds(5f);
@@ -705,7 +705,7 @@
             yield return new WaitForSeconds(0.5f);
         }
 
-        private static void RestoreVIPButtons()
+        private static void RestoreVIPButton()
         {
                 // Restore VIP button
                 if (VIPButton==null) VIPButton = VIPRoom.transform.Find("BedroomUdon/Door Tablet/BlueButtonWide - Toggle VIP only").gameObject;
@@ -716,21 +716,6 @@
                 else
                 {
                     ModConsole.Error("VIP Button not found!");
-                }
-
-                // Restore VIP button
-                var flairButton = GameObjectFinder.Find("Lobby/Entrance Corridor/Udon/Spawn Settings/Buttons/Own Flair - BlueButtonWide");            if (VIPButton != null)
-                if (flairButton != null)
-                {
-                    if (!flairButton.active)
-                    {
-                        flairButton.SetActive(true);
-                        ModConsole.Log("Flair Button Found! Activated!");
-                    }
-                }
-                else
-                {
-                    ModConsole.Error("Flair Button not found!");
                 }
         }
 

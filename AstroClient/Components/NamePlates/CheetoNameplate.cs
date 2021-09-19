@@ -138,7 +138,7 @@
                 ModConsole.Error("[Nameplate] Player was null!");
             }
 
-            AddTag(player.GetAPIUser().GetRank(), player.GetAPIUser().GetRankColor());
+            //AddTag(player.GetAPIUser().GetRank(), player.GetAPIUser().GetRankColor());
 
             stopwatch.Stop();
             if (stopwatch.ElapsedMilliseconds > 1)
