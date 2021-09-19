@@ -29,8 +29,6 @@ namespace AstroLibrary.Utility
 
         public static VRCWebSocketsManager VRCWebSocketsManager => VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0;
 
-        public static NetworkManager NetworkManager => NetworkManager.field_Internal_Static_NetworkManager_0;
-
         public static PlayerManager PlayerManager => PlayerManager.field_Private_Static_PlayerManager_0;
 
         public static VRCPlayer CurrentUser => VRCPlayer.field_Internal_Static_VRCPlayer_0;

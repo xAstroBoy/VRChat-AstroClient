@@ -84,7 +84,7 @@
 
         public static void Respawn()
         {
-            Utils.QuickMenu.transform.Find("ShortcutMenu/RespawnButton").GetComponent<Button>().onClick.Invoke();
+            QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/RespawnButton").GetComponent<Button>().onClick.Invoke();
         }
 
         private static VRC_Trigger cached;
@@ -587,16 +587,16 @@
                 if (videoPlayers[0].Videos.Count > 0)
                 {
                     System.Windows.Forms.Clipboard.SetText(videoPlayers[0].Videos[0].URL);
-                    Utils.VRCUiManager.QueHudMessage("Copied video player url to clipboard");
+                    PopupUtils.QueHudMessage("Copied video player url to clipboard");
                 }
                 else
                 {
-                    Utils.VRCUiManager.QueHudMessage("Video player does not contain any videos");
+                    PopupUtils.QueHudMessage("Video player does not contain any videos");
                 }
             }
             else
             {
-                Utils.VRCUiManager.QueHudMessage("There are no video players in the world");
+                PopupUtils.QueHudMessage("There are no video players in the world");
             }
         }
 

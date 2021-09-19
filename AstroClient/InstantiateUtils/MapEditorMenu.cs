@@ -31,7 +31,7 @@
 
         public static void EnableAllObjects()
         {
-            System.Collections.Generic.List<GameObject> list1 = GameObjectFinder.RootSceneObjects_Without_Avatars;
+            System.Collections.Generic.List<GameObject> list1 = GameObjectFinder.RootSceneObjects_WithoutAvatars;
             for (int i1 = 0; i1 < list1.Count; i1++)
             {
                 GameObject item = list1[i1];

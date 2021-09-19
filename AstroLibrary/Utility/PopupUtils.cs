@@ -38,9 +38,10 @@ namespace AstroLibrary.Utility
             Utils.VRCUiManager.HideScreen("POPUP");
         }
 
-        public static void QueHudMessage(this VRCUiManager instance, string Message)
+        public static void QueHudMessage(string Message)
         {
             if (!WorldUtils.IsInWorld) return;
+            var manager = Utils.VRCUiManager;
             if (true)
             {
                 if (HudMessage1 == null)
@@ -52,7 +53,7 @@ namespace AstroLibrary.Utility
             }
             else
             {
-                instance.field_Private_List_1_String_0.Add(Message);
+                manager.field_Private_List_1_String_0.Add(Message);
             }
         }
 

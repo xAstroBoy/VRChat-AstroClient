@@ -14,7 +14,7 @@
         {
             var ScaleEditor = new QMNestedButton(menu, x, y, "Scale", "Scale Editor Menu!", null, null, null, null, btnHalf);
 
-            ScaleSlider = new QMSlider(Utils.QuickMenu.transform.Find(ScaleEditor.GetMenuName()), "Scale:", 250, -720, delegate (float value)
+            ScaleSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(ScaleEditor.GetMenuName()), "Scale:", 250, -720, delegate (float value)
             {
                 SetScaleValueToUse(value);
             }, 0.1f, 20, 0, true);

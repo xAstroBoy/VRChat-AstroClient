@@ -30,7 +30,7 @@
             ForceAmnt2 = new QMSingleButton(ForceAddControl, 0, 0, "Force : " + Force, () => { Force = DefaultForce; }, string.Empty, null, null);
             SpinForceAmnt2 = new QMSingleButton(ForceAddControl, 0, 1, "Spin Force : " + SpinForce, () => { SpinForce = DefaultSpinForce; }, string.Empty, null, null);
 
-            ForceSlider = new QMSlider(Utils.QuickMenu.transform.Find(ForceAddControl.GetMenuName()), "Force Power :", 150, -720, delegate (float value)
+            ForceSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(ForceAddControl.GetMenuName()), "Force Power :", 150, -720, delegate (float value)
             {
                 Force = (int)value;
             }, DefaultForce, 1000, 1, true);
@@ -38,7 +38,7 @@
             ForceSlider.SetTextLabel("");
             Force = DefaultForce;
 
-            SpinForceSlider = new QMSlider(Utils.QuickMenu.transform.Find(ForceAddControl.GetMenuName()), "Spin Power : ", 150, -1120, delegate (float value)
+            SpinForceSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(ForceAddControl.GetMenuName()), "Spin Power : ", 150, -1120, delegate (float value)
             {
                 SpinForce = (int)value;
             }, DefaultSpinForce, 1000, 1, true);

@@ -36,8 +36,7 @@
         {
             if (WorldUtils.IsInWorld)
             {
-                var uiManager = VRCUiManager.prop_VRCUiManager_0;
-                PopupUtils.QueHudMessage(uiManager, msg);
+                PopupUtils.QueHudMessage(msg);
             }
         }
 

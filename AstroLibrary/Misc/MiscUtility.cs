@@ -99,7 +99,7 @@
 
         public static void SetButtonToArrow(QMSingleButton button, ArrowDirection direction)
         {
-            button.GetGameObject().GetComponent<Image>().sprite = Utils.QuickMenu.transform.Find("QuickMenu_NewElements/_CONTEXT/QM_Context_User_Selected/NextArrow_Button").GetComponent<Image>().sprite;
+            button.GetGameObject().GetComponent<Image>().sprite = QuickMenuUtils.QuickMenu.transform.Find("QuickMenu_NewElements/_CONTEXT/QM_Context_User_Selected/NextArrow_Button").GetComponent<Image>().sprite;
             switch (direction)
             {
                 case ArrowDirection.Up:
@@ -147,7 +147,7 @@
 
         public static void SetPosition(Transform transform, float x_pos, float y_pos)
         {
-            var quickMenu = Utils.QuickMenu;
+            var quickMenu = QuickMenuUtils.QuickMenu;
             float X = quickMenu.transform.Find("UserInteractMenu/ForceLogoutButton").localPosition.x - quickMenu.transform.Find("UserInteractMenu/BanButton").localPosition.x;
             float Y = quickMenu.transform.Find("UserInteractMenu/ForceLogoutButton").localPosition.x - quickMenu.transform.Find("UserInteractMenu/BanButton").localPosition.x;
             transform.transform.localPosition = new Vector3(X * x_pos, Y * y_pos);

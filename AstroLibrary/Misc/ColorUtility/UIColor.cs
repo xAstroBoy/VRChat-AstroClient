@@ -333,6 +333,6 @@
 
         private static List<Text> normalColorText = new List<Text>();
 
-        public static GameObject sexysex = Utils.QuickMenu.transform.Find("/UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingBackground_TealGradient/SkyCube_Baked").gameObject;
+        public static GameObject sexysex = QuickMenuUtils.QuickMenu.transform.Find("/UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingBackground_TealGradient/SkyCube_Baked").gameObject;
     }
 }

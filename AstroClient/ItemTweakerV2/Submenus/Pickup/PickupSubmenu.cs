@@ -45,7 +45,7 @@
         public static void InitProximitySliderSubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var slider = new QMNestedButton(menu, x, y, "Proximity", "Pickup Proximity Slider Editor!", null, null, null, null, btnHalf);
-            PickupProximitySlider = new QMSlider(Utils.QuickMenu.transform.Find(slider.GetMenuName()), "Proximity : ", 250, -720, delegate (float value)
+            PickupProximitySlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(slider.GetMenuName()), "Proximity : ", 250, -720, delegate (float value)
             {
                 Tweaker_Object.GetGameObjectToEdit().Pickup_Set_proximity((int)value);
             }, 5, 1000, 0, true);

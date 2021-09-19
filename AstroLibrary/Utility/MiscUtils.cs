@@ -417,7 +417,7 @@ namespace AstroLibrary.Utility
             };
             textEditor.SelectAll();
             textEditor.Copy();
-            Utils.VRCUiManager.QueHudMessage("Copied to Clipboard");
+            PopupUtils.QueHudMessage("Copied to Clipboard");
         }
     }
 }

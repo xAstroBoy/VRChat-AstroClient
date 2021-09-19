@@ -1,13 +1,19 @@
-﻿namespace AstroLibrary.Extensions
+﻿// Credits to Blaze and DayOfThePlay
+
+namespace AstroLibrary.Utility
 {
-    using AstroLibrary.Utility;
     using ExitGames.Client.Photon;
+    using Transmtn.DTO.Notifications;
     using UnityEngine;
+    using VRC;
+    using VRC.Core;
     using VRC.SDKBase;
     using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
 
-    public class NetworkingExt
+    public static class NetworkingUtils
     {
+        public static NetworkManager NetworkManager => NetworkManager.field_Internal_Static_NetworkManager_0;
+
         public static void RPC(RPC.Destination targetClients, GameObject targetObject, string methodname, object[] parameters)
         {
             Il2CppSystem.Object[] IL2CPPParameters = MiscUtils_Old.Serialization.FromManagedArrayToIL2CPPArray(parameters);
