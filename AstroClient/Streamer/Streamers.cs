@@ -26,5 +26,6 @@
         public const string ZodiacSector5 = "usr_a8755929-cd9b-411a-a25a-92255e9de831";
         public const string RagingNova = "usr_ff31cb89-78f2-4f84-982e-ea570d59fef7";
         public const string TehFuzziest = "usr_54b3614e-6f68-4da2-a983-1a941dc0bae8";
+        public const string DarrenZeus = "usr_880a77b6-b167-40be-8e5f-d1fab64f662f";
     }
 }
