@@ -24,7 +24,7 @@
                 if (apiuser != null)
                 {
                     var userid = apiuser.id;
-                    player.AddSingleTag(Color.SkyBlue, UnityEngine.Color.white, "Streamer");
+                    player.AddSingleTag(Color.Lime, UnityEngine.Color.white, "Streamer");
                     switch (userid)
                     {
                         case Streamers.StarNovaKitty:
@@ -32,7 +32,7 @@
                             break;
 
                         case Streamers.Cambly:
-                            player.AddSingleTag(Color.PaleTurquoise, UnityEngine.Color.white, "A Clumsy Cute Birb ");
+                            player.AddSingleTag(Color.Turquoise, UnityEngine.Color.white, "A Clumsy Cute Birb ");
                             break;
 
                         case Streamers.Lolathon:
