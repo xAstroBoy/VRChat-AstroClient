@@ -274,7 +274,7 @@ namespace AstroLibrary.Utility
                     }
                 }.ChangeToSelectedAvatar();
             }
-            catch { Logs.Msg("Error turning into avatar! Maybe it's non existing?", ConsoleColor.Red); }
+            catch { ModConsole.Error("Error turning into avatar! Maybe it's non existing?"); }
         }
 
         public static void ChangeAvatar(this Player instance)
@@ -292,7 +292,7 @@ namespace AstroLibrary.Utility
                     }
                 }.ChangeToSelectedAvatar();
             }
-            catch { Logs.Msg("Error turning into avatar! Maybe it's non existing?", ConsoleColor.Red); }
+            catch { ModConsole.Error("Error turning into avatar! Maybe it's non existing?"); }
         }
 
         public static void ChangeAvatar(this VRCPlayer instance)
@@ -310,7 +310,7 @@ namespace AstroLibrary.Utility
                     }
                 }.ChangeToSelectedAvatar();
             }
-            catch { Logs.Msg("Error turning into avatar! Maybe it's non existing?", ConsoleColor.Red); }
+            catch { ModConsole.Error("Error turning into avatar! Maybe it's non existing?"); }
         }
 
         public static void ChangeAvatar(string id)
@@ -328,7 +328,7 @@ namespace AstroLibrary.Utility
                     }
                 }.ChangeToSelectedAvatar();
             }
-            catch { Logs.Msg("Error turning into avatar! Maybe it's non existing?", ConsoleColor.Red); }
+            catch { ModConsole.Error("Error turning into avatar! Maybe it's non existing?"); }
         }
 
         public static Player GetPlayerByUserId(string userId)
