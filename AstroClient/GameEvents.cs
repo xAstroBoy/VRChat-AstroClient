@@ -4,6 +4,7 @@
 
     using AstroClient.Cheetos;
     using AstroClient.Startup.Hooks;
+    using AstroClient.Streamer;
     using AstroClientCore.Events;
     using System;
     using System.Collections.Generic;
@@ -19,7 +20,7 @@
         public GameEvents()
         {
             // ML Events
-            //Main.Event_OnApplicationStart += Internal_OnApplicationStart;
+            Main.Event_OnApplicationLateStart += Internal_OnApplicationLateStart;
 
             Main.Event_OnUpdate += Internal_OnUpdate;
             Main.Event_LateUpdate += Internal_OnLateUpdate;
@@ -80,6 +81,12 @@
         {
             OnMasterClientSwitched(e.player);
         }
+
+        private void Internal_OnApplicationLateStart(object sender, EventArgs e)
+        {
+            OnApplicationLateStart();
+        }
+
 
         private void Internal_OnApplicationStart(object sender, EventArgs e)
         {
@@ -233,9 +240,17 @@
         {
         }
 
+
+        
         public virtual void OnApplicationStart()
         {
         }
+
+        public virtual void OnApplicationLateStart()
+        {
+
+        }
+
 
         public virtual void OnApplicationQuit()
         {

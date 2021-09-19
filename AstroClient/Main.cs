@@ -42,7 +42,7 @@
     {
         #region EventHandlers
 
-        //public static event EventHandler Event_OnApplicationStart;
+        public static event EventHandler Event_OnApplicationLateStart;
 
         public static event EventHandler Event_OnUpdate;
 
@@ -115,6 +115,12 @@
                 DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
                 //Event_OnApplicationStart.SafetyRaise(this, new EventArgs());
             }
+        }
+
+        public override void OnApplicationLateStart()
+        {
+            if (!KeyManager.IsAuthed) return;
+            Event_OnApplicationLateStart?.SafetyRaise();
         }
 
         public override void OnApplicationQuit()
