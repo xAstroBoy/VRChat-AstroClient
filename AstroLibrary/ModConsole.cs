@@ -42,22 +42,25 @@
 
         private static int CurrentInt => LogInt++;
 
-        public static string GetNewFileName()
+        /// <summary>
+        /// Returns a newly generated file name
+        /// </summary>
+        public static string NewFileName
         {
-            var result = CurrentInt;
-            var newfilename = $"{ModName}-Log-{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year} ({result}).log";
-            return !File.Exists(Path.Combine(LogsPath, newfilename)) ? Path.Combine(LogsPath, newfilename) : GetNewFileName();
+            get
+            {
+                var result = CurrentInt;
+                var newfilename = $"{ModName}-Log-{DateTime.Now.Day}-{DateTime.Now.Month}-{DateTime.Now.Year} ({result}).log";
+                return !File.Exists(Path.Combine(LogsPath, newfilename)) ? Path.Combine(LogsPath, newfilename) : NewFileName;
+            }
         }
 
         public static void ReplaceOldLatestFile()
         {
-            var tmp = GetNewFileName();
-            if (Directory.Exists(LogsPath))
+            var tmp = NewFileName;
+            if (Directory.Exists(LogsPath) && File.Exists(LatestLogFile))
             {
-                if (File.Exists(LatestLogFile))
-                {
-                    File.Move(LatestLogFile, tmp);
-                }
+                File.Move(LatestLogFile, tmp);
             }
         }
 

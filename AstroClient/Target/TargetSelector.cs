@@ -30,7 +30,7 @@
         {
             if (CurrentTarget == null)
             {
-                CurrentTarget = PlayerUtils.Player;
+                CurrentTarget = PlayerUtils.GetPlayer();
             }
         }
 
@@ -48,7 +48,7 @@
         {
             try
             {
-                var apiuser = QuickMenuUtils.GetSelectedUser();
+                var apiuser = QuickMenuUtils.SelectedUser;
                 if (apiuser != null)
                 {
                     var targetuser = apiuser.GetPlayer();

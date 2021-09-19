@@ -13,7 +13,7 @@
         {
             try
             {
-                var apiuser = QuickMenuUtils.GetSelectedUser();
+                var apiuser = QuickMenuUtils.SelectedUser;
                 if (apiuser != null)
                 {
                     var targetuser = apiuser.GetPlayer();
@@ -41,7 +41,7 @@
         {
             try
             {
-                var apiuser = QuickMenuUtils.GetSelectedUser();
+                var apiuser = QuickMenuUtils.SelectedUser;
                 if (apiuser != null)
                 {
                     var targetuser = apiuser.GetPlayer();
@@ -77,7 +77,7 @@
         {
             try
             {
-                var apiuser = QuickMenuUtils.GetSelectedUser();
+                var apiuser = QuickMenuUtils.SelectedUser;
                 if (apiuser != null)
                 {
                     var targetuser = apiuser.GetPlayer();
@@ -109,7 +109,7 @@
         {
             try
             {
-                var apiuser = QuickMenuUtils.GetSelectedUser();
+                var apiuser = QuickMenuUtils.SelectedUser;
                 if (apiuser != null)
                 {
                     var targetuser = apiuser.GetPlayer();
@@ -257,7 +257,7 @@
         {
             try
             {
-                var apiuser = QuickMenuUtils.GetSelectedUser();
+                var apiuser = QuickMenuUtils.SelectedUser;
                 if (apiuser != null)
                 {
                     PlayerWatcherManager.RemovePickupsWatchersBoundToPlayer(apiuser);
@@ -270,7 +270,7 @@
         {
             try
             {
-                var apiuser = QuickMenuUtils.GetSelectedUser();
+                var apiuser = QuickMenuUtils.SelectedUser;
                 if (apiuser != null)
                 {
                     PlayerAttackerManager.RemovePickupsAttackerBoundToPlayer(apiuser);
@@ -355,7 +355,7 @@
         {
             try
             {
-                var apiuser = QuickMenuUtils.GetSelectedUser();
+                var apiuser = QuickMenuUtils.SelectedUser;
                 if (apiuser != null)
                 {
                     OrbitManager_Old.RemoveOrbitObjectsBoundToPlayer(apiuser);

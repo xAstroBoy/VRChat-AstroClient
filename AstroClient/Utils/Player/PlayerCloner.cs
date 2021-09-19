@@ -9,9 +9,9 @@
         // CREDITS : Unreal (Day's one is broken and refused to stay in place)
         public static GameObject CloneLocalPlayerAvatar()
         {
-            if (PlayerUtils.GetVRCPlayer() != null)
+            if (PlayerUtils.VRCPlayer != null)
             {
-                var original = PlayerUtils.Player.GetAvatarObject();
+                var original = PlayerUtils.GetPlayer().GetAvatarObject();
                 if (original != null)
                 {
                     var Capsule = UnityEngine.Object.Instantiate(original, null, true);

@@ -24,14 +24,14 @@
         public static void InitUserMenu(float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton("UserInteractMenu", x, y, "Avatar Utilities", "AstroClient Avatar utilities", null, null, null, null, btnHalf);
-            _ = new QMSingleButton(menu, 1, 0, "Dump Avatar Transforms", () => { QuickMenuUtils.GetSelectedPlayer().Avatar_Transform_Dumper(); }, "Dump Avatar Transforms", null, null, true);
-            _ = new QMSingleButton(menu, 1, 0.5f, "Dump Avatar Renderers", () => { QuickMenuUtils.GetSelectedPlayer().Avatar_Renderer_Dumper(); }, "Dump Avatar Renderers", null, null, true);
-            _ = new QMSingleButton(menu, 1, 1, "Dump Avatar Materials", () => { QuickMenuUtils.GetSelectedPlayer().Avatar_Material_Dumper(); }, "Dump Avatar Materials", null, null, true);
-            _ = new QMSingleButton(menu, 1, 1.5f, "Lewdify", () => { QuickMenuUtils.GetSelectedPlayer().Add_Lewdify(); }, "Lewdify This Player Avatar", null, null, true);
-            _ = new QMSingleButton(menu, 1, 2, "Remove Lewdify Effect.", () => { QuickMenuUtils.GetSelectedPlayer().Remove_Lewdify(); }, "Remove the Lewdifier On this user..", null, null, true);
-            _ = new QMSingleButton(menu, 1, 2.5f, "Skip Avatar Lewdifying.", () => { QuickMenuUtils.GetSelectedPlayer().BlackListAvatar_Lewdifier(); }, "Skip This Avatar From being Lewdified.", null, null, true);
-            _ = new QMSingleButton(menu, 2, 0f, "Add Mask Remover", () => { QuickMenuUtils.GetSelectedPlayer().Add_MaskRemover(); }, "Remove The Annoying Mask Theme on this user.", null, null, true);
-            _ = new QMSingleButton(menu, 2, 0.5f, "Remove Mask Remover", () => { QuickMenuUtils.GetSelectedPlayer().Add_MaskRemover(); }, "Remove The Mask Remover on this user.", null, null, true);
+            _ = new QMSingleButton(menu, 1, 0, "Dump Avatar Transforms", () => { QuickMenuUtils.SelectedPlayer.Avatar_Transform_Dumper(); }, "Dump Avatar Transforms", null, null, true);
+            _ = new QMSingleButton(menu, 1, 0.5f, "Dump Avatar Renderers", () => { QuickMenuUtils.SelectedPlayer.Avatar_Renderer_Dumper(); }, "Dump Avatar Renderers", null, null, true);
+            _ = new QMSingleButton(menu, 1, 1, "Dump Avatar Materials", () => { QuickMenuUtils.SelectedPlayer.Avatar_Material_Dumper(); }, "Dump Avatar Materials", null, null, true);
+            _ = new QMSingleButton(menu, 1, 1.5f, "Lewdify", () => { QuickMenuUtils.SelectedPlayer.Add_Lewdify(); }, "Lewdify This Player Avatar", null, null, true);
+            _ = new QMSingleButton(menu, 1, 2, "Remove Lewdify Effect.", () => { QuickMenuUtils.SelectedPlayer.Remove_Lewdify(); }, "Remove the Lewdifier On this user..", null, null, true);
+            _ = new QMSingleButton(menu, 1, 2.5f, "Skip Avatar Lewdifying.", () => { QuickMenuUtils.SelectedPlayer.BlackListAvatar_Lewdifier(); }, "Skip This Avatar From being Lewdified.", null, null, true);
+            _ = new QMSingleButton(menu, 2, 0f, "Add Mask Remover", () => { QuickMenuUtils.SelectedPlayer.Add_MaskRemover(); }, "Remove The Annoying Mask Theme on this user.", null, null, true);
+            _ = new QMSingleButton(menu, 2, 0.5f, "Remove Mask Remover", () => { QuickMenuUtils.SelectedPlayer.Add_MaskRemover(); }, "Remove The Mask Remover on this user.", null, null, true);
         }
 
         public override void OnPlayerJoined(Player player)

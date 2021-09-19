@@ -19,42 +19,33 @@
             }
             else
             {
-                ModConsole.DebugWarning("[WARNING (Find) ]  Gameobject on path [ " + path + " ]  is Invalid, No Object Found!");
+                ModConsole.DebugWarning($"[WARNING (Find) ]  Gameobject on path [ {path} ]  is Invalid, No Object Found!");
                 return null;
             }
         }
 
+        public static List<GameObject> RootSceneObjects => SceneManager.GetActiveScene().GetRootGameObjects().ToList();
 
-        public static List<GameObject> GetRootSceneObjects()
-        {
-            return SceneManager.GetActiveScene().GetRootGameObjects().ToList();
-        }
-
-
-        public static List<GameObject> GetRootSceneObjects_Without_Avatars()
-        {
-            return SceneManager.GetActiveScene().GetRootGameObjects().Where(x => !x.gameObject.name.Contains("VRCPlayer")).ToList();
-        }
-
-
+        public static List<GameObject> RootSceneObjects_WithoutAvatars => SceneManager.GetActiveScene().GetRootGameObjects().Where(x => !x.gameObject.name.Contains("VRCPlayer")).ToList();
 
         public static List<T> GetRootGameObjectsComponents<T>(bool IncludeInactive = true, bool IncludeAvatarComponents = false) where T : Component
         {
             try
             {
                 var results = new List<T>();
-                foreach (var obj in GameObjectFinder.GetRootSceneObjects())
+                for (int i = 0; i < RootSceneObjects.Count; i++)
                 {
+                    GameObject obj = GameObjectFinder.RootSceneObjects[i];
                     if (!IncludeAvatarComponents)
                     {
                         if (!obj.name.Contains("VRCPlayer"))
                         {
-                            var objects = obj.GetComponentsInChildren<T>(IncludeInactive).ToList();
+                            var objects = obj.GetComponentsInChildren<T>(IncludeInactive);
                             if (objects.Count != 0)
                             {
-                                foreach (var audio in objects)
+                                for (int i1 = 0; i1 < objects.Count; i1++)
                                 {
-
+                                    T audio = objects[i1];
                                     if (!results.Contains(audio))
                                     {
                                         results.Add(audio);
@@ -65,12 +56,12 @@
                     }
                     else
                     {
-                        var objects = obj.GetComponentsInChildren<T>(IncludeInactive).ToList();
+                        var objects = obj.GetComponentsInChildren<T>(IncludeInactive);
                         if (objects.Count != 0)
                         {
-                            foreach (var audio in objects)
+                            for (int i1 = 0; i1 < objects.Count; i1++)
                             {
-
+                                T audio = objects[i1];
                                 if (!results.Contains(audio))
                                 {
                                     results.Add(audio);
@@ -104,7 +95,7 @@
                 }
                 else
                 {
-                    ModConsole.DebugWarning("[WARNING (FindRootSceneObject) ]  Root Gameobject name [ " + name + " ]  is Invalid, No Object Found!");
+                    ModConsole.DebugWarning($"[WARNING (FindRootSceneObject) ]  Root Gameobject name [ {name} ]  is Invalid, No Object Found!");
                 }
             }
 
@@ -172,7 +163,7 @@
         public static string GetGameObjectPath(GameObject obj)
         {
             string path = $"/{obj.name}";
-            while (obj.transform.parent != null)
+            for (; obj.transform.parent != null;)
             {
                 obj = obj.transform.parent.gameObject;
                 path = $"/{obj.name}{path}";

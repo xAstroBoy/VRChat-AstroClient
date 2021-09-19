@@ -106,7 +106,7 @@ namespace AstroLibrary.Utility
 
             Blaze.Utils.PopupUtils.InputPopup("Enter Avatar ID for pedestals", "Change Pedestals", "avtr_XXXXXXXX", delegate (string s)
             {
-                if (WorldUtils.GetSDKType() == "SDK2")
+                if (WorldUtils.SDKType == "SDK2")
                 {
                     var cachedPedestals = UnityEngine.Object.FindObjectsOfType<VRC_AvatarPedestal>();
                     if (cachedPedestals.Count != 0)
@@ -243,7 +243,7 @@ namespace AstroLibrary.Utility
 
         public static IEnumerator WFW(Action action)
         {
-            while (!WorldUtils.IsInWorld && PlayerUtils.GetVRCPlayer() == null) yield return null;
+            while (!WorldUtils.IsInWorld && PlayerUtils.VRCPlayer == null) yield return null;
             action.Invoke();
             yield break;
         }

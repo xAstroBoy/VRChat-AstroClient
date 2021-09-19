@@ -69,7 +69,7 @@
         public void RefreshPickups()
         {
             pickups.Clear();
-            var list = WorldUtils.GetPickups();
+            var list = WorldUtils.Pickups;
             for (int i = 0; i < list.Count; i++)
             {
                 var found = list[i];

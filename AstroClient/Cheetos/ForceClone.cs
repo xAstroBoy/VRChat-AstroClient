@@ -6,7 +6,7 @@
     {
         internal static void ClonePlayer()
         {
-            var player = QuickMenuUtils.GetSelectedPlayer();
+            var player = QuickMenuUtils.SelectedPlayer;
 
             if (player != null)
             {

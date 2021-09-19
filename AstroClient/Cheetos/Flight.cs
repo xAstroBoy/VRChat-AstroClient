@@ -58,7 +58,7 @@
                     DisableFly();
                 }
 
-                PlayerUtils.Player.gameObject.GetComponent<CharacterController>().enabled = value;
+                PlayerUtils.GetPlayer().gameObject.GetComponent<CharacterController>().enabled = value;
                 ExploitsMenu.RefreshFlightButtons();
             }
         }
@@ -98,13 +98,13 @@
         private static void EnableNoClip()
         {
             noClipEnabled = true;
-            PlayerUtils.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = false;
+            PlayerUtils.VRCPlayer.gameObject.GetComponent<CharacterController>().enabled = false;
         }
 
         private static void DisableNoClip()
         {
             noClipEnabled = false;
-            PlayerUtils.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = true;
+            PlayerUtils.VRCPlayer.gameObject.GetComponent<CharacterController>().enabled = true;
         }
 
         public override void OnRoomJoined()
@@ -130,7 +130,7 @@
             {
                 if (currentPlayer == null || transform == null)
                 {
-                    currentPlayer = PlayerUtils.GetVRCPlayer();
+                    currentPlayer = PlayerUtils.VRCPlayer;
                     isInVR = currentPlayer.IsInVR();
                     transform = Camera.main.transform;
                 }

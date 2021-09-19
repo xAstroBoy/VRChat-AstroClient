@@ -166,24 +166,21 @@ namespace AstroLibrary.Utility
             }
         }
 
-        public static int GetWorldOccupants()
-        {
-            return World.occupants;
-        }
+        public static int WorldOccupants => World.occupants;
 
-        public static int GetWorldCapacity()
-        {
-            return World.capacity;
-        }
+        public static int WorldCapacity => World.capacity;
 
-        public static string GetSDKType()
+        public static string SDKType
         {
-            if (SDK2Descriptor != null)
-                return "SDK2";
-            else if (SDK3Descriptor != null)
-                return "SDK3";
-            else
-                return "not found";
+            get
+            {
+                if (SDK2Descriptor != null)
+                    return "SDK2";
+                else if (SDK3Descriptor != null)
+                    return "SDK3";
+                else
+                    return "not found";
+            }
         }
 
         public static void JoinWorld(string fullID)
@@ -252,90 +249,43 @@ namespace AstroLibrary.Utility
 
         public static Player GetPlayerByDisplayName(string name)
         {
-            var players = WorldUtils.Players.ToList();
-            if (players.AnyAndNotNull())
+            var players = WorldUtils.Players;
+            if (players != null && players.Any())
             {
-                foreach (var player in players)
+                for (int i = 0; i < players.Count; i++)
                 {
-                    if (player != null)
+                    Player player = players[i];
+                    if (player != null && player.prop_APIUser_0 != null && player.prop_APIUser_0.displayName == name)
                     {
-                        if (player.prop_APIUser_0 != null)
-                        {
-                            if (player.prop_APIUser_0.displayName == name)
-                            {
-                                return player;
-                            }
-                        }
+                        return player;
                     }
                 }
             }
             return null;
         }
 
-        public static VRCSDK2.VRC_SceneDescriptor SDK2Descriptor
-        {
-            get
-            {
-                return UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
-            }
-        }
+        public static VRCSDK2.VRC_SceneDescriptor SDK2Descriptor => UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
 
-        public static VRC.SDK3.Components.VRCSceneDescriptor SDK3Descriptor
-        {
-            get
-            {
-                return UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
-            }
-        }
+        public static VRC.SDK3.Components.VRCSceneDescriptor SDK3Descriptor => UnityEngine.Object.FindObjectOfType<VRC.SDK3.Components.VRCSceneDescriptor>();
 
-        public static List<VRC_Pickup> GetPickups()
-        {
-            return Resources.FindObjectsOfTypeAll<VRC_Pickup>().ToList();
-        }
+        public static List<VRC_Pickup> Pickups => Resources.FindObjectsOfTypeAll<VRC_Pickup>().ToList();
 
-        public static VRC_Pickup[] GetActivePickups()
-        {
-            return UnityEngine.Object.FindObjectsOfType<VRC_Pickup>();
-        }
+        public static VRC_Pickup[] ActivePickups => UnityEngine.Object.FindObjectsOfType<VRC_Pickup>();
 
-        public static VRC_Interactable[] GetInteractables()
-        {
-            return Resources.FindObjectsOfTypeAll<VRC_Interactable>();
-        }
+        public static VRC_Interactable[] Interactables => Resources.FindObjectsOfTypeAll<VRC_Interactable>();
 
-        public static VRC_Interactable[] GetActiveInteractables()
-        {
-            return UnityEngine.Object.FindObjectsOfType<VRC_Interactable>();
-        }
+        public static VRC_Interactable[] ActiveInteractables => UnityEngine.Object.FindObjectsOfType<VRC_Interactable>();
 
-        public static PostProcessVolume[] GetBloom()
-        {
-            return Resources.FindObjectsOfTypeAll<PostProcessVolume>();
-        }
+        public static PostProcessVolume[] Bloom => Resources.FindObjectsOfTypeAll<PostProcessVolume>();
 
-        public static PostProcessVolume[] GetActiveBloom()
-        {
-            return UnityEngine.Object.FindObjectsOfType<PostProcessVolume>();
-        }
+        public static PostProcessVolume[] ActiveBloom => UnityEngine.Object.FindObjectsOfType<PostProcessVolume>();
 
-        public static UdonBehaviour[] GetUdonScripts()
-        {
-            return Resources.FindObjectsOfTypeAll<UdonBehaviour>();
-        }
+        public static UdonBehaviour[] UdonScripts => Resources.FindObjectsOfTypeAll<UdonBehaviour>();
 
-        public static UdonBehaviour[] GetActiveUdonScripts()
-        {
-            return UnityEngine.Object.FindObjectsOfType<UdonBehaviour>();
-        }
+        public static UdonBehaviour[] ActiveUdonScripts => UnityEngine.Object.FindObjectsOfType<UdonBehaviour>();
 
-        public static VRC_MirrorReflection[] GetMirrors()
-        {
-            return Resources.FindObjectsOfTypeAll<VRC_MirrorReflection>();
-        }
+        public static VRC_MirrorReflection[] Mirrors => Resources.FindObjectsOfTypeAll<VRC_MirrorReflection>();
 
-        public static VRC_MirrorReflection[] GetActiveMirrors()
-        {
-            return UnityEngine.Object.FindObjectsOfType<VRC_MirrorReflection>();
-        }
+        public static VRC_MirrorReflection[] ActiveMirrors => UnityEngine.Object.FindObjectsOfType<VRC_MirrorReflection>();
     }
 }

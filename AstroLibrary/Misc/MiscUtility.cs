@@ -18,19 +18,15 @@
 
     public static class MiscUtils_Old
     {
-        public static Vector2 GetButtonPosition(float x, float y)
-        {
-            return new Vector2(-1050f + (x * 420f), 1570 + (y * -420f));
-        }
+        public static Vector2 GetButtonPosition(float x, float y) => new Vector2(-1050f + (x * 420f), 1570 + (y * -420f));
 
         public static Vector2 GetButtonPosition2(float x, float y)
         {
-            var quickMenu = Utils.QuickMenu;
+            var quickMenu = QuickMenuUtils.QuickMenu;
             float X = quickMenu.transform.Find("UserInteractMenu/ForceLogoutButton").localPosition.x - quickMenu.transform.Find("UserInteractMenu/BanButton").localPosition.x;
             float Y = quickMenu.transform.Find("UserInteractMenu/ForceLogoutButton").localPosition.x - quickMenu.transform.Find("UserInteractMenu/BanButton").localPosition.x;
             return new Vector2(X * x, Y * y);
         }
-
 
         public static VRC_EventHandler FindNearestEventHandler(GameObject target)
         {

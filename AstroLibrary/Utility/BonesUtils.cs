@@ -18,13 +18,9 @@
                 }
             }
             return null;
-
         }
 
-        public static Vector3? Get_Player_Bone_Position(this Player player, HumanBodyBones bone)
-        {
-            return player != null ? player.Get_Player_Bone_Transform(bone).position : null;
-        }
+        public static Vector3? Get_Player_Bone_Position(this Player player, HumanBodyBones bone) => player != null ? player.Get_Player_Bone_Transform(bone).position : null;
 
         public static Vector3? Get_Center_Of_Player(this Player player)
         {

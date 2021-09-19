@@ -380,7 +380,7 @@
                         && m.XRefScanForMethod(null, "VRCTrackingManager")
                         && m.XRefScanForMethod(null, "InputStateController"));
                 }
-                return (AlignTrackingToPlayerDelegate)Delegate.CreateDelegate(typeof(AlignTrackingToPlayerDelegate), PlayerUtils.GetVRCPlayer(), alignTrackingToPlayerMethod);
+                return (AlignTrackingToPlayerDelegate)Delegate.CreateDelegate(typeof(AlignTrackingToPlayerDelegate), PlayerUtils.VRCPlayer, alignTrackingToPlayerMethod);
             }
         }
 

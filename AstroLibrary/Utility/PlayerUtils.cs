@@ -21,18 +21,9 @@ namespace AstroLibrary.Utility
         /// </summary>
         /// <param name="instance"></param>
         /// <returns></returns>
-        public static VRCPlayer GetVRCPlayer()
-        {
-            return VRCPlayer.field_Internal_Static_VRCPlayer_0;
-        }
+        public static VRCPlayer VRCPlayer => VRCPlayer.field_Internal_Static_VRCPlayer_0;
 
-        public static VRC.Player Player
-        {
-            get
-            {
-                return GetVRCPlayer().GetPlayer();
-            }
-        }
+        public static Player GetPlayer() => VRCPlayer.GetPlayer();
 
         /// <summary>
         /// Gets the current APIUser
@@ -40,7 +31,7 @@ namespace AstroLibrary.Utility
         /// <returns></returns>
         public static APIUser GetAPIUser()
         {
-            return GetVRCPlayer().GetAPIUser();
+            return VRCPlayer.GetAPIUser();
         }
 
         /// <summary>
@@ -49,7 +40,7 @@ namespace AstroLibrary.Utility
         /// <returns></returns>
         public static string UserID()
         {
-            return GetVRCPlayer().GetUserID();
+            return VRCPlayer.GetUserID();
         }
 
         /// <summary>
@@ -58,7 +49,7 @@ namespace AstroLibrary.Utility
         /// <returns></returns>
         public static string DisplayName()
         {
-            return GetVRCPlayer().GetDisplayName();
+            return VRCPlayer.GetDisplayName();
         }
 
         public static bool IsInVR()

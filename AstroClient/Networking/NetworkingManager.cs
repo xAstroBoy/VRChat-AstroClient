@@ -99,7 +99,7 @@
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            var self = PlayerUtils.GetVRCPlayer();
+            var self = PlayerUtils.VRCPlayer;
             Name = self.GetDisplayName();
             UserID = self.GetUserID();
             Initialized = true;

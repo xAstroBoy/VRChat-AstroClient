@@ -107,7 +107,7 @@
 
         public static void FindUdonPensEvents()
         {
-            VRC.Udon.UdonBehaviour[] array = WorldUtils.GetUdonScripts();
+            VRC.Udon.UdonBehaviour[] array = WorldUtils.UdonScripts;
             for (int i = 0; i < array.Length; i++)
             {
                 VRC.Udon.UdonBehaviour item = array[i];

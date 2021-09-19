@@ -12,7 +12,7 @@
     {
         public static List<UdonBehaviour_Cached> FindAllUdonEvents(string action, string subaction)
         {
-            var gameobjects = WorldUtils.GetUdonScripts();
+            var gameobjects = WorldUtils.UdonScripts;
 
             List<UdonBehaviour_Cached> foundEvents = new List<UdonBehaviour_Cached>();
             var behaviours = gameobjects.Where(x => x.gameObject.name == action);
@@ -41,7 +41,7 @@
 
         public static UdonBehaviour_Cached FindUdonEvent(string action, string subaction)
         {
-            var gameobjects = WorldUtils.GetUdonScripts();
+            var gameobjects = WorldUtils.UdonScripts;
 
             var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
             if (behaviour != null)

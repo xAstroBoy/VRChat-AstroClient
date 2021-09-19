@@ -9,15 +9,12 @@ namespace AstroLibrary.Utility
 
     public static class QuickMenuUtils
     {
-        public static QuickMenu GetQuickMenu()
-        {
-            return QuickMenu.prop_QuickMenu_0;
-        }
+        public static QuickMenu QuickMenu => QuickMenu.prop_QuickMenu_0;
 
         #region SelectPlayer
         public static void SelectPlayer(VRCPlayer instance)
         {
-            GetQuickMenu().SelectPlayer(instance);
+            QuickMenu.SelectPlayer(instance);
         }
 
         public static void SelectPlayer(this QuickMenu instance, VRCPlayer instance2)
@@ -27,20 +24,13 @@ namespace AstroLibrary.Utility
         #endregion
 
         #region GetSelected
-        public static Player GetSelectedPlayer()
-        {
-            return GetQuickMenu().field_Private_Player_0;
-        }
 
-        public static APIUser GetSelectedUser()
-        {
-            return GetQuickMenu().field_Private_APIUser_0;
-        }
+        public static Player SelectedPlayer => QuickMenu.field_Private_Player_0;
 
-        public static VRCPlayer GetSelectedVRCPlayer()
-        {
-            return GetQuickMenu().field_Private_Player_0.GetVRCPlayer();
-        }
+        public static APIUser SelectedUser => QuickMenu.field_Private_APIUser_0;
+
+        public static VRCPlayer SelectedVRCPlayer => QuickMenu.field_Private_Player_0.GetVRCPlayer();
+
         #endregion
 
         public static void OpenQM()
@@ -56,7 +46,7 @@ namespace AstroLibrary.Utility
         #region ToggleQuickMenu
         public static void ToggleQuickMenu(bool state)
         {
-            GetQuickMenu().ToggleQuickMenu(state);
+            QuickMenu.ToggleQuickMenu(state);
         }
 
         public static void ToggleQuickMenu(this QuickMenu instance, bool state)
@@ -72,7 +62,7 @@ namespace AstroLibrary.Utility
 
         public static void SetQuickMenuBackground(this QuickMenu instance, float x, float y, bool doublesided = true)
         {
-            Transform transform = GetQuickMenu().transform.Find("QuickMenu_NewElements/_Background");
+            Transform transform = QuickMenu.transform.Find("QuickMenu_NewElements/_Background");
             RectTransform rectTransform = transform.GetComponent<RectTransform>();
             if (doublesided)
                 rectTransform.sizeDelta += new Vector2(x * 840, y * 840);
@@ -86,12 +76,12 @@ namespace AstroLibrary.Utility
         #region Collider
         public static void ResizeCollider(Vector3 size)
         {
-            GetQuickMenu().GetComponent<BoxCollider>().size = size;
+            QuickMenu.GetComponent<BoxCollider>().size = size;
         }
 
         public static void SetQuickMenuCollider(this QuickMenu instance, float x, float y, bool doublesided = true)
         {
-            var Collider = GetQuickMenu().GetComponent<BoxCollider>();
+            var Collider = QuickMenu.GetComponent<BoxCollider>();
             if (doublesided)
                 Collider.size += new Vector3(x * 840, y * 840);
             else
@@ -103,7 +93,7 @@ namespace AstroLibrary.Utility
 
         public static void ResetCollider()
         {
-            GetQuickMenu().GetComponent<BoxCollider>().size = new Vector3(2517.34f, 1671.213f, 1f);
+            QuickMenu.GetComponent<BoxCollider>().size = new Vector3(2517.34f, 1671.213f, 1f);
         }
         #endregion
     }

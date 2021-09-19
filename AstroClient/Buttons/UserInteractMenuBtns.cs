@@ -46,16 +46,16 @@
             _ = new QMSingleButton(menu, 4, 0, "All Pickups Watch player.", new Action(ObjectMiscOptions.AllWorldPickupsWatchTarget), "Make the victim feel observed.", null, null);
 
             var sitMenu = new QMNestedButton(menu, 1, 2, "Sit", "Sit on selected player");
-            _ = new QMSingleButton(menu, 2, 2, "Teleport\nTo\nPlayer", () => { PlayerUtils.Player.gameObject.transform.position = QuickMenuUtils.GetSelectedPlayer().transform.position; }, "Teleport To Player");
+            _ = new QMSingleButton(menu, 2, 2, "Teleport\nTo\nPlayer", () => { PlayerUtils.GetPlayer().gameObject.transform.position = QuickMenuUtils.SelectedPlayer.transform.position; }, "Teleport To Player");
 
-            var newOrbitToggle = new QMToggleButton(menu, 3, 2, "Cheetos\nOrbit", () => { OrbitManager.OrbitPlayer(QuickMenuUtils.GetSelectedPlayer()); }, "Cheetos\nOrbit", () => { OrbitManager.DisableOrbit(); }, "Cheetos' WIP Orbit", null, Color.green, Color.red, OrbitManager.IsEnabled);
+            var newOrbitToggle = new QMToggleButton(menu, 3, 2, "Cheetos\nOrbit", () => { OrbitManager.OrbitPlayer(QuickMenuUtils.SelectedPlayer); }, "Cheetos\nOrbit", () => { OrbitManager.DisableOrbit(); }, "Cheetos' WIP Orbit", null, Color.green, Color.red, OrbitManager.IsEnabled);
             newOrbitToggle.SetToggleState(OrbitManager.IsEnabled);
 
-            _ = new QMSingleButton(sitMenu, 1, 0, "Sit On Head", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.Head); }, "Sit On Head", null, null);
-            _ = new QMSingleButton(sitMenu, 2, 1, "Sit On LeftHand", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.LeftHand); }, "Sit On LeftHand", null, null);
-            _ = new QMSingleButton(sitMenu, 2, 2, "Sit On RightHand", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.RightHand); }, "Sit On RightHand", null, null);
-            _ = new QMSingleButton(sitMenu, 3, 1, "Sit On LeftFoot", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.LeftFoot); }, "Sit On LeftFoot", null, null);
-            _ = new QMSingleButton(sitMenu, 3, 2, "Sit On RightFoot", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.GetSelectedPlayer(), HumanBodyBones.RightFoot); }, "Sit On RightFoot", null, null);
+            _ = new QMSingleButton(sitMenu, 1, 0, "Sit On Head", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.SelectedPlayer, HumanBodyBones.Head); }, "Sit On Head", null, null);
+            _ = new QMSingleButton(sitMenu, 2, 1, "Sit On LeftHand", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.SelectedPlayer, HumanBodyBones.LeftHand); }, "Sit On LeftHand", null, null);
+            _ = new QMSingleButton(sitMenu, 2, 2, "Sit On RightHand", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.SelectedPlayer, HumanBodyBones.RightHand); }, "Sit On RightHand", null, null);
+            _ = new QMSingleButton(sitMenu, 3, 1, "Sit On LeftFoot", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.SelectedPlayer, HumanBodyBones.LeftFoot); }, "Sit On LeftFoot", null, null);
+            _ = new QMSingleButton(sitMenu, 3, 2, "Sit On RightFoot", () => { SitOnPlayer.AttachToTarget(QuickMenuUtils.SelectedPlayer, HumanBodyBones.RightFoot); }, "Sit On RightFoot", null, null);
 
             //var setHeightButton = new QMSingleButton(sitMenu, 3, 0, $"Set\nHeight\n{SitOnPlayer.Height}", () =>
             //{
