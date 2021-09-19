@@ -84,7 +84,7 @@
 
         public static void Respawn()
         {
-            Utils.QuickMenu.transform.Find("ShortcutMenu/RespawnButton").GetComponent<Button>().onClick.Invoke();
+            QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/RespawnButton").GetComponent<Button>().onClick.Invoke();
         }
 
         private static VRC_Trigger cached;

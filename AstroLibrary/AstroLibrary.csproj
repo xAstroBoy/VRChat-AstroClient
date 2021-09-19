@@ -737,7 +737,7 @@
     <Compile Include="Blaze%27s Utils\SocialMenuUtils.cs" />
     <Compile Include="Blaze%27s Utils\UdonUtils.cs" />
     <Compile Include="Blaze%27s Utils\VRCUiManagerUtils.cs" />
-    <Compile Include="Utility\NetworkManagerUtils.cs" />
+    <Compile Include="Utility\NetworkingUtils.cs" />
     <Compile Include="Utility\WorldUtils.cs" />
     <Compile Include="CheetosConsole\Console.cs" />
     <Compile Include="CheetosConsole\DefaultFonts.cs" />
@@ -752,7 +752,6 @@
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\MiscExtension.cs" />
     <Compile Include="Extensions\ModerationManagerExtension.cs" />
-    <Compile Include="Extensions\NetworkingExt.cs" />
     <Compile Include="Extensions\NotificationManagerExtension.cs" />
     <Compile Include="Extensions\PhotonExtensions.cs" />
     <Compile Include="Extensions\PlayerExtensions.cs" />

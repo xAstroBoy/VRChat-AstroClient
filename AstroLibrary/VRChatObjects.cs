@@ -19,86 +19,86 @@
 
         #region notification
 
-        public static Transform NotificationMenu { get { return Utils.QuickMenu.transform.Find("NotificationInteractMenu"); } }
-        public static GameObject NotificationMenuOBJ { get { return Utils.QuickMenu.transform.Find("NotificationInteractMenu").gameObject; } }
+        public static Transform NotificationMenu { get { return QuickMenuUtils.QuickMenu.transform.Find("NotificationInteractMenu"); } }
+        public static GameObject NotificationMenuOBJ { get { return QuickMenuUtils.QuickMenu.transform.Find("NotificationInteractMenu").gameObject; } }
 
         #endregion notification
 
         #region QM
 
-        public static GameObject QMInfoBar { get { return Utils.QuickMenu.transform.Find("QuickMenu_NewElements/_InfoBar").gameObject; } }
+        public static GameObject QMInfoBar { get { return QuickMenuUtils.QuickMenu.transform.Find("QuickMenu_NewElements/_InfoBar").gameObject; } }
 
-        public static GameObject QMWorldsButton { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/WorldsButton").gameObject; } }
-        public static GameObject QMAvatarButton { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/AvatarButton").gameObject; } }
-        public static GameObject QMSocialButton { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/SocialButton").gameObject; } }
-        public static GameObject QMSafetyButton { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/SafetyButton").gameObject; } }
-        public static GameObject QMTrustRankToggle { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/Toggle_States_ShowTrustRank_Colors").gameObject; } }
+        public static GameObject QMWorldsButton { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/WorldsButton").gameObject; } }
+        public static GameObject QMAvatarButton { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/AvatarButton").gameObject; } }
+        public static GameObject QMSocialButton { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/SocialButton").gameObject; } }
+        public static GameObject QMSafetyButton { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/SafetyButton").gameObject; } }
+        public static GameObject QMTrustRankToggle { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/Toggle_States_ShowTrustRank_Colors").gameObject; } }
 
-        public static GameObject QMGoHomeButton { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/GoHomeButton").gameObject; } }
-        public static GameObject QMRespawnButton { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/RespawnButton").gameObject; } }
-        public static GameObject QMSitButton { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/SitButton").gameObject; } }
-        public static GameObject QmCalibrateButton { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/CalibrateButton").gameObject; } }
-        public static GameObject QMSettingsButton { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/SettingsButton").gameObject; } }
-        public static GameObject QMReportWorldButton { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/ReportWorldButton").gameObject; } }
+        public static GameObject QMGoHomeButton { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/GoHomeButton").gameObject; } }
+        public static GameObject QMRespawnButton { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/RespawnButton").gameObject; } }
+        public static GameObject QMSitButton { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/SitButton").gameObject; } }
+        public static GameObject QmCalibrateButton { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/CalibrateButton").gameObject; } }
+        public static GameObject QMSettingsButton { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/SettingsButton").gameObject; } }
+        public static GameObject QMReportWorldButton { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/ReportWorldButton").gameObject; } }
 
-        public static GameObject QMUIElementsButton { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/UIElementsButton").gameObject; } }
-        public static GameObject QMCameraButton { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/CameraButton").gameObject; } }
-        public static GameObject QMEmoteButton { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/EmoteButton").gameObject; } }
-        public static GameObject QMEmojiButton { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/EmojiButton").gameObject; } }
+        public static GameObject QMUIElementsButton { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/UIElementsButton").gameObject; } }
+        public static GameObject QMCameraButton { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/CameraButton").gameObject; } }
+        public static GameObject QMEmoteButton { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/EmoteButton").gameObject; } }
+        public static GameObject QMEmojiButton { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/EmojiButton").gameObject; } }
         public static GameObject QMEmojiDown { get { return GameObject.Find("/UserInterface/QuickMenu/EmojiMenu/PageDown"); } }
         public static GameObject QMEmojiUp { get { return GameObject.Find("/UserInterface/QuickMenu/EmojiMenu/PageUp"); } }
 
-        public static GameObject QMMicButton { get { return Utils.QuickMenu.transform.Find("MicControls/MicButton").gameObject; } }
+        public static GameObject QMMicButton { get { return QuickMenuUtils.QuickMenu.transform.Find("MicControls/MicButton").gameObject; } }
 
         public static GameObject QMStatusInfoBar { get { return GameObject.Find("/UserInterface/QuickMenu/QuickMenu_NewElements/_CONTEXT/QM_Context_User_Hover/_UserStatus/Text"); } }
-        public static GameObject QMFPSText { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/FPSText").gameObject; } }
-        public static GameObject RemoveBackdrop { get { return Utils.QuickMenu.transform.Find("/UserInterface/MenuContent/Backdrop/Backdrop/Background").gameObject; } }
-        public static GameObject RemoveSkyCube { get { return Utils.QuickMenu.transform.Find("/UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingBackground_TealGradient/SkyCube_Baked").gameObject; } }
-        public static GameObject QMPingText { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/PingText").gameObject; } }
-        public static GameObject QMEarlyAccessText { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject; } }
-        public static GameObject UIEarlyAccessText { get { return Utils.QuickMenu.transform.Find("/UserInterface/MenuContent/Backdrop/Backdrop/Image").gameObject; } }
-        public static GameObject UIBetaShit { get { return Utils.QuickMenu.transform.Find("/UserInterface/MenuContent/Backdrop/Header/Tabs/ViewPort/Content/SafetyPageTab/Image (1)").gameObject; } }
-        public static GameObject QMNameText { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/NameText").gameObject; } }
-        public static GameObject QMBuildNumText { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/BuildNumText").gameObject; } }
-        public static GameObject VRCSettingsBuildNumText { get { return Utils.QuickMenu.transform.Find("/UserInterface/MenuContent/Screens/Settings/TitlePanel/VersionText").gameObject; } }
-        public static GameObject QMBuildNumTextUI { get { return Utils.QuickMenu.transform.Find("/UserInterface/MenuContent/Screens/Settings/TitlePanel/VersionText").gameObject; } }
-        public static GameObject QMWorldText { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/WorldText").gameObject; } }
-        public static GameObject AdvancedSettingsMenu { get { return Utils.QuickMenu.transform.Find("/UserInterface/MenuContent/Screens/Settings/Button_AdvancedOptions/Image_NEW").gameObject; } }
-        public static GameObject SafetyMenuBetaText { get { return Utils.QuickMenu.transform.Find("/UserInterface/MenuContent/Screens/Settings_Safety/TitlePanel/Image").gameObject; } }
-        public static GameObject SafetyMenuPerformanceOptions { get { return Utils.QuickMenu.transform.Find("/UserInterface/MenuContent/Screens/Settings_Safety/TitlePanel/Button_PerformanceOptions/Image_NEW").gameObject; } }
-        public static GameObject BindingsNew { get { return Utils.QuickMenu.transform.Find("/UserInterface/MenuContent/Screens/Settings/Button_EditBindings/Image_NEW").gameObject; } }
-        public static GameObject RemoveInfoPanel { get { return Utils.QuickMenu.transform.Find("/UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingInfoPanel/InfoPanel_Template_ANIM").gameObject; } }
+        public static GameObject QMFPSText { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/FPSText").gameObject; } }
+        public static GameObject RemoveBackdrop { get { return QuickMenuUtils.QuickMenu.transform.Find("/UserInterface/MenuContent/Backdrop/Backdrop/Background").gameObject; } }
+        public static GameObject RemoveSkyCube { get { return QuickMenuUtils.QuickMenu.transform.Find("/UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingBackground_TealGradient/SkyCube_Baked").gameObject; } }
+        public static GameObject QMPingText { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/PingText").gameObject; } }
+        public static GameObject QMEarlyAccessText { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject; } }
+        public static GameObject UIEarlyAccessText { get { return QuickMenuUtils.QuickMenu.transform.Find("/UserInterface/MenuContent/Backdrop/Backdrop/Image").gameObject; } }
+        public static GameObject UIBetaShit { get { return QuickMenuUtils.QuickMenu.transform.Find("/UserInterface/MenuContent/Backdrop/Header/Tabs/ViewPort/Content/SafetyPageTab/Image (1)").gameObject; } }
+        public static GameObject QMNameText { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/NameText").gameObject; } }
+        public static GameObject QMBuildNumText { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/BuildNumText").gameObject; } }
+        public static GameObject VRCSettingsBuildNumText { get { return QuickMenuUtils.QuickMenu.transform.Find("/UserInterface/MenuContent/Screens/Settings/TitlePanel/VersionText").gameObject; } }
+        public static GameObject QMBuildNumTextUI { get { return QuickMenuUtils.QuickMenu.transform.Find("/UserInterface/MenuContent/Screens/Settings/TitlePanel/VersionText").gameObject; } }
+        public static GameObject QMWorldText { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/WorldText").gameObject; } }
+        public static GameObject AdvancedSettingsMenu { get { return QuickMenuUtils.QuickMenu.transform.Find("/UserInterface/MenuContent/Screens/Settings/Button_AdvancedOptions/Image_NEW").gameObject; } }
+        public static GameObject SafetyMenuBetaText { get { return QuickMenuUtils.QuickMenu.transform.Find("/UserInterface/MenuContent/Screens/Settings_Safety/TitlePanel/Image").gameObject; } }
+        public static GameObject SafetyMenuPerformanceOptions { get { return QuickMenuUtils.QuickMenu.transform.Find("/UserInterface/MenuContent/Screens/Settings_Safety/TitlePanel/Button_PerformanceOptions/Image_NEW").gameObject; } }
+        public static GameObject BindingsNew { get { return QuickMenuUtils.QuickMenu.transform.Find("/UserInterface/MenuContent/Screens/Settings/Button_EditBindings/Image_NEW").gameObject; } }
+        public static GameObject RemoveInfoPanel { get { return QuickMenuUtils.QuickMenu.transform.Find("/UserInterface/MenuContent/Popups/LoadingPopup/3DElements/LoadingInfoPanel/InfoPanel_Template_ANIM").gameObject; } }
 
-        public static GameObject Ads1 { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/VRCPlusMiniBanner").gameObject; } }
-        public static GameObject Ads2 { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/VRCPlusThankYou").gameObject; } }
-        public static GameObject Ads3 { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/UserIconButton").gameObject; } }
-        public static GameObject Ads4 { get { return Utils.QuickMenu.transform.Find("ShortcutMenu/UserIconCameraButton").gameObject; } }
+        public static GameObject Ads1 { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/VRCPlusMiniBanner").gameObject; } }
+        public static GameObject Ads2 { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/VRCPlusThankYou").gameObject; } }
+        public static GameObject Ads3 { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/UserIconButton").gameObject; } }
+        public static GameObject Ads4 { get { return QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/UserIconCameraButton").gameObject; } }
 
         #endregion QM
 
         #region UserInteract
 
-        public static GameObject UserInteractMenu { get { return Utils.QuickMenu.transform.Find("UserInteractMenu").gameObject; } }
-        public static GameObject UIFriendButton { get { return Utils.QuickMenu.transform.Find("UserInteractMenu/FriendButton").gameObject; } }
-        public static GameObject UIDetailsButton { get { return Utils.QuickMenu.transform.Find("UserInteractMenu/DetailsButton").gameObject; } }
-        public static GameObject UIBlockButton { get { return Utils.QuickMenu.transform.Find("UserInteractMenu/BlockButton").gameObject; } }
+        public static GameObject UserInteractMenu { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu").gameObject; } }
+        public static GameObject UIFriendButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/FriendButton").gameObject; } }
+        public static GameObject UIDetailsButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/DetailsButton").gameObject; } }
+        public static GameObject UIBlockButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/BlockButton").gameObject; } }
 
-        public static GameObject UIViewAvatarThreeToggle { get { return Utils.QuickMenu.transform.Find("UserInteractMenu/ViewAvatarThreeToggle").gameObject; } }
+        public static GameObject UIViewAvatarThreeToggle { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/ViewAvatarThreeToggle").gameObject; } }
 
-        public static GameObject UIMuteButton { get { return Utils.QuickMenu.transform.Find("UserInteractMenu/MuteButton").gameObject; } }
-        public static GameObject UIMicOffButton { get { return Utils.QuickMenu.transform.Find("UserInteractMenu/MicOffButton").gameObject; } }
-        public static GameObject UIReportAbuseButton { get { return Utils.QuickMenu.transform.Find("UserInteractMenu/ReportAbuseButton").gameObject; } }
-        public static GameObject UIWarnButton { get { return Utils.QuickMenu.transform.Find("UserInteractMenu/WarnButton").gameObject; } }
-        public static GameObject UIKickButton { get { return Utils.QuickMenu.transform.Find("UserInteractMenu/KickButton").gameObject; } }
-        public static GameObject UIBackButton { get { return Utils.QuickMenu.transform.Find("UserInteractMenu/BackButton").gameObject; } }
+        public static GameObject UIMuteButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/MuteButton").gameObject; } }
+        public static GameObject UIMicOffButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/MicOffButton").gameObject; } }
+        public static GameObject UIReportAbuseButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/ReportAbuseButton").gameObject; } }
+        public static GameObject UIWarnButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/WarnButton").gameObject; } }
+        public static GameObject UIKickButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/KickButton").gameObject; } }
+        public static GameObject UIBackButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/BackButton").gameObject; } }
 
-        //public static GameObject UIForceLogoutButton = Utils.QuickMenu.transform.Find("UserInteractMenu/ForceLogoutButton").gameObject;
-        //public static GameObject UITagAvatarAsDeveloperButton = Utils.QuickMenu.transform.Find("UserInteractMenu/TagAvatarAsDeveloperButton").gameObject;
-        public static GameObject UIViewPlaylistsButton { get { return Utils.QuickMenu.transform.Find("UserInteractMenu/ViewPlaylistsButton").gameObject; } }
+        //public static GameObject UIForceLogoutButton = QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/ForceLogoutButton").gameObject;
+        //public static GameObject UITagAvatarAsDeveloperButton = QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/TagAvatarAsDeveloperButton").gameObject;
+        public static GameObject UIViewPlaylistsButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/ViewPlaylistsButton").gameObject; } }
 
-        public static GameObject UIShowAvatarStatsButton { get { return Utils.QuickMenu.transform.Find("UserInteractMenu/ShowAvatarStatsButton").gameObject; } }
-        public static GameObject UICloneAvatarButton { get { return Utils.QuickMenu.transform.Find("UserInteractMenu/CloneAvatarButton").gameObject; } }
-        public static GameObject UIShowAuthorButton { get { return Utils.QuickMenu.transform.Find("UserInteractMenu/ShowAuthorButton").gameObject; } }
+        public static GameObject UIShowAvatarStatsButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/ShowAvatarStatsButton").gameObject; } }
+        public static GameObject UICloneAvatarButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/CloneAvatarButton").gameObject; } }
+        public static GameObject UIShowAuthorButton { get { return QuickMenuUtils.QuickMenu.transform.Find("UserInteractMenu/ShowAuthorButton").gameObject; } }
 
         #endregion UserInteract
 

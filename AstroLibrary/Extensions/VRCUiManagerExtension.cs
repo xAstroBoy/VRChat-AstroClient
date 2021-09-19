@@ -25,8 +25,8 @@ namespace AstroLibrary.Extensions
 
         public static void SelectAPIUser(this VRCUiManager instance, APIUser user)
         {
-            Utils.QuickMenu.field_Private_APIUser_0 = user;
-            Utils.QuickMenu.Method_Public_Void_EnumNPublicSealedvaUnWoAvSoSeUsDeSaCuUnique_Boolean_0(QuickMenu.EnumNPublicSealedvaUnWoAvSoSeUsDeSaCuUnique.UserDetailsMenu, false);
+            QuickMenuUtils.SelectPlayer(user);
+            QuickMenuUtils.QuickMenu.Method_Public_Void_EnumNPublicSealedvaUnWoAvSoSeUsDeSaCuUnique_Boolean_0(QuickMenu.EnumNPublicSealedvaUnWoAvSoSeUsDeSaCuUnique.UserDetailsMenu, false);
         }
 
         public static void SelectAPIUser(this VRCUiManager instance, string userid)

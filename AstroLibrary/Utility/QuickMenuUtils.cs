@@ -17,6 +17,16 @@ namespace AstroLibrary.Utility
             QuickMenu.SelectPlayer(instance);
         }
 
+        public static void SelectPlayer(APIUser instance)
+        {
+            QuickMenu.SelectPlayer(instance);
+        }
+
+        public static void SelectPlayer(this QuickMenu instance, APIUser instance2)
+        {
+            instance.Method_Public_Void_Player_0(instance2.GetPlayer());
+        }
+
         public static void SelectPlayer(this QuickMenu instance, VRCPlayer instance2)
         {
             instance.Method_Public_Void_Player_0(instance2.GetPlayer());

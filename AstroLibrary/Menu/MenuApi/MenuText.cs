@@ -22,7 +22,7 @@
 
         public MenuText(string MenuName, float posx, float poxy, string text)
         {
-            menuTitle = Object.Instantiate(Utils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, Utils.QuickMenu.transform.Find(MenuName));
+            menuTitle = Object.Instantiate(QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, QuickMenuUtils.QuickMenu.transform.Find(MenuName));
             menuTitle.GetComponent<Text>().fontStyle = FontStyle.Normal;
             menuTitle.GetComponent<Text>().alignment = TextAnchor.MiddleLeft;
             menuTitle.GetComponent<Text>().text = text;
@@ -36,7 +36,7 @@
 
         public MenuText(Transform parent, float posx, float poxy, string text)
         {
-            menuTitle = Object.Instantiate(Utils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, parent);
+            menuTitle = Object.Instantiate(QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, parent);
             menuTitle.GetComponent<Text>().fontStyle = FontStyle.Normal;
             menuTitle.GetComponent<Text>().alignment = TextAnchor.MiddleLeft;
             menuTitle.GetComponent<Text>().text = text;
@@ -50,7 +50,7 @@
 
         public MenuText(Transform parent, float posx, float poxy, string text, int size)
         {
-            menuTitle = Object.Instantiate(Utils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, parent);
+            menuTitle = Object.Instantiate(QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, parent);
             menuTitle.name = text;
             menuTitle.GetComponent<Text>().fontStyle = FontStyle.Normal;
             menuTitle.GetComponent<Text>().alignment = TextAnchor.MiddleLeft;

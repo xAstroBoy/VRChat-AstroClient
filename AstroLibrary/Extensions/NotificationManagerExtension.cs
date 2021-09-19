@@ -25,37 +25,37 @@
 
         public static void AcceptNotification(this Notification notification)
         {
-            if (Utils.QuickMenu.Notification() == null)
+            if (QuickMenuUtils.QuickMenu.Notification() == null)
             {
                 ModConsole.Error("Could not accept notif bc notif is null");
                 return;
             }
             ModConsole.Log("AcceptNotification for notification");
-            if (Utils.QuickMenu.Notification().details == null && Utils.QuickMenu.Notification().notificationType != "friendRequest")
+            if (QuickMenuUtils.QuickMenu.Notification().details == null && QuickMenuUtils.QuickMenu.Notification().notificationType != "friendRequest")
             {
                 ModConsole.Error("Could not accept notif bc notif details is null");
                 return;
             }
-            string text = Utils.QuickMenu.Notification().notificationType.ToLower();
+            string text = QuickMenuUtils.QuickMenu.Notification().notificationType.ToLower();
             if (text.Equals("invite"))
             {
-                if (Utils.QuickMenu.Notification().details.ContainsKey("worldId"))
+                if (QuickMenuUtils.QuickMenu.Notification().details.ContainsKey("worldId"))
                 {
-                    string World = Utils.QuickMenu.Notification().details["worldId"].ToString();
+                    string World = QuickMenuUtils.QuickMenu.Notification().details["worldId"].ToString();
                     WorldUtils.JoinWorld(World);
                 }
             }
             if (text.Equals("friendRequest"))
             {
-                Notification xx = FriendRequest.Create(Utils.QuickMenu.Notification().senderUserId);
+                Notification xx = FriendRequest.Create(QuickMenuUtils.QuickMenu.Notification().senderUserId);
                 Utils.VRCWebSocketsManager.SendNotification(xx);
                 Utils.VRCWebSocketsManager.prop_Api_0.PostOffice.AcceptFriendRequest(notification);
             }
             if (text.Equals("requestInvite"))
             {
-                if (Utils.QuickMenu.Notification().details != null)
+                if (QuickMenuUtils.QuickMenu.Notification().details != null)
                 {
-                    string senderUserId = Utils.QuickMenu.Notification().senderUserId;
+                    string senderUserId = QuickMenuUtils.QuickMenu.Notification().senderUserId;
                     NotificationDetails notificationDetails = new NotificationDetails();
                     notificationDetails["worldId"] = WorldUtils.FullID;
                     notificationDetails["worldName"] = WorldUtils.WorldName;
