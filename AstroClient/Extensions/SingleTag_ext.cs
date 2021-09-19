@@ -81,18 +81,18 @@
 
         public static SingleTag AddSingleTag(this Player player, System.Drawing.Color Tag_Color, System.Drawing.Color Label_TextColor, string Label_Text)
         {
-            return AddSingleTag(player, Tag_Color.ToUnityEngineColor(), Label_TextColor.ToUnityEngineColor(), "TAG NOT SET");
+            return AddSingleTag(player, Tag_Color.ToUnityEngineColor(), Label_TextColor.ToUnityEngineColor(), Label_Text);
 
         }
         public static SingleTag AddSingleTag(this Player player, UnityEngine.Color Tag_Color, System.Drawing.Color Label_TextColor, string Label_Text)
         {
-            return AddSingleTag(player, Tag_Color, Label_TextColor.ToUnityEngineColor(), "TAG NOT SET");
+            return AddSingleTag(player, Tag_Color, Label_TextColor.ToUnityEngineColor(), Label_Text);
 
         }
 
         public static SingleTag AddSingleTag(this Player player, System.Drawing.Color Tag_Color, UnityEngine.Color Label_TextColor, string Label_Text)
         {
-            return AddSingleTag(player, Tag_Color.ToUnityEngineColor(), Label_TextColor, "TAG NOT SET");
+            return AddSingleTag(player, Tag_Color.ToUnityEngineColor(), Label_TextColor, Label_Text);
 
         }
 

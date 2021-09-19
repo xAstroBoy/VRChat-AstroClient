@@ -24,7 +24,7 @@
                 if (apiuser != null)
                 {
                     var userid = apiuser.id;
-                    player.AddSingleTag(Color.LightSkyBlue, UnityEngine.Color.white, "Streamer");
+                    player.AddSingleTag(Color.SkyBlue, UnityEngine.Color.white, "Streamer");
                     switch (userid)
                     {
                         case Streamers.StarNovaKitty:
@@ -45,10 +45,13 @@
                             player.AddSingleTag(Color.Red, UnityEngine.Color.white, "Official Psycho And cutie!");
                             break;
                         case Streamers.Thor_ChanVR:
-                            player.AddSingleTag(Color.LightGoldenrodYellow, UnityEngine.Color.white, "Official VRChat goddess!");
+                            player.AddSingleTag(Color.Gold, UnityEngine.Color.white, "Official VRChat goddess!");
                             break;
                         case Streamers.Pud_Pud:
                             player.AddSingleTag(Color.ForestGreen, UnityEngine.Color.white, "Sensible Squeaky panda and Cute!");
+                            break;
+                        case Streamers.Ruqaa:
+                            player.AddSingleTag(Color.CornflowerBlue, UnityEngine.Color.white, "Cute Bunny!");
                             break;
                         case Streamers.Nifty:
                             player.AddSingleTag(Color.Lavender, UnityEngine.Color.white, "The Legendary Pan Bonker! (Give Her Hugs tho)");

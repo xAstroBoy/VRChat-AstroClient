@@ -30,15 +30,29 @@
         {
             if (FreezePlayerOnQMOpen)
             {
-                Freeze();
+                if (Networking.LocalPlayer != null)
+                {
+                    Freeze();
+                }
+                else
+                {
+                    Frozen = false;
+                }
             }
         }
 
         public override void OnQuickMenuClose()
         {
-            if(FreezePlayerOnQMOpen)
+            if (FreezePlayerOnQMOpen)
             {
-                Unfreeze();
+                if (Networking.LocalPlayer != null)
+                {
+                    Unfreeze();
+                }
+                else
+                {
+                    Frozen = false;
+                }
             }
         }
 
@@ -46,36 +60,42 @@
         {
             if (Frozen)
             {
-                Physics.gravity = originalGravity;
-                if (RestoreVelocity)
+                if (Networking.LocalPlayer != null)
                 {
-                    Networking.LocalPlayer.SetVelocity(originalVelocity);
+                    Physics.gravity = originalGravity;
+                    if (RestoreVelocity)
+                    {
+                        Networking.LocalPlayer.SetVelocity(originalVelocity);
+                    }
+                    Frozen = false;
                 }
-                Frozen = false;
             }
         }
 
         public static void Freeze()
         {
-            if (!Frozen)
+            if (Networking.LocalPlayer != null)
             {
-                originalGravity = Physics.gravity;
-                originalVelocity = Networking.LocalPlayer.GetVelocity();
-                if (originalVelocity == Vector3.zero)
+                if (!Frozen)
                 {
-                    return;
-                }
-                Physics.gravity = Vector3.zero;
-                Networking.LocalPlayer.SetVelocity(Vector3.zero);
-                Frozen = true;
-            }
-            else
-            {
-                if (InputUtils.IsImputJumpCalled|| InputUtils.IsInputJumpPressed)
-                {
-                    if (Networking.LocalPlayer.GetVelocity() != Vector3.zero)
+                    originalGravity = Physics.gravity;
+                    originalVelocity = Networking.LocalPlayer.GetVelocity();
+                    if (originalVelocity == Vector3.zero)
                     {
-                        Networking.LocalPlayer.SetVelocity(Vector3.zero);
+                        return;
+                    }
+                    Physics.gravity = Vector3.zero;
+                    Networking.LocalPlayer.SetVelocity(Vector3.zero);
+                    Frozen = true;
+                }
+                else
+                {
+                    if (InputUtils.IsImputJumpCalled || InputUtils.IsInputJumpPressed)
+                    {
+                        if (Networking.LocalPlayer.GetVelocity() != Vector3.zero)
+                        {
+                            Networking.LocalPlayer.SetVelocity(Vector3.zero);
+                        }
                     }
                 }
             }
