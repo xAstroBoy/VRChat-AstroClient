@@ -96,6 +96,30 @@
             //ModConsole.Log($"[API] {e.Data}");
         }
 
+        public override void OnPlayerBlockedYou(Player player)
+        {
+            ModConsole.Log($"{player.GetDisplayName()} blocked you!");
+            CheetosHelpers.SendHudNotification($"{player.GetDisplayName()} blocked you!");
+        }
+
+        public override void OnPlayerUnblockedYou(Player player)
+        {
+            ModConsole.Log($"{player.GetDisplayName()} unblocked you!");
+            CheetosHelpers.SendHudNotification($"{player.GetDisplayName()} unblocked you!");
+        }
+
+        public override void OnPlayerMutedYou(Player player)
+        {
+            ModConsole.Log($"{player.GetDisplayName()} muted you!");
+            CheetosHelpers.SendHudNotification($"{player.GetDisplayName()} muted you!");
+        }
+
+        public override void OnPlayerUnmutedYou(Player player)
+        {
+            ModConsole.Log($"{player.GetDisplayName()} unmuted you!");
+            CheetosHelpers.SendHudNotification($"{player.GetDisplayName()} unmuted you!");
+        }
+
         private static void OnOpened(object sender, EventArgs e)
         {
             ModConsole.Log("[API] Connected To WebSocket!");

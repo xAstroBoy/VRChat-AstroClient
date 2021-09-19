@@ -19,14 +19,11 @@
 
     internal class PhotonOnEventHook : GameEvents
     {
-
-
         public static event EventHandler<VRCPlayerEventArgs> Event_OnPlayerBlockedYou;
         public static event EventHandler<VRCPlayerEventArgs> Event_OnPlayerUnblockedYou;
 
         public static event EventHandler<VRCPlayerEventArgs> Event_OnPlayerMutedYou;
         public static event EventHandler<VRCPlayerEventArgs> Event_OnPlayerUnmutedYou;
-
 
         private static bool UnblockPatchTest { get; set; } = true;
 
@@ -150,9 +147,6 @@
                                     Event_OnPlayerUnblockedYou.SafetyRaise(new VRCPlayerEventArgs(player));
                                 }
                             }
-
-
-                            
                             if (mutedyou)
                             {
                                 if(!MutedYouPlayers.Contains(player))
@@ -161,7 +155,6 @@
                                     Event_OnPlayerMutedYou.SafetyRaise(new VRCPlayerEventArgs(player));
                                 }
                             }
-                            
                             if(!mutedyou)
                             {
                                 if (MutedYouPlayers.Contains(player))
