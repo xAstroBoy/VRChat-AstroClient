@@ -17,8 +17,9 @@
                 {
                     bool isFirst = true;
                     string printtag = string.Empty;
-                    foreach (var tag in tags)
+                    for (int i = 0; i < tags.Count; i++)
                     {
+                        string tag = tags[i];
                         if (isFirst)
                         {
                             printtag += $"[ {tag} ]";

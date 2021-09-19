@@ -26,8 +26,9 @@
     .GetMethods(BindingFlags.Public | BindingFlags.Static | BindingFlags.DeclaredOnly).Where(it =>
         it.Name.StartsWith("Method_Public_Static_Object_Object_Vector3_Quaternion_Boolean_Boolean_Boolean_") && it.GetParameters().Length == 6).ToList();
 
-            foreach (var matchingMethod in matchingMethods)
+            for (int i = 0; i < matchingMethods.Count; i++)
             {
+                MethodInfo matchingMethod = matchingMethods[i];
                 unsafe
                 {
                     var originalMethodPointer = *(IntPtr*)(IntPtr)UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(matchingMethod).GetValue(null);
@@ -45,8 +46,10 @@
                 }
             }
 
-            foreach (var nestedType in typeof(VRCAvatarManager).GetNestedTypes())
+            Type[] array = typeof(VRCAvatarManager).GetNestedTypes();
+            for (int i = 0; i < array.Length; i++)
             {
+                Type nestedType = array[i];
                 var moveNext = nestedType.GetMethod("MoveNext");
                 if (moveNext == null) continue;
                 var avatarManagerField = nestedType.GetProperties().SingleOrDefault(it => it.PropertyType == typeof(VRCAvatarManager));

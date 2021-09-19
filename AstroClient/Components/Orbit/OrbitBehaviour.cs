@@ -135,25 +135,22 @@
                     InterpolationTempY = 0f;
                 }
 
-                if (!pickup.IsHeld)
-                {
-                    if (!pickup.IsHeld)
-                    {
-                        if (!gameObject.IsOwner())
-                        {
-                            gameObject.TakeOwnership();
-                        }
-                        Timer += (Time.deltaTime * RotationSpeed) + TimerOffset;
-                        Rotate();
-                        UpdateTimer -= Time.deltaTime;
-                        if (UpdateTimer <= 0f)
-                        {
-                            transform.position = Position;
-                            transform.LookAt(CenterPoint);
-                            UpdateTimer = Time.deltaTime * 2f;
-                        }
-                    }
-                }
+                if (!pickup.IsHeld && !pickup.IsHeld)
+				{
+					if (!gameObject.IsOwner())
+					{
+						gameObject.TakeOwnership();
+					}
+					Timer += (Time.deltaTime * RotationSpeed) + TimerOffset;
+					Rotate();
+					UpdateTimer -= Time.deltaTime;
+					if (UpdateTimer <= 0f)
+					{
+						transform.position = Position;
+						transform.LookAt(CenterPoint);
+						UpdateTimer = Time.deltaTime * 2f;
+					}
+				}
 
                 //VRCPlayerApi playerApi = Player.prop_Player_0.prop_VRCPlayerApi_0;
                 //if (playerApi != null && !Networking.IsOwner(playerApi, obj))
@@ -280,20 +277,23 @@
         public static float Clamp(float val)
         {
             float result;
-            if (val > 1f)
-                result = 1f;
-            else if (val < 0f)
-                result = 0f;
-            else
-                result = val;
+            switch (val)
+            {
+                case > 1f:
+                    result = 1f;
+                    break;
+                case < 0f:
+                    result = 0f;
+                    break;
+                default:
+                    result = val;
+                    break;
+            }
             return result;
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Lerp(float a, float b, float t)
-        {
-            return a + ((b - a) * Clamp(t));
-        }
+        public static float Lerp(float a, float b, float t) => a + ((b - a) * Clamp(t));
 
         public enum RotationMode : byte
         {

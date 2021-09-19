@@ -160,8 +160,9 @@
                     yield break;
                 }
 
-                foreach (PickupController pickup in Instance.pickups)
+                for (int i = 0; i < Instance.pickups.Count; i++)
                 {
+                    PickupController pickup = Instance.pickups[i];
                     if (!pickup.gameObject.IsOwner())
                     {
                         pickup.gameObject.TakeOwnership();

@@ -56,8 +56,9 @@
 
             public static async void DoPatches()
             {
-                foreach (var patch in Patches)
+                for (int i = 0; i < Patches.Count; i++)
                 {
+                    Patch patch = Patches[i];
                     try
                     {
                         ModConsole.DebugLog($"[Patches] Patching {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {patch.PrefixMethod?.method.Name}{patch.PostfixMethod?.method.Name}");
@@ -74,8 +75,9 @@
 
             public static async void UnDoPatches()
             {
-                foreach (var patch in Patches)
+                for (int i = 0; i < Patches.Count; i++)
                 {
+                    Patch patch = Patches[i];
                     try
                     {
                         patch.Instance.UnpatchAll();
@@ -139,29 +141,20 @@
                                 }
 
                             }
-                            if (!blockedyou)
+                            if (!blockedyou && BlockedYouPlayers.Contains(player))
                             {
-                                if (BlockedYouPlayers.Contains(player))
-                                {
-                                    BlockedYouPlayers.Remove(player);
-                                    Event_OnPlayerUnblockedYou.SafetyRaise(new VRCPlayerEventArgs(player));
-                                }
+                                BlockedYouPlayers.Remove(player);
+                                Event_OnPlayerUnblockedYou.SafetyRaise(new VRCPlayerEventArgs(player));
                             }
-                            if (mutedyou)
+                            if (mutedyou && !MutedYouPlayers.Contains(player))
                             {
-                                if(!MutedYouPlayers.Contains(player))
-                                {
-                                    MutedYouPlayers.Add(player);
-                                    Event_OnPlayerMutedYou.SafetyRaise(new VRCPlayerEventArgs(player));
-                                }
+                                MutedYouPlayers.Add(player);
+                                Event_OnPlayerMutedYou.SafetyRaise(new VRCPlayerEventArgs(player));
                             }
-                            if(!mutedyou)
+                            if (!mutedyou && MutedYouPlayers.Contains(player))
                             {
-                                if (MutedYouPlayers.Contains(player))
-                                {
-                                    MutedYouPlayers.Remove(player);
-                                    Event_OnPlayerUnmutedYou.SafetyRaise(new VRCPlayerEventArgs(player));
-                                }
+                                MutedYouPlayers.Remove(player);
+                                Event_OnPlayerUnmutedYou.SafetyRaise(new VRCPlayerEventArgs(player));
                             }
                         }
                     }
@@ -169,9 +162,6 @@
             }
             catch { }
         }
-
-
-
 
         public static List<Player> BlockedYouPlayers { get; private set; } = new List<Player>();
 

@@ -53,8 +53,9 @@
 
             public static async void DoPatches()
             {
-                foreach (var patch in Patches)
+                for (int i = 0; i < Patches.Count; i++)
                 {
+                    Patch patch = Patches[i];
                     try
                     {
                         ModConsole.DebugLog($"[Patches] Patching {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {patch.PrefixMethod?.method.Name}{patch.PostfixMethod?.method.Name}");
@@ -71,8 +72,9 @@
 
             public static async void UnDoPatches()
             {
-                foreach (var patch in Patches)
+                for (int i = 0; i < Patches.Count; i++)
                 {
+                    Patch patch = Patches[i];
                     try
                     {
                         patch.Instance.UnpatchAll();

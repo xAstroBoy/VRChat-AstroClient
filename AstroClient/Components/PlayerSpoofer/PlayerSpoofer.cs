@@ -43,39 +43,27 @@
 
         public void LateUpdate()
         {
-            if (IsSpooferActive && isSecondJoin)
-            {
-                if (user != null)
-                {
-                    if (DisplayName != SpoofedName)
-                    {
-                        DisplayName = SpoofedName;
-                    }
-                }
-            }
+            if (IsSpooferActive && isSecondJoin && user != null && DisplayName != SpoofedName)
+			{
+				DisplayName = SpoofedName;
+			}
         }
 
         public override void OnRoomLeft()
         {
             SafetyCheck();
-            if (CanSpoofWithoutBreaking())
-            {
-                if (PlayerSpooferUtils.SpoofAsWorldAuthor)
-                {
-                    DisableSpoofer();
-                }
-            }
+            if (CanSpoofWithoutBreaking() && PlayerSpooferUtils.SpoofAsWorldAuthor)
+			{
+				DisableSpoofer();
+			}
         }
         public override void OnRoomJoined()
         {
             SafetyCheck();
-            if (CanSpoofWithoutBreaking())
-            {
-                if (PlayerSpooferUtils.SpoofAsWorldAuthor)
-                {
-                    SpoofAs(WorldAuthor);
-                }
-            }
+            if (CanSpoofWithoutBreaking() && PlayerSpooferUtils.SpoofAsWorldAuthor)
+			{
+				SpoofAs(WorldAuthor);
+			}
         }
 
         private void SafetyCheck()
@@ -93,13 +81,10 @@
             else
 
             {
-                if (isFistJoin)
-                {
-                    if (!isSecondJoin)
-                    {
-                        isSecondJoin = true;
-                    }
-                }
+                if (isFistJoin && !isSecondJoin)
+				{
+					isSecondJoin = true;
+				}
             }
         }
             internal void SpoofAsWorldAuthor()
@@ -144,13 +129,10 @@
             {
                 if (value)
                 {
-                    if (user != null)
-                    {
-                        if (!RealName.IsNotNullOrEmptyOrWhiteSpace())
-                        {
-                            RealName = user.displayName;
-                        }
-                    }
+                    if (user != null && !RealName.IsNotNullOrEmptyOrWhiteSpace())
+					{
+						RealName = user.displayName;
+					}
                     if (CanSpoofWithoutBreaking())
                     {
                         _IsSpooferActive = value;

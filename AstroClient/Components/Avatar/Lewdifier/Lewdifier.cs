@@ -178,16 +178,19 @@
             bool FoundaHit = false;
             if (avataritems.Count() != 0)
             {
-                foreach (var parent in avataritems)
+                for (int i = 0; i < avataritems.Count; i++)
                 {
+                    Transform parent = avataritems[i];
                     if (CheckForTermsToToggleOff(parent))
                     {
                         FoundaHit = true;
                     }
                     if (parent != null)
                     {
-                        foreach (var child in parent.Get_All_Childs())
+                        List<Transform> list = parent.Get_All_Childs();
+                        for (int i1 = 0; i1 < list.Count; i1++)
                         {
+                            Transform child = list[i1];
                             if (CheckForTermsToToggleOff(child))
                             {
                                 FoundaHit = true;
@@ -229,15 +232,18 @@
             bool FoundaHit = false;
             if (avataritems.Count() != 0)
             {
-                foreach (var parent in avataritems)
+                for (int i = 0; i < avataritems.Count; i++)
                 {
+                    Transform parent = avataritems[i];
                     if (CheckForTermsToToggleOn(parent))
                     {
                         FoundaHit = true;
                     }
 
-                    foreach (var child in parent.Get_All_Childs())
+                    List<Transform> list = parent.Get_All_Childs();
+                    for (int i1 = 0; i1 < list.Count; i1++)
                     {
+                        Transform child = list[i1];
                         if (CheckForTermsToToggleOn(child))
                         {
                             FoundaHit = true;
@@ -299,15 +305,13 @@
                 {
                     if (ChildsToKeepOff.Count() != 0)
                     {
-                        foreach (var child in ChildsToKeepOff)
+                        for (int i = 0; i < ChildsToKeepOff.Count; i++)
                         {
-                            if (child != null)
+                            Transform child = ChildsToKeepOff[i];
+                            if (child != null && child.gameObject.active)
                             {
-                                if (child.gameObject.active)
-                                {
-                                    _ = ChildsToKeepOff.Remove(child);
-                                    child.DestroyMeLocal();
-                                }
+                                _ = ChildsToKeepOff.Remove(child);
+                                child.DestroyMeLocal();
                             }
                         }
                     }

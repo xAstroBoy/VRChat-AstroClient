@@ -97,19 +97,16 @@
                     {
                         control.EditMode = true;
                     }
-                    if (!obj.IsOwner())
+                    if (!obj.IsOwner() && !pickup.IsHeld)
                     {
-                        if (!pickup.IsHeld)
+                        obj.TakeOwnership();
+                        if (control != null)
                         {
-                            obj.TakeOwnership();
-                            if (control != null)
-                            {
-                                control.isKinematic = false;
-                                control.useGravity = UseGravity;
-                                control.angularDrag = 0;
-                                control.drag = 0;
-                                HasRequiredSettings = true;
-                            }
+                            control.isKinematic = false;
+                            control.useGravity = UseGravity;
+                            control.angularDrag = 0;
+                            control.drag = 0;
+                            HasRequiredSettings = true;
                         }
                     }
                 }
@@ -125,19 +122,16 @@
                     }
                     if (ShouldDoImpulseMode)
                     {
-                        if (IsImpulseModeActive)
+                        if (IsImpulseModeActive && !IsDoingImpulseMode)
                         {
-                            if (!IsDoingImpulseMode)
-                            {
-                                IsDoingImpulseMode = true;
-                                ApplyRelativeForce(obj, 0, ImpulseForce, 0);
-                                ApplyRelativeForce(obj, 0, ImpulseForce, 0);
-                                ApplyRelativeForce(obj, 0, ImpulseForce, 0);
-                                ApplyRelativeForce(obj, 0, ImpulseForce, 0);
-                                ApplyRelativeForce(obj, 0, ImpulseForce, 0);
-                                ApplyRelativeForce(obj, 0, ImpulseForce, 0);
-                                IsDoingImpulseMode = false;
-                            }
+                            IsDoingImpulseMode = true;
+                            ApplyRelativeForce(obj, 0, ImpulseForce, 0);
+                            ApplyRelativeForce(obj, 0, ImpulseForce, 0);
+                            ApplyRelativeForce(obj, 0, ImpulseForce, 0);
+                            ApplyRelativeForce(obj, 0, ImpulseForce, 0);
+                            ApplyRelativeForce(obj, 0, ImpulseForce, 0);
+                            ApplyRelativeForce(obj, 0, ImpulseForce, 0);
+                            IsDoingImpulseMode = false;
                         }
                         LastTimeCheck2 = Time.time;
                     }
@@ -145,12 +139,9 @@
 
                 if (Time.time - LastTimeCheck > CrazyTimer)
                 {
-                    if (!pickup.IsHeld)
+                    if (!pickup.IsHeld && !obj.IsOwner())
                     {
-                        if (!obj.IsOwner())
-                        {
-                            obj.TakeOwnership();
-                        }
+                        obj.TakeOwnership();
                     }
                     if (!IsDoingImpulseMode)
                     {
