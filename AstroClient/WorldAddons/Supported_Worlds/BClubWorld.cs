@@ -475,7 +475,7 @@
                 foreach (var chair in _chairs)
                 {
                     chair?.ExecuteUdonEvent();
-                    yield return new WaitForSeconds(0.1f);
+                    yield return new WaitForSeconds(0.001f);
                 }
 
                 if (IsBlueChairEnabled)

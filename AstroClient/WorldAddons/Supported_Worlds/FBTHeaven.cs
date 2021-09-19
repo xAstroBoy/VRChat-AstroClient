@@ -17,14 +17,15 @@
         public static QMNestedButton FBTExploitsPage;
         public static float ButtonUpdateTime = 0f;
         private static List<GameObject> TrashToDelete = new List<GameObject>();
-        //private static QMToggleButton LockButton1;
-        //private static GameObject LockIndicator1;
-        //private static QMToggleButton LockButton2;
-        //private static GameObject LockIndicator2;
-        //private static QMToggleButton LockButton3;
-        //private static GameObject LockIndicator3;
-        //private static QMToggleButton LockButton4;
-        //private static GameObject LockIndicator4;
+        private static bool isCurrentWorld;
+        private static QMToggleButton LockButton1;
+        private static GameObject LockIndicator1;
+        private static QMToggleButton LockButton2;
+        private static GameObject LockIndicator2;
+        private static QMToggleButton LockButton3;
+        private static GameObject LockIndicator3;
+        private static QMToggleButton LockButton4;
+        private static GameObject LockIndicator4;
 
         public override void OnSceneLoaded(int buildIndex, string sceneName)
         {
@@ -45,17 +46,17 @@
             _ = new QMSingleButton(FBTExploitsPage, 3, 1, $"Lock Door\n3", () => { LockDoor(3); }, $"Lock Door 3");
             _ = new QMSingleButton(FBTExploitsPage, 4, 1, $"Lock Door\n4", () => { LockDoor(4); }, $"Lock Door 4");
 
-            //LockButton1 = new QMToggleButton(FBTExploitsPage, 1, 0, "Unlock 1", () => { UnlockDoor(1); }, "Lock 1", () => { LockDoor(1); }, "Toggle Door Lock", null, Color.green, Color.red, false);
-            //LockButton2 = new QMToggleButton(FBTExploitsPage, 2, 0, "Unlock 2", () => { UnlockDoor(2); }, "Lock 2", () => { LockDoor(2); }, "Toggle Door Lock", null, Color.green, Color.red, false);
-            //LockButton3 = new QMToggleButton(FBTExploitsPage, 3, 0, "Unlock 3", () => { UnlockDoor(3); }, "Lock 3", () => { LockDoor(3); }, "Toggle Door Lock", null, Color.green, Color.red, false);
-            //LockButton4 = new QMToggleButton(FBTExploitsPage, 4, 0, "Unlock 4", () => { UnlockDoor(4); }, "Lock 4", () => { LockDoor(4); }, "Toggle Door Lock", null, Color.green, Color.red, false);
+            LockButton1 = new QMToggleButton(FBTExploitsPage, 1, 4, "Unlock 1", () => { UnlockDoor(1); }, "Lock 1", () => { LockDoor(1); }, "Toggle Door Lock", null, Color.green, Color.red, false);
+            LockButton2 = new QMToggleButton(FBTExploitsPage, 2, 4, "Unlock 2", () => { UnlockDoor(2); }, "Lock 2", () => { LockDoor(2); }, "Toggle Door Lock", null, Color.green, Color.red, false);
+            LockButton3 = new QMToggleButton(FBTExploitsPage, 3, 4, "Unlock 3", () => { UnlockDoor(3); }, "Lock 3", () => { LockDoor(3); }, "Toggle Door Lock", null, Color.green, Color.red, false);
+            LockButton4 = new QMToggleButton(FBTExploitsPage, 4, 4, "Unlock 4", () => { UnlockDoor(4); }, "Lock 4", () => { LockDoor(4); }, "Toggle Door Lock", null, Color.green, Color.red, false);
         }
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.FBTHeaven)
             {
-                //
+                isCurrentWorld = true;
                 ModConsole.DebugLog($"Recognized {Name} World,  Removing Blinders and Dividers...");
                 var blinders = GameObjectFinder.Find("[AREA_DEVIDERS]");
                 if (blinders != null)
@@ -109,8 +110,9 @@
 
                     if (TrashToDelete.Count() != 0)
                     {
-                        foreach (var trash in TrashToDelete)
+                        for (int i = 0; i < TrashToDelete.Count; i++)
                         {
+                            GameObject trash = TrashToDelete[i];
                             trash.DestroyMeLocal();
                         }
                     }
@@ -119,8 +121,9 @@
                     {
                         // make invisible this shit.
                         var renderers = doorinvisibleplane.GetComponentsInChildren<Renderer>(true);
-                        foreach (var rend in renderers)
+                        for (int i = 0; i < renderers.Count; i++)
                         {
+                            Renderer rend = renderers[i];
                             if (rend != null)
                             {
                                 rend.enabled = false;
@@ -139,10 +142,10 @@
                     AddLockPickButton(outsidebutton3, 3);
                     AddLockPickButton(outsidebutton4, 4);
 
-                    //if (LockIndicator1 == null || LockIndicator2 == null || LockIndicator3 == null || LockIndicator4 == null)
-                    //{
-                    //    ModConsole.Error("Could not find a lock indicator!");
-                    //}
+                    if (LockIndicator1 == null || LockIndicator2 == null || LockIndicator3 == null || LockIndicator4 == null)
+                    {
+                        ModConsole.Error("Could not find a lock indicator!");
+                    }
                 }
                 else
                 {
@@ -154,6 +157,11 @@
                 // I'll fix this later..
                 //MelonCoroutines.Start(UpdateButtonsLoop());
             }
+        }
+
+        public override void OnRoomLeft()
+        {
+            isCurrentWorld = false;
         }
 
         private static void AddLockPickButton(GameObject HandleSign, int doorID)
@@ -179,19 +187,9 @@
         {
             for (; ; )
             {
-                ButtonUpdateTime += 1 * Time.deltaTime;
-
-                if (ButtonUpdateTime < 100f)
-                {
-                    yield return null;
-                }
-                else
-                {
-                    if (!WorldUtils.IsInWorld) yield break;
-                    ButtonUpdateTime = 0f;
-                }
-
+                if (!isCurrentWorld) yield break;
                 RefreshButtons();
+                yield return new WaitForSeconds(0.25f);
             }
         }
 
@@ -209,41 +207,41 @@
 
         private static void RefreshButtons()
         {
-            //if (LockIndicator1.active)
-            //{
-            //    LockButton1.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton1.SetToggleState(false);
-            //}
+            if (LockIndicator1.active)
+            {
+                LockButton1.SetToggleState(true);
+            }
+            else
+            {
+                LockButton1.SetToggleState(false);
+            }
 
-            //if (LockIndicator2.active)
-            //{
-            //    LockButton2.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton2.SetToggleState(false);
-            //}
+            if (LockIndicator2.active)
+            {
+                LockButton2.SetToggleState(true);
+            }
+            else
+            {
+                LockButton2.SetToggleState(false);
+            }
 
-            //if (LockIndicator3.active)
-            //{
-            //    LockButton3.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton3.SetToggleState(false);
-            //}
+            if (LockIndicator3.active)
+            {
+                LockButton3.SetToggleState(true);
+            }
+            else
+            {
+                LockButton3.SetToggleState(false);
+            }
 
-            //if (LockIndicator4.active)
-            //{
-            //    LockButton4.SetToggleState(true);
-            //}
-            //else
-            //{
-            //    LockButton4.SetToggleState(false);
-            //}
+            if (LockIndicator4.active)
+            {
+                LockButton4.SetToggleState(true);
+            }
+            else
+            {
+                LockButton4.SetToggleState(false);
+            }
         }
     }
 }
