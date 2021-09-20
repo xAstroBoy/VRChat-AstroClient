@@ -1197,6 +1197,633 @@
             return null;
         }
 
+
+        public static BoxCollider Unpack_BoxCollider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_BoxCollider)
+                {
+                    return obj.Cast<UnityEngine.BoxCollider>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static BoxCollider[] Unpack_Array_BoxCollider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_BoxCollider_Array)
+                {
+                    var array = Il2CppArrayBase<BoxCollider>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    if (array != null && array.Count() != 0)
+                    {
+                        return array;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static List<BoxCollider> Unpack_List_BoxCollider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_BoxCollider_Array)
+                {
+                    return obj.Unpack_Array_BoxCollider()?.ToList();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+        public static Sprite Unpack_Sprite(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Sprite)
+                {
+                    return obj.Cast<UnityEngine.Sprite>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static Sprite[] Unpack_Array_Sprite(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Sprite_Array)
+                {
+                    var array = Il2CppArrayBase<Sprite>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    if (array != null && array.Count() != 0)
+                    {
+                        return array;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static List<Sprite> Unpack_List_Sprite(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Sprite_Array)
+                {
+                    return obj.Unpack_Array_Sprite()?.ToList();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static Component Unpack_Component(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Component)
+                {
+                    return obj.Cast<UnityEngine.Component>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static Component[] Unpack_Array_Component(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Component_Array)
+                {
+                    var array = Il2CppArrayBase<Component>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    if (array != null && array.Count() != 0)
+                    {
+                        return array;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static List<Component> Unpack_List_Component(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Component_Array)
+                {
+                    return obj.Unpack_Array_Component()?.ToList();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+
+        public static Rigidbody Unpack_Rigidbody(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Rigidbody)
+                {
+                    return obj.Cast<UnityEngine.Rigidbody>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static Rigidbody[] Unpack_Array_Rigidbody(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Rigidbody_Array)
+                {
+                    var array = Il2CppArrayBase<Rigidbody>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    if (array != null && array.Count() != 0)
+                    {
+                        return array;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static List<Rigidbody> Unpack_List_Rigidbody(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Rigidbody_Array)
+                {
+                    return obj.Unpack_Array_Rigidbody()?.ToList();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static CapsuleCollider Unpack_CapsuleCollider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_CapsuleCollider)
+                {
+                    return obj.Cast<UnityEngine.CapsuleCollider>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static CapsuleCollider[] Unpack_Array_CapsuleCollider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_CapsuleCollider_Array)
+                {
+                    var array = Il2CppArrayBase<CapsuleCollider>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    if (array != null && array.Count() != 0)
+                    {
+                        return array;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static List<CapsuleCollider> Unpack_List_CapsuleCollider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_CapsuleCollider_Array)
+                {
+                    return obj.Unpack_Array_CapsuleCollider()?.ToList();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static SphereCollider Unpack_SphereCollider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_SphereCollider)
+                {
+                    return obj.Cast<UnityEngine.SphereCollider>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static SphereCollider[] Unpack_Array_SphereCollider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_SphereCollider_Array)
+                {
+                    var array = Il2CppArrayBase<SphereCollider>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    if (array != null && array.Count() != 0)
+                    {
+                        return array;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static List<SphereCollider> Unpack_List_SphereCollider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_SphereCollider_Array)
+                {
+                    return obj.Unpack_Array_SphereCollider()?.ToList();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+        public static MeshCollider Unpack_MeshCollider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_MeshCollider)
+                {
+                    return obj.Cast<UnityEngine.MeshCollider>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static MeshCollider[] Unpack_Array_MeshCollider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_MeshCollider_Array)
+                {
+                    var array = Il2CppArrayBase<MeshCollider>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    if (array != null && array.Count() != 0)
+                    {
+                        return array;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static List<MeshCollider> Unpack_List_MeshCollider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_MeshCollider_Array)
+                {
+                    return obj.Unpack_Array_MeshCollider()?.ToList();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static Animator Unpack_Animator(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Animator)
+                {
+                    return obj.Cast<UnityEngine.Animator>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static Animator[] Unpack_Array_Animator(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Animator_Array)
+                {
+                    var array = Il2CppArrayBase<Animator>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    if (array != null && array.Count() != 0)
+                    {
+                        return array;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static List<Animator> Unpack_List_Animator(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Animator_Array)
+                {
+                    return obj.Unpack_Array_Animator()?.ToList();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static LineRenderer Unpack_LineRenderer(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_LineRenderer)
+                {
+                    return obj.Cast<UnityEngine.LineRenderer>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static LineRenderer[] Unpack_Array_LineRenderer(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_LineRenderer_Array)
+                {
+                    var array = Il2CppArrayBase<LineRenderer>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    if (array != null && array.Count() != 0)
+                    {
+                        return array;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static List<LineRenderer> Unpack_List_LineRenderer(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_LineRenderer_Array)
+                {
+                    return obj.Unpack_Array_LineRenderer()?.ToList();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static RaycastHit? Unpack_RaycastHit(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_RaycastHit)
+                {
+                    return obj.Unbox<UnityEngine.RaycastHit>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static RaycastHit[] Unpack_Array_RaycastHit(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_RaycastHit_Array)
+                {
+                    var array = Il2CppArrayBase<RaycastHit>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    if (array != null && array.Count() != 0)
+                    {
+                        return array;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static List<RaycastHit> Unpack_List_RaycastHit(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_RaycastHit_Array)
+                {
+                    return obj.Unpack_Array_RaycastHit()?.ToList();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+
+        public static LayerMask? Unpack_LayerMask(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_LayerMask)
+                {
+                    return obj.Unbox<UnityEngine.LayerMask>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static LayerMask[] Unpack_Array_LayerMask(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_LayerMask_Array)
+                {
+                    var array = Il2CppArrayBase<LayerMask>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    if (array != null && array.Count() != 0)
+                    {
+                        return array;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static List<LayerMask> Unpack_List_LayerMask(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_LayerMask_Array)
+                {
+                    return obj.Unpack_Array_LayerMask()?.ToList();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+
+        public static Bounds? Unpack_Bounds(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Bounds)
+                {
+                    return obj.Unbox<UnityEngine.Bounds>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+
+
+        public static Bounds[] Unpack_Array_Bounds(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Bounds_Array)
+                {
+                    var array = Il2CppArrayBase<Bounds>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    if (array != null && array.Count() != 0)
+                    {
+                        return array;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static List<Bounds> Unpack_List_Bounds(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Bounds_Array)
+                {
+                    return obj.Unpack_Array_Bounds()?.ToList();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
         public static GameObject[] Unpack_Array_GameObject(this Il2CppSystem.Object obj)
         {
             if (obj != null)

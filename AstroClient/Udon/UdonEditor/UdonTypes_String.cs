@@ -34,9 +34,6 @@
         public const string System_Boolean  = "System.Boolean";
         public const string System_Boolean_Array  = "System.Boolean[]";
 
-        // Discarded.
-        public const string System_RuntimeType = "System.RuntimeType";
-        public const string System_RuntimeType_Array = "System.RuntimeType[]";
 
         public const string System_Byte = "System.Byte";
         public const string System_Byte_Array = "System.Byte[]";
@@ -111,6 +108,102 @@
 
         public const string TMPro_TextMeshProUGUI  = "TMPro.TextMeshProUGUI";
         public const string TMPro_TextMeshProUGUI_Array  = "TMPro.TextMeshProUGUI[]";
+
+
+        // TO Implement...
+
+        public const string UnityEngine_Component = "UnityEngine.Component";
+        public const string UnityEngine_Component_Array = "UnityEngine.Component[]";
+
+
+        public const string UnityEngine_BoxCollider = "UnityEngine.BoxCollider";
+        public const string UnityEngine_BoxCollider_Array = "UnityEngine.BoxCollider[]";
+
+        public const string UnityEngine_CapsuleCollider = "UnityEngine.CapsuleCollider";
+        public const string UnityEngine_CapsuleCollider_Array = "UnityEngine.CapsuleCollider[]";
+
+        public const string UnityEngine_SphereCollider = "UnityEngine.SphereCollider";
+        public const string UnityEngine_SphereCollider_Array = "UnityEngine.SphereCollider[]";
+
+        public const string UnityEngine_MeshCollider = "UnityEngine.MeshCollider";
+        public const string UnityEngine_MeshCollider_Array = "UnityEngine.MeshCollider[]";
+
+        public const string UnityEngine_Sprite = "UnityEngine.Sprite";
+        public const string UnityEngine_Sprite_Array = "UnityEngine.Sprite[]";
+
+        public const string UnityEngine_Rigidbody = "UnityEngine.Rigidbody";
+        public const string UnityEngine_Rigidbody_Array = "UnityEngine.Rigidbody[]";
+
+        public const string UnityEngine_Bounds = "UnityEngine.Bounds";
+        public const string UnityEngine_Bounds_Array = "UnityEngine.Bounds[]";
+
+        public const string UnityEngine_Animator = "UnityEngine.Animator";
+        public const string UnityEngine_Animator_Array = "UnityEngine.Animator[]";
+
+        public const string UnityEngine_LayerMask = "UnityEngine.LayerMask";
+        public const string UnityEngine_LayerMask_Array = "UnityEngine.LayerMask[]";
+
+        public const string UnityEngine_LineRenderer = "UnityEngine.LineRenderer";
+        public const string UnityEngine_LineRenderer_Array = "UnityEngine.LineRenderer[]";
+
+        public const string UnityEngine_RaycastHit = "UnityEngine.RaycastHit";
+        public const string UnityEngine_RaycastHit_Array = "UnityEngine.RaycastHit[]";
+
+        public const string UnityEngine_UI_Toggle = "UnityEngine.UI.Toggle";
+        public const string UnityEngine_UI_Toggle_Array = "UnityEngine.UI.Toggle[]";
+
+
+        public const string UnityEngine_AI_NavMeshAgent = "UnityEngine.AI.NavMeshAgent";
+        public const string UnityEngine_AI_NavMeshAgent_Array = "UnityEngine.AI.NavMeshAgent[]";
+
+        public const string UnityEngine_AI_NavMeshHit = "UnityEngine.AI.NavMeshHit";
+        public const string UnityEngine_AI_NavMeshHit_Array = "UnityEngine.AI.NavMeshHit[]";
+
+
+        public const string UnityEngine_RectTransform = "UnityEngine.RectTransform";
+        public const string UnityEngine_RectTransform_Array = "UnityEngine.RectTransform[]";
+
+        public const string UnityEngine_Camera = "UnityEngine.Camera";
+        public const string UnityEngine_Camera_Array = "UnityEngine.Camera[]";
+
+        public const string UnityEngine_UI_Image = "UnityEngine.UI.Image";
+        public const string UnityEngine_UI_Image_Array = "UnityEngine.UI.Image[]";
+
+
+        public const string UnityEngine_UI_Button = "UnityEngine.UI.Button";
+        public const string UnityEngine_UI_Button_Array = "UnityEngine.UI.Button[]";
+
+        public const string UnityEngine_KeyCode = "UnityEngine.KeyCode";
+        public const string UnityEngine_KeyCode_Array = "UnityEngine.KeyCode[]";
+
+        public const string UnityEngine_Rect = "UnityEngine.Rect";
+        public const string UnityEngine_Rect_Array = "UnityEngine.Rect[]";
+
+        public const string UnityEngine_UI_RawImage = "UnityEngine.UI.RawImage";
+        public const string UnityEngine_UI_RawImage_Array = "UnityEngine.UI.RawImage[]";
+
+        public const string UnityEngine_Texture2D = "UnityEngine.Texture2D";
+        public const string UnityEngine_Texture2D_Array = "UnityEngine.Texture2D[]";
+
+        public const string VRC_SDKBase_VRCPlayerApi_TrackingData = "VRC.SDKBase.VRCPlayerApi+TrackingData";
+        public const string VRC_SDKBase_VRCPlayerApi_TrackingData_Array = "VRC.SDKBase.VRCPlayerApi+TrackingData[]";
+
+        public const string VRC_SDK3_Components_VRCPickup = "VRC.SDK3.Components.VRCPickup";
+        public const string VRC_SDK3_Components_VRCPickup_Array = "VRC.SDK3.Components.VRCPickup[]";
+
+        public const string VRC_SDKBase_VRCPlayerApi_TrackingDataType = "VRC.SDKBase.VRCPlayerApi+TrackingDataType";
+        public const string VRC_SDKBase_VRCPlayerApi_TrackingDataType_Array = "VRC.SDKBase.VRCPlayerApi+TrackingDataType[]";
+
+        public const string VRC_SDK3_Components_VRCAvatarPedestal = "VRC.SDK3.Components.VRCAvatarPedestal";
+        public const string VRC_SDK3_Components_VRCAvatarPedestal_Array = "VRC.SDK3.Components.VRCAvatarPedestal[]";
+
+
+        // Unable to Unbox YET (Class Type is Protected)....
+
+
+        public const string System_RuntimeType = "System.RuntimeType";
+        public const string System_RuntimeType_Array = "System.RuntimeType[]";
+
 
 
     }
