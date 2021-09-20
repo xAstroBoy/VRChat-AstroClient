@@ -548,6 +548,30 @@
             }
         }
 
+        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Collider value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Collider[] value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
         public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Bounds value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
@@ -3859,6 +3883,57 @@
                 ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
             }
         }
+
+        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Collider value, bool verify = false)
+        {
+            if (heap != null)
+            {
+                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
+                if (verify)
+                {
+                    var result = heap.GetHeapVariable(address).Unpack_Collider();
+                    if (result.Equals(value))
+                    {
+                        ModConsole.DebugLog($"Heap Patch Applied.");
+                    }
+                    else
+                    {
+                        ModConsole.DebugLog($"Heap Patch Failed.");
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Collider[] value, bool verify = false)
+        {
+            if (heap != null)
+            {
+                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
+                if (verify)
+                {
+                    var result = heap.GetHeapVariable(address).Unpack_Array_Collider();
+                    if (result.Equals(value))
+                    {
+                        ModConsole.DebugLog($"Heap Patch Applied.");
+                    }
+                    else
+                    {
+                        ModConsole.DebugLog($"Heap Patch Failed.");
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
 
         public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.ParticleSystem value, bool verify = false)
         {

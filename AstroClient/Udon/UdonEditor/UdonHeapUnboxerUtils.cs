@@ -825,6 +825,35 @@
                                 }
                                 break;
                             }
+                        case UdonTypes_String.UnityEngine_Collider:
+                            {
+                                var result = obj.Unpack_List_Collider();
+                                if (result != null)
+                                {
+                                    return result.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Collider_Array:
+                            {
+                                var list = obj.Unpack_List_Collider();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
                         case UdonTypes_String.UnityEngine_Sprite:
                             {
                                 var result = obj.Unpack_Sprite();
@@ -1998,6 +2027,10 @@
                         case UdonTypes_String.VRC_SDKBase_VRCPlayerApi_TrackingDataType_Array:
                         case UdonTypes_String.VRC_SDKBase_VRC_Pickup_PickupHand:
                         case UdonTypes_String.VRC_SDKBase_VRC_Pickup_PickupHand_Array:
+                        case UdonTypes_String.UnityEngine_ParticleSystem_MainModule:
+                        case UdonTypes_String.UnityEngine_ParticleSystem_MainModule_Array:
+                        case UdonTypes_String.UnityEngine_ParticleSystem_MinMaxGradient:
+                        case UdonTypes_String.UnityEngine_ParticleSystem_MinMaxGradient_Array:
                             {
                                 return "Not Unboxable.";
                                 break;

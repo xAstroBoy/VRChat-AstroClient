@@ -1685,6 +1685,60 @@
             return null;
         }
 
+        public static Collider Unpack_Collider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Collider)
+                {
+                    return obj.Cast<UnityEngine.Collider>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+
+        public static Collider[] Unpack_Array_Collider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Collider_Array)
+                {
+                    var array = Il2CppArrayBase<Collider>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    if (array != null && array.Count() != 0)
+                    {
+                        return array;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static List<Collider> Unpack_List_Collider(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.UnityEngine_Collider_Array)
+                {
+                    return obj.Unpack_Array_Collider()?.ToList();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+
         public static MeshCollider[] Unpack_Array_MeshCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)

@@ -38,6 +38,14 @@
         public const string System_Byte = "System.Byte";
         public const string System_Byte_Array = "System.Byte[]";
 
+        public const string System_UInt16 = "System.UInt16";
+        public const string System_UInt16_Array = "System.UInt16[]";
+
+        public const string System_Double = "System.Double";
+        public const string System_Double_Array = "System.Double[]";
+
+        public const string System_TimeSpan = "System.TimeSpan";
+        public const string System_TimeSpan_Array = "System.TimeSpan[]";
 
         public const string System_Object  = "System.Object";
         public const string System_Object_Array  = "System.Object[]";
@@ -104,6 +112,9 @@
         public const string UnityEngine_MeshCollider = "UnityEngine.MeshCollider";
         public const string UnityEngine_MeshCollider_Array = "UnityEngine.MeshCollider[]";
 
+        public const string UnityEngine_Collider = "UnityEngine.Collider";
+        public const string UnityEngine_Collider_Array = "UnityEngine.Collider[]";
+
         public const string UnityEngine_Sprite = "UnityEngine.Sprite";
         public const string UnityEngine_Sprite_Array = "UnityEngine.Sprite[]";
 
@@ -140,11 +151,42 @@
         public const string UnityEngine_Texture2D = "UnityEngine.Texture2D";
         public const string UnityEngine_Texture2D_Array = "UnityEngine.Texture2D[]";
 
+        public const string UnityEngine_Mesh = "UnityEngine.Mesh";
+        public const string UnityEngine_Mesh_Array = "UnityEngine.Mesh[]";
+
+        public const string UnityEngine_Texture = "UnityEngine.Texture";
+        public const string UnityEngine_Texture_Array = "UnityEngine.Texture[]";
+
+        public const string UnityEngine_ReflectionProbe = "UnityEngine.ReflectionProbe";
+        public const string UnityEngine_ReflectionProbe_Array = "UnityEngine.ReflectionProbe[]";
+
+        public const string UnityEngine_RenderTexture = "UnityEngine.RenderTexture";
+        public const string UnityEngine_RenderTexture_Array = "UnityEngine.RenderTexture[]";
+
+
+        public const string UnityEngine_TextAsset = "UnityEngine.TextAsset";
+        public const string UnityEngine_TextAsset_Array = "UnityEngine.TextAsset[]";
+
+
+
+
+
+
         public const string UnityEngine_AI_NavMeshAgent = "UnityEngine.AI.NavMeshAgent";
         public const string UnityEngine_AI_NavMeshAgent_Array = "UnityEngine.AI.NavMeshAgent[]";
 
         public const string UnityEngine_AI_NavMeshHit = "UnityEngine.AI.NavMeshHit";
         public const string UnityEngine_AI_NavMeshHit_Array = "UnityEngine.AI.NavMeshHit[]";
+
+        public const string UnityEngine_UI_Slider = "UnityEngine.UI.Slider";
+        public const string UnityEngine_UI_Slider_Array = "UnityEngine.UI.Slider[]";
+
+        public const string UnityEngine_UI_ScrollRect = "UnityEngine.UI.ScrollRect";
+        public const string UnityEngine_UI_ScrollRect_Array = "UnityEngine.UI.ScrollRect[]";
+
+        public const string UnityEngine_UI_InputField = "UnityEngine.UI.InputField";
+        public const string UnityEngine_UI_InputField_Array = "UnityEngine.UI.InputField[]";
+
 
         public const string UnityEngine_UI_Toggle = "UnityEngine.UI.Toggle";
         public const string UnityEngine_UI_Toggle_Array = "UnityEngine.UI.Toggle[]";
@@ -164,6 +206,26 @@
         #endregion
 
         #region VRChat
+
+
+        public const string VRC_Udon_Common_SerializationResult = "VRC.Udon.Common.SerializationResult";
+        public const string VRC_Udon_Common_SerializationResult_Array = "VRC.Udon.Common.SerializationResult[]";
+
+        public const string VRC_SDKBase_VRCUrl = "VRC.SDKBase.VRCUrl";
+        public const string VRC_SDKBase_VRCUrl_Array = "VRC.SDKBase.VRCUrl[]";
+
+        public const string VRC_SDK3_Components_Video_VideoError = "VRC.SDK3.Components.Video.VideoError";
+        public const string VRC_SDK3_Components_Video_VideoError_Array = "VRC.SDK3.Components.Video.VideoError[]";
+
+        public const string VRC_SDK3_Components_VRCUrlInputField = "VRC.SDK3.Components.VRCUrlInputField";
+        public const string VRC_SDK3_Components_VRCUrlInputField_Array = "VRC.SDK3.Components.VRCUrlInputField[]";
+
+        public const string VRC_SDK3_Video_Components_VRCUnityVideoPlayer = "VRC.SDK3.Video.Components.VRCUnityVideoPlayer";
+        public const string VRC_SDK3_Video_Components_VRCUnityVideoPlayer_Array = "VRC.SDK3.Video.Components.VRCUnityVideoPlayer[]";
+
+        public const string VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer = "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer";
+        public const string VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_Array = "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]";
+
 
         public const string VRC_SDKBase_VRCPlayerApi  = "VRC.SDKBase.VRCPlayerApi";
         public const string VRC_SDKBase_VRCPlayerApi_Array  = "VRC.SDKBase.VRCPlayerApi[]";
@@ -196,9 +258,10 @@
 
 
         #region Unboxables
-        // Unable to Unbox YET (Class Type is Protected)....
 
         #region System
+
+        // Unable to Unbox YET (Class Type is Protected)....
         public const string System_RuntimeType = "System.RuntimeType";
         public const string System_RuntimeType_Array = "System.RuntimeType[]";
 
@@ -215,65 +278,22 @@
         public const string VRC_SDKBase_VRC_Pickup_PickupHand = "VRC.SDKBase.VRC_Pickup+PickupHand";
         public const string VRC_SDKBase_VRC_Pickup_PickupHand_Array = "VRC.SDKBase.VRC_Pickup+PickupHand[]";
 
+        public const string UnityEngine_ParticleSystem_MainModule = "UnityEngine.ParticleSystem+MainModule";
+        public const string UnityEngine_ParticleSystem_MainModule_Array = "UnityEngine.ParticleSystem+MainModule[]";
+        public const string UnityEngine_ParticleSystem_MinMaxGradient = "UnityEngine.ParticleSystem+MinMaxGradient";
+        public const string UnityEngine_ParticleSystem_MinMaxGradient_Array = "UnityEngine.ParticleSystem+MinMaxGradient[]";
+        #endregion
+
+        #region Unity
+
+
         #endregion
         #endregion
 
 
 
-        public const string System_UInt16 = "System.UInt16";
-        public const string System_UInt16_Array = "System.UInt16[]";
-
-        public const string System_Double = "System.Double";
-        public const string System_Double_Array = "System.Double[]";
-
-        public const string System_TimeSpan = "System.TimeSpan";
-        public const string System_TimeSpan_Array = "System.TimeSpan[]";
 
 
-        public const string UnityEngine_Mesh = "UnityEngine.Mesh";
-        public const string UnityEngine_Mesh_Array = "UnityEngine.Mesh[]";
-
-        public const string UnityEngine_Texture = "UnityEngine.Texture";
-        public const string UnityEngine_Texture_Array = "UnityEngine.Texture[]";
-
-        public const string UnityEngine_ReflectionProbe = "UnityEngine.ReflectionProbe";
-        public const string UnityEngine_ReflectionProbe_Array = "UnityEngine.ReflectionProbe[]";
-
-        public const string UnityEngine_RenderTexture = "UnityEngine.RenderTexture";
-        public const string UnityEngine_RenderTexture_Array = "UnityEngine.RenderTexture[]";
-
-
-
-        public const string UnityEngine_UI_Slider = "UnityEngine.UI.Slider";
-        public const string UnityEngine_UI_Slider_Array = "UnityEngine.UI.Slider[]";
-
-        public const string UnityEngine_TextAsset = "UnityEngine.TextAsset";
-        public const string UnityEngine_TextAsset_Array = "UnityEngine.TextAsset[]";
-
-        public const string UnityEngine_UI_ScrollRect = "UnityEngine.UI.ScrollRect";
-        public const string UnityEngine_UI_ScrollRect_Array = "UnityEngine.UI.ScrollRect[]";
-
-        public const string UnityEngine_UI_InputField = "UnityEngine.UI.InputField";
-        public const string UnityEngine_UI_InputField_Array = "UnityEngine.UI.InputField[]";
-
-
-        public const string VRC_Udon_Common_SerializationResult = "VRC.Udon.Common.SerializationResult";
-        public const string VRC_Udon_Common_SerializationResult_Array = "VRC.Udon.Common.SerializationResult[]";
-
-        public const string VRC_SDKBase_VRCUrl = "VRC.SDKBase.VRCUrl";
-        public const string VRC_SDKBase_VRCUrl_Array = "VRC.SDKBase.VRCUrl[]";
-
-        public const string VRC_SDK3_Components_Video_VideoError = "VRC.SDK3.Components.Video.VideoError";
-        public const string VRC_SDK3_Components_Video_VideoError_Array = "VRC.SDK3.Components.Video.VideoError[]";
-
-        public const string VRC_SDK3_Components_VRCUrlInputField = "VRC.SDK3.Components.VRCUrlInputField";
-        public const string VRC_SDK3_Components_VRCUrlInputField_Array = "VRC.SDK3.Components.VRCUrlInputField[]";
-
-        public const string VRC_SDK3_Video_Components_VRCUnityVideoPlayer = "VRC.SDK3.Video.Components.VRCUnityVideoPlayer";
-        public const string VRC_SDK3_Video_Components_VRCUnityVideoPlayer_Array = "VRC.SDK3.Video.Components.VRCUnityVideoPlayer[]";
-
-        public const string VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer = "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer";
-        public const string VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_Array = "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]";
 
 
 

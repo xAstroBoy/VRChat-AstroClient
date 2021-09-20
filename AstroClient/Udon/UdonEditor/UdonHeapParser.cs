@@ -1194,6 +1194,48 @@
             }
             return null;
         }
+
+
+        public static UnityEngine.Collider Udon_Parse_Collider(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_Collider(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.Collider> Udon_Parse_Collider_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_Collider_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.Collider[] Udon_Parse_Collider_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_Collider_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
         public static UnityEngine.MeshCollider Udon_Parse_MeshCollider(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
@@ -4682,6 +4724,29 @@
         }
 
 
+        public static UnityEngine.Collider Udon_Parse_Collider(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Collider();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+
         public static UnityEngine.Bounds? Udon_Parse_Bounds(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
@@ -4814,6 +4879,48 @@
                 if (value != null)
                 {
                     var result = value.Unpack_Array_MeshCollider();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.Collider> Udon_Parse_Collider_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_Collider();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.Collider[] Udon_Parse_Collider_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_Collider();
                     if (result != null)
                     {
                         return result;
