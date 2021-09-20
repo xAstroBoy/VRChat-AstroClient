@@ -21,7 +21,7 @@
         public static string ConvertColorToString(System.Drawing.Color color)
         {
             var converted = color.ToUnityEngineColor();
-            return $"public const UnityEngine.Color {color.Name}  " + "{ get; }" + $"  = new UnityEngine.Color({converted.r}f, {converted.g}f, {converted.b}f, {converted.a}f);";
+            return $"public static UnityEngine.Color {color.Name}  " + "{ get; }" + $"  = new UnityEngine.Color({converted.r}f, {converted.g}f, {converted.b}f, {converted.a}f);";
         }
 
 
