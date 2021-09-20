@@ -14,6 +14,7 @@
     using MelonLoader;
     using Newtonsoft.Json;
     using System;
+    using System.Collections;
     using System.Net.Sockets;
     using System.Threading;
     using System.Threading.Tasks;
@@ -37,20 +38,16 @@
             ModConsole.Log("Client Connecting..");
 
             Connect();
-            SetPingTimer();
+            MelonCoroutines.Start(PingLoop());
         }
 
-        private static void SetPingTimer()
+        private static IEnumerator PingLoop()
         {
-            pingTimer = new Timer(10000);
-            pingTimer.Elapsed += OnPingEvent;
-            pingTimer.AutoReset = true;
-            pingTimer.Enabled = true;
-        }
-
-        private static void OnPingEvent(object source, ElapsedEventArgs e)
-        {
-            Client.Send(new PacketData(PacketClientType.KEEP_ALIVE));
+            for(; ; )
+            {
+                Client.Send(new PacketData(PacketClientType.KEEP_ALIVE));
+                yield return new WaitForSeconds(5f);
+            }
         }
 
         private static void Connect()
@@ -227,15 +224,23 @@
 
         private static void OnDisconnect(object sender, EventArgs e)
         {
-            _ = Task.Run(() =>
-              {
-                  for (; ; )
-                  {
-                      ModConsole.Error("Lost connection to server, retrying in 5 seconds...");
-                      Thread.Sleep(5000);
-                      try { Connect(); break; } catch { }
-                  }
-              });
+            MelonCoroutines.Start(TryReconnect());
+        }
+
+        private static IEnumerator TryReconnect()
+        {
+            for (; ; )
+            {
+                try
+                {
+                    Connect();
+                    yield break;
+                }
+                catch { }
+
+                ModConsole.Log("Client reconnection attempt in 5 seconds..");
+                yield return new WaitForSeconds(5f);
+            }
         }
 
         private static void OnPacketReceived(object sender, ReceivedPacketEventArgs e)
