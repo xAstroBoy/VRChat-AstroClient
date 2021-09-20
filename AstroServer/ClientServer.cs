@@ -77,11 +77,6 @@
             var networkEventID = packetData.NetworkEventID;
             Client client = sender as Client;
 
-            if (networkEventID != PacketClientType.KEEP_ALIVE && networkEventID != PacketClientType.AVATAR_DATA)
-            {
-                Console.WriteLine($"TCP Event {packetData.NetworkEventID} Received.");
-            }
-
             switch (networkEventID)
             {
                 case PacketClientType.AUTH:

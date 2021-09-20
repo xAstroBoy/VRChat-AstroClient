@@ -50,9 +50,7 @@
                 clientStream.Close();
                 ClientSocket.Close();
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         private void SendSecret()
@@ -62,7 +60,6 @@
             try
             {
                 clientStream.Write(secretHeader, 0, secretHeader.Length);
-                clientStream.Flush();
             }
             catch
             {
@@ -76,7 +73,6 @@
             try
             {
                 clientStream.Write(headerLength, 0, headerLength.Length);
-                clientStream.Flush();
             }
             catch
             {
@@ -97,7 +93,6 @@
                 try
                 {
                     clientStream.Write(bytes, 0, bytes.Length);
-                    clientStream.Flush();
                 }
                 catch
                 {
@@ -111,7 +106,7 @@
             Connected?.Invoke(this, new EventArgs());
 
             IsConnected = true;
-            while (IsConnected)
+            for (; IsConnected;)
             {
                 Receive();
             }
@@ -171,7 +166,7 @@
                 byte[] data = new byte[len];
 
                 int toRead = PacketSize;
-                while (remaining > 0)
+                for (; remaining > 0;)
                 {
                     toRead = remaining >= PacketSize ? PacketSize : remaining;
 

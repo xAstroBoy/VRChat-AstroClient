@@ -164,7 +164,7 @@
 
             for (; ; )
             {
-                yield return new WaitForSeconds(0.001f);
+                yield return new WaitForSeconds(0.01f);
                 if (!IsSearching)
                 {
                     SearchDone();
