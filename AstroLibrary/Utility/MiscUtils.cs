@@ -263,16 +263,7 @@ namespace AstroLibrary.Utility
         {
             try
             {
-                new PageAvatar
-                {
-                    field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal
-                    {
-                        field_Internal_ApiAvatar_0 = new ApiAvatar
-                        {
-                            id = instance.id
-                        }
-                    }
-                }.ChangeToSelectedAvatar();
+                ChangeAvatar(instance.id);
             }
             catch { ModConsole.Error("Error turning into avatar! Maybe it's non existing?"); }
         }
@@ -281,16 +272,7 @@ namespace AstroLibrary.Utility
         {
             try
             {
-                new PageAvatar
-                {
-                    field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal
-                    {
-                        field_Internal_ApiAvatar_0 = new ApiAvatar
-                        {
-                            id = instance.prop_ApiAvatar_0.id
-                        }
-                    }
-                }.ChangeToSelectedAvatar();
+                ChangeAvatar(instance.prop_ApiAvatar_0.id);
             }
             catch { ModConsole.Error("Error turning into avatar! Maybe it's non existing?"); }
         }
@@ -299,16 +281,7 @@ namespace AstroLibrary.Utility
         {
             try
             {
-                new PageAvatar
-                {
-                    field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal
-                    {
-                        field_Internal_ApiAvatar_0 = new ApiAvatar
-                        {
-                            id = instance.prop_ApiAvatar_0.id
-                        }
-                    }
-                }.ChangeToSelectedAvatar();
+                ChangeAvatar(instance.prop_ApiAvatar_0.id);
             }
             catch { ModConsole.Error("Error turning into avatar! Maybe it's non existing?"); }
         }
@@ -317,16 +290,12 @@ namespace AstroLibrary.Utility
         {
             try
             {
-                new PageAvatar
+                PageAvatar component = GameObject.Find("Screens").transform.Find("Avatar").GetComponent<PageAvatar>();
+                component.field_Public_SimpleAvatarPedestal_0.field_Internal_ApiAvatar_0 = new ApiAvatar
                 {
-                    field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal
-                    {
-                        field_Internal_ApiAvatar_0 = new ApiAvatar
-                        {
-                            id = id
-                        }
-                    }
-                }.ChangeToSelectedAvatar();
+                    id = id
+                };
+                component.ChangeToSelectedAvatar();
             }
             catch { ModConsole.Error("Error turning into avatar! Maybe it's non existing?"); }
         }
