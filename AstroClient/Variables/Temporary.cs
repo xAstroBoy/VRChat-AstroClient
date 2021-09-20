@@ -4,6 +4,6 @@
     {
         internal static int RealPing { get; set; }
 
-        internal static float RealFPS {  get; set; }
+        internal static float RealFPS { get; set; }
     }
 }

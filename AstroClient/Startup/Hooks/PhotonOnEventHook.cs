@@ -135,11 +135,6 @@
                                     BlockedYouPlayers.Add(player);
                                     Event_OnPlayerBlockedYou.SafetyRaise(new VRCPlayerEventArgs(player));
                                 }
-                                if(UnblockPatchTest)
-                                {
-                                    dictionary2[11] = false;
-                                }
-
                             }
                             if (!blockedyou && BlockedYouPlayers.Contains(player))
                             {
@@ -155,6 +150,10 @@
                             {
                                 MutedYouPlayers.Remove(player);
                                 Event_OnPlayerUnmutedYou.SafetyRaise(new VRCPlayerEventArgs(player));
+                            }
+                            if (UnblockPatchTest)
+                            {
+                                dictionary2[11] = false;
                             }
                         }
                     }

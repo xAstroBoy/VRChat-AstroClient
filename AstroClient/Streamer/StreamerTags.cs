@@ -24,37 +24,37 @@
                 if (apiuser != null)
                 {
                     var userid = apiuser.id;
-                    player.AddSingleTag(Color.LimeGreen, UnityEngine.Color.white, "Streamer");
+                    player.AddSingleTag(SystemColors.LimeGreen, UnityEngine.Color.white, "Streamer");
                     switch (userid)
                     {
                         case Streamers.StarNovaKitty:
-                            player.AddSingleTag(Color.Pink, UnityEngine.Color.white, "A Sweet Kitty"); ;
+                            player.AddSingleTag(SystemColors.Pink, UnityEngine.Color.white, "A Sweet Kitty"); ;
                             break;
 
                         case Streamers.Cambly:
-                            player.AddSingleTag(Color.Turquoise, UnityEngine.Color.white, "A Clumsy Cute Birb ");
+                            player.AddSingleTag(SystemColors.Turquoise, UnityEngine.Color.white, "A Clumsy Cute Birb ");
                             break;
 
                         case Streamers.Lolathon:
-                            player.AddSingleTag(Color.OrangeRed, UnityEngine.Color.white, "Clown & Prankster");
+                            player.AddSingleTag(SystemColors.OrangeRed, UnityEngine.Color.white, "Clown & Prankster");
                             break;
                         case Streamers.PATTIIIIIIII:
-                            player.AddSingleTag(Color.Gold, UnityEngine.Color.white, "Golden Toast Protector!");
+                            player.AddSingleTag(SystemColors.Gold, UnityEngine.Color.white, "Golden Toast Protector!");
                             break;
                         case Streamers.Ratchet232:
-                            player.AddSingleTag(Color.Red, UnityEngine.Color.white, "Official Psycho And cutie!");
+                            player.AddSingleTag(SystemColors.Red, UnityEngine.Color.white, "Official Psycho And cutie!");
                             break;
                         case Streamers.Thor_ChanVR:
-                            player.AddSingleTag(Color.Gold, UnityEngine.Color.white, "Official VRChat goddess!");
+                            player.AddSingleTag(SystemColors.Gold, UnityEngine.Color.white, "Official VRChat goddess!");
                             break;
                         case Streamers.Pud_Pud:
-                            player.AddSingleTag(Color.ForestGreen, UnityEngine.Color.white, "Sensible Squeaky panda and Cute!");
+                            player.AddSingleTag(SystemColors.ForestGreen, UnityEngine.Color.white, "Sensible Squeaky panda and Cute!");
                             break;
                         case Streamers.Ruqaa:
-                            player.AddSingleTag(Color.CornflowerBlue, UnityEngine.Color.white, "Cute Bunny!");
+                            player.AddSingleTag(SystemColors.CornflowerBlue, UnityEngine.Color.white, "Cute Bunny!");
                             break;
                         case Streamers.Nifty:
-                            player.AddSingleTag(Color.MediumPurple, UnityEngine.Color.white, "The Legendary Pan Bonker! (Give Her Hugs tho)");
+                            player.AddSingleTag(SystemColors.MediumPurple, UnityEngine.Color.white, "The Legendary Pan Bonker! (Give Her Hugs tho)");
                             break;
 
                         default:
