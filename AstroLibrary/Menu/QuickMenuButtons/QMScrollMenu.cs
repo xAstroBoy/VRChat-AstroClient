@@ -177,8 +177,7 @@
 
         public void Add(QMButtonBase Button, int Page, float POSX = 0, float POSY = 0)
         {
-            if (ShouldChangePos)
-                Button.SetLocation(Posx, Posy);
+            Button.SetLocation(POSX, POSY);
             Button.SetActive(false);
             QMButtons.Add(new ScrollObject()
             {
