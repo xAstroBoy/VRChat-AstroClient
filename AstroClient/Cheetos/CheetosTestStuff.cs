@@ -155,13 +155,10 @@
             Player player = PlayerUtils.GetPlayer();
             if (player.gameObject.GetComponent<SitOnPlayer>() == null) player.gameObject.AddComponent<SitOnPlayer>();
 
-            if (Bools.IsDeveloper)
+            if (Bools.IsDeveloper && !DoOnce)
             {
-                if (!DoOnce)
-                {
-                    PopupUtils.QueHudMessage("Developer Mode!");
-                    DoOnce = true;
-                }
+                PopupUtils.QueHudMessage("Developer Mode!");
+                DoOnce = true;
             }
         }
     }
