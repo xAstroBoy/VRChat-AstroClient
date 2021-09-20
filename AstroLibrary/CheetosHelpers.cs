@@ -28,18 +28,6 @@
             return tex;
         }
 
-        /// <summary>
-        /// Send a notification message to the player's HUD
-        /// </summary>
-        /// <param name="msg"></param>
-        public static void SendHudNotification(string msg)
-        {
-            if (WorldUtils.IsInWorld)
-            {
-                PopupUtils.QueHudMessage(msg);
-            }
-        }
-
         public static byte[] ExtractResource(Assembly assembly, string filename)
         {
             using (Stream resFilestream = assembly.GetManifestResourceStream(filename))

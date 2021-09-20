@@ -26,7 +26,7 @@
                 if (apiuser != null)
                 {
 
-                    CheetosHelpers.SendHudNotification($"Streamer : {apiuser.displayName} Joined!");
+                    PopupUtils.QueHudMessage($"Streamer : {apiuser.displayName} Joined!");
                     ModConsole.Warning($"Streamer : {apiuser.displayName} Joined!");
                 }
             }
@@ -43,7 +43,7 @@
                 var apiuser = player.GetAPIUser();
                 if (apiuser != null)
                 {
-                    CheetosHelpers.SendHudNotification($"Streamer : {apiuser.displayName} Left!");
+                    PopupUtils.QueHudMessage($"Streamer : {apiuser.displayName} Left!");
                     ModConsole.Warning($"Streamer : {apiuser.displayName} Left!");
                 }
             }

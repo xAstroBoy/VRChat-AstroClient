@@ -20,6 +20,7 @@
     using System.Timers;
     using UnityEngine;
     using VRC;
+    using PopupUtils = AstroLibrary.Utility.PopupUtils;
     using Timer = System.Timers.Timer;
 
     #endregion Imports
@@ -168,7 +169,7 @@
                     break;
 
                 case PacketServerType.NOTIFY:
-                    CheetosHelpers.SendHudNotification(packetData.TextData);
+                    PopupUtils.QueHudMessage(packetData.TextData);
                     break;
 
                 case PacketServerType.DEBUG:

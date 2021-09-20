@@ -93,7 +93,7 @@
                     {
                         Notification xx = FriendRequest.Create(player.GetUserID());
                         VRCWebSocketsManager.field_Private_Static_VRCWebSocketsManager_0.prop_Api_0.PostOffice.Send(xx);
-                        CheetosHelpers.SendHudNotification($"Friend Request Sent: {player.GetDisplayName()}");
+                        PopupUtils.QueHudMessage($"Friend Request Sent: {player.GetDisplayName()}");
                     }
                     catch (Exception e)
                     {
@@ -104,7 +104,7 @@
             }
 
             ModConsole.Log("Friend Requests Done!");
-            CheetosHelpers.SendHudNotification("Friend Requests Done!");
+            PopupUtils.QueHudMessage("Friend Requests Done!");
             yield break;
         }
 

@@ -228,14 +228,18 @@
 
         private static bool OnConfigurePortal(PortalInternal __instance, ref string __0, ref string __1, ref int __2, ref VRC.Player __3)
         {
-            ModConsole.Log($"Portal Spawned: {__instance.name}: {__0}, {__1}, {__2}, {__3.DisplayName()}");
             var worldId = __0;
 
             if (!worldId.StartsWith("wrld_"))
             {
                 ModConsole.Log("Blocking Bad Portal Spawn: Bad World ID");
-                CheetosHelpers.SendHudNotification("Blocking Bad Portal Spawn: Bad World ID");
+                PopupUtils.QueHudMessage("Blocking Bad Portal Spawn: Bad World ID");
                 return false;
+            }
+            else
+            {
+                ModConsole.Log($"Portal Spawned: {__instance.name}: {__3.DisplayName()}");
+                PopupUtils.QueHudMessage($"Portal Spawned: {__instance.name}: {__3.DisplayName()}");
             }
             return true;
         }

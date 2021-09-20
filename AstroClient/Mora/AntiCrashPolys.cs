@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.AntiCrash
 {
     using AstroLibrary;
+    using AstroLibrary.Utility;
     using RubyButtonAPI;
     using System;
     using System.Collections.Generic;
@@ -84,7 +85,7 @@
                     flag5 = Shader_Check(user);
                     if (flag5)
                     {
-                        CheetosHelpers.SendHudNotification($"[!!!] nuked shaders for \"" + user.prop_APIUser_0.displayName.ToString() + "\"");
+                        PopupUtils.QueHudMessage($"[!!!] nuked shaders for \"" + user.prop_APIUser_0.displayName.ToString() + "\"");
                     }
                     result = flag5;
                 }

@@ -23,7 +23,7 @@
 
             if (ConfigManager.General.JoinLeave && isReady)
             {
-                CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {player.GetDisplayName()} <color=green>Joined</color>!");
+                PopupUtils.QueHudMessage($"<color=cyan>[PHOTON]</color> {player.GetDisplayName()} <color=green>Joined</color>!");
             }
         }
 
@@ -34,7 +34,7 @@
 
             if (ConfigManager.General.JoinLeave && isReady)
             {
-                CheetosHelpers.SendHudNotification($"<color=cyan>[PHOTON]</color> {player.GetDisplayName()} <color=red>Left</color>!");
+                PopupUtils.QueHudMessage($"<color=cyan>[PHOTON]</color> {player.GetDisplayName()} <color=red>Left</color>!");
             }
         }
     }
