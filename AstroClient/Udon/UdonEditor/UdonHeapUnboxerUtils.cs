@@ -108,6 +108,7 @@
                                 {
                                     return $"empty {FullName}";
                                 }
+                                break;
 
                             }
                         case UdonTypes_String.System_Int64:
@@ -136,6 +137,7 @@
                                 {
                                     return $"empty {FullName}";
                                 }
+                                break;
 
                             }
                         case UdonTypes_String.System_Char:
@@ -164,6 +166,7 @@
                                 {
                                     return $"empty {FullName}";
                                 }
+                                break;
 
                             }
                         case UdonTypes_String.System_Single:
@@ -192,6 +195,7 @@
                                 {
                                     return $"empty {FullName}";
                                 }
+                                break;
 
                             }
                         case UdonTypes_String.System_Boolean:
@@ -220,17 +224,8 @@
                                 {
                                     return $"empty {FullName}";
                                 }
+                                break;
 
-                            }
-                        case UdonTypes_String.System_RuntimeType:
-                            {
-                                return "Unable to Unpack Due to protected Class";
-                                break;
-                            }
-                        case UdonTypes_String.System_RuntimeType_Array:
-                            {
-                                return "Unable to Unpack Due to protected Class";
-                                break;
                             }
                         case UdonTypes_String.System_Byte:
                             {
@@ -287,6 +282,7 @@
                                 {
                                     return $"empty {FullName}";
                                 }
+                                break;
 
                             }
                         #endregion
@@ -319,6 +315,7 @@
                                 {
                                     return $"empty {FullName}";
                                 }
+                                break;
                             }
                         case UdonTypes_String.UnityEngine_Material:
                             {
@@ -395,6 +392,35 @@
                                     foreach (var item in list)
                                     {
                                         listoutput.AppendLine(item.ToString());
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Component:
+                            {
+                                var result = obj.Unpack_Component();
+                                if (result != null)
+                                {
+                                    return result.GetType().FullName.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Component_Array:
+                            {
+                                var list = obj.Unpack_List_Component();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.GetType().FullName.ToString());
+
                                     }
                                     return listoutput.ToString();
                                 }
@@ -542,6 +568,7 @@
                                 {
                                     return $"empty {FullName}";
                                 }
+                                break;
                             }
                         case UdonTypes_String.UnityEngine_AudioSource:
                             {
@@ -599,6 +626,470 @@
                                 }
                                 break;
                             }
+                        case UdonTypes_String.UnityEngine_BoxCollider:
+                            {
+                                var result = obj.Unpack_BoxCollider();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_BoxCollider_Array:
+                            {
+                                var list = obj.Unpack_List_BoxCollider();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_CapsuleCollider:
+                            {
+                                var result = obj.Unpack_CapsuleCollider();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_CapsuleCollider_Array:
+                            {
+                                var list = obj.Unpack_List_CapsuleCollider();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_SphereCollider:
+                            {
+                                var result = obj.Unpack_SphereCollider();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_SphereCollider_Array:
+                            {
+                                var list = obj.Unpack_List_SphereCollider();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_MeshCollider:
+                            {
+                                var result = obj.Unpack_MeshCollider();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_MeshCollider_Array:
+                            {
+                                var list = obj.Unpack_List_MeshCollider();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Sprite:
+                            {
+                                var result = obj.Unpack_Sprite();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Sprite_Array:
+                            {
+                                var list = obj.Unpack_List_Sprite();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Rigidbody:
+                            {
+                                var result = obj.Unpack_Rigidbody();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Rigidbody_Array:
+                            {
+                                var list = obj.Unpack_List_Rigidbody();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Bounds:
+                            {
+                                var result = obj.Unpack_Bounds();
+                                if (result != null)
+                                {
+                                    return result.Value.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Bounds_Array:
+                            {
+                                var list = obj.Unpack_List_Bounds();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Animator:
+                            {
+                                var result = obj.Unpack_Animator();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Animator_Array:
+                            {
+                                var list = obj.Unpack_List_Animator();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_LayerMask:
+                            {
+                                var result = obj.Unpack_LayerMask();
+                                if (result.HasValue && result != null)
+                                {
+                                    return result.Value.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_LayerMask_Array:
+                            {
+                                var list = obj.Unpack_List_LayerMask();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_LineRenderer:
+                            {
+                                var result = obj.Unpack_LineRenderer();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_LineRenderer_Array:
+                            {
+                                var list = obj.Unpack_List_LineRenderer();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_RaycastHit:
+                            {
+                                var result = obj.Unpack_RaycastHit();
+                                if (result.HasValue && result != null)
+                                {
+                                    return result.Value.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_RaycastHit_Array:
+                            {
+                                var list = obj.Unpack_List_RaycastHit();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_RectTransform:
+                            {
+                                var result = obj.Unpack_RectTransform();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_RectTransform_Array:
+                            {
+                                var list = obj.Unpack_List_RectTransform();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Camera:
+                            {
+                                var result = obj.Unpack_Camera();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Camera_Array:
+                            {
+                                var list = obj.Unpack_List_Camera();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_KeyCode:
+                            {
+                                var result = obj.Unpack_KeyCode();
+                                if (result != null)
+                                {
+                                    return result.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_KeyCode_Array:
+                            {
+                                var list = obj.Unpack_List_KeyCode();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Rect:
+                            {
+                                var result = obj.Unpack_Rect();
+                                if (result.HasValue && result != null)
+                                {
+                                    return result.Value.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Rect_Array:
+                            {
+                                var list = obj.Unpack_List_Rect();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Texture2D:
+                            {
+                                var result = obj.Unpack_Texture2D();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_Texture2D_Array:
+                            {
+                                var list = obj.Unpack_List_Texture2D();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
                         case UdonTypes_String.UnityEngine_UI_Text:
                             {
                                 var result = obj.Unpack_UnityEngine_UI_Text();
@@ -628,6 +1119,181 @@
                                 }
                                 break;
                             }
+                        case UdonTypes_String.UnityEngine_UI_Toggle:
+                            {
+                                var result = obj.Unpack_UnityEngine_UI_Toggle();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_UI_Toggle_Array:
+                            {
+                                var list = obj.Unpack_List_UnityEngine_UI_Toggle();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_UI_Image:
+                            {
+                                var result = obj.Unpack_UnityEngine_UI_Image();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_UI_Image_Array:
+                            {
+                                var list = obj.Unpack_List_UnityEngine_UI_Image();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_UI_Button:
+                            {
+                                var result = obj.Unpack_UnityEngine_UI_Button();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_UI_Button_Array:
+                            {
+                                var list = obj.Unpack_List_UnityEngine_UI_Button();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_UI_RawImage:
+                            {
+                                var result = obj.Unpack_UnityEngine_UI_RawImage();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_UI_RawImage_Array:
+                            {
+                                var list = obj.Unpack_List_UnityEngine_UI_RawImage();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_AI_NavMeshAgent:
+                            {
+                                var result = obj.Unpack_UnityEngine_AI_NavMeshAgent();
+                                if (result != null)
+                                {
+                                    return result.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_AI_NavMeshAgent_Array:
+                            {
+                                var list = obj.Unpack_List_UnityEngine_AI_NavMeshAgent();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_AI_NavMeshHit:
+                            {
+                                var result = obj.Unpack_UnityEngine_AI_NavMeshHit();
+                                if (result != null)
+                                {
+                                    return result.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.UnityEngine_AI_NavMeshHit_Array:
+                            {
+                                var list = obj.Unpack_List_UnityEngine_AI_NavMeshHit();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.ToString());
+
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+
                         #endregion
 
                         #region VRChat
@@ -722,6 +1388,62 @@
                                 }
                                 break;
                             }
+                        case UdonTypes_String.VRC_SDK3_Components_VRCPickup:
+                            {
+                                var result = obj.Unpack_VRC_SDK3_Components_VRCPickup();
+                                if (result != null)
+                                {
+                                    return result.name.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.VRC_SDK3_Components_VRCPickup_Array:
+                            {
+                                var list = obj.Unpack_List_VRC_SDK3_Components_VRCPickup();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.name.ToString());
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+                        case UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal:
+                            {
+                                var result = obj.Unpack_VRC_SDK3_Components_VRCAvatarPedestal();
+                                if (result != null)
+                                {
+                                    return result.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal_Array:
+                            {
+                                var list = obj.Unpack_List_VRC_SDK3_Components_VRCAvatarPedestal();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.ToString());
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
 
                         #endregion
 
@@ -784,7 +1506,20 @@
                             }
                         #endregion
 
+                        #region Unboxables (Yet or Permanent)  // Things that aren't possible to Unbox YET.
+                        case UdonTypes_String.System_RuntimeType:
+                        case UdonTypes_String.System_RuntimeType_Array:
+                        case UdonTypes_String.VRC_SDKBase_VRCPlayerApi_TrackingData:
+                        case UdonTypes_String.VRC_SDKBase_VRCPlayerApi_TrackingData_Array:
+                        case UdonTypes_String.VRC_SDKBase_VRCPlayerApi_TrackingDataType:
+                        case UdonTypes_String.VRC_SDKBase_VRCPlayerApi_TrackingDataType_Array:
+                            {
+                                return "Not Unboxable.";
+                                break;
+                            }
 
+
+                        #endregion
                         default:
                             {
                                 if(!UnsupportedTypes.Contains(FullName))
