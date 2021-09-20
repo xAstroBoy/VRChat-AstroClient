@@ -20,6 +20,7 @@
                 if (obj != null)
                 {
                     StringBuilder listoutput = new StringBuilder();
+                    listoutput.AppendLine(Environment.NewLine); 
                     switch (FullName)
                     {
                         #region System Types
@@ -221,6 +222,45 @@
                                 }
 
                             }
+                        case UdonTypes_String.System_RuntimeType:
+                            {
+                                return "Unable to Unpack Due to protected Class";
+                                break;
+                            }
+                        case UdonTypes_String.System_RuntimeType_Array:
+                            {
+                                return "Unable to Unpack Due to protected Class";
+                                break;
+                            }
+                        case UdonTypes_String.System_Byte:
+                            {
+                                var result = obj.Unpack_Byte();
+                                if (result != null)
+                                {
+                                    return result.Value.ToString();
+                                }
+                                return $"empty {FullName}";
+                                break;
+                            }
+                        case UdonTypes_String.System_Byte_Array:
+                            {
+                                var list = obj.Unpack_List_Byte();
+                                if (list != null && list.Count != 0)
+                                {
+
+                                    foreach (var item in list)
+                                    {
+                                        listoutput.AppendLine(item.ToString());
+                                    }
+                                    return listoutput.ToString();
+                                }
+                                else
+                                {
+                                    return $"empty {FullName}";
+                                }
+                                break;
+                            }
+
                         case UdonTypes_String.System_Object:
                             {
                                 var result = obj.Unpack_System_Object();

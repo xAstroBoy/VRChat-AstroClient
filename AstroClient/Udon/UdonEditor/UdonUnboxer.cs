@@ -35,7 +35,6 @@
                             }
                         }
                     }
-                    DumpUdonUnsupportedTypes();
                 }
             }
         }
@@ -83,7 +82,6 @@
                         }
                     }
                 }
-                DumpUdonUnsupportedTypes();
                 return builder.ToString();
             }
             return null;

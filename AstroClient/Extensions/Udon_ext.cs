@@ -16,6 +16,7 @@
             if (obj != null)
             {
                 UdonUnboxer.UnboxUdonToConsole(obj);
+                UdonUnboxer.DumpUdonUnsupportedTypes();
             }
         }
 

@@ -3,6 +3,7 @@
     using AstroClient;
     using AstroClient.Udon;
     using AstroLibrary.Console;
+    using Il2CppSystem;
     using System.Collections.Generic;
     using System.Linq;
     using UnhollowerBaseLib;
@@ -213,6 +214,58 @@
                 if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Char_Array)
                 {
                     return obj.Unpack_Array_Char()?.ToList();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static byte? Unpack_Byte(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Byte)
+                {
+                    return obj.Unbox<byte>();
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static byte[] Unpack_Array_Byte(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Byte_Array)
+                {
+                    var array = Il2CppArrayBase<byte>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    if (array != null && array.Count() != 0)
+                    {
+                        return array;
+                    }
+                }
+                else
+                {
+                    ModConsole.DebugWarning($"Incompatible Type Detected!:  {obj.GetIl2CppType().FullName}");
+                }
+            }
+            return null;
+        }
+
+        public static List<byte> Unpack_List_Byte(this Il2CppSystem.Object obj)
+        {
+            if (obj != null)
+            {
+                if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Byte_Array)
+                {
+                    return obj.Unpack_Array_Byte()?.ToList();
                 }
                 else
                 {
@@ -825,6 +878,8 @@
             }
             return null;
         }
+
+
 
         public static object Unpack_System_Object(this Il2CppSystem.Object obj)
         {

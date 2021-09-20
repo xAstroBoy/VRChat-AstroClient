@@ -319,6 +319,46 @@
             return null;
         }
 
+        public static byte? Udon_Parse_Byte(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_Byte(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<byte> Udon_Parse_Byte_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_Byte_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static byte[] Udon_Parse_Byte_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_Byte_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
         public static uint? Udon_Parse_uint(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
         {
             if (UnpackedUdonBehaviour != null)
@@ -1408,6 +1448,69 @@
                 if (value != null)
                 {
                     var result = value.Unpack_Array_Char();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static byte? Udon_Parse_Byte(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Byte();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<byte> Udon_Parse_Byte_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_Byte();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static byte[] Udon_Parse_Byte_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_Byte();
                     if (result != null)
                     {
                         return result;

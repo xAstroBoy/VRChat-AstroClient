@@ -62,6 +62,7 @@
             return boxed ?? null;
         }
 
+
         public static Il2CppSystem.Object Generate_Il2CPPObject(UnityEngine.Color item)
         {
             var boxed = item.BoxIl2CppObject();

@@ -6,7 +6,7 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public struct UdonTypes_String // TODO : Make usage of Ill2CppType itself , not the Fullname.
+    public struct UdonTypes_String 
     {
 
         // System 
@@ -33,6 +33,13 @@
 
         public const string System_Boolean  = "System.Boolean";
         public const string System_Boolean_Array  = "System.Boolean[]";
+
+        // Discarded.
+        public const string System_RuntimeType = "System.RuntimeType";
+        public const string System_RuntimeType_Array = "System.RuntimeType[]";
+
+        public const string System_Byte = "System.Byte";
+        public const string System_Byte_Array = "System.Byte[]";
 
 
         public const string System_Object  = "System.Object";
