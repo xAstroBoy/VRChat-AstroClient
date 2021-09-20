@@ -34,8 +34,8 @@
             MainButton = new QMNestedButton("ShortcutMenu", 5, 4, "<color=cyan>WIP Menu</color>", "WIP Features", null, null, null, null, true);
             MainScroller = new QMScrollMenu(MainButton);
             _ = new QMSingleButton(MainButton, 0, 0, "Friend Everyone", () => { DoFriendEveryone(); }, "Friend Everyone!");
-            _ = new QMSingleButton(MainButton, 4, 2, "Notorious\nHome 1", () => { WorldUtils.JoinWorld("wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938#wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938:42069"); }, "");
-            _ = new QMSingleButton(MainButton, 4, 3, "Notorious\nHome 2", () => { WorldUtils.JoinWorld("wrld_1913f8f7-ec88-4ff4-acc9-f54b278d8d6d#wrld_1913f8f7-ec88-4ff4-acc9-f54b278d8d6d:42069"); }, "");
+            _ = new QMSingleButton(MainButton, 3, 2, "Notorious\nHome 1", () => { WorldUtils.JoinWorld("wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938#wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938:42069"); }, "");
+            _ = new QMSingleButton(MainButton, 4, 2, "Notorious\nHome 2", () => { WorldUtils.JoinWorld("wrld_1913f8f7-ec88-4ff4-acc9-f54b278d8d6d#wrld_1913f8f7-ec88-4ff4-acc9-f54b278d8d6d:42069"); }, "");
         }
 
         private void DoFriendEveryone()
