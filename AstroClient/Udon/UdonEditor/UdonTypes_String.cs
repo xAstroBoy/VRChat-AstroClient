@@ -9,7 +9,7 @@
     public struct UdonTypes_String 
     {
 
-        // System 
+        #region System
         public const string System_String  = "System.String";
         public const string System_String_Array  = "System.String[]";
 
@@ -42,8 +42,9 @@
         public const string System_Object  = "System.Object";
         public const string System_Object_Array  = "System.Object[]";
 
+        #endregion 
 
-        // UnityEngine
+        #region UnityEngine
 
         public const string UnityEngine_Color  = "UnityEngine.Color";
         public const string UnityEngine_Color_Array  = "UnityEngine.Color[]";
@@ -86,31 +87,6 @@
         public const string UnityEngine_UI_Text  = "UnityEngine.UI.Text";
         public const string UnityEngine_UI_Text_Array  = "UnityEngine.UI.Text[]";
 
-
-        // VRChat
-
-        public const string VRC_SDKBase_VRCPlayerApi  = "VRC.SDKBase.VRCPlayerApi";
-        public const string VRC_SDKBase_VRCPlayerApi_Array  = "VRC.SDKBase.VRCPlayerApi[]";
-
-
-        public const string VRC_Udon_UdonBehaviour  = "VRC.Udon.UdonBehaviour";
-        public const string VRC_Udon_UdonBehaviour_Array  = "VRC.Udon.UdonBehaviour[]";
-
-
-        public const string VRC_Udon_Common_Interfaces_NetworkEventTarget  = "VRC.Udon.Common.Interfaces.NetworkEventTarget";
-        public const string VRC_Udon_Common_Interfaces_NetworkEventTarget_Array  = "VRC.Udon.Common.Interfaces.NetworkEventTarget[]";
-
-
-        // TMPRO 
-        public const string TMPro_TextMeshPro  = "TMPro.TextMeshPro";
-        public const string TMPro_TextMeshPro_Array  = "TMPro.TextMeshPro[]";
-
-
-        public const string TMPro_TextMeshProUGUI  = "TMPro.TextMeshProUGUI";
-        public const string TMPro_TextMeshProUGUI_Array  = "TMPro.TextMeshProUGUI[]";
-
-
-        // TO Implement...
 
         public const string UnityEngine_Component = "UnityEngine.Component";
         public const string UnityEngine_Component_Array = "UnityEngine.Component[]";
@@ -185,7 +161,20 @@
         public const string UnityEngine_UI_RawImage = "UnityEngine.UI.RawImage";
         public const string UnityEngine_UI_RawImage_Array = "UnityEngine.UI.RawImage[]";
 
+        #endregion
 
+        #region VRChat
+
+        public const string VRC_SDKBase_VRCPlayerApi  = "VRC.SDKBase.VRCPlayerApi";
+        public const string VRC_SDKBase_VRCPlayerApi_Array  = "VRC.SDKBase.VRCPlayerApi[]";
+
+
+        public const string VRC_Udon_UdonBehaviour  = "VRC.Udon.UdonBehaviour";
+        public const string VRC_Udon_UdonBehaviour_Array  = "VRC.Udon.UdonBehaviour[]";
+
+
+        public const string VRC_Udon_Common_Interfaces_NetworkEventTarget  = "VRC.Udon.Common.Interfaces.NetworkEventTarget";
+        public const string VRC_Udon_Common_Interfaces_NetworkEventTarget_Array  = "VRC.Udon.Common.Interfaces.NetworkEventTarget[]";
 
         public const string VRC_SDK3_Components_VRCPickup = "VRC.SDK3.Components.VRCPickup";
         public const string VRC_SDK3_Components_VRCPickup_Array = "VRC.SDK3.Components.VRCPickup[]";
@@ -193,20 +182,99 @@
         public const string VRC_SDK3_Components_VRCAvatarPedestal = "VRC.SDK3.Components.VRCAvatarPedestal";
         public const string VRC_SDK3_Components_VRCAvatarPedestal_Array = "VRC.SDK3.Components.VRCAvatarPedestal[]";
 
+        #endregion
 
+        #region TMPRO
+        public const string TMPro_TextMeshPro  = "TMPro.TextMeshPro";
+        public const string TMPro_TextMeshPro_Array  = "TMPro.TextMeshPro[]";
+
+
+        public const string TMPro_TextMeshProUGUI  = "TMPro.TextMeshProUGUI";
+        public const string TMPro_TextMeshProUGUI_Array  = "TMPro.TextMeshProUGUI[]";
+
+        #endregion
+
+
+        #region Unboxables
         // Unable to Unbox YET (Class Type is Protected)....
 
-
+        #region System
         public const string System_RuntimeType = "System.RuntimeType";
         public const string System_RuntimeType_Array = "System.RuntimeType[]";
 
+        #endregion
 
+        #region vrchat
         // Idk How to unbox..
         public const string VRC_SDKBase_VRCPlayerApi_TrackingData = "VRC.SDKBase.VRCPlayerApi+TrackingData";
         public const string VRC_SDKBase_VRCPlayerApi_TrackingData_Array = "VRC.SDKBase.VRCPlayerApi+TrackingData[]";
 
         public const string VRC_SDKBase_VRCPlayerApi_TrackingDataType = "VRC.SDKBase.VRCPlayerApi+TrackingDataType";
         public const string VRC_SDKBase_VRCPlayerApi_TrackingDataType_Array = "VRC.SDKBase.VRCPlayerApi+TrackingDataType[]";
+
+        public const string VRC_SDKBase_VRC_Pickup_PickupHand = "VRC.SDKBase.VRC_Pickup+PickupHand";
+        public const string VRC_SDKBase_VRC_Pickup_PickupHand_Array = "VRC.SDKBase.VRC_Pickup+PickupHand[]";
+
+        #endregion
+        #endregion
+
+
+
+        public const string System_UInt16 = "System.UInt16";
+        public const string System_UInt16_Array = "System.UInt16[]";
+
+        public const string System_Double = "System.Double";
+        public const string System_Double_Array = "System.Double[]";
+
+        public const string System_TimeSpan = "System.TimeSpan";
+        public const string System_TimeSpan_Array = "System.TimeSpan[]";
+
+
+        public const string UnityEngine_Mesh = "UnityEngine.Mesh";
+        public const string UnityEngine_Mesh_Array = "UnityEngine.Mesh[]";
+
+        public const string UnityEngine_Texture = "UnityEngine.Texture";
+        public const string UnityEngine_Texture_Array = "UnityEngine.Texture[]";
+
+        public const string UnityEngine_ReflectionProbe = "UnityEngine.ReflectionProbe";
+        public const string UnityEngine_ReflectionProbe_Array = "UnityEngine.ReflectionProbe[]";
+
+        public const string UnityEngine_RenderTexture = "UnityEngine.RenderTexture";
+        public const string UnityEngine_RenderTexture_Array = "UnityEngine.RenderTexture[]";
+
+
+
+        public const string UnityEngine_UI_Slider = "UnityEngine.UI.Slider";
+        public const string UnityEngine_UI_Slider_Array = "UnityEngine.UI.Slider[]";
+
+        public const string UnityEngine_TextAsset = "UnityEngine.TextAsset";
+        public const string UnityEngine_TextAsset_Array = "UnityEngine.TextAsset[]";
+
+        public const string UnityEngine_UI_ScrollRect = "UnityEngine.UI.ScrollRect";
+        public const string UnityEngine_UI_ScrollRect_Array = "UnityEngine.UI.ScrollRect[]";
+
+        public const string UnityEngine_UI_InputField = "UnityEngine.UI.InputField";
+        public const string UnityEngine_UI_InputField_Array = "UnityEngine.UI.InputField[]";
+
+
+        public const string VRC_Udon_Common_SerializationResult = "VRC.Udon.Common.SerializationResult";
+        public const string VRC_Udon_Common_SerializationResult_Array = "VRC.Udon.Common.SerializationResult[]";
+
+        public const string VRC_SDKBase_VRCUrl = "VRC.SDKBase.VRCUrl";
+        public const string VRC_SDKBase_VRCUrl_Array = "VRC.SDKBase.VRCUrl[]";
+
+        public const string VRC_SDK3_Components_Video_VideoError = "VRC.SDK3.Components.Video.VideoError";
+        public const string VRC_SDK3_Components_Video_VideoError_Array = "VRC.SDK3.Components.Video.VideoError[]";
+
+        public const string VRC_SDK3_Components_VRCUrlInputField = "VRC.SDK3.Components.VRCUrlInputField";
+        public const string VRC_SDK3_Components_VRCUrlInputField_Array = "VRC.SDK3.Components.VRCUrlInputField[]";
+
+        public const string VRC_SDK3_Video_Components_VRCUnityVideoPlayer = "VRC.SDK3.Video.Components.VRCUnityVideoPlayer";
+        public const string VRC_SDK3_Video_Components_VRCUnityVideoPlayer_Array = "VRC.SDK3.Video.Components.VRCUnityVideoPlayer[]";
+
+        public const string VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer = "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer";
+        public const string VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_Array = "VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[]";
+
 
 
     }

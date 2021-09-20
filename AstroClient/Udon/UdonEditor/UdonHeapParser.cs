@@ -1814,6 +1814,1658 @@
             return null;
         }
 
+        public static double? Udon_Parse_double(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_double(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<double> Udon_Parse_double_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_double_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static double[] Udon_Parse_double_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_double_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static System.TimeSpan? Udon_Parse_TimeSpan(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_TimeSpan(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<System.TimeSpan> Udon_Parse_TimeSpan_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_TimeSpan_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static System.TimeSpan[] Udon_Parse_TimeSpan_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_TimeSpan_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.Mesh Udon_Parse_Mesh(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_Mesh(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.Mesh> Udon_Parse_Mesh_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_Mesh_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.Mesh[] Udon_Parse_Mesh_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_Mesh_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.Texture Udon_Parse_Texture(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_Texture(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.Texture> Udon_Parse_Texture_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_Texture_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.Texture[] Udon_Parse_Texture_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_Texture_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.ReflectionProbe Udon_Parse_ReflectionProbe(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_ReflectionProbe(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.ReflectionProbe> Udon_Parse_ReflectionProbe_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_ReflectionProbe_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.ReflectionProbe[] Udon_Parse_ReflectionProbe_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_ReflectionProbe_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.TextAsset Udon_Parse_TextAsset(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_TextAsset(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.TextAsset> Udon_Parse_TextAsset_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_TextAsset_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.TextAsset[] Udon_Parse_TextAsset_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_TextAsset_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+
+        public static UnityEngine.UI.Slider Udon_Parse_UnityEngine_UI_Slider(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_UnityEngine_UI_Slider(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.UI.Slider> Udon_Parse_UnityEngine_UI_Slider_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_UnityEngine_UI_Slider_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.UI.Slider[] Udon_Parse_UnityEngine_UI_Slider_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_UnityEngine_UI_Slider_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+
+        public static UnityEngine.UI.ScrollRect Udon_Parse_UnityEngine_UI_ScrollRect(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_UnityEngine_UI_ScrollRect(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.UI.ScrollRect> Udon_Parse_UnityEngine_UI_ScrollRect_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_UnityEngine_UI_ScrollRect_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.UI.ScrollRect[] Udon_Parse_UnityEngine_UI_ScrollRect_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_UnityEngine_UI_ScrollRect_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+        public static UnityEngine.UI.InputField Udon_Parse_UnityEngine_UI_InputField(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_UnityEngine_UI_InputField(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.UI.InputField> Udon_Parse_UnityEngine_UI_InputField_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_UnityEngine_UI_InputField_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.UI.InputField[] Udon_Parse_UnityEngine_UI_InputField_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_UnityEngine_UI_InputField_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+        public static VRC.Udon.Common.SerializationResult? Udon_Parse_VRC_Udon_Common_SerializationResult(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_VRC_Udon_Common_SerializationResult(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<VRC.Udon.Common.SerializationResult> Udon_Parse_VRC_Udon_Common_SerializationResult_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_VRC_Udon_Common_SerializationResult_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.Udon.Common.SerializationResult[] Udon_Parse_VRC_Udon_Common_SerializationResult_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_VRC_Udon_Common_SerializationResult_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+        public static VRC.SDKBase.VRCUrl Udon_Parse_VRC_SDKBase_VRCUrl(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_VRC_SDKBase_VRCUrl(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<VRC.SDKBase.VRCUrl> Udon_Parse_VRC_SDKBase_VRCUrl_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_VRC_SDKBase_VRCUrl_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.SDKBase.VRCUrl[] Udon_Parse_VRC_SDKBase_VRCUrl_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_VRC_SDKBase_VRCUrl_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+        public static VRC.SDK3.Components.Video.VideoError? Udon_Parse_VRC_SDK3_Components_Video_VideoError(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_VRC_SDK3_Components_Video_VideoError(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<VRC.SDK3.Components.Video.VideoError> Udon_Parse_VRC_SDK3_Components_Video_VideoError_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_VRC_SDK3_Components_Video_VideoError_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.SDK3.Components.Video.VideoError[] Udon_Parse_VRC_SDK3_Components_Video_VideoError_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_VRC_SDK3_Components_Video_VideoError_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+
+        public static VRC.SDK3.Components.VRCUrlInputField VRC_SDK3_Components_VRCUrlInputField(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return VRC_SDK3_Components_VRCUrlInputField(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<VRC.SDK3.Components.VRCUrlInputField> VRC_SDK3_Components_VRCUrlInputField_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return VRC_SDK3_Components_VRCUrlInputField_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.SDK3.Components.VRCUrlInputField[] VRC_SDK3_Components_VRCUrlInputField_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return VRC_SDK3_Components_VRCUrlInputField_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+
+        public static VRC.SDK3.Video.Components.VRCUnityVideoPlayer VRC_SDK3_Video_Components_VRCUnityVideoPlayer(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return VRC_SDK3_Video_Components_VRCUnityVideoPlayer(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<VRC.SDK3.Video.Components.VRCUnityVideoPlayer> VRC_SDK3_Video_Components_VRCUnityVideoPlayer_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return VRC_SDK3_Video_Components_VRCUnityVideoPlayer_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.SDK3.Video.Components.VRCUnityVideoPlayer[] VRC_SDK3_Video_Components_VRCUnityVideoPlayer_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return VRC_SDK3_Video_Components_VRCUnityVideoPlayer_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+        public static VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer> VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[] VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+
+        public static VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer> VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[] VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.SDK3.Video.Components.VRCUnityVideoPlayer VRC_SDK3_Video_Components_VRCUnityVideoPlayer(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_VRC_SDK3_Video_Components_VRCUnityVideoPlayer();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<VRC.SDK3.Video.Components.VRCUnityVideoPlayer> VRC_SDK3_Video_Components_VRCUnityVideoPlayer_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_VRC_SDK3_Video_Components_VRCUnityVideoPlayer();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.SDK3.Video.Components.VRCUnityVideoPlayer[] VRC_SDK3_Video_Components_VRCUnityVideoPlayer_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_VRC_SDK3_Video_Components_VRCUnityVideoPlayer();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.SDK3.Components.VRCUrlInputField VRC_SDK3_Components_VRCUrlInputField(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_VRC_SDK3_Components_VRCUrlInputField();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<VRC.SDK3.Components.VRCUrlInputField> VRC_SDK3_Components_VRCUrlInputField_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_VRC_SDK3_Components_VRCUrlInputField();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.SDK3.Components.VRCUrlInputField[] VRC_SDK3_Components_VRCUrlInputField_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_VRC_SDK3_Components_VRCUrlInputField();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+        public static VRC.SDK3.Components.Video.VideoError? Udon_Parse_VRC_SDK3_Components_Video_VideoError(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_VRC_SDK3_Components_Video_VideoError();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<VRC.SDK3.Components.Video.VideoError> Udon_Parse_VRC_SDK3_Components_Video_VideoError_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_VRC_SDK3_Components_Video_VideoError();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.SDK3.Components.Video.VideoError[] Udon_Parse_VRC_SDK3_Components_Video_VideoError_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_VRC_SDK3_Components_Video_VideoError();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.SDKBase.VRCUrl Udon_Parse_VRC_SDKBase_VRCUrl(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_VRC_SDKBase_VRCUrl();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<VRC.SDKBase.VRCUrl> Udon_Parse_VRC_SDKBase_VRCUrl_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_VRC_SDKBase_VRCUrl();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.SDKBase.VRCUrl[] Udon_Parse_VRC_SDKBase_VRCUrl_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_VRC_SDKBase_VRCUrl();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.Udon.Common.SerializationResult? Udon_Parse_VRC_Udon_Common_SerializationResult(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_VRC_Udon_Common_SerializationResult();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<VRC.Udon.Common.SerializationResult> Udon_Parse_VRC_Udon_Common_SerializationResult_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_VRC_Udon_Common_SerializationResult();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static VRC.Udon.Common.SerializationResult[] Udon_Parse_VRC_Udon_Common_SerializationResult_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_VRC_Udon_Common_SerializationResult();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.UI.InputField Udon_Parse_UnityEngine_UI_InputField(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_UnityEngine_UI_InputField();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.UI.InputField> Udon_Parse_UnityEngine_UI_InputField_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_UnityEngine_UI_InputField();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.UI.InputField[] Udon_Parse_UnityEngine_UI_InputField_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_UnityEngine_UI_InputField();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.UI.ScrollRect Udon_Parse_UnityEngine_UI_ScrollRect(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_UnityEngine_UI_ScrollRect();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.UI.ScrollRect> Udon_Parse_UnityEngine_UI_ScrollRect_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_UnityEngine_UI_ScrollRect();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.UI.ScrollRect[] Udon_Parse_UnityEngine_UI_ScrollRect_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_UnityEngine_UI_ScrollRect();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+        public static UnityEngine.UI.Slider Udon_Parse_UnityEngine_UI_Slider(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_UnityEngine_UI_Slider();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.UI.Slider> Udon_Parse_UnityEngine_UI_Slider_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_UnityEngine_UI_Slider();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.UI.Slider[] Udon_Parse_UnityEngine_UI_Slider_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_UnityEngine_UI_Slider();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+        public static UnityEngine.TextAsset Udon_Parse_TextAsset(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_TextAsset();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.TextAsset> Udon_Parse_TextAsset_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_TextAsset();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.TextAsset[] Udon_Parse_TextAsset_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_TextAsset();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.ReflectionProbe Udon_Parse_ReflectionProbe(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_ReflectionProbe();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.ReflectionProbe> Udon_Parse_ReflectionProbe_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_ReflectionProbe();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.ReflectionProbe[] Udon_Parse_ReflectionProbe_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_ReflectionProbe();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+        public static UnityEngine.RenderTexture Udon_Parse_RenderTexture(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_RenderTexture(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.RenderTexture> Udon_Parse_RenderTexture_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_RenderTexture_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.RenderTexture[] Udon_Parse_RenderTexture_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_RenderTexture_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+
+        public static UnityEngine.RenderTexture Udon_Parse_RenderTexture(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_RenderTexture();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.RenderTexture> Udon_Parse_RenderTexture_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_RenderTexture();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.RenderTexture[] Udon_Parse_RenderTexture_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_RenderTexture();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+        public static UnityEngine.Texture Udon_Parse_Texture(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Texture();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.Texture> Udon_Parse_Texture_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_Texture();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.Texture[] Udon_Parse_Texture_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_Texture();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.Mesh Udon_Parse_Mesh(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Mesh();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<UnityEngine.Mesh> Udon_Parse_Mesh_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_Mesh();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static UnityEngine.Mesh[] Udon_Parse_Mesh_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_Mesh();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+        public static System.TimeSpan? Udon_Parse_TimeSpan(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_TimeSpan();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<System.TimeSpan> Udon_Parse_TimeSpan_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_TimeSpan();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static System.TimeSpan[] Udon_Parse_TimeSpan_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_TimeSpan();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+        public static double? Udon_Parse_double(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Double();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
+        public static List<double> Udon_Parse_double_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_Double();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static double[] Udon_Parse_double_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_Double();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+
         public static VRC.SDK3.Components.VRCPickup Udon_Parse_VRC_SDK3_Components_VRCPickup(IUdonHeap heap, uint address)
         {
             if (heap != null)
@@ -2007,6 +3659,109 @@
             return null;
         }
 
+
+
+        public static ushort? Udon_Parse_System_UInt16(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_System_UInt16(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<ushort> Udon_Parse_System_UInt16_List(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_System_UInt16_List(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static ushort[] Udon_Parse_System_UInt16_Array(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                return Udon_Parse_System_UInt16_Array(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol));
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static ushort? Udon_Parse_System_UInt16(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_UInt16();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static List<ushort> Udon_Parse_System_UInt16_List(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_List_UInt16();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
+
+        public static ushort[] Udon_Parse_System_UInt16_Array(IUdonHeap heap, uint address)
+        {
+            if (heap != null)
+            {
+                var value = heap.GetHeapVariable(address);
+                if (value != null)
+                {
+                    var result = value.Unpack_Array_UInt16();
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Parse Udon Heap value as Heap is null!");
+            }
+            return null;
+        }
 
 
 
