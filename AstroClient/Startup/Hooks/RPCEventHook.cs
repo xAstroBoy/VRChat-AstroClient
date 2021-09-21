@@ -143,26 +143,6 @@
 
                     case 33: // Moderations
 
-                        //var newParameters = new Dictionary<string, object>[254];
-                        //newParameters[245] = new Dictionary<string, object>();
-                        //newParameters[254] = new Dictionary<string, object>();
-
-                        //var converted = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
-                        //var converted1 = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
-                        //var converted2 = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
-                        //converted[245] = converted1;
-                        //converted[254] = converted2;
-
-                        //__0 = new EventData()
-                        //{
-                        //    Code = code,
-                        //    sender = __0.sender,
-                        //    customData = __0.customData,
-                        //    Parameters = converted,
-                        //    CustomDataKey = __0.CustomDataKey,
-                        //    SenderKey = __0.SenderKey,
-                        //};
-
                         object rawData = Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
                         var parsedData = (rawData as Dictionary<byte, object>);
                         var infoData = parsedData[245] as Dictionary<byte, object>;
