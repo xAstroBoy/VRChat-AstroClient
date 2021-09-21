@@ -197,24 +197,6 @@
             }
         }
 
-        // You gotta delay it, let's delay it to some seconds
-        private static void SpawnTag(Player player, string text, Color TextColor, Color Tagcolor)
-        {
-            if (player != null)
-            {
-                SingleTag tag = SingleTagsUtils.AddSingleTag(player);
-                if (tag != null)
-                {
-                    tag.Label_Text = text;
-                    tag.Label_TextColor = TextColor;
-                    tag.Tag_Color = Tagcolor;
-                }
-            }
-            else
-            {
-                ModConsole.Error("Player for setting tag from server was null!");
-            }
-        }
 
         private static void OnConnected(object sender, EventArgs e)
         {
