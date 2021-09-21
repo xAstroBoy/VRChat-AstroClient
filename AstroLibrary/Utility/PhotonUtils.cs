@@ -2,6 +2,7 @@
 
 namespace AstroLibrary.Utility
 {
+    using AstroLibrary.Console;
     using Blaze.Utils;
     using System.Collections.Generic;
 
@@ -9,25 +10,105 @@ namespace AstroLibrary.Utility
     {
         public static string GetUserID(this Photon.Realtime.Player player)
         {
-
+            string Debug = string.Empty;
             if (player != null)
+            {
                 if (player.GetRawHashtable() != null)
+                {
                     if (player.GetRawHashtable().ContainsKey("user"))
+                    {
                         if (player.GetHashtable()["user"] != null)
+                        {
                             if (player.GetHashtable()["user"] is Dictionary<string, object> dict)
-                                return (string)dict["id"];
-            return "No ID";
+                            {
+                                var result = (string)dict["id"];
+                                ModConsole.DebugLog($"Returned {result}");
+                                return result;
+                            }
+                            else
+                            {
+                                Debug = "RawHashtable Key user is Not a Dictionary!";
+
+                            }
+                        }
+                        else
+                        {
+                            Debug = "RawHashtable Key user is Null!";
+                        }
+
+                    }
+                    else
+                    {
+                        Debug = "RawHashtable Doesn't Contain Key user!";
+                    }
+                }
+                else
+                {
+                    Debug = "RawHashtable Is Null!";
+                }
+
+
+            }
+            else
+            {
+                Debug = "Player Is Null!";
+            }
+            ModConsole.Warning($"Photon GetUserID Error: {Debug}");
+            return null;
         }
 
         public static string GetDisplayName(this Photon.Realtime.Player player)
         {
+            string Debug = string.Empty;
             if (player != null)
+            {
                 if (player.GetRawHashtable() != null)
+                {
                     if (player.GetRawHashtable().ContainsKey("user"))
-                        if (player.GetHashtable()["user"] != null)  
-                if (player.GetHashtable()["user"] is Dictionary<string, object> dict)
-                    return (string)dict["displayName"];
-            return "No DisplayName";
+                    {
+                        if (player.GetHashtable()["user"] != null)
+                        {
+                            if (player.GetHashtable()["user"] is Dictionary<string, object> dict)
+                            {
+                                var result = (string)dict["displayName"];
+                                ModConsole.DebugLog($"Returned {result}");
+                                return result;
+
+                            }
+                            else
+                            {
+                                Debug = "RawHashtable Key user is Not a Dictionary!";
+
+                            }
+                        }
+                        else
+                        {
+                            Debug = "RawHashtable Key user is Null!";
+                        }
+
+                    }
+                    else
+                    {
+                        Debug = "RawHashtable Doesn't Contain Key user!";
+                    }
+                }
+                else
+                {
+                    Debug = "RawHashtable Is Null!";
+                }
+
+
+            }
+            else
+            {
+                Debug = "Player Is Null!";
+            }
+            ModConsole.Warning($"Photon GetDisplayName Error: {Debug}");
+            if (player != null)
+            {
+                return $"Photon ID : {player.GetPhotonID()}";
+            }
+            return "Unknown Player";
         }
 
         public static int GetPhotonID(this Photon.Realtime.Player player) => player.field_Private_Int32_0;
@@ -57,12 +138,15 @@ namespace AstroLibrary.Utility
 
         public static Photon.Realtime.Player GetPhotonPlayer(this Photon.Realtime.LoadBalancingClient Instance, int photonID)
         {
-            List<Photon.Realtime.Player> list = Instance.GetAllPhotonPlayers();
-            for (int i = 0; i < list.Count; i++)
+            foreach(var player in Instance.GetAllPhotonPlayers())
             {
-                Photon.Realtime.Player x = list[i];
-                if (x.GetPhotonID() == photonID)
-                    return x;
+                if(player != null)
+                {
+                    if(player.GetPhotonID() == photonID)
+                    {
+                        return player;
+                    }
+                }
             }
 
             return null;
@@ -70,12 +154,15 @@ namespace AstroLibrary.Utility
 
         public static Photon.Realtime.Player GetPhotonPlayer(this Photon.Realtime.LoadBalancingClient Instance, string userID)
         {
-            List<Photon.Realtime.Player> list = Instance.GetAllPhotonPlayers();
-            for (int i = 0; i < list.Count; i++)
+            foreach (var player in Instance.GetAllPhotonPlayers())
             {
-                Photon.Realtime.Player x = list[i];
-                if (x.GetUserID() == userID)
-                    return x;
+                if (player != null)
+                {
+                    if (player.GetUserID() == userID)
+                    {
+                        return player;
+                    }
+                }
             }
 
             return null;

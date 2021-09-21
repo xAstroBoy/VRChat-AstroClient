@@ -135,7 +135,6 @@
                         var parsedData = (rawData as Dictionary<byte, object>);
                         var infoData = parsedData[245] as Dictionary<byte, object>;
                         int eventType = int.Parse(infoData[0].ToString());
-                        string userID = photon.GetUserID();
                         switch (eventType)
                         {
                             case 21: // 10 blocked, 11 muted
@@ -146,33 +145,31 @@
                                     if (infoData.ContainsKey(1))
                                     {
                                         int SenderID = int.Parse(infoData[1].ToString());
-                                        //var VRCPlayer = Utils.PlayerManager.GetPlayerID(SenderID);
-
                                         var PhotonPlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(SenderID);
-                                        string SenderName = "?";
-                                        if (PhotonPlayer != null) SenderName = PhotonPlayer.GetDisplayName();
-
                                         bool Blocked = bool.Parse(infoData[10].ToString());
                                         bool Muted = bool.Parse(infoData[11].ToString());
 
                                         if (Blocked)
                                         {
-                                            Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
+                                            Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(PhotonPlayer));
                                         }
                                         else
                                         {
-                                            Event_OnPlayerUnblockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
+                                            Event_OnPlayerUnblockedYou.SafetyRaise(new PhotonPlayerEventArgs(PhotonPlayer));
                                         }
                                         if (Muted)
                                         {
-                                            Event_OnPlayerMutedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
+                                            Event_OnPlayerMutedYou.SafetyRaise(new PhotonPlayerEventArgs(PhotonPlayer));
                                         }
                                         else
                                         {
-                                            Event_OnPlayerUnmutedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
+                                            Event_OnPlayerUnmutedYou.SafetyRaise(new PhotonPlayerEventArgs(PhotonPlayer));
                                         }
 
-                                        return !Blocked;
+                                        if(Blocked)
+                                        {
+                                            return false;
+                                        }
                                     }
                                     else
                                     {
