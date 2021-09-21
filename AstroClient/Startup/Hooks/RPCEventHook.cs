@@ -251,7 +251,8 @@
                     case 210:
                         return false;
                         break;
-
+                    case 223: // This fired with what looked like base64 png data when I uploaded a VRC+ avatar
+                        break;
                     case 253: // I think this is avatar switching related
                         break;
 
@@ -265,7 +266,7 @@
                 {
                     blockText = "[BLOCKED] ";
                 }
-                if (log && ConfigManager.General.LogEvents || block)
+                if (log || ConfigManager.General.LogEvents || block)
                 {
                     line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented)}");
                     ModConsole.Log($"{blockText}{prefix.ToString()}{line.ToString()}");
