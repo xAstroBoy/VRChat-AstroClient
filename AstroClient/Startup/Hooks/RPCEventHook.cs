@@ -315,10 +315,13 @@
                 {
                     blockText = "[BLOCKED] ";
                 }
-                if (log || ConfigManager.General.LogEvents || block)
+                if (log || block)
                 {
-                    line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented)}");
-                    ModConsole.Log($"{blockText}{prefix.ToString()}{line.ToString()}");
+                    if (ConfigManager.General.LogEvents)
+                    {
+                        line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented)}");
+                        ModConsole.Log($"{blockText}{prefix.ToString()}{line.ToString()}");
+                    }
                 }
 
                 if (block)
@@ -428,29 +431,33 @@
 
             if (parameter.Equals("UdonSyncRunProgramAsRPC"))
             {
-                Event_OnUdonSyncRPC?.SafetyRaise(new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
-
-                if (WorldUtils.WorldID.Equals(WorldIds.BClub) && __1.ParameterObject.name.Contains("Blue") && actiontext.Contains("Sit"))
+                try
                 {
-                    if (!PlayerUtils.DisplayName().Equals(sender))
+                    Event_OnUdonSyncRPC?.SafetyRaise(new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
+
+                    if (WorldUtils.WorldID.Equals(WorldIds.BClub) && __1.ParameterObject.name.Contains("Blue") && actiontext.Contains("Sit"))
                     {
-                        ModConsole.Log($"BLOCKED Blue Chair: {sender}");
-                        return false;
+                        if (!PlayerUtils.DisplayName().Equals(sender))
+                        {
+                            ModConsole.Log($"BLOCKED Blue Chair: {sender}");
+                            return false;
+                        }
+                    }
+
+                    if (ConfigManager.General.LogUdonEvents)
+                    {
+                        if (Bools.BlockUdon)
+                        {
+                            ModConsole.Log($"BLOCKED Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
+                            return false;
+                        }
+                        else
+                        {
+                            ModConsole.Log($"Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
+                        }
                     }
                 }
-
-                if (ConfigManager.General.LogUdonEvents)
-                {
-                    if (Bools.BlockUdon)
-                    {
-                        ModConsole.Log($"BLOCKED Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
-                        return false;
-                    }
-                    else
-                    {
-                        ModConsole.Log($"Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
-                    }
-                }
+                catch { }
                 return true;
             }
 
