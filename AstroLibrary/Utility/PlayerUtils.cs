@@ -404,8 +404,7 @@ namespace AstroLibrary.Utility
             return instance.tags.Contains("admin_moderator")
                 || instance.hasModerationPowers
                 || instance.tags.Contains("admin_")
-                || instance.hasSuperPowers
-                || instance.id == "usr_81ac81f6-cdd1-4eaa-961f-22a80dc772c9";
+                || instance.hasSuperPowers;
         }
 
         public static bool IsStaffMember(this VRCPlayer instance)
@@ -413,8 +412,7 @@ namespace AstroLibrary.Utility
             return instance.GetAPIUser().tags.Contains("admin_moderator")
                 || instance.GetAPIUser().hasModerationPowers
                 || instance.GetAPIUser().tags.Contains("admin_")
-                || instance.GetAPIUser().hasSuperPowers
-                || instance.GetAPIUser().id == "usr_81ac81f6-cdd1-4eaa-961f-22a80dc772c9";
+                || instance.GetAPIUser().hasSuperPowers;
         }
 
         public static bool IsStaffMember(this VRC.Player instance)
@@ -422,8 +420,7 @@ namespace AstroLibrary.Utility
             return instance.GetAPIUser().tags.Contains("admin_moderator")
                 || instance.GetAPIUser().hasModerationPowers
                 || instance.GetAPIUser().tags.Contains("admin_")
-                || instance.GetAPIUser().hasSuperPowers
-                || instance.GetAPIUser().id == "usr_81ac81f6-cdd1-4eaa-961f-22a80dc772c9";
+                || instance.GetAPIUser().hasSuperPowers;
         }
 
         // Display Name
