@@ -277,6 +277,7 @@
             QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
             ExploitsMenu.InitButtons(2f);
             WorldsCheats.InitButtons(4f);
+            HistoryMenu.InitButtons(6f);
             AdminMenu.InitButtons(8f);
             DevMenu.InitButtons(10f);
 
