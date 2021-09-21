@@ -226,7 +226,6 @@
                     {
                         HighLightOptions.highlightColor = BlockedColor;
                     }
-                    return;
                 }
                 else if (AssignedPlayer.GetAPIUser().GetIsFriend())
                 {
@@ -234,7 +233,6 @@
                     {
                         HighLightOptions.highlightColor = FriendColor;
                     }
-                    return;
                 }
                 else
                 {
@@ -242,7 +240,6 @@
                     {
                         HighLightOptions.highlightColor = ESPColor;
                     }
-                    return;
                 }
             }
         }

@@ -160,7 +160,7 @@
 
                         switch (eventType)
                         {
-                            case 21: // 10 blockd, 11 muted
+                            case 21: // 10 blocked, 11 muted
 
                                 if (infoData[10] != null && infoData[11] != null)
                                 {
@@ -177,29 +177,41 @@
                                         bool Blocked = bool.Parse(infoData[10].ToString());
                                         bool Muted = bool.Parse(infoData[11].ToString());
 
-                                        if (Blocked && !BlockedYouPlayers.Contains(userID))
+                                        if (Blocked)
                                         {
-                                            BlockedYouPlayers.Add(userID);
-                                            Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
-                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Blocked You");
+                                            if (!BlockedYouPlayers.Contains(userID))
+                                            {
+                                                BlockedYouPlayers.Add(userID);
+                                                Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
+                                                PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Blocked You");
+                                            }
                                         }
-                                        else if (!Blocked && BlockedYouPlayers.Contains(userID))
+                                        else
                                         {
-                                            BlockedYouPlayers.Remove(userID);
-                                            Event_OnPlayerUnblockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon)); PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Blocked You");
-                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unblocked You");
+                                            if (BlockedYouPlayers.Contains(userID))
+                                            {
+                                                BlockedYouPlayers.Remove(userID);
+                                                Event_OnPlayerUnblockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
+                                                PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unblocked You");
+                                            }
                                         }
-                                        if (Muted && !MutedYouPlayers.Contains(userID))
+                                        if (Muted)
                                         {
-                                            MutedYouPlayers.Add(userID);
-                                            Event_OnPlayerMutedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
-                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Muted You");
+                                            if (!MutedYouPlayers.Contains(userID))
+                                            {
+                                                MutedYouPlayers.Add(userID);
+                                                Event_OnPlayerMutedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
+                                                PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Muted You");
+                                            }
                                         }
-                                        if (!Muted && MutedYouPlayers.Contains(userID))
+                                        else
                                         {
-                                            MutedYouPlayers.Remove(userID);
-                                            Event_OnPlayerUnmutedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
-                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unmuted You");
+                                            if (MutedYouPlayers.Contains(userID))
+                                            {
+                                                MutedYouPlayers.Remove(userID);
+                                                Event_OnPlayerUnmutedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
+                                                PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unmuted You");
+                                            }
                                         }
 
                                         return !Blocked;
