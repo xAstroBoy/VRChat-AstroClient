@@ -12,6 +12,7 @@
     using Photon.Realtime;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Reflection;
     using System.Text;
     using UnityEngine;
@@ -61,8 +62,8 @@
         {
             object data = MiscUtils_Old.Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
             var code = __0.Code;
-            var player = Utils.PlayerManager.GetPlayerID(__0.sender);
-            var photon = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
+            var player = Utils.PlayerManager.GetPlayerID(__0.Sender);
+            var photon = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.Sender);
             bool log = false;
             bool block = false;
 
@@ -70,7 +71,7 @@
             StringBuilder prefix = new StringBuilder();
             prefix.Append($"[Event ({code})] ");
 
-            line.Append($"from: ({__0.sender}) ");
+            line.Append($"from: ({__0.Sender}) ");
             if (WorldUtils.IsInWorld && player != null)
             {
                 line.Append($"'{player.DisplayName()}' ");
@@ -112,8 +113,53 @@
                 case 7: // I believe this is motion, key 245 appears to be base64
                     break;
                 case 33: // Moderations
-                    PopupUtils.QueHudMessage("Moderation Event");
-                    log = true;
+                    object rawData = Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
+                    var parsedData = (rawData as Dictionary<byte, object>);
+                    var infoData = parsedData[245] as Dictionary<byte, object>;
+                    int eventType = int.Parse(infoData[0].ToString());
+
+                    switch(eventType)
+                    {
+                        case 21: // 10 blockd, 11 muted
+                            if (infoData[10] != null && infoData[11] != null)
+                            {
+                                if (infoData.ContainsKey(1))
+                                {
+
+                                }
+                                else
+                                {
+                                    // It sends the Arrays when the Block and Mute Event happen fast.
+                                    // if 10 is an Array it has all the PhotonIds that Blocked You
+                                    // if 11 is an Array it has all the PhotonIds that Muted You
+                                    var BlockedList = infoData[10] as int[];
+                                    var MuteList = infoData[11] as int[];
+
+                                    if (BlockedList.Count() == 0)
+                                    {
+                                        foreach (var blockid in BlockedList)
+                                        {
+                                            var BlockPlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(blockid);
+
+                                            if (photon != null)
+                                            {
+                                                if (BlockPlayer.GetUserID().Equals(photon.GetUserID()))
+                                                {
+                                                    PopupUtils.QueHudMessage($"{BlockPlayer.GetDisplayName()} blocked you!");
+                                                    return false;
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+
+                                    }
+                                }
+                            }
+                            break;
+                    }
+                    PopupUtils.QueHudMessage($"Moderation Event: {eventType}");
                     break;
                 case 203: // Destroy
                     prefix.Append("Destroy: ");

@@ -2,6 +2,7 @@
 
 namespace AstroLibrary.Utility
 {
+    using AstroLibrary.Console;
     using MelonLoader;
     using System;
     using System.Collections.Generic;
@@ -38,8 +39,9 @@ namespace AstroLibrary.Utility
             Utils.VRCUiManager.HideScreen("POPUP");
         }
 
-        public static void QueHudMessage(string Message)
+        public static void QueHudMessage(string message)
         {
+            ModConsole.Log($"[HudMessage] {message}");
             if (!WorldUtils.IsInWorld) return;
             var manager = Utils.VRCUiManager;
             if (true)
@@ -49,11 +51,11 @@ namespace AstroLibrary.Utility
                     HudMessage1 = CreateTextNear(CreateImage("yes", 100f), 110f, TextAnchor.LowerCenter);
                     HudMessage1.supportRichText = true;
                 }
-                MelonCoroutines.Start(ShowMessage(HudMessage1, MessagesList, Message));
+                MelonCoroutines.Start(ShowMessage(HudMessage1, MessagesList, message));
             }
             else
             {
-                manager.field_Private_List_1_String_0.Add(Message);
+                manager.field_Private_List_1_String_0.Add(message);
             }
         }
 
