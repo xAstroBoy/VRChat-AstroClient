@@ -3,6 +3,8 @@
     #region Imports
 
     using AstroClient.Cheetos;
+    using AstroClient.Components;
+    using AstroClient.Exploits;
     using AstroClient.Variables;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
@@ -56,7 +58,7 @@
 
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.Z))
             {
-                if (BClubWorld.IsBlueChairEnabled) BClubWorld.IsBlueChairEnabled = false;
+                ExploitUtils.DisableAllExploits();
             }
 
             if (localPlayer.GetIsInVR())

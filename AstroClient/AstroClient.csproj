@@ -105,6 +105,7 @@
     <Compile Include="Components\Orbit\OrbitManager_Old.cs" />
     <Compile Include="Components\PlayerSpoofer\PlayerSpooferUtils.cs" />
     <Compile Include="Components\PlayerSpoofer\PlayerSpoofer.cs" />
+    <Compile Include="Exploits\ExploitManager.cs" />
     <Compile Include="Extensions\Collider_ext.cs" />
     <Compile Include="Extensions\Engine_ext.cs" />
     <Compile Include="AntiCrash\AntiCrash.cs" />

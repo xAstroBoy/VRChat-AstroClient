@@ -12,8 +12,8 @@
         private static HumanBodyBones TargetBone;
         private static GameObject Target;
         private static GameObject Self;
-        public static bool IsEnabled { get; private set; } = false;
-        public static float Height = 0f;
+        public static bool IsEnabled { get; set; } = false;
+        public static float Height { get; set; } = 0f;
 
         public SitOnPlayer(IntPtr obj0) : base(obj0)
         {
