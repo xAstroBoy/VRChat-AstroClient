@@ -161,6 +161,7 @@
                             }
                             break;
                     }
+                    log = true;
                     PopupUtils.QueHudMessage($"Moderation Event: {eventType}");
                     break;
                 case 203: // Destroy
