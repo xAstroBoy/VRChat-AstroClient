@@ -22,6 +22,8 @@
         }
 
 
+
+
         public static string ColorToHex(System.Drawing.Color color)
         {
             return ColorTranslator.ToHtml(System.Drawing.Color.FromArgb(color.ToArgb()));

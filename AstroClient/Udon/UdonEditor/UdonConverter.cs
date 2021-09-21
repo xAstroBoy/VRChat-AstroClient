@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
     using Il2CppSystem.Collections.Generic;
+    using System;
     using UnhollowerBaseLib;
     using UnhollowerRuntimeLib;
 
@@ -23,6 +24,20 @@
         public static Il2CppSystem.Object Generate_Il2CPPObject(uint item)
         {
             var converted = new Il2CppSystem.UInt32() { m_value = item };
+            var boxed = converted.BoxIl2CppObject();
+            return boxed ?? null;
+        }
+
+        public static Il2CppSystem.Object Generate_Il2CPPObject(UInt16 item)
+        {
+            var converted = new Il2CppSystem.UInt16() { m_value = item };
+            var boxed = converted.BoxIl2CppObject();
+            return boxed ?? null;
+        }
+
+        public static Il2CppSystem.Object Generate_Il2CPPObject(Double item)
+        {
+            var converted = new Il2CppSystem.Double() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
             return boxed ?? null;
         }
@@ -62,11 +77,20 @@
             return boxed ?? null;
         }
 
+
         public static Il2CppSystem.Object Generate_Il2CPPObject(UnityEngine.Color item)
         {
             var boxed = item.BoxIl2CppObject();
             return boxed ?? null;
         }
+
+        public static Il2CppSystem.Object Generate_Il2CPPObject(System.TimeSpan item)
+        {
+            var converted = new Il2CppSystem.TimeSpan() { _ticks = item.Ticks };
+            var boxed = converted.BoxIl2CppObject();
+            return boxed ?? null;
+        }
+
 
         public static Il2CppSystem.Object Generate_Il2CPPObject(UnityEngine.Vector3 item)
         {

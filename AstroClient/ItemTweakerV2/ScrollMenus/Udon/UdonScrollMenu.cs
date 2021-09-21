@@ -37,6 +37,9 @@
                         {
                             foreach (var subaction in action._eventTable)
                             {
+                                var unboxer = new QMSingleButton(MainScroll.BaseMenu, 0, -0f, $"Unbox {action.name}", () => { action.UnboxUdonEventToConsole(); }, $"Attempts to unbox {action.name} in console..", null, Color.yellow, true);
+                                MainScroll.Add(unboxer, 0, -0.5f);
+
                                 MainScroll.Add(new QMSingleButton(MainScroll.BaseMenu, 0f, 0f, subaction.Key, delegate
                                 {
                                     if (subaction.key.StartsWith("_"))
@@ -49,9 +52,6 @@
                                     }
                                 }, action.gameObject?.ToString() + " Run " + subaction.Key));
                             }
-                            var unboxer = new QMSingleButton(MainScroll.BaseMenu, 0, -0.5f, $"Unbox {action.name}", () => { action.UnboxUdonEventToConsole(); }, $"Attempts to unbox {action.name} in console..", null, Color.yellow, true);
-                            MainScroll.Add(unboxer);
-                            unboxer.SetLocation(0, -0.5f);
                         });
                         MainScroll.BaseMenu.GetMainButton().GetGameObject().GetComponent<UnityEngine.UI.Button>()
                             .onClick.Invoke();
