@@ -59,87 +59,96 @@
 
         private static bool OnEvent(EventData __0)
         {
-            object data = MiscUtils_Old.Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
-            var code = __0.Code;
-            var player = Utils.PlayerManager.GetPlayerID(__0.sender);
-            var photon = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
-            bool log = false;
-            bool block = false;
-
-            StringBuilder line = new StringBuilder();
-            StringBuilder prefix = new StringBuilder();
-            prefix.Append($"[Event ({code})] ");
-
-            line.Append($"from: ({__0.sender}) ");
-            if (WorldUtils.IsInWorld && player != null)
+            try
             {
-                line.Append($"'{player.DisplayName()}' ");
+                object data = MiscUtils_Old.Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
+                var code = __0.Code;
+                var player = Utils.PlayerManager.GetPlayerID(__0.sender);
+                var photon = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
+                bool log = false;
+                bool block = false;
+
+                StringBuilder line = new StringBuilder();
+                StringBuilder prefix = new StringBuilder();
+                prefix.Append($"[Event ({code})] ");
+
+                line.Append($"from: ({__0.sender}) ");
+                if (WorldUtils.IsInWorld && player != null)
+                {
+                    line.Append($"'{player.DisplayName()}' ");
+                }
+                else if (WorldUtils.IsInWorld && photon != null)
+                {
+                    line.Append($"'{photon.GetDisplayName()}'");
+                }
+                else
+                {
+                    line.Append($"'NULL' ");
+                }
+
+                switch (code)
+                {
+                    case 1:// Voice Data
+                           // WIP Parrot Mode
+                        break;
+                    case 2:
+                        string kickMessage = (data as Dictionary<byte, object>)[245].ToString();
+                        break;
+                    case 6:
+                        object obj = Serialization.FromIL2CPPToManaged<object>(__0.customData);
+
+                        switch (obj.ToString())
+                        {
+                            case "System.Byte[]":
+                                break;
+                            default:
+                                line.Append("Invaid Event: Possibly a bad actor! ");
+                                block = true;
+                                __0.Reset();
+                                break;
+
+                        }
+                        break;
+                    case 8: // Interest - Interested in events
+                        break;
+                    case 7: // I believe this is motion, key 245 appears to be base64
+                        break;
+                    case 33: // Moderations
+                        PopupUtils.QueHudMessage("Moderation Event");
+                        log = true;
+                        break;
+                    case 203: // Destroy
+                        prefix.Append("Destroy: ");
+                        log = true;
+                        break;
+                    case 253: // I think this is avatar switching related
+                        break;
+                    default:
+                        log = true;
+                        break;
+                }
+
+                string blockText = string.Empty;
+                if (block)
+                {
+                    blockText = "[BLOCKED] ";
+                }
+                if (log && ConfigManager.General.LogEvents || block)
+                {
+                    line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented)}");
+                    ModConsole.Log($"{blockText}{prefix.ToString()}{line.ToString()}");
+                }
+
+                if (block)
+                {
+                    return false;
+                }
             }
-            else if (WorldUtils.IsInWorld && photon != null)
+            catch (System.Exception e)
             {
-                line.Append($"'{photon.GetDisplayName()}'");
-            }
-            else
-            {
-                line.Append($"'NULL' ");
-            }
-
-            switch (code)
-            {
-                case 1:// Voice Data
-                    // WIP Parrot Mode
-                    break;
-                case 2:
-                    string kickMessage = (data as Dictionary<byte, object>)[245].ToString();
-                    break;
-                case 6:
-                    object obj = Serialization.FromIL2CPPToManaged<object>(__0.customData);
-
-                    switch (obj.ToString())
-                    {
-                        case "System.Byte[]":
-                            break;
-                        default:
-                            line.Append("Invaid Event: Possibly a bad actor! ");
-                            block = true;
-                            __0.Reset();
-                            break;
-
-                    }
-                    break;
-                case 8: // Interest - Interested in events
-                    break;
-                case 7: // I believe this is motion, key 245 appears to be base64
-                    break;
-                case 33: // Moderations
-                    PopupUtils.QueHudMessage("Moderation Event");
-                    log = true;
-                    break;
-                case 203: // Destroy
-                    prefix.Append("Destroy: ");
-                    log = true;
-                    break;
-                case 253: // I think this is avatar switching related
-                    break;
-                default:
-                    log = true;
-                    break;
-            }
-
-            string blockText = string.Empty;
-            if (block)
-            {
-                blockText = "[BLOCKED] ";
-            }
-            if (log && ConfigManager.General.LogEvents || block)
-            {
-                line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented)}");
-                ModConsole.Log($"{blockText}{prefix.ToString()}{line.ToString()}");
-            }
-
-            if (block)
-            {
-                return false;
+                ModConsole.DebugError("Error in Photon OnEvent : ");
+                ModConsole.DebugErrorExc(e);
+                return true;
             }
 
             return true;
