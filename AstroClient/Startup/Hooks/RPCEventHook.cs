@@ -142,9 +142,14 @@
 
             if (parameter.Equals("UdonSyncRunProgramAsRPC"))
             {
-                Event_OnUdonSyncRPC.SafetyRaise(new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
+                Event_OnUdonSyncRPC?.SafetyRaise(new UdonSyncRPCEventArgs(__0, __1.ParameterObject, actiontext));
                 if (ConfigManager.General.LogUdonEvents)
                 {
+                    if (WorldUtils.WorldID == WorldIds.BClub && __1.Name.Contains("Blue") && actiontext.Contains("Sit"))
+                    {
+                        ModConsole.Log($"BLOCKED Blue Chair: {sender}");
+                        return false;
+                    }
                     if (Bools.BlockUdon)
                     {
                         ModConsole.Log($"BLOCKED Udon RPC: Sender : {sender} , GameObject : {GameObjName}, Action : {actiontext}");
