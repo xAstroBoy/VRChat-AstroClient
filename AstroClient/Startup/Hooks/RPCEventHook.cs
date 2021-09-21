@@ -98,6 +98,10 @@
         {
             try
             {
+                if(__0 == null && __0.sender != null)
+                {
+                    return true; // discard
+                }
                 object data = MiscUtils_Old.Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
                 var code = __0.Code;
                 var photon = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
@@ -129,8 +133,16 @@
                         break;
 
                     case 6:
+                        if(__0.customData == null)
+                        {
+                            break;
+                        }
                         object obj = Serialization.FromIL2CPPToManaged<object>(__0.customData);
 
+                        if(obj == null)
+                        {
+                            break;
+                        }
                         switch (obj.ToString())
                         {
                             case "System.Byte[]":
@@ -152,12 +164,36 @@
 
                     case 33: // Moderations
 
+                        if (__0.Parameters == null)
+                        {
+                            break;
+                        }
                         object rawData = Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
+                        if(rawData == null)
+                        {
+                            break;
+                        }
                         var parsedData = (rawData as Dictionary<byte, object>);
+                        if(parsedData == null)
+                        {
+                            break;
+                        }
                         var infoData = parsedData[245] as Dictionary<byte, object>;
+                        if(infoData == null)
+                        {
+                            break;
+                        }
                         int eventType = int.Parse(infoData[0].ToString());
+                        if(eventType == null)
+                        {
+                            break;
+                        }
                         string userID = photon.GetUserID();
-
+                        if(userID == null)
+                        {
+                            break;
+                        }
+                        
                         switch (eventType)
                         {
                             case 21: // 10 blocked, 11 muted
@@ -236,6 +272,7 @@
 
                                                 if (photon != null)
                                                 {
+                                                    ModConsole.DebugLog($"INFO : UserID {userID} ");
                                                     if (!BlockedYouPlayers.Contains(userID))
                                                     {
                                                         BlockedYouPlayers.Add(userID);
