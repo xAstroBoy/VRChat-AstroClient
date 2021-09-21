@@ -139,9 +139,9 @@
             }
         }
 
-        public override void OnPlayerBlockedYou(Player player)
+        public override void OnPlayerBlockedYou(Photon.Realtime.Player player)
         {
-            if (player == AssignedPlayer)
+            if (player.GetUserID() == AssignedPlayer.GetUserID())
             {
                 if (!UseCustomColor)
                 {
@@ -150,9 +150,9 @@
             }
         }
 
-        public override void OnPlayerUnblockedYou(Player player)
+        public override void OnPlayerUnblockedYou(Photon.Realtime.Player player)
         {
-            if (player == AssignedPlayer)
+            if (player.GetUserID() == AssignedPlayer.GetUserID())
             {
                 if (!UseCustomColor)
                 {
@@ -220,7 +220,7 @@
         {
             if (HighLightOptions != null && AssignedPlayer != null && AssignedPlayer.GetAPIUser() != null)
             {
-                if (RPCEventHook.BlockedYouPlayers.Contains(AssignedPlayer))
+                if (RPCEventHook.BlockedYouPlayers.Contains(AssignedPlayer.GetUserID()))
                 {
                     if (HighLightOptions.highlightColor != BlockedColor)
                     {

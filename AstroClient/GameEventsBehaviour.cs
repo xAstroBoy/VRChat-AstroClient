@@ -152,25 +152,25 @@
             OnTargetSet(e.player);
         }
 
-        private void Internal_OnPlayerBlockedYou(object sender, VRCPlayerEventArgs e)
+        private void Internal_OnPlayerBlockedYou(object sender, PhotonPlayerEventArgs e)
         {
             OnPlayerBlockedYou(e.player);
         }
 
 
-        private void Internal_OnPlayerUnblockedYou(object sender, VRCPlayerEventArgs e)
+        private void Internal_OnPlayerUnblockedYou(object sender, PhotonPlayerEventArgs e)
         {
             OnPlayerUnblockedYou(e.player);
         }
 
 
-        private void Internal_OnPlayerMutedYou(object sender, VRCPlayerEventArgs e)
+        private void Internal_OnPlayerMutedYou(object sender, PhotonPlayerEventArgs e)
         {
             OnPlayerMutedYou(e.player);
         }
 
 
-        private void Internal_OnPlayerUnmutedYou(object sender, VRCPlayerEventArgs e)
+        private void Internal_OnPlayerUnmutedYou(object sender, PhotonPlayerEventArgs e)
         {
             OnPlayerUnmutedYou(e.player);
         }
@@ -280,22 +280,22 @@
         {
         }
 
-        public virtual void OnPlayerBlockedYou(VRC.Player player)
+        public virtual void OnPlayerBlockedYou(Photon.Realtime.Player player)
         {
         }
 
 
-        public virtual void OnPlayerUnblockedYou(VRC.Player player)
+        public virtual void OnPlayerUnblockedYou(Photon.Realtime.Player player)
         {
         }
 
 
-        public virtual void OnPlayerMutedYou(VRC.Player player)
+        public virtual void OnPlayerMutedYou(Photon.Realtime.Player player)
         {
         }
 
 
-        public virtual void OnPlayerUnmutedYou(VRC.Player player)
+        public virtual void OnPlayerUnmutedYou(Photon.Realtime.Player player)
         {
         }
 

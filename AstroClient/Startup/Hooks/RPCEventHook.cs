@@ -3,6 +3,7 @@
     #region Imports
 
     using AstroClient.Variables;
+    using AstroClientCore.Events;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
@@ -22,13 +23,13 @@
     {
         #region OnEvent Events
 
-        public static event System.EventHandler<VRCPlayerEventArgs> Event_OnPlayerBlockedYou;
+        public static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerBlockedYou;
 
-        public static event System.EventHandler<VRCPlayerEventArgs> Event_OnPlayerUnblockedYou;
+        public static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnblockedYou;
 
-        public static event System.EventHandler<VRCPlayerEventArgs> Event_OnPlayerMutedYou;
+        public static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerMutedYou;
 
-        public static event System.EventHandler<VRCPlayerEventArgs> Event_OnPlayerUnmutedYou;
+        public static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnmutedYou;
 
         #endregion OnEvent Events
 
@@ -39,22 +40,23 @@
             MutedYouPlayers.Clear();
         }
 
-        public override void OnPlayerLeft(VRC.Player player)
+        public override void OnPhotonLeft(Player player)
         {
-            if (BlockedYouPlayers.Contains(player))
+            var userID = player.GetUserID();
+            if (BlockedYouPlayers.Contains(userID))
             {
-                BlockedYouPlayers.Remove(player);
+                BlockedYouPlayers.Remove(userID);
             }
-            if (MutedYouPlayers.Contains(player))
+            if (MutedYouPlayers.Contains(userID))
             {
-                MutedYouPlayers.Remove(player);
+                MutedYouPlayers.Remove(userID);
             }
         }
 
 
-        public static List<VRC.Player> BlockedYouPlayers { get; private set; } = new List<VRC.Player>();
+        public static List<string> BlockedYouPlayers { get; private set; } = new List<string>();
 
-        public static List<VRC.Player> MutedYouPlayers { get; private set; } = new List<VRC.Player>();
+        public static List<string> MutedYouPlayers { get; private set; } = new List<string>();
 
         #endregion PlayerModerations
 
@@ -98,7 +100,6 @@
             {
                 object data = MiscUtils_Old.Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
                 var code = __0.Code;
-                var player = Utils.PlayerManager.GetPlayerID(__0.sender);
                 var photon = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
                 bool log = false;
                 bool block = false;
@@ -108,11 +109,7 @@
                 prefix.Append($"[Event ({code})] ");
 
                 line.Append($"from: ({__0.Sender}) ");
-                if (WorldUtils.IsInWorld && player != null)
-                {
-                    line.Append($"'{player.DisplayName()}' ");
-                }
-                else if (WorldUtils.IsInWorld && photon != null)
+                if (WorldUtils.IsInWorld && photon != null)
                 {
                     line.Append($"'{photon.GetDisplayName()}'");
                 }
@@ -159,6 +156,7 @@
                         var parsedData = (rawData as Dictionary<byte, object>);
                         var infoData = parsedData[245] as Dictionary<byte, object>;
                         int eventType = int.Parse(infoData[0].ToString());
+                        string userID = photon.GetUserID();
 
                         switch (eventType)
                         {
@@ -179,28 +177,28 @@
                                         bool Blocked = bool.Parse(infoData[10].ToString());
                                         bool Muted = bool.Parse(infoData[11].ToString());
 
-                                        if (Blocked && !BlockedYouPlayers.Contains(player))
+                                        if (Blocked && !BlockedYouPlayers.Contains(userID))
                                         {
-                                            BlockedYouPlayers.Add(player);
-                                            Event_OnPlayerBlockedYou.SafetyRaise(new VRCPlayerEventArgs(player));
+                                            BlockedYouPlayers.Add(userID);
+                                            Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
                                             PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Blocked You");
                                         }
-                                        else if (!Blocked && BlockedYouPlayers.Contains(player))
+                                        else if (!Blocked && BlockedYouPlayers.Contains(userID))
                                         {
-                                            BlockedYouPlayers.Remove(player);
-                                            Event_OnPlayerUnblockedYou.SafetyRaise(new VRCPlayerEventArgs(player)); PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Blocked You");
+                                            BlockedYouPlayers.Remove(userID);
+                                            Event_OnPlayerUnblockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon)); PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Blocked You");
                                             PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unblocked You");
                                         }
-                                        if (Muted && !MutedYouPlayers.Contains(player))
+                                        if (Muted && !MutedYouPlayers.Contains(userID))
                                         {
-                                            MutedYouPlayers.Add(player);
-                                            Event_OnPlayerMutedYou.SafetyRaise(new VRCPlayerEventArgs(player));
+                                            MutedYouPlayers.Add(userID);
+                                            Event_OnPlayerMutedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
                                             PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Muted You");
                                         }
-                                        if (!Muted && MutedYouPlayers.Contains(player))
+                                        if (!Muted && MutedYouPlayers.Contains(userID))
                                         {
-                                            MutedYouPlayers.Remove(player);
-                                            Event_OnPlayerUnmutedYou.SafetyRaise(new VRCPlayerEventArgs(player));
+                                            MutedYouPlayers.Remove(userID);
+                                            Event_OnPlayerUnmutedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
                                             PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unmuted You");
                                         }
 
@@ -226,10 +224,10 @@
 
                                                 if (photon != null)
                                                 {
-                                                    if (!BlockedYouPlayers.Contains(player))
+                                                    if (!BlockedYouPlayers.Contains(userID))
                                                     {
-                                                        BlockedYouPlayers.Add(player);
-                                                        Event_OnPlayerBlockedYou.SafetyRaise(new VRCPlayerEventArgs(player));
+                                                        BlockedYouPlayers.Add(userID);
+                                                        Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
                                                         line.Append($"{BlockPlayer.GetDisplayName()} has you blocked!");
                                                         PopupUtils.QueHudMessage($"{BlockPlayer.GetDisplayName()} has you blocked!");
                                                     }
