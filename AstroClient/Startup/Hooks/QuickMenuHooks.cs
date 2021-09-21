@@ -100,7 +100,6 @@
             try
             {
                 new Patch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Public_Void_Player_0)), GetPatch(nameof(OnSelectedPlayerPatch)));
-                new Patch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Public_Void_Player_PDM_0)), GetPatch(nameof(OnSelectedPlayerPatch)));
 
                 Patch.DoPatches();
             }

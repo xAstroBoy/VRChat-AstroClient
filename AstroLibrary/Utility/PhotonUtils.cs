@@ -9,18 +9,26 @@ namespace AstroLibrary.Utility
     {
         public static string GetUserID(this Photon.Realtime.Player player)
         {
-            if (player.GetRawHashtable().ContainsKey("user"))
-                if (player.GetHashtable()["user"] is Dictionary<string, object> dict)
-                    return (string)dict["id"];
-            return "No ID";
+            if (player.GetPlayer() != null)
+            {
+                if (player.GetPlayer().GetAPIUser() != null)
+                {
+                    return player.GetPlayer().GetAPIUser().GetUserID();
+                }
+            }
+            return "No UserID";
         }
 
         public static string GetDisplayName(this Photon.Realtime.Player player)
         {
-            if (player.GetRawHashtable().ContainsKey("user"))
-                if (player.GetHashtable()["user"] is Dictionary<string, object> dict)
-                    return (string)dict["displayName"];
-            return "No DisplayName";
+            if(player.GetPlayer() != null)
+            {
+                if(player.GetPlayer().GetAPIUser() != null)
+                {
+                    return player.GetPlayer().GetAPIUser().displayName;
+                }
+            }
+            return "No Displayname";
         }
 
         public static int GetPhotonID(this Photon.Realtime.Player player) => player.field_Private_Int32_0;
