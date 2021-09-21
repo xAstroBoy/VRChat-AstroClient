@@ -206,11 +206,13 @@
                             Version = avatar.version,
                             SupportedPlatforms = avatar.supportedPlatforms.ToString()
                         };
-
-                        if (avatarData != null)
+                        if (AstroNetworkClient.Client.IsConnected)
                         {
-                            var json = JsonConvert.SerializeObject(avatarData);
-                            AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
+                            if (avatarData != null)
+                            {
+                                var json = JsonConvert.SerializeObject(avatarData);
+                                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
+                            }
                         }
                     }
                 }
