@@ -6,25 +6,31 @@
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
+    using ExitGames.Client.Photon;
     using Harmony;
+    using Il2CppSystem;
+    using Photon.Realtime;
     using System;
+    using System.Collections.Generic;
     using System.Reflection;
+    using System.Text;
     using UnityEngine;
     using VRC;
+    using VRC.Core;
     using VRC.SDKBase;
 
     #endregion Imports
 
     public class RPCEventHook : GameEvents
     {
-        public static event EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
+        public static event System.EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
 
         //public static
         private HarmonyLib.Harmony harmony;
 
         public override void ExecutePriorityPatches()
         {
-            MiscUtils.DelayFunction(1f, new Action(() =>
+            MiscUtils.DelayFunction(1f, new System.Action(() =>
             {
                 InitPatches();
             }));
@@ -41,6 +47,7 @@
                 }
 
                 _ = harmony.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
+                _ = harmony.Patch(AccessTools.Method(typeof(LoadBalancingClient), nameof(LoadBalancingClient.OnEvent)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnEvent), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
                 ModConsole.DebugLog("RPC Hooks Done");
             }
             catch
@@ -50,7 +57,96 @@
             }
         }
 
-        private static bool OnRPCEvent(ref Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
+        private static bool OnEvent(EventData __0)
+        {
+            object data = MiscUtils_Old.Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
+            var code = __0.Code;
+            var player = Utils.PlayerManager.GetPlayerID(__0.sender);
+            var photon = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
+            bool log = false;
+            bool block = false;
+
+            StringBuilder line = new StringBuilder();
+            StringBuilder prefix = new StringBuilder();
+            prefix.Append($"[Event ({code})] ");
+
+            line.Append($"from: ({__0.sender}) ");
+            if (WorldUtils.IsInWorld && player != null)
+            {
+                line.Append($"'{player.DisplayName()}' ");
+            }
+            else if (WorldUtils.IsInWorld && photon != null)
+            {
+                line.Append($"'{photon.GetDisplayName()}'");
+            }
+            else
+            {
+                line.Append($"'NULL' ");
+            }
+
+            switch (code)
+            {
+                case 1:// Voice Data
+                    // WIP Parrot Mode
+                    break;
+                case 2:
+                    string kickMessage = (data as Dictionary<byte, object>)[245].ToString();
+                    break;
+                case 6:
+                    object obj = Serialization.FromIL2CPPToManaged<object>(__0.customData);
+
+                    switch (obj.ToString())
+                    {
+                        case "System.Byte[]":
+                            break;
+                        default:
+                            line.Append("Invaid Event: Possibly a bad actor! ");
+                            block = true;
+                            __0.Reset();
+                            break;
+
+                    }
+                    break;
+                case 8: // Interest - Interested in events
+                    break;
+                case 7: // I believe this is motion, key 245 appears to be base64
+                    break;
+                case 33: // Moderations
+                    PopupUtils.QueHudMessage("Moderation Event");
+                    log = true;
+                    break;
+                case 203: // Destroy
+                    prefix.Append("Destroy: ");
+                    log = true;
+                    break;
+                case 253: // I think this is avatar switching related
+                    break;
+                default:
+                    log = true;
+                    break;
+            }
+
+            string blockText = string.Empty;
+            if (block)
+            {
+                log = true;
+                blockText = "[BLOCKED] ";
+            }
+            if (log && ConfigManager.General.LogEvents)
+            {
+                line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented)}");
+                ModConsole.Log($"{blockText}{prefix.ToString()}{line.ToString()}");
+            }
+
+            if (block)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private static bool OnRPCEvent(ref VRC.Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
         {
             if (__1 == null) return false;
 

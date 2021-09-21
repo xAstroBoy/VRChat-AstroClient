@@ -29,6 +29,9 @@
             QMSingleToggleButton udonRPCToggle = new QMSingleToggleButton(sub, 4, 0, "Udon Log ON", () => { ConfigManager.General.LogUdonEvents = true; }, "Udon Log OFF", () => { ConfigManager.General.LogUdonEvents = false; }, "Log Udon RPC events to the console", Color.green, Color.red, null, ConfigManager.General.LogUdonEvents, true);
             udonRPCToggle.SetToggleState(ConfigManager.General.LogUdonEvents, false);
 
+            QMSingleToggleButton eventLogTottle = new QMSingleToggleButton(sub, 4, 1, "Event Log ON", () => { ConfigManager.General.LogEvents = true; }, "Event Log OFF", () => { ConfigManager.General.LogEvents = false; }, "Log Events to the console", Color.green, Color.red, null, ConfigManager.General.LogEvents, true);
+            eventLogTottle.SetToggleState(ConfigManager.General.LogEvents, false);
+
             // Performance Menu
 
             QMNestedButton performanceMenu = new QMNestedButton(sub, 4, 2f, "Performance", "Performance Menu");

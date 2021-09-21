@@ -35,8 +35,16 @@ namespace AstroLibrary.Utility
         public static List<Photon.Realtime.Player> GetAllPhotonPlayers(this Photon.Realtime.LoadBalancingClient Instance)
         {
             List<Photon.Realtime.Player> result = new List<Photon.Realtime.Player>();
-            foreach (var x in Instance.prop_Room_0.prop_Dictionary_2_Int32_Player_0)
-                result.Add(x.Value);
+            if (WorldUtils.IsInWorld)
+            {
+                foreach (var x in Instance.prop_Room_0.prop_Dictionary_2_Int32_Player_0)
+                {
+                    if (x != null)
+                    {
+                        result.Add(x.Value);
+                    }
+                }
+            }
             return result;
         }
 

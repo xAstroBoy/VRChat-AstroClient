@@ -49,6 +49,8 @@
 
         public bool LogTriggerEvents = false;
 
+        public bool LogEvents = false;
+
         public float FOV = 61f;
 
         public float FarClipPlane = 60f;
