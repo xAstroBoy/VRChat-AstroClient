@@ -10,7 +10,6 @@ namespace AstroLibrary.Utility
     {
         public static string GetUserID(this Photon.Realtime.Player player)
         {
-            string Debug = string.Empty;
             if (player != null)
             {
                 if (player.GetRawHashtable() != null)
@@ -21,45 +20,17 @@ namespace AstroLibrary.Utility
                         {
                             if (player.GetHashtable()["user"] is Dictionary<string, object> dict)
                             {
-                                var result = (string)dict["id"];
-                                ModConsole.DebugLog($"Returned {result}");
-                                return result;
-                            }
-                            else
-                            {
-                                Debug = "RawHashtable Key user is Not a Dictionary!";
-
+                                return  (string)dict["id"];
                             }
                         }
-                        else
-                        {
-                            Debug = "RawHashtable Key user is Null!";
-                        }
-
-                    }
-                    else
-                    {
-                        Debug = "RawHashtable Doesn't Contain Key user!";
                     }
                 }
-                else
-                {
-                    Debug = "RawHashtable Is Null!";
-                }
-
-
             }
-            else
-            {
-                Debug = "Player Is Null!";
-            }
-            ModConsole.Warning($"Photon GetUserID Error: {Debug}");
             return null;
         }
 
         public static string GetDisplayName(this Photon.Realtime.Player player)
         {
-            string Debug = string.Empty;
             if (player != null)
             {
                 if (player.GetRawHashtable() != null)
@@ -70,40 +41,14 @@ namespace AstroLibrary.Utility
                         {
                             if (player.GetHashtable()["user"] is Dictionary<string, object> dict)
                             {
-                                var result = (string)dict["displayName"];
-                                ModConsole.DebugLog($"Returned {result}");
-                                return result;
-
-                            }
-                            else
-                            {
-                                Debug = "RawHashtable Key user is Not a Dictionary!";
+                                return (string)dict["displayName"];
 
                             }
                         }
-                        else
-                        {
-                            Debug = "RawHashtable Key user is Null!";
-                        }
 
                     }
-                    else
-                    {
-                        Debug = "RawHashtable Doesn't Contain Key user!";
-                    }
                 }
-                else
-                {
-                    Debug = "RawHashtable Is Null!";
-                }
-
-
             }
-            else
-            {
-                Debug = "Player Is Null!";
-            }
-            ModConsole.Warning($"Photon GetDisplayName Error: {Debug}");
             if (player != null)
             {
                 return $"Photon ID : {player.GetPhotonID()}";
