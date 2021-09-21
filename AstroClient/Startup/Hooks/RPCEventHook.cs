@@ -231,10 +231,7 @@
                 if (block)
                 {
                     blockText = "[BLOCKED] ";
-                }
-                if (log || block)
-                {
-                    if (ConfigManager.General.LogEvents)
+                    if (log && ConfigManager.General.LogEvents)
                     {
                         line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented)}");
                         ModConsole.Log($"{blockText}{prefix.ToString()}{line.ToString()}");
