@@ -8,23 +8,44 @@
     using AstroLibrary.Utility;
     using ExitGames.Client.Photon;
     using Harmony;
-    using Il2CppSystem;
     using Photon.Realtime;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
     using System.Text;
-    using UnhollowerBaseLib;
     using UnityEngine;
-    using VRC;
-    using VRC.Core;
     using VRC.SDKBase;
 
     #endregion Imports
 
     public class RPCEventHook : GameEvents
     {
+        #region OnEvent Events
+
+        public static event System.EventHandler<VRCPlayerEventArgs> Event_OnPlayerBlockedYou;
+
+        public static event System.EventHandler<VRCPlayerEventArgs> Event_OnPlayerUnblockedYou;
+
+        public static event System.EventHandler<VRCPlayerEventArgs> Event_OnPlayerMutedYou;
+
+        public static event System.EventHandler<VRCPlayerEventArgs> Event_OnPlayerUnmutedYou;
+
+        #endregion OnEvent Events
+
+        #region PlayerModerations
+        public override void OnRoomLeft()
+        {
+            BlockedYouPlayers.Clear();
+            MutedYouPlayers.Clear();
+        }
+
+
+        public static List<VRC.Player> BlockedYouPlayers { get; private set; } = new List<VRC.Player>();
+
+        public static List<VRC.Player> MutedYouPlayers { get; private set; } = new List<VRC.Player>();
+
+        #endregion PlayerModerations
+
         public static event System.EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
 
         //public static
@@ -74,28 +95,30 @@
                 StringBuilder prefix = new StringBuilder();
                 prefix.Append($"[Event ({code})] ");
 
-            line.Append($"from: ({__0.Sender}) ");
-            if (WorldUtils.IsInWorld && player != null)
-            {
-                line.Append($"'{player.DisplayName()}' ");
-            }
-            else if (WorldUtils.IsInWorld && photon != null)
-            {
-                line.Append($"'{photon.GetDisplayName()}'");
-            }
-            else
-            {
-                line.Append($"'NULL' ");
-            }
+                line.Append($"from: ({__0.Sender}) ");
+                if (WorldUtils.IsInWorld && player != null)
+                {
+                    line.Append($"'{player.DisplayName()}' ");
+                }
+                else if (WorldUtils.IsInWorld && photon != null)
+                {
+                    line.Append($"'{photon.GetDisplayName()}'");
+                }
+                else
+                {
+                    line.Append($"'NULL' ");
+                }
 
                 switch (code)
                 {
                     case 1:// Voice Data
                            // WIP Parrot Mode
                         break;
+
                     case 2:
                         string kickMessage = (data as Dictionary<byte, object>)[245].ToString();
                         break;
+
                     case 6:
                         object obj = Serialization.FromIL2CPPToManaged<object>(__0.customData);
 
@@ -103,19 +126,22 @@
                         {
                             case "System.Byte[]":
                                 break;
+
                             default:
                                 line.Append("Invaid Event: Possibly a bad actor! ");
                                 block = true;
                                 __0.Reset();
                                 break;
+                        }
+                        break;
 
-                    }
-                    break;
-                case 8: // Interest - Interested in events
-                    break;
-                case 7: // I believe this is motion, key 245 appears to be base64
-                    break;
-                case 33: // Moderations
+                    case 8: // Interest - Interested in events
+                        break;
+
+                    case 7: // I believe this is motion, key 245 appears to be base64
+                        break;
+
+                    case 33: // Moderations
 
                         //var newParameters = new Dictionary<string, object>[254];
                         //newParameters[245] = new Dictionary<string, object>();
@@ -127,7 +153,6 @@
                         //converted[245] = converted1;
                         //converted[254] = converted2;
 
-
                         //__0 = new EventData()
                         //{
                         //    Code = code,
@@ -138,10 +163,10 @@
                         //    SenderKey = __0.SenderKey,
                         //};
 
-                    object rawData = Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
-                    var parsedData = (rawData as Dictionary<byte, object>);
-                    var infoData = parsedData[245] as Dictionary<byte, object>;
-                    int eventType = int.Parse(infoData[0].ToString());
+                        object rawData = Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
+                        var parsedData = (rawData as Dictionary<byte, object>);
+                        var infoData = parsedData[245] as Dictionary<byte, object>;
+                        int eventType = int.Parse(infoData[0].ToString());
 
                         switch (eventType)
                         {
@@ -161,16 +186,31 @@
 
                                         bool Blocked = bool.Parse(infoData[10].ToString());
                                         bool Muted = bool.Parse(infoData[11].ToString());
-                                        if (Blocked)
-                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Blocked You");
-                                        else
-                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unblocked You");
-                                        if (Muted)
-                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Muted You");
-                                        else
-                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unmuted You");
 
-                                        return !Blocked;
+                                        if (Blocked && !BlockedYouPlayers.Contains(player))
+                                        {
+                                            BlockedYouPlayers.Add(player);
+                                            Event_OnPlayerBlockedYou.SafetyRaise(new VRCPlayerEventArgs(player));
+                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Blocked You");
+                                        }
+                                        else if (!Blocked && BlockedYouPlayers.Contains(player))
+                                        {
+                                            BlockedYouPlayers.Remove(player);
+                                            Event_OnPlayerUnblockedYou.SafetyRaise(new VRCPlayerEventArgs(player)); PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Blocked You");
+                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unblocked You");
+                                        }
+                                        if (Muted && !MutedYouPlayers.Contains(player))
+                                        {
+                                            MutedYouPlayers.Add(player);
+                                            Event_OnPlayerMutedYou.SafetyRaise(new VRCPlayerEventArgs(player));
+                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Muted You");
+                                        }
+                                        if (!Muted && MutedYouPlayers.Contains(player))
+                                        {
+                                            MutedYouPlayers.Remove(player);
+                                            Event_OnPlayerUnmutedYou.SafetyRaise(new VRCPlayerEventArgs(player));
+                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unmuted You");
+                                        }
                                     }
                                     else
                                     {
@@ -182,7 +222,6 @@
 
                                         if (BlockedList.Count() == 0)
                                         {
-
                                         }
                                         else
                                         {
@@ -193,8 +232,13 @@
 
                                                 if (photon != null)
                                                 {
-                                                    line.Append($"{BlockPlayer.GetDisplayName()} has you blocked!");
-                                                    PopupUtils.QueHudMessage($"{BlockPlayer.GetDisplayName()} has you blocked!");
+                                                    if (!BlockedYouPlayers.Contains(player))
+                                                    {
+                                                        BlockedYouPlayers.Add(player);
+                                                        Event_OnPlayerBlockedYou.SafetyRaise(new VRCPlayerEventArgs(player));
+                                                        line.Append($"{BlockPlayer.GetDisplayName()} has you blocked!");
+                                                        PopupUtils.QueHudMessage($"{BlockPlayer.GetDisplayName()} has you blocked!");
+                                                    }
                                                     block = true;
                                                 }
                                             }
@@ -203,22 +247,26 @@
                                 }
                                 break;
                         }
-                    log = true;
-                    PopupUtils.QueHudMessage($"Moderation Event: {eventType}");
-                    break;
-                case 203: // Destroy
-                    prefix.Append("Destroy: ");
-                    log = true;
-                    break;
-                case 210:
-                    return false;
-                    break;
-                case 253: // I think this is avatar switching related
-                    break;
-                default:
-                    log = true;
-                    break;
-            }
+                        log = true;
+                        PopupUtils.QueHudMessage($"Moderation Event: {eventType}");
+                        break;
+
+                    case 203: // Destroy
+                        prefix.Append("Destroy: ");
+                        log = true;
+                        break;
+
+                    case 210:
+                        return false;
+                        break;
+
+                    case 253: // I think this is avatar switching related
+                        break;
+
+                    default:
+                        log = true;
+                        break;
+                }
 
                 string blockText = string.Empty;
                 if (block)

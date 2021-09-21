@@ -50,10 +50,10 @@
             StreamerProtector.Event_OnStreamerJoined += Internal_OnStreamerJoined;
             StreamerProtector.Event_OnStreamerLeft += Internal_OnStreamerLeft;
 
-            PhotonOnEventHook.Event_OnPlayerBlockedYou += Internal_OnPlayerBlockedYou;
-            PhotonOnEventHook.Event_OnPlayerUnblockedYou += Internal_OnPlayerUnblockedYou;
-            PhotonOnEventHook.Event_OnPlayerMutedYou += Internal_OnPlayerMutedYou;
-            PhotonOnEventHook.Event_OnPlayerUnmutedYou += Internal_OnPlayerUnmutedYou;
+            RPCEventHook.Event_OnPlayerBlockedYou += Internal_OnPlayerBlockedYou;
+            RPCEventHook.Event_OnPlayerUnblockedYou += Internal_OnPlayerUnblockedYou;
+            RPCEventHook.Event_OnPlayerMutedYou += Internal_OnPlayerMutedYou;
+            RPCEventHook.Event_OnPlayerUnmutedYou += Internal_OnPlayerUnmutedYou;
 
         }
 

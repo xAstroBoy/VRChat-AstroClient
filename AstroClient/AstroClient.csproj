@@ -148,7 +148,6 @@
     <Compile Include="Spawnables\Flashlight\Flashlight.cs" />
     <Compile Include="Startup\EventArgs\BoolEventsArgs.cs" />
     <Compile Include="Startup\Hooks\QuickMenuHooks.cs" />
-    <Compile Include="Startup\Hooks\PhotonOnEventHook.cs" />
     <Compile Include="Streamer\StreamerNotifier.cs" />
     <Compile Include="Streamer\Streamers.cs" />
     <Compile Include="Streamer\StreamerTags.cs" />
