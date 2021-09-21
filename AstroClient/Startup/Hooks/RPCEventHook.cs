@@ -39,6 +39,18 @@
             MutedYouPlayers.Clear();
         }
 
+        public override void OnPlayerLeft(VRC.Player player)
+        {
+            if (BlockedYouPlayers.Contains(player))
+            {
+                BlockedYouPlayers.Remove(player);
+            }
+            if (MutedYouPlayers.Contains(player))
+            {
+                MutedYouPlayers.Remove(player);
+            }
+        }
+
 
         public static List<VRC.Player> BlockedYouPlayers { get; private set; } = new List<VRC.Player>();
 
@@ -211,6 +223,8 @@
                                             Event_OnPlayerUnmutedYou.SafetyRaise(new VRCPlayerEventArgs(player));
                                             PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unmuted You");
                                         }
+
+                                        return !Blocked;
                                     }
                                     else
                                     {
