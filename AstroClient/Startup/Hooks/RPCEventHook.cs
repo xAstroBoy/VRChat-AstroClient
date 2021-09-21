@@ -33,33 +33,6 @@
 
         #endregion OnEvent Events
 
-        #region PlayerModerations
-        public override void OnRoomLeft()
-        {
-            BlockedYouPlayers.Clear();
-            MutedYouPlayers.Clear();
-        }
-
-        public override void OnPhotonLeft(Player player)
-        {
-            var userID = player.GetUserID();
-            if (BlockedYouPlayers.Contains(userID))
-            {
-                BlockedYouPlayers.Remove(userID);
-            }
-            if (MutedYouPlayers.Contains(userID))
-            {
-                MutedYouPlayers.Remove(userID);
-            }
-        }
-
-
-        public static List<string> BlockedYouPlayers { get; private set; } = new List<string>();
-
-        public static List<string> MutedYouPlayers { get; private set; } = new List<string>();
-
-        #endregion PlayerModerations
-
         public static event System.EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
 
         //public static
@@ -98,7 +71,7 @@
         {
             try
             {
-                if(__0 == null && __0.sender != null)
+                if (__0 == null && __0.sender != null)
                 {
                     return true; // discard
                 }
@@ -133,23 +106,18 @@
                         break;
 
                     case 6:
-                        if(__0.customData == null)
+                        if (__0.customData == null)
                         {
                             break;
                         }
                         object obj = Serialization.FromIL2CPPToManaged<object>(__0.customData);
-
-                        if(obj == null)
-                        {
-                            break;
-                        }
                         switch (obj.ToString())
                         {
                             case "System.Byte[]":
                                 break;
 
                             default:
-                                line.Append("Invaid Event: Possibly a bad actor! ");
+                                line.Append("Invalid Event: Possibly a bad actor! ");
                                 block = true;
                                 __0.Reset();
                                 break;
@@ -167,7 +135,7 @@
                         var parsedData = (rawData as Dictionary<byte, object>);
                         var infoData = parsedData[245] as Dictionary<byte, object>;
                         int eventType = int.Parse(infoData[0].ToString());
-                        string userID = photon.GetUserID();                        
+                        string userID = photon.GetUserID();
                         switch (eventType)
                         {
                             case 21: // 10 blocked, 11 muted
@@ -189,39 +157,19 @@
 
                                         if (Blocked)
                                         {
-                                            if (!BlockedYouPlayers.Contains(userID))
-                                            {
-                                                BlockedYouPlayers.Add(userID);
-                                                Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
-                                                PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Blocked You");
-                                            }
+                                            Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
                                         }
                                         else
                                         {
-                                            if (BlockedYouPlayers.Contains(userID))
-                                            {
-                                                BlockedYouPlayers.Remove(userID);
-                                                Event_OnPlayerUnblockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
-                                                PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unblocked You");
-                                            }
+                                            Event_OnPlayerUnblockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
                                         }
                                         if (Muted)
                                         {
-                                            if (!MutedYouPlayers.Contains(userID))
-                                            {
-                                                MutedYouPlayers.Add(userID);
-                                                Event_OnPlayerMutedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
-                                                PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Muted You");
-                                            }
+                                            Event_OnPlayerMutedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
                                         }
                                         else
                                         {
-                                            if (MutedYouPlayers.Contains(userID))
-                                            {
-                                                MutedYouPlayers.Remove(userID);
-                                                Event_OnPlayerUnmutedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
-                                                PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unmuted You");
-                                            }
+                                            Event_OnPlayerUnmutedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
                                         }
 
                                         return !Blocked;
@@ -246,14 +194,7 @@
 
                                                 if (photon != null)
                                                 {
-                                                    ModConsole.DebugLog($"INFO : UserID {userID} ");
-                                                    if (!BlockedYouPlayers.Contains(userID))
-                                                    {
-                                                        BlockedYouPlayers.Add(userID);
-                                                        Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
-                                                        line.Append($"{BlockPlayer.GetDisplayName()} has you blocked!");
-                                                        PopupUtils.QueHudMessage($"{BlockPlayer.GetDisplayName()} has you blocked!");
-                                                    }
+                                                    Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(photon));
                                                     block = true;
                                                 }
                                             }
@@ -263,7 +204,10 @@
                                 break;
                         }
                         log = true;
-                        PopupUtils.QueHudMessage($"Moderation Event: {eventType}");
+                        if (ConfigManager.General.LogEvents)
+                        {
+                            PopupUtils.QueHudMessage($"Moderation Event: {eventType}");
+                        }
                         break;
 
                     case 203: // Destroy
@@ -274,8 +218,10 @@
                     case 210:
                         return false;
                         break;
+
                     case 223: // This fired with what looked like base64 png data when I uploaded a VRC+ avatar
                         break;
+
                     case 253: // I think this is avatar switching related
                         break;
 
@@ -296,6 +242,7 @@
                         line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented)}");
                         ModConsole.Log($"{blockText}{prefix.ToString()}{line.ToString()}");
                     }
+                    line.Clear();
                 }
 
                 if (block)

@@ -96,29 +96,6 @@
             //ModConsole.Log($"[API] {e.Data}");
         }
 
-        public override void OnPlayerBlockedYou(Photon.Realtime.Player player)
-        {
-            ModConsole.Log($"{player.GetDisplayName()} blocked you!");
-            PopupUtils.QueHudMessage($"{player.GetDisplayName()} blocked you!");
-        }
-
-        public override void OnPlayerUnblockedYou(Photon.Realtime.Player player)
-        {
-            ModConsole.Log($"{player.GetDisplayName()} unblocked you!");
-            PopupUtils.QueHudMessage($"{player.GetDisplayName()} unblocked you!");
-        }
-
-        public override void OnPlayerMutedYou(Photon.Realtime.Player player)
-        {
-            ModConsole.Log($"{player.GetDisplayName()} muted you!");
-            PopupUtils.QueHudMessage($"{player.GetDisplayName()} muted you!");
-        }
-
-        public override void OnPlayerUnmutedYou(Photon.Realtime.Player player)
-        {
-            ModConsole.Log($"{player.GetDisplayName()} unmuted you!");
-            PopupUtils.QueHudMessage($"{player.GetDisplayName()} unmuted you!");
-        }
 
         private static void OnOpened(object sender, EventArgs e)
         {

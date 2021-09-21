@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Components
 {
+    using AstroClient.Moderation;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
@@ -220,7 +221,7 @@
         {
             if (HighLightOptions != null && AssignedPlayer != null && AssignedPlayer.GetAPIUser() != null)
             {
-                if (RPCEventHook.BlockedYouPlayers.Contains(AssignedPlayer.GetUserID()))
+                if (PhotonModerationHandler.BlockedYouPlayers.Contains(AssignedPlayer.GetUserID()))
                 {
                     if (HighLightOptions.highlightColor != BlockedColor)
                     {
