@@ -60,16 +60,18 @@
 
         private static bool OnEvent(EventData __0)
         {
-            object data = MiscUtils_Old.Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
-            var code = __0.Code;
-            var player = Utils.PlayerManager.GetPlayerID(__0.Sender);
-            var photon = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.Sender);
-            bool log = false;
-            bool block = false;
+            try
+            {
+                object data = MiscUtils_Old.Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
+                var code = __0.Code;
+                var player = Utils.PlayerManager.GetPlayerID(__0.sender);
+                var photon = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
+                bool log = false;
+                bool block = false;
 
-            StringBuilder line = new StringBuilder();
-            StringBuilder prefix = new StringBuilder();
-            prefix.Append($"[Event ({code})] ");
+                StringBuilder line = new StringBuilder();
+                StringBuilder prefix = new StringBuilder();
+                prefix.Append($"[Event ({code})] ");
 
             line.Append($"from: ({__0.Sender}) ");
             if (WorldUtils.IsInWorld && player != null)
@@ -85,26 +87,26 @@
                 line.Append($"'NULL' ");
             }
 
-            switch (code)
-            {
-                case 1:// Voice Data
-                    // WIP Parrot Mode
-                    break;
-                case 2:
-                    string kickMessage = (data as Dictionary<byte, object>)[245].ToString();
-                    break;
-                case 6:
-                    object obj = Serialization.FromIL2CPPToManaged<object>(__0.customData);
+                switch (code)
+                {
+                    case 1:// Voice Data
+                           // WIP Parrot Mode
+                        break;
+                    case 2:
+                        string kickMessage = (data as Dictionary<byte, object>)[245].ToString();
+                        break;
+                    case 6:
+                        object obj = Serialization.FromIL2CPPToManaged<object>(__0.customData);
 
-                    switch (obj.ToString())
-                    {
-                        case "System.Byte[]":
-                            break;
-                        default:
-                            line.Append("Invaid Event: Possibly a bad actor! ");
-                            block = true;
-                            __0.Reset();
-                            break;
+                        switch (obj.ToString())
+                        {
+                            case "System.Byte[]":
+                                break;
+                            default:
+                                line.Append("Invaid Event: Possibly a bad actor! ");
+                                block = true;
+                                __0.Reset();
+                                break;
 
                     }
                     break;
@@ -172,20 +174,27 @@
                     break;
             }
 
-            string blockText = string.Empty;
-            if (block)
-            {
-                blockText = "[BLOCKED] ";
-            }
-            if (log && ConfigManager.General.LogEvents || block)
-            {
-                line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented)}");
-                ModConsole.Log($"{blockText}{prefix.ToString()}{line.ToString()}");
-            }
+                string blockText = string.Empty;
+                if (block)
+                {
+                    blockText = "[BLOCKED] ";
+                }
+                if (log && ConfigManager.General.LogEvents || block)
+                {
+                    line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented)}");
+                    ModConsole.Log($"{blockText}{prefix.ToString()}{line.ToString()}");
+                }
 
-            if (block)
+                if (block)
+                {
+                    return false;
+                }
+            }
+            catch (System.Exception e)
             {
-                return false;
+                ModConsole.DebugError("Error in Photon OnEvent : ");
+                ModConsole.DebugErrorExc(e);
+                return true;
             }
 
             return true;
