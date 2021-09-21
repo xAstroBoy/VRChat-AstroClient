@@ -15,6 +15,7 @@
     using System.Linq;
     using System.Reflection;
     using System.Text;
+    using UnhollowerBaseLib;
     using UnityEngine;
     using VRC;
     using VRC.Core;
@@ -58,7 +59,7 @@
             }
         }
 
-        private static bool OnEvent(EventData __0)
+        private static bool OnEvent(ref EventData __0)
         {
             try
             {
@@ -115,58 +116,102 @@
                 case 7: // I believe this is motion, key 245 appears to be base64
                     break;
                 case 33: // Moderations
+
+                        //var newParameters = new Dictionary<string, object>[254];
+                        //newParameters[245] = new Dictionary<string, object>();
+                        //newParameters[254] = new Dictionary<string, object>();
+
+                        //var converted = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
+                        //var converted1 = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
+                        //var converted2 = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
+                        //converted[245] = converted1;
+                        //converted[254] = converted2;
+
+
+                        //__0 = new EventData()
+                        //{
+                        //    Code = code,
+                        //    sender = __0.sender,
+                        //    customData = __0.customData,
+                        //    Parameters = converted,
+                        //    CustomDataKey = __0.CustomDataKey,
+                        //    SenderKey = __0.SenderKey,
+                        //};
+
                     object rawData = Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
                     var parsedData = (rawData as Dictionary<byte, object>);
                     var infoData = parsedData[245] as Dictionary<byte, object>;
                     int eventType = int.Parse(infoData[0].ToString());
 
-                    switch(eventType)
-                    {
-                        case 21: // 10 blockd, 11 muted
-                            if (infoData[10] != null && infoData[11] != null)
-                            {
-                                if (infoData.ContainsKey(1))
-                                {
+                        switch (eventType)
+                        {
+                            case 21: // 10 blockd, 11 muted
 
-                                }
-                                else
+                                if (infoData[10] != null && infoData[11] != null)
                                 {
-                                    // It sends the Arrays when the Block and Mute Event happen fast.
-                                    // if 10 is an Array it has all the PhotonIds that Blocked You
-                                    // if 11 is an Array it has all the PhotonIds that Muted You
-                                    var BlockedList = infoData[10] as int[];
-                                    var MuteList = infoData[11] as int[];
-
-                                    if (BlockedList.Count() == 0)
+                                    // If Key 1 exists then this is a direct moderation
+                                    if (infoData.ContainsKey(1))
                                     {
-                                        foreach (var blockid in BlockedList)
-                                        {
-                                            var BlockPlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(blockid);
+                                        int SenderID = int.Parse(infoData[1].ToString());
+                                        //var VRCPlayer = Utils.PlayerManager.GetPlayerID(SenderID);
 
-                                            if (photon != null)
+                                        var PhotonPlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(SenderID);
+                                        string SenderName = "?";
+                                        if (PhotonPlayer != null) SenderName = PhotonPlayer.GetDisplayName();
+
+                                        bool Blocked = bool.Parse(infoData[10].ToString());
+                                        bool Muted = bool.Parse(infoData[11].ToString());
+                                        if (Blocked)
+                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Blocked You");
+                                        else
+                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unblocked You");
+                                        if (Muted)
+                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Muted You");
+                                        else
+                                            PopupUtils.QueHudMessage($"[Moderation] '{SenderName}' Unmuted You");
+
+                                        return !Blocked;
+                                    }
+                                    else
+                                    {
+                                        // It sends the Arrays when the Block and Mute Event happen fast.
+                                        // if 10 is an Array it has all the PhotonIds that Blocked You
+                                        // if 11 is an Array it has all the PhotonIds that Muted You
+                                        var BlockedList = infoData[10] as int[];
+                                        var MuteList = infoData[11] as int[];
+
+                                        if (BlockedList.Count() == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            for (int i = 0; i < BlockedList.Length; i++)
                                             {
-                                                if (BlockPlayer.GetUserID().Equals(photon.GetUserID()))
+                                                int blockid = BlockedList[i];
+                                                var BlockPlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(blockid);
+
+                                                if (photon != null)
                                                 {
-                                                    PopupUtils.QueHudMessage($"{BlockPlayer.GetDisplayName()} blocked you!");
-                                                    return false;
+                                                    line.Append($"{BlockPlayer.GetDisplayName()} has you blocked!");
+                                                    PopupUtils.QueHudMessage($"{BlockPlayer.GetDisplayName()} has you blocked!");
+                                                    block = true;
                                                 }
                                             }
                                         }
                                     }
-                                    else
-                                    {
-
-                                    }
                                 }
-                            }
-                            break;
-                    }
+                                break;
+                        }
                     log = true;
                     PopupUtils.QueHudMessage($"Moderation Event: {eventType}");
                     break;
                 case 203: // Destroy
                     prefix.Append("Destroy: ");
                     log = true;
+                    break;
+                case 210:
+                    return false;
                     break;
                 case 253: // I think this is avatar switching related
                     break;
