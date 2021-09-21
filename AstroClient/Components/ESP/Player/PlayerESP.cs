@@ -220,12 +220,13 @@
         {
             if (HighLightOptions != null && AssignedPlayer != null && AssignedPlayer.GetAPIUser() != null)
             {
-                if (PhotonOnEventHook.BlockedYouPlayers.Contains(AssignedPlayer))
+                if (RPCEventHook.BlockedYouPlayers.Contains(AssignedPlayer))
                 {
                     if (HighLightOptions.highlightColor != BlockedColor)
                     {
                         HighLightOptions.highlightColor = BlockedColor;
                     }
+                    return;
                 }
                 else if (AssignedPlayer.GetAPIUser().GetIsFriend())
                 {
@@ -233,6 +234,7 @@
                     {
                         HighLightOptions.highlightColor = FriendColor;
                     }
+                    return;
                 }
                 else
                 {
@@ -240,6 +242,7 @@
                     {
                         HighLightOptions.highlightColor = ESPColor;
                     }
+                    return;
                 }
             }
         }
