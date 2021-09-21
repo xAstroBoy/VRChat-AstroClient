@@ -163,37 +163,11 @@
                         break;
 
                     case 33: // Moderations
-
-                        if (__0.Parameters == null)
-                        {
-                            break;
-                        }
                         object rawData = Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
-                        if(rawData == null)
-                        {
-                            break;
-                        }
                         var parsedData = (rawData as Dictionary<byte, object>);
-                        if(parsedData == null)
-                        {
-                            break;
-                        }
                         var infoData = parsedData[245] as Dictionary<byte, object>;
-                        if(infoData == null)
-                        {
-                            break;
-                        }
                         int eventType = int.Parse(infoData[0].ToString());
-                        if(eventType == null)
-                        {
-                            break;
-                        }
-                        string userID = photon.GetUserID();
-                        if(userID == null)
-                        {
-                            break;
-                        }
-                        
+                        string userID = photon.GetUserID();                        
                         switch (eventType)
                         {
                             case 21: // 10 blocked, 11 muted
