@@ -256,24 +256,25 @@
 
         private static bool OnRPCEvent(ref VRC.Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
         {
-            if (__1 == null) return false;
-
+            
             bool log = ConfigManager.General.LogRPCEvents;
             bool blocked = Bools.BlockRPC;
 
-            if (__1.Name.Length >= 100 || __1.ParameterString.Length >= 100)
-            {
-                if (__0 != null)
-                {
-                    ModConsole.Log($"Blocked Malicious RPC: {__0.DisplayName()}");
-                }
-                else
-                {
-                    ModConsole.Log($"Blocked Malicious RPC: NULL");
-                }
-                blocked = true;
-                log = true;
-            }
+
+            // I believe it breaks Everything in sight.
+            //if (__1.Name.Length >= 100 || __1.ParameterString.Length >= 100)
+            //{
+            //    if (__0 != null)
+            //    {
+            //        ModConsole.Log($"Blocked Malicious RPC: {__0.DisplayName()}");
+            //    }
+            //    else
+            //    {
+            //        ModConsole.Log($"Blocked Malicious RPC: NULL");
+            //    }
+            //    blocked = true;
+            //    log = true;
+            //}
 
             string actionstring = string.Empty;
             string actiontext;
