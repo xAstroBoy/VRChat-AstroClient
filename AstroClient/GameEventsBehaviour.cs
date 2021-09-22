@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
     using AstroClient.Cheetos;
+    using AstroClient.Moderation;
     using AstroClient.Startup.Hooks;
     using AstroClient.Streamer;
     using AstroClientCore.Events;
@@ -50,10 +51,10 @@
             StreamerProtector.Event_OnStreamerJoined += Internal_OnStreamerJoined;
             StreamerProtector.Event_OnStreamerLeft += Internal_OnStreamerLeft;
 
-            RPCEventHook.Event_OnPlayerBlockedYou += Internal_OnPlayerBlockedYou;
-            RPCEventHook.Event_OnPlayerUnblockedYou += Internal_OnPlayerUnblockedYou;
-            RPCEventHook.Event_OnPlayerMutedYou += Internal_OnPlayerMutedYou;
-            RPCEventHook.Event_OnPlayerUnmutedYou += Internal_OnPlayerUnmutedYou;
+            PhotonModerationHandler.Event_OnPlayerBlockedYou += Internal_OnPlayerBlockedYou;
+            PhotonModerationHandler.Event_OnPlayerUnblockedYou += Internal_OnPlayerUnblockedYou;
+            PhotonModerationHandler.Event_OnPlayerMutedYou += Internal_OnPlayerMutedYou;
+            PhotonModerationHandler.Event_OnPlayerUnmutedYou += Internal_OnPlayerUnmutedYou;
 
         }
 

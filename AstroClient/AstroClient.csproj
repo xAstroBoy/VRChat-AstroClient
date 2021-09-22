@@ -149,6 +149,7 @@
     <Compile Include="Spawnables\Flashlight\Flashlight.cs" />
     <Compile Include="Startup\EventArgs\BoolEventsArgs.cs" />
     <Compile Include="Startup\Hooks\QuickMenuHooks.cs" />
+    <Compile Include="Startup\Hooks\RPCEventHook.cs" />
     <Compile Include="Streamer\StreamerNotifier.cs" />
     <Compile Include="Streamer\Streamers.cs" />
     <Compile Include="Streamer\StreamerTags.cs" />
@@ -324,7 +325,7 @@
     <Compile Include="Startup\Hooks\AvatarManagerHook.cs" />
     <Compile Include="Startup\Hooks\NetworkManagerHooks.cs" />
     <Compile Include="Startup\Hooks\OnWorldRevealHook.cs" />
-    <Compile Include="Startup\Hooks\RPCEventHook.cs" />
+    <Compile Include="Startup\Hooks\Photon_OnEvent_Hook.cs" />
     <Compile Include="Startup\Hooks\SpawnEmojiRPCHook.cs" />
     <Compile Include="Startup\Hooks\TriggerEventHook.cs" />
     <Compile Include="Startup\WorldJoinMsg.cs" />
