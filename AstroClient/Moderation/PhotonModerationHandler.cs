@@ -30,85 +30,94 @@
 
         public static bool Handle_Photon_ModerationEvent(EventData Event)
         {
-            if (Event == null)
+            try
             {
-                return true;
-            }
-            object rawData = Serialization.FromIL2CPPToManaged<object>(Event.Parameters);
-            var code = Event.Code;
-            var parsedData = (rawData as Dictionary<byte, object>);
-            var infoData = parsedData[245] as Dictionary<byte, object>;
-            int eventType = int.Parse(infoData[0].ToString());
-            var photon = Utils.LoadBalancingPeer.GetPhotonPlayer(Event.sender);
-            var sender = Event.sender;
-            switch (eventType)
-            {
-                case 21: // 10 blocked, 11 muted
+                if (Event == null)
+                {
+                    return true;
+                }
+                object rawData = Serialization.FromIL2CPPToManaged<object>(Event.Parameters);
+                var code = Event.Code;
+                var parsedData = (rawData as Dictionary<byte, object>);
+                var infoData = parsedData[245] as Dictionary<byte, object>;
+                int eventType = int.Parse(infoData[0].ToString());
+                var photon = Utils.LoadBalancingPeer.GetPhotonPlayer(Event.sender);
+                var sender = Event.sender;
+                switch (eventType)
+                {
+                    case 21: // 10 blocked, 11 muted
 
-                    if (infoData[10] != null && infoData[11] != null)
-                    {
-                        // If Key 1 exists then this is a direct moderation
-                        if (infoData.ContainsKey(1))
+                        if (infoData[10] != null && infoData[11] != null)
                         {
-                            int SenderID = int.Parse(infoData[1].ToString());
-                            var PhotonPlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(SenderID);
-                            bool Blocked = bool.Parse(infoData[10].ToString());
-                            bool Muted = bool.Parse(infoData[11].ToString());
-                            if (PhotonPlayer != null)
+                            // If Key 1 exists then this is a direct moderation
+                            if (infoData.ContainsKey(1))
                             {
+                                int SenderID = int.Parse(infoData[1].ToString());
+                                var PhotonPlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(SenderID);
+                                bool Blocked = bool.Parse(infoData[10].ToString());
+                                bool Muted = bool.Parse(infoData[11].ToString());
+                                if (PhotonPlayer != null)
+                                {
 
-                                if (Blocked)
-                                {
-                                    OnPlayerBlockedYou_Invoker(PhotonPlayer);
-                                }
-                                else
-                                {
-                                    OnPlayerUnblockedYou_Invoker(PhotonPlayer);
-                                }
-                                if (Muted)
-                                {
-                                    OnPlayerMutedYou_Invoker(PhotonPlayer);
-                                }
-                                else
-                                {
-                                    OnPlayerUnmutedYou_Invoker(PhotonPlayer);
-                                }
-
-                                if (Blocked) // AntiBlock.
-                                {
-                                    ModerationEventNotifier(Event, code, PhotonPlayer, SenderID, eventType, true);
-                                    return false;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            // It sends the Arrays when the Block and Mute Event happen fast.
-                            // if 10 is an Array it has all the PhotonIds that Blocked You
-                            // if 11 is an Array it has all the PhotonIds that Muted You
-                            var BlockedList = infoData[10] as int[];
-                            var MuteList = infoData[11] as int[];
-
-                            if (BlockedList.Count() != 0)
-                            {
-                                for (int i = 0; i < BlockedList.Length; i++)
-                                {
-                                    int blockid = BlockedList[i];
-                                    var BlockPlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(blockid);
-
-                                    if (BlockPlayer != null)
+                                    if (Blocked)
                                     {
-                                        OnPlayerBlockedYou_Invoker(BlockPlayer);
+                                        OnPlayerBlockedYou_Invoker(PhotonPlayer);
+                                    }
+                                    else
+                                    {
+                                        OnPlayerUnblockedYou_Invoker(PhotonPlayer);
+                                    }
+                                    if (Muted)
+                                    {
+                                        OnPlayerMutedYou_Invoker(PhotonPlayer);
+                                    }
+                                    else
+                                    {
+                                        OnPlayerUnmutedYou_Invoker(PhotonPlayer);
+                                    }
+
+                                    if (Blocked) // AntiBlock.
+                                    {
+                                        ModerationEventNotifier(Event, code, PhotonPlayer, SenderID, eventType, true);
                                         return false;
                                     }
                                 }
                             }
+                            else
+                            {
+                                // It sends the Arrays when the Block and Mute Event happen fast.
+                                // if 10 is an Array it has all the PhotonIds that Blocked You
+                                // if 11 is an Array it has all the PhotonIds that Muted You
+                                var BlockedList = infoData[10] as int[];
+                                var MuteList = infoData[11] as int[];
+
+                                if (BlockedList.Count() != 0)
+                                {
+                                    for (int i = 0; i < BlockedList.Length; i++)
+                                    {
+                                        int blockid = BlockedList[i];
+                                        var BlockPlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(blockid);
+
+                                        if (BlockPlayer != null)
+                                        {
+                                            OnPlayerBlockedYou_Invoker(BlockPlayer);
+                                            return false;
+                                        }
+                                    }
+                                }
+                            }
                         }
-                    }
-                    break;
+                        break;
+                }
+                ModerationEventNotifier(Event, code, photon, sender, eventType, true);
+                return true;
             }
-            ModerationEventNotifier(Event, code, photon, sender, eventType, true);
-            return true;
+            catch (System.Exception e)
+            {
+                ModConsole.DebugError("Error in Photon Moderation EventHandler : ");
+                ModConsole.DebugErrorExc(e);
+                return true;
+            }
         }
 
 
