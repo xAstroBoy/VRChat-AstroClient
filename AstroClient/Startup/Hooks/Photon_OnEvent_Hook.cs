@@ -58,9 +58,10 @@
                 {
                     return true; // discard
                 }
-                object data = MiscUtils_Old.Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
+                object RawData = Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
                 var code = __0.Code;
-                var photon = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
+                var PhotonSender = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
+                var PhotonID = __0.sender;
                 bool log = false;
                 bool block = false;
 
@@ -69,9 +70,9 @@
                 prefix.Append($"[Event ({code})] ");
 
                 line.Append($"from: ({__0.Sender}) ");
-                if (WorldUtils.IsInWorld && photon != null)
+                if (WorldUtils.IsInWorld && PhotonSender != null)
                 {
-                    line.Append($"'{photon.GetDisplayName()}'");
+                    line.Append($"'{PhotonSender.GetDisplayName()}'");
                 }
                 else
                 {
@@ -87,7 +88,7 @@
                         break;
 
                     case 2: // Kick Message?
-                        string kickMessage = (data as Dictionary<byte, object>)[245].ToString();
+                        string kickMessage = (RawData as Dictionary<byte, object>)[245].ToString();
                         break;
 
                     case 6:
@@ -97,7 +98,7 @@
                         break;
 
                     case 33: // Moderations
-                        return PhotonModerationHandler.Handle_Photon_ModerationEvent(__0);
+                        return PhotonModerationHandler.Handle_Photon_ModerationEvent(RawData, code, PhotonSender, PhotonID);
                         break;
 
                     case 203: // Destroy
@@ -125,7 +126,7 @@
                     blockText = "[BLOCKED] ";
                     if (log && ConfigManager.General.LogEvents)
                     {
-                        line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(data, Newtonsoft.Json.Formatting.Indented)}");
+                        line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(RawData, Newtonsoft.Json.Formatting.Indented)}");
                         ModConsole.Log($"{blockText}{prefix.ToString()}{line.ToString()}");
                     }
                     line.Clear();

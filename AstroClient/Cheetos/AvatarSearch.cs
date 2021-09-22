@@ -8,6 +8,7 @@
     using AstroLibrary.Enums;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
+    using AstroLibrary.Utility;
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
     using DayClientML2.Utility;
@@ -45,9 +46,9 @@
 
         private static VRCList worldList;
 
-        private static Stopwatch stopwatch;
+        private static Stopwatch stopwatch = new Stopwatch();
 
-        private static Stopwatch stopwatch2;
+        private static Stopwatch stopwatch2 = new Stopwatch();
 
         private static MenuButton searchTypeButton;
 
@@ -118,7 +119,9 @@
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
+            MiscUtils.DelayFunction(0.5f, () => { 
             PedestalDump();
+            });
         }
 
         public static void OnSelect()
@@ -143,7 +146,6 @@
         {
             if (!IsSearching)
             {
-                stopwatch = new Stopwatch();
                 stopwatch.Start();
 
                 lastSearchQuery = query;
@@ -175,49 +177,49 @@
 
         public static void PedestalDump()
         {
-            stopwatch2 = new Stopwatch();
             stopwatch2.Start();
 
             // Refresh UI
             worldAvatars.Clear();
 
             var avatars = WorldUtils_Old.GetAvatarsFromPedestals();
-
-            if (avatars.AnyAndNotNull())
+            if (avatars != null)
             {
-                for (int i = 0; i < avatars.Count; i++)
+                if (avatars.AnyAndNotNull())
                 {
-                    ApiAvatar avatar = avatars[i];
-                    worldAvatars.Add(avatar);
-
-                    if (avatar != null)
+                    for (int i = 0; i < avatars.Count; i++)
                     {
-                        var avatarData = new AvatarData()
+                        ApiAvatar avatar = avatars[i];
+                        worldAvatars.Add(avatar);
+
+                        if (avatar != null)
                         {
-                            AssetURL = avatar.assetUrl,
-                            AuthorID = avatar.authorId,
-                            AuthorName = avatar.authorName,
-                            Description = avatar.description,
-                            AvatarID = avatar.id,
-                            ImageURL = avatar.imageUrl,
-                            ThumbnailURL = avatar.thumbnailImageUrl,
-                            Name = avatar.name,
-                            ReleaseStatus = avatar.releaseStatus,
-                            Version = avatar.version,
-                            SupportedPlatforms = avatar.supportedPlatforms.ToString()
-                        };
-                        if (AstroNetworkClient.Client.IsConnected)
-                        {
-                            if (avatarData != null)
+                            var avatarData = new AvatarData()
                             {
-                                var json = JsonConvert.SerializeObject(avatarData);
-                                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
+                                AssetURL = avatar.assetUrl,
+                                AuthorID = avatar.authorId,
+                                AuthorName = avatar.authorName,
+                                Description = avatar.description,
+                                AvatarID = avatar.id,
+                                ImageURL = avatar.imageUrl,
+                                ThumbnailURL = avatar.thumbnailImageUrl,
+                                Name = avatar.name,
+                                ReleaseStatus = avatar.releaseStatus,
+                                Version = avatar.version,
+                                SupportedPlatforms = avatar.supportedPlatforms.ToString()
+                            };
+                            if (AstroNetworkClient.Client.IsConnected)
+                            {
+                                if (avatarData != null)
+                                {
+                                    var json = JsonConvert.SerializeObject(avatarData);
+                                    AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
+                                }
                             }
                         }
                     }
                 }
             }
-
             DumpDone();
         }
 

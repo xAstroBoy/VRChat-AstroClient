@@ -28,21 +28,17 @@
         public static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnmutedYou;
 
 
-        public static bool Handle_Photon_ModerationEvent(EventData Event)
+        public static bool Handle_Photon_ModerationEvent(object RawData, byte code, Player PhotonSender, int PhotonID)
         {
             try
             {
-                if (Event == null)
+                if (RawData == null)
                 {
                     return true;
                 }
-                object rawData = Serialization.FromIL2CPPToManaged<object>(Event.Parameters);
-                var code = Event.Code;
-                var parsedData = (rawData as Dictionary<byte, object>);
+                var parsedData = (RawData as Dictionary<byte, object>);
                 var infoData = parsedData[245] as Dictionary<byte, object>;
                 int eventType = int.Parse(infoData[0].ToString());
-                var photon = Utils.LoadBalancingPeer.GetPhotonPlayer(Event.sender);
-                var sender = Event.sender;
                 switch (eventType)
                 {
                     case 21: // 10 blocked, 11 muted
@@ -78,7 +74,7 @@
 
                                     if (Blocked) // AntiBlock.
                                     {
-                                        ModerationEventNotifier(Event, code, PhotonPlayer, SenderID, eventType, true);
+                                        ModerationEventNotifier(RawData, code, PhotonPlayer, SenderID, eventType, true);
                                         return false;
                                     }
                                 }
@@ -109,7 +105,7 @@
                         }
                         break;
                 }
-                ModerationEventNotifier(Event, code, photon, sender, eventType, true);
+                ModerationEventNotifier(RawData, code, PhotonSender, PhotonID, eventType, true);
                 return true;
             }
             catch (System.Exception e)
@@ -161,11 +157,9 @@
         private static void OnPlayerBlockedYou_Invoker(Photon.Realtime.Player player)
         {
             string userID = player.GetUserID();
-            if (!BlockedYouPlayers.Contains(userID))
+            if (!BlockedYouPlayers.Contains(player))
             {
-                BlockedYouPlayers.Add(userID);
-                ModConsole.Log($"{player.GetDisplayName()} blocked you!");
-                PopupUtils.QueHudMessage($"{player.GetDisplayName()} blocked you!");
+                BlockedYouPlayers.Add(player);
                 Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
             }
         }
@@ -173,11 +167,9 @@
         private static void OnPlayerUnblockedYou_Invoker(Photon.Realtime.Player player)
         {
             string userID = player.GetUserID();
-            if (BlockedYouPlayers.Contains(userID))
+            if (BlockedYouPlayers.Contains(player))
             {
-                BlockedYouPlayers.Remove(userID);
-                ModConsole.Log($"{player.GetDisplayName()} unblocked you!");
-                PopupUtils.QueHudMessage($"{player.GetDisplayName()} unblocked you!");
+                BlockedYouPlayers.Remove(player);
                 Event_OnPlayerUnblockedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
             }
         }
@@ -186,11 +178,9 @@
         {
             string userID = player.GetUserID();
 
-            if (!MutedYouPlayers.Contains(userID))
+            if (!MutedYouPlayers.Contains(player))
             {
-                MutedYouPlayers.Add(userID);
-                ModConsole.Log($"{player.GetDisplayName()} muted you!");
-                PopupUtils.QueHudMessage($"{player.GetDisplayName()} muted you!");
+                MutedYouPlayers.Add(player);
                 Event_OnPlayerMutedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
             }
 
@@ -198,12 +188,9 @@
 
         private static void OnPlayerUnmutedYou_Invoker(Photon.Realtime.Player player)
         {
-            string userID = player.GetUserID();
-            if (MutedYouPlayers.Contains(userID))
+            if (MutedYouPlayers.Contains(player))
             {
-                MutedYouPlayers.Remove(userID);
-                ModConsole.Log($"{player.GetDisplayName()} unmuted you!");
-                PopupUtils.QueHudMessage($"{player.GetDisplayName()} unmuted you!");
+                MutedYouPlayers.Remove(player);
                 Event_OnPlayerUnmutedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
             }
 
@@ -218,21 +205,20 @@
 
         public override void OnPhotonLeft(Player player)
         {
-            var userID = player.GetUserID();
-            if (BlockedYouPlayers.Contains(userID))
+            if (BlockedYouPlayers.Contains(player))
             {
-                BlockedYouPlayers.Remove(userID);
+                BlockedYouPlayers.Remove(player);
             }
-            if (MutedYouPlayers.Contains(userID))
+            if (MutedYouPlayers.Contains(player))
             {
-                MutedYouPlayers.Remove(userID);
+                MutedYouPlayers.Remove(player);
             }
         }
 
 
-        public static List<string> BlockedYouPlayers { get; private set; } = new List<string>();
+        public static List<Player> BlockedYouPlayers { get; private set; } = new List<Player>();
 
-        public static List<string> MutedYouPlayers { get; private set; } = new List<string>();
+        public static List<Player> MutedYouPlayers { get; private set; } = new List<Player>();
 
         #endregion PlayerModerations
 

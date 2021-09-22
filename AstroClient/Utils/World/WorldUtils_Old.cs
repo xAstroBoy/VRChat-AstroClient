@@ -279,10 +279,14 @@
                 for (int i = 0; i < SDK_VRC_AvatarPedestrals.Count; i++)
                 {
                     VRC.SDKBase.VRC_AvatarPedestal pedestal = SDK_VRC_AvatarPedestrals[i];
-                    var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
-                    if (avatar != null)
+                    if (pedestal.blueprintId.IsNotNullOrEmptyOrWhiteSpace())
                     {
-                        AddAvatar(avatar);
+                        var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
+
+                        if (avatar != null)
+                        {
+                            AddAvatar(avatar);
+                        }
                     }
                 }
             }
@@ -292,10 +296,14 @@
                 for (int i = 0; i < VRC_AvatarPedestal.Count; i++)
                 {
                     VRCSDK2.VRC_AvatarPedestal pedestal = VRC_AvatarPedestal[i];
-                    var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
-                    if (avatar != null)
+                    if (pedestal.blueprintId.IsNotNullOrEmptyOrWhiteSpace())
                     {
-                        AddAvatar(avatar);
+                        var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
+
+                        if (avatar != null)
+                        {
+                            AddAvatar(avatar);
+                        }
                     }
                 }
             }
@@ -305,10 +313,15 @@
                 for (int i = 0; i < VRCAvatarPedestal.Count; i++)
                 {
                     VRCAvatarPedestal pedestal = VRCAvatarPedestal[i];
-                    var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
-                    if (avatar != null)
+
+                    if (pedestal.blueprintId.IsNotNullOrEmptyOrWhiteSpace())
                     {
-                        AddAvatar(avatar);
+                        var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
+
+                        if (avatar != null)
+                        {
+                            AddAvatar(avatar);
+                        }
                     }
                 }
             }

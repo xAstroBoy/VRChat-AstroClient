@@ -221,7 +221,7 @@
         {
             if (HighLightOptions != null && AssignedPlayer != null && AssignedPlayer.GetAPIUser() != null)
             {
-                if (PhotonModerationHandler.BlockedYouPlayers.Contains(AssignedPlayer.GetUserID()))
+                if (AssignedPlayer.GetAPIUser().HasBlockedYou())
                 {
                     if (HighLightOptions.highlightColor != BlockedColor)
                     {
