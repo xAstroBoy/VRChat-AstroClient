@@ -77,6 +77,7 @@
                                         ModerationEventNotifier(RawData, code, PhotonPlayer, SenderID, eventType, true);
                                         return false;
                                     }
+                                    return true;
                                 }
                             }
                             else
@@ -101,11 +102,12 @@
                                         }
                                     }
                                 }
+
                             }
                         }
                         break;
                 }
-                ModerationEventNotifier(RawData, code, PhotonSender, PhotonID, eventType, true);
+                ModerationEventNotifier(RawData, code, PhotonSender, PhotonID, eventType, false);
                 return true;
             }
             catch (System.Exception e)
@@ -114,6 +116,7 @@
                 ModConsole.DebugErrorExc(e);
                 return true;
             }
+            return true;
         }
 
 
@@ -156,7 +159,6 @@
 
         private static void OnPlayerBlockedYou_Invoker(Photon.Realtime.Player player)
         {
-            string userID = player.GetUserID();
             if (!BlockedYouPlayers.Contains(player))
             {
                 BlockedYouPlayers.Add(player);
@@ -166,7 +168,6 @@
 
         private static void OnPlayerUnblockedYou_Invoker(Photon.Realtime.Player player)
         {
-            string userID = player.GetUserID();
             if (BlockedYouPlayers.Contains(player))
             {
                 BlockedYouPlayers.Remove(player);
@@ -176,8 +177,6 @@
 
         private static void OnPlayerMutedYou_Invoker(Photon.Realtime.Player player)
         {
-            string userID = player.GetUserID();
-
             if (!MutedYouPlayers.Contains(player))
             {
                 MutedYouPlayers.Add(player);
