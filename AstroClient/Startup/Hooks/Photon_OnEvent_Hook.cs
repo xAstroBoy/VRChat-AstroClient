@@ -98,7 +98,14 @@
                         break;
 
                     case 33: // Moderations
-                        return PhotonModerationHandler.Handle_Photon_ModerationEvent(RawData, code, PhotonSender, PhotonID);
+                        var NeedToBlock = PhotonModerationHandler.Handle_Photon_ModerationEvent_NeedToBlock(RawData, code, PhotonSender, PhotonID);
+                        ModConsole.DebugLog($"ModerationManager returned : {NeedToBlock}");
+                        if(NeedToBlock)
+                        {
+                            block = true;
+                            return false;
+                            break;
+                        }
                         break;
 
                     case 203: // Destroy
