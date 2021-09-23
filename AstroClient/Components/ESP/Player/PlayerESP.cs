@@ -142,24 +142,19 @@
 
         public override void OnPlayerBlockedYou(Photon.Realtime.Player player)
         {
-            if (player.GetUserID() == AssignedPlayer.GetUserID())
+            if (!UseCustomColor)
             {
-                if (!UseCustomColor)
-                {
-                    SetPlayerDefaultESP();
-                }
+                SetPlayerDefaultESP();
             }
         }
 
         public override void OnPlayerUnblockedYou(Photon.Realtime.Player player)
         {
-            if (player.GetUserID() == AssignedPlayer.GetUserID())
+            if (!UseCustomColor)
             {
-                if (!UseCustomColor)
-                {
-                    SetPlayerDefaultESP();
-                }
+                SetPlayerDefaultESP();
             }
+
         }
 
 

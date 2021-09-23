@@ -5,104 +5,110 @@
     using UnhollowerBaseLib;
     using UnhollowerRuntimeLib;
 
-    public static class UdonConverter
+    public static class Il2cppObjectConverter
     {
         public static Il2CppSystem.Object Generate_Il2CPPObject(string[] item)
         {
             Il2CppStringArray array2 = new Il2CppStringArray(item);
             Il2CppSystem.Object boxed = new Il2CppSystem.Object(array2.Pointer);
-            return boxed ?? null;
+            return boxed ;
         }
 
         public static Il2CppSystem.Object Generate_Il2CPPObject(string item)
         {
             var ptr = IL2CPP.ManagedStringToIl2Cpp(item);
             Il2CppSystem.Object boxed = new Il2CppSystem.Object(ptr);
-            return boxed ?? null;
+            return boxed ;
         }
 
         public static Il2CppSystem.Object Generate_Il2CPPObject(uint item)
         {
             var converted = new Il2CppSystem.UInt32() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
-            return boxed ?? null;
+            return boxed ;
         }
+
 
         public static Il2CppSystem.Object Generate_Il2CPPObject(UInt16 item)
         {
             var converted = new Il2CppSystem.UInt16() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
-            return boxed ?? null;
+            return boxed ;
         }
 
         public static Il2CppSystem.Object Generate_Il2CPPObject(Double item)
         {
             var converted = new Il2CppSystem.Double() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
-            return boxed ?? null;
+            return boxed ;
         }
 
         public static Il2CppSystem.Object Generate_Il2CPPObject(int item)
         {
             var converted = new Il2CppSystem.Int32() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
-            return boxed ?? null;
+            return boxed ;
         }
+
+
 
         public static Il2CppSystem.Object Generate_Il2CPPObject(long item)
         {
             var converted = new Il2CppSystem.Int64() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
-            return boxed ?? null;
+            return boxed ;
         }
 
         public static Il2CppSystem.Object Generate_Il2CPPObject(char item)
         {
             var converted = new Il2CppSystem.Char() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
-            return boxed ?? null;
+            return boxed ;
         }
 
         public static Il2CppSystem.Object Generate_Il2CPPObject(float item)
         {
             var converted = new Il2CppSystem.Single() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
-            return boxed ?? null;
+            return boxed ;
         }
 
         public static Il2CppSystem.Object Generate_Il2CPPObject(bool item)
         {
             var converted = new Il2CppSystem.Boolean() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
-            return boxed ?? null;
+            return boxed;
         }
 
 
         public static Il2CppSystem.Object Generate_Il2CPPObject(UnityEngine.Color item)
         {
             var boxed = item.BoxIl2CppObject();
-            return boxed ?? null;
+            return boxed;
         }
 
         public static Il2CppSystem.Object Generate_Il2CPPObject(System.TimeSpan item)
         {
             var converted = new Il2CppSystem.TimeSpan() { _ticks = item.Ticks };
             var boxed = converted.BoxIl2CppObject();
-            return boxed ?? null;
+            return boxed;
         }
 
 
         public static Il2CppSystem.Object Generate_Il2CPPObject(UnityEngine.Vector3 item)
         {
             var boxed = item.BoxIl2CppObject();
-            return boxed ?? null;
+            return boxed ;
         }
 
         public static Il2CppSystem.Object Generate_Il2CPPObject(UnityEngine.Quaternion item)
         {
             var boxed = item.BoxIl2CppObject();
-            return boxed ?? null;
+            return boxed ;
         }
+
+
+
 
         public static Il2CppSystem.Object Generate_Il2CppObject_Unmanaged<T>(List<T> list) where T : unmanaged
         {
@@ -115,10 +121,7 @@
             var list = new Il2CppSystem.Collections.Generic.List<T>();
             foreach (var item in array)
             {
-                if (!list.Contains(item))
-                {
-                    list.Add(item);
-                }
+                list.Add(item);               
             }
 
             // Convert to Array.
@@ -126,6 +129,9 @@
             var arrayresult = list.ToArray();
             return new Il2CppSystem.Object(arrayresult.Pointer);
         }
+
+
+
 
         public static Il2CppSystem.Object Generate_Il2CPPObject_Il2cppObjectBase<T>(List<T> list) where T : Il2CppObjectBase
         {
@@ -153,7 +159,7 @@
         public static Il2CppSystem.Object Generate_Il2CPPObject_Il2cppObjectBase<T>(T item) where T : Il2CppObjectBase
         {
             var boxed = new Il2CppSystem.Object(IL2CPP.il2cpp_value_box(Il2CppClassPointerStore<T>.NativeClassPtr, item.Pointer));
-            return boxed ?? null;
+            return boxed ;
         }
 
         public static Il2CppSystem.Object Generate_Il2CppObject_Unmanaged<T>(T value) where T : unmanaged
