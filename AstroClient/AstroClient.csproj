@@ -156,7 +156,7 @@
     <Compile Include="Streamer\Streamers.cs" />
     <Compile Include="Streamer\StreamerTags.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapUnboxerUtils.cs" />
-    <Compile Include="Udon\UdonEditor\Il2cppObjectConverter.cs" />
+    <Compile Include="Udon\UdonEditor\UdonConverter.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapParser.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapEditor.cs" />
     <Compile Include="Udon\UdonEditor\UdonTypes_String.cs" />
