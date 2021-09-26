@@ -28,7 +28,7 @@
         public static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnmutedYou;
 
 
-        public static bool Handle_Photon_ModerationEvent_NeedToBlock(object RawData, byte code, Player PhotonSender, int PhotonID)
+        public static void Handle_Photon_ModerationEvent_NeedToBlock(object RawData, byte code, Player PhotonSender, int PhotonID)
         {
             try
             {
@@ -121,7 +121,6 @@
                 ModConsole.DebugError("Error in Photon Moderation EventHandler : ");
                 ModConsole.DebugErrorExc(e);
             }
-            return false;
         }
 
 
