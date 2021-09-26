@@ -139,6 +139,17 @@
                 }
             }
 
+            else if (id == WorldIds.PoolParlor)
+            {
+                if (PoolParlor.PoolParlorCheats != null)
+                {
+                    SetButtonText("Pool Parlor Skins", "Manage Pool Parlor Customizations.");
+                    SetButtonShortcut(PoolParlor.PoolParlorCheats);
+                    SetButtonColor(Color.green);
+                    ToggleButtonVisibilityAndInteractivity(true);
+                }
+            }
+
             else
             {
                 SetButtonColor(Color.red);

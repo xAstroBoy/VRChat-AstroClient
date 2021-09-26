@@ -7,33 +7,37 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
+    using RubyButtonAPI;
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using UnityEngine;
     using VRC.Udon;
 
     public class PoolParlor : GameEvents
     {
-        private void TempUdonPatcherList(UdonBehaviour behaviour, string Symbol)
+
+
+
+
+        public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
-            var disassembled = behaviour.DisassembleUdonBehaviour();
-            if (disassembled != null)
-            {
-                var address = disassembled.IUdonSymbolTable.GetAddressFromSymbol(Symbol);
-                var UnboxVariable = disassembled.IUdonHeap.GetHeapVariable(address);
-                if (UnboxVariable != null)
-                {
-                    var unpackedlist = UnboxVariable.Unpack_List_String();
-                    if (unpackedlist != null)
-                    {
-                        if (!unpackedlist.Contains(Utils.CurrentUser.DisplayName()))
-                        {
-                            unpackedlist.Add(Utils.CurrentUser.DisplayName());
-                            UdonHeapEditor.PatchHeap(disassembled, Symbol, unpackedlist.ToArray(), true);
-                        }
-                    }
-                }
-            }
+            PoolParlorCheats = new QMNestedButton(main, x, y, "Super Tower Defense", "Super Tower Defense Cheats", null, null, null, null, btnHalf);
+
+            _ = new QMSingleButton(PoolParlorCheats, 1, 0f, "+", () => { CurrentTableSkin++; }, "Set Table Skin!", null, null, false);
+            TableSkinBtn = new QMSingleButton(PoolParlorCheats, 2, 0f, "Default Table", () => { }, "Table Skin!", null, null, false);
+            _ = new QMSingleButton(PoolParlorCheats, 3, 0, "-", () => { CurrentTableSkin--;}, "Set Table Skin!", null, null, false);
+
+            _ = new QMSingleButton(PoolParlorCheats, 1, 1f, "+", () => { CurrentCueSkin++; }, "Set Cue Skin!", null, null, false);
+            CueSkinBtn = new QMSingleButton(PoolParlorCheats, 2, 1f, "Default Cue", () => { }, "Cue Skin!", null, null, false);
+            _ = new QMSingleButton(PoolParlorCheats, 3, 1, "-", () => { CurrentCueSkin--; }, "Set Cue Skin!", null, null, false);
+
         }
+
+
+
+
+
 
         public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
@@ -42,40 +46,31 @@
                 ModConsole.Log($"Recognized {Name} World, Patching Skins....");
 
                 // DEAD Until Lists gets exposed...
-                //var Cue_0 = UdonSearch.FindUdonEvent("intl.cue-0", "_GetCuetip").Action;
-                //if (Cue_0 != null)
-                //{
-                //    TempUdonPatcherList(Cue_0, "__0_mp_FAEC5B32FB70E90FACBC029727ACAFEC_StringArray");
-                //}
 
-                //var Cue_1 = UdonSearch.FindUdonEvent("intl.cue-1", "_GetCuetip").Action;
-                //if (Cue_1 != null)
-                //{
-                //    TempUdonPatcherList(Cue_1, "__0_mp_FAEC5B32FB70E90FACBC029727ACAFEC_StringArray");
-                //}
-
-                //var graphicsmanager = UdonSearch.FindUdonEvent("graphicsmanager", "_IsUSColors").Action;
-                //if (graphicsmanager != null)
-                //{
-                //    TempUdonPatcherList(graphicsmanager, "__0_mp_A2E471DA9675E8F3C0BCD6DD0EBFF058_StringArray");
-                //}
-
-                if (world == null)
+                var module1 = UdonSearch.FindAllUdonEvents("BilliardsModule", "_start");
+                foreach (var modules in module1)
                 {
-                    world = GameObjectFinder.FindRootSceneObject("world").transform;
-                    if (world != null)
-                    {
-                        Meta_Cue_Rack = world.transform.FindObject("Meta's Cue Rack");
-                    }
+                    BilliardsModules.Add(modules.UdonBehaviour.DisassembleUdonBehaviour()); // WTF
                 }
-                if (table_primary == null)
+                var cue_0_unpacked = UdonSearch.FindUdonEvent("intl.cue-0", "_start");
+                if(cue_0_unpacked != null)
                 {
-                    table_primary = GameObjectFinder.FindRootSceneObject("table_primary").transform;
-                    if (table_primary != null)
-                    {
-                        table_Balls = table_primary.FindObject("intl.balls");
-                    }
+                    Cue_0 = cue_0_unpacked.UdonBehaviour.DisassembleUdonBehaviour();
                 }
+                var cue_1_unpacked = UdonSearch.FindUdonEvent("intl.cue-1", "_start");
+                if (cue_1_unpacked != null)
+                {
+                    Cue_1 = cue_1_unpacked.UdonBehaviour.DisassembleUdonBehaviour();
+                }
+                var module2 = UdonSearch.FindAllUdonEvents("NetworkingManager", "_OnGameReset");
+                foreach (var modules in module2)
+                {
+                    NetworkingManagers.Add(modules.UdonBehaviour.DisassembleUdonBehaviour()); // WTF
+                }
+
+                GetCurrentTable();
+                GetCurrentCue();
+
 
                 if (world != null && table_primary != null && Meta_Cue_Rack != null && table_Balls != null)
                 {
@@ -99,6 +94,118 @@
                 }
             }
         }
+
+        public static void GetCurrentTable()
+        {
+            int currentskin = 0;
+            foreach (var module in NetworkingManagers)
+            {
+                var result = UdonHeapParser.Udon_Parse_Byte(module, "tableSkinSynced");
+                if (result != null && result.HasValue)
+                {
+                    currentskin = result.Value;
+                }
+                break;
+            }
+            if (Enum.IsDefined(typeof(TableSkins), currentskin))
+            {
+                var translated = (TableSkins)currentskin;
+                if (TableSkinBtn != null)
+                {
+                    TableSkinBtn.SetButtonText(translated.ToString());
+                }
+            }
+            else
+            {
+                ModConsole.Warning("New Table Skin Detected, Please Notify the developer To implement it.");
+            }
+        }
+
+        public static void GetCurrentCue()
+        {
+            int currentskin = 0;
+            foreach (var module in BilliardsModules)
+            {
+                var result = UdonHeapParser.Udon_Parse_Int32(module, "activeCueSkin");
+                if (result != null && result.HasValue)
+                {
+                    currentskin = result.Value;
+                }
+                break;
+            }
+            if(Enum.IsDefined(typeof(CueSkins), currentskin))
+            {
+                var translated = (CueSkins)currentskin;
+                if (CueSkinBtn != null)
+                {
+                    CueSkinBtn.SetButtonText(translated.ToString());
+                }
+            }
+            else
+            {
+                ModConsole.Warning("New Cue Skin Detected, Please Notify the developer To implement it.");
+            }
+
+        }
+        private static void SetTableSkinLocal(TableSkins value)
+        {
+            foreach (var module in BilliardsModules)
+            {
+                UdonHeapEditor.PatchHeap(module, "tableSkinLocal", ((int)value), true);
+            }
+        }
+
+
+        private static void SetTableSkinSynced(TableSkins value)
+        {
+            foreach(var module in NetworkingManagers)
+            {
+                UdonHeapEditor.PatchHeap(module, "tableSkinLocal", ((int)value), true);
+            }
+        }
+
+        private static void SetActiveCueSkin(CueSkins value)
+        {
+            foreach (var module in BilliardsModules)
+            {
+                UdonHeapEditor.PatchHeap(module, "activeCueSkin", ((int)value), true);
+            }
+        }
+        private static void SetSyncedCueSkin(CueSkins value)
+        {
+            UdonHeapEditor.PatchHeap(Cue_0, "syncedCueSkin", ((int)value), true);
+            UdonHeapEditor.PatchHeap(Cue_1, "syncedCueSkin", ((int)value), true);
+        }
+
+        public  enum TableSkins
+        {
+            White = 0,
+            Green = 1,
+            Blue = 2,
+            Purple = 3,
+            Black = 4,
+            Red = 5,
+            Toaster = 6,
+            Chintzy = 7,
+            Yuuta = 8,
+
+        }
+
+        public enum CueSkins
+        {
+            DefaultDark = 0,
+            TournamentWinner = 1,
+            Trickshotter = 2,
+            Toaster = 3,
+            Yuuta = 4,
+            Chintzy = 5,
+            Meta = 6,
+            HolyStar = 7,
+            DefaultLight = 8,
+            BetaTester = 8,
+        }
+
+
 
         private static void Add_Modifier_ToBall(Parlor_Balls ball)
         {
@@ -224,10 +331,67 @@
             Meta_Cue_Rack = null;
         }
 
-        public static Transform table_primary;
-        public static Transform table_Balls;
+        public static Transform table_primary{ get; private set; }
+        public static Transform table_Balls{ get; private set; }
 
-        public static Transform world;
-        public static Transform Meta_Cue_Rack;
+        public static Transform world{ get; private set; }
+        public static Transform Meta_Cue_Rack{ get; private set; }
+
+        public static DisassembledUdonBehaviour Cue_0 { get; private set;  }
+        public static DisassembledUdonBehaviour Cue_1 { get; private set; }
+        public static List<DisassembledUdonBehaviour> NetworkingManagers { get; private set; } = new List<DisassembledUdonBehaviour>();
+
+        public static List<DisassembledUdonBehaviour> BilliardsModules { get; private set; } = new List<DisassembledUdonBehaviour>();
+        public static QMNestedButton PoolParlorCheats { get; set; }
+
+        private static TableSkins _CurrentTableSkin;
+        public static TableSkins CurrentTableSkin
+        {
+            get
+            {
+                return _CurrentTableSkin;
+            }
+            set
+            {
+                if (TableSkinBtn != null)
+                {
+                    TableSkinBtn.SetButtonText(value.ToString());
+                }
+                else
+                {
+                    value = TableSkins.White;
+                }
+                _CurrentTableSkin = value;
+                SetTableSkinLocal(value);
+                SetTableSkinSynced(value);
+            }
+        }
+        public static QMSingleButton TableSkinBtn { get; set; }
+
+        private static CueSkins _CurrentCueSkin;
+        public static CueSkins CurrentCueSkin
+        {
+            get
+            {
+                return _CurrentCueSkin;
+            }
+            set
+            {
+
+                if (CueSkinBtn != null)
+                {
+                    CueSkinBtn.SetButtonText(value.ToString());
+                }
+                else
+                {
+                    value = CueSkins.DefaultLight;
+                }
+                _CurrentCueSkin = value;
+                SetActiveCueSkin(value);
+                SetSyncedCueSkin(value);
+            }
+        }
+        public static QMSingleButton CueSkinBtn { get; set; }
+
     }
 }
