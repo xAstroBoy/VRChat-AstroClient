@@ -360,7 +360,8 @@
     <Compile Include="Variables\InstanceBuilder.cs" />
     <Compile Include="Variables\Strings.cs" />
     <Compile Include="Variables\VRChatObjects.cs" />
-    <Compile Include="Variables\WorldIds.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\SuperTowerDefense.cs" />
+    <Compile Include="WorldAddons\WorldsIds\WorldIds.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\FurryTalkAndChill.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\VoidClub.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\JustHParty.cs" />
@@ -376,7 +377,6 @@
     <Compile Include="WorldAddons\Supported_Worlds\lpd.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\Meroom.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\SnoozeScaryMaze5.cs" />
-    <Compile Include="WorldAddons\Supported_Worlds\Valkyrie_Defense.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\SmashContest.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\ClubMisfitAfterParty.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\TheGreatPug.cs" />

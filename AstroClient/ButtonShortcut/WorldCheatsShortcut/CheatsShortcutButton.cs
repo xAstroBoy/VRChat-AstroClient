@@ -128,6 +128,17 @@
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
+            else if (id == WorldIds.Super_Tower_defense)
+            {
+                if (SuperTowerDefense.SuperTowerDefensecheatPage != null)
+                {
+                    SetButtonText("Super Tower Defense Cheats", "Manage Super Tower Defense Cheats");
+                    SetButtonShortcut(SuperTowerDefense.SuperTowerDefensecheatPage);
+                    SetButtonColor(Color.green);
+                    ToggleButtonVisibilityAndInteractivity(true);
+                }
+            }
+
             else
             {
                 SetButtonColor(Color.red);

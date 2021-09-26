@@ -68,8 +68,8 @@
 
                                 if (Blocked) // AntiBlock.
                                 {
+                                    infoData[10] = false;
                                     ModerationEventNotifier(RawData, code, PhotonPlayer, SenderID, eventType, true);
-                                    return true;
                                 }
                             }
                         }
@@ -92,6 +92,7 @@
                                     {
                                         BlockedYouPlayers.Add(BlockPlayer);
                                     }
+                                    blockid = -1;
                                 }
                             }
 
@@ -114,13 +115,11 @@
                     }
                 }
                 ModerationEventNotifier(RawData, code, PhotonSender, PhotonID, eventType, false);
-                return false;
             }
             catch (System.Exception e)
             {
                 ModConsole.DebugError("Error in Photon Moderation EventHandler : ");
                 ModConsole.DebugErrorExc(e);
-                return false;
             }
             return false;
         }
@@ -148,7 +147,7 @@
                 string blockText = string.Empty;
                 if (isBlocked)
                 {
-                    blockText = "[BLOCKED] : ";
+                    blockText = "[PATCHED] : ";
                 }
                 PopupUtils.QueHudMessage($"{blockText}Moderation Event: {EventType}");
                 if (ConfigManager.General.LogEvents)
