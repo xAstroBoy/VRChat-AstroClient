@@ -3,6 +3,7 @@
     #region Imports
 
     using AstroLibrary.Console;
+    using AstroLibrary.Utility;
     using DayClientML2.Utility;
     using Harmony;
     using MelonLoader;
@@ -124,7 +125,11 @@
         {
             if (__0 != null)
             {
-                ModConsole.Log("[Photon] Player Joined:");
+                var stopwatch = Stopwatch.StartNew();
+                var name = __0.GetDisplayName();
+                stopwatch.Stop();
+                ModConsole.Log($"[Photon] Player Joined: {name}");
+                ModConsole.Log($"PhotonPlayer.GetDisplayName() took {stopwatch.ElapsedMilliseconds}ms");
             }
         }
 
@@ -132,7 +137,11 @@
         {
             if (__0 != null)
             {
-                ModConsole.Log("[Photon] Player Left:");
+                var stopwatch = Stopwatch.StartNew();
+                var name = __0.GetDisplayName();
+                stopwatch.Stop();
+                ModConsole.Log($"[Photon] Player Left: {name}");
+                ModConsole.Log($"PhotonPlayer.GetDisplayName() took {stopwatch.ElapsedMilliseconds}ms");
             }
         }
     }
