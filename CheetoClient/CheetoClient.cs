@@ -12,7 +12,7 @@
 		{
 			ModConsole.Initialize("CheetoClient");
 			ModConsole.Log("Congratulations, you now have the most useless client!");
-		}
-
+            CheetosHooks.ExecutePriorityPatches();
+        }
 	}
 }
