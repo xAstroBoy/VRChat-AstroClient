@@ -4,9 +4,9 @@
     using MelonLoader;
     using System.Linq;
 
-    public class FindMods : GameEvents
+    internal class FindMods : GameEvents
     {
-        public override void OnApplicationStart()
+        internal override void OnApplicationStart()
         {
             if (MelonHandler.Mods.Any(m => m.Info.Name == "Notorious"))
             {
@@ -15,6 +15,6 @@
             }
         }
 
-        public static bool IsNotoriousPresent { get; private set; }
+        internal static  bool IsNotoriousPresent { get; private set; }
     }
 }

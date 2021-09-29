@@ -14,11 +14,11 @@
     using VRC.Core;
     using Object = UnityEngine.Object;
 
-    public class AvatarManagerHook : GameEvents
+    internal class AvatarManagerHook : GameEvents
     {
-        public static event EventHandler<OnAvatarSpawnArgs> Event_OnAvatarSpawn;
+        internal static  event EventHandler<OnAvatarSpawnArgs> Event_OnAvatarSpawn;
 
-        public override void OnApplicationStart() => HookAvatarManager();
+        internal override void OnApplicationStart() => HookAvatarManager();
 
         private void HookAvatarManager()
         {

@@ -14,7 +14,7 @@
     using VRC;
     using static AstroClient.Variables.InstanceBuilder;
 
-    public class OrbitManager : GameEventsBehaviour
+    internal class OrbitManager : GameEventsBehaviour
     {
         #region Internal
 
@@ -47,14 +47,14 @@
 
         #endregion Internal
 
-        public static OrbitManager Instance { get; set; }
+        internal static  OrbitManager Instance { get; set; }
         private Player target;
         private bool isEnabled;
         private bool isLooping;
         private Transform centerPoint = null;
         private List<PickupController> pickups = new List<PickupController>();
 
-        public static bool IsEnabled
+        internal static  bool IsEnabled
         {
             get => Instance.isEnabled;
             set => Instance.isEnabled = value;
@@ -87,7 +87,7 @@
             ModConsole.Log($"[OrbitManager] Refreshed: {pickups.Count} pickups found");
         }
 
-        public static void MakeInstance()
+        internal static  void MakeInstance()
         {
             if (Instance == null)
             {
@@ -106,12 +106,12 @@
             }
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             RefreshPickups();
         }
 
-        public static void OrbitPlayer(Player target)
+        internal static  void OrbitPlayer(Player target)
         {
             if (Instance != null && target != null && Instance.target == null)
             {
@@ -134,7 +134,7 @@
             }
         }
 
-        public static void DisableOrbit()
+        internal static  void DisableOrbit()
         {
             if (Instance == null) return;
 
@@ -150,7 +150,7 @@
             ModConsole.Log($"[OrbitManager] Orbit Disabled");
         }
 
-        public static IEnumerator LoopPickups()
+        internal static  IEnumerator LoopPickups()
         {
             for (; ; )
             {

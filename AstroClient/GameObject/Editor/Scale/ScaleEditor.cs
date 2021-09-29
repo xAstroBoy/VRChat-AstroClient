@@ -128,7 +128,7 @@
             }
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             ScaleCheck.Clear();
         }

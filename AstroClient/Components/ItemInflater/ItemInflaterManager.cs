@@ -10,7 +10,7 @@
     using Color = System.Drawing.Color;
 
     [RegisterComponent]
-    public class ItemInflaterManager : GameEventsBehaviour
+    internal class ItemInflaterManager : GameEventsBehaviour
     {
         #region Internal
 
@@ -45,7 +45,7 @@
 
         #region Module
 
-        public static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ObjectEditorBehaviors;
+        internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ObjectEditorBehaviors;
 
         public void Start()
         {
@@ -53,7 +53,7 @@
             Instance = this;
         }
 
-        public static void MakeInstance()
+        internal static  void MakeInstance()
         {
             if (Instance == null)
             {
@@ -72,11 +72,11 @@
             }
         }
 
-        public static void Update()
+        internal static  void Update()
         {
         }
 
-        public static void AddObject(GameObject obj, bool ShouldFloat)
+        internal static  void AddObject(GameObject obj, bool ShouldFloat)
         {
             if (obj != null)
             {
@@ -96,7 +96,7 @@
             }
         }
 
-        public static void RemoveObject(GameObject obj)
+        internal static  void RemoveObject(GameObject obj)
         {
             if (ObjectEditors.Contains(obj))
             {
@@ -105,7 +105,7 @@
             }
         }
 
-        public static void KillObjectEditors()
+        internal static  void KillObjectEditors()
         {
             foreach (var obj in ObjectEditors)
             {
@@ -114,30 +114,30 @@
             ObjectEditors.Clear();
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             ObjectEditors.Clear();
             ClearList();
         }
 
-        public static void Register(ItemInflater ObjectEditorBehaviour)
+        internal static  void Register(ItemInflater ObjectEditorBehaviour)
         {
             ObjectEditorBehaviors.Add(ObjectEditorBehaviour);
         }
 
-        public static void Deregister(ItemInflater ObjectEditorBehaviour)
+        internal static  void Deregister(ItemInflater ObjectEditorBehaviour)
         {
             _ = ObjectEditorBehaviors.Remove(ObjectEditorBehaviour);
         }
 
-        public static void ClearList()
+        internal static  void ClearList()
         {
             ObjectEditorBehaviors.Clear();
         }
 
-        public static List<GameObject> ObjectEditors = new List<GameObject>();
+        internal static  List<GameObject> ObjectEditors = new List<GameObject>();
 
-        public static ItemInflaterManager Instance { get; set; }
+        internal static  ItemInflaterManager Instance { get; set; }
 
         #endregion Module
     }

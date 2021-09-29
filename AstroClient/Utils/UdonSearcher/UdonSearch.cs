@@ -8,9 +8,9 @@
     using VRC.Udon;
     using static AstroClient.Variables.CustomLists;
 
-    public static class UdonSearch
+    internal static  class UdonSearch
     {
-        public static List<UdonBehaviour_Cached> FindAllUdonEvents(string action, string subaction)
+        internal static  List<UdonBehaviour_Cached> FindAllUdonEvents(string action, string subaction)
         {
             var gameobjects = WorldUtils.UdonScripts;
 
@@ -39,7 +39,7 @@
             return null;
         }
 
-        public static UdonBehaviour_Cached FindUdonEvent(string action, string subaction)
+        internal static  UdonBehaviour_Cached FindUdonEvent(string action, string subaction)
         {
             var gameobjects = WorldUtils.UdonScripts;
 
@@ -63,7 +63,7 @@
             return null;
         }
 
-        public static UdonBehaviour_Cached FindUdonEvent(UdonBehaviour obj, string subaction)
+        internal static  UdonBehaviour_Cached FindUdonEvent(UdonBehaviour obj, string subaction)
         {
             if (obj != null)
             {
@@ -82,7 +82,7 @@
             return null;
         }
 
-        public static UdonBehaviour_Cached FindUdonEvent(GameObject obj, string subaction)
+        internal static  UdonBehaviour_Cached FindUdonEvent(GameObject obj, string subaction)
         {
             var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
 

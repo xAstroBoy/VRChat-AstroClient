@@ -12,10 +12,10 @@
     using System.Linq;
     using UnityEngine;
 
-    public class FBTHeaven : GameEvents
+    internal class FBTHeaven : GameEvents
     {
-        public static QMNestedButton FBTExploitsPage;
-        public static float ButtonUpdateTime = 0f;
+        internal static  QMNestedButton FBTExploitsPage;
+        internal static  float ButtonUpdateTime = 0f;
         private static List<GameObject> TrashToDelete = new List<GameObject>();
         private static bool isCurrentWorld;
         private static QMToggleButton LockButton1;
@@ -27,12 +27,12 @@
         private static QMToggleButton LockButton4;
         private static GameObject LockIndicator4;
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             TrashToDelete.Clear();
         }
 
-        public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             FBTExploitsPage = new QMNestedButton(main, x, y, "FBTHeaven Exploits", "FBTHeaven Exploits", null, null, null, null, btnHalf);
 
@@ -52,7 +52,7 @@
             LockButton4 = new QMToggleButton(FBTExploitsPage, 4, 4, "Unlock 4", () => { UnlockDoor(4); }, "Lock 4", () => { LockDoor(4); }, "Toggle Door Lock", null, Color.green, Color.red, false);
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.FBTHeaven)
             {
@@ -159,7 +159,7 @@
             }
         }
 
-        public override void OnRoomLeft()
+        internal override void OnRoomLeft()
         {
             isCurrentWorld = false;
         }

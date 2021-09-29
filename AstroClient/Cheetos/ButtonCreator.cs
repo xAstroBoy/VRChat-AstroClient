@@ -5,9 +5,9 @@
     using TMPro;
     using UnityEngine;
 
-    public static class ButtonCreator
+    internal static  class ButtonCreator
     {
-        public static GameObject Create(string text, Vector3 position, Quaternion rotation, System.Action action)
+        internal static  GameObject Create(string text, Vector3 position, Quaternion rotation, System.Action action)
         {
             var go = GameObject.CreatePrimitive(PrimitiveType.Cube);
             go.name = "Button " + text;

@@ -7,7 +7,7 @@
 
     #endregion Imports
 
-    public class CMPage
+    internal class CMPage
     {
         public GameObject GetGameObject { get; private set; }
 

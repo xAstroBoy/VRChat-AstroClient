@@ -3,7 +3,7 @@
     using System;
     using VRC.Core;
 
-    public class OnAvatarDownloadArgs : EventArgs
+    internal class OnAvatarDownloadArgs : EventArgs
     {
         public ApiAvatar Avatar;
 

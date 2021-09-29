@@ -3,7 +3,7 @@
     using Photon.Realtime;
     using System;
 
-    public class PhotonPlayerEventArgs : EventArgs
+    internal class PhotonPlayerEventArgs : EventArgs
     {
         public Player player;
 

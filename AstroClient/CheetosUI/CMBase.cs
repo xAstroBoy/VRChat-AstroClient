@@ -6,7 +6,7 @@
 
     #endregion Imports
 
-    public class CMBase
+    internal class CMBase
     {
         public GameObject GetGameObject { get; private set; }
 

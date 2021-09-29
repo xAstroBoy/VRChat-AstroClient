@@ -11,11 +11,11 @@
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
 
-    public class SpawnEmojiRPCHook : GameEvents
+    internal class SpawnEmojiRPCHook : GameEvents
     {
-        public static event EventHandler<SpawnEmojiArgs> Event_SpawnEmojiRPC;
+        internal static  event EventHandler<SpawnEmojiArgs> Event_SpawnEmojiRPC;
 
-        public override void ExecutePriorityPatches()
+        internal override void ExecutePriorityPatches()
         {
             HookSpawnEmojiRPC();
         }

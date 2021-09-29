@@ -5,9 +5,9 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public static class BouncerExtensions
+    internal static  class BouncerExtensions
     {
-        public static void Set_Bouncer(this Bouncer instance, bool BounceTowardPlayer = false)
+        internal static  void Set_Bouncer(this Bouncer instance, bool BounceTowardPlayer = false)
         {
             if (instance != null)
             {
@@ -15,7 +15,7 @@
             }
         }
 
-        public static void Remove_Bouncer(this Bouncer instance)
+        internal static  void Remove_Bouncer(this Bouncer instance)
         {
             if (instance != null)
             {
@@ -23,7 +23,7 @@
             }
         }
 
-        public static void Add_Bouncer(this GameObject obj, bool BounceTowardPlayer = false)
+        internal static  void Add_Bouncer(this GameObject obj, bool BounceTowardPlayer = false)
         {
             if (obj != null)
             {
@@ -31,7 +31,7 @@
             }
         }
 
-        public static void Remove_Bouncer(this GameObject obj)
+        internal static  void Remove_Bouncer(this GameObject obj)
         {
             if (obj != null)
             {
@@ -43,7 +43,7 @@
             }
         }
 
-        public static void Add_Bouncer(this List<GameObject> items, bool BounceTowardPlayer = false)
+        internal static  void Add_Bouncer(this List<GameObject> items, bool BounceTowardPlayer = false)
         {
             foreach (var obj in items)
             {
@@ -54,7 +54,7 @@
             }
         }
 
-        public static void Remove_Bouncer(this List<GameObject> items)
+        internal static  void Remove_Bouncer(this List<GameObject> items)
         {
             foreach (var obj in items)
             {

@@ -2,15 +2,15 @@
 {
     using System.Collections.Generic;
 
-    public static class AntiCrash_Lists
+    internal static  class AntiCrash_Lists
     {
-        public static List<string> GenitalNames = new List<string>();
+        internal static  List<string> GenitalNames = new List<string>();
 
-        public static List<string> CrasherCreators = new List<string>();
+        internal static  List<string> CrasherCreators = new List<string>();
 
-        public static List<string> CrashShaderTerms = new List<string>();
+        internal static  List<string> CrashShaderTerms = new List<string>();
 
-        public static void DownloadLists()
+        internal static  void DownloadLists()
         {
         }
     }

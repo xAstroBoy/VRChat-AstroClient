@@ -10,7 +10,7 @@
     using static AstroClient.JarRoleController;
 
     [RegisterComponent]
-    public class JarRoleESP : JarControllerEvents
+    internal class JarRoleESP : JarControllerEvents
     {
         public JarRoleESP(IntPtr ptr) : base(ptr)
         {
@@ -79,7 +79,7 @@
             return value;
         }
 
-        public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             try
             {
@@ -355,7 +355,7 @@
             catch (Exception e) { ModConsole.DebugError("JarRoleRevealer OnUpdate Exception : " + e); }
         }
 
-        public override void OnViewRolesPropertyChanged(bool value)
+        internal override void OnViewRolesPropertyChanged(bool value)
         {
             ViewRoles = value;
             if (LinkedNode != null)
@@ -381,7 +381,7 @@
             }
         }
 
-        public override void OnPlayerESPPropertyChanged(bool value)
+        internal override void OnPlayerESPPropertyChanged(bool value)
         {
             if (value)
             {

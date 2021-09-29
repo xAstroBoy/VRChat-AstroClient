@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Cheetos
 {
-    public class InstanceHistory : GameEvents
+    internal class InstanceHistory : GameEvents
     {
     }
 }

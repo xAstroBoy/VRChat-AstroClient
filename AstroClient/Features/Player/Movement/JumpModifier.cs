@@ -6,20 +6,20 @@
     using UnityEngine;
     using VRC.SDKBase;
 
-    public class JumpModifier : GameEvents
+    internal class JumpModifier : GameEvents
     {
-        public override void OnUpdate()
+        internal override void OnUpdate()
         {
             CheckForJumpUpdates();
             FixJumpMissing();
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             HasCheckedJump = false;
         }
 
-        public static void OnLevelLoad()
+        internal static  void OnLevelLoad()
         {
             IsJumpOverriden = false;
         }
@@ -50,7 +50,7 @@
             }
         }
 
-        public static void CheckForJumpUpdates()
+        internal static  void CheckForJumpUpdates()
         {
             if (Utils.LocalPlayer != null)
             {
@@ -76,7 +76,7 @@
             }
         }
 
-        public static void EmulatedJump()
+        internal static  void EmulatedJump()
         {
             if (Networking.LocalPlayer != null)
             {
@@ -88,9 +88,9 @@
 
         private static bool HasCheckedJump = false;
 
-        public static QMSingleToggleButton UnlimitedJumpToggle;
+        internal static  QMSingleToggleButton UnlimitedJumpToggle;
 
-        public static bool IsUnlimitedJumpActive
+        internal static  bool IsUnlimitedJumpActive
         {
             get
             {
@@ -106,9 +106,9 @@
             }
         }
 
-        public static QMSingleToggleButton RocketJumpToggle;
+        internal static  QMSingleToggleButton RocketJumpToggle;
 
-        public static bool IsRocketJumpActive
+        internal static  bool IsRocketJumpActive
         {
             get
             {
@@ -124,10 +124,10 @@
             }
         }
 
-        public static QMToggleButton JumpOverrideToggle;
+        internal static  QMToggleButton JumpOverrideToggle;
         private static bool _IsJumpOverriden;
 
-        public static bool IsJumpOverriden
+        internal static  bool IsJumpOverriden
         {
             get
             {

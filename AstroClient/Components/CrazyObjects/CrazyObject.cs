@@ -9,7 +9,7 @@
     using Random = UnityEngine.Random;
 
     [RegisterComponent]
-    public class CrazyObject : GameEventsBehaviour
+    internal class CrazyObject : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;

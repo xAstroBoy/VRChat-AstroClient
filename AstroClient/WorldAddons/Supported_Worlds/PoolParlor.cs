@@ -15,13 +15,13 @@
     using VRC.Udon;
     using static AstroClient.Variables.CustomLists;
 
-    public class PoolParlor : GameEvents
+    internal class PoolParlor : GameEvents
     {
 
 
 
 
-        public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             PoolParlorCheats = new QMNestedButton(main, x, y, "Super Tower Defense", "Super Tower Defense Cheats", null, null, null, null, btnHalf);
 
@@ -40,7 +40,7 @@
 
 
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.PoolParlor)
             {
@@ -103,7 +103,7 @@
             }
         }
 
-        public static void GetCurrentTable()
+        internal static  void GetCurrentTable()
         {
             int currentskin = 0;
             foreach (var module in NetworkingManagers)
@@ -129,7 +129,7 @@
             }
         }
 
-        public static void GetCurrentCue()
+        internal static  void GetCurrentCue()
         {
             int currentskin = 0;
             foreach (var module in BilliardsModules)
@@ -156,7 +156,7 @@
 
         }
 
-        public static void SetTableSkin(TableSkins value)
+        internal static  void SetTableSkin(TableSkins value)
         {
             SetTableSkinLocal(value);
             SetTableSkin_PoolParlorModule(value);
@@ -303,7 +303,7 @@
             }
         }
 
-        public static Parlor_Balls Find_Balls(string first_number, string second_number)
+        internal static  Parlor_Balls Find_Balls(string first_number, string second_number)
         {
             if (world != null && table_primary != null && Meta_Cue_Rack != null && table_Balls != null)
             {
@@ -345,7 +345,7 @@
             return null;
         }
 
-        public class Parlor_Balls
+        internal class Parlor_Balls
         {
             public string Ball_Number { get; set; }
             public GameObject Table_Ball { get; set; }
@@ -363,7 +363,7 @@
             }
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             table_primary = null;
             table_Balls = null;
@@ -371,28 +371,28 @@
             Meta_Cue_Rack = null;
         }
 
-        public static Transform table_primary{ get; private set; }
-        public static Transform table_Balls{ get; private set; }
+        internal static  Transform table_primary{ get; private set; }
+        internal static  Transform table_Balls{ get; private set; }
 
-        public static Transform world{ get; private set; }
-        public static Transform Meta_Cue_Rack{ get; private set; }
-
-
-        public static UdonBehaviour_Cached UpdateColorScheme_Table { get; private set;  }
+        internal static  Transform world{ get; private set; }
+        internal static  Transform Meta_Cue_Rack{ get; private set; }
 
 
-        public static DisassembledUdonBehaviour Cue_0 { get; private set;  }
-        public static DisassembledUdonBehaviour Cue_1 { get; private set; }
+        internal static  UdonBehaviour_Cached UpdateColorScheme_Table { get; private set;  }
 
-        public static DisassembledUdonBehaviour PoolParlorModule { get; private set; }
 
-        public static List<DisassembledUdonBehaviour> NetworkingManagers { get; private set; } = new List<DisassembledUdonBehaviour>();
+        internal static  DisassembledUdonBehaviour Cue_0 { get; private set;  }
+        internal static  DisassembledUdonBehaviour Cue_1 { get; private set; }
 
-        public static List<DisassembledUdonBehaviour> BilliardsModules { get; private set; } = new List<DisassembledUdonBehaviour>();
-        public static QMNestedButton PoolParlorCheats { get; set; }
+        internal static  DisassembledUdonBehaviour PoolParlorModule { get; private set; }
+
+        internal static  List<DisassembledUdonBehaviour> NetworkingManagers { get; private set; } = new List<DisassembledUdonBehaviour>();
+
+        internal static  List<DisassembledUdonBehaviour> BilliardsModules { get; private set; } = new List<DisassembledUdonBehaviour>();
+        internal static  QMNestedButton PoolParlorCheats { get; set; }
 
         private static TableSkins _CurrentTableSkin;
-        public static TableSkins CurrentTableSkin
+        internal static  TableSkins CurrentTableSkin
         {
             get
             {
@@ -416,10 +416,10 @@
                 }
             }
         }
-        public static QMSingleButton TableSkinBtn { get; set; }
+        internal static  QMSingleButton TableSkinBtn { get; set; }
 
         private static CueSkins _CurrentCueSkin;
-        public static CueSkins CurrentCueSkin
+        internal static  CueSkins CurrentCueSkin
         {
             get
             {
@@ -440,7 +440,7 @@
                 SetSyncedCueSkin(value);
             }
         }
-        public static QMSingleButton CueSkinBtn { get; set; }
+        internal static  QMSingleButton CueSkinBtn { get; set; }
 
     }
 }

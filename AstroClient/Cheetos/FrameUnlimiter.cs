@@ -7,7 +7,7 @@
     {
         private static int Default;
 
-        public override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnUiManagerInit()
         {
             Default = Application.targetFrameRate;
 
@@ -17,7 +17,7 @@
             }
         }
 
-        public static bool IsEnabled
+        internal static  bool IsEnabled
         {
             get => ConfigManager.Performance.UnlimitedFrames;
             set => Unlock(value);

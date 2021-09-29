@@ -8,9 +8,9 @@
     using System.Linq;
     using UnityEngine;
 
-    public class SpawnerSubmenu : Tweaker_Events
+    internal class SpawnerSubmenu : Tweaker_Events
     {
-        public static void Init_SpawnerSubmenu(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static  void Init_SpawnerSubmenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "Spawner", "Spawner Menu!", null, null, null, null, btnHalf);
             _ = new QMSingleButton(main, 1, 0, "Spawn Clone", () => { Cloner.ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }, "Instantiates a copy of The selected object.", null, null, true);
@@ -23,14 +23,14 @@
             SpawnedPrefabsCounter = new QMSingleButton(main, 4, 0.5f, GetSpawnedPrefabText, null, GetSpawnedPrefabText, null, Color.cyan, true);
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             SpawnedPrefabs.Clear();
             ClonedObjects.Clear();
             UpdateSpawnedPrefabsBtn();
         }
 
-        public static string GetSpawnedPrefabText
+        internal static  string GetSpawnedPrefabText
         {
             get
             {
@@ -38,7 +38,7 @@
             }
         }
 
-        public static string GetClonesPickupText
+        internal static  string GetClonesPickupText
         {
             get
             {
@@ -46,7 +46,7 @@
             }
         }
 
-        public static void UpdateSpawnedPickupsBtn()
+        internal static  void UpdateSpawnedPickupsBtn()
         {
             if (SpawnedPickupsCounter != null)
             {
@@ -55,7 +55,7 @@
             }
         }
 
-        public static void UpdateSpawnedPrefabsBtn()
+        internal static  void UpdateSpawnedPrefabsBtn()
         {
             if (SpawnedPrefabsCounter != null)
             {
@@ -64,7 +64,7 @@
             }
         }
 
-        public static void RegisterPrefab(GameObject obj)
+        internal static  void RegisterPrefab(GameObject obj)
         {
             if (obj != null)
             {
@@ -76,7 +76,7 @@
             }
         }
 
-        public static void KillSpawnedPrefabs()
+        internal static  void KillSpawnedPrefabs()
         {
             foreach (var prefab in SpawnedPrefabs)
             {
@@ -92,10 +92,10 @@
             UpdateSpawnedPrefabsBtn();
         }
 
-        public static List<GameObject> SpawnedPrefabs = new List<GameObject>();
-        public static List<GameObject> ClonedObjects = new List<GameObject>();
+        internal static  List<GameObject> SpawnedPrefabs = new List<GameObject>();
+        internal static  List<GameObject> ClonedObjects = new List<GameObject>();
 
-        public static QMSingleButton SpawnedPickupsCounter;
-        public static QMSingleButton SpawnedPrefabsCounter;
+        internal static  QMSingleButton SpawnedPickupsCounter;
+        internal static  QMSingleButton SpawnedPrefabsCounter;
     }
 }

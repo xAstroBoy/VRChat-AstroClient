@@ -23,18 +23,18 @@
 
     #endregion Imports
 
-    public class AvatarResult : VRCUiContentButton
+    internal class AvatarResult : VRCUiContentButton
     {
         public string AvatarID = string.Empty;
     }
 
-    public class AvatarSearch : GameEvents
+    internal class AvatarSearch : GameEvents
     {
-        public static SearchTypes SearchType = SearchTypes.ALL;
+        internal static  SearchTypes SearchType = SearchTypes.ALL;
 
-        public static bool IsSearching = false;
+        internal static  bool IsSearching = false;
 
-        public static bool IsDumping = false;
+        internal static  bool IsDumping = false;
 
         private static GameObject publicAvatarList;
 
@@ -69,7 +69,7 @@
             PRIVATE
         }
 
-        public override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnUiManagerInit()
         {
             inputModule = GameObject.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
 
@@ -117,14 +117,14 @@
             worldList.Text.supportRichText = true;
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             MiscUtils.DelayFunction(0.5f, () => { 
             PedestalDump();
             });
         }
 
-        public static void OnSelect()
+        internal static  void OnSelect()
         {
             // Add a check here later
             var selected = inputModule.field_Public_Selectable_0;
@@ -142,7 +142,7 @@
             }
         }
 
-        public static void Search(SearchTypes searchType, string query)
+        internal static  void Search(SearchTypes searchType, string query)
         {
             if (!IsSearching)
             {
@@ -160,7 +160,7 @@
             }
         }
 
-        public static IEnumerator SearchLoop()
+        internal static  IEnumerator SearchLoop()
         {
             if (!IsSearching) yield break;
 
@@ -175,7 +175,7 @@
             }
         }
 
-        public static void PedestalDump()
+        internal static  void PedestalDump()
         {
             stopwatch2.Start();
 
@@ -223,7 +223,7 @@
             DumpDone();
         }
 
-        public static void DumpDone()
+        internal static  void DumpDone()
         {
             worldList.Text.supportRichText = true;
             worldList.UiVRCList.expandedHeight *= 2f;
@@ -237,7 +237,7 @@
             worldList.Text.text = $"<color=cyan>Astro Pedestal</color> Found: <color=yellow>{worldAvatars.Count}</color>";
         }
 
-        public static void SearchDone()
+        internal static  void SearchDone()
         {
             IsSearching = false;
             stopwatch.Stop();
@@ -259,7 +259,7 @@
             ModConsole.Log($"Avatar Search Completed: found {foundAvatars.Count} avatars in {stopwatch.ElapsedMilliseconds}ms");
         }
 
-        public static void AddAvatar(AvatarData avatarData)
+        internal static  void AddAvatar(AvatarData avatarData)
         {
             foundAvatars.Add(avatarData.ToApiAvatar());
             ModConsole.Log($"Avatar Result: {avatarData.Name}: {avatarData.AvatarID}");

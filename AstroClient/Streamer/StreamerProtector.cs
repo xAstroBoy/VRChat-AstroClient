@@ -12,11 +12,11 @@
     using System.Reflection;
     using VRC;
 
-    public class StreamerProtector : GameEvents
+    internal class StreamerProtector : GameEvents
     {
 
 
-        public override void OnApplicationLateStart()
+        internal override void OnApplicationLateStart()
         {
             Streamers structValue = new Streamers();
             foreach (var field in typeof(Streamers).GetFields())
@@ -26,21 +26,21 @@
             ModConsole.Log($"Registered {StreamerIDs.Count()} Streamers.");
         }
 
-        public static EventHandler<PlayerEventArgs> Event_OnStreamerJoined;
+        internal static  EventHandler<PlayerEventArgs> Event_OnStreamerJoined;
 
-        public static EventHandler<PlayerEventArgs> Event_OnStreamerLeft;
+        internal static  EventHandler<PlayerEventArgs> Event_OnStreamerLeft;
 
-        public static bool IsExploitsAllowed => IsAStreamerPresent();
+        internal static  bool IsExploitsAllowed => IsAStreamerPresent();
 
         private static List<string> StreamerIDs { get; } = new List<string>(); 
 
 
-        public static bool IsAStreamerPresent()
+        internal static  bool IsAStreamerPresent()
         {
             return StreamersInInstance.Count() != 0;
         }
 
-        public override void OnPlayerJoined(Player player)
+        internal override void OnPlayerJoined(Player player)
         {
             if (player != null)
             {
@@ -60,7 +60,7 @@
             }
         }
 
-        public override void OnPlayerLeft(Player player)
+        internal override void OnPlayerLeft(Player player)
         {
             if (player != null)
             {
@@ -81,11 +81,11 @@
             }
         }
 
-        public override void OnRoomLeft()
+        internal override void OnRoomLeft()
         {
             StreamersInInstance.Clear();
         }
 
-        public static List<Player> StreamersInInstance { get; private set; } = new List<Player>();
+        internal static  List<Player> StreamersInInstance { get; private set; } = new List<Player>();
     }
 }

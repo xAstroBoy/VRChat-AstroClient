@@ -6,16 +6,16 @@
     using AstroLibrary.Extensions;
     using UnityEngine;
 
-    public class ObjectCloner : GameEvents
+    internal class ObjectCloner : GameEvents
     {
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             _Holder = null;
             SpawnerSubmenu.ClonedObjects.Clear();
             SpawnerSubmenu.UpdateSpawnedPickupsBtn();
         }
 
-        public static void ClonedObjectsDeleter()
+        internal static  void ClonedObjectsDeleter()
         {
             foreach (var obj in SpawnerSubmenu.ClonedObjects)
             {
@@ -48,7 +48,7 @@
             }
         }
 
-        public static void CloneGameObject(GameObject GameObject)
+        internal static  void CloneGameObject(GameObject GameObject)
         {
             ModConsole.DebugLog("Found A Target GameObject  :" + GameObject.name);
             var obj = Object.Instantiate(GameObject);

@@ -4,9 +4,9 @@
     using AstroLibrary.Extensions;
     using VRC.Udon.Common.Interfaces;
 
-    public static class UdonHeapEditor
+    internal static  class UdonHeapEditor
     {
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, bool value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, bool value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -18,7 +18,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, float value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, float value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -30,7 +30,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, string value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, string value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -42,7 +42,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, string[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, string[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -54,7 +54,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, uint value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, uint value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -66,7 +66,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, int value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, int value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -78,7 +78,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, long value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, long value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -90,7 +90,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, char value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, char value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -102,7 +102,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, char[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, char[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -114,7 +114,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, byte value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, byte value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -126,7 +126,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, byte[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, byte[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -137,7 +137,7 @@
                 ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
             }
         }
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Color value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Color value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -149,7 +149,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Material value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Material value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -161,7 +161,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.MeshRenderer value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.MeshRenderer value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -173,7 +173,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.MeshRenderer[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.MeshRenderer[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -185,7 +185,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Component value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Component value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -197,7 +197,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Component[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Component[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -209,7 +209,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.BoxCollider value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.BoxCollider value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -221,7 +221,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.BoxCollider[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.BoxCollider[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -235,7 +235,7 @@
 
 
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Sprite value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Sprite value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -247,7 +247,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Sprite[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Sprite[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -258,7 +258,7 @@
                 ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
             }
         }
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Rigidbody value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Rigidbody value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -270,7 +270,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Rigidbody[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Rigidbody[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -285,7 +285,7 @@
 
 
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.ParticleSystem value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.ParticleSystem value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -297,7 +297,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Transform value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Transform value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -309,7 +309,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.GameObject value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.GameObject value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -321,7 +321,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.GameObject[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.GameObject[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -333,7 +333,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Vector3 value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Vector3 value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -345,7 +345,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Quaternion value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Quaternion value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -357,7 +357,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.AudioSource value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.AudioSource value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -369,7 +369,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.AudioClip[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.AudioClip[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -381,7 +381,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Text value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Text value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -393,7 +393,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.HumanBodyBones value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.HumanBodyBones value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -405,7 +405,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDKBase.VRCPlayerApi value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDKBase.VRCPlayerApi value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -417,7 +417,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDKBase.VRCPlayerApi[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDKBase.VRCPlayerApi[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -429,7 +429,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.Udon.UdonBehaviour value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.Udon.UdonBehaviour value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -441,7 +441,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.Udon.Common.Interfaces.NetworkEventTarget value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.Udon.Common.Interfaces.NetworkEventTarget value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -453,7 +453,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, TMPro.TextMeshPro value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, TMPro.TextMeshPro value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -465,7 +465,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, TMPro.TextMeshProUGUI value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, TMPro.TextMeshProUGUI value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -476,7 +476,7 @@
                 ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
             }
         }
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.CapsuleCollider value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.CapsuleCollider value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -488,7 +488,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.CapsuleCollider[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.CapsuleCollider[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -500,7 +500,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.SphereCollider value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.SphereCollider value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -512,7 +512,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.SphereCollider[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.SphereCollider[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -524,7 +524,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.MeshCollider value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.MeshCollider value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -536,7 +536,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.MeshCollider[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.MeshCollider[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -548,7 +548,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Collider value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Collider value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -560,7 +560,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Collider[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Collider[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -572,7 +572,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Bounds value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Bounds value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -584,7 +584,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Bounds[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Bounds[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -596,7 +596,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Animator value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Animator value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -608,7 +608,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Animator[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Animator[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -620,7 +620,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.LayerMask value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.LayerMask value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -632,7 +632,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.LayerMask[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.LayerMask[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -644,7 +644,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.LineRenderer value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.LineRenderer value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -656,7 +656,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.LineRenderer[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.LineRenderer[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -668,7 +668,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.RaycastHit value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.RaycastHit value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -680,7 +680,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.RaycastHit[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.RaycastHit[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -692,7 +692,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.RectTransform value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.RectTransform value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -704,7 +704,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.RectTransform[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.RectTransform[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -716,7 +716,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Camera value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Camera value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -728,7 +728,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Camera[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Camera[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -740,7 +740,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.KeyCode value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.KeyCode value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -752,7 +752,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.KeyCode[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.KeyCode[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -764,7 +764,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Rect value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Rect value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -776,7 +776,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Rect[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Rect[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -788,7 +788,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Texture2D value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Texture2D value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -800,7 +800,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Texture2D[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Texture2D[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -813,7 +813,7 @@
         }
 
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.AI.NavMeshAgent value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.AI.NavMeshAgent value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -825,7 +825,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.AI.NavMeshAgent[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.AI.NavMeshAgent[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -837,7 +837,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.AI.NavMeshHit value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.AI.NavMeshHit value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -849,7 +849,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.AI.NavMeshHit[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.AI.NavMeshHit[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -861,7 +861,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Toggle value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Toggle value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -873,7 +873,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Toggle[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Toggle[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -884,7 +884,7 @@
                 ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
             }
         }
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Image value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Image value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -896,7 +896,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Image[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Image[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -908,7 +908,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Button value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Button value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -920,7 +920,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Button[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Button[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -935,7 +935,7 @@
 
         
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.RawImage value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.RawImage value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -947,7 +947,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.RawImage[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.RawImage[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -958,19 +958,7 @@
                 ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
             }
         }
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.VRCAvatarPedestal value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.VRCAvatarPedestal[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.VRCAvatarPedestal value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -982,7 +970,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.VRCPickup value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.VRCAvatarPedestal[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -994,7 +982,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.VRCPickup[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.VRCPickup value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1006,164 +994,7 @@
             }
         }
 
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, double value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, double[] value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, System.TimeSpan value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, System.TimeSpan[] value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Mesh value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Mesh[] value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Texture value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Texture[] value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.ReflectionProbe value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.ReflectionProbe[] value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.RenderTexture value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.RenderTexture[] value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.TextAsset value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.TextAsset[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.VRCPickup[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1176,7 +1007,7 @@
         }
 
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Slider value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, double value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1188,18 +1019,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Slider[] value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.ScrollRect value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, double[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1211,7 +1031,139 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.ScrollRect[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, System.TimeSpan value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, System.TimeSpan[] value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Mesh value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Mesh[] value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Texture value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.Texture[] value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.ReflectionProbe value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.ReflectionProbe[] value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.RenderTexture value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.RenderTexture[] value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.TextAsset value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.TextAsset[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1224,7 +1176,7 @@
         }
 
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.InputField value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Slider value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1236,7 +1188,18 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.InputField[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.Slider[] value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.ScrollRect value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1248,93 +1211,7 @@
             }
         }
 
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.Udon.Common.SerializationResult value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.Udon.Common.SerializationResult[] value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDKBase.VRCUrl value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDKBase.VRCUrl[] value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.Video.VideoError value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.Video.VideoError[] value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.VRCUrlInputField value, bool verify = false)
-        {
-            if (UnpackedUdonBehaviour != null)
-            {
-                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
-            }
-            else
-            {
-                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
-            }
-        }
-
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.VRCUrlInputField[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.ScrollRect[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1347,7 +1224,7 @@
         }
 
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Video.Components.VRCUnityVideoPlayer value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.InputField value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1359,7 +1236,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Video.Components.VRCUnityVideoPlayer[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, UnityEngine.UI.InputField[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1371,7 +1248,8 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer value, bool verify = false)
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.Udon.Common.SerializationResult value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1383,7 +1261,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.Udon.Common.SerializationResult[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -1395,7 +1273,129 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer value, bool verify = false)
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDKBase.VRCUrl value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDKBase.VRCUrl[] value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.Video.VideoError value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.Video.VideoError[] value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.VRCUrlInputField value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Components.VRCUrlInputField[] value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Video.Components.VRCUnityVideoPlayer value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Video.Components.VRCUnityVideoPlayer[] value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[] value, bool verify = false)
+        {
+            if (UnpackedUdonBehaviour != null)
+            {
+                PatchHeap(UnpackedUdonBehaviour.IUdonHeap, UnpackedUdonBehaviour.IUdonSymbolTable.GetAddressFromSymbol(symbol), value, verify);
+            }
+            else
+            {
+                ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
+            }
+        }
+
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1420,7 +1420,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1444,7 +1444,7 @@
                 ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
             }
         }
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Video.Components.VRCUnityVideoPlayer value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Video.Components.VRCUnityVideoPlayer value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1469,7 +1469,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Video.Components.VRCUnityVideoPlayer[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Video.Components.VRCUnityVideoPlayer[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1494,7 +1494,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.VRCUrlInputField value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.VRCUrlInputField value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1519,7 +1519,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.VRCUrlInputField[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.VRCUrlInputField[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1545,7 +1545,7 @@
         }
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.Video.VideoError value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.Video.VideoError value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1570,7 +1570,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.Video.VideoError[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.Video.VideoError[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1596,7 +1596,7 @@
         }
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDKBase.VRCUrl value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDKBase.VRCUrl value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1621,7 +1621,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDKBase.VRCUrl[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDKBase.VRCUrl[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1646,7 +1646,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.Udon.Common.SerializationResult value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.Udon.Common.SerializationResult value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1671,7 +1671,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.Udon.Common.SerializationResult[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.Udon.Common.SerializationResult[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1697,7 +1697,7 @@
         }
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.InputField value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.InputField value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1722,7 +1722,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.InputField[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.InputField[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1748,7 +1748,7 @@
         }
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.ScrollRect value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.ScrollRect value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1773,7 +1773,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.ScrollRect[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.ScrollRect[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1797,7 +1797,7 @@
                 ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
             }
         }
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Slider value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Slider value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1822,7 +1822,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Slider[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Slider[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1849,7 +1849,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.TextAsset value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.TextAsset value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1874,7 +1874,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.TextAsset[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.TextAsset[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1901,7 +1901,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.RenderTexture value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.RenderTexture value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1926,7 +1926,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.RenderTexture[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.RenderTexture[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1953,7 +1953,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.ReflectionProbe value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.ReflectionProbe value, bool verify = false)
         {
             if (heap != null)
             {
@@ -1978,7 +1978,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.ReflectionProbe[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.ReflectionProbe[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2003,7 +2003,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Texture value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Texture value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2028,7 +2028,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Texture[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Texture[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2055,7 +2055,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Mesh value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Mesh value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2080,7 +2080,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Mesh[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Mesh[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2108,7 +2108,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, System.TimeSpan value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, System.TimeSpan value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2133,7 +2133,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, System.TimeSpan[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, System.TimeSpan[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2157,7 +2157,7 @@
                 ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
             }
         }
-        public static void PatchHeap(IUdonHeap heap, uint address, double value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, double value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2182,7 +2182,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, double[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, double[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2209,7 +2209,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.VRCPickup value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.VRCPickup value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2234,7 +2234,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.VRCPickup[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.VRCPickup[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2263,7 +2263,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.VRCAvatarPedestal value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.VRCAvatarPedestal value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2288,7 +2288,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.VRCAvatarPedestal[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.VRCAvatarPedestal[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2316,7 +2316,7 @@
 
 
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, ushort value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, ushort value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2328,7 +2328,7 @@
             }
         }
 
-        public static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, ushort[] value, bool verify = false)
+        internal static  void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, ushort[] value, bool verify = false)
         {
             if (UnpackedUdonBehaviour != null)
             {
@@ -2340,7 +2340,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, ushort value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, ushort value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2365,7 +2365,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, ushort[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, ushort[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2389,7 +2389,7 @@
                 ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
             }
         }
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Button value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Button value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2414,7 +2414,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Button[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Button[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2439,7 +2439,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.RawImage value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.RawImage value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2464,7 +2464,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.RawImage[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.RawImage[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2492,7 +2492,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Image value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Image value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2517,7 +2517,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Image[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Image[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2545,7 +2545,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Toggle value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Toggle value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2570,7 +2570,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Toggle[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Toggle[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2597,7 +2597,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.AI.NavMeshHit value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.AI.NavMeshHit value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2622,7 +2622,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.AI.NavMeshHit[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.AI.NavMeshHit[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2649,7 +2649,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.AI.NavMeshAgent value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.AI.NavMeshAgent value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2674,7 +2674,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.AI.NavMeshAgent[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.AI.NavMeshAgent[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2703,7 +2703,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Texture2D value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Texture2D value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2728,7 +2728,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Texture2D[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Texture2D[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2755,7 +2755,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Rect value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Rect value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2780,7 +2780,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Rect[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Rect[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2809,7 +2809,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.KeyCode value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.KeyCode value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2834,7 +2834,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.KeyCode[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.KeyCode[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2861,7 +2861,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Camera value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Camera value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2886,7 +2886,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Camera[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Camera[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2913,7 +2913,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.RectTransform value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.RectTransform value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2938,7 +2938,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.RectTransform[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.RectTransform[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2966,7 +2966,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.RaycastHit value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.RaycastHit value, bool verify = false)
         {
             if (heap != null)
             {
@@ -2991,7 +2991,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.RaycastHit[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.RaycastHit[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3020,7 +3020,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.LineRenderer value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.LineRenderer value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3045,7 +3045,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.LineRenderer[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.LineRenderer[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3072,7 +3072,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.LayerMask value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.LayerMask value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3097,7 +3097,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.LayerMask[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.LayerMask[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3124,7 +3124,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Animator value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Animator value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3149,7 +3149,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Animator[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Animator[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3176,7 +3176,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Bounds value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Bounds value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3201,7 +3201,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Bounds[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Bounds[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3228,7 +3228,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.MeshCollider value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.MeshCollider value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3253,7 +3253,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.MeshCollider[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.MeshCollider[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3280,7 +3280,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.SphereCollider value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.SphereCollider value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3305,7 +3305,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.SphereCollider[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.SphereCollider[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3332,7 +3332,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.CapsuleCollider value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.CapsuleCollider value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3357,7 +3357,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.CapsuleCollider[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.CapsuleCollider[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3384,7 +3384,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, TMPro.TextMeshProUGUI value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, TMPro.TextMeshProUGUI value, bool verify = false)
         {
             if (heap != null && address != null)
             {
@@ -3409,7 +3409,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, bool value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, bool value, bool verify = false)
         {
             if (heap != null && address != null)
             {
@@ -3434,7 +3434,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, float value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, float value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3459,7 +3459,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, string value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, string value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3484,7 +3484,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, string[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, string[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3509,7 +3509,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, uint value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, uint value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3534,7 +3534,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, int value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, int value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3558,7 +3558,7 @@
                 ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
             }
         }
-        public static void PatchHeap(IUdonHeap heap, uint address, byte value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, byte value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3583,7 +3583,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, byte[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, byte[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3610,7 +3610,7 @@
 
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, long value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, long value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3635,7 +3635,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, char value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, char value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3660,7 +3660,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, char[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, char[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3685,7 +3685,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Color value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Color value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3710,7 +3710,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Material value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Material value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3735,7 +3735,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.MeshRenderer value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.MeshRenderer value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3760,7 +3760,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.MeshRenderer[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.MeshRenderer[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3785,7 +3785,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Component value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Component value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3810,7 +3810,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Component[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Component[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3834,7 +3834,7 @@
                 ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
             }
         }
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.BoxCollider value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.BoxCollider value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3859,7 +3859,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.BoxCollider[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.BoxCollider[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3884,7 +3884,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Collider value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Collider value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3909,7 +3909,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Collider[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Collider[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3935,7 +3935,7 @@
         }
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.ParticleSystem value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.ParticleSystem value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3960,7 +3960,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Transform value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Transform value, bool verify = false)
         {
             if (heap != null)
             {
@@ -3985,7 +3985,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.GameObject value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.GameObject value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4010,7 +4010,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.GameObject[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.GameObject[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4035,7 +4035,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Vector3 value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Vector3 value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4060,7 +4060,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Quaternion value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Quaternion value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4085,7 +4085,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.AudioSource value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.AudioSource value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4110,7 +4110,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.AudioClip[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.AudioClip[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4135,7 +4135,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Text value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Text value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4160,7 +4160,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.HumanBodyBones value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.HumanBodyBones value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4185,7 +4185,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDKBase.VRCPlayerApi value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDKBase.VRCPlayerApi value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4210,7 +4210,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.SDKBase.VRCPlayerApi[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.SDKBase.VRCPlayerApi[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4235,7 +4235,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.Udon.UdonBehaviour value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.Udon.UdonBehaviour value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4260,7 +4260,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, VRC.Udon.Common.Interfaces.NetworkEventTarget value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, VRC.Udon.Common.Interfaces.NetworkEventTarget value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4285,7 +4285,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, TMPro.TextMeshPro value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, TMPro.TextMeshPro value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4310,7 +4310,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Sprite value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Sprite value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4335,7 +4335,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Sprite[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Sprite[] value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4361,7 +4361,7 @@
         }
 
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Rigidbody value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Rigidbody value, bool verify = false)
         {
             if (heap != null)
             {
@@ -4386,7 +4386,7 @@
             }
         }
 
-        public static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Rigidbody[] value, bool verify = false)
+        internal static  void PatchHeap(IUdonHeap heap, uint address, UnityEngine.Rigidbody[] value, bool verify = false)
         {
             if (heap != null)
             {

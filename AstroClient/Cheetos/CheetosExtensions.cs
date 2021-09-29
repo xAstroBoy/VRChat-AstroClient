@@ -5,9 +5,9 @@
     using UnityEngine;
     using VRC.Core;
 
-    public static class CheetosExtensions
+    internal static  class CheetosExtensions
     {
-        public static AvatarData GetAvatarData(this ApiAvatar instance)
+        internal static  AvatarData GetAvatarData(this ApiAvatar instance)
         {
             return new AvatarData()
             {
@@ -25,7 +25,7 @@
             };
         }
 
-        public static AvatarData GetAvatarData(this AvatarObject instance)
+        internal static  AvatarData GetAvatarData(this AvatarObject instance)
         {
             return new AvatarData()
             {
@@ -43,7 +43,7 @@
             };
         }
 
-        public static ApiAvatar ToApiAvatar(this AvatarData instance)
+        internal static  ApiAvatar ToApiAvatar(this AvatarData instance)
         {
             return new ApiAvatar()
             {
@@ -60,7 +60,7 @@
             };
         }
 
-        public static string ToUppercaseFirstCharacterOnly(this string text)
+        internal static  string ToUppercaseFirstCharacterOnly(this string text)
         {
             if (text.Length >= 2)
             {

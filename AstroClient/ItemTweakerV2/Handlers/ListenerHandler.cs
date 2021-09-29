@@ -7,15 +7,15 @@
     using System;
     using UnityEngine;
 
-    public class ListenerHandler : Tweaker_Events
+    internal class ListenerHandler : Tweaker_Events
     {
-        public static event EventHandler Event_OnSelectedObject_Enabled;
+        internal static  event EventHandler Event_OnSelectedObject_Enabled;
 
-        public static event EventHandler Event_OnSelectedObject_Disabled;
+        internal static  event EventHandler Event_OnSelectedObject_Disabled;
 
-        public static event EventHandler Event_OnSelectedObject_Destroyed;
+        internal static  event EventHandler Event_OnSelectedObject_Destroyed;
 
-        public override void On_New_GameObject_Selected(GameObject obj)
+        internal override void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
             {
@@ -48,7 +48,7 @@
             }
         }
 
-        public override void On_Old_GameObject_Removed(GameObject obj)
+        internal override void On_Old_GameObject_Removed(GameObject obj)
         {
             if (obj != null)
             {

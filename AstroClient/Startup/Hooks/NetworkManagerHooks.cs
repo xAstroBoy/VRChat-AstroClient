@@ -7,26 +7,26 @@
     using System.Collections;
     using VRC;
 
-    public class NetworkManagerHooks : GameEvents
+    internal class NetworkManagerHooks : GameEvents
     {
         private static bool IsInitialized;
         private static bool SeenFire;
         private static bool AFiredFirst;
 
-        public static event Action<Player> OnJoin;
+        internal static  event Action<Player> OnJoin;
 
-        public static event Action<Player> OnLeave;
+        internal static  event Action<Player> OnLeave;
 
-        public static EventHandler<PlayerEventArgs> Event_OnPlayerJoin;
+        internal static  EventHandler<PlayerEventArgs> Event_OnPlayerJoin;
 
-        public static EventHandler<PlayerEventArgs> Event_OnPlayerLeft;
+        internal static  EventHandler<PlayerEventArgs> Event_OnPlayerLeft;
 
-        public override void ExecutePriorityPatches()
+        internal override void ExecutePriorityPatches()
         {
             _ = MelonCoroutines.Start(HookNetworkManager());
         }
 
-        public static IEnumerator HookNetworkManager()
+        internal static  IEnumerator HookNetworkManager()
         {
             while (NetworkManager.field_Internal_Static_NetworkManager_0 is null)
             {
@@ -48,17 +48,17 @@
             OnLeave += OnPlayerLeftEvent;
         }
 
-        public static void OnPlayerJoinedEvent(Player player)
+        internal static  void OnPlayerJoinedEvent(Player player)
         {
             Event_OnPlayerJoin?.SafetyRaise(new PlayerEventArgs(player));
         }
 
-        public static void OnPlayerLeftEvent(Player player)
+        internal static  void OnPlayerLeftEvent(Player player)
         {
             Event_OnPlayerLeft?.SafetyRaise(new PlayerEventArgs(player));
         }
 
-        public static void EventHandlerA(Player player)
+        internal static  void EventHandlerA(Player player)
         {
             if (!SeenFire)
             {
@@ -69,7 +69,7 @@
             (AFiredFirst ? OnJoin : OnLeave)?.Invoke(player);
         }
 
-        public static void EventHandlerB(Player player)
+        internal static  void EventHandlerB(Player player)
         {
             if (!SeenFire)
             {
@@ -80,7 +80,7 @@
             (AFiredFirst ? OnLeave : OnJoin)?.Invoke(player);
         }
 
-        public static void Initialize()
+        internal static  void Initialize()
         {
             if (IsInitialized) return;
             if (NetworkManager.field_Internal_Static_NetworkManager_0 is null) return;

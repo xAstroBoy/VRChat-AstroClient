@@ -5,38 +5,38 @@
 //	using Windows.Foundation;
 //	using Windows.Media.Control;
 
-//	public class MediaController
+//	internal class MediaController
 //	{
 //		public delegate void MediaSessionDelegate(MediaSession session);
 
 //		/// <summary>
 //		/// Triggered when a new media source gets added to the MediaSessions
 //		/// </summary>
-//		public static event MediaSessionDelegate OnNewSource;
+//		internal static  event MediaSessionDelegate OnNewSource;
 
 //		/// <summary>
 //		/// Triggered when a media source gets removed from the MediaSessions
 //		/// </summary>
-//		public static event MediaSessionDelegate OnRemovedSource;
+//		internal static  event MediaSessionDelegate OnRemovedSource;
 
 //		/// <summary>
 //		/// Triggered when a playback state changes of a MediaSession
 //		/// </summary>
-//		public static event TypedEventHandler<MediaSession, GlobalSystemMediaTransportControlsSessionPlaybackInfo> OnPlaybackStateChanged;
+//		internal static  event TypedEventHandler<MediaSession, GlobalSystemMediaTransportControlsSessionPlaybackInfo> OnPlaybackStateChanged;
 
 //		/// <summary>
 //		/// Triggered when a song changes of a MediaSession
 //		/// </summary>
-//		public static event TypedEventHandler<MediaSession, GlobalSystemMediaTransportControlsSessionMediaProperties> OnSongChanged;
+//		internal static  event TypedEventHandler<MediaSession, GlobalSystemMediaTransportControlsSessionMediaProperties> OnSongChanged;
 
 //		/// <summary>
 //		/// A dictionary of the current MediaSessions
 //		/// </summary>
-//		public static Dictionary<string, MediaSession> CurrentMediaSessions = new Dictionary<string, MediaSession>();
+//		internal static  Dictionary<string, MediaSession> CurrentMediaSessions = new Dictionary<string, MediaSession>();
 
 //		private static bool IsStarted;
 
-//		public static void Start()
+//		internal static  void Start()
 //		{
 //			if (!IsStarted)
 //			{
@@ -69,7 +69,7 @@
 //			OnRemovedSource.SafetyRaise(mediaSession);
 //		}
 
-//		public class MediaSession
+//		internal class MediaSession
 //		{
 //			public GlobalSystemMediaTransportControlsSession ControlSession;
 //			public string LastSong;

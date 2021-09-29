@@ -5,7 +5,7 @@
 
     internal class EspHelper : GameEvents
     {
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             foreach (var item in SpawnedESPsHolders)
             {
@@ -16,7 +16,7 @@
 
         private static GameObject _HighlightFXCamera;
 
-        public static GameObject HighLightFXCamera
+        internal static  GameObject HighLightFXCamera
         {
             get
             {
@@ -36,6 +36,6 @@
             }
         }
 
-        public static List<HighlightsFXStandalone> SpawnedESPsHolders = new List<HighlightsFXStandalone>();
+        internal static  List<HighlightsFXStandalone> SpawnedESPsHolders = new List<HighlightsFXStandalone>();
     }
 }

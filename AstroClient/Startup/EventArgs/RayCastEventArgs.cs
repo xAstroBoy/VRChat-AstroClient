@@ -2,7 +2,7 @@
 {
     using UnityEngine;
 
-    public class RayCastEventArgs
+    internal class RayCastEventArgs
     {
         public RaycastHit hit;
 

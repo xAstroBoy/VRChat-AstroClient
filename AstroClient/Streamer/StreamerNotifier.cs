@@ -11,10 +11,10 @@
     using System.Threading.Tasks;
     using VRC;
 
-    public class StreamerNotifier : GameEvents
+    internal class StreamerNotifier : GameEvents
     {
 
-        public override void OnStreamerJoined(Player player)
+        internal override void OnStreamerJoined(Player player)
         {
             if (!Bools.IsDeveloper)
             {
@@ -32,7 +32,7 @@
             }
         }
 
-        public override void OnStreamerLeft(Player player)
+        internal override void OnStreamerLeft(Player player)
         {
             if (!Bools.IsDeveloper)
             {

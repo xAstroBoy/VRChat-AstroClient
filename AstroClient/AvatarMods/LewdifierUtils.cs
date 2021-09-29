@@ -8,51 +8,51 @@
     using System.Collections.Generic;
     using System.IO;
 
-    public class LewdifierUtils : GameEvents
+    internal class LewdifierUtils : GameEvents
     {
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             RefreshAll();
         }
 
-        public override void OnApplicationQuit()
+        internal override void OnApplicationQuit()
         {
             SaveAll();
         }
 
-        public static QMSingleButton LewdifyLists;
+        internal static  QMSingleButton LewdifyLists;
 
-        public static List<string> TermsToToggleOn { get; set; } = new List<string>();
-        public static List<string> TermsToToggleOff { get; set; } = new List<string>();
-        public static List<string> AvatarsToSkip { get; set; } = new List<string>();
+        internal static  List<string> TermsToToggleOn { get; set; } = new List<string>();
+        internal static  List<string> TermsToToggleOff { get; set; } = new List<string>();
+        internal static  List<string> AvatarsToSkip { get; set; } = new List<string>();
 
         private static string TermsToEnableOnPath { get; } = Path.Combine(Environment.CurrentDirectory, @"AstroClient\Lewdify\TermsToEnable.json");
         private static string TermsToEnableOffPath { get; } = Path.Combine(Environment.CurrentDirectory, @"AstroClient\Lewdify\TermsToDisable.json");
         private static string AvatarsToSkipPath { get; } = Path.Combine(Environment.CurrentDirectory, @"AstroClient\Lewdify\IgnoredAvatars.json");
 
-        public static void SaveAll()
+        internal static  void SaveAll()
         {
             Save_TermsToToggleOn();
             Save_TermsToToggleOff();
             Save_AvatarToSkip();
         }
 
-        public static void Save_TermsToToggleOn()
+        internal static  void Save_TermsToToggleOn()
         {
             JSonWriter.WriteToJsonFile(TermsToEnableOnPath, TermsToToggleOn);
         }
 
-        public static void Save_TermsToToggleOff()
+        internal static  void Save_TermsToToggleOff()
         {
             JSonWriter.WriteToJsonFile(TermsToEnableOffPath, TermsToToggleOff);
         }
 
-        public static void Save_AvatarToSkip()
+        internal static  void Save_AvatarToSkip()
         {
             JSonWriter.WriteToJsonFile(AvatarsToSkipPath, AvatarsToSkip);
         }
 
-        public static void RefreshAll()
+        internal static  void RefreshAll()
         {
             try
             {
@@ -73,7 +73,7 @@
             }
         }
 
-        public static string ListButtonText
+        internal static  string ListButtonText
         {
             get
             {
@@ -83,7 +83,7 @@
             }
         }
 
-        public static void Refresh_termsToToggleOn()
+        internal static  void Refresh_termsToToggleOn()
         {
             if (File.Exists(TermsToEnableOnPath))
             {
@@ -110,7 +110,7 @@
             }
         }
 
-        public static void Refresh_termsToToggleOff()
+        internal static  void Refresh_termsToToggleOff()
         {
             if (File.Exists(TermsToEnableOffPath))
             {
@@ -136,7 +136,7 @@
             }
         }
 
-        public static void Refresh_AvatarsToSkip()
+        internal static  void Refresh_AvatarsToSkip()
         {
             if (File.Exists(AvatarsToSkipPath))
             {

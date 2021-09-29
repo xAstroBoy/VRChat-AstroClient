@@ -27,7 +27,7 @@
     {
         private static bool DoOnce;
 
-        public override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnUiManagerInit()
         {
             var infoBar = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar");
             var infobartext = GameObject.Find("UserInterface/QuickMenu/QuickMenu_NewElements/_InfoBar/EarlyAccessText").GetComponent<Text>();
@@ -103,31 +103,31 @@
             //Helper().Start();
         }
 
-        public override void OnMasterClientSwitched(Photon.Realtime.Player player)
+        internal override void OnMasterClientSwitched(Photon.Realtime.Player player)
         {
             if (!WorldUtils.IsInWorld) return;
 
             PopupUtils.QueHudMessage($"'{player.field_Public_Player_0.GetDisplayName()}' is now the room master.");
         }
 
-        public override void OnRoomJoined()
+        internal override void OnRoomJoined()
         {
             ModConsole.Log("You joined a room.");
         }
 
-        public override void OnRoomLeft()
+        internal override void OnRoomLeft()
         {
             ModConsole.Log("You left a room.");
         }
 
-        public override void OnPlayerJoined(Player player)
+        internal override void OnPlayerJoined(Player player)
         {
             return;
             if (player == null) throw new ArgumentNullException();
             if (player.gameObject.GetComponent<CheetoNameplate>() == null) player.gameObject.AddComponent<CheetoNameplate>();
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             Player player = PlayerUtils.GetPlayer();
             if (player.gameObject.GetComponent<SitOnPlayer>() == null) player.gameObject.AddComponent<SitOnPlayer>();

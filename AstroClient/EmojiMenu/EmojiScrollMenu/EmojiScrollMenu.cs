@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.EmojiMenu
 {
-    public class EmojiScrollMenu
+    internal class EmojiScrollMenu
     {
     }
 }

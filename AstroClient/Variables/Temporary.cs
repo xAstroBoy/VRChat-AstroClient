@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.Variables
 {
-    public class Temporary
+    internal class Temporary
     {
         internal static int RealPing { get; set; }
 

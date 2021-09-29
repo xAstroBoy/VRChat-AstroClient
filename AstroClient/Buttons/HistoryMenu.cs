@@ -9,11 +9,11 @@
 
     #endregion Imports
 
-    public class HistoryMenu : GameEvents
+    internal class HistoryMenu : GameEvents
     {
-        public static QMTabMenu SubMenu { get; private set; }
+        internal static  QMTabMenu SubMenu { get; private set; }
 
-        public static void InitButtons(float pos)
+        internal static  void InitButtons(float pos)
         {
             if (Bools.IsDeveloper)
             {

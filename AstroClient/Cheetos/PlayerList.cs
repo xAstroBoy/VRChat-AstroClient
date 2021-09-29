@@ -23,7 +23,7 @@
 
         private static QMSingleButton refreshButton;
 
-        public static List<QMSingleButton> PlayerButtons { get; } = new List<QMSingleButton>();
+        internal static  List<QMSingleButton> PlayerButtons { get; } = new List<QMSingleButton>();
 
         private static readonly Color InstanceMasterColor = Color.cyan;
 
@@ -37,7 +37,7 @@
 
         private static Mutex refreshMutex = new Mutex();
 
-        public override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnUiManagerInit()
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -61,7 +61,7 @@
             Console.WriteLine($"Playerlist Created: {stopwatch.ElapsedMilliseconds}ms");
         }
 
-        public override void OnLateUpdate()
+        internal override void OnLateUpdate()
         {
             //if (ConfigManager.UI.ShowPlayersList && ConfigManager.UI.ShowPlayersMenu)
             //{
@@ -77,18 +77,18 @@
             //}
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             //MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
         }
 
-        public override void OnPhotonJoined(Photon.Realtime.Player player)
+        internal override void OnPhotonJoined(Photon.Realtime.Player player)
         {
             if (player == null) throw new ArgumentNullException();
             //MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
         }
 
-        public override void OnPhotonLeft(Photon.Realtime.Player player)
+        internal override void OnPhotonLeft(Photon.Realtime.Player player)
         {
             if (player == null) { throw new ArgumentNullException(); }
             //RefreshButtons();
@@ -139,7 +139,7 @@
             yield break;
         }
 
-        public static void CreateButton(PlayerListData player, float xPos, float yPos)
+        internal static  void CreateButton(PlayerListData player, float xPos, float yPos)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -192,7 +192,7 @@
             }
         }
 
-        public static void ShowPlayerMenu()
+        internal static  void ShowPlayerMenu()
         {
             ConfigManager.UI.ShowPlayersMenu = true;
             playersButton.SetTextColor(Color.green);
@@ -207,7 +207,7 @@
             }
         }
 
-        public static void HidePlayerMenu()
+        internal static  void HidePlayerMenu()
         {
             ConfigManager.UI.ShowPlayersMenu = false;
             playersButton.SetTextColor(Color.red);

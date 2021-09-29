@@ -12,7 +12,7 @@
     using Color = System.Drawing.Color;
 
     [RegisterComponent]
-    public class ObjectSpinnerManager : GameEventsBehaviour
+    internal class ObjectSpinnerManager : GameEventsBehaviour
     {
         #region Internal
 
@@ -47,7 +47,7 @@
 
         #region Module
 
-        public static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ObjectSpinnerBehaviors;
+        internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ObjectSpinnerBehaviors;
 
         public void Start()
         {
@@ -55,7 +55,7 @@
             Instance = this;
         }
 
-        public static void MakeInstance()
+        internal static  void MakeInstance()
         {
             if (Instance == null)
             {
@@ -74,11 +74,11 @@
             }
         }
 
-        public static void Update()
+        internal static  void Update()
         {
         }
 
-        public static void UpdateSpinnerButton(GameObject obj)
+        internal static  void UpdateSpinnerButton(GameObject obj)
         {
             var spin = obj.GetComponent<ObjectSpinner>();
             if (spin != null)
@@ -91,7 +91,7 @@
             }
         }
 
-        public static void RemoveObject(GameObject obj)
+        internal static  void RemoveObject(GameObject obj)
         {
             if (ObjectSpinners.Contains(obj))
             {
@@ -99,7 +99,7 @@
             }
         }
 
-        public static void UpdateTimerButton(GameObject obj)
+        internal static  void UpdateTimerButton(GameObject obj)
         {
             var Timer = obj.GetComponent<ObjectSpinner>();
             if (Timer != null)
@@ -112,7 +112,7 @@
             }
         }
 
-        public static void KillObjectSpinners()
+        internal static  void KillObjectSpinners()
         {
             foreach (var obj in ObjectSpinners)
             {
@@ -126,7 +126,7 @@
             ObjectSpinners.Clear();
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             ObjectSpinners.Clear();
             ClearList();
@@ -140,7 +140,7 @@
             }
         }
 
-        public static void IncreaseObjTimer(GameObject obj)
+        internal static  void IncreaseObjTimer(GameObject obj)
         {
             var TuneTime = obj.GetComponent<ObjectSpinner>();
             if (TuneTime != null)
@@ -150,7 +150,7 @@
             }
         }
 
-        public static void DecreaseObjTimer(GameObject obj)
+        internal static  void DecreaseObjTimer(GameObject obj)
         {
             var TuneTime = obj.GetComponent<ObjectSpinner>();
             if (TuneTime != null)
@@ -160,27 +160,27 @@
             }
         }
 
-        public static void Register(ObjectSpinner ObjectSpinnerBehaviour)
+        internal static  void Register(ObjectSpinner ObjectSpinnerBehaviour)
         {
             ObjectSpinnerBehaviors.Add(ObjectSpinnerBehaviour);
         }
 
-        public static void Deregister(ObjectSpinner ObjectSpinnerBehaviour)
+        internal static  void Deregister(ObjectSpinner ObjectSpinnerBehaviour)
         {
             _ = ObjectSpinnerBehaviors.Remove(ObjectSpinnerBehaviour);
         }
 
-        public static void ClearList()
+        internal static  void ClearList()
         {
             ObjectSpinnerBehaviors.Clear();
         }
 
-        public static List<GameObject> ObjectSpinners = new List<GameObject>();
+        internal static  List<GameObject> ObjectSpinners = new List<GameObject>();
 
-        public static ObjectSpinnerManager Instance { get; set; }
+        internal static  ObjectSpinnerManager Instance { get; set; }
 
-        public static QMSingleButton SpinnerTimerBtn;
-        public static QMSingleButton SpinAmountTell;
+        internal static  QMSingleButton SpinnerTimerBtn;
+        internal static  QMSingleButton SpinAmountTell;
 
         #endregion Module
     }

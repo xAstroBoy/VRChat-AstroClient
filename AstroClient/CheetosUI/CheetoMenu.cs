@@ -9,13 +9,13 @@
 
     internal class CheetoMenu : GameEvents
     {
-        public static GameObject UI;
+        internal static  GameObject UI;
 
-        public static GameObject Menu;
+        internal static  GameObject Menu;
 
-        public static bool IsOpen = false;
+        internal static  bool IsOpen = false;
 
-        public override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnUiManagerInit()
         {
             //try
             //{
@@ -53,7 +53,7 @@
             //}
         }
 
-        public override void OnUpdate()
+        internal override void OnUpdate()
         {
             //if (Input.GetKeyDown(KeyCode.BackQuote))
             //{

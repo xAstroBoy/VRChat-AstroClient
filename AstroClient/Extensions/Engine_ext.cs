@@ -16,21 +16,21 @@
 
     #endregion Imports
 
-    public static class Engine_ext
+    internal static  class Engine_ext
     {
-        public static void DestroyChildren(this Transform parent)
+        internal static  void DestroyChildren(this Transform parent)
         {
             for (var i = parent.childCount; i > 0; i--)
                 UnityEngine.Object.DestroyImmediate(parent.GetChild(i - 1).gameObject);
         }
 
-        public static GameObject NoUnload(this GameObject obj)
+        internal static  GameObject NoUnload(this GameObject obj)
         {
             obj.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             return obj;
         }
 
-        public static void PrintPath(this GameObject obj)
+        internal static  void PrintPath(this GameObject obj)
         {
             if (obj != null)
             {
@@ -42,7 +42,7 @@
             }
         }
 
-        public static string GetPath(this GameObject obj)
+        internal static  string GetPath(this GameObject obj)
         {
             if (obj != null)
             {
@@ -52,42 +52,42 @@
             return "Object is Null";
         }
 
-        public static UnityEngine.Color Get_Transform_Active_ToColor(this Transform obj)
+        internal static  UnityEngine.Color Get_Transform_Active_ToColor(this Transform obj)
         {
             return obj.gameObject.Get_GameObject_Active_ToColor();
         }
 
-        public static UnityEngine.Color Get_GameObject_Active_ToColor(this GameObject obj)
+        internal static  UnityEngine.Color Get_GameObject_Active_ToColor(this GameObject obj)
         {
             return obj != null ? obj.active ? UnityEngine.Color.green : UnityEngine.Color.red : UnityEngine.Color.red;
         }
 
-        public static UnityEngine.Color Get_AudioSource_Active_ToColor(this AudioSource obj)
+        internal static  UnityEngine.Color Get_AudioSource_Active_ToColor(this AudioSource obj)
         {
             return obj != null ? obj.enabled ? UnityEngine.Color.green : UnityEngine.Color.red : UnityEngine.Color.red;
         }
 
-        public static UnityEngine.Color Get_MonoBehaviour_Enabled_ToColor(this MonoBehaviour obj)
+        internal static  UnityEngine.Color Get_MonoBehaviour_Enabled_ToColor(this MonoBehaviour obj)
         {
             return obj != null ? obj.enabled ? UnityEngine.Color.green : UnityEngine.Color.red : UnityEngine.Color.red;
         }
 
-        public static bool? Is_DontDestroyOnLoad(this GameObject obj)
+        internal static  bool? Is_DontDestroyOnLoad(this GameObject obj)
         {
             return obj != null ? obj.scene.name.Equals("DontDestroyOnLoad") : (bool?)null;
         }
 
-        public static bool? Is_DontDestroyOnLoad(this Transform obj)
+        internal static  bool? Is_DontDestroyOnLoad(this Transform obj)
         {
             return obj?.gameObject.Is_DontDestroyOnLoad();
         }
 
-        public static void Set_DontDestroyOnLoad(this Object obj)
+        internal static  void Set_DontDestroyOnLoad(this Object obj)
         {
             UnityEngine.Object.DontDestroyOnLoad(obj);
         }
 
-        public static bool? Is_HideAndDontSave(this GameObject obj)
+        internal static  bool? Is_HideAndDontSave(this GameObject obj)
         {
             try
             {
@@ -96,22 +96,22 @@
             catch { return false; }
         }
 
-        public static bool? Is_HideAndDontSave(this Transform obj)
+        internal static  bool? Is_HideAndDontSave(this Transform obj)
         {
             return obj?.gameObject.Is_HideAndDontSave();
         }
 
-        public static bool? Is_CurrentWorld(this GameObject obj)
+        internal static  bool? Is_CurrentWorld(this GameObject obj)
         {
             return obj != null ? !obj.Is_HideAndDontSave().Value && !obj.Is_DontDestroyOnLoad().Value : (bool?)null;
         }
 
-        public static bool? Is_CurrentWorld(this Transform obj)
+        internal static  bool? Is_CurrentWorld(this Transform obj)
         {
             return obj?.gameObject.Is_CurrentWorld();
         }
 
-        public static void CopyPath(this GameObject obj)
+        internal static  void CopyPath(this GameObject obj)
         {
             if (obj != null)
             {
@@ -125,7 +125,7 @@
             }
         }
 
-        public static void CopyRotation(this GameObject obj)
+        internal static  void CopyRotation(this GameObject obj)
         {
             if (obj != null)
             {
@@ -135,7 +135,7 @@
             }
         }
 
-        public static void CopyPosition(this GameObject obj)
+        internal static  void CopyPosition(this GameObject obj)
         {
             if (obj != null)
             {
@@ -145,7 +145,7 @@
             }
         }
 
-        public static void CopyLocalPosition(this GameObject obj)
+        internal static  void CopyLocalPosition(this GameObject obj)
         {
             if (obj != null)
             {
@@ -155,7 +155,7 @@
             }
         }
 
-        public static void CopyLocalRotation(this GameObject obj)
+        internal static  void CopyLocalRotation(this GameObject obj)
         {
             if (obj != null)
             {
@@ -165,7 +165,7 @@
             }
         }
 
-        public static void DestroyObject(this GameObject obj)
+        internal static  void DestroyObject(this GameObject obj)
         {
             if (!obj.DestroyMeOnline())
             {
@@ -173,17 +173,17 @@
             }
         }
 
-        public static GameObject InstantiateObject(this GameObject obj)
+        internal static  GameObject InstantiateObject(this GameObject obj)
         {
             return obj != null ? Object.Instantiate(obj) : null;
         }
 
-        public static GameObject InstantiateObject(this Transform obj)
+        internal static  GameObject InstantiateObject(this Transform obj)
         {
             return obj != null ? Object.Instantiate(obj.gameObject) : null;
         }
 
-        public static void CloneObject(this GameObject obj)
+        internal static  void CloneObject(this GameObject obj)
         {
             if (obj != null)
             {
@@ -191,7 +191,7 @@
             }
         }
 
-        public static bool DestroyMeOnline(this GameObject obj)
+        internal static  bool DestroyMeOnline(this GameObject obj)
         {
             var name = obj.name;
             if (obj != null)
@@ -211,7 +211,7 @@
             }
         }
 
-        public static void DestroyMeLocal(this Object obj)
+        internal static  void DestroyMeLocal(this Object obj)
         {
             if (obj != null)
             {
@@ -299,7 +299,7 @@
             }
         }
 
-        public static void RenameObject(this GameObject obj, string newname)
+        internal static  void RenameObject(this GameObject obj, string newname)
         {
             if (obj != null)
             {
@@ -309,7 +309,7 @@
             }
         }
 
-        public static List<Transform> Get_Childs(this Transform obj)
+        internal static  List<Transform> Get_Childs(this Transform obj)
         {
             List<Transform> childs = new List<Transform>();
             for (var i = 0; i < obj.childCount; i++)
@@ -323,7 +323,7 @@
             return childs;
         }
 
-        public static List<Transform> Get_All_Childs(this Transform item)
+        internal static  List<Transform> Get_All_Childs(this Transform item)
         {
             CheckTransform(item);
             return _Transforms;
@@ -361,7 +361,7 @@
             }
         }
 
-        public static UnityEngine.Color ToUnityEngineColor(this System.Drawing.Color Color)
+        internal static  UnityEngine.Color ToUnityEngineColor(this System.Drawing.Color Color)
         {
             return ColorUtils.ToUnityEngineColor(Color);
         }

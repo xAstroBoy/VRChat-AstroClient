@@ -7,9 +7,9 @@
 
     internal class VoidClub : GameEvents
     {
-        public static QMNestedButton VoidClubMenu;
+        internal static  QMNestedButton VoidClubMenu;
 
-        public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             VoidClubMenu = new QMNestedButton(main, x, y, "VoidClubMenu Exploits", "VoidClubMenu Exploits", null, null, null, null, btnHalf);
 
@@ -18,7 +18,7 @@
             _ = new QMSingleButton(VoidClubMenu, 1, 2, "Unlock\nForest\n3", () => { UnlockForest(); }, "Unlock Forest 3");
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
         }
 

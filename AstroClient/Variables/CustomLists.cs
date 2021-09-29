@@ -4,9 +4,9 @@
     using UnityEngine;
     using VRC.Udon;
 
-    public class CustomLists : GameEvents
+    internal class CustomLists : GameEvents
     {
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             RendererSaverIndex.Clear();
             ColliderCheck.Clear();
@@ -14,7 +14,7 @@
             ScaleCheck.Clear();
         }
 
-        public class UdonBehaviour_Cached
+        internal class UdonBehaviour_Cached
         {
             public UdonBehaviour UdonBehaviour { get; set; }
             public string EventKey { get; set; }
@@ -26,7 +26,7 @@
             }
         }
 
-        public class ColliderChecker
+        internal class ColliderChecker
         {
             public GameObject TargetObj { get; set; }
             public bool HasCustomCollider { get; set; }
@@ -38,7 +38,7 @@
             }
         }
 
-        public class RigidBodyChecker
+        internal class RigidBodyChecker
         {
             public GameObject TargetObj { get; set; }
             public bool HasRigidBodyReplaced { get; set; }
@@ -50,7 +50,7 @@
             }
         }
 
-        public class GameObjScales
+        internal class GameObjScales
         {
             public GameObject TargetObj { get; set; }
             public Vector3 OriginalScale { get; set; }
@@ -65,7 +65,7 @@
             }
         }
 
-        public class RendererSaver
+        internal class RendererSaver
         {
             public GameObject TargetObj { get; set; }
             public int OriglightmapIndex { get; set; }
@@ -80,9 +80,9 @@
             }
         }
 
-        public static List<RendererSaver> RendererSaverIndex = new List<RendererSaver>();
-        public static List<ColliderChecker> ColliderCheck = new List<ColliderChecker>();
-        public static List<RigidBodyChecker> RigidBodyCheck = new List<RigidBodyChecker>();
-        public static List<GameObjScales> ScaleCheck = new List<GameObjScales>();
+        internal static  List<RendererSaver> RendererSaverIndex = new List<RendererSaver>();
+        internal static  List<ColliderChecker> ColliderCheck = new List<ColliderChecker>();
+        internal static  List<RigidBodyChecker> RigidBodyCheck = new List<RigidBodyChecker>();
+        internal static  List<GameObjScales> ScaleCheck = new List<GameObjScales>();
     }
 }

@@ -14,12 +14,12 @@
 
     internal class SingleTagsUtils : GameEvents
     {
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Counter.Clear();
         }
 
-        public override void OnPlayerLeft(Player player)
+        internal override void OnPlayerLeft(Player player)
         {
             if (player == null) throw new ArgumentNullException();
             var entry = GetEntry(player);
@@ -29,14 +29,14 @@
             }
         }
 
-        public static PlayerTagCounter GetEntry(Player player)
+        internal static  PlayerTagCounter GetEntry(Player player)
         {
             return Counter.Where(x => x.Player == player).DefaultIfEmpty(null).First();
         }
 
         private static readonly bool DebugMode = false;
 
-        public static void Debug(string msg)
+        internal static  void Debug(string msg)
         {
             if (DebugMode)
             {
@@ -44,7 +44,7 @@
             }
         }
 
-        public static SingleTag AddSingleTag(Player player)
+        internal static  SingleTag AddSingleTag(Player player)
         {
             SingleTag newtag = null;
             if (player != null)
@@ -85,7 +85,7 @@
             return newtag;
         }
 
-        public static List<PlayerTagCounter> GetAssignedTagsToPlayer(Player player)
+        internal static  List<PlayerTagCounter> GetAssignedTagsToPlayer(Player player)
         {
             List<PlayerTagCounter> AssignedTags = new List<PlayerTagCounter>();
             if (player != null)
@@ -104,9 +104,9 @@
             return AssignedTags;
         }
 
-        public static List<PlayerTagCounter> Counter = new List<PlayerTagCounter>();
+        internal static  List<PlayerTagCounter> Counter = new List<PlayerTagCounter>();
 
-        public static void RemoveCounter(PlayerTagCounter entry)
+        internal static  void RemoveCounter(PlayerTagCounter entry)
         {
             if (entry != null)
             {
@@ -117,7 +117,7 @@
             }
         }
 
-        public class PlayerTagCounter
+        internal class PlayerTagCounter
         {
             public Player Player { get; set; }
             public int AssignedStack { get; set; }

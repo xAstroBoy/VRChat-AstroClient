@@ -4,9 +4,9 @@ using Photon.Realtime;
 
 namespace AstroClient.Moderation
 {
-    public class ModerationNotifier : GameEvents
+    internal class ModerationNotifier : GameEvents
     {
-        public override void OnPlayerBlockedYou(Player player)
+        internal override void OnPlayerBlockedYou(Player player)
         {
             if (player != null)
             {
@@ -15,7 +15,7 @@ namespace AstroClient.Moderation
             }
         }
 
-        public override void OnPlayerUnblockedYou(Player player)
+        internal override void OnPlayerUnblockedYou(Player player)
         {
             if (player != null)
             {
@@ -24,7 +24,7 @@ namespace AstroClient.Moderation
             }
         }
 
-        public override void OnPlayerMutedYou(Player player)
+        internal override void OnPlayerMutedYou(Player player)
         {
             if (player != null)
             {
@@ -33,7 +33,7 @@ namespace AstroClient.Moderation
             }
         }
 
-        public override void OnPlayerUnmutedYou(Player player)
+        internal override void OnPlayerUnmutedYou(Player player)
         {
             if (player != null)
             {

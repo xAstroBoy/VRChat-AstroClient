@@ -8,7 +8,7 @@
     using UnityEngine;
 
     [RegisterComponent]
-    public class ESP_ItemTweaker : GameEventsBehaviour
+    internal class ESP_ItemTweaker : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 

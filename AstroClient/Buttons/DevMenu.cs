@@ -12,21 +12,21 @@
     /// <summary>
     /// Cheeto's temporary UI for new/wip features
     /// </summary>
-    public class DevMenu : GameEvents
+    internal class DevMenu : GameEvents
     {
         #region UIElements
 
-        public static QMTabMenu SubMenu { get; private set; }
+        internal static  QMTabMenu SubMenu { get; private set; }
 
-        public static QMScrollMenu MainScroller { get; private set; }
+        internal static  QMScrollMenu MainScroller { get; private set; }
 
-        public static QMSingleButton DisconectButton { get; private set; }
+        internal static  QMSingleButton DisconectButton { get; private set; }
 
-        public static QMSingleButton ReconnectButton { get; private set; }
+        internal static  QMSingleButton ReconnectButton { get; private set; }
 
         #endregion UIElements
 
-        public static void InitButtons(float pos)
+        internal static  void InitButtons(float pos)
         {
             if (Bools.IsDeveloper)
             {

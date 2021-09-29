@@ -4,14 +4,14 @@
     using UnityEngine;
     using static AstroClient.Variables.CustomLists;
 
-    public class ColliderEditors
+    internal class ColliderEditors
     {
-        public static bool HasAlreadyAColliderAdded(GameObject obj)
+        internal static  bool HasAlreadyAColliderAdded(GameObject obj)
         {
             return ColliderCheck.Where(x => x.TargetObj == obj).Select(x => x.HasCustomCollider).DefaultIfEmpty(false).First();
         }
 
-        public static void CustomColliderHasBeenAdded(GameObject obj, bool HasColliderAdded)
+        internal static  void CustomColliderHasBeenAdded(GameObject obj, bool HasColliderAdded)
         {
             if (obj != null)
             {
@@ -24,7 +24,7 @@
             }
         }
 
-        public static void AddCollider(GameObject obj)
+        internal static  void AddCollider(GameObject obj)
         {
             var Missing_boxCollider = obj.GetComponent<BoxCollider>();
             var Missing_CapsuleCollider = obj.GetComponent<CapsuleCollider>();
@@ -78,7 +78,7 @@
             }
         }
 
-        public static void AddTriggerCollider(GameObject obj)
+        internal static  void AddTriggerCollider(GameObject obj)
         {
             var Missing_boxCollider = obj.GetComponent<BoxCollider>();
             var Missing_CapsuleCollider = obj.GetComponent<CapsuleCollider>();
@@ -136,7 +136,7 @@
             }
         }
 
-        public static void AddBoxCollider(GameObject obj, Vector3 size)
+        internal static  void AddBoxCollider(GameObject obj, Vector3 size)
         {
             var Missing_boxCollider = obj.GetComponent<BoxCollider>();
             if (Missing_boxCollider == null)

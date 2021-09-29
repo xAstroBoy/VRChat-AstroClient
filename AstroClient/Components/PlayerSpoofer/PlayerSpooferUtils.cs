@@ -4,14 +4,14 @@
     using AstroLibrary.Console;
     using System.Drawing;
 
-    public class PlayerSpooferUtils : GameEvents
+    internal class PlayerSpooferUtils : GameEvents
     {
-        public override void OnUpdate()
+        internal override void OnUpdate()
         {
             MakeInstance();
         }
 
-        public static void MakeInstance()
+        internal static  void MakeInstance()
         {
             if (Instance == null)
             {
@@ -32,7 +32,7 @@
 
         private static PlayerSpoofer Instance;
 
-        public static PlayerSpoofer SpooferInstance
+        internal static  PlayerSpoofer SpooferInstance
         {
             get
             {
@@ -43,7 +43,7 @@
 
         private static bool _SpoofASWorldAuthor;
 
-        public static bool SpoofAsWorldAuthor
+        internal static  bool SpoofAsWorldAuthor
         {
             get
             {

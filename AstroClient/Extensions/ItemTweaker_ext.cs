@@ -3,9 +3,9 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public static class ItemTweaker_ext
+    internal static  class ItemTweaker_ext
     {
-        public static void AddToWorldUtilsMenu(this GameObject obj)
+        internal static  void AddToWorldUtilsMenu(this GameObject obj)
         {
             if (obj != null)
             {
@@ -13,7 +13,7 @@
             }
         }
 
-        public static void AddToWorldUtilsMenu(this List<GameObject> list)
+        internal static  void AddToWorldUtilsMenu(this List<GameObject> list)
         {
             foreach (var obj in list)
             {
@@ -24,7 +24,7 @@
             }
         }
 
-        public static void Set_As_Object_To_Edit(this GameObject obj)
+        internal static  void Set_As_Object_To_Edit(this GameObject obj)
         {
             if (obj != null)
             {

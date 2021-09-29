@@ -17,9 +17,9 @@
 
     #endregion Imports
 
-    public class WorldsCheats : GameEvents
+    internal class WorldsCheats : GameEvents
     {
-        public static void InitButtons(float pos)
+        internal static  void InitButtons(float pos)
         {
             QMTabMenu WorldCheats = new QMTabMenu(pos, "WorldCheats Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.thief.png"));
             Murder2Cheats.Murder2CheatsButtons(WorldCheats, 1, 0, true);
@@ -37,7 +37,7 @@
             PoolParlor.InitButtons(WorldCheats, 3, 0f, true);
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.VRChatDefaultHub)
             {

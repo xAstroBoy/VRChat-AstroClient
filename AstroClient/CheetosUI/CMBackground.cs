@@ -7,7 +7,7 @@
 
     #endregion Imports
 
-    public class CMBackground
+    internal class CMBackground
     {
         public GameObject GetGameObject { get; private set; }
 

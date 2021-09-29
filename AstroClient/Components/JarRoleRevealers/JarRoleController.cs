@@ -15,19 +15,19 @@
     using UnityEngine;
     using VRC;
 
-    public class JarRoleController : GameEvents
+    internal class JarRoleController : GameEvents
     {
         private static bool _ViewRoles;
 
-        public static bool IsMurder4World { get; private set; }
+        internal static  bool IsMurder4World { get; private set; }
 
-        public static bool IsAmongUsWorld { get; private set; }
+        internal static  bool IsAmongUsWorld { get; private set; }
 
-        public static EventHandler<BoolEventsArgs> Event_OnViewRolesPropertyChanged;
+        internal static  EventHandler<BoolEventsArgs> Event_OnViewRolesPropertyChanged;
 
         // TODO: Make A Action event  to bind on JarRoleESP Component.
 
-        public static bool ViewRoles
+        internal static  bool ViewRoles
         {
             get
             {
@@ -55,9 +55,9 @@
             }
         }
 
-        public static JarRoleESP _CurrentPlayerRoleESP = null;
+        internal static  JarRoleESP _CurrentPlayerRoleESP = null;
 
-        public static JarRoleESP CurrentPlayerRoleESP
+        internal static  JarRoleESP CurrentPlayerRoleESP
         {
             get
             {
@@ -71,18 +71,18 @@
             }
         }
 
-        public static QMSingleToggleButton Murder4RolesRevealerToggle;
-        public static QMSingleToggleButton AmongUSRolesRevealerToggle;
+        internal static  QMSingleToggleButton Murder4RolesRevealerToggle;
+        internal static  QMSingleToggleButton AmongUSRolesRevealerToggle;
 
-        public static List<LinkedNodes> JarRoleLinks { get; private set; } = new List<LinkedNodes>();
+        internal static  List<LinkedNodes> JarRoleLinks { get; private set; } = new List<LinkedNodes>();
 
-        public static List<JarRoleESP> RoleEspComponents { get; private set; } = new List<JarRoleESP>();
+        internal static  List<JarRoleESP> RoleEspComponents { get; private set; } = new List<JarRoleESP>();
 
-        public static LinkedNodes GetLinkedNode(int value) => JarRoleLinks.Where(x => x.Nodevalue == value).DefaultIfEmpty(null).First();
+        internal static  LinkedNodes GetLinkedNode(int value) => JarRoleLinks.Where(x => x.Nodevalue == value).DefaultIfEmpty(null).First();
 
-        public static JarRoleESP GetLinkedComponent(int value) => RoleEspComponents.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
+        internal static  JarRoleESP GetLinkedComponent(int value) => RoleEspComponents.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             JarRoleLinks.Clear();
             RoleEspComponents.Clear();
@@ -94,7 +94,7 @@
             IsMurder4World = false;
         }
 
-        public override void OnPlayerJoined(Player player)
+        internal override void OnPlayerJoined(Player player)
         {
             MiscUtils.DelayFunction(0.5f, new Action(() =>
             {
@@ -115,7 +115,7 @@
             }));
         }
 
-        public class LinkedNodes
+        internal class LinkedNodes
         {
             public Transform Entry { get; set; }
             public Transform Node { get; set; }
@@ -131,7 +131,7 @@
             }
         }
 
-        public static string DescPart
+        internal static  string DescPart
         {
             get
             {
@@ -148,9 +148,9 @@
             }
         }
 
-        public static bool DebugMsg = true;
+        internal static  bool DebugMsg = true;
 
-        public static void Debug(string msg)
+        internal static  void Debug(string msg)
         {
             if (DebugMsg)
             {
@@ -158,7 +158,7 @@
             }
         }
 
-        public static int? RemoveNodeText(Transform node)
+        internal static  int? RemoveNodeText(Transform node)
         {
             var replacedstring = node.name.Replace("Player Node ", string.Empty).Replace("(", string.Empty).Replace(")", string.Empty).Replace(" ", string.Empty);
             if (!string.IsNullOrEmpty(replacedstring) && !string.IsNullOrWhiteSpace(replacedstring))
@@ -169,7 +169,7 @@
             return null;
         }
 
-        public static int? RemoveEntryText(Transform Entry)
+        internal static  int? RemoveEntryText(Transform Entry)
         {
             var replacedstring = Entry.name.Replace("Player Entry ", string.Empty).Replace("(", string.Empty).Replace(")", string.Empty).Replace(" ", string.Empty); ;
             if (!string.IsNullOrEmpty(replacedstring) && !string.IsNullOrWhiteSpace(replacedstring))
@@ -180,7 +180,7 @@
             return null;
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             IsAmongUsWorld = id.Equals(WorldIds.AmongUS);
             IsMurder4World = id.Equals(WorldIds.Murder4);

@@ -14,14 +14,14 @@
 
     #endregion Imports
 
-    public class ComponentHelper : GameEvents
+    internal class ComponentHelper : GameEvents
     {
-        public static void RegisterComponent<T>() where T : class
+        internal static  void RegisterComponent<T>() where T : class
         {
             RegisterComponent(typeof(T));
         }
 
-        public static void RegisterComponent(Type type)
+        internal static  void RegisterComponent(Type type)
         {
             try
             {
@@ -39,7 +39,7 @@
             }
         }
 
-        public override void OnApplicationStart()
+        internal override void OnApplicationStart()
         {
             RegisterComponent<GameEventsBehaviour>();
             RegisterComponent<JarControllerEvents>();
@@ -77,7 +77,7 @@
             }
         }
 
-        public override void OnUpdate()
+        internal override void OnUpdate()
         {
             RocketManager.MakeInstance();
             CrazyObjectManager.MakeInstance();
@@ -94,6 +94,6 @@
             PlayerWatcherManager.MakeInstance();
         }
 
-        public static List<Type> RegisteredComponentsTypes { get; } = new List<Type>();
+        internal static  List<Type> RegisteredComponentsTypes { get; } = new List<Type>();
     }
 }

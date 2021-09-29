@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class OnWorldRevealArgs : EventArgs
+    internal class OnWorldRevealArgs : EventArgs
     {
         public string ID;
         public string Name;

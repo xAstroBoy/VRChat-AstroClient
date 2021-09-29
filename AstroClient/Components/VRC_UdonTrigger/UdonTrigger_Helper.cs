@@ -6,7 +6,7 @@
     {
         private static SerializedUdonProgramAsset _OnInteractUdonProgramEvent;
 
-        public static SerializedUdonProgramAsset OnInteractUdonProgramEvent
+        internal static  SerializedUdonProgramAsset OnInteractUdonProgramEvent
         {
             get
             {

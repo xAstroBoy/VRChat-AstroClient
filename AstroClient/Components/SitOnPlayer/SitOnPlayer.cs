@@ -6,20 +6,20 @@
     using VRC;
 
     [RegisterComponent]
-    public class SitOnPlayer : GameEventsBehaviour
+    internal class SitOnPlayer : GameEventsBehaviour
     {
         private static Player TargetPlayer;
         private static HumanBodyBones TargetBone;
         private static GameObject Target;
         private static GameObject Self;
-        public static bool IsEnabled { get; set; } = false;
-        public static float Height { get; set; } = 0f;
+        internal static  bool IsEnabled { get; set; } = false;
+        internal static  float Height { get; set; } = 0f;
 
         public SitOnPlayer(IntPtr obj0) : base(obj0)
         {
         }
 
-        public static void AttachToTarget(Player targetPlayer, HumanBodyBones targetBone)
+        internal static  void AttachToTarget(Player targetPlayer, HumanBodyBones targetBone)
         {
             Detach();
             Self.gameObject.GetComponent<CharacterController>().enabled = false;
@@ -28,7 +28,7 @@
             IsEnabled = true;
         }
 
-        public static void Detach()
+        internal static  void Detach()
         {
             Self.gameObject.GetComponent<CharacterController>().enabled = true;
             TargetBone = HumanBodyBones.Head;

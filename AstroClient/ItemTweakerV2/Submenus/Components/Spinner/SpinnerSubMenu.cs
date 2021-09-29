@@ -6,9 +6,9 @@
     using RubyButtonAPI;
     using System;
 
-    public class SpinnerSubMenu : Tweaker_Events
+    internal class SpinnerSubMenu : Tweaker_Events
     {
-        public static void Init_SpinnerSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        internal static  void Init_SpinnerSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var submenu = new QMNestedButton(menu, x, y, "Spin Control", "Make them spiiiiin!", null, null, null, null, btnHalf);
             _ = new QMSingleButton(submenu, 1, 0, "+ 1 x", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Add_SpinForceX(); }), "Add Spin Force to spinner!", null, null);

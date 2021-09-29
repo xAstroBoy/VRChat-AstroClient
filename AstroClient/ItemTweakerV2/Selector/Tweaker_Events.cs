@@ -6,7 +6,7 @@
     using System;
     using UnityEngine;
 
-    public class Tweaker_Events : GameEvents
+    internal class Tweaker_Events : GameEvents
     {
         public Tweaker_Events()
         {
@@ -83,47 +83,47 @@
             OnRigidBodyController_OnUpdate(e.control);
         }
 
-        public virtual void On_Old_GameObject_Removed(GameObject obj)
+        internal virtual void On_Old_GameObject_Removed(GameObject obj)
         {
         }
 
-        public virtual void On_New_GameObject_Selected(GameObject obj)
+        internal virtual void On_New_GameObject_Selected(GameObject obj)
         {
         }
 
-        public virtual void OnSelectedObject_Enabled()
+        internal virtual void OnSelectedObject_Enabled()
         {
         }
 
-        public virtual void OnSelectedObject_Disabled()
+        internal virtual void OnSelectedObject_Disabled()
         {
         }
 
-        public virtual void OnSelectedObject_Destroyed()
+        internal virtual void OnSelectedObject_Destroyed()
         {
         }
 
-        public virtual void OnRigidBodyController_Selected(RigidBodyController control)
+        internal virtual void OnRigidBodyController_Selected(RigidBodyController control)
         {
         }
 
-        public virtual void OnRigidBodyController_PropertyChanged(RigidBodyController control)
+        internal virtual void OnRigidBodyController_PropertyChanged(RigidBodyController control)
         {
         }
 
-        public virtual void OnRigidBodyController_OnUpdate(RigidBodyController control)
+        internal virtual void OnRigidBodyController_OnUpdate(RigidBodyController control)
         {
         }
 
-        public virtual void OnPickupController_Selected(PickupController control)
+        internal virtual void OnPickupController_Selected(PickupController control)
         {
         }
 
-        public virtual void OnPickupController_PropertyChanged(PickupController control)
+        internal virtual void OnPickupController_PropertyChanged(PickupController control)
         {
         }
 
-        public virtual void OnPickupController_OnUpdate(PickupController control)
+        internal virtual void OnPickupController_OnUpdate(PickupController control)
         {
         }
     }

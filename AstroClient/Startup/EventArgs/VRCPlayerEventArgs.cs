@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class VRCPlayerEventArgs : EventArgs
+    internal class VRCPlayerEventArgs : EventArgs
     {
         public VRC.Player player;
 

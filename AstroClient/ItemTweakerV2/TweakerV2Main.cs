@@ -16,9 +16,9 @@
     using VRC;
     using Color = UnityEngine.Color;
 
-    public class TweakerV2Main : Tweaker_Events
+    internal class TweakerV2Main : Tweaker_Events
     {
-        public static void Init_TweakerV2Main()
+        internal static  void Init_TweakerV2Main()
         {
             QMTabMenu menu = new QMTabMenu(3f, "Item Tweaker", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.box.png"));
 
@@ -70,7 +70,7 @@
             _ = new QMSingleButton(menu, 5, -0.5f, "DANGER : Destroy item.", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DestroyObject(); }), "Destroys Object , You need to reload the world to restore it back.", null, Color.red, true);
         }
 
-        public override void OnPickupController_OnUpdate(PickupController control)
+        internal override void OnPickupController_OnUpdate(PickupController control)
         {
             if (control != null)
             {
@@ -90,7 +90,7 @@
             }
         }
 
-        public override void On_New_GameObject_Selected(GameObject obj)
+        internal override void On_New_GameObject_Selected(GameObject obj)
         {
             UpdateCapturedObject(obj);
             if (TeleportToTarget != null)
@@ -105,7 +105,7 @@
             }
         }
 
-        public override void OnTargetSet(Player player)
+        internal override void OnTargetSet(Player player)
         {
             if (TeleportToTarget != null)
             {
@@ -114,7 +114,7 @@
             }
         }
 
-        public override void OnSelectedObject_Enabled()
+        internal override void OnSelectedObject_Enabled()
         {
             ObjectActiveToggle.SetToggleState(true);
             if (ObjectToEditBtn != null)
@@ -127,7 +127,7 @@
             }
         }
 
-        public override void OnSelectedObject_Disabled()
+        internal override void OnSelectedObject_Disabled()
         {
             ObjectActiveToggle.SetToggleState(false);
             if (ObjectToEditBtn != null)
@@ -140,23 +140,23 @@
             }
         }
 
-        public override void OnSelectedObject_Destroyed()
+        internal override void OnSelectedObject_Destroyed()
         {
             Reset();
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Reset();
         }
 
-        public static void Reset()
+        internal static  void Reset()
         {
             Tweaker_Object.LockItem = false;
             Tweaker_Selector.SelectedObject = null;
         }
 
-        public static void UpdateCapturedObject(GameObject obj)
+        internal static  void UpdateCapturedObject(GameObject obj)
         {
             if (obj != null)
             {
@@ -188,14 +188,14 @@
             }
         }
 
-        public static QMSingleButton TeleportToMe;
+        internal static  QMSingleButton TeleportToMe;
 
-        public static QMSingleButton TeleportToTarget;
+        internal static  QMSingleButton TeleportToTarget;
 
-        public static QMSingleToggleButton LockHoldItem;
-        public static QMSingleButton ObjectToEditBtn;
-        public static QMSingleToggleButton ObjectActiveToggle;
-        public static QMSingleToggleButton ProtectionInteractor;
+        internal static  QMSingleToggleButton LockHoldItem;
+        internal static  QMSingleButton ObjectToEditBtn;
+        internal static  QMSingleToggleButton ObjectActiveToggle;
+        internal static  QMSingleToggleButton ProtectionInteractor;
 
         private static QMSingleButton Pickup_IsHeldStatus { get; set; }
         private static QMSingleButton Pickup_CurrentObjectHolder { get; set; }

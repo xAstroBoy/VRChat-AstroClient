@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class OnSceneLoadedEventArgs : EventArgs
+    internal class OnSceneLoadedEventArgs : EventArgs
     {
         public int BuildIndex;
 

@@ -12,9 +12,9 @@
 
     internal class JustHParty : GameEvents
     {
-        public static QMNestedButton JustHPartyMenu;
+        internal static  QMNestedButton JustHPartyMenu;
 
-        public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             JustHPartyMenu = new QMNestedButton(main, x, y, "JustHParty Exploits", "JustHParty Exploits", null, null, null, null, btnHalf);
 
@@ -28,7 +28,7 @@
             _ = new QMSingleButton(JustHPartyMenu, 1, 2.5f, "Go To Rooms", () => { GoToRooms(); }, "Go To Rooms", null, Color.cyan, true);
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (WorldUtils.WorldID == WorldIds.JustHParty)
             {

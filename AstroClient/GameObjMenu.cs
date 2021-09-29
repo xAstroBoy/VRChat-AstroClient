@@ -18,9 +18,9 @@
 
     #endregion Imports
 
-    public class GameObjMenu : GameEvents
+    internal class GameObjMenu : GameEvents
     {
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             CurrentSelection.Clear();
             Current = null;
@@ -52,9 +52,9 @@
 
         private static bool StartRoutineOfRefreshAction = false;
 
-        public static bool IsOnRootScene { get; set; } = true;
+        internal static  bool IsOnRootScene { get; set; } = true;
 
-        public static bool IsARootParent
+        internal static  bool IsARootParent
         {
             get
             {
@@ -62,7 +62,7 @@
             }
         }
 
-        public static IEnumerator RoutineStart()
+        internal static  IEnumerator RoutineStart()
         {
             while (true)
             {
@@ -240,7 +240,7 @@
 
         private static Transform _Current;
 
-        public static Transform Current
+        internal static  Transform Current
         {
             get
             {
@@ -268,19 +268,19 @@
             }
         }
 
-        public static QMNestedButton gameobjtogglermenu;
+        internal static  QMNestedButton gameobjtogglermenu;
 
-        public static QMSingleButton GoToParentBtn;
+        internal static  QMSingleButton GoToParentBtn;
 
         private static QMSingleToggleButton ToggleModeSwitch;
         private static QMSingleToggleButton DestroyModeSwitch;
         private static QMSingleToggleButton PasstoTweakerModeSwitch;
-        public static QMSingleButton GameObjMenuObjectToEdit;
+        internal static  QMSingleButton GameObjMenuObjectToEdit;
 
         private static QMHalfScroll MainScroll; // Original : MainScroll
         private static QMHalfScroll subscroll; // Original : subscroll
 
-        public static void ReturnToRoot()
+        internal static  void ReturnToRoot()
         {
             CurrentSelection.Clear();
             CurrentSelection = GetAllCurrentSceneObjects();
@@ -289,7 +289,7 @@
             ModConsole.DebugLog("ResetGameObjToggler fired.");
         }
 
-        public static void InitTogglerMenu(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static  void InitTogglerMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var main = new QMSingleButton(menu, x, y, "Advanced GameObject Toggler", new Action(() => { ReturnToRoot(); gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }), "Advanced GameObject Toggler", null, null, btnHalf);
 
@@ -381,7 +381,7 @@
             });
         }
 
-        public static void AddEnterChildObj(QMNestedButton page, QMSingleButton parentbtn, Transform item)
+        internal static  void AddEnterChildObj(QMNestedButton page, QMSingleButton parentbtn, Transform item)
         {
             List<Transform> itemchilds = GetAllChildObjects(item, false, false);
             if (itemchilds.Count() != 0)
@@ -414,7 +414,7 @@
             }
         }
 
-        public static List<Transform> GetAllCurrentSceneObjects()
+        internal static  List<Transform> GetAllCurrentSceneObjects()
         {
             Current = null;
             //Previous = null;
@@ -434,7 +434,7 @@
             return TransformsInScene;
         }
 
-        public static void ReturnToParent()
+        internal static  void ReturnToParent()
         {
             if (Current != null)
             {
@@ -464,7 +464,7 @@
             }
         }
 
-        public static bool SetCurrentParent(Transform Parent)
+        internal static  bool SetCurrentParent(Transform Parent)
         {
             if (Parent != null)
             {
@@ -503,7 +503,7 @@
             return true;
         }
 
-        public static bool IsARootObject(Transform obj)
+        internal static  bool IsARootObject(Transform obj)
         {
             try
             {
@@ -526,7 +526,7 @@
             return false;
         }
 
-        public static List<Transform> GetAllChildObjects(Transform item, bool SetParent, bool RevealTransformCount)
+        internal static  List<Transform> GetAllChildObjects(Transform item, bool SetParent, bool RevealTransformCount)
         {
             var FoundChilds = new List<Transform>();
             Transform ChildToUseForParent = null;

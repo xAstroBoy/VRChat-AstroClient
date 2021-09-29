@@ -13,17 +13,17 @@
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
 
-    public class OnWorldRevealHook : GameEvents
+    internal class OnWorldRevealHook : GameEvents
     {
-        public static event EventHandler<OnWorldRevealArgs> Event_OnWorldReveal;
+        internal static  event EventHandler<OnWorldRevealArgs> Event_OnWorldReveal;
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             if (Bools.IsDeveloper)
                 ModConsole.DebugLog($"Scene Name: {sceneName}");
         }
 
-        public override void ExecutePriorityPatches()
+        internal override void ExecutePriorityPatches()
         {
             HookFadeTo();
         }

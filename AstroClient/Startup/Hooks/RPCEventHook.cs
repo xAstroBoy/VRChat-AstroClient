@@ -20,15 +20,15 @@
     #endregion Imports
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
 
-    public class RPCEventHook : GameEvents
+    internal class RPCEventHook : GameEvents
     {
 
-        public static event System.EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
+        internal static  event System.EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
 
-        //public static
+        //internal static 
         private HarmonyLib.Harmony harmony;
 
-        public override void ExecutePriorityPatches()
+        internal override void ExecutePriorityPatches()
         {
             MiscUtils.DelayFunction(1f, new System.Action(() =>
             {

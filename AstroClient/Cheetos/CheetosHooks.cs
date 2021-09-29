@@ -30,20 +30,20 @@
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class CheetosHooks : GameEvents
     {
-        public static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonJoin { get; set; }
-        public static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonLeft { get; set; }
-        public static EventHandler<PhotonPlayerEventArgs> Event_OnMasterClientSwitched { get; set; }
-        public static EventHandler<EventArgs> Event_OnRoomLeft { get; set; }
-        public static EventHandler<EventArgs> Event_OnRoomJoined { get; set; }
-        public static EventHandler<EventArgs> Event_OnFriended { get; set; }
-        public static EventHandler<EventArgs> Event_OnUnfriended { get; set; }
-        public static EventHandler<EventArgs> Event_OnAvatarPageOpen { get; set; }
-        public static EventHandler<EventArgs> Event_OnQuickMenuOpen { get; set; }
-        public static EventHandler<EventArgs> Event_OnQuickMenuClose { get; set; }
+        internal static  EventHandler<PhotonPlayerEventArgs> Event_OnPhotonJoin { get; set; }
+        internal static  EventHandler<PhotonPlayerEventArgs> Event_OnPhotonLeft { get; set; }
+        internal static  EventHandler<PhotonPlayerEventArgs> Event_OnMasterClientSwitched { get; set; }
+        internal static  EventHandler<EventArgs> Event_OnRoomLeft { get; set; }
+        internal static  EventHandler<EventArgs> Event_OnRoomJoined { get; set; }
+        internal static  EventHandler<EventArgs> Event_OnFriended { get; set; }
+        internal static  EventHandler<EventArgs> Event_OnUnfriended { get; set; }
+        internal static  EventHandler<EventArgs> Event_OnAvatarPageOpen { get; set; }
+        internal static  EventHandler<EventArgs> Event_OnQuickMenuOpen { get; set; }
+        internal static  EventHandler<EventArgs> Event_OnQuickMenuClose { get; set; }
 
-        public class Patch
+        internal class Patch
         {
-            public static List<Patch> Patches { get; set; } = new List<Patch>();
+            internal static  List<Patch> Patches { get; set; } = new List<Patch>();
             public MethodInfo TargetMethod { get; set; }
             public HarmonyMethod PrefixMethod { get; set; }
             public HarmonyMethod PostfixMethod { get; set; }
@@ -63,7 +63,7 @@
                 Patches.Add(this);
             }
 
-            public static async void DoPatches()
+            internal static  async void DoPatches()
             {
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
@@ -91,7 +91,7 @@
                 ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods: {stopwatch.ElapsedMilliseconds}ms");
             }
 
-            public static async void UnDoPatches()
+            internal static  async void UnDoPatches()
             {
                 for (int i = 0; i < Patches.Count; i++)
                 {
@@ -116,7 +116,7 @@
             return new HarmonyMethod(typeof(CheetosHooks).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-        public override void ExecutePriorityPatches()
+        internal override void ExecutePriorityPatches()
         {
             MelonCoroutines.Start(Init());
         }
@@ -127,7 +127,7 @@
             yield break;
         }
 
-        public static async void InitPatch()
+        internal static  async void InitPatch()
         {
             try
             {

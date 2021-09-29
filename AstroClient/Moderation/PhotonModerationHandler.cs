@@ -17,18 +17,18 @@
     using VRC.SDKBase;
 
 
-    public class PhotonModerationHandler : GameEvents
+    internal class PhotonModerationHandler : GameEvents
     {
-        public static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerBlockedYou;
+        internal static  event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerBlockedYou;
 
-        public static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnblockedYou;
+        internal static  event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnblockedYou;
 
-        public static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerMutedYou;
+        internal static  event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerMutedYou;
 
-        public static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnmutedYou;
+        internal static  event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnmutedYou;
 
 
-        public static void Handle_Photon_ModerationEvent_NeedToBlock(object RawData, byte code, Player PhotonSender, int PhotonID)
+        internal static  void Handle_Photon_ModerationEvent_NeedToBlock(object RawData, byte code, Player PhotonSender, int PhotonID)
         {
             try
             {
@@ -200,13 +200,13 @@
         }
 
         #region PlayerModerations
-        public override void OnRoomLeft()
+        internal override void OnRoomLeft()
         {
             BlockedYouPlayers.Clear();
             MutedYouPlayers.Clear();
         }
 
-        public override void OnPhotonLeft(Player player)
+        internal override void OnPhotonLeft(Player player)
         {
             if (BlockedYouPlayers.Contains(player))
             {
@@ -219,9 +219,9 @@
         }
 
 
-        public static List<Player> BlockedYouPlayers { get; private set; } = new List<Player>();
+        internal static  List<Player> BlockedYouPlayers { get; private set; } = new List<Player>();
 
-        public static List<Player> MutedYouPlayers { get; private set; } = new List<Player>();
+        internal static  List<Player> MutedYouPlayers { get; private set; } = new List<Player>();
 
         #endregion PlayerModerations
 

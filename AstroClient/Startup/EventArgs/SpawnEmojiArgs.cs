@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class SpawnEmojiArgs : EventArgs
+    internal class SpawnEmojiArgs : EventArgs
     {
         public VRCPlayer player;
 

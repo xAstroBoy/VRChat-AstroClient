@@ -12,24 +12,24 @@
     using VRC;
     using Color = System.Drawing.Color;
 
-    public static class AvatarUtils
+    internal static  class AvatarUtils
     {
-        public static Transform Get_Avatar(this Transform obj)
+        internal static  Transform Get_Avatar(this Transform obj)
         {
             return obj.FindObject("ForwardDirection/Avatar");
         }
 
-        public static Transform Get_Armature(this Transform obj)
+        internal static  Transform Get_Armature(this Transform obj)
         {
             return obj.FindObject("ForwardDirection/Avatar/Armature");
         }
 
-        public static Transform Get_Body(this Transform obj)
+        internal static  Transform Get_Body(this Transform obj)
         {
             return obj.FindObject("ForwardDirection/Avatar/Body");
         }
 
-        public static Transform Get_root_of_avatar_child(this Transform obj)
+        internal static  Transform Get_root_of_avatar_child(this Transform obj)
         {
             var root = obj.root;
             if (root != null)
@@ -49,7 +49,7 @@
             return null;
         }
 
-        public static void Avatar_Renderer_Dumper(this Player player)
+        internal static  void Avatar_Renderer_Dumper(this Player player)
         {
             if (player != null)
             {
@@ -75,7 +75,7 @@
             }
         }
 
-        public static void Avatar_MeshRenderer_Dumper(this Player player)
+        internal static  void Avatar_MeshRenderer_Dumper(this Player player)
         {
             if (player != null)
             {
@@ -101,7 +101,7 @@
             }
         }
 
-        public static void Avatar_Transform_Dumper(this Player player)
+        internal static  void Avatar_Transform_Dumper(this Player player)
         {
             if (player != null)
             {
@@ -123,7 +123,7 @@
             }
         }
 
-        public static void Avatar_Material_Dumper(this Player player)
+        internal static  void Avatar_Material_Dumper(this Player player)
         {
             if (player != null)
             {
@@ -152,7 +152,7 @@
             }
         }
 
-        public static List<string> Dump_Renderers(this Transform item)
+        internal static  List<string> Dump_Renderers(this Transform item)
         {
             var dumpednames = new List<string>();
             if (item != null)
@@ -180,7 +180,7 @@
             return dumpednames;
         }
 
-        public static string GetAvatarID(this Player player)
+        internal static  string GetAvatarID(this Player player)
         {
             if (player != null)
             {
@@ -192,7 +192,7 @@
             return null;
         }
 
-        public static void BlackListAvatar_Lewdifier(this Player player)
+        internal static  void BlackListAvatar_Lewdifier(this Player player)
         {
             if (player != null)
             {
@@ -207,7 +207,7 @@
             }
         }
 
-        public static List<string> Dump_Mesh_Renderers(this Transform item)
+        internal static  List<string> Dump_Mesh_Renderers(this Transform item)
         {
             var dumpednames = new List<string>();
             if (item != null)
@@ -235,7 +235,7 @@
             return dumpednames;
         }
 
-        public static List<string> Dump_Materials(this Transform item)
+        internal static  List<string> Dump_Materials(this Transform item)
         {
             var dumpednames = new List<string>();
             if (item != null)
@@ -264,7 +264,7 @@
             return dumpednames;
         }
 
-        public static List<string> Dump_Transforms(this Transform item)
+        internal static  List<string> Dump_Transforms(this Transform item)
         {
             var dumpednames = new List<string>();
             if (item != null)
@@ -292,7 +292,7 @@
             return dumpednames;
         }
 
-        public static IEnumerator ReloadAllAvatars()
+        internal static  IEnumerator ReloadAllAvatars()
         {
             foreach (var player in WorldUtils.Players)
             {
@@ -305,7 +305,7 @@
             yield break;
         }
 
-        public static void Add_Lewdify(this Player player)
+        internal static  void Add_Lewdify(this Player player)
         {
             if (player != null)
             {
@@ -321,7 +321,7 @@
             }
         }
 
-        public static void Add_MaskRemover(this Player player)
+        internal static  void Add_MaskRemover(this Player player)
         {
             if (player != null)
             {
@@ -333,7 +333,7 @@
             }
         }
 
-        public static void Remove_Lewdify(this Player player)
+        internal static  void Remove_Lewdify(this Player player)
         {
             if (player != null)
             {
@@ -345,7 +345,7 @@
             }
         }
 
-        public static void Remove_MaskRemover(this Player player)
+        internal static  void Remove_MaskRemover(this Player player)
         {
             if (player != null)
             {

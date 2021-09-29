@@ -16,12 +16,12 @@
 
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
-    public class PhotonOnEventHook : GameEvents
+    internal class PhotonOnEventHook : GameEvents
     {
-        //public static
+        //internal static 
         private HarmonyLib.Harmony harmony;
 
-        public override void ExecutePriorityPatches()
+        internal override void ExecutePriorityPatches()
         {
             MiscUtils.DelayFunction(1f, new System.Action(() =>
             {

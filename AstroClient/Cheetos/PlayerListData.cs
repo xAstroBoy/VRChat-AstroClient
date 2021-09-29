@@ -10,7 +10,7 @@
     using VRC.SDKBase;
     using static AstroLibrary.Extensions.PlayerExtensions;
 
-    public class PlayerListData
+    internal class PlayerListData
     {
         public Photon.Realtime.Player PhotonPlayer { get; private set; }
 

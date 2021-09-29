@@ -6,9 +6,9 @@
     using System.Collections.Generic;
     using System.Drawing;
 
-    public class Meroom : GameEvents
+    internal class Meroom : GameEvents
     {
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.Meroom)
             {

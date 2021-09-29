@@ -8,15 +8,15 @@
     using System;
     using UnityEngine;
 
-    public class PickupControllerHandler : Tweaker_Events
+    internal class PickupControllerHandler : Tweaker_Events
     {
-        public static event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerSelected;
+        internal static  event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerSelected;
 
-        public static event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerPropertyChanged;
+        internal static  event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerPropertyChanged;
 
-        public static event EventHandler<OnPickupControllerArgs> Event_OnPickupController_OnUpdate;
+        internal static  event EventHandler<OnPickupControllerArgs> Event_OnPickupController_OnUpdate;
 
-        public override void On_New_GameObject_Selected(GameObject obj)
+        internal override void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
             {
@@ -38,7 +38,7 @@
             }
         }
 
-        public override void On_Old_GameObject_Removed(GameObject obj)
+        internal override void On_Old_GameObject_Removed(GameObject obj)
         {
             if (obj != null)
             {

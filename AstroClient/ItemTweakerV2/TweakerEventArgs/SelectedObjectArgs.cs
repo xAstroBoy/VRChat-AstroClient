@@ -3,7 +3,7 @@
     using System;
     using UnityEngine;
 
-    public class SelectedObjectArgs : EventArgs
+    internal class SelectedObjectArgs : EventArgs
     {
         public GameObject GameObject;
 

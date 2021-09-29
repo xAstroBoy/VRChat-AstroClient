@@ -4,7 +4,7 @@
     using UnityEngine;
     using VRC;
 
-    public class GDBUser
+    internal class GDBUser
     {
         public Player Player;
         public GameObject avatarObject;

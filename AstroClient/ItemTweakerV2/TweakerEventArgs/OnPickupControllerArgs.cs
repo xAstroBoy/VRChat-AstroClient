@@ -3,7 +3,7 @@
     using AstroClient.Components;
     using System;
 
-    public class OnPickupControllerArgs : EventArgs
+    internal class OnPickupControllerArgs : EventArgs
     {
         public PickupController control;
 

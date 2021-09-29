@@ -9,9 +9,9 @@
     using VRC.SDKBase;
     using VRC.Udon;
 
-    public static class ComponentParser_ext
+    internal static  class ComponentParser_ext
     {
-        public static List<GameObject> Get_VRCInteractables(this GameObject obj)
+        internal static  List<GameObject> Get_VRCInteractables(this GameObject obj)
         {
             if (obj != null)
             {
@@ -49,7 +49,7 @@
             return new List<GameObject>();
         }
 
-        public static List<GameObject> Get_Triggers(this GameObject obj)
+        internal static  List<GameObject> Get_Triggers(this GameObject obj)
         {
             if (obj != null)
             {
@@ -79,7 +79,7 @@
             return new List<GameObject>();
         }
 
-        public static List<UdonBehaviour> Get_UdonBehaviours(this GameObject obj)
+        internal static  List<UdonBehaviour> Get_UdonBehaviours(this GameObject obj)
         {
             var UdonBehaviourObjects = new List<UdonBehaviour>();
             var list = obj.GetComponentsInChildren<UdonBehaviour>(true);
@@ -100,17 +100,17 @@
             return UdonBehaviourObjects;
         }
 
-        public static List<UdonBehaviour> Get_UdonBehaviours(this Transform obj)
+        internal static  List<UdonBehaviour> Get_UdonBehaviours(this Transform obj)
         {
             return obj.gameObject.Get_UdonBehaviours();
         }
 
-        public static List<GameObject> Get_Triggers(this Transform obj)
+        internal static  List<GameObject> Get_Triggers(this Transform obj)
         {
             return obj.gameObject.Get_Triggers();
         }
 
-        public static List<GameObject> Get_VRCInteractables(this Transform obj)
+        internal static  List<GameObject> Get_VRCInteractables(this Transform obj)
         {
             return obj.gameObject.Get_VRCInteractables();
         }

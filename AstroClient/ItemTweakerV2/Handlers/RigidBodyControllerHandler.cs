@@ -8,15 +8,15 @@
     using System;
     using UnityEngine;
 
-    public class RigidBodyControllerHandler : Tweaker_Events
+    internal class RigidBodyControllerHandler : Tweaker_Events
     {
-        public static event EventHandler<OnRigidBodyControllerArgs> Event_OnRigidBodyControllerSelected;
+        internal static  event EventHandler<OnRigidBodyControllerArgs> Event_OnRigidBodyControllerSelected;
 
-        public static event EventHandler<OnRigidBodyControllerArgs> Event_OnRigidBodyControllerPropertyChanged;
+        internal static  event EventHandler<OnRigidBodyControllerArgs> Event_OnRigidBodyControllerPropertyChanged;
 
-        public static event EventHandler<OnRigidBodyControllerArgs> Event_OnRigidBodyController_OnUpdate;
+        internal static  event EventHandler<OnRigidBodyControllerArgs> Event_OnRigidBodyController_OnUpdate;
 
-        public override void On_New_GameObject_Selected(GameObject obj)
+        internal override void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
             {
@@ -38,7 +38,7 @@
             }
         }
 
-        public override void On_Old_GameObject_Removed(GameObject obj)
+        internal override void On_Old_GameObject_Removed(GameObject obj)
         {
             if (obj != null)
             {

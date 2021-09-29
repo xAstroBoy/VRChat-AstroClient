@@ -6,7 +6,7 @@
 
     internal class HighPriority : GameEvents
     {
-        public override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnUiManagerInit()
         {
             if (ConfigManager.Performance.HighPriority)
             {
@@ -14,7 +14,7 @@
             }
         }
 
-        public static bool IsEnabled
+        internal static  bool IsEnabled
         {
             get => ConfigManager.Performance.HighPriority;
             set

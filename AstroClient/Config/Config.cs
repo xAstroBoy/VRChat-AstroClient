@@ -6,7 +6,7 @@
     using System.Reflection;
 
     [Serializable, Obfuscation]
-    public class ConfigUI
+    internal class ConfigUI
     {
         public bool RemoveVRCPlus = false;
 
@@ -37,7 +37,7 @@
     }
 
     [Serializable, Obfuscation]
-    public class ConfigGeneral
+    internal class ConfigGeneral
     {
         public bool DebugLog = false;
 
@@ -69,7 +69,7 @@
     }
 
     [Serializable, Obfuscation]
-    public class ConfigESP
+    internal class ConfigESP
     {
         public bool PlayerESP = false;
 
@@ -81,7 +81,7 @@
     }
 
     [Serializable, Obfuscation]
-    public class ConfigFlight
+    internal class ConfigFlight
     {
         public float VRFlySpeed = 3f;
 
@@ -91,7 +91,7 @@
     }
 
     [Serializable, Obfuscation]
-    public class ConfigMovement
+    internal class ConfigMovement
     {
         public bool UnlimitedJump = false;
 
@@ -101,13 +101,13 @@
     }
 
     [Serializable, Obfuscation]
-    public class ConfigFavorites
+    internal class ConfigFavorites
     {
         public List<AvatarData> Avatars = new List<AvatarData>();
     }
 
     [Serializable, Obfuscation]
-    public class ConfigPerformance
+    internal class ConfigPerformance
     {
         public bool HighPriority = false;
 

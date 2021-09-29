@@ -26,12 +26,12 @@
     {
 
 
-        public static event EventHandler<VRCPlayerEventArgs> Event_OnPlayerSelected;
+        internal static  event EventHandler<VRCPlayerEventArgs> Event_OnPlayerSelected;
 
 
-        public class Patch
+        internal class Patch
         {
-            public static List<Patch> Patches { get; set; } = new List<Patch>();
+            internal static  List<Patch> Patches { get; set; } = new List<Patch>();
             public MethodInfo TargetMethod { get; set; }
             public HarmonyMethod PrefixMethod { get; set; }
             public HarmonyMethod PostfixMethod { get; set; }
@@ -51,7 +51,7 @@
                 Patches.Add(this);
             }
 
-            public static async void DoPatches()
+            internal static  async void DoPatches()
             {
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
@@ -79,7 +79,7 @@
                 ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods: {stopwatch.ElapsedMilliseconds}ms");
             }
 
-            public static async void UnDoPatches()
+            internal static  async void UnDoPatches()
             {
                 for (int i = 0; i < Patches.Count; i++)
                 {
@@ -104,7 +104,7 @@
             return new HarmonyMethod(typeof(QuickMenuHooks).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-        public override void ExecutePriorityPatches()
+        internal override void ExecutePriorityPatches()
         {
             MelonCoroutines.Start(Init());
         }

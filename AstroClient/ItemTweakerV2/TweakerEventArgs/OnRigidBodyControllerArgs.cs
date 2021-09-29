@@ -3,7 +3,7 @@
     using AstroClient.Components;
     using System;
 
-    public class OnRigidBodyControllerArgs : EventArgs
+    internal class OnRigidBodyControllerArgs : EventArgs
     {
         public RigidBodyController control;
 

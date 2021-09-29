@@ -5,7 +5,7 @@
 
     internal class FOV : GameEvents
     {
-        public static void Set_Camera_FOV(float v)
+        internal static  void Set_Camera_FOV(float v)
         {
             var gameObject = GameObject.Find("Camera (eye)");
             if (gameObject != null)
@@ -16,7 +16,7 @@
             ConfigManager.General.FOV = v;
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             Set_Camera_FOV(ConfigManager.General.FOV);
         }

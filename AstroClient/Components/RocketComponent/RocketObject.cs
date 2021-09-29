@@ -9,7 +9,7 @@
     using Random = UnityEngine.Random;
 
     [RegisterComponent]
-    public class RocketObject : GameEventsBehaviour
+    internal class RocketObject : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;

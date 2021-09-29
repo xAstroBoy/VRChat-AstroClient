@@ -8,11 +8,11 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public static class UdonHeapUnboxerUtils
+    internal static  class UdonHeapUnboxerUtils
     {
-        public static List<string> UnsupportedTypes = new List<string>();
+        internal static  List<string> UnsupportedTypes = new List<string>();
 
-        public static string UnboxUdonHeap(Il2CppSystem.Object obj)
+        internal static  string UnboxUdonHeap(Il2CppSystem.Object obj)
         {
             try
             {

@@ -3,7 +3,7 @@
     using System;
     using UnityEngine;
 
-    public class OnAvatarSpawnArgs : EventArgs
+    internal class OnAvatarSpawnArgs : EventArgs
     {
         public VRCAvatarManager VRCAvatarManager;
         public GameObject Avatar;

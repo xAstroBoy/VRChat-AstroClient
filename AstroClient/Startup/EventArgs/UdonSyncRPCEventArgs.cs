@@ -4,7 +4,7 @@
     using UnityEngine;
     using VRC;
 
-    public class UdonSyncRPCEventArgs : EventArgs
+    internal class UdonSyncRPCEventArgs : EventArgs
     {
         public Player sender;
         public GameObject obj;

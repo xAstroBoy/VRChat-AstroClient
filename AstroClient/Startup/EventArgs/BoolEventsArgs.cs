@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class BoolEventsArgs : EventArgs
+    internal class BoolEventsArgs : EventArgs
     {
         public bool value;
 

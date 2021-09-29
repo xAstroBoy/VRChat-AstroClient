@@ -3,7 +3,7 @@
     using Newtonsoft.Json;
     using System.IO;
 
-    public static class JSonWriter
+    internal static  class JSonWriter
     {
         /// <summary>
         /// Writes the given object instance to a Json file.
@@ -15,7 +15,7 @@
         /// <param name="filePath">The file path to write the object instance to.</param>
         /// <param name="objectToWrite">The object instance to write to the file.</param>
         /// <param name="append">If false the file will be overwritten if it already exists. If true the contents will be appended to the file.</param>
-        public static void WriteToJsonFile<T>(string filePath, T objectToWrite, bool append = false)
+        internal static  void WriteToJsonFile<T>(string filePath, T objectToWrite, bool append = false)
         {
             TextWriter writer = null;
             try
@@ -39,7 +39,7 @@
         /// <typeparam name="T">The type of object to read from the file.</typeparam>
         /// <param name="filePath">The file path to read the object instance from.</param>
         /// <returns>Returns a new instance of the object read from the Json file.</returns>
-        public static T ReadFromJsonFile<T>(string filePath)
+        internal static  T ReadFromJsonFile<T>(string filePath)
         {
             TextReader reader = null;
             try

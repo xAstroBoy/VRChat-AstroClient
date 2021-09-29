@@ -10,9 +10,9 @@
     using System.Threading.Tasks;
     using VRC;
     using Color = System.Drawing.Color;
-    public class StreamerTags : GameEvents
+    internal class StreamerTags : GameEvents
     {
-        public override void OnStreamerJoined(Player player)
+        internal override void OnStreamerJoined(Player player)
         {
             if(!Bools.IsDeveloper)
             {

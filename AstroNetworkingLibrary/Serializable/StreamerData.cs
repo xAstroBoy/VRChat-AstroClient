@@ -4,7 +4,7 @@
     using System.Collections.Generic;
 
     [Serializable]
-    public class StreamerData
+    internal class StreamerData
     {
         public List<string> StreamerNames;
     }

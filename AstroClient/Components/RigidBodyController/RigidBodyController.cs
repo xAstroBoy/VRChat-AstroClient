@@ -7,7 +7,7 @@
     using UnityEngine;
 
     [RegisterComponent]
-    public class RigidBodyController : GameEventsBehaviour
+    internal class RigidBodyController : GameEventsBehaviour
     {
         public RigidBodyController(IntPtr ptr) : base(ptr)
         {

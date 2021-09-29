@@ -9,7 +9,7 @@
     using UnityEngine;
     using UnityEngine.UI;
 
-    public class WorldButton
+    internal class WorldButton
     {
         private GameObject gameObject;
 

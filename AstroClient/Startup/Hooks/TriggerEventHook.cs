@@ -10,13 +10,13 @@
 
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
-    public class TriggerEventHook : GameEvents
+    internal class TriggerEventHook : GameEvents
     {
         private HarmonyLib.Harmony harmony;
 
-        public static event EventHandler<VRC_EventDispatcherRFC_TriggerEventArgs> Event_VRC_EventDispatcherRFC_triggerEvent;
+        internal static  event EventHandler<VRC_EventDispatcherRFC_TriggerEventArgs> Event_VRC_EventDispatcherRFC_triggerEvent;
 
-        public override void ExecutePriorityPatches()
+        internal override void ExecutePriorityPatches()
         {
             HookTriggerEvent();
         }

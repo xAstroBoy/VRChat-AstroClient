@@ -9,7 +9,7 @@
     using UnityEngine;
     using UnityEngine.SceneManagement;
 
-    public class ColliderDisplay : GameEvents
+    internal class ColliderDisplay : GameEvents
     {
         private static string ShaderName
         {
@@ -48,7 +48,7 @@
             _ = Resources.UnloadUnusedAssets();
         }
 
-        public static void ToggleDisplays()
+        internal static  void ToggleDisplays()
         {
             AutoUpdateColliderList = !AutoUpdateColliderList;
             if (!AutoUpdateColliderList)
@@ -61,7 +61,7 @@
             }
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             ToggleDisplays(false);
             if (ToggleColliderDisplayBtn != null)
@@ -78,7 +78,7 @@
             }
         }
 
-        public static void ToggleDisplays(bool value)
+        internal static  void ToggleDisplays(bool value)
         {
             AutoUpdateColliderList = value;
             if (!value)
@@ -93,7 +93,7 @@
 
         private static bool AutoUpdateColliderList = false;
 
-        public static void UpdateColliders(bool isOnUpdate = true)
+        internal static  void UpdateColliders(bool isOnUpdate = true)
         {
             if (!AutoUpdateColliderList)
             {
@@ -171,7 +171,7 @@
             }
         }
 
-        public override void OnUpdate()
+        internal override void OnUpdate()
         {
             Update(SphereCache, SphereColliders);
             Update(CubeCache, BoxColliders);
@@ -196,7 +196,7 @@
             }
         }
 
-        public static void DisableAll()
+        internal static  void DisableAll()
         {
             int count = SphereColliders.Count;
             int count2 = BoxColliders.Count;
@@ -210,7 +210,7 @@
             ModConsole.DebugLog(string.Format("No longer showing {0} sphere colliders, {1} box colliders, and {2} capsule colliders", count, count2, count3));
         }
 
-        public static readonly HashSet<int> MyRenderers = new HashSet<int>();
+        internal static  readonly HashSet<int> MyRenderers = new HashSet<int>();
 
         private static readonly List<Sphere> SphereCache = new List<Sphere>();
 
@@ -318,7 +318,7 @@
             private readonly Renderer _renderer;
         }
 
-        public class Capsule : IDisplay<CapsuleCollider, Capsule>
+        internal class Capsule : IDisplay<CapsuleCollider, Capsule>
         {
             public bool Enabled
             {
@@ -419,8 +419,8 @@
             private readonly Renderer _middleRenderer;
         }
 
-        public static QMToggleButton ToggleColliderDisplayBtn;
-        public static QMToggleButton ToggleColliderInvisibleXRayBtn;
-        public static QMToggleButton ToggleColliderXRayBtn;
+        internal static  QMToggleButton ToggleColliderDisplayBtn;
+        internal static  QMToggleButton ToggleColliderInvisibleXRayBtn;
+        internal static  QMToggleButton ToggleColliderXRayBtn;
     }
 }

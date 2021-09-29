@@ -12,7 +12,7 @@
 
     #endregion Imports
 
-    public static class ConfigManager
+    internal static  class ConfigManager
     {
         private static Mutex SaveMutex = new Mutex();
 
@@ -40,23 +40,23 @@
 
         #region Config Classes
 
-        public static ConfigGeneral General = new ConfigGeneral();
+        internal static  ConfigGeneral General = new ConfigGeneral();
 
-        public static ConfigUI UI = new ConfigUI();
+        internal static  ConfigUI UI = new ConfigUI();
 
-        public static ConfigESP ESP = new ConfigESP();
+        internal static  ConfigESP ESP = new ConfigESP();
 
-        public static ConfigFlight Flight = new ConfigFlight();
+        internal static  ConfigFlight Flight = new ConfigFlight();
 
-        public static ConfigMovement Movement = new ConfigMovement();
+        internal static  ConfigMovement Movement = new ConfigMovement();
 
-        public static ConfigFavorites Favorites = new ConfigFavorites();
+        internal static  ConfigFavorites Favorites = new ConfigFavorites();
 
-        public static ConfigPerformance Performance = new ConfigPerformance();
+        internal static  ConfigPerformance Performance = new ConfigPerformance();
 
         #endregion Config Classes
 
-        public static Color PublicESPColor
+        internal static  Color PublicESPColor
         {
             get
             {
@@ -71,7 +71,7 @@
             }
         }
 
-        public static Color ESPFriendColor
+        internal static  Color ESPFriendColor
         {
             get
             {
@@ -86,7 +86,7 @@
             }
         }
 
-        public static Color ESPBlockedColor
+        internal static  Color ESPBlockedColor
         {
             get
             {
@@ -101,7 +101,7 @@
             }
         }
 
-        public static void Validate()
+        internal static  void Validate()
         {
             _ = SaveMutex.WaitOne();
 
@@ -172,49 +172,49 @@
             SaveMutex.ReleaseMutex();
         }
 
-        public static void Save_General()
+        internal static  void Save_General()
         {
             JSonWriter.WriteToJsonFile(ConfigPath, General);
             ModConsole.DebugLog("General Config Saved.");
         }
 
-        public static void Save_UI()
+        internal static  void Save_UI()
         {
             JSonWriter.WriteToJsonFile(ConfigUIPath, UI);
             ModConsole.DebugLog("UI Config Saved.");
         }
 
-        public static void Save_ESP()
+        internal static  void Save_ESP()
         {
             JSonWriter.WriteToJsonFile(ConfigESPPath, ESP);
             ModConsole.DebugLog("ESP Config Saved.");
         }
 
-        public static void Save_Flight()
+        internal static  void Save_Flight()
         {
             JSonWriter.WriteToJsonFile(ConfigFlightPath, Flight);
             ModConsole.DebugLog("Flight Config Saved.");
         }
 
-        public static void Save_Movement()
+        internal static  void Save_Movement()
         {
             JSonWriter.WriteToJsonFile(ConfigMovementPath, Movement);
             ModConsole.DebugLog("Movement Config Saved.");
         }
 
-        public static void Save_Favorites()
+        internal static  void Save_Favorites()
         {
             JSonWriter.WriteToJsonFile(ConfigFavoritesPath, Favorites);
             ModConsole.DebugLog("Favorites Config Saved.");
         }
 
-        public static void Save_Performance()
+        internal static  void Save_Performance()
         {
             JSonWriter.WriteToJsonFile(ConfigPerformancePath, Performance);
             ModConsole.DebugLog("Performance Config Saved.");
         }
 
-        public static void SaveAll()
+        internal static  void SaveAll()
         {
             _ = SaveMutex.WaitOne();
             Stopwatch stopwatch = new Stopwatch();
@@ -231,7 +231,7 @@
             SaveMutex.ReleaseMutex();
         }
 
-        public static void Load()
+        internal static  void Load()
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();

@@ -4,7 +4,7 @@
     using System.Reflection;
 
     [Serializable, Obfuscation]
-    public class TagData
+    internal class TagData
     {
         public string UserID;
 

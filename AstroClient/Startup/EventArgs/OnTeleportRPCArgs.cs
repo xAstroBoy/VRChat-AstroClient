@@ -5,7 +5,7 @@
     using VRC.SDKBase;
     using static VRC.SDKBase.VRC_SceneDescriptor;
 
-    public class OnTeleportRPCArgs : EventArgs
+    internal class OnTeleportRPCArgs : EventArgs
     {
         public Vector3 Position;
         public Quaternion Rotation;

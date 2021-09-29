@@ -11,17 +11,17 @@
 
     #endregion Imports
 
-    public class NetworkingManager : GameEvents
+    internal class NetworkingManager : GameEvents
     {
         /// <summary>
         /// Gets whether the NetworkingManager has initialized and contains the player's information.
         /// </summary>
-        public static bool Initialized { get; private set; }
+        internal static  bool Initialized { get; private set; }
 
         /// <summary>
         /// Returns true when everything is received from the server, IE (auth, account, exploit) data.
         /// </summary>
-        public static bool IsReady
+        internal static  bool IsReady
         {
             get
             {
@@ -39,13 +39,13 @@
         private static bool isReady;
         private static bool initialized;
 
-        public static string Name = string.Empty;
+        internal static  string Name = string.Empty;
 
-        public static string UserID = string.Empty;
+        internal static  string UserID = string.Empty;
 
-        public static bool HasUdon;
+        internal static  bool HasUdon;
 
-        public static void AvatarSearch(SearchTypes searchType, string query)
+        internal static  void AvatarSearch(SearchTypes searchType, string query)
         {
             if (Initialized)
             {
@@ -62,7 +62,7 @@
             }
         }
 
-        public static void SendClientInfo()
+        internal static  void SendClientInfo()
         {
             if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
             {
@@ -78,7 +78,7 @@
             }
         }
 
-        public static void SendInstanceInfo()
+        internal static  void SendInstanceInfo()
         {
             if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
             {
@@ -92,12 +92,12 @@
             }
         }
 
-        public override void OnRoomLeft()
+        internal override void OnRoomLeft()
         {
             initialized = false;
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             var self = PlayerUtils.VRCPlayer;
             Name = self.GetDisplayName();

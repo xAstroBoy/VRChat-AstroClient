@@ -7,9 +7,9 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class ChuckECheeseExperience : GameEvents
+    internal class ChuckECheeseExperience : GameEvents
     {
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.ChuckECheeseEsperience)
             {

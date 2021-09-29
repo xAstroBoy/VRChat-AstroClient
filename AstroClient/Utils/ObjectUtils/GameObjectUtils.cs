@@ -26,9 +26,9 @@
 
     #endregion Imports
 
-    public class GameObjectMenu : GameEvents
+    internal class GameObjectMenu : GameEvents
     {
-        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var GameObjectsMenus = new QMNestedButton(menu, x, y, "GameObjects DebugMenu", "Find Whatever is in these VRChat GameObjects in console", null, null, null, null, btnHalf);
             GameObjDumper = new QMSingleButton(GameObjectsMenus, 1, 0, "World's Gameobject Dumper", new Action(GameObjectDumper), "Dump All World GameObjects's names in a file!", null, null);
@@ -45,11 +45,11 @@
             ColliderDisplay.ToggleColliderDisplayBtn = new QMToggleButton(GameObjectsMenus, 3, 2, "Collider Viewer ON", new Action(() => { ColliderDisplay.ToggleDisplays(true); }), "Collider Viewer OFF", new Action(() => { ColliderDisplay.ToggleDisplays(false); }), "Reveals all world triggers available.", null, null, null, false);
         }
 
-        public static Il2CppArrayBase<VRC_SyncVideoPlayer> VRC_SyncVideoPlayers => Resources.FindObjectsOfTypeAll<VRC_SyncVideoPlayer>();
+        internal static  Il2CppArrayBase<VRC_SyncVideoPlayer> VRC_SyncVideoPlayers => Resources.FindObjectsOfTypeAll<VRC_SyncVideoPlayer>();
 
-        public static Il2CppArrayBase<SyncVideoPlayer> SyncVideoPlayers => Resources.FindObjectsOfTypeAll<SyncVideoPlayer>();
+        internal static  Il2CppArrayBase<SyncVideoPlayer> SyncVideoPlayers => Resources.FindObjectsOfTypeAll<SyncVideoPlayer>();
 
-        public static void DumpVideoPlayerURLS()
+        internal static  void DumpVideoPlayerURLS()
         {
             for (int i = 0; i < VRC_SyncVideoPlayers.Count; i++)
             {
@@ -67,7 +67,7 @@
             }
         }
 
-        public static void ClearVideoPlayers()
+        internal static  void ClearVideoPlayers()
         {
             for (int i = 0; i < VRC_SyncVideoPlayers.Count; i++)
             {
@@ -82,7 +82,7 @@
             }
         }
 
-        public static void CheckObjComponents(Transform Obj)
+        internal static  void CheckObjComponents(Transform Obj)
         {
             try
             {
@@ -99,7 +99,7 @@
             catch (Exception) { }
         }
 
-        public static void CheckObjComponents(GameObject Obj)
+        internal static  void CheckObjComponents(GameObject Obj)
         {
             try
             {
@@ -116,7 +116,7 @@
             catch (Exception) { }
         }
 
-        public static string ReturnObjectComponentsToString(GameObject Obj)
+        internal static  string ReturnObjectComponentsToString(GameObject Obj)
         {
             StringBuilder comp = new StringBuilder();
             try
@@ -139,7 +139,7 @@
             }
         }
 
-        public static void EnableAllWorldPickups()
+        internal static  void EnableAllWorldPickups()
         {
             List<GameObject> list = WorldUtils_Old.Get_Pickups();
             for (int i = 0; i < list.Count; i++)
@@ -152,7 +152,7 @@
             }
         }
 
-        public static void TeleportPlayerToPickup(GameObject obj)
+        internal static  void TeleportPlayerToPickup(GameObject obj)
         {
             if (obj != null && Utils.CurrentUser != null)
             {
@@ -160,7 +160,7 @@
             }
         }
 
-        public static void RestoreOriginalLocation(GameObject obj, bool RestoreBodySettings)
+        internal static  void RestoreOriginalLocation(GameObject obj, bool RestoreBodySettings)
         {
             if (obj != null)
             {
@@ -182,9 +182,9 @@
             }
         }
 
-        public static bool IsLocalPlayerHoldingObject(GameObject obj) => obj.GetComponent<VRC_Pickup>() != null && obj.GetComponent<VRC_Pickup>().currentPlayer.displayName == Utils.LocalPlayer.GetPlayer().GetVRCPlayerApi().displayName;
+        internal static  bool IsLocalPlayerHoldingObject(GameObject obj) => obj.GetComponent<VRC_Pickup>() != null && obj.GetComponent<VRC_Pickup>().currentPlayer.displayName == Utils.LocalPlayer.GetPlayer().GetVRCPlayerApi().displayName;
 
-        public static void TeleportPickupsToTheirDefaultPosition(bool RestoreBodySettings)
+        internal static  void TeleportPickupsToTheirDefaultPosition(bool RestoreBodySettings)
         {
             List<GameObject> list = WorldUtils_Old.Get_Pickups();
             for (int i = 0; i < list.Count; i++)
@@ -197,7 +197,7 @@
             }
         }
 
-        public static void DisableAllWorldPickups()
+        internal static  void DisableAllWorldPickups()
         {
             List<GameObject> list = WorldUtils_Old.Get_Pickups();
             for (int i = 0; i < list.Count; i++)
@@ -210,7 +210,7 @@
             }
         }
 
-        public static void GrabbableGameObjDumper()
+        internal static  void GrabbableGameObjDumper()
         {
             GrabGameObjDumper.SetIntractable(false);
             new Thread(() =>
@@ -241,7 +241,7 @@
             }).Start();
         }
 
-        public static void GameObjectDumper()
+        internal static  void GameObjectDumper()
         {
             GameObjDumper.SetIntractable(false);
             new Thread(() =>
@@ -272,7 +272,7 @@
             }).Start();
         }
 
-        public static void GetAllPickupsOwners()
+        internal static  void GetAllPickupsOwners()
         {
             List<GameObject> list = WorldUtils_Old.Get_Pickups();
             for (int i = 0; i < list.Count; i++)
@@ -294,7 +294,7 @@
             }
         }
 
-        public static void GameObjDumperWithComponents()
+        internal static  void GameObjDumperWithComponents()
         {
             ObjDumperWithComponentsBtn.SetIntractable(false);
             string path = Path.Combine(Environment.CurrentDirectory + $@"/{BuildInfo.Name}_DebugInfos/" + RoomManager.field_Internal_Static_ApiWorld_0.name.ToString() + "_GameObjects_With_components.txt");
@@ -327,7 +327,7 @@
             ModConsole.Log("Done Dumping GameObjects, Check The Path");
         }
 
-        public static List<GameObject> GetAllPickupObjects()
+        internal static  List<GameObject> GetAllPickupObjects()
         {
             List<GameObject> Objects = new List<GameObject>();
             var listg = Resources.FindObjectsOfTypeAll<VRC_Pickup>();
@@ -342,13 +342,13 @@
             return Objects;
         }
 
-        public static void RemoveWorldMirrors()
+        internal static  void RemoveWorldMirrors()
         {
             FindWorldMirrors();
             DestroyMirrors();
         }
 
-        public static void FindWorldMirrors()
+        internal static  void FindWorldMirrors()
         {
             Mirrors.Clear();
             var Mir1 = Resources.FindObjectsOfTypeAll<MirrorReflection>();
@@ -395,7 +395,7 @@
             ModConsole.Log("Mirrors Found : " + Mirrors.Count());
         }
 
-        public static void DestroyMirrors()
+        internal static  void DestroyMirrors()
         {
             for (int i = 0; i < Mirrors.Count; i++)
             {
@@ -410,7 +410,7 @@
             }
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Mirrors.Clear();
             if (GameObjDumper != null)
@@ -428,7 +428,7 @@
             }
         }
 
-        public static void DumpHoldingGameObjComponent()
+        internal static  void DumpHoldingGameObjComponent()
         {
             var held = Tweaker_Object.GetGameObjectToEdit();
             if (held != null)
@@ -437,7 +437,7 @@
             }
         }
 
-        public static void DumpObjectComponent(GameObject obj)
+        internal static  void DumpObjectComponent(GameObject obj)
         {
             if (obj != null)
             {
@@ -445,7 +445,7 @@
             }
         }
 
-        public static void DumpObjectComponent(Transform obj)
+        internal static  void DumpObjectComponent(Transform obj)
         {
             if (obj != null)
             {
@@ -453,12 +453,12 @@
             }
         }
 
-        public static QMSingleButton GameObjDumper;
-        public static QMSingleButton GrabGameObjDumper;
-        public static QMSingleButton ObjDumperWithComponentsBtn;
+        internal static  QMSingleButton GameObjDumper;
+        internal static  QMSingleButton GrabGameObjDumper;
+        internal static  QMSingleButton ObjDumperWithComponentsBtn;
 
-        public static bool HasPrePatchedGameObjects = false;
+        internal static  bool HasPrePatchedGameObjects = false;
 
-        public static List<GameObject> Mirrors = new List<GameObject>();
+        internal static  List<GameObject> Mirrors = new List<GameObject>();
     }
 }

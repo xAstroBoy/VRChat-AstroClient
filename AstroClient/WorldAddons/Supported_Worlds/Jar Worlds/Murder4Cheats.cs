@@ -20,9 +20,9 @@
 
     #endregion Imports
 
-    public class Murder4Cheats : GameEvents
+    internal class Murder4Cheats : GameEvents
     {
-        public static void FindGameMurderObjects()
+        internal static  void FindGameMurderObjects()
         {
             ModConsole.Log("Removing Anti-Peek Protection...");
 
@@ -185,7 +185,7 @@
             ModConsole.Log("Found Tot Knifes : " + Knifes.Count());
         }
 
-        public static void AllowTheft()
+        internal static  void AllowTheft()
         {
             DetectiveGuns.Pickup_Set_DisallowTheft(false);
             SilencedGuns.Pickup_Set_DisallowTheft(false);
@@ -195,21 +195,21 @@
             Knifes.Pickup_Set_DisallowTheft(false);
         }
 
-        public static void MurderGunsRockets()
+        internal static  void MurderGunsRockets()
         {
             DetectiveGuns.Add_Rocket_Component(false);
             SilencedGuns.Add_Rocket_Component(false);
             ShotGuns.Add_Rocket_Component(false);
         }
 
-        public static void MurderGunsBounce()
+        internal static  void MurderGunsBounce()
         {
             DetectiveGuns.Add_Bouncer(false);
             SilencedGuns.Add_Bouncer(false);
             ShotGuns.Add_Bouncer(false);
         }
 
-        public static void RemoveRockets()
+        internal static  void RemoveRockets()
         {
             DetectiveGuns.Remove_RocketObject_Component();
             SilencedGuns.Remove_RocketObject_Component();
@@ -219,7 +219,7 @@
             Knifes.Remove_RocketObject_Component();
         }
 
-        public static void RemoveCrazy()
+        internal static  void RemoveCrazy()
         {
             DetectiveGuns.Remove_CrazyObject_Component();
             SilencedGuns.Remove_CrazyObject_Component();
@@ -229,7 +229,7 @@
             Knifes.Remove_CrazyObject_Component();
         }
 
-        public static void RemoveBouncers()
+        internal static  void RemoveBouncers()
         {
             DetectiveGuns.Remove_Bouncer();
             SilencedGuns.Remove_Bouncer();
@@ -239,14 +239,14 @@
             Knifes.Remove_Bouncer();
         }
 
-        public static void MurderGunsCrazy()
+        internal static  void MurderGunsCrazy()
         {
             DetectiveGuns.Add_Crazy_Component(false);
             SilencedGuns.Add_Crazy_Component(false);
             ShotGuns.Add_Crazy_Component(false);
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.Murder4)
             {
@@ -270,7 +270,7 @@
             }
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             if (KnifesGrabbableToggle != null)
             {
@@ -329,7 +329,7 @@
 
         private static bool _UseGravity;
 
-        public static bool UseGravity
+        internal static  bool UseGravity
         {
             get
             {
@@ -351,7 +351,7 @@
             }
         }
 
-        public static void ToggleItemESP(bool value)
+        internal static  void ToggleItemESP(bool value)
         {
             VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = value; // ESSENTIAL
 
@@ -394,7 +394,7 @@
             }
         }
 
-        public static void Murder4CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
+        internal static  void Murder4CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
         {
             Murder4CheatPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Murder 4 Cheats", "Manage Murder 4 Cheats", null, null, null, null, btnHalf);
             Murder4CheatPage.GetMainButton().SetResizeTextForBestFit(true);
@@ -580,7 +580,7 @@
             GameVictoryMurdererBtn = new QMSingleButton(Murder4CheatPage, 4, 2.5f, "Victory Murderer", new Action(() => { VictoryMurdererEvent.ExecuteUdonEvent(); }), "Force Victory Murderer Event", null, Color.red, true);
         }
 
-        public static void ToggleKnifesGrab(bool Pickupable)
+        internal static  void ToggleKnifesGrab(bool Pickupable)
         {
             foreach (var knife in Knifes)
             {
@@ -588,7 +588,7 @@
             }
         }
 
-        public static void MakeKnifeGrabbableFromFar()
+        internal static  void MakeKnifeGrabbableFromFar()
         {
             foreach (var knife in Knifes)
             {
@@ -597,7 +597,7 @@
             }
         }
 
-        public static void RestoreKnifeToWorldControl()
+        internal static  void RestoreKnifeToWorldControl()
         {
             foreach (var knife in Knifes)
             {
@@ -605,7 +605,7 @@
             }
         }
 
-        public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             try
             {
@@ -670,7 +670,7 @@
             catch { }
         }
 
-        public static bool SwapRoles(GameObject SelfNode, GameObject TargetNode, string AssignedSelfRole, string AssignedTargetRole)
+        internal static  bool SwapRoles(GameObject SelfNode, GameObject TargetNode, string AssignedSelfRole, string AssignedTargetRole)
         {
             if (SelfNode == null && TargetNode == null && AssignedSelfRole == null && AssignedTargetRole == null)
             {
@@ -725,7 +725,7 @@
 
         //private static bool _OnlySelfHasPatreonPerk;
 
-        //public static bool OnlySelfHasPatreonPerk
+        //internal static  bool OnlySelfHasPatreonPerk
         //{
         //    get
         //    {
@@ -747,7 +747,7 @@
 
         //private static bool _EveryoneHasPatreonPerk;
 
-        //public static bool EveryoneHasPatreonPerk
+        //internal static  bool EveryoneHasPatreonPerk
         //{
         //    get
         //    {
@@ -787,12 +787,12 @@
         private static bool SafetySwap;
 
         // MAP GameObjects Required for control.
-        public static QMSingleToggleButton Murder4ESPtoggler;
+        internal static  QMSingleToggleButton Murder4ESPtoggler;
 
-        public static QMSingleButton GameStartbtn;
-        public static QMSingleButton GameAbortbtn;
-        public static QMSingleButton GameVictoryBystanderBtn;
-        public static QMSingleButton GameVictoryMurdererBtn;
+        internal static  QMSingleButton GameStartbtn;
+        internal static  QMSingleButton GameAbortbtn;
+        internal static  QMSingleButton GameVictoryBystanderBtn;
+        internal static  QMSingleButton GameVictoryMurdererBtn;
 
         private static QMSingleButton PresentTeleporter;
         private static QMSingleButton PresentSpawner;
@@ -802,7 +802,7 @@
 
         private static bool _DoUnlockedSound;
 
-        public static bool DoUnlockedSound
+        internal static  bool DoUnlockedSound
         {
             get
             {
@@ -818,12 +818,12 @@
             }
         }
 
-        public static QMSingleToggleButton KnifesGrabbableToggle;
+        internal static  QMSingleToggleButton KnifesGrabbableToggle;
 
-        public static QMSingleButton KnifesGrabFromFar;
+        internal static  QMSingleButton KnifesGrabFromFar;
         private static bool _isChristmasMode;
 
-        public static bool IsChristmasMode
+        internal static  bool IsChristmasMode
         {
             get
             {
@@ -847,67 +847,67 @@
             }
         }
 
-        public static GameObject Clue_photograph = null;
+        internal static  GameObject Clue_photograph = null;
 
-        public static GameObject Clue_notebook = null;
-        public static GameObject Clue_Locket = null;
-        public static GameObject Clue_PocketWatch = null;
-        public static GameObject Clue_Postcard = null;
+        internal static  GameObject Clue_notebook = null;
+        internal static  GameObject Clue_Locket = null;
+        internal static  GameObject Clue_PocketWatch = null;
+        internal static  GameObject Clue_Postcard = null;
 
-        public static GameObject item_Knife_0 = null;
-        public static GameObject item_Knife_1 = null;
-        public static GameObject item_Knife_2 = null;
-        public static GameObject item_Knife_3 = null;
-        public static GameObject item_Knife_4 = null;
-        public static GameObject item_Knife_5 = null;
+        internal static  GameObject item_Knife_0 = null;
+        internal static  GameObject item_Knife_1 = null;
+        internal static  GameObject item_Knife_2 = null;
+        internal static  GameObject item_Knife_3 = null;
+        internal static  GameObject item_Knife_4 = null;
+        internal static  GameObject item_Knife_5 = null;
 
-        public static GameObject item_Bear_trap_0 = null;
-        public static GameObject item_Bear_trap_1 = null;
-        public static GameObject item_Bear_trap_2 = null;
+        internal static  GameObject item_Bear_trap_0 = null;
+        internal static  GameObject item_Bear_trap_1 = null;
+        internal static  GameObject item_Bear_trap_2 = null;
 
-        public static GameObject item_Shotgun = null;
+        internal static  GameObject item_Shotgun = null;
 
-        public static GameObject item_Silenced_Revolver_0 = null;
-        public static GameObject item_Silenced_Revolver_1 = null;
+        internal static  GameObject item_Silenced_Revolver_0 = null;
+        internal static  GameObject item_Silenced_Revolver_1 = null;
 
-        public static GameObject item_Grenade = null;
+        internal static  GameObject item_Grenade = null;
 
-        public static GameObject item_DetectiveRevolver = null;
+        internal static  GameObject item_DetectiveRevolver = null;
 
-        public static GameObject Clue_Present = null;
-        public static GameObject PatreonFlairtoggle = null;
+        internal static  GameObject Clue_Present = null;
+        internal static  GameObject PatreonFlairtoggle = null;
 
-        public static GameObject Snake_Crate = null;
+        internal static  GameObject Snake_Crate = null;
 
-        public static List<GameObject> Clues = new List<GameObject>();
-        public static List<GameObject> DetectiveGuns = new List<GameObject>();
-        public static List<GameObject> SilencedGuns = new List<GameObject>();
-        public static List<GameObject> ShotGuns = new List<GameObject>();
+        internal static  List<GameObject> Clues = new List<GameObject>();
+        internal static  List<GameObject> DetectiveGuns = new List<GameObject>();
+        internal static  List<GameObject> SilencedGuns = new List<GameObject>();
+        internal static  List<GameObject> ShotGuns = new List<GameObject>();
 
-        public static List<GameObject> Knifes = new List<GameObject>();
-        public static List<GameObject> BearTraps = new List<GameObject>();
-        public static List<GameObject> Grenades = new List<GameObject>();
+        internal static  List<GameObject> Knifes = new List<GameObject>();
+        internal static  List<GameObject> BearTraps = new List<GameObject>();
+        internal static  List<GameObject> Grenades = new List<GameObject>();
 
-        public static QMNestedButton Murder4CheatPage;
+        internal static  QMNestedButton Murder4CheatPage;
 
-        public static UdonBehaviour_Cached OnPlayerUnlockedClues;
+        internal static  UdonBehaviour_Cached OnPlayerUnlockedClues;
 
-        public static UdonBehaviour_Cached StartGameEvent;
-        public static UdonBehaviour_Cached AbortGameEvent;
+        internal static  UdonBehaviour_Cached StartGameEvent;
+        internal static  UdonBehaviour_Cached AbortGameEvent;
 
-        public static UdonBehaviour_Cached VictoryBystanderEvent;
-        public static UdonBehaviour_Cached VictoryMurdererEvent;
+        internal static  UdonBehaviour_Cached VictoryBystanderEvent;
+        internal static  UdonBehaviour_Cached VictoryMurdererEvent;
 
-        public static QMSingleToggleButton GetDetectiveRoleBtn;
-        public static QMSingleToggleButton GetMurdererRoleBtn;
+        internal static  QMSingleToggleButton GetDetectiveRoleBtn;
+        internal static  QMSingleToggleButton GetMurdererRoleBtn;
 
-        //public static QMSingleToggleButton GetSelfPatreonGunBtn;
-        //public static QMSingleToggleButton GetEveryonePatreonGunBtn;
-        public static QMSingleToggleButton ToggleGravityMode;
+        //internal static  QMSingleToggleButton GetSelfPatreonGunBtn;
+        //internal static  QMSingleToggleButton GetEveryonePatreonGunBtn;
+        internal static  QMSingleToggleButton ToggleGravityMode;
 
-        public static bool _RoleSwapper_GetDetectiveRole;
+        internal static  bool _RoleSwapper_GetDetectiveRole;
 
-        public static bool RoleSwapper_GetDetectiveRole
+        internal static  bool RoleSwapper_GetDetectiveRole
         {
             get
             {
@@ -939,9 +939,9 @@
             }
         }
 
-        public static bool _RoleSwapper_GetMurdererRole;
+        internal static  bool _RoleSwapper_GetMurdererRole;
 
-        public static bool RoleSwapper_GetMurdererRole
+        internal static  bool RoleSwapper_GetMurdererRole
         {
             get
             {
@@ -972,6 +972,6 @@
             }
         }
 
-        public static bool HasMurder4WorldLoaded = false;
+        internal static  bool HasMurder4WorldLoaded = false;
     }
 }

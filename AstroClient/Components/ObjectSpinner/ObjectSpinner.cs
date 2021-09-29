@@ -8,7 +8,7 @@
     using static AstroClient.Forces;
 
     [RegisterComponent]
-    public class ObjectSpinner : GameEventsBehaviour
+    internal class ObjectSpinner : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;

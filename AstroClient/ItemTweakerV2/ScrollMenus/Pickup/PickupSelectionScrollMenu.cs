@@ -9,9 +9,9 @@
     using UnityEngine;
     using VRC;
 
-    public class PickupSelectionScrollMenu : Tweaker_Events
+    internal class PickupSelectionScrollMenu : Tweaker_Events
     {
-        public static void Init_PickupSelectionQMScroll(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static  void Init_PickupSelectionQMScroll(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Select Pickup", "Select World Pickup to edit", null, null, null, null, btnHalf);
             var PickupQMScroll = new QMScrollMenu(menu);
@@ -61,7 +61,7 @@
             });
         }
 
-        public override void OnPickupController_OnUpdate(PickupController control)
+        internal override void OnPickupController_OnUpdate(PickupController control)
         {
             if (control != null)
             {
@@ -85,7 +85,7 @@
         private static QMSingleButton Pickup_CurrentObjectHolder { get; set; }
         private static QMSingleButton Pickup_CurrentObjectOwner { get; set; }
 
-        public override void On_New_GameObject_Selected(GameObject obj)
+        internal override void On_New_GameObject_Selected(GameObject obj)
         {
             if (TeleportToTarget != null)
             {
@@ -99,7 +99,7 @@
             }
         }
 
-        public override void OnTargetSet(Player player)
+        internal override void OnTargetSet(Player player)
         {
             if (TeleportToTarget != null)
             {
@@ -108,7 +108,7 @@
             }
         }
 
-        public static QMSingleButton TeleportToMe;
-        public static QMSingleButton TeleportToTarget;
+        internal static  QMSingleButton TeleportToMe;
+        internal static  QMSingleButton TeleportToTarget;
     }
 }

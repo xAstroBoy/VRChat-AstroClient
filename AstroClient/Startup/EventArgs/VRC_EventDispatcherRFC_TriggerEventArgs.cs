@@ -3,7 +3,7 @@
     using System;
     using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
 
-    public class VRC_EventDispatcherRFC_TriggerEventArgs : EventArgs
+    internal class VRC_EventDispatcherRFC_TriggerEventArgs : EventArgs
     {
         public VRC_EventHandler VRC_EventHandler;
         public VRC_EventHandler.VrcEvent VrcEvent;

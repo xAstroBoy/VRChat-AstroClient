@@ -8,9 +8,9 @@
     using System;
     using UnityEngine;
 
-    public class ForcesSubmenu : Tweaker_Events
+    internal class ForcesSubmenu : Tweaker_Events
     {
-        public static void Init_ForceSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        internal static  void Init_ForceSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var ForceSubMenu = new QMNestedButton(menu, x, y, "Forces", "You have the Force! Dont abuse it! <3!", null, null, null, null, btnHalf);
 
@@ -59,7 +59,7 @@
             _ = new QMSingleButton(ForceSubMenu, 1, 2, "Rotate Z", new Action(() => { Tweaker_Object.GetGameObjectToEdit().SpinZ(); }), string.Empty, null, null);
         }
 
-        public override void OnPickupController_OnUpdate(PickupController control)
+        internal override void OnPickupController_OnUpdate(PickupController control)
         {
             if (control != null)
             {
@@ -82,18 +82,18 @@
         private static QMSingleButton Pickup_IsHeldStatus { get; set; }
         private static QMSingleButton Pickup_CurrentObjectHolder { get; set; }
         private static QMSingleButton Pickup_CurrentObjectOwner { get; set; }
-        public static QMSlider ForceSlider { get; private set; }
-        public static QMSlider SpinForceSlider { get; private set; }
+        internal static  QMSlider ForceSlider { get; private set; }
+        internal static  QMSlider SpinForceSlider { get; private set; }
 
-        public static QMSingleButton ForceAmnt1;
+        internal static  QMSingleButton ForceAmnt1;
 
-        public static QMSingleButton ForceAmnt2;
-        public static QMSingleButton SpinForceAmnt1;
-        public static QMSingleButton SpinForceAmnt2;
+        internal static  QMSingleButton ForceAmnt2;
+        internal static  QMSingleButton SpinForceAmnt1;
+        internal static  QMSingleButton SpinForceAmnt2;
 
         private static float _Force;
 
-        public static float Force
+        internal static  float Force
         {
             get
             {
@@ -119,7 +119,7 @@
 
         private static float _SpinForce;
 
-        public static float SpinForce
+        internal static  float SpinForce
         {
             get
             {
@@ -144,7 +144,7 @@
             }
         }
 
-        public static readonly float DefaultForce = 1f;
-        public static readonly float DefaultSpinForce = 100f;
+        internal static  readonly float DefaultForce = 1f;
+        internal static  readonly float DefaultSpinForce = 100f;
     }
 }

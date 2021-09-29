@@ -10,9 +10,9 @@
     using UnityEngine;
     using static VRC.SDKBase.VRCPlayerApi;
 
-    public static class UdonUnpacker_ext
+    internal static  class UdonUnpacker_ext
     {
-        public static string Unpack_String(this Il2CppSystem.Object obj)
+        internal static  string Unpack_String(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -32,7 +32,7 @@
             return null;
         }
 
-        public static string[] Unpack_Array_String(this Il2CppSystem.Object obj)
+        internal static  string[] Unpack_Array_String(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -52,7 +52,7 @@
             return null;
         }
 
-        public static List<string> Unpack_List_String(this Il2CppSystem.Object obj)
+        internal static  List<string> Unpack_List_String(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -68,7 +68,7 @@
             return null;
         }
 
-        public static bool? Unpack_Boolean(this Il2CppSystem.Object obj)
+        internal static  bool? Unpack_Boolean(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -84,7 +84,7 @@
             return null;
         }
 
-        public static bool[] Unpack_Array_Boolean(this Il2CppSystem.Object obj)
+        internal static  bool[] Unpack_Array_Boolean(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -104,7 +104,7 @@
             return null;
         }
 
-        public static List<bool> Unpack_List_Boolean(this Il2CppSystem.Object obj)
+        internal static  List<bool> Unpack_List_Boolean(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -120,7 +120,7 @@
             return null;
         }
 
-        public static float? Unpack_Single(this Il2CppSystem.Object obj)
+        internal static  float? Unpack_Single(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -136,7 +136,7 @@
             return null;
         }
 
-        public static float[] Unpack_Array_Single(this Il2CppSystem.Object obj)
+        internal static  float[] Unpack_Array_Single(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -156,7 +156,7 @@
             return null;
         }
 
-        public static List<float> Unpack_List_Single(this Il2CppSystem.Object obj)
+        internal static  List<float> Unpack_List_Single(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -172,7 +172,7 @@
             return null;
         }
 
-        public static ushort? Unpack_UInt16(this Il2CppSystem.Object obj)
+        internal static  ushort? Unpack_UInt16(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -188,7 +188,7 @@
             return null;
         }
 
-        public static ushort[] Unpack_Array_UInt16(this Il2CppSystem.Object obj)
+        internal static  ushort[] Unpack_Array_UInt16(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -208,7 +208,7 @@
             return null;
         }
 
-        public static List<ushort> Unpack_List_UInt16(this Il2CppSystem.Object obj)
+        internal static  List<ushort> Unpack_List_UInt16(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -225,7 +225,7 @@
         }
 
 
-        public static System.TimeSpan? Unpack_TimeSpan(this Il2CppSystem.Object obj)
+        internal static  System.TimeSpan? Unpack_TimeSpan(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -241,7 +241,7 @@
             return null;
         }
 
-        public static System.TimeSpan[] Unpack_Array_TimeSpan(this Il2CppSystem.Object obj)
+        internal static  System.TimeSpan[] Unpack_Array_TimeSpan(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -261,7 +261,7 @@
             return null;
         }
 
-        public static List<System.TimeSpan> Unpack_List_TimeSpan(this Il2CppSystem.Object obj)
+        internal static  List<System.TimeSpan> Unpack_List_TimeSpan(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -277,7 +277,7 @@
             return null;
         }
 
-        public static double? Unpack_Double(this Il2CppSystem.Object obj)
+        internal static  double? Unpack_Double(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -293,7 +293,7 @@
             return null;
         }
 
-        public static double[] Unpack_Array_Double(this Il2CppSystem.Object obj)
+        internal static  double[] Unpack_Array_Double(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -313,7 +313,7 @@
             return null;
         }
 
-        public static List<double> Unpack_List_Double(this Il2CppSystem.Object obj)
+        internal static  List<double> Unpack_List_Double(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -331,7 +331,7 @@
 
 
 
-        public static char? Unpack_Char(this Il2CppSystem.Object obj)
+        internal static  char? Unpack_Char(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -347,7 +347,7 @@
             return null;
         }
 
-        public static char[] Unpack_Array_Char(this Il2CppSystem.Object obj)
+        internal static  char[] Unpack_Array_Char(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -367,7 +367,7 @@
             return null;
         }
 
-        public static List<char> Unpack_List_Char(this Il2CppSystem.Object obj)
+        internal static  List<char> Unpack_List_Char(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -383,7 +383,7 @@
             return null;
         }
 
-        public static byte? Unpack_Byte(this Il2CppSystem.Object obj)
+        internal static  byte? Unpack_Byte(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -399,7 +399,7 @@
             return null;
         }
 
-        public static byte[] Unpack_Array_Byte(this Il2CppSystem.Object obj)
+        internal static  byte[] Unpack_Array_Byte(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -419,7 +419,7 @@
             return null;
         }
 
-        public static List<byte> Unpack_List_Byte(this Il2CppSystem.Object obj)
+        internal static  List<byte> Unpack_List_Byte(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -435,7 +435,7 @@
             return null;
         }
 
-        public static long? Unpack_Int64(this Il2CppSystem.Object obj)
+        internal static  long? Unpack_Int64(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -451,7 +451,7 @@
             return null;
         }
 
-        public static long[] Unpack_Array_Int64(this Il2CppSystem.Object obj)
+        internal static  long[] Unpack_Array_Int64(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -471,7 +471,7 @@
             return null;
         }
 
-        public static List<long> Unpack_List_Int64(this Il2CppSystem.Object obj)
+        internal static  List<long> Unpack_List_Int64(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -487,7 +487,7 @@
             return null;
         }
 
-        public static uint? Unpack_UInt32(this Il2CppSystem.Object obj)
+        internal static  uint? Unpack_UInt32(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -503,7 +503,7 @@
             return null;
         }
 
-        public static uint[] Unpack_Array_UInt32(this Il2CppSystem.Object obj)
+        internal static  uint[] Unpack_Array_UInt32(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -523,7 +523,7 @@
             return null;
         }
 
-        public static List<uint> Unpack_List_UInt32(this Il2CppSystem.Object obj)
+        internal static  List<uint> Unpack_List_UInt32(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -539,7 +539,7 @@
             return null;
         }
 
-        public static int? Unpack_Int32(this Il2CppSystem.Object obj)
+        internal static  int? Unpack_Int32(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -555,7 +555,7 @@
             return null;
         }
 
-        public static int[] Unpack_Array_Int32(this Il2CppSystem.Object obj)
+        internal static  int[] Unpack_Array_Int32(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -575,7 +575,7 @@
             return null;
         }
 
-        public static List<int> Unpack_List_Int32(this Il2CppSystem.Object obj)
+        internal static  List<int> Unpack_List_Int32(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -591,7 +591,7 @@
             return null;
         }
 
-        public static Color? Unpack_Color(this Il2CppSystem.Object obj)
+        internal static  Color? Unpack_Color(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -607,7 +607,7 @@
             return null;
         }
 
-        public static Color[] Unpack_Array_Color(this Il2CppSystem.Object obj)
+        internal static  Color[] Unpack_Array_Color(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -627,7 +627,7 @@
             return null;
         }
 
-        public static List<Color> Unpack_List_Color(this Il2CppSystem.Object obj)
+        internal static  List<Color> Unpack_List_Color(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -643,7 +643,7 @@
             return null;
         }
 
-        public static Transform Unpack_Transform(this Il2CppSystem.Object obj)
+        internal static  Transform Unpack_Transform(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -659,7 +659,7 @@
             return null;
         }
 
-        public static Transform[] Unpack_Array_Transform(this Il2CppSystem.Object obj)
+        internal static  Transform[] Unpack_Array_Transform(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -679,7 +679,7 @@
             return null;
         }
 
-        public static List<Transform> Unpack_List_Transform(this Il2CppSystem.Object obj)
+        internal static  List<Transform> Unpack_List_Transform(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -695,7 +695,7 @@
             return null;
         }
 
-        public static GameObject Unpack_GameObject(this Il2CppSystem.Object obj)
+        internal static  GameObject Unpack_GameObject(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -711,7 +711,7 @@
             return null;
         }
 
-        public static VRC.SDKBase.VRCPlayerApi Unpack_VRCPlayerApi(this Il2CppSystem.Object obj)
+        internal static  VRC.SDKBase.VRCPlayerApi Unpack_VRCPlayerApi(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -727,7 +727,7 @@
             return null;
         }
 
-        public static VRC.Udon.UdonBehaviour Unpack_UdonBehaviour(this Il2CppSystem.Object obj)
+        internal static  VRC.Udon.UdonBehaviour Unpack_UdonBehaviour(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -743,7 +743,7 @@
             return null;
         }
 
-        public static VRC.Udon.UdonBehaviour[] Unpack_Array_UdonBehaviour(this Il2CppSystem.Object obj)
+        internal static  VRC.Udon.UdonBehaviour[] Unpack_Array_UdonBehaviour(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -763,7 +763,7 @@
             return null;
         }
 
-        public static List<VRC.Udon.UdonBehaviour> Unpack_List_UdonBehaviour(this Il2CppSystem.Object obj)
+        internal static  List<VRC.Udon.UdonBehaviour> Unpack_List_UdonBehaviour(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -779,7 +779,7 @@
             return null;
         }
 
-        public static Material Unpack_Material(this Il2CppSystem.Object obj)
+        internal static  Material Unpack_Material(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -795,7 +795,7 @@
             return null;
         }
 
-        public static Material[] Unpack_Array_Material(this Il2CppSystem.Object obj)
+        internal static  Material[] Unpack_Array_Material(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -815,7 +815,7 @@
             return null;
         }
 
-        public static List<Material> Unpack_List_Material(this Il2CppSystem.Object obj)
+        internal static  List<Material> Unpack_List_Material(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -831,7 +831,7 @@
             return null;
         }
 
-        public static Vector3? Unpack_Vector3(this Il2CppSystem.Object obj)
+        internal static  Vector3? Unpack_Vector3(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -847,7 +847,7 @@
             return null;
         }
 
-        public static Vector3[] Unpack_Array_Vector3(this Il2CppSystem.Object obj)
+        internal static  Vector3[] Unpack_Array_Vector3(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -867,7 +867,7 @@
             return null;
         }
 
-        public static List<Vector3> Unpack_List_Vector3(this Il2CppSystem.Object obj)
+        internal static  List<Vector3> Unpack_List_Vector3(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -883,7 +883,7 @@
             return null;
         }
 
-        public static Quaternion? Unpack_Quaternion(this Il2CppSystem.Object obj)
+        internal static  Quaternion? Unpack_Quaternion(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -899,7 +899,7 @@
             return null;
         }
 
-        public static Quaternion[] Unpack_Array_Quaternion(this Il2CppSystem.Object obj)
+        internal static  Quaternion[] Unpack_Array_Quaternion(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -919,7 +919,7 @@
             return null;
         }
 
-        public static List<Quaternion> Unpack_List_Quaternion(this Il2CppSystem.Object obj)
+        internal static  List<Quaternion> Unpack_List_Quaternion(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -935,7 +935,7 @@
             return null;
         }
 
-        public static HumanBodyBones? Unpack_HumanBodyBones(this Il2CppSystem.Object obj)
+        internal static  HumanBodyBones? Unpack_HumanBodyBones(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -951,7 +951,7 @@
             return null;
         }
 
-        public static HumanBodyBones[] Unpack_Array_HumanBodyBones(this Il2CppSystem.Object obj)
+        internal static  HumanBodyBones[] Unpack_Array_HumanBodyBones(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -971,7 +971,7 @@
             return null;
         }
 
-        public static List<HumanBodyBones> Unpack_List_HumanBodyBones(this Il2CppSystem.Object obj)
+        internal static  List<HumanBodyBones> Unpack_List_HumanBodyBones(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -987,7 +987,7 @@
             return null;
         }
 
-        public static VRC.Udon.Common.Interfaces.NetworkEventTarget? Unpack_NetworkEventTarget(this Il2CppSystem.Object obj)
+        internal static  VRC.Udon.Common.Interfaces.NetworkEventTarget? Unpack_NetworkEventTarget(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1003,7 +1003,7 @@
             return null;
         }
 
-        public static VRC.Udon.Common.Interfaces.NetworkEventTarget[] Unpack_Array_NetworkEventTarget(this Il2CppSystem.Object obj)
+        internal static  VRC.Udon.Common.Interfaces.NetworkEventTarget[] Unpack_Array_NetworkEventTarget(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1023,7 +1023,7 @@
             return null;
         }
 
-        public static List<VRC.Udon.Common.Interfaces.NetworkEventTarget> Unpack_List_NetworkEventTarget(this Il2CppSystem.Object obj)
+        internal static  List<VRC.Udon.Common.Interfaces.NetworkEventTarget> Unpack_List_NetworkEventTarget(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1041,7 +1041,7 @@
 
 
 
-        public static object Unpack_System_Object(this Il2CppSystem.Object obj)
+        internal static  object Unpack_System_Object(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1061,7 +1061,7 @@
             return null;
         }
 
-        public static object[] Unpack_Array_System_Object(this Il2CppSystem.Object obj)
+        internal static  object[] Unpack_Array_System_Object(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1081,7 +1081,7 @@
             return null;
         }
 
-        public static List<object> Unpack_List_System_Object(this Il2CppSystem.Object obj)
+        internal static  List<object> Unpack_List_System_Object(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1097,7 +1097,7 @@
             return null;
         }
 
-        public static TMPro.TextMeshPro Unpack_TextMeshPro(this Il2CppSystem.Object obj)
+        internal static  TMPro.TextMeshPro Unpack_TextMeshPro(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1113,7 +1113,7 @@
             return null;
         }
 
-        public static TMPro.TextMeshPro[] Unpack_Array_TextMeshPro(this Il2CppSystem.Object obj)
+        internal static  TMPro.TextMeshPro[] Unpack_Array_TextMeshPro(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1133,7 +1133,7 @@
             return null;
         }
 
-        public static List<TMPro.TextMeshPro> Unpack_List_TextMeshPro(this Il2CppSystem.Object obj)
+        internal static  List<TMPro.TextMeshPro> Unpack_List_TextMeshPro(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1149,7 +1149,7 @@
             return null;
         }
 
-        public static AudioSource Unpack_AudioSource(this Il2CppSystem.Object obj)
+        internal static  AudioSource Unpack_AudioSource(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1165,7 +1165,7 @@
             return null;
         }
 
-        public static AudioSource[] Unpack_Array_AudioSource(this Il2CppSystem.Object obj)
+        internal static  AudioSource[] Unpack_Array_AudioSource(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1185,7 +1185,7 @@
             return null;
         }
 
-        public static List<AudioSource> Unpack_List_AudioSource(this Il2CppSystem.Object obj)
+        internal static  List<AudioSource> Unpack_List_AudioSource(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1201,7 +1201,7 @@
             return null;
         }
 
-        public static UnityEngine.UI.Text Unpack_UnityEngine_UI_Text(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.Text Unpack_UnityEngine_UI_Text(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1217,7 +1217,7 @@
             return null;
         }
 
-        public static UnityEngine.UI.Text[] Unpack_Array_UnityEngine_UI_Text(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.Text[] Unpack_Array_UnityEngine_UI_Text(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1237,7 +1237,7 @@
             return null;
         }
 
-        public static List<UnityEngine.UI.Text> Unpack_List_UnityEngine_UI_Text(this Il2CppSystem.Object obj)
+        internal static  List<UnityEngine.UI.Text> Unpack_List_UnityEngine_UI_Text(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1253,7 +1253,7 @@
             return null;
         }
 
-        public static TMPro.TextMeshProUGUI Unpack_TextMeshProUGUI(this Il2CppSystem.Object obj)
+        internal static  TMPro.TextMeshProUGUI Unpack_TextMeshProUGUI(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1269,7 +1269,7 @@
             return null;
         }
 
-        public static TMPro.TextMeshProUGUI[] Unpack_Array_TextMeshProUGUI(this Il2CppSystem.Object obj)
+        internal static  TMPro.TextMeshProUGUI[] Unpack_Array_TextMeshProUGUI(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1289,7 +1289,7 @@
             return null;
         }
 
-        public static List<TMPro.TextMeshProUGUI> Unpack_List_TextMeshProUGUI(this Il2CppSystem.Object obj)
+        internal static  List<TMPro.TextMeshProUGUI> Unpack_List_TextMeshProUGUI(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1305,7 +1305,7 @@
             return null;
         }
 
-        public static MeshRenderer Unpack_MeshRenderer(this Il2CppSystem.Object obj)
+        internal static  MeshRenderer Unpack_MeshRenderer(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1321,7 +1321,7 @@
             return null;
         }
 
-        public static MeshRenderer[] Unpack_Array_MeshRenderer(this Il2CppSystem.Object obj)
+        internal static  MeshRenderer[] Unpack_Array_MeshRenderer(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1341,7 +1341,7 @@
             return null;
         }
 
-        public static List<MeshRenderer> Unpack_List_MeshRenderer(this Il2CppSystem.Object obj)
+        internal static  List<MeshRenderer> Unpack_List_MeshRenderer(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1358,7 +1358,7 @@
         }
 
 
-        public static BoxCollider Unpack_BoxCollider(this Il2CppSystem.Object obj)
+        internal static  BoxCollider Unpack_BoxCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1374,7 +1374,7 @@
             return null;
         }
 
-        public static BoxCollider[] Unpack_Array_BoxCollider(this Il2CppSystem.Object obj)
+        internal static  BoxCollider[] Unpack_Array_BoxCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1394,7 +1394,7 @@
             return null;
         }
 
-        public static List<BoxCollider> Unpack_List_BoxCollider(this Il2CppSystem.Object obj)
+        internal static  List<BoxCollider> Unpack_List_BoxCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1409,7 +1409,7 @@
             }
             return null;
         }
-        public static Sprite Unpack_Sprite(this Il2CppSystem.Object obj)
+        internal static  Sprite Unpack_Sprite(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1425,7 +1425,7 @@
             return null;
         }
 
-        public static Sprite[] Unpack_Array_Sprite(this Il2CppSystem.Object obj)
+        internal static  Sprite[] Unpack_Array_Sprite(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1445,7 +1445,7 @@
             return null;
         }
 
-        public static List<Sprite> Unpack_List_Sprite(this Il2CppSystem.Object obj)
+        internal static  List<Sprite> Unpack_List_Sprite(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1461,7 +1461,7 @@
             return null;
         }
 
-        public static Component Unpack_Component(this Il2CppSystem.Object obj)
+        internal static  Component Unpack_Component(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1477,7 +1477,7 @@
             return null;
         }
 
-        public static Component[] Unpack_Array_Component(this Il2CppSystem.Object obj)
+        internal static  Component[] Unpack_Array_Component(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1497,7 +1497,7 @@
             return null;
         }
 
-        public static List<Component> Unpack_List_Component(this Il2CppSystem.Object obj)
+        internal static  List<Component> Unpack_List_Component(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1514,7 +1514,7 @@
         }
 
 
-        public static Rigidbody Unpack_Rigidbody(this Il2CppSystem.Object obj)
+        internal static  Rigidbody Unpack_Rigidbody(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1530,7 +1530,7 @@
             return null;
         }
 
-        public static Rigidbody[] Unpack_Array_Rigidbody(this Il2CppSystem.Object obj)
+        internal static  Rigidbody[] Unpack_Array_Rigidbody(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1550,7 +1550,7 @@
             return null;
         }
 
-        public static List<Rigidbody> Unpack_List_Rigidbody(this Il2CppSystem.Object obj)
+        internal static  List<Rigidbody> Unpack_List_Rigidbody(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1566,7 +1566,7 @@
             return null;
         }
 
-        public static CapsuleCollider Unpack_CapsuleCollider(this Il2CppSystem.Object obj)
+        internal static  CapsuleCollider Unpack_CapsuleCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1582,7 +1582,7 @@
             return null;
         }
 
-        public static CapsuleCollider[] Unpack_Array_CapsuleCollider(this Il2CppSystem.Object obj)
+        internal static  CapsuleCollider[] Unpack_Array_CapsuleCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1602,7 +1602,7 @@
             return null;
         }
 
-        public static List<CapsuleCollider> Unpack_List_CapsuleCollider(this Il2CppSystem.Object obj)
+        internal static  List<CapsuleCollider> Unpack_List_CapsuleCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1618,7 +1618,7 @@
             return null;
         }
 
-        public static SphereCollider Unpack_SphereCollider(this Il2CppSystem.Object obj)
+        internal static  SphereCollider Unpack_SphereCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1634,7 +1634,7 @@
             return null;
         }
 
-        public static SphereCollider[] Unpack_Array_SphereCollider(this Il2CppSystem.Object obj)
+        internal static  SphereCollider[] Unpack_Array_SphereCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1654,7 +1654,7 @@
             return null;
         }
 
-        public static List<SphereCollider> Unpack_List_SphereCollider(this Il2CppSystem.Object obj)
+        internal static  List<SphereCollider> Unpack_List_SphereCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1669,7 +1669,7 @@
             }
             return null;
         }
-        public static MeshCollider Unpack_MeshCollider(this Il2CppSystem.Object obj)
+        internal static  MeshCollider Unpack_MeshCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1685,7 +1685,7 @@
             return null;
         }
 
-        public static Collider Unpack_Collider(this Il2CppSystem.Object obj)
+        internal static  Collider Unpack_Collider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1702,7 +1702,7 @@
         }
 
 
-        public static Collider[] Unpack_Array_Collider(this Il2CppSystem.Object obj)
+        internal static  Collider[] Unpack_Array_Collider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1722,7 +1722,7 @@
             return null;
         }
 
-        public static List<Collider> Unpack_List_Collider(this Il2CppSystem.Object obj)
+        internal static  List<Collider> Unpack_List_Collider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1739,7 +1739,7 @@
         }
 
 
-        public static MeshCollider[] Unpack_Array_MeshCollider(this Il2CppSystem.Object obj)
+        internal static  MeshCollider[] Unpack_Array_MeshCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1759,7 +1759,7 @@
             return null;
         }
 
-        public static List<MeshCollider> Unpack_List_MeshCollider(this Il2CppSystem.Object obj)
+        internal static  List<MeshCollider> Unpack_List_MeshCollider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1775,7 +1775,7 @@
             return null;
         }
 
-        public static Texture Unpack_Texture(this Il2CppSystem.Object obj)
+        internal static  Texture Unpack_Texture(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1791,7 +1791,7 @@
             return null;
         }
 
-        public static Texture[] Unpack_Array_Texture(this Il2CppSystem.Object obj)
+        internal static  Texture[] Unpack_Array_Texture(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1811,7 +1811,7 @@
             return null;
         }
 
-        public static List<Texture> Unpack_List_Texture(this Il2CppSystem.Object obj)
+        internal static  List<Texture> Unpack_List_Texture(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1826,7 +1826,7 @@
             }
             return null;
         }
-        public static ReflectionProbe Unpack_ReflectionProbe(this Il2CppSystem.Object obj)
+        internal static  ReflectionProbe Unpack_ReflectionProbe(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1842,7 +1842,7 @@
             return null;
         }
 
-        public static ReflectionProbe[] Unpack_Array_ReflectionProbe(this Il2CppSystem.Object obj)
+        internal static  ReflectionProbe[] Unpack_Array_ReflectionProbe(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1862,7 +1862,7 @@
             return null;
         }
 
-        public static List<ReflectionProbe> Unpack_List_ReflectionProbe(this Il2CppSystem.Object obj)
+        internal static  List<ReflectionProbe> Unpack_List_ReflectionProbe(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1878,7 +1878,7 @@
             return null;
         }
 
-        public static RenderTexture Unpack_RenderTexture(this Il2CppSystem.Object obj)
+        internal static  RenderTexture Unpack_RenderTexture(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1894,7 +1894,7 @@
             return null;
         }
 
-        public static RenderTexture[] Unpack_Array_RenderTexture(this Il2CppSystem.Object obj)
+        internal static  RenderTexture[] Unpack_Array_RenderTexture(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1914,7 +1914,7 @@
             return null;
         }
 
-        public static List<RenderTexture> Unpack_List_RenderTexture(this Il2CppSystem.Object obj)
+        internal static  List<RenderTexture> Unpack_List_RenderTexture(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1932,7 +1932,7 @@
 
 
 
-        public static TextAsset Unpack_TextAsset(this Il2CppSystem.Object obj)
+        internal static  TextAsset Unpack_TextAsset(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1948,7 +1948,7 @@
             return null;
         }
 
-        public static TextAsset[] Unpack_Array_TextAsset(this Il2CppSystem.Object obj)
+        internal static  TextAsset[] Unpack_Array_TextAsset(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1968,7 +1968,7 @@
             return null;
         }
 
-        public static List<TextAsset> Unpack_List_TextAsset(this Il2CppSystem.Object obj)
+        internal static  List<TextAsset> Unpack_List_TextAsset(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -1986,7 +1986,7 @@
 
 
 
-        public static Mesh Unpack_Mesh(this Il2CppSystem.Object obj)
+        internal static  Mesh Unpack_Mesh(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2002,7 +2002,7 @@
             return null;
         }
 
-        public static Mesh[] Unpack_Array_Mesh(this Il2CppSystem.Object obj)
+        internal static  Mesh[] Unpack_Array_Mesh(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2022,7 +2022,7 @@
             return null;
         }
 
-        public static List<Mesh> Unpack_List_Mesh(this Il2CppSystem.Object obj)
+        internal static  List<Mesh> Unpack_List_Mesh(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2039,7 +2039,7 @@
         }
 
 
-        public static Animator Unpack_Animator(this Il2CppSystem.Object obj)
+        internal static  Animator Unpack_Animator(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2055,7 +2055,7 @@
             return null;
         }
 
-        public static Animator[] Unpack_Array_Animator(this Il2CppSystem.Object obj)
+        internal static  Animator[] Unpack_Array_Animator(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2075,7 +2075,7 @@
             return null;
         }
 
-        public static List<Animator> Unpack_List_Animator(this Il2CppSystem.Object obj)
+        internal static  List<Animator> Unpack_List_Animator(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2091,7 +2091,7 @@
             return null;
         }
 
-        public static LineRenderer Unpack_LineRenderer(this Il2CppSystem.Object obj)
+        internal static  LineRenderer Unpack_LineRenderer(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2107,7 +2107,7 @@
             return null;
         }
 
-        public static LineRenderer[] Unpack_Array_LineRenderer(this Il2CppSystem.Object obj)
+        internal static  LineRenderer[] Unpack_Array_LineRenderer(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2127,7 +2127,7 @@
             return null;
         }
 
-        public static List<LineRenderer> Unpack_List_LineRenderer(this Il2CppSystem.Object obj)
+        internal static  List<LineRenderer> Unpack_List_LineRenderer(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2143,7 +2143,7 @@
             return null;
         }
 
-        public static KeyCode? Unpack_KeyCode(this Il2CppSystem.Object obj)
+        internal static  KeyCode? Unpack_KeyCode(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2159,7 +2159,7 @@
             return null;
         }
 
-        public static KeyCode[] Unpack_Array_KeyCode(this Il2CppSystem.Object obj)
+        internal static  KeyCode[] Unpack_Array_KeyCode(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2179,7 +2179,7 @@
             return null;
         }
 
-        public static List<KeyCode> Unpack_List_KeyCode(this Il2CppSystem.Object obj)
+        internal static  List<KeyCode> Unpack_List_KeyCode(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2195,7 +2195,7 @@
             return null;
         }
 
-        public static Texture2D Unpack_Texture2D(this Il2CppSystem.Object obj)
+        internal static  Texture2D Unpack_Texture2D(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2211,7 +2211,7 @@
             return null;
         }
 
-        public static Texture2D[] Unpack_Array_Texture2D(this Il2CppSystem.Object obj)
+        internal static  Texture2D[] Unpack_Array_Texture2D(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2231,7 +2231,7 @@
             return null;
         }
 
-        public static List<Texture2D> Unpack_List_Texture2D(this Il2CppSystem.Object obj)
+        internal static  List<Texture2D> Unpack_List_Texture2D(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2247,7 +2247,7 @@
             return null;
         }
 
-        public static Rect? Unpack_Rect(this Il2CppSystem.Object obj)
+        internal static  Rect? Unpack_Rect(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2263,7 +2263,7 @@
             return null;
         }
 
-        public static Rect[] Unpack_Array_Rect(this Il2CppSystem.Object obj)
+        internal static  Rect[] Unpack_Array_Rect(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2283,7 +2283,7 @@
             return null;
         }
 
-        public static List<Rect> Unpack_List_Rect(this Il2CppSystem.Object obj)
+        internal static  List<Rect> Unpack_List_Rect(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2300,7 +2300,7 @@
         }
 
 
-        public static Camera Unpack_Camera(this Il2CppSystem.Object obj)
+        internal static  Camera Unpack_Camera(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2316,7 +2316,7 @@
             return null;
         }
 
-        public static Camera[] Unpack_Array_Camera(this Il2CppSystem.Object obj)
+        internal static  Camera[] Unpack_Array_Camera(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2336,7 +2336,7 @@
             return null;
         }
 
-        public static List<Camera> Unpack_List_Camera(this Il2CppSystem.Object obj)
+        internal static  List<Camera> Unpack_List_Camera(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2353,7 +2353,7 @@
         }
 
 
-        public static RectTransform Unpack_RectTransform(this Il2CppSystem.Object obj)
+        internal static  RectTransform Unpack_RectTransform(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2369,7 +2369,7 @@
             return null;
         }
 
-        public static RectTransform[] Unpack_Array_RectTransform(this Il2CppSystem.Object obj)
+        internal static  RectTransform[] Unpack_Array_RectTransform(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2389,7 +2389,7 @@
             return null;
         }
 
-        public static List<RectTransform> Unpack_List_RectTransform(this Il2CppSystem.Object obj)
+        internal static  List<RectTransform> Unpack_List_RectTransform(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2406,7 +2406,7 @@
         }
 
 
-        public static RaycastHit? Unpack_RaycastHit(this Il2CppSystem.Object obj)
+        internal static  RaycastHit? Unpack_RaycastHit(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2422,7 +2422,7 @@
             return null;
         }
 
-        public static RaycastHit[] Unpack_Array_RaycastHit(this Il2CppSystem.Object obj)
+        internal static  RaycastHit[] Unpack_Array_RaycastHit(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2442,7 +2442,7 @@
             return null;
         }
 
-        public static List<RaycastHit> Unpack_List_RaycastHit(this Il2CppSystem.Object obj)
+        internal static  List<RaycastHit> Unpack_List_RaycastHit(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2459,7 +2459,7 @@
         }
 
 
-        public static LayerMask? Unpack_LayerMask(this Il2CppSystem.Object obj)
+        internal static  LayerMask? Unpack_LayerMask(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2475,7 +2475,7 @@
             return null;
         }
 
-        public static LayerMask[] Unpack_Array_LayerMask(this Il2CppSystem.Object obj)
+        internal static  LayerMask[] Unpack_Array_LayerMask(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2495,7 +2495,7 @@
             return null;
         }
 
-        public static List<LayerMask> Unpack_List_LayerMask(this Il2CppSystem.Object obj)
+        internal static  List<LayerMask> Unpack_List_LayerMask(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2512,7 +2512,7 @@
         }
 
 
-        public static Bounds? Unpack_Bounds(this Il2CppSystem.Object obj)
+        internal static  Bounds? Unpack_Bounds(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2530,7 +2530,7 @@
 
 
 
-        public static Bounds[] Unpack_Array_Bounds(this Il2CppSystem.Object obj)
+        internal static  Bounds[] Unpack_Array_Bounds(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2550,7 +2550,7 @@
             return null;
         }
 
-        public static List<Bounds> Unpack_List_Bounds(this Il2CppSystem.Object obj)
+        internal static  List<Bounds> Unpack_List_Bounds(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2565,7 +2565,7 @@
             }
             return null;
         }
-        public static GameObject[] Unpack_Array_GameObject(this Il2CppSystem.Object obj)
+        internal static  GameObject[] Unpack_Array_GameObject(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2585,7 +2585,7 @@
             return null;
         }
 
-        public static List<GameObject> Unpack_List_GameObject(this Il2CppSystem.Object obj)
+        internal static  List<GameObject> Unpack_List_GameObject(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2601,7 +2601,7 @@
             return null;
         }
 
-        public static VRC.SDKBase.VRCPlayerApi[] Unpack_Array_VRCPlayerApi(this Il2CppSystem.Object obj)
+        internal static  VRC.SDKBase.VRCPlayerApi[] Unpack_Array_VRCPlayerApi(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2621,7 +2621,7 @@
             return null;
         }
 
-        public static List<VRC.SDKBase.VRCPlayerApi> Unpack_List_VRCPlayerApi(this Il2CppSystem.Object obj)
+        internal static  List<VRC.SDKBase.VRCPlayerApi> Unpack_List_VRCPlayerApi(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2637,7 +2637,7 @@
             return null;
         }
 
-        public static AudioClip Unpack_AudioClip(this Il2CppSystem.Object obj)
+        internal static  AudioClip Unpack_AudioClip(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2653,7 +2653,7 @@
             return null;
         }
 
-        public static AudioClip[] Unpack_Array_AudioClip(this Il2CppSystem.Object obj)
+        internal static  AudioClip[] Unpack_Array_AudioClip(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2673,7 +2673,7 @@
             return null;
         }
 
-        public static List<AudioClip> Unpack_List_AudioClip(this Il2CppSystem.Object obj)
+        internal static  List<AudioClip> Unpack_List_AudioClip(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2689,7 +2689,7 @@
             return null;
         }
 
-        public static ParticleSystem Unpack_ParticleSystem(this Il2CppSystem.Object obj)
+        internal static  ParticleSystem Unpack_ParticleSystem(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2705,7 +2705,7 @@
             return null;
         }
 
-        public static ParticleSystem[] Unpack_Array_ParticleSystem(this Il2CppSystem.Object obj)
+        internal static  ParticleSystem[] Unpack_Array_ParticleSystem(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2725,7 +2725,7 @@
             return null;
         }
 
-        public static List<ParticleSystem> Unpack_List_ParticleSystem(this Il2CppSystem.Object obj)
+        internal static  List<ParticleSystem> Unpack_List_ParticleSystem(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2742,7 +2742,7 @@
         }
 
 
-        public static UnityEngine.AI.NavMeshAgent Unpack_UnityEngine_AI_NavMeshAgent(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.AI.NavMeshAgent Unpack_UnityEngine_AI_NavMeshAgent(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2758,7 +2758,7 @@
             return null;
         }
 
-        public static UnityEngine.AI.NavMeshAgent[] Unpack_Array_UnityEngine_AI_NavMeshAgent(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.AI.NavMeshAgent[] Unpack_Array_UnityEngine_AI_NavMeshAgent(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2778,7 +2778,7 @@
             return null;
         }
 
-        public static List<UnityEngine.AI.NavMeshAgent> Unpack_List_UnityEngine_AI_NavMeshAgent(this Il2CppSystem.Object obj)
+        internal static  List<UnityEngine.AI.NavMeshAgent> Unpack_List_UnityEngine_AI_NavMeshAgent(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2793,7 +2793,7 @@
             }
             return null;
         }
-        public static UnityEngine.AI.NavMeshHit? Unpack_UnityEngine_AI_NavMeshHit(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.AI.NavMeshHit? Unpack_UnityEngine_AI_NavMeshHit(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2809,7 +2809,7 @@
             return null;
         }
 
-        public static UnityEngine.AI.NavMeshHit[] Unpack_Array_UnityEngine_AI_NavMeshHit(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.AI.NavMeshHit[] Unpack_Array_UnityEngine_AI_NavMeshHit(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2829,7 +2829,7 @@
             return null;
         }
 
-        public static List<UnityEngine.AI.NavMeshHit> Unpack_List_UnityEngine_AI_NavMeshHit(this Il2CppSystem.Object obj)
+        internal static  List<UnityEngine.AI.NavMeshHit> Unpack_List_UnityEngine_AI_NavMeshHit(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2846,7 +2846,7 @@
         }
 
 
-        public static UnityEngine.UI.ScrollRect Unpack_UnityEngine_UI_ScrollRect(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.ScrollRect Unpack_UnityEngine_UI_ScrollRect(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2862,7 +2862,7 @@
             return null;
         }
 
-        public static UnityEngine.UI.ScrollRect[] Unpack_Array_UnityEngine_UI_ScrollRect(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.ScrollRect[] Unpack_Array_UnityEngine_UI_ScrollRect(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2882,7 +2882,7 @@
             return null;
         }
 
-        public static List<UnityEngine.UI.ScrollRect> Unpack_List_UnityEngine_UI_ScrollRect(this Il2CppSystem.Object obj)
+        internal static  List<UnityEngine.UI.ScrollRect> Unpack_List_UnityEngine_UI_ScrollRect(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2898,7 +2898,7 @@
             return null;
         }
 
-        public static UnityEngine.UI.InputField Unpack_UnityEngine_UI_InputField(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.InputField Unpack_UnityEngine_UI_InputField(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2914,7 +2914,7 @@
             return null;
         }
 
-        public static UnityEngine.UI.InputField[] Unpack_Array_UnityEngine_UI_InputField(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.InputField[] Unpack_Array_UnityEngine_UI_InputField(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2934,7 +2934,7 @@
             return null;
         }
 
-        public static VRC.SDKBase.VRCUrl Unpack_VRC_SDKBase_VRCUrl(this Il2CppSystem.Object obj)
+        internal static  VRC.SDKBase.VRCUrl Unpack_VRC_SDKBase_VRCUrl(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2950,7 +2950,7 @@
             return null;
         }
 
-        public static VRC.SDKBase.VRCUrl[] Unpack_Array_VRC_SDKBase_VRCUrl(this Il2CppSystem.Object obj)
+        internal static  VRC.SDKBase.VRCUrl[] Unpack_Array_VRC_SDKBase_VRCUrl(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2970,7 +2970,7 @@
             return null;
         }
 
-        public static List<VRC.SDKBase.VRCUrl> Unpack_List_VRC_SDKBase_VRCUrl(this Il2CppSystem.Object obj)
+        internal static  List<VRC.SDKBase.VRCUrl> Unpack_List_VRC_SDKBase_VRCUrl(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -2987,7 +2987,7 @@
         }
 
 
-        public static VRC.SDK3.Video.Components.VRCUnityVideoPlayer Unpack_VRC_SDK3_Video_Components_VRCUnityVideoPlayer(this Il2CppSystem.Object obj)
+        internal static  VRC.SDK3.Video.Components.VRCUnityVideoPlayer Unpack_VRC_SDK3_Video_Components_VRCUnityVideoPlayer(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3003,7 +3003,7 @@
             return null;
         }
 
-        public static VRC.SDK3.Video.Components.VRCUnityVideoPlayer[] Unpack_Array_VRC_SDK3_Video_Components_VRCUnityVideoPlayer(this Il2CppSystem.Object obj)
+        internal static  VRC.SDK3.Video.Components.VRCUnityVideoPlayer[] Unpack_Array_VRC_SDK3_Video_Components_VRCUnityVideoPlayer(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3023,7 +3023,7 @@
             return null;
         }
 
-        public static List<VRC.SDK3.Video.Components.VRCUnityVideoPlayer> Unpack_List_VRC_SDK3_Video_Components_VRCUnityVideoPlayer(this Il2CppSystem.Object obj)
+        internal static  List<VRC.SDK3.Video.Components.VRCUnityVideoPlayer> Unpack_List_VRC_SDK3_Video_Components_VRCUnityVideoPlayer(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3039,7 +3039,7 @@
             return null;
         }
 
-        public static VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer Unpack_VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer(this Il2CppSystem.Object obj)
+        internal static  VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer Unpack_VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3055,7 +3055,7 @@
             return null;
         }
 
-        public static VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[] Unpack_Array_VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer(this Il2CppSystem.Object obj)
+        internal static  VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer[] Unpack_Array_VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3075,7 +3075,7 @@
             return null;
         }
 
-        public static List<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer> Unpack_List_VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer(this Il2CppSystem.Object obj)
+        internal static  List<VRC.SDK3.Video.Components.AVPro.VRCAVProVideoPlayer> Unpack_List_VRC_SDK3_Video_Components_AVPro_VRCAVProVideoPlayer(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3091,7 +3091,7 @@
             return null;
         }
 
-        public static VRC.SDK3.Components.VRCUrlInputField Unpack_VRC_SDK3_Components_VRCUrlInputField(this Il2CppSystem.Object obj)
+        internal static  VRC.SDK3.Components.VRCUrlInputField Unpack_VRC_SDK3_Components_VRCUrlInputField(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3107,7 +3107,7 @@
             return null;
         }
 
-        public static VRC.SDK3.Components.VRCUrlInputField[] Unpack_Array_VRC_SDK3_Components_VRCUrlInputField(this Il2CppSystem.Object obj)
+        internal static  VRC.SDK3.Components.VRCUrlInputField[] Unpack_Array_VRC_SDK3_Components_VRCUrlInputField(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3127,7 +3127,7 @@
             return null;
         }
 
-        public static List<VRC.SDK3.Components.VRCUrlInputField> Unpack_List_VRC_SDK3_Components_VRCUrlInputField(this Il2CppSystem.Object obj)
+        internal static  List<VRC.SDK3.Components.VRCUrlInputField> Unpack_List_VRC_SDK3_Components_VRCUrlInputField(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3143,7 +3143,7 @@
             return null;
         }
 
-        public static VRC.SDK3.Components.Video.VideoError? Unpack_VRC_SDK3_Components_Video_VideoError(this Il2CppSystem.Object obj)
+        internal static  VRC.SDK3.Components.Video.VideoError? Unpack_VRC_SDK3_Components_Video_VideoError(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3161,7 +3161,7 @@
 
 
 
-        public static VRC.SDK3.Components.Video.VideoError[] Unpack_Array_VRC_SDK3_Components_Video_VideoError(this Il2CppSystem.Object obj)
+        internal static  VRC.SDK3.Components.Video.VideoError[] Unpack_Array_VRC_SDK3_Components_Video_VideoError(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3181,7 +3181,7 @@
             return null;
         }
 
-        public static List<VRC.SDK3.Components.Video.VideoError> Unpack_List_VRC_SDK3_Components_Video_VideoError(this Il2CppSystem.Object obj)
+        internal static  List<VRC.SDK3.Components.Video.VideoError> Unpack_List_VRC_SDK3_Components_Video_VideoError(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3199,7 +3199,7 @@
 
 
 
-        public static VRC.Udon.Common.SerializationResult? Unpack_VRC_Udon_Common_SerializationResult(this Il2CppSystem.Object obj)
+        internal static  VRC.Udon.Common.SerializationResult? Unpack_VRC_Udon_Common_SerializationResult(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3215,7 +3215,7 @@
             return null;
         }
 
-        public static VRC.Udon.Common.SerializationResult[] Unpack_Array_VRC_Udon_Common_SerializationResult(this Il2CppSystem.Object obj)
+        internal static  VRC.Udon.Common.SerializationResult[] Unpack_Array_VRC_Udon_Common_SerializationResult(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3235,7 +3235,7 @@
             return null;
         }
 
-        public static List<VRC.Udon.Common.SerializationResult> Unpack_List_VRC_Udon_Common_SerializationResult(this Il2CppSystem.Object obj)
+        internal static  List<VRC.Udon.Common.SerializationResult> Unpack_List_VRC_Udon_Common_SerializationResult(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3252,7 +3252,7 @@
         }
 
 
-        public static List<UnityEngine.UI.InputField> Unpack_List_UnityEngine_UI_InputField(this Il2CppSystem.Object obj)
+        internal static  List<UnityEngine.UI.InputField> Unpack_List_UnityEngine_UI_InputField(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3267,7 +3267,7 @@
             }
             return null;
         }
-        public static UnityEngine.UI.Slider Unpack_UnityEngine_UI_Slider(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.Slider Unpack_UnityEngine_UI_Slider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3283,7 +3283,7 @@
             return null;
         }
 
-        public static UnityEngine.UI.Slider[] Unpack_Array_UnityEngine_UI_Slider(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.Slider[] Unpack_Array_UnityEngine_UI_Slider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3303,7 +3303,7 @@
             return null;
         }
 
-        public static List<UnityEngine.UI.Slider> Unpack_List_UnityEngine_UI_Slider(this Il2CppSystem.Object obj)
+        internal static  List<UnityEngine.UI.Slider> Unpack_List_UnityEngine_UI_Slider(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3318,7 +3318,7 @@
             }
             return null;
         }
-        public static UnityEngine.UI.Toggle Unpack_UnityEngine_UI_Toggle(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.Toggle Unpack_UnityEngine_UI_Toggle(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3334,7 +3334,7 @@
             return null;
         }
 
-        public static UnityEngine.UI.Toggle[] Unpack_Array_UnityEngine_UI_Toggle(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.Toggle[] Unpack_Array_UnityEngine_UI_Toggle(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3354,7 +3354,7 @@
             return null;
         }
 
-        public static List<UnityEngine.UI.Toggle> Unpack_List_UnityEngine_UI_Toggle(this Il2CppSystem.Object obj)
+        internal static  List<UnityEngine.UI.Toggle> Unpack_List_UnityEngine_UI_Toggle(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3370,7 +3370,7 @@
             return null;
         }
 
-        public static UnityEngine.UI.Image Unpack_UnityEngine_UI_Image(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.Image Unpack_UnityEngine_UI_Image(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3386,7 +3386,7 @@
             return null;
         }
 
-        public static UnityEngine.UI.Image[] Unpack_Array_UnityEngine_UI_Image(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.Image[] Unpack_Array_UnityEngine_UI_Image(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3406,7 +3406,7 @@
             return null;
         }
 
-        public static List<UnityEngine.UI.Image> Unpack_List_UnityEngine_UI_Image(this Il2CppSystem.Object obj)
+        internal static  List<UnityEngine.UI.Image> Unpack_List_UnityEngine_UI_Image(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3422,7 +3422,7 @@
             return null;
         }
 
-        public static UnityEngine.UI.Button Unpack_UnityEngine_UI_Button(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.Button Unpack_UnityEngine_UI_Button(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3438,7 +3438,7 @@
             return null;
         }
 
-        public static UnityEngine.UI.Button[] Unpack_Array_UnityEngine_UI_Button(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.Button[] Unpack_Array_UnityEngine_UI_Button(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3458,7 +3458,7 @@
             return null;
         }
 
-        public static List<UnityEngine.UI.Button> Unpack_List_UnityEngine_UI_Button(this Il2CppSystem.Object obj)
+        internal static  List<UnityEngine.UI.Button> Unpack_List_UnityEngine_UI_Button(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3473,7 +3473,7 @@
             }
             return null;
         }
-        public static UnityEngine.UI.RawImage Unpack_UnityEngine_UI_RawImage(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.RawImage Unpack_UnityEngine_UI_RawImage(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3489,7 +3489,7 @@
             return null;
         }
 
-        public static UnityEngine.UI.RawImage[] Unpack_Array_UnityEngine_UI_RawImage(this Il2CppSystem.Object obj)
+        internal static  UnityEngine.UI.RawImage[] Unpack_Array_UnityEngine_UI_RawImage(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3509,7 +3509,7 @@
             return null;
         }
 
-        public static List<UnityEngine.UI.RawImage> Unpack_List_UnityEngine_UI_RawImage(this Il2CppSystem.Object obj)
+        internal static  List<UnityEngine.UI.RawImage> Unpack_List_UnityEngine_UI_RawImage(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3525,7 +3525,7 @@
             return null;
         }
 
-        public static VRC.SDK3.Components.VRCAvatarPedestal Unpack_VRC_SDK3_Components_VRCAvatarPedestal(this Il2CppSystem.Object obj)
+        internal static  VRC.SDK3.Components.VRCAvatarPedestal Unpack_VRC_SDK3_Components_VRCAvatarPedestal(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3541,7 +3541,7 @@
             return null;
         }
 
-        public static VRC.SDK3.Components.VRCAvatarPedestal[] Unpack_Array_VRC_SDK3_Components_VRCAvatarPedestal(this Il2CppSystem.Object obj)
+        internal static  VRC.SDK3.Components.VRCAvatarPedestal[] Unpack_Array_VRC_SDK3_Components_VRCAvatarPedestal(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3561,7 +3561,7 @@
             return null;
         }
 
-        public static List<VRC.SDK3.Components.VRCAvatarPedestal> Unpack_List_VRC_SDK3_Components_VRCAvatarPedestal(this Il2CppSystem.Object obj)
+        internal static  List<VRC.SDK3.Components.VRCAvatarPedestal> Unpack_List_VRC_SDK3_Components_VRCAvatarPedestal(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3577,7 +3577,7 @@
             return null;
         }
 
-        public static VRC.SDK3.Components.VRCPickup Unpack_VRC_SDK3_Components_VRCPickup(this Il2CppSystem.Object obj)
+        internal static  VRC.SDK3.Components.VRCPickup Unpack_VRC_SDK3_Components_VRCPickup(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3593,7 +3593,7 @@
             return null;
         }
 
-        public static VRC.SDK3.Components.VRCPickup[] Unpack_Array_VRC_SDK3_Components_VRCPickup(this Il2CppSystem.Object obj)
+        internal static  VRC.SDK3.Components.VRCPickup[] Unpack_Array_VRC_SDK3_Components_VRCPickup(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
@@ -3613,7 +3613,7 @@
             return null;
         }
 
-        public static List<VRC.SDK3.Components.VRCPickup> Unpack_List_VRC_SDK3_Components_VRCPickup(this Il2CppSystem.Object obj)
+        internal static  List<VRC.SDK3.Components.VRCPickup> Unpack_List_VRC_SDK3_Components_VRCPickup(this Il2CppSystem.Object obj)
         {
             if (obj != null)
             {
