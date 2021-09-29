@@ -9,19 +9,19 @@
     using Random = UnityEngine.Random;
 
     [RegisterComponent]
-    internal class RocketObject : GameEventsBehaviour
+    public class RocketObject : GameEventsBehaviour
     {
-        internal Delegate ReferencedDelegate;
-        internal IntPtr MethodInfo;
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Delegate ReferencedDelegate;
+        public IntPtr MethodInfo;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal RocketObject(IntPtr obj0) : base(obj0)
+        public RocketObject(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        internal RocketObject(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<RocketObject>())
+        public RocketObject(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<RocketObject>())
         {
             ClassInjector.DerivedConstructorBody(this);
 

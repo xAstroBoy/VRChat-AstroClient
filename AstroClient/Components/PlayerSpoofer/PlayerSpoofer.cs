@@ -8,9 +8,9 @@
     using VRC.Core;
 
     [RegisterComponent]
-    internal class PlayerSpoofer : GameEventsBehaviour
+    public class PlayerSpoofer : GameEventsBehaviour
     {
-        internal PlayerSpoofer(IntPtr ptr) : base(ptr)
+        public PlayerSpoofer(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }

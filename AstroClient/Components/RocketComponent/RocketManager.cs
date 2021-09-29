@@ -13,21 +13,21 @@
     using Color = System.Drawing.Color;
 
     [RegisterComponent]
-    internal class RocketManager : GameEventsBehaviour
+    public class RocketManager : GameEventsBehaviour
     {
         #region Internal
 
-        internal Delegate ReferencedDelegate;
-        internal IntPtr MethodInfo;
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Delegate ReferencedDelegate;
+        public IntPtr MethodInfo;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal RocketManager(IntPtr obj0) : base(obj0)
+        public RocketManager(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        internal RocketManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<RocketManager>())
+        public RocketManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<RocketManager>())
         {
             ClassInjector.DerivedConstructorBody(this);
 

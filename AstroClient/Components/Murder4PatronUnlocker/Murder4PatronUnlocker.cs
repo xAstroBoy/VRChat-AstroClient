@@ -10,11 +10,11 @@
 	using VRC.Udon;
 	using static AstroClient.variables.CustomLists;
 
-	internal class Murder4PatronUnlocker : GameEventsBehaviour
+	public class Murder4PatronUnlocker : GameEventsBehaviour
 	{
-		internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+		public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-		internal Murder4PatronUnlocker(IntPtr obj0) : base(obj0)
+		public Murder4PatronUnlocker(IntPtr obj0) : base(obj0)
 		{
 			AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
 			AntiGcList.Add(this);

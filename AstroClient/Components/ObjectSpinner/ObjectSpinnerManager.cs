@@ -12,21 +12,21 @@
     using Color = System.Drawing.Color;
 
     [RegisterComponent]
-    internal class ObjectSpinnerManager : GameEventsBehaviour
+    public class ObjectSpinnerManager : GameEventsBehaviour
     {
         #region Internal
 
-        internal Delegate ReferencedDelegate;
-        internal IntPtr MethodInfo;
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Delegate ReferencedDelegate;
+        public IntPtr MethodInfo;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal ObjectSpinnerManager(IntPtr obj0) : base(obj0)
+        public ObjectSpinnerManager(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        internal ObjectSpinnerManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ObjectSpinnerManager>())
+        public ObjectSpinnerManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ObjectSpinnerManager>())
         {
             ClassInjector.DerivedConstructorBody(this);
 

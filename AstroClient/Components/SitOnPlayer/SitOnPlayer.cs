@@ -6,7 +6,7 @@
     using VRC;
 
     [RegisterComponent]
-    internal class SitOnPlayer : GameEventsBehaviour
+    public class SitOnPlayer : GameEventsBehaviour
     {
         private static Player TargetPlayer;
         private static HumanBodyBones TargetBone;
@@ -15,7 +15,7 @@
         internal static  bool IsEnabled { get; set; } = false;
         internal static  float Height { get; set; } = 0f;
 
-        internal SitOnPlayer(IntPtr obj0) : base(obj0)
+        public SitOnPlayer(IntPtr obj0) : base(obj0)
         {
         }
 

@@ -13,21 +13,21 @@
     using static AstroClient.Variables.InstanceBuilder;
     using Color = System.Drawing.Color;
 
-    internal class OrbitManager_Old : GameEventsBehaviour
+    public class OrbitManager_Old : GameEventsBehaviour
     {
         #region Internal
 
-        internal Delegate ReferencedDelegate;
-        internal IntPtr MethodInfo;
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Delegate ReferencedDelegate;
+        public IntPtr MethodInfo;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal OrbitManager_Old(IntPtr obj0) : base(obj0)
+        public OrbitManager_Old(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        internal OrbitManager_Old(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<OrbitManager_Old>())
+        public OrbitManager_Old(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<OrbitManager_Old>())
         {
             ClassInjector.DerivedConstructorBody(this);
 

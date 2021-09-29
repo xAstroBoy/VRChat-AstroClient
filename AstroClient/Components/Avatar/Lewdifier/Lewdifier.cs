@@ -12,11 +12,11 @@
     using VRC;
 
     [RegisterComponent]
-    internal class Lewdifier : GameEventsBehaviour
+    public class Lewdifier : GameEventsBehaviour
     {
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal Lewdifier(IntPtr obj0) : base(obj0)
+        public Lewdifier(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);

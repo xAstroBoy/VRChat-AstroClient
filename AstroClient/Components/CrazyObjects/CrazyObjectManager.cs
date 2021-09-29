@@ -12,21 +12,21 @@
     using Color = System.Drawing.Color;
 
     [RegisterComponent]
-    internal class CrazyObjectManager : GameEventsBehaviour
+    public class CrazyObjectManager : GameEventsBehaviour
     {
         #region Internal
 
-        internal Delegate ReferencedDelegate;
-        internal IntPtr MethodInfo;
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Delegate ReferencedDelegate;
+        public IntPtr MethodInfo;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal CrazyObjectManager(IntPtr obj0) : base(obj0)
+        public CrazyObjectManager(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        internal CrazyObjectManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<CrazyObjectManager>())
+        public CrazyObjectManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<CrazyObjectManager>())
         {
             ClassInjector.DerivedConstructorBody(this);
 

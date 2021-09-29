@@ -13,11 +13,11 @@
     using VRC.Management;
 
     [RegisterComponent]
-    internal class PlayerESP : GameEventsBehaviour
+    public class PlayerESP : GameEventsBehaviour
     {
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal PlayerESP(IntPtr obj0) : base(obj0)
+        public PlayerESP(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);

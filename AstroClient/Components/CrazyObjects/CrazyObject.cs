@@ -9,19 +9,19 @@
     using Random = UnityEngine.Random;
 
     [RegisterComponent]
-    internal class CrazyObject : GameEventsBehaviour
+    public class CrazyObject : GameEventsBehaviour
     {
-        internal Delegate ReferencedDelegate;
-        internal IntPtr MethodInfo;
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Delegate ReferencedDelegate;
+        public IntPtr MethodInfo;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal CrazyObject(IntPtr obj0) : base(obj0)
+        public CrazyObject(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        internal CrazyObject(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<CrazyObject>())
+        public CrazyObject(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<CrazyObject>())
         {
             ClassInjector.DerivedConstructorBody(this);
 

@@ -12,19 +12,19 @@
     using Delegate = System.Delegate;
     using Time = UnityEngine.Time;
 
-    internal class PlayerAttacker : GameEventsBehaviour
+    public class PlayerAttacker : GameEventsBehaviour
     {
-        internal Delegate ReferencedDelegate;
-        internal IntPtr MethodInfo;
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Delegate ReferencedDelegate;
+        public IntPtr MethodInfo;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal PlayerAttacker(IntPtr obj0) : base(obj0)
+        public PlayerAttacker(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        internal PlayerAttacker(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<PlayerAttacker>())
+        public PlayerAttacker(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<PlayerAttacker>())
         {
             ClassInjector.DerivedConstructorBody(this);
 

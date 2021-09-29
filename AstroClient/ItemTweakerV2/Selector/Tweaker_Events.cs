@@ -8,7 +8,7 @@
 
     internal class Tweaker_Events : GameEvents
     {
-        internal Tweaker_Events()
+        public Tweaker_Events()
         {
             Tweaker_Selector.Event_On_New_GameObject_Selected += Internal_On_New_GameObject_Selected;
             Tweaker_Selector.Event_On_Old_GameObject_Removed += Internal_On_Old_GameObject_Removed;

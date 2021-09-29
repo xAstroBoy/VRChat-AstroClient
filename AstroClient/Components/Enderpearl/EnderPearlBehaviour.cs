@@ -9,9 +9,9 @@ namespace AstroClient
     using UnityEngine;
 
     [RegisterComponent]
-    internal class EnderPearlBehaviour : MonoBehaviour
+    public class EnderPearlBehaviour : MonoBehaviour
     {
-        internal EnderPearlBehaviour(IntPtr ptr)
+        public EnderPearlBehaviour(IntPtr ptr)
             : base(ptr)
         {
         }

@@ -10,9 +10,9 @@
     using static AstroClient.JarRoleController;
 
     [RegisterComponent]
-    internal class JarRoleESP : JarControllerEvents
+    public class JarRoleESP : JarControllerEvents
     {
-        internal JarRoleESP(IntPtr ptr) : base(ptr)
+        public JarRoleESP(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }

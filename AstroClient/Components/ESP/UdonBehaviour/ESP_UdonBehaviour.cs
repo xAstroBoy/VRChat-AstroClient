@@ -8,11 +8,11 @@
     using UnityEngine;
 
     [RegisterComponent]
-    internal class ESP_UdonBehaviour : GameEventsBehaviour
+    public class ESP_UdonBehaviour : GameEventsBehaviour
     {
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal ESP_UdonBehaviour(IntPtr obj0) : base(obj0)
+        public ESP_UdonBehaviour(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);

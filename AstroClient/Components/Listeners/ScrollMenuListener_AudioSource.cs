@@ -5,7 +5,7 @@ namespace AstroClient.Components
     using System;
 
     [RegisterComponent]
-    internal class ScrollMenuListener_AudioSource : GameEventsBehaviour
+    public class ScrollMenuListener_AudioSource : GameEventsBehaviour
     {
         internal QMSingleButton Assignedbtn { get; set; }
 
@@ -13,7 +13,7 @@ namespace AstroClient.Components
 
         internal bool Lock = true;
 
-        internal ScrollMenuListener_AudioSource(IntPtr obj0) : base(obj0)
+        public ScrollMenuListener_AudioSource(IntPtr obj0) : base(obj0)
         {
         }
 

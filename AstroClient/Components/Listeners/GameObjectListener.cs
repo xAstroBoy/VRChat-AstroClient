@@ -4,7 +4,7 @@ namespace AstroClient.Components
     using UnhollowerBaseLib.Attributes;
 
     [RegisterComponent]
-    internal class GameObjectListener : GameEventsBehaviour
+    public class GameObjectListener : GameEventsBehaviour
     {
         [method: HideFromIl2Cpp]
         internal event Action? OnEnabled;
@@ -15,7 +15,7 @@ namespace AstroClient.Components
         [method: HideFromIl2Cpp]
         internal event Action? OnDestroyed;
 
-        internal GameObjectListener(IntPtr obj0) : base(obj0)
+        public GameObjectListener(IntPtr obj0) : base(obj0)
         {
         }
 

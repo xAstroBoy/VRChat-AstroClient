@@ -19,7 +19,7 @@
     #endregion
 
     [RegisterComponent]
-    internal class CheetoNameplate : GameEventsBehaviour
+    public class CheetoNameplate : GameEventsBehaviour
     {
         private PlayerNameplate nameplate;
 
@@ -53,7 +53,7 @@
 
         private TextMeshProUGUI trustTextComp;
 
-        internal CheetoNameplate(IntPtr obj0) : base(obj0)
+        public CheetoNameplate(IntPtr obj0) : base(obj0)
         {
         }
 

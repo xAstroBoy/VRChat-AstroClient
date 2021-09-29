@@ -4,9 +4,9 @@
     using AstroClientCore.Events;
     using System;
 
-    internal class JarControllerEvents : GameEventsBehaviour
+    public class JarControllerEvents : GameEventsBehaviour
     {
-        internal JarControllerEvents(IntPtr obj0) : base(obj0)
+        public JarControllerEvents(IntPtr obj0) : base(obj0)
         {
             JarRoleController.Event_OnViewRolesPropertyChanged += Internal_OnViewRolesPropertyChanged;
             PlayerESPMenu.Event_OnPlayerESPPropertyChanged += Internal_OnPlayerESPPropertyChanged;

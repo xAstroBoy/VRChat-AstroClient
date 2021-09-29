@@ -19,21 +19,21 @@
 
     using static AstroClient.Variables.InstanceBuilder;
 
-    internal class PlayerAttackerManager : GameEventsBehaviour
+    public class PlayerAttackerManager : GameEventsBehaviour
     {
         #region Internal
 
-        internal Delegate ReferencedDelegate;
-        internal IntPtr MethodInfo;
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Delegate ReferencedDelegate;
+        public IntPtr MethodInfo;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal PlayerAttackerManager(IntPtr obj0) : base(obj0)
+        public PlayerAttackerManager(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        internal PlayerAttackerManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<PlayerAttackerManager>())
+        public PlayerAttackerManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<PlayerAttackerManager>())
         {
             ClassInjector.DerivedConstructorBody(this);
 

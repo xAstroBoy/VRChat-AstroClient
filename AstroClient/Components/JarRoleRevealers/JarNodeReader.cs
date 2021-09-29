@@ -5,9 +5,9 @@
     using VRC.Udon;
 
     [RegisterComponent]
-    internal class JarNodeReader : GameEventsBehaviour
+    public class JarNodeReader : GameEventsBehaviour
     {
-        internal JarNodeReader(IntPtr ptr) : base(ptr)
+        public JarNodeReader(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }

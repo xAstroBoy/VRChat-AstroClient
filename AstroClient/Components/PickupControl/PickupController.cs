@@ -9,9 +9,9 @@
     using VRC.SDKBase;
 
     [RegisterComponent]
-    internal class PickupController : GameEventsBehaviour
+    public class PickupController : GameEventsBehaviour
     {
-        internal PickupController(IntPtr ptr) : base(ptr)
+        public PickupController(IntPtr ptr) : base(ptr)
         {
         }
 

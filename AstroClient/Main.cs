@@ -38,7 +38,7 @@
 
     #endregion Imports
 
-    internal class Main : MelonMod
+    public class Main : MelonMod
     {
         #region EventHandlers
 

@@ -5,11 +5,11 @@ namespace AstroClient.Components
     using System;
 
     [RegisterComponent]
-    internal class ScrollMenuListener : GameEventsBehaviour
+    public class ScrollMenuListener : GameEventsBehaviour
     {
         internal QMSingleButton assignedbtn;
 
-        internal ScrollMenuListener(IntPtr obj0) : base(obj0)
+        public ScrollMenuListener(IntPtr obj0) : base(obj0)
         {
         }
 

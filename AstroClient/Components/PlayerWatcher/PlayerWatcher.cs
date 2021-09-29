@@ -13,19 +13,19 @@
     using Time = UnityEngine.Time;
 
     [RegisterComponent]
-    internal class PlayerWatcher : GameEventsBehaviour
+    public class PlayerWatcher : GameEventsBehaviour
     {
-        internal Delegate ReferencedDelegate;
-        internal IntPtr MethodInfo;
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Delegate ReferencedDelegate;
+        public IntPtr MethodInfo;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal PlayerWatcher(IntPtr obj0) : base(obj0)
+        public PlayerWatcher(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        internal PlayerWatcher(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<PlayerWatcher>())
+        public PlayerWatcher(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<PlayerWatcher>())
         {
             ClassInjector.DerivedConstructorBody(this);
 

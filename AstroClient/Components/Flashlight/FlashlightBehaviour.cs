@@ -5,9 +5,9 @@ namespace AstroClient
     using UnityEngine;
 
     [RegisterComponent]
-    internal class FlashlightBehaviour : MonoBehaviour
+    public class FlashlightBehaviour : MonoBehaviour
     {
-        internal FlashlightBehaviour(IntPtr ptr)
+        public FlashlightBehaviour(IntPtr ptr)
             : base(ptr)
         {
         }

@@ -8,9 +8,9 @@ namespace AstroClient.Components
     using VRC.Udon.Common.Interfaces;
 
     [RegisterComponent]
-    internal class VRC_AstroUdonTrigger : MonoBehaviour
+    public class VRC_AstroUdonTrigger : MonoBehaviour
     {
-        internal VRC_AstroUdonTrigger(IntPtr ptr)
+        public VRC_AstroUdonTrigger(IntPtr ptr)
             : base(ptr)
         {
         }

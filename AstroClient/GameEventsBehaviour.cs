@@ -11,9 +11,9 @@
     using VRC;
     using VRC.SDKBase;
 
-    internal class GameEventsBehaviour : MonoBehaviour
+    public class GameEventsBehaviour : MonoBehaviour
     {
-        internal GameEventsBehaviour(IntPtr obj0) : base(obj0)
+        public GameEventsBehaviour(IntPtr obj0) : base(obj0)
         {
             // ML Events
             //Main.Event_OnApplicationStart += Internal_OnApplicationStart;

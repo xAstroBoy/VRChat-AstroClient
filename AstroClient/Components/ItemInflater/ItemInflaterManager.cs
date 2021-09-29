@@ -10,21 +10,21 @@
     using Color = System.Drawing.Color;
 
     [RegisterComponent]
-    internal class ItemInflaterManager : GameEventsBehaviour
+    public class ItemInflaterManager : GameEventsBehaviour
     {
         #region Internal
 
-        internal Delegate ReferencedDelegate;
-        internal IntPtr MethodInfo;
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Delegate ReferencedDelegate;
+        public IntPtr MethodInfo;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal ItemInflaterManager(IntPtr obj0) : base(obj0)
+        public ItemInflaterManager(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        internal ItemInflaterManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ItemInflaterManager>())
+        public ItemInflaterManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ItemInflaterManager>())
         {
             ClassInjector.DerivedConstructorBody(this);
 

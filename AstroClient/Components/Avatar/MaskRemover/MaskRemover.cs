@@ -11,11 +11,11 @@
     using VRC;
 
     [RegisterComponent]
-    internal class MaskRemover : GameEventsBehaviour
+    public class MaskRemover : GameEventsBehaviour
     {
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal MaskRemover(IntPtr obj0) : base(obj0)
+        public MaskRemover(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);

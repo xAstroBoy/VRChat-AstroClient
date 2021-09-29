@@ -21,6 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 [assembly: MelonInfo(typeof(AstroClient.Main), AstroClient.BuildInfo.Name, AstroClient.BuildInfo.Version, AstroClient.BuildInfo.Author, AstroClient.BuildInfo.DownloadLink)]
 [assembly: InternalsVisibleTo("UnityExplorer.ML.IL2CPP")]
+[assembly: InternalsVisibleTo(AstroClient.BuildInfo.Name)]
 [assembly: MelonGame(null, null)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM

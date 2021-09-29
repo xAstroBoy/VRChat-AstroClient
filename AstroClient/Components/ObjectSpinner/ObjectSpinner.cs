@@ -8,19 +8,19 @@
     using static AstroClient.Forces;
 
     [RegisterComponent]
-    internal class ObjectSpinner : GameEventsBehaviour
+    public class ObjectSpinner : GameEventsBehaviour
     {
-        internal Delegate ReferencedDelegate;
-        internal IntPtr MethodInfo;
-        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public Delegate ReferencedDelegate;
+        public IntPtr MethodInfo;
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        internal ObjectSpinner(IntPtr obj0) : base(obj0)
+        public ObjectSpinner(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        internal ObjectSpinner(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ObjectSpinner>())
+        public ObjectSpinner(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ObjectSpinner>())
         {
             ClassInjector.DerivedConstructorBody(this);
 
