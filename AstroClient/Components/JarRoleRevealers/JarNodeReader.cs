@@ -7,7 +7,7 @@
     [RegisterComponent]
     internal class JarNodeReader : GameEventsBehaviour
     {
-        public JarNodeReader(IntPtr ptr) : base(ptr)
+        internal JarNodeReader(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
@@ -15,7 +15,7 @@
         private Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object> AntiGarbageCollection = new Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object>();
 
         // Use this for initialization
-        public void Start()
+        internal void Start()
         {
             Node = this.gameObject.GetComponent<UdonBehaviour>();
             if (Node != null)

@@ -5,9 +5,9 @@
     using AstroLibrary.Console;
     using System.Collections.Generic;
 
-    public class Valkyrie_Defense : GameEvents
+    internal class Valkyrie_Defense : GameEvents
     {
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.Valkyrie_Defense)
             {

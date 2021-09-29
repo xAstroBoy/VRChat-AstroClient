@@ -43,11 +43,11 @@
 
         internal static  string Oculus_SecondaryThumbstickVertical { get; } = "Oculus_CrossPlatform_SecondaryThumbstickVertical";
 
-        public GameObject LeftHandPointer { get; private set; }
+        internal GameObject LeftHandPointer { get; private set; }
 
-        public GameObject RightHandPointer { get; private set; }
+        internal GameObject RightHandPointer { get; private set; }
 
-        public bool CanClick { get; private set; }
+        internal bool CanClick { get; private set; }
 
         internal override void OnLateUpdate()
         {
@@ -127,7 +127,7 @@
             }
         }
 
-        public void CheckHitObject(GameObject gameObject)
+        internal void CheckHitObject(GameObject gameObject)
         {
             //var interactable = gameObject.GetComponent<Astro_Interactable>();
             //if (interactable != null)

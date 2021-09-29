@@ -10,10 +10,10 @@
 	using UnityEngine;
 	using VRC.SDKBase;
 
-	public static class RPC_Experiments
+	internal static class RPC_Experiments
 	{
 		
-		public static VRC_EventDispatcher GetRandomVRC_EventDispatcher()
+		internal static VRC_EventDispatcher GetRandomVRC_EventDispatcher()
 		{
 			var list = Resources.FindObjectsOfTypeAll<VRC_EventDispatcher>();
 			foreach (var item in list)
@@ -28,7 +28,7 @@
 
 		private static VRC_EventHandler _CurrentEventHandler;
 
-		public static VRC_EventHandler CurrentVRC_EventHandler
+		internal static VRC_EventHandler CurrentVRC_EventHandler
 		{
 			get
 			{
@@ -54,7 +54,7 @@
 				}
 			}
 		}
-		public static VRC_EventHandler GetRandomVRC_EventHandler()
+		internal static VRC_EventHandler GetRandomVRC_EventHandler()
 		{
 			var List = Resources.FindObjectsOfTypeAll<VRC_EventHandler>();
 			foreach (var item in List)
@@ -74,7 +74,7 @@
 
 
 
-		public static void SetActiveGameObjectRPC(GameObject obj)
+		internal static void SetActiveGameObjectRPC(GameObject obj)
 		{
 			if (RPC_Dispatchers.SceneEventHandlerAndInstantiator_Dispatcher != null && CurrentVRC_EventHandler)
 			{
@@ -95,12 +95,12 @@
 			}
 		}
 
-		//public static void GenerateInstantiateObject(GameObject obj)
+		//internal static void GenerateInstantiateObject(GameObject obj)
 		//{
 		//	foreach(var action in RPC_Dispatchers.SceneEventHandlerAndInstantiator_Dispatcher.)
 		//}
 
-		public static void SendSpawnobject(GameObject obj)
+		internal static void SendSpawnobject(GameObject obj)
 		{
 			if (RPC_Dispatchers.SceneEventHandlerAndInstantiator_Dispatcher != null && CurrentVRC_EventHandler)
 			{

@@ -19,11 +19,11 @@
 
         internal static  List<string> shader_list_local = new List<string>();
 
-        public struct avatar_data
+        internal struct avatar_data
         {
-            public string asseturl;
+            internal string asseturl;
 
-            public int polys;
+            internal int polys;
         }
 
         internal override void VRChat_OnUiManagerInit()

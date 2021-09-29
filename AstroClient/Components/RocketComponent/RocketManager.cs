@@ -17,17 +17,17 @@
     {
         #region Internal
 
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Delegate ReferencedDelegate;
+        internal IntPtr MethodInfo;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public RocketManager(IntPtr obj0) : base(obj0)
+        internal RocketManager(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        public RocketManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<RocketManager>())
+        internal RocketManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<RocketManager>())
         {
             ClassInjector.DerivedConstructorBody(this);
 
@@ -50,7 +50,7 @@
 
         internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> RocketBehaviours;
 
-        public void Start()
+        internal void Start()
         {
             RocketBehaviours = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
             Instance = this;

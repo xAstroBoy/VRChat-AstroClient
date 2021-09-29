@@ -13,7 +13,7 @@ namespace AstroClient.Components
 
         internal bool Lock = true;
 
-        public ScrollMenuListener_AudioSource(IntPtr obj0) : base(obj0)
+        internal ScrollMenuListener_AudioSource(IntPtr obj0) : base(obj0)
         {
         }
 

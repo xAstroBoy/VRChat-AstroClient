@@ -5,7 +5,7 @@
 
     internal class OnPickupControllerArgs : EventArgs
     {
-        public PickupController control;
+        internal PickupController control;
 
         internal OnPickupControllerArgs(PickupController controller)
         {

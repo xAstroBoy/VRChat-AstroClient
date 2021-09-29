@@ -60,7 +60,7 @@
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void SpawnEmojiRPCDelegate(IntPtr thisPtr, int emoji, IntPtr PlayerPtr);
+        internal delegate void SpawnEmojiRPCDelegate(IntPtr thisPtr, int emoji, IntPtr PlayerPtr);
 
         private static SpawnEmojiRPCDelegate _SpawnEmojiRPCDelegate;
 

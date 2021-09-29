@@ -12,7 +12,7 @@
     [RegisterComponent]
     internal class JarRoleESP : JarControllerEvents
     {
-        public JarRoleESP(IntPtr ptr) : base(ptr)
+        internal JarRoleESP(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
@@ -20,7 +20,7 @@
         private Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object> AntiGarbageCollection = new Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object>();
 
         // Use this for initialization
-        public void Start()
+        internal void Start()
         {
             var p = GetComponent<Player>();
             if (p != null)
@@ -245,7 +245,7 @@
             return null;
         }
 
-        public Color? Murder4GetNamePlateColor()
+        internal Color? Murder4GetNamePlateColor()
         {
             switch (Murder4CurrentRole)
             {
@@ -264,7 +264,7 @@
             }
         }
 
-        public Color? AmongUsGetNamePlateColor()
+        internal Color? AmongUsGetNamePlateColor()
         {
             switch (AmongUsCurrentRole)
             {
@@ -306,7 +306,7 @@
             }
         }
 
-        public void OnDestroy()
+        internal void OnDestroy()
         {
             if (GameRoleTag != null)
             {

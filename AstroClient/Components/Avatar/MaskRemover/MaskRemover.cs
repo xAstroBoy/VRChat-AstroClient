@@ -13,9 +13,9 @@
     [RegisterComponent]
     internal class MaskRemover : GameEventsBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public MaskRemover(IntPtr obj0) : base(obj0)
+        internal MaskRemover(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
@@ -33,7 +33,7 @@
         }
 
         // Use this for initialization
-        public void Start()
+        internal void Start()
         {
             if (player == null)
             {
@@ -116,7 +116,7 @@
             }
         }
 
-        public void OnDestroy()
+        internal void OnDestroy()
         {
             player.ReloadAvatar();
         }

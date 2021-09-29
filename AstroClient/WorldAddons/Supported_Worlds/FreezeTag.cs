@@ -14,13 +14,13 @@
 	using VRC.Udon.Common.Interfaces;
 	using static AstroClient.Variables.CustomLists;
 
-	public class FreezeTag : GameEvents
+	internal class FreezeTag : GameEvents
 	{
 		private static bool IsFreezeTag;
 
 		private static bool _AutomaticallyUnfreeze;
 
-		public static bool AutomaticallyUnfreeze
+		internal static bool AutomaticallyUnfreeze
 		{
 			get
 			{
@@ -40,18 +40,18 @@
 
 		private static bool HasFoundAssignedNode;
 
-		public static QMNestedButton FreezeTagCheatsPage;
+		internal static QMNestedButton FreezeTagCheatsPage;
 
-		public static QMToggleButton UnfreezeAutoMode;
+		internal static QMToggleButton UnfreezeAutoMode;
 
-		public static void InitButtons(QMTabMenu main, float x, float y, bool btnhalf)
+		internal static void InitButtons(QMTabMenu main, float x, float y, bool btnhalf)
 		{
 			FreezeTagCheatsPage = new QMNestedButton(main, x, y, "Freeze Tag", "Freeze Tag Cheats", null, null, null, null, true);
 			UnfreezeAutoMode = new QMToggleButton(FreezeTagCheatsPage, 1, 0, "Auto Unfreeze ON", new Action(() => { AutomaticallyUnfreeze = true; }), "Auto Unfreeze OFF", new Action(() => { AutomaticallyUnfreeze = false; }), "Unfreezes you automatically", null, null, null);
 			NodeControlSubmenu(FreezeTagCheatsPage, 2, 0, false);
 		}
 
-		public override void OnSceneLoaded(int buildIndex, string sceneName)
+		internal override void OnSceneLoaded(int buildIndex, string sceneName)
 		{
 			IsFreezeTag = false;
 			SelfNode = null;
@@ -60,7 +60,7 @@
 			UnfreezeMeUdonEvent = null;
 		}
 
-		public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
+		internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)
 		{
 			if (id == WorldIds.FreezeTag)
 			{
@@ -96,7 +96,7 @@
 		private static CachedUdonEvent UnfreezeMeUdonEvent;
 		private static CachedUdonEvent RefreezeMeUdonEvent;
 
-		public static void NodeControlSubmenu(QMNestedButton main, float x, float y, bool btnHalf)
+		internal static void NodeControlSubmenu(QMNestedButton main, float x, float y, bool btnHalf)
 		{
 			var menu = new QMNestedButton(main, x, y, "Interact Node", "Interact with Node  Events", null, null, null, null, btnHalf);
 			var scroll = new QMHalfScroll(menu);
@@ -118,7 +118,7 @@
 			});
 		}
 
-		public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+		internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
 		{
 			try
 			{

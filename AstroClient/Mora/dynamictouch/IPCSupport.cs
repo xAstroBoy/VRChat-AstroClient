@@ -10,7 +10,7 @@
 
 	namespace IPCSupport
 	{
-		public enum Message
+		internal enum Message
 		{
 			SetBoneDamping,
 			SetBoneElasticity,
@@ -25,11 +25,11 @@
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
-		public struct Float3
+		internal struct Float3
 		{
-			public float x, y, z;
+			internal float x, y, z;
 
-			public Float3(float x, float y, float z)
+			internal Float3(float x, float y, float z)
 			{
 				this.x = x;
 				this.y = y;
@@ -37,13 +37,13 @@
 			}
 		}
 
-		public struct AvatarBones
+		internal struct AvatarBones
 		{
-			public string name;
-			public int boneCount;
-			public SerializedBoneData[] bones;
+			internal string name;
+			internal int boneCount;
+			internal SerializedBoneData[] bones;
 
-			public byte[] ToByteArray()
+			internal byte[] ToByteArray()
 			{
 				using (MemoryStream ms = new MemoryStream())
 				{
@@ -62,7 +62,7 @@
 				}
 			}
 
-			public static AvatarBones FromByteArray(byte[] array)
+			internal static AvatarBones FromByteArray(byte[] array)
 			{
 				using (MemoryStream memoryStream = new MemoryStream(array))
 				{
@@ -83,20 +83,20 @@
 		}
 
 		[StructLayout(LayoutKind.Sequential)]
-		public struct SerializedBoneData
+		internal struct SerializedBoneData
 		{
-			public string name;
-			public float damping;
-			public float elasticity;
-			public float stiffness;
-			public float inert;
-			public float radius;
-			public float endLength;
-			public Float3 endOffset;
-			public Float3 gravity;
-			public Float3 force;
+			internal string name;
+			internal float damping;
+			internal float elasticity;
+			internal float stiffness;
+			internal float inert;
+			internal float radius;
+			internal float endLength;
+			internal Float3 endOffset;
+			internal Float3 gravity;
+			internal Float3 force;
 
-			public static SerializedBoneData FromByteArray(byte[] array)
+			internal static SerializedBoneData FromByteArray(byte[] array)
 			{
 				using (MemoryStream memoryStream = new MemoryStream(array))
 				{
@@ -119,7 +119,7 @@
 				}
 			}
 
-			public unsafe byte[] ToByteArray()
+			internal unsafe byte[] ToByteArray()
 			{
 				using (MemoryStream ms = new MemoryStream())
 				{
@@ -147,13 +147,13 @@
 			}
 		}
 
-		public class IPCHandler
+		internal class IPCHandler
 		{
 			private PipeStream pipe;
 			private BinaryWriter pipeWriter;
 			private BinaryReader pipeReader;
 
-			public bool IsConnected
+			internal bool IsConnected
 			{
 				get
 				{
@@ -161,7 +161,7 @@
 				}
 			}
 
-			public bool IsServer
+			internal bool IsServer
 			{
 				get
 				{
@@ -169,14 +169,14 @@
 				}
 			}
 
-			public IPCHandler(PipeStream pipeResource)
+			internal IPCHandler(PipeStream pipeResource)
 			{
 				pipe = pipeResource;
 				pipeReader = new BinaryReader(pipe, Encoding.UTF8);
 				pipeWriter = new BinaryWriter(pipe, Encoding.UTF8);
 			}
 
-			public Message Receive(out byte[] data)
+			internal Message Receive(out byte[] data)
 			{
 				if (!IsConnected) throw new InvalidOperationException("Tried to receive a message but the pipe is disconnected.");
 				Message message = (Message)pipeReader.ReadInt32();
@@ -184,7 +184,7 @@
 				return message;
 			}
 
-			public void Send(Message messageType, string boneName, object data)
+			internal void Send(Message messageType, string boneName, object data)
 			{
 				if (!IsConnected) throw new InvalidOperationException("Tried to send a message but the pipe is disconnected.");
 				switch (messageType)

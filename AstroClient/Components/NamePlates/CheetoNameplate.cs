@@ -53,11 +53,11 @@
 
         private TextMeshProUGUI trustTextComp;
 
-        public CheetoNameplate(IntPtr obj0) : base(obj0)
+        internal CheetoNameplate(IntPtr obj0) : base(obj0)
         {
         }
 
-        public void Start()
+        internal void Start()
         {
             if (!ConfigManager.UI.NamePlates) return;
             Stopwatch stopwatch = new Stopwatch();

@@ -26,12 +26,12 @@
 //        internal class Patch
 //        {
 //            private static List<Patch> Patches = new List<Patch>();
-//            public MethodInfo TargetMethod { get; set; }
-//            public HarmonyMethod PrefixMethod { get; set; }
-//            public HarmonyMethod PostfixMethod { get; set; }
-//            public Harmony Instance { get; set; }
+//            internal MethodInfo TargetMethod { get; set; }
+//            internal HarmonyMethod PrefixMethod { get; set; }
+//            internal HarmonyMethod PostfixMethod { get; set; }
+//            internal Harmony Instance { get; set; }
 
-//            public Patch(MethodInfo targetMethod, HarmonyMethod Before = null, HarmonyMethod After = null)
+//            internal Patch(MethodInfo targetMethod, HarmonyMethod Before = null, HarmonyMethod After = null)
 //            {
 //                if (targetMethod == null || (Before == null && After == null))
 //                {

@@ -10,7 +10,7 @@ namespace AstroClient.Components
 	using System.Collections.Generic;
 	using HarmonyLib;
 
-	public class VRC_CustomTriggerMod : GameEvents
+	internal class VRC_CustomTriggerMod : GameEvents
     {
         private static TutorialManager tutorialManagerInstance;
         private static MethodInfo trackingmanagerGetTrackedTransform;
@@ -18,7 +18,7 @@ namespace AstroClient.Components
         private static FieldInfo interactablesfield;
         private static FieldInfo pickupfield;
 
-       public override void OnApplicationStart()
+       internal override void OnApplicationStart()
         {
 
 			//var instance = HarmonyLib.Harmony.CreateAndPatchAll(typeof(VRC_CustomTriggerMod));
@@ -108,7 +108,7 @@ namespace AstroClient.Components
 
 
 
-		public static void Create(string interacttext, GameObject parent, Action oninteract)
+		internal static void Create(string interacttext, GameObject parent, Action oninteract)
 		{
 			VRC_Trigger oldtrigger = parent.GetComponent<VRC_Trigger>();
 			if (oldtrigger != null)

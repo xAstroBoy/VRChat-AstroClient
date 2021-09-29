@@ -11,17 +11,17 @@
     [RegisterComponent]
     internal class RocketObject : GameEventsBehaviour
     {
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Delegate ReferencedDelegate;
+        internal IntPtr MethodInfo;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public RocketObject(IntPtr obj0) : base(obj0)
+        internal RocketObject(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        public RocketObject(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<RocketObject>())
+        internal RocketObject(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<RocketObject>())
         {
             ClassInjector.DerivedConstructorBody(this);
 
@@ -142,10 +142,10 @@
             }
         }
 
-        public RocketManager Manager = null;
+        internal RocketManager Manager = null;
 
-        public float UpdateTimer = 2f;
-        public float TimerOffset = 0f;
+        internal float UpdateTimer = 2f;
+        internal float TimerOffset = 0f;
         private float LastTimeCheck = 0;
         internal float RocketTimer = 0.07f;
 

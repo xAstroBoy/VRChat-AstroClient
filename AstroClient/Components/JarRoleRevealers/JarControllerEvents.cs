@@ -6,7 +6,7 @@
 
     internal class JarControllerEvents : GameEventsBehaviour
     {
-        public JarControllerEvents(IntPtr obj0) : base(obj0)
+        internal JarControllerEvents(IntPtr obj0) : base(obj0)
         {
             JarRoleController.Event_OnViewRolesPropertyChanged += Internal_OnViewRolesPropertyChanged;
             PlayerESPMenu.Event_OnPlayerESPPropertyChanged += Internal_OnPlayerESPPropertyChanged;

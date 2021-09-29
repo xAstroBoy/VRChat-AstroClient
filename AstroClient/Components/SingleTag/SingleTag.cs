@@ -11,9 +11,9 @@
     [RegisterComponent]
     internal class SingleTag : GameEventsBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public SingleTag(IntPtr obj0) : base(obj0)
+        internal SingleTag(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
@@ -31,7 +31,7 @@
         }
 
         // Use this for initialization
-        public void Start()
+        internal void Start()
         {
             // FIND ALLOCATED PLAYER
             var p = this.GetComponent<Player>();
@@ -128,7 +128,7 @@
             }
         }
 
-        public void OnDestroy()
+        internal void OnDestroy()
         {
             if (Player != null)
             {
@@ -164,7 +164,7 @@
         }
 
         // Update is called once per frame
-        public void Update()
+        internal void Update()
         {
             try
             {

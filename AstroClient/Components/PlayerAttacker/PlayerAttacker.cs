@@ -14,17 +14,17 @@
 
     internal class PlayerAttacker : GameEventsBehaviour
     {
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Delegate ReferencedDelegate;
+        internal IntPtr MethodInfo;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public PlayerAttacker(IntPtr obj0) : base(obj0)
+        internal PlayerAttacker(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        public PlayerAttacker(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<PlayerAttacker>())
+        internal PlayerAttacker(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<PlayerAttacker>())
         {
             ClassInjector.DerivedConstructorBody(this);
 
@@ -258,9 +258,9 @@
             }
         }
 
-        public PlayerAttackerManager Manager = null;
+        internal PlayerAttackerManager Manager = null;
         private float Movementforce = 0.04f; // DEFAULT 0.04f
-        public float TimerOffset = 0f;
+        internal float TimerOffset = 0f;
         private float LastTimeCheck = 0;
         private float LastTimeCheck2 = 0;
         private float Drag = 0.3f;

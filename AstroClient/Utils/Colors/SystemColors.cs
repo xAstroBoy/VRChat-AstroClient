@@ -1,6 +1,6 @@
 ﻿namespace AstroClient
 {
-    public struct SystemColors
+    internal struct SystemColors
     {
         internal static  UnityEngine.Color MediumPurple { get; } = new UnityEngine.Color(0.5764706f, 0.4392157f, 0.8588235f, 1f);
         internal static  UnityEngine.Color MediumSeaGreen { get; } = new UnityEngine.Color(0.2352941f, 0.7019608f, 0.4431373f, 1f);

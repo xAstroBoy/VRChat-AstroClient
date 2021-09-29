@@ -10,12 +10,12 @@ namespace AstroClient.Components
     [RegisterComponent]
     internal class VRC_AstroUdonTrigger : MonoBehaviour
     {
-        public VRC_AstroUdonTrigger(IntPtr ptr)
+        internal VRC_AstroUdonTrigger(IntPtr ptr)
             : base(ptr)
         {
         }
 
-        public void Start()
+        internal void Start()
         {
             if (gameObject.GetComponent<VRCInteractable>() != null)
             {
@@ -37,7 +37,7 @@ namespace AstroClient.Components
             }
         }
 
-        public void FixedUpdate()
+        internal void FixedUpdate()
         {
             if (UdonBehaviour == null)
             {

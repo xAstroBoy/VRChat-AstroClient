@@ -11,17 +11,17 @@
     [RegisterComponent]
     internal class CrazyObject : GameEventsBehaviour
     {
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Delegate ReferencedDelegate;
+        internal IntPtr MethodInfo;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public CrazyObject(IntPtr obj0) : base(obj0)
+        internal CrazyObject(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        public CrazyObject(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<CrazyObject>())
+        internal CrazyObject(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<CrazyObject>())
         {
             ClassInjector.DerivedConstructorBody(this);
 
@@ -165,9 +165,9 @@
             }
         }
 
-        public CrazyObjectManager Manager = null;
+        internal CrazyObjectManager Manager = null;
 
-        public float TimerOffset = 0f;
+        internal float TimerOffset = 0f;
         private float LastTimeCheck = 0;
         private float LastTimeCheck2 = 0;
 

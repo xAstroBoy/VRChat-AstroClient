@@ -23,11 +23,11 @@
 
         internal class AssetBundleSkyboxes
         {
-            public AssetBundle SkyboxBundle { get; set; }
-            public string SkyboxName { get; set; }
-            public string SkyboxMaterialPath { get; set; }
+            internal AssetBundle SkyboxBundle { get; set; }
+            internal string SkyboxName { get; set; }
+            internal string SkyboxMaterialPath { get; set; }
 
-            public AssetBundleSkyboxes(AssetBundle SkyboxBundle, string SkyboxName, string SkyboxMaterialPath)
+            internal AssetBundleSkyboxes(AssetBundle SkyboxBundle, string SkyboxName, string SkyboxMaterialPath)
             {
                 this.SkyboxBundle = SkyboxBundle;
                 this.SkyboxName = SkyboxName;
@@ -37,11 +37,11 @@
 
         internal class MaterialSkyboxes
         {
-            public Material SkyboxBundle { get; set; }
-            public string SkyboxName { get; set; }
-            public string SkyboxMaterialPath { get; set; }
+            internal Material SkyboxBundle { get; set; }
+            internal string SkyboxName { get; set; }
+            internal string SkyboxMaterialPath { get; set; }
 
-            public MaterialSkyboxes(Material SkyboxBundle, string SkyboxName, string SkyboxMaterialPath)
+            internal MaterialSkyboxes(Material SkyboxBundle, string SkyboxName, string SkyboxMaterialPath)
             {
                 this.SkyboxBundle = SkyboxBundle;
                 this.SkyboxName = SkyboxName;

@@ -14,9 +14,9 @@
     [RegisterComponent]
     internal class Lewdifier : GameEventsBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public Lewdifier(IntPtr obj0) : base(obj0)
+        internal Lewdifier(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
@@ -41,7 +41,7 @@
         }
 
         // Use this for initialization
-        public void Start()
+        internal void Start()
         {
             if (player == null)
             {
@@ -289,11 +289,11 @@
         }
 
         // TODO: Figure how to Edit the animator to Be able to toggle the Objects with animator active.
-        //public void Update()
+        //internal void Update()
         //{
         //}
 
-        public void LateUpdate()
+        internal void LateUpdate()
         {
             if (PlayerTag == null)
             {
@@ -320,7 +320,7 @@
             }
         }
 
-        public void OnDestroy()
+        internal void OnDestroy()
         {
             ChildsTokeepOn.Clear();
             ChildsToKeepOff.Clear();

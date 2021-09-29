@@ -10,11 +10,11 @@
 	using VRC.Udon;
 	using static AstroClient.variables.CustomLists;
 
-	public class Murder4PatronUnlocker : GameEventsBehaviour
+	internal class Murder4PatronUnlocker : GameEventsBehaviour
 	{
-		public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+		internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-		public Murder4PatronUnlocker(IntPtr obj0) : base(obj0)
+		internal Murder4PatronUnlocker(IntPtr obj0) : base(obj0)
 		{
 			AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
 			AntiGcList.Add(this);
@@ -32,7 +32,7 @@
 		}
 
 		// Use this for initialization
-		public void Start()
+		internal void Start()
 		{
 			LocalObject = this.gameObject;
 			Debug($"Finding Skin Events for pickup {LocalObject.name}");
@@ -75,7 +75,7 @@
 			}
 		}
 
-		public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+		internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
 		{
 			try
 			{

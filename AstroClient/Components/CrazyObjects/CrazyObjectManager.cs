@@ -16,17 +16,17 @@
     {
         #region Internal
 
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Delegate ReferencedDelegate;
+        internal IntPtr MethodInfo;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public CrazyObjectManager(IntPtr obj0) : base(obj0)
+        internal CrazyObjectManager(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        public CrazyObjectManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<CrazyObjectManager>())
+        internal CrazyObjectManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<CrazyObjectManager>())
         {
             ClassInjector.DerivedConstructorBody(this);
 
@@ -49,7 +49,7 @@
 
         internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> CrazyObjectBehaviors;
 
-        public void Start()
+        internal void Start()
         {
             CrazyObjectBehaviors = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
             Instance = this;

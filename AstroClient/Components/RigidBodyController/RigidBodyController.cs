@@ -9,12 +9,12 @@
     [RegisterComponent]
     internal class RigidBodyController : GameEventsBehaviour
     {
-        public RigidBodyController(IntPtr ptr) : base(ptr)
+        internal RigidBodyController(IntPtr ptr) : base(ptr)
         {
         }
 
         // Use this for initialization
-        public void Start()
+        internal void Start()
         {
             SyncPhysics = gameObject.GetComponent<SyncPhysics>();
             if (SyncPhysics == null)
@@ -135,7 +135,7 @@
             }
         }
 
-        public void Updater()
+        internal void Updater()
         {
             if (gameObject != null)
             {

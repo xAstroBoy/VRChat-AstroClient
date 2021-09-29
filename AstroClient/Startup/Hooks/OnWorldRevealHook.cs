@@ -54,7 +54,7 @@
         }
 
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
-        public delegate void FadeToDelegate(IntPtr thisPtr, IntPtr fadeTypePtr, float duration, IntPtr action);
+        internal delegate void FadeToDelegate(IntPtr thisPtr, IntPtr fadeTypePtr, float duration, IntPtr action);
 
         private static FadeToDelegate _fadeToDelegate;
 

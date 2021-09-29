@@ -9,11 +9,11 @@
 	using UnityEngine;
 	using Object = UnityEngine.Object;
 
-	public class ObjectESP : GameEventsBehaviour
+	internal class ObjectESP : GameEventsBehaviour
 	{
-		public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+		internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-		public ObjectESP(IntPtr obj0) : base(obj0)
+		internal ObjectESP(IntPtr obj0) : base(obj0)
 		{
 			AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
 			AntiGcList.Add(this);
@@ -31,7 +31,7 @@
 		}
 
 		// Use this for initialization
-		public void Start()
+		internal void Start()
 		{
 			ObjMeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true).ToList();
 			if (ObjMeshRenderers == null && ObjMeshRenderers.Count() == 0)
@@ -58,7 +58,7 @@
 			}
 		}
 
-		public void Update()
+		internal void Update()
 		{
 			if (HighLightOptions == null)
 			{
@@ -86,17 +86,17 @@
 			HighLightOptions.ResetHighlighterColor();
 		}
 
-		public void OnDestroy()
+		internal void OnDestroy()
 		{
 			HighLightOptions.DestroyHighlighter();
 		}
 
-		public void OnEnable()
+		internal void OnEnable()
 		{
 			SetupHighlighter();
 		}
 
-		public void OnDisable()
+		internal void OnDisable()
 		{
 			HighLightOptions.DestroyHighlighter();
 		}

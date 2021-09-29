@@ -117,12 +117,12 @@
 
         internal class LinkedNodes
         {
-            public Transform Entry { get; set; }
-            public Transform Node { get; set; }
-            public JarNodeReader NodeReader { get; set; }
-            public int Nodevalue { get; set; }
+            internal Transform Entry { get; set; }
+            internal Transform Node { get; set; }
+            internal JarNodeReader NodeReader { get; set; }
+            internal int Nodevalue { get; set; }
 
-            public LinkedNodes(Transform EntryObj, Transform Nodeobj, JarNodeReader JarNodeReader, int linknumber)
+            internal LinkedNodes(Transform EntryObj, Transform Nodeobj, JarNodeReader JarNodeReader, int linknumber)
             {
                 Entry = EntryObj;
                 Node = Nodeobj;

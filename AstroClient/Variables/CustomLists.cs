@@ -16,10 +16,10 @@
 
         internal class UdonBehaviour_Cached
         {
-            public UdonBehaviour UdonBehaviour { get; set; }
-            public string EventKey { get; set; }
+            internal UdonBehaviour UdonBehaviour { get; set; }
+            internal string EventKey { get; set; }
 
-            public UdonBehaviour_Cached(UdonBehaviour udonBehaviour, string eventKey)
+            internal UdonBehaviour_Cached(UdonBehaviour udonBehaviour, string eventKey)
             {
                 UdonBehaviour = udonBehaviour;
                 EventKey = eventKey;
@@ -28,10 +28,10 @@
 
         internal class ColliderChecker
         {
-            public GameObject TargetObj { get; set; }
-            public bool HasCustomCollider { get; set; }
+            internal GameObject TargetObj { get; set; }
+            internal bool HasCustomCollider { get; set; }
 
-            public ColliderChecker(GameObject obj, bool collider)
+            internal ColliderChecker(GameObject obj, bool collider)
             {
                 TargetObj = obj;
                 HasCustomCollider = collider;
@@ -40,10 +40,10 @@
 
         internal class RigidBodyChecker
         {
-            public GameObject TargetObj { get; set; }
-            public bool HasRigidBodyReplaced { get; set; }
+            internal GameObject TargetObj { get; set; }
+            internal bool HasRigidBodyReplaced { get; set; }
 
-            public RigidBodyChecker(GameObject obj, bool RigidBody)
+            internal RigidBodyChecker(GameObject obj, bool RigidBody)
             {
                 TargetObj = obj;
                 HasRigidBodyReplaced = RigidBody;
@@ -52,12 +52,12 @@
 
         internal class GameObjScales
         {
-            public GameObject TargetObj { get; set; }
-            public Vector3 OriginalScale { get; set; }
+            internal GameObject TargetObj { get; set; }
+            internal Vector3 OriginalScale { get; set; }
 
-            public bool HasBeenStored { get; set; }
+            internal bool HasBeenStored { get; set; }
 
-            public GameObjScales(GameObject obj, Vector3 scale, bool stored)
+            internal GameObjScales(GameObject obj, Vector3 scale, bool stored)
             {
                 TargetObj = obj;
                 OriginalScale = scale;
@@ -67,12 +67,12 @@
 
         internal class RendererSaver
         {
-            public GameObject TargetObj { get; set; }
-            public int OriglightmapIndex { get; set; }
+            internal GameObject TargetObj { get; set; }
+            internal int OriglightmapIndex { get; set; }
 
-            public bool IsSavedObj { get; set; }
+            internal bool IsSavedObj { get; set; }
 
-            public RendererSaver(GameObject obj, int lightmapIndex, bool isSaved = true)
+            internal RendererSaver(GameObject obj, int lightmapIndex, bool isSaved = true)
             {
                 TargetObj = obj;
                 OriglightmapIndex = lightmapIndex;

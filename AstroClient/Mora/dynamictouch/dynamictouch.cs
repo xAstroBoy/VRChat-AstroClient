@@ -36,75 +36,75 @@
 	{
 		private static class NDBConfig
 		{
-			public static float distanceToDisable;
-			public static float colliderSizeLimit;
-			public static int dynamicBoneUpdateRate;
-			public static bool dynamicBoneUpdateRateAdjSettings;
-			public static bool distanceDisable;
-			public static bool enabledByDefault;
-			public static bool disallowInsideColliders;
-			public static bool destroyInsideColliders;
-			public static bool onlyForMyBones;
-			public static bool onlyForMeAndFriends;
-			public static bool disallowDesktoppers;
-			public static bool enableBoundsCheck;
-			public static float visiblityUpdateRate;
-			public static bool onlyHandColliders;
-			public static bool keybindsEnabled;
-			public static bool onlyOptimize;
-			public static int updateMode;
-			//public static bool hasShownCompatibilityIssueMessage;
-			//public static HashSet<string> avatarsToWhichNotApply;
-			public static Dictionary<string, bool> avatarsToWhichNotApply;
-			public static bool enableEditor;
-			public static bool breastsOnly;
-			//public static bool enableUserPanelButton;
-			//public static int userPanelButtonX;
-			//public static int userPanelButtonY;
-			public static HashSet<string> bonesToExclude;
-			public static HashSet<string> collidersToExclude;
-			public static HashSet<string> bonesToAlwaysExclude;
-			public static bool excludeSpecificBones;
-			public static bool interactSelf;
-			public static bool othersInteractSelf;
-			public static int logLevel;
-			public static Dictionary<string, int> avatarsToAdjustDBRadius;
-			public static Dictionary<string, bool> avatarsToAddColliders;
-			public static int boneRadiusDivisor;
-			public static float endBoneRadius;
-			public static bool addAutoCollidersAll;
-			public static bool adjustRadiusExcludeZero;
-			public static bool adjustRadiusForAllZeroBones;
-			public static bool disableAllBones;
-			public static bool moarBones;
-			public static bool moarBonesPrefLimit;
-			public static bool moarBonesNotLocal;
-			public static HashSet<string> bonesToInclude;
-			public static HashSet<string> collidersToInclude;
-			public static bool includeSpecificBones;
+			internal static float distanceToDisable;
+			internal static float colliderSizeLimit;
+			internal static int dynamicBoneUpdateRate;
+			internal static bool dynamicBoneUpdateRateAdjSettings;
+			internal static bool distanceDisable;
+			internal static bool enabledByDefault;
+			internal static bool disallowInsideColliders;
+			internal static bool destroyInsideColliders;
+			internal static bool onlyForMyBones;
+			internal static bool onlyForMeAndFriends;
+			internal static bool disallowDesktoppers;
+			internal static bool enableBoundsCheck;
+			internal static float visiblityUpdateRate;
+			internal static bool onlyHandColliders;
+			internal static bool keybindsEnabled;
+			internal static bool onlyOptimize;
+			internal static int updateMode;
+			//internal static bool hasShownCompatibilityIssueMessage;
+			//internal static HashSet<string> avatarsToWhichNotApply;
+			internal static Dictionary<string, bool> avatarsToWhichNotApply;
+			internal static bool enableEditor;
+			internal static bool breastsOnly;
+			//internal static bool enableUserPanelButton;
+			//internal static int userPanelButtonX;
+			//internal static int userPanelButtonY;
+			internal static HashSet<string> bonesToExclude;
+			internal static HashSet<string> collidersToExclude;
+			internal static HashSet<string> bonesToAlwaysExclude;
+			internal static bool excludeSpecificBones;
+			internal static bool interactSelf;
+			internal static bool othersInteractSelf;
+			internal static int logLevel;
+			internal static Dictionary<string, int> avatarsToAdjustDBRadius;
+			internal static Dictionary<string, bool> avatarsToAddColliders;
+			internal static int boneRadiusDivisor;
+			internal static float endBoneRadius;
+			internal static bool addAutoCollidersAll;
+			internal static bool adjustRadiusExcludeZero;
+			internal static bool adjustRadiusForAllZeroBones;
+			internal static bool disableAllBones;
+			internal static bool moarBones;
+			internal static bool moarBonesPrefLimit;
+			internal static bool moarBonesNotLocal;
+			internal static HashSet<string> bonesToInclude;
+			internal static HashSet<string> collidersToInclude;
+			internal static bool includeSpecificBones;
 		}
 
 
 		struct OriginalBoneInformation
 		{
-			public float updateRate;
-			public float distanceToDisable;
-			public List<DynamicBoneCollider> colliders;
-			public DynamicBone referenceToOriginal;
-			public bool distantDisable;
-			public float Elasticity;
-			public float Stiffness;
-			public float Damping;
-			public float Inert;
-			public float Radius;
-			public bool Enabled;
+			internal float updateRate;
+			internal float distanceToDisable;
+			internal List<DynamicBoneCollider> colliders;
+			internal DynamicBone referenceToOriginal;
+			internal bool distantDisable;
+			internal float Elasticity;
+			internal float Stiffness;
+			internal float Damping;
+			internal float Inert;
+			internal float Radius;
+			internal bool Enabled;
 		}
 
 		private static dynamictouch _Instance;
 
-		public Dictionary<string, System.Tuple<GameObject, bool, DynamicBone[], DynamicBoneCollider[], bool, System.Tuple<string, string, float>>> avatarsInScene;
+		internal Dictionary<string, System.Tuple<GameObject, bool, DynamicBone[], DynamicBoneCollider[], bool, System.Tuple<string, string, float>>> avatarsInScene;
 		private Dictionary<string, List<OriginalBoneInformation>> originalSettings;
-		public Dictionary<string, System.Tuple<Renderer, DynamicBone[]>> avatarRenderers;
+		internal Dictionary<string, System.Tuple<Renderer, DynamicBone[]>> avatarRenderers;
 		private GameObject localPlayer;
 		private Dictionary<string, DynamicBone> localPlayerDBbyRootName;
 		private Transform toggleButton;
@@ -119,24 +119,24 @@
 		private static PlayerLeftDelegate onPlayerLeftDelegate;
 		private static JoinedRoom onJoinedRoom;
 
-		public static HashSet<string> bonesExcluded = new HashSet<string>();
-		public static HashSet<string> collidersExcluded = new HashSet<string>();
-		public static HashSet<string> bonesIncluded = new HashSet<string>();
-		public static HashSet<string> collidersIncluded = new HashSet<string>();
-		public static Dictionary<string, Transform> specificButtonList = new Dictionary<string, Transform>();
-		public static Dictionary<string, Transform> otherAvatarButtonList = new Dictionary<string, Transform>();
+		internal static HashSet<string> bonesExcluded = new HashSet<string>();
+		internal static HashSet<string> collidersExcluded = new HashSet<string>();
+		internal static HashSet<string> bonesIncluded = new HashSet<string>();
+		internal static HashSet<string> collidersIncluded = new HashSet<string>();
+		internal static Dictionary<string, Transform> specificButtonList = new Dictionary<string, Transform>();
+		internal static Dictionary<string, Transform> otherAvatarButtonList = new Dictionary<string, Transform>();
 
-		public string AvatarsToWhichNotApplyPath = "UserData/MDB/AvatarsToWhichNotApply.txt";
-		public string BonesToExcludePath = "UserData/MDB/BonesToExclude.txt";
-		public string CollidersToExcludePath = "UserData/MDB/CollidersToExclude.txt";
-		public string BonesToAlwaysExcludePath = "UserData/MDB/BonesToAlwaysExclude.txt";
-		public string AvatarsToAdjustDBRadiusPath = "UserData/MDB/AvatarsToAdjustDBRadius.txt";
-		public string AvatarsToAddCollidersPath = "UserData/MDB/AvatarsToAddColliders.txt";
-		public string BonesToIncludePath = "UserData/MDB/BonesToInclude.txt";
-		public string CollidersToIncludePath = "UserData/MDB/CollidersToInclude.txt";
+		internal string AvatarsToWhichNotApplyPath = "UserData/MDB/AvatarsToWhichNotApply.txt";
+		internal string BonesToExcludePath = "UserData/MDB/BonesToExclude.txt";
+		internal string CollidersToExcludePath = "UserData/MDB/CollidersToExclude.txt";
+		internal string BonesToAlwaysExcludePath = "UserData/MDB/BonesToAlwaysExclude.txt";
+		internal string AvatarsToAdjustDBRadiusPath = "UserData/MDB/AvatarsToAdjustDBRadius.txt";
+		internal string AvatarsToAddCollidersPath = "UserData/MDB/AvatarsToAddColliders.txt";
+		internal string BonesToIncludePath = "UserData/MDB/BonesToInclude.txt";
+		internal string CollidersToIncludePath = "UserData/MDB/CollidersToInclude.txt";
 
-		public static int moarbonesCount;
-		public bool firstrun = true;
+		internal static int moarbonesCount;
+		internal bool firstrun = true;
 		private static void Hook(IntPtr target, IntPtr detour)
 		{
 			Imports.Hook(target, detour);
@@ -147,7 +147,7 @@
 
 		[DllImport("User32.dll", CharSet = CharSet.Unicode)]
 		static extern int MessageBox(IntPtr nWnd, string text, string title, uint type);
-		public unsafe override void OnApplicationStart()
+		internal unsafe override void OnApplicationStart()
 		{
 			_Instance = this;
 
@@ -477,14 +477,14 @@
 		}
 
 
-		public void LogLevelWarning()
+		internal void LogLevelWarning()
 		{
 			if (MelonPreferences.GetEntryValue<int>("NDB", "LogLevel") >= 3) MelonLogger.Msg(ConsoleColor.Magenta, $"Log level set to debug extra (3+), this will spam the console a lot and will cause lag. \n ======================== Disable this unless you are actively trying to debug something ======================== \n ======================== Disable this unless you are actively trying to debug something ========================");
 			else if (MelonPreferences.GetEntryValue<int>("NDB", "LogLevel") == 2) MelonLogger.Msg(ConsoleColor.Magenta, $"Log level set to debug (2), this is mostly limited to once per avatar items or if(s) that get met.");
 			else if (MelonPreferences.GetEntryValue<int>("NDB", "LogLevel") == 1) MelonLogger.Msg(ConsoleColor.Yellow, $"Log level set to info (1).");
 		}
 
-		public override void OnPreferencesSaved()
+		internal override void OnPreferencesSaved()
 		{
 			if (NDBConfig.logLevel != MelonPreferences.GetEntryValue<int>("NDB", "LogLevel")) LogLevelWarning(); //If settings changed, send warning
 			if (!firstrun && MelonPreferences.GetEntryValue<bool>("NDB", "MoarBones") != NDBConfig.moarBones)
@@ -706,7 +706,7 @@
 		}
 
 
-		public static bool IsTextFileEmpty(string fileName)
+		internal static bool IsTextFileEmpty(string fileName)
 		{ //https://stackoverflow.com/a/58123228
 			var info = new FileInfo(fileName);
 			if (info.Length == 0)
@@ -920,7 +920,7 @@
 			catch (System.Exception ex) { MelonLogger.Error(ex.ToString()); }
 		}
 
-		public void AddOrReplaceWithCleanup(string key, System.Tuple<GameObject, bool, DynamicBone[], DynamicBoneCollider[], bool, System.Tuple<string, string, float>> newValue)
+		internal void AddOrReplaceWithCleanup(string key, System.Tuple<GameObject, bool, DynamicBone[], DynamicBoneCollider[], bool, System.Tuple<string, string, float>> newValue)
 		{
 			foreach (DynamicBoneCollider col in newValue.Item4)
 			{
@@ -1483,7 +1483,7 @@
 
 
 
-		public override void OnUpdate()
+		internal override void OnUpdate()
 		{
 			if (avatarRenderers != null)
 			{
@@ -1685,7 +1685,7 @@
 			return serializedBoneData;
 		}
 
-		public override void OnGUI()
+		internal override void OnGUI()
 		{
 			if (showEditorGUI) guiRect = GUILayout.Window(0, new Rect(5, 5, 80, 80), (GUI.WindowFunction)DrawWindowContents, "Dynamic Bones Editor Interface", new Il2CppReferenceArray<GUILayoutOption>(0));
 			GUI.FocusWindow(0);
@@ -1897,16 +1897,16 @@
 			dynamictouch.collidersIncluded.Clear();
 		}
 
-		public void LogDebug(int lvl, ConsoleColor color, string text)
+		internal void LogDebug(int lvl, ConsoleColor color, string text)
 		{
 			if (NDBConfig.logLevel >= lvl) MelonLogger.Msg(color, text);
 		}
 	}
 
 
-	public static class ListExtensions
+	internal static class ListExtensions
 	{
-		public static T[] ToArrayExtension<T>(this Il2CppSystem.Collections.Generic.List<T> list)
+		internal static T[] ToArrayExtension<T>(this Il2CppSystem.Collections.Generic.List<T> list)
 		{
 			T[] arr = new T[list.Count];
 			for (int x = 0; x < list.Count; x++)

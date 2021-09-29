@@ -16,17 +16,17 @@
     {
         #region Internal
 
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Delegate ReferencedDelegate;
+        internal IntPtr MethodInfo;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public ObjectSpinnerManager(IntPtr obj0) : base(obj0)
+        internal ObjectSpinnerManager(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        public ObjectSpinnerManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ObjectSpinnerManager>())
+        internal ObjectSpinnerManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ObjectSpinnerManager>())
         {
             ClassInjector.DerivedConstructorBody(this);
 
@@ -49,7 +49,7 @@
 
         internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ObjectSpinnerBehaviors;
 
-        public void Start()
+        internal void Start()
         {
             ObjectSpinnerBehaviors = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
             Instance = this;

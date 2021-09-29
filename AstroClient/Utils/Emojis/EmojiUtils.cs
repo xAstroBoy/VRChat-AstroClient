@@ -480,7 +480,7 @@
             _ = new QMSingleButton(EmojiSpawnerButtons, 4, 2, "Spawn 15 Emojis (Online) ", new Action(OnlineEmojiSpammer), "How many emojis to Spawn (Only if the other has The Emoji Unlocker mod.)", null, null);
         }
 
-        public enum EmojiNames
+        internal enum EmojiNames
         {
             Smile = 0,
             Like = 1,

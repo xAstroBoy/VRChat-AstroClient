@@ -17,7 +17,7 @@
 
     #endregion Imports
 
-    public partial class PlayerList : GameEvents
+    internal partial class PlayerList : GameEvents
     {
         private static QMSingleButton playersButton;
 

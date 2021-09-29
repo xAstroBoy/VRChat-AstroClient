@@ -15,7 +15,7 @@
         internal static  bool IsEnabled { get; set; } = false;
         internal static  float Height { get; set; } = 0f;
 
-        public SitOnPlayer(IntPtr obj0) : base(obj0)
+        internal SitOnPlayer(IntPtr obj0) : base(obj0)
         {
         }
 
@@ -36,12 +36,12 @@
             IsEnabled = false;
         }
 
-        public void Start()
+        internal void Start()
         {
             Self = gameObject;
         }
 
-        public void LateUpdate()
+        internal void LateUpdate()
         {
             if (Target == null)
             {

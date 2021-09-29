@@ -15,17 +15,17 @@
     [RegisterComponent]
     internal class PlayerWatcher : GameEventsBehaviour
     {
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Delegate ReferencedDelegate;
+        internal IntPtr MethodInfo;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public PlayerWatcher(IntPtr obj0) : base(obj0)
+        internal PlayerWatcher(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        public PlayerWatcher(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<PlayerWatcher>())
+        internal PlayerWatcher(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<PlayerWatcher>())
         {
             ClassInjector.DerivedConstructorBody(this);
 
@@ -172,8 +172,8 @@
             PlayerWatcherManager.Deregister(this);
         }
 
-        public PlayerWatcherManager Manager = null;
-        public float TimerOffset = 0f;
+        internal PlayerWatcherManager Manager = null;
+        internal float TimerOffset = 0f;
         private float LastTimeCheck2 = 0;
         private float LastTimeCheck = 0;
         private bool HasRequiredSettings = false;

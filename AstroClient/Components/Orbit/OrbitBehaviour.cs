@@ -14,17 +14,17 @@
     {
         #region Internal
 
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Delegate ReferencedDelegate;
+        internal IntPtr MethodInfo;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public Orbit(IntPtr obj0) : base(obj0)
+        internal Orbit(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        public Orbit(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<Orbit>())
+        internal Orbit(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<Orbit>())
         {
             ClassInjector.DerivedConstructorBody(this);
 
@@ -45,29 +45,29 @@
 
         #region Behaviour
 
-        public OrbitManager_Old Instance = null;
+        internal OrbitManager_Old Instance = null;
 
-        public Quaternion FirstRotation = Quaternion.identity;
-        public Vector3 FirstPosition = Vector3.zero;
-        public Vector3 Position = Vector3.zero;
+        internal Quaternion FirstRotation = Quaternion.identity;
+        internal Vector3 FirstPosition = Vector3.zero;
+        internal Vector3 Position = Vector3.zero;
 
-        public float x = 1.5f;
-        public float y = 1.5f;
-        public float z = 0f;
-        public Vector3 Offset = Vector3.zero;
+        internal float x = 1.5f;
+        internal float y = 1.5f;
+        internal float z = 0f;
+        internal Vector3 Offset = Vector3.zero;
 
         private Transform CenterPoint = null;
-        public Player player;
-        public Rigidbody body;
-        public GameObject obj;
+        internal Player player;
+        internal Rigidbody body;
+        internal GameObject obj;
 
-        public float RotationSpeed = 2f;
-        public bool RotateClockwise = true;
-        public RotationMode Mode = RotationMode.CircleWithRotation; // DEFAULT : CircleWithRotation
+        internal float RotationSpeed = 2f;
+        internal bool RotateClockwise = true;
+        internal RotationMode Mode = RotationMode.CircleWithRotation; // DEFAULT : CircleWithRotation
 
-        public float UpdateTimer = 0f;
-        public float Timer = 0f;
-        public float TimerOffset = 0f;
+        internal float UpdateTimer = 0f;
+        internal float Timer = 0f;
+        internal float TimerOffset = 0f;
 
         private float InterpolationMaxY = 1f;
         private float InterpolationMinY = -1f;
@@ -78,7 +78,7 @@
         private float InterpolationTempX = 0f;
         private PickupController pickup;
 
-        public void Start()
+        internal void Start()
         {
             FirstRotation = transform.rotation;
             FirstPosition = transform.position;
@@ -93,7 +93,7 @@
             //OnlineEditor.TakeObjectOwnership(obj);
         }
 
-        public void Update()
+        internal void Update()
         {
             if (player == null)
             {
@@ -295,7 +295,7 @@
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static  float Lerp(float a, float b, float t) => a + ((b - a) * Clamp(t));
 
-        public enum RotationMode : byte
+        internal enum RotationMode : byte
         {
             Circle,
             Ellipse,

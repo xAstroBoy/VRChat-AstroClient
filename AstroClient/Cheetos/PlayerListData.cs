@@ -12,39 +12,39 @@
 
     internal class PlayerListData
     {
-        public Photon.Realtime.Player PhotonPlayer { get; private set; }
+        internal Photon.Realtime.Player PhotonPlayer { get; private set; }
 
-        public Player Player { get; private set; }
+        internal Player Player { get; private set; }
 
-        public APIUser APIUser { get; private set; }
+        internal APIUser APIUser { get; private set; }
 
-        public VRCPlayerApi PlayerAPI { get; private set; }
+        internal VRCPlayerApi PlayerAPI { get; private set; }
 
-        public PlayerNet PlayerNet { get; private set; }
+        internal PlayerNet PlayerNet { get; private set; }
 
-        public VRCPlayer VRCPlayer { get; private set; }
+        internal VRCPlayer VRCPlayer { get; private set; }
 
-        public string UserID => PhotonPlayer.GetUserID();
+        internal string UserID => PhotonPlayer.GetUserID();
 
-        public string Name => PhotonPlayer.GetDisplayName();
+        internal string Name => PhotonPlayer.GetDisplayName();
 
-        public bool IsMaster => Player != null && Player.GetIsMaster();
+        internal bool IsMaster => Player != null && Player.GetIsMaster();
 
-        public bool IsSelf => Player != null && Player.GetUserID().Equals(Utils.LocalPlayer.GetPlayer().GetUserID());
+        internal bool IsSelf => Player != null && Player.GetUserID().Equals(Utils.LocalPlayer.GetPlayer().GetUserID());
 
-        public bool IsFriend => APIUser != null && APIUser.GetIsFriend();
+        internal bool IsFriend => APIUser != null && APIUser.GetIsFriend();
 
-        public bool IsInVR => Player != null && Player.GetIsInVR();
+        internal bool IsInVR => Player != null && Player.GetIsInVR();
 
-        public bool IsDanger => VRCPlayer != null && VRCPlayer.GetIsDANGER();
+        internal bool IsDanger => VRCPlayer != null && VRCPlayer.GetIsDANGER();
 
-        public string Rank => APIUser != null ? APIUser.GetRank() : string.Empty;
+        internal string Rank => APIUser != null ? APIUser.GetRank() : string.Empty;
 
-        public RankType RankType => APIUser != null ? APIUser.GetRankEnum() : RankType.VeryNegativeTrust;
+        internal RankType RankType => APIUser != null ? APIUser.GetRankEnum() : RankType.VeryNegativeTrust;
 
-        public Color RankColor => APIUser != null ? APIUser.GetRankColor() : Color.white;
+        internal Color RankColor => APIUser != null ? APIUser.GetRankColor() : Color.white;
 
-        public Color Color
+        internal Color Color
         {
             get
             {
@@ -63,7 +63,7 @@
             }
         }
 
-        public string Prefix
+        internal string Prefix
         {
             get
             {
@@ -107,12 +107,12 @@
             }
         }
 
-        public bool GetIsInvisible()
+        internal bool GetIsInvisible()
         {
             return Player == null || !WorldUtils.Players.Any(p => p.GetUserID().Equals(Player.GetUserID()));
         }
 
-        public PlayerListData(Photon.Realtime.Player photonPlayer)
+        internal PlayerListData(Photon.Realtime.Player photonPlayer)
         {
             PhotonPlayer = photonPlayer;
             Player = photonPlayer?.GetPlayer();

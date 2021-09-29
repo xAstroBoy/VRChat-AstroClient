@@ -25,9 +25,9 @@
     /// </summary>
     internal class CheetosUI : GameEvents
     {
-        public QMNestedButton MainButton { get; private set; }
+        internal QMNestedButton MainButton { get; private set; }
 
-        public QMScrollMenu MainScroller { get; private set; }
+        internal QMScrollMenu MainScroller { get; private set; }
 
         internal override void VRChat_OnUiManagerInit()
         {

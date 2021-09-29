@@ -136,7 +136,7 @@
             internal static VRCAvatarManager CurrentManager;
             private readonly VRCAvatarManager myLastManager;
 
-            public AvatarManagerCookie(VRCAvatarManager avatarManager)
+            internal AvatarManagerCookie(VRCAvatarManager avatarManager)
             {
                 myLastManager = CurrentManager;
                 CurrentManager = avatarManager;

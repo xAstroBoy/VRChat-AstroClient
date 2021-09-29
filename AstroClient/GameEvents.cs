@@ -16,7 +16,7 @@
     #endregion Imports
 
     // thanks TO Cheeto aka Craig on discord, he's been really helpful!
-    public class GameEvents
+    internal class GameEvents
     {
         internal GameEvents()
         {

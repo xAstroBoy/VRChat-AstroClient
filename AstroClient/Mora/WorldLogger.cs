@@ -21,7 +21,7 @@
     //        return new HarmonyMethod(typeof(WorldLogger).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
     //    }
 
-    //    public override void OnApplicationStart()
+    //    internal override void OnApplicationStart()
     //    {
     //        //Directory.CreateDirectory("AstroClient\\WorldLog");
     //        //if (!File.Exists(PublicWorldFile))
@@ -32,7 +32,7 @@
     //        //		_WorldsIDs += line.Replace("World ID:", "");
     //    }
 
-    //    public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)  //ApiWorldDownloadPatch(ApiWorld __0) //__0
+    //    internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL)  //ApiWorldDownloadPatch(ApiWorld __0) //__0
     //    {
     //        DateTime now = DateTime.Now;
     //        if (!_WorldsIDs.Contains(RoomManager.field_Internal_Static_ApiWorld_0.id))

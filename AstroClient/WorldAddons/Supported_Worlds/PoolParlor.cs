@@ -217,7 +217,7 @@
             UdonHeapEditor.PatchHeap(Cue_1, "syncedCueSkin", ((int)value), true);
         }
 
-        public  enum TableSkins
+        internal  enum TableSkins
         {
             White = 0,
             Green = 1,
@@ -231,7 +231,7 @@
 
         }
 
-        public enum CueSkins
+        internal enum CueSkins
         {
             DefaultDark = 0,
             TournamentWinner = 1,
@@ -347,13 +347,13 @@
 
         internal class Parlor_Balls
         {
-            public string Ball_Number { get; set; }
-            public GameObject Table_Ball { get; set; }
-            public GameObject Table_Ball_Pickup { get; set; }
-            public GameObject Estetic_Ball { get; set; }
-            public GameObjectListener Ball_table_pickup_listener { get; set; }
+            internal string Ball_Number { get; set; }
+            internal GameObject Table_Ball { get; set; }
+            internal GameObject Table_Ball_Pickup { get; set; }
+            internal GameObject Estetic_Ball { get; set; }
+            internal GameObjectListener Ball_table_pickup_listener { get; set; }
 
-            public Parlor_Balls(string Ball_Number, GameObject Table_Ball, GameObject Table_Ball_Pickup, GameObjectListener Ball_table_pickup_listener, GameObject Estetic_Ball)
+            internal Parlor_Balls(string Ball_Number, GameObject Table_Ball, GameObject Table_Ball_Pickup, GameObjectListener Ball_table_pickup_listener, GameObject Estetic_Ball)
             {
                 this.Ball_Number = Ball_Number;
                 this.Table_Ball = Table_Ball;

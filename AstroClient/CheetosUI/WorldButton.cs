@@ -15,7 +15,7 @@
 
         private VRC_AstroUdonTrigger interactable;
 
-        public WorldButton(Vector3 position, Quaternion rotation, string label, Action action)
+        internal WorldButton(Vector3 position, Quaternion rotation, string label, Action action)
         {
             gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
             gameObject.name = $"AstroWorldButton: {label}";

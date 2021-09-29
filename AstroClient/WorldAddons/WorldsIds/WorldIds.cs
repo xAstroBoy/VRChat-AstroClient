@@ -2,32 +2,32 @@
 {
     // Yes, the mod supports these worlds : = )
 
-    public struct WorldIds
+    internal struct WorldIds
     {
-        public const string Murder2 = "wrld_ccbf8103-c23e-472f-8efb-38a9a9164357";
-        public const string Murder4 = "wrld_858dfdfc-1b48-4e1e-8a43-f0edc611e5fe";
-        public const string AmongUS = "wrld_dd036610-a246-4f52-bf01-9d7cea3405d7";
-        public const string SmashContest = "wrld_c87d9e7a-d46a-4ca4-9077-a6322ac0f7e7";
-        public const string VRChatDefaultHub = "wrld_ba913a96-fac4-4048-a062-9aa5db092812";
-        public const string SnoozeScaryMaze5 = "wrld_953eff93-20c9-457b-8ef0-1ac2130d5b8a";
-        public const string Meroom = "wrld_9c72e56b-d2b0-4c9b-b816-07a857f6ae4e";
-        public const string TermalTreatment = "wrld_d010695a-3e7c-43a1-ac38-d80f3ffeab17";
-        public const string DontTripWorld = "wrld_a1b9fcc4-1ed1-4e67-8b16-f1edc5a5d6e9";
-        public const string FBTHeaven = "wrld_d319c58a-dcec-47de-b5fc-21200116462c";
-        public const string TheGreatPug = "wrld_6caf5200-70e1-46c2-b043-e3c4abe69e0f";
-        public const string FreezeTag = "wrld_7487d91a-3ef4-44c6-ad6d-9bdc7dee5efd";
-        public const string BClub = "wrld_1b3b3259-0a1f-4311-984e-826abab6f481";
-        public const string JustHParty = "wrld_e5c30b56-efa8-42d5-a8d4-a2cca2bf3403";
-        public const string VoidClub = "wrld_7e10376a-29b6-43af-ac5d-6eb72732e90c";
-        public const string AimFactory = "wrld_97a21a21-9e5e-4152-b1c6-bc899a041d3f";
-        public const string LPD = "wrld_0d3bc22f-eb0c-48f6-9d22-1b7ef764a60a";
-        public const string Club808 = "wrld_6fdd0648-a0de-47a5-bf14-fc42b8b2f859";
-        public const string ChuckECheeseEsperience = "wrld_d24c4cc9-a6ba-43a0-a3e8-185b6481a43a";
-        public const string ClubMisfitAfterParty = "wrld_4524f1b5-e380-4330-afc9-d36705ced271";
-        public const string BOMBERio = "wrld_98422193-2ddd-4af4-bd97-ab5609a46785";
-        public const string PoolParlor = "wrld_747e7258-f804-4414-83f5-b618ebca7471";
-        public const string Valkyrie_Defense = "wrld_26c38507-8915-40d5-9338-667f01fe3b4c";
-        public const string Furry_Talk_And_Chill = "wrld_c591c76e-0ac2-413d-969e-b243ae943ace";
-        public const string Super_Tower_defense = "wrld_9a51b365-d6cc-42e6-901a-54ceb46b94ef";
+        internal const string Murder2 = "wrld_ccbf8103-c23e-472f-8efb-38a9a9164357";
+        internal const string Murder4 = "wrld_858dfdfc-1b48-4e1e-8a43-f0edc611e5fe";
+        internal const string AmongUS = "wrld_dd036610-a246-4f52-bf01-9d7cea3405d7";
+        internal const string SmashContest = "wrld_c87d9e7a-d46a-4ca4-9077-a6322ac0f7e7";
+        internal const string VRChatDefaultHub = "wrld_ba913a96-fac4-4048-a062-9aa5db092812";
+        internal const string SnoozeScaryMaze5 = "wrld_953eff93-20c9-457b-8ef0-1ac2130d5b8a";
+        internal const string Meroom = "wrld_9c72e56b-d2b0-4c9b-b816-07a857f6ae4e";
+        internal const string TermalTreatment = "wrld_d010695a-3e7c-43a1-ac38-d80f3ffeab17";
+        internal const string DontTripWorld = "wrld_a1b9fcc4-1ed1-4e67-8b16-f1edc5a5d6e9";
+        internal const string FBTHeaven = "wrld_d319c58a-dcec-47de-b5fc-21200116462c";
+        internal const string TheGreatPug = "wrld_6caf5200-70e1-46c2-b043-e3c4abe69e0f";
+        internal const string FreezeTag = "wrld_7487d91a-3ef4-44c6-ad6d-9bdc7dee5efd";
+        internal const string BClub = "wrld_1b3b3259-0a1f-4311-984e-826abab6f481";
+        internal const string JustHParty = "wrld_e5c30b56-efa8-42d5-a8d4-a2cca2bf3403";
+        internal const string VoidClub = "wrld_7e10376a-29b6-43af-ac5d-6eb72732e90c";
+        internal const string AimFactory = "wrld_97a21a21-9e5e-4152-b1c6-bc899a041d3f";
+        internal const string LPD = "wrld_0d3bc22f-eb0c-48f6-9d22-1b7ef764a60a";
+        internal const string Club808 = "wrld_6fdd0648-a0de-47a5-bf14-fc42b8b2f859";
+        internal const string ChuckECheeseEsperience = "wrld_d24c4cc9-a6ba-43a0-a3e8-185b6481a43a";
+        internal const string ClubMisfitAfterParty = "wrld_4524f1b5-e380-4330-afc9-d36705ced271";
+        internal const string BOMBERio = "wrld_98422193-2ddd-4af4-bd97-ab5609a46785";
+        internal const string PoolParlor = "wrld_747e7258-f804-4414-83f5-b618ebca7471";
+        internal const string Valkyrie_Defense = "wrld_26c38507-8915-40d5-9338-667f01fe3b4c";
+        internal const string Furry_Talk_And_Chill = "wrld_c591c76e-0ac2-413d-969e-b243ae943ace";
+        internal const string Super_Tower_defense = "wrld_9a51b365-d6cc-42e6-901a-54ceb46b94ef";
     }
 }

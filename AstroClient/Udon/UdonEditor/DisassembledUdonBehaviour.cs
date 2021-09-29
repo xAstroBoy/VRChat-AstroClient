@@ -4,11 +4,11 @@
 
     internal class DisassembledUdonBehaviour
     {
-        public IUdonProgram IUdonProgram { get; set; }
-        public IUdonSymbolTable IUdonSymbolTable { get; set; }
-        public IUdonHeap IUdonHeap { get; set; }
+        internal IUdonProgram IUdonProgram { get; set; }
+        internal IUdonSymbolTable IUdonSymbolTable { get; set; }
+        internal IUdonHeap IUdonHeap { get; set; }
 
-        public DisassembledUdonBehaviour(IUdonProgram IUdonProgram, IUdonSymbolTable IUdonSymbolTable, IUdonHeap IUdonHeap)
+        internal DisassembledUdonBehaviour(IUdonProgram IUdonProgram, IUdonSymbolTable IUdonSymbolTable, IUdonHeap IUdonHeap)
         {
             this.IUdonProgram = IUdonProgram;
             this.IUdonSymbolTable = IUdonSymbolTable;

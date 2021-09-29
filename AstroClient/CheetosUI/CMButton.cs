@@ -11,7 +11,7 @@
 
     internal class CMButton : CMBase
     {
-        public CMButton(Transform parent, Vector2 position, string text, Action action) : base(parent, position)
+        internal CMButton(Transform parent, Vector2 position, string text, Action action) : base(parent, position)
         {
             GetGameObject.name = $"CMButton-{text}";
 

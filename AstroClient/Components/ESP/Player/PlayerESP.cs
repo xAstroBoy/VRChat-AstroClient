@@ -15,9 +15,9 @@
     [RegisterComponent]
     internal class PlayerESP : GameEventsBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public PlayerESP(IntPtr obj0) : base(obj0)
+        internal PlayerESP(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
@@ -35,7 +35,7 @@
         }
 
         // Use this for initialization
-        public void Start()
+        internal void Start()
         {
             // FIND ALLOCATED PLAYER
             var p = this.GetComponent<Player>();
@@ -163,7 +163,7 @@
         }
 
 
-        public void OnDestroy()
+        internal void OnDestroy()
         {
             HighLightOptions.DestroyHighlighter();
             if (RoutineCancellationToken != null)
@@ -172,7 +172,7 @@
             }
         }
 
-        public void OnEnable()
+        internal void OnEnable()
         {
             if (HighLightOptions != null)
             {

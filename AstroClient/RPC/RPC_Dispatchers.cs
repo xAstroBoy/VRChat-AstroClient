@@ -4,11 +4,11 @@
 	using UnityEngine;
 	using VRC.SDKBase;
 
-	public static class RPC_Dispatchers
+	internal static class RPC_Dispatchers
 	{
-		public static GameObject _SceneEventHandlerAndInstantiator_GameObject;
+		internal static GameObject _SceneEventHandlerAndInstantiator_GameObject;
 
-		public static GameObject SceneEventHandlerAndInstantiator_GameObject
+		internal static GameObject SceneEventHandlerAndInstantiator_GameObject
 		{
 			get
 			{
@@ -25,9 +25,9 @@
 			}
 		}
 
-		public static VRC_EventDispatcher _SceneEventHandlerAndInstantiator_Dispatcher;
+		internal static VRC_EventDispatcher _SceneEventHandlerAndInstantiator_Dispatcher;
 
-		public static VRC_EventDispatcher SceneEventHandlerAndInstantiator_Dispatcher
+		internal static VRC_EventDispatcher SceneEventHandlerAndInstantiator_Dispatcher
 		{
 			get
 			{
@@ -43,9 +43,9 @@
 			}
 		}
 
-		public static GameObject _Dispatcher_GameObject;
+		internal static GameObject _Dispatcher_GameObject;
 
-		public static GameObject Dispatcher_GameObject
+		internal static GameObject Dispatcher_GameObject
 		{
 			get
 			{
@@ -62,9 +62,9 @@
 			}
 		}
 
-		public static VRC_EventDispatcher _Dispatcher;
+		internal static VRC_EventDispatcher _Dispatcher;
 
-		public static VRC_EventDispatcher Dispatcher
+		internal static VRC_EventDispatcher Dispatcher
 		{
 			get
 			{

@@ -24,17 +24,17 @@
     {
         #region Internal
 
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Delegate ReferencedDelegate;
+        internal IntPtr MethodInfo;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public PlayerWatcherManager(IntPtr obj0) : base(obj0)
+        internal PlayerWatcherManager(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        public PlayerWatcherManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<PlayerWatcherManager>())
+        internal PlayerWatcherManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<PlayerWatcherManager>())
         {
             ClassInjector.DerivedConstructorBody(this);
 
@@ -57,7 +57,7 @@
 
         internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> PlayerWatcherBehaviors;
 
-        public void Start()
+        internal void Start()
         {
             PlayerWatcherBehaviors = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
             Instance = this;

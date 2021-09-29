@@ -10,7 +10,7 @@
     [RegisterComponent]
     internal class PlayerSpoofer : GameEventsBehaviour
     {
-        public PlayerSpoofer(IntPtr ptr) : base(ptr)
+        internal PlayerSpoofer(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
         }
@@ -18,7 +18,7 @@
         private Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object> AntiGarbageCollection = new Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object>();
 
         // Use this for initialization
-        public void Start()
+        internal void Start()
         {
         }
 
@@ -41,7 +41,7 @@
             }
         }
 
-        public void LateUpdate()
+        internal void LateUpdate()
         {
             if (IsSpooferActive && isSecondJoin && user != null && DisplayName != SpoofedName)
 			{

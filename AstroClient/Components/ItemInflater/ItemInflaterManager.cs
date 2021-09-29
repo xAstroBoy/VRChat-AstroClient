@@ -14,17 +14,17 @@
     {
         #region Internal
 
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Delegate ReferencedDelegate;
+        internal IntPtr MethodInfo;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public ItemInflaterManager(IntPtr obj0) : base(obj0)
+        internal ItemInflaterManager(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        public ItemInflaterManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ItemInflaterManager>())
+        internal ItemInflaterManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ItemInflaterManager>())
         {
             ClassInjector.DerivedConstructorBody(this);
 
@@ -47,7 +47,7 @@
 
         internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ObjectEditorBehaviors;
 
-        public void Start()
+        internal void Start()
         {
             ObjectEditorBehaviors = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>();
             Instance = this;

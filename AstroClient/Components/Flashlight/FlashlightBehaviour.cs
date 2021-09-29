@@ -7,7 +7,7 @@ namespace AstroClient
     [RegisterComponent]
     internal class FlashlightBehaviour : MonoBehaviour
     {
-        public FlashlightBehaviour(IntPtr ptr)
+        internal FlashlightBehaviour(IntPtr ptr)
             : base(ptr)
         {
         }

@@ -8,9 +8,9 @@
 
     internal class CMBase
     {
-        public GameObject GetGameObject { get; private set; }
+        internal GameObject GetGameObject { get; private set; }
 
-        public CMBase(Transform parent, Vector2 position)
+        internal CMBase(Transform parent, Vector2 position)
         {
             GetGameObject = new GameObject($"CMBase");
             _ = GetGameObject.AddComponent<CanvasRenderer>();

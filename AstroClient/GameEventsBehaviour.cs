@@ -13,7 +13,7 @@
 
     internal class GameEventsBehaviour : MonoBehaviour
     {
-        public GameEventsBehaviour(IntPtr obj0) : base(obj0)
+        internal GameEventsBehaviour(IntPtr obj0) : base(obj0)
         {
             // ML Events
             //Main.Event_OnApplicationStart += Internal_OnApplicationStart;

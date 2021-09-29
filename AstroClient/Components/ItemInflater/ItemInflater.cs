@@ -8,17 +8,17 @@
     [RegisterComponent]
     internal class ItemInflater : GameEventsBehaviour
     {
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Delegate ReferencedDelegate;
+        internal IntPtr MethodInfo;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public ItemInflater(IntPtr obj0) : base(obj0)
+        internal ItemInflater(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        public ItemInflater(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ItemInflater>())
+        internal ItemInflater(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ItemInflater>())
         {
             ClassInjector.DerivedConstructorBody(this);
 
@@ -123,10 +123,10 @@
             }
         }
 
-        public float TimerOffset = 0f;
+        internal float TimerOffset = 0f;
         private float LastTimeCheck = 0;
         private float InflateTimer = 0.05f;
-        public ItemInflaterManager Manager = null;
+        internal ItemInflaterManager Manager = null;
         private GameObject obj = null;
         internal Vector3 NewSize;
     }

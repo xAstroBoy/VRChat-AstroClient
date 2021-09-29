@@ -119,10 +119,10 @@
 
         internal class PlayerTagCounter
         {
-            public Player Player { get; set; }
-            public int AssignedStack { get; set; }
+            internal Player Player { get; set; }
+            internal int AssignedStack { get; set; }
 
-            public PlayerTagCounter(Player user, int stack)
+            internal PlayerTagCounter(Player user, int stack)
             {
                 this.Player = user;
                 AssignedStack = stack;

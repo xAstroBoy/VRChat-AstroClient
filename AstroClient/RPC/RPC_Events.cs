@@ -4,11 +4,11 @@
 	using UnityEngine;
 	using VRC.SDKBase;
 
-	public static class RPC_Events
+	internal static class RPC_Events
 	{
-		public static GameObject _InstantiateObject_GameObject;
+		internal static GameObject _InstantiateObject_GameObject;
 
-		public static GameObject InstantiateObject_GameObject
+		internal static GameObject InstantiateObject_GameObject
 		{
 			get
 			{
@@ -25,14 +25,14 @@
 			}
 		}
 
-		public static VRC_EventDispatcher _InstantiateObject_Event;
+		internal static VRC_EventDispatcher _InstantiateObject_Event;
 		
 
 //		private static void SearchForEvent(VRC_EventDispatcher entry , string eventname)
 //		{
 //foreach(var item in entry.)
 //		}
-//		public static VRC_EventHandler.VrcEvent InstantiateObject_Event
+//		internal static VRC_EventHandler.VrcEvent InstantiateObject_Event
 //		{
 //			get
 //			{

@@ -358,7 +358,6 @@
     <Compile Include="Variables\GDBUser.cs" />
     <Compile Include="Variables\GlobalLists.cs" />
     <Compile Include="Variables\InstanceBuilder.cs" />
-    <Compile Include="Variables\Strings.cs" />
     <Compile Include="Variables\VRChatObjects.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\PoolParlor.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\SuperTowerDefense.cs" />

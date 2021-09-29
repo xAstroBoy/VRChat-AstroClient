@@ -15,14 +15,14 @@
 	using static VRC.Core.ApiWorldInstance;
 	using harm = HarmonyLib.Harmony;
 
-	public class BullshitTest : GameEvents
+	internal class BullshitTest : GameEvents
 	{
-		public override void OnApplicationStart()
+		internal override void OnApplicationStart()
 		{
 			//StartPatchTest();
 		}
 
-		public static void StartPatchTest()
+		internal static void StartPatchTest()
 		{
 			var instance = harm.CreateAndPatchAll(typeof(BullshitTest));
 			ModConsole.Log("Started Instance Hijack Patcher.");
@@ -43,8 +43,8 @@
 
 		private static bool Force_PublicInstanceType(ref InstanceAccessType __result)
 		{
-			ModConsole.Log($"Marked a World Instance as Public Instance!");
-			__result = InstanceAccessType.Public;
+			ModConsole.Log($"Marked a World Instance as internal Instance!");
+			__result = InstanceAccessType.internal;
 			return false;
 		}
 
@@ -92,12 +92,12 @@
 			string owner = "null";
 			if (__3 != null)
 			{
-				heading = __3.ToString();
+				owner = __3.ToString();
 			}
 			string order = "null";
 			if (__4 != null)
 			{
-				heading = __4.ToString();
+				order = __4.ToString();
 			}
 			string offset = "null";
 			if (__5 != null)
@@ -269,7 +269,7 @@
 
 		private static string _currentDisplayName = string.Empty;
 
-		public static string CurrentDisplayName
+		internal static string CurrentDisplayName
 		{
 			get
 			{

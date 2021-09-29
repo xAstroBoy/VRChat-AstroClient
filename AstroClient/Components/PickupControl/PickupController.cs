@@ -11,12 +11,12 @@
     [RegisterComponent]
     internal class PickupController : GameEventsBehaviour
     {
-        public PickupController(IntPtr ptr) : base(ptr)
+        internal PickupController(IntPtr ptr) : base(ptr)
         {
         }
 
         // Use this for initialization
-        public void Start()
+        internal void Start()
         {
             SDKBase_Pickup = gameObject.GetComponent<VRC.SDKBase.VRC_Pickup>();
             SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();

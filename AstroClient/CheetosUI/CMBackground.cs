@@ -9,9 +9,9 @@
 
     internal class CMBackground
     {
-        public GameObject GetGameObject { get; private set; }
+        internal GameObject GetGameObject { get; private set; }
 
-        public CMBackground(Transform parent, Color color)
+        internal CMBackground(Transform parent, Color color)
         {
             GetGameObject = new GameObject("Background");
             _ = GetGameObject.AddComponent<RectTransform>();

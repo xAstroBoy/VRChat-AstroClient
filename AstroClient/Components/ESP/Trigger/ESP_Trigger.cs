@@ -10,9 +10,9 @@
     [RegisterComponent]
     internal class ESP_Trigger : GameEventsBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public ESP_Trigger(IntPtr obj0) : base(obj0)
+        internal ESP_Trigger(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
@@ -30,7 +30,7 @@
         }
 
         // Use this for initialization
-        public void Start()
+        internal void Start()
         {
             ESPColor = GetDefaultColor();
             ObjMeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true);
@@ -82,7 +82,7 @@
             }
         }
 
-        public void FixedUpdate()
+        internal void FixedUpdate()
         {
             if (!Lock)
             {
@@ -127,18 +127,18 @@
             }
         }
 
-        public void OnDestroy()
+        internal void OnDestroy()
         {
             HighLightOptions.DestroyHighlighter();
             HasSetupESP = false;
         }
 
-        public void OnEnable()
+        internal void OnEnable()
         {
             SetupHighlighter();
         }
 
-        public void OnDisable()
+        internal void OnDisable()
         {
             HighLightOptions.DestroyHighlighter();
             HasSetupESP = false;

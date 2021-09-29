@@ -25,7 +25,7 @@
 
     internal class AvatarResult : VRCUiContentButton
     {
-        public string AvatarID = string.Empty;
+        internal string AvatarID = string.Empty;
     }
 
     internal class AvatarSearch : GameEvents
@@ -62,7 +62,7 @@
 
         private static SearchTypes lastSearchType;
 
-        public enum SearchTypes
+        internal enum SearchTypes
         {
             ALL,
             PUBLIC,

@@ -11,12 +11,12 @@ namespace AstroClient
     [RegisterComponent]
     internal class EnderPearlBehaviour : MonoBehaviour
     {
-        public EnderPearlBehaviour(IntPtr ptr)
+        internal EnderPearlBehaviour(IntPtr ptr)
             : base(ptr)
         {
         }
 
-        public void Start()
+        internal void Start()
         {
             pickup = gameObject.GetOrAddComponent<PickupController>();
             body = gameObject.GetOrAddComponent<RigidBodyController>();
@@ -49,7 +49,7 @@ namespace AstroClient
             }
         }
 
-        public void Update()
+        internal void Update()
         {
             Time += UnityEngine.Time.deltaTime;
             if (Time > 0.3f)
@@ -71,12 +71,12 @@ namespace AstroClient
             }
         }
 
-        public void OnDisable()
+        internal void OnDisable()
         {
             Held = false;
         }
 
-        public void OnEnable()
+        internal void OnEnable()
         {
             Held = false;
         }

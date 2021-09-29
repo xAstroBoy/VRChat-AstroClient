@@ -10,23 +10,23 @@
     using System.Text;
     using System.Threading.Tasks;
 
-    public class TempClass : GameEvents
+    internal class TempClass : GameEvents
     {
 
-        public override void OnApplicationStart()
+        internal override void OnApplicationStart()
         {
             MelonCoroutines.Start(ConvertAllColorsToFile());
         }
 
-        public static string ConvertColorToString(System.Drawing.Color color)
+        internal static string ConvertColorToString(System.Drawing.Color color)
         {
             var converted = color.ToUnityEngineColor();
-            return $"public static UnityEngine.Color {color.Name}  " + "{ get; }" + $"  = new UnityEngine.Color({converted.r}f, {converted.g}f, {converted.b}f, {converted.a}f);";
+            return $"internal static UnityEngine.Color {color.Name}  " + "{ get; }" + $"  = new UnityEngine.Color({converted.r}f, {converted.g}f, {converted.b}f, {converted.a}f);";
         }
 
 
 
-        public IEnumerator ConvertAllColorsToFile()
+        internal IEnumerator ConvertAllColorsToFile()
         {
             var stringbuilder = new StringBuilder();
 

@@ -22,7 +22,7 @@
  //           return new HarmonyMethod(typeof(AvatarLogger).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
  //       }
 
- //       public override void OnApplicationStart()
+ //       internal override void OnApplicationStart()
  //       {
  //           //Directory.CreateDirectory("AstroClient\\AvatarLog");
  //           //if (!File.Exists(PublicAvatarFile))

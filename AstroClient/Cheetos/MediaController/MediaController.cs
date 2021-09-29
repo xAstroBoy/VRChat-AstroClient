@@ -7,7 +7,7 @@
 
 //	internal class MediaController
 //	{
-//		public delegate void MediaSessionDelegate(MediaSession session);
+//		internal delegate void MediaSessionDelegate(MediaSession session);
 
 //		/// <summary>
 //		/// Triggered when a new media source gets added to the MediaSessions
@@ -71,10 +71,10 @@
 
 //		internal class MediaSession
 //		{
-//			public GlobalSystemMediaTransportControlsSession ControlSession;
-//			public string LastSong;
+//			internal GlobalSystemMediaTransportControlsSession ControlSession;
+//			internal string LastSong;
 
-//			public MediaSession(GlobalSystemMediaTransportControlsSession ctrlSession)
+//			internal MediaSession(GlobalSystemMediaTransportControlsSession ctrlSession)
 //			{
 //				ControlSession = ctrlSession;
 //				ControlSession.MediaPropertiesChanged += OnSongChange;

@@ -45,7 +45,7 @@
 
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
-        public void InitPatches()
+        internal void InitPatches()
         {
             try
             {

@@ -7,15 +7,15 @@ namespace AstroClient.Components
     internal class TweakerListener : GameEventsBehaviour
     {
         [method: HideFromIl2Cpp]
-        public event Action? OnEnabled;
+        internal event Action? OnEnabled;
 
         [method: HideFromIl2Cpp]
-        public event Action? OnDisabled;
+        internal event Action? OnDisabled;
 
         [method: HideFromIl2Cpp]
-        public event Action? OnDestroyed;
+        internal event Action? OnDestroyed;
 
-        public TweakerListener(IntPtr obj0) : base(obj0)
+        internal TweakerListener(IntPtr obj0) : base(obj0)
         {
         }
 

@@ -9,9 +9,9 @@
 
     internal class CMPage
     {
-        public GameObject GetGameObject { get; private set; }
+        internal GameObject GetGameObject { get; private set; }
 
-        public CMPage(Transform parent)
+        internal CMPage(Transform parent)
         {
             GetGameObject = new GameObject("CMPage");
             GetGameObject.transform.SetParent(parent, false);

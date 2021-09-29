@@ -9,7 +9,7 @@ namespace AstroClient.Components
     {
         internal QMSingleButton assignedbtn;
 
-        public ScrollMenuListener(IntPtr obj0) : base(obj0)
+        internal ScrollMenuListener(IntPtr obj0) : base(obj0)
         {
         }
 

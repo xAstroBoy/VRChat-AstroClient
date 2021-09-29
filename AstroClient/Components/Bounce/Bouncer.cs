@@ -10,9 +10,9 @@
     [RegisterComponent]
     internal class Bouncer : GameEventsBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public Bouncer(IntPtr obj0) : base(obj0)
+        internal Bouncer(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
@@ -30,7 +30,7 @@
         }
 
         // Use this for initialization
-        public void Start()
+        internal void Start()
         {
             rb = GetComponent<Rigidbody>();
             initialVelocity = rb.velocity;

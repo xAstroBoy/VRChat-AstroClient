@@ -18,17 +18,17 @@
     {
         #region Internal
 
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        internal Delegate ReferencedDelegate;
+        internal IntPtr MethodInfo;
+        internal Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        public OrbitManager(IntPtr obj0) : base(obj0)
+        internal OrbitManager(IntPtr obj0) : base(obj0)
         {
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
-        public OrbitManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<OrbitManager>())
+        internal OrbitManager(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<OrbitManager>())
         {
             ClassInjector.DerivedConstructorBody(this);
 
@@ -60,13 +60,13 @@
             set => Instance.isEnabled = value;
         }
 
-        public void Start()
+        internal void Start()
         {
             Instance = this;
             ModConsole.Log($"[OrbitManager] Initialized");
         }
 
-        public void RefreshPickups()
+        internal void RefreshPickups()
         {
             pickups.Clear();
             var list = WorldUtils.Pickups;
