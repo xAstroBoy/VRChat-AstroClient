@@ -32,7 +32,7 @@
 
         private static Timer pingTimer;
 
-        public static void Initialize()
+        internal static  void Initialize()
         {
             KeyManager.ReadKey();
             ModConsole.Log("Client Connecting..");

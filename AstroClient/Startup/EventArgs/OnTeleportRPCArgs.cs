@@ -5,15 +5,15 @@
     using VRC.SDKBase;
     using static VRC.SDKBase.VRC_SceneDescriptor;
 
-    public class OnTeleportRPCArgs : EventArgs
+    internal class OnTeleportRPCArgs : EventArgs
     {
-        public Vector3 Position;
-        public Quaternion Rotation;
-        public VRC_SceneDescriptor.SpawnOrientation SpawnOrientation;
-        public bool UnknownBool;
-        public int UnknownInt;
+        internal Vector3 Position;
+        internal Quaternion Rotation;
+        internal VRC_SceneDescriptor.SpawnOrientation SpawnOrientation;
+        internal bool UnknownBool;
+        internal int UnknownInt;
 
-        public OnTeleportRPCArgs(Vector3 position, Quaternion Rotation, SpawnOrientation SpawnOrientation, bool UnknownBool, int UnknownInt)
+        internal OnTeleportRPCArgs(Vector3 position, Quaternion Rotation, SpawnOrientation SpawnOrientation, bool UnknownBool, int UnknownInt)
         {
             this.Position = position;
             this.Rotation = Rotation;

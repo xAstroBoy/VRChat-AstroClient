@@ -3,9 +3,9 @@
     using UnityEngine;
     using SyncPhysics = SyncPhysics;
 
-    public static class SyncPhysics_ext
+    internal static  class SyncPhysics_ext
     {
-        public static void RefreshProperties(this SyncPhysics instance)
+        internal static  void RefreshProperties(this SyncPhysics instance)
         {
             if (instance != null)
             {
@@ -13,7 +13,7 @@
             }
         }
 
-        public static void RespawnItem(this SyncPhysics instance)
+        internal static  void RespawnItem(this SyncPhysics instance)
         {
             if (instance != null)
             {
@@ -21,7 +21,7 @@
             }
         }
 
-        public static Rigidbody GetRigidBody(this SyncPhysics instance)
+        internal static  Rigidbody GetRigidBody(this SyncPhysics instance)
         {
             return instance?.field_Private_Rigidbody_0;
         }

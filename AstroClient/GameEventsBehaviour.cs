@@ -11,7 +11,7 @@
     using VRC;
     using VRC.SDKBase;
 
-    public class GameEventsBehaviour : MonoBehaviour
+    internal class GameEventsBehaviour : MonoBehaviour
     {
         public GameEventsBehaviour(IntPtr obj0) : base(obj0)
         {
@@ -193,114 +193,114 @@
             OnAvatarSpawn(e.VRCAvatarManager, e.Avatar);
         }
 
-        public virtual void VRChat_OnUiManagerInit()
+        internal virtual void VRChat_OnUiManagerInit()
         {
         }
 
-        public virtual void OnSceneLoaded(int buildIndex, string sceneName)
+        internal virtual void OnSceneLoaded(int buildIndex, string sceneName)
         {
         }
 
-        public virtual void OnMasterClientSwitched(Photon.Realtime.Player player)
+        internal virtual void OnMasterClientSwitched(Photon.Realtime.Player player)
         {
         }
 
-        public virtual void OnRoomLeft()
+        internal virtual void OnRoomLeft()
         {
         }
 
-        public virtual void OnRoomJoined()
+        internal virtual void OnRoomJoined()
         {
         }
 
-        public virtual void OnFriended()
+        internal virtual void OnFriended()
         {
         }
 
-        public virtual void OnUnfriended()
+        internal virtual void OnUnfriended()
         {
         }
 
-        public virtual void OnPlayerLeft(Player player)
+        internal virtual void OnPlayerLeft(Player player)
         {
         }
 
-        public virtual void OnPlayerJoined(Player player)
+        internal virtual void OnPlayerJoined(Player player)
         {
         }
 
-        public virtual void OnStreamerLeft(Player player)
+        internal virtual void OnStreamerLeft(Player player)
         {
         }
 
-        public virtual void OnStreamerJoined(Player player)
+        internal virtual void OnStreamerJoined(Player player)
         {
         }
 
-        public virtual void OnPhotonLeft(Photon.Realtime.Player player)
+        internal virtual void OnPhotonLeft(Photon.Realtime.Player player)
         {
         }
 
-        public virtual void OnPhotonJoined(Photon.Realtime.Player player)
+        internal virtual void OnPhotonJoined(Photon.Realtime.Player player)
         {
         }
 
-        public virtual void OnQuickMenuOpen()
+        internal virtual void OnQuickMenuOpen()
         {
         }
 
-        public virtual void OnQuickMenuClose()
+        internal virtual void OnQuickMenuClose()
         {
         }
 
-        public virtual void SpawnEmojiRPC(VRCPlayer player, int emoji)
+        internal virtual void SpawnEmojiRPC(VRCPlayer player, int emoji)
         {
         }
 
-        public virtual void VRC_EventDispatcherRFC_triggerEvent(VRC_EventHandler VRC_EventHandler, VRC_EventHandler.VrcEvent VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int UnknownInt, float UnknownFloat)
+        internal virtual void VRC_EventDispatcherRFC_triggerEvent(VRC_EventHandler VRC_EventHandler, VRC_EventHandler.VrcEvent VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int UnknownInt, float UnknownFloat)
         {
         }
 
-        public virtual void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
+        internal virtual void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
         {
         }
 
-        public virtual void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        internal virtual void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
         }
 
-        public virtual void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal virtual void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
         }
 
-        public virtual void OnPlayerSelected(Player player)
+        internal virtual void OnPlayerSelected(Player player)
         {
         }
 
-        public virtual void OnTargetSet(Player player)
+        internal virtual void OnTargetSet(Player player)
         {
         }
 
-        public virtual void OnPlayerBlockedYou(Photon.Realtime.Player player)
-        {
-        }
-
-
-        public virtual void OnPlayerUnblockedYou(Photon.Realtime.Player player)
+        internal virtual void OnPlayerBlockedYou(Photon.Realtime.Player player)
         {
         }
 
 
-        public virtual void OnPlayerMutedYou(Photon.Realtime.Player player)
+        internal virtual void OnPlayerUnblockedYou(Photon.Realtime.Player player)
         {
         }
 
 
-        public virtual void OnPlayerUnmutedYou(Photon.Realtime.Player player)
+        internal virtual void OnPlayerMutedYou(Photon.Realtime.Player player)
         {
         }
 
-        public virtual void OnViewRolesPropertyChanged(bool value)
+
+        internal virtual void OnPlayerUnmutedYou(Photon.Realtime.Player player)
+        {
+        }
+
+        internal virtual void OnViewRolesPropertyChanged(bool value)
         {
         }
 

@@ -5,7 +5,7 @@ namespace AstroClient.Components
     using System;
 
     [RegisterComponent]
-    public class ScrollMenuListener : GameEventsBehaviour
+    internal class ScrollMenuListener : GameEventsBehaviour
     {
         internal QMSingleButton assignedbtn;
 

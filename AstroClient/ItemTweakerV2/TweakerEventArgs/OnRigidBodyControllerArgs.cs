@@ -3,11 +3,11 @@
     using AstroClient.Components;
     using System;
 
-    public class OnRigidBodyControllerArgs : EventArgs
+    internal class OnRigidBodyControllerArgs : EventArgs
     {
-        public RigidBodyController control;
+        internal RigidBodyController control;
 
-        public OnRigidBodyControllerArgs(RigidBodyController controller)
+        internal OnRigidBodyControllerArgs(RigidBodyController controller)
         {
             this.control = controller;
         }

@@ -2,7 +2,7 @@
 {
     using AstroLibrary.Utility;
 
-    public static class ForceClone
+    internal static  class ForceClone
     {
         internal static void ClonePlayer()
         {

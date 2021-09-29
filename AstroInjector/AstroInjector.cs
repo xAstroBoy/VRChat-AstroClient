@@ -3,6 +3,7 @@
     using global::AstroInjector.Cheetos;
     using MelonLoader;
     using System;
+    using System.IO;
     using System.Reflection;
 
     public class AstroInjector : MelonPlugin
@@ -138,8 +139,20 @@
                 string path = DebugLibraryPaths[i];
                 try
                 {
-                    var dll = Assembly.LoadFrom(path);
-                    MelonLogger.Msg($"Injected Library: {path}");
+                    if (File.Exists(path))
+                    {
+                        var dll = Assembly.LoadFrom(path);
+                        MelonHandler.LoadFromAssembly(dll, path);
+                        MelonLogger.Msg($"Injected Library: {path}");
+                    }
+                    else
+                    {
+                        var newpath = Path.GetDirectoryName(path) + "\\" + Path.GetFileNameWithoutExtension(path) + "-Obfuscated" + Path.GetExtension(path);
+                        var obfuscatedll = Assembly.LoadFrom(newpath);
+                        MelonHandler.LoadFromAssembly(obfuscatedll, newpath);
+                        MelonLogger.Msg($"Injected Obfuscated Library: {path}");
+                    }
+
                 }
                 catch (Exception e)
                 {
@@ -153,9 +166,18 @@
                 string path = DebugMelonPaths[i];
                 try
                 {
-                    var dll = Assembly.LoadFile(path);
-                    MelonHandler.LoadFromAssembly(dll, path);
-                    MelonLogger.Msg($"Injected MelonMod/MelonPlugin: {path}");
+                    if (File.Exists(path))
+                    {
+                        var dll = Assembly.LoadFile(path);
+                        MelonHandler.LoadFromAssembly(dll, path);
+                        MelonLogger.Msg($"Injected MelonMod/MelonPlugin: {path}");
+                    }
+                    else
+                    {   var newpath = Path.GetDirectoryName(path) + "\\" + Path.GetFileNameWithoutExtension(path) + "-Obfuscated" + Path.GetExtension(path);
+                        var obfuscatedll = Assembly.LoadFile(newpath);
+                        MelonHandler.LoadFromAssembly(obfuscatedll, newpath);
+                        MelonLogger.Msg($"Injected Obfuscated MelonMod/MelonPlugin: {path}");
+                    }
                 }
                 catch (Exception e)
                 {

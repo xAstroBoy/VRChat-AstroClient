@@ -13,7 +13,7 @@
     using Time = UnityEngine.Time;
 
     [RegisterComponent]
-    public class PlayerWatcher : GameEventsBehaviour
+    internal class PlayerWatcher : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;

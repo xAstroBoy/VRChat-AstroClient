@@ -11,11 +11,11 @@
     using static AstroClient.Variables.CustomLists;
     using static AstroClient.Variables.GlobalLists;
 
-    public class LightControl : GameEvents
+    internal class LightControl : GameEvents
     {
         // TODO : Rewrite this Light Control Class (Borked ATM).
 
-        public static void UpdateFogSwitch()
+        internal static  void UpdateFogSwitch()
         {
             if (FogSwitch != null)
             {
@@ -23,7 +23,7 @@
             }
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             FogEnabled = RenderSettings.fog;
             UpdateFogSwitch();
@@ -46,7 +46,7 @@
             }
         }
 
-        public static void ToggleFog(bool value)
+        internal static  void ToggleFog(bool value)
         {
             if (!HasBackuppedRenderSettings)
             {
@@ -59,7 +59,7 @@
             UpdateFogSwitch();
         }
 
-        public static void SetRenderSettings()
+        internal static  void SetRenderSettings()
         {
             try
             {
@@ -108,7 +108,7 @@
             }
         }
 
-        public static void BackupRenderSettings()
+        internal static  void BackupRenderSettings()
         {
             if (HasOriginalRenderEditSettings && !HasBackuppedRenderSettings)
             {
@@ -149,7 +149,7 @@
             }
         }
 
-        public static void RestoreRenderSettings()
+        internal static  void RestoreRenderSettings()
         {
             if (!HasOriginalRenderEditSettings)
             {
@@ -206,7 +206,7 @@
             }
         }
 
-        public static void ToggleLightMaps(bool value)
+        internal static  void ToggleLightMaps(bool value)
         {
             AreLightMapsEnabled = value;
             if (!HasLightmapsStored)
@@ -225,7 +225,7 @@
             }
         }
 
-        public static void EnableLightMaps()
+        internal static  void EnableLightMaps()
         {
             foreach (var obj in RenderObjects.Where(obj => obj.gameObject.RenderisSaved()))
             {
@@ -234,7 +234,7 @@
             }
         }
 
-        public static void DisableLightMaps()
+        internal static  void DisableLightMaps()
         {
             for (int i = 0; i < RenderObjects.Count; i++)
             {
@@ -243,7 +243,7 @@
             }
         }
 
-        public static void FindLightmaps()
+        internal static  void FindLightmaps()
         {
             if (!HasLightmapsStored)
             {
@@ -269,7 +269,7 @@
             }
         }
 
-        public static void FullbrightByHead(bool value)
+        internal static  void FullbrightByHead(bool value)
         {
             if (Utils.LocalPlayer != null)
             {
@@ -310,7 +310,7 @@
 
         private static bool _isHeadLightActive;
 
-        public static bool IsHeadLightActive
+        internal static  bool IsHeadLightActive
         {
             get
             {
@@ -331,7 +331,7 @@
             }
         }
 
-        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var temp = new QMNestedButton(menu, x, y, "Light Menu", "Control Avatar & World Lights!", null, null, null, null, btnHalf);
 
@@ -386,7 +386,7 @@
 
         private static bool HasLightmapsStored { get; set; } = false;
         private static bool AreLightMapsEnabled { get; set; } = true;
-        public static QMSingleToggleButton FogSwitch { get; set; }
+        internal static  QMSingleToggleButton FogSwitch { get; set; }
 
         private static Light FullBrightLight { get; set; }
         private static QMSingleToggleButton ToggleFullbright { get; set; }

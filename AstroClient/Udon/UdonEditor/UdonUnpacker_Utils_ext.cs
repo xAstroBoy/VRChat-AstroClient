@@ -2,9 +2,9 @@
 {
     using VRC.Udon;
 
-    public static class UdonUnpacker_Utils_ext
+    internal static  class UdonUnpacker_Utils_ext
     {
-        public static DisassembledUdonBehaviour DisassembleUdonBehaviour(this UdonBehaviour udon)
+        internal static  DisassembledUdonBehaviour DisassembleUdonBehaviour(this UdonBehaviour udon)
         {
             return UdonUnpacker_Utils.DisassembleUdonBehaviour(udon);
         }

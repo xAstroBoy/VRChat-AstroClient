@@ -2,13 +2,13 @@
 {
     using System;
 
-    public class SpawnEmojiArgs : EventArgs
+    internal class SpawnEmojiArgs : EventArgs
     {
-        public VRCPlayer player;
+        internal VRCPlayer player;
 
-        public int Emoji;
+        internal int Emoji;
 
-        public SpawnEmojiArgs(VRCPlayer player, int emoji)
+        internal SpawnEmojiArgs(VRCPlayer player, int emoji)
         {
             this.player = player;
             this.Emoji = emoji;

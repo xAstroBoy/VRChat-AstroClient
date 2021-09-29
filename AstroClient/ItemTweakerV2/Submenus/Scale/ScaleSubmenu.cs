@@ -8,9 +8,9 @@
     using System;
     using UnityEngine;
 
-    public class ScaleSubmenu : Tweaker_Events
+    internal class ScaleSubmenu : Tweaker_Events
     {
-        public static void Init_ScaleSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static  void Init_ScaleSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var ScaleEditor = new QMNestedButton(menu, x, y, "Scale", "Scale Editor Menu!", null, null, null, null, btnHalf);
 
@@ -36,7 +36,7 @@
             ScaleEditZ = new QMSingleToggleButton(ScaleEditor, 2, 2, "Edit Z", new Action(() => { EditVectorZ = true; }), "Ignore Z", new Action(() => { EditVectorZ = false; }), "Make Inflater Edit Z", Color.green, Color.red, null, false, true);
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             if (CurrentScaleButton != null)
             {
@@ -48,25 +48,25 @@
             InflaterScaleMode = false;
         }
 
-        public static void IncreaseHoldItemScale(GameObject obj)
+        internal static  void IncreaseHoldItemScale(GameObject obj)
         {
             ScaleEditor.EditScaleSize(obj, true);
             UpdateScaleButton(obj);
         }
 
-        public static void RestoreOriginalScaleItem(GameObject obj)
+        internal static  void RestoreOriginalScaleItem(GameObject obj)
         {
             ScaleEditor.RestoreOriginalScale(obj);
             UpdateScaleButton(obj);
         }
 
-        public static void DecreaseHoldItemScale(GameObject obj)
+        internal static  void DecreaseHoldItemScale(GameObject obj)
         {
             ScaleEditor.EditScaleSize(obj, false);
             UpdateScaleButton(obj);
         }
 
-        public static void UpdateScaleButton(GameObject obj)
+        internal static  void UpdateScaleButton(GameObject obj)
         {
             if (obj != null)
             {
@@ -91,7 +91,7 @@
             }
         }
 
-        public static void UpdateCurrentAddValue()
+        internal static  void UpdateCurrentAddValue()
         {
             if (CurrentAddValue != null)
             {
@@ -103,39 +103,39 @@
             }
         }
 
-        public static void SetScaleValueToUse(float newval)
+        internal static  void SetScaleValueToUse(float newval)
         {
             ScaleValueToUse = newval;
             UpdateCurrentAddValue();
         }
 
-        public static void ResetDefValue()
+        internal static  void ResetDefValue()
         {
             ScaleValueToUse = 1f;
             UpdateCurrentAddValue();
         }
 
-        public static void ToggleInflaterEditor()
+        internal static  void ToggleInflaterEditor()
         {
             InflaterScaleMode = !InflaterScaleMode;
         }
 
-        public static QMSlider ScaleSlider;
+        internal static  QMSlider ScaleSlider;
 
-        public static QMSingleButton CurrentAddValue;
-        public static QMSingleButton GameObjectActualScale;
-        public static QMSingleButton CurrentScaleButton;
-        public static QMSingleToggleButton InflaterModeButton;
+        internal static  QMSingleButton CurrentAddValue;
+        internal static  QMSingleButton GameObjectActualScale;
+        internal static  QMSingleButton CurrentScaleButton;
+        internal static  QMSingleToggleButton InflaterModeButton;
 
-        public static QMSingleToggleButton ScaleEditX;
-        public static QMSingleToggleButton ScaleEditY;
-        public static QMSingleToggleButton ScaleEditZ;
+        internal static  QMSingleToggleButton ScaleEditX;
+        internal static  QMSingleToggleButton ScaleEditY;
+        internal static  QMSingleToggleButton ScaleEditZ;
 
-        public static float ScaleValueToUse = 0.1f;
+        internal static  float ScaleValueToUse = 0.1f;
 
         private static bool _InflaterScaleMode = false;
 
-        public static bool InflaterScaleMode
+        internal static  bool InflaterScaleMode
         {
             get
             {
@@ -155,7 +155,7 @@
         private static bool _EditVectorY = true;
         private static bool _EditVectorZ = true;
 
-        public static bool EditVectorX
+        internal static  bool EditVectorX
         {
             get
             {
@@ -171,7 +171,7 @@
             }
         }
 
-        public static bool EditVectorY
+        internal static  bool EditVectorY
         {
             get
             {
@@ -187,7 +187,7 @@
             }
         }
 
-        public static bool EditVectorZ
+        internal static  bool EditVectorZ
         {
             get
             {

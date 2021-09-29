@@ -9,7 +9,7 @@
 
     internal class SettingsMenuBtn
     {
-        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             // Main Settings Menu
             QMNestedButton sub = new QMNestedButton(menu, x, y, "Settings", "Settings", null, null, null, null, btnHalf);

@@ -2,11 +2,11 @@
 {
     using System;
 
-    public class BoolEventsArgs : EventArgs
+    internal class BoolEventsArgs : EventArgs
     {
-        public bool value;
+        internal bool value;
 
-        public BoolEventsArgs(bool value)
+        internal BoolEventsArgs(bool value)
         {
             this.value = value;
         }

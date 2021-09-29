@@ -7,7 +7,7 @@
 
     #endregion Imports
 
-    public class CMLabel : CMBase
+    internal class CMLabel : CMBase
     {
         public CMLabel(Transform parent, Vector2 position, string text, Color? color = null, int minTextSize = 12, int maxTextSize = 70) : base(parent, position)
         {

@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Startup.Hooks
 {
     #region Imports
 
@@ -8,8 +8,11 @@
     using AstroLibrary.Utility;
     using ExitGames.Client.Photon;
     using HarmonyLib;
+    using MelonLoader;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Reflection;
     using UnityEngine;
     using VRC;
@@ -17,25 +20,22 @@
 
     #endregion Imports
 
+
+    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class QuickMenuHooks : GameEvents
     {
 
 
-        public static event EventHandler<VRCPlayerEventArgs> Event_OnPlayerSelected;
+        internal static  event EventHandler<VRCPlayerEventArgs> Event_OnPlayerSelected;
 
 
-        private static HarmonyMethod GetPatch(string name)
+        internal class Patch
         {
-            return new HarmonyMethod(typeof(QuickMenuHooks).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
-        }
-
-        public class Patch
-        {
-            private static List<Patch> Patches = new List<Patch>();
+            internal static  List<Patch> Patches { get; set; } = new List<Patch>();
             public MethodInfo TargetMethod { get; set; }
             public HarmonyMethod PrefixMethod { get; set; }
             public HarmonyMethod PostfixMethod { get; set; }
-            public Harmony Instance { get; set; }
+            public HarmonyLib.Harmony Instance { get; set; }
 
             public Patch(MethodInfo targetMethod, HarmonyMethod Before = null, HarmonyMethod After = null)
             {
@@ -44,33 +44,42 @@
                     ModConsole.Error("[Patches] TargetMethod is NULL or Pre And PostFix are Null");
                     return;
                 }
-                Instance = new Harmony($"Patch:{targetMethod.DeclaringType.FullName}.{targetMethod.Name}");
+                Instance = new HarmonyLib.Harmony($"Patch:{targetMethod.DeclaringType.FullName}.{targetMethod.Name}");
                 TargetMethod = targetMethod;
                 PrefixMethod = Before;
                 PostfixMethod = After;
                 Patches.Add(this);
             }
 
-            public static async void DoPatches()
+            internal static  async void DoPatches()
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 for (int i = 0; i < Patches.Count; i++)
                 {
                     Patch patch = Patches[i];
                     try
                     {
-                        ModConsole.DebugLog($"[Patches] Patching {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {patch.PrefixMethod?.method.Name}{patch.PostfixMethod?.method.Name}");
-                        _ = patch.Instance.Patch(patch.TargetMethod, patch.PrefixMethod, patch.PostfixMethod);
+                        patch.Instance.Patch(patch.TargetMethod, patch.PrefixMethod, patch.PostfixMethod);
                     }
                     catch (Exception e)
                     {
                         ModConsole.Error($"[Patches] Failed At {patch.TargetMethod?.Name} | {patch.PrefixMethod?.method.Name} | with AstroClient {patch.PostfixMethod?.method.Name}");
+                        ModConsole.Error(e.Message);
                         ModConsole.ErrorExc(e);
                     }
+                    finally
+                    {
+                        ModConsole.DebugLog($"[Patches] Patched {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {patch.PrefixMethod?.method.Name}{patch.PostfixMethod?.method.Name}");
+                    }
                 }
-                ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods!");
+
+                stopwatch.Stop();
+                ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods: {stopwatch.ElapsedMilliseconds}ms");
             }
 
-            public static async void UnDoPatches()
+            internal static  async void UnDoPatches()
             {
                 for (int i = 0; i < Patches.Count; i++)
                 {
@@ -89,9 +98,21 @@
             }
         }
 
-        public override void ExecutePriorityPatches()
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        private static HarmonyMethod GetPatch(string name)
+        {
+            return new HarmonyMethod(typeof(QuickMenuHooks).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+        }
+
+        internal override void ExecutePriorityPatches()
+        {
+            MelonCoroutines.Start(Init());
+        }
+
+        private IEnumerator Init()
         {
             InitPatch();
+            yield break;
         }
 
 

@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Startup.Hooks
 {
     #region Imports
 
@@ -18,22 +18,31 @@
     using VRC.SDKBase;
 
     #endregion Imports
+    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
 
-    public class RPCEventHook : GameEvents
+    internal class RPCEventHook : GameEvents
     {
 
-        public static event System.EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
+        internal static  event System.EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
 
-        //public static
+        //internal static 
         private HarmonyLib.Harmony harmony;
 
-        public override void ExecutePriorityPatches()
+        internal override void ExecutePriorityPatches()
         {
             MiscUtils.DelayFunction(1f, new System.Action(() =>
             {
                 InitPatches();
             }));
         }
+
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        private static HarmonyMethod GetPatch(string name)
+        {
+            return new HarmonyMethod(typeof(RPCEventHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+        }
+
+
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
         public void InitPatches()
@@ -45,7 +54,7 @@
                     harmony = new HarmonyLib.Harmony(BuildInfo.Name + " RPCEventHook");
                 }
 
-                _ = harmony.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), new HarmonyMethod(typeof(RPCEventHook).GetMethod(nameof(OnRPCEvent), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
+                _ = harmony.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), GetPatch(nameof(OnRPCEvent)), null, null);
                 ModConsole.DebugLog("RPC Hooks Done");
             }
             catch

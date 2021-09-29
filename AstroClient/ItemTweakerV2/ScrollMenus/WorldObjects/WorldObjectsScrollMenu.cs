@@ -10,9 +10,9 @@
     using UnityEngine;
     using VRC;
 
-    public class WorldObjectsScrollMenu : Tweaker_Events
+    internal class WorldObjectsScrollMenu : Tweaker_Events
     {
-        public static void Init_WorldObjectScrollMenu(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static  void Init_WorldObjectScrollMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Select W.Objects", "Select World Objects to edit", null, null, null, null, btnHalf);
             var scroll = new QMScrollMenu(menu);
@@ -53,7 +53,7 @@
             });
         }
 
-        public static void AddToWorldUtilsMenu(GameObject obj)
+        internal static  void AddToWorldUtilsMenu(GameObject obj)
         {
             if (obj != null)
             {
@@ -64,12 +64,12 @@
             }
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             WorldObjects.Clear();
         }
 
-        public override void On_New_GameObject_Selected(GameObject obj)
+        internal override void On_New_GameObject_Selected(GameObject obj)
         {
             if (TeleportToTarget != null)
             {
@@ -83,7 +83,7 @@
             }
         }
 
-        public override void OnTargetSet(Player player)
+        internal override void OnTargetSet(Player player)
         {
             if (TeleportToTarget != null)
             {
@@ -92,9 +92,9 @@
             }
         }
 
-        public static QMSingleButton TeleportToMe;
-        public static QMSingleButton TeleportToTarget;
+        internal static  QMSingleButton TeleportToMe;
+        internal static  QMSingleButton TeleportToTarget;
 
-        public static List<GameObject> WorldObjects = new List<GameObject>();
+        internal static  List<GameObject> WorldObjects = new List<GameObject>();
     }
 }

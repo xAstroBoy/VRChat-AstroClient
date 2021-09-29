@@ -10,13 +10,13 @@
     {
         private static bool isReady = false;
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             isReady = false;
             MiscUtils.DelayFunction(5, () => { isReady = true; });
         }
 
-        public override void OnPhotonJoined(Photon.Realtime.Player player)
+        internal override void OnPhotonJoined(Photon.Realtime.Player player)
         {
             if (player == null) throw new ArgumentNullException();
             ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Joined!");
@@ -27,7 +27,7 @@
             }
         }
 
-        public override void OnPhotonLeft(Photon.Realtime.Player player)
+        internal override void OnPhotonLeft(Photon.Realtime.Player player)
         {
             if (player == null) { throw new ArgumentNullException(); }
             ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Left!");

@@ -10,7 +10,7 @@
 
     internal class AvatarModifier : GameEvents
     {
-        public static void InitQMMenu(QMTabMenu tab, float x, float y, bool btnHalf)
+        internal static  void InitQMMenu(QMTabMenu tab, float x, float y, bool btnHalf)
         {
             var tmp = new QMNestedButton(tab, x, y, "Avatar Modifiers", "Modify Other's avatars", null, null, null, null, btnHalf);
             _ = new QMSingleButton(tmp, 5, 0, "Reload All Avatars", () => { MelonCoroutines.Start(AvatarUtils.ReloadAllAvatars()); }, "Reloads All avatars", null, null, true);
@@ -21,7 +21,7 @@
             LewdifierUtils.LewdifyLists.SetResizeTextForBestFit(true);
         }
 
-        public static void InitUserMenu(float x, float y, bool btnHalf)
+        internal static  void InitUserMenu(float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton("UserInteractMenu", x, y, "Avatar Utilities", "AstroClient Avatar utilities", null, null, null, null, btnHalf);
             _ = new QMSingleButton(menu, 1, 0, "Dump Avatar Transforms", () => { QuickMenuUtils.SelectedPlayer.Avatar_Transform_Dumper(); }, "Dump Avatar Transforms", null, null, true);
@@ -34,7 +34,7 @@
             _ = new QMSingleButton(menu, 2, 0.5f, "Remove Mask Remover", () => { QuickMenuUtils.SelectedPlayer.Add_MaskRemover(); }, "Remove The Mask Remover on this user.", null, null, true);
         }
 
-        public override void OnPlayerJoined(Player player)
+        internal override void OnPlayerJoined(Player player)
         {
             if (player == null) throw new ArgumentNullException();
             if (player != Utils.LocalPlayer.GetPlayer())
@@ -50,11 +50,11 @@
             }
         }
 
-        public static QMSingleToggleButton ForceLewdifyToggle { get; set; }
+        internal static  QMSingleToggleButton ForceLewdifyToggle { get; set; }
 
         private static bool _ForceLewdify = false;
 
-        public static bool ForceLewdify
+        internal static  bool ForceLewdify
         {
             get
             {
@@ -70,11 +70,11 @@
             }
         }
 
-        public static QMSingleToggleButton LewdifyToggle { get; set; }
+        internal static  QMSingleToggleButton LewdifyToggle { get; set; }
 
         private static bool _Lewdify = false;
 
-        public static bool Lewdify
+        internal static  bool Lewdify
         {
             get
             {
@@ -116,11 +116,11 @@
             }
         }
 
-        public static QMSingleToggleButton RemoveMasksToggle { get; set; }
+        internal static  QMSingleToggleButton RemoveMasksToggle { get; set; }
 
         private static bool _MaskDeleter = false;
 
-        public static bool MaskDeleter
+        internal static  bool MaskDeleter
         {
             get
             {

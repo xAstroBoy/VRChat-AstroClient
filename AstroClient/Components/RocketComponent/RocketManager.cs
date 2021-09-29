@@ -13,7 +13,7 @@
     using Color = System.Drawing.Color;
 
     [RegisterComponent]
-    public class RocketManager : GameEventsBehaviour
+    internal class RocketManager : GameEventsBehaviour
     {
         #region Internal
 
@@ -48,7 +48,7 @@
 
         #region Module
 
-        public static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> RocketBehaviours;
+        internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> RocketBehaviours;
 
         public void Start()
         {
@@ -56,7 +56,7 @@
             Instance = this;
         }
 
-        public static void MakeInstance()
+        internal static  void MakeInstance()
         {
             if (Instance == null)
             {
@@ -77,11 +77,11 @@
             }
         }
 
-        public static void Update()
+        internal static  void Update()
         {
         }
 
-        public static void AddObject(GameObject obj, bool ShouldFloat, bool HasRelativeForce = true)
+        internal static  void AddObject(GameObject obj, bool ShouldFloat, bool HasRelativeForce = true)
         {
             if (obj != null)
             {
@@ -110,7 +110,7 @@
             }
         }
 
-        public static void RemoveObject(GameObject obj)
+        internal static  void RemoveObject(GameObject obj)
         {
             if (Rockets.Contains(obj))
             {
@@ -118,7 +118,7 @@
             }
         }
 
-        public static void IncreaseObjTimer(GameObject obj)
+        internal static  void IncreaseObjTimer(GameObject obj)
         {
             var TuneTime = obj.GetComponent<RocketObject>();
             if (TuneTime != null)
@@ -127,7 +127,7 @@
             }
         }
 
-        public static void DecreaseObjTimer(GameObject obj)
+        internal static  void DecreaseObjTimer(GameObject obj)
         {
             var TuneTime = obj.GetComponent<RocketObject>();
             if (TuneTime != null)
@@ -136,7 +136,7 @@
             }
         }
 
-        public static void UpdateButton(GameObject obj)
+        internal static  void UpdateButton(GameObject obj)
         {
             var Timer = obj.GetComponent<RocketObject>();
             if (Timer != null)
@@ -149,7 +149,7 @@
             }
         }
 
-        public static void KillRockets()
+        internal static  void KillRockets()
         {
             foreach (var obj in Rockets)
             {
@@ -162,7 +162,7 @@
             Rockets.Clear();
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Rockets.Clear();
             ClearList();
@@ -172,25 +172,25 @@
             }
         }
 
-        public static void Register(RocketObject RocketBehaviour)
+        internal static  void Register(RocketObject RocketBehaviour)
         {
             RocketBehaviours.Add(RocketBehaviour);
         }
 
-        public static void Deregister(RocketObject RocketBehaviour)
+        internal static  void Deregister(RocketObject RocketBehaviour)
         {
             _ = RocketBehaviours.Remove(RocketBehaviour);
         }
 
-        public static void ClearList()
+        internal static  void ClearList()
         {
             RocketBehaviours.Clear();
         }
 
-        public static List<GameObject> Rockets = new List<GameObject>();
+        internal static  List<GameObject> Rockets = new List<GameObject>();
 
-        public static RocketManager Instance { get; set; }
-        public static QMSingleButton RocketTimer;
+        internal static  RocketManager Instance { get; set; }
+        internal static  QMSingleButton RocketTimer;
 
         #endregion Module
     }

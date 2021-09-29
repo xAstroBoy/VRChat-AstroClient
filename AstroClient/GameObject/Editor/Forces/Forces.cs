@@ -5,10 +5,10 @@
     using AstroLibrary.Utility;
     using UnityEngine;
 
-    public class Forces
+    internal class Forces
     {
         // TODO: Get rid of these two , lazy rn.
-        public static float Force
+        internal static  float Force
         {
             get
             {
@@ -16,7 +16,7 @@
             }
         }
 
-        public static float SpinForce
+        internal static  float SpinForce
         {
             get
             {
@@ -24,7 +24,7 @@
             }
         }
 
-        public static void ApplyBackwardsForce(GameObject obj, bool TakeOwnership = true)
+        internal static  void ApplyBackwardsForce(GameObject obj, bool TakeOwnership = true)
         {
             if (obj != null)
             {
@@ -40,7 +40,7 @@
             }
         }
 
-        public static void ApplyForce(GameObject obj, float x, float y, float z, bool TakeOwnership = true)
+        internal static  void ApplyForce(GameObject obj, float x, float y, float z, bool TakeOwnership = true)
         {
             if (obj != null)
             {
@@ -56,7 +56,7 @@
             }
         }
 
-        public static void ApplyFowardForce(GameObject obj, bool TakeOwnership = true)
+        internal static  void ApplyFowardForce(GameObject obj, bool TakeOwnership = true)
         {
             if (obj != null)
             {
@@ -72,7 +72,7 @@
             }
         }
 
-        public static void ApplyLeftForce(GameObject obj, bool TakeOwnership = true)
+        internal static  void ApplyLeftForce(GameObject obj, bool TakeOwnership = true)
         {
             if (obj != null)
             {
@@ -88,7 +88,7 @@
             }
         }
 
-        public static void ApplyRelativeForce(GameObject obj, float x, float y, float z, bool TakeOwnership = true)
+        internal static  void ApplyRelativeForce(GameObject obj, float x, float y, float z, bool TakeOwnership = true)
         {
             if (obj != null)
             {
@@ -104,7 +104,7 @@
             }
         }
 
-        public static void ApplyRightForce(GameObject obj, bool TakeOwnership = true)
+        internal static  void ApplyRightForce(GameObject obj, bool TakeOwnership = true)
         {
             if (obj != null)
             {
@@ -120,7 +120,7 @@
             }
         }
 
-        public static void PullObject(GameObject obj, bool TakeOwnership = true)
+        internal static  void PullObject(GameObject obj, bool TakeOwnership = true)
         {
             if (obj != null)
             {
@@ -136,7 +136,7 @@
             }
         }
 
-        public static void PushObject(GameObject obj, bool TakeOwnership = true)
+        internal static  void PushObject(GameObject obj, bool TakeOwnership = true)
         {
             if (obj != null)
             {
@@ -152,7 +152,7 @@
             }
         }
 
-        public static void RemoveAllObjConstraints(GameObject obj)
+        internal static  void RemoveAllObjConstraints(GameObject obj)
         {
             var itemedit = obj.GetOrAddComponent<RigidBodyController>();
             if (itemedit != null)
@@ -165,7 +165,7 @@
             }
         }
 
-        public static void RemoveConstraint(GameObject obj, RigidbodyConstraints constraint)
+        internal static  void RemoveConstraint(GameObject obj, RigidbodyConstraints constraint)
         {
             var itemedit = obj.GetOrAddComponent<RigidBodyController>();
 
@@ -182,7 +182,7 @@
             }
         }
 
-        public static void RemoveForces(GameObject obj, bool TakeOwnership = true)
+        internal static  void RemoveForces(GameObject obj, bool TakeOwnership = true)
         {
             if (obj != null)
             {
@@ -203,7 +203,7 @@
             }
         }
 
-        public static void SpinObject(GameObject obj, float x, float y, float z, bool TakeOwnership = true)
+        internal static  void SpinObject(GameObject obj, float x, float y, float z, bool TakeOwnership = true)
         {
             if (obj != null)
             {
@@ -219,7 +219,7 @@
             }
         }
 
-        public static void SpinObjectX(GameObject obj, bool TakeOwnership = true)
+        internal static  void SpinObjectX(GameObject obj, bool TakeOwnership = true)
         {
             if (obj != null)
             {
@@ -231,7 +231,7 @@
             }
         }
 
-        public static void SpinObjectY(GameObject obj, bool TakeOwnership = true)
+        internal static  void SpinObjectY(GameObject obj, bool TakeOwnership = true)
         {
             if (obj != null)
             {
@@ -247,7 +247,7 @@
             }
         }
 
-        public static void SpinObjectZ(GameObject obj, bool TakeOwnership = true)
+        internal static  void SpinObjectZ(GameObject obj, bool TakeOwnership = true)
         {
             if (obj != null)
             {

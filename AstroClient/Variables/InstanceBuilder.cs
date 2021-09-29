@@ -4,11 +4,11 @@
     using UnityEngine;
     using Color = System.Drawing.Color;
 
-    public static class InstanceBuilder
+    internal static  class InstanceBuilder
     {
-        public static GameObject InstanceHolder;
+        internal static  GameObject InstanceHolder;
 
-        public static void BuildInstanceContainer()
+        internal static  void BuildInstanceContainer()
         {
             ModConsole.Log("Generating Instance Holder", Color.LimeGreen);
             InstanceHolder = new GameObject
@@ -18,7 +18,7 @@
             Object.DontDestroyOnLoad(InstanceHolder);
         }
 
-        public static GameObject GetInstanceHolder(string instancename = "INSTANCE_OBJECT_ADDED")
+        internal static  GameObject GetInstanceHolder(string instancename = "INSTANCE_OBJECT_ADDED")
         {
             if (InstanceHolder != null)
             {

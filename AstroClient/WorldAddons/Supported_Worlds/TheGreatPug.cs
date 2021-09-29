@@ -6,9 +6,9 @@
     using AstroLibrary.Finder;
     using System.Collections.Generic;
 
-    public class TheGreatPug : GameEvents
+    internal class TheGreatPug : GameEvents
     {
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.TheGreatPug)
             {

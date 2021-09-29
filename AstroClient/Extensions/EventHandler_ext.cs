@@ -8,9 +8,9 @@
 
     #endregion Imports
 
-    public static class Eventhandler_ext
+    internal static  class Eventhandler_ext
     {
-        public static void SafetyRaise(this EventHandler eh)
+        internal static  void SafetyRaise(this EventHandler eh)
         {
             if (eh == null)
                 return;
@@ -34,7 +34,7 @@
             }
         }
 
-        public static void SafetyRaise<T>(this EventHandler<T> eh, T e) where T : EventArgs
+        internal static  void SafetyRaise<T>(this EventHandler<T> eh, T e) where T : EventArgs
         {
             if (eh == null)
                 return;

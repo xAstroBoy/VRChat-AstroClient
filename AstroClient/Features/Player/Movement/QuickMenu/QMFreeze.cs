@@ -4,14 +4,14 @@
     using UnityEngine;
     using VRC.SDKBase;
 
-    public class QMFreeze : GameEvents
+    internal class QMFreeze : GameEvents
     {
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Frozen = false;
         }
 
-        public override void OnUpdate()
+        internal override void OnUpdate()
         {
             if (FreezePlayerOnQMOpen)
             {
@@ -26,7 +26,7 @@
             }
         }
 
-        public override void OnQuickMenuOpen()
+        internal override void OnQuickMenuOpen()
         {
             if (FreezePlayerOnQMOpen)
             {
@@ -41,7 +41,7 @@
             }
         }
 
-        public override void OnQuickMenuClose()
+        internal override void OnQuickMenuClose()
         {
             if (FreezePlayerOnQMOpen)
             {
@@ -56,7 +56,7 @@
             }
         }
 
-        public static void Unfreeze()
+        internal static  void Unfreeze()
         {
             if (Frozen)
             {
@@ -72,7 +72,7 @@
             }
         }
 
-        public static void Freeze()
+        internal static  void Freeze()
         {
             if (Networking.LocalPlayer != null)
             {
@@ -101,7 +101,7 @@
             }
         }
 
-        public static bool FreezePlayerOnQMOpen
+        internal static  bool FreezePlayerOnQMOpen
         {
             get
             {
@@ -117,8 +117,8 @@
             }
         }
 
-        public static QMToggleButton FreezePlayerOnQMOpenToggle;
-        public static bool Frozen;
+        internal static  QMToggleButton FreezePlayerOnQMOpenToggle;
+        internal static  bool Frozen;
 
         private static Vector3 originalGravity
         {

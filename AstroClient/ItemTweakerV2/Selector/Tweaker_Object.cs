@@ -4,9 +4,9 @@
     using AstroLibrary.Finder;
     using UnityEngine;
 
-    public class Tweaker_Object
+    internal class Tweaker_Object
     {
-        public static GameObject SetObjectToEditWithPath(string objpath)
+        internal static  GameObject SetObjectToEditWithPath(string objpath)
         {
             var obj = GameObjectFinder.Find(objpath);
             if (obj != null)
@@ -21,7 +21,7 @@
             }
         }
 
-        public static void SetObjectToEdit(GameObject obj)
+        internal static  void SetObjectToEdit(GameObject obj)
         {
             if (LockItem)
             {
@@ -30,7 +30,7 @@
             Tweaker_Selector.SelectedObject = obj;
         }
 
-        public static GameObject GetGameObjectToEdit()
+        internal static  GameObject GetGameObjectToEdit()
         {
             try
             {
@@ -56,7 +56,7 @@
 
         private static bool _LockItem;
 
-        public static bool LockItem
+        internal static  bool LockItem
         {
             get
             {
@@ -76,7 +76,7 @@
             }
         }
 
-        public static string GetObjectToEditName
+        internal static  string GetObjectToEditName
         {
             get
             {

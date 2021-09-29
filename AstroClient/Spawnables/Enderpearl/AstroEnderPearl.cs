@@ -4,11 +4,11 @@ using VRC.SDKBase;
 
 namespace AstroClient
 {
-    public class AstroEnderPearl
+    internal class AstroEnderPearl
     {
         private static GameObject ENDER;
 
-        public static void SpawnEnderPearl()
+        internal static  void SpawnEnderPearl()
         {
             if (ENDER != null)
             {

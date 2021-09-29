@@ -8,7 +8,7 @@
     using UnityEngine;
 
     [RegisterComponent]
-    public class ESP_VRCInteractable : GameEventsBehaviour
+    internal class ESP_VRCInteractable : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 

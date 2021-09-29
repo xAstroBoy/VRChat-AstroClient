@@ -3,15 +3,15 @@
     using AstroLibrary.Finder;
     using UnityEngine;
 
-    public class VRChatObjects_Old : GameEvents
+    internal class VRChatObjects_Old : GameEvents
     {
-        public override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnUiManagerInit()
         {
             _ = AvatarPreviewBase_FallbackAvatar;
             _ = _AvatarPreviewBase_MainAvatar;
         }
 
-        public override void OnLateUpdate()
+        internal override void OnLateUpdate()
         {
             if (ScreenFade != null)
             {
@@ -24,7 +24,7 @@
 
         private static GameObject _ScreenFade;
 
-        public static GameObject ScreenFade
+        internal static  GameObject ScreenFade
         {
             get
             {
@@ -39,7 +39,7 @@
 
         private static Transform _AvatarPreviewBase_MainAvatar;
 
-        public static Transform AvatarPreviewBase_MainAvatar
+        internal static  Transform AvatarPreviewBase_MainAvatar
         {
             get
             {
@@ -54,7 +54,7 @@
 
         private static Transform _AvatarPreviewBase_FallbackAvatar;
 
-        public static Transform AvatarPreviewBase_FallbackAvatar
+        internal static  Transform AvatarPreviewBase_FallbackAvatar
         {
             get
             {

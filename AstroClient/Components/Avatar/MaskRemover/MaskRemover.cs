@@ -11,7 +11,7 @@
     using VRC;
 
     [RegisterComponent]
-    public class MaskRemover : GameEventsBehaviour
+    internal class MaskRemover : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
@@ -45,7 +45,7 @@
             }
         }
 
-        public override void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
+        internal override void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
         {
             if (Avatar != null && VRCAvatarManager.prop_VRC_AvatarDescriptor_0 != null)
             {

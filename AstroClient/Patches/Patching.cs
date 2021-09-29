@@ -23,7 +23,7 @@
 //            return new HarmonyMethod(typeof(Patching).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
 //        }
 
-//        public class Patch
+//        internal class Patch
 //        {
 //            private static List<Patch> Patches = new List<Patch>();
 //            public MethodInfo TargetMethod { get; set; }
@@ -45,7 +45,7 @@
 //                Patches.Add(this);
 //            }
 
-//            public static async void DoPatches()
+//            internal static  async void DoPatches()
 //            {
 //                foreach (var patch in Patches)
 //                {
@@ -63,7 +63,7 @@
 //                ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods!");
 //            }
 
-//            public static async void UnDoPatches()
+//            internal static  async void UnDoPatches()
 //            {
 //                foreach (var patch in Patches)
 //                {
@@ -81,7 +81,7 @@
 //            }
 //        }
 
-//        public override void ExecutePriorityPatches()
+//        internal override void ExecutePriorityPatches()
 //        {
 //            InitPatch();
 //        }

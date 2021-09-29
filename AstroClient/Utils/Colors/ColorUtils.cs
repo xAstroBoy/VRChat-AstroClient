@@ -6,9 +6,9 @@
     using System.Web.Mvc;
     using UnityEngine;
 
-    public class ColorUtils : GameEvents
+    internal class ColorUtils : GameEvents
     {
-        public static UnityEngine.Color HexToColor(string hexColor)
+        internal static  UnityEngine.Color HexToColor(string hexColor)
         {
             if (hexColor.IndexOf('#') != -1)
             {
@@ -24,18 +24,18 @@
 
 
 
-        public static string ColorToHex(System.Drawing.Color color)
+        internal static  string ColorToHex(System.Drawing.Color color)
         {
             return ColorTranslator.ToHtml(System.Drawing.Color.FromArgb(color.ToArgb()));
         }
 
-        public static UnityEngine.Color ToUnityEngineColor(System.Drawing.Color color)
+        internal static  UnityEngine.Color ToUnityEngineColor(System.Drawing.Color color)
         {
             return HexToColor(ColorToHex(color));
         }
 
 
-        public static UnityEngine.Color GenerateHSVColor()
+        internal static  UnityEngine.Color GenerateHSVColor()
         {
            UnityEngine.Color color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
             if (GeneratedColors != null)
@@ -52,7 +52,7 @@
             return color;
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             GeneratedColors.Clear();
         }

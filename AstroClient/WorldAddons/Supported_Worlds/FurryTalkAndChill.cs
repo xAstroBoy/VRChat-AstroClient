@@ -8,9 +8,9 @@
     using AstroClient.Udon;
     using AstroLibrary.Utility;
     using AstroClient.Components;
-    public class FurryTalkAndChill : GameEvents
+    internal class FurryTalkAndChill : GameEvents
     {
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.Furry_Talk_And_Chill)
             {

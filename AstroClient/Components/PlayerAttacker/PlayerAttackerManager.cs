@@ -19,7 +19,7 @@
 
     using static AstroClient.Variables.InstanceBuilder;
 
-    public class PlayerAttackerManager : GameEventsBehaviour
+    internal class PlayerAttackerManager : GameEventsBehaviour
     {
         #region Internal
 
@@ -54,7 +54,7 @@
 
         #region Module
 
-        public static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> PlayerAttackerBehaviors;
+        internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> PlayerAttackerBehaviors;
 
         public void Start()
         {
@@ -62,7 +62,7 @@
             Instance = this;
         }
 
-        public static void MakeInstance()
+        internal static  void MakeInstance()
         {
             if (Instance == null)
             {
@@ -81,11 +81,11 @@
             }
         }
 
-        public static void Update()
+        internal static  void Update()
         {
         }
 
-        public static void AddObject(GameObject obj, Player player)
+        internal static  void AddObject(GameObject obj, Player player)
         {
             if (obj == null)
             {
@@ -125,7 +125,7 @@
             }
         }
 
-        public static void RemovePickupsAttackerBoundToPlayer(APIUser player)
+        internal static  void RemovePickupsAttackerBoundToPlayer(APIUser player)
         {
             int i = 0;
             if (player != null)
@@ -150,7 +150,7 @@
             }
         }
 
-        public static void RemoveAttacker(GameObject obj)
+        internal static  void RemoveAttacker(GameObject obj)
         {
             if (obj != null)
             {
@@ -162,7 +162,7 @@
             }
         }
 
-        public static void RemoveSelf(GameObject obj)
+        internal static  void RemoveSelf(GameObject obj)
         {
             if (OriginalPlayerAttackers.Contains(obj))
             {
@@ -170,7 +170,7 @@
             }
         }
 
-        public static void KillPlayerAttackers()
+        internal static  void KillPlayerAttackers()
         {
             foreach (var obj in GetAllAttackers())
             {
@@ -192,7 +192,7 @@
             ClearList();
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             OriginalPlayerAttackers.Clear();
             if (SnapshotPlayerAttackers != null)
@@ -202,22 +202,22 @@
             ClearList();
         }
 
-        public static void Register(PlayerAttacker PlayerAttackerBehaviour)
+        internal static  void Register(PlayerAttacker PlayerAttackerBehaviour)
         {
             PlayerAttackerBehaviors.Add(PlayerAttackerBehaviour);
         }
 
-        public static void Deregister(PlayerAttacker PlayerAttackerBehaviour)
+        internal static  void Deregister(PlayerAttacker PlayerAttackerBehaviour)
         {
             _ = PlayerAttackerBehaviors.Remove(PlayerAttackerBehaviour);
         }
 
-        public static void ClearList()
+        internal static  void ClearList()
         {
             PlayerAttackerBehaviors.Clear();
         }
 
-        public static List<GameObject> GetAllAttackers()
+        internal static  List<GameObject> GetAllAttackers()
         {
             SnapshotPlayerAttackers = new List<GameObject>();
             SnapshotPlayerAttackers = OriginalPlayerAttackers.ToList();
@@ -227,7 +227,7 @@
         private static List<GameObject> OriginalPlayerAttackers = new List<GameObject>();
 
         private static List<GameObject> SnapshotPlayerAttackers;
-        public static PlayerAttackerManager Instance { get; set; }
+        internal static  PlayerAttackerManager Instance { get; set; }
 
         #endregion Module
     }

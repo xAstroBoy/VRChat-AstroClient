@@ -7,9 +7,9 @@
     using System;
     using UnityEngine;
 
-    public static class MapEditorMenu
+    internal static  class MapEditorMenu
     {
-        public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Map Editor Utils", "Map Editor", null, null, null, null, btnHalf);
             _ = new QMSingleButton(menu, 1, 0, "Spawn Empty Button", new Action(() =>
@@ -29,7 +29,7 @@
             _ = new QMSingleButton(menu, 2, 0, "Toggles all Map Items Active", () => { EnableAllObjects(); }, "Sets Map objects active, will Break Instance Locally..", null, Color.red, true);
         }
 
-        public static void EnableAllObjects()
+        internal static  void EnableAllObjects()
         {
             System.Collections.Generic.List<GameObject> list1 = GameObjectFinder.RootSceneObjects_WithoutAvatars;
             for (int i1 = 0; i1 < list1.Count; i1++)

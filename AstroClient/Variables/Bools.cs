@@ -2,7 +2,7 @@
 {
     using AstroLibrary.Console;
 
-    public class Bools
+    internal class Bools
     {
         internal static bool AntiPortal;
 

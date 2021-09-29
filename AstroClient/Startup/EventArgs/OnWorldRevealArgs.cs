@@ -3,16 +3,16 @@
     using System;
     using System.Collections.Generic;
 
-    public class OnWorldRevealArgs : EventArgs
+    internal class OnWorldRevealArgs : EventArgs
     {
-        public string ID;
-        public string Name;
-        public List<string> WorldTags;
-        public string AuthorName;
-        public string AssetUrl;
+        internal string ID;
+        internal string Name;
+        internal List<string> WorldTags;
+        internal string AuthorName;
+        internal string AssetUrl;
         
 
-        public OnWorldRevealArgs(string ID, string Name, List<string> WorldTags, string AuthorName, string AssetUrl)
+        internal OnWorldRevealArgs(string ID, string Name, List<string> WorldTags, string AuthorName, string AssetUrl)
         {
             this.ID = ID;
             this.Name = Name;

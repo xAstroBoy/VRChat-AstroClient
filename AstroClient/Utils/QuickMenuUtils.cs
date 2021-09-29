@@ -2,23 +2,23 @@
 {
     using UnityEngine;
 
-    public class QuickMenuUtils_Old : GameEvents
+    internal class QuickMenuUtils_Old : GameEvents
     {
-        public static void SetQuickMenuBackGround(float x, float y)
+        internal static  void SetQuickMenuBackGround(float x, float y)
         {
             Transform transform = QuickMenu.prop_QuickMenu_0.transform.Find("QuickMenu_NewElements/_Background");
             RectTransform rectTransform = transform.GetComponent<RectTransform>();
             rectTransform.sizeDelta += new Vector2(x * 840, y * 840);
         }
 
-        public static void SetQuickMenuCollider(float x, float y)
+        internal static  void SetQuickMenuCollider(float x, float y)
         {
             QuickMenuCollider.size += new Vector3(x * 840, y * 840);
             CorrectedSize = QuickMenuCollider.size;
             HasQuickMenuBoxColliderCalled = true;
         }
 
-        public override void OnUpdate()
+        internal override void OnUpdate()
         {
             if (HasQuickMenuBoxColliderCalled)
             {
@@ -40,7 +40,7 @@
 
         private static BoxCollider _QuickMenuCollider;
 
-        public static BoxCollider QuickMenuCollider
+        internal static  BoxCollider QuickMenuCollider
         {
             get
             {
@@ -62,7 +62,7 @@
             }
         }
 
-        public static bool IsQuickMenuOpen
+        internal static  bool IsQuickMenuOpen
         {
             get
             {

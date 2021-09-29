@@ -10,19 +10,28 @@
     using System.Runtime.InteropServices;
     using UnhollowerBaseLib;
 
-    public class OnWorldRevealHook : GameEvents
-    {
-        public static event EventHandler<OnWorldRevealArgs> Event_OnWorldReveal;
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
+
+    internal class OnWorldRevealHook : GameEvents
+    {
+        internal static  event EventHandler<OnWorldRevealArgs> Event_OnWorldReveal;
+
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             if (Bools.IsDeveloper)
                 ModConsole.DebugLog($"Scene Name: {sceneName}");
         }
 
-        public override void ExecutePriorityPatches()
+        internal override void ExecutePriorityPatches()
         {
             HookFadeTo();
+        }
+
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        private static IntPtr GetPointerPatch(string patch)
+        {
+            return typeof(OnWorldRevealHook).GetMethod(patch, BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer();
         }
 
         private static void HookFadeTo()
@@ -31,7 +40,7 @@
             {
                 ModConsole.DebugLog("Hooking FadeTo");
                 var originalMethod = *(IntPtr*)(IntPtr)UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(typeof(VRCUiManager).GetMethod(nameof(VRCUiManager.Method_Public_Void_String_Single_Action_0))).GetValue(null);
-                MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), typeof(OnWorldRevealHook).GetMethod(nameof(FadeToPatch), BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer());
+                MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), GetPointerPatch(nameof(FadeToPatch)));
                 _fadeToDelegate = Marshal.GetDelegateForFunctionPointer<FadeToDelegate>(originalMethod);
                 if (_fadeToDelegate != null)
                 {

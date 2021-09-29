@@ -11,9 +11,9 @@
 
     #endregion Imports
 
-    public static class MovementMenu
+    internal static  class MovementMenu
     {
-        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var temp = new QMNestedButton(menu, x, y, "Movement Options", "Control Your Movements", null, null, null, null, btnHalf);
             JumpModifier.UnlimitedJumpToggle = new QMSingleToggleButton(temp, 1, 0, "Unlimited Jumps", new Action(() => { JumpModifier.IsUnlimitedJumpActive = true; }), "Unlimited Jumps OFF", new Action(() => { JumpModifier.IsUnlimitedJumpActive = false; }), "Allows you to Unlimited jump", Color.green, Color.red, null, false, true);

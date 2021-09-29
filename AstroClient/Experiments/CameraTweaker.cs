@@ -9,9 +9,9 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class CameraTweaker : GameEvents
+    internal class CameraTweaker : GameEvents
     {
-        public static void CheckCamera()
+        internal static  void CheckCamera()
         {
             if (userCameraParent != null)
             {
@@ -36,7 +36,7 @@
             }
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             CheckCamera();
             if (UserCamera != null)
@@ -63,7 +63,7 @@
             }
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             CheckCamera(); // Just in case it Loses the Flags.
             if (IsCameraFree)
@@ -84,7 +84,7 @@
             }
         }
 
-        public static void InitQMMenu(QMTabMenu tab, float x, float y, bool btnHalf)
+        internal static  void InitQMMenu(QMTabMenu tab, float x, float y, bool btnHalf)
         {
             var tmp = new QMNestedButton(tab, x, y, "Camera Experiments", "Edit Camera Behaviours", null, null, null, null, btnHalf);
             _ = new QMSingleButton(tmp, 1, 0, "Set Camera (Tweaker)", () => { UserCamera.gameObject.Set_As_Object_To_Edit(); CheckCamera(); }, "Sets Camera on the tweaker", null, null, true);
@@ -95,7 +95,7 @@
             RespawnOnLevelChangeToggle.SetResizeTextForBestFit(true);
         }
 
-        public static Transform UserCamera
+        internal static  Transform UserCamera
         {
             get
             {
@@ -123,7 +123,7 @@
             }
         }
 
-        public static Transform ViewFinder
+        internal static  Transform ViewFinder
         {
             get
             {
@@ -143,7 +143,7 @@
             }
         }
 
-        public static Transform userCameraParent
+        internal static  Transform userCameraParent
         {
             get
             {

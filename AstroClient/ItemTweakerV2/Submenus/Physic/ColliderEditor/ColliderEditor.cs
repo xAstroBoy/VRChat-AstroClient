@@ -10,7 +10,7 @@
 
     internal class ColliderEditor : Tweaker_Events
     {
-        public static void Init_ColliderEditor(QMNestedButton main, float x, float y, bool btnhalf)
+        internal static  void Init_ColliderEditor(QMNestedButton main, float x, float y, bool btnhalf)
         {
             var menu = new QMNestedButton(main, x, y, "Collider Editor", "Edit Collider Properties", null, null, null, null, btnhalf);
 
@@ -33,7 +33,7 @@
             _ = new QMSingleButton(menu, 1, 1f, "Add Trigger Collider", new Action(() => { Tweaker_Object.GetGameObjectToEdit().AddTriggerCollider(); }), "Adds A Collider to the object (use it in case it doesn't have any!)", null, null, true);
         }
 
-        public override void OnPickupController_OnUpdate(PickupController control)
+        internal override void OnPickupController_OnUpdate(PickupController control)
         {
             if (control != null)
             {
@@ -53,7 +53,7 @@
             }
         }
 
-        public override void On_New_GameObject_Selected(GameObject obj)
+        internal override void On_New_GameObject_Selected(GameObject obj)
         {
             if (TeleportToTarget != null)
             {
@@ -67,7 +67,7 @@
             }
         }
 
-        public override void OnTargetSet(Player player)
+        internal override void OnTargetSet(Player player)
         {
             if (TeleportToTarget != null)
             {
@@ -76,8 +76,8 @@
             }
         }
 
-        public static QMSingleButton TeleportToMe;
-        public static QMSingleButton TeleportToTarget;
+        internal static  QMSingleButton TeleportToMe;
+        internal static  QMSingleButton TeleportToTarget;
 
         private static QMSingleButton Pickup_IsHeldStatus { get; set; }
         private static QMSingleButton Pickup_CurrentObjectHolder { get; set; }

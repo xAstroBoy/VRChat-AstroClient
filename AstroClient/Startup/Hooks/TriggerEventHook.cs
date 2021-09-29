@@ -8,15 +8,22 @@
     using UnhollowerRuntimeLib.XrefScans;
     using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
 
-    public class TriggerEventHook : GameEvents
+
+    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
+    internal class TriggerEventHook : GameEvents
     {
         private HarmonyLib.Harmony harmony;
 
-        public static event EventHandler<VRC_EventDispatcherRFC_TriggerEventArgs> Event_VRC_EventDispatcherRFC_triggerEvent;
+        internal static  event EventHandler<VRC_EventDispatcherRFC_TriggerEventArgs> Event_VRC_EventDispatcherRFC_triggerEvent;
 
-        public override void ExecutePriorityPatches()
+        internal override void ExecutePriorityPatches()
         {
             HookTriggerEvent();
+        }
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        private static HarmonyMethod GetPatch(string name)
+        {
+            return new HarmonyMethod(typeof(TriggerEventHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
         private void HookTriggerEvent()
@@ -32,13 +39,15 @@
                 if (x.Type == XrefType.Method && x.TryResolve() != null && x.TryResolve().DeclaringType == typeof(VRC_EventDispatcherRFC))
                 {
                     var methodToPatch = (MethodInfo)x.TryResolve();
-                    _ = harmony.Patch(methodToPatch, new HarmonyMethod(typeof(TriggerEventHook).GetMethod(nameof(TriggerEventHookEvent), BindingFlags.Public | BindingFlags.Static)));
+                    _ = harmony.Patch(methodToPatch, GetPatch(nameof(TriggerEventHookEvent)));
                     break;
                 }
             }
         }
 
-        public static bool TriggerEventHookEvent(VRC_EventHandler __0, VRC_EventHandler.VrcEvent __1, VRC_EventHandler.VrcBroadcastType __2, int __3, float __4)
+
+
+        private static bool TriggerEventHookEvent(VRC_EventHandler __0, VRC_EventHandler.VrcEvent __1, VRC_EventHandler.VrcBroadcastType __2, int __3, float __4)
         {
             try
             {

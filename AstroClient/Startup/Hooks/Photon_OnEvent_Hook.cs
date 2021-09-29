@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Startup.Hooks
 {
     #region Imports
 
@@ -14,18 +14,29 @@
 
     #endregion Imports
 
-    public class PhotonOnEventHook : GameEvents
+
+    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
+    internal class PhotonOnEventHook : GameEvents
     {
-        //public static
+        //internal static 
         private HarmonyLib.Harmony harmony;
 
-        public override void ExecutePriorityPatches()
+        internal override void ExecutePriorityPatches()
         {
             MiscUtils.DelayFunction(1f, new System.Action(() =>
             {
                 InitPatches();
             }));
         }
+
+
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        private static HarmonyMethod GetPatch(string name)
+        {
+            return new HarmonyMethod(typeof(PhotonOnEventHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+        }
+
+
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
         public void InitPatches()
@@ -37,7 +48,7 @@
                     harmony = new HarmonyLib.Harmony(BuildInfo.Name + " PhotonOnEventHook");
                 }
 
-                _ = harmony.Patch(AccessTools.Method(typeof(LoadBalancingClient), nameof(LoadBalancingClient.OnEvent)), new HarmonyMethod(typeof(PhotonOnEventHook).GetMethod(nameof(OnEvent), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
+                _ = harmony.Patch(AccessTools.Method(typeof(LoadBalancingClient), nameof(LoadBalancingClient.OnEvent)), GetPatch(nameof(OnEvent)), null, null);
                 ModConsole.DebugLog("Photon Hooks Done");
             }
             catch
@@ -50,21 +61,15 @@
         // UDON BEHAVIOURS GETS AFFECTED!
         // Best advice, make each event have his own handler class to translate and remove the useless translations so is faster and better.
 
-        private static bool OnEvent(ref EventData __0)
+        private static void OnEvent(ref EventData __0)
         {
-            try
+            if (__0.Parameters != null)
             {
-                if (__0 == null && __0.sender != null)
-                {
-                    return true; // discard
-                }
                 object RawData = Serialization.FromIL2CPPToManaged<object>(__0.Parameters);
                 var code = __0.Code;
                 var PhotonSender = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
                 var PhotonID = __0.sender;
                 bool log = false;
-                bool block = false;
-
                 StringBuilder line = new StringBuilder();
                 StringBuilder prefix = new StringBuilder();
                 prefix.Append($"[Event ({code})] ");
@@ -99,9 +104,7 @@
 
                     case 33: // Moderations
                         PhotonModerationHandler.Handle_Photon_ModerationEvent_NeedToBlock(RawData, code, PhotonSender, PhotonID);
-                        return true;
                         break;
-
                     case 203: // Destroy
                         prefix.Append("Destroy: ");
                         log = true;
@@ -121,31 +124,13 @@
                         break;
                 }
 
-                string blockText = string.Empty;
-                if (block)
+                if (log && ConfigManager.General.LogEvents)
                 {
-                    blockText = "[BLOCKED] ";
-                    if (log && ConfigManager.General.LogEvents)
-                    {
-                        line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(RawData, Newtonsoft.Json.Formatting.Indented)}");
-                        ModConsole.Log($"{blockText}{prefix.ToString()}{line.ToString()}");
-                    }
-                    line.Clear();
+                    line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(RawData, Newtonsoft.Json.Formatting.Indented)}");
+                    ModConsole.Log($"{prefix.ToString()}{line.ToString()}");
                 }
-                if (block)
-                {
-                    return false;
-                }
-                return true;
+                line.Clear();
             }
-            catch (System.Exception e)
-            {
-                ModConsole.DebugError("Error in Photon OnEvent : ");
-                ModConsole.DebugErrorExc(e);
-                return true;
-            }
-
-            return true;
         }
     }
 }

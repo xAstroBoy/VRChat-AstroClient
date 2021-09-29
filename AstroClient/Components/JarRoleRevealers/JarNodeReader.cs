@@ -5,7 +5,7 @@
     using VRC.Udon;
 
     [RegisterComponent]
-    public class JarNodeReader : GameEventsBehaviour
+    internal class JarNodeReader : GameEventsBehaviour
     {
         public JarNodeReader(IntPtr ptr) : base(ptr)
         {

@@ -2,13 +2,13 @@
 {
     using AstroLibrary.Console;
 
-    public static class AntiCrashUtils
+    internal static  class AntiCrashUtils
     {
         /// <summary>
         /// This is temporary while I figure out things
         /// </summary>
         /// <param name="msg"></param>
-        public static void TempLog(string msg)
+        internal static  void TempLog(string msg)
         {
             ModConsole.CheetoLog($"[ACS] {msg}");
         }

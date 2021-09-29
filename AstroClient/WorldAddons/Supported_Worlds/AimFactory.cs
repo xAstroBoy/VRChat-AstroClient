@@ -14,15 +14,15 @@
     using VRC;
     using Random = System.Random;
 
-    public class AimFactory : GameEvents
+    internal class AimFactory : GameEvents
     {
-        public static void InitButtons(QMTabMenu main, float x, float y, bool btnhalf)
+        internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnhalf)
         {
             AimFactoryCheatPage = new QMNestedButton(main, x, y, "Aim Factory", "Aim Factory Cheats", null, null, null, null, true);
             AlwaysPerfectHitToggle = new QMToggleButton(AimFactoryCheatPage, 1, 0, "Always Hit ON", new Action(() => { IsAlwaysPerfectHit = true; }), "Always Hit OFF", new Action(() => { IsAlwaysPerfectHit = false; }), "Unfreezes you automatically", null, null, null);
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             IsAlwaysPerfectHit = false;
             MapTargets.Clear();
@@ -31,7 +31,7 @@
             prevtarget = null;
         }
 
-        public static QMNestedButton AimFactoryCheatPage;
+        internal static  QMNestedButton AimFactoryCheatPage;
         private static QMToggleButton AlwaysPerfectHitToggle;
 
         private static List<GameObject> MapTargets = new List<GameObject>();
@@ -86,7 +86,7 @@
         private static bool IsAimFactory = false;
         private static bool IsPoppingTarget = false;
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.AimFactory)
             {
@@ -130,7 +130,7 @@
         }
 
         // WORKS but the map doesn't count the objects, there must be something that triggers the point count!
-        public static IEnumerator PopTarget()
+        internal static  IEnumerator PopTarget()
         {
             //float cooldown = 0.f;
             //DayClientML2.Utility.MiscUtility.DelayFunction(cooldown, new Action(() =>
@@ -162,7 +162,7 @@
             yield return null;
         }
 
-        public override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        internal override void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
         {
             if (IsAimFactory && obj != null && IsAlwaysPerfectHit && sender != null && sender == Utils.LocalPlayer.GetPlayer() && obj.name.Equals("Handgun_M1911A (Model)") && action == "AllwaysTrigger" && !IsPoppingTarget)
             {

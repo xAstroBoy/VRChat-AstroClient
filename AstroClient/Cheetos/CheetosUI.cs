@@ -23,13 +23,13 @@
     /// <summary>
     /// Cheeto's temporary UI for new/wip features
     /// </summary>
-    public class CheetosUI : GameEvents
+    internal class CheetosUI : GameEvents
     {
         public QMNestedButton MainButton { get; private set; }
 
         public QMScrollMenu MainScroller { get; private set; }
 
-        public override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnUiManagerInit()
         {
             MainButton = new QMNestedButton("ShortcutMenu", 5, 4, "<color=cyan>WIP Menu</color>", "WIP Features", null, null, null, null, true);
             MainScroller = new QMScrollMenu(MainButton);

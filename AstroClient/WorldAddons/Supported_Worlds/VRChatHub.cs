@@ -13,9 +13,9 @@
     using VRC.SDKBase;
     using static VRC.SDKBase.VRC_EventHandler;
 
-    public class VRChatHub : GameEvents
+    internal class VRChatHub : GameEvents
     {
-        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             VRChat_Hub_Addons = new QMNestedButton(menu, x, y, "Hub Mods", "Control HUB World.", null, null, null, null, btnHalf);
             VRChat_Hub_Addons.GetMainButton().SetResizeTextForBestFit(true);
@@ -24,9 +24,9 @@
             IgnoreSelfFight = new QMToggleButton(VRChat_Hub_Addons, 3, 0, "Ignore Self ON", new Action(ToggleIgnoreSelf), "Ignore Self OFF", new Action(ToggleIgnoreSelf), "Prevents other people from annoying you in the hub by fighting back!", null, null, null, false);
         }
 
-        public static QMNestedButton VRChat_Hub_Addons;
+        internal static  QMNestedButton VRChat_Hub_Addons;
 
-        public static void ToggleAllHubObjectOn()
+        internal static  void ToggleAllHubObjectOn()
         {
             Fighting_Boats_Props = true;
             Fighting_Toy_BeachBall = true;
@@ -50,7 +50,7 @@
             Emulate_table_roleplay_props_click();
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Status_Mirror_Props = VrcBooleanOp.Unused;
             Status_BeachBalls_Props = VrcBooleanOp.Unused;
@@ -74,7 +74,7 @@
             }
         }
 
-        public override void OnUpdate()
+        internal override void OnUpdate()
         {
             if (isHubWorldLoaded)
             {
@@ -94,7 +94,7 @@
             }
         }
 
-        public static void FindHubButtons()
+        internal static  void FindHubButtons()
         {
             if (!HasAnalyzedHubGameObjects)
             {
@@ -127,7 +127,7 @@
             }
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.VRChatDefaultHub)
             {
@@ -140,13 +140,13 @@
             }
         }
 
-        public static void ToggleHubButtonLock() => IsHubButtonLocked = !IsHubButtonLocked;
+        internal static  void ToggleHubButtonLock() => IsHubButtonLocked = !IsHubButtonLocked;
 
-        public static void ToggleIgnoreSelf() => IgnoreSelf = !IgnoreSelf;
+        internal static  void ToggleIgnoreSelf() => IgnoreSelf = !IgnoreSelf;
 
         // TODO : REWRITE THE EMULATORS OF CLICKS.
 
-        public static void Emulate_beachball_click(bool isOnUpdate = false)
+        internal static  void Emulate_beachball_click(bool isOnUpdate = false)
         {
             var item = Button_toggle_BeachBall;
             if (item != null)
@@ -172,7 +172,7 @@
             }
         }
 
-        public static void Emulate_mirror_props_click(bool isOnUpdate = false)
+        internal static  void Emulate_mirror_props_click(bool isOnUpdate = false)
         {
             var item = Button_toggle_MirrorProps;
             if (item != null)
@@ -198,7 +198,7 @@
             }
         }
 
-        public static void Emulate_table_roleplay_props_click(bool isOnUpdate = false)
+        internal static  void Emulate_table_roleplay_props_click(bool isOnUpdate = false)
         {
             var item = Button_toggle_Table_Props;
             if (item != null)
@@ -224,7 +224,7 @@
             }
         }
 
-        public static void Emulate_building_crystals_blocks_click(bool isOnUpdate = false)
+        internal static  void Emulate_building_crystals_blocks_click(bool isOnUpdate = false)
         {
             var item = Button_toggle_CrystalBlocks;
             if (item != null && Fighting_Build_Crystals_blocks)
@@ -247,7 +247,7 @@
             }
         }
 
-        public static void Emulate_boats_props_click(bool isOnUpdate = false)
+        internal static  void Emulate_boats_props_click(bool isOnUpdate = false)
         {
             var item = Button_toggle_Boats;
             if (item != null && Fighting_Boats_Props)
@@ -270,7 +270,7 @@
             }
         }
 
-        public static bool ConvertVrcBool(VrcBooleanOp Value)
+        internal static  bool ConvertVrcBool(VrcBooleanOp Value)
         {
             switch (Value)
             {
@@ -283,7 +283,7 @@
             }
         }
 
-        public override void VRC_EventDispatcherRFC_triggerEvent(VRC_EventHandler EventHandler, VrcEvent VrcEvent, VrcBroadcastType VrcBroadcastType, int value, float floatvalue)
+        internal override void VRC_EventDispatcherRFC_triggerEvent(VRC_EventHandler EventHandler, VrcEvent VrcEvent, VrcBroadcastType VrcBroadcastType, int value, float floatvalue)
         {
             if (isHubWorldLoaded)
             {
@@ -292,7 +292,7 @@
             }
         }
 
-        public static void HubObjectPatcher(VRC_EventHandler EventHandler, VrcEvent VrcEvent)
+        internal static  void HubObjectPatcher(VRC_EventHandler EventHandler, VrcEvent VrcEvent)
         {
             if (EventHandler != null && VrcEvent != null)
             {
@@ -339,7 +339,7 @@
             }
         }
 
-        public static void UpdateVariablesHub(VRC_EventHandler EventHandler, VrcEvent VrcEvent)
+        internal static  void UpdateVariablesHub(VRC_EventHandler EventHandler, VrcEvent VrcEvent)
         {
             if (EventHandler != null && VrcEvent != null && EventHandler.ToString() == PlayerUtils.DisplayName())
             {
@@ -391,38 +391,38 @@
             }
         }
 
-        public static bool IsHubButtonLocked = true;
-        public static QMToggleButton HubLock;
-        public static QMToggleButton IgnoreSelfFight;
+        internal static  bool IsHubButtonLocked = true;
+        internal static  QMToggleButton HubLock;
+        internal static  QMToggleButton IgnoreSelfFight;
 
-        public static VrcBooleanOp Mirror_Props = VrcBooleanOp.True;
-        public static VrcBooleanOp BeachBalls_Props = VrcBooleanOp.True;
-        public static VrcBooleanOp Table_Props = VrcBooleanOp.True;
-        public static VrcBooleanOp CrystalBlock_Props = VrcBooleanOp.True;
-        public static VrcBooleanOp Boats_Props = VrcBooleanOp.True;
+        internal static  VrcBooleanOp Mirror_Props = VrcBooleanOp.True;
+        internal static  VrcBooleanOp BeachBalls_Props = VrcBooleanOp.True;
+        internal static  VrcBooleanOp Table_Props = VrcBooleanOp.True;
+        internal static  VrcBooleanOp CrystalBlock_Props = VrcBooleanOp.True;
+        internal static  VrcBooleanOp Boats_Props = VrcBooleanOp.True;
 
-        public static VrcBooleanOp Status_Mirror_Props = VrcBooleanOp.Unused;
-        public static VrcBooleanOp Status_BeachBalls_Props = VrcBooleanOp.Unused;
-        public static VrcBooleanOp Status_Table_Props = VrcBooleanOp.Unused;
-        public static VrcBooleanOp Status_CrystalBlock_Props = VrcBooleanOp.Unused;
-        public static VrcBooleanOp Status_Boats_Props = VrcBooleanOp.Unused;
+        internal static  VrcBooleanOp Status_Mirror_Props = VrcBooleanOp.Unused;
+        internal static  VrcBooleanOp Status_BeachBalls_Props = VrcBooleanOp.Unused;
+        internal static  VrcBooleanOp Status_Table_Props = VrcBooleanOp.Unused;
+        internal static  VrcBooleanOp Status_CrystalBlock_Props = VrcBooleanOp.Unused;
+        internal static  VrcBooleanOp Status_Boats_Props = VrcBooleanOp.Unused;
 
-        public static bool Fighting_MirrorProps;
-        public static bool Fighting_Toy_BeachBall;
-        public static bool Fighting_RolePlayFighting_Props;
-        public static bool Fighting_Build_Crystals_blocks;
-        public static bool Fighting_Boats_Props;
+        internal static  bool Fighting_MirrorProps;
+        internal static  bool Fighting_Toy_BeachBall;
+        internal static  bool Fighting_RolePlayFighting_Props;
+        internal static  bool Fighting_Build_Crystals_blocks;
+        internal static  bool Fighting_Boats_Props;
 
-        public static GameObject Button_toggle_BeachBall; // Button_Prop_BeachBall
-        public static GameObject Button_toggle_MirrorProps; // Button_Enable_Props
-        public static GameObject Button_toggle_Table_Props; // Button_Enable_Table_Props
-        public static GameObject Button_toggle_CrystalBlocks; // Button_CrystalBlocks
-        public static GameObject Button_toggle_Boats; // Button_Prop_Boats
+        internal static  GameObject Button_toggle_BeachBall; // Button_Prop_BeachBall
+        internal static  GameObject Button_toggle_MirrorProps; // Button_Enable_Props
+        internal static  GameObject Button_toggle_Table_Props; // Button_Enable_Table_Props
+        internal static  GameObject Button_toggle_CrystalBlocks; // Button_CrystalBlocks
+        internal static  GameObject Button_toggle_Boats; // Button_Prop_Boats
 
-        public static bool HasAnalyzedHubGameObjects;
-        public static bool isHubWorldLoaded;
+        internal static  bool HasAnalyzedHubGameObjects;
+        internal static  bool isHubWorldLoaded;
 
-        public static bool IgnoreSelf;
-        public static float LastTimeCheck = 0;
+        internal static  bool IgnoreSelf;
+        internal static  float LastTimeCheck = 0;
     }
 }

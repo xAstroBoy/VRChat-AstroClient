@@ -4,7 +4,7 @@
     using AstroClientCore.Events;
     using System;
 
-    public class JarControllerEvents : GameEventsBehaviour
+    internal class JarControllerEvents : GameEventsBehaviour
     {
         public JarControllerEvents(IntPtr obj0) : base(obj0)
         {
@@ -16,7 +16,7 @@
 
         private void Internal_OnPlayerESPPropertyChanged(object sender, BoolEventsArgs e) => OnPlayerESPPropertyChanged(e.value);
 
-        public virtual void OnPlayerESPPropertyChanged(bool value)
+        internal virtual void OnPlayerESPPropertyChanged(bool value)
         {
         }
     }

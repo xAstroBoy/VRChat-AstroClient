@@ -10,7 +10,7 @@
     using UnityEngine;
     using VRC;
 
-    public class Orbit : GameEventsBehaviour
+    internal class Orbit : GameEventsBehaviour
     {
         #region Internal
 
@@ -274,7 +274,7 @@
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Clamp(float val)
+        internal static  float Clamp(float val)
         {
             float result;
             switch (val)
@@ -293,7 +293,7 @@
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static float Lerp(float a, float b, float t) => a + ((b - a) * Clamp(t));
+        internal static  float Lerp(float a, float b, float t) => a + ((b - a) * Clamp(t));
 
         public enum RotationMode : byte
         {

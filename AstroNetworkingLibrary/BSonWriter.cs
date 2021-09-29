@@ -5,9 +5,9 @@
     using System;
     using System.IO;
 
-    public static class BSonWriter
+    internal static  class BSonWriter
     {
-        public static string ToBson<T>(T value)
+        internal static  string ToBson<T>(T value)
         {
             using (MemoryStream ms = new MemoryStream())
             using (BsonDataWriter datawriter = new BsonDataWriter(ms))
@@ -18,7 +18,7 @@
             }
         }
 
-        public static T FromBson<T>(string base64data)
+        internal static  T FromBson<T>(string base64data)
         {
             using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(base64data)))
             using (BsonDataReader reader = new BsonDataReader(ms))

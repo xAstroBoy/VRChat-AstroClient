@@ -4,7 +4,7 @@
 
     internal class MouseTp : GameEvents
     {
-        public override void OnUpdate()
+        internal override void OnUpdate()
         {
             if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.T))
             {

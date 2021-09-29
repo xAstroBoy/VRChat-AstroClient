@@ -8,14 +8,26 @@
     using System.Runtime.InteropServices;
     using UnhollowerBaseLib;
 
-    public class SpawnEmojiRPCHook : GameEvents
-    {
-        public static event EventHandler<SpawnEmojiArgs> Event_SpawnEmojiRPC;
 
-        public override void ExecutePriorityPatches()
+    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
+
+    internal class SpawnEmojiRPCHook : GameEvents
+    {
+        internal static  event EventHandler<SpawnEmojiArgs> Event_SpawnEmojiRPC;
+
+        internal override void ExecutePriorityPatches()
         {
             HookSpawnEmojiRPC();
         }
+
+
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        private static IntPtr GetPointerPatch(string patch)
+        {
+            return typeof(SpawnEmojiRPCHook).GetMethod(patch, BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer();
+        }
+
+
 
         private void HookSpawnEmojiRPC()
         {
@@ -29,7 +41,7 @@
                             typeof(VRCPlayer).GetMethod(
                                 nameof(VRCPlayer
                                     .SpawnEmojiRPC))).GetValue(null);
-                    MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), typeof(SpawnEmojiRPCHook).GetMethod(nameof(SpawnEmojiRPCPatch), BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer());
+                    MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), GetPointerPatch(nameof(SpawnEmojiRPCPatch)));
                     _SpawnEmojiRPCDelegate = Marshal.GetDelegateForFunctionPointer<SpawnEmojiRPCDelegate>(originalMethod);
                     if (_SpawnEmojiRPCDelegate != null)
                     {

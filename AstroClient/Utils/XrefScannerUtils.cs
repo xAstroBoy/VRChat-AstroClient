@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnhollowerRuntimeLib.XrefScans;
 
-public static class XrefScannerUtils
+internal static  class XrefScannerUtils
 {
     /// <summary>
     ///     Scans global instances for the specific search-term
@@ -13,7 +13,7 @@ public static class XrefScannerUtils
     /// <param name="searchTerm">What string the value should contain</param>
     /// <param name="ignoreCase">Ignore Casing?</param>
     /// <returns>if any of the instances contains the search-them</returns>
-    public static bool XRefScanForGlobal(this MethodBase methodBase, string searchTerm, bool ignoreCase = true)
+    internal static  bool XRefScanForGlobal(this MethodBase methodBase, string searchTerm, bool ignoreCase = true)
     {
         if (!string.IsNullOrEmpty(searchTerm))
             return XrefScanner.XrefScan(methodBase).Any(
@@ -34,7 +34,7 @@ public static class XrefScannerUtils
     /// <param name="parentType">type of the parent to scan for. can be null</param>
     /// <param name="ignoreCase">Ignore Casing?</param>
     /// <returns>if any of the instances contains the specified method-name/parent-type</returns>
-    public static bool XRefScanForMethod(this MethodBase methodBase, string methodName = null, string parentType = null, bool ignoreCase = true)
+    internal static  bool XRefScanForMethod(this MethodBase methodBase, string methodName = null, string parentType = null, bool ignoreCase = true)
     {
         if (!string.IsNullOrEmpty(methodName)
             || !string.IsNullOrEmpty(parentType))
@@ -69,7 +69,7 @@ public static class XrefScannerUtils
         return false;
     }
 
-    public static int XRefScanMethodCount(this MethodBase methodBase, string methodName = null, string parentType = null, bool ignoreCase = true)
+    internal static  int XRefScanMethodCount(this MethodBase methodBase, string methodName = null, string parentType = null, bool ignoreCase = true)
     {
         if (!string.IsNullOrEmpty(methodName)
             || !string.IsNullOrEmpty(parentType))

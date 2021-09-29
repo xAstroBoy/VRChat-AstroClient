@@ -8,7 +8,7 @@
     using VRC.Core;
 
     [RegisterComponent]
-    public class PlayerSpoofer : GameEventsBehaviour
+    internal class PlayerSpoofer : GameEventsBehaviour
     {
         public PlayerSpoofer(IntPtr ptr) : base(ptr)
         {
@@ -49,7 +49,7 @@
 			}
         }
 
-        public override void OnRoomLeft()
+        internal override void OnRoomLeft()
         {
             SafetyCheck();
             if (CanSpoofWithoutBreaking() && PlayerSpooferUtils.SpoofAsWorldAuthor)
@@ -57,7 +57,7 @@
 				DisableSpoofer();
 			}
         }
-        public override void OnRoomJoined()
+        internal override void OnRoomJoined()
         {
             SafetyCheck();
             if (CanSpoofWithoutBreaking() && PlayerSpooferUtils.SpoofAsWorldAuthor)

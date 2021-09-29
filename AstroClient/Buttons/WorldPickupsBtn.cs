@@ -7,7 +7,7 @@
 
     internal class WorldPickupsBtn
     {
-        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var sub = new QMNestedButton(menu, x, y, "Pickup Control", "Pickup Control", null, null, null, null, btnHalf);
             _ = new QMSingleButton(sub, 1, 0, "Reveal all world pickups", new Action(GameObjectMenu.EnableAllWorldPickups), "Enables all world pickups!", null, null);

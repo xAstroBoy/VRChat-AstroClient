@@ -15,7 +15,7 @@
 
     #endregion Imports
 
-    public class AvatarFavorites : GameEvents
+    internal class AvatarFavorites : GameEvents
     {
         private static GameObject publicAvatarList;
 
@@ -29,7 +29,7 @@
 
         private static bool initialized;
 
-        public override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnUiManagerInit()
         {
             inputModule = GameObject.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
 
@@ -57,7 +57,7 @@
             list = new VRCList(publicAvatarList.transform.parent, "Astro Favorites", 0);
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (!initialized)
             {
@@ -66,7 +66,7 @@
             }
         }
 
-        public static void RefreshList()
+        internal static  void RefreshList()
         {
             favoriteAvatars.Clear();
             for (int i = 0; i < AstroClient.ConfigManager.Favorites.Avatars.Count; i++)
@@ -84,7 +84,7 @@
             list.Text.text = $"<color=cyan>Astro Favorites</color> <color=yellow>{favoriteAvatars.Count}</color>";
         }
 
-        public static void OnSelect()
+        internal static  void OnSelect()
         {
             // Add a check here later
             var selected = inputModule.field_Public_Selectable_0;
@@ -102,7 +102,7 @@
             }
         }
 
-        public static void AddToFavorites(string avatarID)
+        internal static  void AddToFavorites(string avatarID)
         {
             if (!AstroClient.ConfigManager.Favorites.Avatars.FindAll(a => a.AvatarID == avatarID).Any())
             {
@@ -120,7 +120,7 @@
             }
         }
 
-        public static void DeleteFromFavorites(string avatarID)
+        internal static  void DeleteFromFavorites(string avatarID)
         {
             if (AstroClient.ConfigManager.Favorites.Avatars.Remove(AstroClient.ConfigManager.Favorites.Avatars.Where(a => a.AvatarID == avatarID).FirstOrDefault()))
             {

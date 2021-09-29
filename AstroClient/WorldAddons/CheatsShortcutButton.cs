@@ -9,17 +9,17 @@
     using UnityEngine;
     using UnityEngine.UI;
 
-    public class CheatsShortcutButton : GameEvents
+    internal class CheatsShortcutButton : GameEvents
     {
         private static QMSingleButton WorldCheatsShortcut;
 
-        public static void Init_Cheats_ShortcutBtn(float x, float y, bool btnHalf)
+        internal static  void Init_Cheats_ShortcutBtn(float x, float y, bool btnHalf)
         {
             WorldCheatsShortcut = new QMSingleButton("ShortcutMenu", x, y, "Cheats Shortcut", null, "Cheats Shortcut", null, null, btnHalf);
             ToggleButtonVisibilityAndInteractivity(false);
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.VRChatDefaultHub)
             {
@@ -159,7 +159,7 @@
             }
         }
 
-        public static void SetButtonText(string ButtonText)
+        internal static  void SetButtonText(string ButtonText)
         {
             if (WorldCheatsShortcut != null)
             {
@@ -168,7 +168,7 @@
             }
         }
 
-        public static void SetButtonText(string ButtonText, string ButtonToolTip)
+        internal static  void SetButtonText(string ButtonText, string ButtonToolTip)
         {
             if (WorldCheatsShortcut != null)
             {
@@ -177,7 +177,7 @@
             }
         }
 
-        public static void SetButtonColor(Color color)
+        internal static  void SetButtonColor(Color color)
         {
             if (WorldCheatsShortcut != null)
             {
@@ -185,7 +185,7 @@
             }
         }
 
-        public static void SetButtonShortcut(QMNestedButton btn)
+        internal static  void SetButtonShortcut(QMNestedButton btn)
         {
             if (WorldCheatsShortcut != null)
             {
@@ -193,7 +193,7 @@
             }
         }
 
-        public static void SetButtonShortcut(QMSingleButton btn)
+        internal static  void SetButtonShortcut(QMSingleButton btn)
         {
             if (WorldCheatsShortcut != null)
             {
@@ -201,7 +201,7 @@
             }
         }
 
-        public static void ClearButtonAction()
+        internal static  void ClearButtonAction()
         {
             if (WorldCheatsShortcut != null)
             {
@@ -209,7 +209,7 @@
             }
         }
 
-        public static void ToggleButtonVisibilityAndInteractivity(bool isActive)
+        internal static  void ToggleButtonVisibilityAndInteractivity(bool isActive)
         {
             if (WorldCheatsShortcut != null)
             {

@@ -7,9 +7,9 @@
     using System;
     using UnityEngine;
 
-    public class ObjectMiscOptions : GameEvents
+    internal class ObjectMiscOptions : GameEvents
     {
-        public static void AllWorldPickupsOrbitsOnTarget()
+        internal static  void AllWorldPickupsOrbitsOnTarget()
         {
             try
             {
@@ -37,7 +37,7 @@
             catch (Exception) { }
         }
 
-        public static void TeleportAllWorldPickupsToPlayer()
+        internal static  void TeleportAllWorldPickupsToPlayer()
         {
             try
             {
@@ -73,7 +73,7 @@
             catch (Exception) { }
         }
 
-        public static void AllWorldPickupsAttackTarget()
+        internal static  void AllWorldPickupsAttackTarget()
         {
             try
             {
@@ -105,7 +105,7 @@
             catch (Exception) { }
         }
 
-        public static void AllWorldPickupsWatchTarget()
+        internal static  void AllWorldPickupsWatchTarget()
         {
             try
             {
@@ -137,7 +137,7 @@
             catch (Exception) { }
         }
 
-        public static void RemoveAttackerFromobj(GameObject obj)
+        internal static  void RemoveAttackerFromobj(GameObject obj)
         {
             if (obj != null)
             {
@@ -149,7 +149,7 @@
             }
         }
 
-        public static void RemoveWatcherFromobj(GameObject obj)
+        internal static  void RemoveWatcherFromobj(GameObject obj)
         {
             if (obj != null)
             {
@@ -161,7 +161,7 @@
             }
         }
 
-        public static void RemoveOrbitingObject(GameObject obj)
+        internal static  void RemoveOrbitingObject(GameObject obj)
         {
             if (obj != null)
             {
@@ -173,7 +173,7 @@
             }
         }
 
-        public static void MakeHeldItemOrbitAroundTarget(GameObject obj)
+        internal static  void MakeHeldItemOrbitAroundTarget(GameObject obj)
         {
             try
             {
@@ -193,7 +193,7 @@
             catch (Exception) { }
         }
 
-        public static void MakeObjectAttackTarget(GameObject obj)
+        internal static  void MakeObjectAttackTarget(GameObject obj)
         {
             try
             {
@@ -213,7 +213,7 @@
             catch (Exception) { }
         }
 
-        public static void MakeObjectWatchTarget(GameObject obj)
+        internal static  void MakeObjectWatchTarget(GameObject obj)
         {
             try
             {
@@ -233,7 +233,7 @@
             catch (Exception) { }
         }
 
-        public static void MakeObjectOrbitToTarget(GameObject obj)
+        internal static  void MakeObjectOrbitToTarget(GameObject obj)
         {
             try
             {
@@ -253,7 +253,7 @@
             catch (Exception) { }
         }
 
-        public static void RemoveAllWatchersPlayer()
+        internal static  void RemoveAllWatchersPlayer()
         {
             try
             {
@@ -266,7 +266,7 @@
             catch (Exception) { }
         }
 
-        public static void RemoveAllAttackPlayer()
+        internal static  void RemoveAllAttackPlayer()
         {
             try
             {
@@ -279,7 +279,7 @@
             catch (Exception) { }
         }
 
-        public static void DisablePickupKinematic(bool useGravity)
+        internal static  void DisablePickupKinematic(bool useGravity)
         {
             foreach (var item in WorldUtils_Old.Get_Pickups())
             {
@@ -351,7 +351,7 @@
             }
         }
 
-        public static void RemoveAllOrbitPlayer()
+        internal static  void RemoveAllOrbitPlayer()
         {
             try
             {

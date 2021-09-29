@@ -3,11 +3,11 @@
     using System;
     using UnityEngine;
 
-    public class SelectedObjectArgs : EventArgs
+    internal class SelectedObjectArgs : EventArgs
     {
-        public GameObject GameObject;
+        internal GameObject GameObject;
 
-        public SelectedObjectArgs(GameObject obj)
+        internal SelectedObjectArgs(GameObject obj)
         {
             this.GameObject = obj;
         }

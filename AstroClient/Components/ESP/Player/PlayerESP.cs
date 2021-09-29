@@ -13,7 +13,7 @@
     using VRC.Management;
 
     [RegisterComponent]
-    public class PlayerESP : GameEventsBehaviour
+    internal class PlayerESP : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
@@ -124,7 +124,7 @@
             }
         }
 
-        public override void OnFriended()
+        internal override void OnFriended()
         {
             if (!UseCustomColor)
             {
@@ -132,7 +132,7 @@
             }
         }
 
-        public override void OnUnfriended()
+        internal override void OnUnfriended()
         {
             if (!UseCustomColor)
             {
@@ -140,7 +140,7 @@
             }
         }
 
-        public override void OnPlayerBlockedYou(Photon.Realtime.Player player)
+        internal override void OnPlayerBlockedYou(Photon.Realtime.Player player)
         {
             if (player.GetUserID() == AssignedPlayer.GetUserID())
             {
@@ -151,7 +151,7 @@
             }
         }
 
-        public override void OnPlayerUnblockedYou(Photon.Realtime.Player player)
+        internal override void OnPlayerUnblockedYou(Photon.Realtime.Player player)
         {
             if (player.GetUserID() == AssignedPlayer.GetUserID())
             {

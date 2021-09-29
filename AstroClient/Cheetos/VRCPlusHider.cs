@@ -6,9 +6,9 @@
 
     #endregion Imports
 
-    public class VRCPlusHider : GameEvents
+    internal class VRCPlusHider : GameEvents
     {
-        public override void VRChat_OnUiManagerInit()
+        internal override void VRChat_OnUiManagerInit()
         {
             if (ConfigManager.UI.RemoveVRCPlusMenu)
             {

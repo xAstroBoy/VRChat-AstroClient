@@ -25,7 +25,7 @@
         private static bool noClipEnabled;
         private static bool isInRoom;
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             Gravity = Physics.gravity;
             motionState = currentPlayer.GetComponent<VRCMotionState>();
@@ -33,17 +33,17 @@
             DisableFly();
         }
 
-        public static void SetDesktopFlySpeed(float v)
+        internal static  void SetDesktopFlySpeed(float v)
         {
             ConfigManager.Flight.DesktopFlySpeed = v;
         }
 
-        public static void SetVRFlySpeed(float v)
+        internal static  void SetVRFlySpeed(float v)
         {
             ConfigManager.Flight.VRFlySpeed = v;
         }
 
-        public static bool FlyEnabled
+        internal static  bool FlyEnabled
         {
             get => flyEnabled;
             set
@@ -75,7 +75,7 @@
             Physics.gravity = Gravity;
         }
 
-        public static bool NoClipEnabled
+        internal static  bool NoClipEnabled
         {
             get => noClipEnabled;
             set
@@ -107,19 +107,19 @@
             PlayerUtils.VRCPlayer.gameObject.GetComponent<CharacterController>().enabled = true;
         }
 
-        public override void OnRoomJoined()
+        internal override void OnRoomJoined()
         {
             isInRoom = true;
         }
 
-        public override void OnRoomLeft()
+        internal override void OnRoomLeft()
         {
             isInRoom = false;
             FlyEnabled = false;
             NoClipEnabled = false;
         }
 
-        public override void OnUpdate()
+        internal override void OnUpdate()
         {
             if (!isInRoom || PopupUtils.IsTyping)
             {

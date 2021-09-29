@@ -19,7 +19,7 @@
     #endregion
 
     [RegisterComponent]
-    public class CheetoNameplate : GameEventsBehaviour
+    internal class CheetoNameplate : GameEventsBehaviour
     {
         private PlayerNameplate nameplate;
 

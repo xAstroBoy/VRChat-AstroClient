@@ -8,9 +8,9 @@
     using RubyButtonAPI;
     using System.Collections.Generic;
 
-    public class SuperTowerDefense : GameEvents
+    internal class SuperTowerDefense : GameEvents
     {
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.Super_Tower_defense)
             {
@@ -52,13 +52,13 @@
             }
         }
 
-        public override void OnRoomLeft()
+        internal override void OnRoomLeft()
         {
             NearbyColliders.Clear();
         }
 
 
-        public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             SuperTowerDefensecheatPage = new QMNestedButton(main, x, y, "Super Tower Defense", "Super Tower Defense Cheats", null, null, null, null, btnHalf);
 
@@ -77,7 +77,7 @@
 
 
 
-        public static void AddBankBalance(int amount)
+        internal static  void AddBankBalance(int amount)
         {
             var result = UdonHeapParser.Udon_Parse_Int32(Bank, CurrentMoney);
             if (result.HasValue)
@@ -93,13 +93,13 @@
 
 
 
-        public static void SetBankBalance(int amount)
+        internal static  void SetBankBalance(int amount)
         {
             UdonHeapEditor.PatchHeap(Bank, CurrentMoney, amount, true);
         }
 
 
-        public static void SetMaxTowerCount(int amount)
+        internal static  void SetMaxTowerCount(int amount)
         {
             UdonHeapEditor.PatchHeap(TowerManager, MaxTowerCount, amount, true);
             //UdonHeapEditor.PatchHeap(TowerManager, TowerCount, amount, true);
@@ -114,7 +114,7 @@
         }
 
 
-        public static QMNestedButton SuperTowerDefensecheatPage { get; set; }
+        internal static  QMNestedButton SuperTowerDefensecheatPage { get; set; }
 
         private static DisassembledUdonBehaviour Bank { get; set; }
 

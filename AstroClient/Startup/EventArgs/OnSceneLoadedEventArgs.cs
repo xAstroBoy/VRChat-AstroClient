@@ -2,13 +2,13 @@
 {
     using System;
 
-    public class OnSceneLoadedEventArgs : EventArgs
+    internal class OnSceneLoadedEventArgs : EventArgs
     {
-        public int BuildIndex;
+        internal int BuildIndex;
 
-        public string SceneName;
+        internal string SceneName;
 
-        public OnSceneLoadedEventArgs(int buildIndex, string sceneName)
+        internal OnSceneLoadedEventArgs(int buildIndex, string sceneName)
         {
             BuildIndex = buildIndex;
             SceneName = sceneName;

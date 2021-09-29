@@ -5,19 +5,19 @@ using UnityEngine;
 
 namespace AstroClient
 {
-    public class Astro_Flashlight : GameEvents
+    internal class Astro_Flashlight : GameEvents
     {
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             DestroyAllFlashLights();
         }
 
-        public static void DestroyAllFlashLights()
+        internal static  void DestroyAllFlashLights()
         {
             flashlights.DestroyAndClearList();
         }
 
-        public static void SpawnFlashlight()
+        internal static  void SpawnFlashlight()
         {
             GameObject FlashLight_Body = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
 

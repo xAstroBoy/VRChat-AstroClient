@@ -7,7 +7,7 @@
 
     internal class RandomSubmenus
     {
-        public static void VRC_InteractableSubMenu(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static  void VRC_InteractableSubMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Interact VRC_Interactable", "Interact with VRC_Interactable Triggers", null, null, null, null, btnHalf);
             var scroll = new QMScrollMenu(menu);
@@ -35,7 +35,7 @@
             });
         }
 
-        public static void ToggleAudioSourceSubMebu(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static  void ToggleAudioSourceSubMebu(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Toggle AudioSources", "Toggle AudioSources Triggers", null, null, null, null, btnHalf);
             var scroll = new QMScrollMenu(menu);
@@ -65,7 +65,7 @@
             });
         }
 
-        public static void TriggerSubMenu(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static  void TriggerSubMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Interact Triggers", "Interact with Level Triggers", null, null, null, null, btnHalf);
             var scroll = new QMScrollMenu(menu);

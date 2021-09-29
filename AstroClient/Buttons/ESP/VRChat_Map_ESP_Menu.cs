@@ -9,7 +9,7 @@
 
     internal class VRChat_Map_ESP_Menu : GameEvents
     {
-        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "ESP Menu", "ESP Options", null, null, null, null, btnHalf);
 
@@ -24,7 +24,7 @@
         private static QMSingleToggleButton TriggerESPToggleBtn;
         private static QMSingleToggleButton UdonBehaviourESPToggleBtn;
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Toggle_VRCInteractable_ESP = false;
             Toggle_Trigger_ESP = false;
@@ -36,7 +36,7 @@
 
         private static bool _Toggle_VRCInteractable_ESP;
 
-        public static bool Toggle_VRCInteractable_ESP
+        internal static  bool Toggle_VRCInteractable_ESP
         {
             get
             {
@@ -61,7 +61,7 @@
             }
         }
 
-        public static void AddESPToVRCInteractables()
+        internal static  void AddESPToVRCInteractables()
         {
             var items = WorldUtils_Old.Get_VRCInteractables();
             foreach (var item in items)
@@ -73,7 +73,7 @@
             }
         }
 
-        public static void RemoveESPToVRCInteractables()
+        internal static  void RemoveESPToVRCInteractables()
         {
             var items = WorldUtils_Old.Get_VRCInteractables();
             foreach (var item in items)
@@ -92,7 +92,7 @@
 
         private static bool _Toggle_Pickup_ESP;
 
-        public static bool Toggle_Pickup_ESP
+        internal static  bool Toggle_Pickup_ESP
         {
             get
             {
@@ -148,7 +148,7 @@
 
         private static bool _Toggle_Trigger_ESP;
 
-        public static bool Toggle_Trigger_ESP
+        internal static  bool Toggle_Trigger_ESP
         {
             get
             {

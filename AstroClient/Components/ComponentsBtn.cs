@@ -6,9 +6,9 @@
     using RubyButtonAPI;
     using System;
 
-    public static class ComponentsBtn
+    internal static  class ComponentsBtn
     {
-        public static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var temp = new QMNestedButton(menu, x, y, "Component Menu", "Control Object Custom Components!", null, null, null, null, btnHalf);
             if (Bools.AllowAttackerComponent)

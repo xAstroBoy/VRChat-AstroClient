@@ -8,7 +8,7 @@
     using UnityEngine;
 
     [RegisterComponent]
-    public class Bouncer : GameEventsBehaviour
+    internal class Bouncer : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 

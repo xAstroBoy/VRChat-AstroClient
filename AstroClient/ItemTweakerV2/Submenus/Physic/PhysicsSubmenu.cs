@@ -9,9 +9,9 @@
     using UnityEngine;
     using VRC;
 
-    public class PhysicsSubmenu : Tweaker_Events
+    internal class PhysicsSubmenu : Tweaker_Events
     {
-        public static void Init_PhysicSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static  void Init_PhysicSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "Physics", "Item Physics Editor Menu!", null, null, null, null, btnHalf);
 
@@ -42,7 +42,7 @@
             ForcesSubmenu.Init_ForceSubMenu(main, 4, 0, true);
         }
 
-        public override void OnPickupController_OnUpdate(PickupController control)
+        internal override void OnPickupController_OnUpdate(PickupController control)
         {
             if (control != null)
             {
@@ -62,7 +62,7 @@
             }
         }
 
-        public override void On_New_GameObject_Selected(GameObject obj)
+        internal override void On_New_GameObject_Selected(GameObject obj)
         {
             if (TeleportToTarget != null)
             {
@@ -76,7 +76,7 @@
             }
         }
 
-        public override void OnTargetSet(Player player)
+        internal override void OnTargetSet(Player player)
         {
             if (TeleportToTarget != null)
             {
@@ -107,17 +107,17 @@
             }
         }
 
-        public override void OnRigidBodyController_PropertyChanged(RigidBodyController control)
+        internal override void OnRigidBodyController_PropertyChanged(RigidBodyController control)
         {
             UpdateProperties(control);
         }
 
-        public override void OnRigidBodyController_Selected(RigidBodyController control)
+        internal override void OnRigidBodyController_Selected(RigidBodyController control)
         {
             UpdateProperties(control);
         }
 
-        public override void OnRigidBodyController_OnUpdate(RigidBodyController control)
+        internal override void OnRigidBodyController_OnUpdate(RigidBodyController control)
         {
             UpdateProperties(control);
         }
@@ -139,12 +139,12 @@
             CollisionsToggler.SetToggleState(false);
         }
 
-        public override void OnSelectedObject_Destroyed()
+        internal override void OnSelectedObject_Destroyed()
         {
             Reset();
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Reset();
         }
@@ -154,8 +154,8 @@
         private static QMSingleToggleButton CollisionsToggler;
         private static QMSingleToggleButton SmartKinematicToggler;
 
-        public static QMSingleButton TeleportToMe;
-        public static QMSingleButton TeleportToTarget;
+        internal static  QMSingleButton TeleportToMe;
+        internal static  QMSingleButton TeleportToTarget;
 
         private static QMSingleButton Pickup_IsHeldStatus { get; set; }
         private static QMSingleButton Pickup_CurrentObjectHolder { get; set; }
@@ -163,7 +163,7 @@
 
         private static bool _SmartKinematicEnabled;
 
-        public static bool SmartKinematicEnabled
+        internal static  bool SmartKinematicEnabled
         {
             get
             {

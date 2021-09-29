@@ -4,19 +4,19 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    public class Clones : GameEvents
+    internal class Clones : GameEvents
     {
-        public static void OnLevelLoad()
+        internal static  void OnLevelLoad()
         {
             ClonesCapsules.Clear();
         }
 
-        public static void SpawnClone()
+        internal static  void SpawnClone()
         {
             ClonesCapsules.Add(PlayerCloner.CloneLocalPlayerAvatar());
         }
 
-        public static void RemoveClones()
+        internal static  void RemoveClones()
         {
             try
             {

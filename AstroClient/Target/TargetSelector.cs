@@ -6,11 +6,11 @@
     using System.Collections.Generic;
     using VRC;
 
-    public class TargetSelector : GameEvents
+    internal class TargetSelector : GameEvents
     {
-        public static event EventHandler<VRCPlayerEventArgs> Event_OnTargetSet;
+        internal static  event EventHandler<VRCPlayerEventArgs> Event_OnTargetSet;
 
-        public override void OnPlayerLeft(Player player)
+        internal override void OnPlayerLeft(Player player)
         {
             if (player != null)
             {
@@ -21,12 +21,12 @@
             }
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             CurrentTarget = null;
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (CurrentTarget == null)
             {
@@ -34,7 +34,7 @@
             }
         }
 
-        public static string TeleportToTarget_button_text
+        internal static  string TeleportToTarget_button_text
         {
             get
             {
@@ -44,7 +44,7 @@
             }
         }
 
-        public static void MarkPlayerAsTarget()
+        internal static  void MarkPlayerAsTarget()
         {
             try
             {
@@ -67,7 +67,7 @@
 
         private static Player _CurrentTarget;
 
-        public static Player CurrentTarget
+        internal static  Player CurrentTarget
         {
             get
             {

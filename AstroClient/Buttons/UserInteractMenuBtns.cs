@@ -12,9 +12,9 @@
 
     internal class UserInteractMenuBtns : GameEvents
     {
-        public static GameObject OldCloneButton;
+        internal static  GameObject OldCloneButton;
 
-        public static void InitButtons(float x, float y, bool btnHalf)
+        internal static  void InitButtons(float x, float y, bool btnHalf)
         {
             OldCloneButton = Finder.GameObjectFinder.Find("UserInterface/QuickMenu/UserInteractMenu/CloneAvatarButton");
             OldCloneButton?.SetActive(false);
@@ -26,7 +26,7 @@
             var forceClone = new QMSingleButton("UserInteractMenu", 5, 0, "Force Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar", null, null, false);
         }
 
-        public static void Init_UserMenu_Exploits(float x, float y, bool btnHalf)
+        internal static  void Init_UserMenu_Exploits(float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton("UserInteractMenu", x, y, "AstroClient Exploits", "AstroClient Menu", null, null, null, null, btnHalf);
             menu.GetMainButton().SetResizeTextForBestFit(true);
@@ -87,7 +87,7 @@
             , "Removes everything bound to this player.", null, null);
         }
 
-        public override void OnLateUpdate()
+        internal override void OnLateUpdate()
         {
             OldCloneButton?.SetActive(false);
         }

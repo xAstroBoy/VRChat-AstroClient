@@ -21,14 +21,14 @@
 
     #endregion Imports
 
-    public class BClubWorld : GameEvents
+    internal class BClubWorld : GameEvents
     {
-        public static GameObject VIPRoom;
-        public static GameObject VIPInsideDoor;
-        public static GameObject VIPButton;
-        public static GameObject VIPControls;
+        internal static  GameObject VIPRoom;
+        internal static  GameObject VIPInsideDoor;
+        internal static  GameObject VIPButton;
+        internal static  GameObject VIPControls;
 
-        public static QMNestedButton BClubExploitsPage;
+        internal static  QMNestedButton BClubExploitsPage;
 
         private static QMToggleButton FreezeLockedToggle;
         private static QMToggleButton FreezeUnlockedToggle;
@@ -48,7 +48,7 @@
 
         #region BlueChairSpam
 
-        public static bool IsBlueChairEnabled
+        internal static  bool IsBlueChairEnabled
         {
             get => _isBlueChairEnabed;
             set
@@ -72,7 +72,7 @@
 
         #region DoorbellSpam
 
-        public static bool IsDoorbellSpamEnabled
+        internal static  bool IsDoorbellSpamEnabled
         {
             get => _isDoorBellSpamEnabled;
             set
@@ -102,7 +102,7 @@
 
         #endregion
 
-        public static bool IsFreezeLockEnabed
+        internal static  bool IsFreezeLockEnabed
         {
             get => _isFreezeLockEnabed;
             set
@@ -122,7 +122,7 @@
             }
         }
 
-        public static bool IsFreezeUnlockEnabed
+        internal static  bool IsFreezeUnlockEnabed
         {
             get => _isFreezeUnlockEnabed;
             set
@@ -145,7 +145,7 @@
             }
         }
 
-        public static bool IsRainbowEnabled
+        internal static  bool IsRainbowEnabled
         {
             get => _isRainbowEnabled;
             set
@@ -169,7 +169,7 @@
 
         #region MoanSpam
 
-        public static bool IsMoanSpamEnabled
+        internal static  bool IsMoanSpamEnabled
         {
             get => _isMoanSpamEnabled;
             set
@@ -224,7 +224,7 @@
         private static QMToggleButton ToggleMoanSpamBtn;
 
 
-        public static GameObjectListener RegisterListener(GameObject Object, Action OnEnabled, Action OnDisabled, Action OnDestroy)
+        internal static  GameObjectListener RegisterListener(GameObject Object, Action OnEnabled, Action OnDisabled, Action OnDestroy)
         {
             if (Object != null)
             {
@@ -240,7 +240,7 @@
             return null;
         }
 
-        public static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             BClubExploitsPage = new QMNestedButton(main, x, y, "BClub Exploits", "BClub Exploits", null, null, null, null, btnHalf);
 
@@ -501,7 +501,7 @@
             }
         }
 
-        public override void OnRoomLeft()
+        internal override void OnRoomLeft()
         {
             if (isCurrentWorld)
             {
@@ -533,7 +533,7 @@
 
         private static GameObject PenthouseRoot;
 
-        public static GameObject GetIndicator(int id)
+        internal static  GameObject GetIndicator(int id)
         {
             if (id <= 6)
             {
@@ -550,7 +550,7 @@
             }
         }
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (id == WorldIds.BClub)
             {

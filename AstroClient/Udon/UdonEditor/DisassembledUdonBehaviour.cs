@@ -2,7 +2,7 @@
 {
     using VRC.Udon.Common.Interfaces;
 
-    public class DisassembledUdonBehaviour
+    internal class DisassembledUdonBehaviour
     {
         public IUdonProgram IUdonProgram { get; set; }
         public IUdonSymbolTable IUdonSymbolTable { get; set; }

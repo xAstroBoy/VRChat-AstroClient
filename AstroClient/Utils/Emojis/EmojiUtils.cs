@@ -12,9 +12,9 @@
     using VRC;
     using VRC.SDKBase;
 
-    public class EmojiUtils : GameEvents
+    internal class EmojiUtils : GameEvents
     {
-        public static void SpawnlastEmoji()
+        internal static  void SpawnlastEmoji()
         {
             if (IsVRChatCooldownActive)
             {
@@ -30,13 +30,13 @@
             }
         }
 
-        public static void IncreaseEmojiInt()
+        internal static  void IncreaseEmojiInt()
         {
             EmojiInt++;
             UpdateEmojiButton();
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Cooldown = 0f;
             IsVRChatCooldownActive = false;
@@ -46,7 +46,7 @@
             UpdateEmojiSpawning(true);
         }
 
-        public override void SpawnEmojiRPC(VRCPlayer player, int Emoji)
+        internal override void SpawnEmojiRPC(VRCPlayer player, int Emoji)
         {
             if (player == VRCPlayer.field_Internal_Static_VRCPlayer_0)
             {
@@ -69,7 +69,7 @@
             }
         }
 
-        public override void OnPlayerJoined(Player player)
+        internal override void OnPlayerJoined(Player player)
         {
             if (player != null)
             {
@@ -85,7 +85,7 @@
             }
         }
 
-        public override void OnUpdate()
+        internal override void OnUpdate()
         {
             if (IsVRChatCooldownActive)
             {
@@ -106,7 +106,7 @@
             }
         }
 
-        public static void DecreaseEmojiInt()
+        internal static  void DecreaseEmojiInt()
         {
             if (EmojiInt != 0)
             {
@@ -115,13 +115,13 @@
             UpdateEmojiButton();
         }
 
-        public static void SetEmoji(int emoji)
+        internal static  void SetEmoji(int emoji)
         {
             EmojiInt = emoji;
             UpdateEmojiButton();
         }
 
-        public static void SpawnOnlineEmoji(int emoji)
+        internal static  void SpawnOnlineEmoji(int emoji)
         {
             if (IsBeingSpawnedFromMenu)
             {
@@ -134,11 +134,11 @@
             }
         }
 
-        public static void SetEmojiButton(GameObject obj)
+        internal static  void SetEmojiButton(GameObject obj)
         {
         }
 
-        public static void UpdateEmojiButton()
+        internal static  void UpdateEmojiButton()
         {
             if (EmojiIntReveal != null)
             {
@@ -147,7 +147,7 @@
             }
         }
 
-        public static void UpdateLastSpawnedEmoji(int emoji)
+        internal static  void UpdateLastSpawnedEmoji(int emoji)
         {
             if (LastSpawnedEmojiName != null)
             {
@@ -157,7 +157,7 @@
             }
         }
 
-        public static void UpdateEmojiSpamCounter()
+        internal static  void UpdateEmojiSpamCounter()
         {
             if (EmojiSpamCounter != null)
             {
@@ -165,7 +165,7 @@
             }
         }
 
-        public static void SpawnEmoji()
+        internal static  void SpawnEmoji()
         {
             if (!OnlineSpawn)
             {
@@ -190,7 +190,7 @@
             }
         }
 
-        public static IEnumerator OfflineSpammer()
+        internal static  IEnumerator OfflineSpammer()
         {
             for (int i = 0; i < EmojiSpammerInt; i++)
             {
@@ -204,12 +204,12 @@
             yield return null;
         }
 
-        public static void OfflineEmojiSpammer()
+        internal static  void OfflineEmojiSpammer()
         {
             _ = MelonCoroutines.Start(OfflineSpammer());
         }
 
-        public static void OnlineEmojiSpammer()
+        internal static  void OnlineEmojiSpammer()
         {
             if (Killcoroutines)
             {
@@ -222,7 +222,7 @@
             }
         }
 
-        public static IEnumerator OnlineSpammer()
+        internal static  IEnumerator OnlineSpammer()
         {
             if (isOnlineSpammerActive)
             {
@@ -247,7 +247,7 @@
             }
         }
 
-        public static void SpawnLocalEmoji(VRCPlayer player, int emoji)
+        internal static  void SpawnLocalEmoji(VRCPlayer player, int emoji)
         {
             if (player != null)
             {
@@ -263,7 +263,7 @@
             }
         }
 
-        public static void SpawnOfflineEmoji(int emoji, bool MakeOthersSeeit)
+        internal static  void SpawnOfflineEmoji(int emoji, bool MakeOthersSeeit)
         {
             var EmojiGen = Player.prop_Player_0.GetVRCPlayer().field_Private_EmotePlayer_0;
             if (EmojiGen != null)
@@ -285,49 +285,49 @@
             }
         }
 
-        public static void Add_x1()
+        internal static  void Add_x1()
         {
             EmojiSpammerInt++;
             UpdateEmojiSpamCounter();
         }
 
-        public static void Add_x10()
+        internal static  void Add_x10()
         {
             EmojiSpammerInt += 10;
             UpdateEmojiSpamCounter();
         }
 
-        public static void Add_x100()
+        internal static  void Add_x100()
         {
             EmojiSpammerInt += 100;
             UpdateEmojiSpamCounter();
         }
 
-        public static void Sub_x1()
+        internal static  void Sub_x1()
         {
             EmojiSpammerInt--;
             UpdateEmojiSpamCounter();
         }
 
-        public static void Sub_x10()
+        internal static  void Sub_x10()
         {
             EmojiSpammerInt -= 10;
             UpdateEmojiSpamCounter();
         }
 
-        public static void Sub_x100()
+        internal static  void Sub_x100()
         {
             EmojiSpammerInt -= 100;
             UpdateEmojiSpamCounter();
         }
 
-        public static void RestoreSpammer()
+        internal static  void RestoreSpammer()
         {
             EmojiSpammerInt = 1;
             UpdateEmojiSpamCounter();
         }
 
-        public static void ToggleOnlineSpawner()
+        internal static  void ToggleOnlineSpawner()
         {
             OnlineSpawn = !OnlineSpawn;
             if (EmojiSpawnerChoices != null)
@@ -336,7 +336,7 @@
             }
         }
 
-        public static void ToggleOnlineSpawner(bool @override)
+        internal static  void ToggleOnlineSpawner(bool @override)
         {
             OnlineSpawn = @override;
             if (EmojiSpawnerChoices != null)
@@ -345,7 +345,7 @@
             }
         }
 
-        public static void ToggleEmojiSpawnerOnce()
+        internal static  void ToggleEmojiSpawnerOnce()
         {
             SkipVRChatOnlineCooldown = !SkipVRChatOnlineCooldown;
             if (SpawnOfflineEmojisToggle != null)
@@ -358,7 +358,7 @@
             }
         }
 
-        public static void ToggleEmojiSkipCooldown()
+        internal static  void ToggleEmojiSkipCooldown()
         {
             SkipVRChatOnlineCooldown = !SkipVRChatOnlineCooldown;
             if (SpawnOfflineEmojisToggle != null)
@@ -371,7 +371,7 @@
             }
         }
 
-        public static void UpdateEmojiSpawning()
+        internal static  void UpdateEmojiSpawning()
         {
             if (EmojiStatusEmojiMenu != null)
             {
@@ -417,7 +417,7 @@
             }
         }
 
-        public static void UpdateEmojiSpawning(bool @override)
+        internal static  void UpdateEmojiSpawning(bool @override)
         {
             if (EmojiStatusEmojiMenu != null)
             {
@@ -447,7 +447,7 @@
             }
         }
 
-        public static void ToggleEmojiSpamMode()
+        internal static  void ToggleEmojiSpamMode()
         {
             SlowSpawningAllowed = !SlowSpawningAllowed;
             if (EmojiSpawnerAllAtOnce != null)
@@ -456,7 +456,7 @@
             }
         }
 
-        public static void InitButton(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static  void InitButton(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var EmojiSpawnerButtons = new QMNestedButton(main, x, y, "Emoji Spawner", "Manual Emoji Spawner.", null, null, null, null, btnHalf);
             EmojiIntReveal = new QMSingleButton(EmojiSpawnerButtons, 3, 0, EmojiNames.Smile.ToString(), new Action(SpawnEmoji), "Spawn Emoji.", null, null);
@@ -542,44 +542,44 @@
             Summer_SunLotion = 57
         }
 
-        public static List<GameObject> EmojiPrefabsClone;
+        internal static  List<GameObject> EmojiPrefabsClone;
 
-        public static QMSingleButton EmojiIntReveal;
+        internal static  QMSingleButton EmojiIntReveal;
 
-        public static QMSingleButton EmojiSpamCounter;
+        internal static  QMSingleButton EmojiSpamCounter;
 
-        public static QMToggleButton EmojiSpawnerChoices;
+        internal static  QMToggleButton EmojiSpawnerChoices;
 
-        public static QMToggleButton EmojiSpawnerAllAtOnce;
+        internal static  QMToggleButton EmojiSpawnerAllAtOnce;
 
-        public static QMToggleButton SpawnOfflineEmojisToggle;
+        internal static  QMToggleButton SpawnOfflineEmojisToggle;
 
-        public static QMToggleButton SpawnOfflineEmojisToggle2;
+        internal static  QMToggleButton SpawnOfflineEmojisToggle2;
 
-        public static bool IsBeingSpawnedFromMenu = false;
+        internal static  bool IsBeingSpawnedFromMenu = false;
 
-        public static bool SlowSpawningAllowed = true;
-        public static int EmojiSpammerInt = 0;
+        internal static  bool SlowSpawningAllowed = true;
+        internal static  int EmojiSpammerInt = 0;
 
-        public static readonly float VRChatEmojiCooldown = 2f;
+        internal static  readonly float VRChatEmojiCooldown = 2f;
 
-        public static float Cooldown = 0f;
+        internal static  float Cooldown = 0f;
 
-        public static bool IsVRChatCooldownActive = false;
-        public static bool isOnlineSpammerActive = false;
-        public static bool Killcoroutines = false;
-        public static int EmojiInt = 0;
+        internal static  bool IsVRChatCooldownActive = false;
+        internal static  bool isOnlineSpammerActive = false;
+        internal static  bool Killcoroutines = false;
+        internal static  int EmojiInt = 0;
 
-        public static bool OnlineSpawn = true;
+        internal static  bool OnlineSpawn = true;
 
-        public static bool SkipVRChatOnlineCooldown = false;
+        internal static  bool SkipVRChatOnlineCooldown = false;
 
-        public static int LastUsedEmoji = 0;
+        internal static  int LastUsedEmoji = 0;
 
-        public static QMSingleButton EmojiStatusEmojiMenu;
+        internal static  QMSingleButton EmojiStatusEmojiMenu;
 
-        public static QMSingleButton LastSpawnedEmojiName;
+        internal static  QMSingleButton LastSpawnedEmojiName;
 
-        public static QMSingleButton EmojiStatusEmojiSpawner;
+        internal static  QMSingleButton EmojiStatusEmojiSpawner;
     }
 }

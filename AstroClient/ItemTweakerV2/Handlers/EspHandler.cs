@@ -6,9 +6,9 @@
     using AstroLibrary.Utility;
     using UnityEngine;
 
-    public class EspHandler : Tweaker_Events
+    internal class EspHandler : Tweaker_Events
     {
-        public override void On_New_GameObject_Selected(GameObject obj)
+        internal override void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
             {
@@ -19,7 +19,7 @@
             }
         }
 
-        public override void On_Old_GameObject_Removed(GameObject obj)
+        internal override void On_Old_GameObject_Removed(GameObject obj)
         {
             if (obj != null)
             {
@@ -33,7 +33,7 @@
 
         private static bool _TweakerESPEnabled;
 
-        public static bool TweakerESPEnabled
+        internal static  bool TweakerESPEnabled
         {
             get
             {

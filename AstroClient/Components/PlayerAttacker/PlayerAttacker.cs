@@ -12,7 +12,7 @@
     using Delegate = System.Delegate;
     using Time = UnityEngine.Time;
 
-    public class PlayerAttacker : GameEventsBehaviour
+    internal class PlayerAttacker : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;

@@ -7,24 +7,24 @@
     using UnityEngine;
     using VRC.SDKBase;
 
-    public class OnlineEditor
+    internal class OnlineEditor
     {
-        public static void TakeObjectOwnership(GameObject obj)
+        internal static  void TakeObjectOwnership(GameObject obj)
         {
             Networking.SetOwner(VRC.Player.prop_Player_0.field_Private_VRCPlayerApi_0, obj);
         }
 
-        public static void RemoveOwnerShip(GameObject obj)
+        internal static  void RemoveOwnerShip(GameObject obj)
         {
             Networking.SetOwner(GetInstanceMaster(), obj);
         }
 
-        public static bool IsLocalPlayerOwner(GameObject obj)
+        internal static  bool IsLocalPlayerOwner(GameObject obj)
         {
             return Networking.IsOwner(VRC.Player.prop_Player_0.field_Private_VRCPlayerApi_0, obj);
         }
 
-        public static void ReturnObjectOwner(GameObject obj)
+        internal static  void ReturnObjectOwner(GameObject obj)
         {
             ModConsole.Warning($"Current Owner : {Networking.GetOwner(obj).displayName}");
         }

@@ -3,11 +3,11 @@
     using System;
     using VRC;
 
-    public class PlayerEventArgs : EventArgs
+    internal class PlayerEventArgs : EventArgs
     {
-        public Player player;
+        internal Player player;
 
-        public PlayerEventArgs(Player player)
+        internal PlayerEventArgs(Player player)
         {
             this.player = player;
         }

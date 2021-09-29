@@ -6,7 +6,7 @@
 
     internal class UdonUnpacker_Utils
     {
-        public static DisassembledUdonBehaviour DisassembleUdonBehaviour(UdonBehaviour udon)
+        internal static  DisassembledUdonBehaviour DisassembleUdonBehaviour(UdonBehaviour udon)
         {
             if (udon != null)
             {

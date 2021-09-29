@@ -11,9 +11,9 @@
     using UnhollowerRuntimeLib;
     using UnityEngine;
 
-    public class SkyboxEditor : GameEvents
+    internal class SkyboxEditor : GameEvents
     {
-        public static string SkyboxesPath
+        internal static  string SkyboxesPath
         {
             get
             {
@@ -21,7 +21,7 @@
             }
         }
 
-        public class AssetBundleSkyboxes
+        internal class AssetBundleSkyboxes
         {
             public AssetBundle SkyboxBundle { get; set; }
             public string SkyboxName { get; set; }
@@ -35,7 +35,7 @@
             }
         }
 
-        public class MaterialSkyboxes
+        internal class MaterialSkyboxes
         {
             public Material SkyboxBundle { get; set; }
             public string SkyboxName { get; set; }
@@ -49,14 +49,14 @@
             }
         }
 
-        public static List<AssetBundleSkyboxes> LoadedSkyboxesBundles = new List<AssetBundleSkyboxes>();
-        public static List<MaterialSkyboxes> LoadedSkyboxesMaterials = new List<MaterialSkyboxes>();
+        internal static  List<AssetBundleSkyboxes> LoadedSkyboxesBundles = new List<AssetBundleSkyboxes>();
+        internal static  List<MaterialSkyboxes> LoadedSkyboxesMaterials = new List<MaterialSkyboxes>();
 
         private static bool HasLoadedCachedSkyboxes = false;
 
         private static Material OriginalSkybox;
 
-        public override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (!HasLoadedCachedSkyboxes)
             {
@@ -67,22 +67,22 @@
             OriginalSkybox = RenderSettings.skybox;
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             OriginalSkybox = null;
         }
 
-        public static bool IsBundleAlreadyRegistered(string filename)
+        internal static  bool IsBundleAlreadyRegistered(string filename)
         {
             return LoadedSkyboxesBundles.Where(x => x.SkyboxName == filename).Any(); ;
         }
 
-        public static bool IsMaterialAlreadyRegistered(string filename)
+        internal static  bool IsMaterialAlreadyRegistered(string filename)
         {
             return LoadedSkyboxesMaterials.Where(x => x.SkyboxName == filename).Any(); ;
         }
 
-        //public static void SaveCurrentSkybox()
+        //internal static  void SaveCurrentSkybox()
         //{
         //    if(OriginalSkybox != null)
         //    {
@@ -90,7 +90,7 @@
         //    }
         //}
 
-        public static IEnumerator FindAndLoadBundle()
+        internal static  IEnumerator FindAndLoadBundle()
         {
             if (Directory.Exists(SkyboxesPath))
             {
@@ -184,7 +184,7 @@
             RenderSettings.skybox = mat;
         }
 
-        public static void CustomSkyboxesMenu(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static  void CustomSkyboxesMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Skyboxes", "Change Map Skybox with a custom one", null, null, null, null, btnHalf);
             var scroll = new QMHalfScroll(menu);

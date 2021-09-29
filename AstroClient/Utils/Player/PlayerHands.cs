@@ -4,9 +4,9 @@
     using AstroLibrary.Utility;
     using UnityEngine;
 
-    public static class PlayerHands
+    internal static  class PlayerHands
     {
-        public static void DropObject(GameObject obj)
+        internal static  void DropObject(GameObject obj)
         {
             if (Utils.LocalPlayer.GetPlayer().GetVRCPlayerApi() != null)
             {
@@ -29,7 +29,7 @@
             }
         }
 
-        public static GameObject GetHoldTransform()
+        internal static  GameObject GetHoldTransform()
         {
             if (Utils.LocalPlayer.GetPlayer().GetVRCPlayerApi() != null)
             {
@@ -53,7 +53,7 @@
             return null;
         }
 
-        public static GameObject GetLeftHoldObject()
+        internal static  GameObject GetLeftHoldObject()
         {
             if (Utils.LocalPlayer.GetPlayer().GetVRCPlayerApi() != null)
             {
@@ -69,7 +69,7 @@
             return null;
         }
 
-        public static GameObject GetRightHoldObject()
+        internal static  GameObject GetRightHoldObject()
         {
             if (Utils.LocalPlayer.GetPlayer().GetVRCPlayerApi() != null)
             {

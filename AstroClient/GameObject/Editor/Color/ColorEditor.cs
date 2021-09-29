@@ -4,9 +4,9 @@
     using System.Threading.Tasks;
     using UnityEngine;
 
-    public class ColorEditor
+    internal class ColorEditor
     {
-        public static void ChangeObjColor(GameObject obj, Color color)
+        internal static  void ChangeObjColor(GameObject obj, Color color)
         {
             if (obj != null)
             {
@@ -23,7 +23,7 @@
             }
         }
 
-        public static async void BlinkColorObject(GameObject obj, Color BlinkColor, Color OriginalColor)
+        internal static  async void BlinkColorObject(GameObject obj, Color BlinkColor, Color OriginalColor)
         {
             ModConsole.Log("Setting Color of object : " + obj.name + " to : " + BlinkColor.ToString());
             ChangeObjColor(obj, BlinkColor);

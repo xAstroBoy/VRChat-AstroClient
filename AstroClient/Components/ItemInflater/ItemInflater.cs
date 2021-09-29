@@ -6,7 +6,7 @@
     using UnityEngine;
 
     [RegisterComponent]
-    public class ItemInflater : GameEventsBehaviour
+    internal class ItemInflater : GameEventsBehaviour
     {
         public Delegate ReferencedDelegate;
         public IntPtr MethodInfo;

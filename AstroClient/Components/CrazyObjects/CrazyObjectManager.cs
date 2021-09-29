@@ -12,7 +12,7 @@
     using Color = System.Drawing.Color;
 
     [RegisterComponent]
-    public class CrazyObjectManager : GameEventsBehaviour
+    internal class CrazyObjectManager : GameEventsBehaviour
     {
         #region Internal
 
@@ -47,7 +47,7 @@
 
         #region Module
 
-        public static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> CrazyObjectBehaviors;
+        internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> CrazyObjectBehaviors;
 
         public void Start()
         {
@@ -55,7 +55,7 @@
             Instance = this;
         }
 
-        public static void MakeInstance()
+        internal static  void MakeInstance()
         {
             if (Instance == null)
             {
@@ -74,11 +74,11 @@
             }
         }
 
-        public static void Update()
+        internal static  void Update()
         {
         }
 
-        public static void AddObject(GameObject obj, bool ShouldFloat)
+        internal static  void AddObject(GameObject obj, bool ShouldFloat)
         {
             if (obj != null)
             {
@@ -103,7 +103,7 @@
             }
         }
 
-        public static void IncreaseObjTimer(GameObject obj)
+        internal static  void IncreaseObjTimer(GameObject obj)
         {
             var TuneTime = obj.GetComponent<CrazyObject>();
             if (TuneTime != null)
@@ -113,7 +113,7 @@
             }
         }
 
-        public static void DecreaseObjTimer(GameObject obj)
+        internal static  void DecreaseObjTimer(GameObject obj)
         {
             var TuneTime = obj.GetComponent<CrazyObject>();
             if (TuneTime != null)
@@ -123,7 +123,7 @@
             }
         }
 
-        public static void UpdateTimeButton(GameObject obj)
+        internal static  void UpdateTimeButton(GameObject obj)
         {
             try
             {
@@ -140,7 +140,7 @@
             catch (Exception) { }
         }
 
-        public static void RemoveObject(GameObject obj)
+        internal static  void RemoveObject(GameObject obj)
         {
             if (CrazyObjects.Contains(obj))
             {
@@ -148,7 +148,7 @@
             }
         }
 
-        public static void KillCrazyObjects()
+        internal static  void KillCrazyObjects()
         {
             foreach (var obj in CrazyObjects)
             {
@@ -161,7 +161,7 @@
             CrazyObjects.Clear();
         }
 
-        public override void OnSceneLoaded(int buildIndex, string sceneName)
+        internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             CrazyObjects.Clear();
             ClearList();
@@ -171,25 +171,25 @@
             }
         }
 
-        public static void Register(CrazyObject CrazyObjectBehaviour)
+        internal static  void Register(CrazyObject CrazyObjectBehaviour)
         {
             CrazyObjectBehaviors.Add(CrazyObjectBehaviour);
         }
 
-        public static void Deregister(CrazyObject CrazyObjectBehaviour)
+        internal static  void Deregister(CrazyObject CrazyObjectBehaviour)
         {
             _ = CrazyObjectBehaviors.Remove(CrazyObjectBehaviour);
         }
 
-        public static void ClearList()
+        internal static  void ClearList()
         {
             CrazyObjectBehaviors.Clear();
         }
 
-        public static List<GameObject> CrazyObjects = new List<GameObject>();
+        internal static  List<GameObject> CrazyObjects = new List<GameObject>();
 
-        public static CrazyObjectManager Instance { get; set; }
-        public static QMSingleButton CrazyTimerBtn;
+        internal static  CrazyObjectManager Instance { get; set; }
+        internal static  QMSingleButton CrazyTimerBtn;
 
         #endregion Module
     }

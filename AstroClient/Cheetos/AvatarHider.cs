@@ -11,16 +11,16 @@
 
     #endregion Imports
 
-    public class AvatarHider : GameEvents
+    internal class AvatarHider : GameEvents
     {
-        public static bool HideAvatar = false;
+        internal static  bool HideAvatar = false;
 
-        public static void DestroyAvatar(GameObject avatar)
+        internal static  void DestroyAvatar(GameObject avatar)
         {
             avatar.transform.root.Find("ForwardDirection/Avatar").gameObject.DestroyMeLocal();
         }
 
-        public override void OnAvatarSpawn(VRCAvatarManager avatarManager, GameObject avatar)
+        internal override void OnAvatarSpawn(VRCAvatarManager avatarManager, GameObject avatar)
         {
             if (avatarManager == null || avatar == null) throw new ArgumentNullException();
             if (HideAvatar)
