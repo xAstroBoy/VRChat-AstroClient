@@ -6,111 +6,111 @@
     using System.Reflection;
 
     [Serializable, Obfuscation]
-    internal class ConfigUI
+    public class ConfigUI
     {
-        internal bool RemoveVRCPlus = false;
+        public bool RemoveVRCPlus = false;
 
-        internal bool RemoveReportButton = false;
+        public bool RemoveReportButton = false;
 
-        internal bool RemoveUserIconButton = false;
+        public bool RemoveUserIconButton = false;
 
-        internal bool RemoveVRCPlusMiniBanner = false;
+        public bool RemoveVRCPlusMiniBanner = false;
 
-        internal bool RemoveVRCPlusBanner = false;
+        public bool RemoveVRCPlusBanner = false;
 
-        internal bool RemoveUserIconCameraButton = false;
+        public bool RemoveUserIconCameraButton = false;
 
-        internal bool RemoveVRCPlusThankYou = false;
+        public bool RemoveVRCPlusThankYou = false;
 
-        internal bool RemoveVRCPlusMenu = false;
+        public bool RemoveVRCPlusMenu = false;
 
-        internal bool RemoveGalleryButton = false;
+        public bool RemoveGalleryButton = false;
 
-        internal bool NamePlates = false;
+        public bool NamePlates = false;
 
         // Player List UI
-        internal bool ShowPlayersMenu = true;
+        public bool ShowPlayersMenu = true;
 
-        internal bool ShowPlayersList = true;
+        public bool ShowPlayersList = true;
 
-        internal int PlayerListOffset = 0;
+        public int PlayerListOffset = 0;
     }
 
     [Serializable, Obfuscation]
-    internal class ConfigGeneral
+    public class ConfigGeneral
     {
-        internal bool DebugLog = false;
+        public bool DebugLog = false;
 
-        internal bool JoinLeave = false;
+        public bool JoinLeave = false;
 
-        internal bool LogRPCEvents = false;
+        public bool LogRPCEvents = false;
 
-        internal bool LogUdonEvents = false;
+        public bool LogUdonEvents = false;
 
-        internal bool LogTriggerEvents = false;
+        public bool LogTriggerEvents = false;
 
-        internal bool LogEvents = false;
+        public bool LogEvents = false;
 
-        internal float FOV = 61f;
+        public float FOV = 61f;
 
-        internal float FarClipPlane = 60f;
+        public float FarClipPlane = 60f;
 
-        internal bool SpoofPing = false;
+        public bool SpoofPing = false;
 
-        internal bool SpoofFPS = false;
+        public bool SpoofFPS = false;
 
-        internal bool SpoofQuest = false;
+        public bool SpoofQuest = false;
 
-        internal int SpoofedPing = 30;
+        public int SpoofedPing = 30;
 
-        internal float SpoofedFPS = 60f;
+        public float SpoofedFPS = 60f;
 
-        internal bool KeyBinds = false;
+        public bool KeyBinds = false;
     }
 
     [Serializable, Obfuscation]
-    internal class ConfigESP
+    public class ConfigESP
     {
-        internal bool PlayerESP = false;
+        public bool PlayerESP = false;
 
-        internal float[] PublicESPColor = new float[] { 0f, 1f, 1f, 1f };
+        public float[] PublicESPColor = new float[] { 0f, 1f, 1f, 1f };
 
-        internal float[] ESPFriendColor = new float[] { 0f, 1f, 0f, 1f };
+        public float[] ESPFriendColor = new float[] { 0f, 1f, 0f, 1f };
 
-        internal float[] ESPBlockedColor = new float[] { 1f, 0f, 0f, 1f };
+        public float[] ESPBlockedColor = new float[] { 1f, 0f, 0f, 1f };
     }
 
     [Serializable, Obfuscation]
-    internal class ConfigFlight
+    public class ConfigFlight
     {
-        internal float VRFlySpeed = 3f;
+        public float VRFlySpeed = 3f;
 
-        internal float DesktopFlySpeed = 3f;
+        public float DesktopFlySpeed = 3f;
 
-        internal bool BasicFly = true;
+        public bool BasicFly = true;
     }
 
     [Serializable, Obfuscation]
-    internal class ConfigMovement
+    public class ConfigMovement
     {
-        internal bool UnlimitedJump = false;
+        public bool UnlimitedJump = false;
 
-        internal bool RocketJump = false;
+        public bool RocketJump = false;
 
-        internal bool QMFreeze = false;
+        public bool QMFreeze = false;
     }
 
     [Serializable, Obfuscation]
-    internal class ConfigFavorites
+    public class ConfigFavorites
     {
-        internal List<AvatarData> Avatars = new List<AvatarData>();
+        public List<AvatarData> Avatars = new List<AvatarData>();
     }
 
     [Serializable, Obfuscation]
-    internal class ConfigPerformance
+    public class ConfigPerformance
     {
-        internal bool HighPriority = false;
+        public bool HighPriority = false;
 
-        internal bool UnlimitedFrames = false;
+        public bool UnlimitedFrames = false;
     }
 }

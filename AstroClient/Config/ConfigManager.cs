@@ -12,7 +12,7 @@
 
     #endregion Imports
 
-    internal static  class ConfigManager
+    public static  class ConfigManager
     {
         private static Mutex SaveMutex = new Mutex();
 
@@ -40,23 +40,23 @@
 
         #region Config Classes
 
-        internal static  ConfigGeneral General = new ConfigGeneral();
+        public static  ConfigGeneral General = new ConfigGeneral();
 
-        internal static  ConfigUI UI = new ConfigUI();
+        public static  ConfigUI UI = new ConfigUI();
 
-        internal static  ConfigESP ESP = new ConfigESP();
+        public static  ConfigESP ESP = new ConfigESP();
 
-        internal static  ConfigFlight Flight = new ConfigFlight();
+        public static  ConfigFlight Flight = new ConfigFlight();
 
-        internal static  ConfigMovement Movement = new ConfigMovement();
+        public static  ConfigMovement Movement = new ConfigMovement();
 
-        internal static  ConfigFavorites Favorites = new ConfigFavorites();
+        public static  ConfigFavorites Favorites = new ConfigFavorites();
 
-        internal static  ConfigPerformance Performance = new ConfigPerformance();
+        public static  ConfigPerformance Performance = new ConfigPerformance();
 
         #endregion Config Classes
 
-        internal static  Color PublicESPColor
+        public static  Color PublicESPColor
         {
             get
             {
@@ -71,7 +71,7 @@
             }
         }
 
-        internal static  Color ESPFriendColor
+        public static  Color ESPFriendColor
         {
             get
             {
@@ -86,7 +86,7 @@
             }
         }
 
-        internal static  Color ESPBlockedColor
+        public static  Color ESPBlockedColor
         {
             get
             {
@@ -101,7 +101,7 @@
             }
         }
 
-        internal static  void Validate()
+        public static  void Validate()
         {
             _ = SaveMutex.WaitOne();
 
@@ -172,49 +172,49 @@
             SaveMutex.ReleaseMutex();
         }
 
-        internal static  void Save_General()
+        public static  void Save_General()
         {
             JSonWriter.WriteToJsonFile(ConfigPath, General);
             ModConsole.DebugLog("General Config Saved.");
         }
 
-        internal static  void Save_UI()
+        public static  void Save_UI()
         {
             JSonWriter.WriteToJsonFile(ConfigUIPath, UI);
             ModConsole.DebugLog("UI Config Saved.");
         }
 
-        internal static  void Save_ESP()
+        public static  void Save_ESP()
         {
             JSonWriter.WriteToJsonFile(ConfigESPPath, ESP);
             ModConsole.DebugLog("ESP Config Saved.");
         }
 
-        internal static  void Save_Flight()
+        public static  void Save_Flight()
         {
             JSonWriter.WriteToJsonFile(ConfigFlightPath, Flight);
             ModConsole.DebugLog("Flight Config Saved.");
         }
 
-        internal static  void Save_Movement()
+        public static  void Save_Movement()
         {
             JSonWriter.WriteToJsonFile(ConfigMovementPath, Movement);
             ModConsole.DebugLog("Movement Config Saved.");
         }
 
-        internal static  void Save_Favorites()
+        public static  void Save_Favorites()
         {
             JSonWriter.WriteToJsonFile(ConfigFavoritesPath, Favorites);
             ModConsole.DebugLog("Favorites Config Saved.");
         }
 
-        internal static  void Save_Performance()
+        public static  void Save_Performance()
         {
             JSonWriter.WriteToJsonFile(ConfigPerformancePath, Performance);
             ModConsole.DebugLog("Performance Config Saved.");
         }
 
-        internal static  void SaveAll()
+        public static  void SaveAll()
         {
             _ = SaveMutex.WaitOne();
             Stopwatch stopwatch = new Stopwatch();
@@ -231,7 +231,7 @@
             SaveMutex.ReleaseMutex();
         }
 
-        internal static  void Load()
+        public static  void Load()
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
