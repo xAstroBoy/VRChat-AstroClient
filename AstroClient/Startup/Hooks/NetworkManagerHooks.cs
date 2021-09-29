@@ -1,4 +1,4 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.Startup.Hooks
 {
     using AstroClientCore.Events;
     using AstroLibrary.Extensions;
