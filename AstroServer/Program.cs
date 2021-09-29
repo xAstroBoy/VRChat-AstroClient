@@ -45,8 +45,8 @@
             await Services.GetRequiredService<CommandHandlingService>().InitializeAsync();
 
             // Key count
-            Console.WriteLine($"There are {KeyManager.GetDevKeyCount()} dev keys stored.");
-            Console.WriteLine($"There are {KeyManager.GetKeyCount()} valid keys stored.");
+            Console.WriteLine($"There are {AccountManager.GetDevKeyCount()} dev keys stored.");
+            Console.WriteLine($"There are {AccountManager.GetKeyCount()} valid keys stored.");
 
             Console.WriteLine("Starting Server..");
             LServer = new LoaderServer();

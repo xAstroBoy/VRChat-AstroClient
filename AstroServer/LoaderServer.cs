@@ -83,13 +83,13 @@
                     {
                         string key = packetData.TextData;
 
-                        if (KeyManager.IsKeyValid(key))
+                        if (AccountManager.IsKeyValid(key))
                         {
                             client.IsAuthed = true;
                             client.Key = key;
-                            client.DiscordID = KeyManager.GetKeysDiscordOwner(key);
+                            client.DiscordID = AccountManager.GetKeysDiscordOwner(key);
 
-                            client.Data = KeyManager.GetAccountData(key);
+                            client.Data = AccountManager.GetAccountData(key);
                             client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
                         }
                         else

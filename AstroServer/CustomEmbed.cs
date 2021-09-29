@@ -16,9 +16,9 @@
                 Color = Color.Blue,
             };
 
-            embedBuilder.AddField("Developers", KeyManager.GetDevKeyCount());
-            embedBuilder.AddField("Beta Testers", KeyManager.GetBetaKeyCount());
-            embedBuilder.AddField("Clients", KeyManager.GetDevKeyCount());
+            embedBuilder.AddField("Developers", AccountManager.GetDevKeyCount());
+            embedBuilder.AddField("Beta Testers", AccountManager.GetBetaKeyCount());
+            embedBuilder.AddField("Clients", AccountManager.GetDevKeyCount());
             return embedBuilder.Build();
         }
 
@@ -66,7 +66,7 @@
 
         public static Embed GetKeyshareEmbed(Client origin, Client other)
         {
-            var data = KeyManager.GetAccountData(origin.Key);
+            var data = AccountManager.GetAccountData(origin.Key);
             var discordId = data.DiscordID;
             var discordUser = AstroBot.Client.GetUser(discordId);
 
@@ -193,7 +193,7 @@
                 color = Color.Red;
             }
 
-            var data = KeyManager.GetAccountData(client.Key);
+            var data = AccountManager.GetAccountData(client.Key);
             var discordId = data.DiscordID;
             var discordUser = AstroBot.Client.GetUser(discordId);
 
@@ -246,7 +246,7 @@
                 color = Color.Gold;
             }
 
-            var data = KeyManager.GetAccountData(client.Key);
+            var data = AccountManager.GetAccountData(client.Key);
             var discordId = data.DiscordID;
             var discordUser = AstroBot.Client.GetUser(discordId);
 
@@ -306,7 +306,7 @@
 
         public static Embed GetKeyEmbed(string authKey)
         {
-            var data = KeyManager.GetAccountData(authKey);
+            var data = AccountManager.GetAccountData(authKey);
             var discordId = data.DiscordID;
             var discordUser = AstroBot.Client.GetUser(discordId);
 

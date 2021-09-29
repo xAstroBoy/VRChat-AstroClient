@@ -6,7 +6,7 @@
     using System.IO;
     using System.Linq;
 
-    internal static class KeyManager
+    internal static class AccountManager
     {
         /// <summary>
         /// Returns the auth token for the DiscordBot

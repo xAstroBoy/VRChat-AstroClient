@@ -16,6 +16,16 @@
     [RequireTeam]
     public class AdminModule : ModuleBase<SocketCommandContext>
     {
+        [Command("ForceSave")]
+        [Summary("ForceSave command")]
+        public async Task ForceSave()
+        {
+            foreach (var client in ClientServer.Clients)
+            {
+
+            }
+        }
+
         [Command("GenKey")]
         [Summary("GenKey command")]
         public async Task GenKey()
@@ -24,7 +34,7 @@
 
             if (key != string.Empty)
             {
-                if (!KeyManager.IsKeyValid(key))
+                if (!AccountManager.IsKeyValid(key))
                 {
                     _ = await ReplyAsync(null, false, CustomEmbed.GetNewKeyEmbed(key, true));
                     //KeyManager.AddKey(key, discordID);

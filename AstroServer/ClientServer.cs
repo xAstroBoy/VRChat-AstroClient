@@ -83,13 +83,13 @@
                     {
                         client.Key = packetData.TextData;
 
-                        if (KeyManager.IsKeyValid(client.Key))
+                        if (AccountManager.IsKeyValid(client.Key))
                         {
                             CheckExistingClientsWithKey(client);
                             client.IsAuthed = true;
-                            client.DiscordID = KeyManager.GetKeysDiscordOwner(client.Key);
+                            client.DiscordID = AccountManager.GetKeysDiscordOwner(client.Key);
 
-                            client.Data = KeyManager.GetAccountData(client.Key);
+                            client.Data = AccountManager.GetAccountData(client.Key);
                             client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
 
                             if (client.Data.IsDeveloper)

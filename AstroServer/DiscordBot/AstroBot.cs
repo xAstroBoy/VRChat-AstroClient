@@ -60,7 +60,7 @@
 
         public async Task Start()
         {
-            await Client.LoginAsync(TokenType.Bot, KeyManager.GetBotToken());
+            await Client.LoginAsync(TokenType.Bot, AccountManager.GetBotToken());
             await Client.StartAsync();
         }
 
