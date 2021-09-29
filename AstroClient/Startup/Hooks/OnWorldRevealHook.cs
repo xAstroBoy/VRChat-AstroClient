@@ -10,6 +10,9 @@
     using System.Runtime.InteropServices;
     using UnhollowerBaseLib;
 
+
+    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
+
     public class OnWorldRevealHook : GameEvents
     {
         public static event EventHandler<OnWorldRevealArgs> Event_OnWorldReveal;
@@ -25,13 +28,19 @@
             HookFadeTo();
         }
 
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        private static IntPtr GetPointerPatch(string patch)
+        {
+            return typeof(OnWorldRevealHook).GetMethod(patch, BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer();
+        }
+
         private static void HookFadeTo()
         {
             unsafe
             {
                 ModConsole.DebugLog("Hooking FadeTo");
                 var originalMethod = *(IntPtr*)(IntPtr)UnhollowerUtils.GetIl2CppMethodInfoPointerFieldForGeneratedMethod(typeof(VRCUiManager).GetMethod(nameof(VRCUiManager.Method_Public_Void_String_Single_Action_0))).GetValue(null);
-                MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), typeof(OnWorldRevealHook).GetMethod(nameof(FadeToPatch), BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer());
+                MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), GetPointerPatch(nameof(FadeToPatch)));
                 _fadeToDelegate = Marshal.GetDelegateForFunctionPointer<FadeToDelegate>(originalMethod);
                 if (_fadeToDelegate != null)
                 {

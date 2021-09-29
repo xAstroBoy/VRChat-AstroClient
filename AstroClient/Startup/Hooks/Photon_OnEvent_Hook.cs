@@ -14,6 +14,8 @@
 
     #endregion Imports
 
+
+    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     public class PhotonOnEventHook : GameEvents
     {
         //public static
@@ -27,6 +29,15 @@
             }));
         }
 
+
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        private static HarmonyMethod GetPatch(string name)
+        {
+            return new HarmonyMethod(typeof(PhotonOnEventHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+        }
+
+
+
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
         public void InitPatches()
         {
@@ -37,7 +48,7 @@
                     harmony = new HarmonyLib.Harmony(BuildInfo.Name + " PhotonOnEventHook");
                 }
 
-                _ = harmony.Patch(AccessTools.Method(typeof(LoadBalancingClient), nameof(LoadBalancingClient.OnEvent)), new HarmonyMethod(typeof(PhotonOnEventHook).GetMethod(nameof(OnEvent), BindingFlags.Static | BindingFlags.NonPublic)), null, null);
+                _ = harmony.Patch(AccessTools.Method(typeof(LoadBalancingClient), nameof(LoadBalancingClient.OnEvent)), GetPatch(nameof(OnEvent)), null, null);
                 ModConsole.DebugLog("Photon Hooks Done");
             }
             catch

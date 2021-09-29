@@ -17,6 +17,15 @@
             HookSpawnEmojiRPC();
         }
 
+
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch ", Exclude = false)]
+        private static IntPtr GetPointerPatch(string patch)
+        {
+            return typeof(SpawnEmojiRPCHook).GetMethod(patch, BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer();
+        }
+
+
+
         private void HookSpawnEmojiRPC()
         {
             unsafe
@@ -29,7 +38,7 @@
                             typeof(VRCPlayer).GetMethod(
                                 nameof(VRCPlayer
                                     .SpawnEmojiRPC))).GetValue(null);
-                    MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), typeof(SpawnEmojiRPCHook).GetMethod(nameof(SpawnEmojiRPCPatch), BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer());
+                    MelonUtils.NativeHookAttach((IntPtr)(&originalMethod), GetPointerPatch(nameof(SpawnEmojiRPCPatch)));
                     _SpawnEmojiRPCDelegate = Marshal.GetDelegateForFunctionPointer<SpawnEmojiRPCDelegate>(originalMethod);
                     if (_SpawnEmojiRPCDelegate != null)
                     {

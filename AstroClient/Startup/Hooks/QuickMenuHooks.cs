@@ -8,8 +8,11 @@
     using AstroLibrary.Utility;
     using ExitGames.Client.Photon;
     using HarmonyLib;
+    using MelonLoader;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Reflection;
     using UnityEngine;
     using VRC;
@@ -24,18 +27,13 @@
         public static event EventHandler<VRCPlayerEventArgs> Event_OnPlayerSelected;
 
 
-        private static HarmonyMethod GetPatch(string name)
-        {
-            return new HarmonyMethod(typeof(QuickMenuHooks).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
-        }
-
         public class Patch
         {
-            private static List<Patch> Patches = new List<Patch>();
+            public static List<Patch> Patches { get; set; } = new List<Patch>();
             public MethodInfo TargetMethod { get; set; }
             public HarmonyMethod PrefixMethod { get; set; }
             public HarmonyMethod PostfixMethod { get; set; }
-            public Harmony Instance { get; set; }
+            public HarmonyLib.Harmony Instance { get; set; }
 
             public Patch(MethodInfo targetMethod, HarmonyMethod Before = null, HarmonyMethod After = null)
             {
@@ -44,7 +42,7 @@
                     ModConsole.Error("[Patches] TargetMethod is NULL or Pre And PostFix are Null");
                     return;
                 }
-                Instance = new Harmony($"Patch:{targetMethod.DeclaringType.FullName}.{targetMethod.Name}");
+                Instance = new HarmonyLib.Harmony($"Patch:{targetMethod.DeclaringType.FullName}.{targetMethod.Name}");
                 TargetMethod = targetMethod;
                 PrefixMethod = Before;
                 PostfixMethod = After;
@@ -53,21 +51,30 @@
 
             public static async void DoPatches()
             {
+                Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();
+
                 for (int i = 0; i < Patches.Count; i++)
                 {
                     Patch patch = Patches[i];
                     try
                     {
-                        ModConsole.DebugLog($"[Patches] Patching {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {patch.PrefixMethod?.method.Name}{patch.PostfixMethod?.method.Name}");
-                        _ = patch.Instance.Patch(patch.TargetMethod, patch.PrefixMethod, patch.PostfixMethod);
+                        patch.Instance.Patch(patch.TargetMethod, patch.PrefixMethod, patch.PostfixMethod);
                     }
                     catch (Exception e)
                     {
                         ModConsole.Error($"[Patches] Failed At {patch.TargetMethod?.Name} | {patch.PrefixMethod?.method.Name} | with AstroClient {patch.PostfixMethod?.method.Name}");
+                        ModConsole.Error(e.Message);
                         ModConsole.ErrorExc(e);
                     }
+                    finally
+                    {
+                        ModConsole.DebugLog($"[Patches] Patched {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {patch.PrefixMethod?.method.Name}{patch.PostfixMethod?.method.Name}");
+                    }
                 }
-                ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods!");
+
+                stopwatch.Stop();
+                ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods: {stopwatch.ElapsedMilliseconds}ms");
             }
 
             public static async void UnDoPatches()
@@ -89,9 +96,21 @@
             }
         }
 
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        private static HarmonyMethod GetPatch(string name)
+        {
+            return new HarmonyMethod(typeof(QuickMenuHooks).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+        }
+
         public override void ExecutePriorityPatches()
         {
+            MelonCoroutines.Start(Init());
+        }
+
+        private IEnumerator Init()
+        {
             InitPatch();
+            yield break;
         }
 
 
