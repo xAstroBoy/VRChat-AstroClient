@@ -91,11 +91,6 @@
 
                             client.Data = KeyManager.GetAccountData(key);
                             client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
-
-                            if (KeyManager.IsDevKey(key))
-                            {
-                                client.Data.IsDeveloper = true;
-                            }
                         }
                         else
                         {
