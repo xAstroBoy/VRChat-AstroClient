@@ -16,9 +16,9 @@
     {
         #region ChannelIDs
 
-        internal const ulong AvatarCountChannelID = 849865669393776660;
+        internal const ulong AvatarCountChannelID = 892870307176656927; // Updated
 
-        internal const ulong LoginChannelID = 832405505774190682;
+        internal const ulong LoginChannelID = 892871455824564274; // Updated
 
         internal const ulong LogChannelID = 834125750365192210;
 
@@ -34,7 +34,7 @@
 
         public static DiscordSocketClient Client { get; set; }
 
-        internal static ulong[] DeveloperIDs = new ulong[] { 717788323262890045, 257862389687386113, 587423650718679068 };
+        internal static ulong[] DeveloperIDs = new ulong[] { 453635324124463115, 717788323262890045 };
 
         private static Timer statusTimer;
 
