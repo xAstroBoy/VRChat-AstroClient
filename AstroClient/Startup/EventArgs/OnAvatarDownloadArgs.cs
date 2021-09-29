@@ -5,9 +5,9 @@
 
     internal class OnAvatarDownloadArgs : EventArgs
     {
-        public ApiAvatar Avatar;
+        internal ApiAvatar Avatar;
 
-        public OnAvatarDownloadArgs(ApiAvatar avatar)
+        internal OnAvatarDownloadArgs(ApiAvatar avatar)
         {
             Avatar = avatar;
         }

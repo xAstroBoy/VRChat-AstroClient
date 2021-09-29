@@ -18,7 +18,7 @@
     // thanks TO Cheeto aka Craig on discord, he's been really helpful!
     public class GameEvents
     {
-        public GameEvents()
+        internal GameEvents()
         {
             // ML Events
             Main.Event_OnApplicationLateStart += Internal_OnApplicationLateStart;

@@ -4,9 +4,9 @@
 
     internal class RayCastEventArgs
     {
-        public RaycastHit hit;
+        internal RaycastHit hit;
 
-        public RayCastEventArgs(RaycastHit hit)
+        internal RayCastEventArgs(RaycastHit hit)
         {
             this.hit = hit;
         }

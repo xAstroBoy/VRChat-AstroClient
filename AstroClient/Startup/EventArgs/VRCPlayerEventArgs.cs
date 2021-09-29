@@ -4,9 +4,9 @@
 
     internal class VRCPlayerEventArgs : EventArgs
     {
-        public VRC.Player player;
+        internal VRC.Player player;
 
-        public VRCPlayerEventArgs(VRC.Player player)
+        internal VRCPlayerEventArgs(VRC.Player player)
         {
             this.player = player;
         }

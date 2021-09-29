@@ -5,13 +5,13 @@
 
     internal class VRC_EventDispatcherRFC_TriggerEventArgs : EventArgs
     {
-        public VRC_EventHandler VRC_EventHandler;
-        public VRC_EventHandler.VrcEvent VrcEvent;
-        public VRC_EventHandler.VrcBroadcastType VrcBroadcastType;
-        public int UnknownInt;
-        public float UnknownFloat;
+        internal VRC_EventHandler VRC_EventHandler;
+        internal VRC_EventHandler.VrcEvent VrcEvent;
+        internal VRC_EventHandler.VrcBroadcastType VrcBroadcastType;
+        internal int UnknownInt;
+        internal float UnknownFloat;
 
-        public VRC_EventDispatcherRFC_TriggerEventArgs(VRC_EventHandler VRC_EventHandler, VRC_EventHandler.VrcEvent VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int UnknownInt, float UnknownFloat)
+        internal VRC_EventDispatcherRFC_TriggerEventArgs(VRC_EventHandler VRC_EventHandler, VRC_EventHandler.VrcEvent VrcEvent, VRC_EventHandler.VrcBroadcastType VrcBroadcastType, int UnknownInt, float UnknownFloat)
         {
             this.VRC_EventHandler = VRC_EventHandler;
             this.VrcEvent = VrcEvent;

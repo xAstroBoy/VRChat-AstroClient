@@ -5,10 +5,10 @@
 
     internal class OnAvatarSpawnArgs : EventArgs
     {
-        public VRCAvatarManager VRCAvatarManager;
-        public GameObject Avatar;
+        internal VRCAvatarManager VRCAvatarManager;
+        internal GameObject Avatar;
 
-        public OnAvatarSpawnArgs(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
+        internal OnAvatarSpawnArgs(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
         {
             this.VRCAvatarManager = VRCAvatarManager;
             this.Avatar = Avatar;
