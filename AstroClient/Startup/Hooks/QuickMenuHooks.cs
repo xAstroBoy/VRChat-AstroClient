@@ -20,6 +20,8 @@
 
     #endregion Imports
 
+
+    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class QuickMenuHooks : GameEvents
     {
 
