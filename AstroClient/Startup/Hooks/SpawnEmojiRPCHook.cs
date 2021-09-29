@@ -8,6 +8,9 @@
     using System.Runtime.InteropServices;
     using UnhollowerBaseLib;
 
+
+    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
+
     public class SpawnEmojiRPCHook : GameEvents
     {
         public static event EventHandler<SpawnEmojiArgs> Event_SpawnEmojiRPC;
@@ -18,7 +21,7 @@
         }
 
 
-        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch ", Exclude = false)]
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static IntPtr GetPointerPatch(string patch)
         {
             return typeof(SpawnEmojiRPCHook).GetMethod(patch, BindingFlags.Static | BindingFlags.NonPublic).MethodHandle.GetFunctionPointer();
