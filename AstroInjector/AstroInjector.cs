@@ -149,7 +149,7 @@
                     {
                         var newpath = Path.GetDirectoryName(path) + "\\" + Path.GetFileNameWithoutExtension(path) + "-Obfuscated" + Path.GetExtension(path);
                         var obfuscatedll = Assembly.LoadFrom(newpath);
-                        MelonHandler.LoadFromAssembly(obfuscatedll, path);
+                        MelonHandler.LoadFromAssembly(obfuscatedll, newpath);
                         MelonLogger.Msg($"Injected Obfuscated Library: {path}");
                     }
 
@@ -175,7 +175,7 @@
                     else
                     {   var newpath = Path.GetDirectoryName(path) + "\\" + Path.GetFileNameWithoutExtension(path) + "-Obfuscated" + Path.GetExtension(path);
                         var obfuscatedll = Assembly.LoadFile(newpath);
-                        MelonHandler.LoadFromAssembly(obfuscatedll, path);
+                        MelonHandler.LoadFromAssembly(obfuscatedll, newpath);
                         MelonLogger.Msg($"Injected Obfuscated MelonMod/MelonPlugin: {path}");
                     }
                 }
