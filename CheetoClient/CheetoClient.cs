@@ -1,6 +1,5 @@
 ﻿namespace CheetoClient
 {
-	using AstroLibrary.Console;
 	using HarmonyLib;
 	using MelonLoader;
 	using System;
@@ -10,9 +9,6 @@
 	{
 		public override void OnApplicationStart()
 		{
-			ModConsole.Initialize("CheetoClient");
-			ModConsole.Log("Congratulations, you now have the most useless client!");
-		}
-
+        }
 	}
 }

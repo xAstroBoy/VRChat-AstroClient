@@ -30,14 +30,14 @@
             return DB.Find<AccountData>().ManyAsync(a => a.IsDeveloper).Result.Count;
         }
 
-        public static int GetKeyCount()
+        public static int GetBetaKeyCount()
         {
-            return DB.Find<AccountData>().ManyAsync(a => !a.IsDeveloper).Result.Count;
+            return DB.Find<AccountData>().ManyAsync(a => a.IsBeta).Result.Count;
         }
 
-        public static bool IsDevKey(string authKey)
+        public static int GetKeyCount()
         {
-            return DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(authKey) && a.IsDeveloper).Result.Any();
+            return DB.Find<AccountData>().ManyAsync(a => (!a.IsDeveloper && !a.IsBeta)).Result.Count;
         }
 
         public static bool IsKeyValid(string key)

@@ -17,6 +17,7 @@
             };
 
             embedBuilder.AddField("Developers", KeyManager.GetDevKeyCount());
+            embedBuilder.AddField("Beta Testers", KeyManager.GetBetaKeyCount());
             embedBuilder.AddField("Clients", KeyManager.GetDevKeyCount());
             return embedBuilder.Build();
         }
@@ -65,7 +66,8 @@
 
         public static Embed GetKeyshareEmbed(Client origin, Client other)
         {
-            var discordId = KeyManager.GetKeysDiscordOwner(origin.Key);
+            var data = KeyManager.GetAccountData(origin.Key);
+            var discordId = data.DiscordID;
             var discordUser = AstroBot.Client.GetUser(discordId);
 
             EmbedBuilder embedBuilder = new EmbedBuilder()
@@ -75,10 +77,21 @@
                 ThumbnailUrl = discordUser.GetAvatarUrl()
             };
 
-            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
+            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
+            var text = string.Empty;
+
+            if (data.IsDeveloper)
             {
-                Text = KeyManager.IsDevKey(origin.Key) ? "Developer" : "Client"
-            };
+                text = "Developer";
+            }
+            else if (data.IsBeta)
+            {
+                text = "Beta";
+            }
+            else
+            {
+                text = "Client";
+            }
 
             embedBuilder.AddField("Kicked Name", origin.Name);
             embedBuilder.AddField("Kicked UserID", origin.Name);
@@ -93,16 +106,16 @@
             return embedBuilder.Build();
         }
 
-        public static Embed GetAccountEmbed(AccountData account)
+        public static Embed GetAccountEmbed(AccountData data)
         {
             var color = Color.Blue;
 
-            if (account.IsDeveloper)
+            if (data.IsDeveloper)
             {
-                color = Color.Red;
+                color = Color.Gold;
             }
 
-            var discordId = KeyManager.GetKeysDiscordOwner(account.Key);
+            var discordId = data.DiscordID;
             var discordUser = AstroBot.Client.GetUser(discordId);
 
             EmbedBuilder embedBuilder = new EmbedBuilder()
@@ -112,37 +125,48 @@
                 ThumbnailUrl = discordUser.GetAvatarUrl()
             };
 
-            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
-            {
-                Text = KeyManager.IsDevKey(account.Key) ? "Developer" : "Client"
-            };
+            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
+            var text = string.Empty;
 
-            embedBuilder.AddField("Name", account.Name);
-            embedBuilder.AddField("Discord", account.DiscordID);
+            if (data.IsDeveloper)
+            {
+                text = "Developer";
+            }
+            else if (data.IsBeta)
+            {
+                text = "Beta";
+            }
+            else
+            {
+                text = "Client";
+            }
+
+            embedBuilder.AddField("Name", data.Name);
+            embedBuilder.AddField("Discord", data.DiscordID);
 
             StringBuilder sb = new StringBuilder();
 
-            if (account.HasExploits)
+            if (data.HasExploits)
             {
                 sb.Append("HasExploits ");
             }
 
-            if (account.HasUdon)
+            if (data.HasUdon)
             {
                 sb.Append("HasUdon ");
             }
 
-            if (account.HasAmongUs)
+            if (data.HasAmongUs)
             {
                 sb.Append("HasAmongUs ");
             }
 
-            if (account.HasFreezeTag)
+            if (data.HasFreezeTag)
             {
                 sb.Append("HasFreezeTag ");
             }
 
-            if (account.HasMurder4)
+            if (data.HasMurder4)
             {
                 sb.Append("HasMurder4 ");
             }
@@ -153,7 +177,7 @@
             {
                 embedBuilder.AddField("Permissions", sb.ToString());
             }
-            embedBuilder.AddField("Key", account.Key);
+            embedBuilder.AddField("Key", data.Key);
 
             embedBuilder.Footer = embedFooterBuilder;
 
@@ -169,7 +193,8 @@
                 color = Color.Red;
             }
 
-            var discordId = KeyManager.GetKeysDiscordOwner(client.Key);
+            var data = KeyManager.GetAccountData(client.Key);
+            var discordId = data.DiscordID;
             var discordUser = AstroBot.Client.GetUser(discordId);
 
             EmbedBuilder embedBuilder = new EmbedBuilder()
@@ -179,10 +204,21 @@
                 ThumbnailUrl = discordUser.GetAvatarUrl()
             };
 
-            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
+            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
+            var text = string.Empty;
+
+            if (data.IsDeveloper)
             {
-                Text = KeyManager.IsDevKey(client.Key) ? "Developer" : "Client"
-            };
+                text = "Developer";
+            }
+            else if (data.IsBeta)
+            {
+                text = "Beta";
+            }
+            else
+            {
+                text = "Client";
+            }
 
             embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
 
@@ -207,10 +243,11 @@
 
             if (client.Data.IsDeveloper)
             {
-                color = Color.Red;
+                color = Color.Gold;
             }
 
-            var discordId = KeyManager.GetKeysDiscordOwner(client.Key);
+            var data = KeyManager.GetAccountData(client.Key);
+            var discordId = data.DiscordID;
             var discordUser = AstroBot.Client.GetUser(discordId);
 
             EmbedBuilder embedBuilder = new EmbedBuilder()
@@ -220,10 +257,21 @@
                 ThumbnailUrl = discordUser.GetAvatarUrl()
             };
 
-            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
+            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
+            var text = string.Empty;
+
+            if (data.IsDeveloper)
             {
-                Text = KeyManager.IsDevKey(client.Key) ? "Developer" : "Client"
-            };
+                text = "Developer";
+            }
+            else if (data.IsBeta)
+            {
+                text = "Beta";
+            }
+            else
+            {
+                text = "Client";
+            }
 
             embedBuilder.AddField("IP", client.ClientSocket.Client.RemoteEndPoint);
             embedBuilder.AddField("Time", $"{DateTime.Now.ToLongDateString()}, {DateTime.Now:HH:mm:ss tt}");
@@ -258,15 +306,16 @@
 
         public static Embed GetKeyEmbed(string authKey)
         {
+            var data = KeyManager.GetAccountData(authKey);
+            var discordId = data.DiscordID;
+            var discordUser = AstroBot.Client.GetUser(discordId);
+
             var color = Color.Blue;
 
-            if (KeyManager.IsDevKey(authKey))
+            if (data.IsDeveloper)
             {
-                color = Color.Red;
+                color = Color.Gold;
             }
-
-            var discordId = KeyManager.GetKeysDiscordOwner(authKey);
-            var discordUser = AstroBot.Client.GetUser(discordId);
 
             EmbedBuilder embedBuilder = new EmbedBuilder()
             {
@@ -275,10 +324,21 @@
                 ThumbnailUrl = discordUser.GetAvatarUrl()
             };
 
-            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder
+            EmbedFooterBuilder embedFooterBuilder = new EmbedFooterBuilder();
+            var text = string.Empty;
+
+            if (data.IsDeveloper)
             {
-                Text = KeyManager.IsDevKey(authKey) ? "Developer" : "Client"
-            };
+                text = "Developer";
+            }
+            else if (data.IsBeta)
+            {
+                text = "Beta";
+            }
+            else
+            {
+                text = "Client";
+            }
 
             embedBuilder.AddField("Key", authKey);
 
