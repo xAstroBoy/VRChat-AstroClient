@@ -21,7 +21,7 @@
                     string displayname = string.Empty;
                     if (PlayerSpooferUtils.SpooferInstance.IsSpooferActive)
                     {
-                        displayname = PlayerSpooferUtils.SpooferInstance.RealName;
+                        displayname = PlayerSpooferUtils.SpooferInstance.Original_DisplayName;
                     }
                     else
                     {

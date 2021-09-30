@@ -22,11 +22,12 @@ namespace AstroClient
                     ToggleLightTrigger = FlashLight_Body.AddComponent<VRC_AstroPickup>();
                     if (ToggleLightTrigger != null)
                     {
+                        ToggleLightTrigger.IsForcedPickupController = true;
                         ToggleLightTrigger.OnPickupUseUp = ToggleFlashLight;
+                        ToggleLightTrigger.UseText = OnText;
                     }
                 }
 
-                ToggleLightTrigger.interactText = OnText;
                 FlashLight_Light.enabled = false;
                 _IsFlashlightActive = false;
             }
@@ -51,11 +52,11 @@ namespace AstroClient
                     FlashLight_Light.enabled = value;
                     if (FlashLight_Light.enabled)
                     {
-                        ToggleLightTrigger.interactText = OffText;
+                        ToggleLightTrigger.UseText = OffText;
                     }
                     else
                     {
-                        ToggleLightTrigger.interactText = OnText;
+                        ToggleLightTrigger.UseText = OnText;
                     }
                 }
             }

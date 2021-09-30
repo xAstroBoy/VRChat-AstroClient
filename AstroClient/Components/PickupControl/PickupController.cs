@@ -602,20 +602,20 @@
             set
             {
                 _InteractionText = value;
+                if (SDKBase_Pickup != null)
+                {
+                    SDKBase_Pickup.InteractionText = value;
+                }
+                if (SDK2_Pickup != null)
+                {
+                    SDK2_Pickup.InteractionText = value;
+                }
+                if (SDK3_Pickup != null)
+                {
+                    SDK3_Pickup.InteractionText = value;
+                }
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.InteractionText = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.InteractionText = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.InteractionText = value;
-                    }
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -826,20 +826,20 @@
             set
             {
                 _UseText = value;
+                if (SDKBase_Pickup != null)
+                {
+                    SDKBase_Pickup.UseText = value;
+                }
+                if (SDK2_Pickup != null)
+                {
+                    SDK2_Pickup.UseText = value;
+                }
+                if (SDK3_Pickup != null)
+                {
+                    SDK3_Pickup.UseText = value;
+                }
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.UseText = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.UseText = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.UseText = value;
-                    }
                     Run_OnOnPickupPropertyChanged();
                 }
             }

@@ -15,6 +15,7 @@ namespace AstroClient.Components
             : base(ptr)
         {
         }
+        private SerializedUdonProgramAsset AssignedProgram { get; } = UdonPrograms.PickupProgram;
 
         internal void Start()
         {
@@ -30,7 +31,6 @@ namespace AstroClient.Components
                 UdonBehaviour.serializedProgramAsset = AssignedProgram;
                 UdonBehaviour.InitializeUdonContent();
                 UdonBehaviour.Start();
-                UdonBehaviour.interactText = interactText;
             }
         }
 
@@ -44,7 +44,6 @@ namespace AstroClient.Components
                 UdonBehaviour.serializedProgramAsset = AssignedProgram;
                 UdonBehaviour.InitializeUdonContent();
                 UdonBehaviour.Start();
-                UdonBehaviour.interactText = interactText;
             }
             else
             {
@@ -167,53 +166,68 @@ namespace AstroClient.Components
         }
 
 
-        private string _interactText = "Use";
+        private string _UseText = "Use";
 
-        internal string interactText
+        internal string UseText
         {
-            get => _interactText;
+            get => _UseText;
             set
             {
-                _interactText = value;
-                if (UdonBehaviour != null)
+                _UseText = value;
+                if(Controller != null)
                 {
-                    UdonBehaviour.interactText = value;
-                }
-                if(VRCInteractable != null)
-                {
-                    VRCInteractable.interactText = value;
+                    Controller.UseText = value;
                 }
             }
         }
 
-        private SerializedUdonProgramAsset AssignedProgram { get; } = UdonPrograms.PickupProgram;
+        private string _InteractionText;
+
+        internal string InteractionText
+        {
+            get => _InteractionText;
+            set
+            {
+                _InteractionText = value;
+                if (Controller != null)
+                {
+                    Controller.InteractionText = value;
+                }
+            }
+        }
+
+
         private struct Addresses
         {
-            internal const uint OnDrop  = 7u;
-            internal const uint OnDrop_1 = 2u;
-            internal const uint OnPickup = 4u;
-            internal const uint OnPickup_1 = 3u;
-            internal const uint OnPickupUseDown = 6u;
-            internal const uint OnPickupUseDown_1 = 0u;
-            internal const uint OnPickupUseUp = 5u;
-            internal const uint OnPickupUseUp_1 = 1u;
-            internal const uint AlwaysFalse = 8u;
+            internal const uint OnDrop  = 7;
+            internal const uint OnDrop_1 = 2;
+            internal const uint OnPickup = 4;
+            internal const uint OnPickup_1 = 3;
+            internal const uint OnPickupUseDown = 6;
+            internal const uint OnPickupUseDown_1 = 0;
+            internal const uint OnPickupUseUp = 5;
+            internal const uint OnPickupUseUp_1 = 1;
+            internal const uint AlwaysFalse = 8;
         }
         internal Action OnPickup { get; set; }
         internal Action OnPickupUseUp { get; set; }
         internal Action OnPickupUseDown { get; set; }
         internal Action OnDrop { get; set; }
-
-        private VRCInteractable _VRCInteractable;
-        private VRCInteractable VRCInteractable
+        internal bool IsForcedPickupController { get; set; } = false;
+        private PickupController _Controller;
+        private PickupController Controller
         {
             get
             {
-                if(_VRCInteractable == null)
+                if(_Controller == null)
                 {
-                    return _VRCInteractable = gameObject.GetComponent<VRCInteractable>();
+                    if(IsForcedPickupController)
+                    {
+                        return _Controller = gameObject.AddComponent<PickupController>();
+                    }
+                    return _Controller = gameObject.GetComponent<PickupController>();
                 }
-                return _VRCInteractable;
+                return _Controller;
             }
         }
         internal UdonBehaviour UdonBehaviour { get; private set; }
