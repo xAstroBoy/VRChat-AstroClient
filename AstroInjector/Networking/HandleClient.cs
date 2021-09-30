@@ -44,10 +44,14 @@
         {
             IsConnected = false;
             ShouldReconnect = reconnect;
-
             try
             {
                 clientStream.Close();
+            }
+            catch { }
+
+            try
+            {
                 ClientSocket.Close();
             }
             catch { }

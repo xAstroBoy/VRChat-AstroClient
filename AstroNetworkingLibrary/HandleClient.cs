@@ -48,6 +48,11 @@
             try
             {
                 clientStream.Close();
+            }
+            catch { }
+
+            try
+            {
                 ClientSocket.Close();
             }
             catch { }
@@ -135,7 +140,7 @@
             {
                 byte[] received = new byte[4];
                 _ = clientStream.Read(received, 0, received.Length);
-                return BitConverter.ToInt32(received, 0); ;
+                return BitConverter.ToInt32(received, 0);
             }
             catch
             {
