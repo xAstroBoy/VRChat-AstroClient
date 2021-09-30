@@ -25,6 +25,7 @@ namespace AstroClient
                         ToggleLightTrigger.IsForcedPickupController = true;
                         ToggleLightTrigger.OnPickupUseUp = ToggleFlashLight;
                         ToggleLightTrigger.UseText = OnText;
+                        ToggleLightTrigger.InteractionText = "Flashlight <3";
                     }
                 }
 

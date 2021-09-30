@@ -155,54 +155,23 @@
             }
         }
 
-        internal override void OnUpdate()
+        internal static void OnPickupInteract()
         {
-            if (isBomberIO && isInGame)
+            if (!HasShot)
             {
-                if (control != null)
-                {
-                    if (control.IsHeld)
-                    {
-                        if (control.CurrentHand == VRC.SDKBase.VRC_Pickup.PickupHand.Left)
-                        {
-                            if (InputUtils.IsImputUseLeftCalled || InputUtils.IsInputUseLeftPressed)
-                            {
-                                if (!HasShot)
-                                {
-                                    ModConsole.DebugLog("Detected Use Left, executing...");
-                                    ShootModifiedBullet();
-                                    HasShot = true;
-                                }
-                            }
-                            else
-                            {
-                                HasShot = false;
-                            }
-                        }
-                        else if (control.CurrentHand == VRC.SDKBase.VRC_Pickup.PickupHand.Right)
-                        {
-                            if (InputUtils.IsImputUseRightCalled || InputUtils.IsInputUseRightPressed)
-                            {
-                                if (!HasShot)
-                                {
-                                    ModConsole.DebugLog("Detected Use Right, executing...");
-                                    ShootModifiedBullet();
-                                    HasShot = true;
-                                }
-                            }
-                            else
-                            {
-                                HasShot = false;
-                            }
-                        }
-                    }
-                }
+                ShootModifiedBullet();
+                HasShot = true;
             }
+            else
+            {
+                HasShot = false;
+            }
+
         }
 
         private static bool HasShot = false;
 
-        private void ShootModifiedBullet()
+        private static void ShootModifiedBullet()
         {
             if (AssignedNode != null)
             {
@@ -305,7 +274,12 @@
                     var Item = AssignedNode.transform.FindObject("Shooter");
                     if (Item != null)
                     {
-                        control = Item.GetOrAddComponent<PickupController>();
+                        control = Item.GetOrAddComponent<VRC_AstroPickup>();
+                        if(control != null)
+                        {
+                            control.OnPickupUseUp = OnPickupInteract;
+                            control.InteractionText = "Hello Motherfuckers (Modified By AstroClient Developers)";
+                        }
                     }
                     var shooterbody = AssignedNode.transform.FindObject("Shooter/ShooterBody");
                     if (shooterbody != null)
@@ -366,7 +340,7 @@
             Inner_Default_RunSpeed = 0f;
         }
 
-        internal static PickupController control;
+        internal static VRC_AstroPickup control;
 
         internal static UdonBehaviour_Cached ShootBomb0;
         internal static UdonBehaviour_Cached ShootBomb1;
