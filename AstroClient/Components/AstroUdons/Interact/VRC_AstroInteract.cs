@@ -15,18 +15,18 @@ namespace AstroClient.Components
             : base(ptr)
         {
         }
+
         private SerializedUdonProgramAsset AssignedProgram { get; } = UdonPrograms.InteractProgram;
 
-        internal void Start()
-        { 
-
+        private void Start()
+        {
             if (AssignedProgram == null)
             {
                 ModConsole.DebugError("Custom Trigger Can't Load as Program Asset is null!");
                 Destroy(this);
             }
 
-            UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
+            UdonBehaviour = base.gameObject.AddComponent<UdonBehaviour>();
             if (UdonBehaviour != null)
             {
                 UdonBehaviour.serializedProgramAsset = AssignedProgram;
@@ -34,9 +34,10 @@ namespace AstroClient.Components
                 UdonBehaviour.Start();
                 UdonBehaviour.interactText = interactText;
             }
+            DoChecks();
         }
 
-        internal void FixedUpdate()
+        private void DoChecks()
         {
             if (UdonBehaviour == null)
             {
@@ -55,18 +56,34 @@ namespace AstroClient.Components
                     UdonBehaviour.Start();
                 }
 
-                if (UdonBehaviour != null && UdonBehaviour._udonVM != null && !UdonBehaviour._udonManager != null)
+                if (UdonBehaviour != null && UdonBehaviour._udonVM != null)
                 {
                     if (IUdonHeap == null)
                     {
                         IUdonHeap = UdonBehaviour._udonVM.InspectHeap();
                     }
-                    if (IUdonHeap != null && IUdonHeap.GetHeapVariable(2u).Unbox<bool>())
-                    {
-                        OnInteract();
-                        IUdonHeap.CopyHeapVariable(3u, 2u);
-                    }
                 }
+            }
+        }
+
+        internal void FixedUpdate()
+        {
+            if (IUdonHeap != null)
+            {
+                if (Get_OnInteract)
+                {
+                    OnInteract();
+                }
+            }
+        }
+
+        private bool Get_OnInteract
+        {
+            get
+            {
+                var result = IUdonHeap.GetHeapVariable(2u).Unbox<bool>();
+                IUdonHeap.CopyHeapVariable(3u, 2u);
+                return result;
             }
         }
 
@@ -78,7 +95,7 @@ namespace AstroClient.Components
             }
         }
 
-        internal void OnDisable()
+        private void OnDisable()
         {
             if (UdonBehaviour != null)
             {
@@ -86,15 +103,13 @@ namespace AstroClient.Components
             }
         }
 
-
-        internal void OnEnable()
+        private void OnEnable()
         {
             if (UdonBehaviour != null)
             {
                 UdonBehaviour.enabled = true;
             }
         }
-
 
         private string _interactText = "Use";
 
@@ -118,6 +133,7 @@ namespace AstroClient.Components
         internal bool ForceInteractiveText { get; set; } = false;
 
         private VRCInteractable _VRCInteractable;
+
         private VRCInteractable VRCInteractable
         {
             get
@@ -134,11 +150,8 @@ namespace AstroClient.Components
             }
         }
 
-
-
         internal Action OnInteract { get; set; }
-
-        internal UdonBehaviour UdonBehaviour { get; private set; }
-        internal IUdonHeap IUdonHeap { get; private set; }
+        private UdonBehaviour UdonBehaviour { get; set; }
+        private IUdonHeap IUdonHeap { get; set; }
     }
 }

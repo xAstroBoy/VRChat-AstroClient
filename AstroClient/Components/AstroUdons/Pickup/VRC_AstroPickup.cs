@@ -3,7 +3,6 @@ namespace AstroClient.Components
     using AstroLibrary.Console;
     using System;
     using UnityEngine;
-    using VRC.SDK3.Components;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
     using VRC.Udon.ProgramSources;
@@ -15,9 +14,10 @@ namespace AstroClient.Components
             : base(ptr)
         {
         }
+
         private SerializedUdonProgramAsset AssignedProgram { get; } = UdonPrograms.PickupProgram;
 
-        internal void Start()
+        private void Start()
         {
             if (AssignedProgram == null)
             {
@@ -25,18 +25,17 @@ namespace AstroClient.Components
                 Destroy(this);
             }
 
-            UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
+            UdonBehaviour = base.gameObject.AddComponent<UdonBehaviour>();
             if (UdonBehaviour != null)
             {
                 UdonBehaviour.serializedProgramAsset = AssignedProgram;
                 UdonBehaviour.InitializeUdonContent();
                 UdonBehaviour.Start();
             }
+            DoChecks();
         }
 
-        // For now.
-
-        internal void FixedUpdate()
+        private void DoChecks()
         {
             if (UdonBehaviour == null)
             {
@@ -53,46 +52,49 @@ namespace AstroClient.Components
                     UdonBehaviour.InitializeUdonContent();
                     UdonBehaviour.Start();
                 }
+            }
 
-                if (UdonBehaviour != null && UdonBehaviour._udonVM != null && !UdonBehaviour._udonManager != null)
+            if (UdonBehaviour != null && UdonBehaviour._udonVM != null)
+            {
+                if (IUdonHeap == null)
                 {
-                    if (IUdonHeap == null)
-                    {
-                        IUdonHeap = UdonBehaviour._udonVM.InspectHeap();
-                    }
-                    if (IUdonHeap != null)
-                    {
-                        if (Get_OnPickup)
-                        {
-                            OnPickup();
-                        }
-                        if (Get_OnPickupUseUp)
-                        {
-                            OnPickupUseUp();
-                        }
-                        if (Get_OnPickupUseDown)
-                        {
-                            OnPickupUseDown();
-                        }
-                        if (Get_OnDrop)
-                        {
-                            OnDrop();
-                        }
-                    }
+                    IUdonHeap = UdonBehaviour._udonVM.InspectHeap();
                 }
             }
         }
 
-
-        internal void OnDestroy()
+        private void FixedUpdate()
         {
-            if(UdonBehaviour != null)
+            if (IUdonHeap != null)
+            {
+                if (Get_OnPickup)
+                {
+                    OnPickup();
+                }
+                if (Get_OnPickupUseUp)
+                {
+                    OnPickupUseUp();
+                }
+                if (Get_OnPickupUseDown)
+                {
+                    OnPickupUseDown();
+                }
+                if (Get_OnDrop)
+                {
+                    OnDrop();
+                }
+            }
+        }
+
+        private void OnDestroy()
+        {
+            if (UdonBehaviour != null)
             {
                 Destroy(UdonBehaviour);
             }
         }
 
-        internal void OnDisable()
+        private void OnDisable()
         {
             if (UdonBehaviour != null)
             {
@@ -100,15 +102,13 @@ namespace AstroClient.Components
             }
         }
 
-
-        internal void OnEnable()
+        private void OnEnable()
         {
             if (UdonBehaviour != null)
             {
                 UdonBehaviour.enabled = true;
             }
         }
-
 
         private void SetBackToFalse(uint one)
         {
@@ -117,9 +117,7 @@ namespace AstroClient.Components
                 IUdonHeap = UdonBehaviour._udonVM.InspectHeap();
             }
             IUdonHeap.CopyHeapVariable(8u, one);
-
         }
-
 
         private bool Get_OnPickup
         {
@@ -131,8 +129,6 @@ namespace AstroClient.Components
             }
         }
 
-
-
         private bool Get_OnPickupUseUp
         {
             get
@@ -142,8 +138,6 @@ namespace AstroClient.Components
                 return result;
             }
         }
-
-
 
         private bool Get_OnPickupUseDown
         {
@@ -165,7 +159,6 @@ namespace AstroClient.Components
             }
         }
 
-
         private string _UseText = "Use";
 
         internal string UseText
@@ -174,7 +167,7 @@ namespace AstroClient.Components
             set
             {
                 _UseText = value;
-                if(Controller != null)
+                if (Controller != null)
                 {
                     Controller.UseText = value;
                 }
@@ -196,10 +189,9 @@ namespace AstroClient.Components
             }
         }
 
-
         private struct Addresses
         {
-            internal const uint OnDrop  = 7;
+            internal const uint OnDrop = 7;
             internal const uint OnDrop_1 = 2;
             internal const uint OnPickup = 4;
             internal const uint OnPickup_1 = 3;
@@ -209,19 +201,21 @@ namespace AstroClient.Components
             internal const uint OnPickupUseUp_1 = 1;
             internal const uint AlwaysFalse = 8;
         }
+
         internal Action OnPickup { get; set; }
         internal Action OnPickupUseUp { get; set; }
         internal Action OnPickupUseDown { get; set; }
         internal Action OnDrop { get; set; }
         internal bool IsForcedPickupController { get; set; } = false;
         private PickupController _Controller;
+
         private PickupController Controller
         {
             get
             {
-                if(_Controller == null)
+                if (_Controller == null)
                 {
-                    if(IsForcedPickupController)
+                    if (IsForcedPickupController)
                     {
                         return _Controller = gameObject.AddComponent<PickupController>();
                     }
@@ -230,7 +224,8 @@ namespace AstroClient.Components
                 return _Controller;
             }
         }
-        internal UdonBehaviour UdonBehaviour { get; private set; }
-        private IUdonHeap IUdonHeap { get;  set; }
+
+        private UdonBehaviour UdonBehaviour { get; set; }
+        private IUdonHeap IUdonHeap { get; set; }
     }
 }

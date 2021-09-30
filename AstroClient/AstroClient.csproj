@@ -106,7 +106,7 @@
     <Compile Include="Components\Orbit\OrbitManager_Old.cs" />
     <Compile Include="Components\PlayerSpoofer\PlayerSpooferUtils.cs" />
     <Compile Include="Components\PlayerSpoofer\PlayerSpoofer.cs" />
-    <Compile Include="Components\VRC_UdonTrigger\VRC_AstroPickup.cs" />
+    <Compile Include="Components\AstroUdons\Pickup\VRC_AstroPickup.cs" />
     <Compile Include="Exploits\ExploitUtils.cs" />
     <Compile Include="Extensions\Collider_ext.cs" />
     <Compile Include="Extensions\Engine_ext.cs" />
@@ -125,8 +125,8 @@
     <Compile Include="Components\Listeners\ScrollMenuListener.cs" />
     <Compile Include="Components\Listeners\GameObjectListener.cs" />
     <Compile Include="Components\SitOnPlayer\SitOnPlayer.cs" />
-    <Compile Include="Components\VRC_UdonTrigger\UdonPrograms.cs" />
-    <Compile Include="Components\VRC_UdonTrigger\VRC_AstroInteract.cs" />
+    <Compile Include="Components\AstroUdons\Programs\UdonPrograms.cs" />
+    <Compile Include="Components\AstroUdons\Interact\VRC_AstroInteract.cs" />
     <Compile Include="EmojiMenu\EmojiMenu.cs" />
     <Compile Include="EmojiMenu\EmojiScrollMenu\EmojiScrollMenu.cs" />
     <Compile Include="Moderation\ModerationExtensions.cs" />
