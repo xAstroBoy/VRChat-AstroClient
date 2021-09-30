@@ -23,7 +23,7 @@
 
         public TempData Temp;
 
-        internal Client()
+        public Client()
         {
             Name = "N/A";
             Key = "N/A";
