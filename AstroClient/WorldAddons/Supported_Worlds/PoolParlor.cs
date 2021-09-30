@@ -19,13 +19,13 @@
         {
             PoolParlorCheats = new QMNestedButton(main, x, y, "PoolParlor", "PoolParlor Customization", null, null, null, null, btnHalf);
 
-            _ = new QMSingleButton(PoolParlorCheats, 1, 0f, "+", () => { CurrentTableSkin++; }, "Set Table Skin!", null, null, false);
-            TableSkinBtn = new QMSingleButton(PoolParlorCheats, 2, 0f, "Default Table", () => { }, "Table Skin!", null, null, false);
-            _ = new QMSingleButton(PoolParlorCheats, 3, 0, "-", () => { CurrentTableSkin--; }, "Set Table Skin!", null, null, false);
+            _ = new QMSingleButton(PoolParlorCheats, 1, 0f, "+", () => { CurrentTableSkin++; }, "Set Table Skin!", null, null, true);
+            TableSkinBtn = new QMSingleButton(PoolParlorCheats, 2, 0f, "Default Table", () => { CurrentTableSkin = _CurrentTableSkin; }, "Table Skin!", null, null, true);
+            _ = new QMSingleButton(PoolParlorCheats, 3, 0, "-", () => { CurrentTableSkin--; }, "Set Table Skin!", null, null, true);
 
-            _ = new QMSingleButton(PoolParlorCheats, 1, 1f, "+", () => { CurrentCueSkin++; }, "Set Cue Skin!", null, null, false);
-            CueSkinBtn = new QMSingleButton(PoolParlorCheats, 2, 1f, "Default Cue", () => { }, "Cue Skin!", null, null, false);
-            _ = new QMSingleButton(PoolParlorCheats, 3, 1, "-", () => { CurrentCueSkin--; }, "Set Cue Skin!", null, null, false);
+            _ = new QMSingleButton(PoolParlorCheats, 1, 1f, "+", () => { CurrentCueSkin++; }, "Set Cue Skin!", null, null, true);
+            CueSkinBtn = new QMSingleButton(PoolParlorCheats, 2, 1f, "Default Cue", () => { CurrentCueSkin = _CurrentCueSkin; }, "Cue Skin!", null, null, true);
+            _ = new QMSingleButton(PoolParlorCheats, 3, 1, "-", () => { CurrentCueSkin--; }, "Set Cue Skin!", null, null, true);
 
             CueSkinOverrideBtn = new QMSingleToggleButton(PoolParlorCheats, 1, 2f, "OVerride Cue Skin", () => { OverrideCurrentSkins = true; }, "Override Cue Skin", () => { OverrideCurrentSkins = false; }, "Enable Cue Skin Override using Spoofer.", Color.green, Color.red, null, false, true);
         }
@@ -129,12 +129,12 @@
             }
         }
 
-        internal static void SetTableSkin(TableSkins value)
+        internal static void SetTableSkin(TableSkins skin)
         {
-            SetTableSkinLocal(value);
-            SetTableSkin_PoolParlorModule(value);
-            SetTableSkin_NetworkingManager(value);
-            SetTableSkinSynced(value);
+            SetTableSkinLocal(skin);
+            SetTableSkin_PoolParlorModule(skin);
+            SetTableSkin_NetworkingManager(skin);
+            SetTableSkinSynced(skin);
         }
 
         private static void SetTableSkinLocal(TableSkins value)
@@ -180,13 +180,28 @@
             }
         }
 
+
+        internal static void SetCueSkin(CueSkins skin)
+        {
+            SetActiveCueSkin(skin);
+            SetSyncedCueSkin(skin);
+        }
+
+
         private static void SetActiveCueSkin(CueSkins value)
         {
             foreach (var module in BilliardsModules)
             {
-                if (UdonHeapParser.Udon_Parse_Int32(module, "activeCueSkin").Value != (int)value)
+                try
                 {
-                    UdonHeapEditor.PatchHeap(module, "activeCueSkin", ((int)value), true);
+                    if (UdonHeapParser.Udon_Parse_Int32(module, "activeCueSkin").Value != (int)value)
+                    {
+                        UdonHeapEditor.PatchHeap(module, "activeCueSkin", ((int)value), true);
+                    }
+                }
+                catch
+                {
+
                 }
             }
         }
@@ -195,53 +210,25 @@
         {
             try
             {
-                var active_cue0 = UdonHeapParser.Udon_Parse_Int32(Cue_0, "activeCueSkin");
-                if (active_cue0.HasValue)
-                {
-                    if (active_cue0.Value != (int)value)
-                    {
-                        UdonHeapEditor.PatchHeap(Cue_0, "activeCueSkin", ((int)value), true);
-                    }
-                }
+                UdonHeapEditor.PatchHeap(Cue_0, "activeCueSkin", ((int)value), true);
             }
             catch { } // Nobody cares .
             try
             {
 
-                var Sync_cue0 = UdonHeapParser.Udon_Parse_Int32(Cue_0, "syncedCueSkin");
-                if (Sync_cue0.HasValue)
-                {
-                    if (Sync_cue0.Value != (int)value)
-                    {
-                        UdonHeapEditor.PatchHeap(Cue_0, "syncedCueSkin", ((int)value), true);
-                    }
-                }
+                UdonHeapEditor.PatchHeap(Cue_0, "syncedCueSkin", ((int)value), true);
             }
             catch { } // Nobody cares .
 
             try
             {
-                var active_cue1 = UdonHeapParser.Udon_Parse_Int32(Cue_1, "activeCueSkin");
-                if (active_cue1.HasValue)
-                {
-                    if (active_cue1.Value != (int)value)
-                    {
-                        UdonHeapEditor.PatchHeap(Cue_1, "activeCueSkin", ((int)value), true);
-                    }
-                }
+                UdonHeapEditor.PatchHeap(Cue_1, "activeCueSkin", ((int)value), true);
             }
             catch { } // Nobody cares .
             try
             {
 
-                var Sync_cue1 = UdonHeapParser.Udon_Parse_Int32(Cue_1, "syncedCueSkin");
-                if (Sync_cue1.HasValue)
-                {
-                    if (Sync_cue1.Value != (int)value)
-                    {
-                        UdonHeapEditor.PatchHeap(Cue_1, "syncedCueSkin", ((int)value), true);
-                    }
-                }
+                UdonHeapEditor.PatchHeap(Cue_1, "syncedCueSkin", ((int)value), true);
             }
             catch { } // Nobody cares .
         }
@@ -345,16 +332,10 @@
 
         private static void onPickup()
         {
-            ModConsole.DebugLog("1");
             if (OverrideCurrentSkins)
             {
-                ModConsole.DebugLog("2");
-                SetActiveCueSkin(_CurrentCueSkin);
-                ModConsole.DebugLog("3");
-                SetSyncedCueSkin(_CurrentCueSkin);
-                ModConsole.DebugLog("4");
+                SetCueSkin(_CurrentCueSkin);
                 PlayerSpooferUtils.SpoofAsWorldAuthor = true;
-                ModConsole.DebugLog("END");
             }
         }
 
@@ -426,8 +407,7 @@
                     CueSkinBtn.SetButtonText(value.ToString());
                 }
                 _CurrentCueSkin = value;
-                SetActiveCueSkin(value);
-                SetSyncedCueSkin(value);
+                SetCueSkin(value);
             }
         }
 
