@@ -100,6 +100,7 @@
     <Compile Include="Cheetos\InstanceHistory.cs" />
     <Compile Include="Components\Flashlight\FlashlightBehaviour.cs" />
     <Compile Include="Components\Expoits\OrbitManager.cs" />
+    <Compile Include="Components\FunBehaviour\StretchyCheeseBehaviour.cs" />
     <Compile Include="Components\JarRoleRevealers\JarControllerEvents.cs" />
     <Compile Include="Components\JarRoleRevealers\JarNodeReader.cs" />
     <Compile Include="Components\Orbit\OrbitBehaviour.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Components\AstroUdons\Interact\VRC_AstroInteract.cs" />
     <Compile Include="EmojiMenu\EmojiMenu.cs" />
     <Compile Include="EmojiMenu\EmojiScrollMenu\EmojiScrollMenu.cs" />
+    <Compile Include="ItemTweakerV2\Submenus\Components\Fun\FunBehavioursSubMenu.cs" />
     <Compile Include="Moderation\ModerationExtensions.cs" />
     <Compile Include="Moderation\ModerationNotifier.cs" />
     <Compile Include="Moderation\PhotonModerationHandler.cs" />

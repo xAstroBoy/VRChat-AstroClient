@@ -562,6 +562,7 @@
                 var bouncer = obj.GetComponent<Bouncer>();
                 var watcher = obj.GetComponent<PlayerWatcher>();
                 var PickupController = obj.GetComponent<PickupController>();
+                var StretchyCheese = obj.GetComponent<StretchyCheeseBehaviour>();
                 if (Bools.AllowAttackerComponent)
                 {
                     var attacker = obj.GetComponent<PlayerAttacker>();
@@ -598,6 +599,11 @@
                 {
                     bouncer.DestroyMeLocal();
                 }
+                if (StretchyCheese != null)
+                {
+                    StretchyCheese.DestroyMeLocal();
+                }
+
                 if (ResetRigidBody)
                 {
                     if (control != null)
