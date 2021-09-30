@@ -6,31 +6,29 @@ namespace AstroClient.Components
     using VRC.SDK3.Components;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
+    using VRC.Udon.ProgramSources;
 
     [RegisterComponent]
-    public class VRC_AstroUdonTrigger : MonoBehaviour
+    public class VRC_AstroInteract : MonoBehaviour
     {
-        public VRC_AstroUdonTrigger(IntPtr ptr)
+        public VRC_AstroInteract(IntPtr ptr)
             : base(ptr)
         {
         }
 
         internal void Start()
-        {
-            if (gameObject.GetComponent<VRCInteractable>() != null)
-            {
-                UnityEngine.Object.Destroy(gameObject.GetComponent<VRCInteractable>());
-            }
+        { 
 
-            if (UdonTrigger_Helper.OnInteractUdonProgramEvent == null)
+            if (AssignedProgram == null)
             {
                 ModConsole.DebugError("Custom Trigger Can't Load as Program Asset is null!");
+                Destroy(this);
             }
 
             UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
             if (UdonBehaviour != null)
             {
-                UdonBehaviour.serializedProgramAsset = UdonTrigger_Helper.OnInteractUdonProgramEvent;
+                UdonBehaviour.serializedProgramAsset = AssignedProgram;
                 UdonBehaviour.InitializeUdonContent();
                 UdonBehaviour.Start();
                 UdonBehaviour.interactText = interactText;
@@ -42,7 +40,7 @@ namespace AstroClient.Components
             if (UdonBehaviour == null)
             {
                 UdonBehaviour = base.gameObject.AddComponent<UdonBehaviour>();
-                UdonBehaviour.serializedProgramAsset = UdonTrigger_Helper.OnInteractUdonProgramEvent;
+                UdonBehaviour.serializedProgramAsset = AssignedProgram;
                 UdonBehaviour.InitializeUdonContent();
                 UdonBehaviour.Start();
                 UdonBehaviour.interactText = interactText;
@@ -51,7 +49,7 @@ namespace AstroClient.Components
             {
                 if (UdonBehaviour.serializedProgramAsset == null)
                 {
-                    UdonBehaviour.serializedProgramAsset = UdonTrigger_Helper.OnInteractUdonProgramEvent;
+                    UdonBehaviour.serializedProgramAsset = AssignedProgram;
                     UdonBehaviour.InitializeUdonContent();
                     UdonBehaviour.Start();
                 }
@@ -71,6 +69,32 @@ namespace AstroClient.Components
             }
         }
 
+        internal void OnDestroy()
+        {
+            if (UdonBehaviour != null)
+            {
+                Destroy(UdonBehaviour);
+            }
+        }
+
+        internal void OnDisable()
+        {
+            if (UdonBehaviour != null)
+            {
+                UdonBehaviour.enabled = false;
+            }
+        }
+
+
+        internal void OnEnable()
+        {
+            if (UdonBehaviour != null)
+            {
+                UdonBehaviour.enabled = true;
+            }
+        }
+
+
         private string _interactText = "Use";
 
         internal string interactText
@@ -83,8 +107,28 @@ namespace AstroClient.Components
                 {
                     UdonBehaviour.interactText = value;
                 }
+                if (VRCInteractable != null)
+                {
+                    VRCInteractable.interactText = value;
+                }
             }
         }
+
+        private VRCInteractable _VRCInteractable;
+        private VRCInteractable VRCInteractable
+        {
+            get
+            {
+                if (_VRCInteractable == null)
+                {
+                    return _VRCInteractable = gameObject.GetComponent<VRCInteractable>();
+                }
+                return _VRCInteractable;
+            }
+        }
+
+
+        private SerializedUdonProgramAsset AssignedProgram { get; } = UdonPrograms.InteractProgram;
 
         internal Action OnInteract { get; set; }
 

@@ -40,7 +40,7 @@
             }
         }
 
-
+        
         private static bool _SpoofASWorldAuthor;
 
         internal static  bool SpoofAsWorldAuthor

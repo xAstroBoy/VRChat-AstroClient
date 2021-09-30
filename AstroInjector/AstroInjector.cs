@@ -45,7 +45,6 @@
         public AstroInjector()
         {
             LoadEmbeddedLibraries();
-
             var rinPath = Directory.GetCurrentDirectory() + "\\RinClient\\IsBot.txt";
             if (File.Exists(rinPath))
             {
@@ -56,7 +55,6 @@
                     return;
                 }
             }
-
             LoadEmbeddedMelons();
 
 #if DEBUG

@@ -35,10 +35,15 @@
                     {
                         MainScroll.SetAction(delegate
                         {
+                            bool HasAddedUnboxerBtn = false;
                             foreach (var subaction in action._eventTable)
                             {
-                                var unboxer = new QMSingleButton(MainScroll.BaseMenu, 0, 0, $"Unbox {action.name}", () => { action.UnboxUdonEventToConsole(); }, $"Attempts to unbox {action.name} in console..", null, Color.yellow, false);
-                                MainScroll.Add(unboxer, 0, 1f, 0f);
+                                if (!HasAddedUnboxerBtn)
+                                {
+                                    var unboxer = new QMSingleButton(MainScroll.BaseMenu, 0, 0, $"Unbox {action.name}", () => { action.UnboxUdonEventToConsole(); }, $"Attempts to unbox {action.name} in console..", null, Color.yellow, false);
+                                    MainScroll.Add(unboxer, 0, 1f, 0f);
+                                    HasAddedUnboxerBtn = true;
+                                }
 
                                 MainScroll.Add(new QMSingleButton(MainScroll.BaseMenu, 0f, 0f, subaction.Key, delegate
                                 {

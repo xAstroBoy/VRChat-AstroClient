@@ -174,7 +174,7 @@
                     collider.smoothSphereCollisions = true;
                 }
 
-                var AstroTrigger = HandleSign.GetOrAddComponent<VRC_AstroUdonTrigger>();
+                var AstroTrigger = HandleSign.GetOrAddComponent<VRC_AstroInteract>();
                 if (AstroTrigger != null)
                 {
                     AstroTrigger.interactText = "Lockpick Door " + doorID + " (AstroClient)";

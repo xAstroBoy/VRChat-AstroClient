@@ -986,12 +986,29 @@
             {
                 try
                 {
+                    return CurrentHolder?.displayName;
+                }
+                catch
+                {
+                }
+                return "None";
+            }
+        }
+
+
+        internal VRCPlayerApi CurrentHolder
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                try
+                {
                     if (SDKBase_Pickup != null)
                     {
                         var user = SDKBase_Pickup.currentPlayer;
                         if (user != null)
                         {
-                            return user.displayName;
+                            return user;
                         }
                     }
                     else if (SDK2_Pickup != null)
@@ -999,7 +1016,7 @@
                         var user = SDK2_Pickup.currentPlayer;
                         if (user != null)
                         {
-                            return user.displayName;
+                            return user;
                         }
                     }
                     else if (SDK3_Pickup != null)
@@ -1007,14 +1024,14 @@
                         var user = SDK3_Pickup.currentPlayer;
                         if (user != null)
                         {
-                            return user.displayName;
+                            return user;
                         }
                     }
                 }
                 catch
                 {
                 }
-                return "None";
+                return null;
             }
         }
 
