@@ -44,17 +44,17 @@
 
         public AstroInjector()
         {
-            if (File.Exists(Directory.GetCurrentDirectory() + "\\RinClient\\IsBot.txt"))
+            LoadEmbeddedLibraries();
+            var rinPath = Directory.GetCurrentDirectory() + "\\RinClient\\IsBot.txt";
+            if (File.Exists(rinPath))
             {
-                bool flag = File.ReadAllText(Directory.GetCurrentDirectory() + "\\RinClient\\IsBot.txt") == "true";
+                bool flag = File.ReadAllText(rinPath) == "true";
                 if (flag)
                 {
                     MelonLogger.Warning("RinClient Bot Detected, Not loading AstroClient for this session");
                     return;
                 }
             }
-
-            LoadEmbeddedLibraries();
             LoadEmbeddedMelons();
 
 #if DEBUG
