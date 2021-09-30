@@ -31,7 +31,6 @@ namespace AstroClient.Components
                 UdonBehaviour.serializedProgramAsset = AssignedProgram;
                 UdonBehaviour.InitializeUdonContent();
                 UdonBehaviour.Start();
-                UdonBehaviour.interactText = interactText;
             }
         }
 
@@ -45,7 +44,6 @@ namespace AstroClient.Components
                 UdonBehaviour.serializedProgramAsset = AssignedProgram;
                 UdonBehaviour.InitializeUdonContent();
                 UdonBehaviour.Start();
-                UdonBehaviour.interactText = interactText;
             }
             else
             {
@@ -168,24 +166,36 @@ namespace AstroClient.Components
         }
 
 
-        private string _interactText = "Use";
+        private string _UseText = "Use";
 
-        internal string interactText
+        internal string UseText
         {
-            get => _interactText;
+            get => _UseText;
             set
             {
-                _interactText = value;
-                if (UdonBehaviour != null)
+                _UseText = value;
+                if(Controller != null)
                 {
-                    UdonBehaviour.interactText = value;
-                }
-                if(VRCInteractable != null)
-                {
-                    VRCInteractable.interactText = value;
+                    Controller.UseText = value;
                 }
             }
         }
+
+        private string _InteractionText;
+
+        internal string InteractionText
+        {
+            get => _InteractionText;
+            set
+            {
+                _InteractionText = value;
+                if (Controller != null)
+                {
+                    Controller.InteractionText = value;
+                }
+            }
+        }
+
 
         private struct Addresses
         {
@@ -204,22 +214,16 @@ namespace AstroClient.Components
         internal Action OnPickupUseDown { get; set; }
         internal Action OnDrop { get; set; }
 
-        internal bool ForceInteractiveText { get; set; } = false;
-
-        private VRCInteractable _VRCInteractable;
-        private VRCInteractable VRCInteractable
+        private PickupController _Controller;
+        private PickupController Controller
         {
             get
             {
-                if(_VRCInteractable == null)
+                if(_Controller == null)
                 {
-                    if(ForceInteractiveText)
-                    {
-                        return _VRCInteractable = gameObject.AddComponent<VRCInteractable>();
-                    }
-                    return _VRCInteractable = gameObject.GetComponent<VRCInteractable>();
+                    return _Controller = gameObject.GetComponent<PickupController>();
                 }
-                return _VRCInteractable;
+                return _Controller;
             }
         }
         internal UdonBehaviour UdonBehaviour { get; private set; }
