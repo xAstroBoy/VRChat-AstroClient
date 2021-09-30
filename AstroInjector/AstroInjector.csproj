@@ -94,9 +94,6 @@
     <Compile Include="..\AstroNetworkingLibrary\NetworkingExtensions.cs">
       <Link>Networking\NetworkingExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\AstroNetworkingLibrary\PacketType.cs">
-      <Link>Networking\PacketType.cs</Link>
-    </Compile>
     <Compile Include="..\AstroNetworkingLibrary\ReceivedPacketEventArgs.cs">
       <Link>Networking\ReceivedPacketEventArgs.cs</Link>
     </Compile>
@@ -112,6 +109,7 @@
     <Compile Include="BuildInfo.cs" />
     <Compile Include="Networking\HandleClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
+    <Compile Include="Networking\PacketType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
