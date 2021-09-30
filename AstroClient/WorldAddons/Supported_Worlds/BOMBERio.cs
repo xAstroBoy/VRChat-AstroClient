@@ -159,7 +159,6 @@
         {
             if (!HasShot)
             {
-                ModConsole.DebugLog("Detected Use Left, executing...");
                 ShootModifiedBullet();
                 HasShot = true;
             }
