@@ -29,14 +29,9 @@
                 }
                 else
                 {
-                    ModConsole.DebugLog("Failed To Get Current DisplayName!");
+                    ModConsole.DebugLog($"Spoofer : Failed To Get Current DisplayName!");
                 }
             }));
-        }
-
-        private void GetCurrentDisplayName()
-        {
-            
         }
 
 
