@@ -22,6 +22,7 @@ namespace AstroClient
                     ToggleLightTrigger = FlashLight_Body.AddComponent<VRC_AstroPickup>();
                     if (ToggleLightTrigger != null)
                     {
+                        ToggleLightTrigger.IsForcedPickupController = true;
                         ToggleLightTrigger.OnPickupUseUp = ToggleFlashLight;
                         ToggleLightTrigger.UseText = OnText;
                     }

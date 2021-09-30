@@ -213,7 +213,7 @@ namespace AstroClient.Components
         internal Action OnPickupUseUp { get; set; }
         internal Action OnPickupUseDown { get; set; }
         internal Action OnDrop { get; set; }
-
+        internal bool IsForcedPickupController { get; set; } = false;
         private PickupController _Controller;
         private PickupController Controller
         {
@@ -221,6 +221,10 @@ namespace AstroClient.Components
             {
                 if(_Controller == null)
                 {
+                    if(IsForcedPickupController)
+                    {
+                        return _Controller = gameObject.AddComponent<PickupController>();
+                    }
                     return _Controller = gameObject.GetComponent<PickupController>();
                 }
                 return _Controller;
