@@ -9,8 +9,6 @@
     {
         internal static void Init_ComponentSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
-            var submenu = new QMNestedButton(menu, x, y, "Crazy Object", "Make Items fly in random directions lol!", null, null, null, null, btnHalf);
-
             var main = new QMNestedButton(menu, x, y, "Astro Components", "Custom Component Editor Menu!", null, null, null, null, btnHalf);
             RocketComponentSubMenu.Init_RocketComponentSubMenu(main, 1, 0, true);
             CrazyComponentSubMenu.Init_CrazyComponentSubMenu(main, 1, 0.5f, true);
