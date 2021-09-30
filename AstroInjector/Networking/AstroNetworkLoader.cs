@@ -22,7 +22,7 @@
 
         internal static bool IsReady = false;
 
-        public static void Initialize()
+        internal static void Initialize()
         {
             Console.WriteLine("Loader Connecting..");
             Connect();

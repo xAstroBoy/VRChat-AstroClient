@@ -2,13 +2,13 @@
 {
     using AstroNetworkingLibrary.Serializable;
 
-    public class ReceivedPacketEventArgs
+    internal class ReceivedPacketEventArgs
     {
-        public PacketData Data { get; private set; }
+        internal PacketData Data { get; private set; }
 
-        public int ClientID { get; private set; }
+        internal int ClientID { get; private set; }
 
-        public ReceivedPacketEventArgs(int clientID, PacketData data)
+        internal ReceivedPacketEventArgs(int clientID, PacketData data)
         {
             Data = data;
             ClientID = clientID;
