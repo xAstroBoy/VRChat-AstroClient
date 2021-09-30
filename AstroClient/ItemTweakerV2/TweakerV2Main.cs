@@ -18,7 +18,7 @@
 
     internal class TweakerV2Main : Tweaker_Events
     {
-        internal static  void Init_TweakerV2Main()
+        internal static void Init_TweakerV2Main()
         {
             QMTabMenu menu = new QMTabMenu(3f, "Item Tweaker", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.box.png"));
 
@@ -150,13 +150,13 @@
             Reset();
         }
 
-        internal static  void Reset()
+        internal static void Reset()
         {
             Tweaker_Object.LockItem = false;
             Tweaker_Selector.SelectedObject = null;
         }
 
-        internal static  void UpdateCapturedObject(GameObject obj)
+        internal static void UpdateCapturedObject(GameObject obj)
         {
             if (obj != null)
             {
@@ -188,14 +188,14 @@
             }
         }
 
-        internal static  QMSingleButton TeleportToMe;
+        internal static QMSingleButton TeleportToMe;
 
-        internal static  QMSingleButton TeleportToTarget;
+        internal static QMSingleButton TeleportToTarget;
 
-        internal static  QMSingleToggleButton LockHoldItem;
-        internal static  QMSingleButton ObjectToEditBtn;
-        internal static  QMSingleToggleButton ObjectActiveToggle;
-        internal static  QMSingleToggleButton ProtectionInteractor;
+        internal static QMSingleToggleButton LockHoldItem;
+        internal static QMSingleButton ObjectToEditBtn;
+        internal static QMSingleToggleButton ObjectActiveToggle;
+        internal static QMSingleToggleButton ProtectionInteractor;
 
         private static QMSingleButton Pickup_IsHeldStatus { get; set; }
         private static QMSingleButton Pickup_CurrentObjectHolder { get; set; }

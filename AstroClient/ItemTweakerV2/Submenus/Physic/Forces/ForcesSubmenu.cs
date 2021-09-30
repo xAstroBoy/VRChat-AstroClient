@@ -10,7 +10,7 @@
 
     internal class ForcesSubmenu : Tweaker_Events
     {
-        internal static  void Init_ForceSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        internal static void Init_ForceSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var ForceSubMenu = new QMNestedButton(menu, x, y, "Forces", "You have the Force! Dont abuse it! <3!", null, null, null, null, btnHalf);
 
@@ -82,18 +82,18 @@
         private static QMSingleButton Pickup_IsHeldStatus { get; set; }
         private static QMSingleButton Pickup_CurrentObjectHolder { get; set; }
         private static QMSingleButton Pickup_CurrentObjectOwner { get; set; }
-        internal static  QMSlider ForceSlider { get; private set; }
-        internal static  QMSlider SpinForceSlider { get; private set; }
+        internal static QMSlider ForceSlider { get; private set; }
+        internal static QMSlider SpinForceSlider { get; private set; }
 
-        internal static  QMSingleButton ForceAmnt1;
+        internal static QMSingleButton ForceAmnt1;
 
-        internal static  QMSingleButton ForceAmnt2;
-        internal static  QMSingleButton SpinForceAmnt1;
-        internal static  QMSingleButton SpinForceAmnt2;
+        internal static QMSingleButton ForceAmnt2;
+        internal static QMSingleButton SpinForceAmnt1;
+        internal static QMSingleButton SpinForceAmnt2;
 
         private static float _Force;
 
-        internal static  float Force
+        internal static float Force
         {
             get
             {
@@ -119,7 +119,7 @@
 
         private static float _SpinForce;
 
-        internal static  float SpinForce
+        internal static float SpinForce
         {
             get
             {
@@ -144,7 +144,7 @@
             }
         }
 
-        internal static  readonly float DefaultForce = 1f;
-        internal static  readonly float DefaultSpinForce = 100f;
+        internal static readonly float DefaultForce = 1f;
+        internal static readonly float DefaultSpinForce = 100f;
     }
 }

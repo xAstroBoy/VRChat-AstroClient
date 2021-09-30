@@ -23,7 +23,7 @@
 
         private static QMSingleButton refreshButton;
 
-        internal static  List<QMSingleButton> PlayerButtons { get; } = new List<QMSingleButton>();
+        internal static List<QMSingleButton> PlayerButtons { get; } = new List<QMSingleButton>();
 
         private static readonly Color InstanceMasterColor = Color.cyan;
 
@@ -139,7 +139,7 @@
             yield break;
         }
 
-        internal static  void CreateButton(PlayerListData player, float xPos, float yPos)
+        internal static void CreateButton(PlayerListData player, float xPos, float yPos)
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -192,7 +192,7 @@
             }
         }
 
-        internal static  void ShowPlayerMenu()
+        internal static void ShowPlayerMenu()
         {
             ConfigManager.UI.ShowPlayersMenu = true;
             playersButton.SetTextColor(Color.green);
@@ -207,7 +207,7 @@
             }
         }
 
-        internal static  void HidePlayerMenu()
+        internal static void HidePlayerMenu()
         {
             ConfigManager.UI.ShowPlayersMenu = false;
             playersButton.SetTextColor(Color.red);

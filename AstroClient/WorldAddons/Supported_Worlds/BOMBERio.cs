@@ -17,7 +17,7 @@
 
     internal class BOMBERio : GameEvents
     {
-        internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             BOMBERioCheatsPage = new QMNestedButton(main, x, y, "BOMBERio", "BOMBERio Cheats", null, null, null, null, btnHalf);
             Always_ShootBomb_0_Toggle = new QMSingleToggleButton(BOMBERioCheatsPage, 1, 0, "Shoot Bomb 0", () => { Override_ShootBomb_0_Toggle = true; }, "Shoot Bomb 0", () => { Override_ShootBomb_0_Toggle = false; }, "Always Shoot A Specified Projectile", Color.green, Color.red, null, false, true);
@@ -52,7 +52,7 @@
 
         private bool isBomberIO = false;
 
-        internal static  GameObject GetRandomQuad()
+        internal static GameObject GetRandomQuad()
         {
             foreach (var item in GameObjectFinder.FindRootSceneObject("ItemManager").transform.Get_Childs())
             {
@@ -75,7 +75,7 @@
         private static bool isHarvesting = false;
         private static bool isInGame = false;
 
-        internal static  void HarvestQuads(int amount)
+        internal static void HarvestQuads(int amount)
         {
             if (!isHarvesting)
             {
@@ -84,7 +84,7 @@
             }
         }
 
-        internal static  IEnumerator HarvestQuadsRoutine(int amount)
+        internal static IEnumerator HarvestQuadsRoutine(int amount)
         {
             while (Quad == null) yield return null;
             int i = 0;
@@ -251,7 +251,7 @@
             }
         }
 
-        internal static  void FindEverything(GameObject obj)
+        internal static void FindEverything(GameObject obj)
         {
             if (obj != null)
             {
@@ -321,7 +321,7 @@
             }
         }
 
-        internal static  void Change_Behaviour_Outside_Speed(float Run_Speed, float Walk_And_Strafe_Speed)
+        internal static void Change_Behaviour_Outside_Speed(float Run_Speed, float Walk_And_Strafe_Speed)
         {
             if (FollowObjBehaviour != null)
             {
@@ -366,26 +366,26 @@
             Inner_Default_RunSpeed = 0f;
         }
 
-        internal static  PickupController control;
+        internal static PickupController control;
 
-        internal static  UdonBehaviour_Cached ShootBomb0;
-        internal static  UdonBehaviour_Cached ShootBomb1;
-        internal static  UdonBehaviour_Cached ShootBomb2;
-        internal static  UdonBehaviour_Cached ShootBomb3;
-        internal static  UdonBehaviour_Cached ShootBomb4;
-        internal static  UdonBehaviour_Cached ShootBombEx;
+        internal static UdonBehaviour_Cached ShootBomb0;
+        internal static UdonBehaviour_Cached ShootBomb1;
+        internal static UdonBehaviour_Cached ShootBomb2;
+        internal static UdonBehaviour_Cached ShootBomb3;
+        internal static UdonBehaviour_Cached ShootBomb4;
+        internal static UdonBehaviour_Cached ShootBombEx;
 
-        internal static  GameObject AssignedNode;
-        internal static  QMNestedButton BOMBERioCheatsPage;
+        internal static GameObject AssignedNode;
+        internal static QMNestedButton BOMBERioCheatsPage;
 
-        internal static  QMSingleToggleButton Always_ShootBomb_0_Toggle;
-        internal static  QMSingleToggleButton Always_ShootBomb_1_Toggle;
-        internal static  QMSingleToggleButton Always_ShootBomb_2_Toggle;
-        internal static  QMSingleToggleButton Always_ShootBomb_3_Toggle;
-        internal static  QMSingleToggleButton Always_ShootBomb_4_Toggle;
-        internal static  QMSingleToggleButton Always_ShootBomb_5_Toggle;
+        internal static QMSingleToggleButton Always_ShootBomb_0_Toggle;
+        internal static QMSingleToggleButton Always_ShootBomb_1_Toggle;
+        internal static QMSingleToggleButton Always_ShootBomb_2_Toggle;
+        internal static QMSingleToggleButton Always_ShootBomb_3_Toggle;
+        internal static QMSingleToggleButton Always_ShootBomb_4_Toggle;
+        internal static QMSingleToggleButton Always_ShootBomb_5_Toggle;
 
-        internal static  QMSingleToggleButton Bypass_Outside_Circle_speed_Toggle;
+        internal static QMSingleToggleButton Bypass_Outside_Circle_speed_Toggle;
 
         private static bool _BypassOutsideCircleSpeed;
 

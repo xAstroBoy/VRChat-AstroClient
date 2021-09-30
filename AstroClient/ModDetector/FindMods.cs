@@ -15,6 +15,6 @@
             }
         }
 
-        internal static  bool IsNotoriousPresent { get; private set; }
+        internal static bool IsNotoriousPresent { get; private set; }
     }
 }

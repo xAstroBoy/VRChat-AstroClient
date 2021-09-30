@@ -7,13 +7,13 @@
 
     internal class Tweaker_Selector : Tweaker_Events
     {
-        internal static  event EventHandler<SelectedObjectArgs> Event_On_New_GameObject_Selected;
+        internal static event EventHandler<SelectedObjectArgs> Event_On_New_GameObject_Selected;
 
-        internal static  event EventHandler<SelectedObjectArgs> Event_On_Old_GameObject_Removed;
+        internal static event EventHandler<SelectedObjectArgs> Event_On_Old_GameObject_Removed;
 
         private static GameObject _SelectedObject;
 
-        internal static  GameObject SelectedObject
+        internal static GameObject SelectedObject
         {
             get
             {

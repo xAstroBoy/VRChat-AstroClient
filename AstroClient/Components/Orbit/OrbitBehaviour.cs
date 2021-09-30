@@ -274,7 +274,7 @@
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static  float Clamp(float val)
+        internal static float Clamp(float val)
         {
             float result;
             switch (val)
@@ -293,7 +293,7 @@
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static  float Lerp(float a, float b, float t) => a + ((b - a) * Clamp(t));
+        internal static float Lerp(float a, float b, float t) => a + ((b - a) * Clamp(t));
 
         internal enum RotationMode : byte
         {

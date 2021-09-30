@@ -14,7 +14,7 @@
         // MOST ACTIONS REQUIRE A CONFIG!
         // FOR FULL PORT WE NEED A CONFIG .
 
-        internal static  void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "VRCAntiCrash", "Ported VRCAntiCrash Features", null, null, null, null, btnHalf);
             _ = new QMSingleButton(menu, 0, -0.5f, "Pay Respect", () => { }, "Pay Respect To All Crashers Who Will fail to Crash You", null, null, true); // NEEDS ACTION AND CONFIG;
@@ -43,7 +43,7 @@
             _ = new QMSingleToggleButton(menu, 4, 1.5f, "Anti-World Triggers", () => { }, "Anti-World Triggers", () => { }, "Toggle Anti-World Triggers , Stop Clients with World Triggers From Affecting You.", Color.green, Color.red, null, false, true);
         }
 
-        internal static  void InitKinkySubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        internal static void InitKinkySubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "Kinky Options", "Ported VRCAntiCrash Kinky Features", null, null, null, null, btnHalf);
             _ = new QMSingleButton(menu, 1, 0, "Leash", () => { }, "Toggles A Leash To your Master", null, null, true); // NEEDS ACTION;

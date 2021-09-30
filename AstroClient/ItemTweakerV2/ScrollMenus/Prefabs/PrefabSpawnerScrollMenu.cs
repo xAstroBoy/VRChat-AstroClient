@@ -9,7 +9,7 @@
 
     internal class PrefabSpawnerScrollMenu
     {
-        internal static  void Init_PrefabSpawnerQMScroll(QMNestedButton main, float x, float y, bool btnHalf)
+        internal static void Init_PrefabSpawnerQMScroll(QMNestedButton main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Spawn Prefabs", "Spawn World Prefabs", null, null, null, null, btnHalf);
             var prefabQMScroll = new QMScrollMenu(menu);

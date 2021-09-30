@@ -12,31 +12,31 @@
 //		/// <summary>
 //		/// Triggered when a new media source gets added to the MediaSessions
 //		/// </summary>
-//		internal static  event MediaSessionDelegate OnNewSource;
+//		internal static event MediaSessionDelegate OnNewSource;
 
 //		/// <summary>
 //		/// Triggered when a media source gets removed from the MediaSessions
 //		/// </summary>
-//		internal static  event MediaSessionDelegate OnRemovedSource;
+//		internal static event MediaSessionDelegate OnRemovedSource;
 
 //		/// <summary>
 //		/// Triggered when a playback state changes of a MediaSession
 //		/// </summary>
-//		internal static  event TypedEventHandler<MediaSession, GlobalSystemMediaTransportControlsSessionPlaybackInfo> OnPlaybackStateChanged;
+//		internal static event TypedEventHandler<MediaSession, GlobalSystemMediaTransportControlsSessionPlaybackInfo> OnPlaybackStateChanged;
 
 //		/// <summary>
 //		/// Triggered when a song changes of a MediaSession
 //		/// </summary>
-//		internal static  event TypedEventHandler<MediaSession, GlobalSystemMediaTransportControlsSessionMediaProperties> OnSongChanged;
+//		internal static event TypedEventHandler<MediaSession, GlobalSystemMediaTransportControlsSessionMediaProperties> OnSongChanged;
 
 //		/// <summary>
 //		/// A dictionary of the current MediaSessions
 //		/// </summary>
-//		internal static  Dictionary<string, MediaSession> CurrentMediaSessions = new Dictionary<string, MediaSession>();
+//		internal static Dictionary<string, MediaSession> CurrentMediaSessions = new Dictionary<string, MediaSession>();
 
 //		private static bool IsStarted;
 
-//		internal static  void Start()
+//		internal static void Start()
 //		{
 //			if (!IsStarted)
 //			{

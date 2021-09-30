@@ -3,9 +3,9 @@
     using AstroClient.ItemTweakerV2.Submenus;
     using UnityEngine;
 
-    internal static  class Scale_ext
+    internal static class Scale_ext
     {
-        internal static  void IncreaseHoldItemScale(this GameObject obj)
+        internal static void IncreaseHoldItemScale(this GameObject obj)
         {
             if (obj != null)
             {
@@ -13,7 +13,7 @@
             }
         }
 
-        internal static  void RestoreOriginalScaleItem(this GameObject obj)
+        internal static void RestoreOriginalScaleItem(this GameObject obj)
         {
             if (obj != null)
             {
@@ -21,7 +21,7 @@
             }
         }
 
-        internal static  void DecreaseHoldItemScale(this GameObject obj)
+        internal static void DecreaseHoldItemScale(this GameObject obj)
         {
             if (obj != null)
             {

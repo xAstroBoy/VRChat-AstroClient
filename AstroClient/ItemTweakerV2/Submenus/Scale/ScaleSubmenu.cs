@@ -10,7 +10,7 @@
 
     internal class ScaleSubmenu : Tweaker_Events
     {
-        internal static  void Init_ScaleSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void Init_ScaleSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var ScaleEditor = new QMNestedButton(menu, x, y, "Scale", "Scale Editor Menu!", null, null, null, null, btnHalf);
 
@@ -48,25 +48,25 @@
             InflaterScaleMode = false;
         }
 
-        internal static  void IncreaseHoldItemScale(GameObject obj)
+        internal static void IncreaseHoldItemScale(GameObject obj)
         {
             ScaleEditor.EditScaleSize(obj, true);
             UpdateScaleButton(obj);
         }
 
-        internal static  void RestoreOriginalScaleItem(GameObject obj)
+        internal static void RestoreOriginalScaleItem(GameObject obj)
         {
             ScaleEditor.RestoreOriginalScale(obj);
             UpdateScaleButton(obj);
         }
 
-        internal static  void DecreaseHoldItemScale(GameObject obj)
+        internal static void DecreaseHoldItemScale(GameObject obj)
         {
             ScaleEditor.EditScaleSize(obj, false);
             UpdateScaleButton(obj);
         }
 
-        internal static  void UpdateScaleButton(GameObject obj)
+        internal static void UpdateScaleButton(GameObject obj)
         {
             if (obj != null)
             {
@@ -91,7 +91,7 @@
             }
         }
 
-        internal static  void UpdateCurrentAddValue()
+        internal static void UpdateCurrentAddValue()
         {
             if (CurrentAddValue != null)
             {
@@ -103,39 +103,39 @@
             }
         }
 
-        internal static  void SetScaleValueToUse(float newval)
+        internal static void SetScaleValueToUse(float newval)
         {
             ScaleValueToUse = newval;
             UpdateCurrentAddValue();
         }
 
-        internal static  void ResetDefValue()
+        internal static void ResetDefValue()
         {
             ScaleValueToUse = 1f;
             UpdateCurrentAddValue();
         }
 
-        internal static  void ToggleInflaterEditor()
+        internal static void ToggleInflaterEditor()
         {
             InflaterScaleMode = !InflaterScaleMode;
         }
 
-        internal static  QMSlider ScaleSlider;
+        internal static QMSlider ScaleSlider;
 
-        internal static  QMSingleButton CurrentAddValue;
-        internal static  QMSingleButton GameObjectActualScale;
-        internal static  QMSingleButton CurrentScaleButton;
-        internal static  QMSingleToggleButton InflaterModeButton;
+        internal static QMSingleButton CurrentAddValue;
+        internal static QMSingleButton GameObjectActualScale;
+        internal static QMSingleButton CurrentScaleButton;
+        internal static QMSingleToggleButton InflaterModeButton;
 
-        internal static  QMSingleToggleButton ScaleEditX;
-        internal static  QMSingleToggleButton ScaleEditY;
-        internal static  QMSingleToggleButton ScaleEditZ;
+        internal static QMSingleToggleButton ScaleEditX;
+        internal static QMSingleToggleButton ScaleEditY;
+        internal static QMSingleToggleButton ScaleEditZ;
 
-        internal static  float ScaleValueToUse = 0.1f;
+        internal static float ScaleValueToUse = 0.1f;
 
         private static bool _InflaterScaleMode = false;
 
-        internal static  bool InflaterScaleMode
+        internal static bool InflaterScaleMode
         {
             get
             {
@@ -155,7 +155,7 @@
         private static bool _EditVectorY = true;
         private static bool _EditVectorZ = true;
 
-        internal static  bool EditVectorX
+        internal static bool EditVectorX
         {
             get
             {
@@ -171,7 +171,7 @@
             }
         }
 
-        internal static  bool EditVectorY
+        internal static bool EditVectorY
         {
             get
             {
@@ -187,7 +187,7 @@
             }
         }
 
-        internal static  bool EditVectorZ
+        internal static bool EditVectorZ
         {
             get
             {

@@ -6,7 +6,7 @@
 
     internal static class ColliderToggler
     {
-        internal static  void ReenableAll()
+        internal static void ReenableAll()
         {
             int num = 0;
             int num2 = 0;

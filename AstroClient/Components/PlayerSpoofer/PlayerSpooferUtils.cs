@@ -11,7 +11,7 @@
             MakeInstance();
         }
 
-        internal static  void MakeInstance()
+        internal static void MakeInstance()
         {
             if (Instance == null)
             {
@@ -32,7 +32,7 @@
 
         private static PlayerSpoofer Instance;
 
-        internal static  PlayerSpoofer SpooferInstance
+        internal static PlayerSpoofer SpooferInstance
         {
             get
             {
@@ -43,7 +43,7 @@
         
         private static bool _SpoofASWorldAuthor;
 
-        internal static  bool SpoofAsWorldAuthor
+        internal static bool SpoofAsWorldAuthor
         {
             get
             {

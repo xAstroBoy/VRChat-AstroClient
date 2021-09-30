@@ -47,14 +47,14 @@
 
         #endregion Internal
 
-        internal static  OrbitManager Instance { get; set; }
+        internal static OrbitManager Instance { get; set; }
         private Player target;
         private bool isEnabled;
         private bool isLooping;
         private Transform centerPoint = null;
         private List<PickupController> pickups = new List<PickupController>();
 
-        internal static  bool IsEnabled
+        internal static bool IsEnabled
         {
             get => Instance.isEnabled;
             set => Instance.isEnabled = value;
@@ -87,7 +87,7 @@
             ModConsole.Log($"[OrbitManager] Refreshed: {pickups.Count} pickups found");
         }
 
-        internal static  void MakeInstance()
+        internal static void MakeInstance()
         {
             if (Instance == null)
             {
@@ -111,7 +111,7 @@
             RefreshPickups();
         }
 
-        internal static  void OrbitPlayer(Player target)
+        internal static void OrbitPlayer(Player target)
         {
             if (Instance != null && target != null && Instance.target == null)
             {
@@ -134,7 +134,7 @@
             }
         }
 
-        internal static  void DisableOrbit()
+        internal static void DisableOrbit()
         {
             if (Instance == null) return;
 
@@ -150,7 +150,7 @@
             ModConsole.Log($"[OrbitManager] Orbit Disabled");
         }
 
-        internal static  IEnumerator LoopPickups()
+        internal static IEnumerator LoopPickups()
         {
             for (; ; )
             {

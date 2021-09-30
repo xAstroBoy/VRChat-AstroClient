@@ -8,7 +8,7 @@
 
     internal class TargetSelector : GameEvents
     {
-        internal static  event EventHandler<VRCPlayerEventArgs> Event_OnTargetSet;
+        internal static event EventHandler<VRCPlayerEventArgs> Event_OnTargetSet;
 
         internal override void OnPlayerLeft(Player player)
         {
@@ -34,7 +34,7 @@
             }
         }
 
-        internal static  string TeleportToTarget_button_text
+        internal static string TeleportToTarget_button_text
         {
             get
             {
@@ -44,7 +44,7 @@
             }
         }
 
-        internal static  void MarkPlayerAsTarget()
+        internal static void MarkPlayerAsTarget()
         {
             try
             {
@@ -67,7 +67,7 @@
 
         private static Player _CurrentTarget;
 
-        internal static  Player CurrentTarget
+        internal static Player CurrentTarget
         {
             get
             {

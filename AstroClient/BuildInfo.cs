@@ -1,6 +1,6 @@
 ﻿namespace AstroClient
 {
-    public static  class BuildInfo
+    public static class BuildInfo
     {
         public const string Name = "AstroClient"; // Name of the Mod.  (MUST BE SET)
         public const string Author = "xAstroBoy, Cheetos"; // Author of the Mod.  (Set as null if none)

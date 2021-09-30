@@ -18,7 +18,7 @@
 
     internal class Murder2Cheats : GameEvents
     {
-        internal static  void FindGameMurderObjects()
+        internal static void FindGameMurderObjects()
         {
             item_detectiveGun = GameObjectFinder.Find("Murder Logic 3/Weapons/Gun Revolver");
             item_SilencedGun = GameObjectFinder.Find("Murder Logic 3/Weapons/Gun Silenced");
@@ -84,7 +84,7 @@
             }
         }
 
-        internal static  void SetMurderItemsGravity(bool useGravity)
+        internal static void SetMurderItemsGravity(bool useGravity)
         {
             Clues.RigidBody_Set_Gravity(useGravity);
             DetectiveGuns.RigidBody_Set_Gravity(useGravity);
@@ -92,7 +92,7 @@
             Knifes.RigidBody_Set_Gravity(useGravity);
         }
 
-        internal static  void AllowTheft()
+        internal static void AllowTheft()
         {
             Clues.Pickup_Set_DisallowTheft(false);
             DetectiveGuns.Pickup_Set_DisallowTheft(false);
@@ -100,19 +100,19 @@
             Knifes.Pickup_Set_DisallowTheft(false);
         }
 
-        internal static  void MurderGunsRockets()
+        internal static void MurderGunsRockets()
         {
             DetectiveGuns.Add_Rocket_Component(false);
             SilencedGuns.Add_Rocket_Component(false);
         }
 
-        internal static  void MurderGunsCrazy()
+        internal static void MurderGunsCrazy()
         {
             DetectiveGuns.Add_Crazy_Component(false);
             SilencedGuns.Add_Crazy_Component(false);
         }
 
-        internal static  void ToggleDeathComponent()
+        internal static void ToggleDeathComponent()
         {
             if (Death != null)
             {
@@ -174,7 +174,7 @@
             }
         }
 
-        internal static  void ToggleItemESP(bool value)
+        internal static void ToggleItemESP(bool value)
         {
             VRChat_Map_ESP_Menu.Toggle_Pickup_ESP = value;
             if (value)
@@ -189,7 +189,7 @@
             }
         }
 
-        internal static  void Murder2CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
+        internal static void Murder2CheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
         {
             Murder2CheatPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Murder 2 Cheats", "Manage Murder 2 Cheats", null, null, null, null, btnHalf);
             Murder2CheatPage.GetMainButton().SetResizeTextForBestFit(true);
@@ -252,32 +252,32 @@
         }
 
         // MAP GameObjects Required for control.
-        internal static  List<GameObject> Clues = new List<GameObject>();
+        internal static List<GameObject> Clues = new List<GameObject>();
 
-        internal static  List<GameObject> DetectiveGuns = new List<GameObject>();
-        internal static  List<GameObject> SilencedGuns = new List<GameObject>();
-        internal static  List<GameObject> Knifes = new List<GameObject>();
-        internal static  GameObject Death = null;
+        internal static List<GameObject> DetectiveGuns = new List<GameObject>();
+        internal static List<GameObject> SilencedGuns = new List<GameObject>();
+        internal static List<GameObject> Knifes = new List<GameObject>();
+        internal static GameObject Death = null;
 
-        internal static  GameObject item_detectiveGun = null;
-        internal static  GameObject item_SilencedGun = null;
+        internal static GameObject item_detectiveGun = null;
+        internal static GameObject item_SilencedGun = null;
 
-        internal static  GameObject item_clue_0 = null;
-        internal static  GameObject item_clue_1 = null;
-        internal static  GameObject item_clue_2 = null;
-        internal static  GameObject item_clue_3 = null;
+        internal static GameObject item_clue_0 = null;
+        internal static GameObject item_clue_1 = null;
+        internal static GameObject item_clue_2 = null;
+        internal static GameObject item_clue_3 = null;
 
-        internal static  GameObject item_knife_0 = null;
-        internal static  GameObject item_knife_1 = null;
-        internal static  GameObject item_knife_2 = null;
-        internal static  GameObject item_knife_3 = null;
-        internal static  GameObject item_knife_4 = null;
-        internal static  GameObject item_knife_5 = null;
-        internal static  GameObject item_knife_6 = null;
-        internal static  GameObject item_knife_7 = null;
-        internal static  GameObject item_knife_8 = null;
-        internal static  QMNestedButton Murder2CheatPage;
-        internal static  QMSingleToggleButton GodModeMurder2;
-        internal static  QMSingleToggleButton Murder2ESPtoggler;
+        internal static GameObject item_knife_0 = null;
+        internal static GameObject item_knife_1 = null;
+        internal static GameObject item_knife_2 = null;
+        internal static GameObject item_knife_3 = null;
+        internal static GameObject item_knife_4 = null;
+        internal static GameObject item_knife_5 = null;
+        internal static GameObject item_knife_6 = null;
+        internal static GameObject item_knife_7 = null;
+        internal static GameObject item_knife_8 = null;
+        internal static QMNestedButton Murder2CheatPage;
+        internal static QMSingleToggleButton GodModeMurder2;
+        internal static QMSingleToggleButton Murder2ESPtoggler;
     }
 }

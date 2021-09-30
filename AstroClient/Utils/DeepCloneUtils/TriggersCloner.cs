@@ -5,9 +5,9 @@
     using UnityEngine;
     using VRCSDK2;
 
-    internal static  class TriggersCloner
+    internal static class TriggersCloner
     {
-        internal static  void CloneVRC2SDKTrigger(GameObject OrigObj, GameObject DisplayObj, string InteractText)
+        internal static void CloneVRC2SDKTrigger(GameObject OrigObj, GameObject DisplayObj, string InteractText)
         {
             var DeleteTrigger = DisplayObj.GetComponentInChildren<VRC_Trigger>(true);
             var WorkingTrigger = OrigObj.GetComponentInChildren<VRC_Trigger>(true);

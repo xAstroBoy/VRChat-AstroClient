@@ -37,7 +37,7 @@
             }
         }
 
-        internal static  void FindQVPenSetTriggers()
+        internal static void FindQVPenSetTriggers()
         {
             UnhollowerBaseLib.Il2CppArrayBase<GameObject> list = Resources.FindObjectsOfTypeAll<GameObject>();
             for (int i = 0; i < list.Count; i++)
@@ -61,7 +61,7 @@
             }
         }
 
-        internal static  void GetAllResetGlobals()
+        internal static void GetAllResetGlobals()
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -105,7 +105,7 @@
             ModConsole.Log($"Trigger Search Took: {stopwatch.ElapsedMilliseconds}ms");
         }
 
-        internal static  void FindUdonPensEvents()
+        internal static void FindUdonPensEvents()
         {
             VRC.Udon.UdonBehaviour[] array = WorldUtils.UdonScripts;
             for (int i = 0; i < array.Length; i++)
@@ -140,7 +140,7 @@
             ModConsole.Log("Found " + ClearPensUdonEvents.Count() + " Clear Pens Udon Events.");
         }
 
-        internal static  void ResetQPensGlobal()
+        internal static void ResetQPensGlobal()
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -176,9 +176,9 @@
             ModConsole.Log($"ResetQPens took: {stopwatch.ElapsedMilliseconds}ms");
         }
 
-        internal static  List<GameObject> PenManagers = new List<GameObject>();
-        internal static  List<VRC.SDKBase.VRC_Trigger> TriggerSDKBase = new List<VRC.SDKBase.VRC_Trigger>();
-        internal static  List<VRCSDK2.VRC_Trigger> TriggerSDK2 = new List<VRCSDK2.VRC_Trigger>();
-        internal static  List<UdonBehaviour_Cached> ClearPensUdonEvents = new List<UdonBehaviour_Cached>();
+        internal static List<GameObject> PenManagers = new List<GameObject>();
+        internal static List<VRC.SDKBase.VRC_Trigger> TriggerSDKBase = new List<VRC.SDKBase.VRC_Trigger>();
+        internal static List<VRCSDK2.VRC_Trigger> TriggerSDK2 = new List<VRCSDK2.VRC_Trigger>();
+        internal static List<UdonBehaviour_Cached> ClearPensUdonEvents = new List<UdonBehaviour_Cached>();
     }
 }

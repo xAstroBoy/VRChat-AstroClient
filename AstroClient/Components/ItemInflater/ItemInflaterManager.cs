@@ -45,7 +45,7 @@
 
         #region Module
 
-        internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ObjectEditorBehaviors;
+        internal static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ObjectEditorBehaviors;
 
         internal void Start()
         {
@@ -53,7 +53,7 @@
             Instance = this;
         }
 
-        internal static  void MakeInstance()
+        internal static void MakeInstance()
         {
             if (Instance == null)
             {
@@ -72,11 +72,11 @@
             }
         }
 
-        internal static  void Update()
+        internal static void Update()
         {
         }
 
-        internal static  void AddObject(GameObject obj, bool ShouldFloat)
+        internal static void AddObject(GameObject obj, bool ShouldFloat)
         {
             if (obj != null)
             {
@@ -96,7 +96,7 @@
             }
         }
 
-        internal static  void RemoveObject(GameObject obj)
+        internal static void RemoveObject(GameObject obj)
         {
             if (ObjectEditors.Contains(obj))
             {
@@ -105,7 +105,7 @@
             }
         }
 
-        internal static  void KillObjectEditors()
+        internal static void KillObjectEditors()
         {
             foreach (var obj in ObjectEditors)
             {
@@ -120,24 +120,24 @@
             ClearList();
         }
 
-        internal static  void Register(ItemInflater ObjectEditorBehaviour)
+        internal static void Register(ItemInflater ObjectEditorBehaviour)
         {
             ObjectEditorBehaviors.Add(ObjectEditorBehaviour);
         }
 
-        internal static  void Deregister(ItemInflater ObjectEditorBehaviour)
+        internal static void Deregister(ItemInflater ObjectEditorBehaviour)
         {
             _ = ObjectEditorBehaviors.Remove(ObjectEditorBehaviour);
         }
 
-        internal static  void ClearList()
+        internal static void ClearList()
         {
             ObjectEditorBehaviors.Clear();
         }
 
-        internal static  List<GameObject> ObjectEditors = new List<GameObject>();
+        internal static List<GameObject> ObjectEditors = new List<GameObject>();
 
-        internal static  ItemInflaterManager Instance { get; set; }
+        internal static ItemInflaterManager Instance { get; set; }
 
         #endregion Module
     }

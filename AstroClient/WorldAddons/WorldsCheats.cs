@@ -19,7 +19,7 @@
 
     internal class WorldsCheats : GameEvents
     {
-        internal static  void InitButtons(float pos)
+        internal static void InitButtons(float pos)
         {
             QMTabMenu WorldCheats = new QMTabMenu(pos, "WorldCheats Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.thief.png"));
             Murder2Cheats.Murder2CheatsButtons(WorldCheats, 1, 0, true);

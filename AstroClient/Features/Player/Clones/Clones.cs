@@ -6,17 +6,17 @@
 
     internal class Clones : GameEvents
     {
-        internal static  void OnLevelLoad()
+        internal static void OnLevelLoad()
         {
             ClonesCapsules.Clear();
         }
 
-        internal static  void SpawnClone()
+        internal static void SpawnClone()
         {
             ClonesCapsules.Add(PlayerCloner.CloneLocalPlayerAvatar());
         }
 
-        internal static  void RemoveClones()
+        internal static void RemoveClones()
         {
             try
             {

@@ -30,11 +30,11 @@
 
     internal class AvatarSearch : GameEvents
     {
-        internal static  SearchTypes SearchType = SearchTypes.ALL;
+        internal static SearchTypes SearchType = SearchTypes.ALL;
 
-        internal static  bool IsSearching = false;
+        internal static bool IsSearching = false;
 
-        internal static  bool IsDumping = false;
+        internal static bool IsDumping = false;
 
         private static GameObject publicAvatarList;
 
@@ -124,7 +124,7 @@
             });
         }
 
-        internal static  void OnSelect()
+        internal static void OnSelect()
         {
             // Add a check here later
             var selected = inputModule.field_Public_Selectable_0;
@@ -142,7 +142,7 @@
             }
         }
 
-        internal static  void Search(SearchTypes searchType, string query)
+        internal static void Search(SearchTypes searchType, string query)
         {
             if (!IsSearching)
             {
@@ -160,7 +160,7 @@
             }
         }
 
-        internal static  IEnumerator SearchLoop()
+        internal static IEnumerator SearchLoop()
         {
             if (!IsSearching) yield break;
 
@@ -175,7 +175,7 @@
             }
         }
 
-        internal static  void PedestalDump()
+        internal static void PedestalDump()
         {
             stopwatch2.Start();
 
@@ -223,7 +223,7 @@
             DumpDone();
         }
 
-        internal static  void DumpDone()
+        internal static void DumpDone()
         {
             worldList.Text.supportRichText = true;
             worldList.UiVRCList.expandedHeight *= 2f;
@@ -237,7 +237,7 @@
             worldList.Text.text = $"<color=cyan>Astro Pedestal</color> Found: <color=yellow>{worldAvatars.Count}</color>";
         }
 
-        internal static  void SearchDone()
+        internal static void SearchDone()
         {
             IsSearching = false;
             stopwatch.Stop();
@@ -259,7 +259,7 @@
             ModConsole.Log($"Avatar Search Completed: found {foundAvatars.Count} avatars in {stopwatch.ElapsedMilliseconds}ms");
         }
 
-        internal static  void AddAvatar(AvatarData avatarData)
+        internal static void AddAvatar(AvatarData avatarData)
         {
             foundAvatars.Add(avatarData.ToApiAvatar());
             ModConsole.Log($"Avatar Result: {avatarData.Name}: {avatarData.AvatarID}");

@@ -2,7 +2,7 @@
 {
     internal class Serialization
     {
-        internal static  byte[] ToByteArray(Il2CppSystem.Object obj)
+        internal static byte[] ToByteArray(Il2CppSystem.Object obj)
         {
             if (obj == null) return null;
             var bf = new Il2CppSystem.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
@@ -11,7 +11,7 @@
             return ms.ToArray();
         }
 
-        internal static  byte[] ToByteArray(object obj)
+        internal static byte[] ToByteArray(object obj)
         {
             if (obj == null) return null;
             var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
@@ -20,7 +20,7 @@
             return ms.ToArray();
         }
 
-        internal static  T FromByteArray<T>(byte[] data)
+        internal static T FromByteArray<T>(byte[] data)
         {
             if (data == null) return default(T);
             var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
@@ -31,7 +31,7 @@
             }
         }
 
-        internal static  T IL2CPPFromByteArray<T>(byte[] data)
+        internal static T IL2CPPFromByteArray<T>(byte[] data)
         {
             if (data == null) return default(T);
             var bf = new Il2CppSystem.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
@@ -40,11 +40,11 @@
             return (T)obj;
         }
 
-        internal static  T FromIL2CPPToManaged<T>(Il2CppSystem.Object obj) => FromByteArray<T>(ToByteArray(obj));
+        internal static T FromIL2CPPToManaged<T>(Il2CppSystem.Object obj) => FromByteArray<T>(ToByteArray(obj));
 
-        internal static  T FromManagedToIL2CPP<T>(object obj) => IL2CPPFromByteArray<T>(ToByteArray(obj));
+        internal static T FromManagedToIL2CPP<T>(object obj) => IL2CPPFromByteArray<T>(ToByteArray(obj));
 
-        internal static  object[] FromIL2CPPArrayToManagedArray(Il2CppSystem.Object[] obj)
+        internal static object[] FromIL2CPPArrayToManagedArray(Il2CppSystem.Object[] obj)
         {
             object[] Parameters = new object[obj.Length];
             for (int i = 0; i < obj.Length; i++)
@@ -55,7 +55,7 @@
             return Parameters;
         }
 
-        internal static  Il2CppSystem.Object[] FromManagedArrayToIL2CPPArray(object[] obj)
+        internal static Il2CppSystem.Object[] FromManagedArrayToIL2CPPArray(object[] obj)
         {
             Il2CppSystem.Object[] Parameters = new Il2CppSystem.Object[obj.Length];
             for (int i = 0; i < obj.Length; i++)

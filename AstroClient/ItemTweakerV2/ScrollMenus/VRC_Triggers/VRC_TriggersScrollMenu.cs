@@ -8,7 +8,7 @@
 
     internal class VRC_TriggersScrollMenu
     {
-        internal static  void Init_VRC_TriggersScrollMenu(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void Init_VRC_TriggersScrollMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Interact Triggers", "Interact with Selected Pickup Triggers", null, null, null, null, btnHalf);
             var scroll = new QMScrollMenu(menu);

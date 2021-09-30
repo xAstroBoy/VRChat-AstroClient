@@ -11,7 +11,7 @@
 
     internal class PickupSelectionScrollMenu : Tweaker_Events
     {
-        internal static  void Init_PickupSelectionQMScroll(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void Init_PickupSelectionQMScroll(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Select Pickup", "Select World Pickup to edit", null, null, null, null, btnHalf);
             var PickupQMScroll = new QMScrollMenu(menu);
@@ -108,7 +108,7 @@
             }
         }
 
-        internal static  QMSingleButton TeleportToMe;
-        internal static  QMSingleButton TeleportToTarget;
+        internal static QMSingleButton TeleportToMe;
+        internal static QMSingleButton TeleportToTarget;
     }
 }

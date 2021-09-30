@@ -8,7 +8,7 @@
 
     internal class CrazyComponentSubMenu : Tweaker_Events
     {
-        internal static  void Init_CrazyComponentSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        internal static void Init_CrazyComponentSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var submenu = new QMNestedButton(menu, x, y, "Crazy Object", "Make Items fly in random directions lol!", null, null, null, null, btnHalf);
             _ = new QMSingleButton(submenu, 1, 0, "Crazy Object (With Gravity)", new Action(() => { Tweaker_Object.GetGameObjectToEdit().GoNutsWithGravity(); }), "Make Held Object Go Nuts!", null, null);

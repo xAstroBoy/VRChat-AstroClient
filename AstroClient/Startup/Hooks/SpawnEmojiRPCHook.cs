@@ -13,7 +13,7 @@
 
     internal class SpawnEmojiRPCHook : GameEvents
     {
-        internal static  event EventHandler<SpawnEmojiArgs> Event_SpawnEmojiRPC;
+        internal static event EventHandler<SpawnEmojiArgs> Event_SpawnEmojiRPC;
 
         internal override void ExecutePriorityPatches()
         {

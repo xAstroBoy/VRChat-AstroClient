@@ -10,11 +10,11 @@
 
     internal class PickupControllerHandler : Tweaker_Events
     {
-        internal static  event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerSelected;
+        internal static event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerSelected;
 
-        internal static  event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerPropertyChanged;
+        internal static event EventHandler<OnPickupControllerArgs> Event_OnPickupControllerPropertyChanged;
 
-        internal static  event EventHandler<OnPickupControllerArgs> Event_OnPickupController_OnUpdate;
+        internal static event EventHandler<OnPickupControllerArgs> Event_OnPickupController_OnUpdate;
 
         internal override void On_New_GameObject_Selected(GameObject obj)
         {

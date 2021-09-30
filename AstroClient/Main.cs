@@ -42,32 +42,32 @@
     {
         #region EventHandlers
 
-        internal static  event EventHandler Event_OnApplicationLateStart;
+        internal static event EventHandler Event_OnApplicationLateStart;
 
-        internal static  event EventHandler Event_OnUpdate;
+        internal static event EventHandler Event_OnUpdate;
 
-        internal static  event EventHandler Event_LateUpdate;
+        internal static event EventHandler Event_LateUpdate;
 
-        internal static  event EventHandler Event_VRChat_OnUiManagerInit;
+        internal static event EventHandler Event_VRChat_OnUiManagerInit;
 
-        internal static  event EventHandler Event_VRChat_OnQuickMenuInit;
+        internal static event EventHandler Event_VRChat_OnQuickMenuInit;
 
-        internal static  event EventHandler<OnSceneLoadedEventArgs> Event_OnSceneLoaded;
+        internal static event EventHandler<OnSceneLoadedEventArgs> Event_OnSceneLoaded;
 
-        internal static  event EventHandler Event_OnApplicationQuit;
+        internal static event EventHandler Event_OnApplicationQuit;
 
         #endregion EventHandlers
 
         #region Buttons
 
-        internal static  QMSingleToggleButton ToggleDebugInfo;
-        internal static  QMSingleButton CopyIDButton;
-        internal static  QMSingleButton AvatarByIDButton;
-        internal static  QMSingleButton ClearVRamButton;
-        internal static  QMSingleButton JoinInstanceButton;
-        internal static  QMSingleButton ReloadAvatarsButton;
-        internal static  QMSingleButton CloseButton;
-        internal static  QMSingleButton RestartButton;
+        internal static QMSingleToggleButton ToggleDebugInfo;
+        internal static QMSingleButton CopyIDButton;
+        internal static QMSingleButton AvatarByIDButton;
+        internal static QMSingleButton ClearVRamButton;
+        internal static QMSingleButton JoinInstanceButton;
+        internal static QMSingleButton ReloadAvatarsButton;
+        internal static QMSingleButton CloseButton;
+        internal static QMSingleButton RestartButton;
 
         #endregion Buttons
 
@@ -138,7 +138,7 @@
         /// <summary>
         /// Maybe move this later?
         /// </summary>
-        internal static  void WriteBanner()
+        internal static void WriteBanner()
         {
             try
             {
@@ -151,7 +151,7 @@
             }
         }
 
-        internal static  void InitializeOverridables()
+        internal static void InitializeOverridables()
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -271,7 +271,7 @@
             ModConsole.Log($"Start_VRChat_OnUiManagerInit: Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
-        internal static  void InitMainsButtons()
+        internal static void InitMainsButtons()
         {
             if (!KeyManager.IsAuthed) return;
             QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));

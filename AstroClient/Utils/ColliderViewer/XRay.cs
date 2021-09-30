@@ -6,18 +6,18 @@
     using UnityEngine;
     using UnityEngine.SceneManagement;
 
-    internal static  class XRay
+    internal static class XRay
     {
         private static Dictionary<int, Renderer> OriginallyEnabled { get; } = new Dictionary<int, Renderer>();
 
         private static Dictionary<int, Renderer> OriginallyDisabled { get; } = new Dictionary<int, Renderer>();
 
-        internal static  void ToggleEnabledRenderers()
+        internal static void ToggleEnabledRenderers()
         {
             ToggleRenderers(OriginallyEnabled, true);
         }
 
-        internal static  void ToggleDisabledRenderers()
+        internal static void ToggleDisabledRenderers()
         {
             ToggleRenderers(OriginallyDisabled, false);
         }

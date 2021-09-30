@@ -41,7 +41,7 @@
             BodyESPs = false;
         }
 
-        internal static  void FindAmongUsObjects()
+        internal static void FindAmongUsObjects()
         {
             ModConsole.Log("Removing Anti-Peek Protection...");
             var occlusion = GameObjectFinder.Find("Environment/skeld occ");
@@ -172,7 +172,7 @@
             }
         }
 
-        internal static  void AmongUSCheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
+        internal static void AmongUSCheatsButtons(QMTabMenu submenu, float BtnXLocation, float BtnYLocation, bool btnHalf)
         {
             AmongUsCheatsPage = new QMNestedButton(submenu, BtnXLocation, BtnYLocation, "Among US Cheats", "Manage Among US Cheats", null, null, null, null, btnHalf);
             JarRoleController.AmongUSRolesRevealerToggle = new QMSingleToggleButton(AmongUsCheatsPage, 1, 0, "Reveal Roles On", new Action(() => { JarRoleController.ViewRoles = true; }), "Reveals Roles Off", new Action(() => { JarRoleController.ViewRoles = false; }), "Reveals Current Players Roles In nameplates.", Color.green, Color.red, null, false, true);
@@ -235,7 +235,7 @@
             catch { }
         }
 
-        internal static  bool SwapRoles(GameObject SelfNode, GameObject TargetNode, string AssignedSelfRole, string AssignedTargetRole)
+        internal static bool SwapRoles(GameObject SelfNode, GameObject TargetNode, string AssignedSelfRole, string AssignedTargetRole)
         {
             if (SelfNode == null && TargetNode == null && AssignedSelfRole == null && AssignedTargetRole == null)
             {
@@ -293,9 +293,9 @@
 
         private static bool SafetySwap;
 
-        internal static  bool _RoleSwapper_GetImpostorRole;
+        internal static bool _RoleSwapper_GetImpostorRole;
 
-        internal static  bool RoleSwapper_GetImpostorRole
+        internal static bool RoleSwapper_GetImpostorRole
         {
             get
             {
@@ -395,23 +395,23 @@
             }
         }
 
-        internal static  QMSingleButton GameStartbtn;
-        internal static  QMSingleButton GameAbortbtn;
-        internal static  QMSingleButton GameVictoryCrewmateBtn;
-        internal static  QMSingleButton GameVictoryImpostorBtn;
-        internal static  QMSingleToggleButton GameBodyESPBtn;
+        internal static QMSingleButton GameStartbtn;
+        internal static QMSingleButton GameAbortbtn;
+        internal static QMSingleButton GameVictoryCrewmateBtn;
+        internal static QMSingleButton GameVictoryImpostorBtn;
+        internal static QMSingleToggleButton GameBodyESPBtn;
 
-        internal static  QMSingleToggleButton GetImpostorRoleBtn;
-        internal static  QMSingleToggleButton ToggleSerializerShortcut;
+        internal static QMSingleToggleButton GetImpostorRoleBtn;
+        internal static QMSingleToggleButton ToggleSerializerShortcut;
 
-        internal static  QMNestedButton AmongUsCheatsPage;
+        internal static QMNestedButton AmongUsCheatsPage;
 
-        internal static  bool HasAmongUsWorldLoaded = false;
+        internal static bool HasAmongUsWorldLoaded = false;
 
-        internal static  UdonBehaviour_Cached StartGameEvent;
-        internal static  UdonBehaviour_Cached AbortGameEvent;
+        internal static UdonBehaviour_Cached StartGameEvent;
+        internal static UdonBehaviour_Cached AbortGameEvent;
 
-        internal static  UdonBehaviour_Cached VictoryCrewmateEvent;
-        internal static  UdonBehaviour_Cached VictoryImpostorEvent;
+        internal static UdonBehaviour_Cached VictoryCrewmateEvent;
+        internal static UdonBehaviour_Cached VictoryImpostorEvent;
     }
 }

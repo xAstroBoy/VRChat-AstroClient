@@ -16,12 +16,12 @@
 
     internal class ComponentHelper : GameEvents
     {
-        internal static  void RegisterComponent<T>() where T : class
+        internal static void RegisterComponent<T>() where T : class
         {
             RegisterComponent(typeof(T));
         }
 
-        internal static  void RegisterComponent(Type type)
+        internal static void RegisterComponent(Type type)
         {
             try
             {
@@ -94,6 +94,6 @@
             PlayerWatcherManager.MakeInstance();
         }
 
-        internal static  List<Type> RegisteredComponentsTypes { get; } = new List<Type>();
+        internal static List<Type> RegisteredComponentsTypes { get; } = new List<Type>();
     }
 }

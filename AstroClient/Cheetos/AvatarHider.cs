@@ -13,9 +13,9 @@
 
     internal class AvatarHider : GameEvents
     {
-        internal static  bool HideAvatar = false;
+        internal static bool HideAvatar = false;
 
-        internal static  void DestroyAvatar(GameObject avatar)
+        internal static void DestroyAvatar(GameObject avatar)
         {
             avatar.transform.root.Find("ForwardDirection/Avatar").gameObject.DestroyMeLocal();
         }

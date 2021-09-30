@@ -24,7 +24,7 @@
 
         private static GameObject _ScreenFade;
 
-        internal static  GameObject ScreenFade
+        internal static GameObject ScreenFade
         {
             get
             {
@@ -39,7 +39,7 @@
 
         private static Transform _AvatarPreviewBase_MainAvatar;
 
-        internal static  Transform AvatarPreviewBase_MainAvatar
+        internal static Transform AvatarPreviewBase_MainAvatar
         {
             get
             {
@@ -54,7 +54,7 @@
 
         private static Transform _AvatarPreviewBase_FallbackAvatar;
 
-        internal static  Transform AvatarPreviewBase_FallbackAvatar
+        internal static Transform AvatarPreviewBase_FallbackAvatar
         {
             get
             {

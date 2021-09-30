@@ -9,11 +9,11 @@
 
     internal class CheetoMenu : GameEvents
     {
-        internal static  GameObject UI;
+        internal static GameObject UI;
 
-        internal static  GameObject Menu;
+        internal static GameObject Menu;
 
-        internal static  bool IsOpen = false;
+        internal static bool IsOpen = false;
 
         internal override void VRChat_OnUiManagerInit()
         {

@@ -11,9 +11,9 @@
 
     internal class HistoryMenu : GameEvents
     {
-        internal static  QMTabMenu SubMenu { get; private set; }
+        internal static QMTabMenu SubMenu { get; private set; }
 
-        internal static  void InitButtons(float pos)
+        internal static void InitButtons(float pos)
         {
             if (Bools.IsDeveloper)
             {

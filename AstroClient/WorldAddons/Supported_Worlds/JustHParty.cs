@@ -12,9 +12,9 @@
 
     internal class JustHParty : GameEvents
     {
-        internal static  QMNestedButton JustHPartyMenu;
+        internal static QMNestedButton JustHPartyMenu;
 
-        internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             JustHPartyMenu = new QMNestedButton(main, x, y, "JustHParty Exploits", "JustHParty Exploits", null, null, null, null, btnHalf);
 

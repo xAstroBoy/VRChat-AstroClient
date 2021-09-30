@@ -11,7 +11,7 @@
 
     internal class CameraTweaker : GameEvents
     {
-        internal static  void CheckCamera()
+        internal static void CheckCamera()
         {
             if (userCameraParent != null)
             {
@@ -84,7 +84,7 @@
             }
         }
 
-        internal static  void InitQMMenu(QMTabMenu tab, float x, float y, bool btnHalf)
+        internal static void InitQMMenu(QMTabMenu tab, float x, float y, bool btnHalf)
         {
             var tmp = new QMNestedButton(tab, x, y, "Camera Experiments", "Edit Camera Behaviours", null, null, null, null, btnHalf);
             _ = new QMSingleButton(tmp, 1, 0, "Set Camera (Tweaker)", () => { UserCamera.gameObject.Set_As_Object_To_Edit(); CheckCamera(); }, "Sets Camera on the tweaker", null, null, true);
@@ -95,7 +95,7 @@
             RespawnOnLevelChangeToggle.SetResizeTextForBestFit(true);
         }
 
-        internal static  Transform UserCamera
+        internal static Transform UserCamera
         {
             get
             {
@@ -123,7 +123,7 @@
             }
         }
 
-        internal static  Transform ViewFinder
+        internal static Transform ViewFinder
         {
             get
             {
@@ -143,7 +143,7 @@
             }
         }
 
-        internal static  Transform userCameraParent
+        internal static Transform userCameraParent
         {
             get
             {

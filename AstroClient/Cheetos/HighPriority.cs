@@ -14,7 +14,7 @@
             }
         }
 
-        internal static  bool IsEnabled
+        internal static bool IsEnabled
         {
             get => ConfigManager.Performance.HighPriority;
             set

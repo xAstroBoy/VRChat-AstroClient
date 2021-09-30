@@ -8,7 +8,7 @@
 
     internal class ColorUtils : GameEvents
     {
-        internal static  UnityEngine.Color HexToColor(string hexColor)
+        internal static UnityEngine.Color HexToColor(string hexColor)
         {
             if (hexColor.IndexOf('#') != -1)
             {
@@ -24,18 +24,18 @@
 
 
 
-        internal static  string ColorToHex(System.Drawing.Color color)
+        internal static string ColorToHex(System.Drawing.Color color)
         {
             return ColorTranslator.ToHtml(System.Drawing.Color.FromArgb(color.ToArgb()));
         }
 
-        internal static  UnityEngine.Color ToUnityEngineColor(System.Drawing.Color color)
+        internal static UnityEngine.Color ToUnityEngineColor(System.Drawing.Color color)
         {
             return HexToColor(ColorToHex(color));
         }
 
 
-        internal static  UnityEngine.Color GenerateHSVColor()
+        internal static UnityEngine.Color GenerateHSVColor()
         {
            UnityEngine.Color color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
             if (GeneratedColors != null)

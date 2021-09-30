@@ -5,23 +5,23 @@
     using System.Net.Sockets;
     using System.Threading.Tasks;
 
-    public class HandleClient
+    internal class HandleClient
     {
-        public TcpClient ClientSocket { get; private set; }
+        internal TcpClient ClientSocket { get; private set; }
 
-        public event EventHandler<EventArgs> Connected;
+        internal event EventHandler<EventArgs> Connected;
 
-        public event EventHandler<EventArgs> Disconnected;
+        internal event EventHandler<EventArgs> Disconnected;
 
-        public event EventHandler<ReceivedPacketEventArgs> ReceivedPacket;
+        internal event EventHandler<ReceivedPacketEventArgs> ReceivedPacket;
 
-        public int ClientID { get; private set; }
+        internal int ClientID { get; private set; }
 
-        public bool IsClient = true;
+        internal bool IsClient = true;
 
-        public bool IsConnected;
+        internal bool IsConnected;
 
-        public bool ShouldReconnect = true;
+        internal bool ShouldReconnect = true;
 
         private NetworkStream clientStream;
 
@@ -30,7 +30,7 @@
 
         private const int PacketSize = 1024;
 
-        public void StartClient(TcpClient clientSocket, int clientId)
+        internal void StartClient(TcpClient clientSocket, int clientId)
         {
             ClientID = clientId;
             ClientSocket = clientSocket;
@@ -40,11 +40,10 @@
             task.Start();
         }
 
-        public void Disconnect(bool reconnect = false)
+        internal void Disconnect(bool reconnect = false)
         {
             IsConnected = false;
             ShouldReconnect = reconnect;
-
             try
             {
                 clientStream.Close();
@@ -85,7 +84,7 @@
             }
         }
 
-        public void Send(PacketData packetData) // 0 = text, 1 = data
+        internal void Send(PacketData packetData) // 0 = text, 1 = data
         {
             var bson = BSonWriter.ToBson(packetData);
             var bytes = bson.ConvertToBytes();

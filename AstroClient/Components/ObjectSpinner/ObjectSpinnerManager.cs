@@ -47,7 +47,7 @@
 
         #region Module
 
-        internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ObjectSpinnerBehaviors;
+        internal static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> ObjectSpinnerBehaviors;
 
         internal void Start()
         {
@@ -55,7 +55,7 @@
             Instance = this;
         }
 
-        internal static  void MakeInstance()
+        internal static void MakeInstance()
         {
             if (Instance == null)
             {
@@ -74,11 +74,11 @@
             }
         }
 
-        internal static  void Update()
+        internal static void Update()
         {
         }
 
-        internal static  void UpdateSpinnerButton(GameObject obj)
+        internal static void UpdateSpinnerButton(GameObject obj)
         {
             var spin = obj.GetComponent<ObjectSpinner>();
             if (spin != null)
@@ -91,7 +91,7 @@
             }
         }
 
-        internal static  void RemoveObject(GameObject obj)
+        internal static void RemoveObject(GameObject obj)
         {
             if (ObjectSpinners.Contains(obj))
             {
@@ -99,7 +99,7 @@
             }
         }
 
-        internal static  void UpdateTimerButton(GameObject obj)
+        internal static void UpdateTimerButton(GameObject obj)
         {
             var Timer = obj.GetComponent<ObjectSpinner>();
             if (Timer != null)
@@ -112,7 +112,7 @@
             }
         }
 
-        internal static  void KillObjectSpinners()
+        internal static void KillObjectSpinners()
         {
             foreach (var obj in ObjectSpinners)
             {
@@ -140,7 +140,7 @@
             }
         }
 
-        internal static  void IncreaseObjTimer(GameObject obj)
+        internal static void IncreaseObjTimer(GameObject obj)
         {
             var TuneTime = obj.GetComponent<ObjectSpinner>();
             if (TuneTime != null)
@@ -150,7 +150,7 @@
             }
         }
 
-        internal static  void DecreaseObjTimer(GameObject obj)
+        internal static void DecreaseObjTimer(GameObject obj)
         {
             var TuneTime = obj.GetComponent<ObjectSpinner>();
             if (TuneTime != null)
@@ -160,27 +160,27 @@
             }
         }
 
-        internal static  void Register(ObjectSpinner ObjectSpinnerBehaviour)
+        internal static void Register(ObjectSpinner ObjectSpinnerBehaviour)
         {
             ObjectSpinnerBehaviors.Add(ObjectSpinnerBehaviour);
         }
 
-        internal static  void Deregister(ObjectSpinner ObjectSpinnerBehaviour)
+        internal static void Deregister(ObjectSpinner ObjectSpinnerBehaviour)
         {
             _ = ObjectSpinnerBehaviors.Remove(ObjectSpinnerBehaviour);
         }
 
-        internal static  void ClearList()
+        internal static void ClearList()
         {
             ObjectSpinnerBehaviors.Clear();
         }
 
-        internal static  List<GameObject> ObjectSpinners = new List<GameObject>();
+        internal static List<GameObject> ObjectSpinners = new List<GameObject>();
 
-        internal static  ObjectSpinnerManager Instance { get; set; }
+        internal static ObjectSpinnerManager Instance { get; set; }
 
-        internal static  QMSingleButton SpinnerTimerBtn;
-        internal static  QMSingleButton SpinAmountTell;
+        internal static QMSingleButton SpinnerTimerBtn;
+        internal static QMSingleButton SpinAmountTell;
 
         #endregion Module
     }

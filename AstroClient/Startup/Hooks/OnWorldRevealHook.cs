@@ -15,7 +15,7 @@
 
     internal class OnWorldRevealHook : GameEvents
     {
-        internal static  event EventHandler<OnWorldRevealArgs> Event_OnWorldReveal;
+        internal static event EventHandler<OnWorldRevealArgs> Event_OnWorldReveal;
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {

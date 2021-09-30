@@ -5,7 +5,7 @@
 
     internal class FOV : GameEvents
     {
-        internal static  void Set_Camera_FOV(float v)
+        internal static void Set_Camera_FOV(float v)
         {
             var gameObject = GameObject.Find("Camera (eye)");
             if (gameObject != null)

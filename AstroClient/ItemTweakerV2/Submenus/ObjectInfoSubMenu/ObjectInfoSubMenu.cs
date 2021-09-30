@@ -8,7 +8,7 @@
 
     internal class ObjectInfoSubMenu : Tweaker_Events
     {
-        internal static  void Init_ObjectInfoSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void Init_ObjectInfoSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "Object info", "Object Info Menu!", null, null, null, null, btnHalf);
 
@@ -46,11 +46,11 @@
             CurrentObjectPath.GetGameObject().GetComponent<RectTransform>().sizeDelta = new Vector2(CurrentObjectPath.GetGameObject().GetComponent<RectTransform>().sizeDelta.x + stretch, CurrentObjectPath.GetGameObject().GetComponent<RectTransform>().sizeDelta.y);
         }
 
-        internal static  QMSingleButton CurrentObjectCoordsBtn;
-        internal static  QMSingleButton CurrentObjectRotation;
-        internal static  QMSingleButton CurrentObjectLocalPosition;
-        internal static  QMSingleButton CurrentObjectLocalRotation;
-        internal static  QMSingleButton CurrentObjectPath;
+        internal static QMSingleButton CurrentObjectCoordsBtn;
+        internal static QMSingleButton CurrentObjectRotation;
+        internal static QMSingleButton CurrentObjectLocalPosition;
+        internal static QMSingleButton CurrentObjectLocalRotation;
+        internal static QMSingleButton CurrentObjectPath;
 
         internal override void On_New_GameObject_Selected(GameObject obj)
         {

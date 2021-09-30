@@ -2,11 +2,11 @@
 {
     using UnityEngine;
 
-    internal static  class SpawnedItemsHolder
+    internal static class SpawnedItemsHolder
     {
         private static GameObject _SpawnedItemsHolder;
 
-        internal static  GameObject GetSpawnedItemsHolder()
+        internal static GameObject GetSpawnedItemsHolder()
         {
             if (_SpawnedItemsHolder != null)
             {

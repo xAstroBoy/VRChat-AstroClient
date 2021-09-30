@@ -14,7 +14,7 @@
     {
         private HarmonyLib.Harmony harmony;
 
-        internal static  event EventHandler<VRC_EventDispatcherRFC_TriggerEventArgs> Event_VRC_EventDispatcherRFC_triggerEvent;
+        internal static event EventHandler<VRC_EventDispatcherRFC_TriggerEventArgs> Event_VRC_EventDispatcherRFC_triggerEvent;
 
         internal override void ExecutePriorityPatches()
         {

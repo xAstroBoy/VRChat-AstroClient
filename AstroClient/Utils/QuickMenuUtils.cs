@@ -4,14 +4,14 @@
 
     internal class QuickMenuUtils_Old : GameEvents
     {
-        internal static  void SetQuickMenuBackGround(float x, float y)
+        internal static void SetQuickMenuBackGround(float x, float y)
         {
             Transform transform = QuickMenu.prop_QuickMenu_0.transform.Find("QuickMenu_NewElements/_Background");
             RectTransform rectTransform = transform.GetComponent<RectTransform>();
             rectTransform.sizeDelta += new Vector2(x * 840, y * 840);
         }
 
-        internal static  void SetQuickMenuCollider(float x, float y)
+        internal static void SetQuickMenuCollider(float x, float y)
         {
             QuickMenuCollider.size += new Vector3(x * 840, y * 840);
             CorrectedSize = QuickMenuCollider.size;
@@ -40,7 +40,7 @@
 
         private static BoxCollider _QuickMenuCollider;
 
-        internal static  BoxCollider QuickMenuCollider
+        internal static BoxCollider QuickMenuCollider
         {
             get
             {
@@ -62,7 +62,7 @@
             }
         }
 
-        internal static  bool IsQuickMenuOpen
+        internal static bool IsQuickMenuOpen
         {
             get
             {

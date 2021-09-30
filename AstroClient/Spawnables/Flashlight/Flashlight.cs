@@ -12,12 +12,12 @@ namespace AstroClient
             DestroyAllFlashLights();
         }
 
-        internal static  void DestroyAllFlashLights()
+        internal static void DestroyAllFlashLights()
         {
             flashlights.DestroyAndClearList();
         }
 
-        internal static  void SpawnFlashlight()
+        internal static void SpawnFlashlight()
         {
             GameObject FlashLight_Body = GameObject.CreatePrimitive(PrimitiveType.Cylinder);
 

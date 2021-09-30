@@ -11,7 +11,7 @@
 
     internal class UdonScrollMenu
     {
-        internal static  void Init_Internal_UdonEvents(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void Init_Internal_UdonEvents(QMTabMenu main, float x, float y, bool btnHalf)
         {
             if (!Bools.IsDeveloper) // TODO : Add permission check for udon events.
             {

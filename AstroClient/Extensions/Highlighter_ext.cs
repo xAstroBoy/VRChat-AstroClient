@@ -4,7 +4,7 @@
     using AstroClient.Components;
     using UnityEngine;
 
-    internal static  class Highlighter_ext
+    internal static class Highlighter_ext
     {
         private static void RemoveRendFromUnlistedHighLighter(Renderer rend)
         {
@@ -16,7 +16,7 @@
             _ = HighlightsFX.prop_HighlightsFX_0.field_Protected_HashSet_1_Renderer_0.Remove(rend);
         }
 
-        internal static  void SetHighLighter(this HighlightsFXStandalone item, Renderer rend, bool status)
+        internal static void SetHighLighter(this HighlightsFXStandalone item, Renderer rend, bool status)
         {
             if (item != null)
             {
@@ -33,7 +33,7 @@
             }
         }
 
-        internal static  void SetHighLighter(this HighlightsFXStandalone item, MeshRenderer rend, bool status)
+        internal static void SetHighLighter(this HighlightsFXStandalone item, MeshRenderer rend, bool status)
         {
             if (item != null)
             {
@@ -50,7 +50,7 @@
             }
         }
 
-        internal static  void SetHighLighter(this HighlightsFXStandalone item, Renderer rend, Color color, bool status)
+        internal static void SetHighLighter(this HighlightsFXStandalone item, Renderer rend, Color color, bool status)
         {
             if (item != null)
             {
@@ -68,7 +68,7 @@
             }
         }
 
-        internal static  HighlightsFXStandalone AddHighlighter(this GameObject obj)
+        internal static HighlightsFXStandalone AddHighlighter(this GameObject obj)
         {
             var item = obj.AddComponent<HighlightsFXStandalone>();
             if (item != null)
@@ -82,7 +82,7 @@
             return item;
         }
 
-        internal static  void DestroyHighlighter(this HighlightsFXStandalone item)
+        internal static void DestroyHighlighter(this HighlightsFXStandalone item)
         {
             if (item != null)
             {
@@ -94,7 +94,7 @@
             }
         }
 
-        internal static  void SetHighLighter(this HighlightsFXStandalone item, MeshRenderer rend, Color color, bool status)
+        internal static void SetHighLighter(this HighlightsFXStandalone item, MeshRenderer rend, Color color, bool status)
         {
             if (item != null)
             {
@@ -113,7 +113,7 @@
             }
         }
 
-        internal static  void AddRenderer(this HighlightsFXStandalone item, MeshRenderer rend)
+        internal static void AddRenderer(this HighlightsFXStandalone item, MeshRenderer rend)
         {
             if (item != null)
             {
@@ -121,7 +121,7 @@
             }
         }
 
-        internal static  void AddRenderer(this HighlightsFXStandalone item, Renderer rend)
+        internal static void AddRenderer(this HighlightsFXStandalone item, Renderer rend)
         {
             if (item != null)
             {
@@ -129,7 +129,7 @@
             }
         }
 
-        internal static  void RemoveRenderer(this HighlightsFXStandalone item, MeshRenderer rend)
+        internal static void RemoveRenderer(this HighlightsFXStandalone item, MeshRenderer rend)
         {
             if (item != null)
             {
@@ -137,7 +137,7 @@
             }
         }
 
-        internal static  void RemoveRenderer(this HighlightsFXStandalone item, Renderer rend)
+        internal static void RemoveRenderer(this HighlightsFXStandalone item, Renderer rend)
         {
             if (item != null)
             {
@@ -145,7 +145,7 @@
             }
         }
 
-        internal static  void SetHighLighterColor(this HighlightsFXStandalone item, Color color)
+        internal static void SetHighLighterColor(this HighlightsFXStandalone item, Color color)
         {
             if (item != null)
             {
@@ -153,7 +153,7 @@
             }
         }
 
-        internal static  void SetHighLighterColor(this HighlightsFXStandalone item, string hex)
+        internal static void SetHighLighterColor(this HighlightsFXStandalone item, string hex)
         {
             if (item != null)
             {
@@ -161,7 +161,7 @@
             }
         }
 
-        internal static  void ResetHighlighterColor(this HighlightsFXStandalone item)
+        internal static void ResetHighlighterColor(this HighlightsFXStandalone item)
         {
             if (item != null && item.highlightColor != null)
             {

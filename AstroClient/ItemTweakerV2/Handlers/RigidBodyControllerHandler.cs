@@ -10,11 +10,11 @@
 
     internal class RigidBodyControllerHandler : Tweaker_Events
     {
-        internal static  event EventHandler<OnRigidBodyControllerArgs> Event_OnRigidBodyControllerSelected;
+        internal static event EventHandler<OnRigidBodyControllerArgs> Event_OnRigidBodyControllerSelected;
 
-        internal static  event EventHandler<OnRigidBodyControllerArgs> Event_OnRigidBodyControllerPropertyChanged;
+        internal static event EventHandler<OnRigidBodyControllerArgs> Event_OnRigidBodyControllerPropertyChanged;
 
-        internal static  event EventHandler<OnRigidBodyControllerArgs> Event_OnRigidBodyController_OnUpdate;
+        internal static event EventHandler<OnRigidBodyControllerArgs> Event_OnRigidBodyController_OnUpdate;
 
         internal override void On_New_GameObject_Selected(GameObject obj)
         {

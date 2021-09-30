@@ -11,7 +11,7 @@
 
         // Good For buttons and such.
         private static SerializedUdonProgramAsset _InteractProgram;
-        internal static  SerializedUdonProgramAsset InteractProgram
+        internal static SerializedUdonProgramAsset InteractProgram
         {
             get
             {

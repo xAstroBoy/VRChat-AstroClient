@@ -23,7 +23,7 @@
     internal class RPCEventHook : GameEvents
     {
 
-        internal static  event System.EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
+        internal static event System.EventHandler<UdonSyncRPCEventArgs> Event_OnUdonSyncRPC;
 
         //internal static 
         private HarmonyLib.Harmony harmony;

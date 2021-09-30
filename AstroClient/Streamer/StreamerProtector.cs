@@ -26,16 +26,16 @@
             ModConsole.Log($"Registered {StreamerIDs.Count()} Streamers.");
         }
 
-        internal static  EventHandler<PlayerEventArgs> Event_OnStreamerJoined;
+        internal static EventHandler<PlayerEventArgs> Event_OnStreamerJoined;
 
-        internal static  EventHandler<PlayerEventArgs> Event_OnStreamerLeft;
+        internal static EventHandler<PlayerEventArgs> Event_OnStreamerLeft;
 
-        internal static  bool IsExploitsAllowed => IsAStreamerPresent();
+        internal static bool IsExploitsAllowed => IsAStreamerPresent();
 
         private static List<string> StreamerIDs { get; } = new List<string>(); 
 
 
-        internal static  bool IsAStreamerPresent()
+        internal static bool IsAStreamerPresent()
         {
             return StreamersInInstance.Count() != 0;
         }
@@ -86,6 +86,6 @@
             StreamersInInstance.Clear();
         }
 
-        internal static  List<Player> StreamersInInstance { get; private set; } = new List<Player>();
+        internal static List<Player> StreamersInInstance { get; private set; } = new List<Player>();
     }
 }

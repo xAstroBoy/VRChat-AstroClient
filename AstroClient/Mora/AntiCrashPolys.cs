@@ -13,11 +13,11 @@
 
     internal class AntiCrashPolys : GameEvents
     {
-        internal static  Dictionary<string, avatar_data> anti_crash_list = new Dictionary<string, avatar_data>();
+        internal static Dictionary<string, avatar_data> anti_crash_list = new Dictionary<string, avatar_data>();
 
-        internal static  string[] shader_list;
+        internal static string[] shader_list;
 
-        internal static  List<string> shader_list_local = new List<string>();
+        internal static List<string> shader_list_local = new List<string>();
 
         internal struct avatar_data
         {
@@ -31,7 +31,7 @@
             //new QMSingleButton("ShortcutMenu", 5, -0.5f, "check\nblacklist", delegate () { ModConsole.Log($"{shader_list_local}"); }, "checks the shader list.", null, null, true);
         }
 
-        internal static  void Set_Pickups(bool state)
+        internal static void Set_Pickups(bool state)
         {
             foreach (VRC_Pickup vrc_Pickup in Resources.FindObjectsOfTypeAll<VRC_Pickup>())
             {
@@ -42,7 +42,7 @@
             }
         }
 
-        internal static  bool Shader_Check(Player user)
+        internal static bool Shader_Check(Player user)
         {
             Il2CppArrayBase<Renderer> componentsInChildren = user.prop_VRCPlayer_0.prop_VRCAvatarManager_0.GetComponentsInChildren<Renderer>(true);
             Shader shader = Shader.Find("Standard");
@@ -66,7 +66,7 @@
             return result;
         }
 
-        internal static  bool Work_hk(Player user, int polys)
+        internal static bool Work_hk(Player user, int polys)
         {
             bool result;
             try
@@ -97,6 +97,6 @@
             return result;
         }
 
-        internal static  QMSingleButton CheckBlackList;
+        internal static QMSingleButton CheckBlackList;
     }
 }

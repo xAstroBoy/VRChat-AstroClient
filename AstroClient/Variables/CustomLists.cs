@@ -80,9 +80,9 @@
             }
         }
 
-        internal static  List<RendererSaver> RendererSaverIndex = new List<RendererSaver>();
-        internal static  List<ColliderChecker> ColliderCheck = new List<ColliderChecker>();
-        internal static  List<RigidBodyChecker> RigidBodyCheck = new List<RigidBodyChecker>();
-        internal static  List<GameObjScales> ScaleCheck = new List<GameObjScales>();
+        internal static List<RendererSaver> RendererSaverIndex = new List<RendererSaver>();
+        internal static List<ColliderChecker> ColliderCheck = new List<ColliderChecker>();
+        internal static List<RigidBodyChecker> RigidBodyCheck = new List<RigidBodyChecker>();
+        internal static List<GameObjScales> ScaleCheck = new List<GameObjScales>();
     }
 }

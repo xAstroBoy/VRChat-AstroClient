@@ -11,7 +11,7 @@
 
     internal class PhysicsSubmenu : Tweaker_Events
     {
-        internal static  void Init_PhysicSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void Init_PhysicSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "Physics", "Item Physics Editor Menu!", null, null, null, null, btnHalf);
 
@@ -154,8 +154,8 @@
         private static QMSingleToggleButton CollisionsToggler;
         private static QMSingleToggleButton SmartKinematicToggler;
 
-        internal static  QMSingleButton TeleportToMe;
-        internal static  QMSingleButton TeleportToTarget;
+        internal static QMSingleButton TeleportToMe;
+        internal static QMSingleButton TeleportToTarget;
 
         private static QMSingleButton Pickup_IsHeldStatus { get; set; }
         private static QMSingleButton Pickup_CurrentObjectHolder { get; set; }
@@ -163,7 +163,7 @@
 
         private static bool _SmartKinematicEnabled;
 
-        internal static  bool SmartKinematicEnabled
+        internal static bool SmartKinematicEnabled
         {
             get
             {

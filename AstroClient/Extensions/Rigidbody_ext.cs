@@ -3,9 +3,9 @@
     using AstroLibrary.Console;
     using UnityEngine;
 
-    internal static  class Rigidbody_ext
+    internal static class Rigidbody_ext
     {
-        internal static  void PrintAllRigidBodySettings(this GameObject obj)
+        internal static void PrintAllRigidBodySettings(this GameObject obj)
         {
             if (obj != null)
             {
