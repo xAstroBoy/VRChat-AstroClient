@@ -19,13 +19,6 @@ namespace AstroClient.Components
         internal void Start()
         { 
 
-            // Might be not neccessary but let's test it later.
-            if (gameObject.GetComponent<VRCInteractable>() != null)
-            {
-                UnityEngine.Object.Destroy(gameObject.GetComponent<VRCInteractable>());
-            }
-
-
             if (AssignedProgram == null)
             {
                 ModConsole.DebugError("Custom Trigger Can't Load as Program Asset is null!");
@@ -114,8 +107,27 @@ namespace AstroClient.Components
                 {
                     UdonBehaviour.interactText = value;
                 }
+                if (VRCInteractable != null)
+                {
+                    VRCInteractable.interactText = value;
+                }
             }
         }
+
+        private VRCInteractable _VRCInteractable;
+        private VRCInteractable VRCInteractable
+        {
+            get
+            {
+                if (_VRCInteractable == null)
+                {
+                    return _VRCInteractable = gameObject.GetComponent<VRCInteractable>();
+                }
+                return _VRCInteractable;
+            }
+        }
+
+
         private SerializedUdonProgramAsset AssignedProgram { get; } = UdonPrograms.InteractProgram;
 
         internal Action OnInteract { get; set; }

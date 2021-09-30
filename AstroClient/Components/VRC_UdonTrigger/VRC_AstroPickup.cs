@@ -179,6 +179,10 @@ namespace AstroClient.Components
                 {
                     UdonBehaviour.interactText = value;
                 }
+                if(VRCInteractable != null)
+                {
+                    VRCInteractable.interactText = value;
+                }
             }
         }
 
@@ -200,6 +204,18 @@ namespace AstroClient.Components
         internal Action OnPickupUseDown { get; set; }
         internal Action OnDrop { get; set; }
 
+        private VRCInteractable _VRCInteractable;
+        private VRCInteractable VRCInteractable
+        {
+            get
+            {
+                if(_VRCInteractable == null)
+                {
+                    return _VRCInteractable = gameObject.GetComponent<VRCInteractable>();
+                }
+                return _VRCInteractable;
+            }
+        }
         internal UdonBehaviour UdonBehaviour { get; private set; }
         private IUdonHeap IUdonHeap { get;  set; }
     }

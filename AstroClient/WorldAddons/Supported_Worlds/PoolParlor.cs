@@ -23,7 +23,7 @@
 
         internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
-            PoolParlorCheats = new QMNestedButton(main, x, y, "Super Tower Defense", "Super Tower Defense Cheats", null, null, null, null, btnHalf);
+            PoolParlorCheats = new QMNestedButton(main, x, y, "PoolParlor", "PoolParlor Customization", null, null, null, null, btnHalf);
 
             _ = new QMSingleButton(PoolParlorCheats, 1, 0f, "+", () => { CurrentTableSkin++; }, "Set Table Skin!", null, null, false);
             TableSkinBtn = new QMSingleButton(PoolParlorCheats, 2, 0f, "Default Table", () => { }, "Table Skin!", null, null, false);
@@ -33,6 +33,9 @@
             CueSkinBtn = new QMSingleButton(PoolParlorCheats, 2, 1f, "Default Cue", () => { }, "Cue Skin!", null, null, false);
             _ = new QMSingleButton(PoolParlorCheats, 3, 1, "-", () => { CurrentCueSkin--; }, "Set Cue Skin!", null, null, false);
 
+            CueSkinOverrideBtn = new QMSingleToggleButton(PoolParlorCheats, 1, 2f, "OVerride Cue Skin", () => { }, "Override Cue Skin", () => { }, "Enable Cue Skin Override using Spoofer.", Color.green, Color.red, null, false, true);
+
+            
         }
 
 
@@ -46,6 +49,11 @@
             {
                 ModConsole.Log($"Recognized {Name} World, Patching Skins....");
 
+                if(PlayerSpooferUtils.SpoofAsWorldAuthor)
+                {
+                    ModConsole.Warning("Use the New Customization Menu to Access Table and Cue skins!");
+                    PlayerSpooferUtils.SpoofAsWorldAuthor = false;
+                }
                 // DEAD Until Lists gets exposed...
 
                 var module1 = UdonSearch.FindAllUdonEvents("BilliardsModule", "_start");
@@ -78,30 +86,13 @@
                 UpdateColorScheme_Table = UdonSearch.FindUdonEvent("GraphicsManager", "_UpdateTableColorScheme");
                 GetCurrentTable();
                 GetCurrentCue();
-
-
-                if (world != null && table_primary != null && Meta_Cue_Rack != null && table_Balls != null)
-                {
-                    Add_Modifier_ToCueBall(Find_Balls("0", "0"));
-
-                    Add_Modifier_ToBall(Find_Balls("0", "1"));
-                    Add_Modifier_ToBall(Find_Balls("0", "2"));
-                    Add_Modifier_ToBall(Find_Balls("0", "3"));
-                    Add_Modifier_ToBall(Find_Balls("0", "4"));
-                    Add_Modifier_ToBall(Find_Balls("0", "5"));
-                    Add_Modifier_ToBall(Find_Balls("0", "6"));
-                    Add_Modifier_ToBall(Find_Balls("0", "7"));
-                    Add_Modifier_ToBall(Find_Balls("0", "8"));
-                    Add_Modifier_ToBall(Find_Balls("0", "9"));
-                    Add_Modifier_ToBall(Find_Balls("1", "0"));
-                    Add_Modifier_ToBall(Find_Balls("1", "1"));
-                    Add_Modifier_ToBall(Find_Balls("1", "2"));
-                    Add_Modifier_ToBall(Find_Balls("1", "3"));
-                    Add_Modifier_ToBall(Find_Balls("1", "4"));
-                    Add_Modifier_ToBall(Find_Balls("1", "5"));
-                }
+                SetupCues();
             }
         }
+
+        
+
+        
 
         internal static  void GetCurrentTable()
         {
@@ -246,136 +237,167 @@
         }
 
 
-
-        private static void Add_Modifier_ToBall(Parlor_Balls ball)
+        public static void SetupCues()
         {
-            if (ball != null)
+            var cue1 = GameObjectFinder.FindRootSceneObject("Modules").transform.FindObject("BilliardsModule/intl.cue-0/");
+            if (cue1 != null)
             {
-                var udon = ball.Estetic_Ball.GetOrAddComponent<VRC_AstroInteract>();
-                if (udon != null)
+                var Primary = cue1.FindObject("primary");
+                var Secondary = cue1.FindObject("secondary");
+                // Do  stuff;
+                if (Primary != null)
                 {
-                    udon.OnInteract += () => { ball.Table_Ball_Pickup.SetActive(!ball.Table_Ball_Pickup.active); };
-                    if (ball.Table_Ball_Pickup.active)
+                    if (Primary != null)
                     {
-                        udon.interactText = $"Deactivate {ball.Table_Ball.name} Pickup";
+                        Cue1_Primary = Primary.gameObject.AddComponent<VRC_AstroPickup>();
+                        Cue1_Primary_PickupController = Primary.gameObject.GetComponent<PickupController>();
+                        Cue1_Primary.OnPickup = Cue1_Primary_OnPickup;
+                        Cue1_Primary.OnDrop = OnDrop;
                     }
-                    else
+                    if (Secondary != null)
                     {
-                        udon.interactText = $"Activate {ball.Table_Ball.name} Pickup";
+                        Cue1_Secondary = Secondary.gameObject.AddComponent<VRC_AstroPickup>();
+                        Cue1_Secondary_PickupController = Secondary.gameObject.GetComponent<PickupController>();
+                        Cue1_Secondary.OnPickup = Cue1_Secondary_OnPickup;
+                        Cue1_Secondary.OnDrop = OnDrop;
+
                     }
                 }
-                ball.Ball_table_pickup_listener.OnDisabled += () =>
+            }
+            var cue2 = GameObjectFinder.FindRootSceneObject("Modules").transform.FindObject("BilliardsModule/intl.cue-1");
+            if (cue2 != null)
+            {
+                var Primary_2 = cue2.FindObject("primary");
+                var Secondary_2 = cue2.FindObject("secondary");
+                // Do  stuff;
+                if(Primary_2 != null)
                 {
-                    udon.interactText = $"Activate {ball.Table_Ball.name} Pickup";
-                };
-                ball.Ball_table_pickup_listener.OnEnabled += () =>
+                        Cue2_Primary = Primary_2.gameObject.AddComponent<VRC_AstroPickup>();
+                        Cue2_Primary_PickupController = Primary_2.gameObject.GetComponent<PickupController>();
+                        Cue2_Primary.OnDrop = OnDrop;
+                        Cue2_Primary.OnPickup = Cue2_Primary_OnPickup;
+                    
+                }
+                if (Secondary_2 != null)
                 {
-                    udon.interactText = $"Deactivate {ball.Table_Ball.name} Pickup";
-                };
+                    Cue2_Secondary = Secondary_2.gameObject.AddComponent<VRC_AstroPickup>();
+                    Cue2_Secondary_PickupController = Secondary_2.gameObject.GetComponent<PickupController>();
+                    Cue2_Secondary.OnDrop = OnDrop;
+                    Cue2_Secondary.OnPickup = Cue2_Secondary_OnPickup;
+
+                }
+
+            }
+        }
+            
+
+
+        private static void OnDrop()
+        {
+            if (OverrideCurrentSkins)
+            {
+                if (PlayerSpooferUtils.SpoofAsWorldAuthor)
+                {
+                    PlayerSpooferUtils.SpoofAsWorldAuthor = false;
+                }
             }
         }
 
-        private static void Add_Modifier_ToCueBall(Parlor_Balls clue)
+        private static void Cue1_Primary_OnPickup()
         {
-            if (clue != null)
+            if (OverrideCurrentSkins)
             {
-                var udon = clue.Estetic_Ball.GetOrAddComponent<VRC_AstroInteract>();
-                if (udon != null)
+                if (Cue1_Primary_PickupController != null)
                 {
-                    udon.OnInteract += () => { clue.Table_Ball_Pickup.SetActive(!clue.Table_Ball_Pickup.active); };
-                    if (clue.Table_Ball_Pickup.active)
+                    var holder = Cue1_Primary_PickupController.CurrentHolder;
+                    if (holder != null)
                     {
-                        udon.interactText = "Deactivate Clue Ball Pickup";
-                    }
-                    else
-                    {
-                        udon.interactText = "Activate Clue Ball Pickup";
+                        if (holder.Equals(Utils.LocalPlayer))
+                        {
+                            SetActiveCueSkin(_CurrentCueSkin);
+                            SetSyncedCueSkin(_CurrentCueSkin);
+                            PlayerSpooferUtils.SpoofAsWorldAuthor = true;
+                        }
                     }
                 }
-                clue.Ball_table_pickup_listener.OnDisabled += () =>
-                {
-                    udon.interactText = "Activate Clue Ball Pickup";
-                };
-                clue.Ball_table_pickup_listener.OnEnabled += () =>
-                {
-                    udon.interactText = "Deactivate Clue Ball Pickup";
-                };
             }
         }
 
-        internal static  Parlor_Balls Find_Balls(string first_number, string second_number)
+        private static void Cue1_Secondary_OnPickup()
         {
-            if (world != null && table_primary != null && Meta_Cue_Rack != null && table_Balls != null)
+            if (OverrideCurrentSkins)
             {
-                if (first_number + second_number == "00")
+                if (Cue1_Secondary_PickupController != null)
                 {
-                    var cue_ball_table = table_Balls.FindObject("ball00");
-                    var cue_ball_table_pickup = cue_ball_table.FindObject("pickup");
-                    var cue_ball_table_Pickup_Listener = cue_ball_table_pickup.GetOrAddComponent<GameObjectListener>();
-                    var cue_ball_estetic = Meta_Cue_Rack.FindObject("Cue_Ball");
-                    if (cue_ball_table != null && cue_ball_table_pickup != null && cue_ball_estetic != null && cue_ball_table_Pickup_Listener != null)
+                    var holder = Cue1_Secondary_PickupController.CurrentHolder;
+                    if (holder != null)
                     {
-                        return new Parlor_Balls(first_number + second_number, cue_ball_table.gameObject, cue_ball_table_pickup.gameObject, cue_ball_table_Pickup_Listener, cue_ball_estetic.gameObject);
+                        if (holder.Equals(Utils.LocalPlayer))
+                        {
+                            SetActiveCueSkin(_CurrentCueSkin);
+                            SetSyncedCueSkin(_CurrentCueSkin);
+                            PlayerSpooferUtils.SpoofAsWorldAuthor = true;
+                        }
                     }
-                    return null;
                 }
-                else
-                {
-                    Transform rack_ball;
-                    Transform table_ball = table_Balls.FindObject($"ball{first_number + second_number}");
-                    Transform table_ball_pickup = table_ball.FindObject("pickup");
-                    GameObjectListener table_ball_pickup_listener = table_ball_pickup.GetOrAddComponent<GameObjectListener>();
-
-                    if (first_number == "0")
-                    {
-                        rack_ball = Meta_Cue_Rack.FindObject($"{second_number}Ball");
-                    }
-                    else
-                    {
-                        rack_ball = Meta_Cue_Rack.FindObject($"{first_number + second_number}Ball");
-                    }
-                    if (table_ball != null && table_ball_pickup != null && rack_ball != null && table_ball_pickup_listener != null)
-                    {
-                        return new Parlor_Balls(first_number + second_number, table_ball.gameObject, table_ball_pickup.gameObject, table_ball_pickup_listener, rack_ball.gameObject);
-                    }
-                    return null;
-                }
-                return null;
-            }
-            return null;
-        }
-
-        internal class Parlor_Balls
-        {
-            internal string Ball_Number { get; set; }
-            internal GameObject Table_Ball { get; set; }
-            internal GameObject Table_Ball_Pickup { get; set; }
-            internal GameObject Estetic_Ball { get; set; }
-            internal GameObjectListener Ball_table_pickup_listener { get; set; }
-
-            internal Parlor_Balls(string Ball_Number, GameObject Table_Ball, GameObject Table_Ball_Pickup, GameObjectListener Ball_table_pickup_listener, GameObject Estetic_Ball)
-            {
-                this.Ball_Number = Ball_Number;
-                this.Table_Ball = Table_Ball;
-                this.Table_Ball_Pickup = Table_Ball_Pickup;
-                this.Ball_table_pickup_listener = Ball_table_pickup_listener;
-                this.Estetic_Ball = Estetic_Ball;
             }
         }
 
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
+
+        private static void Cue2_Primary_OnPickup()
         {
-            table_primary = null;
-            table_Balls = null;
-            world = null;
-            Meta_Cue_Rack = null;
+            if (OverrideCurrentSkins)
+            {
+                if (Cue2_Primary_PickupController != null)
+                {
+                    var holder = Cue2_Primary_PickupController.CurrentHolder;
+                    if (holder != null)
+                    {
+                        if (holder.Equals(Utils.LocalPlayer))
+                        {
+                            SetActiveCueSkin(_CurrentCueSkin);
+                            SetSyncedCueSkin(_CurrentCueSkin);
+                            PlayerSpooferUtils.SpoofAsWorldAuthor = true;
+                        }
+                    }
+                }
+            }
         }
 
-        internal static  Transform table_primary{ get; private set; }
-        internal static  Transform table_Balls{ get; private set; }
+        private static void Cue2_Secondary_OnPickup()
+        {
+            if (OverrideCurrentSkins)
+            {
+                if (Cue2_Secondary_PickupController != null)
+                {
+                    var holder = Cue2_Secondary_PickupController.CurrentHolder;
+                    if (holder != null)
+                    {
+                        if (holder.Equals(Utils.LocalPlayer))
+                        {
+                            SetActiveCueSkin(_CurrentCueSkin);
+                            SetSyncedCueSkin(_CurrentCueSkin);
+                            PlayerSpooferUtils.SpoofAsWorldAuthor = true;
+                        }
+                    }
+                }
+            }
+        }
 
-        internal static  Transform world{ get; private set; }
-        internal static  Transform Meta_Cue_Rack{ get; private set; }
+
+
+        internal static VRC_AstroPickup Cue1_Primary{ get; private set;  } 
+        internal static VRC_AstroPickup Cue1_Secondary{ get; private set;  }
+
+        internal static VRC_AstroPickup Cue2_Primary{ get; private set;  }
+        internal static VRC_AstroPickup Cue2_Secondary{ get; private set;  }
+
+        internal static PickupController Cue1_Primary_PickupController { get; private set; }
+        internal static PickupController Cue1_Secondary_PickupController { get; private set; }
+
+        internal static PickupController Cue2_Primary_PickupController { get; private set; }
+        internal static PickupController Cue2_Secondary_PickupController { get; private set; }
+
 
 
         internal static  UdonBehaviour_Cached UpdateColorScheme_Table { get; private set;  }
@@ -441,6 +463,26 @@
             }
         }
         internal static  QMSingleButton CueSkinBtn { get; set; }
+
+        internal static QMSingleToggleButton CueSkinOverrideBtn { get; set; }
+
+        private static bool _OverrideCurrentSkins = false;
+        internal static bool OverrideCurrentSkins
+        {
+            get
+            {
+                return _OverrideCurrentSkins;
+            }
+            set
+            {
+                _OverrideCurrentSkins = value;
+                if(CueSkinOverrideBtn != null)
+                {
+                    CueSkinOverrideBtn.SetToggleState(value);
+                }
+            }
+        }
+
 
     }
 }
