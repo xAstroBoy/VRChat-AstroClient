@@ -292,10 +292,7 @@
         {
             if (OverrideCurrentSkins)
             {
-                if (PlayerSpooferUtils.SpoofAsWorldAuthor)
-                {
-                    PlayerSpooferUtils.SpoofAsWorldAuthor = false;
-                }
+                PlayerSpooferUtils.SpoofAsWorldAuthor = false;
             }
         }
 
@@ -303,12 +300,9 @@
         {
             if (OverrideCurrentSkins)
             {
-                if (!PlayerSpooferUtils.SpoofAsWorldAuthor)
-                {
-                    SetActiveCueSkin(_CurrentCueSkin);
-                    SetSyncedCueSkin(_CurrentCueSkin);
-                    PlayerSpooferUtils.SpoofAsWorldAuthor = true;
-                }
+                SetActiveCueSkin(_CurrentCueSkin);
+                SetSyncedCueSkin(_CurrentCueSkin);
+                PlayerSpooferUtils.SpoofAsWorldAuthor = true;
             }
         }
 

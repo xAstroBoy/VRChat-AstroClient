@@ -3,7 +3,9 @@
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
+    using MelonLoader;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using VRC.Core;
 
@@ -20,7 +22,32 @@
         // Use this for initialization
         internal void Start()
         {
+            MelonCoroutines.Start(OnUserInit(() => {
+                if (Original_DisplayName != null)
+                {
+                    ModConsole.DebugLog($"Spoofer : Got Current DisplayName {Original_DisplayName}");
+                }
+                else
+                {
+                    ModConsole.DebugLog("Failed To Get Current DisplayName!");
+                }
+            }));
         }
+
+        private void GetCurrentDisplayName()
+        {
+            
+        }
+
+
+        private IEnumerator OnUserInit(Action code)
+        {
+            while (user == null)
+                yield return null;
+
+            code();
+        }
+
 
         private string DisplayName
         {
@@ -87,23 +114,26 @@
 				}
             }
         }
-            internal void SpoofAsWorldAuthor()
+            internal void SpoofAsWorldAuthor(bool output = true)
         {
-            SpoofAs(WorldAuthor);
+            SpoofAs(WorldAuthor, output);
         }
 
 
-        internal void SpoofAs(string name)
+        internal void SpoofAs(string name, bool output = true)
         {
-            ModConsole.Log($"[PlayerSpoofer] : Spoofing As {name}");
+            if (output)
+            {
+                ModConsole.Log($"[PlayerSpoofer] : Spoofing As {name}");
+            }
             SpoofedName = name;
             IsSpooferActive = true;
         }
 
 
-        internal void DisableSpoofer()
+        internal void DisableSpoofer(bool output = true)
         {
-            ModConsole.Log($"[PlayerSpoofer] : No Longer Spoofing As {SpoofedName}, Restored : {RealName}");
+            ModConsole.Log($"[PlayerSpoofer] : No Longer Spoofing As {SpoofedName}, Restored : {Original_DisplayName}");
             IsSpooferActive = false;
         }
 
@@ -126,15 +156,17 @@
             }
             set
             {
+                if(Has_Original_Displayname || Original_DisplayName == null)
+                {
+                    _IsSpooferActive = false;
+                    return;
+                }
                 if (value)
                 {
-                    if (user != null && !RealName.IsNotNullOrEmptyOrWhiteSpace())
-					{
-						RealName = user.displayName;
-					}
                     if (CanSpoofWithoutBreaking())
                     {
                         _IsSpooferActive = value;
+                        SpoofedName = _SpoofedName;
                     }
                 }
                 else
@@ -142,10 +174,11 @@
                     if (CanSpoofWithoutBreaking())
                     {
                         _IsSpooferActive = value;
+                        SpoofedName = _SpoofedName;
                     }
                     if (user != null)
                     {
-                        DisplayName = RealName;
+                        DisplayName = Original_DisplayName;
                     }
                 }
             }
@@ -161,10 +194,44 @@
 
         private bool isSecondJoin = false;
 
+        private string _SpoofedName;
 
-        internal string SpoofedName { get; set; }
-
-        internal string RealName { get; private set; }
+        internal string SpoofedName
+        {
+            get
+            {
+                return _SpoofedName;
+            }
+            set
+            {
+                _SpoofedName = value;
+                if (IsSpooferActive)
+                {
+                    DisplayName = value;
+                }
+            }
+        }
+        private bool Has_Original_Displayname;
+        private string _Original_DisplayName;
+        internal string Original_DisplayName
+        {
+            get
+            {
+                if (!Has_Original_Displayname)
+                {
+                    if (user != null)
+                    {
+                        Has_Original_Displayname = true;
+                        return _Original_DisplayName = user.displayName;
+                    }
+                }
+                else
+                {
+                    return _Original_DisplayName;
+                }
+                return null;
+            }
+        }
 
         internal string WorldAuthor
         {
