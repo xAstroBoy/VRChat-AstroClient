@@ -251,7 +251,7 @@
         {
             if (ball != null)
             {
-                var udon = ball.Estetic_Ball.GetOrAddComponent<VRC_AstroUdonTrigger>();
+                var udon = ball.Estetic_Ball.GetOrAddComponent<VRC_AstroInteract>();
                 if (udon != null)
                 {
                     udon.OnInteract += () => { ball.Table_Ball_Pickup.SetActive(!ball.Table_Ball_Pickup.active); };
@@ -279,7 +279,7 @@
         {
             if (clue != null)
             {
-                var udon = clue.Estetic_Ball.GetOrAddComponent<VRC_AstroUdonTrigger>();
+                var udon = clue.Estetic_Ball.GetOrAddComponent<VRC_AstroInteract>();
                 if (udon != null)
                 {
                     udon.OnInteract += () => { clue.Table_Ball_Pickup.SetActive(!clue.Table_Ball_Pickup.active); };

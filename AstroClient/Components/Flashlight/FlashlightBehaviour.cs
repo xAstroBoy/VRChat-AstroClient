@@ -1,6 +1,7 @@
 namespace AstroClient
 {
     using AstroClient.Components;
+    using AstroLibrary.Console;
     using System;
     using UnityEngine;
 
@@ -18,10 +19,10 @@ namespace AstroClient
             {
                 if (ToggleLightTrigger == null)
                 {
-                    ToggleLightTrigger = FlashLight_Body.AddComponent<VRC_AstroUdonTrigger>();
+                    ToggleLightTrigger = FlashLight_Body.AddComponent<VRC_AstroPickup>();
                     if (ToggleLightTrigger != null)
                     {
-                        ToggleLightTrigger.OnInteract = action;
+                        ToggleLightTrigger.OnPickupUseUp = ToggleFlashLight;
                     }
                 }
 
@@ -31,7 +32,7 @@ namespace AstroClient
             }
         }
 
-        private void action()
+        private void ToggleFlashLight()
         { IsFlashlightActive = !IsFlashlightActive; }
 
         private bool _IsFlashlightActive;
@@ -71,6 +72,6 @@ namespace AstroClient
 
         internal Light FlashLight_Light { get; set; }
 
-        internal VRC_AstroUdonTrigger ToggleLightTrigger { get; private set; }
+        internal VRC_AstroPickup ToggleLightTrigger { get; private set; } // let's test.
     }
 }

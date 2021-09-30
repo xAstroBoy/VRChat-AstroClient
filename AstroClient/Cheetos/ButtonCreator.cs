@@ -14,7 +14,7 @@
             go.transform.position = position;
             go.transform.rotation = rotation;
             go.transform.localScale = new Vector3(0.2f, 0.1f, 0.1f);
-            var AstroTrigger = go.AddComponent<VRC_AstroUdonTrigger>();
+            var AstroTrigger = go.AddComponent<VRC_AstroInteract>();
             if (AstroTrigger != null)
             {
                 AstroTrigger.interactText = text;
