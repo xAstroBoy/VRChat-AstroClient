@@ -110,6 +110,8 @@ namespace AstroClient.Components
             }
         }
 
+        // needed since the program is currently programmed to set the bools only to true.
+        // This will edit and set the values to false hence how the Custom trigger works, by listening to these booleans.
         private void SetBackToFalse(uint one)
         {
             if (IUdonHeap == null)
