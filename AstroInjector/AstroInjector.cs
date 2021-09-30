@@ -10,7 +10,7 @@
     {
 #if DEBUG
 
-        public static string[] DebugMelonPaths =
+        internal static string[] DebugMelonPaths =
         {
             @"Debug\AstroClient.dll",
 			//@"Debug\AstroClientCore.dll",
@@ -18,26 +18,26 @@
 			//@"Debug\MonoDumper.dll",
 		};
 
-        public static string[] DebugLibraryPaths =
+        internal static string[] DebugLibraryPaths =
         {
             @"Debug\Libs\AstroLibrary.dll",
         };
 
-        public static string[] DebugModulePaths =
+        internal static string[] DebugModulePaths =
         {
 			//@"Debug\Module\AstroTestModule.dll"
 		};
 
 #endif
 
-        public static string[] EmbededLibraryPaths =
+        internal static string[] EmbededLibraryPaths =
         {
             @"AstroInjector.Resources.Newtonsoft.Json.dll",
             @"AstroInjector.Resources.Newtonsoft.Json.Bson.dll",
             @"AstroInjector.Resources.websocket-sharp.dll",
         };
 
-        public static string[] EmbededMelonsPaths =
+        internal static string[] EmbededMelonsPaths =
         {
             //@"AstroInjector.Resources.DontTouchMyClient.dll",
         };
@@ -99,7 +99,7 @@
             }
         }
 
-        public void LoadEmbeddedLibraries()
+        internal void LoadEmbeddedLibraries()
         {
             for (int i = 0; i < EmbededLibraryPaths.Length; i++)
             {
@@ -118,7 +118,7 @@
             }
         }
 
-        public void LoadEmbeddedMelons()
+        internal void LoadEmbeddedMelons()
         {
             for (int i = 0; i < EmbededMelonsPaths.Length; i++)
             {
@@ -140,7 +140,7 @@
 
 #if DEBUG
 
-        public void LoadDebug()
+        internal void LoadDebug()
         {
             MelonLogger.Msg("Loader is in debug mode.");
 

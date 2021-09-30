@@ -1,6 +1,6 @@
 ﻿namespace AstroNetworkingLibrary
 {
-    public static  class PacketClientType
+    internal static  class PacketClientType
     {
         public const byte AUTH = 1;
         public const byte CONNECTED = 1;
@@ -17,7 +17,7 @@
         public const byte AVATAR_DELETE = 227;
     }
 
-    public static class PacketServerType
+    internal static class PacketServerType
     {
         public const byte EXIT = 0;
         public const byte CONNECTED = 1;

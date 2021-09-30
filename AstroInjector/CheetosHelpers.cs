@@ -6,9 +6,9 @@
 
     #endregion Imports
 
-    public static class CheetosHelpers
+    internal static class CheetosHelpers
     {
-        public static byte[] ExtractResource(string filename)
+        internal static byte[] ExtractResource(string filename)
         {
             System.Reflection.Assembly a = System.Reflection.Assembly.GetExecutingAssembly();
             using (Stream resFilestream = a.GetManifestResourceStream(filename))
