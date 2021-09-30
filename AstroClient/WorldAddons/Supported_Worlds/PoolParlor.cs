@@ -239,7 +239,7 @@
 
         public static void SetupCues()
         {
-            var cue1 = GameObjectFinder.FindRootSceneObject("Modules").transform.FindObject("BilliardsModule/intl.cue-0/");
+            var cue1 = GameObjectFinder.FindRootSceneObject("Modules").transform.FindObject("BilliardsModule/intl.cue-0");
             if (cue1 != null)
             {
                 var Primary = cue1.FindObject("primary");
@@ -250,15 +250,13 @@
                     if (Primary != null)
                     {
                         Cue1_Primary = Primary.gameObject.AddComponent<VRC_AstroPickup>();
-                        Cue1_Primary_PickupController = Primary.gameObject.GetComponent<PickupController>();
-                        Cue1_Primary.OnPickup = Cue1_Primary_OnPickup;
+                        Cue1_Primary.OnPickup = onPickup;
                         Cue1_Primary.OnDrop = OnDrop;
                     }
                     if (Secondary != null)
                     {
                         Cue1_Secondary = Secondary.gameObject.AddComponent<VRC_AstroPickup>();
-                        Cue1_Secondary_PickupController = Secondary.gameObject.GetComponent<PickupController>();
-                        Cue1_Secondary.OnPickup = Cue1_Secondary_OnPickup;
+                        Cue1_Secondary.OnPickup = onPickup;
                         Cue1_Secondary.OnDrop = OnDrop;
 
                     }
@@ -273,17 +271,15 @@
                 if(Primary_2 != null)
                 {
                         Cue2_Primary = Primary_2.gameObject.AddComponent<VRC_AstroPickup>();
-                        Cue2_Primary_PickupController = Primary_2.gameObject.GetComponent<PickupController>();
+                        Cue2_Primary.OnPickup = onPickup;
                         Cue2_Primary.OnDrop = OnDrop;
-                        Cue2_Primary.OnPickup = Cue2_Primary_OnPickup;
                     
                 }
                 if (Secondary_2 != null)
                 {
                     Cue2_Secondary = Secondary_2.gameObject.AddComponent<VRC_AstroPickup>();
-                    Cue2_Secondary_PickupController = Secondary_2.gameObject.GetComponent<PickupController>();
+                    Cue2_Secondary.OnPickup = onPickup;
                     Cue2_Secondary.OnDrop = OnDrop;
-                    Cue2_Secondary.OnPickup = Cue2_Secondary_OnPickup;
 
                 }
 
@@ -303,86 +299,25 @@
             }
         }
 
-        private static void Cue1_Primary_OnPickup()
-        {
-            if (OverrideCurrentSkins)
-            {
-                if (Cue1_Primary_PickupController != null)
-                {
-                    var holder = Cue1_Primary_PickupController.CurrentHolder;
-                    if (holder != null)
-                    {
-                        if (holder.Equals(Utils.LocalPlayer))
-                        {
-                            SetActiveCueSkin(_CurrentCueSkin);
-                            SetSyncedCueSkin(_CurrentCueSkin);
-                            PlayerSpooferUtils.SpoofAsWorldAuthor = true;
-                        }
-                    }
-                }
-            }
-        }
+        
 
-        private static void Cue1_Secondary_OnPickup()
+        private static void onPickup()
         {
             if (OverrideCurrentSkins)
             {
-                if (Cue1_Secondary_PickupController != null)
+                if (!PlayerSpooferUtils.SpoofAsWorldAuthor)
                 {
-                    var holder = Cue1_Secondary_PickupController.CurrentHolder;
-                    if (holder != null)
-                    {
-                        if (holder.Equals(Utils.LocalPlayer))
-                        {
-                            SetActiveCueSkin(_CurrentCueSkin);
-                            SetSyncedCueSkin(_CurrentCueSkin);
-                            PlayerSpooferUtils.SpoofAsWorldAuthor = true;
-                        }
-                    }
+                    SetActiveCueSkin(_CurrentCueSkin);
+                    SetSyncedCueSkin(_CurrentCueSkin);
+                    PlayerSpooferUtils.SpoofAsWorldAuthor = true;
                 }
             }
         }
 
 
-        private static void Cue2_Primary_OnPickup()
-        {
-            if (OverrideCurrentSkins)
-            {
-                if (Cue2_Primary_PickupController != null)
-                {
-                    var holder = Cue2_Primary_PickupController.CurrentHolder;
-                    if (holder != null)
-                    {
-                        if (holder.Equals(Utils.LocalPlayer))
-                        {
-                            SetActiveCueSkin(_CurrentCueSkin);
-                            SetSyncedCueSkin(_CurrentCueSkin);
-                            PlayerSpooferUtils.SpoofAsWorldAuthor = true;
-                        }
-                    }
-                }
-            }
-        }
+        
 
-        private static void Cue2_Secondary_OnPickup()
-        {
-            if (OverrideCurrentSkins)
-            {
-                if (Cue2_Secondary_PickupController != null)
-                {
-                    var holder = Cue2_Secondary_PickupController.CurrentHolder;
-                    if (holder != null)
-                    {
-                        if (holder.Equals(Utils.LocalPlayer))
-                        {
-                            SetActiveCueSkin(_CurrentCueSkin);
-                            SetSyncedCueSkin(_CurrentCueSkin);
-                            PlayerSpooferUtils.SpoofAsWorldAuthor = true;
-                        }
-                    }
-                }
-            }
-        }
+        
 
 
 
@@ -391,14 +326,6 @@
 
         internal static VRC_AstroPickup Cue2_Primary{ get; private set;  }
         internal static VRC_AstroPickup Cue2_Secondary{ get; private set;  }
-
-        internal static PickupController Cue1_Primary_PickupController { get; private set; }
-        internal static PickupController Cue1_Secondary_PickupController { get; private set; }
-
-        internal static PickupController Cue2_Primary_PickupController { get; private set; }
-        internal static PickupController Cue2_Secondary_PickupController { get; private set; }
-
-
 
         internal static  UdonBehaviour_Cached UpdateColorScheme_Table { get; private set;  }
 
