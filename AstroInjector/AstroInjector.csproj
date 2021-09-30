@@ -88,9 +88,6 @@
     <Compile Include="..\AstroNetworkingLibrary\Encoding.cs">
       <Link>Networking\Encoding.cs</Link>
     </Compile>
-    <Compile Include="..\AstroNetworkingLibrary\HandleClient.cs">
-      <Link>Networking\HandleClient.cs</Link>
-    </Compile>
     <Compile Include="..\AstroNetworkingLibrary\JSonWriter.cs">
       <Link>Networking\JSonWriter.cs</Link>
     </Compile>
@@ -113,6 +110,7 @@
     <Compile Include="CheetosHelpers.cs" />
     <Compile Include="Networking\AstroNetworkLoader.cs" />
     <Compile Include="BuildInfo.cs" />
+    <Compile Include="Networking\HandleClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
