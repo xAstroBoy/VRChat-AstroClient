@@ -82,7 +82,10 @@ namespace AstroClient.Components
             get
             {
                 var result = IUdonHeap.GetHeapVariable(2u).Unbox<bool>();
-                IUdonHeap.CopyHeapVariable(3u, 2u);
+                if (result)
+                {
+                    IUdonHeap.CopyHeapVariable(3u, 2u);
+                }
                 return result;
             }
         }

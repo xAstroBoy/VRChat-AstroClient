@@ -124,7 +124,10 @@ namespace AstroClient.Components
             get
             {
                 var result = IUdonHeap.GetHeapVariable(Addresses.OnPickup).Unbox<bool>();
-                SetBackToFalse(Addresses.OnPickup);
+                if (result)
+                {
+                    SetBackToFalse(Addresses.OnPickup);
+                }
                 return result;
             }
         }
@@ -134,7 +137,10 @@ namespace AstroClient.Components
             get
             {
                 var result = IUdonHeap.GetHeapVariable(Addresses.OnPickupUseUp).Unbox<bool>();
-                SetBackToFalse(Addresses.OnPickupUseUp);
+                if (result)
+                {
+                    SetBackToFalse(Addresses.OnPickupUseUp);
+                }
                 return result;
             }
         }
@@ -144,7 +150,10 @@ namespace AstroClient.Components
             get
             {
                 var result = IUdonHeap.GetHeapVariable(Addresses.OnPickupUseDown).Unbox<bool>();
-                SetBackToFalse(Addresses.OnPickupUseDown);
+                if (result)
+                {
+                    SetBackToFalse(Addresses.OnPickupUseDown);
+                }
                 return result;
             }
         }
@@ -154,7 +163,10 @@ namespace AstroClient.Components
             get
             {
                 var result = IUdonHeap.GetHeapVariable(Addresses.OnDrop).Unbox<bool>();
-                SetBackToFalse(Addresses.OnDrop);
+                if (result)
+                {
+                    SetBackToFalse(Addresses.OnDrop);
+                }
                 return result;
             }
         }
