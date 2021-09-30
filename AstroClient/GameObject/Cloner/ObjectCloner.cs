@@ -15,7 +15,7 @@
             SpawnerSubmenu.UpdateSpawnedPickupsBtn();
         }
 
-        internal static  void ClonedObjectsDeleter()
+        internal static void ClonedObjectsDeleter()
         {
             foreach (var obj in SpawnerSubmenu.ClonedObjects)
             {
@@ -48,7 +48,7 @@
             }
         }
 
-        internal static  void CloneGameObject(GameObject GameObject)
+        internal static void CloneGameObject(GameObject GameObject)
         {
             ModConsole.DebugLog("Found A Target GameObject  :" + GameObject.name);
             var obj = Object.Instantiate(GameObject);

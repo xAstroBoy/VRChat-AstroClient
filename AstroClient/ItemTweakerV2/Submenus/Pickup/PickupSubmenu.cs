@@ -12,7 +12,7 @@
 
     internal class PickupSubmenu : Tweaker_Events
     {
-        internal static  void Init_PickupSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void Init_PickupSubMenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var PickupEditor = new QMNestedButton(menu, x, y, "Pickup Property", "Pickup Property Editor Menu!", null, null, null, null, btnHalf);
             HasPickupComponent = new QMSingleButton(PickupEditor, 0, -1f, "Force Pickup Component", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_ForceComponent(); }), "Forces Pickup component in case there's none.", null, null, true);
@@ -42,7 +42,7 @@
             Pickup_DisallowTheft = new QMToggleButton(PickupEditor, 4, 2, "Allow Theft", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_DisallowTheft(false); }), "Block Theft", new Action(() => { Tweaker_Object.GetGameObjectToEdit().Pickup_Set_DisallowTheft(true); }), "Control DisallowTheft property", null, null, null);
         }
 
-        internal static  void InitProximitySliderSubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        internal static void InitProximitySliderSubmenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var slider = new QMNestedButton(menu, x, y, "Proximity", "Pickup Proximity Slider Editor!", null, null, null, null, btnHalf);
             PickupProximitySlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(slider.GetMenuName()), "Proximity : ", 250, -720, delegate (float value)
@@ -255,24 +255,24 @@
             }
         }
 
-        internal static  QMSingleButton HasPickupComponent { get; private set; }
+        internal static QMSingleButton HasPickupComponent { get; private set; }
 
-        internal static  QMSingleButton Pickup_PickupOrientation_prop_any { get; private set; }
-        internal static  QMSingleButton Pickup_PickupOrientation_prop_Grip { get; private set; }
-        internal static  QMSingleButton Pickup_PickupOrientation_prop_Gun { get; private set; }
+        internal static QMSingleButton Pickup_PickupOrientation_prop_any { get; private set; }
+        internal static QMSingleButton Pickup_PickupOrientation_prop_Grip { get; private set; }
+        internal static QMSingleButton Pickup_PickupOrientation_prop_Gun { get; private set; }
 
-        internal static  QMSingleButton Pickup_AutoHoldMode_prop_AutoDetect { get; private set; }
-        internal static  QMSingleButton Pickup_AutoHoldMode_prop_Yes { get; private set; }
-        internal static  QMSingleButton Pickup_AutoHoldMode_prop_No { get; private set; }
+        internal static QMSingleButton Pickup_AutoHoldMode_prop_AutoDetect { get; private set; }
+        internal static QMSingleButton Pickup_AutoHoldMode_prop_Yes { get; private set; }
+        internal static QMSingleButton Pickup_AutoHoldMode_prop_No { get; private set; }
 
-        internal static  QMToggleButton Pickup_allowManipulationWhenEquipped { get; private set; }
-        internal static  QMToggleButton Pickup_pickupable { get; private set; }
-        internal static  QMToggleButton Pickup_DisallowTheft { get; private set; }
+        internal static QMToggleButton Pickup_allowManipulationWhenEquipped { get; private set; }
+        internal static QMToggleButton Pickup_pickupable { get; private set; }
+        internal static QMToggleButton Pickup_DisallowTheft { get; private set; }
 
-        internal static  QMSingleButton Pickup_IsEditMode { get; private set; }
-        internal static  QMSingleButton Pickup_IsHeld { get; private set; }
-        internal static  QMSingleButton Pickup_CurrentObjOwner { get; private set; }
-        internal static  QMSingleButton Pickup_CurrentObjHolder { get; private set; }
-        internal static  QMSlider PickupProximitySlider { get; private set; }
+        internal static QMSingleButton Pickup_IsEditMode { get; private set; }
+        internal static QMSingleButton Pickup_IsHeld { get; private set; }
+        internal static QMSingleButton Pickup_CurrentObjOwner { get; private set; }
+        internal static QMSingleButton Pickup_CurrentObjHolder { get; private set; }
+        internal static QMSlider PickupProximitySlider { get; private set; }
     }
 }

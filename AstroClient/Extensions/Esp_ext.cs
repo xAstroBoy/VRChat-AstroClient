@@ -5,9 +5,9 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    internal static  class Esp_ext
+    internal static class Esp_ext
     {
-        internal static  void Set_Pickup_ESP_Color(this GameObject obj, Color Color)
+        internal static void Set_Pickup_ESP_Color(this GameObject obj, Color Color)
         {
             if (obj != null)
             {
@@ -19,7 +19,7 @@
             }
         }
 
-        internal static  void Set_Pickup_ESP_Color(this GameObject obj, string Color)
+        internal static void Set_Pickup_ESP_Color(this GameObject obj, string Color)
         {
             Color hextocolor = ColorUtils.HexToColor(Color);
             if (obj != null)
@@ -32,7 +32,7 @@
             }
         }
 
-        internal static  void Set_Pickup_ESP_Color(this List<GameObject> list, Color color)
+        internal static void Set_Pickup_ESP_Color(this List<GameObject> list, Color color)
         {
             foreach (var obj in list)
             {
@@ -47,7 +47,7 @@
             }
         }
 
-        internal static  void Set_Pickup_ESP_Color(this List<GameObject> list, string color)
+        internal static void Set_Pickup_ESP_Color(this List<GameObject> list, string color)
         {
             Color hextocolor = ColorUtils.HexToColor(color);
             foreach (var obj in list)
@@ -60,7 +60,7 @@
             }
         }
 
-        internal static  void Set_Trigger_ESP_Color(this GameObject obj, Color Color)
+        internal static void Set_Trigger_ESP_Color(this GameObject obj, Color Color)
         {
             if (obj != null)
             {
@@ -72,7 +72,7 @@
             }
         }
 
-        internal static  void Set_Trigger_ESP_Color(this GameObject obj, string Color)
+        internal static void Set_Trigger_ESP_Color(this GameObject obj, string Color)
         {
             if (obj != null)
             {
@@ -84,7 +84,7 @@
             }
         }
 
-        internal static  void Set_Trigger_ESP_Color(this List<GameObject> list, Color color)
+        internal static void Set_Trigger_ESP_Color(this List<GameObject> list, Color color)
         {
             foreach (var obj in list)
             {
@@ -99,7 +99,7 @@
             }
         }
 
-        internal static  void Set_Trigger_ESP_Color(this List<GameObject> list, string color)
+        internal static void Set_Trigger_ESP_Color(this List<GameObject> list, string color)
         {
             foreach (var obj in list)
             {
@@ -114,7 +114,7 @@
             }
         }
 
-        internal static  void Set_ItemTweaker_ESP_Color(this GameObject obj, Color Color)
+        internal static void Set_ItemTweaker_ESP_Color(this GameObject obj, Color Color)
         {
             if (obj != null)
             {
@@ -126,7 +126,7 @@
             }
         }
 
-        internal static  void Set_ItemTweaker_ESP_Color(this GameObject obj, string Color)
+        internal static void Set_ItemTweaker_ESP_Color(this GameObject obj, string Color)
         {
             if (obj != null)
             {
@@ -138,7 +138,7 @@
             }
         }
 
-        internal static  void Set_ItemTweaker_ESP_Color(this List<GameObject> list, Color color)
+        internal static void Set_ItemTweaker_ESP_Color(this List<GameObject> list, Color color)
         {
             foreach (var obj in list)
             {
@@ -153,7 +153,7 @@
             }
         }
 
-        internal static  void Set_ItemTweaker_ESP_Color(this List<GameObject> list, string color)
+        internal static void Set_ItemTweaker_ESP_Color(this List<GameObject> list, string color)
         {
             foreach (var obj in list)
             {
@@ -168,7 +168,7 @@
             }
         }
 
-        internal static  void Set_UdonBehaviour_ESP_Color(this GameObject obj, Color Color)
+        internal static void Set_UdonBehaviour_ESP_Color(this GameObject obj, Color Color)
         {
             if (obj != null)
             {
@@ -180,7 +180,7 @@
             }
         }
 
-        internal static  void Set_UdonBehaviour_ESP_Color(this GameObject obj, string Color)
+        internal static void Set_UdonBehaviour_ESP_Color(this GameObject obj, string Color)
         {
             if (obj != null)
             {
@@ -192,7 +192,7 @@
             }
         }
 
-        internal static  void Set_UdonBehaviour_ESP_Color(this List<GameObject> list, Color color)
+        internal static void Set_UdonBehaviour_ESP_Color(this List<GameObject> list, Color color)
         {
             foreach (var obj in list)
             {
@@ -207,7 +207,7 @@
             }
         }
 
-        internal static  void Set_UdonBehaviour_ESP_Color(this List<GameObject> list, string color)
+        internal static void Set_UdonBehaviour_ESP_Color(this List<GameObject> list, string color)
         {
             foreach (var obj in list)
             {
@@ -222,7 +222,7 @@
             }
         }
 
-        internal static  void Set_VRCInteractable_ESP_Color(this GameObject obj, Color Color)
+        internal static void Set_VRCInteractable_ESP_Color(this GameObject obj, Color Color)
         {
             if (obj != null)
             {
@@ -234,7 +234,7 @@
             }
         }
 
-        internal static  void Set_VRCInteractable_ESP_Color(this GameObject obj, string Color)
+        internal static void Set_VRCInteractable_ESP_Color(this GameObject obj, string Color)
         {
             if (obj != null)
             {
@@ -246,7 +246,7 @@
             }
         }
 
-        internal static  void Set_VRCInteractable_ESP_Color(this List<GameObject> list, Color color)
+        internal static void Set_VRCInteractable_ESP_Color(this List<GameObject> list, Color color)
         {
             foreach (var obj in list)
             {
@@ -261,7 +261,7 @@
             }
         }
 
-        internal static  void Set_VRCInteractable_ESP_Color(this List<GameObject> list, string color)
+        internal static void Set_VRCInteractable_ESP_Color(this List<GameObject> list, string color)
         {
             foreach (var obj in list)
             {

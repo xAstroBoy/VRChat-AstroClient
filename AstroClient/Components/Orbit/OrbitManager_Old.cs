@@ -48,8 +48,8 @@
 
         #region Module
 
-        internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> OrbitBehaviours;
-        internal static  float Offset = 0f;
+        internal static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> OrbitBehaviours;
+        internal static float Offset = 0f;
 
         internal void Start()
         {
@@ -57,7 +57,7 @@
             Instance = this;
         }
 
-        internal static  void MakeInstance()
+        internal static void MakeInstance()
         {
             if (Instance == null)
             {
@@ -76,7 +76,7 @@
             }
         }
 
-        internal static  void RemoveOrbitObjectsBoundToPlayer(APIUser player)
+        internal static void RemoveOrbitObjectsBoundToPlayer(APIUser player)
         {
             int i = 0;
             if (player != null)
@@ -101,7 +101,7 @@
             }
         }
 
-        internal static  void RemoveFromList(GameObject obj)
+        internal static void RemoveFromList(GameObject obj)
         {
             if (obj != null)
             {
@@ -112,7 +112,7 @@
             }
         }
 
-        internal static  void RegisterObject(GameObject obj)
+        internal static void RegisterObject(GameObject obj)
         {
             if (obj != null)
             {
@@ -123,7 +123,7 @@
             }
         }
 
-        internal static  void AddOrbitObject(GameObject obj, Player player)
+        internal static void AddOrbitObject(GameObject obj, Player player)
         {
             if (obj != null && player != null && obj.GetComponent<Orbit>() == null)
             {
@@ -139,11 +139,11 @@
             }
         }
 
-        internal static  void Update()
+        internal static void Update()
         {
         }
 
-        internal static  void RemoveAllOrbitObjects()
+        internal static void RemoveAllOrbitObjects()
         {
             foreach (var obj in GetOrbitObjects())
             {
@@ -168,22 +168,22 @@
             }
         }
 
-        internal static  void Register(Orbit orbitBehaviour)
+        internal static void Register(Orbit orbitBehaviour)
         {
             OrbitBehaviours.Add(orbitBehaviour);
         }
 
-        internal static  void Deregister(Orbit orbitBehaviour)
+        internal static void Deregister(Orbit orbitBehaviour)
         {
             _ = OrbitBehaviours.Remove(orbitBehaviour);
         }
 
-        internal static  void ClearList()
+        internal static void ClearList()
         {
             OrbitBehaviours.Clear();
         }
 
-        internal static  List<GameObject> GetOrbitObjects()
+        internal static List<GameObject> GetOrbitObjects()
         {
             OrbitObjects = new List<GameObject>();
             OrbitObjects = _OrbitObjects.ToList();
@@ -192,7 +192,7 @@
 
         private static List<GameObject> _OrbitObjects = new List<GameObject>();
         private static List<GameObject> OrbitObjects;
-        internal static  OrbitManager_Old Instance { get; set; }
+        internal static OrbitManager_Old Instance { get; set; }
 
         #endregion Module
     }

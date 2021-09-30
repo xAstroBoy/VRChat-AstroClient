@@ -12,13 +12,13 @@
 
     internal class Headlight : GameEvents
     {
-        internal static  float LightRange = 10f;
-        internal static  Color LightColor = Color.white;
-        internal static  float LightIntensity = 1f;
-        internal static  float LightAngle = 80f;
+        internal static float LightRange = 10f;
+        internal static Color LightColor = Color.white;
+        internal static float LightIntensity = 1f;
+        internal static float LightAngle = 80f;
         private static bool _DesktopHeadlight;
 
-        internal static  bool DesktopHeadlightBool
+        internal static bool DesktopHeadlightBool
         {
             get
             {
@@ -37,7 +37,7 @@
 
         private static bool _VRHeadlight;
 
-        internal static  bool VRHeadLightBool
+        internal static bool VRHeadLightBool
         {
             get
             {
@@ -54,8 +54,8 @@
             }
         }
 
-        internal static  QMSingleToggleButton DesktopHeadlightBtn;
-        internal static  QMSingleToggleButton VRHeadlightBtn;
+        internal static QMSingleToggleButton DesktopHeadlightBtn;
+        internal static QMSingleToggleButton VRHeadlightBtn;
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
@@ -67,7 +67,7 @@
             VRLight = null;
         }
 
-        internal static  void HeadlightButtonInit(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void HeadlightButtonInit(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             QMNestedButton HeadlightConfig = new QMNestedButton(menu, x, y, "Custom Headlight", "Headlight Settings", null, null, null, null, btnHalf);
 
@@ -194,10 +194,10 @@
               }, "Changes Headlight Color");
         }
 
-        internal static  Light DesktopLight;
-        internal static  Light VRLight;
+        internal static Light DesktopLight;
+        internal static Light VRLight;
 
-        internal static  void UpdateLights()
+        internal static void UpdateLights()
         {
             if (DesktopLight != null)
             {
@@ -219,7 +219,7 @@
             }
         }
 
-        internal static  void VRHeadLight(bool state)
+        internal static void VRHeadLight(bool state)
         {
             if (Player.prop_Player_0 != null)
             {

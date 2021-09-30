@@ -5,9 +5,9 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    internal static  class RigidBodyControllerExtensions
+    internal static class RigidBodyControllerExtensions
     {
-        internal static  void RigidBody_RestoreOriginalBody(this RigidBodyController control)
+        internal static void RigidBody_RestoreOriginalBody(this RigidBodyController control)
         {
             if (control != null)
             {
@@ -15,7 +15,7 @@
             }
         }
 
-        internal static  void RigidBody_Set_Gravity(this RigidBodyController control, bool useGravity)
+        internal static void RigidBody_Set_Gravity(this RigidBodyController control, bool useGravity)
         {
             if (control != null)
             {
@@ -27,7 +27,7 @@
             }
         }
 
-        internal static  void RigidBody_Set_DetectCollisions(this RigidBodyController control, bool DetectCollisions)
+        internal static void RigidBody_Set_DetectCollisions(this RigidBodyController control, bool DetectCollisions)
         {
             if (control != null)
             {
@@ -39,7 +39,7 @@
             }
         }
 
-        internal static  void RigidBody_Set_isKinematic(this RigidBodyController control, bool isKinematic)
+        internal static void RigidBody_Set_isKinematic(this RigidBodyController control, bool isKinematic)
         {
             if (control != null)
             {
@@ -51,7 +51,7 @@
             }
         }
 
-        internal static  void RigidBody_Remove_Constraint(this RigidBodyController control, RigidbodyConstraints constraint)
+        internal static void RigidBody_Remove_Constraint(this RigidBodyController control, RigidbodyConstraints constraint)
         {
             if (control != null)
             {
@@ -66,7 +66,7 @@
             }
         }
 
-        internal static  void RigidBody_Remove_All_Constraints(this RigidBodyController control)
+        internal static void RigidBody_Remove_All_Constraints(this RigidBodyController control)
         {
             if (control != null)
             {
@@ -78,7 +78,7 @@
             }
         }
 
-        internal static  void RigidBody_Add_Constraint(this RigidBodyController control, RigidbodyConstraints constraint)
+        internal static void RigidBody_Add_Constraint(this RigidBodyController control, RigidbodyConstraints constraint)
         {
             if (control != null)
             {
@@ -90,7 +90,7 @@
             }
         }
 
-        internal static  void RigidBody_PreventOthersFromGrabbing(this RigidBodyController control, bool PreventOthersFromGrabbing)
+        internal static void RigidBody_PreventOthersFromGrabbing(this RigidBodyController control, bool PreventOthersFromGrabbing)
         {
             if (control != null)
             {
@@ -102,7 +102,7 @@
             }
         }
 
-        internal static  bool RigidBody_Will_It_fall_throught(this RigidBodyController control)
+        internal static bool RigidBody_Will_It_fall_throught(this RigidBodyController control)
         {
             if (control != null)
             {
@@ -138,52 +138,52 @@
             return true;
         }
 
-        internal static  void RigidBody_RestoreOriginalBody(this GameObject obj)
+        internal static void RigidBody_RestoreOriginalBody(this GameObject obj)
         {
             obj.GetOrAddComponent<RigidBodyController>().RigidBody_RestoreOriginalBody();
         }
 
-        internal static  void RigidBody_Set_Gravity(this GameObject obj, bool useGravity)
+        internal static void RigidBody_Set_Gravity(this GameObject obj, bool useGravity)
         {
             obj.GetOrAddComponent<RigidBodyController>().RigidBody_Set_Gravity(useGravity);
         }
 
-        internal static  void RigidBody_Set_DetectCollisions(this GameObject obj, bool DetectCollisions)
+        internal static void RigidBody_Set_DetectCollisions(this GameObject obj, bool DetectCollisions)
         {
             obj.GetOrAddComponent<RigidBodyController>().RigidBody_Set_DetectCollisions(DetectCollisions);
         }
 
-        internal static  void RigidBody_Set_isKinematic(this GameObject obj, bool isKinematic)
+        internal static void RigidBody_Set_isKinematic(this GameObject obj, bool isKinematic)
         {
             obj.GetOrAddComponent<RigidBodyController>().RigidBody_Set_isKinematic(isKinematic);
         }
 
-        internal static  void RigidBody_Remove_Constraint(this GameObject obj, RigidbodyConstraints constraint)
+        internal static void RigidBody_Remove_Constraint(this GameObject obj, RigidbodyConstraints constraint)
         {
             obj.GetOrAddComponent<RigidBodyController>().RigidBody_Remove_Constraint(constraint);
         }
 
-        internal static  void RigidBody_Remove_All_Constraints(this GameObject obj)
+        internal static void RigidBody_Remove_All_Constraints(this GameObject obj)
         {
             obj.GetOrAddComponent<RigidBodyController>().RigidBody_Remove_All_Constraints();
         }
 
-        internal static  void RigidBody_Add_Constraint(this GameObject obj, RigidbodyConstraints constraint)
+        internal static void RigidBody_Add_Constraint(this GameObject obj, RigidbodyConstraints constraint)
         {
             obj.GetOrAddComponent<RigidBodyController>().RigidBody_Add_Constraint(constraint);
         }
 
-        internal static  void RigidBody_PreventOthersFromGrabbing(this GameObject obj, bool PreventOthersFromGrabbing)
+        internal static void RigidBody_PreventOthersFromGrabbing(this GameObject obj, bool PreventOthersFromGrabbing)
         {
             obj.GetOrAddComponent<RigidBodyController>().RigidBody_PreventOthersFromGrabbing(PreventOthersFromGrabbing);
         }
 
-        internal static  bool RigidBody_Will_It_fall_throught(this GameObject obj)
+        internal static bool RigidBody_Will_It_fall_throught(this GameObject obj)
         {
             return obj.GetOrAddComponent<RigidBodyController>().RigidBody_Will_It_fall_throught();
         }
 
-        internal static  void RigidBody_RestoreOriginalBody(this List<GameObject> items)
+        internal static void RigidBody_RestoreOriginalBody(this List<GameObject> items)
         {
             foreach (var obj in items)
             {
@@ -194,7 +194,7 @@
             }
         }
 
-        internal static  void RigidBody_Set_Gravity(this List<GameObject> items, bool useGravity)
+        internal static void RigidBody_Set_Gravity(this List<GameObject> items, bool useGravity)
         {
             foreach (var obj in items)
             {
@@ -205,7 +205,7 @@
             }
         }
 
-        internal static  void RigidBody_Set_DetectCollisions(this List<GameObject> items, bool DetectCollisions)
+        internal static void RigidBody_Set_DetectCollisions(this List<GameObject> items, bool DetectCollisions)
         {
             foreach (var obj in items)
             {
@@ -216,7 +216,7 @@
             }
         }
 
-        internal static  void RigidBody_Set_isKinematic(this List<GameObject> items, bool isKinematic)
+        internal static void RigidBody_Set_isKinematic(this List<GameObject> items, bool isKinematic)
         {
             foreach (var obj in items)
             {
@@ -227,7 +227,7 @@
             }
         }
 
-        internal static  void RigidBody_Remove_Constraint(this List<GameObject> items, RigidbodyConstraints constraint)
+        internal static void RigidBody_Remove_Constraint(this List<GameObject> items, RigidbodyConstraints constraint)
         {
             foreach (var obj in items)
             {
@@ -238,7 +238,7 @@
             }
         }
 
-        internal static  void RigidBody_Remove_All_Constraints(this List<GameObject> items)
+        internal static void RigidBody_Remove_All_Constraints(this List<GameObject> items)
         {
             foreach (var obj in items)
             {
@@ -249,7 +249,7 @@
             }
         }
 
-        internal static  void RigidBody_Add_Constraint(this List<GameObject> items, RigidbodyConstraints constraint)
+        internal static void RigidBody_Add_Constraint(this List<GameObject> items, RigidbodyConstraints constraint)
         {
             foreach (var obj in items)
             {
@@ -260,7 +260,7 @@
             }
         }
 
-        internal static  void RigidBody_PreventOthersFromGrabbing(this List<GameObject> items, bool PreventOthersFromGrabbing)
+        internal static void RigidBody_PreventOthersFromGrabbing(this List<GameObject> items, bool PreventOthersFromGrabbing)
         {
             foreach (var obj in items)
             {
@@ -271,7 +271,7 @@
             }
         }
 
-        internal static  void RigidBody_Set_Drag(this RigidBodyController control, float Drag)
+        internal static void RigidBody_Set_Drag(this RigidBodyController control, float Drag)
         {
             if (control != null)
             {
@@ -283,7 +283,7 @@
             }
         }
 
-        internal static  void RigidBody_Set_AngularDrag(this RigidBodyController control, float AngularDrag)
+        internal static void RigidBody_Set_AngularDrag(this RigidBodyController control, float AngularDrag)
         {
             if (control != null)
             {
@@ -295,7 +295,7 @@
             }
         }
 
-        internal static  void RigidBody_Forced(this RigidBodyController control, bool Forced_RigidBody)
+        internal static void RigidBody_Forced(this RigidBodyController control, bool Forced_RigidBody)
         {
             if (control != null)
             {

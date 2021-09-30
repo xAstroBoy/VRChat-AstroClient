@@ -54,7 +54,7 @@
 
         #region Module
 
-        internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> PlayerAttackerBehaviors;
+        internal static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> PlayerAttackerBehaviors;
 
         internal void Start()
         {
@@ -62,7 +62,7 @@
             Instance = this;
         }
 
-        internal static  void MakeInstance()
+        internal static void MakeInstance()
         {
             if (Instance == null)
             {
@@ -81,11 +81,11 @@
             }
         }
 
-        internal static  void Update()
+        internal static void Update()
         {
         }
 
-        internal static  void AddObject(GameObject obj, Player player)
+        internal static void AddObject(GameObject obj, Player player)
         {
             if (obj == null)
             {
@@ -125,7 +125,7 @@
             }
         }
 
-        internal static  void RemovePickupsAttackerBoundToPlayer(APIUser player)
+        internal static void RemovePickupsAttackerBoundToPlayer(APIUser player)
         {
             int i = 0;
             if (player != null)
@@ -150,7 +150,7 @@
             }
         }
 
-        internal static  void RemoveAttacker(GameObject obj)
+        internal static void RemoveAttacker(GameObject obj)
         {
             if (obj != null)
             {
@@ -162,7 +162,7 @@
             }
         }
 
-        internal static  void RemoveSelf(GameObject obj)
+        internal static void RemoveSelf(GameObject obj)
         {
             if (OriginalPlayerAttackers.Contains(obj))
             {
@@ -170,7 +170,7 @@
             }
         }
 
-        internal static  void KillPlayerAttackers()
+        internal static void KillPlayerAttackers()
         {
             foreach (var obj in GetAllAttackers())
             {
@@ -202,22 +202,22 @@
             ClearList();
         }
 
-        internal static  void Register(PlayerAttacker PlayerAttackerBehaviour)
+        internal static void Register(PlayerAttacker PlayerAttackerBehaviour)
         {
             PlayerAttackerBehaviors.Add(PlayerAttackerBehaviour);
         }
 
-        internal static  void Deregister(PlayerAttacker PlayerAttackerBehaviour)
+        internal static void Deregister(PlayerAttacker PlayerAttackerBehaviour)
         {
             _ = PlayerAttackerBehaviors.Remove(PlayerAttackerBehaviour);
         }
 
-        internal static  void ClearList()
+        internal static void ClearList()
         {
             PlayerAttackerBehaviors.Clear();
         }
 
-        internal static  List<GameObject> GetAllAttackers()
+        internal static List<GameObject> GetAllAttackers()
         {
             SnapshotPlayerAttackers = new List<GameObject>();
             SnapshotPlayerAttackers = OriginalPlayerAttackers.ToList();
@@ -227,7 +227,7 @@
         private static List<GameObject> OriginalPlayerAttackers = new List<GameObject>();
 
         private static List<GameObject> SnapshotPlayerAttackers;
-        internal static  PlayerAttackerManager Instance { get; set; }
+        internal static PlayerAttackerManager Instance { get; set; }
 
         #endregion Module
     }

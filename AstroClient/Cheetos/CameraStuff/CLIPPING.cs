@@ -5,7 +5,7 @@
 
     internal class CLIPPING : GameEvents
     {
-        internal static  void Set_Camera_FarClipPlane(float v)
+        internal static void Set_Camera_FarClipPlane(float v)
         {
             var gameObject = GameObject.Find("Camera (eye)");
             if (gameObject != null)

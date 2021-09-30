@@ -6,7 +6,7 @@
 
     internal class ColorEditor
     {
-        internal static  void ChangeObjColor(GameObject obj, Color color)
+        internal static void ChangeObjColor(GameObject obj, Color color)
         {
             if (obj != null)
             {
@@ -23,7 +23,7 @@
             }
         }
 
-        internal static  async void BlinkColorObject(GameObject obj, Color BlinkColor, Color OriginalColor)
+        internal static async void BlinkColorObject(GameObject obj, Color BlinkColor, Color OriginalColor)
         {
             ModConsole.Log("Setting Color of object : " + obj.name + " to : " + BlinkColor.ToString());
             ChangeObjColor(obj, BlinkColor);

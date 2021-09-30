@@ -33,17 +33,17 @@
             DisableFly();
         }
 
-        internal static  void SetDesktopFlySpeed(float v)
+        internal static void SetDesktopFlySpeed(float v)
         {
             ConfigManager.Flight.DesktopFlySpeed = v;
         }
 
-        internal static  void SetVRFlySpeed(float v)
+        internal static void SetVRFlySpeed(float v)
         {
             ConfigManager.Flight.VRFlySpeed = v;
         }
 
-        internal static  bool FlyEnabled
+        internal static bool FlyEnabled
         {
             get => flyEnabled;
             set
@@ -75,7 +75,7 @@
             Physics.gravity = Gravity;
         }
 
-        internal static  bool NoClipEnabled
+        internal static bool NoClipEnabled
         {
             get => noClipEnabled;
             set

@@ -16,7 +16,7 @@
 
     internal class AvatarManagerHook : GameEvents
     {
-        internal static  event EventHandler<OnAvatarSpawnArgs> Event_OnAvatarSpawn;
+        internal static event EventHandler<OnAvatarSpawnArgs> Event_OnAvatarSpawn;
 
         internal override void OnApplicationStart() => HookAvatarManager();
 

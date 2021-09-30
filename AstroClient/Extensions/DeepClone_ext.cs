@@ -7,7 +7,7 @@
     using System.Reflection;
     using UnityEngine;
 
-    internal static  class DeepClone_ext
+    internal static class DeepClone_ext
     {
         private static bool GetCopyOfDebugMode = false;
 
@@ -21,7 +21,7 @@
 
         private const BindingFlags bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Default | BindingFlags.DeclaredOnly;
 
-        internal static  T GetCopyOf<T>(this Component comp, T other) where T : Component
+        internal static T GetCopyOf<T>(this Component comp, T other) where T : Component
         {
             if (comp == null) return null;
             if (other.GetType() == null) return null;
@@ -114,7 +114,7 @@
             return comp as T;
         }
 
-        internal static  T CopyComponent<T>(this GameObject go, T toAdd) where T : Component
+        internal static T CopyComponent<T>(this GameObject go, T toAdd) where T : Component
         {
             if (go == null)
             {

@@ -1,8 +1,8 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    internal static  class Il2Cpp_ext
+    internal static class Il2Cpp_ext
     {
-        //internal static  List<UnityEngine.Object> ConvertToUnityObject(this Il2CppReferenceArray<Il2CppSystem.Object> list)
+        //internal static List<UnityEngine.Object> ConvertToUnityObject(this Il2CppReferenceArray<Il2CppSystem.Object> list)
         //{
         //	var items = new List<UnityEngine.Object>();
         //	foreach(var item in items)

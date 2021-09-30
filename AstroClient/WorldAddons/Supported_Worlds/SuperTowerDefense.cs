@@ -58,7 +58,7 @@
         }
 
 
-        internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             SuperTowerDefensecheatPage = new QMNestedButton(main, x, y, "Super Tower Defense", "Super Tower Defense Cheats", null, null, null, null, btnHalf);
 
@@ -77,7 +77,7 @@
 
 
 
-        internal static  void AddBankBalance(int amount)
+        internal static void AddBankBalance(int amount)
         {
             var result = UdonHeapParser.Udon_Parse_Int32(Bank, CurrentMoney);
             if (result.HasValue)
@@ -93,13 +93,13 @@
 
 
 
-        internal static  void SetBankBalance(int amount)
+        internal static void SetBankBalance(int amount)
         {
             UdonHeapEditor.PatchHeap(Bank, CurrentMoney, amount, true);
         }
 
 
-        internal static  void SetMaxTowerCount(int amount)
+        internal static void SetMaxTowerCount(int amount)
         {
             UdonHeapEditor.PatchHeap(TowerManager, MaxTowerCount, amount, true);
             //UdonHeapEditor.PatchHeap(TowerManager, TowerCount, amount, true);
@@ -114,7 +114,7 @@
         }
 
 
-        internal static  QMNestedButton SuperTowerDefensecheatPage { get; set; }
+        internal static QMNestedButton SuperTowerDefensecheatPage { get; set; }
 
         private static DisassembledUdonBehaviour Bank { get; set; }
 

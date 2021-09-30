@@ -12,7 +12,7 @@
 
     internal class WorldObjectsScrollMenu : Tweaker_Events
     {
-        internal static  void Init_WorldObjectScrollMenu(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void Init_WorldObjectScrollMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Select W.Objects", "Select World Objects to edit", null, null, null, null, btnHalf);
             var scroll = new QMScrollMenu(menu);
@@ -53,7 +53,7 @@
             });
         }
 
-        internal static  void AddToWorldUtilsMenu(GameObject obj)
+        internal static void AddToWorldUtilsMenu(GameObject obj)
         {
             if (obj != null)
             {
@@ -92,9 +92,9 @@
             }
         }
 
-        internal static  QMSingleButton TeleportToMe;
-        internal static  QMSingleButton TeleportToTarget;
+        internal static QMSingleButton TeleportToMe;
+        internal static QMSingleButton TeleportToTarget;
 
-        internal static  List<GameObject> WorldObjects = new List<GameObject>();
+        internal static List<GameObject> WorldObjects = new List<GameObject>();
     }
 }

@@ -14,8 +14,8 @@
 
     internal class FBTHeaven : GameEvents
     {
-        internal static  QMNestedButton FBTExploitsPage;
-        internal static  float ButtonUpdateTime = 0f;
+        internal static QMNestedButton FBTExploitsPage;
+        internal static float ButtonUpdateTime = 0f;
         private static List<GameObject> TrashToDelete = new List<GameObject>();
         private static bool isCurrentWorld;
         private static QMToggleButton LockButton1;
@@ -32,7 +32,7 @@
             TrashToDelete.Clear();
         }
 
-        internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             FBTExploitsPage = new QMNestedButton(main, x, y, "FBTHeaven Exploits", "FBTHeaven Exploits", null, null, null, null, btnHalf);
 

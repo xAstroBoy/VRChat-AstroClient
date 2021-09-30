@@ -55,7 +55,7 @@
 
         #region Module
 
-        internal static  Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> PlayerWatcherBehaviors;
+        internal static Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> PlayerWatcherBehaviors;
 
         internal void Start()
         {
@@ -63,7 +63,7 @@
             Instance = this;
         }
 
-        internal static  void MakeInstance()
+        internal static void MakeInstance()
         {
             if (Instance == null)
             {
@@ -82,11 +82,11 @@
             }
         }
 
-        internal static  void Update()
+        internal static void Update()
         {
         }
 
-        internal static  void AddObject(GameObject obj, Player player)
+        internal static void AddObject(GameObject obj, Player player)
         {
             if (obj == null)
             {
@@ -126,7 +126,7 @@
             }
         }
 
-        internal static  void RemovePickupsWatchersBoundToPlayer(APIUser player)
+        internal static void RemovePickupsWatchersBoundToPlayer(APIUser player)
         {
             int i = 0;
             if (player != null)
@@ -151,7 +151,7 @@
             }
         }
 
-        internal static  void RemoveAttacker(GameObject obj)
+        internal static void RemoveAttacker(GameObject obj)
         {
             if (obj != null)
             {
@@ -163,7 +163,7 @@
             }
         }
 
-        internal static  void RemoveSelf(GameObject obj)
+        internal static void RemoveSelf(GameObject obj)
         {
             if (OriginalPlayerWatchers.Contains(obj))
             {
@@ -171,7 +171,7 @@
             }
         }
 
-        internal static  void KillPlayerWatchers()
+        internal static void KillPlayerWatchers()
         {
             foreach (var obj in GetAllAttackers())
             {
@@ -203,22 +203,22 @@
             ClearList();
         }
 
-        internal static  void Register(PlayerWatcher PlayerWatcherBehaviour)
+        internal static void Register(PlayerWatcher PlayerWatcherBehaviour)
         {
             PlayerWatcherBehaviors.Add(PlayerWatcherBehaviour);
         }
 
-        internal static  void Deregister(PlayerWatcher PlayerWatcherBehaviour)
+        internal static void Deregister(PlayerWatcher PlayerWatcherBehaviour)
         {
             _ = PlayerWatcherBehaviors.Remove(PlayerWatcherBehaviour);
         }
 
-        internal static  void ClearList()
+        internal static void ClearList()
         {
             PlayerWatcherBehaviors.Clear();
         }
 
-        internal static  List<GameObject> GetAllAttackers()
+        internal static List<GameObject> GetAllAttackers()
         {
             SnapshotPlayerWatchers = new List<GameObject>();
             SnapshotPlayerWatchers = OriginalPlayerWatchers.ToList();
@@ -228,7 +228,7 @@
         private static List<GameObject> OriginalPlayerWatchers = new List<GameObject>();
 
         private static List<GameObject> SnapshotPlayerWatchers;
-        internal static  PlayerWatcherManager Instance { get; set; }
+        internal static PlayerWatcherManager Instance { get; set; }
 
         #endregion Module
     }

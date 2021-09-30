@@ -56,7 +56,7 @@
             }
         }
 
-        internal static  void Unfreeze()
+        internal static void Unfreeze()
         {
             if (Frozen)
             {
@@ -72,7 +72,7 @@
             }
         }
 
-        internal static  void Freeze()
+        internal static void Freeze()
         {
             if (Networking.LocalPlayer != null)
             {
@@ -101,7 +101,7 @@
             }
         }
 
-        internal static  bool FreezePlayerOnQMOpen
+        internal static bool FreezePlayerOnQMOpen
         {
             get
             {
@@ -117,8 +117,8 @@
             }
         }
 
-        internal static  QMToggleButton FreezePlayerOnQMOpenToggle;
-        internal static  bool Frozen;
+        internal static QMToggleButton FreezePlayerOnQMOpenToggle;
+        internal static bool Frozen;
 
         private static Vector3 originalGravity
         {

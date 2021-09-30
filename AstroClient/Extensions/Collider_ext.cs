@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    internal static  class Collider_ext
+    internal static class Collider_ext
     {
-        internal static  void AddCollider(this GameObject obj)
+        internal static void AddCollider(this GameObject obj)
         {
             if (obj != null)
             {
@@ -14,7 +14,7 @@
             }
         }
 
-        internal static  void AddTriggerCollider(this GameObject obj)
+        internal static void AddTriggerCollider(this GameObject obj)
         {
             if (obj != null)
             {
@@ -22,7 +22,7 @@
             }
         }
 
-        internal static  void RemoveColliders(this GameObject obj)
+        internal static void RemoveColliders(this GameObject obj)
         {
             if (obj != null)
             {
@@ -33,7 +33,7 @@
             }
         }
 
-        internal static  void RemoveAllColliders(this GameObject obj)
+        internal static void RemoveAllColliders(this GameObject obj)
         {
             if (obj != null)
             {
@@ -44,7 +44,7 @@
             }
         }
 
-        internal static  void Disablecollider(this GameObject obj)
+        internal static void Disablecollider(this GameObject obj)
         {
             if (obj != null)
             {
@@ -55,7 +55,7 @@
             }
         }
 
-        internal static  void DisableAllColliders(this GameObject obj)
+        internal static void DisableAllColliders(this GameObject obj)
         {
             if (obj != null)
             {
@@ -66,7 +66,7 @@
             }
         }
 
-        internal static  void EnableColliders(this GameObject obj)
+        internal static void EnableColliders(this GameObject obj)
         {
             if (obj != null)
             {
@@ -82,7 +82,7 @@
             }
         }
 
-        internal static  void RegisterCustomCollider(this GameObject obj, bool HasColliderAdded)
+        internal static void RegisterCustomCollider(this GameObject obj, bool HasColliderAdded)
         {
             if (obj != null)
             {
@@ -90,7 +90,7 @@
             }
         }
 
-        internal static  void AddBoxCollider(this List<GameObject> list, Vector3 size)
+        internal static void AddBoxCollider(this List<GameObject> list, Vector3 size)
         {
             foreach (var obj in list)
             {

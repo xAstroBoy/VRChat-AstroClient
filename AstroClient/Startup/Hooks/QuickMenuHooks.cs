@@ -26,12 +26,12 @@
     {
 
 
-        internal static  event EventHandler<VRCPlayerEventArgs> Event_OnPlayerSelected;
+        internal static event EventHandler<VRCPlayerEventArgs> Event_OnPlayerSelected;
 
 
         internal class Patch
         {
-            internal static  List<Patch> Patches { get; set; } = new List<Patch>();
+            internal static List<Patch> Patches { get; set; } = new List<Patch>();
             internal MethodInfo TargetMethod { get; set; }
             internal HarmonyMethod PrefixMethod { get; set; }
             internal HarmonyMethod PostfixMethod { get; set; }
@@ -51,7 +51,7 @@
                 Patches.Add(this);
             }
 
-            internal static  async void DoPatches()
+            internal static async void DoPatches()
             {
                 Stopwatch stopwatch = new Stopwatch();
                 stopwatch.Start();
@@ -79,7 +79,7 @@
                 ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods: {stopwatch.ElapsedMilliseconds}ms");
             }
 
-            internal static  async void UnDoPatches()
+            internal static async void UnDoPatches()
             {
                 for (int i = 0; i < Patches.Count; i++)
                 {

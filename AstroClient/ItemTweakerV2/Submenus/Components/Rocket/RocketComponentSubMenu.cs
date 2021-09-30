@@ -8,7 +8,7 @@
 
     internal class RocketComponentSubMenu : Tweaker_Events
     {
-        internal static  void Init_RocketComponentSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
+        internal static void Init_RocketComponentSubMenu(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var submenu = new QMNestedButton(menu, x, y, "Rocket Maker", "Turn Items Into Rockets, Be careful as they will explode on impact!", null, null, null, null, btnHalf);
             _ = new QMSingleButton(submenu, 1, 0, "Rocket Object Direction (With Gravity)", new Action(() => { Tweaker_Object.GetGameObjectToEdit().MakeRocketItemWithG(); }), "Turn Held Object Into a rocket!", null, null);

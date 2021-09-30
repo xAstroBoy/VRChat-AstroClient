@@ -33,7 +33,7 @@
 
         private static bool _TweakerESPEnabled;
 
-        internal static  bool TweakerESPEnabled
+        internal static bool TweakerESPEnabled
         {
             get
             {

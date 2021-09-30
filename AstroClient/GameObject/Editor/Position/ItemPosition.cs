@@ -7,7 +7,7 @@
 
     internal class ItemPosition
     {
-        internal static  void TeleportObject(GameObject obj)
+        internal static void TeleportObject(GameObject obj)
         {
             if (obj != null && Utils.LocalPlayer != null)
             {
@@ -22,7 +22,7 @@
             }
         }
 
-        internal static  void TeleportObject(GameObject obj, HumanBodyBones SelfBones)
+        internal static void TeleportObject(GameObject obj, HumanBodyBones SelfBones)
         {
             if (obj != null && Utils.LocalPlayer != null)
             {
@@ -37,7 +37,7 @@
             }
         }
 
-        internal static  void TeleportObject(GameObject obj, Vector3 NewPos, bool SkipKillScripts = false)
+        internal static void TeleportObject(GameObject obj, Vector3 NewPos, bool SkipKillScripts = false)
         {
             if (obj != null && Utils.LocalPlayer != null)
             {
@@ -50,7 +50,7 @@
             }
         }
 
-        internal static  void TeleportObject(GameObject obj, Player player, HumanBodyBones targetbone, bool SkipKillScripts = false)
+        internal static void TeleportObject(GameObject obj, Player player, HumanBodyBones targetbone, bool SkipKillScripts = false)
         {
             if (obj != null && player != null)
             {

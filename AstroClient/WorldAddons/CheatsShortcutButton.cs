@@ -13,7 +13,7 @@
     {
         private static QMSingleButton WorldCheatsShortcut;
 
-        internal static  void Init_Cheats_ShortcutBtn(float x, float y, bool btnHalf)
+        internal static void Init_Cheats_ShortcutBtn(float x, float y, bool btnHalf)
         {
             WorldCheatsShortcut = new QMSingleButton("ShortcutMenu", x, y, "Cheats Shortcut", null, "Cheats Shortcut", null, null, btnHalf);
             ToggleButtonVisibilityAndInteractivity(false);
@@ -159,7 +159,7 @@
             }
         }
 
-        internal static  void SetButtonText(string ButtonText)
+        internal static void SetButtonText(string ButtonText)
         {
             if (WorldCheatsShortcut != null)
             {
@@ -168,7 +168,7 @@
             }
         }
 
-        internal static  void SetButtonText(string ButtonText, string ButtonToolTip)
+        internal static void SetButtonText(string ButtonText, string ButtonToolTip)
         {
             if (WorldCheatsShortcut != null)
             {
@@ -177,7 +177,7 @@
             }
         }
 
-        internal static  void SetButtonColor(Color color)
+        internal static void SetButtonColor(Color color)
         {
             if (WorldCheatsShortcut != null)
             {
@@ -185,7 +185,7 @@
             }
         }
 
-        internal static  void SetButtonShortcut(QMNestedButton btn)
+        internal static void SetButtonShortcut(QMNestedButton btn)
         {
             if (WorldCheatsShortcut != null)
             {
@@ -193,7 +193,7 @@
             }
         }
 
-        internal static  void SetButtonShortcut(QMSingleButton btn)
+        internal static void SetButtonShortcut(QMSingleButton btn)
         {
             if (WorldCheatsShortcut != null)
             {
@@ -201,7 +201,7 @@
             }
         }
 
-        internal static  void ClearButtonAction()
+        internal static void ClearButtonAction()
         {
             if (WorldCheatsShortcut != null)
             {
@@ -209,7 +209,7 @@
             }
         }
 
-        internal static  void ToggleButtonVisibilityAndInteractivity(bool isActive)
+        internal static void ToggleButtonVisibilityAndInteractivity(bool isActive)
         {
             if (WorldCheatsShortcut != null)
             {

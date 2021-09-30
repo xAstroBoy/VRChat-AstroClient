@@ -10,7 +10,7 @@
 
     internal class ColliderEditor : Tweaker_Events
     {
-        internal static  void Init_ColliderEditor(QMNestedButton main, float x, float y, bool btnhalf)
+        internal static void Init_ColliderEditor(QMNestedButton main, float x, float y, bool btnhalf)
         {
             var menu = new QMNestedButton(main, x, y, "Collider Editor", "Edit Collider Properties", null, null, null, null, btnhalf);
 
@@ -76,8 +76,8 @@
             }
         }
 
-        internal static  QMSingleButton TeleportToMe;
-        internal static  QMSingleButton TeleportToTarget;
+        internal static QMSingleButton TeleportToMe;
+        internal static QMSingleButton TeleportToTarget;
 
         private static QMSingleButton Pickup_IsHeldStatus { get; set; }
         private static QMSingleButton Pickup_CurrentObjectHolder { get; set; }

@@ -48,7 +48,7 @@
             _ = Resources.UnloadUnusedAssets();
         }
 
-        internal static  void ToggleDisplays()
+        internal static void ToggleDisplays()
         {
             AutoUpdateColliderList = !AutoUpdateColliderList;
             if (!AutoUpdateColliderList)
@@ -78,7 +78,7 @@
             }
         }
 
-        internal static  void ToggleDisplays(bool value)
+        internal static void ToggleDisplays(bool value)
         {
             AutoUpdateColliderList = value;
             if (!value)
@@ -93,7 +93,7 @@
 
         private static bool AutoUpdateColliderList = false;
 
-        internal static  void UpdateColliders(bool isOnUpdate = true)
+        internal static void UpdateColliders(bool isOnUpdate = true)
         {
             if (!AutoUpdateColliderList)
             {
@@ -196,7 +196,7 @@
             }
         }
 
-        internal static  void DisableAll()
+        internal static void DisableAll()
         {
             int count = SphereColliders.Count;
             int count2 = BoxColliders.Count;
@@ -210,7 +210,7 @@
             ModConsole.DebugLog(string.Format("No longer showing {0} sphere colliders, {1} box colliders, and {2} capsule colliders", count, count2, count3));
         }
 
-        internal static  readonly HashSet<int> MyRenderers = new HashSet<int>();
+        internal static readonly HashSet<int> MyRenderers = new HashSet<int>();
 
         private static readonly List<Sphere> SphereCache = new List<Sphere>();
 
@@ -419,8 +419,8 @@
             private readonly Renderer _middleRenderer;
         }
 
-        internal static  QMToggleButton ToggleColliderDisplayBtn;
-        internal static  QMToggleButton ToggleColliderInvisibleXRayBtn;
-        internal static  QMToggleButton ToggleColliderXRayBtn;
+        internal static QMToggleButton ToggleColliderDisplayBtn;
+        internal static QMToggleButton ToggleColliderInvisibleXRayBtn;
+        internal static QMToggleButton ToggleColliderXRayBtn;
     }
 }

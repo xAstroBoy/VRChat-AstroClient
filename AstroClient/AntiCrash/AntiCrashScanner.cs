@@ -6,11 +6,11 @@
     using VRC;
     using VRC.SDKBase;
 
-    internal static  class AntiCrashScanner
+    internal static class AntiCrashScanner
     {
-        internal static  Material DefaultMaterial = new Material(Shader.Find("Standard"));
+        internal static Material DefaultMaterial = new Material(Shader.Find("Standard"));
 
-        internal static  void ScanAvatar(GameObject avatar, VRC_AvatarDescriptor descriptorObj)
+        internal static void ScanAvatar(GameObject avatar, VRC_AvatarDescriptor descriptorObj)
         {
             if (descriptorObj != null)
             {

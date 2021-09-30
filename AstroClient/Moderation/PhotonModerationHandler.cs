@@ -19,16 +19,16 @@
 
     internal class PhotonModerationHandler : GameEvents
     {
-        internal static  event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerBlockedYou;
+        internal static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerBlockedYou;
 
-        internal static  event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnblockedYou;
+        internal static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnblockedYou;
 
-        internal static  event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerMutedYou;
+        internal static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerMutedYou;
 
-        internal static  event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnmutedYou;
+        internal static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnmutedYou;
 
 
-        internal static  void Handle_Photon_ModerationEvent_NeedToBlock(object RawData, byte code, Player PhotonSender, int PhotonID)
+        internal static void Handle_Photon_ModerationEvent_NeedToBlock(object RawData, byte code, Player PhotonSender, int PhotonID)
         {
             try
             {
@@ -219,9 +219,9 @@
         }
 
 
-        internal static  List<Player> BlockedYouPlayers { get; private set; } = new List<Player>();
+        internal static List<Player> BlockedYouPlayers { get; private set; } = new List<Player>();
 
-        internal static  List<Player> MutedYouPlayers { get; private set; } = new List<Player>();
+        internal static List<Player> MutedYouPlayers { get; private set; } = new List<Player>();
 
         #endregion PlayerModerations
 

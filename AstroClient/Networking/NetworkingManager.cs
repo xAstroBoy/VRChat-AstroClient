@@ -16,12 +16,12 @@
         /// <summary>
         /// Gets whether the NetworkingManager has initialized and contains the player's information.
         /// </summary>
-        internal static  bool Initialized { get; private set; }
+        internal static bool Initialized { get; private set; }
 
         /// <summary>
         /// Returns true when everything is received from the server, IE (auth, account, exploit) data.
         /// </summary>
-        internal static  bool IsReady
+        internal static bool IsReady
         {
             get
             {
@@ -39,13 +39,13 @@
         private static bool isReady;
         private static bool initialized;
 
-        internal static  string Name = string.Empty;
+        internal static string Name = string.Empty;
 
-        internal static  string UserID = string.Empty;
+        internal static string UserID = string.Empty;
 
-        internal static  bool HasUdon;
+        internal static bool HasUdon;
 
-        internal static  void AvatarSearch(SearchTypes searchType, string query)
+        internal static void AvatarSearch(SearchTypes searchType, string query)
         {
             if (Initialized)
             {
@@ -62,7 +62,7 @@
             }
         }
 
-        internal static  void SendClientInfo()
+        internal static void SendClientInfo()
         {
             if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
             {
@@ -78,7 +78,7 @@
             }
         }
 
-        internal static  void SendInstanceInfo()
+        internal static void SendInstanceInfo()
         {
             if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
             {

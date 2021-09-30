@@ -8,7 +8,7 @@ namespace AstroClient
     {
         private static GameObject ENDER;
 
-        internal static  void SpawnEnderPearl()
+        internal static void SpawnEnderPearl()
         {
             if (ENDER != null)
             {

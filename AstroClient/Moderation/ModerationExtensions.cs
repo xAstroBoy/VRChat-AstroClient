@@ -5,9 +5,9 @@ using VRC.Core;
 
 namespace AstroClient.Moderation
 {
-    internal static  class ModerationExtensions
+    internal static class ModerationExtensions
     {
-        internal static  bool HasBlockedYou(this APIUser user)
+        internal static bool HasBlockedYou(this APIUser user)
         {
             if (PhotonModerationHandler.BlockedYouPlayers.Count != 0)
             {
@@ -25,7 +25,7 @@ namespace AstroClient.Moderation
             return false;
         }
 
-        internal static  bool HasMutedYou(this APIUser user)
+        internal static bool HasMutedYou(this APIUser user)
         {
             if (PhotonModerationHandler.MutedYouPlayers.Count != 0)
             {

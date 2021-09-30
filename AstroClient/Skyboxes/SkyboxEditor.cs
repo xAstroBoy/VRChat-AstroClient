@@ -13,7 +13,7 @@
 
     internal class SkyboxEditor : GameEvents
     {
-        internal static  string SkyboxesPath
+        internal static string SkyboxesPath
         {
             get
             {
@@ -49,8 +49,8 @@
             }
         }
 
-        internal static  List<AssetBundleSkyboxes> LoadedSkyboxesBundles = new List<AssetBundleSkyboxes>();
-        internal static  List<MaterialSkyboxes> LoadedSkyboxesMaterials = new List<MaterialSkyboxes>();
+        internal static List<AssetBundleSkyboxes> LoadedSkyboxesBundles = new List<AssetBundleSkyboxes>();
+        internal static List<MaterialSkyboxes> LoadedSkyboxesMaterials = new List<MaterialSkyboxes>();
 
         private static bool HasLoadedCachedSkyboxes = false;
 
@@ -72,17 +72,17 @@
             OriginalSkybox = null;
         }
 
-        internal static  bool IsBundleAlreadyRegistered(string filename)
+        internal static bool IsBundleAlreadyRegistered(string filename)
         {
             return LoadedSkyboxesBundles.Where(x => x.SkyboxName == filename).Any(); ;
         }
 
-        internal static  bool IsMaterialAlreadyRegistered(string filename)
+        internal static bool IsMaterialAlreadyRegistered(string filename)
         {
             return LoadedSkyboxesMaterials.Where(x => x.SkyboxName == filename).Any(); ;
         }
 
-        //internal static  void SaveCurrentSkybox()
+        //internal static void SaveCurrentSkybox()
         //{
         //    if(OriginalSkybox != null)
         //    {
@@ -90,7 +90,7 @@
         //    }
         //}
 
-        internal static  IEnumerator FindAndLoadBundle()
+        internal static IEnumerator FindAndLoadBundle()
         {
             if (Directory.Exists(SkyboxesPath))
             {
@@ -184,7 +184,7 @@
             RenderSettings.skybox = mat;
         }
 
-        internal static  void CustomSkyboxesMenu(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void CustomSkyboxesMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
             var menu = new QMNestedButton(main, x, y, "Skyboxes", "Change Map Skybox with a custom one", null, null, null, null, btnHalf);
             var scroll = new QMHalfScroll(menu);

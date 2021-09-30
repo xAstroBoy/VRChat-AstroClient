@@ -6,7 +6,7 @@
 
     internal class Tweaker_Object
     {
-        internal static  GameObject SetObjectToEditWithPath(string objpath)
+        internal static GameObject SetObjectToEditWithPath(string objpath)
         {
             var obj = GameObjectFinder.Find(objpath);
             if (obj != null)
@@ -21,7 +21,7 @@
             }
         }
 
-        internal static  void SetObjectToEdit(GameObject obj)
+        internal static void SetObjectToEdit(GameObject obj)
         {
             if (LockItem)
             {
@@ -30,7 +30,7 @@
             Tweaker_Selector.SelectedObject = obj;
         }
 
-        internal static  GameObject GetGameObjectToEdit()
+        internal static GameObject GetGameObjectToEdit()
         {
             try
             {
@@ -56,7 +56,7 @@
 
         private static bool _LockItem;
 
-        internal static  bool LockItem
+        internal static bool LockItem
         {
             get
             {
@@ -76,7 +76,7 @@
             }
         }
 
-        internal static  string GetObjectToEditName
+        internal static string GetObjectToEditName
         {
             get
             {

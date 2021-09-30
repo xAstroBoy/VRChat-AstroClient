@@ -16,7 +16,7 @@
 
     internal class AimFactory : GameEvents
     {
-        internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnhalf)
+        internal static void InitButtons(QMTabMenu main, float x, float y, bool btnhalf)
         {
             AimFactoryCheatPage = new QMNestedButton(main, x, y, "Aim Factory", "Aim Factory Cheats", null, null, null, null, true);
             AlwaysPerfectHitToggle = new QMToggleButton(AimFactoryCheatPage, 1, 0, "Always Hit ON", new Action(() => { IsAlwaysPerfectHit = true; }), "Always Hit OFF", new Action(() => { IsAlwaysPerfectHit = false; }), "Unfreezes you automatically", null, null, null);
@@ -31,7 +31,7 @@
             prevtarget = null;
         }
 
-        internal static  QMNestedButton AimFactoryCheatPage;
+        internal static QMNestedButton AimFactoryCheatPage;
         private static QMToggleButton AlwaysPerfectHitToggle;
 
         private static List<GameObject> MapTargets = new List<GameObject>();
@@ -130,7 +130,7 @@
         }
 
         // WORKS but the map doesn't count the objects, there must be something that triggers the point count!
-        internal static  IEnumerator PopTarget()
+        internal static IEnumerator PopTarget()
         {
             //float cooldown = 0.f;
             //DayClientML2.Utility.MiscUtility.DelayFunction(cooldown, new Action(() =>

@@ -9,39 +9,39 @@
     using System.Linq;
     using UnityEngine;
 
-    internal static  class Custom_Components_ext
+    internal static class Custom_Components_ext
     {
-        internal static  void MakeRocketItemWithG(this GameObject obj)
+        internal static void MakeRocketItemWithG(this GameObject obj)
         {
             RocketManager.AddObject(obj, false);
         }
 
-        internal static  void MakeRocketItemWithoutG(this GameObject obj)
+        internal static void MakeRocketItemWithoutG(this GameObject obj)
         {
             RocketManager.AddObject(obj, true);
         }
 
-        internal static  void MakeRocketItemWithGAndGoUp(this GameObject obj)
+        internal static void MakeRocketItemWithGAndGoUp(this GameObject obj)
         {
             RocketManager.AddObject(obj, false, false);
         }
 
-        internal static  void MakeRocketItemWithoutGAndGoUp(this GameObject obj)
+        internal static void MakeRocketItemWithoutGAndGoUp(this GameObject obj)
         {
             RocketManager.AddObject(obj, true, false);
         }
 
-        internal static  void GoNutsWithGravity(this GameObject obj)
+        internal static void GoNutsWithGravity(this GameObject obj)
         {
             CrazyObjectManager.AddObject(obj, false);
         }
 
-        internal static  void GoNutsWithoutGravity(this GameObject obj)
+        internal static void GoNutsWithoutGravity(this GameObject obj)
         {
             CrazyObjectManager.AddObject(obj, true);
         }
 
-        internal static  void Add_SpinForceX(this GameObject obj)
+        internal static void Add_SpinForceX(this GameObject obj)
         {
             try
             {
@@ -75,7 +75,7 @@
             catch (Exception) { }
         }
 
-        internal static  void SubtractSpinForceX(this GameObject obj)
+        internal static void SubtractSpinForceX(this GameObject obj)
         {
             try
             {
@@ -102,7 +102,7 @@
             catch (Exception) { }
         }
 
-        internal static  void Add_SpinForceY(this GameObject obj)
+        internal static void Add_SpinForceY(this GameObject obj)
         {
             try
             {
@@ -130,7 +130,7 @@
             catch (Exception) { }
         }
 
-        internal static  void SubtractSpinForceY(this GameObject obj)
+        internal static void SubtractSpinForceY(this GameObject obj)
         {
             try
             {
@@ -157,7 +157,7 @@
             catch (Exception) { }
         }
 
-        internal static  void Add_SpinForceZ(this GameObject obj)
+        internal static void Add_SpinForceZ(this GameObject obj)
         {
             try
             {
@@ -184,7 +184,7 @@
             catch (Exception) { }
         }
 
-        internal static  void SubtractSpinForceZ(this GameObject obj)
+        internal static void SubtractSpinForceZ(this GameObject obj)
         {
             try
             {
@@ -211,42 +211,42 @@
             catch (Exception) { }
         }
 
-        internal static  void Remove_Spinner(this GameObject obj)
+        internal static void Remove_Spinner(this GameObject obj)
         {
             ObjectSpinnerManager.RemoveObject(obj);
         }
 
-        internal static  void IncSpinnerSpeed(this GameObject obj)
+        internal static void IncSpinnerSpeed(this GameObject obj)
         {
             ObjectSpinnerManager.IncreaseObjTimer(obj);
         }
 
-        internal static  void DecSpinnerSpeed(this GameObject obj)
+        internal static void DecSpinnerSpeed(this GameObject obj)
         {
             ObjectSpinnerManager.DecreaseObjTimer(obj);
         }
 
-        internal static  void IncCrazySpeed(this GameObject obj)
+        internal static void IncCrazySpeed(this GameObject obj)
         {
             CrazyObjectManager.IncreaseObjTimer(obj);
         }
 
-        internal static  void DecCrazySpeed(this GameObject obj)
+        internal static void DecCrazySpeed(this GameObject obj)
         {
             CrazyObjectManager.DecreaseObjTimer(obj);
         }
 
-        internal static  void IncRocketSpeed(this GameObject obj)
+        internal static void IncRocketSpeed(this GameObject obj)
         {
             RocketManager.IncreaseObjTimer(obj);
         }
 
-        internal static  void DecRocketSpeed(this GameObject obj)
+        internal static void DecRocketSpeed(this GameObject obj)
         {
             RocketManager.DecreaseObjTimer(obj);
         }
 
-        internal static  void Add_Rocket_Component(this List<GameObject> list, bool ShouldFloat, bool HasRelativeForce = true)
+        internal static void Add_Rocket_Component(this List<GameObject> list, bool ShouldFloat, bool HasRelativeForce = true)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
@@ -254,7 +254,7 @@
             }
         }
 
-        internal static  void Add_Crazy_Component(this List<GameObject> list, bool ShouldFloat)
+        internal static void Add_Crazy_Component(this List<GameObject> list, bool ShouldFloat)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
@@ -262,7 +262,7 @@
             }
         }
 
-        internal static  void Add_Rocket_Component(this GameObject obj, bool ShouldFloat, bool HasRelativeForce = true)
+        internal static void Add_Rocket_Component(this GameObject obj, bool ShouldFloat, bool HasRelativeForce = true)
         {
             if (obj != null)
             {
@@ -270,7 +270,7 @@
             }
         }
 
-        internal static  void Add_Crazy_Component(this GameObject obj, bool ShouldFloat)
+        internal static void Add_Crazy_Component(this GameObject obj, bool ShouldFloat)
         {
             if (obj != null)
             {
@@ -278,7 +278,7 @@
             }
         }
 
-        internal static  void AttackSelf(this GameObject obj)
+        internal static void AttackSelf(this GameObject obj)
         {
             if (obj != null)
             {
@@ -290,7 +290,7 @@
             }
         }
 
-        internal static  void AttackTarget(this GameObject obj)
+        internal static void AttackTarget(this GameObject obj)
         {
             if (obj != null)
             {
@@ -298,7 +298,7 @@
             }
         }
 
-        internal static  void WatchSelfPlayer(this GameObject obj)
+        internal static void WatchSelfPlayer(this GameObject obj)
         {
             if (obj != null)
             {
@@ -310,7 +310,7 @@
             }
         }
 
-        internal static  void WatchTarget(this GameObject obj)
+        internal static void WatchTarget(this GameObject obj)
         {
             if (obj != null)
             {
@@ -318,7 +318,7 @@
             }
         }
 
-        internal static  void OrbitSelf(this GameObject obj)
+        internal static void OrbitSelf(this GameObject obj)
         {
             if (obj != null)
             {
@@ -330,7 +330,7 @@
             }
         }
 
-        internal static  void OrbitTarget(this GameObject obj)
+        internal static void OrbitTarget(this GameObject obj)
         {
             if (obj != null)
             {
@@ -338,7 +338,7 @@
             }
         }
 
-        internal static  void AttackSelf(this List<GameObject> list)
+        internal static void AttackSelf(this List<GameObject> list)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
@@ -350,7 +350,7 @@
             }
         }
 
-        internal static  void AttackTarget(this List<GameObject> list)
+        internal static void AttackTarget(this List<GameObject> list)
         {
             foreach (var item in list.Where(item => item != null))
             {
@@ -358,7 +358,7 @@
             }
         }
 
-        internal static  void WatchTarget(this List<GameObject> list)
+        internal static void WatchTarget(this List<GameObject> list)
         {
             foreach (var item in list.Where(item => item != null))
             {
@@ -366,7 +366,7 @@
             }
         }
 
-        internal static  void WatchSelf(this List<GameObject> list)
+        internal static void WatchSelf(this List<GameObject> list)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
@@ -378,7 +378,7 @@
             }
         }
 
-        internal static  void OrbitSelf(this List<GameObject> list)
+        internal static void OrbitSelf(this List<GameObject> list)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
@@ -390,7 +390,7 @@
             }
         }
 
-        internal static  void OrbitTarget(this List<GameObject> list)
+        internal static void OrbitTarget(this List<GameObject> list)
         {
             foreach (var obj in list.Where(obj => obj != null).Where(obj => obj != null))
             {
@@ -398,7 +398,7 @@
             }
         }
 
-        internal static  void Remove_RocketObject_Component(this List<GameObject> list)
+        internal static void Remove_RocketObject_Component(this List<GameObject> list)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
@@ -410,7 +410,7 @@
             }
         }
 
-        internal static  void Remove_RocketObject_Component(this GameObject obj)
+        internal static void Remove_RocketObject_Component(this GameObject obj)
         {
             if (obj != null)
             {
@@ -422,7 +422,7 @@
             }
         }
 
-        internal static  void Remove_CrazyObject_Component(this List<GameObject> list)
+        internal static void Remove_CrazyObject_Component(this List<GameObject> list)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
@@ -434,7 +434,7 @@
             }
         }
 
-        internal static  void Remove_CrazyObject_Component(this GameObject obj)
+        internal static void Remove_CrazyObject_Component(this GameObject obj)
         {
             if (obj != null)
             {
@@ -446,7 +446,7 @@
             }
         }
 
-        internal static  void Remove_ObjectSpinner_Component(this List<GameObject> list)
+        internal static void Remove_ObjectSpinner_Component(this List<GameObject> list)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
@@ -458,7 +458,7 @@
             }
         }
 
-        internal static  void Remove_ObjectSpinner_Component(this GameObject obj)
+        internal static void Remove_ObjectSpinner_Component(this GameObject obj)
         {
             if (obj != null)
             {
@@ -470,7 +470,7 @@
             }
         }
 
-        internal static  void Remove_PlayerWatcher_Component(this List<GameObject> list)
+        internal static void Remove_PlayerWatcher_Component(this List<GameObject> list)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
@@ -482,7 +482,7 @@
             }
         }
 
-        internal static  void Remove_PlayerWatcher_Component(this GameObject obj)
+        internal static void Remove_PlayerWatcher_Component(this GameObject obj)
         {
             if (obj != null)
             {
@@ -494,7 +494,7 @@
             }
         }
 
-        internal static  void Remove_PlayerAttacker_Component(this List<GameObject> list)
+        internal static void Remove_PlayerAttacker_Component(this List<GameObject> list)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
@@ -506,7 +506,7 @@
             }
         }
 
-        internal static  void Remove_PlayerAttacker_Component(this GameObject obj)
+        internal static void Remove_PlayerAttacker_Component(this GameObject obj)
         {
             if (obj != null)
             {
@@ -518,7 +518,7 @@
             }
         }
 
-        internal static  void Remove_Orbit_Component(this List<GameObject> list)
+        internal static void Remove_Orbit_Component(this List<GameObject> list)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
@@ -530,7 +530,7 @@
             }
         }
 
-        internal static  void Remove_Orbit_Component(this GameObject obj)
+        internal static void Remove_Orbit_Component(this GameObject obj)
         {
             if (obj != null)
             {
@@ -542,7 +542,7 @@
             }
         }
 
-        internal static  void KillCustomComponents(this List<GameObject> list, bool ResetRigidBody)
+        internal static void KillCustomComponents(this List<GameObject> list, bool ResetRigidBody)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
@@ -551,7 +551,7 @@
         }
 
         // KILL ( ROCKET | CRAZY | SPINNER | Attacker | Watcher | Orbit | Bouncer) COMPONENT IF PRESENT
-        internal static  void KillCustomComponents(this GameObject obj, bool ResetRigidBody = false, bool ResetPickupProperties = false)
+        internal static void KillCustomComponents(this GameObject obj, bool ResetRigidBody = false, bool ResetPickupProperties = false)
         {
             if (obj != null)
             {

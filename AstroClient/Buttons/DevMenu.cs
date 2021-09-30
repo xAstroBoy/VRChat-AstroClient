@@ -16,17 +16,17 @@
     {
         #region UIElements
 
-        internal static  QMTabMenu SubMenu { get; private set; }
+        internal static QMTabMenu SubMenu { get; private set; }
 
-        internal static  QMScrollMenu MainScroller { get; private set; }
+        internal static QMScrollMenu MainScroller { get; private set; }
 
-        internal static  QMSingleButton DisconectButton { get; private set; }
+        internal static QMSingleButton DisconectButton { get; private set; }
 
-        internal static  QMSingleButton ReconnectButton { get; private set; }
+        internal static QMSingleButton ReconnectButton { get; private set; }
 
         #endregion UIElements
 
-        internal static  void InitButtons(float pos)
+        internal static void InitButtons(float pos)
         {
             if (Bools.IsDeveloper)
             {

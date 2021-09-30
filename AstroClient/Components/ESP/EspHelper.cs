@@ -16,7 +16,7 @@
 
         private static GameObject _HighlightFXCamera;
 
-        internal static  GameObject HighLightFXCamera
+        internal static GameObject HighLightFXCamera
         {
             get
             {
@@ -36,6 +36,6 @@
             }
         }
 
-        internal static  List<HighlightsFXStandalone> SpawnedESPsHolders = new List<HighlightsFXStandalone>();
+        internal static List<HighlightsFXStandalone> SpawnedESPsHolders = new List<HighlightsFXStandalone>();
     }
 }

@@ -45,7 +45,7 @@
 //                Patches.Add(this);
 //            }
 
-//            internal static  async void DoPatches()
+//            internal static async void DoPatches()
 //            {
 //                foreach (var patch in Patches)
 //                {
@@ -63,7 +63,7 @@
 //                ModConsole.DebugLog($"[Patches] Done! Patched {Patches.Count} Methods!");
 //            }
 
-//            internal static  async void UnDoPatches()
+//            internal static async void UnDoPatches()
 //            {
 //                foreach (var patch in Patches)
 //                {

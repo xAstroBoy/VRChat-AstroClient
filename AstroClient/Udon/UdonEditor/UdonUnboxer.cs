@@ -9,10 +9,10 @@
     using System.Text;
     using VRC.Udon;
 
-    internal static  class UdonUnboxer
+    internal static class UdonUnboxer
     {
 
-        internal static  void UnboxUdonToConsole(UdonBehaviour udonnode)
+        internal static void UnboxUdonToConsole(UdonBehaviour udonnode)
         {
             if (udonnode != null)
             {
@@ -40,7 +40,7 @@
         }
 
 
-        internal static  void DumpUdonUnsupportedTypes()
+        internal static void DumpUdonUnsupportedTypes()
         {
             if (UdonHeapUnboxerUtils.UnsupportedTypes.Count() != 0)
             {
@@ -58,7 +58,7 @@
 
 
 
-        internal static  string UnboxUdonToString(UdonBehaviour udonnode)
+        internal static string UnboxUdonToString(UdonBehaviour udonnode)
         {
             if (udonnode != null)
             {

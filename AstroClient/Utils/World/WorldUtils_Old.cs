@@ -22,7 +22,7 @@
 
     internal class WorldUtils_Old : GameEvents
     {
-        internal static  List<GameObject> Get_Prefabs()
+        internal static List<GameObject> Get_Prefabs()
         {
             try
             {
@@ -49,7 +49,7 @@
             return new List<GameObject>();
         }
 
-        internal static  Player Get_Player_By_ID(string id)
+        internal static Player Get_Player_By_ID(string id)
         {
             var zero = PlayerManager.Method_Public_Static_Player_String_0(id);
             if (zero != null)
@@ -67,7 +67,7 @@
             ModConsole.Log("This instance has " + WorldUtils.Players.Count() + " Players.", Color.Gold);
         }
 
-        internal static  List<GameObject> Get_Pickups()
+        internal static List<GameObject> Get_Pickups()
         {
             try
             {
@@ -120,7 +120,7 @@
             return new List<GameObject>();
         }
 
-        internal static  List<GameObject> Get_VRCInteractables()
+        internal static List<GameObject> Get_VRCInteractables()
         {
             try
             {
@@ -155,7 +155,7 @@
             return new List<GameObject>();
         }
 
-        internal static  List<GameObject> Get_Triggers()
+        internal static List<GameObject> Get_Triggers()
         {
             try
             {
@@ -182,7 +182,7 @@
             return new List<GameObject>();
         }
 
-        internal static  List<AudioSource> Get_AudioSources()
+        internal static List<AudioSource> Get_AudioSources()
         {
             try
             {
@@ -197,7 +197,7 @@
             return new List<AudioSource>();
         }
 
-        internal static  List<string> Get_World_Pedestrals_Avatar_ids()
+        internal static List<string> Get_World_Pedestrals_Avatar_ids()
         {
             List<string> ids = new List<string>();
             var SDK_VRC_AvatarPedestrals = Get_SDKBase_VRC_AvatarPedestal();
@@ -264,7 +264,7 @@
             return ids.Distinct().ToList();
         }
 
-        internal static  List<ApiAvatar> GetAvatarsFromPedestals()
+        internal static List<ApiAvatar> GetAvatarsFromPedestals()
         {
             List<ApiAvatar> avatars = new List<ApiAvatar>();
 
@@ -353,7 +353,7 @@
             return avatars;
         }
 
-        internal static  List<VRCAvatarPedestal> Get_VRCAvatarPedestal()
+        internal static List<VRCAvatarPedestal> Get_VRCAvatarPedestal()
         {
             try
             {
@@ -376,7 +376,7 @@
             return new List<VRCAvatarPedestal>();
         }
 
-        internal static  List<SimpleAvatarPedestal> Get_SimpleAvatarPedestal()
+        internal static List<SimpleAvatarPedestal> Get_SimpleAvatarPedestal()
         {
             try
             {
@@ -403,7 +403,7 @@
             return new List<SimpleAvatarPedestal>();
         }
 
-        internal static  List<AvatarPedestal> Get_AvatarPedestal()
+        internal static List<AvatarPedestal> Get_AvatarPedestal()
         {
             try
             {
@@ -428,7 +428,7 @@
             return new List<AvatarPedestal>();
         }
 
-        internal static  List<VRC.SDKBase.VRC_AvatarPedestal> Get_SDKBase_VRC_AvatarPedestal()
+        internal static List<VRC.SDKBase.VRC_AvatarPedestal> Get_SDKBase_VRC_AvatarPedestal()
         {
             try
             {
@@ -451,7 +451,7 @@
             return new List<VRC.SDKBase.VRC_AvatarPedestal>();
         }
 
-        internal static  List<VRCSDK2.VRC_AvatarPedestal> Get_VRC_AvatarPedestal()
+        internal static List<VRCSDK2.VRC_AvatarPedestal> Get_VRC_AvatarPedestal()
         {
             try
             {
@@ -474,7 +474,7 @@
             return new List<VRCSDK2.VRC_AvatarPedestal>();
         }
 
-        internal static  List<UdonBehaviour> Get_UdonBehaviours()
+        internal static List<UdonBehaviour> Get_UdonBehaviours()
         {
             var UdonBehaviourObjects = new List<UdonBehaviour>();
             var list = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
@@ -496,7 +496,7 @@
             return UdonBehaviourObjects;
         }
 
-        internal static  string Get_World_Name()
+        internal static string Get_World_Name()
         {
             var instance = RoomManager.field_Internal_Static_ApiWorld_0;
             if (instance != null)
@@ -509,7 +509,7 @@
             return null;
         }
 
-        internal static  string Get_World_ID()
+        internal static string Get_World_ID()
         {
             var instance = RoomManager.field_Internal_Static_ApiWorld_0;
             if (instance != null)
@@ -522,30 +522,30 @@
             return null;
         }
 
-        internal static  VRCSDK2.VRC_SceneDescriptor GetSDK2Descriptor()
+        internal static VRCSDK2.VRC_SceneDescriptor GetSDK2Descriptor()
         {
             return UnityEngine.Object.FindObjectOfType<VRCSDK2.VRC_SceneDescriptor>();
         }
 
-        internal static  VRCSceneDescriptor GetSDK3Descriptor()
+        internal static VRCSceneDescriptor GetSDK3Descriptor()
         {
             return UnityEngine.Object.FindObjectOfType<VRCSceneDescriptor>();
         }
 
-        internal static  bool IsInWorld()
+        internal static bool IsInWorld()
         {
             if (RoomManager.field_Internal_Static_ApiWorld_0 != null && RoomManager.field_Internal_Static_ApiWorldInstance_0 != null) return true;
             else return false;
         }
 
-        internal static  bool IsDefaultScene(string name)
+        internal static bool IsDefaultScene(string name)
         {
             var lower = name.ToLower();
             string[] scenes = { "application2", "ui", "empty", "dontdestroyonload", "hideanddontsave", "samplescene" };
             return scenes.Contains(lower);
         }
 
-        internal static  string GetSDKType()
+        internal static string GetSDKType()
         {
             if (GetSDK2Descriptor() != null)
                 return "SDK2";

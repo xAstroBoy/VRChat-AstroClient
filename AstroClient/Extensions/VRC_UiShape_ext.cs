@@ -7,7 +7,7 @@
 
     #endregion Imports
 
-    internal static  class VRC_UiShape_ext
+    internal static class VRC_UiShape_ext
     {
         internal static void AddUiShapeWithTriggerCollider(this GameObject obj)
         {

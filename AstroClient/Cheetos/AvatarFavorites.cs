@@ -66,7 +66,7 @@
             }
         }
 
-        internal static  void RefreshList()
+        internal static void RefreshList()
         {
             favoriteAvatars.Clear();
             for (int i = 0; i < AstroClient.ConfigManager.Favorites.Avatars.Count; i++)
@@ -84,7 +84,7 @@
             list.Text.text = $"<color=cyan>Astro Favorites</color> <color=yellow>{favoriteAvatars.Count}</color>";
         }
 
-        internal static  void OnSelect()
+        internal static void OnSelect()
         {
             // Add a check here later
             var selected = inputModule.field_Public_Selectable_0;
@@ -102,7 +102,7 @@
             }
         }
 
-        internal static  void AddToFavorites(string avatarID)
+        internal static void AddToFavorites(string avatarID)
         {
             if (!AstroClient.ConfigManager.Favorites.Avatars.FindAll(a => a.AvatarID == avatarID).Any())
             {
@@ -120,7 +120,7 @@
             }
         }
 
-        internal static  void DeleteFromFavorites(string avatarID)
+        internal static void DeleteFromFavorites(string avatarID)
         {
             if (AstroClient.ConfigManager.Favorites.Avatars.Remove(AstroClient.ConfigManager.Favorites.Avatars.Where(a => a.AvatarID == avatarID).FirstOrDefault()))
             {

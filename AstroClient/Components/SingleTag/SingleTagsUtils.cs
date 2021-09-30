@@ -29,14 +29,14 @@
             }
         }
 
-        internal static  PlayerTagCounter GetEntry(Player player)
+        internal static PlayerTagCounter GetEntry(Player player)
         {
             return Counter.Where(x => x.Player == player).DefaultIfEmpty(null).First();
         }
 
         private static readonly bool DebugMode = false;
 
-        internal static  void Debug(string msg)
+        internal static void Debug(string msg)
         {
             if (DebugMode)
             {
@@ -44,7 +44,7 @@
             }
         }
 
-        internal static  SingleTag AddSingleTag(Player player)
+        internal static SingleTag AddSingleTag(Player player)
         {
             SingleTag newtag = null;
             if (player != null)
@@ -85,7 +85,7 @@
             return newtag;
         }
 
-        internal static  List<PlayerTagCounter> GetAssignedTagsToPlayer(Player player)
+        internal static List<PlayerTagCounter> GetAssignedTagsToPlayer(Player player)
         {
             List<PlayerTagCounter> AssignedTags = new List<PlayerTagCounter>();
             if (player != null)
@@ -104,9 +104,9 @@
             return AssignedTags;
         }
 
-        internal static  List<PlayerTagCounter> Counter = new List<PlayerTagCounter>();
+        internal static List<PlayerTagCounter> Counter = new List<PlayerTagCounter>();
 
-        internal static  void RemoveCounter(PlayerTagCounter entry)
+        internal static void RemoveCounter(PlayerTagCounter entry)
         {
             if (entry != null)
             {

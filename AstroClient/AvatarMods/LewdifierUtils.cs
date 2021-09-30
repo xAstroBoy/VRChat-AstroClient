@@ -20,39 +20,39 @@
             SaveAll();
         }
 
-        internal static  QMSingleButton LewdifyLists;
+        internal static QMSingleButton LewdifyLists;
 
-        internal static  List<string> TermsToToggleOn { get; set; } = new List<string>();
-        internal static  List<string> TermsToToggleOff { get; set; } = new List<string>();
-        internal static  List<string> AvatarsToSkip { get; set; } = new List<string>();
+        internal static List<string> TermsToToggleOn { get; set; } = new List<string>();
+        internal static List<string> TermsToToggleOff { get; set; } = new List<string>();
+        internal static List<string> AvatarsToSkip { get; set; } = new List<string>();
 
         private static string TermsToEnableOnPath { get; } = Path.Combine(Environment.CurrentDirectory, @"AstroClient\Lewdify\TermsToEnable.json");
         private static string TermsToEnableOffPath { get; } = Path.Combine(Environment.CurrentDirectory, @"AstroClient\Lewdify\TermsToDisable.json");
         private static string AvatarsToSkipPath { get; } = Path.Combine(Environment.CurrentDirectory, @"AstroClient\Lewdify\IgnoredAvatars.json");
 
-        internal static  void SaveAll()
+        internal static void SaveAll()
         {
             Save_TermsToToggleOn();
             Save_TermsToToggleOff();
             Save_AvatarToSkip();
         }
 
-        internal static  void Save_TermsToToggleOn()
+        internal static void Save_TermsToToggleOn()
         {
             JSonWriter.WriteToJsonFile(TermsToEnableOnPath, TermsToToggleOn);
         }
 
-        internal static  void Save_TermsToToggleOff()
+        internal static void Save_TermsToToggleOff()
         {
             JSonWriter.WriteToJsonFile(TermsToEnableOffPath, TermsToToggleOff);
         }
 
-        internal static  void Save_AvatarToSkip()
+        internal static void Save_AvatarToSkip()
         {
             JSonWriter.WriteToJsonFile(AvatarsToSkipPath, AvatarsToSkip);
         }
 
-        internal static  void RefreshAll()
+        internal static void RefreshAll()
         {
             try
             {
@@ -73,7 +73,7 @@
             }
         }
 
-        internal static  string ListButtonText
+        internal static string ListButtonText
         {
             get
             {
@@ -83,7 +83,7 @@
             }
         }
 
-        internal static  void Refresh_termsToToggleOn()
+        internal static void Refresh_termsToToggleOn()
         {
             if (File.Exists(TermsToEnableOnPath))
             {
@@ -110,7 +110,7 @@
             }
         }
 
-        internal static  void Refresh_termsToToggleOff()
+        internal static void Refresh_termsToToggleOff()
         {
             if (File.Exists(TermsToEnableOffPath))
             {
@@ -136,7 +136,7 @@
             }
         }
 
-        internal static  void Refresh_AvatarsToSkip()
+        internal static void Refresh_AvatarsToSkip()
         {
             if (File.Exists(AvatarsToSkipPath))
             {

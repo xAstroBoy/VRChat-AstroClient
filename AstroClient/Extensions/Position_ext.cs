@@ -4,9 +4,9 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    internal static  class Position_ext
+    internal static class Position_ext
     {
-        internal static  void TeleportToTarget(this List<GameObject> list)
+        internal static void TeleportToTarget(this List<GameObject> list)
         {
             foreach (var obj in list)
             {
@@ -17,7 +17,7 @@
             }
         }
 
-        internal static  void TeleportToMe(this List<GameObject> list)
+        internal static void TeleportToMe(this List<GameObject> list)
         {
             foreach (var obj in list)
             {
@@ -28,7 +28,7 @@
             }
         }
 
-        internal static  void TeleportToTarget(this GameObject obj)
+        internal static void TeleportToTarget(this GameObject obj)
         {
             if (obj != null)
             {
@@ -36,7 +36,7 @@
             }
         }
 
-        internal static  void TeleportToMe(this GameObject obj)
+        internal static void TeleportToMe(this GameObject obj)
         {
             if (obj != null)
             {
@@ -44,7 +44,7 @@
             }
         }
 
-        internal static  void TeleportToMe(this GameObject obj, HumanBodyBones bone)
+        internal static void TeleportToMe(this GameObject obj, HumanBodyBones bone)
         {
             if (obj != null)
             {

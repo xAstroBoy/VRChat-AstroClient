@@ -10,7 +10,7 @@
 
     internal class SpawnerSubmenu : Tweaker_Events
     {
-        internal static  void Init_SpawnerSubmenu(QMTabMenu menu, float x, float y, bool btnHalf)
+        internal static void Init_SpawnerSubmenu(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "Spawner", "Spawner Menu!", null, null, null, null, btnHalf);
             _ = new QMSingleButton(main, 1, 0, "Spawn Clone", () => { Cloner.ObjectCloner.CloneGameObject(Tweaker_Object.GetGameObjectToEdit()); }, "Instantiates a copy of The selected object.", null, null, true);
@@ -30,7 +30,7 @@
             UpdateSpawnedPrefabsBtn();
         }
 
-        internal static  string GetSpawnedPrefabText
+        internal static string GetSpawnedPrefabText
         {
             get
             {
@@ -38,7 +38,7 @@
             }
         }
 
-        internal static  string GetClonesPickupText
+        internal static string GetClonesPickupText
         {
             get
             {
@@ -46,7 +46,7 @@
             }
         }
 
-        internal static  void UpdateSpawnedPickupsBtn()
+        internal static void UpdateSpawnedPickupsBtn()
         {
             if (SpawnedPickupsCounter != null)
             {
@@ -55,7 +55,7 @@
             }
         }
 
-        internal static  void UpdateSpawnedPrefabsBtn()
+        internal static void UpdateSpawnedPrefabsBtn()
         {
             if (SpawnedPrefabsCounter != null)
             {
@@ -64,7 +64,7 @@
             }
         }
 
-        internal static  void RegisterPrefab(GameObject obj)
+        internal static void RegisterPrefab(GameObject obj)
         {
             if (obj != null)
             {
@@ -76,7 +76,7 @@
             }
         }
 
-        internal static  void KillSpawnedPrefabs()
+        internal static void KillSpawnedPrefabs()
         {
             foreach (var prefab in SpawnedPrefabs)
             {
@@ -92,10 +92,10 @@
             UpdateSpawnedPrefabsBtn();
         }
 
-        internal static  List<GameObject> SpawnedPrefabs = new List<GameObject>();
-        internal static  List<GameObject> ClonedObjects = new List<GameObject>();
+        internal static List<GameObject> SpawnedPrefabs = new List<GameObject>();
+        internal static List<GameObject> ClonedObjects = new List<GameObject>();
 
-        internal static  QMSingleButton SpawnedPickupsCounter;
-        internal static  QMSingleButton SpawnedPrefabsCounter;
+        internal static QMSingleButton SpawnedPickupsCounter;
+        internal static QMSingleButton SpawnedPrefabsCounter;
     }
 }

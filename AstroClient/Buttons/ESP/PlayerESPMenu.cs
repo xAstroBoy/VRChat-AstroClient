@@ -11,9 +11,9 @@
 
     internal class PlayerESPMenu : GameEvents
     {
-        internal static  EventHandler<BoolEventsArgs> Event_OnPlayerESPPropertyChanged;
+        internal static EventHandler<BoolEventsArgs> Event_OnPlayerESPPropertyChanged;
 
-        internal static  void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMNestedButton menu, float x, float y, bool btnHalf)
         {
             var main = new QMNestedButton(menu, x, y, "ESP Menu", "ESP Options", null, null, null, null, btnHalf);
 
@@ -51,7 +51,7 @@
         #region playerESP
 
         // TODO: MAKE ESP FRIEND COLOR BE SETTABLE
-        internal static  bool Toggle_Player_ESP
+        internal static bool Toggle_Player_ESP
         {
             get
             {

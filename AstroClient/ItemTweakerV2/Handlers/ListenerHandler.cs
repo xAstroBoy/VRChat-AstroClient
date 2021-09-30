@@ -9,11 +9,11 @@
 
     internal class ListenerHandler : Tweaker_Events
     {
-        internal static  event EventHandler Event_OnSelectedObject_Enabled;
+        internal static event EventHandler Event_OnSelectedObject_Enabled;
 
-        internal static  event EventHandler Event_OnSelectedObject_Disabled;
+        internal static event EventHandler Event_OnSelectedObject_Disabled;
 
-        internal static  event EventHandler Event_OnSelectedObject_Destroyed;
+        internal static event EventHandler Event_OnSelectedObject_Destroyed;
 
         internal override void On_New_GameObject_Selected(GameObject obj)
         {

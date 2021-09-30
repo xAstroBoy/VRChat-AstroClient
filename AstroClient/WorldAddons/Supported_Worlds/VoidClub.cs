@@ -7,9 +7,9 @@
 
     internal class VoidClub : GameEvents
     {
-        internal static  QMNestedButton VoidClubMenu;
+        internal static QMNestedButton VoidClubMenu;
 
-        internal static  void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
+        internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             VoidClubMenu = new QMNestedButton(main, x, y, "VoidClubMenu Exploits", "VoidClubMenu Exploits", null, null, null, null, btnHalf);
 

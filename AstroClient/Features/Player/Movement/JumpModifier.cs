@@ -19,7 +19,7 @@
             HasCheckedJump = false;
         }
 
-        internal static  void OnLevelLoad()
+        internal static void OnLevelLoad()
         {
             IsJumpOverriden = false;
         }
@@ -50,7 +50,7 @@
             }
         }
 
-        internal static  void CheckForJumpUpdates()
+        internal static void CheckForJumpUpdates()
         {
             if (Utils.LocalPlayer != null)
             {
@@ -76,7 +76,7 @@
             }
         }
 
-        internal static  void EmulatedJump()
+        internal static void EmulatedJump()
         {
             if (Networking.LocalPlayer != null)
             {
@@ -88,9 +88,9 @@
 
         private static bool HasCheckedJump = false;
 
-        internal static  QMSingleToggleButton UnlimitedJumpToggle;
+        internal static QMSingleToggleButton UnlimitedJumpToggle;
 
-        internal static  bool IsUnlimitedJumpActive
+        internal static bool IsUnlimitedJumpActive
         {
             get
             {
@@ -106,9 +106,9 @@
             }
         }
 
-        internal static  QMSingleToggleButton RocketJumpToggle;
+        internal static QMSingleToggleButton RocketJumpToggle;
 
-        internal static  bool IsRocketJumpActive
+        internal static bool IsRocketJumpActive
         {
             get
             {
@@ -124,10 +124,10 @@
             }
         }
 
-        internal static  QMToggleButton JumpOverrideToggle;
+        internal static QMToggleButton JumpOverrideToggle;
         private static bool _IsJumpOverriden;
 
-        internal static  bool IsJumpOverriden
+        internal static bool IsJumpOverriden
         {
             get
             {

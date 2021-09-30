@@ -7,9 +7,9 @@
     using VRC.SDK3.Components;
     using VRC.SDKBase;
 
-    internal static  class Click_ext
+    internal static class Click_ext
     {
-        internal static  void VRC_Trigger_UpdateInteractionText(this GameObject obj, string NewText)
+        internal static void VRC_Trigger_UpdateInteractionText(this GameObject obj, string NewText)
         {
             if (obj != null)
             {
@@ -33,7 +33,7 @@
             }
         }
 
-        internal static  void VRC_Interactable_Click(this List<GameObject> list)
+        internal static void VRC_Interactable_Click(this List<GameObject> list)
         {
             foreach (var item in list.Where(item => item != null))
             {
@@ -41,7 +41,7 @@
             }
         }
 
-        internal static  void VRC_Interactable_Click(this GameObject obj)
+        internal static void VRC_Interactable_Click(this GameObject obj)
         {
             bool ObjHasBeenActivated = false;
             bool TriggerHasBeenEnabled = false;
@@ -117,7 +117,7 @@
             }
         }
 
-        internal static  void TriggerClick(this VRC_Trigger obj)
+        internal static void TriggerClick(this VRC_Trigger obj)
         {
             bool ObjHasBeenActivated = false;
             bool TriggerHasBeenEnabled = false;
@@ -176,7 +176,7 @@
             }
         }
 
-        internal static  void TriggerClick(this GameObject obj)
+        internal static void TriggerClick(this GameObject obj)
         {
             bool ObjHasBeenActivated = false;
             bool TriggerHasBeenEnabled = false;

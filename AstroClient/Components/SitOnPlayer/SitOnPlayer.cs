@@ -12,14 +12,14 @@
         private static HumanBodyBones TargetBone;
         private static GameObject Target;
         private static GameObject Self;
-        internal static  bool IsEnabled { get; set; } = false;
-        internal static  float Height { get; set; } = 0f;
+        internal static bool IsEnabled { get; set; } = false;
+        internal static float Height { get; set; } = 0f;
 
         public SitOnPlayer(IntPtr obj0) : base(obj0)
         {
         }
 
-        internal static  void AttachToTarget(Player targetPlayer, HumanBodyBones targetBone)
+        internal static void AttachToTarget(Player targetPlayer, HumanBodyBones targetBone)
         {
             Detach();
             Self.gameObject.GetComponent<CharacterController>().enabled = false;
@@ -28,7 +28,7 @@
             IsEnabled = true;
         }
 
-        internal static  void Detach()
+        internal static void Detach()
         {
             Self.gameObject.GetComponent<CharacterController>().enabled = true;
             TargetBone = HumanBodyBones.Head;

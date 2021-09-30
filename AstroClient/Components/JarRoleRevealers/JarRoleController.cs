@@ -19,15 +19,15 @@
     {
         private static bool _ViewRoles;
 
-        internal static  bool IsMurder4World { get; private set; }
+        internal static bool IsMurder4World { get; private set; }
 
-        internal static  bool IsAmongUsWorld { get; private set; }
+        internal static bool IsAmongUsWorld { get; private set; }
 
-        internal static  EventHandler<BoolEventsArgs> Event_OnViewRolesPropertyChanged;
+        internal static EventHandler<BoolEventsArgs> Event_OnViewRolesPropertyChanged;
 
         // TODO: Make A Action event  to bind on JarRoleESP Component.
 
-        internal static  bool ViewRoles
+        internal static bool ViewRoles
         {
             get
             {
@@ -55,9 +55,9 @@
             }
         }
 
-        internal static  JarRoleESP _CurrentPlayerRoleESP = null;
+        internal static JarRoleESP _CurrentPlayerRoleESP = null;
 
-        internal static  JarRoleESP CurrentPlayerRoleESP
+        internal static JarRoleESP CurrentPlayerRoleESP
         {
             get
             {
@@ -71,16 +71,16 @@
             }
         }
 
-        internal static  QMSingleToggleButton Murder4RolesRevealerToggle;
-        internal static  QMSingleToggleButton AmongUSRolesRevealerToggle;
+        internal static QMSingleToggleButton Murder4RolesRevealerToggle;
+        internal static QMSingleToggleButton AmongUSRolesRevealerToggle;
 
-        internal static  List<LinkedNodes> JarRoleLinks { get; private set; } = new List<LinkedNodes>();
+        internal static List<LinkedNodes> JarRoleLinks { get; private set; } = new List<LinkedNodes>();
 
-        internal static  List<JarRoleESP> RoleEspComponents { get; private set; } = new List<JarRoleESP>();
+        internal static List<JarRoleESP> RoleEspComponents { get; private set; } = new List<JarRoleESP>();
 
-        internal static  LinkedNodes GetLinkedNode(int value) => JarRoleLinks.Where(x => x.Nodevalue == value).DefaultIfEmpty(null).First();
+        internal static LinkedNodes GetLinkedNode(int value) => JarRoleLinks.Where(x => x.Nodevalue == value).DefaultIfEmpty(null).First();
 
-        internal static  JarRoleESP GetLinkedComponent(int value) => RoleEspComponents.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
+        internal static JarRoleESP GetLinkedComponent(int value) => RoleEspComponents.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
@@ -131,7 +131,7 @@
             }
         }
 
-        internal static  string DescPart
+        internal static string DescPart
         {
             get
             {
@@ -148,9 +148,9 @@
             }
         }
 
-        internal static  bool DebugMsg = true;
+        internal static bool DebugMsg = true;
 
-        internal static  void Debug(string msg)
+        internal static void Debug(string msg)
         {
             if (DebugMsg)
             {
@@ -158,7 +158,7 @@
             }
         }
 
-        internal static  int? RemoveNodeText(Transform node)
+        internal static int? RemoveNodeText(Transform node)
         {
             var replacedstring = node.name.Replace("Player Node ", string.Empty).Replace("(", string.Empty).Replace(")", string.Empty).Replace(" ", string.Empty);
             if (!string.IsNullOrEmpty(replacedstring) && !string.IsNullOrWhiteSpace(replacedstring))
@@ -169,7 +169,7 @@
             return null;
         }
 
-        internal static  int? RemoveEntryText(Transform Entry)
+        internal static int? RemoveEntryText(Transform Entry)
         {
             var replacedstring = Entry.name.Replace("Player Entry ", string.Empty).Replace("(", string.Empty).Replace(")", string.Empty).Replace(" ", string.Empty); ;
             if (!string.IsNullOrEmpty(replacedstring) && !string.IsNullOrWhiteSpace(replacedstring))
