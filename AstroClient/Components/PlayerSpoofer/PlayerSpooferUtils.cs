@@ -52,7 +52,6 @@
             set
             {
                 _SpoofASWorldAuthor = value;
-
                 if (SpooferInstance != null)
                 {
                     if (value)

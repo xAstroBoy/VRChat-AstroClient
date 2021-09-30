@@ -89,7 +89,6 @@
         }
             internal void SpoofAsWorldAuthor()
         {
-            ModConsole.Log($"[PlayerSpoofer] : Spoofing As {WorldAuthor}");
             SpoofAs(WorldAuthor);
         }
 
