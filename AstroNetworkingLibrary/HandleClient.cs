@@ -5,7 +5,7 @@
     using System.Net.Sockets;
     using System.Threading.Tasks;
 
-    internal class HandleClient
+    public class HandleClient
     {
         public TcpClient ClientSocket { get; private set; }
 
@@ -30,7 +30,7 @@
 
         private const int PacketSize = 1024;
 
-        internal void StartClient(TcpClient clientSocket, int clientId)
+        public void StartClient(TcpClient clientSocket, int clientId)
         {
             ClientID = clientId;
             ClientSocket = clientSocket;
@@ -40,7 +40,7 @@
             task.Start();
         }
 
-        internal void Disconnect(bool reconnect = false)
+        public void Disconnect(bool reconnect = false)
         {
             IsConnected = false;
             ShouldReconnect = reconnect;
@@ -80,7 +80,7 @@
             }
         }
 
-        internal void Send(PacketData packetData) // 0 = text, 1 = data
+        public void Send(PacketData packetData) // 0 = text, 1 = data
         {
             var bson = BSonWriter.ToBson(packetData);
             var bytes = bson.ConvertToBytes();
