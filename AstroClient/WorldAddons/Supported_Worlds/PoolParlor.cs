@@ -33,7 +33,7 @@
             CueSkinBtn = new QMSingleButton(PoolParlorCheats, 2, 1f, "Default Cue", () => { }, "Cue Skin!", null, null, false);
             _ = new QMSingleButton(PoolParlorCheats, 3, 1, "-", () => { CurrentCueSkin--; }, "Set Cue Skin!", null, null, false);
 
-            CueSkinOverrideBtn = new QMSingleToggleButton(PoolParlorCheats, 1, 2f, "OVerride Cue Skin", () => { }, "Override Cue Skin", () => { }, "Enable Cue Skin Override using Spoofer.", Color.green, Color.red, null, false, true);
+            CueSkinOverrideBtn = new QMSingleToggleButton(PoolParlorCheats, 1, 2f, "OVerride Cue Skin", () => { OverrideCurrentSkins = true; }, "Override Cue Skin", () => { OverrideCurrentSkins = false; }, "Enable Cue Skin Override using Spoofer.", Color.green, Color.red, null, false, true);
 
             
         }
