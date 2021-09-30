@@ -2,6 +2,7 @@
 {
     using AstroClient.Variables;
     using AstroLibrary.Console;
+    using AstroLibrary.Utility;
     using System.Drawing;
 
     internal class PlayerSpooferUtils : GameEvents
@@ -40,7 +41,31 @@
             }
         }
 
-        
+        internal static bool IsSpooferActive
+        {
+            get
+            {
+                return Instance.IsSpooferActive;
+            }
+            set
+            {
+                Instance.IsSpooferActive = value;
+            }
+        }
+
+
+        internal static string SpoofedName
+        {
+            get
+            {
+                return Instance.SpoofedName;
+            }
+            set
+            {
+                Instance.SpoofedName = value;
+            }
+        }
+
         private static bool _SpoofASWorldAuthor;
 
         internal static bool SpoofAsWorldAuthor
@@ -52,16 +77,14 @@
             set
             {
                 _SpoofASWorldAuthor = value;
-                if (SpooferInstance != null)
+                if (value)
                 {
-                    if (value)
-                    {
-                        SpooferInstance.SpoofAsWorldAuthor();
-                    }
-                    else
-                    {
-                        SpooferInstance.DisableSpoofer();
-                    }
+                    IsSpooferActive = true;
+                    SpoofedName = WorldUtils.AuthorName;
+                }
+                else
+                {
+                    SpooferInstance.IsSpooferActive = false;
                 }
             }
         }

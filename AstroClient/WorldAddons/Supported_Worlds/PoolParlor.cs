@@ -6,6 +6,7 @@
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
+    using AstroLibrary.Utility;
     using RubyButtonAPI;
     using System;
     using System.Collections.Generic;
@@ -188,22 +189,37 @@
 
         private static void SetSyncedCueSkin(CueSkins value)
         {
-            if (UdonHeapParser.Udon_Parse_Int32(Cue_0, "activeCueSkin").Value != (int)value)
+            var active_cue0 = UdonHeapParser.Udon_Parse_Int32(Cue_0, "activeCueSkin");
+            var Sync_cue0 = UdonHeapParser.Udon_Parse_Int32(Cue_0, "syncedCueSkin");
+            if(active_cue0.HasValue)
             {
-                UdonHeapEditor.PatchHeap(Cue_0, "activeCueSkin", ((int)value), true);
+                if (active_cue0.Value != (int)value)
+                {
+                    UdonHeapEditor.PatchHeap(Cue_0, "activeCueSkin", ((int)value), true);
+                }
             }
-            if (UdonHeapParser.Udon_Parse_Int32(Cue_0, "syncedCueSkin").Value != (int)value)
+            if (Sync_cue0.HasValue)
             {
-                UdonHeapEditor.PatchHeap(Cue_0, "syncedCueSkin", ((int)value), true);
+                if (Sync_cue0.Value != (int)value)
+                {
+                    UdonHeapEditor.PatchHeap(Cue_0, "syncedCueSkin", ((int)value), true);
+                }
             }
-
-            if (UdonHeapParser.Udon_Parse_Int32(Cue_1, "activeCueSkin").Value != (int)value)
+            var active_cue1 = UdonHeapParser.Udon_Parse_Int32(Cue_1, "activeCueSkin");
+            var Sync_cue1 = UdonHeapParser.Udon_Parse_Int32(Cue_1, "syncedCueSkin");
+            if (active_cue1.HasValue)
             {
-                UdonHeapEditor.PatchHeap(Cue_1, "activeCueSkin", ((int)value), true);
+                if (active_cue1.Value != (int)value)
+                {
+                    UdonHeapEditor.PatchHeap(Cue_0, "activeCueSkin", ((int)value), true);
+                }
             }
-            if (UdonHeapParser.Udon_Parse_Int32(Cue_1, "syncedCueSkin").Value != (int)value)
+            if (Sync_cue1.HasValue)
             {
-                UdonHeapEditor.PatchHeap(Cue_1, "syncedCueSkin", ((int)value), true);
+                if (Sync_cue1.Value != (int)value)
+                {
+                    UdonHeapEditor.PatchHeap(Cue_1, "syncedCueSkin", ((int)value), true);
+                }
             }
         }
 
@@ -288,6 +304,14 @@
             }
         }
 
+        internal override void OnRoomLeft()
+        {
+            if (OverrideCurrentSkins)
+            {
+                PlayerSpooferUtils.SpoofAsWorldAuthor = false;
+            }
+        }
+
         private static void OnDrop()
         {
             if (OverrideCurrentSkins)
@@ -305,6 +329,8 @@
                 PlayerSpooferUtils.SpoofAsWorldAuthor = true;
             }
         }
+
+
 
         internal static VRC_AstroPickup Cue1_Primary { get; private set; }
         internal static VRC_AstroPickup Cue1_Secondary { get; private set; }

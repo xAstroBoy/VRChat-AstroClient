@@ -74,17 +74,15 @@
         internal override void OnRoomLeft()
         {
             SafetyCheck();
-            if (CanSpoofWithoutBreaking() && PlayerSpooferUtils.SpoofAsWorldAuthor)
-			{
-				DisableSpoofer();
-			}
+            IsSpooferActive = false;
         }
         internal override void OnRoomJoined()
         {
             SafetyCheck();
-            if (CanSpoofWithoutBreaking() && PlayerSpooferUtils.SpoofAsWorldAuthor)
+            if (PlayerSpooferUtils.SpoofAsWorldAuthor)
 			{
-				SpoofAs(WorldAuthor);
+                IsSpooferActive = true;
+                SpoofedName = WorldUtils.AuthorName;
 			}
         }
 
@@ -109,28 +107,8 @@
 				}
             }
         }
-            internal void SpoofAsWorldAuthor(bool output = true)
-        {
-            SpoofAs(WorldAuthor, output);
-        }
 
 
-        internal void SpoofAs(string name, bool output = true)
-        {
-            if (output)
-            {
-                ModConsole.Log($"[PlayerSpoofer] : Spoofing As {name}");
-            }
-            SpoofedName = name;
-            IsSpooferActive = true;
-        }
-
-
-        internal void DisableSpoofer(bool output = true)
-        {
-            ModConsole.Log($"[PlayerSpoofer] : No Longer Spoofing As {SpoofedName}, Restored : {Original_DisplayName}");
-            IsSpooferActive = false;
-        }
 
 
         internal APIUser user
@@ -151,45 +129,40 @@
             }
             set
             {
-                if(Has_Original_Displayname || Original_DisplayName == null)
+                if(!isSecondJoin)
                 {
-                    _IsSpooferActive = false;
-                    return;
+                    value = false;
                 }
+                _IsSpooferActive = value;
                 if (value)
                 {
-                    if (CanSpoofWithoutBreaking())
+                    if (user != null)
                     {
-                        _IsSpooferActive = value;
-                        SpoofedName = _SpoofedName;
+                        DisplayName = SpoofedName;
                     }
                 }
                 else
                 {
-                    if (CanSpoofWithoutBreaking())
-                    {
-                        _IsSpooferActive = value;
-                        SpoofedName = _SpoofedName;
-                    }
                     if (user != null)
                     {
                         DisplayName = Original_DisplayName;
+                        if (SpoofedName.IsNotNullOrEmptyOrWhiteSpace())
+                        {
+                            ModConsole.DebugLog($"[PlayerSpoofer] : No Longer Spoofing As {SpoofedName}, Restored : {Original_DisplayName}");
+                        }
                     }
                 }
             }
         }
 
 
-        private bool CanSpoofWithoutBreaking()
-        {
-            return isSecondJoin;
-        }
+
 
         private bool isFistJoin = false;
 
         private bool isSecondJoin = false;
 
-        private string _SpoofedName;
+        private string _SpoofedName = string.Empty;
 
         internal string SpoofedName
         {
@@ -203,6 +176,7 @@
                 if (IsSpooferActive)
                 {
                     DisplayName = value;
+                    ModConsole.DebugLog($"[PlayerSpoofer] : Spoofing As {value}");
                 }
             }
         }
@@ -228,12 +202,5 @@
             }
         }
 
-        internal string WorldAuthor
-        {
-            get
-            {
-                return WorldUtils.AuthorName;
-            }
-        }
     }
 }

@@ -189,15 +189,15 @@ namespace AstroClient.Components
         private SerializedUdonProgramAsset AssignedProgram { get; } = UdonPrograms.PickupProgram;
         private struct Addresses
         {
-            internal const uint OnDrop  = 7u;
-            internal const uint OnDrop_1 = 2u;
-            internal const uint OnPickup = 4u;
-            internal const uint OnPickup_1 = 3u;
-            internal const uint OnPickupUseDown = 6u;
-            internal const uint OnPickupUseDown_1 = 0u;
-            internal const uint OnPickupUseUp = 5u;
-            internal const uint OnPickupUseUp_1 = 1u;
-            internal const uint AlwaysFalse = 8u;
+            internal const uint OnDrop  = 7;
+            internal const uint OnDrop_1 = 2;
+            internal const uint OnPickup = 4;
+            internal const uint OnPickup_1 = 3;
+            internal const uint OnPickupUseDown = 6;
+            internal const uint OnPickupUseDown_1 = 0;
+            internal const uint OnPickupUseUp = 5;
+            internal const uint OnPickupUseUp_1 = 1;
+            internal const uint AlwaysFalse = 8;
         }
         internal Action OnPickup { get; set; }
         internal Action OnPickupUseUp { get; set; }
