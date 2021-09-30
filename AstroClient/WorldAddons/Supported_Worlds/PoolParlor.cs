@@ -141,10 +141,14 @@
         {
             foreach (var module in BilliardsModules)
             {
-                UdonHeapEditor.PatchHeap(module, "tableSkinLocal", ((int)value), true);
-                UdonHeapEditor.PatchHeap(module, "__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32", (int)value, true);
-                UdonHeapEditor.PatchHeap(module, "__0_mp_72681C8A3F190167F4664BA51221AA32_Int32", (int)value, true);
-                UdonHeapEditor.PatchHeap(module, "__0_mp_E1F7FEED75E8E688F1A147B44E5225D5_Byte", (int)value, true);
+                try
+                {
+                    UdonHeapEditor.PatchHeap(module, "tableSkinLocal", ((int)value), true);
+                    UdonHeapEditor.PatchHeap(module, "__0_mp_64C827E5E2EF62232E24389B8281D1CF_Int32", (int)value, true);
+                    UdonHeapEditor.PatchHeap(module, "__0_mp_72681C8A3F190167F4664BA51221AA32_Int32", (int)value, true);
+                    UdonHeapEditor.PatchHeap(module, "__0_mp_E1F7FEED75E8E688F1A147B44E5225D5_Byte", (int)value, true);
+                }
+                catch { }
             }
         }
 
@@ -189,38 +193,57 @@
 
         private static void SetSyncedCueSkin(CueSkins value)
         {
-            var active_cue0 = UdonHeapParser.Udon_Parse_Int32(Cue_0, "activeCueSkin");
-            var Sync_cue0 = UdonHeapParser.Udon_Parse_Int32(Cue_0, "syncedCueSkin");
-            if(active_cue0.HasValue)
+            try
             {
-                if (active_cue0.Value != (int)value)
+                var active_cue0 = UdonHeapParser.Udon_Parse_Int32(Cue_0, "activeCueSkin");
+                if (active_cue0.HasValue)
                 {
-                    UdonHeapEditor.PatchHeap(Cue_0, "activeCueSkin", ((int)value), true);
+                    if (active_cue0.Value != (int)value)
+                    {
+                        UdonHeapEditor.PatchHeap(Cue_0, "activeCueSkin", ((int)value), true);
+                    }
                 }
             }
-            if (Sync_cue0.HasValue)
+            catch { } // Nobody cares .
+            try
             {
-                if (Sync_cue0.Value != (int)value)
+
+                var Sync_cue0 = UdonHeapParser.Udon_Parse_Int32(Cue_0, "syncedCueSkin");
+                if (Sync_cue0.HasValue)
                 {
-                    UdonHeapEditor.PatchHeap(Cue_0, "syncedCueSkin", ((int)value), true);
+                    if (Sync_cue0.Value != (int)value)
+                    {
+                        UdonHeapEditor.PatchHeap(Cue_0, "syncedCueSkin", ((int)value), true);
+                    }
                 }
             }
-            var active_cue1 = UdonHeapParser.Udon_Parse_Int32(Cue_1, "activeCueSkin");
-            var Sync_cue1 = UdonHeapParser.Udon_Parse_Int32(Cue_1, "syncedCueSkin");
-            if (active_cue1.HasValue)
+            catch { } // Nobody cares .
+
+            try
             {
-                if (active_cue1.Value != (int)value)
+                var active_cue1 = UdonHeapParser.Udon_Parse_Int32(Cue_1, "activeCueSkin");
+                if (active_cue1.HasValue)
                 {
-                    UdonHeapEditor.PatchHeap(Cue_0, "activeCueSkin", ((int)value), true);
+                    if (active_cue1.Value != (int)value)
+                    {
+                        UdonHeapEditor.PatchHeap(Cue_1, "activeCueSkin", ((int)value), true);
+                    }
                 }
             }
-            if (Sync_cue1.HasValue)
+            catch { } // Nobody cares .
+            try
             {
-                if (Sync_cue1.Value != (int)value)
+
+                var Sync_cue1 = UdonHeapParser.Udon_Parse_Int32(Cue_1, "syncedCueSkin");
+                if (Sync_cue1.HasValue)
                 {
-                    UdonHeapEditor.PatchHeap(Cue_1, "syncedCueSkin", ((int)value), true);
+                    if (Sync_cue1.Value != (int)value)
+                    {
+                        UdonHeapEditor.PatchHeap(Cue_1, "syncedCueSkin", ((int)value), true);
+                    }
                 }
             }
+            catch { } // Nobody cares .
         }
 
         internal enum TableSkins
@@ -322,11 +345,16 @@
 
         private static void onPickup()
         {
+            ModConsole.DebugLog("1");
             if (OverrideCurrentSkins)
             {
+                ModConsole.DebugLog("2");
                 SetActiveCueSkin(_CurrentCueSkin);
+                ModConsole.DebugLog("3");
                 SetSyncedCueSkin(_CurrentCueSkin);
+                ModConsole.DebugLog("4");
                 PlayerSpooferUtils.SpoofAsWorldAuthor = true;
+                ModConsole.DebugLog("END");
             }
         }
 
@@ -379,7 +407,7 @@
 
         internal static QMSingleButton TableSkinBtn { get; set; }
 
-        private static CueSkins _CurrentCueSkin;
+        private static CueSkins _CurrentCueSkin = CueSkins.DefaultLight;
 
         internal static CueSkins CurrentCueSkin
         {
