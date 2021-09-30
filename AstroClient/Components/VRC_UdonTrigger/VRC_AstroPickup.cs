@@ -15,6 +15,7 @@ namespace AstroClient.Components
             : base(ptr)
         {
         }
+        private SerializedUdonProgramAsset AssignedProgram { get; } = UdonPrograms.PickupProgram;
 
         internal void Start()
         {
@@ -186,7 +187,6 @@ namespace AstroClient.Components
             }
         }
 
-        private SerializedUdonProgramAsset AssignedProgram { get; } = UdonPrograms.PickupProgram;
         private struct Addresses
         {
             internal const uint OnDrop  = 7;
@@ -204,6 +204,8 @@ namespace AstroClient.Components
         internal Action OnPickupUseDown { get; set; }
         internal Action OnDrop { get; set; }
 
+        internal bool ForceInteractiveText { get; set; } = false;
+
         private VRCInteractable _VRCInteractable;
         private VRCInteractable VRCInteractable
         {
@@ -211,6 +213,10 @@ namespace AstroClient.Components
             {
                 if(_VRCInteractable == null)
                 {
+                    if(ForceInteractiveText)
+                    {
+                        return _VRCInteractable = gameObject.AddComponent<VRCInteractable>();
+                    }
                     return _VRCInteractable = gameObject.GetComponent<VRCInteractable>();
                 }
                 return _VRCInteractable;
