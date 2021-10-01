@@ -11,9 +11,9 @@
 
     internal class WorldButton
     {
-        private GameObject gameObject;
+        internal GameObject gameObject { get; private set; }
 
-        private VRC_AstroInteract interactable;
+        internal VRC_AstroInteract interactable { get; private set; }
 
         internal WorldButton(Vector3 position, Quaternion rotation, string label, Action action)
         {

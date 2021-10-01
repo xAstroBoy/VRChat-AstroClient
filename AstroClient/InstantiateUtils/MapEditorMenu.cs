@@ -18,12 +18,11 @@
                   Quaternion? buttonRotation = Utils.LocalPlayer.GetPlayer().gameObject.transform.rotation;
                   if (buttonRotation != null && buttonRotation != null)
                   {
-                      var btn = ButtonCreator.Create("Template", buttonPosition.Value, buttonRotation.Value, null);
-                      btn.TeleportToMe();
-                      btn.Pickup_Set_ForceComponent();
-                      btn.Pickup_Set_Pickupable(true);
-                      btn.Set_As_Object_To_Edit();
-                      btn.AddToWorldUtilsMenu();
+                      var btn = new WorldButton(buttonPosition.Value, buttonRotation.Value, "Template Test", null);
+                      btn.gameObject.Pickup_Set_ForceComponent();
+                      btn.gameObject.Pickup_Set_Pickupable(true);
+                      btn.gameObject.Set_As_Object_To_Edit();
+                      btn.gameObject.AddToWorldUtilsMenu();
                   }
               }), "Spawn Preset Button", null, null, true);
             _ = new QMSingleButton(menu, 2, 0, "Toggles all Map Items Active", () => { EnableAllObjects(); }, "Sets Map objects active, will Break Instance Locally..", null, Color.red, true);

@@ -44,6 +44,16 @@
             }
         }
 
+        internal static void TeleportToMe(this GameObject obj, bool ResetRigidBody = false, bool ResetPickupProperties = false)
+        {
+            if (obj != null)
+            {
+                ItemPosition.TeleportObject(obj, ResetRigidBody, ResetPickupProperties);
+            }
+        }
+
+
+
         internal static void TeleportToMe(this GameObject obj, HumanBodyBones bone)
         {
             if (obj != null)

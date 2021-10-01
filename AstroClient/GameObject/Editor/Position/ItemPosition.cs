@@ -7,6 +7,22 @@
 
     internal class ItemPosition
     {
+        internal static void TeleportObject(GameObject obj, bool ResetRigidBody = false, bool ResetPickupProperties = false)
+        {
+            if (obj != null && Utils.LocalPlayer != null)
+            {
+                var bonepos = Utils.LocalPlayer.GetPlayer().Get_Player_Bone_Position(HumanBodyBones.RightHand);
+                if (bonepos != null)
+                {
+                    OnlineEditor.TakeObjectOwnership(obj);
+                    obj.transform.position = bonepos.Value;
+                    obj.KillCustomComponents(ResetRigidBody, ResetPickupProperties);
+                    obj.KillForces(true);
+                }
+            }
+        }
+
+
         internal static void TeleportObject(GameObject obj)
         {
             if (obj != null && Utils.LocalPlayer != null)
