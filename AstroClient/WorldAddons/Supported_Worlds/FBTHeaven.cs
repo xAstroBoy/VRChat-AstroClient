@@ -131,14 +131,9 @@
                             }
                         }
                     }
-                    if (Skyboxes.SkyboxEditor.LoadedSkyboxesBundles != null && Skyboxes.SkyboxEditor.LoadedSkyboxesBundles.Count() != 0)
+                    if (Skyboxes.SkyboxEditor.SetSkyboxByFileName("dark_coalsack"))
                     {
-                        var skybox = Skyboxes.SkyboxEditor.LoadedSkyboxesBundles.Where(x => x.SkyboxName.Equals("dark_coalsack")).FirstOrDefault(null);
-                        if (skybox != null)
-                        {
-                            ModConsole.DebugLog("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");
-                            Skyboxes.SkyboxEditor.SetNewSkybox(skybox);
-                        }
+                        ModConsole.DebugLog("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");
                     }
 
                     var outsidebutton1 = rootObject.transform.FindObject("[STATIC]/Building/FBT_Heaven/Private_Room_Hallway/Room_Doors/Room_1/Door_Handle_Sign_1").gameObject;
