@@ -138,6 +138,13 @@
                         bool save = false;
 
                         AvatarDataEntity avatarDataEntity = avatarData.GetAvatarDataEntity();
+
+                        if (avatarDataEntity.Name == null || avatarDataEntity.Description == null)
+                        {
+                            Console.WriteLine("Failed to receive avatar data: corrupted information");
+                            break;
+                        }
+
                         var found = DB.Find<AvatarDataEntity>().OneAsync(avatarData.AvatarID).GetAwaiter().GetResult();
 
                         if (found != null)
