@@ -66,9 +66,6 @@
     <Compile Include="..\astronetworkinglibrary\Encoding.cs">
       <Link>Networking\Encoding.cs</Link>
     </Compile>
-    <Compile Include="..\astronetworkinglibrary\HandleClient.cs">
-      <Link>Networking\HandleClient.cs</Link>
-    </Compile>
     <Compile Include="..\astronetworkinglibrary\JSonWriter.cs">
       <Link>Networking\JSonWriter.cs</Link>
     </Compile>
@@ -134,6 +131,7 @@
     <Compile Include="Moderation\ModerationExtensions.cs" />
     <Compile Include="Moderation\ModerationNotifier.cs" />
     <Compile Include="Moderation\PhotonModerationHandler.cs" />
+    <Compile Include="Networking\HandleClient.cs" />
     <Compile Include="RegisterComponent.cs" />
     <Compile Include="Spawnables\Enderpearl\AstroEnderPearl.cs" />
     <Compile Include="Components\Enderpearl\EnderPearlBehaviour.cs" />

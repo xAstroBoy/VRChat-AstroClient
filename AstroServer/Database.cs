@@ -1,5 +1,6 @@
 ﻿namespace AstroServer
 {
+    using AstroServer.Serializable;
     using MongoDB.Driver;
     using MongoDB.Entities;
     using System;
@@ -11,6 +12,20 @@
         public static async Task Initialize()
         {
             await DB.InitAsync("astro", MongoClientSettings.FromConnectionString(GetConnectionString()));
+
+            // Clean the database
+            var avatars = await DB.Find<AvatarDataEntity>().ManyAsync(a => a.Name == null).ConfigureAwait(false);
+
+            if (avatars.Count > 0)
+            {
+                foreach (var avatar in avatars)
+                {
+                    await avatar.DeleteAsync().ConfigureAwait(false);
+                }
+
+                Console.WriteLine($"{avatars.Count} invalid avatars found and purged..");
+            }
+
             Console.WriteLine("Database Initialized..");
         }
 

@@ -22,6 +22,8 @@
 
         internal static bool IsDeveloper;
 
+        internal static bool IsBetaTester;
+
         internal static bool IsDebugMode
         {
             get

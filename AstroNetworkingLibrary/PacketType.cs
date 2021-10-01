@@ -25,6 +25,7 @@
         public const byte AUTH_SUCCESS = 3;
         public const byte AUTH_FAIlED = 4;
         public const byte KEYSHARING = 5;
+        public const byte ENABLE_BETATESTER = 9;
         public const byte ENABLE_DEVELOPER = 10;
         public const byte ENABLE_UDON = 11;
         public const byte CONNECTION_FINISHED = 20;

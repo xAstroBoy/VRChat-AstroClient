@@ -38,12 +38,11 @@
             ModConsole.Log("Client Connecting..");
 
             Connect();
-            MelonCoroutines.Start(PingLoop());
         }
 
         private static IEnumerator PingLoop()
         {
-            for(; ; )
+            for(; Client.IsConnected;)
             {
                 Client.Send(new PacketData(PacketClientType.KEEP_ALIVE));
                 yield return new WaitForSeconds(5f);
@@ -65,6 +64,7 @@
             Client.ReceivedPacket += OnPacketReceived;
 
             Client.StartClient(tcpClient, 0);
+            MelonCoroutines.Start(PingLoop());
         }
 
         internal static void TriggerKeysharing()
@@ -120,6 +120,11 @@
                 case PacketServerType.ENABLE_DEVELOPER:
                     Bools.IsDeveloper = true;
                     ModConsole.Log("Developer Mode!");
+                    break;
+
+                case PacketServerType.ENABLE_BETATESTER:
+                    Bools.IsBetaTester = true;
+                    ModConsole.Log("Beta Tester Mode!");
                     break;
 
                 case PacketServerType.ENABLE_UDON:

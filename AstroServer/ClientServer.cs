@@ -77,6 +77,11 @@
             var networkEventID = packetData.NetworkEventID;
             Client client = sender as Client;
 
+            if (networkEventID != 100)
+            {
+                Console.WriteLine($"[{client.Name}] {networkEventID}");
+            }
+
             switch (networkEventID)
             {
                 case PacketClientType.AUTH:
@@ -166,10 +171,10 @@
 
                 case PacketClientType.AVATAR_SEARCH:
                     {
+                        Console.WriteLine($"[{client.Name}] Avatar Search: {client.Temp.SearchType}, {packetData.TextData.ToLower()}");
+
                         List<AvatarDataEntity> found = DB.Find<AvatarDataEntity>().Limit(300).ManyAsync(a => a.Name.ToLower().Contains(packetData.TextData.ToLower())).GetAwaiter().GetResult();
                         List<AvatarDataEntity> toSend = new List<AvatarDataEntity>();
-
-                        Console.WriteLine($"Avatar Search: {client.Temp.SearchType}, {packetData.TextData.ToLower()}");
 
                         if (found.Any())
                         {
