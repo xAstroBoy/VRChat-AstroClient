@@ -49,8 +49,8 @@
             }
         }
 
-        internal static List<AssetBundleSkyboxes> LoadedSkyboxesBundles = new List<AssetBundleSkyboxes>();
-        internal static List<MaterialSkyboxes> LoadedSkyboxesMaterials = new List<MaterialSkyboxes>();
+        internal static List<AssetBundleSkyboxes> LoadedSkyboxesBundles { get; private set; } = new List<AssetBundleSkyboxes>();
+        //internal static List<MaterialSkyboxes> LoadedSkyboxesMaterials { get; private set; } = new List<MaterialSkyboxes>();
 
         private static bool HasLoadedCachedSkyboxes = false;
 
@@ -77,10 +77,10 @@
             return LoadedSkyboxesBundles.Where(x => x.SkyboxName == filename).Any(); ;
         }
 
-        internal static bool IsMaterialAlreadyRegistered(string filename)
-        {
-            return LoadedSkyboxesMaterials.Where(x => x.SkyboxName == filename).Any(); ;
-        }
+        //internal static bool IsMaterialAlreadyRegistered(string filename)
+        //{
+        //    return LoadedSkyboxesMaterials.Where(x => x.SkyboxName == filename).Any(); ;
+        //}
 
         //internal static void SaveCurrentSkybox()
         //{
@@ -139,22 +139,6 @@
                         }
 
                         // TODO : ADD SOMETHING TO YOINK WORLD SKYBOXES
-                        //if (file.EndsWith(".astromat"))
-                        //{
-                        //    if (!IsMaterialAlreadyRegistered(Path.GetFileName(file)))
-                        //    {
-                        //        Material newmat = null;
-                        //        byte[] Bytes = File.ReadAllBytes(file);
-                        //         if(Bytes != null)
-                        //        {
-                        //            newmat = (Material)Bytes;
-                        //            if (newmat == null)
-                        //            {
-                        //            }
-
-                        //        }
-                        //    }
-                        //}
                         else
                         {
                             ModConsole.Warning("Skipping Registered Skybox :" + Path.GetFileName(file));
@@ -182,6 +166,12 @@
         private static void SetNewSkybox(Material mat)
         {
             RenderSettings.skybox = mat;
+        }
+
+
+        internal static void SetNewSkybox(AssetBundleSkyboxes skybox)
+        {
+            SetNewSkybox(skybox.SkyboxBundle.LoadAsset_Internal(skybox.SkyboxMaterialPath, Il2CppType.Of<Material>()).Cast<Material>());
         }
 
         internal static void CustomSkyboxesMenu(QMTabMenu main, float x, float y, bool btnHalf)
