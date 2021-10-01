@@ -611,6 +611,12 @@
                 var Lobby = GameObjectFinder.FindRootSceneObject("Lobby");
                 if (Lobby != null)
                 {
+                    var fuckthiscancer = Lobby.transform.FindObject("Entrance Corridor").FindObject("Cancer Spawn");
+                    if(fuckthiscancer != null)
+                    {
+                        fuckthiscancer.DestroyMeLocal();
+                    }
+
                     VIPControls = Lobby.transform.FindObject("Udon/MyI Control Panel").gameObject;
                     if (VIPControls != null)
                     {
