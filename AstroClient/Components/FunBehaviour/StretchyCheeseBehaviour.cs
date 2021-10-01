@@ -24,7 +24,7 @@
                 var PickupBehaviour = this.gameObject.AddComponent<VRC_AstroPickup>();
                 if (PickupBehaviour != null)
                 {
-                    PickupBehaviour.OnPickupUseUp += () =>
+                    PickupBehaviour.OnPickupUseDown += () =>
                     {
                         ExtendCheese.ExecuteUdonEvent();
                     };
