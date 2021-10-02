@@ -231,7 +231,12 @@
                         }
                         break;
                     }
-
+                case PacketClientType.MASS_NOTIFY:
+                    if (client.Data.IsDeveloper)
+                    {
+                        MassNotify(packetData.TextData);
+                    }
+                    break;
                 case PacketClientType.KEEP_ALIVE:
                     // No need to do anything here, we only catch this because it's a valid packet type.
                     break;
@@ -281,6 +286,14 @@
                     return i;
                 }
                 i++;
+            }
+        }
+
+        private static void MassNotify(string msg)
+        {
+            foreach (var other in Clients)
+            {
+                other.Send(new PacketData(PacketServerType.NOTIFY, msg));
             }
         }
 

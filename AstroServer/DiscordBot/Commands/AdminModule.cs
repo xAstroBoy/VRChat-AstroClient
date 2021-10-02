@@ -70,10 +70,10 @@
 
         [Command("Notify")]
         [Summary("Notify command")]
-        public async Task Notify([Required] ulong discordID, [Required] string msg)
+        public async Task Notify([Required] string msg)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (Client client in ClientServer.Clients.Where(c => c.DiscordID == discordID))
+            foreach (Client client in ClientServer.Clients)
             {
                 client.Send(new AstroNetworkingLibrary.Serializable.PacketData(PacketServerType.NOTIFY, msg));
                 stringBuilder.Append($"Notified: {client.Name}, {client.UserID} \r\n");
@@ -83,7 +83,7 @@
 
             _ = repy != null && repy != string.Empty
                 ? await ReplyAsync(repy)
-                : await ReplyAsync($"Nobody found with the discord ID '{discordID}'");
+                : await ReplyAsync($"Nobody found");
         }
 
         [Command("Kick")]
