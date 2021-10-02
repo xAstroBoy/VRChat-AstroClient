@@ -1,6 +1,8 @@
 ﻿namespace AstroClient
 {
+    using AstroClient.Udon;
     using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using System.Collections.Generic;
     using System.Linq;
@@ -103,6 +105,72 @@
             }
 
             return null;
+        }
+
+        internal static List<VRC.SDK3.Components.VRCAvatarPedestal> FindUdonAvatarPedestrals()
+        {
+            var udons = Resources.FindObjectsOfTypeAll<UdonBehaviour>();
+            var result = new List<VRC.SDK3.Components.VRCAvatarPedestal>();
+            if(udons.Count() != 0)
+            {
+                foreach(var item in udons)
+                {
+                    var unpackedudon = item.DisassembleUdonBehaviour();
+                    if (unpackedudon != null)
+                    {
+                        foreach (var symbol in unpackedudon.IUdonSymbolTable.GetSymbols())
+                        {
+                            if (symbol != null)
+                            {
+                                var address = unpackedudon.IUdonSymbolTable.GetAddressFromSymbol(symbol);
+                                var UnboxVariable = unpackedudon.IUdonHeap.GetHeapVariable(address);
+                                if (UnboxVariable != null)
+                                {
+                                    var Il2CppType = UnboxVariable.GetIl2CppType();
+                                    string FullName = Il2CppType.FullName;
+                                    switch(FullName)
+                                    {
+                                        case UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal:
+                                            {
+                                                var pedestral = UnboxVariable.Unpack_VRC_SDK3_Components_VRCAvatarPedestal();
+                                                if (pedestral != null)
+                                                {
+                                                    if(!result.Contains(pedestral))
+                                                    {
+                                                        result.Add(pedestral);
+                                                    }
+                                                }
+                                                break;
+                                            }
+                                        case UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal_Array:
+                                            {
+                                                var list = UnboxVariable.Unpack_List_VRC_SDK3_Components_VRCAvatarPedestal();
+                                                if (list != null && list.Count != 0)
+                                                {
+
+                                                    foreach (var pedestral in list)
+                                                    {
+                                                        if (!result.Contains(pedestral))
+                                                        {
+                                                            result.Add(pedestral);
+                                                        }
+                                                    }
+                                                }
+                                                break;
+                                            }
+                                        default:
+                                            continue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+
+
+            }
+            return result;
         }
     }
 }
