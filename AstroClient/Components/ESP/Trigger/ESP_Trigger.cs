@@ -130,18 +130,16 @@
         internal void OnDestroy()
         {
             HighLightOptions.DestroyHighlighter();
-            HasSetupESP = false;
         }
 
         internal void OnEnable()
         {
-            SetupHighlighter();
+            HighLightOptions.enabled = true;
         }
 
         internal void OnDisable()
         {
-            HighLightOptions.DestroyHighlighter();
-            HasSetupESP = false;
+            HighLightOptions.enabled = false;
         }
 
         internal void ChangeColor(Color newcolor)

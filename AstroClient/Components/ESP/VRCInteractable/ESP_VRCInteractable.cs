@@ -100,12 +100,12 @@
 
         internal void OnEnable()
         {
-            SetupHighlighter();
+            HighLightOptions.enabled = true;
         }
 
         internal void OnDisable()
         {
-            HighLightOptions.DestroyHighlighter();
+            HighLightOptions.enabled = false;
         }
 
         internal void ChangeColor(Color newcolor)

@@ -189,27 +189,12 @@
             SetPlayerDefaultESP();
         }
 
-        internal Color GetCurrentESPColor
-        {
-            get
-            {
-                return HighLightOptions.highlightColor;
-            }
-            set
-            {
-                HighLightOptions.highlightColor = value;
-            }
-        }
-
         internal override void OnPublicESPColorChanged(Color color)
         {
             if (UseCustomColor || !CanEditValues) return;
             if (!AssignedPlayer.GetAPIUser().IsFriend())
             {
-                if (HighLightOptions.highlightColor != color)
-                {
-                    HighLightOptions.highlightColor = color;
-                }
+                CurrentColor = color;
             }
         }
         internal override void OnFriendESPColorChanged(Color color)
@@ -217,10 +202,7 @@
             if (UseCustomColor || !CanEditValues) return;
             if (AssignedPlayer.GetAPIUser().IsFriend())
             {
-                if (HighLightOptions.highlightColor != color)
-                {
-                    HighLightOptions.highlightColor = color;
-                }
+                CurrentColor = color;
             }
 
         }
@@ -234,40 +216,26 @@
             {
                 if (CurrentColor.HasValue)
                 {
-                    if (CurrentColor != BlockedColor)
-                    {
-                        CurrentColor = BlockedColor;
-                    }
+                    CurrentColor = color;
                 }
             }
         }
 
         private void SetPlayerDefaultESP()
         {
-
             if (CanEditValues)
             {
-                if (AssignedPlayer.GetAPIUser().GetIsFriend())
+                if (AssignedPlayer.GetAPIUser().HasBlockedYou())
                 {
-                    if (CurrentColor.Value != FriendColor)
-                    {
-                        CurrentColor = FriendColor;
-                    }
+                    CurrentColor = BlockedColor;
                 }
-
-                else if (AssignedPlayer.GetAPIUser().HasBlockedYou())
+                else if (AssignedPlayer.GetAPIUser().GetIsFriend())
                 {
-                    if (CurrentColor != BlockedColor)
-                    {
-                        CurrentColor = BlockedColor;
-                    }
+                    CurrentColor = FriendColor;
                 }
                 else
                 {
-                    if (CurrentColor.Value != PublicColor)
-                    {
-                        CurrentColor = PublicColor;
-                    }
+                    CurrentColor = PublicColor;
                 }
             }
         }
