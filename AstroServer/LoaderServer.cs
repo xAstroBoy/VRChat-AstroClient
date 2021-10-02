@@ -131,7 +131,7 @@
                             currentLibraries = Libraries;
                         }
 
-                        foreach (var libPath in Libraries)
+                        foreach (var libPath in currentLibraries)
                         {
                             try
                             {
@@ -146,7 +146,7 @@
                             }
                         }
 
-                        foreach (var libPath in Melons)
+                        foreach (var libPath in currentMelons)
                         {
                             try
                             {
@@ -161,7 +161,7 @@
                             }
                         }
 
-                        foreach (var libPath in Modules)
+                        foreach (var libPath in currentModules)
                         {
                             try
                             {
