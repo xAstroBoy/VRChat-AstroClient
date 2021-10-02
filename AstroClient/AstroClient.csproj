@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Buttons\HistoryMenu.cs" />
     <Compile Include="Cheetos\InstanceHistory.cs" />
+    <Compile Include="Components\ESP\EspEvents.cs" />
     <Compile Include="Components\Flashlight\FlashlightBehaviour.cs" />
     <Compile Include="Components\Expoits\OrbitManager.cs" />
     <Compile Include="Components\FunBehaviour\StretchyCheeseBehaviour.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="ModDetector\FindMods.cs" />
     <Compile Include="Spawnables\Flashlight\Flashlight.cs" />
     <Compile Include="Startup\EventArgs\BoolEventsArgs.cs" />
+    <Compile Include="Startup\EventArgs\ColorEventArgs.cs" />
     <Compile Include="Startup\Hooks\QuickMenuHooks.cs" />
     <Compile Include="Startup\Hooks\RPCEventHook.cs" />
     <Compile Include="Streamer\StreamerNotifier.cs" />
