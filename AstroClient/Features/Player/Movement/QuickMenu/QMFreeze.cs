@@ -14,6 +14,7 @@
 
         internal override void OnQuickMenuOpen()
         {
+            Opened = true;
             if (FreezePlayerOnQMOpen)
             {
                 if (Networking.LocalPlayer != null)
@@ -29,6 +30,7 @@
 
         internal override void OnQuickMenuClose()
         {
+            Opened = false;
             if (FreezePlayerOnQMOpen)
             {
                 if (Networking.LocalPlayer != null)
@@ -48,7 +50,7 @@
             {
                 if (Networking.LocalPlayer != null)
                 {
-                    Physics.gravity = originalGravity;
+                    CurrentGravity = originalGravity;
                     if (RestoreVelocity)
                     {
                         Networking.LocalPlayer.SetVelocity(originalVelocity);
@@ -70,7 +72,7 @@
                     {
                         return;
                     }
-                    Physics.gravity = Vector3.zero;
+                    CurrentGravity = Vector3.zero;
                     Networking.LocalPlayer.SetVelocity(Vector3.zero);
                     Frozen = true;
                 }
@@ -106,6 +108,36 @@
         internal static QMToggleButton FreezePlayerOnQMOpenToggle;
         internal static bool Frozen;
 
+        private static Vector3 CurrentGravity
+        {
+            get
+            {
+                return Physics.gravity;
+            }
+            set
+            {
+                if (Networking.LocalPlayer.IsPlayerGrounded())
+                {
+                    return;
+                }
+                if (Opened)
+                {
+                    Physics.gravity = value;
+                }
+                else
+                {
+                    if (value.Equals(Vector3.zero))
+                    {
+                        return; // Discard this value as is No Gravity.
+                    }
+                    if (!Opened)
+                    {
+                        Physics.gravity = value;
+                    }
+                }
+            }
+        }
+
         private static Vector3 originalGravity
         {
             get
@@ -114,7 +146,7 @@
             }
             set
             {
-                if (value.x == 0f && value.y == 0f && value.z == 0f)
+                if (value.Equals(Vector3.zero))
                 {
                     return; // Discard this value as is No Gravity.
                 }
@@ -126,7 +158,7 @@
 
         private static Vector3 originalVelocity;
 
-        internal static bool Opened;
+        internal static bool Opened { get; set; }
         internal static bool RestoreVelocity = false;
     }
 }
