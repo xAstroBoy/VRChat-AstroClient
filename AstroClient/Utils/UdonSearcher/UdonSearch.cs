@@ -150,11 +150,17 @@
                                                         else
                                                         {
                                                             var ids = item.GetAllAvatarIDs();
-                                                            if(ids.Count() != 0)
+                                                            if (ids != null)
                                                             {
-                                                                foreach(var id in ids)
+                                                                if (ids.Count() != 0)
                                                                 {
-                                                                    result.Add(id);
+                                                                    foreach (var id in ids)
+                                                                    {
+                                                                        if (id != null)
+                                                                        {
+                                                                            result.Add(id);
+                                                                        }
+                                                                    }
                                                                 }
                                                             }
                                                         }
@@ -182,7 +188,10 @@
                                                                         {
                                                                             foreach (var id in ids)
                                                                             {
-                                                                                result.Add(id);
+                                                                                if (id != null)
+                                                                                {
+                                                                                    result.Add(id);
+                                                                                }
                                                                             }
                                                                         }
                                                                     }
@@ -232,11 +241,9 @@
                                         }
                                     }
 
-                                    catch (Exception e)
+                                    catch
                                     {
-                                        ModConsole.DebugErrorExc(e);
                                     }
-
                                 }
                             }
                         }
