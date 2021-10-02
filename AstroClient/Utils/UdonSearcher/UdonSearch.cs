@@ -211,7 +211,10 @@
                                                         {
                                                             pedestral.grantBlueprintAccess = true;
                                                         }
-                                                        result.Add(pedestral.blueprintId);
+                                                        if (pedestral.blueprintId.IsNotNullOrEmptyOrWhiteSpace() && pedestral.blueprintId.IsAvatarID())
+                                                        {
+                                                            result.Add(pedestral.blueprintId);
+                                                        }
                                                     }
                                                     break;
                                                 }
@@ -229,8 +232,10 @@
                                                                 {
                                                                     pedestral.grantBlueprintAccess = true;
                                                                 }
-
-                                                                result.Add(pedestral.blueprintId);
+                                                                if (pedestral.blueprintId.IsNotNullOrEmptyOrWhiteSpace() && pedestral.blueprintId.IsAvatarID())
+                                                                {
+                                                                    result.Add(pedestral.blueprintId);
+                                                                }
                                                             }
                                                         }
                                                     }

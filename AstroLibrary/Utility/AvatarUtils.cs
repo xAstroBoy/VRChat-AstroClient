@@ -14,9 +14,13 @@
 
         public static ApiAvatar GetApiAvatar(string avatarID)
         {
-            var avatar = new ApiAvatar { id = avatarID };
-            avatar.Fetch();
-            return avatar;
+            if (avatarID.IsAvatarID())
+            {
+                var avatar = new ApiAvatar { id = avatarID };
+                avatar.Fetch();
+                return avatar;
+            }
+            return null;
         }
     }
 }
