@@ -15,7 +15,7 @@
 
         internal static ClientServer CServer;
 
-        internal static LoaderServer LServer;
+        internal static ContentServer LServer;
 
         internal static bool Running;
 
@@ -50,7 +50,7 @@
             Console.WriteLine($"There are {AccountManager.GetKeyCount()} valid keys stored.");
 
             Console.WriteLine("Starting Server..");
-            LServer = new LoaderServer();
+            LServer = new ContentServer();
             CServer = new ClientServer();
 
             Running = true;

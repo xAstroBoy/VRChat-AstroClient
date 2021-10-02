@@ -11,15 +11,15 @@
     using System.Security.Cryptography;
     using System.Threading.Tasks;
 
-    internal class LoaderServer
+    internal class ContentServer
     {
         private static readonly int maxConnections = 1000;
 
         internal static List<Client> Clients { get; private set; }
 
-        internal LoaderServer()
+        internal ContentServer()
         {
-            Console.WriteLine("Starting Loader Server..");
+            Console.WriteLine("Starting Content Server..");
             Clients = new List<Client>();
             StartServer();
         }
@@ -28,7 +28,7 @@
         {
             TcpListener serverSocket = new TcpListener(new IPEndPoint(IPAddress.Any, 42070));
             serverSocket.Start();
-            Console.WriteLine("Loader Server Started.");
+            Console.WriteLine("Content Server Started.");
 
             Console.WriteLine($"InjectorHash: {GetInjectorHash().GetByteArrayAsString()}");
 
@@ -56,26 +56,26 @@
 
         public static List<string> Libraries = new List<string>()
         {
-            "/AstroClient/Libs/AstroLibrary.dll"
+            "../Client/Public/Libs/AstroLibrary.dll"
         };
 
         public static List<string> BetaLibraries = new List<string>()
         {
-            "/AstroClient-Beta/Libs/AstroLibrary.dll"
+            "../Client/Beta/Libs/AstroLibrary.dll"
         };
 
         public static List<string> Melons = new List<string>()
         {
             //"/AstroClient/DontTouchMyClient.dll",
             //"/AstroClient/AstroClientCore.dll",
-            "/AstroClient/AstroClient.dll"
+            "../Client/Public/AstroClient.dll"
         };
 
         public static List<string> BetaMelons = new List<string>()
         {
             //"/AstroClient/DontTouchMyClient.dll",
             //"/AstroClient/AstroClientCore.dll",
-            "/AstroClient-Beta/AstroClient.dll"
+            "../Client/Beta/AstroClient.dll"
         };
 
         public static List<string> Modules = new List<string>()
