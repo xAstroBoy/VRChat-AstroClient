@@ -116,22 +116,19 @@
             }
             set
             {
-                if (Networking.LocalPlayer.IsPlayerGrounded())
-                {
-                    return;
-                }
-                if (Opened)
+                if (Opened && !Networking.LocalPlayer.IsPlayerGrounded())
                 {
                     Physics.gravity = value;
                 }
                 else
                 {
-                    if (value.Equals(Vector3.zero))
-                    {
-                        return; // Discard this value as is No Gravity.
-                    }
                     if (!Opened)
                     {
+
+                        if (value.Equals(Vector3.zero))
+                        {
+                            return; // Discard this value as is No Gravity.
+                        }
                         Physics.gravity = value;
                     }
                 }
