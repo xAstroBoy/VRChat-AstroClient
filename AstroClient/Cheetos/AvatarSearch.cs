@@ -119,9 +119,7 @@
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            MiscUtils.DelayFunction(0.5f, () => { 
-            PedestalDump();
-            });
+            MiscUtils.DelayFunction(0.5f, () => { PedestalDump(); });
         }
 
         internal static void OnSelect()
@@ -166,7 +164,7 @@
 
             for (; ; )
             {
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.005f);
                 if (!IsSearching)
                 {
                     SearchDone();
@@ -262,7 +260,6 @@
         internal static void AddAvatar(AvatarData avatarData)
         {
             foundAvatars.Add(avatarData.ToApiAvatar());
-            ModConsole.Log($"Avatar Result: {avatarData.Name}: {avatarData.AvatarID}");
         }
 
         private static void UpdateButtons()
