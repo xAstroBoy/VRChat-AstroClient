@@ -372,14 +372,26 @@
         {
             try
             {
-                var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRCAvatarPedestal>()
+                var list = GameObjectFinder.GetRootGameObjectsComponents<VRCAvatarPedestal>();
+                if(list.Count() != 0)
+                {
+                    foreach(var item in list)
+                    {
+                        if(!item.grantBlueprintAccess)
+                        {
+                            item.grantBlueprintAccess = true;
+                        }
+                    }
+                }
+                var result = list
                     .Where(
                     i => i.blueprintId.IsNotNullOrEmptyOrWhiteSpace()
                     && i.blueprintId.IsAvatarID()
                     ).ToList();
-                if (list1.AnyAndNotNull())
+
+                if (result.AnyAndNotNull())
                 {
-                    return list1;
+                    return result;
                 }
             }
             catch (Exception e)
@@ -395,7 +407,8 @@
         {
             try
             {
-                var list1 = GameObjectFinder.GetRootGameObjectsComponents<SimpleAvatarPedestal>()
+                var list = GameObjectFinder.GetRootGameObjectsComponents<SimpleAvatarPedestal>();
+                var result = list
                     .Where(
                     i => i.field_Internal_ApiAvatar_0 != null &&
                     i.field_Internal_ApiAvatar_0.id.IsNotNullOrEmptyOrWhiteSpace() &&
@@ -404,9 +417,10 @@
                     && !i.transform.IsChildOf(VRChatObjects_Old.AvatarPreviewBase_FallbackAvatar)
                     && i.field_Internal_ApiAvatar_0.assetUrl.IsNotNullOrEmptyOrWhiteSpace()
                     ).ToList();
-                if (list1.AnyAndNotNull())
+
+                if (result.AnyAndNotNull())
                 {
-                    return list1;
+                    return result;
                 }
             }
             catch (Exception e)
@@ -422,7 +436,22 @@
         {
             try
             {
-                var list1 = GameObjectFinder.GetRootGameObjectsComponents<AvatarPedestal>()
+                var list = GameObjectFinder.GetRootGameObjectsComponents<AvatarPedestal>();
+                if (list.Count() != 0)
+                {
+                    foreach (var item in list)
+                    {
+                        if (item.field_Private_VRC_AvatarPedestal_0 != null)
+                        {
+                            if (!item.field_Private_VRC_AvatarPedestal_0.grantBlueprintAccess)
+                            {
+                                item.field_Private_VRC_AvatarPedestal_0.grantBlueprintAccess = true;
+                            }
+                        }
+                    }
+                }
+
+                var list1 = list
                     .Where(
                     i => i.field_Private_ApiAvatar_0 != null &&
                     i.field_Private_ApiAvatar_0.id.IsNotNullOrEmptyOrWhiteSpace() &&
@@ -447,14 +476,26 @@
         {
             try
             {
-                var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_AvatarPedestal>()
+                var list = GameObjectFinder.GetRootGameObjectsComponents<VRC.SDKBase.VRC_AvatarPedestal>();
+                if (list.Count() != 0)
+                {
+                    foreach (var item in list)
+                    {
+                        if (!item.grantBlueprintAccess)
+                        {
+                            item.grantBlueprintAccess = true;
+                        }
+                    }
+                }
+
+                var result = list
                     .Where(
                     i => i.blueprintId.IsNotNullOrEmptyOrWhiteSpace()
                     && i.blueprintId.IsAvatarID()
                     ).ToList();
-                if (list1.AnyAndNotNull())
+                if (result.AnyAndNotNull())
                 {
-                    return list1;
+                    return result;
                 }
             }
             catch (Exception e)
@@ -470,7 +511,21 @@
         {
             try
             {
-                var list1 = GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_AvatarPedestal>()
+                var list =GameObjectFinder.GetRootGameObjectsComponents<VRCSDK2.VRC_AvatarPedestal>();
+                if (list.Count() != 0)
+                {
+                    foreach (var item in list)
+                    {
+                        if (item!= null)
+                        {
+                            if (!item.grantBlueprintAccess)
+                            {
+                                item.grantBlueprintAccess = true;
+                            }
+                        }
+                    }
+                }
+                var list1 = list
                     .Where(
                     i => i.blueprintId.IsNotNullOrEmptyOrWhiteSpace()
                     && i.blueprintId.IsAvatarID()
