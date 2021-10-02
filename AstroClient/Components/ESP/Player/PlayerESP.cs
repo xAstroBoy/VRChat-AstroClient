@@ -6,6 +6,7 @@
     using AstroLibrary.Utility;
     using MelonLoader;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
@@ -38,7 +39,7 @@
         internal void Start()
         {
             // FIND ALLOCATED PLAYER
-            var p = this.GetComponent<Player>();
+            var p = gameObject.GetComponent<Player>();
             if (p != null)
             {
                 Debug($"Found Target Player {p.DisplayName()}, For PlayerESP");
@@ -58,8 +59,7 @@
                 else
                 {
                     Debug($"Found SelectRegion Transform Assigned in {AssignedPlayer.DisplayName()}!");
-                    ObjRenderers = SelectRegion.GetComponentsInChildren<MeshRenderer>(true);
-                    if (ObjRenderers == null && ObjRenderers.Count() == 0)
+                    if (CurrentRenderers == null && CurrentRenderers.Count() == 0)
                     {
                         ModConsole.Error($"Failed to Generate a PlayerESP for Player {AssignedPlayer.DisplayName()}, Due to SelectRegion Renderer Missing!");
                         Destroy(this);
@@ -76,9 +76,9 @@
                                 Debug("Added HighlightsFXStandalone in SelectRegion For Custom Color Option for ESP!");
                             }
                         }
-                        for (int i = 0; i < ObjRenderers.Count; i++)
+                        for (int i = 0; i < CurrentRenderers.Count; i++)
                         {
-                            Renderer ObjRenderer = ObjRenderers[i];
+                            var ObjRenderer = CurrentRenderers[i];
                             if (ObjRenderer != null)
                             {
                                 HighLightOptions.SetHighLighter(ObjRenderer, true);
@@ -300,8 +300,19 @@
             }
         }
 
+        private List<MeshRenderer> CurrentRenderers
+        {
+            get
+            {
+                if (SelectRegion != null)
+                {
+                    return SelectRegion.GetComponentsInChildren<MeshRenderer>(true).ToArray().ToList();
+                }
+                return null;
+            }
+        }
+
         private Transform SelectRegion { get; set; }
-        private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjRenderers{ get; set; }
         private HighlightsFXStandalone HighLightOptions { get; set; }
         internal bool _UseCustomColor;
 
