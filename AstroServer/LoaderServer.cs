@@ -54,16 +54,28 @@
             "/AstroClient/Libs/AstroLibrary.dll"
         };
 
+        public static List<string> BetaLibraries = new List<string>()
+        {
+            "/AstroClient-Beta/Libs/AstroLibrary.dll"
+        };
+
         public static List<string> Melons = new List<string>()
         {
-            "/AstroClient/DontTouchMyClient.dll",
-            "/AstroClient/AstroClientCore.dll",
+            //"/AstroClient/DontTouchMyClient.dll",
+            //"/AstroClient/AstroClientCore.dll",
             "/AstroClient/AstroClient.dll"
+        };
+
+        public static List<string> BetaMelons = new List<string>()
+        {
+            //"/AstroClient/DontTouchMyClient.dll",
+            //"/AstroClient/AstroClientCore.dll",
+            "/AstroClient-Beta/AstroClient.dll"
         };
 
         public static List<string> Modules = new List<string>()
         {
-            "/AstroClient/Module/AstroTestModule.dll"
+            //"/AstroClient/Module/AstroTestModule.dll"
         };
 
         private static void ProcessInput(object sender, PacketData packetData)
@@ -104,6 +116,21 @@
 
                 case PacketClientType.GET_RESOURCES:
                     {
+                        var currentMelons = new List<string>();
+                        var currentLibraries = new List<string>();
+                        var currentModules = Modules;
+
+                        if (client.Data.IsBeta)
+                        {
+                            currentMelons = BetaMelons;
+                            currentLibraries = BetaLibraries;
+                        }
+                        else
+                        {
+                            currentMelons = Melons;
+                            currentLibraries = Libraries;
+                        }
+
                         foreach (var libPath in Libraries)
                         {
                             try

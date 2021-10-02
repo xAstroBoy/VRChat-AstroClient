@@ -102,6 +102,11 @@
                                 client.Send(new PacketData(PacketServerType.ENABLE_DEVELOPER));
                             }
 
+                            if (client.Data.IsBeta)
+                            {
+                                client.Send(new PacketData(PacketServerType.ENABLE_BETATESTER));
+                            }
+
                             if (client.Data.HasUdon)
                             {
                                 client.Send(new PacketData(PacketServerType.ENABLE_UDON));
