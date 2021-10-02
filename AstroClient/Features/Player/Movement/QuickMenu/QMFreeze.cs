@@ -2,6 +2,7 @@
 {
     using AstroLibrary.Utility;
     using RubyButtonAPI;
+    using System.Collections.Generic;
     using UnityEngine;
     using VRC.SDKBase;
 
@@ -10,7 +11,17 @@
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Frozen = false;
+            hasBackuppedGravity = false;
         }
+
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        {
+            if(!hasBackuppedGravity)
+            {
+                originalGravity = Physics.gravity;
+            }
+        }
+
 
 
         internal override void OnQuickMenuOpen()
@@ -66,8 +77,7 @@
                 if (!Frozen)
                 {
                     Frozen = true;
-                    originalGravity = Physics.gravity;
-                    originalVelocity = Networking.LocalPlayer.GetVelocity();
+                    originalVelocity = Utils.LocalPlayer.GetVelocity();
                     if (originalVelocity == Vector3.zero)
                     {
                         return;
@@ -124,7 +134,7 @@
                     if (!Frozen)
                     {
 
-                        if (value.Equals(Vector3.zero))
+                        if (value.x == 0f && value.y == 0f && value.z == 0f)
                         {
                             value = originalGravity;
                         }
@@ -142,7 +152,7 @@
             }
             set
             {
-                if (value.Equals(Vector3.zero))
+                if (value.x == 0f && value.y == 0f && value.z == 0f)
                 {
                     return; // Discard this value as is No Gravity.
                 }
@@ -155,5 +165,7 @@
         private static Vector3 originalVelocity;
 
         internal static bool RestoreVelocity = false;
+
+        internal static bool hasBackuppedGravity = false;
     }
 }
