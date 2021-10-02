@@ -84,7 +84,7 @@
 
             switch (networkEventID)
             {
-                case PacketClientType.AUTH:
+                case PacketClientType.CONNECTED:
                     {
                         client.Key = packetData.TextData;
 

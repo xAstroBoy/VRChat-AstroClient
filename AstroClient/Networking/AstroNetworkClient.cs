@@ -100,7 +100,7 @@
                     break;
 
                 case PacketServerType.CONNECTED:
-                    Client.Send(new PacketData(PacketClientType.AUTH, KeyManager.AuthKey));
+                    Client.Send(new PacketData(PacketClientType.CONNECTED, KeyManager.AuthKey));
                     break;
 
                 case PacketServerType.DISCONNECT:

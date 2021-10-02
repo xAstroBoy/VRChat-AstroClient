@@ -8,6 +8,7 @@
     using System.Linq;
     using System.Net;
     using System.Net.Sockets;
+    using System.Security.Cryptography;
     using System.Threading.Tasks;
 
     internal class LoaderServer
@@ -29,6 +30,8 @@
             serverSocket.Start();
             Console.WriteLine("Loader Server Started.");
 
+            Console.WriteLine($"InjectorHash: {GetInjectorHash().GetByteArrayAsString()}");
+
             Task task = new Task(() =>
             {
                 while (true)
@@ -48,6 +51,8 @@
             });
             task.Start();
         }
+
+        public static string InjectorPath = "../Client/AstroInjector.dll";
 
         public static List<string> Libraries = new List<string>()
         {
@@ -78,6 +83,16 @@
             //"/AstroClient/Module/AstroTestModule.dll"
         };
 
+        private static byte[] GetInjectorHash()
+        {
+            using (SHA256 mySHA256 = SHA256.Create())
+            {
+                var stream = File.OpenRead(InjectorPath);
+                stream.Position = 0;
+                return mySHA256.ComputeHash(stream);
+            }
+        }
+
         private static void ProcessInput(object sender, PacketData packetData)
         {
             var networkEventID = packetData.NetworkEventID;
@@ -91,7 +106,7 @@
 
             switch (networkEventID)
             {
-                case PacketClientType.AUTH:
+                case PacketClientType.CONNECTED:
                     {
                         string key = packetData.TextData;
 

@@ -46,6 +46,7 @@
 
             // Key count
             Console.WriteLine($"There are {AccountManager.GetDevKeyCount()} dev keys stored.");
+            Console.WriteLine($"There are {AccountManager.GetBetaKeyCount()} beta keys stored.");
             Console.WriteLine($"There are {AccountManager.GetKeyCount()} valid keys stored.");
 
             Console.WriteLine("Starting Server..");

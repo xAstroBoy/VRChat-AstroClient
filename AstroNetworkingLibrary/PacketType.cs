@@ -2,7 +2,6 @@
 {
     public static class PacketClientType
     {
-        public const byte AUTH = 1;
         public const byte CONNECTED = 1;
         public const byte DISCONNECT = 2;
         public const byte SEND_PLAYER_USERID = 11;
@@ -15,6 +14,7 @@
         public const byte AVATAR_SEARCH = 225;
         public const byte AVATAR_REPORT = 226;
         public const byte AVATAR_DELETE = 227;
+        public const byte MASS_NOTIFY = 230;
     }
 
     public static class PacketServerType
@@ -34,20 +34,17 @@
 
         // Loader Stuff
         public const byte LOADER_DONE = 200;
-
         public const byte LOADER_LIBRARY = 201;
         public const byte LOADER_MELON = 202;
         public const byte LOADER_MODULE = 203;
 
         // Other Stuff
         public const byte LOG = 220;
-
         public const byte DEBUG = 221;
         public const byte NOTIFY = 223;
 
         // Avatar Stuff
         public const byte AVATAR_RESULT = 230;
-
         public const byte AVATAR_RESULT_DONE = 231;
     }
 }
