@@ -11,20 +11,6 @@
             Frozen = false;
         }
 
-        internal override void OnUpdate()
-        {
-            if (FreezePlayerOnQMOpen)
-            {
-                if (QuickMenuUtils_Old.IsQuickMenuOpen)
-                {
-                    Freeze();
-                }
-                else
-                {
-                    Unfreeze();
-                }
-            }
-        }
 
         internal override void OnQuickMenuOpen()
         {

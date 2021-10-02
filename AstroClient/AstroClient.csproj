@@ -133,6 +133,8 @@
     <Compile Include="Moderation\ModerationNotifier.cs" />
     <Compile Include="Moderation\PhotonModerationHandler.cs" />
     <Compile Include="Networking\HandleClient.cs" />
+    <Compile Include="Regexes\RegexExtensions.cs" />
+    <Compile Include="Regexes\RegexUtils.cs" />
     <Compile Include="RegisterComponent.cs" />
     <Compile Include="Spawnables\Enderpearl\AstroEnderPearl.cs" />
     <Compile Include="Components\Enderpearl\EnderPearlBehaviour.cs" />
