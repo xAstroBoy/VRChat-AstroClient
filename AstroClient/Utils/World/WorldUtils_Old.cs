@@ -347,10 +347,10 @@
             {
                 for (int i = 0; i < EmbededUdonPedestrals.Count; i++)
                 {
-                    VRC.SDK3.Components.VRCAvatarPedestal pedestal = EmbededUdonPedestrals[i];
-                    if (pedestal.blueprintId.IsNotNullOrEmptyOrWhiteSpace())
+                    string avatarid = EmbededUdonPedestrals[i];
+                    if (avatarid.IsNotNullOrEmptyOrWhiteSpace())
                     {
-                        var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
+                        var avatar = AvatarUtils.GetApiAvatar(avatarid);
                         if (avatar != null)
                         {
                             AddAvatar(avatar);
