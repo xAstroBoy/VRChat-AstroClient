@@ -3,7 +3,9 @@
     using AstroClient.Udon;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
+    using AstroLibrary.Finder;
     using AstroLibrary.Utility;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
@@ -109,15 +111,19 @@
 
         internal static List<VRC.SDK3.Components.VRCAvatarPedestal> FindUdonAvatarPedestrals()
         {
-            var udons = Resources.FindObjectsOfTypeAll<UdonBehaviour>();
+            var udons = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
             var result = new List<VRC.SDK3.Components.VRCAvatarPedestal>();
-            if(udons.Count() != 0)
+            if (udons.Count() != 0)
             {
-                foreach(var item in udons)
+                foreach (var behaviour in udons)
                 {
-                    var unpackedudon = item.DisassembleUdonBehaviour();
+                    var unpackedudon = behaviour.DisassembleUdonBehaviour();
                     if (unpackedudon != null)
                     {
+                        if (unpackedudon == null || unpackedudon == null)
+                        {
+                            continue;
+                        }
                         foreach (var symbol in unpackedudon.IUdonSymbolTable.GetSymbols())
                         {
                             if (symbol != null)
@@ -128,49 +134,64 @@
                                 {
                                     var Il2CppType = UnboxVariable.GetIl2CppType();
                                     string FullName = Il2CppType.FullName;
-                                    switch(FullName)
+                                    try
                                     {
-                                        case UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal:
-                                            {
-                                                var pedestral = UnboxVariable.Unpack_VRC_SDK3_Components_VRCAvatarPedestal();
-                                                if (pedestral != null)
+                                        switch (FullName)
+                                        {
+                                            case UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal:
                                                 {
-                                                    if(!result.Contains(pedestral))
+                                                    var pedestral = UnboxVariable.Unpack_VRC_SDK3_Components_VRCAvatarPedestal();
+                                                    if (pedestral != null)
                                                     {
+                                                        if(!pedestral.grantBlueprintAccess)
+                                                        {
+                                                            pedestral.grantBlueprintAccess = true;
+                                                        }
                                                         result.Add(pedestral);
                                                     }
+                                                    break;
                                                 }
-                                                break;
-                                            }
-                                        case UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal_Array:
-                                            {
-                                                var list = UnboxVariable.Unpack_List_VRC_SDK3_Components_VRCAvatarPedestal();
-                                                if (list != null && list.Count != 0)
+                                            case UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal_Array:
                                                 {
-
-                                                    foreach (var pedestral in list)
+                                                    var list = UnboxVariable.Unpack_List_VRC_SDK3_Components_VRCAvatarPedestal();
+                                                    if (list != null && list.Count != 0)
                                                     {
-                                                        if (!result.Contains(pedestral))
+
+                                                        foreach (var pedestral in list)
                                                         {
-                                                            result.Add(pedestral);
+                                                            if (pedestral != null)
+                                                            {
+                                                                if (!pedestral.grantBlueprintAccess)
+                                                                {
+                                                                    pedestral.grantBlueprintAccess = true;
+                                                                }
+
+                                                                result.Add(pedestral);
+                                                            }
                                                         }
                                                     }
+                                                    break;
                                                 }
-                                                break;
-                                            }
-                                        default:
-                                            continue;
+                                            default:
+                                                continue;
+                                        }
                                     }
+
+                                    catch (Exception e)
+                                    {
+                                        ModConsole.DebugErrorExc(e);
+                                    }
+
                                 }
                             }
                         }
                     }
                 }
-
-
-
             }
             return result;
+
+
+
         }
     }
 }
