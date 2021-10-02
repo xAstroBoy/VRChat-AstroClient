@@ -13,14 +13,14 @@
         {
             await DB.InitAsync("astro", MongoClientSettings.FromConnectionString(GetConnectionString()));
 
-            var accounts = DB.Collection<AccountData>();
+            // I use this below to update accounts when I add new fields
+            //var accounts = DB.Collection<AccountData>();
 
-            var update = Builders<AccountData>.Update.Set("IsBeta", false);
-            var filter = Builders<AccountData>.Filter.Empty;
-            var options = new UpdateOptions() { IsUpsert = true };
-            var result = accounts.UpdateMany(filter, update, options);
-
-            Console.WriteLine($"Updated: {result.ModifiedCount} accounts with missing data");
+            //var update = Builders<AccountData>.Update.Set("IsBeta", false);
+            //var filter = Builders<AccountData>.Filter.Empty;
+            //var options = new UpdateOptions() { IsUpsert = true };
+            //var result = accounts.UpdateMany(filter, update, options);
+            //Console.WriteLine($"Updated: {result.ModifiedCount} accounts with missing data");
 
             // Clean the database
             var avatars = await DB.Find<AvatarDataEntity>().ManyAsync(a => a.Name == null).ConfigureAwait(false);
