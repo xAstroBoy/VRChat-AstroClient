@@ -121,6 +121,7 @@
                         }
 
                         client.Send(new PacketData(PacketServerType.CONNECTION_FINISHED));
+                        client.Send(new PacketData(PacketServerType.REQUEST_INFO));
                         break;
                     }
 

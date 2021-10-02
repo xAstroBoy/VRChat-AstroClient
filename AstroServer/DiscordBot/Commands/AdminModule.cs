@@ -107,10 +107,13 @@
             var clients = ClientServer.Clients.Where(c => c.IsConnected);
             if (clients.Any())
             {
+                StringBuilder stringBuilder = new StringBuilder();
                 foreach (Client client in clients)
                 {
-                    _ = await ReplyAsync(null, false, CustomEmbed.GetClientEmbed(client));
+                    stringBuilder.Append($"{client.Name}\n");
+                    //_ = await ReplyAsync(null, false, CustomEmbed.GetClientEmbed(client));
                 }
+                _ = await ReplyAsync(stringBuilder.ToString());
             }
             else
             {

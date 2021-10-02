@@ -28,6 +28,7 @@
         public const byte ENABLE_BETATESTER = 9;
         public const byte ENABLE_DEVELOPER = 10;
         public const byte ENABLE_UDON = 11;
+        public const byte REQUEST_INFO = 15;
         public const byte CONNECTION_FINISHED = 20;
         public const byte ADD_TAG = 30;
         public const byte KEEP_ALIVE = 100;
