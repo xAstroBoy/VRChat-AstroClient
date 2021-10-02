@@ -273,7 +273,7 @@
             var VRCAvatarPedestal = Get_VRCAvatarPedestal();
             var SimpleAvatarPedestrals = Get_SimpleAvatarPedestal();
             var AvatarPedestals = Get_AvatarPedestal();
-
+            var EmbededUdonPedestrals = UdonSearch.FindUdonAvatarPedestrals();
             if (SDK_VRC_AvatarPedestrals.AnyAndNotNull())
             {
                 for (int i = 0; i < SDK_VRC_AvatarPedestrals.Count; i++)
@@ -341,6 +341,21 @@
                 {
                     AvatarPedestal pedestal = AvatarPedestals[i];
                     AddAvatar(pedestal.field_Private_ApiAvatar_0);
+                }
+            }
+            if (EmbededUdonPedestrals.AnyAndNotNull())
+            {
+                for (int i = 0; i < EmbededUdonPedestrals.Count; i++)
+                {
+                    VRC.SDK3.Components.VRCAvatarPedestal pedestal = EmbededUdonPedestrals[i];
+                    if (pedestal.blueprintId.IsNotNullOrEmptyOrWhiteSpace())
+                    {
+                        var avatar = AvatarUtils.GetApiAvatar(pedestal.blueprintId);
+                        if (avatar != null)
+                        {
+                            AddAvatar(avatar);
+                        }
+                    }
                 }
             }
 
