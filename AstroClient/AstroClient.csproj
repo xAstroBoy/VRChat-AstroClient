@@ -207,7 +207,6 @@
     <Compile Include="Buttons\DevMenu.cs" />
     <Compile Include="Cheetos\AstroInput.cs" />
     <Compile Include="Cheetos\AvatarHider.cs" />
-    <Compile Include="Cheetos\ButtonCreator.cs" />
     <Compile Include="CheetosUI\CheetoMenu.cs" />
     <Compile Include="Buttons\AdminMenu.cs" />
     <Compile Include="Cheetos\ForceClone.cs" />

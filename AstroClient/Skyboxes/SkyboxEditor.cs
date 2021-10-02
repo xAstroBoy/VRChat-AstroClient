@@ -49,8 +49,8 @@
             }
         }
 
-        internal static List<AssetBundleSkyboxes> LoadedSkyboxesBundles = new List<AssetBundleSkyboxes>();
-        internal static List<MaterialSkyboxes> LoadedSkyboxesMaterials = new List<MaterialSkyboxes>();
+        internal static List<AssetBundleSkyboxes> LoadedSkyboxesBundles { get; private set; } = new List<AssetBundleSkyboxes>();
+        //internal static List<MaterialSkyboxes> LoadedSkyboxesMaterials { get; private set; } = new List<MaterialSkyboxes>();
 
         private static bool HasLoadedCachedSkyboxes = false;
 
@@ -77,10 +77,10 @@
             return LoadedSkyboxesBundles.Where(x => x.SkyboxName == filename).Any(); ;
         }
 
-        internal static bool IsMaterialAlreadyRegistered(string filename)
-        {
-            return LoadedSkyboxesMaterials.Where(x => x.SkyboxName == filename).Any(); ;
-        }
+        //internal static bool IsMaterialAlreadyRegistered(string filename)
+        //{
+        //    return LoadedSkyboxesMaterials.Where(x => x.SkyboxName == filename).Any(); ;
+        //}
 
         //internal static void SaveCurrentSkybox()
         //{
@@ -139,22 +139,6 @@
                         }
 
                         // TODO : ADD SOMETHING TO YOINK WORLD SKYBOXES
-                        //if (file.EndsWith(".astromat"))
-                        //{
-                        //    if (!IsMaterialAlreadyRegistered(Path.GetFileName(file)))
-                        //    {
-                        //        Material newmat = null;
-                        //        byte[] Bytes = File.ReadAllBytes(file);
-                        //         if(Bytes != null)
-                        //        {
-                        //            newmat = (Material)Bytes;
-                        //            if (newmat == null)
-                        //            {
-                        //            }
-
-                        //        }
-                        //    }
-                        //}
                         else
                         {
                             ModConsole.Warning("Skipping Registered Skybox :" + Path.GetFileName(file));
@@ -179,10 +163,46 @@
             yield break;
         }
 
-        private static void SetNewSkybox(Material mat)
+        private static void SetRenderSettingSkybox(Material mat)
         {
             RenderSettings.skybox = mat;
         }
+        internal static void SetRenderSettingSkybox(AssetBundleSkyboxes skybox)
+        {
+            SetRenderSettingSkybox(skybox.SkyboxBundle.LoadAsset_Internal(skybox.SkyboxMaterialPath, Il2CppType.Of<Material>()).Cast<Material>());
+        }
+
+
+        internal static bool SetSkyboxByFileName(string name)
+        {
+            if(!name.IsNotNullOrEmptyOrWhiteSpace())
+            {
+                ModConsole.DebugError($"Set a valid Skybox Name , Got {name}");
+                return false;
+            }
+            if(LoadedSkyboxesBundles.Count() == 0)
+            {
+                ModConsole.Error($"There are no skybox Registered, unable to set a custom skybox.");
+                return false;
+            }
+            if (LoadedSkyboxesBundles.Count() != 0)
+            {
+                foreach (var skybox in LoadedSkyboxesBundles)
+                {
+                    if(skybox != null)
+                    {
+                        if(skybox.SkyboxName.ToLower().Equals(name.ToLower()))
+                        {
+                            SetRenderSettingSkybox(skybox);
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+
 
         internal static void CustomSkyboxesMenu(QMTabMenu main, float x, float y, bool btnHalf)
         {
@@ -196,7 +216,7 @@
               }, "", null, null, true);
             _ = new QMSingleButton(menu, 0, 0.5f, "Reset Skybox", delegate
               {
-                  SetNewSkybox(OriginalSkybox);
+                  SetRenderSettingSkybox(OriginalSkybox);
               }, "", null, null, true);
             scroll.SetAction(delegate
             {
@@ -210,7 +230,7 @@
                             tmp.SetResizeTextForBestFit(true);
                             tmp.SetAction(new Action(() =>
                             {
-                                SetNewSkybox(skybox.SkyboxBundle.LoadAsset_Internal(skybox.SkyboxMaterialPath, Il2CppType.Of<Material>()).Cast<Material>());
+                                SetRenderSettingSkybox(skybox);
                             }));
                             scroll.Add(tmp);
                         }
