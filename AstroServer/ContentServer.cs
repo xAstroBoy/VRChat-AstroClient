@@ -52,30 +52,30 @@
             task.Start();
         }
 
-        public static string InjectorPath = "../Client/AstroInjector.dll";
+        public static string InjectorPath = "/Client/AstroInjector.dll";
 
         public static List<string> Libraries = new List<string>()
         {
-            "../Client/Public/Libs/AstroLibrary.dll"
+            "/Client/Public/Libs/AstroLibrary.dll"
         };
 
         public static List<string> BetaLibraries = new List<string>()
         {
-            "../Client/Beta/Libs/AstroLibrary.dll"
+            "/Client/Beta/Libs/AstroLibrary.dll"
         };
 
         public static List<string> Melons = new List<string>()
         {
             //"/AstroClient/DontTouchMyClient.dll",
             //"/AstroClient/AstroClientCore.dll",
-            "../Client/Public/AstroClient.dll"
+            "/Client/Public/AstroClient.dll"
         };
 
         public static List<string> BetaMelons = new List<string>()
         {
             //"/AstroClient/DontTouchMyClient.dll",
             //"/AstroClient/AstroClientCore.dll",
-            "../Client/Beta/AstroClient.dll"
+            "/Client/Beta/AstroClient.dll"
         };
 
         public static List<string> Modules = new List<string>()
@@ -87,7 +87,7 @@
         {
             using (SHA256 mySHA256 = SHA256.Create())
             {
-                var stream = File.OpenRead(InjectorPath);
+                var stream = File.OpenRead(Environment.CurrentDirectory + InjectorPath);
                 stream.Position = 0;
                 return mySHA256.ComputeHash(stream);
             }
@@ -139,11 +139,13 @@
                         {
                             currentMelons = BetaMelons;
                             currentLibraries = BetaLibraries;
+                            Console.WriteLine("Content Type: Beta Tester");
                         }
                         else
                         {
                             currentMelons = Melons;
                             currentLibraries = Libraries;
+                            Console.WriteLine("Content Type: Public");
                         }
 
                         foreach (var libPath in currentLibraries)
