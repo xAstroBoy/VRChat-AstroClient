@@ -186,7 +186,7 @@
                     {
                         Console.WriteLine($"[{client.Name}] Avatar Search: {client.Temp.SearchType}, {packetData.TextData.ToLower()}");
 
-                        List<AvatarDataEntity> found = DB.Find<AvatarDataEntity>().Limit(300).ManyAsync(a => a.Name.ToLower().Contains(packetData.TextData.ToLower())).GetAwaiter().GetResult();
+                        List<AvatarDataEntity> found = DB.Find<AvatarDataEntity>().Limit(1000).ManyAsync(a => a.Name.ToLower().Contains(packetData.TextData.ToLower())).GetAwaiter().GetResult();
                         List<AvatarDataEntity> toSend = new List<AvatarDataEntity>();
 
                         if (found.Any())
