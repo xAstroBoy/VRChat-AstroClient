@@ -109,10 +109,10 @@
             return null;
         }
 
-        internal static List<VRC.SDK3.Components.VRCAvatarPedestal> FindUdonAvatarPedestrals()
+        internal static List<string> FindUdonAvatarPedestrals()
         {
             var udons = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
-            var result = new List<VRC.SDK3.Components.VRCAvatarPedestal>();
+            var result = new List<string>();
             if (udons.Count() != 0)
             {
                 foreach (var behaviour in udons)
@@ -138,6 +138,70 @@
                                     {
                                         switch (FullName)
                                         {
+                                            case UdonTypes_String.System_String:
+                                            {
+                                                    var item = UnboxVariable.Unpack_String();
+                                                    if (item != null && item.IsNotNullOrEmptyOrWhiteSpace())
+                                                    {
+                                                        if (item.IsAvatarID())
+                                                        {
+                                                            result.Add(item);
+                                                        }
+                                                        else
+                                                        {
+                                                            var ids = item.GetAllAvatarIDs();
+                                                            if (ids != null)
+                                                            {
+                                                                if (ids.Count() != 0)
+                                                                {
+                                                                    foreach (var id in ids)
+                                                                    {
+                                                                        if (id != null)
+                                                                        {
+                                                                            result.Add(id);
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        
+                                                    }
+                                                    break;
+                                                }
+                                            case UdonTypes_String.System_String_Array:
+                                                {
+                                                    var list = UnboxVariable.Unpack_List_String();
+                                                    if (list.Count() != 0)
+                                                        foreach (var value in list)
+                                                        {
+                                                            {
+                                                                if (value != null && value.IsNotNullOrEmptyOrWhiteSpace())
+                                                                {
+                                                                    if (value.IsAvatarID())
+                                                                    {
+                                                                        result.Add(value);
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        var ids = value.GetAllAvatarIDs();
+                                                                        if (ids.Count() != 0)
+                                                                        {
+                                                                            foreach (var id in ids)
+                                                                            {
+                                                                                if (id != null)
+                                                                                {
+                                                                                    result.Add(id);
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    }
+
+                                                                }
+
+                                                            }
+                                                        }
+                                                    break;
+                                                }
                                             case UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal:
                                                 {
                                                     var pedestral = UnboxVariable.Unpack_VRC_SDK3_Components_VRCAvatarPedestal();
@@ -147,7 +211,10 @@
                                                         {
                                                             pedestral.grantBlueprintAccess = true;
                                                         }
-                                                        result.Add(pedestral);
+                                                        if (pedestral.blueprintId.IsNotNullOrEmptyOrWhiteSpace() && pedestral.blueprintId.IsAvatarID())
+                                                        {
+                                                            result.Add(pedestral.blueprintId);
+                                                        }
                                                     }
                                                     break;
                                                 }
@@ -165,8 +232,10 @@
                                                                 {
                                                                     pedestral.grantBlueprintAccess = true;
                                                                 }
-
-                                                                result.Add(pedestral);
+                                                                if (pedestral.blueprintId.IsNotNullOrEmptyOrWhiteSpace() && pedestral.blueprintId.IsAvatarID())
+                                                                {
+                                                                    result.Add(pedestral.blueprintId);
+                                                                }
                                                             }
                                                         }
                                                     }
@@ -177,11 +246,9 @@
                                         }
                                     }
 
-                                    catch (Exception e)
+                                    catch
                                     {
-                                        ModConsole.DebugErrorExc(e);
                                     }
-
                                 }
                             }
                         }

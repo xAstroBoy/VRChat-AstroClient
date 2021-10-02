@@ -1,8 +1,10 @@
 ﻿namespace AstroClient
 {
+    using AstroClientCore.Events;
     #region Imports
 
     using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
     using AstroNetworkingLibrary;
     using System;
     using System.Diagnostics;
@@ -15,6 +17,13 @@
     public static class ConfigManager
     {
         private static Mutex SaveMutex = new Mutex();
+
+        #region ESPEVents
+        internal static event EventHandler<ColorEventArgs> Event_OnPublicESPColorChanged;
+        internal static event EventHandler<ColorEventArgs> Event_OnBlockedESPColorChanged;
+        internal static event EventHandler<ColorEventArgs> Event_OnFriendESPColorChanged;
+
+        #endregion
 
         #region Paths
 
@@ -68,6 +77,7 @@
                 ESP.PublicESPColor[1] = value.g;
                 ESP.PublicESPColor[2] = value.b;
                 ESP.PublicESPColor[3] = value.a;
+                Event_OnPublicESPColorChanged.SafetyRaise(new ColorEventArgs(value));
             }
         }
 
@@ -83,6 +93,7 @@
                 ESP.ESPFriendColor[1] = value.g;
                 ESP.ESPFriendColor[2] = value.b;
                 ESP.ESPFriendColor[3] = value.a;
+                Event_OnFriendESPColorChanged.SafetyRaise(new ColorEventArgs(value));
             }
         }
 
@@ -98,6 +109,7 @@
                 ESP.ESPBlockedColor[1] = value.g;
                 ESP.ESPBlockedColor[2] = value.b;
                 ESP.ESPBlockedColor[3] = value.a;
+                Event_OnBlockedESPColorChanged.SafetyRaise(new ColorEventArgs(value));
             }
         }
 

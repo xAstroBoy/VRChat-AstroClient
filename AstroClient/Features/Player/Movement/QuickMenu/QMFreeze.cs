@@ -1,6 +1,8 @@
 ﻿namespace AstroClient.Features.Player.Movement.QuickMenu_QMFreeze
 {
+    using AstroLibrary.Utility;
     using RubyButtonAPI;
+    using System.Collections.Generic;
     using UnityEngine;
     using VRC.SDKBase;
 
@@ -9,22 +11,18 @@
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
             Frozen = false;
+            hasBackuppedGravity = false;
         }
 
-        internal override void OnUpdate()
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            if (FreezePlayerOnQMOpen)
+            if(!hasBackuppedGravity)
             {
-                if (QuickMenuUtils_Old.IsQuickMenuOpen)
-                {
-                    Freeze();
-                }
-                else
-                {
-                    Unfreeze();
-                }
+                originalGravity = Physics.gravity;
             }
         }
+
+
 
         internal override void OnQuickMenuOpen()
         {
@@ -60,14 +58,14 @@
         {
             if (Frozen)
             {
+                Frozen = false;
                 if (Networking.LocalPlayer != null)
                 {
-                    Physics.gravity = originalGravity;
+                    CurrentGravity = originalGravity;
                     if (RestoreVelocity)
                     {
                         Networking.LocalPlayer.SetVelocity(originalVelocity);
                     }
-                    Frozen = false;
                 }
             }
         }
@@ -78,15 +76,14 @@
             {
                 if (!Frozen)
                 {
-                    originalGravity = Physics.gravity;
-                    originalVelocity = Networking.LocalPlayer.GetVelocity();
+                    Frozen = true;
+                    originalVelocity = Utils.LocalPlayer.GetVelocity();
                     if (originalVelocity == Vector3.zero)
                     {
                         return;
                     }
-                    Physics.gravity = Vector3.zero;
+                    CurrentGravity = Vector3.zero;
                     Networking.LocalPlayer.SetVelocity(Vector3.zero);
-                    Frozen = true;
                 }
                 else
                 {
@@ -120,6 +117,33 @@
         internal static QMToggleButton FreezePlayerOnQMOpenToggle;
         internal static bool Frozen;
 
+        private static Vector3 CurrentGravity
+        {
+            get
+            {
+                return Physics.gravity;
+            }
+            set
+            {
+                if (Frozen && !Utils.LocalPlayer.IsPlayerGrounded())
+                {
+                    Physics.gravity = value;
+                }
+                else
+                {
+                    if (!Frozen)
+                    {
+
+                        if (value.x == 0f && value.y == 0f && value.z == 0f)
+                        {
+                            value = originalGravity;
+                        }
+                        Physics.gravity = value;
+                    }
+                }
+            }
+        }
+
         private static Vector3 originalGravity
         {
             get
@@ -140,7 +164,8 @@
 
         private static Vector3 originalVelocity;
 
-        internal static bool Opened;
         internal static bool RestoreVelocity = false;
+
+        internal static bool hasBackuppedGravity = false;
     }
 }
