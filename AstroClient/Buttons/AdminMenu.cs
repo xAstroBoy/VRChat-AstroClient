@@ -4,6 +4,10 @@
 
     using AstroClient.Variables;
     using AstroLibrary;
+    using AstroLibrary.Enums;
+    using AstroNetworkingLibrary;
+    using AstroNetworkingLibrary.Serializable;
+    using DayClientML2.Utility;
     using RubyButtonAPI;
     using System.Reflection;
 
@@ -15,10 +19,20 @@
 
         internal static void InitButtons(float pos)
         {
-            if (Bools.IsDeveloper)
-            {
-                SubMenu = new QMTabMenu(pos, "Admin Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.badge.png"));
-            }
+            if (!Bools.IsDeveloper) { return; }
+            SubMenu = new QMTabMenu(pos, "Admin Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.badge.png"));
+
+            _ = new QMSingleButton(SubMenu, 1, 1, "Mass\nNotify", () => {
+                CheetosHelpers.PopupCall("Astro Avatar Search", "Search", "Enter Avatar name. . .", false, delegate (string text)
+                {
+                    MassNotify(text);
+                });
+            }, "Mass Notify");
+        }
+
+        private static void MassNotify(string message)
+        {
+            AstroNetworkClient.Client.Send(new PacketData(PacketClientType.MASS_NOTIFY, message));
         }
     }
 }
