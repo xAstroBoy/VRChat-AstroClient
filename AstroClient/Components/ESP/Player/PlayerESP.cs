@@ -58,7 +58,7 @@
                 else
                 {
                     Debug($"Found SelectRegion Transform Assigned in {AssignedPlayer.DisplayName()}!");
-                    ObjRenderers = SelectRegion.GetComponentsInChildren<Renderer>(true);
+                    ObjRenderers = SelectRegion.GetComponentsInChildren<MeshRenderer>(true);
                     if (ObjRenderers == null && ObjRenderers.Count() == 0)
                     {
                         ModConsole.Error($"Failed to Generate a PlayerESP for Player {AssignedPlayer.DisplayName()}, Due to SelectRegion Renderer Missing!");
@@ -301,7 +301,7 @@
         }
 
         private Transform SelectRegion { get; set; }
-        private UnhollowerBaseLib.Il2CppArrayBase<Renderer> ObjRenderers{ get; set; }
+        private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjRenderers{ get; set; }
         private HighlightsFXStandalone HighLightOptions { get; set; }
         internal bool _UseCustomColor;
 
