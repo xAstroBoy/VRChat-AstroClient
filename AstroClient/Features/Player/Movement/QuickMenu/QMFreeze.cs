@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Features.Player.Movement.QuickMenu_QMFreeze
 {
+    using AstroLibrary.Utility;
     using RubyButtonAPI;
     using UnityEngine;
     using VRC.SDKBase;
@@ -14,7 +15,6 @@
 
         internal override void OnQuickMenuOpen()
         {
-            Opened = true;
             if (FreezePlayerOnQMOpen)
             {
                 if (Networking.LocalPlayer != null)
@@ -30,7 +30,6 @@
 
         internal override void OnQuickMenuClose()
         {
-            Opened = false;
             if (FreezePlayerOnQMOpen)
             {
                 if (Networking.LocalPlayer != null)
@@ -48,6 +47,7 @@
         {
             if (Frozen)
             {
+                Frozen = false;
                 if (Networking.LocalPlayer != null)
                 {
                     CurrentGravity = originalGravity;
@@ -55,7 +55,6 @@
                     {
                         Networking.LocalPlayer.SetVelocity(originalVelocity);
                     }
-                    Frozen = false;
                 }
             }
         }
@@ -66,6 +65,7 @@
             {
                 if (!Frozen)
                 {
+                    Frozen = true;
                     originalGravity = Physics.gravity;
                     originalVelocity = Networking.LocalPlayer.GetVelocity();
                     if (originalVelocity == Vector3.zero)
@@ -74,7 +74,6 @@
                     }
                     CurrentGravity = Vector3.zero;
                     Networking.LocalPlayer.SetVelocity(Vector3.zero);
-                    Frozen = true;
                 }
                 else
                 {
@@ -116,18 +115,18 @@
             }
             set
             {
-                if (Opened && !Networking.LocalPlayer.IsPlayerGrounded())
+                if (Frozen && !Utils.LocalPlayer.IsPlayerGrounded())
                 {
                     Physics.gravity = value;
                 }
                 else
                 {
-                    if (!Opened)
+                    if (!Frozen)
                     {
 
                         if (value.Equals(Vector3.zero))
                         {
-                            return; // Discard this value as is No Gravity.
+                            value = originalGravity;
                         }
                         Physics.gravity = value;
                     }
@@ -155,7 +154,6 @@
 
         private static Vector3 originalVelocity;
 
-        internal static bool Opened { get; set; }
         internal static bool RestoreVelocity = false;
     }
 }
