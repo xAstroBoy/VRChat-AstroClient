@@ -93,6 +93,16 @@
         {
             try
             {
+                if (!IsEnabled || isPaused)
+                {
+                    if (HasRequiredSettings)
+                    {
+                        RigidBodyController.RestoreOriginalBody();
+                        HasRequiredSettings = false;
+                    }
+                    return;
+                }
+
                 if (PickupController.IsHeld)
                 {
                     if (HasRequiredSettings)

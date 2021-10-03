@@ -79,6 +79,11 @@
             {
                 if (!IsEnabled || isPaused)
                 {
+                    if (HasRequiredSettings)
+                    {
+                        RigidBodyController.RestoreOriginalBody();
+                        HasRequiredSettings = false;
+                    }
                     return;
                 }
                 if (Time.time - LastTimeCheck > RocketTimer)
