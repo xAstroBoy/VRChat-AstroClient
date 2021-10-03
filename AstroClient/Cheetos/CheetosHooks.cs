@@ -29,7 +29,7 @@
     #endregion Imports
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
-    internal partial class CheetosHooks : GameEvents
+    internal class CheetosHooks : GameEvents
     {
         internal static EventHandler<ScreenEventArgs> Event_OnShowScreen { get; set; }
         internal static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonJoin { get; set; }
@@ -64,7 +64,6 @@
         {
             try
             {
-                ModConsole.Log("[Cheetos Patches] Appying Patches.");
                 new Patch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_0)), GetPatch(nameof(OnAvatarDownload)));
                 new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
                 new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
@@ -87,12 +86,7 @@
                 new Patch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
                 new Patch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
                 new Patch(typeof(Cursor).GetProperty(nameof(Cursor.lockState)).GetSetMethod(), GetPatch(nameof(MousePatch)), null);
-
-                // Experiments
                 new Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.Method_Public_Boolean_String_Object_Boolean_PDM_0)), GetPatch(nameof(LoadBalancingClient_OpWebRpc)));
-
-                ModConsole.Log($"[Cheetos Patches] Done patching {Patch.Patches.Count} methods!");
-                Patch.DoPatches();
             }
             catch (Exception e) { ModConsole.Error($"[Cheetos Patches] Error in applying patches : {e}"); }
             finally { }

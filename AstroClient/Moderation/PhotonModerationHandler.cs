@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Moderation
 {
+    #region Imports
 
     using AstroClient.Variables;
     using AstroClientCore.Events;
@@ -16,17 +17,16 @@
     using UnityEngine;
     using VRC.SDKBase;
 
+    #endregion
 
     internal class PhotonModerationHandler : GameEvents
     {
+        #region EventHandlers
         internal static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerBlockedYou;
-
         internal static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnblockedYou;
-
         internal static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerMutedYou;
-
         internal static event System.EventHandler<PhotonPlayerEventArgs> Event_OnPlayerUnmutedYou;
-
+        #endregion
 
         internal static void Handle_Photon_ModerationEvent_NeedToBlock(object RawData, byte code, Player PhotonSender, int PhotonID)
         {
@@ -123,7 +123,6 @@
             }
         }
 
-
         private static void ModerationEventNotifier(object data, byte code, Player photon, int sender, int EventType, bool isBlocked)
         {
             if (ConfigManager.General.LogEvents)
@@ -157,9 +156,6 @@
                 line.Clear();
             }
         }
-    
-
-
 
         private static void OnPlayerBlockedYou_Invoker(Photon.Realtime.Player player)
         {

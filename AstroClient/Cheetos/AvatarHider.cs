@@ -23,16 +23,10 @@
         internal override void OnAvatarSpawn(VRCAvatarManager avatarManager, GameObject avatar)
         {
             if (avatarManager == null || avatar == null) throw new ArgumentNullException();
-            if (HideAvatar)
+            if (HideAvatar && Utils.LocalPlayer.GetPlayer().GetUserID().Equals(avatar.transform.root.GetComponent<Player>().GetUserID()))
             {
-                var self = Utils.LocalPlayer.GetPlayer();
-                var owner = avatar.transform.root.GetComponent<Player>();
-
-                if (self.GetUserID().Equals(owner.GetUserID()))
-                {
-                    DestroyAvatar(avatar);
-                    ModConsole.DebugLog("Your avatar was hidden.");
-                }
+                DestroyAvatar(avatar);
+                ModConsole.DebugLog("Your avatar was hidden.");
             }
         }
     }

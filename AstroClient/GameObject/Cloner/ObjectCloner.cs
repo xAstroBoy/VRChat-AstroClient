@@ -10,7 +10,7 @@
     {
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
-            _Holder = null;
+            _holder = null;
             SpawnerSubmenu.ClonedObjects.Clear();
             SpawnerSubmenu.UpdateSpawnedPickupsBtn();
         }
@@ -27,13 +27,13 @@
             SpawnerSubmenu.UpdateSpawnedPickupsBtn();
         }
 
-        private static GameObject _Holder;
+        private static GameObject _holder;
 
         private static GameObject GetClonedHolder()
         {
-            if (_Holder != null)
+            if (_holder != null)
             {
-                return _Holder;
+                return _holder;
             }
             else
             {
@@ -44,13 +44,13 @@
                     name = "Cloned GameObject Holder (AstroClient)",
                     active = true
                 };
-                return _Holder = parent;
+                return _holder = parent;
             }
         }
 
         internal static void CloneGameObject(GameObject GameObject)
         {
-            ModConsole.DebugLog("Found A Target GameObject  :" + GameObject.name);
+            ModConsole.DebugLog($"Found A Target GameObject  :{GameObject.name}");
             var obj = Object.Instantiate(GameObject);
             if (obj != null)
             {
@@ -64,7 +64,7 @@
                     SpawnerSubmenu.ClonedObjects.Add(obj);
                     SpawnerSubmenu.UpdateSpawnedPickupsBtn();
                 }
-                ModConsole.Log("Spawned A Copy Successfully!, cloned " + obj.name);
+                ModConsole.Log($"Spawned A Copy Successfully!, cloned {obj.name}");
                 Tweaker_Object.SetObjectToEdit(obj);
             }
             else

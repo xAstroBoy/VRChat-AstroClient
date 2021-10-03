@@ -35,6 +35,7 @@
     using VRC.UI;
     using Application = UnityEngine.Application;
     using Button = UnityEngine.UI.Button;
+    using AstroClient.Cheetos;
 
     #endregion Imports
 
@@ -113,7 +114,6 @@
             {
                 InitializeOverridables();
                 DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
-                //Event_OnApplicationStart.SafetyRaise(this, new EventArgs());
             }
         }
 
@@ -180,7 +180,12 @@
             }
 
             stopwatch.Stop();
-            ModConsole.Log($"Initialize Overidables: Took {stopwatch.ElapsedMilliseconds}ms");
+            ModConsole.Log($"Initialized {Overridable_List.Count} Overidables: Took {stopwatch.ElapsedMilliseconds}ms");
+
+            foreach (var thing in CheetosHooks.Event_OnPhotonJoin.GetInvocationList())
+            {
+                ModConsole.Log(thing.Target.ToString());
+            }
         }
 
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
@@ -241,7 +246,7 @@
         private void Start_VRChat_OnQuickMenuInit()
         {
             if (!KeyManager.IsAuthed) return;
-            Event_VRChat_OnQuickMenuInit.SafetyRaise();
+            Event_VRChat_OnQuickMenuInit?.SafetyRaise();
         }
 
         private void Start_VRChat_OnUiManagerInit()
@@ -265,7 +270,7 @@
             _ = new QMSingleButton("ShortcutMenu", 5, 3.5f, "GameObject Toggler", () => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }, "Advanced GameObject Toggler", null, null, true);
             CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 3f, true);
 
-            Event_VRChat_OnUiManagerInit.SafetyRaise();
+            Event_VRChat_OnUiManagerInit?.SafetyRaise();
 
             stopwatch.Stop();
             ModConsole.Log($"Start_VRChat_OnUiManagerInit: Took {stopwatch.ElapsedMilliseconds}ms");

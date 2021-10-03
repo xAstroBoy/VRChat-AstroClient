@@ -15,294 +15,95 @@ namespace AstroLibrary.Utility
 
     public static class PlayerUtils
     {
-        #region CurrentUser
-        /// <summary>
-        /// Gets the current VRCPlayer
-        /// </summary>
-        /// <param name="instance"></param>
-        /// <returns></returns>
-        public static VRCPlayer VRCPlayer => VRCPlayer.field_Internal_Static_VRCPlayer_0;
+        public static VRCPlayer? GetVRCPlayer() => VRCPlayer.field_Internal_Static_VRCPlayer_0;
 
-        public static Player GetPlayer() => VRCPlayer.GetPlayer();
+        public static Player? GetPlayer() => GetVRCPlayer()?.GetPlayer();
 
-        /// <summary>
-        /// Gets the current APIUser
-        /// </summary>
-        /// <returns></returns>
-        public static APIUser GetAPIUser()
-        {
-            return VRCPlayer.GetAPIUser();
-        }
+        public static APIUser? GetAPIUser() => GetVRCPlayer()?.GetAPIUser();
 
-        /// <summary>
-        /// Gets the current players userid
-        /// </summary>
-        /// <returns></returns>
-        public static string UserID()
-        {
-            return VRCPlayer.GetUserID();
-        }
+        public static string UserID() => GetVRCPlayer().GetUserID();
 
-        /// <summary>
-        /// Gets the current players dispay name
-        /// </summary>
-        /// <returns></returns>
-        public static string DisplayName()
-        {
-            return VRCPlayer.GetDisplayName();
-        }
+        public static string DisplayName() => GetVRCPlayer().GetDisplayName();
 
-        public static bool IsInVR()
-        {
-            return XRDevice.isPresent;
-        }
-        #endregion
+        public static bool IsInVR() => XRDevice.isPresent;
 
-        #region VRC.Player
-        public static VRC.Player GetPlayer(this VRCPlayer instance)
-        {
-            return instance?._player;
-        }
+        public static VRC.Player GetPlayer(this VRCPlayer instance) => instance._player;
 
-        public static VRC.Player GetPlayer(this PlayerNet instance)
-        {
-            return instance?.prop_Player_0;
-        }
+        public static VRC.Player GetPlayer(this PlayerNet instance) => instance.prop_Player_0;
 
-        public static VRC.Player GetPlayer(this VRCPlayerApi instance)
-        {
-            return Utils.PlayerManager.GetPlayerID(instance.playerId);
-        }
+        public static VRC.Player GetPlayer(this VRCPlayerApi instance) => Utils.PlayerManager.GetPlayerID(instance.playerId);
 
-        public static VRC.Player GetPlayer(this APIUser instance)
-        {
-            return Utils.PlayerManager.GetPlayer(instance.id);
-        }
+        public static VRC.Player GetPlayer(this APIUser instance) => Utils.PlayerManager.GetPlayer(instance.id);
 
+        public static VRCPlayer GetVRCPlayer(this VRC.Player instance) => instance._vrcplayer;
 
-        #endregion
+        public static VRCPlayer GetVRCPlayer(this PlayerNet instance) => instance._vrcPlayer;
 
-        #region VRCPlayer
-        public static VRCPlayer GetVRCPlayer(this VRC.Player instance)
-        {
-            return instance?._vrcplayer;
-        }
+        public static int GetPhotonID(this VRCPlayer instance) => instance.GetPhotonView().GetPhotonID();
 
-        public static VRCPlayer GetVRCPlayer(this PlayerNet instance)
-        {
-            return instance?._vrcPlayer;
-        }
+        public static APIUser GetAPIUser(this VRCPlayer instance) => instance._player.prop_APIUser_0;
 
-        public static int GetPhotonID(this VRCPlayer instance)
-        {
-            return instance.GetPhotonView().GetPhotonID();
-        }
+        public static APIUser GetAPIUser(this VRC.Player instance) => instance.prop_APIUser_0;
 
-        #endregion
+        public static APIUser GetAPIUser(this PlayerNet instance) => instance.GetPlayer().GetAPIUser();
 
-        #region API User
-        public static APIUser GetAPIUser(this VRCPlayer instance)
-        {
-            return instance?._player.prop_APIUser_0;
-        }
+        public static ApiAvatar GetApiAvatar(this VRCPlayer instance) => instance.prop_ApiAvatar_0;
 
-        public static APIUser GetAPIUser(this VRC.Player instance)
-        {
-            return instance?.prop_APIUser_0;
-        }
+        public static ApiAvatar GetApiAvatar(this VRC.Player instance) => instance.prop_ApiAvatar_0;
 
-        public static APIUser GetAPIUser(this PlayerNet instance)
-        {
-            return instance?.GetPlayer().GetAPIUser();
-        }
-        #endregion
+        public static ApiAvatar GetApiAvatarQuest(this VRCPlayer instance) => instance.prop_ApiAvatar_1;
 
-        #region Api Avatar
-        // Get PC Api Avatar
-        public static ApiAvatar GetApiAvatar(this VRCPlayer instance)
-        {
-            return instance.prop_ApiAvatar_0;
-        }
+        public static ApiAvatar GetApiAvatarQuest(this VRC.Player instance) => instance._vrcplayer.prop_ApiAvatar_1;
 
-        public static ApiAvatar GetApiAvatar(this VRC.Player instance)
-        {
-            return instance.prop_ApiAvatar_0;
-        }
+        public static bool IsAllPlatform(this ApiAvatar instance) => instance.supportedPlatforms == ApiModel.SupportedPlatforms.All;
 
-        // Get Quest Api Avatar (fallback avatar)
-        public static ApiAvatar GetApiAvatarQuest(this VRCPlayer instance)
-        {
-            return instance.prop_ApiAvatar_1;
-        }
+        public static bool IsPCPlatform(this ApiAvatar instance) => instance.supportedPlatforms == ApiModel.SupportedPlatforms.StandaloneWindows;
 
-        public static ApiAvatar GetApiAvatarQuest(this VRC.Player instance)
-        {
-            return instance._vrcplayer.prop_ApiAvatar_1;
-        }
+        public static bool IsQuestPlatform(this ApiAvatar instance) => instance.supportedPlatforms == ApiModel.SupportedPlatforms.Android;
 
-        // Api Avatar Details
-        public static bool IsAllPlatform(this ApiAvatar instance)
-        {
-            return instance.supportedPlatforms == ApiModel.SupportedPlatforms.All;
-        }
+        public static USpeaker GetUSpeaker(this VRC.Player instance) => instance.prop_USpeaker_0;
 
-        public static bool IsPCPlatform(this ApiAvatar instance)
-        {
-            return instance.supportedPlatforms == ApiModel.SupportedPlatforms.StandaloneWindows;
-        }
+        public static USpeaker GetUSpeaker(this VRCPlayer instance) => instance.prop_USpeaker_0;
 
-        public static bool IsQuestPlatform(this ApiAvatar instance)
-        {
-            return instance.supportedPlatforms == ApiModel.SupportedPlatforms.Android;
-        }
+        public static bool Is_Talking(this USpeaker speaker) => speaker.prop_Boolean_0;
 
-        #endregion
+        public static VRCPlayerApi GetVRCPlayerApi(this VRCPlayer instance) => instance.prop_VRCPlayerApi_0;
 
-        #region USpeaker
-        public static USpeaker GetUSpeaker(this VRC.Player instance)
-        {
-            return instance.prop_USpeaker_0;
-        }
+        public static VRCPlayerApi GetVRCPlayerApi(this VRC.Player instance) => instance.prop_VRCPlayerApi_0;
 
-        public static USpeaker GetUSpeaker(this VRCPlayer instance)
-        {
-            return instance.prop_USpeaker_0;
-        }
+        public static VRCPlayerApi GetVRCPlayerApi(this PlayerNet instance) => instance?.GetVRCPlayer().GetVRCPlayerApi();
 
-        public static bool Is_Talking(this USpeaker speaker)
-        {
-            return speaker.prop_Boolean_0;
-        }
-        #endregion
+        public static PlayerNet GetPlayerNet(this VRC.Player instance) => instance._playerNet;
 
-        #region VRCPlayerApi
-        public static VRCPlayerApi GetVRCPlayerApi(this VRCPlayer instance)
-        {
-            return instance?.prop_VRCPlayerApi_0;
-        }
+        public static PlayerNet GetPlayerNet(this VRCPlayer instance) => instance._playerNet;
 
-        public static VRCPlayerApi GetVRCPlayerApi(this VRC.Player instance)
-        {
-            return instance?.prop_VRCPlayerApi_0;
-        }
+        public static Photon.Realtime.LoadBalancingClient GetLoadBalancingPeer() => GetPhotonHandler().prop_LoadBalancingClient_0;
 
-        public static VRCPlayerApi GetVRCPlayerApi(this PlayerNet instance)
-        {
-            return instance?.GetVRCPlayer().GetVRCPlayerApi();
-        }
-        #endregion
+        public static PhotonHandler GetPhotonHandler() => PhotonHandler.field_Internal_Static_MonoBehaviour1PrivateObInPrInBoInInInInUnique_0;
 
-        #region PlayerNet
-        public static PlayerNet GetPlayerNet(this VRC.Player instance)
-        {
-            return instance._playerNet;
-        }
+        public static PhotonView GetPhotonView(this VRCPlayer instance) => instance.prop_PhotonView_0;
 
-        public static PlayerNet GetPlayerNet(this VRCPlayer instance)
-        {
-            return instance._playerNet;
-        }
-        #endregion
+        private static int GetPhotonID(this PhotonView instance) => instance.field_Private_Int32_0;
 
-        #region Photon
-        public static Photon.Realtime.LoadBalancingClient LoadBalancingPeer
-        {
-            get
-            {
-                return PhotonHandler.prop_LoadBalancingClient_0;
-            }
-        }
+        public static Player GetPlayerIDPhoton(this PlayerManager Instance, int playerID) => Instance.AllPlayers().Where(x => x.GetVRCPlayer() != null).Where(x => x.GetVRCPlayer().GetPhotonView() != null).Where(x => x.GetVRCPlayer().GetPhotonView().GetPhotonID() == playerID).FirstOrDefault(null);
 
-        public static PhotonHandler PhotonHandler
-        {
-            get
-            {
-                return PhotonHandler.field_Internal_Static_MonoBehaviour1PrivateObInPrInBoInInInInUnique_0;
-            }
-        }
+        public static List<Player> GetAllPlayers(this PlayerManager instance) => instance.AllPlayers();
 
+        public static PlayerManager GetPlayerManager() => PlayerManager.prop_PlayerManager_0;
 
-        public static PhotonView GetPhotonView(this VRCPlayer instance)
-        {
-            return instance?.prop_PhotonView_0;
-        }
+        public static void ReloadAvatar() => VRCPlayer.Method_Public_Static_Void_APIUser_PDM_0(GetAPIUser());
 
-        private static int GetPhotonID(this PhotonView instance)
-        {
-            return instance.field_Private_Int32_0;
-        }
+        public static void ReloadAvatar(this VRCPlayer instance) => VRCPlayer.Method_Public_Static_Void_APIUser_PDM_0(instance.GetAPIUser());
 
-        public static Player GetPlayerIDPhoton(this PlayerManager Instance, int playerID)
-        {
-            return Instance.AllPlayers()
-                .Where(x => x.GetVRCPlayer() != null)
-                .Where(x => x.GetVRCPlayer().GetPhotonView() != null)
-                .Where(x => x.GetVRCPlayer().GetPhotonView().GetPhotonID() == playerID)
-                .FirstOrDefault(null);
-            //var Players = Instance.AllPlayers()
-            //foreach (Player player in Players.ToArray())
-            //    if (player.GetVRCPlayerApi().playerId == playerID)
-            //        return player;
-            //return null;
-        }
-        #endregion
+        public static void ReloadAvatar(this VRC.Player instance) => ReloadAvatar(instance.GetVRCPlayer());
 
+        public static GameObject GetAvatar(this VRC.Player Instance) => Instance.GetVRCPlayer().GetAvatarManager().GetAvatar();
 
-        #region PlayerManager
+        public static GameObject GetAvatar(this VRCPlayer Instance) => Instance.GetAvatarManager().GetAvatar();
 
-        public static List<Player> GetAllPlayers(this PlayerManager instance)
-        {
-            return instance?.AllPlayers();
-        }
+        public static VRCAvatarManager GetAvatarManager(this VRCPlayer Instance) => Instance.prop_VRCAvatarManager_0;
 
-        public static PlayerManager PlayerManager
-        {
-            get
-            {
-                return PlayerManager.prop_PlayerManager_0;
-            }
-        }
-
-
-        #endregion
-
-        #region Avatar
-        public static void ReloadAvatar()
-        {
-            VRCPlayer.Method_Public_Static_Void_APIUser_PDM_0(GetAPIUser());
-        }
-
-        public static void ReloadAvatar(this VRCPlayer instance)
-        {
-            VRCPlayer.Method_Public_Static_Void_APIUser_PDM_0(instance.GetAPIUser());
-        }
-
-        public static void ReloadAvatar(this VRC.Player instance)
-        {
-            ReloadAvatar(instance.GetVRCPlayer());
-        }
-
-        public static GameObject GetAvatar(this VRC.Player Instance)
-        {
-            return Instance.GetVRCPlayer().GetAvatarManager().GetAvatar();
-        }
-
-        public static GameObject GetAvatar(this VRCPlayer Instance)
-        {
-            return Instance.GetAvatarManager().GetAvatar();
-        }
-
-        public static VRCAvatarManager GetAvatarManager(this VRCPlayer Instance)
-        {
-            return Instance.prop_VRCAvatarManager_0;
-        }
-
-
-        public static GameObject GetAvatarObject(this VRC.Player Instance)
-        {
-            return Instance.GetVRCPlayer().field_Internal_GameObject_0;
-        }
-
+        public static GameObject GetAvatarObject(this VRC.Player Instance) => Instance.GetVRCPlayer().field_Internal_GameObject_0;
 
         public static GameObject GetAvatar(this VRCAvatarManager Instance)
         {
@@ -311,156 +112,59 @@ namespace AstroLibrary.Utility
             return null;
         }
 
-        public static ApiAvatar GetAPIAvatar(this VRCAvatarManager Instance)
-        {
-            return Instance.field_Private_ApiAvatar_0;
-        }
-        #endregion
+        public static ApiAvatar GetAPIAvatar(this VRCAvatarManager Instance) => Instance.field_Private_ApiAvatar_0;
 
-        #region User Info
-        // Is In VR
-        public static bool IsInVR(this VRCPlayer instance)
-        {
-            return instance.prop_VRCPlayerApi_0.IsUserInVR();
-        }
+        public static bool IsInVR(this VRCPlayer instance) => instance.prop_VRCPlayerApi_0.IsUserInVR();
 
-        public static bool IsInVR(this VRCPlayerApi instance)
-        {
-            return instance.IsUserInVR();
-        }
+        public static bool IsInVR(this VRCPlayerApi instance) => instance.IsUserInVR();
 
-        public static bool IsInVR(this VRC.Player instance)
-        {
-            return instance.prop_VRCPlayerApi_0.IsUserInVR();
-        }
+        public static bool IsInVR(this VRC.Player instance) => instance.prop_VRCPlayerApi_0.IsUserInVR();
 
-        // Is Instance Master
-        public static bool IsInstanceMaster(this VRCPlayer instance)
-        {
-            return instance.prop_VRCPlayerApi_0.isMaster;
-        }
+        public static bool IsInstanceMaster(this VRCPlayer instance) => instance.prop_VRCPlayerApi_0.isMaster;
 
-        public static bool IsInstanceMaster(this VRCPlayerApi instance)
-        {
-            return instance.isMaster;
-        }
+        public static bool IsInstanceMaster(this VRCPlayerApi instance) => instance.isMaster;
 
-        public static bool IsInstanceMaster(this VRC.Player instance)
-        {
-            return instance.prop_VRCPlayerApi_0.isMaster;
-        }
+        public static bool IsInstanceMaster(this VRC.Player instance) => instance.prop_VRCPlayerApi_0.isMaster;
 
-        // Is Instance Creator
         public static bool IsInstanceCreator(this VRCPlayer instance)
-        {
-            return instance.prop_VRCPlayerApi_0.isInstanceOwner;
-        }
+        => instance.prop_VRCPlayerApi_0.isInstanceOwner;
 
-        public static bool IsInstanceCreator(this VRCPlayerApi instance)
-        {
-            return instance.isInstanceOwner;
-        }
+        public static bool IsInstanceCreator(this VRCPlayerApi instance) => instance.isInstanceOwner;
 
-        public static bool IsInstanceCreator(this VRC.Player instance)
-        {
-            return instance.prop_VRCPlayerApi_0.isInstanceOwner;
-        }
+        public static bool IsInstanceCreator(this VRC.Player instance) => instance.prop_VRCPlayerApi_0.isInstanceOwner;
 
-        // Is World Creator
-        public static bool IsWorldCreator(this VRC.Player instance)
-        {
-            return WorldUtils.World.authorId == instance.prop_APIUser_0.id;
-        }
+        public static bool IsWorldCreator(this VRC.Player instance) => WorldUtils.World.authorId == instance.prop_APIUser_0.id;
 
-        public static bool IsWorldCreator(this VRCPlayer instance)
-        {
-            return WorldUtils.World.authorId == instance._player.prop_APIUser_0.id;
-        }
+        public static bool IsWorldCreator(this VRCPlayer instance) => WorldUtils.World.authorId == instance._player.prop_APIUser_0.id;
 
-        public static bool IsWorldCreator(this APIUser instance)
-        {
-            return WorldUtils.World.authorId == instance.id;
-        }
+        public static bool IsWorldCreator(this APIUser instance) => WorldUtils.World.authorId == instance.id;
 
-        // Is Friend
-        public static bool IsFriend(this VRCPlayer instance)
-        {
-            return APIUser.IsFriendsWith(instance._player.field_Private_APIUser_0.id);
-        }
+        public static bool IsFriend(this VRCPlayer instance) => APIUser.IsFriendsWith(instance._player.field_Private_APIUser_0.id);
 
-        public static bool IsFriend(this VRC.Player instance)
-        {
-            return APIUser.IsFriendsWith(instance.field_Private_APIUser_0.id);
-        }
+        public static bool IsFriend(this VRC.Player instance) => APIUser.IsFriendsWith(instance.field_Private_APIUser_0.id);
 
-        public static bool IsFriend(this APIUser instance)
-        {
-            return APIUser.IsFriendsWith(instance.id);
-        }
+        public static bool IsFriend(this APIUser instance) => APIUser.IsFriendsWith(instance.id);
 
-        // Is Staff Member
-        public static bool IsStaffMember(this APIUser instance)
-        {
-            return instance.tags.Contains("admin_moderator")
-                || instance.hasModerationPowers
-                || instance.tags.Contains("admin_")
-                || instance.hasSuperPowers;
-        }
+        public static bool IsStaffMember(this APIUser instance) => instance.tags.Contains("admin_moderator") || instance.hasModerationPowers || instance.tags.Contains("admin_") || instance.hasSuperPowers;
 
-        public static bool IsStaffMember(this VRCPlayer instance)
-        {
-            return instance.GetAPIUser().tags.Contains("admin_moderator")
-                || instance.GetAPIUser().hasModerationPowers
-                || instance.GetAPIUser().tags.Contains("admin_")
-                || instance.GetAPIUser().hasSuperPowers;
-        }
+        public static bool IsStaffMember(this VRCPlayer instance) => instance.GetAPIUser().tags.Contains("admin_moderator") || instance.GetAPIUser().hasModerationPowers || instance.GetAPIUser().tags.Contains("admin_") || instance.GetAPIUser().hasSuperPowers;
 
-        public static bool IsStaffMember(this VRC.Player instance)
-        {
-            return instance.GetAPIUser().tags.Contains("admin_moderator")
-                || instance.GetAPIUser().hasModerationPowers
-                || instance.GetAPIUser().tags.Contains("admin_")
-                || instance.GetAPIUser().hasSuperPowers;
-        }
+        public static bool IsStaffMember(this VRC.Player instance) => instance.GetAPIUser().tags.Contains("admin_moderator") || instance.GetAPIUser().hasModerationPowers || instance.GetAPIUser().tags.Contains("admin_") || instance.GetAPIUser().hasSuperPowers;
 
-        // Display Name
-        public static string GetDisplayName(this VRCPlayerApi instance)
-        {
-            return instance.displayName;
-        }
+        public static string GetDisplayName(this VRCPlayerApi instance) => instance.displayName;
 
-        public static string GetDisplayName(this VRCPlayer instance)
-        {
-            return instance._player.prop_APIUser_0.displayName;
-        }
+        public static string GetDisplayName(this VRCPlayer instance) => instance._player.prop_APIUser_0.displayName;
 
-        public static string GetDisplayName(this VRC.Player instance)
-        {
-            return instance.prop_APIUser_0.displayName;
-        }
+        public static string GetDisplayName(this VRC.Player instance) => instance.prop_APIUser_0.displayName;
 
-        public static string GetDisplayName(this APIUser instance)
-        {
-            return instance.displayName;
-        }
+        public static string GetDisplayName(this APIUser instance) => instance.displayName;
 
-        // User ID
-        public static string GetUserID(this VRCPlayer instance)
-        {
-            return instance._player.prop_APIUser_0.id;
-        }
+        public static string GetUserID(this VRCPlayer instance) => instance._player.prop_APIUser_0.id;
 
-        public static string GetUserID(this VRC.Player instance)
-        {
-            return instance.prop_APIUser_0.id;
-        }
+        public static string GetUserID(this VRC.Player instance) => instance.prop_APIUser_0.id;
 
-        public static string GetUserID(this APIUser instance)
-        {
-            return instance.id;
-        }
+        public static string GetUserID(this APIUser instance) => instance.id;
 
-        // Frames
         public static int GetFrames(this VRC.Player instance) => instance.GetPlayerNet().prop_Byte_0 != 0 ? (int)(1000f / instance.GetPlayerNet().prop_Byte_0) : 0;
 
         public static int GetFrames(this VRCPlayer instance) => instance.GetPlayerNet().prop_Byte_0 != 0 ? (int)(1000f / instance.GetPlayerNet().prop_Byte_0) : 0;
@@ -481,7 +185,6 @@ namespace AstroLibrary.Utility
                 : frames <= 25 ? $"<color=red>{frames}</color>" : $"<color=orange>{frames}</color>";
         }
 
-        // Ping
         public static short GetPing(this VRCPlayer instance) => instance.GetPlayerNet().field_Private_Int16_0;
 
         public static short GetPing(this VRC.Player instance) => instance.GetPlayerNet().field_Private_Int16_0;
@@ -497,9 +200,7 @@ namespace AstroLibrary.Utility
             var ping = instance.GetPing();
             return ping >= 80 ? $"<color=red>{ping}</color>" : ping <= 35 ? $"<color=green>{ping}</color>" : $"<color=orange>{ping}</color>";
         }
-        #endregion
 
-        #region Ranks
         public static Color GetRankColor(this APIUser instance)
         {
             if (instance != null)
@@ -566,9 +267,7 @@ namespace AstroLibrary.Utility
                 return "VeryNegativeTrust";
             return "Visitor";
         }
-        #endregion
 
-        #region Module Based Methods
         public static string GetTags(VRC.Player instance)
         {
             string results = string.Empty;
@@ -680,21 +379,5 @@ namespace AstroLibrary.Utility
                 return "Online";
             }
         }
-        #endregion
-
-        #region Mod Methods
-
-        //internal static string GetTrueRank(this APIUser instance)
-        //{
-        //    var apiUser = Modules.TrueRanks.CachedApiUsers.Find(x => x.id == instance.id) ?? instance;
-        //    return GetRank(apiUser);
-        //}
-
-        //internal static string GetTrueRankColor(this APIUser instance)
-        //{
-        //    var apiUser = Modules.TrueRanks.CachedApiUsers.Find(x => x.id == instance.id) ?? instance;
-        //    return GetRankColor(apiUser);
-        //}
-        #endregion
     }
 }

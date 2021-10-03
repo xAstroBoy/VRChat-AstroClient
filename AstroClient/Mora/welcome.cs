@@ -12,7 +12,7 @@
         {
             if (!HasDisplayed)
             {
-                PopupUtils.QueHudMessage($"Welcome Back <Color=#c242f5>{ PlayerUtils.DisplayName()}</color> \n 	<color=#42f5f2>AstroClient</color> Made By\n <color=#2A3EBF>AstroBoy</color> and <color=#F79239>Cheetos</color>");
+                PopupUtils.QueHudMessage($"Welcome Back <Color=#c242f5>{PlayerUtils.DisplayName()}</color>\n<color=#42f5f2>AstroClient</color> Made By\n <color=#2A3EBF>AstroBoy</color> and <color=#F79239>Cheetos</color>");
                 HasDisplayed = true;
             }
         }

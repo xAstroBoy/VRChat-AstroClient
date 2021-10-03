@@ -77,7 +77,6 @@
             return boxed ?? null;
         }
 
-
         internal static Il2CppSystem.Object Generate_Il2CPPObject(UnityEngine.Color item)
         {
             var boxed = item.BoxIl2CppObject();
@@ -90,7 +89,6 @@
             var boxed = converted.BoxIl2CppObject();
             return boxed ?? null;
         }
-
 
         internal static Il2CppSystem.Object Generate_Il2CPPObject(UnityEngine.Vector3 item)
         {
@@ -113,8 +111,9 @@
         internal static Il2CppSystem.Object Generate_Il2CppObject_Unmanaged<T>(T[] array) where T : unmanaged
         {
             var list = new Il2CppSystem.Collections.Generic.List<T>();
-            foreach (var item in array)
+            for (int i = 0; i < array.Length; i++)
             {
+                T item = array[i];
                 if (!list.Contains(item))
                 {
                     list.Add(item);
@@ -136,8 +135,9 @@
         internal static Il2CppSystem.Object Generate_Il2CPPObject_Il2cppObjectBase<T>(T[] array) where T : Il2CppObjectBase
         {
             var list = new Il2CppSystem.Collections.Generic.List<T>();
-            foreach (var item in array)
+            for (int i = 0; i < array.Length; i++)
             {
+                T item = array[i];
                 if (!list.Contains(item))
                 {
                     list.Add(item);

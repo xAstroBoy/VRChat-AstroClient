@@ -100,13 +100,13 @@
         private static void EnableNoClip()
         {
             noClipEnabled = true;
-            PlayerUtils.VRCPlayer.gameObject.GetComponent<CharacterController>().enabled = false;
+            PlayerUtils.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = false;
         }
 
         private static void DisableNoClip()
         {
             noClipEnabled = false;
-            PlayerUtils.VRCPlayer.gameObject.GetComponent<CharacterController>().enabled = true;
+            PlayerUtils.GetVRCPlayer().gameObject.GetComponent<CharacterController>().enabled = true;
         }
 
         internal override void OnRoomJoined()
@@ -132,7 +132,7 @@
             {
                 if (currentPlayer == null || transform == null)
                 {
-                    currentPlayer = PlayerUtils.VRCPlayer;
+                    currentPlayer = PlayerUtils.GetVRCPlayer();
                     isInVR = currentPlayer.IsInVR();
                     transform = Camera.main.transform;
                 }

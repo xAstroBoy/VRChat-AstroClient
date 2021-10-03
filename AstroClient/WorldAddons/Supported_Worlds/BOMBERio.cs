@@ -54,8 +54,10 @@
 
         internal static GameObject GetRandomQuad()
         {
-            foreach (var item in GameObjectFinder.FindRootSceneObject("ItemManager").transform.Get_Childs())
+            List<Transform> list = GameObjectFinder.FindRootSceneObject("ItemManager").transform.Get_Childs();
+            for (int i = 0; i < list.Count; i++)
             {
+                Transform item = list[i];
                 ModConsole.DebugLog($"Grabbed Quad : {item.name}");
                 return item.gameObject;
             }
@@ -599,37 +601,13 @@
             }
         }
 
-        private static string Outside_RunSpeedSymbol
-        {
-            get
-            {
-                return "__8_const_intnl_SystemSingle";
-            }
-        }
+        private static string Outside_RunSpeedSymbol => "__8_const_intnl_SystemSingle";
 
-        private static string Outside_WalkAndStrafeSpeedSymbol
-        {
-            get
-            {
-                return "__5_const_intnl_SystemSingle";
-            }
-        }
+        private static string Outside_WalkAndStrafeSpeedSymbol => "__5_const_intnl_SystemSingle";
 
-        private static string Inner_RunSpeedSymbol
-        {
-            get
-            {
-                return "__9_const_intnl_SystemSingle";
-            }
-        }
+        private static string Inner_RunSpeedSymbol => "__9_const_intnl_SystemSingle";
 
-        private static string Inner_WalkAndStrafeSpeedSymbol
-        {
-            get
-            {
-                return "__1_const_intnl_SystemSingle";
-            }
-        }
+        private static string Inner_WalkAndStrafeSpeedSymbol => "__1_const_intnl_SystemSingle";
 
         private static bool HasUnboxedDefaultSpeeds = false;
 

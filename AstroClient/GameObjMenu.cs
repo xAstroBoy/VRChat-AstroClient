@@ -54,13 +54,7 @@
 
         internal static bool IsOnRootScene { get; set; } = true;
 
-        internal static bool IsARootParent
-        {
-            get
-            {
-                return IsARootObject(Current);
-            }
-        }
+        internal static bool IsARootParent => IsARootObject(Current);
 
         internal static IEnumerator RoutineStart()
         {

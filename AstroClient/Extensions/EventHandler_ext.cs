@@ -15,8 +15,10 @@
             if (eh == null)
                 return;
 
-            foreach (var handler in eh.GetInvocationList())
+            Delegate[] array = eh.GetInvocationList();
+            for (int i = 0; i < array.Length; i++)
             {
+                Delegate handler = array[i];
                 try
                 {
                     _ = handler.DynamicInvoke(null, null);
@@ -39,8 +41,10 @@
             if (eh == null)
                 return;
 
-            foreach (var handler in eh.GetInvocationList())
+            Delegate[] array = eh.GetInvocationList();
+            for (int i = 0; i < array.Length; i++)
             {
+                Delegate handler = array[i];
                 try
                 {
                     _ = handler.DynamicInvoke(null, e);

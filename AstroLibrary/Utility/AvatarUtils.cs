@@ -5,12 +5,7 @@
 
     public static class AvatarUtils
     {
-        #region Extensions
-        public static bool IsAvatarID(this string id)
-        {
-            return id.IsNotNullOrEmptyOrWhiteSpace() && id.StartsWith("avtr_");
-        }
-        #endregion
+        public static bool IsAvatarID(this string id) => id.IsNotNullOrEmptyOrWhiteSpace() && id.StartsWith("avtr_");
 
         public static ApiAvatar GetApiAvatar(string avatarID)
         {

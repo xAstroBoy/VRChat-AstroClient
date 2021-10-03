@@ -2105,9 +2105,6 @@
             }
         }
 
-
-
-
         internal static void PatchHeap(IUdonHeap heap, uint address, System.TimeSpan value, bool verify = false)
         {
             if (heap != null)
@@ -2207,8 +2204,6 @@
             }
         }
 
-
-
         internal static void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.VRCPickup value, bool verify = false)
         {
             if (heap != null)
@@ -2259,10 +2254,6 @@
             }
         }
 
-
-
-
-
         internal static void PatchHeap(IUdonHeap heap, uint address, VRC.SDK3.Components.VRCAvatarPedestal value, bool verify = false)
         {
             if (heap != null)
@@ -2312,9 +2303,6 @@
                 ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
             }
         }
-
-
-
 
         internal static void PatchHeap(DisassembledUdonBehaviour UnpackedUdonBehaviour, string symbol, ushort value, bool verify = false)
         {
@@ -2489,9 +2477,6 @@
             }
         }
 
-
-
-
         internal static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Image value, bool verify = false)
         {
             if (heap != null)
@@ -2542,9 +2527,6 @@
             }
         }
 
-
-
-
         internal static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.UI.Toggle value, bool verify = false)
         {
             if (heap != null)
@@ -2594,8 +2576,6 @@
                 ModConsole.DebugLog("Unable To Patch Udon Heap as is null!");
             }
         }
-
-
 
         internal static void PatchHeap(IUdonHeap heap, uint address, UnityEngine.AI.NavMeshHit value, bool verify = false)
         {

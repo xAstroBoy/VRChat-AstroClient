@@ -18,7 +18,6 @@
 
         internal override void OnPhotonJoined(Photon.Realtime.Player player)
         {
-            if (player == null) throw new ArgumentNullException();
             ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Joined!");
 
             if (ConfigManager.General.JoinLeave && isReady)
@@ -29,7 +28,6 @@
 
         internal override void OnPhotonLeft(Photon.Realtime.Player player)
         {
-            if (player == null) { throw new ArgumentNullException(); }
             ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Left!");
 
             if (ConfigManager.General.JoinLeave && isReady)

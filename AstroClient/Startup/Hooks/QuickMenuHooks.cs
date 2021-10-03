@@ -49,8 +49,6 @@
             try
             {
                 new Patch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Public_Void_Player_0)), GetPatch(nameof(OnSelectedPlayerPatch)));
-
-                Patch.DoPatches();
             }
             catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
             finally { }

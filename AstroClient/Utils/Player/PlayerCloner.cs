@@ -9,7 +9,7 @@
         // CREDITS : Unreal (Day's one is broken and refused to stay in place)
         internal static GameObject CloneLocalPlayerAvatar()
         {
-            if (PlayerUtils.VRCPlayer != null)
+            if (PlayerUtils.GetVRCPlayer() != null)
             {
                 var original = PlayerUtils.GetPlayer().GetAvatarObject();
                 if (original != null)

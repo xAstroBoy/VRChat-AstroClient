@@ -44,8 +44,9 @@
                 // DEAD Until Lists gets exposed...
 
                 var module1 = UdonSearch.FindAllUdonEvents("BilliardsModule", "_start");
-                foreach (var modules in module1)
+                for (int i = 0; i < module1.Count; i++)
                 {
+                    UdonBehaviour_Cached modules = module1[i];
                     BilliardsModules.Add(modules.UdonBehaviour.DisassembleUdonBehaviour()); // WTF
                 }
                 var cue_0_unpacked = UdonSearch.FindUdonEvent("intl.cue-0", "_start");
@@ -59,8 +60,9 @@
                     Cue_1 = cue_1_unpacked.UdonBehaviour.DisassembleUdonBehaviour();
                 }
                 var module2 = UdonSearch.FindAllUdonEvents("NetworkingManager", "_OnGameReset");
-                foreach (var modules in module2)
+                for (int i = 0; i < module2.Count; i++)
                 {
+                    UdonBehaviour_Cached modules = module2[i];
                     NetworkingManagers.Add(modules.UdonBehaviour.DisassembleUdonBehaviour()); // WTF
                 }
 
@@ -80,8 +82,9 @@
         internal static void GetCurrentTable()
         {
             int currentskin = 0;
-            foreach (var module in NetworkingManagers)
+            for (int i = 0; i < NetworkingManagers.Count; i++)
             {
+                DisassembledUdonBehaviour module = NetworkingManagers[i];
                 var result = UdonHeapParser.Udon_Parse_Byte(module, "tableSkinSynced");
                 if (result != null && result.HasValue)
                 {

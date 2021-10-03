@@ -23,11 +23,6 @@
 
     #endregion Imports
 
-    internal class AvatarResult : VRCUiContentButton
-    {
-        internal string AvatarID = string.Empty;
-    }
-
     internal class AvatarSearch : GameEvents
     {
         internal static SearchTypes SearchType = SearchTypes.ALL;
@@ -160,8 +155,6 @@
 
         internal static IEnumerator SearchLoop()
         {
-            if (!IsSearching) yield break;
-
             for (; ; )
             {
                 yield return new WaitForSeconds(0.025f);
@@ -181,38 +174,35 @@
             worldAvatars.Clear();
 
             var avatars = WorldUtils_Old.GetAvatarsFromPedestals();
-            if (avatars != null)
+            if (avatars != null && avatars.AnyAndNotNull())
             {
-                if (avatars.AnyAndNotNull())
+                for (int i = 0; i < avatars.Count; i++)
                 {
-                    for (int i = 0; i < avatars.Count; i++)
-                    {
-                        ApiAvatar avatar = avatars[i];
-                        worldAvatars.Add(avatar);
+                    ApiAvatar avatar = avatars[i];
+                    worldAvatars.Add(avatar);
 
-                        if (avatar != null)
+                    if (avatar != null)
+                    {
+                        var avatarData = new AvatarData()
                         {
-                            var avatarData = new AvatarData()
+                            AssetURL = avatar.assetUrl,
+                            AuthorID = avatar.authorId,
+                            AuthorName = avatar.authorName,
+                            Description = avatar.description,
+                            AvatarID = avatar.id,
+                            ImageURL = avatar.imageUrl,
+                            ThumbnailURL = avatar.thumbnailImageUrl,
+                            Name = avatar.name,
+                            ReleaseStatus = avatar.releaseStatus,
+                            Version = avatar.version,
+                            SupportedPlatforms = avatar.supportedPlatforms.ToString()
+                        };
+                        if (AstroNetworkClient.Client.IsConnected)
+                        {
+                            if (avatarData != null)
                             {
-                                AssetURL = avatar.assetUrl,
-                                AuthorID = avatar.authorId,
-                                AuthorName = avatar.authorName,
-                                Description = avatar.description,
-                                AvatarID = avatar.id,
-                                ImageURL = avatar.imageUrl,
-                                ThumbnailURL = avatar.thumbnailImageUrl,
-                                Name = avatar.name,
-                                ReleaseStatus = avatar.releaseStatus,
-                                Version = avatar.version,
-                                SupportedPlatforms = avatar.supportedPlatforms.ToString()
-                            };
-                            if (AstroNetworkClient.Client.IsConnected)
-                            {
-                                if (avatarData != null)
-                                {
-                                    var json = JsonConvert.SerializeObject(avatarData);
-                                    AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
-                                }
+                                var json = JsonConvert.SerializeObject(avatarData);
+                                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
                             }
                         }
                     }

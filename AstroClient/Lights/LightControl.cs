@@ -104,7 +104,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("Exception : " + e.Message);
+                ModConsole.Error($"Exception : {e.Message}");
             }
         }
 
@@ -193,7 +193,7 @@
                     UnityEngine.Object.DestroyImmediate(NewSun);
                     if (NewSun == null)
                     {
-                        ModConsole.DebugLog("The Generated Sun has been destroyed  : " + NewSun.ToString());
+                        ModConsole.DebugLog($"The Generated Sun has been destroyed  : {NewSun.ToString()}");
                     }
                     else
                     {

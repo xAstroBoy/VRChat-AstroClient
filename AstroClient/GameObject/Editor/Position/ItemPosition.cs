@@ -22,7 +22,6 @@
             }
         }
 
-
         internal static void TeleportObject(GameObject obj)
         {
             if (obj != null && Utils.LocalPlayer != null)

@@ -46,8 +46,6 @@
             return vrc_EventHandler;
         }
 
-
-
         public static bool IsNaN(Vector3 v3)
         {
             return float.IsNaN(v3.x) || float.IsNaN(v3.y) || float.IsNaN(v3.z);
@@ -158,12 +156,7 @@
             Button.GetComponent<RectTransform>().sizeDelta /= new Vector2(xSize, ySize);
         }
 
-        public static float GetDistandBetweenObjects(GameObject Base, GameObject target)
-        {
-            Vector3 positionbase = Base.transform.position;
-            Vector3 positiontarget = target.transform.position;
-            return Vector3.Distance(positionbase, positiontarget);
-        }
+        public static float GetDistandBetweenObjects(GameObject Base, GameObject target) => Vector3.Distance(Base.transform.position, target.transform.position);
 
         public static Player GetOwnerOfGameObjectButBetter(GameObject gameObject) => Utils.PlayerManager.AllPlayers().Where(plr => plr.GetVRCPlayerApi().IsOwner(gameObject)).FirstOrDefault();
 
@@ -178,25 +171,6 @@
             return text;
         }
 
-        //internal static void LoadSprite(Image Instance, string url)
-        //{
-        //    MelonLoader.MelonCoroutines.Start(LoadSpriteEnum(Instance, url));
-        //}
-
-        //private static IEnumerator LoadSpriteEnum(Image Instance, string url)
-        //{
-        //    while (VRCPlayer.field_Internal_Static_VRCPlayer_0 != true) yield return null;
-        //    var Sprite = new Sprite();
-        //    WWW www = new WWW(url, null, new Il2CppSystem.Collections.Generic.Dictionary<string, string>());
-        //    yield return www;
-        //    {
-        //        Sprite = Sprite.CreateSprite(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
-        //    }
-        //    Instance.sprite = Sprite;
-        //    Instance.color = Color.white;
-        //    yield break;
-        //}
-
         public static int Reverse(this int num)
         {
             int result = 0;
@@ -207,25 +181,6 @@
             }
             return result;
         }
-
-        //internal static IEnumerator LoadAudioAndPlayIt(string url)
-        //{
-        //    var AudioClip = new AudioClip();
-        //    WWW www = new WWW(url, null, new Il2CppSystem.Collections.Generic.Dictionary<string, string>());
-        //    ModConsole.Log("[Debug] Getting File. . .");
-        //    yield return www;
-        //    {
-        //        AudioClip = www.GetAudioClip();
-        //        ModConsole.Log("[Debug] Got File!");
-        //    }
-        //    ModConsole.Log("[Debug] Creating Source!");
-        //    var source = CreateAudioSource(AudioClip, Utils.CurrentUser.gameObject);
-        //    ModConsole.Log("[Debug] Playing Source!");
-        //    source.Play();
-        //    ModConsole.Log("[Debug] Deleting Source!");
-        //    UnityEngine.Object.Destroy(source, AudioClip.length);
-        //    yield break;
-        //}
 
         public static List<GameObject> GetWorldPrefabs()
         {
@@ -385,8 +340,7 @@
                 var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
                 using (var ms = new System.IO.MemoryStream(data))
                 {
-                    object obj = bf.Deserialize(ms);
-                    return (T)obj;
+                    return (T)bf.Deserialize(ms);
                 }
             }
 
@@ -394,9 +348,7 @@
             {
                 if (data == null) return default;
                 var bf = new Il2CppSystem.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
-                var ms = new Il2CppSystem.IO.MemoryStream(data);
-                object obj = bf.Deserialize(ms);
-                return (T)obj;
+                return (T)(object)bf.Deserialize(new Il2CppSystem.IO.MemoryStream(data));
             }
 
             public static T FromIL2CPPToManaged<T>(Il2CppSystem.Object obj)

@@ -22,8 +22,6 @@
             }
         }
 
-
-
         internal override void OnQuickMenuOpen()
         {
             if (FreezePlayerOnQMOpen)
@@ -133,7 +131,6 @@
                 {
                     if (!Frozen)
                     {
-
                         if (value.x == 0f && value.y == 0f && value.z == 0f)
                         {
                             value = originalGravity;

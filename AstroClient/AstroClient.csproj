@@ -38,6 +38,8 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <DebugSymbols>true</DebugSymbols>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_Offline|AnyCPU'">
     <OutputPath>D:\Steam Library\steamapps\common\VRChat\Debug\</OutputPath>
@@ -272,7 +274,6 @@
     <Compile Include="GameObject\Object Tweaker\ObjectMiscOptions.cs" />
     <Compile Include="GameObject\Online\OnlineEditor.cs" />
     <Compile Include="GameObjMenu.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="InstantiateUtils\MapEditorMenu.cs" />
     <Compile Include="ItemTweakerV2\Handlers\EspHandler.cs" />
     <Compile Include="ItemTweakerV2\Handlers\ListenerHandler.cs" />
@@ -655,6 +656,9 @@
     <Reference Include="Rug.Osc">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\Rug.Osc.dll</HintPath>
       <Private>False</Private>
+    </Reference>
+    <Reference Include="SharpCompress, Version=0.30.0.0, Culture=neutral, PublicKeyToken=afb0a02973931d96, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpCompress.0.30.0\lib\net461\SharpCompress.dll</HintPath>
     </Reference>
     <Reference Include="SMDiagnostics, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

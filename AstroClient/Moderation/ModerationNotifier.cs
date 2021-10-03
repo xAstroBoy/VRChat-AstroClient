@@ -1,17 +1,17 @@
-﻿using AstroLibrary.Console;
-using AstroLibrary.Utility;
-using Photon.Realtime;
-
-namespace AstroClient.Moderation
+﻿namespace AstroClient.Moderation
 {
+    using AstroLibrary.Console;
+    using AstroLibrary.Utility;
+    using Photon.Realtime;
+
     internal class ModerationNotifier : GameEvents
     {
         internal override void OnPlayerBlockedYou(Player player)
         {
             if (player != null)
             {
-                ModConsole.Log(PhotonUtils.GetDisplayName(player) + " blocked you!", null);
-                PopupUtils.QueHudMessage(PhotonUtils.GetDisplayName(player) + " blocked you!");
+                ModConsole.Log($"{PhotonUtils.GetDisplayName(player)} blocked you!", null);
+                PopupUtils.QueHudMessage($"{PhotonUtils.GetDisplayName(player)} blocked you!");
             }
         }
 
@@ -19,8 +19,8 @@ namespace AstroClient.Moderation
         {
             if (player != null)
             {
-                ModConsole.Log(PhotonUtils.GetDisplayName(player) + " unblocked you!", null);
-                PopupUtils.QueHudMessage(PhotonUtils.GetDisplayName(player) + " unblocked you!");
+                ModConsole.Log($"{PhotonUtils.GetDisplayName(player)} unblocked you!", null);
+                PopupUtils.QueHudMessage($"{PhotonUtils.GetDisplayName(player)} unblocked you!");
             }
         }
 
@@ -28,8 +28,8 @@ namespace AstroClient.Moderation
         {
             if (player != null)
             {
-                ModConsole.Log(PhotonUtils.GetDisplayName(player) + " muted you!", null);
-                PopupUtils.QueHudMessage(PhotonUtils.GetDisplayName(player) + " muted you!");
+                ModConsole.Log($"{PhotonUtils.GetDisplayName(player)} muted you!", null);
+                PopupUtils.QueHudMessage($"{PhotonUtils.GetDisplayName(player)} muted you!");
             }
         }
 
@@ -37,8 +37,8 @@ namespace AstroClient.Moderation
         {
             if (player != null)
             {
-                ModConsole.Log(PhotonUtils.GetDisplayName(player) + " unmuted you!", null);
-                PopupUtils.QueHudMessage(PhotonUtils.GetDisplayName(player) + " unmuted you!");
+                ModConsole.Log($"{PhotonUtils.GetDisplayName(player)} unmuted you!", null);
+                PopupUtils.QueHudMessage($"{PhotonUtils.GetDisplayName(player)} unmuted you!");
             }
         }
     }

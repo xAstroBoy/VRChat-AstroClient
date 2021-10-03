@@ -39,8 +39,7 @@
 
         internal override void VRChat_OnUiManagerInit()
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             refreshButton = new QMSingleButton("ShortcutMenu", -1 + ConfigManager.UI.PlayerListOffset, -1.5f, "Refresh", () => { RefreshButtons(); }, "Refresh player list", null, null, true);
             refreshButton.SetActive(ConfigManager.UI.ShowPlayersMenu);
@@ -77,23 +76,21 @@
             //}
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
-        {
-            //MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
-        }
+        //internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        //{
+        //    //MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
+        //}
 
-        internal override void OnPhotonJoined(Photon.Realtime.Player player)
-        {
-            if (player == null) throw new ArgumentNullException();
-            //MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
-        }
+        //internal override void OnPhotonJoined(Photon.Realtime.Player player)
+        //{
+        //    //MiscUtility.DelayFunction(2f, () => { RefreshButtons(); RefreshTime = 0f; });
+        //}
 
-        internal override void OnPhotonLeft(Photon.Realtime.Player player)
-        {
-            if (player == null) { throw new ArgumentNullException(); }
-            //RefreshButtons();
-            //RefreshTime = 0f;
-        }
+        //internal override void OnPhotonLeft(Photon.Realtime.Player player)
+        //{
+        //    //RefreshButtons();
+        //    //RefreshTime = 0f;
+        //}
 
         private void RefreshButtons()
         {
@@ -141,8 +138,7 @@
 
         internal static void CreateButton(PlayerListData player, float xPos, float yPos)
         {
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            Stopwatch stopwatch = Stopwatch.StartNew();
 
             var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, $"{player.Prefix}{player.Name}", () => { if (player.Player != null) { SelectPlayer(player.Player); } }, "", player.Color, player.Color, true);
             playerButton.SetResizeTextForBestFit(true);

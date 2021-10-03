@@ -31,14 +31,8 @@
             }
         }
 
-        public static APIUser GetAPIUserFromSM()
-        {
-            return UnityEngine.Object.FindObjectOfType<PageUserInfo>().field_Public_APIUser_0;
-        }
+        public static APIUser APIUserFromSM => UnityEngine.Object.FindObjectOfType<PageUserInfo>().field_Public_APIUser_0;
 
-        public static ApiWorld GetApiWorldFromSM()
-        {
-            return UnityEngine.Object.FindObjectOfType<PageWorldInfo>().field_Private_ApiWorld_0;
-        }
+        public static ApiWorld ApiWorldFromSM => UnityEngine.Object.FindObjectOfType<PageWorldInfo>().field_Private_ApiWorld_0;
     }
 }

@@ -33,8 +33,10 @@
 
         internal static void Set_Pickups(bool state)
         {
-            foreach (VRC_Pickup vrc_Pickup in Resources.FindObjectsOfTypeAll<VRC_Pickup>())
+            Il2CppArrayBase<VRC_Pickup> list = Resources.FindObjectsOfTypeAll<VRC_Pickup>();
+            for (int i = 0; i < list.Count; i++)
             {
+                VRC_Pickup vrc_Pickup = list[i];
                 if (!(vrc_Pickup == null) && !vrc_Pickup.name.Contains("ViewFinder"))
                 {
                     vrc_Pickup.gameObject.SetActive(state);

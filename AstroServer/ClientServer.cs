@@ -193,8 +193,9 @@
                         {
                             toSend.AddRange(found.Where(avatar => (client.Temp.SearchType == 0) || (client.Temp.SearchType == 1 && avatar.ReleaseStatus.ToLower().Equals("public")) || (client.Temp.SearchType == 2 && avatar.ReleaseStatus.ToLower().Equals("private"))));
                             int i = 0;
-                            foreach (var avatar in toSend)
+                            for (int i1 = 0; i1 < toSend.Count; i1++)
                             {
+                                AvatarDataEntity avatar = toSend[i1];
                                 if (i < 1000)
                                 {
                                     client.Send(new PacketData(PacketServerType.AVATAR_RESULT, Newtonsoft.Json.JsonConvert.SerializeObject(avatar.GetAvatarData())));

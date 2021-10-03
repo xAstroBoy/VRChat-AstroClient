@@ -15,13 +15,11 @@
             // split the items
             string[] sArray = sVector.Split(',');
 
-            // store as a Vector3
-            Vector3 result = new Vector3(
+            // return as a Vector3
+            return new Vector3(
                 float.Parse(sArray[0]),
                 float.Parse(sArray[1]),
                 float.Parse(sArray[2]));
-
-            return result;
         }
 
         public static Color HexToColor(string Hex)

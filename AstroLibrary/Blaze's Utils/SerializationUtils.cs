@@ -26,8 +26,7 @@
             var bf = new System.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             using (var ms = new System.IO.MemoryStream(data))
             {
-                object obj = bf.Deserialize(ms);
-                return (T)obj;
+                return (T)bf.Deserialize(ms);
             }
         }
 
@@ -36,8 +35,7 @@
             if (data == null) return default(T);
             var bf = new Il2CppSystem.Runtime.Serialization.Formatters.Binary.BinaryFormatter();
             var ms = new Il2CppSystem.IO.MemoryStream(data);
-            object obj = bf.Deserialize(ms);
-            return (T)obj;
+            return (T)(object)bf.Deserialize(ms);
         }
 
         public static T FromIL2CPPToManaged<T>(Il2CppSystem.Object obj)

@@ -10,20 +10,11 @@
 
     internal class ScaleEditor : GameEvents
     {
-        private static float ModifiedVectorX()
-        {
-            return EditVectorX ? ScaleValueToUse : 0;
-        }
+        private static float ModifiedVectorX() => EditVectorX ? ScaleValueToUse : 0;
 
-        private static float ModifiedVectorY()
-        {
-            return EditVectorY ? ScaleValueToUse : 0;
-        }
+        private static float ModifiedVectorY() => EditVectorY ? ScaleValueToUse : 0;
 
-        private static float ModifiedVectorZ()
-        {
-            return EditVectorZ ? ScaleValueToUse : 0;
-        }
+        private static float ModifiedVectorZ() => EditVectorZ ? ScaleValueToUse : 0;
 
         internal static void EditScaleSize(GameObject obj, bool increase)
         {

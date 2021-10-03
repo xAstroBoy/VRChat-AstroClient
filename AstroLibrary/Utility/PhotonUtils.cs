@@ -31,22 +31,12 @@ namespace AstroLibrary.Utility
 
         public static string GetDisplayName(this Photon.Realtime.Player player)
         {
-            if (player != null)
+            if (player != null && player.GetRawHashtable() != null && player.GetRawHashtable().ContainsKey("user") && player.GetHashtable()["user"] != null)
             {
-                if (player.GetRawHashtable() != null)
+                if (player.GetHashtable()["user"] is Dictionary<string, object> dict)
                 {
-                    if (player.GetRawHashtable().ContainsKey("user"))
-                    {
-                        if (player.GetHashtable()["user"] != null)
-                        {
-                            if (player.GetHashtable()["user"] is Dictionary<string, object> dict)
-                            {
-                                return (string)dict["displayName"];
+                    return (string)dict["displayName"];
 
-                            }
-                        }
-
-                    }
                 }
             }
             if (player != null)
@@ -59,7 +49,6 @@ namespace AstroLibrary.Utility
         public static int GetPhotonID(this Photon.Realtime.Player player) => player.field_Private_Int32_0;
 
         public static VRC.Player GetPlayer(this Photon.Realtime.Player player) => player.field_Public_Player_0;
-
 
         public static System.Collections.Hashtable GetHashtable(this Photon.Realtime.Player player) => SerializationUtils.FromIL2CPPToManaged<System.Collections.Hashtable>(player.GetRawHashtable());
 
@@ -83,9 +72,11 @@ namespace AstroLibrary.Utility
 
         public static Photon.Realtime.Player GetPhotonPlayer(this Photon.Realtime.LoadBalancingClient Instance, int photonID)
         {
-            foreach(var player in Instance.GetAllPhotonPlayers())
+            List<Photon.Realtime.Player> list = Instance.GetAllPhotonPlayers();
+            for (int i = 0; i < list.Count; i++)
             {
-                if(player != null)
+                Photon.Realtime.Player player = list[i];
+                if (player != null)
                 {
                     if(player.GetPhotonID() == photonID)
                     {
@@ -99,8 +90,10 @@ namespace AstroLibrary.Utility
 
         public static Photon.Realtime.Player GetPhotonPlayer(this Photon.Realtime.LoadBalancingClient Instance, string userID)
         {
-            foreach (var player in Instance.GetAllPhotonPlayers())
+            List<Photon.Realtime.Player> list = Instance.GetAllPhotonPlayers();
+            for (int i = 0; i < list.Count; i++)
             {
+                Photon.Realtime.Player player = list[i];
                 if (player != null)
                 {
                     if (player.GetUserID() == userID)

@@ -62,17 +62,14 @@
 
         internal static string ToUppercaseFirstCharacterOnly(this string text)
         {
-            if (text.Length >= 2)
+            switch (text.Length)
             {
-                return char.ToUpper(text[0]) + text.Substring(1);
-            }
-            else if (text.Length == 1)
-            {
-                return char.ToUpper(text[0]).ToString();
-            }
-            else
-            {
-                return text;
+                case >= 2:
+                    return char.ToUpper(text[0]) + text.Substring(1);
+                case 1:
+                    return char.ToUpper(text[0]).ToString();
+                default:
+                    return text;
             }
         }
 

@@ -13,16 +13,6 @@
             return Instance.GetAPIUser().displayName;
         }
 
-        public static string DisplayName(this VRCPlayer Instance)
-        {
-            return Instance.GetAPIUser().displayName;
-        }
-
-        public static string DisplayName(this PlayerNet Instance)
-        {
-            return Instance.GetAPIUser().displayName;
-        }
-
         public static string DisplayName(this APIUser Instance)
         {
             return Instance.displayName;
@@ -33,27 +23,7 @@
             return Instance.GetVRCPlayerApi().isMaster;
         }
 
-        public static bool GetIsMaster(this VRCPlayer Instance)
-        {
-            return Instance.GetVRCPlayerApi().isMaster;
-        }
-
-        public static bool GetIsMaster(this PlayerNet Instance)
-        {
-            return Instance.GetVRCPlayerApi().isMaster;
-        }
-
         public static bool GetIsInVR(this Player Instance)
-        {
-            return Instance.GetVRCPlayerApi().IsUserInVR();
-        }
-
-        public static bool GetIsInVR(this VRCPlayer Instance)
-        {
-            return Instance.GetVRCPlayerApi().IsUserInVR();
-        }
-
-        public static bool GetIsInVR(this PlayerNet Instance)
         {
             return Instance.GetVRCPlayerApi().IsUserInVR();
         }

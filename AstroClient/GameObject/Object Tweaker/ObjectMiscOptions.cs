@@ -20,8 +20,10 @@
                     if (targetuser != null)
                     {
                         TargetSelector.CurrentTarget = targetuser;
-                        foreach (var item in WorldUtils_Old.Get_Pickups())
+                        System.Collections.Generic.List<GameObject> list = WorldUtils_Old.Get_Pickups();
+                        for (int i = 0; i < list.Count; i++)
                         {
+                            GameObject item = list[i];
                             if (item != null)
                             {
                                 OrbitManager_Old.AddOrbitObject(item, targetuser);
@@ -30,7 +32,7 @@
                     }
                     else
                     {
-                        ModConsole.Log("[Orbit] Cant find user : " + apiuser.displayName);
+                        ModConsole.Log($"[Orbit] Cant find user : {apiuser.displayName}");
                     }
                 }
             }
@@ -48,8 +50,10 @@
                     if (targetuser != null)
                     {
                         TargetSelector.CurrentTarget = targetuser;
-                        foreach (var item in WorldUtils_Old.Get_Pickups())
+                        System.Collections.Generic.List<GameObject> list = WorldUtils_Old.Get_Pickups();
+                        for (int i = 0; i < list.Count; i++)
                         {
+                            GameObject item = list[i];
                             try
                             {
                                 if (item != null)
@@ -62,7 +66,7 @@
                     }
                     else
                     {
-                        ModConsole.Log("[Teleport] Cant find user : " + apiuser.displayName);
+                        ModConsole.Log($"[Teleport] Cant find user : {apiuser.displayName}");
                     }
                 }
                 else
@@ -84,8 +88,10 @@
                     if (targetuser != null)
                     {
                         TargetSelector.CurrentTarget = targetuser;
-                        foreach (var item in WorldUtils_Old.Get_Pickups())
+                        System.Collections.Generic.List<GameObject> list = WorldUtils_Old.Get_Pickups();
+                        for (int i = 0; i < list.Count; i++)
                         {
+                            GameObject item = list[i];
                             if (item != null)
                             {
                                 PlayerAttackerManager.AddObject(item, targetuser);
@@ -94,7 +100,7 @@
                     }
                     else
                     {
-                        ModConsole.Log("[Attacker] Cant find user : " + apiuser.displayName);
+                        ModConsole.Log($"[Attacker] Cant find user : {apiuser.displayName}");
                     }
                 }
                 else
@@ -116,8 +122,10 @@
                     if (targetuser != null)
                     {
                         TargetSelector.CurrentTarget = targetuser;
-                        foreach (var item in WorldUtils_Old.Get_Pickups())
+                        System.Collections.Generic.List<GameObject> list = WorldUtils_Old.Get_Pickups();
+                        for (int i = 0; i < list.Count; i++)
                         {
+                            GameObject item = list[i];
                             if (item != null)
                             {
                                 PlayerWatcherManager.AddObject(item, targetuser);
@@ -126,7 +134,7 @@
                     }
                     else
                     {
-                        ModConsole.Log("[Watcher] Cant find user : " + apiuser.displayName);
+                        ModConsole.Log($"[Watcher] Cant find user : {apiuser.displayName}");
                     }
                 }
                 else
@@ -281,8 +289,10 @@
 
         internal static void DisablePickupKinematic(bool useGravity)
         {
-            foreach (var item in WorldUtils_Old.Get_Pickups())
+            System.Collections.Generic.List<GameObject> list = WorldUtils_Old.Get_Pickups();
+            for (int i1 = 0; i1 < list.Count; i1++)
             {
+                GameObject item = list[i1];
                 if (item != null)
                 {
                     var control = item.GetOrAddComponent<RigidBodyController>();
@@ -300,8 +310,9 @@
                                 var meshcolliders = control.gameObject.GetComponentsInChildren<MeshCollider>(true);
                                 if (meshcolliders.Count != 0)
                                 {
-                                    foreach (var c in meshcolliders)
+                                    for (int i = 0; i < meshcolliders.Count; i++)
                                     {
+                                        MeshCollider c = meshcolliders[i];
                                         if (c.enabled && c.convex)
                                         {
                                             ModConsole.DebugLog($"Found Working MeshCollider for {item.name}");
@@ -318,8 +329,9 @@
                                     var Colliders = control.gameObject.GetComponentsInChildren<Collider>(true);
                                     if (Colliders.Count != 0)
                                     {
-                                        foreach (var collider in Colliders)
+                                        for (int i = 0; i < Colliders.Count; i++)
                                         {
+                                            Collider collider = Colliders[i];
                                             if (collider != null)
                                             {
                                                 if (!collider.isTrigger && collider.enabled)

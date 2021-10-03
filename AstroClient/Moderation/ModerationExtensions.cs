@@ -11,8 +11,9 @@ namespace AstroClient.Moderation
         {
             if (PhotonModerationHandler.BlockedYouPlayers.Count != 0)
             {
-                foreach (Player player in PhotonModerationHandler.BlockedYouPlayers)
+                for (int i = 0; i < PhotonModerationHandler.BlockedYouPlayers.Count; i++)
                 {
+                    Player player = PhotonModerationHandler.BlockedYouPlayers[i];
                     if (player != null)
                     {
                         if (PlayerUtils.GetUserID(user).Equals(PhotonUtils.GetUserID(player)))
@@ -29,8 +30,9 @@ namespace AstroClient.Moderation
         {
             if (PhotonModerationHandler.MutedYouPlayers.Count != 0)
             {
-                foreach (Player player in PhotonModerationHandler.MutedYouPlayers)
+                for (int i = 0; i < PhotonModerationHandler.MutedYouPlayers.Count; i++)
                 {
+                    Player player = PhotonModerationHandler.MutedYouPlayers[i];
                     if (player != null)
                     {
                         if (PlayerUtils.GetUserID(user).Equals(PhotonUtils.GetUserID(player)))

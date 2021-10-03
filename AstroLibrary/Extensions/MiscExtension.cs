@@ -45,54 +45,17 @@ namespace AstroLibrary.Extensions
             }
         }
 
-        public static Text GetToolTip(this UiTooltip Instance)
-        {
-            return Instance.field_Public_Text_0;
-        }
+        public static Text GetToolTip(this UiTooltip Instance) => Instance.field_Public_Text_0;
 
-        public static string GetText(this UiTooltip Instance)
-        {
-            return Instance.field_Public_String_0;
-        }
+        public static string GetText(this UiTooltip Instance) => Instance.field_Public_String_0;
 
-        public static string GetAlternateText(this UiTooltip Instance)
-        {
-            return Instance.field_Public_String_1;
-        }
+        public static string GetAlternateText(this UiTooltip Instance) => Instance.field_Public_String_1;
 
-        public static bool GetToggledOn(this UiTooltip Instance)
-        {
-            return Instance.field_Private_Boolean_0;
-        }
+        public static bool GetToggledOn(this UiTooltip Instance) => Instance.field_Private_Boolean_0;
 
-        public static void EnterPortal(this PortalInternal Instance, string WorldID, string InstanceID)
-        {
-            Instance.Method_Private_Void_String_String_PDM_0(WorldID, InstanceID);
-        }
+        public static void EnterPortal(this PortalInternal Instance, string WorldID, string InstanceID) => Instance.Method_Private_Void_String_String_PDM_0(WorldID, InstanceID);
 
-        public static void Start(this IEnumerator e)
-        {
-            MelonCoroutines.Start(e);
-        }
-
-        //public static void LoadSprite(this Image Instance, string url)
-        //{
-        //    MelonCoroutines.Start(LoadSpriteEnum(Instance, url));
-        //}
-
-        //private static IEnumerator LoadSpriteEnum(this Image Instance, string url)
-        //{
-        //    while (VRCPlayer.field_Internal_Static_VRCPlayer_0 != true) yield return null;
-        //    var Sprite = new Sprite();
-        //    WWW www = new WWW(url, null, new Il2CppSystem.Collections.Generic.Dictionary<string, string>());
-        //    yield return www;
-        //    {
-        //        Sprite = Sprite.CreateSprite(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
-        //    }
-        //    Instance.sprite = Sprite;
-        //    Instance.color = Color.white;
-        //    yield break;
-        //}
+        public static void Start(this IEnumerator e) => MelonCoroutines.Start(e);
 
         public static bool XRefScanForGlobal(this MethodBase methodBase, string searchTerm, bool ignoreCase = true)
         {
@@ -190,36 +153,10 @@ namespace AstroLibrary.Extensions
             return false;
         }
 
-        //public static T Cast<T>(this object o)
-        //{
-        //	return (T)o;
-        //}
-
         public static bool IsRunningNotorious()
         {
             bool _return = Assembly.GetExecutingAssembly().GetType("Notorious") != null;
             return _return;
         }
-
-        //public static Sprite LoadSpriteFromDisk(this string path)
-        //{
-        //    if (string.IsNullOrEmpty(path))
-        //    {
-        //        return null;
-        //    }
-        //    byte[] array = File.ReadAllBytes(path);
-        //    if (array == null || array.Length == 0)
-        //    {
-        //        return null;
-        //    }
-        //    Texture2D texture2D = new Texture2D(2, 2);
-        //    if (!Il2CppImageConversionManager.LoadImage(texture2D, array))
-        //    {
-        //        return null;
-        //    }
-        //    Sprite sprite = Sprite.CreateSprite(texture2D, new Rect(0f, 0f, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f), 100f, 0u, SpriteMeshType.FullRect, default(Vector4), generateFallbackPhysicsShape: false);
-        //    sprite.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-        //    return sprite;
-        //}
     }
 }

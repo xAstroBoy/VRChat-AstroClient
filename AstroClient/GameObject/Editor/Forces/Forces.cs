@@ -8,21 +8,9 @@
     internal class Forces
     {
         // TODO: Get rid of these two , lazy rn.
-        internal static float Force
-        {
-            get
-            {
-                return ForcesSubmenu.Force;
-            }
-        }
+        internal static float Force => ForcesSubmenu.Force;
 
-        internal static float SpinForce
-        {
-            get
-            {
-                return ForcesSubmenu.SpinForce;
-            }
-        }
+        internal static float SpinForce => ForcesSubmenu.SpinForce;
 
         internal static void ApplyBackwardsForce(GameObject obj, bool TakeOwnership = true)
         {

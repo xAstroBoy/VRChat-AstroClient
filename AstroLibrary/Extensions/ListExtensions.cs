@@ -18,8 +18,9 @@
             {
                 if (list.Count() != 0)
                 {
-                    foreach (var obj in list)
+                    for (int i = 0; i < list.Count; i++)
                     {
+                        GameObject obj = list[i];
                         Original.AddGameObject(obj);
                     }
                 }

@@ -93,22 +93,17 @@
             }
         }
 
-
         // AdminPanel stuff
         private string _isAdmin { get; } = "_isAdmin";
 
         private string _superSpecialSnowflakes { get; } = "_superSpecialSnowflakes"; // Idk if is admin list
 
-
         private string __0_mp_isAdmin_Boolean { get; } = "__0_mp_isAdmin_Boolean"; // Idk if is admin list
 
         private string __0_ownerAndAdmin_Boolean { get; } = "__0_ownerAndAdmin_Boolean"; // Idk if is admin list
 
-
         private string _permaBannedPlayers { get; } = "_permaBannedPlayers";
 
         private string __0_temp_StringArray { get; } = "__0_temp_StringArray";
-
-
     }
 }

@@ -7,6 +7,7 @@
     using AstroClient.Startup.Hooks;
     using AstroClient.Streamer;
     using AstroClientCore.Events;
+    using AstroLibrary.Console;
     using System;
     using System.Collections.Generic;
     using UnityEngine;
@@ -92,12 +93,6 @@
         private void Internal_OnApplicationLateStart(object sender, EventArgs e)
         {
             OnApplicationLateStart();
-        }
-
-
-        private void Internal_OnApplicationStart(object sender, EventArgs e)
-        {
-            OnApplicationStart();
         }
 
         private void Internal_VRChat_OnUiManagerInit(object sender, EventArgs e)
@@ -253,7 +248,6 @@
 
         internal virtual void OnApplicationLateStart()
         {
-
         }
 
         internal virtual void OnApplicationQuit()

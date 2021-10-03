@@ -6,10 +6,7 @@
 
     internal class ColliderEditors
     {
-        internal static bool HasAlreadyAColliderAdded(GameObject obj)
-        {
-            return ColliderCheck.Where(x => x.TargetObj == obj).Select(x => x.HasCustomCollider).DefaultIfEmpty(false).First();
-        }
+        internal static bool HasAlreadyAColliderAdded(GameObject obj) => ColliderCheck.Where(x => x.TargetObj == obj).Select(x => x.HasCustomCollider).DefaultIfEmpty(false).First();
 
         internal static void CustomColliderHasBeenAdded(GameObject obj, bool HasColliderAdded)
         {

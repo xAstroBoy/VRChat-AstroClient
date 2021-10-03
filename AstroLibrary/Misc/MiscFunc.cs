@@ -427,7 +427,7 @@
 
         public static void TakeOwnershipIfNecessary(GameObject gameObject)
         {
-            if (GameObjectUtils.GetOwnerOfGameObject(gameObject) != PlayerUtils.VRCPlayer)
+            if (GameObjectUtils.GetOwnerOfGameObject(gameObject) != PlayerUtils.GetVRCPlayer())
                 Networking.SetOwner(Utils.CurrentUser.field_Private_VRCPlayerApi_0, gameObject);
         }
 
