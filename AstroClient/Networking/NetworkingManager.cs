@@ -72,18 +72,24 @@
 
         internal static IEnumerator SendClientInfoLoop()
         {
-            if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected && !IsReady)
+            for (; ; )
             {
-                yield return new WaitForSeconds(0.01f);
+                if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected && WorldUtils.IsInWorld && PlayerUtils.GetPlayer() != null)
+                {
+                    try
+                    {
+                        Name = PlayerUtils.DisplayName();
+                        UserID = PlayerUtils.UserID();
+                        ModConsole.Log($"Sending Client Information: {UserID}, {Name}");
+                        AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_USERID, UserID));
+                        AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_NAME, Name));
+                        yield break;
+                    }
+                    catch { }
+                }
+
+                yield return null;
             }
-
-            Name = PlayerUtils.DisplayName();
-            UserID = PlayerUtils.UserID();
-            ModConsole.Log($"Sending Client Information: {UserID}, {Name}");
-            AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_USERID, UserID));
-            AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_NAME, Name));
-
-            yield break;
         }
 
         internal static void SendInstanceInfo()
