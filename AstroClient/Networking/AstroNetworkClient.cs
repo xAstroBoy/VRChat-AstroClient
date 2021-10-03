@@ -118,7 +118,7 @@
                     break;
 
                 case PacketServerType.REQUEST_INFO:
-
+                    NetworkingManager.SendClientInfo();
                     break;
 
                 case PacketServerType.ENABLE_DEVELOPER:
