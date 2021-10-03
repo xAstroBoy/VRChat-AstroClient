@@ -1,5 +1,6 @@
-﻿namespace Blaze.API
+﻿namespace AstroButtonAPI
 {
+    using Blaze.API;
     using System.Threading.Tasks;
     using UnityEngine;
     using UnityEngine.Networking;
@@ -12,7 +13,7 @@
 
         public QMImage(QMNestedButton QMNB, float LocX, float LocY, float SizeX, float SizeY, string ImageURL)
         {
-            Initialize(QMStuff.GetQuickMenuInstance().transform.Find(QMNB.getMenuName()), LocX, LocY, SizeX, SizeY, ImageURL);
+            Initialize(QMStuff.GetQuickMenuInstance().transform.Find(QMNB.GetMenuName()), LocX, LocY, SizeX, SizeY, ImageURL);
         }
 
         public QMImage(Transform location, float LocX, float LocY, float SizeX, float SizeY, string ImageURL)
@@ -23,7 +24,7 @@
         private void Initialize(Transform location, float LocX, float LocY, float SizeX, float SizeY, string ImageURL)
         {
             ImageObject = UnityEngine.Object.Instantiate(QMStuff.GetImageInstance(), location);
-            ImageObject.name = $"{BlazesAPIs.Identifier}-QMImage";
+            ImageObject.name = $"QMImage";
 
             SetSize(new Vector2(SizeX, SizeY));
             SetLocation(new Vector3(LocX, LocY, 1));

@@ -1,7 +1,9 @@
 ﻿namespace AstroButtonAPI
 {
     using System.Collections;
+    using System.Threading.Tasks;
     using UnityEngine;
+    using UnityEngine.Networking;
     using UnityEngine.UI;
     using Button = UnityEngine.UI.Button;
 
@@ -75,24 +77,50 @@
             catch { }
         }
 
-        //public void LoadSprite(string url)
-        //{
-        //    MelonLoader.MelonCoroutines.Start(LoadSprite(button.GetComponent<Image>(), url));
-        //}
+        public void ClickMe()
+        {
+            button.GetComponent<Button>().onClick.Invoke();
+        }
 
-        //private static IEnumerator LoadSprite(Image Instance, string url)
-        //{
-        //    while (VRCPlayer.field_Internal_Static_VRCPlayer_0 != true) yield return null;
-        //    WWW www = new WWW(url, null, new Il2CppSystem.Collections.Generic.Dictionary<string, string>());
-        //    yield return www;
-        //    Sprite sprite;
-        //    {
-        //        sprite = Sprite.CreateSprite(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
-        //    }
-        //    Instance.sprite = sprite;
-        //    Instance.color = Color.white;
-        //    yield break;
-        //}
+        public void SetImage(Sprite image)
+        {
+            button.GetComponent<Image>().sprite = image;
+        }
+
+        public async void SetImage(string URL)
+        {
+            await GetRemoteTexture(button.GetComponent<Image>(), URL);
+        }
+
+        private async Task<Texture2D> GetRemoteTexture(Image Instance, string url)
+        {
+            var www = UnityWebRequestTexture.GetTexture(url);
+            var asyncOp = www.SendWebRequest();
+            while (asyncOp.isDone == false)
+                await Task.Delay(1000 / 30);//30 hertz
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                return null;
+            }
+            else
+            {
+                var Sprite = new Sprite();
+                Sprite = Sprite.CreateSprite(DownloadHandlerTexture.GetContent(www), new Rect(0, 0, DownloadHandlerTexture.GetContent(www).width, DownloadHandlerTexture.GetContent(www).height), Vector2.zero, 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+                Instance.sprite = Sprite;
+                Instance.color = Color.white;
+                return DownloadHandlerTexture.GetContent(www);
+            }
+        }
+
+        public void SetShader(string shaderName)
+        {
+            var Material = new Material(button.GetComponent<Image>().material)
+            {
+                shader = Shader.Find(shaderName)
+            };
+            button.gameObject.GetComponent<Image>().material = Material;
+        }
 
         public void SetParent(QMNestedButton Parent)
         {

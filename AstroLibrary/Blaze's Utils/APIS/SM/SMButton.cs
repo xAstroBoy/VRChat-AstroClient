@@ -1,5 +1,6 @@
-﻿namespace Blaze.API
+﻿namespace AstroButtonAPI
 {
+    using Blaze.API;
     using System;
     using UnityEngine;
     using UnityEngine.UI;
@@ -58,7 +59,7 @@
                     text = button.transform.Find("Text").GetComponent<Text>();
                     break;
             }
-            button.name = $"{BlazesAPIs.Identifier}-SMButton";
+            button.name = $"SMButton";
             button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
             button.GetComponent<Button>().onClick.AddListener(buttonAction);
             button.transform.localScale = new Vector3(1, 1, 1);

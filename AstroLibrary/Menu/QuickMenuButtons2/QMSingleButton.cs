@@ -1,5 +1,6 @@
 ﻿namespace Blaze.API
 {
+    using AstroButtonAPI;
     using System;
     using UnityEngine;
     using UnityEngine.Events;

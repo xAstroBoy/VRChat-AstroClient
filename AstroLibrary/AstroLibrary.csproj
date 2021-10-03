@@ -685,14 +685,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blaze%27s Utils\APIS\BlazesAPIs.cs" />
-    <Compile Include="Menu\QuickMenuButtons2\QMButtonBase.cs" />
-    <Compile Include="Menu\QuickMenuButtons2\QMImage.cs" />
+    <Compile Include="Menu\QuickMenuButtons\QMImage.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMInfo.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMNestedButton.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMScrollMenu.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMSingleButton.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMSlider.cs" />
-    <Compile Include="Menu\QuickMenuButtons2\QMStuff.cs" />
+    <Compile Include="Menu\QuickMenuButtons\QMStuff.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMToggleButton.cs" />
     <Compile Include="Blaze%27s Utils\APIS\SM\SMButton.cs" />
     <Compile Include="Blaze%27s Utils\APIS\SM\SMList.cs" />

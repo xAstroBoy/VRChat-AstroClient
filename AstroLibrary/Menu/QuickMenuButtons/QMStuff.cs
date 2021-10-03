@@ -1,4 +1,4 @@
-﻿namespace Blaze.API
+﻿namespace AstroButtonAPI
 {
     using Il2CppSystem.Reflection;
     using System;

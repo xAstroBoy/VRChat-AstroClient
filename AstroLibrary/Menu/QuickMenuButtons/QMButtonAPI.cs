@@ -4,21 +4,6 @@
     using System.Collections.Generic;
     using UnityEngine;
 
-    // Dubya:
-    //Firstly, thanks to Emilia for helping me update this to the unhollower.
-    //This adds a couple of new functions compared to the old one, however,
-    //like the last one, I will not be providing any support as I will
-    //personally not be using melonloader/unhollower in the near future.
-
-    //Look here for a useful example guide:
-    //https://github.com/DubyaDude/RubyButtonAPI/blob/master/RubyButtonAPI_Old.cs
-
-    // Day:
-    // This is my edited Ruby with more stuff and such.
-    // remember this is just an edit and not its own thing,
-    // if you have any questions or ways to improve it,
-    // you can contact me on discord.gg/day
-
     public static class QMButtonAPI
     {
         //REPLACE THIS STRING SO YOUR MENU DOESNT COLLIDE WITH OTHER MENUS
