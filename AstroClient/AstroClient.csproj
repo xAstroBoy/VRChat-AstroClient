@@ -95,6 +95,7 @@
     </Compile>
     <Compile Include="Buttons\HistoryMenu.cs" />
     <Compile Include="Cheetos\InstanceHistory.cs" />
+    <Compile Include="Cheetos\Patch.cs" />
     <Compile Include="Components\ESP\EspEvents.cs" />
     <Compile Include="Components\Flashlight\FlashlightBehaviour.cs" />
     <Compile Include="Components\Expoits\OrbitManager.cs" />

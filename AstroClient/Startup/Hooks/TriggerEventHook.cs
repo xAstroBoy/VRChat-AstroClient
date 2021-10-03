@@ -8,7 +8,6 @@
     using UnhollowerRuntimeLib.XrefScans;
     using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
 
-
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class TriggerEventHook : GameEvents
     {
@@ -20,6 +19,7 @@
         {
             HookTriggerEvent();
         }
+
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
         {
@@ -44,8 +44,6 @@
                 }
             }
         }
-
-
 
         private static bool TriggerEventHookEvent(VRC_EventHandler __0, VRC_EventHandler.VrcEvent __1, VRC_EventHandler.VrcBroadcastType __2, int __3, float __4)
         {
