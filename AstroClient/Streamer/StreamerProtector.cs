@@ -32,7 +32,7 @@
 
         internal static bool IsExploitsAllowed => IsAStreamerPresent();
 
-        private static List<string> StreamerIDs { get; } = new List<string>(); 
+        private static List<string> StreamerIDs { get; } = new List<string>();
 
 
         internal static bool IsAStreamerPresent()

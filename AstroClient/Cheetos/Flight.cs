@@ -123,7 +123,7 @@
 
         internal override void OnUpdate()
         {
-            if (!isInRoom || PopupUtils.IsTyping || !StreamerProtector.IsExploitsAllowed)
+            if (!isInRoom || PopupUtils.IsTyping)
             {
                 return;
             }

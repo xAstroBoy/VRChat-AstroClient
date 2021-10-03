@@ -58,17 +58,7 @@
         internal static bool IsEnabled
         {
             get => Instance.isEnabled;
-            set
-            {
-                if (StreamerProtector.IsExploitsAllowed)
-                {
-                    Instance.isEnabled = value;
-                }
-                else
-                {
-                    Instance.isEnabled = false;
-                }
-            }
+            set => Instance.isEnabled = value;
         }
 
         internal void Start()
@@ -124,7 +114,7 @@
 
         internal static void OrbitPlayer(Player target)
         {
-            if (Instance != null && target != null && Instance.target == null && StreamerProtector.IsExploitsAllowed)
+            if (Instance != null && target != null && Instance.target == null)
             {
                 Instance.target = target;
                 Instance.isEnabled = true;

@@ -22,7 +22,6 @@
 
         internal static void AttachToTarget(Player targetPlayer, HumanBodyBones targetBone)
         {
-            if (!StreamerProtector.IsExploitsAllowed) { return; }
             Detach();
             Self.gameObject.GetComponent<CharacterController>().enabled = false;
             TargetPlayer = targetPlayer;
@@ -52,7 +51,7 @@
                     Target = BonesUtils.Get_Player_Bone_Transform(TargetPlayer, TargetBone).gameObject;
                 }
 
-                if (TargetPlayer == null || !StreamerProtector.IsExploitsAllowed)
+                if (TargetPlayer == null)
                 {
                     Detach();
                 }

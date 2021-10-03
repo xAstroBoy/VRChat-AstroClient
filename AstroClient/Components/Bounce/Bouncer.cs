@@ -20,7 +20,6 @@
 
         private bool DebugMode = false;
 
-        
         private void Debug(string msg)
         {
             if (DebugMode)
