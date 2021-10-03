@@ -70,64 +70,57 @@
                 nameplate = player.GetVRCPlayer().field_Public_PlayerNameplate_0;
                 if (nameplate == null) { ModConsole.Error("[Nameplate] Nameplate was null!"); return; };
 
-                if (nameplate != null)
+                contents = nameplate.transform.Find("Contents").gameObject;
+
+                if (contents != null)
                 {
-                    contents = nameplate.transform.Find("Contents").gameObject;
+                    main = contents.transform.Find("Main").gameObject;
+                    quickStats = contents.transform.Find("Quick Stats").gameObject;
+                    quickStats_Image = quickStats.GetComponent<ImageThreeSlice>();
+                    quest = contents.transform.Find("Quest").gameObject;
+                    friendMarker = contents.transform.Find("Friend Marker").gameObject;
 
-                    if (contents != null)
+                    if (main != null)
                     {
-                        main = contents.transform.Find("Main").gameObject;
-                        quickStats = contents.transform.Find("Quick Stats").gameObject;
-                        quickStats_Image = quickStats.GetComponent<ImageThreeSlice>();
-                        quest = contents.transform.Find("Quest").gameObject;
-                        friendMarker = contents.transform.Find("Friend Marker").gameObject;
+                        background = main.transform.Find("Background").gameObject;
+                        background_Image = background.GetComponent<ImageThreeSlice>();
+                        glow = main.transform.Find("Glow").gameObject;
+                        glow_Image = glow.GetComponent<Image>();
+                        textContainer = main.transform.Find("Text Container").gameObject;
 
-                        if (main != null)
+                        if (textContainer != null)
                         {
-                            background = main.transform.Find("Background").gameObject;
-                            background_Image = background.GetComponent<ImageThreeSlice>();
-                            glow = main.transform.Find("Glow").gameObject;
-                            glow_Image = glow.GetComponent<Image>();
-                            textContainer = main.transform.Find("Text Container").gameObject;
-
-                            if (textContainer != null)
-                            {
-                                subText = textContainer.transform.Find("Sub Text").gameObject;
-                            }
-                            else
-                            {
-                                ModConsole.Error("[Nameplate] TextContainer was null");
-                            }
+                            subText = textContainer.transform.Find("Sub Text").gameObject;
                         }
                         else
                         {
-                            ModConsole.Error("[Nameplate] Main was null");
-                        }
-
-                        if (quickStats != null)
-                        {
-                            trustIcon = quickStats.transform.Find("Trust Icon").gameObject;
-                            trustIcon.SetActiveRecursively(false);
-                            trustText = quickStats.transform.Find("Trust Text").gameObject;
-                            trustText_Text = trustText.GetComponent<TextMeshProUGUI>();
-                            performanceIcon = quickStats.transform.Find("Performance Icon").gameObject;
-                            performanceIcon.SetActiveRecursively(false);
-                            performanceText = quickStats.transform.Find("Performance Text").gameObject;
-                            performanceText.SetActiveRecursively(false);
-                        }
-                        else
-                        {
-                            ModConsole.Error("[Nameplate] QuickStats was null");
+                            ModConsole.Error("[Nameplate] TextContainer was null");
                         }
                     }
                     else
                     {
-                        ModConsole.Error("[Nameplate] Contents was null");
+                        ModConsole.Error("[Nameplate] Main was null");
+                    }
+
+                    if (quickStats != null)
+                    {
+                        trustIcon = quickStats.transform.Find("Trust Icon").gameObject;
+                        trustIcon.SetActiveRecursively(false);
+                        trustText = quickStats.transform.Find("Trust Text").gameObject;
+                        trustText_Text = trustText.GetComponent<TextMeshProUGUI>();
+                        performanceIcon = quickStats.transform.Find("Performance Icon").gameObject;
+                        performanceIcon.SetActiveRecursively(false);
+                        performanceText = quickStats.transform.Find("Performance Text").gameObject;
+                        performanceText.SetActiveRecursively(false);
+                    }
+                    else
+                    {
+                        ModConsole.Error("[Nameplate] QuickStats was null");
                     }
                 }
                 else
                 {
-                    ModConsole.Error("[Nameplate] Nameplate was null");
+                    ModConsole.Error("[Nameplate] Contents was null");
                 }
 
                 _ = MelonCoroutines.Start(FastUpdateLoop());

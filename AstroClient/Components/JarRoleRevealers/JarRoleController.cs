@@ -36,21 +36,15 @@
             set
             {
                 _ViewRoles = value;
-                if (Murder4RolesRevealerToggle != null)
+                if (Murder4RolesRevealerToggle != null && IsMurder4World)
                 {
-                    if (IsMurder4World)
-                    {
-                        Murder4RolesRevealerToggle.SetToggleState(value);
-                        Event_OnViewRolesPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
-                    }
+                    Murder4RolesRevealerToggle.SetToggleState(value);
+                    Event_OnViewRolesPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
                 }
-                if (AmongUSRolesRevealerToggle != null)
+                if (AmongUSRolesRevealerToggle != null && IsAmongUsWorld)
                 {
-                    if (IsAmongUsWorld)
-                    {
-                        AmongUSRolesRevealerToggle.SetToggleState(value);
-                        Event_OnViewRolesPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
-                    }
+                    AmongUSRolesRevealerToggle.SetToggleState(value);
+                    Event_OnViewRolesPropertyChanged.SafetyRaise(new BoolEventsArgs(value));
                 }
             }
         }
@@ -98,18 +92,12 @@
         {
             MiscUtils.DelayFunction(0.5f, new Action(() =>
             {
-                if (JarRoleLinks.Count() != 0)
+                if (JarRoleLinks.Count() != 0 && (IsMurder4World || IsAmongUsWorld) && player != null && player.gameObject.GetComponent<JarRoleESP>() == null)
                 {
-                    if (IsMurder4World || IsAmongUsWorld)
+                    var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
+                    if (RoleRevealer != null && !RoleEspComponents.Contains(RoleRevealer))
                     {
-                        if (player != null && player.gameObject.GetComponent<JarRoleESP>() == null)
-                        {
-                            var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
-                            if (RoleRevealer != null && !RoleEspComponents.Contains(RoleRevealer))
-                            {
-                                RoleEspComponents.Add(RoleRevealer);
-                            }
-                        }
+                        RoleEspComponents.Add(RoleRevealer);
                     }
                 }
             }));

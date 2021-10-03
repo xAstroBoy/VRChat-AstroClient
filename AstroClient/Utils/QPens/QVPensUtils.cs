@@ -56,7 +56,7 @@
             }
             if (PenManagers.Count() != 0)
             {
-                ModConsole.Log("Found " + PenManagers.Count() + " Pen Managers!, Registering Clear Trigger!");
+                ModConsole.DebugLog("Found " + PenManagers.Count() + " Pen Managers!, Registering Clear Trigger!");
                 GetAllResetGlobals();
             }
         }
@@ -100,9 +100,9 @@
             }
 
             stopwatch.Stop();
-            ModConsole.Log("Found " + TriggerSDKBase.Count() + " QVPens Clear SDKBase Triggers.");
-            ModConsole.Log("Found " + TriggerSDK2.Count() + " QVPens Clear VRCSDK2 Triggers.");
-            ModConsole.Log($"Trigger Search Took: {stopwatch.ElapsedMilliseconds}ms");
+            ModConsole.DebugLog("Found " + TriggerSDKBase.Count() + " QVPens Clear SDKBase Triggers.");
+            ModConsole.DebugLog("Found " + TriggerSDK2.Count() + " QVPens Clear VRCSDK2 Triggers.");
+            ModConsole.DebugLog($"Trigger Search Took: {stopwatch.ElapsedMilliseconds}ms");
         }
 
         internal static void FindUdonPensEvents()
@@ -137,7 +137,7 @@
                     }
                 }
             }
-            ModConsole.Log("Found " + ClearPensUdonEvents.Count() + " Clear Pens Udon Events.");
+            ModConsole.DebugLog("Found " + ClearPensUdonEvents.Count() + " Clear Pens Udon Events.");
         }
 
         internal static void ResetQPensGlobal()
@@ -173,7 +173,7 @@
             }
 
             stopwatch.Stop();
-            ModConsole.Log($"ResetQPens took: {stopwatch.ElapsedMilliseconds}ms");
+            ModConsole.DebugLog($"ResetQPens took: {stopwatch.ElapsedMilliseconds}ms");
         }
 
         internal static List<GameObject> PenManagers = new List<GameObject>();
