@@ -1,6 +1,7 @@
 ﻿namespace AstroClient.Components
 {
     using AstroClient.GameObjectDebug;
+    using AstroClient.Streamer;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
@@ -57,7 +58,17 @@
         internal static bool IsEnabled
         {
             get => Instance.isEnabled;
-            set => Instance.isEnabled = value;
+            set
+            {
+                if (StreamerProtector.IsExploitsAllowed)
+                {
+                    Instance.isEnabled = value;
+                }
+                else
+                {
+                    Instance.isEnabled = false;
+                }
+            }
         }
 
         internal void Start()
@@ -113,7 +124,7 @@
 
         internal static void OrbitPlayer(Player target)
         {
-            if (Instance != null && target != null && Instance.target == null)
+            if (Instance != null && target != null && Instance.target == null && StreamerProtector.IsExploitsAllowed)
             {
                 Instance.target = target;
                 Instance.isEnabled = true;
