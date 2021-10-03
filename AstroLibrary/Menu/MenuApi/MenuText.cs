@@ -6,60 +6,44 @@
 
     public class MenuText
     {
-        public MenuText(QMNestedButton menuBase, float posx, float poxy, string text)
+        public MenuText(QMNestedButton menuBase, float posx, float posy, string text)
         {
             menuTitle = Object.Instantiate(QuickMenuStuff.GetQuickMenuInstance().transform.Find("ShortcutMenu/EarlyAccessText").gameObject, menuBase.GetBackButton().GetGameObject().transform.parent);
-            menuTitle.GetComponent<Text>().fontStyle = FontStyle.Normal;
-            menuTitle.GetComponent<Text>().alignment = TextAnchor.MiddleLeft;
-            menuTitle.GetComponent<Text>().text = text;
-            menuTitle.GetComponent<RectTransform>().anchoredPosition = new Vector2(posx, -poxy);
-            menuTitle.GetComponent<Text>().color = Color.white;
-            Posx = posx;
-            Posy = -poxy;
-            Text = text;
-            menuTitle.name = $"MenuText_{text}_{posx}_{-Posy}";
+            Init(menuTitle, posx, posy, text);
         }
 
-        public MenuText(string MenuName, float posx, float poxy, string text)
+        public MenuText(string MenuName, float posx, float posy, string text)
         {
             menuTitle = Object.Instantiate(QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, QuickMenuUtils.QuickMenu.transform.Find(MenuName));
-            menuTitle.GetComponent<Text>().fontStyle = FontStyle.Normal;
-            menuTitle.GetComponent<Text>().alignment = TextAnchor.MiddleLeft;
-            menuTitle.GetComponent<Text>().text = text;
-            menuTitle.GetComponent<RectTransform>().anchoredPosition = new Vector2(posx, -poxy);
-            menuTitle.GetComponent<Text>().color = Color.white;
-            Posx = posx;
-            Posy = -poxy;
-            Text = text;
-            menuTitle.name = $"MenuText_{text}_{posx}_{-Posy}";
+            Init(menuTitle, posx, posy, text);
         }
 
-        public MenuText(Transform parent, float posx, float poxy, string text)
+        public MenuText(Transform parent, float posx, float posy, string text)
         {
             menuTitle = Object.Instantiate(QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, parent);
-            menuTitle.GetComponent<Text>().fontStyle = FontStyle.Normal;
-            menuTitle.GetComponent<Text>().alignment = TextAnchor.MiddleLeft;
-            menuTitle.GetComponent<Text>().text = text;
-            menuTitle.GetComponent<RectTransform>().anchoredPosition = new Vector2(posx, -poxy);
-            menuTitle.GetComponent<Text>().color = Color.white;
-            Posx = posx;
-            Posy = -poxy;
-            Text = text;
-            menuTitle.name = $"MenuText_{text}_{posx}_{-Posy}";
+            Init(menuTitle, posx, posy, text);
         }
 
-        public MenuText(Transform parent, float posx, float poxy, string text, int size)
+        public MenuText(Transform parent, float posx, float posy, string text, int size)
         {
             menuTitle = Object.Instantiate(QuickMenuUtils.QuickMenu.transform.Find("ShortcutMenu/EarlyAccessText").gameObject, parent);
+            Init(menuTitle, posx, posy, text, size);
+        }
+
+        public void Init(GameObject menuTitle, float posx, float posy, string text, int size = 0)
+        {
             menuTitle.name = text;
             menuTitle.GetComponent<Text>().fontStyle = FontStyle.Normal;
             menuTitle.GetComponent<Text>().alignment = TextAnchor.MiddleLeft;
             menuTitle.GetComponent<Text>().text = text;
-            menuTitle.GetComponent<Text>().fontSize = size;
-            menuTitle.GetComponent<RectTransform>().anchoredPosition = new Vector2(posx, -poxy);
+            if (size != 0)
+            {
+                menuTitle.GetComponent<Text>().fontSize = size;
+            }
+            menuTitle.GetComponent<RectTransform>().anchoredPosition = new Vector2(posx, -posy);
             menuTitle.GetComponent<Text>().color = Color.white;
             Posx = posx;
-            Posy = -poxy;
+            Posy = -posy;
             Text = text;
             menuTitle.name = $"MenuText_{text}_{posx}_{-Posy}";
         }
