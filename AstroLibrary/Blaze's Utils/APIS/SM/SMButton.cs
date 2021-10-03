@@ -12,7 +12,7 @@
 
         public SMButton(SMButtonType type, string location, float PosX, float PosY, string buttonText, Action buttonAction)
         {
-            Initialize(type, QMStuff.GetSocialMenuInstance().transform.Find(location), PosX, PosY, buttonText, buttonAction);
+            Initialize(type, QuickMenuStuff.GetSocialMenuInstance().transform.Find(location), PosX, PosY, buttonText, buttonAction);
         }
 
         public SMButton(SMButtonType type, Transform location, float PosX, float PosY, string buttonText, Action buttonAction)
@@ -22,7 +22,7 @@
 
         public SMButton(SMButtonType type, string location, float PosX, float PosY, string buttonText, Action buttonAction, float XSize, float YSize)
         {
-            InitializeX(type, QMStuff.GetSocialMenuInstance().transform.Find(location), PosX, PosY, buttonText, buttonAction, XSize, YSize);
+            InitializeX(type, QuickMenuStuff.GetSocialMenuInstance().transform.Find(location), PosX, PosY, buttonText, buttonAction, XSize, YSize);
         }
 
         public SMButton(SMButtonType type, Transform location, float PosX, float PosY, string buttonText, Action buttonAction, float XSize, float YSize)
@@ -35,27 +35,27 @@
             switch (type)
             {
                 case SMButtonType.ChangeAvatar:
-                    button = UnityEngine.Object.Instantiate(QMStuff.GetSocialMenuInstance().transform.Find("Avatar/Change Button").gameObject, location);
+                    button = UnityEngine.Object.Instantiate(QuickMenuStuff.GetSocialMenuInstance().transform.Find("Avatar/Change Button").gameObject, location);
                     text = button.transform.Find("Label").GetComponent<Text>();
                     break;
 
                 case SMButtonType.DropPortal:
-                    button = UnityEngine.Object.Instantiate(QMStuff.GetSocialMenuInstance().transform.Find("WorldInfo/WorldButtons/PortalButton").gameObject, location);
+                    button = UnityEngine.Object.Instantiate(QuickMenuStuff.GetSocialMenuInstance().transform.Find("WorldInfo/WorldButtons/PortalButton").gameObject, location);
                     text = button.transform.Find("Text").GetComponent<Text>();
                     break;
 
                 case SMButtonType.EditStatus:
-                    button = UnityEngine.Object.Instantiate(QMStuff.GetSocialMenuInstance().transform.Find("Social/UserProfileAndStatusSection/Status/EditStatusButton").gameObject, location);
+                    button = UnityEngine.Object.Instantiate(QuickMenuStuff.GetSocialMenuInstance().transform.Find("Social/UserProfileAndStatusSection/Status/EditStatusButton").gameObject, location);
                     text = button.transform.Find("Text").GetComponent<Text>();
                     break;
 
                 case SMButtonType.ExitVRChat:
-                    button = UnityEngine.Object.Instantiate(QMStuff.GetSocialMenuInstance().transform.Find("Settings/Footer/Exit").gameObject, location);
+                    button = UnityEngine.Object.Instantiate(QuickMenuStuff.GetSocialMenuInstance().transform.Find("Settings/Footer/Exit").gameObject, location);
                     text = button.transform.Find("Text").GetComponent<Text>();
                     break;
 
                 default:
-                    button = UnityEngine.Object.Instantiate(QMStuff.GetSocialMenuInstance().transform.Find("Social/UserProfileAndStatusSection/Status/EditStatusButton").gameObject, location);
+                    button = UnityEngine.Object.Instantiate(QuickMenuStuff.GetSocialMenuInstance().transform.Find("Social/UserProfileAndStatusSection/Status/EditStatusButton").gameObject, location);
                     text = button.transform.Find("Text").GetComponent<Text>();
                     break;
             }
@@ -74,27 +74,27 @@
             switch (type)
             {
                 case SMButtonType.ChangeAvatar:
-                    button = UnityEngine.Object.Instantiate(QMStuff.GetSocialMenuInstance().transform.Find("Avatar/Change Button").gameObject, location);
+                    button = UnityEngine.Object.Instantiate(QuickMenuStuff.GetSocialMenuInstance().transform.Find("Avatar/Change Button").gameObject, location);
                     text = button.transform.Find("Label").GetComponent<Text>();
                     break;
 
                 case SMButtonType.DropPortal:
-                    button = UnityEngine.Object.Instantiate(QMStuff.GetSocialMenuInstance().transform.Find("WorldInfo/WorldButtons/PortalButton").gameObject, location);
+                    button = UnityEngine.Object.Instantiate(QuickMenuStuff.GetSocialMenuInstance().transform.Find("WorldInfo/WorldButtons/PortalButton").gameObject, location);
                     text = button.transform.Find("Text").GetComponent<Text>();
                     break;
 
                 case SMButtonType.EditStatus:
-                    button = UnityEngine.Object.Instantiate(QMStuff.GetSocialMenuInstance().transform.Find("Social/UserProfileAndStatusSection/Status/EditStatusButton").gameObject, location);
+                    button = UnityEngine.Object.Instantiate(QuickMenuStuff.GetSocialMenuInstance().transform.Find("Social/UserProfileAndStatusSection/Status/EditStatusButton").gameObject, location);
                     text = button.transform.Find("Text").GetComponent<Text>();
                     break;
 
                 case SMButtonType.ExitVRChat:
-                    button = UnityEngine.Object.Instantiate(QMStuff.GetSocialMenuInstance().transform.Find("Settings/Footer/Exit").gameObject, location);
+                    button = UnityEngine.Object.Instantiate(QuickMenuStuff.GetSocialMenuInstance().transform.Find("Settings/Footer/Exit").gameObject, location);
                     text = button.transform.Find("Text").GetComponent<Text>();
                     break;
 
                 default:
-                    button = UnityEngine.Object.Instantiate(QMStuff.GetSocialMenuInstance().transform.Find("Social/UserProfileAndStatusSection/Status/EditStatusButton").gameObject, location);
+                    button = UnityEngine.Object.Instantiate(QuickMenuStuff.GetSocialMenuInstance().transform.Find("Social/UserProfileAndStatusSection/Status/EditStatusButton").gameObject, location);
                     text = button.transform.Find("Text").GetComponent<Text>();
                     break;
             }

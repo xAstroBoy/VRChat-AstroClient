@@ -12,7 +12,6 @@
         private static BoxCollider QuickMenuBackgroundReference;
 
         private static GameObject TabButtonReference;
-
         // Internal cache of the Single Button Template for the Quick Menu
         private static GameObject SingleButtonReference;
 
@@ -25,8 +24,14 @@
         // Internal cache of the QuickMenu
         private static QuickMenu quickmenuInstance;
 
+        // Internal cache of the SocialMenu
+        private static GameObject socialmenuInstance;
+
         // Internal cache of the VRCUiManager
         private static VRCUiManager vrcuimInstance;
+
+        // Internal cache of the Image
+        private static GameObject ImageReference;
 
         // Fetch the background from the Quick Menu
         public static BoxCollider QuickMenuBackground()
@@ -83,6 +88,16 @@
             return quickmenuInstance;
         }
 
+        // Fetch the Social Menu instance
+        public static GameObject GetSocialMenuInstance()
+        {
+            if (socialmenuInstance == null)
+            {
+                socialmenuInstance = GameObject.Find("UserInterface/MenuContent/Screens");
+            }
+            return socialmenuInstance;
+        }
+
         // Fetch the VRCUiManager instance
         public static VRCUiManager GetVRCUiMInstance()
         {
@@ -93,9 +108,18 @@
             return vrcuimInstance;
         }
 
+        // Fetch the Image instance
+        public static GameObject GetImageInstance()
+        {
+            if (ImageReference == null)
+            {
+                ImageReference = GetSocialMenuInstance().transform.Find("WorldInfo/WorldImage/RoomImage").gameObject;
+            }
+            return ImageReference;
+        }
+
         // Cache the FieldInfo for getting the current page. Hope to god this works!
         private static FieldInfo currentPageGetter;
-
         private static GameObject shortcutMenu;
         private static GameObject userInteractMenu;
 
@@ -114,6 +138,7 @@
                 GameObject shortcutMenu = quickmenu.transform.Find("ShortcutMenu").gameObject;
                 if (!shortcutMenu.activeInHierarchy)
                     shortcutMenu = quickmenu.transform.Find("UserInteractMenu").gameObject;
+
 
                 FieldInfo[] fis = Il2CppType.Of<QuickMenu>().GetFields(BindingFlags.NonPublic | BindingFlags.Instance).Where((fi) => fi.FieldType == Il2CppType.Of<GameObject>()).ToArray();
                 //MelonLoader.MelonModLogger.Log("[QMStuff] GameObject Fields in QuickMenu:");
@@ -171,6 +196,7 @@
         }
 
         // Set the current Quick Menu index
+        // VRChat Build 1101 - github.com/MintLily
         public static void SetIndex(int index)
         {
             GetQuickMenuInstance().field_Private_EnumNPublicSealedvaUnShEmUsEmNoCaMo_nUnique_0 = (QuickMenu.EnumNPublicSealedvaUnShEmUsEmNoCaMo_nUnique)index;

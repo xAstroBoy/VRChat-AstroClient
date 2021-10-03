@@ -11,7 +11,7 @@
 
         public SMText(string Screen, float PosX, float PosY, float SizeX, float SizeY, string textLabel)
         {
-            Initialize(QMStuff.GetSocialMenuInstance().transform.Find(Screen), PosX, PosY, SizeX, SizeY, textLabel);
+            Initialize(QuickMenuStuff.GetSocialMenuInstance().transform.Find(Screen), PosX, PosY, SizeX, SizeY, textLabel);
         }
 
         private void Initialize(Transform location, float PosX, float PosY, float SizeX, float SizeY, string textLabel)

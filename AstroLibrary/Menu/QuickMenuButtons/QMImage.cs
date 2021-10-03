@@ -13,7 +13,7 @@
 
         public QMImage(QMNestedButton QMNB, float LocX, float LocY, float SizeX, float SizeY, string ImageURL)
         {
-            Initialize(QMStuff.GetQuickMenuInstance().transform.Find(QMNB.GetMenuName()), LocX, LocY, SizeX, SizeY, ImageURL);
+            Initialize(QuickMenuStuff.GetQuickMenuInstance().transform.Find(QMNB.GetMenuName()), LocX, LocY, SizeX, SizeY, ImageURL);
         }
 
         public QMImage(Transform location, float LocX, float LocY, float SizeX, float SizeY, string ImageURL)
@@ -23,7 +23,7 @@
 
         private void Initialize(Transform location, float LocX, float LocY, float SizeX, float SizeY, string ImageURL)
         {
-            ImageObject = UnityEngine.Object.Instantiate(QMStuff.GetImageInstance(), location);
+            ImageObject = UnityEngine.Object.Instantiate(QuickMenuStuff.GetImageInstance(), location);
             ImageObject.name = $"QMImage";
 
             SetSize(new Vector2(SizeX, SizeY));

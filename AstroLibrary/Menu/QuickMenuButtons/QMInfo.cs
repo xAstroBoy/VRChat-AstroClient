@@ -1,71 +1,88 @@
 ﻿namespace AstroButtonAPI
 {
+    using System.Threading.Tasks;
     using UnityEngine;
+    using UnityEngine.Networking;
     using UnityEngine.UI;
 
     public class QMInfo
     {
-        public GameObject TextObject;
+        public GameObject InfoObject;
+        public Text InfoText;
         public GameObject InfoIconObject;
-        public GameObject InfoGameObject;
-        public Text Text;
-        public Image Image;
-        private float[] initShift = { 0, 0 };
 
-        public QMInfo(Transform Parent, string text, float Pos_X, float Pos_Y, float Scale_X, float Scale_Y, bool infoIcon = true)
+        public QMInfo(Transform location, float PosX, float PosY, float SizeX, float SizeY, string Text, bool? ShowInfoIcon = false)
         {
-            InfoGameObject = UnityEngine.Object.Instantiate(QuickMenuStuff.GetQuickMenuInstance().transform.Find("/UserInterface/QuickMenu/UserIconMenu/Info").gameObject, Parent);
-            InfoGameObject.name = $"QMInfo_{Pos_X}_{Pos_Y}";
-            Image = InfoGameObject.GetComponent<Image>();
-            InfoIconObject = InfoGameObject.transform.Find("InfoIcon").gameObject;
-            TextObject = InfoGameObject.transform.Find("Text").gameObject;
-            Text = TextObject.GetComponent<Text>();
-            // 420 is pushin it 1 button position to the direction
-            SetPositon(new Vector2(Pos_X, Pos_Y));
-            // 420 is one button. so 1680,1260 is the whole menu
-            SetSize(new Vector2(Scale_X, Scale_Y));
-            SetText(text);
-            SetInfoIcon(infoIcon);
-            QMButtonAPI.AllInfos.Add(this);
+            Initialize(location, PosX, PosY, SizeX, SizeY, Text, ShowInfoIcon);
         }
 
-        public QMInfo(QMNestedButton Parent, string text, float Pos_X, float Pos_Y, float Scale_X, float Scale_Y, bool infoIcon = true)
+        public QMInfo(QMNestedButton QMNB, float PosX, float PosY, float SizeX, float SizeY, string Text, bool? ShowInfoIcon = false)
         {
-            InfoGameObject = UnityEngine.Object.Instantiate(QuickMenuStuff.GetQuickMenuInstance().transform.Find("/UserInterface/QuickMenu/UserIconMenu/Info").gameObject,
-                QuickMenuStuff.GetQuickMenuInstance().transform.Find(Parent.GetMenuName()));
-            InfoGameObject.name = $"QMInfo_{Pos_X}_{Pos_Y}";
-            Image = InfoGameObject.GetComponent<Image>();
-            InfoIconObject = InfoGameObject.transform.Find("InfoIcon").gameObject;
-            TextObject = InfoGameObject.transform.Find("Text").gameObject;
-            Text = TextObject.GetComponent<Text>();
-            // 420 is pushin it 1 button position to the direction
-            SetPositon(new Vector2(Pos_X, Pos_Y));
-            // 420 is one button. so 1680,1260 is the whole menu
-            SetSize(new Vector2(Scale_X, Scale_Y));
-            SetText(text);
-            SetInfoIcon(infoIcon);
-            QMButtonAPI.AllInfos.Add(this);
+            Initialize(QuickMenuStuff.GetQuickMenuInstance().transform.Find(QMNB.GetMenuName()), PosX, PosY, SizeX, SizeY, Text, ShowInfoIcon);
         }
 
-        public void SetText(string text)
+        private void Initialize(Transform location, float PosX, float PosY, float SizeX, float SizeY, string Text, bool? ShowInfoIcon = false)
         {
-            Text.text = text;
+            InfoObject = UnityEngine.Object.Instantiate(QuickMenuStuff.GetQuickMenuInstance().transform.Find("EmoteMenu/ActionMenuInfo2").gameObject, location);
+            InfoObject.name = $"QMInfo_{PosX}_{PosY}";
+            InfoText = InfoObject.GetComponentInChildren<Text>();
+            InfoIconObject = InfoObject.transform.Find("InfoIcon").gameObject;
+            SetSize(new Vector2(SizeX, SizeY));
+            SetLocation(new Vector3(PosX, PosY, 1));
+            SetText(Text);
+            ToggleInfoIcon((bool)ShowInfoIcon);
         }
 
         public void SetSize(Vector2 size)
         {
-            InfoGameObject.GetComponent<RectTransform>().sizeDelta = size;
-            TextObject.GetComponent<RectTransform>().sizeDelta = new Vector2(TextObject.GetComponent<RectTransform>().sizeDelta.x, size.y);
+            InfoObject.GetComponent<RectTransform>().sizeDelta = size;
+            InfoObject.transform.Find("Text").GetComponent<RectTransform>().sizeDelta = new Vector2(-100, size.y - 50);
         }
 
-        public void SetPositon(Vector2 Position)
+        public void SetLocation(Vector3 location)
         {
-            InfoGameObject.GetComponent<RectTransform>().anchoredPosition = Position;
+            InfoObject.GetComponent<RectTransform>().anchoredPosition = location;
         }
 
-        public void SetInfoIcon(bool state)
+        public void SetText(string text)
+        {
+            InfoText.text = text;
+        }
+
+        public void ToggleInfoIcon(bool state)
         {
             InfoIconObject.SetActive(state);
+        }
+
+        public void ToggleBackground(bool state)
+        {
+            InfoObject.GetComponent<Image>().enabled = state;
+        }
+
+        public async void SetBackground(string URL)
+        {
+            await GetRemoteTexture(InfoObject.GetComponent<Image>(), URL);
+        }
+
+        private async Task<Texture2D> GetRemoteTexture(Image Instance, string url)
+        {
+            var www = UnityWebRequestTexture.GetTexture(url);
+            var asyncOp = www.SendWebRequest();
+            while (asyncOp.isDone == false)
+                await Task.Delay(1000 / 30);//30 hertz
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                return null;
+            }
+            else
+            {
+                var Sprite = new Sprite();
+                Sprite = Sprite.CreateSprite(DownloadHandlerTexture.GetContent(www), new Rect(0, 0, DownloadHandlerTexture.GetContent(www).width, DownloadHandlerTexture.GetContent(www).height), Vector2.zero, 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+                Instance.sprite = Sprite;
+                Instance.color = Color.white;
+                return DownloadHandlerTexture.GetContent(www);
+            }
         }
     }
 }

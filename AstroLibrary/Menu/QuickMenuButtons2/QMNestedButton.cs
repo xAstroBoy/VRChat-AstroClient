@@ -28,11 +28,11 @@
         {
             btnType = "NestedButton";
 
-            Transform menu = UnityEngine.Object.Instantiate<Transform>(QMStuff.NestedMenuTemplate(), QMStuff.GetQuickMenuInstance().transform);
+            Transform menu = UnityEngine.Object.Instantiate<Transform>(QuickMenuStuff.NestedMenuTemplate(), QuickMenuStuff.GetQuickMenuInstance().transform);
             menuName = BlazesAPIs.Identifier + btnQMLoc + "_" + btnXLocation + "_" + btnYLocation;
             menu.name = menuName;
 
-            mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QMStuff.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, btnTextColor);
+            mainButton = new QMSingleButton(btnQMLoc, btnXLocation, btnYLocation, btnText, () => { QuickMenuStuff.ShowQuickmenuPage(menuName); }, btnToolTip, btnBackgroundColor, btnTextColor);
 
             Il2CppSystem.Collections.IEnumerator enumerator = menu.transform.GetEnumerator();
             while (enumerator.MoveNext())
@@ -50,7 +50,7 @@
                 backbtnTextColor = Color.yellow;
             }
             BlazesAPIs.allNestedButtons.Add(this);
-            backButton = new QMSingleButton(this, 5, 2, "Back", () => { QMStuff.ShowQuickmenuPage(btnQMLoc); }, "Go Back", backbtnBackgroundColor, backbtnTextColor);
+            backButton = new QMSingleButton(this, 5, 2, "Back", () => { QuickMenuStuff.ShowQuickmenuPage(btnQMLoc); }, "Go Back", backbtnBackgroundColor, backbtnTextColor);
         }
 
         public string getMenuName()
@@ -76,7 +76,7 @@
 
         public void OpenMe()
         {
-            QMStuff.ShowQuickmenuPage(menuName);
+            QuickMenuStuff.ShowQuickmenuPage(menuName);
         }
     }
 }

@@ -686,12 +686,11 @@
   <ItemGroup>
     <Compile Include="Blaze%27s Utils\APIS\BlazesAPIs.cs" />
     <Compile Include="Menu\QuickMenuButtons\QMImage.cs" />
-    <Compile Include="Menu\QuickMenuButtons2\QMInfo.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMNestedButton.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMScrollMenu.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMSingleButton.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMSlider.cs" />
-    <Compile Include="Menu\QuickMenuButtons\QMStuff.cs" />
+    <Compile Include="Menu\QuickMenuButtons\QuickMenuStuff.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMToggleButton.cs" />
     <Compile Include="Blaze%27s Utils\APIS\SM\SMButton.cs" />
     <Compile Include="Blaze%27s Utils\APIS\SM\SMList.cs" />
@@ -770,7 +769,6 @@
     <Compile Include="Menu\QuickMenuButtons\QMTabButton.cs" />
     <Compile Include="Menu\QuickMenuButtons\QMTabMenu.cs" />
     <Compile Include="Menu\QuickMenuButtons\QMToggleButton.cs" />
-    <Compile Include="Menu\QuickMenuButtons\QuickMenuStuff.cs" />
     <Compile Include="Menu\QuickMenuButtons\QMHalfScroll.cs" />
     <Compile Include="Menu\UnityUIUtils.cs" />
     <Compile Include="Misc\Api\API.cs" />

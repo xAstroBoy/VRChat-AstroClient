@@ -23,7 +23,7 @@
 
         public QMSlider(QMNestedButton QMNB, bool IsBoxStyle, int PosX, int PosY, string Label, float minValue, float maxValue, float currentValue, Action<float> sliderAction, Color? labelColor = null)
         {
-            Initialize(QMStuff.GetQuickMenuInstance().transform.Find(QMNB.getMenuName()), IsBoxStyle, PosX, PosY, Label, minValue, maxValue, currentValue, sliderAction, labelColor);
+            Initialize(QuickMenuStuff.GetQuickMenuInstance().transform.Find(QMNB.getMenuName()), IsBoxStyle, PosX, PosY, Label, minValue, maxValue, currentValue, sliderAction, labelColor);
         }
 
         private void Initialize(Transform location, bool IsBoxStyle, int PosX, int PosY, string Label, float minValue, float maxValue, float currentValue, Action<float> sliderAction, Color? labelColor = null)
