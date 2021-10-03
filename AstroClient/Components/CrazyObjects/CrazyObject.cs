@@ -98,6 +98,11 @@
             {
                 if (!IsEnabled || isPaused)
                 {
+                    if (HasRequiredSettings)
+                    {
+                        RigidBodyController.RestoreOriginalBody();
+                        HasRequiredSettings = false;
+                    }
                     return;
                 }
                 if (PickupController.IsHeld)
@@ -210,7 +215,7 @@
         private string OriginalText_Use { get; set; }
         private bool isPaused;
         private bool _IsEnabled = true;
-        private bool IsEnabled
+        internal bool IsEnabled
         {
             get
             {
