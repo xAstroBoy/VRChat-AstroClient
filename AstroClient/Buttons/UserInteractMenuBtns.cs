@@ -5,7 +5,7 @@
     using AstroClient.Components;
     using AstroClient.Variables;
     using AstroLibrary.Utility;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System;
     using UnityEngine;
     using Finder = AstroLibrary.Finder;

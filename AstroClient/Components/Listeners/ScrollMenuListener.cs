@@ -1,7 +1,7 @@
 namespace AstroClient.Components
 {
     using AstroLibrary.Extensions;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System;
 
     [RegisterComponent]

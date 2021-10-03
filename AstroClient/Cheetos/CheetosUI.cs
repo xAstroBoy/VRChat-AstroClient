@@ -8,7 +8,7 @@
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
     using MelonLoader;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System;
     using System.Collections;
     using System.Collections.Generic;

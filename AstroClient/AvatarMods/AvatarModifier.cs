@@ -3,7 +3,7 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using MelonLoader;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System;
     using UnityEngine;
     using VRC;

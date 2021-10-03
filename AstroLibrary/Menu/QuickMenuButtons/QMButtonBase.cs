@@ -1,4 +1,4 @@
-﻿namespace RubyButtonAPI
+﻿namespace AstroButtonAPI
 {
     using System.Collections;
     using UnityEngine;

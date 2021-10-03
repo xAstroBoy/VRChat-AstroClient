@@ -4,7 +4,7 @@
 
     using AstroClient.Variables;
     using AstroLibrary;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System.Reflection;
 
     #endregion Imports

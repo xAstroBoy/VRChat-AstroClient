@@ -3,7 +3,7 @@
     using AstroClient.Components;
     using AstroClient.ItemTweakerV2.Selector;
     using AstroLibrary.Extensions;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System;
     using UnityEngine;
     using VRC;

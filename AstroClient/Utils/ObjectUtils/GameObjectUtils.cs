@@ -9,7 +9,7 @@
     using AstroLibrary.Utility;
     using Il2CppSystem.Text;
     using Photon.Pun;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System;
     using System.Collections.Generic;
     using System.IO;

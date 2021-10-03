@@ -3,7 +3,7 @@
     using AstroClient.Components;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
 
     internal class RandomSubmenus
     {

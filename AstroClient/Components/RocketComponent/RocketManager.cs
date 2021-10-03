@@ -2,7 +2,7 @@
 {
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;

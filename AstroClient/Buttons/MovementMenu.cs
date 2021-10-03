@@ -5,7 +5,7 @@
     using AstroClient.Features.Player.Clones;
     using AstroClient.Features.Player.Movement;
     using AstroClient.Features.Player.Movement.QuickMenu_QMFreeze;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System;
     using UnityEngine;
 

@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.WorldAddons
 {
     using AstroLibrary.Finder;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System.Collections.Generic;
     using UnityEngine.UI;
 

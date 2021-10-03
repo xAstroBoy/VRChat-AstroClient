@@ -1,6 +1,6 @@
 ﻿namespace AstroClient.AntiCrash
 {
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using UnityEngine;
 
     /// <summary>

@@ -3,7 +3,7 @@
     using AstroClient.Variables;
     using AstroClient.World.Hub;
     using AstroClient.WorldAddons;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System;
     using System.Collections.Generic;
     using UnityEngine;

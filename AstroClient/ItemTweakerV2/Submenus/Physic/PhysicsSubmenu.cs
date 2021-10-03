@@ -4,7 +4,7 @@
     using AstroClient.ItemTweakerV2.Selector;
     using AstroClient.ItemTweakerV2.Submenus.Collider;
     using AstroLibrary.Extensions;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System;
     using UnityEngine;
     using VRC;

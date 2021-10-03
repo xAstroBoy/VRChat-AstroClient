@@ -4,7 +4,7 @@
     using AstroClientCore.Events;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System;
     using UnityEngine;
     using VRC;

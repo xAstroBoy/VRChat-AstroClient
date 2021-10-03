@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Features.Player.Movement.QuickMenu_QMFreeze
 {
     using AstroLibrary.Utility;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System.Collections.Generic;
     using UnityEngine;
     using VRC.SDKBase;

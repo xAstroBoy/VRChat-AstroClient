@@ -5,7 +5,7 @@
     using AstroLibrary;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using UnityEngine;
 
     #endregion Imports

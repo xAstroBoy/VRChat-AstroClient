@@ -9,7 +9,7 @@
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;

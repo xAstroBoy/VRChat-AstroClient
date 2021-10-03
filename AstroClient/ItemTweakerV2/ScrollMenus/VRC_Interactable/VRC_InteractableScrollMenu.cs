@@ -4,7 +4,7 @@
     using AstroClient.ItemTweakerV2.Selector;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
 
     internal class VRC_InteractableScrollMenu
     {

@@ -1,4 +1,4 @@
-﻿namespace RubyButtonAPI
+﻿namespace AstroButtonAPI
 {
     using UnityEngine;
     using UnityEngine.UI;

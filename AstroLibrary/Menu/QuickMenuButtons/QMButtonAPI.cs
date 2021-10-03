@@ -1,4 +1,4 @@
-﻿namespace RubyButtonAPI
+﻿namespace AstroButtonAPI
 {
     using MelonLoader;
     using System.Collections.Generic;

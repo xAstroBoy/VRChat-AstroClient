@@ -2,7 +2,7 @@
 {
     using AstroClient.GameObjectDebug;
     using AstroLibrary.Extensions;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System;
 
     internal class WorldPickupsBtn

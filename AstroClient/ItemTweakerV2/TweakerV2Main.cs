@@ -9,7 +9,7 @@
     using AstroClient.Variables;
     using AstroLibrary;
     using AstroLibrary.Extensions;
-    using RubyButtonAPI;
+    using AstroButtonAPI;
     using System;
     using System.Reflection;
     using UnityEngine;
