@@ -70,7 +70,7 @@
             MelonCoroutines.Start(SendClientInfoLoop());
         }
 
-        internal static IEnumerator SendClientInfoLoop()
+        private static IEnumerator SendClientInfoLoop()
         {
             for (; ; )
             {
