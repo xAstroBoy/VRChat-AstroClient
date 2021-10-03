@@ -700,9 +700,7 @@
     <Compile Include="Blaze%27s Utils\BlazesXRefs.cs" />
     <Compile Include="Blaze%27s Utils\ConversionUtils.cs" />
     <Compile Include="Blaze%27s Utils\DiscordUtils.cs" />
-    <Compile Include="Blaze%27s Utils\FileManager.cs" />
     <Compile Include="Blaze%27s Utils\JsonWriter.cs" />
-    <Compile Include="Blaze%27s Utils\Logs.cs" />
     <Compile Include="Extensions\ButtonExtensions.cs" />
     <Compile Include="Extensions\ButtonStringExtensions.cs" />
     <Compile Include="Extensions\CodingExtensions.cs" />
@@ -711,7 +709,6 @@
     <Compile Include="Utility\ComponentUtils.cs" />
     <Compile Include="Utility\GameObjectUtils.cs" />
     <Compile Include="Utility\MiscUtils.cs" />
-    <Compile Include="Blaze%27s Utils\ModerationHelper.cs" />
     <Compile Include="Utility\PhotonUtils.cs" />
     <Compile Include="Utility\PlayerUtils.cs" />
     <Compile Include="Blaze%27s Utils\PopupUtils.cs" />

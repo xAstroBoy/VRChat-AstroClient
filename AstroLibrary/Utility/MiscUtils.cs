@@ -67,13 +67,6 @@ namespace AstroLibrary.Utility
             ForceQuit();
         }
 
-        public static void LoginFailed()
-        {
-            Logs.Msg("Authorization to Blaze's Servers has failed. Please restart and check again!", ConsoleColor.Red);
-            Console.ReadKey();
-            ForceQuit();
-        }
-
         //public static void ClearVRAM()
         //{
         //    var currentAvatars = (from player in PlayerManager.prop_PlayerManager_0.prop_ArrayOf_Player_0 where player != null select player.prop_ApiAvatar_0 into apiAvatar where apiAvatar != null select apiAvatar.assetUrl).ToList();
@@ -115,7 +108,7 @@ namespace AstroLibrary.Utility
                         {
                             p.blueprintId = s;
                         }
-                        Logs.Debug($"<color=red>[EXPLOITS]</color> Changed <color=yellow>{cachedPedestals.Count}</color> pedestals!");
+                        ModConsole.DebugLog($"<color=red>[EXPLOITS]</color> Changed <color=yellow>{cachedPedestals.Count}</color> pedestals!");
                     }
                     else
                     {
@@ -132,7 +125,7 @@ namespace AstroLibrary.Utility
                         {
                             p.blueprintId = s;
                         }
-                        Logs.Debug($"<color=red>[EXPLOITS]</color> Changed <color=yellow>{cachedPedestals.Count}</color> pedestals!");
+                        ModConsole.DebugLog($"<color=red>[EXPLOITS]</color> Changed <color=yellow>{cachedPedestals.Count}</color> pedestals!");
                     }
                     else
                     {

@@ -1,5 +1,6 @@
 ﻿namespace Blaze.Utils
 {
+    using AstroLibrary.Console;
     using System;
     using System.Collections.Generic;
     using UnityEngine;
@@ -23,7 +24,7 @@
                     }
                     catch (Exception ex)
                     {
-                        Logs.Msg(ex.ToString(), ConsoleColor.Red);
+                        ModConsole.Error(ex.ToString());
                     }
                 }
                 return;
