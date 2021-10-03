@@ -37,8 +37,10 @@
                 var avatar = root.Get_Avatar();
                 if (avatar != null)
                 {
-                    foreach (var child in avatar.Get_Childs())
+                    List<Transform> list = avatar.Get_Childs();
+                    for (int i = 0; i < list.Count; i++)
                     {
+                        Transform child = list[i];
                         if (obj.IsChildOf(child))
                         {
                             return child;
@@ -60,10 +62,13 @@
                     ModConsole.Log("[AVATAR RENDERER DUMPER] : Dumping All Renderers of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
                     ModConsole.Log("[AVATAR RENDERER DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
                     ModConsole.Log("Dumping Renderers names ...", Color.Green);
-                    foreach (var item in parents)
+                    for (int i = 0; i < parents.Count; i++)
                     {
-                        foreach (var name in Dump_Renderers(item))
+                        Transform item = parents[i];
+                        List<string> list = Dump_Renderers(item);
+                        for (int i1 = 0; i1 < list.Count; i1++)
                         {
+                            string name = list[i1];
                             ModConsole.Log("Found Renderer [ " + name + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
                         }
                     }
@@ -86,10 +91,13 @@
                     ModConsole.Log("[AVATAR MESHRENDERER DUMPER] : Dumping All Renderers of " + player.GetAPIUser().displayName + " Avatar...", Color.Green);
                     ModConsole.Log("[AVATAR MESHRENDERER DUMPER] : AVATAR ID : " + player.prop_ApiAvatar_0.id, Color.Green);
                     ModConsole.Log("Dumping Mesh Renderers names ...", Color.Green);
-                    foreach (var item in parents)
+                    for (int i = 0; i < parents.Count; i++)
                     {
-                        foreach (var name in Dump_Renderers(item))
+                        Transform item = parents[i];
+                        List<string> list = Dump_Renderers(item);
+                        for (int i1 = 0; i1 < list.Count; i1++)
                         {
+                            string name = list[i1];
                             ModConsole.Log("Found Mesh Renderer [ " + name + " ] in " + player.DisplayName() + "'s avatar", Color.Yellow);
                         }
                     }

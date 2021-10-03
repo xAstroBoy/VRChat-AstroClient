@@ -123,11 +123,11 @@
             {
                 string str = text;
                 object obj = __1;
-                ModConsole.Log($"{str}{obj?.ToString()}, {__2.ToString()}");
+                ModConsole.DebugLog($"{str}{obj?.ToString()}, {__2.ToString()}");
             }
             else
             {
-                ModConsole.Log($"{text}null, {__2.ToString()}");
+                ModConsole.DebugLog($"{text}null, {__2.ToString()}");
             }
             return true;
         }
@@ -273,26 +273,12 @@
 
         private static void OnPhotonPlayerJoin(ref Photon.Realtime.Player __0)
         {
-            if (__0 != null)
-            {
-                Event_OnPhotonJoin?.SafetyRaise(new PhotonPlayerEventArgs(__0));
-            }
-            else
-            {
-                ModConsole.Error($"[Photon] OnPhotonPlayerJoin Failed! __0 was null.");
-            }
+            Event_OnPhotonJoin?.SafetyRaise(new PhotonPlayerEventArgs(__0));
         }
 
         private static void OnPhotonPlayerLeft(ref Photon.Realtime.Player __0)
         {
-            if (__0 != null && Event_OnPhotonLeft != null)
-            {
-                Event_OnPhotonLeft?.SafetyRaise(new PhotonPlayerEventArgs(__0));
-            }
-            else
-            {
-                ModConsole.Error($"[Photon] OnPhotonPlayerLeft Failed! __0 was null.");
-            }
+            Event_OnPhotonLeft?.SafetyRaise(new PhotonPlayerEventArgs(__0));
         }
     }
 }

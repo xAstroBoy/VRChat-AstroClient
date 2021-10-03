@@ -115,8 +115,9 @@
             if (File.Exists(TermsToEnableOffPath))
             {
                 List<string> list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(TermsToEnableOffPath));
-                foreach (var item in list)
+                for (int i = 0; i < list.Count; i++)
                 {
+                    string item = list[i];
                     //ModConsole.DebugLog($"Found Term : {item}");
                     if (!TermsToToggleOff.Contains(item.ToLower()))
                     {
@@ -141,8 +142,9 @@
             if (File.Exists(AvatarsToSkipPath))
             {
                 List<string> list = JsonConvert.DeserializeObject<List<string>>(File.ReadAllText(AvatarsToSkipPath));
-                foreach (var item in list)
+                for (int i = 0; i < list.Count; i++)
                 {
+                    string item = list[i];
                     //ModConsole.DebugLog($"Found Term : {item}");
                     if (!AvatarsToSkip.Contains(item))
                     {

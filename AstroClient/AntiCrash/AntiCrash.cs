@@ -9,7 +9,7 @@
         internal override void OnAvatarSpawn(VRCAvatarManager avatarManager, GameObject avatar)
         {
             if (avatarManager == null || avatar == null) throw new ArgumentNullException();
-            ModConsole.Log($"[AntiCrash] Scanning Avatar");
+            ModConsole.DebugLog($"[AntiCrash] Scanning Avatar");
         }
     }
 }

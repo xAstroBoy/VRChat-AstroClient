@@ -68,7 +68,7 @@
                 {
                     AvatarSearch.DumpDone(); // Refresh Avatar Pedestal Dump
                     RefreshList();
-                    ModConsole.Log("Refreshed Avatar Lists");
+                    ModConsole.DebugLog("Refreshed Avatar Lists");
                 });
             }
         }
@@ -116,14 +116,14 @@
                 new ApiAvatar { id = avatarID }.Fetch(new Action<ApiContainer>(model =>
                 {
                     AstroClient.ConfigManager.Favorites.Avatars.Add(model.Model.Cast<ApiAvatar>().GetAvatarData());
-                    ModConsole.Log($"Avatar Favorited: {avatarID}");
+                    ModConsole.DebugLog($"Avatar Favorited: {avatarID}");
                     AstroClient.ConfigManager.Save_Favorites();
                     RefreshList();
                 }));
             }
             else
             {
-                ModConsole.Log($"Avatar already favorited!");
+                ModConsole.Warning($"Avatar already favorited!");
             }
         }
 
@@ -131,7 +131,7 @@
         {
             if (AstroClient.ConfigManager.Favorites.Avatars.Remove(AstroClient.ConfigManager.Favorites.Avatars.Where(a => a.AvatarID == avatarID).FirstOrDefault()))
             {
-                ModConsole.Log($"Avatar Unfavorited: {avatarID}");
+                ModConsole.DebugLog($"Avatar Unfavorited: {avatarID}");
                 AstroClient.ConfigManager.Save_Favorites();
                 RefreshList();
             }

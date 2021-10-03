@@ -84,8 +84,9 @@
             {
                 if (value)
                 {
-                    foreach (var player in WorldUtils.Players)
+                    for (int i = 0; i < WorldUtils.Players.Count; i++)
                     {
+                        Player player = WorldUtils.Players[i];
                         if (player != Utils.LocalPlayer.GetPlayer())
                         {
                             if (player != null)
@@ -97,8 +98,9 @@
                 }
                 else
                 {
-                    foreach (var player in WorldUtils.Players)
+                    for (int i = 0; i < WorldUtils.Players.Count; i++)
                     {
+                        Player player = WorldUtils.Players[i];
                         if (player != Utils.LocalPlayer.GetPlayer())
                         {
                             if (player != null)
@@ -130,8 +132,9 @@
             {
                 if (value)
                 {
-                    foreach (var player in WorldUtils.Players)
+                    for (int i = 0; i < WorldUtils.Players.Count; i++)
                     {
+                        Player player = WorldUtils.Players[i];
                         if (player != Utils.LocalPlayer.GetPlayer())
                         {
                             if (player != null)
@@ -143,8 +146,9 @@
                 }
                 else
                 {
-                    foreach (var player in WorldUtils.Players)
+                    for (int i = 0; i < WorldUtils.Players.Count; i++)
                     {
+                        Player player = WorldUtils.Players[i];
                         if (player != Utils.LocalPlayer.GetPlayer())
                         {
                             if (player != null)

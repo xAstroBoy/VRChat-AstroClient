@@ -221,7 +221,7 @@
             worldList.RenderElement(worldAvatars);
 
             stopwatch2.Stop();
-            ModConsole.Log($"Avatar Pedestals Completed: found {worldAvatars.Count} avatars, took {stopwatch2.ElapsedMilliseconds}ms");
+            ModConsole.DebugLog($"Avatar Pedestals Completed: found {worldAvatars.Count} avatars, took {stopwatch2.ElapsedMilliseconds}ms");
             worldList.Text.text = $"<color=cyan>Astro Pedestal</color> Found: <color=yellow>{worldAvatars.Count}</color>";
         }
 
@@ -244,7 +244,7 @@
             searchList.RenderElement(foundAvatars);
 
             searchList.Text.text = $"<color=cyan>Astro Search</color> Found: <color=yellow>{foundAvatars.Count}</color> in {stopwatch.ElapsedMilliseconds}ms";
-            ModConsole.Log($"Avatar Search Completed: found {foundAvatars.Count} avatars in {stopwatch.ElapsedMilliseconds}ms");
+            ModConsole.DebugLog($"Avatar Search Completed: found {foundAvatars.Count} avatars in {stopwatch.ElapsedMilliseconds}ms");
         }
 
         internal static void AddAvatar(AvatarData avatarData)

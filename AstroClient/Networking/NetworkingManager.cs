@@ -54,7 +54,7 @@
             {
                 if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
                 {
-                    ModConsole.Log($"Sending Avatar Search: {(int)searchType}, {query}");
+                    ModConsole.DebugLog($"Sending Avatar Search: {(int)searchType}, {query}");
                     AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_SEARCH_TYPE, ((int)searchType).ToString()));
                     AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_SEARCH, query));
                 }
@@ -97,7 +97,7 @@
             if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
             {
                 var instanceID = WorldUtils.Instance.id;
-                ModConsole.Log($"Sending Instance Information: {instanceID}");
+                ModConsole.DebugLog($"Sending Instance Information: {instanceID}");
                 AstroNetworkClient.Client.Send(new PacketData(PacketClientType.WORLD_JOIN, instanceID));
             }
             else
