@@ -6,7 +6,10 @@
     using AstroLibrary.Utility;
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
+    using MelonLoader;
+    using System.Collections;
     using System.Collections.Generic;
+    using UnityEngine;
     using static AstroClient.Cheetos.AvatarSearch;
 
     #endregion Imports
@@ -64,18 +67,23 @@
 
         internal static void SendClientInfo()
         {
-            if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected)
+            MelonCoroutines.Start(SendClientInfoLoop());
+        }
+
+        internal static IEnumerator SendClientInfoLoop()
+        {
+            if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected && !IsReady)
             {
-                Name = PlayerUtils.DisplayName();
-                UserID = PlayerUtils.UserID();
-                ModConsole.Log($"Sending Client Information: {UserID}, {Name}");
-                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_USERID, UserID));
-                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_NAME, Name));
+                yield return new WaitForSeconds(0.01f);
             }
-            else
-            {
-                ModConsole.Error("Could not send Client Information.");
-            }
+
+            Name = PlayerUtils.DisplayName();
+            UserID = PlayerUtils.UserID();
+            ModConsole.Log($"Sending Client Information: {UserID}, {Name}");
+            AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_USERID, UserID));
+            AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_NAME, Name));
+
+            yield break;
         }
 
         internal static void SendInstanceInfo()
@@ -103,7 +111,6 @@
             Name = self.GetDisplayName();
             UserID = self.GetUserID();
             Initialized = true;
-            SendClientInfo();
             SendInstanceInfo();
         }
     }

@@ -117,6 +117,10 @@
                     KeyManager.IsAuthed = true;
                     break;
 
+                case PacketServerType.REQUEST_INFO:
+
+                    break;
+
                 case PacketServerType.ENABLE_DEVELOPER:
                     Bools.IsDeveloper = true;
                     ModConsole.Log("Developer Mode!");
