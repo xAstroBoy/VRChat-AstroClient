@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Components
 {
+    using AstroClient.Streamer;
     using AstroLibrary.Utility;
     using System;
     using UnityEngine;
@@ -21,6 +22,7 @@
 
         internal static void AttachToTarget(Player targetPlayer, HumanBodyBones targetBone)
         {
+            if (!StreamerProtector.IsExploitsAllowed) { return; }
             Detach();
             Self.gameObject.GetComponent<CharacterController>().enabled = false;
             TargetPlayer = targetPlayer;
@@ -41,40 +43,40 @@
             Self = gameObject;
         }
 
-        internal void LateUpdate()
+        internal void Update()
         {
-            if (Target == null)
-            {
-                Target = BonesUtils.Get_Player_Bone_Transform(TargetPlayer, TargetBone).gameObject;
-            }
-
-            if (TargetPlayer == null)
-            {
-                Detach();
-            }
-
-            if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
-            {
-                Detach();
-            }
-
-            if (Input.GetKey(KeyCode.Q))
-            {
-                Height -= 0.02f;
-            }
-
-            if (Input.GetKey(KeyCode.E))
-            {
-                Height += 0.02f;
-            }
-
-            if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.E))
-            {
-                Height = 0f;
-            }
-
             if (IsEnabled)
             {
+                if (Target == null)
+                {
+                    Target = BonesUtils.Get_Player_Bone_Transform(TargetPlayer, TargetBone).gameObject;
+                }
+
+                if (TargetPlayer == null || !StreamerProtector.IsExploitsAllowed)
+                {
+                    Detach();
+                }
+
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+                {
+                    Detach();
+                }
+
+                if (Input.GetKey(KeyCode.Q))
+                {
+                    Height -= 0.02f;
+                }
+
+                if (Input.GetKey(KeyCode.E))
+                {
+                    Height += 0.02f;
+                }
+
+                if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.E))
+                {
+                    Height = 0f;
+                }
+
                 Self.transform.position = Target.transform.position + new Vector3(0, Height, 0);
             }
         }
