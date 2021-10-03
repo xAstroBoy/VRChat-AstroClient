@@ -37,7 +37,7 @@
                 using (Process process = Process.GetCurrentProcess())
                 {
                     process.PriorityClass = priority;
-                    ModConsole.Log($"Process priority: {priority}");
+                    ModConsole.DebugLog($"Process priority: {priority}");
                 }
             }
             catch (Exception e)

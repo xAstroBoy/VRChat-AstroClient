@@ -82,7 +82,7 @@
                 }
             }
 
-            ModConsole.Log("Hooked VRCAvatarManager");
+            ModConsole.DebugLog("Hooked VRCAvatarManager");
         }
 
         private static IntPtr ObjectInstantiatePatch(IntPtr assetPtr, Vector3 pos, Quaternion rot,
@@ -112,7 +112,7 @@
             var instantiated = new GameObject(result);
             try
             {
-                ModConsole.Log("Attempting to invoke avatar spawning..");
+                ModConsole.DebugLog("Attempting to invoke avatar spawning..");
                 OnAvatarSpawnEvent(AvatarManagerCookie.CurrentManager, instantiated);
             }
             catch (Exception ex)

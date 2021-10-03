@@ -42,8 +42,6 @@
             return new HarmonyMethod(typeof(RPCEventHook).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
         }
 
-
-
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
         internal void InitPatches()
         {
@@ -63,8 +61,6 @@
                 InitPatches();
             }
         }
-
-        
 
         private static bool OnRPCEvent(ref VRC.Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)
         {

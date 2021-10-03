@@ -35,7 +35,7 @@
         internal static void Initialize()
         {
             KeyManager.ReadKey();
-            ModConsole.Log("Client Connecting..");
+            ModConsole.DebugLog("Client Connecting..");
 
             Connect();
         }
@@ -209,7 +209,7 @@
 
         private static void OnConnected(object sender, EventArgs e)
         {
-            ModConsole.Log("Client Connected.");
+            ModConsole.DebugLog("Client Connected.");
             return;
         }
 
@@ -229,7 +229,7 @@
                 }
                 catch { }
 
-                ModConsole.Log("Client reconnection attempt in 5 seconds..");
+                ModConsole.Warning("Client reconnection attempt in 5 seconds..");
                 yield return new WaitForSeconds(5f);
             }
         }

@@ -100,7 +100,7 @@
 #endif
 
             stopwatch.Stop();
-            ModConsole.Log($"Client Connected: Took {stopwatch.ElapsedMilliseconds}ms");
+            ModConsole.DebugLog($"Client Connected: Took {stopwatch.ElapsedMilliseconds}ms");
 
             if (!KeyManager.IsAuthed)
             {
@@ -180,12 +180,7 @@
             }
 
             stopwatch.Stop();
-            ModConsole.Log($"Initialized {Overridable_List.Count} Overidables: Took {stopwatch.ElapsedMilliseconds}ms");
-
-            foreach (var thing in CheetosHooks.Event_OnPhotonJoin.GetInvocationList())
-            {
-                ModConsole.Log(thing.Target.ToString());
-            }
+            ModConsole.DebugLog($"Initialized {Overridable_List.Count} Overidables: Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
@@ -273,7 +268,7 @@
             Event_VRChat_OnUiManagerInit?.SafetyRaise();
 
             stopwatch.Stop();
-            ModConsole.Log($"Start_VRChat_OnUiManagerInit: Took {stopwatch.ElapsedMilliseconds}ms");
+            ModConsole.DebugLog($"Start_VRChat_OnUiManagerInit: Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
         internal static void InitMainsButtons()

@@ -80,7 +80,7 @@
                     {
                         Name = PlayerUtils.DisplayName();
                         UserID = PlayerUtils.UserID();
-                        ModConsole.Log($"Sending Client Information: {UserID}, {Name}");
+                        ModConsole.DebugLog($"Sending Client Information: {UserID}, {Name}");
                         AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_USERID, UserID));
                         AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_NAME, Name));
                         yield break;
