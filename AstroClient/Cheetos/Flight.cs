@@ -1,11 +1,13 @@
 ﻿namespace AstroClient
 {
+    using AstroClient.Streamer;
     #region Imports
 
     using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
     using UnityEngine;
+    using VRC;
     using VRC.Animation;
 
     #endregion Imports
@@ -121,7 +123,7 @@
 
         internal override void OnUpdate()
         {
-            if (!isInRoom || PopupUtils.IsTyping)
+            if (!isInRoom || PopupUtils.IsTyping || !StreamerProtector.IsExploitsAllowed)
             {
                 return;
             }
