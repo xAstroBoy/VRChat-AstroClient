@@ -46,6 +46,7 @@
             NetworkManagerHooks.Event_OnPlayerLeft += Internal_OnPlayerLeft;
 
             CheetosHooks.Event_OnMasterClientSwitched += Internal_OnMasterClientSwitched;
+            CheetosHooks.Event_OnShowScreen += Internal_OnShowScreen;
             CheetosHooks.Event_OnPhotonJoin += Internal_OnPhotonPlayerJoined;
             CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
             CheetosHooks.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
@@ -66,6 +67,11 @@
             PhotonModerationHandler.Event_OnPlayerUnblockedYou += Internal_OnPlayerUnblockedYou;
             PhotonModerationHandler.Event_OnPlayerMutedYou += Internal_OnPlayerMutedYou;
             PhotonModerationHandler.Event_OnPlayerUnmutedYou += Internal_OnPlayerUnmutedYou;
+        }
+
+        private void Internal_OnShowScreen(object sender, ScreenEventArgs e)
+        {
+            OnShowScreen(e.page);
         }
 
         private void Internal_OnStreamerJoined(object sender, PlayerEventArgs e)
@@ -241,8 +247,6 @@
         {
         }
 
-
-
         internal virtual void OnApplicationStart()
         {
         }
@@ -251,7 +255,6 @@
         {
 
         }
-
 
         internal virtual void OnApplicationQuit()
         {
@@ -274,6 +277,10 @@
         }
 
         internal virtual void OnMasterClientSwitched(Photon.Realtime.Player player)
+        {
+        }
+
+        internal virtual void OnShowScreen(VRCUiPage page)
         {
         }
 

@@ -24,12 +24,14 @@
     using UnityEngine;
     using VRC;
     using VRC.Core;
+    using VRC.UI;
 
     #endregion Imports
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class CheetosHooks : GameEvents
     {
+        internal static EventHandler<ScreenEventArgs> Event_OnShowScreen { get; set; }
         internal static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonJoin { get; set; }
         internal static EventHandler<PhotonPlayerEventArgs> Event_OnPhotonLeft { get; set; }
         internal static EventHandler<PhotonPlayerEventArgs> Event_OnMasterClientSwitched { get; set; }
@@ -135,6 +137,7 @@
                 new Patch(typeof(AssetBundleDownloadManager).GetMethod(nameof(AssetBundleDownloadManager.Method_Internal_Void_ApiAvatar_PDM_0)), GetPatch(nameof(OnAvatarDownload)));
                 new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerJoinMethod.Name), GetPatch(nameof(OnPhotonPlayerJoin)));
                 new Patch(typeof(NetworkManager).GetMethod(XrefTesting.OnPhotonPlayerLeftMethod.Name), GetPatch(nameof(OnPhotonPlayerLeft)));
+                new Patch(typeof(VRCUiManager).GetMethod(XrefTesting.ShowScreenMethod.Name), GetPatch(nameof(OnShowScreenPatch)));
                 new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnMasterClientSwitched)), GetPatch(nameof(OnMasterClientSwitchedPatch)));
                 new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnLeftRoom)), GetPatch(nameof(OnRoomLeftPatch)));
                 new Patch(typeof(NetworkManager).GetMethod(nameof(NetworkManager.OnJoinedRoom)), GetPatch(nameof(OnRoomJoinedPatch)));
@@ -210,6 +213,15 @@
             {
                 __result = true;
             }
+        }
+
+        private static bool OnShowScreenPatch(ref VRCUiPage __0)
+        {
+            if (__0 != null)
+            {
+                Event_OnShowScreen?.SafetyRaise(new ScreenEventArgs(__0));
+            }
+            return true;
         }
 
         private static bool QuickMenuPatch(ref QuickMenu __instance, ref bool __0)

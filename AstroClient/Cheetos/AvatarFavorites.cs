@@ -5,6 +5,7 @@
     using AstroLibrary.Console;
     using AstroLibrary.Enums;
     using AstroLibrary.Finder;
+    using AstroLibrary.Utility;
     using DayClientML2.Utility;
     using DayClientML2.Utility.MenuApi;
     using System;
@@ -45,13 +46,6 @@
                   DeleteFromFavorites(selectedID);
               }, 1.45f, 1f);
 
-            // Avatar Unfavorite
-            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Refresh", 921f, 170f, delegate ()
-              {
-                  AvatarSearch.DumpDone(); // Refresh Avatar Pedestal Dump
-                  RefreshList();
-              }, 1.45f, 1f);
-
             publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
 
             list = new VRCList(publicAvatarList.transform.parent, "Astro Favorites", 0);
@@ -63,6 +57,19 @@
             {
                 RefreshList();
                 initialized = true;
+            }
+        }
+
+        internal override void OnShowScreen(VRCUiPage page)
+        {
+            if (page.name == "Avatar")
+            {
+                MiscUtils.DelayFunction(0.1f, () =>
+                {
+                    AvatarSearch.DumpDone(); // Refresh Avatar Pedestal Dump
+                    RefreshList();
+                    ModConsole.Log("Refreshed Avatar Lists");
+                });
             }
         }
 
