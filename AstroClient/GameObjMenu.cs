@@ -64,8 +64,9 @@
                 try
                 {
                     var list = CurrentSelection.ToList();
-                    foreach (var item in list)
+                    for (int i = 0; i < list.Count; i++)
                     {
+                        Transform item = list[i];
                         if (item == null)
                         {
                             if (CurrentSelection.Contains(item))
@@ -320,8 +321,9 @@
                     MainScroll.Refresh();
                     subscroll.Refresh();
                 }
-                foreach (var item in CurrentSelection)
+                for (int i = 0; i < CurrentSelection.Count; i++)
                 {
+                    Transform item = CurrentSelection[i];
                     if (item != null)
                     {
                         string objname = item.name;
@@ -414,8 +416,10 @@
             //Previous = null;
             IsOnRootScene = true;
             var TransformsInScene = new List<Transform>();
-            foreach (var obj in SceneManager.GetActiveScene().GetRootGameObjects())
+            UnhollowerBaseLib.Il2CppReferenceArray<GameObject> list = SceneManager.GetActiveScene().GetRootGameObjects();
+            for (int i = 0; i < list.Count; i++)
             {
+                GameObject obj = list[i];
                 if (obj != null && obj.transform != null)
 
                 {
