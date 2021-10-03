@@ -21,7 +21,7 @@
 
         private bool DebugMode = false;
 
-        [HideFromIl2Cpp]
+        
         private void Debug(string msg)
         {
             if (DebugMode)
@@ -207,7 +207,7 @@
 
         internal string TagName
         {
-            [HideFromIl2Cpp]
+            
             get
             {
                 return $"SingleTag:{_allocatedStack}";
@@ -218,12 +218,12 @@
 
         private int AllocatedStack
         {
-            [HideFromIl2Cpp]
+            
             get
             {
                 return _allocatedStack;
             }
-            [HideFromIl2Cpp]
+            
             set
             {
                 if (SpawnedTag != null)

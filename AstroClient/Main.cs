@@ -77,9 +77,9 @@
 
         public override void OnApplicationStart()
         {
+            LogSupport.RemoveAllHandlers(); // Fuck ML ugly console.
             ModConsole.Initialize("AstroClient");
             WriteBanner();
-            LogSupport.RemoveAllHandlers();
             ConfigManager.Validate();
             ConfigManager.Load();
             if (ModConsole.DebugMode != ConfigManager.General.DebugLog)

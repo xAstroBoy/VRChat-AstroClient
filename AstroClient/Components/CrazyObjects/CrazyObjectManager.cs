@@ -89,7 +89,7 @@
                         CrazyObject crazy = obj.AddComponent<CrazyObject>();
                         if (crazy != null)
                         {
-                            crazy.Manager = Instance;
+                            crazy.CrazyObjectManager = Instance;
                             crazy.UseGravity = !ShouldFloat;
                             CrazyObjects.Add(obj);
                             UpdateTimeButton(obj);

@@ -20,7 +20,7 @@
 
         private bool DebugMode = false;
 
-        [HideFromIl2Cpp]
+        
         private void Debug(string msg)
         {
             if (DebugMode)
@@ -34,6 +34,20 @@
         {
             rb = GetComponent<Rigidbody>();
             initialVelocity = rb.velocity;
+            PickupController = GetComponent<PickupController>();
+            if (PickupController == null)
+            {
+                PickupController = gameObject.AddComponent<PickupController>();
+            }
+            VRC_AstroPickup = gameObject.AddComponent<VRC_AstroPickup>();
+            if (VRC_AstroPickup != null)
+            {
+                VRC_AstroPickup.OnPickup += new Action(() => { isPaused = true; });
+                VRC_AstroPickup.OnPickupUseDown += new Action(() => { IsEnabled = !IsEnabled; });
+                VRC_AstroPickup.OnDrop += new Action(() => { isPaused = false; });
+
+            }
+            IsEnabled = true;
         }
 
         private void Update()
@@ -43,6 +57,10 @@
 
         private void OnCollisionEnter(Collision collision)
         {
+            if (!IsEnabled || isPaused)
+            {
+                return;
+            }
             _ = GameObjectUtils.TakeOwnershipIfNecessary(gameObject);
             if (!BounceTowardPlayer)
             {
@@ -78,18 +96,55 @@
         private void OnDestroy()
         {
             gameObject.KillForces(true);
+            if (VRC_AstroPickup != null)
+            {
+                Destroy(VRC_AstroPickup);
+            }
+            PickupController.UseText = OriginalText_Use;
         }
 
-        private Vector3 initialVelocity = new Vector3(0, 0, 0);
-        private Vector3 lastFrameVelocity;
-        private Rigidbody rb;
-        private float minVelocity = 10f;
+        private Vector3 initialVelocity { get; set; } = new Vector3(0, 0, 0);
+        private Vector3 lastFrameVelocity{ get; set; }
+        private Rigidbody rb { get; set; }
+        private float minVelocity { get; set; } = 10f;
 
         // TODO : MAKE PLAYER BOUNCE  BACK SUPPORTED AS WELL
-        private float bias = 0.5f;
-
-        private float bounceVelocity = 10f;
+        private float bias { get; set; } = 0.5f;
+        private float bounceVelocity { get; set; } = 10f;
 
         internal bool BounceTowardPlayer { get; set; } = false;
+        private PickupController PickupController { get; set; }
+        private VRC_AstroPickup VRC_AstroPickup { get; set; }
+        private string OriginalText_Use { get; set; }
+        private bool isPaused { get; set; }
+        private bool _IsEnabled = true;
+        internal bool IsEnabled
+        {
+            get
+            {
+                return _IsEnabled;
+            }
+            set
+            {
+                _IsEnabled = value;
+                if (VRC_AstroPickup != null)
+                {
+                    if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace())
+                    {
+                        OriginalText_Use = PickupController.UseText;
+                    }
+                    if (value)
+                    {
+                        VRC_AstroPickup.UseText = "Toggle Bouncy Off";
+                    }
+                    else
+                    {
+                        VRC_AstroPickup.UseText = "Toggle Bouncy On";
+                    }
+                }
+            }
+
+        }
+
     }
 }

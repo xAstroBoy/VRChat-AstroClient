@@ -20,7 +20,7 @@
 
         private bool DebugMode = true;
 
-        [HideFromIl2Cpp]
+        
         private void Debug(string msg)
         {
             if (DebugMode)

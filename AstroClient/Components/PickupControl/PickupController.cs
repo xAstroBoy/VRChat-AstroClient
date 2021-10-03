@@ -877,10 +877,10 @@
 
         #region Pickup Getters Only
 
-        [HideFromIl2Cpp]
+        
         internal bool IsHeld
         {
-            [HideFromIl2Cpp]
+            
             get
             {
                 if (SDKBase_Pickup != null)
@@ -924,7 +924,7 @@
 
         internal VRCPlayerApi currentPlayer
         {
-            [HideFromIl2Cpp]
+            
             get
             {
                 try
@@ -967,7 +967,7 @@
 
         internal string CurrentOwner
         {
-            [HideFromIl2Cpp]
+            
             get
             {
                 var owner = Networking.GetOwner(gameObject);
@@ -981,7 +981,7 @@
 
         internal string CurrentHolderDisplayName
         {
-            [HideFromIl2Cpp]
+            
             get
             {
                 try
@@ -998,7 +998,7 @@
 
         internal VRCPlayerApi CurrentHolder
         {
-            [HideFromIl2Cpp]
+            
             get
             {
                 try

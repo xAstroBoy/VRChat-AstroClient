@@ -859,27 +859,27 @@
 
         #region Random Methods
 
-        [HideFromIl2Cpp]
+        
         internal bool UpdateKinematic(bool isKinematic)
         {
             this.isKinematic = isKinematic;
             return this.isKinematic == isKinematic;
         }
 
-        [HideFromIl2Cpp]
+        
         internal void OverrideInternalKinematic(bool isKinematic)
         {
             Original_isKinematic = isKinematic;
         }
 
-        [HideFromIl2Cpp]
+        
         internal bool UpdateAngularDrag(float angularDrag)
         {
             this.angularDrag = angularDrag;
             return this.angularDrag == angularDrag;
         }
 
-        [HideFromIl2Cpp]
+        
         internal bool UpdateDrag(float drag)
         {
             this.drag = drag;

@@ -45,11 +45,11 @@
             RocketManager.Register(this);
             obj = RigidBody.gameObject;
             OnlineEditor.TakeObjectOwnership(obj);
-            control = GetComponent<RigidBodyController>();
+            RigidBodyController = GetComponent<RigidBodyController>();
 
-            if (control == null)
+            if (RigidBodyController == null)
             {
-                control = obj.AddComponent<RigidBodyController>();
+                RigidBodyController = obj.AddComponent<RigidBodyController>();
                 HasRequiredSettings = false;
             }
             else
@@ -57,11 +57,19 @@
                 HasRequiredSettings = false;
             }
 
-            pickup = GetComponent<PickupController>();
-            if (pickup == null)
+            PickupController = GetComponent<PickupController>();
+            if (PickupController == null)
             {
-                pickup = obj.AddComponent<PickupController>();
+                PickupController = obj.AddComponent<PickupController>();
             }
+            VRC_AstroPickup = gameObject.AddComponent<VRC_AstroPickup>();
+            if (VRC_AstroPickup != null)
+            {
+                VRC_AstroPickup.OnPickup += new Action(() => { isPaused = true; });
+                VRC_AstroPickup.OnPickupUseDown += new Action(() => { IsEnabled = !IsEnabled; });
+                VRC_AstroPickup.OnDrop += new Action(() => { isPaused = false; });
+            }
+            IsEnabled = true;
         }
 
         // Update is called once per frame
@@ -69,14 +77,18 @@
         {
             try
             {
+                if (!IsEnabled || isPaused)
+                {
+                    return;
+                }
                 if (Time.time - LastTimeCheck > RocketTimer)
                 {
-                    if (pickup.IsHeld)
+                    if (PickupController.IsHeld)
                     {
                         if (HasRequiredSettings)
                         {
                             OnlineEditor.RemoveOwnerShip(obj);
-                            control.RestoreOriginalBody();
+                            RigidBodyController.RestoreOriginalBody();
                             HasRequiredSettings = false;
                         }
                     }
@@ -84,25 +96,25 @@
                     {
                         if (!HasRequiredSettings)
                         {
-                            if (!control.EditMode)
+                            if (!RigidBodyController.EditMode)
                             {
-                                control.EditMode = true;
+                                RigidBodyController.EditMode = true;
                             }
                             if (!obj.IsOwner())
                             {
                                 obj.TakeOwnership();
                             }
 
-                            if (control != null)
+                            if (RigidBodyController != null)
                             {
-                                control.isKinematic = false;
-                                control.useGravity = UseGravity;
-                                control.angularDrag = 0;
-                                control.drag = 0;
+                                RigidBodyController.isKinematic = false;
+                                RigidBodyController.useGravity = UseGravity;
+                                RigidBodyController.angularDrag = 0;
+                                RigidBodyController.drag = 0;
                             }
                             HasRequiredSettings = true;
                         }
-                        if (!pickup.IsHeld)
+                        if (!PickupController.IsHeld)
                         {
                             if (obj.IsOwner())
                             {
@@ -127,34 +139,75 @@
             catch (Exception)
             {
             }
+            IsEnabled = true;
         }
 
         private void OnDestroy()
         {
             try
             {
-                control.RestoreOriginalBody();
+                RigidBodyController.RestoreOriginalBody();
                 OnlineEditor.RemoveOwnerShip(obj);
                 RocketManager.RemoveObject(obj);
+                if (VRC_AstroPickup != null)
+                {
+                    Destroy(VRC_AstroPickup);
+                }
+                PickupController.UseText = OriginalText_Use;
             }
             catch
             {
             }
         }
 
-        internal RocketManager Manager = null;
+        internal RocketManager Manager { get; set; } = null;
 
-        internal float UpdateTimer = 2f;
-        internal float TimerOffset = 0f;
-        private float LastTimeCheck = 0;
-        internal float RocketTimer = 0.07f;
+        internal float UpdateTimer { get; set; } = 2f;
+        internal float TimerOffset { get; set; } = 0f;
+        private float LastTimeCheck { get; set; } = 0;
+        internal float RocketTimer { get; set; } = 0.07f;
 
-        internal bool ShouldBeAlwaysUp = false;
-        internal bool UseGravity = false;
-        private Rigidbody RigidBody = null;
-        private GameObject obj = null;
-        private RigidBodyController control;
-        private PickupController pickup;
-        private bool HasRequiredSettings;
+        internal bool ShouldBeAlwaysUp { get; set; } = false;
+        internal bool UseGravity { get; set; } = false;
+        private Rigidbody RigidBody { get; set; } = null;
+        private GameObject obj { get; set; } = null;
+        private RigidBodyController RigidBodyController { get; set; }
+        private PickupController PickupController { get; set; }
+        private VRC_AstroPickup VRC_AstroPickup { get; set; }
+        private string OriginalText_Use { get; set; }
+
+
+        private bool isPaused { get; set; }
+
+        private bool _IsEnabled;
+        internal bool IsEnabled
+        {
+            get
+            {
+                return _IsEnabled;
+            }
+            set
+            {
+                _IsEnabled = value;
+                if (VRC_AstroPickup != null)
+                {
+                    if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace())
+                    {
+                        OriginalText_Use = PickupController.UseText;
+                    }
+                    if (value)
+                    {
+                        VRC_AstroPickup.UseText = "Toggle Off Rocket";
+                    }
+                    else
+                    {
+                        VRC_AstroPickup.UseText = "Toggle On Rocket";
+                    }
+                }
+            }
+
+        }
+
+        private bool HasRequiredSettings { get; set; }
     }
 }
