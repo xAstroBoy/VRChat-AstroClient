@@ -53,6 +53,8 @@
 
         internal static event EventHandler Event_VRChat_OnQuickMenuInit;
 
+        internal static event EventHandler Event_VRChat_OnActionMenuInit;
+
         internal static event EventHandler<OnSceneLoadedEventArgs> Event_OnSceneLoaded;
 
         internal static event EventHandler Event_OnApplicationQuit;
@@ -72,7 +74,7 @@
 
         #endregion Buttons
 
-        private static List<GameEvents> Overridable_List = new List<GameEvents>();
+        private static List<GameEvents> GameEvents_list = new List<GameEvents>();
 
         private static List<Tweaker_Events> Tweaker_Overridables = new List<Tweaker_Events>();
 
@@ -114,8 +116,22 @@
             {
                 InitializeOverridables();
                 DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
+                DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
+                DoAfterActionMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
+
+                
+
             }
         }
+
+
+        private IEnumerator WaitForActionMenuInit()
+        {
+            while (ActionMenuDriver.prop_ActionMenuDriver_0 == null) //VRCUIManager Init is too early 
+                yield return null;
+        }
+
+
 
         public override void OnApplicationLateStart()
         {
@@ -169,7 +185,7 @@
                     component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
 
                     component.OnApplicationStart();
-                    Overridable_List.Add(component);
+                    GameEvents_list.Add(component);
                 }
 
                 if (btype != null && btype.Equals(typeof(Tweaker_Events)))
@@ -180,7 +196,7 @@
             }
 
             stopwatch.Stop();
-            ModConsole.DebugLog($"Initialized {Overridable_List.Count} Overidables: Took {stopwatch.ElapsedMilliseconds}ms");
+            ModConsole.DebugLog($"Initialized {GameEvents_list.Count} GameEvents: Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
@@ -224,6 +240,22 @@
             code();
         }
 
+        protected void DoAfterActionMenuInit(Action code)
+        {
+            if (!KeyManager.IsAuthed) return;
+            _ = MelonCoroutines.Start(OnActionMenuInitCoro(code));
+        }
+
+        private IEnumerator OnActionMenuInitCoro(Action code)
+        {
+            while (ActionMenuDriver.prop_ActionMenuDriver_0 == null)
+                yield return null;
+
+            code();
+        }
+
+
+
         protected void DoAfterUiManagerInit(Action code)
         {
             if (!KeyManager.IsAuthed) return;
@@ -240,16 +272,39 @@
 
         private void Start_VRChat_OnQuickMenuInit()
         {
-            if (!KeyManager.IsAuthed) return;
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            if (!KeyManager.IsAuthed)
+                stopwatch.Stop();
+                return;
             Event_VRChat_OnQuickMenuInit?.SafetyRaise();
+            ModConsole.DebugLog($"QuickMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
         }
+
+        private void Start_VRChat_OnActionMenuInit()
+        {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            if (!KeyManager.IsAuthed)
+                stopwatch.Stop();
+            return;
+            Event_VRChat_OnActionMenuInit?.SafetyRaise();
+            ModConsole.DebugLog($"ActionMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
+        }
+
 
         private void Start_VRChat_OnUiManagerInit()
         {
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            if (!KeyManager.IsAuthed) return;
+            if (!KeyManager.IsAuthed)
+            stopwatch.Stop();
+            return;
+            
+
             QuickMenuUtils_Old.SetQuickMenuCollider(5, 5);
             UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
 

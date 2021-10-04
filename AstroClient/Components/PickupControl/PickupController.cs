@@ -26,6 +26,7 @@
             SyncProperties(true);
             ModConsole.DebugLog("Attacked Successfully PickupController to object " + gameObject.name);
             InvokeRepeating(nameof(Updater), 0.1f, 0.3f);
+
         }
 
         private void Updater()
@@ -252,7 +253,7 @@
         private Transform _ExactGun;
         private bool _DisallowTheft;
         private ForceMode _MomentumTransferMethod;
-        private string _UseText;
+        private string _UseText = "Use";
         private VRC_EventHandler.VrcBroadcastType _pickupDropEventBroadcastType;
 
         #endregion Internal Reflection (Do Not edit these values)

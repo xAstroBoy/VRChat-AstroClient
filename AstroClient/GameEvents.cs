@@ -28,7 +28,9 @@
             Main.Event_LateUpdate += Internal_OnLateUpdate;
             Main.Event_VRChat_OnUiManagerInit += Internal_VRChat_OnUiManagerInit;
             Main.Event_VRChat_OnQuickMenuInit += Internal_VRChat_OnQuickMenuInit;
+            Main.Event_VRChat_OnActionMenuInit += Internal_VRChat_OnActionMenuInit;
 
+            
             Main.Event_OnSceneLoaded += Internal_OnSceneLoaded;
             Main.Event_OnApplicationQuit += Internal_OnApplicationQuit;
 
@@ -103,6 +105,11 @@
         private void Internal_VRChat_OnQuickMenuInit(object sender, EventArgs e)
         {
             VRChat_OnQuickMenuInit();
+        }
+
+        private void Internal_VRChat_OnActionMenuInit(object sender, EventArgs e)
+        {
+            VRChat_OnActionMenuInit();
         }
 
         private void Internal_OnUpdate(object sender, EventArgs e)
@@ -237,6 +244,11 @@
         internal virtual void VRChat_OnQuickMenuInit()
         {
         }
+
+        internal virtual void VRChat_OnActionMenuInit()
+        {
+        }
+
 
         internal virtual void ExecutePriorityPatches()
         {

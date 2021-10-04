@@ -95,6 +95,29 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="ActionMenu\AMAPI.cs" />
+    <Compile Include="ActionMenu\Api\ActionMenuPage.cs" />
+    <Compile Include="ActionMenu\Api\AMUtils.cs" />
+    <Compile Include="ActionMenu\Api\CustomSubMenu.cs" />
+    <Compile Include="ActionMenu\Api\VRCActionMenuPage.cs" />
+    <Compile Include="ActionMenu\Helpers\Constants.cs" />
+    <Compile Include="ActionMenu\Helpers\ExtensionMethods.cs" />
+    <Compile Include="ActionMenu\Helpers\Utilities.cs" />
+    <Compile Include="ActionMenu\Managers\FourAxisPuppetManager.cs" />
+    <Compile Include="ActionMenu\Managers\ModsFolderManager.cs" />
+    <Compile Include="ActionMenu\Managers\RadialPuppetManager.cs" />
+    <Compile Include="ActionMenu\Managers\ResourcesManager.cs" />
+    <Compile Include="ActionMenu\AstroActionMenuPatches.cs" />
+    <Compile Include="ActionMenu\Pedals\PedalButton.cs" />
+    <Compile Include="ActionMenu\Pedals\PedalFourAxis.cs" />
+    <Compile Include="ActionMenu\Pedals\PedalRadial.cs" />
+    <Compile Include="ActionMenu\Pedals\PedalStruct.cs" />
+    <Compile Include="ActionMenu\Pedals\PedalSubMenu.cs" />
+    <Compile Include="ActionMenu\Pedals\PedalToggle.cs" />
+    <Compile Include="ActionMenu\Types\ActionMenuHand.cs" />
+    <Compile Include="ActionMenu\Types\ActionMenuPageType.cs" />
+    <Compile Include="ActionMenu\Types\Insertion.cs" />
+    <Compile Include="ActionMenu\Types\PedalType.cs" />
     <Compile Include="Buttons\HistoryMenu.cs" />
     <Compile Include="Cheetos\InstanceHistory.cs" />
     <Compile Include="Cheetos\Patch.cs" />
@@ -1104,6 +1127,7 @@
       <Link>.editorconfig</Link>
     </None>
     <EmbeddedResource Include="Figlet\Larry3D.flf" />
+    <None Include="ActionMenu\actionmenuapi.icons" />
     <None Include="app.config" />
     <Compile Include="Components\RigidBodyController\RigidBodyController.cs" />
     <None Include="packages.config" />
@@ -1127,6 +1151,14 @@
     <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
     <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
+    <EmbeddedResource Include="Resources\ActionMenu\1.png" />
+    <EmbeddedResource Include="Resources\ActionMenu\2.png" />
+    <EmbeddedResource Include="Resources\ActionMenu\3.png" />
+    <EmbeddedResource Include="Resources\ActionMenu\4.png" />
+    <EmbeddedResource Include="Resources\ActionMenu\5.png" />
+    <EmbeddedResource Include="Resources\ActionMenu\6.png" />
+    <EmbeddedResource Include="Resources\ActionMenu\7.png" />
+    <EmbeddedResource Include="Resources\ActionMenu\locked.png" />
     <EmbeddedResource Include="Resources\history.png" />
   </ItemGroup>
   <ItemGroup>

@@ -69,7 +69,7 @@
                 VRC_AstroPickup.OnPickupUseDown += new Action(() => { IsEnabled = !IsEnabled; });
                 VRC_AstroPickup.OnDrop += new Action(() => { isPaused = false; });
             }
-            IsEnabled = true;
+            IsEnabled = false;
         }
 
         // Update is called once per frame

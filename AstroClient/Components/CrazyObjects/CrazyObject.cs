@@ -56,19 +56,14 @@
                 VRC_AstroPickup.OnPickup += new Action(() => { isPaused = true; });
                 VRC_AstroPickup.OnPickupUseDown += new Action(() => { IsEnabled = !IsEnabled; });
                 VRC_AstroPickup.OnDrop += new Action(() => { isPaused = false; });
-
             }
             RigidBodyController = GetComponent<RigidBodyController>();
             if (RigidBodyController == null)
             {
                 RigidBodyController = gameObject.AddComponent<RigidBodyController>();
-                HasRequiredSettings = false;
             }
-            else
-            {
-                HasRequiredSettings = false;
-            }
-            IsEnabled = true;
+            HasRequiredSettings = false;
+            IsEnabled = false;
         }
 
 
