@@ -29,6 +29,9 @@
             CrazyBehaviourHandler.Event_OnCrazyBehaviourPropertyChanged+= internal_OnCrazyBehaviour_OnPropertyChanged;
             SpinnerBehaviourHandler.Event_OnSpinnerBehaviourPropertyChanged+= internal_OnSpinnerBehaviour_OnPropertyChanged;
 
+            InflaterBehaviourHandler.Event_OnInflaterBehaviourPropertyChanged+= Internal_OnInflaterBehaviour_PropertyChanged;
+            InflaterBehaviourHandler.Event_OnInflaterBehaviourUpdate += Internal_OnInflaterBehaviour_OnUpdate;
+
             // TODO : Figure a way to add Event and Getter Listeners as well for certain Components.
         }
 
@@ -101,7 +104,16 @@
             OnSpinnerBehaviour_OnPropertyChanged(e.SpinnerBehaviour);
         }
 
+        private void Internal_OnInflaterBehaviour_PropertyChanged(object sender, OnInflaterBehaviourArgs e)
+        {
+            OnInflaterBehaviour_PropertyChanged(e.InflaterBehaviour);
+        }
 
+
+        private void Internal_OnInflaterBehaviour_OnUpdate(object sender, OnInflaterBehaviourArgs e)
+        {
+            OnInflaterBehaviour_OnUpdate(e.InflaterBehaviour);
+        }
 
 
         internal virtual void On_Old_GameObject_Removed(GameObject obj)
@@ -157,6 +169,13 @@
         internal virtual void OnSpinnerBehaviour_OnPropertyChanged(SpinnerBehaviour SpinnerBehaviour)
         {
         }
+        internal virtual void OnInflaterBehaviour_PropertyChanged(InflaterBehaviour inflaterBehaviour)
+        {
+        }
+        internal virtual void OnInflaterBehaviour_OnUpdate(InflaterBehaviour inflaterBehaviour)
+        {
+        }
+
 
     }
 }

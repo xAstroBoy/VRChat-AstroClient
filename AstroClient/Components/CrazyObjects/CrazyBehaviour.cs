@@ -251,6 +251,11 @@
                 _IsEnabled = value;
                 if (VRC_AstroPickup != null)
                 {
+                    if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace())
+                    {
+                        OriginalText_Use = PickupController.UseText;
+                    }
+
                     if (value)
                     {
                         VRC_AstroPickup.UseText = "Toggle Off Crazy Object";

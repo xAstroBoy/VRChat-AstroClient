@@ -30,34 +30,23 @@
         // Update is called once per frame
         private void Update()
         {
-            try
+            if (Time.time - LastTimeCheck > InflateTimer)
             {
-                if (gameObject != null)
+                if (gameObject.transform.localScale != NewSize)
                 {
-                    if (Time.time - LastTimeCheck > InflateTimer)
-                    {
-                        if (gameObject.transform.localScale != NewSize)
-                        {
-                            // X
-                            FixX();
-                            // Y
-                            FixY();
-                            // Z
-                            FixZ();
-                            // Update Button
+                    // X
+                    FixX();
+                    // Y
+                    FixY();
+                    // Z
+                    FixZ();
 
-                            // TODO: Figure a way to update the button remotely. (event)
-                            //GamegameObjectectActualScale.SetButtonText("gameObjectect 's Current scale : " + gameObject.transform.localScale.ToString());
-                        }
-                        LastTimeCheck = Time.time;
-                    }
                 }
-            }
-            catch (Exception)
-            {
-                DestroyImmediate(this);
+                Run_OnOnInflaterUpdate();
+                LastTimeCheck = Time.time;
             }
         }
+
 
         private void FixX()
         {
@@ -95,12 +84,59 @@
             }
         }
 
+
+        #region actions
+
+        private void Run_OnOnInflaterPropertyChanged()
+        {
+            OnInflaterPropertyChanged?.Invoke();
+        }
+
+        internal void SetOnInflaterPropertyChanged(Action action)
+        {
+            OnInflaterPropertyChanged += action;
+        }
+        private void Run_OnOnInflaterUpdate()
+        {
+            OnInflaterUpdate?.Invoke();
+        }
+
+        internal void SetOnInflaterUpdate(Action action)
+        {
+            OnInflaterUpdate += action;
+        }
+
+
+
+        internal void RemoveActionEvents()
+        {
+            OnInflaterPropertyChanged = null;
+            OnInflaterUpdate = null;
+        }
+
+        private event Action? OnInflaterPropertyChanged;
+        private event Action? OnInflaterUpdate;
+
+        #endregion actions
+
+
+
         internal float TimerOffset = 0f;
         private float LastTimeCheck = 0;
         private float InflateTimer = 0.05f;
-        internal Vector3 NewSize;
+        private Vector3 _NewSize;
 
-        internal Vector3 OriginalSize;
+        internal Vector3 NewSize
+        {
+            get => _NewSize;
+            set
+            {
+                _NewSize = value;
+                Run_OnOnInflaterPropertyChanged();
+            }
+        }
+
+        private Vector3 OriginalSize;
 
     }
 }

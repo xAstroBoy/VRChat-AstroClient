@@ -16,7 +16,7 @@
 
             ScaleSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(ScaleEditor.GetMenuName()), "Scale:", 250, -720, delegate (float value)
             {
-                SetScaleValueToUse(value);
+                ScaleValueToUse = value;
             }, 0.1f, 20, 0, true);
             ScaleSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
             ScaleSlider.SetTextLabel("");
@@ -28,7 +28,7 @@
             _ = new QMSingleButton(ScaleEditor, 1, 1, "+ Scale", new Action(() => { Tweaker_Object.GetGameObjectToEdit().IncreaseHoldItemScale(); }), "Increase item scale!", null, null, true);
             _ = new QMSingleButton(ScaleEditor, 1, 1.5f, "- Scale", new Action(() => { Tweaker_Object.GetGameObjectToEdit().DecreaseHoldItemScale(); }), "Decrease item scale!", null, null, true);
 
-            InflaterModeButton = new QMSingleToggleButton(ScaleEditor, 1, 2, "SCale Inflater ON", new Action(() => { InflaterScaleMode = true; }), "Scale Inflater OFF", new Action(() => { InflaterScaleMode = false; }), "Change between instant or inflater", Color.green, Color.red, null, false, true);
+            InflaterModeButton = new QMSingleToggleButton(ScaleEditor, 1, 2, "Scale Inflater ON", new Action(() => { InflaterScaleMode = true; }), "Scale Inflater OFF", new Action(() => { InflaterScaleMode = false; }), "Change between instant or inflater", Color.green, Color.red, null, false, true);
             _ = new QMSingleButton(ScaleEditor, 1, 2.5f, "Restore Original", new Action(() => { Tweaker_Object.GetGameObjectToEdit().RestoreOriginalScaleItem(); }), "Restores Original Item Scale!", null, null, true);
 
             ScaleEditX = new QMSingleToggleButton(ScaleEditor, 2, 1, "Edit X", new Action(() => { EditVectorX = true; }), "Ignore X", new Action(() => { EditVectorX = false; }), "Make Inflater Edit X", Color.green, Color.red, null, false, true);
@@ -51,74 +51,44 @@
         internal static void IncreaseHoldItemScale(GameObject obj)
         {
             ScaleEditor.EditScaleSize(obj, true);
-            UpdateScaleButton(obj);
         }
 
         internal static void RestoreOriginalScaleItem(GameObject obj)
         {
             ScaleEditor.RestoreOriginalScale(obj);
-            UpdateScaleButton(obj);
         }
 
         internal static void DecreaseHoldItemScale(GameObject obj)
         {
             ScaleEditor.EditScaleSize(obj, false);
-            UpdateScaleButton(obj);
         }
-
-        internal static void UpdateScaleButton(GameObject obj)
+        internal override void OnInflaterBehaviour_PropertyChanged(InflaterBehaviour inflaterBehaviour)
         {
-            if (obj != null)
+            if (inflaterBehaviour != null)
             {
-                if (InflaterScaleMode)
-                {
-                    if (obj.GetComponent<InflaterBehaviour>() != null)
-                    {
-                        if (obj.GetComponent<InflaterBehaviour>().enabled)
-                        {
-                            CurrentScaleButton.SetButtonText("Object 's scale : " + obj.GetComponent<InflaterBehaviour>().NewSize.ToString());
-                            return;
-                        }
-                    }
-                }
-
-                CurrentScaleButton.SetButtonText("Object 's scale : " + obj.transform.localScale.ToString());
-                return;
+                GameObjectActualScale.SetButtonText("Inflater 's scale : " + inflaterBehaviour.transform.localScale.ToString());
             }
             else
             {
-                CurrentScaleButton.SetButtonText("");
+                GameObjectActualScale.SetButtonText("Inflater 's scale : " + Vector3.zero.ToString());
             }
+
         }
 
-        internal static void UpdateCurrentAddValue()
+        internal override void OnInflaterBehaviour_OnUpdate(InflaterBehaviour inflaterBehaviour)
         {
-            if (CurrentAddValue != null)
+            if (inflaterBehaviour != null)
             {
-                CurrentAddValue.SetButtonText(ScaleValueToUse.ToString());
+                CurrentScaleButton.SetButtonText("Object 's scale : " + inflaterBehaviour.transform.localScale.ToString());
             }
-            if (ScaleSlider != null)
+            else
             {
-                ScaleSlider.SetValue(ScaleValueToUse);
+                CurrentScaleButton.SetButtonText("Object 's scale : " + Vector3.zero.ToString());
             }
         }
 
-        internal static void SetScaleValueToUse(float newval)
-        {
-            ScaleValueToUse = newval;
-            UpdateCurrentAddValue();
-        }
 
-        internal static void ResetDefValue()
-        {
-            ScaleValueToUse = 1f;
-            UpdateCurrentAddValue();
-        }
 
-        internal static void ToggleInflaterEditor()
-        {
-            InflaterScaleMode = !InflaterScaleMode;
-        }
 
         internal static QMSlider ScaleSlider;
 
@@ -131,7 +101,23 @@
         internal static QMSingleToggleButton ScaleEditY;
         internal static QMSingleToggleButton ScaleEditZ;
 
-        internal static float ScaleValueToUse = 0.1f;
+        private static float _ScaleValueToUse = 0.1f;
+        internal static float ScaleValueToUse
+        {
+            get => _ScaleValueToUse;
+            set
+            {
+                _ScaleValueToUse = value;
+                if (CurrentAddValue != null)
+                {
+                    CurrentAddValue.SetButtonText(value.ToString());
+                }
+                if (ScaleSlider != null)
+                {
+                    ScaleSlider.SetValue(value);
+                }
+            }
+        }
 
         private static bool _InflaterScaleMode = false;
 

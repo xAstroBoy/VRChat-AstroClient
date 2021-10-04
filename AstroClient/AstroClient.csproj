@@ -161,6 +161,7 @@
     <Compile Include="EmojiMenu\EmojiMenu.cs" />
     <Compile Include="EmojiMenu\EmojiScrollMenu\EmojiScrollMenu.cs" />
     <Compile Include="ItemTweakerV2\Handlers\CrazyBehaviourHandler.cs" />
+    <Compile Include="ItemTweakerV2\Handlers\InflaterBehaviourHandler.cs" />
     <Compile Include="ItemTweakerV2\Handlers\RocketBehaviourHandler.cs" />
     <Compile Include="ItemTweakerV2\Handlers\SpinnerBehaviourHandler.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Components\Fun\FunBehavioursSubMenu.cs" />
