@@ -23,13 +23,7 @@
             if (RigidBodyController == null)
             {
                 RigidBodyController = gameObject.AddComponent<RigidBodyController>();
-                HasRequiredSettings = false;
             }
-            else
-            {
-                HasRequiredSettings = false;
-            }
-
             PickupController = GetComponent<PickupController>();
             if (PickupController == null)
             {
