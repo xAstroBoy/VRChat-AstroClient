@@ -134,6 +134,7 @@
     <Compile Include="Components\PlayerSpoofer\PlayerSpooferUtils.cs" />
     <Compile Include="Components\PlayerSpoofer\PlayerSpoofer.cs" />
     <Compile Include="Components\AstroUdons\Pickup\VRC_AstroPickup.cs" />
+    <Compile Include="Components\Spinner\SpinnerBehaviour.cs" />
     <Compile Include="Exploits\ExploitUtils.cs" />
     <Compile Include="Extensions\Collider_ext.cs" />
     <Compile Include="Extensions\Engine_ext.cs" />
@@ -283,7 +284,6 @@
     <Compile Include="Components\ItemInflater\InflaterBehaviour.cs" />
     <Compile Include="Components\JarRoleRevealers\JarRoleController.cs" />
     <Compile Include="Components\JarRoleRevealers\JarRoleESP.cs" />
-    <Compile Include="Components\Spinner\SpinnerBehaviour.cs" />
     <Compile Include="Components\PickupControl\PickupController.cs" />
     <Compile Include="Components\PlayerAttacker\PlayerAttacker.cs" />
     <Compile Include="Components\PlayerAttacker\PlayerAttackerManager.cs" />

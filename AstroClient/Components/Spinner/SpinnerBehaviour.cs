@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Components
 {
+    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using System;
     using System.Runtime.InteropServices;
@@ -8,7 +9,6 @@
     using static AstroClient.Forces;
 
     [RegisterComponent]
-
     public class SpinnerBehaviour : GameEventsBehaviour
     {
         public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
@@ -23,10 +23,12 @@
         private void Start()
         {
             RigidBody = GetComponent<Rigidbody>();
-            OnlineEditor.TakeObjectOwnership(gameObject);
             RigidBodyController = GetComponent<RigidBodyController>();
+            if (RigidBodyController == null)
+            {
+                RigidBodyController = gameObject.AddComponent<RigidBodyController>();
+            }
             PickupController = GetComponent<PickupController>();
-
             if (PickupController == null)
             {
                 PickupController = gameObject.AddComponent<PickupController>();
@@ -37,18 +39,43 @@
                 VRC_AstroPickup.OnPickup += new Action(() => { isPaused = true; });
                 VRC_AstroPickup.OnPickupUseDown += new Action(() => { IsEnabled = !IsEnabled; });
                 VRC_AstroPickup.OnDrop += new Action(() => { isPaused = false; });
-
-            }
-            if (RigidBodyController == null)
-            {
-                RigidBodyController = gameObject.AddComponent<RigidBodyController>();
-                HasRequiredSettings = false;
-            }
-            else
-            {
-                HasRequiredSettings = false;
             }
             IsEnabled = true;
+        }
+
+        private void Update()
+        {
+            if (!IsEnabled || isPaused || isHeld)
+            {
+                if (HasRequiredSettings)
+                {
+                    HasRequiredSettings = false;
+                }
+                return;
+            }
+            if (!CheckisOwner)
+            {
+                if (Time.time - CheckisOwnerTimeCheck > CheckisOwnerDelay)
+                {
+                    CheckisOwner = true;
+                    CheckisOwnerTimeCheck = Time.time;
+                }
+            }
+            if (Time.time - SpinnerTimeCheck > SpinnerTimer)
+            {
+                if (!HasRequiredSettings)
+                {
+                    HasRequiredSettings = true;
+                }
+                if (isCurrentOwner)
+                {
+                    SpinObject(gameObject, ForceX, 0, 0);
+                    SpinObject(gameObject, 0, ForceY, 0);
+                    SpinObject(gameObject, 0, 0, ForceZ);
+                }
+
+                SpinnerTimeCheck = Time.time;
+            }
         }
 
         private void OnDestroy()
@@ -56,75 +83,17 @@
             try
             {
                 RigidBodyController.RestoreOriginalBody();
-                OnlineEditor.RemoveOwnerShip(gameObject);
+                if (gameObject.IsOwner())
+                {
+                    OnlineEditor.RemoveOwnerShip(gameObject);
+                }
                 if (VRC_AstroPickup != null)
                 {
                     Destroy(VRC_AstroPickup);
                 }
                 PickupController.UseText = OriginalText_Use;
             }
-            catch
-            {
-            }
-        }
-
-
-        // Update is called once per frame
-        private void Update()
-        {
-            try
-            {
-                if (!IsEnabled || isPaused)
-                {
-                    return;
-                }
-
-                if (PickupController.IsHeld)
-                {
-                    if (HasRequiredSettings)
-                    {
-                        RigidBodyController.RestoreOriginalBody();
-                        HasRequiredSettings = false;
-                    }
-                    return;
-                }
-
-                if (Time.time - LastTimeCheck > SpinnerTimer)
-                {
-                    if (!HasRequiredSettings)
-                    {
-                        if (!RigidBodyController.EditMode)
-                        {
-                            RigidBodyController.EditMode = true;
-                        }
-                        if (!PickupController.IsHeld)
-                        {
-                            if (RigidBodyController != null)
-                            {
-                                RigidBodyController.isKinematic = false;
-                                RigidBodyController.angularDrag = 0;
-                                RigidBodyController.drag = 0;
-                            }
-                            HasRequiredSettings = true;
-                        }
-                    }
-                    if (!PickupController.IsHeld)
-                    {
-                        if (!gameObject.IsOwner())
-                        {
-                            gameObject.TakeOwnership();
-                        }
-                        SpinObject(gameObject, ForceX, 0, 0);
-                        SpinObject(gameObject, 0, ForceY, 0);
-                        SpinObject(gameObject, 0, 0, ForceZ);
-                    }
-
-                    LastTimeCheck = Time.time;
-                }
-            }
-            catch (Exception)
-            {
-            }
+            catch { }
         }
 
         #region actions
@@ -148,11 +117,6 @@
         private event Action? OnSpinnerPropertyChanged;
 
         #endregion actions
-
-        internal float TimerOffset = 0f;
-
-        private float LastTimeCheck = 0;
-
         private float _ForceX { get; set; }
         internal float ForceX
         {
@@ -210,24 +174,99 @@
                 Run_OnOnSpinnerPropertyChanged();
             }
         }
+        private float CheckisOwnerTimeCheck { get; set; } = 0;
 
-        private bool HasRequiredSettings { get; set; } = false;
-        private Rigidbody RigidBody { get; set; }= null;
-        private RigidBodyController  RigidBodyController { get; set; }
-        private PickupController PickupController { get; set; }
+        private float CheckisOwnerDelay { get; set; } = 16f;
+        private bool CheckisOwner { get; set; } = false;
+        private float SpinnerTimeCheck { get; set; } = 0;
 
-        private VRC_AstroPickup VRC_AstroPickup { get; set; }
-        private string OriginalText_Use { get; set; }
-        private bool isPaused { get; set; }
+        private bool _ShouldBeAlwaysUp { get; set; } = false;
+        internal bool ShouldBeAlwaysUp
+        {
+            get => _ShouldBeAlwaysUp;
+            set
+            {
+                _ShouldBeAlwaysUp = value;
+                Run_OnOnSpinnerPropertyChanged();
+            }
+        }
+
+        private bool _UseGravity { get; set; } = false;
+        internal bool UseGravity
+        {
+            get => _UseGravity;
+            set
+            {
+                _UseGravity = value;
+                Run_OnOnSpinnerPropertyChanged();
+            }
+        }
 
 
-        private bool _IsEnabled = true;
-        internal bool IsEnabled
+        private bool isCurrentOwner
         {
             get
             {
-                return _IsEnabled;
+                if (CheckisOwner)
+                {
+                    if (!gameObject.IsOwner())
+                    {
+                        gameObject.TakeOwnership();
+                    }
+                    return gameObject.IsOwner();
+                }
+                else
+                {
+                    return true;
+                }
             }
+        }
+        private bool isHeld => PickupController.IsHeld;
+
+        private bool _HasRequiredSettings = false;
+        private bool HasRequiredSettings
+        {
+            get => _HasRequiredSettings;
+            set
+            {
+                if(value.Equals(_HasRequiredSettings))
+                {
+                    return; // Do Nothing.
+                }
+                _HasRequiredSettings = value;
+                if (value)
+                {
+                    if (RigidBodyController != null)
+                    {
+                        if (!RigidBodyController.EditMode)
+                        {
+                            RigidBodyController.EditMode = true;
+                        }
+                        RigidBodyController.isKinematic = false;
+                        RigidBodyController.angularDrag = 0;
+                        RigidBodyController.drag = 0;
+                    }
+                }
+                else
+                {
+                    RigidBodyController.RestoreOriginalBody();
+                    RigidBodyController.EditMode = false;
+                }
+            }
+        }
+
+        private Rigidbody RigidBody { get; set; } = null;
+        private RigidBodyController RigidBodyController { get; set; }
+        private PickupController PickupController { get; set; }
+        private VRC_AstroPickup VRC_AstroPickup { get; set; }
+        private string OriginalText_Use { get; set; }
+
+        private bool isPaused { get; set; }
+
+        private bool _IsEnabled;
+        internal bool IsEnabled
+        {
+            get => _IsEnabled;
             set
             {
                 _IsEnabled = value;
@@ -249,6 +288,5 @@
             }
 
         }
-
     }
 }
