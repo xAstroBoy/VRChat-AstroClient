@@ -150,8 +150,6 @@
         {
             OnCrazyPropertyChanged = null;
         }
-        private readonly string TurnOffText = "Turn Off Crazy Movement";
-        private readonly string TurnOnText = "Turn On Crazy Movement";
         private event Action? OnCrazyPropertyChanged;
 
         #endregion actions
