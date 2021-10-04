@@ -42,21 +42,21 @@ namespace AstroLibrary.Managers
         {
             modsSectionIcon = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
             modsSectionIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageOne = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.ActionMenu.1.png"));
+            pageOne = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.Action_Menu_1.png"));
             pageOne.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageTwo = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.ActionMenu.2.png"));
+            pageTwo = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.Action_Menu_1.png"));
             pageTwo.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageThree = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.ActionMenu.3.png"));;
+            pageThree = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.Action_Menu_3.png"));;
             pageThree.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageFour = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.ActionMenu.4.png"));
+            pageFour = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.Action_Menu_4.png"));
             pageFour.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageFive = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.ActionMenu.5.png"));
+            pageFive = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.Action_Menu_5.png"));
             pageFive.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageSix = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.ActionMenu.6.png"));
+            pageSix = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.Action_Menu_6.png"));
             pageSix.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageSeven = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.ActionMenu.7.png"));
+            pageSeven = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.Action_Menu_7.png"));
             pageSeven.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            locked = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.ActionMenu.locked.png"));
+            locked = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.locked.png"));
             locked.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             ModConsole.DebugLog("ActionMenu Loaded textures");
         }
