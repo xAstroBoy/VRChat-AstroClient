@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.Components
 {
+    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using System;
     using System.Runtime.InteropServices;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using static AstroClient.Forces;
-    using Random = UnityEngine.Random;
 
     [RegisterComponent]
     public class CrazyBehaviour : GameEventsBehaviour
@@ -19,14 +19,16 @@
             AntiGcList.Add(this);
         }
 
-
         // Use this for initialization
         private void Start()
         {
-            Rigidbody = GetComponent<Rigidbody>();
-            OnlineEditor.TakeObjectOwnership(gameObject);
+            RigidBody = GetComponent<Rigidbody>();
+            RigidBodyController = GetComponent<RigidBodyController>();
+            if (RigidBodyController == null)
+            {
+                RigidBodyController = gameObject.AddComponent<RigidBodyController>();
+            }
             PickupController = GetComponent<PickupController>();
-
             if (PickupController == null)
             {
                 PickupController = gameObject.AddComponent<PickupController>();
@@ -38,124 +40,98 @@
                 VRC_AstroPickup.OnPickupUseDown += new Action(() => { IsEnabled = !IsEnabled; });
                 VRC_AstroPickup.OnDrop += new Action(() => { isPaused = false; });
             }
-            RigidBodyController = GetComponent<RigidBodyController>();
-            if (RigidBodyController == null)
-            {
-                RigidBodyController = gameObject.AddComponent<RigidBodyController>();
-            }
-            HasRequiredSettings = false;
             IsEnabled = false;
         }
 
+        private void Update()
+        {
+            if (!IsEnabled || isPaused || isHeld)
+            {
+                if (HasRequiredSettings)
+                {
+                    HasRequiredSettings = false;
+                }
+                return;
+            }
+            if (!CheckisOwner)
+            {
+                if (Time.time - CheckisOwnerTimeCheck > CheckisOwnerDelay)
+                {
+                    CheckisOwner = true;
+                    CheckisOwnerTimeCheck = Time.time;
+                }
+            }
+            if (Time.time - CrazyTimeCheck > CrazyTimer)
+            {
+                if (!HasRequiredSettings)
+                {
+                    HasRequiredSettings = true;
+                }
+                if (isCurrentOwner)
+                {
+                    if (Time.time - InpulseTimeCheck > ImpulseTimer)
+                    {
+                        if (ShouldDoImpulseMode)
+                        {
+                            if (IsImpulseModeActive && !IsDoingImpulseMode)
+                            {
+                                IsDoingImpulseMode = true;
+                                ApplyRelativeForce(gameObject, 0, ImpulseForce, 0);
+                                ApplyRelativeForce(gameObject, 0, ImpulseForce, 0);
+                                ApplyRelativeForce(gameObject, 0, ImpulseForce, 0);
+                                ApplyRelativeForce(gameObject, 0, ImpulseForce, 0);
+                                ApplyRelativeForce(gameObject, 0, ImpulseForce, 0);
+                                ApplyRelativeForce(gameObject, 0, ImpulseForce, 0);
+                                IsDoingImpulseMode = false;
+                            }
+                            InpulseTimeCheck = Time.time;
+                        }
+                    }
+                    if (Time.time - CrazyTimeCheck > CrazyTimer)
+                    {
+                        if (!PickupController.IsHeld && !gameObject.IsOwner())
+                        {
+                            gameObject.TakeOwnership();
+                        }
+                        if (!IsDoingImpulseMode)
+                        {
+                            ApplyRelativeForce(gameObject, UnityEngine.Random.Range(1f, 8f), 0, 0);
 
+                            SpinObject(gameObject, UnityEngine.Random.Range(0f, 2f), 0, 0);
+
+                            ApplyRelativeForce(gameObject, 0, UnityEngine.Random.Range(1f, 8f), 0);
+
+                            SpinObject(gameObject, 0, UnityEngine.Random.Range(0f, 2f), 0);
+
+                            ApplyRelativeForce(gameObject, 0, 0, UnityEngine.Random.Range(1f, 8f));
+
+                            SpinObject(gameObject, 0, 0, UnityEngine.Random.Range(0f, 2f));
+                        }
+                        CrazyTimeCheck = Time.time;
+                    }
+                }
+
+            }
+        }
 
         private void OnDestroy()
         {
             try
             {
                 RigidBodyController.RestoreOriginalBody();
-                OnlineEditor.RemoveOwnerShip(gameObject);
+                if (gameObject.IsOwner())
+                {
+                    OnlineEditor.RemoveOwnerShip(gameObject);
+                }
                 if (VRC_AstroPickup != null)
                 {
                     Destroy(VRC_AstroPickup);
                 }
+                PickupController.UseText = OriginalText_Use;
             }
-            catch
-            {
-            }
+            catch { }
         }
 
-        // Update is called once per frame
-        private void Update()
-        {
-            try
-            {
-                if (!IsEnabled || isPaused)
-                {     
-                    return;
-                }
-
-                if (PickupController.IsHeld)
-                {
-                    if (HasRequiredSettings)
-                    {
-                        RigidBodyController.RestoreOriginalBody();
-                        OnlineEditor.RemoveOwnerShip(gameObject);
-                        HasRequiredSettings = false;
-                    }
-                    return;
-                }
-
-                if (!HasRequiredSettings)
-                {
-                    if (!RigidBodyController.EditMode)
-                    {
-                        RigidBodyController.EditMode = true;
-                    }
-                    if (!gameObject.IsOwner() && !PickupController.IsHeld)
-                    {
-                        gameObject.TakeOwnership();
-                        if (RigidBodyController != null)
-                        {
-                            RigidBodyController.isKinematic = false;
-                            RigidBodyController.useGravity = UseGravity;
-                            RigidBodyController.angularDrag = 0;
-                            RigidBodyController.drag = 0;
-                            HasRequiredSettings = true;
-                        }
-                    }
-                }
-
-                if (Time.time - LastTimeCheck2 > ImpulseTimer)
-                {
-                    if (!PickupController.IsHeld && !gameObject.IsOwner())
-                    {
-                        gameObject.TakeOwnership();
-                    }
-                    if (ShouldDoImpulseMode)
-                    {
-                        if (IsImpulseModeActive && !IsDoingImpulseMode)
-                        {
-                            IsDoingImpulseMode = true;
-                            ApplyRelativeForce(gameObject, 0, ImpulseForce, 0);
-                            ApplyRelativeForce(gameObject, 0, ImpulseForce, 0);
-                            ApplyRelativeForce(gameObject, 0, ImpulseForce, 0);
-                            ApplyRelativeForce(gameObject, 0, ImpulseForce, 0);
-                            ApplyRelativeForce(gameObject, 0, ImpulseForce, 0);
-                            ApplyRelativeForce(gameObject, 0, ImpulseForce, 0);
-                            IsDoingImpulseMode = false;
-                        }
-                        LastTimeCheck2 = Time.time;
-                    }
-                }
-
-                if (Time.time - LastTimeCheck > CrazyTimer)
-                {
-                    if (!PickupController.IsHeld && !gameObject.IsOwner())
-                    {
-                        gameObject.TakeOwnership();
-                    }
-                    if (!IsDoingImpulseMode)
-                    {
-                        ApplyRelativeForce(gameObject, Random.Range(1f, 8f), 0, 0);
-
-                        SpinObject(gameObject, Random.Range(0f, 2f), 0, 0);
-
-                        ApplyRelativeForce(gameObject, 0, Random.Range(1f, 8f), 0);
-
-                        SpinObject(gameObject, 0, Random.Range(0f, 2f), 0);
-
-                        ApplyRelativeForce(gameObject, 0, 0, Random.Range(1f, 8f));
-
-                        SpinObject(gameObject, 0, 0, Random.Range(0f, 2f));
-                    }
-                    LastTimeCheck = Time.time;
-                }
-            }
-            catch
-            {
-            }
-        }
 
         #region actions
 
@@ -189,8 +165,8 @@
             }
         }
 
-        private float LastTimeCheck { get; set; } = 0;
-        private float LastTimeCheck2 { get; set; } = 0;
+        private float CrazyTimeCheck { get; set; } = 0;
+        private float InpulseTimeCheck { get; set; } = 0;
 
         private float _CrazyTimer { get; set; } = 0.04f;
         internal float CrazyTimer
@@ -273,9 +249,7 @@
         private Rigidbody Rigidbody { get; set; }
         private RigidBodyController RigidBodyController { get; set; }
         private PickupController PickupController { get; set; }
-
-        private bool HasRequiredSettings { get; set; } = false;
-
+        private bool isHeld => PickupController.IsHeld;
 
         private VRC_AstroPickup VRC_AstroPickup { get; set; }
 
@@ -301,5 +275,66 @@
             }
 
         }
+        private float CheckisOwnerTimeCheck { get; set; } = 0;
+
+        private float CheckisOwnerDelay { get; set; } = 16f;
+        private bool CheckisOwner { get; set; } = false;
+        private bool isCurrentOwner
+        {
+            get
+            {
+                if (CheckisOwner)
+                {
+                    if (!gameObject.IsOwner())
+                    {
+                        gameObject.TakeOwnership();
+                    }
+                    return gameObject.IsOwner();
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
+        private bool _HasRequiredSettings = false;
+        private bool HasRequiredSettings
+        {
+            get => _HasRequiredSettings;
+            set
+            {
+                if(value.Equals(_HasRequiredSettings))
+                {
+                    return; // Do Nothing.
+                }
+                _HasRequiredSettings = value;
+                if (value)
+                {
+                    if (RigidBodyController != null)
+                    {
+                        if (!RigidBodyController.EditMode)
+                        {
+                            RigidBodyController.EditMode = true;
+                        }
+                        RigidBodyController.isKinematic = false;
+                        RigidBodyController.useGravity = UseGravity;
+                        RigidBodyController.angularDrag = 0;
+                        RigidBodyController.drag = 0;
+                    }
+                }
+                else
+                {
+                    RigidBodyController.RestoreOriginalBody();
+                    RigidBodyController.EditMode = false;
+                }
+            }
+        }
+
+        private Rigidbody RigidBody { get; set; } = null;
+        private string OriginalText_Use { get; set; }
+
+
+        
     }
 }

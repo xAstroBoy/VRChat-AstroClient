@@ -122,6 +122,7 @@
     <Compile Include="Buttons\HistoryMenu.cs" />
     <Compile Include="Cheetos\InstanceHistory.cs" />
     <Compile Include="Cheetos\Patch.cs" />
+    <Compile Include="Components\CrazyObjects\CrazyBehaviour.cs" />
     <Compile Include="Components\ESP\EspEvents.cs" />
     <Compile Include="Components\Flashlight\FlashlightBehaviour.cs" />
     <Compile Include="Components\Expoits\OrbitManager.cs" />
@@ -278,7 +279,6 @@
     <Compile Include="Streamer\StreamerProtector.cs" />
     <Compile Include="GameObject\Cloner\ObjectCloner.cs" />
     <Compile Include="Components\ComponentsBtn.cs" />
-    <Compile Include="Components\CrazyObjects\CrazyBehaviour.cs" />
     <Compile Include="Components\ESP\EspHelper.cs" />
     <Compile Include="Components\ItemInflater\InflaterBehaviour.cs" />
     <Compile Include="Components\JarRoleRevealers\JarRoleController.cs" />

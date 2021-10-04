@@ -43,64 +43,44 @@
             IsEnabled = false;
         }
 
-        // Update is called once per frame
         private void Update()
         {
-            try
+            if (!IsEnabled || isPaused || isHeld)
             {
-                if (!IsEnabled || isPaused)
+                if (HasRequiredSettings)
                 {
-                    if (HasRequiredSettings)
-                    {
-                        HasRequiredSettings = false;
-                    }
-                    return;
+                    HasRequiredSettings = false;
                 }
-                //if (!CheckisOwner)
-                //{
-                //    if (Time.time - CheckisOwnerTimeCheck > CheckisOwnerDelay)
-                //    {
-                //        CheckisOwner = true;
-                //        CheckisOwnerTimeCheck = Time.time;
-                //    }
-                //}
-                    if (Time.time - RocketTimeCheck > RocketTimer)
-                { 
-                    if (isHeld)
+                return;
+            }
+            if (!CheckisOwner)
+            {
+                if (Time.time - CheckisOwnerTimeCheck > CheckisOwnerDelay)
+                {
+                    CheckisOwner = true;
+                    CheckisOwnerTimeCheck = Time.time;
+                }
+            }
+            if (Time.time - RocketTimeCheck > RocketTimer)
+            {
+                if (!HasRequiredSettings)
+                {
+                    HasRequiredSettings = true;
+                }
+                if (isCurrentOwner)
+                {
+                    if (!ShouldBeAlwaysUp)
                     {
-                        if (HasRequiredSettings)
-                        {
-                            HasRequiredSettings = false;
-                        }
-                        return;
+                        ApplyRelativeForce(gameObject, 0, UnityEngine.Random.Range(1f, 10f), 0);
                     }
                     else
                     {
-                        if (!HasRequiredSettings)
-                        {
-                            HasRequiredSettings = true;
-                        }
-                        if (isCurrentOwner)
-                        {
-                            if (!ShouldBeAlwaysUp)
-                            {
-                                ApplyRelativeForce(gameObject, 0, UnityEngine.Random.Range(1f, 10f), 0);
-                            }
-                            else
-                            {
-                                ApplyForce(gameObject, 0, UnityEngine.Random.Range(1f, 10f), 0);
-                            }
-                        }
-
+                        ApplyForce(gameObject, 0, UnityEngine.Random.Range(1f, 10f), 0);
                     }
-                    RocketTimeCheck = Time.time;
                 }
+
+                RocketTimeCheck = Time.time;
             }
-            catch (Exception e)
-            {
-                ModConsole.DebugErrorExc(e);
-            }
-            IsEnabled = true;
         }
 
         private void OnDestroy()
@@ -108,7 +88,7 @@
             try
             {
                 RigidBodyController.RestoreOriginalBody();
-                if (isOwner)
+                if (gameObject.IsOwner())
                 {
                     OnlineEditor.RemoveOwnerShip(gameObject);
                 }
@@ -188,18 +168,18 @@
         {
             get
             {
+                if (CheckisOwner)
+                {
                     if (!gameObject.IsOwner())
                     {
                         gameObject.TakeOwnership();
                     }
                     return gameObject.IsOwner();
-                //if (CheckisOwner)
-                //{
-                //}
-                //else
-                //{
-                //    return true;
-                //}
+                }
+                else
+                {
+                    return true;
+                }
             }
         }
         private bool isHeld => PickupController.IsHeld;
@@ -210,6 +190,10 @@
             get => _HasRequiredSettings;
             set
             {
+                if(value.Equals(_HasRequiredSettings))
+                {
+                    return; // Do Nothing.
+                }
                 _HasRequiredSettings = value;
                 if (value)
                 {
