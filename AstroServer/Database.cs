@@ -14,7 +14,7 @@
             await DB.InitAsync("astro", MongoClientSettings.FromConnectionString(GetConnectionString()));
 
             // I use this below to update accounts when I add new fields
-            //var accounts = DB.Collection<AccountData>();
+            //var accounts = DB.Collection<AstroData>();
 
             //var update = Builders<AccountData>.Update.Set("IsBeta", false);
             //var filter = Builders<AccountData>.Filter.Empty;
