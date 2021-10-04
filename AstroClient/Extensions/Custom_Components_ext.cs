@@ -37,13 +37,13 @@
 
         internal static void GoNutsWithGravity(this GameObject obj)
         {
-            var item = obj.GetOrAddComponent<RocketBehaviour>();
+            var item = obj.GetOrAddComponent<CrazyBehaviour>();
             item.UseGravity = true;
         }
 
         internal static void GoNutsWithoutGravity(this GameObject obj)
         {
-            var item = obj.GetOrAddComponent<RocketBehaviour>();
+            var item = obj.GetOrAddComponent<CrazyBehaviour>();
             item.UseGravity = false;
         }
 
