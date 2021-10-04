@@ -631,20 +631,20 @@
             set
             {
                 _AutoHold = value;
+                if (SDKBase_Pickup != null)
+                {
+                    SDKBase_Pickup.AutoHold = value;
+                }
+                if (SDK2_Pickup != null)
+                {
+                    SDK2_Pickup.AutoHold = value;
+                }
+                if (SDK3_Pickup != null)
+                {
+                    SDK3_Pickup.AutoHold = value;
+                }
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.AutoHold = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.AutoHold = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.AutoHold = value;
-                    }
                     Run_OnOnPickupPropertyChanged();
                 }
             }

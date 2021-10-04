@@ -1,6 +1,7 @@
 namespace AstroClient.Components
 {
     using AstroLibrary.Console;
+    using AstroLibrary.Utility;
     using System;
     using UnityEngine;
     using VRC.Udon;
@@ -32,6 +33,10 @@ namespace AstroClient.Components
                 UdonBehaviour.InitializeUdonContent();
                 UdonBehaviour.Start();
             }
+            if(!UdonBehaviour.enabled)
+            {
+                UdonBehaviour.enabled = true;
+            }
             DoChecks();
         }
 
@@ -59,6 +64,14 @@ namespace AstroClient.Components
                 if (IUdonHeap == null)
                 {
                     IUdonHeap = UdonBehaviour._udonVM.InspectHeap();
+                }
+            }
+            if(Controller != null)
+            {
+                if(Controller.AutoHold != VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes)
+                {
+                    OriginalMode = Controller.AutoHold;
+                    Controller.AutoHold = VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes;
                 }
             }
         }
@@ -91,6 +104,10 @@ namespace AstroClient.Components
             if (UdonBehaviour != null)
             {
                 Destroy(UdonBehaviour);
+            }
+            if (Controller != null)
+            {
+                Controller.AutoHold = OriginalMode;
             }
         }
 
@@ -183,6 +200,7 @@ namespace AstroClient.Components
                 _UseText = value;
                 if (Controller != null)
                 {
+                    Controller.EditMode = true;
                     Controller.UseText = value;
                 }
             }
@@ -198,6 +216,7 @@ namespace AstroClient.Components
                 _InteractionText = value;
                 if (Controller != null)
                 {
+                    Controller.EditMode = true;
                     Controller.InteractionText = value;
                 }
             }
@@ -220,20 +239,18 @@ namespace AstroClient.Components
         internal Action OnPickupUseUp { get; set; }
         internal Action OnPickupUseDown { get; set; }
         internal Action OnDrop { get; set; }
-        internal bool IsForcedPickupController { get; set; } = false;
-        private PickupController _Controller;
 
+        internal VRC.SDKBase.VRC_Pickup.AutoHoldMode OriginalMode;
+
+
+        private PickupController _Controller;
         private PickupController Controller
         {
             get
             {
                 if (_Controller == null)
                 {
-                    if (IsForcedPickupController)
-                    {
-                        return _Controller = gameObject.AddComponent<PickupController>();
-                    }
-                    return _Controller = gameObject.GetComponent<PickupController>();
+                    return _Controller = gameObject.GetOrAddComponent<PickupController>();
                 }
                 return _Controller;
             }

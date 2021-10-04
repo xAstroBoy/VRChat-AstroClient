@@ -79,7 +79,6 @@
                 {
                     Destroy(VRC_AstroPickup);
                 }
-                PickupController.UseText = OriginalText_Use;
             }
             catch
             {
@@ -92,14 +91,10 @@
             try
             {
                 if (!IsEnabled || isPaused)
-                {
-                    if (HasRequiredSettings)
-                    {
-                        RigidBodyController.RestoreOriginalBody();
-                        HasRequiredSettings = false;
-                    }
+                {     
                     return;
                 }
+
                 if (PickupController.IsHeld)
                 {
                     if (HasRequiredSettings)
@@ -207,7 +202,7 @@
 
 
         private VRC_AstroPickup VRC_AstroPickup { get; set; }
-        private string OriginalText_Use { get; set; }
+
         private bool isPaused;
         private bool _IsEnabled = true;
         internal bool IsEnabled
@@ -221,10 +216,6 @@
                 _IsEnabled = value;
                 if (VRC_AstroPickup != null)
                 {
-                    if(!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace())
-                    {
-                        OriginalText_Use = PickupController.UseText;
-                    }
                     if (value)
                     {
                         VRC_AstroPickup.UseText = "Toggle Off Crazy Object";
