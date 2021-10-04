@@ -88,34 +88,11 @@
         }
 
 
-        internal static void UpdateCurrentAddValue()
-        {
-            if (CurrentAddValue != null)
-            {
-                CurrentAddValue.SetButtonText(ScaleValueToUse.ToString());
-            }
-            if (ScaleSlider != null)
-            {
-                ScaleSlider.SetValue(ScaleValueToUse);
-            }
-        }
-
         internal static void SetScaleValueToUse(float newval)
         {
             ScaleValueToUse = newval;
-            UpdateCurrentAddValue();
         }
 
-        internal static void ResetDefValue()
-        {
-            ScaleValueToUse = 1f;
-            UpdateCurrentAddValue();
-        }
-
-        internal static void ToggleInflaterEditor()
-        {
-            InflaterScaleMode = !InflaterScaleMode;
-        }
 
         internal static QMSlider ScaleSlider;
 
@@ -128,7 +105,23 @@
         internal static QMSingleToggleButton ScaleEditY;
         internal static QMSingleToggleButton ScaleEditZ;
 
-        internal static float ScaleValueToUse = 0.1f;
+        private static float _ScaleValueToUse = 0.1f;
+        internal static float ScaleValueToUse
+        {
+            get => _ScaleValueToUse;
+            set
+            {
+                _ScaleValueToUse = value;
+                if (CurrentAddValue != null)
+                {
+                    CurrentAddValue.SetButtonText(value.ToString());
+                }
+                if (ScaleSlider != null)
+                {
+                    ScaleSlider.SetValue(value);
+                }
+            }
+        }
 
         private static bool _InflaterScaleMode = false;
 
