@@ -7,6 +7,8 @@
     {
         public string Name = string.Empty;
 
+        public byte ClientType;
+
         public string Key = string.Empty;
 
         public string UserID = string.Empty;
@@ -19,13 +21,14 @@
 
         public bool IsReady;
 
-        public AccountData Data;
+        public AstroData Data;
 
         public TempData Temp;
 
         public Client()
         {
             Name = "N/A";
+            ClientType = 0;
             Key = "N/A";
             UserID = "N/A";
             InstanceID = "N/A";

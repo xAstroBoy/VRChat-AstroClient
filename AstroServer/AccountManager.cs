@@ -27,32 +27,32 @@
 
         public static int GetDevKeyCount()
         {
-            return DB.Find<AccountData>().ManyAsync(a => a.IsDeveloper).Result.Count;
+            return DB.Find<AstroData>().ManyAsync(a => a.IsDeveloper).Result.Count;
         }
 
         public static int GetBetaKeyCount()
         {
-            return DB.Find<AccountData>().ManyAsync(a => a.IsBeta).Result.Count;
+            return DB.Find<AstroData>().ManyAsync(a => a.IsBeta).Result.Count;
         }
 
         public static int GetKeyCount()
         {
-            return DB.Find<AccountData>().ManyAsync(a => (!a.IsDeveloper && !a.IsBeta)).Result.Count;
+            return DB.Find<AstroData>().ManyAsync(a => (!a.IsDeveloper && !a.IsBeta)).Result.Count;
         }
 
         public static bool IsKeyValid(string key)
         {
-            return DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(key)).Result.Any();
+            return DB.Find<AstroData>().ManyAsync(a => a.Key.Equals(key)).Result.Any();
         }
 
-        public static AccountData GetAccountData(string key)
+        public static AstroData GetAccountData(string key)
         {
-            return DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(key)).Result.FirstOrDefault();
+            return DB.Find<AstroData>().ManyAsync(a => a.Key.Equals(key)).Result.FirstOrDefault();
         }
 
         public static ulong GetKeysDiscordOwner(string authKey)
         {
-            var account = DB.Find<AccountData>().ManyAsync(a => a.Key.Equals(authKey)).Result.First();
+            var account = DB.Find<AstroData>().ManyAsync(a => a.Key.Equals(authKey)).Result.First();
             return account != null ? account.DiscordID : 0;
         }
     }

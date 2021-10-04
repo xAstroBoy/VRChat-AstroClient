@@ -80,6 +80,9 @@
     <Compile Include="..\astronetworkinglibrary\ReceivedPacketEventArgs.cs">
       <Link>Networking\ReceivedPacketEventArgs.cs</Link>
     </Compile>
+    <Compile Include="..\AstroNetworkingLibrary\Serializable\AuthData.cs">
+      <Link>Networking\Serializable\AuthData.cs</Link>
+    </Compile>
     <Compile Include="..\astronetworkinglibrary\serializable\AvatarData.cs">
       <Link>Networking\Serializable\AvatarData.cs</Link>
     </Compile>

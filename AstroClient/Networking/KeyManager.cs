@@ -1,11 +1,12 @@
 ﻿namespace AstroClient
 {
+    using AstroNetworkingLibrary.Serializable;
     using System;
     using System.IO;
 
     internal static class KeyManager
     {
-        internal static string AuthKey = string.Empty;
+        internal static AuthData Data;
 
         internal static bool IsAuthed { get; set; } = false;
 
@@ -29,7 +30,7 @@
 
             if (File.Exists(keyPath))
             {
-                AuthKey = File.ReadAllText(keyPath);
+                Data = new AuthData(1, File.ReadAllText(keyPath));
             }
             else
             {

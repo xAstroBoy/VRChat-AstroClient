@@ -61,7 +61,7 @@
         [Summary("Accounts command")]
         public async Task Accounts()
         {
-            var accounts = DB.Queryable<AccountData>();
+            var accounts = DB.Queryable<AstroData>();
             foreach (var account in accounts)
             {
                 _ = await base.ReplyAsync(null, false, CustomEmbed.GetAccountEmbed(account));

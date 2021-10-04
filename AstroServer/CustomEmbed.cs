@@ -106,7 +106,7 @@
             return embedBuilder.Build();
         }
 
-        public static Embed GetAccountEmbed(AccountData data)
+        public static Embed GetAccountEmbed(AstroData data)
         {
             var color = Color.Blue;
 

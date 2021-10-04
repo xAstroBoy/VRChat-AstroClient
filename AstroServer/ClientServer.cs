@@ -86,7 +86,9 @@
             {
                 case PacketClientType.CONNECTED:
                     {
-                        client.Key = packetData.TextData;
+                        var authData = Newtonsoft.Json.JsonConvert.DeserializeObject<AuthData>(packetData.TextData);
+                        client.ClientType = authData.ClientType;
+                        client.Key = authData.Key;
 
                         if (AccountManager.IsKeyValid(client.Key))
                         {

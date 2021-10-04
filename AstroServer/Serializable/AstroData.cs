@@ -4,7 +4,7 @@
     using System;
 
     [Serializable]
-    public class AccountData : Entity
+    public class AstroData : Entity
     {
         public string Key = string.Empty;
 
