@@ -74,9 +74,9 @@
 
         #endregion Buttons
 
-        private static List<GameEvents> GameEvents_list = new List<GameEvents>();
+        private static List<GameEvents> GameEvents { get; set; } = new List<GameEvents>();
 
-        private static List<Tweaker_Events> Tweaker_Overridables = new List<Tweaker_Events>();
+        private static List<Tweaker_Events> Tweaker_Overridables  { get; set; } = new List<Tweaker_Events>();
 
         public override void OnApplicationStart()
         {
@@ -172,7 +172,8 @@
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            if (!KeyManager.IsAuthed) return;
+            if (!KeyManager.IsAuthed)
+            return;
             Type[] array = Assembly.GetExecutingAssembly().GetTypes();
             for (int i = 0; i < array.Length; i++)
             {
@@ -185,7 +186,7 @@
                     component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
 
                     component.OnApplicationStart();
-                    GameEvents_list.Add(component);
+                    GameEvents.Add(component);
                 }
 
                 if (btype != null && btype.Equals(typeof(Tweaker_Events)))
@@ -196,7 +197,7 @@
             }
 
             stopwatch.Stop();
-            ModConsole.DebugLog($"Initialized {GameEvents_list.Count} GameEvents: Took {stopwatch.ElapsedMilliseconds}ms");
+            ModConsole.DebugLog($"Initialized {GameEvents.Count} GameEvents: Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
         public override void OnSceneWasInitialized(int buildIndex, string sceneName)
@@ -276,7 +277,6 @@
             stopwatch.Start();
 
             if (!KeyManager.IsAuthed)
-                stopwatch.Stop();
                 return;
             Event_VRChat_OnQuickMenuInit?.SafetyRaise();
             ModConsole.DebugLog($"QuickMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
@@ -301,13 +301,11 @@
             stopwatch.Start();
 
             if (!KeyManager.IsAuthed)
-            stopwatch.Stop();
             return;
             
 
             QuickMenuUtils_Old.SetQuickMenuCollider(5, 5);
             UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
-
             InitMainsButtons();
             try
             {

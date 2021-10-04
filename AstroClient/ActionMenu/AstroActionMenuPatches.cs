@@ -21,7 +21,7 @@ namespace AstroLibrary
         {
             try
             {
-                AstroActionMenuPatches.PatchAll(new HarmonyLib.Harmony("AstroActionMenuAPI Patches"));
+                AstroActionMenuPatches.PatchAll(new HarmonyLib.Harmony("AstroActionMenuAPI_Patches"));
             }
             catch (Exception e)
             {
