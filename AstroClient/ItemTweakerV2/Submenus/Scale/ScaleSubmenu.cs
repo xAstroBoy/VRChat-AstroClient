@@ -16,7 +16,7 @@
 
             ScaleSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(ScaleEditor.GetMenuName()), "Scale:", 250, -720, delegate (float value)
             {
-                SetScaleValueToUse(value);
+                ScaleValueToUse = value;
             }, 0.1f, 20, 0, true);
             ScaleSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
             ScaleSlider.SetTextLabel("");
@@ -88,10 +88,6 @@
         }
 
 
-        internal static void SetScaleValueToUse(float newval)
-        {
-            ScaleValueToUse = newval;
-        }
 
 
         internal static QMSlider ScaleSlider;
