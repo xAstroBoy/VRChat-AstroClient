@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using AstroLibrary.Managers;
+using AstroActionMenu.Managers;
 using MelonLoader;
 using TMPro;
 using UnhollowerRuntimeLib;
@@ -13,7 +13,7 @@ using ActionMenuPage = ActionMenu.ObjectNPublicAcTeAcStGaUnique; //Will this cha
 using Object = UnityEngine.Object;
 using AstroLibrary.Console;
 
-namespace AstroLibrary.Helpers
+namespace AstroActionMenu.Helpers
 {
     internal static class ExtensionMethods
     {

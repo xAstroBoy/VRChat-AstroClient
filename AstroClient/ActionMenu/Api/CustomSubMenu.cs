@@ -1,11 +1,11 @@
 using System;
-using AstroLibrary.Helpers;
-using AstroLibrary.Managers;
+using AstroActionMenu.Helpers;
+using AstroActionMenu.Managers;
 using UnityEngine;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
 // ReSharper disable HeuristicUnreachableCode
 
-namespace AstroLibrary.Api
+namespace AstroActionMenu.Api
 {
     /// <summary>
     ///     Class for adding buttons,toggles,radial puppets inside of a custom submenu

@@ -1,13 +1,13 @@
 ﻿using System;
 using AstroClient;
 using AstroLibrary.Console;
-using AstroLibrary.Helpers;
-using AstroLibrary.Types;
+using AstroActionMenu.Helpers;
+using AstroActionMenu.Types;
 using MelonLoader;
 using UnityEngine;
 using UnityEngine.XR;
 
-namespace AstroLibrary.Managers
+namespace AstroActionMenu.Managers
 {
 
 

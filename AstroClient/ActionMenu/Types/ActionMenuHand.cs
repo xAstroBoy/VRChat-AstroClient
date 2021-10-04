@@ -1,4 +1,4 @@
-﻿namespace AstroLibrary.Types
+﻿namespace AstroActionMenu.Types
 {
     internal enum ActionMenuHand
     {

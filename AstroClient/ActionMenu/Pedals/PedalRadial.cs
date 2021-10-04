@@ -1,11 +1,11 @@
 ﻿using System;
-using AstroLibrary.Helpers;
-using AstroLibrary.Managers;
-using AstroLibrary.Types;
+using AstroActionMenu.Helpers;
+using AstroActionMenu.Managers;
+using AstroActionMenu.Types;
 using UnityEngine;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique;
 
-namespace AstroLibrary.Pedals
+namespace AstroActionMenu.Pedals
 {
     public sealed class PedalRadial : PedalStruct
     {

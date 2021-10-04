@@ -1,16 +1,16 @@
 ﻿using System;
-using AstroLibrary.Api;
-using AstroLibrary.Pedals;
-using AstroLibrary.Types;
+using AstroActionMenu.Api;
+using AstroActionMenu.Pedals;
+using AstroActionMenu.Types;
 using UnityEngine;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
 // ReSharper disable HeuristicUnreachableCode
 #pragma warning disable 1591
 
-namespace AstroLibrary
+namespace AstroActionMenu
 {
     [Obsolete(
-        "This class is only here for compatibility reasons! Please use AstroLibrary.Api.CustomSubMenu/VRCActionMenuPage/AMUtils for new updated methods to integrate with the action menu",
+        "This class is only here for compatibility reasons! Please use AstroActionMenu.Api.CustomSubMenu/VRCActionMenuPage/AMUtils for new updated methods to integrate with the action menu",
         false)]
     public static class AMAPI
     {

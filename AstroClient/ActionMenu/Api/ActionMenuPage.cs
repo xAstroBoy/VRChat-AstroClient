@@ -1,4 +1,4 @@
-namespace AstroLibrary.Api
+namespace AstroActionMenu.Api
 {
     /// <summary>
     ///     Supported existing vrchat pages that you can add pedals to

@@ -1,11 +1,11 @@
 using System;
 using AstroLibrary.Console;
-using AstroLibrary.Pedals;
-using AstroLibrary.Types;
+using AstroActionMenu.Pedals;
+using AstroActionMenu.Types;
 using MelonLoader;
 using UnityEngine;
 
-namespace AstroLibrary.Api
+namespace AstroActionMenu.Api
 {
     /// <summary>
     /// VRC Page specific things

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using AstroLibrary.Api;
-using AstroLibrary.Helpers;
+using AstroActionMenu.Api;
+using AstroActionMenu.Helpers;
 
-namespace AstroLibrary.Managers
+namespace AstroActionMenu.Managers
 {
     internal static class ModsFolderManager
     {

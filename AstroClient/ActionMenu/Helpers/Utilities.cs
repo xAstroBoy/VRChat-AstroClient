@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using AstroLibrary.Console;
-using AstroLibrary.Pedals;
-using AstroLibrary.Types;
+using AstroActionMenu.Pedals;
+using AstroActionMenu.Types;
 using HarmonyLib;
 using MelonLoader;
 using UnhollowerRuntimeLib.XrefScans;
@@ -12,7 +12,7 @@ using UnityEngine;
 using UnityEngine.XR;
 using Object = UnityEngine.Object;
 
-namespace AstroLibrary.Helpers
+namespace AstroActionMenu.Helpers
 {
     internal static class Utilities
     {

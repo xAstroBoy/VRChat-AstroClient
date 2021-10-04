@@ -1,9 +1,9 @@
 ﻿using System;
-using AstroLibrary.Helpers;
-using AstroLibrary.Types;
+using AstroActionMenu.Helpers;
+using AstroActionMenu.Types;
 using UnityEngine;
 
-namespace AstroLibrary.Pedals
+namespace AstroActionMenu.Pedals
 {
     public sealed class PedalToggle : PedalStruct
     {

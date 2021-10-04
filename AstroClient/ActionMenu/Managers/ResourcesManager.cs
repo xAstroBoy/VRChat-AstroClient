@@ -2,13 +2,14 @@ using System.IO;
 using System.Reflection;
 using AstroClient;
 using AstroLibrary.Console;
-using AstroLibrary.Helpers;
+using AstroActionMenu.Helpers;
 using MelonLoader;
 using UnhollowerRuntimeLib;
 using UnityEngine;
 using UnityEngine.UI;
+using AstroLibrary;
 
-namespace AstroLibrary.Managers
+namespace AstroActionMenu.Managers
 {
 
     internal class ResourceManagerEvents : GameEvents

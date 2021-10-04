@@ -1,4 +1,4 @@
-﻿namespace AstroLibrary.Helpers
+﻿namespace AstroActionMenu.Helpers
 {
     internal static class Constants
     {

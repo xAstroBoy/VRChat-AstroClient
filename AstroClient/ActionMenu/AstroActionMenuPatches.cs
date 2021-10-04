@@ -5,14 +5,14 @@ using System.Linq;
 using System.Reflection;
 using AstroClient;
 using AstroLibrary.Console;
-using AstroLibrary.Helpers;
-using AstroLibrary.Managers;
-using AstroLibrary.Pedals;
+using AstroActionMenu.Helpers;
+using AstroActionMenu.Managers;
+using AstroActionMenu.Pedals;
 using HarmonyLib;
 using MelonLoader;
 using UnhollowerBaseLib;
 
-namespace AstroLibrary
+namespace AstroActionMenu
 {
 
     internal class AstroActionMenuPatchesEvents : GameEvents

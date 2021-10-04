@@ -1,11 +1,11 @@
 ﻿using System;
 
-namespace AstroLibrary.Types
+namespace AstroActionMenu.Types
 {
     /// <summary>
     ///     Defines the already existing vrchat pages that you can add pedals to
     /// </summary>
-    [Obsolete("Please use AstroLibrary.Api.ActionMenuPage", false)]
+    [Obsolete("Please use AstroActionMenu.Api.ActionMenuPage", false)]
     public enum ActionMenuPageType
     {
         /// <summary>

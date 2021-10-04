@@ -95,6 +95,7 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="ActionMenu\ActionMenuInitializer.cs" />
     <Compile Include="ActionMenu\AMAPI.cs" />
     <Compile Include="ActionMenu\Api\ActionMenuPage.cs" />
     <Compile Include="ActionMenu\Api\AMUtils.cs" />

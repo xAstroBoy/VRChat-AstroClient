@@ -1,8 +1,8 @@
 ﻿using System;
-using AstroLibrary.Types;
+using AstroActionMenu.Types;
 using UnityEngine;
 
-namespace AstroLibrary.Pedals
+namespace AstroActionMenu.Pedals
 {
     public abstract class PedalStruct
     {
