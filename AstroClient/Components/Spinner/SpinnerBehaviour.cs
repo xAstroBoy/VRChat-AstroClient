@@ -11,10 +11,13 @@
 
     public class SpinnerBehaviour : GameEventsBehaviour
     {
-        public SpinnerBehaviour(IntPtr ptr) : base(ptr)
-        {
-        }
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
+        public SpinnerBehaviour(IntPtr obj0) : base(obj0)
+        {
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList.Add(this);
+        }
 
         // Use this for initialization
         private void Start()

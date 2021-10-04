@@ -11,8 +11,12 @@
     [RegisterComponent]
     public class RocketBehaviour : GameEventsBehaviour
     {
-        public RocketBehaviour(IntPtr ptr) : base(ptr)
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+
+        public RocketBehaviour(IntPtr obj0) : base(obj0)
         {
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList.Add(this);
         }
 
         // Use this for initialization
@@ -52,8 +56,16 @@
                     }
                     return;
                 }
-                if (Time.time - LastTimeCheck > RocketTimer)
-                {
+                //if (!CheckisOwner)
+                //{
+                //    if (Time.time - CheckisOwnerTimeCheck > CheckisOwnerDelay)
+                //    {
+                //        CheckisOwner = true;
+                //        CheckisOwnerTimeCheck = Time.time;
+                //    }
+                //}
+                    if (Time.time - RocketTimeCheck > RocketTimer)
+                { 
                     if (isHeld)
                     {
                         if (HasRequiredSettings)
@@ -81,7 +93,7 @@
                         }
 
                     }
-                    LastTimeCheck = Time.time;
+                    RocketTimeCheck = Time.time;
                 }
             }
             catch (Exception e)
@@ -131,7 +143,13 @@
 
         #endregion actions
 
-        private float LastTimeCheck { get; set; } = 0;
+        private float CheckisOwnerTimeCheck { get; set; } = 0;
+
+        private float CheckisOwnerDelay { get; set; } = 16f;
+        private bool CheckisOwner { get; set; } = false;
+
+
+        private float RocketTimeCheck { get; set; } = 0;
         private float _RocketTimer { get; set; } = 0.07f;
         internal float RocketTimer
         {
@@ -165,17 +183,23 @@
             }
         }
 
-        private bool isOwner => gameObject.IsOwner();
 
         private bool isCurrentOwner
         {
             get
             {
-                if(!isOwner)
-                {
-                    gameObject.TakeOwnership();
-                }
-                return isOwner;
+                    if (!gameObject.IsOwner())
+                    {
+                        gameObject.TakeOwnership();
+                    }
+                    return gameObject.IsOwner();
+                //if (CheckisOwner)
+                //{
+                //}
+                //else
+                //{
+                //    return true;
+                //}
             }
         }
         private bool isHeld => PickupController.IsHeld;
@@ -186,6 +210,7 @@
             get => _HasRequiredSettings;
             set
             {
+                _HasRequiredSettings = value;
                 if (value)
                 {
                     if (RigidBodyController != null)
@@ -205,7 +230,6 @@
                     RigidBodyController.RestoreOriginalBody();
                     RigidBodyController.EditMode = false;
                 }
-
             }
         }
 

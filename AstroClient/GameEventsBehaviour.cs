@@ -5,6 +5,7 @@
     using AstroClient.Startup.Hooks;
     using AstroClient.Streamer;
     using AstroClientCore.Events;
+    using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
     using UnityEngine;
@@ -13,6 +14,7 @@
 
     public class GameEventsBehaviour : MonoBehaviour
     {
+        #region events
         public GameEventsBehaviour(IntPtr obj0) : base(obj0)
         {
             // ML Events
@@ -56,6 +58,13 @@
             PhotonModerationHandler.Event_OnPlayerMutedYou += Internal_OnPlayerMutedYou;
             PhotonModerationHandler.Event_OnPlayerUnmutedYou += Internal_OnPlayerUnmutedYou;
 
+
+            #region utility stuff
+            //Networking._IsOwner = Il2CppSystem.Delegate.Combine(
+            //    (Il2CppSystem.Action<Player, GameObject, VRC.SDKBase.VRC_AvatarDescriptor>)OnAvatarInstantiate,
+            //    VRCAvatarManager.field_Private_Static_Action_3_Player_GameObject_VRC_AvatarDescriptor_0
+            //).Cast<Il2CppSystem.Action<Player, GameObject, VRC.SDKBase.VRC_AvatarDescriptor>>();
+            #endregion
         }
 
         private void Internal_OnStreamerJoined(object sender, PlayerEventArgs e)
@@ -303,6 +312,10 @@
         internal virtual void OnViewRolesPropertyChanged(bool value)
         {
         }
+
+        #endregion 
+
+        private bool _isCurrentOwner;
 
     }
 }
