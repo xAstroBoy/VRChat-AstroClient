@@ -33,6 +33,10 @@
                             {
                                 Event_OnInflaterBehaviourPropertyChanged.SafetyRaise(new OnInflaterBehaviourArgs(newinstance)); // Dunno if it works.
                             });
+                            newinstance.SetOnInflaterUpdate(() =>
+                            {
+                                Event_OnInflaterBehaviourUpdate.SafetyRaise(new OnInflaterBehaviourArgs(newinstance)); // Dunno if it works.
+                            });
                         }
                     }
                 }
@@ -46,14 +50,20 @@
                     {
                         Event_OnInflaterBehaviourPropertyChanged.SafetyRaise(new OnInflaterBehaviourArgs(newinstance)); // Dunno if it works.
                     });
-                }
+                    newinstance.SetOnInflaterUpdate(() =>
+{
+Event_OnInflaterBehaviourUpdate.SafetyRaise(new OnInflaterBehaviourArgs(newinstance)); // Dunno if it works.
+});
 
+                }
             }
         }
 
         
 
         internal static event EventHandler<OnInflaterBehaviourArgs> Event_OnInflaterBehaviourPropertyChanged;
+        internal static event EventHandler<OnInflaterBehaviourArgs> Event_OnInflaterBehaviourUpdate;
+
         internal override void On_New_GameObject_Selected(GameObject obj)
         {
             if (obj != null)
@@ -66,6 +76,11 @@
                     {
                         Event_OnInflaterBehaviourPropertyChanged.SafetyRaise(new OnInflaterBehaviourArgs(InflaterBehaviour)); // Dunno if it works.
                     });
+                    InflaterBehaviour.SetOnInflaterUpdate(() =>
+{
+    Event_OnInflaterBehaviourUpdate.SafetyRaise(new OnInflaterBehaviourArgs(InflaterBehaviour)); // Dunno if it works.
+                    });
+
                 }
             }
         }

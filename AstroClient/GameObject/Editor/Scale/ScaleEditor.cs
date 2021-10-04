@@ -2,6 +2,7 @@
 {
     using AstroClient.Components;
     using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
     using System.Linq;
     using UnityEngine;
     using VRC.Udon;
@@ -24,75 +25,81 @@
                 {
                     StoreOriginalScale(obj, obj.transform.localScale);
                 }
+                var inflater = obj.GetComponent<InflaterBehaviour>();
                 if (!InflaterScaleMode)
                 {
                     if (increase)
                     {
                         obj.transform.localScale = obj.transform.localScale + new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
-                        if (obj.GetComponent<InflaterBehaviour>() != null)
+                        if (inflater != null)
                         {
-                            if (obj.GetComponent<InflaterBehaviour>().enabled)
+                            if (inflater.enabled)
                             {
-                                obj.GetComponent<InflaterBehaviour>().enabled = false;
+                                inflater.enabled = false;
                             }
-                            obj.GetComponent<InflaterBehaviour>().NewSize = obj.transform.localScale;
+                            inflater.NewSize = obj.transform.localScale;
                         }
                         EditUdon(obj, obj.transform.localScale);
                     }
                     else
                     {
                         obj.transform.localScale = obj.transform.localScale - new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
-                        if (obj.GetComponent<InflaterBehaviour>() != null)
+                        if (inflater != null)
                         {
-                            if (obj.GetComponent<InflaterBehaviour>().enabled)
+                            if (inflater.enabled)
                             {
-                                obj.GetComponent<InflaterBehaviour>().enabled = false;
+                                inflater.enabled = false;
                             }
-                            obj.GetComponent<InflaterBehaviour>().NewSize = obj.transform.localScale;
+                            inflater.NewSize = obj.transform.localScale;
                         }
                         EditUdon(obj, obj.transform.localScale);
                     }
                 }
                 else
                 {
-                    if (obj.GetComponent<InflaterBehaviour>() != null)
+                    if (inflater!= null)
                     {
-                        if (!obj.GetComponent<InflaterBehaviour>().enabled)
+                        if (!inflater.enabled)
                         {
-                            obj.GetComponent<InflaterBehaviour>().enabled = true;
+                            inflater.enabled = true;
                         }
                         if (increase)
                         {
-                            obj.GetComponent<InflaterBehaviour>().NewSize = obj.GetComponent<InflaterBehaviour>().NewSize + new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
+                            inflater.NewSize = inflater.NewSize + new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
                             EditUdon(obj, obj.transform.localScale);
                         }
                         else
                         {
-                            obj.GetComponent<InflaterBehaviour>().NewSize = obj.GetComponent<InflaterBehaviour>().NewSize - new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
+                            inflater.NewSize = inflater.NewSize - new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
                             EditUdon(obj, obj.transform.localScale);
                         }
                     }
                     else
                     {
-                        var SizeInflater = obj.AddComponent<InflaterBehaviour>();
-                        if (SizeInflater != null)
+                        inflater = obj.AddComponent<InflaterBehaviour>();
+                        if (inflater != null)
                         {
-                            if (!SizeInflater.enabled)
+                            if (!inflater.enabled)
                             {
-                                SizeInflater.enabled = true;
+                                inflater.enabled = true;
                             }
                             if (increase)
                             {
-                                obj.GetComponent<InflaterBehaviour>().NewSize = obj.GetComponent<InflaterBehaviour>().NewSize + new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
+                                inflater.NewSize = inflater.NewSize + new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
                                 EditUdon(obj, obj.transform.localScale);
                             }
                             else
                             {
-                                obj.GetComponent<InflaterBehaviour>().NewSize = obj.GetComponent<InflaterBehaviour>().NewSize - new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
+                                inflater.NewSize = inflater.NewSize - new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
                                 EditUdon(obj, obj.transform.localScale);
                             }
                         }
                     }
+                }
+
+                if(inflater != null)
+                {
+                    inflater.FocusOnTweaker();
                 }
             }
         }
@@ -142,13 +149,14 @@
             if (HasOriginalScaleStored(obj))
             {
                 obj.transform.localScale = GetOriginalScale(obj);
-                if (obj.GetComponent<InflaterBehaviour>() != null)
+                var inflater = obj.GetComponent<InflaterBehaviour>();
+                if (inflater != null)
                 {
-                    obj.GetComponent<InflaterBehaviour>().enabled = false;
-                    if (!obj.GetComponent<InflaterBehaviour>().enabled)
+                    inflater.enabled = false;
+                    if (!inflater.enabled)
                     {
-                        obj.GetComponent<InflaterBehaviour>().NewSize = GetOriginalScale(obj);
-                        obj.GetComponent<InflaterBehaviour>().enabled = true;
+                        inflater.NewSize = GetOriginalScale(obj);
+                        inflater.enabled = true;
                     }
                 }
             }

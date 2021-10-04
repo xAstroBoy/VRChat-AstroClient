@@ -66,5 +66,9 @@
         {
             CrazyBehaviourHandler.FocusPageOnCrazy(instance);
         }
+        internal static void FocusOnTweaker(this InflaterBehaviour instance)
+        {
+            InflaterBehaviourHandler.FocusPageOnInflater(instance);
+        }
     }
 }
