@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.Components
 {
+    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using System;
     using System.Runtime.InteropServices;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using static AstroClient.Forces;
-    using Random = UnityEngine.Random;
 
     [RegisterComponent]
     public class RocketBehaviour : GameEventsBehaviour
@@ -19,13 +19,10 @@
         private void Start()
         {
             RigidBody = GetComponent<Rigidbody>();
-            obj = RigidBody.gameObject;
-            OnlineEditor.TakeObjectOwnership(obj);
             RigidBodyController = GetComponent<RigidBodyController>();
-
             if (RigidBodyController == null)
             {
-                RigidBodyController = obj.AddComponent<RigidBodyController>();
+                RigidBodyController = gameObject.AddComponent<RigidBodyController>();
                 HasRequiredSettings = false;
             }
             else
@@ -36,7 +33,7 @@
             PickupController = GetComponent<PickupController>();
             if (PickupController == null)
             {
-                PickupController = obj.AddComponent<PickupController>();
+                PickupController = gameObject.AddComponent<PickupController>();
             }
             VRC_AstroPickup = gameObject.AddComponent<VRC_AstroPickup>();
             if (VRC_AstroPickup != null)
@@ -55,65 +52,47 @@
             {
                 if (!IsEnabled || isPaused)
                 {
+                    if (HasRequiredSettings)
+                    {
+                        HasRequiredSettings = false;
+                    }
                     return;
                 }
                 if (Time.time - LastTimeCheck > RocketTimer)
                 {
-                    if (PickupController.IsHeld)
+                    if (isHeld)
                     {
                         if (HasRequiredSettings)
                         {
-                            OnlineEditor.RemoveOwnerShip(obj);
-                            RigidBodyController.RestoreOriginalBody();
                             HasRequiredSettings = false;
                         }
+                        return;
                     }
                     else
                     {
                         if (!HasRequiredSettings)
                         {
-                            if (!RigidBodyController.EditMode)
-                            {
-                                RigidBodyController.EditMode = true;
-                            }
-                            if (!obj.IsOwner())
-                            {
-                                obj.TakeOwnership();
-                            }
-
-                            if (RigidBodyController != null)
-                            {
-                                RigidBodyController.isKinematic = false;
-                                RigidBodyController.useGravity = UseGravity;
-                                RigidBodyController.angularDrag = 0;
-                                RigidBodyController.drag = 0;
-                            }
                             HasRequiredSettings = true;
                         }
-                        if (!PickupController.IsHeld)
+                        if (isCurrentOwner)
                         {
-                            if (obj.IsOwner())
+                            if (!ShouldBeAlwaysUp)
                             {
-                                if (!ShouldBeAlwaysUp)
-                                {
-                                    ApplyRelativeForce(obj, 0, Random.Range(1f, 10f), 0);
-                                }
-                                else
-                                {
-                                    ApplyForce(obj, 0, Random.Range(1f, 10f), 0);
-                                }
+                                ApplyRelativeForce(gameObject, 0, UnityEngine.Random.Range(1f, 10f), 0);
                             }
                             else
                             {
-                                obj.TakeOwnership();
+                                ApplyForce(gameObject, 0, UnityEngine.Random.Range(1f, 10f), 0);
                             }
                         }
+
                     }
                     LastTimeCheck = Time.time;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                ModConsole.DebugErrorExc(e);
             }
             IsEnabled = true;
         }
@@ -123,7 +102,10 @@
             try
             {
                 RigidBodyController.RestoreOriginalBody();
-                OnlineEditor.RemoveOwnerShip(obj);
+                if (isOwner)
+                {
+                    OnlineEditor.RemoveOwnerShip(gameObject);
+                }
                 if (VRC_AstroPickup != null)
                 {
                     Destroy(VRC_AstroPickup);
@@ -158,36 +140,6 @@
         #endregion actions
 
         private float LastTimeCheck { get; set; } = 0;
-
-        private float _UpdateTimer { get; set; } = 2f;
-        internal float UpdateTimer
-        {
-            get
-            {
-                return _UpdateTimer;
-            }
-            set
-            {
-                _UpdateTimer = value;
-                Run_OnOnRocketPropertyChanged();
-            }
-        }
-
-        private float _TimerOffset { get; set; } = 0f;
-        internal float TimerOffset
-        {
-            get
-            {
-                return _TimerOffset;
-            }
-            set
-            {
-                _TimerOffset = value;
-                Run_OnOnRocketPropertyChanged();
-
-            }
-        }
-
         private float _RocketTimer { get; set; } = 0.07f;
         internal float RocketTimer
         {
@@ -235,17 +187,72 @@
             }
         }
 
+        private bool isOwner
+        {
+            get
+            {
+                return gameObject.IsOwner();
+            }
+        }
 
 
+        private bool isCurrentOwner
+        {
+            get
+            {
+                if(!isOwner)
+                {
+                    gameObject.TakeOwnership();
+                }
+                return isOwner;
+            }
+        }
+        private bool isHeld
+        {
+            get
+            {
+                return PickupController.IsHeld;
+            }
+        }
 
+
+        private bool _HasRequiredSettings = false;
+        private bool HasRequiredSettings
+        {
+            get
+            {
+                return _HasRequiredSettings;
+            }
+            set
+            {
+                if (value)
+                {
+                    if (RigidBodyController != null)
+                    {
+                        if (!RigidBodyController.EditMode)
+                        {
+                            RigidBodyController.EditMode = true;
+                        }
+                        RigidBodyController.isKinematic = false;
+                        RigidBodyController.useGravity = UseGravity;
+                        RigidBodyController.angularDrag = 0;
+                        RigidBodyController.drag = 0;
+                    }
+                }
+                else
+                {
+                    RigidBodyController.RestoreOriginalBody();
+                    RigidBodyController.EditMode = false;
+                }
+
+            }
+        }
 
         private Rigidbody RigidBody { get; set; } = null;
-        private GameObject obj { get; set; } = null;
         private RigidBodyController RigidBodyController { get; set; }
         private PickupController PickupController { get; set; }
         private VRC_AstroPickup VRC_AstroPickup { get; set; }
         private string OriginalText_Use { get; set; }
-
 
         private bool isPaused { get; set; }
 
@@ -277,7 +284,5 @@
             }
 
         }
-
-        private bool HasRequiredSettings { get; set; }
     }
 }

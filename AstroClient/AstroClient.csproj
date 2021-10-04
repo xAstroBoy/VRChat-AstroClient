@@ -160,6 +160,7 @@
     <Compile Include="ItemTweakerV2\Handlers\SpinnerBehaviourHandler.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Components\Fun\FunBehavioursSubMenu.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnCrazyBehaviourArgs.cs" />
+    <Compile Include="ItemTweakerV2\TweakerEventArgs\OnInflaterBehaviourArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnRocketBehaviourArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnRigidBodyControllerArgs.cs" />
     <Compile Include="Moderation\ModerationExtensions.cs" />
