@@ -65,8 +65,8 @@
             }
         }
 
-        internal static QMSingleToggleButton Murder4RolesRevealerToggle;
-        internal static QMSingleToggleButton AmongUSRolesRevealerToggle;
+        internal static QMSingleToggleButton Murder4RolesRevealerToggle { get; set; }
+        internal static QMSingleToggleButton AmongUSRolesRevealerToggle { get; set; }
 
         internal static List<LinkedNodes> JarRoleLinks { get; private set; } = new List<LinkedNodes>();
 

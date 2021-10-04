@@ -117,7 +117,8 @@
             }
             catch (Exception ex)
             {
-                MelonLogger.Error($"Exception when cleaning avatar: {ex}");
+                ModConsole.DebugError($"Exception when cleaning avatar:");
+                ModConsole.DebugErrorExc(ex);
             }
 
             return result;

@@ -117,7 +117,7 @@
                 InitializeOverridables();
                 DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
                 DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
-                DoAfterActionMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
+                DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
 
                 
 

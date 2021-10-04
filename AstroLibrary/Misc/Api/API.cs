@@ -44,7 +44,7 @@
                 }
                 catch (Exception)
                 {
-                    MelonLoader.MelonLogger.Error("[Avatar Search] Didn't Find Password need to enter");
+                    ModConsole.Error("[Avatar Search] Didn't Find Password need to enter");
                 }
             }
             catch (Exception)

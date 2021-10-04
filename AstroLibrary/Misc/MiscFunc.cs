@@ -101,7 +101,7 @@
             }
             if (cached == null)
             {
-                MelonLogger.Warning("Failed to find Murder Logic 3 Death trigger.");
+                ModConsole.Warning("Failed to find Murder Logic 3 Death trigger.");
                 return;
             }
             cached.gameObject.SetActive(!state);
