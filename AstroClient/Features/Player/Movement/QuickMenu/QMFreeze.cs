@@ -83,18 +83,25 @@
                     CurrentGravity = Vector3.zero;
                     Networking.LocalPlayer.SetVelocity(Vector3.zero);
                 }
-                else
-                {
-                    if (InputUtils.IsImputJumpCalled || InputUtils.IsInputJumpPressed)
-                    {
-                        if (Networking.LocalPlayer.GetVelocity() != Vector3.zero)
-                        {
-                            Networking.LocalPlayer.SetVelocity(Vector3.zero);
-                        }
-                    }
-                }
             }
         }
+
+        internal override void OnUpdate()
+        {
+            // Prevent Jumping bug.
+            if(Frozen && FreezePlayerOnQMOpen)
+            {
+                if (InputUtils.IsImputJumpCalled || InputUtils.IsInputJumpPressed)
+                {
+                    if (Networking.LocalPlayer.GetVelocity() != Vector3.zero)
+                    {
+                        Networking.LocalPlayer.SetVelocity(Vector3.zero);
+                    }
+                }
+
+            }
+        }
+
 
         internal static bool FreezePlayerOnQMOpen
         {
