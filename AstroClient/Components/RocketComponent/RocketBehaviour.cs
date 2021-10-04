@@ -143,10 +143,7 @@
         private float _RocketTimer { get; set; } = 0.07f;
         internal float RocketTimer
         {
-            get
-            {
-                return _RocketTimer;
-            }
+            get => _RocketTimer;
             set
             {
                 _RocketTimer = value;
@@ -154,16 +151,10 @@
             }
         }
 
-
-
-
         private bool _ShouldBeAlwaysUp { get; set; } = false;
         internal bool ShouldBeAlwaysUp
         {
-            get
-            {
-                return _ShouldBeAlwaysUp;
-            }
+            get => _ShouldBeAlwaysUp;
             set
             {
                 _ShouldBeAlwaysUp = value;
@@ -171,15 +162,10 @@
             }
         }
 
-
-
         private bool _UseGravity { get; set; } = false;
         internal bool UseGravity
         {
-            get
-            {
-                return _UseGravity;
-            }
+            get => _UseGravity;
             set
             {
                 _UseGravity = value;
@@ -187,14 +173,7 @@
             }
         }
 
-        private bool isOwner
-        {
-            get
-            {
-                return gameObject.IsOwner();
-            }
-        }
-
+        private bool isOwner => gameObject.IsOwner();
 
         private bool isCurrentOwner
         {
@@ -207,14 +186,7 @@
                 return isOwner;
             }
         }
-        private bool isHeld
-        {
-            get
-            {
-                return PickupController.IsHeld;
-            }
-        }
-
+        private bool isHeld => PickupController.IsHeld;
 
         private bool _HasRequiredSettings = false;
         private bool HasRequiredSettings
