@@ -106,9 +106,7 @@
                 }
                 PickupController.UseText = OriginalText_Use;
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         #region actions
@@ -185,10 +183,7 @@
         private bool _HasRequiredSettings = false;
         private bool HasRequiredSettings
         {
-            get
-            {
-                return _HasRequiredSettings;
-            }
+            get => _HasRequiredSettings;
             set
             {
                 if (value)
@@ -225,10 +220,7 @@
         private bool _IsEnabled;
         internal bool IsEnabled
         {
-            get
-            {
-                return _IsEnabled;
-            }
+            get => _IsEnabled;
             set
             {
                 _IsEnabled = value;

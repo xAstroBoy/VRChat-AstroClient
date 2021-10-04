@@ -136,8 +136,9 @@
                 var sorted = (from s in Player.GetComponentsInChildren<SingleTag>(true) orderby s.AllocatedStack descending select s).ToList();
                 if (sorted.Count() != 0 && sorted.Count() != 1)
                 {
-                    foreach (var tag in sorted)
+                    for (int i = 0; i < sorted.Count; i++)
                     {
+                        SingleTag tag = sorted[i];
                         if (tag != null)
                         {
                             Debug($"Found SingleTag with Allocated TagStack {tag.InternalStack}");

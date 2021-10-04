@@ -103,12 +103,9 @@
 
                 if (Time.time - LastTimeCheck2 > ImpulseTimer)
                 {
-                    if (!PickupController.IsHeld)
+                    if (!PickupController.IsHeld && !gameObject.IsOwner())
                     {
-                        if (!gameObject.IsOwner())
-                        {
-                            gameObject.TakeOwnership();
-                        }
+                        gameObject.TakeOwnership();
                     }
                     if (ShouldDoImpulseMode)
                     {
@@ -179,10 +176,7 @@
         private float _TimerOffset { get; set; } = 0f;
         internal float TimerOffset
         {
-            get
-            {
-                return _TimerOffset;
-            }
+            get => _TimerOffset;
             set
             {
                 _TimerOffset = value;
@@ -196,10 +190,7 @@
         private float _CrazyTimer { get; set; } = 0.04f;
         internal float CrazyTimer
         {
-            get
-            {
-                return _CrazyTimer;
-            }
+            get => _CrazyTimer;
             set
             {
                 _CrazyTimer = value;
@@ -210,10 +201,7 @@
         private float _ImpulseTimer { get; set; } = 5f;
         internal float ImpulseTimer
         {
-            get
-            {
-                return _ImpulseTimer;
-            }
+            get => _ImpulseTimer;
             set
             {
                 _ImpulseTimer = value;
@@ -224,10 +212,7 @@
         private float _ImpulseForce { get; set; } = 1.5f;
         internal float ImpulseForce
         {
-            get
-            {
-                return _ImpulseForce;
-            }
+            get => _ImpulseForce;
             set
             {
                 _ImpulseForce = value;
@@ -238,10 +223,7 @@
         private bool _ShouldDoImpulseMode { get; set; } = true;
         internal bool ShouldDoImpulseMode
         {
-            get
-            {
-                return _ShouldDoImpulseMode;
-            }
+            get => _ShouldDoImpulseMode;
             set
             {
                 _ShouldDoImpulseMode = value;
@@ -252,10 +234,7 @@
         private bool _IsDoingImpulseMode { get; set; } = false;
         internal bool IsDoingImpulseMode
         {
-            get
-            {
-                return _IsDoingImpulseMode;
-            }
+            get => _IsDoingImpulseMode;
             set
             {
                 _IsDoingImpulseMode = value;
@@ -266,10 +245,7 @@
         private bool _IsImpulseModeActive { get; set; } = false;
         internal bool IsImpulseModeActive
         {
-            get
-            {
-                return _IsImpulseModeActive;
-            }
+            get => _IsImpulseModeActive;
             set
             {
                 _IsImpulseModeActive = value;
@@ -281,10 +257,7 @@
         private bool _UseGravity { get; set; }
         internal bool UseGravity
         {
-            get
-            {
-                return _UseGravity;
-            }
+            get => _UseGravity;
             set
             {
                 _UseGravity = value;
@@ -305,10 +278,7 @@
         private bool _IsEnabled = true;
         internal bool IsEnabled
         {
-            get
-            {
-                return _IsEnabled;
-            }
+            get => _IsEnabled;
             set
             {
                 _IsEnabled = value;
