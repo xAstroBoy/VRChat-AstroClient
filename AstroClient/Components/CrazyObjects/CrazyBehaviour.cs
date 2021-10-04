@@ -154,17 +154,6 @@
         private event Action? OnCrazyPropertyChanged;
 
         #endregion actions
-        private float _TimerOffset { get; set; } = 0f;
-        internal float TimerOffset
-        {
-            get => _TimerOffset;
-            set
-            {
-                _TimerOffset = value;
-                Run_OnOnCrazyPropertyChanged();
-            }
-        }
-
         private float CrazyTimeCheck { get; set; } = 0;
         private float InpulseTimeCheck { get; set; } = 0;
 
