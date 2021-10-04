@@ -25,6 +25,10 @@
             RigidBodyControllerHandler.Event_OnRigidBodyControllerPropertyChanged += Internal_OnRigidBodyController_PropertyChanged;
             RigidBodyControllerHandler.Event_OnRigidBodyController_OnUpdate += Internal_OnRigidBodyController_OnUpdate;
 
+            RocketBehaviourHandler.Event_OnRocketBehaviourPropertyChanged += internal_OnRocketBehaviour_OnPropertyChanged;
+            CrazyBehaviourHandler.Event_OnCrazyBehaviourPropertyChanged+= internal_OnCrazyBehaviour_OnPropertyChanged;
+            SpinnerBehaviourHandler.Event_OnSpinnerBehaviourPropertyChanged+= internal_OnSpinnerBehaviour_OnPropertyChanged;
+
             // TODO : Figure a way to add Event and Getter Listeners as well for certain Components.
         }
 
@@ -55,33 +59,50 @@
 
         private void Internal_OnPickupController_Selected(object sender, OnPickupControllerArgs e)
         {
-            OnPickupController_Selected(e.control);
+            OnPickupController_Selected(e.PickupController);
         }
 
         private void Internal_OnPickupController_PropertyChanged(object sender, OnPickupControllerArgs e)
         {
-            OnPickupController_PropertyChanged(e.control);
+            OnPickupController_PropertyChanged(e.PickupController);
         }
 
         private void Internal_OnPickupController_OnUpdate(object sender, OnPickupControllerArgs e)
         {
-            OnPickupController_OnUpdate(e.control);
+            OnPickupController_OnUpdate(e.PickupController);
         }
 
         private void Internal_OnRigidBodyControllerSelected(object sender, OnRigidBodyControllerArgs e)
         {
-            OnRigidBodyController_Selected(e.control);
+            OnRigidBodyController_Selected(e.RigidBodyController);
         }
 
         private void Internal_OnRigidBodyController_PropertyChanged(object sender, OnRigidBodyControllerArgs e)
         {
-            OnRigidBodyController_PropertyChanged(e.control);
+            OnRigidBodyController_PropertyChanged(e.RigidBodyController);
         }
 
         private void Internal_OnRigidBodyController_OnUpdate(object sender, OnRigidBodyControllerArgs e)
         {
-            OnRigidBodyController_OnUpdate(e.control);
+            OnRigidBodyController_OnUpdate(e.RigidBodyController);
         }
+
+        private void internal_OnRocketBehaviour_OnPropertyChanged(object sender, OnRocketBehaviourArgs e)
+        {
+            OnRocketBehaviour_OnPropertyChanged(e.RocketBehaviour);
+        }
+        private void internal_OnCrazyBehaviour_OnPropertyChanged(object sender, OnCrazyBehaviourArgs e)
+        {
+            OnCrazyBehaviour_OnPropertyChanged(e.CrazyBehaviour);
+
+        }
+        private void internal_OnSpinnerBehaviour_OnPropertyChanged(object sender, OnSpinnerBehaviourArgs e)
+        {
+            OnSpinnerBehaviour_OnPropertyChanged(e.SpinnerBehaviour);
+        }
+
+
+
 
         internal virtual void On_Old_GameObject_Removed(GameObject obj)
         {
@@ -126,5 +147,16 @@
         internal virtual void OnPickupController_OnUpdate(PickupController control)
         {
         }
+
+        internal virtual void OnRocketBehaviour_OnPropertyChanged(RocketBehaviour RocketBehaviour)
+        {
+        }
+        internal virtual void OnCrazyBehaviour_OnPropertyChanged(CrazyBehaviour CrazyBehaviour)
+        {
+        }
+        internal virtual void OnSpinnerBehaviour_OnPropertyChanged(SpinnerBehaviour SpinnerBehaviour)
+        {
+        }
+
     }
 }

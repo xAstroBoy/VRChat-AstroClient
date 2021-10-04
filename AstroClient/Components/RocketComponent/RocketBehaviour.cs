@@ -9,40 +9,16 @@
     using Random = UnityEngine.Random;
 
     [RegisterComponent]
-    public class RocketObject : GameEventsBehaviour
+    public class RocketBehaviour : GameEventsBehaviour
     {
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
-
-        public RocketObject(IntPtr obj0) : base(obj0)
+        public RocketBehaviour(IntPtr ptr) : base(ptr)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
-            AntiGcList.Add(this);
-        }
-
-        public RocketObject(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<RocketObject>())
-        {
-            ClassInjector.DerivedConstructorBody(this);
-
-            ReferencedDelegate = referencedDelegate;
-            MethodInfo = methodInfo;
-        }
-
-        ~RocketObject()
-        {
-            Marshal.FreeHGlobal(MethodInfo);
-            MethodInfo = IntPtr.Zero;
-            ReferencedDelegate = null;
-            _ = AntiGcList.Remove(this);
-            AntiGcList = null;
         }
 
         // Use this for initialization
         private void Start()
         {
             RigidBody = GetComponent<Rigidbody>();
-            RocketManager.Register(this);
             obj = RigidBody.gameObject;
             OnlineEditor.TakeObjectOwnership(obj);
             RigidBodyController = GetComponent<RigidBodyController>();
@@ -148,7 +124,6 @@
             {
                 RigidBodyController.RestoreOriginalBody();
                 OnlineEditor.RemoveOwnerShip(obj);
-                RocketManager.RemoveObject(obj);
                 if (VRC_AstroPickup != null)
                 {
                     Destroy(VRC_AstroPickup);
@@ -160,15 +135,110 @@
             }
         }
 
-        internal RocketManager Manager { get; set; } = null;
+        #region actions
 
-        internal float UpdateTimer { get; set; } = 2f;
-        internal float TimerOffset { get; set; } = 0f;
+        private void Run_OnOnRocketPropertyChanged()
+        {
+            OnRocketPropertyChanged?.Invoke();
+        }
+
+        internal void SetOnRocketPropertyChanged(Action action)
+        {
+            OnRocketPropertyChanged += action;
+        }
+
+
+        internal void RemoveActionEvents()
+        {
+            OnRocketPropertyChanged = null;
+        }
+
+        private event Action? OnRocketPropertyChanged;
+
+        #endregion actions
+
         private float LastTimeCheck { get; set; } = 0;
-        internal float RocketTimer { get; set; } = 0.07f;
 
-        internal bool ShouldBeAlwaysUp { get; set; } = false;
-        internal bool UseGravity { get; set; } = false;
+        private float _UpdateTimer { get; set; } = 2f;
+        internal float UpdateTimer
+        {
+            get
+            {
+                return _UpdateTimer;
+            }
+            set
+            {
+                _UpdateTimer = value;
+                Run_OnOnRocketPropertyChanged();
+            }
+        }
+
+        private float _TimerOffset { get; set; } = 0f;
+        internal float TimerOffset
+        {
+            get
+            {
+                return _TimerOffset;
+            }
+            set
+            {
+                _TimerOffset = value;
+                Run_OnOnRocketPropertyChanged();
+
+            }
+        }
+
+        private float _RocketTimer { get; set; } = 0.07f;
+        internal float RocketTimer
+        {
+            get
+            {
+                return _RocketTimer;
+            }
+            set
+            {
+                _RocketTimer = value;
+                Run_OnOnRocketPropertyChanged();
+            }
+        }
+
+
+
+
+        private bool _ShouldBeAlwaysUp { get; set; } = false;
+        internal bool ShouldBeAlwaysUp
+        {
+            get
+            {
+                return _ShouldBeAlwaysUp;
+            }
+            set
+            {
+                _ShouldBeAlwaysUp = value;
+                Run_OnOnRocketPropertyChanged();
+            }
+        }
+
+
+
+        private bool _UseGravity { get; set; } = false;
+        internal bool UseGravity
+        {
+            get
+            {
+                return _UseGravity;
+            }
+            set
+            {
+                _UseGravity = value;
+                Run_OnOnRocketPropertyChanged();
+            }
+        }
+
+
+
+
+
         private Rigidbody RigidBody { get; set; } = null;
         private GameObject obj { get; set; } = null;
         private RigidBodyController RigidBodyController { get; set; }

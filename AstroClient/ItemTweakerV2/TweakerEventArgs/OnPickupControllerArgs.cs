@@ -5,11 +5,11 @@
 
     internal class OnPickupControllerArgs : EventArgs
     {
-        internal PickupController control;
+        internal PickupController PickupController;
 
-        internal OnPickupControllerArgs(PickupController controller)
+        internal OnPickupControllerArgs(PickupController PickupController)
         {
-            this.control = controller;
+            this.PickupController = PickupController;
         }
     }
 }

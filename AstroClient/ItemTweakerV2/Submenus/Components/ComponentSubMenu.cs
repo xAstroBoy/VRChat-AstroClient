@@ -23,9 +23,9 @@
 
         internal static void KillCustomComponents()
         {
-            CrazyObjectManager.KillCrazyObjects();
-            RocketManager.KillRockets();
-            ObjectSpinnerManager.KillObjectSpinners();
+            CrazyComponentSubMenu.KillCrazyObjects();
+            RocketComponentSubMenu.KillAllRockets();
+            SpinnerSubMenu.KillAllSpinners();
             ItemTweakerV2.Selector.Tweaker_Object.GetGameObjectToEdit().KillCustomComponents(false, false);
         }
     }

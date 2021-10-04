@@ -8,40 +8,18 @@
     using static AstroClient.Forces;
 
     [RegisterComponent]
-    public class ObjectSpinner : GameEventsBehaviour
+
+    public class SpinnerBehaviour : GameEventsBehaviour
     {
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
-
-        public ObjectSpinner(IntPtr obj0) : base(obj0)
+        public SpinnerBehaviour(IntPtr ptr) : base(ptr)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
-            AntiGcList.Add(this);
         }
 
-        public ObjectSpinner(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<ObjectSpinner>())
-        {
-            ClassInjector.DerivedConstructorBody(this);
-
-            ReferencedDelegate = referencedDelegate;
-            MethodInfo = methodInfo;
-        }
-
-        ~ObjectSpinner()
-        {
-            Marshal.FreeHGlobal(MethodInfo);
-            MethodInfo = IntPtr.Zero;
-            ReferencedDelegate = null;
-            _ = AntiGcList.Remove(this);
-            AntiGcList = null;
-        }
 
         // Use this for initialization
         private void Start()
         {
             RigidBody = GetComponent<Rigidbody>();
-            ObjectSpinnerManager.Register(this);
             OnlineEditor.TakeObjectOwnership(gameObject);
             RigidBodyController = GetComponent<RigidBodyController>();
             PickupController = GetComponent<PickupController>();
@@ -76,7 +54,6 @@
             {
                 RigidBodyController.RestoreOriginalBody();
                 OnlineEditor.RemoveOwnerShip(gameObject);
-                ObjectSpinnerManager.RemoveObject(gameObject);
                 if (VRC_AstroPickup != null)
                 {
                     Destroy(VRC_AstroPickup);
@@ -87,6 +64,7 @@
             {
             }
         }
+
 
         // Update is called once per frame
         private void Update()
@@ -146,17 +124,91 @@
             }
         }
 
-        internal ObjectSpinnerManager Manager = null;
+        #region actions
+
+        private void Run_OnOnSpinnerPropertyChanged()
+        {
+            OnSpinnerPropertyChanged?.Invoke();
+        }
+
+        internal void SetOnSpinnerPropertyChanged(Action action)
+        {
+            OnSpinnerPropertyChanged += action;
+        }
+
+
+        internal void RemoveActionEvents()
+        {
+            OnSpinnerPropertyChanged = null;
+        }
+
+        private event Action? OnSpinnerPropertyChanged;
+
+        #endregion actions
 
         internal float TimerOffset = 0f;
 
         private float LastTimeCheck = 0;
 
-        internal float ForceX { get; set; }
-        internal float ForceY{ get; set; }
-        internal float ForceZ{ get; set; }
-        internal float SpinnerTimer { get; set; }= 0.03f;
-        private bool HasRequiredSettings { get; set; }= false;
+        private float _ForceX { get; set; }
+        internal float ForceX
+        {
+            get
+            {
+                return _ForceX;
+            }
+            set
+            {
+                _ForceX = value;
+                Run_OnOnSpinnerPropertyChanged();
+            }
+        }
+        private float _ForceY { get; set; }
+        internal float ForceY
+        {
+            get
+            {
+                return _ForceY;
+            }
+            set
+            {
+                _ForceY = value;
+                Run_OnOnSpinnerPropertyChanged();
+            }
+        }
+
+
+        private float _ForceZ { get; set; }
+        internal float ForceZ
+        {
+            get
+            {
+                return _ForceZ;
+            }
+            set
+            {
+                _ForceZ = value;
+                Run_OnOnSpinnerPropertyChanged();
+            }
+        }
+
+
+
+        private float _SpinnerTimer { get; set; } = 0.03f;
+        internal float SpinnerTimer
+        {
+            get
+            {
+                return _SpinnerTimer;
+            }
+            set
+            {
+                _SpinnerTimer = value;
+                Run_OnOnSpinnerPropertyChanged();
+            }
+        }
+
+        private bool HasRequiredSettings { get; set; } = false;
         private Rigidbody RigidBody { get; set; }= null;
         private RigidBodyController  RigidBodyController { get; set; }
         private PickupController PickupController { get; set; }
@@ -164,6 +216,8 @@
         private VRC_AstroPickup VRC_AstroPickup { get; set; }
         private string OriginalText_Use { get; set; }
         private bool isPaused { get; set; }
+
+
         private bool _IsEnabled = true;
         internal bool IsEnabled
         {

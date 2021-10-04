@@ -5,11 +5,11 @@
 
     internal class OnRigidBodyControllerArgs : EventArgs
     {
-        internal RigidBodyController control;
+        internal RigidBodyController RigidBodyController;
 
-        internal OnRigidBodyControllerArgs(RigidBodyController controller)
+        internal OnRigidBodyControllerArgs(RigidBodyController RigidBodyController)
         {
-            this.control = controller;
+            this.RigidBodyController = RigidBodyController;
         }
     }
 }

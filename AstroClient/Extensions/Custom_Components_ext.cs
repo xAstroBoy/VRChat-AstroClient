@@ -13,32 +13,38 @@
     {
         internal static void MakeRocketItemWithG(this GameObject obj)
         {
-            RocketManager.AddObject(obj, false);
+            obj.GetOrAddComponent<RocketBehaviour>().UseGravity = true;
         }
 
         internal static void MakeRocketItemWithoutG(this GameObject obj)
         {
-            RocketManager.AddObject(obj, true);
+            obj.GetOrAddComponent<RocketBehaviour>().UseGravity = false;
         }
 
         internal static void MakeRocketItemWithGAndGoUp(this GameObject obj)
         {
-            RocketManager.AddObject(obj, false, false);
+           var rocket = obj.GetOrAddComponent<RocketBehaviour>();
+            rocket.UseGravity = true;
+            rocket.ShouldBeAlwaysUp = true;
         }
 
         internal static void MakeRocketItemWithoutGAndGoUp(this GameObject obj)
         {
-            RocketManager.AddObject(obj, true, false);
+            var rocket = obj.GetOrAddComponent<RocketBehaviour>();
+            rocket.UseGravity = false;
+            rocket.ShouldBeAlwaysUp = true;
         }
 
         internal static void GoNutsWithGravity(this GameObject obj)
         {
-            CrazyObjectManager.AddObject(obj, false);
+            var item = obj.GetOrAddComponent<RocketBehaviour>();
+            item.UseGravity = true;
         }
 
         internal static void GoNutsWithoutGravity(this GameObject obj)
         {
-            CrazyObjectManager.AddObject(obj, true);
+            var item = obj.GetOrAddComponent<RocketBehaviour>();
+            item.UseGravity = false;
         }
 
         internal static void Add_SpinForceX(this GameObject obj)
@@ -46,30 +52,27 @@
             try
             {
                 var item = obj;
+                SpinnerBehaviour instance = null;
                 if (item != null)
                 {
-                    if (!ObjectSpinnerManager.ObjectSpinners.Contains(item))
-                    {
-                        ObjectSpinnerManager.ObjectSpinners.Add(item);
-                    }
-                    var spin = item.GetComponent<ObjectSpinner>();
+                    instance = item.GetComponent<SpinnerBehaviour>();
 
-                    if (spin != null)
+                    if (instance != null)
                     {
-                        spin.ForceX++;
+                        instance.ForceX++;
                     }
                     else
                     {
-                        var newspin = item.AddComponent<ObjectSpinner>();
-
-                        if (newspin != null)
+                        instance = item.AddComponent<SpinnerBehaviour>();
+                        if (instance != null)
                         {
-                            spin.ForceX = 1f;
+                            instance.ForceX = 1f;
                         }
                     }
-
-                    ObjectSpinnerManager.UpdateSpinnerButton(item);
-                    ObjectSpinnerManager.UpdateTimerButton(item);
+                }
+                if(item.isCurrentObjectToEdit())
+                {
+                    instance.FocusOnTweaker();
                 }
             }
             catch (Exception) { }
@@ -79,25 +82,24 @@
         {
             try
             {
-                if (!ObjectSpinnerManager.ObjectSpinners.Contains(obj))
+                SpinnerBehaviour instance = obj.GetComponent<SpinnerBehaviour>();
+                if (instance != null)
                 {
-                    ObjectSpinnerManager.ObjectSpinners.Add(obj);
-                }
-                var spin = obj.GetComponent<ObjectSpinner>();
-                if (spin != null)
-                {
-                    spin.ForceX--;
+                    instance.ForceX--;
                 }
                 else
                 {
-                    var newspin = obj.AddComponent<ObjectSpinner>();
+                    var newspin = obj.AddComponent<SpinnerBehaviour>();
                     if (newspin != null)
                     {
-                        spin.ForceX = 1f;
+                        instance.ForceX = 1f;
                     }
                 }
-                ObjectSpinnerManager.UpdateSpinnerButton(obj);
-                ObjectSpinnerManager.UpdateTimerButton(obj);
+                if (instance.isCurrentObjectToEdit())
+                {
+                    instance.FocusOnTweaker();
+                }
+
             }
             catch (Exception) { }
         }
@@ -106,26 +108,24 @@
         {
             try
             {
-                if (!ObjectSpinnerManager.ObjectSpinners.Contains(obj))
+                SpinnerBehaviour instance = obj.GetComponent<SpinnerBehaviour>();
+                if (instance != null)
                 {
-                    ObjectSpinnerManager.ObjectSpinners.Add(obj);
-                }
-                var spin = obj.GetComponent<ObjectSpinner>();
-                if (spin != null)
-                {
-                    spin.ForceY++;
+                    instance.ForceY++;
                 }
                 else
                 {
-                    var newspin = obj.AddComponent<ObjectSpinner>();
-                    if (newspin != null)
+                    instance = obj.AddComponent<SpinnerBehaviour>();
+                    if (instance != null)
                     {
-                        spin.ForceY = 1f;
+                        instance.ForceY = 1f;
                     }
                 }
+                if (instance.isCurrentObjectToEdit())
+                {
+                    instance.FocusOnTweaker();
+                }
 
-                ObjectSpinnerManager.UpdateSpinnerButton(obj);
-                ObjectSpinnerManager.UpdateTimerButton(obj);
             }
             catch (Exception) { }
         }
@@ -134,25 +134,24 @@
         {
             try
             {
-                if (!ObjectSpinnerManager.ObjectSpinners.Contains(obj))
+                SpinnerBehaviour instance = obj.GetComponent<SpinnerBehaviour>();
+                if (instance != null)
                 {
-                    ObjectSpinnerManager.ObjectSpinners.Add(obj);
-                }
-                var spin = obj.GetComponent<ObjectSpinner>();
-                if (spin != null)
-                {
-                    spin.ForceY--;
+                    instance.ForceY--;
                 }
                 else
                 {
-                    var newspin = obj.AddComponent<ObjectSpinner>();
-                    if (newspin != null)
+                    instance = obj.AddComponent<SpinnerBehaviour>();
+                    if (instance != null)
                     {
-                        spin.ForceY = 1f;
+                        instance.ForceY = 1f;
                     }
                 }
-                ObjectSpinnerManager.UpdateSpinnerButton(obj);
-                ObjectSpinnerManager.UpdateTimerButton(obj);
+                if (instance.isCurrentObjectToEdit())
+                {
+                    instance.FocusOnTweaker();
+                }
+
             }
             catch (Exception) { }
         }
@@ -161,25 +160,24 @@
         {
             try
             {
-                if (!ObjectSpinnerManager.ObjectSpinners.Contains(obj))
+                SpinnerBehaviour instance = obj.GetComponent<SpinnerBehaviour>();
+                if (instance != null)
                 {
-                    ObjectSpinnerManager.ObjectSpinners.Add(obj);
-                }
-                var spin = obj.GetComponent<ObjectSpinner>();
-                if (spin != null)
-                {
-                    spin.ForceZ++;
+                    instance.ForceZ++;
                 }
                 else
                 {
-                    var newspin = obj.AddComponent<ObjectSpinner>();
-                    if (newspin != null)
+                    instance = obj.AddComponent<SpinnerBehaviour>();
+                    if (instance != null)
                     {
-                        spin.ForceZ = 1f;
+                        instance.ForceZ = 1f;
                     }
                 }
-                ObjectSpinnerManager.UpdateSpinnerButton(obj);
-                ObjectSpinnerManager.UpdateTimerButton(obj);
+                if (instance.isCurrentObjectToEdit())
+                {
+                    instance.FocusOnTweaker();
+                }
+
             }
             catch (Exception) { }
         }
@@ -188,93 +186,212 @@
         {
             try
             {
-                if (!ObjectSpinnerManager.ObjectSpinners.Contains(obj))
+                SpinnerBehaviour instance = obj.GetComponent<SpinnerBehaviour>();
+                if (instance != null)
                 {
-                    ObjectSpinnerManager.ObjectSpinners.Add(obj);
-                }
-                var spin = obj.GetComponent<ObjectSpinner>();
-                if (spin != null)
-                {
-                    spin.ForceZ--;
+                    instance.ForceZ--;
                 }
                 else
                 {
-                    var newspin = obj.AddComponent<ObjectSpinner>();
+                    var newspin = obj.AddComponent<SpinnerBehaviour>();
                     if (newspin != null)
                     {
-                        spin.ForceZ = 1f;
+                        instance.ForceZ = 1f;
                     }
                 }
-                ObjectSpinnerManager.UpdateSpinnerButton(obj);
-                ObjectSpinnerManager.UpdateTimerButton(obj);
+                if (instance.isCurrentObjectToEdit())
+                {
+                    instance.FocusOnTweaker();
+                }
+
             }
             catch (Exception) { }
         }
 
         internal static void Remove_Spinner(this GameObject obj)
         {
-            ObjectSpinnerManager.RemoveObject(obj);
+            var item = obj.GetComponent<SpinnerBehaviour>();
+            if (item != null)
+            {
+                UnityEngine.Object.Destroy(item);
+            }
         }
 
         internal static void IncSpinnerSpeed(this GameObject obj)
         {
-            ObjectSpinnerManager.IncreaseObjTimer(obj);
+            try
+            {
+                SpinnerBehaviour instance = obj.GetOrAddComponent<SpinnerBehaviour>();
+                if (instance != null)
+                {
+                    instance.SpinnerTimer++;
+                }
+                if (instance.isCurrentObjectToEdit())
+                {
+                    instance.FocusOnTweaker();
+                }
+
+            }
+            catch (Exception) { }
         }
 
         internal static void DecSpinnerSpeed(this GameObject obj)
         {
-            ObjectSpinnerManager.DecreaseObjTimer(obj);
+            try
+            {
+                SpinnerBehaviour instance = obj.GetOrAddComponent<SpinnerBehaviour>();
+                if (instance != null)
+                {
+                    instance.SpinnerTimer--;
+                }
+                if (instance.isCurrentObjectToEdit())
+                {
+                    instance.FocusOnTweaker();
+                }
+
+            }
+            catch (Exception) { }
         }
 
         internal static void IncCrazySpeed(this GameObject obj)
         {
-            CrazyObjectManager.IncreaseObjTimer(obj);
+            try
+            {
+                CrazyBehaviour instance = obj.GetOrAddComponent<CrazyBehaviour>();
+                if (instance != null)
+                {
+                    instance.CrazyTimer++;
+                }
+                if (instance.isCurrentObjectToEdit())
+                {
+                    instance.FocusOnTweaker();
+                }
+
+            }
+            catch (Exception) { }
         }
 
         internal static void DecCrazySpeed(this GameObject obj)
         {
-            CrazyObjectManager.DecreaseObjTimer(obj);
+            try
+            {
+                CrazyBehaviour instance = obj.GetOrAddComponent<CrazyBehaviour>();
+                if (instance != null)
+                {
+                    instance.CrazyTimer--;
+                }
+                if (instance.isCurrentObjectToEdit())
+                {
+                    instance.FocusOnTweaker();
+                }
+
+            }
+            catch (Exception) { }
         }
 
         internal static void IncRocketSpeed(this GameObject obj)
         {
-            RocketManager.IncreaseObjTimer(obj);
+            try
+            {
+                RocketBehaviour instance = obj.GetOrAddComponent<RocketBehaviour>();
+                if (instance != null)
+                {
+                    instance.RocketTimer++;
+                }
+                if (instance.isCurrentObjectToEdit())
+                {
+                    instance.FocusOnTweaker();
+                }
+
+            }
+            catch (Exception) { }
         }
 
         internal static void DecRocketSpeed(this GameObject obj)
         {
-            RocketManager.DecreaseObjTimer(obj);
+            try
+            {
+                RocketBehaviour instance = obj.GetOrAddComponent<RocketBehaviour>();
+                if (instance != null)
+                {
+                    instance.RocketTimer--;
+                }
+                if (instance.isCurrentObjectToEdit())
+                {
+                    instance.FocusOnTweaker();
+                }
+
+            }
+            catch (Exception) { }
         }
 
-        internal static void Add_Rocket_Component(this List<GameObject> list, bool ShouldFloat, bool HasRelativeForce = true)
+        internal static void Add_Rocket_Component(this List<GameObject> list, bool UseGravity, bool ShouldBeAlwaysUp = true)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
-                RocketManager.AddObject(obj, ShouldFloat, HasRelativeForce);
+                try
+                {
+                    RocketBehaviour item = obj.AddComponent<RocketBehaviour>();
+                    if (item != null)
+                    {
+                        item.UseGravity = UseGravity;
+                        item.ShouldBeAlwaysUp = ShouldBeAlwaysUp;
+                    }
+                    if (item.isCurrentObjectToEdit())
+                    {
+                        item.FocusOnTweaker();
+                    }
+
+                }
+                catch (Exception) { }
+
             }
         }
 
-        internal static void Add_Crazy_Component(this List<GameObject> list, bool ShouldFloat)
+        internal static void Add_Crazy_Component(this List<GameObject> list, bool UseGravity)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
-                CrazyObjectManager.AddObject(obj, ShouldFloat);
+                var item = obj.AddComponent<CrazyBehaviour>();
+                if (item != null)
+                {
+                    item.UseGravity = UseGravity;
+                }
             }
         }
 
-        internal static void Add_Rocket_Component(this GameObject obj, bool ShouldFloat, bool HasRelativeForce = true)
+        internal static void Add_Rocket_Component(this GameObject obj, bool UseGravity, bool ShouldBeAlwaysUp = true)
         {
             if (obj != null)
             {
-                RocketManager.AddObject(obj, ShouldFloat, HasRelativeForce);
+                var item = obj.AddComponent<RocketBehaviour>();
+                if (item != null)
+                {
+                    item.UseGravity = UseGravity;
+                    item.ShouldBeAlwaysUp = ShouldBeAlwaysUp;
+                }
+                if (item.isCurrentObjectToEdit())
+                {
+                    item.FocusOnTweaker();
+                }
+
             }
         }
 
-        internal static void Add_Crazy_Component(this GameObject obj, bool ShouldFloat)
+        internal static void Add_Crazy_Component(this GameObject obj, bool UseGravity)
         {
             if (obj != null)
             {
-                CrazyObjectManager.AddObject(obj, ShouldFloat);
+                var item = obj.AddComponent<CrazyBehaviour>();
+                if (item != null)
+                {
+                    item.UseGravity = UseGravity;
+                }
+                if (item.isCurrentObjectToEdit())
+                {
+                    item.FocusOnTweaker();
+                }
+
             }
         }
 
@@ -402,7 +519,7 @@
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
-                RocketObject RocketObject = obj.GetComponent<RocketObject>();
+                RocketBehaviour RocketObject = obj.GetComponent<RocketBehaviour>();
                 if (RocketObject != null)
                 {
                     RocketObject.DestroyMeLocal();
@@ -414,7 +531,7 @@
         {
             if (obj != null)
             {
-                RocketObject RocketObject = obj.GetComponent<RocketObject>();
+                RocketBehaviour RocketObject = obj.GetComponent<RocketBehaviour>();
                 if (RocketObject != null)
                 {
                     RocketObject.DestroyMeLocal();
@@ -426,7 +543,7 @@
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
-                CrazyObject CrazyObject = obj.GetComponent<CrazyObject>();
+                CrazyBehaviour CrazyObject = obj.GetComponent<CrazyBehaviour>();
                 if (CrazyObject != null)
                 {
                     CrazyObject.DestroyMeLocal();
@@ -438,7 +555,7 @@
         {
             if (obj != null)
             {
-                CrazyObject CrazyObject = obj.GetComponent<CrazyObject>();
+                CrazyBehaviour CrazyObject = obj.GetComponent<CrazyBehaviour>();
                 if (CrazyObject != null)
                 {
                     CrazyObject.DestroyMeLocal();
@@ -446,26 +563,26 @@
             }
         }
 
-        internal static void Remove_ObjectSpinner_Component(this List<GameObject> list)
+        internal static void Remove_SpinnerBehaviour_Component(this List<GameObject> list)
         {
             foreach (var obj in list.Where(obj => obj != null))
             {
-                ObjectSpinner ObjectSpinner = obj.GetComponent<ObjectSpinner>();
-                if (ObjectSpinner != null)
+                SpinnerBehaviour SpinnerBehaviour = obj.GetComponent<SpinnerBehaviour>();
+                if (SpinnerBehaviour != null)
                 {
-                    ObjectSpinner.DestroyMeLocal();
+                    SpinnerBehaviour.DestroyMeLocal();
                 }
             }
         }
 
-        internal static void Remove_ObjectSpinner_Component(this GameObject obj)
+        internal static void Remove_SpinnerBehaviour_Component(this GameObject obj)
         {
             if (obj != null)
             {
-                ObjectSpinner ObjectSpinner = obj.GetComponent<ObjectSpinner>();
-                if (ObjectSpinner != null)
+                SpinnerBehaviour SpinnerBehaviour = obj.GetComponent<SpinnerBehaviour>();
+                if (SpinnerBehaviour != null)
                 {
-                    ObjectSpinner.DestroyMeLocal();
+                    SpinnerBehaviour.DestroyMeLocal();
                 }
             }
         }
@@ -555,9 +672,9 @@
         {
             if (obj != null)
             {
-                var rocket = obj.GetComponent<RocketObject>();
-                var crazy = obj.GetComponent<CrazyObject>();
-                var spinner = obj.GetComponent<ObjectSpinner>();
+                var rocket = obj.GetComponent<RocketBehaviour>();
+                var crazy = obj.GetComponent<CrazyBehaviour>();
+                var spinner = obj.GetComponent<SpinnerBehaviour>();
                 var control = obj.GetComponent<RigidBodyController>();
                 var bouncer = obj.GetComponent<Bouncer>();
                 var watcher = obj.GetComponent<PlayerWatcher>();

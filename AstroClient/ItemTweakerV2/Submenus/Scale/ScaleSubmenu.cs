@@ -72,11 +72,11 @@
             {
                 if (InflaterScaleMode)
                 {
-                    if (obj.GetComponent<ItemInflater>() != null)
+                    if (obj.GetComponent<InflaterBehaviour>() != null)
                     {
-                        if (obj.GetComponent<ItemInflater>().enabled)
+                        if (obj.GetComponent<InflaterBehaviour>().enabled)
                         {
-                            CurrentScaleButton.SetButtonText("Object 's scale : " + obj.GetComponent<ItemInflater>().NewSize.ToString());
+                            CurrentScaleButton.SetButtonText("Object 's scale : " + obj.GetComponent<InflaterBehaviour>().NewSize.ToString());
                             return;
                         }
                     }

@@ -79,10 +79,6 @@
 
         internal override void OnUpdate()
         {
-            RocketManager.MakeInstance();
-            CrazyObjectManager.MakeInstance();
-            ObjectSpinnerManager.MakeInstance();
-            ItemInflaterManager.MakeInstance();
             if (Bools.AllowAttackerComponent)
             {
                 PlayerAttackerManager.MakeInstance();

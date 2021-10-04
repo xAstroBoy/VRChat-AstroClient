@@ -29,52 +29,52 @@
                     if (increase)
                     {
                         obj.transform.localScale = obj.transform.localScale + new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
-                        if (obj.GetComponent<ItemInflater>() != null)
+                        if (obj.GetComponent<InflaterBehaviour>() != null)
                         {
-                            if (obj.GetComponent<ItemInflater>().enabled)
+                            if (obj.GetComponent<InflaterBehaviour>().enabled)
                             {
-                                obj.GetComponent<ItemInflater>().enabled = false;
+                                obj.GetComponent<InflaterBehaviour>().enabled = false;
                             }
-                            obj.GetComponent<ItemInflater>().NewSize = obj.transform.localScale;
+                            obj.GetComponent<InflaterBehaviour>().NewSize = obj.transform.localScale;
                         }
                         EditUdon(obj, obj.transform.localScale);
                     }
                     else
                     {
                         obj.transform.localScale = obj.transform.localScale - new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
-                        if (obj.GetComponent<ItemInflater>() != null)
+                        if (obj.GetComponent<InflaterBehaviour>() != null)
                         {
-                            if (obj.GetComponent<ItemInflater>().enabled)
+                            if (obj.GetComponent<InflaterBehaviour>().enabled)
                             {
-                                obj.GetComponent<ItemInflater>().enabled = false;
+                                obj.GetComponent<InflaterBehaviour>().enabled = false;
                             }
-                            obj.GetComponent<ItemInflater>().NewSize = obj.transform.localScale;
+                            obj.GetComponent<InflaterBehaviour>().NewSize = obj.transform.localScale;
                         }
                         EditUdon(obj, obj.transform.localScale);
                     }
                 }
                 else
                 {
-                    if (obj.GetComponent<ItemInflater>() != null)
+                    if (obj.GetComponent<InflaterBehaviour>() != null)
                     {
-                        if (!obj.GetComponent<ItemInflater>().enabled)
+                        if (!obj.GetComponent<InflaterBehaviour>().enabled)
                         {
-                            obj.GetComponent<ItemInflater>().enabled = true;
+                            obj.GetComponent<InflaterBehaviour>().enabled = true;
                         }
                         if (increase)
                         {
-                            obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize + new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
+                            obj.GetComponent<InflaterBehaviour>().NewSize = obj.GetComponent<InflaterBehaviour>().NewSize + new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
                             EditUdon(obj, obj.transform.localScale);
                         }
                         else
                         {
-                            obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize - new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
+                            obj.GetComponent<InflaterBehaviour>().NewSize = obj.GetComponent<InflaterBehaviour>().NewSize - new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
                             EditUdon(obj, obj.transform.localScale);
                         }
                     }
                     else
                     {
-                        var SizeInflater = obj.AddComponent<ItemInflater>();
+                        var SizeInflater = obj.AddComponent<InflaterBehaviour>();
                         if (SizeInflater != null)
                         {
                             if (!SizeInflater.enabled)
@@ -83,12 +83,12 @@
                             }
                             if (increase)
                             {
-                                obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize + new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
+                                obj.GetComponent<InflaterBehaviour>().NewSize = obj.GetComponent<InflaterBehaviour>().NewSize + new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
                                 EditUdon(obj, obj.transform.localScale);
                             }
                             else
                             {
-                                obj.GetComponent<ItemInflater>().NewSize = obj.GetComponent<ItemInflater>().NewSize - new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
+                                obj.GetComponent<InflaterBehaviour>().NewSize = obj.GetComponent<InflaterBehaviour>().NewSize - new Vector3(ModifiedVectorX(), ModifiedVectorY(), ModifiedVectorZ());
                                 EditUdon(obj, obj.transform.localScale);
                             }
                         }
@@ -142,13 +142,13 @@
             if (HasOriginalScaleStored(obj))
             {
                 obj.transform.localScale = GetOriginalScale(obj);
-                if (obj.GetComponent<ItemInflater>() != null)
+                if (obj.GetComponent<InflaterBehaviour>() != null)
                 {
-                    obj.GetComponent<ItemInflater>().enabled = false;
-                    if (!obj.GetComponent<ItemInflater>().enabled)
+                    obj.GetComponent<InflaterBehaviour>().enabled = false;
+                    if (!obj.GetComponent<InflaterBehaviour>().enabled)
                     {
-                        obj.GetComponent<ItemInflater>().NewSize = GetOriginalScale(obj);
-                        obj.GetComponent<ItemInflater>().enabled = true;
+                        obj.GetComponent<InflaterBehaviour>().NewSize = GetOriginalScale(obj);
+                        obj.GetComponent<InflaterBehaviour>().enabled = true;
                     }
                 }
             }

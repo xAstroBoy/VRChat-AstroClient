@@ -9,40 +9,16 @@
     using Random = UnityEngine.Random;
 
     [RegisterComponent]
-    public class CrazyObject : GameEventsBehaviour
+    public class CrazyBehaviour : GameEventsBehaviour
     {
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
-
-        public CrazyObject(IntPtr obj0) : base(obj0)
+        public CrazyBehaviour(IntPtr ptr) : base(ptr)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
-            AntiGcList.Add(this);
-        }
-
-        public CrazyObject(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<CrazyObject>())
-        {
-            ClassInjector.DerivedConstructorBody(this);
-
-            ReferencedDelegate = referencedDelegate;
-            MethodInfo = methodInfo;
-        }
-
-        ~CrazyObject()
-        {
-            Marshal.FreeHGlobal(MethodInfo);
-            MethodInfo = IntPtr.Zero;
-            ReferencedDelegate = null;
-            _ = AntiGcList.Remove(this);
-            AntiGcList = null;
         }
 
         // Use this for initialization
         private void Start()
         {
             Rigidbody = GetComponent<Rigidbody>();
-            CrazyObjectManager.Register(this);
             OnlineEditor.TakeObjectOwnership(gameObject);
             PickupController = GetComponent<PickupController>();
 
@@ -74,7 +50,6 @@
             {
                 RigidBodyController.RestoreOriginalBody();
                 OnlineEditor.RemoveOwnerShip(gameObject);
-                CrazyObjectManager.RemoveObject(gameObject);
                 if (VRC_AstroPickup != null)
                 {
                     Destroy(VRC_AstroPickup);
@@ -180,24 +155,147 @@
             }
         }
 
-        internal CrazyObjectManager CrazyObjectManager { get; set; } = null;
+        #region actions
 
-        internal float TimerOffset { get; set; } = 0f;
+        private void Run_OnOnCrazyPropertyChanged()
+        {
+            OnCrazyPropertyChanged?.Invoke();
+        }
+
+        internal void SetOnCrazyPropertyChanged(Action action)
+        {
+            OnCrazyPropertyChanged += action;
+        }
+
+
+        internal void RemoveActionEvents()
+        {
+            OnCrazyPropertyChanged = null;
+        }
+
+        private event Action? OnCrazyPropertyChanged;
+
+        #endregion actions
+        private float _TimerOffset { get; set; } = 0f;
+        internal float TimerOffset
+        {
+            get
+            {
+                return _TimerOffset;
+            }
+            set
+            {
+                _TimerOffset = value;
+                Run_OnOnCrazyPropertyChanged();
+            }
+        }
+
         private float LastTimeCheck { get; set; } = 0;
         private float LastTimeCheck2 { get; set; } = 0;
 
-        internal float CrazyTimer { get; set; } = 0.04f;
-        internal float ImpulseTimer { get; set; } = 5f;
-        internal float ImpulseForce { get; set; } = 1.5f;
-        internal bool ShouldDoImpulseMode { get; set; } = true;
-        internal bool IsDoingImpulseMode { get; set; } = false;
+        private float _CrazyTimer { get; set; } = 0.04f;
+        internal float CrazyTimer
+        {
+            get
+            {
+                return _CrazyTimer;
+            }
+            set
+            {
+                _CrazyTimer = value;
+                Run_OnOnCrazyPropertyChanged();
+            }
+        }
 
-        internal bool IsImpulseModeActive { get; set; } = false;
+        private float _ImpulseTimer { get; set; } = 5f;
+        internal float ImpulseTimer
+        {
+            get
+            {
+                return _ImpulseTimer;
+            }
+            set
+            {
+                _ImpulseTimer = value;
+                Run_OnOnCrazyPropertyChanged();
+            }
+        }
+
+        private float _ImpulseForce { get; set; } = 1.5f;
+        internal float ImpulseForce
+        {
+            get
+            {
+                return _ImpulseForce;
+            }
+            set
+            {
+                _ImpulseForce = value;
+                Run_OnOnCrazyPropertyChanged();
+            }
+        }
+
+        private bool _ShouldDoImpulseMode { get; set; } = true;
+        internal bool ShouldDoImpulseMode
+        {
+            get
+            {
+                return _ShouldDoImpulseMode;
+            }
+            set
+            {
+                _ShouldDoImpulseMode = value;
+                Run_OnOnCrazyPropertyChanged();
+            }
+        }
+
+        private bool _IsDoingImpulseMode { get; set; } = false;
+        internal bool IsDoingImpulseMode
+        {
+            get
+            {
+                return _IsDoingImpulseMode;
+            }
+            set
+            {
+                _IsDoingImpulseMode = value;
+                Run_OnOnCrazyPropertyChanged();
+            }
+        }
+
+        private bool _IsImpulseModeActive { get; set; } = false;
+        internal bool IsImpulseModeActive
+        {
+            get
+            {
+                return _IsImpulseModeActive;
+            }
+            set
+            {
+                _IsImpulseModeActive = value;
+                Run_OnOnCrazyPropertyChanged();
+            }
+        }
+
+
+        private bool _UseGravity { get; set; }
+        internal bool UseGravity
+        {
+            get
+            {
+                return _UseGravity;
+            }
+            set
+            {
+                _UseGravity = value;
+                Run_OnOnCrazyPropertyChanged();
+            }
+        }
+
         private Rigidbody Rigidbody { get; set; }
         private RigidBodyController RigidBodyController { get; set; }
         private PickupController PickupController { get; set; }
 
-        internal bool UseGravity { get; set; }
         private bool HasRequiredSettings { get; set; } = false;
 
 
