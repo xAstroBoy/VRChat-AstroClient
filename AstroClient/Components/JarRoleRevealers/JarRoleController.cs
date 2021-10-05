@@ -90,17 +90,14 @@
 
         internal override void OnPlayerJoined(Player player)
         {
-            MiscUtils.DelayFunction(0.5f, new Action(() =>
+            if (JarRoleLinks.Count() != 0 && player != null)
             {
-                if (JarRoleLinks.Count() != 0 && player != null)
+                var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
+                if (RoleRevealer != null && !RoleEspComponents.Contains(RoleRevealer))
                 {
-                    var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
-                    if (RoleRevealer != null && !RoleEspComponents.Contains(RoleRevealer))
-                    {
-                        RoleEspComponents.Add(RoleRevealer);
-                    }
+                    RoleEspComponents.Add(RoleRevealer);
                 }
-            }));
+            }
         }
 
         internal class LinkedNodes
