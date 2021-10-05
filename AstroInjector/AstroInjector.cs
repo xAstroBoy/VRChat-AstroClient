@@ -4,6 +4,7 @@
     using MelonLoader;
     using System;
     using System.IO;
+    using System.Linq;
     using System.Reflection;
 
     public class AstroInjector : MelonPlugin
@@ -45,15 +46,10 @@
         public AstroInjector()
         {
             LoadEmbeddedLibraries();
-            var rinPath = Directory.GetCurrentDirectory() + "\\RinClient\\IsBot.txt";
-            if (File.Exists(rinPath))
+            if (Environment.GetCommandLineArgs().Any(a => a.Contains("RinBot")))
             {
-                bool flag = File.ReadAllText(rinPath) == "true";
-                if (flag)
-                {
-                    MelonLogger.Warning("RinClient Bot Detected, Not loading AstroClient for this session");
-                    return;
-                }
+                MelonLogger.Msg($"Detected RinBot: Skipping AstroClient Loading");
+                return;
             }
             LoadEmbeddedMelons();
 

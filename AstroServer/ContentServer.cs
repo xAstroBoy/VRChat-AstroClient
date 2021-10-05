@@ -108,15 +108,16 @@
             {
                 case PacketClientType.CONNECTED:
                     {
-                        string key = packetData.TextData;
+                        var authData = Newtonsoft.Json.JsonConvert.DeserializeObject<AuthData>(packetData.TextData);
+                        client.ClientType = authData.ClientType;
+                        client.Key = authData.Key;
 
-                        if (AccountManager.IsKeyValid(key))
+                        if (AccountManager.IsKeyValid(client.Key))
                         {
                             client.IsAuthed = true;
-                            client.Key = key;
-                            client.DiscordID = AccountManager.GetKeysDiscordOwner(key);
+                            client.DiscordID = AccountManager.GetKeysDiscordOwner(client.Key);
 
-                            client.Data = AccountManager.GetAccountData(key);
+                            client.Data = AccountManager.GetAccountData(client.Key);
                             client.Send(new PacketData(PacketServerType.AUTH_SUCCESS));
                         }
                         else
