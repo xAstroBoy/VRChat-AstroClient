@@ -92,7 +92,7 @@
         {
             MiscUtils.DelayFunction(0.5f, new Action(() =>
             {
-                if (JarRoleLinks.Count() != 0 && (IsMurder4World || IsAmongUsWorld) && player != null && player.gameObject.GetComponent<JarRoleESP>() == null)
+                if (JarRoleLinks.Count() != 0 && player != null)
                 {
                     var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
                     if (RoleRevealer != null && !RoleEspComponents.Contains(RoleRevealer))
