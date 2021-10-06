@@ -156,6 +156,7 @@
                                                         break;
 
                                                     case 21: // Mute , Blocking
+                                                        prefix.Append("Moderation Block/Mute : ");
                                                         log = true;
                                                         #region Blocking and Muting Events.
 
