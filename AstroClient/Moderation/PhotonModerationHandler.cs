@@ -31,19 +31,16 @@
 
 
         internal static void OnPlayerBlockedYou_Invoker(Photon.Realtime.Player player)
-        {
-            if (!BlockedYouPlayers.Contains(player))
-            {
-                Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
+        {            
                 BlockedYouPlayers.Add(player);
-            }
+                Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(player));   
         }
 
         internal static void OnPlayerUnblockedYou_Invoker(Photon.Realtime.Player player)
         {
+            Event_OnPlayerUnblockedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
             if (BlockedYouPlayers.Contains(player))
-
-                Event_OnPlayerUnblockedYou.SafetyRaise(new PhotonPlayerEventArgs(player));            {
+            {
                 BlockedYouPlayers.Remove(player);
             }
         }

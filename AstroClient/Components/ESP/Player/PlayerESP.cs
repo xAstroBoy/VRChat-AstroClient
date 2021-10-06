@@ -116,7 +116,7 @@
 
         internal override void OnFriended()
         {
-            if (UseCustomColor || !CanEditValues) return;
+            if (!UseCustomColor || !CanEditValues) return;
             if (AssignedPlayer.GetAPIUser().IsFriend())
             {
                     CurrentColor = FriendColor;
@@ -125,9 +125,9 @@
 
         internal override void OnUnfriended()
         {
-            if (UseCustomColor || !CanEditValues) return;
-                if (!AssignedPlayer.GetAPIUser().IsFriend())
-                {
+            if (!UseCustomColor || !CanEditValues) return;
+            if (!AssignedPlayer.GetAPIUser().IsFriend())
+            {
                     CurrentColor = PublicColor;
                 }
             
@@ -135,9 +135,9 @@
 
         internal override void OnPlayerBlockedYou(Photon.Realtime.Player player)
         {
-            if (UseCustomColor || !CanEditValues) return;
+            if (!UseCustomColor || !CanEditValues) return;
 
-            if (player.GetUserID() == AssignedPlayer.GetUserID())
+            if (player.GetUserID().Equals(AssignedPlayer.GetUserID()))
             {
                 if (!UseCustomColor)
                 {
@@ -148,9 +148,8 @@
 
         internal override void OnPlayerUnblockedYou(Photon.Realtime.Player player)
         {
-            if (UseCustomColor || !CanEditValues) return;
-
-            if (player.GetUserID() == AssignedPlayer.GetUserID())
+            if (!UseCustomColor || !CanEditValues) return;
+            if (player.GetUserID().Equals(AssignedPlayer.GetUserID()))
             {
                 if (AssignedPlayer.GetAPIUser().IsFriend())
                 {
@@ -191,7 +190,7 @@
 
         internal override void OnPublicESPColorChanged(Color color)
         {
-            if (UseCustomColor || !CanEditValues) return;
+            if (!UseCustomColor || !CanEditValues) return;
             if (!AssignedPlayer.GetAPIUser().IsFriend())
             {
                 CurrentColor = color;
@@ -199,7 +198,7 @@
         }
         internal override void OnFriendESPColorChanged(Color color)
         {
-            if (UseCustomColor || !CanEditValues) return;
+            if (!UseCustomColor || !CanEditValues) return;
             if (AssignedPlayer.GetAPIUser().IsFriend())
             {
                 CurrentColor = color;
@@ -210,7 +209,7 @@
 
         internal override void OnBlockedESPColorChanged(Color color)
         {
-            if (UseCustomColor || !CanEditValues) return;
+            if (!UseCustomColor || !CanEditValues) return;
 
             if (AssignedPlayer.GetAPIUser().HasBlockedYou())
             {

@@ -22,6 +22,7 @@
     using Photon.Realtime;
     using System.Text;
     using UnhollowerBaseLib;
+    using UnhollowerRuntimeLib;
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class PhotonOnEventHook : GameEvents
@@ -47,13 +48,15 @@
             }
         }
 
-        private unsafe static bool OnEventPatch(EventData __0)
+        private unsafe static bool OnEventPatch(ref EventData __0)
         {
             try
             {
                 bool log = false;
-                bool isBlocked = false; // Use this if really required;
-                bool isPatched = false;
+                bool isBlocked = false; // Flag this if needed to make the event not continue
+                bool isPatched = false; // Flag this if you modify the event. (it will replace the event data)
+                bool toReset = false; // Flag this if you need to clear the event entirely (might break something!)
+                Dictionary<byte, IntPtr> ConvertedToNormalDict = new Dictionary<byte, IntPtr>();
                 if (__0 != null)
                 {
                     var code = __0.Code;
@@ -76,9 +79,34 @@
                         var customdataobj = __0.Parameters[245];
                         if (customdataobj != null)
                         {
-                            Il2CppSystem.Collections.Generic.Dictionary<byte, IntPtr> DataDict = customdataobj.TryCast<Il2CppSystem.Collections.Generic.Dictionary<byte, IntPtr>>();
-                            if (DataDict != null && DataDict.Count != 0)
+                            if (customdataobj.GetIl2CppType().Equals(Il2CppType.Of<Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>>()))
                             {
+                                try
+                                {
+                                    //ModConsole.DebugLog($"Object Type is {customdataobj.GetIl2CppType().FullName}");
+                                    var originaldict = customdataobj.Cast<Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>>();
+                                    if (originaldict != null && originaldict.Count != 0)
+                                    {
+
+                                        foreach (var key in originaldict.Keys)
+                                        {
+                                            ConvertedToNormalDict.Add(key, originaldict[key].Pointer);
+                                        }
+                                    }
+                                }
+                                catch (Exception e)
+                                {
+                                    ModConsole.DebugError("Failed to Cast event !");
+                                    ModConsole.DebugErrorExc(e);
+                                }
+                            }
+                            if(customdataobj == null)
+                            {
+                                return true; // There's no need to continue to read and translate, so let's continue.
+                            }
+                            if (ConvertedToNormalDict != null && ConvertedToNormalDict.Count != 0)
+                            {
+
                                 switch (code)
                                 {
                                     case 1:// Voice Data TODO : (Parrot Mode)
@@ -102,10 +130,10 @@
                                         #region Moderation Handler
                                         try
                                         {
-                                            if (DataDict.ContainsKey(0))
+                                            if (ConvertedToNormalDict.ContainsKey(0))
                                             {
-                                                byte moderationbyte = *(byte*)IL2CPP.il2cpp_object_unbox(DataDict[0]).ToPointer();
-                                                switch (moderationbyte)
+                                                byte moderationevent = *(byte*)IL2CPP.il2cpp_object_unbox(ConvertedToNormalDict[0]).ToPointer();
+                                                switch (moderationevent)
                                                 {
                                                     case 2: // Warnings.
                                                         prefix.Append("Moderation Warning: ");
@@ -132,25 +160,25 @@
                                                         #region Blocking and Muting Events.
 
                                                         // Single Moderation Event (one player)
-                                                        if (DataDict.count == 4)
+                                                        if (ConvertedToNormalDict.Count == 4)
                                                         {
-                                                            if (DataDict.ContainsKey(1))
+                                                            if (ConvertedToNormalDict.ContainsKey(1))
                                                             {
                                                                 ModConsole.DebugLog("Single Moderation Event Detected");
-                                                                int RemoteModerationPhotonID = *(int*)DataDict[1];
+                                                                int RemoteModerationPhotonID = *(int*)IL2CPP.il2cpp_object_unbox(ConvertedToNormalDict[1]).ToPointer();
                                                                 var PhotonPlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(RemoteModerationPhotonID);
                                                                 bool blocked = false;
                                                                 bool muted = false;
-                                                                if (DataDict.ContainsKey(10))
+                                                                if (ConvertedToNormalDict.ContainsKey(10))
                                                                 {
-                                                                    IntPtr BlockedPtr = DataDict[10];
+                                                                    IntPtr BlockedPtr = ConvertedToNormalDict[10];
                                                                     if (BlockedPtr != IntPtr.Zero)
                                                                     {
                                                                         blocked = *(bool*)IL2CPP.il2cpp_object_unbox(BlockedPtr).ToPointer();
                                                                         if (blocked)
                                                                         {
                                                                             PhotonModerationHandler.OnPlayerBlockedYou_Invoker(PhotonPlayer);
-                                                                            DataDict[10] = Il2CppConverter.Generate_Il2CPPObject(false).Pointer;
+                                                                            ConvertedToNormalDict[10] = Il2CppConverter.Generate_Il2CPPObject(false).Pointer;
                                                                             isPatched = true;
                                                                         }
                                                                         else
@@ -159,9 +187,9 @@
                                                                         }
                                                                     }
                                                                 }
-                                                                if (DataDict.ContainsKey(11))
+                                                                if (ConvertedToNormalDict.ContainsKey(11))
                                                                 {
-                                                                    IntPtr MutedPtr = DataDict[11];
+                                                                    IntPtr MutedPtr = ConvertedToNormalDict[11];
                                                                     if (MutedPtr != IntPtr.Zero)
                                                                     {
                                                                         muted = *(bool*)IL2CPP.il2cpp_object_unbox(MutedPtr).ToPointer();
@@ -178,13 +206,13 @@
                                                             }
                                                         }
                                                         // Multiple Moderation Events (Usually happens when you enter the room)
-                                                        else if (DataDict.count == 3)
+                                                        else if (ConvertedToNormalDict.Count == 3)
                                                         {
                                                             ModConsole.DebugLog("Multiple Moderations Event Detected");
                                                             // Blocked List
-                                                            if (DataDict.ContainsKey(10))
+                                                            if (ConvertedToNormalDict.ContainsKey(10))
                                                             {
-                                                                IntPtr blockedlistptr = DataDict[10];
+                                                                IntPtr blockedlistptr = ConvertedToNormalDict[10];
                                                                 if (blockedlistptr != IntPtr.Zero)
                                                                 {
                                                                     var blockedlistObject = new Il2CppSystem.Object(blockedlistptr);
@@ -200,7 +228,7 @@
                                                                                 {
                                                                                     BlockedPlayersArray[i] = -1;
                                                                                 }
-                                                                                DataDict[10] = BlockedPlayersArray.Pointer;
+                                                                                ConvertedToNormalDict[10] = BlockedPlayersArray.Pointer;
                                                                                 isPatched = true;
                                                                             }
                                                                         }
@@ -208,9 +236,9 @@
                                                                 }
                                                             }
                                                             // Muted List
-                                                            if (DataDict.ContainsKey(11))
+                                                            if (ConvertedToNormalDict.ContainsKey(11))
                                                             {
-                                                                IntPtr Mutedlistptr = DataDict[11];
+                                                                IntPtr Mutedlistptr = ConvertedToNormalDict[11];
                                                                 if (Mutedlistptr != IntPtr.Zero)
                                                                 {
                                                                     var MutedlistObject = new Il2CppSystem.Object(Mutedlistptr);
@@ -242,7 +270,7 @@
                                                         break;
 
                                                     default:
-                                                        ModConsole.DebugError($"Unknown Moderation Byte Detected : {moderationbyte}");
+                                                        ModConsole.DebugWarning($"Unknown Moderation Event Detected : {moderationevent}");
                                                         log = true;
                                                         break;
                                                 }
@@ -278,6 +306,38 @@
                             }
                         }
                     }
+                    if (isPatched)
+                    {
+                        if (ConvertedToNormalDict != null && ConvertedToNormalDict.Count != 0)
+                        {
+                            var ModifiedEvent = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
+                            foreach (var key in ConvertedToNormalDict.Keys)
+                            {
+                                ModifiedEvent.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), new Il2CppSystem.Object(ConvertedToNormalDict[key]));
+                            }
+
+                            var modifiedparams = new Dictionary<byte, Il2CppSystem.Object>();
+                            foreach (var key in __0.Parameters.Keys)
+                            {
+                                if (key != 245)
+                                {
+                                    modifiedparams.Add(key, __0.Parameters[key]);
+                                }
+                                else
+                                {
+                                    modifiedparams.Add(key, ModifiedEvent);
+                                }
+                            }
+
+                            __0.Parameters.Clear();
+                            __0.Parameters = null;
+                            __0.Parameters = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
+                            foreach (var key in modifiedparams.Keys)
+                            {
+                                __0.Parameters.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), modifiedparams[key]);
+                            }
+                        }
+                    }
                     string eventstring = string.Empty;
                     if(isPatched)
                     {
@@ -286,6 +346,10 @@
                     else if(isBlocked)
                     {
                         eventstring = "BLOCKED :";
+                    }
+                    else if(toReset)
+                    {
+                        eventstring = "RESET :";
                     }
                     if (log && ConfigManager.General.LogEvents && __0.Parameters != null)
                     {
@@ -300,6 +364,10 @@
                 }
                 else
                 {
+                    if(toReset)
+                    {
+                        __0.Reset();
+                    }
                     return true;
                 }
             }
@@ -307,7 +375,9 @@
             {
                 ModConsole.DebugError("Exception in OnEvent");
                 ModConsole.ErrorExc(e);
+                return true;
             }
+            ModConsole.DebugLog($"HOOK END Without Exceptions");
             return true;
         }
     }
