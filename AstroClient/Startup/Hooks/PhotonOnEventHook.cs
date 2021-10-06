@@ -263,8 +263,7 @@
 
                                                         break;
 
-                                                    case 20: // Public Ban Bypass 
-                                                        toReset = true; // Ruby resets it, so we will apply same logic here.
+                                                    case 20: // Unknown, seems affecting users on reset 
                                                         log = true;
                                                         break;
 
