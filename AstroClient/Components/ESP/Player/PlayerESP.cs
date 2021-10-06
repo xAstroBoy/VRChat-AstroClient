@@ -24,17 +24,6 @@
             AntiGcList.Add(this);
         }
 
-        private bool DebugMode = false;
-
-        
-        private void Debug(string msg)
-        {
-            if (DebugMode)
-            {
-                ModConsole.DebugLog($"[PlayerESP Debug] : {msg}");
-            }
-        }
-
         // Use this for initialization
         internal void Start()
         {
@@ -42,7 +31,6 @@
             var p = gameObject.GetComponent<Player>();
             if (p != null)
             {
-                Debug($"Found Target Player {p.DisplayName()}, For PlayerESP");
                 AssignedPlayer = p;
             }
             else
@@ -58,7 +46,6 @@
                 }
                 else
                 {
-                    Debug($"Found SelectRegion Transform Assigned in {AssignedPlayer.DisplayName()}!");
                     if (CurrentRenderers == null && CurrentRenderers.Count() == 0)
                     {
                         ModConsole.Error($"Failed to Generate a PlayerESP for Player {AssignedPlayer.DisplayName()}, Due to SelectRegion Renderer Missing!");
@@ -67,14 +54,9 @@
                     }
                     else
                     {
-                        Debug($"Found SelectRegion Renderer in {AssignedPlayer.DisplayName()}, Activating ESP !");
                         if (HighLightOptions == null)
                         {
                             HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
-                            if (HighLightOptions != null)
-                            {
-                                Debug("Added HighlightsFXStandalone in SelectRegion For Custom Color Option for ESP!");
-                            }
                         }
                         for (int i = 0; i < CurrentRenderers.Count; i++)
                         {
@@ -116,7 +98,7 @@
 
         internal override void OnFriended()
         {
-            if (!UseCustomColor || !CanEditValues) return;
+            if (!CanActuallyEditOnEvent) return;
             if (AssignedPlayer.GetAPIUser().IsFriend())
             {
                     CurrentColor = FriendColor;
@@ -125,7 +107,7 @@
 
         internal override void OnUnfriended()
         {
-            if (!UseCustomColor || !CanEditValues) return;
+            if (!CanActuallyEditOnEvent) return;
             if (!AssignedPlayer.GetAPIUser().IsFriend())
             {
                     CurrentColor = PublicColor;
@@ -135,7 +117,7 @@
 
         internal override void OnPlayerBlockedYou(Photon.Realtime.Player player)
         {
-            if (!UseCustomColor || !CanEditValues) return;
+            if (!CanActuallyEditOnEvent) return;
 
             if (player.GetUserID().Equals(AssignedPlayer.GetUserID()))
             {
@@ -148,7 +130,7 @@
 
         internal override void OnPlayerUnblockedYou(Photon.Realtime.Player player)
         {
-            if (!UseCustomColor || !CanEditValues) return;
+            if (!CanActuallyEditOnEvent) return;
             if (player.GetUserID().Equals(AssignedPlayer.GetUserID()))
             {
                 if (AssignedPlayer.GetAPIUser().IsFriend())
@@ -190,7 +172,7 @@
 
         internal override void OnPublicESPColorChanged(Color color)
         {
-            if (!UseCustomColor || !CanEditValues) return;
+            if (!CanActuallyEditOnEvent) return;
             if (!AssignedPlayer.GetAPIUser().IsFriend())
             {
                 CurrentColor = color;
@@ -198,7 +180,7 @@
         }
         internal override void OnFriendESPColorChanged(Color color)
         {
-            if (!UseCustomColor || !CanEditValues) return;
+            if (!CanActuallyEditOnEvent) return;
             if (AssignedPlayer.GetAPIUser().IsFriend())
             {
                 CurrentColor = color;
@@ -209,7 +191,7 @@
 
         internal override void OnBlockedESPColorChanged(Color color)
         {
-            if (!UseCustomColor || !CanEditValues) return;
+            if (!CanActuallyEditOnEvent) return;
 
             if (AssignedPlayer.GetAPIUser().HasBlockedYou())
             {
@@ -258,6 +240,21 @@
             }
         }
 
+        private bool CanActuallyEditOnEvent
+        {
+            get
+            {
+                if (CanEditValues)
+                {
+                    if (UseCustomColor)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+                return false;
+            }
+        }
 
         private bool CanEditValues
         {
