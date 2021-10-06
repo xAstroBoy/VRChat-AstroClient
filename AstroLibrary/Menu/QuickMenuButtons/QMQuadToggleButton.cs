@@ -96,7 +96,11 @@ namespace AstroButtonAPI
             button.GetComponent<Button>().onClick.AddListener(new Action(() =>
             {
                 Toggle();
-                button.GetComponent<Button>()._hasSelection_k__BackingField = false;
+
+                var temp = button.GetComponent<Button>();
+                temp._isPointerDown_k__BackingField = false;
+                temp._isPointerInside_k__BackingField = false;
+                temp._hasSelection_k__BackingField = false;
             }));
 
             State = States.FIRST;
