@@ -49,7 +49,7 @@
 
         public bool LogTriggerEvents = false;
 
-        public bool LogEvents = false;
+        public bool LogEvents = true;
 
         public float FOV = 61f;
 
