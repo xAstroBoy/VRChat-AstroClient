@@ -77,6 +77,13 @@
             return boxed ?? null;
         }
 
+        internal static Il2CppSystem.Object Generate_Il2CPPObject(byte item)
+        {
+            var converted = new Il2CppSystem.Byte() { m_value = item };
+            var boxed = converted.BoxIl2CppObject();
+            return boxed ?? null;
+        }
+
         internal static Il2CppSystem.Object Generate_Il2CPPObject(UnityEngine.Color item)
         {
             var boxed = item.BoxIl2CppObject();

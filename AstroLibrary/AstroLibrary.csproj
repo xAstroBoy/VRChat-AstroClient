@@ -802,7 +802,7 @@
     <Folder Include="Blaze%27s Utils\APIS\QM\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\blank.png" />
+    <Content Include="Resources\blank.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
