@@ -97,10 +97,9 @@ namespace AstroButtonAPI
             {
                 Toggle();
 
-                var temp = button.GetComponent<Button>();
-                temp._isPointerDown_k__BackingField = false;
-                temp._isPointerInside_k__BackingField = false;
-                temp._hasSelection_k__BackingField = false;
+                button.GetComponent<Button>()._hasSelection_k__BackingField = false;
+                button.GetComponent<Button>()._isPointerDown_k__BackingField = false;
+                button.GetComponent<Button>()._isPointerInside_k__BackingField = false;
             }));
 
             State = States.FIRST;
@@ -112,7 +111,7 @@ namespace AstroButtonAPI
             var image = button.GetComponent<Image>();
             var texture = CheetosHelpers.LoadPNG(data);
 
-            var sprite = Sprite.CreateSprite(texture, new Rect(0, 0, selectorSize * 1.2f, selectorSize * 1.2f), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+            var sprite = Sprite.CreateSprite(texture, new Rect(0, 0, selectorSize, selectorSize), new Vector2(0, 0), 1, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
             image1.sprite = sprite;
             image2.sprite = sprite;
             image3.sprite = sprite;
