@@ -264,11 +264,12 @@
                                                         break;
 
                                                     case 20: // Unknown, seems affecting users on reset 
+                                                        prefix.Append($"Moderation Event {moderationevent}:");
                                                         log = true;
                                                         break;
 
                                                     default:
-                                                        ModConsole.DebugWarning($"Unknown Moderation Event Detected : {moderationevent}");
+                                                        prefix.Append($"Moderation Event {moderationevent}:");
                                                         log = true;
                                                         break;
                                                 }
