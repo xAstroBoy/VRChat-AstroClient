@@ -30,8 +30,6 @@ namespace AstroActionMenu
         }
     }
 
-    [SuppressMessage("ReSharper", "Unity.IncorrectMonoBehaviourInstantiation")]
-    [SuppressMessage("ReSharper", "InconsistentNaming")]
     internal static class AstroActionMenuPatches
     {
         public static List<PedalStruct>

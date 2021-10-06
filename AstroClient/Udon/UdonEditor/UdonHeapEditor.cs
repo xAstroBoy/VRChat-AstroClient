@@ -1399,7 +1399,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1424,7 +1424,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1448,7 +1448,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1473,7 +1473,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1498,7 +1498,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1523,7 +1523,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1549,7 +1549,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1574,7 +1574,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1600,7 +1600,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1625,7 +1625,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1650,7 +1650,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1675,7 +1675,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1701,7 +1701,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1726,7 +1726,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1752,7 +1752,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1777,7 +1777,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1801,7 +1801,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1826,7 +1826,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1853,7 +1853,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1878,7 +1878,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1905,7 +1905,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1930,7 +1930,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1957,7 +1957,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -1982,7 +1982,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2007,7 +2007,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2032,7 +2032,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2059,7 +2059,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2084,7 +2084,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2109,7 +2109,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2134,7 +2134,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2158,7 +2158,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2183,7 +2183,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2208,7 +2208,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2233,7 +2233,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2258,7 +2258,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2283,7 +2283,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2332,7 +2332,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2357,7 +2357,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2381,7 +2381,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2406,7 +2406,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2431,7 +2431,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2456,7 +2456,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2481,7 +2481,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2506,7 +2506,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2531,7 +2531,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2556,7 +2556,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2581,7 +2581,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2606,7 +2606,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2633,7 +2633,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2658,7 +2658,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2687,7 +2687,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2712,7 +2712,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2739,7 +2739,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2764,7 +2764,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2793,7 +2793,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2818,7 +2818,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2845,7 +2845,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2870,7 +2870,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2897,7 +2897,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2922,7 +2922,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2950,7 +2950,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -2975,7 +2975,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3004,7 +3004,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3029,7 +3029,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3056,7 +3056,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3081,7 +3081,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3108,7 +3108,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3133,7 +3133,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3160,7 +3160,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3185,7 +3185,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3212,7 +3212,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3237,7 +3237,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3264,7 +3264,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3289,7 +3289,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3316,7 +3316,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3341,7 +3341,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3368,7 +3368,7 @@
         {
             if (heap != null && address != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3393,7 +3393,7 @@
         {
             if (heap != null && address != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3418,7 +3418,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3443,7 +3443,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3468,7 +3468,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3493,7 +3493,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3518,7 +3518,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3542,7 +3542,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3567,7 +3567,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3594,7 +3594,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3619,7 +3619,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3644,7 +3644,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3669,7 +3669,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3694,7 +3694,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3719,7 +3719,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3744,7 +3744,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3769,7 +3769,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3794,7 +3794,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3818,7 +3818,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3843,7 +3843,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3868,7 +3868,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3893,7 +3893,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3919,7 +3919,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3944,7 +3944,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3969,7 +3969,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -3994,7 +3994,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4019,7 +4019,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4044,7 +4044,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4069,7 +4069,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4094,7 +4094,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4119,7 +4119,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4144,7 +4144,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4169,7 +4169,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4194,7 +4194,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4219,7 +4219,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4244,7 +4244,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CppObject_Unmanaged(value);
+                var converted = Il2CppConverter.Generate_Il2CppObject_Unmanaged(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4269,7 +4269,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4294,7 +4294,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4319,7 +4319,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4345,7 +4345,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {
@@ -4370,7 +4370,7 @@
         {
             if (heap != null)
             {
-                var converted = UdonConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {

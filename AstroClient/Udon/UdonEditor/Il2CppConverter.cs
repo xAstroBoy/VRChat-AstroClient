@@ -5,7 +5,7 @@
     using UnhollowerBaseLib;
     using UnhollowerRuntimeLib;
 
-    internal static class UdonConverter
+    internal static class Il2CppConverter
     {
         internal static Il2CppSystem.Object Generate_Il2CPPObject(string[] item)
         {
@@ -114,10 +114,7 @@
             for (int i = 0; i < array.Length; i++)
             {
                 T item = array[i];
-                if (!list.Contains(item))
-                {
-                    list.Add(item);
-                }
+                list.Add(item);
             }
 
             // Convert to Array.
@@ -138,10 +135,7 @@
             for (int i = 0; i < array.Length; i++)
             {
                 T item = array[i];
-                if (!list.Contains(item))
-                {
-                    list.Add(item);
-                }
+                list.Add(item);
             }
 
             // Convert to Array.
