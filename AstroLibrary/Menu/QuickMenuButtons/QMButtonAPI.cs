@@ -15,6 +15,7 @@
         public static Color bForeground = Color.yellow;
         public static List<QMSingleButton> allSingleButtons = new List<QMSingleButton>();
         public static List<QMToggleButton> allToggleButtons = new List<QMToggleButton>();
+        public static List<QMQuadToggleButton> allQuadToggleButtons = new List<QMQuadToggleButton>();
         public static List<QMNestedButton> allNestedButtons = new List<QMNestedButton>();
         public static List<QMSingleToggleButton> allSingleToggleButtons = new List<QMSingleToggleButton>();
         public static List<QMInfo> AllInfos = new List<QMInfo>();

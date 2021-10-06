@@ -690,6 +690,7 @@
     <Compile Include="Menu\QuickMenuButtons2\QMScrollMenu.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMSingleButton.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMSlider.cs" />
+    <Compile Include="Menu\QuickMenuButtons\QMQuadToggleButton.cs" />
     <Compile Include="Menu\QuickMenuButtons\QuickMenuStuff.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMToggleButton.cs" />
     <Compile Include="Blaze%27s Utils\APIS\SM\SMButton.cs" />
@@ -798,6 +799,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Blaze%27s Utils\APIS\QM\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\blank.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
