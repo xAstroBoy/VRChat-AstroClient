@@ -14,6 +14,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.IO;
     using UnhollowerBaseLib;
     using UnityEngine;
     using UnityEngine.UI;
@@ -26,6 +27,7 @@
     internal class CheetosTestStuff : GameEvents
     {
         private static bool DoOnce;
+        private static WebSocket ws;
 
         internal override void VRChat_OnUiManagerInit()
         {
@@ -37,9 +39,16 @@
             infoBar.transform.localPosition -= new Vector3(0, 110, 0);
             infobartext.text = "AstroClient";
 
+            if (Bools.IsDeveloper)
+            {
+                SearchNet.Connect();
+
+                SearchNet.AddusertoSearch("usr_e358e56c-da53-4ada-a860-1cc8ac54c13f", false); // Jacked Delta (Asshole)
+                SearchNet.AddusertoSearch("usr_d078d7cc-bbfb-4e4e-b970-ccead7998a5b", false); // Qg
+                SearchNet.AddusertoSearch("usr_1365189e-4d5e-4015-a754-3daff40a972e", false); // SusheSarah (Moist)
+            }
             _ = MelonCoroutines.Start(Connect());
         }
-        internal static WebSocket ws;
 
         private static IEnumerator Connect()
         {
