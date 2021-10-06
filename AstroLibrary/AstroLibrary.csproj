@@ -685,6 +685,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Blaze%27s Utils\APIS\BlazesAPIs.cs" />
+    <Compile Include="Exceptions\InvalidArrayItemCount.cs" />
     <Compile Include="Menu\QuickMenuButtons\QMImage.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMNestedButton.cs" />
     <Compile Include="Menu\QuickMenuButtons2\QMScrollMenu.cs" />

@@ -17,11 +17,12 @@ namespace AstroButtonAPI
         private Image image2;
         private Image image3;
         private Image image4;
+        private Text text;
 
-        private Action action1;
-        private Action action2;
-        private Action action3;
-        private Action action4;
+        private Action[] actions;
+        private string[] labels;
+
+        private float selectorSize = 220f;
 
         public enum States { FIRST, SECOND, THIRD, FOURTH };
         public States State
@@ -35,12 +36,20 @@ namespace AstroButtonAPI
         }
         private States _state;
 
-        public QMQuadToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, Action first, Action second, Action third, Action fourth)
+        /// <summary>
+        /// Cheetos QMQuadToggleButton, for toggling between 4 actions!
+        /// </summary>
+        /// <param name="btnMenu"></param>
+        /// <param name="btnXLocation"></param>
+        /// <param name="btnYLocation"></param>
+        /// <param name="labels"></param>
+        /// <param name="actions"></param>
+        /// <exception cref="InvalidArrayItemCount"></exception>
+        public QMQuadToggleButton(QMNestedButton btnMenu, float btnXLocation, float btnYLocation, string[] labels, Action[] actions)
         {
-            action1 = first;
-            action2 = second;
-            action3 = third;
-            action4 = fourth;
+            if (labels.Length > 4 || actions.Length > 4) throw new InvalidArrayItemCount("Actions and Labels can only contain 4 objects");
+            this.labels = labels;
+            this.actions = actions;
             btnQMLoc = btnMenu.GetMenuName();
             InitButton(btnXLocation, btnYLocation);
         }
@@ -67,44 +76,46 @@ namespace AstroButtonAPI
             goi4.transform.parent = button.transform;
             image4 = goi4.AddComponent<Image>();
 
-            State = States.FIRST;
-
             LoadSprite(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroLibrary.Resources.blank.png"));
             image1.transform.localScale = new Vector3(1f, 1f, 1f);
-            image1.transform.localPosition = new Vector3(-100f, 100f, 0f);
+            image1.transform.localPosition = new Vector3(-selectorSize/2, selectorSize/2, 0f);
 
             image2.transform.localScale = new Vector3(1f, 1f, 1f);
-            image2.transform.localPosition = new Vector3(100f, 100f, 0f);
+            image2.transform.localPosition = new Vector3(selectorSize/2, selectorSize/2, 0f);
 
             image3.transform.localScale = new Vector3(1f, 1f, 1f);
-            image3.transform.localPosition = new Vector3(100f, -100f, 0f);
+            image3.transform.localPosition = new Vector3(selectorSize/2, -selectorSize/2, 0f);
 
             image4.transform.localScale = new Vector3(1f, 1f, 1f);
-            image4.transform.localPosition = new Vector3(-100f, -100f, 0f);
+            image4.transform.localPosition = new Vector3(-selectorSize/2, -selectorSize/2, 0f);
+
+            text = button.GetComponentInChildren<Text>();
+            text.text = labels[0];
 
             button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
             button.GetComponent<Button>().onClick.AddListener(new Action(() =>
             {
                 Toggle();
+                button.GetComponent<Button>()._hasSelection_k__BackingField = false;
             }));
 
+            State = States.FIRST;
             QMButtonAPI.allQuadToggleButtons.Add(this);
         }
 
-        public void LoadSprite(byte[] data)
+        private void LoadSprite(byte[] data)
         {
             var image = button.GetComponent<Image>();
             var texture = CheetosHelpers.LoadPNG(data);
 
-            var sprite = Sprite.CreateSprite(texture, new Rect(0, 0, 200, 200), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+            var sprite = Sprite.CreateSprite(texture, new Rect(0, 0, selectorSize * 1.2f, selectorSize * 1.2f), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
             image1.sprite = sprite;
             image2.sprite = sprite;
             image3.sprite = sprite;
             image4.sprite = sprite;
-            RefreshButton();
         }
 
-        public void RefreshButton()
+        private void RefreshButton()
         {
             switch (State)
             {
@@ -113,47 +124,51 @@ namespace AstroButtonAPI
                     image2.color = Color.gray;
                     image3.color = Color.gray;
                     image4.color = Color.gray;
+                    text.text = labels[0];
                     break;
                 case States.SECOND:
                     image1.color = Color.gray;
                     image2.color = Color.green;
                     image3.color = Color.gray;
                     image4.color = Color.gray;
+                    text.text = labels[1];
                     break;
                 case States.THIRD:
                     image1.color = Color.gray;
                     image2.color = Color.gray;
                     image3.color = Color.green;
                     image4.color = Color.gray;
+                    text.text = labels[2];
                     break;
                 case States.FOURTH:
                     image1.color = Color.gray;
                     image2.color = Color.gray;
                     image3.color = Color.gray;
                     image4.color = Color.green;
+                    text.text = labels[3];
                     break;
             }
         }
 
-        public void Toggle()
+        private void Toggle()
         {
             switch (State)
             {
                 case States.FIRST:
                     State = States.SECOND;
-                    action2();
+                    actions[1]();
                     break;
                 case States.SECOND:
                     State = States.THIRD;
-                    action3();
+                    actions[2]();
                     break;
                 case States.THIRD:
                     State = States.FOURTH;
-                    action4();
+                    actions[3]();
                     break;
                 case States.FOURTH:
                     State = States.FIRST;
-                    action1();
+                    actions[0]();
                     break;
             }
                 

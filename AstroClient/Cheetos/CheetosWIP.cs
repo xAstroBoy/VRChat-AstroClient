@@ -33,7 +33,20 @@
         {
             MainButton = new QMNestedButton("ShortcutMenu", 5, 4, "<color=cyan>WIP Menu</color>", "WIP Features", null, null, null, null, true);
             MainScroller = new QMScrollMenu(MainButton);
-            var quadToggle = new QMQuadToggleButton(MainButton, 3, 0, () => ModConsole.Log("1"), () => ModConsole.Log("2"), () => ModConsole.Log("3"), () => ModConsole.Log("4"));
+
+            var actions = new Action[4];
+            var labels = new string[4];
+
+            actions[0] = () => { ModConsole.Log("Toggle State: 1"); };
+            actions[1] = () => { ModConsole.Log("Toggle State: 2"); };
+            actions[2] = () => { ModConsole.Log("Toggle State: 3"); };
+            actions[3] = () => { ModConsole.Log("Toggle State: 4"); };
+            labels[0] = "First";
+            labels[1] = "Second";
+            labels[2] = "Third";
+            labels[3] = "Fourth";
+
+            var quadToggle = new QMQuadToggleButton(MainButton, 3, 0, labels, actions);
 
             _ = new QMSingleButton(MainButton, 0, 0, "Friend Everyone", () => { DoFriendEveryone(); }, "Friend Everyone!");
             _ = new QMSingleButton(MainButton, 3, 2, "Notorious\nHome 1", () => { WorldUtils.JoinWorld("wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938#wrld_9b92ff5d-d445-4a25-a4d5-0a776b869938:42069"); }, "");
