@@ -3,12 +3,13 @@
     #region Imports
 
     using AstroLibrary.Finder;
+    using System.Collections.Generic;
 
     #endregion Imports
 
     internal class VRCPlusHider : GameEvents
     {
-        internal override void VRChat_OnUiManagerInit()
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
             if (ConfigManager.UI.RemoveVRCPlusMenu)
             {
