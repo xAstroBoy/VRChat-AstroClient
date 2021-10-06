@@ -31,17 +31,20 @@
 
 
         internal static void OnPlayerBlockedYou_Invoker(Photon.Realtime.Player player)
-        {            
+        {
+            if (!BlockedYouPlayers.Contains(player))
+            {
                 BlockedYouPlayers.Add(player);
-                Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(player));   
+                Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
+            }
         }
 
         internal static void OnPlayerUnblockedYou_Invoker(Photon.Realtime.Player player)
         {
-            Event_OnPlayerUnblockedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
             if (BlockedYouPlayers.Contains(player))
             {
                 BlockedYouPlayers.Remove(player);
+                Event_OnPlayerUnblockedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
             }
         }
 
@@ -59,8 +62,8 @@
         {
             if (MutedYouPlayers.Contains(player))
             {
-                Event_OnPlayerUnmutedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
                 MutedYouPlayers.Remove(player);
+                Event_OnPlayerUnmutedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
             }
 
         }
