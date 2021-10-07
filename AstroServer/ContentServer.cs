@@ -30,7 +30,7 @@
             serverSocket.Start();
             Console.WriteLine("Content Server Started.");
 
-            Console.WriteLine($"InjectorHash: {GetInjectorHash().GetByteArrayAsString()}");
+            Console.WriteLine($"AstroInjector Hash: {GetHash(Environment.CurrentDirectory + AstroInjectorPath).GetByteArrayAsString()}");
 
             Task task = new Task(() =>
             {
@@ -52,30 +52,38 @@
             task.Start();
         }
 
-        public static string InjectorPath = "/Client/AstroInjector.dll";
+        public static string AstroInjectorPath = "/AstroClient/AstroInjector.dll";
+        public static string RinInjectorPath = "/RinClient/RinInjector.dll";
 
         public static List<string> Libraries = new List<string>()
         {
-            "/Client/Public/Libs/AstroLibrary.dll"
+            "/AstroClient/Public/Libs/AstroLibrary.dll"
         };
 
         public static List<string> BetaLibraries = new List<string>()
         {
-            "/Client/Beta/Libs/AstroLibrary.dll"
+            "/AstroClient/Beta/Libs/AstroLibrary.dll"
         };
 
         public static List<string> Melons = new List<string>()
         {
             //"/AstroClient/DontTouchMyClient.dll",
             //"/AstroClient/AstroClientCore.dll",
-            "/Client/Public/AstroClient.dll"
+            "/AstroClient/Public/AstroClient.dll"
         };
 
-        public static List<string> BetaMelons = new List<string>()
+        public static List<string> AstroBetaMelons = new List<string>()
         {
             //"/AstroClient/DontTouchMyClient.dll",
             //"/AstroClient/AstroClientCore.dll",
-            "/Client/Beta/AstroClient.dll"
+            "/AstroClient/Beta/AstroClient.dll"
+        };
+
+        public static List<string> RinBetaMelons = new List<string>()
+        {
+            //"/AstroClient/DontTouchMyClient.dll",
+            //"/AstroClient/AstroClientCore.dll",
+            "/RinClient/Beta/RinClient.dll"
         };
 
         public static List<string> Modules = new List<string>()
@@ -83,11 +91,11 @@
             //"/AstroClient/Module/AstroTestModule.dll"
         };
 
-        private static byte[] GetInjectorHash()
+        private static byte[] GetHash(string path)
         {
             using (SHA256 mySHA256 = SHA256.Create())
             {
-                var stream = File.OpenRead(Environment.CurrentDirectory + InjectorPath);
+                var stream = File.OpenRead(path);
                 stream.Position = 0;
                 return mySHA256.ComputeHash(stream);
             }
@@ -136,17 +144,34 @@
                         var currentLibraries = new List<string>();
                         var currentModules = Modules;
 
-                        if (client.Data.IsBeta)
+                        if (client.ClientID == 0)
                         {
-                            currentMelons = BetaMelons;
-                            currentLibraries = BetaLibraries;
-                            Console.WriteLine("Content Type: Beta Tester");
+                            if (client.Data.IsBeta)
+                            {
+                                currentMelons = AstroBetaMelons;
+                                currentLibraries = BetaLibraries;
+                                Console.WriteLine("Content Type: AstroClient Beta Tester");
+                            }
+                            else
+                            {
+                                currentMelons = Melons;
+                                currentLibraries = Libraries;
+                                Console.WriteLine("Content Type: AstroClient Public");
+                            }
                         }
-                        else
+
+                        if (client.ClientID == 1)
                         {
-                            currentMelons = Melons;
-                            currentLibraries = Libraries;
-                            Console.WriteLine("Content Type: Public");
+                            if (client.Data.IsBeta)
+                            {
+                                currentMelons = RinBetaMelons;
+                                Console.WriteLine("Content Type: RinClient Beta Tester");
+                            }
+                            else
+                            {
+ 
+                                Console.WriteLine("Content Type: RinClient Public");
+                            }
                         }
 
                         foreach (var libPath in currentLibraries)
