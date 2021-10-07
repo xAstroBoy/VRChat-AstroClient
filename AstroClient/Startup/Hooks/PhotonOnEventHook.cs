@@ -55,6 +55,7 @@
                 bool log = false;
                 bool isBlocked = false; // Flag this if needed to make the event not continue
                 bool isPatched = false; // Flag this if you modify the event. (it will replace the event data)
+                bool ToEmpty = false; // Flag this if you want to modify the event with a empty key.
                 bool toReset = false; // Flag this if you need to clear the event entirely (might break something!)
                 Dictionary<byte, IntPtr> ConvertedToNormalDict = new Dictionary<byte, IntPtr>();
                 if (__0 != null)
@@ -337,18 +338,45 @@
                             }
                         }
                     }
+                    else if(ToEmpty)
+                    {
+                        var modifiedparams = new Dictionary<byte, Il2CppSystem.Object>();
+                        foreach (var key in __0.Parameters.Keys)
+                        {
+                            if (key != 245)
+                            {
+                                modifiedparams.Add(key, __0.Parameters[key]);
+                            }
+                            else
+                            {
+                                modifiedparams.Add(key, new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>());
+                            }
+                        }
+
+                        __0.Parameters.Clear();
+                        __0.Parameters = null;
+                        __0.Parameters = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
+                        foreach (var key in modifiedparams.Keys)
+                        {
+                            __0.Parameters.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), modifiedparams[key]);
+                        }
+                    }
                     string eventstring = string.Empty;
                     if(isPatched)
                     {
-                        eventstring = "PATCHED :";
+                        eventstring = "PATCHED : ";
                     }
                     else if(isBlocked)
                     {
-                        eventstring = "BLOCKED :";
+                        eventstring = "BLOCKED : ";
                     }
                     else if(toReset)
                     {
-                        eventstring = "RESET :";
+                        eventstring = "RESET : ";
+                    }
+                    else if(ToEmpty)
+                    {
+                        eventstring = "EMPTIED : ";
                     }
                     if (log && ConfigManager.General.LogEvents && __0.Parameters != null)
                     {
