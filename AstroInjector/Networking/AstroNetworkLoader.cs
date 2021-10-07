@@ -4,6 +4,7 @@
 
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
@@ -54,7 +55,7 @@
 
             if (packetData.NetworkEventID == PacketServerType.CONNECTED)
             {
-                Client.Send(new PacketData(PacketClientType.AUTH, KeyManager.AuthKey));
+                Client.Send(new PacketData(PacketClientType.CONNECTED, JsonConvert.SerializeObject(KeyManager.Data)));
             }
 
             if (packetData.NetworkEventID == PacketServerType.DISCONNECT)

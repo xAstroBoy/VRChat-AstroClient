@@ -169,7 +169,7 @@
                             }
                             else
                             {
- 
+                                currentMelons = RinBetaMelons;
                                 Console.WriteLine("Content Type: RinClient Public");
                             }
                         }

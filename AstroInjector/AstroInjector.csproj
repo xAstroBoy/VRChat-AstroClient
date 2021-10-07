@@ -94,6 +94,9 @@
     <Compile Include="..\AstroNetworkingLibrary\NetworkingExtensions.cs">
       <Link>Networking\NetworkingExtensions.cs</Link>
     </Compile>
+    <Compile Include="..\AstroNetworkingLibrary\Serializable\AuthData.cs">
+      <Link>Networking\Serializable\AuthData.cs</Link>
+    </Compile>
     <Compile Include="..\AstroNetworkingLibrary\Serializable\PacketData.cs">
       <Link>Networking\Serializable\PacketData.cs</Link>
     </Compile>
