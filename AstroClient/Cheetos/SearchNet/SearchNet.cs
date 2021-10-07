@@ -137,7 +137,8 @@
 							vrchat_SearchNet.worldname,
 							" [",
 							vrchat_SearchNet.worldprivacy,
-							"]\nPress Del to Join!"
+							"]\n,",
+                            vrchat_SearchNet.worldid,
 						}));
 						SearchNet.CurrentForceJoin = vrchat_SearchNet.worldid;
 						SearchNet.CurrentForceJoinUsername = vrchat_SearchNet.Username;
@@ -149,7 +150,7 @@
 						{
 							"[SearchNet] ",
 							vrchat_SearchNet.Username,
-							" Leaved\n",
+							" Left\n",
 							vrchat_SearchNet.worldname,
 							" [",
 							vrchat_SearchNet.worldprivacy,
