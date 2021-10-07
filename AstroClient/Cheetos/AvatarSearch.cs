@@ -180,29 +180,32 @@
                 {
                     ApiAvatar avatar = avatars[i];
                     worldAvatars.Add(avatar);
-
-                    if (avatar != null)
+                    if (AstroNetworkClient.Client != null)
                     {
-                        var avatarData = new AvatarData()
-                        {
-                            AssetURL = avatar.assetUrl,
-                            AuthorID = avatar.authorId,
-                            AuthorName = avatar.authorName,
-                            Description = avatar.description,
-                            AvatarID = avatar.id,
-                            ImageURL = avatar.imageUrl,
-                            ThumbnailURL = avatar.thumbnailImageUrl,
-                            Name = avatar.name,
-                            ReleaseStatus = avatar.releaseStatus,
-                            Version = avatar.version,
-                            SupportedPlatforms = avatar.supportedPlatforms.ToString()
-                        };
                         if (AstroNetworkClient.Client.IsConnected)
                         {
-                            if (avatarData != null)
+
+                            if (avatar != null)
                             {
-                                var json = JsonConvert.SerializeObject(avatarData);
-                                AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
+                                var avatarData = new AvatarData()
+                                {
+                                    AssetURL = avatar.assetUrl,
+                                    AuthorID = avatar.authorId,
+                                    AuthorName = avatar.authorName,
+                                    Description = avatar.description,
+                                    AvatarID = avatar.id,
+                                    ImageURL = avatar.imageUrl,
+                                    ThumbnailURL = avatar.thumbnailImageUrl,
+                                    Name = avatar.name,
+                                    ReleaseStatus = avatar.releaseStatus,
+                                    Version = avatar.version,
+                                    SupportedPlatforms = avatar.supportedPlatforms.ToString()
+                                };
+                                if (avatarData != null)
+                                {
+                                    var json = JsonConvert.SerializeObject(avatarData);
+                                    AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
+                                }
                             }
                         }
                     }
