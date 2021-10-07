@@ -144,7 +144,7 @@
                         var currentLibraries = new List<string>();
                         var currentModules = Modules;
 
-                        if (client.ClientID == 0)
+                        if (client.ClientType == 0)
                         {
                             if (client.Data.IsBeta)
                             {
@@ -160,7 +160,7 @@
                             }
                         }
 
-                        if (client.ClientID == 1)
+                        if (client.ClientType == 1)
                         {
                             if (client.Data.IsBeta)
                             {
