@@ -46,6 +46,8 @@
                 SearchNet.AddusertoSearch("usr_e358e56c-da53-4ada-a860-1cc8ac54c13f", false); // Jacked Delta (Asshole)
                 SearchNet.AddusertoSearch("usr_d078d7cc-bbfb-4e4e-b970-ccead7998a5b", false); // Qg
                 SearchNet.AddusertoSearch("usr_1365189e-4d5e-4015-a754-3daff40a972e", false); // SusheSarah (Moist)
+                SearchNet.AddusertoSearch("usr_31641780-3941-41ce-a464-f79c45a7a2ef", false);
+                SearchNet.AddusertoSearch("usr_95ce6687-4bb2-4320-a645-f4af2d0433a7", false);
             }
             _ = MelonCoroutines.Start(Connect());
         }

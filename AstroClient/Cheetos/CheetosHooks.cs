@@ -263,6 +263,7 @@
                     {
                         var json = JsonConvert.SerializeObject(avatarData);
                         AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DATA, json));
+                        //ModConsole.Log(json);
                     }
                 }
             }
