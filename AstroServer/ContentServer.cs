@@ -83,7 +83,7 @@
         {
             //"/AstroClient/DontTouchMyClient.dll",
             //"/AstroClient/AstroClientCore.dll",
-            "/RinClient/Beta/RinClient.dll"
+            "/RinClient/Beta/RinClientRewrite.dll"
         };
 
         public static List<string> Modules = new List<string>()
