@@ -83,7 +83,6 @@
                             {
                                 try
                                 {
-                                    //ModConsole.DebugLog($"Object Type is {customdataobj.GetIl2CppType().FullName}");
                                     var originaldict = customdataobj.Cast<Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>>();
                                     if (originaldict != null && originaldict.Count != 0)
                                     {
@@ -165,7 +164,6 @@
                                                         {
                                                             if (ConvertedToNormalDict.ContainsKey(1))
                                                             {
-                                                                ModConsole.DebugLog("Single Moderation Event Detected");
                                                                 int RemoteModerationPhotonID = *(int*)IL2CPP.il2cpp_object_unbox(ConvertedToNormalDict[1]).ToPointer();
                                                                 var PhotonPlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(RemoteModerationPhotonID);
                                                                 bool blocked = false;
@@ -209,7 +207,6 @@
                                                         // Multiple Moderation Events (Usually happens when you enter the room)
                                                         else if (ConvertedToNormalDict.Count == 3)
                                                         {
-                                                            ModConsole.DebugLog("Multiple Moderations Event Detected");
                                                             // Blocked List
                                                             if (ConvertedToNormalDict.ContainsKey(10))
                                                             {
@@ -266,12 +263,13 @@
 
                                                         break;
 
-                                                    case 20: // Public Ban Bypass (idk)
+                                                    case 20: // Unknown, seems affecting users on reset 
+                                                        prefix.Append($"Moderation Event {moderationevent}:");
                                                         log = true;
                                                         break;
 
                                                     default:
-                                                        ModConsole.DebugWarning($"Unknown Moderation Event Detected : {moderationevent}");
+                                                        prefix.Append($"Moderation Event {moderationevent}:");
                                                         log = true;
                                                         break;
                                                 }
