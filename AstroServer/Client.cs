@@ -7,7 +7,7 @@
     {
         public string Name = string.Empty;
 
-        public byte ClientType;
+        public int ClientType;
 
         public string Key = string.Empty;
 

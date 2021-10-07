@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31515.178
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31717.71
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroClient", "AstroClient\AstroClient.csproj", "{6506F83F-9665-4EC9-9D7F-6F88E1652BBA}"
 EndProject
@@ -41,6 +41,7 @@ Global
 		{6506F83F-9665-4EC9-9D7F-6F88E1652BBA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{06B82A0F-106E-42DA-9614-BB95F2CB2741}.Debug_Offline|Any CPU.ActiveCfg = Debug|Any CPU
 		{06B82A0F-106E-42DA-9614-BB95F2CB2741}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06B82A0F-106E-42DA-9614-BB95F2CB2741}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06B82A0F-106E-42DA-9614-BB95F2CB2741}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06B82A0F-106E-42DA-9614-BB95F2CB2741}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F41EC84C-6465-4449-B2F6-79535171265B}.Debug_Offline|Any CPU.ActiveCfg = Release|Any CPU

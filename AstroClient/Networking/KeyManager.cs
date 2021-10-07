@@ -14,9 +14,9 @@
 
         internal static void ReadKey()
         {
-            string keyPath = $@"{Environment.CurrentDirectory}\AstroClient\key.txt";
-            string keyPathBad = $@"{Environment.CurrentDirectory}\AstroClient\key.txt.txt";
-            string keyPathBad2 = $@"{Environment.CurrentDirectory}\AstroClient\key";
+            string keyPath = $@"{Environment.CurrentDirectory}\CheetoAuth\key.txt";
+            string keyPathBad = $@"{Environment.CurrentDirectory}\CheetoAuth\key.txt.txt";
+            string keyPathBad2 = $@"{Environment.CurrentDirectory}\CheetoAuth\key";
 
             if (File.Exists(keyPathBad))
             {
@@ -30,7 +30,7 @@
 
             if (File.Exists(keyPath))
             {
-                Data = new AuthData(1, File.ReadAllText(keyPath));
+                Data = new AuthData(0, File.ReadAllText(keyPath));
             }
             else
             {

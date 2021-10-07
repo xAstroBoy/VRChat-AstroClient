@@ -114,6 +114,14 @@
                                 client.Send(new PacketData(PacketServerType.ENABLE_UDON));
                             }
 
+                            if (client.ClientType == 0)
+                            {
+                                Console.WriteLine("Connected as AstroClient");
+                            } else if (client.ClientType == 1)
+                            {
+                                Console.WriteLine("Connected as RinClient");
+                            }
+
                             AstroBot.SendLoggedInLog(client);
                         }
                         else
