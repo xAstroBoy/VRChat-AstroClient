@@ -160,46 +160,63 @@
                                                         log = true;
                                                         #region Blocking and Muting Events.
 
+                                                        byte photonid = 1;
+                                                        byte blockbyte = 10;
+                                                        byte mutebyte = 11;
+                                                        
                                                         // Single Moderation Event (one player)
                                                         if (ConvertedToNormalDict.Count == 4)
                                                         {
-                                                            if (ConvertedToNormalDict.ContainsKey(1))
+                                                            if (ConvertedToNormalDict.ContainsKey(photonid))
                                                             {
-                                                                int RemoteModerationPhotonID = *(int*)IL2CPP.il2cpp_object_unbox(ConvertedToNormalDict[1]).ToPointer();
+                                                                int RemoteModerationPhotonID = *(int*)IL2CPP.il2cpp_object_unbox(ConvertedToNormalDict[photonid]).ToPointer();
                                                                 var PhotonPlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(RemoteModerationPhotonID);
-                                                                bool blocked = false;
-                                                                bool muted = false;
-                                                                if (ConvertedToNormalDict.ContainsKey(10))
+                                                                if (ConvertedToNormalDict.ContainsKey(blockbyte))
                                                                 {
-                                                                    IntPtr BlockedPtr = ConvertedToNormalDict[10];
+                                                                    IntPtr BlockedPtr = ConvertedToNormalDict[blockbyte];
                                                                     if (BlockedPtr != IntPtr.Zero)
                                                                     {
-                                                                        blocked = *(bool*)IL2CPP.il2cpp_object_unbox(BlockedPtr).ToPointer();
-                                                                        if (blocked)
+                                                                        bool blocked = *(bool*)IL2CPP.il2cpp_object_unbox(BlockedPtr).ToPointer();
+                                                                        switch (blocked)
                                                                         {
-                                                                            PhotonModerationHandler.OnPlayerBlockedYou_Invoker(PhotonPlayer);
-                                                                            ConvertedToNormalDict[10] = Il2CppConverter.Generate_Il2CPPObject(false).Pointer;
-                                                                            isPatched = true;
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            PhotonModerationHandler.OnPlayerUnblockedYou_Invoker(PhotonPlayer);
+                                                                            case true:
+                                                                                {
+                                                                                    PhotonModerationHandler.OnPlayerBlockedYou_Invoker(PhotonPlayer);
+                                                                                    ConvertedToNormalDict[blockbyte] = Il2CppConverter.Generate_Il2CPPObject(false).Pointer;
+                                                                                    isPatched = true;
+                                                                                    break;
+                                                                                }
+                                                                            case false:
+                                                                                {
+
+                                                                                    PhotonModerationHandler.OnPlayerUnblockedYou_Invoker(PhotonPlayer);
+                                                                                    break;
+                                                                                }
+                                                                            default:
+                                                                                break;
                                                                         }
                                                                     }
                                                                 }
-                                                                if (ConvertedToNormalDict.ContainsKey(11))
+                                                                if (ConvertedToNormalDict.ContainsKey(mutebyte))
                                                                 {
-                                                                    IntPtr MutedPtr = ConvertedToNormalDict[11];
+                                                                    IntPtr MutedPtr = ConvertedToNormalDict[mutebyte];
                                                                     if (MutedPtr != IntPtr.Zero)
                                                                     {
-                                                                        muted = *(bool*)IL2CPP.il2cpp_object_unbox(MutedPtr).ToPointer();
-                                                                        if (muted)
+                                                                        bool muted = *(bool*)IL2CPP.il2cpp_object_unbox(MutedPtr).ToPointer();
+                                                                        switch (muted)
                                                                         {
-                                                                            PhotonModerationHandler.OnPlayerMutedYou_Invoker(PhotonPlayer);
-                                                                        }
-                                                                        else
-                                                                        {
-                                                                            PhotonModerationHandler.OnPlayerUnmutedYou_Invoker(PhotonPlayer);
+                                                                            case true:
+                                                                                {
+                                                                                    PhotonModerationHandler.OnPlayerMutedYou_Invoker(PhotonPlayer);
+                                                                                    break;
+                                                                                }
+                                                                            case false:
+                                                                                {
+                                                                                    PhotonModerationHandler.OnPlayerUnmutedYou_Invoker(PhotonPlayer);
+                                                                                    break;
+                                                                                }
+                                                                            default:
+                                                                                break;
                                                                         }
                                                                     }
                                                                 }
@@ -209,9 +226,9 @@
                                                         else if (ConvertedToNormalDict.Count == 3)
                                                         {
                                                             // Blocked List
-                                                            if (ConvertedToNormalDict.ContainsKey(10))
+                                                            if (ConvertedToNormalDict.ContainsKey(blockbyte))
                                                             {
-                                                                IntPtr blockedlistptr = ConvertedToNormalDict[10];
+                                                                IntPtr blockedlistptr = ConvertedToNormalDict[blockbyte];
                                                                 if (blockedlistptr != IntPtr.Zero)
                                                                 {
                                                                     var blockedlistObject = new Il2CppSystem.Object(blockedlistptr);
@@ -225,9 +242,11 @@
                                                                                 int count = BlockedPlayersArray.Count;
                                                                                 for (int i = 0; i < count; i++)
                                                                                 {
+                                                                                    var blockedplayers = Utils.LoadBalancingPeer.GetPhotonPlayer(BlockedPlayersArray[i]);
+                                                                                    PhotonModerationHandler.OnPlayerBlockedYou_Invoker(blockedplayers);
                                                                                     BlockedPlayersArray[i] = -1;
                                                                                 }
-                                                                                ConvertedToNormalDict[10] = BlockedPlayersArray.Pointer;
+                                                                                ConvertedToNormalDict[blockbyte] = BlockedPlayersArray.Pointer;
                                                                                 isPatched = true;
                                                                             }
                                                                         }
@@ -235,9 +254,9 @@
                                                                 }
                                                             }
                                                             // Muted List
-                                                            if (ConvertedToNormalDict.ContainsKey(11))
+                                                            if (ConvertedToNormalDict.ContainsKey(mutebyte))
                                                             {
-                                                                IntPtr Mutedlistptr = ConvertedToNormalDict[11];
+                                                                IntPtr Mutedlistptr = ConvertedToNormalDict[mutebyte];
                                                                 if (Mutedlistptr != IntPtr.Zero)
                                                                 {
                                                                     var MutedlistObject = new Il2CppSystem.Object(Mutedlistptr);
@@ -260,6 +279,8 @@
                                                                 }
                                                             }
                                                         }
+
+
                                                         #endregion Blocking and Muting Events.
 
                                                         break;

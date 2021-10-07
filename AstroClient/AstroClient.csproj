@@ -197,6 +197,7 @@
     <Compile Include="Spawnables\Flashlight\Flashlight.cs" />
     <Compile Include="Startup\EventArgs\BoolEventsArgs.cs" />
     <Compile Include="Startup\EventArgs\ColorEventArgs.cs" />
+    <Compile Include="Startup\EventArgs\APIUserEventArgs.cs" />
     <Compile Include="Startup\EventArgs\ScreenEventArgs.cs" />
     <Compile Include="Startup\Hooks\PhotonOnEventHook.cs" />
     <Compile Include="Startup\Hooks\QuickMenuHooks.cs" />

@@ -32,39 +32,63 @@
 
         internal static void OnPlayerBlockedYou_Invoker(Photon.Realtime.Player player)
         {
-            if (!BlockedYouPlayers.Contains(player))
+            if (player != null)
             {
-                BlockedYouPlayers.Add(player);
-                Event_OnPlayerBlockedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
+                var photonuserid = player.GetUserID();
+
+
+                if (!BlockedYouPlayers.Contains(photonuserid))
+                {
+                    BlockedYouPlayers.Add(photonuserid);
+                    Event_OnPlayerBlockedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                }
             }
+
         }
 
         internal static void OnPlayerUnblockedYou_Invoker(Photon.Realtime.Player player)
         {
-            if (BlockedYouPlayers.Contains(player))
+            if (player != null)
             {
-                BlockedYouPlayers.Remove(player);
-                Event_OnPlayerUnblockedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
+                var photonuserid = player.GetUserID();
+
+                if (BlockedYouPlayers.Contains(photonuserid))
+                {
+                    BlockedYouPlayers.Remove(photonuserid);
+                    Event_OnPlayerUnblockedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                }
             }
+
         }
 
         internal static void OnPlayerMutedYou_Invoker(Photon.Realtime.Player player)
         {
-            if (!MutedYouPlayers.Contains(player))
+            if (player != null)
             {
-                MutedYouPlayers.Add(player);
-                Event_OnPlayerMutedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
+                var photonuserid = player.GetUserID();
+
+                if (!MutedYouPlayers.Contains(photonuserid))
+                {
+                    MutedYouPlayers.Add(photonuserid);
+                    Event_OnPlayerMutedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                }
             }
 
         }
 
         internal static void OnPlayerUnmutedYou_Invoker(Photon.Realtime.Player player)
         {
-            if (MutedYouPlayers.Contains(player))
+            if (player != null)
             {
-                MutedYouPlayers.Remove(player);
-                Event_OnPlayerUnmutedYou.SafetyRaise(new PhotonPlayerEventArgs(player));
+                var photonuserid = player.GetUserID();
+
+                if (MutedYouPlayers.Contains(photonuserid))
+                {
+                    MutedYouPlayers.Remove(photonuserid);
+                    Event_OnPlayerUnmutedYou?.SafetyRaise(new PhotonPlayerEventArgs(player));
+                }
             }
+
 
         }
 
@@ -77,20 +101,21 @@
 
         internal override void OnPhotonLeft(Player player)
         {
-            if (BlockedYouPlayers.Contains(player))
+            var photonuserid = player.GetUserID();
+            if (BlockedYouPlayers.Contains(photonuserid))
             {
-                BlockedYouPlayers.Remove(player);
+                BlockedYouPlayers.Remove(photonuserid);
             }
-            if (MutedYouPlayers.Contains(player))
+            if (MutedYouPlayers.Contains(photonuserid))
             {
-                MutedYouPlayers.Remove(player);
+                MutedYouPlayers.Remove(photonuserid);
             }
         }
 
 
-        internal static List<Player> BlockedYouPlayers { get; private set; } = new List<Player>();
+        internal static List<string> BlockedYouPlayers { get; private set; } = new List<string>();
 
-        internal static List<Player> MutedYouPlayers { get; private set; } = new List<Player>();
+        internal static List<string> MutedYouPlayers { get; private set; } = new List<string>();
 
         #endregion PlayerModerations
 

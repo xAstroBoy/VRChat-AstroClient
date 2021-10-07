@@ -1,4 +1,4 @@
-﻿namespace AstroClient.BetterPatch
+﻿namespace AstroClient
 {
     #region Imports
 
@@ -17,7 +17,6 @@
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;
-    using Patch = AstroClient.Patch;
     #endregion Imports
 
     internal class SerializerPatches : GameEvents
