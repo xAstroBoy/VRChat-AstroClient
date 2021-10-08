@@ -2,25 +2,18 @@
 {
     using AstroClient.Moderation;
     using AstroLibrary.Console;
-    using AstroLibrary.Utility;
-    using AstroClient.Features.Player.Movement.Exploit;
     using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
     using ExitGames.Client.Photon;
     using Harmony;
-    using MelonLoader;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Reflection;
-    using UnityEngine;
-    using VRC;
-    using VRC.SDKBase;
-    using Patch = AstroClient.Patch;
     using Photon.Realtime;
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
     using System.Text;
     using UnhollowerBaseLib;
     using UnhollowerRuntimeLib;
+    using Patch = AstroClient.Patch;
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class PhotonOnEventHook : GameEvents
@@ -42,10 +35,8 @@
             {
                 ModConsole.DebugLog("Hooking Photon OnEvent");
                 new Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)), GetPatch(nameof(OnEventPatch)));
-
             }
         }
-
 
         private struct EventCode
         {
@@ -77,15 +68,13 @@
             internal const byte Joining_World = 255;
         }
 
-
-
         private struct ModerationCode
         {
             internal const byte Warning = 2;
             internal const byte Mod_Mute = 8;
             internal const byte Friend_State = 10;
             internal const byte VoteKick = 13;
-            internal const byte Unknown = 20;  // Unknown, seems affecting users on reset 
+            internal const byte Unknown = 20;  // Unknown, seems affecting users on reset
             internal const byte Block_Or_Mute = 21;
         }
 
@@ -101,7 +90,6 @@
                 case ModerationCode.Block_Or_Mute: return "Block Or Mute";
                 default:
                     return null;
-
             }
         }
 
@@ -137,20 +125,18 @@
                 case EventCode.Joining_World: return "Joining World";
                 default:
                     return null;
-
             }
         }
-
 
         private static bool EventCodeToLog(byte code)
         {
             switch (code)
             {
                 case EventCode.OpRemoveCache_etc: return false;
-                case EventCode.USpeaker_Voice_Data: return true;
+                case EventCode.USpeaker_Voice_Data: return false;
                 case EventCode.Disconnect_Message: return false;
                 case EventCode.Cached_Events: return false;
-                case EventCode.Master_allowing_player_to_join: return false;
+                case EventCode.Master_allowing_player_to_join: return true;
                 case EventCode.RPC: return false;
                 case EventCode.Motion: return false;
                 case EventCode.interest: return false;
@@ -174,11 +160,8 @@
                 case EventCode.Joining_World: return false;
                 default:
                     return true;
-
             }
         }
-
-
 
         private unsafe static bool OnEventPatch(ref EventData __0)
         {
@@ -189,7 +172,7 @@
 
             try
             {
-                Dictionary<byte, IntPtr> ConvertedToNormalDict = new Dictionary<byte, IntPtr>();
+                Dictionary<byte, Il2CppSystem.Object> ConvertedToNormalDict = new Dictionary<byte, Il2CppSystem.Object>();
                 if (__0 != null)
                 {
                     var PhotonSender = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
@@ -226,10 +209,9 @@
                                     var originaldict = customdataobj.Cast<Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>>();
                                     if (originaldict != null && originaldict.Count != 0)
                                     {
-
                                         foreach (var key in originaldict.Keys)
                                         {
-                                            ConvertedToNormalDict.Add(key, originaldict[key].Pointer);
+                                            ConvertedToNormalDict.Add(key, originaldict[key]);
                                         }
                                     }
                                 }
@@ -239,13 +221,12 @@
                                     ModConsole.DebugErrorExc(e);
                                 }
                             }
-                            if(customdataobj == null)
+                            if (customdataobj == null)
                             {
                                 return true; // There's no need to continue to read and translate.
                             }
                             if (ConvertedToNormalDict != null && ConvertedToNormalDict.Count != 0)
                             {
-                                 
                                 switch (__0.Code)
                                 {
                                     //case EventCode.USpeaker_Voice_Data:// Voice Data TODO : (Parrot Mode)
@@ -266,14 +247,16 @@
                                     //    break;
 
                                     case EventCode.Moderations: // Moderations
+
                                         #region Moderation Handler
+
                                         try
                                         {
                                             if (ConvertedToNormalDict.ContainsKey(0))
                                             {
-                                                byte moderationevent = *(byte*)IL2CPP.il2cpp_object_unbox(ConvertedToNormalDict[0]).ToPointer();
+                                                byte moderationevent = ConvertedToNormalDict[0].Unpack_Byte().Value;
                                                 var moderationeventname = TranslateModerationEvent(moderationevent);
-                                                if(moderationeventname.IsNotNullOrEmptyOrWhiteSpace())
+                                                if (moderationeventname.IsNotNullOrEmptyOrWhiteSpace())
                                                 {
                                                     prefix.Append($"{moderationeventname} ");
                                                 }
@@ -291,98 +274,87 @@
                                                     case ModerationCode.VoteKick: // VoteKick
                                                         break;
 
-                                                    case(byte) ModerationCode.Block_Or_Mute: 
+                                                    case (byte)ModerationCode.Block_Or_Mute:
+
                                                         #region Blocking and Muting Events.
 
                                                         byte photonid = 1;
                                                         byte blockbyte = 10;
                                                         byte mutebyte = 11;
-                                                        
+
                                                         // Single Moderation Event (one player)
                                                         if (ConvertedToNormalDict.Count == 4)
                                                         {
                                                             if (ConvertedToNormalDict.ContainsKey(photonid))
                                                             {
-                                                                int RemoteModerationPhotonID = *(int*)IL2CPP.il2cpp_object_unbox(ConvertedToNormalDict[photonid]).ToPointer();
+                                                                int RemoteModerationPhotonID = ConvertedToNormalDict[photonid].Unpack_Int32().Value;
                                                                 var PhotonPlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(RemoteModerationPhotonID);
                                                                 if (ConvertedToNormalDict.ContainsKey(blockbyte))
                                                                 {
-                                                                    IntPtr BlockedPtr = ConvertedToNormalDict[blockbyte];
-                                                                    if (BlockedPtr != IntPtr.Zero)
+                                                                    bool blocked = ConvertedToNormalDict[blockbyte].Unpack_Boolean().Value;
+                                                                    switch (blocked)
                                                                     {
-                                                                        bool blocked = *(bool*)IL2CPP.il2cpp_object_unbox(BlockedPtr).ToPointer();
-                                                                        switch (blocked)
-                                                                        {
-                                                                            case true:
-                                                                                {
-                                                                                    PhotonModerationHandler.OnPlayerBlockedYou_Invoker(PhotonPlayer);
-                                                                                    ConvertedToNormalDict[blockbyte] = Il2CppConverter.Generate_Il2CPPObject(false).Pointer;
-                                                                                    isPatched = true;
-                                                                                    break;
-                                                                                }
-                                                                            case false:
-                                                                                {
-
-                                                                                    PhotonModerationHandler.OnPlayerUnblockedYou_Invoker(PhotonPlayer);
-                                                                                    break;
-                                                                                }
-                                                                            default:
+                                                                        case true:
+                                                                            {
+                                                                                PhotonModerationHandler.OnPlayerBlockedYou_Invoker(PhotonPlayer);
+                                                                                ConvertedToNormalDict[blockbyte] = Il2CppConverter.Generate_Il2CPPObject(false);
+                                                                                isPatched = true;
                                                                                 break;
-                                                                        }
+                                                                            }
+                                                                        case false:
+                                                                            {
+                                                                                PhotonModerationHandler.OnPlayerUnblockedYou_Invoker(PhotonPlayer);
+                                                                                break;
+                                                                            }
+                                                                        default:
+                                                                            break;
                                                                     }
                                                                 }
                                                                 if (ConvertedToNormalDict.ContainsKey(mutebyte))
                                                                 {
-                                                                    IntPtr MutedPtr = ConvertedToNormalDict[mutebyte];
-                                                                    if (MutedPtr != IntPtr.Zero)
+                                                                    bool muted = ConvertedToNormalDict[mutebyte].Unpack_Boolean().Value;
+                                                                    switch (muted)
                                                                     {
-                                                                        bool muted = *(bool*)IL2CPP.il2cpp_object_unbox(MutedPtr).ToPointer();
-                                                                        switch (muted)
-                                                                        {
-                                                                            case true:
-                                                                                {
-                                                                                    PhotonModerationHandler.OnPlayerMutedYou_Invoker(PhotonPlayer);
-                                                                                    break;
-                                                                                }
-                                                                            case false:
-                                                                                {
-                                                                                    PhotonModerationHandler.OnPlayerUnmutedYou_Invoker(PhotonPlayer);
-                                                                                    break;
-                                                                                }
-                                                                            default:
+                                                                        case true:
+                                                                            {
+                                                                                PhotonModerationHandler.OnPlayerMutedYou_Invoker(PhotonPlayer);
                                                                                 break;
-                                                                        }
+                                                                            }
+                                                                        case false:
+                                                                            {
+                                                                                PhotonModerationHandler.OnPlayerUnmutedYou_Invoker(PhotonPlayer);
+                                                                                break;
+                                                                            }
+                                                                        default:
+                                                                            break;
                                                                     }
                                                                 }
                                                             }
                                                         }
+
                                                         // Multiple Moderation Events (Usually happens when you enter the room)
                                                         else if (ConvertedToNormalDict.Count == 3)
                                                         {
                                                             // Blocked List
                                                             if (ConvertedToNormalDict.ContainsKey(blockbyte))
                                                             {
-                                                                IntPtr blockedlistptr = ConvertedToNormalDict[blockbyte];
-                                                                if (blockedlistptr != IntPtr.Zero)
+                                                                var blockedlistObject = ConvertedToNormalDict[blockbyte];
+                                                                if (blockedlistObject != null)
                                                                 {
-                                                                    var blockedlistObject = new Il2CppSystem.Object(blockedlistptr);
-                                                                    if (blockedlistObject != null)
+                                                                    Il2CppStructArray<int> BlockedPlayersArray = blockedlistObject.Cast<Il2CppStructArray<int>>();
+                                                                    if (BlockedPlayersArray != null)
                                                                     {
-                                                                        Il2CppStructArray<int> BlockedPlayersArray = blockedlistObject.Cast<Il2CppStructArray<int>>();
-                                                                        if (BlockedPlayersArray != null)
+                                                                        if (BlockedPlayersArray.Count != 0)
                                                                         {
-                                                                            if (BlockedPlayersArray.Count != 0)
+                                                                            int count = BlockedPlayersArray.Count;
+                                                                            for (int i = 0; i < count; i++)
                                                                             {
-                                                                                int count = BlockedPlayersArray.Count;
-                                                                                for (int i = 0; i < count; i++)
-                                                                                {
-                                                                                    var blockedplayers = Utils.LoadBalancingPeer.GetPhotonPlayer(BlockedPlayersArray[i]);
-                                                                                    PhotonModerationHandler.OnPlayerBlockedYou_Invoker(blockedplayers);
-                                                                                    BlockedPlayersArray[i] = -1;
-                                                                                }
-                                                                                ConvertedToNormalDict[blockbyte] = BlockedPlayersArray.Pointer;
-                                                                                isPatched = true;
+                                                                                var blockedplayers = Utils.LoadBalancingPeer.GetPhotonPlayer(BlockedPlayersArray[i]);
+                                                                                PhotonModerationHandler.OnPlayerBlockedYou_Invoker(blockedplayers);
+                                                                                BlockedPlayersArray[i] = -1;
                                                                             }
+                                                                            ConvertedToNormalDict[blockbyte] = new Il2CppSystem.Object(BlockedPlayersArray.Pointer);
+                                                                            isPatched = true;
                                                                         }
                                                                     }
                                                                 }
@@ -390,23 +362,19 @@
                                                             // Muted List
                                                             if (ConvertedToNormalDict.ContainsKey(mutebyte))
                                                             {
-                                                                IntPtr Mutedlistptr = ConvertedToNormalDict[mutebyte];
-                                                                if (Mutedlistptr != IntPtr.Zero)
+                                                                var MutedlistObject = ConvertedToNormalDict[mutebyte];
+                                                                if (MutedlistObject != null)
                                                                 {
-                                                                    var MutedlistObject = new Il2CppSystem.Object(Mutedlistptr);
-                                                                    if (MutedlistObject != null)
+                                                                    Il2CppStructArray<int> MutePlayersArray = MutedlistObject.Cast<Il2CppStructArray<int>>();
+                                                                    if (MutePlayersArray != null)
                                                                     {
-                                                                        Il2CppStructArray<int> MutePlayersArray = MutedlistObject.Cast<Il2CppStructArray<int>>();
-                                                                        if (MutePlayersArray != null)
+                                                                        if (MutePlayersArray.Count != 0)
                                                                         {
-                                                                            if (MutePlayersArray.Count != 0)
+                                                                            int count = MutePlayersArray.Count;
+                                                                            for (int i = 0; i < count; i++)
                                                                             {
-                                                                                int count = MutePlayersArray.Count;
-                                                                                for (int i = 0; i < count; i++)
-                                                                                {
-                                                                                    var MutePlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(MutePlayersArray[i]);
-                                                                                    PhotonModerationHandler.OnPlayerMutedYou_Invoker(MutePlayer);
-                                                                                }
+                                                                                var MutePlayer = Utils.LoadBalancingPeer.GetPhotonPlayer(MutePlayersArray[i]);
+                                                                                PhotonModerationHandler.OnPlayerMutedYou_Invoker(MutePlayer);
                                                                             }
                                                                         }
                                                                     }
@@ -414,12 +382,11 @@
                                                             }
                                                         }
 
-
                                                         #endregion Blocking and Muting Events.
 
                                                         break;
 
-                                                    case (byte) ModerationCode.Unknown: // Unknown, seems affecting users on reset 
+                                                    case (byte)ModerationCode.Unknown: // Unknown, seems affecting users on reset
                                                         break;
 
                                                     default:
@@ -432,9 +399,10 @@
                                         {
                                             ModConsole.DebugError("Exception in OnEvent Moderation Handler");
                                             ModConsole.ErrorExc(e);
-
                                         }
+
                                         #endregion Moderation Handler
+
                                         break;
 
                                     //case EventCode.Destroy: // Destroy
@@ -463,7 +431,7 @@
                             var ModifiedEvent = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
                             foreach (var key in ConvertedToNormalDict.Keys)
                             {
-                                ModifiedEvent.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), new Il2CppSystem.Object(ConvertedToNormalDict[key]));
+                                ModifiedEvent.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), ConvertedToNormalDict[key]);
                             }
 
                             var modifiedparams = new Dictionary<byte, Il2CppSystem.Object>();
@@ -488,7 +456,7 @@
                             }
                         }
                     }
-                    else if(ToEmpty)
+                    else if (ToEmpty)
                     {
                         var modifiedparams = new Dictionary<byte, Il2CppSystem.Object>();
                         foreach (var key in __0.Parameters.Keys)
@@ -512,19 +480,19 @@
                         }
                     }
                     string eventstring = string.Empty;
-                    if(isPatched)
+                    if (isPatched)
                     {
                         eventstring = "PATCHED : ";
                     }
-                    else if(isBlocked)
+                    else if (isBlocked)
                     {
                         eventstring = "BLOCKED : ";
                     }
-                    else if(toReset)
+                    else if (toReset)
                     {
                         eventstring = "RESET : ";
                     }
-                    else if(ToEmpty)
+                    else if (ToEmpty)
                     {
                         eventstring = "EMPTIED : ";
                     }
@@ -541,7 +509,7 @@
                 }
                 else
                 {
-                    if(toReset)
+                    if (toReset)
                     {
                         __0.Reset();
                     }
