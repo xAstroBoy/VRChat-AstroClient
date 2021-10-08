@@ -43,6 +43,15 @@
                 {
                     SellTool = five.DisassembleUdonBehaviour();
                 }
+                var revive = UdonSearch.FindUdonEvent("HealthController", "Revive");
+                if(revive != null)
+                {
+                    ReviveEvent = revive;
+                }
+                else
+                {
+                    ModConsole.Warning("HealthController Not Found, unable to create Revive Tool!");
+                }
                 var ListBehaviours = UdonSearch.FindAllUdonEvents("NearbyCollider", "_start");
                 if (ListBehaviours != null)
                 {
@@ -51,8 +60,17 @@
                         NearbyColliders.Add(item.UdonBehaviour.DisassembleUdonBehaviour());
                     }
                 }
-                RedWrench  = GameObjectFinder.FindRootSceneObject("UpgradeTool0");
-                ReviveEvent = UdonSearch.FindUdonEvent("HealthController", "Revive");
+                var wrench = GameObjectFinder.Find("UpgradeTool0");
+                if(wrench != null)
+                {
+
+                    RedWrench = wrench; 
+                }
+                else
+                {
+                    ModConsole.Warning("Red Wrench Not Found, unable to create Revive Tool!");
+
+                }
 
             }
         }
@@ -61,6 +79,8 @@
         {
             NearbyColliders.Clear();
             HealthToolEnabled = false;
+            RedWrench = null;
+            ReviveEvent = null;
         }
 
 
@@ -142,15 +162,18 @@
                 {
                     return;
                 }
-                if(value)
+                if (RedWrench != null && ReviveEvent != null)
                 {
-                    GenerateTool();
-                }
-                else
-                {
-                    if(RedWrenchPickup != null)
+                    if (value)
                     {
-                        RedWrenchPickup.DestroyMeLocal();
+                        GenerateTool();
+                    }
+                    else
+                    {
+                        if (RedWrenchPickup != null)
+                        {
+                            RedWrenchPickup.DestroyMeLocal();
+                        }
                     }
                 }
             }
