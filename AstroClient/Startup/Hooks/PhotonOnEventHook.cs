@@ -47,45 +47,46 @@
         }
 
 
-        private enum EventCode
+        private struct EventCode
         {
-            OpRemoveCache_etc = 0,
-            USpeaker_Voice_Data = 1,
-            Disconnect_Message = 2,
-            Cached_Events = 4, // Wut?
-            Master_allowing_player_to_join = 5,
-            RPC = 6,
-            Motion = 7,
-            interest = 8, // Wut
-            Reliable = 9,
-            Moderations = 33,
-            OpCleanRpcBuffer = 200, // (int actorNumber)
-            SendSerialize = 201,
-            Instantiation = 202,
-            CloseConnection = 203, // (PhotonPlayer kickPlayer)
-            Destroy = 204,
-            RemoveCachedRPCs = 205,
-            SendSerializeReliable = 206,
-            Destroy_Player = 207,
-            SetMasterClient = 208, // (int playerId, bool sync)
-            Request_Ownership = 209,
-            Transfer_Ownership = 210,
-            VacantViewIds = 211,
-            UploadAvatar = 223, 
-            Custom_Properties = 253,
-            Leaving_World = 254,
-            Joining_World = 255,
+            internal const byte OpRemoveCache_etc = 0;
+            internal const byte USpeaker_Voice_Data = 1;
+            internal const byte Disconnect_Message = 2;
+            internal const byte Cached_Events = 4; // Wut?
+            internal const byte Master_allowing_player_to_join = 5;
+            internal const byte RPC = 6;
+            internal const byte Motion = 7;
+            internal const byte interest = 8; // Wut
+            internal const byte Reliable = 9;
+            internal const byte Moderations = 33;
+            internal const byte OpCleanRpcBuffer = 200; // (int actorNumber)
+            internal const byte SendSerialize = 201;
+            internal const byte Instantiation = 202;
+            internal const byte CloseConnection = 203; // (PhotonPlayer kickPlayer)
+            internal const byte Destroy = 204;
+            internal const byte RemoveCachedRPCs = 205;
+            internal const byte SendSerializeReliable = 206;
+            internal const byte Destroy_Player = 207;
+            internal const byte SetMasterClient = 208; // (int playerId; bool sync)
+            internal const byte Request_Ownership = 209;
+            internal const byte Transfer_Ownership = 210;
+            internal const byte VacantViewIds = 211;
+            internal const byte UploadAvatar = 223;
+            internal const byte Custom_Properties = 253;
+            internal const byte Leaving_World = 254;
+            internal const byte Joining_World = 255;
         }
 
 
-        private enum ModerationCode
+
+        private struct ModerationCode
         {
-            Warnings = 2,
-            Mod_Mute = 8,
-            Friend_State = 10,
-            VoteKick = 13,
-            Unknown = 20,  // Unknown, seems affecting users on reset 
-            Block_Or_Mute = 21,
+            internal const byte Warnings = 2;
+            internal const byte Mod_Mute = 8;
+            internal const byte Friend_State = 10;
+            internal const byte VoteKick = 13;
+            internal const byte Unknown = 20;  // Unknown, seems affecting users on reset 
+            internal const byte Block_Or_Mute = 21;
         }
 
 
@@ -106,9 +107,9 @@
                     var PhotonID = __0.sender;
                     StringBuilder line = new StringBuilder();
                     StringBuilder prefix = new StringBuilder();
-                    if (Enum.IsDefined(typeof(EventCode), __0.Code.ToString()))
+                    if (Enum.IsDefined(typeof(EventCode), __0.Code))
                     {
-                        prefix.Append($"[Event ({__0.Code}) {Enum.GetName(typeof(EventCode), __0.Code.ToString()).Replace("_", " ")}] ");
+                        prefix.Append($"[Event ({__0.Code}) {Enum.GetName(typeof(EventCode), __0.Code).Replace("_", " ")}] ");
                     }
                     else
                     {
@@ -157,24 +158,24 @@
                                  
                                 switch (__0.Code)
                                 {
-                                    case (byte)EventCode.USpeaker_Voice_Data:// Voice Data TODO : (Parrot Mode)
+                                    case EventCode.USpeaker_Voice_Data:// Voice Data TODO : (Parrot Mode)
                                         log = true;
                                         break;
 
-                                    case (byte)EventCode.Motion: // I believe this is motion, key 245 appears to be base64
+                                    case EventCode.Motion: // I believe this is motion, key 245 appears to be base64
                                         break;
 
-                                    case (byte)EventCode.Disconnect_Message: // Kick Message?
+                                    case EventCode.Disconnect_Message: // Kick Message?
                                         string kickMessage = (Serialization.FromIL2CPPToManaged<object>(__0.Parameters) as Dictionary<byte, object>)[245].ToString();
                                         break;
 
-                                    case (byte)EventCode.RPC:
+                                    case EventCode.RPC:
                                         break;
 
-                                    case (byte)EventCode.interest: // Interest - Interested in events
+                                    case EventCode.interest: // Interest - Interested in events
                                         break;
 
-                                    case (byte)EventCode.Moderations: // Moderations
+                                    case EventCode.Moderations: // Moderations
                                         log = true;
                                         #region Moderation Handler
                                         try
@@ -182,25 +183,25 @@
                                             if (ConvertedToNormalDict.ContainsKey(0))
                                             {
                                                 byte moderationevent = *(byte*)IL2CPP.il2cpp_object_unbox(ConvertedToNormalDict[0]).ToPointer();
-                                                if (Enum.IsDefined(typeof(ModerationCode), moderationevent.ToString()))
+                                                if (Enum.IsDefined(typeof(ModerationCode), moderationevent))
                                                 {
-                                                    prefix.Append($"[Moderation {Enum.GetName(typeof(ModerationCode), __0.Code.ToString()).Replace("_", " ")}] ");
+                                                    prefix.Append($"[Moderation {Enum.GetName(typeof(ModerationCode), moderationevent).Replace("_", " ")}] ");
                                                 }
                                                 switch (moderationevent)
                                                 {
-                                                    case (byte)ModerationCode.Warnings: // Warnings.
+                                                    case ModerationCode.Warnings: // Warnings.
                                                         log = true;
                                                         break;
 
-                                                    case (byte)ModerationCode.Mod_Mute: // Mod Mute
+                                                    case ModerationCode.Mod_Mute: // Mod Mute
                                                         log = true;
                                                         break;
 
-                                                    case (byte)ModerationCode.Friend_State: // Friend State
+                                                    case ModerationCode.Friend_State: // Friend State
                                                         log = true;
                                                         break;
 
-                                                    case (byte)ModerationCode.VoteKick: // VoteKick
+                                                    case ModerationCode.VoteKick: // VoteKick
                                                         log = true;
                                                         break;
 
@@ -353,17 +354,17 @@
                                         #endregion Moderation Handler
                                         break;
 
-                                    case (byte)EventCode.Destroy: // Destroy
+                                    case EventCode.Destroy: // Destroy
                                         log = true;
                                         break;
 
-                                    case (byte)EventCode.Transfer_Ownership:
+                                    case EventCode.Transfer_Ownership:
                                         break;
 
-                                    case (byte)EventCode.UploadAvatar: // This fired with what looked like base64 png data when I uploaded a VRC+ avatar
+                                    case EventCode.UploadAvatar: // This fired with what looked like base64 png data when I uploaded a VRC+ avatar
                                         break;
 
-                                    case (byte)EventCode.Custom_Properties: // I think this is avatar switching related
+                                    case EventCode.Custom_Properties: // I think this is avatar switching related
                                         break;
 
                                     default:
