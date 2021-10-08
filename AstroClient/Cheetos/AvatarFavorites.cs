@@ -37,7 +37,8 @@
             // Avatar Favorite
             _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Favorite", 921f, 290f, delegate ()
               {
-                  AddToFavorites(selectedID);
+                  var selected = PlayerUtils.GetPlayer().prop_VRCPlayer_0.prop_VRCAvatarManager_0.field_Private_ApiAvatar_1.id;
+                  AddToFavorites(selected);
               }, 1.45f, 1f);
 
             // Avatar Unfavorite
