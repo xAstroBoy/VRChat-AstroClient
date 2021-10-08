@@ -108,7 +108,7 @@
                     StringBuilder prefix = new StringBuilder();
                     if (Enum.IsDefined(typeof(EventCode), __0.Code))
                     {
-                        prefix.Append($"[Event ({__0.Code}) {Enum.GetName(typeof(EventCode), __0.Code).Replace("_", " ")}] ");
+                        prefix.Append($"[Event ({__0.Code}) {Enum.GetName(typeof(EventCode), __0.Code.ToString()).Replace("_", " ")}] ");
                     }
                     else
                     {
@@ -183,7 +183,7 @@
                                                 byte moderationevent = *(byte*)IL2CPP.il2cpp_object_unbox(ConvertedToNormalDict[0]).ToPointer();
                                                 if (Enum.IsDefined(typeof(ModerationCode), moderationevent))
                                                 {
-                                                    prefix.Append($"[Moderation {Enum.GetName(typeof(ModerationCode), __0.Code).Replace("_", " ")}] ");
+                                                    prefix.Append($"[Moderation {Enum.GetName(typeof(ModerationCode), __0.Code.ToString()).Replace("_", " ")}] ");
                                                 }
                                                 switch (moderationevent)
                                                 {
