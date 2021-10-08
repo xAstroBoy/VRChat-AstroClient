@@ -66,8 +66,6 @@
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2f, "Add 10000000 Money", () => { AddBankBalance(10000000); }, "Edit Current Balance!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2.5f, "Set 999999999 Money", () => { SetBankBalance(999999999); }, "Edit Current Balance!", null, null, true);
 
-            //_ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0f, "Default Tower Limit", () => { SetMaxTowerCount(20); }, "Edit Tower Limit!", null, null, true);
-            //_ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0.5f, "Unlimited Towers", () => { SetMaxTowerCount(99); }, "Edit Tower Limit!", null, null, true);
             HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 1, "Toggle Health Tool", () => { HealthToolEnabled = true; }, "Toggle Health Tool", () => { HealthToolEnabled = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
         }
 
