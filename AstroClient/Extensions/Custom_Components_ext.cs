@@ -402,7 +402,12 @@
                 var Self = Utils.LocalPlayer.GetPlayer();
                 if (obj != null && Self != null)
                 {
-                    PlayerAttackerManager.AddObject(obj, Self);
+                    var item = obj.GetOrAddComponent<PlayerAttacker>();
+                    if (item != null)
+                    {
+                        item.TargetPlayer = Self;
+                        item.IsLockDeactivated = true;
+                    }
                 }
             }
         }
@@ -422,7 +427,12 @@
                 var Self = Utils.LocalPlayer.GetPlayer();
                 if (obj != null && Self != null)
                 {
-                    PlayerWatcherManager.AddObject(obj, Self);
+                    var item = obj.GetOrAddComponent<PlayerWatcher>();
+                    if (item != null)
+                    {
+                        item.TargetPlayer = Self;
+                        item.IsLockDeactivated = true;
+                    }
                 }
             }
         }
@@ -462,7 +472,12 @@
                 var Self = Utils.LocalPlayer.GetPlayer();
                 if (obj != null && Self != null)
                 {
-                    PlayerAttackerManager.AddObject(obj, Self);
+                    var item = obj.GetOrAddComponent<PlayerAttacker>();
+                    if (item != null)
+                    {
+                        item.TargetPlayer = Self;
+                        item.IsLockDeactivated = true;
+                    }
                 }
             }
         }
@@ -490,7 +505,12 @@
                 var Self = Utils.LocalPlayer.GetPlayer();
                 if (obj != null && Self != null)
                 {
-                    PlayerWatcherManager.AddObject(obj, Self);
+                    var item = obj.GetOrAddComponent<PlayerWatcher>();
+                    if (item != null)
+                    {
+                        item.TargetPlayer = Self;
+                        item.IsLockDeactivated = true;
+                    }
                 }
             }
         }

@@ -65,7 +65,6 @@
 
             if (Bools.AllowAttackerComponent)
             {
-                RegisterComponent<PlayerAttackerManager>();
                 RegisterComponent<PlayerAttacker>();
             }
 
@@ -79,15 +78,10 @@
 
         internal override void OnUpdate()
         {
-            if (Bools.AllowAttackerComponent)
-            {
-                PlayerAttackerManager.MakeInstance();
-            }
             if (Bools.AllowOrbitComponent)
             {
                 OrbitManager.MakeInstance();
             }
-            PlayerWatcherManager.MakeInstance();
         }
 
         internal static List<Type> RegisteredComponentsTypes { get; } = new List<Type>();

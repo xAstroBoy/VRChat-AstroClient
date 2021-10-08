@@ -15,32 +15,12 @@
     [RegisterComponent]
     public class PlayerWatcher : GameEventsBehaviour
     {
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
-
-        public PlayerWatcher(IntPtr obj0) : base(obj0)
+        public PlayerWatcher(IntPtr ptr) : base(ptr)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
-            AntiGcList.Add(this);
+            AntiGarbageCollection.Add(this);
         }
 
-        public PlayerWatcher(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<PlayerWatcher>())
-        {
-            ClassInjector.DerivedConstructorBody(this);
-
-            ReferencedDelegate = referencedDelegate;
-            MethodInfo = methodInfo;
-        }
-
-        ~PlayerWatcher()
-        {
-            Marshal.FreeHGlobal(MethodInfo);
-            MethodInfo = IntPtr.Zero;
-            ReferencedDelegate = null;
-            _ = AntiGcList.Remove(this);
-            AntiGcList = null;
-        }
+        private Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object> AntiGarbageCollection = new Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object>();
 
         // Use this for initialization
         private void Start()
@@ -74,7 +54,7 @@
                     ModConsole.Warning("PlayerWatcher : Object Still Has No RigidBody (Probably Udon World) , Watcher Will be broken!");
                 }
 
-                if (player == null)
+                if (TargetPlayer == null)
                 {
                     ModConsole.Error("PlayerWatcher : , Player Is not registered!");
                 }
@@ -87,7 +67,6 @@
             catch
             { }
 
-            PlayerWatcherManager.Register(this);
         }
 
         // Update is called once per frame
@@ -97,7 +76,7 @@
             {
                 if (IsLockDeactivated)
                 {
-                    if (player == null)
+                    if (TargetPlayer == null)
                     {
                         Destroy(this);
                         return;
@@ -132,7 +111,7 @@
                                     gameObject.TakeOwnership();
                                 }
 
-                                gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position);
+                                gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position);
                             }
 
                             LastTimeCheck = Time.time;
@@ -167,19 +146,16 @@
         {
             control.RestoreOriginalBody();
             GameObjectMenu.RestoreOriginalLocation(gameObject, false);
-            PlayerWatcherManager.RemoveSelf(gameObject);
             OnlineEditor.RemoveOwnerShip(gameObject);
-            PlayerWatcherManager.Deregister(this);
         }
 
-        internal PlayerWatcherManager Manager = null;
         internal float TimerOffset = 0f;
         private float LastTimeCheck2 = 0;
         private float LastTimeCheck = 0;
         private bool HasRequiredSettings = false;
         private bool ApplyOnce = true;
 
-        internal Player player;
+        internal Player TargetPlayer;
         internal bool IsLockDeactivated = false;
         private Rigidbody body = null;
         private RigidBodyController control;

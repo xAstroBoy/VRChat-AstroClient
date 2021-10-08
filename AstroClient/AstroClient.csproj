@@ -293,9 +293,7 @@
     <Compile Include="Components\JarRoleRevealers\JarRoleESP.cs" />
     <Compile Include="Components\PickupControl\PickupController.cs" />
     <Compile Include="Components\PlayerAttacker\PlayerAttacker.cs" />
-    <Compile Include="Components\PlayerAttacker\PlayerAttackerManager.cs" />
     <Compile Include="Components\PlayerWatcher\PlayerWatcher.cs" />
-    <Compile Include="Components\PlayerWatcher\PlayerWatcherManager.cs" />
     <Compile Include="Components\RocketComponent\RocketBehaviour.cs" />
     <Compile Include="Components\ESP\Player\PlayerESP.cs" />
     <Compile Include="Components\SingleTag\SingleTag.cs" />

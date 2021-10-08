@@ -14,32 +14,14 @@
 
     public class PlayerAttacker : GameEventsBehaviour
     {
-        public Delegate ReferencedDelegate;
-        public IntPtr MethodInfo;
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
-
-        public PlayerAttacker(IntPtr obj0) : base(obj0)
+        public PlayerAttacker(IntPtr ptr) : base(ptr)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
-            AntiGcList.Add(this);
+            AntiGarbageCollection.Add(this);
         }
 
-        public PlayerAttacker(Delegate referencedDelegate, IntPtr methodInfo) : base(ClassInjector.DerivedConstructorPointer<PlayerAttacker>())
-        {
-            ClassInjector.DerivedConstructorBody(this);
+        private Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object> AntiGarbageCollection = new Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object>();
 
-            ReferencedDelegate = referencedDelegate;
-            MethodInfo = methodInfo;
-        }
 
-        ~PlayerAttacker()
-        {
-            Marshal.FreeHGlobal(MethodInfo);
-            MethodInfo = IntPtr.Zero;
-            ReferencedDelegate = null;
-            _ = AntiGcList.Remove(this);
-            AntiGcList = null;
-        }
 
         // Use this for initialization
         private void Start()
@@ -74,7 +56,7 @@
                     ModConsole.Warning("PlayerAttacker : Object Still Has No PickupController (Probably Udon World) , Attacker Will be broken!");
                 }
 
-                if (player == null)
+                if (TargetPlayer == null)
                 {
                     ModConsole.Error("PlayerAttacker : ERROR , Player Is not registered!");
                 }
@@ -87,7 +69,6 @@
             catch
             { }
 
-            PlayerAttackerManager.Register(this);
         }
 
         // Update is called once per frame
@@ -97,7 +78,7 @@
             {
                 if (IsLockDeactivated)
                 {
-                    if (player == null)
+                    if (TargetPlayer == null)
                     {
                         Destroy(this);
                         return;
@@ -142,13 +123,13 @@
                             {
                                 if (Time.time - LastTimeCheck2 > 0.06f)
                                 {
-                                    gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position);
+                                    gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position);
                                     ApplyForceX();
-                                    gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position);
+                                    gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position);
                                     ApplyForceY();
-                                    gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position);
+                                    gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position);
                                     ApplyForceZ();
-                                    gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position);
+                                    gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position);
                                 }
                             }
                         }
@@ -196,24 +177,22 @@
         {
             control.RestoreOriginalBody();
             GameObjectMenu.RestoreOriginalLocation(gameObject, false);
-            PlayerAttackerManager.RemoveSelf(gameObject);
             OnlineEditor.RemoveOwnerShip(gameObject);
-            PlayerAttackerManager.Deregister(this);
         }
 
         private void ApplyForceX()
         {
-            if (body != null && player.transform != null)
+            if (body != null && TargetPlayer.transform != null)
             {
-                if (body.transform.position.x <= BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.x)
+                if (body.transform.position.x <= BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.x)
                 {
                     body.AddForce(Movementforce, 0, 0, ForceMode.Impulse);
                 }
-                else if (gameObject.transform.position.x >= BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.x)
+                else if (gameObject.transform.position.x >= BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.x)
                 {
                     body.AddForce(-Movementforce, 0, 0, ForceMode.Impulse);
                 }
-                else if (gameObject.transform.position.x == BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.x)
+                else if (gameObject.transform.position.x == BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.x)
                 {
                     return;
                 }
@@ -222,17 +201,17 @@
 
         private void ApplyForceY()
         {
-            if (body != null && player.transform != null)
+            if (body != null && TargetPlayer.transform != null)
             {
-                if (gameObject.transform.position.y <= BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.y)
+                if (gameObject.transform.position.y <= BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.y)
                 {
                     body.AddForce(0, Movementforce, 0, ForceMode.Impulse);
                 }
-                else if (gameObject.transform.position.y >= BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.y)
+                else if (gameObject.transform.position.y >= BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.y)
                 {
                     body.AddForce(0, -Movementforce, 0, ForceMode.Impulse);
                 }
-                else if (gameObject.transform.position.y == BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.y)
+                else if (gameObject.transform.position.y == BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.y)
                 {
                     return;
                 }
@@ -241,24 +220,23 @@
 
         private void ApplyForceZ()
         {
-            if (body != null && player.transform != null)
+            if (body != null && TargetPlayer.transform != null)
             {
-                if (gameObject.transform.position.z <= BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.z)
+                if (gameObject.transform.position.z <= BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.z)
                 {
                     body.AddForce(0, 0, Movementforce, ForceMode.Impulse);
                 }
-                else if (gameObject.transform.position.z >= BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.z)
+                else if (gameObject.transform.position.z >= BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.z)
                 {
                     body.AddForce(0, 0, -Movementforce, ForceMode.Impulse);
                 }
-                else if (gameObject.transform.position.z == BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head).position.z)
+                else if (gameObject.transform.position.z == BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position.z)
                 {
                     return;
                 }
             }
         }
 
-        internal PlayerAttackerManager Manager = null;
         private float Movementforce = 0.04f; // DEFAULT 0.04f
         internal float TimerOffset = 0f;
         private float LastTimeCheck = 0;
@@ -266,7 +244,7 @@
         private float Drag = 0.3f;
         private bool HasUpdatedDrag = false;
 
-        internal Player player;
+        internal Player TargetPlayer;
         internal bool IsLockDeactivated = false;
         private Rigidbody body = null;
         private RigidBodyController control;

@@ -94,7 +94,12 @@
                             GameObject item = list[i];
                             if (item != null)
                             {
-                                PlayerAttackerManager.AddObject(item, targetuser);
+                                var itemtwo = item.GetOrAddComponent<PlayerAttacker>();
+                                    if(itemtwo != null)
+                                {
+                                    itemtwo.TargetPlayer = targetuser;
+                                    itemtwo.IsLockDeactivated = true;
+                                }
                             }
                         }
                     }
@@ -126,9 +131,11 @@
                         for (int i = 0; i < list.Count; i++)
                         {
                             GameObject item = list[i];
-                            if (item != null)
+                            var itemtwo = item.GetOrAddComponent<PlayerWatcher>();
+                            if (itemtwo != null)
                             {
-                                PlayerWatcherManager.AddObject(item, targetuser);
+                                itemtwo.TargetPlayer = targetuser;
+                                itemtwo.IsLockDeactivated = true;
                             }
                         }
                     }
@@ -210,7 +217,12 @@
                 {
                     if (obj != null)
                     {
-                        PlayerAttackerManager.AddObject(obj, targetuser);
+                        var item = obj.GetOrAddComponent<PlayerAttacker>();
+                        if (item != null)
+                        {
+                            item.TargetPlayer = targetuser;
+                            item.IsLockDeactivated = true;
+                        }
                     }
                 }
                 else
@@ -230,7 +242,12 @@
                 {
                     if (obj != null)
                     {
-                        PlayerWatcherManager.AddObject(obj, targetuser);
+                        var item = obj.GetOrAddComponent<PlayerWatcher>();
+                        if (item != null)
+                        {
+                            item.TargetPlayer = targetuser;
+                            item.IsLockDeactivated = true;
+                        }
                     }
                 }
                 else
@@ -268,7 +285,13 @@
                 var apiuser = QuickMenuUtils.SelectedUser;
                 if (apiuser != null)
                 {
-                    PlayerWatcherManager.RemovePickupsWatchersBoundToPlayer(apiuser);
+                    foreach(var item in Resources.FindObjectsOfTypeAll<PlayerWatcher>())
+                    {
+                        if(item.TargetPlayer.GetAPIUser().Equals(apiuser))
+                        {
+                            item.DestroyMeLocal();
+                        }
+                    }
                 }
             }
             catch (Exception) { }
@@ -281,7 +304,13 @@
                 var apiuser = QuickMenuUtils.SelectedUser;
                 if (apiuser != null)
                 {
-                    PlayerAttackerManager.RemovePickupsAttackerBoundToPlayer(apiuser);
+                    foreach (var item in Resources.FindObjectsOfTypeAll<PlayerAttacker>())
+                    {
+                        if (item.TargetPlayer.GetAPIUser().Equals(apiuser))
+                        {
+                            item.DestroyMeLocal();
+                        }
+                    }
                 }
             }
             catch (Exception) { }
