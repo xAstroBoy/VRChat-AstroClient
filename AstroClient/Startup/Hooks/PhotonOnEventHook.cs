@@ -106,7 +106,7 @@
                     var PhotonID = __0.sender;
                     StringBuilder line = new StringBuilder();
                     StringBuilder prefix = new StringBuilder();
-                    if (Enum.IsDefined(typeof(EventCode), __0.Code))
+                    if (Enum.IsDefined(typeof(EventCode), __0.Code.ToString()))
                     {
                         prefix.Append($"[Event ({__0.Code}) {Enum.GetName(typeof(EventCode), __0.Code.ToString()).Replace("_", " ")}] ");
                     }
@@ -158,6 +158,7 @@
                                 switch (__0.Code)
                                 {
                                     case (byte)EventCode.USpeaker_Voice_Data:// Voice Data TODO : (Parrot Mode)
+                                        log = true;
                                         break;
 
                                     case (byte)EventCode.Motion: // I believe this is motion, key 245 appears to be base64
@@ -181,7 +182,7 @@
                                             if (ConvertedToNormalDict.ContainsKey(0))
                                             {
                                                 byte moderationevent = *(byte*)IL2CPP.il2cpp_object_unbox(ConvertedToNormalDict[0]).ToPointer();
-                                                if (Enum.IsDefined(typeof(ModerationCode), moderationevent))
+                                                if (Enum.IsDefined(typeof(ModerationCode), moderationevent.ToString()))
                                                 {
                                                     prefix.Append($"[Moderation {Enum.GetName(typeof(ModerationCode), __0.Code.ToString()).Replace("_", " ")}] ");
                                                 }
