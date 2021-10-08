@@ -81,7 +81,7 @@
 
         private struct ModerationCode
         {
-            internal const byte Warnings = 2;
+            internal const byte Warning = 2;
             internal const byte Mod_Mute = 8;
             internal const byte Friend_State = 10;
             internal const byte VoteKick = 13;
@@ -89,9 +89,24 @@
             internal const byte Block_Or_Mute = 21;
         }
 
+        private static string TranslateModerationEvent(byte moderationEvent)
+        {
+            switch (moderationEvent)
+            {
+                case ModerationCode.Warning: return "Warning";
+                case ModerationCode.Mod_Mute: return "Mod Mute";
+                case ModerationCode.Friend_State: return "Friend State";
+                case ModerationCode.VoteKick: return "VoteKick";
+                case ModerationCode.Unknown: return "Unknown";
+                case ModerationCode.Block_Or_Mute: return "Block Or Mute";
+                default:
+                    return null;
+
+            }
+        }
 
 
-        private unsafe static bool OnEventPatch(ref EventData __0)
+            private unsafe static bool OnEventPatch(ref EventData __0)
         {
             try
             {
@@ -183,13 +198,14 @@
                                             if (ConvertedToNormalDict.ContainsKey(0))
                                             {
                                                 byte moderationevent = *(byte*)IL2CPP.il2cpp_object_unbox(ConvertedToNormalDict[0]).ToPointer();
-                                                if (Enum.IsDefined(typeof(ModerationCode), moderationevent))
+                                                var moderationeventname = TranslateModerationEvent(moderationevent);
+                                                if(moderationeventname != null && moderationeventname.IsNotNullOrEmptyOrWhiteSpace())
                                                 {
-                                                    prefix.Append($"[Moderation {Enum.GetName(typeof(ModerationCode), moderationevent).Replace("_", " ")}] ");
+                                                    prefix.Append($"[Moderation {moderationeventname}");
                                                 }
                                                 switch (moderationevent)
                                                 {
-                                                    case ModerationCode.Warnings: // Warnings.
+                                                    case ModerationCode.Warning: // Warnings.
                                                         log = true;
                                                         break;
 
