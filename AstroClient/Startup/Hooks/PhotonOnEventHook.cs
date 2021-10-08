@@ -237,7 +237,7 @@
                                                 var moderationeventname = TranslateModerationEvent(moderationevent);
                                                 if(moderationeventname.IsNotNullOrEmptyOrWhiteSpace())
                                                 {
-                                                    prefix.Append($"[Moderation {moderationeventname}");
+                                                    prefix.Append($"Moderation {moderationeventname} : ");
                                                 }
                                                 switch (moderationevent)
                                                 {
