@@ -78,7 +78,7 @@
             internal const byte Block_Or_Mute = 21;
         }
 
-        private static string TranslateModerationEvent(byte moderationEvent)
+    private static string TranslateModerationEvent(byte moderationEvent)
         {
             switch (moderationEvent)
             {
@@ -162,14 +162,32 @@
                     return true;
             }
         }
-
-        private unsafe static bool OnEventPatch(ref EventData __0)
+        private enum HookAction
         {
-            bool isBlocked = false; // Flag this if needed to make the event not continue
-            bool isPatched = false; // Flag this if you modify the event. (it will replace the event data)
-            bool ToEmpty = false; // Flag this if you want to modify the event with a empty key.
-            bool toReset = false; // Flag this if you need to clear the event entirely (might break something!)
+            Nothing,
+            Patch, // Flag this if you modify the event. (it will replace the event data)
+            Block, // Flag this if needed to make the event not continue
+            Empty,// Flag this if you want to modify the event with a empty key.
+            Reset, // Flag this if you need to clear the event entirely (might break something!)
+        }
 
+        private static string HookActionToString(HookAction action)
+        {
+            switch(action)
+            {
+                case HookAction.Patch: return "PATCHED ";
+                case HookAction.Block: return "BLOCKED ";
+                case HookAction.Empty: return "EMPTIED ";
+                case HookAction.Reset: return "RESET ";
+                default:
+                    return string.Empty;    
+            }
+        }
+
+
+    private unsafe static bool OnEventPatch(ref EventData __0)
+        {
+            HookAction Currentaction = HookAction.Nothing;
             try
             {
                 Dictionary<byte, Il2CppSystem.Object> ConvertedToNormalDict = new Dictionary<byte, Il2CppSystem.Object>();
@@ -298,7 +316,7 @@
                                                                             {
                                                                                 PhotonModerationHandler.OnPlayerBlockedYou_Invoker(PhotonPlayer);
                                                                                 ConvertedToNormalDict[blockbyte] = Il2CppConverter.Generate_Il2CPPObject(false);
-                                                                                isPatched = true;
+                                                                                Currentaction = HookAction.Patch;
                                                                                 break;
                                                                             }
                                                                         case false:
@@ -354,7 +372,7 @@
                                                                                 BlockedPlayersArray[i] = -1;
                                                                             }
                                                                             ConvertedToNormalDict[blockbyte] = new Il2CppSystem.Object(BlockedPlayersArray.Pointer);
-                                                                            isPatched = true;
+                                                                            Currentaction = HookAction.Patch;
                                                                         }
                                                                     }
                                                                 }
@@ -424,96 +442,87 @@
                             }
                         }
                     }
-                    if (isPatched)
+                    switch (Currentaction)
                     {
-                        if (ConvertedToNormalDict != null && ConvertedToNormalDict.Count != 0)
-                        {
-                            var ModifiedEvent = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
-                            foreach (var key in ConvertedToNormalDict.Keys)
+                        case HookAction.Patch:
                             {
-                                ModifiedEvent.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), ConvertedToNormalDict[key]);
-                            }
-
-                            var modifiedparams = new Dictionary<byte, Il2CppSystem.Object>();
-                            foreach (var key in __0.Parameters.Keys)
-                            {
-                                if (key != 245)
+                                if (ConvertedToNormalDict != null && ConvertedToNormalDict.Count != 0)
                                 {
-                                    modifiedparams.Add(key, __0.Parameters[key]);
+                                    var ModifiedEvent = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
+                                    foreach (var key in ConvertedToNormalDict.Keys)
+                                    {
+                                        ModifiedEvent.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), ConvertedToNormalDict[key]);
+                                    }
+
+                                    var modifiedparams = new Dictionary<byte, Il2CppSystem.Object>();
+                                    foreach (var key in __0.Parameters.Keys)
+                                    {
+                                        if (key != 245)
+                                        {
+                                            modifiedparams.Add(key, __0.Parameters[key]);
+                                        }
+                                        else
+                                        {
+                                            modifiedparams.Add(key, ModifiedEvent);
+                                        }
+                                    }
+
+                                    __0.Parameters.Clear();
+                                    __0.Parameters = null;
+                                    __0.Parameters = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
+                                    foreach (var key in modifiedparams.Keys)
+                                    {
+                                        __0.Parameters.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), modifiedparams[key]);
+                                    }
                                 }
-                                else
+                                break;
+                            }
+                        case HookAction.Empty:
+                            {
+                                var modifiedparams = new Dictionary<byte, Il2CppSystem.Object>();
+                                foreach (var key in __0.Parameters.Keys)
                                 {
-                                    modifiedparams.Add(key, ModifiedEvent);
+                                    if (key != 245)
+                                    {
+                                        modifiedparams.Add(key, __0.Parameters[key]);
+                                    }
+                                    else
+                                    {
+                                        modifiedparams.Add(key, new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>());
+                                    }
                                 }
-                            }
 
-                            __0.Parameters.Clear();
-                            __0.Parameters = null;
-                            __0.Parameters = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
-                            foreach (var key in modifiedparams.Keys)
-                            {
-                                __0.Parameters.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), modifiedparams[key]);
+                                __0.Parameters.Clear();
+                                __0.Parameters = null;
+                                __0.Parameters = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
+                                foreach (var key in modifiedparams.Keys)
+                                {
+                                    __0.Parameters.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), modifiedparams[key]);
+                                }
+                                break;
                             }
-                        }
-                    }
-                    else if (ToEmpty)
-                    {
-                        var modifiedparams = new Dictionary<byte, Il2CppSystem.Object>();
-                        foreach (var key in __0.Parameters.Keys)
-                        {
-                            if (key != 245)
-                            {
-                                modifiedparams.Add(key, __0.Parameters[key]);
-                            }
-                            else
-                            {
-                                modifiedparams.Add(key, new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>());
-                            }
-                        }
-
-                        __0.Parameters.Clear();
-                        __0.Parameters = null;
-                        __0.Parameters = new Il2CppSystem.Collections.Generic.Dictionary<byte, Il2CppSystem.Object>();
-                        foreach (var key in modifiedparams.Keys)
-                        {
-                            __0.Parameters.System_Collections_IDictionary_Add(Il2CppConverter.Generate_Il2CPPObject(key), modifiedparams[key]);
-                        }
-                    }
-                    string eventstring = string.Empty;
-                    if (isPatched)
-                    {
-                        eventstring = "PATCHED : ";
-                    }
-                    else if (isBlocked)
-                    {
-                        eventstring = "BLOCKED : ";
-                    }
-                    else if (toReset)
-                    {
-                        eventstring = "RESET : ";
-                    }
-                    else if (ToEmpty)
-                    {
-                        eventstring = "EMPTIED : ";
+                        default:
+                            break;
                     }
                     if (EventCodeToLog(__0.Code) && ConfigManager.General.LogEvents && __0.Parameters != null)
                     {
                         line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(__0.Parameters), Newtonsoft.Json.Formatting.Indented)}");
-                        ModConsole.Log($"{eventstring}{prefix.ToString()}{line.ToString()}");
+                        ModConsole.Log($"{HookActionToString(Currentaction)}{prefix.ToString()}{line.ToString()}");
                     }
                     line.Clear();
                 }
-                if (isBlocked)
+                switch (Currentaction)
                 {
-                    return false;
-                }
-                else
-                {
-                    if (toReset)
-                    {
+                    case HookAction.Block:
+                        return false;
+                        break;
+                    case HookAction.Reset:
                         __0.Reset();
-                    }
-                    return true;
+                        return true;
+                        break;
+                    default:
+                        return true;
+                        break;
                 }
             }
             catch (Exception e)
