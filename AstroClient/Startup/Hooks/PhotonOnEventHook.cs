@@ -160,7 +160,7 @@
                     string translated = TranslateEventData(__0.Code);
                     if (translated.IsNotNullOrEmptyOrWhiteSpace())
                     {
-                        prefix.Append($"[Event ({__0.Code}) {translated}] ");
+                        prefix.Append($"[Event ({__0.Code})][{translated}]: ");
                     }
                     else
                     {
@@ -237,7 +237,7 @@
                                                 var moderationeventname = TranslateModerationEvent(moderationevent);
                                                 if(moderationeventname.IsNotNullOrEmptyOrWhiteSpace())
                                                 {
-                                                    prefix.Append($"Moderation {moderationeventname} : ");
+                                                    prefix.Append($"{moderationeventname} ");
                                                 }
                                                 switch (moderationevent)
                                                 {
