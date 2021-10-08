@@ -406,7 +406,6 @@
                     if (item != null)
                     {
                         item.TargetPlayer = Self;
-                        item.IsLockDeactivated = true;
                     }
                 }
             }
@@ -431,7 +430,6 @@
                     if (item != null)
                     {
                         item.TargetPlayer = Self;
-                        item.IsLockDeactivated = true;
                     }
                 }
             }
@@ -476,7 +474,6 @@
                     if (item != null)
                     {
                         item.TargetPlayer = Self;
-                        item.IsLockDeactivated = true;
                     }
                 }
             }
@@ -509,7 +506,6 @@
                     if (item != null)
                     {
                         item.TargetPlayer = Self;
-                        item.IsLockDeactivated = true;
                     }
                 }
             }

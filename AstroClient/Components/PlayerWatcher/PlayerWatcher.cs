@@ -1,164 +1,183 @@
 ﻿namespace AstroClient.Components
 {
     using AstroClient.GameObjectDebug;
-    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using System;
-    using System.Runtime.InteropServices;
-    using UnhollowerRuntimeLib;
     using UnityEngine;
     using VRC;
-    using Delegate = System.Delegate;
     using Time = UnityEngine.Time;
 
     [RegisterComponent]
     public class PlayerWatcher : GameEventsBehaviour
     {
-        public PlayerWatcher(IntPtr ptr) : base(ptr)
-        {
-            AntiGarbageCollection.Add(this);
-        }
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
 
-        private Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object> AntiGarbageCollection = new Il2CppSystem.Collections.Generic.List<Il2CppSystem.Object>();
+        public PlayerWatcher(IntPtr obj0) : base(obj0)
+        {
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList.Add(this);
+        }
 
         // Use this for initialization
         private void Start()
         {
-            try
+            RigidBodyController = GetComponent<RigidBodyController>();
+            if (RigidBodyController == null)
+            {
+                RigidBodyController = gameObject.AddComponent<RigidBodyController>();
+            }
+            body = RigidBodyController.Rigidbody;
+            if (body == null)
             {
                 body = GetComponent<Rigidbody>();
                 if (body == null)
                 {
                     body = gameObject.AddComponent<Rigidbody>();
                 }
-                control = GetComponent<RigidBodyController>();
-                if (control == null)
-                {
-                    control = gameObject.AddComponent<RigidBodyController>();
-                }
-                pickup = GetComponent<PickupController>();
-                if (pickup == null)
-                {
-                    pickup = gameObject.AddComponent<PickupController>();
-                }
-                HasRequiredSettings = false;
-
-                if (GetComponent<PickupController>() == null)
-                {
-                    ModConsole.Warning("PlayerWatcher : Object Still Has No PickupController (Probably Udon World) , Watcher Will be broken!");
-                }
-
-                if (GetComponent<RigidBodyController>() == null)
-                {
-                    ModConsole.Warning("PlayerWatcher : Object Still Has No RigidBody (Probably Udon World) , Watcher Will be broken!");
-                }
-
-                if (TargetPlayer == null)
-                {
-                    ModConsole.Error("PlayerWatcher : , Player Is not registered!");
-                }
-
-                if (this == null)
-                {
-                    ModConsole.Error("PlayerWatcher : Is This actually supposed to be null?");
-                }
             }
-            catch
-            { }
-
+            PickupController = GetComponent<PickupController>();
+            if (PickupController == null)
+            {
+                PickupController = gameObject.AddComponent<PickupController>();
+            }
+            VRC_AstroPickup = gameObject.AddComponent<VRC_AstroPickup>();
+            if (VRC_AstroPickup != null)
+            {
+                VRC_AstroPickup.OnPickup += new Action(() => { isPaused = true; });
+                VRC_AstroPickup.OnDrop += new Action(() => { isPaused = false; });
+            }
         }
 
-        // Update is called once per frame
+        internal override void OnPlayerLeft(Player player)
+        {
+            if (TargetPlayer.Equals(player))
+            {
+                Destroy(this);
+            }
+        }
+
         private void Update()
         {
-            try
+            if (TargetPlayer == null) return;
+            if (isPaused || isHeld)
             {
-                if (IsLockDeactivated)
+                if (HasRequiredSettings)
                 {
-                    if (TargetPlayer == null)
-                    {
-                        Destroy(this);
-                        return;
-                    }
-
-                    if (ApplyOnce)
-                    {
-                        SetRequiredSettings();
-                    }
-
-                    if (Time.time - LastTimeCheck2 > 16.33f)
-                    {
-                        SetRequiredSettings();
-                        LastTimeCheck2 = Time.time;
-                    }
-                    if (pickup.IsHeld)
-                    {
-                        if (HasRequiredSettings)
-                        {
-                            control.RestoreOriginalBody();
-                            HasRequiredSettings = false;
-                        }
-                    }
-                    else
-                    {
-                        if (Time.time - LastTimeCheck > 0.05f)
-                        {
-                            if (!pickup.IsHeld)
-                            {
-                                if (!gameObject.IsOwner())
-                                {
-                                    gameObject.TakeOwnership();
-                                }
-
-                                gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position);
-                            }
-
-                            LastTimeCheck = Time.time;
-                        }
-                    }
+                    HasRequiredSettings = false;
+                }
+                return;
+            }
+            if (!CheckisOwner)
+            {
+                if (Time.time - CheckisOwnerTimeCheck > CheckisOwnerDelay)
+                {
+                    CheckisOwner = true;
+                    CheckisOwnerTimeCheck = Time.time;
                 }
             }
-            catch
+            if (Time.time - WatcherTimeCheck > 0.05f)
             {
-            }
-        }
+                if (!HasRequiredSettings)
+                {
+                    HasRequiredSettings = true;
+                }
+                if (isCurrentOwner)
+                {
+                    gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position);
+                }
 
-        private void SetRequiredSettings()
-        {
-            if (!HasRequiredSettings)
-            {
-                if (!control.EditMode)
-                {
-                    control.EditMode = true;
-                }
-                if (!gameObject.IsOwner())
-                {
-                    gameObject.TakeOwnership();
-                }
-                control.constraints = RigidbodyConstraints.FreezeRotation;
-                control.constraints = RigidbodyConstraints.None;
-                HasRequiredSettings = true;
+                WatcherTimeCheck = Time.time;
             }
         }
 
         private void OnDestroy()
         {
-            control.RestoreOriginalBody();
-            GameObjectMenu.RestoreOriginalLocation(gameObject, false);
-            OnlineEditor.RemoveOwnerShip(gameObject);
+            try
+            {
+                RigidBodyController.RestoreOriginalBody();
+                if (gameObject.IsOwner())
+                {
+                    OnlineEditor.RemoveOwnerShip(gameObject);
+                }
+                if (VRC_AstroPickup != null)
+                {
+                    Destroy(VRC_AstroPickup);
+                }
+                GameObjectMenu.RestoreOriginalLocation(gameObject, false);
+            }
+            catch { }
         }
 
-        internal float TimerOffset = 0f;
-        private float LastTimeCheck2 = 0;
-        private float LastTimeCheck = 0;
-        private bool HasRequiredSettings = false;
-        private bool ApplyOnce = true;
+        private float CheckisOwnerTimeCheck { get; set; } = 0;
 
-        internal Player TargetPlayer;
-        internal bool IsLockDeactivated = false;
-        private Rigidbody body = null;
-        private RigidBodyController control;
-        private PickupController pickup;
+        private float CheckisOwnerDelay { get; set; } = 16f;
+        private bool CheckisOwner { get; set; } = false;
+
+        private bool isCurrentOwner
+        {
+            get
+            {
+                if (CheckisOwner)
+                {
+                    if (!gameObject.IsOwner())
+                    {
+                        gameObject.TakeOwnership();
+                    }
+                    return gameObject.IsOwner();
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
+        private bool isHeld => PickupController.IsHeld;
+
+        private bool _HasRequiredSettings = false;
+
+        private bool HasRequiredSettings
+        {
+            get => _HasRequiredSettings;
+            set
+            {
+                if (value.Equals(_HasRequiredSettings))
+                {
+                    return; // Do Nothing.
+                }
+                _HasRequiredSettings = value;
+                if (value)
+                {
+                    if (RigidBodyController != null)
+                    {
+                        if (!RigidBodyController.EditMode)
+                        {
+                            RigidBodyController.EditMode = true;
+                        }
+                        RigidBodyController.constraints = RigidbodyConstraints.FreezeRotation;
+                        RigidBodyController.constraints = RigidbodyConstraints.None;
+                    }
+                }
+                else
+                {
+                    RigidBodyController.RestoreOriginalBody();
+                    RigidBodyController.EditMode = false;
+                }
+            }
+        }
+
+        private Rigidbody RigidBody { get; set; } = null;
+        private RigidBodyController RigidBodyController { get; set; }
+        private PickupController PickupController { get; set; }
+        private VRC_AstroPickup VRC_AstroPickup { get; set; }
+        private float WatcherTimeCheck { get; set; } = 0;
+
+        private float Movementforce { get; set; } = 0.04f; // DEFAULT 0.04f
+
+        private bool isPaused { get; set; }
+        private Rigidbody body { get; set; } = null;
+
+        internal Player TargetPlayer { get; set; }
     }
 }

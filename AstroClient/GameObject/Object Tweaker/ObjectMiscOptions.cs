@@ -98,7 +98,6 @@
                                     if(itemtwo != null)
                                 {
                                     itemtwo.TargetPlayer = targetuser;
-                                    itemtwo.IsLockDeactivated = true;
                                 }
                             }
                         }
@@ -135,7 +134,6 @@
                             if (itemtwo != null)
                             {
                                 itemtwo.TargetPlayer = targetuser;
-                                itemtwo.IsLockDeactivated = true;
                             }
                         }
                     }
@@ -221,7 +219,6 @@
                         if (item != null)
                         {
                             item.TargetPlayer = targetuser;
-                            item.IsLockDeactivated = true;
                         }
                     }
                 }
@@ -246,7 +243,6 @@
                         if (item != null)
                         {
                             item.TargetPlayer = targetuser;
-                            item.IsLockDeactivated = true;
                         }
                     }
                 }
