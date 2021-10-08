@@ -4,9 +4,7 @@
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
     using AstroClient.Features.Player.Movement.Exploit;
-    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
     using ExitGames.Client.Photon;
     using Harmony;
     using MelonLoader;
@@ -48,6 +46,50 @@
             }
         }
 
+
+        private enum EventCode
+        {
+            OpRemoveCache_etc = 0,
+            USpeaker_Voice_Data = 1,
+            Disconnect_Message = 2,
+            Cached_Events = 4, // Wut?
+            Master_allowing_player_to_join = 5,
+            RPC = 6,
+            Motion = 7,
+            interest = 8, // Wut
+            Reliable = 9,
+            Moderations = 33,
+            OpCleanRpcBuffer = 200, // (int actorNumber)
+            SendSerialize = 201,
+            Instantiation = 202,
+            CloseConnection = 203, // (PhotonPlayer kickPlayer)
+            Destroy = 204,
+            RemoveCachedRPCs = 205,
+            SendSerializeReliable = 206,
+            Destroy_Player = 207,
+            SetMasterClient = 208, // (int playerId, bool sync)
+            Request_Ownership = 209,
+            Transfer_Ownership = 210,
+            VacantViewIds = 211,
+            UploadAvatar = 223, 
+            Custom_Properties = 253,
+            Leaving_World = 254,
+            Joining_World = 255,
+        }
+
+
+        private enum ModerationCode
+        {
+            Warnings = 2,
+            Mod_Mute = 8,
+            Friend_State = 10,
+            VoteKick = 13,
+            Unknown = 20,  // Unknown, seems affecting users on reset 
+            Block_Or_Mute = 21,
+        }
+
+
+
         private unsafe static bool OnEventPatch(ref EventData __0)
         {
             try
@@ -60,12 +102,18 @@
                 Dictionary<byte, IntPtr> ConvertedToNormalDict = new Dictionary<byte, IntPtr>();
                 if (__0 != null)
                 {
-                    var code = __0.Code;
                     var PhotonSender = Utils.LoadBalancingPeer.GetPhotonPlayer(__0.sender);
                     var PhotonID = __0.sender;
                     StringBuilder line = new StringBuilder();
                     StringBuilder prefix = new StringBuilder();
-                    prefix.Append($"[Event ({code})] ");
+                    if (Enum.IsDefined(typeof(EventCode), __0.Code))
+                    {
+                        prefix.Append($"[Event ({__0.Code}) {Enum.GetName(typeof(EventCode), __0.Code).Replace("_", " ")}] ");
+                    }
+                    else
+                    {
+                        prefix.Append($"[Event ({__0.Code})] ");
+                    }
                     line.Append($"from: ({__0.Sender}) ");
                     if (WorldUtils.IsInWorld && PhotonSender != null)
                     {
@@ -106,26 +154,26 @@
                             }
                             if (ConvertedToNormalDict != null && ConvertedToNormalDict.Count != 0)
                             {
-
-                                switch (code)
+                                 
+                                switch (__0.Code)
                                 {
-                                    case 1:// Voice Data TODO : (Parrot Mode)
+                                    case (byte)EventCode.USpeaker_Voice_Data:// Voice Data TODO : (Parrot Mode)
                                         break;
 
-                                    case 7: // I believe this is motion, key 245 appears to be base64
+                                    case (byte)EventCode.Motion: // I believe this is motion, key 245 appears to be base64
                                         break;
 
-                                    case 2: // Kick Message?
+                                    case (byte)EventCode.Disconnect_Message: // Kick Message?
                                         string kickMessage = (Serialization.FromIL2CPPToManaged<object>(__0.Parameters) as Dictionary<byte, object>)[245].ToString();
                                         break;
 
-                                    case 6:
+                                    case (byte)EventCode.RPC:
                                         break;
 
-                                    case 8: // Interest - Interested in events
+                                    case (byte)EventCode.interest: // Interest - Interested in events
                                         break;
 
-                                    case 33: // Moderations
+                                    case (byte)EventCode.Moderations: // Moderations
                                         log = true;
                                         #region Moderation Handler
                                         try
@@ -133,30 +181,29 @@
                                             if (ConvertedToNormalDict.ContainsKey(0))
                                             {
                                                 byte moderationevent = *(byte*)IL2CPP.il2cpp_object_unbox(ConvertedToNormalDict[0]).ToPointer();
+                                                if (Enum.IsDefined(typeof(ModerationCode), moderationevent))
+                                                {
+                                                    prefix.Append($"[Moderation {Enum.GetName(typeof(ModerationCode), __0.Code).Replace("_", " ")}] ");
+                                                }
                                                 switch (moderationevent)
                                                 {
-                                                    case 2: // Warnings.
-                                                        prefix.Append("Moderation Warning: ");
+                                                    case (byte)ModerationCode.Warnings: // Warnings.
                                                         log = true;
                                                         break;
 
-                                                    case 8: // Mod Mute
-                                                        prefix.Append("Moderation Mod-Mute: ");
+                                                    case (byte)ModerationCode.Mod_Mute: // Mod Mute
                                                         log = true;
                                                         break;
 
-                                                    case 10: // Friend State
-                                                        prefix.Append("Moderation Friend State: ");
+                                                    case (byte)ModerationCode.Friend_State: // Friend State
                                                         log = true;
                                                         break;
 
-                                                    case 13: // VoteKick
-                                                        prefix.Append("Moderation VoteKick : ");
+                                                    case (byte)ModerationCode.VoteKick: // VoteKick
                                                         log = true;
                                                         break;
 
-                                                    case 21: // Mute , Blocking
-                                                        prefix.Append("Moderation Block/Mute : ");
+                                                    case(byte) ModerationCode.Block_Or_Mute: 
                                                         log = true;
                                                         #region Blocking and Muting Events.
 
@@ -285,13 +332,12 @@
 
                                                         break;
 
-                                                    case 20: // Unknown, seems affecting users on reset 
-                                                        prefix.Append($"Moderation Event {moderationevent}:");
+                                                    case (byte) ModerationCode.Unknown: // Unknown, seems affecting users on reset 
                                                         log = true;
                                                         break;
 
                                                     default:
-                                                        prefix.Append($"Moderation Event {moderationevent}:");
+                                                        prefix.Append($"Unregistered Event {moderationevent}:");
                                                         log = true;
                                                         break;
                                                 }
@@ -306,21 +352,21 @@
                                         #endregion Moderation Handler
                                         break;
 
-                                    case 203: // Destroy
-                                        prefix.Append("Destroy: ");
+                                    case (byte)EventCode.Destroy: // Destroy
                                         log = true;
                                         break;
 
-                                    case 210:
+                                    case (byte)EventCode.Transfer_Ownership:
                                         break;
 
-                                    case 223: // This fired with what looked like base64 png data when I uploaded a VRC+ avatar
+                                    case (byte)EventCode.UploadAvatar: // This fired with what looked like base64 png data when I uploaded a VRC+ avatar
                                         break;
 
-                                    case 253: // I think this is avatar switching related
+                                    case (byte)EventCode.Custom_Properties: // I think this is avatar switching related
                                         break;
 
                                     default:
+
                                         log = true;
                                         break;
                                 }
