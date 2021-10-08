@@ -105,8 +105,43 @@
             }
         }
 
+        private static string TranslateEventData(byte code)
+        {
+            switch (code)
+            {
+                case EventCode.OpRemoveCache_etc: return "OpRemoveCache , etc...";
+                case EventCode.USpeaker_Voice_Data: return "USpeak voice Data";
+                case EventCode.Disconnect_Message: return "Disconnect (Kick)";
+                case EventCode.Cached_Events: return "Cached Events";
+                case EventCode.Master_allowing_player_to_join: return "Master allowing player to join";
+                case EventCode.RPC: return "RPC";
+                case EventCode.Motion: return "Motion";
+                case EventCode.interest: return "Interest";
+                case EventCode.Reliable: return "Reliable";
+                case EventCode.Moderations: return "Moderation";
+                case EventCode.OpCleanRpcBuffer: return "OPCleanRPCBuffer (int actorNumber)";
+                case EventCode.SendSerialize: return "SendSerialize";
+                case EventCode.Instantiation: return "Instantiation";
+                case EventCode.CloseConnection: return "CloseConnection (PhotonPlayer kickPlayer)";
+                case EventCode.Destroy: return "Destroy";
+                case EventCode.RemoveCachedRPCs: return "RemoveCachedRPCs";
+                case EventCode.SendSerializeReliable: return "SendSerializeReliable";
+                case EventCode.Destroy_Player: return "Destroy Player";
+                case EventCode.SetMasterClient: return "SetMasterClient (int playerId, bool sync)";
+                case EventCode.Request_Ownership: return "Request Ownership";
+                case EventCode.Transfer_Ownership: return "Transfer Ownership";
+                case EventCode.VacantViewIds: return "VacantViewIds";
+                case EventCode.UploadAvatar: return "UploadAvatar";
+                case EventCode.Custom_Properties: return "Custom Properties";
+                case EventCode.Leaving_World: return "Leaving World";
+                case EventCode.Joining_World: return "Joining World";
+                default:
+                    return null;
 
-            private unsafe static bool OnEventPatch(ref EventData __0)
+            }
+        }
+
+        private unsafe static bool OnEventPatch(ref EventData __0)
         {
             try
             {
@@ -122,9 +157,10 @@
                     var PhotonID = __0.sender;
                     StringBuilder line = new StringBuilder();
                     StringBuilder prefix = new StringBuilder();
-                    if (Enum.IsDefined(typeof(EventCode), __0.Code))
+                    string translated = TranslateEventData(__0.Code);
+                    if (translated.IsNotNullOrEmptyOrWhiteSpace())
                     {
-                        prefix.Append($"[Event ({__0.Code}) {Enum.GetName(typeof(EventCode), __0.Code).Replace("_", " ")}] ");
+                        prefix.Append($"[Event ({__0.Code}) {translated}] ");
                     }
                     else
                     {
@@ -199,7 +235,7 @@
                                             {
                                                 byte moderationevent = *(byte*)IL2CPP.il2cpp_object_unbox(ConvertedToNormalDict[0]).ToPointer();
                                                 var moderationeventname = TranslateModerationEvent(moderationevent);
-                                                if(moderationeventname != null && moderationeventname.IsNotNullOrEmptyOrWhiteSpace())
+                                                if(moderationeventname.IsNotNullOrEmptyOrWhiteSpace())
                                                 {
                                                     prefix.Append($"[Moderation {moderationeventname}");
                                                 }
