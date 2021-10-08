@@ -76,7 +76,7 @@
                     CheckisOwnerTimeCheck = Time.time;
                 }
             }
-            if (Time.time - WatcherTimeCheck > 0.05f)
+            if (Time.time - WatcherTimeCheck > 0.005f)
             {
                 if (!HasRequiredSettings)
                 {
@@ -104,7 +104,10 @@
                 {
                     Destroy(VRC_AstroPickup);
                 }
-                GameObjectMenu.RestoreOriginalLocation(gameObject, false);
+                if (!isHeld)
+                {
+                    GameObjectMenu.RestoreOriginalLocation(gameObject, false);
+                }
             }
             catch { }
         }

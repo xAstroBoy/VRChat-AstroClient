@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Components
 {
+    using AstroClient.GameObjectDebug;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using System;
@@ -67,8 +68,8 @@
                     CheckisOwnerTimeCheck = Time.time;
                 }
             }
-            if (Time.time - AttackerTimeCheck > 0.6f)
-            {
+            //if (Time.time - AttackerTimeCheck > 0.6f)
+            //{
                 if (!HasRequiredSettings)
                 {
                     HasRequiredSettings = true;
@@ -84,8 +85,8 @@
                     gameObject.transform.LookAt(BonesUtils.Get_Player_Bone_Transform(TargetPlayer, HumanBodyBones.Head).position);
                 }
 
-                AttackerTimeCheck = Time.time;
-            }
+                //AttackerTimeCheck = Time.time;
+            //}
         }
 
         private void ApplyForceX()
@@ -165,6 +166,10 @@
                 if (VRC_AstroPickup != null)
                 {
                     Destroy(VRC_AstroPickup);
+                }
+                if (!isHeld)
+                {
+                    GameObjectMenu.RestoreOriginalLocation(gameObject, false);
                 }
             }
             catch { }

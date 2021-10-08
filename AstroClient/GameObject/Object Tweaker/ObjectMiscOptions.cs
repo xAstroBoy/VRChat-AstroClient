@@ -281,9 +281,10 @@
                 var apiuser = QuickMenuUtils.SelectedUser;
                 if (apiuser != null)
                 {
-                    foreach(var item in Resources.FindObjectsOfTypeAll<PlayerWatcher>())
+                    foreach(var pickup in WorldUtils_Old.Get_Pickups())
                     {
-                        if(item.TargetPlayer.GetAPIUser().Equals(apiuser))
+                        var item = pickup.GetComponent<PlayerWatcher>();
+                        if (item != null)
                         {
                             item.DestroyMeLocal();
                         }
@@ -300,9 +301,10 @@
                 var apiuser = QuickMenuUtils.SelectedUser;
                 if (apiuser != null)
                 {
-                    foreach (var item in Resources.FindObjectsOfTypeAll<PlayerAttacker>())
+                    foreach (var pickup in WorldUtils_Old.Get_Pickups())
                     {
-                        if (item.TargetPlayer.GetAPIUser().Equals(apiuser))
+                        var item = pickup.GetComponent<PlayerAttacker>();
+                        if (item != null)
                         {
                             item.DestroyMeLocal();
                         }
