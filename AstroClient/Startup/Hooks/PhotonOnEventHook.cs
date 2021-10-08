@@ -202,7 +202,7 @@
                             }
                             if(customdataobj == null)
                             {
-                                return true; // There's no need to continue to read and translate, so let's continue.
+                                return true; // There's no need to continue to read and translate.
                             }
                             if (ConvertedToNormalDict != null && ConvertedToNormalDict.Count != 0)
                             {
@@ -210,6 +210,7 @@
                                 switch (__0.Code)
                                 {
                                     case EventCode.USpeaker_Voice_Data:// Voice Data TODO : (Parrot Mode)
+                                        log = true;
                                         break;
 
                                     case EventCode.Motion: // I believe this is motion, key 245 appears to be base64
