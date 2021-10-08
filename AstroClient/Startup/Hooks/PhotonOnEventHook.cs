@@ -141,15 +141,54 @@
             }
         }
 
+
+        private static bool EventCodeToLog(byte code)
+        {
+            switch (code)
+            {
+                case EventCode.OpRemoveCache_etc: return false;
+                case EventCode.USpeaker_Voice_Data: return true;
+                case EventCode.Disconnect_Message: return false;
+                case EventCode.Cached_Events: return false;
+                case EventCode.Master_allowing_player_to_join: return false;
+                case EventCode.RPC: return false;
+                case EventCode.Motion: return false;
+                case EventCode.interest: return false;
+                case EventCode.Reliable: return false;
+                case EventCode.Moderations: return true;
+                case EventCode.OpCleanRpcBuffer: return false;
+                case EventCode.SendSerialize: return false;
+                case EventCode.Instantiation: return false;
+                case EventCode.CloseConnection: return false;
+                case EventCode.Destroy: return false;
+                case EventCode.RemoveCachedRPCs: return false;
+                case EventCode.SendSerializeReliable: return false;
+                case EventCode.Destroy_Player: return false;
+                case EventCode.SetMasterClient: return false;
+                case EventCode.Request_Ownership: return false;
+                case EventCode.Transfer_Ownership: return false;
+                case EventCode.VacantViewIds: return false;
+                case EventCode.UploadAvatar: return false;
+                case EventCode.Custom_Properties: return false;
+                case EventCode.Leaving_World: return false;
+                case EventCode.Joining_World: return false;
+                default:
+                    return true;
+
+            }
+        }
+
+
+
         private unsafe static bool OnEventPatch(ref EventData __0)
         {
+            bool isBlocked = false; // Flag this if needed to make the event not continue
+            bool isPatched = false; // Flag this if you modify the event. (it will replace the event data)
+            bool ToEmpty = false; // Flag this if you want to modify the event with a empty key.
+            bool toReset = false; // Flag this if you need to clear the event entirely (might break something!)
+
             try
             {
-                bool log = false;
-                bool isBlocked = false; // Flag this if needed to make the event not continue
-                bool isPatched = false; // Flag this if you modify the event. (it will replace the event data)
-                bool ToEmpty = false; // Flag this if you want to modify the event with a empty key.
-                bool toReset = false; // Flag this if you need to clear the event entirely (might break something!)
                 Dictionary<byte, IntPtr> ConvertedToNormalDict = new Dictionary<byte, IntPtr>();
                 if (__0 != null)
                 {
@@ -209,25 +248,24 @@
                                  
                                 switch (__0.Code)
                                 {
-                                    case EventCode.USpeaker_Voice_Data:// Voice Data TODO : (Parrot Mode)
-                                        log = true;
-                                        break;
+                                    //case EventCode.USpeaker_Voice_Data:// Voice Data TODO : (Parrot Mode)
+                                    //    log = true;
+                                    //    break;
 
                                     case EventCode.Motion: // I believe this is motion, key 245 appears to be base64
                                         break;
 
-                                    case EventCode.Disconnect_Message: // Kick Message?
-                                        string kickMessage = (Serialization.FromIL2CPPToManaged<object>(__0.Parameters) as Dictionary<byte, object>)[245].ToString();
-                                        break;
+                                    //case EventCode.Disconnect_Message: // Kick Message?
+                                    //    string kickMessage = (Serialization.FromIL2CPPToManaged<object>(__0.Parameters) as Dictionary<byte, object>)[245].ToString();
+                                    //    break;
 
-                                    case EventCode.RPC:
-                                        break;
+                                    //case EventCode.RPC:
+                                    //    break;
 
-                                    case EventCode.interest: // Interest - Interested in events
-                                        break;
+                                    //case EventCode.interest: // Interest - Interested in events
+                                    //    break;
 
                                     case EventCode.Moderations: // Moderations
-                                        log = true;
                                         #region Moderation Handler
                                         try
                                         {
@@ -242,23 +280,18 @@
                                                 switch (moderationevent)
                                                 {
                                                     case ModerationCode.Warning: // Warnings.
-                                                        log = true;
                                                         break;
 
                                                     case ModerationCode.Mod_Mute: // Mod Mute
-                                                        log = true;
                                                         break;
 
                                                     case ModerationCode.Friend_State: // Friend State
-                                                        log = true;
                                                         break;
 
                                                     case ModerationCode.VoteKick: // VoteKick
-                                                        log = true;
                                                         break;
 
                                                     case(byte) ModerationCode.Block_Or_Mute: 
-                                                        log = true;
                                                         #region Blocking and Muting Events.
 
                                                         byte photonid = 1;
@@ -387,12 +420,10 @@
                                                         break;
 
                                                     case (byte) ModerationCode.Unknown: // Unknown, seems affecting users on reset 
-                                                        log = true;
                                                         break;
 
                                                     default:
                                                         prefix.Append($"Unregistered Event {moderationevent}:");
-                                                        log = true;
                                                         break;
                                                 }
                                             }
@@ -406,22 +437,20 @@
                                         #endregion Moderation Handler
                                         break;
 
-                                    case EventCode.Destroy: // Destroy
-                                        log = true;
-                                        break;
+                                    //case EventCode.Destroy: // Destroy
+                                    //    log = true;
+                                    //    break;
 
-                                    case EventCode.Transfer_Ownership:
-                                        break;
+                                    //case EventCode.Transfer_Ownership:
+                                    //    break;
 
-                                    case EventCode.UploadAvatar: // This fired with what looked like base64 png data when I uploaded a VRC+ avatar
-                                        break;
+                                    //case EventCode.UploadAvatar: // This fired with what looked like base64 png data when I uploaded a VRC+ avatar
+                                    //    break;
 
-                                    case EventCode.Custom_Properties: // I think this is avatar switching related
-                                        break;
+                                    //case EventCode.Custom_Properties: // I think this is avatar switching related
+                                    //    break;
 
                                     default:
-
-                                        log = true;
                                         break;
                                 }
                             }
@@ -499,7 +528,7 @@
                     {
                         eventstring = "EMPTIED : ";
                     }
-                    if (log && ConfigManager.General.LogEvents && __0.Parameters != null)
+                    if (EventCodeToLog(__0.Code) && ConfigManager.General.LogEvents && __0.Parameters != null)
                     {
                         line.Append($"\n{Newtonsoft.Json.JsonConvert.SerializeObject(Serialization.FromIL2CPPToManaged<object>(__0.Parameters), Newtonsoft.Json.Formatting.Indented)}");
                         ModConsole.Log($"{eventstring}{prefix.ToString()}{line.ToString()}");
@@ -525,7 +554,6 @@
                 ModConsole.ErrorExc(e);
                 return true;
             }
-            ModConsole.DebugLog($"HOOK END Without Exceptions");
             return true;
         }
     }
