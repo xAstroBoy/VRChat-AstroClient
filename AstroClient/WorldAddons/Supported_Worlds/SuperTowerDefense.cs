@@ -23,26 +23,6 @@
                 {
                     Bank = one.DisassembleUdonBehaviour();
                 }
-                var two = UdonSearch.FindUdonEvent("TowerManager", "_start").UdonBehaviour;
-                if (two != null)
-                {
-                    TowerManager = two.DisassembleUdonBehaviour();
-                }
-                var three = UdonSearch.FindUdonEvent("UpgradeTool1", "Restart").UdonBehaviour;
-                if (three != null)
-                {
-                    UpgradeTool1 = three.DisassembleUdonBehaviour();
-                }
-                var four = UdonSearch.FindUdonEvent("UpgradeTool0", "_start").UdonBehaviour;
-                if (four != null)
-                {
-                    UpgradeTool0 = four.DisassembleUdonBehaviour();
-                }
-                var five = UdonSearch.FindUdonEvent("SellTool", "_start").UdonBehaviour;
-                if (five != null)
-                {
-                    SellTool = five.DisassembleUdonBehaviour();
-                }
                 var revive = UdonSearch.FindUdonEvent("HealthController", "Revive");
                 if(revive != null)
                 {
@@ -51,14 +31,6 @@
                 else
                 {
                     ModConsole.Warning("HealthController Not Found, unable to create Revive Tool!");
-                }
-                var ListBehaviours = UdonSearch.FindAllUdonEvents("NearbyCollider", "_start");
-                if (ListBehaviours != null)
-                {
-                    foreach (var item in ListBehaviours)
-                    {
-                        NearbyColliders.Add(item.UdonBehaviour.DisassembleUdonBehaviour());
-                    }
                 }
                 var wrench = GameObjectFinder.Find("UpgradeTool0");
                 if(wrench != null)
@@ -77,7 +49,6 @@
 
         internal override void OnRoomLeft()
         {
-            NearbyColliders.Clear();
             HealthToolEnabled = false;
             RedWrench = null;
             ReviveEvent = null;
@@ -95,8 +66,8 @@
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2f, "Add 10000000 Money", () => { AddBankBalance(10000000); }, "Edit Current Balance!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2.5f, "Set 999999999 Money", () => { SetBankBalance(999999999); }, "Edit Current Balance!", null, null, true);
 
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0f, "Default Tower Limit", () => { SetMaxTowerCount(20); }, "Edit Tower Limit!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0.5f, "Unlimited Towers", () => { SetMaxTowerCount(99); }, "Edit Tower Limit!", null, null, true);
+            //_ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0f, "Default Tower Limit", () => { SetMaxTowerCount(20); }, "Edit Tower Limit!", null, null, true);
+            //_ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0.5f, "Unlimited Towers", () => { SetMaxTowerCount(99); }, "Edit Tower Limit!", null, null, true);
             HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 1, "Toggle Health Tool", () => { HealthToolEnabled = true; }, "Toggle Health Tool", () => { HealthToolEnabled = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
         }
 
@@ -117,32 +88,11 @@
             }
         }
 
-
-
         internal static void SetBankBalance(int amount)
         {
             UdonHeapEditor.PatchHeap(Bank, CurrentMoney, amount, true);
         }
 
-
-        internal static void SetMaxTowerCount(int amount)
-        {
-            UdonHeapEditor.PatchHeap(TowerManager, MaxTowerCount, amount, true);
-            //UdonHeapEditor.PatchHeap(TowerManager, TowerCount, amount, true);
-            UdonHeapEditor.PatchHeap(UpgradeTool1, MaxTowerCount, amount, true);
-            UdonHeapEditor.PatchHeap(UpgradeTool0, MaxTowerCount, amount, true);
-            UdonHeapEditor.PatchHeap(SellTool, MaxTowerCount, amount, true);
-            foreach (var beh in NearbyColliders)
-            {
-                UdonHeapEditor.PatchHeap(beh, MaxTowers, amount, true);
-
-            }
-        }
-        private static QMSingleToggleButton HealthToolBtn;
-        private static GameObject RedWrench;
-        private static VRC_AstroPickup RedWrenchPickup;
-
-        private static UdonBehaviour_Cached ReviveEvent;
 
         private static bool _HealthToolEnabled;
         private static bool HealthToolEnabled
@@ -197,26 +147,20 @@
                 }
             }
         }
+
+
         internal static QMNestedButton SuperTowerDefensecheatPage { get; set; }
 
         private static DisassembledUdonBehaviour Bank { get; set; }
 
-        private static DisassembledUdonBehaviour TowerManager { get; set; }
+        private static QMSingleToggleButton HealthToolBtn{ get; set; }
+        private static GameObject RedWrench{ get; set; }
+        private static VRC_AstroPickup RedWrenchPickup{ get; set; }
 
-        private static DisassembledUdonBehaviour UpgradeTool1 { get; set; }
-        private static DisassembledUdonBehaviour UpgradeTool0 { get; set; }
-        private static DisassembledUdonBehaviour SellTool { get; set; }
-
-        private static List<DisassembledUdonBehaviour> NearbyColliders { get; set; } = new List<DisassembledUdonBehaviour>();
+        private static UdonBehaviour_Cached ReviveEvent{ get; set; }
 
         private static string StartMoney { get; } = "StartMoney";
         private static string CurrentMoney { get; } = "Money";
-
-        private static string MaxTowerCount { get; } = "MaxTowerCount";
-
-        private static string MaxTowers { get; } = "MaxTowers";
-
-        private static string TowerCount { get; } = "TowerCount";
 
 
     }
