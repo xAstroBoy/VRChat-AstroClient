@@ -10,6 +10,7 @@
     using UnityEngine;
     using AstroClient.Components;
     using static AstroClient.Variables.CustomLists;
+    using AstroLibrary.Utility;
 
     internal class SuperTowerDefense : GameEvents
     {
@@ -101,7 +102,6 @@
             }
             set
             {
-                _HealthToolEnabled = value;
                 if(HealthToolBtn != null)
                 {
                     HealthToolBtn.SetToggleState(value);
@@ -110,11 +110,21 @@
                 {
                     return;
                 }
+                _HealthToolEnabled = value;
                 if (RedWrench != null && ReviveEvent != null)
                 {
                     if (value)
                     {
-                        GenerateTool();
+                        if (RedWrenchPickup == null)
+                        {
+                            RedWrenchPickup = RedWrench.GetOrAddComponent<VRC_AstroPickup>();
+                            if (RedWrenchPickup != null)
+                            {
+                                RedWrenchPickup.OnPickupUseUp = null;
+                                RedWrenchPickup.OnPickupUseUp += new System.Action(() => { ReviveEvent.ExecuteUdonEvent(); });
+                                RedWrenchPickup.UseText = "Reset Health (AstroClient)";
+                            }
+                        }
                     }
                     else
                     {
@@ -124,25 +134,7 @@
                         }
                     }
                 }
-            }
-        }
 
-        private static  void GenerateTool()
-        {
-            if (RedWrench != null)
-            {
-                if (ReviveEvent != null)
-                {
-                    if (RedWrenchPickup == null)
-                    {
-                        RedWrenchPickup = RedWrench.AddComponent<VRC_AstroPickup>();
-                        if (RedWrenchPickup != null)
-                        {
-                            RedWrenchPickup.OnPickupUseUp += new System.Action(() => { ReviveEvent.ExecuteUdonEvent(); });
-                            RedWrenchPickup.InteractionText = "Reset Health (AstroClient)";
-                        }
-                    }
-                }
             }
         }
 
