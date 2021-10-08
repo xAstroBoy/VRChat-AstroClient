@@ -210,7 +210,6 @@
                                 switch (__0.Code)
                                 {
                                     case EventCode.USpeaker_Voice_Data:// Voice Data TODO : (Parrot Mode)
-                                        log = true;
                                         break;
 
                                     case EventCode.Motion: // I believe this is motion, key 245 appears to be base64
