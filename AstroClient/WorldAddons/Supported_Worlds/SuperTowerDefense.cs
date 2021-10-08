@@ -7,6 +7,9 @@
     using AstroLibrary.Finder;
     using AstroButtonAPI;
     using System.Collections.Generic;
+    using UnityEngine;
+    using AstroClient.Components;
+    using static AstroClient.Variables.CustomLists;
 
     internal class SuperTowerDefense : GameEvents
     {
@@ -43,11 +46,13 @@
                 var ListBehaviours = UdonSearch.FindAllUdonEvents("NearbyCollider", "_start");
                 if (ListBehaviours != null)
                 {
-                    foreach(var item in ListBehaviours)
+                    foreach (var item in ListBehaviours)
                     {
                         NearbyColliders.Add(item.UdonBehaviour.DisassembleUdonBehaviour());
                     }
                 }
+                RedWrench  = GameObjectFinder.FindRootSceneObject("UpgradeTool0");
+                ReviveEvent = UdonSearch.FindUdonEvent("HealthController", "Revive");
 
             }
         }
@@ -55,6 +60,7 @@
         internal override void OnRoomLeft()
         {
             NearbyColliders.Clear();
+            HealthToolEnabled = false;
         }
 
 
@@ -71,7 +77,7 @@
 
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0f, "Default Tower Limit", () => { SetMaxTowerCount(20); }, "Edit Tower Limit!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0.5f, "Unlimited Towers", () => { SetMaxTowerCount(99); }, "Edit Tower Limit!", null, null, true);
-
+            HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 1, "Toggle Health Tool", () => { HealthToolEnabled = true; }, "Toggle Health Tool", () => { HealthToolEnabled = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
         }
 
 
@@ -106,14 +112,68 @@
             UdonHeapEditor.PatchHeap(UpgradeTool1, MaxTowerCount, amount, true);
             UdonHeapEditor.PatchHeap(UpgradeTool0, MaxTowerCount, amount, true);
             UdonHeapEditor.PatchHeap(SellTool, MaxTowerCount, amount, true);
-            foreach(var beh in NearbyColliders)
+            foreach (var beh in NearbyColliders)
             {
-            UdonHeapEditor.PatchHeap(beh, MaxTowers, amount, true);
+                UdonHeapEditor.PatchHeap(beh, MaxTowers, amount, true);
 
             }
         }
+        private static QMSingleToggleButton HealthToolBtn;
+        private static GameObject RedWrench;
+        private static VRC_AstroPickup RedWrenchPickup;
 
+        private static UdonBehaviour_Cached ReviveEvent;
 
+        private static bool _HealthToolEnabled;
+        private static bool HealthToolEnabled
+        {
+            get
+            {
+                return _HealthToolEnabled;   
+            }
+            set
+            {
+                _HealthToolEnabled = value;
+                if(HealthToolBtn != null)
+                {
+                    HealthToolBtn.SetToggleState(value);
+                }
+                if (value.Equals(_HealthToolEnabled))
+                {
+                    return;
+                }
+                if(value)
+                {
+                    GenerateTool();
+                }
+                else
+                {
+                    if(RedWrenchPickup != null)
+                    {
+                        RedWrenchPickup.DestroyMeLocal();
+                    }
+                }
+            }
+        }
+
+        private static  void GenerateTool()
+        {
+            if (RedWrench != null)
+            {
+                if (ReviveEvent != null)
+                {
+                    if (RedWrenchPickup == null)
+                    {
+                        RedWrenchPickup = RedWrench.AddComponent<VRC_AstroPickup>();
+                        if (RedWrenchPickup != null)
+                        {
+                            RedWrenchPickup.OnPickupUseUp += new System.Action(() => { ReviveEvent.ExecuteUdonEvent(); });
+                            RedWrenchPickup.InteractionText = "Reset Health (AstroClient)";
+                        }
+                    }
+                }
+            }
+        }
         internal static QMNestedButton SuperTowerDefensecheatPage { get; set; }
 
         private static DisassembledUdonBehaviour Bank { get; set; }
