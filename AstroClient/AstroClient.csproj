@@ -134,7 +134,7 @@
     <Compile Include="Components\JarRoleRevealers\JarNodeReader.cs" />
     <Compile Include="Components\Orbit\OrbitBehaviour.cs" />
     <Compile Include="Components\Orbit\OrbitManager_Old.cs" />
-    <Compile Include="Components\PickupBlocker\PickupBlocker.cs" />
+    <Compile Include="Components\PickupControl\PickupBlocker.cs" />
     <Compile Include="Components\PlayerAttacker\PlayerAttacker.cs" />
     <Compile Include="Components\PlayerSpoofer\PlayerSpooferUtils.cs" />
     <Compile Include="Components\PlayerSpoofer\PlayerSpoofer.cs" />

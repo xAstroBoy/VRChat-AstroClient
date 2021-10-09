@@ -288,6 +288,20 @@
             return "Current owner : \n" + controller.CurrentOwner;
         }
 
+        internal static void Pickup_AllowOnlySelfToGrab(this PickupController control, bool AllowOnlySelfToGrab)
+        {
+            if (control != null)
+            {
+                if (!control.EditMode)
+                {
+                    control.EditMode = true;
+                }
+                control.AllowOnlySelfToGrab = AllowOnlySelfToGrab;
+            }
+        }
+
+
+
         internal static void Pickup_Set_ThrowVelocityBoostScale(this PickupController instance, float ThrowVelocityBoostScale)
         {
             if (instance != null)

@@ -33,8 +33,8 @@
             menu.GetMainButton().SetResizeTextForBestFit(true);
             if (Bools.IsDeveloper)
             {
-                _ = new QMSingleButton(menu, 0, 0, "Deny Pickups to Player.", new Action(() => { QuickMenuUtils.SelectedUser.GetPlayer().GetOrAddComponent<PickupBlocker>(); }), "Block Pickups from being used by this player!.", null, null, true);
-            _ = new QMSingleButton(menu, 0, 0.5f, "Re-allow Pickups to Player.", new Action(() => { QuickMenuUtils.SelectedUser.GetPlayer().GetComponent<PickupBlocker>().DestroyMeLocal(); }), "Block Pickups from being used by this player!.", null, null, true);
+            _ = new QMSingleButton(menu, 0, 0, "Deny Pickups to Player.", new Action(() => { PickupBlocker.RegisterPlayer(QuickMenuUtils.SelectedPlayer); }), "Block Pickups from being used by this player!.", null, null, true);
+            _ = new QMSingleButton(menu, 0, 0.5f, "Re-allow Pickups to Player.", new Action(() => { PickupBlocker.RemovePlayer(QuickMenuUtils.SelectedPlayer); }), "Block Pickups from being used by this player!.", null, null, true);
             }
 
             _ = new QMSingleButton(menu, 1, 0, "Teleport All\nPickups\nTo\nplayer.", new Action(ObjectMiscOptions.TeleportAllWorldPickupsToPlayer), "Teleport World Pickups To Player.", null, null); ;

@@ -4,6 +4,7 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using System;
+    using System.Linq;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC.SDKBase;
@@ -36,6 +37,13 @@
                 if (gameObject.active && this.isActiveAndEnabled)
                 {
                     Run_onPickupUpdate();
+                    if (AllowOnlySelfToGrab)
+                    {
+                        if (!OnlineEditor.IsLocalPlayerOwner(gameObject))
+                        {
+                            OnlineEditor.TakeObjectOwnership(gameObject);
+                        }
+                    }
                     if (!EditMode)
                     {
                         SyncProperties(true);
@@ -43,6 +51,48 @@
                 }
             }
         }
+
+
+        private void OnUpdate()
+        {
+            // Add a Shield for the Users.
+            if (!AllowOnlySelfToGrab)
+            {
+                if (PickupBlocker.blockeduserids != null && PickupBlocker.blockeduserids.Count() != 0)
+                {
+                    if (IsHeld)
+                    {
+                        var id = CurrentHolder.GetPlayer().GetAPIUser().GetUserID();
+                        if (PickupBlocker.blockeduserids.Contains(id))
+                        {
+                            OnlineEditor.TakeObjectOwnership(gameObject);
+                            CurrentHolder.GetPickupInHand(CurrentHand).Drop();
+                        }
+                    }
+                }
+            }
+        }
+
+
+        #region anti-grab method
+
+        private bool _PreventOthersFromGrabbing = false;
+
+        internal bool AllowOnlySelfToGrab
+        {
+            get
+            {
+                return _PreventOthersFromGrabbing;
+            }
+            set
+            {
+                _PreventOthersFromGrabbing = value;
+                Run_OnOnPickupPropertyChanged();
+            }
+        }
+
+        #endregion anti-grab method
+
 
         #region Backup and Restore Methods
 
