@@ -3,32 +3,10 @@
     using AstroLibrary.Console;
     using VRC.Udon.ProgramSources;
 
-    internal class UdonPrograms : GameEvents
+    internal class UdonPrograms 
     {
 
 
-        internal override void VRChat_OnUiManagerInit()
-        {
-            if (InteractProgram != null)
-            {
-                InteractProgram.hideFlags |= UnityEngine.HideFlags.DontUnloadUnusedAsset;
-            }
-            else
-            {
-                ModConsole.Error($"{InteractTriggerIdentifier} program is null, Custom Buttons might not work!");
-            }
-
-            if (PickupProgram != null)
-            {
-                PickupProgram.hideFlags |= UnityEngine.HideFlags.DontUnloadUnusedAsset;
-            }
-            else
-            {
-                ModConsole.Error($"{PickupIdentifier} program is null, Custom Pickups might not work!");
-            }
-
-
-        }
 
 
 
@@ -56,7 +34,7 @@
                         program.name = InteractTriggerIdentifier; // use it as identifier.
                         program.serializationDataFormat = VRC.Udon.Serialization.OdinSerializer.DataFormat.Binary;
                         program.programUnityEngineObjects = new Il2CppSystem.Collections.Generic.List<UnityEngine.Object>();
-                        program.hideFlags |= UnityEngine.HideFlags.DontUnloadUnusedAsset;
+                        program.hideFlags = UnityEngine.HideFlags.DontUnloadUnusedAsset;
                         _InteractProgram = program;
                         return program;
                     }
@@ -84,7 +62,7 @@
                         program.name = PickupIdentifier;
                         program.serializationDataFormat = VRC.Udon.Serialization.OdinSerializer.DataFormat.Binary;
                         program.programUnityEngineObjects = new Il2CppSystem.Collections.Generic.List<UnityEngine.Object>();
-                        program.hideFlags |= UnityEngine.HideFlags.DontUnloadUnusedAsset;
+                        program.hideFlags = UnityEngine.HideFlags.DontUnloadUnusedAsset;
                         _PickupProgram = program;
                         return program;
                     }
