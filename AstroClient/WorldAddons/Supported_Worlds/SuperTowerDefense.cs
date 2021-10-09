@@ -33,16 +33,38 @@
                 {
                     ModConsole.Warning("HealthController Not Found, unable to create Revive Tool!");
                 }
-                var wrench = GameObjectFinder.Find("UpgradeTool0");
-                if(wrench != null)
+                var RedWrench = GameObjectFinder.Find("UpgradeTool0");
+                var BlueWrench = GameObjectFinder.Find("UpgradeTool1");
+                var Hammer = GameObjectFinder.Find("SellTool");
+                if(RedWrench != null)
                 {
-
-                    RedWrench = wrench; 
+                    RedWrenchPickup = RedWrench.GetOrAddComponent<VRC_AstroPickup>();
+                    if (RedWrenchPickup != null)
+                    {
+                        RedWrenchPickup.OnPickupUseUp = null;
+                        RedWrenchPickup.OnPickupUseUp += new System.Action(() => { ReviveEvent.ExecuteUdonEvent(); });
+                        RedWrenchPickup.enabled = HealthToolEnabled;
+                    }
                 }
-                else
+                if (BlueWrench != null)
                 {
-                    ModConsole.Warning("Red Wrench Not Found, unable to create Revive Tool!");
-
+                    BlueWrenchPickup = BlueWrench.GetOrAddComponent<VRC_AstroPickup>();
+                    if (BlueWrenchPickup != null)
+                    {
+                        BlueWrenchPickup.OnPickupUseUp = null;
+                        BlueWrenchPickup.OnPickupUseUp += new System.Action(() => { ReviveEvent.ExecuteUdonEvent(); });
+                        BlueWrenchPickup.enabled = HealthToolEnabled;
+                    }
+                }
+                if (Hammer != null)
+                {
+                    HammerPickup = Hammer.GetOrAddComponent<VRC_AstroPickup>();
+                    if (HammerPickup != null)
+                    {
+                        HammerPickup.OnPickupUseUp = null;
+                        HammerPickup.OnPickupUseUp += new System.Action(() => { ReviveEvent.ExecuteUdonEvent(); });
+                        HammerPickup.enabled = HealthToolEnabled;
+                    }
                 }
 
             }
@@ -51,8 +73,11 @@
         internal override void OnRoomLeft()
         {
             HealthToolEnabled = false;
-            RedWrench = null;
             ReviveEvent = null;
+
+            RedWrenchPickup = null;
+            HammerPickup = null;
+            BlueWrenchPickup = null;
         }
 
 
@@ -67,7 +92,7 @@
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2f, "Add 10000000 Money", () => { AddBankBalance(10000000); }, "Edit Current Balance!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2.5f, "Set 999999999 Money", () => { SetBankBalance(999999999); }, "Edit Current Balance!", null, null, true);
 
-            HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 1, "Toggle Health Tool", () => { HealthToolEnabled = true; }, "Toggle Health Tool", () => { HealthToolEnabled = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 1, "Toggle Health Tools", () => { HealthToolEnabled = true; }, "Toggle Health Tool", () => { HealthToolEnabled = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
         }
 
 
@@ -98,11 +123,11 @@
         {
             get
             {
-                return _HealthToolEnabled;   
+                return _HealthToolEnabled;
             }
             set
             {
-                if(HealthToolBtn != null)
+                if (HealthToolBtn != null)
                 {
                     HealthToolBtn.SetToggleState(value);
                 }
@@ -111,30 +136,44 @@
                     return;
                 }
                 _HealthToolEnabled = value;
-                if (RedWrench != null && ReviveEvent != null)
+                if (RedWrenchPickup != null)
                 {
-                    if (value)
+                    RedWrenchPickup.enabled = value;
+                    if(value)
                     {
-                        if (RedWrenchPickup == null)
-                        {
-                            RedWrenchPickup = RedWrench.GetOrAddComponent<VRC_AstroPickup>();
-                            if (RedWrenchPickup != null)
-                            {
-                                RedWrenchPickup.OnPickupUseUp = null;
-                                RedWrenchPickup.OnPickupUseUp += new System.Action(() => { ReviveEvent.ExecuteUdonEvent(); });
-                                RedWrenchPickup.UseText = "Reset Health (AstroClient)";
-                            }
-                        }
+                        RedWrenchPickup.UseText = "Reset Health (AstroClient)";
                     }
                     else
                     {
-                        if (RedWrenchPickup != null)
-                        {
-                            RedWrenchPickup.DestroyMeLocal();
-                        }
+                        RedWrenchPickup.UseText = "Use";
+                    }
+
+                }
+                if (BlueWrenchPickup != null)
+                {
+                    BlueWrenchPickup.enabled = value;
+                    if (value)
+                    {
+                        BlueWrenchPickup.UseText = "Reset Health (AstroClient)";
+                    }
+                    else
+                    {
+                        BlueWrenchPickup.UseText = "Use";
                     }
                 }
+                if (HammerPickup != null)
+                {
+                    HammerPickup.enabled = value;
+                    if (value)
+                    {
+                        HammerPickup.UseText = "Reset Health (AstroClient)";
+                    }
+                    else
+                    {
+                        HammerPickup.UseText = "Use";
+                    }
 
+                }
             }
         }
 
@@ -144,8 +183,10 @@
         private static DisassembledUdonBehaviour Bank { get; set; }
 
         private static QMSingleToggleButton HealthToolBtn{ get; set; }
-        private static GameObject RedWrench{ get; set; }
+
         private static VRC_AstroPickup RedWrenchPickup{ get; set; }
+        private static VRC_AstroPickup BlueWrenchPickup { get; set; }
+        private static VRC_AstroPickup HammerPickup { get; set; }
 
         private static UdonBehaviour_Cached ReviveEvent{ get; set; }
 
