@@ -22,7 +22,7 @@ namespace AstroClient.Components
         {
             if (AssignedProgram == null)
             {
-                ModConsole.DebugError("Custom Pickup Events Can't Load as Program Asset is null!");
+                ModConsole.Error("Custom Pickup Events Can't Load as Program Asset is null!");
                 Destroy(this);
             }
 
