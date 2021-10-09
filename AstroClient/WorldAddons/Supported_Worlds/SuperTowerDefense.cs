@@ -11,6 +11,8 @@
     using AstroClient.Components;
     using static AstroClient.Variables.CustomLists;
     using AstroLibrary.Utility;
+    using MelonLoader;
+    using System.Collections;
 
     internal class SuperTowerDefense : GameEvents
     {
@@ -32,6 +34,11 @@
                 else
                 {
                     ModConsole.Warning("HealthController Not Found, unable to create Revive Tool!");
+                }
+                var Round = UdonSearch.FindUdonEvent("NewWaveButton", "TryStartNewWave");
+                if (Round != null)
+                {
+                    WaveEvent = Round;
                 }
                 var RedWrench = GameObjectFinder.Find("UpgradeTool0");
                 var BlueWrench = GameObjectFinder.Find("UpgradeTool1");
@@ -92,7 +99,9 @@
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2f, "Add 10000000 Money", () => { AddBankBalance(10000000); }, "Edit Current Balance!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2.5f, "Set 999999999 Money", () => { SetBankBalance(999999999); }, "Edit Current Balance!", null, null, true);
 
-            HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 1, "Toggle Health Tools", () => { HealthToolEnabled = true; }, "Toggle Health Tool", () => { HealthToolEnabled = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 0, "Toggle Health Tools", () => { HealthToolEnabled = true; }, "Toggle Health Tool", () => { HealthToolEnabled = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            AutomaticWaveBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 0.5f, "Toggle Automatic Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+
         }
 
 
@@ -178,17 +187,68 @@
         }
 
 
+        private static bool _AutomaticWaveStart = false;
+        private static bool AutomaticWaveStart
+        {
+            get
+            {
+                return _AutomaticWaveStart;
+            }
+            set
+            {
+                if (AutomaticWaveBtn != null)
+                {
+                    AutomaticWaveBtn.SetToggleState(value);
+                }
+
+                if (value.Equals(_AutomaticWaveStart))
+                {
+                    return;
+                }
+                _AutomaticWaveStart = value;
+                if(value)
+                {
+                    cancellationwavetoken = MelonCoroutines.Start(WaveStarter());
+                }
+                else
+                {
+                    if(cancellationwavetoken != null)
+                    {
+                        MelonCoroutines.Stop(cancellationwavetoken);
+                    }
+                    cancellationwavetoken = null;
+                }
+            }
+        }
+
+
+
+        private static IEnumerator WaveStarter()
+        {
+            while(AutomaticWaveStart)
+            {
+                yield return new WaitForSeconds(9f);
+                if(WaveEvent != null)
+                {
+                    WaveEvent.ExecuteUdonEvent();
+                }
+                yield return null;
+            }
+            yield return null;
+        }
         internal static QMNestedButton SuperTowerDefensecheatPage { get; set; }
 
         private static DisassembledUdonBehaviour Bank { get; set; }
 
         private static QMSingleToggleButton HealthToolBtn{ get; set; }
-
+        private static QMSingleToggleButton AutomaticWaveBtn { get; set; }
+        private static object cancellationwavetoken { get; set; }
         private static VRC_AstroPickup RedWrenchPickup{ get; set; }
         private static VRC_AstroPickup BlueWrenchPickup { get; set; }
         private static VRC_AstroPickup HammerPickup { get; set; }
 
         private static UdonBehaviour_Cached ReviveEvent{ get; set; }
+        private static UdonBehaviour_Cached WaveEvent { get; set; }
 
         private static string StartMoney { get; } = "StartMoney";
         private static string CurrentMoney { get; } = "Money";
