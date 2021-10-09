@@ -29,12 +29,14 @@
                 var revive = UdonSearch.FindUdonEvent("HealthController", "Revive");
                 if(revive != null)
                 {
-                    ReviveEvent = revive;
+                    ResetHealth = revive;
                 }
-                else
+                var damagehealth = UdonSearch.FindUdonEvent("HealthController", "LoseLives");
+                if (damagehealth != null)
                 {
-                    ModConsole.Warning("HealthController Not Found, unable to create Revive Tool!");
+                    LoseHealth = damagehealth;
                 }
+
                 var Round = UdonSearch.FindUdonEvent("NewWaveButton", "TryStartNewWave");
                 if (Round != null)
                 {
@@ -49,8 +51,8 @@
                     if (RedWrenchPickup != null)
                     {
                         RedWrenchPickup.OnPickupUseUp = null;
-                        RedWrenchPickup.OnPickupUseUp += new System.Action(() => { ReviveEvent.ExecuteUdonEvent(); });
-                        RedWrenchPickup.enabled = HealthToolEnabled;
+                        RedWrenchPickup.OnPickupUseUp += new System.Action(() => { ResetHealth.ExecuteUdonEvent(); });
+                        RedWrenchPickup.enabled = ExtraTools;
                     }
                 }
                 if (BlueWrench != null)
@@ -59,8 +61,8 @@
                     if (BlueWrenchPickup != null)
                     {
                         BlueWrenchPickup.OnPickupUseUp = null;
-                        BlueWrenchPickup.OnPickupUseUp += new System.Action(() => { ReviveEvent.ExecuteUdonEvent(); });
-                        BlueWrenchPickup.enabled = HealthToolEnabled;
+                        BlueWrenchPickup.OnPickupUseUp += new System.Action(() => { ResetHealth.ExecuteUdonEvent(); });
+                        BlueWrenchPickup.enabled = ExtraTools;
                     }
                 }
                 if (Hammer != null)
@@ -69,8 +71,8 @@
                     if (HammerPickup != null)
                     {
                         HammerPickup.OnPickupUseUp = null;
-                        HammerPickup.OnPickupUseUp += new System.Action(() => { ReviveEvent.ExecuteUdonEvent(); });
-                        HammerPickup.enabled = HealthToolEnabled;
+                        HammerPickup.OnPickupUseUp += new System.Action(() => { ResetHealth.ExecuteUdonEvent(); });
+                        HammerPickup.enabled = ExtraTools;
                     }
                 }
 
@@ -79,8 +81,8 @@
 
         internal override void OnRoomLeft()
         {
-            HealthToolEnabled = false;
-            ReviveEvent = null;
+            ExtraTools = false;
+            ResetHealth = null;
             AutomaticWaveStart = false;
             RedWrenchPickup = null;
             HammerPickup = null;
@@ -99,7 +101,7 @@
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2f, "Add 10000000 Money", () => { AddBankBalance(10000000); }, "Edit Current Balance!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2.5f, "Set 999999999 Money", () => { SetBankBalance(999999999); }, "Edit Current Balance!", null, null, true);
 
-            HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 0, "Toggle Health Tools", () => { HealthToolEnabled = true; }, "Toggle Health Tool", () => { HealthToolEnabled = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 0, "Toggle Extra Tools", () => { ExtraTools = true; }, "Toggle Extra Tools", () => { ExtraTools = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
             AutomaticWaveBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 0.5f, "Toggle Automatic Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 
         }
@@ -128,7 +130,7 @@
 
 
         private static bool _HealthToolEnabled;
-        private static bool HealthToolEnabled
+        private static bool ExtraTools
         {
             get
             {
@@ -175,7 +177,7 @@
                     HammerPickup.enabled = value;
                     if (value)
                     {
-                        HammerPickup.UseText = "Reset Health (AstroClient)";
+                        HammerPickup.UseText = "Lose Health (AstroClient)";
                     }
                     else
                     {
@@ -247,7 +249,10 @@
         private static VRC_AstroPickup BlueWrenchPickup { get; set; }
         private static VRC_AstroPickup HammerPickup { get; set; }
 
-        private static UdonBehaviour_Cached ReviveEvent{ get; set; }
+        private static UdonBehaviour_Cached ResetHealth{ get; set; }
+
+        private static UdonBehaviour_Cached LoseHealth { get; set; }
+
         private static UdonBehaviour_Cached WaveEvent { get; set; }
 
         private static string StartMoney { get; } = "StartMoney";

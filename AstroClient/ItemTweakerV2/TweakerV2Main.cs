@@ -105,6 +105,14 @@
             }
         }
 
+        internal override void OnRigidBodyController_Selected(RigidBodyController control)
+        {
+            if(ProtectionInteractor != null)
+            {
+                ProtectionInteractor.SetToggleState(control.PreventOthersFromGrabbing);
+            }
+        }
+
         internal override void OnTargetSet(Player player)
         {
             if (TeleportToTarget != null)
