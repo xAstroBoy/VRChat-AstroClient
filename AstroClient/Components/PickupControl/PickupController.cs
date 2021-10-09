@@ -53,7 +53,7 @@
         }
 
 
-        private void OnUpdate()
+        private void Update()
         {
             // Add a Shield for the Users.
             if (!AllowOnlySelfToGrab)
@@ -65,6 +65,7 @@
                         var id = CurrentHolder.GetPlayer().GetAPIUser().GetUserID();
                         if (PickupBlocker.blockeduserids.Contains(id))
                         {
+                            ModConsole.DebugLog($"Denied Pickup Usage to {CurrentHolder.displayName}");
                             OnlineEditor.TakeObjectOwnership(gameObject);
                             CurrentHolder.GetPickupInHand(CurrentHand).Drop();
                         }

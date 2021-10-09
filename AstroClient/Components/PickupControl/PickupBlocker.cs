@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+    using AstroLibrary.Console;
     using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
@@ -27,6 +28,7 @@
             var id = player.GetAPIUser().GetUserID();
             if (!blockeduserids.Contains(id))
             {
+                ModConsole.DebugLog($"Added Block for Player {player.GetDisplayName()}  from using Pickups.");
                 blockeduserids.Add(id);
             }
 
@@ -37,6 +39,8 @@
             var id = player.GetAPIUser().GetUserID();
             if (blockeduserids.Contains(id))
             {
+                ModConsole.DebugLog($"Removed Block for Player {player.GetDisplayName()}  from using Pickups.");
+
                 blockeduserids.Remove(id);
             }
 
