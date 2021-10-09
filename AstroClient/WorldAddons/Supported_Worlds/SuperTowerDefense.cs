@@ -81,7 +81,7 @@
         {
             HealthToolEnabled = false;
             ReviveEvent = null;
-
+            AutomaticWaveStart = false;
             RedWrenchPickup = null;
             HammerPickup = null;
             BlueWrenchPickup = null;
@@ -227,7 +227,7 @@
         {
             while(AutomaticWaveStart)
             {
-                yield return new WaitForSeconds(9f);
+                yield return new WaitForSeconds(1.5f);
                 if(WaveEvent != null)
                 {
                     WaveEvent.ExecuteUdonEvent();
