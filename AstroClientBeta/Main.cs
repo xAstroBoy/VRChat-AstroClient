@@ -88,17 +88,18 @@ namespace CheetosLibrary
             buttons.transform.localPosition = new Vector3(0, 0, 0);
             buttons.transform.localScale = new Vector3(1, 1, 1);
 
-            var children = buttons.GetComponentsInChildren<Transform>();
+            var children = buttons.transform.GetComponentsInChildren<Transform>();
             foreach(var child in children)
             {
                 var go = child.gameObject;
-                if (go.name.ToLower().Contains("button"))
+                if (go != hgo && go.name.ToLower().Contains("button"))
                 {
                     GameObject.Destroy(go);
                 }
             }
 
-            CreateNewButton(buttons.transform.parent);
+            CreateNewButton(buttons.transform, "Test Button #1");
+            CreateNewButton(buttons.transform, "Test Button #2");
         }
 
         public static void CreateNewDashboardTopIcon()
@@ -119,7 +120,7 @@ namespace CheetosLibrary
             image.color = Color.white;
         }
 
-        public static void CreateNewButton(Transform parent)
+        public static void CreateNewButton(Transform parent, string label)
         {
             var buttonBase = GameObject.Find(UIPaths.WorldButton);
 
@@ -128,6 +129,10 @@ namespace CheetosLibrary
             go.transform.rotation = parent.transform.rotation;
             go.transform.localPosition = new Vector3(0, 0, 0);
             go.transform.localScale = new Vector3(1, 1, 1);
+
+            go.transform.GetComponentInChildren<TextMeshProUGUI>().text = label;
+            go.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
+            go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg("Button Clicked")));
         }
     }
 }
