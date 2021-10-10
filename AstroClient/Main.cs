@@ -36,6 +36,7 @@
     using Application = UnityEngine.Application;
     using Button = UnityEngine.UI.Button;
     using AstroClient.Cheetos;
+    using CheetosLibrary;
 
     #endregion Imports
 
@@ -118,20 +119,30 @@
                 DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
                 DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
                 DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
-
-                
-
             }
+
+            _ = MelonCoroutines.Start(OnUiManagerInitCoro(() => { AfterUI(); }));
         }
 
+        private void AfterUI()
+        {
+            var junk = GameObject.Find(UIPaths.Banner);
+            if (junk != null) junk.SetActive(false);
+
+            CheetoUtils.TryRun(new Action[]
+            {
+                () => CheetoButtonAPI.CreateNewDashboardMenu("AstroClient"),
+                () => CheetoButtonAPI.CreateNewDashboardTopIcon(),
+            });
+
+            MelonLogger.Msg("UI Initialized.");
+        }
 
         private IEnumerator WaitForActionMenuInit()
         {
             while (ActionMenuDriver.prop_ActionMenuDriver_0 == null) //VRCUIManager Init is too early 
                 yield return null;
         }
-
-
 
         public override void OnApplicationLateStart()
         {
@@ -265,9 +276,10 @@
 
         private IEnumerator OnUiManagerInitCoro(Action code)
         {
-            while (VRCUiManager.prop_VRCUiManager_0 == null)
-                yield return new WaitForSeconds(0.001f);
-
+            //while (VRCUiManager.prop_VRCUiManager_0 == null)
+            //    yield return new WaitForSeconds(0.001f);
+                while (GameObject.Find(UIPaths.QuickMenu) == null)
+                    yield return new WaitForSeconds(0.001f);
             code();
         }
 

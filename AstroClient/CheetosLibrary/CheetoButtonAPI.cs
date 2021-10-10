@@ -1,117 +1,11 @@
-﻿namespace AstroClient
-{
-    using CheetosLibrary;
-    using MelonLoader;
-    using System;
-    using System.Collections;
-    using UnityEngine;
-
-    public class Main : MelonMod
-    {
-        public override void OnApplicationStart()
-        {
-            MelonLogger.Msg("AstroClient");
-
-            _ = MelonCoroutines.Start(OnUiManagerInitCoro(() => { AfterUI(); }));
-        }
-
-        private void AfterUI()
-        {
-            var junk = GameObject.Find(UIPaths.Banner);
-            if (junk != null) junk.SetActive(false);
-
-            Utils.TryRun(new Action[]
-            {
-                () => CheetoButtonAPI.CreateNewDashboardMenu("AstroClient"),
-                () => CheetoButtonAPI.CreateNewDashboardTopIcon(),
-            });
-
-            MelonLogger.Msg("UI Initialized.");
-        }
-
-        private IEnumerator OnUiManagerInitCoro(Action code)
-        {
-            while (GameObject.Find(UIPaths.QuickMenu) == null)
-                yield return new WaitForSeconds(0.001f);
-
-            code();
-        }
-    }
-}
-
-namespace CheetosLibrary
+﻿namespace CheetosLibrary
 {
     using MelonLoader;
     using System;
     using System.Collections.Generic;
-    using System.Reflection;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
-
-    public class Utils
-    {
-        public static void TryRun(Action[] actions)
-        {
-            foreach (var action in actions)
-            {
-                try
-                {
-                    action();
-                }
-                catch (Exception e)
-                {
-                    MelonLogger.Error(e);
-                }
-            }
-        }
-    }
-
-    // TODO: Finish
-    public class CheetoElement
-    {
-        public GameObject Self;
-        public GameObject Parent;
-
-        public CheetoElement()
-        {
-        }
-
-        public void SetName(string name)
-        {
-            Self.name = name;
-        }
-
-        public void ApplyFixes()
-        {
-            Self.transform.parent = Parent.transform;
-            Self.transform.rotation = Parent.transform.rotation;
-            Self.transform.localPosition = new Vector3(0, 0, 0);
-            Self.transform.localScale = new Vector3(1, 1, 1);
-        }
-    }
-
-    public class CheetoButton : CheetoElement
-    {
-        public CheetoButton(Transform parent, string label, Action action) : base()
-        {
-            var buttonBase = GameObject.Find(UIPaths.WorldButton);
-
-            var go = GameObject.Instantiate(buttonBase);
-            Self = go;
-            Parent = parent.gameObject;
-
-            SetName($"CheetoLibrary-{CheetoButtonAPI.UIElements.Count}-Button:{label}");
-            ApplyFixes();
-
-            go.transform.GetComponentInChildren<TextMeshProUGUI>().text = label;
-            go.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-            go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"[Debug] Button Clicked: {go.name}")));
-            go.transform.GetComponentInChildren<Button>().onClick.AddListener(action);
-
-            CheetoButtonAPI.UIElements.Add(go);
-        }
-    }
 
     public static class CheetoButtonAPI
     {

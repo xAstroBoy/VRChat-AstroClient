@@ -26,8 +26,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheetoClient", "CheetoClien
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroInstaller", "AstroInstaller\AstroInstaller.csproj", "{0BDBC17C-6D44-45BB-BE5D-44582B9B9622}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstroClientBeta", "AstroClientBeta\AstroClientBeta.csproj", "{15D5E4E8-D6F6-45FF-8FB5-BC6E323CE582}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug_Offline|Any CPU = Debug_Offline|Any CPU
