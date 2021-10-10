@@ -200,20 +200,7 @@
             return null;
         }
 
-        internal static void BlackListAvatar_Lewdifier(this Player player)
-        {
-            if (player != null)
-            {
-                var avatarid = player.GetAvatarID();
-                if (avatarid != null)
-                {
-                    LewdifierUtils.AvatarsToSkip.Add(avatarid);
-                    LewdifierUtils.Save_AvatarToSkip();
-                    LewdifierUtils.Refresh_AvatarsToSkip();
-                    player.ReloadAvatar();
-                }
-            }
-        }
+
 
         internal static List<string> Dump_Mesh_Renderers(this Transform item)
         {
@@ -313,56 +300,5 @@
             yield break;
         }
 
-        internal static void Add_Lewdify(this Player player)
-        {
-            if (player != null)
-            {
-                var item = player.transform.root.gameObject.GetComponentInChildren<Lewdifier>();
-                if (item == null)
-                {
-                    item = player.transform.root.gameObject.AddComponent<Lewdifier>();
-                }
-                else
-                {
-                    item.Lewdify_Avatar();
-                }
-            }
-        }
-
-        internal static void Add_MaskRemover(this Player player)
-        {
-            if (player != null)
-            {
-                var item = player.transform.root.gameObject.GetComponent<MaskRemover>();
-                if (item == null)
-                {
-                    _ = player.transform.root.gameObject.AddComponent<MaskRemover>();
-                }
-            }
-        }
-
-        internal static void Remove_Lewdify(this Player player)
-        {
-            if (player != null)
-            {
-                var item = player.transform.root.gameObject.GetComponentInChildren<Lewdifier>();
-                if (item != null)
-                {
-                    Object.Destroy(item);
-                }
-            }
-        }
-
-        internal static void Remove_MaskRemover(this Player player)
-        {
-            if (player != null)
-            {
-                var item = player.transform.root.gameObject.GetComponentInChildren<MaskRemover>();
-                if (item != null)
-                {
-                    Object.Destroy(item);
-                }
-            }
-        }
     }
 }

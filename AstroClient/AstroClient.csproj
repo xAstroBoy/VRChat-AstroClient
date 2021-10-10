@@ -141,6 +141,7 @@
     <Compile Include="Components\AstroUdons\Pickup\VRC_AstroPickup.cs" />
     <Compile Include="Components\PlayerWatcher\PlayerWatcher.cs" />
     <Compile Include="Components\Spinner\SpinnerBehaviour.cs" />
+    <Compile Include="EmojiMenu\EmojiCooldownKiller.cs" />
     <Compile Include="Exploits\ExploitUtils.cs" />
     <Compile Include="Extensions\Collider_ext.cs" />
     <Compile Include="Extensions\Engine_ext.cs" />
@@ -234,9 +235,7 @@
     <Compile Include="Extensions\SingleTag_ext.cs" />
     <Compile Include="Extensions\SyncPhysics_ext.cs" />
     <Compile Include="Extensions\Udon_ext.cs" />
-    <Compile Include="AvatarMods\AvatarModifier.cs" />
     <Compile Include="AvatarMods\AvatarUtils.cs" />
-    <Compile Include="AvatarMods\LewdifierUtils.cs" />
     <Compile Include="Cheetos\Flight.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="WorldAddons\CheatsShortcutButton.cs" />
@@ -268,8 +267,6 @@
     <Compile Include="Cheetos\CheetosWIP.cs" />
     <Compile Include="Cheetos\MediaController\MediaController.cs" />
     <Compile Include="Cheetos\HighPriority.cs" />
-    <Compile Include="Components\Avatar\MaskRemover\MaskRemover.cs" />
-    <Compile Include="Components\Avatar\Lewdifier\Lewdifier.cs" />
     <Compile Include="Components\ESP\Pickup\ESP_Pickup.cs" />
     <Compile Include="Components\ESP\Trigger\ESP_Trigger.cs" />
     <Compile Include="Components\ESP\ItemTweaker\ESP_ItemTweaker.cs" />
@@ -378,7 +375,6 @@
     <Compile Include="Utils\ColliderViewer\ColliderToggler.cs" />
     <Compile Include="Utils\ColliderViewer\XRay.cs" />
     <Compile Include="Utils\DeepCloneUtils\TriggersCloner.cs" />
-    <Compile Include="Utils\Emojis\EmojiUtils.cs" />
     <Compile Include="Utils\Colors\ColorUtils.cs" />
     <Compile Include="Utils\Headlight\Headlight.cs" />
     <Compile Include="Utils\Input\InputUtils.cs" />
@@ -1175,7 +1171,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\button.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Utils\Emojis\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
