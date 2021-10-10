@@ -45,7 +45,8 @@
                 }
             }
 
-            buttons.transform.SetSiblingIndex(0);
+            hgo.transform.SetSiblingIndex(0);
+            buttons.transform.SetSiblingIndex(1);
             _ = new CheetoButton(buttons.transform, "Test Button #1", () => { MelonLogger.Msg("Boom!"); });
             _ = new CheetoButton(buttons.transform, "Test Button #2", () => { MelonLogger.Msg("Bam!"); });
         }
