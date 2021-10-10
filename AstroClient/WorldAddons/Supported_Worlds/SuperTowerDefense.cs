@@ -52,7 +52,7 @@
                     {
                         RedWrenchPickup.OnPickupUseUp = null;
                         RedWrenchPickup.OnPickupUseUp += new System.Action(() => { ResetHealth.ExecuteUdonEvent(); });
-                        RedWrenchPickup.enabled = ExtraTools;
+                        RedWrenchPickup.enabled = false;
                     }
                 }
                 if (BlueWrench != null)
@@ -62,7 +62,7 @@
                     {
                         BlueWrenchPickup.OnPickupUseUp = null;
                         BlueWrenchPickup.OnPickupUseUp += new System.Action(() => { ResetHealth.ExecuteUdonEvent(); });
-                        BlueWrenchPickup.enabled = ExtraTools;
+                        BlueWrenchPickup.enabled = false;
                     }
                 }
                 if (Hammer != null)
@@ -71,8 +71,8 @@
                     if (HammerPickup != null)
                     {
                         HammerPickup.OnPickupUseUp = null;
-                        HammerPickup.OnPickupUseUp += new System.Action(() => { ResetHealth.ExecuteUdonEvent(); });
-                        HammerPickup.enabled = ExtraTools;
+                        HammerPickup.OnPickupUseUp += new System.Action(() => { LoseHealth.ExecuteUdonEvent(); });
+                        HammerPickup.enabled = false;
                     }
                 }
 
@@ -81,7 +81,9 @@
 
         internal override void OnRoomLeft()
         {
-            ExtraTools = false;
+            RepairLifeWrenches = false;
+            LoseLifeHammer = false;
+            LoseHealth = null;
             ResetHealth = null;
             AutomaticWaveStart = false;
             RedWrenchPickup = null;
@@ -101,9 +103,12 @@
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2f, "Add 10000000 Money", () => { AddBankBalance(10000000); }, "Edit Current Balance!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2.5f, "Set 999999999 Money", () => { SetBankBalance(999999999); }, "Edit Current Balance!", null, null, true);
 
-            HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 0, "Toggle Extra Tools", () => { ExtraTools = true; }, "Toggle Extra Tools", () => { ExtraTools = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-            AutomaticWaveBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 0.5f, "Toggle Automatic Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-
+            HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 0, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            HammerToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 0.5f, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; }, "Toggle Lose Life Hammer", () => { LoseLifeHammer = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            HammerToolBtn.SetResizeTextForBestFit(true);
+            HealthToolBtn.SetResizeTextForBestFit(true);
+            AutomaticWaveBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 2, 0.5f, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            AutomaticWaveBtn.SetResizeTextForBestFit(true); 
         }
 
 
@@ -129,12 +134,12 @@
         }
 
 
-        private static bool _HealthToolEnabled;
-        private static bool ExtraTools
+        private static bool _RepairLifeWrenches;
+        private static bool RepairLifeWrenches
         {
             get
             {
-                return _HealthToolEnabled;
+                return _RepairLifeWrenches;
             }
             set
             {
@@ -142,11 +147,11 @@
                 {
                     HealthToolBtn.SetToggleState(value);
                 }
-                if (value.Equals(_HealthToolEnabled))
+                if (value.Equals(_RepairLifeWrenches))
                 {
                     return;
                 }
-                _HealthToolEnabled = value;
+                _RepairLifeWrenches = value;
                 if (RedWrenchPickup != null)
                 {
                     RedWrenchPickup.enabled = value;
@@ -172,6 +177,27 @@
                         BlueWrenchPickup.UseText = "Use";
                     }
                 }
+            }
+        }
+
+        private static bool _LoseLifeHammer;
+        private static bool LoseLifeHammer
+        {
+            get
+            {
+                return _LoseLifeHammer;
+            }
+            set
+            {
+                if (HammerToolBtn != null)
+                {
+                    HammerToolBtn.SetToggleState(value);
+                }
+                if (value.Equals(_LoseLifeHammer))
+                {
+                    return;
+                }
+                _LoseLifeHammer = value;
                 if (HammerPickup != null)
                 {
                     HammerPickup.enabled = value;
@@ -242,7 +268,9 @@
 
         private static DisassembledUdonBehaviour Bank { get; set; }
 
-        private static QMSingleToggleButton HealthToolBtn{ get; set; }
+        private static QMSingleToggleButton HealthToolBtn { get; set; }
+        private static QMSingleToggleButton HammerToolBtn { get; set; }
+
         private static QMSingleToggleButton AutomaticWaveBtn { get; set; }
         private static object cancellationwavetoken { get; set; }
         private static VRC_AstroPickup RedWrenchPickup{ get; set; }
