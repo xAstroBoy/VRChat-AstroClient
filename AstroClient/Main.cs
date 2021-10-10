@@ -376,9 +376,7 @@
             // Misc
             SkyboxEditor.CustomSkyboxesMenu(AstroClient, 1, 0, true);
             LightControl.InitButtons(AstroClient, 1, 0.5f, true);
-            AvatarModifier.InitQMMenu(AstroClient, 1, 1, true);
             GameObjectMenu.InitButtons(AstroClient, 1, 1.5f, true);
-            EmojiUtils.InitButton(AstroClient, 1, 2, true); // TODO : Rewrite
             if (Bools.IsDeveloper)
             {
                 MapEditorMenu.InitButtons(AstroClient, 1, 2.5f, true);
