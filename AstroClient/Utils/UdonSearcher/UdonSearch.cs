@@ -1,6 +1,7 @@
 ﻿namespace AstroClient
 {
     using AstroClient.Udon;
+    using AstroClient.Udon.UdonEditor;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
@@ -16,7 +17,7 @@
     {
         internal static List<UdonBehaviour_Cached> FindAllUdonEvents(string action, string subaction)
         {
-            var gameobjects = WorldUtils.UdonScripts;
+            var gameobjects = UdonParser.CleanedWorldBehaviours;
 
             List<UdonBehaviour_Cached> foundEvents = new List<UdonBehaviour_Cached>();
             var behaviours = gameobjects.Where(x => x.gameObject.name == action);
@@ -45,7 +46,7 @@
 
         internal static UdonBehaviour_Cached FindUdonEvent(string action, string subaction)
         {
-            var gameobjects = WorldUtils.UdonScripts;
+            var gameobjects = UdonParser.CleanedWorldBehaviours;
 
             var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
             if (behaviour != null)

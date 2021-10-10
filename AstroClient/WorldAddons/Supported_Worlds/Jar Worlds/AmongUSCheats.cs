@@ -15,6 +15,7 @@
     using UnityEngine;
     using VRC;
     using static AstroClient.Variables.CustomLists;
+    using AstroClient.Udon.UdonEditor;
 
     internal class AmongUSCheats : GameEvents
     {
@@ -61,7 +62,7 @@
                 invisiblewall_1.DestroyMeLocal();
             }
 
-            foreach (var action in WorldUtils.UdonScripts)
+            foreach (var action in UdonParser.CleanedWorldBehaviours)
             {
                 if (action.gameObject.name == "Game Logic")
                 {

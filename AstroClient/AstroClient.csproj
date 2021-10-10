@@ -212,6 +212,7 @@
     <Compile Include="Udon\UdonEditor\UdonHeapUnboxerUtils.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapParser.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapEditor.cs" />
+    <Compile Include="Udon\UdonEditor\UdonParser.cs" />
     <Compile Include="Udon\UdonEditor\UdonTypes_String.cs" />
     <Compile Include="Udon\UdonEditor\UdonUnpacker_Utils_ext.cs" />
     <Compile Include="Udon\UdonEditor\UdonUnpacker_Utils.cs" />

@@ -96,7 +96,7 @@
             while (i <= amount && isInGame)
             {
                 Quad?.SetActive(true);
-                Quad?.TeleportToMe(HumanBodyBones.RightFoot);
+                Quad?.TeleportToMe(HumanBodyBones.RightFoot, true, true);
                 i++;
                 yield return null;
             }

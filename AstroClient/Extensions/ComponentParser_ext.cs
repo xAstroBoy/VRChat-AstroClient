@@ -1,5 +1,6 @@
 ﻿namespace AstroLibrary.Extensions
 {
+    using AstroClient.Components;
     using AstroLibrary.Console;
     using System;
     using System.Collections.Generic;
@@ -87,12 +88,13 @@
             {
                 foreach (var item in list)
                 {
+                    if(item.serializedProgramAsset.Equals(UdonPrograms.InteractProgram) || item.serializedProgramAsset.Equals(UdonPrograms.PickupProgram))
+                    {
+                        continue;
+                    }
                     if (item._eventTable.Keys.Count != 0)
                     {
-                        if (!UdonBehaviourObjects.Contains(item))
-                        {
-                            UdonBehaviourObjects.Add(item);
-                        }
+                        UdonBehaviourObjects.Add(item);
                     }
                 }
                 return UdonBehaviourObjects;

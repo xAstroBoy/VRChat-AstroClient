@@ -54,11 +54,11 @@
 
 
 
-        internal static void TeleportToMe(this GameObject obj, HumanBodyBones bone)
+        internal static void TeleportToMe(this GameObject obj, HumanBodyBones bone, bool KillcustomScripts = true, bool KillForces = true)
         {
             if (obj != null)
             {
-                ItemPosition.TeleportObject(obj, bone);
+                ItemPosition.TeleportObject(obj, bone, KillcustomScripts, KillForces);
             }
         }
     }

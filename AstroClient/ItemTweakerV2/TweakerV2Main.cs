@@ -108,6 +108,7 @@
         }
 
 
+
         internal override void OnPickupController_Selected(PickupController control)
         {
             if (ProtectionInteractor != null)

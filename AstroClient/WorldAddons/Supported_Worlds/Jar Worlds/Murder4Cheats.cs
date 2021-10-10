@@ -17,6 +17,7 @@
     using UnityEngine;
     using VRC;
     using static AstroClient.Variables.CustomLists;
+    using AstroClient.Udon.UdonEditor;
 
     #endregion Imports
 
@@ -80,7 +81,7 @@
             item_Silenced_Revolver_1 = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Luger (1)");
             item_Grenade = GameObjectFinder.Find("Game Logic/Weapons/Unlockables/Frag (0)");
             Snake_Crate = GameObjectFinder.Find("/Game Logic/Snakes/SnakeDispenser");
-            foreach (var action in WorldUtils.UdonScripts)
+            foreach (var action in UdonParser.CleanedWorldBehaviours)
             {
                 if (action.gameObject.name == "Game Logic")
                 {
