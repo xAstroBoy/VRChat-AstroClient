@@ -22,7 +22,12 @@
             SDKBase_Pickup = gameObject.GetComponent<VRC.SDKBase.VRC_Pickup>();
             SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
             SDK3_Pickup = gameObject.GetComponent<VRC.SDK3.Components.VRCPickup>();
-
+            AntiTheftComponent = gameObject.AddComponent<VRC_AstroPickup>();
+            if (AntiTheftComponent != null)
+            {
+                AntiTheftComponent.OnPickup += new Action(() => { AntiTheftProtectionAvailable = true; });
+                AntiTheftComponent.OnDrop += new Action(() => { AntiTheftProtectionAvailable = false; });
+            }
             RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
             SyncProperties(true);
             ModConsole.DebugLog("Attacked Successfully PickupController to object " + gameObject.name);
@@ -30,6 +35,29 @@
 
         }
 
+        private void OnDestroy()
+        {
+            if (AntiTheftComponent != null)
+            {
+                Destroy(AntiTheftComponent);
+            }
+        }
+
+        private void OnEnable()
+        {
+            if (AntiTheftComponent != null)
+            {
+                AntiTheftComponent.enabled = true;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (AntiTheftComponent != null)
+            {
+                AntiTheftComponent.enabled = false;
+            }
+        }
         private void Updater()
         {
             if (gameObject != null)
@@ -37,13 +65,6 @@
                 if (gameObject.active && this.isActiveAndEnabled)
                 {
                     Run_onPickupUpdate();
-                    if (AllowOnlySelfToGrab)
-                    {
-                        if (!OnlineEditor.IsLocalPlayerOwner(gameObject))
-                        {
-                            OnlineEditor.TakeObjectOwnership(gameObject);
-                        }
-                    }
                     if (!EditMode)
                     {
                         SyncProperties(true);
@@ -53,7 +74,7 @@
         }
 
 
-        private void Update()
+        private void FixedUpdate()
         {
             // Add a Shield for the Users.
             if (!AllowOnlySelfToGrab)
@@ -63,20 +84,86 @@
                     if (IsHeld)
                     {
                         var id = CurrentHolder.GetPlayer().GetAPIUser().GetUserID();
-                        if (PickupBlocker.blockeduserids.Contains(id))
+                        if(PickupBlocker.blockeduserids.Contains(id))
                         {
-                            ModConsole.DebugLog($"Denied Pickup Usage to {CurrentHolder.displayName}");
+                            AntiTheftProtection();
                             OnlineEditor.TakeObjectOwnership(gameObject);
-                            CurrentHolder.GetPickupInHand(CurrentHand).Drop();
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (IsHeld)
+                {
+                    if (!CurrentHolder.isLocal)
+                    {
+                        if (!OnlineEditor.IsLocalPlayerOwner(gameObject))
+                        {
+                            OnlineEditor.TakeObjectOwnership(gameObject);
+                        }
+                        AntiTheftProtection();
+                    }
+                }
+            }
+        }
+
+        private void AntiTheftProtection()
+        {
+            if (AntiTheft)
+            {
+                if (AntiTheftProtectionAvailable)
+                {
+                    if (!CurrentHolder.isLocal)
+                    {
+                        if (SDKBase_Pickup != null)
+                        {
+                            Utils.CurrentUser.GetVRCPlayerApi().SetPickupInHand(SDKBase_Pickup, PreviousHoldingHand);
+                        }
+                        else if (SDK2_Pickup != null)
+                        {
+                            Utils.CurrentUser.GetVRCPlayerApi().SetPickupInHand(SDK2_Pickup, PreviousHoldingHand);
+                        }
+                        else if (SDK3_Pickup != null)
+                        {
+                            Utils.CurrentUser.GetVRCPlayerApi().SetPickupInHand(SDK3_Pickup, PreviousHoldingHand);
                         }
                     }
                 }
             }
         }
 
-
         #region anti-grab method
 
+        private VRC_Pickup.PickupHand PreviousHoldingHand;
+
+        internal VRC_AstroPickup AntiTheftComponent { get; private set; }
+
+        internal bool AntiTheft = false;
+
+        private bool _AntiTheftProtectionAvailable = false;
+
+        private bool AntiTheftProtectionAvailable
+        {
+            get
+            {
+                return AntiTheftProtectionAvailable;
+            }
+            set
+            {
+                AntiTheftProtectionAvailable = value;
+                if(value)
+                {
+                    if (IsHeld)
+                    {
+                        if (CurrentHolder.isLocal)
+                        {
+                            PreviousHoldingHand = CurrentHand;
+                        }
+                    }
+                }
+            }
+        }
         private bool _PreventOthersFromGrabbing = false;
 
         internal bool AllowOnlySelfToGrab
@@ -1343,6 +1430,7 @@
         #endregion Force Pickup Functions
 
         #region essentials
+        
 
         private VRC_Pickup _SDKBase_Pickup;
 
@@ -1422,6 +1510,7 @@
                 Run_OnOnPickupPropertyChanged();
             }
         }
+
 
         #endregion essentials
     }
