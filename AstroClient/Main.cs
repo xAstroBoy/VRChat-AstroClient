@@ -268,8 +268,6 @@
             code();
         }
 
-
-
         protected void DoAfterUiManagerInit(Action code)
         {
             if (!KeyManager.IsAuthed) return;
@@ -307,7 +305,6 @@
             Event_VRChat_OnActionMenuInit?.SafetyRaise();
             ModConsole.DebugLog($"ActionMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
         }
-
 
         private void Start_VRChat_OnUiManagerInit()
         {
