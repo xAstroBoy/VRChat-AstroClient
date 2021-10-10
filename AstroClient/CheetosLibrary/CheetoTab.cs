@@ -17,11 +17,5 @@
             SetAction(action);
             Self.transform.GetComponentInChildren<MenuTab>().pageName = $"QuickMenuAstroClient-{CheetoButtonAPI.UIElements.Count}:{label}";
         }
-
-        public void SetAction(Action action)
-        {
-            Self.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-            Self.transform.GetComponentInChildren<Button>().onClick.AddListener(action);
-        }
     }
 }

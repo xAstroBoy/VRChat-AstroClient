@@ -14,7 +14,7 @@
 
         public static void CreateTabButtons()
         {
-            _ = new CheetoTab("", () => { });
+            _ = new CheetoTab("AstroClient", () => { MelonLogger.Msg("Astro Tab Clicked!"); });
         }
 
         public static void CreateNewDashboardMenu(string header)

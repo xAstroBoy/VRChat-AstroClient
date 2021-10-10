@@ -15,11 +15,5 @@
             Self.transform.GetComponentInChildren<TextMeshProUGUI>().text = label;
             SetAction(action);
         }
-
-        public void SetAction(Action action)
-        {
-            Self.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-            Self.transform.GetComponentInChildren<Button>().onClick.AddListener(action);
-        }
     }
 }

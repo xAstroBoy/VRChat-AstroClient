@@ -1,6 +1,17 @@
 ﻿namespace CheetosLibrary
 {
+    using MelonLoader;
+    using System;
     using UnityEngine;
+    using UnityEngine.UI;
+
+    public class CheetoUIException : Exception
+    {
+        public CheetoUIException(string msg) : base(msg)
+        {
+
+        }
+    }
 
     // TODO: Finish
     public class CheetoElement
@@ -10,7 +21,7 @@
 
         public CheetoElement(GameObject original, Transform parent)
         {
-            Self = Object.Instantiate(original);
+            Self = GameObject.Instantiate(original);
             Parent = parent.gameObject;
             ApplyFixes();
             CheetoButtonAPI.UIElements.Add(Self);
@@ -39,6 +50,25 @@
         {
             get => Self.activeSelf;
             set => Self.SetActive(value);
+        }
+
+        public void Destroy()
+        {
+            GameObject.Destroy(Self);
+        }
+
+        public void SetAction(Action action)
+        {
+            var button = Self.transform.GetComponentInChildren<Button>();
+            if (button != null)
+            {
+                button.onClick = new Button.ButtonClickedEvent();
+                button.onClick.AddListener(action);
+            }
+            else
+            {
+                throw new CheetoUIException($"Could not assign action to {Self.name}, not a button!");
+            }
         }
     }
 }
