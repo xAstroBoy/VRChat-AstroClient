@@ -91,9 +91,9 @@ namespace AstroLibrary.Utility
 
         public static PlayerManager GetPlayerManager() => PlayerManager.prop_PlayerManager_0;
 
-        public static void ReloadAvatar() => VRCPlayer.Method_Private_Static_String_APIUser_PDM_0(GetAPIUser());
+        public static void ReloadAvatar() => VRCPlayer.Method_Public_Static_Void_APIUser_0(GetAPIUser());
 
-        public static void ReloadAvatar(this VRCPlayer instance) => VRCPlayer.Method_Private_Static_String_APIUser_PDM_0(instance.GetAPIUser());
+        public static void ReloadAvatar(this VRCPlayer instance) => VRCPlayer.Method_Public_Static_Void_APIUser_0(instance.GetAPIUser());
 
         public static void ReloadAvatar(this VRC.Player instance) => ReloadAvatar(instance.GetVRCPlayer());
 
