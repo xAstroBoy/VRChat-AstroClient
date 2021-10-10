@@ -13,6 +13,7 @@
             Self = Object.Instantiate(original);
             Parent = parent.gameObject;
             ApplyFixes();
+            CheetoButtonAPI.UIElements.Add(Self);
         }
 
         public void SetName(string name)

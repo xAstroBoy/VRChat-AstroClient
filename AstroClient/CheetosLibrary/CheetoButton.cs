@@ -13,11 +13,13 @@
             SetName($"CheetoLibrary-{CheetoButtonAPI.UIElements.Count}-Button:{label}");
 
             Self.transform.GetComponentInChildren<TextMeshProUGUI>().text = label;
-            Self.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-            Self.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"[Debug] Button Clicked: {Self.name}")));
-            Self.transform.GetComponentInChildren<Button>().onClick.AddListener(action);
+            SetAction(action);
+        }
 
-            CheetoButtonAPI.UIElements.Add(Self);
+        public void SetAction(Action action)
+        {
+            Self.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
+            Self.transform.GetComponentInChildren<Button>().onClick.AddListener(action);
         }
     }
 }
