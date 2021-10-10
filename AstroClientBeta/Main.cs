@@ -137,14 +137,7 @@ namespace CheetosLibrary
             go.transform.localScale = new Vector3(1, 1, 1);
 
             go.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-            go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg("TopIcon Clicked")));
-
-            var icon = go.transform.Find("Icon");
-            var image = icon.gameObject.GetComponent<Image>();
-
-            var texture = ResourceUtils.LoadPNG(ResourceUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClientBeta.Resources.planet.png"));
-            image.sprite = Sprite.CreateSprite(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
-            image.color = Color.white;
+            go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"TopIcon Clicked {go.name}")));
 
             UIElements.Add(go);
         }
@@ -160,11 +153,12 @@ namespace CheetosLibrary
             go.transform.rotation = parent.transform.rotation;
             go.transform.localPosition = new Vector3(0, 0, 0);
             go.transform.localScale = new Vector3(1, 1, 1);
-            UIElements.Add(go);
 
             go.transform.GetComponentInChildren<TextMeshProUGUI>().text = label;
             go.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-            go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg("Button Clicked")));
+            go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"Button Clicked: {go.name}")));
+
+            UIElements.Add(go);
         }
     }
 }
