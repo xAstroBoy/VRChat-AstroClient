@@ -74,7 +74,7 @@
         }
 
 
-        private void FixedUpdate()
+        private void Update()
         {
             // Add a Shield for the Users.
             if (!AllowOnlySelfToGrab)
