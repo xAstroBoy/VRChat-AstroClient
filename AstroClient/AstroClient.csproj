@@ -1132,33 +1132,65 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\shuttle.png" />
+    <EmbeddedResource Include="Resources\shuttle.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\box.png" />
-    <EmbeddedResource Include="Resources\planet.png" />
-    <EmbeddedResource Include="Resources\thief.png" />
+    <EmbeddedResource Include="Resources\box.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\planet.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\thief.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
     <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
-    <EmbeddedResource Include="Resources\1.png" />
-    <EmbeddedResource Include="Resources\2.png" />
-    <EmbeddedResource Include="Resources\3.png" />
-    <EmbeddedResource Include="Resources\4.png" />
-    <EmbeddedResource Include="Resources\5.png" />
-    <EmbeddedResource Include="Resources\6.png" />
-    <EmbeddedResource Include="Resources\7.png" />
-    <EmbeddedResource Include="Resources\locked.png" />
-    <EmbeddedResource Include="Resources\history.png" />
+    <EmbeddedResource Include="Resources\1.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\2.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\3.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\4.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\5.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\6.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\7.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\locked.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\history.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\repair.png" />
-    <EmbeddedResource Include="Resources\badge.png" />
+    <EmbeddedResource Include="Resources\repair.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\badge.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\button.png" />
+    <EmbeddedResource Include="Resources\button.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ActionMenu\" />
