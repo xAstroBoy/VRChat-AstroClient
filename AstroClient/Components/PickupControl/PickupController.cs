@@ -74,7 +74,7 @@
         }
 
 
-        private void Update()
+        private void FixedUpdate()
         {
             // Add a Shield for the Users.
             if (!AllowOnlySelfToGrab)
@@ -147,11 +147,11 @@
         {
             get
             {
-                return AntiTheftProtectionAvailable;
+                return _AntiTheftProtectionAvailable;
             }
             set
             {
-                AntiTheftProtectionAvailable = value;
+                _AntiTheftProtectionAvailable = value;
                 if(value)
                 {
                     if (IsHeld)
