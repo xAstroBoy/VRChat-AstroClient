@@ -12,8 +12,6 @@
         public CheetoTab(string label, Action action) : base(GameObject.Find(UIPaths.LaunchPadTab), GameObject.Find(UIPaths.TabsGroup).transform)
         {
             SetName($"CheetoLibrary-{CheetoButtonAPI.UIElements.Count}-CheetoTab:{label}");
-
-            Self.transform.GetComponentInChildren<TextMeshProUGUI>().text = label;
             SetAction(action);
             Self.transform.GetComponentInChildren<MenuTab>().pageName = $"QuickMenuAstroClient-{CheetoButtonAPI.UIElements.Count}:{label}";
         }

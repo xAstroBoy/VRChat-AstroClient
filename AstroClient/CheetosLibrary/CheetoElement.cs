@@ -9,7 +9,6 @@
     {
         public CheetoUIException(string msg) : base(msg)
         {
-
         }
     }
 
