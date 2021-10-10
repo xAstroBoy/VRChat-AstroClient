@@ -5,14 +5,6 @@
     using UnityEngine;
     using UnityEngine.UI;
 
-    public class CheetoUIException : Exception
-    {
-        public CheetoUIException(string msg) : base(msg)
-        {
-        }
-    }
-
-    // TODO: Finish
     public class CheetoElement
     {
         public GameObject Self;
