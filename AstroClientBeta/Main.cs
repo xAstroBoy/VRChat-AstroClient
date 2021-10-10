@@ -22,8 +22,8 @@
 
             Utils.TryRun(new Action[]
             {
-                () => DashboardUtils.CreateNewDashboardMenu("AstroClient"),
-                () => DashboardUtils.CreateNewDashboardTopIcon(),
+                () => CheetoButtonAPI.CreateNewDashboardMenu("AstroClient"),
+                () => CheetoButtonAPI.CreateNewDashboardTopIcon(),
             });
 
             MelonLogger.Msg("UI Initialized.");
@@ -43,6 +43,7 @@ namespace CheetosLibrary
 {
     using MelonLoader;
     using System;
+    using System.Collections.Generic;
     using System.Reflection;
     using TMPro;
     using UnityEngine;
@@ -66,28 +67,33 @@ namespace CheetosLibrary
         }
     }
 
-    public static class DashboardUtils
+    public static class CheetoButtonAPI
     {
+        public static List<GameObject> UIElements = new List<GameObject>();
+
         public static void CreateNewDashboardMenu(string header)
         {
             var headerBase = GameObject.Find(UIPaths.HeaderQuickActions);
             var buttonsBase = GameObject.Find(UIPaths.ButtonsQuickActions);
 
             var hgo = GameObject.Instantiate(headerBase);
+            hgo.name = $"CheetoLibrary-{UIElements.Count}-DashboardHeader:{header}";
             hgo.transform.parent = headerBase.transform.parent;
             hgo.transform.rotation = headerBase.transform.rotation;
             hgo.transform.localPosition = new Vector3(0, 0, 0);
             hgo.transform.localScale = new Vector3(1, 1, 1);
+            UIElements.Add(hgo);
 
             var text = hgo.GetComponentInChildren<TextMeshProUGUI>();
             text.text = header;
 
             var buttons = GameObject.Instantiate(buttonsBase);
-            buttons.name = $"CheetoLibrary-DashboardMenu:{header}";
+            buttons.name = $"CheetoLibrary-{UIElements.Count}-DashboardMenu:{header}";
             buttons.transform.parent = buttonsBase.transform.parent;
             buttons.transform.rotation = buttonsBase.transform.rotation;
             buttons.transform.localPosition = new Vector3(0, 0, 0);
             buttons.transform.localScale = new Vector3(1, 1, 1);
+            UIElements.Add(buttons);
 
             var children = buttons.transform.GetComponentsInChildren<Transform>();
             foreach (Transform child in children)
@@ -108,10 +114,12 @@ namespace CheetosLibrary
             var expandBase = GameObject.Find(UIPaths.ExpandButton);
 
             var go = GameObject.Instantiate(expandBase);
+            go.name = $"CheetoLibrary-{UIElements.Count}-TopIcon";
             go.transform.parent = expandBase.transform.parent;
             go.transform.rotation = expandBase.transform.rotation;
             go.transform.localPosition = new Vector3(0, 0, 0);
             go.transform.localScale = new Vector3(1, 1, 1);
+            UIElements.Add(go);
 
             var icon = go.transform.Find("Icon");
             var image = icon.GetComponent<Image>();
@@ -126,10 +134,12 @@ namespace CheetosLibrary
             var buttonBase = GameObject.Find(UIPaths.WorldButton);
 
             var go = GameObject.Instantiate(buttonBase);
+            go.name = $"CheetoLibrary-{UIElements.Count}-Button:{label}";
             go.transform.parent = parent.transform;
             go.transform.rotation = parent.transform.rotation;
             go.transform.localPosition = new Vector3(0, 0, 0);
             go.transform.localScale = new Vector3(1, 1, 1);
+            UIElements.Add(go);
 
             go.transform.GetComponentInChildren<TextMeshProUGUI>().text = label;
             go.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
