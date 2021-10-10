@@ -24,5 +24,10 @@
             Self.transform.localPosition = new Vector3(0, 0, 0);
             Self.transform.localScale = new Vector3(1, 1, 1);
         }
+
+        public void SetIndex(int index)
+        {
+            Self.transform.SetSiblingIndex(index);
+        }
     }
 }
