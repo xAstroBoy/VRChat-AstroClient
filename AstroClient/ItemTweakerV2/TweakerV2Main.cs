@@ -15,12 +15,13 @@
     using UnityEngine;
     using VRC;
     using Color = UnityEngine.Color;
+    using CheetoLibrary;
 
     internal class TweakerV2Main : Tweaker_Events
     {
         internal static void Init_TweakerV2Main()
         {
-            QMTabMenu menu = new QMTabMenu(3f, "Item Tweaker", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.box.png"));
+            QMTabMenu menu = new QMTabMenu(3f, "Item Tweaker", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.box.png"));
 
             // Outside Area
 

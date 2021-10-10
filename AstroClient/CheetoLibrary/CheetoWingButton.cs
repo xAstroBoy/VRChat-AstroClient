@@ -1,4 +1,4 @@
-﻿namespace CheetosLibrary
+﻿namespace CheetoLibrary
 {
     using MelonLoader;
     using System;

@@ -2,6 +2,7 @@
 namespace AstroButtonAPI
 {
     using AstroLibrary;
+    using CheetoLibrary;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -76,7 +77,7 @@ namespace AstroButtonAPI
             goi4.transform.parent = button.transform;
             image4 = goi4.AddComponent<Image>();
 
-            LoadSprite(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroLibrary.Resources.blank.png"));
+            LoadSprite(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroLibrary.Resources.blank.png"));
             image1.transform.localScale = new Vector3(1f, 1f, 1f);
             image1.transform.localPosition = new Vector3(-selectorSize/2, selectorSize/2, 0f);
 
@@ -109,7 +110,7 @@ namespace AstroButtonAPI
         private void LoadSprite(byte[] data)
         {
             var image = button.GetComponent<Image>();
-            var texture = CheetosHelpers.LoadPNG(data);
+            var texture = CheetoUtils.LoadPNG(data);
 
             var sprite = Sprite.CreateSprite(texture, new Rect(0, 0, selectorSize, selectorSize), new Vector2(0, 0), 1, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
             image1.sprite = sprite;

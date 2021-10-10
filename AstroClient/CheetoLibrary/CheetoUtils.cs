@@ -1,19 +1,39 @@
-﻿namespace AstroLibrary
+﻿namespace CheetoLibrary
 {
-    using AstroLibrary.Console;
     #region Imports
 
-    using AstroLibrary.Utility;
+    using AstroLibrary.Console;
     using System;
     using System.IO;
     using System.Reflection;
     using UnityEngine;
     using UnityEngine.UI;
+    using VRC.UI.Elements;
 
     #endregion Imports
 
-    public static class CheetosHelpers
+    public static class CheetoUtils
     {
+        public static MenuStateController GetMenuStateController()
+        {
+            return GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)").GetComponent<MenuStateController>();
+        }
+
+        public static void TryRun(Action[] actions)
+        {
+            foreach (Action action in actions)
+            {
+                try
+                {
+                    action();
+                }
+                catch (Exception e)
+                {
+                    ModConsole.Exception(e);
+                }
+            }
+        }
+
         public static Texture2D LoadPNG(string filePath)
         {
             byte[] fileData = ExtractResource(Assembly.GetExecutingAssembly(), filePath);

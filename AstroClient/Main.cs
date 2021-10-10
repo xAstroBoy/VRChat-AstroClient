@@ -36,7 +36,7 @@
     using Application = UnityEngine.Application;
     using Button = UnityEngine.UI.Button;
     using AstroClient.Cheetos;
-    using CheetosLibrary;
+    using CheetoLibrary;
 
     #endregion Imports
 
@@ -129,7 +129,7 @@
             var junk = GameObject.Find(UIPaths.Banner);
             if (junk != null) junk.SetActive(false);
 
-            CheetoUtils.TryRun(new Action[]
+            CheetoLibrary.CheetoUtils.TryRun(new Action[]
             {
                 () => CheetoButtonAPI.CreateNewDashboardMenu("AstroClient"),
                 () => CheetoButtonAPI.CreateNewDashboardTopIcon(),
@@ -341,7 +341,7 @@
         internal static void InitMainsButtons()
         {
             if (!KeyManager.IsAuthed) return;
-            QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
+            QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
             ExploitsMenu.InitButtons(2f);
             WorldsCheats.InitButtons(4f);
             HistoryMenu.InitButtons(6f);

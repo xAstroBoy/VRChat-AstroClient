@@ -98,15 +98,120 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\BlazesAPIs.cs" />
+    <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\SM\SMButton.cs" />
+    <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\SM\SMList.cs" />
+    <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\SM\SMText.cs" />
+    <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\TagsAPI.cs" />
+    <Compile Include="AstroLibrary\Blaze%27s Utils\BlazesXRefs.cs" />
+    <Compile Include="AstroLibrary\Blaze%27s Utils\ConversionUtils.cs" />
+    <Compile Include="AstroLibrary\Blaze%27s Utils\DiscordUtils.cs" />
+    <Compile Include="AstroLibrary\Blaze%27s Utils\JsonWriter.cs" />
+    <Compile Include="AstroLibrary\Blaze%27s Utils\PopupUtils.cs" />
+    <Compile Include="AstroLibrary\Blaze%27s Utils\SerializationUtils.cs" />
+    <Compile Include="AstroLibrary\Blaze%27s Utils\SocialMenuUtils.cs" />
+    <Compile Include="AstroLibrary\Blaze%27s Utils\UdonUtils.cs" />
+    <Compile Include="AstroLibrary\Blaze%27s Utils\VRCUiManagerUtils.cs" />
+    <Compile Include="AstroLibrary\Exceptions\InvalidArrayItemCount.cs" />
+    <Compile Include="AstroLibrary\Extensions\ButtonExtensions.cs" />
+    <Compile Include="AstroLibrary\Extensions\ButtonStringExtensions.cs" />
+    <Compile Include="AstroLibrary\Extensions\CodingExtensions.cs" />
+    <Compile Include="AstroLibrary\Extensions\ListExtensions.cs" />
+    <Compile Include="AstroLibrary\Extensions\MiscExtension.cs" />
+    <Compile Include="AstroLibrary\Extensions\ModerationManagerExtension.cs" />
+    <Compile Include="AstroLibrary\Extensions\NotificationManagerExtension.cs" />
+    <Compile Include="AstroLibrary\Extensions\PhotonExtensions.cs" />
+    <Compile Include="AstroLibrary\Extensions\PlayerExtensions.cs" />
+    <Compile Include="AstroLibrary\Extensions\PlayerManagerExtension.cs" />
+    <Compile Include="AstroLibrary\Extensions\VRCUiManagerExtension.cs" />
+    <Compile Include="AstroLibrary\Extensions\VRInput.cs" />
+    <Compile Include="AstroLibrary\GameObjectFinder.cs" />
+    <Compile Include="AstroLibrary\Managers\Assets.cs" />
+    <Compile Include="AstroLibrary\Managers\AssetsManager.cs" />
+    <Compile Include="AstroLibrary\Managers\ConversionManager.cs" />
+    <Compile Include="AstroLibrary\Managers\CustomJsonTypes.cs" />
+    <Compile Include="AstroLibrary\Managers\ExploitManager_Old.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuArrow.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuButtonAPI.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuButtonType.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuCheckbox.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuSlider.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuSocialText.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuText.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\MenuType.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\VRCList.cs" />
+    <Compile Include="AstroLibrary\Menu\MenuApi\VRCMenuAPI.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons2\QMNestedButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons2\QMScrollMenu.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons2\QMSingleButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons2\QMSlider.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons2\QMToggleButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMButtonAPI.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMButtonBase.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMHalfScroll.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMImage.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMInfo.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMNestedButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMQuadToggleButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMScrollMenu.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMSingleButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMSingleToggleButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMSlider.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMTabBase.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMTabButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMTabMenu.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QMToggleButton.cs" />
+    <Compile Include="AstroLibrary\Menu\QuickMenuButtons\QuickMenuStuff.cs" />
+    <Compile Include="AstroLibrary\Menu\UnityUIUtils.cs" />
+    <Compile Include="AstroLibrary\Misc\Api\API.cs" />
+    <Compile Include="AstroLibrary\Misc\Api\Object\VRChatAPIObjects.cs" />
+    <Compile Include="AstroLibrary\Misc\Api\Object\WebSocketObject.cs" />
+    <Compile Include="AstroLibrary\Misc\ColorUtility\HSBColor.cs" />
+    <Compile Include="AstroLibrary\Misc\ColorUtility\NamePlates.cs" />
+    <Compile Include="AstroLibrary\Misc\ColorUtility\UIColor.cs" />
+    <Compile Include="AstroLibrary\Misc\MiscFunc.cs" />
+    <Compile Include="AstroLibrary\Misc\MiscUtility.cs" />
+    <Compile Include="AstroLibrary\Misc\VRCAPI\API.cs" />
+    <Compile Include="AstroLibrary\Misc\VRCAPI\Classes\VRChatAPIObjects.cs" />
+    <Compile Include="AstroLibrary\Misc\VRCAPI\Endpoints\AuthEndpoint.cs" />
+    <Compile Include="AstroLibrary\Misc\VRCAPI\Endpoints\Avatar.cs" />
+    <Compile Include="AstroLibrary\Misc\VRCAPI\Endpoints\MiscEndpoint.cs" />
+    <Compile Include="AstroLibrary\Misc\VRCAPI\Utils.cs" />
+    <Compile Include="AstroLibrary\Misc\VRCAPI\Variables.cs" />
+    <Compile Include="AstroLibrary\ModConsole.cs" />
+    <Compile Include="AstroLibrary\Utility\AudioUtils.cs" />
+    <Compile Include="AstroLibrary\Utility\AvatarUtils.cs" />
+    <Compile Include="AstroLibrary\Utility\BonesUtils.cs" />
+    <Compile Include="AstroLibrary\Utility\CameraUtils.cs" />
+    <Compile Include="AstroLibrary\Utility\ComponentUtils.cs" />
+    <Compile Include="AstroLibrary\Utility\GameObjectUtils.cs" />
+    <Compile Include="AstroLibrary\Utility\MiscUtils.cs" />
+    <Compile Include="AstroLibrary\Utility\NetworkingUtils.cs" />
+    <Compile Include="AstroLibrary\Utility\PhotonUtils.cs" />
+    <Compile Include="AstroLibrary\Utility\PlayerUtils.cs" />
+    <Compile Include="AstroLibrary\Utility\PopupUtils.cs" />
+    <Compile Include="AstroLibrary\Utility\QuickMenuUtils.cs" />
+    <Compile Include="AstroLibrary\Utility\Utils.cs" />
+    <Compile Include="AstroLibrary\Utility\WorldUtils.cs" />
+    <Compile Include="AstroLibrary\VRChatObjects.cs" />
+    <Compile Include="AstroLibrary\XrefTesting.cs" />
     <Compile Include="Buttons\HistoryMenu.cs" />
-    <Compile Include="CheetosLibrary\CheetoWingButton.cs" />
-    <Compile Include="CheetosLibrary\CheetoTab.cs" />
-    <Compile Include="CheetosLibrary\CheetoButton.cs" />
-    <Compile Include="CheetosLibrary\CheetoButtonAPI.cs" />
-    <Compile Include="CheetosLibrary\CheetoElement.cs" />
-    <Compile Include="CheetosLibrary\CheetoUIException.cs" />
-    <Compile Include="CheetosLibrary\CheetoUtils.cs" />
-    <Compile Include="CheetosLibrary\UIPaths.cs" />
+    <Compile Include="CheetoLibrary\CheetoUtils.cs" />
+    <Compile Include="CheetoLibrary\CheetoWingButton.cs" />
+    <Compile Include="CheetoLibrary\CheetoTab.cs" />
+    <Compile Include="CheetoLibrary\CheetoButton.cs" />
+    <Compile Include="CheetoLibrary\CheetoButtonAPI.cs" />
+    <Compile Include="CheetoLibrary\CheetoElement.cs" />
+    <Compile Include="CheetoLibrary\CheetoUIException.cs" />
+    <Compile Include="CheetoLibrary\UIPaths.cs" />
+    <Compile Include="CheetosConsole\Console.cs" />
+    <Compile Include="CheetosConsole\DefaultFonts.cs" />
+    <Compile Include="CheetosConsole\Extensions.cs" />
+    <Compile Include="CheetosConsole\Figlet.cs" />
+    <Compile Include="CheetosConsole\FigletFont.cs" />
+    <Compile Include="CheetosConsole\NativeMethods.cs" />
+    <Compile Include="CheetosConsole\StyledString.cs" />
+    <Compile Include="CheetosConsole\VirtualTerminalSequences.cs" />
     <Compile Include="Cheetos\InstanceHistory.cs" />
     <Compile Include="Cheetos\Patch.cs" />
     <Compile Include="Components\CrazyObjects\CrazyBehaviour.cs" />
@@ -1125,13 +1230,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AstroLibrary\AstroLibrary.csproj">
-      <Project>{4613c712-5463-44c6-ab48-081a2b3ae61d}</Project>
-      <Name>AstroLibrary</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\shuttle.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
@@ -1148,6 +1246,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AstroLibrary\Resources\blank.png" />
     <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
     <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />

@@ -3,6 +3,7 @@
     using AstroClient.Components;
     using AstroLibrary;
     using AstroLibrary.Utility;
+    using CheetoLibrary;
     using System;
     using System.Reflection;
     using TMPro;
@@ -45,11 +46,11 @@
             var front_renderer = front.GetComponent<Renderer>();
             front_renderer.material = new Material(Shader.Find("Standard"))
             {
-                mainTexture = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.button.png"))
+                mainTexture = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.button.png"))
             };
             front_renderer.material.EnableKeyword("_EMISSION");
             front_renderer.material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
-            front_renderer.material.SetTexture("_EmissionMap", CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.button.png")));
+            front_renderer.material.SetTexture("_EmissionMap", CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.button.png")));
             front_renderer.material.SetFloat("_EmissionScaleUI", 1f);
             front_renderer.material.SetColor("_EmissionColor", Color.white);
 

@@ -10,6 +10,7 @@
     using DayClientML2.Utility;
     using AstroButtonAPI;
     using System.Reflection;
+    using CheetoLibrary;
 
     #endregion Imports
 
@@ -20,10 +21,10 @@
         internal static void InitButtons(float pos)
         {
             if (!Bools.IsDeveloper) { return; }
-            SubMenu = new QMTabMenu(pos, "Admin Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.badge.png"));
+            SubMenu = new QMTabMenu(pos, "Admin Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.badge.png"));
 
             _ = new QMSingleButton(SubMenu, 1, 1, "Mass\nNotify", () => {
-                CheetosHelpers.PopupCall("Astro Avatar Search", "Search", "Enter Avatar name. . .", false, delegate (string text)
+                CheetoUtils.PopupCall("Astro Avatar Search", "Search", "Enter Avatar name. . .", false, delegate (string text)
                 {
                     MassNotify(text);
                 });

@@ -1,4 +1,4 @@
-﻿namespace CheetosLibrary
+﻿namespace CheetoLibrary
 {
     using System;
 
