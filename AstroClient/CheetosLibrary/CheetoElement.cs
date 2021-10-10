@@ -29,9 +29,16 @@
             Self.transform.localScale = new Vector3(1, 1, 1);
         }
 
-        public void SetIndex(int index)
+        public int Index
         {
-            Self.transform.SetSiblingIndex(index);
+            get => Self.transform.GetSiblingIndex();
+            set => Self.transform.SetSiblingIndex(value);
+        }
+
+        public bool Active
+        {
+            get => Self.activeSelf;
+            set => Self.SetActive(value);
         }
     }
 }

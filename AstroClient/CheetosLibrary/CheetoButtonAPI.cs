@@ -12,6 +12,11 @@
     {
         public static List<GameObject> UIElements = new List<GameObject>();
 
+        public static void CreateTabButtons()
+        {
+            _ = new CheetoTab("", () => { });
+        }
+
         public static void CreateNewDashboardMenu(string header)
         {
             var headerBase = GameObject.Find(UIPaths.HeaderQuickActions);
@@ -66,26 +71,6 @@
 
             go.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"TopIcon Clicked {go.name}")));
-
-            UIElements.Add(go);
-        }
-
-        public static void CreateNewTabButton(int index)
-        {
-            var tabBase = GameObject.Find(UIPaths.LaunchPadTab);
-
-            var go = GameObject.Instantiate(tabBase);
-            go.name = $"CheetoLibrary-{UIElements.Count}-TabButton-{index}";
-            go.transform.parent = tabBase.transform.parent;
-            go.transform.rotation = tabBase.transform.rotation;
-            go.transform.localPosition = new Vector3(0, 0, 0);
-            go.transform.localScale = new Vector3(1, 1, 1);
-
-            go.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-            go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"TabButton Clicked {go.name}")));
-            go.transform.SetSiblingIndex(index);
-
-            go.transform.GetComponentInChildren<MenuTab>().pageName = $"QuickMenuAstroClient-{index}";
 
             UIElements.Add(go);
         }

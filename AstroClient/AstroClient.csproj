@@ -99,6 +99,7 @@
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
     <Compile Include="Buttons\HistoryMenu.cs" />
+    <Compile Include="CheetosLibrary\CheetoTab.cs" />
     <Compile Include="CheetosLibrary\CheetoButton.cs" />
     <Compile Include="CheetosLibrary\CheetoButtonAPI.cs" />
     <Compile Include="CheetosLibrary\CheetoElement.cs" />
