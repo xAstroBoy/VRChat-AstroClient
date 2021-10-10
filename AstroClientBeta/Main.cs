@@ -70,16 +70,46 @@ namespace CheetosLibrary
     // TODO: Finish
     public class CheetoElement
     {
+        public GameObject Self;
+        public GameObject Parent;
+
         public CheetoElement()
         {
         }
+
+        public void SetName(string name)
+        {
+            Self.name = name;
+        }
+
+        public void ApplyFixes()
+        {
+            Self.transform.parent = Parent.transform;
+            Self.transform.rotation = Parent.transform.rotation;
+            Self.transform.localPosition = new Vector3(0, 0, 0);
+            Self.transform.localScale = new Vector3(1, 1, 1);
+        }
     }
 
-    // TODO: Finish
     public class CheetoButton : CheetoElement
     {
-        public CheetoButton() : base()
+        public CheetoButton(Transform parent, string label, Action action) : base()
         {
+            var buttonBase = GameObject.Find(UIPaths.WorldButton);
+
+            var go = GameObject.Instantiate(buttonBase);
+            Self = go;
+            Parent = parent.gameObject;
+
+            SetName($"CheetoLibrary-{CheetoButtonAPI.UIElements.Count}-Button:{label}");
+            ApplyFixes();
+
+            go.transform.GetComponentInChildren<TextMeshProUGUI>().text = label;
+            go.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
+            go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"[Debug] Button Clicked: {go.name}")));
+            go.transform.GetComponentInChildren<Button>().onClick.AddListener(action);
+
+            CheetoButtonAPI.UIElements.Add(go);
         }
     }
 
@@ -121,8 +151,8 @@ namespace CheetosLibrary
                 }
             }
 
-            CreateNewButton(buttons.transform, "Test Button #1");
-            CreateNewButton(buttons.transform, "Test Button #2");
+            _ = new CheetoButton(buttons.transform, "Test Button #1", () => { MelonLogger.Msg("Boom!"); });
+            _ = new CheetoButton(buttons.transform, "Test Button #2", () => { MelonLogger.Msg("Bam!"); });
         }
 
         public static void CreateNewDashboardTopIcon()
@@ -142,21 +172,19 @@ namespace CheetosLibrary
             UIElements.Add(go);
         }
 
-        // TODO: Move to CheetoButton
-        public static void CreateNewButton(Transform parent, string label)
+        public static void CreateNewTabButton()
         {
-            var buttonBase = GameObject.Find(UIPaths.WorldButton);
+            var expandBase = GameObject.Find(UIPaths.ExpandButton);
 
-            var go = GameObject.Instantiate(buttonBase);
-            go.name = $"CheetoLibrary-{UIElements.Count}-Button:{label}";
-            go.transform.parent = parent.transform;
-            go.transform.rotation = parent.transform.rotation;
+            var go = GameObject.Instantiate(expandBase);
+            go.name = $"CheetoLibrary-{UIElements.Count}-TopIcon";
+            go.transform.parent = expandBase.transform.parent;
+            go.transform.rotation = expandBase.transform.rotation;
             go.transform.localPosition = new Vector3(0, 0, 0);
             go.transform.localScale = new Vector3(1, 1, 1);
 
-            go.transform.GetComponentInChildren<TextMeshProUGUI>().text = label;
             go.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-            go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"Button Clicked: {go.name}")));
+            go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"TopIcon Clicked {go.name}")));
 
             UIElements.Add(go);
         }

@@ -254,7 +254,7 @@
                 var EmojiGen = player.field_Private_EmotePlayer_0;
                 if (EmojiGen != null)
                 {
-                    EmojiGen.Method_Public_Void_Int32_0(emoji);
+                    EmojiGen.Method_Public_Virtual_Final_New_Void_Int32_0(emoji);
                 }
                 if (IsBeingSpawnedFromMenu)
                 {
@@ -268,7 +268,7 @@
             var EmojiGen = Player.prop_Player_0.GetVRCPlayer().field_Private_EmotePlayer_0;
             if (EmojiGen != null)
             {
-                EmojiGen.Method_Public_Void_Int32_0(emoji);
+                EmojiGen.Method_Public_Virtual_Final_New_Void_Int32_0(emoji);
 
                 if (IsBeingSpawnedFromMenu)
                 {
