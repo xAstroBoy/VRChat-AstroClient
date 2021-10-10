@@ -45,6 +45,7 @@
                 }
             }
 
+            buttons.transform.SetSiblingIndex(0);
             _ = new CheetoButton(buttons.transform, "Test Button #1", () => { MelonLogger.Msg("Boom!"); });
             _ = new CheetoButton(buttons.transform, "Test Button #2", () => { MelonLogger.Msg("Bam!"); });
         }
@@ -59,6 +60,7 @@
             go.transform.rotation = expandBase.transform.rotation;
             go.transform.localPosition = new Vector3(0, 0, 0);
             go.transform.localScale = new Vector3(1, 1, 1);
+            go.transform.SetSiblingIndex(0);
 
             go.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"TopIcon Clicked {go.name}")));
@@ -68,17 +70,18 @@
 
         public static void CreateNewTabButton()
         {
-            var expandBase = GameObject.Find(UIPaths.ExpandButton);
+            var tabBase = GameObject.Find(UIPaths.LaunchPadTab);
 
-            var go = GameObject.Instantiate(expandBase);
-            go.name = $"CheetoLibrary-{UIElements.Count}-TopIcon";
-            go.transform.parent = expandBase.transform.parent;
-            go.transform.rotation = expandBase.transform.rotation;
+            var go = GameObject.Instantiate(tabBase);
+            go.name = $"CheetoLibrary-{UIElements.Count}-TabButton";
+            go.transform.parent = tabBase.transform.parent;
+            go.transform.rotation = tabBase.transform.rotation;
             go.transform.localPosition = new Vector3(0, 0, 0);
             go.transform.localScale = new Vector3(1, 1, 1);
 
             go.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-            go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"TopIcon Clicked {go.name}")));
+            go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"TabButton Clicked {go.name}")));
+            go.transform.SetSiblingIndex(1);
 
             UIElements.Add(go);
         }
