@@ -83,16 +83,17 @@ namespace CheetosLibrary
             text.text = header;
 
             var buttons = GameObject.Instantiate(buttonsBase);
+            buttons.name = $"CheetoLibrary-DashboardMenu:{header}";
             buttons.transform.parent = buttonsBase.transform.parent;
             buttons.transform.rotation = buttonsBase.transform.rotation;
             buttons.transform.localPosition = new Vector3(0, 0, 0);
             buttons.transform.localScale = new Vector3(1, 1, 1);
 
             var children = buttons.transform.GetComponentsInChildren<Transform>();
-            foreach(var child in children)
+            foreach (Transform child in children)
             {
                 var go = child.gameObject;
-                if (go != hgo && go.name.ToLower().Contains("button"))
+                if (go != buttons && go.name.ToLower().Contains("button"))
                 {
                     GameObject.Destroy(go);
                 }
@@ -125,7 +126,7 @@ namespace CheetosLibrary
             var buttonBase = GameObject.Find(UIPaths.WorldButton);
 
             var go = GameObject.Instantiate(buttonBase);
-            go.transform.parent = parent.transform.parent;
+            go.transform.parent = parent.transform;
             go.transform.rotation = parent.transform.rotation;
             go.transform.localPosition = new Vector3(0, 0, 0);
             go.transform.localScale = new Vector3(1, 1, 1);
