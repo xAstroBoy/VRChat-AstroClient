@@ -8,23 +8,16 @@
 
     public class CheetoButton : CheetoElement
     {
-        public CheetoButton(Transform parent, string label, Action action) : base()
+        public CheetoButton(Transform parent, string label, Action action) : base(GameObject.Find(UIPaths.WorldButton), parent)
         {
-            var buttonBase = GameObject.Find(UIPaths.WorldButton);
-
-            var go = GameObject.Instantiate(buttonBase);
-            Self = go;
-            Parent = parent.gameObject;
-
             SetName($"CheetoLibrary-{CheetoButtonAPI.UIElements.Count}-Button:{label}");
-            ApplyFixes();
 
-            go.transform.GetComponentInChildren<TextMeshProUGUI>().text = label;
-            go.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-            go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"[Debug] Button Clicked: {go.name}")));
-            go.transform.GetComponentInChildren<Button>().onClick.AddListener(action);
+            Self.transform.GetComponentInChildren<TextMeshProUGUI>().text = label;
+            Self.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
+            Self.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"[Debug] Button Clicked: {Self.name}")));
+            Self.transform.GetComponentInChildren<Button>().onClick.AddListener(action);
 
-            CheetoButtonAPI.UIElements.Add(go);
+            CheetoButtonAPI.UIElements.Add(Self);
         }
     }
 }

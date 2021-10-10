@@ -6,6 +6,7 @@
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
+    using VRC.UI.Elements.Controls;
 
     public static class CheetoButtonAPI
     {
@@ -69,12 +70,12 @@
             UIElements.Add(go);
         }
 
-        public static void CreateNewTabButton()
+        public static void CreateNewTabButton(int index)
         {
             var tabBase = GameObject.Find(UIPaths.LaunchPadTab);
 
             var go = GameObject.Instantiate(tabBase);
-            go.name = $"CheetoLibrary-{UIElements.Count}-TabButton";
+            go.name = $"CheetoLibrary-{UIElements.Count}-TabButton-{index}";
             go.transform.parent = tabBase.transform.parent;
             go.transform.rotation = tabBase.transform.rotation;
             go.transform.localPosition = new Vector3(0, 0, 0);
@@ -82,7 +83,9 @@
 
             go.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
             go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"TabButton Clicked {go.name}")));
-            go.transform.SetSiblingIndex(1);
+            go.transform.SetSiblingIndex(index);
+
+            go.transform.GetComponentInChildren<MenuTab>().pageName = $"QuickMenuAstroClient-{index}";
 
             UIElements.Add(go);
         }

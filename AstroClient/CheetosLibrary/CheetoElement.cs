@@ -8,8 +8,11 @@
         public GameObject Self;
         public GameObject Parent;
 
-        public CheetoElement()
+        public CheetoElement(GameObject original, Transform parent)
         {
+            Self = Object.Instantiate(original);
+            Parent = parent.gameObject;
+            ApplyFixes();
         }
 
         public void SetName(string name)

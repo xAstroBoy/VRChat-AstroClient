@@ -133,7 +133,7 @@
             {
                 () => CheetoButtonAPI.CreateNewDashboardMenu("AstroClient"),
                 () => CheetoButtonAPI.CreateNewDashboardTopIcon(),
-                () => CheetoButtonAPI.CreateNewTabButton(),
+                () => CheetoButtonAPI.CreateNewTabButton(2),
             });
 
             MelonLogger.Msg("UI Initialized.");
