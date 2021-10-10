@@ -1,5 +1,6 @@
 ﻿namespace AstroLibrary
 {
+    using AstroLibrary.Console;
     #region Imports
 
     using AstroLibrary.Utility;
@@ -30,13 +31,22 @@
 
         public static byte[] ExtractResource(Assembly assembly, string filename)
         {
-            using (Stream resFilestream = assembly.GetManifestResourceStream(filename))
+            try
             {
-                if (resFilestream == null) return null;
-                byte[] ba = new byte[resFilestream.Length];
-                resFilestream.Read(ba, 0, ba.Length);
-                return ba;
+                using (Stream resFilestream = assembly.GetManifestResourceStream(filename))
+                {
+                    if (resFilestream == null) return null;
+                    byte[] ba = new byte[resFilestream.Length];
+                    resFilestream.Read(ba, 0, ba.Length);
+                    return ba;
+                }
             }
+            catch (Exception e)
+            {
+                ModConsole.Error($"Failed to extract resource: {filename}");
+                ModConsole.Exception(e);
+            }
+            return null;
         }
 
         public static void PopupCall(string title, string confirm, string placeholder, bool IsNumpad, Action<string> OnAccept, Action OnCancel = null)
