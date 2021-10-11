@@ -92,7 +92,7 @@
 
         internal static void CreateNewDashboardMenu(string header)
         {
-            _ = new CheetoDashMenu("");
+            _ = new CheetoDashMenu(header);
         }
     }
 }
