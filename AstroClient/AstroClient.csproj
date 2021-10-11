@@ -132,6 +132,7 @@
     <Compile Include="Components\FunBehaviour\StretchyCheeseBehaviour.cs" />
     <Compile Include="Components\JarRoleRevealers\JarControllerEvents.cs" />
     <Compile Include="Components\JarRoleRevealers\JarNodeReader.cs" />
+    <Compile Include="Components\QuickMenuListener\QuickMenuListener.cs" />
     <Compile Include="Components\Orbit\OrbitBehaviour.cs" />
     <Compile Include="Components\Orbit\OrbitManager_Old.cs" />
     <Compile Include="Components\PickupControl\PickupBlocker.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="Components\PlayerSpoofer\PlayerSpoofer.cs" />
     <Compile Include="Components\AstroUdons\Pickup\VRC_AstroPickup.cs" />
     <Compile Include="Components\PlayerWatcher\PlayerWatcher.cs" />
+    <Compile Include="Components\QuickMenuListener\QuickMenuEvents.cs" />
     <Compile Include="Components\Spinner\SpinnerBehaviour.cs" />
     <Compile Include="EmojiMenu\EmojiCooldownKiller.cs" />
     <Compile Include="Exploits\ExploitUtils.cs" />

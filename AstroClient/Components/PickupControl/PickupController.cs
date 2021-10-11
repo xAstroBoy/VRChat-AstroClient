@@ -25,11 +25,12 @@
             RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
             SyncProperties(true);
             ModConsole.DebugLog("Attacked Successfully PickupController to object " + gameObject.name);
+            isQMOpen = false;
             InvokeRepeating(nameof(PickupUpdate), 0.1f, 0.3f);
 
         }
 
-        private bool isQMOpen = false;
+        private bool isQMOpen { get; set; }
         internal override void OnQuickMenuClose()
         {
             isQMOpen = false;
@@ -39,6 +40,7 @@
         {
             isQMOpen = true;
         }
+
         private void PickupUpdate()
         {
             if (gameObject != null)
@@ -64,7 +66,8 @@
 
         private void AntiPickupTheft()
         {
-            if (!AntiTheft || isQMOpen) return;
+            if (isQMOpen) return;
+            if (!AntiTheft) return;
             if (Utils.LocalPlayer == null) return;
             bool TeleporToAntiTheft = false;
             if (CurrentHolder == null && !IsHeld || !CurrentHolder.isLocal)
@@ -73,7 +76,7 @@
             }
             if(TeleporToAntiTheft)
             {
-                if (InputUtils.IsImputGrabRightCalled || InputUtils.IsImputUseRightCalled)
+                if (InputUtils.IsImputUseRightCalled)
                 {
                     if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) != null)
                     {
@@ -84,7 +87,7 @@
                         gameObject.TeleportToMe(HumanBodyBones.RightHand, false, true);
                     }
                 }
-                else if (InputUtils.IsImputGrabLeftCalled || InputUtils.IsImputUseLeftCalled)
+                else if (InputUtils.IsImputUseLeftCalled)
                 {
                     if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) != null)
                     { 

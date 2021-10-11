@@ -40,8 +40,6 @@
         internal static EventHandler<EventArgs> Event_OnFriended { get; set; }
         internal static EventHandler<EventArgs> Event_OnUnfriended { get; set; }
         internal static EventHandler<EventArgs> Event_OnAvatarPageOpen { get; set; }
-        internal static EventHandler<EventArgs> Event_OnQuickMenuOpen { get; set; }
-        internal static EventHandler<EventArgs> Event_OnQuickMenuClose { get; set; }
 
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
@@ -76,7 +74,6 @@
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.ConfigurePortal)), GetPatch(nameof(OnConfigurePortal)));
                 new Patch(typeof(PortalInternal).GetMethod(nameof(PortalInternal.Method_Public_Void_0)), GetPatch(nameof(OnEnterPortal)));
                 new Patch(typeof(PlayerNameplate).GetMethod(nameof(PlayerNameplate.Method_Private_Void_1)), GetPatch(nameof(NameplatePatch)));
-                new Patch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Private_Void_Boolean_0)), GetPatch(nameof(QuickMenuPatch)));
                 new Patch(typeof(APIUser).GetMethod(nameof(APIUser.LocalAddFriend)), GetPatch(nameof(OnFriended)));
                 new Patch(typeof(APIUser).GetMethod(nameof(APIUser.UnfriendUser)), GetPatch(nameof(OnUnfriended)));
                 new Patch(AccessTools.Property(typeof(APIUser), nameof(APIUser.canSeeAllUsersStatus)).GetMethod, null, GetPatch(nameof(APIUserBypass)));
@@ -146,20 +143,6 @@
             {
                 Event_OnShowScreen?.SafetyRaise(new ScreenEventArgs(__0));
             }
-            return true;
-        }
-
-        private static bool QuickMenuPatch(ref QuickMenu __instance, ref bool __0)
-        {
-            if (!__0)
-            {
-                Event_OnQuickMenuOpen?.SafetyRaise(new EventArgs());
-            }
-            else
-            {
-                Event_OnQuickMenuClose?.SafetyRaise(new EventArgs());
-            }
-
             return true;
         }
 

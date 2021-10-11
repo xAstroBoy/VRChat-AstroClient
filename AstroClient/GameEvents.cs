@@ -3,6 +3,7 @@
     #region Imports
 
     using AstroClient.Cheetos;
+    using AstroClient.Components;
     using AstroClient.Moderation;
     using AstroClient.Startup.Hooks;
     using AstroClient.Streamer;
@@ -52,8 +53,8 @@
             CheetosHooks.Event_OnShowScreen += Internal_OnShowScreen;
             CheetosHooks.Event_OnPhotonJoin += Internal_OnPhotonPlayerJoined;
             CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
-            CheetosHooks.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
-            CheetosHooks.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
+            QuickMenuEvents.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
+            QuickMenuEvents.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
             CheetosHooks.Event_OnRoomLeft += Internal_OnRoomLeft;
             CheetosHooks.Event_OnRoomJoined += Internal_OnRoomJoined;
             CheetosHooks.Event_OnFriended += Internal_OnFriended;
