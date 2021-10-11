@@ -130,6 +130,7 @@
     <Compile Include="Components\Flashlight\FlashlightBehaviour.cs" />
     <Compile Include="Components\Expoits\OrbitManager.cs" />
     <Compile Include="Components\FunBehaviour\StretchyCheeseBehaviour.cs" />
+    <Compile Include="Components\ItemInflater\InflaterBehaviour.cs" />
     <Compile Include="Components\JarRoleRevealers\JarControllerEvents.cs" />
     <Compile Include="Components\JarRoleRevealers\JarNodeReader.cs" />
     <Compile Include="Components\VRChatUIListeners\UiListener.cs" />
@@ -291,7 +292,6 @@
     <Compile Include="GameObject\Cloner\ObjectCloner.cs" />
     <Compile Include="Components\ComponentsBtn.cs" />
     <Compile Include="Components\ESP\EspHelper.cs" />
-    <Compile Include="Components\ItemInflater\InflaterBehaviour.cs" />
     <Compile Include="Components\JarRoleRevealers\JarRoleController.cs" />
     <Compile Include="Components\JarRoleRevealers\JarRoleESP.cs" />
     <Compile Include="Components\PickupControl\PickupController.cs" />
