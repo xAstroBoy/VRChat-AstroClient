@@ -13,6 +13,7 @@
         public static string QuickMenu { get; } = "UserInterface/Canvas_QuickMenu(Clone)";
         public static string Container { get; } = "UserInterface/Canvas_QuickMenu(Clone)/Container";
         public static string Window { get; } = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window";
+        public static string QickMenuParent { get; } = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent";
         public static string WorldButton { get; } = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Buttons_QuickLinks/Button_Worlds";
         public static string LaunchPadTab { get; } = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/Page_Buttons_QM/HorizontalLayoutGroup/Page_Dashboard";
         public static string Banner { get; } = "UserInterface/Canvas_QuickMenu(Clone)/Container/Window/QMParent/Menu_Dashboard/ScrollRect/Viewport/VerticalLayoutGroup/Carousel_Banners";

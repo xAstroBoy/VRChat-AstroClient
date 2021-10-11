@@ -12,6 +12,21 @@
     {
         public static List<GameObject> UIElements = new List<GameObject>();
 
+        public static void ClearDashboardMenu()
+        {
+            var menu = GameObject.Find(UIPaths.QickMenuParent);
+
+            var children = menu.transform.GetComponentsInChildren<Transform>();
+            foreach (Transform child in children)
+            {
+                var go = child.gameObject;
+                if (go.transform.parent == menu.transform && !go.name.ToLower().Contains("background") && !go.name.ToLower().Contains("controllers") && !go.name.ToLower().Contains("model"))
+                {
+                    go.SetActive(false);
+                }
+            }
+        }
+
         public static void CreateTabButtons()
         {
             _ = new CheetoTab("AstroClient", () => { MelonLogger.Msg("Astro Tab Clicked!"); });
@@ -45,7 +60,7 @@
             foreach (Transform child in children)
             {
                 var go = child.gameObject;
-                if (go != buttons && go.name.ToLower().Contains("button"))
+                if (go.name.ToLower().Contains("button"))
                 {
                     GameObject.Destroy(go);
                 }
@@ -53,7 +68,7 @@
 
             hgo.transform.SetSiblingIndex(0);
             buttons.transform.SetSiblingIndex(1);
-            _ = new CheetoButton(buttons.transform, "Test Button #1", () => { MelonLogger.Msg("Boom!"); });
+            _ = new CheetoButton(buttons.transform, "Nested Button", () => { MelonLogger.Msg("Dashboard Cleared!"); ClearDashboardMenu(); });
             _ = new CheetoButton(buttons.transform, "Test Button #2", () => { MelonLogger.Msg("Bam!"); });
         }
 
