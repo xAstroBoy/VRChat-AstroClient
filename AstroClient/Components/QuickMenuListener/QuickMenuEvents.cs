@@ -27,11 +27,11 @@
 
         internal IEnumerator InitListenerForQM()
         {
-            while (QMTabs == null)
+            while (QuickMenuElements == null)
                 yield return null;
-            if(QMTabs != null)
+            if(QuickMenuElements != null)
             {
-                var listener = QMTabs.AddComponent<QuickMenuListener>();
+                var listener = QuickMenuElements.AddComponent<QuickMenuListener>();
                 if(listener != null)
                 {
                     listener.OnEnabled += new Action(() => {Event_OnQuickMenuOpen?.SafetyRaise(new EventArgs()); });
@@ -43,17 +43,31 @@
         }
 
 
-        private static GameObject _QMTabs;
-        internal static GameObject QMTabs
+        private static GameObject _QuickMenuElements;
+        internal static GameObject QuickMenuElements
         {
             get
             {
-                if(_QMTabs == null)
+                if(_QuickMenuElements == null)
                 {
-                    return _QMTabs = GameObjectFinder.Find("UserInterface/QuickMenu/QuickModeTabs");
+                    return _QuickMenuElements = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements");
                 }
-                return _QMTabs;
+                return _QuickMenuElements;
             }
         }
+
+        //private static GameObject _UIElements;
+        //internal static GameObject UiElement
+        //{
+        //    get
+        //    {
+        //        if (_UIElements == null)
+        //        {
+        //            return _UIElements = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements");
+        //        }
+        //        return _UIElements;
+        //    }
+        //}
+
     }
 }
