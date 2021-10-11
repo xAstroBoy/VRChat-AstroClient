@@ -8,11 +8,11 @@
     using UnityEngine.UI;
     using VRC.UI.Elements.Controls;
 
-    public static class CheetoButtonAPI
+    internal static class CheetoButtonAPI
     {
-        public static List<GameObject> UIElements = new List<GameObject>();
+        internal static List<GameObject> UIElements = new List<GameObject>();
 
-        public static void ClearDashboardMenu()
+        internal static void ClearDashboardMenu()
         {
             var menu = GameObject.Find(UIPaths.QickMenuParent);
 
@@ -27,12 +27,12 @@
             }
         }
 
-        public static void CreateTabButtons()
+        internal static void CreateTabButtons()
         {
             _ = new CheetoTab("AstroClient", () => { MelonLogger.Msg("Astro Tab Clicked!"); });
         }
 
-        public static void CreateNewDashboardMenu(string header)
+        internal static void CreateNewDashboardSubMenu(string header)
         {
             var headerBase = GameObject.Find(UIPaths.HeaderQuickActions);
             var buttonsBase = GameObject.Find(UIPaths.ButtonsQuickActions);
@@ -72,7 +72,7 @@
             _ = new CheetoButton(buttons.transform, "Test Button #2", () => { MelonLogger.Msg("Bam!"); });
         }
 
-        public static void CreateNewDashboardTopIcon()
+        internal static void CreateNewDashboardTopIcon()
         {
             var expandBase = GameObject.Find(UIPaths.ExpandButton);
 
@@ -88,6 +88,11 @@
             go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"TopIcon Clicked {go.name}")));
 
             UIElements.Add(go);
+        }
+
+        internal static void CreateNewDashboardMenu(string header)
+        {
+            _ = new CheetoDashMenu("");
         }
     }
 }

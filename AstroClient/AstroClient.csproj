@@ -196,6 +196,7 @@
     <Compile Include="AstroLibrary\VRChatObjects.cs" />
     <Compile Include="AstroLibrary\XrefTesting.cs" />
     <Compile Include="Buttons\HistoryMenu.cs" />
+    <Compile Include="CheetoLibrary\CheetoDashMenu.cs" />
     <Compile Include="CheetoLibrary\CheetoUtils.cs" />
     <Compile Include="CheetoLibrary\CheetoWingButton.cs" />
     <Compile Include="CheetoLibrary\CheetoTab.cs" />
