@@ -39,6 +39,9 @@
             Self.transform.localPosition = Original.transform.localPosition;
         }
 
+        /// <summary>
+        /// Resets the rect offsets to zero, I had to do this for DashboardMenus for some reason.
+        /// </summary>
         public void ResetRect()
         {
             var rect = Self.GetComponent<RectTransform>();
@@ -46,6 +49,9 @@
             rect.offsetMin = new Vector2(0, 0);
         }
 
+        /// <summary>
+        /// Shouldn't need to use this, should probably make it private
+        /// </summary>
         public void ApplyFixes()
         {
             Self.transform.parent = Parent.transform;
