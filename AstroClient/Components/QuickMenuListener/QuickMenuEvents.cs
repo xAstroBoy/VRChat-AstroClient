@@ -1,7 +1,9 @@
 ﻿namespace AstroClient.Components
 {
+    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
+    using MelonLoader;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -19,7 +21,7 @@
 
         internal override void VRChat_OnQuickMenuInit()
         {
-            
+            MelonCoroutines.Start(InitListenerForQM());
         }
 
 
@@ -34,9 +36,10 @@
                 {
                     listener.OnEnabled += new Action(() => {Event_OnQuickMenuOpen?.SafetyRaise(new EventArgs()); });
                     listener.OnDisabled += new Action(() => { Event_OnQuickMenuClose?.SafetyRaise(new EventArgs()); });
+                    ModConsole.DebugLog("QuickMenu Listener Added!");
                 }
             }
-
+            yield return null;
         }
 
 
