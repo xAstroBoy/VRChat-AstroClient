@@ -25,21 +25,20 @@
             RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
             SyncProperties(true);
             ModConsole.DebugLog("Attacked Successfully PickupController to object " + gameObject.name);
-            isQMOpen = false;
+            isUsingUI = false;
             InvokeRepeating(nameof(PickupUpdate), 0.1f, 0.3f);
 
         }
 
-        private bool isQMOpen { get; set; }
-        internal override void OnQuickMenuClose()
-        {
-            isQMOpen = false;
-        }
+        private bool isUsingUI { get; set; }
+        internal override void OnQuickMenuClose() => isUsingUI = false;
 
-        internal override void OnQuickMenuOpen()
-        {
-            isQMOpen = true;
-        }
+        internal override void OnQuickMenuOpen() => isUsingUI = true;
+
+        internal override void OnBigMenuOpen() => isUsingUI = true;
+
+        internal override void OnBigMenuClose() => isUsingUI = false;
+
 
         private void PickupUpdate()
         {
@@ -66,7 +65,7 @@
 
         private void AntiPickupTheft()
         {
-            if (isQMOpen) return;
+            if (isUsingUI) return;
             if (!AntiTheft) return;
             if (Utils.LocalPlayer == null) return;
             bool TeleporToAntiTheft = false;

@@ -12,17 +12,42 @@
     using System.Threading.Tasks;
     using UnityEngine;
 
-    internal class QuickMenuEvents : GameEvents
+    internal class VRChatUIEvents : GameEvents
     {
 
         internal static EventHandler<EventArgs> Event_OnQuickMenuOpen { get; set; }
         internal static EventHandler<EventArgs> Event_OnQuickMenuClose { get; set; }
 
+        internal static EventHandler<EventArgs> Event_OnBigMenuOpen { get; set; }
+        internal static EventHandler<EventArgs> Event_OnBigMenuClose { get; set; }
+
 
         internal override void VRChat_OnQuickMenuInit()
         {
             MelonCoroutines.Start(InitListenerForQM());
+            MelonCoroutines.Start(InitListenerForBigMenu());
+
         }
+
+
+
+        internal IEnumerator InitListenerForBigMenu()
+        {
+            while (BigMenuElements == null)
+                yield return null;
+            if (BigMenuElements != null)
+            {
+                var listener = BigMenuElements.AddComponent<UiListener>();
+                if (listener != null)
+                {
+                    listener.OnEnabled += new Action(() => { Event_OnBigMenuOpen?.SafetyRaise(new EventArgs()); });
+                    listener.OnDisabled += new Action(() => { Event_OnBigMenuClose?.SafetyRaise(new EventArgs()); });
+                    ModConsole.DebugLog("Big Menu Listener Added!");
+                }
+            }
+            yield return null;
+        }
+
 
 
         internal IEnumerator InitListenerForQM()
@@ -31,7 +56,7 @@
                 yield return null;
             if(QuickMenuElements != null)
             {
-                var listener = QuickMenuElements.AddComponent<QuickMenuListener>();
+                var listener = QuickMenuElements.AddComponent<UiListener>();
                 if(listener != null)
                 {
                     listener.OnEnabled += new Action(() => {Event_OnQuickMenuOpen?.SafetyRaise(new EventArgs()); });
@@ -42,6 +67,8 @@
             yield return null;
         }
 
+
+        // Mostly background UIs paths .
 
         private static GameObject _QuickMenuElements;
         internal static GameObject QuickMenuElements
@@ -56,18 +83,18 @@
             }
         }
 
-        //private static GameObject _UIElements;
-        //internal static GameObject UiElement
-        //{
-        //    get
-        //    {
-        //        if (_UIElements == null)
-        //        {
-        //            return _UIElements = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements");
-        //        }
-        //        return _UIElements;
-        //    }
-        //}
+        private static GameObject _BigMenuElements;
+        internal static GameObject BigMenuElements 
+        {
+            get
+            {
+                if (_BigMenuElements == null)
+                {
+                    return _BigMenuElements = GameObjectFinder.Find("UserInterface/MenuContent/Backdrop/Backdrop");
+                }
+                return _BigMenuElements;
+            }
+        }
 
     }
 }

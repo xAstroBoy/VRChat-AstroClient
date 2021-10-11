@@ -4,7 +4,7 @@ namespace AstroClient.Components
     using UnhollowerBaseLib.Attributes;
 
     [RegisterComponent]
-    public class QuickMenuListener : GameEventsBehaviour
+    public class UiListener : GameEventsBehaviour
     {
         [method: HideFromIl2Cpp]
         internal event Action? OnEnabled;
@@ -12,7 +12,7 @@ namespace AstroClient.Components
         [method: HideFromIl2Cpp]
         internal event Action? OnDisabled;
 
-        public QuickMenuListener(IntPtr obj0) : base(obj0)
+        public UiListener(IntPtr obj0) : base(obj0)
         {
         }
 
