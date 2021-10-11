@@ -12,17 +12,24 @@
     {
         internal static List<GameObject> UIElements = new List<GameObject>();
 
-        internal static void ClearDashboardMenu()
+        internal static void ChangeDashboardMenu(string name)
         {
             var menu = GameObject.Find(UIPaths.QickMenuParent);
 
-            var children = menu.transform.GetComponentsInChildren<Transform>();
-            foreach (Transform child in children)
+            var children = menu.transform.GetComponentsInChildren<RectTransform>();
+            foreach (RectTransform child in children)
             {
                 var go = child.gameObject;
                 if (go.transform.parent == menu.transform && !go.name.ToLower().Contains("background") && !go.name.ToLower().Contains("controllers") && !go.name.ToLower().Contains("model"))
                 {
-                    go.SetActive(false);
+                    if (go.name.ToLower().Contains(name.ToLower()))
+                    {
+                        go.SetActive(true);
+                    }
+                    else
+                    {
+                        go.SetActive(false);
+                    }
                 }
             }
         }
@@ -68,7 +75,7 @@
 
             hgo.transform.SetSiblingIndex(0);
             buttons.transform.SetSiblingIndex(1);
-            _ = new CheetoButton(buttons.transform, "Nested Button", () => { MelonLogger.Msg("Dashboard Cleared!"); ClearDashboardMenu(); });
+            _ = new CheetoButton(buttons.transform, "Nested Button", () => { MelonLogger.Msg("Dashboard Cleared!"); ChangeDashboardMenu("AstroMainMenu"); });
             _ = new CheetoButton(buttons.transform, "Test Button #2", () => { MelonLogger.Msg("Bam!"); });
         }
 

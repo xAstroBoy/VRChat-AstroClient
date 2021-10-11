@@ -9,11 +9,13 @@
     {
         public GameObject Self;
         public GameObject Parent;
+        public GameObject Original;
 
         public CheetoElement(GameObject original, Transform parent)
         {
             Self = GameObject.Instantiate(original);
             Parent = parent.gameObject;
+            Original = original;
             ApplyFixes();
             CheetoButtonAPI.UIElements.Add(Self);
         }
@@ -21,6 +23,25 @@
         public void SetName(string name)
         {
             Self.name = name;
+        }
+
+        /// <summary>
+        /// Sets this objects transform properties to those of the object it was orignally cloned from
+        /// </summary>
+        public void CopyOriginalTransform()
+        {
+            Self.transform.parent = Original.transform.parent;
+            Self.transform.position = Original.transform.position;
+            Self.transform.rotation = Original.transform.rotation;
+            Self.transform.localScale = Original.transform.localScale;
+            Self.transform.localPosition = Original.transform.localPosition;
+        }
+
+        public void ResetRect()
+        {
+            var rect = Self.GetComponent<RectTransform>();
+            rect.offsetMax = new Vector2(0, 0);
+            rect.offsetMin = new Vector2(0, 0);
         }
 
         public void ApplyFixes()

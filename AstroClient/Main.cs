@@ -131,7 +131,7 @@
 
             CheetoLibrary.CheetoUtils.TryRun(new Action[]
             {
-                () => CheetoButtonAPI.CreateNewDashboardMenu("AstroClient"),
+                () => CheetoButtonAPI.CreateNewDashboardMenu("AstroMainMenu"),
                 () => CheetoButtonAPI.CreateNewDashboardSubMenu("AstroClient"),
                 () => CheetoButtonAPI.CreateNewDashboardTopIcon(),
                 () => CheetoButtonAPI.CreateTabButtons(),
