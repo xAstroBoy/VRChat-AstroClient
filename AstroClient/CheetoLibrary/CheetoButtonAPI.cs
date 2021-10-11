@@ -75,7 +75,7 @@
 
             hgo.transform.SetSiblingIndex(0);
             buttons.transform.SetSiblingIndex(1);
-            _ = new CheetoButton(buttons.transform, "Nested Button", () => { MelonLogger.Msg("Dashboard Cleared!"); ChangeDashboardMenu("AstroMainMenu"); });
+            _ = new CheetoButton(buttons.transform, "Nested Button", () => { MelonLogger.Msg("Dashboard Cleared!"); ChangeDashboardMenu("AstroMainMenu"); }, true);
             _ = new CheetoButton(buttons.transform, "Test Button #2", () => { MelonLogger.Msg("Bam!"); });
         }
 

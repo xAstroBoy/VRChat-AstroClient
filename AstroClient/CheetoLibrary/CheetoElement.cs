@@ -1,9 +1,11 @@
 ﻿namespace CheetoLibrary
 {
+    using AstroLibrary.Console;
     using MelonLoader;
     using System;
     using UnityEngine;
     using UnityEngine.UI;
+    using VRC.UI.Core.Styles;
 
     public class CheetoElement
     {
@@ -80,6 +82,21 @@
             else
             {
                 throw new CheetoUIException($"Could not assign action to {Self.name}, not a button!");
+            }
+        }
+
+        public void LoadSprite(byte[] data)
+        {
+            var children = Self.transform.GetComponentsInChildren<Image>();
+            foreach (Image child in children)
+            {
+                var go = child.gameObject;
+                if (go.name.ToLower().Contains("icon"))
+                {
+                    var texture = CheetoUtils.LoadPNG(data);
+                    child.overrideSprite = Sprite.CreateSprite(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);
+                    child.color = Color.white;
+                }
             }
         }
     }
