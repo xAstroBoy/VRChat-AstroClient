@@ -109,7 +109,7 @@
             if (!WorldUtils.IsInWorld) return;
 
 
-            if (player.GetPlayer().GetAPIUser().IsSelf)
+            if (player.GetPhotonPlayer().GetAPIUser().IsSelf)
             {
                 if (PlayerSpooferUtils.IsSpooferActive)
                 {
@@ -119,7 +119,7 @@
                 }
             }
 
-            PopupUtils.QueHudMessage($"'{player.GetPlayer().GetDisplayName()}' is now the room master.");
+            PopupUtils.QueHudMessage($"'{player.GetPhotonPlayer().GetDisplayName()}' is now the room master.");
             }
 
         internal override void OnRoomJoined()

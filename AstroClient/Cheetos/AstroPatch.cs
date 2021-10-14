@@ -217,7 +217,7 @@
                 if (Bools.IsDeveloper)
                 {
                     
-                    ModConsole.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath} | with AstroClient {patch.PatchType}");
+                    ModConsole.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath} | with {patch.PatchType}");
                 }
                 else
                 {

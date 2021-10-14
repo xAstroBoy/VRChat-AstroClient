@@ -48,7 +48,7 @@ namespace AstroLibrary.Utility
 
         public static int GetPhotonID(this Photon.Realtime.Player player) => player.field_Private_Int32_0;
 
-        public static VRC.Player GetPlayer(this Photon.Realtime.Player player) => player.field_Public_Player_0;
+        public static VRC.Player GetPhotonPlayer(this Photon.Realtime.Player player) => player.field_Public_Player_0;
 
         public static System.Collections.Hashtable GetHashtable(this Photon.Realtime.Player player) => SerializationUtils.FromIL2CPPToManaged<System.Collections.Hashtable>(player.GetRawHashtable());
 

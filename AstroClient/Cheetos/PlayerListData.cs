@@ -115,7 +115,7 @@
         internal PlayerListData(Photon.Realtime.Player photonPlayer)
         {
             PhotonPlayer = photonPlayer;
-            Player = photonPlayer?.GetPlayer();
+            Player = photonPlayer?.GetPhotonPlayer();
             APIUser = Player?.GetAPIUser();
             PlayerAPI = Player?.GetVRCPlayerApi();
             PlayerNet = Player?.GetPlayerNet();

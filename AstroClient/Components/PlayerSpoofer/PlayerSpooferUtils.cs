@@ -79,12 +79,47 @@
                 _SpoofASWorldAuthor = value;
                 if (value)
                 {
+                    SpoofAsInstanceMaster = false;
                     IsSpooferActive = true;
                     SpoofedName = WorldUtils.AuthorName;
                 }
                 else
                 {
                     SpooferInstance.IsSpooferActive = false;
+                }
+                if (ExploitsMenu.ToggleWorldAuthorSpoofer != null)
+                {
+                    ExploitsMenu.ToggleWorldAuthorSpoofer.SetToggleState(value);
+                }
+
+            }
+        }
+
+        private static bool _SpoofAsInstanceMaster;
+
+        internal static bool SpoofAsInstanceMaster
+        {
+            get
+            {
+                return _SpoofAsInstanceMaster;
+            }
+            set
+            {
+                _SpoofAsInstanceMaster = value;
+                if (value)
+                {
+                    SpoofAsWorldAuthor = false;
+                    IsSpooferActive = true;
+                    SpoofedName = WorldUtils.InstanceMaster.GetAPIUser().displayName;
+                }
+                else
+                {
+                    SpooferInstance.IsSpooferActive = false;
+                }
+
+                if (ExploitsMenu.ToggleInstanceMasterSpoofer != null)
+                {
+                    ExploitsMenu.ToggleInstanceMasterSpoofer.SetToggleState(value);
                 }
             }
         }

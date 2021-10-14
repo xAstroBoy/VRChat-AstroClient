@@ -7,6 +7,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using Photon.Realtime;
     using VRC.Core;
 
     [RegisterComponent]
@@ -84,6 +85,38 @@
                 IsSpooferActive = true;
                 SpoofedName = WorldUtils.AuthorName;
 			}
+            else if (PlayerSpooferUtils.SpoofAsInstanceMaster && WorldUtils.IsInWorld)
+            {
+                IsSpooferActive = true;
+                SpoofedName = WorldUtils.InstanceMaster.GetAPIUser().displayName;
+            }
+        }
+
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        {
+            if (PlayerSpooferUtils.SpoofAsInstanceMaster)
+            {
+                IsSpooferActive = true;
+                SpoofedName = WorldUtils.InstanceMaster.GetAPIUser().displayName;
+            }
+        }
+
+        internal override void OnMasterClientSwitched(Player player)
+        {
+            if (!WorldUtils.IsInWorld) return;
+
+            if (PlayerSpooferUtils.SpoofAsInstanceMaster)
+            {
+
+                if (!player.GetVRCPlayer().GetAPIUser().IsSelf)
+                {
+                    SpoofedName = player.GetVRCPlayer().GetAPIUser().displayName;
+                }
+                else
+                {
+                    SpoofedName = Original_DisplayName;
+                }
+            }
         }
 
         private void SafetyCheck()
