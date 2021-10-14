@@ -83,7 +83,6 @@ namespace AstroActionMenu
                 "XXXXXXXXX"
             }); // No strings found :( Unusable for now. Scanning for methods doesnt help either as there are other functions that yield similar results
 
-        private static HarmonyLib.Harmony Harmony;
 
         public static void PatchAll()
         {
