@@ -99,14 +99,14 @@ namespace AstroActionMenu
 
             //Method_Private_Void_PDM_11
             //Special Child
-            new AstroPatch(
+           /* new AstroPatch(
                 typeof(ActionMenu).GetMethods().Single(
                     m => Utilities.CheckXref(m, openNameplatesSizePageKeyWords)
                          && m.CheckStringsCount(5)
                 ),
                 new HarmonyMethod(typeof(Patches).GetMethod("OpenNameplatesSizePre")),
                 new HarmonyMethod(typeof(Patches).GetMethod("OpenNameplatesSizePost"))
-            );
+            );*/
             ModConsole.DebugLog("ActionMenu Patches Applied");
         }
 
