@@ -13,8 +13,14 @@
     using AstroLibrary.Extensions;
     #endregion Imports
 
+
+
+
     internal class AstroPatch
     {
+
+        private string PatchIdentifier { get; } = "AstroPatch";
+
         internal MethodInfo TargetMethod { get; set; }
         internal HarmonyMethod Prefix { get; set; }
         internal HarmonyMethod PostFix { get; set; }
@@ -25,13 +31,8 @@
         internal HarmonyLib.Harmony Instance { get; set; }
 
 
-        internal string TargetPath
-        {
-            get
-            {
-                return $"{TargetMethod?.DeclaringType?.FullName}.{TargetMethod.Name}";
-            }
-        }
+        internal string TargetPath => $"{TargetMethod?.DeclaringType?.FullName}.{TargetMethod.Name}";
+
         internal string PatchType
         {
             get
@@ -179,17 +180,17 @@
                 }
                 if (TargetMethod != null)
                 {
-                    ModConsole.Error("[AstroPatch] TargetMethod is NULL");
+                    ModConsole.Error($"[{PatchIdentifier}] TargetMethod is NULL");
                 }
                 else
                 {
                     if (Bools.IsDeveloper)
                     {
-                        ModConsole.Error($"[AstroPatch] Failed to Patch {TargetMethod.DeclaringType.FullName}.{TargetMethod.Name} because {FailureReason.ToString()}.");
+                        ModConsole.Error($"[{PatchIdentifier}] Failed to Patch {TargetMethod.DeclaringType?.FullName}.{TargetMethod?.Name} because {FailureReason.ToString()}.");
                     }
                     else
                     {
-                        ModConsole.Error($"[AstroPatch] Failed to Patch {TargetMethod?.Name}");
+                        ModConsole.Error($"[{PatchIdentifier}] Failed to Patch {TargetMethod.Name}");
                     }
                 }
                 return;
@@ -201,7 +202,7 @@
             this.Transpiler = Transpiler;
             this.Finalizer = Finalizer;
             this.IlManipulator = ILmanipulator;
-            Instance = new HarmonyLib.Harmony($"AstroPatch: {TargetPath}, {PatchType}");
+            Instance = new HarmonyLib.Harmony($"{PatchIdentifier}: {TargetPath}, {PatchType}");
             DoPatch(this);
         }
 
@@ -216,11 +217,11 @@
                 if (Bools.IsDeveloper)
                 {
                     
-                    ModConsole.Error($"[AstroPatch] Failed At {patch.TargetPath} | with AstroClient {patch.PatchType}");
+                    ModConsole.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetPath} | with AstroClient {patch.PatchType}");
                 }
                 else
                 {
-                    ModConsole.Error($"[AstroPatch] Failed At {patch.TargetMethod?.Name}");
+                    ModConsole.Error($"[{patch.PatchIdentifier}] Failed At {patch.TargetMethod?.Name}");
                 }
                 ModConsole.ErrorExc(e);
             }
@@ -228,11 +229,11 @@
             {
                 if (Bools.IsDeveloper)
                 {
-                    ModConsole.DebugLog($"[AstroPatch] Patched {patch.TargetPath} | with {patch.PatchType}");
+                    ModConsole.DebugLog($"[{patch.PatchIdentifier}] Patched {patch.TargetPath} | with {patch.PatchType}");
                 }
                 else
                 {
-                    ModConsole.DebugLog($"[AstroPatch] Patched {patch.TargetMethod?.Name}");
+                    ModConsole.DebugLog($"[{patch.PatchIdentifier}] Patched {patch.TargetMethod?.Name}");
                 }
             }
         }
