@@ -123,8 +123,8 @@
     <Compile Include="ActionMenu\Types\Insertion.cs" />
     <Compile Include="ActionMenu\Types\PedalType.cs" />
     <Compile Include="Buttons\HistoryMenu.cs" />
+    <Compile Include="Cheetos\AstroPatch.cs" />
     <Compile Include="Cheetos\InstanceHistory.cs" />
-    <Compile Include="Cheetos\Patch.cs" />
     <Compile Include="Components\CrazyObjects\CrazyBehaviour.cs" />
     <Compile Include="Components\ESP\EspEvents.cs" />
     <Compile Include="Components\Flashlight\FlashlightBehaviour.cs" />
