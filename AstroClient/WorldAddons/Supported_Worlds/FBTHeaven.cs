@@ -1,4 +1,5 @@
-﻿namespace AstroClient
+﻿#pragma warning disable 649
+namespace AstroClient
 {
     using AstroClient.Components;
     using AstroClient.Variables;
