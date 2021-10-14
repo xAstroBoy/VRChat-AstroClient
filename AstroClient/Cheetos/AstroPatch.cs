@@ -115,7 +115,7 @@
             this.Transpiler = Transpiler;
             this.Finalizer = Finalizer;
             this.IlManipulator = ILmanipulator;
-            Instance = new HarmonyLib.Harmony($"AstroPatch: {TargetPath}, {PatchType.ToString()}");
+            Instance = new HarmonyLib.Harmony($"AstroPatch: {TargetPath}, {PatchType}");
             DoPatch(this);
         }
 
@@ -146,7 +146,7 @@
                 }
                 else
                 {
-                    ModConsole.DebugLog($"[AstroPatch] Patched {patch.TargetMethod.Name}");
+                    ModConsole.DebugLog($"[AstroPatch] Patched {patch.TargetMethod?.Name}");
                 }
             }
         }
