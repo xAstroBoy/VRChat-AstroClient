@@ -23,6 +23,8 @@
 
         internal HarmonyMethod IlManipulator { get; set; }
         internal HarmonyLib.Harmony Instance { get; set; }
+
+
         internal string TargetPath
         {
             get
@@ -34,26 +36,27 @@
         {
             get
             {
+                StringBuilder patchtype = new StringBuilder();
                 if (PostFix != null)
                 {
-                    return $"PostFix Patch : {PostFix.method?.DeclaringType?.FullName}.{PostFix.method?.Name}";
+                    patchtype.AppendLine($"PostFix Patch : {PostFix.method?.DeclaringType?.FullName}.{PostFix.method?.Name}");
                 }
-                else if (Prefix != null)
+                if (Prefix != null)
                 {
-                    return $"Prefix Patch : {Prefix.method?.DeclaringType?.FullName}.{Prefix.method?.Name}";
+                    patchtype.AppendLine($"Prefix Patch : {Prefix.method?.DeclaringType?.FullName}.{Prefix.method?.Name}");
                 }
-                else if (Transpiler != null)
+                if (Transpiler != null)
                 {
-                    return $"Transpiler Patch : {Transpiler.method?.DeclaringType?.FullName}.{Transpiler.method?.Name}";
+                    patchtype.AppendLine($"Transpiler Patch : {Transpiler.method?.DeclaringType?.FullName}.{Transpiler.method?.Name}");
                 }
-                else if (Finalizer != null)
+                if (Finalizer != null)
                 {
-                    return $"Finalizer Patch : {Finalizer.method?.DeclaringType?.FullName}.{Finalizer.method?.Name}";
+                    patchtype.AppendLine($"Finalizer Patch : {Finalizer.method?.DeclaringType?.FullName}.{Finalizer.method?.Name}");
 
                 }
-                else if (IlManipulator != null)
+                if (IlManipulator != null)
                 {
-                    return $"IlManipulator Patch : {IlManipulator.method?.DeclaringType?.FullName}.{IlManipulator.method?.Name}";
+                    patchtype.AppendLine($"IlManipulator Patch : {IlManipulator.method?.DeclaringType?.FullName}.{IlManipulator.method?.Name}");
                 }
 
                 return "Failed to Read Patch.";
@@ -67,25 +70,25 @@
                 StringBuilder reason = new StringBuilder();
                 if (Prefix == null)
                 {
-                    reason.Append("Prefix Method is null");
+                    reason.AppendLine("Prefix Method is null");
                 }
                 if (PostFix == null)
                 {
-                    reason.Append("Postfix Method is null");
+                    reason.AppendLine("Postfix Method is null");
                 }
-                else if(Transpiler == null)
+                if(Transpiler == null)
                 {
-                    reason.Append("Transpiler Method is null");
+                    reason.AppendLine("Transpiler Method is null");
 
                 }
-                else if (Finalizer == null)
+                if (Finalizer == null)
                 {
-                    reason.Append("Finalizer Method is null");
+                    reason.AppendLine("Finalizer Method is null");
 
                 }
-                else if (ILmanipulator == null)
+                if (ILmanipulator == null)
                 {
-                    reason.Append("ILmanipulator Method is null");
+                    reason.AppendLine("ILmanipulator Method is null");
 
                 }
                 if (TargetMethod != null)
