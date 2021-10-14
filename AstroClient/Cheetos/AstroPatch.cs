@@ -10,42 +10,82 @@
     using System.Diagnostics;
     using System.Reflection;
     using System.Text;
-
+    using AstroLibrary.Extensions;
     #endregion Imports
 
     internal class AstroPatch
     {
         internal MethodInfo TargetMethod { get; set; }
-        internal HarmonyMethod PrefixMethod { get; set; }
-        internal HarmonyMethod PostfixMethod { get; set; }
-        internal HarmonyMethod TranspilerMethod { get; set; }
-        internal HarmonyMethod FinalizerMethod { get; set; }
+        internal HarmonyMethod Prefix { get; set; }
+        internal HarmonyMethod PostFix { get; set; }
+        internal HarmonyMethod Transpiler { get; set; }
+        internal HarmonyMethod Finalizer { get; set; }
 
-        internal HarmonyMethod IlManipulatorMethod { get; set; }
+        internal HarmonyMethod IlManipulator { get; set; }
         internal HarmonyLib.Harmony Instance { get; set; }
-
-        internal AstroPatch(MethodInfo TargetMethod, HarmonyMethod PrefixMethod = null, HarmonyMethod PostfixMethod = null, HarmonyMethod TranspilerMethod = null , HarmonyMethod FinalizerMethod = null , HarmonyMethod IlManipulatorMethod = null)
+        internal string TargetPath
         {
-            if (TargetMethod == null || (PrefixMethod == null && PostfixMethod == null && TranspilerMethod == null && FinalizerMethod == null && IlManipulatorMethod == null))
+            get
+            {
+                return $"{TargetMethod?.DeclaringType?.FullName}.{TargetMethod.Name}";
+            }
+        }
+        internal string PatchType
+        {
+            get
+            {
+                if (PostFix != null)
+                {
+                    return $"PostFix Patch : {PostFix.method?.DeclaringType?.FullName}.{PostFix.method?.Name}";
+                }
+                else if (Prefix != null)
+                {
+                    return $"Prefix Patch : {Prefix.method?.DeclaringType?.FullName}.{Prefix.method?.Name}";
+                }
+                else if (Transpiler != null)
+                {
+                    return $"Transpiler Patch : {Transpiler.method?.DeclaringType?.FullName}.{Transpiler.method?.Name}";
+                }
+                else if (Finalizer != null)
+                {
+                    return $"Finalizer Patch : {Finalizer.method?.DeclaringType?.FullName}.{Finalizer.method?.Name}";
+
+                }
+                else if (IlManipulator != null)
+                {
+                    return $"IlManipulator Patch : {IlManipulator.method?.DeclaringType?.FullName}.{IlManipulator.method?.Name}";
+                }
+
+                return "Failed to Read Patch.";
+            }
+        }
+
+        internal AstroPatch(MethodInfo TargetMethod, HarmonyMethod Prefix = null, HarmonyMethod PostFix = null, HarmonyMethod Transpiler = null , HarmonyMethod Finalizer = null , HarmonyMethod ILmanipulator = null)
+        {
+            if (TargetMethod == null || (Prefix == null && PostFix == null && Transpiler == null && Finalizer == null && ILmanipulator == null))
             {
                 StringBuilder reason = new StringBuilder();
-                if(PostfixMethod == null)
+                if (Prefix == null)
+                {
+                    reason.Append("Prefix Method is null");
+                }
+                if (PostFix == null)
                 {
                     reason.Append("Postfix Method is null");
                 }
-                else if(TranspilerMethod == null)
+                else if(Transpiler == null)
                 {
-                    reason.Append("TranspilerMethod Method is null");
+                    reason.Append("Transpiler Method is null");
 
                 }
-                else if (FinalizerMethod == null)
+                else if (Finalizer == null)
                 {
-                    reason.Append("FinalizerMethod Method is null");
+                    reason.Append("Finalizer Method is null");
 
                 }
-                else if (IlManipulatorMethod == null)
+                else if (ILmanipulator == null)
                 {
-                    reason.Append("IlManipulatorMethod Method is null");
+                    reason.Append("ILmanipulator Method is null");
 
                 }
                 if (TargetMethod != null)
@@ -55,39 +95,18 @@
                 }
                 else
                 {
-                    ModConsole.Error($"[AstroPatch] Failed to Patch {TargetMethod.DeclaringType.FullName}.{TargetMethod.Name} because {reason.ToString()} .");
+                    ModConsole.Error($"[AstroPatch] Failed to Patch {TargetMethod.DeclaringType.FullName}.{TargetMethod.Name} because {reason.ToString()}.");
                 }
                 return;
             }
-            StringBuilder patchname = new StringBuilder();
-            if (PostfixMethod != null)
-            {
-                patchname.Append($"PostFix Patch : {PostfixMethod?.method.DeclaringType.FullName}.{PostfixMethod?.method.Name}");
-            }
-            else if (TranspilerMethod != null)
-            {
-                patchname.Append($"Transpiler Patch : {TranspilerMethod?.method.DeclaringType.FullName}.{TranspilerMethod?.method.Name}");
 
-            }
-            else if (FinalizerMethod != null)
-            {
-                patchname.Append($"Finalizer Patch : {FinalizerMethod?.method.DeclaringType.FullName}.{FinalizerMethod?.method.Name}");
-
-            }
-            else if (IlManipulatorMethod != null)
-            {
-                patchname.Append($"ILManipulator Patch : {IlManipulatorMethod?.method.DeclaringType.FullName}.{IlManipulatorMethod?.method.Name}");
-            }
-
-            Instance = new HarmonyLib.Harmony($"AstroPatch:{TargetMethod.DeclaringType.FullName}.{TargetMethod.Name}, {patchname.ToString()}");
-            patchname.Clear();
             this.TargetMethod = TargetMethod;
-            this.PrefixMethod = PrefixMethod;
-            this.PostfixMethod = PostfixMethod;
-            this.TranspilerMethod = TranspilerMethod;
-            this.FinalizerMethod = FinalizerMethod;
-            this.IlManipulatorMethod = IlManipulatorMethod;
-
+            this.Prefix = Prefix;
+            this.PostFix = PostFix;
+            this.Transpiler = Transpiler;
+            this.Finalizer = Finalizer;
+            this.IlManipulator = ILmanipulator;
+            Instance = new HarmonyLib.Harmony($"AstroPatch: {TargetPath}, {PatchType.ToString()}");
             DoPatch(this);
         }
 
@@ -95,71 +114,30 @@
         {
             try
             {
-                patch.Instance.Patch(patch.TargetMethod, patch.PrefixMethod, patch.PostfixMethod, patch.TranspilerMethod, patch.FinalizerMethod, patch.IlManipulatorMethod);
+                patch.Instance.Patch(patch.TargetMethod, patch.Prefix, patch.PostFix, patch.Transpiler, patch.Finalizer, patch.IlManipulator);
             }
             catch (Exception e)
             {
                 if (Bools.IsDeveloper)
                 {
-                    StringBuilder patchtype = new StringBuilder();
-                    if (patch.PostfixMethod != null)
-                    {
-                        patchtype.Append($"PostFix Patch : {patch.PostfixMethod?.method.DeclaringType.FullName}.{patch.PostfixMethod?.method.Name}");
-                    }
-                    else if (patch.TranspilerMethod != null)
-                    {
-                        patchtype.Append($"Transpiler Patch : {patch.TranspilerMethod?.method.DeclaringType.FullName}.{patch.TranspilerMethod?.method.Name}");
-
-                    }
-                    else if (patch.FinalizerMethod != null)
-                    {
-                        patchtype.Append($"Finalizer Patch : {patch.FinalizerMethod?.method.DeclaringType.FullName}.{patch.FinalizerMethod?.method.Name}");
-
-                    }
-                    else if (patch.IlManipulatorMethod != null)
-                    {
-                        patchtype.Append($"ILManipulator Patch : {patch.IlManipulatorMethod?.method.DeclaringType.FullName}.{patch.IlManipulatorMethod?.method.Name}");
-                    }
-                    ModConsole.Error($"[AstroPatch] Failed At {patch.TargetMethod?.Name} | {patch.PrefixMethod?.method.Name} | with AstroClient {patch.PostfixMethod?.method.Name}");
-                    patchtype.Clear();
+                    
+                    ModConsole.Error($"[AstroPatch] Failed At {patch.TargetPath} | with AstroClient {patch.PatchType}");
                 }
                 else
                 {
                     ModConsole.Error($"[AstroPatch] Failed At {patch.TargetMethod?.Name}");
                 }
-                ModConsole.Error(e.Message);
                 ModConsole.ErrorExc(e);
             }
             finally
             {
                 if (Bools.IsDeveloper)
                 {
-                    StringBuilder patchtype = new StringBuilder();
-                    if (patch.PostfixMethod != null)
-                    {
-                        patchtype.Append($"PostFix Patch : {patch.PostfixMethod?.method.DeclaringType.FullName}.{patch.PostfixMethod?.method.Name}");
-                    }
-                    else if (patch.TranspilerMethod != null)
-                    {
-                        patchtype.Append($"Transpiler Patch : {patch.TranspilerMethod?.method.DeclaringType.FullName}.{patch.TranspilerMethod?.method.Name}");
-
-                    }
-                    else if (patch.FinalizerMethod != null)
-                    {
-                        patchtype.Append($"Finalizer Patch : {patch.FinalizerMethod?.method.DeclaringType.FullName}.{patch.FinalizerMethod?.method.Name}");
-
-                    }
-                    else if (patch.IlManipulatorMethod != null)
-                    {
-                        patchtype.Append($"ILManipulator Patch : {patch.IlManipulatorMethod?.method.DeclaringType.FullName}.{patch.IlManipulatorMethod?.method.Name}");
-                    }
-
-                    ModConsole.DebugLog($"[Patches] Patched {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name} | with AstroClient {patchtype.ToString()}");
-                    patchtype.Clear();
+                    ModConsole.DebugLog($"[AstroPatch] Patched {patch.TargetPath} | with {patch.PatchType}");
                 }
                 else
                 {
-                    ModConsole.DebugLog($"[Patches] Patched {patch.TargetMethod.DeclaringType.FullName}.{patch.TargetMethod.Name}");
+                    ModConsole.DebugLog($"[AstroPatch] Patched {patch.TargetMethod.Name}");
                 }
             }
         }
