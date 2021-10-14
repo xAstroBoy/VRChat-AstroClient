@@ -39,24 +39,64 @@
                 StringBuilder patchtype = new StringBuilder();
                 if (PostFix != null)
                 {
-                    patchtype.AppendLine($"PostFix Patch : {PostFix.method?.DeclaringType?.FullName}.{PostFix.method?.Name}");
+                    string patch = $"PostFix Patch : {PostFix.method?.DeclaringType?.FullName}.{PostFix.method?.Name}";
+                    if (patchtype.Length != 0)
+                    {
+                        patchtype.AppendLine(patch);
+                    }
+                    else
+                    {
+                        patchtype.Append(patch);
+                    }
                 }
                 if (Prefix != null)
                 {
-                    patchtype.AppendLine($"Prefix Patch : {Prefix.method?.DeclaringType?.FullName}.{Prefix.method?.Name}");
+                    string patch = $"Prefix Patch : {Prefix.method?.DeclaringType?.FullName}.{Prefix.method?.Name}";
+                    if (patchtype.Length != 0)
+                    {
+                        patchtype.AppendLine(patch);
+                    }
+                    else
+                    {
+                        patchtype.Append(patch);
+                    }
                 }
                 if (Transpiler != null)
                 {
-                    patchtype.AppendLine($"Transpiler Patch : {Transpiler.method?.DeclaringType?.FullName}.{Transpiler.method?.Name}");
+                    string patch = $"Transpiler Patch : {Transpiler.method?.DeclaringType?.FullName}.{Transpiler.method?.Name}";
+                    if (patchtype.Length != 0)
+                    {
+                        patchtype.AppendLine(patch);
+                    }
+                    else
+                    {
+                        patchtype.Append(patch);
+                    }
                 }
                 if (Finalizer != null)
                 {
-                    patchtype.AppendLine($"Finalizer Patch : {Finalizer.method?.DeclaringType?.FullName}.{Finalizer.method?.Name}");
+                    string patch = $"Finalizer Patch : {Finalizer.method?.DeclaringType?.FullName}.{Finalizer.method?.Name}";
+                    if (patchtype.Length != 0)
+                    {
+                        patchtype.AppendLine(patch);
+                    }
+                    else
+                    {
+                        patchtype.Append(patch);
+                    }
 
                 }
                 if (IlManipulator != null)
                 {
-                    patchtype.AppendLine($"IlManipulator Patch : {IlManipulator.method?.DeclaringType?.FullName}.{IlManipulator.method?.Name}");
+                    string patch = $"IlManipulator Patch : {IlManipulator.method?.DeclaringType?.FullName}.{IlManipulator.method?.Name}";
+                    if (patchtype.Length != 0)
+                    {
+                        patchtype.AppendLine(patch);
+                    }
+                    else
+                    {
+                        patchtype.Append(patch);
+                    }
                 }
                 if (patchtype.Length == 0)
                 {
@@ -73,38 +113,84 @@
         {
             if (TargetMethod == null || (Prefix == null && PostFix == null && Transpiler == null && Finalizer == null && ILmanipulator == null))
             {
-                StringBuilder reason = new StringBuilder();
+                StringBuilder FailureReason = new StringBuilder();
                 if (Prefix == null)
                 {
-                    reason.AppendLine("Prefix Method is null");
+                    string reason = "Prefix Method is null"; 
+                    if (FailureReason.Length != 0)
+                    {
+                        FailureReason.AppendLine(reason);
+                    }
+                    else
+                    {
+                        FailureReason.Append(reason);
+                    }
                 }
                 if (PostFix == null)
                 {
-                    reason.AppendLine("Postfix Method is null");
-                }
-                if(Transpiler == null)
-                {
-                    reason.AppendLine("Transpiler Method is null");
+                    string reason = "PostFix Method is null";
+                    if (FailureReason.Length != 0)
+                    {
+                        FailureReason.AppendLine(reason);
+                    }
+                    else
+                    {
+                        FailureReason.Append(reason);
+                    }
 
+                }
+                if (Transpiler == null)
+                {
+                    string reason = "Transpiler Method is null";
+                    if (FailureReason.Length != 0)
+                    {
+                        FailureReason.AppendLine(reason);
+                    }
+                    else
+                    {
+                        FailureReason.Append(reason);
+                    }
                 }
                 if (Finalizer == null)
                 {
-                    reason.AppendLine("Finalizer Method is null");
+                    string reason = "Finalizer Method is null";
+                    if (FailureReason.Length != 0)
+                    {
+                        FailureReason.AppendLine(reason);
+                    }
+                    else
+                    {
+                        FailureReason.Append(reason);
+                    }
 
                 }
                 if (ILmanipulator == null)
                 {
-                    reason.AppendLine("ILmanipulator Method is null");
+                    string reason = "ILmanipulator Method is null";
+                    if (FailureReason.Length != 0)
+                    {
+                        FailureReason.AppendLine(reason);
+                    }
+                    else
+                    {
+                        FailureReason.Append(reason);
+                    }
 
                 }
                 if (TargetMethod != null)
                 {
-
                     ModConsole.Error("[AstroPatch] TargetMethod is NULL");
                 }
                 else
                 {
-                    ModConsole.Error($"[AstroPatch] Failed to Patch {TargetMethod.DeclaringType.FullName}.{TargetMethod.Name} because {reason.ToString()}.");
+                    if (Bools.IsDeveloper)
+                    {
+                        ModConsole.Error($"[AstroPatch] Failed to Patch {TargetMethod.DeclaringType.FullName}.{TargetMethod.Name} because {FailureReason.ToString()}.");
+                    }
+                    else
+                    {
+                        ModConsole.Error($"[AstroPatch] Failed to Patch {TargetMethod?.Name}");
+                    }
                 }
                 return;
             }
