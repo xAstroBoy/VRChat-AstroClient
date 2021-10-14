@@ -99,14 +99,14 @@ namespace AstroActionMenu
 
             //Method_Private_Void_PDM_11
             //Special Child
-            /*harmonyInstance.Patch(
+            new AstroPatch(
                 typeof(ActionMenu).GetMethods().Single(
-                    m => Utilities.checkXref(m, openNameplatesSizePageKeyWords)
+                    m => Utilities.CheckXref(m, openNameplatesSizePageKeyWords)
                          && m.CheckStringsCount(5)
                 ),
                 new HarmonyMethod(typeof(Patches).GetMethod("OpenNameplatesSizePre")),
                 new HarmonyMethod(typeof(Patches).GetMethod("OpenNameplatesSizePost"))
-            );*/
+            );
             ModConsole.DebugLog("ActionMenu Patches Applied");
         }
 
@@ -241,11 +241,7 @@ namespace AstroActionMenu
         {
             try
             {
-                new AstroPatch(
-                    FindAMMethod(keywords),
-                    new Harmony.HarmonyMethod(typeof(AstroActionMenuPatches).GetMethod(preName)),
-                    new Harmony.HarmonyMethod(typeof(AstroActionMenuPatches).GetMethod(postName))
-                );
+                new AstroPatch(FindAMMethod(keywords),new HarmonyLib.HarmonyMethod(typeof(AstroActionMenuPatches).GetMethod(preName)), new HarmonyLib.HarmonyMethod((typeof(AstroActionMenuPatches).GetMethod(postName))));
             }
             catch (Exception e)
             {

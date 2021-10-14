@@ -22,12 +22,12 @@
         private string PatchIdentifier { get; } = "AstroPatch";
 
         internal MethodInfo TargetMethod { get; set; }
-        internal HarmonyMethod Prefix { get; set; }
-        internal HarmonyMethod PostFix { get; set; }
-        internal HarmonyMethod Transpiler { get; set; }
-        internal HarmonyMethod Finalizer { get; set; }
+        internal HarmonyLib.HarmonyMethod Prefix { get; set; }
+        internal HarmonyLib.HarmonyMethod PostFix { get; set; }
+        internal HarmonyLib.HarmonyMethod Transpiler { get; set; }
+        internal HarmonyLib.HarmonyMethod Finalizer { get; set; }
 
-        internal HarmonyMethod IlManipulator { get; set; }
+        internal HarmonyLib.HarmonyMethod IlManipulator { get; set; }
         internal HarmonyLib.Harmony Instance { get; set; }
 
 
@@ -110,7 +110,7 @@
             }
         }
 
-        internal AstroPatch(MethodInfo TargetMethod, HarmonyMethod Prefix = null, HarmonyMethod PostFix = null, HarmonyMethod Transpiler = null , HarmonyMethod Finalizer = null , HarmonyMethod ILmanipulator = null)
+        internal AstroPatch(MethodInfo TargetMethod, HarmonyLib.HarmonyMethod Prefix = null, HarmonyLib.HarmonyMethod PostFix = null, HarmonyLib.HarmonyMethod Transpiler = null , HarmonyLib.HarmonyMethod Finalizer = null , HarmonyLib.HarmonyMethod ILmanipulator = null)
         {
             if (TargetMethod == null || (Prefix == null && PostFix == null && Transpiler == null && Finalizer == null && ILmanipulator == null))
             {
