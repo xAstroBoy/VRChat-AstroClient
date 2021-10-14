@@ -173,7 +173,7 @@
             stopwatch.Start();
 
             if (!KeyManager.IsAuthed)
-            return;
+                return;
             Type[] array = Assembly.GetExecutingAssembly().GetTypes();
             for (int i = 0; i < array.Length; i++)
             {
@@ -183,10 +183,13 @@
                 if (btype != null && btype.Equals(typeof(GameEvents)))
                 {
                     GameEvents component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as GameEvents;
-                    component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
+                    if (component != null)
+                    {
+                        component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
 
-                    component.OnApplicationStart();
-                    GameEvents.Add(component);
+                        component.OnApplicationStart();
+                        GameEvents.Add(component);
+                    }
                 }
 
                 if (btype != null && btype.Equals(typeof(Tweaker_Events)))
