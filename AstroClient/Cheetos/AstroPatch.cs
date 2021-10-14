@@ -58,8 +58,14 @@
                 {
                     patchtype.AppendLine($"IlManipulator Patch : {IlManipulator.method?.DeclaringType?.FullName}.{IlManipulator.method?.Name}");
                 }
-
-                return "Failed to Read Patch.";
+                if (patchtype.Length == 0)
+                {
+                    return "Failed to Read Patch.";
+                }
+                else
+                {
+                    return patchtype.ToString();
+                }
             }
         }
 
