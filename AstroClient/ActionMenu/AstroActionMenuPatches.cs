@@ -21,7 +21,7 @@ namespace AstroActionMenu
         {
             try
             {
-                AstroActionMenuPatches.PatchAll(new HarmonyLib.Harmony("AstroActionMenuAPI_Patches"));
+                AstroActionMenuPatches.PatchAll();
             }
             catch (Exception e)
             {
@@ -85,9 +85,8 @@ namespace AstroActionMenu
 
         private static HarmonyLib.Harmony Harmony;
 
-        public static void PatchAll(HarmonyLib.Harmony harmonyInstance)
+        public static void PatchAll()
         {
-            Harmony = harmonyInstance;
             PatchMethod(openMenuOpacityPageKeyWords, "OpenMenuOpacityPagePre", "OpenMenuOpacityPagePost");
             PatchMethod(openExpressionMenuKeyWords, "OpenExpressionMenuPre", "OpenExpressionMenuPost");
             PatchMethod(openConfigPageKeyWords, "OpenConfigPagePre", "OpenConfigPagePost");
@@ -243,10 +242,10 @@ namespace AstroActionMenu
         {
             try
             {
-                Harmony.Patch(
+                new AstroPatch(
                     FindAMMethod(keywords),
-                    new HarmonyMethod(typeof(AstroActionMenuPatches).GetMethod(preName)),
-                    new HarmonyMethod(typeof(AstroActionMenuPatches).GetMethod(postName))
+                    new Harmony.HarmonyMethod(typeof(AstroActionMenuPatches).GetMethod(preName)),
+                    new Harmony.HarmonyMethod(typeof(AstroActionMenuPatches).GetMethod(postName))
                 );
             }
             catch (Exception e)

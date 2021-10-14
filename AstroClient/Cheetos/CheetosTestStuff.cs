@@ -39,77 +39,88 @@
             infoBar.transform.localPosition -= new Vector3(0, 110, 0);
             infobartext.text = "AstroClient";
 
-            _ = MelonCoroutines.Start(Connect());
+            //_ = MelonCoroutines.Start(Connect());
         }
 
-        private static IEnumerator Connect()
-        {
-            //while (APIUser.CurrentUser == null) yield return new WaitForSeconds(0.1F);
-            //while (string.IsNullOrWhiteSpace(ApiCredentials.authToken)) yield return new WaitForSeconds(0.1F);
-            //try
-            //{
-            //    Console.WriteLine($"AuthCookie: " + ApiCredentials.authToken);
-            //    var protocols = new Il2CppStringArray(new string[] { });
-            //    ws = new WebSocketSharp.WebSocket("wss://pipeline.vrchat.cloud/?authToken=" + ApiCredentials.authToken);
-            //    ws.OnOpen += OnOpened;
-            //    ws.OnMessage += HandleMessage;
-            //    ws.Connect();
-            //}
-            //catch
-            //{
-            //    Console.WriteLine("[ApiExtensions] VRChat Pipeline WebSocket Error");
-            //}
+        //private static IEnumerator Connect()
+        //{
+        //    //while (APIUser.CurrentUser == null) yield return new WaitForSeconds(0.1F);
+        //    //while (string.IsNullOrWhiteSpace(ApiCredentials.authToken)) yield return new WaitForSeconds(0.1F);
+        //    //try
+        //    //{
+        //    //    Console.WriteLine($"AuthCookie: " + ApiCredentials.authToken);
+        //    //    var protocols = new Il2CppStringArray(new string[] { });
+        //    //    ws = new WebSocketSharp.WebSocket("wss://pipeline.vrchat.cloud/?authToken=" + ApiCredentials.authToken);
+        //    //    ws.OnOpen += OnOpened;
+        //    //    ws.OnMessage += HandleMessage;
+        //    //    ws.Connect();
+        //    //}
+        //    //catch
+        //    //{
+        //    //    Console.WriteLine("[ApiExtensions] VRChat Pipeline WebSocket Error");
+        //    //}
 
-            yield break;
-        }
+        //    yield break;
+        //}
 
-        private static void HandleMessage(object sender, MessageEventArgs e)
-        {
-            var WebSocketRawData = JsonConvert.DeserializeObject<WebSocketObject>(e.Data);
-            var WebSocketData = JsonConvert.DeserializeObject<WebSocketContent>(WebSocketRawData?.content);
-            var type = WebSocketRawData?.type;
+        //private static void HandleMessage(object sender, MessageEventArgs e)
+        //{
+        //    var WebSocketRawData = JsonConvert.DeserializeObject<WebSocketObject>(e.Data);
+        //    var WebSocketData = JsonConvert.DeserializeObject<WebSocketContent>(WebSocketRawData?.content);
+        //    var type = WebSocketRawData?.type;
 
-            switch (type)
-            {
-                case "friend-online":
-                    ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Came Online");
-                    break;
-                case "friend-active":
-                    ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Status: {WebSocketData.user.state} - '{WebSocketData.user.status}'");
-                    break;
-                case "friend-location":
-                    if (WebSocketData.location.Equals("private"))
-                    {
-                        ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Went to a private location");
-                    }
-                    else
-                    {
-                        ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Went to {WebSocketData.world.name} - {WebSocketData.location}");
-                    }
-                    break;
-                case "user-location":
-                    break;
-                default:
-                    ModConsole.Log($"[API] Unhandled Type: {type}");
-                    break;
-            }
+        //    switch (type)
+        //    {
+        //        case "friend-online":
+        //            ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Came Online");
+        //            break;
+        //        case "friend-active":
+        //            ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Status: {WebSocketData.user.state} - '{WebSocketData.user.status}'");
+        //            break;
+        //        case "friend-location":
+        //            if (WebSocketData.location.Equals("private"))
+        //            {
+        //                ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Went to a private location");
+        //            }
+        //            else
+        //            {
+        //                ModConsole.Log($"[Friends] '{WebSocketData.user.displayName}' -> Went to {WebSocketData.world.name} - {WebSocketData.location}");
+        //            }
+        //            break;
+        //        case "user-location":
+        //            break;
+        //        default:
+        //            ModConsole.Log($"[API] Unhandled Type: {type}");
+        //            break;
+        //    }
 
-            //ModConsole.Log($"[API] {e.Data}");
-        }
+        //    //ModConsole.Log($"[API] {e.Data}");
+        //}
 
 
-        private static void OnOpened(object sender, EventArgs e)
-        {
-            ModConsole.Log("[API] Connected To WebSocket!");
-            //Helper().Start();
-        }
+        //private static void OnOpened(object sender, EventArgs e)
+        //{
+        //    ModConsole.Log("[API] Connected To WebSocket!");
+        //    //Helper().Start();
+        //}
 
         internal override void OnMasterClientSwitched(Photon.Realtime.Player player)
         {
             if (!WorldUtils.IsInWorld) return;
 
-            PopupUtils.QueHudMessage($"'{player.field_Public_Player_0.GetDisplayName()}' is now the room master.");
-        }
+
+            if (player.GetPlayer().GetAPIUser().IsSelf)
+            {
+                if (PlayerSpooferUtils.IsSpooferActive)
+                {
+                    PopupUtils.QueHudMessage(
+                        $"'{PlayerSpooferUtils.SpooferInstance.Original_DisplayName}' is now the room master.");
+                    return;
+                }
+            }
+
+            PopupUtils.QueHudMessage($"'{player.GetPlayer().GetDisplayName()}' is now the room master.");
+            }
 
         internal override void OnRoomJoined()
         {
