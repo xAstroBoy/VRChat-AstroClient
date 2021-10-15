@@ -98,6 +98,7 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="AstroActionMenu\AvatarParametersEditor\Menu\CameraUtils.cs" />
     <Compile Include="AstroActionMenu\AvatarParametersEditor\ParametersEditorResources.cs" />
     <Compile Include="AstroActionMenu\AvatarParametersEditor\Menu\Avatar.cs" />
     <Compile Include="ActionMenu\AMAPI.cs" />
@@ -1181,6 +1182,7 @@
     <EmbeddedResource Include="Resources\button.png" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bin\" />
     <Folder Include="Utils\Emojis\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

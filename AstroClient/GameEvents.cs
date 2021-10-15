@@ -248,7 +248,7 @@
 
         private void Internal_OnAvatarSpawn(object sender, OnAvatarSpawnArgs e)
         {
-            OnAvatarSpawn(e.VRCAvatarManager, e.Avatar);
+            OnAvatarSpawn(e.Player, e.Avatar, e.VRCAvatarManager, e.VRC_AvatarDescriptor);
         }
 
         internal virtual void VRChat_OnUiManagerInit()
@@ -371,7 +371,7 @@
         {
         }
 
-        internal virtual void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
+        internal virtual void OnAvatarSpawn(Player Player, GameObject Avatar, VRCAvatarManager VRCAvatarManager, VRC_AvatarDescriptor VRC_AvatarDescriptor)
         {
         }
 
