@@ -98,7 +98,8 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
-    <Compile Include="ActionMenu\ActionMenuInitializer.cs" />
+    <Compile Include="AstroActionMenu\AvatarParametersEditor\ParametersEditorResources.cs" />
+    <Compile Include="AstroActionMenu\AvatarParametersEditor\Menu\Avatar.cs" />
     <Compile Include="ActionMenu\AMAPI.cs" />
     <Compile Include="ActionMenu\Api\ActionMenuPage.cs" />
     <Compile Include="ActionMenu\Api\AMUtils.cs" />
@@ -122,6 +123,9 @@
     <Compile Include="ActionMenu\Types\ActionMenuPageType.cs" />
     <Compile Include="ActionMenu\Types\Insertion.cs" />
     <Compile Include="ActionMenu\Types\PedalType.cs" />
+    <Compile Include="AstroActionMenu\AvatarParametersEditor\Menu\RefCountedObject.cs" />
+    <Compile Include="AstroActionMenu\AvatarParametersEditor\Menu\Sigh.cs" />
+    <Compile Include="AstroActionMenu\AvatarParametersEditor\Menu\WorldCleanup.cs" />
     <Compile Include="Buttons\HistoryMenu.cs" />
     <Compile Include="Cheetos\AstroPatch.cs" />
     <Compile Include="Cheetos\InstanceHistory.cs" />
@@ -1157,6 +1161,8 @@
     <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
     <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
+    <EmbeddedResource Include="Resources\save.png" />
+    <EmbeddedResource Include="Resources\unlocked.png" />
     <EmbeddedResource Include="Resources\1.png" />
     <EmbeddedResource Include="Resources\2.png" />
     <EmbeddedResource Include="Resources\3.png" />

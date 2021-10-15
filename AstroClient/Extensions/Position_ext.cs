@@ -12,7 +12,7 @@
             {
                 if (obj != null)
                 {
-                    ItemPosition.TeleportObject(obj, TargetSelector.CurrentTarget, HumanBodyBones.LeftHand, true);
+                    ItemPosition.TeleportObject(obj, TargetSelector.CurrentTarget, HumanBodyBones.Chest, true);
                 }
             }
         }
@@ -32,7 +32,7 @@
         {
             if (obj != null)
             {
-                ItemPosition.TeleportObject(obj, TargetSelector.CurrentTarget, HumanBodyBones.LeftHand, true);
+                ItemPosition.TeleportObject(obj, TargetSelector.CurrentTarget, HumanBodyBones.Chest, true);
             }
         }
 
