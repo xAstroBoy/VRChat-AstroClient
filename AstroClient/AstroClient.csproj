@@ -125,7 +125,7 @@
     <Compile Include="ActionMenu\Types\PedalType.cs" />
     <Compile Include="AstroActionMenu\AvatarParametersEditor\Menu\RefCountedObject.cs" />
     <Compile Include="AstroActionMenu\AvatarParametersEditor\Menu\Sigh.cs" />
-    <Compile Include="AstroActionMenu\AvatarParametersEditor\Menu\WorldCleanup.cs" />
+    <None Include="AstroActionMenu\AvatarParametersEditor\Menu\AvatarParametersMenu,cs" />
     <Compile Include="Buttons\HistoryMenu.cs" />
     <Compile Include="Cheetos\AstroPatch.cs" />
     <Compile Include="Cheetos\InstanceHistory.cs" />
