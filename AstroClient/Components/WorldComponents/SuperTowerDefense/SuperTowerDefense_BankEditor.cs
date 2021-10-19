@@ -1,9 +1,8 @@
 ﻿namespace AstroClient.Components
 {
     using AstroClient.Udon;
-    using System;
     using AstroLibrary.Extensions;
-    using VRC.Udon;
+    using System;
 
     [RegisterComponent]
     public class SuperTowerDefense_BankEditor : GameEventsBehaviour
@@ -24,10 +23,6 @@
                 BankController = obj.UdonBehaviour.DisassembleUdonBehaviour();
             }
         }
-
-
-
-
 
         internal int? CurrentBankBalance
         {
@@ -51,11 +46,8 @@
             }
         }
 
-
-
         private string StartMoney { get; } = "StartMoney";
         private string CurrentMoney { get; } = "Money";
-
 
         private static DisassembledUdonBehaviour BankController { get; set; }
     }

@@ -1,9 +1,8 @@
 ﻿namespace AstroClient.Components
 {
     using AstroClient.Udon;
-    using System;
     using AstroLibrary.Extensions;
-    using VRC.Udon;
+    using System;
 
     [RegisterComponent]
     public class SuperTowerDefense_WaveEditor : GameEventsBehaviour
@@ -25,16 +24,13 @@
             }
         }
 
-
-
-
         internal int? CurrentRound
         {
             get
             {
                 if (WaveController != null)
                 {
-                    return UdonHeapParser.Udon_Parse_Int32(WaveController, Address);
+                    return UdonHeapParser.Udon_Parse_Int32(WaveController, Wave);
                 }
                 return null;
             }
@@ -44,15 +40,13 @@
                 {
                     if (value.HasValue)
                     {
-                        UdonHeapEditor.PatchHeap(WaveController, Address, value.Value, true);
+                        UdonHeapEditor.PatchHeap(WaveController, Wave, value.Value, true);
                     }
                 }
             }
         }
 
-        
-        private readonly string Address = "Wave";
-
+        private string Wave { get; } = "Wave";
 
         private DisassembledUdonBehaviour WaveController { get; set; }
     }

@@ -1,9 +1,8 @@
 ﻿namespace AstroClient.Components
 {
     using AstroClient.Udon;
-    using System;
     using AstroLibrary.Extensions;
-    using VRC.Udon;
+    using System;
 
     [RegisterComponent]
     public class SuperTowerDefense_HealthEditor : GameEventsBehaviour
@@ -25,12 +24,7 @@
             }
         }
 
-
-
-
-
-
-        internal  int? CurrentHealth
+        internal int? CurrentHealth
         {
             get
             {
@@ -52,9 +46,7 @@
             }
         }
 
-
-        private string  Lives { get; } = "Lives";
-
+        private string Lives { get; } = "Lives";
 
         internal DisassembledUdonBehaviour HealthController { get; private set; }
     }

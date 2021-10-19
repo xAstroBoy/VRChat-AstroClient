@@ -2,19 +2,17 @@
 {
     using AstroButtonAPI;
     using AstroClient.Components;
-    using AstroClient.Udon;
     using AstroClient.Variables;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
+    using Cheetos;
     using MelonLoader;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using Cheetos;
     using UnityEngine;
-    using VRC.Udon;
     using static AstroClient.Variables.CustomLists;
 
     internal class SuperTowerDefense : GameEvents
@@ -48,7 +46,7 @@
                 {
                     WaveEditor = wavecontrol.UdonBehaviour.gameObject.AddComponent<SuperTowerDefense_WaveEditor>();
                 }
-                
+
                 var RedWrench = GameObjectFinder.Find("UpgradeTool0");
                 var BlueWrench = GameObjectFinder.Find("UpgradeTool1");
                 var Hammer = GameObjectFinder.Find("SellTool");
@@ -91,15 +89,17 @@
 
         internal override void OnRoomLeft()
         {
-            RepairLifeWrenches = false;
-            LoseLifeHammer = false;
-            LoseHealth = null;
-            ResetHealth = null;
-            AutomaticWaveStart = false;
-            AutomaticGodMode = false;
+            WaveEditor = null;
+            HealthEditor = null;
+            BankEditor = null;
+            cancellationwavetoken = null;
             RedWrenchPickup = null;
-            HammerPickup = null;
             BlueWrenchPickup = null;
+            HammerPickup = null;
+            ResetHealth = null;
+            LoseHealth = null;
+            WaveEvent = null;
+            isSuperTowerDefense = false;
         }
 
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
@@ -107,12 +107,12 @@
         {
             SuperTowerDefensecheatPage = new QMNestedButton(main, x, y, "Super Tower Defense", "Super Tower Defense Cheats", null, null, null, null, btnHalf);
 
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 0f, "Set 0 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue ) { BankEditor.CurrentBankBalance = 0; } }, "Edit Current Balance!", null, null, true);
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 0f, "Set 0 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = 0; } }, "Edit Current Balance!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 0.5f, "Add 10000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000; } }, "Edit Current Balance!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 1, "Add 100000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 100000; } }, "Edit Current Balance!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 1.5f, "Add 1000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 1000000; } }, "Edit Current Balance!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2f, "Add 10000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000000; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2.5f, "Set 999999999 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = 999999999; } }, "Edit Current Balance!", null, null, true); 
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2.5f, "Set 999999999 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = 999999999; } }, "Edit Current Balance!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0f, "Wave +1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 1; } }, "Edit Current Round!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0.5f, "Wave +10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 10; } }, "Edit Current Round!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 1, "Wave +100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 100; } }, "Edit Current Round!", null, null, true);
@@ -122,7 +122,6 @@
 
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 3, 0f, "Super Tower Range", () => { SetTowersRange(9999f); }, "Edit Towers Range to maximum!", null, null, true);
             _ = new QMSingleButton(SuperTowerDefensecheatPage, 3, 0.5f, "Super Tower Speed", () => { SetTowerSpeed(9999f); }, "Edit Towers Speed to maximum!", null, null, true);
-
 
             HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 0, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
             HammerToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 0.5f, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; }, "Toggle Lose Life Hammer", () => { LoseLifeHammer = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
@@ -165,11 +164,7 @@
             }
         }
 
-
-
         // TODO: Add a reversal mechanism to check if speed or range is modified and revert it.
-
-
 
         private static List<SuperTowerDefense_TowerEditor> GetCurrentEditors
         {
@@ -178,7 +173,7 @@
                 List<SuperTowerDefense_TowerEditor> result = new List<SuperTowerDefense_TowerEditor>();
                 foreach (var item in GameObjectFinder.RootSceneObjects_WithoutAvatars)
                 {
-                    if (item.name.StartsWith("TowerMiniGun") && item.name.EndsWith("(Clone)")||
+                    if (item.name.StartsWith("TowerMiniGun") && item.name.EndsWith("(Clone)") ||
                         item.name.StartsWith("TowerRocketLauncher") && item.name.EndsWith("(Clone)") ||
                         item.name.StartsWith("TowerSlow") && item.name.EndsWith("(Clone)") ||
                         item.name.StartsWith("TowerLance") && item.name.EndsWith("(Clone)") ||
@@ -190,7 +185,6 @@
                         {
                             result.Add(editor);
                         }
-
                     }
                 }
 
@@ -219,9 +213,6 @@
                 }
             }
         }
-
-
-
 
         private static bool _RepairLifeWrenches;
 
@@ -371,10 +362,6 @@
             }
         }
 
-
-
-
-
         internal static QMNestedButton SuperTowerDefensecheatPage { get; set; }
 
         internal static SuperTowerDefense_WaveEditor WaveEditor { get; set; }
@@ -394,13 +381,11 @@
         private static VRC_AstroPickup BlueWrenchPickup { get; set; }
         private static VRC_AstroPickup HammerPickup { get; set; }
 
-
         private static UdonBehaviour_Cached ResetHealth { get; set; }
 
         private static UdonBehaviour_Cached LoseHealth { get; set; }
 
         private static UdonBehaviour_Cached WaveEvent { get; set; }
-
 
         private static bool isSuperTowerDefense { get; set; } = false;
     }

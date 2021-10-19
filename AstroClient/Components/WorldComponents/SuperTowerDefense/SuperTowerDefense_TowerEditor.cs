@@ -1,9 +1,8 @@
 ﻿namespace AstroClient.Components
 {
     using AstroClient.Udon;
-    using System;
     using AstroLibrary.Extensions;
-    using VRC.Udon;
+    using System;
 
     [RegisterComponent]
     public class SuperTowerDefense_TowerEditor : GameEventsBehaviour
@@ -24,11 +23,6 @@
                 CurrentTower = obj.UdonBehaviour.DisassembleUdonBehaviour();
             }
         }
-
-
-
-
-
 
         internal float? Range
         {
@@ -52,7 +46,6 @@
             }
         }
 
-
         internal float? SpeedMultiplier
         {
             get
@@ -75,10 +68,8 @@
             }
         }
 
-
-        private readonly string SpeedMultiplierAddress = "SpeedMultiplier";
-        private readonly string RangeAddress = "Range";
-
+        private string SpeedMultiplierAddress { get; } = "SpeedMultiplier";
+        private string RangeAddress { get; } = "Range";
 
         internal DisassembledUdonBehaviour CurrentTower { get; private set; }
     }
