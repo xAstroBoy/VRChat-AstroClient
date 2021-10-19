@@ -115,7 +115,7 @@
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            MiscUtils.DelayFunction(0.5f, () => { PedestalDump(); });
+            //MiscUtils.DelayFunction(0.5f, () => { PedestalDump(); });
         }
 
         internal static void OnSelect()
