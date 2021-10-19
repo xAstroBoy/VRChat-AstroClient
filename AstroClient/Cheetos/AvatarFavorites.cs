@@ -57,7 +57,7 @@
         {
             if (!initialized)
             {
-                RefreshList();
+                //RefreshList();
                 initialized = true;
             }
         }
