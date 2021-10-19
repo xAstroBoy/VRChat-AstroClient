@@ -199,13 +199,13 @@
     <Compile Include="CheetoLibrary\ButtonAPI\DashMenu.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\InputHandler.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\QMUtils.cs" />
+    <Compile Include="CheetoLibrary\ButtonAPI\WingUtils.cs" />
     <Compile Include="CheetoLibrary\CheetoUtils.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\WingButton.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\TabButton.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\Button.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\CheetoButtonAPI.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\UIElement.cs" />
-    <Compile Include="CheetoLibrary\ButtonAPI\CheetoUIException.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\UIHooks.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\UIPaths.cs" />
     <Compile Include="CheetoLibrary\Extensions.cs" />
