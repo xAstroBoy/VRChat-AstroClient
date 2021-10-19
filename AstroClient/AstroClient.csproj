@@ -197,7 +197,7 @@
     <Compile Include="AstroLibrary\XrefTesting.cs" />
     <Compile Include="Buttons\HistoryMenu.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\DashMenu.cs" />
-    <Compile Include="CheetoLibrary\ButtonAPI\CheetoUtils.cs" />
+    <Compile Include="CheetoLibrary\CheetoUtils.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\WingButton.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\TabButton.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\Button.cs" />
@@ -342,7 +342,6 @@
     <Compile Include="CheetosUI\CMLabel.cs" />
     <Compile Include="Cheetos\AvatarSearch.cs" />
     <Compile Include="CheetosUI\CMPage.cs" />
-    <Compile Include="Cheetos\CheetosExtensions.cs" />
     <Compile Include="Cheetos\CheetosHooks.cs" />
     <Compile Include="Buttons\DevMenu.cs" />
     <Compile Include="Cheetos\AstroInput.cs" />

@@ -37,6 +37,7 @@
     using Button = UnityEngine.UI.Button;
     using AstroClient.Cheetos;
     using CheetoLibrary;
+    using CheetoLibrary.ButtonAPI;
 
     #endregion Imports
 
