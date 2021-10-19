@@ -8,7 +8,7 @@
     using UnityEngine;
     using VRC.UI.Elements;
 
-    internal static class QMStuff
+    internal static class QMUtils
     {
         private static QuickMenu _quickMenuInstance;
         private static MenuStateController _quickMenuController;
