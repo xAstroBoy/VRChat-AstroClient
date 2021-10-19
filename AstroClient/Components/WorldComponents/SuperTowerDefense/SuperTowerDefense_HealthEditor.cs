@@ -25,6 +25,7 @@
                 HealthController = obj.UdonBehaviour.DisassembleUdonBehaviour();
             }
         }
+
         private void LateUpdate()
         {
             if (ResetHealth != null && GodMode)
@@ -56,7 +57,6 @@
             }
         }
 
-
         internal int? CurrentHealth
         {
             get
@@ -83,11 +83,8 @@
 
         internal bool GodMode { get; set; } = false;
 
-
         internal DisassembledUdonBehaviour HealthController { get; private set; }
 
         internal static CustomLists.UdonBehaviour_Cached ResetHealth { get; private set; }
-
-
     }
 }

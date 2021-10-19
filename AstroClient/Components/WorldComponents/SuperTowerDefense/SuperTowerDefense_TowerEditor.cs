@@ -17,7 +17,7 @@
         // Use this for initialization
         internal void Start()
         {
-            var obj = this.gameObject.FindUdonEvent("SetTowerBehaviour");
+            var obj = gameObject.FindUdonEvent("SetTowerBehaviour");
             if (obj != null)
             {
                 CurrentTower = obj.UdonBehaviour.DisassembleUdonBehaviour();
@@ -40,7 +40,7 @@
                 {
                     if (value.HasValue)
                     {
-                        AstroClient.UdonHeapEditor.PatchHeap(CurrentTower, RangeAddress, value.Value, true);
+                        UdonHeapEditor.PatchHeap(CurrentTower, RangeAddress, value.Value, true);
                     }
                 }
             }
@@ -62,7 +62,7 @@
                 {
                     if (value.HasValue)
                     {
-                        AstroClient.UdonHeapEditor.PatchHeap(CurrentTower, SpeedMultiplierAddress, value.Value, true);
+                        UdonHeapEditor.PatchHeap(CurrentTower, SpeedMultiplierAddress, value.Value, true);
                     }
                 }
             }

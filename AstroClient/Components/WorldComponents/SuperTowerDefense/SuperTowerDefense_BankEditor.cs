@@ -17,7 +17,7 @@
         // Use this for initialization
         internal void Start()
         {
-            var obj = this.gameObject.FindUdonEvent("Restart");
+            var obj = gameObject.FindUdonEvent("Restart");
             if (obj != null)
             {
                 BankController = obj.UdonBehaviour.DisassembleUdonBehaviour();

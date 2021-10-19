@@ -17,7 +17,7 @@
         // Use this for initialization
         internal void Start()
         {
-            var Obj = this.gameObject.FindUdonEvent("AskForNewWave");
+            var Obj = gameObject.FindUdonEvent("AskForNewWave");
             if (Obj != null)
             {
                 WaveController = Obj.UdonBehaviour.DisassembleUdonBehaviour();

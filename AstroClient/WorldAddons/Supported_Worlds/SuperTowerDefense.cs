@@ -22,7 +22,6 @@
             if (id == WorldIds.Super_Tower_defense)
             {
                 ModConsole.Log($"Recognized {Name}, Cheats available.");
-                isSuperTowerDefense = true;
                 var one = UdonSearch.FindUdonEvent("Bank", "Restart").UdonBehaviour.gameObject;
                 if (one != null)
                 {
@@ -96,10 +95,6 @@
                     }
                 }
             }
-            else
-            {
-                isSuperTowerDefense = false;
-            }
         }
 
         internal override void OnRoomLeft()
@@ -115,7 +110,6 @@
             ResetHealth = null;
             LoseHealth = null;
             WaveEvent = null;
-            isSuperTowerDefense = false;
         }
 
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
@@ -381,7 +375,5 @@
         private static UdonBehaviour_Cached LoseHealth { get; set; }
 
         private static UdonBehaviour_Cached WaveEvent { get; set; }
-
-        private static bool isSuperTowerDefense { get; set; } = false;
     }
 }
