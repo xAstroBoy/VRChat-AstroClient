@@ -1,5 +1,7 @@
 ﻿namespace CheetoLibrary
 {
+    using AstroClient;
+    using AstroClient.Variables;
     using MelonLoader;
     using System;
     using System.Collections.Generic;
@@ -8,6 +10,9 @@
     using UnityEngine.UI;
     using VRC.UI.Elements.Controls;
 
+    /// <summary>
+    /// The ButtonAPI has contributions from, Unreal and RinLovesYou
+    /// </summary>
     internal static class CheetoButtonAPI
     {
         internal static List<GameObject> UIElements = new List<GameObject>();
