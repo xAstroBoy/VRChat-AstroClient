@@ -121,24 +121,6 @@
                 DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
                 DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
             }
-
-            //_ = MelonCoroutines.Start(OnUiManagerInitCoro(() => { AfterUI(); }));
-        }
-
-        private void AfterUI()
-        {
-            var junk = GameObject.Find(UIPaths.Banner);
-            if (junk != null) junk.SetActive(false);
-
-            CheetoLibrary.CheetoUtils.TryRun(new Action[]
-            {
-                () => CheetoButtonAPI.CreateNewDashboardMenu("AstroMainMenu"),
-                () => CheetoButtonAPI.CreateNewDashboardSubMenu("AstroClient"),
-                () => CheetoButtonAPI.CreateNewDashboardTopIcon(),
-                () => CheetoButtonAPI.CreateTabButtons(),
-            });
-
-            MelonLogger.Msg("UI Initialized.");
         }
 
         private IEnumerator WaitForActionMenuInit()

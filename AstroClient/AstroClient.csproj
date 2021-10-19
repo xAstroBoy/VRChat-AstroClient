@@ -197,6 +197,7 @@
     <Compile Include="AstroLibrary\XrefTesting.cs" />
     <Compile Include="Buttons\HistoryMenu.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\DashMenu.cs" />
+    <Compile Include="CheetoLibrary\ButtonAPI\QMStuff.cs" />
     <Compile Include="CheetoLibrary\CheetoUtils.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\WingButton.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\TabButton.cs" />
