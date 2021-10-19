@@ -9,13 +9,15 @@
 
     public class UIElement
     {
-        public GameObject Self;
-        public GameObject Parent;
-        public GameObject Original;
+        public GameObject Self { get; }
+        public GameObject Parent { get; }
+        public GameObject Original { get; }
+        public RectTransform RectTransform { get; }
 
         public UIElement(GameObject original, Transform parent)
         {
             Self = GameObject.Instantiate(original);
+            RectTransform = Self.GetComponent<RectTransform>();
             Parent = parent.gameObject;
             Original = original;
             ApplyFixes();
@@ -32,11 +34,11 @@
         /// </summary>
         public void CopyOriginalTransform()
         {
-            Self.transform.parent = Original.transform.parent;
-            Self.transform.position = Original.transform.position;
-            Self.transform.rotation = Original.transform.rotation;
-            Self.transform.localScale = Original.transform.localScale;
-            Self.transform.localPosition = Original.transform.localPosition;
+            RectTransform.parent = Original.transform.parent;
+            RectTransform.position = Original.transform.position;
+            RectTransform.rotation = Original.transform.rotation;
+            RectTransform.localScale = Original.transform.localScale;
+            RectTransform.localPosition = Original.transform.localPosition;
         }
 
         /// <summary>
@@ -54,22 +56,28 @@
         /// </summary>
         public void ApplyFixes()
         {
-            Self.transform.parent = Parent.transform;
-            Self.transform.rotation = Parent.transform.rotation;
-            Self.transform.localPosition = new Vector3(0, 0, 0);
-            Self.transform.localScale = new Vector3(1, 1, 1);
+            RectTransform.parent = Parent.transform;
+            RectTransform.rotation = Parent.transform.rotation;
+            RectTransform.localPosition = new Vector3(0, 0, 0);
+            RectTransform.localScale = new Vector3(1, 1, 1);
         }
 
         public int Index
         {
-            get => Self.transform.GetSiblingIndex();
-            set => Self.transform.SetSiblingIndex(value);
+            get => RectTransform.GetSiblingIndex();
+            set => RectTransform.SetSiblingIndex(value);
         }
 
         public bool Active
         {
             get => Self.activeSelf;
             set => Self.SetActive(value);
+        }
+
+        public Vector3 Position
+        {
+            get => RectTransform.localPosition;
+            set => RectTransform.localPosition = value;
         }
 
         public void Destroy()
@@ -79,7 +87,7 @@
 
         public void SetAction(Action action)
         {
-            var button = Self.transform.GetComponentInChildren<UnityEngine.UI.Button>();
+            var button = RectTransform.GetComponentInChildren<UnityEngine.UI.Button>();
             if (button != null)
             {
                 button.onClick = new UnityEngine.UI.Button.ButtonClickedEvent();
@@ -93,7 +101,7 @@
 
         public void LoadSprite(byte[] data)
         {
-            var children = Self.transform.GetComponentsInChildren<Image>();
+            var children = RectTransform.GetComponentsInChildren<Image>();
             foreach (Image child in children)
             {
                 var go = child.gameObject;
