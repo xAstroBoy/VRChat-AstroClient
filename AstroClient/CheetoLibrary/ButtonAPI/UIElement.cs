@@ -1,11 +1,9 @@
 ﻿namespace CheetoLibrary.ButtonAPI
 {
     using AstroLibrary.Console;
-    using MelonLoader;
     using System;
     using UnityEngine;
     using UnityEngine.UI;
-    using VRC.UI.Core.Styles;
 
     public class UIElement
     {
@@ -51,10 +49,7 @@
             rect.offsetMin = new Vector2(0, 0);
         }
 
-        /// <summary>
-        /// Shouldn't need to use this, should probably make it private
-        /// </summary>
-        public void ApplyFixes()
+        private void ApplyFixes()
         {
             RectTransform.parent = Parent.transform;
             RectTransform.rotation = Parent.transform.rotation;
@@ -95,7 +90,7 @@
             }
             else
             {
-                ModConsole.Error($"Could not assign action to {Self.name}, not a button!");
+                ModConsole.Error($"Could not SetAction on {Self.name}, does not have a Button component!");
             }
         }
 
@@ -108,7 +103,7 @@
             }
             else
             {
-                ModConsole.Error($"Could not SetTooltip(\"{line}\") to {Self.name}, does not have UITooltip component!");
+                ModConsole.Error($"Could not SetTooltip(\"{line}\") on {Self.name}, does not have UITooltip component!");
             }
         }
 

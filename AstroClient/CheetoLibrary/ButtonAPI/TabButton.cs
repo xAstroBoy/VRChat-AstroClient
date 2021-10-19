@@ -1,12 +1,7 @@
 ﻿namespace CheetoLibrary.ButtonAPI
 {
-    using AstroLibrary;
-    using MelonLoader;
     using System;
-    using System.Reflection;
-    using TMPro;
     using UnityEngine;
-    using UnityEngine.UI;
     using VRC.UI.Elements.Controls;
 
     public class TabButton : UIElement
@@ -15,7 +10,7 @@
         {
             SetName($"{CheetoButtonAPI.Indentifier}-{CheetoButtonAPI.UIElements.Count}-CL(TabButton):{label}");
             SetAction(action);
-            LoadSprite(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
+            if (image != null) LoadSprite(image);
             RectTransform.GetComponentInChildren<MenuTab>().pageName = $"QuickMenuAstroClient-{CheetoButtonAPI.UIElements.Count}:{label}";
         }
     }
