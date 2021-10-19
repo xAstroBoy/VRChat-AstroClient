@@ -93,14 +93,14 @@ namespace AstroButtonAPI
             text = button.GetComponentInChildren<Text>();
             text.text = labels[0];
 
-            button.GetComponent<Button>().onClick = new Button.ButtonClickedEvent();
-            button.GetComponent<Button>().onClick.AddListener(new Action(() =>
+            button.GetComponent<UnityEngine.UI.Button>().onClick = new UnityEngine.UI.Button.ButtonClickedEvent();
+            button.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(new Action(() =>
             {
                 Toggle();
 
-                button.GetComponent<Button>()._hasSelection_k__BackingField = false;
-                button.GetComponent<Button>()._isPointerDown_k__BackingField = false;
-                button.GetComponent<Button>()._isPointerInside_k__BackingField = false;
+                button.GetComponent<UnityEngine.UI.Button>()._hasSelection_k__BackingField = false;
+                button.GetComponent<UnityEngine.UI.Button>()._isPointerDown_k__BackingField = false;
+                button.GetComponent<UnityEngine.UI.Button>()._isPointerInside_k__BackingField = false;
             }));
 
             State = States.FIRST;

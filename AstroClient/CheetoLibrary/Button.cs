@@ -10,11 +10,11 @@
     using UnityEngine.UI;
     using VRC.UI.Core.Styles;
 
-    public class CheetoButton : CheetoElement
+    public class Button : UIElement
     {
-        public CheetoButton(Transform parent, string label, Action action, bool jump = false) : base(GameObject.Find(UIPaths.WorldButton), parent)
+        public Button(Transform parent, string label, Action action, bool jump = false) : base(GameObject.Find(UIPaths.WorldButton), parent)
         {
-            SetName($"CL-{CheetoButtonAPI.UIElements.Count}-CheetoButton:{label}");
+            SetName($"{CheetoButtonAPI.Indentifier}-{CheetoButtonAPI.UIElements.Count}-CL(Button):{label}");
             var text = Self.transform.GetComponentInChildren<TextMeshProUGUI>();
             text.text = label; text.richText = true; text.autoSizeTextContainer = true;
             SetAction(action);

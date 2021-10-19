@@ -7,13 +7,13 @@
     using UnityEngine.UI;
     using VRC.UI.Core.Styles;
 
-    public class CheetoElement
+    public class UIElement
     {
         public GameObject Self;
         public GameObject Parent;
         public GameObject Original;
 
-        public CheetoElement(GameObject original, Transform parent)
+        public UIElement(GameObject original, Transform parent)
         {
             Self = GameObject.Instantiate(original);
             Parent = parent.gameObject;
@@ -79,10 +79,10 @@
 
         public void SetAction(Action action)
         {
-            var button = Self.transform.GetComponentInChildren<Button>();
+            var button = Self.transform.GetComponentInChildren<UnityEngine.UI.Button>();
             if (button != null)
             {
-                button.onClick = new Button.ButtonClickedEvent();
+                button.onClick = new UnityEngine.UI.Button.ButtonClickedEvent();
                 button.onClick.AddListener(action);
             }
             else

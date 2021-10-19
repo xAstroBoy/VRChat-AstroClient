@@ -15,33 +15,35 @@
     /// </summary>
     internal static class CheetoButtonAPI
     {
+        internal static string Indentifier = "AstroClient";
         internal static List<GameObject> UIElements = new List<GameObject>();
 
-        internal static void ChangeDashboardMenu(string name)
-        {
-            var menu = GameObject.Find(UIPaths.QickMenuParent);
+        // Use Rin's instead
+        //internal static void ChangeDashboardMenu(string name)
+        //{
+        //    var menu = GameObject.Find(UIPaths.QickMenuParent);
 
-            var children = menu.transform.GetComponentsInChildren<RectTransform>();
-            foreach (RectTransform child in children)
-            {
-                var go = child.gameObject;
-                if (go.transform.parent == menu.transform && !go.name.ToLower().Contains("background") && !go.name.ToLower().Contains("controllers") && !go.name.ToLower().Contains("model"))
-                {
-                    if (go.name.ToLower().Contains(name.ToLower()))
-                    {
-                        go.SetActive(true);
-                    }
-                    else
-                    {
-                        go.SetActive(false);
-                    }
-                }
-            }
-        }
+        //    var children = menu.transform.GetComponentsInChildren<RectTransform>();
+        //    foreach (RectTransform child in children)
+        //    {
+        //        var go = child.gameObject;
+        //        if (go.transform.parent == menu.transform && !go.name.ToLower().Contains("background") && !go.name.ToLower().Contains("controllers") && !go.name.ToLower().Contains("model"))
+        //        {
+        //            if (go.name.ToLower().Contains(name.ToLower()))
+        //            {
+        //                go.SetActive(true);
+        //            }
+        //            else
+        //            {
+        //                go.SetActive(false);
+        //            }
+        //        }
+        //    }
+        //}
 
         internal static void CreateTabButtons()
         {
-            _ = new CheetoTab("AstroClient", () => { MelonLogger.Msg("Astro Tab Clicked!"); });
+            _ = new TabButton("AstroClient", () => { MelonLogger.Msg("Astro Tab Clicked!"); });
         }
 
         internal static void CreateNewDashboardSubMenu(string header)
@@ -80,8 +82,8 @@
 
             hgo.transform.SetSiblingIndex(0);
             buttons.transform.SetSiblingIndex(1);
-            _ = new CheetoButton(buttons.transform, "Nested Button", () => { MelonLogger.Msg("Dashboard Cleared!"); ChangeDashboardMenu("AstroMainMenu"); }, true);
-            _ = new CheetoButton(buttons.transform, "Test Button #2", () => { MelonLogger.Msg("Bam!"); });
+            //_ = new CheetoButton(buttons.transform, "Nested Button", () => { MelonLogger.Msg("Dashboard Cleared!"); ChangeDashboardMenu("AstroMainMenu"); }, true);
+            //_ = new CheetoButton(buttons.transform, "Test Button #2", () => { MelonLogger.Msg("Bam!"); });
         }
 
         internal static void CreateNewDashboardTopIcon()
@@ -96,15 +98,15 @@
             go.transform.localScale = new Vector3(1, 1, 1);
             go.transform.SetSiblingIndex(0);
 
-            go.transform.GetComponentInChildren<Button>().onClick = new Button.ButtonClickedEvent();
-            go.transform.GetComponentInChildren<Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"TopIcon Clicked {go.name}")));
+            go.transform.GetComponentInChildren<UnityEngine.UI.Button>().onClick = new UnityEngine.UI.Button.ButtonClickedEvent();
+            go.transform.GetComponentInChildren<UnityEngine.UI.Button>().onClick.AddListener(new Action(() => MelonLogger.Msg($"TopIcon Clicked {go.name}")));
 
             UIElements.Add(go);
         }
 
         internal static void CreateNewDashboardMenu(string header)
         {
-            _ = new CheetoDashMenu(header);
+            _ = new DashMenu(header);
         }
     }
 }
