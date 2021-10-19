@@ -52,7 +52,7 @@
                 {
                     if (value.HasValue)
                     {
-                        UdonHeapEditor.PatchHeap(WaveController, Wave, value.Value, true);
+                        UdonHeapEditor.PatchHeap(WaveController, Wave, Math.Abs(value.Value), true);
                     }
                 }
             }

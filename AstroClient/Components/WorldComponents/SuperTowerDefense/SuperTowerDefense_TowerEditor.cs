@@ -52,7 +52,7 @@
                 {
                     if (value.HasValue)
                     {
-                        UdonHeapEditor.PatchHeap(CurrentTower, RangeAddress, value.Value, true);
+                        UdonHeapEditor.PatchHeap(CurrentTower, RangeAddress, Math.Abs(value.Value), true);
                     }
                 }
             }
@@ -74,7 +74,7 @@
                 {
                     if (value.HasValue)
                     {
-                        UdonHeapEditor.PatchHeap(CurrentTower, SpeedMultiplierAddress, value.Value, true);
+                        UdonHeapEditor.PatchHeap(CurrentTower, SpeedMultiplierAddress, Math.Abs(value.Value), true);
                     }
                 }
             }
