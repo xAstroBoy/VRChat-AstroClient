@@ -121,7 +121,7 @@
                 DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
             }
 
-            _ = MelonCoroutines.Start(OnUiManagerInitCoro(() => { AfterUI(); }));
+            //_ = MelonCoroutines.Start(OnUiManagerInitCoro(() => { AfterUI(); }));
         }
 
         private void AfterUI()

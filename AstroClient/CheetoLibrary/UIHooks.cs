@@ -2,7 +2,7 @@
 {
     using AstroClient;
     using AstroLibrary.Console;
-    using HarmonyLib;
+    using Harmony;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -12,25 +12,32 @@
     using System.Threading.Tasks;
     using UnityEngine.UI;
     using VRC.UI.Elements;
+    using Patch = AstroClient.Patch;
 
     internal class UIHooks : GameEvents
     {
         internal static HarmonyLib.Harmony HarmonyNew = new HarmonyLib.Harmony("UIHooks");
 
-        internal static IEnumerator GeneralPatchesInit()
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        private static HarmonyMethod GetPatch(string name)
+        {
+            return new HarmonyMethod(typeof(UIHooks).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
+        }
+
+        internal override void ExecutePriorityPatches()
         {
             try
             {
-                //Patch Patch6 = new Patch(AccessTools.Method(typeof(QuickMenu), "OnEnable", null, null), GetPatchGeneral("QMOnEnable"));
+                _ = new Patch(AccessTools.Method(typeof(QuickMenu), nameof(QuickMenu.OnEnable), null, null), GetPatch(nameof(QMOnEnable)));
             }
             catch (Exception ex)
             {
                 ModConsole.Exception(ex);
             }
 
-            ModConsole.Log("ChingChong Patched!");
-            yield break;
+            ModConsole.Log("UIHooks Patched!");
         }
+
         //public static MenuPage MainMenu { get; set; }
         //public static MenuPage TargetMenu { get; set; }
         private static bool initialized = false;
@@ -40,6 +47,8 @@
             {
                 initialized = true;
                 ModConsole.Log("QMOnEnable");
+
+                _ = new WingButton("AstroClient", () => ModConsole.Log("Clicked test wing button"));
 
                 //var category = new MenuCategory("RinClient", "RinClient");
                 //var vat2 = new MenuCategory("Cum", "Cum");
