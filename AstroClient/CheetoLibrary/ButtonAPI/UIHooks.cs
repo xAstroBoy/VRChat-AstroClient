@@ -48,7 +48,7 @@
                 initialized = true;
                 ModConsole.Log("QMOnEnable");
 
-                _ = new WingButton("AstroClient", () => ModConsole.Log("Clicked test wing button"));
+                _ = new WingButton("AstroClient", "Test Button <3", () => ModConsole.Log("Clicked test wing button"));
 
                 //var category = new MenuCategory("RinClient", "RinClient");
                 //var vat2 = new MenuCategory("Cum", "Cum");

@@ -95,7 +95,20 @@
             }
             else
             {
-                throw new CheetoUIException($"Could not assign action to {Self.name}, not a button!");
+                ModConsole.Error($"Could not assign action to {Self.name}, not a button!");
+            }
+        }
+
+        public void SetTooltip(string line)
+        {
+            var tooltip = RectTransform.GetComponentInChildren<VRC.UI.Elements.Tooltips.UiTooltip>();
+            if (tooltip != null)
+            {
+                tooltip.text = line;
+            }
+            else
+            {
+                ModConsole.Error($"Could not SetTooltip(\"{line}\") to {Self.name}, does not have UITooltip component!");
             }
         }
 
