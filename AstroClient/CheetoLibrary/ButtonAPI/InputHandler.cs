@@ -3,12 +3,14 @@
     using AstroClient;
     using AstroClient.Variables;
     using AstroLibrary.Console;
+    using AstroLibrary.Utility;
     using UnityEngine;
 
     internal class InputHandler : GameEvents
     {
         internal override void OnLateUpdate()
         {
+            if (!WorldUtils.IsInWorld) return;
             if (Event.current.control && Event.current.shift && Bools.IsDeveloper)
             {
                 if (Input.GetKeyDown(KeyCode.P))
