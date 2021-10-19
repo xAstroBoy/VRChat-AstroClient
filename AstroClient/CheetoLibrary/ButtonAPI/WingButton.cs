@@ -13,12 +13,9 @@
         {
             SetName($"{CheetoButtonAPI.Indentifier}-{CheetoButtonAPI.UIElements.Count}-CL(WingButton):{label}");
             RectTransform.GetComponentInChildren<TextMeshProUGUI>().text = label;
+            if (image != null) SetIcon(image);
             SetAction(action);
             SetTooltip(tooltip);
-            if (image != null)
-            {
-                LoadSprite(image);
-            }
         }
     }
 }

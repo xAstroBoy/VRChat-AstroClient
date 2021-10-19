@@ -100,6 +100,7 @@
             if (tooltip != null)
             {
                 tooltip.text = line;
+                tooltip.alternateText = line;
             }
             else
             {
@@ -107,13 +108,13 @@
             }
         }
 
-        public void LoadSprite(byte[] data)
+        public void SetIcon(byte[] data)
         {
             var children = RectTransform.GetComponentsInChildren<Image>();
             foreach (Image child in children)
             {
                 var go = child.gameObject;
-                if (go.name.ToLower().Contains("icon"))
+                if (go.name.ToLower().Contains("icon") && !go.name.ToLower().Contains("arrow"))
                 {
                     var texture = CheetoUtils.LoadPNG(data);
                     child.overrideSprite = Sprite.CreateSprite(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0, 0), 100 * 1000, 1000, SpriteMeshType.FullRect, Vector4.zero, false);

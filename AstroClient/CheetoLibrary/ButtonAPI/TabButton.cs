@@ -10,7 +10,7 @@
         {
             SetName($"{CheetoButtonAPI.Indentifier}-{CheetoButtonAPI.UIElements.Count}-CL(TabButton):{label}");
             SetAction(action);
-            if (image != null) LoadSprite(image);
+            if (image != null) SetIcon(image);
             RectTransform.GetComponentInChildren<MenuTab>().pageName = $"QuickMenuAstroClient-{CheetoButtonAPI.UIElements.Count}:{label}";
         }
     }

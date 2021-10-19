@@ -18,7 +18,7 @@
             var text = RectTransform.GetComponentInChildren<TextMeshProUGUI>();
             text.text = label; text.richText = true; text.autoSizeTextContainer = true;
             SetAction(action);
-            LoadSprite(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
+            SetIcon(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
             if (!jump) { RectTransform.Find("Badge_MMJump").gameObject.SetActive(false); }
         }
     }
