@@ -80,6 +80,21 @@
                         HammerPickup.enabled = false;
                     }
                 }
+                var CanvasesObj = GameObjectFinder.Find("WaveInteractables/SM_Bld_Portable_Office_01 (1)/WavePaper");
+                if (CanvasesObj != null)
+                {
+                    foreach (var text in CanvasesObj.GetComponentsInChildren<UnityEngine.UI.Text>(true))
+                    {
+                        if (text != null)
+                        {
+                            if (!text.text.ToLower().Equals("wave"))
+                            {
+                                text.resizeTextForBestFit = true;
+                                ModConsole.DebugLog($"Fixed Canvas : {text.gameObject.name}");
+                            }
+                        }
+                    }
+                }
             }
             else
             {
@@ -96,6 +111,7 @@
             RedWrenchPickup = null;
             BlueWrenchPickup = null;
             HammerPickup = null;
+            GodMode = false;
             ResetHealth = null;
             LoseHealth = null;
             WaveEvent = null;
@@ -129,40 +145,10 @@
             HealthToolBtn.SetResizeTextForBestFit(true);
             AutomaticWaveBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 2f, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = true; }, "Toggle Automatic \n Wave start", () => { AutomaticWaveStart = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
             AutomaticWaveBtn.SetResizeTextForBestFit(true);
-            AutomaticGodModebnt = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 2.5f, "Toggle Automatic \n GodMode", () => { AutomaticGodMode = true; }, "Toggle Automatic \n GodMode", () => { AutomaticGodMode = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
+            AutomaticGodModebnt = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 2.5f, "Toggle Automatic \n GodMode", () => { GodMode = true; }, "Toggle Automatic \n GodMode", () => { GodMode = false; }, "Turn the Red Wrench able to reset health on interact!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
             AutomaticGodModebnt.SetResizeTextForBestFit(true);
         }
 
-        internal override void OnLateUpdate()
-        {
-            if (isSuperTowerDefense && ResetHealth != null && AutomaticGodMode && HealthEditor != null)
-            {
-                if (HealthEditor.CurrentHealth.HasValue)
-                {
-                    switch (HealthEditor.CurrentHealth.Value)
-                    {
-                        case 3:
-                            ResetHealth.ExecuteUdonEvent();
-                            break;
-
-                        case 2:
-                            ResetHealth.ExecuteUdonEvent();
-                            break;
-
-                        case 1:
-                            ResetHealth.ExecuteUdonEvent();
-                            break;
-
-                        case 0:
-                            ResetHealth.ExecuteUdonEvent();
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-            }
-        }
 
         // TODO: Add a reversal mechanism to check if speed or range is modified and revert it.
 
@@ -343,22 +329,31 @@
             yield return null;
         }
 
-        private static bool _AutomaticGodMode = false;
 
-        private static bool AutomaticGodMode
+        private static bool? GodMode
         {
             get
             {
-                return _AutomaticGodMode;
+                if (HealthEditor != null)
+                {
+                    return HealthEditor.GodMode;
+                }
+                return null;
             }
             set
             {
-                if (AutomaticGodModebnt != null)
+                if (value.HasValue)
                 {
-                    AutomaticGodModebnt.SetToggleState(value);
-                }
+                    if (AutomaticGodModebnt != null)
+                    {
+                        AutomaticGodModebnt.SetToggleState(value.Value);
+                    }
 
-                _AutomaticGodMode = value;
+                    if (HealthEditor != null)
+                    {
+                        HealthEditor.GodMode = value.Value;
+                    }
+                }
             }
         }
 

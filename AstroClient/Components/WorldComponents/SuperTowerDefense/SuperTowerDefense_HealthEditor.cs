@@ -3,6 +3,7 @@
     using AstroClient.Udon;
     using AstroLibrary.Extensions;
     using System;
+    using Variables;
 
     [RegisterComponent]
     public class SuperTowerDefense_HealthEditor : GameEventsBehaviour
@@ -20,9 +21,41 @@
             var obj = this.gameObject.FindUdonEvent("Revive");
             if (obj != null)
             {
+                ResetHealth = obj;
                 HealthController = obj.UdonBehaviour.DisassembleUdonBehaviour();
             }
         }
+        private void LateUpdate()
+        {
+            if (ResetHealth != null && GodMode)
+            {
+                if (CurrentHealth.HasValue)
+                {
+                    switch (CurrentHealth.Value)
+                    {
+                        case 3:
+                            ResetHealth.ExecuteUdonEvent();
+                            break;
+
+                        case 2:
+                            ResetHealth.ExecuteUdonEvent();
+                            break;
+
+                        case 1:
+                            ResetHealth.ExecuteUdonEvent();
+                            break;
+
+                        case 0:
+                            ResetHealth.ExecuteUdonEvent();
+                            break;
+
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
 
         internal int? CurrentHealth
         {
@@ -48,6 +81,13 @@
 
         private string Lives { get; } = "Lives";
 
+        internal bool GodMode { get; set; } = false;
+
+
         internal DisassembledUdonBehaviour HealthController { get; private set; }
+
+        internal static CustomLists.UdonBehaviour_Cached ResetHealth { get; private set; }
+
+
     }
 }
