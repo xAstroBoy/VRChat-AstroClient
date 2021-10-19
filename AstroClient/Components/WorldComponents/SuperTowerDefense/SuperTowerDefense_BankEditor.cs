@@ -52,7 +52,10 @@
                 {
                     if (value.HasValue)
                     {
-                        UdonHeapEditor.PatchHeap(BankController, CurrentMoney, value.Value);
+                        if (value.Value > 0)
+                        {
+                            UdonHeapEditor.PatchHeap(BankController, CurrentMoney, value.Value);
+                        }
                     }
                 }
             }
