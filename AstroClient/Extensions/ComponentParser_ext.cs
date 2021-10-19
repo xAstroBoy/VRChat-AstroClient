@@ -88,10 +88,15 @@
             {
                 foreach (var item in list)
                 {
-                    if(item.serializedProgramAsset.Equals(UdonPrograms.InteractProgram) || item.serializedProgramAsset.Equals(UdonPrograms.PickupProgram))
+                    if (item.serializedProgramAsset != null)
                     {
-                        continue;
+                        if (item.serializedProgramAsset.Equals(UdonPrograms.InteractProgram) ||
+                            item.serializedProgramAsset.Equals(UdonPrograms.PickupProgram))
+                        {
+                            continue;
+                        }
                     }
+
                     if (item._eventTable.Keys.Count != 0)
                     {
                         UdonBehaviourObjects.Add(item);

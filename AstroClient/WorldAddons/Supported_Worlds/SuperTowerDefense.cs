@@ -12,7 +12,9 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using Cheetos;
     using UnityEngine;
+    using VRC.Udon;
     using static AstroClient.Variables.CustomLists;
 
     internal class SuperTowerDefense : GameEvents
@@ -23,25 +25,17 @@
             {
                 ModConsole.Log($"Recognized {Name}, Cheats available.");
                 isSuperTowerDefense = true;
-                var one = UdonSearch.FindUdonEvent("Bank", "Restart").UdonBehaviour;
+                var one = UdonSearch.FindUdonEvent("Bank", "Restart").UdonBehaviour.gameObject;
                 if (one != null)
                 {
-                    BankController = one.DisassembleUdonBehaviour();
+                    BankEditor = one.GetOrAddComponent<SuperTowerDefense_BankEditor>();
                 }
                 var revive = UdonSearch.FindUdonEvent("HealthController", "Revive");
                 if (revive != null)
                 {
                     ResetHealth = revive;
-                    if (HealthController == null)
-                    {
-                        HealthController = ResetHealth.UdonBehaviour.DisassembleUdonBehaviour();
-                    }
-                }
-
-                var damagehealth = UdonSearch.FindUdonEvent("HealthController", "LoseLives");
-                if (damagehealth != null)
-                {
-                    LoseHealth = damagehealth;
+                    LoseHealth = revive.UdonBehaviour.FindUdonEvent("LoseLives");
+                    HealthEditor = revive.UdonBehaviour.GetOrAddComponent<SuperTowerDefense_HealthEditor>();
                 }
 
                 var Round = UdonSearch.FindUdonEvent("NewWaveButton", "TryStartNewWave");
@@ -52,8 +46,9 @@
                 var wavecontrol = UdonSearch.FindUdonEvent("WaveController", "AskForNewWave");
                 if (wavecontrol != null)
                 {
-                    WaveController = wavecontrol.UdonBehaviour.DisassembleUdonBehaviour();
+                    WaveEditor = wavecontrol.UdonBehaviour.gameObject.AddComponent<SuperTowerDefense_WaveEditor>();
                 }
+                
                 var RedWrench = GameObjectFinder.Find("UpgradeTool0");
                 var BlueWrench = GameObjectFinder.Find("UpgradeTool1");
                 var Hammer = GameObjectFinder.Find("SellTool");
@@ -112,17 +107,23 @@
         {
             SuperTowerDefensecheatPage = new QMNestedButton(main, x, y, "Super Tower Defense", "Super Tower Defense Cheats", null, null, null, null, btnHalf);
 
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 0f, "Set 0 Money", () => { if (CurrentBankBalance.HasValue) { CurrentBankBalance = 0; } }, "Edit Current Balance!", null, null, true); _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 0.5f, "Add 10000 Money", () => { if (CurrentBankBalance.HasValue) { CurrentBankBalance = CurrentBankBalance.Value + 10000; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 1, "Add 100000 Money", () => { if (CurrentBankBalance.HasValue) { CurrentBankBalance = CurrentBankBalance.Value + 100000; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 1.5f, "Add 1000000 Money", () => { if (CurrentBankBalance.HasValue) { CurrentBankBalance = CurrentBankBalance.Value + 1000000; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2f, "Add 10000000 Money", () => { if (CurrentBankBalance.HasValue) { CurrentBankBalance = CurrentBankBalance.Value + 10000000; } }, "Edit Current Balance!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2.5f, "Set 999999999 Money", () => { if (CurrentBankBalance.HasValue) { CurrentBankBalance = 999999999; } }, "Edit Current Balance!", null, null, true); 
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0f, "Wave +1", () => { if (CurrentRound.HasValue) { CurrentRound = CurrentRound.Value + 1; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0.5f, "Wave +10", () => { if (CurrentRound.HasValue) { CurrentRound = CurrentRound.Value + 10; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 1, "Wave +100", () => { if (CurrentRound.HasValue) { CurrentRound = CurrentRound.Value + 100; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 1.5f, "Wave -1", () => { if (CurrentRound.HasValue) { CurrentRound = CurrentRound.Value - 1; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 2f, "Wave -10", () => { if (CurrentRound.HasValue) { CurrentRound = CurrentRound.Value - 10; } }, "Edit Current Round!", null, null, true);
-            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 2.5f, "Wave -100", () => { if (CurrentRound.HasValue) { CurrentRound = CurrentRound.Value - 100; } }, "Edit Current Round!", null, null, true);
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 0f, "Set 0 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue ) { BankEditor.CurrentBankBalance = 0; } }, "Edit Current Balance!", null, null, true);
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 0.5f, "Add 10000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000; } }, "Edit Current Balance!", null, null, true);
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 1, "Add 100000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 100000; } }, "Edit Current Balance!", null, null, true);
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 1.5f, "Add 1000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 1000000; } }, "Edit Current Balance!", null, null, true);
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2f, "Add 10000000 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = BankEditor.CurrentBankBalance.Value + 10000000; } }, "Edit Current Balance!", null, null, true);
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 1, 2.5f, "Set 999999999 Money", () => { if (BankEditor != null && BankEditor.CurrentBankBalance.HasValue) { BankEditor.CurrentBankBalance = 999999999; } }, "Edit Current Balance!", null, null, true); 
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0f, "Wave +1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 1; } }, "Edit Current Round!", null, null, true);
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 0.5f, "Wave +10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 10; } }, "Edit Current Round!", null, null, true);
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 1, "Wave +100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value + 100; } }, "Edit Current Round!", null, null, true);
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 1.5f, "Wave -1", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 1; } }, "Edit Current Round!", null, null, true);
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 2f, "Wave -10", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 10; } }, "Edit Current Round!", null, null, true);
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 2, 2.5f, "Wave -100", () => { if (WaveEditor != null && WaveEditor.CurrentRound.HasValue) { WaveEditor.CurrentRound = WaveEditor.CurrentRound.Value - 100; } }, "Edit Current Round!", null, null, true);
+
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 3, 0f, "Super Tower Range", () => { SetTowersRange(9999f); }, "Edit Towers Range to maximum!", null, null, true);
+            _ = new QMSingleButton(SuperTowerDefensecheatPage, 3, 0.5f, "Super Tower Speed", () => { SetTowerSpeed(9999f); }, "Edit Towers Speed to maximum!", null, null, true);
+
+
             HealthToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 0, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = true; }, "Toggle Repair life Wrenches", () => { RepairLifeWrenches = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
             HammerToolBtn = new QMSingleToggleButton(SuperTowerDefensecheatPage, 4, 0.5f, "Toggle Lose Life Hammer", () => { LoseLifeHammer = true; }, "Toggle Lose Life Hammer", () => { LoseLifeHammer = false; }, "Wrenches = Reset Health, Hammer = Lose health (useful to troll)!", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
             HammerToolBtn.SetResizeTextForBestFit(true);
@@ -135,11 +136,11 @@
 
         internal override void OnLateUpdate()
         {
-            if (isSuperTowerDefense && ResetHealth != null && AutomaticGodMode)
+            if (isSuperTowerDefense && ResetHealth != null && AutomaticGodMode && HealthEditor != null)
             {
-                if (CurrentHealth.HasValue)
+                if (HealthEditor.CurrentHealth.HasValue)
                 {
-                    switch (CurrentHealth.Value)
+                    switch (HealthEditor.CurrentHealth.Value)
                     {
                         case 3:
                             ResetHealth.ExecuteUdonEvent();
@@ -163,6 +164,64 @@
                 }
             }
         }
+
+
+
+        // TODO: Add a reversal mechanism to check if speed or range is modified and revert it.
+
+
+
+        private static List<SuperTowerDefense_TowerEditor> GetCurrentEditors
+        {
+            get
+            {
+                List<SuperTowerDefense_TowerEditor> result = new List<SuperTowerDefense_TowerEditor>();
+                foreach (var item in GameObjectFinder.RootSceneObjects_WithoutAvatars)
+                {
+                    if (item.name.StartsWith("TowerMiniGun") && item.name.EndsWith("(Clone)")||
+                        item.name.StartsWith("TowerRocketLauncher") && item.name.EndsWith("(Clone)") ||
+                        item.name.StartsWith("TowerSlow") && item.name.EndsWith("(Clone)") ||
+                        item.name.StartsWith("TowerLance") && item.name.EndsWith("(Clone)") ||
+                        item.name.StartsWith("TowerRadar") && item.name.EndsWith("(Clone)") ||
+                         item.name.StartsWith("TowerCannon") && item.name.EndsWith("(Clone)"))
+                    {
+                        var editor = item.GetOrAddComponent<SuperTowerDefense_TowerEditor>();
+                        if (editor != null)
+                        {
+                            result.Add(editor);
+                        }
+
+                    }
+                }
+
+                return result;
+            }
+        }
+
+        private static void SetTowersRange(float value)
+        {
+            foreach (var tower in GetCurrentEditors)
+            {
+                if (tower != null)
+                {
+                    tower.Range = value;
+                }
+            }
+        }
+
+        private static void SetTowerSpeed(float value)
+        {
+            foreach (var tower in GetCurrentEditors)
+            {
+                if (tower != null)
+                {
+                    tower.SpeedMultiplier = value;
+                }
+            }
+        }
+
+
+
 
         private static bool _RepairLifeWrenches;
 
@@ -308,83 +367,19 @@
                     AutomaticGodModebnt.SetToggleState(value);
                 }
 
-                if (value.Equals(_AutomaticGodMode))
-                {
-                    return;
-                }
                 _AutomaticGodMode = value;
             }
         }
 
-        private static int? CurrentHealth
-        {
-            get
-            {
-                if (HealthController != null)
-                {
-                    return UdonHeapParser.Udon_Parse_Int32(HealthController, "Lives");
-                }
-                return null;
-            }
-            set
-            {
-                if (HealthController != null)
-                {
-                    if (value.HasValue)
-                    {
-                        UdonHeapEditor.PatchHeap(BankController, "Lives", value.Value);
-                    }
-                }
-            }
-        }
 
-        private static int? CurrentBankBalance
-        {
-            get
-            {
-                if (BankController != null)
-                {
-                    return UdonHeapParser.Udon_Parse_Int32(BankController, CurrentMoney);
-                }
-                return null;
-            }
-            set
-            {
-                if (BankController != null)
-                {
-                    if (value.HasValue)
-                    {
-                        UdonHeapEditor.PatchHeap(BankController, CurrentMoney, value.Value);
-                    }
-                }
-            }
-        }
 
-        private static int? CurrentRound
-        {
-            get
-            {
-                if (WaveController != null)
-                {
-                    return UdonHeapParser.Udon_Parse_Int32(WaveController, "Wave");
-                }
-                return null;
-            }
-            set
-            {
-                if (WaveController != null)
-                {
-                    if (value.HasValue)
-                    {
-                        UdonHeapEditor.PatchHeap(WaveController, "Wave", value.Value, true);
-                    }
-                }
-            }
-        }
+
 
         internal static QMNestedButton SuperTowerDefensecheatPage { get; set; }
 
-        private static DisassembledUdonBehaviour BankController { get; set; }
+        internal static SuperTowerDefense_WaveEditor WaveEditor { get; set; }
+        internal static SuperTowerDefense_HealthEditor HealthEditor { get; set; }
+        internal static SuperTowerDefense_BankEditor BankEditor { get; set; }
 
         private static QMSingleToggleButton HealthToolBtn { get; set; }
         private static QMSingleToggleButton HammerToolBtn { get; set; }
@@ -399,9 +394,6 @@
         private static VRC_AstroPickup BlueWrenchPickup { get; set; }
         private static VRC_AstroPickup HammerPickup { get; set; }
 
-        private static DisassembledUdonBehaviour HealthController { get; set; }
-
-        private static DisassembledUdonBehaviour WaveController { get; set; }
 
         private static UdonBehaviour_Cached ResetHealth { get; set; }
 
@@ -409,8 +401,6 @@
 
         private static UdonBehaviour_Cached WaveEvent { get; set; }
 
-        private static string StartMoney { get; } = "StartMoney";
-        private static string CurrentMoney { get; } = "Money";
 
         private static bool isSuperTowerDefense { get; set; } = false;
     }

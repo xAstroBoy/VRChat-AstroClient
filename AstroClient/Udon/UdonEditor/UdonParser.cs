@@ -11,16 +11,20 @@
 
     internal class UdonParser
     {
-
+        // CRITICAL : OPTIMIZE.
         internal static List<UdonBehaviour> FilteredUdonBehaviours()
         {
             var result = new List<UdonBehaviour>();
             var currentlist = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
             foreach (var item in currentlist)
             {
-                if (item.serializedProgramAsset.Equals(UdonPrograms.InteractProgram) || item.serializedProgramAsset.Equals(UdonPrograms.PickupProgram))
+                if (item.serializedProgramAsset != null)
                 {
-                    continue;
+                    if (item.serializedProgramAsset.Equals(UdonPrograms.InteractProgram) ||
+                        item.serializedProgramAsset.Equals(UdonPrograms.PickupProgram))
+                    {
+                        continue;
+                    }
                 }
                 result.Add(item);
             }
