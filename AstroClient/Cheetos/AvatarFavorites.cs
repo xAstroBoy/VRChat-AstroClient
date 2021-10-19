@@ -6,6 +6,7 @@
     using AstroLibrary.Enums;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
+    using CheetoLibrary;
     using DayClientML2.Utility;
     using DayClientML2.Utility.MenuApi;
     using System;

@@ -169,25 +169,25 @@ namespace AstroLibrary.Utility
             Utils.UserCameraController.field_Private_UserCameraMovementBehaviour_0 = (UserCameraMovementBehaviour)mode;
         }
 
-        public static void CycleCameraBehaviour()
-        {
-            Utils.UserCameraController.field_Public_Transform_0.transform.Find("PhotoControls/Left_CameraMode").GetComponent<CameraInteractable>().Interact();
-        }
+        //public static void CycleCameraBehaviour()
+        //{
+        //    Utils.UserCameraController.field_Public_Transform_0.transform.Find("PhotoControls/Left_CameraMode").GetComponent<CameraInteractable>().Interact();
+        //}
 
-        public static void CycleCameraSpace()
-        {
-            Utils.UserCameraController.field_Public_Transform_0.transform.Find("PhotoControls/Left_Space").GetComponent<CameraInteractable>().Interact();
-        }
+        //public static void CycleCameraSpace()
+        //{
+        //    Utils.UserCameraController.field_Public_Transform_0.transform.Find("PhotoControls/Left_Space").GetComponent<CameraInteractable>().Interact();
+        //}
 
-        public static void TogglePinMenu()
-        {
-            Utils.UserCameraController.field_Public_Transform_0.transform.Find("PhotoControls/Left_Pins").GetComponent<CameraInteractable>().Interact();
-        }
+        //public static void TogglePinMenu()
+        //{
+        //    Utils.UserCameraController.field_Public_Transform_0.transform.Find("PhotoControls/Left_Pins").GetComponent<CameraInteractable>().Interact();
+        //}
 
-        public static void ToggleLock()
-        {
-            Utils.UserCameraController.field_Public_Transform_0.transform.Find("PhotoControls/Right_Lock").GetComponent<CameraInteractable>().Interact();
-        }
+        //public static void ToggleLock()
+        //{
+        //    Utils.UserCameraController.field_Public_Transform_0.transform.Find("PhotoControls/Right_Lock").GetComponent<CameraInteractable>().Interact();
+        //}
 
         public static Vector3 WorldCameraVector
         {
