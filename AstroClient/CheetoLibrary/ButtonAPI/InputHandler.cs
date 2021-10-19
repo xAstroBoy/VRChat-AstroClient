@@ -15,8 +15,8 @@
             {
                 if (Input.GetKeyDown(KeyCode.P))
                 {
-                    ModConsole.Log("Current page name: " + QMUtils.QuickMenuInstance._menuStateController._currentRootPage.Name);
-                    ModConsole.Log("Current page Index: " + QMUtils.QuickMenuInstance._menuStateController._currentRootPageIndex);
+                    ModConsole.Log("Current page name: " + QMUtils.QuickMenuController._currentRootPage.Name);
+                    ModConsole.Log("Current page Index: " + QMUtils.QuickMenuController._currentRootPageIndex);
                 }
             }
         }
