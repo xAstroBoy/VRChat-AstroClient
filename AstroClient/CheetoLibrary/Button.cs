@@ -15,11 +15,11 @@
         public Button(Transform parent, string label, Action action, bool jump = false) : base(GameObject.Find(UIPaths.WorldButton), parent)
         {
             SetName($"{CheetoButtonAPI.Indentifier}-{CheetoButtonAPI.UIElements.Count}-CL(Button):{label}");
-            var text = Self.transform.GetComponentInChildren<TextMeshProUGUI>();
+            var text = RectTransform.GetComponentInChildren<TextMeshProUGUI>();
             text.text = label; text.richText = true; text.autoSizeTextContainer = true;
             SetAction(action);
             LoadSprite(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
-            if (!jump) { Self.transform.Find("Badge_MMJump").gameObject.SetActive(false); }
+            if (!jump) { RectTransform.Find("Badge_MMJump").gameObject.SetActive(false); }
         }
     }
 }

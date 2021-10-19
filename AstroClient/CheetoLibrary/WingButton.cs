@@ -12,7 +12,7 @@
         public WingButton(string label, Action action) : base(GameObject.Find(UIPaths.ProfileButton), GameObject.Find(UIPaths.LeftWingContainer).transform)
         {
             SetName($"{CheetoButtonAPI.Indentifier}-{CheetoButtonAPI.UIElements.Count}-CL(WingButton):{label}");
-            Self.transform.GetComponentInChildren<TextMeshProUGUI>().text = label;
+            RectTransform.GetComponentInChildren<TextMeshProUGUI>().text = label;
             SetAction(action);
         }
     }

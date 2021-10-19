@@ -21,8 +21,9 @@
 
         public static void TryRun(Action[] actions)
         {
-            foreach (Action action in actions)
+            for (int i = 0; i < actions.Length; i++)
             {
+                Action action = actions[i];
                 try
                 {
                     action();
