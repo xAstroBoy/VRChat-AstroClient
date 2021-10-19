@@ -84,10 +84,7 @@
                 {
                     if (value.HasValue)
                     {
-                        if (value.Value > 0)
-                        {
-                            UdonHeapEditor.PatchHeap(HealthController, Lives, value.Value);
-                        }
+                        UdonHeapEditor.PatchHeap(HealthController, Lives, value.Value);
                     }
                 }
             }
