@@ -3,6 +3,9 @@
     using AstroClient.Udon;
     using AstroLibrary.Extensions;
     using System;
+    using AstroLibrary.Console;
+    using AstroLibrary.Utility;
+    using Variables;
 
     [RegisterComponent]
     public class SuperTowerDefense_WaveEditor : GameEventsBehaviour
@@ -17,11 +20,22 @@
         // Use this for initialization
         internal void Start()
         {
-            var Obj = gameObject.FindUdonEvent("AskForNewWave");
-            if (Obj != null)
+            
+            if (WorldUtils.WorldID.Equals(WorldIds.Super_Tower_defense))
             {
-                WaveController = Obj.UdonBehaviour.DisassembleUdonBehaviour();
+                var obj = gameObject.FindUdonEvent("AskForNewWave");
+                if (obj != null)
+                {
+                    WaveController = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                }
+                else
+                {
+                    ModConsole.Error("Can't Find WaveController behaviour, Unable to Add Reader Component, did the author update the world?");
+                    Destroy(this);
+                }
             }
+            else { Destroy(this); }
+
         }
 
         internal int? CurrentRound

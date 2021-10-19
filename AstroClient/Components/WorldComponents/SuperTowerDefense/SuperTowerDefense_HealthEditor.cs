@@ -3,6 +3,8 @@
     using AstroClient.Udon;
     using AstroLibrary.Extensions;
     using System;
+    using AstroLibrary.Console;
+    using AstroLibrary.Utility;
     using Variables;
 
     [RegisterComponent]
@@ -18,12 +20,21 @@
         // Use this for initialization
         internal void Start()
         {
-            var obj = this.gameObject.FindUdonEvent("Revive");
-            if (obj != null)
+            if (WorldUtils.WorldID.Equals(WorldIds.Super_Tower_defense))
             {
-                ResetHealth = obj;
-                HealthController = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                var obj = gameObject.FindUdonEvent("Revive");
+                if (obj != null)
+                {
+                    ResetHealth = obj;
+                    HealthController = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                }
+                else
+                {
+                    ModConsole.Error("Can't Find HealthController behaviour, Unable to Add Reader Component, did the author update the world?");
+                    Destroy(this);
+                }
             }
+            else { Destroy(this); }
         }
 
         private void LateUpdate()

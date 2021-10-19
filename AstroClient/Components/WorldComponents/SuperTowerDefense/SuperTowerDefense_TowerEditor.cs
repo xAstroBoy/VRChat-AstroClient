@@ -3,6 +3,9 @@
     using AstroClient.Udon;
     using AstroLibrary.Extensions;
     using System;
+    using AstroLibrary.Console;
+    using AstroLibrary.Utility;
+    using Variables;
 
     [RegisterComponent]
     public class SuperTowerDefense_TowerEditor : GameEventsBehaviour
@@ -17,11 +20,21 @@
         // Use this for initialization
         internal void Start()
         {
-            var obj = gameObject.FindUdonEvent("SetTowerBehaviour");
-            if (obj != null)
+            if (WorldUtils.WorldID.Equals(WorldIds.Super_Tower_defense))
             {
-                CurrentTower = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                var obj = gameObject.FindUdonEvent("SetTowerBehaviour");
+                if (obj != null)
+                {
+                    CurrentTower = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                }
+                else
+                {
+                    ModConsole.Error("Can't Find CurrentTower behaviour, Unable to Add Reader Component, did the author update the world?");
+                    Destroy(this);
+                }
             }
+            else { Destroy(this); }
+
         }
 
         internal float? Range

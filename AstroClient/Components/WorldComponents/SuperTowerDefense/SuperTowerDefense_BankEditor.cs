@@ -3,6 +3,10 @@
     using AstroClient.Udon;
     using AstroLibrary.Extensions;
     using System;
+    using System.Diagnostics.Eventing.Reader;
+    using AstroLibrary.Console;
+    using AstroLibrary.Utility;
+    using Variables;
 
     [RegisterComponent]
     public class SuperTowerDefense_BankEditor : GameEventsBehaviour
@@ -17,11 +21,20 @@
         // Use this for initialization
         internal void Start()
         {
-            var obj = gameObject.FindUdonEvent("Restart");
-            if (obj != null)
+            if(WorldUtils.WorldID.Equals(WorldIds.Super_Tower_defense))
             {
-                BankController = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                var obj = gameObject.FindUdonEvent("Restart");
+                if (obj != null)
+                {
+                    BankController = obj.UdonBehaviour.DisassembleUdonBehaviour();
+                }
+                else
+                {
+                    ModConsole.Error("Can't Find BankController behaviour, Unable to Add Reader Component, did the author update the world?");
+                    Destroy(this);
+                }
             }
+            else {Destroy(this);}
         }
 
         internal int? CurrentBankBalance
