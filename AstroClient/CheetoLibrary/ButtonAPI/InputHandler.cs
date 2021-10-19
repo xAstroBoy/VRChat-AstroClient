@@ -15,8 +15,10 @@
             {
                 if (Input.GetKeyDown(KeyCode.P))
                 {
-                    ModConsole.Log("Current page name: " + QMUtils.QuickMenuController._currentRootPage.Name);
-                    ModConsole.Log("Current page Index: " + QMUtils.QuickMenuController._currentRootPageIndex);
+                    ModConsole.Log("Current page information -------------");
+                    ModConsole.Log("Name: " + QMUtils.QuickMenuController._currentRootPage.Name);
+                    ModConsole.Log("Index: " + QMUtils.QuickMenuController._currentRootPageIndex);
+                    ModConsole.Log("--------------------------------------");
                 }
             }
         }
