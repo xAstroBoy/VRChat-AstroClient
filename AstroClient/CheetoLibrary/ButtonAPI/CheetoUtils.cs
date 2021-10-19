@@ -1,4 +1,4 @@
-﻿namespace CheetoLibrary
+﻿namespace CheetoLibrary.ButtonAPI
 {
     #region Imports
 

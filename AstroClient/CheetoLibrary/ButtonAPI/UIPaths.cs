@@ -1,4 +1,4 @@
-﻿namespace CheetoLibrary
+﻿namespace CheetoLibrary.ButtonAPI
 {
     using System;
     using System.Collections.Generic;

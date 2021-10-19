@@ -1,4 +1,4 @@
-﻿namespace CheetoLibrary
+﻿namespace CheetoLibrary.ButtonAPI
 {
     using AstroLibrary;
     using MelonLoader;

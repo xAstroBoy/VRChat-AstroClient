@@ -1,4 +1,4 @@
-﻿namespace CheetoLibrary
+﻿namespace CheetoLibrary.ButtonAPI
 {
     using AstroLibrary.Console;
     using AstroLibrary.Utility;

@@ -1,11 +1,14 @@
-﻿namespace AstroClient.Cheetos
+﻿namespace CheetoLibrary
 {
     using AstroLibrary.Misc.Api.Object;
     using AstroNetworkingLibrary.Serializable;
     using UnityEngine;
     using VRC.Core;
 
-    internal static class CheetosExtensions
+    /// <summary>
+    /// TODO: This is going to be merged to AstroLibrary
+    /// </summary>
+    internal static class Extensions
     {
         internal static AvatarData GetAvatarData(this ApiAvatar instance)
         {
