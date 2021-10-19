@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.Components
 {
     using AstroClient.Udon;
-    using AstroLibrary.Extensions;
-    using System;
     using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
+    using System;
     using Variables;
 
     [RegisterComponent]
@@ -34,7 +34,6 @@
                 }
             }
             else { Destroy(this); }
-
         }
 
         internal float? Range

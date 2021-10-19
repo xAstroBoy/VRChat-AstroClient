@@ -1,11 +1,10 @@
 ﻿namespace AstroClient.Components
 {
     using AstroClient.Udon;
-    using AstroLibrary.Extensions;
-    using System;
-    using System.Diagnostics.Eventing.Reader;
     using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
+    using System;
     using Variables;
 
     [RegisterComponent]
@@ -21,7 +20,7 @@
         // Use this for initialization
         internal void Start()
         {
-            if(WorldUtils.WorldID.Equals(WorldIds.Super_Tower_defense))
+            if (WorldUtils.WorldID.Equals(WorldIds.Super_Tower_defense))
             {
                 var obj = gameObject.FindUdonEvent("Restart");
                 if (obj != null)
@@ -34,7 +33,7 @@
                     Destroy(this);
                 }
             }
-            else {Destroy(this);}
+            else { Destroy(this); }
         }
 
         internal int? CurrentBankBalance

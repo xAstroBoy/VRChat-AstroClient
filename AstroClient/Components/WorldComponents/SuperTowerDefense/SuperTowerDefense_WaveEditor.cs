@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.Components
 {
     using AstroClient.Udon;
-    using AstroLibrary.Extensions;
-    using System;
     using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
+    using System;
     using Variables;
 
     [RegisterComponent]
@@ -20,7 +20,6 @@
         // Use this for initialization
         internal void Start()
         {
-            
             if (WorldUtils.WorldID.Equals(WorldIds.Super_Tower_defense))
             {
                 var obj = gameObject.FindUdonEvent("AskForNewWave");
@@ -35,7 +34,6 @@
                 }
             }
             else { Destroy(this); }
-
         }
 
         internal int? CurrentRound
