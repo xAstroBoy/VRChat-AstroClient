@@ -224,8 +224,10 @@
     <Compile Include="AstroLibrary\VRChatObjects.cs" />
     <Compile Include="AstroLibrary\XrefTesting.cs" />
     <Compile Include="Buttons\HistoryMenu.cs" />
-    <Compile Include="CheetoLibrary\ButtonAPI\DashMenu.cs" />
+    <Compile Include="CheetoLibrary\ButtonAPI\ButtonBase.cs" />
+    <Compile Include="CheetoLibrary\ButtonAPI\DashMenuPage.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\InputHandler.cs" />
+    <Compile Include="CheetoLibrary\ButtonAPI\NestedButton.cs" />
     <Compile Include="CheetoLibrary\Utility\QMUtils.cs" />
     <Compile Include="CheetoLibrary\Utility\WingUtils.cs" />
     <Compile Include="CheetoLibrary\Utility\CheetoUtils.cs" />

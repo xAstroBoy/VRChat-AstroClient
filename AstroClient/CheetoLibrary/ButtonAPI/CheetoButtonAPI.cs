@@ -51,7 +51,7 @@
 
             hgo.transform.SetSiblingIndex(0);
             buttons.transform.SetSiblingIndex(1);
-            _ = new NestedButton(buttons.transform, "Nested Button", "Test Menu", "Hello <3");
+            _ = new NestedButton(buttons.transform, "Nested Button", "Hello <3");
             _ = new Button(buttons.transform, "Test Button #2", "", () => { MelonLogger.Msg("Bam!"); });
         }
 
@@ -75,7 +75,7 @@
 
         internal static void CreateNewDashboardMenu(string header)
         {
-            _ = new DashMenu(header);
+            //_ = new DashMenu(header);
         }
     }
 }
