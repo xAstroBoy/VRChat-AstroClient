@@ -3,7 +3,6 @@ using AstroActionMenu.Helpers;
 using AstroActionMenu.Managers;
 using AstroActionMenu.Types;
 using UnityEngine;
-using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique;
 
 namespace AstroActionMenu.Pedals
 {

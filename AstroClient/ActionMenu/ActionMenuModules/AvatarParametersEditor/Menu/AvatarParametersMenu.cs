@@ -21,6 +21,7 @@ namespace AstroClient.AvatarParametersEditor
     using AstroLibrary;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
+    using CheetoLibrary;
     using Components;
     using UnityEngine.Playables;
 
@@ -101,10 +102,10 @@ namespace AstroClient.AvatarParametersEditor
 
                         CustomSubMenu.AddToggle("Lock", filtered.Any(Parameters.IsLocked),
                             (state) => { filtered.ForEach(state ? Parameters.Lock : Parameters.Unlock); },
-                            CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(),
+                            CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(),
                                 "AstroClient.Resources.locked.png")));
                         CustomSubMenu.AddButton("Save", () => Parameters.StoreParameters(manager),
-                            CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(),
+                            CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(),
                                 "AstroClient.Resources.save.png")));
 
                         AvatarParameter FindParameter(string name)

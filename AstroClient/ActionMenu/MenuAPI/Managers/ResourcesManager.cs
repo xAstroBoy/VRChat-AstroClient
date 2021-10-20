@@ -11,6 +11,7 @@ using AstroLibrary;
 
 namespace AstroActionMenu.Managers
 {
+    using CheetoLibrary;
 
     internal class ResourceManagerEvents : GameEvents
     {
@@ -41,23 +42,23 @@ namespace AstroActionMenu.Managers
 
         public static void LoadTextures()
         {
-            modsSectionIcon = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
+            modsSectionIcon = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
             modsSectionIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageOne = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.1.png"));
+            pageOne = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.1.png"));
             pageOne.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageTwo = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.1.png"));
+            pageTwo = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.1.png"));
             pageTwo.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageThree = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.3.png"));;
+            pageThree = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.3.png"));;
             pageThree.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageFour = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.4.png"));
+            pageFour = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.4.png"));
             pageFour.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageFive = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.5.png"));
+            pageFive = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.5.png"));
             pageFive.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageSix = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.6.png"));
+            pageSix = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.6.png"));
             pageSix.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageSeven = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.7.png"));
+            pageSeven = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.7.png"));
             pageSeven.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            locked = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.locked.png"));
+            locked = CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.locked.png"));
             locked.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             ModConsole.DebugLog("ActionMenu Loaded textures");
         }
