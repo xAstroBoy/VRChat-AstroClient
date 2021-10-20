@@ -29,7 +29,7 @@
     {
         internal string MenuName { get; }
 
-        public NestedButton(Transform parent, string label, string tooltip, Action action, byte[] icon = null, bool jump = false) : base(parent, label, tooltip, icon, null, true)
+        public NestedButton(Transform parent, string label, string tooltip, byte[] icon = null, bool jump = false) : base(parent, label, tooltip, icon, null, true)
         {
             MenuName = $"Page_{label}";
             var nestedPart = UnityEngine.Object.Instantiate(UIUtils.NestedMenuTemplate, UIUtils.NestedPages, true);
