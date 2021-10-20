@@ -1,14 +1,10 @@
 ﻿namespace CheetoLibrary.ButtonAPI
 {
-    using AstroClient;
-    using AstroClient.Variables;
     using MelonLoader;
     using System;
     using System.Collections.Generic;
     using TMPro;
     using UnityEngine;
-    using UnityEngine.UI;
-    using VRC.UI.Elements.Controls;
 
     /// <summary>
     /// CBA - Cheeto's Button API (Can't Be Assed)

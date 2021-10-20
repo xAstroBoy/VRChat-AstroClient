@@ -1,10 +1,6 @@
 ﻿namespace CheetoLibrary.ButtonAPI
 {
-    using MelonLoader;
-    using System;
-    using TMPro;
     using UnityEngine;
-    using UnityEngine.UI;
 
     public class DashMenu : UIElement
     {

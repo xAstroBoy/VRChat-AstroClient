@@ -2,7 +2,6 @@
 {
     using System;
     using UnityEngine;
-    using VRC.UI.Elements.Controls;
 
     public class TabButton : UIElement
     {

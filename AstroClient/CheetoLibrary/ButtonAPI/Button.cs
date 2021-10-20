@@ -1,14 +1,9 @@
 ﻿namespace CheetoLibrary.ButtonAPI
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
-    using MelonLoader;
     using System;
-    using System.Reflection;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
-    using VRC.UI.Core.Styles;
     using VRC.UI.Elements;
 
     public class ButtonBase : UIElement
