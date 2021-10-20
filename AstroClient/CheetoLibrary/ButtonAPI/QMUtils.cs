@@ -36,5 +36,15 @@
                 return _quickMenuController;
             }
         }
+
+        internal static void ShowQuickmenuPage(string pagename)
+        {
+            QuickMenuController.PushPage(pagename);
+        }
+
+        internal static void ShowQuickmenuPage(int index)
+        {
+            QuickMenuController.SwitchToRootPage(index);
+        }
     }
 }

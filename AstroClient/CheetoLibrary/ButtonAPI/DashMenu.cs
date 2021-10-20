@@ -8,7 +8,7 @@
 
     public class DashMenu : UIElement
     {
-        public DashMenu(string name) : base(GameObject.Find(UIPaths.QMDashboard), GameObject.Find(UIPaths.QMDashboard).transform.parent)
+        public DashMenu(string name) : base(GameObject.Find(UIUtils.QMDashboard), GameObject.Find(UIUtils.QMDashboard).transform.parent)
         {
             SetName($"{CheetoButtonAPI.Indentifier}-{CheetoButtonAPI.UIElements.Count}-CL(DashMenu):{name}");
             CopyOriginalTransform();

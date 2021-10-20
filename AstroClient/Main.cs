@@ -261,7 +261,7 @@
         {
             //while (VRCUiManager.prop_VRCUiManager_0 == null)
             //    yield return new WaitForSeconds(0.001f);
-                while (GameObject.Find(UIPaths.QuickMenu) == null)
+                while (GameObject.Find(UIUtils.QuickMenu) == null)
                     yield return new WaitForSeconds(0.001f);
             code();
         }

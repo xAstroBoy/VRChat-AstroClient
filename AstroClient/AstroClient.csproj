@@ -207,7 +207,7 @@
     <Compile Include="CheetoLibrary\ButtonAPI\CheetoButtonAPI.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\UIElement.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\UIHooks.cs" />
-    <Compile Include="CheetoLibrary\ButtonAPI\UIPaths.cs" />
+    <Compile Include="CheetoLibrary\ButtonAPI\UIUtils.cs" />
     <Compile Include="CheetoLibrary\Extensions.cs" />
     <Compile Include="CheetosConsole\Console.cs" />
     <Compile Include="CheetosConsole\DefaultFonts.cs" />

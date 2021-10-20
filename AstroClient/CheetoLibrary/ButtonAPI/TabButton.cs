@@ -6,12 +6,13 @@
 
     public class TabButton : UIElement
     {
-        public TabButton(string label, Action action, byte[] image = null) : base(GameObject.Find(UIPaths.LaunchPadTab), GameObject.Find(UIPaths.TabsGroup).transform)
+        public TabButton(string label, string tooltip, Action action, byte[] icon = null) : base(GameObject.Find(UIUtils.LaunchPadTab), GameObject.Find(UIUtils.TabsGroup).transform)
         {
             SetName($"{CheetoButtonAPI.Indentifier}-{CheetoButtonAPI.UIElements.Count}-CL(TabButton):{label}");
             SetAction(action);
-            if (image != null) SetIcon(image);
-            RectTransform.GetComponentInChildren<MenuTab>().pageName = $"QuickMenuAstroClient-{CheetoButtonAPI.UIElements.Count}:{label}";
+            SetTooltip(tooltip);
+            if (icon != null) SetIcon(icon);
+            //RectTransform.GetComponentInChildren<MenuTab>().pageName = $"QuickMenuAstroClient-{CheetoButtonAPI.UIElements.Count}:{label}";
         }
     }
 }
