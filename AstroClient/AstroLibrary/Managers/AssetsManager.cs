@@ -59,7 +59,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("ERROR LOADING SPRITE: " + e.Message);
+                ModConsole.Error($"ERROR LOADING SPRITE: {sprite}");
+                ModConsole.Exception(e);
                 throw;
             }
         }
@@ -74,22 +75,24 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error("ERROR LOADING GAME OBJECT: " + e.Message);
+                ModConsole.Error("ERROR LOADING GAME OBJECT");
+                ModConsole.Exception(e);
                 throw;
             }
         }
 
-        public static AudioClip LoadAudioClip(string Audio)
+        public static AudioClip LoadAudioClip(string audio)
         {
             try
             {
-                AudioClip Audioclip = assetBundle.LoadAsset(Audio, Il2CppType.Of<AudioClip>()).Cast<AudioClip>();
+                AudioClip Audioclip = assetBundle.LoadAsset(audio, Il2CppType.Of<AudioClip>()).Cast<AudioClip>();
                 Audioclip.hideFlags |= HideFlags.DontUnloadUnusedAsset;
                 return Audioclip;
             }
             catch (Exception e)
             {
-                ModConsole.Error("ERROR LOADING AUDIO CLIP: " + e.Message);
+                ModConsole.Error($"ERROR LOADING AUDIO CLIP: {audio}");
+                ModConsole.Exception(e);
                 throw;
             }
         }
