@@ -226,16 +226,16 @@
     <Compile Include="Buttons\HistoryMenu.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\DashMenu.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\InputHandler.cs" />
-    <Compile Include="CheetoLibrary\ButtonAPI\QMUtils.cs" />
-    <Compile Include="CheetoLibrary\ButtonAPI\WingUtils.cs" />
-    <Compile Include="CheetoLibrary\CheetoUtils.cs" />
+    <Compile Include="CheetoLibrary\Utility\QMUtils.cs" />
+    <Compile Include="CheetoLibrary\Utility\WingUtils.cs" />
+    <Compile Include="CheetoLibrary\Utility\CheetoUtils.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\WingButton.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\TabButton.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\Button.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\CheetoButtonAPI.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\UIElement.cs" />
     <Compile Include="CheetoLibrary\ButtonAPI\UIHooks.cs" />
-    <Compile Include="CheetoLibrary\ButtonAPI\UIUtils.cs" />
+    <Compile Include="CheetoLibrary\Utility\UIUtils.cs" />
     <Compile Include="CheetoLibrary\Extensions.cs" />
     <Compile Include="CheetosConsole\Console.cs" />
     <Compile Include="CheetosConsole\DefaultFonts.cs" />
@@ -1285,6 +1285,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\save.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\unlocked.png">
+      <CustomToolNamespace>AstroClient</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\blank.png">
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
