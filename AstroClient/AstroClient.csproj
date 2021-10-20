@@ -98,12 +98,12 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
-    <Compile Include="ActionMenu\ActionMenuModules\AvatarParametersEditor\Menu\Avatar.cs" />
-    <Compile Include="ActionMenu\ActionMenuModules\AvatarParametersEditor\Menu\AvatarParametersMenu.cs" />
-    <Compile Include="ActionMenu\ActionMenuModules\AvatarParametersEditor\Menu\CameraUtils.cs" />
-    <Compile Include="ActionMenu\ActionMenuModules\AvatarParametersEditor\Menu\RefCountedObject.cs" />
-    <Compile Include="ActionMenu\ActionMenuModules\AvatarParametersEditor\Menu\Sigh.cs" />
-    <Compile Include="ActionMenu\ActionMenuModules\AvatarParametersEditor\ParametersEditorResources.cs" />
+    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\Menu\Avatar.cs" />
+    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\Menu\AvatarParametersMenu.cs" />
+    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\Menu\CameraUtils.cs" />
+    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\Menu\RefCountedObject.cs" />
+    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\Menu\Sigh.cs" />
+    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\ParametersEditorResources.cs" />
     <Compile Include="ActionMenu\MenuAPI\Api\ActionMenuPage.cs" />
     <Compile Include="ActionMenu\MenuAPI\Api\AMUtils.cs" />
     <Compile Include="ActionMenu\MenuAPI\Api\CustomSubMenu.cs" />
