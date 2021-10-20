@@ -217,8 +217,8 @@
     <Compile Include="CheetosConsole\NativeMethods.cs" />
     <Compile Include="CheetosConsole\StyledString.cs" />
     <Compile Include="CheetosConsole\VirtualTerminalSequences.cs" />
+    <Compile Include="Cheetos\AstroPatch.cs" />
     <Compile Include="Cheetos\InstanceHistory.cs" />
-    <Compile Include="Cheetos\Patch.cs" />
     <Compile Include="Components\CrazyObjects\CrazyBehaviour.cs" />
     <Compile Include="Components\ESP\EspEvents.cs" />
     <Compile Include="Components\Flashlight\FlashlightBehaviour.cs" />
@@ -235,6 +235,12 @@
     <Compile Include="Components\AstroUdons\Pickup\VRC_AstroPickup.cs" />
     <Compile Include="Components\PlayerWatcher\PlayerWatcher.cs" />
     <Compile Include="Components\Spinner\SpinnerBehaviour.cs" />
+    <Compile Include="Components\VRChatUIListeners\UiListener.cs" />
+    <Compile Include="Components\VRChatUIListeners\VRChatUIEvents.cs" />
+    <Compile Include="Components\WorldComponents\SuperTowerDefense\SuperTowerDefense_BankEditor.cs" />
+    <Compile Include="Components\WorldComponents\SuperTowerDefense\SuperTowerDefense_HealthEditor.cs" />
+    <Compile Include="Components\WorldComponents\SuperTowerDefense\SuperTowerDefense_TowerEditor.cs" />
+    <Compile Include="Components\WorldComponents\SuperTowerDefense\SuperTowerDefense_WaveEditor.cs" />
     <Compile Include="EmojiMenu\EmojiCooldownKiller.cs" />
     <Compile Include="Exploits\ExploitUtils.cs" />
     <Compile Include="Extensions\Collider_ext.cs" />
@@ -306,6 +312,7 @@
     <Compile Include="Udon\UdonEditor\UdonHeapUnboxerUtils.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapParser.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapEditor.cs" />
+    <Compile Include="Udon\UdonEditor\UdonParser.cs" />
     <Compile Include="Udon\UdonEditor\UdonTypes_String.cs" />
     <Compile Include="Udon\UdonEditor\UdonUnpacker_Utils_ext.cs" />
     <Compile Include="Udon\UdonEditor\UdonUnpacker_Utils.cs" />
@@ -1185,10 +1192,10 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="VRC.UI.Core">
-      <HintPath>..\..\..\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Core.dll</HintPath>
+      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Core.dll</HintPath>
     </Reference>
     <Reference Include="VRC.UI.Elements">
-      <HintPath>..\..\..\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Elements.dll</HintPath>
+      <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRC.UI.Elements.dll</HintPath>
     </Reference>
     <Reference Include="VRCCore-Editor">
       <HintPath>D:\Steam Library\steamapps\common\VRChat\MelonLoader\Managed\VRCCore-Editor.dll</HintPath>
@@ -1297,9 +1304,7 @@
       <CustomToolNamespace>AstroClient</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ActionMenu\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

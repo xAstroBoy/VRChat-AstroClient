@@ -7,7 +7,6 @@
     using System;
     using System.Reflection;
     using VRC.UI.Elements;
-    using Patch = AstroClient.Patch;
 
     internal class UIHooks : GameEvents
     {
@@ -23,7 +22,7 @@
         {
             try
             {
-                _ = new Patch(AccessTools.Method(typeof(QuickMenu), nameof(QuickMenu.OnEnable), null, null), GetPatch(nameof(QMOnEnable)));
+                _ = new AstroPatch(AccessTools.Method(typeof(QuickMenu), nameof(QuickMenu.OnEnable), null, null), GetPatch(nameof(QMOnEnable)));
             }
             catch (Exception ex)
             {
