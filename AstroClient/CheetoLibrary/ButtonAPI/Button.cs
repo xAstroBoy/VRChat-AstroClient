@@ -29,13 +29,17 @@
     {
         internal string MenuName { get; }
 
-        public NestedButton(Transform parent, string label, string tooltip, byte[] icon = null, bool jump = false) : base(parent, label, tooltip, icon, null, true)
+        public NestedButton(Transform parent, string menu_name, string label, string tooltip, byte[] icon = null, bool jump = false) : base(parent, label, tooltip, icon, null, true)
         {
-            MenuName = $"Page_{label}";
-            var nestedPart = UnityEngine.Object.Instantiate(UIUtils.NestedMenuTemplate, UIUtils.NestedPages, true);
+            MenuName = menu_name;
+            var nestedPart = UnityEngine.Object.Instantiate(UIUtils.NestedMenuTemplate, UIUtils.NestedMenuTemplate.transform.parent);
             UnityEngine.GameObject.Destroy(nestedPart.GetComponentInChildren<CameraMenu>());
             UnityEngine.GameObject.Destroy(nestedPart.FindObject("Buttons").GetComponentInChildren<GridLayoutGroup>());
-            
+
+            var backButton = nestedPart.FindObject("Button_Back");
+            backButton.SetActive(true);
+            //backButton.GetComponent<Button>().SetAction(() => ModConsole.Log($"{QMUtils.QuickMenuController._currentRootPageIndex}"));
+
             var page = nestedPart.AddComponent<UIPage>();
             page.name = MenuName;
             page.Name = MenuName;

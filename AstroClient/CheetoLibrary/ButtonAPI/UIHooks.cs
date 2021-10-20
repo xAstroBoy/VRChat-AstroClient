@@ -48,6 +48,9 @@
                 initialized = true;
                 ModConsole.Log("QMOnEnable");
 
+                var testparent = QMUtils.QuickMenuController.menuRootPages[0];
+
+                _ = new NestedButton(testparent.transform, "AstroClient-Main", "Test Nested Button", "Nested Button Test");
                 _ = new WingButton("AstroClient", "Test Button <3", () => ModConsole.Log("Clicked test wing button"), CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
 
                 //var category = new MenuCategory("RinClient", "RinClient");
