@@ -17,7 +17,7 @@
 
         private static bool HasRenamedOldLogFile = false;
 
-        private static readonly Mutex ConsoleMutex = new Mutex();
+        //private static readonly Mutex ConsoleMutex = new Mutex();
 
         /// <summary>
         /// Opens the latest log file in Notepad
@@ -80,9 +80,9 @@
 
         public static void Write(string msg)
         {
-            ConsoleMutex.WaitOne();
-            File.AppendAllText(LatestLogFile, msg);
-            ConsoleMutex.ReleaseMutex();
+            //ConsoleMutex.WaitOne();
+            //File.AppendAllText(LatestLogFile, msg);
+            //ConsoleMutex.ReleaseMutex();
         }
 
         public enum LogTypes
@@ -302,9 +302,9 @@
                 color = Color.White;
             }
 
-            ConsoleMutex.WaitOne();
-            Console.Write(msg + Environment.NewLine, color.Value);
-            ConsoleMutex.ReleaseMutex();
+            //ConsoleMutex.WaitOne();
+            //Console.Write(msg + Environment.NewLine, color.Value);
+            //ConsoleMutex.ReleaseMutex();
             Write(msg + Environment.NewLine);
         }
 
