@@ -298,19 +298,19 @@
             return;
             
 
-            QuickMenuUtils_Old.SetQuickMenuCollider(5, 5);
-            UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
+            //QuickMenuUtils_Old.SetQuickMenuCollider(5, 5);
+            //UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
             InitMainsButtons();
             try
             {
-                TweakerV2Main.Init_TweakerV2Main();
+                //TweakerV2Main.Init_TweakerV2Main();
             }
             catch (Exception e)
             {
                 ModConsole.ErrorExc(e);
             }
-            _ = new QMSingleButton("ShortcutMenu", 5, 3.5f, "GameObject Toggler", () => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }, "Advanced GameObject Toggler", null, null, true);
-            CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 3f, true);
+            //_ = new QMSingleButton("ShortcutMenu", 5, 3.5f, "GameObject Toggler", () => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }, "Advanced GameObject Toggler", null, null, true);
+            //CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 3f, true);
 
             Event_VRChat_OnUiManagerInit?.SafetyRaise();
 
