@@ -8,7 +8,6 @@ using TMPro;
 using UnhollowerRuntimeLib;
 using UnhollowerRuntimeLib.XrefScans;
 using UnityEngine;
-using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
 using ActionMenuPage = ActionMenu.ObjectNPublicAcTeAcStGaUnique; //Will this change?, ¯\_(ツ)_/¯x2
 using Object = UnityEngine.Object;
 using AstroLibrary.Console;
@@ -227,15 +226,9 @@ namespace AstroActionMenu.Helpers
             return pedalOption.field_Public_ActionButton_0; //only one
         }
 
-        public static void SetPedalTriggerEvent(this PedalOption pedalOption, PedalOptionTriggerEvent triggerEvent)
-        {
-            pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 = triggerEvent; //only one
-        }
-
         public static void SetPedalAction(this PedalOption pedalOption, Action action)
         {
-            pedalOption.field_Public_MulticastDelegateNPublicSealedBoUnique_0 =
-                DelegateSupport.ConvertDelegate<PedalOptionTriggerEvent>(action);
+            pedalOption.field_Public_Func_1_Boolean_0 = DelegateSupport.ConvertDelegate<Il2CppSystem.Func<bool>>(action);
         }
 
         public static ActionMenuOpener GetLeftOpener(this ActionMenuDriver actionMenuDriver)
@@ -567,7 +560,6 @@ namespace AstroActionMenu.Helpers
             for (var i = 0; i < actionMenu.field_Private_List_1_ObjectNPublicAcTeAcStGaUnique_0._items.Count; i++)
                 actionMenu.DestroyPage(actionMenu.field_Private_List_1_ObjectNPublicAcTeAcStGaUnique_0._items[i]);
             actionMenu.field_Private_List_1_ObjectNPublicAcTeAcStGaUnique_0?.Clear();
-            actionMenu.field_Public_List_1_ObjectNPublicPaSiAcObUnique_0?.Clear();
         }
 
         public static List<List<T>> Split<T>(this List<T> ourList, int chunkSize)

@@ -98,6 +98,34 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="ActionMenu\ActionMenuModules\AvatarParametersEditor\Menu\Avatar.cs" />
+    <Compile Include="ActionMenu\ActionMenuModules\AvatarParametersEditor\Menu\AvatarParametersMenu.cs" />
+    <Compile Include="ActionMenu\ActionMenuModules\AvatarParametersEditor\Menu\CameraUtils.cs" />
+    <Compile Include="ActionMenu\ActionMenuModules\AvatarParametersEditor\Menu\RefCountedObject.cs" />
+    <Compile Include="ActionMenu\ActionMenuModules\AvatarParametersEditor\Menu\Sigh.cs" />
+    <Compile Include="ActionMenu\ActionMenuModules\AvatarParametersEditor\ParametersEditorResources.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Api\ActionMenuPage.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Api\AMUtils.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Api\CustomSubMenu.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Api\VRCActionMenuPage.cs" />
+    <Compile Include="ActionMenu\MenuAPI\AstroActionMenuPatches.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Helpers\Constants.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Helpers\ExtensionMethods.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Helpers\Utilities.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Managers\FourAxisPuppetManager.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Managers\ModsFolderManager.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Managers\RadialPuppetManager.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Managers\ResourcesManager.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Pedals\PedalButton.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Pedals\PedalFourAxis.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Pedals\PedalRadial.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Pedals\PedalStruct.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Pedals\PedalSubMenu.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Pedals\PedalToggle.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Types\ActionMenuHand.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Types\ActionMenuPageType.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Types\Insertion.cs" />
+    <Compile Include="ActionMenu\MenuAPI\Types\PedalType.cs" />
     <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\BlazesAPIs.cs" />
     <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\SM\SMButton.cs" />
     <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\SM\SMList.cs" />

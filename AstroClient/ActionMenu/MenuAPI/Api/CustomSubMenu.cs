@@ -2,7 +2,6 @@ using System;
 using AstroActionMenu.Helpers;
 using AstroActionMenu.Managers;
 using UnityEngine;
-using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
 // ReSharper disable HeuristicUnreachableCode
 
 namespace AstroActionMenu.Api
