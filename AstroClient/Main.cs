@@ -169,7 +169,7 @@
             stopwatch.Start();
 
             if (!KeyManager.IsAuthed)
-            return;
+                return;
             Type[] array = Assembly.GetExecutingAssembly().GetTypes();
             for (int i = 0; i < array.Length; i++)
             {
@@ -179,10 +179,13 @@
                 if (btype != null && btype.Equals(typeof(GameEvents)))
                 {
                     GameEvents component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as GameEvents;
-                    component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
+                    if (component != null)
+                    {
+                        component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
 
-                    component.OnApplicationStart();
-                    GameEvents.Add(component);
+                        component.OnApplicationStart();
+                        GameEvents.Add(component);
+                    }
                 }
 
                 if (btype != null && btype.Equals(typeof(Tweaker_Events)))
@@ -229,7 +232,7 @@
             _ = MelonCoroutines.Start(OnQuickMenuInitCoro(code));
         }
 
-        private IEnumerator OnQuickMenuInitCoro(Action code)
+        protected IEnumerator OnQuickMenuInitCoro(Action code)
         {
             while (QuickMenu.prop_QuickMenu_0 == null)
                 yield return null;
@@ -257,7 +260,7 @@
             _ = MelonCoroutines.Start(OnUiManagerInitCoro(code));
         }
 
-        private IEnumerator OnUiManagerInitCoro(Action code)
+        protected IEnumerator OnUiManagerInitCoro(Action code)
         {
             //while (VRCUiManager.prop_VRCUiManager_0 == null)
             //    yield return new WaitForSeconds(0.001f);
@@ -272,8 +275,12 @@
             stopwatch.Start();
 
             if (!KeyManager.IsAuthed)
+            {
+                stopwatch.Stop();
                 return;
+            }
             Event_VRChat_OnQuickMenuInit?.SafetyRaise();
+            stopwatch.Stop(); 
             ModConsole.DebugLog($"QuickMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
@@ -283,9 +290,13 @@
             stopwatch.Start();
 
             if (!KeyManager.IsAuthed)
+            {
                 stopwatch.Stop();
-            return;
+                return;
+            }
+
             Event_VRChat_OnActionMenuInit?.SafetyRaise();
+            stopwatch.Stop();
             ModConsole.DebugLog($"ActionMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
@@ -295,8 +306,9 @@
             stopwatch.Start();
 
             if (!KeyManager.IsAuthed)
-            return;
-            
+            {
+                return;
+            }
 
             //QuickMenuUtils_Old.SetQuickMenuCollider(5, 5);
             //UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button

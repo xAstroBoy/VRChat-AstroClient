@@ -10,7 +10,7 @@
     using System.Threading.Tasks;
     using VRC;
 
-    internal class EmojiCooldownKiller: GameEvents
+    internal class EmojiCooldownKiller : GameEvents
     {
 
         internal override void OnPlayerJoined(Player player)
@@ -33,3 +33,4 @@
 
     }
 }
+

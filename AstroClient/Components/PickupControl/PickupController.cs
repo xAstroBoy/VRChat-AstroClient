@@ -22,28 +22,31 @@
             SDKBase_Pickup = gameObject.GetComponent<VRC.SDKBase.VRC_Pickup>();
             SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
             SDK3_Pickup = gameObject.GetComponent<VRC.SDK3.Components.VRCPickup>();
-
             RigidBodyController = gameObject.GetOrAddComponent<RigidBodyController>();
             SyncProperties(true);
             ModConsole.DebugLog("Attacked Successfully PickupController to object " + gameObject.name);
-            InvokeRepeating(nameof(Updater), 0.1f, 0.3f);
+            isUsingUI = false;
+            InvokeRepeating(nameof(PickupUpdate), 0.1f, 0.3f);
 
         }
 
-        private void Updater()
+        private bool isUsingUI { get; set; }
+        internal override void OnQuickMenuClose() => isUsingUI = false;
+
+        internal override void OnQuickMenuOpen() => isUsingUI = true;
+
+        internal override void OnBigMenuOpen() => isUsingUI = true;
+
+        internal override void OnBigMenuClose() => isUsingUI = false;
+
+
+        private void PickupUpdate()
         {
             if (gameObject != null)
             {
                 if (gameObject.active && this.isActiveAndEnabled)
                 {
                     Run_onPickupUpdate();
-                    if (AllowOnlySelfToGrab)
-                    {
-                        if (!OnlineEditor.IsLocalPlayerOwner(gameObject))
-                        {
-                            OnlineEditor.TakeObjectOwnership(gameObject);
-                        }
-                    }
                     if (!EditMode)
                     {
                         SyncProperties(true);
@@ -55,27 +58,83 @@
 
         private void Update()
         {
-            // Add a Shield for the Users.
-            if (!AllowOnlySelfToGrab)
+            PickupProtection();
+            AntiPickupTheft();
+        }
+
+
+        private void AntiPickupTheft()
+        {
+            if (isUsingUI) return;
+            if (!AntiTheft) return;
+            if (Utils.LocalPlayer == null) return;
+            bool TeleporToAntiTheft = false;
+            if (CurrentHolder == null && !IsHeld || !CurrentHolder.isLocal)
             {
-                if (PickupBlocker.blockeduserids != null && PickupBlocker.blockeduserids.Count() != 0)
+                TeleporToAntiTheft = true;
+            }
+            if(TeleporToAntiTheft)
+            {
+                if (InputUtils.IsImputUseRightCalled)
                 {
-                    if (IsHeld)
+                    if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) != null)
                     {
-                        var id = CurrentHolder.GetPlayer().GetAPIUser().GetUserID();
-                        if (PickupBlocker.blockeduserids.Contains(id))
-                        {
-                            ModConsole.DebugLog($"Denied Pickup Usage to {CurrentHolder.displayName}");
-                            OnlineEditor.TakeObjectOwnership(gameObject);
-                            CurrentHolder.GetPickupInHand(CurrentHand).Drop();
-                        }
+                        return;
+                    }
+                    else
+                    {
+                        gameObject.TeleportToMe(HumanBodyBones.RightHand, false, true);
+                    }
+                }
+                else if (InputUtils.IsImputUseLeftCalled)
+                {
+                    if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) != null)
+                    { 
+                        return;
+                    }
+                    else
+                    {
+                        gameObject.TeleportToMe(HumanBodyBones.LeftHand, false, true);
                     }
                 }
             }
         }
 
-
         #region anti-grab method
+        private void PickupProtection()
+        {
+            // Add a Shield for the Local User.
+            if (!IsHeld) return;
+            if (CurrentHolder == null) return;
+            if (CurrentHolder.isLocal) return;
+            if (!AllowOnlySelfToGrab)
+            {
+
+                if (PickupBlocker.blockeduserids != null && PickupBlocker.blockeduserids.Count() != 0)
+                {
+                    var id = CurrentHolder.GetPlayer().GetAPIUser().GetUserID();
+                    if (PickupBlocker.blockeduserids.Contains(id))
+                    {
+                        ModConsole.DebugLog($"Prevented {this.gameObject} from being used from Blacklisted user {CurrentHolderDisplayName}");
+                        OnlineEditor.TakeObjectOwnership(gameObject);
+                    }
+                }
+
+            }
+            else
+            {
+                if (!CurrentHolder.isLocal)
+                {
+                    if (!OnlineEditor.IsLocalPlayerOwner(gameObject))
+                    {
+                        OnlineEditor.TakeObjectOwnership(gameObject);
+                    }
+                }
+            }
+
+        }
+
+        internal bool AntiTheft = false;
 
         private bool _PreventOthersFromGrabbing = false;
 
@@ -1343,6 +1402,7 @@
         #endregion Force Pickup Functions
 
         #region essentials
+        
 
         private VRC_Pickup _SDKBase_Pickup;
 
@@ -1422,6 +1482,7 @@
                 Run_OnOnPickupPropertyChanged();
             }
         }
+
 
         #endregion essentials
     }

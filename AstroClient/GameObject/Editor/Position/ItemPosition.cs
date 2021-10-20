@@ -37,7 +37,7 @@
             }
         }
 
-        internal static void TeleportObject(GameObject obj, HumanBodyBones SelfBones)
+        internal static void TeleportObject(GameObject obj, HumanBodyBones SelfBones, bool KillcustomScripts, bool KillForces)
         {
             if (obj != null && Utils.LocalPlayer != null)
             {
@@ -46,8 +46,14 @@
                 {
                     OnlineEditor.TakeObjectOwnership(obj);
                     obj.transform.position = bonepos.Value;
-                    obj.KillCustomComponents(true);
-                    obj.KillForces(true);
+                    if (KillcustomScripts)
+                    {
+                        obj.KillCustomComponents(true);
+                    }
+                    if (KillForces)
+                    {
+                        obj.KillForces(true);
+                    }
                 }
             }
         }

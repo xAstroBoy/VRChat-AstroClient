@@ -8,6 +8,7 @@
         public const string LondonLad = "usr_b22748cd-de1c-4586-9bcc-33c51acc453d";
         public const string The_Great_Fish = "usr_2d8fdf16-6470-4322-9696-88df092bf2f8";
         public const string Lolathon = "usr_bf4846e6-e208-47cd-9837-a2ba3b98c688";
+        public const string Limbonic = "usr_47219da8-8ae8-42f7-872d-888dade73bcc";
         public const string MimiQu = "usr_da67e7e6-1398-4fb3-8fcd-c1378dfe55f3";
         public const string Thor_ChanVR = "usr_03a485cc-1dde-41aa-aa17-29c9a06d5310";
         public const string Ratchet232 = "usr_d7e5a8c7-9c39-4baa-80cc-137d6ef404d9";

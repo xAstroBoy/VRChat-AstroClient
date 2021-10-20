@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+    using AstroLibrary.Extensions;
     using UnityEngine;
 
     internal static class SpawnedItemsHolder
@@ -22,5 +23,27 @@
                 return _SpawnedItemsHolder = parent;
             }
         }
+
+        private static GameObject _DoNotDestroyHolder;
+
+        internal static GameObject GetDoNotDestroySpawnedItemsHolder()
+        {
+            if (_DoNotDestroyHolder != null)
+            {
+                return _DoNotDestroyHolder;
+            }
+            else
+            {
+                var parent = new GameObject
+                {
+                    name = "Dont Destroy (Spawned GameObject Holder (AstroClient))",
+                    active = true
+                };
+                parent.Set_DontDestroyOnLoad();
+                return _DoNotDestroyHolder = parent;
+            }
+        }
+
+
     }
 }

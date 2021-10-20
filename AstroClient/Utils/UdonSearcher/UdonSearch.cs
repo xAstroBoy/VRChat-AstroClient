@@ -1,11 +1,11 @@
 ﻿namespace AstroClient
 {
     using AstroClient.Udon;
+    using AstroClient.Udon.UdonEditor;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
@@ -14,9 +14,9 @@
 
     internal static class UdonSearch
     {
-        internal static List<UdonBehaviour_Cached> FindAllUdonEvents(string action, string subaction)
+        internal static List<UdonBehaviour_Cached> FindAllUdonEvents(string action, string subaction, bool Debug = false)
         {
-            var gameobjects = WorldUtils.UdonScripts;
+            var gameobjects = UdonParser.CleanedWorldBehaviours;
 
             List<UdonBehaviour_Cached> foundEvents = new List<UdonBehaviour_Cached>();
             var behaviours = gameobjects.Where(x => x.gameObject.name == action);
@@ -26,16 +26,25 @@
                 {
                     if (behaviour._eventTable.count != 0)
                     {
-                        ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+                        if (Debug)
+                        {
+                            ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+                        }
+
                         foreach (var actionkeys in behaviour._eventTable)
                         {
                             if (actionkeys.key == subaction)
                             {
-                                ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
+                                if (Debug)
+                                {
+                                    ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
+                                }
+
                                 foundEvents.Add(new UdonBehaviour_Cached(behaviour, actionkeys.key));
                             }
                         }
                     }
+
                     return foundEvents;
                 }
             }
@@ -43,21 +52,29 @@
             return null;
         }
 
-        internal static UdonBehaviour_Cached FindUdonEvent(string action, string subaction)
+        internal static UdonBehaviour_Cached FindUdonEvent(string action, string subaction, bool Debug = false)
         {
-            var gameobjects = WorldUtils.UdonScripts;
+            var gameobjects = UdonParser.CleanedWorldBehaviours;
 
             var behaviour = gameobjects.Where(x => x.gameObject.name == action).DefaultIfEmpty(null).First();
             if (behaviour != null)
             {
                 if (behaviour._eventTable.count != 0)
                 {
-                    ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+                    if (Debug)
+                    {
+                        ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+                    }
+
                     foreach (var actionkeys in behaviour._eventTable)
                     {
                         if (actionkeys.key == subaction)
                         {
-                            ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
+                            if (Debug)
+                            {
+                                ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {behaviour.gameObject.name}");
+                            }
+
                             return new UdonBehaviour_Cached(behaviour, actionkeys.key);
                         }
                     }
@@ -67,7 +84,7 @@
             return null;
         }
 
-        internal static UdonBehaviour_Cached FindUdonEvent(UdonBehaviour obj, string subaction)
+        internal static UdonBehaviour_Cached FindUdonEvent(UdonBehaviour obj, string subaction, bool Debug = false)
         {
             if (obj != null)
             {
@@ -77,16 +94,20 @@
                     {
                         if (actionkeys.key == subaction)
                         {
-                            ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {obj.gameObject.name}");
+                            if (Debug)
+                            {
+                                ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {obj.gameObject.name}");
+                            }
                             return new UdonBehaviour_Cached(obj, actionkeys.key);
                         }
                     }
                 }
             }
+
             return null;
         }
 
-        internal static UdonBehaviour_Cached FindUdonEvent(GameObject obj, string subaction)
+        internal static UdonBehaviour_Cached FindUdonEvent(GameObject obj, string subaction, bool Debug = false)
         {
             var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
 
@@ -99,7 +120,10 @@
                     {
                         if (actionkeys.key == subaction)
                         {
-                            ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
+                            if (Debug)
+                            {
+                                ModConsole.DebugLog($"Found subaction {actionkeys.key} bound in {actionobject.gameObject.name}");
+                            }
                             return new UdonBehaviour_Cached(actionobject, actionkeys.key);
                         }
                     }
@@ -124,6 +148,7 @@
                         {
                             continue;
                         }
+
                         foreach (var symbol in unpackedudon.IUdonSymbolTable.GetSymbols())
                         {
                             if (symbol != null)
@@ -139,7 +164,7 @@
                                         switch (FullName)
                                         {
                                             case UdonTypes_String.System_String:
-                                            {
+                                                {
                                                     var item = UnboxVariable.Unpack_String();
                                                     if (item != null && item.IsNotNullOrEmptyOrWhiteSpace())
                                                     {
@@ -164,8 +189,8 @@
                                                                 }
                                                             }
                                                         }
-                                                        
                                                     }
+
                                                     break;
                                                 }
                                             case UdonTypes_String.System_String_Array:
@@ -175,7 +200,8 @@
                                                         foreach (var value in list)
                                                         {
                                                             {
-                                                                if (value != null && value.IsNotNullOrEmptyOrWhiteSpace())
+                                                                if (value != null &&
+                                                                    value.IsNotNullOrEmptyOrWhiteSpace())
                                                                 {
                                                                     if (value.IsAvatarID())
                                                                     {
@@ -195,35 +221,38 @@
                                                                             }
                                                                         }
                                                                     }
-
                                                                 }
-
                                                             }
                                                         }
+
                                                     break;
                                                 }
                                             case UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal:
                                                 {
-                                                    var pedestral = UnboxVariable.Unpack_VRC_SDK3_Components_VRCAvatarPedestal();
+                                                    var pedestral = UnboxVariable
+                                                        .Unpack_VRC_SDK3_Components_VRCAvatarPedestal();
                                                     if (pedestral != null)
                                                     {
-                                                        if(!pedestral.grantBlueprintAccess)
+                                                        if (!pedestral.grantBlueprintAccess)
                                                         {
                                                             pedestral.grantBlueprintAccess = true;
                                                         }
-                                                        if (pedestral.blueprintId.IsNotNullOrEmptyOrWhiteSpace() && pedestral.blueprintId.IsAvatarID())
+
+                                                        if (pedestral.blueprintId.IsNotNullOrEmptyOrWhiteSpace() &&
+                                                            pedestral.blueprintId.IsAvatarID())
                                                         {
                                                             result.Add(pedestral.blueprintId);
                                                         }
                                                     }
+
                                                     break;
                                                 }
                                             case UdonTypes_String.VRC_SDK3_Components_VRCAvatarPedestal_Array:
                                                 {
-                                                    var list = UnboxVariable.Unpack_List_VRC_SDK3_Components_VRCAvatarPedestal();
+                                                    var list = UnboxVariable
+                                                        .Unpack_List_VRC_SDK3_Components_VRCAvatarPedestal();
                                                     if (list != null && list.Count != 0)
                                                     {
-
                                                         foreach (var pedestral in list)
                                                         {
                                                             if (pedestral != null)
@@ -232,20 +261,23 @@
                                                                 {
                                                                     pedestral.grantBlueprintAccess = true;
                                                                 }
-                                                                if (pedestral.blueprintId.IsNotNullOrEmptyOrWhiteSpace() && pedestral.blueprintId.IsAvatarID())
+
+                                                                if (pedestral.blueprintId
+                                                                        .IsNotNullOrEmptyOrWhiteSpace() &&
+                                                                    pedestral.blueprintId.IsAvatarID())
                                                                 {
                                                                     result.Add(pedestral.blueprintId);
                                                                 }
                                                             }
                                                         }
                                                     }
+
                                                     break;
                                                 }
                                             default:
                                                 continue;
                                         }
                                     }
-
                                     catch
                                     {
                                     }
@@ -255,10 +287,8 @@
                     }
                 }
             }
+
             return result;
-
-
-
         }
     }
 }

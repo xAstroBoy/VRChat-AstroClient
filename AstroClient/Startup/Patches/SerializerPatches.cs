@@ -19,8 +19,12 @@
     using VRC.SDKBase;
     #endregion Imports
 
+
+    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class SerializerPatches : GameEvents
     {
+        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+
         private static HarmonyMethod GetPatch(string name)
         {
             return new HarmonyMethod(typeof(SerializerPatches).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
@@ -36,9 +40,9 @@
         {
             try
             {
-                new Patch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
-                new Patch(typeof(ObjectInstantiator).GetMethod(nameof(ObjectInstantiator._InstantiateObject)), GetPatch(nameof(Debug_ObjectInstantiator)));
-                new Patch(typeof(Networking).GetMethod(nameof(Networking.Instantiate)), GetPatch(nameof(Debug_NetworkingInstantiate)));
+                new AstroPatch(typeof(Photon.Realtime.LoadBalancingClient).GetMethod(nameof(Photon.Realtime.LoadBalancingClient.Method_Public_Virtual_New_Boolean_Byte_Object_RaiseEventOptions_SendOptions_0)), GetPatch(nameof(OpRaiseEvent)));
+                new AstroPatch(typeof(ObjectInstantiator).GetMethod(nameof(ObjectInstantiator._InstantiateObject)), GetPatch(nameof(Debug_ObjectInstantiator)));
+                new AstroPatch(typeof(Networking).GetMethod(nameof(Networking.Instantiate)), GetPatch(nameof(Debug_NetworkingInstantiate)));
             }
             catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
             finally { }

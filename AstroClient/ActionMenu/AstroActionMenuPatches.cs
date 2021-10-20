@@ -21,7 +21,7 @@ namespace AstroActionMenu
         {
             try
             {
-                AstroActionMenuPatches.PatchAll(new HarmonyLib.Harmony("AstroActionMenuAPI_Patches"));
+                AstroActionMenuPatches.PatchAll();
             }
             catch (Exception e)
             {
@@ -83,11 +83,9 @@ namespace AstroActionMenu
                 "XXXXXXXXX"
             }); // No strings found :( Unusable for now. Scanning for methods doesnt help either as there are other functions that yield similar results
 
-        private static HarmonyLib.Harmony Harmony;
 
-        public static void PatchAll(HarmonyLib.Harmony harmonyInstance)
+        public static void PatchAll()
         {
-            Harmony = harmonyInstance;
             PatchMethod(openMenuOpacityPageKeyWords, "OpenMenuOpacityPagePre", "OpenMenuOpacityPagePost");
             PatchMethod(openExpressionMenuKeyWords, "OpenExpressionMenuPre", "OpenExpressionMenuPost");
             PatchMethod(openConfigPageKeyWords, "OpenConfigPagePre", "OpenConfigPagePost");
@@ -101,9 +99,9 @@ namespace AstroActionMenu
 
             //Method_Private_Void_PDM_11
             //Special Child
-            /*harmonyInstance.Patch(
+           /* new AstroPatch(
                 typeof(ActionMenu).GetMethods().Single(
-                    m => Utilities.checkXref(m, openNameplatesSizePageKeyWords)
+                    m => Utilities.CheckXref(m, openNameplatesSizePageKeyWords)
                          && m.CheckStringsCount(5)
                 ),
                 new HarmonyMethod(typeof(Patches).GetMethod("OpenNameplatesSizePre")),
@@ -243,11 +241,7 @@ namespace AstroActionMenu
         {
             try
             {
-                Harmony.Patch(
-                    FindAMMethod(keywords),
-                    new HarmonyMethod(typeof(AstroActionMenuPatches).GetMethod(preName)),
-                    new HarmonyMethod(typeof(AstroActionMenuPatches).GetMethod(postName))
-                );
+                new AstroPatch(FindAMMethod(keywords),new HarmonyLib.HarmonyMethod(typeof(AstroActionMenuPatches).GetMethod(preName)), new HarmonyLib.HarmonyMethod((typeof(AstroActionMenuPatches).GetMethod(postName))));
             }
             catch (Exception e)
             {

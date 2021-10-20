@@ -3,12 +3,14 @@
     using AstroLibrary.Console;
     using System;
     using UnityEngine;
+    using VRC;
+    using VRC.SDKBase;
 
     internal class AntiCrash : GameEvents
     {
-        internal override void OnAvatarSpawn(VRCAvatarManager avatarManager, GameObject avatar)
+        internal override void OnAvatarSpawn(Player Player, GameObject Avatar, VRCAvatarManager VRCAvatarManager, VRC_AvatarDescriptor VRC_AvatarDescriptor)
         {
-            if (avatarManager == null || avatar == null) throw new ArgumentNullException();
+            if (VRCAvatarManager == null || Avatar == null) throw new ArgumentNullException();
             ModConsole.DebugLog($"[AntiCrash] Scanning Avatar");
         }
     }

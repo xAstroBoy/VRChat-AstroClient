@@ -18,6 +18,7 @@
     using UnityEngine;
     using VRC.Udon;
     using static AstroClient.Variables.CustomLists;
+    using AstroClient.Udon.UdonEditor;
 
     #endregion Imports
 
@@ -446,7 +447,7 @@
 
         private static void BlueChairSpam()
         {
-            var temp = WorldUtils.UdonScripts.Where(b => b.name.Contains("Chair") || b.name.Contains("Seat")).ToList();
+            var temp = UdonParser.CleanedWorldBehaviours.Where(b => b.name.Contains("Chair") || b.name.Contains("Seat")).ToList();
             foreach (var chair in temp)
             {
                 if (chair.name.Contains("Chair") || chair.name.Contains("Seat"))
@@ -555,7 +556,7 @@
             if (id == WorldIds.BClub)
             {
                 isCurrentWorld = true;
-                WorldUtils.UdonScripts.Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
+                UdonParser.CleanedWorldBehaviours.Where(b => b.name == "Doorbell").ToList().ForEach(s => _bells.Add(s.FindUdonEvent("DingDong")));
                 ModConsole.Log($"Recognized {Name} World! This world has an exploit menu, and other extra goodies!");
 
                 PenthouseRoot = GameObjectFinder.FindRootSceneObject("Penthouse");

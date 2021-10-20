@@ -8,6 +8,7 @@
     using System;
     using UnityEngine;
     using VRC;
+    using VRC.SDKBase;
 
     #endregion Imports
 
@@ -20,12 +21,13 @@
             avatar.transform.root.Find("ForwardDirection/Avatar").gameObject.DestroyMeLocal();
         }
 
-        internal override void OnAvatarSpawn(VRCAvatarManager avatarManager, GameObject avatar)
+        internal override void OnAvatarSpawn(Player Player, GameObject Avatar, VRCAvatarManager VRCAvatarManager,
+            VRC_AvatarDescriptor VRC_AvatarDescriptor)
         {
-            if (avatarManager == null || avatar == null) throw new ArgumentNullException();
-            if (HideAvatar && Utils.LocalPlayer.GetPlayer().GetUserID().Equals(avatar.transform.root.GetComponent<Player>().GetUserID()))
+            if (VRCAvatarManager == null || Avatar == null) throw new ArgumentNullException();
+            if (HideAvatar && Utils.LocalPlayer.GetPlayer().GetUserID().Equals(Avatar.transform.root.GetComponent<Player>().GetUserID()))
             {
-                DestroyAvatar(avatar);
+                DestroyAvatar(Avatar);
                 ModConsole.DebugLog("Your avatar was hidden.");
             }
         }

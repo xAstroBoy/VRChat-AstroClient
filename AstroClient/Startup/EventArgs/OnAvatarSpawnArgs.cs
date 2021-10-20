@@ -2,16 +2,22 @@
 {
     using System;
     using UnityEngine;
+    using VRC;
+    using VRC.SDKBase;
 
     internal class OnAvatarSpawnArgs : EventArgs
     {
-        internal VRCAvatarManager VRCAvatarManager;
-        internal GameObject Avatar;
+        internal Player Player { get; set; }
+        internal GameObject Avatar { get; set; }
+        internal VRCAvatarManager VRCAvatarManager { get; set; }
+        internal VRC_AvatarDescriptor VRC_AvatarDescriptor { get; set; }
 
-        internal OnAvatarSpawnArgs(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
+        internal OnAvatarSpawnArgs(Player Player, GameObject Avatar, VRCAvatarManager VRCAvatarManager, VRC_AvatarDescriptor VRC_AvatarDescriptor)
         {
-            this.VRCAvatarManager = VRCAvatarManager;
+            this.Player = Player;
             this.Avatar = Avatar;
+            this.VRCAvatarManager = VRCAvatarManager;
+            this.VRC_AvatarDescriptor = VRC_AvatarDescriptor;
         }
     }
 }

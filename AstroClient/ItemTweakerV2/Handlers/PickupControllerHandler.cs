@@ -46,6 +46,7 @@
                 if (PickupController != null)
                 {
                     PickupController.RemoveActionEvents(); // No more Focused on tweaker, so no need for The property Event changed.
+                    PickupController.AntiTheft = false; // Only one antitheft for pickup controller.
                 }
             }
         }

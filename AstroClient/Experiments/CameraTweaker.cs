@@ -80,7 +80,7 @@
             if (RespawnCameraOnLevelLoad)
             {
                 ModConsole.DebugLog("Resetting Camera Position...");
-                ViewFinder.gameObject.TeleportToMe(HumanBodyBones.RightHand);
+                ViewFinder.gameObject.TeleportToMe(HumanBodyBones.RightHand, true, true);
             }
         }
 
