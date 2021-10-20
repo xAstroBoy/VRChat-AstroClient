@@ -152,12 +152,12 @@
 
         internal override void OnSelectedObject_Destroyed()
         {
-            Reset();
+            //Reset();
         }
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
-            Reset();
+            //Reset();
         }
 
         internal static void Reset()
