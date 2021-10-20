@@ -183,8 +183,7 @@
             int num = 0;
             for (int i = colliders.Count - 1; i >= 0; i--)
             {
-                bool flag = colliders[i] == null || !colliders[i].enabled;
-                if (flag)
+                if (colliders[i] == null || !colliders[i].enabled)
                 {
                     colliders.RemoveAt(i);
                     cache[colliders.Count].Enabled = false;
@@ -241,7 +240,7 @@
             {
                 get
                 {
-                    return _transform.gameObject.activeSelf;
+                    return _transform.gameObject.active;
                 }
                 set
                 {
@@ -286,7 +285,7 @@
             {
                 get
                 {
-                    return _transform.gameObject.activeSelf;
+                    return _transform.gameObject.active;
                 }
                 set
                 {
@@ -324,7 +323,7 @@
             {
                 get
                 {
-                    return _parent.gameObject.activeSelf;
+                    return _parent.gameObject.active;
                 }
                 set
                 {
