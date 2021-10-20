@@ -48,6 +48,7 @@
             nestedPart.SetActive(false);
             nestedPart.CleanButtonsNestedMenu();
             QMUtils.QuickMenuController._uiPages.Add(MenuName, page);
+            SetAction(() => QMUtils.ShowQuickmenuPage(MenuName));
         }
     }
 
