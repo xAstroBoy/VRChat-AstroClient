@@ -2,6 +2,7 @@
 {
     using AstroClient;
     using AstroLibrary.Console;
+    using AstroLibrary.Finder;
     using Harmony;
     using System;
     using System.Collections;
@@ -48,10 +49,18 @@
                 initialized = true;
                 ModConsole.Log("QMOnEnable");
 
+                var junk = GameObjectFinder.Find(UIUtils.Banner);
+                junk.SetActive(false);
+
                 var testparent = QMUtils.QuickMenuController.menuRootPages[0];
 
-                _ = new NestedButton(testparent.transform, "AstroClient-Main", "Test Nested Button", "Nested Button Test");
-                _ = new WingButton("AstroClient", "Test Button <3", () => ModConsole.Log("Clicked test wing button"), CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
+                var tempImage = CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png");
+
+                //_ = new NestedButton(testparent.transform, "AstroClient-Main", "Test Nested Button", "Nested Button Test");
+                _ = new WingButton("AstroClient", "Test Button <3", () => ModConsole.Log("Clicked test wing button"), tempImage);
+                _ = new TabButton("AstroClient", "Test Tab Button!", () => ModConsole.Log("Astro Tab Clicked!"), tempImage);
+
+                CheetoButtonAPI.CreateNewDashboardSubMenu("AstroClient");
 
                 //var category = new MenuCategory("RinClient", "RinClient");
                 //var vat2 = new MenuCategory("Cum", "Cum");
