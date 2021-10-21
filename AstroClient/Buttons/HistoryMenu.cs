@@ -6,6 +6,7 @@
     using AstroLibrary;
     using AstroButtonAPI;
     using System.Reflection;
+    using CheetoLibrary;
 
     #endregion Imports
 
@@ -17,7 +18,7 @@
         {
             if (Bools.IsDeveloper)
             {
-                SubMenu = new QMTabMenu(pos, "History Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.history.png"));
+                SubMenu = new QMTabMenu(pos, "History Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.history.png"));
             }
         }
     }

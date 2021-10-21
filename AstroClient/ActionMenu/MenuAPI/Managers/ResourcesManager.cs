@@ -11,6 +11,7 @@ using AstroLibrary;
 
 namespace AstroActionMenu.Managers
 {
+    using CheetoLibrary;
 
     internal class ResourceManagerEvents : GameEvents
     {
@@ -45,7 +46,7 @@ namespace AstroActionMenu.Managers
             modsSectionIcon.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             pageOne = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.1.png"));
             pageOne.hideFlags |= HideFlags.DontUnloadUnusedAsset;
-            pageTwo = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.1.png"));
+            pageTwo = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.2.png"));
             pageTwo.hideFlags |= HideFlags.DontUnloadUnusedAsset;
             pageThree = CheetosHelpers.LoadPNG(CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.3.png"));;
             pageThree.hideFlags |= HideFlags.DontUnloadUnusedAsset;

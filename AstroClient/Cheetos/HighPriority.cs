@@ -42,7 +42,8 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error($"Failed to set process priority: {e.Message}");
+                ModConsole.Error($"Failed to set process priority");
+                ModConsole.Exception(e);
             }
             finally
             {

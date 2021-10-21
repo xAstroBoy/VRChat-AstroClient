@@ -11,6 +11,7 @@
     using AstroLibrary.Utility;
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
+    using CheetoLibrary;
     using DayClientML2.Utility;
     using DayClientML2.Utility.MenuApi;
     using Newtonsoft.Json;
@@ -71,7 +72,7 @@
             // Avatar Search
             _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Search", 921f, 470f, delegate ()
               {
-                  CheetosHelpers.PopupCall("Astro Avatar Search", "Search", "Enter Avatar name. . .", false, delegate (string text)
+                  CheetoUtils.PopupCall("Astro Avatar Search", "Search", "Enter Avatar name. . .", false, delegate (string text)
                   {
                       Search(SearchType, text);
                   });
@@ -114,7 +115,7 @@
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            MiscUtils.DelayFunction(0.5f, () => { PedestalDump(); });
+            //MiscUtils.DelayFunction(0.5f, () => { PedestalDump(); });
         }
 
         internal static void OnSelect()

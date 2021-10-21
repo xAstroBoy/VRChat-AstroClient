@@ -12,6 +12,7 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using CheetoLibrary;
     using UnityEngine;
     using static AstroClient.Variables.CustomLists;
 
@@ -145,6 +146,9 @@
 
 
         // TODO: Add a reversal mechanism to check if speed or range is modified and revert it.
+
+
+        // TODO : make a Hook to detect when a object is instantiated to immediately add and optimize the component as well, to avoid running this on loop.
 
         private static List<SuperTowerDefense_TowerEditor> GetCurrentEditors
         {

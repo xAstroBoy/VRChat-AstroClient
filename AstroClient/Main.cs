@@ -36,6 +36,8 @@
     using Application = UnityEngine.Application;
     using Button = UnityEngine.UI.Button;
     using AstroClient.Cheetos;
+    using CheetoLibrary;
+    using CheetoLibrary.ButtonAPI;
 
     #endregion Imports
 
@@ -118,20 +120,14 @@
                 DoAfterUiManagerInit(() => { Start_VRChat_OnUiManagerInit(); });
                 DoAfterQuickMenuInit(() => { Start_VRChat_OnQuickMenuInit(); });
                 DoAfterActionMenuInit(() => { Start_VRChat_OnActionMenuInit(); });
-
-                
-
             }
         }
-
 
         private IEnumerator WaitForActionMenuInit()
         {
             while (ActionMenuDriver.prop_ActionMenuDriver_0 == null) //VRCUIManager Init is too early 
                 yield return null;
         }
-
-
 
         public override void OnApplicationLateStart()
         {
@@ -258,8 +254,6 @@
             code();
         }
 
-
-
         protected void DoAfterUiManagerInit(Action code)
         {
             if (!KeyManager.IsAuthed) return;
@@ -268,9 +262,10 @@
 
         protected IEnumerator OnUiManagerInitCoro(Action code)
         {
-            while (VRCUiManager.prop_VRCUiManager_0 == null)
-                yield return new WaitForSeconds(0.001f);
-
+            //while (VRCUiManager.prop_VRCUiManager_0 == null)
+            //    yield return new WaitForSeconds(0.001f);
+                while (GameObject.Find(UIUtils.QuickMenu) == null)
+                    yield return new WaitForSeconds(0.001f);
             code();
         }
 
@@ -305,7 +300,6 @@
             ModConsole.DebugLog($"ActionMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
-
         private void Start_VRChat_OnUiManagerInit()
         {
             Stopwatch stopwatch = new Stopwatch();
@@ -316,19 +310,19 @@
                 return;
             }
 
-            QuickMenuUtils_Old.SetQuickMenuCollider(5, 5);
-            UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
+            //QuickMenuUtils_Old.SetQuickMenuCollider(5, 5);
+            //UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
             InitMainsButtons();
             try
             {
-                TweakerV2Main.Init_TweakerV2Main();
+                //TweakerV2Main.Init_TweakerV2Main();
             }
             catch (Exception e)
             {
                 ModConsole.ErrorExc(e);
             }
-            _ = new QMSingleButton("ShortcutMenu", 5, 3.5f, "GameObject Toggler", () => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }, "Advanced GameObject Toggler", null, null, true);
-            CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 3f, true);
+            //_ = new QMSingleButton("ShortcutMenu", 5, 3.5f, "GameObject Toggler", () => { GameObjMenu.ReturnToRoot(); GameObjMenu.gameobjtogglermenu.GetMainButton().GetGameObject().GetComponent<Button>().onClick.Invoke(); }, "Advanced GameObject Toggler", null, null, true);
+            //CheatsShortcutButton.Init_Cheats_ShortcutBtn(5, 3f, true);
 
             Event_VRChat_OnUiManagerInit?.SafetyRaise();
 
@@ -339,55 +333,55 @@
         internal static void InitMainsButtons()
         {
             if (!KeyManager.IsAuthed) return;
-            QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
-            ExploitsMenu.InitButtons(2f);
-            WorldsCheats.InitButtons(4f);
-            HistoryMenu.InitButtons(6f);
-            AdminMenu.InitButtons(8f);
-            DevMenu.InitButtons(10f);
+            //QMTabMenu AstroClient = new QMTabMenu(1f, "AstroClient Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.planet.png"));
+            //ExploitsMenu.InitButtons(2f);
+            //WorldsCheats.InitButtons(4f);
+            //HistoryMenu.InitButtons(6f);
+            //AdminMenu.InitButtons(8f);
+            //DevMenu.InitButtons(10f);
 
-            ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", () => { Bools.IsDebugMode = true; }, "Debug Console OFF", () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-            ToggleDebugInfo.SetToggleState(Bools.IsDebugMode);
-            // Top Right Buttons
-            CopyIDButton = new QMSingleButton(AstroClient, 5, -1, "Copy\nInstance ID", () => { Clipboard.SetText($"{WorldUtils.FullID}"); }, "Copy the ID of the current instance.", null, null, true);
-            JoinInstanceButton = new QMSingleButton(AstroClient, 5, -0.5f, "Join\nInstance", () => { new PortalInternal().Method_Private_Void_String_String_PDM_0(Clipboard.GetText().Split(':')[0], Clipboard.GetText().Split(':')[1]); }, "Join an instance via your clipboard.", null, null, true);
-            AvatarByIDButton = new QMSingleButton(AstroClient, 5, 0.5f, "Avatar\nBy ID", () => { string text = Clipboard.GetText(); if (text.isAvatarID()) new PageAvatar { field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal { field_Internal_ApiAvatar_0 = new ApiAvatar { id = text } } }.ChangeToSelectedAvatar(); else MelonLogger.Error("Clipboard does not contains Avatar ID!"); }, "Alows you to change into a public avatar with its id.", null, null, true);
-            ReloadAvatarsButton = new QMSingleButton(AstroClient, 5, 1f, "Reload\nAvatars", () => { MelonCoroutines.Start(AvatarMods.AvatarUtils.ReloadAllAvatars()); }, "Reloads All Avatars", null, null, true);
+            //ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", () => { Bools.IsDebugMode = true; }, "Debug Console OFF", () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
 
-            CloseButton = new QMSingleButton(AstroClient, 0, 0, "Close Game", () => { Process.GetCurrentProcess().Kill(); }, "Close the game");
-            RestartButton = new QMSingleButton(AstroClient, 0, 1, "Restart Game", () =>
-            {
-                _ = Process.Start(Directory.GetParent(Application.dataPath) + "\\VRChat.exe");
-                Process.GetCurrentProcess().Kill();
-            }, "Restart the game");
+            //// Top Right Buttons
+            //CopyIDButton = new QMSingleButton(AstroClient, 5, -1, "Copy\nInstance ID", () => { Clipboard.SetText($"{WorldUtils.FullID}"); }, "Copy the ID of the current instance.", null, null, true);
+            //JoinInstanceButton = new QMSingleButton(AstroClient, 5, -0.5f, "Join\nInstance", () => { new PortalInternal().Method_Private_Void_String_String_PDM_0(Clipboard.GetText().Split(':')[0], Clipboard.GetText().Split(':')[1]); }, "Join an instance via your clipboard.", null, null, true);
+            //AvatarByIDButton = new QMSingleButton(AstroClient, 5, 0.5f, "Avatar\nBy ID", () => { string text = Clipboard.GetText(); if (text.StartsWith("avtr_")) new PageAvatar { field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal { field_Internal_ApiAvatar_0 = new ApiAvatar { id = text } } }.ChangeToSelectedAvatar(); else MelonLogger.Error("Clipboard does not contains Avatar ID!"); }, "Alows you to change into a public avatar with its id.", null, null, true);
+            //ReloadAvatarsButton = new QMSingleButton(AstroClient, 5, 1f, "Reload\nAvatars", () => { MelonCoroutines.Start(AvatarMods.AvatarUtils.ReloadAllAvatars()); }, "Reloads All Avatars", null, null, true);
 
-            // Protections
-            QMNestedButton protectionsButton = new QMNestedButton(AstroClient, 4, 2f, "Protections", "Protections Menu", null, Color.yellow, null, null, true);
+            //CloseButton = new QMSingleButton(AstroClient, 0, 0, "Close Game", () => { Process.GetCurrentProcess().Kill(); }, "Close the game");
+            //RestartButton = new QMSingleButton(AstroClient, 0, 1, "Restart Game", () =>
+            //{
+            //    _ = Process.Start(Directory.GetParent(Application.dataPath) + "\\VRChat.exe");
+            //    Process.GetCurrentProcess().Kill();
+            //}, "Restart the game");
 
-            QMSingleToggleButton toggleBlockRPC = new QMSingleToggleButton(protectionsButton, 2, 0, "RPC Block", () => { Bools.BlockRPC = true; }, "RPC Block", () => { Bools.BlockRPC = false; }, "Toggle RPC Blocking", Color.green, Color.red, null, Bools.BlockRPC, true);
-            toggleBlockRPC.SetToggleState(Bools.BlockRPC, false);
+            //// Protections
+            //QMNestedButton protectionsButton = new QMNestedButton(AstroClient, 4, 2f, "Protections", "Protections Menu", null, Color.yellow, null, null, true);
 
-            QMSingleToggleButton toggleBlockUdon = new QMSingleToggleButton(protectionsButton, 3, 0, "Udon Block", () => { Bools.BlockUdon = true; }, "Udon Block", () => { Bools.BlockUdon = false; }, "Toggle Udon Blocking", Color.green, Color.red, null, Bools.BlockRPC, true);
-            toggleBlockUdon.SetToggleState(Bools.BlockUdon, false);
+            //QMSingleToggleButton toggleBlockRPC = new QMSingleToggleButton(protectionsButton, 2, 0, "RPC Block", () => { Bools.BlockRPC = true; }, "RPC Block", () => { Bools.BlockRPC = false; }, "Toggle RPC Blocking", Color.green, Color.red, null, Bools.BlockRPC, true);
+            //toggleBlockRPC.SetToggleState(Bools.BlockRPC, false);
 
-            QMSingleToggleButton toggleAntiPortal = new QMSingleToggleButton(protectionsButton, 4, 2.5f, "Anti Portal", () => { Bools.AntiPortal = true; }, "Anti Portal", () => { Bools.AntiPortal = false; }, "Stops you from entering portals.", Color.green, Color.red, null, Bools.AntiPortal, true);
-            toggleAntiPortal.SetToggleState(Bools.AntiPortal, false);
+            //QMSingleToggleButton toggleBlockUdon = new QMSingleToggleButton(protectionsButton, 3, 0, "Udon Block", () => { Bools.BlockUdon = true; }, "Udon Block", () => { Bools.BlockUdon = false; }, "Toggle Udon Blocking", Color.green, Color.red, null, Bools.BlockRPC, true);
+            //toggleBlockUdon.SetToggleState(Bools.BlockUdon, false);
 
-            // Misc
-            SkyboxEditor.CustomSkyboxesMenu(AstroClient, 1, 0, true);
-            LightControl.InitButtons(AstroClient, 1, 0.5f, true);
-            GameObjectMenu.InitButtons(AstroClient, 1, 1.5f, true);
-            if (Bools.IsDeveloper)
-            {
-                MapEditorMenu.InitButtons(AstroClient, 1, 2.5f, true);
-            }
-            WorldPickupsBtn.InitButtons(AstroClient, 2, 0, true);
-            ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
+            //QMSingleToggleButton toggleAntiPortal = new QMSingleToggleButton(protectionsButton, 4, 2.5f, "Anti Portal", () => { Bools.AntiPortal = true; }, "Anti Portal", () => { Bools.AntiPortal = false; }, "Stops you from entering portals.", Color.green, Color.red, null, Bools.AntiPortal, true);
+            //toggleAntiPortal.SetToggleState(Bools.AntiPortal, false);
 
-            Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
-            CameraTweaker.InitQMMenu(AstroClient, 3, 0.5f, true);
+            //// Misc
+            //SkyboxEditor.CustomSkyboxesMenu(AstroClient, 1, 0, true);
+            //LightControl.InitButtons(AstroClient, 1, 0.5f, true);
+            //GameObjectMenu.InitButtons(AstroClient, 1, 1.5f, true);
+            //if (Bools.IsDeveloper)
+            //{
+            //    MapEditorMenu.InitButtons(AstroClient, 1, 2.5f, true);
+            //}
+            //WorldPickupsBtn.InitButtons(AstroClient, 2, 0, true);
+            //ComponentsBtn.InitButtons(AstroClient, 2, 0.5f, true);
 
-            SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
+            //Headlight.Headlight.HeadlightButtonInit(AstroClient, 3, 0, true);
+            //CameraTweaker.InitQMMenu(AstroClient, 3, 0.5f, true);
+
+            //SettingsMenuBtn.InitButtons(AstroClient, 3, 2.5f, true);
         }
     }
 }

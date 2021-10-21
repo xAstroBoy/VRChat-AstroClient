@@ -70,7 +70,7 @@
             catch (Exception e)
             {
                 ModConsole.Error("Error parsing Components from Root Objects");
-                ModConsole.ErrorExc(e);
+                ModConsole.Exception(e);
                 return null;
             }
             return null;

@@ -77,33 +77,33 @@
 
         public delegate VRCUiPage ShowScreenAction(VRCUiPage page);
 
-        public static void RefreshUser()
-        {
-            APIUser user = VRCUiManager.prop_VRCUiManager_0.field_Public_GameObject_0.GetComponentInChildren<PageUserInfo>().GetUser();
+        //public static void RefreshUser()
+        //{
+        //    APIUser user = VRCUiManager.prop_VRCUiManager_0.field_Public_GameObject_0.GetComponentInChildren<PageUserInfo>().GetUser();
 
-            if (user == null)
-            {
-                Console.WriteLine("user null");
-                return;
-            }
-            APIUser.FetchUser(user.id,
-                new Action<APIUser>((userapi) =>
-                {
-                    PageUserInfo pageUserInfo = VRCUiManager.prop_VRCUiManager_0.prop_VRCUiPopupManager_0.GetComponentInChildren<PageUserInfo>();
-                    if (pageUserInfo != null)
-                    {
-                        pageUserInfo.Method_Public_Void_APIUser_PDM_0(userapi);
-                        pageUserInfo.Method_Private_Boolean_APIUser_PDM_0(userapi);
-                        pageUserInfo.Method_Private_EnumNPublicSealedvaNoOnOfSeReBlInFa10Unique_APIUser_PDM_0(userapi);
+        //    if (user == null)
+        //    {
+        //        Console.WriteLine("user null");
+        //        return;
+        //    }
+        //    APIUser.FetchUser(user.id,
+        //        new Action<APIUser>((userapi) =>
+        //        {
+        //            PageUserInfo pageUserInfo = VRCUiManager.prop_VRCUiManager_0.prop_VRCUiPopupManager_0.GetComponentInChildren<PageUserInfo>();
+        //            if (pageUserInfo != null)
+        //            {
+        //                pageUserInfo.Method_Public_Void_APIUser_PDM_0(userapi);
+        //                pageUserInfo.Method_Private_Boolean_APIUser_PDM_0(userapi);
+        //                pageUserInfo.Method_Private_EnumNPublicSealedvaNoOnOfSeReBlInFa10Unique_APIUser_PDM_0(userapi);
 
-                        //LogHandler.Log("Refreshed user: " + userapi.id);
-                    }
-                }),
-                new Action<string>((Error) =>
-                {
-                    //LogHandler.Log("Error Couldnt Fetch User\n" + Error);
-                }));
-        }
+        //                //LogHandler.Log("Refreshed user: " + userapi.id);
+        //            }
+        //        }),
+        //        new Action<string>((Error) =>
+        //        {
+        //            //LogHandler.Log("Error Couldnt Fetch User\n" + Error);
+        //        }));
+        //}
 
         public static APIUser GetUser(this PageUserInfo Instance)
         {

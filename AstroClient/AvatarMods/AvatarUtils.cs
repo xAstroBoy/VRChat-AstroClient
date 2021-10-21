@@ -200,8 +200,6 @@
             return null;
         }
 
-
-
         internal static List<string> Dump_Mesh_Renderers(this Transform item)
         {
             var dumpednames = new List<string>();
@@ -299,6 +297,5 @@
             }
             yield break;
         }
-
     }
 }

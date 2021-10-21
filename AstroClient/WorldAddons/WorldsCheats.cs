@@ -14,6 +14,7 @@
     using System.Linq;
     using System.Reflection;
     using UnityEngine;
+    using CheetoLibrary;
 
     #endregion Imports
 
@@ -21,7 +22,7 @@
     {
         internal static void InitButtons(float pos)
         {
-            QMTabMenu WorldCheats = new QMTabMenu(pos, "WorldCheats Menu", null, null, null, CheetosHelpers.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.thief.png"));
+            QMTabMenu WorldCheats = new QMTabMenu(pos, "WorldCheats Menu", null, null, null, CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(), "AstroClient.Resources.thief.png"));
             Murder2Cheats.Murder2CheatsButtons(WorldCheats, 1, 0, true);
             Murder4Cheats.Murder4CheatsButtons(WorldCheats, 1, 0.5f, true);
             AmongUSCheats.AmongUSCheatsButtons(WorldCheats, 1, 1f, true);

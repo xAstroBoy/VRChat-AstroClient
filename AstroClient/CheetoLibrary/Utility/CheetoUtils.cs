@@ -1,18 +1,40 @@
-﻿namespace AstroLibrary
+﻿namespace CheetoLibrary
 {
     #region Imports
 
-    using AstroLibrary.Utility;
+    using AstroLibrary.Console;
     using System;
     using System.IO;
     using System.Reflection;
     using UnityEngine;
     using UnityEngine.UI;
+    using VRC.UI.Elements;
 
     #endregion Imports
 
-    public static class CheetosHelpers
+    public static class CheetoUtils
     {
+        public static MenuStateController GetMenuStateController()
+        {
+            return GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)").GetComponent<MenuStateController>();
+        }
+
+        public static void TryRun(Action[] actions)
+        {
+            for (int i = 0; i < actions.Length; i++)
+            {
+                Action action = actions[i];
+                try
+                {
+                    action();
+                }
+                catch (Exception e)
+                {
+                    ModConsole.Exception(e);
+                }
+            }
+        }
+
         public static Texture2D LoadPNG(string filePath)
         {
             byte[] fileData = ExtractResource(Assembly.GetExecutingAssembly(), filePath);
@@ -32,13 +54,22 @@
 
         public static byte[] ExtractResource(Assembly assembly, string filename)
         {
-            using (Stream resFilestream = assembly.GetManifestResourceStream(filename))
+            try
             {
-                if (resFilestream == null) return null;
-                byte[] ba = new byte[resFilestream.Length];
-                resFilestream.Read(ba, 0, ba.Length);
-                return ba;
+                using (Stream resFilestream = assembly.GetManifestResourceStream(filename))
+                {
+                    if (resFilestream == null) return null;
+                    byte[] ba = new byte[resFilestream.Length];
+                    resFilestream.Read(ba, 0, ba.Length);
+                    return ba;
+                }
             }
+            catch (Exception e)
+            {
+                ModConsole.Error($"Failed to extract resource: {filename}");
+                ModConsole.Exception(e);
+            }
+            return null;
         }
 
         public static void PopupCall(string title, string confirm, string placeholder, bool IsNumpad, Action<string> OnAccept, Action OnCancel = null)
