@@ -110,8 +110,15 @@
                 StringBuilder stringBuilder = new StringBuilder();
                 foreach (Client client in clients)
                 {
-                    stringBuilder.Append($"{client.Name}\n");
-                    //_ = await ReplyAsync(null, false, CustomEmbed.GetClientEmbed(client));
+                    if (client.Data != null)
+                    {
+                        if (client.Data.IsDeveloper)
+                        {
+                            stringBuilder.Append("Developer: ");
+                        }
+                    }
+                    stringBuilder.Append($"'{client.Name}'\n");
+                    stringBuilder.Append($"```{client.InstanceID}```");
                 }
                 _ = await ReplyAsync(stringBuilder.ToString());
             }
