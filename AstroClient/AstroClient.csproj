@@ -61,6 +61,9 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\astronetworkinglibrary\BSonWriter.cs">
       <Link>Networking\BSonWriter.cs</Link>
@@ -171,6 +174,8 @@
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnInflaterBehaviourArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnRocketBehaviourArgs.cs" />
     <Compile Include="ItemTweakerV2\TweakerEventArgs\OnRigidBodyControllerArgs.cs" />
+    <Compile Include="Kaned\Pathfinder.cs" />
+    <Compile Include="Kaned\Pathfinding.cs" />
     <Compile Include="Moderation\ModerationExtensions.cs" />
     <Compile Include="Moderation\ModerationNotifier.cs" />
     <Compile Include="Moderation\PhotonModerationHandler.cs" />

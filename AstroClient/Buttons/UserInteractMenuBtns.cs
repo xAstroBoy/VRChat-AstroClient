@@ -35,15 +35,15 @@
             if (Bools.AllowOrbitComponent)
             {
                 _ = new QMSingleButton(menu, 2, 0, "All\nPickups\nOrbits around \nplayer.", new Action(ObjectMiscOptions.AllWorldPickupsOrbitsOnTarget), "Make that dirty pickup thief regret stealing from you.", null, null);
-               _ = new QMSingleButton(menu, 2, 1, "Remove\nPlayer (bound) Orbiting Items", new Action(ObjectMiscOptions.RemoveAllOrbitPlayer), "Removes any Orbiting Items bound to this player.", null, null);
+                _ = new QMSingleButton(menu, 2, 1, "Remove\nPlayer (bound) Orbiting Items", new Action(ObjectMiscOptions.RemoveAllOrbitPlayer), "Removes any Orbiting Items bound to this player.", null, null);
             }
             if (Bools.AllowAttackerComponent)
             {
                 _ = new QMSingleButton(menu, 3, 0, "All Pickups Attack player.", new Action(ObjectMiscOptions.AllWorldPickupsAttackTarget), "Make that dirty pickup thief regret stealing from you.", null, null);
-               _ =  new QMSingleButton(menu, 3, 1, "Remove\nPlayer (bound) Attackers", new Action(ObjectMiscOptions.RemoveAllAttackPlayer), "Removes any Attackers bound to this player.", null, null);
+                _ = new QMSingleButton(menu, 3, 1, "Remove\nPlayer (bound) Attackers", new Action(ObjectMiscOptions.RemoveAllAttackPlayer), "Removes any Attackers bound to this player.", null, null);
             }
             _ = new QMSingleButton(menu, 4, 0, "All Pickups Watch player.", new Action(ObjectMiscOptions.AllWorldPickupsWatchTarget), "Make the victim feel observed.", null, null);
-            _ =new QMSingleButton(menu, 4, 1, "Remove\nPlayer (bound) Watchers", new Action(ObjectMiscOptions.RemoveAllWatchersPlayer), "Removes any Watchers bound to this player.", null, null);
+            _ = new QMSingleButton(menu, 4, 1, "Remove\nPlayer (bound) Watchers", new Action(ObjectMiscOptions.RemoveAllWatchersPlayer), "Removes any Watchers bound to this player.", null, null);
 
             var sitMenu = new QMNestedButton(menu, 1, 2, "Sit", "Sit on selected player");
             _ = new QMSingleButton(menu, 2, 2, "Teleport\nTo\nPlayer", () => { PlayerUtils.GetPlayer().gameObject.transform.position = QuickMenuUtils.SelectedPlayer.transform.position; }, "Teleport To Player");
