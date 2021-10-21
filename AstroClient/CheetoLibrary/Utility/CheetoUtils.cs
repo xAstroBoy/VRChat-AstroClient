@@ -8,16 +8,16 @@
     using System.Reflection;
     using UnityEngine;
     using UnityEngine.UI;
-    using VRC.UI.Elements;
+    //using VRC.UI.Elements;
 
     #endregion Imports
 
     public static class CheetoUtils
     {
-        public static MenuStateController GetMenuStateController()
-        {
-            return GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)").GetComponent<MenuStateController>();
-        }
+        //public static MenuStateController GetMenuStateController()
+        //{
+        //    return GameObject.Find("UserInterface/Canvas_QuickMenu(Clone)").GetComponent<MenuStateController>();
+        //}
 
         public static void TryRun(Action[] actions)
         {
