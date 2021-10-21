@@ -356,13 +356,13 @@
             Console.Write(":", Color.White);
             Console.Write(callerLine.ToString(), Color.Green);
             Console.Write("]: ", Color.White);
-            Task.Run(() => { Write("[LOG]: "); });
+            Task.Run(() => { Write($"[{callerName}:{callerLine}]: "); });
         }
 
         private static void PrintAntiCrashTag()
         {
             Console.Write("[", Color.White);
-            Console.Write("LOG", Color.PaleVioletRed);
+            Console.Write("ANTICRASH", Color.PaleVioletRed);
             Console.Write("]: ", Color.White);
             Task.Run(() => { Write("[ANTICRASH]: "); });
         }

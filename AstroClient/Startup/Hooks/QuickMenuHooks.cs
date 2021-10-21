@@ -17,7 +17,6 @@
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;
-    using Patch = AstroClient.Patch;
 
     #endregion Imports
 
@@ -48,7 +47,7 @@
         {
             try
             {
-                new Patch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Public_Void_Player_0)), GetPatch(nameof(OnSelectedPlayerPatch)));
+                new AstroPatch(typeof(QuickMenu).GetMethod(nameof(QuickMenu.Method_Public_Void_Player_0)), GetPatch(nameof(OnSelectedPlayerPatch)));
             }
             catch (Exception e) { ModConsole.Error("Error in applying patches : " + e); }
             finally { }

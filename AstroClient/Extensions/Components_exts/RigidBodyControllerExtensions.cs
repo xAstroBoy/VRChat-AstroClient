@@ -90,17 +90,6 @@
             }
         }
 
-        internal static void RigidBody_PreventOthersFromGrabbing(this RigidBodyController control, bool PreventOthersFromGrabbing)
-        {
-            if (control != null)
-            {
-                if (!control.EditMode)
-                {
-                    control.EditMode = true;
-                }
-                control.PreventOthersFromGrabbing = PreventOthersFromGrabbing;
-            }
-        }
 
         internal static bool RigidBody_Will_It_fall_throught(this RigidBodyController control)
         {
@@ -173,10 +162,6 @@
             obj.GetOrAddComponent<RigidBodyController>().RigidBody_Add_Constraint(constraint);
         }
 
-        internal static void RigidBody_PreventOthersFromGrabbing(this GameObject obj, bool PreventOthersFromGrabbing)
-        {
-            obj.GetOrAddComponent<RigidBodyController>().RigidBody_PreventOthersFromGrabbing(PreventOthersFromGrabbing);
-        }
 
         internal static bool RigidBody_Will_It_fall_throught(this GameObject obj)
         {
@@ -260,16 +245,6 @@
             }
         }
 
-        internal static void RigidBody_PreventOthersFromGrabbing(this List<GameObject> items, bool PreventOthersFromGrabbing)
-        {
-            foreach (var obj in items)
-            {
-                if (obj != null)
-                {
-                    obj.GetOrAddComponent<RigidBodyController>().RigidBody_PreventOthersFromGrabbing(PreventOthersFromGrabbing);
-                }
-            }
-        }
 
         internal static void RigidBody_Set_Drag(this RigidBodyController control, float Drag)
         {

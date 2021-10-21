@@ -9,6 +9,7 @@
     using System;
     using UnityEngine;
     using Finder = AstroLibrary.Finder;
+    using AstroLibrary.Extensions;
 
     internal class UserInteractMenuBtns : GameEvents
     {
@@ -22,7 +23,6 @@
 
             //  NO TOUCH!
             new QMSingleButton("UserInteractMenu", x, y + 0.5f, "AstroClient : Set Target.", new Action(TargetSelector.MarkPlayerAsTarget), "Mark this player as target.", null, null, btnHalf).SetResizeTextForBestFit(true);
-            AvatarModifier.InitUserMenu(x, y + 1f, true); // Might remove it or rewrite it
             var forceClone = new QMSingleButton("UserInteractMenu", 5, 0, "Force Clone", () => { ForceClone.ClonePlayer(); }, "Force Clone This Player's Avatar", null, null, false);
         }
 
@@ -30,6 +30,11 @@
         {
             var menu = new QMNestedButton("UserInteractMenu", x, y, "AstroClient Exploits", "AstroClient Menu", null, null, null, null, btnHalf);
             menu.GetMainButton().SetResizeTextForBestFit(true);
+            if (Bools.IsDeveloper)
+            {
+            _ = new QMSingleButton(menu, 0, 0, "Deny Pickups to Player.", new Action(() => { PickupBlocker.RegisterPlayer(QuickMenuUtils.SelectedPlayer); }), "Block Pickups from being used by this player!.", null, null, true);
+            _ = new QMSingleButton(menu, 0, 0.5f, "Re-allow Pickups to Player.", new Action(() => { PickupBlocker.RemovePlayer(QuickMenuUtils.SelectedPlayer); }), "Block Pickups from being used by this player!.", null, null, true);
+            }
 
             _ = new QMSingleButton(menu, 1, 0, "Teleport All\nPickups\nTo\nplayer.", new Action(ObjectMiscOptions.TeleportAllWorldPickupsToPlayer), "Teleport World Pickups To Player.", null, null); ;
             if (Bools.AllowOrbitComponent)

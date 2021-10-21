@@ -45,11 +45,8 @@
                             {
                                 for (int i1 = 0; i1 < objects.Count; i1++)
                                 {
-                                    T audio = objects[i1];
-                                    if (!results.Contains(audio))
-                                    {
-                                        results.Add(audio);
-                                    }
+                                    T component = objects[i1];
+                                    results.Add(component);
                                 }
                             }
                         }
@@ -61,11 +58,8 @@
                         {
                             for (int i1 = 0; i1 < objects.Count; i1++)
                             {
-                                T audio = objects[i1];
-                                if (!results.Contains(audio))
-                                {
-                                    results.Add(audio);
-                                }
+                                T component = objects[i1];
+                                results.Add(component);
                             }
                         }
                     }

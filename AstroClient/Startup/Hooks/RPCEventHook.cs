@@ -45,21 +45,8 @@
         [System.Reflection.ObfuscationAttribute(Feature = "HarmonyHookInit", Exclude = false)]
         internal void InitPatches()
         {
-            try
-            {
-                if (harmony == null)
-                {
-                    harmony = new HarmonyLib.Harmony(BuildInfo.Name + " RPCEventHook");
-                }
-
-                _ = harmony.Patch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), GetPatch(nameof(OnRPCEvent)), null, null);
-                ModConsole.DebugLog("RPC Hooks Done");
-            }
-            catch
-            {
-                harmony.UnpatchAll();
-                InitPatches();
-            }
+                new AstroPatch(AccessTools.Method(typeof(VRC_EventDispatcherRFC), nameof(VRC_EventDispatcherRFC.Method_Public_Void_Player_VrcEvent_VrcBroadcastType_Int32_Single_0)), GetPatch(nameof(OnRPCEvent)));
+            
         }
 
         private static bool OnRPCEvent(ref VRC.Player __0, ref VRC_EventHandler.VrcEvent __1, ref VRC_EventHandler.VrcBroadcastType __2, ref int __3, ref float __4)

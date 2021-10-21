@@ -143,7 +143,6 @@
                 {
                     // Add a Sync Mechanism if Edit Mode is off and is not Applying edits anymore.
                     Run_OnRigidbodyControllerOnUpdate();
-                    PreventOthersFromHolding();
                     if (!EditMode)
                     {
                         // Makes sure if EditMode is OFF. As long is off it keeps updating the properties.
@@ -888,37 +887,7 @@
 
         #endregion Random Methods
 
-        // TODO : Move it to PickupController...
 
-        #region anti-grab method
-
-        internal void PreventOthersFromHolding()
-        {
-            if (PreventOthersFromGrabbing)
-            {
-                if (!OnlineEditor.IsLocalPlayerOwner(gameObject))
-                {
-                    OnlineEditor.TakeObjectOwnership(gameObject);
-                }
-            }
-        }
-
-        private bool _PreventOthersFromGrabbing = false;
-
-        internal bool PreventOthersFromGrabbing
-        {
-            get
-            {
-                return _PreventOthersFromGrabbing;
-            }
-            set
-            {
-                _PreventOthersFromGrabbing = value;
-                Run_OnRigidBodyPropertyChanged();
-            }
-        }
-
-        #endregion anti-grab method
 
         #region Essential Variables.
 

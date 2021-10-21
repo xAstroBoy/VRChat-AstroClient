@@ -173,7 +173,7 @@
             stopwatch.Start();
 
             if (!KeyManager.IsAuthed)
-            return;
+                return;
             Type[] array = Assembly.GetExecutingAssembly().GetTypes();
             for (int i = 0; i < array.Length; i++)
             {
@@ -183,10 +183,13 @@
                 if (btype != null && btype.Equals(typeof(GameEvents)))
                 {
                     GameEvents component = Assembly.GetExecutingAssembly().CreateInstance(type.ToString(), true) as GameEvents;
-                    component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
+                    if (component != null)
+                    {
+                        component.ExecutePriorityPatches(); // NEEDED TO DO PATCHING EVENT
 
-                    component.OnApplicationStart();
-                    GameEvents.Add(component);
+                        component.OnApplicationStart();
+                        GameEvents.Add(component);
+                    }
                 }
 
                 if (btype != null && btype.Equals(typeof(Tweaker_Events)))
@@ -233,7 +236,7 @@
             _ = MelonCoroutines.Start(OnQuickMenuInitCoro(code));
         }
 
-        private IEnumerator OnQuickMenuInitCoro(Action code)
+        protected IEnumerator OnQuickMenuInitCoro(Action code)
         {
             while (QuickMenu.prop_QuickMenu_0 == null)
                 yield return null;
@@ -263,7 +266,7 @@
             _ = MelonCoroutines.Start(OnUiManagerInitCoro(code));
         }
 
-        private IEnumerator OnUiManagerInitCoro(Action code)
+        protected IEnumerator OnUiManagerInitCoro(Action code)
         {
             while (VRCUiManager.prop_VRCUiManager_0 == null)
                 yield return new WaitForSeconds(0.001f);
@@ -277,8 +280,12 @@
             stopwatch.Start();
 
             if (!KeyManager.IsAuthed)
+            {
+                stopwatch.Stop();
                 return;
+            }
             Event_VRChat_OnQuickMenuInit?.SafetyRaise();
+            stopwatch.Stop(); 
             ModConsole.DebugLog($"QuickMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
@@ -288,9 +295,13 @@
             stopwatch.Start();
 
             if (!KeyManager.IsAuthed)
+            {
                 stopwatch.Stop();
-            return;
+                return;
+            }
+
             Event_VRChat_OnActionMenuInit?.SafetyRaise();
+            stopwatch.Stop();
             ModConsole.DebugLog($"ActionMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
         }
 
@@ -301,8 +312,9 @@
             stopwatch.Start();
 
             if (!KeyManager.IsAuthed)
-            return;
-            
+            {
+                return;
+            }
 
             QuickMenuUtils_Old.SetQuickMenuCollider(5, 5);
             UserInteractMenuBtns.InitButtons(-1, 3, true); //UserMenu Main Button
@@ -335,11 +347,11 @@
             DevMenu.InitButtons(10f);
 
             ToggleDebugInfo = new QMSingleToggleButton(AstroClient, 4, 2.5f, "Debug Console ON", () => { Bools.IsDebugMode = true; }, "Debug Console OFF", () => { Bools.IsDebugMode = false; }, "Shows Client Details in Melonloader's console", UnityEngine.Color.green, UnityEngine.Color.red, null, false, true);
-
+            ToggleDebugInfo.SetToggleState(Bools.IsDebugMode);
             // Top Right Buttons
             CopyIDButton = new QMSingleButton(AstroClient, 5, -1, "Copy\nInstance ID", () => { Clipboard.SetText($"{WorldUtils.FullID}"); }, "Copy the ID of the current instance.", null, null, true);
             JoinInstanceButton = new QMSingleButton(AstroClient, 5, -0.5f, "Join\nInstance", () => { new PortalInternal().Method_Private_Void_String_String_PDM_0(Clipboard.GetText().Split(':')[0], Clipboard.GetText().Split(':')[1]); }, "Join an instance via your clipboard.", null, null, true);
-            AvatarByIDButton = new QMSingleButton(AstroClient, 5, 0.5f, "Avatar\nBy ID", () => { string text = Clipboard.GetText(); if (text.StartsWith("avtr_")) new PageAvatar { field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal { field_Internal_ApiAvatar_0 = new ApiAvatar { id = text } } }.ChangeToSelectedAvatar(); else MelonLogger.Error("Clipboard does not contains Avatar ID!"); }, "Alows you to change into a public avatar with its id.", null, null, true);
+            AvatarByIDButton = new QMSingleButton(AstroClient, 5, 0.5f, "Avatar\nBy ID", () => { string text = Clipboard.GetText(); if (text.isAvatarID()) new PageAvatar { field_Public_SimpleAvatarPedestal_0 = new SimpleAvatarPedestal { field_Internal_ApiAvatar_0 = new ApiAvatar { id = text } } }.ChangeToSelectedAvatar(); else MelonLogger.Error("Clipboard does not contains Avatar ID!"); }, "Alows you to change into a public avatar with its id.", null, null, true);
             ReloadAvatarsButton = new QMSingleButton(AstroClient, 5, 1f, "Reload\nAvatars", () => { MelonCoroutines.Start(AvatarMods.AvatarUtils.ReloadAllAvatars()); }, "Reloads All Avatars", null, null, true);
 
             CloseButton = new QMSingleButton(AstroClient, 0, 0, "Close Game", () => { Process.GetCurrentProcess().Kill(); }, "Close the game");
@@ -364,9 +376,7 @@
             // Misc
             SkyboxEditor.CustomSkyboxesMenu(AstroClient, 1, 0, true);
             LightControl.InitButtons(AstroClient, 1, 0.5f, true);
-            AvatarModifier.InitQMMenu(AstroClient, 1, 1, true);
             GameObjectMenu.InitButtons(AstroClient, 1, 1.5f, true);
-            EmojiUtils.InitButton(AstroClient, 1, 2, true); // TODO : Rewrite
             if (Bools.IsDeveloper)
             {
                 MapEditorMenu.InitButtons(AstroClient, 1, 2.5f, true);

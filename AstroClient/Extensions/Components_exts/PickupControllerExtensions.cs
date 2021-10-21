@@ -20,6 +20,15 @@
             }
         }
 
+        internal static void Pickup_Set_AntiTheft(this PickupController instance, bool AntiTheft)
+        {
+            if (instance != null)
+            {
+                instance.AntiTheft = AntiTheft;
+            }
+        }
+
+
         internal static void Pickup_Set_proximity(this PickupController instance, float proximity)
         {
             if (instance != null)
@@ -108,6 +117,15 @@
             }
             return false;
         }
+        internal static bool Pickup_Get_AntiTheft(this PickupController instance)
+        {
+            if (instance != null)
+            {
+                return instance.AntiTheft;
+            }
+            return false;
+        }
+
 
         internal static VRCPlayerApi Pickup_Get_HeldByUser(this PickupController instance)
         {
@@ -116,6 +134,11 @@
                 return instance.currentPlayer;
             }
             return null;
+        }
+
+        internal static void Pickup_Set_AntiTheft(this GameObject obj, bool AntiTheft)
+        {
+            obj.GetOrAddComponent<PickupController>().Pickup_Set_AntiTheft(AntiTheft);
         }
 
         internal static void Pickup_Set_DisallowTheft(this GameObject obj, bool DisallowTheft)
@@ -178,6 +201,18 @@
                 }
             }
         }
+
+        internal static void Pickup_Set_AntiTheft(this List<GameObject> items, bool AntiTheft)
+        {
+            foreach (var obj in items)
+            {
+                if (obj != null)
+                {
+                    obj.GetOrAddComponent<PickupController>().Pickup_Set_AntiTheft(AntiTheft);
+                }
+            }
+        }
+
 
         internal static void Pickup_Set_proximity(this List<GameObject> items, float proximity)
         {
@@ -287,6 +322,20 @@
         {
             return "Current owner : \n" + controller.CurrentOwner;
         }
+
+        internal static void Pickup_AllowOnlySelfToGrab(this PickupController control, bool AllowOnlySelfToGrab)
+        {
+            if (control != null)
+            {
+                if (!control.EditMode)
+                {
+                    control.EditMode = true;
+                }
+                control.AllowOnlySelfToGrab = AllowOnlySelfToGrab;
+            }
+        }
+
+
 
         internal static void Pickup_Set_ThrowVelocityBoostScale(this PickupController instance, float ThrowVelocityBoostScale)
         {

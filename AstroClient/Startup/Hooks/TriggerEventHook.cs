@@ -11,7 +11,6 @@
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class TriggerEventHook : GameEvents
     {
-        private HarmonyLib.Harmony harmony;
 
         internal static event EventHandler<VRC_EventDispatcherRFC_TriggerEventArgs> Event_VRC_EventDispatcherRFC_triggerEvent;
 
@@ -28,10 +27,6 @@
 
         private void HookTriggerEvent()
         {
-            if (harmony == null)
-            {
-                harmony = new HarmonyLib.Harmony(BuildInfo.Name + " TriggerEventHook");
-            }
             ModConsole.DebugLog("Hooking TriggerEvent");
             var xrefs = XrefScanner.XrefScan(typeof(VRC_EventDispatcherRFC).GetMethod(nameof(VRC_EventDispatcherRFC.TriggerEvent)));
             foreach (var x in xrefs)
@@ -39,7 +34,7 @@
                 if (x.Type == XrefType.Method && x.TryResolve() != null && x.TryResolve().DeclaringType == typeof(VRC_EventDispatcherRFC))
                 {
                     var methodToPatch = (MethodInfo)x.TryResolve();
-                    _ = harmony.Patch(methodToPatch, GetPatch(nameof(TriggerEventHookEvent)));
+                    new AstroPatch(methodToPatch, GetPatch(nameof(TriggerEventHookEvent)));
                     break;
                 }
             }

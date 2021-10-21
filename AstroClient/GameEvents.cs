@@ -3,6 +3,7 @@
     #region Imports
 
     using AstroClient.Cheetos;
+    using AstroClient.Components;
     using AstroClient.Moderation;
     using AstroClient.Startup.Hooks;
     using AstroClient.Streamer;
@@ -52,8 +53,10 @@
             CheetosHooks.Event_OnShowScreen += Internal_OnShowScreen;
             CheetosHooks.Event_OnPhotonJoin += Internal_OnPhotonPlayerJoined;
             CheetosHooks.Event_OnPhotonLeft += Internal_OnPhotonPlayerLeft;
-            CheetosHooks.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
-            CheetosHooks.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
+            VRChatUIEvents.Event_OnQuickMenuOpen += Internal_OnQuickMenuOpen;
+            VRChatUIEvents.Event_OnQuickMenuClose += Internal_OnQuickMenuClose;
+            VRChatUIEvents.Event_OnBigMenuOpen += Internal_OnBigMenuOpen;
+            VRChatUIEvents.Event_OnBigMenuClose += Internal_OnBigMenuClose;
             CheetosHooks.Event_OnRoomLeft += Internal_OnRoomLeft;
             CheetosHooks.Event_OnRoomJoined += Internal_OnRoomJoined;
             CheetosHooks.Event_OnFriended += Internal_OnFriended;
@@ -171,6 +174,17 @@
         {
             OnQuickMenuClose();
         }
+        private void Internal_OnBigMenuOpen(object sender, EventArgs e)
+        {
+            OnBigMenuOpen();
+        }
+
+        private void Internal_OnBigMenuClose(object sender, EventArgs e)
+        {
+            OnBigMenuClose();
+        }
+
+
 
         private void Internal_OnPhotonPlayerLeft(object sender, PhotonPlayerEventArgs e)
         {
@@ -234,7 +248,7 @@
 
         private void Internal_OnAvatarSpawn(object sender, OnAvatarSpawnArgs e)
         {
-            OnAvatarSpawn(e.VRCAvatarManager, e.Avatar);
+            OnAvatarSpawn(e.Player, e.Avatar, e.VRCAvatarManager, e.VRC_AvatarDescriptor);
         }
 
         internal virtual void VRChat_OnUiManagerInit()
@@ -338,6 +352,17 @@
         {
         }
 
+
+        internal virtual void OnBigMenuOpen()
+        {
+        }
+
+        internal virtual void OnBigMenuClose()
+        {
+        }
+
+
+
         internal virtual void SpawnEmojiRPC(VRCPlayer player, int emoji)
         {
         }
@@ -346,7 +371,7 @@
         {
         }
 
-        internal virtual void OnAvatarSpawn(VRCAvatarManager VRCAvatarManager, GameObject Avatar)
+        internal virtual void OnAvatarSpawn(Player Player, GameObject Avatar, VRCAvatarManager VRCAvatarManager, VRC_AvatarDescriptor VRC_AvatarDescriptor)
         {
         }
 

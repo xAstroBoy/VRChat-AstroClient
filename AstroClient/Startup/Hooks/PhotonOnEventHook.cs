@@ -13,7 +13,6 @@
     using System.Text;
     using UnhollowerBaseLib;
     using UnhollowerRuntimeLib;
-    using Patch = AstroClient.Patch;
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class PhotonOnEventHook : GameEvents
@@ -34,7 +33,7 @@
             unsafe
             {
                 ModConsole.DebugLog("Hooking Photon OnEvent");
-                new Patch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)), GetPatch(nameof(OnEventPatch)));
+                new AstroPatch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.OnEvent)), GetPatch(nameof(OnEventPatch)));
             }
         }
 
