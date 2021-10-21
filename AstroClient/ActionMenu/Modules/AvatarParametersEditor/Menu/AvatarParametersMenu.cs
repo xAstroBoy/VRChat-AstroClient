@@ -102,7 +102,7 @@ namespace AstroClient.AvatarParametersEditor
 
                         CustomSubMenu.AddToggle("Lock", filtered.Any(Parameters.IsLocked),
                             (state) => { filtered.ForEach(state ? Parameters.Lock : Parameters.Unlock); },
-                            CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(),
+                        CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(),
                                 "AstroClient.Resources.locked.png")));
                         CustomSubMenu.AddButton("Save", () => Parameters.StoreParameters(manager),
                             CheetoUtils.LoadPNG(CheetoUtils.ExtractResource(Assembly.GetExecutingAssembly(),
