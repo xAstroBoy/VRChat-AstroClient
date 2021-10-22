@@ -384,7 +384,7 @@
     <Compile Include="CheetosUI\CheetoMenu.cs" />
     <Compile Include="Buttons\AdminMenu.cs" />
     <Compile Include="Cheetos\ForceClone.cs" />
-    <Compile Include="Cheetos\CameraStuff\CLIPPING.cs" />
+    <Compile Include="Cheetos\CameraStuff\PlayerCameraEditor.cs" />
     <Compile Include="Cheetos\PlayerListData.cs" />
     <Compile Include="Cheetos\VRCPlusHider.cs" />
     <Compile Include="Cheetos\CheetosTestStuff.cs" />

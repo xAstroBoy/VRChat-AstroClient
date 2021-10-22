@@ -273,12 +273,11 @@
         {
             if (Utils.LocalPlayer != null)
             {
-                var PlayerHeadTransform = Utils.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(HumanBodyBones.Head);
-                if (PlayerHeadTransform != null)
+                if (PlayerCameraEditor.PlayerCamera.gameObject != null)
                 {
                     if (FullBrightLight == null)
                     {
-                        FullBrightLight = PlayerHeadTransform.gameObject.AddComponent<Light>();
+                        FullBrightLight = PlayerCameraEditor.PlayerCamera.gameObject.AddComponent<Light>();
                     }
                     if (value)
                     {
