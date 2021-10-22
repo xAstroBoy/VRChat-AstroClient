@@ -54,7 +54,7 @@
             {
                 if (__0 == 7 || __0 == 206 || __0 == 201 || __0 == 1)
                 {
-                    return !MovementSerializer.Enabled;
+                    return !MovementSerializer.SerializerActivated;
                 }
             }
             catch { }

@@ -101,12 +101,14 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
-    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\Menu\Avatar.cs" />
-    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\Menu\AvatarParametersMenu.cs" />
-    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\Menu\CameraUtils.cs" />
-    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\Menu\RefCountedObject.cs" />
-    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\Menu\Sigh.cs" />
-    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\ParametersEditorResources.cs" />
+    <Compile Include="ActionMenu\Modules\ESPModule.cs" />
+    <Compile Include="ActionMenu\Modules\MovementModule.cs" />
+    <Compile Include="ActionMenu\Modules\AvatarParametersModule\Menu\Avatar.cs" />
+    <Compile Include="ActionMenu\Modules\AvatarParametersModule\Menu\AvatarParametersMenu.cs" />
+    <Compile Include="ActionMenu\Modules\AvatarParametersModule\Menu\CameraUtils.cs" />
+    <Compile Include="ActionMenu\Modules\AvatarParametersModule\Menu\RefCountedObject.cs" />
+    <Compile Include="ActionMenu\Modules\AvatarParametersModule\Menu\Sigh.cs" />
+    <Compile Include="ActionMenu\Modules\AvatarParametersModule\ParametersEditorResources.cs" />
     <Compile Include="ActionMenu\MenuAPI\Api\ActionMenuPage.cs" />
     <Compile Include="ActionMenu\MenuAPI\Api\AMUtils.cs" />
     <Compile Include="ActionMenu\MenuAPI\Api\CustomSubMenu.cs" />
@@ -129,9 +131,7 @@
     <Compile Include="ActionMenu\MenuAPI\Types\ActionMenuPageType.cs" />
     <Compile Include="ActionMenu\MenuAPI\Types\Insertion.cs" />
     <Compile Include="ActionMenu\MenuAPI\Types\PedalType.cs" />
-    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\Menu\RefCountedObject.cs" />
-    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\Menu\Sigh.cs" />
-    <Compile Include="ActionMenu\Modules\AvatarParametersEditor\Menu\AvatarParametersMenu.cs" />
+    <Compile Include="ActionMenu\Modules\LightsModule.cs" />
     <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\BlazesAPIs.cs" />
     <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\SM\SMButton.cs" />
     <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\SM\SMList.cs" />

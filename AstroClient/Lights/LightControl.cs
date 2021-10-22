@@ -6,6 +6,7 @@
     using AstroButtonAPI;
     using System;
     using System.Linq;
+    using AvatarParametersEditor;
     using UnityEngine;
     using UnityEngine.Rendering;
     using static AstroClient.Variables.CustomLists;
@@ -25,13 +26,13 @@
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
         {
-            FogEnabled = RenderSettings.fog;
             UpdateFogSwitch();
             HasOriginalRenderEditSettings = true;
             HasBackuppedRenderSettings = false;
             IsHeadLightActive = false;
             HasLightmapsStored = false;
             AreLightMapsEnabled = true;
+            _isRenderFullbrightActive = false;
             //if (ToggleLightmaps != null)
             //{
             //    ToggleLightmaps.SetToggleState(AreLightMapsEnabled);
@@ -46,6 +47,7 @@
             }
         }
 
+
         internal static void ToggleFog(bool value)
         {
             if (!HasBackuppedRenderSettings)
@@ -54,7 +56,6 @@
             }
 
             HasOriginalRenderEditSettings = false;
-            FogEnabled = value;
             RenderSettings.fog = value;
             UpdateFogSwitch();
         }
@@ -330,13 +331,44 @@
             }
         }
 
+        private static bool _isRenderFullbrightActive;
+
+        internal static bool FullbrightByRender
+        {
+            get
+            {
+                return _isRenderFullbrightActive;
+            }
+            set
+            {
+                if (value == _isRenderFullbrightActive)
+                {
+                    return;
+                }
+
+                if (value)
+                {
+                    SetRenderSettings();
+                }
+                else
+                {
+                    RestoreRenderSettings();
+                }
+                if (ToggleFullbright != null)
+                {
+                    ToggleFullbright.SetToggleState(value);
+                }
+            }
+        }
+
+
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             var temp = new QMNestedButton(menu, x, y, "Light Menu", "Control Avatar & World Lights!", null, null, null, null, btnHalf);
 
             ToggleFullbright = new QMSingleToggleButton(temp, 1, 0, "Player Headlight: ON", () => { IsHeadLightActive = true; }, "Player Headlight: OFF", () => { IsHeadLightActive = false; }, "Toggle Player Headlight", Color.green, Color.red, null, false, true);
 
-            RenderFullbrightToggle = new QMSingleToggleButton(temp, 1, 0.5f, "Render Fullbright: ON", () => { SetRenderSettings(); }, "Render Fullbright: OFF", () => { RestoreRenderSettings(); }, "Tweaks Level RenderSettings To Make the whole place Visible.", Color.green, Color.red, null, false, true);
+            RenderFullbrightToggle = new QMSingleToggleButton(temp, 1, 0.5f, "Render Fullbright: ON", () => { FullbrightByRender = true;  }, "Render Fullbright: OFF", () => { FullbrightByRender = false;  }, "Tweaks Level RenderSettings To Make the whole place Visible.", Color.green, Color.red, null, false, true);
             FogSwitch = new QMSingleToggleButton(temp, 1, 1f, "FOG: ON", () => { ToggleFog(true); }, "FOG: OFF", () => { ToggleFog(false); }, "Tweaks Level RenderSettings Fog.", Color.green, Color.red, null, false, true);
 
             _ = new QMSingleButton(temp, 2, 0, "Spawn Flashlight", () => { Astro_Flashlight.SpawnFlashlight(); }, "Spawn a Flashlight", null, null, true);
@@ -381,8 +413,6 @@
         private static LightType Originalsuntype { get; set; }
         private static Color Originalsuncolor { get; set; }
         private static float Originalsunintensity { get; set; }
-        private static bool FogEnabled { get; set; }
-
         private static bool HasLightmapsStored { get; set; } = false;
         private static bool AreLightMapsEnabled { get; set; } = true;
         internal static QMSingleToggleButton FogSwitch { get; set; }

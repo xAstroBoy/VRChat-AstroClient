@@ -344,7 +344,7 @@
                     SerializerRot = new Quaternion(0, 0, 0, 0);
                     SerializerPos = Vector3.zero;
                 }
-                MovementSerializer.Enabled = value;
+                MovementSerializer.SerializerActivated = value;
             }
         }
 
