@@ -41,9 +41,13 @@
                 hunters.Clear();
                 for (int i = 2; i < WorldUtils.Pickups.Count; i++)
                 {
-                    hunters.Add(new Hunter() { pickup = WorldUtils.Pickups[i] });
+                    var pu = WorldUtils.Pickups[i];
+                    if (pu.enabled == false) continue;
+                    if (pu.gameObject.active == false) continue;
+                    hunters.Add(new Hunter() { pickup = pu });
                 }
                 //hunters.Add(new Hunter() { pickup = WorldUtils.Pickups[2] });
+                ModConsole.Log("Pickups located");
                 hunters.ForEach(x => { ModConsole.Log(x.pickup.name); });
                 RefreshInfo();
             }, "", btnHalf: true);
@@ -63,23 +67,26 @@
                 {
                     for (int i = 0; i < hunters.Count; i++)
                     {
-                        new Pathfinder().GetPath(hunters[i].pickup.transform.position, (Vector3)targetedPlayer.Get_Player_Bone_Position(HumanBodyBones.Chest), coarseness, maxInterPerFrame, (x) =>
+                        new Pathfinder().GetPath(hunters[i].pickup.transform.position, (Vector3)targetedPlayer.Get_Player_Bone_Position(HumanBodyBones.Chest), coarseness, maxInterPerFrame, (x, a) =>
                         {
-                            foreach (var p in x.points)
-                            {
-                                var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                                obj.transform.position = p;
-                                obj.transform.localScale = Vector3.one * coarseness;
-                                UnityEngine.Object.Destroy(obj.GetComponent<Collider>());
-                                obj.RigidBody_Set_Gravity(false);
-                                indicators.Add(obj);
-                            }
-                            hunters[i].path = x.points;
+                            //indicators
+                            //foreach (var p in x.points)
+                            //{
+                            //    var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                            //    obj.transform.position = p;
+                            //    obj.transform.localScale = Vector3.one * coarseness;
+                            //    UnityEngine.Object.Destroy(obj.GetComponent<Collider>());
+                            //    obj.RigidBody_Set_Gravity(false);
+                            //    indicators.Add(obj);
+                            //}
+                            int index = (int)a[0];
+                            ModConsole.Log(index.ToString());
+                            hunters[index].path = x.points;
                             if (followingState)
                             {
-                                hunters[i].startFollow();
+                                hunters[index].startFollow();
                             }
-                        });
+                        }, new object[] { i });
                     }
                 }
             }, "Try to create a path");
@@ -193,7 +200,7 @@
         internal class Hunter
         {
             internal VRC_Pickup pickup;
-            internal Coroutine coroutine = null;
+            internal object coroutine = null;
             internal bool following = false;
             internal Vector3[] path;
             internal void startFollow()
@@ -201,7 +208,7 @@
                 following = true;
                 t = 1;
                 pind = 0;
-                coroutine = (Coroutine)MelonLoader.MelonCoroutines.Start(follow());
+                coroutine = MelonLoader.MelonCoroutines.Start(follow());
             }
             internal void stopFollow()
             {
@@ -216,6 +223,11 @@
             {
                 while (following)
                 {
+                    if (path == null)
+                    {
+                        //ModConsole.Log("PATH IS FUCKED");
+                        yield break;
+                    }
                     if (t >= 1)
                     {
                         if (pind == path.Length) yield break;
@@ -226,7 +238,7 @@
                         pdist = Vector3.Distance(start, end);
                     }
                     pickup.transform.position = Vector3.Lerp(start, end, t);
-                    t += (Time.deltaTime / pdist) * 2;
+                    t += (Time.deltaTime / pdist);
                     yield return null;
                 }
             }

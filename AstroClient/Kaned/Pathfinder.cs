@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Kaned
 {
+    using AstroLibrary.Console;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -8,17 +9,27 @@
 
     internal class Pathfinder
     {
+        internal static Dictionary<float, Dictionary<(int x, int y, int z), bool>> fullGridCache = new Dictionary<float, Dictionary<(int x, int y, int z), bool>>();
+
         internal Vector3[] points = null;
         internal bool foundPath = false;
-        internal bool halted = false;
 
-        internal void GetPath(Vector3 startPos, Vector3 endPos, float coarseness = 0.2f, int maxIterationsPerFrame = 10, Action<Pathfinder> onComplete = null)
+        internal void GetPath(Vector3 startPos, Vector3 endPos, float coarseness = 0.2f, int maxIterationsPerFrame = 10, Action<Pathfinder, object[]> onComplete = null, object[] actionArgs = null)
         {
-            var c = (Coroutine)MelonLoader.MelonCoroutines.Start(Pathfind());
+            //get the grid cache if it exists and if it doesnt add it
+            Dictionary<(int x, int y, int z), bool> gridCache = null;
+            if (fullGridCache.TryGetValue(coarseness, out var val))
+            {
+                gridCache = val;
+            }
+            else
+            {
+                gridCache = new Dictionary<(int x, int y, int z), bool>();
+                fullGridCache.Add(coarseness, gridCache);
+            }
+            _ = MelonLoader.MelonCoroutines.Start(Pathfind());
             IEnumerator Pathfind()
             {
-                //layer 9 for other players
-                //layer 10 for local player
                 var finalmask = ~LayerMask.GetMask(new string[] { "Player", "PlayerLocal", "UiMenu" });
                 startPos /= coarseness;
                 endPos /= coarseness;
@@ -63,7 +74,7 @@
                         }
                         points = pPoints.ToArray();
                         foundPath = true;
-                        if (onComplete != null) onComplete(this);
+                        if (onComplete != null) onComplete(this, actionArgs);
 
                         yield break;
                     }
@@ -101,7 +112,7 @@
                         yield return new WaitForEndOfFrame();
                     }
                 }
-                if (halted) yield break;
+                ModConsole.Log("Failed to find path");
                 List<PathingTile> GetWalkableTiles(PathingTile ct, PathingTile targetTile)
                 {
                     //this is this way because i was too lazy to figure out automatic code for it     shouldn't be hard
@@ -137,8 +148,7 @@
                     };
 
                     possibleTiles.ForEach(tile => tile.SetDistance(targetTile.pos));
-
-                    return possibleTiles.Where(tile => !Physics.CheckBox(((Vector3)tile.pos) * coarseness, Vector3.one * (coarseness / 2f), Quaternion.identity, finalmask) || tile.pos == endPos).ToList();
+                    return possibleTiles.Where(tile => (gridCache.TryGetValue(((int)tile.pos.x, (int)tile.pos.y, (int)tile.pos.z), out bool state) ? state : !Physics.CheckBox(((Vector3)tile.pos) * coarseness, Vector3.one * (coarseness / 2f), Quaternion.identity, finalmask)) || tile.pos == endPos).ToList();
                 }
             }
         }
