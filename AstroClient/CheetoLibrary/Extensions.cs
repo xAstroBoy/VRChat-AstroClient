@@ -1,12 +1,58 @@
-﻿namespace AstroClient.Cheetos
+﻿namespace CheetoLibrary
 {
     using AstroLibrary.Misc.Api.Object;
     using AstroNetworkingLibrary.Serializable;
     using UnityEngine;
     using VRC.Core;
 
-    internal static class CheetosExtensions
+    internal static class Extensions
     {
+        public static void CleanButtonsNestedMenu(this GameObject Parent)
+        {
+            var ButtonToDelete = Parent.GetComponentsInChildren<UnityEngine.UI.Button>(true);
+            foreach (var Button in ButtonToDelete)
+            {
+                if (Button.name.Contains("Camera") || Button.name == "Button_Panorama" || Button.name == "Button_Screenshot"
+                    || Button.name == "Button_VrChivePano" || Button.name == "Button_DynamicLight")
+                    UnityEngine.Object.Destroy(Button.gameObject);
+            }
+
+            var ButtonToDelete2 = Parent.GetComponentsInChildren<UnityEngine.UI.Toggle>(true);
+            foreach (var Button in ButtonToDelete2)
+            {
+                if (Button.name == "Button_Steadycam")
+                    UnityEngine.Object.Destroy(Button.gameObject);
+            }
+        }
+
+        public static TMPro.TextMeshProUGUI NewText(this GameObject Parent, string search)
+        {
+            TMPro.TextMeshProUGUI text = new TMPro.TextMeshProUGUI();
+
+            var TextTop = Parent.GetComponentsInChildren<TMPro.TextMeshProUGUI>();
+            foreach (TMPro.TextMeshProUGUI texto in TextTop)
+            {
+                if (texto.name == search)
+                    text = texto;
+            }
+
+            return text;
+        }
+
+        internal static GameObject FindObject(this GameObject parent, string name)
+        {
+            Transform[] trs = parent.GetComponentsInChildren<Transform>(true);
+            for (int i = 0; i < trs.Length; i++)
+            {
+                Transform t = trs[i];
+                if (t.name == name)
+                {
+                    return t.gameObject;
+                }
+            }
+            return null;
+        }
+
         internal static AvatarData GetAvatarData(this ApiAvatar instance)
         {
             return new AvatarData()

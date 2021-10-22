@@ -7,6 +7,7 @@
     using AstroLibrary.Utility;
     using AstroButtonAPI;
     using UnityEngine;
+    using CheetoLibrary;
 
     #endregion Imports
 
@@ -31,7 +32,7 @@
 
             setPCSpeedButton = new QMSingleButton(mainButton, 1, 2, "Set\nPC\nSpeed", delegate ()
             {
-                CheetosHelpers.PopupCall("Set PC Speed", "Done", "Enter Speed. . .", true, delegate (string text)
+                CheetoUtils.PopupCall("Set PC Speed", "Done", "Enter Speed. . .", true, delegate (string text)
                 {
                     float value = 0f;
 
@@ -56,7 +57,7 @@
 
             setVRSpeedButton = new QMSingleButton(mainButton, 2, 2, "Set\nVR\nSpeed", delegate ()
             {
-                CheetosHelpers.PopupCall("Set VR Speed", "Done", "Enter Speed. . .", true, delegate (string text)
+                CheetoUtils.PopupCall("Set VR Speed", "Done", "Enter Speed. . .", true, delegate (string text)
                 {
                     float value = 0f;
 

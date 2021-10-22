@@ -6,6 +6,7 @@
     using AstroLibrary.Utility;
     using AstroButtonAPI;
     using UnityEngine;
+    using CheetoLibrary;
 
     internal class SettingsMenuBtn
     {
@@ -110,7 +111,7 @@
 
             _ = new QMSingleButton(subSpoofButton, 2, 1, "Set\nFPS\nValue", () =>
               {
-                  CheetosHelpers.PopupCall("Set FPS Value", "Done", "Enter FPS. . .", true, delegate (string text)
+                  CheetoUtils.PopupCall("Set FPS Value", "Done", "Enter FPS. . .", true, delegate (string text)
                   {
                       float value = 0f;
 
@@ -131,7 +132,7 @@
 
             _ = new QMSingleButton(subSpoofButton, 3, 1, "Set\nPing\nValue", () =>
               {
-                  CheetosHelpers.PopupCall("Set Ping Value", "Done", "Enter Ping. . .", true, delegate (string text)
+                  CheetoUtils.PopupCall("Set Ping Value", "Done", "Enter Ping. . .", true, delegate (string text)
                   {
                       short value = 0;
 

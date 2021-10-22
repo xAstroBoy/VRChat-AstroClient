@@ -21,7 +21,7 @@
 
         internal static string[] DebugLibraryPaths =
         {
-            @"Debug\Libs\AstroLibrary.dll",
+            //@"Debug\Libs\AstroLibrary.dll",
         };
 
         internal static string[] DebugModulePaths =

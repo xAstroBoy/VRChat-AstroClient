@@ -24,7 +24,7 @@
                     }
                     catch (Exception ex)
                     {
-                        ModConsole.Error(ex.ToString());
+                        ModConsole.Exception(ex.ToString());
                     }
                 }
                 return;

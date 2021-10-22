@@ -80,8 +80,8 @@
         {
             JarRoleLinks.Clear();
             RoleEspComponents.Clear();
-            Murder4RolesRevealerToggle.SetToggleState(false);
-            AmongUSRolesRevealerToggle.SetToggleState(false);
+            //Murder4RolesRevealerToggle.SetToggleState(false);
+            //AmongUSRolesRevealerToggle.SetToggleState(false);
             _CurrentPlayerRoleESP = null;
             ViewRoles = false;
             IsAmongUsWorld = false;
