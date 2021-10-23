@@ -45,6 +45,11 @@
             {
                 RenderFullbrightToggle.SetToggleState(false);
             }
+
+            if (FullBrightLight != null)
+            {
+                FullBrightLight.DestroyMeLocal();
+            }
         }
 
 
@@ -341,11 +346,7 @@
             }
             set
             {
-                if (value == _isRenderFullbrightActive)
-                {
-                    return;
-                }
-
+                _isRenderFullbrightActive = value;
                 if (value)
                 {
                     SetRenderSettings();
