@@ -73,25 +73,34 @@
             if (packetData.NetworkEventID == PacketServerType.AUTH_SUCCESS)
             {
                 KeyManager.IsAuthed = true;
+                Console.WriteLine("Asking for resources..");
                 Client.Send(new PacketData(PacketClientType.GET_RESOURCES));
             }
 
             if (packetData.NetworkEventID == PacketServerType.LOADER_LIBRARY)
             {
+                Console.WriteLine("Received: Library");
                 var data = Convert.FromBase64String(packetData.TextData);
                 LibraryFiles.Add(data);
             }
 
             if (packetData.NetworkEventID == PacketServerType.LOADER_MELON)
             {
+                Console.WriteLine("Received: Melon");
                 var data = Convert.FromBase64String(packetData.TextData);
                 MelonFiles.Add(data);
             }
 
             if (packetData.NetworkEventID == PacketServerType.LOADER_MODULE)
             {
+                Console.WriteLine("Received: Module");
                 var data = Convert.FromBase64String(packetData.TextData);
                 ModuleFiles.Add(data);
+            }
+
+            if (packetData.NetworkEventID == PacketServerType.DEBUG)
+            {
+                Console.WriteLine(packetData.TextData);
             }
 
             if (packetData.NetworkEventID == PacketServerType.LOADER_DONE)

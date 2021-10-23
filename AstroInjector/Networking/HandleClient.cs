@@ -3,6 +3,7 @@
     using AstroNetworkingLibrary.Serializable;
     using System;
     using System.Net.Sockets;
+    using System.Threading;
     using System.Threading.Tasks;
 
     internal class HandleClient
@@ -84,7 +85,7 @@
             }
         }
 
-        internal void Send(PacketData packetData) // 0 = text, 1 = data
+        internal void Send(PacketData packetData)
         {
             var bson = BSonWriter.ToBson(packetData);
             var bytes = bson.ConvertToBytes();
@@ -162,7 +163,7 @@
             }
 
             int len = ReceiveHeaderLength();
-
+            Console.WriteLine($"len: {len}");
             if (len > 0)
             {
                 int remaining = len;
@@ -178,12 +179,31 @@
                     {
                         byte[] received = new byte[toRead];
                         int read = clientStream.Read(received, 0, received.Length);
+                        if (read > 0)
+                        {
+                            totalRead += read;
+                            remaining -= read;
 
-                        totalRead += read;
-                        remaining -= read;
-
-                        received.CopyTo(data, totalRead - read);
-                    }
+                            if (read != toRead)
+                            {
+                                //Console.WriteLine($"WARNING: Possible internet issue? Read {read} excpected to read {toRead}..");
+                            }
+                            Console.WriteLine($"Downloading: {totalRead} / {remaining} / {len} - {read}/{toRead}");
+                            //Console.WriteLine($"----------" +
+                            //    $"\r\n read: {read}" +
+                            //    $"\r\n toRead: {toRead}" +
+                            //    $"\r\n remaining: {remaining}" +
+                            //    $"\r\n totalRead: {totalRead}");
+                            received.CopyTo(data, totalRead - read);
+                        }
+                        else
+                        {
+                            //remaining = 0;
+                            Console.WriteLine($"ERROR: 0x000001A");
+                            Console.WriteLine($"{totalRead}/{len}");
+                            Thread.Sleep(1000);
+                        }
+                    } 
                     catch
                     {
                         Disconnect();
@@ -192,6 +212,7 @@
 
                 string base64 = data.ConvertToString();
                 var packetData = BSonWriter.FromBson<PacketData>(base64);
+                Console.WriteLine($"Received ({packetData.NetworkEventID}): {data.Length}/{len}");
                 ReceivedPacket?.Invoke(this, new ReceivedPacketEventArgs(ClientID, packetData));
             }
         }

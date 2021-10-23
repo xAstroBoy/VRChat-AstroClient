@@ -79,7 +79,7 @@
             }
         }
 
-        public void Send(PacketData packetData) // 0 = text, 1 = data
+        public void Send(PacketData packetData)
         {
             var bson = BSonWriter.ToBson(packetData);
             var bytes = bson.ConvertToBytes();
@@ -157,7 +157,6 @@
             }
 
             int len = ReceiveHeaderLength();
-
             if (len > 0)
             {
                 int remaining = len;
