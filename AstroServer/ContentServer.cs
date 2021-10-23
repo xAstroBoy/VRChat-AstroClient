@@ -196,7 +196,14 @@
                                 var path = Environment.CurrentDirectory + libPath;
                                 byte[] data = File.ReadAllBytes(path);
                                 var converted = Convert.ToBase64String(data);
-                                client.Send(new PacketData(PacketServerType.LOADER_MELON, converted));
+
+                                var packet = new PacketData(PacketServerType.LOADER_MELON, converted);
+
+                                var bson = BSonWriter.ToBson(packet);
+                                var bytes = bson.ConvertToBytes();
+
+                                client.Send(new PacketData(PacketServerType.DEBUG, $"[SERVER] Sending Melon: {bytes.Length} - {libPath}"));
+                                client.Send(packet);
                             }
                             catch (Exception e)
                             {
@@ -219,6 +226,7 @@
                             }
                         }
 
+                        Console.WriteLine("Sent Everything..");
                         client.Send(new PacketData(PacketServerType.LOADER_DONE));
                         break;
                     }
