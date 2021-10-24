@@ -333,6 +333,7 @@
     <Compile Include="Streamer\StreamerNotifier.cs" />
     <Compile Include="Streamer\Streamers.cs" />
     <Compile Include="Streamer\StreamerTags.cs" />
+    <Compile Include="Utils\UdonSearcher\UdonReplacer.cs" />
     <Compile Include="Udon\UdonEditor\Il2CppConverter.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapUnboxerUtils.cs" />
     <Compile Include="Udon\UdonEditor\UdonHeapParser.cs" />
