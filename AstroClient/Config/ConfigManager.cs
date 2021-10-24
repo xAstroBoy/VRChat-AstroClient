@@ -29,7 +29,7 @@
 
         private static string ConfigFolder = Environment.CurrentDirectory + @"\AstroClient";
 
-        private static string ConfigLewdifyPath = ConfigFolder + @"\Lewdify";
+        internal static string ConfigTempFolder = ConfigFolder + @"\Temp";
 
         private static string ConfigPath = ConfigFolder + @"\Config.json";
 
@@ -175,10 +175,10 @@
                 ModConsole.DebugWarning($"ConfigPerformance File Created: {ConfigPerformancePath}");
             }
 
-            if (!Directory.Exists(ConfigLewdifyPath))
+            if (!Directory.Exists(ConfigTempFolder))
             {
-                _ = Directory.CreateDirectory(ConfigLewdifyPath);
-                ModConsole.DebugWarning($"ConfigLewdify File Created: {ConfigLewdifyPath}");
+                _ = Directory.CreateDirectory(ConfigTempFolder);
+                ModConsole.DebugWarning($"ConfigTempFolder File Created: {ConfigTempFolder}");
             }
 
             SaveMutex.ReleaseMutex();

@@ -1,6 +1,9 @@
 ﻿namespace AstroLibrary.Extensions
 {
+    using System;
     using System.Collections.Generic;
+    using System.Data.Objects;
+    using System.Text.RegularExpressions;
 
     public static class CodingExtensions
     {
@@ -17,5 +20,16 @@
         public static bool IsNotNull<T>(this T? obj) where T : struct => obj.HasValue;
 
         public static bool IsNotNullOrEmptyOrWhiteSpace(this string obj) => !string.IsNullOrEmpty(obj) && !string.IsNullOrWhiteSpace(obj);
+
+        internal static string ReplaceWholeWord(this string original, string wordToFind, string replacement, RegexOptions regexOptions = RegexOptions.IgnoreCase)
+        {
+            return Regex.Replace(original, wordToFind, replacement, regexOptions);
+        }
+
+        internal static bool ContainsString(this string value, string wordToFind, RegexOptions regexOptions = RegexOptions.IgnoreCase)
+        {
+            return Regex.IsMatch(value, wordToFind, regexOptions);
+        }
+
     }
 }
