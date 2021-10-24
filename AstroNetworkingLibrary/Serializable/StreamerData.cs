@@ -6,6 +6,6 @@
     [Serializable]
     internal class StreamerData
     {
-        public List<string> StreamerNames;
+        //public List<string> StreamerNames;
     }
 }
