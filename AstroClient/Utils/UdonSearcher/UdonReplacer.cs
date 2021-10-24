@@ -135,65 +135,65 @@
 
                                                     break;
                                                 }
-                                            // TODO: FIX WEIRD BUG, IT GETS FLAGGED AS BOOL.
-                                            case UdonTypes_String.UnityEngine_TextAsset:
-                                                {
-                                                    ModConsole.DebugLog($"Single UnityEngine_TextAsset");
-                                                    var item = UnboxVariable.Unpack_TextAsset();
-                                                    ModConsole.DebugLog($"Result is : {item.text}");
-                                                    if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
-                                                    {
-                                                        if (item.text.ContainsString(find))
-                                                        {
-                                                            var patchedstr = item.text.ReplaceWholeWord(find, replacement);
-                                                            if (item.SetValue(patchedstr))
-                                                            {
-                                                                result++;
-                                                                UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, item, true);
-                                                            }
+                                            // TODO: Figure how to edit it .
+                                            //case UdonTypes_String.UnityEngine_TextAsset:
+                                            //    {
+                                            //        ModConsole.DebugLog($"Single UnityEngine_TextAsset");
+                                            //        var item = UnboxVariable.Unpack_TextAsset();
+                                            //        ModConsole.DebugLog($"Result is : {item.text}");
+                                            //        if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
+                                            //        {
+                                            //            if (item.text.ContainsString(find))
+                                            //            {
+                                            //                var patchedstr = item.text.ReplaceWholeWord(find, replacement);
+                                            //                if (item.SetValue(patchedstr))
+                                            //                {
+                                            //                    result++;
+                                            //                    UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, item, true);
+                                            //                }
 
-                                                        }
-                                                    }
+                                            //            }
+                                            //        }
 
-                                                    break;
-                                                }
-                                            case UdonTypes_String.UnityEngine_TextAsset_Array:
-                                                {
-                                                    var list = UnboxVariable.Unpack_List_TextAsset();
-                                                    if (list.Count() != 0)
-                                                    {
-                                                        var patchedlist = new List<UnityEngine.TextAsset>();
-                                                        bool modified = false;
-                                                        foreach (var item in list)
-                                                        {
-                                                            if (item.text != null &&
-                                                                item.text.IsNotNullOrEmptyOrWhiteSpace())
-                                                            {
-                                                                if (item.text.ContainsString(find))
-                                                                {
-                                                                    result++;
-                                                                    var patchedstr = item.text.ReplaceWholeWord(find, replacement);
-                                                                    if (item.SetValue(patchedstr))
-                                                                    {
-                                                                        patchedlist.Add(item);
-                                                                        modified = true;
-                                                                    }
-                                                                }
-                                                                else
-                                                                {
-                                                                    patchedlist.Add(item);
-                                                                }
-                                                            }
-                                                        }
+                                            //        break;
+                                            //    }
+                                            //case UdonTypes_String.UnityEngine_TextAsset_Array:
+                                            //    {
+                                            //        var list = UnboxVariable.Unpack_List_TextAsset();
+                                            //        if (list.Count() != 0)
+                                            //        {
+                                            //            var patchedlist = new List<UnityEngine.TextAsset>();
+                                            //            bool modified = false;
+                                            //            foreach (var item in list)
+                                            //            {
+                                            //                if (item.text != null &&
+                                            //                    item.text.IsNotNullOrEmptyOrWhiteSpace())
+                                            //                {
+                                            //                    if (item.text.ContainsString(find))
+                                            //                    {
+                                            //                        result++;
+                                            //                        var patchedstr = item.text.ReplaceWholeWord(find, replacement);
+                                            //                        if (item.SetValue(patchedstr))
+                                            //                        {
+                                            //                            patchedlist.Add(item);
+                                            //                            modified = true;
+                                            //                        }
+                                            //                    }
+                                            //                    else
+                                            //                    {
+                                            //                        patchedlist.Add(item);
+                                            //                    }
+                                            //                }
+                                            //            }
 
-                                                        if (modified)
-                                                        {
-                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), true);
-                                                        }
-                                                    }
+                                            //            if (modified)
+                                            //            {
+                                            //                UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), true);
+                                            //            }
+                                            //        }
 
-                                                    break;
-                                                }
+                                                //    break;
+                                                //}
                                             default:
                                                 continue;
                                         }
