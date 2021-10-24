@@ -16,11 +16,8 @@
     internal static class UdonReplacer
     {
 
-
         internal static void ReplaceString(string find, string replace)
         {
-            if (!find.IsNotNullOrEmptyOrWhiteSpace()) return;
-
             var udons = GameObjectFinder.GetRootGameObjectsComponents<UdonBehaviour>();
             int result = 0;
             if (udons.Count() != 0)
@@ -43,230 +40,179 @@
                                 var UnboxVariable = unpackedudon.IUdonHeap.GetHeapVariable(address);
                                 if (UnboxVariable != null)
                                 {
-                                    var ObjectType = UnboxVariable.GetIl2CppType();
-                                    if (ObjectType == null) continue;
                                     try
                                     {
-
-                                        if (ObjectType.Equals(Il2CppType.Of<System.String>()))
+                                        switch (UnboxVariable.GetIl2CppType().FullName)
                                         {
-                                            var item = UnboxVariable.Unpack_String();
-                                            if (item != null && item.IsNotNullOrEmptyOrWhiteSpace())
-                                            {
-                                                if (item.ToLower().Equals(find.ToLower()) ||
-                                                    item.ToLower().Contains(find.ToLower()))
+                                            case UdonTypes_String.System_String:
                                                 {
-                                                    result++;
-                                                    var patch = item.Replace(find, replace);
-                                                    UdonHeapEditor.PatchHeap(unpackedudon, symbol, item, true);
-
-                                                }
-                                            }
-
-                                        }
-                                        else if (ObjectType.Equals(Il2CppType.Of<System.String[]>()))
-                                        {
-                                            var list = UnboxVariable.Unpack_List_String();
-                                            if (list.Count() != 0)
-                                            {
-                                                var patchedlist = new List<string>();
-                                                bool modified = false;
-                                                foreach (var value in list)
-                                                {
-                                                    if (value != null && value.IsNotNullOrEmptyOrWhiteSpace())
+                                                    var item = UnboxVariable.Unpack_String();
+                                                    if (item != null && item.IsNotNullOrEmptyOrWhiteSpace())
                                                     {
-                                                        if (value.ToLower().Equals(find.ToLower()) ||
-                                                            value.ToLower().Contains(find.ToLower()))
+                                                        if (item.ToLower().Equals(find.ToLower()) || item.ToLower().Contains(find.ToLower()))
                                                         {
                                                             result++;
-                                                            var patched = value.Replace(find, replace);
-                                                            patchedlist.Add(patched);
-                                                            modified = true;
-                                                        }
-                                                        else
-                                                        {
-                                                            patchedlist.Add(value);
+                                                            var patch = item.Replace(find, replace);
+                                                            ModConsole.DebugLog("Found a single string match!");
+                                                            UdonHeapEditor.PatchHeap(unpackedudon, symbol, patch, true);
+
                                                         }
                                                     }
-                                                }
 
-                                                if (modified)
-                                                {
-                                                    UdonHeapEditor.PatchHeap(unpackedudon, symbol,
-                                                        patchedlist.ToArray(), true);
+                                                    break;
                                                 }
-                                            }
-                                        }
-                                        else if (ObjectType.Equals(Il2CppType.Of<TMPro.TextMeshPro>()))
-                                        {
-                                            var item = UnboxVariable.Unpack_TextMeshPro();
-                                            if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
+                                            case UdonTypes_String.System_String_Array:
+                                                {
+                                                    var list = UnboxVariable.Unpack_List_String();
+                                                    if (list.Count() != 0)
+                                                    {
+                                                        var patchedlist = new List<string>();
+                                                        bool modified = false;
+                                                        foreach (var value in list)
+                                                        {
+                                                            if (value != null && value.IsNotNullOrEmptyOrWhiteSpace())
+                                                            {
+                                                                if (value.ToLower().Equals(find.ToLower()) || value.ToLower().Contains(find.ToLower()))
+                                                                {
+                                                                    result++;
+                                                                    var patched = value.Replace(find, replace);
+                                                                    patchedlist.Add(patched);
+                                                                    modified = true;
+                                                                    ModConsole.DebugLog("Found a match in a Array!");
+                                                                }
+                                                                else
+                                                                {
+                                                                    patchedlist.Add(value);
+                                                                }
+                                                            }
+                                                        }
+                                                        if (modified)
+                                                        {
+                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), true);
+                                                        }
+                                                    }
+                                                    
+
+                                                    break;
+                                                }
+                                            case UdonTypes_String.TMPro_TextMeshPro:
                                             {
-                                                if (item.text.ToLower().Equals(find.ToLower()) ||
-                                                    item.text.ToLower().Contains(find.ToLower()))
-                                                {
-                                                    result++;
-                                                    item.text = item.text.Replace(find, replace);
-                                                    UdonHeapEditor.PatchHeap(unpackedudon, symbol, item, true);
+                                                    var item = UnboxVariable.Unpack_TextMeshPro();
+                                                    if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
+                                                    {
+                                                        if (item.text.ToLower().Equals(find.ToLower()) || item.text.ToLower().Contains(find.ToLower()))
+                                                        {
+                                                            result++;
+                                                            item.text = item.text.Replace(find, replace);
+                                                            ModConsole.DebugLog("Found a single string match!");
 
-                                                }
+                                                        }
+                                                    }
+
+                                                    break;
                                             }
+                                            case UdonTypes_String.TMPro_TextMeshPro_Array:
+                                            {
 
-                                        }
-
-                                        else if (ObjectType.Equals(Il2CppType.Of<TMPro.TextMeshPro[]>()))
-                                        {
                                             var list = UnboxVariable.Unpack_List_TextMeshPro();
-                                            if (list.Count() != 0)
-                                            {
-                                                var patchedlist = new List<TextMeshPro>();
-                                                bool modified = false;
-                                                foreach (var value in list)
+                                                if (list.Count() != 0)
                                                 {
-                                                    if (value.text != null && value.text.IsNotNullOrEmptyOrWhiteSpace())
+                                                    var patchedlist = new List<TextMeshPro>();
+                                                    bool modified = false;
+                                                    foreach (var value in list)
                                                     {
-                                                        if (value.text.ToLower().Equals(find.ToLower()) ||
-                                                            value.text.ToLower().Contains(find.ToLower()))
+                                                        if (value.text != null && value.text.IsNotNullOrEmptyOrWhiteSpace())
                                                         {
-                                                            result++;
-                                                            value.text = value.text.Replace(find, replace);
-                                                            patchedlist.Add(value);
-                                                            modified = true;
+                                                            if (value.text.ToLower().Equals(find.ToLower()) || value.text.ToLower().Contains(find.ToLower()))
+                                                            {
+                                                                result++;
+                                                                value.text = value.text.Replace(find, replace);
+                                                                patchedlist.Add(value);
+                                                                modified = true;
+                                                            }
+                                                            else
+                                                            {
+                                                                patchedlist.Add(value);
+                                                            }
                                                         }
-                                                        else
-                                                        {
-                                                            patchedlist.Add(value);
-                                                        }
+                                                    }
+                                                    if (modified)
+                                                    {
+                                                        UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, patchedlist.ToArray(), true);
                                                     }
                                                 }
 
-                                                if (modified)
-                                                {
-                                                    UdonHeapEditor.PatchHeap(unpackedudon, symbol,
-                                                        patchedlist.ToArray(), true);
-                                                }
+
+                                                break;
                                             }
-                                        }
-                                        else if (ObjectType.Equals(Il2CppType.Of<UnityEngine.UI.Text>()))
-                                        {
-                                            var item = UnboxVariable.Unpack_UnityEngine_UI_Text();
-                                            if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
+                                            case UdonTypes_String.UnityEngine_TextAsset:
                                             {
-                                                if (item.text.ToLower().Equals(find.ToLower()) ||
-                                                    item.text.ToLower().Contains(find.ToLower()))
-                                                {
-                                                    result++;
-                                                    item.text = item.text.Replace(find, replace);
-                                                    UdonHeapEditor.PatchHeap(unpackedudon, symbol, item, true);
-
-                                                }
-                                            }
-
-                                        }
-
-                                        else if (ObjectType.Equals(Il2CppType.Of<UnityEngine.UI.Text[]>()))
-                                        {
-                                            var list = UnboxVariable.Unpack_List_UnityEngine_UI_Text();
-                                            if (list.Count() != 0)
-                                            {
-                                                var patchedlist = new List<UnityEngine.UI.Text>();
-                                                bool modified = false;
-                                                foreach (var value in list)
-                                                {
-                                                    if (value.text != null &&
-                                                        value.text.IsNotNullOrEmptyOrWhiteSpace())
+                                                    ModConsole.DebugLog("Found Single TextAsset");
+                                                    var item = UnboxVariable.Unpack_TextAsset();
+                                                    if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
                                                     {
-                                                        if (value.text.ToLower().Equals(find.ToLower()) ||
-                                                            value.text.ToLower().Contains(find.ToLower()))
+                                                        if (item.text.ToLower().Equals(find.ToLower()) ||
+                                                            item.text.ToLower().Contains(find.ToLower()))
                                                         {
-                                                            result++;
-                                                            value.text = value.text.Replace(find, replace);
-                                                            patchedlist.Add(value);
-                                                            modified = true;
-                                                        }
-                                                        else
-                                                        {
-                                                            patchedlist.Add(value);
-                                                        }
-                                                    }
-                                                }
-
-                                                if (modified)
-                                                {
-                                                    UdonHeapEditor.PatchHeap(unpackedudon, symbol,
-                                                        patchedlist.ToArray(), true);
-                                                }
-
-                                            }
-                                        }
-
-                                        else if (ObjectType.Equals(Il2CppType.Of<UnityEngine.TextAsset>()))
-                                        {
-                                            ModConsole.DebugLog("Found Single TextAsset");
-                                            var item = UnboxVariable.Unpack_TextAsset();
-                                            if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
-                                            {
-                                                if (item.text.ToLower().Equals(find.ToLower()) ||
-                                                    item.text.ToLower().Contains(find.ToLower()))
-                                                {
-                                                    var patchedtext = item.text.Replace(find, replace);
-                                                    var patchedvalue =
-                                                        new UnityEngine.TextAsset(TextAsset.CreateOptions.None,
-                                                            patchedtext);
-                                                    UdonHeapEditor.PatchHeap(unpackedudon, symbol, patchedvalue, true);
-                                                    result++;
-
-                                                }
-                                            }
-
-                                            break;
-                                        }
-
-                                        else if (ObjectType.Equals(Il2CppType.Of<UnityEngine.TextAsset[]>()))
-                                        {
-                                            ModConsole.DebugLog("Found Single TextAsset");
-                                            var list = UnboxVariable.Unpack_List_TextAsset();
-                                            if (list.Count() != 0)
-                                            {
-                                                var patchedlist = new List<UnityEngine.TextAsset>();
-                                                bool modified = false;
-                                                foreach (var value in list)
-                                                {
-                                                    if (value.text != null &&
-                                                        value.text.IsNotNullOrEmptyOrWhiteSpace())
-                                                    {
-                                                        if (value.text.ToLower().Equals(find.ToLower()) ||
-                                                            value.text.ToLower().Contains(find.ToLower()))
-                                                        {
-                                                            result++;
-                                                            var patchedtext = value.text.Replace(find, replace);
+                                                            var patchedtext = item.text.Replace(find, replace);
                                                             var patchedvalue =
                                                                 new UnityEngine.TextAsset(TextAsset.CreateOptions.None,
                                                                     patchedtext);
-                                                            patchedlist.Add(patchedvalue);
-                                                            modified = true;
-                                                        }
-                                                        else
-                                                        {
-                                                            patchedlist.Add(value);
+                                                            UdonHeapEditor.PatchHeap(unpackedudon, symbol, patchedvalue, true);
+                                                            result++;
+
                                                         }
                                                     }
-                                                }
 
-                                                if (modified)
-                                                {
-                                                    UdonHeapEditor.PatchHeap(unpackedudon, symbol,
-                                                        patchedlist.ToArray(), true);
-                                                }
+                                                    break;
                                             }
+                                            case UdonTypes_String.UnityEngine_TextAsset_Array:
+                                            {
+                                                        ModConsole.DebugLog("Found Array TextAsset");
+                                                        var list = UnboxVariable.Unpack_List_TextAsset();
+                                                        if (list.Count() != 0)
+                                                        {
+                                                            var patchedlist = new List<UnityEngine.TextAsset>();
+                                                            bool modified = false;
+                                                            foreach (var value in list)
+                                                            {
+                                                                if (value.text != null &&
+                                                                    value.text.IsNotNullOrEmptyOrWhiteSpace())
+                                                                {
+                                                                    if (value.text.ToLower().Equals(find.ToLower()) ||
+                                                                        value.text.ToLower().Contains(find.ToLower()))
+                                                                    {
+                                                                        result++;
+                                                                        var patchedtext = value.text.Replace(find, replace);
+                                                                        var patchedvalue =
+                                                                            new UnityEngine.TextAsset(TextAsset.CreateOptions.None,
+                                                                                patchedtext);
+                                                                        patchedlist.Add(patchedvalue);
+                                                                        modified = true;
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        patchedlist.Add(value);
+                                                                    }
+                                                                }
+                                                            }
+
+                                                            if (modified)
+                                                            {
+                                                                UdonHeapEditor.PatchHeap(unpackedudon, symbol,
+                                                                    patchedlist.ToArray(), true);
+                                                            }
+                                                        }
+                                                    
+
+                                                break;
+                                            }
+                                            default:
+                                                continue;
                                         }
                                     }
-
                                     catch
-
-                                        (System.Exception e)
                                     {
-                                        ModConsole.DebugErrorExc(e);
                                     }
                                 }
                             }
@@ -276,5 +222,6 @@
                 ModConsole.DebugLog($"Found and replaced {result}, containing {find} with {replace}");
             }
         }
+    
     }
 }
