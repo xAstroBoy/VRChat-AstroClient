@@ -16,7 +16,7 @@
     internal class Pathfinding : GameEvents
     {
         private float coarseness = 0.2f;
-        private int maxInterPerFrame = 10;
+        private int maxMSPerFrame = 16;
 
         internal Player targetedPlayer;
 
@@ -65,29 +65,49 @@
             {
                 if (targetedPlayer != null && hunters.Count > 0)
                 {
-                    for (int i = 0; i < hunters.Count; i++)
+                    //for (int i = 0; i < hunters.Count; i++)
+                    //{
+                    //    new Pathfinder().GetPath(hunters[i].pickup.transform.position, (Vector3)targetedPlayer.Get_Player_Bone_Position(HumanBodyBones.Chest), (x, a) =>
+                    //    {
+                    //        //indicators
+                    //        //foreach (var p in x.points)
+                    //        //{
+                    //        //    var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    //        //    obj.transform.position = p;
+                    //        //    obj.transform.localScale = Vector3.one * coarseness;
+                    //        //    UnityEngine.Object.Destroy(obj.GetComponent<Collider>());
+                    //        //    obj.RigidBody_Set_Gravity(false);
+                    //        //    indicators.Add(obj);
+                    //        //}
+                    //        int index = (int)a[0];
+                    //        ModConsole.Log(index.ToString());
+                    //        hunters[index].path = x.points;
+                    //        if (followingState)
+                    //        {
+                    //            hunters[index].startFollow();
+                    //        }
+                    //    }, new object[] { i }, coarseness, maxMSPerFrame);
+                    //}
+                    new Pathfinder().MultiGetPath(hunters.Select(x => x.pickup.transform.position).ToArray(), hunters.Select(x => (Vector3)targetedPlayer.Get_Player_Bone_Position(HumanBodyBones.Chest)).ToArray(), (x, a) =>
                     {
-                        new Pathfinder().GetPath(hunters[i].pickup.transform.position, (Vector3)targetedPlayer.Get_Player_Bone_Position(HumanBodyBones.Chest), coarseness, maxInterPerFrame, (x, a) =>
+                        //indicators
+                        foreach (var p in x.points)
                         {
-                            //indicators
-                            //foreach (var p in x.points)
-                            //{
-                            //    var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                            //    obj.transform.position = p;
-                            //    obj.transform.localScale = Vector3.one * coarseness;
-                            //    UnityEngine.Object.Destroy(obj.GetComponent<Collider>());
-                            //    obj.RigidBody_Set_Gravity(false);
-                            //    indicators.Add(obj);
-                            //}
-                            int index = (int)a[0];
-                            ModConsole.Log(index.ToString());
-                            hunters[index].path = x.points;
-                            if (followingState)
-                            {
-                                hunters[index].startFollow();
-                            }
-                        }, new object[] { i });
-                    }
+                            var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                            obj.transform.position = p;
+                            obj.transform.localScale = Vector3.one * coarseness;
+                            UnityEngine.Object.Destroy(obj.GetComponent<Collider>());
+                            obj.RigidBody_Set_Gravity(false);
+                            indicators.Add(obj);
+                        }
+                        int index = (int)a[0];
+                        ModConsole.Log(index.ToString());
+                        hunters[index].path = x.points;
+                        if (followingState)
+                        {
+                            hunters[index].startFollow();
+                        }
+                    }, Enumerable.Range(0,hunters.Count - 1).Select(x => new object[] { x }).ToArray(), coarseness, maxMSPerFrame);
                 }
             }, "Try to create a path");
 
