@@ -14,6 +14,7 @@
 
         internal Vector3[] points = null;
         internal bool foundPath = false;
+        internal bool complete = false;
 
         internal void MultiGetPath(Vector3[] startPos, Vector3[] endPos, Action<Pathfinder, object[]> onComplete, object[][] actionArgs = null, float coarseness = 0.2f, int maxMSPerFrame = 16)
         {
@@ -24,11 +25,12 @@
                 int i = 0;
                 while (true)
                 {
-                    if (foundPath || fr)
+                    if (complete || fr)
                     {
                         if (i >= startPos.Length) yield break;
                         fr = false;
                         foundPath = false;
+                        complete = false;
                         points = null;
                         GetPath(startPos[i], endPos[i], onComplete, actionArgs[i], coarseness, maxMSPerFrame);
                         i++;
@@ -101,7 +103,7 @@
                         points = pPoints.ToArray();
                         if (onComplete != null) onComplete(this, actionArgs);
                         foundPath = true;
-
+                        complete = true;
                         yield break;
                     }
 
@@ -144,7 +146,9 @@
                         yield return new WaitForEndOfFrame();
                     }
                 }
-                ModConsole.Log("Failed to find path");
+                //ModConsole.Log("Failed to find path");
+                complete = true;
+
                 List<PathingTile> GetWalkableTiles(PathingTile ct, PathingTile targetTile)
                 {
                     //this is this way because i was too lazy to figure out automatic code for it     shouldn't be hard

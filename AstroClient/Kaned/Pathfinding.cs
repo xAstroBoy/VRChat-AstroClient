@@ -16,13 +16,13 @@
     internal class Pathfinding : GameEvents
     {
         private float coarseness = 0.2f;
-        private int maxMSPerFrame = 16;
+        private int maxMSPerFrame = 25;
 
         internal Player targetedPlayer;
 
         internal List<Hunter> hunters = new List<Hunter>();
 
-        List<GameObject> indicators = new List<GameObject>();
+        //List<GameObject> indicators = new List<GameObject>();
 
         internal QMNestedButton WIPMenu { get; private set; }
         internal QMSingleButton[] buttons;
@@ -48,7 +48,10 @@
                 }
                 //hunters.Add(new Hunter() { pickup = WorldUtils.Pickups[2] });
                 ModConsole.Log("Pickups located");
-                hunters.ForEach(x => { ModConsole.Log(x.pickup.name); });
+                for (int i = 0; i < hunters.Count; i++)
+                {
+                    ModConsole.Log($"{i,-2}, {hunters[i].pickup.name}");
+                }
                 RefreshInfo();
             }, "", btnHalf: true);
             _ = new QMSingleButton(WIPMenu, 1, 0.5f, "Target Player", () =>
@@ -91,15 +94,15 @@
                     new Pathfinder().MultiGetPath(hunters.Select(x => x.pickup.transform.position).ToArray(), hunters.Select(x => (Vector3)targetedPlayer.Get_Player_Bone_Position(HumanBodyBones.Chest)).ToArray(), (x, a) =>
                     {
                         //indicators
-                        foreach (var p in x.points)
-                        {
-                            var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                            obj.transform.position = p;
-                            obj.transform.localScale = Vector3.one * coarseness;
-                            UnityEngine.Object.Destroy(obj.GetComponent<Collider>());
-                            obj.RigidBody_Set_Gravity(false);
-                            indicators.Add(obj);
-                        }
+                        //foreach (var p in x.points)
+                        //{
+                        //    var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                        //    obj.transform.position = p;
+                        //    obj.transform.localScale = Vector3.one * coarseness;
+                        //    UnityEngine.Object.Destroy(obj.GetComponent<Collider>());
+                        //    obj.RigidBody_Set_Gravity(false);
+                        //    indicators.Add(obj);
+                        //}
                         int index = (int)a[0];
                         ModConsole.Log(index.ToString());
                         hunters[index].path = x.points;
@@ -107,15 +110,15 @@
                         {
                             hunters[index].startFollow();
                         }
-                    }, Enumerable.Range(0,hunters.Count - 1).Select(x => new object[] { x }).ToArray(), coarseness, maxMSPerFrame);
+                    }, Enumerable.Range(0, hunters.Count).Select(x => new object[] { x }).ToArray(), coarseness, maxMSPerFrame);
                 }
             }, "Try to create a path");
 
-            _ = new QMSingleButton(WIPMenu, 1, 1, "Clear", () =>
-            {
-                indicators.ForEach(x => x.DestroyMeLocal());
-                indicators.Clear();
-            }, "Clears Indicators", btnHalf: true);
+            //_ = new QMSingleButton(WIPMenu, 1, 1, "Clear", () =>
+            //{
+            //    indicators.ForEach(x => x.DestroyMeLocal());
+            //    indicators.Clear();
+            //}, "Clears Indicators", btnHalf: true);
             _ = new QMSingleButton(WIPMenu, 2, 1, "StopPathing", () =>
             {
 
