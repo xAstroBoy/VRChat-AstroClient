@@ -1853,7 +1853,7 @@
         {
             if (heap != null)
             {
-                var converted = Il2CppConverter.Generate_Il2CPPObject(value);
+                var converted = Il2CppConverter.Generate_Il2CPPObject_Il2cppObjectBase(value);
                 heap.SetHeapVariable(address, converted, converted.GetIl2CppType());
                 if (verify)
                 {

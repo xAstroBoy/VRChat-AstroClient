@@ -113,7 +113,6 @@
             WaveEvent = null;
         }
 
-        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         internal static void InitButtons(QMTabMenu main, float x, float y, bool btnHalf)
         {
             SuperTowerDefensecheatPage = new QMNestedButton(main, x, y, "Super Tower Defense", "Super Tower Defense Cheats", null, null, null, null, btnHalf);

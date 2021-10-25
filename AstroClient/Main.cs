@@ -2,7 +2,7 @@
 {
     #region Imports
 
-    using AstroClient.AvatarMods;
+    using AstroButtonAPI;
     using AstroClient.ButtonShortcut;
     using AstroClient.Components;
     using AstroClient.Experiments;
@@ -15,12 +15,11 @@
     using AstroClient.WorldLights;
     using AstroClient.Worlds;
     using AstroClientCore.Events;
-    using AstroLibrary;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
+    using CheetoLibrary;
     using MelonLoader;
-    using AstroButtonAPI;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -35,8 +34,6 @@
     using VRC.UI;
     using Application = UnityEngine.Application;
     using Button = UnityEngine.UI.Button;
-    using AstroClient.Cheetos;
-    using CheetoLibrary;
 
     #endregion Imports
 
@@ -77,7 +74,7 @@
 
         private static List<GameEvents> GameEvents { get; set; } = new List<GameEvents>();
 
-        private static List<Tweaker_Events> Tweaker_Overridables  { get; set; } = new List<Tweaker_Events>();
+        private static List<Tweaker_Events> Tweaker_Overridables { get; set; } = new List<Tweaker_Events>();
 
         public override void OnApplicationStart()
         {
@@ -263,8 +260,8 @@
         {
             while (VRCUiManager.prop_VRCUiManager_0 == null)
                 yield return new WaitForSeconds(0.001f);
-                //while (GameObject.Find(UIUtils.QuickMenu) == null)
-                //    yield return new WaitForSeconds(0.001f);
+            //while (GameObject.Find(UIUtils.QuickMenu) == null)
+            //    yield return new WaitForSeconds(0.001f);
             code();
         }
 
@@ -279,7 +276,7 @@
                 return;
             }
             Event_VRChat_OnQuickMenuInit?.SafetyRaise();
-            stopwatch.Stop(); 
+            stopwatch.Stop();
             ModConsole.DebugLog($"QuickMenu Init : Took {stopwatch.ElapsedMilliseconds}ms");
         }
 

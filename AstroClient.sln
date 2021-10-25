@@ -8,6 +8,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{01DB654E-745F-48CA-A666-354969B3AF62}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		ErrorCodes.txt = ErrorCodes.txt
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AstroServer", "AstroServer\AstroServer.csproj", "{06B82A0F-106E-42DA-9614-BB95F2CB2741}"

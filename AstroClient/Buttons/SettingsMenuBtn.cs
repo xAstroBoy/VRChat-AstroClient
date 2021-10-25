@@ -1,5 +1,6 @@
 ﻿namespace AstroClient.Startup.Buttons
 {
+    using System.Collections.Generic;
     using AstroClient.Cheetos;
     using AstroLibrary;
     using AstroLibrary.Console;
@@ -8,8 +9,10 @@
     using UnityEngine;
     using CheetoLibrary;
 
-    internal class SettingsMenuBtn
+    internal class SettingsMenuBtn : GameEvents
     {
+
+        internal static QMSlider farClipPlaneSlider;
         internal static void InitButtons(QMTabMenu menu, float x, float y, bool btnHalf)
         {
             // Main Settings Menu
@@ -51,7 +54,7 @@
             QMNestedButton cameraSettings = new QMNestedButton(sub, 2, 2, "Camera", "Camera", null, null, null, null, false);
             QMSlider fovSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(cameraSettings.GetMenuName()), "FOV", 400, -620, delegate (float value) { FOV.Set_Camera_FOV(value); }, ConfigManager.General.FOV, 140, 20, true);
             fovSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
-            QMSlider farClipPlaneSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(cameraSettings.GetMenuName()), "FarClipPlane", 400, -820, delegate (float value) { CLIPPING.Set_Camera_FarClipPlane(value); }, ConfigManager.General.FarClipPlane, 5000, 1, true);
+            farClipPlaneSlider = new QMSlider(QuickMenuUtils.QuickMenu.transform.Find(cameraSettings.GetMenuName()), "FarClipPlane", 400, -820, delegate (float value) { PlayerCameraEditor.PlayerCamera.farClipPlane = value; }, PlayerCameraEditor.PlayerCamera.farClipPlane, 999999999, 1, true);
             farClipPlaneSlider.Slider.transform.localScale = new Vector3(3.5f, 3.5f, 3.5f);
 
             // Hide Elements Menu
@@ -151,5 +154,17 @@
                   });
               }, "Input a Ping value");
         }
+
+
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        {
+            if (farClipPlaneSlider != null)
+            {
+                farClipPlaneSlider.SetValue(PlayerCameraEditor.PlayerCamera.farClipPlane);
+            }
+        }
+
+
+
     }
 }

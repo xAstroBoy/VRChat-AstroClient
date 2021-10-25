@@ -222,7 +222,7 @@
 
         private static bool _Toggle_UdonBehaviour_ESP;
 
-        private static bool Toggle_UdonBehaviour_ESP
+        internal static bool Toggle_UdonBehaviour_ESP
         {
             get
             {

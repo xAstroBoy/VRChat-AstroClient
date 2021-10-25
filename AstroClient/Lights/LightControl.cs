@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.WorldLights
 {
+    using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using AstroButtonAPI;
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using UnityEngine;
     using UnityEngine.Rendering;
@@ -15,23 +15,14 @@
     {
         // TODO : Rewrite this Light Control Class (Borked ATM).
 
-        internal static void UpdateFogSwitch()
+        internal override void OnRoomLeft()
         {
-            if (FogSwitch != null)
-            {
-                FogSwitch.SetToggleState(RenderSettings.fog);
-            }
-        }
-
-        internal override void OnSceneLoaded(int buildIndex, string sceneName)
-        {
-            FogEnabled = RenderSettings.fog;
-            UpdateFogSwitch();
             HasOriginalRenderEditSettings = true;
             HasBackuppedRenderSettings = false;
             IsHeadLightActive = false;
             HasLightmapsStored = false;
             AreLightMapsEnabled = true;
+            _isRenderFullbrightActive = false;
             //if (ToggleLightmaps != null)
             //{
             //    ToggleLightmaps.SetToggleState(AreLightMapsEnabled);
@@ -44,6 +35,24 @@
             {
                 RenderFullbrightToggle.SetToggleState(false);
             }
+
+            if (FullBrightLight != null)
+            {
+                FullBrightLight.DestroyMeLocal();
+            }
+            if (FogSwitch != null)
+            {
+                FogSwitch.SetToggleState(RenderSettings.fog);
+            }
+        }
+
+        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        {
+            if (FogSwitch != null)
+            {
+                FogSwitch.SetToggleState(RenderSettings.fog);
+            }
+
         }
 
         internal static void ToggleFog(bool value)
@@ -54,16 +63,21 @@
             }
 
             HasOriginalRenderEditSettings = false;
-            FogEnabled = value;
             RenderSettings.fog = value;
-            UpdateFogSwitch();
+            if (FogSwitch != null)
+            {
+                FogSwitch.SetToggleState(RenderSettings.fog);
+            }
         }
 
         internal static void SetRenderSettings()
         {
             try
             {
-                BackupRenderSettings();
+                if (!HasBackuppedRenderSettings)
+                {
+                    BackupRenderSettings();
+                }
                 HasOriginalRenderEditSettings = false;
                 RenderSettings.fog = false;
                 RenderSettings.ambientLight = Color.white;
@@ -100,7 +114,10 @@
                     NewSun.transform.SetParent(RenderSettings.sun.transform);
                     NewSun.transform.rotation = RenderSettings.sun.transform.rotation;
                 }
-                UpdateFogSwitch();
+                if (FogSwitch != null)
+                {
+                    FogSwitch.SetToggleState(RenderSettings.fog);
+                }
             }
             catch (Exception e)
             {
@@ -201,7 +218,10 @@
                     }
                     IsUsingASpawnedSun = false;
                 }
-                UpdateFogSwitch();
+                if (FogSwitch != null)
+                {
+                    FogSwitch.SetToggleState(RenderSettings.fog);
+                }
                 HasOriginalRenderEditSettings = true;
             }
         }
@@ -269,45 +289,6 @@
             }
         }
 
-        internal static void FullbrightByHead(bool value)
-        {
-            if (Utils.LocalPlayer != null)
-            {
-                var PlayerHeadTransform = Utils.LocalPlayer.GetPlayer().Get_Player_Bone_Transform(HumanBodyBones.Head);
-                if (PlayerHeadTransform != null)
-                {
-                    if (FullBrightLight == null)
-                    {
-                        FullBrightLight = PlayerHeadTransform.gameObject.AddComponent<Light>();
-                    }
-                    if (value)
-                    {
-                        FullBrightLight.enabled = true;
-                        FullBrightLight.shadows = LightShadows.None;
-                        FullBrightLight.type = LightType.Spot;
-                        FullBrightLight.intensity = 1f;
-                        FullBrightLight.range = 999f;
-                        FullBrightLight.spotAngle = float.MaxValue;
-                        FullBrightLight.color = Color.white;
-                        ModConsole.DebugLog("Fullbright Enabled!");
-                    }
-                    else
-                    {
-                        FullBrightLight.DestroyMeLocal();
-                        ModConsole.DebugLog("Fullbright Deactivated!");
-                    }
-                }
-                else
-                {
-                    ModConsole.DebugError("[Player Fullbright] : I Can't find Player's GameObject!");
-                }
-            }
-            else
-            {
-                ModConsole.DebugError("[Player Fullbright] : I Can't find LocalPlayer!");
-            }
-        }
-
         private static bool _isHeadLightActive;
 
         internal static bool IsHeadLightActive
@@ -322,8 +303,69 @@
                 {
                     return;
                 }
+                if (value)
+                {
+                    if (PlayerCameraEditor.PlayerCamera.gameObject != null)
+                    {
+                        if (FullBrightLight == null)
+                        {
+                            if (FullBrightLight == null)
+                            {
+                                FullBrightLight = PlayerCameraEditor.PlayerCamera.gameObject.AddComponent<Light>();
+                            }
+                        }
+
+                        FullBrightLight.enabled = true;
+                        FullBrightLight.shadows = LightShadows.None;
+                        FullBrightLight.type = LightType.Spot;
+                        FullBrightLight.intensity = 1f;
+                        FullBrightLight.range = 999f;
+                        FullBrightLight.spotAngle = float.MaxValue;
+                        FullBrightLight.color = Color.white;
+                        ModConsole.DebugLog("Fullbright Enabled!");
+                    }
+                    else
+                    {
+                        ModConsole.DebugError("[Player Fullbright] : I Can't find Player Camera's GameObject!");
+                        value = false;
+                    }
+                }
+                else
+                {
+                    if (FullBrightLight != null)
+                    {
+                        FullBrightLight.DestroyMeLocal();
+                        ModConsole.DebugLog("Fullbright Deactivated!");
+                    }
+                }
+
                 _isHeadLightActive = value;
-                FullbrightByHead(value);
+                if (ToggleFullbright != null)
+                {
+                    ToggleFullbright.SetToggleState(value);
+                }
+            }
+        }
+
+        private static bool _isRenderFullbrightActive;
+
+        internal static bool FullbrightByRender
+        {
+            get
+            {
+                return _isRenderFullbrightActive;
+            }
+            set
+            {
+                _isRenderFullbrightActive = value;
+                if (value)
+                {
+                    SetRenderSettings();
+                }
+                else
+                {
+                    RestoreRenderSettings();
+                }
                 if (ToggleFullbright != null)
                 {
                     ToggleFullbright.SetToggleState(value);
@@ -337,7 +379,7 @@
 
             ToggleFullbright = new QMSingleToggleButton(temp, 1, 0, "Player Headlight: ON", () => { IsHeadLightActive = true; }, "Player Headlight: OFF", () => { IsHeadLightActive = false; }, "Toggle Player Headlight", Color.green, Color.red, null, false, true);
 
-            RenderFullbrightToggle = new QMSingleToggleButton(temp, 1, 0.5f, "Render Fullbright: ON", () => { SetRenderSettings(); }, "Render Fullbright: OFF", () => { RestoreRenderSettings(); }, "Tweaks Level RenderSettings To Make the whole place Visible.", Color.green, Color.red, null, false, true);
+            RenderFullbrightToggle = new QMSingleToggleButton(temp, 1, 0.5f, "Render Fullbright: ON", () => { FullbrightByRender = true; }, "Render Fullbright: OFF", () => { FullbrightByRender = false; }, "Tweaks Level RenderSettings To Make the whole place Visible.", Color.green, Color.red, null, false, true);
             FogSwitch = new QMSingleToggleButton(temp, 1, 1f, "FOG: ON", () => { ToggleFog(true); }, "FOG: OFF", () => { ToggleFog(false); }, "Tweaks Level RenderSettings Fog.", Color.green, Color.red, null, false, true);
 
             _ = new QMSingleButton(temp, 2, 0, "Spawn Flashlight", () => { Astro_Flashlight.SpawnFlashlight(); }, "Spawn a Flashlight", null, null, true);
@@ -346,6 +388,9 @@
             // TODO : make it less laggy and able to toggle em on/off without breaking itself.
             //ToggleLightmaps = new QMSingleToggleButton(temp, 1, 1f, "Baked Lightings: ON", () => { ToggleLightMaps(true); }, "Baked Lightings: OFF", () => { ToggleLightMaps(false); }, "Tries to toggle on/off LightMaps but is broken and buggy.", Color.green, Color.red, null, false, true);
         }
+
+
+        // TODO : Make a Component to handle RenderSettings
 
         private static Light NewSun { get; set; }
         private static bool IsUsingASpawnedSun { get; set; }
@@ -382,8 +427,6 @@
         private static LightType Originalsuntype { get; set; }
         private static Color Originalsuncolor { get; set; }
         private static float Originalsunintensity { get; set; }
-        private static bool FogEnabled { get; set; }
-
         private static bool HasLightmapsStored { get; set; } = false;
         private static bool AreLightMapsEnabled { get; set; } = true;
         internal static QMSingleToggleButton FogSwitch { get; set; }

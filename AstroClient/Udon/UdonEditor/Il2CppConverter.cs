@@ -4,6 +4,7 @@
     using System;
     using UnhollowerBaseLib;
     using UnhollowerRuntimeLib;
+    using UnityEngine;
 
     internal static class Il2CppConverter
     {
@@ -83,6 +84,11 @@
             var boxed = converted.BoxIl2CppObject();
             return boxed ?? null;
         }
+
+
+
+
+
 
         internal static Il2CppSystem.Object Generate_Il2CPPObject(UnityEngine.Color item)
         {
