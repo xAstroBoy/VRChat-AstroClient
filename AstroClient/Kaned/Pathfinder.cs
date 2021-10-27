@@ -4,6 +4,7 @@
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Linq;
     using UnityEngine;
 
@@ -13,8 +14,33 @@
 
         internal Vector3[] points = null;
         internal bool foundPath = false;
+        internal bool complete = false;
 
-        internal void GetPath(Vector3 startPos, Vector3 endPos, float coarseness = 0.2f, int maxIterationsPerFrame = 10, Action<Pathfinder, object[]> onComplete = null, object[] actionArgs = null)
+        internal void MultiGetPath(Vector3[] startPos, Vector3[] endPos, Action<Pathfinder, object[]> onComplete, object[][] actionArgs = null, float coarseness = 0.2f, int maxMSPerFrame = 16)
+        {
+            _ = MelonLoader.MelonCoroutines.Start(MPF());
+            IEnumerator MPF()
+            {
+                bool fr = true;
+                int i = 0;
+                while (true)
+                {
+                    if (complete || fr)
+                    {
+                        if (i >= startPos.Length) yield break;
+                        fr = false;
+                        foundPath = false;
+                        complete = false;
+                        points = null;
+                        GetPath(startPos[i], endPos[i], onComplete, actionArgs[i], coarseness, maxMSPerFrame);
+                        i++;
+                    }
+                    yield return null;
+                }
+            }
+        }
+
+        internal void GetPath(Vector3 startPos, Vector3 endPos, Action<Pathfinder, object[]> onComplete = null, object[] actionArgs = null, float coarseness = 0.2f, int maxMSPerFrame = 16)
         {
             //get the grid cache if it exists and if it doesnt add it
             Dictionary<(int x, int y, int z), bool> gridCache = null;
@@ -50,9 +76,11 @@
 
                 //this weird variable is used to reduce the amount of active tiles that are checked each frame
                 //otherwise the game essentially freezes
+                Stopwatch sw = new Stopwatch();
                 int runCount = 0;
                 while (activeTiles.Count > 0)
                 {
+                    sw.Start();
                     activeTiles = activeTiles.OrderBy(x => x.CostDistance).ToList();
                     var checkTile = activeTiles[0];
 
@@ -73,9 +101,9 @@
                             parent = parent.Parent;
                         }
                         points = pPoints.ToArray();
-                        foundPath = true;
                         if (onComplete != null) onComplete(this, actionArgs);
-
+                        foundPath = true;
+                        complete = true;
                         yield break;
                     }
 
@@ -105,14 +133,22 @@
                             activeTiles.Add(walkableTile);
                         }
                     }
-                    runCount++;
-                    if (runCount >= maxIterationsPerFrame)
+                    //reduces lag
+                    //runCount++;
+                    //if (runCount >= maxIterationsPerFrame)
+                    //{
+                    //    runCount = 0;
+                    //    yield return new WaitForEndOfFrame();
+                    //}
+                    if (sw.ElapsedMilliseconds > maxMSPerFrame)
                     {
-                        runCount = 0;
+                        sw.Reset();
                         yield return new WaitForEndOfFrame();
                     }
                 }
-                ModConsole.Log("Failed to find path");
+                //ModConsole.Log("Failed to find path");
+                complete = true;
+
                 List<PathingTile> GetWalkableTiles(PathingTile ct, PathingTile targetTile)
                 {
                     //this is this way because i was too lazy to figure out automatic code for it     shouldn't be hard
