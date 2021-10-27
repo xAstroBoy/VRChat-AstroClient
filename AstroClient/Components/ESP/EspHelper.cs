@@ -16,7 +16,7 @@
 
         private static GameObject _HighlightFXCamera;
 
-        internal static GameObject HighLightFXCamera
+        internal static GameObject HighlightFXCamera
         {
             get
             {

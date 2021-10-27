@@ -4,14 +4,11 @@
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using MelonLoader;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
-    using VRC.Management;
 
     [RegisterComponent]
     public class PlayerESP : EspEvents
@@ -29,21 +26,13 @@
         {
             // FIND ALLOCATED PLAYER
             var p = gameObject.GetComponent<Player>();
-            if (p != null)
-            {
-                AssignedPlayer = p;
-            }
-            else
-            {
-                Destroy(this);
-            }
+            if (p != null) AssignedPlayer = p;
+            else Destroy(this);
+
             if (AssignedPlayer != null)
             {
                 SelectRegion = AssignedPlayer.transform.Find("SelectRegion");
-                if (SelectRegion == null)
-                {
-                    Destroy(this);
-                }
+                if (SelectRegion == null) Destroy(this);
                 else
                 {
                     if (CurrentRenderers == null && CurrentRenderers.Count() == 0)
@@ -54,17 +43,12 @@
                     }
                     else
                     {
-                        if (HighLightOptions == null)
-                        {
-                            HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
-                        }
+                        HighlightOptions ??= HighlightOptions = EspHelper.HighlightFXCamera.AddHighlighter();
+
                         for (int i = 0; i < CurrentRenderers.Count; i++)
                         {
                             var ObjRenderer = CurrentRenderers[i];
-                            if (ObjRenderer != null)
-                            {
-                                HighLightOptions.SetHighLighter(ObjRenderer, true);
-                            }
+                            if (ObjRenderer != null) HighlightOptions.SetHighlighter(ObjRenderer, true);
                         }
                     }
                 }
@@ -72,60 +56,22 @@
             }
         }
 
-        private Color BlockedColor
-        {
-            get
-            {
-                return ConfigManager.ESPBlockedColor;
-            }
-        }
-
-        private Color FriendColor
-        {
-            get
-            {
-                return ConfigManager.ESPFriendColor;
-            }
-        }
-
-        private Color PublicColor
-        {
-            get
-            {
-                return ConfigManager.PublicESPColor;
-            }
-        }
-
         internal override void OnFriended()
         {
             if (!CanActuallyEditOnEvent) return;
-            if (AssignedPlayer.GetAPIUser().IsFriend())
-            {
-                    CurrentColor = FriendColor;
-                }
+            if (AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = ConfigManager.ESPFriendColor;
         }
 
         internal override void OnUnfriended()
         {
             if (!CanActuallyEditOnEvent) return;
-            if (!AssignedPlayer.GetAPIUser().IsFriend())
-            {
-                    CurrentColor = PublicColor;
-                }
-            
+            if (!AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = ConfigManager.PublicESPColor;
         }
 
         internal override void OnPlayerBlockedYou(Photon.Realtime.Player player)
         {
             if (!CanActuallyEditOnEvent) return;
-
-            if (player.GetUserID().Equals(AssignedPlayer.GetUserID()))
-            {
-                if (!UseCustomColor)
-                {
-                    CurrentColor = BlockedColor;
-                }
-            }
+            if (player.GetUserID().Equals(AssignedPlayer.GetUserID()) && !UseCustomColor) CurrentColor = ConfigManager.ESPBlockedColor;
         }
 
         internal override void OnPlayerUnblockedYou(Photon.Realtime.Player player)
@@ -133,36 +79,29 @@
             if (!CanActuallyEditOnEvent) return;
             if (player.GetUserID().Equals(AssignedPlayer.GetUserID()))
             {
-                if (AssignedPlayer.GetAPIUser().IsFriend())
-                {
-                    CurrentColor = FriendColor;
-                }
-                else
-                {
-                    CurrentColor = PublicColor;
-                }
+                if (AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = ConfigManager.ESPFriendColor;
+                else CurrentColor = ConfigManager.PublicESPColor;
             }
         }
 
-
         internal void OnDestroy()
         {
-            HighLightOptions.DestroyHighlighter();
+            HighlightOptions.DestroyHighlighter();
         }
 
         internal void OnEnable()
         {
-            HighLightOptions.enabled = true;
+            HighlightOptions.enabled = true;
         }
 
         internal void OnDisable()
         {
-            HighLightOptions.enabled = false;
+            HighlightOptions.enabled = false;
         }
 
         internal void ChangeColor(Color newcolor)
         {
-            HighLightOptions.SetHighLighterColor(newcolor);
+            HighlightOptions?.SetHighlighterColor(newcolor);
         }
 
         internal void ResetColor()
@@ -173,51 +112,28 @@
         internal override void OnPublicESPColorChanged(Color color)
         {
             if (!CanActuallyEditOnEvent) return;
-            if (!AssignedPlayer.GetAPIUser().IsFriend())
-            {
-                CurrentColor = color;
-            }
+            if (!AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = color;
         }
+
         internal override void OnFriendESPColorChanged(Color color)
         {
             if (!CanActuallyEditOnEvent) return;
-            if (AssignedPlayer.GetAPIUser().IsFriend())
-            {
-                CurrentColor = color;
-            }
-
+            if (AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = color;
         }
-
 
         internal override void OnBlockedESPColorChanged(Color color)
         {
             if (!CanActuallyEditOnEvent) return;
-
-            if (AssignedPlayer.GetAPIUser().HasBlockedYou())
-            {
-                if (CurrentColor.HasValue)
-                {
-                    CurrentColor = color;
-                }
-            }
+            if (AssignedPlayer.GetAPIUser().HasBlockedYou() && CurrentColor.HasValue) CurrentColor = color;
         }
 
         private void SetPlayerDefaultESP()
         {
             if (CanEditValues)
             {
-                if (AssignedPlayer.GetAPIUser().HasBlockedYou())
-                {
-                    CurrentColor = BlockedColor;
-                }
-                else if (AssignedPlayer.GetAPIUser().GetIsFriend())
-                {
-                    CurrentColor = FriendColor;
-                }
-                else
-                {
-                    CurrentColor = PublicColor;
-                }
+                if (AssignedPlayer.GetAPIUser().HasBlockedYou()) CurrentColor = ConfigManager.ESPBlockedColor;
+                else if (AssignedPlayer.GetAPIUser().GetIsFriend()) CurrentColor = ConfigManager.ESPFriendColor;
+                else CurrentColor = ConfigManager.PublicESPColor;
             }
         }
 
@@ -225,18 +141,12 @@
         {
             get
             {
-                if(HighLightOptions != null)
-                {
-                    return HighLightOptions.highlightColor;
-                }
+                if (HighlightOptions != null) return HighlightOptions.highlightColor;
                 return null;
             }
             set
             {
-                if(HighLightOptions != null)
-                {
-                    HighLightOptions.highlightColor = value.Value;
-                }
+                if (HighlightOptions != null) HighlightOptions.highlightColor = value.Value;
             }
         }
 
@@ -260,7 +170,7 @@
         {
             get
             {
-                return HighLightOptions != null && AssignedPlayer != null && AssignedPlayer.GetAPIUser() != null && CurrentColor.HasValue;
+                return HighlightOptions != null && AssignedPlayer != null && AssignedPlayer.GetAPIUser() != null && CurrentColor.HasValue;
             }
         }
 
@@ -268,16 +178,13 @@
         {
             get
             {
-                if (SelectRegion != null)
-                {
-                    return SelectRegion.GetComponentsInChildren<MeshRenderer>(true).ToArray().ToList();
-                }
+                if (SelectRegion != null) return SelectRegion.GetComponentsInChildren<MeshRenderer>(true).ToList();
                 return null;
             }
         }
 
         private Transform SelectRegion { get; set; }
-        private HighlightsFXStandalone HighLightOptions { get; set; }
+        private HighlightsFXStandalone HighlightOptions { get; set; }
         internal bool _UseCustomColor;
 
         internal bool UseCustomColor
@@ -288,14 +195,8 @@
             }
             set
             {
-                if (value == _UseCustomColor)
-                {
-                    return;
-                }
-                if (!value)
-                {
-                    SetPlayerDefaultESP();
-                }
+                if (value == _UseCustomColor) return;
+                if (!value) SetPlayerDefaultESP();
                 _UseCustomColor = value;
             }
         }
