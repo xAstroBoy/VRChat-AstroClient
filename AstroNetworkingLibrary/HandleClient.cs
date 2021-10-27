@@ -28,13 +28,13 @@
         private const int SecretKeyClient = 2454;
         private const int SecretKeyLoader = 2353;
 
-        private const int PacketSize = 1024;
+        private const int PacketSize = 32768;
 
         public void StartClient(TcpClient clientSocket, int clientId)
         {
+            Console.WriteLine($"PacketSize: {PacketSize}");
             ClientID = clientId;
             ClientSocket = clientSocket;
-            ClientSocket.SendTimeout = 2000;
             clientStream = ClientSocket.GetStream();
             Task task = new Task(StartThread);
             task.Start();
@@ -93,8 +93,10 @@
                 {
                     clientStream.Write(bytes, 0, bytes.Length);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Console.WriteLine($"Failed to send Event {packetData.NetworkEventID}");
+                    Console.WriteLine(ex.ToString());
                     Disconnect();
                 }
             }

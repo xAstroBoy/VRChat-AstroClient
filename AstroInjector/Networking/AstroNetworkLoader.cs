@@ -82,6 +82,7 @@
                 Console.WriteLine("Received: Library");
                 var data = Convert.FromBase64String(packetData.TextData);
                 LibraryFiles.Add(data);
+                Client.Send(new PacketData(PacketClientType.GOT_RESOURCE));
             }
 
             if (packetData.NetworkEventID == PacketServerType.LOADER_MELON)
@@ -89,6 +90,7 @@
                 Console.WriteLine("Received: Melon");
                 var data = Convert.FromBase64String(packetData.TextData);
                 MelonFiles.Add(data);
+                Client.Send(new PacketData(PacketClientType.GOT_RESOURCE));
             }
 
             if (packetData.NetworkEventID == PacketServerType.LOADER_MODULE)
@@ -96,6 +98,7 @@
                 Console.WriteLine("Received: Module");
                 var data = Convert.FromBase64String(packetData.TextData);
                 ModuleFiles.Add(data);
+                Client.Send(new PacketData(PacketClientType.GOT_RESOURCE));
             }
 
             if (packetData.NetworkEventID == PacketServerType.DEBUG)
@@ -105,8 +108,9 @@
 
             if (packetData.NetworkEventID == PacketServerType.LOADER_DONE)
             {
-                Client.Disconnect();
-                IsReady = true;
+                Console.WriteLine("Loader Done?");
+                //Client.Disconnect();
+                //IsReady = true;
             }
         }
 

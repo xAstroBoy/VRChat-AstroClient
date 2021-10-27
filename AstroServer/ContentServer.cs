@@ -57,12 +57,12 @@
 
         public static List<string> Libraries = new List<string>()
         {
-            "/AstroClient/Public/Libs/AstroLibrary.dll"
+            //"/AstroClient/Public/Libs/AstroLibrary.dll"
         };
 
         public static List<string> BetaLibraries = new List<string>()
         {
-            "/AstroClient/Beta/Libs/AstroLibrary.dll"
+            //"/AstroClient/Beta/Libs/AstroLibrary.dll"
         };
 
         public static List<string> Melons = new List<string>()
@@ -138,6 +138,22 @@
                         break;
                     }
 
+                case PacketClientType.GOT_RESOURCE:
+                    {
+                        if (client.Temp.PendingResources > 0)
+                        {
+                            client.Temp.PendingResources -= 1;
+                            Console.WriteLine($"Other side received resouce: {client.Temp.PendingResources} left");
+                        }
+
+                        if (client.Temp.PendingResources == 0)
+                        {
+                            Console.WriteLine("Sent Everything..");
+                            client.Send(new PacketData(PacketServerType.LOADER_DONE));
+                        }
+                        break;
+                    }
+
                 case PacketClientType.GET_RESOURCES:
                     {
                         var currentMelons = new List<string>();
@@ -174,20 +190,21 @@
                             }
                         }
 
-                        foreach (var libPath in currentLibraries)
-                        {
-                            try
-                            {
-                                var path = Environment.CurrentDirectory + libPath;
-                                byte[] data = File.ReadAllBytes(path);
-                                var converted = Convert.ToBase64String(data);
-                                client.Send(new PacketData(PacketServerType.LOADER_LIBRARY, converted));
-                            }
-                            catch (Exception e)
-                            {
-                                Console.WriteLine($"Failed to send: {e.Message}");
-                            }
-                        }
+                        //foreach (var libPath in currentLibraries)
+                        //{
+                        //    try
+                        //    {
+                        //        var path = Environment.CurrentDirectory + libPath;
+                        //        byte[] data = File.ReadAllBytes(path);
+                        //        var converted = Convert.ToBase64String(data);
+                        //        client.Temp.PendingResources += 1;
+                        //        client.Send(new PacketData(PacketServerType.LOADER_LIBRARY, converted));
+                        //    }
+                        //    catch (Exception e)
+                        //    {
+                        //        Console.WriteLine($"Failed to send: {e.Message}");
+                        //    }
+                        //}
 
                         foreach (var libPath in currentMelons)
                         {
@@ -196,14 +213,8 @@
                                 var path = Environment.CurrentDirectory + libPath;
                                 byte[] data = File.ReadAllBytes(path);
                                 var converted = Convert.ToBase64String(data);
-
-                                var packet = new PacketData(PacketServerType.LOADER_MELON, converted);
-
-                                var bson = BSonWriter.ToBson(packet);
-                                var bytes = bson.ConvertToBytes();
-
-                                client.Send(new PacketData(PacketServerType.DEBUG, $"[SERVER] Sending Melon: {bytes.Length} - {libPath}"));
-                                client.Send(packet);
+                                client.Temp.PendingResources += 1;
+                                client.Send(new PacketData(PacketServerType.LOADER_MELON, converted));
                             }
                             catch (Exception e)
                             {
@@ -211,23 +222,21 @@
                             }
                         }
 
-                        foreach (var libPath in currentModules)
-                        {
-                            try
-                            {
-                                var path = Environment.CurrentDirectory + libPath;
-                                byte[] data = File.ReadAllBytes(path);
-                                var converted = Convert.ToBase64String(data);
-                                client.Send(new PacketData(PacketServerType.LOADER_MODULE, converted));
-                            }
-                            catch (Exception e)
-                            {
-                                Console.WriteLine($"Failed to send: {e.Message}");
-                            }
-                        }
-
-                        Console.WriteLine("Sent Everything..");
-                        client.Send(new PacketData(PacketServerType.LOADER_DONE));
+                        //foreach (var libPath in currentModules)
+                        //{
+                        //    try
+                        //    {
+                        //        var path = Environment.CurrentDirectory + libPath;
+                        //        byte[] data = File.ReadAllBytes(path);
+                        //        var converted = Convert.ToBase64String(data);
+                        //        client.Temp.PendingResources += 1;
+                        //        client.Send(new PacketData(PacketServerType.LOADER_MODULE, converted));
+                        //    }
+                        //    catch (Exception e)
+                        //    {
+                        //        Console.WriteLine($"Failed to send: {e.Message}");
+                        //    }
+                        //}
                         break;
                     }
 
