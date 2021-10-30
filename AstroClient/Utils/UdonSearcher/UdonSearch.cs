@@ -53,6 +53,61 @@
             return null;
         }
 
+        internal static List<GameObject> FindAllUdonEvents(string action,  List<string> TermsToAvoid , bool Debug = false)
+        {
+            var gameobjects = UdonParser.CleanedWorldBehaviours;
+
+            List<GameObject> foundEvents = new List<GameObject>();
+            var behaviours = gameobjects.Where(x => x.gameObject.name.isMatch(action));
+            if (behaviours.Any())
+            {
+                foreach (var behaviour in behaviours)
+                {
+                    if (behaviour._eventTable.count != 0)
+                    {
+                        if (Debug)
+                        {
+                            ModConsole.DebugLog($"Found Behaviour {behaviour.gameObject.name}, Searching for Action.");
+                        }
+
+                        if (foundEvents.Contains(behaviour.gameObject))
+                        {
+                            continue;
+                        }
+                        bool HasAvoidTermKey = false;
+                        if (TermsToAvoid != null)
+                        {
+                            if (TermsToAvoid.Count() != 0)
+                            {
+                                foreach (var actionkeys in behaviour._eventTable)
+                                {
+                                    if (TermsToAvoid.Contains(actionkeys.key))
+                                    {
+                                        HasAvoidTermKey = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+
+
+                        if (!HasAvoidTermKey)
+                        {
+                            foundEvents.Add(behaviour.gameObject);
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+
+                }
+                return foundEvents;
+            }
+
+            return null;
+        }
+
         internal static UdonBehaviour_Cached FindUdonEvent(string action, string subaction, bool Debug = false)
         {
             var gameobjects = UdonParser.CleanedWorldBehaviours;

@@ -16,7 +16,7 @@
 
             new QMSingleButton(submenu, 1, 0f, "Make Stretchy Cheese", () => { ItemTweakerV2.Selector.Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<StretchyCheeseBehaviour>(); }, "Make sure is a Fork with Behaviour Extend", null, null, true);
             new QMSingleButton(submenu, 1, 0.5f, "Remove Stretchy Cheese", () => { DestroyStretchyCheese(); }, "Make sure is a Fork with Behaviour Extend", null, null, true);
-            new QMSingleButton(submenu, 1, 1f, "Reveal Current Object Keycode ", () => { ItemTweakerV2.Selector.Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<KeycodeRevealer>(); }, "(works only with keycodes Objects.)", null, null, true);
+            new QMSingleButton(submenu, 1, 1f, "Reveal Current Object Keycode ", () => { ItemTweakerV2.Selector.Tweaker_Object.GetGameObjectToEdit().GetOrAddComponent<KeypadRevealer>(); }, "(works only with keycodes Objects.)", null, null, true);
 
         }
 
