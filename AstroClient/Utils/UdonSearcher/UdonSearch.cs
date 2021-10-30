@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+    using System;
     using AstroClient.Udon;
     using AstroClient.Udon.UdonEditor;
     using AstroLibrary.Console;
@@ -132,6 +133,53 @@
 
             return null;
         }
+
+
+        internal static Il2CppSystem.Object FindUdonVariable(GameObject obj, string SymbolName)
+        {
+            var actionObjects = obj.GetComponentsInChildren<UdonBehaviour>(true);
+            if (actionObjects.Count() != 0)
+            {
+                foreach (var behaviour in actionObjects)
+                {
+                    var unpackedudon = behaviour.DisassembleUdonBehaviour();
+                    if (unpackedudon != null)
+                    {
+                        if (unpackedudon == null || unpackedudon == null)
+                        {
+                            continue;
+                        }
+
+                        foreach (var symbol in unpackedudon.IUdonSymbolTable.GetSymbols())
+                        {
+                            if (symbol != null)
+                            {
+                                if (symbol.isMatch(SymbolName))
+                                {
+                                    var address = unpackedudon.IUdonSymbolTable.GetAddressFromSymbol(symbol);
+                                    var UnboxVariable = unpackedudon.IUdonHeap.GetHeapVariable(address);
+                                    if (UnboxVariable != null)
+                                    {
+                                        try
+                                        {
+                                            return UnboxVariable;
+                                        }
+                                        catch (Exception e)
+                                        {
+                                            ModConsole.DebugErrorExc(e);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+
 
         internal static List<string> FindUdonAvatarPedestrals()
         {

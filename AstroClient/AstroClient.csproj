@@ -257,6 +257,7 @@
     <Compile Include="Components\PlayerSpoofer\PlayerSpooferUtils.cs" />
     <Compile Include="Components\PlayerSpoofer\PlayerSpoofer.cs" />
     <Compile Include="Components\AstroUdons\Pickup\VRC_AstroPickup.cs" />
+    <Compile Include="Components\KeycodeRevealer\KeycodeRevealer.cs" />
     <Compile Include="Components\PlayerWatcher\PlayerWatcher.cs" />
     <Compile Include="Components\Spinner\SpinnerBehaviour.cs" />
     <Compile Include="Components\VRChatUIListeners\UiListener.cs" />

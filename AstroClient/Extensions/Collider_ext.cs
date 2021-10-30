@@ -55,6 +55,18 @@
             }
         }
 
+        internal static void Set_Colliders_isTrigger(this GameObject obj, bool isTrigger)
+        {
+            if (obj != null)
+            {
+                foreach (var c in obj.GetComponents<Collider>())
+                {
+                    c.isTrigger = isTrigger;
+                }
+            }
+        }
+
+
         internal static void DisableAllColliders(this GameObject obj)
         {
             if (obj != null)

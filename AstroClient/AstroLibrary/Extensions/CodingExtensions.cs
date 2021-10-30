@@ -26,7 +26,7 @@
             return Regex.Replace(original, wordToFind, replacement, regexOptions);
         }
 
-        internal static bool ContainsString(this string value, string wordToFind, RegexOptions regexOptions = RegexOptions.IgnoreCase)
+        internal static bool isMatch(this string value, string wordToFind, RegexOptions regexOptions = RegexOptions.IgnoreCase)
         {
             return Regex.IsMatch(value, wordToFind, regexOptions);
         }

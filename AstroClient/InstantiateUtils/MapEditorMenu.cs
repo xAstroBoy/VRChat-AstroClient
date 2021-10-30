@@ -21,6 +21,7 @@
                       var btn = new WorldButton(buttonPosition.Value, buttonRotation.Value, "Template Test", null);
                       btn.gameObject.Pickup_Set_ForceComponent();
                       btn.gameObject.Pickup_Set_Pickupable(true);
+                      btn.gameObject.RigidBody_Set_isKinematic(true);
                       btn.gameObject.Set_As_Object_To_Edit();
                       btn.gameObject.AddToWorldUtilsMenu();
                   }

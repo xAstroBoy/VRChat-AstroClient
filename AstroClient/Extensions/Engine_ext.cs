@@ -312,16 +312,6 @@
             }
         }
 
-        internal static bool SetValue(this TextAsset textasset, string NewText)
-        {
-            var TextAssetField = typeof(TextAsset).GetField("text", BindingFlags.Instance | BindingFlags.NonPublic);
-            if (TextAssetField != null)
-            {
-                TextAssetField.SetValue(textasset, NewText);
-            }
-
-            return textasset.text.Equals(NewText);
-        }
         internal static List<Transform> Get_Childs(this Transform obj)
         {
             List<Transform> childs = new List<Transform>();

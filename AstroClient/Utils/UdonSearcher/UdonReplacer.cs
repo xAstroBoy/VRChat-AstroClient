@@ -45,7 +45,7 @@
                                                     var item = UnboxVariable.Unpack_String();
                                                     if (item != null && item.IsNotNullOrEmptyOrWhiteSpace())
                                                     {
-                                                        if (item.ContainsString(find))
+                                                        if (item.isMatch(find))
                                                         {
                                                             result++;
                                                             ModConsole.DebugLog("Found a single string match!");
@@ -66,7 +66,7 @@
                                                         {
                                                             if (item != null && item.IsNotNullOrEmptyOrWhiteSpace())
                                                             {
-                                                                if (item.ContainsString(find))
+                                                                if (item.isMatch(find))
                                                                 {
                                                                     result++;
                                                                     patchedlist.Add(item.ReplaceWholeWord(find, replacement));
@@ -92,7 +92,7 @@
                                                     var item = UnboxVariable.Unpack_TextMeshPro();
                                                     if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
                                                     {
-                                                        if (item.text.ContainsString(find))
+                                                        if (item.text.isMatch(find))
                                                         {
                                                             result++;
                                                             item.text = item.text.ReplaceWholeWord(find, replacement);
@@ -114,7 +114,7 @@
                                                         {
                                                             if (item.text != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
                                                             {
-                                                                if (item.text.ContainsString(find))
+                                                                if (item.text.isMatch(find))
                                                                 {
                                                                     result++;
                                                                     item.text = item.text.ReplaceWholeWord(find, replacement);
@@ -141,7 +141,7 @@
                                                     var item = UnboxVariable.Unpack_TextAsset();
                                                     if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
                                                     {
-                                                        if (item.text.ContainsString(find))
+                                                        if (item.text.isMatch(find))
                                                         {
                                                             var patchedstr = item.text.ReplaceWholeWord(find, replacement);
                                                             result++;
@@ -164,7 +164,7 @@
                                                             if (item.text != null &&
                                                                 item.text.IsNotNullOrEmptyOrWhiteSpace())
                                                             {
-                                                                if (item.text.ContainsString(find))
+                                                                if (item.text.isMatch(find))
                                                                 {
                                                                     result++;
                                                                     var patchedstr = item.text.ReplaceWholeWord(find, replacement);
