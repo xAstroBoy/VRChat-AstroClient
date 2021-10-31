@@ -39,24 +39,43 @@
 
         private bool FindAndRevealPassword()
         {
-            bool result = false;
             foreach (var item in PasswordsVariables)
             {
                 var UdonObj = this.gameObject.FindUdonVariable(item);
                 if (UdonObj != null)
                 {
                     var heaptostring = UdonObj.UnboxUdonHeap();
-                    if (heaptostring.IsNotNullOrEmptyOrWhiteSpace() && !heaptostring.isMatch("Not Supported Yet") || !heaptostring.isMatch("empty") || !heaptostring.isMatch("Error") || !heaptostring.isMatch("Null"))
+                    if (heaptostring.IsNotNullOrEmptyOrWhiteSpace())
                     {
+                        var cleaned = heaptostring.RemoveWhitespace();
+                        if (HasFailedUnpacking(heaptostring) || isInvalidPasscode(cleaned))
+                        {
+                            continue;
+                        }
+
                         // At this point it should contain the keycode password.
-                        GenerateButtonWithPassword(Environment.NewLine + heaptostring.RemoveWhitespace() + Environment.NewLine);
-                        result = true;
-                        break;
+                        GenerateButtonWithPassword(Environment.NewLine + cleaned + Environment.NewLine);
+                        return true;
+
                     }
                 }
             }
+            return false;
+        }
 
-            return result;
+
+        internal bool HasFailedUnpacking(string value)
+        {
+            return value.StartsWith("Not Supported Yet") ||
+                   value.StartsWith("Error Unboxing") ||
+                   value.StartsWith("Not Unboxable") ||
+                   value.StartsWith("empty") ||
+                   value.StartsWith("Null");
+        }
+
+        internal bool isInvalidPasscode(string value)
+        {
+            return value == "_" || value == "-";
         }
 
 
@@ -65,6 +84,7 @@
             "password",
             "solution",
             "code",
+            "PassCode",
         };
 
         internal void GenerateButtonWithPassword(string password)
