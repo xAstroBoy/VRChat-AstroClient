@@ -21,7 +21,6 @@
 
         internal override void OnPlayerLeft(Player player)
         {
-            if (player == null) throw new ArgumentNullException();
             var entry = GetEntry(player);
             if (entry != null)
             {

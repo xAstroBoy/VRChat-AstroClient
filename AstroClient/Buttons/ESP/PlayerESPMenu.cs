@@ -79,15 +79,11 @@
 
         internal override void OnPlayerJoined(Player player)
         {
-            if (player == null) throw new ArgumentNullException();
             if (Toggle_Player_ESP)
             {
-                if (player != null && player != Utils.LocalPlayer.GetPlayer())
+                if (player != null && !player.GetAPIUser().IsSelf)
                 {
-                    if (!player.gameObject.GetComponent<PlayerESP>())
-                    {
-                        _ = player.gameObject.AddComponent<PlayerESP>();
-                    }
+                    _ = player.gameObject.GetOrAddComponent<PlayerESP>();
                 }
             }
         }

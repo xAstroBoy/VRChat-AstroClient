@@ -335,7 +335,5 @@
 
         #endregion 
 
-        private bool _isCurrentOwner;
-
     }
 }

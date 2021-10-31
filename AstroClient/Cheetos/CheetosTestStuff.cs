@@ -132,12 +132,12 @@
             ModConsole.Log("You left a room.");
         }
 
-        internal override void OnPlayerJoined(Player player)
-        {
-            return;
-            if (player == null) throw new ArgumentNullException();
-            if (player.gameObject.GetComponent<CheetoNameplate>() == null) player.gameObject.AddComponent<CheetoNameplate>();
-        }
+        //internal override void OnPlayerJoined(Player player)
+        //{
+        //    return;
+        //    if (player == null) throw new ArgumentNullException();
+        //    if (player.gameObject.GetComponent<CheetoNameplate>() == null) player.gameObject.AddComponent<CheetoNameplate>();
+        //}
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {

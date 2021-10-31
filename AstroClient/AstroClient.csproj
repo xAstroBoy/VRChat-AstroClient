@@ -248,8 +248,9 @@
     <Compile Include="Components\Flashlight\FlashlightBehaviour.cs" />
     <Compile Include="Components\Expoits\OrbitManager.cs" />
     <Compile Include="Components\FunBehaviour\StretchyCheeseBehaviour.cs" />
-    <Compile Include="Components\JarRoleRevealers\JarControllerEvents.cs" />
-    <Compile Include="Components\JarRoleRevealers\JarNodeReader.cs" />
+    <Compile Include="Components\JarWorlds\JarControllerEvents.cs" />
+    <Compile Include="Components\JarWorlds\JarNodeReader.cs" />
+    <Compile Include="Components\PatronUnlocker\PatronUnlocker.cs" />
     <Compile Include="Components\Orbit\OrbitBehaviour.cs" />
     <Compile Include="Components\Orbit\OrbitManager_Old.cs" />
     <Compile Include="Components\PickupControl\PickupBlocker.cs" />
@@ -270,11 +271,6 @@
     <Compile Include="Exploits\ExploitUtils.cs" />
     <Compile Include="Extensions\Collider_ext.cs" />
     <Compile Include="Extensions\Engine_ext.cs" />
-    <Compile Include="AntiCrash\AntiCrash.cs" />
-    <Compile Include="AntiCrash\AntiCrashScanner.cs" />
-    <Compile Include="AntiCrash\AntiCrashUtils.cs" />
-    <Compile Include="AntiCrash\AntiCrash_Lists.cs" />
-    <Compile Include="AntiCrash\VRCAntiCrash_InitButtons.cs" />
     <Compile Include="CheetosUI\CMBase.cs" />
     <Compile Include="CheetosUI\WorldButton.cs" />
     <Compile Include="Cheetos\AvatarFavorites.cs" />
@@ -416,8 +412,8 @@
     <Compile Include="Components\ComponentsBtn.cs" />
     <Compile Include="Components\ESP\EspHelper.cs" />
     <Compile Include="Components\ItemInflater\InflaterBehaviour.cs" />
-    <Compile Include="Components\JarRoleRevealers\JarRoleController.cs" />
-    <Compile Include="Components\JarRoleRevealers\JarRoleESP.cs" />
+    <Compile Include="Components\JarWorlds\JarRoleController.cs" />
+    <Compile Include="Components\JarWorlds\JarRoleESP.cs" />
     <Compile Include="Components\PickupControl\PickupController.cs" />
     <Compile Include="Components\RocketComponent\RocketBehaviour.cs" />
     <Compile Include="Components\ESP\Player\PlayerESP.cs" />
@@ -464,10 +460,7 @@
     <Compile Include="ItemTweakerV2\Submenus\Physic\PhysicsSubmenu.cs" />
     <Compile Include="Lights\LightControl.cs" />
     <Compile Include="Buttons\MovementMenu.cs" />
-    <Compile Include="Mora\AntiCrashPolys.cs" />
-    <Compile Include="Mora\anticrashwrappers.cs" />
-    <Compile Include="Mora\Welcome.cs" />
-    <Compile Include="Mora\MouseTp.cs" />
+    <Compile Include="Startup\Welcome.cs" />
     <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
     <Compile Include="Networking\NetworkingManager.cs" />
@@ -1349,6 +1342,7 @@
     <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
     <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

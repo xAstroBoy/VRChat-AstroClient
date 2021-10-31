@@ -32,24 +32,27 @@
             {
                 occlusion.DestroyMeLocal();
             }
-            var patronCheckFool = UdonSearch.FindUdonEvent("Patreon Data", "_start");
-            if (patronCheckFool != null)
-            {
-                ModConsole.Log("Unlocking Patron Perks.");
-                if (!PlayerSpooferUtils.SpoofAsWorldAuthor)
-                {
-                    PlayerSpooferUtils.SpoofAsWorldAuthor = true;
-                    patronCheckFool.ExecuteUdonEvent();
-                    PlayerSpooferUtils.SpoofAsWorldAuthor = false;
-                }
-                else
-                {
-                    patronCheckFool.ExecuteUdonEvent();
-
-                }
-            }
+            //var patronCheckFool = UdonSearch.FindUdonEvent("Patreon Data", "_start"); //  Not working.
+            //if (patronCheckFool != null)
+            //{
+            //    ModConsole.Log("Unlocking Patron Perks.");
+            //    if (!PlayerSpooferUtils.SpoofAsWorldAuthor)
+            //    {
+            //        PlayerSpooferUtils.SpoofAsWorldAuthor = true;
+            //        patronCheckFool.ExecuteUdonEvent();
+            //        PlayerSpooferUtils.SpoofAsWorldAuthor = false;
+            //    }
+            //    else
+            //    {
+            //        patronCheckFool.ExecuteUdonEvent();
+            //    }
+            //}
 
             item_DetectiveRevolver = GameObjectFinder.Find("Game Logic/Weapons/Revolver");
+            if (item_DetectiveRevolver != null)
+            {
+                DetectiveGunPerkUnlocker = item_DetectiveRevolver.GetOrAddComponent<PatronUnlocker>();
+            }
             Clue_photograph = GameObjectFinder.Find("Game Logic/Clues/Clue (photograph)");
             Clue_notebook = GameObjectFinder.Find("Game Logic/Clues/Clue (notebook)");
             Clue_Locket = GameObjectFinder.Find("Game Logic/Clues/Clue (locket)");
@@ -318,8 +321,8 @@
             SafetySwap = false;
             RoleSwapper_GetDetectiveRole = false;
             RoleSwapper_GetMurdererRole = false;
-            //EveryoneHasPatreonPerk = false;
-            //OnlySelfHasPatreonPerk = false;
+            EveryoneHasPatreonPerk = false;
+            OnlySelfHasPatreonPerk = false;
             Snake_Crate = null;
             if (Murder4ESPtoggler != null)
             {
@@ -562,8 +565,8 @@
 
             Murder4UdonExploits.Init_RoleSwap_Menu(Murder4CheatPage, 2, 0.5f, true);
 
-            //GetSelfPatreonGunBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1, "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = true; EveryoneHasPatreonPerk = false; }), "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For You!", Color.green, Color.red, null, false, true);
-            //GetEveryonePatreonGunBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1.5f, "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = true; OnlySelfHasPatreonPerk = false; }), "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For Everyone!", Color.green, Color.red, null, false, true);
+            GetSelfPatreonGunBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1, "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = true; EveryoneHasPatreonPerk = false; }), "Private Golden Gun", new Action(() => { OnlySelfHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For You!", Color.green, Color.red, null, false, true);
+            GetEveryonePatreonGunBtn = new QMSingleToggleButton(Murder4CheatPage, 2, 1.5f, "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = true; OnlySelfHasPatreonPerk = false; }), "Public Golden Gun", new Action(() => { EveryoneHasPatreonPerk = false; }), "Unlocks The Patreon Perks (Golden Gun) For Everyone!", Color.green, Color.red, null, false, true);
 
             GetDetectiveRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 3, 1, "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = true; RoleSwapper_GetMurdererRole = false; }), "Get Detective Role", new Action(() => { RoleSwapper_GetDetectiveRole = false; }), "Assign Yourself Detective Role on Next Round!", Color.green, Color.red, null, false, true);
             GetMurdererRoleBtn = new QMSingleToggleButton(Murder4CheatPage, 3, 1.5f, "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = true; RoleSwapper_GetDetectiveRole = false; }), "Get Murderer Role", new Action(() => { RoleSwapper_GetMurdererRole = false; }), "Assign Yourself Murderer Role on Next Round!", Color.green, Color.red, null, false, true);
@@ -724,61 +727,52 @@
             return false; // Deactivate.
         }
 
-        //private static bool _OnlySelfHasPatreonPerk;
+        private static bool _OnlySelfHasPatreonPerk;
 
-        //internal static bool OnlySelfHasPatreonPerk
-        //{
-        //    get
-        //    {
-        //        return _OnlySelfHasPatreonPerk;
-        //    }
-        //    set
-        //    {
-        //        _OnlySelfHasPatreonPerk = value;
-        //        if (GetSelfPatreonGunBtn != null)
-        //        {
-        //            GetSelfPatreonGunBtn.SetToggleState(value);
-        //        }
-        //        if (value)
-        //        {
-        //            DetectiveGunPerkUnlocker.SendOnlySelfPatreonSkinEvent();
-        //        }
-        //    }
-        //}
+        internal static bool OnlySelfHasPatreonPerk
+        {
+            get
+            {
+                return _OnlySelfHasPatreonPerk;
+            }
+            set
+            {
+                _OnlySelfHasPatreonPerk = value;
+                if (GetSelfPatreonGunBtn != null)
+                {
+                    GetSelfPatreonGunBtn.SetToggleState(value);
+                }
+                if (DetectiveGunPerkUnlocker != null)
+                {
+                    DetectiveGunPerkUnlocker.OnlySelfHasPatreonPerk = value;
+                }
+            }
+        }
 
-        //private static bool _EveryoneHasPatreonPerk;
+        private static bool _EveryoneHasPatreonPerk;
 
-        //internal static bool EveryoneHasPatreonPerk
-        //{
-        //    get
-        //    {
-        //        return _EveryoneHasPatreonPerk;
-        //    }
-        //    set
-        //    {
-        //        _EveryoneHasPatreonPerk = value;
-        //        if (GetEveryonePatreonGunBtn != null)
-        //        {
-        //            GetEveryonePatreonGunBtn.SetToggleState(value);
-        //        }
-        //        if (value)
-        //        {
-        //            if (DetectiveGunPerkUnlocker != null)
-        //            {
-        //                DetectiveGunPerkUnlocker.SendPublicPatreonSkinEvent();
-        //            }
-        //        }
-        //        else
-        //        {
-        //            if (DetectiveGunPerkUnlocker != null)
-        //            {
-        //                DetectiveGunPerkUnlocker.SendPublicNonPatreonSkinEvent();
-        //            }
-        //        }
-        //    }
-        //}
+        internal static bool EveryoneHasPatreonPerk
+        {
+            get
+            {
+                return _EveryoneHasPatreonPerk;
+            }
+            set
+            {
+                _EveryoneHasPatreonPerk = value;
+                if (GetEveryonePatreonGunBtn != null)
+                {
+                    GetEveryonePatreonGunBtn.SetToggleState(value);
+                }
 
-        //private static Murder4PatronUnlocker DetectiveGunPerkUnlocker;
+                if (DetectiveGunPerkUnlocker != null)
+                {
+                    DetectiveGunPerkUnlocker.EveryoneHasPatreonPerk = value;
+                }
+            }
+        }
+
+        private static PatronUnlocker DetectiveGunPerkUnlocker;
 
         private static GameObject TargetNode;
         private static string AssignedTargetRole;
@@ -902,8 +896,8 @@
         internal static QMSingleToggleButton GetDetectiveRoleBtn;
         internal static QMSingleToggleButton GetMurdererRoleBtn;
 
-        //internal static QMSingleToggleButton GetSelfPatreonGunBtn;
-        //internal static QMSingleToggleButton GetEveryonePatreonGunBtn;
+        internal static QMSingleToggleButton GetSelfPatreonGunBtn;
+        internal static QMSingleToggleButton GetEveryonePatreonGunBtn;
         internal static QMSingleToggleButton ToggleGravityMode;
 
         internal static bool _RoleSwapper_GetDetectiveRole;
