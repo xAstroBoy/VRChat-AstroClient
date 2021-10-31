@@ -85,6 +85,7 @@
             "solution",
             "code",
             "PassCode",
+            "correctCodes",
         };
 
         internal void GenerateButtonWithPassword(string password)
