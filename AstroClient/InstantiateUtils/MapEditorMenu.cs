@@ -6,6 +6,8 @@
     using AstroButtonAPI;
     using System;
     using UnityEngine;
+    using VRC.SDK3.Components;
+    using VRC.SDKBase;
 
     internal static class MapEditorMenu
     {
@@ -41,7 +43,10 @@
                     Transform child = list[i];
                     if (!child.gameObject.active)
                     {
-                        child.gameObject.SetActiveRecursively(true);
+                        if (!child.isMirror()) // Check and ignore mirrors.
+                        {
+                            child.gameObject.SetActiveRecursively(true);
+                        }
                     }
                 }
             }
