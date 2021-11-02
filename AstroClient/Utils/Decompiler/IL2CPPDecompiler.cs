@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Reflection;
 using UnhollowerRuntimeLib.XrefScans;
 using AstroLibrary.Console;
+using BestHTTP.SecureProtocol.Org.BouncyCastle.Cms;
+using Il2CppSystem.Reflection;
+using Il2CppSystem.Runtime.InteropServices;
+using FieldInfo = System.Reflection.FieldInfo;
+using MemberTypes = System.Reflection.MemberTypes;
+using MethodBase = System.Reflection.MethodBase;
+using MethodInfo = System.Reflection.MethodInfo;
+using PropertyInfo = System.Reflection.PropertyInfo;
+using AstroClient.Reflection;
 
 namespace AstroClient
 {
-    using BestHTTP.SecureProtocol.Org.BouncyCastle.Cms;
-    using Reflection;
 
     internal class IL2CPPDecompiler
     {
@@ -107,8 +113,7 @@ namespace AstroClient
                                     string Translated = "";
                                     if (param.ParameterType.Name == "Object")
                                     {
-                                        Translated = param.Member.Name;
-                                        Params += $"({Translated}){param.Name}";
+                                        Params += $"({param.ParameterType.FullName}){param.Name}";
                                     }
                                     else
                                     {
