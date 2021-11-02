@@ -104,20 +104,16 @@ namespace AstroClient
                                 string Params = "";
                                 foreach (var param in Method.GetParameters())
                                 {
-                                    string Translated = ""
+                                    string Translated = "";
                                     if (param.ParameterType.Name == "Object")
                                     {
-                                        if (param != null)
-                                        {
-                                            Translated = param.Member.Name;
-                                            Params += $"({Translated}){param.Name}";
-
-                                        }
+                                        Translated = param.Member.Name;
+                                        Params += $"({Translated}){param.Name}";
                                     }
                                     else
                                     {
 
-                                        Params += $"({param.ParameterType.DeclaringType.Name}){param.Name}";
+                                        Params += $"({param.ParameterType.Name}){param.Name}";
                                     }
                                 }
 
