@@ -25,5 +25,6 @@
         {
             return instance?.field_Private_Rigidbody_0;
         }
+
     }
 }
