@@ -331,9 +331,9 @@
     <Compile Include="Streamer\StreamerNotifier.cs" />
     <Compile Include="Streamer\Streamers.cs" />
     <Compile Include="Streamer\StreamerTags.cs" />
-    <Compile Include="DumpTool.cs" />
     <Compile Include="Utils\Decompiler\DecompilerUtils.cs" />
     <Compile Include="Utils\Decompiler\IL2CPPDecompiler.cs" />
+    <Compile Include="Utils\Decompiler\MethodsTools\ParameterInfoTools.cs" />
     <Compile Include="Utils\Decompiler\MethodsTools\MethodSignatureTools.cs" />
     <Compile Include="Utils\Decompiler\MethodsTools\TypeExtensionMethods.cs" />
     <Compile Include="Utils\Decompiler\MethodsTools\TypeSignatureTools.cs" />

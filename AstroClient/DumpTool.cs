@@ -10,14 +10,19 @@
     using System.Text;
     using System.Threading.Tasks;
     using AstroLibrary.Console;
+    using Moderation;
+    using Mono.CSharp;
+    using VRC.Core;
+    using VRC.Management;
 
     internal class DumpTool : GameEvents
     {
         internal override void OnApplicationLateStart()
         {
-            DecompilerUtils.DumpClass<SyncPhysics>();
+            
+            ModConsole.Log("Finished Dumping Classes.");
+            Console.ReadKey();
         }
-
 
 
     }

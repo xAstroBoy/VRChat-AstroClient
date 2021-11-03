@@ -31,7 +31,7 @@ namespace AstroClient.Reflection
             }
 
             // Add method parameters
-            signatureBuilder.Append(GetMethodArgumentsSignature(method, invokable));
+            signatureBuilder.Append(GetMethodArgumentsSignature(method));
 
             return signatureBuilder.ToString();
         }
@@ -141,7 +141,8 @@ namespace AstroClient.Reflection
             return TypeSignatureTools.BuildGenericSignature(method.GetGenericArguments());
         }
 
-        public static string GetMethodArgumentsSignature(this MethodInfo method, bool invokable) {
+        public static string GetMethodArgumentsSignature(this MethodInfo method) {
+            bool invokable = method.isInvokable();
             var isExtensionMethod = method.IsDefined(typeof(System.Runtime.CompilerServices.ExtensionAttribute), false);
             var methodParameters = method.GetParameters().AsEnumerable();
 
@@ -170,9 +171,8 @@ namespace AstroClient.Reflection
                 return signature;
             });
 
-            var methodParameterString = "(" + string.Join(", ", methodParameterSignatures) + ")";
+            return "(" + string.Join(", ", methodParameterSignatures) + ")";
 
-            return methodParameterString;
         }
     }
 }
