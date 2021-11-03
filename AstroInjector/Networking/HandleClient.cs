@@ -198,7 +198,8 @@
                             //remaining = 0;
                             Console.WriteLine($"ERROR: 0x000001A");
                             Console.WriteLine($"{totalRead}/{len}");
-                            Thread.Sleep(1000);
+                            Environment.Exit(0);
+                            break;
                         }
                     } 
                     catch

@@ -109,8 +109,8 @@
             if (packetData.NetworkEventID == PacketServerType.LOADER_DONE)
             {
                 Console.WriteLine("Loader Done?");
-                //Client.Disconnect();
-                //IsReady = true;
+                Client.Disconnect();
+                IsReady = true;
             }
         }
 
