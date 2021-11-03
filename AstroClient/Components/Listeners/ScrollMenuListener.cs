@@ -1,7 +1,7 @@
 namespace AstroClient.Components
 {
-    using AstroLibrary.Extensions;
     using AstroButtonAPI;
+    using AstroLibrary.Extensions;
     using System;
 
     [RegisterComponent]

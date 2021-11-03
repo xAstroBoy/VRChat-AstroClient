@@ -1,9 +1,9 @@
 ﻿namespace AstroClient.Components
 {
+    using AstroButtonAPI;
     using AstroClient.ItemTweakerV2.Selector;
     using AstroClient.Variables;
     using AstroLibrary.Extensions;
-    using AstroButtonAPI;
     using System;
     using UnityEngine;
 
@@ -31,7 +31,7 @@
 
         internal static void KillAttackers()
         {
-            foreach(var item in Resources.FindObjectsOfTypeAll<PlayerAttacker>())
+            foreach (var item in Resources.FindObjectsOfTypeAll<PlayerAttacker>())
             {
                 item.DestroyMeLocal();
             }
@@ -44,6 +44,5 @@
                 item.DestroyMeLocal();
             }
         }
-
     }
 }

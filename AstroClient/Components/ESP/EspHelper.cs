@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using System.Collections.Generic;
     using UnityEngine;
@@ -18,6 +20,7 @@
 
         internal static GameObject HighLightFXCamera
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (_HighlightFXCamera == null)

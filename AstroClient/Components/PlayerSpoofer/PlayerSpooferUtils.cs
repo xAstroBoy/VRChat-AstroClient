@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using AstroClient.Variables;
     using AstroLibrary.Console;
@@ -35,6 +37,7 @@
 
         internal static PlayerSpoofer SpooferInstance
         {
+            [HideFromIl2Cpp]
             get
             {
                 return Instance;
@@ -43,23 +46,26 @@
 
         internal static bool IsSpooferActive
         {
+            [HideFromIl2Cpp]
             get
             {
                 return Instance.IsSpooferActive;
             }
+            [HideFromIl2Cpp]
             set
             {
                 Instance.IsSpooferActive = value;
             }
         }
 
-
         internal static string SpoofedName
         {
+            [HideFromIl2Cpp]
             get
             {
                 return Instance.SpoofedName;
             }
+            [HideFromIl2Cpp]
             set
             {
                 Instance.SpoofedName = value;
@@ -70,10 +76,12 @@
 
         internal static bool SpoofAsWorldAuthor
         {
+            [HideFromIl2Cpp]
             get
             {
                 return _SpoofASWorldAuthor;
             }
+            [HideFromIl2Cpp]
             set
             {
                 _SpoofASWorldAuthor = value;
@@ -91,7 +99,6 @@
                 {
                     ExploitsMenu.ToggleWorldAuthorSpoofer.SetToggleState(value);
                 }
-
             }
         }
 
@@ -99,10 +106,12 @@
 
         internal static bool SpoofAsInstanceMaster
         {
+            [HideFromIl2Cpp]
             get
             {
                 return _SpoofAsInstanceMaster;
             }
+            [HideFromIl2Cpp]
             set
             {
                 _SpoofAsInstanceMaster = value;

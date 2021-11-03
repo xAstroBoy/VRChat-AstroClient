@@ -16,7 +16,7 @@
     using UnityEngine.UI;
     using VRC;
 
-    #endregion
+    #endregion Imports
 
     [RegisterComponent]
     public class CheetoNameplate : GameEventsBehaviour
@@ -144,7 +144,7 @@
         {
             for (; ; )
             {
-                if (nameplate==null) { yield return null; }
+                if (nameplate == null) { yield return null; }
                 Refresh();
                 yield return new WaitForSeconds(2f);
             }
@@ -173,7 +173,6 @@
                 quickStats_Image.color = color;
             }
         }
-
 
         private void FastRefresh()
         {

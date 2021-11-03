@@ -1,7 +1,8 @@
+using UnhollowerBaseLib.Attributes;
+
 namespace AstroClient
 {
     using AstroClient.Components;
-    using AstroLibrary.Console;
     using System;
     using UnityEngine;
 
@@ -40,10 +41,12 @@ namespace AstroClient
 
         internal bool IsFlashlightActive
         {
+            [HideFromIl2Cpp]
             get
             {
                 return _IsFlashlightActive;
             }
+            [HideFromIl2Cpp]
             set
             {
                 _IsFlashlightActive = value;
@@ -62,17 +65,17 @@ namespace AstroClient
             }
         }
 
-        internal string OnText { get; } = "Turn On Flashlight";
-        internal string OffText { get; } = "Turn Off Flashlight";
+        internal string OnText { [HideFromIl2Cpp] get; } = "Turn On Flashlight";
+        internal string OffText { [HideFromIl2Cpp] get; } = "Turn Off Flashlight";
 
-        internal GameObject FlashLight_Base { get; set; }
+        internal GameObject FlashLight_Base { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal GameObject FlashLight_Body { get; set; }
+        internal GameObject FlashLight_Body { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal GameObject FlashLight_Head { get; set; }
+        internal GameObject FlashLight_Head { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal Light FlashLight_Light { get; set; }
+        internal Light FlashLight_Light { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal VRC_AstroPickup ToggleLightTrigger { get; private set; } // let's test.
+        internal VRC_AstroPickup ToggleLightTrigger { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } // let's test.
     }
 }

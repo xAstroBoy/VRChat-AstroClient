@@ -1,16 +1,17 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     #region Imports
 
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using VRC;
 
-    #endregion
+    #endregion Imports
 
     internal class SingleTagsUtils : GameEvents
     {
@@ -118,8 +119,8 @@
 
         internal class PlayerTagCounter
         {
-            internal Player Player { get; set; }
-            internal int AssignedStack { get; set; }
+            internal Player Player { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+            internal int AssignedStack { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
             internal PlayerTagCounter(Player user, int stack)
             {

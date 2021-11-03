@@ -1,4 +1,6 @@
-﻿namespace AstroClient
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient
 {
     using AstroClient.Components;
     using AstroLibrary.Console;
@@ -15,7 +17,6 @@
         {
         }
 
-
         private void Start()
         {
             ExtendCheese = UdonSearch.FindUdonEvent(this.gameObject, "Extend");
@@ -29,7 +30,6 @@
                         ExtendCheese.ExecuteUdonEvent();
                     };
                 }
-
             }
             else
             {
@@ -62,7 +62,7 @@
             }
         }
 
-        private UdonBehaviour_Cached ExtendCheese { get; set; }
-        internal VRC_AstroPickup PickupBehaviour { get; private set; } // let's test.
+        private UdonBehaviour_Cached ExtendCheese { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal VRC_AstroPickup PickupBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } // let's test.
     }
 }

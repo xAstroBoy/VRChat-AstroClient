@@ -1,7 +1,8 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using AstroClient.GameObjectDebug;
-    using AstroClient.Streamer;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
@@ -48,7 +49,7 @@
 
         #endregion Internal
 
-        internal static OrbitManager Instance { get; set; }
+        internal static OrbitManager Instance { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private Player target;
         private bool isEnabled;
         private bool isLooping;
@@ -57,7 +58,9 @@
 
         internal static bool IsEnabled
         {
+            [HideFromIl2Cpp]
             get => Instance.isEnabled;
+            [HideFromIl2Cpp]
             set => Instance.isEnabled = value;
         }
 
@@ -127,7 +130,6 @@
                 _ = MelonCoroutines.Start(LoopPickups());
 
                 ModConsole.Log($"[OrbitManager] Orbiting Player: {Instance.target.DisplayName()}");
-
             }
             else
             {

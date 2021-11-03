@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using AstroClient.Udon;
     using AstroLibrary.Console;
@@ -70,6 +72,7 @@
 
         internal int? CurrentHealth
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (HealthController != null)
@@ -78,6 +81,7 @@
                 }
                 return null;
             }
+            [HideFromIl2Cpp]
             set
             {
                 if (HealthController != null)
@@ -90,12 +94,12 @@
             }
         }
 
-        private string Lives { get; } = "Lives";
+        private string Lives { [HideFromIl2Cpp] get; } = "Lives";
 
-        internal bool GodMode { get; set; } = false;
+        internal bool GodMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
 
-        internal DisassembledUdonBehaviour HealthController { get; private set; }
+        internal DisassembledUdonBehaviour HealthController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
-        internal static CustomLists.UdonBehaviour_Cached ResetHealth { get; private set; }
+        internal static CustomLists.UdonBehaviour_Cached ResetHealth { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
     }
 }

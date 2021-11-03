@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using AstroClient.GameObjectDebug;
     using AstroLibrary.Extensions;
@@ -112,13 +114,14 @@
             catch { }
         }
 
-        private float CheckisOwnerTimeCheck { get; set; } = 0;
+        private float CheckisOwnerTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0;
 
-        private float CheckisOwnerDelay { get; set; } = 16f;
-        private bool CheckisOwner { get; set; } = false;
+        private float CheckisOwnerDelay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 16f;
+        private bool CheckisOwner { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
 
         private bool isCurrentOwner
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (CheckisOwner)
@@ -142,7 +145,9 @@
 
         private bool HasRequiredSettings
         {
+            [HideFromIl2Cpp]
             get => _HasRequiredSettings;
+            [HideFromIl2Cpp]
             set
             {
                 if (value.Equals(_HasRequiredSettings))
@@ -170,17 +175,17 @@
             }
         }
 
-        private Rigidbody RigidBody { get; set; } = null;
-        private RigidBodyController RigidBodyController { get; set; }
-        private PickupController PickupController { get; set; }
-        private VRC_AstroPickup VRC_AstroPickup { get; set; }
-        private float WatcherTimeCheck { get; set; } = 0;
+        private Rigidbody RigidBody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private RigidBodyController RigidBodyController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private PickupController PickupController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private VRC_AstroPickup VRC_AstroPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private float WatcherTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0;
 
-        private float Movementforce { get; set; } = 0.04f; // DEFAULT 0.04f
+        private float Movementforce { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.04f; // DEFAULT 0.04f
 
-        private bool isPaused { get; set; }
-        private Rigidbody body { get; set; } = null;
+        private bool isPaused { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private Rigidbody body { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
 
-        internal Player TargetPlayer { get; set; }
+        internal Player TargetPlayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
 }

@@ -1,3 +1,5 @@
+using UnhollowerBaseLib.Attributes;
+
 namespace AstroClient
 {
     using AstroClient.Components;
@@ -109,12 +111,12 @@ namespace AstroClient
             Held = false;
         }
 
-        internal PickupController pickup { get; private set; }
-        internal RigidBodyController body { get; private set; }
-        internal BoxCollider collider { get; private set; }
-        internal MeshRenderer renderer { get; private set; }
-        internal static bool Held { get; private set; }
-        internal static float Time { get; private set; }
-        private static Color Ender { get; } = new Color(0f, 2f, 0f, 0.4f);
+        internal PickupController pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal RigidBodyController body { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal BoxCollider collider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal MeshRenderer renderer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal static bool Held { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal static float Time { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        private static Color Ender { [HideFromIl2Cpp] get; } = new Color(0f, 2f, 0f, 0.4f);
     }
 }

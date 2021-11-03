@@ -1,10 +1,9 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
-    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using System;
-    using System.Runtime.InteropServices;
-    using UnhollowerRuntimeLib;
     using UnityEngine;
     using static AstroClient.Forces;
 
@@ -113,7 +112,6 @@
             OnRocketPropertyChanged += action;
         }
 
-
         internal void RemoveActionEvents()
         {
             OnRocketPropertyChanged = null;
@@ -123,17 +121,19 @@
 
         #endregion actions
 
-        private float CheckisOwnerTimeCheck { get; set; } = 0;
+        private float CheckisOwnerTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0;
 
-        private float CheckisOwnerDelay { get; set; } = 16f;
-        private bool CheckisOwner { get; set; } = false;
+        private float CheckisOwnerDelay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 16f;
+        private bool CheckisOwner { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
 
+        private float RocketTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0;
+        private float _RocketTimer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.07f;
 
-        private float RocketTimeCheck { get; set; } = 0;
-        private float _RocketTimer { get; set; } = 0.07f;
         internal float RocketTimer
         {
+            [HideFromIl2Cpp]
             get => _RocketTimer;
+            [HideFromIl2Cpp]
             set
             {
                 _RocketTimer = value;
@@ -141,10 +141,13 @@
             }
         }
 
-        private bool _ShouldBeAlwaysUp { get; set; } = false;
+        private bool _ShouldBeAlwaysUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+
         internal bool ShouldBeAlwaysUp
         {
+            [HideFromIl2Cpp]
             get => _ShouldBeAlwaysUp;
+            [HideFromIl2Cpp]
             set
             {
                 _ShouldBeAlwaysUp = value;
@@ -152,10 +155,13 @@
             }
         }
 
-        private bool _UseGravity { get; set; } = false;
+        private bool _UseGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+
         internal bool UseGravity
         {
+            [HideFromIl2Cpp]
             get => _UseGravity;
+            [HideFromIl2Cpp]
             set
             {
                 _UseGravity = value;
@@ -163,9 +169,9 @@
             }
         }
 
-
         private bool isCurrentOwner
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (CheckisOwner)
@@ -182,15 +188,19 @@
                 }
             }
         }
+
         private bool isHeld => PickupController.IsHeld;
 
         private bool _HasRequiredSettings = false;
+
         private bool HasRequiredSettings
         {
+            [HideFromIl2Cpp]
             get => _HasRequiredSettings;
+            [HideFromIl2Cpp]
             set
             {
-                if(value.Equals(_HasRequiredSettings))
+                if (value.Equals(_HasRequiredSettings))
                 {
                     return; // Do Nothing.
                 }
@@ -217,18 +227,21 @@
             }
         }
 
-        private Rigidbody RigidBody { get; set; } = null;
-        private RigidBodyController RigidBodyController { get; set; }
-        private PickupController PickupController { get; set; }
-        private VRC_AstroPickup VRC_AstroPickup { get; set; }
-        private string OriginalText_Use { get; set; }
+        private Rigidbody RigidBody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private RigidBodyController RigidBodyController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private PickupController PickupController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private VRC_AstroPickup VRC_AstroPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private string OriginalText_Use { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private bool isPaused { get; set; }
+        private bool isPaused { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private bool _IsEnabled;
+
         internal bool IsEnabled
         {
+            [HideFromIl2Cpp]
             get => _IsEnabled;
+            [HideFromIl2Cpp]
             set
             {
                 _IsEnabled = value;
@@ -248,7 +261,6 @@
                     }
                 }
             }
-
         }
     }
 }

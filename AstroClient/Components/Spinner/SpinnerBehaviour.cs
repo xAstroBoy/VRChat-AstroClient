@@ -1,10 +1,9 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
-    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using System;
-    using System.Runtime.InteropServices;
-    using UnhollowerRuntimeLib;
     using UnityEngine;
     using static AstroClient.Forces;
 
@@ -108,7 +107,6 @@
             OnSpinnerPropertyChanged += action;
         }
 
-
         internal void RemoveActionEvents()
         {
             OnSpinnerPropertyChanged = null;
@@ -117,26 +115,34 @@
         private event Action? OnSpinnerPropertyChanged;
 
         #endregion actions
-        private float _ForceX { get; set; }
+
+        private float _ForceX { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
         internal float ForceX
         {
+            [HideFromIl2Cpp]
             get
             {
                 return _ForceX;
             }
+            [HideFromIl2Cpp]
             set
             {
                 _ForceX = value;
                 Run_OnOnSpinnerPropertyChanged();
             }
         }
-        private float _ForceY { get; set; }
+
+        private float _ForceY { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
         internal float ForceY
         {
+            [HideFromIl2Cpp]
             get
             {
                 return _ForceY;
             }
+            [HideFromIl2Cpp]
             set
             {
                 _ForceY = value;
@@ -144,14 +150,16 @@
             }
         }
 
+        private float _ForceZ { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private float _ForceZ { get; set; }
         internal float ForceZ
         {
+            [HideFromIl2Cpp]
             get
             {
                 return _ForceZ;
             }
+            [HideFromIl2Cpp]
             set
             {
                 _ForceZ = value;
@@ -159,31 +167,36 @@
             }
         }
 
+        private float _SpinnerTimer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.03f;
 
-
-        private float _SpinnerTimer { get; set; } = 0.03f;
         internal float SpinnerTimer
         {
+            [HideFromIl2Cpp]
             get
             {
                 return _SpinnerTimer;
             }
+            [HideFromIl2Cpp]
             set
             {
                 _SpinnerTimer = value;
                 Run_OnOnSpinnerPropertyChanged();
             }
         }
-        private float CheckisOwnerTimeCheck { get; set; } = 0;
 
-        private float CheckisOwnerDelay { get; set; } = 16f;
-        private bool CheckisOwner { get; set; } = false;
-        private float SpinnerTimeCheck { get; set; } = 0;
+        private float CheckisOwnerTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0;
 
-        private bool _ShouldBeAlwaysUp { get; set; } = false;
+        private float CheckisOwnerDelay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 16f;
+        private bool CheckisOwner { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        private float SpinnerTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0;
+
+        private bool _ShouldBeAlwaysUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+
         internal bool ShouldBeAlwaysUp
         {
+            [HideFromIl2Cpp]
             get => _ShouldBeAlwaysUp;
+            [HideFromIl2Cpp]
             set
             {
                 _ShouldBeAlwaysUp = value;
@@ -191,10 +204,13 @@
             }
         }
 
-        private bool _UseGravity { get; set; } = false;
+        private bool _UseGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+
         internal bool UseGravity
         {
+            [HideFromIl2Cpp]
             get => _UseGravity;
+            [HideFromIl2Cpp]
             set
             {
                 _UseGravity = value;
@@ -202,9 +218,9 @@
             }
         }
 
-
         private bool isCurrentOwner
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (CheckisOwner)
@@ -221,15 +237,19 @@
                 }
             }
         }
+
         private bool isHeld => PickupController.IsHeld;
 
         private bool _HasRequiredSettings = false;
+
         private bool HasRequiredSettings
         {
+            [HideFromIl2Cpp]
             get => _HasRequiredSettings;
+            [HideFromIl2Cpp]
             set
             {
-                if(value.Equals(_HasRequiredSettings))
+                if (value.Equals(_HasRequiredSettings))
                 {
                     return; // Do Nothing.
                 }
@@ -255,18 +275,21 @@
             }
         }
 
-        private Rigidbody RigidBody { get; set; } = null;
-        private RigidBodyController RigidBodyController { get; set; }
-        private PickupController PickupController { get; set; }
-        private VRC_AstroPickup VRC_AstroPickup { get; set; }
-        private string OriginalText_Use { get; set; }
+        private Rigidbody RigidBody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private RigidBodyController RigidBodyController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private PickupController PickupController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private VRC_AstroPickup VRC_AstroPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private string OriginalText_Use { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private bool isPaused { get; set; }
+        private bool isPaused { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private bool _IsEnabled;
+
         internal bool IsEnabled
         {
+            [HideFromIl2Cpp]
             get => _IsEnabled;
+            [HideFromIl2Cpp]
             set
             {
                 _IsEnabled = value;
@@ -286,7 +309,6 @@
                     }
                 }
             }
-
         }
     }
 }

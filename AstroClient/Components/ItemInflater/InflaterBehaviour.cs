@@ -1,19 +1,16 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using System;
-    using System.Runtime.InteropServices;
-    using UnhollowerRuntimeLib;
     using UnityEngine;
 
-
     [RegisterComponent]
-
     public class InflaterBehaviour : GameEventsBehaviour
     {
         public InflaterBehaviour(IntPtr ptr) : base(ptr)
         {
         }
-
 
         // Use this for initialization
         private void Start()
@@ -40,13 +37,11 @@
                     FixY();
                     // Z
                     FixZ();
-
                 }
                 Run_OnOnInflaterUpdate();
                 LastTimeCheck = Time.time;
             }
         }
-
 
         private void FixX()
         {
@@ -84,7 +79,6 @@
             }
         }
 
-
         #region actions
 
         private void Run_OnOnInflaterPropertyChanged()
@@ -96,6 +90,7 @@
         {
             OnInflaterPropertyChanged += action;
         }
+
         private void Run_OnOnInflaterUpdate()
         {
             OnInflaterUpdate?.Invoke();
@@ -106,8 +101,6 @@
             OnInflaterUpdate += action;
         }
 
-
-
         internal void RemoveActionEvents()
         {
             OnInflaterPropertyChanged = null;
@@ -115,11 +108,10 @@
         }
 
         private event Action? OnInflaterPropertyChanged;
+
         private event Action? OnInflaterUpdate;
 
         #endregion actions
-
-
 
         internal float TimerOffset = 0f;
         private float LastTimeCheck = 0;
@@ -128,7 +120,9 @@
 
         internal Vector3 NewSize
         {
+            [HideFromIl2Cpp]
             get => _NewSize;
+            [HideFromIl2Cpp]
             set
             {
                 _NewSize = value;
@@ -137,6 +131,5 @@
         }
 
         private Vector3 OriginalSize;
-
     }
 }

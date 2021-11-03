@@ -25,6 +25,5 @@ namespace AstroClient.Components
         {
             OnDisabled?.Invoke();
         }
-
     }
 }

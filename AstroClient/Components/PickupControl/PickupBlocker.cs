@@ -1,27 +1,23 @@
-﻿namespace AstroClient
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient
 {
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using VRC;
 
     internal class PickupBlocker : GameEvents
     {
-
         internal override void OnPlayerLeft(Player player)
         {
             var id = player.GetAPIUser().GetUserID();
 
-            if(blockeduserids.Contains(id))
+            if (blockeduserids.Contains(id))
             {
                 blockeduserids.Remove(id);
             }
         }
-
 
         internal static void RegisterPlayer(Player player)
         {
@@ -31,7 +27,6 @@
                 ModConsole.DebugLog($"Added Block for Player {player.GetDisplayName()}  from using Pickups.");
                 blockeduserids.Add(id);
             }
-
         }
 
         internal static void RemovePlayer(Player player)
@@ -43,16 +38,13 @@
 
                 blockeduserids.Remove(id);
             }
-
         }
-
 
         internal override void OnRoomLeft()
         {
             blockeduserids.Clear();
         }
 
-
-        internal static List<string> blockeduserids { get; private set; } = new List<string>();
+        internal static List<string> blockeduserids { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = new List<string>();
     }
 }

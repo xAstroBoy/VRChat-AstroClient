@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using AstroClient.Udon;
     using AstroLibrary.Console;
@@ -38,6 +40,7 @@
 
         internal float? Range
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (CurrentTower != null)
@@ -46,6 +49,7 @@
                 }
                 return null;
             }
+            [HideFromIl2Cpp]
             set
             {
                 if (CurrentTower != null)
@@ -60,6 +64,7 @@
 
         internal float? SpeedMultiplier
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (CurrentTower != null)
@@ -68,6 +73,7 @@
                 }
                 return null;
             }
+            [HideFromIl2Cpp]
             set
             {
                 if (CurrentTower != null)
@@ -80,9 +86,9 @@
             }
         }
 
-        private string SpeedMultiplierAddress { get; } = "SpeedMultiplier";
-        private string RangeAddress { get; } = "Range";
+        private string SpeedMultiplierAddress { [HideFromIl2Cpp] get; } = "SpeedMultiplier";
+        private string RangeAddress { [HideFromIl2Cpp] get; } = "Range";
 
-        internal DisassembledUdonBehaviour CurrentTower { get; private set; }
+        internal DisassembledUdonBehaviour CurrentTower { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
     }
 }

@@ -4,14 +4,12 @@
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using MelonLoader;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
-    using VRC.Management;
 
     [RegisterComponent]
     public class PlayerESP : EspEvents
@@ -74,6 +72,7 @@
 
         private Color BlockedColor
         {
+            [HideFromIl2Cpp]
             get
             {
                 return ConfigManager.ESPBlockedColor;
@@ -82,6 +81,7 @@
 
         private Color FriendColor
         {
+            [HideFromIl2Cpp]
             get
             {
                 return ConfigManager.ESPFriendColor;
@@ -90,6 +90,7 @@
 
         private Color PublicColor
         {
+            [HideFromIl2Cpp]
             get
             {
                 return ConfigManager.PublicESPColor;
@@ -101,8 +102,8 @@
             if (!CanActuallyEditOnEvent) return;
             if (AssignedPlayer.GetAPIUser().IsFriend())
             {
-                    CurrentColor = FriendColor;
-                }
+                CurrentColor = FriendColor;
+            }
         }
 
         internal override void OnUnfriended()
@@ -110,9 +111,8 @@
             if (!CanActuallyEditOnEvent) return;
             if (!AssignedPlayer.GetAPIUser().IsFriend())
             {
-                    CurrentColor = PublicColor;
-                }
-            
+                CurrentColor = PublicColor;
+            }
         }
 
         internal override void OnPlayerBlockedYou(Photon.Realtime.Player player)
@@ -143,7 +143,6 @@
                 }
             }
         }
-
 
         internal void OnDestroy()
         {
@@ -178,6 +177,7 @@
                 CurrentColor = color;
             }
         }
+
         internal override void OnFriendESPColorChanged(Color color)
         {
             if (!CanActuallyEditOnEvent) return;
@@ -185,9 +185,7 @@
             {
                 CurrentColor = color;
             }
-
         }
-
 
         internal override void OnBlockedESPColorChanged(Color color)
         {
@@ -223,17 +221,19 @@
 
         private UnityEngine.Color? CurrentColor
         {
+            [HideFromIl2Cpp]
             get
             {
-                if(HighLightOptions != null)
+                if (HighLightOptions != null)
                 {
                     return HighLightOptions.highlightColor;
                 }
                 return null;
             }
+            [HideFromIl2Cpp]
             set
             {
-                if(HighLightOptions != null)
+                if (HighLightOptions != null)
                 {
                     HighLightOptions.highlightColor = value.Value;
                 }
@@ -242,6 +242,7 @@
 
         private bool CanActuallyEditOnEvent
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (CanEditValues)
@@ -258,6 +259,7 @@
 
         private bool CanEditValues
         {
+            [HideFromIl2Cpp]
             get
             {
                 return HighLightOptions != null && AssignedPlayer != null && AssignedPlayer.GetAPIUser() != null && CurrentColor.HasValue;
@@ -266,6 +268,7 @@
 
         private List<MeshRenderer> CurrentRenderers
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (SelectRegion != null)
@@ -276,16 +279,18 @@
             }
         }
 
-        private Transform SelectRegion { get; set; }
-        private HighlightsFXStandalone HighLightOptions { get; set; }
+        private Transform SelectRegion { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         internal bool _UseCustomColor;
 
         internal bool UseCustomColor
         {
+            [HideFromIl2Cpp]
             get
             {
                 return _UseCustomColor;
             }
+            [HideFromIl2Cpp]
             set
             {
                 if (value == _UseCustomColor)
@@ -300,6 +305,6 @@
             }
         }
 
-        internal Player AssignedPlayer { get; private set; }
+        internal Player AssignedPlayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
     }
 }

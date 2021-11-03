@@ -1,6 +1,7 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
-    using AstroClient.Streamer;
     using AstroLibrary.Utility;
     using System;
     using UnityEngine;
@@ -13,8 +14,8 @@
         private static HumanBodyBones TargetBone;
         private static GameObject Target;
         private static GameObject Self;
-        internal static bool IsEnabled { get; set; } = false;
-        internal static float Height { get; set; } = 0f;
+        internal static bool IsEnabled { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+        internal static float Height { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0f;
 
         public SitOnPlayer(IntPtr obj0) : base(obj0)
         {

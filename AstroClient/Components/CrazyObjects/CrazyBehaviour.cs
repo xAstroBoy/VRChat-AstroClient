@@ -1,10 +1,9 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
-    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using System;
-    using System.Runtime.InteropServices;
-    using UnhollowerRuntimeLib;
     using UnityEngine;
     using static AstroClient.Forces;
 
@@ -110,7 +109,6 @@
                         CrazyTimeCheck = Time.time;
                     }
                 }
-
             }
         }
 
@@ -132,7 +130,6 @@
             catch { }
         }
 
-
         #region actions
 
         private void Run_OnOnCrazyPropertyChanged()
@@ -145,21 +142,25 @@
             OnCrazyPropertyChanged += action;
         }
 
-
         internal void RemoveActionEvents()
         {
             OnCrazyPropertyChanged = null;
         }
+
         private event Action? OnCrazyPropertyChanged;
 
         #endregion actions
-        private float CrazyTimeCheck { get; set; } = 0;
-        private float InpulseTimeCheck { get; set; } = 0;
 
-        private float _CrazyTimer { get; set; } = 0.04f;
+        private float CrazyTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0;
+        private float InpulseTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0;
+
+        private float _CrazyTimer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.04f;
+
         internal float CrazyTimer
         {
+            [HideFromIl2Cpp]
             get => _CrazyTimer;
+            [HideFromIl2Cpp]
             set
             {
                 _CrazyTimer = value;
@@ -167,10 +168,13 @@
             }
         }
 
-        private float _ImpulseTimer { get; set; } = 5f;
+        private float _ImpulseTimer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 5f;
+
         internal float ImpulseTimer
         {
+            [HideFromIl2Cpp]
             get => _ImpulseTimer;
+            [HideFromIl2Cpp]
             set
             {
                 _ImpulseTimer = value;
@@ -178,10 +182,13 @@
             }
         }
 
-        private float _ImpulseForce { get; set; } = 1.5f;
+        private float _ImpulseForce { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 1.5f;
+
         internal float ImpulseForce
         {
+            [HideFromIl2Cpp]
             get => _ImpulseForce;
+            [HideFromIl2Cpp]
             set
             {
                 _ImpulseForce = value;
@@ -189,10 +196,13 @@
             }
         }
 
-        private bool _ShouldDoImpulseMode { get; set; } = true;
+        private bool _ShouldDoImpulseMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = true;
+
         internal bool ShouldDoImpulseMode
         {
+            [HideFromIl2Cpp]
             get => _ShouldDoImpulseMode;
+            [HideFromIl2Cpp]
             set
             {
                 _ShouldDoImpulseMode = value;
@@ -200,10 +210,13 @@
             }
         }
 
-        private bool _IsDoingImpulseMode { get; set; } = false;
+        private bool _IsDoingImpulseMode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+
         internal bool IsDoingImpulseMode
         {
+            [HideFromIl2Cpp]
             get => _IsDoingImpulseMode;
+            [HideFromIl2Cpp]
             set
             {
                 _IsDoingImpulseMode = value;
@@ -211,10 +224,13 @@
             }
         }
 
-        private bool _IsImpulseModeActive { get; set; } = false;
+        private bool _IsImpulseModeActive { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+
         internal bool IsImpulseModeActive
         {
+            [HideFromIl2Cpp]
             get => _IsImpulseModeActive;
+            [HideFromIl2Cpp]
             set
             {
                 _IsImpulseModeActive = value;
@@ -222,11 +238,13 @@
             }
         }
 
+        private bool _UseGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private bool _UseGravity { get; set; }
         internal bool UseGravity
         {
+            [HideFromIl2Cpp]
             get => _UseGravity;
+            [HideFromIl2Cpp]
             set
             {
                 _UseGravity = value;
@@ -234,18 +252,21 @@
             }
         }
 
-        private Rigidbody Rigidbody { get; set; }
-        private RigidBodyController RigidBodyController { get; set; }
-        private PickupController PickupController { get; set; }
+        private Rigidbody Rigidbody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private RigidBodyController RigidBodyController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private PickupController PickupController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private bool isHeld => PickupController.IsHeld;
 
-        private VRC_AstroPickup VRC_AstroPickup { get; set; }
+        private VRC_AstroPickup VRC_AstroPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private bool isPaused;
         private bool _IsEnabled = true;
+
         internal bool IsEnabled
         {
+            [HideFromIl2Cpp]
             get => _IsEnabled;
+            [HideFromIl2Cpp]
             set
             {
                 _IsEnabled = value;
@@ -266,14 +287,16 @@
                     }
                 }
             }
-
         }
-        private float CheckisOwnerTimeCheck { get; set; } = 0;
 
-        private float CheckisOwnerDelay { get; set; } = 16f;
-        private bool CheckisOwner { get; set; } = false;
+        private float CheckisOwnerTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0;
+
+        private float CheckisOwnerDelay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 16f;
+        private bool CheckisOwner { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+
         private bool isCurrentOwner
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (CheckisOwner)
@@ -292,12 +315,15 @@
         }
 
         private bool _HasRequiredSettings = false;
+
         private bool HasRequiredSettings
         {
+            [HideFromIl2Cpp]
             get => _HasRequiredSettings;
+            [HideFromIl2Cpp]
             set
             {
-                if(value.Equals(_HasRequiredSettings))
+                if (value.Equals(_HasRequiredSettings))
                 {
                     return; // Do Nothing.
                 }
@@ -324,10 +350,7 @@
             }
         }
 
-        private Rigidbody RigidBody { get; set; } = null;
-        private string OriginalText_Use { get; set; }
-
-
-        
+        private Rigidbody RigidBody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private string OriginalText_Use { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
 }

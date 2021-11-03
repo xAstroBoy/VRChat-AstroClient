@@ -1,14 +1,12 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
-    using AstroClient.GameObjectDebug;
+    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
-    using AstroLibrary.Console;
     using UnityEngine;
-    using VRC;
-    using Time = UnityEngine.Time;
 
     [RegisterComponent]
     public class KeypadRevealer : GameEventsBehaviour
@@ -35,8 +33,6 @@
             }
         }
 
-
-
         private bool FindAndRevealPassword()
         {
             foreach (var item in PasswordsVariables)
@@ -56,13 +52,11 @@
                         // At this point it should contain the keycode password.
                         GenerateButtonWithPassword(Environment.NewLine + cleaned + Environment.NewLine);
                         return true;
-
                     }
                 }
             }
             return false;
         }
-
 
         internal bool HasFailedUnpacking(string value)
         {
@@ -78,8 +72,7 @@
             return value == "_" || value == "-";
         }
 
-
-        private List<string> PasswordsVariables { get; } = new List<string>
+        private List<string> PasswordsVariables { [HideFromIl2Cpp] get; } = new List<string>
         {
             "password",
             "solution",

@@ -1,13 +1,15 @@
+using UnhollowerBaseLib.Attributes;
+
 namespace AstroClient.Components
 {
-    using AstroLibrary.Extensions;
     using AstroButtonAPI;
+    using AstroLibrary.Extensions;
     using System;
 
     [RegisterComponent]
     public class ScrollMenuListener_AudioSource : GameEventsBehaviour
     {
-        internal QMSingleButton Assignedbtn { get; set; }
+        internal QMSingleButton Assignedbtn { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal UnityEngine.AudioSource source;
 

@@ -2,7 +2,6 @@
 {
     #region Imports
 
-    using AstroClient.Cheetos;
     using AstroClient.Components;
     using AstroClient.Variables;
     using AstroLibrary.Console;
@@ -25,7 +24,7 @@
         {
             try
             {
-                ClassInjector.RegisterTypeInIl2Cpp(type);
+                ClassInjector.RegisterTypeInIl2Cpp(type, true);
                 ModConsole.DebugLog($"Registered: {type}");
                 if (!RegisteredComponentsTypes.Contains(type))
                 {

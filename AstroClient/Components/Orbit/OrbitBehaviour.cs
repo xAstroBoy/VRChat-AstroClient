@@ -136,21 +136,21 @@
                 }
 
                 if (!pickup.IsHeld && !pickup.IsHeld)
-				{
-					if (!gameObject.IsOwner())
-					{
-						gameObject.TakeOwnership();
-					}
-					Timer += (Time.deltaTime * RotationSpeed) + TimerOffset;
-					Rotate();
-					UpdateTimer -= Time.deltaTime;
-					if (UpdateTimer <= 0f)
-					{
-						transform.position = Position;
-						transform.LookAt(CenterPoint);
-						UpdateTimer = Time.deltaTime * 2f;
-					}
-				}
+                {
+                    if (!gameObject.IsOwner())
+                    {
+                        gameObject.TakeOwnership();
+                    }
+                    Timer += (Time.deltaTime * RotationSpeed) + TimerOffset;
+                    Rotate();
+                    UpdateTimer -= Time.deltaTime;
+                    if (UpdateTimer <= 0f)
+                    {
+                        transform.position = Position;
+                        transform.LookAt(CenterPoint);
+                        UpdateTimer = Time.deltaTime * 2f;
+                    }
+                }
 
                 //VRCPlayerApi playerApi = Player.prop_Player_0.prop_VRCPlayerApi_0;
                 //if (playerApi != null && !Networking.IsOwner(playerApi, obj))
@@ -282,9 +282,11 @@
                 case > 1f:
                     result = 1f;
                     break;
+
                 case < 0f:
                     result = 0f;
                     break;
+
                 default:
                     result = val;
                     break;

@@ -20,7 +20,6 @@
 
         private bool DebugMode = true;
 
-        
         private void Debug(string msg)
         {
             if (DebugMode)
@@ -32,7 +31,7 @@
         // Use this for initialization
         internal void Start()
         {
-            ESPColor = GetDefaultColor();
+            ESPColor = DefaultColor;
             ObjMeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true);
             if (ObjMeshRenderers == null && ObjMeshRenderers.Count() == 0)
             {
@@ -112,18 +111,12 @@
                 }
             }
         }
-
-        private Color GetDefaultColor()
-        {
-            return ColorUtils.HexToColor("EF2C3F");
-        }
-
         internal void ResetColor()
         {
-            ESPColor = GetDefaultColor();
+            ESPColor = DefaultColor;
             if (HighLightOptions != null)
             {
-                HighLightOptions.SetHighLighterColor(GetDefaultColor());
+                HighLightOptions.SetHighLighterColor(DefaultColor);
             }
         }
 
@@ -163,6 +156,7 @@
 
         internal Color GetCurrentESPColor
         {
+            [HideFromIl2Cpp]
             get
             {
                 return HighLightOptions.highlightColor;
@@ -173,8 +167,10 @@
         internal VRCSDK2.VRC_Trigger trigger2;
         internal bool Lock = true;
         internal bool HasSetupESP = false;
-        internal Color ESPColor { get; private set; }
-        internal HighlightsFXStandalone HighLightOptions { get; private set; }
+        internal Color ESPColor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal Color DefaultColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("EF2C3F");
+
+        internal HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
     }
 }

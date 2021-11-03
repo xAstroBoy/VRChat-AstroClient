@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using AstroClient.Udon;
     using AstroLibrary.Console;
@@ -38,6 +40,7 @@
 
         internal int? CurrentBankBalance
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (BankController != null)
@@ -46,6 +49,7 @@
                 }
                 return null;
             }
+            [HideFromIl2Cpp]
             set
             {
                 if (BankController != null)
@@ -58,9 +62,9 @@
             }
         }
 
-        private string StartMoney { get; } = "StartMoney";
-        private string CurrentMoney { get; } = "Money";
+        private string StartMoney { [HideFromIl2Cpp] get; } = "StartMoney";
+        private string CurrentMoney { [HideFromIl2Cpp] get; } = "Money";
 
-        private static DisassembledUdonBehaviour BankController { get; set; }
+        private static DisassembledUdonBehaviour BankController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
 }

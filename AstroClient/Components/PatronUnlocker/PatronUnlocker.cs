@@ -199,15 +199,16 @@
             }
         }
 
-
         private bool _EveryoneHasPatreonPerk;
 
         internal bool EveryoneHasPatreonPerk
         {
+            [HideFromIl2Cpp]
             get
             {
                 return _EveryoneHasPatreonPerk;
             }
+            [HideFromIl2Cpp]
             set
             {
                 _EveryoneHasPatreonPerk = value;
@@ -222,10 +223,12 @@
 
         internal bool OnlySelfHasPatreonPerk
         {
+            [HideFromIl2Cpp]
             get
             {
                 return _OnlySelfHasPatreonPerk;
             }
+            [HideFromIl2Cpp]
             set
             {
                 _OnlySelfHasPatreonPerk = value;
@@ -236,21 +239,20 @@
             }
         }
 
-
-        private List<string> GetPatronSkinEventNames { get; } = new List<string>
+        private List<string> GetPatronSkinEventNames { [HideFromIl2Cpp] get; } = new List<string>
         {
             "PatronSkin",
         };
-        private List<string> GetNonPatronSkinEventNames { get; } = new List<string>
+
+        private List<string> GetNonPatronSkinEventNames { [HideFromIl2Cpp] get; } = new List<string>
         {
             "NonPatronSkin",
         };
 
-
-        internal VRC_AstroPickup CustomPickup { get; private set; }
-        internal PickupController PickupListener { get; private set; }
-        internal bool IgnoreEventReceiver { get; private set; }
-        internal UdonBehaviour_Cached NonPatronSkinEvent { get; private set; }
-        internal UdonBehaviour_Cached PatronSkinEvent { get; private set; }
+        internal VRC_AstroPickup CustomPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal PickupController PickupListener { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal bool IgnoreEventReceiver { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal UdonBehaviour_Cached NonPatronSkinEvent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal UdonBehaviour_Cached PatronSkinEvent { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
     }
 }
