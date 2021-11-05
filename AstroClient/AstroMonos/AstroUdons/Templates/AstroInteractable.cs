@@ -15,14 +15,21 @@ namespace AstroClient.AstroMonos.AstroUdons.Templates
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
 
+        }
+
+
+        private void Start()
+        {
+
             interactable = this.gameObject.AddComponent<VRC_AstroInteractable>();
             if (interactable != null)
             {
 
                 interactable.OnInteract += OnInteract;
-
             }
         }
+
+
         internal string InteractionText
         {
             [HideFromIl2Cpp]
@@ -33,7 +40,7 @@ namespace AstroClient.AstroMonos.AstroUdons.Templates
 
         internal virtual void OnInteract() { }
 
-        private VRC_AstroInteractable interactable { [HideFromIl2Cpp] get; }
+        private VRC_AstroInteractable interactable { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
 
         internal VRCInteractable VRCInteractableProperties

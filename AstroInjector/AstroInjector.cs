@@ -46,11 +46,6 @@
         public AstroInjector()
         {
             LoadEmbeddedLibraries();
-         
-        }
-
-        public override void OnApplicationStart()
-        {
             if (Environment.GetCommandLineArgs().Any(a => a.Contains("RinBot")))
             {
                 MelonLogger.Msg($"Detected RinBot: Skipping AstroClient Loading");
@@ -98,6 +93,11 @@
                     Assembly.Load(bytes);
                 }
             }
+        }
+
+        public override void OnApplicationStart()
+        {
+          
         }
 
         internal void LoadEmbeddedLibraries()

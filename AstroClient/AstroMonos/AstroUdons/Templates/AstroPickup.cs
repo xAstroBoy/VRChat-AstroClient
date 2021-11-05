@@ -15,6 +15,10 @@ namespace AstroClient.AstroMonos.AstroUdons.Templates
             AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
 
+        }
+
+        private void Start()
+        {
             CustomPickup = this.gameObject.AddComponent<VRC_AstroPickup>();
             if (CustomPickup != null)
             {
@@ -38,8 +42,8 @@ namespace AstroClient.AstroMonos.AstroUdons.Templates
                 CustomPickup.OnPickupUseDown += OnPickupUseDown;
 
             }
-        }
 
+        }
 
         internal string UseText
         {
@@ -62,7 +66,7 @@ namespace AstroClient.AstroMonos.AstroUdons.Templates
         internal virtual void OnPickupUseUp() { }
         internal virtual void OnPickupUseDown() { }
 
-        private VRC_AstroPickup CustomPickup { [HideFromIl2Cpp] get; }
+        private VRC_AstroPickup CustomPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal PickupController PickupProperties
         {

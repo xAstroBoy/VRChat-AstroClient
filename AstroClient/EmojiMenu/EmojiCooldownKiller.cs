@@ -15,15 +15,19 @@
 
         internal override void OnPlayerJoined(Player player)
         {
-            if (player != null)
+            MiscUtils.DelayFunction(1f, () =>
             {
-                var vrcplayer = player.GetVRCPlayer();
-                if (vrcplayer != null)
+
+                if (player != null)
                 {
+                    var vrcplayer = player.GetVRCPlayer();
+                    if (vrcplayer != null)
+                    {
                         vrcplayer.Set_Emoji_Cooldown(0);
                         ModConsole.DebugLog($"[EmojiBypasser] : Removed Player {player.DisplayName()} 's Emoji Cooldown.");
+                    }
                 }
-            }
+            });
         }
     }
 }
