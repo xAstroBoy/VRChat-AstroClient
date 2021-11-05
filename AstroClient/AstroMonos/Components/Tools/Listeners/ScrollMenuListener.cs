@@ -1,8 +1,9 @@
-namespace AstroClient.Components
+namespace AstroClient.AstroMonos.Components.Tools.Listeners
 {
+    using System;
     using AstroButtonAPI;
     using AstroLibrary.Extensions;
-    using System;
+    using CustomMono;
 
     [RegisterComponent]
     public class ScrollMenuListener : GameEventsBehaviour

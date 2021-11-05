@@ -7,8 +7,8 @@ namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
     using System.Runtime.InteropServices;
     using AstroActionMenu.Api;
     using AstroLibrary.Console;
+    using AstroMonos.Components.Tools.Listeners;
     using CheetoLibrary;
-    using Components;
     using MelonLoader;
     using UnityEngine;
     using VRC;

@@ -1,7 +1,7 @@
 ﻿namespace AstroLibrary.Extensions
 {
     using AstroClient;
-    using AstroClient.Components;
+    using AstroClient.AstroMonos.Components.ESP;
     using UnityEngine;
 
     internal static class Highlighter_ext

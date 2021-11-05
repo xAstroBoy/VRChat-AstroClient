@@ -7,7 +7,8 @@
     using AstroLibrary.Extensions;
     using AstroClient.Udon;
     using AstroLibrary.Utility;
-    using AstroClient.Components;
+    using AstroMonos.Components.Spoofer;
+
     internal class FurryTalkAndChill : GameEvents
     {
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)

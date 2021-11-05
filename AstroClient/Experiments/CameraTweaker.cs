@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.Experiments
 {
-    using AstroClient.Components;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
     using AstroButtonAPI;
     using System.Collections.Generic;
+    using AstroMonos.Components.Tools;
     using UnityEngine;
 
     internal class CameraTweaker : GameEvents

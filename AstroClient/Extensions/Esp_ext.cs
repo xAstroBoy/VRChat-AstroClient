@@ -1,8 +1,12 @@
 ﻿namespace AstroLibrary.Extensions
 {
     using AstroClient;
-    using AstroClient.Components;
     using System.Collections.Generic;
+    using AstroClient.AstroMonos.Components.ESP.ItemTweaker;
+    using AstroClient.AstroMonos.Components.ESP.Pickup;
+    using AstroClient.AstroMonos.Components.ESP.Trigger;
+    using AstroClient.AstroMonos.Components.ESP.UdonBehaviour;
+    using AstroClient.AstroMonos.Components.ESP.VRCInteractable;
     using UnityEngine;
 
     internal static class Esp_ext

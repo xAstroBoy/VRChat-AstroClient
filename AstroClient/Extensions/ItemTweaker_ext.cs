@@ -1,8 +1,8 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroClient.Components;
     using AstroClient.ItemTweakerV2.Handlers;
     using System.Collections.Generic;
+    using AstroClient.AstroMonos.Components.Custom.Random;
     using UnityEngine;
 
     internal static class ItemTweaker_ext

@@ -4,7 +4,6 @@
 
     using AstroButtonAPI;
     using AstroClient.ButtonShortcut;
-    using AstroClient.Components;
     using AstroClient.Experiments;
     using AstroClient.GameObjectDebug;
     using AstroClient.ItemTweakerV2;
@@ -26,6 +25,7 @@
     using System.IO;
     using System.Reflection;
     using System.Windows.Forms;
+    using AstroMonos;
     using ClientUI.QuickMenuButtons;
     using UnhollowerBaseLib;
     using UnityEngine;

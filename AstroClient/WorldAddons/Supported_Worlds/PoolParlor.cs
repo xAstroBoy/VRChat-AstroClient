@@ -1,6 +1,5 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Components;
     using AstroClient.Udon;
     using AstroClient.Variables;
     using AstroLibrary.Console;
@@ -10,6 +9,8 @@
     using AstroButtonAPI;
     using System;
     using System.Collections.Generic;
+    using AstroMonos.AstroUdons;
+    using AstroMonos.Components.Spoofer;
     using UnityEngine;
     using static AstroClient.Variables.CustomLists;
 

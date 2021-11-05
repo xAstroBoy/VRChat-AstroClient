@@ -1,16 +1,16 @@
-﻿namespace AstroClient.Cheetos
+﻿namespace AstroClient.AstroMonos.Components.UI.NamePlates
 {
     #region Imports
 
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using MelonLoader;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Text;
+    using AstroLibrary.Console;
+    using AstroLibrary.Utility;
+    using CustomMono;
+    using MelonLoader;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;

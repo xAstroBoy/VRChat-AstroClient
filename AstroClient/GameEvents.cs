@@ -3,7 +3,6 @@
     #region Imports
 
     using AstroClient.Cheetos;
-    using AstroClient.Components;
     using AstroClient.Moderation;
     using AstroClient.Startup.Hooks;
     using AstroClient.Streamer;
@@ -11,6 +10,7 @@
     using AstroLibrary.Console;
     using System;
     using System.Collections.Generic;
+    using AstroMonos;
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;

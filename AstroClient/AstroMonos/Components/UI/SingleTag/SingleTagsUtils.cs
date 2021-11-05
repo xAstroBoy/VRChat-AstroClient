@@ -1,14 +1,13 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.UI.SingleTag
 {
     #region Imports
 
+    using System.Collections.Generic;
+    using System.Linq;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System.Collections.Generic;
-    using System.Linq;
+    using UnhollowerBaseLib.Attributes;
     using VRC;
 
     #endregion Imports

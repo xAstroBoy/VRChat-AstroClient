@@ -416,7 +416,7 @@
     <Compile Include="Features\Player\Movement\JumpModifier.cs" />
     <Compile Include="Features\Player\Movement\QuickMenu\QMFreeze.cs" />
     <Compile Include="GameEvents.cs" />
-    <Compile Include="GameEventsBehaviour.cs" />
+    <Compile Include="AstroMonos\CustomMono\GameEventsBehaviour.cs" />
     <Compile Include="Cheetos\CameraStuff\FOV.cs" />
     <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
     <Compile Include="Streamer\StreamerProtector.cs" />

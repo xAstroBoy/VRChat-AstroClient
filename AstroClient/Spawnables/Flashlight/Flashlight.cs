@@ -5,6 +5,8 @@ using UnityEngine;
 
 namespace AstroClient
 {
+    using AstroMonos.Components.Custom.Items;
+
     internal class Astro_Flashlight : GameEvents
     {
         internal override void OnSceneLoaded(int buildIndex, string sceneName)

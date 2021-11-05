@@ -1,9 +1,9 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Components;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using System.Linq;
+    using AstroMonos.Components.Custom.Random;
     using UnityEngine;
     using VRC.Udon;
     using static AstroClient.ItemTweakerV2.Submenus.ScaleSubmenu;

@@ -1,7 +1,6 @@
 ﻿namespace AstroClient
 {
     using AstroClient.Cheetos;
-    using AstroClient.Components;
     using AstroClient.Moderation;
     using AstroClient.Startup.Hooks;
     using AstroClient.Streamer;
@@ -9,6 +8,7 @@
     using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
+    using AstroMonos.AstroUdons;
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;

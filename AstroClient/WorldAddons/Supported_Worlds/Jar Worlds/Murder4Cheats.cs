@@ -2,7 +2,6 @@
 {
     #region Imports
 
-    using AstroClient.Components;
     using AstroClient.UdonExploits;
     using AstroClient.Variables;
     using AstroLibrary.Console;
@@ -17,6 +16,9 @@
     using VRC;
     using static AstroClient.Variables.CustomLists;
     using AstroClient.Udon.UdonEditor;
+    using AstroMonos.Components.Cheats.PatronUnlocker;
+    using AstroMonos.Components.Cheats.Worlds.JarWorlds;
+    using AstroMonos.Components.ESP.Pickup;
     using ClientUI.QuickMenuButtons.ESP;
 
     #endregion Imports

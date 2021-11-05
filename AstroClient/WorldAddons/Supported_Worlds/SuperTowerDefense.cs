@@ -1,7 +1,6 @@
 ﻿namespace AstroClient
 {
     using AstroButtonAPI;
-    using AstroClient.Components;
     using AstroClient.Variables;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
@@ -12,6 +11,8 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using AstroMonos.AstroUdons;
+    using AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
     using CheetoLibrary;
     using UnityEngine;
     using static AstroClient.Variables.CustomLists;

@@ -1,11 +1,12 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-    using AstroClient.Components;
     using AstroClient.ItemTweakerV2.Selector;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using AstroButtonAPI;
     using System;
+    using AstroMonos.Components.Custom.Random;
+    using AstroMonos.Components.Tools.KeycodeRevealer;
 
     internal class FunBehavioursSubMenu : Tweaker_Events
     {

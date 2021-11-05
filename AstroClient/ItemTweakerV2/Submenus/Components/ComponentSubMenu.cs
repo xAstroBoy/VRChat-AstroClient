@@ -1,6 +1,5 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-    using AstroClient.Components;
     using AstroClient.ItemTweakerV2.Selector;
     using AstroLibrary.Extensions;
     using AstroButtonAPI;

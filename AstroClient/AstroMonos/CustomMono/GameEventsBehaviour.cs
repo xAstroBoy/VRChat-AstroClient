@@ -1,14 +1,12 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.AstroMonos.CustomMono
 {
-    using AstroClient.Cheetos;
-    using AstroClient.Components;
-    using AstroClient.Moderation;
-    using AstroClient.Startup.Hooks;
-    using AstroClient.Streamer;
-    using AstroClientCore.Events;
-    using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
+    using AstroClientCore.Events;
+    using Cheetos;
+    using Moderation;
+    using Startup.Hooks;
+    using Streamer;
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;

@@ -3,8 +3,10 @@
     using System;
     using AstroButtonAPI;
     using AstroLibrary.Utility;
+    using AstroMonos;
+    using AstroMonos.Components.Malicious;
+    using AstroMonos.Components.Player;
     using Cheetos;
-    using Components;
     using UnityEngine;
     using Variables;
     using Finder = AstroLibrary.Finder;

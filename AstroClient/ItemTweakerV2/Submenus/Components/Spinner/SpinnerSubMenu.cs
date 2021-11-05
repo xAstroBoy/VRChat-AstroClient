@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-    using AstroClient.Components;
     using AstroClient.ItemTweakerV2.Selector;
     using AstroLibrary.Extensions;
     using AstroButtonAPI;
     using System;
     using UnityEngine;
     using System.Linq;
+    using AstroMonos.Components.Custom.Random;
 
     internal class SpinnerSubMenu : Tweaker_Events
     {

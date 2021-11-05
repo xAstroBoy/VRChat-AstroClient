@@ -1,12 +1,12 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Components;
     using AstroLibrary;
     using AstroLibrary.Utility;
     using CheetoLibrary;
     using System;
     using System.Reflection;
     using AstroLibrary.Extensions;
+    using AstroMonos.AstroUdons;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;

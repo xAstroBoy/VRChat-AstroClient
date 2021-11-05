@@ -1,10 +1,11 @@
-﻿using AstroClient.Components;
-using AstroLibrary.Utility;
+﻿using AstroLibrary.Utility;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace AstroLibrary.Extensions
 {
+    using AstroClient.AstroMonos.Components.Tools;
+
     internal static class Pickup_ext
     {
         internal static void Pickup_AllowOnlySelfToGrab(this GameObject obj, bool AllowOnlySelfToGrab)

@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.Startup
 {
     using AstroLibrary.Utility;
-    using Components;
+    using AstroMonos.Components.Tools;
 
     internal class UiModifier : GameEvents
     {

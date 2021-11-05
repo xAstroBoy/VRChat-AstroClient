@@ -4,7 +4,10 @@
     using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using Components;
+    using AstroMonos.Components.ESP.Pickup;
+    using AstroMonos.Components.ESP.Trigger;
+    using AstroMonos.Components.ESP.UdonBehaviour;
+    using AstroMonos.Components.ESP.VRCInteractable;
     using UnityEngine;
 
     internal class VRChat_Map_ESP_Menu : GameEvents

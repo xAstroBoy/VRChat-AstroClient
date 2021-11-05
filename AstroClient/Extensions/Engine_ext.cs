@@ -12,6 +12,7 @@
     using System.IO;
     using System.Reflection;
     using System.Windows.Forms;
+    using AstroClient.AstroMonos;
     using UnityEngine;
     using VRC.SDK3.Components;
     using VRC.SDKBase;

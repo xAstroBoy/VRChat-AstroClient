@@ -1,6 +1,5 @@
 ﻿namespace AstroClient.ItemTweakerV2
 {
-    using AstroClient.Components;
     using AstroClient.GameObjectDebug;
     using AstroClient.ItemTweakerV2.Handlers;
     using AstroClient.ItemTweakerV2.Selector;
@@ -12,6 +11,7 @@
     using AstroButtonAPI;
     using System;
     using System.Reflection;
+    using AstroMonos.Components.Tools;
     using UnityEngine;
     using VRC;
     using Color = UnityEngine.Color;

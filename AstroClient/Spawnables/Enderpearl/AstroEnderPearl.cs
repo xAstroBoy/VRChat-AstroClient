@@ -5,6 +5,8 @@ using VRC.SDKBase;
 
 namespace AstroClient
 {
+    using AstroMonos.Components.Custom.Items;
+
     internal class AstroEnderPearl
     {
         private static GameObject ENDER;

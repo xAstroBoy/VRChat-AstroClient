@@ -1,7 +1,6 @@
 ﻿#pragma warning disable 649
 namespace AstroClient
 {
-    using AstroClient.Components;
     using AstroClient.Variables;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
@@ -11,6 +10,7 @@ namespace AstroClient
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroMonos.AstroUdons;
     using UnityEngine;
 
     internal class FBTHeaven : GameEvents

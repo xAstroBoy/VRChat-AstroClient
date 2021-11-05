@@ -2,7 +2,6 @@
 {
     #region Imports
 
-    using AstroClient.Components;
     using AstroClient.ItemTweakerV2.Selector;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
@@ -15,6 +14,7 @@
     using System.IO;
     using System.Linq;
     using System.Threading;
+    using AstroMonos.Components.Tools;
     using UnhollowerBaseLib;
     using UnityEngine;
     using VRC;

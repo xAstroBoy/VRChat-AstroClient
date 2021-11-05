@@ -1,7 +1,6 @@
-namespace AstroClient.Components
+namespace AstroClient.AstroMonos.Components.Tools
 {
     using System;
-    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
     [RegisterComponent]

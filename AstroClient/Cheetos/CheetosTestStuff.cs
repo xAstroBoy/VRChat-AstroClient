@@ -2,7 +2,6 @@
 {
     #region Imports
 
-    using AstroClient.Components;
     using AstroClient.Variables;
     using AstroLibrary;
     using AstroLibrary.Console;
@@ -15,6 +14,8 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.IO;
+    using AstroMonos.Components.Player;
+    using AstroMonos.Components.Spoofer;
     using UnhollowerBaseLib;
     using UnityEngine;
     using UnityEngine.UI;

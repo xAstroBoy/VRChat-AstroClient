@@ -5,7 +5,7 @@
     using AstroClientCore.Events;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using Components;
+    using AstroMonos.Components.ESP.Player;
     using UnityEngine;
     using VRC;
 

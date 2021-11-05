@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.ItemTweakerV2.Handlers
 {
-    using AstroClient.Components;
     using AstroClient.ItemTweakerV2.Selector;
     using AstroClient.ItemTweakerV2.TweakerEventArgs;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using System;
+    using AstroMonos.Components.Custom.Random;
     using UnityEngine;
 
     internal class CrazyBehaviourHandler : Tweaker_Events

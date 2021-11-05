@@ -1,6 +1,5 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Components;
     using AstroClient.Features.Player.Movement.Exploit;
     using AstroClient.UdonExploits;
     using AstroClient.Variables;
@@ -16,6 +15,9 @@
     using VRC;
     using static AstroClient.Variables.CustomLists;
     using AstroClient.Udon.UdonEditor;
+    using AstroMonos.Components.Cheats.Worlds.JarWorlds;
+    using AstroMonos.Components.ESP.VRCInteractable;
+    using AstroMonos.Components.Spoofer;
 
     internal class AmongUSCheats : GameEvents
     {

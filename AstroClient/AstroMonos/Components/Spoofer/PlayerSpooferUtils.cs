@@ -1,12 +1,11 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.Spoofer
 {
-    using AstroClient.Variables;
+    using System.Drawing;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
-    using System.Drawing;
     using ClientUI.QuickMenuButtons;
+    using UnhollowerBaseLib.Attributes;
+    using Variables;
 
     internal class PlayerSpooferUtils : GameEvents
     {

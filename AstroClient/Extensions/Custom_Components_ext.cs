@@ -1,12 +1,15 @@
 ﻿namespace AstroLibrary.Extensions
 {
     using AstroClient;
-    using AstroClient.Components;
     using AstroClient.Variables;
     using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroClient.AstroMonos.Components.Custom.Random;
+    using AstroClient.AstroMonos.Components.Malicious;
+    using AstroClient.AstroMonos.Components.Malicious.Orbit;
+    using AstroClient.AstroMonos.Components.Tools;
     using UnityEngine;
 
     internal static class Custom_Components_ext
