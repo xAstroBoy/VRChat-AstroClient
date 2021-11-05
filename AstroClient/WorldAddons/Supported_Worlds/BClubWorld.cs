@@ -823,7 +823,7 @@
                                     RenameTrigger.gameObject.RenameObject(ObjectName);
                                 }
 
-                                var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroInteract>();
+                                var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroInteractable>();
                                 if (AstroTrigger != null)
                                 {
                                     AstroTrigger.interactText = InteractionText;
@@ -873,7 +873,7 @@
                                     RenameTrigger.gameObject.RenameObject(ObjectName);
                                 }
 
-                                var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroInteract>();
+                                var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroInteractable>();
                                 if (AstroTrigger != null)
                                 {
                                     AstroTrigger.interactText = InteractionText;
@@ -924,7 +924,7 @@
                                     RenameTrigger.gameObject.RenameObject(ObjectName);
                                 }
 
-                                var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroInteract>();
+                                var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroInteractable>();
                                 if (AstroTrigger != null)
                                 {
                                     AstroTrigger.interactText = InteractionText;
@@ -976,7 +976,7 @@
                                     RenameTrigger.gameObject.RenameObject(ObjectName);
                                 }
 
-                                var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroInteract>();
+                                var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroInteractable>();
                                 if (AstroTrigger != null)
                                 {
                                     AstroTrigger.interactText = InteractionText;
@@ -1026,7 +1026,7 @@
                                     RenameTrigger.gameObject.RenameObject(ObjectName);
                                 }
 
-                                var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroInteract>();
+                                var AstroTrigger = clone.gameObject.AddComponent<VRC_AstroInteractable>();
                                 if (AstroTrigger != null)
                                 {
                                     AstroTrigger.interactText = InteractionText;

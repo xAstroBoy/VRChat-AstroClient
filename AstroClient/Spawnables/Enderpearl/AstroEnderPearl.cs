@@ -1,4 +1,5 @@
 using AstroLibrary.Extensions;
+using AstroLibrary.Utility;
 using UnityEngine;
 using VRC.SDKBase;
 
@@ -23,8 +24,12 @@ namespace AstroClient
             pearl.transform.position = bonePosition;
             pearl.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
             pearl.name = "EnderPearl (AstroClient)";
+           var body =  pearl.GetOrAddComponent<Rigidbody>();
+           if (body != null)
+           {
+               body.useGravity = false;
+           }
             UnityEngine.Object.Destroy(pearl.GetComponent<Collider>());
-            pearl.RigidBody_Set_Gravity(false);
             _ = pearl.AddComponent<EnderPearlBehaviour>();
             ENDER = pearl;
         }

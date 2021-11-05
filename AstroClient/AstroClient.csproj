@@ -102,6 +102,9 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
+    <Compile Include="AstroLibrary\VRChatObjects\GameCamera.cs" />
+    <Compile Include="AstroLibrary\VRChatObjects\UserInterfaceObjects.cs" />
+    <Compile Include="AstroMonos\AstroUdons\Templates\VRCInteractable.cs" />
     <Compile Include="ClientUI\ActionMenuButtons\ESPModule.cs" />
     <Compile Include="ClientUI\ActionMenuButtons\MovementModule.cs" />
     <Compile Include="ClientUI\ActionMenuButtons\AvatarParametersModule\Menu\Avatar.cs" />
@@ -110,6 +113,9 @@
     <Compile Include="ClientUI\ActionMenuButtons\AvatarParametersModule\Menu\RefCountedObject.cs" />
     <Compile Include="ClientUI\ActionMenuButtons\AvatarParametersModule\Menu\Sigh.cs" />
     <Compile Include="ClientUI\ActionMenuButtons\AvatarParametersModule\ParametersEditorResources.cs" />
+    <Compile Include="AstroMonos\AstroUdons\Templates\AstroPickup.cs" />
+    <Compile Include="AstroMonos\Components\Tools\Disabler.cs" />
+    <Compile Include="CustomPickupBehaviour.cs" />
     <Compile Include="MenuAPI\ActionMenu\Api\ActionMenuPage.cs" />
     <Compile Include="MenuAPI\ActionMenu\Api\AMUtils.cs" />
     <Compile Include="MenuAPI\ActionMenu\Api\CustomSubMenu.cs" />
@@ -243,30 +249,30 @@
     <Compile Include="CheetosConsole\VirtualTerminalSequences.cs" />
     <Compile Include="Cheetos\AstroPatch.cs" />
     <Compile Include="Cheetos\InstanceHistory.cs" />
-    <Compile Include="Components\CrazyObjects\CrazyBehaviour.cs" />
-    <Compile Include="Components\ESP\EspEvents.cs" />
-    <Compile Include="Components\Flashlight\FlashlightBehaviour.cs" />
-    <Compile Include="Components\Expoits\OrbitManager.cs" />
-    <Compile Include="Components\FunBehaviour\StretchyCheeseBehaviour.cs" />
-    <Compile Include="Components\JarWorlds\JarControllerEvents.cs" />
-    <Compile Include="Components\JarWorlds\JarNodeReader.cs" />
-    <Compile Include="Components\PatronUnlocker\PatronUnlocker.cs" />
-    <Compile Include="Components\Orbit\OrbitBehaviour.cs" />
-    <Compile Include="Components\Orbit\OrbitManager_Old.cs" />
-    <Compile Include="Components\PickupControl\PickupBlocker.cs" />
-    <Compile Include="Components\PlayerAttacker\PlayerAttacker.cs" />
-    <Compile Include="Components\PlayerSpoofer\PlayerSpooferUtils.cs" />
-    <Compile Include="Components\PlayerSpoofer\PlayerSpoofer.cs" />
-    <Compile Include="Components\AstroUdons\Pickup\VRC_AstroPickup.cs" />
-    <Compile Include="Components\KeycodeRevealer\KeypadRevealer.cs" />
-    <Compile Include="Components\PlayerWatcher\PlayerWatcher.cs" />
-    <Compile Include="Components\Spinner\SpinnerBehaviour.cs" />
-    <Compile Include="Components\VRChatUIListeners\UiListener.cs" />
-    <Compile Include="Components\VRChatUIListeners\VRChatUIEvents.cs" />
-    <Compile Include="Components\WorldComponents\SuperTowerDefense\SuperTowerDefense_BankEditor.cs" />
-    <Compile Include="Components\WorldComponents\SuperTowerDefense\SuperTowerDefense_HealthEditor.cs" />
-    <Compile Include="Components\WorldComponents\SuperTowerDefense\SuperTowerDefense_TowerEditor.cs" />
-    <Compile Include="Components\WorldComponents\SuperTowerDefense\SuperTowerDefense_WaveEditor.cs" />
+    <Compile Include="AstroMonos\Components\Custom\Random\Crazy.cs" />
+    <Compile Include="AstroMonos\Components\ESP\EspEvents.cs" />
+    <Compile Include="AstroMonos\Components\Custom\Items\Flashlight.cs" />
+    <Compile Include="AstroMonos\Components\Malicious\OrbitManager.cs" />
+    <Compile Include="AstroMonos\Components\Custom\Random\StretchyCheese.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarControllerEvents.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarNodeReader.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\PatronUnlocker.cs" />
+    <Compile Include="AstroMonos\Components\Malicious\Orbit\OrbitBehaviour.cs" />
+    <Compile Include="AstroMonos\Components\Malicious\Orbit\OrbitManager_Old.cs" />
+    <Compile Include="AstroMonos\PickupBlocker.cs" />
+    <Compile Include="AstroMonos\Components\Malicious\PlayerAttacker.cs" />
+    <Compile Include="AstroMonos\Components\Spoofer\PlayerSpooferUtils.cs" />
+    <Compile Include="AstroMonos\Components\Spoofer\PlayerSpoofer.cs" />
+    <Compile Include="AstroMonos\AstroUdons\VRC_AstroPickup.cs" />
+    <Compile Include="AstroMonos\Components\Tools\KeycodeRevealer\KeypadRevealer.cs" />
+    <Compile Include="AstroMonos\Components\Custom\Random\Watcher.cs" />
+    <Compile Include="AstroMonos\Components\Custom\Random\Spinner.cs" />
+    <Compile Include="AstroMonos\Components\Tools\Listeners\UiListener.cs" />
+    <Compile Include="AstroMonos\VRChatUIEvents.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_BankEditor.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_HealthEditor.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_TowerEditor.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\SuperTowerDefense\SuperTowerDefense_WaveEditor.cs" />
     <Compile Include="EmojiMenu\EmojiCooldownKiller.cs" />
     <Compile Include="Exploits\ExploitUtils.cs" />
     <Compile Include="Extensions\Collider_ext.cs" />
@@ -276,13 +282,13 @@
     <Compile Include="Cheetos\AvatarFavorites.cs" />
     <Compile Include="Cheetos\FrameUnlimiter.cs" />
     <Compile Include="Cheetos\PlayerList.cs" />
-    <Compile Include="Components\NamePlates\CheetoNameplate.cs" />
-    <Compile Include="Components\Listeners\ScrollMenuListener_AudioSource.cs" />
-    <Compile Include="Components\Listeners\ScrollMenuListener.cs" />
-    <Compile Include="Components\Listeners\GameObjectListener.cs" />
-    <Compile Include="Components\SitOnPlayer\SitOnPlayer.cs" />
-    <Compile Include="Components\AstroUdons\Programs\UdonPrograms.cs" />
-    <Compile Include="Components\AstroUdons\Interact\VRC_AstroInteract.cs" />
+    <Compile Include="AstroMonos\Components\UI\NamePlates\CheetoNameplate.cs" />
+    <Compile Include="AstroMonos\Components\Tools\Listeners\ScrollMenuListener_AudioSource.cs" />
+    <Compile Include="AstroMonos\Components\Tools\Listeners\ScrollMenuListener.cs" />
+    <Compile Include="AstroMonos\Components\Tools\Listeners\GameObjectListener.cs" />
+    <Compile Include="AstroMonos\Components\Player\SitOnPlayer.cs" />
+    <Compile Include="AstroMonos\AstroUdons\Programs\UdonPrograms.cs" />
+    <Compile Include="AstroMonos\AstroUdons\VRC_AstroInteractable.cs" />
     <Compile Include="EmojiMenu\EmojiMenu.cs" />
     <Compile Include="EmojiMenu\EmojiScrollMenu\EmojiScrollMenu.cs" />
     <Compile Include="ItemTweakerV2\Handlers\CrazyBehaviourHandler.cs" />
@@ -304,7 +310,7 @@
     <Compile Include="Regexes\RegexUtils.cs" />
     <Compile Include="RegisterComponent.cs" />
     <Compile Include="Spawnables\Enderpearl\AstroEnderPearl.cs" />
-    <Compile Include="Components\Enderpearl\EnderPearlBehaviour.cs" />
+    <Compile Include="AstroMonos\Components\Custom\Items\EnderPearl.cs" />
     <Compile Include="Experiments\CameraTweaker.cs" />
     <Compile Include="Exploits\Exploit_Exts\Teleport_Ext.cs" />
     <Compile Include="Exploits\TeleportExploit.cs" />
@@ -328,6 +334,7 @@
     <Compile Include="Startup\Hooks\QuickMenuHooks.cs" />
     <Compile Include="Startup\Hooks\RPCEventHook.cs" />
     <Compile Include="Startup\Patches\SerializerPatches.cs" />
+    <Compile Include="Startup\UiModifier.cs" />
     <Compile Include="Streamer\StreamerNotifier.cs" />
     <Compile Include="Streamer\Streamers.cs" />
     <Compile Include="Streamer\StreamerTags.cs" />
@@ -389,20 +396,19 @@
     <Compile Include="CheetosUI\CheetoMenu.cs" />
     <Compile Include="ClientUI\QuickMenuButtons\AdminMenu.cs" />
     <Compile Include="Cheetos\ForceClone.cs" />
-    <Compile Include="Cheetos\CameraStuff\PlayerCameraEditor.cs" />
     <Compile Include="Cheetos\PlayerListData.cs" />
     <Compile Include="Cheetos\VRCPlusHider.cs" />
     <Compile Include="Cheetos\CheetosTestStuff.cs" />
     <Compile Include="Cheetos\CheetosWIP.cs" />
     <Compile Include="Cheetos\MediaController\MediaController.cs" />
     <Compile Include="Cheetos\HighPriority.cs" />
-    <Compile Include="Components\ESP\Pickup\ESP_Pickup.cs" />
-    <Compile Include="Components\ESP\Trigger\ESP_Trigger.cs" />
-    <Compile Include="Components\ESP\ItemTweaker\ESP_ItemTweaker.cs" />
-    <Compile Include="Components\ESP\UdonBehaviour\ESP_UdonBehaviour.cs" />
-    <Compile Include="Components\ESP\VRCInteractable\ESP_VRCInteractable.cs" />
-    <Compile Include="Components\Bounce\Bouncer.cs" />
-    <Compile Include="Components\Listeners\TweakerListener.cs" />
+    <Compile Include="AstroMonos\Components\ESP\Pickup\ESP_Pickup.cs" />
+    <Compile Include="AstroMonos\Components\ESP\Trigger\ESP_Trigger.cs" />
+    <Compile Include="AstroMonos\Components\ESP\ItemTweaker\ESP_ItemTweaker.cs" />
+    <Compile Include="AstroMonos\Components\ESP\UdonBehaviour\ESP_UdonBehaviour.cs" />
+    <Compile Include="AstroMonos\Components\ESP\VRCInteractable\ESP_VRCInteractable.cs" />
+    <Compile Include="AstroMonos\Components\Custom\Random\Bouncer.cs" />
+    <Compile Include="AstroMonos\Components\Tools\Listeners\TweakerListener.cs" />
     <Compile Include="Config\Config.cs" />
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="Features\Player\Clones\Clones.cs" />
@@ -415,16 +421,16 @@
     <Compile Include="Cheetos\JoinLeaveNotifier.cs" />
     <Compile Include="Streamer\StreamerProtector.cs" />
     <Compile Include="GameObject\Cloner\ObjectCloner.cs" />
-    <Compile Include="Components\ComponentsBtn.cs" />
-    <Compile Include="Components\ESP\EspHelper.cs" />
-    <Compile Include="Components\ItemInflater\InflaterBehaviour.cs" />
-    <Compile Include="Components\JarWorlds\JarRoleController.cs" />
-    <Compile Include="Components\JarWorlds\JarRoleESP.cs" />
-    <Compile Include="Components\PickupControl\PickupController.cs" />
-    <Compile Include="Components\RocketComponent\RocketBehaviour.cs" />
-    <Compile Include="Components\ESP\Player\PlayerESP.cs" />
-    <Compile Include="Components\SingleTag\SingleTag.cs" />
-    <Compile Include="Components\SingleTag\SingleTagsUtils.cs" />
+    <Compile Include="AstroMonos\ComponentsBtn.cs" />
+    <Compile Include="AstroMonos\Components\ESP\EspHelper.cs" />
+    <Compile Include="AstroMonos\Components\Custom\Random\Inflater.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarRoleController.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarRoleESP.cs" />
+    <Compile Include="AstroMonos\Components\Tools\PickupController.cs" />
+    <Compile Include="AstroMonos\Components\Custom\Random\Rocket.cs" />
+    <Compile Include="AstroMonos\Components\ESP\Player\PlayerESP.cs" />
+    <Compile Include="AstroMonos\Components\UI\SingleTag\SingleTag.cs" />
+    <Compile Include="AstroMonos\Components\UI\SingleTag\SingleTagsUtils.cs" />
     <Compile Include="GameObject\Editor\Colliders\ColliderEditors.cs" />
     <Compile Include="GameObject\Editor\Color\ColorEditor.cs" />
     <Compile Include="GameObject\Editor\Forces\Forces.cs" />
@@ -474,7 +480,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Skyboxes\SkyboxEditor.cs" />
-    <Compile Include="Components\ComponentHelper.cs" />
+    <Compile Include="AstroMonos\ComponentHelper.cs" />
     <Compile Include="Startup\EventArgs\OnAvatarDownloadArgs.cs" />
     <Compile Include="Startup\EventArgs\OnAvatarSpawnArgs.cs" />
     <Compile Include="Startup\EventArgs\OnTeleportRPCArgs.cs" />
@@ -517,7 +523,6 @@
     <Compile Include="Variables\CustomLists.cs" />
     <Compile Include="Variables\GlobalLists.cs" />
     <Compile Include="Variables\InstanceBuilder.cs" />
-    <Compile Include="Variables\VRChatObjects.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\PoolParlor.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\SuperTowerDefense.cs" />
     <Compile Include="WorldAddons\WorldsIds\WorldIds.cs" />
@@ -1264,7 +1269,7 @@
     </None>
     <EmbeddedResource Include="Figlet\Larry3D.flf" />
     <None Include="app.config" />
-    <Compile Include="Components\RigidBodyController\RigidBodyController.cs" />
+    <Compile Include="AstroMonos\Components\Tools\RigidBodyController.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1339,7 +1344,6 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AvatarMods\" />
     <Folder Include="MenuAPI\ActionMenu\MenuAPI\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

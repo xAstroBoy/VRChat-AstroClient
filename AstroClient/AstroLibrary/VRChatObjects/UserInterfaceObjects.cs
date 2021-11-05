@@ -1,26 +1,10 @@
-﻿namespace AstroClient.Variables
+﻿namespace AstroClient
 {
     using AstroLibrary.Finder;
     using UnityEngine;
 
-    internal class VRChatObjects_Old : GameEvents
+    internal class UserInterfaceObjects
     {
-        internal override void VRChat_OnUiManagerInit()
-        {
-            _ = AvatarPreviewBase_FallbackAvatar;
-            _ = _AvatarPreviewBase_MainAvatar;
-        }
-
-        internal override void OnLateUpdate()
-        {
-            if (ScreenFade != null)
-            {
-                if (ScreenFade.active)
-                {
-                    ScreenFade.SetActive(false);
-                }
-            }
-        }
 
         private static GameObject _ScreenFade;
 
@@ -66,5 +50,35 @@
                 return _AvatarPreviewBase_FallbackAvatar;
             }
         }
+
+        private static Transform _QuickMenuElements;
+
+        internal static Transform QuickMenuElements
+        {
+            get
+            {
+                if (_QuickMenuElements == null)
+                {
+                    return _QuickMenuElements = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements").transform;
+                }
+                return _QuickMenuElements;
+            }
+        }
+
+        private static Transform _BigMenuElements;
+
+        internal static Transform BigMenuElements
+        {
+            get
+            {
+                if (_BigMenuElements == null)
+                {
+                    return _BigMenuElements = GameObjectFinder.Find("UserInterface/MenuContent/Backdrop/Backdrop").transform;;
+                }
+                return _BigMenuElements;
+            }
+        }
+
+
     }
 }

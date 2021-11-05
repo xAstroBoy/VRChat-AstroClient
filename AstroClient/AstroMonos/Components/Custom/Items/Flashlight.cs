@@ -7,7 +7,7 @@ namespace AstroClient
     using UnityEngine;
 
     [RegisterComponent]
-    public class FlashlightBehaviour : MonoBehaviour
+    public class FlashlightBehaviour : AstroPickup
     {
         public FlashlightBehaviour(IntPtr ptr)
             : base(ptr)
@@ -18,24 +18,18 @@ namespace AstroClient
         {
             if (FlashLight_Base != null && FlashLight_Body != null && FlashLight_Head != null && FlashLight_Light != null)
             {
-                if (ToggleLightTrigger == null)
-                {
-                    ToggleLightTrigger = FlashLight_Body.AddComponent<VRC_AstroPickup>();
-                    if (ToggleLightTrigger != null)
-                    {
-                        ToggleLightTrigger.OnPickupUseUp = ToggleFlashLight;
-                        ToggleLightTrigger.UseText = OnText;
-                        ToggleLightTrigger.InteractionText = "Flashlight <3";
-                    }
-                }
-
+                InteractionText = "Flashlight <3";
+                UseText = OnText;
                 FlashLight_Light.enabled = false;
                 _IsFlashlightActive = false;
             }
         }
 
-        private void ToggleFlashLight()
-        { IsFlashlightActive = !IsFlashlightActive; }
+
+        internal override void OnPickupUseUp()
+        {
+            IsFlashlightActive = !IsFlashlightActive;;
+        }
 
         private bool _IsFlashlightActive;
 
@@ -50,16 +44,16 @@ namespace AstroClient
             set
             {
                 _IsFlashlightActive = value;
-                if (FlashLight_Light != null && ToggleLightTrigger != null)
+                if (FlashLight_Light != null)
                 {
                     FlashLight_Light.enabled = value;
                     if (FlashLight_Light.enabled)
                     {
-                        ToggleLightTrigger.UseText = OffText;
+                        UseText = OffText;
                     }
                     else
                     {
-                        ToggleLightTrigger.UseText = OnText;
+                        UseText = OnText;
                     }
                 }
             }
@@ -76,6 +70,5 @@ namespace AstroClient
 
         internal Light FlashLight_Light { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal VRC_AstroPickup ToggleLightTrigger { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } // let's test.
     }
 }

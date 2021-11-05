@@ -68,12 +68,12 @@ namespace AstroClient.Components
                     IUdonHeap = UdonBehaviour._udonVM.InspectHeap();
                 }
             }
-            if (Controller != null)
+            if (PickupController != null)
             {
-                if (Controller.AutoHold != VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes)
+                if (PickupController.AutoHold != VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes)
                 {
-                    OriginalMode = Controller.AutoHold;
-                    Controller.AutoHold = VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes;
+                    OriginalMode = PickupController.AutoHold;
+                    PickupController.AutoHold = VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes;
                 }
             }
         }
@@ -107,9 +107,9 @@ namespace AstroClient.Components
             {
                 Destroy(UdonBehaviour);
             }
-            if (Controller != null)
+            if (PickupController != null)
             {
-                Controller.AutoHold = OriginalMode;
+                PickupController.AutoHold = OriginalMode;
             }
         }
 
@@ -206,10 +206,10 @@ namespace AstroClient.Components
             set
             {
                 _UseText = value;
-                if (Controller != null)
+                if (PickupController != null)
                 {
-                    Controller.EditMode = true;
-                    Controller.UseText = value;
+                    PickupController.EditMode = true;
+                    PickupController.UseText = value;
                 }
             }
         }
@@ -224,10 +224,10 @@ namespace AstroClient.Components
             set
             {
                 _InteractionText = value;
-                if (Controller != null)
+                if (PickupController != null)
                 {
-                    Controller.EditMode = true;
-                    Controller.InteractionText = value;
+                    PickupController.EditMode = true;
+                    PickupController.InteractionText = value;
                 }
             }
         }
@@ -252,20 +252,52 @@ namespace AstroClient.Components
 
         internal VRC.SDKBase.VRC_Pickup.AutoHoldMode OriginalMode;
 
-        private PickupController _Controller;
+        private PickupController _PickupController;
 
-        private PickupController Controller
+        internal PickupController PickupController
         {
             [HideFromIl2Cpp]
             get
             {
-                if (_Controller == null)
+                if (_PickupController == null)
                 {
-                    return _Controller = gameObject.GetOrAddComponent<PickupController>();
+                    return _PickupController = gameObject.GetOrAddComponent<PickupController>();
                 }
-                return _Controller;
+                return _PickupController;
             }
         }
+
+        internal bool HasPickupComponent
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return PickupController.HasPickupComponent();
+            }
+        }
+
+        internal bool ForcePickupComponent
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return PickupController.ForceComponent;
+            }
+            [HideFromIl2Cpp]
+            set
+            {
+                PickupController.ForceComponent = value;
+                if (value)
+                {
+                    if (PickupController.AutoHold != VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes)
+                    {
+                        OriginalMode = PickupController.AutoHold;
+                        PickupController.AutoHold = VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes;
+                    }
+                }
+            }
+        }
+
 
         private UdonBehaviour UdonBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private IUdonHeap IUdonHeap { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }

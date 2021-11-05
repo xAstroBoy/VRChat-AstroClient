@@ -179,7 +179,7 @@ namespace AstroClient
                     collider.smoothSphereCollisions = true;
                 }
 
-                var AstroTrigger = HandleSign.GetOrAddComponent<VRC_AstroInteract>();
+                var AstroTrigger = HandleSign.GetOrAddComponent<VRC_AstroInteractable>();
                 if (AstroTrigger != null)
                 {
                     AstroTrigger.interactText = "Lockpick Door " + doorID + " (AstroClient)";

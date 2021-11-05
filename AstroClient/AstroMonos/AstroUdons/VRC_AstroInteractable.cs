@@ -3,6 +3,7 @@ using UnhollowerBaseLib.Attributes;
 namespace AstroClient.Components
 {
     using AstroLibrary.Console;
+    using AstroLibrary.Utility;
     using System;
     using UnityEngine;
     using VRC.SDK3.Components;
@@ -11,9 +12,9 @@ namespace AstroClient.Components
     using VRC.Udon.ProgramSources;
 
     [RegisterComponent]
-    public class VRC_AstroInteract : MonoBehaviour
+    public class VRC_AstroInteractable : MonoBehaviour
     {
-        public VRC_AstroInteract(IntPtr ptr)
+        public VRC_AstroInteractable(IntPtr ptr)
             : base(ptr)
         {
         }
@@ -138,22 +139,16 @@ namespace AstroClient.Components
             }
         }
 
-        internal bool ForceInteractiveText { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
-
         private VRCInteractable _VRCInteractable;
 
-        private VRCInteractable VRCInteractable
+        internal VRCInteractable VRCInteractable
         {
             [HideFromIl2Cpp]
             get
             {
                 if (_VRCInteractable == null)
                 {
-                    if (ForceInteractiveText)
-                    {
-                        return _VRCInteractable = gameObject.AddComponent<VRCInteractable>();
-                    }
-                    return _VRCInteractable = gameObject.GetComponent<VRCInteractable>();
+                    return _VRCInteractable = gameObject.GetOrAddComponent<VRCInteractable>();
                 }
                 return _VRCInteractable;
             }

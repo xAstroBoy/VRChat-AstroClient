@@ -1271,26 +1271,6 @@
 
         #region Force Pickup Functions
 
-        private bool _Force_Pickup_Component = false;
-
-        internal bool Force_Pickup_Component
-        {
-            [HideFromIl2Cpp]
-            get
-            {
-                return _Force_Pickup_Component;
-            }
-            [HideFromIl2Cpp]
-            set
-            {
-                _Force_Pickup_Component = value;
-                if (value)
-                {
-                    ForcePickupComponent();
-                }
-                Run_OnOnPickupPropertyChanged();
-            }
-        }
 
         private void ForcePickupComponent()
         {

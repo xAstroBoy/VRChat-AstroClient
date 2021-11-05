@@ -11,7 +11,7 @@ namespace AstroClient
     using UnityEngine;
 
     [RegisterComponent]
-    public class EnderPearlBehaviour : MonoBehaviour
+    public class EnderPearlBehaviour : AstroPickup
     {
         public EnderPearlBehaviour(IntPtr ptr)
             : base(ptr)
@@ -20,8 +20,6 @@ namespace AstroClient
 
         internal void Start()
         {
-            pickup = gameObject.GetOrAddComponent<PickupController>();
-            body = gameObject.GetOrAddComponent<RigidBodyController>();
             collider = gameObject.GetOrAddComponent<BoxCollider>();
             renderer = gameObject.GetOrAddComponent<MeshRenderer>();
             if (collider != null)
@@ -33,22 +31,29 @@ namespace AstroClient
             {
                 renderer.material.color = Ender;
             }
-            if (body != null)
+            if (RigidBodyProperties != null)
             {
-                body.EditMode = true;
-                body.Forced_Rigidbody = true;
-                body.isKinematic = false;
-                body.useGravity = false;
-                body.drag = 0f;
-                body.angularDrag = 0.01f;
+                RigidBodyProperties.Forced_Rigidbody = true;
+                RigidBodyProperties.isKinematic = false;
+                RigidBodyProperties.useGravity = false;
+                RigidBodyProperties.drag = 0f;
+                RigidBodyProperties.angularDrag = 0.01f;
             }
-            if (pickup != null)
+            if (PickupProperties != null)
             {
-                pickup.EditMode = true;
-                pickup.ForceComponent = true;
-                pickup.pickupable = true;
-                pickup.ThrowVelocityBoostScale = 5.5f;
+                PickupProperties.pickupable = true;
+                PickupProperties.ThrowVelocityBoostScale = 5.5f;
             }
+        }
+
+        internal override void OnDrop()
+        {
+            Held = false;
+        }
+
+        internal override void OnPickup()
+        {
+            Held = true;
         }
 
         internal void Update()
@@ -56,17 +61,13 @@ namespace AstroClient
             Time += UnityEngine.Time.deltaTime;
             if (Time > 0.3f)
             {
-                if (pickup.IsHeld)
+                if (RigidBodyProperties.isKinematic)
                 {
-                    Held = true;
+                    RigidBodyProperties.isKinematic = false;
                 }
-                if (body.isKinematic)
+                if (!Held)
                 {
-                    body.isKinematic = false;
-                }
-                if (Held)
-                {
-                    body.useGravity = true;
+                    RigidBodyProperties.useGravity = true;
                     collider.isTrigger = false;
                 }
                 Time = 0f;
@@ -93,7 +94,11 @@ namespace AstroClient
             {
                 if (Held)
                 {
-                    MelonLogger.Msg(contact.point.ToString() + "Point To Tp To");
+                    break;
+                }
+                else
+                {
+                    ModConsole.DebugLog(contact.point.ToString() + "Point To Teleport To");
                     Vector3 position = new Vector3(contact.point.x, contact.point.y, contact.point.z);
                     Utils.CurrentUser.gameObject.transform.position = position;
                     gameObject.DestroyMeLocal();
@@ -111,8 +116,6 @@ namespace AstroClient
             Held = false;
         }
 
-        internal PickupController pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
-        internal RigidBodyController body { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal BoxCollider collider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal MeshRenderer renderer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal static bool Held { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }

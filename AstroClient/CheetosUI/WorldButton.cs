@@ -15,7 +15,7 @@
     {
         internal GameObject gameObject { get; private set; }
 
-        internal VRC_AstroInteract interactable { get; private set; }
+        internal VRC_AstroInteractable interactable { get; private set; }
 
         internal Rigidbody RigidBody { get; private set; }
 
@@ -43,7 +43,7 @@
             front.Set_Colliders_isTrigger(true);
             MiscUtils.DelayFunction(0.2f, () =>
             {
-                var AstroTrigger = front.AddComponent<VRC_AstroInteract>();
+                var AstroTrigger = front.AddComponent<VRC_AstroInteractable>();
                 if (AstroTrigger != null)
                 {
                     AstroTrigger.interactText = label;

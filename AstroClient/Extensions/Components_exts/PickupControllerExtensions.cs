@@ -49,7 +49,7 @@
                 {
                     instance.EditMode = true;
                 }
-                instance.Force_Pickup_Component = ForceComponent;
+                instance.ForceComponent = ForceComponent;
             }
         }
 
