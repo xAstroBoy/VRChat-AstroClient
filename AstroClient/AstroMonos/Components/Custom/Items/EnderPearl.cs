@@ -4,12 +4,14 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using AstroUdons.Templates;
+    using AstroUdons;
+    using CheetoLibrary;
+    using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
     [RegisterComponent]
-    public class EnderPearlBehaviour : AstroPickup
+    public class EnderPearlBehaviour : MonoBehaviour
     {
         public EnderPearlBehaviour(IntPtr ptr)
             : base(ptr)
@@ -18,6 +20,8 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
 
         internal void Start()
         {
+            pickup = gameObject.GetOrAddComponent<PickupController>();
+            body = gameObject.GetOrAddComponent<RigidBodyController>();
             collider = gameObject.GetOrAddComponent<BoxCollider>();
             renderer = gameObject.GetOrAddComponent<MeshRenderer>();
             if (collider != null)
@@ -29,43 +33,54 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
             {
                 renderer.material.color = Ender;
             }
-            if (RigidBodyProperties != null)
+            if (body != null)
             {
-                RigidBodyProperties.Forced_Rigidbody = true;
-                RigidBodyProperties.isKinematic = false;
-                RigidBodyProperties.useGravity = false;
-                RigidBodyProperties.drag = 0f;
-                RigidBodyProperties.angularDrag = 0.01f;
+                body.EditMode = true;
+                body.Forced_Rigidbody = true;
+                body.isKinematic = false;
+                body.useGravity = false;
+                body.drag = 0f;
+                body.angularDrag = 0.01f;
+                body.isKinematic = false;
             }
-            if (PickupProperties != null)
+            if (pickup != null)
             {
-                PickupProperties.pickupable = true;
-                PickupProperties.ThrowVelocityBoostScale = 5.5f;
+                pickup.EditMode = true;
+                pickup.ForceComponent = true;
+                pickup.pickupable = true;
+                pickup.ThrowVelocityBoostScale = 5.5f;
             }
+
+            if (PickupEvents == null)
+            {
+                PickupEvents = gameObject.AddComponent<VRC_AstroPickup>();
+            }
+            if (PickupEvents != null)
+            {
+                PickupEvents.OnDrop += OnDrop;
+                PickupEvents.OnPickup += OnPickup;
+            }
+                
         }
 
-        internal override void OnDrop()
+
+        private void OnDrop()
         {
             Held = false;
         }
 
-        internal override void OnPickup()
+        private void OnPickup()
         {
             Held = true;
         }
-
         internal void Update()
         {
             Time += UnityEngine.Time.deltaTime;
             if (Time > 0.3f)
             {
-                if (RigidBodyProperties.isKinematic)
+                if (Held)
                 {
-                    RigidBodyProperties.isKinematic = false;
-                }
-                if (!Held)
-                {
-                    RigidBodyProperties.useGravity = true;
+                    body.useGravity = true;
                     collider.isTrigger = false;
                 }
                 Time = 0f;
@@ -113,6 +128,12 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
         {
             Held = false;
         }
+
+        internal PickupController pickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal RigidBodyController body { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+
+        internal VRC_AstroPickup PickupEvents { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+
 
         internal BoxCollider collider { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         internal MeshRenderer renderer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }

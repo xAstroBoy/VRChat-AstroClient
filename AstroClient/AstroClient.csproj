@@ -104,7 +104,6 @@
     </Compile>
     <Compile Include="AstroLibrary\VRChatObjects\GameCamera.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\UserInterfaceObjects.cs" />
-    <Compile Include="AstroMonos\AstroUdons\Templates\AstroInteractable.cs" />
     <Compile Include="ClientUI\ActionMenu\ESPModule.cs" />
     <Compile Include="ClientUI\ActionMenu\MovementModule.cs" />
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\Avatar.cs" />
@@ -113,7 +112,6 @@
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\RefCountedObject.cs" />
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\Sigh.cs" />
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\ParametersEditorResources.cs" />
-    <Compile Include="AstroMonos\AstroUdons\Templates\AstroPickup.cs" />
     <Compile Include="AstroMonos\Components\Tools\Disabler.cs" />
     <Compile Include="CustomPickupBehaviour.cs" />
     <Compile Include="MenuAPI\ActionMenu\Api\ActionMenuPage.cs" />
@@ -253,7 +251,7 @@
     <Compile Include="AstroMonos\Components\ESP\EspEvents.cs" />
     <Compile Include="AstroMonos\Components\Custom\Items\Flashlight.cs" />
     <Compile Include="AstroMonos\Components\Malicious\OrbitManager.cs" />
-    <Compile Include="AstroMonos\Components\Custom\Random\StretchyCheese.cs" />
+    <Compile Include="AstroMonos\Components\Custom\Items\StretchyCheese.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarControllerEvents.cs" />
     <Compile Include="AstroMonos\Components\Cheats\Worlds\JarWorlds\JarNodeReader.cs" />
     <Compile Include="AstroMonos\Components\Cheats\PatronUnlocker\PatronUnlocker.cs" />
