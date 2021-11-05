@@ -1,7 +1,7 @@
 namespace AstroClient.Components
 {
-    using AstroLibrary.Extensions;
     using AstroButtonAPI;
+    using AstroLibrary.Extensions;
     using System;
 
     [RegisterComponent]
@@ -27,22 +27,13 @@ namespace AstroClient.Components
 
         private void OnDisable()
         {
-            if (assignedbtn != null)
-            {
-                assignedbtn.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
-            }
-            else
-            {
-                DestroyImmediate(this);
-            }
+            if (assignedbtn != null) assignedbtn.SetTextColor(gameObject.Get_GameObject_Active_ToColor());
+            else DestroyImmediate(this);
         }
 
         private void OnDestroy()
         {
-            if (assignedbtn != null)
-            {
-                assignedbtn.DestroyMe();
-            }
+            assignedbtn?.DestroyMe();
             DestroyImmediate(this);
         }
     }

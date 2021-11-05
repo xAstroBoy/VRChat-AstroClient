@@ -29,7 +29,6 @@
                         ExtendCheese.ExecuteUdonEvent();
                     };
                 }
-
             }
             else
             {
@@ -62,7 +61,7 @@
             }
         }
 
-        private UdonBehaviour_Cached ExtendCheese { get; set; }
+        private UdonBehaviour_Cached ExtendCheese;
         internal VRC_AstroPickup PickupBehaviour { get; private set; } // let's test.
     }
 }

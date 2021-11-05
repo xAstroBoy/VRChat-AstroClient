@@ -4,7 +4,6 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using System;
-    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
     [RegisterComponent]
@@ -102,20 +101,20 @@
             PickupController.UseText = OriginalText_Use;
         }
 
-        private Vector3 initialVelocity { get; set; } = new Vector3(0, 0, 0);
-        private Vector3 lastFrameVelocity{ get; set; }
-        private Rigidbody rb { get; set; }
-        private float minVelocity { get; set; } = 10f;
+        private Vector3 initialVelocity = new Vector3(0, 0, 0);
+        private Vector3 lastFrameVelocity;
+        private Rigidbody rb;
+        private float minVelocity = 10f;
 
         // TODO : MAKE PLAYER BOUNCE  BACK SUPPORTED AS WELL
-        private float bias { get; set; } = 0.5f;
-        private float bounceVelocity { get; set; } = 10f;
+        private float bias = 0.5f;
+        private float bounceVelocity = 10f;
 
-        internal bool BounceTowardPlayer { get; set; } = false;
-        private PickupController PickupController { get; set; }
-        private VRC_AstroPickup VRC_AstroPickup { get; set; }
-        private string OriginalText_Use { get; set; }
-        private bool isPaused { get; set; }
+        internal bool BounceTowardPlayer = false;
+        private PickupController PickupController;
+        private VRC_AstroPickup VRC_AstroPickup;
+        private string OriginalText_Use;
+        private bool isPaused;
         private bool _IsEnabled = true;
         internal bool IsEnabled
         {
@@ -144,6 +143,5 @@
             }
 
         }
-
     }
 }

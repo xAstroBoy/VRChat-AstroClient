@@ -1,7 +1,6 @@
 ﻿namespace AstroClient.Components
 {
     using AstroClient.GameObjectDebug;
-    using AstroClient.Streamer;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
@@ -78,10 +77,7 @@
                 var controller = GetComponent<PickupController>();
                 var obj = body.gameObject;
 
-                if (controller == null)
-                {
-                    controller = obj.AddComponent<PickupController>();
-                }
+                controller ??= obj.AddComponent<PickupController>();
 
                 pickups.Add(controller);
             }
@@ -96,14 +92,8 @@
                 var gameobj = GetInstanceHolder(name);
                 Instance = gameobj.AddComponent<OrbitManager>();
                 DontDestroyOnLoad(gameobj);
-                if (Instance != null)
-                {
-                    ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", System.Drawing.Color.LawnGreen);
-                }
-                else
-                {
-                    ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : ERROR", System.Drawing.Color.OrangeRed);
-                }
+                if (Instance != null) ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", System.Drawing.Color.LawnGreen);
+                else ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : ERROR", System.Drawing.Color.OrangeRed);
             }
         }
 
@@ -119,15 +109,11 @@
                 Instance.target = target;
                 Instance.isEnabled = true;
 
-                if (Instance.centerPoint == null)
-                {
-                    Instance.centerPoint = BonesUtils.Get_Player_Bone_Transform(target, HumanBodyBones.Head);
-                }
+                Instance.centerPoint ??= BonesUtils.Get_Player_Bone_Transform(target, HumanBodyBones.Head);
 
                 _ = MelonCoroutines.Start(LoopPickups());
 
                 ModConsole.Log($"[OrbitManager] Orbiting Player: {Instance.target.DisplayName()}");
-
             }
             else
             {
@@ -166,7 +152,7 @@
                     PickupController pickup = Instance.pickups[i];
                     if (!pickup.gameObject.IsOwner())
                     {
-                        pickup.gameObject.TakeOwnership();
+                        pickup.gameObject.TryTakeOwnership();
                         pickup.gameObject.RigidBody_Set_Gravity(false);
                         pickup.gameObject.RigidBody_Set_DetectCollisions(true);
                         pickup.gameObject.RigidBody_Set_isKinematic(false);

@@ -66,9 +66,9 @@ namespace AstroClient.Components
                     IUdonHeap = UdonBehaviour._udonVM.InspectHeap();
                 }
             }
-            if(Controller != null)
+            if (Controller != null)
             {
-                if(Controller.AutoHold != VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes)
+                if (Controller.AutoHold != VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes)
                 {
                     OriginalMode = Controller.AutoHold;
                     Controller.AutoHold = VRC.SDKBase.VRC_Pickup.AutoHoldMode.Yes;

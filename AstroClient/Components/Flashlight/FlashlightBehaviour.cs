@@ -1,7 +1,6 @@
 namespace AstroClient
 {
     using AstroClient.Components;
-    using AstroLibrary.Console;
     using System;
     using UnityEngine;
 
@@ -33,8 +32,7 @@ namespace AstroClient
             }
         }
 
-        private void ToggleFlashLight()
-        { IsFlashlightActive = !IsFlashlightActive; }
+        private void ToggleFlashLight() { IsFlashlightActive = !IsFlashlightActive; }
 
         private bool _IsFlashlightActive;
 
@@ -50,14 +48,8 @@ namespace AstroClient
                 if (FlashLight_Light != null && ToggleLightTrigger != null)
                 {
                     FlashLight_Light.enabled = value;
-                    if (FlashLight_Light.enabled)
-                    {
-                        ToggleLightTrigger.UseText = OffText;
-                    }
-                    else
-                    {
-                        ToggleLightTrigger.UseText = OnText;
-                    }
+                    if (FlashLight_Light.enabled) ToggleLightTrigger.UseText = OffText;
+                    else ToggleLightTrigger.UseText = OnText;
                 }
             }
         }
@@ -65,14 +57,10 @@ namespace AstroClient
         internal string OnText { get; } = "Turn On Flashlight";
         internal string OffText { get; } = "Turn Off Flashlight";
 
-        internal GameObject FlashLight_Base { get; set; }
-
-        internal GameObject FlashLight_Body { get; set; }
-
-        internal GameObject FlashLight_Head { get; set; }
-
-        internal Light FlashLight_Light { get; set; }
-
+        internal GameObject FlashLight_Base;
+        internal GameObject FlashLight_Body;
+        internal GameObject FlashLight_Head;
+        internal Light FlashLight_Light;
         internal VRC_AstroPickup ToggleLightTrigger { get; private set; } // let's test.
     }
 }

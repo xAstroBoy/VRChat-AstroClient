@@ -23,10 +23,7 @@
             if (WorldUtils.WorldID.Equals(WorldIds.Super_Tower_defense))
             {
                 var obj = gameObject.FindUdonEvent("SetTowerBehaviour");
-                if (obj != null)
-                {
-                    CurrentTower = obj.UdonBehaviour.DisassembleUdonBehaviour();
-                }
+                if (obj != null) CurrentTower = obj.UdonBehaviour.DisassembleUdonBehaviour();
                 else
                 {
                     ModConsole.Error("Can't Find CurrentTower behaviour, Unable to Add Reader Component, did the author update the world?");
@@ -40,20 +37,14 @@
         {
             get
             {
-                if (CurrentTower != null)
-                {
-                    return UdonHeapParser.Udon_Parse_single(CurrentTower, RangeAddress);
-                }
+                if (CurrentTower != null) return UdonHeapParser.Udon_Parse_single(CurrentTower, RangeAddress);
                 return null;
             }
             set
             {
                 if (CurrentTower != null)
                 {
-                    if (value.HasValue)
-                    {
-                        UdonHeapEditor.PatchHeap(CurrentTower, RangeAddress, Math.Abs(value.Value), true);
-                    }
+                    if (value.HasValue) UdonHeapEditor.PatchHeap(CurrentTower, RangeAddress, Math.Abs(value.Value), true);
                 }
             }
         }
@@ -62,20 +53,14 @@
         {
             get
             {
-                if (CurrentTower != null)
-                {
-                    return UdonHeapParser.Udon_Parse_single(CurrentTower, SpeedMultiplierAddress);
-                }
+                if (CurrentTower != null) return UdonHeapParser.Udon_Parse_single(CurrentTower, SpeedMultiplierAddress);
                 return null;
             }
             set
             {
                 if (CurrentTower != null)
                 {
-                    if (value.HasValue)
-                    {
-                        UdonHeapEditor.PatchHeap(CurrentTower, SpeedMultiplierAddress, Math.Abs(value.Value), true);
-                    }
+                    if (value.HasValue) UdonHeapEditor.PatchHeap(CurrentTower, SpeedMultiplierAddress, Math.Abs(value.Value), true);
                 }
             }
         }

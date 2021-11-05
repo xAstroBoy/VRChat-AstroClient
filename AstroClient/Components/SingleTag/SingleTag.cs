@@ -20,14 +20,9 @@
         }
 
         private bool DebugMode = false;
-
-        
         private void Debug(string msg)
         {
-            if (DebugMode)
-            {
-                ModConsole.DebugLog($"[SingleTag Debug] : {msg}");
-            }
+            if (DebugMode) ModConsole.DebugLog($"[SingleTag Debug] : {msg}");
         }
 
         // Use this for initialization
@@ -52,19 +47,13 @@
                 if (Player != null)
                 {
                     Player_content = Player.transform.Find("Player Nameplate/Canvas/Nameplate/Contents");
-                    if (Player_content != null)
-                    {
-                        Debug($"Found {Player.DisplayName()}  Nameplate Contents Required to generate a SingleTag (using : {Player_content.name})!");
-                    }
+                    if (Player_content != null) Debug($"Found {Player.DisplayName()}  Nameplate Contents Required to generate a SingleTag (using : {Player_content.name})!");
                 }
             }
             if (Player_QuickStats == null && Player_content != null)
             {
                 Player_QuickStats = Player_content.Find("Quick Stats");
-                if (Player_QuickStats != null)
-                {
-                    Debug($"Found {Player.DisplayName()}  Nameplate Quick Stats Required to generate a SingleTag (using : {Player_QuickStats.name})!");
-                }
+                if (Player_QuickStats != null) Debug($"Found {Player.DisplayName()}  Nameplate Quick Stats Required to generate a SingleTag (using : {Player_QuickStats.name})!");
             }
             if (Player_content != null && Player_QuickStats != null)
             {
@@ -91,18 +80,12 @@
                             {
                                 Debug($"Found Child {child.name} As TextChild in {SpawnedTag.name}  allocated on {Player.DisplayName()}");
                                 Label = child;
-                                if (Label != null)
-                                {
-                                    LabelText = Label.GetComponent<TMPro.TextMeshProUGUI>();
-                                }
+                                if (Label != null) LabelText = Label.GetComponent<TMPro.TextMeshProUGUI>();
                                 continue;
                             }
                             Debug($"Removed Child {child.name} in {SpawnedTag.name} allocated on {Player.DisplayName()}");
                             Destroy(child.gameObject);
-                            if (!SpawnedTag.gameObject.active)
-                            {
-                                SpawnedTag.gameObject.SetActive(true);
-                            }
+                            if (!SpawnedTag.gameObject.active) SpawnedTag.gameObject.SetActive(true);
                         }
 
                         if (SpawnedStatsImage == null)
@@ -157,10 +140,7 @@
                     }
                 }
                 var entry = SingleTagsUtils.GetEntry(Player);
-                if (entry != null)
-                {
-                    entry.AssignedStack--;
-                }
+                if (entry != null) entry.AssignedStack--;
             }
         }
 
@@ -175,28 +155,16 @@
                 }
                 if (SpawnedTag != null)
                 {
-                    if (SpawnedTag.gameObject.active != ShowTag)
-                    {
-                        SpawnedTag.gameObject.SetActive(ShowTag);
-                    }
+                    if (SpawnedTag.gameObject.active != ShowTag) SpawnedTag.gameObject.SetActive(ShowTag);
 
                     if (LabelText != null)
                     {
-                        if (LabelText.text != Label_Text)
-                        {
-                            LabelText.text = Label_Text;
-                        }
-                        if (LabelText.color != Label_TextColor)
-                        {
-                            LabelText.color = Label_TextColor;
-                        }
+                        if (LabelText.text != Label_Text) LabelText.text = Label_Text;
+                        if (LabelText.color != Label_TextColor) LabelText.color = Label_TextColor;
                     }
                     if (SpawnedStatsImage != null)
                     {
-                        if (SpawnedStatsImage.color != Tag_Color)
-                        {
-                            SpawnedStatsImage.color = Tag_Color;
-                        }
+                        if (SpawnedStatsImage.color != Tag_Color) SpawnedStatsImage.color = Tag_Color;
                     }
                 }
             }
@@ -208,23 +176,14 @@
 
         internal string TagName
         {
-            
-            get
-            {
-                return $"SingleTag:{_allocatedStack}";
-            }
+            get => $"SingleTag:{_allocatedStack}";
         }
 
         private int _allocatedStack;
-
         private int AllocatedStack
         {
             
-            get
-            {
-                return _allocatedStack;
-            }
-            
+            get => _allocatedStack;
             set
             {
                 if (SpawnedTag != null)
@@ -257,11 +216,8 @@
 
         // STATS
         private Transform Player_QuickStats;
-
         private ImageThreeSlice SpawnedStatsImage;
-
         internal Color Tag_Color = Color.grey;
-
         internal bool ShowTag = true;
     }
 }

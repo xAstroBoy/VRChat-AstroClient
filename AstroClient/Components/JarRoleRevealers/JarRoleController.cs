@@ -1,5 +1,6 @@
 ﻿namespace AstroClient
 {
+    using AstroButtonAPI;
     using AstroClient.Components;
     using AstroClient.Variables;
     using AstroClientCore.Events;
@@ -7,7 +8,6 @@
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using AstroButtonAPI;
     using System;
     using System.Collections.Generic;
     using System.Linq;
@@ -18,14 +18,11 @@
     internal class JarRoleController : GameEvents
     {
         private static bool _ViewRoles;
-
         internal static bool IsMurder4World { get; private set; }
-
         internal static bool IsAmongUsWorld { get; private set; }
-
         internal static EventHandler<BoolEventsArgs> Event_OnViewRolesPropertyChanged;
 
-        // TODO: Make A Action event  to bind on JarRoleESP Component.
+        // TODO: Make A Action event to bind on JarRoleESP Component.
 
         internal static bool ViewRoles
         {
@@ -50,11 +47,11 @@
         }
 
         internal static JarRoleESP _CurrentPlayerRoleESP = null;
-
         internal static JarRoleESP CurrentPlayerRoleESP
         {
             get
             {
+                //this just looks weird
                 switch (_CurrentPlayerRoleESP)
                 {
                     case null:
@@ -69,11 +66,8 @@
         internal static QMSingleToggleButton AmongUSRolesRevealerToggle { get; set; }
 
         internal static List<LinkedNodes> JarRoleLinks { get; private set; } = new List<LinkedNodes>();
-
         internal static List<JarRoleESP> RoleEspComponents { get; private set; } = new List<JarRoleESP>();
-
         internal static LinkedNodes GetLinkedNode(int value) => JarRoleLinks.Where(x => x.Nodevalue == value).DefaultIfEmpty(null).First();
-
         internal static JarRoleESP GetLinkedComponent(int value) => RoleEspComponents.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
 
         internal override void OnSceneLoaded(int buildIndex, string sceneName)
@@ -93,10 +87,7 @@
             if (JarRoleLinks.Count() != 0 && player != null)
             {
                 var RoleRevealer = player.gameObject.AddComponent<JarRoleESP>();
-                if (RoleRevealer != null && !RoleEspComponents.Contains(RoleRevealer))
-                {
-                    RoleEspComponents.Add(RoleRevealer);
-                }
+                if (RoleRevealer != null && !RoleEspComponents.Contains(RoleRevealer)) RoleEspComponents.Add(RoleRevealer);
             }
         }
 
@@ -120,26 +111,9 @@
         {
             get
             {
-                if (IsAmongUsWorld)
-                {
-                    return "ability To see who is the impostor";
-                }
-                if (IsMurder4World)
-                {
-                    return "ability to see who is the murderer";
-                }
-
+                if (IsAmongUsWorld) return "ability To see who is the impostor";
+                if (IsMurder4World) return "ability to see who is the murderer";
                 return "WORLD NOT RECOGNIZED!";
-            }
-        }
-
-        internal static bool DebugMsg = true;
-
-        internal static void Debug(string msg)
-        {
-            if (DebugMsg)
-            {
-                ModConsole.DebugLog($"[Jar Role Linker Debug] : {msg}");
             }
         }
 
@@ -177,19 +151,13 @@
                 Il2CppArrayBase<Transform> EntryChilds;
                 Il2CppArrayBase<Transform> NodeChilds;
 
-                if (PlayerEntries != null)
-                {
-                    EntryChilds = PlayerEntries.GetComponentsInChildren<Transform>(true);
-                }
+                if (PlayerEntries != null) EntryChilds = PlayerEntries.GetComponentsInChildren<Transform>(true);
                 else
                 {
                     ModConsole.Error("PlayerEntries Returned Null, Ignored Finding Nodes & Entries");
                     return;
                 }
-                if (GameNodes != null)
-                {
-                    NodeChilds = GameNodes.GetComponentsInChildren<Transform>(true);
-                }
+                if (GameNodes != null) NodeChilds = GameNodes.GetComponentsInChildren<Transform>(true);
                 else
                 {
                     ModConsole.Error("GameNodes Returned Null, Ignored Finding Nodes & Entries");
@@ -203,10 +171,8 @@
                         Transform Entry = EntryChilds[i1];
                         if (Entry != null)
                         {
-                            if (Entry.gameObject == PlayerEntries) // CRITICAL AS THE GETCOMPONENTSINCHILDREN INCLUDE THE PARENT APPARENTLY AS WELL
-                            {
-                                continue;
-                            }
+                            // CRITICAL AS THE GETCOMPONENTSINCHILDREN INCLUDE THE PARENT APPARENTLY AS WELL
+                            if (Entry.gameObject == PlayerEntries) continue;
                             if (Entry.name.StartsWith("Player Entry"))
                             {
                                 //Debug($"Found Entry : {Entry.name}, Finding Link in Nodes...");
@@ -222,10 +188,8 @@
                                             //{
                                             //	continue;
                                             //}
-                                            if (node.gameObject == GameNodes) // CRITICAL AS THE GETCOMPONENTSINCHILDREN INCLUDE THE PARENT APPARENTLY AS WELL
-                                            {
-                                                continue;
-                                            }
+                                            // CRITICAL AS THE GETCOMPONENTSINCHILDREN INCLUDE THE PARENT APPARENTLY AS WELL
+                                            if (node.gameObject == GameNodes) continue;
                                             int? NodeNumber = RemoveNodeText(node);
                                             if (NodeNumber != null)
                                             {
@@ -240,10 +204,7 @@
                                                         {
                                                             var addme = new LinkedNodes(Entry, node, NodeReader, NodeNumber.Value);
 
-                                                            if (GetLinkedNode(addme.Nodevalue) != null)
-                                                            {
-                                                                continue;
-                                                            }
+                                                            if (GetLinkedNode(addme.Nodevalue) != null) continue;
                                                             else
                                                             {
                                                                 if (!JarRoleLinks.Contains(addme))
@@ -267,14 +228,8 @@
                 }
                 else
                 {
-                    if (IsMurder4World)
-                    {
-                        ModConsole.Error("Player List Group Path in Murder 4 Changed! Unable to Reveal Roles!");
-                    }
-                    if (IsAmongUsWorld)
-                    {
-                        ModConsole.Error("Player List Group Path in Among us Changed! Unable to Reveal Roles!");
-                    }
+                    if (IsMurder4World) ModConsole.Error("Player List Group Path in Murder 4 Changed! Unable to Reveal Roles!");
+                    if (IsAmongUsWorld) ModConsole.Error("Player List Group Path in Among us Changed! Unable to Reveal Roles!");
                 }
             }
         }

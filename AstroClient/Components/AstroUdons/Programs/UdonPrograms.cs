@@ -5,14 +5,8 @@
 
     internal class UdonPrograms 
     {
-
-
-
-
-
         private static string InteractTriggerIdentifier = "VRC_AstroInteract";
         private static string PickupIdentifier = "VRC_AstroPickup";
-
 
 
         // Good For buttons and such.
@@ -43,7 +37,6 @@
             }
         }
 
-
         private static SerializedUdonProgramAsset _PickupProgram { get; set; }
         internal static SerializedUdonProgramAsset PickupProgram
         {
@@ -70,7 +63,5 @@
                 return null;
             }
         }
-
-
     }
 }

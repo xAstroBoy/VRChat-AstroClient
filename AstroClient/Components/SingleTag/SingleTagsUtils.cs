@@ -23,10 +23,7 @@
         {
             if (player == null) throw new ArgumentNullException();
             var entry = GetEntry(player);
-            if (entry != null)
-            {
-                RemoveCounter(entry);
-            }
+            if (entry != null) RemoveCounter(entry);
         }
 
         internal static PlayerTagCounter GetEntry(Player player)
@@ -35,7 +32,6 @@
         }
 
         private static readonly bool DebugMode = false;
-
         internal static void Debug(string msg)
         {
             if (DebugMode)
@@ -94,10 +90,7 @@
                 {
                     if (tag != null && tag.Player != null)
                     {
-                        if (tag.Player == player)
-                        {
-                            AssignedTags.Add(tag);
-                        }
+                        if (tag.Player == player) AssignedTags.Add(tag);
                     }
                 }
             }
@@ -110,10 +103,7 @@
         {
             if (entry != null)
             {
-                if (Counter.Contains(entry))
-                {
-                    _ = Counter.Remove(entry);
-                }
+                if (Counter.Contains(entry)) _ = Counter.Remove(entry);
             }
         }
 

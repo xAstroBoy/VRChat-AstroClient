@@ -65,14 +65,8 @@
                 var gameobj = GetInstanceHolder(name);
                 Instance = gameobj.AddComponent<OrbitManager_Old>();
                 DontDestroyOnLoad(gameobj);
-                if (Instance != null)
-                {
-                    ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
-                }
-                else
-                {
-                    ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
-                }
+                if (Instance != null) ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : READY", Color.LawnGreen);
+                else ModConsole.DebugLog("[ " + name.ToUpper() + " STATUS ] : ERROR", Color.OrangeRed);
             }
         }
 
@@ -86,14 +80,11 @@
                     if (obj != null)
                     {
                         var orbit = obj.GetComponent<Orbit>();
-                        if (orbit != null)
+                        if (orbit != null && orbit.player.prop_APIUser_0.id == player.id)
                         {
-                            if (orbit.player.prop_APIUser_0.id == player.id)
-                            {
-                                orbit.DestroyMeLocal();
-                                i++;
-                                continue;
-                            }
+                            orbit.DestroyMeLocal();
+                            i++;
+                            continue;
                         }
                     }
                 }
@@ -103,24 +94,12 @@
 
         internal static void RemoveFromList(GameObject obj)
         {
-            if (obj != null)
-            {
-                if (_OrbitObjects.Contains(obj))
-                {
-                    _ = _OrbitObjects.Remove(obj);
-                }
-            }
+            if (obj != null && _OrbitObjects.Contains(obj)) _ = _OrbitObjects.Remove(obj);
         }
 
         internal static void RegisterObject(GameObject obj)
         {
-            if (obj != null)
-            {
-                if (!_OrbitObjects.Contains(obj))
-                {
-                    _OrbitObjects.Add(obj);
-                }
-            }
+            if (obj != null && !_OrbitObjects.Contains(obj)) _OrbitObjects.Add(obj);
         }
 
         internal static void AddOrbitObject(GameObject obj, Player player)
@@ -150,10 +129,7 @@
                 if (obj != null)
                 {
                     var orbit = obj.GetComponent<Orbit>();
-                    if (orbit != null)
-                    {
-                        orbit.DestroyMeLocal();
-                    }
+                    if (orbit != null) orbit.DestroyMeLocal();
                 }
             }
         }
@@ -162,10 +138,7 @@
         {
             ClearList();
             _OrbitObjects.Clear();
-            if (OrbitObjects != null)
-            {
-                OrbitObjects = null;
-            }
+            if (OrbitObjects != null) OrbitObjects = null;
         }
 
         internal static void Register(Orbit orbitBehaviour)
@@ -192,7 +165,7 @@
 
         private static List<GameObject> _OrbitObjects = new List<GameObject>();
         private static List<GameObject> OrbitObjects;
-        internal static OrbitManager_Old Instance { get; set; }
+        internal static OrbitManager_Old Instance;
 
         #endregion Module
     }

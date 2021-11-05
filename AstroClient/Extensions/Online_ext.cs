@@ -5,9 +5,14 @@
 
     internal static class Online_ext
     {
-        internal static void TakeOwnership(this GameObject obj)
+        /// <summary>
+        /// Returns True if already owned otherwise tries to take ownership and returns the result of the attempt
+        /// </summary>
+        internal static bool TryTakeOwnership(this GameObject obj)
         {
+            if (obj.IsOwner()) return true;
             OnlineEditor.TakeObjectOwnership(obj);
+            return obj.IsOwner();
         }
 
         internal static void DropOwnership(this GameObject obj)

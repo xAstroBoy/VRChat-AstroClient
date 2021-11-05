@@ -1,10 +1,7 @@
 ﻿namespace AstroClient.Components
 {
     using System;
-    using System.Runtime.InteropServices;
-    using UnhollowerRuntimeLib;
     using UnityEngine;
-
 
     [RegisterComponent]
 
@@ -13,7 +10,6 @@
         public InflaterBehaviour(IntPtr ptr) : base(ptr)
         {
         }
-
 
         // Use this for initialization
         private void Start()
@@ -34,56 +30,32 @@
             {
                 if (gameObject.transform.localScale != NewSize)
                 {
-                    // X
                     FixX();
-                    // Y
                     FixY();
-                    // Z
                     FixZ();
-
                 }
                 Run_OnOnInflaterUpdate();
                 LastTimeCheck = Time.time;
             }
         }
 
-
         private void FixX()
         {
-            if (gameObject.transform.localScale.x <= NewSize.x)
-            {
-                gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x + 0.1f, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
-            }
-            if (gameObject.transform.localScale.x >= NewSize.x)
-            {
-                gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x - 0.1f, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
-            }
+            if (gameObject.transform.localScale.x <= NewSize.x) gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x + 0.1f, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
+            if (gameObject.transform.localScale.x >= NewSize.x) gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x - 0.1f, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
         }
 
         private void FixY()
         {
-            if (gameObject.transform.localScale.y <= NewSize.y)
-            {
-                gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y + 0.1f, gameObject.transform.localScale.z);
-            }
-            if (gameObject.transform.localScale.y >= NewSize.y)
-            {
-                gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y - 0.1f, gameObject.transform.localScale.z);
-            }
+            if (gameObject.transform.localScale.y <= NewSize.y) gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y + 0.1f, gameObject.transform.localScale.z);
+            if (gameObject.transform.localScale.y >= NewSize.y) gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y - 0.1f, gameObject.transform.localScale.z);
         }
 
         private void FixZ()
         {
-            if (gameObject.transform.localScale.z <= NewSize.z)
-            {
-                gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y, gameObject.transform.localScale.z + 0.1f);
-            }
-            if (gameObject.transform.localScale.z >= NewSize.z)
-            {
-                gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y, gameObject.transform.localScale.z - 0.1f);
-            }
+            if (gameObject.transform.localScale.z <= NewSize.z) gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y, gameObject.transform.localScale.z + 0.1f);
+            if (gameObject.transform.localScale.z >= NewSize.z) gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y, gameObject.transform.localScale.z - 0.1f);
         }
-
 
         #region actions
 
@@ -106,8 +78,6 @@
             OnInflaterUpdate += action;
         }
 
-
-
         internal void RemoveActionEvents()
         {
             OnInflaterPropertyChanged = null;
@@ -118,8 +88,6 @@
         private event Action? OnInflaterUpdate;
 
         #endregion actions
-
-
 
         internal float TimerOffset = 0f;
         private float LastTimeCheck = 0;

@@ -27,10 +27,7 @@
             {
                 ClassInjector.RegisterTypeInIl2Cpp(type);
                 ModConsole.DebugLog($"Registered: {type}");
-                if (!RegisteredComponentsTypes.Contains(type))
-                {
-                    RegisteredComponentsTypes.Add(type);
-                }
+                if (!RegisteredComponentsTypes.Contains(type)) RegisteredComponentsTypes.Add(type);
             }
             catch (Exception e)
             {
@@ -45,7 +42,6 @@
             RegisterComponent<JarControllerEvents>();
 
             var classes = Assembly.GetExecutingAssembly().GetTypes();
-
             for (int i = 0; i < classes.Length; i++)
             {
                 Type c = classes[i];
@@ -54,19 +50,13 @@
                 for (int i1 = 0; i1 < array.Length; i1++)
                 {
                     Attribute attribute = array[i1];
-                    if (attribute.GetType().Equals(typeof(RegisterComponent)))
-                    {
-                        RegisterComponent(c);
-                    }
+                    if (attribute.GetType().Equals(typeof(RegisterComponent))) RegisterComponent(c);
                 }
             }
 
             //RegisterComponent<Murder4PatronUnlocker>();
 
-            if (Bools.AllowAttackerComponent)
-            {
-                RegisterComponent<PlayerAttacker>();
-            }
+            if (Bools.AllowAttackerComponent) RegisterComponent<PlayerAttacker>();
 
             if (Bools.AllowOrbitComponent)
             {
@@ -78,10 +68,7 @@
 
         internal override void OnUpdate()
         {
-            if (Bools.AllowOrbitComponent)
-            {
-                OrbitManager.MakeInstance();
-            }
+            if (Bools.AllowOrbitComponent) OrbitManager.MakeInstance();
         }
 
         internal static List<Type> RegisteredComponentsTypes { get; } = new List<Type>();

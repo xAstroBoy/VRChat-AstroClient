@@ -23,10 +23,7 @@
             if (WorldUtils.WorldID.Equals(WorldIds.Super_Tower_defense))
             {
                 var obj = gameObject.FindUdonEvent("AskForNewWave");
-                if (obj != null)
-                {
-                    WaveController = obj.UdonBehaviour.DisassembleUdonBehaviour();
-                }
+                if (obj != null) WaveController = obj.UdonBehaviour.DisassembleUdonBehaviour();
                 else
                 {
                     ModConsole.Error("Can't Find WaveController behaviour, Unable to Add Reader Component, did the author update the world?");
@@ -40,26 +37,19 @@
         {
             get
             {
-                if (WaveController != null)
-                {
-                    return UdonHeapParser.Udon_Parse_Int32(WaveController, Wave);
-                }
+                if (WaveController != null) return UdonHeapParser.Udon_Parse_Int32(WaveController, Wave);
                 return null;
             }
             set
             {
                 if (WaveController != null)
                 {
-                    if (value.HasValue)
-                    {
-                        UdonHeapEditor.PatchHeap(WaveController, Wave, Math.Abs(value.Value), true);
-                    }
+                    if (value.HasValue) UdonHeapEditor.PatchHeap(WaveController, Wave, Math.Abs(value.Value), true);
                 }
             }
         }
 
         private string Wave { get; } = "Wave";
-
-        private DisassembledUdonBehaviour WaveController { get; set; }
+        private DisassembledUdonBehaviour WaveController;
     }
 }

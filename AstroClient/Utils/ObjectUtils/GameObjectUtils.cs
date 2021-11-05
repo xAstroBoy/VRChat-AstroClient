@@ -164,7 +164,7 @@
         {
             if (obj != null)
             {
-                obj.TakeOwnership();
+                obj.TryTakeOwnership();
                 var control = obj.GetComponent<RigidBodyController>();
                 var SyncPhysic = obj.GetComponent<SyncPhysics>();
 

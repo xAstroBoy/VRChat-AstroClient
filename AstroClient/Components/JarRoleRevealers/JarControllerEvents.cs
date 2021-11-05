@@ -16,8 +16,6 @@
 
         private void Internal_OnPlayerESPPropertyChanged(object sender, BoolEventsArgs e) => OnPlayerESPPropertyChanged(e.value);
 
-        internal virtual void OnPlayerESPPropertyChanged(bool value)
-        {
-        }
+        internal virtual void OnPlayerESPPropertyChanged(bool value) { }
     }
 }

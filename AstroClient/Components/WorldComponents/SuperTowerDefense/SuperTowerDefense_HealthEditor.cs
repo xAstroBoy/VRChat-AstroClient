@@ -48,19 +48,15 @@
                         case 3:
                             ResetHealth.ExecuteUdonEvent();
                             break;
-
                         case 2:
                             ResetHealth.ExecuteUdonEvent();
                             break;
-
                         case 1:
                             ResetHealth.ExecuteUdonEvent();
                             break;
-
                         case 0:
                             ResetHealth.ExecuteUdonEvent();
                             break;
-
                         default:
                             break;
                     }
@@ -72,30 +68,21 @@
         {
             get
             {
-                if (HealthController != null)
-                {
-                    return UdonHeapParser.Udon_Parse_Int32(HealthController, Lives);
-                }
+                if (HealthController != null) return UdonHeapParser.Udon_Parse_Int32(HealthController, Lives);
                 return null;
             }
             set
             {
                 if (HealthController != null)
                 {
-                    if (value.HasValue)
-                    {
-                        UdonHeapEditor.PatchHeap(HealthController, Lives, Math.Abs(value.Value));
-                    }
+                    if (value.HasValue) UdonHeapEditor.PatchHeap(HealthController, Lives, Math.Abs(value.Value));
                 }
             }
         }
 
         private string Lives { get; } = "Lives";
-
-        internal bool GodMode { get; set; } = false;
-
+        internal bool GodMode = false;
         internal DisassembledUdonBehaviour HealthController { get; private set; }
-
         internal static CustomLists.UdonBehaviour_Cached ResetHealth { get; private set; }
     }
 }

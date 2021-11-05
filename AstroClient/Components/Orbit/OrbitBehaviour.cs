@@ -85,10 +85,7 @@
             body = GetComponent<Rigidbody>();
             obj = body.gameObject;
             pickup = GetComponent<PickupController>();
-            if (pickup == null)
-            {
-                pickup = obj.AddComponent<PickupController>();
-            }
+            pickup ??= obj.AddComponent<PickupController>();
             OrbitManager_Old.Register(this);
             //OnlineEditor.TakeObjectOwnership(obj);
         }
@@ -101,15 +98,9 @@
                 return;
             }
 
-            if (pickup.IsHeld)
-            {
-                return;
-            }
+            if (pickup.IsHeld) return;
 
-            if (CenterPoint == null)
-            {
-                CenterPoint = BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head);
-            }
+            CenterPoint ??= BonesUtils.Get_Player_Bone_Transform(player, HumanBodyBones.Head);
 
             if (CenterPoint != null)
             {
@@ -137,10 +128,7 @@
 
                 if (!pickup.IsHeld && !pickup.IsHeld)
 				{
-					if (!gameObject.IsOwner())
-					{
-						gameObject.TakeOwnership();
-					}
+					gameObject.TryTakeOwnership();
 					Timer += (Time.deltaTime * RotationSpeed) + TimerOffset;
 					Rotate();
 					UpdateTimer -= Time.deltaTime;
@@ -186,19 +174,15 @@
                 case RotationMode.Circle:
                     CircularRotation();
                     break;
-
                 case RotationMode.Ellipse:
                     EllipseRotation();
                     break;
-
                 case RotationMode.CircleWithRotation:
                     CircleWithRotation();
                     break;
-
                 case RotationMode.BackAndForth:
                     BackAndForthRotation();
                     break;
-
                 default:
                     break;
             }

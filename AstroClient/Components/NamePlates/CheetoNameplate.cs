@@ -68,7 +68,7 @@
             if (player != null && player.GetVRCPlayer() != null)
             {
                 nameplate = player.GetVRCPlayer().field_Public_PlayerNameplate_0;
-                if (nameplate == null) { ModConsole.Error("[Nameplate] Nameplate was null!"); return; };
+                if (nameplate == null) ModConsole.Error("[Nameplate] Nameplate was null!"); return;
 
                 contents = nameplate.transform.Find("Contents").gameObject;
 
@@ -88,14 +88,8 @@
                         glow_Image = glow.GetComponent<Image>();
                         textContainer = main.transform.Find("Text Container").gameObject;
 
-                        if (textContainer != null)
-                        {
-                            subText = textContainer.transform.Find("Sub Text").gameObject;
-                        }
-                        else
-                        {
-                            ModConsole.Error("[Nameplate] TextContainer was null");
-                        }
+                        if (textContainer != null) subText = textContainer.transform.Find("Sub Text").gameObject;
+                        else ModConsole.Error("[Nameplate] TextContainer was null");
                     }
                     else
                     {
@@ -134,17 +128,14 @@
             //AddTag(player.GetAPIUser().GetRank(), player.GetAPIUser().GetRankColor());
 
             stopwatch.Stop();
-            if (stopwatch.ElapsedMilliseconds > 1)
-            {
-                ModConsole.Log($"[Nameplate] creation took {stopwatch.ElapsedMilliseconds}ms!");
-            }
+            if (stopwatch.ElapsedMilliseconds > 1) ModConsole.Log($"[Nameplate] creation took {stopwatch.ElapsedMilliseconds}ms!");
         }
 
         private IEnumerator UpdateLoop()
         {
             for (; ; )
             {
-                if (nameplate==null) { yield return null; }
+                if (nameplate==null) yield return null;
                 Refresh();
                 yield return new WaitForSeconds(2f);
             }
@@ -154,7 +145,7 @@
         {
             for (; ; )
             {
-                if (nameplate == null) { yield return null; }
+                if (nameplate == null) yield return null;
                 FastRefresh();
                 yield return new WaitForSeconds(0.25f);
             }
@@ -187,7 +178,7 @@
             subText.SetActiveRecursively(true);
             trustText.SetActiveRecursively(true);
 
-            if (player.IsFriend()) { friendMarker.SetActiveRecursively(true); }
+            if (player.IsFriend()) friendMarker.SetActiveRecursively(true);
             if (player.GetPlatform().Equals("Quest") && !quest.active) quest.SetActiveRecursively(true);
         }
 
@@ -200,14 +191,9 @@
             SetBackgroundColor(player.GetAPIUser().GetRankColor());
 
             var stringBuilder = new StringBuilder();
-            if (player.IsInstanceMaster())
-            {
-                _ = stringBuilder.Append($"(Owner) ");
-            }
-            if (player.IsFriend())
-            {
-                _ = stringBuilder.Append($"<color=green>[F]</color> ");
-            }
+            if (player.IsInstanceMaster()) _ = stringBuilder.Append($"(Owner) ");
+            if (player.IsFriend()) _ = stringBuilder.Append($"<color=green>[F]</color> ");
+
             _ = stringBuilder.Append($"{player.GetPlatformColored()} ");
             _ = stringBuilder.Append($"F:{player.GetFramesColored()}|P:{player.GetPingColored()}");
 
@@ -215,10 +201,7 @@
             trustText_Text.color = Color.white;
 
             stopwatch.Stop();
-            if (stopwatch.ElapsedMilliseconds > 1)
-            {
-                ModConsole.Log($"Namplate Refresh took {stopwatch.ElapsedMilliseconds}ms!");
-            }
+            if (stopwatch.ElapsedMilliseconds > 1) ModConsole.Log($"Namplate Refresh took {stopwatch.ElapsedMilliseconds}ms!");
         }
 
         internal void AddTag(string text, Color bgColor)
@@ -232,10 +215,7 @@
                 newTag.GetComponent<ImageThreeSlice>().color = Color.black;
                 tagText.color = Color.yellow;
             }
-            else
-            {
-                newTag.GetComponent<ImageThreeSlice>().color = bgColor;
-            }
+            else newTag.GetComponent<ImageThreeSlice>().color = bgColor;
             tagText.text = text;
             newTag.SetActiveRecursively(true);
             SetLocation(newTag, tags.Count);
@@ -245,10 +225,7 @@
         internal void SetDeveloper(bool value)
         {
             isDeveloper = value;
-            if (value)
-            {
-                SetBackgroundColor(Color.black);
-            }
+            if (value) SetBackgroundColor(Color.black);
         }
 
         internal void SetBetaTester(bool value)
@@ -266,10 +243,7 @@
             for (int i = tag.transform.childCount; i > 0; i--)
             {
                 Transform child = tag.transform.GetChild(i - 1);
-                if (!child.name.Equals("Trust Text"))
-                {
-                    UnityEngine.Object.Destroy(child.gameObject);
-                }
+                if (!child.name.Equals("Trust Text")) UnityEngine.Object.Destroy(child.gameObject);
             }
         }
     }

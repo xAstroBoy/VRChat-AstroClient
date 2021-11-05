@@ -24,10 +24,7 @@
             else
             {
                 Rigidbody = SyncPhysics.GetRigidBody();
-                if (Rigidbody == null)
-                {
-                    Rigidbody = gameObject.GetComponent<Rigidbody>();
-                }
+                Rigidbody ??= gameObject.GetComponent<Rigidbody>();
             }
             ModConsole.DebugLog("Attacked Successfully RigidBodyController to object " + gameObject.name);
             InvokeRepeating(nameof(Updater), 0.1f, 0.3f);
@@ -38,10 +35,7 @@
         {
             if (Rigidbody != null)
             {
-                if (_EditMode)
-                {
-                    _EditMode = false; // To be sure to backup the original properties without writing them .
-                }
+                if (_EditMode) _EditMode = false; // To be sure to backup the original properties without writing them.
                 ModConsole.DebugLog($"Backupping from RigidBody properties for object  {gameObject.name}");
                 solverVelocityIterationCount = Rigidbody.solverVelocityIterationCount;
                 inertiaTensor = Rigidbody.inertiaTensor;
@@ -100,11 +94,8 @@
 
         internal void RestoreOriginalBody() // Restore only if Editmode is already active, and Activate sync mode Once Restored.
         {
-            if (!_EditMode)
-            {
-                _EditMode = true;
-            }
-            if (_EditMode)
+            if (!_EditMode) _EditMode = true;
+            else
             {
                 solverVelocityIterationCount = Original_solverVelocityIterationCount;
                 inertiaTensor = Original_inertiaTensor;
@@ -239,10 +230,7 @@
 
         internal int solverVelocityIterationCount
         {
-            get
-            {
-                return _solverVelocityIterationCount;
-            }
+            get => _solverVelocityIterationCount;
             set
             {
                 _solverVelocityIterationCount = value;
@@ -260,10 +248,7 @@
 
         internal Vector3 inertiaTensor
         {
-            get
-            {
-                return _inertiaTensor;
-            }
+            get => _inertiaTensor;
             set
             {
                 _inertiaTensor = value;
@@ -281,10 +266,7 @@
 
         internal Quaternion inertiaTensorRotation
         {
-            get
-            {
-                return _inertiaTensorRotation;
-            }
+            get => _inertiaTensorRotation;
             set
             {
                 _inertiaTensorRotation = value;
@@ -302,10 +284,7 @@
 
         internal Vector3 centerOfMass
         {
-            get
-            {
-                return _centerOfMass;
-            }
+            get => _centerOfMass;
             set
             {
                 _centerOfMass = value;
@@ -323,10 +302,7 @@
 
         internal CollisionDetectionMode collisionDetectionMode
         {
-            get
-            {
-                return _collisionDetectionMode;
-            }
+            get => _collisionDetectionMode;
             set
             {
                 _collisionDetectionMode = value;
@@ -344,10 +320,7 @@
 
         internal RigidbodyConstraints constraints
         {
-            get
-            {
-                return _constraints;
-            }
+            get => _constraints;
             set
             {
                 _constraints = value;
@@ -365,10 +338,7 @@
 
         internal bool freezeRotation
         {
-            get
-            {
-                return _freezeRotation;
-            }
+            get => _freezeRotation;
             set
             {
                 _freezeRotation = value;
@@ -386,10 +356,7 @@
 
         internal float maxDepenetrationVelocity
         {
-            get
-            {
-                return _maxDepenetrationVelocity;
-            }
+            get => _maxDepenetrationVelocity;
             set
             {
                 _maxDepenetrationVelocity = value;
@@ -407,10 +374,7 @@
 
         internal bool detectCollisions
         {
-            get
-            {
-                return _detectCollisions;
-            }
+            get => _detectCollisions;
             set
             {
                 _detectCollisions = value;
@@ -428,10 +392,7 @@
 
         internal bool useGravity
         {
-            get
-            {
-                return _useGravity;
-            }
+            get => _useGravity;
             set
             {
                 _useGravity = value;
@@ -449,10 +410,7 @@
 
         internal float mass
         {
-            get
-            {
-                return _mass;
-            }
+            get => _mass;
             set
             {
                 _mass = value;
@@ -470,10 +428,7 @@
 
         internal int solverIterationCount
         {
-            get
-            {
-                return _solverIterationCount;
-            }
+            get => _solverIterationCount;
             set
             {
                 _solverIterationCount = value;
@@ -491,10 +446,7 @@
 
         internal float angularDrag
         {
-            get
-            {
-                return _angularDrag;
-            }
+            get => _angularDrag;
             set
             {
                 _angularDrag = value;
@@ -512,10 +464,7 @@
 
         internal float drag
         {
-            get
-            {
-                return _drag;
-            }
+            get => _drag;
             set
             {
                 _drag = value;
@@ -533,10 +482,7 @@
 
         internal Vector3 angularVelocity
         {
-            get
-            {
-                return _angularVelocity;
-            }
+            get => _angularVelocity;
             set
             {
                 _angularVelocity = value;
@@ -554,10 +500,7 @@
 
         internal Vector3 velocity
         {
-            get
-            {
-                return _velocity;
-            }
+            get => _velocity;
             set
             {
                 _velocity = value;
@@ -575,10 +518,7 @@
 
         internal bool isKinematic
         {
-            get
-            {
-                return _isKinematic;
-            }
+            get => _isKinematic;
             set
             {
                 _isKinematic = value;
@@ -596,10 +536,7 @@
 
         internal float sleepVelocity
         {
-            get
-            {
-                return _sleepVelocity;
-            }
+            get => _sleepVelocity;
             set
             {
                 _sleepVelocity = value;
@@ -617,10 +554,7 @@
 
         internal float sleepThreshold
         {
-            get
-            {
-                return _sleepThreshold;
-            }
+            get => _sleepThreshold;
             set
             {
                 _sleepThreshold = value;
@@ -638,10 +572,7 @@
 
         internal float maxAngularVelocity
         {
-            get
-            {
-                return _maxAngularVelocity;
-            }
+            get => _maxAngularVelocity;
             set
             {
                 _maxAngularVelocity = value;
@@ -659,10 +590,7 @@
 
         internal int solverVelocityIterations
         {
-            get
-            {
-                return _solverVelocityIterations;
-            }
+            get => _solverVelocityIterations;
             set
             {
                 _solverVelocityIterations = value;
@@ -680,10 +608,7 @@
 
         internal RigidbodyInterpolation interpolation
         {
-            get
-            {
-                return _interpolation;
-            }
+            get => _interpolation;
             set
             {
                 _interpolation = value;
@@ -701,10 +626,7 @@
 
         internal float sleepAngularVelocity
         {
-            get
-            {
-                return _sleepAngularVelocity;
-            }
+            get => _sleepAngularVelocity;
             set
             {
                 _sleepAngularVelocity = value;
@@ -722,10 +644,7 @@
 
         internal bool useConeFriction
         {
-            get
-            {
-                return _useConeFriction;
-            }
+            get => _useConeFriction;
             set
             {
                 _useConeFriction = value;
@@ -743,10 +662,7 @@
 
         internal int solverIterations
         {
-            get
-            {
-                return _solverIterations;
-            }
+            get => _solverIterations;
             set
             {
                 _solverIterations = value;
@@ -767,10 +683,7 @@
         {
             get
             {
-                if (Rigidbody != null)
-                {
-                    return Rigidbody.worldCenterOfMass;
-                }
+                if (Rigidbody != null) return Rigidbody.worldCenterOfMass;
                 return Vector3.zero;
             }
         }
@@ -858,19 +771,16 @@
 
         #region Random Methods
 
-        
         internal bool UpdateKinematic(bool isKinematic)
         {
             this.isKinematic = isKinematic;
             return this.isKinematic == isKinematic;
         }
 
-        
         internal void OverrideInternalKinematic(bool isKinematic)
         {
             Original_isKinematic = isKinematic;
         }
-
         
         internal bool UpdateAngularDrag(float angularDrag)
         {
@@ -878,7 +788,6 @@
             return this.angularDrag == angularDrag;
         }
 
-        
         internal bool UpdateDrag(float drag)
         {
             this.drag = drag;
@@ -887,34 +796,23 @@
 
         #endregion Random Methods
 
-
-
         #region Essential Variables.
 
         internal Rigidbody Rigidbody { get; private set; }
         internal SyncPhysics SyncPhysics { get; private set; }
-        private bool _EditMode = false;
 
         private bool IsActived = false;
 
+        private bool _EditMode = false;
         internal bool EditMode
         {
-            get
-            {
-                return _EditMode;
-            }
+            get => _EditMode;
             set
             {
                 if (value != _EditMode)
                 {
-                    if (value)
-                    {
-                        BackupBasicBody();
-                    }
-                    else
-                    {
-                        RestoreOriginalBody();
-                    }
+                    if (value) BackupBasicBody();
+                    else RestoreOriginalBody();
                     Run_OnRigidBodyPropertyChanged();
                 }
                 _EditMode = value;
@@ -922,13 +820,9 @@
         }
 
         private bool _Forced_RigidBody;
-
         internal bool Forced_Rigidbody
         {
-            get
-            {
-                return _Forced_RigidBody;
-            }
+            get => _Forced_RigidBody;
             set
             {
                 if (value)
@@ -941,10 +835,7 @@
                 }
                 else
                 {
-                    if (_Forced_RigidBody)
-                    {
-                        return;
-                    }
+                    if (_Forced_RigidBody) return;
                 }
             }
         }

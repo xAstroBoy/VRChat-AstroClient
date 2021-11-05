@@ -5,7 +5,6 @@
     using AstroLibrary.Utility;
     using System;
     using System.Linq;
-    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC.SDKBase;
 
@@ -27,34 +26,23 @@
             ModConsole.DebugLog("Attacked Successfully PickupController to object " + gameObject.name);
             isUsingUI = false;
             InvokeRepeating(nameof(PickupUpdate), 0.1f, 0.3f);
-
         }
 
         private bool isUsingUI { get; set; }
         internal override void OnQuickMenuClose() => isUsingUI = false;
-
         internal override void OnQuickMenuOpen() => isUsingUI = true;
-
         internal override void OnBigMenuOpen() => isUsingUI = true;
-
         internal override void OnBigMenuClose() => isUsingUI = false;
 
 
         private void PickupUpdate()
         {
-            if (gameObject != null)
+            if (gameObject != null && gameObject.active && this.isActiveAndEnabled)
             {
-                if (gameObject.active && this.isActiveAndEnabled)
-                {
-                    Run_onPickupUpdate();
-                    if (!EditMode)
-                    {
-                        SyncProperties(true);
-                    }
-                }
+                Run_onPickupUpdate();
+                if (!EditMode) SyncProperties(true);
             }
         }
-
 
         private void Update()
         {
@@ -62,40 +50,24 @@
             AntiPickupTheft();
         }
 
-
         private void AntiPickupTheft()
         {
             if (isUsingUI) return;
             if (!AntiTheft) return;
             if (Utils.LocalPlayer == null) return;
             bool TeleporToAntiTheft = false;
-            if (CurrentHolder == null && !IsHeld || !CurrentHolder.isLocal)
-            {
-                TeleporToAntiTheft = true;
-            }
+            if (CurrentHolder == null && !IsHeld || !CurrentHolder.isLocal) TeleporToAntiTheft = true;
             if(TeleporToAntiTheft)
             {
                 if (InputUtils.IsImputUseRightCalled)
                 {
-                    if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) != null)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        gameObject.TeleportToMe(HumanBodyBones.RightHand, false, true);
-                    }
+                    if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Right) != null) return;
+                    else gameObject.TeleportToMe(HumanBodyBones.RightHand, false, true);
                 }
                 else if (InputUtils.IsImputUseLeftCalled)
                 {
-                    if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) != null)
-                    { 
-                        return;
-                    }
-                    else
-                    {
-                        gameObject.TeleportToMe(HumanBodyBones.LeftHand, false, true);
-                    }
+                    if (Utils.LocalPlayer.GetPickupInHand(VRC_Pickup.PickupHand.Left) != null) return;
+                    else gameObject.TeleportToMe(HumanBodyBones.LeftHand, false, true);
                 }
             }
         }
@@ -119,17 +91,10 @@
                         OnlineEditor.TakeObjectOwnership(gameObject);
                     }
                 }
-
             }
             else
             {
-                if (!CurrentHolder.isLocal)
-                {
-                    if (!OnlineEditor.IsLocalPlayerOwner(gameObject))
-                    {
-                        OnlineEditor.TakeObjectOwnership(gameObject);
-                    }
-                }
+                if (!CurrentHolder.isLocal && !OnlineEditor.IsLocalPlayerOwner(gameObject)) OnlineEditor.TakeObjectOwnership(gameObject);
             }
 
         }
@@ -158,13 +123,7 @@
 
         private void SyncProperties(bool isFromUpdate)
         {
-            if (isFromUpdate)
-            {
-                if (_EditMode)
-                {
-                    _EditMode = false; // Disable this so it goes on Sync Mode.
-                }
-            }
+            if (isFromUpdate && _EditMode) _EditMode = false; // Disable this so it goes on Sync Mode.
             if (SDKBase_Pickup != null)
             {
                 Original_currentlyHeldBy = SDKBase_Pickup.currentlyHeldBy;
@@ -407,18 +366,9 @@
                 _currentlyHeldBy = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.currentlyHeldBy = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.currentlyHeldBy = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.currentlyHeldBy = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.currentlyHeldBy = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.currentlyHeldBy = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.currentlyHeldBy = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -435,18 +385,9 @@
                 _UseDownEventName = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.UseDownEventName = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.UseDownEventName = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.UseDownEventName = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.UseDownEventName = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.UseDownEventName = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.UseDownEventName = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -463,18 +404,9 @@
                 _currentLocalPlayer = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.currentLocalPlayer = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.currentLocalPlayer = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.currentLocalPlayer = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.currentLocalPlayer = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.currentLocalPlayer = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.currentLocalPlayer = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -491,18 +423,9 @@
                 _ThrowVelocityBoostScale = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.ThrowVelocityBoostScale = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.ThrowVelocityBoostScale = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.ThrowVelocityBoostScale = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.ThrowVelocityBoostScale = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.ThrowVelocityBoostScale = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.ThrowVelocityBoostScale = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -519,18 +442,9 @@
                 _ThrowVelocityBoostMinSpeed = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.ThrowVelocityBoostMinSpeed = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.ThrowVelocityBoostMinSpeed = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.ThrowVelocityBoostMinSpeed = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.ThrowVelocityBoostMinSpeed = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.ThrowVelocityBoostMinSpeed = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.ThrowVelocityBoostMinSpeed = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -547,18 +461,9 @@
                 _DropEventName = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.DropEventName = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.DropEventName = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.DropEventName = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.DropEventName = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.DropEventName = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.DropEventName = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -575,18 +480,9 @@
                 _PickupEventName = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.PickupEventName = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.PickupEventName = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.PickupEventName = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.PickupEventName = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.PickupEventName = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.PickupEventName = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -603,18 +499,9 @@
                 _pickupable = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.pickupable = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.pickupable = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.pickupable = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.pickupable = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.pickupable = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.pickupable = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -631,18 +518,9 @@
                 _UseUpEventName = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.UseUpEventName = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.UseUpEventName = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.UseUpEventName = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.UseUpEventName = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.UseUpEventName = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.UseUpEventName = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -659,18 +537,9 @@
                 _useEventBroadcastType = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.useEventBroadcastType = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.useEventBroadcastType = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.useEventBroadcastType = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.useEventBroadcastType = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.useEventBroadcastType = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.useEventBroadcastType = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -687,18 +556,9 @@
                 _orientation = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.orientation = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.orientation = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.orientation = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.orientation = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.orientation = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.orientation = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -713,22 +573,10 @@
             set
             {
                 _InteractionText = value;
-                if (SDKBase_Pickup != null)
-                {
-                    SDKBase_Pickup.InteractionText = value;
-                }
-                if (SDK2_Pickup != null)
-                {
-                    SDK2_Pickup.InteractionText = value;
-                }
-                if (SDK3_Pickup != null)
-                {
-                    SDK3_Pickup.InteractionText = value;
-                }
-                if (EditMode)
-                {
-                    Run_OnOnPickupPropertyChanged();
-                }
+                if (SDKBase_Pickup != null) SDKBase_Pickup.InteractionText = value;
+                if (SDK2_Pickup != null) SDK2_Pickup.InteractionText = value;
+                if (SDK3_Pickup != null) SDK3_Pickup.InteractionText = value;
+                if (EditMode) Run_OnOnPickupPropertyChanged();
             }
         }
 
@@ -741,22 +589,10 @@
             set
             {
                 _AutoHold = value;
-                if (SDKBase_Pickup != null)
-                {
-                    SDKBase_Pickup.AutoHold = value;
-                }
-                if (SDK2_Pickup != null)
-                {
-                    SDK2_Pickup.AutoHold = value;
-                }
-                if (SDK3_Pickup != null)
-                {
-                    SDK3_Pickup.AutoHold = value;
-                }
-                if (EditMode)
-                {
-                    Run_OnOnPickupPropertyChanged();
-                }
+                if (SDKBase_Pickup != null) SDKBase_Pickup.AutoHold = value;
+                if (SDK2_Pickup != null) SDK2_Pickup.AutoHold = value;
+                if (SDK3_Pickup != null) SDK3_Pickup.AutoHold = value;
+                if (EditMode) Run_OnOnPickupPropertyChanged();
             }
         }
 
@@ -771,18 +607,9 @@
                 _proximity = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.proximity = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.proximity = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.proximity = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.proximity = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.proximity = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.proximity = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -799,18 +626,9 @@
                 _allowManipulationWhenEquipped = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.allowManipulationWhenEquipped = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.allowManipulationWhenEquipped = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.allowManipulationWhenEquipped = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.allowManipulationWhenEquipped = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.allowManipulationWhenEquipped = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.allowManipulationWhenEquipped = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -827,18 +645,9 @@
                 _ExactGrip = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.ExactGrip = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.ExactGrip = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.ExactGrip = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.ExactGrip = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.ExactGrip = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.ExactGrip = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -855,18 +664,9 @@
                 _ExactGun = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.ExactGun = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.ExactGun = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.ExactGun = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.ExactGun = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.ExactGun = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.ExactGun = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -883,18 +683,9 @@
                 _DisallowTheft = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.DisallowTheft = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.DisallowTheft = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.DisallowTheft = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.DisallowTheft = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.DisallowTheft = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.DisallowTheft = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -911,18 +702,9 @@
                 _MomentumTransferMethod = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.MomentumTransferMethod = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.MomentumTransferMethod = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.MomentumTransferMethod = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.MomentumTransferMethod = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.MomentumTransferMethod = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.MomentumTransferMethod = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -937,22 +719,10 @@
             set
             {
                 _UseText = value;
-                if (SDKBase_Pickup != null)
-                {
-                    SDKBase_Pickup.UseText = value;
-                }
-                if (SDK2_Pickup != null)
-                {
-                    SDK2_Pickup.UseText = value;
-                }
-                if (SDK3_Pickup != null)
-                {
-                    SDK3_Pickup.UseText = value;
-                }
-                if (EditMode)
-                {
-                    Run_OnOnPickupPropertyChanged();
-                }
+                if (SDKBase_Pickup != null) SDKBase_Pickup.UseText = value;
+                if (SDK2_Pickup != null) SDK2_Pickup.UseText = value;
+                if (SDK3_Pickup != null) SDK3_Pickup.UseText = value;
+                if (EditMode) Run_OnOnPickupPropertyChanged();
             }
         }
 
@@ -967,18 +737,9 @@
                 _pickupDropEventBroadcastType = value;
                 if (EditMode)
                 {
-                    if (SDKBase_Pickup != null)
-                    {
-                        SDKBase_Pickup.pickupDropEventBroadcastType = value;
-                    }
-                    if (SDK2_Pickup != null)
-                    {
-                        SDK2_Pickup.pickupDropEventBroadcastType = value;
-                    }
-                    if (SDK3_Pickup != null)
-                    {
-                        SDK3_Pickup.pickupDropEventBroadcastType = value;
-                    }
+                    if (SDKBase_Pickup != null) SDKBase_Pickup.pickupDropEventBroadcastType = value;
+                    if (SDK2_Pickup != null) SDK2_Pickup.pickupDropEventBroadcastType = value;
+                    if (SDK3_Pickup != null) SDK3_Pickup.pickupDropEventBroadcastType = value;
                     Run_OnOnPickupPropertyChanged();
                 }
             }
@@ -994,22 +755,10 @@
             
             get
             {
-                if (SDKBase_Pickup != null)
-                {
-                    return SDKBase_Pickup.IsHeld;
-                }
-                else if (SDK2_Pickup != null)
-                {
-                    return SDK2_Pickup.IsHeld;
-                }
-                else if (SDK3_Pickup != null)
-                {
-                    return SDK3_Pickup.IsHeld;
-                }
-                else
-                {
-                    return false;
-                }
+                if (SDKBase_Pickup != null) return SDKBase_Pickup.IsHeld;
+                else if (SDK2_Pickup != null) return SDK2_Pickup.IsHeld;
+                else if (SDK3_Pickup != null) return SDK3_Pickup.IsHeld;
+                else return false;
             }
         }
 
@@ -1017,18 +766,9 @@
         {
             get
             {
-                if (SDKBase_Pickup != null)
-                {
-                    return SDKBase_Pickup.currentHand;
-                }
-                else if (SDK2_Pickup != null)
-                {
-                    return SDK2_Pickup.currentHand;
-                }
-                else if (SDK3_Pickup != null)
-                {
-                    return SDK3_Pickup.currentHand;
-                }
+                if (SDKBase_Pickup != null) return SDKBase_Pickup.currentHand;
+                else if (SDK2_Pickup != null) return SDK2_Pickup.currentHand;
+                else if (SDK3_Pickup != null) return SDK3_Pickup.currentHand;
                 return VRC_Pickup.PickupHand.None;
             }
         }
@@ -1043,26 +783,17 @@
                     if (SDKBase_Pickup != null)
                     {
                         var user = SDKBase_Pickup.currentPlayer;
-                        if (user != null)
-                        {
-                            return user;
-                        }
+                        if (user != null) return user;
                     }
                     else if (SDK2_Pickup != null)
                     {
                         var user = SDK2_Pickup.currentPlayer;
-                        if (user != null)
-                        {
-                            return user;
-                        }
+                        if (user != null) return user;
                     }
                     else if (SDK3_Pickup != null)
                     {
                         var user = SDK3_Pickup.currentPlayer;
-                        if (user != null)
-                        {
-                            return user;
-                        }
+                        if (user != null) return user;
                     }
                 }
                 catch
@@ -1082,10 +813,7 @@
             get
             {
                 var owner = Networking.GetOwner(gameObject);
-                if (owner != null)
-                {
-                    return owner.displayName;
-                }
+                if (owner != null) return owner.displayName;
                 return "Unassigned owner";
             }
         }
@@ -1117,26 +845,17 @@
                     if (SDKBase_Pickup != null)
                     {
                         var user = SDKBase_Pickup.currentPlayer;
-                        if (user != null)
-                        {
-                            return user;
-                        }
+                        if (user != null) return user;
                     }
                     else if (SDK2_Pickup != null)
                     {
                         var user = SDK2_Pickup.currentPlayer;
-                        if (user != null)
-                        {
-                            return user;
-                        }
+                        if (user != null) return user;
                     }
                     else if (SDK3_Pickup != null)
                     {
                         var user = SDK3_Pickup.currentPlayer;
-                        if (user != null)
-                        {
-                            return user;
-                        }
+                        if (user != null) return user;
                     }
                 }
                 catch
@@ -1148,19 +867,13 @@
 
         internal bool HasPickupComponent()
         {
-            if (SDKBase_Pickup != null || SDK2_Pickup != null || SDK3_Pickup != null)
-            {
-                return true;
-            }
+            if (SDKBase_Pickup != null || SDK2_Pickup != null || SDK3_Pickup != null) return true;
             return false;
         }
 
         internal void SetRigidbody()
         {
-            if (HasSetRigidbodyController)
-            {
-                return;
-            }
+            if (HasSetRigidbodyController) return;
             if (!HasSetRigidbodyController)
             {
                 if (RigidBodyController != null)
@@ -1168,27 +881,15 @@
                     // IF INTERNAL SYNC IS NULL, Force The rigidbody to take over , Then Set it as Kinematic in case no collider is present.
                     if (RigidBodyController.SyncPhysics == null)
                     {
-                        if (!RigidBodyController.Forced_Rigidbody)
-                        {
-                            RigidBodyController.Forced_Rigidbody = true;
-                        }
-                        if (!RigidBodyController.EditMode)
-                        {
-                            RigidBodyController.EditMode = true;
-                        }
+                        if (!RigidBodyController.Forced_Rigidbody) RigidBodyController.Forced_Rigidbody = true;
+                        if (!RigidBodyController.EditMode) RigidBodyController.EditMode = true;
                         // Let's use smart kinematic (Checks for Colliders present that can block and prevent the fall of the object).
 
                         if (RigidBodyController != null)
                         {
                             var will_it_fall_throught = RigidBodyController.RigidBody_Will_It_fall_throught();
-                            if (!will_it_fall_throught)
-                            {
-                                RigidBodyController.RigidBody_Set_isKinematic(false);
-                            }
-                            else
-                            {
-                                RigidBodyController.RigidBody_Set_isKinematic(true);
-                            }
+                            if (!will_it_fall_throught) RigidBodyController.RigidBody_Set_isKinematic(false);
+                            else RigidBodyController.RigidBody_Set_isKinematic(true);
                         }
                     }
                 }
@@ -1245,10 +946,7 @@
             set
             {
                 _Force_Pickup_Component = value;
-                if (value)
-                {
-                    ForcePickupComponent();
-                }
+                if (value) ForcePickupComponent();
                 Run_OnOnPickupPropertyChanged();
             }
         }
@@ -1386,10 +1084,7 @@
                 if (value)
                 {
                     _ForceComponent = value;
-                    if (!hasRequiredComponentBeenAdded)
-                    {
-                        ForcePickupComponent();
-                    }
+                    if (!hasRequiredComponentBeenAdded) ForcePickupComponent();
                     Run_OnOnPickupPropertyChanged();
                 }
                 else
@@ -1410,10 +1105,7 @@
         {
             get
             {
-                if (_SDKBase_Pickup == null)
-                {
-                    return _SDKBase_Pickup = gameObject.GetComponent<VRC_Pickup>();
-                }
+                if (_SDKBase_Pickup == null) return _SDKBase_Pickup = gameObject.GetComponent<VRC_Pickup>();
                 return _SDKBase_Pickup;
             }
             private set
@@ -1428,10 +1120,7 @@
         {
             get
             {
-                if (_SDK2_Pickup == null)
-                {
-                    return _SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
-                }
+                if (_SDK2_Pickup == null) return _SDK2_Pickup = gameObject.GetComponent<VRCSDK2.VRC_Pickup>();
                 return _SDK2_Pickup;
             }
             private set
@@ -1446,10 +1135,7 @@
         {
             get
             {
-                if (_SDK3_Pickup == null)
-                {
-                    return _SDK3_Pickup = gameObject.GetComponent<VRC.SDK3.Components.VRCPickup>();
-                }
+                if (_SDK3_Pickup == null) return _SDK3_Pickup = gameObject.GetComponent<VRC.SDK3.Components.VRCPickup>();
                 return _SDK3_Pickup;
             }
             private set
@@ -1470,14 +1156,8 @@
             }
             set
             {
-                if (value)
-                {
-                    SyncProperties(false);
-                }
-                else
-                {
-                    RestoreProperties();
-                }
+                if (value) SyncProperties(false);
+                else RestoreProperties();
                 _EditMode = value;
                 Run_OnOnPickupPropertyChanged();
             }

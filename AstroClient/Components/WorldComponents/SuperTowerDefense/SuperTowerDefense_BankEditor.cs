@@ -61,6 +61,6 @@
         private string StartMoney { get; } = "StartMoney";
         private string CurrentMoney { get; } = "Money";
 
-        private static DisassembledUdonBehaviour BankController { get; set; }
+        private static DisassembledUdonBehaviour BankController;
     }
 }

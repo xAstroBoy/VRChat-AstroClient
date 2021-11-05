@@ -12,6 +12,17 @@
     [RegisterComponent]
     public class JarRoleESP : JarControllerEvents
     {
+        //-----------------------------------------------------------
+        //Could separate the murder 4 and among us role esps into 2 seperate classes
+        //-----------------------------------------------------------
+
+
+
+
+
+
+
+
         public JarRoleESP(IntPtr ptr) : base(ptr)
         {
             AntiGarbageCollection.Add(this);
@@ -92,36 +103,24 @@
                             if (action == "SyncAssignB")
                             {
                                 AmongUsCurrentRole = AmongUsRoles.Crewmate;
-                                if (!IsRPCActive)
-                                {
-                                    IsRPCActive = true;
-                                }
+                                if (!IsRPCActive) IsRPCActive = true;
                             }
                             else if (action == "SyncAssignM")
                             {
                                 AmongUsCurrentRole = AmongUsRoles.Impostor;
-                                if (!IsRPCActive)
-                                {
-                                    IsRPCActive = true;
-                                }
+                                if (!IsRPCActive) IsRPCActive = true;
                             }
                             else if (action == "SyncKill")
                             {
                                 AmongUsCurrentRole = AmongUsRoles.None;
                                 AmongUSHasVoted = false;
-                                if (!IsRPCActive)
-                                {
-                                    IsRPCActive = true;
-                                }
+                                if (!IsRPCActive) IsRPCActive = true;
                             }
                             else if (action == "SyncVotedOut")
                             {
                                 AmongUsCurrentRole = AmongUsRoles.None;
                                 AmongUSHasVoted = false;
-                                if (!IsRPCActive)
-                                {
-                                    IsRPCActive = true;
-                                }
+                                if (!IsRPCActive) IsRPCActive = true;
                             }
                             else if (action.Contains("SyncVotedFor"))
                             {
@@ -138,19 +137,13 @@
                                     }
                                 }
                                 AmongUSHasVoted = true;
-                                if (!IsRPCActive)
-                                {
-                                    IsRPCActive = true;
-                                }
+                                if (!IsRPCActive) IsRPCActive = true;
                             }
                             else if (action.Equals("SyncAbstainedVoting"))
                             {
-                                AmongUSHasVoted = true;
                                 _ = SetTag(AmongUSVoteRevealTag, $"Skipped Vote", Color.white, ColorUtils.HexToColor("#1BA039"));
-                                if (!IsRPCActive)
-                                {
-                                    IsRPCActive = true;
-                                }
+                                AmongUSHasVoted = true;
+                                if (!IsRPCActive) IsRPCActive = true;
                             }
                         }
 
@@ -166,10 +159,7 @@
                                 AmongUsCurrentRole = AmongUsRoles.None;
                                 AmongUSHasVoted = false;
                             }
-                            if (!IsRPCActive)
-                            {
-                                IsRPCActive = true;
-                            }
+                            if (!IsRPCActive) IsRPCActive = true;
                         }
                     }
                     else if (IsMurder4World)
@@ -181,44 +171,29 @@
                                 if (action == "SyncAssignB")
                                 {
                                     Murder4CurrentRole = Murder4Roles.Bystander;
-                                    if (!IsRPCActive)
-                                    {
-                                        IsRPCActive = true;
-                                    }
+                                    if (!IsRPCActive) IsRPCActive = true;
                                 }
                                 else if (action == "SyncAssignD")
                                 {
                                     Murder4CurrentRole = Murder4Roles.Detective;
-                                    if (!IsRPCActive)
-                                    {
-                                        IsRPCActive = true;
-                                    }
+                                    if (!IsRPCActive) IsRPCActive = true;
                                 }
                                 else if (action == "SyncAssignM")
                                 {
                                     Murder4CurrentRole = Murder4Roles.Murderer;
-                                    if (!IsRPCActive)
-                                    {
-                                        IsRPCActive = true;
-                                    }
+                                    if (!IsRPCActive) IsRPCActive = true;
                                 }
                                 else if (action == "SyncKill")
                                 {
                                     Murder4CurrentRole = Murder4Roles.None;
-                                    if (!IsRPCActive)
-                                    {
-                                        IsRPCActive = true;
-                                    }
+                                    if (!IsRPCActive) IsRPCActive = true;
                                 }
                             }
 
                             if (action == "SyncVictoryB" || action == "SyncVictoryM" || action == "SyncAbort" || action.Equals("SyncStart"))
                             {
                                 Murder4CurrentRole = Murder4Roles.None;
-                                if (!IsRPCActive)
-                                {
-                                    IsRPCActive = true;
-                                }
+                                if (!IsRPCActive) IsRPCActive = true;
                             }
                         }
                     }
@@ -334,23 +309,14 @@
 
         private void ResetESPColor()
         {
-            if (Player != null)
-            {
-                if (ESP != null)
-                {
-                    ESP.ResetColor();
-                }
-            }
+            if (Player != null && ESP != null) ESP.ResetColor();
         }
 
         private void Update()
         {
             try
             {
-                if (LinkedNode == null)
-                {
-                    LinkedNode = GetEntryWithUser();
-                }
+                if (LinkedNode == null) LinkedNode = GetEntryWithUser();
             }
             catch (Exception e) { ModConsole.DebugError("JarRoleRevealer OnUpdate Exception : " + e); }
         }
@@ -367,14 +333,8 @@
                     {
                         if (ESP != null)
                         {
-                            if (IsAmongUsWorld)
-                            {
-                                UpdateAmongUSRole(AmongUsCurrentRole);
-                            }
-                            else if (IsMurder4World)
-                            {
-                                UpdateMurder4Role(Murder4CurrentRole);
-                            }
+                            if (IsAmongUsWorld) UpdateAmongUSRole(AmongUsCurrentRole);
+                            else if (IsMurder4World) UpdateMurder4Role(Murder4CurrentRole);
                         }
                     }
                 }
@@ -387,10 +347,7 @@
             {
                 if (!IsSelf)
                 {
-                    if (ESP == null)
-                    {
-                        ESP = Player.gameObject.GetComponent<PlayerESP>();
-                    }
+                    ESP ??= Player.gameObject.GetComponent<PlayerESP>();
                 }
             }
         }
@@ -401,10 +358,7 @@
             {
                 if (ESP != null)
                 {
-                    if (ESP.UseCustomColor != ViewRoles)
-                    {
-                        ESP.UseCustomColor = ViewRoles;
-                    }
+                    if (ESP.UseCustomColor != ViewRoles) ESP.UseCustomColor = ViewRoles;
                 }
                 if (ViewRoles)
                 {
@@ -444,26 +398,11 @@
         {
             if (LinkedNode != null)
             {
-                if (AmongUSVoteRevealTag == null)
-                {
-                    AmongUSVoteRevealTag = SingleTagsUtils.AddSingleTag(Player);
-                }
-                if (ESP != null)
-                {
-                    if (ESP.UseCustomColor != ViewRoles)
-                    {
-                        ESP.UseCustomColor = ViewRoles;
-                    }
-                }
+                AmongUSVoteRevealTag ??= SingleTagsUtils.AddSingleTag(Player);
+                if (ESP != null && ESP.UseCustomColor != ViewRoles) ESP.UseCustomColor = ViewRoles;
                 if (ViewRoles)
                 {
-                    if (AmongUSHasVoted)
-                    {
-                        if (!AmongUSVoteRevealTag.ShowTag)
-                        {
-                            AmongUSVoteRevealTag.ShowTag = true;
-                        }
-                    }
+                    if (AmongUSHasVoted && !AmongUSVoteRevealTag.ShowTag) AmongUSVoteRevealTag.ShowTag = true;
 
                     if (role != AmongUsRoles.None && role != AmongUsRoles.Unassigned)
                     {
@@ -489,13 +428,7 @@
                 }
                 else
                 {
-                    if (AmongUSVoteRevealTag != null)
-                    {
-                        if (AmongUSVoteRevealTag.ShowTag)
-                        {
-                            AmongUSVoteRevealTag.ShowTag = false;
-                        }
-                    }
+                    if (AmongUSVoteRevealTag != null && AmongUSVoteRevealTag.ShowTag) AmongUSVoteRevealTag.ShowTag = false;
 
                     if (GetCurrentSingleTagText() != HiddenRole)
                     {
@@ -526,14 +459,12 @@
         }
 
         internal bool _AmongUSHasVoted { get; private set; }
-
         internal bool AmongUSHasVoted
         {
             get
             {
                 return _AmongUSHasVoted;
             }
-
             set
             {
                 if (AmongUSVoteRevealTag != null)
@@ -559,10 +490,7 @@
         {
             get
             {
-                if (AmongUsCurrentRole == AmongUsRoles.Crewmate || AmongUsCurrentRole == AmongUsRoles.Impostor)
-                {
-                    return !AmongUSHasVoted;
-                }
+                if (AmongUsCurrentRole == AmongUsRoles.Crewmate || AmongUsCurrentRole == AmongUsRoles.Impostor) return !AmongUSHasVoted;
                 return false;
             }
         }
@@ -570,7 +498,6 @@
         internal bool IsRPCActive { get; private set; }
 
         private AmongUsRoles _AmongUsCurrentRole = AmongUsRoles.Unassigned;
-
         internal AmongUsRoles AmongUsCurrentRole
         {
             get
@@ -585,7 +512,6 @@
         }
 
         private Murder4Roles _Murder4CurrentRole = Murder4Roles.Unassigned;
-
         internal Murder4Roles Murder4CurrentRole
         {
             get
@@ -602,7 +528,6 @@
         internal Player Player { get; private set; }
 
         private PlayerESP _ESP;
-
         internal PlayerESP ESP
         {
             get

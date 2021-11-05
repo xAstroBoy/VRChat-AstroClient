@@ -24,15 +24,10 @@
         {
             RigidBody = GetComponent<Rigidbody>();
             RigidBodyController = GetComponent<RigidBodyController>();
-            if (RigidBodyController == null)
-            {
-                RigidBodyController = gameObject.AddComponent<RigidBodyController>();
-            }
+            RigidBodyController ??= gameObject.AddComponent<RigidBodyController>();
+
             PickupController = GetComponent<PickupController>();
-            if (PickupController == null)
-            {
-                PickupController = gameObject.AddComponent<PickupController>();
-            }
+            PickupController ??= gameObject.AddComponent<PickupController>();
             VRC_AstroPickup = gameObject.AddComponent<VRC_AstroPickup>();
             if (VRC_AstroPickup != null)
             {
@@ -47,10 +42,7 @@
         {
             if (!IsEnabled || isPaused || isHeld)
             {
-                if (HasRequiredSettings)
-                {
-                    HasRequiredSettings = false;
-                }
+                if (HasRequiredSettings) HasRequiredSettings = false;
                 return;
             }
             if (!CheckisOwner)
@@ -63,17 +55,13 @@
             }
             if (Time.time - SpinnerTimeCheck > SpinnerTimer)
             {
-                if (!HasRequiredSettings)
-                {
-                    HasRequiredSettings = true;
-                }
+                if (!HasRequiredSettings) HasRequiredSettings = true;
                 if (isCurrentOwner)
                 {
                     SpinObject(gameObject, ForceX, 0, 0);
                     SpinObject(gameObject, 0, ForceY, 0);
                     SpinObject(gameObject, 0, 0, ForceZ);
                 }
-
                 SpinnerTimeCheck = Time.time;
             }
         }
@@ -83,14 +71,8 @@
             try
             {
                 RigidBodyController.RestoreOriginalBody();
-                if (gameObject.IsOwner())
-                {
-                    OnlineEditor.RemoveOwnerShip(gameObject);
-                }
-                if (VRC_AstroPickup != null)
-                {
-                    Destroy(VRC_AstroPickup);
-                }
+                if (gameObject.IsOwner()) OnlineEditor.RemoveOwnerShip(gameObject);
+                if (VRC_AstroPickup != null) Destroy(VRC_AstroPickup);
                 PickupController.UseText = OriginalText_Use;
             }
             catch { }
@@ -108,7 +90,6 @@
             OnSpinnerPropertyChanged += action;
         }
 
-
         internal void RemoveActionEvents()
         {
             OnSpinnerPropertyChanged = null;
@@ -120,23 +101,18 @@
         private float _ForceX { get; set; }
         internal float ForceX
         {
-            get
-            {
-                return _ForceX;
-            }
+            get => _ForceX;
             set
             {
                 _ForceX = value;
                 Run_OnOnSpinnerPropertyChanged();
             }
         }
+
         private float _ForceY { get; set; }
         internal float ForceY
         {
-            get
-            {
-                return _ForceY;
-            }
+            get => _ForceY;
             set
             {
                 _ForceY = value;
@@ -144,14 +120,10 @@
             }
         }
 
-
         private float _ForceZ { get; set; }
         internal float ForceZ
         {
-            get
-            {
-                return _ForceZ;
-            }
+            get => _ForceZ;
             set
             {
                 _ForceZ = value;
@@ -159,28 +131,23 @@
             }
         }
 
-
-
         private float _SpinnerTimer { get; set; } = 0.03f;
         internal float SpinnerTimer
         {
-            get
-            {
-                return _SpinnerTimer;
-            }
+            get => _SpinnerTimer;
             set
             {
                 _SpinnerTimer = value;
                 Run_OnOnSpinnerPropertyChanged();
             }
         }
-        private float CheckisOwnerTimeCheck { get; set; } = 0;
+        private float CheckisOwnerTimeCheck = 0;
 
-        private float CheckisOwnerDelay { get; set; } = 16f;
-        private bool CheckisOwner { get; set; } = false;
-        private float SpinnerTimeCheck { get; set; } = 0;
+        private float CheckisOwnerDelay = 16f;
+        private bool CheckisOwner = false;
+        private float SpinnerTimeCheck = 0;
 
-        private bool _ShouldBeAlwaysUp { get; set; } = false;
+        private bool _ShouldBeAlwaysUp = false;
         internal bool ShouldBeAlwaysUp
         {
             get => _ShouldBeAlwaysUp;
@@ -191,7 +158,7 @@
             }
         }
 
-        private bool _UseGravity { get; set; } = false;
+        private bool _UseGravity = false;
         internal bool UseGravity
         {
             get => _UseGravity;
@@ -202,23 +169,12 @@
             }
         }
 
-
         private bool isCurrentOwner
         {
             get
             {
-                if (CheckisOwner)
-                {
-                    if (!gameObject.IsOwner())
-                    {
-                        gameObject.TakeOwnership();
-                    }
-                    return gameObject.IsOwner();
-                }
-                else
-                {
-                    return true;
-                }
+                if (CheckisOwner) return gameObject.TryTakeOwnership();
+                else return true;
             }
         }
         private bool isHeld => PickupController.IsHeld;
@@ -238,10 +194,7 @@
                 {
                     if (RigidBodyController != null)
                     {
-                        if (!RigidBodyController.EditMode)
-                        {
-                            RigidBodyController.EditMode = true;
-                        }
+                        if (!RigidBodyController.EditMode) RigidBodyController.EditMode = true;
                         RigidBodyController.isKinematic = false;
                         RigidBodyController.angularDrag = 0;
                         RigidBodyController.drag = 0;
@@ -255,13 +208,13 @@
             }
         }
 
-        private Rigidbody RigidBody { get; set; } = null;
-        private RigidBodyController RigidBodyController { get; set; }
-        private PickupController PickupController { get; set; }
-        private VRC_AstroPickup VRC_AstroPickup { get; set; }
-        private string OriginalText_Use { get; set; }
+        private Rigidbody RigidBody = null;
+        private RigidBodyController RigidBodyController;
+        private PickupController PickupController;
+        private VRC_AstroPickup VRC_AstroPickup;
+        private string OriginalText_Use;
 
-        private bool isPaused { get; set; }
+        private bool isPaused;
 
         private bool _IsEnabled;
         internal bool IsEnabled
@@ -272,18 +225,9 @@
                 _IsEnabled = value;
                 if (VRC_AstroPickup != null)
                 {
-                    if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace())
-                    {
-                        OriginalText_Use = PickupController.UseText;
-                    }
-                    if (value)
-                    {
-                        VRC_AstroPickup.UseText = "Toggle Off Spinner";
-                    }
-                    else
-                    {
-                        VRC_AstroPickup.UseText = "Toggle On Spinner";
-                    }
+                    if (!OriginalText_Use.IsNotNullOrEmptyOrWhiteSpace()) OriginalText_Use = PickupController.UseText;
+                    if (value) VRC_AstroPickup.UseText = "Toggle Off Spinner";
+                    else VRC_AstroPickup.UseText = "Toggle On Spinner";
                 }
             }
 

@@ -27,10 +27,7 @@ namespace AstroClient
                 collider.size = new Vector3(1f, 1f, 1f);
                 collider.isTrigger = true;
             }
-            if (renderer != null)
-            {
-                renderer.material.color = Ender;
-            }
+            if (renderer != null) renderer.material.color = Ender;
             if (body != null)
             {
                 body.EditMode = true;
@@ -83,10 +80,7 @@ namespace AstroClient
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.transform.name.Contains("VRCPlayer"))
-            {
-                return;
-            }
+            if (collision.transform.name.Contains("VRCPlayer")) return;
             foreach (ContactPoint contact in collision.contacts)
             {
                 if (Held)

@@ -46,35 +46,16 @@
         {
             if (IsEnabled)
             {
-                if (Target == null)
-                {
-                    Target = BonesUtils.Get_Player_Bone_Transform(TargetPlayer, TargetBone).gameObject;
-                }
+                Target ??= BonesUtils.Get_Player_Bone_Transform(TargetPlayer, TargetBone).gameObject;
 
-                if (TargetPlayer == null)
-                {
-                    Detach();
-                }
+                if (TargetPlayer == null) Detach();
 
-                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
-                {
-                    Detach();
-                }
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D)) Detach();
 
-                if (Input.GetKey(KeyCode.Q))
-                {
-                    Height -= 0.02f;
-                }
+                if (Input.GetKey(KeyCode.Q)) Height -= 0.02f;
+                if (Input.GetKey(KeyCode.E)) Height += 0.02f;
 
-                if (Input.GetKey(KeyCode.E))
-                {
-                    Height += 0.02f;
-                }
-
-                if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.E))
-                {
-                    Height = 0f;
-                }
+                if (Input.GetKey(KeyCode.Q) && Input.GetKey(KeyCode.E)) Height = 0f;
 
                 Self.transform.position = Target.transform.position + new Vector3(0, Height, 0);
             }

@@ -26,15 +26,11 @@
         {
             MelonCoroutines.Start(InitListenerForQM());
             MelonCoroutines.Start(InitListenerForBigMenu());
-
         }
-
-
 
         internal IEnumerator InitListenerForBigMenu()
         {
-            while (BigMenuElements == null)
-                yield return null;
+            while (BigMenuElements == null) yield return null;
             if (BigMenuElements != null)
             {
                 var listener = BigMenuElements.AddComponent<UiListener>();
@@ -52,8 +48,7 @@
 
         internal IEnumerator InitListenerForQM()
         {
-            while (QuickMenuElements == null)
-                yield return null;
+            while (QuickMenuElements == null) yield return null;
             if(QuickMenuElements != null)
             {
                 var listener = QuickMenuElements.AddComponent<UiListener>();
@@ -69,32 +64,16 @@
 
 
         // Mostly background UIs paths .
-
         private static GameObject _QuickMenuElements;
         internal static GameObject QuickMenuElements
         {
-            get
-            {
-                if(_QuickMenuElements == null)
-                {
-                    return _QuickMenuElements = GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements");
-                }
-                return _QuickMenuElements;
-            }
+            get => _QuickMenuElements ??= GameObjectFinder.Find("UserInterface/QuickMenu/QuickMenu_NewElements");
         }
 
         private static GameObject _BigMenuElements;
         internal static GameObject BigMenuElements 
         {
-            get
-            {
-                if (_BigMenuElements == null)
-                {
-                    return _BigMenuElements = GameObjectFinder.Find("UserInterface/MenuContent/Backdrop/Backdrop");
-                }
-                return _BigMenuElements;
-            }
+            get => _BigMenuElements ??= GameObjectFinder.Find("UserInterface/MenuContent/Backdrop/Backdrop");
         }
-
     }
 }

@@ -18,10 +18,7 @@
         internal void Start()
         {
             Node = this.gameObject.GetComponent<UdonBehaviour>();
-            if (Node != null)
-            {
-                DisassembledNode = Node.DisassembleUdonBehaviour();
-            }
+            if (Node != null) DisassembledNode = Node.DisassembleUdonBehaviour();
         }
 
         internal VRC.SDKBase.VRCPlayerApi VRCPlayerAPI
@@ -31,17 +28,13 @@
                 if (DisassembledNode != null)
                 {
                     var player = UdonHeapParser.Udon_Parse_VRCPlayerApi(DisassembledNode, "playerApi");
-                    if (player != null)
-                    {
-                        return player;
-                    }
+                    if (player != null) return player;
                 }
                 return null;
             }
         }
 
         internal UdonBehaviour Node { get; private set; }
-
         internal DisassembledUdonBehaviour DisassembledNode { get; private set; }
     }
 }

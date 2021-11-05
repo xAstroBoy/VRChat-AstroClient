@@ -1,10 +1,7 @@
 ﻿namespace AstroClient.Components
 {
-    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using System;
-    using System.Runtime.InteropServices;
-    using UnhollowerRuntimeLib;
     using UnityEngine;
     using static AstroClient.Forces;
 
@@ -89,22 +86,17 @@
                     }
                     if (Time.time - CrazyTimeCheck > CrazyTimer)
                     {
-                        if (!PickupController.IsHeld && !gameObject.IsOwner())
+                        if (!PickupController.IsHeld)
                         {
-                            gameObject.TakeOwnership();
+                            gameObject.TryTakeOwnership();
                         }
                         if (!IsDoingImpulseMode)
                         {
                             ApplyRelativeForce(gameObject, UnityEngine.Random.Range(1f, 8f), 0, 0);
-
                             SpinObject(gameObject, UnityEngine.Random.Range(0f, 2f), 0, 0);
-
                             ApplyRelativeForce(gameObject, 0, UnityEngine.Random.Range(1f, 8f), 0);
-
                             SpinObject(gameObject, 0, UnityEngine.Random.Range(0f, 2f), 0);
-
                             ApplyRelativeForce(gameObject, 0, 0, UnityEngine.Random.Range(1f, 8f));
-
                             SpinObject(gameObject, 0, 0, UnityEngine.Random.Range(0f, 2f));
                         }
                         CrazyTimeCheck = Time.time;
@@ -153,10 +145,10 @@
         private event Action? OnCrazyPropertyChanged;
 
         #endregion actions
-        private float CrazyTimeCheck { get; set; } = 0;
-        private float InpulseTimeCheck { get; set; } = 0;
+        private float CrazyTimeCheck = 0;
+        private float InpulseTimeCheck = 0;
 
-        private float _CrazyTimer { get; set; } = 0.04f;
+        private float _CrazyTimer = 0.04f;
         internal float CrazyTimer
         {
             get => _CrazyTimer;
@@ -167,7 +159,7 @@
             }
         }
 
-        private float _ImpulseTimer { get; set; } = 5f;
+        private float _ImpulseTimer = 5f;
         internal float ImpulseTimer
         {
             get => _ImpulseTimer;
@@ -178,7 +170,7 @@
             }
         }
 
-        private float _ImpulseForce { get; set; } = 1.5f;
+        private float _ImpulseForce = 1.5f;
         internal float ImpulseForce
         {
             get => _ImpulseForce;
@@ -189,7 +181,7 @@
             }
         }
 
-        private bool _ShouldDoImpulseMode { get; set; } = true;
+        private bool _ShouldDoImpulseMode = true;
         internal bool ShouldDoImpulseMode
         {
             get => _ShouldDoImpulseMode;
@@ -200,7 +192,7 @@
             }
         }
 
-        private bool _IsDoingImpulseMode { get; set; } = false;
+        private bool _IsDoingImpulseMode = false;
         internal bool IsDoingImpulseMode
         {
             get => _IsDoingImpulseMode;
@@ -211,7 +203,7 @@
             }
         }
 
-        private bool _IsImpulseModeActive { get; set; } = false;
+        private bool _IsImpulseModeActive = false;
         internal bool IsImpulseModeActive
         {
             get => _IsImpulseModeActive;
@@ -223,7 +215,7 @@
         }
 
 
-        private bool _UseGravity { get; set; }
+        private bool _UseGravity;
         internal bool UseGravity
         {
             get => _UseGravity;
@@ -234,12 +226,12 @@
             }
         }
 
-        private Rigidbody Rigidbody { get; set; }
-        private RigidBodyController RigidBodyController { get; set; }
-        private PickupController PickupController { get; set; }
+        private Rigidbody Rigidbody;
+        private RigidBodyController RigidBodyController;
+        private PickupController PickupController;
         private bool isHeld => PickupController.IsHeld;
 
-        private VRC_AstroPickup VRC_AstroPickup { get; set; }
+        private VRC_AstroPickup VRC_AstroPickup;
 
         private bool isPaused;
         private bool _IsEnabled = true;
@@ -268,21 +260,17 @@
             }
 
         }
-        private float CheckisOwnerTimeCheck { get; set; } = 0;
+        private float CheckisOwnerTimeCheck = 0;
 
-        private float CheckisOwnerDelay { get; set; } = 16f;
-        private bool CheckisOwner { get; set; } = false;
+        private float CheckisOwnerDelay = 16f;
+        private bool CheckisOwner = false;
         private bool isCurrentOwner
         {
             get
             {
                 if (CheckisOwner)
                 {
-                    if (!gameObject.IsOwner())
-                    {
-                        gameObject.TakeOwnership();
-                    }
-                    return gameObject.IsOwner();
+                    return gameObject.TryTakeOwnership();
                 }
                 else
                 {
@@ -297,10 +285,9 @@
             get => _HasRequiredSettings;
             set
             {
-                if(value.Equals(_HasRequiredSettings))
-                {
-                    return; // Do Nothing.
-                }
+                // Do nothing if required settings are met
+                if (value == _HasRequiredSettings) { return; }
+
                 _HasRequiredSettings = value;
                 if (value)
                 {

@@ -1,16 +1,14 @@
 namespace AstroClient.Components
 {
-    using AstroLibrary.Extensions;
     using AstroButtonAPI;
+    using AstroLibrary.Extensions;
     using System;
 
     [RegisterComponent]
     public class ScrollMenuListener_AudioSource : GameEventsBehaviour
     {
         internal QMSingleButton Assignedbtn { get; set; }
-
         internal UnityEngine.AudioSource source;
-
         internal bool Lock = true;
 
         public ScrollMenuListener_AudioSource(IntPtr obj0) : base(obj0)
@@ -23,24 +21,15 @@ namespace AstroClient.Components
             {
                 if (source != null)
                 {
-                    if (Assignedbtn != null)
-                    {
-                        Assignedbtn.SetTextColor(source.Get_AudioSource_Active_ToColor());
-                    }
-                    else
-                    {
-                        Destroy(this);
-                    }
+                    if (Assignedbtn != null) Assignedbtn.SetTextColor(source.Get_AudioSource_Active_ToColor());
+                    else Destroy(this);
                 }
             }
         }
 
         private void OnDestroy()
         {
-            if (Assignedbtn != null)
-            {
-                Assignedbtn.DestroyMe();
-            }
+            if (Assignedbtn != null) Assignedbtn.DestroyMe();
         }
     }
 }
