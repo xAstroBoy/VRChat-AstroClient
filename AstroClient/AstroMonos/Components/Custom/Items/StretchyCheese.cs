@@ -4,16 +4,20 @@
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroUdons;
+    using CustomMono;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using static Variables.CustomLists;
 
     [RegisterComponent]
-    public class StretchyCheeseBehaviour : MonoBehaviour
+    public class StretchyCheeseBehaviour : GameEventsBehaviour
     {
-        public StretchyCheeseBehaviour(IntPtr ptr)
-            : base(ptr)
+        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+
+        public StretchyCheeseBehaviour(IntPtr obj0) : base(obj0)
         {
+            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList.Add(this);
         }
 
         private void Start()
