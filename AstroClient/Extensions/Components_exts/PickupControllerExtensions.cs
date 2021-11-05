@@ -1,8 +1,8 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroClient.Components;
     using AstroLibrary.Utility;
     using System.Collections.Generic;
+    using AstroClient.AstroMonos.Components.Tools;
     using UnityEngine;
     using VRC.SDKBase;
 

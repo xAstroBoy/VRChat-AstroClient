@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-    using AstroClient.Components;
     using AstroClient.ItemTweakerV2.Selector;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using AstroButtonAPI;
     using System;
+    using AstroMonos.Components.Tools;
     using UnityEngine;
     using VRC.SDKBase;
     using Color = UnityEngine.Color;

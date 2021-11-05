@@ -1,12 +1,12 @@
-﻿namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.ESP.Player
 {
-    using AstroClient.Moderation;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using Moderation;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;

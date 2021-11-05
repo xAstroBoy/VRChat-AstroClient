@@ -1,9 +1,12 @@
-﻿namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.Custom.Random
 {
+    using System;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System;
+    using AstroUdons;
+    using CustomMono;
+    using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 

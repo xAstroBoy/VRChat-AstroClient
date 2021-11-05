@@ -1,15 +1,15 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.Spoofer
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using MelonLoader;
-    using Photon.Realtime;
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using CustomMono;
+    using MelonLoader;
+    using Photon.Realtime;
+    using UnhollowerBaseLib.Attributes;
     using VRC.Core;
 
     [RegisterComponent]

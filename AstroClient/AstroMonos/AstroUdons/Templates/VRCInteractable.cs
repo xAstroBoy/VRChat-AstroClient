@@ -1,15 +1,9 @@
-using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+namespace AstroClient.AstroMonos.AstroUdons.Templates
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
     using System;
-    using UnityEngine;
+    using CustomMono;
+    using UnhollowerBaseLib.Attributes;
     using VRC.SDK3.Components;
-    using VRC.Udon;
-    using VRC.Udon.Common.Interfaces;
-    using VRC.Udon.ProgramSources;
 
     [RegisterComponent]
     public class AstroInteractable : GameEventsBehaviour

@@ -1,15 +1,16 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
+    using System;
+    using System.Linq;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System;
-    using System.Linq;
+    using ESP.Player;
+    using UI.SingleTag;
+    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
-    using static AstroClient.JarRoleController;
+    using static JarRoleController;
 
     [RegisterComponent]
     public class JarRoleESP : JarControllerEvents

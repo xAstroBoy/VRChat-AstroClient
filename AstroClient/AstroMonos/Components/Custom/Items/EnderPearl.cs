@@ -1,13 +1,11 @@
-using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient
+namespace AstroClient.AstroMonos.Components.Custom.Items
 {
-    using AstroClient.Components;
+    using System;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using MelonLoader;
-    using System;
+    using AstroUdons.Templates;
+    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
     [RegisterComponent]

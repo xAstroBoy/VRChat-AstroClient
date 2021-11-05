@@ -1,18 +1,18 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.Malicious.Orbit
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Runtime.InteropServices;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using CustomMono;
+    using UnhollowerBaseLib.Attributes;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using VRC;
     using VRC.Core;
-    using static AstroClient.Variables.InstanceBuilder;
+    using static Variables.InstanceBuilder;
     using Color = System.Drawing.Color;
 
     public class OrbitManager_Old : GameEventsBehaviour

@@ -1,20 +1,18 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient
+﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using AstroButtonAPI;
-    using AstroClient.Components;
-    using AstroClient.Variables;
     using AstroClientCore.Events;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using UnhollowerBaseLib;
+    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
+    using Variables;
     using VRC;
 
     internal class JarRoleController : GameEvents

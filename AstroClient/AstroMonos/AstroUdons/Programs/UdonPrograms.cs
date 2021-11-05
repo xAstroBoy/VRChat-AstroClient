@@ -1,7 +1,6 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.AstroUdons.Programs
 {
+    using UnhollowerBaseLib.Attributes;
     using VRC.Udon.ProgramSources;
 
     internal class UdonPrograms

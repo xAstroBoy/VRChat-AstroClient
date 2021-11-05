@@ -1,10 +1,10 @@
-using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+namespace AstroClient.AstroMonos.AstroUdons
 {
+    using System;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
-    using System;
+    using Programs;
+    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC.SDK3.Components;
     using VRC.Udon;

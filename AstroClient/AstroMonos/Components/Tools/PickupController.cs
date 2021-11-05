@@ -1,10 +1,11 @@
-﻿namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.Tools
 {
+    using System;
+    using System.Linq;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System;
-    using System.Linq;
+    using CustomMono;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC.SDKBase;

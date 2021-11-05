@@ -1,14 +1,11 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using MelonLoader;
     using System;
     using System.Collections;
-    using UnityEngine;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using Components.Tools.Listeners;
+    using MelonLoader;
 
     internal class VRChatUIEvents : GameEvents
     {

@@ -1,9 +1,9 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.Player
 {
-    using AstroLibrary.Utility;
     using System;
+    using AstroLibrary.Utility;
+    using CustomMono;
+    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
 

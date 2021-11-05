@@ -1,12 +1,12 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.SuperTowerDefense
 {
-    using AstroClient.Udon;
+    using System;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System;
+    using CustomMono;
+    using Udon;
+    using UnhollowerBaseLib.Attributes;
     using Variables;
 
     [RegisterComponent]

@@ -1,8 +1,7 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.ESP
 {
     using System.Collections.Generic;
+    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
     internal class EspHelper : GameEvents

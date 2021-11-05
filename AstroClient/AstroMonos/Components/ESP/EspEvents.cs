@@ -1,7 +1,8 @@
-﻿namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.ESP
 {
-    using AstroClientCore.Events;
     using System;
+    using AstroClientCore.Events;
+    using CustomMono;
 
     [RegisterComponent]
     public class EspEvents : GameEventsBehaviour

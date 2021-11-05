@@ -1,9 +1,8 @@
-using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient
+namespace AstroClient.AstroMonos.Components.Custom.Items
 {
-    using AstroClient.Components;
     using System;
+    using AstroUdons.Templates;
+    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
     [RegisterComponent]

@@ -1,9 +1,10 @@
-﻿namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.ESP.Trigger
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
     using System;
     using System.Linq;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using CustomMono;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 

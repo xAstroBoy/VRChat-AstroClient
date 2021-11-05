@@ -1,10 +1,13 @@
-﻿namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.Cheats.PatronUnlocker
 {
+    using System;
+    using System.Collections.Generic;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System;
-    using System.Collections.Generic;
+    using AstroUdons;
+    using CustomMono;
+    using Tools;
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;

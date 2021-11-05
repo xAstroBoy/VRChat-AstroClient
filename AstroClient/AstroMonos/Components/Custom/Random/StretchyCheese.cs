@@ -1,13 +1,12 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient
+﻿namespace AstroClient.AstroMonos.Components.Custom.Random
 {
-    using AstroClient.Components;
+    using System;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using System;
+    using AstroUdons;
+    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
-    using static AstroClient.Variables.CustomLists;
+    using static Variables.CustomLists;
 
     [RegisterComponent]
     public class StretchyCheeseBehaviour : MonoBehaviour

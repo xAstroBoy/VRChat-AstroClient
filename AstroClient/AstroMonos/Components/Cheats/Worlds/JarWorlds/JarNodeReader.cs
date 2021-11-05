@@ -1,9 +1,9 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.Cheats.Worlds.JarWorlds
 {
-    using AstroClient.Udon;
     using System;
+    using CustomMono;
+    using Udon;
+    using UnhollowerBaseLib.Attributes;
     using VRC.Udon;
 
     [RegisterComponent]

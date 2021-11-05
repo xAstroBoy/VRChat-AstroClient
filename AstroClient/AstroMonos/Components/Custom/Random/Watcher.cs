@@ -1,11 +1,13 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.Custom.Random
 {
-    using AstroClient.GameObjectDebug;
+    using System;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System;
+    using AstroUdons;
+    using CustomMono;
+    using GameObjectDebug;
+    using Tools;
+    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
     using Time = UnityEngine.Time;

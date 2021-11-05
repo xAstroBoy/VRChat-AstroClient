@@ -1,10 +1,9 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient
+﻿namespace AstroClient.AstroMonos
 {
+    using System.Collections.Generic;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
-    using System.Collections.Generic;
+    using UnhollowerBaseLib.Attributes;
     using VRC;
 
     internal class PickupBlocker : GameEvents

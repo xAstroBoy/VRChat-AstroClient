@@ -1,8 +1,8 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.Custom.Random
 {
     using System;
+    using CustomMono;
+    using UnhollowerBaseLib.Attributes;
     using UnityEngine;
 
     [RegisterComponent]

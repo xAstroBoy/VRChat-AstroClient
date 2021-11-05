@@ -1,11 +1,13 @@
-﻿namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.Malicious.Orbit
 {
-    using AstroClient.GameObjectDebug;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
     using System;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using CustomMono;
+    using GameObjectDebug;
+    using Tools;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using VRC;

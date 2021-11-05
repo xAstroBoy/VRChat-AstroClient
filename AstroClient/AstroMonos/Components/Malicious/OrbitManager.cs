@@ -1,20 +1,21 @@
-﻿using UnhollowerBaseLib.Attributes;
-
-namespace AstroClient.Components
+﻿namespace AstroClient.AstroMonos.Components.Malicious
 {
-    using AstroClient.GameObjectDebug;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using MelonLoader;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Runtime.InteropServices;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using CustomMono;
+    using GameObjectDebug;
+    using MelonLoader;
+    using Tools;
+    using UnhollowerBaseLib.Attributes;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using VRC;
-    using static AstroClient.Variables.InstanceBuilder;
+    using static Variables.InstanceBuilder;
 
     public class OrbitManager : GameEventsBehaviour
     {
