@@ -1,6 +1,8 @@
 ﻿namespace AstroClient
 {
     using AstroClient.Streamer;
+    using ClientUI.QuickMenuButtons;
+
     #region Imports
 
     using AstroLibrary.Utility;

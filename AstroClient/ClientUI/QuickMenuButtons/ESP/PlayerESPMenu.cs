@@ -1,11 +1,11 @@
-﻿namespace AstroClient.Startup.Buttons
+﻿namespace AstroClient.ClientUI.QuickMenuButtons.ESP
 {
-    using AstroClient.Components;
+    using System;
+    using AstroButtonAPI;
     using AstroClientCore.Events;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using AstroButtonAPI;
-    using System;
+    using Components;
     using UnityEngine;
     using VRC;
 

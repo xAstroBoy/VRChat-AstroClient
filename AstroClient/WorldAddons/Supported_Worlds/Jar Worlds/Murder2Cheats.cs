@@ -2,7 +2,6 @@
 {
     #region Imports
 
-    using AstroClient.Startup.Buttons;
     using AstroClient.Variables;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
@@ -12,6 +11,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using ClientUI.QuickMenuButtons.ESP;
     using UnityEngine;
 
     #endregion Imports

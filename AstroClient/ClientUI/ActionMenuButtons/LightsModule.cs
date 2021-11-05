@@ -1,11 +1,10 @@
-using UnityEngine;
-
-namespace AstroClient.AvatarParametersEditor
+namespace AstroClient.ClientUI.ActionMenuButtons
 {
     using AstroActionMenu.Api;
     using AstroLibrary.Console;
-    using System.Drawing;
+    using UnityEngine;
     using WorldLights;
+    using Color = System.Drawing.Color;
 
     internal class ActionLightsMenu : GameEvents
     {

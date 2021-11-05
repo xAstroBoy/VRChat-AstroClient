@@ -1,13 +1,12 @@
-using AstroLibrary.Console;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using UnityEngine;
-using VRC.Playables;
-
-namespace AstroClient.AvatarParametersEditor
+namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using AstroLibrary.Console;
+    using UnityEngine;
+    using VRC.Playables;
+
     internal static class Parameters
     {
         internal static readonly string[] DefaultParameterNames = new string[]

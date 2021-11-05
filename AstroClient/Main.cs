@@ -10,7 +10,6 @@
     using AstroClient.ItemTweakerV2;
     using AstroClient.ItemTweakerV2.Selector;
     using AstroClient.Skyboxes;
-    using AstroClient.Startup.Buttons;
     using AstroClient.Variables;
     using AstroClient.WorldLights;
     using AstroClient.Worlds;
@@ -27,6 +26,7 @@
     using System.IO;
     using System.Reflection;
     using System.Windows.Forms;
+    using ClientUI.QuickMenuButtons;
     using UnhollowerBaseLib;
     using UnityEngine;
     using VRC;

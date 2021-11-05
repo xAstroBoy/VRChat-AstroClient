@@ -2,7 +2,7 @@
 /* Note: While loading a 400KiB string isn't really a    */
 /*       problem, trying to render that to a texture is. */
 
-namespace AstroClient.AvatarParametersEditor {
+namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu {
     using AstroLibrary.Console;
     using Mono.WebBrowser;
     using UnityEngine;

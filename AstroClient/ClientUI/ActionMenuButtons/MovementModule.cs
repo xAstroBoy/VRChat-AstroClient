@@ -1,9 +1,9 @@
-namespace AstroClient.AvatarParametersEditor
+namespace AstroClient.ClientUI.ActionMenuButtons
 {
+    using System.Drawing;
     using AstroActionMenu.Api;
     using AstroLibrary.Console;
     using Features.Player.Movement.Exploit;
-    using System.Drawing;
 
     internal class MovementModule : GameEvents
     {

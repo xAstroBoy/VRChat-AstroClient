@@ -20,11 +20,8 @@
                 var vrcplayer = player.GetVRCPlayer();
                 if (vrcplayer != null)
                 {
-                    if (vrcplayer.Get_Emoji_Cooldown() != 0)
-                    {
                         vrcplayer.Set_Emoji_Cooldown(0);
                         ModConsole.DebugLog($"[EmojiBypasser] : Removed Player {player.DisplayName()} 's Emoji Cooldown.");
-                    }
                 }
             }
         }

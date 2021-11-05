@@ -1,12 +1,11 @@
-﻿namespace AstroClient.Startup.Buttons
+﻿namespace AstroClient.ClientUI.QuickMenuButtons
 {
     #region Imports
 
-    using AstroClient.Variables;
-    using AstroLibrary;
-    using AstroButtonAPI;
     using System.Reflection;
+    using AstroButtonAPI;
     using CheetoLibrary;
+    using Variables;
 
     #endregion Imports
 

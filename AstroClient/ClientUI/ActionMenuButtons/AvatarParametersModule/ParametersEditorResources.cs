@@ -1,17 +1,8 @@
-﻿namespace AstroClient.ActionMenu
+﻿namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule
 {
-    using AstroActionMenu.Api;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
-    using AstroLibrary;
-    using AstroLibrary.Extensions;
     using UnityEngine;
     using UnityEngine.Experimental.Rendering;
     using UnityEngine.Rendering;
-    using AstroLibrary.Console;
 
     internal static class ParametersEditorResources
     {

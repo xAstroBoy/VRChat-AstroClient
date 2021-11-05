@@ -1,8 +1,8 @@
 
-using UnityEngine;
-
-namespace AstroClient.AvatarParametersEditor
+namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
 {
+    using UnityEngine;
+
     internal class RefCountedObject<T> where T : Object
     {
         private int m_Count;

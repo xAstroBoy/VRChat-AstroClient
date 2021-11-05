@@ -1,12 +1,12 @@
-﻿namespace AstroClient.Startup.Buttons
+﻿namespace AstroClient.ClientUI.QuickMenuButtons
 {
     #region Imports
 
-    using AstroClient.Features.Player.Clones;
-    using AstroClient.Features.Player.Movement;
-    using AstroClient.Features.Player.Movement.QuickMenu_QMFreeze;
-    using AstroButtonAPI;
     using System;
+    using AstroButtonAPI;
+    using Features.Player.Clones;
+    using Features.Player.Movement;
+    using Features.Player.Movement.QuickMenu_QMFreeze;
     using UnityEngine;
 
     #endregion Imports

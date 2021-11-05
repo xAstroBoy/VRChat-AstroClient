@@ -1,9 +1,9 @@
-namespace AstroClient.AvatarParametersEditor
+namespace AstroClient.ClientUI.ActionMenuButtons
 {
+    using System.Drawing;
     using AstroActionMenu.Api;
     using AstroLibrary.Console;
-    using Startup.Buttons;
-    using System.Drawing;
+    using QuickMenuButtons.ESP;
 
     internal class ESPModule : GameEvents
     {

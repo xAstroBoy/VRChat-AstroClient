@@ -1,10 +1,10 @@
-﻿namespace AstroClient.Startup.Buttons
+﻿namespace AstroClient.ClientUI.QuickMenuButtons.ESP
 {
-    using AstroClient.Components;
+    using System;
+    using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using AstroButtonAPI;
-    using System;
+    using Components;
     using UnityEngine;
 
     internal class VRChat_Map_ESP_Menu : GameEvents

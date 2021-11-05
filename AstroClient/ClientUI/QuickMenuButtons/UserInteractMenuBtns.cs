@@ -1,15 +1,13 @@
-﻿namespace AstroClient.Startup.Buttons
+﻿namespace AstroClient.ClientUI.QuickMenuButtons
 {
-    using AstroClient.AvatarMods;
-    using AstroClient.Cheetos;
-    using AstroClient.Components;
-    using AstroClient.Variables;
-    using AstroLibrary.Utility;
-    using AstroButtonAPI;
     using System;
+    using AstroButtonAPI;
+    using AstroLibrary.Utility;
+    using Cheetos;
+    using Components;
     using UnityEngine;
+    using Variables;
     using Finder = AstroLibrary.Finder;
-    using AstroLibrary.Extensions;
 
     internal class UserInteractMenuBtns : GameEvents
     {

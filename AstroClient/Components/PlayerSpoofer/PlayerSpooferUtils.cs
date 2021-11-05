@@ -6,6 +6,7 @@ namespace AstroClient.Components
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
     using System.Drawing;
+    using ClientUI.QuickMenuButtons;
 
     internal class PlayerSpooferUtils : GameEvents
     {

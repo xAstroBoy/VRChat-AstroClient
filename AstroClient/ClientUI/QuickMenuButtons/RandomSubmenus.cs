@@ -1,9 +1,9 @@
-﻿namespace AstroClient
+﻿namespace AstroClient.ClientUI.QuickMenuButtons
 {
-    using AstroClient.Components;
+    using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using AstroButtonAPI;
+    using Components;
 
     internal class RandomSubmenus
     {

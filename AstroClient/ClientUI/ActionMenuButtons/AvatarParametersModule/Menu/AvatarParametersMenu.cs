@@ -1,29 +1,21 @@
-using MelonLoader;
-using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
-using UnityEngine.SceneManagement;
-using System;
-using System.Reflection;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Collections;
-using System.Collections.Generic;
-using VRC.Playables;
-using VRC.SDKBase;
-using VRC;
-using VRC.SDK3.Avatars.ScriptableObjects;
-
-namespace AstroClient.AvatarParametersEditor
+namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu
 {
-    using System.Drawing;
-    using ActionMenu;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using AstroActionMenu.Api;
-    using AstroLibrary;
     using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
     using CheetoLibrary;
     using Components;
-    using UnityEngine.Playables;
+    using MelonLoader;
+    using UnityEngine;
+    using VRC;
+    using VRC.Playables;
+    using VRC.SDK3.Avatars.ScriptableObjects;
+    using VRC.SDKBase;
+    using Color = System.Drawing.Color;
 
     internal class AvatarParametersEditorMod : GameEvents
     {

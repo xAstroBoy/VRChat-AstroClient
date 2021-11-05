@@ -1,13 +1,13 @@
-﻿namespace AstroClient.Startup.Buttons
+﻿namespace AstroClient.ClientUI.QuickMenuButtons
 {
     using System.Collections.Generic;
-    using AstroClient.Cheetos;
-    using AstroLibrary;
+    using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
-    using AstroButtonAPI;
-    using UnityEngine;
     using CheetoLibrary;
+    using Cheetos;
+    using ESP;
+    using UnityEngine;
 
     internal class SettingsMenuBtn : GameEvents
     {

@@ -60,6 +60,7 @@
             }
         }
 
+
         internal override void OnPlayerLeft(Player player)
         {
             if (player != null)

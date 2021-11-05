@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.Components
 {
-    using AstroClient.Startup.Buttons;
     using AstroClientCore.Events;
     using System;
+    using ClientUI.QuickMenuButtons.ESP;
 
     public class JarControllerEvents : GameEventsBehaviour
     {

@@ -2,7 +2,7 @@
 /* Note: While loading a 400KiB string isn't really a    */
 /*       problem, trying to render that to a texture is. */
 
-namespace AstroClient.AvatarParametersEditor {
+namespace AstroClient.ClientUI.ActionMenuButtons.AvatarParametersModule.Menu {
     internal static class ZipBombExtend {
         internal static string Truncate(this string value, int max_length) {
             if (!string.IsNullOrEmpty(value) && value.Length > max_length)

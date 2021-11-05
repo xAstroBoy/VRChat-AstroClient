@@ -102,37 +102,37 @@
     <Compile Include="..\astronetworkinglibrary\serializable\TagData.cs">
       <Link>Networking\Serializable\TagData.cs</Link>
     </Compile>
-    <Compile Include="ActionMenu\Modules\ESPModule.cs" />
-    <Compile Include="ActionMenu\Modules\MovementModule.cs" />
-    <Compile Include="ActionMenu\Modules\AvatarParametersModule\Menu\Avatar.cs" />
-    <Compile Include="ActionMenu\Modules\AvatarParametersModule\Menu\AvatarParametersMenu.cs" />
-    <Compile Include="ActionMenu\Modules\AvatarParametersModule\Menu\CameraUtils.cs" />
-    <Compile Include="ActionMenu\Modules\AvatarParametersModule\Menu\RefCountedObject.cs" />
-    <Compile Include="ActionMenu\Modules\AvatarParametersModule\Menu\Sigh.cs" />
-    <Compile Include="ActionMenu\Modules\AvatarParametersModule\ParametersEditorResources.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Api\ActionMenuPage.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Api\AMUtils.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Api\CustomSubMenu.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Api\VRCActionMenuPage.cs" />
-    <Compile Include="ActionMenu\MenuAPI\AstroActionMenuPatches.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Helpers\Constants.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Helpers\ExtensionMethods.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Helpers\Utilities.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Managers\FourAxisPuppetManager.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Managers\ModsFolderManager.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Managers\RadialPuppetManager.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Managers\ResourcesManager.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Pedals\PedalButton.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Pedals\PedalFourAxis.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Pedals\PedalRadial.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Pedals\PedalStruct.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Pedals\PedalSubMenu.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Pedals\PedalToggle.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Types\ActionMenuHand.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Types\ActionMenuPageType.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Types\Insertion.cs" />
-    <Compile Include="ActionMenu\MenuAPI\Types\PedalType.cs" />
-    <Compile Include="ActionMenu\Modules\LightsModule.cs" />
+    <Compile Include="ClientUI\ActionMenuButtons\ESPModule.cs" />
+    <Compile Include="ClientUI\ActionMenuButtons\MovementModule.cs" />
+    <Compile Include="ClientUI\ActionMenuButtons\AvatarParametersModule\Menu\Avatar.cs" />
+    <Compile Include="ClientUI\ActionMenuButtons\AvatarParametersModule\Menu\AvatarParametersMenu.cs" />
+    <Compile Include="ClientUI\ActionMenuButtons\AvatarParametersModule\Menu\CameraUtils.cs" />
+    <Compile Include="ClientUI\ActionMenuButtons\AvatarParametersModule\Menu\RefCountedObject.cs" />
+    <Compile Include="ClientUI\ActionMenuButtons\AvatarParametersModule\Menu\Sigh.cs" />
+    <Compile Include="ClientUI\ActionMenuButtons\AvatarParametersModule\ParametersEditorResources.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Api\ActionMenuPage.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Api\AMUtils.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Api\CustomSubMenu.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Api\VRCActionMenuPage.cs" />
+    <Compile Include="MenuAPI\ActionMenu\AstroActionMenuPatches.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Helpers\Constants.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Helpers\ExtensionMethods.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Helpers\Utilities.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Managers\FourAxisPuppetManager.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Managers\ModsFolderManager.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Managers\RadialPuppetManager.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Managers\ResourcesManager.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Pedals\PedalButton.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Pedals\PedalFourAxis.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Pedals\PedalRadial.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Pedals\PedalStruct.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Pedals\PedalSubMenu.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Pedals\PedalToggle.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Types\ActionMenuHand.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Types\ActionMenuPageType.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Types\Insertion.cs" />
+    <Compile Include="MenuAPI\ActionMenu\Types\PedalType.cs" />
+    <Compile Include="ClientUI\ActionMenuButtons\LightsModule.cs" />
     <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\BlazesAPIs.cs" />
     <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\SM\SMButton.cs" />
     <Compile Include="AstroLibrary\Blaze%27s Utils\APIS\SM\SMList.cs" />
@@ -230,7 +230,7 @@
     <Compile Include="AstroLibrary\Utility\WorldUtils.cs" />
     <Compile Include="AstroLibrary\VRChatObjects.cs" />
     <Compile Include="AstroLibrary\XrefTesting.cs" />
-    <Compile Include="Buttons\HistoryMenu.cs" />
+    <Compile Include="ClientUI\QuickMenuButtons\HistoryMenu.cs" />
     <Compile Include="CheetoLibrary\Extensions.cs" />
     <Compile Include="CheetoLibrary\Utility\CheetoUtils.cs" />
     <Compile Include="CheetosConsole\Console.cs" />
@@ -338,15 +338,15 @@
     <Compile Include="Utils\Decompiler\MethodsTools\TypeExtensionMethods.cs" />
     <Compile Include="Utils\Decompiler\MethodsTools\TypeSignatureTools.cs" />
     <Compile Include="Utils\UdonSearcher\UdonReplacer.cs" />
-    <Compile Include="Udon\UdonEditor\Il2CppConverter.cs" />
-    <Compile Include="Udon\UdonEditor\UdonHeapUnboxerUtils.cs" />
-    <Compile Include="Udon\UdonEditor\UdonHeapParser.cs" />
-    <Compile Include="Udon\UdonEditor\UdonHeapEditor.cs" />
-    <Compile Include="Udon\UdonEditor\UdonParser.cs" />
-    <Compile Include="Udon\UdonEditor\UdonTypes_String.cs" />
-    <Compile Include="Udon\UdonEditor\UdonUnpacker_Utils_ext.cs" />
-    <Compile Include="Udon\UdonEditor\UdonUnpacker_Utils.cs" />
-    <Compile Include="Udon\UdonEditor\DisassembledUdonBehaviour.cs" />
+    <Compile Include="Utils\UdonEditor\Il2CppConverter.cs" />
+    <Compile Include="Utils\UdonEditor\UdonHeapUnboxerUtils.cs" />
+    <Compile Include="Utils\UdonEditor\UdonHeapParser.cs" />
+    <Compile Include="Utils\UdonEditor\UdonHeapEditor.cs" />
+    <Compile Include="Utils\UdonEditor\UdonParser.cs" />
+    <Compile Include="Utils\UdonEditor\UdonTypes_String.cs" />
+    <Compile Include="Utils\UdonEditor\UdonUnpacker_Utils_ext.cs" />
+    <Compile Include="Utils\UdonEditor\UdonUnpacker_Utils.cs" />
+    <Compile Include="Utils\UdonEditor\DisassembledUdonBehaviour.cs" />
     <Compile Include="Utils\Colors\SystemColors.cs" />
     <Compile Include="Utils\Holders\SpawnedItemsHolder.cs" />
     <Compile Include="Utils\Serialization.cs" />
@@ -365,29 +365,29 @@
     <Compile Include="Extensions\SingleTag_ext.cs" />
     <Compile Include="Extensions\SyncPhysics_ext.cs" />
     <Compile Include="Extensions\Udon_ext.cs" />
-    <Compile Include="AvatarMods\AvatarUtils.cs" />
+    <Compile Include="Utils\Player\Avatar.cs" />
     <Compile Include="Cheetos\Flight.cs" />
     <Compile Include="BuildInfo.cs" />
     <Compile Include="WorldAddons\CheatsShortcutButton.cs" />
-    <Compile Include="Buttons\ESP\PlayerESPMenu.cs" />
-    <Compile Include="Buttons\FlightMenu.cs" />
-    <Compile Include="Buttons\RandomSubmenus.cs" />
-    <Compile Include="Buttons\SettingsMenuBtn.cs" />
-    <Compile Include="Buttons\ExploitsMenu.cs" />
-    <Compile Include="Buttons\UserInteractMenuBtns.cs" />
-    <Compile Include="Buttons\ESP\VRChat_Map_ESP_Menu.cs" />
-    <Compile Include="Buttons\WorldPickupsBtn.cs" />
+    <Compile Include="ClientUI\QuickMenuButtons\ESP\PlayerESPMenu.cs" />
+    <Compile Include="ClientUI\QuickMenuButtons\FlightMenu.cs" />
+    <Compile Include="ClientUI\QuickMenuButtons\RandomSubmenus.cs" />
+    <Compile Include="ClientUI\QuickMenuButtons\SettingsMenuBtn.cs" />
+    <Compile Include="ClientUI\QuickMenuButtons\ExploitsMenu.cs" />
+    <Compile Include="ClientUI\QuickMenuButtons\UserInteractMenuBtns.cs" />
+    <Compile Include="ClientUI\QuickMenuButtons\ESP\VRChat_Map_ESP_Menu.cs" />
+    <Compile Include="ClientUI\QuickMenuButtons\WorldPickupsBtn.cs" />
     <Compile Include="CheetosUI\CMBackground.cs" />
     <Compile Include="CheetosUI\CMButton.cs" />
     <Compile Include="CheetosUI\CMLabel.cs" />
     <Compile Include="Cheetos\AvatarSearch.cs" />
     <Compile Include="CheetosUI\CMPage.cs" />
     <Compile Include="Cheetos\CheetosHooks.cs" />
-    <Compile Include="Buttons\DevMenu.cs" />
+    <Compile Include="ClientUI\QuickMenuButtons\DevMenu.cs" />
     <Compile Include="Cheetos\AstroInput.cs" />
     <Compile Include="Cheetos\AvatarHider.cs" />
     <Compile Include="CheetosUI\CheetoMenu.cs" />
-    <Compile Include="Buttons\AdminMenu.cs" />
+    <Compile Include="ClientUI\QuickMenuButtons\AdminMenu.cs" />
     <Compile Include="Cheetos\ForceClone.cs" />
     <Compile Include="Cheetos\CameraStuff\PlayerCameraEditor.cs" />
     <Compile Include="Cheetos\PlayerListData.cs" />
@@ -465,7 +465,7 @@
     <Compile Include="ItemTweakerV2\TweakerEventArgs\SelectedObjectArgs.cs" />
     <Compile Include="ItemTweakerV2\Submenus\Physic\PhysicsSubmenu.cs" />
     <Compile Include="Lights\LightControl.cs" />
-    <Compile Include="Buttons\MovementMenu.cs" />
+    <Compile Include="ClientUI\QuickMenuButtons\MovementMenu.cs" />
     <Compile Include="Startup\Welcome.cs" />
     <Compile Include="Networking\AstroNetworkClient.cs" />
     <Compile Include="Networking\KeyManager.cs" />
@@ -496,7 +496,7 @@
     <Compile Include="Udon\Exploits\AmongUS\AmongUSUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Global\GlobalUdonExploits.cs" />
     <Compile Include="Udon\Exploits\Murder4\Murder4UdonExploits.cs" />
-    <Compile Include="Udon\UdonEditor\UdonUnboxer.cs" />
+    <Compile Include="Utils\UdonEditor\UdonUnboxer.cs" />
     <Compile Include="Utils\ColliderViewer\ColliderDisplay.cs" />
     <Compile Include="Utils\ColliderViewer\ColliderToggler.cs" />
     <Compile Include="Utils\ColliderViewer\XRay.cs" />
@@ -505,8 +505,8 @@
     <Compile Include="Utils\Headlight\Headlight.cs" />
     <Compile Include="Utils\Input\InputUtils.cs" />
     <Compile Include="Utils\ObjectUtils\GameObjectUtils.cs" />
-    <Compile Include="Utils\Player\PlayerCloner.cs" />
-    <Compile Include="Utils\Player\PlayerHands.cs" />
+    <Compile Include="Utils\Player\Cloner.cs" />
+    <Compile Include="Utils\Player\Hands.cs" />
     <Compile Include="Utils\QPens\QVPensUtils.cs" />
     <Compile Include="Utils\QuickMenuUtils.cs" />
     <Compile Include="Utils\UdonSearcher\UdonSearch.cs" />
@@ -515,7 +515,6 @@
     <Compile Include="Variables\Temporary.cs" />
     <Compile Include="Variables\Bools.cs" />
     <Compile Include="Variables\CustomLists.cs" />
-    <Compile Include="Variables\GDBUser.cs" />
     <Compile Include="Variables\GlobalLists.cs" />
     <Compile Include="Variables\InstanceBuilder.cs" />
     <Compile Include="Variables\VRChatObjects.cs" />
@@ -1266,10 +1265,6 @@
     <EmbeddedResource Include="Figlet\Larry3D.flf" />
     <None Include="app.config" />
     <Compile Include="Components\RigidBodyController\RigidBodyController.cs" />
-    <None Include="Core\Compression\Snappy\lib\linux\libsnappy64.so" />
-    <None Include="Core\Compression\Snappy\lib\osx\libsnappy64.dylib" />
-    <None Include="Core\Compression\Zstandard\lib\linux\libzstd.so" />
-    <None Include="Core\Compression\Zstandard\lib\osx\libzstd.dylib" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -1344,11 +1339,9 @@
     <Analyzer Include="..\packages\Microsoft.CodeAnalysis.Analyzers.3.3.3\analyzers\dotnet\cs\Microsoft.CodeAnalysis.CSharp.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Core\Compression\Snappy\lib\win\snappy32.dll" />
-    <Content Include="Core\Compression\Snappy\lib\win\snappy64.dll" />
-    <Content Include="Core\Compression\Zstandard\lib\win\libzstd.dll" />
+    <Folder Include="AvatarMods\" />
+    <Folder Include="MenuAPI\ActionMenu\MenuAPI\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

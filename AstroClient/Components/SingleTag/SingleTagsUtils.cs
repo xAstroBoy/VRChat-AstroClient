@@ -20,14 +20,14 @@ namespace AstroClient.Components
             Counter.Clear();
         }
 
-        internal override void OnPlayerLeft(Player player)
-        {
-            var entry = GetEntry(player);
-            if (entry != null)
-            {
-                RemoveCounter(entry);
-            }
-        }
+        //internal override void OnPlayerLeft(Player player)
+        //{
+        //    var entry = GetEntry(player);
+        //    if (entry != null)
+        //    {
+        //        RemoveCounter(entry);
+        //    }
+        //}
 
         internal static PlayerTagCounter GetEntry(Player player)
         {
