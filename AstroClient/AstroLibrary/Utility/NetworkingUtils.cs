@@ -3,10 +3,7 @@
 namespace AstroLibrary.Utility
 {
     using ExitGames.Client.Photon;
-    using Transmtn.DTO.Notifications;
     using UnityEngine;
-    using VRC;
-    using VRC.Core;
     using VRC.SDKBase;
     using PhotonHandler = MonoBehaviour1PrivateObInPrInBoInInInInUnique;
 

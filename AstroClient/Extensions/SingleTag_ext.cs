@@ -1,9 +1,9 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroClient.Components;
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
     using System.Collections.Generic;
+    using AstroClient.AstroMonos.Components.UI.SingleTag;
+    using Console;
+    using Utility;
     using VRC;
 
     internal static class SingleTag_ext

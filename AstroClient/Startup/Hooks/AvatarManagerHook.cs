@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
+    using System;
     using AstroClientCore.Events;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System;
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;

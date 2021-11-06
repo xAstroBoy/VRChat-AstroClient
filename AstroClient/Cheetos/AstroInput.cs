@@ -2,13 +2,11 @@
 {
     #region Imports
 
-    using AstroClient.Cheetos;
-    using AstroClient.Components;
-    using AstroClient.Exploits;
-    using AstroClient.Variables;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
+    using Cheetos;
+    using Exploits;
     using UnityEngine;
 
     #endregion Imports
@@ -127,7 +125,9 @@
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         internal void CheckHitObject(GameObject gameObject)

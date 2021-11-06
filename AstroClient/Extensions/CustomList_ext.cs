@@ -17,6 +17,7 @@
                     _ = ColliderCheck.Remove(objectcollider);
                 }
             }
+
             if (objectRigidBody != null)
             {
                 if (RigidBodyCheck.Contains(objectRigidBody))

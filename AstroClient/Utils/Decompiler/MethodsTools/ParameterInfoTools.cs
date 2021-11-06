@@ -1,13 +1,12 @@
-﻿using System.Text;
-using System.Linq;
-using System.Reflection;
-
-namespace AstroClient.Reflection
+﻿namespace AstroClient.Reflection
 {
     using System;
     using System.CodeDom;
     using System.CodeDom.Compiler;
     using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
     using Microsoft.CSharp;
 
     public static class ParameterInfoTools

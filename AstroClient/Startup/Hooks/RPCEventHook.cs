@@ -2,19 +2,13 @@
 {
     #region Imports
 
-    using AstroClient.Variables;
-    using AstroClientCore.Events;
+    using System.Reflection;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using ExitGames.Client.Photon;
     using Harmony;
-    using Photon.Realtime;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Reflection;
-    using System.Text;
     using UnityEngine;
+    using Variables;
     using VRC.SDKBase;
 
     #endregion Imports

@@ -1,15 +1,15 @@
 ﻿namespace AstroClient.WorldLights
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroButtonAPI;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
     using UnityEngine;
     using UnityEngine.Rendering;
-    using static AstroClient.Variables.CustomLists;
-    using static AstroClient.Variables.GlobalLists;
+    using static Variables.CustomLists;
+    using static Variables.GlobalLists;
 
     internal class LightControl : GameEvents
     {

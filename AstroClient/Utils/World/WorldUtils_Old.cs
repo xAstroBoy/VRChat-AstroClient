@@ -2,15 +2,14 @@
 {
     #region Imports
 
-    using AstroClient.Experiments;
-    using AstroClient.Variables;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    using Experiments;
     using UnityEngine;
     using VRC;
     using VRC.Core;
@@ -413,8 +412,8 @@
                     i => i.field_Internal_ApiAvatar_0 != null &&
                     i.field_Internal_ApiAvatar_0.id.IsNotNullOrEmptyOrWhiteSpace() &&
                     i.field_Internal_ApiAvatar_0.id.IsAvatarID()
-                    && !i.transform.IsChildOf(VRChatObjects_Old.AvatarPreviewBase_MainAvatar)
-                    && !i.transform.IsChildOf(VRChatObjects_Old.AvatarPreviewBase_FallbackAvatar)
+                    && !i.transform.IsChildOf(UserInterfaceObjects.AvatarPreviewBase_MainAvatar)
+                    && !i.transform.IsChildOf(UserInterfaceObjects.AvatarPreviewBase_FallbackAvatar)
                     && i.field_Internal_ApiAvatar_0.assetUrl.IsNotNullOrEmptyOrWhiteSpace()
                     ).ToList();
 

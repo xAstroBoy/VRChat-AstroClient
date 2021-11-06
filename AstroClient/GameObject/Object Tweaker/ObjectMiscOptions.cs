@@ -1,10 +1,13 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Components;
+    using System;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System;
+    using AstroMonos.Components.Custom.Random;
+    using AstroMonos.Components.Malicious;
+    using AstroMonos.Components.Malicious.Orbit;
+    using AstroMonos.Components.Tools;
     using UnityEngine;
 
     internal class ObjectMiscOptions : GameEvents

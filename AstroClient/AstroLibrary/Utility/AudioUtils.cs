@@ -2,7 +2,6 @@
 
 namespace AstroLibrary.Utility
 {
-    using System;
     using System.Runtime.InteropServices;
 
     public static class AudioUtils

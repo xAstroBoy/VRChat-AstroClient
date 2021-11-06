@@ -1,6 +1,5 @@
 ﻿namespace AstroClient
 {
-    using AstroClientCore.Events;
     #region Imports
 
     using AstroLibrary.Console;
@@ -10,6 +9,7 @@
     using System.Diagnostics;
     using System.IO;
     using System.Threading;
+    using AstroClientCore.Events;
     using UnityEngine;
 
     #endregion Imports

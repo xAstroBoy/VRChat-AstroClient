@@ -1,9 +1,9 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroClient.Components;
-    using AstroLibrary.Utility;
     using System.Collections.Generic;
+    using AstroClient.AstroMonos.Components.Tools;
     using UnityEngine;
+    using Utility;
     using VRC.SDKBase;
 
     internal static class PickupControllerExtensions
@@ -16,6 +16,7 @@
                 {
                     instance.EditMode = true;
                 }
+
                 instance.DisallowTheft = DisallowTheft;
             }
         }
@@ -37,6 +38,7 @@
                 {
                     instance.EditMode = true;
                 }
+
                 instance.proximity = proximity;
             }
         }
@@ -49,7 +51,8 @@
                 {
                     instance.EditMode = true;
                 }
-                instance.Force_Pickup_Component = ForceComponent;
+
+                instance.ForceComponent = ForceComponent;
             }
         }
 
@@ -61,6 +64,7 @@
                 {
                     instance.EditMode = true;
                 }
+
                 instance.AutoHold = AutoHoldMode;
             }
         }
@@ -73,6 +77,7 @@
                 {
                     instance.EditMode = true;
                 }
+
                 instance.orientation = PickupOrientation;
             }
         }
@@ -85,6 +90,7 @@
                 {
                     instance.EditMode = true;
                 }
+
                 instance.pickupable = pickupable;
             }
         }
@@ -97,6 +103,7 @@
                 {
                     instance.EditMode = true;
                 }
+
                 instance.allowManipulationWhenEquipped = allowManipulationWhenEquipped;
             }
         }
@@ -115,14 +122,17 @@
             {
                 return instance.IsHeld;
             }
+
             return false;
         }
+
         internal static bool Pickup_Get_AntiTheft(this PickupController instance)
         {
             if (instance != null)
             {
                 return instance.AntiTheft;
             }
+
             return false;
         }
 
@@ -133,6 +143,7 @@
             {
                 return instance.currentPlayer;
             }
+
             return null;
         }
 
@@ -297,6 +308,7 @@
             {
                 return controller.IsHeld ? "Held : Yes" : "Held : No";
             }
+
             return "No Pickup Property Found";
         }
 
@@ -306,6 +318,7 @@
             {
                 return controller.IsHeld ? Color.green : Color.red;
             }
+
             return Color.red;
         }
 
@@ -315,6 +328,7 @@
             {
                 return "Held By " + controller.CurrentHolderDisplayName;
             }
+
             return "Not Held";
         }
 
@@ -331,10 +345,10 @@
                 {
                     control.EditMode = true;
                 }
+
                 control.AllowOnlySelfToGrab = AllowOnlySelfToGrab;
             }
         }
-
 
 
         internal static void Pickup_Set_ThrowVelocityBoostScale(this PickupController instance, float ThrowVelocityBoostScale)
@@ -345,6 +359,7 @@
                 {
                     instance.EditMode = true;
                 }
+
                 instance.ThrowVelocityBoostScale = ThrowVelocityBoostScale;
             }
         }

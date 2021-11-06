@@ -1,7 +1,7 @@
 ﻿namespace Blaze.API
 {
-    using AstroButtonAPI;
     using System.Collections.Generic;
+    using AstroButtonAPI;
     using UnityEngine;
     using VRC;
 

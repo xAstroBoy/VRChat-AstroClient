@@ -1,7 +1,7 @@
 ﻿namespace AstroClient.ItemTweakerV2.TweakerEventArgs
 {
-    using AstroClient.Components;
     using System;
+    using AstroMonos.Components.Tools;
 
     internal class OnPickupControllerArgs : EventArgs
     {

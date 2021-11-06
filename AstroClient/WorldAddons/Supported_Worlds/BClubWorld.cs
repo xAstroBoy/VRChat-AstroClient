@@ -2,7 +2,6 @@
 {
     #region Imports
 
-    using AstroClient.Components;
     using AstroClient.Udon;
     using AstroClient.Variables;
     using AstroLibrary.Console;
@@ -19,6 +18,9 @@
     using VRC.Udon;
     using static AstroClient.Variables.CustomLists;
     using AstroClient.Udon.UdonEditor;
+    using AstroMonos.AstroUdons;
+    using AstroMonos.Components.Spoofer;
+    using AstroMonos.Components.Tools.Listeners;
 
     #endregion Imports
 

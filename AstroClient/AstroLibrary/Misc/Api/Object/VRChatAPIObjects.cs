@@ -1,8 +1,8 @@
 ﻿namespace AstroLibrary.Misc.Api.Object
 {
-    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
+    using Newtonsoft.Json;
     using VRC.Core;
 
     public class Platforms

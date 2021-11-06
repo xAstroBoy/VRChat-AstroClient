@@ -1,9 +1,9 @@
 ﻿namespace AstroClient
 {
-    using AstroNetworkingLibrary.Serializable;
     using System;
     using System.Collections.Generic;
     using System.Reflection;
+    using AstroNetworkingLibrary.Serializable;
 
     [Serializable, Obfuscation]
     public class ConfigUI

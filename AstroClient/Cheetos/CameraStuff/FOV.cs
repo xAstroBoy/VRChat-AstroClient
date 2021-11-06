@@ -13,6 +13,7 @@
                 var component = gameObject.GetComponent<Camera>();
                 if (component != null) component.fieldOfView = v;
             }
+
             ConfigManager.General.FOV = v;
         }
 

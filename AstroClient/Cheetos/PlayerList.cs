@@ -1,23 +1,23 @@
 ﻿namespace AstroClient
 {
-    using AstroLibrary.Console;
     #region Imports
 
-    using AstroLibrary.Utility;
-    using MelonLoader;
-    using AstroButtonAPI;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
     using System.Threading;
+    using AstroButtonAPI;
+    using AstroLibrary.Console;
+    using AstroLibrary.Utility;
+    using MelonLoader;
     using UnityEngine;
     using VRC;
 
     #endregion Imports
 
-    internal partial class PlayerList : GameEvents
+    internal class PlayerList : GameEvents
     {
         private static QMSingleButton playersButton;
 
@@ -132,15 +132,21 @@
 
                 yield return new WaitForSeconds(0.001f);
             }
+
             refreshMutex.ReleaseMutex();
-            yield break;
         }
 
         internal static void CreateButton(PlayerListData player, float xPos, float yPos)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
 
-            var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, $"{player.Prefix}{player.Name}", () => { if (player.Player != null) { SelectPlayer(player.Player); } }, "", player.Color, player.Color, true);
+            var playerButton = new QMSingleButton("ShortcutMenu", xPos, yPos, $"{player.Prefix}{player.Name}", () =>
+            {
+                if (player.Player != null)
+                {
+                    SelectPlayer(player.Player);
+                }
+            }, "", player.Color, player.Color, true);
             playerButton.SetResizeTextForBestFit(true);
 
             playerButton.SetActive(ConfigManager.UI.ShowPlayersList);
@@ -148,6 +154,7 @@
             {
                 playerButton.SetActive(false);
             }
+
             PlayerButtons.Add(playerButton);
 
             stopwatch.Stop();
@@ -161,6 +168,7 @@
                 QMSingleButton button = PlayerButtons[i];
                 button.DestroyMe();
             }
+
             PlayerButtons.Clear();
         }
 

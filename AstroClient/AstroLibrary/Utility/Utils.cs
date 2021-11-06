@@ -2,10 +2,7 @@
 
 namespace AstroLibrary.Utility
 {
-    using AstroLibrary.Extensions;
-    using UnhollowerRuntimeLib;
     using UnityEngine;
-    using UnityEngine.XR;
     using VRC;
     using VRC.SDKBase;
     using VRC.UserCamera;

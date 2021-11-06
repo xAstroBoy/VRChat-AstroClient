@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.ButtonShortcut
 {
-    using AstroClient.Variables;
-    using AstroClient.World.Hub;
-    using AstroClient.WorldAddons;
-    using AstroButtonAPI;
     using System;
     using System.Collections.Generic;
+    using AstroButtonAPI;
     using UnityEngine;
     using UnityEngine.UI;
+    using Variables;
+    using World.Hub;
+    using WorldAddons;
 
     internal class CheatsShortcutButton : GameEvents
     {
@@ -145,6 +145,16 @@
                 {
                     SetButtonText("Pool Parlor Skins", "Manage Pool Parlor Customizations.");
                     SetButtonShortcut(PoolParlor.PoolParlorCheats);
+                    SetButtonColor(Color.green);
+                    ToggleButtonVisibilityAndInteractivity(true);
+                }
+            }
+            else if (id == WorldIds.Udon_Tycoon)
+            {
+                if (UdonTycoon.udonTycoonCheatPage != null)
+                {
+                    SetButtonText("Pool Udon Tycoon", "Manage Udon Tycoon Cheats.");
+                    SetButtonShortcut(UdonTycoon.udonTycoonCheatPage);
                     SetButtonColor(Color.green);
                     ToggleButtonVisibilityAndInteractivity(true);
                 }

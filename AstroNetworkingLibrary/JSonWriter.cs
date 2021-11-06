@@ -1,7 +1,7 @@
 ﻿namespace AstroNetworkingLibrary
 {
-    using Newtonsoft.Json;
     using System.IO;
+    using Newtonsoft.Json;
 
     internal static class JSonWriter
     {

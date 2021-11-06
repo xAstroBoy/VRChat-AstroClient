@@ -1,11 +1,11 @@
 ﻿namespace DayBots.VRCAPI
 {
-    using AstroLibrary.Bots.VRCAPI.Endpoints;
-    using DayBots.VRCAPI.Endpoints;
     using System;
     using System.Collections.Generic;
     using System.Net;
     using System.Net.Http;
+    using AstroLibrary.Bots.VRCAPI.Endpoints;
+    using Endpoints;
 
     internal class API
     {

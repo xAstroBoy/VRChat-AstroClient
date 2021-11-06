@@ -2,27 +2,19 @@
 {
     #region Imports
 
-    using AstroClient.Cheetos;
-    using AstroClient.Components;
-    using AstroClient.Variables;
-    using AstroLibrary;
+    using System;
+    using System.Collections;
+    using System.Net.Sockets;
+    using System.Timers;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
-    using Blaze.Utils;
+    using Cheetos;
     using MelonLoader;
     using Newtonsoft.Json;
-    using System;
-    using System.Collections;
-    using System.Net.Sockets;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using System.Timers;
     using UnityEngine;
-    using VRC;
-    using PopupUtils = AstroLibrary.Utility.PopupUtils;
-    using Timer = System.Timers.Timer;
+    using Variables;
 
     #endregion Imports
 
@@ -42,7 +34,7 @@
 
         private static IEnumerator PingLoop()
         {
-            for(; Client.IsConnected;)
+            for (; Client.IsConnected;)
             {
                 Client.Send(new PacketData(PacketClientType.KEEP_ALIVE));
                 yield return new WaitForSeconds(5f);
@@ -187,10 +179,10 @@
                     break;
 
                 case PacketServerType.AVATAR_RESULT:
-                    {
-                        AvatarSearch.AddAvatar(JsonConvert.DeserializeObject<AvatarData>(packetData.TextData));
-                        break;
-                    }
+                {
+                    AvatarSearch.AddAvatar(JsonConvert.DeserializeObject<AvatarData>(packetData.TextData));
+                    break;
+                }
 
                 case PacketServerType.AVATAR_RESULT_DONE:
                     AvatarSearch.IsSearching = false;
@@ -210,7 +202,6 @@
         private static void OnConnected(object sender, EventArgs e)
         {
             ModConsole.DebugLog("Client Connected.");
-            return;
         }
 
         private static void OnDisconnect(object sender, EventArgs e)
@@ -220,14 +211,16 @@
 
         private static IEnumerator TryReconnect()
         {
-            for (; ; )
+            for (;;)
             {
                 try
                 {
                     Connect();
                     yield break;
                 }
-                catch { }
+                catch
+                {
+                }
 
                 ModConsole.Warning("Client reconnection attempt in 5 seconds..");
                 yield return new WaitForSeconds(5f);

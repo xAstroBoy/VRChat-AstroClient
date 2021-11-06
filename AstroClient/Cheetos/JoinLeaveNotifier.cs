@@ -1,14 +1,13 @@
 ﻿namespace AstroClient
 {
-    using AstroLibrary;
+    using System.Collections.Generic;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
-    using System;
-    using System.Collections.Generic;
+    using Photon.Realtime;
 
     internal class JoinLeaveNotifier : GameEvents
     {
-        private static bool isReady = false;
+        private static bool isReady;
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
@@ -16,7 +15,7 @@
             MiscUtils.DelayFunction(5, () => { isReady = true; });
         }
 
-        internal override void OnPhotonJoined(Photon.Realtime.Player player)
+        internal override void OnPhotonJoined(Player player)
         {
             ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Joined!");
 
@@ -26,7 +25,7 @@
             }
         }
 
-        internal override void OnPhotonLeft(Photon.Realtime.Player player)
+        internal override void OnPhotonLeft(Player player)
         {
             ModConsole.Log($"[PHOTON] {player.GetDisplayName()} Left!");
 

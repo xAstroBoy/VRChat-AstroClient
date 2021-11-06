@@ -2,19 +2,18 @@
 {
     #region Imports
 
-    using AstroClient.Variables;
-    using AstroClient.World.Hub;
-    using AstroClient.WorldAddons;
-    using AstroLibrary;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroButtonAPI;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
-    using UnityEngine;
+    using AstroButtonAPI;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Finder;
     using CheetoLibrary;
+    using UnityEngine;
+    using Variables;
+    using World.Hub;
+    using WorldAddons;
 
     #endregion Imports
 
@@ -36,6 +35,7 @@
             FBTHeaven.InitButtons(WorldCheats, 4, 2, true);
             SuperTowerDefense.InitButtons(WorldCheats, 4, 2.5f, true);
             PoolParlor.InitButtons(WorldCheats, 3, 0f, true);
+            UdonTycoon.InitButtons(WorldCheats, 3, 0.5f, true);
         }
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)

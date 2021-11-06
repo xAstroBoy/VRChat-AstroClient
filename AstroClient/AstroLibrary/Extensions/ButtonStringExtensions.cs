@@ -1,7 +1,7 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroLibrary.Utility;
     using UnityEngine;
+    using Utility;
     using VRC;
 
     public static class ButtonStringExtensions

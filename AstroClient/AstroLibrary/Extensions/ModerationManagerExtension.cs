@@ -1,8 +1,8 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroLibrary.Utility;
-    using Il2CppSystem.Collections.Generic;
     using System;
+    using Il2CppSystem.Collections.Generic;
+    using Utility;
     using VRC.Core;
 
     public static class ModerationManagerExtension

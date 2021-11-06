@@ -1,7 +1,7 @@
 ﻿namespace AstroClient
 {
-    using AstroLibrary.Console;
     using System.Collections.Generic;
+    using AstroLibrary.Console;
     using UnityEngine;
 
     internal static class ColliderToggler

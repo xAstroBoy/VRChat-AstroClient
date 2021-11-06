@@ -1,20 +1,19 @@
 ﻿namespace AstroClient
 {
+    using System.Collections;
+    using System.Collections.Generic;
     using AstroButtonAPI;
-    using AstroClient.Components;
-    using AstroClient.Variables;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using Cheetos;
-    using MelonLoader;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
+    using AstroMonos.AstroUdons;
+    using AstroMonos.Components.Cheats.Worlds.SuperTowerDefense;
     using CheetoLibrary;
+    using MelonLoader;
     using UnityEngine;
-    using static AstroClient.Variables.CustomLists;
+    using Variables;
+    using static Variables.CustomLists;
 
     internal class SuperTowerDefense : GameEvents
     {

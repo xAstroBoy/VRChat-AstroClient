@@ -1,11 +1,11 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
+    using Console;
     using Transmtn.DTO;
     using Transmtn.DTO.Notifications;
     using UnityEngine;
     using UnityEngine.UI;
+    using Utility;
 
     public static class NotificationManagerExtension
     {

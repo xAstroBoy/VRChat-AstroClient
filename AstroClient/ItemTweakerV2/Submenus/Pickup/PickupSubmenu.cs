@@ -1,14 +1,13 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-    using AstroClient.Components;
-    using AstroClient.ItemTweakerV2.Selector;
+    using System;
+    using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using AstroButtonAPI;
-    using System;
+    using AstroMonos.Components.Tools;
+    using Selector;
     using UnityEngine;
     using VRC.SDKBase;
-    using Color = UnityEngine.Color;
 
     internal class PickupSubmenu : Tweaker_Events
     {

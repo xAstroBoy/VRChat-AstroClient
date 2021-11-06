@@ -2,9 +2,8 @@
 
 namespace AstroLibrary.Utility
 {
-    using AstroLibrary.Console;
-    using Blaze.Utils;
     using System.Collections.Generic;
+    using Blaze.Utils;
 
     public static class PhotonUtils
     {

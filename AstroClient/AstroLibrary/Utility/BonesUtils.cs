@@ -2,8 +2,6 @@
 {
     using UnityEngine;
     using VRC;
-    using VRC.SDKBase;
-    using Vector3 = UnityEngine.Vector3;
 
     public static class BonesUtils
     {

@@ -1,7 +1,7 @@
-using AstroLibrary.Console;
 using System;
 using System.Linq;
 using System.Reflection;
+using AstroLibrary.Console;
 using UnhollowerRuntimeLib.XrefScans;
 
 internal static class XrefScannerUtils

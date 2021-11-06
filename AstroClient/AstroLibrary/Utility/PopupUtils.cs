@@ -2,12 +2,12 @@
 
 namespace AstroLibrary.Utility
 {
-    using AstroLibrary.Console;
-    using MelonLoader;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
+    using Console;
+    using MelonLoader;
     using UnhollowerRuntimeLib.XrefScans;
     using UnityEngine;
     using UnityEngine.UI;

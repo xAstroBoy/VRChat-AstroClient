@@ -1,8 +1,8 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Components;
-    using AstroClient.ItemTweakerV2.Submenus;
     using AstroLibrary.Utility;
+    using AstroMonos.Components.Tools;
+    using ItemTweakerV2.Submenus;
     using UnityEngine;
 
     internal class Forces

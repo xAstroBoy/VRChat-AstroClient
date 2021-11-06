@@ -1,7 +1,6 @@
 ﻿namespace AstroLibrary.Extensions
 {
     using UnityEngine;
-    using SyncPhysics = SyncPhysics;
 
     internal static class SyncPhysics_ext
     {

@@ -1,21 +1,16 @@
 ﻿namespace AstroClient.Streamer
 {
-    using AstroClient.Variables;
-    using AstroClientCore.Events;
-    using AstroLibrary;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Reflection;
+    using AstroClientCore.Events;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
     using VRC;
 
     internal class StreamerProtector : GameEvents
     {
-
-
         internal override void OnApplicationLateStart()
         {
             Streamers structValue = new Streamers();
@@ -23,6 +18,7 @@
             {
                 StreamerIDs.Add(field.GetValue(structValue).ToString());
             }
+
             ModConsole.Log($"Registered {StreamerIDs.Count()} Streamers.");
         }
 
@@ -37,7 +33,7 @@
 
         internal static bool IsAStreamerPresent()
         {
-            return StreamersInInstance.Count() != 0;
+            return StreamersInInstance != 0;
         }
 
         internal override void OnPlayerJoined(Player player)
@@ -51,14 +47,12 @@
                     if (StreamerIDs.Contains(userid))
                     {
                         Event_OnStreamerJoined.SafetyRaise(new PlayerEventArgs(player));
-                        if (!StreamersInInstance.Contains(player))
-                        {
-                            StreamersInInstance.Add(player);
-                        }
+                        StreamersInInstance++;
                     }
                 }
             }
         }
+
 
         internal override void OnPlayerLeft(Player player)
         {
@@ -72,10 +66,7 @@
                     {
                         Event_OnStreamerLeft.SafetyRaise(new PlayerEventArgs(player));
 
-                        if (StreamersInInstance.Contains(player))
-                        {
-                            StreamersInInstance.Remove(player);
-                        }
+                        StreamersInInstance--;
                     }
                 }
             }
@@ -83,9 +74,9 @@
 
         internal override void OnRoomLeft()
         {
-            StreamersInInstance.Clear();
+            StreamersInInstance = 0;
         }
 
-        internal static List<Player> StreamersInInstance { get; private set; } = new List<Player>();
+        internal static int StreamersInInstance;
     }
 }

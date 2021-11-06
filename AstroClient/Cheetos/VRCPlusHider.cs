@@ -2,8 +2,8 @@
 {
     #region Imports
 
-    using AstroLibrary.Finder;
     using System.Collections.Generic;
+    using AstroLibrary.Finder;
 
     #endregion Imports
 
@@ -46,6 +46,7 @@
                 {
                     found.SetActive(false);
                 }
+
                 if (found_2 != null)
                 {
                     found_2.SetActive(false);

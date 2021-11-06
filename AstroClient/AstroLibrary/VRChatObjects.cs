@@ -1,8 +1,8 @@
 ﻿namespace AstroLibrary
 {
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
+    using Extensions;
     using UnityEngine;
+    using Utility;
 
     internal class VRChatObjects
     {

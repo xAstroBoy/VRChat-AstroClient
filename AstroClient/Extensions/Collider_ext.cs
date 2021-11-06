@@ -1,7 +1,7 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroClient;
     using System.Collections.Generic;
+    using AstroClient;
     using UnityEngine;
 
     internal static class Collider_ext
@@ -86,6 +86,7 @@
                 {
                     c.enabled = true;
                 }
+
                 foreach (var c in obj.GetComponentsInChildren<MeshCollider>(true))
                 {
                     c.enabled = true;

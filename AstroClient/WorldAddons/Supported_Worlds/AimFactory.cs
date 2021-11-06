@@ -1,16 +1,16 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Variables;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
-    using AstroButtonAPI;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroButtonAPI;
+    using AstroLibrary.Console;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Finder;
+    using AstroLibrary.Utility;
     using UnityEngine;
+    using Variables;
     using VRC;
     using Random = System.Random;
 

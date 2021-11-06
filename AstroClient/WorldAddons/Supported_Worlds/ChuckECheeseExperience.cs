@@ -1,11 +1,11 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Variables;
+    using System.Collections.Generic;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
-    using System.Collections.Generic;
     using UnityEngine;
+    using Variables;
 
     internal class ChuckECheeseExperience : GameEvents
     {

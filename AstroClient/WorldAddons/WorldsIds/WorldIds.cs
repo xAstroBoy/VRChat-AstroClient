@@ -29,5 +29,6 @@
         public const string Valkyrie_Defense = "wrld_26c38507-8915-40d5-9338-667f01fe3b4c";
         public const string Furry_Talk_And_Chill = "wrld_c591c76e-0ac2-413d-969e-b243ae943ace";
         public const string Super_Tower_defense = "wrld_9a51b365-d6cc-42e6-901a-54ceb46b94ef";
+        public const string Udon_Tycoon = "wrld_257ce0c9-35cc-45ce-a8fc-9d703067c58a";
     }
 }

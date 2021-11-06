@@ -2,18 +2,20 @@
 {
     #region Imports
 
+    using System;
+    using System.Linq;
     using AstroLibrary.Console;
     using AstroLibrary.Enums;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
+    using AstroNetworkingLibrary.Serializable;
     using CheetoLibrary;
     using DayClientML2.Utility;
     using DayClientML2.Utility.MenuApi;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
+    using Il2CppSystem.Collections.Generic;
     using UnityEngine;
     using VRC.Core;
+    using ConfigManager = AstroClient.ConfigManager;
 
     #endregion Imports
 
@@ -21,7 +23,7 @@
     {
         private static GameObject publicAvatarList;
 
-        private static Il2CppSystem.Collections.Generic.List<ApiAvatar> favoriteAvatars = new Il2CppSystem.Collections.Generic.List<ApiAvatar>();
+        private static List<ApiAvatar> favoriteAvatars = new List<ApiAvatar>();
 
         private static VRCList list;
 
@@ -36,24 +38,21 @@
             inputModule = GameObject.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
 
             // Avatar Favorite
-            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Favorite", 921f, 290f, delegate ()
-              {
-                  var selected = PlayerUtils.GetPlayer().prop_VRCPlayer_0.prop_VRCAvatarManager_0.field_Private_ApiAvatar_1.id;
-                  AddToFavorites(selected);
-              }, 1.45f, 1f);
+            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Favorite", 921f, 290f, delegate
+            {
+                var selected = PlayerUtils.GetPlayer().prop_VRCPlayer_0.prop_VRCAvatarManager_0.field_Private_ApiAvatar_1.id;
+                AddToFavorites(selected);
+            }, 1.45f, 1f);
 
             // Avatar Unfavorite
-            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Unfavorite", 921f, 230f, delegate ()
-              {
-                  DeleteFromFavorites(selectedID);
-              }, 1.45f, 1f);
+            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Unfavorite", 921f, 230f, delegate { DeleteFromFavorites(selectedID); }, 1.45f, 1f);
 
             publicAvatarList = GameObjectFinder.Find("/UserInterface/MenuContent/Screens/Avatar/Vertical Scroll View/Viewport/Content/Public Avatar List");
 
-            list = new VRCList(publicAvatarList.transform.parent, "Astro Favorites", 0);
+            list = new VRCList(publicAvatarList.transform.parent, "Astro Favorites");
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, System.Collections.Generic.List<string> tags, string AssetURL, string AuthorName)
         {
             if (!initialized)
             {
@@ -78,9 +77,9 @@
         internal static void RefreshList()
         {
             favoriteAvatars.Clear();
-            for (int i = 0; i < AstroClient.ConfigManager.Favorites.Avatars.Count; i++)
+            for (int i = 0; i < ConfigManager.Favorites.Avatars.Count; i++)
             {
-                AstroNetworkingLibrary.Serializable.AvatarData avatarData = AstroClient.ConfigManager.Favorites.Avatars[i];
+                AvatarData avatarData = ConfigManager.Favorites.Avatars[i];
                 favoriteAvatars.Add(avatarData.ToApiAvatar());
             }
 
@@ -113,28 +112,28 @@
 
         internal static void AddToFavorites(string avatarID)
         {
-            if (!AstroClient.ConfigManager.Favorites.Avatars.FindAll(a => a.AvatarID == avatarID).Any())
+            if (!ConfigManager.Favorites.Avatars.FindAll(a => a.AvatarID == avatarID).Any())
             {
                 new ApiAvatar { id = avatarID }.Fetch(new Action<ApiContainer>(model =>
                 {
-                    AstroClient.ConfigManager.Favorites.Avatars.Add(model.Model.Cast<ApiAvatar>().GetAvatarData());
+                    ConfigManager.Favorites.Avatars.Add(model.Model.Cast<ApiAvatar>().GetAvatarData());
                     ModConsole.DebugLog($"Avatar Favorited: {avatarID}");
-                    AstroClient.ConfigManager.Save_Favorites();
+                    ConfigManager.Save_Favorites();
                     RefreshList();
                 }));
             }
             else
             {
-                ModConsole.Warning($"Avatar already favorited!");
+                ModConsole.Warning("Avatar already favorited!");
             }
         }
 
         internal static void DeleteFromFavorites(string avatarID)
         {
-            if (AstroClient.ConfigManager.Favorites.Avatars.Remove(AstroClient.ConfigManager.Favorites.Avatars.Where(a => a.AvatarID == avatarID).FirstOrDefault()))
+            if (ConfigManager.Favorites.Avatars.Remove(ConfigManager.Favorites.Avatars.Where(a => a.AvatarID == avatarID).FirstOrDefault()))
             {
                 ModConsole.DebugLog($"Avatar Unfavorited: {avatarID}");
-                AstroClient.ConfigManager.Save_Favorites();
+                ConfigManager.Save_Favorites();
                 RefreshList();
             }
         }

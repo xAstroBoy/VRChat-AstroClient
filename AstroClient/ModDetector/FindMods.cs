@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.ModDetector
 {
+    using System.Linq;
     using AstroLibrary.Console;
     using MelonLoader;
-    using System.Linq;
 
     internal class FindMods : GameEvents
     {

@@ -1,10 +1,10 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Variables;
-    using AstroLibrary.Console;
-    using AstroLibrary.Finder;
     using System.Collections.Generic;
     using System.Drawing;
+    using AstroLibrary.Console;
+    using AstroLibrary.Finder;
+    using Variables;
 
     internal class Meroom : GameEvents
     {

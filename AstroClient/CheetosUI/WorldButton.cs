@@ -1,12 +1,11 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Components;
-    using AstroLibrary;
-    using AstroLibrary.Utility;
-    using CheetoLibrary;
     using System;
     using System.Reflection;
     using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
+    using AstroMonos.AstroUdons;
+    using CheetoLibrary;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
@@ -89,7 +88,6 @@
             front_text.enableAutoSizing = true;
             front_text.fontSizeMin = 0f;
             front_text.fontSizeMax = 72f;
-
         }
     }
 }

@@ -1,13 +1,12 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-    using AstroClient.Components;
-    using AstroClient.ItemTweakerV2.Selector;
-    using AstroLibrary.Extensions;
-    using AstroButtonAPI;
     using System;
-    using UnityEngine;
     using System.Linq;
-    using AstroClient.ItemTweakerV2.TweakerEventArgs;
+    using AstroButtonAPI;
+    using AstroLibrary.Extensions;
+    using AstroMonos.Components.Custom.Random;
+    using Selector;
+    using UnityEngine;
 
     internal class CrazyComponentSubMenu : Tweaker_Events
     {

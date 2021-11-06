@@ -2,8 +2,9 @@
 {
     #region Imports
 
-    using AstroClient.Variables;
-    using AstroLibrary;
+    using System;
+    using System.Collections;
+    using System.Diagnostics;
     using AstroLibrary.Console;
     using AstroLibrary.Enums;
     using AstroLibrary.Extensions;
@@ -14,12 +15,11 @@
     using CheetoLibrary;
     using DayClientML2.Utility;
     using DayClientML2.Utility.MenuApi;
+    using Il2CppSystem.Collections.Generic;
+    using MelonLoader;
     using Newtonsoft.Json;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics;
-    using System.Linq;
     using UnityEngine;
+    using Variables;
     using VRC.Core;
 
     #endregion Imports
@@ -28,15 +28,15 @@
     {
         internal static SearchTypes SearchType = SearchTypes.ALL;
 
-        internal static bool IsSearching = false;
+        internal static bool IsSearching;
 
         internal static bool IsDumping = false;
 
         private static GameObject publicAvatarList;
 
-        private static Il2CppSystem.Collections.Generic.List<ApiAvatar> foundAvatars = new Il2CppSystem.Collections.Generic.List<ApiAvatar>();
+        private static List<ApiAvatar> foundAvatars = new List<ApiAvatar>();
 
-        private static Il2CppSystem.Collections.Generic.List<ApiAvatar> worldAvatars = new Il2CppSystem.Collections.Generic.List<ApiAvatar>();
+        private static List<ApiAvatar> worldAvatars = new List<ApiAvatar>();
 
         private static VRCList searchList;
 
@@ -70,15 +70,9 @@
             inputModule = GameObject.Find("_Application/UiEventSystem").GetComponent<VRCStandaloneInputModule>();
 
             // Avatar Search
-            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Search", 921f, 470f, delegate ()
-              {
-                  CheetoUtils.PopupCall("Astro Avatar Search", "Search", "Enter Avatar name. . .", false, delegate (string text)
-                  {
-                      Search(SearchType, text);
-                  });
-              }, 1.45f, 1f);
+            _ = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Astro Search", 921f, 470f, delegate { CheetoUtils.PopupCall("Astro Avatar Search", "Search", "Enter Avatar name. . .", false, delegate(string text) { Search(SearchType, text); }); }, 1.45f, 1f);
 
-            searchTypeButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "All", 921f, 410f, delegate ()
+            searchTypeButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "All", 921f, 410f, delegate
             {
                 if (SearchType == SearchTypes.ALL)
                 {
@@ -92,12 +86,13 @@
                 {
                     SearchType = SearchTypes.ALL;
                 }
+
                 UpdateButtons();
             }, 1.45f, 1f);
 
             if (Bools.IsDeveloper)
             {
-                deleteButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Delete From Database", 921f, 350f, delegate ()
+                deleteButton = new MenuButton(MenuType.AvatarMenu, MenuButtonType.AvatarFavButton, "Delete From Database", 921f, 350f, delegate
                 {
                     ModConsole.Log($"Sent Avatar Deletion For: {selectedID}");
                     AstroNetworkClient.Client.Send(new PacketData(PacketClientType.AVATAR_DELETE, selectedID));
@@ -113,7 +108,7 @@
             worldList.Text.supportRichText = true;
         }
 
-        internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
+        internal override void OnWorldReveal(string id, string Name, System.Collections.Generic.List<string> tags, string AssetURL, string AuthorName)
         {
             MiscUtils.DelayFunction(0.5f, () => { PedestalDump(); });
         }
@@ -150,13 +145,13 @@
                 NetworkingManager.AvatarSearch(searchType, query);
 
                 IsSearching = true;
-                _ = MelonLoader.MelonCoroutines.Start(SearchLoop());
+                _ = MelonCoroutines.Start(SearchLoop());
             }
         }
 
         internal static IEnumerator SearchLoop()
         {
-            for (; ; )
+            for (;;)
             {
                 yield return new WaitForSeconds(0.025f);
                 if (!IsSearching)
@@ -185,10 +180,9 @@
                     {
                         if (AstroNetworkClient.Client.IsConnected)
                         {
-
                             if (avatar != null)
                             {
-                                var avatarData = new AvatarData()
+                                var avatarData = new AvatarData
                                 {
                                     AssetURL = avatar.assetUrl,
                                     AuthorID = avatar.authorId,
@@ -212,6 +206,7 @@
                     }
                 }
             }
+
             DumpDone();
         }
 
@@ -258,7 +253,7 @@
 
         private static void UpdateButtons()
         {
-            searchTypeButton.SetText(System.Enum.GetName(typeof(SearchTypes), SearchType).ToLower().ToUppercaseFirstCharacterOnly());
+            searchTypeButton.SetText(Enum.GetName(typeof(SearchTypes), SearchType).ToLower().ToUppercaseFirstCharacterOnly());
         }
     }
 }

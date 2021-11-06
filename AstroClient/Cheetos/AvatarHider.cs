@@ -2,10 +2,10 @@
 {
     #region Imports
 
+    using System;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System;
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;

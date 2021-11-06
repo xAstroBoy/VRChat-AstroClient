@@ -1,13 +1,13 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Components;
+    using System.Linq;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using System.Linq;
+    using AstroMonos.Components.Custom.Random;
     using UnityEngine;
     using VRC.Udon;
-    using static AstroClient.ItemTweakerV2.Submenus.ScaleSubmenu;
-    using static AstroClient.Variables.CustomLists;
+    using static ItemTweakerV2.Submenus.ScaleSubmenu;
+    using static Variables.CustomLists;
 
     internal class ScaleEditor : GameEvents
     {

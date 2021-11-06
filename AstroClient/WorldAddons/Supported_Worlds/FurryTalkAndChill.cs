@@ -1,13 +1,13 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Variables;
-    using AstroLibrary.Console;
-    using AstroLibrary.Finder;
     using System.Collections.Generic;
+    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using AstroClient.Udon;
     using AstroLibrary.Utility;
-    using AstroClient.Components;
+    using AstroMonos.Components.Spoofer;
+    using Udon;
+    using Variables;
+
     internal class FurryTalkAndChill : GameEvents
     {
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)

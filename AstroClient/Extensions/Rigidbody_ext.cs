@@ -1,6 +1,6 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroLibrary.Console;
+    using Console;
     using UnityEngine;
 
     internal static class Rigidbody_ext

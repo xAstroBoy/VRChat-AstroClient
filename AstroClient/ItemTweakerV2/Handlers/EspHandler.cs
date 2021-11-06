@@ -1,9 +1,9 @@
 ﻿namespace AstroClient.ItemTweakerV2.Handlers
 {
-    using AstroClient.Components;
-    using AstroClient.ItemTweakerV2.Selector;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
+    using AstroMonos.Components.ESP.ItemTweaker;
+    using Selector;
     using UnityEngine;
 
     internal class EspHandler : Tweaker_Events

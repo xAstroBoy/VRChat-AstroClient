@@ -1,10 +1,8 @@
 ﻿namespace AstroButtonAPI
 {
-    using AstroLibrary;
     using CheetoLibrary;
     using UnityEngine;
     using UnityEngine.UI;
-    using Button = UnityEngine.UI.Button;
 
     public class QMTabBase
     {

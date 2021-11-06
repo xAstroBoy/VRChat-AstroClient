@@ -1,11 +1,10 @@
 ﻿namespace Blaze.API
 {
-    using AstroButtonAPI;
     using System;
     using System.Collections.Generic;
+    using AstroButtonAPI;
     using UnityEngine;
     using UnityEngine.UI;
-    using Button = UnityEngine.UI.Button;
 
     public class QMScrollMenu
     {

@@ -1,19 +1,13 @@
-﻿using AstroClient.Reflection;
-using AstroLibrary.Console;
-using System;
-using System.Collections.Generic;
-using UnhollowerRuntimeLib.XrefScans;
-using FieldInfo = System.Reflection.FieldInfo;
-using MemberTypes = System.Reflection.MemberTypes;
-using MethodBase = System.Reflection.MethodBase;
-using MethodInfo = System.Reflection.MethodInfo;
-using PropertyInfo = System.Reflection.PropertyInfo;
-using System.Text;
-
-namespace AstroClient
+﻿namespace AstroClient
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using System.Text;
+    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using Iced.Intel;
+    using Reflection;
+    using UnhollowerRuntimeLib.XrefScans;
 
     internal class IL2CPPDecompiler
     {

@@ -1,17 +1,14 @@
 ﻿namespace AstroClient.Kaned
 {
-    using AstroButtonAPI;
-    using AstroLibrary.Console;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
-    using UnityEngine;
-    using VRC.SDKBase;
-    using AstroLibrary.Extensions;
+    using AstroButtonAPI;
+    using AstroLibrary.Console;
     using AstroLibrary.Utility;
+    using UnityEngine;
     using VRC;
-    using System.Diagnostics;
-    using System;
+    using VRC.SDKBase;
 
     internal class Pathfinding : GameEvents
     {

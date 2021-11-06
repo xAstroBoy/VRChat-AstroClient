@@ -1,9 +1,9 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroLibrary.Utility;
     using AstroButtonAPI;
     using UnityEngine;
     using UnityEngine.UI;
+    using Utility;
 
     public static class ButtonExtensions
     {

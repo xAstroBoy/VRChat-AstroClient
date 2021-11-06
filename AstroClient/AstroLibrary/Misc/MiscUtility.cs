@@ -2,13 +2,13 @@
 {
     #region Imports
 
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroButtonAPI;
     using System;
     using System.Collections;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroButtonAPI;
+    using Console;
+    using Extensions;
     using UnityEngine;
     using UnityEngine.UI;
     using VRC;

@@ -1,14 +1,14 @@
 ﻿namespace AstroLibrary.ButtonApi
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Enums;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using DayClientML2.Utility;
-    using MelonLoader;
     using System;
+    using Console;
+    using DayClientML2.Utility;
+    using Enums;
+    using Extensions;
+    using MelonLoader;
     using UnityEngine;
     using UnityEngine.UI;
+    using Utility;
 
     internal class VRCMenu
     {
