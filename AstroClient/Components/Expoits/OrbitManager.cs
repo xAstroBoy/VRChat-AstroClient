@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using AstroClient.GameObjectDebug;
     using AstroLibrary.Console;
@@ -47,7 +49,7 @@
 
         #endregion Internal
 
-        internal static OrbitManager Instance { get; set; }
+        internal static OrbitManager Instance { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
         private Player target;
         private bool isEnabled;
         private bool isLooping;
@@ -56,7 +58,9 @@
 
         internal static bool IsEnabled
         {
+            [HideFromIl2Cpp]
             get => Instance.isEnabled;
+            [HideFromIl2Cpp]
             set => Instance.isEnabled = value;
         }
 

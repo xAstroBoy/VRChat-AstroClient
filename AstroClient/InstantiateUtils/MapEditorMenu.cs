@@ -6,6 +6,8 @@
     using AstroButtonAPI;
     using System;
     using UnityEngine;
+    using VRC.SDK3.Components;
+    using VRC.SDKBase;
 
     internal static class MapEditorMenu
     {
@@ -21,6 +23,7 @@
                       var btn = new WorldButton(buttonPosition.Value, buttonRotation.Value, "Template Test", null);
                       btn.gameObject.Pickup_Set_ForceComponent();
                       btn.gameObject.Pickup_Set_Pickupable(true);
+                      btn.gameObject.RigidBody_Set_isKinematic(true);
                       btn.gameObject.Set_As_Object_To_Edit();
                       btn.gameObject.AddToWorldUtilsMenu();
                   }
@@ -40,7 +43,10 @@
                     Transform child = list[i];
                     if (!child.gameObject.active)
                     {
-                        child.gameObject.SetActiveRecursively(true);
+                        if (!child.isMirror()) // Check and ignore mirrors.
+                        {
+                            child.gameObject.SetActiveRecursively(true);
+                        }
                     }
                 }
             }

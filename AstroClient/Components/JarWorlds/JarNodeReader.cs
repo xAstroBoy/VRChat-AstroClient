@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using AstroClient.Udon;
     using System;
@@ -23,6 +25,7 @@
 
         internal VRC.SDKBase.VRCPlayerApi VRCPlayerAPI
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (DisassembledNode != null)
@@ -34,7 +37,7 @@
             }
         }
 
-        internal UdonBehaviour Node { get; private set; }
-        internal DisassembledUdonBehaviour DisassembledNode { get; private set; }
+        internal UdonBehaviour Node { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal DisassembledUdonBehaviour DisassembledNode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace AstroClient
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient
 {
     using AstroClient.Components;
     using AstroLibrary.Console;
@@ -14,7 +16,6 @@
             : base(ptr)
         {
         }
-
 
         private void Start()
         {
@@ -61,7 +62,7 @@
             }
         }
 
-        private UdonBehaviour_Cached ExtendCheese;
-        internal VRC_AstroPickup PickupBehaviour { get; private set; } // let's test.
+        private UdonBehaviour_Cached ExtendCheese { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal VRC_AstroPickup PickupBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } // let's test.
     }
 }

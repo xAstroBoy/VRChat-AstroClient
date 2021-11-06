@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using AstroClient.Udon;
     using AstroLibrary.Console;
@@ -35,11 +37,13 @@
 
         internal int? CurrentRound
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (WaveController != null) return UdonHeapParser.Udon_Parse_Int32(WaveController, Wave);
                 return null;
             }
+            [HideFromIl2Cpp]
             set
             {
                 if (WaveController != null)
@@ -49,7 +53,8 @@
             }
         }
 
-        private string Wave { get; } = "Wave";
-        private DisassembledUdonBehaviour WaveController;
+        private string Wave { [HideFromIl2Cpp] get; } = "Wave";
+
+        private DisassembledUdonBehaviour WaveController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
 }

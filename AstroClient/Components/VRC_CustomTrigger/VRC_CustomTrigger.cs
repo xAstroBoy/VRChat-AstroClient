@@ -1,4 +1,4 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes; namespace AstroClient.Components
 {
 	using System;
 	using VRC.SDKBase;

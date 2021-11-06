@@ -1,18 +1,20 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
-    using AstroLibrary.Console;
     using VRC.Udon.ProgramSources;
 
-    internal class UdonPrograms 
+    internal class UdonPrograms
     {
         private static string InteractTriggerIdentifier = "VRC_AstroInteract";
         private static string PickupIdentifier = "VRC_AstroPickup";
 
-
         // Good For buttons and such.
-        private static SerializedUdonProgramAsset _InteractProgram { get; set; }
+        private static SerializedUdonProgramAsset _InteractProgram { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
         internal static SerializedUdonProgramAsset InteractProgram
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (_InteractProgram != null)
@@ -37,9 +39,11 @@
             }
         }
 
-        private static SerializedUdonProgramAsset _PickupProgram { get; set; }
+        private static SerializedUdonProgramAsset _PickupProgram { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+
         internal static SerializedUdonProgramAsset PickupProgram
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (_PickupProgram != null)

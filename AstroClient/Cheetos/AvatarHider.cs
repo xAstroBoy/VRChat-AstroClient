@@ -25,7 +25,7 @@
             VRC_AvatarDescriptor VRC_AvatarDescriptor)
         {
             if (VRCAvatarManager == null || Avatar == null) throw new ArgumentNullException();
-            if (HideAvatar && Utils.LocalPlayer.GetPlayer().GetUserID().Equals(Avatar.transform.root.GetComponent<Player>().GetUserID()))
+            if (HideAvatar && Player.GetAPIUser().IsSelf)
             {
                 DestroyAvatar(Avatar);
                 ModConsole.DebugLog("Your avatar was hidden.");

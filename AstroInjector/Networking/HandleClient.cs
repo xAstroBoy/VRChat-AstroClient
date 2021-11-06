@@ -29,13 +29,13 @@
         private const int SecretKeyClient = 2454;
         private const int SecretKeyLoader = 2353;
 
-        private const int PacketSize = 1024;
+        private const int PacketSize = 32768;
 
         internal void StartClient(TcpClient clientSocket, int clientId)
         {
+            Console.WriteLine($"PacketSize: {PacketSize}");
             ClientID = clientId;
             ClientSocket = clientSocket;
-            ClientSocket.SendTimeout = 2000;
             clientStream = ClientSocket.GetStream();
             Task task = new Task(StartThread);
             task.Start();
@@ -45,15 +45,10 @@
         {
             IsConnected = false;
             ShouldReconnect = reconnect;
-            try
-            {
-                clientStream.Close();
-            }
-            catch { }
 
             try
             {
-                ClientSocket.Close();
+                ClientSocket.Client.Close();
             }
             catch { }
         }
@@ -99,8 +94,10 @@
                 {
                     clientStream.Write(bytes, 0, bytes.Length);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    Console.WriteLine($"Failed to send Event {packetData.NetworkEventID}");
+                    Console.WriteLine(ex.ToString());
                     Disconnect();
                 }
             }
@@ -188,7 +185,7 @@
                             {
                                 //Console.WriteLine($"WARNING: Possible internet issue? Read {read} excpected to read {toRead}..");
                             }
-                            Console.WriteLine($"Downloading: {totalRead} / {remaining} / {len} - {read}/{toRead}");
+                            //Console.WriteLine($"Downloading: {totalRead} / {remaining} / {len} - {read}/{toRead}");
                             //Console.WriteLine($"----------" +
                             //    $"\r\n read: {read}" +
                             //    $"\r\n toRead: {toRead}" +
@@ -201,7 +198,8 @@
                             //remaining = 0;
                             Console.WriteLine($"ERROR: 0x000001A");
                             Console.WriteLine($"{totalRead}/{len}");
-                            Thread.Sleep(1000);
+                            Environment.Exit(0);
+                            break;
                         }
                     } 
                     catch

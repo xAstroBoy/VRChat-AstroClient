@@ -20,6 +20,7 @@
         }
 
         private bool DebugMode = false;
+
         private void Debug(string msg)
         {
             if (DebugMode) ModConsole.DebugLog($"[SingleTag Debug] : {msg}");
@@ -176,14 +177,16 @@
 
         internal string TagName
         {
+            [HideFromIl2Cpp]
             get => $"SingleTag:{_allocatedStack}";
         }
 
         private int _allocatedStack;
         private int AllocatedStack
         {
-            
+            [HideFromIl2Cpp]
             get => _allocatedStack;
+            [HideFromIl2Cpp]
             set
             {
                 if (SpawnedTag != null)
@@ -201,7 +204,7 @@
 
         internal int InternalStack;
 
-        internal Player Player { get; private set; }
+        internal Player Player { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         private Transform Player_content;
 

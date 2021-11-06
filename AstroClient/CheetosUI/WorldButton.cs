@@ -6,6 +6,7 @@
     using CheetoLibrary;
     using System;
     using System.Reflection;
+    using AstroLibrary.Extensions;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
@@ -16,6 +17,10 @@
 
         internal VRC_AstroInteract interactable { get; private set; }
 
+        internal Rigidbody RigidBody { get; private set; }
+
+        internal TextMeshPro front_text { get; private set; }
+
         internal WorldButton(Vector3 position, Quaternion rotation, string label, Action action)
         {
             gameObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -24,6 +29,8 @@
             gameObject.transform.position = position;
             gameObject.transform.rotation = rotation;
             gameObject.transform.localScale = new Vector3(0.25f, 0.1f, 0.1f);
+            RigidBody = gameObject.GetOrAddComponent<Rigidbody>();
+            RigidBody.isKinematic = true;
 
             var front = GameObject.CreatePrimitive(PrimitiveType.Quad);
             front.name = "Front";
@@ -33,7 +40,7 @@
             front.transform.localPosition -= new Vector3(0f, 0f, 0.51f);
             front.transform.rotation = gameObject.transform.rotation;
             front.transform.localScale = new Vector3(1f, 1f, 1f);
-
+            front.Set_Colliders_isTrigger(true);
             MiscUtils.DelayFunction(0.2f, () =>
             {
                 var AstroTrigger = front.AddComponent<VRC_AstroInteract>();
@@ -63,6 +70,7 @@
             front_canvas.layer = LayerMask.NameToLayer("UI");
             _ = front_canvas.AddComponent<Canvas>();
             _ = front_canvas.AddComponent<CanvasScaler>();
+            front_canvas.Set_Colliders_isTrigger(true);
 
             var textObject = new GameObject("Text");
 
@@ -72,8 +80,8 @@
             textObject.transform.localScale = new Vector3(0.01f, 0.01f, 0.004f);
             textObject.layer = LayerMask.NameToLayer("UI");
             _ = textObject.AddComponent<CanvasRenderer>();
-
-            var front_text = textObject.AddComponent<TextMeshPro>();
+            textObject.Set_Colliders_isTrigger(true);
+            front_text = textObject.AddComponent<TextMeshPro>();
             front_text.color = Color.black;
             front_text.text = label;
             front_text.richText = true;
@@ -81,6 +89,7 @@
             front_text.enableAutoSizing = true;
             front_text.fontSizeMin = 0f;
             front_text.fontSizeMax = 72f;
+
         }
     }
 }

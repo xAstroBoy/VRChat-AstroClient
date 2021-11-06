@@ -56,16 +56,38 @@
             }
         }
 
+        private Color BlockedColor
+        {
+            [HideFromIl2Cpp]
+            get
+            {
+                return ConfigManager.ESPBlockedColor;
+            }
+        }
+
+        private Color FriendColor
+        {
+            [HideFromIl2Cpp]
+            get => ConfigManager.ESPFriendColor;
+        }
+
+        private Color PublicColor
+        {
+            [HideFromIl2Cpp]
+            get => ConfigManager.PublicESPColor;
+        }
+
         internal override void OnFriended()
         {
             if (!CanActuallyEditOnEvent) return;
-            if (AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = ConfigManager.ESPFriendColor;
+            if (AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = FriendColor;
         }
 
         internal override void OnUnfriended()
         {
             if (!CanActuallyEditOnEvent) return;
-            if (!AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = ConfigManager.PublicESPColor;
+            if (!AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = PublicColor;
+            
         }
 
         internal override void OnPlayerBlockedYou(Photon.Realtime.Player player)
@@ -111,15 +133,15 @@
 
         internal override void OnPublicESPColorChanged(Color color)
         {
-            if (!CanActuallyEditOnEvent) return;
             if (!AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = color;
         }
 
+        }
         internal override void OnFriendESPColorChanged(Color color)
         {
-            if (!CanActuallyEditOnEvent) return;
             if (AssignedPlayer.GetAPIUser().IsFriend()) CurrentColor = color;
         }
+
 
         internal override void OnBlockedESPColorChanged(Color color)
         {
@@ -139,19 +161,28 @@
 
         private UnityEngine.Color? CurrentColor
         {
+            [HideFromIl2Cpp]
             get
             {
-                if (HighlightOptions != null) return HighlightOptions.highlightColor;
+                if (HighLightOptions != null)
+                {
+                    return HighLightOptions.highlightColor;
+                }
                 return null;
             }
+            [HideFromIl2Cpp]
             set
             {
-                if (HighlightOptions != null) HighlightOptions.highlightColor = value.Value;
+                if (HighLightOptions != null)
+                {
+                    HighLightOptions.highlightColor = value.Value;
+                }
             }
         }
 
         private bool CanActuallyEditOnEvent
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (CanEditValues)
@@ -168,6 +199,7 @@
 
         private bool CanEditValues
         {
+            [HideFromIl2Cpp]
             get
             {
                 return HighlightOptions != null && AssignedPlayer != null && AssignedPlayer.GetAPIUser() != null && CurrentColor.HasValue;
@@ -176,23 +208,26 @@
 
         private List<MeshRenderer> CurrentRenderers
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (SelectRegion != null) return SelectRegion.GetComponentsInChildren<MeshRenderer>(true).ToList();
                 return null;
             }
         }
-
-        private Transform SelectRegion { get; set; }
-        private HighlightsFXStandalone HighlightOptions { get; set; }
+        private Transform SelectRegion { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private HighlightsFXStandalone HighLightOptions { get; set; }
         internal bool _UseCustomColor;
 
         internal bool UseCustomColor
         {
+            [HideFromIl2Cpp]
             get
             {
                 return _UseCustomColor;
             }
+            [HideFromIl2Cpp]
             set
             {
                 if (value == _UseCustomColor) return;
@@ -201,6 +236,6 @@
             }
         }
 
-        internal Player AssignedPlayer { get; private set; }
+        internal Player AssignedPlayer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
     }
 }

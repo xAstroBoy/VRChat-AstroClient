@@ -21,8 +21,20 @@
             AntiGcList.Add(this);
         }
 
+        private bool DebugMode = true;
+
+        private void Debug(string msg)
+        {
+            if (DebugMode)
+            {
+                ModConsole.DebugLog($"[ESP_Tweaker Debug] : {msg}");
+            }
+        }
+
+
+
         // Use this for initialization
-        internal void Start()
+            ESPColor = DefaultColor;
         {
             ESPColor = DefaultColor;
             ObjMeshRenderers = gameObject.GetComponentsInChildren<MeshRenderer>(true);
@@ -47,11 +59,37 @@
                     {
                         HighlightOptions.AddRenderer(obj);
                     }
-                    else
-                    {
-                        HighlightOptions.RemoveRenderer(obj);
+                        HighLightOptions.RemoveRenderer(obj);
                     }
                 }
+            }
+        }
+
+
+        internal void ResetColor()
+        {
+            ESPColor = DefaultColor;
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighLighterColor(DefaultColor);
+            ESPColor = GetDefaultColor();
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighLighterColor(GetDefaultColor());
+            ESPColor = GetDefaultColor();
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighLighterColor(GetDefaultColor());
+            ESPColor = GetDefaultColor();
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighLighterColor(GetDefaultColor());
+            ESPColor = GetDefaultColor();
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighLighterColor(GetDefaultColor());
+            {
+                HighLightOptions.SetHighLighterColor(GetDefaultColor());
             }
         }
 
@@ -63,17 +101,17 @@
         internal void OnEnable()
         {
             SetupHighlighter();
-        }
-
-        internal void OnDisable()
+        internal Color GetCurrentESPColor
         {
-            HighlightOptions.DestroyHighlighter();
-        }
+            [HideFromIl2Cpp]
+            get => HighLightOptions.highlightColor;
 
-        internal void ChangeColor(Color newcolor)
-        {
-            ESPColor = newcolor;
-            HighlightOptions?.SetHighlighterColor(newcolor);
+
+        internal Color ESPColor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal Color DefaultColor { [HideFromIl2Cpp] get; } = Color.yellow;
+
+        internal HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
         }
 
         internal void ResetColor()
@@ -81,9 +119,16 @@
             ChangeColor(DefaultColor);
         }
 
-        internal void ChangeColor(string HexColor)
+        internal Color GetCurrentESPColor
         {
-            ChangeColor(ColorUtils.HexToColor(HexColor));
+            get
+            {
+                return HighLightOptions.highlightColor;
+            }
         }
+
+        internal Color ESPColor { get; private set; }
+        internal HighlightsFXStandalone HighLightOptions { get; private set; }
+        private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
     }
 }

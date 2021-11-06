@@ -1,4 +1,6 @@
-﻿namespace AstroClient
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient
 {
     using AstroButtonAPI;
     using AstroClient.Components;
@@ -18,18 +20,23 @@
     internal class JarRoleController : GameEvents
     {
         private static bool _ViewRoles;
-        internal static bool IsMurder4World { get; private set; }
-        internal static bool IsAmongUsWorld { get; private set; }
+
+        internal static bool IsMurder4World { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+
+        internal static bool IsAmongUsWorld { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+
         internal static EventHandler<BoolEventsArgs> Event_OnViewRolesPropertyChanged;
 
         // TODO: Make A Action event to bind on JarRoleESP Component.
 
         internal static bool ViewRoles
         {
+            [HideFromIl2Cpp]
             get
             {
                 return _ViewRoles;
             }
+            [HideFromIl2Cpp]
             set
             {
                 _ViewRoles = value;
@@ -49,6 +56,7 @@
         internal static JarRoleESP _CurrentPlayerRoleESP = null;
         internal static JarRoleESP CurrentPlayerRoleESP
         {
+            [HideFromIl2Cpp]
             get
             {
                 //this just looks weird
@@ -56,17 +64,20 @@
                 {
                     case null:
                         return _CurrentPlayerRoleESP = Utils.LocalPlayer.GetPlayer().gameObject.GetComponent<JarRoleESP>();
+
                     default:
                         return _CurrentPlayerRoleESP;
                 }
             }
         }
 
-        internal static QMSingleToggleButton Murder4RolesRevealerToggle { get; set; }
-        internal static QMSingleToggleButton AmongUSRolesRevealerToggle { get; set; }
+        internal static QMSingleToggleButton Murder4RolesRevealerToggle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal static QMSingleToggleButton AmongUSRolesRevealerToggle { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        internal static List<LinkedNodes> JarRoleLinks { get; private set; } = new List<LinkedNodes>();
-        internal static List<JarRoleESP> RoleEspComponents { get; private set; } = new List<JarRoleESP>();
+        internal static List<LinkedNodes> JarRoleLinks { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = new List<LinkedNodes>();
+
+        internal static List<JarRoleESP> RoleEspComponents { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; } = new List<JarRoleESP>();
+
         internal static LinkedNodes GetLinkedNode(int value) => JarRoleLinks.Where(x => x.Nodevalue == value).DefaultIfEmpty(null).First();
         internal static JarRoleESP GetLinkedComponent(int value) => RoleEspComponents.Where(x => x.LinkedNode.Nodevalue == value).DefaultIfEmpty(null).First();
 
@@ -93,10 +104,10 @@
 
         internal class LinkedNodes
         {
-            internal Transform Entry { get; set; }
-            internal Transform Node { get; set; }
-            internal JarNodeReader NodeReader { get; set; }
-            internal int Nodevalue { get; set; }
+            internal Transform Entry { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+            internal Transform Node { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+            internal JarNodeReader NodeReader { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+            internal int Nodevalue { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
             internal LinkedNodes(Transform EntryObj, Transform Nodeobj, JarNodeReader JarNodeReader, int linknumber)
             {
@@ -109,6 +120,7 @@
 
         internal static string DescPart
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (IsAmongUsWorld) return "ability To see who is the impostor";

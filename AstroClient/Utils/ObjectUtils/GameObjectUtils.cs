@@ -166,7 +166,6 @@
             {
                 obj.TryTakeOwnership();
                 var control = obj.GetComponent<RigidBodyController>();
-                var SyncPhysic = obj.GetComponent<SyncPhysics>();
 
                 if (control != null)
                 {
@@ -174,10 +173,19 @@
                     {
                         control.RestoreOriginalBody();
                     }
+
+                    if (control.SyncPhysics != null)
+                    {
+                        control.SyncPhysics.RespawnItem();
+                    }
                 }
-                if (SyncPhysic != null)
+                else
                 {
-                    SyncPhysic.RespawnItem();
+                    var SyncPhysic = obj.GetComponent<SyncPhysics>();
+                    if (SyncPhysic != null)
+                    {
+                        SyncPhysic.RespawnItem();
+                    }
                 }
             }
         }

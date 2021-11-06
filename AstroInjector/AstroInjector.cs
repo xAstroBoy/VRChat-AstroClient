@@ -14,20 +14,20 @@
         internal static string[] DebugMelonPaths =
         {
             @"Debug\AstroClient.dll",
-			//@"Debug\AstroClientCore.dll",
+            @"Debug\AstroClientCore.dll",
 			//@"Debug\DontTouchMyClient.dll",
 			//@"Debug\MonoDumper.dll",
 		};
 
         internal static string[] DebugLibraryPaths =
         {
-            //@"Debug\Libs\AstroLibrary.dll",
+            @"Debug\Libs\AstroLibrary.dll",
         };
 
         internal static string[] DebugModulePaths =
         {
-			//@"Debug\Module\AstroTestModule.dll"
-		};
+            @"Debug\Module\AstroTestModule.dll"
+        };
 
 #endif
 
@@ -40,12 +40,17 @@
 
         internal static string[] EmbededMelonsPaths =
         {
-            //@"AstroInjector.Resources.DontTouchMyClient.dll",
+            @"AstroInjector.Resources.DontTouchMyClient.dll",
         };
 
         public AstroInjector()
         {
             LoadEmbeddedLibraries();
+         
+        }
+
+        public override void OnApplicationStart()
+        {
             if (Environment.GetCommandLineArgs().Any(a => a.Contains("RinBot")))
             {
                 MelonLogger.Msg($"Detected RinBot: Skipping AstroClient Loading");

@@ -1,6 +1,6 @@
 ﻿#pragma warning disable CS0618
 
-namespace AstroClient.Components
+using UnhollowerBaseLib.Attributes; namespace AstroClient.Components
 {
 	using System;
 	using System.Reflection;

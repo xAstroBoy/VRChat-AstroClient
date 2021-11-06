@@ -2,19 +2,15 @@
 {
     using AstroClientCore.Events;
     using System;
-    using System.Collections.Generic;
-    using UnityEngine;
 
     [RegisterComponent]
     public class EspEvents : GameEventsBehaviour
     {
         public EspEvents(IntPtr obj0) : base(obj0)
         {
-
             ConfigManager.Event_OnPublicESPColorChanged += Internal_OnPublicESPColorChanged;
             ConfigManager.Event_OnFriendESPColorChanged += Internal_OnFriendESPColorChanged;
             ConfigManager.Event_OnBlockedESPColorChanged += Internal_OnBlockedESPColorChanged;
-
         }
 
         private void Internal_OnPublicESPColorChanged(object sender, ColorEventArgs e)

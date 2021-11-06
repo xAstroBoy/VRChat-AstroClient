@@ -1,13 +1,15 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using MelonLoader;
+    using Photon.Realtime;
     using System;
     using System.Collections;
     using System.Collections.Generic;
-    using Photon.Realtime;
     using VRC.Core;
 
     [RegisterComponent]
@@ -23,13 +25,13 @@
         // Use this for initialization
         internal void Start()
         {
-            MelonCoroutines.Start(OnUserInit(() => {
+            MelonCoroutines.Start(OnUserInit(() =>
+            {
                 if (Original_DisplayName != null) ModConsole.DebugLog($"Spoofer : Got Current DisplayName {Original_DisplayName}");
-                else ModConsole.DebugLog($"Spoofer : Failed To Get Current DisplayName!");
+                else ModConsole.DebugLog($"Spoofer : Failed To [HideFromIl2Cpp] get Current DisplayName!");
             }));
         }
 
-        //run some code when the user is initialized
         private IEnumerator OnUserInit(Action code)
         {
             while (user == null) yield return null;
@@ -38,11 +40,13 @@
 
         private string DisplayName
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (user != null) return user._displayName_k__BackingField;
                 return null;
             }
+            [HideFromIl2Cpp]
             set
             {
                 if (user != null) user._displayName_k__BackingField = value;
@@ -64,10 +68,10 @@
         {
             SafetyCheck();
             if (PlayerSpooferUtils.SpoofAsWorldAuthor)
-			{
+            {
                 IsSpooferActive = true;
                 SpoofedName = WorldUtils.AuthorName;
-			}
+            }
             else if (PlayerSpooferUtils.SpoofAsInstanceMaster && WorldUtils.IsInWorld)
             {
                 IsSpooferActive = true;
@@ -102,15 +106,26 @@
         }
 
 
-        internal APIUser user { get => PlayerUtils.GetAPIUser(); }
+            {
+                if (isFistJoin && !isSecondJoin) isSecondJoin = true;
+            }
+        }
+
+        internal APIUser user
+        {
+            [HideFromIl2Cpp]
+            get => PlayerUtils.GetAPIUser();
+        }
 
         private bool _IsSpooferActive;
         internal bool IsSpooferActive // TODO : Make it more customizable, for now there's nothing else.
         {
+            [HideFromIl2Cpp]
             get => _IsSpooferActive;
+            [HideFromIl2Cpp]
             set
             {
-                if(!isSecondJoin) value = false;
+                if (!isSecondJoin) value = false;
                 _IsSpooferActive = value;
                 if (value)
                 {
@@ -127,13 +142,16 @@
             }
         }
 
-        private bool isFirstJoin = false;
+        private bool isFistJoin = false;
+
         private bool isSecondJoin = false;
 
         private string _SpoofedName = string.Empty;
         internal string SpoofedName
         {
+            [HideFromIl2Cpp]
             get => _SpoofedName;
+            [HideFromIl2Cpp]
             set
             {
                 _SpoofedName = value;
@@ -144,10 +162,13 @@
                 }
             }
         }
+
         private bool Has_Original_Displayname;
         private string _Original_DisplayName;
+
         internal string Original_DisplayName
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (!Has_Original_Displayname)
@@ -162,6 +183,5 @@
                 return null;
             }
         }
-
     }
 }

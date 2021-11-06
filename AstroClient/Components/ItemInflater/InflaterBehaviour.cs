@@ -1,10 +1,11 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using System;
     using UnityEngine;
 
     [RegisterComponent]
-
     public class InflaterBehaviour : GameEventsBehaviour
     {
         public InflaterBehaviour(IntPtr ptr) : base(ptr)
@@ -68,6 +69,7 @@
         {
             OnInflaterPropertyChanged += action;
         }
+
         private void Run_OnOnInflaterUpdate()
         {
             OnInflaterUpdate?.Invoke();
@@ -85,6 +87,7 @@
         }
 
         private event Action? OnInflaterPropertyChanged;
+
         private event Action? OnInflaterUpdate;
 
         #endregion actions
@@ -96,7 +99,9 @@
 
         internal Vector3 NewSize
         {
+            [HideFromIl2Cpp]
             get => _NewSize;
+            [HideFromIl2Cpp]
             set
             {
                 _NewSize = value;
@@ -105,6 +110,5 @@
         }
 
         private Vector3 OriginalSize;
-
     }
 }

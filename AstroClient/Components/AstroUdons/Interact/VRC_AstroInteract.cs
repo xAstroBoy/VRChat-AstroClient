@@ -1,3 +1,5 @@
+using UnhollowerBaseLib.Attributes;
+
 namespace AstroClient.Components
 {
     using AstroLibrary.Console;
@@ -16,7 +18,7 @@ namespace AstroClient.Components
         {
         }
 
-        private SerializedUdonProgramAsset AssignedProgram { get; } = UdonPrograms.InteractProgram;
+        private SerializedUdonProgramAsset AssignedProgram { [HideFromIl2Cpp] get; } = UdonPrograms.InteractProgram;
 
         private void Start()
         {
@@ -79,6 +81,7 @@ namespace AstroClient.Components
 
         private bool Get_OnInteract
         {
+            [HideFromIl2Cpp]
             get
             {
                 var result = IUdonHeap.GetHeapVariable(2u).Unbox<bool>();
@@ -118,7 +121,9 @@ namespace AstroClient.Components
 
         internal string interactText
         {
+            [HideFromIl2Cpp]
             get => _interactText;
+            [HideFromIl2Cpp]
             set
             {
                 _interactText = value;
@@ -133,12 +138,13 @@ namespace AstroClient.Components
             }
         }
 
-        internal bool ForceInteractiveText { get; set; } = false;
+        internal bool ForceInteractiveText { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
 
         private VRCInteractable _VRCInteractable;
 
         private VRCInteractable VRCInteractable
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (_VRCInteractable == null)
@@ -153,8 +159,8 @@ namespace AstroClient.Components
             }
         }
 
-        internal Action OnInteract { get; set; }
-        private UdonBehaviour UdonBehaviour { get; set; }
-        private IUdonHeap IUdonHeap { get; set; }
+        internal Action OnInteract { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private UdonBehaviour UdonBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private IUdonHeap IUdonHeap { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
 }

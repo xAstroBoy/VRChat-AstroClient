@@ -13,6 +13,7 @@
     using System.Reflection;
     using System.Windows.Forms;
     using UnityEngine;
+    using VRC.SDK3.Components;
     using VRC.SDKBase;
     using Color = System.Drawing.Color;
 
@@ -312,16 +313,6 @@
             }
         }
 
-        internal static bool SetValue(this TextAsset textasset, string NewText)
-        {
-            var TextAssetField = typeof(TextAsset).GetField("text", BindingFlags.Instance | BindingFlags.NonPublic);
-            if (TextAssetField != null)
-            {
-                TextAssetField.SetValue(textasset, NewText);
-            }
-
-            return textasset.text.Equals(NewText);
-        }
         internal static List<Transform> Get_Childs(this Transform obj)
         {
             List<Transform> childs = new List<Transform>();
@@ -377,6 +368,20 @@
         internal static UnityEngine.Color ToUnityEngineColor(this System.Drawing.Color Color)
         {
             return ColorUtils.ToUnityEngineColor(Color);
+        }
+
+        internal static bool isMirror(this GameObject item)
+        {
+            return item.GetComponent<VRC_MirrorReflection>() != null ||
+                   item.GetComponent<MirrorReflection>() != null ||
+                   item.GetComponent<VRCSDK2.VRC_MirrorReflection>() != null ||
+                   item.GetComponent<VRCMirrorReflection>() != null;
+
+        }
+
+        internal static bool isMirror(this Transform item)
+        {
+            return item.gameObject.isMirror();
         }
     }
 }

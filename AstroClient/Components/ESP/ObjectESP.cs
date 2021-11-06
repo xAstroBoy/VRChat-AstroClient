@@ -1,4 +1,4 @@
-﻿namespace AstroClient.components
+﻿using UnhollowerBaseLib.Attributes; namespace AstroClient.components
 {
 	using AstroClient.ConsoleUtils;
 	using AstroClient.extensions;
@@ -122,7 +122,7 @@
 
 		internal Color GetCurrentESPColor
 		{
-			get
+			[HideFromIl2Cpp] get
 			{
 				return HighLightOptions.highlightColor;
 			}
@@ -132,14 +132,14 @@
 
 		internal string Identifier
 		{
-			get
+			[HideFromIl2Cpp] get
 			{
 				return _Identifier;
 			}
-			set
+			[HideFromIl2Cpp] set
 			{
 				_Identifier = value;
-				ModConsole.DebugLog($"Identifier for ObjectESP bound to {gameObject.name}, should be set to {value} , currently _ID = {_Identifier}, Current ID {Identifier}");
+				ModConsole.DebugLog($"Identifier for ObjectESP bound to {gameObject.name}, should be [HideFromIl2Cpp] set to {value} , currently _ID = {_Identifier}, Current ID {Identifier}");
 			}
 		}
 

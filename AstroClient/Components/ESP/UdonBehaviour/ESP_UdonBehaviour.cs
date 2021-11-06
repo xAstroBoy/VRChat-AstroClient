@@ -18,6 +18,16 @@
             AntiGcList.Add(this);
         }
 
+        private bool DebugMode = true;
+
+        private void Debug(string msg)
+        {
+            if (DebugMode)
+            {
+                ModConsole.DebugLog($"[ESP_UdonBehaviour Debug] : {msg}");
+            }
+        }
+
         // Use this for initialization
         internal void Start()
         {
@@ -31,11 +41,17 @@
             }
             SetupHighlighter();
             for (int i = 0; i < ObjMeshRenderers.Count; i++)
-			{
-				MeshRenderer obj = ObjMeshRenderers[i];
-				if (obj != null && obj.gameObject.active) HighlightOptions.AddRenderer(obj);
-				else HighlightOptions.RemoveRenderer(obj);
-			}
+            {
+                MeshRenderer obj = ObjMeshRenderers[i];
+                if (obj != null && obj.gameObject.active)
+                {
+                    HighLightOptions.AddRenderer(obj);
+                }
+                else
+                {
+                    HighLightOptions.RemoveRenderer(obj);
+                }
+            }
         }
 
         private void SetupHighlighter()
@@ -45,12 +61,25 @@
             {
                 HighlightOptions.SetHighlighterColor(ESPColor);
                 for (int i = 0; i < ObjMeshRenderers.Count; i++)
-				{
-					MeshRenderer obj = ObjMeshRenderers[i];
-					if (obj != null && obj.gameObject.active) HighlightOptions.AddRenderer(obj);
-					else HighlightOptions.RemoveRenderer(obj);
-				}
+                {
+                    MeshRenderer obj = ObjMeshRenderers[i];
+                    if (obj != null && obj.gameObject.active)
+                    {
+                        HighLightOptions.AddRenderer(obj);
+                    }
+                    else
+                    {
+                        HighLightOptions.RemoveRenderer(obj);
+                    }
+                }
             }
+        }
+
+
+        internal void ResetColor()
+        {
+            ESPColor = DefaultColor;
+            HighLightOptions?.SetHighLighterColor(DefaultColor);
         }
 
         internal void OnDestroy()
@@ -79,13 +108,16 @@
             ChangeColor(DefaultColor);
         }
 
-        internal void ChangeColor(string HexColor)
+        internal Color GetCurrentESPColor
         {
-            ChangeColor(ColorUtils.HexToColor(HexColor));
+            [HideFromIl2Cpp]
+            get => HighLightOptions.highlightColor;
         }
 
-        internal Color ESPColor { get; private set; }
-        internal HighlightsFXStandalone HighlightOptions { get; private set; }
+        internal Color ESPColor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal Color DefaultColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("CD14C7");
+
+        internal HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
         private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
     }
 }

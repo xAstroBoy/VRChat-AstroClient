@@ -45,11 +45,12 @@
                                                     var item = UnboxVariable.Unpack_String();
                                                     if (item != null && item.IsNotNullOrEmptyOrWhiteSpace())
                                                     {
-                                                        if (item.ContainsString(find))
+                                                        if (item.isMatch(find))
                                                         {
                                                             result++;
-                                                            ModConsole.DebugLog("Found a single string match!");
-                                                            UdonHeapEditor.PatchHeap(unpackedudon, symbol, item.ReplaceWholeWord(find, replacement), true);
+                                                            var modifiedstring = item.ReplaceWholeWord(find, replacement);
+                                                            //ModConsole.DebugLog($"Modified a String , Original : {item}, Modified : {modifiedstring}");
+                                                            UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, modifiedstring, true);
                                                         }
                                                     }
 
@@ -66,18 +67,17 @@
                                                         {
                                                             if (item != null && item.IsNotNullOrEmptyOrWhiteSpace())
                                                             {
-                                                                if (item.ContainsString(find))
+                                                                if (item.Equals(find, StringComparison.InvariantCultureIgnoreCase))
                                                                 {
                                                                     result++;
-                                                                    patchedlist.Add(item.ReplaceWholeWord(find, replacement));
+                                                                    var modifiedstring = item.ReplaceWholeWord(find, replacement);
+                                                                    //ModConsole.DebugLog($"Modified String in Array , Original : {item}, Modified : {modifiedstring}");
+                                                                    patchedlist.Add(modifiedstring);
                                                                     modified = true;
-                                                                    ModConsole.DebugLog("Found a match in a Array!");
-                                                                }
-                                                                else
-                                                                {
-                                                                    patchedlist.Add(item);
+                                                                    continue;
                                                                 }
                                                             }
+                                                            patchedlist.Add(item);
                                                         }
                                                         if (modified)
                                                         {
@@ -92,11 +92,13 @@
                                                     var item = UnboxVariable.Unpack_TextMeshPro();
                                                     if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
                                                     {
-                                                        if (item.text.ContainsString(find))
+                                                        if (item.text.isMatch(find))
                                                         {
                                                             result++;
-                                                            item.text = item.text.ReplaceWholeWord(find, replacement);
-                                                            ModConsole.DebugLog("Found a single string match!");
+                                                            var modifiedstring = item.text.ReplaceWholeWord(find, replacement);
+                                                            //ModConsole.DebugLog($"Modified String in TextMeshPro , Original : {item}, Modified : {modifiedstring}");
+
+                                                            item.text = modifiedstring;
                                                             UdonHeapEditor.PatchHeap(unpackedudon.IUdonHeap, address, item, true);
                                                         }
                                                     }
@@ -114,18 +116,18 @@
                                                         {
                                                             if (item.text != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
                                                             {
-                                                                if (item.text.ContainsString(find))
+                                                                if (item.text.isMatch(find))
                                                                 {
                                                                     result++;
-                                                                    item.text = item.text.ReplaceWholeWord(find, replacement);
+                                                                    var modifiedstring = item.text.ReplaceWholeWord(find, replacement);
+                                                                    //ModConsole.DebugLog($"Modified String in TextMeshPro Array , Original : {item}, Modified : {modifiedstring}");
+                                                                    item.text = modifiedstring;
                                                                     patchedlist.Add(item);
                                                                     modified = true;
-                                                                }
-                                                                else
-                                                                {
-                                                                    patchedlist.Add(item);
+                                                                    continue;
                                                                 }
                                                             }
+                                                            patchedlist.Add(item);
                                                         }
                                                         if (modified)
                                                         {
@@ -141,7 +143,7 @@
                                                     var item = UnboxVariable.Unpack_TextAsset();
                                                     if (item != null && item.text.IsNotNullOrEmptyOrWhiteSpace())
                                                     {
-                                                        if (item.text.ContainsString(find))
+                                                        if (item.text.isMatch(find))
                                                         {
                                                             var patchedstr = item.text.ReplaceWholeWord(find, replacement);
                                                             result++;
@@ -164,7 +166,7 @@
                                                             if (item.text != null &&
                                                                 item.text.IsNotNullOrEmptyOrWhiteSpace())
                                                             {
-                                                                if (item.text.ContainsString(find))
+                                                                if (item.text.isMatch(find))
                                                                 {
                                                                     result++;
                                                                     var patchedstr = item.text.ReplaceWholeWord(find, replacement);

@@ -21,6 +21,16 @@
             AntiGcList.Add(this);
         }
 
+        private bool DebugMode = true;
+
+        private void Debug(string msg)
+        {
+            if (DebugMode)
+            {
+                ModConsole.DebugLog($"[ESP_Pickup Debug] : {msg}");
+            }
+        }
+
         // Use this for initialization
         internal void Start()
         {
@@ -32,6 +42,7 @@
                 Destroy(this);
                 return;
             }
+
             SetupHighlighter();
             for (int i = 0; i < ObjMeshRenderers.Count; i++)
             {
@@ -46,7 +57,12 @@
             HighlightOptions ??= EspHelper.HighlightFXCamera.AddHighlighter();
             if (HighlightOptions != null)
             {
-                HighlightOptions.SetHighlighterColor(ESPColor);
+                HighLightOptions = EspHelper.HighLightFXCamera.AddHighlighter();
+            }
+
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.SetHighLighterColor(ESPColor);
                 for (int i = 0; i < ObjMeshRenderers.Count; i++)
                 {
                     MeshRenderer obj = ObjMeshRenderers[i];
@@ -74,17 +90,27 @@
         internal void ChangeColor(Color newcolor)
         {
             ESPColor = newcolor;
-            HighlightOptions?.SetHighlighterColor(newcolor);
+            if (HighLightOptions != null)
+            {
+                HighLightOptions.highlightColor = newcolor;
+            }
         }
 
         internal void ResetColor()
         {
-            ChangeColor(DefaultColor);
+            ESPColor = DefaultColor;
+            HighLightOptions?.SetHighLighterColor(DefaultColor);
         }
 
-        internal void ChangeColor(string HexColor)
+        internal Color GetCurrentESPColor
         {
-            ChangeColor(ColorUtils.HexToColor(HexColor));
+            [HideFromIl2Cpp] get { return HighLightOptions.highlightColor; }
         }
+
+        internal Color ESPColor { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal Color DefaultColor { [HideFromIl2Cpp] get; } = ColorUtils.HexToColor("4AB30D");
+
+        internal HighlightsFXStandalone HighLightOptions { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        private UnhollowerBaseLib.Il2CppArrayBase<MeshRenderer> ObjMeshRenderers;
     }
 }

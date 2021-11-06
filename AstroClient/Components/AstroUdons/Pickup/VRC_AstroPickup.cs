@@ -1,3 +1,5 @@
+using UnhollowerBaseLib.Attributes;
+
 namespace AstroClient.Components
 {
     using AstroLibrary.Console;
@@ -16,7 +18,7 @@ namespace AstroClient.Components
         {
         }
 
-        private SerializedUdonProgramAsset AssignedProgram { get; } = UdonPrograms.PickupProgram;
+        private SerializedUdonProgramAsset AssignedProgram { [HideFromIl2Cpp] get; } = UdonPrograms.PickupProgram;
 
         private void Start()
         {
@@ -33,7 +35,7 @@ namespace AstroClient.Components
                 UdonBehaviour.InitializeUdonContent();
                 UdonBehaviour.Start();
             }
-            if(!UdonBehaviour.enabled)
+            if (!UdonBehaviour.enabled)
             {
                 UdonBehaviour.enabled = true;
             }
@@ -127,8 +129,8 @@ namespace AstroClient.Components
             }
         }
 
-        // needed since the program is currently programmed to set the bools only to true.
-        // This will edit and set the values to false hence how the Custom trigger works, by listening to these booleans.
+        // needed since the program is currently programmed to [HideFromIl2Cpp] set the bools only to true.
+        // This will edit and [HideFromIl2Cpp] set the values to false hence how the Custom trigger works, by listening to these booleans.
         private void SetBackToFalse(uint one)
         {
             if (IUdonHeap == null)
@@ -140,6 +142,7 @@ namespace AstroClient.Components
 
         private bool Get_OnPickup
         {
+            [HideFromIl2Cpp]
             get
             {
                 var result = IUdonHeap.GetHeapVariable(Addresses.OnPickup).Unbox<bool>();
@@ -153,6 +156,7 @@ namespace AstroClient.Components
 
         private bool Get_OnPickupUseUp
         {
+            [HideFromIl2Cpp]
             get
             {
                 var result = IUdonHeap.GetHeapVariable(Addresses.OnPickupUseUp).Unbox<bool>();
@@ -166,6 +170,7 @@ namespace AstroClient.Components
 
         private bool Get_OnPickupUseDown
         {
+            [HideFromIl2Cpp]
             get
             {
                 var result = IUdonHeap.GetHeapVariable(Addresses.OnPickupUseDown).Unbox<bool>();
@@ -179,6 +184,7 @@ namespace AstroClient.Components
 
         private bool Get_OnDrop
         {
+            [HideFromIl2Cpp]
             get
             {
                 var result = IUdonHeap.GetHeapVariable(Addresses.OnDrop).Unbox<bool>();
@@ -194,7 +200,9 @@ namespace AstroClient.Components
 
         internal string UseText
         {
+            [HideFromIl2Cpp]
             get => _UseText;
+            [HideFromIl2Cpp]
             set
             {
                 _UseText = value;
@@ -210,7 +218,9 @@ namespace AstroClient.Components
 
         internal string InteractionText
         {
+            [HideFromIl2Cpp]
             get => _InteractionText;
+            [HideFromIl2Cpp]
             set
             {
                 _InteractionText = value;
@@ -235,17 +245,18 @@ namespace AstroClient.Components
             internal const uint AlwaysFalse = 8;
         }
 
-        internal Action OnPickup { get; set; }
-        internal Action OnPickupUseUp { get; set; }
-        internal Action OnPickupUseDown { get; set; }
-        internal Action OnDrop { get; set; }
+        internal Action OnPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Action OnPickupUseUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Action OnPickupUseDown { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        internal Action OnDrop { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         internal VRC.SDKBase.VRC_Pickup.AutoHoldMode OriginalMode;
 
-
         private PickupController _Controller;
+
         private PickupController Controller
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (_Controller == null)
@@ -256,7 +267,7 @@ namespace AstroClient.Components
             }
         }
 
-        private UdonBehaviour UdonBehaviour { get; set; }
-        private IUdonHeap IUdonHeap { get; set; }
+        private UdonBehaviour UdonBehaviour { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private IUdonHeap IUdonHeap { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
     }
 }

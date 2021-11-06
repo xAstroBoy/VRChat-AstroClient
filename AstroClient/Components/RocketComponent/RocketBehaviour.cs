@@ -1,10 +1,9 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
-    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using System;
-    using System.Runtime.InteropServices;
-    using UnhollowerRuntimeLib;
     using UnityEngine;
     using static AstroClient.Forces;
 
@@ -98,15 +97,19 @@
 
         #endregion actions
 
-        private float CheckisOwnerTimeCheck { get; set; } = 0;
-        private float CheckisOwnerDelay { get; set; } = 16f;
-        private bool CheckisOwner { get; set; } = false;
+        private float CheckisOwnerTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0;
 
-        private float RocketTimeCheck { get; set; } = 0;
-        private float _RocketTimer { get; set; } = 0.07f;
+        private float CheckisOwnerDelay { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 16f;
+        private bool CheckisOwner { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+
+        private float RocketTimeCheck { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0;
+        private float _RocketTimer { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = 0.07f;
+
         internal float RocketTimer
         {
+            [HideFromIl2Cpp]
             get => _RocketTimer;
+            [HideFromIl2Cpp]
             set
             {
                 _RocketTimer = value;
@@ -114,10 +117,13 @@
             }
         }
 
-        private bool _ShouldBeAlwaysUp { get; set; } = false;
+        private bool _ShouldBeAlwaysUp { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+
         internal bool ShouldBeAlwaysUp
         {
+            [HideFromIl2Cpp]
             get => _ShouldBeAlwaysUp;
+            [HideFromIl2Cpp]
             set
             {
                 _ShouldBeAlwaysUp = value;
@@ -125,10 +131,13 @@
             }
         }
 
-        private bool _UseGravity { get; set; } = false;
+        private bool _UseGravity { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = false;
+
         internal bool UseGravity
         {
+            [HideFromIl2Cpp]
             get => _UseGravity;
+            [HideFromIl2Cpp]
             set
             {
                 _UseGravity = value;
@@ -138,21 +147,26 @@
 
         private bool isCurrentOwner
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (CheckisOwner) return gameObject.TryTakeOwnership();
                 else return true;
             }
         }
+
         private bool isHeld => PickupController.IsHeld;
 
         private bool _HasRequiredSettings = false;
+
         private bool HasRequiredSettings
         {
+            [HideFromIl2Cpp]
             get => _HasRequiredSettings;
+            [HideFromIl2Cpp]
             set
             {
-                if(value.Equals(_HasRequiredSettings)) return; // Do Nothing.
+                if (value.Equals(_HasRequiredSettings)) return; // Do Nothing.
                 _HasRequiredSettings = value;
                 if (value)
                 {
@@ -173,18 +187,21 @@
             }
         }
 
-        private Rigidbody RigidBody = null;
-        private RigidBodyController RigidBodyController;
-        private PickupController PickupController;
-        private VRC_AstroPickup VRC_AstroPickup;
-        private string OriginalText_Use;
+        private Rigidbody RigidBody { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; } = null;
+        private RigidBodyController RigidBodyController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private PickupController PickupController { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private VRC_AstroPickup VRC_AstroPickup { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
+        private string OriginalText_Use { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
-        private bool isPaused;
+        private bool isPaused { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         private bool _IsEnabled;
+
         internal bool IsEnabled
         {
+            [HideFromIl2Cpp]
             get => _IsEnabled;
+            [HideFromIl2Cpp]
             set
             {
                 _IsEnabled = value;
@@ -195,7 +212,6 @@
                     else VRC_AstroPickup.UseText = "Toggle On Rocket";
                 }
             }
-
         }
     }
 }

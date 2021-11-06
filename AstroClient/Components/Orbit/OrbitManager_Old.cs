@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
@@ -165,7 +167,7 @@
 
         private static List<GameObject> _OrbitObjects = new List<GameObject>();
         private static List<GameObject> OrbitObjects;
-        internal static OrbitManager_Old Instance;
+        internal static OrbitManager_Old Instance { [HideFromIl2Cpp] get; [HideFromIl2Cpp] set; }
 
         #endregion Module
     }

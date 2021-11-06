@@ -1,4 +1,6 @@
-﻿namespace AstroClient.Components
+﻿using UnhollowerBaseLib.Attributes;
+
+namespace AstroClient.Components
 {
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
@@ -219,25 +221,31 @@
             }
             return null;
         }
-
+        [HideFromIl2Cpp]
         internal Color? Murder4GetNamePlateColor()
         {
             switch (Murder4CurrentRole)
             {
                 case Murder4Roles.Detective:
                     return DetectiveColor;
+
                 case Murder4Roles.Murderer:
                     return MurderColor;
+
                 case Murder4Roles.Bystander:
                     return BystanderColor;
+
                 case Murder4Roles.Unassigned:
                     return null;
+
                 case Murder4Roles.None:
                     return null;
+
                 default:
                     return null;
             }
         }
+        [HideFromIl2Cpp]
 
         internal Color? AmongUsGetNamePlateColor()
         {
@@ -245,12 +253,16 @@
             {
                 case AmongUsRoles.Crewmate:
                     return CrewmateColor;
+
                 case AmongUsRoles.Impostor:
                     return ImpostorColor;
+
                 case AmongUsRoles.Unassigned:
                     return null;
+
                 case AmongUsRoles.None:
                     return null;
+
                 default:
                     return null;
             }
@@ -458,13 +470,14 @@
             Null = 4,
         }
 
-        internal bool _AmongUSHasVoted { get; private set; }
+        internal bool _AmongUSHasVoted { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+
         internal bool AmongUSHasVoted
         {
-            get
-            {
-                return _AmongUSHasVoted;
-            }
+            [HideFromIl2Cpp]
+            get => _AmongUSHasVoted;
+
+            [HideFromIl2Cpp]
             set
             {
                 if (AmongUSVoteRevealTag != null)
@@ -488,6 +501,7 @@
 
         internal bool AmongUSCanVote
         {
+            [HideFromIl2Cpp]
             get
             {
                 if (AmongUsCurrentRole == AmongUsRoles.Crewmate || AmongUsCurrentRole == AmongUsRoles.Impostor) return !AmongUSHasVoted;
@@ -495,15 +509,14 @@
             }
         }
 
-        internal bool IsRPCActive { get; private set; }
+        internal bool IsRPCActive { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         private AmongUsRoles _AmongUsCurrentRole = AmongUsRoles.Unassigned;
         internal AmongUsRoles AmongUsCurrentRole
         {
-            get
-            {
-                return _AmongUsCurrentRole;
-            }
+            [HideFromIl2Cpp]
+            get => _AmongUsCurrentRole;
+            [HideFromIl2Cpp]
             private set
             {
                 _AmongUsCurrentRole = value;
@@ -514,10 +527,9 @@
         private Murder4Roles _Murder4CurrentRole = Murder4Roles.Unassigned;
         internal Murder4Roles Murder4CurrentRole
         {
-            get
-            {
-                return _Murder4CurrentRole;
-            }
+            [HideFromIl2Cpp]
+            get => _Murder4CurrentRole;
+            [HideFromIl2Cpp]
             private set
             {
                 _Murder4CurrentRole = value;
@@ -525,56 +537,44 @@
             }
         }
 
-        internal Player Player { get; private set; }
+        internal Player Player { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
 
         private PlayerESP _ESP;
         internal PlayerESP ESP
         {
-            get
-            {
-                return _ESP;
-            }
-            private set
-            {
-                _ESP = value;
-            }
+            [HideFromIl2Cpp]
+            get => _ESP;
+            [HideFromIl2Cpp]
+            private set => _ESP = value;
         }
 
         internal bool IsSelf
         {
-            get
-            {
-                return Player.GetAPIUser().IsSelf;
-            }
+            [HideFromIl2Cpp]
+            get => Player.GetAPIUser().IsSelf;
         }
-        internal bool ViewRoles { get; private set; }
 
-        internal SingleTag GameRoleTag { get; private set; }
-        internal SingleTag AmongUSVoteRevealTag { get; private set; }
-
-        internal LinkedNodes LinkedNode { get; private set; }
-
-        internal string HiddenRole { get; } = "Role Hidden";
-        internal string NoRoles { get; } = "No Role";
-
-        internal Color NoRolesColor { get; } = Color.yellow;
-        internal Color HiddenRolesColor { get; } = Color.green;
-        internal Color DefaultTextColor { get; } = Color.white;
+        internal bool ViewRoles { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal SingleTag GameRoleTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal SingleTag AmongUSVoteRevealTag { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal LinkedNodes LinkedNode { [HideFromIl2Cpp] get; [HideFromIl2Cpp] private set; }
+        internal string HiddenRole { [HideFromIl2Cpp] get; } = "Role Hidden";
+        internal string NoRoles { [HideFromIl2Cpp] get; } = "No Role";
+        internal Color NoRolesColor { [HideFromIl2Cpp] get; } = Color.yellow;
+        internal Color HiddenRolesColor { [HideFromIl2Cpp] get; } = Color.green;
+        internal Color DefaultTextColor { [HideFromIl2Cpp] get; } = Color.white;
 
         // MURDER 4 MAP
-        internal Color MurderColor { get; } = new Color(0.5377358f, 0.1648718f, 0.1728278f, 1f);
-
-        internal Color BystanderColor { get; } = new Color(0.3428266f, 0.5883213f, 0.6792453f, 1f);
-        internal Color DetectiveColor { get; } = new Color(0.2976544f, 0.251424f, 0.4716981f, 1f);
+        internal Color MurderColor { [HideFromIl2Cpp] get; } = new Color(0.5377358f, 0.1648718f, 0.1728278f, 1f);
+        internal Color BystanderColor { [HideFromIl2Cpp] get; } = new Color(0.3428266f, 0.5883213f, 0.6792453f, 1f);
+        internal Color DetectiveColor { [HideFromIl2Cpp] get; } = new Color(0.2976544f, 0.251424f, 0.4716981f, 1f);
 
         // AMONG US MAP
-        internal Color ImpostorColor { get; } = new Color(0.5377358f, 0.1648718f, 0.1728278f, 1f);
-
-        internal Color CrewmateColor { get; } = new Color(0f, 0.3228593f, 0.8396226f, 1f);
+        internal Color ImpostorColor { [HideFromIl2Cpp] get; } = new Color(0.5377358f, 0.1648718f, 0.1728278f, 1f);
+        internal Color CrewmateColor { [HideFromIl2Cpp] get; } = new Color(0f, 0.3228593f, 0.8396226f, 1f);
 
         // GENERAL
-        internal Color Unassigned { get; } = new Color(0.5f, 0.5f, 0.5f, 1f);
-
-        internal Color NoRolesAssigned { get; } = new Color(0f, 0f, 0f, 0f);
+        internal Color Unassigned { [HideFromIl2Cpp] get; } = new Color(0.5f, 0.5f, 0.5f, 1f);
+        internal Color NoRolesAssigned { [HideFromIl2Cpp] get; } = new Color(0f, 0f, 0f, 0f);
     }
 }

@@ -11,6 +11,7 @@
         internal const byte AVATAR_DATA = 21;
         internal const byte KEEP_ALIVE = 100;
         internal const byte GET_RESOURCES = 200;
+        internal const byte GOT_RESOURCE = 201;
         internal const byte AVATAR_SEARCH_TYPE = 224;
         internal const byte AVATAR_SEARCH = 225;
         internal const byte AVATAR_REPORT = 226;
