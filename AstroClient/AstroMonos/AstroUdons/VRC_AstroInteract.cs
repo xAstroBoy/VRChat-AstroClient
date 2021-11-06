@@ -3,18 +3,18 @@ namespace AstroClient.AstroMonos.AstroUdons
     using System;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
+    using CustomMono;
     using Programs;
     using UnhollowerBaseLib.Attributes;
-    using UnityEngine;
     using VRC.SDK3.Components;
     using VRC.Udon;
     using VRC.Udon.Common.Interfaces;
     using VRC.Udon.ProgramSources;
 
     [RegisterComponent]
-    public class VRC_AstroInteractable : MonoBehaviour
+    public class VRC_AstroInteract : GameEventsBehaviour
     {
-        public VRC_AstroInteractable(IntPtr ptr)
+        public VRC_AstroInteract(IntPtr ptr)
             : base(ptr)
         {
         }
@@ -29,7 +29,7 @@ namespace AstroClient.AstroMonos.AstroUdons
                 Destroy(this);
             }
 
-            UdonBehaviour = base.gameObject.AddComponent<UdonBehaviour>();
+            UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
             if (UdonBehaviour != null)
             {
                 UdonBehaviour.serializedProgramAsset = AssignedProgram;
@@ -37,6 +37,7 @@ namespace AstroClient.AstroMonos.AstroUdons
                 UdonBehaviour.Start();
                 UdonBehaviour.interactText = interactText;
             }
+
             DoChecks();
         }
 
@@ -44,7 +45,7 @@ namespace AstroClient.AstroMonos.AstroUdons
         {
             if (UdonBehaviour == null)
             {
-                UdonBehaviour = base.gameObject.AddComponent<UdonBehaviour>();
+                UdonBehaviour = gameObject.AddComponent<UdonBehaviour>();
                 UdonBehaviour.serializedProgramAsset = AssignedProgram;
                 UdonBehaviour.InitializeUdonContent();
                 UdonBehaviour.Start();
@@ -90,6 +91,7 @@ namespace AstroClient.AstroMonos.AstroUdons
                 {
                     IUdonHeap.CopyHeapVariable(3u, 2u);
                 }
+
                 return result;
             }
         }
@@ -122,8 +124,7 @@ namespace AstroClient.AstroMonos.AstroUdons
 
         internal string interactText
         {
-            [HideFromIl2Cpp]
-            get => _interactText;
+            [HideFromIl2Cpp] get => _interactText;
             [HideFromIl2Cpp]
             set
             {
@@ -132,6 +133,7 @@ namespace AstroClient.AstroMonos.AstroUdons
                 {
                     UdonBehaviour.interactText = value;
                 }
+
                 if (VRCInteractable != null)
                 {
                     VRCInteractable.interactText = value;
@@ -150,6 +152,7 @@ namespace AstroClient.AstroMonos.AstroUdons
                 {
                     return _VRCInteractable = gameObject.GetOrAddComponent<VRCInteractable>();
                 }
+
                 return _VRCInteractable;
             }
         }

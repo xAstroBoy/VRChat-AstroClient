@@ -1,10 +1,10 @@
 ﻿namespace AstroLibrary.Finder
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Console;
+    using Extensions;
     using UnityEngine;
     using UnityEngine.SceneManagement;
 

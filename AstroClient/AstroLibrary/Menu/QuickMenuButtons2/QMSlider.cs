@@ -1,10 +1,10 @@
 ﻿namespace Blaze.API
 {
-    using AstroButtonAPI;
-    using Blaze.Utils;
     using System;
+    using AstroButtonAPI;
     using UnityEngine;
     using UnityEngine.UI;
+    using Utils;
 
     class QMSlider
     {

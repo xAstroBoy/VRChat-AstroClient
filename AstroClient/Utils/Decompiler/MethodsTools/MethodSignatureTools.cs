@@ -1,10 +1,9 @@
-﻿using System.Text;
-using System.Linq;
-using System.Reflection;
-
-namespace AstroClient.Reflection
+﻿namespace AstroClient.Reflection
 {
     using System;
+    using System.Linq;
+    using System.Reflection;
+    using System.Text;
 
     public static class MethodSignatureTools
     {

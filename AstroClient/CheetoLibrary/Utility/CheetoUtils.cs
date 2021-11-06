@@ -2,12 +2,13 @@
 {
     #region Imports
 
-    using AstroLibrary.Console;
     using System;
     using System.IO;
     using System.Reflection;
+    using AstroLibrary.Console;
     using UnityEngine;
     using UnityEngine.UI;
+
     //using VRC.UI.Elements;
 
     #endregion Imports

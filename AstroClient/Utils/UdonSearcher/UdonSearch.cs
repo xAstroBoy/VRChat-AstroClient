@@ -1,17 +1,17 @@
 ﻿namespace AstroClient
 {
     using System;
-    using AstroClient.Udon;
-    using AstroClient.Udon.UdonEditor;
+    using System.Collections.Generic;
+    using System.Linq;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using System.Collections.Generic;
-    using System.Linq;
+    using Udon;
+    using Udon.UdonEditor;
     using UnityEngine;
     using VRC.Udon;
-    using static AstroClient.Variables.CustomLists;
+    using static Variables.CustomLists;
 
     internal static class UdonSearch
     {

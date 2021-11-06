@@ -1,9 +1,8 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.ScrollMenus
 {
-    using AstroClient.ItemTweakerV2.Selector;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
     using AstroButtonAPI;
+    using AstroLibrary.Utility;
+    using Selector;
     using UnityEngine;
     using VRC.SDKBase;
 

@@ -1,10 +1,9 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
     using System.Collections.Generic;
     using System.Linq;
+    using Console;
+    using Finder;
     using UnityEngine;
 
     public static class ListExtensions

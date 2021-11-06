@@ -1,8 +1,8 @@
 ﻿namespace Blaze.Utils
 {
-    using AstroLibrary.Console;
     using System;
     using System.Collections.Generic;
+    using AstroLibrary.Console;
     using UnityEngine;
     using VRC.Core;
     using VRC.UI;

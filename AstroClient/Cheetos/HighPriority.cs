@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.Cheetos
 {
-    using AstroLibrary.Console;
     using System;
     using System.Diagnostics;
+    using AstroLibrary.Console;
 
     internal class HighPriority : GameEvents
     {
@@ -42,7 +42,7 @@
             }
             catch (Exception e)
             {
-                ModConsole.Error($"Failed to set process priority");
+                ModConsole.Error("Failed to set process priority");
                 ModConsole.Exception(e);
             }
             finally

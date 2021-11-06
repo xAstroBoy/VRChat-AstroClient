@@ -1,10 +1,10 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroLibrary.Console;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using AstroClient.AstroMonos.AstroUdons.Programs;
+    using Console;
     using UnityEngine;
     using VRC.SDK3.Components;
     using VRC.SDKBase;
@@ -23,21 +23,17 @@
                     {
                         return list1;
                     }
-                    else
+
+                    var list2 = obj.GetComponentsInChildren<VRCSDK2.VRC_Interactable>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
+                    if (list2.Count() != 0 && list2 != null)
                     {
-                        var list2 = obj.GetComponentsInChildren<VRCSDK2.VRC_Interactable>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
-                        if (list2.Count() != 0 && list2 != null)
-                        {
-                            return list2;
-                        }
-                        else
-                        {
-                            var list3 = obj.GetComponentsInChildren<VRCInteractable>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
-                            if (list3.Count() != 0 && list3 != null)
-                            {
-                                return list3;
-                            }
-                        }
+                        return list2;
+                    }
+
+                    var list3 = obj.GetComponentsInChildren<VRCInteractable>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
+                    if (list3.Count() != 0 && list3 != null)
+                    {
+                        return list3;
                     }
                 }
                 catch (Exception e)
@@ -47,6 +43,7 @@
                     return new List<GameObject>();
                 }
             }
+
             return new List<GameObject>();
         }
 
@@ -56,18 +53,16 @@
             {
                 try
                 {
-                    var list1 = obj.GetComponentsInChildren<VRC.SDKBase.VRC_Trigger>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
+                    var list1 = obj.GetComponentsInChildren<VRC_Trigger>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
                     if (list1.Count() != 0 && list1 != null)
                     {
                         return list1;
                     }
-                    else
+
+                    var list2 = obj.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
+                    if (list2.Count() != 0 && list2 != null)
                     {
-                        var list2 = obj.GetComponentsInChildren<VRCSDK2.VRC_Trigger>(true).Select(i => i.gameObject).Where(x => x != null).ToList();
-                        if (list2.Count() != 0 && list2 != null)
-                        {
-                            return list2;
-                        }
+                        return list2;
                     }
                 }
                 catch (Exception e)
@@ -77,6 +72,7 @@
                     return new List<GameObject>();
                 }
             }
+
             return new List<GameObject>();
         }
 
@@ -102,8 +98,10 @@
                         UdonBehaviourObjects.Add(item);
                     }
                 }
+
                 return UdonBehaviourObjects;
             }
+
             return UdonBehaviourObjects;
         }
 

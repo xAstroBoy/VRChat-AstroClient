@@ -1,16 +1,14 @@
 ﻿namespace AstroClient.ItemTweakerV2.Handlers
 {
-    using AstroClient.ItemTweakerV2.Selector;
-    using AstroClient.ItemTweakerV2.TweakerEventArgs;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
     using System;
+    using AstroLibrary.Extensions;
     using AstroMonos.Components.Custom.Random;
+    using Selector;
+    using TweakerEventArgs;
     using UnityEngine;
 
     internal class InflaterBehaviourHandler : Tweaker_Events
     {
-
         internal override void OnSelectedObject_Destroyed()
         {
             Event_OnInflaterBehaviourPropertyChanged.SafetyRaise(new OnInflaterBehaviourArgs(null)); // Dunno if it works.
@@ -51,15 +49,13 @@
                         Event_OnInflaterBehaviourPropertyChanged.SafetyRaise(new OnInflaterBehaviourArgs(newinstance)); // Dunno if it works.
                     });
                     newinstance.SetOnInflaterUpdate(() =>
-{
-Event_OnInflaterBehaviourUpdate.SafetyRaise(new OnInflaterBehaviourArgs(newinstance)); // Dunno if it works.
-});
-
+                    {
+                        Event_OnInflaterBehaviourUpdate.SafetyRaise(new OnInflaterBehaviourArgs(newinstance)); // Dunno if it works.
+                    });
                 }
             }
         }
 
-        
 
         internal static event EventHandler<OnInflaterBehaviourArgs> Event_OnInflaterBehaviourPropertyChanged;
         internal static event EventHandler<OnInflaterBehaviourArgs> Event_OnInflaterBehaviourUpdate;
@@ -71,16 +67,15 @@ Event_OnInflaterBehaviourUpdate.SafetyRaise(new OnInflaterBehaviourArgs(newinsta
                 InflaterBehaviour InflaterBehaviour = obj.GetComponent<InflaterBehaviour>();
                 if (InflaterBehaviour != null)
                 {
-                    instance = InflaterBehaviour; 
+                    instance = InflaterBehaviour;
                     InflaterBehaviour.SetOnInflaterPropertyChanged(() =>
                     {
                         Event_OnInflaterBehaviourPropertyChanged.SafetyRaise(new OnInflaterBehaviourArgs(InflaterBehaviour)); // Dunno if it works.
                     });
                     InflaterBehaviour.SetOnInflaterUpdate(() =>
-{
-    Event_OnInflaterBehaviourUpdate.SafetyRaise(new OnInflaterBehaviourArgs(InflaterBehaviour)); // Dunno if it works.
+                    {
+                        Event_OnInflaterBehaviourUpdate.SafetyRaise(new OnInflaterBehaviourArgs(InflaterBehaviour)); // Dunno if it works.
                     });
-
                 }
             }
         }

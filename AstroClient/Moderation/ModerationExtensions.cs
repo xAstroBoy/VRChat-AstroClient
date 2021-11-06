@@ -1,10 +1,8 @@
-﻿using System;
-using AstroLibrary.Utility;
-using Photon.Realtime;
-using VRC.Core;
-
-namespace AstroClient.Moderation
+﻿namespace AstroClient.Moderation
 {
+    using AstroLibrary.Utility;
+    using VRC.Core;
+
     internal static class ModerationExtensions
     {
         internal static bool HasBlockedYou(this APIUser user)

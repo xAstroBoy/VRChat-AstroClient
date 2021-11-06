@@ -1,9 +1,9 @@
 ﻿namespace AstroLibrary.Managers
 {
-    using AstroLibrary.Console;
     using System;
     using System.Collections;
     using System.Linq;
+    using Console;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using UnityEngine.Networking;

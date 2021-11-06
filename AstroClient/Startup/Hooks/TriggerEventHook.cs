@@ -1,12 +1,12 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
+    using System;
+    using System.Reflection;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using Harmony;
-    using System;
-    using System.Reflection;
     using UnhollowerRuntimeLib.XrefScans;
-    using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
+    using VRC.SDKBase;
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class TriggerEventHook : GameEvents

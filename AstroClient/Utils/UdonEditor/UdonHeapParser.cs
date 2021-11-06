@@ -1,8 +1,8 @@
 ﻿namespace AstroClient
 {
+    using System.Collections.Generic;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using System.Collections.Generic;
     using VRC.Udon.Common.Interfaces;
 
     internal static class UdonHeapParser

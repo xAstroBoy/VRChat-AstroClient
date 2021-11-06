@@ -1,18 +1,18 @@
 ﻿/// Original Credit to DayOfThePlay
 namespace AstroLibrary.Extensions
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Utility;
-    using MelonLoader;
-    using Newtonsoft.Json;
-    using Newtonsoft.Json.Linq;
     using System;
     using System.IO;
     using System.Linq;
     using System.Net;
     using System.Reflection;
+    using Console;
+    using MelonLoader;
+    using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
     using UnhollowerRuntimeLib.XrefScans;
     using UnityEngine;
+    using Utility;
     using VRC.Core;
     using VRC.UI;
 

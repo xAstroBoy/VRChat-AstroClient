@@ -1,10 +1,9 @@
-﻿using AstroLibrary.Utility;
-using System.Collections.Generic;
-using UnityEngine;
-
-namespace AstroLibrary.Extensions
+﻿namespace AstroLibrary.Extensions
 {
+    using System.Collections.Generic;
     using AstroClient.AstroMonos.Components.Tools;
+    using AstroLibrary.Utility;
+    using UnityEngine;
 
     internal static class Pickup_ext
     {

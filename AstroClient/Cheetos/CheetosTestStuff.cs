@@ -2,25 +2,16 @@
 {
     #region Imports
 
-    using AstroClient.Variables;
-    using AstroLibrary;
+    using System.Collections.Generic;
     using AstroLibrary.Console;
     using AstroLibrary.Finder;
-    using AstroLibrary.Misc.Api.Object;
     using AstroLibrary.Utility;
-    using MelonLoader;
-    using Newtonsoft.Json;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.IO;
     using AstroMonos.Components.Player;
     using AstroMonos.Components.Spoofer;
-    using UnhollowerBaseLib;
+    using Photon.Realtime;
     using UnityEngine;
     using UnityEngine.UI;
-    using VRC;
-    using VRC.Core;
+    using Variables;
     using WebSocketSharp;
 
     #endregion Imports
@@ -105,7 +96,7 @@
         //    //Helper().Start();
         //}
 
-        internal override void OnMasterClientSwitched(Photon.Realtime.Player player)
+        internal override void OnMasterClientSwitched(Player player)
         {
             if (!WorldUtils.IsInWorld) return;
 
@@ -121,7 +112,7 @@
             }
 
             PopupUtils.QueHudMessage($"'{player.GetPhotonPlayer().GetDisplayName()}' is now the room master.");
-            }
+        }
 
         internal override void OnRoomJoined()
         {
@@ -142,7 +133,7 @@
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
         {
-            Player player = PlayerUtils.GetPlayer();
+            VRC.Player player = PlayerUtils.GetPlayer();
             if (player.gameObject.GetComponent<SitOnPlayer>() == null) player.gameObject.AddComponent<SitOnPlayer>();
 
             if (Bools.IsDeveloper && !DoOnce)

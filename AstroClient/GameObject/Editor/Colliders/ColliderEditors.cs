@@ -2,7 +2,7 @@
 {
     using System.Linq;
     using UnityEngine;
-    using static AstroClient.Variables.CustomLists;
+    using static Variables.CustomLists;
 
     internal class ColliderEditors
     {

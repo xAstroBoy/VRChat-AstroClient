@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.ButtonShortcut
 {
-    using AstroClient.Variables;
-    using AstroClient.World.Hub;
-    using AstroClient.WorldAddons;
-    using AstroButtonAPI;
     using System;
     using System.Collections.Generic;
+    using AstroButtonAPI;
     using UnityEngine;
     using UnityEngine.UI;
+    using Variables;
+    using World.Hub;
+    using WorldAddons;
 
     internal class CheatsShortcutButton : GameEvents
     {

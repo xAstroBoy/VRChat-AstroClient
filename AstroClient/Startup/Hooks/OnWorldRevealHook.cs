@@ -1,15 +1,14 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
-    using AstroClient.Variables;
+    using System;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using MelonLoader;
-    using System;
-    using System.Reflection;
-    using System.Runtime.InteropServices;
     using UnhollowerBaseLib;
-
+    using Variables;
 
     [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
 

@@ -1,10 +1,10 @@
-﻿using System;
-using AstroActionMenu.Helpers;
-using AstroActionMenu.Types;
-using UnityEngine;
-
-namespace AstroActionMenu.Pedals
+﻿namespace AstroActionMenu.Pedals
 {
+    using System;
+    using Helpers;
+    using Types;
+    using UnityEngine;
+
     public sealed class PedalToggle : PedalStruct
     {
         public PedalToggle(string text, Action<bool> onToggle, bool toggled, Texture2D icon = null,

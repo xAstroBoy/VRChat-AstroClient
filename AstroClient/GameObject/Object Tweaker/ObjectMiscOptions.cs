@@ -1,9 +1,9 @@
 ﻿namespace AstroClient
 {
+    using System;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System;
     using AstroMonos.Components.Custom.Random;
     using AstroMonos.Components.Malicious;
     using AstroMonos.Components.Malicious.Orbit;

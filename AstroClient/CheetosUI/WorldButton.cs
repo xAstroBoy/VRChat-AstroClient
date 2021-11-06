@@ -1,12 +1,11 @@
 ﻿namespace AstroClient
 {
-    using AstroLibrary;
-    using AstroLibrary.Utility;
-    using CheetoLibrary;
     using System;
     using System.Reflection;
     using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
     using AstroMonos.AstroUdons;
+    using CheetoLibrary;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
@@ -15,7 +14,7 @@
     {
         internal GameObject gameObject { get; private set; }
 
-        internal VRC_AstroInteractable interactable { get; private set; }
+        internal VRC_AstroInteract interactable { get; private set; }
 
         internal Rigidbody RigidBody { get; private set; }
 
@@ -43,7 +42,7 @@
             front.Set_Colliders_isTrigger(true);
             MiscUtils.DelayFunction(0.2f, () =>
             {
-                var AstroTrigger = front.AddComponent<VRC_AstroInteractable>();
+                var AstroTrigger = front.AddComponent<VRC_AstroInteract>();
                 if (AstroTrigger != null)
                 {
                     AstroTrigger.interactText = label;
@@ -89,7 +88,6 @@
             front_text.enableAutoSizing = true;
             front_text.fontSizeMin = 0f;
             front_text.fontSizeMax = 72f;
-
         }
     }
 }

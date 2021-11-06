@@ -1,11 +1,9 @@
 ﻿namespace AstroButtonAPI
 {
-    using System.Collections;
     using System.Threading.Tasks;
     using UnityEngine;
     using UnityEngine.Networking;
     using UnityEngine.UI;
-    using Button = UnityEngine.UI.Button;
 
     public class QMButtonBase
     {

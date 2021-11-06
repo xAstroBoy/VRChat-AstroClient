@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Reflection;
-using AstroClient;
-using AstroLibrary.Console;
-using AstroActionMenu.Helpers;
-using AstroActionMenu.Managers;
-using AstroActionMenu.Pedals;
-using HarmonyLib;
-using MelonLoader;
-using UnhollowerBaseLib;
-
-namespace AstroActionMenu
+﻿namespace AstroActionMenu
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using AstroClient;
+    using AstroLibrary.Console;
+    using Helpers;
+    using Managers;
+    using Pedals;
 
     internal class AstroActionMenuPatchesEvents : GameEvents
     {

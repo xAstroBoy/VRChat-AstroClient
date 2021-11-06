@@ -1,7 +1,6 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroLibrary.Utility;
-    using System.Collections.Generic;
+    using Utility;
 
     public static class PhotonExtensions
     {

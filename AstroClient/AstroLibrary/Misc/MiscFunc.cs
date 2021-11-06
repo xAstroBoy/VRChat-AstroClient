@@ -2,15 +2,14 @@
 {
     #region Imports
 
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using MelonLoader;
     using System;
     using System.Diagnostics;
     using System.IO;
     using System.Linq;
-    using System.Net;
     using System.Runtime.InteropServices;
+    using Console;
+    using Extensions;
+    using MelonLoader;
     using Transmtn.DTO.Notifications;
     using UnityEngine;
     using UnityEngine.UI;
@@ -18,7 +17,6 @@
     using VRC.Core;
     using VRC.SDKBase;
     using VRC.UI;
-    using VRC_EventHandler = VRC.SDKBase.VRC_EventHandler;
 
     #endregion Imports
 

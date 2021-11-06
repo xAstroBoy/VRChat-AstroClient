@@ -1,6 +1,5 @@
 ﻿namespace AstroClient.Kaned
 {
-    using AstroLibrary.Console;
     using System;
     using System.Collections;
     using System.Collections.Generic;

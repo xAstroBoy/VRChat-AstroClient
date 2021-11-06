@@ -1,14 +1,12 @@
-﻿using System;
-using AstroClient;
-using AstroLibrary.Console;
-using AstroActionMenu.Helpers;
-using AstroActionMenu.Types;
-using MelonLoader;
-using UnityEngine;
-using UnityEngine.XR;
-
-namespace AstroActionMenu.Managers
+﻿namespace AstroActionMenu.Managers
 {
+    using System;
+    using AstroClient;
+    using AstroLibrary.Console;
+    using Helpers;
+    using Types;
+    using UnityEngine;
+    using UnityEngine.XR;
 
     internal class FourAxisPuppetManagerEventHandler : GameEvents
     {

@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.Features.Player.Movement
 {
-    using AstroLibrary.Utility;
-    using AstroButtonAPI;
     using System.Collections.Generic;
+    using AstroButtonAPI;
+    using AstroLibrary.Utility;
     using UnityEngine;
     using VRC.SDKBase;
 

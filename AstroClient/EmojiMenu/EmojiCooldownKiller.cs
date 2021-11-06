@@ -3,21 +3,14 @@
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using VRC;
 
     internal class EmojiCooldownKiller : GameEvents
     {
-
         internal override void OnPlayerJoined(Player player)
         {
             MiscUtils.DelayFunction(1f, () =>
             {
-
                 if (player != null)
                 {
                     var vrcplayer = player.GetVRCPlayer();
@@ -31,4 +24,3 @@
         }
     }
 }
-

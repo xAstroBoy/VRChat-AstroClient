@@ -1,42 +1,39 @@
-﻿namespace AstroClient.AstroMonos.Components.Custom.Random
+﻿namespace AstroClient.AstroMonos.Components.Custom.Items
 {
     using System;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroUdons;
     using CustomMono;
+    using Il2CppSystem.Collections.Generic;
     using UnhollowerBaseLib.Attributes;
-    using UnityEngine;
     using static Variables.CustomLists;
 
     [RegisterComponent]
     public class StretchyCheeseBehaviour : GameEventsBehaviour
     {
-        public Il2CppSystem.Collections.Generic.List<GameEventsBehaviour> AntiGcList;
+        public List<GameEventsBehaviour> AntiGcList;
 
         public StretchyCheeseBehaviour(IntPtr obj0) : base(obj0)
         {
-            AntiGcList = new Il2CppSystem.Collections.Generic.List<GameEventsBehaviour>(1);
+            AntiGcList = new List<GameEventsBehaviour>(1);
             AntiGcList.Add(this);
         }
 
         private void Start()
         {
-            ExtendCheese = UdonSearch.FindUdonEvent(this.gameObject, "Extend");
+            ExtendCheese = UdonSearch.FindUdonEvent(gameObject, "Extend");
             if (ExtendCheese != null)
             {
-                var PickupBehaviour = this.gameObject.AddComponent<VRC_AstroPickup>();
+                var PickupBehaviour = gameObject.AddComponent<VRC_AstroPickup>();
                 if (PickupBehaviour != null)
                 {
-                    PickupBehaviour.OnPickupUseUp += () =>
-                    {
-                        ExtendCheese.ExecuteUdonEvent();
-                    };
+                    PickupBehaviour.OnPickupUseUp += () => { ExtendCheese.ExecuteUdonEvent(); };
                 }
             }
             else
             {
-                ModConsole.DebugError($"{this.gameObject.name} : Failed to Bind StretcyCheese Component because there's no Extend behaviour!");
+                ModConsole.DebugError($"{gameObject.name} : Failed to Bind StretcyCheese Component because there's no Extend behaviour!");
                 Destroy(this);
             }
         }

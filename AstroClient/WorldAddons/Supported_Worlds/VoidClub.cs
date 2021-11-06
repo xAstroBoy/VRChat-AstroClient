@@ -1,8 +1,8 @@
 ﻿namespace AstroClient.WorldAddons
 {
-    using AstroLibrary.Finder;
-    using AstroButtonAPI;
     using System.Collections.Generic;
+    using AstroButtonAPI;
+    using AstroLibrary.Finder;
     using UnityEngine.UI;
 
     internal class VoidClub : GameEvents

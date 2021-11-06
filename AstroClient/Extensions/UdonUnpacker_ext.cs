@@ -1,14 +1,12 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroClient;
-    using AstroClient.Udon;
-    using AstroLibrary.Console;
-    using Il2CppSystem;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroClient;
+    using AstroClient.Udon;
+    using Console;
     using UnhollowerBaseLib;
     using UnityEngine;
-    using static VRC.SDKBase.VRCPlayerApi;
 
     internal static class UdonUnpacker_ext
     {
@@ -126,7 +124,7 @@
             {
                 if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Single)
                 {
-                    return obj.Unbox<System.Single>();
+                    return obj.Unbox<float>();
                 }
                 else
                 {
@@ -142,7 +140,7 @@
             {
                 if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Single_Array)
                 {
-                    var array = Il2CppArrayBase<System.Single>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    var array = Il2CppArrayBase<float>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
                     {
                         return array;
@@ -178,7 +176,7 @@
             {
                 if (obj.GetIl2CppType().FullName == UdonTypes_String.System_UInt16)
                 {
-                    return obj.Unbox<System.UInt16>();
+                    return obj.Unbox<ushort>();
                 }
                 else
                 {
@@ -194,7 +192,7 @@
             {
                 if (obj.GetIl2CppType().FullName == UdonTypes_String.System_UInt16_Array)
                 {
-                    var array = Il2CppArrayBase<System.UInt16>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    var array = Il2CppArrayBase<ushort>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
                     {
                         return array;
@@ -283,7 +281,7 @@
             {
                 if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Double)
                 {
-                    return obj.Unbox<System.Double>();
+                    return obj.Unbox<double>();
                 }
                 else
                 {
@@ -299,7 +297,7 @@
             {
                 if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Double_Array)
                 {
-                    var array = Il2CppArrayBase<System.Double>.WrapNativeGenericArrayPointer(obj.Pointer);
+                    var array = Il2CppArrayBase<double>.WrapNativeGenericArrayPointer(obj.Pointer);
                     if (array != null && array.Count() != 0)
                     {
                         return array;
@@ -337,7 +335,7 @@
             {
                 if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Char)
                 {
-                    return obj.Unbox<System.Char>();
+                    return obj.Unbox<char>();
                 }
                 else
                 {
@@ -441,7 +439,7 @@
             {
                 if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Int64)
                 {
-                    return obj.Unbox<System.Int64>();
+                    return obj.Unbox<long>();
                 }
                 else
                 {
@@ -1047,7 +1045,7 @@
             {
                 if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Object)
                 {
-                    var result = Serialization.FromIL2CPPToManaged<System.Object>(obj);
+                    var result = Serialization.FromIL2CPPToManaged<object>(obj);
                     if (result != null)
                     {
                         return result;
@@ -1067,7 +1065,7 @@
             {
                 if (obj.GetIl2CppType().FullName == UdonTypes_String.System_Object_Array)
                 {
-                    var array = Serialization.FromIL2CPPToManaged<System.Object[]>(obj);
+                    var array = Serialization.FromIL2CPPToManaged<object[]>(obj);
                     if (array != null && array.Count() != 0)
                     {
                         return array;

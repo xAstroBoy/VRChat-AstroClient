@@ -1,9 +1,9 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-    using AstroClient.ItemTweakerV2.Selector;
-    using AstroLibrary.Extensions;
     using AstroButtonAPI;
+    using AstroLibrary.Extensions;
     using AstroMonos.Components.Tools;
+    using Selector;
     using UnityEngine;
 
     internal class ObjectInfoSubMenu : Tweaker_Events

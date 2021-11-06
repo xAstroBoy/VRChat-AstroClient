@@ -1,10 +1,10 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Variables;
-    using AstroLibrary.Console;
     using System.Collections.Generic;
+    using AstroLibrary.Console;
     using UnityEngine;
     using UnityEngine.UI;
+    using Variables;
 
     internal class Club808 : GameEvents
     {

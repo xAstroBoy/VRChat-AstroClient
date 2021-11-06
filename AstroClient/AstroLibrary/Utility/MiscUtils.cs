@@ -2,9 +2,6 @@
 
 namespace AstroLibrary.Utility
 {
-    using AstroLibrary.Console;
-    using Blaze;
-    using MelonLoader;
     using System;
     using System.Collections;
     using System.Collections.Generic;
@@ -12,6 +9,8 @@ namespace AstroLibrary.Utility
     using System.IO;
     using System.Linq;
     using System.Reflection;
+    using Console;
+    using MelonLoader;
     using UnhollowerRuntimeLib;
     using UnityEngine;
     using VRC;

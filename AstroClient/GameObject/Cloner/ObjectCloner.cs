@@ -1,9 +1,9 @@
 ﻿namespace AstroClient.Cloner
 {
-    using AstroClient.ItemTweakerV2.Selector;
-    using AstroClient.ItemTweakerV2.Submenus;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
+    using ItemTweakerV2.Selector;
+    using ItemTweakerV2.Submenus;
     using UnityEngine;
 
     internal class ObjectCloner : GameEvents

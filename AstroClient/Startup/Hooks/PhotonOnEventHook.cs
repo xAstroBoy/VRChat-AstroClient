@@ -1,16 +1,16 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
-    using AstroClient.Moderation;
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+    using System.Text;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using ExitGames.Client.Photon;
     using Harmony;
+    using Moderation;
     using Photon.Realtime;
-    using System;
-    using System.Collections.Generic;
-    using System.Reflection;
-    using System.Text;
     using UnhollowerBaseLib;
     using UnhollowerRuntimeLib;
 

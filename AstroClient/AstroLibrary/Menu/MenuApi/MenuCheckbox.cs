@@ -1,8 +1,8 @@
 ﻿namespace DayClientML2.Utility
 {
+    using System;
     using AstroLibrary.Console;
     using MelonLoader;
-    using System;
     using UnityEngine;
     using UnityEngine.UI;
     using Object = UnityEngine.GameObject;

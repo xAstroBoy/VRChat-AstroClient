@@ -1,9 +1,9 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroLibrary.Utility;
     using System.Collections.Generic;
     using AstroClient.AstroMonos.Components.Tools;
     using UnityEngine;
+    using Utility;
 
     internal static class RigidBodyControllerExtensions
     {
@@ -23,6 +23,7 @@
                 {
                     control.EditMode = true;
                 }
+
                 control.useGravity = useGravity;
             }
         }
@@ -35,6 +36,7 @@
                 {
                     control.EditMode = true;
                 }
+
                 control.detectCollisions = DetectCollisions;
             }
         }
@@ -47,6 +49,7 @@
                 {
                     control.EditMode = true;
                 }
+
                 control.isKinematic = isKinematic;
             }
         }
@@ -59,6 +62,7 @@
                 {
                     control.EditMode = true;
                 }
+
                 if (control.constraints.HasFlag(constraint))
                 {
                     control.constraints &= ~constraint;
@@ -74,6 +78,7 @@
                 {
                     control.EditMode = true;
                 }
+
                 control.constraints = RigidbodyConstraints.None;
             }
         }
@@ -86,6 +91,7 @@
                 {
                     control.EditMode = true;
                 }
+
                 control.constraints |= constraint;
             }
         }
@@ -124,6 +130,7 @@
                     }
                 }
             }
+
             return true;
         }
 
@@ -254,6 +261,7 @@
                 {
                     control.EditMode = true;
                 }
+
                 control.drag = Drag;
             }
         }
@@ -266,6 +274,7 @@
                 {
                     control.EditMode = true;
                 }
+
                 control.angularDrag = AngularDrag;
             }
         }
@@ -278,6 +287,7 @@
                 {
                     control.EditMode = true;
                 }
+
                 control.Forced_Rigidbody = Forced_RigidBody;
             }
         }

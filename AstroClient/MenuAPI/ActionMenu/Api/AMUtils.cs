@@ -1,12 +1,11 @@
-using System;
-using AstroLibrary.Console;
-using AstroActionMenu.Helpers;
-using AstroActionMenu.Managers;
-using MelonLoader;
-using UnityEngine;
-
 namespace AstroActionMenu.Api
 {
+    using System;
+    using AstroLibrary.Console;
+    using Helpers;
+    using Managers;
+    using UnityEngine;
+
     /// <summary>
     /// General Action Menu Things
     /// </summary>

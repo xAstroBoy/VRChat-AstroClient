@@ -3,13 +3,12 @@ namespace AstroLibrary.Extensions
 {
     #region Imports
 
-    using AstroLibrary.Console;
-    using MelonLoader;
     using System;
     using System.Collections;
-    using System.IO;
     using System.Linq;
     using System.Reflection;
+    using Console;
+    using MelonLoader;
     using UnhollowerRuntimeLib.XrefScans;
     using UnityEngine;
     using UnityEngine.SceneManagement;

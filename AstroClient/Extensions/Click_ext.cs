@@ -1,8 +1,8 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroClient;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroClient;
     using UnityEngine;
     using VRC.SDK3.Components;
     using VRC.SDKBase;
@@ -23,6 +23,7 @@
                         child.interactText = NewText;
                     }
                 }
+
                 if (two.Count() != 0)
                 {
                     foreach (var child in one.Where(child => child.interactText != NewText))
@@ -172,6 +173,7 @@
                         obj.gameObject.SetActive(false);
                     }
                 }
+
                 OnlineEditor.RemoveOwnerShip(obj.gameObject);
             }
         }
@@ -231,6 +233,7 @@
                         obj.SetActive(false);
                     }
                 }
+
                 OnlineEditor.RemoveOwnerShip(obj);
             }
         }

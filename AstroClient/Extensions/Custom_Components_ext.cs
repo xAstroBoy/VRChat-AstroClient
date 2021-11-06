@@ -1,16 +1,18 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroClient;
-    using AstroClient.Variables;
-    using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroClient;
+    using AstroClient.AstroMonos.Components.Custom.Items;
     using AstroClient.AstroMonos.Components.Custom.Random;
     using AstroClient.AstroMonos.Components.Malicious;
     using AstroClient.AstroMonos.Components.Malicious.Orbit;
     using AstroClient.AstroMonos.Components.Tools;
+    using AstroClient.Variables;
     using UnityEngine;
+    using Utility;
+    using Object = UnityEngine.Object;
 
     internal static class Custom_Components_ext
     {
@@ -26,7 +28,7 @@
 
         internal static void MakeRocketItemWithGAndGoUp(this GameObject obj)
         {
-           var rocket = obj.GetOrAddComponent<RocketBehaviour>();
+            var rocket = obj.GetOrAddComponent<RocketBehaviour>();
             rocket.UseGravity = true;
             rocket.ShouldBeAlwaysUp = true;
         }
@@ -73,12 +75,15 @@
                         }
                     }
                 }
-                if(item.isCurrentObjectToEdit())
+
+                if (item.isCurrentObjectToEdit())
                 {
                     instance.FocusOnTweaker();
                 }
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         internal static void SubtractSpinForceX(this GameObject obj)
@@ -98,13 +103,15 @@
                         instance.ForceX = 1f;
                     }
                 }
+
                 if (instance.isCurrentObjectToEdit())
                 {
                     instance.FocusOnTweaker();
                 }
-
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         internal static void Add_SpinForceY(this GameObject obj)
@@ -124,13 +131,15 @@
                         instance.ForceY = 1f;
                     }
                 }
+
                 if (instance.isCurrentObjectToEdit())
                 {
                     instance.FocusOnTweaker();
                 }
-
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         internal static void SubtractSpinForceY(this GameObject obj)
@@ -150,13 +159,15 @@
                         instance.ForceY = 1f;
                     }
                 }
+
                 if (instance.isCurrentObjectToEdit())
                 {
                     instance.FocusOnTweaker();
                 }
-
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         internal static void Add_SpinForceZ(this GameObject obj)
@@ -176,13 +187,15 @@
                         instance.ForceZ = 1f;
                     }
                 }
+
                 if (instance.isCurrentObjectToEdit())
                 {
                     instance.FocusOnTweaker();
                 }
-
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         internal static void SubtractSpinForceZ(this GameObject obj)
@@ -202,13 +215,15 @@
                         instance.ForceZ = 1f;
                     }
                 }
+
                 if (instance.isCurrentObjectToEdit())
                 {
                     instance.FocusOnTweaker();
                 }
-
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         internal static void Remove_Spinner(this GameObject obj)
@@ -216,7 +231,7 @@
             var item = obj.GetComponent<SpinnerBehaviour>();
             if (item != null)
             {
-                UnityEngine.Object.Destroy(item);
+                Object.Destroy(item);
             }
         }
 
@@ -229,13 +244,15 @@
                 {
                     instance.SpinnerTimer++;
                 }
+
                 if (instance.isCurrentObjectToEdit())
                 {
                     instance.FocusOnTweaker();
                 }
-
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         internal static void DecSpinnerSpeed(this GameObject obj)
@@ -247,13 +264,15 @@
                 {
                     instance.SpinnerTimer--;
                 }
+
                 if (instance.isCurrentObjectToEdit())
                 {
                     instance.FocusOnTweaker();
                 }
-
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         internal static void IncCrazySpeed(this GameObject obj)
@@ -265,13 +284,15 @@
                 {
                     instance.CrazyTimer++;
                 }
+
                 if (instance.isCurrentObjectToEdit())
                 {
                     instance.FocusOnTweaker();
                 }
-
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         internal static void DecCrazySpeed(this GameObject obj)
@@ -283,13 +304,15 @@
                 {
                     instance.CrazyTimer--;
                 }
+
                 if (instance.isCurrentObjectToEdit())
                 {
                     instance.FocusOnTweaker();
                 }
-
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         internal static void IncRocketSpeed(this GameObject obj)
@@ -301,13 +324,15 @@
                 {
                     instance.RocketTimer++;
                 }
+
                 if (instance.isCurrentObjectToEdit())
                 {
                     instance.FocusOnTweaker();
                 }
-
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         internal static void DecRocketSpeed(this GameObject obj)
@@ -319,13 +344,15 @@
                 {
                     instance.RocketTimer--;
                 }
+
                 if (instance.isCurrentObjectToEdit())
                 {
                     instance.FocusOnTweaker();
                 }
-
             }
-            catch (Exception) { }
+            catch (Exception)
+            {
+            }
         }
 
         internal static void Add_Rocket_Component(this List<GameObject> list, bool UseGravity, bool ShouldBeAlwaysUp = true)
@@ -340,14 +367,15 @@
                         item.UseGravity = UseGravity;
                         item.ShouldBeAlwaysUp = ShouldBeAlwaysUp;
                     }
+
                     if (item.isCurrentObjectToEdit())
                     {
                         item.FocusOnTweaker();
                     }
-
                 }
-                catch (Exception) { }
-
+                catch (Exception)
+                {
+                }
             }
         }
 
@@ -373,11 +401,11 @@
                     item.UseGravity = UseGravity;
                     item.ShouldBeAlwaysUp = ShouldBeAlwaysUp;
                 }
+
                 if (item.isCurrentObjectToEdit())
                 {
                     item.FocusOnTweaker();
                 }
-
             }
         }
 
@@ -390,11 +418,11 @@
                 {
                     item.UseGravity = UseGravity;
                 }
+
                 if (item.isCurrentObjectToEdit())
                 {
                     item.FocusOnTweaker();
                 }
-
             }
         }
 
@@ -707,6 +735,7 @@
                         attacker.DestroyMeLocal();
                     }
                 }
+
                 if (Bools.AllowOrbitComponent)
                 {
                     var orbit = obj.GetComponent<Orbit>();
@@ -715,26 +744,32 @@
                         orbit.DestroyMeLocal();
                     }
                 }
+
                 if (watcher != null)
                 {
                     watcher.DestroyMeLocal();
                 }
+
                 if (rocket != null)
                 {
                     rocket.DestroyMeLocal();
                 }
+
                 if (crazy != null)
                 {
                     crazy.DestroyMeLocal();
                 }
+
                 if (spinner != null)
                 {
                     spinner.DestroyMeLocal();
                 }
+
                 if (bouncer != null)
                 {
                     bouncer.DestroyMeLocal();
                 }
+
                 if (StretchyCheese != null)
                 {
                     StretchyCheese.DestroyMeLocal();
@@ -747,6 +782,7 @@
                         control.RestoreOriginalBody();
                     }
                 }
+
                 if (ResetPickupProperties)
                 {
                     if (PickupController != null)

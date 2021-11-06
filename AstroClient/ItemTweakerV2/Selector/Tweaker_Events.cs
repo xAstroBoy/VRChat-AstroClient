@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.ItemTweakerV2.Selector
 {
-    using AstroClient.ItemTweakerV2.Handlers;
-    using AstroClient.ItemTweakerV2.TweakerEventArgs;
     using System;
     using AstroMonos.Components.Custom.Random;
     using AstroMonos.Components.Tools;
+    using Handlers;
+    using TweakerEventArgs;
     using UnityEngine;
 
     internal class Tweaker_Events : GameEvents

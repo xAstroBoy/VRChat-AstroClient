@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using AstroLibrary.Console;
-using AstroActionMenu.Pedals;
-using AstroActionMenu.Types;
-using HarmonyLib;
-using MelonLoader;
-using UnhollowerRuntimeLib.XrefScans;
-using UnityEngine;
-using UnityEngine.XR;
-using Object = UnityEngine.Object;
-
-namespace AstroActionMenu.Helpers
+﻿namespace AstroActionMenu.Helpers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using AstroLibrary.Console;
+    using HarmonyLib;
+    using Pedals;
+    using Types;
+    using UnhollowerRuntimeLib.XrefScans;
+    using UnityEngine;
+    using UnityEngine.XR;
+    using Object = UnityEngine.Object;
+
     internal static class Utilities
     {
         private static RefreshAMDelegate refreshAMDelegate;

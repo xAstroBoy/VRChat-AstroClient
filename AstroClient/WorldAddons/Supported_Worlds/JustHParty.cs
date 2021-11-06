@@ -1,13 +1,13 @@
 ﻿namespace AstroClient.WorldAddons
 {
-    using AstroClient.Variables;
+    using System.Collections.Generic;
+    using System.Linq;
+    using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using AstroButtonAPI;
-    using System.Collections.Generic;
-    using System.Linq;
     using UnityEngine;
+    using Variables;
     using VRC.SDKBase;
 
     internal class JustHParty : GameEvents

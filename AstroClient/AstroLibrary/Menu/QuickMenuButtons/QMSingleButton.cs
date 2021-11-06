@@ -5,7 +5,6 @@
     using UnityEngine;
     using UnityEngine.Events;
     using UnityEngine.UI;
-    using Button = UnityEngine.UI.Button;
 
     public class QMSingleButton : QMButtonBase
     {

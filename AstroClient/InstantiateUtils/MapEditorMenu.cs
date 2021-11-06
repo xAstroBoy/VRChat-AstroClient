@@ -1,13 +1,11 @@
 ﻿namespace AstroClient
 {
+    using System;
+    using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using AstroButtonAPI;
-    using System;
     using UnityEngine;
-    using VRC.SDK3.Components;
-    using VRC.SDKBase;
 
     internal static class MapEditorMenu
     {

@@ -2,21 +2,13 @@
 {
     #region Imports
 
-    using AstroClient.Features.Player.Movement.Exploit;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Utility;
-    using ExitGames.Client.Photon;
-    using Harmony;
-    using MelonLoader;
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Reflection;
-    using UnityEngine;
-    using VRC;
-    using VRC.SDKBase;
+    using AstroLibrary.Console;
+    using ExitGames.Client.Photon;
+    using Features.Player.Movement.Exploit;
+    using Harmony;
+
     #endregion Imports
 
 

@@ -1,9 +1,9 @@
-﻿using System;
-using AstroActionMenu.Types;
-using UnityEngine;
-
-namespace AstroActionMenu.Pedals
+﻿namespace AstroActionMenu.Pedals
 {
+    using System;
+    using Types;
+    using UnityEngine;
+
     public abstract class PedalStruct
     {
         public string text { get; set; }

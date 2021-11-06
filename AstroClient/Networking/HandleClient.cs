@@ -1,9 +1,9 @@
 ﻿namespace AstroNetworkingLibrary
 {
-    using AstroNetworkingLibrary.Serializable;
     using System;
     using System.Net.Sockets;
     using System.Threading.Tasks;
+    using Serializable;
 
     internal class HandleClient
     {
@@ -49,7 +49,9 @@
             {
                 ClientSocket.Client.Close();
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private void SendSecret()

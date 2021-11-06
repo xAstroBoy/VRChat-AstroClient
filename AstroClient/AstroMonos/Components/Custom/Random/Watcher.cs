@@ -10,7 +10,6 @@
     using UnhollowerBaseLib.Attributes;
     using UnityEngine;
     using VRC;
-    using Time = UnityEngine.Time;
 
     [RegisterComponent]
     public class PlayerWatcher : GameEventsBehaviour

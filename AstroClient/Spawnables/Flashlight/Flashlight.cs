@@ -1,11 +1,10 @@
-using AstroLibrary.Extensions;
-using AstroLibrary.Utility;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace AstroClient
 {
+    using System.Collections.Generic;
+    using AstroLibrary.Extensions;
+    using AstroLibrary.Utility;
     using AstroMonos.Components.Custom.Items;
+    using UnityEngine;
 
     internal class Astro_Flashlight : GameEvents
     {

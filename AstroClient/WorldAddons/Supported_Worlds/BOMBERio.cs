@@ -1,19 +1,19 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Udon;
-    using AstroClient.Variables;
+    using System.Collections;
+    using System.Collections.Generic;
+    using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using AstroButtonAPI;
-    using System.Collections;
-    using System.Collections.Generic;
     using AstroMonos.AstroUdons;
+    using Udon;
     using UnityEngine;
+    using Variables;
     using VRC;
     using VRC.Udon;
-    using static AstroClient.Variables.CustomLists;
+    using static Variables.CustomLists;
 
     internal class BOMBERio : GameEvents
     {

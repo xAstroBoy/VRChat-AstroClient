@@ -29,6 +29,7 @@
                 {
                     _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
                 }
+
                 item.Method_Public_Void_Renderer_Boolean_0(rend, status);
             }
         }
@@ -46,6 +47,7 @@
                 {
                     _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
                 }
+
                 item.Method_Public_Void_Renderer_Boolean_0(rend, status);
             }
         }
@@ -63,6 +65,7 @@
                 {
                     _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
                 }
+
                 item.SetHighLighterColor(color);
                 item.Method_Public_Void_Renderer_Boolean_0(rend, status);
             }
@@ -90,6 +93,7 @@
                 {
                     _ = EspHelper.SpawnedESPsHolders.Remove(item);
                 }
+
                 Object.Destroy(item);
             }
         }
@@ -108,6 +112,7 @@
                 {
                     _ = item.field_Protected_HashSet_1_Renderer_0.Remove(rend);
                 }
+
                 item.SetHighLighterColor(color);
                 item.Method_Public_Void_Renderer_Boolean_0(rend, status);
             }

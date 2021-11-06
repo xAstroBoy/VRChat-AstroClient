@@ -1,6 +1,6 @@
 ﻿namespace AstroLibrary.Utility
 {
-    using AstroLibrary.Extensions;
+    using Extensions;
     using VRC.Core;
 
     public static class AvatarUtils

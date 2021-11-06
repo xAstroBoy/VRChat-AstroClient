@@ -1,6 +1,5 @@
 ﻿namespace AstroClientCore.Events
 {
-    using Photon.Realtime;
     using System;
 
     internal class ScreenEventArgs : EventArgs

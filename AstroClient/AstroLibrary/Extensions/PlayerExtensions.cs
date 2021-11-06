@@ -1,7 +1,7 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroLibrary.Utility;
     using UnityEngine;
+    using Utility;
     using VRC;
     using VRC.Core;
     using VRC.SDKBase;

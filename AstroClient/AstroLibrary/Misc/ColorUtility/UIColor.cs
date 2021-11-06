@@ -1,8 +1,8 @@
 ﻿namespace DayClientML2.Utility.ColorUtility
 {
-    using AstroLibrary.Utility;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroLibrary.Utility;
     using UnityEngine;
     using UnityEngine.UI;
 

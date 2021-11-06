@@ -1,9 +1,9 @@
 ﻿namespace AstroClient
 {
+    using System.Linq;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System.Linq;
     using UnityEngine;
     using VRC.SDKBase;
 

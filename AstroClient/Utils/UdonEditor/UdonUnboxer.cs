@@ -1,12 +1,10 @@
 ﻿namespace AstroClient.Udon
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
     using System;
-    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Text;
+    using AstroLibrary.Console;
     using VRC.Udon;
 
     internal static class UdonUnboxer

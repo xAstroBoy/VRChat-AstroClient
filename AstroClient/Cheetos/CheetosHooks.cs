@@ -2,10 +2,10 @@
 {
     #region Imports
 
-    using AstroClient;
-    using AstroClient.Variables;
+    using System;
+    using System.Collections;
+    using System.Reflection;
     using AstroClientCore.Events;
-    using AstroLibrary;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
@@ -17,17 +17,17 @@
     using MelonLoader;
     using Newtonsoft.Json;
     using Photon.Realtime;
-    using System;
-    using System.Collections;
-    using System.Reflection;
     using UnityEngine;
+    using Variables;
     using VRC;
     using VRC.Core;
-    using VRC.UI;
+    using Action = Il2CppSystem.Action;
+    using ConfigManager = AstroClient.ConfigManager;
+    using Player = Photon.Realtime.Player;
 
     #endregion Imports
 
-    [System.Reflection.ObfuscationAttribute(Feature = "HarmonyRenamer")]
+    [ObfuscationAttribute(Feature = "HarmonyRenamer")]
     internal class CheetosHooks : GameEvents
     {
         internal static EventHandler<ScreenEventArgs> Event_OnShowScreen { get; set; }
@@ -42,7 +42,7 @@
         internal static EventHandler<EventArgs> Event_OnQuickMenuOpen { get; set; }
         internal static EventHandler<EventArgs> Event_OnQuickMenuClose { get; set; }
 
-        [System.Reflection.ObfuscationAttribute(Feature = "HarmonyGetPatch")]
+        [ObfuscationAttribute(Feature = "HarmonyGetPatch")]
         private static HarmonyMethod GetPatch(string name)
         {
             return new HarmonyMethod(typeof(CheetosHooks).GetMethod(name, BindingFlags.Static | BindingFlags.NonPublic));
@@ -83,11 +83,13 @@
                 new AstroPatch(AccessTools.Property(typeof(Time), nameof(Time.smoothDeltaTime)).GetMethod, null, GetPatch(nameof(SpoofFPS)));
                 new AstroPatch(AccessTools.Property(typeof(PhotonPeer), nameof(PhotonPeer.RoundTripTime)).GetMethod, null, GetPatch(nameof(SpoofPing)));
                 new AstroPatch(AccessTools.Property(typeof(Tools), nameof(Tools.Platform)).GetMethod, null, GetPatch(nameof(SpoofQuest)));
-                new AstroPatch(typeof(Cursor).GetProperty(nameof(Cursor.lockState)).GetSetMethod(), GetPatch(nameof(MousePatch)), null);
+                new AstroPatch(typeof(Cursor).GetProperty(nameof(Cursor.lockState)).GetSetMethod(), GetPatch(nameof(MousePatch)));
                 new AstroPatch(typeof(LoadBalancingClient).GetMethod(nameof(LoadBalancingClient.Method_Public_Boolean_String_Object_Boolean_PDM_0)), GetPatch(nameof(LoadBalancingClient_OpWebRpc)));
             }
-            catch (Exception e) { ModConsole.Error($"[Cheetos Patches] Error in applying patches : {e}"); }
-            finally { }
+            catch (Exception e)
+            {
+                ModConsole.Error($"[Cheetos Patches] Error in applying patches : {e}");
+            }
         }
 
         private static bool NameplatePatch(PlayerNameplate __instance) => false;
@@ -100,11 +102,11 @@
             }
         }
 
-        private static void OnMasterClientSwitchedPatch(Photon.Realtime.Player __0) => Event_OnMasterClientSwitched?.SafetyRaise(new PhotonPlayerEventArgs(__0));
+        private static void OnMasterClientSwitchedPatch(Player __0) => Event_OnMasterClientSwitched?.SafetyRaise(new PhotonPlayerEventArgs(__0));
 
         private static void OnFriended(ref APIUser __0) => Event_OnFriended?.SafetyRaise(new EventArgs());
 
-        private static void OnUnfriended(ref string __0, ref Il2CppSystem.Action __1, ref Il2CppSystem.Action __2) => Event_OnUnfriended?.SafetyRaise(new EventArgs());
+        private static void OnUnfriended(ref string __0, ref Action __1, ref Action __2) => Event_OnUnfriended?.SafetyRaise(new EventArgs());
 
         private static void OnLobbyLeftPatch() => ModConsole.Log("Lobby Left.");
 
@@ -121,12 +123,13 @@
             {
                 string str = text;
                 object obj = __1;
-                ModConsole.DebugLog($"{str}{obj?.ToString()}, {__2.ToString()}");
+                ModConsole.DebugLog($"{str}{obj}, {__2.ToString()}");
             }
             else
             {
                 ModConsole.DebugLog($"{text}null, {__2.ToString()}");
             }
+
             return true;
         }
 
@@ -144,6 +147,7 @@
             {
                 Event_OnShowScreen?.SafetyRaise(new ScreenEventArgs(__0));
             }
+
             return true;
         }
 
@@ -158,11 +162,9 @@
                 PopupUtils.QueHudMessage("Blocking Bad Portal Spawn: Bad World ID");
                 return false;
             }
-            else
-            {
-                ModConsole.Log($"Portal Spawned: {__instance.name}: {__3.DisplayName()}");
-                PopupUtils.QueHudMessage($"Portal Spawned: {__instance.name}: {__3.DisplayName()}");
-            }
+
+            ModConsole.Log($"Portal Spawned: {__instance.name}: {__3.DisplayName()}");
+            PopupUtils.QueHudMessage($"Portal Spawned: {__instance.name}: {__3.DisplayName()}");
             return true;
         }
 
@@ -173,18 +175,16 @@
                 ModConsole.Log($"{__instance.name}: Portal Entry Blocked!");
                 return false;
             }
-            else
-            {
-                ModConsole.Log($"{__instance.name}: Portal Entered");
-                return true;
-            }
+
+            ModConsole.Log($"{__instance.name}: Portal Entered");
+            return true;
         }
 
         private static void SpoofQuest(ref string __result)
         {
             try
             {
-                if (AstroClient.ConfigManager.General.SpoofQuest && !WorldUtils.IsInWorld)
+                if (ConfigManager.General.SpoofQuest && !WorldUtils.IsInWorld)
                 {
                     __result = "android";
                 }
@@ -199,28 +199,30 @@
         {
             try
             {
-                if (AstroClient.ConfigManager.General.SpoofPing && WorldUtils.IsInWorld)
+                if (ConfigManager.General.SpoofPing && WorldUtils.IsInWorld)
                 {
                     Temporary.RealPing = __result;
-                    __result = AstroClient.ConfigManager.General.SpoofedPing;
-                    return;
+                    __result = ConfigManager.General.SpoofedPing;
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private static void SpoofFPS(ref float __result)
         {
             try
             {
-                if (AstroClient.ConfigManager.General.SpoofFPS && WorldUtils.IsInWorld)
+                if (ConfigManager.General.SpoofFPS && WorldUtils.IsInWorld)
                 {
                     Temporary.RealFPS = __result;
-                    __result = (float)1f / AstroClient.ConfigManager.General.SpoofedFPS;
-                    return;
+                    __result = 1f / ConfigManager.General.SpoofedFPS;
                 }
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private static bool OnAvatarDownload(ref ApiAvatar __0)
@@ -229,7 +231,7 @@
             {
                 if (__0 != null)
                 {
-                    var avatarData = new AvatarData()
+                    var avatarData = new AvatarData
                     {
                         AssetURL = __0.assetUrl,
                         AuthorID = __0.authorId,
@@ -252,17 +254,19 @@
                     }
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             return true;
         }
 
-        private static void OnPhotonPlayerJoin(ref Photon.Realtime.Player __0)
+        private static void OnPhotonPlayerJoin(ref Player __0)
         {
             Event_OnPhotonJoin?.SafetyRaise(new PhotonPlayerEventArgs(__0));
         }
 
-        private static void OnPhotonPlayerLeft(ref Photon.Realtime.Player __0)
+        private static void OnPhotonPlayerLeft(ref Player __0)
         {
             Event_OnPhotonLeft?.SafetyRaise(new PhotonPlayerEventArgs(__0));
         }

@@ -2,15 +2,14 @@
 {
     #region Imports
 
+    using System.Collections;
+    using System.Collections.Generic;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
     using AstroNetworkingLibrary;
     using AstroNetworkingLibrary.Serializable;
     using MelonLoader;
-    using System.Collections;
-    using System.Collections.Generic;
-    using UnityEngine;
-    using static AstroClient.Cheetos.AvatarSearch;
+    using static Cheetos.AvatarSearch;
 
     #endregion Imports
 
@@ -72,7 +71,7 @@
 
         private static IEnumerator SendClientInfoLoop()
         {
-            for (; ; )
+            for (;;)
             {
                 if (AstroNetworkClient.Client != null && AstroNetworkClient.Client.IsConnected && WorldUtils.IsInWorld && PlayerUtils.GetPlayer() != null)
                 {
@@ -85,7 +84,9 @@
                         AstroNetworkClient.Client.Send(new PacketData(PacketClientType.SEND_PLAYER_NAME, Name));
                         yield break;
                     }
-                    catch { }
+                    catch
+                    {
+                    }
                 }
 
                 yield return null;

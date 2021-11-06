@@ -1,9 +1,9 @@
-﻿using System;
-using AstroActionMenu.Types;
-using UnityEngine;
-
-namespace AstroActionMenu.Pedals
+﻿namespace AstroActionMenu.Pedals
 {
+    using System;
+    using Types;
+    using UnityEngine;
+
     public sealed class PedalButton : PedalStruct
     {
         public PedalButton(string text, Texture2D icon, Action triggerEvent, bool locked = false)

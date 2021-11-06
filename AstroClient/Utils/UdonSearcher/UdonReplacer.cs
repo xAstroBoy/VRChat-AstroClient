@@ -1,16 +1,13 @@
 ﻿namespace AstroClient.Udon
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using Il2CppSystem.Text.RegularExpressions;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
     using TMPro;
-    using UnityEngine;
     using VRC.Udon;
 
     internal static class UdonReplacer

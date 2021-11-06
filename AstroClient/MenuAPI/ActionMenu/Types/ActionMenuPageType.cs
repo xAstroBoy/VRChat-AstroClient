@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace AstroActionMenu.Types
+﻿namespace AstroActionMenu.Types
 {
+    using System;
+
     /// <summary>
     ///     Defines the already existing vrchat pages that you can add pedals to
     /// </summary>

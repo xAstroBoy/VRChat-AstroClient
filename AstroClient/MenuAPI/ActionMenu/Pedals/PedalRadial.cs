@@ -1,12 +1,13 @@
-﻿using System;
-using AstroActionMenu.Helpers;
-using AstroActionMenu.Managers;
-using AstroActionMenu.Types;
-using UnityEngine;
-using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique;
+﻿using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique;
 
 namespace AstroActionMenu.Pedals
 {
+    using System;
+    using Helpers;
+    using Managers;
+    using Types;
+    using UnityEngine;
+
     public sealed class PedalRadial : PedalStruct
     {
         public float currentValue;

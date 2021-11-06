@@ -1,17 +1,13 @@
-using System.IO;
-using System.Reflection;
-using AstroClient;
-using AstroLibrary.Console;
-using AstroActionMenu.Helpers;
-using MelonLoader;
-using UnhollowerRuntimeLib;
-using UnityEngine;
-using UnityEngine.UI;
-using AstroLibrary;
-using CheetoLibrary;
-
 namespace AstroActionMenu.Managers
 {
+    using System.Reflection;
+    using AstroClient;
+    using AstroLibrary.Console;
+    using CheetoLibrary;
+    using Helpers;
+    using UnityEngine;
+    using UnityEngine.UI;
+
     internal class ResourceManagerEvents : GameEvents
     {
         internal override void OnApplicationStart()

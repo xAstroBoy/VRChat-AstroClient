@@ -1,9 +1,9 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Variables;
+    using System.Collections.Generic;
     using AstroLibrary.Console;
     using AstroLibrary.Finder;
-    using System.Collections.Generic;
+    using Variables;
 
     internal class LPD : GameEvents
     {

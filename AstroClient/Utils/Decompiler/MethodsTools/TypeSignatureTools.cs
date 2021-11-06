@@ -1,11 +1,9 @@
 ﻿
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace System.Reflection
 {
     using AstroClient.Reflection;
+    using Collections.Generic;
+    using Linq;
 
     public static class TypeSignatureTools
     {

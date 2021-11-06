@@ -1,10 +1,10 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Variables;
+    using System.Collections.Generic;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
-    using System.Collections.Generic;
+    using Variables;
 
     internal class TheGreatPug : GameEvents
     {

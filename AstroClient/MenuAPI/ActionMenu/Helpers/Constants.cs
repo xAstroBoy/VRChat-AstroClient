@@ -1,7 +1,7 @@
-﻿using AstroClient;
-
-namespace AstroActionMenu.Helpers
+﻿namespace AstroActionMenu.Helpers
 {
+    using AstroClient;
+
     internal static class Constants
     {
         public const int MAX_PEDALS_PER_PAGE = 7;

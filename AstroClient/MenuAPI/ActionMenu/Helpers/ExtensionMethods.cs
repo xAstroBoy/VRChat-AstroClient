@@ -1,20 +1,20 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using AstroActionMenu.Managers;
-using MelonLoader;
-using TMPro;
-using UnhollowerRuntimeLib;
-using UnhollowerRuntimeLib.XrefScans;
-using UnityEngine;
 using PedalOptionTriggerEvent = PedalOption.MulticastDelegateNPublicSealedBoUnique; //Will this change?, ¯\_(ツ)_/¯
 using ActionMenuPage = ActionMenu.ObjectNPublicAcTeAcStGaUnique; //Will this change?, ¯\_(ツ)_/¯x2
-using Object = UnityEngine.Object;
-using AstroLibrary.Console;
 
 namespace AstroActionMenu.Helpers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using AstroLibrary.Console;
+    using Managers;
+    using TMPro;
+    using UnhollowerRuntimeLib;
+    using UnhollowerRuntimeLib.XrefScans;
+    using UnityEngine;
+    using Object = UnityEngine.Object;
+
     internal static class ExtensionMethods
     {
         private static AddOptionDelegate addOptionDelegate;

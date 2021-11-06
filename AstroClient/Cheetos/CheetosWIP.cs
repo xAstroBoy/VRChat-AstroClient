@@ -2,21 +2,15 @@
 {
     #region Imports
 
-    using AstroClient.Exploits;
-    using AstroClient.Variables;
-    using AstroLibrary;
+    using System;
+    using System.Collections;
+    using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Utility;
     using MelonLoader;
-    using AstroButtonAPI;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Threading;
     using Transmtn.DTO.Notifications;
     using UnityEngine;
-    using VRC.SDKBase;
-    using static VRC.SDKBase.VRC_EventHandler;
+    using VRC;
 
     #endregion Imports
 
@@ -62,7 +56,7 @@
         {
             for (int i = 0; i < WorldUtils.Players.Count; i++)
             {
-                VRC.Player player = WorldUtils.Players[i];
+                Player player = WorldUtils.Players[i];
                 if (!player.GetAPIUser().isFriend && !player.GetUserID().Equals(Utils.LocalPlayer.GetPlayer().GetUserID()))
                 {
                     try
@@ -76,12 +70,12 @@
                         ModConsole.Error(e.Message);
                     }
                 }
+
                 yield return new WaitForSeconds(5f);
             }
 
             ModConsole.Log("Friend Requests Done!");
             PopupUtils.QueHudMessage("Friend Requests Done!");
-            yield break;
         }
     }
 }

@@ -2,10 +2,10 @@
 
 namespace AstroLibrary.Utility
 {
-    using AstroLibrary.Extensions;
-    using Photon.Pun;
     using System.Collections.Generic;
     using System.Linq;
+    using Extensions;
+    using Photon.Pun;
     using UnityEngine;
     using UnityEngine.XR;
     using VRC;

@@ -1,7 +1,7 @@
 ﻿namespace AstroLibrary.Extensions
 {
-    using AstroClient;
     using System.Collections.Generic;
+    using AstroClient;
     using AstroClient.AstroMonos.Components.ESP.ItemTweaker;
     using AstroClient.AstroMonos.Components.ESP.Pickup;
     using AstroClient.AstroMonos.Components.ESP.Trigger;

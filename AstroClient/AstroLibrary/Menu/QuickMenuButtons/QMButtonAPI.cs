@@ -1,7 +1,7 @@
 ﻿namespace AstroButtonAPI
 {
-    using MelonLoader;
     using System.Collections.Generic;
+    using MelonLoader;
     using UnityEngine;
 
     public static class QMButtonAPI

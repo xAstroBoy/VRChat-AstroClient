@@ -1,7 +1,7 @@
 ﻿namespace AstroButtonAPI
 {
-    using AstroLibrary.Extensions;
     using System;
+    using AstroLibrary.Extensions;
     using UnityEngine;
     using UnityEngine.UI;
 

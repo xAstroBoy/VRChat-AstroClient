@@ -1,21 +1,19 @@
 ﻿namespace AstroClient.ItemTweakerV2
 {
-    using AstroClient.GameObjectDebug;
-    using AstroClient.ItemTweakerV2.Handlers;
-    using AstroClient.ItemTweakerV2.Selector;
-    using AstroClient.ItemTweakerV2.Submenus;
-    using AstroClient.ItemTweakerV2.Submenus.ScrollMenus;
-    using AstroClient.Variables;
-    using AstroLibrary;
-    using AstroLibrary.Extensions;
-    using AstroButtonAPI;
     using System;
     using System.Reflection;
+    using AstroButtonAPI;
+    using AstroLibrary.Extensions;
     using AstroMonos.Components.Tools;
-    using UnityEngine;
-    using VRC;
-    using Color = UnityEngine.Color;
     using CheetoLibrary;
+    using GameObjectDebug;
+    using Handlers;
+    using Selector;
+    using Submenus;
+    using Submenus.ScrollMenus;
+    using UnityEngine;
+    using Variables;
+    using VRC;
 
     internal class TweakerV2Main : Tweaker_Events
     {

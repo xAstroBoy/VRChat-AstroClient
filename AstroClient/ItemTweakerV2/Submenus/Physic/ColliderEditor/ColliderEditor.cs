@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus.Collider
 {
-    using AstroClient.ItemTweakerV2.Selector;
-    using AstroLibrary.Extensions;
-    using AstroButtonAPI;
     using System;
+    using AstroButtonAPI;
+    using AstroLibrary.Extensions;
     using AstroMonos.Components.Tools;
+    using Selector;
     using UnityEngine;
     using VRC;
 

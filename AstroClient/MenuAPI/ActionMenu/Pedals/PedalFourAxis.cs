@@ -1,11 +1,11 @@
-﻿using System;
-using AstroActionMenu.Helpers;
-using AstroActionMenu.Managers;
-using AstroActionMenu.Types;
-using UnityEngine;
-
-namespace AstroActionMenu.Pedals
+﻿namespace AstroActionMenu.Pedals
 {
+    using System;
+    using Helpers;
+    using Managers;
+    using Types;
+    using UnityEngine;
+
     public sealed class PedalFourAxis : PedalStruct
     {
         public PedalFourAxis(string text, Texture2D icon, Action<Vector2> onUpdate, string topButtonText,

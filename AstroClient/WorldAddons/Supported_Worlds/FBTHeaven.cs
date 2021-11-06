@@ -1,17 +1,18 @@
 ﻿#pragma warning disable 649
 namespace AstroClient
 {
-    using AstroClient.Variables;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using AstroButtonAPI;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
     using AstroMonos.AstroUdons;
+    using Skyboxes;
     using UnityEngine;
+    using Variables;
 
     internal class FBTHeaven : GameEvents
     {
@@ -37,20 +38,20 @@ namespace AstroClient
         {
             FBTExploitsPage = new QMNestedButton(main, x, y, "FBTHeaven Exploits", "FBTHeaven Exploits", null, null, null, null, btnHalf);
 
-            _ = new QMSingleButton(FBTExploitsPage, 1, 0, $"Unlock Door\n1", () => { UnlockDoor(1); }, $"Unlock Door 1");
-            _ = new QMSingleButton(FBTExploitsPage, 2, 0, $"Unlock Door\n2", () => { UnlockDoor(2); }, $"Unlock Door 2");
-            _ = new QMSingleButton(FBTExploitsPage, 3, 0, $"Unlock Door\n3", () => { UnlockDoor(3); }, $"Unlock Door 3");
-            _ = new QMSingleButton(FBTExploitsPage, 4, 0, $"Unlock Door\n4", () => { UnlockDoor(4); }, $"Unlock Door 4");
+            _ = new QMSingleButton(FBTExploitsPage, 1, 0, "Unlock Door\n1", () => { UnlockDoor(1); }, "Unlock Door 1");
+            _ = new QMSingleButton(FBTExploitsPage, 2, 0, "Unlock Door\n2", () => { UnlockDoor(2); }, "Unlock Door 2");
+            _ = new QMSingleButton(FBTExploitsPage, 3, 0, "Unlock Door\n3", () => { UnlockDoor(3); }, "Unlock Door 3");
+            _ = new QMSingleButton(FBTExploitsPage, 4, 0, "Unlock Door\n4", () => { UnlockDoor(4); }, "Unlock Door 4");
 
-            _ = new QMSingleButton(FBTExploitsPage, 1, 1, $"Lock Door\n1", () => { LockDoor(1); }, $"Lock Door 1");
-            _ = new QMSingleButton(FBTExploitsPage, 2, 1, $"Lock Door\n2", () => { LockDoor(2); }, $"Lock Door 2");
-            _ = new QMSingleButton(FBTExploitsPage, 3, 1, $"Lock Door\n3", () => { LockDoor(3); }, $"Lock Door 3");
-            _ = new QMSingleButton(FBTExploitsPage, 4, 1, $"Lock Door\n4", () => { LockDoor(4); }, $"Lock Door 4");
+            _ = new QMSingleButton(FBTExploitsPage, 1, 1, "Lock Door\n1", () => { LockDoor(1); }, "Lock Door 1");
+            _ = new QMSingleButton(FBTExploitsPage, 2, 1, "Lock Door\n2", () => { LockDoor(2); }, "Lock Door 2");
+            _ = new QMSingleButton(FBTExploitsPage, 3, 1, "Lock Door\n3", () => { LockDoor(3); }, "Lock Door 3");
+            _ = new QMSingleButton(FBTExploitsPage, 4, 1, "Lock Door\n4", () => { LockDoor(4); }, "Lock Door 4");
 
-            LockButton1 = new QMToggleButton(FBTExploitsPage, 1, 4, "Unlock 1", () => { UnlockDoor(1); }, "Lock 1", () => { LockDoor(1); }, "Toggle Door Lock", null, Color.green, Color.red, false);
-            LockButton2 = new QMToggleButton(FBTExploitsPage, 2, 4, "Unlock 2", () => { UnlockDoor(2); }, "Lock 2", () => { LockDoor(2); }, "Toggle Door Lock", null, Color.green, Color.red, false);
-            LockButton3 = new QMToggleButton(FBTExploitsPage, 3, 4, "Unlock 3", () => { UnlockDoor(3); }, "Lock 3", () => { LockDoor(3); }, "Toggle Door Lock", null, Color.green, Color.red, false);
-            LockButton4 = new QMToggleButton(FBTExploitsPage, 4, 4, "Unlock 4", () => { UnlockDoor(4); }, "Lock 4", () => { LockDoor(4); }, "Toggle Door Lock", null, Color.green, Color.red, false);
+            LockButton1 = new QMToggleButton(FBTExploitsPage, 1, 4, "Unlock 1", () => { UnlockDoor(1); }, "Lock 1", () => { LockDoor(1); }, "Toggle Door Lock", null, Color.green, Color.red);
+            LockButton2 = new QMToggleButton(FBTExploitsPage, 2, 4, "Unlock 2", () => { UnlockDoor(2); }, "Lock 2", () => { LockDoor(2); }, "Toggle Door Lock", null, Color.green, Color.red);
+            LockButton3 = new QMToggleButton(FBTExploitsPage, 3, 4, "Unlock 3", () => { UnlockDoor(3); }, "Lock 3", () => { LockDoor(3); }, "Toggle Door Lock", null, Color.green, Color.red);
+            LockButton4 = new QMToggleButton(FBTExploitsPage, 4, 4, "Unlock 4", () => { UnlockDoor(4); }, "Lock 4", () => { LockDoor(4); }, "Toggle Door Lock", null, Color.green, Color.red);
         }
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)
@@ -117,6 +118,7 @@ namespace AstroClient
                             trash.DestroyMeLocal();
                         }
                     }
+
                     var doorinvisibleplane = rootObject.transform.FindObject("Plane");
                     if (doorinvisibleplane != null)
                     {
@@ -132,7 +134,8 @@ namespace AstroClient
                             }
                         }
                     }
-                    if (Skyboxes.SkyboxEditor.SetSkyboxByFileName("dark_coalsack"))
+
+                    if (SkyboxEditor.SetSkyboxByFileName("dark_coalsack"))
                     {
                         ModConsole.DebugLog("Replaced FBT heaven Skybox as is dark and the author made it on purpose to prevent fly/noclip members.");
                     }
@@ -179,7 +182,7 @@ namespace AstroClient
                     collider.smoothSphereCollisions = true;
                 }
 
-                var AstroTrigger = HandleSign.GetOrAddComponent<VRC_AstroInteractable>();
+                var AstroTrigger = HandleSign.GetOrAddComponent<VRC_AstroInteract>();
                 if (AstroTrigger != null)
                 {
                     AstroTrigger.interactText = "Lockpick Door " + doorID + " (AstroClient)";
@@ -190,7 +193,7 @@ namespace AstroClient
 
         private static IEnumerator UpdateButtonsLoop()
         {
-            for (; ; )
+            for (;;)
             {
                 if (!isCurrentWorld) yield break;
                 RefreshButtons();
@@ -200,13 +203,13 @@ namespace AstroClient
 
         private static void LockDoor(int doorID)
         {
-            UdonSearch.FindUdonEvent($"Room {doorID} main script", $"OnToggle").ExecuteUdonEvent();
+            UdonSearch.FindUdonEvent($"Room {doorID} main script", "OnToggle").ExecuteUdonEvent();
             //RefreshButtons();
         }
 
         private static void UnlockDoor(int doorID)
         {
-            UdonSearch.FindUdonEvent($"Room {doorID} main script", $"OffToggle").ExecuteUdonEvent();
+            UdonSearch.FindUdonEvent($"Room {doorID} main script", "OffToggle").ExecuteUdonEvent();
             //RefreshButtons();
         }
 

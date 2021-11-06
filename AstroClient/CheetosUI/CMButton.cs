@@ -2,8 +2,8 @@
 {
     #region Imports
 
-    using AstroLibrary.Console;
     using System;
+    using AstroLibrary.Console;
     using UnityEngine;
     using UnityEngine.UI;
 

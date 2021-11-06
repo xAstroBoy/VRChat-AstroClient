@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-    using AstroClient.ItemTweakerV2.Selector;
+    using System;
+    using AstroButtonAPI;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using AstroButtonAPI;
-    using System;
     using AstroMonos.Components.Custom.Random;
+    using Selector;
     using UnityEngine;
 
     internal class ScaleSubmenu : Tweaker_Events

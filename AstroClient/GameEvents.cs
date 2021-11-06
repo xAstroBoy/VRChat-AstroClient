@@ -2,15 +2,14 @@
 {
     #region Imports
 
-    using AstroClient.Cheetos;
-    using AstroClient.Moderation;
-    using AstroClient.Startup.Hooks;
-    using AstroClient.Streamer;
-    using AstroClientCore.Events;
-    using AstroLibrary.Console;
     using System;
     using System.Collections.Generic;
+    using AstroClientCore.Events;
     using AstroMonos;
+    using Cheetos;
+    using Moderation;
+    using Startup.Hooks;
+    using Streamer;
     using UnityEngine;
     using VRC;
     using VRC.SDKBase;

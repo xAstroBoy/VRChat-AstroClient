@@ -1,10 +1,8 @@
 ﻿namespace AstroClient
 {
     using Il2CppSystem.Collections.Generic;
-    using System;
     using UnhollowerBaseLib;
     using UnhollowerRuntimeLib;
-    using UnityEngine;
 
     internal static class Il2CppConverter
     {
@@ -29,14 +27,14 @@
             return boxed ?? null;
         }
 
-        internal static Il2CppSystem.Object Generate_Il2CPPObject(UInt16 item)
+        internal static Il2CppSystem.Object Generate_Il2CPPObject(ushort item)
         {
             var converted = new Il2CppSystem.UInt16() { m_value = item };
             var boxed = converted.BoxIl2CppObject();
             return boxed ?? null;
         }
 
-        internal static Il2CppSystem.Object Generate_Il2CPPObject(Double item)
+        internal static Il2CppSystem.Object Generate_Il2CPPObject(double item)
         {
             var converted = new Il2CppSystem.Double() { m_value = item };
             var boxed = converted.BoxIl2CppObject();

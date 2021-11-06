@@ -1,15 +1,10 @@
 ﻿namespace AstroClient.Streamer
 {
-    using AstroClient.Variables;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using Variables;
     using VRC;
-    using Color = System.Drawing.Color;
+
     internal class StreamerTags : GameEvents
     {
         internal override void OnStreamerJoined(Player player)

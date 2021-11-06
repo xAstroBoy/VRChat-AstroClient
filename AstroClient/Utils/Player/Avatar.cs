@@ -1,15 +1,12 @@
 ﻿namespace AstroClient.AvatarMods
 {
-    using AstroLibrary.Console;
+    using System.Collections;
+    using System.Collections.Generic;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Linq;
     using UnityEngine;
     using VRC;
-    using Color = System.Drawing.Color;
 
     internal static class AvatarUtils
     {

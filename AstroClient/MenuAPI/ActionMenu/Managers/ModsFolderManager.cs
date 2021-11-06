@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using AstroActionMenu.Api;
-using AstroActionMenu.Helpers;
-
 namespace AstroActionMenu.Managers
 {
+    using System;
+    using System.Collections.Generic;
+    using Api;
+    using Helpers;
+
     internal static class ModsFolderManager
     {
         public static List<Action> mods = new();

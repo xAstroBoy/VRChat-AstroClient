@@ -1,11 +1,7 @@
 ﻿namespace AstroClient.Udon.UdonEditor
 {
-    using AstroLibrary.Finder;
-    using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
+    using AstroLibrary.Finder;
     using AstroMonos.AstroUdons.Programs;
     using VRC.Udon;
 

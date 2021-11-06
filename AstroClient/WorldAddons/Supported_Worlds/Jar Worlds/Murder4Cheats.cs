@@ -2,24 +2,24 @@
 {
     #region Imports
 
-    using AstroClient.UdonExploits;
-    using AstroClient.Variables;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
     using AstroLibrary.Utility;
-    using AstroButtonAPI;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using UnityEngine;
-    using VRC;
-    using static AstroClient.Variables.CustomLists;
-    using AstroClient.Udon.UdonEditor;
     using AstroMonos.Components.Cheats.PatronUnlocker;
     using AstroMonos.Components.Cheats.Worlds.JarWorlds;
     using AstroMonos.Components.ESP.Pickup;
     using ClientUI.QuickMenuButtons.ESP;
+    using Udon.UdonEditor;
+    using UdonExploits;
+    using UnityEngine;
+    using Variables;
+    using VRC;
+    using static Variables.CustomLists;
 
     #endregion Imports
 

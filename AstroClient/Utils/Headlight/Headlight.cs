@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.Headlight
 {
+    using System;
+    using System.Windows.Forms;
+    using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
-    using AstroButtonAPI;
-    using System;
-    using System.Windows.Forms;
     using UnityEngine;
     using VRC;
     using Object = UnityEngine.Object;

@@ -1,13 +1,12 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Variables;
-    using AstroLibrary.Console;
-    using AstroLibrary.Finder;
     using System.Collections.Generic;
+    using AstroLibrary.Console;
     using AstroLibrary.Extensions;
-    using AstroClient.Udon;
     using AstroLibrary.Utility;
     using AstroMonos.Components.Spoofer;
+    using Udon;
+    using Variables;
 
     internal class FurryTalkAndChill : GameEvents
     {

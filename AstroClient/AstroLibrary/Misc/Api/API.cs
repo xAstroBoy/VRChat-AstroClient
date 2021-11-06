@@ -1,15 +1,12 @@
 ﻿namespace AstroClient.Misc.Api
 {
-    using AstroLibrary.Console;
-    using AstroLibrary.Managers;
-    using AstroLibrary.Misc.Api.Object;
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
     using System.Net;
-    using UnityEngine;
+    using AstroLibrary.Console;
+    using AstroLibrary.Misc.Api.Object;
     using VRC.Core;
 
     internal class API

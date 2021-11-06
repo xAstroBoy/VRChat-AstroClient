@@ -5,7 +5,6 @@ namespace AstroClient.AstroMonos.Components.Custom.Items
     using AstroLibrary.Extensions;
     using AstroLibrary.Utility;
     using AstroUdons;
-    using CheetoLibrary;
     using CustomMono;
     using Tools;
     using UnhollowerBaseLib.Attributes;

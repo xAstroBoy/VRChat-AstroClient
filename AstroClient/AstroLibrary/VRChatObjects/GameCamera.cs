@@ -1,6 +1,5 @@
 ﻿namespace AstroClient
 {
-    using System.Collections.Generic;
     using UnityEngine;
 
     internal class PlayerCameraEditor : GameEvents

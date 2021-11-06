@@ -1,10 +1,10 @@
 ﻿namespace AstroClient.Startup.Hooks
 {
+    using System;
+    using System.Collections;
     using AstroClientCore.Events;
     using AstroLibrary.Extensions;
     using MelonLoader;
-    using System;
-    using System.Collections;
     using VRC;
 
     internal class NetworkManagerHooks : GameEvents

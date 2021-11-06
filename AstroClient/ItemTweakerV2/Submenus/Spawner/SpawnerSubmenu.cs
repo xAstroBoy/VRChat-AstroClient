@@ -1,11 +1,11 @@
 ﻿namespace AstroClient.ItemTweakerV2.Submenus
 {
-    using AstroClient.ItemTweakerV2.Selector;
-    using AstroClient.ItemTweakerV2.Submenus.ScrollMenus;
-    using AstroLibrary.Extensions;
-    using AstroButtonAPI;
     using System.Collections.Generic;
     using System.Linq;
+    using AstroButtonAPI;
+    using AstroLibrary.Extensions;
+    using ScrollMenus;
+    using Selector;
     using UnityEngine;
 
     internal class SpawnerSubmenu : Tweaker_Events

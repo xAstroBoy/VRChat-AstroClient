@@ -1,10 +1,10 @@
-﻿using System;
-using AstroActionMenu.Helpers;
-using AstroActionMenu.Types;
-using UnityEngine;
-
-namespace AstroActionMenu.Pedals
+﻿namespace AstroActionMenu.Pedals
 {
+    using System;
+    using Helpers;
+    using Types;
+    using UnityEngine;
+
     public sealed class PedalSubMenu : PedalStruct
     {
         public PedalSubMenu(Action openFunc, string text = null, Texture2D icon = null, Action closeFunc = null,

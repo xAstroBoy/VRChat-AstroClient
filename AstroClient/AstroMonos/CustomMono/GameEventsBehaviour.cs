@@ -5,15 +5,16 @@
     using AstroClientCore.Events;
     using Cheetos;
     using Moderation;
+    using Photon.Realtime;
     using Startup.Hooks;
     using Streamer;
     using UnityEngine;
-    using VRC;
     using VRC.SDKBase;
 
     public class GameEventsBehaviour : MonoBehaviour
     {
         #region events
+
         public GameEventsBehaviour(IntPtr obj0) : base(obj0)
         {
             // ML Events
@@ -59,14 +60,6 @@
             PhotonModerationHandler.Event_OnPlayerUnblockedYou += Internal_OnPlayerUnblockedYou;
             PhotonModerationHandler.Event_OnPlayerMutedYou += Internal_OnPlayerMutedYou;
             PhotonModerationHandler.Event_OnPlayerUnmutedYou += Internal_OnPlayerUnmutedYou;
-
-
-            #region utility stuff
-            //Networking._IsOwner = Il2CppSystem.Delegate.Combine(
-            //    (Il2CppSystem.Action<Player, GameObject, VRC.SDKBase.VRC_AvatarDescriptor>)OnAvatarInstantiate,
-            //    VRCAvatarManager.field_Private_Static_Action_3_Player_GameObject_VRC_AvatarDescriptor_0
-            //).Cast<Il2CppSystem.Action<Player, GameObject, VRC.SDKBase.VRC_AvatarDescriptor>>();
-            #endregion
         }
 
         private void Internal_OnStreamerJoined(object sender, PlayerEventArgs e)
@@ -133,6 +126,7 @@
         {
             OnQuickMenuClose();
         }
+
         private void Internal_OnBigMenuOpen(object sender, EventArgs e)
         {
             OnBigMenuOpen();
@@ -197,7 +191,6 @@
         }
 
 
-
         private void Internal_VRC_EventDispatcherRFC_triggerEvent(object sender, VRC_EventDispatcherRFC_TriggerEventArgs e)
         {
             VRC_EventDispatcherRFC_triggerEvent(e.VRC_EventHandler, e.VrcEvent, e.VrcBroadcastType, e.UnknownInt, e.UnknownFloat);
@@ -221,7 +214,7 @@
         {
         }
 
-        internal virtual void OnMasterClientSwitched(Photon.Realtime.Player player)
+        internal virtual void OnMasterClientSwitched(Player player)
         {
         }
 
@@ -241,27 +234,27 @@
         {
         }
 
-        internal virtual void OnPlayerLeft(Player player)
+        internal virtual void OnPlayerLeft(VRC.Player player)
         {
         }
 
-        internal virtual void OnPlayerJoined(Player player)
+        internal virtual void OnPlayerJoined(VRC.Player player)
         {
         }
 
-        internal virtual void OnStreamerLeft(Player player)
+        internal virtual void OnStreamerLeft(VRC.Player player)
         {
         }
 
-        internal virtual void OnStreamerJoined(Player player)
+        internal virtual void OnStreamerJoined(VRC.Player player)
         {
         }
 
-        internal virtual void OnPhotonLeft(Photon.Realtime.Player player)
+        internal virtual void OnPhotonLeft(Player player)
         {
         }
 
-        internal virtual void OnPhotonJoined(Photon.Realtime.Player player)
+        internal virtual void OnPhotonJoined(Player player)
         {
         }
 
@@ -272,6 +265,7 @@
         internal virtual void OnQuickMenuClose()
         {
         }
+
         internal virtual void OnBigMenuOpen()
         {
         }
@@ -288,11 +282,11 @@
         {
         }
 
-        internal virtual void OnAvatarSpawn(Player Player, GameObject Avatar, VRCAvatarManager VRCAvatarManager, VRC_AvatarDescriptor VRC_AvatarDescriptor)
+        internal virtual void OnAvatarSpawn(VRC.Player Player, GameObject Avatar, VRCAvatarManager VRCAvatarManager, VRC_AvatarDescriptor VRC_AvatarDescriptor)
         {
         }
 
-        internal virtual void OnUdonSyncRPCEvent(Player sender, GameObject obj, string action)
+        internal virtual void OnUdonSyncRPCEvent(VRC.Player sender, GameObject obj, string action)
         {
         }
 
@@ -300,30 +294,30 @@
         {
         }
 
-        internal virtual void OnPlayerSelected(Player player)
+        internal virtual void OnPlayerSelected(VRC.Player player)
         {
         }
 
-        internal virtual void OnTargetSet(Player player)
+        internal virtual void OnTargetSet(VRC.Player player)
         {
         }
 
-        internal virtual void OnPlayerBlockedYou(Photon.Realtime.Player player)
-        {
-        }
-
-
-        internal virtual void OnPlayerUnblockedYou(Photon.Realtime.Player player)
+        internal virtual void OnPlayerBlockedYou(Player player)
         {
         }
 
 
-        internal virtual void OnPlayerMutedYou(Photon.Realtime.Player player)
+        internal virtual void OnPlayerUnblockedYou(Player player)
         {
         }
 
 
-        internal virtual void OnPlayerUnmutedYou(Photon.Realtime.Player player)
+        internal virtual void OnPlayerMutedYou(Player player)
+        {
+        }
+
+
+        internal virtual void OnPlayerUnmutedYou(Player player)
         {
         }
 
@@ -331,7 +325,6 @@
         {
         }
 
-        #endregion 
-
+        #endregion
     }
 }

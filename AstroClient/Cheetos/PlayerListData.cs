@@ -1,20 +1,19 @@
 ﻿namespace AstroClient
 {
+    using System.Linq;
     using AstroLibrary.Utility;
     using Il2CppSystem.Text;
-    using System.Linq;
+    using Photon.Realtime;
     using UnityEngine;
-    using VRC;
     using VRC.Core;
-    using VRC.Management;
     using VRC.SDKBase;
     using static AstroLibrary.Extensions.PlayerExtensions;
 
     internal class PlayerListData
     {
-        internal Photon.Realtime.Player PhotonPlayer { get; private set; }
+        internal Player PhotonPlayer { get; private set; }
 
-        internal Player Player { get; private set; }
+        internal VRC.Player Player { get; private set; }
 
         internal APIUser APIUser { get; private set; }
 
@@ -52,14 +51,13 @@
                 {
                     return Color.white;
                 }
-                else if (IsDanger)
+
+                if (IsDanger)
                 {
                     return Color.red;
                 }
-                else
-                {
-                    return RankColor;
-                }
+
+                return RankColor;
             }
         }
 
@@ -112,7 +110,7 @@
             return Player == null || !WorldUtils.Players.Any(p => p.GetUserID().Equals(Player.GetUserID()));
         }
 
-        internal PlayerListData(Photon.Realtime.Player photonPlayer)
+        internal PlayerListData(Player photonPlayer)
         {
             PhotonPlayer = photonPlayer;
             Player = photonPlayer?.GetPhotonPlayer();

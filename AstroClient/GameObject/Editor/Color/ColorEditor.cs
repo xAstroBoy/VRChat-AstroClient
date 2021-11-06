@@ -1,7 +1,7 @@
 ﻿namespace AstroClient
 {
-    using AstroLibrary.Console;
     using System.Threading.Tasks;
+    using AstroLibrary.Console;
     using UnityEngine;
 
     internal class ColorEditor

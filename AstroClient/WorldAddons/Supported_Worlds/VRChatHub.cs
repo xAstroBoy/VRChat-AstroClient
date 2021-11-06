@@ -1,15 +1,14 @@
 ﻿namespace AstroClient.World.Hub
 
 {
-    using AstroClient.Variables;
-    using AstroLibrary.Console;
-    using AstroLibrary.Extensions;
-    using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
-    using AstroButtonAPI;
     using System;
     using System.Collections.Generic;
+    using AstroButtonAPI;
+    using AstroLibrary.Console;
+    using AstroLibrary.Finder;
+    using AstroLibrary.Utility;
     using UnityEngine;
+    using Variables;
     using VRC.SDKBase;
     using static VRC.SDKBase.VRC_EventHandler;
 

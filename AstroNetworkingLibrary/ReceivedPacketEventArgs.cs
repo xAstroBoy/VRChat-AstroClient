@@ -1,6 +1,6 @@
 ﻿namespace AstroNetworkingLibrary
 {
-    using AstroNetworkingLibrary.Serializable;
+    using Serializable;
 
     public class ReceivedPacketEventArgs
     {

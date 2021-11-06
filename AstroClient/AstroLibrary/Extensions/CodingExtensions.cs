@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Data.Objects;
     using System.Text.RegularExpressions;
 
     public static class CodingExtensions

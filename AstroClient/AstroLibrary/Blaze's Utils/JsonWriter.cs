@@ -1,7 +1,7 @@
 ﻿namespace Blaze
 {
-    using Newtonsoft.Json;
     using System.IO;
+    using Newtonsoft.Json;
 
     public static class JSonWriter
     {

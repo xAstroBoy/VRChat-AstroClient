@@ -1,15 +1,13 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Streamer;
-    using ClientUI.QuickMenuButtons;
-
     #region Imports
 
-    using AstroLibrary.Utility;
     using System;
     using System.Collections.Generic;
+    using AstroLibrary.Utility;
+    using ClientUI.QuickMenuButtons;
+    using ModDetector;
     using UnityEngine;
-    using VRC;
     using VRC.Animation;
 
     #endregion Imports
@@ -139,7 +137,7 @@
                     transform = Camera.main.transform;
                 }
 
-                if (!ModDetector.FindMods.IsNotoriousPresent && ConfigManager.General.KeyBinds)
+                if (!FindMods.IsNotoriousPresent && ConfigManager.General.KeyBinds)
                 {
                     if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.F))
                     {
@@ -274,7 +272,9 @@
                 //	motionState.Reset();
                 //}
             }
-            catch { }
+            catch
+            {
+            }
         }
     }
 }

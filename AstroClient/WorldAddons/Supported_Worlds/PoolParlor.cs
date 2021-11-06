@@ -1,18 +1,17 @@
 ﻿namespace AstroClient
 {
-    using AstroClient.Udon;
-    using AstroClient.Variables;
+    using System;
+    using System.Collections.Generic;
+    using AstroButtonAPI;
     using AstroLibrary.Console;
     using AstroLibrary.Extensions;
     using AstroLibrary.Finder;
-    using AstroLibrary.Utility;
-    using AstroButtonAPI;
-    using System;
-    using System.Collections.Generic;
     using AstroMonos.AstroUdons;
     using AstroMonos.Components.Spoofer;
+    using Udon;
     using UnityEngine;
-    using static AstroClient.Variables.CustomLists;
+    using Variables;
+    using static Variables.CustomLists;
 
     internal class PoolParlor : GameEvents
     {

@@ -9,7 +9,6 @@
     using Cheetos;
     using UnityEngine;
     using Variables;
-    using Finder = AstroLibrary.Finder;
 
     internal class UserInteractMenuBtns : GameEvents
     {
@@ -17,7 +16,7 @@
 
         internal static void InitButtons(float x, float y, bool btnHalf)
         {
-            OldCloneButton = Finder.GameObjectFinder.Find("UserInterface/QuickMenu/UserInteractMenu/CloneAvatarButton");
+            OldCloneButton = AstroLibrary.Finder.GameObjectFinder.Find("UserInterface/QuickMenu/UserInteractMenu/CloneAvatarButton");
             OldCloneButton?.SetActive(false);
             Init_UserMenu_Exploits(x, y, true);
 
