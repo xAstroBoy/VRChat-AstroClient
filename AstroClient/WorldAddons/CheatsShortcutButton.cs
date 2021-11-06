@@ -149,6 +149,16 @@
                     ToggleButtonVisibilityAndInteractivity(true);
                 }
             }
+            else if (id == WorldIds.Udon_Tycoon)
+            {
+                if (UdonTycoon.udonTycoonCheatPage != null)
+                {
+                    SetButtonText("Pool Udon Tycoon", "Manage Udon Tycoon Cheats.");
+                    SetButtonShortcut(UdonTycoon.udonTycoonCheatPage);
+                    SetButtonColor(Color.green);
+                    ToggleButtonVisibilityAndInteractivity(true);
+                }
+            }
 
             else
             {

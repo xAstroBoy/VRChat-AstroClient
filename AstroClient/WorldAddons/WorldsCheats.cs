@@ -35,6 +35,7 @@
             FBTHeaven.InitButtons(WorldCheats, 4, 2, true);
             SuperTowerDefense.InitButtons(WorldCheats, 4, 2.5f, true);
             PoolParlor.InitButtons(WorldCheats, 3, 0f, true);
+            UdonTycoon.InitButtons(WorldCheats, 3, 0.5f, true);
         }
 
         internal override void OnWorldReveal(string id, string Name, List<string> tags, string AssetURL, string AuthorName)

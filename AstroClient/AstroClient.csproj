@@ -104,6 +104,8 @@
     </Compile>
     <Compile Include="AstroLibrary\VRChatObjects\GameCamera.cs" />
     <Compile Include="AstroLibrary\VRChatObjects\UserInterfaceObjects.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\UdonTycoon\UdonTycoon_LevelController.cs" />
+    <Compile Include="AstroMonos\Components\Cheats\Worlds\UdonTycoon\UdonTycoon_PolyCollector.cs" />
     <Compile Include="ClientUI\ActionMenu\ESPModule.cs" />
     <Compile Include="ClientUI\ActionMenu\MovementModule.cs" />
     <Compile Include="ClientUI\ActionMenu\AvatarParametersModule\Menu\Avatar.cs" />
@@ -521,6 +523,7 @@
     <Compile Include="Variables\GlobalLists.cs" />
     <Compile Include="Variables\InstanceBuilder.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\PoolParlor.cs" />
+    <Compile Include="WorldAddons\Supported_Worlds\UdonTycoon.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\SuperTowerDefense.cs" />
     <Compile Include="WorldAddons\WorldsIds\WorldIds.cs" />
     <Compile Include="WorldAddons\Supported_Worlds\FurryTalkAndChill.cs" />
